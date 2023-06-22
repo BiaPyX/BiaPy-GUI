@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="95.995621mm"
+   height="22.812717mm"
+   viewBox="0 0 95.995621 22.812717"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="home.svg"
+   inkscape:export-filename="/home/dfranco/Documents/0.thesis/BiaPy_GUI/images/bn_images/home.png"
+   inkscape:export-xdpi="53.443878"
+   inkscape:export-ydpi="53.443878"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="2"
+     inkscape:cx="76.25"
+     inkscape:cy="12.25"
+     inkscape:window-width="1846"
+     inkscape:window-height="1136"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0" />
+  <defs
+     id="defs2">
+    <rect
+       x="143.78255"
+       y="43.349037"
+       width="302.91681"
+       height="98.809967"
+       id="rect4478" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-7.0888724,-5.4919925)">
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-2.4639538,0.71066731)"
+       id="text4476"
+       style="font-style:normal;font-weight:normal;font-size:32px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect4478);fill:#000000;fill-opacity:1;stroke:none"
+       inkscape:export-filename="/home/dfranco/Documents/0.thesis/BiaPy_GUI/Minimalistic-Flat-Modern-GUI-Template/icons/1x/new/text4476.png"
+       inkscape:export-xdpi="44.358955"
+       inkscape:export-ydpi="44.358955"><tspan
+         x="143.7832"
+         y="71.662109"
+         id="tspan1154"><tspan
+           style="font-family:'DejaVu Serif';-inkscape-font-specification:'DejaVu Serif'"
+           id="tspan1152">Home</tspan></tspan></text>
+    <g
+       id="System / Data"
+       transform="matrix(8.8194444,0,0,8.8194444,-119.39815,-99.308656)" />
+    <path
+       d="M 25.634216,16.59418 18.431111,9.049435 C 18.340421,8.954915 18.215669,8.90213 18.085157,8.90213 c -0.130511,0 -0.255745,0.05326 -0.346432,0.147305 L 10.49867,16.59418 c -0.183772,0.190969 -0.177054,0.494697 0.01391,0.678472 0.191449,0.183291 0.494698,0.178013 0.67847,-0.01393 l 0.644883,-0.672231 v 7.179596 c 0,0.264862 0.21496,0.479824 0.479823,0.479824 h 3.352049 c 0.264382,0 0.478861,-0.21352 0.479819,-0.478382 l 0.01488,-4.792955 h 3.823712 v 4.791513 c 0,0.264862 0.214963,0.479824 0.479824,0.479824 h 3.350608 c 0.264861,0 0.479819,-0.214962 0.479819,-0.479824 v -7.181993 l 0.644404,0.675107 c 0.09453,0.09789 0.220239,0.14779 0.346432,0.14779 0.119478,0 0.239435,-0.04413 0.332039,-0.133871 0.19097,-0.183296 0.19721,-0.487023 0.01393,-0.677992 z m -2.296912,-0.878078 v 7.569692 h -2.390959 v -4.791513 c 0,-0.264862 -0.214962,-0.479824 -0.479824,-0.479824 h -4.781439 c -0.264384,0 -0.478865,0.21352 -0.479825,0.478382 l -0.01487,4.792955 h -2.393839 v -7.570171 c 0,-0.03934 -0.0062,-0.07773 -0.01536,-0.114676 l 5.304448,-5.527566 5.26942,5.521326 c -0.01008,0.03884 -0.01727,0.07917 -0.01727,0.120916 z"
+       id="path2"
+       style="stroke-width:0.479824" />
+  </g>
+</svg>
