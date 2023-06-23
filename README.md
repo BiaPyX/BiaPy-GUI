@@ -4,7 +4,29 @@
 
 [BiaPy](https://github.com/danifranco/BiaPy) is an open source Python library for building bioimage analysis pipelines. This repository is actively under development by the Biomedical Computer Vision group at the [University of the Basque Country](https://www.ehu.eus/en/en-home) and the [Donostia International Physics Center](http://dipc.ehu.es/). 
 
- 
+
+## Run GUI locally
+
+Download the repository first:
+
+```shell
+git clone https://github.com/danifranco/BiaPy-GUI.git
+```
+
+This will create a folder called ``BiaPy-GUI`` that contains all the files of the repository. Then you need to create a conda environment using the file located in ``BiaPy-GUI/environment.yml`` :
+
+```shell
+conda env create -f BiaPy-GUI/environment.yml
+conda activate biapy-gui
+```
+
+After that simply run the ``main.py`` :
+
+```shell
+cd BiaPy-GUI
+python main.py
+```
+
 ## Citation                                                                                                             
                                                                                                                         
 This repository is the base of the following work:                                                                      
