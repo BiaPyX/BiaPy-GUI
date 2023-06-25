@@ -10,7 +10,6 @@ import time
 import traceback
 from datetime import datetime, timedelta
 import getpass
-import pwd 
 
 from ui_run import Ui_RunBiaPy 
 from main import * 
@@ -70,6 +69,16 @@ validation_data_gt_input_path = None
 test_data_input_path = None
 test_data_gt_input_path = None
 
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
 class UIFunction(MainWindow):
 
     def initStackTab(self):
@@ -86,22 +95,54 @@ class UIFunction(MainWindow):
             self.ui.stackedWidget.setCurrentWidget(self.ui.page_home)
             self.ui.frame_home.setStyleSheet("background:rgb(255,255,255)") 
             APFunction.check_docker(self)
-
-            workflow_images = [QPixmap("images/semantic_seg.png"),QPixmap("images/instance_seg.png"),QPixmap("images/detection.png"),\
-                QPixmap("images/denoising.png"),QPixmap("images/sr.png"),QPixmap("images/ssl.png"),\
-                QPixmap("images/classification.png")]
-
-            workflow_images_selec = [QPixmap("images/semantic_seg_selected.png"),QPixmap("images/instance_seg_selected.png"),QPixmap("images/detection_selected.png"),\
-                QPixmap("images/denoising_selected.png"),QPixmap("images/sr_selected.png"),QPixmap("images/ssl_selected.png"),\
-                QPixmap("images/classification_selected.png")]
             
-            workflow_description_images = [[QPixmap("images/semantic_seg_raw.png"),QPixmap("images/semantic_seg_label.png")],
-                [QPixmap("images/instance_seg_raw.png"),QPixmap("images/instance_seg_label.png")],
-                [QPixmap("images/detection_raw.png"),QPixmap("images/detection_csv_input.png")],
-                [QPixmap("images/denoising_raw.png"),QPixmap("images/denoising_pred.png")],
-                [QPixmap("images/sr_raw.png"),QPixmap("images/sr_pred.png")],
-                [QPixmap("images/ssl_raw.png"),QPixmap("images/ssl_pred.png")],
-                [QPixmap("images/classification_raw.png"),QPixmap("images/classification_label.png")]]
+            self.ui.biapy_logo_label.setPixmap(QPixmap(resource_path(os.path.join("images","superminimal_ark_biapy2.png"))))
+            self.ui.docker_logo.setPixmap(QPixmap(resource_path(os.path.join("images","superminimal_ark_biapy2.png"))))
+            self.ui.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","closeAsset 43.png"))))
+            self.ui.bn_min.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","hideAsset 53.png"))))
+
+            self.ui.bn_home.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","home.png"))))
+            self.ui.bn_workflow.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","workflow.png"))))
+            self.ui.bn_goptions.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","goptions.png"))))
+            self.ui.bn_train.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","train.png"))))
+            self.ui.bn_test.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","test.png"))))
+            self.ui.bn_run_biapy.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","run.png"))))
+
+            self.ui.left_arrow_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","left_arrow.svg"))))
+            self.ui.right_arrow_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","right_arrow.svg"))))
+            self.ui.goptions_advanced_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","down_arrow.svg"))))
+            self.ui.train_advanced_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","down_arrow.svg"))))
+            self.ui.test_advanced_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","down_arrow.svg"))))
+
+            workflow_images = [
+                QPixmap(resource_path(os.path.join("images","semantic_seg.png"))),
+                QPixmap(resource_path(os.path.join("images","instance_seg.png"))),
+                QPixmap(resource_path(os.path.join("images","detection.png"))),
+                QPixmap(resource_path(os.path.join("images","denoising.png"))),
+                QPixmap(resource_path(os.path.join("images","sr.png"))),
+                QPixmap(resource_path(os.path.join("images","ssl.png"))),
+                QPixmap(resource_path(os.path.join("images","classification.png")))
+            ]
+
+            workflow_images_selec = [
+                QPixmap(resource_path(os.path.join("images","semantic_seg_selected.png"))),
+                QPixmap(resource_path(os.path.join("images","instance_seg_selected.png"))),
+                QPixmap(resource_path(os.path.join("images","detection_selected.png"))),
+                QPixmap(resource_path(os.path.join("images","denoising_selected.png"))),
+                QPixmap(resource_path(os.path.join("images","sr_selected.png"))),
+                QPixmap(resource_path(os.path.join("images","ssl_selected.png"))),
+                QPixmap(resource_path(os.path.join("images","classification_selected.png")))
+            ]
+            
+            workflow_description_images = [
+                [QPixmap(resource_path(os.path.join("images","semantic_seg_raw.png"))),QPixmap(resource_path(os.path.join("images","semantic_seg_label.png")))],
+                [QPixmap(resource_path(os.path.join("images","instance_seg_raw.png"))),QPixmap(resource_path(os.path.join("images","instance_seg_label.png")))],
+                [QPixmap(resource_path(os.path.join("images","detection_raw.png"))),QPixmap(resource_path(os.path.join("images","detection_csv_input.png")))],
+                [QPixmap(resource_path(os.path.join("images","denoising_raw.png"))),QPixmap(resource_path(os.path.join("images","denoising_pred.png")))],
+                [QPixmap(resource_path(os.path.join("images","sr_raw.png"))),QPixmap(resource_path(os.path.join("images","sr_pred.png")))],
+                [QPixmap(resource_path(os.path.join("images","ssl_raw.png"))),QPixmap(resource_path(os.path.join("images","ssl_pred.png")))],
+                [QPixmap(resource_path(os.path.join("images","classification_raw.png"))),QPixmap(resource_path(os.path.join("images","classification_label.png")))]
+            ]
 
             workflow_descriptions = [
                 # Semantic segmentation
@@ -191,10 +232,10 @@ class UIFunction(MainWindow):
                 <table style="text-align: center;">\
                 <tbody>\
                 <tr><td style="text-align: center;">\
-                <img src="images/detection_raw.png"> <p><span>Input image.</span></p>\
+                <img src="images","detection_raw.png"> <p><span>Input image.</span></p>\
                 </td>\
                 <td style="text-align: center;">\
-                <img src="images/detection_label.png"><p><span>Model\'s GT.</span></p>\
+                <img src="images","detection_label.png"><p><span>Model\'s GT.</span></p>\
                 </td>\
                 </tr>\
                 </tbody>\
@@ -286,8 +327,14 @@ class UIFunction(MainWindow):
                 DermaMNIST dataset which is a large collection of multi-source dermatoscopic images of common \
                 pigmented skin lesions.</p>']
 
-            advanced_frame_images = [QPixmap("images/bn_images/up_arrow.svg"),QPixmap("images/bn_images/down_arrow.svg")]
-            dot_images = [QPixmap("images/bn_images/dot_enable.svg"),QPixmap("images/bn_images/dot_disable.svg")]
+            advanced_frame_images = [
+                QPixmap(resource_path(os.path.join("images","bn_images","up_arrow.svg"))),
+                QPixmap(resource_path(os.path.join("images","bn_images","down_arrow.svg")))
+            ]
+            dot_images = [
+                QPixmap(resource_path(os.path.join("images","bn_images","dot_enable.svg"))),
+                QPixmap(resource_path(os.path.join("images","bn_images","dot_disable.svg")))
+            ]
 
             UIFunction.init_main_page(self)
             UIFunction.init_goptions_page(self)
@@ -528,7 +575,7 @@ class UIFunction(MainWindow):
     # Home page 
     ###########
     def init_main_page(self):
-        pixmap = QPixmap("images/horizontal-logo-monochromatic-white.png")
+        pixmap = QPixmap(resource_path(os.path.join("images","horizontal-logo-monochromatic-white.png")))
         pixmap = pixmap.scaled(QSize(201,51),aspectRatioMode=QtCore.Qt.AspectRatioMode.KeepAspectRatio)
 
         self.ui.docker_logo.setPixmap(pixmap)
@@ -1404,6 +1451,8 @@ class runBiaPy_Ui(QDialog):
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint) 
         self.run_window.bn_min.clicked.connect(lambda: self.showMinimized())
         self.run_window.bn_close.clicked.connect(lambda: self.close_all())
+        self.run_window.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","closeAsset 43.png"))))
+        self.run_window.bn_min.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","hideAsset 53.png"))))
         self.run_window.stop_container_bn.clicked.connect(lambda: self.parent_worker.stop_worker())
         self.run_window.container_state_label.setText("BiaPy state [ Initializing ]")
         self.run_window.train_progress_bar.setValue(0)
@@ -1533,7 +1582,6 @@ class Worker(QObject):
                 "-name", "{}".format(jobname), "-rid", "0", "-gpu", 
                 "{}".format(APFunction.get_text(self.main_gui, self.main_gui.ui.gpu_input))]
             user = getpass.getuser()
-            userid = pwd.getpwnam(user).pw_uid
             
             # Create the result dir
             container_out_dir = os.path.join(output_folder, jobname)

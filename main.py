@@ -24,6 +24,7 @@ class workflow_explanation_Ui(QDialog):
         self.workflow_info_window.setupUi(self)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint) 
         self.workflow_info_window.bn_close.clicked.connect(lambda: self.close())
+        self.workflow_info_window.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","closeAsset 43.png"))))
         self.workflow_info_window.ok_bn.clicked.connect(lambda: self.close())
         self.workflow_info_window.workflow_description_label.setOpenExternalLinks(True)
 
@@ -57,7 +58,9 @@ class dialog_Ui(QDialog):
         self.info_window.setupUi(self)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint) 
         self.info_window.bn_min.clicked.connect(lambda: self.showMinimized())
+        self.info_window.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","hideAsset 53.png.png"))))
         self.info_window.bn_close.clicked.connect(lambda: self.close())
+        self.info_window.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","closeAsset 43.png"))))
         self.info_window.ok_bn.clicked.connect(lambda: self.close())
 
         self.dragPos = self.pos()  
