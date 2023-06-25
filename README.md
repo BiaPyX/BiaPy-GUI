@@ -1,13 +1,16 @@
 # Graphical user interface for BiaPy: Bioimage analysis pipelines in Python
 
-![BiaPy GUI](./images/BiaPy_GUI_main_page.png)
+<kbd>
+  <img src="https://raw.githubusercontent.com/danifranco/BiaPy-GUI/main/images/BiaPy_GUI_main_page.png">
+</kbd>
 
 [BiaPy](https://github.com/danifranco/BiaPy) is an open source Python library for building bioimage analysis pipelines. This repository is actively under development by the Biomedical Computer Vision group at the [University of the Basque Country](https://www.ehu.eus/en/en-home) and the [Donostia International Physics Center](http://dipc.ehu.es/). 
 
 
 ## Run GUI 
 
-- [Windows 64-bit](https://github.com/danifranco/BiaPy-GUI/tree/main/dist-win/BiaPy.exe) 
+- [Windows 64-bit](https://github.com/danifranco/BiaPy-GUI/raw/main/dist-win/BiaPy.exe) 
+- [Linux 64-bit](https://github.com/danifranco/BiaPy-GUI/raw/main/dist-linux/BiaPy") 
 
 ## For developers (through console):
 
@@ -31,6 +34,20 @@ After that simply run the ``main.py`` :
 cd BiaPy-GUI
 python main.py
 ```
+
+To create the binary files:
+
+```shell
+cd BiaPy-GUI
+pyinstaller -F main.py
+```
+
+You can also modify the main.spec file (e.g. to add new images) and redo the binary:
+```shell
+pyinstaller main.spec
+```
+
+This will create a ``main.spec`` file and a ``dist`` folder with ``BiaPy`` binary inside it. 
 
 ## Citation                                                                                                             
                                                                                                                         

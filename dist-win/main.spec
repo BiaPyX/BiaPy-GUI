@@ -55,7 +55,7 @@ a.datas +=[('images/bn_images/down_arrow.svg', 'C:\\Users\\Dani\\Downloads\\BiaP
 a.datas +=[('images/bn_images/left_arrow.svg', 'C:\\Users\\Dani\\Downloads\\BiaPy-GUI\\images\\bn_images\\left_arrow.svg', 'images/bn_images')]
 a.datas +=[('images/bn_images/right_arrow.svg', 'C:\\Users\\Dani\\Downloads\\BiaPy-GUI\\images\\bn_images\\right_arrow.svg', 'images/bn_images')]
 a.datas +=[('images/bn_images/up_arrow.svg', 'C:\\Users\\Dani\\Downloads\\BiaPy-GUI\\images\\bn_images\\up_arrow.svg', 'images/bn_images')]
-a.datas +=[('images/biapy_logo.ico', 'C:\\Users\\Dani\\Downloads\\BiaPy-GUI\\images\\biapy_logo.ico', 'images')]
+a.datas +=[('images/biapy_logo_icon.ico', 'C:\\Users\\Dani\\Downloads\\BiaPy-GUI\\images\\biapy_logo_icon.ico', 'images')]
 
 pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
 
@@ -66,7 +66,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='main',
+    name='BiaPy',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -79,5 +79,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['C:\\Users\\Dani\\Downloads\\BiaPy-GUI\\images\\biapy_logo.ico']
+    icon=['C:\\Users\\Dani\\Downloads\\BiaPy-GUI\\images\\biapy_logo_icon.ico']
 )
