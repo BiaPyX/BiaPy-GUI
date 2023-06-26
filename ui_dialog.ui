@@ -278,6 +278,12 @@ QPushButton:pressed {
          </item>
          <item>
           <widget class="QLabel" name="yaml_path_label">
+           <property name="font">
+            <font>
+             <family>DejaVu Math TeX Gyre</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string/>
            </property>

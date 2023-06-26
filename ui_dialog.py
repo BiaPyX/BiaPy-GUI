@@ -129,6 +129,7 @@ class Ui_Dialog(object):
 
         self.yaml_path_label = QLabel(self.frame_bottom)
         self.yaml_path_label.setObjectName(u"yaml_path_label")
+        self.yaml_path_label.setFont(font)
         self.yaml_path_label.setWordWrap(True)
         self.yaml_path_label.setTextInteractionFlags(Qt.LinksAccessibleByMouse)
 

@@ -1317,7 +1317,7 @@ QPushButton:pressed {
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>2</number>
+                <number>1</number>
                </property>
                <widget class="QWidget" name="page_home">
                 <property name="styleSheet">
@@ -1756,7 +1756,7 @@ QPushButton:pressed {
                        </font>
                       </property>
                       <property name="currentIndex">
-                       <number>3</number>
+                       <number>1</number>
                       </property>
                       <widget class="QWidget" name="workflow_selection_page">
                        <property name="minimumSize">
@@ -13461,8 +13461,8 @@ p, li { white-space: pre-wrap; }
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>913</width>
-                                         <height>338</height>
+                                         <width>399</width>
+                                         <height>44</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_52">
@@ -13817,7 +13817,7 @@ p, li { white-space: pre-wrap; }
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>913</width>
+                                  <width>814</width>
                                   <height>910</height>
                                  </rect>
                                 </property>
@@ -15242,8 +15242,8 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>927</width>
-                                       <height>354</height>
+                                       <width>364</width>
+                                       <height>271</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_61">
@@ -16889,7 +16889,7 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>913</width>
+                                       <width>452</width>
                                        <height>652</height>
                                       </rect>
                                      </property>
@@ -17844,8 +17844,8 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>927</width>
-                                       <height>354</height>
+                                       <width>488</width>
+                                       <height>44</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_66">
