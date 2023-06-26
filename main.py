@@ -702,6 +702,8 @@ if __name__ == "__main__":
         window = MainWindow(log_file)
         window.show()
         app.exec_()
+    except KeyboardInterrupt:
+        print("KeyboardInterrupt")
     except:
         # Log the error
         logger.exception("Main window error:")

@@ -1376,6 +1376,7 @@ class APFunction():
             docker_found = True
         except:
             docker_found = False
+            print(traceback.format_exc())
 
         if docker_found:
             self.ui.docker_status_label.setText("<br>Docker installation found. You are ready to run BiaPy!")
