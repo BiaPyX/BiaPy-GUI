@@ -1368,10 +1368,6 @@ class APFunction():
     def check_docker(self):
         global docker_found
         try:
-            # Needs user to be added to Docker group: 
-            # Linux: 
-            #       sudo usermod -aG docker $USER
-            #       newgrp docker
             docker_client = docker.from_env()
             docker_found = True
         except:
@@ -1579,9 +1575,12 @@ class Worker(QObject):
             
             jobname = APFunction.get_text(self.main_gui, self.main_gui.ui.job_name_input)
             cfg_file = APFunction.get_text(self.main_gui, self.main_gui.ui.select_yaml_name_label)
+            gpus = APFunction.get_text(self.main_gui, self.main_gui.ui.gpu_input)
+            gpus = sorted([int(x) for x in gpus.split(',')])
+            gpus = list(dict.fromkeys(gpus))
+            gpus = ','.join(str(x) for x in gpus)
             command=["-cfg", "{}".format(cfg_file), "-rdir", "{}".format(output_folder),
-                "-name", "{}".format(jobname), "-rid", "0", "-gpu", 
-                "{}".format(APFunction.get_text(self.main_gui, self.main_gui.ui.gpu_input))]
+                "-name", "{}".format(jobname), "-rid", "0", "-gpu", gpus]
             user = getpass.getuser()
             
             # Create the result dir
@@ -1633,6 +1632,7 @@ class Worker(QObject):
                 command=command,
                 detach=True,
                 volumes=volumes,
+                device_requests=[ docker.types.DeviceRequest(count=-1, capabilities=[['gpu']]) ]
             )
 
             # Set the window header 
