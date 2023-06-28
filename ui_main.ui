@@ -1317,7 +1317,7 @@ QPushButton:pressed {
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>1</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="page_home">
                 <property name="styleSheet">
@@ -1468,7 +1468,7 @@ QPushButton:pressed {
                       <property name="maximumSize">
                        <size>
                         <width>16777215</width>
-                        <height>150</height>
+                        <height>300</height>
                        </size>
                       </property>
                       <property name="styleSheet">
@@ -1484,21 +1484,45 @@ QPushButton:pressed {
                        <number>1</number>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_68">
-                       <property name="verticalSpacing">
+                       <property name="horizontalSpacing">
                         <number>15</number>
                        </property>
-                       <item row="1" column="1">
+                       <property name="verticalSpacing">
+                        <number>0</number>
+                       </property>
+                       <item row="0" column="3">
+                        <widget class="QLabel" name="container_build_head_label">
+                         <property name="minimumSize">
+                          <size>
+                           <width>300</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>DejaVu Math TeX Gyre</family>
+                           <pointsize>12</pointsize>
+                           <weight>75</weight>
+                           <bold>true</bold>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>Container</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="3" column="1">
                         <widget class="QLabel" name="docker_status_label">
                          <property name="minimumSize">
                           <size>
-                           <width>520</width>
-                           <height>80</height>
+                           <width>270</width>
+                           <height>100</height>
                           </size>
                          </property>
                          <property name="maximumSize">
                           <size>
-                           <width>520</width>
-                           <height>80</height>
+                           <width>100</width>
+                           <height>16777215</height>
                           </size>
                          </property>
                          <property name="font">
@@ -1518,47 +1542,14 @@ QPushButton:pressed {
                          </property>
                         </widget>
                        </item>
-                       <item row="1" column="0">
-                        <widget class="QLabel" name="docker_logo">
-                         <property name="minimumSize">
-                          <size>
-                           <width>250</width>
-                           <height>80</height>
-                          </size>
-                         </property>
-                         <property name="text">
-                          <string/>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="3" column="1">
-                        <spacer name="verticalSpacer_12">
-                         <property name="orientation">
-                          <enum>Qt::Vertical</enum>
-                         </property>
-                         <property name="sizeHint" stdset="0">
-                          <size>
-                           <width>20</width>
-                           <height>40</height>
-                          </size>
-                         </property>
-                        </spacer>
-                       </item>
-                       <item row="1" column="2">
-                        <spacer name="horizontalSpacer_64">
-                         <property name="orientation">
-                          <enum>Qt::Horizontal</enum>
-                         </property>
-                         <property name="sizeHint" stdset="0">
-                          <size>
-                           <width>40</width>
-                           <height>20</height>
-                          </size>
-                         </property>
-                        </spacer>
-                       </item>
                        <item row="0" column="0">
                         <widget class="QLabel" name="dependencies_label">
+                         <property name="maximumSize">
+                          <size>
+                           <width>16777215</width>
+                           <height>30</height>
+                          </size>
+                         </property>
                          <property name="font">
                           <font>
                            <family>DejaVu Math TeX Gyre</family>
@@ -1572,6 +1563,91 @@ QPushButton:pressed {
                          </property>
                          <property name="openExternalLinks">
                           <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="4" column="3">
+                        <widget class="QPushButton" name="build_container_bn">
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>40</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>200</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>DejaVu Math TeX Gyre</family>
+                           <pointsize>12</pointsize>
+                          </font>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">QPushButton {
+	border: none;
+	border-radius: 15px;
+	background-color: rgb(64,144,253);
+}
+QPushButton:hover {
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}
+QPushButton:pressed {	
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}</string>
+                         </property>
+                         <property name="text">
+                          <string>Create container</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="3" column="3">
+                        <widget class="QLabel" name="container_build_label">
+                         <property name="font">
+                          <font>
+                           <family>DejaVu Math TeX Gyre</family>
+                           <pointsize>12</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>TextLabel</string>
+                         </property>
+                         <property name="wordWrap">
+                          <bool>true</bool>
+                         </property>
+                         <property name="openExternalLinks">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="3" column="2">
+                        <spacer name="horizontalSpacer">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                       <item row="3" column="0">
+                        <widget class="QLabel" name="docker_logo">
+                         <property name="minimumSize">
+                          <size>
+                           <width>250</width>
+                           <height>80</height>
+                          </size>
+                         </property>
+                         <property name="text">
+                          <string/>
                          </property>
                         </widget>
                        </item>
@@ -1756,7 +1832,7 @@ QPushButton:pressed {
                        </font>
                       </property>
                       <property name="currentIndex">
-                       <number>1</number>
+                       <number>0</number>
                       </property>
                       <widget class="QWidget" name="workflow_selection_page">
                        <property name="minimumSize">
@@ -2548,8 +2624,8 @@ QPushButton:pressed {
                              <rect>
                               <x>0</x>
                               <y>0</y>
-                              <width>925</width>
-                              <height>483</height>
+                              <width>922</width>
+                              <height>481</height>
                              </rect>
                             </property>
                             <property name="layoutDirection">
@@ -2917,8 +2993,8 @@ QPushButton:pressed {
                                     <rect>
                                      <x>0</x>
                                      <y>0</y>
-                                     <width>877</width>
-                                     <height>174</height>
+                                     <width>874</width>
+                                     <height>175</height>
                                     </rect>
                                    </property>
                                    <layout class="QGridLayout" name="gridLayout_2">
@@ -3489,8 +3565,8 @@ QPushButton:pressed {
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>934</width>
-                                  <height>5192</height>
+                                  <width>895</width>
+                                  <height>5080</height>
                                  </rect>
                                 </property>
                                 <property name="layoutDirection">
@@ -11552,8 +11628,8 @@ p, li { white-space: pre-wrap; }
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>429</width>
-                                         <height>273</height>
+                                         <width>390</width>
+                                         <height>271</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_18">
@@ -11986,8 +12062,8 @@ p, li { white-space: pre-wrap; }
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>429</width>
-                                         <height>176</height>
+                                         <width>390</width>
+                                         <height>178</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_17">
@@ -12389,7 +12465,7 @@ p, li { white-space: pre-wrap; }
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>429</width>
+                                         <width>390</width>
                                          <height>207</height>
                                         </rect>
                                        </property>
@@ -12772,8 +12848,8 @@ p, li { white-space: pre-wrap; }
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>546</width>
-                                         <height>190</height>
+                                         <width>506</width>
+                                         <height>186</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_49">
@@ -13091,7 +13167,7 @@ p, li { white-space: pre-wrap; }
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>240</width>
+                                         <width>226</width>
                                          <height>94</height>
                                         </rect>
                                        </property>
@@ -13250,7 +13326,7 @@ p, li { white-space: pre-wrap; }
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>288</width>
+                                         <width>261</width>
                                          <height>125</height>
                                         </rect>
                                        </property>
@@ -13461,7 +13537,7 @@ p, li { white-space: pre-wrap; }
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>399</width>
+                                         <width>346</width>
                                          <height>44</height>
                                         </rect>
                                        </property>
@@ -13817,8 +13893,8 @@ p, li { white-space: pre-wrap; }
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>814</width>
-                                  <height>910</height>
+                                  <width>782</width>
+                                  <height>892</height>
                                  </rect>
                                 </property>
                                 <layout class="QGridLayout" name="gridLayout_37">
@@ -15242,8 +15318,8 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>364</width>
-                                       <height>271</height>
+                                       <width>335</width>
+                                       <height>269</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_61">
@@ -15611,8 +15687,8 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>482</width>
-                                       <height>1038</height>
+                                       <width>434</width>
+                                       <height>1026</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_44">
@@ -16889,8 +16965,8 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>452</width>
-                                       <height>652</height>
+                                       <width>910</width>
+                                       <height>644</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_47">
@@ -17690,7 +17766,7 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>372</width>
+                                       <width>326</width>
                                        <height>44</height>
                                       </rect>
                                      </property>
@@ -17767,7 +17843,7 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>426</width>
+                                       <width>372</width>
                                        <height>44</height>
                                       </rect>
                                      </property>
@@ -17844,7 +17920,7 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>488</width>
+                                       <width>425</width>
                                        <height>44</height>
                                       </rect>
                                      </property>
@@ -17921,7 +17997,7 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>399</width>
+                                       <width>346</width>
                                        <height>44</height>
                                       </rect>
                                      </property>
@@ -18705,8 +18781,8 @@ QPushButton:pressed {
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>889</width>
-                               <height>104</height>
+                               <width>48</width>
+                               <height>19</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_32">

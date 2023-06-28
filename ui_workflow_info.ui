@@ -332,6 +332,11 @@ QPushButton:pressed {
                        <height>16777215</height>
                       </size>
                      </property>
+                     <property name="font">
+                      <font>
+                       <family>DejaVu Math TeX Gyre</family>
+                      </font>
+                     </property>
                      <property name="text">
                       <string>Input image</string>
                      </property>
@@ -366,6 +371,11 @@ QPushButton:pressed {
                        <width>250</width>
                        <height>16777215</height>
                       </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>DejaVu Math TeX Gyre</family>
+                      </font>
                      </property>
                      <property name="text">
                       <string>GT</string>
@@ -419,13 +429,13 @@ QPushButton:pressed {
                     <widget class="QPushButton" name="ok_bn">
                      <property name="minimumSize">
                       <size>
-                       <width>50</width>
+                       <width>100</width>
                        <height>30</height>
                       </size>
                      </property>
                      <property name="maximumSize">
                       <size>
-                       <width>50</width>
+                       <width>100</width>
                        <height>16777215</height>
                       </size>
                      </property>

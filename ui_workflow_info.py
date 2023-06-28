@@ -151,6 +151,9 @@ class Ui_Workflow_info(object):
         self.input_description_label.setObjectName(u"input_description_label")
         self.input_description_label.setMinimumSize(QSize(250, 0))
         self.input_description_label.setMaximumSize(QSize(250, 16777215))
+        font2 = QFont()
+        font2.setFamily(u"DejaVu Math TeX Gyre")
+        self.input_description_label.setFont(font2)
         self.input_description_label.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_3.addWidget(self.input_description_label)
@@ -163,6 +166,7 @@ class Ui_Workflow_info(object):
         self.gt_description_label.setObjectName(u"gt_description_label")
         self.gt_description_label.setMinimumSize(QSize(250, 0))
         self.gt_description_label.setMaximumSize(QSize(250, 16777215))
+        self.gt_description_label.setFont(font2)
         self.gt_description_label.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_3.addWidget(self.gt_description_label)
@@ -184,8 +188,8 @@ class Ui_Workflow_info(object):
         self.horizontalLayout_2.setContentsMargins(0, 50, 0, 0)
         self.ok_bn = QPushButton(self.frame)
         self.ok_bn.setObjectName(u"ok_bn")
-        self.ok_bn.setMinimumSize(QSize(50, 30))
-        self.ok_bn.setMaximumSize(QSize(50, 16777215))
+        self.ok_bn.setMinimumSize(QSize(100, 30))
+        self.ok_bn.setMaximumSize(QSize(100, 16777215))
         self.ok_bn.setFont(font)
         self.ok_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
@@ -247,11 +251,11 @@ class Ui_Workflow_info(object):
 
         self.workflow_description_label = QLabel(self.frame_3)
         self.workflow_description_label.setObjectName(u"workflow_description_label")
-        font2 = QFont()
-        font2.setFamily(u"DejaVu Math TeX Gyre")
-        font2.setPointSize(12)
-        font2.setKerning(True)
-        self.workflow_description_label.setFont(font2)
+        font3 = QFont()
+        font3.setFamily(u"DejaVu Math TeX Gyre")
+        font3.setPointSize(12)
+        font3.setKerning(True)
+        self.workflow_description_label.setFont(font3)
         self.workflow_description_label.setStyleSheet(u"")
         self.workflow_description_label.setWordWrap(True)
 
