@@ -1,4 +1,7 @@
 import os 
+import platform
+import getpass
+
 from PySide2.QtGui import QPixmap
 from ui_utils import resource_path
 
@@ -9,8 +12,13 @@ def get_default_settings():
     settings['page_number'] = 0
 
     # OS
-    settings['os_host'] = None
-    settings['user_host'] = None
+    settings['os_host'] = platform.system()
+    settings['user_to_replace'] = "biapy_user" 
+    if "win" in settings['os_host'].lower():
+        settings['user_host'] = getpass.getuser()
+        #environ["USERNAME"] if platform.startswith("win") else environ["USER"]
+    else: # Linux, macOS
+        settings['user_host'] = str(os.getuid())+":"+str(os.getgid())
 
     # Biapy 
     settings['biapy_container_name'] = "danifranco/biapy:v1.0"

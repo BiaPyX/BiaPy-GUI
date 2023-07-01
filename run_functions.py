@@ -221,7 +221,7 @@ class run_worker(QObject):
                 command=command,
                 detach=True,
                 volumes=volumes,
-                # user=self.user_host,
+                user=self.user_host,
                 device_requests=[ docker.types.DeviceRequest(count=-1, capabilities=[['gpu']]) ]
             )
 

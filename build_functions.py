@@ -3,6 +3,7 @@ import traceback
 import docker
 import urllib.request
 from datetime import datetime, timedelta
+from pathlib import Path
 
 from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtCore import Qt, QObject, QUrl
@@ -105,7 +106,7 @@ class build_worker(QObject):
             dt_string = now.strftime("%Y%m%d_%H%M%S")
             jobname = get_text(self.main_gui.ui.job_name_input)
             # dockerfile = os.path.join(self.log_dir, "Dockerfile")
-            dockerfile = os.path.join("/data/dfranco/ficheros_BiaPy_GUI", "Dockerfile")
+            dockerfile = os.path.join(str(Path.home()), "Dockerfile")
             container_out_dir = os.path.join(self.output_folder, jobname)
             if jobname == '': jobname = "BiaPy"
             self.container_stdout_file = os.path.join(container_out_dir, jobname+"_container_build_"+dt_string)

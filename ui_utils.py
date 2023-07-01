@@ -1,7 +1,5 @@
 import os 
 import sys
-import platform 
-import getpass
 import traceback
 import docker
 import ast 
@@ -245,7 +243,7 @@ def update_container_status(self, signal):
     # If the container was built correctly 
     if signal == 0:
         self.ui.container_build_label.setText("Your BiaPy container is ready to be used!")
-        self.ui.build_container_bn.setEnabled(False)
+        self.ui.build_container_bn.setText("Rebuild container")
         self.settings['biapy_container_ready'] = True
         self.ui.dependencies_label.setText("Dependency check")
         self.ui.docker_frame.setStyleSheet("")
@@ -257,9 +255,6 @@ def update_container_status(self, signal):
         self.ui.container_build_label.setText("Something went wrong during the building phase of the container")
 
 def oninit_checks(self):
-    self.settings['os_host'] = platform.system()
-    self.settings['user_host'] = getpass.getuser()
-
     try:
         docker_client = docker.from_env()
         self.settings['docker_found'] = True
@@ -269,16 +264,17 @@ def oninit_checks(self):
 
     if self.settings['docker_found']:
         self.ui.docker_status_label.setText("<br>Docker installation found")
-        
+
         # Check whether the container is built or not 
-        if self.settings['biapy_container_name'] not in docker_client.containers.list():
+        docker_images = [x.tags[0] for x in docker_client.images.list()]
+        if self.settings['biapy_container_name'] not in docker_images:
             self.ui.container_build_label.setText("You need to build the container in order to run BiaPy. " 
                 "Please click in the button below!")
             self.ui.dependencies_label.setText("Dependency error")
             self.ui.docker_frame.setStyleSheet("#docker_frame { border: 3px solid red; }")
         else:
             self.ui.container_build_label.setText("Your BiaPy container is ready to be used!")
-            self.ui.build_container_bn.setEnabled(False)
+            self.ui.build_container_bn.setText("Rebuild container")
             self.settings['biapy_container_ready'] = True
             self.ui.dependencies_label.setText("Dependency check")
             self.ui.docker_frame.setStyleSheet("")

@@ -320,7 +320,8 @@ class UIFunction(MainWindow):
 
         self.settings['running_threads'].append(QThread())
         worker_id = len(self.settings['running_workers'])
-        self.settings['running_workers'].append(run_worker(self, self.settings['biapy_cfg'], self.biapy_container_name, worker_id, self.settings['output_folder'], self.settings['user_host']))
+        self.settings['running_workers'].append(run_worker(self, self.settings['biapy_cfg'], self.settings['biapy_container_name'], 
+            worker_id, self.settings['output_folder'], self.settings['user_host']))
         self.settings['running_workers'][worker_id].moveToThread(self.settings['running_threads'][worker_id])
         self.settings['running_threads'][worker_id].started.connect(self.settings['running_workers'][worker_id].run)
         self.settings['running_workers'][worker_id].finished_signal.connect(self.settings['running_threads'][worker_id].quit)
