@@ -1,3 +1,4 @@
+import os
 import sys
 import tempfile
 import logging
@@ -14,6 +15,8 @@ from ui_function import *
 from ui_utils import examine, combobox_hide_visible_action, mark_syntax_error, expand_hide_advanced_options, buttonPressed, load_yaml_config
 from settings import get_default_settings
 from aux_windows import dialog_Ui, error_Ui, workflow_explanation_Ui, yes_no_Ui
+
+os.environ['QT_MAC_WANTS_LAYER'] = '1'
 
 class MainWindow(QMainWindow):
     def __init__(self, log_file, log_dir):
@@ -87,7 +90,6 @@ class MainWindow(QMainWindow):
         # Home page buttons 
         self.ui.continue_yaml_bn.clicked.connect(lambda: buttonPressed(self,'bn_run_biapy',99))
         self.ui.create_yaml_bn.clicked.connect(lambda: buttonPressed(self, 'bn_workflow', 99))
-        self.ui.build_container_bn.clicked.connect(lambda: UIFunction.build_container(self))
 
         # Workflow page buttons
         self.ui.left_arrow_bn.clicked.connect(lambda: UIFunction.move_workflow_view(self, True))

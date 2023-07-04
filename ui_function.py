@@ -1,7 +1,5 @@
 import os
 import sys
-import docker
-import json
 import re
 import multiprocessing
 
@@ -291,8 +289,9 @@ class UIFunction(MainWindow):
         
     def run_biapy(self):
         # Load the YAML file selected
-        load_yaml_config(self)
-
+        r = load_yaml_config(self)
+        if not r: return
+        
         # Job name check
         jobname = get_text(self.ui.job_name_input)
         if jobname == "":

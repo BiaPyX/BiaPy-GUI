@@ -166,7 +166,7 @@ def set_workflow_page(self):
     self.ui.workflow_view1_name_label.setText(self.settings['workflow_names'][self.settings['selected_workflow']-1])
 
     # Mid view
-    self.ui.workflow_view2_label.setPixmap(self.settings['workflow_images'][self.settings['selected_workflow']])
+    self.ui.workflow_view2_label.setPixmap(self.settings['workflow_images_selec'][self.settings['selected_workflow']])
     self.ui.workflow_view2_name_label.setText(self.settings['workflow_names'][self.settings['selected_workflow']])
 
     # Right view
@@ -242,17 +242,9 @@ def move_between_pages(self, to_page):
 def update_container_status(self, signal):
     # If the container was built correctly 
     if signal == 0:
-        self.ui.container_build_label.setText("Your BiaPy container is ready to be used!")
-        self.ui.build_container_bn.setText("Rebuild container")
         self.settings['biapy_container_ready'] = True
         self.ui.dependencies_label.setText("Dependency check")
         self.ui.docker_frame.setStyleSheet("")
-    elif signal == 1:
-        self.ui.container_build_label.setText("Something went wrong during the building phase of the container. \
-            Please report the <a href={}>log error</a> to BiaPy administrators"\
-            .format(bytearray(QUrl.fromLocalFile(self.settings['building_worker'].container_stdout_file).toEncoded()).decode()))
-    elif signal == 2:
-        self.ui.container_build_label.setText("Something went wrong during the building phase of the container")
 
 def oninit_checks(self):
     try:
@@ -264,30 +256,15 @@ def oninit_checks(self):
 
     if self.settings['docker_found']:
         self.ui.docker_status_label.setText("<br>Docker installation found")
-
-        # Check whether the container is built or not 
-        docker_images = [x.tags[0] for x in docker_client.images.list()]
-        if self.settings['biapy_container_name'] not in docker_images:
-            self.ui.container_build_label.setText("You need to build the container in order to run BiaPy. " 
-                "Please click in the button below!")
-            self.ui.dependencies_label.setText("Dependency error")
-            self.ui.docker_frame.setStyleSheet("#docker_frame { border: 3px solid red; }")
-        else:
-            self.ui.container_build_label.setText("Your BiaPy container is ready to be used!")
-            self.ui.build_container_bn.setText("Rebuild container")
-            self.settings['biapy_container_ready'] = True
-            self.ui.dependencies_label.setText("Dependency check")
-            self.ui.docker_frame.setStyleSheet("")
+        self.settings['biapy_container_ready'] = True
+        self.ui.dependencies_label.setText("Dependency check")
+        self.ui.docker_frame.setStyleSheet("")
     else:
         self.ui.docker_status_label.setText("Docker installation not found. Please, install it before running BiaPy in \
                 <a href=\"https://biapy.readthedocs.io/en/latest/get_started/installation.html#docker-installation/\">our documentation</a>. \
                 Once you have done that please restart this application.")
         self.ui.dependencies_label.setText("Dependency error")
         self.ui.docker_frame.setStyleSheet("#docker_frame { border: 3px solid red; }")
-
-        self.ui.container_build_head_label.setVisible(False)
-        self.ui.container_build_label.setVisible(False)
-        self.ui.build_container_bn.setVisible(False)
 
 def get_text(obj):
     if isinstance(obj, QComboBox):
@@ -803,13 +780,14 @@ def load_yaml_config(self, checks=True):
     if checks:
         if self.settings['yaml_config_filename'] == "":
             self.error_exec("A YAML file must be selected", "select_yaml_name_label")
-            return
+            return False
         yaml_file = get_text(self.ui.select_yaml_name_label)
         if not os.path.exists(yaml_file):
             self.error_exec("The YAML file does not exist!", "select_yaml_name_label")
+            return False
         if not str(yaml_file).endswith(".yaml") and not str(yaml_file).endswith(".yml"):
             self.error_exec("The YAML filename must have .yaml or .yml extension", "select_yaml_name_label")
-
+            return False
     self.settings['biapy_cfg'] = Config("/home/","jobname")
     
     errors = ""
@@ -817,6 +795,7 @@ def load_yaml_config(self, checks=True):
         self.settings['biapy_cfg']._C.merge_from_file(os.path.join(self.settings['yaml_config_file_path'], self.settings['yaml_config_filename']))
         self.settings['biapy_cfg'] = self.settings['biapy_cfg'].get_cfg_defaults()
         check_configuration(self.settings['biapy_cfg'])
+        return True
     except Exception as errors:   
         errors = str(errors)
         self.ui.check_yaml_file_errors_label.setText(errors)
