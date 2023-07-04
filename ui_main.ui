@@ -1317,7 +1317,7 @@ QPushButton:pressed {
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>0</number>
+                <number>1</number>
                </property>
                <widget class="QWidget" name="page_home">
                 <property name="styleSheet">
@@ -2544,7 +2544,7 @@ QPushButton:pressed {
                              <rect>
                               <x>0</x>
                               <y>0</y>
-                              <width>898</width>
+                              <width>925</width>
                               <height>483</height>
                              </rect>
                             </property>
@@ -2913,8 +2913,8 @@ QPushButton:pressed {
                                     <rect>
                                      <x>0</x>
                                      <y>0</y>
-                                     <width>246</width>
-                                     <height>159</height>
+                                     <width>877</width>
+                                     <height>174</height>
                                     </rect>
                                    </property>
                                    <layout class="QGridLayout" name="gridLayout_2">
@@ -13778,7 +13778,7 @@ p, li { white-space: pre-wrap; }
                             </font>
                            </property>
                            <property name="currentIndex">
-                            <number>1</number>
+                            <number>0</number>
                            </property>
                            <widget class="QWidget" name="test_general_options_tab">
                             <attribute name="title">
@@ -13813,7 +13813,7 @@ p, li { white-space: pre-wrap; }
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>814</width>
+                                  <width>913</width>
                                   <height>910</height>
                                  </rect>
                                 </property>
@@ -16885,7 +16885,7 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>452</width>
+                                       <width>913</width>
                                        <height>652</height>
                                       </rect>
                                      </property>
@@ -18701,8 +18701,8 @@ QPushButton:pressed {
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>96</width>
-                               <height>26</height>
+                               <width>889</width>
+                               <height>104</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_32">

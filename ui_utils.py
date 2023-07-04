@@ -76,7 +76,7 @@ def mark_syntax_error(main_window, obj, validator_type=["empty"]):
 
 def expand_hide_advanced_options(main_window, advanced_options_bn_tag, advanced_options_frame_tag):
     expand = not getattr(main_window.ui, advanced_options_frame_tag).isVisible()
-    getattr(main_window.ui, advanced_options_bn_tag).setIcon(advanced_frame_images[0] if expand else advanced_frame_images[1])
+    getattr(main_window.ui, advanced_options_bn_tag).setIcon(main_window.settings['advanced_frame_images'][0] if expand else main_window.settings['advanced_frame_images'][1])
     getattr(main_window.ui, advanced_options_frame_tag).setVisible(expand)
 
 def resource_path(relative_path):
