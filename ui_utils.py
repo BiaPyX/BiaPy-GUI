@@ -103,23 +103,24 @@ def buttonPressed(self, buttonName, to_page):
         if not move: return
 
         if buttonName == "up":
-            self.settings['page_number'] += 1
+            self.cfg.settings['page_number'] += 1
         else:
-            self.settings['page_number'] -= 1
-        to_page = self.settings['page_number']
+            self.cfg.settings['page_number'] -= 1
+        to_page = self.cfg.settings['page_number']
 
     if buttonName=='bn_home' or (buttonName=='down' and to_page == 0):
         self.ui.stackedWidget.setCurrentWidget(self.ui.page_home)
         self.ui.frame_home.setStyleSheet("background:rgb(255,255,255)") 
-        self.settings['page_number'] = 0
+        self.cfg.settings['page_number'] = 0
 
     elif buttonName=='bn_workflow' or ('bn_' not in buttonName and to_page == 1):
+        self.cfg.load_workflow_page()
         self.ui.continue_bn.setText("Continue")
         self.ui.stackedWidget.setCurrentWidget(self.ui.page_create_yaml)
         self.ui.stackedWidget_create_yaml_frame.setCurrentWidget(self.ui.workflow_selection_page)
         self.ui.frame_workflow.setStyleSheet("background:rgb(255,255,255)") 
         set_workflow_page(self)
-        self.settings['page_number'] = 1
+        self.cfg.settings['page_number'] = 1
         adjust_window_progress(self)
 
     elif buttonName=='bn_goptions' or ('bn_' not in buttonName and to_page == 2):
@@ -127,7 +128,7 @@ def buttonPressed(self, buttonName, to_page):
         self.ui.stackedWidget.setCurrentWidget(self.ui.page_create_yaml)
         self.ui.stackedWidget_create_yaml_frame.setCurrentWidget(self.ui.goptions_page)
         self.ui.frame_goptions.setStyleSheet("background:rgb(255,255,255)") 
-        self.settings['page_number'] = 2
+        self.cfg.settings['page_number'] = 2
         adjust_window_progress(self)
 
     elif buttonName=='bn_train' or ('bn_' not in buttonName and to_page == 3):
@@ -135,7 +136,7 @@ def buttonPressed(self, buttonName, to_page):
         self.ui.stackedWidget.setCurrentWidget(self.ui.page_create_yaml)
         self.ui.stackedWidget_create_yaml_frame.setCurrentWidget(self.ui.train_page)
         self.ui.frame_train.setStyleSheet("background:rgb(255,255,255)") 
-        self.settings['page_number'] = 3
+        self.cfg.settings['page_number'] = 3
         adjust_window_progress(self)
 
     elif buttonName=='bn_test' or ('bn_' not in buttonName and to_page == 4):
@@ -143,7 +144,7 @@ def buttonPressed(self, buttonName, to_page):
         self.ui.stackedWidget.setCurrentWidget(self.ui.page_create_yaml)
         self.ui.stackedWidget_create_yaml_frame.setCurrentWidget(self.ui.test_page)
         self.ui.frame_test.setStyleSheet("background:rgb(255,255,255)") 
-        self.settings['page_number'] = 4
+        self.cfg.settings['page_number'] = 4
         adjust_window_progress(self)
 
     elif buttonName=='bn_run_biapy' or ('bn_' not in buttonName and to_page == 5):            
@@ -156,71 +157,71 @@ def buttonPressed(self, buttonName, to_page):
         if not error:
             self.ui.stackedWidget.setCurrentWidget(self.ui.page_run_biapy)
             self.ui.frame_run_biapy.setStyleSheet("background:rgb(255,255,255)") 
-            self.settings['page_number'] = 5
+            self.cfg.settings['page_number'] = 5
 
     move_between_pages(self, to_page)
 
 def set_workflow_page(self):
     # Left view
-    self.ui.workflow_view1_label.setPixmap(self.settings['workflow_images'][self.settings['selected_workflow']-1])
-    self.ui.workflow_view1_name_label.setText(self.settings['workflow_names'][self.settings['selected_workflow']-1])
+    self.ui.workflow_view1_label.setPixmap(self.cfg.settings['workflow_images'][self.cfg.settings['selected_workflow']-1])
+    self.ui.workflow_view1_name_label.setText(self.cfg.settings['workflow_names'][self.cfg.settings['selected_workflow']-1])
 
     # Mid view
-    self.ui.workflow_view2_label.setPixmap(self.settings['workflow_images_selec'][self.settings['selected_workflow']])
-    self.ui.workflow_view2_name_label.setText(self.settings['workflow_names'][self.settings['selected_workflow']])
+    self.ui.workflow_view2_label.setPixmap(self.cfg.settings['workflow_images_selec'][self.cfg.settings['selected_workflow']])
+    self.ui.workflow_view2_name_label.setText(self.cfg.settings['workflow_names'][self.cfg.settings['selected_workflow']])
 
     # Right view
-    p = self.settings['selected_workflow']+1 if self.settings['selected_workflow']+1 < len(self.settings['workflow_names']) else 0
-    self.ui.workflow_view3_label.setPixmap(self.settings['workflow_images'][p])
-    self.ui.workflow_view3_name_label.setText(self.settings['workflow_names'][p])     
+    p = self.cfg.settings['selected_workflow']+1 if self.cfg.settings['selected_workflow']+1 < len(self.cfg.settings['workflow_names']) else 0
+    self.ui.workflow_view3_label.setPixmap(self.cfg.settings['workflow_images'][p])
+    self.ui.workflow_view3_name_label.setText(self.cfg.settings['workflow_names'][p])     
 
 def adjust_window_progress(self):
-    self.ui.window1_bn.setIcon(self.settings['dot_images'][0] if self.settings['page_number'] == 1 else self.settings['dot_images'][1])
-    self.ui.window2_bn.setIcon(self.settings['dot_images'][0] if self.settings['page_number'] == 2 else self.settings['dot_images'][1])
-    self.ui.window3_bn.setIcon(self.settings['dot_images'][0] if self.settings['page_number'] == 3 else self.settings['dot_images'][1])
-    self.ui.window4_bn.setIcon(self.settings['dot_images'][0] if self.settings['page_number'] == 4 else self.settings['dot_images'][1])
+    self.ui.window1_bn.setIcon(self.cfg.settings['dot_images'][0] if self.cfg.settings['page_number'] == 1 else self.cfg.settings['dot_images'][1])
+    self.ui.window2_bn.setIcon(self.cfg.settings['dot_images'][0] if self.cfg.settings['page_number'] == 2 else self.cfg.settings['dot_images'][1])
+    self.ui.window3_bn.setIcon(self.cfg.settings['dot_images'][0] if self.cfg.settings['page_number'] == 3 else self.cfg.settings['dot_images'][1])
+    self.ui.window4_bn.setIcon(self.cfg.settings['dot_images'][0] if self.cfg.settings['page_number'] == 4 else self.cfg.settings['dot_images'][1])
 
 def move_between_pages(self, to_page):
     # Semantic seg
-    if self.settings['selected_workflow'] == 0:
+    if self.cfg.settings['selected_workflow'] == 0:
         jobname = "my_semantic_segmentation"
-        models = self.settings['semantic_models']
+        models = self.cfg.settings['semantic_models']
         self.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.train_workflow_specific_tab_semantic_seg_page)
         self.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.test_workflow_specific_tab_semantic_seg_page)
     # Instance seg
-    elif self.settings['selected_workflow'] == 1:
+    elif self.cfg.settings['selected_workflow'] == 1:
         jobname = "my_instance_segmentation"
-        models = self.settings['instance_models']
+        models = self.cfg.settings['instance_models']
         self.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.train_workflow_specific_tab_instance_seg_page)
         self.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.test_workflow_specific_tab_instance_seg_page)
     # Detection
-    elif self.settings['selected_workflow'] == 2:
+    elif self.cfg.settings['selected_workflow'] == 2:
         jobname = "my_detection"
-        models = self.settings['detection_models']
+        models = self.cfg.settings['detection_models']
         self.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.train_workflow_specific_tab_detection_page)
         self.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.test_workflow_specific_tab_detection_page)
     # Denoising
-    elif self.settings['selected_workflow'] == 3:
+    elif self.cfg.settings['selected_workflow'] == 3:
         jobname = "my_denoising"
-        models = self.settings['denoising_models']
+        models = self.cfg.settings['denoising_models']
         self.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.train_workflow_specific_tab_denoising_page)
         self.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.test_workflow_specific_tab_denoising_page)
     # Super resolution
-    elif self.settings['selected_workflow'] == 4:
+    elif self.cfg.settings['selected_workflow'] == 4:
         jobname = "my_super_resolution"
-        models = self.settings['sr_models']
+        models = self.cfg.settings['sr_models']
         self.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.train_workflow_specific_tab_sr_page)
         self.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.test_workflow_specific_tab_sr_page)
     # Self-supevised learning
-    elif self.settings['selected_workflow'] == 5:
+    elif self.cfg.settings['selected_workflow'] == 5:
         jobname = "my_self_supervised_learning"
-        models = self.settings['ssl_models']
+        models = self.cfg.settings['ssl_models']
         self.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.train_workflow_specific_tab_ssl_page)
         self.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.test_workflow_specific_tab_ssl_page)
     # Classification
-    elif self.settings['selected_workflow'] == 6:
+    elif self.cfg.settings['selected_workflow'] == 6:
         jobname = "my_classification"
-        models = self.settings['classification_models']
+        models = self.cfg.settings['classification_models']
         goptions_tab_widget_visible = True
         self.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.train_workflow_specific_tab_classification_page)
         self.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.test_workflow_specific_tab_classification_page)
@@ -242,21 +243,21 @@ def move_between_pages(self, to_page):
 def update_container_status(self, signal):
     # If the container was built correctly 
     if signal == 0:
-        self.settings['biapy_container_ready'] = True
+        self.cfg.settings['biapy_container_ready'] = True
         self.ui.dependencies_label.setText("Dependency check")
         self.ui.docker_frame.setStyleSheet("")
 
 def oninit_checks(self):
     try:
         docker_client = docker.from_env()
-        self.settings['docker_found'] = True
+        self.cfg.settings['docker_found'] = True
     except:
-        self.settings['docker_found'] = False
+        self.cfg.settings['docker_found'] = False
         print(traceback.format_exc())
 
-    if self.settings['docker_found']:
+    if self.cfg.settings['docker_found']:
         self.ui.docker_status_label.setText("<br>Docker installation found")
-        self.settings['biapy_container_ready'] = True
+        self.cfg.settings['biapy_container_ready'] = True
         self.ui.dependencies_label.setText("Dependency check")
         self.ui.docker_frame.setStyleSheet("")
     else:
@@ -286,11 +287,11 @@ def create_yaml_file(self):
     workflow_names_yaml = ['SEMANTIC_SEG', 'INSTANCE_SEG', 'DETECTION', 'DENOISING', 'SUPER_RESOLUTION', 
         'SELF_SUPERVISED', 'CLASSIFICATION']
     biapy_config['PROBLEM'] = {}
-    biapy_config['PROBLEM']['TYPE'] = workflow_names_yaml[self.settings['selected_workflow']]
+    biapy_config['PROBLEM']['TYPE'] = workflow_names_yaml[self.cfg.settings['selected_workflow']]
     biapy_config['PROBLEM']['NDIM'] = get_text(self.ui.dimensions_comboBox)
 
     ### INSTANCE_SEG
-    if self.settings['selected_workflow'] == 1:
+    if self.cfg.settings['selected_workflow'] == 1:
         biapy_config['PROBLEM']['INSTANCE_SEG'] = {}
         biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_CHANNELS'] = get_text(self.ui.inst_seg_data_channels_input)
         biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_CHANNEL_WEIGHTS'] = get_text(self.ui.inst_seg_channel_weigths_input) 
@@ -325,7 +326,7 @@ def create_yaml_file(self):
         # biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_CHECK_MW'] = True
         
     ### DETECTION
-    elif self.settings['selected_workflow'] == 2:
+    elif self.cfg.settings['selected_workflow'] == 2:
         biapy_config['PROBLEM']['DETECTION'] = {}
         biapy_config['PROBLEM']['DETECTION']['CENTRAL_POINT_DILATION'] = int(get_text(self.ui.det_central_point_dilation_input))
         biapy_config['PROBLEM']['DETECTION']['CHECK_POINTS_CREATED'] = True if get_text(self.ui.det_central_point_dilation_input) == "Yes" else False
@@ -333,7 +334,7 @@ def create_yaml_file(self):
             biapy_config['PROBLEM']['DETECTION']['DATA_CHECK_MW'] = True
 
     ### DENOISING
-    elif self.settings['selected_workflow'] == 3:
+    elif self.cfg.settings['selected_workflow'] == 3:
         biapy_config['PROBLEM']['DENOISING'] = {}
         biapy_config['PROBLEM']['DENOISING']['N2V_PERC_PIX'] = float(get_text(self.ui.deno_n2v_perc_pix_input))
         biapy_config['PROBLEM']['DENOISING']['N2V_MANIPULATOR'] = get_text(self.ui.deno_n2v_manipulator_input)
@@ -341,12 +342,12 @@ def create_yaml_file(self):
         biapy_config['PROBLEM']['DENOISING']['N2V_STRUCTMASK'] = True if get_text(self.ui.deno_n2v_neighborhood_struct_input) == "Yes" else False
 
     ### SUPER_RESOLUTION
-    elif self.settings['selected_workflow'] == 4:
+    elif self.cfg.settings['selected_workflow'] == 4:
         biapy_config['PROBLEM']['SUPER_RESOLUTION'] = {}
         biapy_config['PROBLEM']['SUPER_RESOLUTION']['UPSCALING'] = int(get_text(self.ui.sr_upscaling_input))
 
     ### SELF_SUPERVISED
-    elif self.settings['selected_workflow'] == 5:
+    elif self.cfg.settings['selected_workflow'] == 5:
         biapy_config['PROBLEM']['SELF_SUPERVISED'] = {}
         biapy_config['PROBLEM']['SELF_SUPERVISED']['RESIZING_FACTOR'] = int(get_text(self.ui.ssl_resizing_factor_input))
         biapy_config['PROBLEM']['SELF_SUPERVISED']['NOISE'] = float(get_text(self.ui.ssl_noise_input))
@@ -391,11 +392,11 @@ def create_yaml_file(self):
         if get_text(self.ui.train_resolution_input) != "(1,1,1)" and get_text(self.ui.train_resolution_input) != "(1,1)":
             biapy_config['DATA']['TRAIN']['RESOLUTION'] = get_text(self.ui.train_resolution_input)
         
-        if self.settings['selected_workflow'] == 0 and int(get_text(self.ui.sem_seg_minimum_fore_percentage_input)) != 0:
+        if self.cfg.settings['selected_workflow'] == 0 and int(get_text(self.ui.sem_seg_minimum_fore_percentage_input)) != 0:
             biapy_config['DATA']['TRAIN']['MINIMUM_FOREGROUND_PER'] = int(get_text(self.ui.sem_seg_minimum_fore_percentage_input))
-        if self.settings['selected_workflow'] == 1 and int(get_text(self.ui.inst_seg_minimum_fore_percentage_input)) != 0:
+        if self.cfg.settings['selected_workflow'] == 1 and int(get_text(self.ui.inst_seg_minimum_fore_percentage_input)) != 0:
             biapy_config['DATA']['TRAIN']['MINIMUM_FOREGROUND_PER'] = int(get_text(self.ui.inst_seg_minimum_fore_percentage_input))
-        if self.settings['selected_workflow'] == 2 and int(get_text(self.ui.det_minimum_fore_percentage_input)) != 0:
+        if self.cfg.settings['selected_workflow'] == 2 and int(get_text(self.ui.det_minimum_fore_percentage_input)) != 0:
             biapy_config['DATA']['TRAIN']['MINIMUM_FOREGROUND_PER'] = int(get_text(self.ui.det_minimum_fore_percentage_input))
         
         # Validation
@@ -616,7 +617,7 @@ def create_yaml_file(self):
             biapy_config['PATHS']['CHECKPOINT_FILE'] = get_text(self.ui.checkpoint_file_path_input)
 
     # Loss (in detection only)
-    if self.settings['selected_workflow'] == 2:
+    if self.cfg.settings['selected_workflow'] == 2:
         biapy_config['LOSS'] = {}
         biapy_config['LOSS']['TYPE'] = get_text(self.ui.det_loss_type_input)
 
@@ -674,7 +675,7 @@ def create_yaml_file(self):
             biapy_config['TEST']['STATS']['FULL_IMG'] = True 
 
         ### Instance segmentation
-        if self.settings['selected_workflow'] == 1:
+        if self.cfg.settings['selected_workflow'] == 1:
             biapy_config['TEST']['MATCHING_STATS'] = True if get_text(self.ui.inst_seg_matching_stats_input) == "Yes" else False 
             biapy_config['TEST']['MATCHING_STATS_THS'] = ast.literal_eval(get_text(self.ui.inst_seg_matching_stats_ths_input)) 
             if get_text(self.ui.inst_seg_matching_stats_colores_img_ths_input) != "[0.3]":
@@ -682,7 +683,7 @@ def create_yaml_file(self):
             # biapy_config['TEST']['MATCHING_SEGCOMPARE'] = False 
 
         ### Detection
-        elif self.settings['selected_workflow'] == 2:
+        elif self.cfg.settings['selected_workflow'] == 2:
             biapy_config['TEST']['DET_LOCAL_MAX_COORDS'] = True if get_text(self.ui.det_local_max_coords_input) == "Yes" else False 
             biapy_config['TEST']['DET_MIN_TH_TO_BE_PEAK'] = ast.literal_eval(get_text(self.ui.det_min_th_to_be_peak_input))
             biapy_config['TEST']['DET_TOLERANCE'] = ast.literal_eval(get_text(self.ui.det_tolerance_input))
@@ -690,7 +691,7 @@ def create_yaml_file(self):
         # Post-processing
         biapy_config['TEST']['POST_PROCESSING'] = {}
         ### Semantic segmentation
-        if self.settings['selected_workflow'] == 0:
+        if self.cfg.settings['selected_workflow'] == 0:
             if get_text(self.ui.sem_seg_yz_filtering_input) == "Yes":
                 biapy_config['TEST']['POST_PROCESSING']['YZ_FILTERING'] = True 
                 biapy_config['TEST']['POST_PROCESSING']['YZ_FILTERING_SIZE'] = int(get_text(self.ui.sem_seg_yz_filtering_size_input))
@@ -698,7 +699,7 @@ def create_yaml_file(self):
                 biapy_config['TEST']['POST_PROCESSING']['Z_FILTERING'] = True 
                 biapy_config['TEST']['POST_PROCESSING']['Z_FILTERING_SIZE'] = int(get_text(self.ui.sem_seg_z_filtering_size_input))
         ### Instance segmentation
-        elif self.settings['selected_workflow'] == 1:
+        elif self.cfg.settings['selected_workflow'] == 1:
             if get_text(self.ui.inst_seg_yz_filtering_input) == "Yes":
                 biapy_config['TEST']['POST_PROCESSING']['YZ_FILTERING'] = True 
                 biapy_config['TEST']['POST_PROCESSING']['YZ_FILTERING_SIZE'] = int(get_text(self.ui.inst_seg_yz_filtering_size_input))
@@ -716,7 +717,7 @@ def create_yaml_file(self):
                     biapy_config['TEST']['POST_PROCESSING']['REMOVE_CLOSE_POINTS'] = True 
                     biapy_config['TEST']['POST_PROCESSING']['REMOVE_CLOSE_POINTS_RADIUS'] = ast.literal_eval(get_text(self.ui.inst_seg_remove_close_points_radius_input))
         ### Detection
-        elif self.settings['selected_workflow'] == 2:
+        elif self.cfg.settings['selected_workflow'] == 2:
             if get_text(self.ui.det_yz_filtering_input) == "Yes":
                 biapy_config['TEST']['POST_PROCESSING']['YZ_FILTERING'] = True 
                 biapy_config['TEST']['POST_PROCESSING']['YZ_FILTERING_SIZE'] = int(get_text(self.ui.det_yz_filtering_size_input))
@@ -741,44 +742,44 @@ def create_yaml_file(self):
         biapy_config['TEST']['ENABLE'] = False
 
     # Checking the directory
-    if self.settings['yaml_config_file_path'] == "":
+    if self.cfg.settings['yaml_config_file_path'] == "":
         self.error_exec("YAML file path must be defined", "yaml_config_file_path")
         return True
-    if not os.path.exists(self.settings['yaml_config_file_path']):
+    if not os.path.exists(self.cfg.settings['yaml_config_file_path']):
         self.error_exec("The directory '{}' does not exist. That folder was selected to store the YAML file"\
-            .format(self.settings['yaml_config_file_path']), "yaml_config_file_path")
+            .format(self.cfg.settings['yaml_config_file_path']), "yaml_config_file_path")
         return True
 
     # Checking YAML file name
-    self.settings['yaml_config_filename'] = get_text(self.ui.goptions_yaml_name_input)
-    if self.settings['yaml_config_filename'] == "":
+    self.cfg.settings['yaml_config_filename'] = get_text(self.ui.goptions_yaml_name_input)
+    if self.cfg.settings['yaml_config_filename'] == "":
         self.error_exec("The YAML filename must be defined", "goptions_yaml_name_input")
         return True
-    if not self.settings['yaml_config_filename'].endswith(".yaml") and not self.settings['yaml_config_filename'].endswith(".yml"):
+    if not self.cfg.settings['yaml_config_filename'].endswith(".yaml") and not self.cfg.settings['yaml_config_filename'].endswith(".yml"):
         self.error_exec("The YAML filename must have .yaml or .yml extension. You should change it to: {}"\
-            .format(self.settings['yaml_config_filename']+".yaml"), "goptions_yaml_name_input")
+            .format(self.cfg.settings['yaml_config_filename']+".yaml"), "goptions_yaml_name_input")
         return True
 
     # Writing YAML file
     print("Creating YAML file") 
-    with open(os.path.join(self.settings['yaml_config_file_path'], self.settings['yaml_config_filename']), 'w') as outfile:
+    with open(os.path.join(self.cfg.settings['yaml_config_file_path'], self.cfg.settings['yaml_config_filename']), 'w') as outfile:
         yaml.dump(biapy_config, outfile, default_flow_style=False)
 
     # Update GUI with the new YAML file path
-    self.ui.select_yaml_name_label.setText(os.path.join(self.settings['yaml_config_file_path'], self.settings['yaml_config_filename']))
+    self.ui.select_yaml_name_label.setText(os.path.join(self.cfg.settings['yaml_config_file_path'], self.cfg.settings['yaml_config_filename']))
 
     # Load configuration
     load_yaml_config(self, False)
     
     # Advise user where the YAML file has been saved 
-    message = "{}".format(os.path.join(self.settings['yaml_config_file_path'], self.settings['yaml_config_filename']))
+    message = "{}".format(os.path.join(self.cfg.settings['yaml_config_file_path'], self.cfg.settings['yaml_config_filename']))
     self.dialog_exec(message)
         
     return False
 
 def load_yaml_config(self, checks=True):
     if checks:
-        if self.settings['yaml_config_filename'] == "":
+        if self.cfg.settings['yaml_config_filename'] == "":
             self.error_exec("A YAML file must be selected", "select_yaml_name_label")
             return False
         yaml_file = get_text(self.ui.select_yaml_name_label)
@@ -788,13 +789,13 @@ def load_yaml_config(self, checks=True):
         if not str(yaml_file).endswith(".yaml") and not str(yaml_file).endswith(".yml"):
             self.error_exec("The YAML filename must have .yaml or .yml extension", "select_yaml_name_label")
             return False
-    self.settings['biapy_cfg'] = Config("/home/","jobname")
+    self.cfg.settings['biapy_cfg'] = Config("/home/","jobname")
     
     errors = ""
     try:
-        self.settings['biapy_cfg']._C.merge_from_file(os.path.join(self.settings['yaml_config_file_path'], self.settings['yaml_config_filename']))
-        self.settings['biapy_cfg'] = self.settings['biapy_cfg'].get_cfg_defaults()
-        check_configuration(self.settings['biapy_cfg'])
+        self.cfg.settings['biapy_cfg']._C.merge_from_file(os.path.join(self.cfg.settings['yaml_config_file_path'], self.cfg.settings['yaml_config_filename']))
+        self.cfg.settings['biapy_cfg'] = self.cfg.settings['biapy_cfg'].get_cfg_defaults()
+        check_configuration(self.cfg.settings['biapy_cfg'])
         return True
     except Exception as errors:   
         errors = str(errors)

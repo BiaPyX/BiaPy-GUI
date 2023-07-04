@@ -10,7 +10,6 @@ from PySide2.QtCore import Qt, QObject, QUrl
 from PySide2.QtGui import QPixmap
 from PySide2.QtWidgets import *
 
-import settings
 from ui_utils import resource_path, get_text
 from ui_build import Ui_BuildBiaPy 
 

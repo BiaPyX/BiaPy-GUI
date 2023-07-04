@@ -8,7 +8,6 @@ from PySide2.QtCore import Qt, QObject, QUrl
 from PySide2.QtGui import QPixmap
 from PySide2.QtWidgets import *
 
-import settings
 from ui_utils import get_text, resource_path
 from ui_run import Ui_RunBiaPy 
 

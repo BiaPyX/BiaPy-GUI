@@ -12,7 +12,7 @@ from ui_utils import get_text, resource_path, set_workflow_page, update_containe
 class UIFunction(MainWindow):
 
     def initStackTab(self):
-        if self.settings['init']==False:
+        if not self.cfg.settings['init']:
             self.ui.stackedWidget.setCurrentWidget(self.ui.page_home)
             self.ui.frame_home.setStyleSheet("background:rgb(255,255,255)") 
             oninit_checks(self)
@@ -40,18 +40,22 @@ class UIFunction(MainWindow):
             UIFunction.init_train_page(self)
             UIFunction.init_test_page(self)
 
-            self.settings['init'] = True
+            self.cfg.settings['init'] = True
     
     def obtain_workflow_description(self, offset):
-        s_workflow = self.settings['selected_workflow'] + offset
+        # Load first time
+        if not 'workflow_description_images' in self.cfg.settings:
+            self.cfg.load_workflow_detail_page()
+
+        s_workflow = self.cfg.settings['selected_workflow'] + offset
         if s_workflow < 0:
-            s_workflow = len(self.settings['workflow_names'])-1
-        if s_workflow == len(self.settings['workflow_names']):
+            s_workflow = len(self.cfg.settings['workflow_names'])-1
+        if s_workflow == len(self.cfg.settings['workflow_names']):
             s_workflow = 0
 
-        workflow_name = self.settings['workflow_names'][s_workflow].replace("\n"," ") 
-        workflow_images = self.settings['workflow_description_images'][s_workflow]
-        workflow_description = self.settings['workflow_descriptions'][s_workflow]
+        workflow_name = self.cfg.settings['workflow_names'][s_workflow].replace("\n"," ") 
+        workflow_images = self.cfg.settings['workflow_description_images'][s_workflow]
+        workflow_description = self.cfg.settings['workflow_descriptions'][s_workflow]
         self.workflow_info_exec(workflow_name, workflow_images, workflow_description)
 
     ###########
@@ -67,9 +71,9 @@ class UIFunction(MainWindow):
     ###############
     def move_workflow_view(self, isleft):
         if isleft:
-            self.settings['selected_workflow'] = self.settings['selected_workflow'] - 1 if self.settings['selected_workflow'] != 0 else len(self.settings['workflow_names'])-1
+            self.cfg.settings['selected_workflow'] = self.cfg.settings['selected_workflow'] - 1 if self.cfg.settings['selected_workflow'] != 0 else len(self.cfg.settings['workflow_names'])-1
         else: 
-            self.settings['selected_workflow'] = self.settings['selected_workflow'] + 1 if self.settings['selected_workflow'] != len(self.settings['workflow_names'])-1 else 0
+            self.cfg.settings['selected_workflow'] = self.cfg.settings['selected_workflow'] + 1 if self.cfg.settings['selected_workflow'] != len(self.cfg.settings['workflow_names'])-1 else 0
         set_workflow_page(self)
 
     ######################
@@ -271,21 +275,21 @@ class UIFunction(MainWindow):
         self.ui.test_advanced_options_frame.setVisible(False)
 
     def build_container(self):
-        self.settings['building_thread'] = None
-        self.settings['building_worker'] = None
-        self.settings['building_threads'] = QThread()
-        outf = self.log_dir if self.settings['output_folder'] == "" else self.settings['output_folder']
-        self.settings['building_worker'] = build_worker(self, self.settings['biapy_container_dockerfile'], 
-            self.settings['biapy_container_name'], outf)
-        self.settings['building_worker'].moveToThread(self.settings['building_threads'])
-        self.settings['building_threads'].started.connect(self.settings['building_worker'].run)
-        self.settings['building_worker'].finished_signal.connect(self.settings['building_threads'].quit)
-        self.settings['building_worker'].finished_signal.connect(lambda: update_container_status(self, self.settings['building_worker'].finished_good))
-        self.settings['building_worker'].close_signal.connect(self.settings['building_worker'].deleteLater) 
-        self.settings['building_threads'].finished.connect(self.settings['building_threads'].deleteLater)
-        self.settings['building_worker'].update_log_signal.connect(self.settings['building_worker'].gui.update_gui)
-        self.settings['building_worker'].update_build_progress_signal.connect(self.settings['building_worker'].gui.update_building_progress)
-        self.settings['building_threads'].start()
+        self.cfg.settings['building_thread'] = None
+        self.cfg.settings['building_worker'] = None
+        self.cfg.settings['building_threads'] = QThread()
+        outf = self.log_dir if self.cfg.settings['output_folder'] == "" else self.cfg.settings['output_folder']
+        self.cfg.settings['building_worker'] = build_worker(self, self.cfg.settings['biapy_container_dockerfile'], 
+            self.cfg.settings['biapy_container_name'], outf)
+        self.cfg.settings['building_worker'].moveToThread(self.cfg.settings['building_threads'])
+        self.cfg.settings['building_threads'].started.connect(self.cfg.settings['building_worker'].run)
+        self.cfg.settings['building_worker'].finished_signal.connect(self.cfg.settings['building_threads'].quit)
+        self.cfg.settings['building_worker'].finished_signal.connect(lambda: update_container_status(self, self.cfg.settings['building_worker'].finished_good))
+        self.cfg.settings['building_worker'].close_signal.connect(self.cfg.settings['building_worker'].deleteLater) 
+        self.cfg.settings['building_threads'].finished.connect(self.cfg.settings['building_threads'].deleteLater)
+        self.cfg.settings['building_worker'].update_log_signal.connect(self.cfg.settings['building_worker'].gui.update_gui)
+        self.cfg.settings['building_worker'].update_build_progress_signal.connect(self.cfg.settings['building_worker'].gui.update_building_progress)
+        self.cfg.settings['building_threads'].start()
         
     def run_biapy(self):
         # Load the YAML file selected
@@ -302,32 +306,32 @@ class UIFunction(MainWindow):
             return
 
         # Output folder check
-        if self.settings['output_folder'] == "":
+        if self.cfg.settings['output_folder'] == "":
             self.error_exec("Output folder must be defined", "output_folder")
             return 
 
         # Docker installation check
-        if not self.settings['docker_found']:
+        if not self.cfg.settings['docker_found']:
             self.error_exec("Docker installation not found. Please, install it before running BiaPy in its\
                     <a href=\"https://docs.docker.com/get-docker/\">official documentation</a>. Once you have \
                     done that please restart this application.", "docker_installation")
             return
-        if not self.settings['biapy_container_ready']:
+        if not self.cfg.settings['biapy_container_ready']:
             self.error_exec("You need to build BiaPy's container first. You will be redirected yo the main page "
                 "so you can do it.", "docker_installation")
             return
 
-        self.settings['running_threads'].append(QThread())
-        worker_id = len(self.settings['running_workers'])
-        self.settings['running_workers'].append(run_worker(self, self.settings['biapy_cfg'], self.settings['biapy_container_name'], 
-            worker_id, self.settings['output_folder'], self.settings['user_host']))
-        self.settings['running_workers'][worker_id].moveToThread(self.settings['running_threads'][worker_id])
-        self.settings['running_threads'][worker_id].started.connect(self.settings['running_workers'][worker_id].run)
-        self.settings['running_workers'][worker_id].finished_signal.connect(self.settings['running_threads'][worker_id].quit)
-        self.settings['running_workers'][worker_id].finished_signal.connect(self.settings['running_workers'][worker_id].deleteLater)
-        self.settings['running_threads'][worker_id].finished.connect(self.settings['running_threads'][worker_id].deleteLater)
-        self.settings['running_workers'][worker_id].update_log_signal.connect(self.settings['running_workers'][worker_id].gui.update_gui)
-        self.settings['running_workers'][worker_id].update_cont_state_signal.connect(self.settings['running_workers'][worker_id].gui.update_cont_state)
-        self.settings['running_workers'][worker_id].update_train_progress_signal.connect(self.settings['running_workers'][worker_id].gui.update_train_progress)
-        self.settings['running_workers'][worker_id].update_test_progress_signal.connect(self.settings['running_workers'][worker_id].gui.update_test_progress)
-        self.settings['running_threads'][worker_id].start()
+        self.cfg.settings['running_threads'].append(QThread())
+        worker_id = len(self.cfg.settings['running_workers'])
+        self.cfg.settings['running_workers'].append(run_worker(self, self.cfg.settings['biapy_cfg'], self.cfg.settings['biapy_container_name'], 
+            worker_id, self.cfg.settings['output_folder'], self.cfg.settings['user_host']))
+        self.cfg.settings['running_workers'][worker_id].moveToThread(self.cfg.settings['running_threads'][worker_id])
+        self.cfg.settings['running_threads'][worker_id].started.connect(self.cfg.settings['running_workers'][worker_id].run)
+        self.cfg.settings['running_workers'][worker_id].finished_signal.connect(self.cfg.settings['running_threads'][worker_id].quit)
+        self.cfg.settings['running_workers'][worker_id].finished_signal.connect(self.cfg.settings['running_workers'][worker_id].deleteLater)
+        self.cfg.settings['running_threads'][worker_id].finished.connect(self.cfg.settings['running_threads'][worker_id].deleteLater)
+        self.cfg.settings['running_workers'][worker_id].update_log_signal.connect(self.cfg.settings['running_workers'][worker_id].gui.update_gui)
+        self.cfg.settings['running_workers'][worker_id].update_cont_state_signal.connect(self.cfg.settings['running_workers'][worker_id].gui.update_cont_state)
+        self.cfg.settings['running_workers'][worker_id].update_train_progress_signal.connect(self.cfg.settings['running_workers'][worker_id].gui.update_train_progress)
+        self.cfg.settings['running_workers'][worker_id].update_test_progress_signal.connect(self.cfg.settings['running_workers'][worker_id].gui.update_test_progress)
+        self.cfg.settings['running_threads'][worker_id].start()

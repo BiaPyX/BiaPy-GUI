@@ -13,7 +13,7 @@ from PySide2.QtWidgets import *
 from ui_main import Ui_MainWindow 
 from ui_function import * 
 from ui_utils import examine, combobox_hide_visible_action, mark_syntax_error, expand_hide_advanced_options, buttonPressed, load_yaml_config
-from settings import get_default_settings
+from settings import Settings
 from aux_windows import dialog_Ui, error_Ui, workflow_explanation_Ui, yes_no_Ui
 
 os.environ['QT_MAC_WANTS_LAYER'] = '1'
@@ -27,7 +27,7 @@ class MainWindow(QMainWindow):
 
         self.log_file = log_file
         self.log_dir = log_dir
-        self.settings = get_default_settings()
+        self.cfg = Settings()
 
         # So the error and dialog windows can access it 
         global ui
@@ -416,10 +416,10 @@ class MainWindow(QMainWindow):
         self.ui.check_yaml_file_bn.clicked.connect(lambda: load_yaml_config(self))
         self.ui.run_biapy_docker_bn.clicked.connect(lambda: UIFunction.run_biapy(self))
 
-        self.diag = dialog_Ui()
-        self.yes_no = yes_no_Ui()
-        self.error = error_Ui(self)
-        self.wokflow_info = workflow_explanation_Ui()
+        self.diag = None
+        self.yes_no = None
+        self.error = None
+        self.wokflow_info = None
 
         self.dragPos = self.pos()
         def moveWindow(event):
@@ -552,19 +552,27 @@ class MainWindow(QMainWindow):
         self.dragPos = event.globalPos()
     
     def dialog_exec(self, message):
+        if self.diag is None: 
+            self.diag = dialog_Ui()
         self.diag.dialog_constrict(message)
         self.diag.exec_()
     
     def error_exec(self, message, reason):
+        if self.error is None: 
+            self.error = error_Ui(self)
         self.error.error_constrict(message, reason)
         self.error.exec_()
 
     def workflow_info_exec(self, workflow_name, workflow_images, workflow_description):
+        if self.wokflow_info is None: 
+            self.wokflow_info = workflow_explanation_Ui()
         self.wokflow_info.infoConstrict(workflow_name, workflow_images[0], 
             workflow_images[1], workflow_description)
         self.wokflow_info.exec_()
 
     def yes_no_exec(self, question):
+        if self.yes_no is None: 
+            self.yes_no = yes_no_Ui()
         self.yes_no.create_question(question)
         self.yes_no.exec_()
 
