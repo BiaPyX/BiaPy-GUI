@@ -26,17 +26,17 @@ def examine(main_window, save_in_obj_tag=None, is_file=True):
         getattr(main_window.ui, save_in_obj_tag).setText(out)
         getattr(main_window.ui, save_in_obj_tag).moveCursor(QtGui.QTextCursor.End, QtGui.QTextCursor.MoveAnchor)
         if save_in_obj_tag == "train_data_input":
-            main_window.settings['train_data_input_path'] = out 
+            main_window.cfg.settings['train_data_input_path'] = out 
         elif save_in_obj_tag == "train_data_gt_input":
-            main_window.settings['train_data_gt_input_path'] = out 
+            main_window.cfg.settings['train_data_gt_input_path'] = out 
         elif save_in_obj_tag == "validation_data_input":
-            main_window.settings['validation_data_input_path'] = out 
+            main_window.cfg.settings['validation_data_input_path'] = out 
         elif save_in_obj_tag == "validation_data_gt_input":
-            main_window.settings['validation_data_gt_input_path'] = out 
+            main_window.cfg.settings['validation_data_gt_input_path'] = out 
         elif save_in_obj_tag == "test_data_input":
-            main_window.settings['test_data_input_path'] = out 
+            main_window.cfg.settings['test_data_input_path'] = out 
         elif save_in_obj_tag == "test_data_gt_input":
-            main_window.settings['test_data_gt_input_path'] = out  
+            main_window.cfg.settings['test_data_gt_input_path'] = out  
 
 def combobox_hide_visible_action(main_window, combobox, frames_dict, frames_dict_values_to_set=None):
     for key in frames_dict:
@@ -65,18 +65,18 @@ def mark_syntax_error(main_window, obj, validator_type=["empty"]):
 
         out = get_text(getattr(main_window.ui, obj))
         if obj == "goptions_browse_yaml_path_input":
-            main_window.settings['yaml_config_file_path'] = out
+            main_window.cfg.settings['yaml_config_file_path'] = out
         elif obj == "select_yaml_name_label":
             out_write = os.path.basename(out)
-            main_window.settings['yaml_config_filename'] = out_write
-            main_window.settings['yaml_config_file_path'] = os.path.dirname(out)
+            main_window.cfg.settings['yaml_config_filename'] = out_write
+            main_window.cfg.settings['yaml_config_file_path'] = os.path.dirname(out)
             main_window.ui.job_name_input.setPlainText(os.path.splitext(out_write)[0]+"_experiment")
         elif obj == "output_folder_input":
-            main_window.settings['output_folder'] = out 
+            main_window.cfg.settings['output_folder'] = out 
 
 def expand_hide_advanced_options(main_window, advanced_options_bn_tag, advanced_options_frame_tag):
     expand = not getattr(main_window.ui, advanced_options_frame_tag).isVisible()
-    getattr(main_window.ui, advanced_options_bn_tag).setIcon(main_window.settings['advanced_frame_images'][0] if expand else main_window.settings['advanced_frame_images'][1])
+    getattr(main_window.ui, advanced_options_bn_tag).setIcon(main_window.cfg.settings['advanced_frame_images'][0] if expand else main_window.cfg.settings['advanced_frame_images'][1])
     getattr(main_window.ui, advanced_options_frame_tag).setVisible(expand)
 
 def resource_path(relative_path):

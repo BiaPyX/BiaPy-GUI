@@ -694,10 +694,10 @@ class Ui_MainWindow(object):
 "	background-color: rgba(0,0,0,0);\n"
 "}\n"
 "QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
 "}\n"
 "QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
 "}")
         icon8 = QIcon()
         icon8.addFile(u"images/bn_images/left_arrow.svg", QSize(), QIcon.Normal, QIcon.Off)
@@ -718,7 +718,7 @@ class Ui_MainWindow(object):
 
         self.workflow_view1_frame = QFrame(self.page_create_yaml_mid_frame)
         self.workflow_view1_frame.setObjectName(u"workflow_view1_frame")
-        self.workflow_view1_frame.setMaximumSize(QSize(16777215, 16777215))
+        self.workflow_view1_frame.setMaximumSize(QSize(267, 16777215))
         self.workflow_view1_frame.setFont(font)
         self.workflow_view1_frame.setFrameShape(QFrame.NoFrame)
         self.workflow_view1_frame.setFrameShadow(QFrame.Raised)
@@ -749,14 +749,29 @@ class Ui_MainWindow(object):
         self.horizontalLayout_21.setSpacing(0)
         self.horizontalLayout_21.setObjectName(u"horizontalLayout_21")
         self.horizontalLayout_21.setContentsMargins(0, 10, 0, 0)
+        self.horizontalSpacer_64 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_21.addItem(self.horizontalSpacer_64)
+
         self.workflow_view1_seemore_bn = QPushButton(self.frame_38)
         self.workflow_view1_seemore_bn.setObjectName(u"workflow_view1_seemore_bn")
+        self.workflow_view1_seemore_bn.setMinimumSize(QSize(140, 30))
         font3 = QFont()
         font3.setFamily(u"DejaVu Math TeX Gyre")
         font3.setPointSize(9)
         self.workflow_view1_seemore_bn.setFont(font3)
         self.workflow_view1_seemore_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
+"	background-color: rgb(255,255,255);\n"
+"	border-radius: 15px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
 "}")
 
         self.horizontalLayout_21.addWidget(self.workflow_view1_seemore_bn)
@@ -795,6 +810,8 @@ class Ui_MainWindow(object):
 
         self.workflow_view2_frame = QFrame(self.page_create_yaml_mid_frame)
         self.workflow_view2_frame.setObjectName(u"workflow_view2_frame")
+        self.workflow_view2_frame.setMinimumSize(QSize(0, 0))
+        self.workflow_view2_frame.setMaximumSize(QSize(267, 16777215))
         self.workflow_view2_frame.setFont(font)
         self.workflow_view2_frame.setFrameShape(QFrame.NoFrame)
         self.workflow_view2_frame.setFrameShadow(QFrame.Raised)
@@ -822,11 +839,26 @@ class Ui_MainWindow(object):
         self.horizontalLayout_22.setSpacing(0)
         self.horizontalLayout_22.setObjectName(u"horizontalLayout_22")
         self.horizontalLayout_22.setContentsMargins(0, 4, 0, 0)
+        self.horizontalSpacer_62 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_22.addItem(self.horizontalSpacer_62)
+
         self.workflow_view2_seemore_bn = QPushButton(self.frame_59)
         self.workflow_view2_seemore_bn.setObjectName(u"workflow_view2_seemore_bn")
+        self.workflow_view2_seemore_bn.setMinimumSize(QSize(140, 30))
         self.workflow_view2_seemore_bn.setFont(font3)
         self.workflow_view2_seemore_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
+"	background-color: rgb(255,255,255);\n"
+"	border-radius: 15px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
 "}")
 
         self.horizontalLayout_22.addWidget(self.workflow_view2_seemore_bn)
@@ -865,6 +897,7 @@ class Ui_MainWindow(object):
 
         self.workflow_view3_frame = QFrame(self.page_create_yaml_mid_frame)
         self.workflow_view3_frame.setObjectName(u"workflow_view3_frame")
+        self.workflow_view3_frame.setMaximumSize(QSize(267, 16777215))
         self.workflow_view3_frame.setFont(font)
         self.workflow_view3_frame.setFrameShape(QFrame.NoFrame)
         self.workflow_view3_frame.setFrameShadow(QFrame.Raised)
@@ -893,11 +926,26 @@ class Ui_MainWindow(object):
         self.horizontalLayout_23.setSpacing(0)
         self.horizontalLayout_23.setObjectName(u"horizontalLayout_23")
         self.horizontalLayout_23.setContentsMargins(0, 10, 0, 0)
+        self.horizontalSpacer_55 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_23.addItem(self.horizontalSpacer_55)
+
         self.workflow_view3_seemore_bn = QPushButton(self.frame_60)
         self.workflow_view3_seemore_bn.setObjectName(u"workflow_view3_seemore_bn")
+        self.workflow_view3_seemore_bn.setMinimumSize(QSize(140, 30))
         self.workflow_view3_seemore_bn.setFont(font3)
         self.workflow_view3_seemore_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
+"	background-color: rgb(255,255,255);\n"
+"	border-radius: 15px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
 "}")
 
         self.horizontalLayout_23.addWidget(self.workflow_view3_seemore_bn)
@@ -943,10 +991,10 @@ class Ui_MainWindow(object):
 "	background-color: rgba(0,0,0,0);\n"
 "}\n"
 "QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
 "}\n"
 "QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
 "}")
         icon9 = QIcon()
         icon9.addFile(u"images/bn_images/right_arrow.svg", QSize(), QIcon.Normal, QIcon.Off)
@@ -977,7 +1025,7 @@ class Ui_MainWindow(object):
         self.goptions_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 925, 483))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 925, 493))
         self.scrollAreaWidgetContents.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout.setObjectName(u"gridLayout")
@@ -1004,6 +1052,12 @@ class Ui_MainWindow(object):
         self.goptions_advanced_bn.setFont(font)
         self.goptions_advanced_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
+"}\n"
+"QPushButton:hover {\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
 "}")
         icon10 = QIcon()
         icon10.addFile(u"images/bn_images/down_arrow.svg", QSize(), QIcon.Normal, QIcon.Off)
@@ -1037,14 +1091,15 @@ class Ui_MainWindow(object):
         self.checkpoint_load_input.addItem("")
         self.checkpoint_load_input.addItem("")
         self.checkpoint_load_input.setObjectName(u"checkpoint_load_input")
-        self.checkpoint_load_input.setMaximumSize(QSize(100, 16777215))
+        self.checkpoint_load_input.setMinimumSize(QSize(200, 30))
+        self.checkpoint_load_input.setMaximumSize(QSize(200, 30))
         self.checkpoint_load_input.setFont(font)
 
         self.gridLayout_26.addWidget(self.checkpoint_load_input, 1, 2, 1, 1)
 
         self.checkpoint_file_path_input = QTextBrowser(self.train_disable_checkpoint_frame)
         self.checkpoint_file_path_input.setObjectName(u"checkpoint_file_path_input")
-        self.checkpoint_file_path_input.setMinimumSize(QSize(500, 0))
+        self.checkpoint_file_path_input.setMinimumSize(QSize(500, 30))
         self.checkpoint_file_path_input.setMaximumSize(QSize(500, 30))
         self.checkpoint_file_path_input.setFont(font)
         self.checkpoint_file_path_input.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -1147,24 +1202,24 @@ class Ui_MainWindow(object):
 
         self.maxcpu_combobox = QComboBox(self.frame_2)
         self.maxcpu_combobox.setObjectName(u"maxcpu_combobox")
-        self.maxcpu_combobox.setMinimumSize(QSize(100, 30))
-        self.maxcpu_combobox.setMaximumSize(QSize(100, 16777215))
+        self.maxcpu_combobox.setMinimumSize(QSize(200, 30))
+        self.maxcpu_combobox.setMaximumSize(QSize(200, 30))
         self.maxcpu_combobox.setFont(font)
 
         self.gridLayout_5.addWidget(self.maxcpu_combobox, 1, 2, 1, 1)
 
         self.gpu_input = QLineEdit(self.frame_2)
         self.gpu_input.setObjectName(u"gpu_input")
-        self.gpu_input.setMinimumSize(QSize(100, 0))
-        self.gpu_input.setMaximumSize(QSize(100, 16777215))
+        self.gpu_input.setMinimumSize(QSize(200, 30))
+        self.gpu_input.setMaximumSize(QSize(200, 30))
         self.gpu_input.setFont(font)
 
         self.gridLayout_5.addWidget(self.gpu_input, 0, 2, 1, 1)
 
         self.seed_input = QLineEdit(self.frame_2)
         self.seed_input.setObjectName(u"seed_input")
-        self.seed_input.setMinimumSize(QSize(100, 0))
-        self.seed_input.setMaximumSize(QSize(100, 16777215))
+        self.seed_input.setMinimumSize(QSize(200, 30))
+        self.seed_input.setMaximumSize(QSize(200, 30))
         self.seed_input.setFont(font)
 
         self.gridLayout_5.addWidget(self.seed_input, 3, 2, 1, 1)
@@ -1213,7 +1268,7 @@ class Ui_MainWindow(object):
 
         self.goptions_browse_yaml_path_input = QTextBrowser(self.frame_21)
         self.goptions_browse_yaml_path_input.setObjectName(u"goptions_browse_yaml_path_input")
-        self.goptions_browse_yaml_path_input.setMinimumSize(QSize(500, 0))
+        self.goptions_browse_yaml_path_input.setMinimumSize(QSize(500, 30))
         self.goptions_browse_yaml_path_input.setMaximumSize(QSize(500, 30))
         self.goptions_browse_yaml_path_input.setFont(font)
         self.goptions_browse_yaml_path_input.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -1236,8 +1291,8 @@ class Ui_MainWindow(object):
         self.dimensions_comboBox.addItem("")
         self.dimensions_comboBox.addItem("")
         self.dimensions_comboBox.setObjectName(u"dimensions_comboBox")
-        self.dimensions_comboBox.setMinimumSize(QSize(100, 0))
-        self.dimensions_comboBox.setMaximumSize(QSize(100, 16777215))
+        self.dimensions_comboBox.setMinimumSize(QSize(100, 30))
+        self.dimensions_comboBox.setMaximumSize(QSize(100, 30))
         self.dimensions_comboBox.setFont(font)
 
         self.gridLayout_27.addWidget(self.dimensions_comboBox, 0, 3, 1, 1)
@@ -1279,7 +1334,7 @@ class Ui_MainWindow(object):
         self.train_page.setObjectName(u"train_page")
         self.train_general_frame = QFrame(self.train_page)
         self.train_general_frame.setObjectName(u"train_general_frame")
-        self.train_general_frame.setGeometry(QRect(0, 0, 941, 461))
+        self.train_general_frame.setGeometry(QRect(0, 0, 951, 463))
         self.train_general_frame.setMinimumSize(QSize(0, 0))
         self.train_general_frame.setFont(font)
         self.train_general_frame.setFrameShape(QFrame.StyledPanel)
@@ -1288,6 +1343,47 @@ class Ui_MainWindow(object):
         self.gridLayout_14.setSpacing(9)
         self.gridLayout_14.setObjectName(u"gridLayout_14")
         self.gridLayout_14.setContentsMargins(9, -1, -1, -1)
+        self.verticalSpacer_11 = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.gridLayout_14.addItem(self.verticalSpacer_11, 2, 0, 1, 1)
+
+        self.horizontalSpacer_18 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_14.addItem(self.horizontalSpacer_18, 0, 1, 1, 1)
+
+        self.frame_25 = QFrame(self.train_general_frame)
+        self.frame_25.setObjectName(u"frame_25")
+        self.frame_25.setMinimumSize(QSize(0, 50))
+        self.frame_25.setFrameShape(QFrame.NoFrame)
+        self.frame_25.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_12 = QHBoxLayout(self.frame_25)
+        self.horizontalLayout_12.setSpacing(6)
+        self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
+        self.horizontalLayout_12.setContentsMargins(0, 0, 0, 0)
+        self.label_49 = QLabel(self.frame_25)
+        self.label_49.setObjectName(u"label_49")
+        self.label_49.setMaximumSize(QSize(16777215, 16777215))
+        self.label_49.setFont(font)
+        self.label_49.setContextMenuPolicy(Qt.NoContextMenu)
+
+        self.horizontalLayout_12.addWidget(self.label_49)
+
+        self.enable_train_input = QComboBox(self.frame_25)
+        self.enable_train_input.addItem("")
+        self.enable_train_input.addItem("")
+        self.enable_train_input.setObjectName(u"enable_train_input")
+        self.enable_train_input.setMinimumSize(QSize(100, 0))
+        self.enable_train_input.setFont(font)
+
+        self.horizontalLayout_12.addWidget(self.enable_train_input)
+
+        self.horizontalSpacer_17 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_12.addItem(self.horizontalSpacer_17)
+
+
+        self.gridLayout_14.addWidget(self.frame_25, 0, 0, 1, 1)
+
         self.train_tab_widget = QTabWidget(self.train_general_frame)
         self.train_tab_widget.setObjectName(u"train_tab_widget")
         self.train_tab_widget.setFont(font)
@@ -1295,9 +1391,8 @@ class Ui_MainWindow(object):
         self.train_general_options_tab.setObjectName(u"train_general_options_tab")
         self.train_general_options_tab.setMaximumSize(QSize(16777215, 356))
         self.gridLayout_12 = QGridLayout(self.train_general_options_tab)
+        self.gridLayout_12.setSpacing(0)
         self.gridLayout_12.setObjectName(u"gridLayout_12")
-        self.gridLayout_12.setHorizontalSpacing(0)
-        self.gridLayout_12.setVerticalSpacing(40)
         self.gridLayout_12.setContentsMargins(0, 0, 0, 0)
         self.train_scrollArea = QScrollArea(self.train_general_options_tab)
         self.train_scrollArea.setObjectName(u"train_scrollArea")
@@ -1308,7 +1403,7 @@ class Ui_MainWindow(object):
         self.train_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 934, 5192))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, -606, 934, 5832))
         self.scrollAreaWidgetContents_3.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout_3 = QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
@@ -1353,8 +1448,8 @@ class Ui_MainWindow(object):
         self.da_enable_input.addItem("")
         self.da_enable_input.addItem("")
         self.da_enable_input.setObjectName(u"da_enable_input")
-        self.da_enable_input.setMinimumSize(QSize(100, 0))
-        self.da_enable_input.setMaximumSize(QSize(100, 16777215))
+        self.da_enable_input.setMinimumSize(QSize(200, 30))
+        self.da_enable_input.setMaximumSize(QSize(200, 30))
         self.da_enable_input.setFont(font)
 
         self.gridLayout_69.addWidget(self.da_enable_input, 0, 1, 1, 1)
@@ -1408,8 +1503,8 @@ class Ui_MainWindow(object):
         self.da_cutout_input.addItem("")
         self.da_cutout_input.addItem("")
         self.da_cutout_input.setObjectName(u"da_cutout_input")
-        self.da_cutout_input.setMinimumSize(QSize(100, 0))
-        self.da_cutout_input.setMaximumSize(QSize(100, 16777215))
+        self.da_cutout_input.setMinimumSize(QSize(200, 30))
+        self.da_cutout_input.setMaximumSize(QSize(200, 30))
         self.da_cutout_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_cutout_input, 46, 1, 1, 1)
@@ -1418,8 +1513,8 @@ class Ui_MainWindow(object):
         self.da_cutblur_input.addItem("")
         self.da_cutblur_input.addItem("")
         self.da_cutblur_input.setObjectName(u"da_cutblur_input")
-        self.da_cutblur_input.setMinimumSize(QSize(100, 0))
-        self.da_cutblur_input.setMaximumSize(QSize(100, 16777215))
+        self.da_cutblur_input.setMinimumSize(QSize(200, 30))
+        self.da_cutblur_input.setMaximumSize(QSize(200, 30))
         self.da_cutblur_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_cutblur_input, 51, 1, 1, 1)
@@ -1428,8 +1523,8 @@ class Ui_MainWindow(object):
         self.da_gamma_contrast_input.addItem("")
         self.da_gamma_contrast_input.addItem("")
         self.da_gamma_contrast_input.setObjectName(u"da_gamma_contrast_input")
-        self.da_gamma_contrast_input.setMinimumSize(QSize(100, 0))
-        self.da_gamma_contrast_input.setMaximumSize(QSize(100, 16777215))
+        self.da_gamma_contrast_input.setMinimumSize(QSize(200, 30))
+        self.da_gamma_contrast_input.setMaximumSize(QSize(200, 30))
         self.da_gamma_contrast_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_gamma_contrast_input, 30, 1, 1, 1)
@@ -1438,8 +1533,8 @@ class Ui_MainWindow(object):
         self.da_grayscale_input.addItem("")
         self.da_grayscale_input.addItem("")
         self.da_grayscale_input.setObjectName(u"da_grayscale_input")
-        self.da_grayscale_input.setMinimumSize(QSize(100, 0))
-        self.da_grayscale_input.setMaximumSize(QSize(100, 16777215))
+        self.da_grayscale_input.setMinimumSize(QSize(200, 30))
+        self.da_grayscale_input.setMaximumSize(QSize(200, 30))
         self.da_grayscale_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_grayscale_input, 66, 1, 1, 1)
@@ -1458,8 +1553,8 @@ class Ui_MainWindow(object):
 
         self.da_misaligment_rotate_ratio_input = QLineEdit(self.da_frame)
         self.da_misaligment_rotate_ratio_input.setObjectName(u"da_misaligment_rotate_ratio_input")
-        self.da_misaligment_rotate_ratio_input.setMinimumSize(QSize(100, 0))
-        self.da_misaligment_rotate_ratio_input.setMaximumSize(QSize(100, 16777215))
+        self.da_misaligment_rotate_ratio_input.setMinimumSize(QSize(200, 30))
+        self.da_misaligment_rotate_ratio_input.setMaximumSize(QSize(200, 30))
         self.da_misaligment_rotate_ratio_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_misaligment_rotate_ratio_input, 63, 1, 1, 1)
@@ -1475,8 +1570,8 @@ class Ui_MainWindow(object):
         self.da_contrast_em_mode_input.addItem("")
         self.da_contrast_em_mode_input.addItem("")
         self.da_contrast_em_mode_input.setObjectName(u"da_contrast_em_mode_input")
-        self.da_contrast_em_mode_input.setMinimumSize(QSize(100, 0))
-        self.da_contrast_em_mode_input.setMaximumSize(QSize(100, 16777215))
+        self.da_contrast_em_mode_input.setMinimumSize(QSize(200, 30))
+        self.da_contrast_em_mode_input.setMaximumSize(QSize(200, 30))
         self.da_contrast_em_mode_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_contrast_em_mode_input, 43, 1, 1, 1)
@@ -1489,8 +1584,8 @@ class Ui_MainWindow(object):
 
         self.da_brightness_em_factor_input = QLineEdit(self.da_frame)
         self.da_brightness_em_factor_input.setObjectName(u"da_brightness_em_factor_input")
-        self.da_brightness_em_factor_input.setMinimumSize(QSize(100, 0))
-        self.da_brightness_em_factor_input.setMaximumSize(QSize(100, 16777215))
+        self.da_brightness_em_factor_input.setMinimumSize(QSize(200, 30))
+        self.da_brightness_em_factor_input.setMaximumSize(QSize(200, 30))
         self.da_brightness_em_factor_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_brightness_em_factor_input, 39, 1, 1, 1)
@@ -1539,16 +1634,16 @@ class Ui_MainWindow(object):
 
         self.da_motion_blur_k_size_input = QLineEdit(self.da_frame)
         self.da_motion_blur_k_size_input.setObjectName(u"da_motion_blur_k_size_input")
-        self.da_motion_blur_k_size_input.setMinimumSize(QSize(100, 0))
-        self.da_motion_blur_k_size_input.setMaximumSize(QSize(100, 16777215))
+        self.da_motion_blur_k_size_input.setMinimumSize(QSize(200, 30))
+        self.da_motion_blur_k_size_input.setMaximumSize(QSize(200, 30))
         self.da_motion_blur_k_size_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_motion_blur_k_size_input, 29, 1, 1, 1)
 
         self.da_elastic_sigma_input = QLineEdit(self.da_frame)
         self.da_elastic_sigma_input.setObjectName(u"da_elastic_sigma_input")
-        self.da_elastic_sigma_input.setMinimumSize(QSize(100, 0))
-        self.da_elastic_sigma_input.setMaximumSize(QSize(100, 16777215))
+        self.da_elastic_sigma_input.setMinimumSize(QSize(200, 30))
+        self.da_elastic_sigma_input.setMaximumSize(QSize(200, 30))
         self.da_elastic_sigma_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_elastic_sigma_input, 22, 1, 1, 1)
@@ -1563,8 +1658,8 @@ class Ui_MainWindow(object):
         self.da_vertical_flip_input.addItem("")
         self.da_vertical_flip_input.addItem("")
         self.da_vertical_flip_input.setObjectName(u"da_vertical_flip_input")
-        self.da_vertical_flip_input.setMinimumSize(QSize(100, 0))
-        self.da_vertical_flip_input.setMaximumSize(QSize(100, 16777215))
+        self.da_vertical_flip_input.setMinimumSize(QSize(200, 30))
+        self.da_vertical_flip_input.setMaximumSize(QSize(200, 30))
         self.da_vertical_flip_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_vertical_flip_input, 17, 1, 1, 1)
@@ -1595,24 +1690,24 @@ class Ui_MainWindow(object):
 
         self.da_cutnoise_number_iter_input = QLineEdit(self.da_frame)
         self.da_cutnoise_number_iter_input.setObjectName(u"da_cutnoise_number_iter_input")
-        self.da_cutnoise_number_iter_input.setMinimumSize(QSize(100, 0))
-        self.da_cutnoise_number_iter_input.setMaximumSize(QSize(100, 16777215))
+        self.da_cutnoise_number_iter_input.setMinimumSize(QSize(200, 30))
+        self.da_cutnoise_number_iter_input.setMaximumSize(QSize(200, 30))
         self.da_cutnoise_number_iter_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_cutnoise_number_iter_input, 59, 1, 1, 1)
 
         self.da_cutblut_down_range_input = QLineEdit(self.da_frame)
         self.da_cutblut_down_range_input.setObjectName(u"da_cutblut_down_range_input")
-        self.da_cutblut_down_range_input.setMinimumSize(QSize(100, 0))
-        self.da_cutblut_down_range_input.setMaximumSize(QSize(100, 16777215))
+        self.da_cutblut_down_range_input.setMinimumSize(QSize(200, 30))
+        self.da_cutblut_down_range_input.setMaximumSize(QSize(200, 30))
         self.da_cutblut_down_range_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_cutblut_down_range_input, 53, 1, 1, 1)
 
         self.da_random_rot_range_input = QLineEdit(self.da_frame)
         self.da_random_rot_range_input.setObjectName(u"da_random_rot_range_input")
-        self.da_random_rot_range_input.setMinimumSize(QSize(100, 0))
-        self.da_random_rot_range_input.setMaximumSize(QSize(100, 16777215))
+        self.da_random_rot_range_input.setMinimumSize(QSize(200, 30))
+        self.da_random_rot_range_input.setMaximumSize(QSize(200, 30))
         self.da_random_rot_range_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_random_rot_range_input, 9, 1, 1, 1)
@@ -1621,16 +1716,16 @@ class Ui_MainWindow(object):
         self.da_brightness_input.addItem("")
         self.da_brightness_input.addItem("")
         self.da_brightness_input.setObjectName(u"da_brightness_input")
-        self.da_brightness_input.setMinimumSize(QSize(100, 0))
-        self.da_brightness_input.setMaximumSize(QSize(100, 16777215))
+        self.da_brightness_input.setMinimumSize(QSize(200, 30))
+        self.da_brightness_input.setMaximumSize(QSize(200, 30))
         self.da_brightness_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_brightness_input, 32, 1, 1, 1)
 
         self.da_cutnoise_size_range_input = QLineEdit(self.da_frame)
         self.da_cutnoise_size_range_input.setObjectName(u"da_cutnoise_size_range_input")
-        self.da_cutnoise_size_range_input.setMinimumSize(QSize(100, 0))
-        self.da_cutnoise_size_range_input.setMaximumSize(QSize(100, 16777215))
+        self.da_cutnoise_size_range_input.setMinimumSize(QSize(200, 30))
+        self.da_cutnoise_size_range_input.setMaximumSize(QSize(200, 30))
         self.da_cutnoise_size_range_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_cutnoise_size_range_input, 60, 1, 1, 1)
@@ -1639,8 +1734,8 @@ class Ui_MainWindow(object):
         self.da_missing_sections_input.addItem("")
         self.da_missing_sections_input.addItem("")
         self.da_missing_sections_input.setObjectName(u"da_missing_sections_input")
-        self.da_missing_sections_input.setMinimumSize(QSize(100, 0))
-        self.da_missing_sections_input.setMaximumSize(QSize(100, 16777215))
+        self.da_missing_sections_input.setMinimumSize(QSize(200, 30))
+        self.da_missing_sections_input.setMaximumSize(QSize(200, 30))
         self.da_missing_sections_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_missing_sections_input, 64, 1, 1, 1)
@@ -1653,16 +1748,16 @@ class Ui_MainWindow(object):
 
         self.da_zoom_range_input = QLineEdit(self.da_frame)
         self.da_zoom_range_input.setObjectName(u"da_zoom_range_input")
-        self.da_zoom_range_input.setMinimumSize(QSize(100, 0))
-        self.da_zoom_range_input.setMaximumSize(QSize(100, 16777215))
+        self.da_zoom_range_input.setMinimumSize(QSize(200, 30))
+        self.da_zoom_range_input.setMaximumSize(QSize(200, 30))
         self.da_zoom_range_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_zoom_range_input, 13, 1, 1, 1)
 
         self.da_shear_range_input = QLineEdit(self.da_frame)
         self.da_shear_range_input.setObjectName(u"da_shear_range_input")
-        self.da_shear_range_input.setMinimumSize(QSize(100, 0))
-        self.da_shear_range_input.setMaximumSize(QSize(100, 16777215))
+        self.da_shear_range_input.setMinimumSize(QSize(200, 30))
+        self.da_shear_range_input.setMaximumSize(QSize(200, 30))
         self.da_shear_range_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_shear_range_input, 11, 1, 1, 1)
@@ -1671,16 +1766,16 @@ class Ui_MainWindow(object):
         self.da_z_flip_input.addItem("")
         self.da_z_flip_input.addItem("")
         self.da_z_flip_input.setObjectName(u"da_z_flip_input")
-        self.da_z_flip_input.setMinimumSize(QSize(100, 0))
-        self.da_z_flip_input.setMaximumSize(QSize(100, 16777215))
+        self.da_z_flip_input.setMinimumSize(QSize(200, 30))
+        self.da_z_flip_input.setMaximumSize(QSize(200, 30))
         self.da_z_flip_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_z_flip_input, 19, 1, 1, 1)
 
         self.da_num_samples_check_input = QLineEdit(self.da_frame)
         self.da_num_samples_check_input.setObjectName(u"da_num_samples_check_input")
-        self.da_num_samples_check_input.setMinimumSize(QSize(100, 0))
-        self.da_num_samples_check_input.setMaximumSize(QSize(100, 16777215))
+        self.da_num_samples_check_input.setMinimumSize(QSize(200, 30))
+        self.da_num_samples_check_input.setMaximumSize(QSize(200, 30))
         self.da_num_samples_check_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_num_samples_check_input, 4, 1, 1, 1)
@@ -1720,8 +1815,8 @@ class Ui_MainWindow(object):
         self.da_draw_grid_input.addItem("")
         self.da_draw_grid_input.addItem("")
         self.da_draw_grid_input.setObjectName(u"da_draw_grid_input")
-        self.da_draw_grid_input.setMinimumSize(QSize(100, 0))
-        self.da_draw_grid_input.setMaximumSize(QSize(100, 16777215))
+        self.da_draw_grid_input.setMinimumSize(QSize(200, 30))
+        self.da_draw_grid_input.setMaximumSize(QSize(200, 30))
         self.da_draw_grid_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_draw_grid_input, 3, 1, 1, 1)
@@ -1730,8 +1825,8 @@ class Ui_MainWindow(object):
         self.da_contrast_em_input.addItem("")
         self.da_contrast_em_input.addItem("")
         self.da_contrast_em_input.setObjectName(u"da_contrast_em_input")
-        self.da_contrast_em_input.setMinimumSize(QSize(100, 0))
-        self.da_contrast_em_input.setMaximumSize(QSize(100, 16777215))
+        self.da_contrast_em_input.setMinimumSize(QSize(200, 30))
+        self.da_contrast_em_input.setMaximumSize(QSize(200, 30))
         self.da_contrast_em_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_contrast_em_input, 41, 1, 1, 1)
@@ -1746,8 +1841,8 @@ class Ui_MainWindow(object):
         self.da_cutmix_input.addItem("")
         self.da_cutmix_input.addItem("")
         self.da_cutmix_input.setObjectName(u"da_cutmix_input")
-        self.da_cutmix_input.setMinimumSize(QSize(100, 0))
-        self.da_cutmix_input.setMaximumSize(QSize(100, 16777215))
+        self.da_cutmix_input.setMinimumSize(QSize(200, 30))
+        self.da_cutmix_input.setMaximumSize(QSize(200, 30))
         self.da_cutmix_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_cutmix_input, 55, 1, 1, 1)
@@ -1762,8 +1857,8 @@ class Ui_MainWindow(object):
         self.da_median_blur_input.addItem("")
         self.da_median_blur_input.addItem("")
         self.da_median_blur_input.setObjectName(u"da_median_blur_input")
-        self.da_median_blur_input.setMinimumSize(QSize(100, 0))
-        self.da_median_blur_input.setMaximumSize(QSize(100, 16777215))
+        self.da_median_blur_input.setMinimumSize(QSize(200, 30))
+        self.da_median_blur_input.setMaximumSize(QSize(200, 30))
         self.da_median_blur_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_median_blur_input, 26, 1, 1, 1)
@@ -1772,8 +1867,8 @@ class Ui_MainWindow(object):
         self.da_salt_input.addItem("")
         self.da_salt_input.addItem("")
         self.da_salt_input.setObjectName(u"da_salt_input")
-        self.da_salt_input.setMinimumSize(QSize(100, 0))
-        self.da_salt_input.setMaximumSize(QSize(100, 16777215))
+        self.da_salt_input.setMinimumSize(QSize(200, 30))
+        self.da_salt_input.setMaximumSize(QSize(200, 30))
         self.da_salt_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_salt_input, 78, 1, 1, 1)
@@ -1782,8 +1877,8 @@ class Ui_MainWindow(object):
         self.da_cutout_to_mask_input.addItem("")
         self.da_cutout_to_mask_input.addItem("")
         self.da_cutout_to_mask_input.setObjectName(u"da_cutout_to_mask_input")
-        self.da_cutout_to_mask_input.setMinimumSize(QSize(100, 0))
-        self.da_cutout_to_mask_input.setMaximumSize(QSize(100, 16777215))
+        self.da_cutout_to_mask_input.setMinimumSize(QSize(200, 30))
+        self.da_cutout_to_mask_input.setMaximumSize(QSize(200, 30))
         self.da_cutout_to_mask_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_cutout_to_mask_input, 50, 1, 1, 1)
@@ -1796,8 +1891,8 @@ class Ui_MainWindow(object):
 
         self.da_salt_pepper_amount_input = QLineEdit(self.da_frame)
         self.da_salt_pepper_amount_input.setObjectName(u"da_salt_pepper_amount_input")
-        self.da_salt_pepper_amount_input.setMinimumSize(QSize(100, 0))
-        self.da_salt_pepper_amount_input.setMaximumSize(QSize(100, 16777215))
+        self.da_salt_pepper_amount_input.setMinimumSize(QSize(200, 30))
+        self.da_salt_pepper_amount_input.setMaximumSize(QSize(200, 30))
         self.da_salt_pepper_amount_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_salt_pepper_amount_input, 83, 1, 1, 1)
@@ -1806,8 +1901,8 @@ class Ui_MainWindow(object):
         self.da_random_rot_input.addItem("")
         self.da_random_rot_input.addItem("")
         self.da_random_rot_input.setObjectName(u"da_random_rot_input")
-        self.da_random_rot_input.setMinimumSize(QSize(100, 0))
-        self.da_random_rot_input.setMaximumSize(QSize(100, 16777215))
+        self.da_random_rot_input.setMinimumSize(QSize(200, 30))
+        self.da_random_rot_input.setMaximumSize(QSize(200, 30))
         self.da_random_rot_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_random_rot_input, 8, 1, 1, 1)
@@ -1816,8 +1911,8 @@ class Ui_MainWindow(object):
         self.da_shuffle_val_input.addItem("")
         self.da_shuffle_val_input.addItem("")
         self.da_shuffle_val_input.setObjectName(u"da_shuffle_val_input")
-        self.da_shuffle_val_input.setMinimumSize(QSize(100, 0))
-        self.da_shuffle_val_input.setMaximumSize(QSize(100, 16777215))
+        self.da_shuffle_val_input.setMinimumSize(QSize(200, 30))
+        self.da_shuffle_val_input.setMaximumSize(QSize(200, 30))
         self.da_shuffle_val_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_shuffle_val_input, 6, 1, 1, 1)
@@ -1838,8 +1933,8 @@ class Ui_MainWindow(object):
         self.da_shear_input.addItem("")
         self.da_shear_input.addItem("")
         self.da_shear_input.setObjectName(u"da_shear_input")
-        self.da_shear_input.setMinimumSize(QSize(100, 0))
-        self.da_shear_input.setMaximumSize(QSize(100, 16777215))
+        self.da_shear_input.setMinimumSize(QSize(200, 30))
+        self.da_shear_input.setMaximumSize(QSize(200, 30))
         self.da_shear_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_shear_input, 10, 1, 1, 1)
@@ -1848,8 +1943,8 @@ class Ui_MainWindow(object):
         self.da_grid_invert_input.addItem("")
         self.da_grid_invert_input.addItem("")
         self.da_grid_invert_input.setObjectName(u"da_grid_invert_input")
-        self.da_grid_invert_input.setMinimumSize(QSize(100, 0))
-        self.da_grid_invert_input.setMaximumSize(QSize(100, 16777215))
+        self.da_grid_invert_input.setMinimumSize(QSize(200, 30))
+        self.da_grid_invert_input.setMaximumSize(QSize(200, 30))
         self.da_grid_invert_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_grid_invert_input, 72, 1, 1, 1)
@@ -1857,7 +1952,8 @@ class Ui_MainWindow(object):
         self.da_elastic_mode_input = QComboBox(self.da_frame)
         self.da_elastic_mode_input.addItem("")
         self.da_elastic_mode_input.setObjectName(u"da_elastic_mode_input")
-        self.da_elastic_mode_input.setMaximumSize(QSize(16777215, 16777215))
+        self.da_elastic_mode_input.setMinimumSize(QSize(200, 30))
+        self.da_elastic_mode_input.setMaximumSize(QSize(200, 30))
         self.da_elastic_mode_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_elastic_mode_input, 23, 1, 1, 1)
@@ -1882,16 +1978,16 @@ class Ui_MainWindow(object):
 
         self.da_cutnoise_scale_range_input = QLineEdit(self.da_frame)
         self.da_cutnoise_scale_range_input.setObjectName(u"da_cutnoise_scale_range_input")
-        self.da_cutnoise_scale_range_input.setMinimumSize(QSize(100, 0))
-        self.da_cutnoise_scale_range_input.setMaximumSize(QSize(100, 16777215))
+        self.da_cutnoise_scale_range_input.setMinimumSize(QSize(200, 30))
+        self.da_cutnoise_scale_range_input.setMaximumSize(QSize(200, 30))
         self.da_cutnoise_scale_range_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_cutnoise_scale_range_input, 58, 1, 1, 1)
 
         self.da_grid_d_range_input = QLineEdit(self.da_frame)
         self.da_grid_d_range_input.setObjectName(u"da_grid_d_range_input")
-        self.da_grid_d_range_input.setMinimumSize(QSize(100, 0))
-        self.da_grid_d_range_input.setMaximumSize(QSize(100, 16777215))
+        self.da_grid_d_range_input.setMinimumSize(QSize(200, 30))
+        self.da_grid_d_range_input.setMaximumSize(QSize(200, 30))
         self.da_grid_d_range_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_grid_d_range_input, 70, 1, 1, 1)
@@ -1904,8 +2000,8 @@ class Ui_MainWindow(object):
 
         self.da_missing_sections_iteration_range_input = QLineEdit(self.da_frame)
         self.da_missing_sections_iteration_range_input.setObjectName(u"da_missing_sections_iteration_range_input")
-        self.da_missing_sections_iteration_range_input.setMinimumSize(QSize(100, 0))
-        self.da_missing_sections_iteration_range_input.setMaximumSize(QSize(100, 16777215))
+        self.da_missing_sections_iteration_range_input.setMinimumSize(QSize(200, 30))
+        self.da_missing_sections_iteration_range_input.setMaximumSize(QSize(200, 30))
         self.da_missing_sections_iteration_range_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_missing_sections_iteration_range_input, 65, 1, 1, 1)
@@ -1920,8 +2016,8 @@ class Ui_MainWindow(object):
         self.da_gaussian_noise_use_input_img_input.addItem("")
         self.da_gaussian_noise_use_input_img_input.addItem("")
         self.da_gaussian_noise_use_input_img_input.setObjectName(u"da_gaussian_noise_use_input_img_input")
-        self.da_gaussian_noise_use_input_img_input.setMinimumSize(QSize(100, 0))
-        self.da_gaussian_noise_use_input_img_input.setMaximumSize(QSize(100, 16777215))
+        self.da_gaussian_noise_use_input_img_input.setMinimumSize(QSize(200, 30))
+        self.da_gaussian_noise_use_input_img_input.setMaximumSize(QSize(200, 30))
         self.da_gaussian_noise_use_input_img_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_gaussian_noise_use_input_img_input, 76, 1, 1, 1)
@@ -1942,8 +2038,8 @@ class Ui_MainWindow(object):
         self.da_dropout_input.addItem("")
         self.da_dropout_input.addItem("")
         self.da_dropout_input.setObjectName(u"da_dropout_input")
-        self.da_dropout_input.setMinimumSize(QSize(100, 0))
-        self.da_dropout_input.setMaximumSize(QSize(100, 16777215))
+        self.da_dropout_input.setMinimumSize(QSize(200, 30))
+        self.da_dropout_input.setMaximumSize(QSize(200, 30))
         self.da_dropout_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_dropout_input, 44, 1, 1, 1)
@@ -1952,8 +2048,8 @@ class Ui_MainWindow(object):
         self.da_misaligment_input.addItem("")
         self.da_misaligment_input.addItem("")
         self.da_misaligment_input.setObjectName(u"da_misaligment_input")
-        self.da_misaligment_input.setMinimumSize(QSize(100, 0))
-        self.da_misaligment_input.setMaximumSize(QSize(100, 16777215))
+        self.da_misaligment_input.setMinimumSize(QSize(200, 30))
+        self.da_misaligment_input.setMaximumSize(QSize(200, 30))
         self.da_misaligment_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_misaligment_input, 61, 1, 1, 1)
@@ -1986,8 +2082,8 @@ class Ui_MainWindow(object):
         self.da_zoom_input.addItem("")
         self.da_zoom_input.addItem("")
         self.da_zoom_input.setObjectName(u"da_zoom_input")
-        self.da_zoom_input.setMinimumSize(QSize(100, 0))
-        self.da_zoom_input.setMaximumSize(QSize(100, 16777215))
+        self.da_zoom_input.setMinimumSize(QSize(200, 30))
+        self.da_zoom_input.setMaximumSize(QSize(200, 30))
         self.da_zoom_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_zoom_input, 12, 1, 1, 1)
@@ -1996,8 +2092,8 @@ class Ui_MainWindow(object):
         self.da_contrast_input.addItem("")
         self.da_contrast_input.addItem("")
         self.da_contrast_input.setObjectName(u"da_contrast_input")
-        self.da_contrast_input.setMinimumSize(QSize(100, 0))
-        self.da_contrast_input.setMaximumSize(QSize(100, 16777215))
+        self.da_contrast_input.setMinimumSize(QSize(200, 30))
+        self.da_contrast_input.setMaximumSize(QSize(200, 30))
         self.da_contrast_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_contrast_input, 35, 1, 1, 1)
@@ -2022,32 +2118,32 @@ class Ui_MainWindow(object):
 
         self.da_dropout_range_input = QLineEdit(self.da_frame)
         self.da_dropout_range_input.setObjectName(u"da_dropout_range_input")
-        self.da_dropout_range_input.setMinimumSize(QSize(100, 0))
-        self.da_dropout_range_input.setMaximumSize(QSize(100, 16777215))
+        self.da_dropout_range_input.setMinimumSize(QSize(200, 30))
+        self.da_dropout_range_input.setMaximumSize(QSize(200, 30))
         self.da_dropout_range_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_dropout_range_input, 45, 1, 1, 1)
 
         self.da_contrast_em_factor_input = QLineEdit(self.da_frame)
         self.da_contrast_em_factor_input.setObjectName(u"da_contrast_em_factor_input")
-        self.da_contrast_em_factor_input.setMinimumSize(QSize(100, 0))
-        self.da_contrast_em_factor_input.setMaximumSize(QSize(100, 16777215))
+        self.da_contrast_em_factor_input.setMinimumSize(QSize(200, 30))
+        self.da_contrast_em_factor_input.setMaximumSize(QSize(200, 30))
         self.da_contrast_em_factor_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_contrast_em_factor_input, 42, 1, 1, 1)
 
         self.da_salt_amount_input = QLineEdit(self.da_frame)
         self.da_salt_amount_input.setObjectName(u"da_salt_amount_input")
-        self.da_salt_amount_input.setMinimumSize(QSize(100, 0))
-        self.da_salt_amount_input.setMaximumSize(QSize(100, 16777215))
+        self.da_salt_amount_input.setMinimumSize(QSize(200, 30))
+        self.da_salt_amount_input.setMaximumSize(QSize(200, 30))
         self.da_salt_amount_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_salt_amount_input, 79, 1, 1, 1)
 
         self.da_gamma_contrast_range_input = QLineEdit(self.da_frame)
         self.da_gamma_contrast_range_input.setObjectName(u"da_gamma_contrast_range_input")
-        self.da_gamma_contrast_range_input.setMinimumSize(QSize(100, 0))
-        self.da_gamma_contrast_range_input.setMaximumSize(QSize(100, 16777215))
+        self.da_gamma_contrast_range_input.setMinimumSize(QSize(200, 30))
+        self.da_gamma_contrast_range_input.setMaximumSize(QSize(200, 30))
         self.da_gamma_contrast_range_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_gamma_contrast_range_input, 31, 1, 1, 1)
@@ -2074,8 +2170,8 @@ class Ui_MainWindow(object):
         self.da_cutblur_inside_input.addItem("")
         self.da_cutblur_inside_input.addItem("")
         self.da_cutblur_inside_input.setObjectName(u"da_cutblur_inside_input")
-        self.da_cutblur_inside_input.setMinimumSize(QSize(100, 0))
-        self.da_cutblur_inside_input.setMaximumSize(QSize(100, 16777215))
+        self.da_cutblur_inside_input.setMinimumSize(QSize(200, 30))
+        self.da_cutblur_inside_input.setMaximumSize(QSize(200, 30))
         self.da_cutblur_inside_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_cutblur_inside_input, 54, 1, 1, 1)
@@ -2084,8 +2180,8 @@ class Ui_MainWindow(object):
         self.da_check_input.addItem("")
         self.da_check_input.addItem("")
         self.da_check_input.setObjectName(u"da_check_input")
-        self.da_check_input.setMinimumSize(QSize(100, 0))
-        self.da_check_input.setMaximumSize(QSize(100, 16777215))
+        self.da_check_input.setMinimumSize(QSize(200, 30))
+        self.da_check_input.setMaximumSize(QSize(200, 30))
         self.da_check_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_check_input, 2, 1, 1, 1)
@@ -2094,8 +2190,8 @@ class Ui_MainWindow(object):
         self.da_gaussian_noise_input.addItem("")
         self.da_gaussian_noise_input.addItem("")
         self.da_gaussian_noise_input.setObjectName(u"da_gaussian_noise_input")
-        self.da_gaussian_noise_input.setMinimumSize(QSize(100, 0))
-        self.da_gaussian_noise_input.setMaximumSize(QSize(100, 16777215))
+        self.da_gaussian_noise_input.setMinimumSize(QSize(200, 30))
+        self.da_gaussian_noise_input.setMaximumSize(QSize(200, 30))
         self.da_gaussian_noise_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_gaussian_noise_input, 73, 1, 1, 1)
@@ -2104,8 +2200,8 @@ class Ui_MainWindow(object):
         self.da_cutnoise_input.addItem("")
         self.da_cutnoise_input.addItem("")
         self.da_cutnoise_input.setObjectName(u"da_cutnoise_input")
-        self.da_cutnoise_input.setMinimumSize(QSize(100, 0))
-        self.da_cutnoise_input.setMaximumSize(QSize(100, 16777215))
+        self.da_cutnoise_input.setMinimumSize(QSize(200, 30))
+        self.da_cutnoise_input.setMaximumSize(QSize(200, 30))
         self.da_cutnoise_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_cutnoise_input, 57, 1, 1, 1)
@@ -2121,8 +2217,8 @@ class Ui_MainWindow(object):
         self.da_salt_pepper_input.addItem("")
         self.da_salt_pepper_input.addItem("")
         self.da_salt_pepper_input.setObjectName(u"da_salt_pepper_input")
-        self.da_salt_pepper_input.setMinimumSize(QSize(100, 0))
-        self.da_salt_pepper_input.setMaximumSize(QSize(100, 16777215))
+        self.da_salt_pepper_input.setMinimumSize(QSize(200, 30))
+        self.da_salt_pepper_input.setMaximumSize(QSize(200, 30))
         self.da_salt_pepper_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_salt_pepper_input, 82, 1, 1, 1)
@@ -2131,32 +2227,32 @@ class Ui_MainWindow(object):
         self.da_gridmask_input.addItem("")
         self.da_gridmask_input.addItem("")
         self.da_gridmask_input.setObjectName(u"da_gridmask_input")
-        self.da_gridmask_input.setMinimumSize(QSize(100, 0))
-        self.da_gridmask_input.setMaximumSize(QSize(100, 16777215))
+        self.da_gridmask_input.setMinimumSize(QSize(200, 30))
+        self.da_gridmask_input.setMaximumSize(QSize(200, 30))
         self.da_gridmask_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_gridmask_input, 68, 1, 1, 1)
 
         self.da_cuout_cval_input = QLineEdit(self.da_frame)
         self.da_cuout_cval_input.setObjectName(u"da_cuout_cval_input")
-        self.da_cuout_cval_input.setMinimumSize(QSize(100, 0))
-        self.da_cuout_cval_input.setMaximumSize(QSize(100, 16777215))
+        self.da_cuout_cval_input.setMinimumSize(QSize(200, 30))
+        self.da_cuout_cval_input.setMaximumSize(QSize(200, 30))
         self.da_cuout_cval_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_cuout_cval_input, 49, 1, 1, 1)
 
         self.da_shift_range_input = QLineEdit(self.da_frame)
         self.da_shift_range_input.setObjectName(u"da_shift_range_input")
-        self.da_shift_range_input.setMinimumSize(QSize(100, 0))
-        self.da_shift_range_input.setMaximumSize(QSize(100, 16777215))
+        self.da_shift_range_input.setMinimumSize(QSize(200, 30))
+        self.da_shift_range_input.setMaximumSize(QSize(200, 30))
         self.da_shift_range_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_shift_range_input, 15, 1, 1, 1)
 
         self.da_gaussian_sigma_input = QLineEdit(self.da_frame)
         self.da_gaussian_sigma_input.setObjectName(u"da_gaussian_sigma_input")
-        self.da_gaussian_sigma_input.setMinimumSize(QSize(100, 0))
-        self.da_gaussian_sigma_input.setMaximumSize(QSize(100, 16777215))
+        self.da_gaussian_sigma_input.setMinimumSize(QSize(200, 30))
+        self.da_gaussian_sigma_input.setMaximumSize(QSize(200, 30))
         self.da_gaussian_sigma_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_gaussian_sigma_input, 25, 1, 1, 1)
@@ -2169,8 +2265,8 @@ class Ui_MainWindow(object):
 
         self.da_brightness_factor_range_input = QLineEdit(self.da_frame)
         self.da_brightness_factor_range_input.setObjectName(u"da_brightness_factor_range_input")
-        self.da_brightness_factor_range_input.setMinimumSize(QSize(100, 0))
-        self.da_brightness_factor_range_input.setMaximumSize(QSize(100, 16777215))
+        self.da_brightness_factor_range_input.setMinimumSize(QSize(200, 30))
+        self.da_brightness_factor_range_input.setMaximumSize(QSize(200, 30))
         self.da_brightness_factor_range_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_brightness_factor_range_input, 33, 1, 1, 1)
@@ -2183,8 +2279,8 @@ class Ui_MainWindow(object):
 
         self.da_pepper_amount_input = QLineEdit(self.da_frame)
         self.da_pepper_amount_input.setObjectName(u"da_pepper_amount_input")
-        self.da_pepper_amount_input.setMinimumSize(QSize(100, 0))
-        self.da_pepper_amount_input.setMaximumSize(QSize(100, 16777215))
+        self.da_pepper_amount_input.setMinimumSize(QSize(200, 30))
+        self.da_pepper_amount_input.setMaximumSize(QSize(200, 30))
         self.da_pepper_amount_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_pepper_amount_input, 81, 1, 1, 1)
@@ -2193,8 +2289,8 @@ class Ui_MainWindow(object):
         self.da_motion_blur_input.addItem("")
         self.da_motion_blur_input.addItem("")
         self.da_motion_blur_input.setObjectName(u"da_motion_blur_input")
-        self.da_motion_blur_input.setMinimumSize(QSize(100, 0))
-        self.da_motion_blur_input.setMaximumSize(QSize(100, 16777215))
+        self.da_motion_blur_input.setMinimumSize(QSize(200, 30))
+        self.da_motion_blur_input.setMaximumSize(QSize(200, 30))
         self.da_motion_blur_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_motion_blur_input, 28, 1, 1, 1)
@@ -2209,40 +2305,40 @@ class Ui_MainWindow(object):
         self.da_brightness_mode_input.addItem("")
         self.da_brightness_mode_input.addItem("")
         self.da_brightness_mode_input.setObjectName(u"da_brightness_mode_input")
-        self.da_brightness_mode_input.setMinimumSize(QSize(100, 0))
-        self.da_brightness_mode_input.setMaximumSize(QSize(100, 16777215))
+        self.da_brightness_mode_input.setMinimumSize(QSize(200, 30))
+        self.da_brightness_mode_input.setMaximumSize(QSize(200, 30))
         self.da_brightness_mode_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_brightness_mode_input, 34, 1, 1, 1)
 
         self.da_cutout_size_input = QLineEdit(self.da_frame)
         self.da_cutout_size_input.setObjectName(u"da_cutout_size_input")
-        self.da_cutout_size_input.setMinimumSize(QSize(100, 0))
-        self.da_cutout_size_input.setMaximumSize(QSize(100, 16777215))
+        self.da_cutout_size_input.setMinimumSize(QSize(200, 30))
+        self.da_cutout_size_input.setMaximumSize(QSize(200, 30))
         self.da_cutout_size_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_cutout_size_input, 48, 1, 1, 1)
 
         self.da_prob_input = QLineEdit(self.da_frame)
         self.da_prob_input.setObjectName(u"da_prob_input")
-        self.da_prob_input.setMinimumSize(QSize(100, 0))
-        self.da_prob_input.setMaximumSize(QSize(100, 16777215))
+        self.da_prob_input.setMinimumSize(QSize(200, 30))
+        self.da_prob_input.setMaximumSize(QSize(200, 30))
         self.da_prob_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_prob_input, 1, 1, 1, 1)
 
         self.da_contrast_factor_range_input = QLineEdit(self.da_frame)
         self.da_contrast_factor_range_input.setObjectName(u"da_contrast_factor_range_input")
-        self.da_contrast_factor_range_input.setMinimumSize(QSize(100, 0))
-        self.da_contrast_factor_range_input.setMaximumSize(QSize(100, 16777215))
+        self.da_contrast_factor_range_input.setMinimumSize(QSize(200, 30))
+        self.da_contrast_factor_range_input.setMaximumSize(QSize(200, 30))
         self.da_contrast_factor_range_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_contrast_factor_range_input, 36, 1, 1, 1)
 
         self.da_salt_pepper_prop_input = QLineEdit(self.da_frame)
         self.da_salt_pepper_prop_input.setObjectName(u"da_salt_pepper_prop_input")
-        self.da_salt_pepper_prop_input.setMinimumSize(QSize(100, 0))
-        self.da_salt_pepper_prop_input.setMaximumSize(QSize(100, 16777215))
+        self.da_salt_pepper_prop_input.setMinimumSize(QSize(200, 30))
+        self.da_salt_pepper_prop_input.setMaximumSize(QSize(200, 30))
         self.da_salt_pepper_prop_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_salt_pepper_prop_input, 84, 1, 1, 1)
@@ -2257,16 +2353,16 @@ class Ui_MainWindow(object):
         self.da_horizontal_flip_input.addItem("")
         self.da_horizontal_flip_input.addItem("")
         self.da_horizontal_flip_input.setObjectName(u"da_horizontal_flip_input")
-        self.da_horizontal_flip_input.setMinimumSize(QSize(100, 0))
-        self.da_horizontal_flip_input.setMaximumSize(QSize(100, 16777215))
+        self.da_horizontal_flip_input.setMinimumSize(QSize(200, 30))
+        self.da_horizontal_flip_input.setMaximumSize(QSize(200, 30))
         self.da_horizontal_flip_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_horizontal_flip_input, 18, 1, 1, 1)
 
         self.da_misaligment_displacement_input = QLineEdit(self.da_frame)
         self.da_misaligment_displacement_input.setObjectName(u"da_misaligment_displacement_input")
-        self.da_misaligment_displacement_input.setMinimumSize(QSize(100, 0))
-        self.da_misaligment_displacement_input.setMaximumSize(QSize(100, 16777215))
+        self.da_misaligment_displacement_input.setMinimumSize(QSize(200, 30))
+        self.da_misaligment_displacement_input.setMaximumSize(QSize(200, 30))
         self.da_misaligment_displacement_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_misaligment_displacement_input, 62, 1, 1, 1)
@@ -2281,8 +2377,8 @@ class Ui_MainWindow(object):
         self.da_poisson_noise_input.addItem("")
         self.da_poisson_noise_input.addItem("")
         self.da_poisson_noise_input.setObjectName(u"da_poisson_noise_input")
-        self.da_poisson_noise_input.setMinimumSize(QSize(100, 0))
-        self.da_poisson_noise_input.setMaximumSize(QSize(100, 16777215))
+        self.da_poisson_noise_input.setMinimumSize(QSize(200, 30))
+        self.da_poisson_noise_input.setMaximumSize(QSize(200, 30))
         self.da_poisson_noise_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_poisson_noise_input, 77, 1, 1, 1)
@@ -2291,8 +2387,8 @@ class Ui_MainWindow(object):
         self.da_shuffle_train_input.addItem("")
         self.da_shuffle_train_input.addItem("")
         self.da_shuffle_train_input.setObjectName(u"da_shuffle_train_input")
-        self.da_shuffle_train_input.setMinimumSize(QSize(100, 0))
-        self.da_shuffle_train_input.setMaximumSize(QSize(100, 16777215))
+        self.da_shuffle_train_input.setMinimumSize(QSize(200, 30))
+        self.da_shuffle_train_input.setMaximumSize(QSize(200, 30))
         self.da_shuffle_train_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_shuffle_train_input, 5, 1, 1, 1)
@@ -2317,16 +2413,16 @@ class Ui_MainWindow(object):
 
         self.da_cutblur_size_range_input = QLineEdit(self.da_frame)
         self.da_cutblur_size_range_input.setObjectName(u"da_cutblur_size_range_input")
-        self.da_cutblur_size_range_input.setMinimumSize(QSize(100, 0))
-        self.da_cutblur_size_range_input.setMaximumSize(QSize(100, 16777215))
+        self.da_cutblur_size_range_input.setMinimumSize(QSize(200, 30))
+        self.da_cutblur_size_range_input.setMaximumSize(QSize(200, 30))
         self.da_cutblur_size_range_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_cutblur_size_range_input, 52, 1, 1, 1)
 
         self.da_gaussian_noise_var_input = QLineEdit(self.da_frame)
         self.da_gaussian_noise_var_input.setObjectName(u"da_gaussian_noise_var_input")
-        self.da_gaussian_noise_var_input.setMinimumSize(QSize(100, 0))
-        self.da_gaussian_noise_var_input.setMaximumSize(QSize(100, 16777215))
+        self.da_gaussian_noise_var_input.setMinimumSize(QSize(200, 30))
+        self.da_gaussian_noise_var_input.setMaximumSize(QSize(200, 30))
         self.da_gaussian_noise_var_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_gaussian_noise_var_input, 75, 1, 1, 1)
@@ -2335,8 +2431,8 @@ class Ui_MainWindow(object):
         self.da_rot90_input.addItem("")
         self.da_rot90_input.addItem("")
         self.da_rot90_input.setObjectName(u"da_rot90_input")
-        self.da_rot90_input.setMinimumSize(QSize(100, 0))
-        self.da_rot90_input.setMaximumSize(QSize(100, 16777215))
+        self.da_rot90_input.setMinimumSize(QSize(200, 30))
+        self.da_rot90_input.setMaximumSize(QSize(200, 30))
         self.da_rot90_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_rot90_input, 7, 1, 1, 1)
@@ -2354,7 +2450,8 @@ class Ui_MainWindow(object):
         self.da_affine_mode_input.addItem("")
         self.da_affine_mode_input.addItem("")
         self.da_affine_mode_input.setObjectName(u"da_affine_mode_input")
-        self.da_affine_mode_input.setMaximumSize(QSize(16777215, 16777215))
+        self.da_affine_mode_input.setMinimumSize(QSize(200, 30))
+        self.da_affine_mode_input.setMaximumSize(QSize(200, 30))
         self.da_affine_mode_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_affine_mode_input, 16, 1, 1, 1)
@@ -2415,8 +2512,8 @@ class Ui_MainWindow(object):
 
         self.da_grid_ratio_input = QLineEdit(self.da_frame)
         self.da_grid_ratio_input.setObjectName(u"da_grid_ratio_input")
-        self.da_grid_ratio_input.setMinimumSize(QSize(100, 0))
-        self.da_grid_ratio_input.setMaximumSize(QSize(100, 16777215))
+        self.da_grid_ratio_input.setMinimumSize(QSize(200, 30))
+        self.da_grid_ratio_input.setMaximumSize(QSize(200, 30))
         self.da_grid_ratio_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_grid_ratio_input, 69, 1, 1, 1)
@@ -2431,16 +2528,16 @@ class Ui_MainWindow(object):
         self.da_brightness_em_input.addItem("")
         self.da_brightness_em_input.addItem("")
         self.da_brightness_em_input.setObjectName(u"da_brightness_em_input")
-        self.da_brightness_em_input.setMinimumSize(QSize(100, 0))
-        self.da_brightness_em_input.setMaximumSize(QSize(100, 16777215))
+        self.da_brightness_em_input.setMinimumSize(QSize(200, 30))
+        self.da_brightness_em_input.setMaximumSize(QSize(200, 30))
         self.da_brightness_em_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_brightness_em_input, 38, 1, 1, 1)
 
         self.da_grid_rotate_input = QLineEdit(self.da_frame)
         self.da_grid_rotate_input.setObjectName(u"da_grid_rotate_input")
-        self.da_grid_rotate_input.setMinimumSize(QSize(100, 0))
-        self.da_grid_rotate_input.setMaximumSize(QSize(100, 16777215))
+        self.da_grid_rotate_input.setMinimumSize(QSize(200, 30))
+        self.da_grid_rotate_input.setMaximumSize(QSize(200, 30))
         self.da_grid_rotate_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_grid_rotate_input, 71, 1, 1, 1)
@@ -2455,8 +2552,8 @@ class Ui_MainWindow(object):
         self.da_channel_shuffle_input.addItem("")
         self.da_channel_shuffle_input.addItem("")
         self.da_channel_shuffle_input.setObjectName(u"da_channel_shuffle_input")
-        self.da_channel_shuffle_input.setMinimumSize(QSize(100, 0))
-        self.da_channel_shuffle_input.setMaximumSize(QSize(100, 16777215))
+        self.da_channel_shuffle_input.setMinimumSize(QSize(200, 30))
+        self.da_channel_shuffle_input.setMaximumSize(QSize(200, 30))
         self.da_channel_shuffle_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_channel_shuffle_input, 67, 1, 1, 1)
@@ -2483,8 +2580,8 @@ class Ui_MainWindow(object):
         self.da_pepper_input.addItem("")
         self.da_pepper_input.addItem("")
         self.da_pepper_input.setObjectName(u"da_pepper_input")
-        self.da_pepper_input.setMinimumSize(QSize(100, 0))
-        self.da_pepper_input.setMaximumSize(QSize(100, 16777215))
+        self.da_pepper_input.setMinimumSize(QSize(200, 30))
+        self.da_pepper_input.setMaximumSize(QSize(200, 30))
         self.da_pepper_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_pepper_input, 80, 1, 1, 1)
@@ -2522,8 +2619,8 @@ class Ui_MainWindow(object):
 
         self.da_cutmix_size_range_input = QLineEdit(self.da_frame)
         self.da_cutmix_size_range_input.setObjectName(u"da_cutmix_size_range_input")
-        self.da_cutmix_size_range_input.setMinimumSize(QSize(100, 0))
-        self.da_cutmix_size_range_input.setMaximumSize(QSize(100, 16777215))
+        self.da_cutmix_size_range_input.setMinimumSize(QSize(200, 30))
+        self.da_cutmix_size_range_input.setMaximumSize(QSize(200, 30))
         self.da_cutmix_size_range_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_cutmix_size_range_input, 56, 1, 1, 1)
@@ -2532,16 +2629,16 @@ class Ui_MainWindow(object):
         self.da_elastic_input.addItem("")
         self.da_elastic_input.addItem("")
         self.da_elastic_input.setObjectName(u"da_elastic_input")
-        self.da_elastic_input.setMinimumSize(QSize(100, 0))
-        self.da_elastic_input.setMaximumSize(QSize(100, 16777215))
+        self.da_elastic_input.setMinimumSize(QSize(200, 30))
+        self.da_elastic_input.setMaximumSize(QSize(200, 30))
         self.da_elastic_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_elastic_input, 20, 1, 1, 1)
 
         self.da_median_blur_k_size_input = QLineEdit(self.da_frame)
         self.da_median_blur_k_size_input.setObjectName(u"da_median_blur_k_size_input")
-        self.da_median_blur_k_size_input.setMinimumSize(QSize(100, 0))
-        self.da_median_blur_k_size_input.setMaximumSize(QSize(100, 16777215))
+        self.da_median_blur_k_size_input.setMinimumSize(QSize(200, 30))
+        self.da_median_blur_k_size_input.setMaximumSize(QSize(200, 30))
         self.da_median_blur_k_size_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_median_blur_k_size_input, 27, 1, 1, 1)
@@ -2550,8 +2647,8 @@ class Ui_MainWindow(object):
         self.da_brightness_em_mode_input.addItem("")
         self.da_brightness_em_mode_input.addItem("")
         self.da_brightness_em_mode_input.setObjectName(u"da_brightness_em_mode_input")
-        self.da_brightness_em_mode_input.setMinimumSize(QSize(100, 0))
-        self.da_brightness_em_mode_input.setMaximumSize(QSize(100, 16777215))
+        self.da_brightness_em_mode_input.setMinimumSize(QSize(200, 30))
+        self.da_brightness_em_mode_input.setMaximumSize(QSize(200, 30))
         self.da_brightness_em_mode_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_brightness_em_mode_input, 40, 1, 1, 1)
@@ -2560,8 +2657,8 @@ class Ui_MainWindow(object):
         self.da_contrast_mode_input.addItem("")
         self.da_contrast_mode_input.addItem("")
         self.da_contrast_mode_input.setObjectName(u"da_contrast_mode_input")
-        self.da_contrast_mode_input.setMinimumSize(QSize(100, 0))
-        self.da_contrast_mode_input.setMaximumSize(QSize(100, 16777215))
+        self.da_contrast_mode_input.setMinimumSize(QSize(200, 30))
+        self.da_contrast_mode_input.setMaximumSize(QSize(200, 30))
         self.da_contrast_mode_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_contrast_mode_input, 37, 1, 1, 1)
@@ -2586,16 +2683,16 @@ class Ui_MainWindow(object):
 
         self.da_gaussian_noise_mean_input = QLineEdit(self.da_frame)
         self.da_gaussian_noise_mean_input.setObjectName(u"da_gaussian_noise_mean_input")
-        self.da_gaussian_noise_mean_input.setMinimumSize(QSize(100, 0))
-        self.da_gaussian_noise_mean_input.setMaximumSize(QSize(100, 16777215))
+        self.da_gaussian_noise_mean_input.setMinimumSize(QSize(200, 30))
+        self.da_gaussian_noise_mean_input.setMaximumSize(QSize(200, 30))
         self.da_gaussian_noise_mean_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_gaussian_noise_mean_input, 74, 1, 1, 1)
 
         self.da_cutout_number_iterations_input = QLineEdit(self.da_frame)
         self.da_cutout_number_iterations_input.setObjectName(u"da_cutout_number_iterations_input")
-        self.da_cutout_number_iterations_input.setMinimumSize(QSize(100, 0))
-        self.da_cutout_number_iterations_input.setMaximumSize(QSize(100, 16777215))
+        self.da_cutout_number_iterations_input.setMinimumSize(QSize(200, 30))
+        self.da_cutout_number_iterations_input.setMaximumSize(QSize(200, 30))
         self.da_cutout_number_iterations_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_cutout_number_iterations_input, 47, 1, 1, 1)
@@ -2608,8 +2705,8 @@ class Ui_MainWindow(object):
 
         self.da_elastic_alpha_input = QLineEdit(self.da_frame)
         self.da_elastic_alpha_input.setObjectName(u"da_elastic_alpha_input")
-        self.da_elastic_alpha_input.setMinimumSize(QSize(100, 0))
-        self.da_elastic_alpha_input.setMaximumSize(QSize(100, 16777215))
+        self.da_elastic_alpha_input.setMinimumSize(QSize(200, 30))
+        self.da_elastic_alpha_input.setMaximumSize(QSize(200, 30))
         self.da_elastic_alpha_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_elastic_alpha_input, 21, 1, 1, 1)
@@ -2618,8 +2715,8 @@ class Ui_MainWindow(object):
         self.da_shift_input.addItem("")
         self.da_shift_input.addItem("")
         self.da_shift_input.setObjectName(u"da_shift_input")
-        self.da_shift_input.setMinimumSize(QSize(100, 0))
-        self.da_shift_input.setMaximumSize(QSize(100, 16777215))
+        self.da_shift_input.setMinimumSize(QSize(200, 30))
+        self.da_shift_input.setMaximumSize(QSize(200, 30))
         self.da_shift_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_shift_input, 14, 1, 1, 1)
@@ -2640,8 +2737,8 @@ class Ui_MainWindow(object):
         self.da_gaussian_blur_input.addItem("")
         self.da_gaussian_blur_input.addItem("")
         self.da_gaussian_blur_input.setObjectName(u"da_gaussian_blur_input")
-        self.da_gaussian_blur_input.setMinimumSize(QSize(100, 0))
-        self.da_gaussian_blur_input.setMaximumSize(QSize(100, 16777215))
+        self.da_gaussian_blur_input.setMinimumSize(QSize(200, 30))
+        self.da_gaussian_blur_input.setMaximumSize(QSize(200, 30))
         self.da_gaussian_blur_input.setFont(font)
 
         self.gridLayout_25.addWidget(self.da_gaussian_blur_input, 24, 1, 1, 1)
@@ -2670,8 +2767,8 @@ class Ui_MainWindow(object):
         self.gridLayout_22.setObjectName(u"gridLayout_22")
         self.kernel_size_input = QLineEdit(self.unet_model_like_frame)
         self.kernel_size_input.setObjectName(u"kernel_size_input")
-        self.kernel_size_input.setMinimumSize(QSize(100, 0))
-        self.kernel_size_input.setMaximumSize(QSize(100, 16777215))
+        self.kernel_size_input.setMinimumSize(QSize(100, 30))
+        self.kernel_size_input.setMaximumSize(QSize(200, 30))
         self.kernel_size_input.setFont(font)
 
         self.gridLayout_22.addWidget(self.kernel_size_input, 5, 1, 1, 1)
@@ -2748,22 +2845,24 @@ class Ui_MainWindow(object):
 
         self.dropout_input = QLineEdit(self.unet_model_like_frame)
         self.dropout_input.setObjectName(u"dropout_input")
-        self.dropout_input.setMaximumSize(QSize(16777215, 16777215))
+        self.dropout_input.setMinimumSize(QSize(200, 30))
+        self.dropout_input.setMaximumSize(QSize(200, 30))
         self.dropout_input.setFont(font)
 
         self.gridLayout_22.addWidget(self.dropout_input, 1, 1, 1, 1)
 
         self.feature_maps_input = QLineEdit(self.unet_model_like_frame)
         self.feature_maps_input.setObjectName(u"feature_maps_input")
-        self.feature_maps_input.setMinimumSize(QSize(200, 0))
-        self.feature_maps_input.setMaximumSize(QSize(16777215, 16777215))
+        self.feature_maps_input.setMinimumSize(QSize(200, 30))
+        self.feature_maps_input.setMaximumSize(QSize(200, 30))
         self.feature_maps_input.setFont(font)
 
         self.gridLayout_22.addWidget(self.feature_maps_input, 0, 1, 1, 1)
 
         self.z_down_input = QLineEdit(self.unet_model_like_frame)
         self.z_down_input.setObjectName(u"z_down_input")
-        self.z_down_input.setMaximumSize(QSize(150, 16777215))
+        self.z_down_input.setMinimumSize(QSize(200, 30))
+        self.z_down_input.setMaximumSize(QSize(200, 30))
         self.z_down_input.setFont(font)
 
         self.gridLayout_22.addWidget(self.z_down_input, 9, 1, 1, 1)
@@ -2772,8 +2871,8 @@ class Ui_MainWindow(object):
         self.batch_normalization_input.addItem("")
         self.batch_normalization_input.addItem("")
         self.batch_normalization_input.setObjectName(u"batch_normalization_input")
-        self.batch_normalization_input.setMinimumSize(QSize(100, 0))
-        self.batch_normalization_input.setMaximumSize(QSize(100, 16777215))
+        self.batch_normalization_input.setMinimumSize(QSize(100, 30))
+        self.batch_normalization_input.setMaximumSize(QSize(200, 30))
         self.batch_normalization_input.setFont(font)
 
         self.gridLayout_22.addWidget(self.batch_normalization_input, 3, 1, 1, 1)
@@ -2788,7 +2887,8 @@ class Ui_MainWindow(object):
         self.kernel_init_input.addItem("")
         self.kernel_init_input.addItem("")
         self.kernel_init_input.setObjectName(u"kernel_init_input")
-        self.kernel_init_input.setMaximumSize(QSize(16777215, 16777215))
+        self.kernel_init_input.setMinimumSize(QSize(200, 30))
+        self.kernel_init_input.setMaximumSize(QSize(200, 30))
         self.kernel_init_input.setFont(font)
 
         self.gridLayout_22.addWidget(self.kernel_init_input, 4, 1, 1, 1)
@@ -2797,8 +2897,8 @@ class Ui_MainWindow(object):
         self.spatial_dropout_input.addItem("")
         self.spatial_dropout_input.addItem("")
         self.spatial_dropout_input.setObjectName(u"spatial_dropout_input")
-        self.spatial_dropout_input.setMinimumSize(QSize(100, 0))
-        self.spatial_dropout_input.setMaximumSize(QSize(100, 16777215))
+        self.spatial_dropout_input.setMinimumSize(QSize(100, 30))
+        self.spatial_dropout_input.setMaximumSize(QSize(200, 30))
         self.spatial_dropout_input.setFont(font)
 
         self.gridLayout_22.addWidget(self.spatial_dropout_input, 2, 1, 1, 1)
@@ -2807,7 +2907,8 @@ class Ui_MainWindow(object):
         self.upsample_layer_input.addItem("")
         self.upsample_layer_input.addItem("")
         self.upsample_layer_input.setObjectName(u"upsample_layer_input")
-        self.upsample_layer_input.setMaximumSize(QSize(16777215, 16777215))
+        self.upsample_layer_input.setMinimumSize(QSize(200, 30))
+        self.upsample_layer_input.setMaximumSize(QSize(200, 30))
         self.upsample_layer_input.setFont(font)
 
         self.gridLayout_22.addWidget(self.upsample_layer_input, 6, 1, 1, 1)
@@ -2817,7 +2918,8 @@ class Ui_MainWindow(object):
         self.activation_input.addItem("")
         self.activation_input.addItem("")
         self.activation_input.setObjectName(u"activation_input")
-        self.activation_input.setMaximumSize(QSize(16777215, 16777215))
+        self.activation_input.setMinimumSize(QSize(200, 30))
+        self.activation_input.setMaximumSize(QSize(200, 30))
         self.activation_input.setFont(font)
 
         self.gridLayout_22.addWidget(self.activation_input, 7, 1, 1, 1)
@@ -2828,7 +2930,8 @@ class Ui_MainWindow(object):
         self.last_activation_input.addItem("")
         self.last_activation_input.addItem("")
         self.last_activation_input.setObjectName(u"last_activation_input")
-        self.last_activation_input.setMaximumSize(QSize(16777215, 16777215))
+        self.last_activation_input.setMinimumSize(QSize(200, 30))
+        self.last_activation_input.setMaximumSize(QSize(200, 30))
         self.last_activation_input.setFont(font)
 
         self.gridLayout_22.addWidget(self.last_activation_input, 8, 1, 1, 1)
@@ -2851,7 +2954,8 @@ class Ui_MainWindow(object):
         self.gridLayout_15.setObjectName(u"gridLayout_15")
         self.custom_mean_input = QLineEdit(self.frame_14)
         self.custom_mean_input.setObjectName(u"custom_mean_input")
-        self.custom_mean_input.setMaximumSize(QSize(150, 16777215))
+        self.custom_mean_input.setMinimumSize(QSize(200, 30))
+        self.custom_mean_input.setMaximumSize(QSize(200, 30))
         self.custom_mean_input.setFont(font)
 
         self.gridLayout_15.addWidget(self.custom_mean_input, 8, 3, 1, 1)
@@ -2860,7 +2964,8 @@ class Ui_MainWindow(object):
         self.normalization_type_input.addItem("")
         self.normalization_type_input.addItem("")
         self.normalization_type_input.setObjectName(u"normalization_type_input")
-        self.normalization_type_input.setMaximumSize(QSize(16777215, 16777215))
+        self.normalization_type_input.setMinimumSize(QSize(200, 30))
+        self.normalization_type_input.setMaximumSize(QSize(200, 30))
         self.normalization_type_input.setFont(font)
 
         self.gridLayout_15.addWidget(self.normalization_type_input, 5, 3, 2, 1)
@@ -2890,8 +2995,8 @@ class Ui_MainWindow(object):
         self.extract_random_patch_input.addItem("")
         self.extract_random_patch_input.addItem("")
         self.extract_random_patch_input.setObjectName(u"extract_random_patch_input")
-        self.extract_random_patch_input.setMinimumSize(QSize(100, 0))
-        self.extract_random_patch_input.setMaximumSize(QSize(100, 16777215))
+        self.extract_random_patch_input.setMinimumSize(QSize(200, 30))
+        self.extract_random_patch_input.setMaximumSize(QSize(200, 30))
         self.extract_random_patch_input.setFont(font)
 
         self.gridLayout_15.addWidget(self.extract_random_patch_input, 1, 3, 1, 1)
@@ -2902,7 +3007,8 @@ class Ui_MainWindow(object):
 
         self.patch_size_input = QLineEdit(self.frame_14)
         self.patch_size_input.setObjectName(u"patch_size_input")
-        self.patch_size_input.setMaximumSize(QSize(150, 16777215))
+        self.patch_size_input.setMinimumSize(QSize(200, 30))
+        self.patch_size_input.setMaximumSize(QSize(200, 30))
         self.patch_size_input.setFont(font)
 
         self.gridLayout_15.addWidget(self.patch_size_input, 0, 3, 1, 1)
@@ -2924,8 +3030,8 @@ class Ui_MainWindow(object):
         self.reflect_to_complete_shape_input.addItem("")
         self.reflect_to_complete_shape_input.addItem("")
         self.reflect_to_complete_shape_input.setObjectName(u"reflect_to_complete_shape_input")
-        self.reflect_to_complete_shape_input.setMinimumSize(QSize(100, 0))
-        self.reflect_to_complete_shape_input.setMaximumSize(QSize(100, 16777215))
+        self.reflect_to_complete_shape_input.setMinimumSize(QSize(200, 30))
+        self.reflect_to_complete_shape_input.setMaximumSize(QSize(200, 30))
         self.reflect_to_complete_shape_input.setFont(font)
 
         self.gridLayout_15.addWidget(self.reflect_to_complete_shape_input, 2, 3, 1, 1)
@@ -2948,15 +3054,16 @@ class Ui_MainWindow(object):
         self.check_gen_input.addItem("")
         self.check_gen_input.addItem("")
         self.check_gen_input.setObjectName(u"check_gen_input")
-        self.check_gen_input.setMinimumSize(QSize(100, 0))
-        self.check_gen_input.setMaximumSize(QSize(100, 16777215))
+        self.check_gen_input.setMinimumSize(QSize(200, 30))
+        self.check_gen_input.setMaximumSize(QSize(200, 30))
         self.check_gen_input.setFont(font)
 
         self.gridLayout_15.addWidget(self.check_gen_input, 10, 3, 1, 1)
 
         self.custom_std_input = QLineEdit(self.frame_14)
         self.custom_std_input.setObjectName(u"custom_std_input")
-        self.custom_std_input.setMaximumSize(QSize(150, 16777215))
+        self.custom_std_input.setMinimumSize(QSize(200, 30))
+        self.custom_std_input.setMaximumSize(QSize(200, 30))
         self.custom_std_input.setFont(font)
 
         self.gridLayout_15.addWidget(self.custom_std_input, 9, 3, 1, 1)
@@ -3013,15 +3120,16 @@ class Ui_MainWindow(object):
         self.lr_schel_input.addItem("")
         self.lr_schel_input.addItem("")
         self.lr_schel_input.setObjectName(u"lr_schel_input")
-        self.lr_schel_input.setMaximumSize(QSize(250, 16777215))
+        self.lr_schel_input.setMinimumSize(QSize(200, 0))
+        self.lr_schel_input.setMaximumSize(QSize(200, 30))
         self.lr_schel_input.setFont(font)
 
         self.gridLayout_29.addWidget(self.lr_schel_input, 7, 1, 1, 1)
 
         self.lr_schel_min_lr_input = QLineEdit(self.frame_28)
         self.lr_schel_min_lr_input.setObjectName(u"lr_schel_min_lr_input")
-        self.lr_schel_min_lr_input.setMinimumSize(QSize(100, 30))
-        self.lr_schel_min_lr_input.setMaximumSize(QSize(100, 16777215))
+        self.lr_schel_min_lr_input.setMinimumSize(QSize(200, 30))
+        self.lr_schel_min_lr_input.setMaximumSize(QSize(200, 30))
         self.lr_schel_min_lr_input.setFont(font)
 
         self.gridLayout_29.addWidget(self.lr_schel_min_lr_input, 9, 1, 1, 1)
@@ -3032,15 +3140,16 @@ class Ui_MainWindow(object):
 
         self.lr_schel_warmupcosine_epochs_input = QLineEdit(self.frame_28)
         self.lr_schel_warmupcosine_epochs_input.setObjectName(u"lr_schel_warmupcosine_epochs_input")
-        self.lr_schel_warmupcosine_epochs_input.setMinimumSize(QSize(100, 0))
-        self.lr_schel_warmupcosine_epochs_input.setMaximumSize(QSize(100, 16777215))
+        self.lr_schel_warmupcosine_epochs_input.setMinimumSize(QSize(200, 30))
+        self.lr_schel_warmupcosine_epochs_input.setMaximumSize(QSize(200, 30))
         self.lr_schel_warmupcosine_epochs_input.setFont(font)
 
         self.gridLayout_29.addWidget(self.lr_schel_warmupcosine_epochs_input, 15, 1, 1, 1)
 
         self.profiler_batch_range_input = QLineEdit(self.frame_28)
         self.profiler_batch_range_input.setObjectName(u"profiler_batch_range_input")
-        self.profiler_batch_range_input.setMaximumSize(QSize(150, 16777215))
+        self.profiler_batch_range_input.setMinimumSize(QSize(200, 0))
+        self.profiler_batch_range_input.setMaximumSize(QSize(200, 30))
         self.profiler_batch_range_input.setFont(font)
 
         self.gridLayout_29.addWidget(self.profiler_batch_range_input, 6, 1, 1, 1)
@@ -3053,7 +3162,8 @@ class Ui_MainWindow(object):
 
         self.learning_rate_input = QLineEdit(self.frame_28)
         self.learning_rate_input.setObjectName(u"learning_rate_input")
-        self.learning_rate_input.setMaximumSize(QSize(150, 16777215))
+        self.learning_rate_input.setMinimumSize(QSize(200, 0))
+        self.learning_rate_input.setMaximumSize(QSize(200, 30))
         self.learning_rate_input.setFont(font)
 
         self.gridLayout_29.addWidget(self.learning_rate_input, 1, 1, 1, 1)
@@ -3066,8 +3176,8 @@ class Ui_MainWindow(object):
 
         self.batch_size_input = QLineEdit(self.frame_28)
         self.batch_size_input.setObjectName(u"batch_size_input")
-        self.batch_size_input.setMinimumSize(QSize(100, 0))
-        self.batch_size_input.setMaximumSize(QSize(100, 16777215))
+        self.batch_size_input.setMinimumSize(QSize(200, 0))
+        self.batch_size_input.setMaximumSize(QSize(200, 30))
         self.batch_size_input.setFont(font)
 
         self.gridLayout_29.addWidget(self.batch_size_input, 2, 1, 1, 1)
@@ -3118,8 +3228,8 @@ class Ui_MainWindow(object):
         self.profiler_input.addItem("")
         self.profiler_input.addItem("")
         self.profiler_input.setObjectName(u"profiler_input")
-        self.profiler_input.setMinimumSize(QSize(100, 0))
-        self.profiler_input.setMaximumSize(QSize(100, 16777215))
+        self.profiler_input.setMinimumSize(QSize(200, 0))
+        self.profiler_input.setMaximumSize(QSize(200, 30))
         self.profiler_input.setFont(font)
 
         self.gridLayout_29.addWidget(self.profiler_input, 5, 1, 1, 1)
@@ -3134,15 +3244,16 @@ class Ui_MainWindow(object):
         self.checkpoint_monitor_input.addItem("")
         self.checkpoint_monitor_input.addItem("")
         self.checkpoint_monitor_input.setObjectName(u"checkpoint_monitor_input")
-        self.checkpoint_monitor_input.setMaximumSize(QSize(16777215, 16777215))
+        self.checkpoint_monitor_input.setMinimumSize(QSize(200, 0))
+        self.checkpoint_monitor_input.setMaximumSize(QSize(200, 30))
         self.checkpoint_monitor_input.setFont(font)
 
         self.gridLayout_29.addWidget(self.checkpoint_monitor_input, 4, 1, 1, 1)
 
         self.lr_schel_warmupcosine_lr_input = QLineEdit(self.frame_28)
         self.lr_schel_warmupcosine_lr_input.setObjectName(u"lr_schel_warmupcosine_lr_input")
-        self.lr_schel_warmupcosine_lr_input.setMinimumSize(QSize(100, 0))
-        self.lr_schel_warmupcosine_lr_input.setMaximumSize(QSize(100, 16777215))
+        self.lr_schel_warmupcosine_lr_input.setMinimumSize(QSize(200, 30))
+        self.lr_schel_warmupcosine_lr_input.setMaximumSize(QSize(200, 30))
         self.lr_schel_warmupcosine_lr_input.setFont(font)
 
         self.gridLayout_29.addWidget(self.lr_schel_warmupcosine_lr_input, 14, 1, 1, 1)
@@ -3151,7 +3262,8 @@ class Ui_MainWindow(object):
         self.optimizer_input.addItem("")
         self.optimizer_input.addItem("")
         self.optimizer_input.setObjectName(u"optimizer_input")
-        self.optimizer_input.setMaximumSize(QSize(150, 16777215))
+        self.optimizer_input.setMinimumSize(QSize(200, 0))
+        self.optimizer_input.setMaximumSize(QSize(200, 30))
         self.optimizer_input.setFont(font)
 
         self.gridLayout_29.addWidget(self.optimizer_input, 0, 1, 1, 1)
@@ -3160,31 +3272,32 @@ class Ui_MainWindow(object):
         self.early_stopping_input.addItem("")
         self.early_stopping_input.addItem("")
         self.early_stopping_input.setObjectName(u"early_stopping_input")
-        self.early_stopping_input.setMaximumSize(QSize(16777215, 16777215))
+        self.early_stopping_input.setMinimumSize(QSize(200, 0))
+        self.early_stopping_input.setMaximumSize(QSize(200, 30))
         self.early_stopping_input.setFont(font)
 
         self.gridLayout_29.addWidget(self.early_stopping_input, 3, 1, 1, 1)
 
         self.lr_schel_reduce_on_plat_factor_input = QLineEdit(self.frame_28)
         self.lr_schel_reduce_on_plat_factor_input.setObjectName(u"lr_schel_reduce_on_plat_factor_input")
-        self.lr_schel_reduce_on_plat_factor_input.setMinimumSize(QSize(100, 0))
-        self.lr_schel_reduce_on_plat_factor_input.setMaximumSize(QSize(100, 16777215))
+        self.lr_schel_reduce_on_plat_factor_input.setMinimumSize(QSize(200, 30))
+        self.lr_schel_reduce_on_plat_factor_input.setMaximumSize(QSize(200, 30))
         self.lr_schel_reduce_on_plat_factor_input.setFont(font)
 
         self.gridLayout_29.addWidget(self.lr_schel_reduce_on_plat_factor_input, 12, 1, 1, 1)
 
         self.lr_schel_warmupcosine_hold_epochs_input = QLineEdit(self.frame_28)
         self.lr_schel_warmupcosine_hold_epochs_input.setObjectName(u"lr_schel_warmupcosine_hold_epochs_input")
-        self.lr_schel_warmupcosine_hold_epochs_input.setMinimumSize(QSize(100, 0))
-        self.lr_schel_warmupcosine_hold_epochs_input.setMaximumSize(QSize(100, 16777215))
+        self.lr_schel_warmupcosine_hold_epochs_input.setMinimumSize(QSize(200, 30))
+        self.lr_schel_warmupcosine_hold_epochs_input.setMaximumSize(QSize(200, 30))
         self.lr_schel_warmupcosine_hold_epochs_input.setFont(font)
 
         self.gridLayout_29.addWidget(self.lr_schel_warmupcosine_hold_epochs_input, 18, 1, 1, 1)
 
         self.lr_schel_reduce_on_plat_patience_input = QLineEdit(self.frame_28)
         self.lr_schel_reduce_on_plat_patience_input.setObjectName(u"lr_schel_reduce_on_plat_patience_input")
-        self.lr_schel_reduce_on_plat_patience_input.setMinimumSize(QSize(100, 0))
-        self.lr_schel_reduce_on_plat_patience_input.setMaximumSize(QSize(100, 16777215))
+        self.lr_schel_reduce_on_plat_patience_input.setMinimumSize(QSize(200, 30))
+        self.lr_schel_reduce_on_plat_patience_input.setMaximumSize(QSize(200, 30))
         self.lr_schel_reduce_on_plat_patience_input.setFont(font)
 
         self.gridLayout_29.addWidget(self.lr_schel_reduce_on_plat_patience_input, 11, 1, 1, 1)
@@ -3223,14 +3336,16 @@ class Ui_MainWindow(object):
 
         self.train_padding_input = QLineEdit(self.frame_16)
         self.train_padding_input.setObjectName(u"train_padding_input")
-        self.train_padding_input.setMaximumSize(QSize(150, 16777215))
+        self.train_padding_input.setMinimumSize(QSize(200, 0))
+        self.train_padding_input.setMaximumSize(QSize(200, 30))
         self.train_padding_input.setFont(font)
 
         self.gridLayout_20.addWidget(self.train_padding_input, 3, 2, 1, 1)
 
         self.replicate_data_input = QLineEdit(self.frame_16)
         self.replicate_data_input.setObjectName(u"replicate_data_input")
-        self.replicate_data_input.setMaximumSize(QSize(100, 16777215))
+        self.replicate_data_input.setMinimumSize(QSize(200, 0))
+        self.replicate_data_input.setMaximumSize(QSize(200, 30))
         self.replicate_data_input.setFont(font)
 
         self.gridLayout_20.addWidget(self.replicate_data_input, 0, 2, 1, 1)
@@ -3244,7 +3359,8 @@ class Ui_MainWindow(object):
 
         self.train_overlap_input = QLineEdit(self.frame_16)
         self.train_overlap_input.setObjectName(u"train_overlap_input")
-        self.train_overlap_input.setMaximumSize(QSize(150, 16777215))
+        self.train_overlap_input.setMinimumSize(QSize(200, 0))
+        self.train_overlap_input.setMaximumSize(QSize(200, 30))
         self.train_overlap_input.setFont(font)
 
         self.gridLayout_20.addWidget(self.train_overlap_input, 2, 2, 1, 1)
@@ -3255,7 +3371,8 @@ class Ui_MainWindow(object):
 
         self.train_resolution_input = QLineEdit(self.frame_16)
         self.train_resolution_input.setObjectName(u"train_resolution_input")
-        self.train_resolution_input.setMaximumSize(QSize(150, 16777215))
+        self.train_resolution_input.setMinimumSize(QSize(200, 0))
+        self.train_resolution_input.setMaximumSize(QSize(200, 30))
         self.train_resolution_input.setFont(font)
 
         self.gridLayout_20.addWidget(self.train_resolution_input, 1, 2, 1, 2)
@@ -3270,8 +3387,8 @@ class Ui_MainWindow(object):
         self.train_median_padding_input.addItem("")
         self.train_median_padding_input.addItem("")
         self.train_median_padding_input.setObjectName(u"train_median_padding_input")
-        self.train_median_padding_input.setMinimumSize(QSize(100, 30))
-        self.train_median_padding_input.setMaximumSize(QSize(100, 16777215))
+        self.train_median_padding_input.setMinimumSize(QSize(200, 30))
+        self.train_median_padding_input.setMaximumSize(QSize(200, 30))
         self.train_median_padding_input.setFont(font)
 
         self.gridLayout_20.addWidget(self.train_median_padding_input, 5, 2, 1, 1)
@@ -3297,7 +3414,8 @@ class Ui_MainWindow(object):
         self.gridLayout_21.setObjectName(u"gridLayout_21")
         self.validation_overlap_input = QLineEdit(self.frame_19)
         self.validation_overlap_input.setObjectName(u"validation_overlap_input")
-        self.validation_overlap_input.setMaximumSize(QSize(150, 16777215))
+        self.validation_overlap_input.setMinimumSize(QSize(200, 30))
+        self.validation_overlap_input.setMaximumSize(QSize(200, 30))
         self.validation_overlap_input.setFont(font)
 
         self.gridLayout_21.addWidget(self.validation_overlap_input, 1, 1, 1, 1)
@@ -3318,7 +3436,8 @@ class Ui_MainWindow(object):
 
         self.validation_padding_input = QLineEdit(self.frame_19)
         self.validation_padding_input.setObjectName(u"validation_padding_input")
-        self.validation_padding_input.setMaximumSize(QSize(150, 16777215))
+        self.validation_padding_input.setMinimumSize(QSize(200, 30))
+        self.validation_padding_input.setMaximumSize(QSize(200, 30))
         self.validation_padding_input.setFont(font)
 
         self.gridLayout_21.addWidget(self.validation_padding_input, 2, 1, 1, 1)
@@ -3338,8 +3457,8 @@ class Ui_MainWindow(object):
         self.random_val_input.addItem("")
         self.random_val_input.addItem("")
         self.random_val_input.setObjectName(u"random_val_input")
-        self.random_val_input.setMinimumSize(QSize(100, 0))
-        self.random_val_input.setMaximumSize(QSize(100, 16777215))
+        self.random_val_input.setMinimumSize(QSize(200, 30))
+        self.random_val_input.setMaximumSize(QSize(200, 30))
         self.random_val_input.setFont(font)
 
         self.gridLayout_21.addWidget(self.random_val_input, 0, 1, 1, 1)
@@ -3352,7 +3471,8 @@ class Ui_MainWindow(object):
 
         self.validation_resolution_input = QLineEdit(self.frame_19)
         self.validation_resolution_input.setObjectName(u"validation_resolution_input")
-        self.validation_resolution_input.setMaximumSize(QSize(150, 16777215))
+        self.validation_resolution_input.setMinimumSize(QSize(200, 30))
+        self.validation_resolution_input.setMaximumSize(QSize(200, 30))
         self.validation_resolution_input.setFont(font)
 
         self.gridLayout_21.addWidget(self.validation_resolution_input, 3, 1, 1, 1)
@@ -3379,8 +3499,8 @@ class Ui_MainWindow(object):
         self.gridLayout_24.setObjectName(u"gridLayout_24")
         self.tiramisu_depth_input = QLineEdit(self.tiramisu_frame)
         self.tiramisu_depth_input.setObjectName(u"tiramisu_depth_input")
-        self.tiramisu_depth_input.setMinimumSize(QSize(100, 0))
-        self.tiramisu_depth_input.setMaximumSize(QSize(100, 16777215))
+        self.tiramisu_depth_input.setMinimumSize(QSize(200, 30))
+        self.tiramisu_depth_input.setMaximumSize(QSize(200, 30))
         self.tiramisu_depth_input.setFont(font)
 
         self.gridLayout_24.addWidget(self.tiramisu_depth_input, 0, 1, 1, 1)
@@ -3394,8 +3514,8 @@ class Ui_MainWindow(object):
 
         self.tiramisu_feature_maps_input = QLineEdit(self.tiramisu_frame)
         self.tiramisu_feature_maps_input.setObjectName(u"tiramisu_feature_maps_input")
-        self.tiramisu_feature_maps_input.setMinimumSize(QSize(100, 0))
-        self.tiramisu_feature_maps_input.setMaximumSize(QSize(100, 16777215))
+        self.tiramisu_feature_maps_input.setMinimumSize(QSize(200, 30))
+        self.tiramisu_feature_maps_input.setMaximumSize(QSize(200, 30))
         self.tiramisu_feature_maps_input.setFont(font)
 
         self.gridLayout_24.addWidget(self.tiramisu_feature_maps_input, 1, 1, 1, 1)
@@ -3420,8 +3540,8 @@ class Ui_MainWindow(object):
 
         self.tiramisu_dropout_input = QLineEdit(self.tiramisu_frame)
         self.tiramisu_dropout_input.setObjectName(u"tiramisu_dropout_input")
-        self.tiramisu_dropout_input.setMinimumSize(QSize(100, 0))
-        self.tiramisu_dropout_input.setMaximumSize(QSize(100, 16777215))
+        self.tiramisu_dropout_input.setMinimumSize(QSize(200, 30))
+        self.tiramisu_dropout_input.setMaximumSize(QSize(200, 30))
         self.tiramisu_dropout_input.setFont(font)
 
         self.gridLayout_24.addWidget(self.tiramisu_dropout_input, 2, 1, 1, 1)
@@ -3440,23 +3560,24 @@ class Ui_MainWindow(object):
         self.gridLayout_23.setObjectName(u"gridLayout_23")
         self.unetr_vit_hidden_multiple_input = QLineEdit(self.unetr_frame)
         self.unetr_vit_hidden_multiple_input.setObjectName(u"unetr_vit_hidden_multiple_input")
-        self.unetr_vit_hidden_multiple_input.setMinimumSize(QSize(100, 0))
-        self.unetr_vit_hidden_multiple_input.setMaximumSize(QSize(100, 16777215))
+        self.unetr_vit_hidden_multiple_input.setMinimumSize(QSize(200, 30))
+        self.unetr_vit_hidden_multiple_input.setMaximumSize(QSize(200, 30))
         self.unetr_vit_hidden_multiple_input.setFont(font)
 
         self.gridLayout_23.addWidget(self.unetr_vit_hidden_multiple_input, 5, 1, 1, 1)
 
         self.unetr_num_heads_input = QLineEdit(self.unetr_frame)
         self.unetr_num_heads_input.setObjectName(u"unetr_num_heads_input")
-        self.unetr_num_heads_input.setMinimumSize(QSize(100, 0))
-        self.unetr_num_heads_input.setMaximumSize(QSize(100, 16777215))
+        self.unetr_num_heads_input.setMinimumSize(QSize(200, 30))
+        self.unetr_num_heads_input.setMaximumSize(QSize(200, 30))
         self.unetr_num_heads_input.setFont(font)
 
         self.gridLayout_23.addWidget(self.unetr_num_heads_input, 4, 1, 1, 1)
 
         self.unetr_mlp_hidden_units_input = QLineEdit(self.unetr_frame)
         self.unetr_mlp_hidden_units_input.setObjectName(u"unetr_mlp_hidden_units_input")
-        self.unetr_mlp_hidden_units_input.setMaximumSize(QSize(150, 16777215))
+        self.unetr_mlp_hidden_units_input.setMinimumSize(QSize(200, 30))
+        self.unetr_mlp_hidden_units_input.setMaximumSize(QSize(200, 30))
         self.unetr_mlp_hidden_units_input.setFont(font)
 
         self.gridLayout_23.addWidget(self.unetr_mlp_hidden_units_input, 3, 1, 1, 1)
@@ -3498,8 +3619,8 @@ class Ui_MainWindow(object):
 
         self.unetr_token_size_input = QLineEdit(self.unetr_frame)
         self.unetr_token_size_input.setObjectName(u"unetr_token_size_input")
-        self.unetr_token_size_input.setMinimumSize(QSize(100, 0))
-        self.unetr_token_size_input.setMaximumSize(QSize(100, 16777215))
+        self.unetr_token_size_input.setMinimumSize(QSize(200, 30))
+        self.unetr_token_size_input.setMaximumSize(QSize(200, 30))
         self.unetr_token_size_input.setFont(font)
 
         self.gridLayout_23.addWidget(self.unetr_token_size_input, 0, 1, 1, 1)
@@ -3513,16 +3634,16 @@ class Ui_MainWindow(object):
 
         self.unetr_embed_dims_input = QLineEdit(self.unetr_frame)
         self.unetr_embed_dims_input.setObjectName(u"unetr_embed_dims_input")
-        self.unetr_embed_dims_input.setMinimumSize(QSize(100, 0))
-        self.unetr_embed_dims_input.setMaximumSize(QSize(100, 16777215))
+        self.unetr_embed_dims_input.setMinimumSize(QSize(200, 30))
+        self.unetr_embed_dims_input.setMaximumSize(QSize(200, 30))
         self.unetr_embed_dims_input.setFont(font)
 
         self.gridLayout_23.addWidget(self.unetr_embed_dims_input, 1, 1, 1, 1)
 
         self.unetr_depth_input = QLineEdit(self.unetr_frame)
         self.unetr_depth_input.setObjectName(u"unetr_depth_input")
-        self.unetr_depth_input.setMinimumSize(QSize(100, 0))
-        self.unetr_depth_input.setMaximumSize(QSize(100, 16777215))
+        self.unetr_depth_input.setMinimumSize(QSize(200, 30))
+        self.unetr_depth_input.setMaximumSize(QSize(200, 30))
         self.unetr_depth_input.setFont(font)
 
         self.gridLayout_23.addWidget(self.unetr_depth_input, 2, 1, 1, 1)
@@ -3598,6 +3719,12 @@ class Ui_MainWindow(object):
         self.train_advanced_bn.setFont(font)
         self.train_advanced_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
+"}\n"
+"QPushButton:hover {\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
 "}")
         self.train_advanced_bn.setIcon(icon10)
 
@@ -3621,14 +3748,16 @@ class Ui_MainWindow(object):
         self.gridLayout_13.setObjectName(u"gridLayout_13")
         self.number_of_epochs_input = QLineEdit(self.frame_12)
         self.number_of_epochs_input.setObjectName(u"number_of_epochs_input")
-        self.number_of_epochs_input.setMaximumSize(QSize(100, 16777215))
+        self.number_of_epochs_input.setMinimumSize(QSize(200, 30))
+        self.number_of_epochs_input.setMaximumSize(QSize(200, 30))
         self.number_of_epochs_input.setFont(font)
 
         self.gridLayout_13.addWidget(self.number_of_epochs_input, 1, 2, 1, 1)
 
         self.number_of_classes_input = QLineEdit(self.frame_12)
         self.number_of_classes_input.setObjectName(u"number_of_classes_input")
-        self.number_of_classes_input.setMaximumSize(QSize(50, 16777215))
+        self.number_of_classes_input.setMinimumSize(QSize(200, 30))
+        self.number_of_classes_input.setMaximumSize(QSize(200, 30))
         self.number_of_classes_input.setFont(font)
 
         self.gridLayout_13.addWidget(self.number_of_classes_input, 5, 2, 1, 1)
@@ -3661,7 +3790,8 @@ class Ui_MainWindow(object):
 
         self.patience_input = QLineEdit(self.frame_12)
         self.patience_input.setObjectName(u"patience_input")
-        self.patience_input.setMaximumSize(QSize(100, 16777215))
+        self.patience_input.setMinimumSize(QSize(200, 30))
+        self.patience_input.setMaximumSize(QSize(200, 30))
         self.patience_input.setFont(font)
 
         self.gridLayout_13.addWidget(self.patience_input, 2, 2, 1, 1)
@@ -3672,8 +3802,8 @@ class Ui_MainWindow(object):
 
         self.model_input = QComboBox(self.frame_12)
         self.model_input.setObjectName(u"model_input")
-        self.model_input.setMinimumSize(QSize(200, 0))
-        self.model_input.setMaximumSize(QSize(16777215, 16777215))
+        self.model_input.setMinimumSize(QSize(200, 30))
+        self.model_input.setMaximumSize(QSize(16777215, 30))
         self.model_input.setFont(font)
 
         self.gridLayout_13.addWidget(self.model_input, 4, 2, 1, 1)
@@ -3699,7 +3829,7 @@ class Ui_MainWindow(object):
         self.gridLayout_6.setObjectName(u"gridLayout_6")
         self.train_data_input = QTextBrowser(self.frame_3)
         self.train_data_input.setObjectName(u"train_data_input")
-        self.train_data_input.setMinimumSize(QSize(500, 0))
+        self.train_data_input.setMinimumSize(QSize(500, 30))
         self.train_data_input.setMaximumSize(QSize(500, 30))
         self.train_data_input.setFont(font)
         self.train_data_input.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -3713,8 +3843,8 @@ class Ui_MainWindow(object):
         self.train_in_memory_comboBox.addItem("")
         self.train_in_memory_comboBox.addItem("")
         self.train_in_memory_comboBox.setObjectName(u"train_in_memory_comboBox")
-        self.train_in_memory_comboBox.setMinimumSize(QSize(100, 0))
-        self.train_in_memory_comboBox.setMaximumSize(QSize(100, 16777215))
+        self.train_in_memory_comboBox.setMinimumSize(QSize(200, 30))
+        self.train_in_memory_comboBox.setMaximumSize(QSize(200, 30))
         self.train_in_memory_comboBox.setFont(font)
 
         self.gridLayout_6.addWidget(self.train_in_memory_comboBox, 4, 2, 1, 1)
@@ -3748,7 +3878,7 @@ class Ui_MainWindow(object):
 
         self.train_data_gt_input = QTextBrowser(self.frame_3)
         self.train_data_gt_input.setObjectName(u"train_data_gt_input")
-        self.train_data_gt_input.setMinimumSize(QSize(500, 0))
+        self.train_data_gt_input.setMinimumSize(QSize(500, 30))
         self.train_data_gt_input.setMaximumSize(QSize(500, 30))
         self.train_data_gt_input.setFont(font)
         self.train_data_gt_input.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -3783,16 +3913,16 @@ class Ui_MainWindow(object):
         self.gridLayout_11.setObjectName(u"gridLayout_11")
         self.cross_validation_nfolds_input = QLineEdit(self.frame_11)
         self.cross_validation_nfolds_input.setObjectName(u"cross_validation_nfolds_input")
-        self.cross_validation_nfolds_input.setMinimumSize(QSize(100, 0))
-        self.cross_validation_nfolds_input.setMaximumSize(QSize(100, 16777215))
+        self.cross_validation_nfolds_input.setMinimumSize(QSize(200, 30))
+        self.cross_validation_nfolds_input.setMaximumSize(QSize(200, 30))
         self.cross_validation_nfolds_input.setFont(font)
 
         self.gridLayout_11.addWidget(self.cross_validation_nfolds_input, 1, 2, 1, 1)
 
         self.cross_validation_fold_input = QLineEdit(self.frame_11)
         self.cross_validation_fold_input.setObjectName(u"cross_validation_fold_input")
-        self.cross_validation_fold_input.setMinimumSize(QSize(100, 0))
-        self.cross_validation_fold_input.setMaximumSize(QSize(100, 16777215))
+        self.cross_validation_fold_input.setMinimumSize(QSize(200, 30))
+        self.cross_validation_fold_input.setMaximumSize(QSize(200, 30))
         self.cross_validation_fold_input.setFont(font)
 
         self.gridLayout_11.addWidget(self.cross_validation_fold_input, 2, 2, 1, 1)
@@ -3809,7 +3939,7 @@ class Ui_MainWindow(object):
         self.validation_type_comboBox.addItem("")
         self.validation_type_comboBox.setObjectName(u"validation_type_comboBox")
         self.validation_type_comboBox.setMinimumSize(QSize(300, 30))
-        self.validation_type_comboBox.setMaximumSize(QSize(16777215, 16777215))
+        self.validation_type_comboBox.setMaximumSize(QSize(16777215, 30))
         self.validation_type_comboBox.setFont(font)
 
         self.gridLayout_11.addWidget(self.validation_type_comboBox, 0, 2, 1, 1)
@@ -3837,15 +3967,16 @@ class Ui_MainWindow(object):
         self.val_in_memory_comboBox.addItem("")
         self.val_in_memory_comboBox.addItem("")
         self.val_in_memory_comboBox.setObjectName(u"val_in_memory_comboBox")
-        self.val_in_memory_comboBox.setMinimumSize(QSize(100, 0))
-        self.val_in_memory_comboBox.setMaximumSize(QSize(100, 16777215))
+        self.val_in_memory_comboBox.setMinimumSize(QSize(200, 30))
+        self.val_in_memory_comboBox.setMaximumSize(QSize(200, 30))
         self.val_in_memory_comboBox.setFont(font)
 
         self.gridLayout_11.addWidget(self.val_in_memory_comboBox, 7, 2, 1, 1)
 
         self.percentage_validation_input = QLineEdit(self.frame_11)
         self.percentage_validation_input.setObjectName(u"percentage_validation_input")
-        self.percentage_validation_input.setMaximumSize(QSize(100, 16777215))
+        self.percentage_validation_input.setMinimumSize(QSize(200, 30))
+        self.percentage_validation_input.setMaximumSize(QSize(200, 30))
         self.percentage_validation_input.setFont(font)
 
         self.gridLayout_11.addWidget(self.percentage_validation_input, 9, 2, 1, 1)
@@ -3858,6 +3989,7 @@ class Ui_MainWindow(object):
 
         self.validation_data_gt_input = QTextBrowser(self.frame_11)
         self.validation_data_gt_input.setObjectName(u"validation_data_gt_input")
+        self.validation_data_gt_input.setMinimumSize(QSize(500, 30))
         self.validation_data_gt_input.setMaximumSize(QSize(500, 30))
         self.validation_data_gt_input.setFont(font)
         self.validation_data_gt_input.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -3881,7 +4013,7 @@ class Ui_MainWindow(object):
 
         self.validation_data_input = QTextBrowser(self.frame_11)
         self.validation_data_input.setObjectName(u"validation_data_input")
-        self.validation_data_input.setMinimumSize(QSize(500, 0))
+        self.validation_data_input.setMinimumSize(QSize(500, 30))
         self.validation_data_input.setMaximumSize(QSize(500, 30))
         self.validation_data_input.setFont(font)
         self.validation_data_input.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -3966,7 +4098,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_6 = QWidget()
         self.scrollAreaWidgetContents_6.setObjectName(u"scrollAreaWidgetContents_6")
-        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 429, 273))
+        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 925, 342))
         self.gridLayout_18 = QGridLayout(self.scrollAreaWidgetContents_6)
         self.gridLayout_18.setObjectName(u"gridLayout_18")
         self.verticalSpacer_8 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -3975,6 +4107,8 @@ class Ui_MainWindow(object):
 
         self.extract_random_patch_frame_label = QLabel(self.scrollAreaWidgetContents_6)
         self.extract_random_patch_frame_label.setObjectName(u"extract_random_patch_frame_label")
+        self.extract_random_patch_frame_label.setMinimumSize(QSize(0, 30))
+        self.extract_random_patch_frame_label.setMaximumSize(QSize(16777215, 30))
         self.extract_random_patch_frame_label.setFont(font)
 
         self.gridLayout_18.addWidget(self.extract_random_patch_frame_label, 1, 0, 1, 1)
@@ -4001,8 +4135,8 @@ class Ui_MainWindow(object):
         self.sem_seg_random_patch_prob_map_input.addItem("")
         self.sem_seg_random_patch_prob_map_input.addItem("")
         self.sem_seg_random_patch_prob_map_input.setObjectName(u"sem_seg_random_patch_prob_map_input")
-        self.sem_seg_random_patch_prob_map_input.setMinimumSize(QSize(100, 0))
-        self.sem_seg_random_patch_prob_map_input.setMaximumSize(QSize(100, 16777215))
+        self.sem_seg_random_patch_prob_map_input.setMinimumSize(QSize(200, 30))
+        self.sem_seg_random_patch_prob_map_input.setMaximumSize(QSize(200, 30))
         self.sem_seg_random_patch_prob_map_input.setFont(font)
 
         self.gridLayout_30.addWidget(self.sem_seg_random_patch_prob_map_input, 0, 1, 1, 1)
@@ -4023,16 +4157,16 @@ class Ui_MainWindow(object):
 
         self.sem_seg_random_patch_fore_weights_input = QLineEdit(self.extract_random_patch_frame)
         self.sem_seg_random_patch_fore_weights_input.setObjectName(u"sem_seg_random_patch_fore_weights_input")
-        self.sem_seg_random_patch_fore_weights_input.setMinimumSize(QSize(100, 0))
-        self.sem_seg_random_patch_fore_weights_input.setMaximumSize(QSize(100, 16777215))
+        self.sem_seg_random_patch_fore_weights_input.setMinimumSize(QSize(200, 30))
+        self.sem_seg_random_patch_fore_weights_input.setMaximumSize(QSize(200, 30))
         self.sem_seg_random_patch_fore_weights_input.setFont(font)
 
         self.gridLayout_30.addWidget(self.sem_seg_random_patch_fore_weights_input, 1, 1, 1, 1)
 
         self.sem_seg_random_patch_back_weights_input = QLineEdit(self.extract_random_patch_frame)
         self.sem_seg_random_patch_back_weights_input.setObjectName(u"sem_seg_random_patch_back_weights_input")
-        self.sem_seg_random_patch_back_weights_input.setMinimumSize(QSize(100, 0))
-        self.sem_seg_random_patch_back_weights_input.setMaximumSize(QSize(100, 16777215))
+        self.sem_seg_random_patch_back_weights_input.setMinimumSize(QSize(200, 30))
+        self.sem_seg_random_patch_back_weights_input.setMaximumSize(QSize(200, 30))
         self.sem_seg_random_patch_back_weights_input.setFont(font)
 
         self.gridLayout_30.addWidget(self.sem_seg_random_patch_back_weights_input, 4, 1, 1, 1)
@@ -4063,16 +4197,16 @@ class Ui_MainWindow(object):
         self.sem_seg_check_train_data_input.addItem("")
         self.sem_seg_check_train_data_input.addItem("")
         self.sem_seg_check_train_data_input.setObjectName(u"sem_seg_check_train_data_input")
-        self.sem_seg_check_train_data_input.setMinimumSize(QSize(100, 0))
-        self.sem_seg_check_train_data_input.setMaximumSize(QSize(100, 16777215))
+        self.sem_seg_check_train_data_input.setMinimumSize(QSize(200, 30))
+        self.sem_seg_check_train_data_input.setMaximumSize(QSize(200, 30))
         self.sem_seg_check_train_data_input.setFont(font)
 
         self.gridLayout_31.addWidget(self.sem_seg_check_train_data_input, 1, 1, 1, 1)
 
         self.sem_seg_minimum_fore_percentage_input = QLineEdit(self.frame_30)
         self.sem_seg_minimum_fore_percentage_input.setObjectName(u"sem_seg_minimum_fore_percentage_input")
-        self.sem_seg_minimum_fore_percentage_input.setMinimumSize(QSize(100, 0))
-        self.sem_seg_minimum_fore_percentage_input.setMaximumSize(QSize(100, 16777215))
+        self.sem_seg_minimum_fore_percentage_input.setMinimumSize(QSize(200, 30))
+        self.sem_seg_minimum_fore_percentage_input.setMaximumSize(QSize(200, 30))
         self.sem_seg_minimum_fore_percentage_input.setFont(font)
 
         self.gridLayout_31.addWidget(self.sem_seg_minimum_fore_percentage_input, 2, 1, 1, 1)
@@ -4116,7 +4250,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 429, 176))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 915, 340))
         self.gridLayout_17 = QGridLayout(self.scrollAreaWidgetContents_4)
         self.gridLayout_17.setObjectName(u"gridLayout_17")
         self.verticalSpacer_9 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -4149,8 +4283,8 @@ class Ui_MainWindow(object):
         self.gridLayout_33.setObjectName(u"gridLayout_33")
         self.inst_seg_minimum_fore_percentage_input = QLineEdit(self.frame_31)
         self.inst_seg_minimum_fore_percentage_input.setObjectName(u"inst_seg_minimum_fore_percentage_input")
-        self.inst_seg_minimum_fore_percentage_input.setMinimumSize(QSize(100, 0))
-        self.inst_seg_minimum_fore_percentage_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_minimum_fore_percentage_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_minimum_fore_percentage_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_minimum_fore_percentage_input.setFont(font)
 
         self.gridLayout_33.addWidget(self.inst_seg_minimum_fore_percentage_input, 0, 1, 1, 1)
@@ -4193,16 +4327,16 @@ class Ui_MainWindow(object):
         self.inst_seg_data_channels_input.addItem("")
         self.inst_seg_data_channels_input.addItem("")
         self.inst_seg_data_channels_input.setObjectName(u"inst_seg_data_channels_input")
-        self.inst_seg_data_channels_input.setMinimumSize(QSize(100, 0))
-        self.inst_seg_data_channels_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_data_channels_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_data_channels_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_data_channels_input.setFont(font)
 
         self.gridLayout_32.addWidget(self.inst_seg_data_channels_input, 0, 1, 1, 1)
 
         self.inst_seg_channel_weigths_input = QLineEdit(self.frame_32)
         self.inst_seg_channel_weigths_input.setObjectName(u"inst_seg_channel_weigths_input")
-        self.inst_seg_channel_weigths_input.setMinimumSize(QSize(100, 0))
-        self.inst_seg_channel_weigths_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_channel_weigths_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_channel_weigths_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_channel_weigths_input.setFont(font)
 
         self.gridLayout_32.addWidget(self.inst_seg_channel_weigths_input, 1, 1, 1, 1)
@@ -4225,8 +4359,8 @@ class Ui_MainWindow(object):
         self.inst_seg_contour_mode_combobox.addItem("")
         self.inst_seg_contour_mode_combobox.addItem("")
         self.inst_seg_contour_mode_combobox.setObjectName(u"inst_seg_contour_mode_combobox")
-        self.inst_seg_contour_mode_combobox.setMinimumSize(QSize(100, 0))
-        self.inst_seg_contour_mode_combobox.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_contour_mode_combobox.setMinimumSize(QSize(200, 30))
+        self.inst_seg_contour_mode_combobox.setMaximumSize(QSize(200, 30))
         self.inst_seg_contour_mode_combobox.setFont(font)
 
         self.gridLayout_32.addWidget(self.inst_seg_contour_mode_combobox, 2, 1, 1, 1)
@@ -4255,7 +4389,7 @@ class Ui_MainWindow(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollAreaWidgetContents_7 = QWidget()
         self.scrollAreaWidgetContents_7.setObjectName(u"scrollAreaWidgetContents_7")
-        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 429, 207))
+        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 913, 338))
         self.gridLayout_19 = QGridLayout(self.scrollAreaWidgetContents_7)
         self.gridLayout_19.setObjectName(u"gridLayout_19")
         self.label_48 = QLabel(self.scrollAreaWidgetContents_7)
@@ -4284,16 +4418,16 @@ class Ui_MainWindow(object):
         self.det_check_created_point_input.addItem("")
         self.det_check_created_point_input.addItem("")
         self.det_check_created_point_input.setObjectName(u"det_check_created_point_input")
-        self.det_check_created_point_input.setMinimumSize(QSize(100, 0))
-        self.det_check_created_point_input.setMaximumSize(QSize(100, 16777215))
+        self.det_check_created_point_input.setMinimumSize(QSize(200, 30))
+        self.det_check_created_point_input.setMaximumSize(QSize(200, 30))
         self.det_check_created_point_input.setFont(font)
 
         self.gridLayout_35.addWidget(self.det_check_created_point_input, 1, 1, 1, 1)
 
         self.det_central_point_dilation_input = QLineEdit(self.frame_34)
         self.det_central_point_dilation_input.setObjectName(u"det_central_point_dilation_input")
-        self.det_central_point_dilation_input.setMinimumSize(QSize(100, 0))
-        self.det_central_point_dilation_input.setMaximumSize(QSize(100, 16777215))
+        self.det_central_point_dilation_input.setMinimumSize(QSize(200, 30))
+        self.det_central_point_dilation_input.setMaximumSize(QSize(200, 30))
         self.det_central_point_dilation_input.setFont(font)
 
         self.gridLayout_35.addWidget(self.det_central_point_dilation_input, 0, 1, 1, 1)
@@ -4336,8 +4470,8 @@ class Ui_MainWindow(object):
 
         self.det_minimum_fore_percentage_input = QLineEdit(self.frame_33)
         self.det_minimum_fore_percentage_input.setObjectName(u"det_minimum_fore_percentage_input")
-        self.det_minimum_fore_percentage_input.setMinimumSize(QSize(100, 0))
-        self.det_minimum_fore_percentage_input.setMaximumSize(QSize(100, 16777215))
+        self.det_minimum_fore_percentage_input.setMinimumSize(QSize(200, 30))
+        self.det_minimum_fore_percentage_input.setMaximumSize(QSize(200, 30))
         self.det_minimum_fore_percentage_input.setFont(font)
 
         self.gridLayout_34.addWidget(self.det_minimum_fore_percentage_input, 0, 1, 1, 1)
@@ -4353,8 +4487,8 @@ class Ui_MainWindow(object):
         self.det_loss_type_input.addItem("")
         self.det_loss_type_input.addItem("")
         self.det_loss_type_input.setObjectName(u"det_loss_type_input")
-        self.det_loss_type_input.setMinimumSize(QSize(100, 0))
-        self.det_loss_type_input.setMaximumSize(QSize(100, 16777215))
+        self.det_loss_type_input.setMinimumSize(QSize(200, 30))
+        self.det_loss_type_input.setMaximumSize(QSize(200, 30))
         self.det_loss_type_input.setFont(font)
 
         self.gridLayout_34.addWidget(self.det_loss_type_input, 1, 1, 1, 1)
@@ -4390,7 +4524,7 @@ class Ui_MainWindow(object):
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollAreaWidgetContents_8 = QWidget()
         self.scrollAreaWidgetContents_8.setObjectName(u"scrollAreaWidgetContents_8")
-        self.scrollAreaWidgetContents_8.setGeometry(QRect(0, 0, 546, 190))
+        self.scrollAreaWidgetContents_8.setGeometry(QRect(0, 0, 913, 338))
         self.gridLayout_49 = QGridLayout(self.scrollAreaWidgetContents_8)
         self.gridLayout_49.setObjectName(u"gridLayout_49")
         self.frame_44 = QFrame(self.scrollAreaWidgetContents_8)
@@ -4428,24 +4562,24 @@ class Ui_MainWindow(object):
         self.deno_n2v_neighborhood_struct_input.addItem("")
         self.deno_n2v_neighborhood_struct_input.addItem("")
         self.deno_n2v_neighborhood_struct_input.setObjectName(u"deno_n2v_neighborhood_struct_input")
-        self.deno_n2v_neighborhood_struct_input.setMinimumSize(QSize(100, 0))
-        self.deno_n2v_neighborhood_struct_input.setMaximumSize(QSize(100, 16777215))
+        self.deno_n2v_neighborhood_struct_input.setMinimumSize(QSize(200, 30))
+        self.deno_n2v_neighborhood_struct_input.setMaximumSize(QSize(200, 30))
         self.deno_n2v_neighborhood_struct_input.setFont(font)
 
         self.gridLayout_48.addWidget(self.deno_n2v_neighborhood_struct_input, 3, 1, 1, 1)
 
         self.deno_n2v_neighborhood_radius_input = QLineEdit(self.frame_44)
         self.deno_n2v_neighborhood_radius_input.setObjectName(u"deno_n2v_neighborhood_radius_input")
-        self.deno_n2v_neighborhood_radius_input.setMinimumSize(QSize(100, 0))
-        self.deno_n2v_neighborhood_radius_input.setMaximumSize(QSize(100, 16777215))
+        self.deno_n2v_neighborhood_radius_input.setMinimumSize(QSize(200, 30))
+        self.deno_n2v_neighborhood_radius_input.setMaximumSize(QSize(200, 30))
         self.deno_n2v_neighborhood_radius_input.setFont(font)
 
         self.gridLayout_48.addWidget(self.deno_n2v_neighborhood_radius_input, 2, 1, 1, 1)
 
         self.deno_n2v_perc_pix_input = QLineEdit(self.frame_44)
         self.deno_n2v_perc_pix_input.setObjectName(u"deno_n2v_perc_pix_input")
-        self.deno_n2v_perc_pix_input.setMinimumSize(QSize(100, 0))
-        self.deno_n2v_perc_pix_input.setMaximumSize(QSize(100, 16777215))
+        self.deno_n2v_perc_pix_input.setMinimumSize(QSize(200, 30))
+        self.deno_n2v_perc_pix_input.setMaximumSize(QSize(200, 30))
         self.deno_n2v_perc_pix_input.setFont(font)
 
         self.gridLayout_48.addWidget(self.deno_n2v_perc_pix_input, 0, 1, 1, 1)
@@ -4460,8 +4594,8 @@ class Ui_MainWindow(object):
         self.deno_n2v_manipulator_input.addItem("")
         self.deno_n2v_manipulator_input.addItem("")
         self.deno_n2v_manipulator_input.setObjectName(u"deno_n2v_manipulator_input")
-        self.deno_n2v_manipulator_input.setMinimumSize(QSize(200, 0))
-        self.deno_n2v_manipulator_input.setMaximumSize(QSize(200, 16777215))
+        self.deno_n2v_manipulator_input.setMinimumSize(QSize(200, 30))
+        self.deno_n2v_manipulator_input.setMaximumSize(QSize(200, 30))
         self.deno_n2v_manipulator_input.setFont(font)
 
         self.gridLayout_48.addWidget(self.deno_n2v_manipulator_input, 1, 1, 1, 1)
@@ -4504,7 +4638,7 @@ class Ui_MainWindow(object):
         self.scrollArea_5.setWidgetResizable(True)
         self.scrollAreaWidgetContents_9 = QWidget()
         self.scrollAreaWidgetContents_9.setObjectName(u"scrollAreaWidgetContents_9")
-        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, 0, 240, 94))
+        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, 0, 913, 338))
         self.gridLayout_50 = QGridLayout(self.scrollAreaWidgetContents_9)
         self.gridLayout_50.setObjectName(u"gridLayout_50")
         self.verticalSpacer_21 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -4528,8 +4662,8 @@ class Ui_MainWindow(object):
         self.sr_upscaling_input.addItem("")
         self.sr_upscaling_input.addItem("")
         self.sr_upscaling_input.setObjectName(u"sr_upscaling_input")
-        self.sr_upscaling_input.setMinimumSize(QSize(100, 0))
-        self.sr_upscaling_input.setMaximumSize(QSize(100, 16777215))
+        self.sr_upscaling_input.setMinimumSize(QSize(200, 30))
+        self.sr_upscaling_input.setMaximumSize(QSize(200, 30))
         self.sr_upscaling_input.setFont(font)
 
         self.gridLayout_56.addWidget(self.sr_upscaling_input, 0, 1, 1, 1)
@@ -4568,7 +4702,7 @@ class Ui_MainWindow(object):
         self.scrollArea_6.setWidgetResizable(True)
         self.scrollAreaWidgetContents_10 = QWidget()
         self.scrollAreaWidgetContents_10.setObjectName(u"scrollAreaWidgetContents_10")
-        self.scrollAreaWidgetContents_10.setGeometry(QRect(0, 0, 288, 125))
+        self.scrollAreaWidgetContents_10.setGeometry(QRect(0, 0, 913, 338))
         self.gridLayout_51 = QGridLayout(self.scrollAreaWidgetContents_10)
         self.gridLayout_51.setObjectName(u"gridLayout_51")
         self.verticalSpacer_22 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -4597,8 +4731,8 @@ class Ui_MainWindow(object):
 
         self.ssl_noise_input = QLineEdit(self.frame_49)
         self.ssl_noise_input.setObjectName(u"ssl_noise_input")
-        self.ssl_noise_input.setMinimumSize(QSize(100, 0))
-        self.ssl_noise_input.setMaximumSize(QSize(100, 16777215))
+        self.ssl_noise_input.setMinimumSize(QSize(200, 30))
+        self.ssl_noise_input.setMaximumSize(QSize(200, 30))
         self.ssl_noise_input.setFont(font)
 
         self.gridLayout_57.addWidget(self.ssl_noise_input, 1, 1, 1, 1)
@@ -4614,8 +4748,8 @@ class Ui_MainWindow(object):
         self.ssl_resizing_factor_input.addItem("")
         self.ssl_resizing_factor_input.addItem("")
         self.ssl_resizing_factor_input.setObjectName(u"ssl_resizing_factor_input")
-        self.ssl_resizing_factor_input.setMinimumSize(QSize(100, 0))
-        self.ssl_resizing_factor_input.setMaximumSize(QSize(100, 16777215))
+        self.ssl_resizing_factor_input.setMinimumSize(QSize(200, 30))
+        self.ssl_resizing_factor_input.setMaximumSize(QSize(200, 30))
         self.ssl_resizing_factor_input.setFont(font)
 
         self.gridLayout_57.addWidget(self.ssl_resizing_factor_input, 0, 1, 1, 1)
@@ -4648,7 +4782,7 @@ class Ui_MainWindow(object):
         self.scrollArea_7.setWidgetResizable(True)
         self.scrollAreaWidgetContents_11 = QWidget()
         self.scrollAreaWidgetContents_11.setObjectName(u"scrollAreaWidgetContents_11")
-        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, 0, 399, 44))
+        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, 0, 913, 338))
         self.gridLayout_52 = QGridLayout(self.scrollAreaWidgetContents_11)
         self.gridLayout_52.setObjectName(u"gridLayout_52")
         self.horizontalSpacer_42 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
@@ -4680,56 +4814,16 @@ class Ui_MainWindow(object):
 
         self.gridLayout_14.addWidget(self.train_tab_widget, 3, 0, 1, 2)
 
-        self.frame_25 = QFrame(self.train_general_frame)
-        self.frame_25.setObjectName(u"frame_25")
-        self.frame_25.setMinimumSize(QSize(0, 50))
-        self.frame_25.setFrameShape(QFrame.NoFrame)
-        self.frame_25.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_12 = QHBoxLayout(self.frame_25)
-        self.horizontalLayout_12.setSpacing(6)
-        self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
-        self.horizontalLayout_12.setContentsMargins(0, 0, 0, 0)
-        self.label_49 = QLabel(self.frame_25)
-        self.label_49.setObjectName(u"label_49")
-        self.label_49.setMaximumSize(QSize(16777215, 16777215))
-        self.label_49.setFont(font)
-        self.label_49.setContextMenuPolicy(Qt.NoContextMenu)
-
-        self.horizontalLayout_12.addWidget(self.label_49)
-
-        self.enable_train_input = QComboBox(self.frame_25)
-        self.enable_train_input.addItem("")
-        self.enable_train_input.addItem("")
-        self.enable_train_input.setObjectName(u"enable_train_input")
-        self.enable_train_input.setMinimumSize(QSize(100, 0))
-        self.enable_train_input.setFont(font)
-
-        self.horizontalLayout_12.addWidget(self.enable_train_input)
-
-        self.horizontalSpacer_17 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.horizontalLayout_12.addItem(self.horizontalSpacer_17)
-
-
-        self.gridLayout_14.addWidget(self.frame_25, 0, 0, 1, 1)
-
-        self.verticalSpacer_11 = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding)
-
-        self.gridLayout_14.addItem(self.verticalSpacer_11, 2, 0, 1, 1)
-
-        self.horizontalSpacer_18 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.gridLayout_14.addItem(self.horizontalSpacer_18, 0, 1, 1, 1)
-
         self.stackedWidget_create_yaml_frame.addWidget(self.train_page)
         self.test_page = QWidget()
         self.test_page.setObjectName(u"test_page")
         self.test_general_frame = QFrame(self.test_page)
         self.test_general_frame.setObjectName(u"test_general_frame")
-        self.test_general_frame.setGeometry(QRect(0, 0, 951, 471))
+        self.test_general_frame.setGeometry(QRect(0, 0, 951, 463))
         self.test_general_frame.setFrameShape(QFrame.StyledPanel)
         self.test_general_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_36 = QGridLayout(self.test_general_frame)
+        self.gridLayout_36.setSpacing(9)
         self.gridLayout_36.setObjectName(u"gridLayout_36")
         self.horizontalSpacer_27 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
@@ -4783,7 +4877,7 @@ class Ui_MainWindow(object):
         self.test_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 913, 910))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 913, 995))
         self.gridLayout_37 = QGridLayout(self.scrollAreaWidgetContents_5)
         self.gridLayout_37.setObjectName(u"gridLayout_37")
         self.test_advanced_options_frame = QFrame(self.scrollAreaWidgetContents_5)
@@ -4847,14 +4941,16 @@ class Ui_MainWindow(object):
 
         self.test_resolution_input = QLineEdit(self.frame_41)
         self.test_resolution_input.setObjectName(u"test_resolution_input")
-        self.test_resolution_input.setMaximumSize(QSize(150, 16777215))
+        self.test_resolution_input.setMinimumSize(QSize(200, 30))
+        self.test_resolution_input.setMaximumSize(QSize(200, 30))
         self.test_resolution_input.setFont(font)
 
         self.gridLayout_43.addWidget(self.test_resolution_input, 3, 2, 1, 1)
 
         self.test_padding_input = QLineEdit(self.frame_41)
         self.test_padding_input.setObjectName(u"test_padding_input")
-        self.test_padding_input.setMaximumSize(QSize(150, 16777215))
+        self.test_padding_input.setMinimumSize(QSize(200, 30))
+        self.test_padding_input.setMaximumSize(QSize(200, 30))
         self.test_padding_input.setFont(font)
 
         self.gridLayout_43.addWidget(self.test_padding_input, 1, 2, 1, 1)
@@ -4867,7 +4963,8 @@ class Ui_MainWindow(object):
 
         self.test_overlap_input = QLineEdit(self.frame_41)
         self.test_overlap_input.setObjectName(u"test_overlap_input")
-        self.test_overlap_input.setMaximumSize(QSize(150, 16777215))
+        self.test_overlap_input.setMinimumSize(QSize(200, 30))
+        self.test_overlap_input.setMaximumSize(QSize(200, 30))
         self.test_overlap_input.setFont(font)
 
         self.gridLayout_43.addWidget(self.test_overlap_input, 0, 2, 1, 1)
@@ -4892,7 +4989,8 @@ class Ui_MainWindow(object):
         self.test_argmax_input.addItem("")
         self.test_argmax_input.addItem("")
         self.test_argmax_input.setObjectName(u"test_argmax_input")
-        self.test_argmax_input.setMaximumSize(QSize(100, 16777215))
+        self.test_argmax_input.setMinimumSize(QSize(200, 30))
+        self.test_argmax_input.setMaximumSize(QSize(200, 30))
         self.test_argmax_input.setFont(font)
 
         self.gridLayout_43.addWidget(self.test_argmax_input, 4, 2, 1, 1)
@@ -4901,7 +4999,8 @@ class Ui_MainWindow(object):
         self.test_median_padding_input.addItem("")
         self.test_median_padding_input.addItem("")
         self.test_median_padding_input.setObjectName(u"test_median_padding_input")
-        self.test_median_padding_input.setMaximumSize(QSize(100, 16777215))
+        self.test_median_padding_input.setMinimumSize(QSize(200, 30))
+        self.test_median_padding_input.setMaximumSize(QSize(200, 30))
         self.test_median_padding_input.setFont(font)
 
         self.gridLayout_43.addWidget(self.test_median_padding_input, 2, 2, 1, 1)
@@ -4921,8 +5020,8 @@ class Ui_MainWindow(object):
         self.test_apply_bin_mask_input.addItem("")
         self.test_apply_bin_mask_input.addItem("")
         self.test_apply_bin_mask_input.setObjectName(u"test_apply_bin_mask_input")
-        self.test_apply_bin_mask_input.setMinimumSize(QSize(100, 0))
-        self.test_apply_bin_mask_input.setMaximumSize(QSize(100, 16777215))
+        self.test_apply_bin_mask_input.setMinimumSize(QSize(200, 30))
+        self.test_apply_bin_mask_input.setMaximumSize(QSize(200, 30))
         self.test_apply_bin_mask_input.setFont(font)
 
         self.gridLayout_63.addWidget(self.test_apply_bin_mask_input, 0, 1, 1, 1)
@@ -4959,8 +5058,8 @@ class Ui_MainWindow(object):
         self.test_full_image_input.addItem("")
         self.test_full_image_input.addItem("")
         self.test_full_image_input.setObjectName(u"test_full_image_input")
-        self.test_full_image_input.setMinimumSize(QSize(100, 0))
-        self.test_full_image_input.setMaximumSize(QSize(100, 16777215))
+        self.test_full_image_input.setMinimumSize(QSize(200, 30))
+        self.test_full_image_input.setMaximumSize(QSize(200, 30))
         self.test_full_image_input.setFont(font)
 
         self.gridLayout_54.addWidget(self.test_full_image_input, 3, 1, 1, 1)
@@ -4969,8 +5068,8 @@ class Ui_MainWindow(object):
         self.test_merge_patches_input.addItem("")
         self.test_merge_patches_input.addItem("")
         self.test_merge_patches_input.setObjectName(u"test_merge_patches_input")
-        self.test_merge_patches_input.setMinimumSize(QSize(100, 0))
-        self.test_merge_patches_input.setMaximumSize(QSize(100, 16777215))
+        self.test_merge_patches_input.setMinimumSize(QSize(200, 30))
+        self.test_merge_patches_input.setMaximumSize(QSize(200, 30))
         self.test_merge_patches_input.setFont(font)
 
         self.gridLayout_54.addWidget(self.test_merge_patches_input, 2, 1, 1, 1)
@@ -4995,8 +5094,8 @@ class Ui_MainWindow(object):
         self.test_evaluate_input.addItem("")
         self.test_evaluate_input.addItem("")
         self.test_evaluate_input.setObjectName(u"test_evaluate_input")
-        self.test_evaluate_input.setMinimumSize(QSize(100, 0))
-        self.test_evaluate_input.setMaximumSize(QSize(100, 16777215))
+        self.test_evaluate_input.setMinimumSize(QSize(200, 30))
+        self.test_evaluate_input.setMaximumSize(QSize(200, 30))
         self.test_evaluate_input.setFont(font)
 
         self.gridLayout_54.addWidget(self.test_evaluate_input, 0, 1, 1, 1)
@@ -5011,8 +5110,8 @@ class Ui_MainWindow(object):
         self.test_per_patch_input.addItem("")
         self.test_per_patch_input.addItem("")
         self.test_per_patch_input.setObjectName(u"test_per_patch_input")
-        self.test_per_patch_input.setMinimumSize(QSize(100, 0))
-        self.test_per_patch_input.setMaximumSize(QSize(100, 16777215))
+        self.test_per_patch_input.setMinimumSize(QSize(200, 30))
+        self.test_per_patch_input.setMaximumSize(QSize(200, 30))
         self.test_per_patch_input.setFont(font)
 
         self.gridLayout_54.addWidget(self.test_per_patch_input, 1, 1, 1, 1)
@@ -5049,8 +5148,8 @@ class Ui_MainWindow(object):
         self.test_tta_input.addItem("")
         self.test_tta_input.addItem("")
         self.test_tta_input.setObjectName(u"test_tta_input")
-        self.test_tta_input.setMinimumSize(QSize(100, 0))
-        self.test_tta_input.setMaximumSize(QSize(100, 16777215))
+        self.test_tta_input.setMinimumSize(QSize(200, 30))
+        self.test_tta_input.setMaximumSize(QSize(200, 30))
         self.test_tta_input.setFont(font)
 
         self.gridLayout_53.addWidget(self.test_tta_input, 3, 1, 1, 1)
@@ -5059,8 +5158,8 @@ class Ui_MainWindow(object):
         self.test_2d_as_3d_stack_input.addItem("")
         self.test_2d_as_3d_stack_input.addItem("")
         self.test_2d_as_3d_stack_input.setObjectName(u"test_2d_as_3d_stack_input")
-        self.test_2d_as_3d_stack_input.setMinimumSize(QSize(100, 0))
-        self.test_2d_as_3d_stack_input.setMaximumSize(QSize(100, 16777215))
+        self.test_2d_as_3d_stack_input.setMinimumSize(QSize(200, 30))
+        self.test_2d_as_3d_stack_input.setMaximumSize(QSize(200, 30))
         self.test_2d_as_3d_stack_input.setFont(font)
 
         self.gridLayout_53.addWidget(self.test_2d_as_3d_stack_input, 4, 1, 1, 1)
@@ -5075,8 +5174,8 @@ class Ui_MainWindow(object):
         self.test_verbose_input.addItem("")
         self.test_verbose_input.addItem("")
         self.test_verbose_input.setObjectName(u"test_verbose_input")
-        self.test_verbose_input.setMinimumSize(QSize(100, 0))
-        self.test_verbose_input.setMaximumSize(QSize(100, 16777215))
+        self.test_verbose_input.setMinimumSize(QSize(200, 30))
+        self.test_verbose_input.setMaximumSize(QSize(200, 30))
         self.test_verbose_input.setFont(font)
 
         self.gridLayout_53.addWidget(self.test_verbose_input, 1, 1, 1, 1)
@@ -5091,8 +5190,8 @@ class Ui_MainWindow(object):
         self.test_reduce_memory_input.addItem("")
         self.test_reduce_memory_input.addItem("")
         self.test_reduce_memory_input.setObjectName(u"test_reduce_memory_input")
-        self.test_reduce_memory_input.setMinimumSize(QSize(100, 0))
-        self.test_reduce_memory_input.setMaximumSize(QSize(100, 16777215))
+        self.test_reduce_memory_input.setMinimumSize(QSize(200, 30))
+        self.test_reduce_memory_input.setMaximumSize(QSize(200, 30))
         self.test_reduce_memory_input.setFont(font)
 
         self.gridLayout_53.addWidget(self.test_reduce_memory_input, 0, 1, 1, 1)
@@ -5143,6 +5242,12 @@ class Ui_MainWindow(object):
         self.test_advanced_bn.setFont(font)
         self.test_advanced_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
+"}\n"
+"QPushButton:hover {\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
 "}")
         self.test_advanced_bn.setIcon(icon10)
 
@@ -5236,8 +5341,8 @@ class Ui_MainWindow(object):
         self.test_data_in_memory_input.addItem("")
         self.test_data_in_memory_input.addItem("")
         self.test_data_in_memory_input.setObjectName(u"test_data_in_memory_input")
-        self.test_data_in_memory_input.setMinimumSize(QSize(0, 0))
-        self.test_data_in_memory_input.setMaximumSize(QSize(100, 16777215))
+        self.test_data_in_memory_input.setMinimumSize(QSize(200, 30))
+        self.test_data_in_memory_input.setMaximumSize(QSize(200, 30))
         self.test_data_in_memory_input.setFont(font)
 
         self.gridLayout_38.addWidget(self.test_data_in_memory_input, 5, 2, 1, 1)
@@ -5256,8 +5361,8 @@ class Ui_MainWindow(object):
         self.use_val_as_test_input.addItem("")
         self.use_val_as_test_input.addItem("")
         self.use_val_as_test_input.setObjectName(u"use_val_as_test_input")
-        self.use_val_as_test_input.setMinimumSize(QSize(0, 0))
-        self.use_val_as_test_input.setMaximumSize(QSize(100, 16777215))
+        self.use_val_as_test_input.setMinimumSize(QSize(200, 30))
+        self.use_val_as_test_input.setMaximumSize(QSize(200, 30))
         self.use_val_as_test_input.setFont(font)
 
         self.gridLayout_38.addWidget(self.use_val_as_test_input, 1, 2, 1, 1)
@@ -5266,8 +5371,8 @@ class Ui_MainWindow(object):
         self.test_exists_gt_input.addItem("")
         self.test_exists_gt_input.addItem("")
         self.test_exists_gt_input.setObjectName(u"test_exists_gt_input")
-        self.test_exists_gt_input.setMinimumSize(QSize(100, 0))
-        self.test_exists_gt_input.setMaximumSize(QSize(100, 16777215))
+        self.test_exists_gt_input.setMinimumSize(QSize(200, 30))
+        self.test_exists_gt_input.setMaximumSize(QSize(200, 30))
         self.test_exists_gt_input.setFont(font)
 
         self.gridLayout_38.addWidget(self.test_exists_gt_input, 3, 2, 1, 1)
@@ -5308,7 +5413,7 @@ class Ui_MainWindow(object):
         self.scrollArea_8.setWidgetResizable(True)
         self.scrollAreaWidgetContents_12 = QWidget()
         self.scrollAreaWidgetContents_12.setObjectName(u"scrollAreaWidgetContents_12")
-        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 364, 271))
+        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 927, 354))
         self.gridLayout_61 = QGridLayout(self.scrollAreaWidgetContents_12)
         self.gridLayout_61.setObjectName(u"gridLayout_61")
         self.label_82 = QLabel(self.scrollAreaWidgetContents_12)
@@ -5329,8 +5434,8 @@ class Ui_MainWindow(object):
         self.sem_seg_check_data_input.addItem("")
         self.sem_seg_check_data_input.addItem("")
         self.sem_seg_check_data_input.setObjectName(u"sem_seg_check_data_input")
-        self.sem_seg_check_data_input.setMinimumSize(QSize(100, 30))
-        self.sem_seg_check_data_input.setMaximumSize(QSize(100, 16777215))
+        self.sem_seg_check_data_input.setMinimumSize(QSize(200, 30))
+        self.sem_seg_check_data_input.setMaximumSize(QSize(200, 30))
         self.sem_seg_check_data_input.setFont(font)
 
         self.gridLayout_42.addWidget(self.sem_seg_check_data_input, 0, 1, 1, 1)
@@ -5388,14 +5493,16 @@ class Ui_MainWindow(object):
 
         self.sem_seg_z_filtering_size_input = QLineEdit(self.frame_52)
         self.sem_seg_z_filtering_size_input.setObjectName(u"sem_seg_z_filtering_size_input")
-        self.sem_seg_z_filtering_size_input.setMaximumSize(QSize(100, 16777215))
+        self.sem_seg_z_filtering_size_input.setMinimumSize(QSize(200, 30))
+        self.sem_seg_z_filtering_size_input.setMaximumSize(QSize(200, 30))
         self.sem_seg_z_filtering_size_input.setFont(font)
 
         self.gridLayout_60.addWidget(self.sem_seg_z_filtering_size_input, 3, 1, 1, 1)
 
         self.sem_seg_yz_filtering_size_input = QLineEdit(self.frame_52)
         self.sem_seg_yz_filtering_size_input.setObjectName(u"sem_seg_yz_filtering_size_input")
-        self.sem_seg_yz_filtering_size_input.setMaximumSize(QSize(100, 16777215))
+        self.sem_seg_yz_filtering_size_input.setMinimumSize(QSize(200, 30))
+        self.sem_seg_yz_filtering_size_input.setMaximumSize(QSize(200, 30))
         self.sem_seg_yz_filtering_size_input.setFont(font)
 
         self.gridLayout_60.addWidget(self.sem_seg_yz_filtering_size_input, 1, 1, 1, 1)
@@ -5404,8 +5511,8 @@ class Ui_MainWindow(object):
         self.sem_seg_yz_filtering_input.addItem("")
         self.sem_seg_yz_filtering_input.addItem("")
         self.sem_seg_yz_filtering_input.setObjectName(u"sem_seg_yz_filtering_input")
-        self.sem_seg_yz_filtering_input.setMinimumSize(QSize(100, 0))
-        self.sem_seg_yz_filtering_input.setMaximumSize(QSize(100, 16777215))
+        self.sem_seg_yz_filtering_input.setMinimumSize(QSize(200, 30))
+        self.sem_seg_yz_filtering_input.setMaximumSize(QSize(200, 30))
         self.sem_seg_yz_filtering_input.setFont(font)
 
         self.gridLayout_60.addWidget(self.sem_seg_yz_filtering_input, 0, 1, 1, 1)
@@ -5414,8 +5521,8 @@ class Ui_MainWindow(object):
         self.sem_seg_z_filtering_input.addItem("")
         self.sem_seg_z_filtering_input.addItem("")
         self.sem_seg_z_filtering_input.setObjectName(u"sem_seg_z_filtering_input")
-        self.sem_seg_z_filtering_input.setMinimumSize(QSize(100, 0))
-        self.sem_seg_z_filtering_input.setMaximumSize(QSize(100, 16777215))
+        self.sem_seg_z_filtering_input.setMinimumSize(QSize(200, 30))
+        self.sem_seg_z_filtering_input.setMaximumSize(QSize(200, 30))
         self.sem_seg_z_filtering_input.setFont(font)
 
         self.gridLayout_60.addWidget(self.sem_seg_z_filtering_input, 2, 1, 1, 1)
@@ -5451,7 +5558,7 @@ class Ui_MainWindow(object):
         self.scrollArea_9.setWidgetResizable(True)
         self.scrollAreaWidgetContents_13 = QWidget()
         self.scrollAreaWidgetContents_13.setObjectName(u"scrollAreaWidgetContents_13")
-        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 482, 1038))
+        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, -769, 913, 1128))
         self.gridLayout_44 = QGridLayout(self.scrollAreaWidgetContents_13)
         self.gridLayout_44.setObjectName(u"gridLayout_44")
         self.horizontalSpacer_35 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
@@ -5481,7 +5588,8 @@ class Ui_MainWindow(object):
         self.gridLayout_58.setObjectName(u"gridLayout_58")
         self.inst_seg_repare_large_blobs_input = QLineEdit(self.frame_50)
         self.inst_seg_repare_large_blobs_input.setObjectName(u"inst_seg_repare_large_blobs_input")
-        self.inst_seg_repare_large_blobs_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_repare_large_blobs_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_repare_large_blobs_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_repare_large_blobs_input.setFont(font)
 
         self.gridLayout_58.addWidget(self.inst_seg_repare_large_blobs_input, 6, 1, 1, 1)
@@ -5508,13 +5616,16 @@ class Ui_MainWindow(object):
         self.inst_seg_voronoi_input.addItem("")
         self.inst_seg_voronoi_input.addItem("")
         self.inst_seg_voronoi_input.setObjectName(u"inst_seg_voronoi_input")
+        self.inst_seg_voronoi_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_voronoi_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_voronoi_input.setFont(font)
 
         self.gridLayout_58.addWidget(self.inst_seg_voronoi_input, 5, 1, 1, 1)
 
         self.inst_seg_circularity_filtering_input = QLineEdit(self.frame_50)
         self.inst_seg_circularity_filtering_input.setObjectName(u"inst_seg_circularity_filtering_input")
-        self.inst_seg_circularity_filtering_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_circularity_filtering_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_circularity_filtering_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_circularity_filtering_input.setFont(font)
 
         self.gridLayout_58.addWidget(self.inst_seg_circularity_filtering_input, 4, 1, 1, 1)
@@ -5545,14 +5656,16 @@ class Ui_MainWindow(object):
 
         self.inst_seg_z_filtering_size_input = QLineEdit(self.frame_50)
         self.inst_seg_z_filtering_size_input.setObjectName(u"inst_seg_z_filtering_size_input")
-        self.inst_seg_z_filtering_size_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_z_filtering_size_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_z_filtering_size_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_z_filtering_size_input.setFont(font)
 
         self.gridLayout_58.addWidget(self.inst_seg_z_filtering_size_input, 3, 1, 1, 1)
 
         self.inst_seg_yz_filtering_size_input = QLineEdit(self.frame_50)
         self.inst_seg_yz_filtering_size_input.setObjectName(u"inst_seg_yz_filtering_size_input")
-        self.inst_seg_yz_filtering_size_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_yz_filtering_size_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_yz_filtering_size_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_yz_filtering_size_input.setFont(font)
 
         self.gridLayout_58.addWidget(self.inst_seg_yz_filtering_size_input, 1, 1, 1, 1)
@@ -5561,8 +5674,8 @@ class Ui_MainWindow(object):
         self.inst_seg_yz_filtering_input.addItem("")
         self.inst_seg_yz_filtering_input.addItem("")
         self.inst_seg_yz_filtering_input.setObjectName(u"inst_seg_yz_filtering_input")
-        self.inst_seg_yz_filtering_input.setMinimumSize(QSize(100, 0))
-        self.inst_seg_yz_filtering_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_yz_filtering_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_yz_filtering_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_yz_filtering_input.setFont(font)
 
         self.gridLayout_58.addWidget(self.inst_seg_yz_filtering_input, 0, 1, 1, 1)
@@ -5571,8 +5684,8 @@ class Ui_MainWindow(object):
         self.inst_seg_z_filtering_input.addItem("")
         self.inst_seg_z_filtering_input.addItem("")
         self.inst_seg_z_filtering_input.setObjectName(u"inst_seg_z_filtering_input")
-        self.inst_seg_z_filtering_input.setMinimumSize(QSize(100, 0))
-        self.inst_seg_z_filtering_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_z_filtering_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_z_filtering_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_z_filtering_input.setFont(font)
 
         self.gridLayout_58.addWidget(self.inst_seg_z_filtering_input, 2, 1, 1, 1)
@@ -5591,7 +5704,8 @@ class Ui_MainWindow(object):
         self.inst_seg_remove_close_points_input.addItem("")
         self.inst_seg_remove_close_points_input.addItem("")
         self.inst_seg_remove_close_points_input.setObjectName(u"inst_seg_remove_close_points_input")
-        self.inst_seg_remove_close_points_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_remove_close_points_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_remove_close_points_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_remove_close_points_input.setFont(font)
 
         self.gridLayout_58.addWidget(self.inst_seg_remove_close_points_input, 7, 1, 1, 1)
@@ -5604,7 +5718,8 @@ class Ui_MainWindow(object):
 
         self.inst_seg_remove_close_points_radius_input = QLineEdit(self.frame_50)
         self.inst_seg_remove_close_points_radius_input.setObjectName(u"inst_seg_remove_close_points_radius_input")
-        self.inst_seg_remove_close_points_radius_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_remove_close_points_radius_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_remove_close_points_radius_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_remove_close_points_radius_input.setFont(font)
 
         self.gridLayout_58.addWidget(self.inst_seg_remove_close_points_radius_input, 8, 1, 1, 1)
@@ -5621,7 +5736,7 @@ class Ui_MainWindow(object):
         self.gridLayout_45.setObjectName(u"gridLayout_45")
         self.inst_seg_b_channel_th_input = QLineEdit(self.frame_42)
         self.inst_seg_b_channel_th_input.setObjectName(u"inst_seg_b_channel_th_input")
-        self.inst_seg_b_channel_th_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_b_channel_th_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_b_channel_th_input.setFont(font)
 
         self.gridLayout_45.addWidget(self.inst_seg_b_channel_th_input, 0, 1, 1, 1)
@@ -5658,28 +5773,28 @@ class Ui_MainWindow(object):
 
         self.inst_seg_d_channel_th_input = QLineEdit(self.frame_42)
         self.inst_seg_d_channel_th_input.setObjectName(u"inst_seg_d_channel_th_input")
-        self.inst_seg_d_channel_th_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_d_channel_th_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_d_channel_th_input.setFont(font)
 
         self.gridLayout_45.addWidget(self.inst_seg_d_channel_th_input, 2, 1, 1, 1)
 
         self.inst_seg_c_channel_th_input = QLineEdit(self.frame_42)
         self.inst_seg_c_channel_th_input.setObjectName(u"inst_seg_c_channel_th_input")
-        self.inst_seg_c_channel_th_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_c_channel_th_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_c_channel_th_input.setFont(font)
 
         self.gridLayout_45.addWidget(self.inst_seg_c_channel_th_input, 1, 1, 1, 1)
 
         self.inst_seg_fore_mask_th_input = QLineEdit(self.frame_42)
         self.inst_seg_fore_mask_th_input.setObjectName(u"inst_seg_fore_mask_th_input")
-        self.inst_seg_fore_mask_th_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_fore_mask_th_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_fore_mask_th_input.setFont(font)
 
         self.gridLayout_45.addWidget(self.inst_seg_fore_mask_th_input, 6, 1, 1, 1)
 
         self.inst_seg_p_channel_th_input = QLineEdit(self.frame_42)
         self.inst_seg_p_channel_th_input.setObjectName(u"inst_seg_p_channel_th_input")
-        self.inst_seg_p_channel_th_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_p_channel_th_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_p_channel_th_input.setFont(font)
 
         self.gridLayout_45.addWidget(self.inst_seg_p_channel_th_input, 5, 1, 1, 1)
@@ -5706,7 +5821,7 @@ class Ui_MainWindow(object):
 
         self.inst_seg_moph_op_rad_input = QLineEdit(self.frame_43)
         self.inst_seg_moph_op_rad_input.setObjectName(u"inst_seg_moph_op_rad_input")
-        self.inst_seg_moph_op_rad_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_moph_op_rad_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_moph_op_rad_input.setFont(font)
 
         self.gridLayout_46.addWidget(self.inst_seg_moph_op_rad_input, 2, 3, 1, 1)
@@ -5725,7 +5840,8 @@ class Ui_MainWindow(object):
 
         self.inst_seg_small_obj_fil_before_size_input = QLineEdit(self.frame_43)
         self.inst_seg_small_obj_fil_before_size_input.setObjectName(u"inst_seg_small_obj_fil_before_size_input")
-        self.inst_seg_small_obj_fil_before_size_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_small_obj_fil_before_size_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_small_obj_fil_before_size_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_small_obj_fil_before_size_input.setFont(font)
 
         self.gridLayout_46.addWidget(self.inst_seg_small_obj_fil_before_size_input, 8, 3, 1, 1)
@@ -5735,7 +5851,7 @@ class Ui_MainWindow(object):
         self.inst_seg_ero_dil_fore_input.addItem("")
         self.inst_seg_ero_dil_fore_input.setObjectName(u"inst_seg_ero_dil_fore_input")
         self.inst_seg_ero_dil_fore_input.setMinimumSize(QSize(100, 0))
-        self.inst_seg_ero_dil_fore_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_ero_dil_fore_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_ero_dil_fore_input.setFont(font)
 
         self.gridLayout_46.addWidget(self.inst_seg_ero_dil_fore_input, 4, 3, 1, 1)
@@ -5750,8 +5866,8 @@ class Ui_MainWindow(object):
         self.inst_seg_small_obj_fil_after_input.addItem("")
         self.inst_seg_small_obj_fil_after_input.addItem("")
         self.inst_seg_small_obj_fil_after_input.setObjectName(u"inst_seg_small_obj_fil_after_input")
-        self.inst_seg_small_obj_fil_after_input.setMinimumSize(QSize(100, 0))
-        self.inst_seg_small_obj_fil_after_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_small_obj_fil_after_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_small_obj_fil_after_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_small_obj_fil_after_input.setFont(font)
 
         self.gridLayout_46.addWidget(self.inst_seg_small_obj_fil_after_input, 11, 3, 1, 1)
@@ -5776,7 +5892,8 @@ class Ui_MainWindow(object):
 
         self.inst_seg_small_obj_fil_after_size_input = QLineEdit(self.frame_43)
         self.inst_seg_small_obj_fil_after_size_input.setObjectName(u"inst_seg_small_obj_fil_after_size_input")
-        self.inst_seg_small_obj_fil_after_size_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_small_obj_fil_after_size_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_small_obj_fil_after_size_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_small_obj_fil_after_size_input.setFont(font)
 
         self.gridLayout_46.addWidget(self.inst_seg_small_obj_fil_after_size_input, 12, 3, 1, 1)
@@ -5789,7 +5906,7 @@ class Ui_MainWindow(object):
 
         self.inst_seg_fore_dil_input = QLineEdit(self.frame_43)
         self.inst_seg_fore_dil_input.setObjectName(u"inst_seg_fore_dil_input")
-        self.inst_seg_fore_dil_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_fore_dil_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_fore_dil_input.setFont(font)
 
         self.gridLayout_46.addWidget(self.inst_seg_fore_dil_input, 5, 3, 1, 1)
@@ -5798,8 +5915,8 @@ class Ui_MainWindow(object):
         self.inst_seg_small_obj_fil_before_input.addItem("")
         self.inst_seg_small_obj_fil_before_input.addItem("")
         self.inst_seg_small_obj_fil_before_input.setObjectName(u"inst_seg_small_obj_fil_before_input")
-        self.inst_seg_small_obj_fil_before_input.setMinimumSize(QSize(100, 0))
-        self.inst_seg_small_obj_fil_before_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_small_obj_fil_before_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_small_obj_fil_before_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_small_obj_fil_before_input.setFont(font)
 
         self.gridLayout_46.addWidget(self.inst_seg_small_obj_fil_before_input, 7, 3, 1, 1)
@@ -5812,7 +5929,8 @@ class Ui_MainWindow(object):
 
         self.inst_seg_fore_ero_input = QLineEdit(self.frame_43)
         self.inst_seg_fore_ero_input.setObjectName(u"inst_seg_fore_ero_input")
-        self.inst_seg_fore_ero_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_fore_ero_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_fore_ero_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_fore_ero_input.setFont(font)
 
         self.gridLayout_46.addWidget(self.inst_seg_fore_ero_input, 6, 3, 1, 1)
@@ -5825,7 +5943,7 @@ class Ui_MainWindow(object):
 
         self.inst_seg_moph_op_input = QLineEdit(self.frame_43)
         self.inst_seg_moph_op_input.setObjectName(u"inst_seg_moph_op_input")
-        self.inst_seg_moph_op_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_moph_op_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_moph_op_input.setFont(font)
 
         self.gridLayout_46.addWidget(self.inst_seg_moph_op_input, 1, 3, 1, 1)
@@ -5834,8 +5952,8 @@ class Ui_MainWindow(object):
         self.inst_seg_save_water_files_input.addItem("")
         self.inst_seg_save_water_files_input.addItem("")
         self.inst_seg_save_water_files_input.setObjectName(u"inst_seg_save_water_files_input")
-        self.inst_seg_save_water_files_input.setMinimumSize(QSize(100, 0))
-        self.inst_seg_save_water_files_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_save_water_files_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_save_water_files_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_save_water_files_input.setFont(font)
 
         self.gridLayout_46.addWidget(self.inst_seg_save_water_files_input, 13, 3, 1, 1)
@@ -5887,20 +6005,24 @@ class Ui_MainWindow(object):
         self.inst_seg_matching_stats_input.addItem("")
         self.inst_seg_matching_stats_input.addItem("")
         self.inst_seg_matching_stats_input.setObjectName(u"inst_seg_matching_stats_input")
-        self.inst_seg_matching_stats_input.setMinimumSize(QSize(100, 0))
-        self.inst_seg_matching_stats_input.setMaximumSize(QSize(100, 16777215))
+        self.inst_seg_matching_stats_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_matching_stats_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_matching_stats_input.setFont(font)
 
         self.gridLayout_55.addWidget(self.inst_seg_matching_stats_input, 0, 1, 1, 1)
 
         self.inst_seg_matching_stats_ths_input = QLineEdit(self.inst_seg_metrics_frame)
         self.inst_seg_matching_stats_ths_input.setObjectName(u"inst_seg_matching_stats_ths_input")
+        self.inst_seg_matching_stats_ths_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_matching_stats_ths_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_matching_stats_ths_input.setFont(font)
 
         self.gridLayout_55.addWidget(self.inst_seg_matching_stats_ths_input, 1, 1, 1, 1)
 
         self.inst_seg_matching_stats_colores_img_ths_input = QLineEdit(self.inst_seg_metrics_frame)
         self.inst_seg_matching_stats_colores_img_ths_input.setObjectName(u"inst_seg_matching_stats_colores_img_ths_input")
+        self.inst_seg_matching_stats_colores_img_ths_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_matching_stats_colores_img_ths_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_matching_stats_colores_img_ths_input.setFont(font)
 
         self.gridLayout_55.addWidget(self.inst_seg_matching_stats_colores_img_ths_input, 2, 1, 1, 1)
@@ -5934,7 +6056,7 @@ class Ui_MainWindow(object):
         self.scrollArea_10.setWidgetResizable(True)
         self.scrollAreaWidgetContents_14 = QWidget()
         self.scrollAreaWidgetContents_14.setObjectName(u"scrollAreaWidgetContents_14")
-        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 913, 652))
+        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 913, 732))
         self.gridLayout_47 = QGridLayout(self.scrollAreaWidgetContents_14)
         self.gridLayout_47.setObjectName(u"gridLayout_47")
         self.label_100 = QLabel(self.scrollAreaWidgetContents_14)
@@ -5959,7 +6081,8 @@ class Ui_MainWindow(object):
 
         self.det_circularity_filtering_input = QLineEdit(self.frame_51)
         self.det_circularity_filtering_input.setObjectName(u"det_circularity_filtering_input")
-        self.det_circularity_filtering_input.setMaximumSize(QSize(100, 16777215))
+        self.det_circularity_filtering_input.setMinimumSize(QSize(200, 30))
+        self.det_circularity_filtering_input.setMaximumSize(QSize(200, 30))
         self.det_circularity_filtering_input.setFont(font)
 
         self.gridLayout_59.addWidget(self.det_circularity_filtering_input, 5, 1, 1, 1)
@@ -5968,7 +6091,8 @@ class Ui_MainWindow(object):
         self.det_watershed_input.addItem("")
         self.det_watershed_input.addItem("")
         self.det_watershed_input.setObjectName(u"det_watershed_input")
-        self.det_watershed_input.setMaximumSize(QSize(100, 16777215))
+        self.det_watershed_input.setMinimumSize(QSize(200, 30))
+        self.det_watershed_input.setMaximumSize(QSize(200, 30))
         self.det_watershed_input.setFont(font)
 
         self.gridLayout_59.addWidget(self.det_watershed_input, 8, 1, 1, 1)
@@ -6005,25 +6129,32 @@ class Ui_MainWindow(object):
 
         self.det_watershed_first_dilation_input = QLineEdit(self.frame_51)
         self.det_watershed_first_dilation_input.setObjectName(u"det_watershed_first_dilation_input")
+        self.det_watershed_first_dilation_input.setMinimumSize(QSize(200, 30))
+        self.det_watershed_first_dilation_input.setMaximumSize(QSize(200, 30))
         self.det_watershed_first_dilation_input.setFont(font)
 
         self.gridLayout_59.addWidget(self.det_watershed_first_dilation_input, 9, 1, 1, 1)
 
         self.det_watershed_donuts_classes_input = QLineEdit(self.frame_51)
         self.det_watershed_donuts_classes_input.setObjectName(u"det_watershed_donuts_classes_input")
+        self.det_watershed_donuts_classes_input.setMinimumSize(QSize(200, 30))
+        self.det_watershed_donuts_classes_input.setMaximumSize(QSize(200, 30))
         self.det_watershed_donuts_classes_input.setFont(font)
 
         self.gridLayout_59.addWidget(self.det_watershed_donuts_classes_input, 10, 1, 1, 1)
 
         self.det_watershed_donuts_patch_input = QLineEdit(self.frame_51)
         self.det_watershed_donuts_patch_input.setObjectName(u"det_watershed_donuts_patch_input")
+        self.det_watershed_donuts_patch_input.setMinimumSize(QSize(200, 30))
+        self.det_watershed_donuts_patch_input.setMaximumSize(QSize(200, 30))
         self.det_watershed_donuts_patch_input.setFont(font)
 
         self.gridLayout_59.addWidget(self.det_watershed_donuts_patch_input, 11, 1, 1, 1)
 
         self.det_watershed_donuts_nucleus_diam_input = QLineEdit(self.frame_51)
         self.det_watershed_donuts_nucleus_diam_input.setObjectName(u"det_watershed_donuts_nucleus_diam_input")
-        self.det_watershed_donuts_nucleus_diam_input.setMaximumSize(QSize(100, 16777215))
+        self.det_watershed_donuts_nucleus_diam_input.setMinimumSize(QSize(200, 30))
+        self.det_watershed_donuts_nucleus_diam_input.setMaximumSize(QSize(200, 30))
         self.det_watershed_donuts_nucleus_diam_input.setFont(font)
 
         self.gridLayout_59.addWidget(self.det_watershed_donuts_nucleus_diam_input, 12, 1, 1, 1)
@@ -6044,8 +6175,8 @@ class Ui_MainWindow(object):
         self.det_z_filtering_input.addItem("")
         self.det_z_filtering_input.addItem("")
         self.det_z_filtering_input.setObjectName(u"det_z_filtering_input")
-        self.det_z_filtering_input.setMinimumSize(QSize(100, 0))
-        self.det_z_filtering_input.setMaximumSize(QSize(100, 16777215))
+        self.det_z_filtering_input.setMinimumSize(QSize(200, 30))
+        self.det_z_filtering_input.setMaximumSize(QSize(200, 30))
         self.det_z_filtering_input.setFont(font)
 
         self.gridLayout_59.addWidget(self.det_z_filtering_input, 2, 1, 1, 1)
@@ -6054,15 +6185,16 @@ class Ui_MainWindow(object):
         self.det_yz_filtering_input.addItem("")
         self.det_yz_filtering_input.addItem("")
         self.det_yz_filtering_input.setObjectName(u"det_yz_filtering_input")
-        self.det_yz_filtering_input.setMinimumSize(QSize(100, 0))
-        self.det_yz_filtering_input.setMaximumSize(QSize(100, 16777215))
+        self.det_yz_filtering_input.setMinimumSize(QSize(200, 30))
+        self.det_yz_filtering_input.setMaximumSize(QSize(200, 30))
         self.det_yz_filtering_input.setFont(font)
 
         self.gridLayout_59.addWidget(self.det_yz_filtering_input, 0, 1, 1, 1)
 
         self.det_z_filtering_size_input = QLineEdit(self.frame_51)
         self.det_z_filtering_size_input.setObjectName(u"det_z_filtering_size_input")
-        self.det_z_filtering_size_input.setMaximumSize(QSize(100, 16777215))
+        self.det_z_filtering_size_input.setMinimumSize(QSize(200, 30))
+        self.det_z_filtering_size_input.setMaximumSize(QSize(200, 30))
         self.det_z_filtering_size_input.setFont(font)
 
         self.gridLayout_59.addWidget(self.det_z_filtering_size_input, 3, 1, 1, 1)
@@ -6075,7 +6207,8 @@ class Ui_MainWindow(object):
 
         self.det_yz_filtering_size_input = QLineEdit(self.frame_51)
         self.det_yz_filtering_size_input.setObjectName(u"det_yz_filtering_size_input")
-        self.det_yz_filtering_size_input.setMaximumSize(QSize(100, 16777215))
+        self.det_yz_filtering_size_input.setMinimumSize(QSize(200, 30))
+        self.det_yz_filtering_size_input.setMaximumSize(QSize(200, 30))
         self.det_yz_filtering_size_input.setFont(font)
 
         self.gridLayout_59.addWidget(self.det_yz_filtering_size_input, 1, 1, 1, 1)
@@ -6088,7 +6221,8 @@ class Ui_MainWindow(object):
 
         self.det_remove_close_points_radius_input = QLineEdit(self.frame_51)
         self.det_remove_close_points_radius_input.setObjectName(u"det_remove_close_points_radius_input")
-        self.det_remove_close_points_radius_input.setMaximumSize(QSize(100, 16777215))
+        self.det_remove_close_points_radius_input.setMinimumSize(QSize(200, 30))
+        self.det_remove_close_points_radius_input.setMaximumSize(QSize(200, 30))
         self.det_remove_close_points_radius_input.setFont(font)
 
         self.gridLayout_59.addWidget(self.det_remove_close_points_radius_input, 7, 1, 1, 1)
@@ -6109,7 +6243,8 @@ class Ui_MainWindow(object):
         self.det_remove_close_points_input.addItem("")
         self.det_remove_close_points_input.addItem("")
         self.det_remove_close_points_input.setObjectName(u"det_remove_close_points_input")
-        self.det_remove_close_points_input.setMaximumSize(QSize(100, 16777215))
+        self.det_remove_close_points_input.setMinimumSize(QSize(200, 30))
+        self.det_remove_close_points_input.setMaximumSize(QSize(200, 30))
         self.det_remove_close_points_input.setFont(font)
 
         self.gridLayout_59.addWidget(self.det_remove_close_points_input, 6, 1, 1, 1)
@@ -6124,8 +6259,8 @@ class Ui_MainWindow(object):
         self.det_data_watetshed_check_input.addItem("")
         self.det_data_watetshed_check_input.addItem("")
         self.det_data_watetshed_check_input.setObjectName(u"det_data_watetshed_check_input")
-        self.det_data_watetshed_check_input.setMinimumSize(QSize(100, 0))
-        self.det_data_watetshed_check_input.setMaximumSize(QSize(100, 16777215))
+        self.det_data_watetshed_check_input.setMinimumSize(QSize(200, 30))
+        self.det_data_watetshed_check_input.setMaximumSize(QSize(200, 30))
         self.det_data_watetshed_check_input.setFont(font)
 
         self.gridLayout_59.addWidget(self.det_data_watetshed_check_input, 13, 1, 1, 1)
@@ -6168,7 +6303,8 @@ class Ui_MainWindow(object):
 
         self.det_tolerance_input = QLineEdit(self.det_metrics_frame)
         self.det_tolerance_input.setObjectName(u"det_tolerance_input")
-        self.det_tolerance_input.setMaximumSize(QSize(100, 16777215))
+        self.det_tolerance_input.setMinimumSize(QSize(200, 30))
+        self.det_tolerance_input.setMaximumSize(QSize(200, 30))
         self.det_tolerance_input.setFont(font)
 
         self.gridLayout_41.addWidget(self.det_tolerance_input, 0, 1, 1, 1)
@@ -6199,7 +6335,8 @@ class Ui_MainWindow(object):
 
         self.det_min_th_to_be_peak_input = QLineEdit(self.frame_54)
         self.det_min_th_to_be_peak_input.setObjectName(u"det_min_th_to_be_peak_input")
-        self.det_min_th_to_be_peak_input.setMaximumSize(QSize(100, 16777215))
+        self.det_min_th_to_be_peak_input.setMinimumSize(QSize(200, 30))
+        self.det_min_th_to_be_peak_input.setMaximumSize(QSize(200, 30))
         self.det_min_th_to_be_peak_input.setFont(font)
 
         self.gridLayout_62.addWidget(self.det_min_th_to_be_peak_input, 1, 1, 1, 1)
@@ -6214,8 +6351,8 @@ class Ui_MainWindow(object):
         self.det_local_max_coords_input.addItem("")
         self.det_local_max_coords_input.addItem("")
         self.det_local_max_coords_input.setObjectName(u"det_local_max_coords_input")
-        self.det_local_max_coords_input.setMinimumSize(QSize(100, 0))
-        self.det_local_max_coords_input.setMaximumSize(QSize(100, 16777215))
+        self.det_local_max_coords_input.setMinimumSize(QSize(200, 30))
+        self.det_local_max_coords_input.setMaximumSize(QSize(200, 30))
         self.det_local_max_coords_input.setFont(font)
 
         self.gridLayout_62.addWidget(self.det_local_max_coords_input, 0, 1, 1, 1)
@@ -6243,7 +6380,7 @@ class Ui_MainWindow(object):
         self.scrollArea_11.setWidgetResizable(True)
         self.scrollAreaWidgetContents_15 = QWidget()
         self.scrollAreaWidgetContents_15.setObjectName(u"scrollAreaWidgetContents_15")
-        self.scrollAreaWidgetContents_15.setGeometry(QRect(0, 0, 372, 44))
+        self.scrollAreaWidgetContents_15.setGeometry(QRect(0, 0, 927, 354))
         self.gridLayout_64 = QGridLayout(self.scrollAreaWidgetContents_15)
         self.gridLayout_64.setObjectName(u"gridLayout_64")
         self.verticalSpacer_27 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -6276,7 +6413,7 @@ class Ui_MainWindow(object):
         self.scrollArea_12.setWidgetResizable(True)
         self.scrollAreaWidgetContents_16 = QWidget()
         self.scrollAreaWidgetContents_16.setObjectName(u"scrollAreaWidgetContents_16")
-        self.scrollAreaWidgetContents_16.setGeometry(QRect(0, 0, 426, 44))
+        self.scrollAreaWidgetContents_16.setGeometry(QRect(0, 0, 927, 354))
         self.gridLayout_65 = QGridLayout(self.scrollAreaWidgetContents_16)
         self.gridLayout_65.setObjectName(u"gridLayout_65")
         self.label_102 = QLabel(self.scrollAreaWidgetContents_16)
@@ -6309,7 +6446,7 @@ class Ui_MainWindow(object):
         self.scrollArea_13.setWidgetResizable(True)
         self.scrollAreaWidgetContents_17 = QWidget()
         self.scrollAreaWidgetContents_17.setObjectName(u"scrollAreaWidgetContents_17")
-        self.scrollAreaWidgetContents_17.setGeometry(QRect(0, 0, 488, 44))
+        self.scrollAreaWidgetContents_17.setGeometry(QRect(0, 0, 927, 354))
         self.gridLayout_66 = QGridLayout(self.scrollAreaWidgetContents_17)
         self.gridLayout_66.setObjectName(u"gridLayout_66")
         self.label_106 = QLabel(self.scrollAreaWidgetContents_17)
@@ -6342,7 +6479,7 @@ class Ui_MainWindow(object):
         self.scrollArea_14.setWidgetResizable(True)
         self.scrollAreaWidgetContents_18 = QWidget()
         self.scrollAreaWidgetContents_18.setObjectName(u"scrollAreaWidgetContents_18")
-        self.scrollAreaWidgetContents_18.setGeometry(QRect(0, 0, 399, 44))
+        self.scrollAreaWidgetContents_18.setGeometry(QRect(0, 0, 927, 354))
         self.gridLayout_67 = QGridLayout(self.scrollAreaWidgetContents_18)
         self.gridLayout_67.setObjectName(u"gridLayout_67")
         self.label_111 = QLabel(self.scrollAreaWidgetContents_18)
@@ -6369,7 +6506,11 @@ class Ui_MainWindow(object):
 
         self.test_tab_widget.addTab(self.test_workflow_specific_tab, "")
 
-        self.gridLayout_36.addWidget(self.test_tab_widget, 1, 0, 1, 2)
+        self.gridLayout_36.addWidget(self.test_tab_widget, 2, 0, 1, 2)
+
+        self.verticalSpacer_12 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.gridLayout_36.addItem(self.verticalSpacer_12, 1, 0, 1, 1)
 
         self.stackedWidget_create_yaml_frame.addWidget(self.test_page)
 
@@ -6405,10 +6546,10 @@ class Ui_MainWindow(object):
 "	background-color: rgba(0,0,0,0);\n"
 "}\n"
 "QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
 "}\n"
 "QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
 "}")
         icon11 = QIcon()
         icon11.addFile(u"images/bn_images/back.png", QSize(), QIcon.Normal, QIcon.Off)
@@ -6763,7 +6904,7 @@ class Ui_MainWindow(object):
 
         self.select_yaml_name_label = QTextBrowser(self.frame_27)
         self.select_yaml_name_label.setObjectName(u"select_yaml_name_label")
-        self.select_yaml_name_label.setMinimumSize(QSize(0, 0))
+        self.select_yaml_name_label.setMinimumSize(QSize(0, 30))
         self.select_yaml_name_label.setMaximumSize(QSize(500, 30))
         self.select_yaml_name_label.setFont(font)
         self.select_yaml_name_label.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -6775,7 +6916,7 @@ class Ui_MainWindow(object):
 
         self.output_folder_input = QTextBrowser(self.frame_27)
         self.output_folder_input.setObjectName(u"output_folder_input")
-        self.output_folder_input.setMinimumSize(QSize(0, 0))
+        self.output_folder_input.setMinimumSize(QSize(0, 30))
         self.output_folder_input.setMaximumSize(QSize(500, 30))
         self.output_folder_input.setFont(font)
         self.output_folder_input.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -6787,6 +6928,7 @@ class Ui_MainWindow(object):
 
         self.job_name_input = QPlainTextEdit(self.frame_27)
         self.job_name_input.setObjectName(u"job_name_input")
+        self.job_name_input.setMinimumSize(QSize(0, 30))
         self.job_name_input.setMaximumSize(QSize(500, 30))
         self.job_name_input.setFont(font)
         self.job_name_input.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -6828,9 +6970,9 @@ class Ui_MainWindow(object):
         self.stackedWidget.setCurrentIndex(1)
         self.stackedWidget_create_yaml_frame.setCurrentIndex(0)
         self.train_tab_widget.setCurrentIndex(0)
-        self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(6)
+        self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(0)
         self.test_tab_widget.setCurrentIndex(0)
-        self.test_workflow_specific_tab_stackedWidget.setCurrentIndex(2)
+        self.test_workflow_specific_tab_stackedWidget.setCurrentIndex(4)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -6883,13 +7025,13 @@ class Ui_MainWindow(object):
         self.continue_yaml_bn.setText(QCoreApplication.translate("MainWindow", u"Continue with my own YAML file", None))
         self.left_arrow_bn.setText("")
         self.workflow_view1_label.setText("")
-        self.workflow_view1_seemore_bn.setText(QCoreApplication.translate("MainWindow", u"                            See more . . .", None))
+        self.workflow_view1_seemore_bn.setText(QCoreApplication.translate("MainWindow", u"See more . . .", None))
         self.workflow_view1_name_label.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.workflow_view2_label.setText("")
-        self.workflow_view2_seemore_bn.setText(QCoreApplication.translate("MainWindow", u"                            See more . . .", None))
+        self.workflow_view2_seemore_bn.setText(QCoreApplication.translate("MainWindow", u"See more . . .", None))
         self.workflow_view2_name_label.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.workflow_view3_label.setText("")
-        self.workflow_view3_seemore_bn.setText(QCoreApplication.translate("MainWindow", u"                            See more . . .", None))
+        self.workflow_view3_seemore_bn.setText(QCoreApplication.translate("MainWindow", u"See more . . .", None))
         self.workflow_view3_name_label.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.right_arrow_bn.setText("")
 #if QT_CONFIG(tooltip)
@@ -6944,6 +7086,13 @@ class Ui_MainWindow(object):
         self.goptions_browse_yaml_path_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to store the YAML file</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.goptions_browse_yaml_path_label.setText(QCoreApplication.translate("MainWindow", u"YAML file path", None))
+#if QT_CONFIG(tooltip)
+        self.label_49.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to enable the training phase or not</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.label_49.setText(QCoreApplication.translate("MainWindow", u"Enable train phase", None))
+        self.enable_train_input.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
+        self.enable_train_input.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
+
         self.label_57.setText(QCoreApplication.translate("MainWindow", u"Data augmentation", None))
         self.da_enable_input.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
         self.da_enable_input.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
@@ -8122,13 +8271,6 @@ class Ui_MainWindow(object):
         self.label_25.setText(QCoreApplication.translate("MainWindow", u"There are no specific options for classification", None))
         self.train_tab_widget.setTabText(self.train_tab_widget.indexOf(self.train_workflow_specific_tab), QCoreApplication.translate("MainWindow", u"Workflow specific options", None))
 #if QT_CONFIG(tooltip)
-        self.label_49.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to enable the training phase or not</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.label_49.setText(QCoreApplication.translate("MainWindow", u"Enable train phase", None))
-        self.enable_train_input.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
-        self.enable_train_input.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
-
-#if QT_CONFIG(tooltip)
         self.label_81.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to enable the training phase or not</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.label_81.setText(QCoreApplication.translate("MainWindow", u"Enable test phase", None))
@@ -8536,7 +8678,7 @@ class Ui_MainWindow(object):
         self.det_data_watetshed_check_input.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
         self.det_data_watetshed_check_input.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
 
-        self.label_104.setText(QCoreApplication.translate("MainWindow", u"Ouput options", None))
+        self.label_104.setText(QCoreApplication.translate("MainWindow", u"Output options", None))
         self.det_metrics_label.setText(QCoreApplication.translate("MainWindow", u"Metrics options", None))
 #if QT_CONFIG(tooltip)
         self.det_tolerance_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Maximum distance far away from a GT point to consider a point as a true positive</span></p></body></html>", None))
