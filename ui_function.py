@@ -62,7 +62,7 @@ class UIFunction(MainWindow):
     # Home page 
     ###########
     def init_main_page(self):
-        pixmap = QPixmap(resource_path(os.path.join("images","horizontal-logo-monochromatic-white.png")))
+        pixmap = QPixmap(resource_path(os.path.join("images","docker_logo.png")))
         pixmap = pixmap.scaled(QSize(201,51),aspectRatioMode=QtCore.Qt.AspectRatioMode.KeepAspectRatio)
         self.ui.docker_logo.setPixmap(pixmap)
 
