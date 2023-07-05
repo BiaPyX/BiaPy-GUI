@@ -201,10 +201,10 @@ class Settings():
             <table style="text-align: center;">\
             <tbody>\
             <tr><td style="text-align: center;">\
-            <img src="'+os.path.join("images","detection_raw.png")+'"> <p><span>Input image.</span></p>\
+            <img src="'+resource_path(os.path.join("images","detection_raw.png"))+'"> <p><span>Input image.</span></p>\
             </td>\
             <td style="text-align: center;">\
-            <img src="'+os.path.join("images","detection_label.png")+'"><p><span>Model\'s GT.</span></p>\
+            <img src="'+resource_path(os.path.join("images","detection_label.png"))+'"><p><span>Model\'s GT.</span></p>\
             </td>\
             </tr>\
             </tbody>\
