@@ -796,7 +796,7 @@ def load_yaml_config(self, checks=True):
         self.cfg.settings['biapy_cfg']._C.merge_from_file(os.path.join(self.cfg.settings['yaml_config_file_path'], self.cfg.settings['yaml_config_filename']))
         self.cfg.settings['biapy_cfg'] = self.cfg.settings['biapy_cfg'].get_cfg_defaults()
         check_configuration(self.cfg.settings['biapy_cfg'])
-        return True
+        
     except Exception as errors:   
         errors = str(errors)
         self.ui.check_yaml_file_errors_label.setText(errors)
@@ -804,3 +804,4 @@ def load_yaml_config(self, checks=True):
     else:
         self.ui.check_yaml_file_errors_label.setText("No errors found in the YAML file")
         self.ui.check_yaml_file_errors_frame.setStyleSheet("")
+        return True

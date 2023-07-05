@@ -201,10 +201,10 @@ class Settings():
             <table style="text-align: center;">\
             <tbody>\
             <tr><td style="text-align: center;">\
-            <img src="images","detection_raw.png"> <p><span>Input image.</span></p>\
+            <img src="images/detection_raw.png"> <p><span>Input image.</span></p>\
             </td>\
             <td style="text-align: center;">\
-            <img src="images","detection_label.png"><p><span>Model\'s GT.</span></p>\
+            <img src="images/detection_label.png"><p><span>Model\'s GT.</span></p>\
             </td>\
             </tr>\
             </tbody>\

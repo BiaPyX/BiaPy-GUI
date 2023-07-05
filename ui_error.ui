@@ -47,7 +47,7 @@
    <item>
     <widget class="QFrame" name="frame_2">
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">background:rgb(255,255,255);</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
@@ -86,7 +86,7 @@
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true"/>
+         <string notr="true">background:rgb(255,255,255);</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
@@ -144,7 +144,7 @@
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true"/>
+            <string notr="true">background:rgb(255,255,255);</string>
            </property>
            <property name="text">
             <string/>
@@ -222,6 +222,9 @@
              </property>
              <item>
               <widget class="QLabel" name="error_message_label">
+               <property name="styleSheet">
+                <string notr="true">background:rgb(255,255,255);</string>
+               </property>
                <property name="text">
                 <string/>
                </property>

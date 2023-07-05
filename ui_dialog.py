@@ -27,7 +27,7 @@ class Ui_Dialog(object):
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.frame_2 = QFrame(Dialog)
         self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setStyleSheet(u"")
+        self.frame_2.setStyleSheet(u"background:rgb(255,255,255);")
         self.frame_2.setFrameShape(QFrame.NoFrame)
         self.frame_2.setFrameShadow(QFrame.Plain)
         self.verticalLayout_2 = QVBoxLayout(self.frame_2)
