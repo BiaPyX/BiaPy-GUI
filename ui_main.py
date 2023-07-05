@@ -1403,7 +1403,7 @@ class Ui_MainWindow(object):
         self.train_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, -606, 934, 5832))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, -19, 934, 5832))
         self.scrollAreaWidgetContents_3.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout_3 = QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
@@ -3685,7 +3685,7 @@ class Ui_MainWindow(object):
 
         self.formLayout_2.setWidget(0, QFormLayout.FieldRole, self.train_advanced_options_frame_2)
 
-        self.verticalSpacer_5 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_5 = QSpacerItem(10, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.formLayout_2.setItem(0, QFormLayout.LabelRole, self.verticalSpacer_5)
 
@@ -4877,7 +4877,7 @@ class Ui_MainWindow(object):
         self.test_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 913, 995))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, -72, 913, 995))
         self.gridLayout_37 = QGridLayout(self.scrollAreaWidgetContents_5)
         self.gridLayout_37.setObjectName(u"gridLayout_37")
         self.test_advanced_options_frame = QFrame(self.scrollAreaWidgetContents_5)
@@ -4890,7 +4890,7 @@ class Ui_MainWindow(object):
         self.formLayout_3.setHorizontalSpacing(6)
         self.formLayout_3.setVerticalSpacing(6)
         self.formLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.verticalSpacer_32 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_32 = QSpacerItem(10, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.formLayout_3.setItem(0, QFormLayout.LabelRole, self.verticalSpacer_32)
 
@@ -6967,8 +6967,8 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(1)
-        self.stackedWidget_create_yaml_frame.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget_create_yaml_frame.setCurrentIndex(2)
         self.train_tab_widget.setCurrentIndex(0)
         self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(0)
         self.test_tab_widget.setCurrentIndex(0)

@@ -1317,7 +1317,7 @@ QPushButton:pressed {
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>1</number>
+                <number>2</number>
                </property>
                <widget class="QWidget" name="page_home">
                 <property name="styleSheet">
@@ -1752,7 +1752,7 @@ QPushButton:pressed {
                        </font>
                       </property>
                       <property name="currentIndex">
-                       <number>0</number>
+                       <number>2</number>
                       </property>
                       <widget class="QWidget" name="workflow_selection_page">
                        <property name="minimumSize">
@@ -3721,7 +3721,7 @@ QPushButton:pressed {
                                 <property name="geometry">
                                  <rect>
                                   <x>0</x>
-                                  <y>-606</y>
+                                  <y>-19</y>
                                   <width>934</width>
                                   <height>5832</height>
                                  </rect>
@@ -10787,7 +10787,7 @@ p, li { white-space: pre-wrap; }
                                       </property>
                                       <property name="sizeHint" stdset="0">
                                        <size>
-                                        <width>20</width>
+                                        <width>10</width>
                                         <height>40</height>
                                        </size>
                                       </property>
@@ -14133,7 +14133,7 @@ p, li { white-space: pre-wrap; }
                                 <property name="geometry">
                                  <rect>
                                   <x>0</x>
-                                  <y>0</y>
+                                  <y>-72</y>
                                   <width>913</width>
                                   <height>995</height>
                                  </rect>
@@ -14179,7 +14179,7 @@ p, li { white-space: pre-wrap; }
                                       </property>
                                       <property name="sizeHint" stdset="0">
                                        <size>
-                                        <width>20</width>
+                                        <width>10</width>
                                         <height>40</height>
                                        </size>
                                       </property>
