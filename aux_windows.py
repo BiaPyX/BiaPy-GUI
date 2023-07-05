@@ -22,6 +22,7 @@ class workflow_explanation_Ui(QDialog):
         self.workflow_info_window.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","closeAsset 43.png"))))
         self.workflow_info_window.ok_bn.clicked.connect(self.close)
         self.workflow_info_window.workflow_description_label.setOpenExternalLinks(True)
+        self.setStyleSheet("QWidget{font-size:16px}")
 
         self.dragPos = self.pos()  
         def movedialogWindow(event):
@@ -57,6 +58,7 @@ class dialog_Ui(QDialog):
         self.info_window.bn_close.clicked.connect(self.close)
         self.info_window.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","closeAsset 43.png"))))
         self.info_window.ok_bn.clicked.connect(self.close)
+        self.setStyleSheet("QWidget{font-size:16px}")
 
         self.dragPos = self.pos()  
         def movedialogWindow(event):
@@ -83,6 +85,8 @@ class error_Ui(QDialog):
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint) 
         self.upbar_icon = [QPixmap("images/bn_images/error.png"),QPixmap("images/bn_images/info.png")]
         self.dragPos = self.pos()  
+        self.setStyleSheet("QWidget{font-size:16px}")
+
         def moveErrorWindow(event):
             if event.buttons() == Qt.LeftButton:
                 self.move(self.pos() + event.globalPos() - self.dragPos)
@@ -153,6 +157,7 @@ class yes_no_Ui(QDialog):
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint) 
         self.yes_no_window.yes_bn.clicked.connect(lambda: self.submitclose(True))
         self.yes_no_window.no_bn.clicked.connect(lambda: self.submitclose(False))
+        self.setStyleSheet("QWidget{font-size:16px}")
 
     def create_question(self, question):
         self.yes_no_window.question_label.setText(question)

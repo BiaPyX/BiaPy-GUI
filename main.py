@@ -558,15 +558,13 @@ class MainWindow(QMainWindow):
     def dialog_exec(self, message):
         if self.diag is None: 
             self.diag = dialog_Ui()
-            self.diag.setStyleSheet("QWidget{font-size:16px}")
-
+            
         self.diag.dialog_constrict(message)
         self.diag.exec_()
     
     def error_exec(self, message, reason):
         if self.error is None: 
             self.error = error_Ui(self)
-            self.error.setStyleSheet("QWidget{font-size:16px}")
 
         self.error.error_constrict(message, reason)
         self.error.exec_()
@@ -574,8 +572,7 @@ class MainWindow(QMainWindow):
     def workflow_info_exec(self, workflow_name, workflow_images, workflow_description):
         if self.wokflow_info is None: 
             self.wokflow_info = workflow_explanation_Ui()
-            self.wokflow_info.setStyleSheet("QWidget{font-size:16px}")
-
+            
         self.wokflow_info.infoConstrict(workflow_name, workflow_images[0], 
             workflow_images[1], workflow_description)
         self.wokflow_info.exec_()
@@ -583,7 +580,6 @@ class MainWindow(QMainWindow):
     def yes_no_exec(self, question):
         if self.yes_no is None: 
             self.yes_no = yes_no_Ui()
-            self.yes_no.setStyleSheet("QWidget{font-size:16px}")
 
         self.yes_no.create_question(question)
         self.yes_no.exec_()
