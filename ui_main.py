@@ -1081,11 +1081,9 @@ class Ui_MainWindow(object):
         self.train_disable_checkpoint_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_26 = QGridLayout(self.train_disable_checkpoint_frame)
         self.gridLayout_26.setObjectName(u"gridLayout_26")
-        self.label_148 = QLabel(self.train_disable_checkpoint_frame)
-        self.label_148.setObjectName(u"label_148")
-        self.label_148.setFont(font)
+        self.horizontalSpacer_20 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.gridLayout_26.addWidget(self.label_148, 1, 1, 1, 1)
+        self.gridLayout_26.addItem(self.horizontalSpacer_20, 2, 5, 1, 1)
 
         self.checkpoint_load_input = QComboBox(self.train_disable_checkpoint_frame)
         self.checkpoint_load_input.addItem("")
@@ -1095,19 +1093,19 @@ class Ui_MainWindow(object):
         self.checkpoint_load_input.setMaximumSize(QSize(200, 30))
         self.checkpoint_load_input.setFont(font)
 
-        self.gridLayout_26.addWidget(self.checkpoint_load_input, 1, 2, 1, 1)
+        self.gridLayout_26.addWidget(self.checkpoint_load_input, 1, 3, 1, 1)
 
-        self.checkpoint_file_path_input = QTextBrowser(self.train_disable_checkpoint_frame)
-        self.checkpoint_file_path_input.setObjectName(u"checkpoint_file_path_input")
-        self.checkpoint_file_path_input.setMinimumSize(QSize(500, 30))
-        self.checkpoint_file_path_input.setMaximumSize(QSize(500, 30))
-        self.checkpoint_file_path_input.setFont(font)
-        self.checkpoint_file_path_input.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.checkpoint_file_path_input.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.checkpoint_file_path_input.setLineWrapMode(QTextEdit.NoWrap)
-        self.checkpoint_file_path_input.setReadOnly(False)
+        self.label_148 = QLabel(self.train_disable_checkpoint_frame)
+        self.label_148.setObjectName(u"label_148")
+        self.label_148.setFont(font)
 
-        self.gridLayout_26.addWidget(self.checkpoint_file_path_input, 2, 2, 1, 1)
+        self.gridLayout_26.addWidget(self.label_148, 1, 1, 1, 1)
+
+        self.checkpoint_file_path_browse_bn = QPushButton(self.train_disable_checkpoint_frame)
+        self.checkpoint_file_path_browse_bn.setObjectName(u"checkpoint_file_path_browse_bn")
+        self.checkpoint_file_path_browse_bn.setFont(font)
+
+        self.gridLayout_26.addWidget(self.checkpoint_file_path_browse_bn, 2, 4, 1, 1)
 
         self.checkpoint_file_path_browse_label = QLabel(self.train_disable_checkpoint_frame)
         self.checkpoint_file_path_browse_label.setObjectName(u"checkpoint_file_path_browse_label")
@@ -1115,15 +1113,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_26.addWidget(self.checkpoint_file_path_browse_label, 2, 1, 1, 1)
 
-        self.checkpoint_file_path_browse_bn = QPushButton(self.train_disable_checkpoint_frame)
-        self.checkpoint_file_path_browse_bn.setObjectName(u"checkpoint_file_path_browse_bn")
-        self.checkpoint_file_path_browse_bn.setFont(font)
+        self.checkpoint_file_path_input = QLineEdit(self.train_disable_checkpoint_frame)
+        self.checkpoint_file_path_input.setObjectName(u"checkpoint_file_path_input")
+        self.checkpoint_file_path_input.setMinimumSize(QSize(500, 30))
+        self.checkpoint_file_path_input.setMaximumSize(QSize(500, 30))
+        self.checkpoint_file_path_input.setFont(font)
 
-        self.gridLayout_26.addWidget(self.checkpoint_file_path_browse_bn, 2, 3, 1, 1)
-
-        self.horizontalSpacer_20 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.gridLayout_26.addItem(self.horizontalSpacer_20, 2, 4, 1, 1)
+        self.gridLayout_26.addWidget(self.checkpoint_file_path_input, 2, 3, 1, 1)
 
 
         self.gridLayout.addWidget(self.train_disable_checkpoint_frame, 6, 0, 1, 3)
@@ -1266,19 +1262,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_bn, 3, 5, 1, 1)
 
-        self.goptions_browse_yaml_path_input = QTextBrowser(self.frame_21)
-        self.goptions_browse_yaml_path_input.setObjectName(u"goptions_browse_yaml_path_input")
-        self.goptions_browse_yaml_path_input.setMinimumSize(QSize(500, 30))
-        self.goptions_browse_yaml_path_input.setMaximumSize(QSize(500, 30))
-        self.goptions_browse_yaml_path_input.setFont(font)
-        self.goptions_browse_yaml_path_input.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.goptions_browse_yaml_path_input.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.goptions_browse_yaml_path_input.setLineWrapMode(QTextEdit.NoWrap)
-        self.goptions_browse_yaml_path_input.setLineWrapColumnOrWidth(0)
-        self.goptions_browse_yaml_path_input.setReadOnly(False)
-
-        self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_input, 3, 3, 1, 1)
-
         self.goptions_yaml_name_input = QLineEdit(self.frame_21)
         self.goptions_yaml_name_input.setObjectName(u"goptions_yaml_name_input")
         self.goptions_yaml_name_input.setMinimumSize(QSize(0, 30))
@@ -1321,6 +1304,14 @@ class Ui_MainWindow(object):
         self.horizontalSpacer_28 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.gridLayout_27.addItem(self.horizontalSpacer_28, 3, 6, 1, 1)
+
+        self.goptions_browse_yaml_path_input = QLineEdit(self.frame_21)
+        self.goptions_browse_yaml_path_input.setObjectName(u"goptions_browse_yaml_path_input")
+        self.goptions_browse_yaml_path_input.setMinimumSize(QSize(500, 30))
+        self.goptions_browse_yaml_path_input.setMaximumSize(QSize(500, 30))
+        self.goptions_browse_yaml_path_input.setFont(font)
+
+        self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_input, 3, 3, 1, 1)
 
 
         self.gridLayout.addWidget(self.frame_21, 0, 0, 2, 5)
@@ -1403,7 +1394,7 @@ class Ui_MainWindow(object):
         self.train_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, -19, 934, 5832))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, -40, 934, 5832))
         self.scrollAreaWidgetContents_3.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout_3 = QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
@@ -3818,90 +3809,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout_3.addWidget(self.label_5, 5, 0, 1, 1)
 
-        self.frame_3 = QFrame(self.scrollAreaWidgetContents_3)
-        self.frame_3.setObjectName(u"frame_3")
-        self.frame_3.setFont(font)
-        self.frame_3.setStyleSheet(u"background: rgb(246,246,246);\n"
-"")
-        self.frame_3.setFrameShape(QFrame.Box)
-        self.frame_3.setFrameShadow(QFrame.Raised)
-        self.gridLayout_6 = QGridLayout(self.frame_3)
-        self.gridLayout_6.setObjectName(u"gridLayout_6")
-        self.train_data_input = QTextBrowser(self.frame_3)
-        self.train_data_input.setObjectName(u"train_data_input")
-        self.train_data_input.setMinimumSize(QSize(500, 30))
-        self.train_data_input.setMaximumSize(QSize(500, 30))
-        self.train_data_input.setFont(font)
-        self.train_data_input.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.train_data_input.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.train_data_input.setLineWrapMode(QTextEdit.NoWrap)
-        self.train_data_input.setReadOnly(False)
-
-        self.gridLayout_6.addWidget(self.train_data_input, 0, 2, 1, 1)
-
-        self.train_in_memory_comboBox = QComboBox(self.frame_3)
-        self.train_in_memory_comboBox.addItem("")
-        self.train_in_memory_comboBox.addItem("")
-        self.train_in_memory_comboBox.setObjectName(u"train_in_memory_comboBox")
-        self.train_in_memory_comboBox.setMinimumSize(QSize(200, 30))
-        self.train_in_memory_comboBox.setMaximumSize(QSize(200, 30))
-        self.train_in_memory_comboBox.setFont(font)
-
-        self.gridLayout_6.addWidget(self.train_in_memory_comboBox, 4, 2, 1, 1)
-
-        self.train_data_in_memory = QLabel(self.frame_3)
-        self.train_data_in_memory.setObjectName(u"train_data_in_memory")
-        self.train_data_in_memory.setMaximumSize(QSize(16777215, 16777215))
-        self.train_data_in_memory.setFont(font)
-
-        self.gridLayout_6.addWidget(self.train_data_in_memory, 4, 1, 1, 1)
-
-        self.train_data_input_browse_bn = QPushButton(self.frame_3)
-        self.train_data_input_browse_bn.setObjectName(u"train_data_input_browse_bn")
-        self.train_data_input_browse_bn.setFont(font)
-
-        self.gridLayout_6.addWidget(self.train_data_input_browse_bn, 0, 3, 1, 1)
-
-        self.train_data_label = QLabel(self.frame_3)
-        self.train_data_label.setObjectName(u"train_data_label")
-        self.train_data_label.setMaximumSize(QSize(200, 35))
-        self.train_data_label.setFont(font)
-
-        self.gridLayout_6.addWidget(self.train_data_label, 0, 1, 1, 1)
-
-        self.train_gt_label = QLabel(self.frame_3)
-        self.train_gt_label.setObjectName(u"train_gt_label")
-        self.train_gt_label.setMaximumSize(QSize(200, 35))
-        self.train_gt_label.setFont(font)
-
-        self.gridLayout_6.addWidget(self.train_gt_label, 1, 1, 1, 1)
-
-        self.train_data_gt_input = QTextBrowser(self.frame_3)
-        self.train_data_gt_input.setObjectName(u"train_data_gt_input")
-        self.train_data_gt_input.setMinimumSize(QSize(500, 30))
-        self.train_data_gt_input.setMaximumSize(QSize(500, 30))
-        self.train_data_gt_input.setFont(font)
-        self.train_data_gt_input.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.train_data_gt_input.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.train_data_gt_input.setLineWrapMode(QTextEdit.NoWrap)
-        self.train_data_gt_input.setReadOnly(False)
-
-        self.gridLayout_6.addWidget(self.train_data_gt_input, 1, 2, 1, 1)
-
-        self.train_data_gt_input_browse_bn = QPushButton(self.frame_3)
-        self.train_data_gt_input_browse_bn.setObjectName(u"train_data_gt_input_browse_bn")
-        self.train_data_gt_input_browse_bn.setMaximumSize(QSize(130, 16777215))
-        self.train_data_gt_input_browse_bn.setFont(font)
-
-        self.gridLayout_6.addWidget(self.train_data_gt_input_browse_bn, 1, 3, 1, 1)
-
-        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.gridLayout_6.addItem(self.horizontalSpacer_5, 0, 4, 1, 1)
-
-
-        self.gridLayout_3.addWidget(self.frame_3, 1, 0, 1, 1)
-
         self.frame_11 = QFrame(self.scrollAreaWidgetContents_3)
         self.frame_11.setObjectName(u"frame_11")
         self.frame_11.setFont(font)
@@ -3911,6 +3818,19 @@ class Ui_MainWindow(object):
         self.frame_11.setFrameShadow(QFrame.Raised)
         self.gridLayout_11 = QGridLayout(self.frame_11)
         self.gridLayout_11.setObjectName(u"gridLayout_11")
+        self.validation_type_label = QLabel(self.frame_11)
+        self.validation_type_label.setObjectName(u"validation_type_label")
+        self.validation_type_label.setFont(font)
+
+        self.gridLayout_11.addWidget(self.validation_type_label, 0, 0, 1, 1)
+
+        self.val_data_gt_input_browse_bn = QPushButton(self.frame_11)
+        self.val_data_gt_input_browse_bn.setObjectName(u"val_data_gt_input_browse_bn")
+        self.val_data_gt_input_browse_bn.setMaximumSize(QSize(130, 16777215))
+        self.val_data_gt_input_browse_bn.setFont(font)
+
+        self.gridLayout_11.addWidget(self.val_data_gt_input_browse_bn, 4, 3, 1, 1)
+
         self.cross_validation_nfolds_input = QLineEdit(self.frame_11)
         self.cross_validation_nfolds_input.setObjectName(u"cross_validation_nfolds_input")
         self.cross_validation_nfolds_input.setMinimumSize(QSize(200, 30))
@@ -3919,19 +3839,57 @@ class Ui_MainWindow(object):
 
         self.gridLayout_11.addWidget(self.cross_validation_nfolds_input, 1, 2, 1, 1)
 
-        self.cross_validation_fold_input = QLineEdit(self.frame_11)
-        self.cross_validation_fold_input.setObjectName(u"cross_validation_fold_input")
-        self.cross_validation_fold_input.setMinimumSize(QSize(200, 30))
-        self.cross_validation_fold_input.setMaximumSize(QSize(200, 30))
-        self.cross_validation_fold_input.setFont(font)
-
-        self.gridLayout_11.addWidget(self.cross_validation_fold_input, 2, 2, 1, 1)
-
         self.validation_data_label = QLabel(self.frame_11)
         self.validation_data_label.setObjectName(u"validation_data_label")
         self.validation_data_label.setFont(font)
 
         self.gridLayout_11.addWidget(self.validation_data_label, 3, 0, 1, 1)
+
+        self.horizontalSpacer_54 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_11.addItem(self.horizontalSpacer_54, 0, 3, 1, 1)
+
+        self.cross_validation_fold_label = QLabel(self.frame_11)
+        self.cross_validation_fold_label.setObjectName(u"cross_validation_fold_label")
+        self.cross_validation_fold_label.setFont(font)
+
+        self.gridLayout_11.addWidget(self.cross_validation_fold_label, 2, 0, 1, 1)
+
+        self.percentage_validation_label = QLabel(self.frame_11)
+        self.percentage_validation_label.setObjectName(u"percentage_validation_label")
+        self.percentage_validation_label.setFont(font)
+
+        self.gridLayout_11.addWidget(self.percentage_validation_label, 9, 0, 1, 1)
+
+        self.verticalSpacer_15 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.gridLayout_11.addItem(self.verticalSpacer_15, 10, 0, 1, 1)
+
+        self.val_in_memory_label = QLabel(self.frame_11)
+        self.val_in_memory_label.setObjectName(u"val_in_memory_label")
+        self.val_in_memory_label.setFont(font)
+
+        self.gridLayout_11.addWidget(self.val_in_memory_label, 7, 0, 1, 1)
+
+        self.cross_validation_nfolds_label = QLabel(self.frame_11)
+        self.cross_validation_nfolds_label.setObjectName(u"cross_validation_nfolds_label")
+        self.cross_validation_nfolds_label.setFont(font)
+
+        self.gridLayout_11.addWidget(self.cross_validation_nfolds_label, 1, 0, 1, 1)
+
+        self.validation_data_gt_label = QLabel(self.frame_11)
+        self.validation_data_gt_label.setObjectName(u"validation_data_gt_label")
+        self.validation_data_gt_label.setFont(font)
+
+        self.gridLayout_11.addWidget(self.validation_data_gt_label, 4, 0, 1, 1)
+
+        self.percentage_validation_input = QLineEdit(self.frame_11)
+        self.percentage_validation_input.setObjectName(u"percentage_validation_input")
+        self.percentage_validation_input.setMinimumSize(QSize(200, 30))
+        self.percentage_validation_input.setMaximumSize(QSize(200, 30))
+        self.percentage_validation_input.setFont(font)
+
+        self.gridLayout_11.addWidget(self.percentage_validation_input, 9, 2, 1, 1)
 
         self.validation_type_comboBox = QComboBox(self.frame_11)
         self.validation_type_comboBox.addItem("")
@@ -3944,25 +3902,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout_11.addWidget(self.validation_type_comboBox, 0, 2, 1, 1)
 
-        self.cross_validation_nfolds_label = QLabel(self.frame_11)
-        self.cross_validation_nfolds_label.setObjectName(u"cross_validation_nfolds_label")
-        self.cross_validation_nfolds_label.setFont(font)
-
-        self.gridLayout_11.addWidget(self.cross_validation_nfolds_label, 1, 0, 1, 1)
-
-        self.validation_type_label = QLabel(self.frame_11)
-        self.validation_type_label.setObjectName(u"validation_type_label")
-        self.validation_type_label.setFont(font)
-
-        self.gridLayout_11.addWidget(self.validation_type_label, 0, 0, 1, 1)
-
-        self.val_data_input_browse_bn = QPushButton(self.frame_11)
-        self.val_data_input_browse_bn.setObjectName(u"val_data_input_browse_bn")
-        self.val_data_input_browse_bn.setMaximumSize(QSize(130, 16777215))
-        self.val_data_input_browse_bn.setFont(font)
-
-        self.gridLayout_11.addWidget(self.val_data_input_browse_bn, 3, 3, 1, 1)
-
         self.val_in_memory_comboBox = QComboBox(self.frame_11)
         self.val_in_memory_comboBox.addItem("")
         self.val_in_memory_comboBox.addItem("")
@@ -3973,76 +3912,36 @@ class Ui_MainWindow(object):
 
         self.gridLayout_11.addWidget(self.val_in_memory_comboBox, 7, 2, 1, 1)
 
-        self.percentage_validation_input = QLineEdit(self.frame_11)
-        self.percentage_validation_input.setObjectName(u"percentage_validation_input")
-        self.percentage_validation_input.setMinimumSize(QSize(200, 30))
-        self.percentage_validation_input.setMaximumSize(QSize(200, 30))
-        self.percentage_validation_input.setFont(font)
+        self.cross_validation_fold_input = QLineEdit(self.frame_11)
+        self.cross_validation_fold_input.setObjectName(u"cross_validation_fold_input")
+        self.cross_validation_fold_input.setMinimumSize(QSize(200, 30))
+        self.cross_validation_fold_input.setMaximumSize(QSize(200, 30))
+        self.cross_validation_fold_input.setFont(font)
 
-        self.gridLayout_11.addWidget(self.percentage_validation_input, 9, 2, 1, 1)
+        self.gridLayout_11.addWidget(self.cross_validation_fold_input, 2, 2, 1, 1)
 
-        self.val_in_memory_label = QLabel(self.frame_11)
-        self.val_in_memory_label.setObjectName(u"val_in_memory_label")
-        self.val_in_memory_label.setFont(font)
+        self.val_data_input_browse_bn = QPushButton(self.frame_11)
+        self.val_data_input_browse_bn.setObjectName(u"val_data_input_browse_bn")
+        self.val_data_input_browse_bn.setMaximumSize(QSize(130, 16777215))
+        self.val_data_input_browse_bn.setFont(font)
 
-        self.gridLayout_11.addWidget(self.val_in_memory_label, 7, 0, 1, 1)
+        self.gridLayout_11.addWidget(self.val_data_input_browse_bn, 3, 3, 1, 1)
 
-        self.validation_data_gt_input = QTextBrowser(self.frame_11)
-        self.validation_data_gt_input.setObjectName(u"validation_data_gt_input")
-        self.validation_data_gt_input.setMinimumSize(QSize(500, 30))
-        self.validation_data_gt_input.setMaximumSize(QSize(500, 30))
-        self.validation_data_gt_input.setFont(font)
-        self.validation_data_gt_input.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.validation_data_gt_input.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.validation_data_gt_input.setLineWrapMode(QTextEdit.NoWrap)
-        self.validation_data_gt_input.setReadOnly(False)
-
-        self.gridLayout_11.addWidget(self.validation_data_gt_input, 4, 2, 1, 1)
-
-        self.percentage_validation_label = QLabel(self.frame_11)
-        self.percentage_validation_label.setObjectName(u"percentage_validation_label")
-        self.percentage_validation_label.setFont(font)
-
-        self.gridLayout_11.addWidget(self.percentage_validation_label, 9, 0, 1, 1)
-
-        self.validation_data_gt_label = QLabel(self.frame_11)
-        self.validation_data_gt_label.setObjectName(u"validation_data_gt_label")
-        self.validation_data_gt_label.setFont(font)
-
-        self.gridLayout_11.addWidget(self.validation_data_gt_label, 4, 0, 1, 1)
-
-        self.validation_data_input = QTextBrowser(self.frame_11)
+        self.validation_data_input = QLineEdit(self.frame_11)
         self.validation_data_input.setObjectName(u"validation_data_input")
         self.validation_data_input.setMinimumSize(QSize(500, 30))
         self.validation_data_input.setMaximumSize(QSize(500, 30))
         self.validation_data_input.setFont(font)
-        self.validation_data_input.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.validation_data_input.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.validation_data_input.setLineWrapMode(QTextEdit.NoWrap)
-        self.validation_data_input.setReadOnly(False)
 
         self.gridLayout_11.addWidget(self.validation_data_input, 3, 2, 1, 1)
 
-        self.cross_validation_fold_label = QLabel(self.frame_11)
-        self.cross_validation_fold_label.setObjectName(u"cross_validation_fold_label")
-        self.cross_validation_fold_label.setFont(font)
+        self.validation_data_gt_input = QLineEdit(self.frame_11)
+        self.validation_data_gt_input.setObjectName(u"validation_data_gt_input")
+        self.validation_data_gt_input.setMinimumSize(QSize(500, 30))
+        self.validation_data_gt_input.setMaximumSize(QSize(500, 30))
+        self.validation_data_gt_input.setFont(font)
 
-        self.gridLayout_11.addWidget(self.cross_validation_fold_label, 2, 0, 1, 1)
-
-        self.verticalSpacer_15 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
-
-        self.gridLayout_11.addItem(self.verticalSpacer_15, 10, 0, 1, 1)
-
-        self.val_data_gt_input_browse_bn = QPushButton(self.frame_11)
-        self.val_data_gt_input_browse_bn.setObjectName(u"val_data_gt_input_browse_bn")
-        self.val_data_gt_input_browse_bn.setMaximumSize(QSize(130, 16777215))
-        self.val_data_gt_input_browse_bn.setFont(font)
-
-        self.gridLayout_11.addWidget(self.val_data_gt_input_browse_bn, 4, 3, 1, 1)
-
-        self.horizontalSpacer_54 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.gridLayout_11.addItem(self.horizontalSpacer_54, 0, 3, 1, 1)
+        self.gridLayout_11.addWidget(self.validation_data_gt_input, 4, 2, 1, 1)
 
 
         self.gridLayout_3.addWidget(self.frame_11, 4, 0, 1, 2)
@@ -4060,6 +3959,82 @@ class Ui_MainWindow(object):
         self.train_label.setFont(font)
 
         self.gridLayout_3.addWidget(self.train_label, 0, 0, 1, 2)
+
+        self.frame_3 = QFrame(self.scrollAreaWidgetContents_3)
+        self.frame_3.setObjectName(u"frame_3")
+        self.frame_3.setFont(font)
+        self.frame_3.setStyleSheet(u"background: rgb(246,246,246);\n"
+"")
+        self.frame_3.setFrameShape(QFrame.Box)
+        self.frame_3.setFrameShadow(QFrame.Raised)
+        self.gridLayout_6 = QGridLayout(self.frame_3)
+        self.gridLayout_6.setObjectName(u"gridLayout_6")
+        self.train_gt_label = QLabel(self.frame_3)
+        self.train_gt_label.setObjectName(u"train_gt_label")
+        self.train_gt_label.setMaximumSize(QSize(200, 35))
+        self.train_gt_label.setFont(font)
+
+        self.gridLayout_6.addWidget(self.train_gt_label, 1, 1, 1, 1)
+
+        self.train_data_in_memory = QLabel(self.frame_3)
+        self.train_data_in_memory.setObjectName(u"train_data_in_memory")
+        self.train_data_in_memory.setMaximumSize(QSize(16777215, 16777215))
+        self.train_data_in_memory.setFont(font)
+
+        self.gridLayout_6.addWidget(self.train_data_in_memory, 4, 1, 1, 1)
+
+        self.train_data_label = QLabel(self.frame_3)
+        self.train_data_label.setObjectName(u"train_data_label")
+        self.train_data_label.setMaximumSize(QSize(200, 35))
+        self.train_data_label.setFont(font)
+
+        self.gridLayout_6.addWidget(self.train_data_label, 0, 1, 1, 1)
+
+        self.train_data_input = QLineEdit(self.frame_3)
+        self.train_data_input.setObjectName(u"train_data_input")
+        self.train_data_input.setMinimumSize(QSize(500, 30))
+        self.train_data_input.setMaximumSize(QSize(500, 30))
+        self.train_data_input.setFont(font)
+
+        self.gridLayout_6.addWidget(self.train_data_input, 0, 2, 1, 1)
+
+        self.train_data_gt_input = QLineEdit(self.frame_3)
+        self.train_data_gt_input.setObjectName(u"train_data_gt_input")
+        self.train_data_gt_input.setMinimumSize(QSize(500, 30))
+        self.train_data_gt_input.setMaximumSize(QSize(500, 30))
+        self.train_data_gt_input.setFont(font)
+
+        self.gridLayout_6.addWidget(self.train_data_gt_input, 1, 2, 1, 1)
+
+        self.train_data_input_browse_bn = QPushButton(self.frame_3)
+        self.train_data_input_browse_bn.setObjectName(u"train_data_input_browse_bn")
+        self.train_data_input_browse_bn.setFont(font)
+
+        self.gridLayout_6.addWidget(self.train_data_input_browse_bn, 0, 3, 1, 1)
+
+        self.train_data_gt_input_browse_bn = QPushButton(self.frame_3)
+        self.train_data_gt_input_browse_bn.setObjectName(u"train_data_gt_input_browse_bn")
+        self.train_data_gt_input_browse_bn.setMaximumSize(QSize(130, 16777215))
+        self.train_data_gt_input_browse_bn.setFont(font)
+
+        self.gridLayout_6.addWidget(self.train_data_gt_input_browse_bn, 1, 3, 1, 1)
+
+        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_6.addItem(self.horizontalSpacer_5, 0, 4, 1, 1)
+
+        self.train_in_memory_comboBox = QComboBox(self.frame_3)
+        self.train_in_memory_comboBox.addItem("")
+        self.train_in_memory_comboBox.addItem("")
+        self.train_in_memory_comboBox.setObjectName(u"train_in_memory_comboBox")
+        self.train_in_memory_comboBox.setMinimumSize(QSize(200, 30))
+        self.train_in_memory_comboBox.setMaximumSize(QSize(200, 30))
+        self.train_in_memory_comboBox.setFont(font)
+
+        self.gridLayout_6.addWidget(self.train_in_memory_comboBox, 4, 2, 1, 1)
+
+
+        self.gridLayout_3.addWidget(self.frame_3, 1, 0, 1, 1)
 
         self.train_scrollArea.setWidget(self.scrollAreaWidgetContents_3)
 
@@ -4702,7 +4677,7 @@ class Ui_MainWindow(object):
         self.scrollArea_6.setWidgetResizable(True)
         self.scrollAreaWidgetContents_10 = QWidget()
         self.scrollAreaWidgetContents_10.setObjectName(u"scrollAreaWidgetContents_10")
-        self.scrollAreaWidgetContents_10.setGeometry(QRect(0, 0, 913, 338))
+        self.scrollAreaWidgetContents_10.setGeometry(QRect(0, 0, 923, 340))
         self.gridLayout_51 = QGridLayout(self.scrollAreaWidgetContents_10)
         self.gridLayout_51.setObjectName(u"gridLayout_51")
         self.verticalSpacer_22 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -4877,7 +4852,7 @@ class Ui_MainWindow(object):
         self.test_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, -72, 913, 995))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 913, 995))
         self.gridLayout_37 = QGridLayout(self.scrollAreaWidgetContents_5)
         self.gridLayout_37.setObjectName(u"gridLayout_37")
         self.test_advanced_options_frame = QFrame(self.scrollAreaWidgetContents_5)
@@ -5276,19 +5251,15 @@ class Ui_MainWindow(object):
         self.frame_36.setFrameShadow(QFrame.Raised)
         self.gridLayout_38 = QGridLayout(self.frame_36)
         self.gridLayout_38.setObjectName(u"gridLayout_38")
-        self.use_val_as_test = QLabel(self.frame_36)
-        self.use_val_as_test.setObjectName(u"use_val_as_test")
-        self.use_val_as_test.setMinimumSize(QSize(0, 0))
-        self.use_val_as_test.setMaximumSize(QSize(200, 16777215))
-        self.use_val_as_test.setFont(font)
+        self.test_exists_gt_input = QComboBox(self.frame_36)
+        self.test_exists_gt_input.addItem("")
+        self.test_exists_gt_input.addItem("")
+        self.test_exists_gt_input.setObjectName(u"test_exists_gt_input")
+        self.test_exists_gt_input.setMinimumSize(QSize(200, 30))
+        self.test_exists_gt_input.setMaximumSize(QSize(200, 30))
+        self.test_exists_gt_input.setFont(font)
 
-        self.gridLayout_38.addWidget(self.use_val_as_test, 1, 1, 1, 1)
-
-        self.test_data_gt_input_browse_bn = QPushButton(self.frame_36)
-        self.test_data_gt_input_browse_bn.setObjectName(u"test_data_gt_input_browse_bn")
-        self.test_data_gt_input_browse_bn.setFont(font)
-
-        self.gridLayout_38.addWidget(self.test_data_gt_input_browse_bn, 4, 3, 1, 1)
+        self.gridLayout_38.addWidget(self.test_exists_gt_input, 3, 3, 1, 1)
 
         self.test_data_gt_label = QLabel(self.frame_36)
         self.test_data_gt_label.setObjectName(u"test_data_gt_label")
@@ -5296,46 +5267,27 @@ class Ui_MainWindow(object):
 
         self.gridLayout_38.addWidget(self.test_data_gt_label, 4, 1, 1, 1)
 
+        self.test_data_input_browse_bn = QPushButton(self.frame_36)
+        self.test_data_input_browse_bn.setObjectName(u"test_data_input_browse_bn")
+        self.test_data_input_browse_bn.setFont(font)
+
+        self.gridLayout_38.addWidget(self.test_data_input_browse_bn, 2, 4, 1, 1)
+
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_38.addItem(self.horizontalSpacer_4, 2, 5, 1, 1)
+
+        self.test_data_gt_input_browse_bn = QPushButton(self.frame_36)
+        self.test_data_gt_input_browse_bn.setObjectName(u"test_data_gt_input_browse_bn")
+        self.test_data_gt_input_browse_bn.setFont(font)
+
+        self.gridLayout_38.addWidget(self.test_data_gt_input_browse_bn, 4, 4, 1, 1)
+
         self.test_data_label = QLabel(self.frame_36)
         self.test_data_label.setObjectName(u"test_data_label")
         self.test_data_label.setFont(font)
 
         self.gridLayout_38.addWidget(self.test_data_label, 2, 1, 1, 1)
-
-        self.test_data_in_memory_label = QLabel(self.frame_36)
-        self.test_data_in_memory_label.setObjectName(u"test_data_in_memory_label")
-        self.test_data_in_memory_label.setFont(font)
-
-        self.gridLayout_38.addWidget(self.test_data_in_memory_label, 5, 1, 1, 1)
-
-        self.test_data_input_browse_bn = QPushButton(self.frame_36)
-        self.test_data_input_browse_bn.setObjectName(u"test_data_input_browse_bn")
-        self.test_data_input_browse_bn.setFont(font)
-
-        self.gridLayout_38.addWidget(self.test_data_input_browse_bn, 2, 3, 1, 1)
-
-        self.test_data_input = QTextBrowser(self.frame_36)
-        self.test_data_input.setObjectName(u"test_data_input")
-        self.test_data_input.setMinimumSize(QSize(500, 0))
-        self.test_data_input.setMaximumSize(QSize(500, 30))
-        self.test_data_input.setFont(font)
-        self.test_data_input.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.test_data_input.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.test_data_input.setLineWrapMode(QTextEdit.NoWrap)
-        self.test_data_input.setReadOnly(False)
-
-        self.gridLayout_38.addWidget(self.test_data_input, 2, 2, 1, 1)
-
-        self.test_data_gt_input = QTextBrowser(self.frame_36)
-        self.test_data_gt_input.setObjectName(u"test_data_gt_input")
-        self.test_data_gt_input.setMaximumSize(QSize(500, 30))
-        self.test_data_gt_input.setFont(font)
-        self.test_data_gt_input.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.test_data_gt_input.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.test_data_gt_input.setLineWrapMode(QTextEdit.NoWrap)
-        self.test_data_gt_input.setReadOnly(False)
-
-        self.gridLayout_38.addWidget(self.test_data_gt_input, 4, 2, 1, 1)
 
         self.test_data_in_memory_input = QComboBox(self.frame_36)
         self.test_data_in_memory_input.addItem("")
@@ -5345,7 +5297,13 @@ class Ui_MainWindow(object):
         self.test_data_in_memory_input.setMaximumSize(QSize(200, 30))
         self.test_data_in_memory_input.setFont(font)
 
-        self.gridLayout_38.addWidget(self.test_data_in_memory_input, 5, 2, 1, 1)
+        self.gridLayout_38.addWidget(self.test_data_in_memory_input, 5, 3, 1, 1)
+
+        self.test_data_in_memory_label = QLabel(self.frame_36)
+        self.test_data_in_memory_label.setObjectName(u"test_data_in_memory_label")
+        self.test_data_in_memory_label.setFont(font)
+
+        self.gridLayout_38.addWidget(self.test_data_in_memory_label, 5, 1, 1, 1)
 
         self.test_exists_gt_label = QLabel(self.frame_36)
         self.test_exists_gt_label.setObjectName(u"test_exists_gt_label")
@@ -5353,9 +5311,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_38.addWidget(self.test_exists_gt_label, 3, 1, 1, 1)
 
-        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.use_val_as_test = QLabel(self.frame_36)
+        self.use_val_as_test.setObjectName(u"use_val_as_test")
+        self.use_val_as_test.setMinimumSize(QSize(0, 0))
+        self.use_val_as_test.setMaximumSize(QSize(200, 16777215))
+        self.use_val_as_test.setFont(font)
 
-        self.gridLayout_38.addItem(self.horizontalSpacer_4, 2, 4, 1, 1)
+        self.gridLayout_38.addWidget(self.use_val_as_test, 1, 1, 1, 1)
 
         self.use_val_as_test_input = QComboBox(self.frame_36)
         self.use_val_as_test_input.addItem("")
@@ -5365,17 +5327,23 @@ class Ui_MainWindow(object):
         self.use_val_as_test_input.setMaximumSize(QSize(200, 30))
         self.use_val_as_test_input.setFont(font)
 
-        self.gridLayout_38.addWidget(self.use_val_as_test_input, 1, 2, 1, 1)
+        self.gridLayout_38.addWidget(self.use_val_as_test_input, 1, 3, 1, 1)
 
-        self.test_exists_gt_input = QComboBox(self.frame_36)
-        self.test_exists_gt_input.addItem("")
-        self.test_exists_gt_input.addItem("")
-        self.test_exists_gt_input.setObjectName(u"test_exists_gt_input")
-        self.test_exists_gt_input.setMinimumSize(QSize(200, 30))
-        self.test_exists_gt_input.setMaximumSize(QSize(200, 30))
-        self.test_exists_gt_input.setFont(font)
+        self.test_data_input = QLineEdit(self.frame_36)
+        self.test_data_input.setObjectName(u"test_data_input")
+        self.test_data_input.setMinimumSize(QSize(500, 30))
+        self.test_data_input.setMaximumSize(QSize(500, 30))
+        self.test_data_input.setFont(font)
 
-        self.gridLayout_38.addWidget(self.test_exists_gt_input, 3, 2, 1, 1)
+        self.gridLayout_38.addWidget(self.test_data_input, 2, 3, 1, 1)
+
+        self.test_data_gt_input = QLineEdit(self.frame_36)
+        self.test_data_gt_input.setObjectName(u"test_data_gt_input")
+        self.test_data_gt_input.setMinimumSize(QSize(500, 30))
+        self.test_data_gt_input.setMaximumSize(QSize(500, 30))
+        self.test_data_gt_input.setFont(font)
+
+        self.gridLayout_38.addWidget(self.test_data_gt_input, 4, 3, 1, 1)
 
 
         self.gridLayout_37.addWidget(self.frame_36, 1, 0, 1, 2)
@@ -6881,50 +6849,33 @@ class Ui_MainWindow(object):
         self.label_138.setObjectName(u"label_138")
         self.label_138.setFont(font)
 
-        self.gridLayout_9.addWidget(self.label_138, 1, 0, 1, 1)
-
-        self.examine_yaml_bn = QPushButton(self.frame_27)
-        self.examine_yaml_bn.setObjectName(u"examine_yaml_bn")
-        self.examine_yaml_bn.setFont(font)
-
-        self.gridLayout_9.addWidget(self.examine_yaml_bn, 0, 3, 1, 1)
+        self.gridLayout_9.addWidget(self.label_138, 2, 0, 1, 1)
 
         self.output_folder_label = QLabel(self.frame_27)
         self.output_folder_label.setObjectName(u"output_folder_label")
         self.output_folder_label.setMaximumSize(QSize(16777215, 35))
         self.output_folder_label.setFont(font)
 
-        self.gridLayout_9.addWidget(self.output_folder_label, 2, 0, 1, 2)
+        self.gridLayout_9.addWidget(self.output_folder_label, 3, 0, 1, 2)
+
+        self.output_folder_bn = QPushButton(self.frame_27)
+        self.output_folder_bn.setObjectName(u"output_folder_bn")
+        self.output_folder_bn.setMaximumSize(QSize(130, 16777215))
+        self.output_folder_bn.setFont(font)
+
+        self.gridLayout_9.addWidget(self.output_folder_bn, 3, 4, 1, 1)
+
+        self.examine_yaml_bn = QPushButton(self.frame_27)
+        self.examine_yaml_bn.setObjectName(u"examine_yaml_bn")
+        self.examine_yaml_bn.setFont(font)
+
+        self.gridLayout_9.addWidget(self.examine_yaml_bn, 0, 4, 1, 1)
 
         self.select_yaml_label = QLabel(self.frame_27)
         self.select_yaml_label.setObjectName(u"select_yaml_label")
         self.select_yaml_label.setFont(font)
 
         self.gridLayout_9.addWidget(self.select_yaml_label, 0, 0, 1, 2)
-
-        self.select_yaml_name_label = QTextBrowser(self.frame_27)
-        self.select_yaml_name_label.setObjectName(u"select_yaml_name_label")
-        self.select_yaml_name_label.setMinimumSize(QSize(0, 30))
-        self.select_yaml_name_label.setMaximumSize(QSize(500, 30))
-        self.select_yaml_name_label.setFont(font)
-        self.select_yaml_name_label.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.select_yaml_name_label.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.select_yaml_name_label.setLineWrapMode(QTextEdit.NoWrap)
-        self.select_yaml_name_label.setReadOnly(False)
-
-        self.gridLayout_9.addWidget(self.select_yaml_name_label, 0, 2, 1, 1)
-
-        self.output_folder_input = QTextBrowser(self.frame_27)
-        self.output_folder_input.setObjectName(u"output_folder_input")
-        self.output_folder_input.setMinimumSize(QSize(0, 30))
-        self.output_folder_input.setMaximumSize(QSize(500, 30))
-        self.output_folder_input.setFont(font)
-        self.output_folder_input.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.output_folder_input.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.output_folder_input.setLineWrapMode(QTextEdit.NoWrap)
-        self.output_folder_input.setReadOnly(False)
-
-        self.gridLayout_9.addWidget(self.output_folder_input, 2, 2, 1, 1)
 
         self.job_name_input = QPlainTextEdit(self.frame_27)
         self.job_name_input.setObjectName(u"job_name_input")
@@ -6935,14 +6886,23 @@ class Ui_MainWindow(object):
         self.job_name_input.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.job_name_input.setLineWrapMode(QPlainTextEdit.NoWrap)
 
-        self.gridLayout_9.addWidget(self.job_name_input, 1, 2, 1, 1)
+        self.gridLayout_9.addWidget(self.job_name_input, 2, 2, 1, 1)
 
-        self.output_folder_bn = QPushButton(self.frame_27)
-        self.output_folder_bn.setObjectName(u"output_folder_bn")
-        self.output_folder_bn.setMaximumSize(QSize(130, 16777215))
-        self.output_folder_bn.setFont(font)
+        self.output_folder_input = QLineEdit(self.frame_27)
+        self.output_folder_input.setObjectName(u"output_folder_input")
+        self.output_folder_input.setMinimumSize(QSize(500, 30))
+        self.output_folder_input.setMaximumSize(QSize(500, 30))
+        self.output_folder_input.setFont(font)
 
-        self.gridLayout_9.addWidget(self.output_folder_bn, 2, 3, 1, 1)
+        self.gridLayout_9.addWidget(self.output_folder_input, 3, 2, 1, 1)
+
+        self.select_yaml_name_label = QLineEdit(self.frame_27)
+        self.select_yaml_name_label.setObjectName(u"select_yaml_name_label")
+        self.select_yaml_name_label.setMinimumSize(QSize(500, 30))
+        self.select_yaml_name_label.setMaximumSize(QSize(500, 30))
+        self.select_yaml_name_label.setFont(font)
+
+        self.gridLayout_9.addWidget(self.select_yaml_name_label, 0, 2, 1, 1)
 
 
         self.gridLayout_72.addWidget(self.frame_27, 0, 1, 1, 1)
@@ -6968,11 +6928,11 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.stackedWidget.setCurrentIndex(2)
-        self.stackedWidget_create_yaml_frame.setCurrentIndex(2)
+        self.stackedWidget_create_yaml_frame.setCurrentIndex(3)
         self.train_tab_widget.setCurrentIndex(0)
-        self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(0)
+        self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(5)
         self.test_tab_widget.setCurrentIndex(0)
-        self.test_workflow_specific_tab_stackedWidget.setCurrentIndex(4)
+        self.test_workflow_specific_tab_stackedWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -7039,18 +6999,19 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.goptions_advanced_label.setText(QCoreApplication.translate("MainWindow", u"Advanced options", None))
         self.goptions_advanced_bn.setText("")
-#if QT_CONFIG(tooltip)
-        self.label_148.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Load previous training weigths (needed for test/inference phase or to train again but not from scratch). If the checkpoint file is empty, BiaPy will search for the checkpoint in the following manner: if the output folder and the job name match, BiaPy will locate the model's weights within the 'checkpoints' directory. On the other hand, if the checkpoint file path is specified that path will be used instead</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.label_148.setText(QCoreApplication.translate("MainWindow", u"Load checkpoint", None))
         self.checkpoint_load_input.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
         self.checkpoint_load_input.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
 
 #if QT_CONFIG(tooltip)
+        self.label_148.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Load previous training weigths (needed for test/inference phase or to train again but not from scratch). If the checkpoint file is empty, BiaPy will search for the checkpoint in the following manner: if the output folder and the job name match, BiaPy will locate the model's weights within the 'checkpoints' directory. On the other hand, if the checkpoint file path is specified that path will be used instead</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.label_148.setText(QCoreApplication.translate("MainWindow", u"Load checkpoint", None))
+        self.checkpoint_file_path_browse_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
+#if QT_CONFIG(tooltip)
         self.checkpoint_file_path_browse_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the model's checkpoint that will be loaded. Leave it blank to let BiaPy find it. If the output folder and the job name match, BiaPy will locate the model's weights within the 'checkpoints' directory</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.checkpoint_file_path_browse_label.setText(QCoreApplication.translate("MainWindow", u"Checkpoint file", None))
-        self.checkpoint_file_path_browse_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
+        self.checkpoint_file_path_input.setText(QCoreApplication.translate("MainWindow", u"model_weights.h5", None))
         self.train_disable_checkpoint_label.setText(QCoreApplication.translate("MainWindow", u"Checkpoint configuration", None))
 #if QT_CONFIG(tooltip)
         self.label_9.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">IDs of the GPU to run the job in. If you want to use more than one GPU add them sepated by commas. E.g. </span><span style=\" font-size:12pt; font-weight:600;\">0,1,2,3 </span><span style=\" font-size:12pt;\">to use 4 GPUs</span></p></body></html>", None))
@@ -8034,85 +7995,69 @@ class Ui_MainWindow(object):
         self.number_of_epochs_label.setText(QCoreApplication.translate("MainWindow", u"Number of epochs", None))
         self.patience_input.setText(QCoreApplication.translate("MainWindow", u"50", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"Basic training parameters", None))
-        self.train_data_input.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Ubuntu';\">images</span></p></body></html>", None))
-        self.train_in_memory_comboBox.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
-        self.train_in_memory_comboBox.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
-
-#if QT_CONFIG(tooltip)
-        self.train_data_in_memory.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to load all training data in memory or not. It speeds up the training process</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.train_data_in_memory.setText(QCoreApplication.translate("MainWindow", u"In memory", None))
-        self.train_data_input_browse_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
-#if QT_CONFIG(tooltip)
-        self.train_data_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the training data image directory</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.train_data_label.setText(QCoreApplication.translate("MainWindow", u"Image path", None))
-#if QT_CONFIG(tooltip)
-        self.train_gt_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the training data ground truth (GT) directory. Depending on the workflow this should point to a folder of mask labels (semantic segmentation), instance masks (instance segmentation), csv files (detection) and high resolution images (super-resolution).</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.train_gt_label.setText(QCoreApplication.translate("MainWindow", u"GT path", None))
-        self.train_data_gt_input.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Ubuntu';\">gt</span></p></body></html>", None))
-        self.train_data_gt_input_browse_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
-        self.cross_validation_nfolds_input.setText(QCoreApplication.translate("MainWindow", u"5", None))
-        self.cross_validation_fold_input.setText(QCoreApplication.translate("MainWindow", u"1", None))
-#if QT_CONFIG(tooltip)
-        self.validation_data_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the validation data image directory</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.validation_data_label.setText(QCoreApplication.translate("MainWindow", u"Image path", None))
-        self.validation_type_comboBox.setItemText(0, QCoreApplication.translate("MainWindow", u"Extract from train (split training)", None))
-        self.validation_type_comboBox.setItemText(1, QCoreApplication.translate("MainWindow", u"Extract from train (cross validation)", None))
-        self.validation_type_comboBox.setItemText(2, QCoreApplication.translate("MainWindow", u"Not extracted from train (path needed)", None))
-
-#if QT_CONFIG(tooltip)
-        self.cross_validation_nfolds_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of folds in the cross validation approach. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.cross_validation_nfolds_label.setText(QCoreApplication.translate("MainWindow", u"Cross validation number of folds", None))
 #if QT_CONFIG(tooltip)
         self.validation_type_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Validation data can be provided in three different ways: </span></p><p><span style=\" font-size:12pt;\">1) You can extract it from the training data given a percentage (&quot;Extract from train (split training)&quot; option). </span></p><p><span style=\" font-size:12pt;\">2) You can extract from the training data following a cross validation procedure (&quot;Extract from train (cross validation)&quot; option). Cross-Validation is a statistical method of evaluating and comparing learning algorithms by dividing data into two segments: one used to learn or train a model and the other used to validate the model. In cross-validation, you make a fixed number of folds (or partitions) of the data, run the analysis on each fold, and then average the overall error estimate. </span></p><p><span style=\" font-size:12pt;\">3) Use a separate source path to load the validation data (&quot;Not extracted from train (path needed)&quot; option)</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.validation_type_label.setText(QCoreApplication.translate("MainWindow", u"Validation type", None))
-        self.val_data_input_browse_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
-        self.val_in_memory_comboBox.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
-        self.val_in_memory_comboBox.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
-
-        self.percentage_validation_input.setText(QCoreApplication.translate("MainWindow", u"0.2", None))
+        self.val_data_gt_input_browse_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
+        self.cross_validation_nfolds_input.setText(QCoreApplication.translate("MainWindow", u"5", None))
 #if QT_CONFIG(tooltip)
-        self.val_in_memory_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to load all validation data in memory or not. It speeds up the evaluation process that is done after each epoch</span></p><p><br/></p></body></html>", None))
+        self.validation_data_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the validation data image directory</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.val_in_memory_label.setText(QCoreApplication.translate("MainWindow", u"In memory", None))
-        self.validation_data_gt_input.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Ubuntu';\">gt</span></p></body></html>", None))
+        self.validation_data_label.setText(QCoreApplication.translate("MainWindow", u"Image path", None))
+#if QT_CONFIG(tooltip)
+        self.cross_validation_fold_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of the fold to be used as validation in the cross validation approach. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.cross_validation_fold_label.setText(QCoreApplication.translate("MainWindow", u"Cross validation fold number", None))
 #if QT_CONFIG(tooltip)
         self.percentage_validation_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Percentage of the training data used as validation during the model training. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a float between 0 and 1</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.percentage_validation_label.setText(QCoreApplication.translate("MainWindow", u"Train percentage for validation", None))
 #if QT_CONFIG(tooltip)
+        self.val_in_memory_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to load all validation data in memory or not. It speeds up the evaluation process that is done after each epoch</span></p><p><br/></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.val_in_memory_label.setText(QCoreApplication.translate("MainWindow", u"In memory", None))
+#if QT_CONFIG(tooltip)
+        self.cross_validation_nfolds_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of folds in the cross validation approach. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.cross_validation_nfolds_label.setText(QCoreApplication.translate("MainWindow", u"Cross validation number of folds", None))
+#if QT_CONFIG(tooltip)
         self.validation_data_gt_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the validation data ground truth (GT) directory. Depending on the workflow this should point to a folder of mask labels (semantic segmentation), instance masks (instance segmentation), csv files (detection) and high resolution images (super-resolution).</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.validation_data_gt_label.setText(QCoreApplication.translate("MainWindow", u"GT path", None))
-        self.validation_data_input.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Ubuntu';\">images</span></p></body></html>", None))
-#if QT_CONFIG(tooltip)
-        self.cross_validation_fold_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of the fold to be used as validation in the cross validation approach. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.cross_validation_fold_label.setText(QCoreApplication.translate("MainWindow", u"Cross validation fold number", None))
-        self.val_data_gt_input_browse_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
+        self.percentage_validation_input.setText(QCoreApplication.translate("MainWindow", u"0.2", None))
+        self.validation_type_comboBox.setItemText(0, QCoreApplication.translate("MainWindow", u"Extract from train (split training)", None))
+        self.validation_type_comboBox.setItemText(1, QCoreApplication.translate("MainWindow", u"Extract from train (cross validation)", None))
+        self.validation_type_comboBox.setItemText(2, QCoreApplication.translate("MainWindow", u"Not extracted from train (path needed)", None))
+
+        self.val_in_memory_comboBox.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
+        self.val_in_memory_comboBox.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
+
+        self.cross_validation_fold_input.setText(QCoreApplication.translate("MainWindow", u"1", None))
+        self.val_data_input_browse_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
+        self.validation_data_input.setText(QCoreApplication.translate("MainWindow", u"images", None))
+        self.validation_data_gt_input.setText(QCoreApplication.translate("MainWindow", u"gt", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Validation data", None))
         self.train_label.setText(QCoreApplication.translate("MainWindow", u"Train data", None))
+#if QT_CONFIG(tooltip)
+        self.train_gt_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the training data ground truth (GT) directory. Depending on the workflow this should point to a folder of mask labels (semantic segmentation), instance masks (instance segmentation), csv files (detection) and high resolution images (super-resolution).</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.train_gt_label.setText(QCoreApplication.translate("MainWindow", u"GT path", None))
+#if QT_CONFIG(tooltip)
+        self.train_data_in_memory.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to load all training data in memory or not. It speeds up the training process</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.train_data_in_memory.setText(QCoreApplication.translate("MainWindow", u"In memory", None))
+#if QT_CONFIG(tooltip)
+        self.train_data_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the training data image directory</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.train_data_label.setText(QCoreApplication.translate("MainWindow", u"Image path", None))
+        self.train_data_input.setText(QCoreApplication.translate("MainWindow", u"images", None))
+        self.train_data_gt_input.setText(QCoreApplication.translate("MainWindow", u"gt", None))
+        self.train_data_input_browse_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
+        self.train_data_gt_input_browse_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
+        self.train_in_memory_comboBox.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
+        self.train_in_memory_comboBox.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
+
         self.train_tab_widget.setTabText(self.train_tab_widget.indexOf(self.train_general_options_tab), QCoreApplication.translate("MainWindow", u"General options", None))
         self.extract_random_patch_frame_label.setText(QCoreApplication.translate("MainWindow", u"Extract random patch options", None))
         self.label_14.setText(QCoreApplication.translate("MainWindow", u"Train data options", None))
@@ -8373,47 +8318,39 @@ class Ui_MainWindow(object):
         self.train_advanced_label_2.setText(QCoreApplication.translate("MainWindow", u"Advanced options", None))
         self.test_advanced_bn.setText("")
         self.label_85.setText(QCoreApplication.translate("MainWindow", u"Test data", None))
-#if QT_CONFIG(tooltip)
-        self.use_val_as_test.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to use validation data as test instead of trying to load test from 'Image path' and 'GT path'. Validation needs to be set as cross validation.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.use_val_as_test.setText(QCoreApplication.translate("MainWindow", u"Use validation as test", None))
-        self.test_data_gt_input_browse_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
+        self.test_exists_gt_input.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.test_exists_gt_input.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
 #if QT_CONFIG(tooltip)
         self.test_data_gt_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to load the test gt data from</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.test_data_gt_label.setText(QCoreApplication.translate("MainWindow", u"GT path", None))
+        self.test_data_input_browse_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
+        self.test_data_gt_input_browse_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
 #if QT_CONFIG(tooltip)
         self.test_data_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to load the test data from</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.test_data_label.setText(QCoreApplication.translate("MainWindow", u"Image path", None))
-#if QT_CONFIG(tooltip)
-        self.test_data_in_memory_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Wheter the test data is fully loaded in memory or processed file by file</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.test_data_in_memory_label.setText(QCoreApplication.translate("MainWindow", u"In memory", None))
-        self.test_data_input_browse_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
-        self.test_data_input.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'MS Shell Dlg 2';\">images</span></p></body></html>", None))
-        self.test_data_gt_input.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'MS Shell Dlg 2';\">gt</span></p></body></html>", None))
         self.test_data_in_memory_input.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
         self.test_data_in_memory_input.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
 
 #if QT_CONFIG(tooltip)
+        self.test_data_in_memory_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Wheter the test data is fully loaded in memory or processed file by file</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.test_data_in_memory_label.setText(QCoreApplication.translate("MainWindow", u"In memory", None))
+#if QT_CONFIG(tooltip)
         self.test_exists_gt_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether there is a ground truth for the test data or not. If so, the model performance will be evaluated comparing the predictions to the ground truth data.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.test_exists_gt_label.setText(QCoreApplication.translate("MainWindow", u"Exists GT", None))
+#if QT_CONFIG(tooltip)
+        self.use_val_as_test.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to use validation data as test instead of trying to load test from 'Image path' and 'GT path'. Validation needs to be set as cross validation.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.use_val_as_test.setText(QCoreApplication.translate("MainWindow", u"Use validation as test", None))
         self.use_val_as_test_input.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
         self.use_val_as_test_input.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
 
-        self.test_exists_gt_input.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.test_exists_gt_input.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
+        self.test_data_input.setText(QCoreApplication.translate("MainWindow", u"images", None))
+        self.test_data_gt_input.setText(QCoreApplication.translate("MainWindow", u"gt", None))
         self.test_tab_widget.setTabText(self.test_tab_widget.indexOf(self.test_general_options_tab), QCoreApplication.translate("MainWindow", u"General options", None))
         self.label_82.setText(QCoreApplication.translate("MainWindow", u"Test data options", None))
         self.sem_seg_check_data_input.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
@@ -8718,15 +8655,15 @@ class Ui_MainWindow(object):
         self.label_138.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Name of the job. It will be used to create a folder in the output path you selected. For instance, if the job name was set to &quot;my_semantic_segmentation&quot;, and if the output folder to save the results is &quot;/home/user/Downloads&quot;, all results of the experiment will be placed at : /home/user/Downloads/my_semantic_segmentation </span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.label_138.setText(QCoreApplication.translate("MainWindow", u"Job name", None))
-        self.examine_yaml_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
 #if QT_CONFIG(tooltip)
         self.output_folder_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to store the results. If you complete the proccess of creating a new one automatically this will point to the folder where you select to save the YAML file. It will be used to create a folder in the output path you selected. For instance, if the job name was set to &quot;my_semantic_segmentation&quot;, and if the output folder to save the results is &quot;/home/user/Downloads&quot;, all results of the experiment will be placed at : /home/user/Downloads/my_semantic_segmentation </span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.output_folder_label.setText(QCoreApplication.translate("MainWindow", u"Output folder to save the results", None))
+        self.output_folder_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
+        self.examine_yaml_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
 #if QT_CONFIG(tooltip)
         self.select_yaml_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">YAML configuration file to run BiaPy with. If you completed the proccess of creating a new YAML file this value will be set pointing to file. However, you can change it too.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.select_yaml_label.setText(QCoreApplication.translate("MainWindow", u"Select YAML configuration file", None))
-        self.output_folder_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
     # retranslateUi
 

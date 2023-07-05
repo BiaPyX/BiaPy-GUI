@@ -24,7 +24,6 @@ def examine(main_window, save_in_obj_tag=None, is_file=True):
 
     if save_in_obj_tag is not None:
         getattr(main_window.ui, save_in_obj_tag).setText(out)
-        getattr(main_window.ui, save_in_obj_tag).moveCursor(QtGui.QTextCursor.End, QtGui.QTextCursor.MoveAnchor)
         if save_in_obj_tag == "train_data_input":
             main_window.cfg.settings['train_data_input_path'] = out 
         elif save_in_obj_tag == "train_data_gt_input":

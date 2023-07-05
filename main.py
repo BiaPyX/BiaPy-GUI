@@ -30,18 +30,8 @@ class MainWindow(QMainWindow):
         self.cfg = Settings()
 
         # Adjust font cross-platform 
-        self.setStyleSheet("QWidget{font-size:16px}")
+        self.setStyleSheet("QWidget{font: \"Roboto Mono\", font-size:16px}")
         self.ui.biapy_version.setStyleSheet("QWidget{font-size:10px}")
-        self.ui.train_data_input.setStyleSheet("QWidget{font-size:16px}")
-        self.ui.train_data_gt_input.setStyleSheet("QWidget{font-size:16px}")
-        self.ui.validation_data_input.setStyleSheet("QWidget{font-size:16px}")
-        self.ui.validation_data_gt_input.setStyleSheet("QWidget{font-size:16px}")
-        self.ui.test_data_input.setStyleSheet("QWidget{font-size:16px}")
-        self.ui.test_data_gt_input.setStyleSheet("QWidget{font-size:16px}")
-        self.ui.select_yaml_name_label.setStyleSheet("QWidget{font-size:16px}")
-        self.ui.output_folder_input.setStyleSheet("QWidget{font-size:16px}")
-        self.ui.checkpoint_file_path_input.setStyleSheet("QWidget{font-size:16px}")
-        self.ui.goptions_browse_yaml_path_input.setStyleSheet("QWidget{font-size:16px}")
 
         # So the error and dialog windows can access it 
         global ui
