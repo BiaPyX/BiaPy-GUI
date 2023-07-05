@@ -9,8 +9,9 @@
 
 ## Run GUI 
 
-- [Windows 64-bit](https://github.com/danifranco/BiaPy-GUI/raw/main/dist-win/BiaPy.exe) 
+- [Windows 64-bit (outdated)](https://github.com/danifranco/BiaPy-GUI/raw/main/dist-win/BiaPy.exe) 
 - [Linux 64-bit](https://github.com/danifranco/BiaPy-GUI/raw/main/dist-linux/BiaPy) 
+- [macOS 64-bit](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/danifranco/BiaPy-GUI/raw/main/dist-macOS/BiaPy.app) 
 
 ## For developers (through console):
 
