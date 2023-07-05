@@ -1317,7 +1317,7 @@ QPushButton:pressed {
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>2</number>
+                <number>1</number>
                </property>
                <widget class="QWidget" name="page_home">
                 <property name="styleSheet">
@@ -1722,7 +1722,7 @@ QPushButton:pressed {
                     </font>
                    </property>
                    <property name="frameShape">
-                    <enum>QFrame::StyledPanel</enum>
+                    <enum>QFrame::NoFrame</enum>
                    </property>
                    <property name="frameShadow">
                     <enum>QFrame::Raised</enum>
@@ -1766,8 +1766,8 @@ QPushButton:pressed {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>941</width>
-                          <height>461</height>
+                          <width>943</width>
+                          <height>456</height>
                          </rect>
                         </property>
                         <property name="font">
@@ -2583,7 +2583,7 @@ QPushButton:pressed {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>939</width>
+                          <width>942</width>
                           <height>456</height>
                          </rect>
                         </property>
@@ -2649,7 +2649,7 @@ QPushButton:pressed {
                              <rect>
                               <x>0</x>
                               <y>0</y>
-                              <width>925</width>
+                              <width>928</width>
                               <height>493</height>
                              </rect>
                             </property>
@@ -3021,7 +3021,7 @@ QPushButton:pressed {
                                     <rect>
                                      <x>0</x>
                                      <y>0</y>
-                                     <width>877</width>
+                                     <width>880</width>
                                      <height>174</height>
                                     </rect>
                                    </property>
@@ -3484,7 +3484,7 @@ QPushButton:pressed {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>951</width>
+                          <width>953</width>
                           <height>463</height>
                          </rect>
                         </property>
@@ -3501,7 +3501,7 @@ QPushButton:pressed {
                          </font>
                         </property>
                         <property name="frameShape">
-                         <enum>QFrame::StyledPanel</enum>
+                         <enum>QFrame::NoFrame</enum>
                         </property>
                         <property name="frameShadow">
                          <enum>QFrame::Raised</enum>
@@ -13599,8 +13599,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>923</width>
-                                         <height>340</height>
+                                         <width>927</width>
+                                         <height>342</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_51">
@@ -13878,12 +13878,12 @@ QPushButton:pressed {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>951</width>
+                          <width>953</width>
                           <height>463</height>
                          </rect>
                         </property>
                         <property name="frameShape">
-                         <enum>QFrame::StyledPanel</enum>
+                         <enum>QFrame::NoFrame</enum>
                         </property>
                         <property name="frameShadow">
                          <enum>QFrame::Raised</enum>
@@ -14046,7 +14046,7 @@ QPushButton:pressed {
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>913</width>
+                                  <width>917</width>
                                   <height>995</height>
                                  </rect>
                                 </property>

@@ -30,7 +30,7 @@ class MainWindow(QMainWindow):
         self.cfg = Settings()
 
         # Adjust font cross-platform 
-        self.setStyleSheet("QWidget{font: \"Roboto Mono\", font-size:16px}")
+        self.setStyleSheet("QWidget{font-size:16px}")
         self.ui.biapy_version.setStyleSheet("QWidget{font-size:10px}")
 
         # So the error and dialog windows can access it 
