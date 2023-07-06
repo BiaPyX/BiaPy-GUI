@@ -17,7 +17,7 @@
 
 In macOS an error like ["BiaPy cannot be opened because the developer cannot be verified"](https://raw.githubusercontent.com/danifranco/BiaPy-GUI/main/images/macOS_binary_error.png) may appear. To solve that you can open a terminal and remove quarantine attribute from the file with the following command:
 
-````shell
+```shell
 xattr -d com.apple.quarantine BiaPy.app  
 ```
 
