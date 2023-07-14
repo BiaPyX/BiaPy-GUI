@@ -12,7 +12,7 @@ from PySide2.QtWidgets import *
 
 from ui_main import Ui_MainWindow 
 from ui_function import * 
-from ui_utils import examine, combobox_hide_visible_action, mark_syntax_error, expand_hide_advanced_options, buttonPressed, load_yaml_config
+from ui_utils import examine, combobox_hide_visible_action, mark_syntax_error, expand_hide_advanced_options, buttonPressed, load_yaml_config, resource_path
 from settings import Settings
 from aux_windows import dialog_Ui, error_Ui, workflow_explanation_Ui, yes_no_Ui
 
@@ -100,6 +100,7 @@ class MainWindow(QMainWindow):
         self.ui.right_arrow_bn.clicked.connect(lambda: UIFunction.move_workflow_view(self, False))
         self.ui.continue_bn.clicked.connect(lambda: buttonPressed(self, 'up', -1))
         self.ui.back_bn.clicked.connect(lambda: buttonPressed(self, 'down', -1))
+        self.ui.back_bn.setIcon(QIcon(resource_path(os.path.join("images","bn_images", "back.png"))))
 
         self.ui.workflow_view1_seemore_bn.clicked.connect(lambda: UIFunction.obtain_workflow_description(self, -1))
         self.ui.workflow_view2_seemore_bn.clicked.connect(lambda: UIFunction.obtain_workflow_description(self, 0))
@@ -593,6 +594,7 @@ if __name__ == "__main__":
     logging.basicConfig(filename=log_file, level=logging.ERROR)
     try:
         app = QApplication(sys.argv)
+        app.setWindowIcon(QIcon(resource_path(os.path.join("images","biapy_logo_icon.ico"))))
         window = MainWindow(log_file, log_dir)
         window.show()
         app.exec_()
