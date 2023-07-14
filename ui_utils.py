@@ -175,10 +175,10 @@ def set_workflow_page(self):
     self.ui.workflow_view3_name_label.setText(self.cfg.settings['workflow_names'][p])     
 
 def adjust_window_progress(self):
-    self.ui.window1_bn.setIcon(self.cfg.settings['dot_images'][0] if self.cfg.settings['page_number'] == 1 else self.cfg.settings['dot_images'][1])
-    self.ui.window2_bn.setIcon(self.cfg.settings['dot_images'][0] if self.cfg.settings['page_number'] == 2 else self.cfg.settings['dot_images'][1])
-    self.ui.window3_bn.setIcon(self.cfg.settings['dot_images'][0] if self.cfg.settings['page_number'] == 3 else self.cfg.settings['dot_images'][1])
-    self.ui.window4_bn.setIcon(self.cfg.settings['dot_images'][0] if self.cfg.settings['page_number'] == 4 else self.cfg.settings['dot_images'][1])
+    self.ui.window1_bn.setIcon(self.cfg.settings['dot_images'][0] if self.cfg.settings['page_number'] >= 1 else self.cfg.settings['dot_images'][1])
+    self.ui.window2_bn.setIcon(self.cfg.settings['dot_images'][0] if self.cfg.settings['page_number'] >= 2 else self.cfg.settings['dot_images'][1])
+    self.ui.window3_bn.setIcon(self.cfg.settings['dot_images'][0] if self.cfg.settings['page_number'] >= 3 else self.cfg.settings['dot_images'][1])
+    self.ui.window4_bn.setIcon(self.cfg.settings['dot_images'][0] if self.cfg.settings['page_number'] >= 4 else self.cfg.settings['dot_images'][1])
 
 def move_between_pages(self, to_page):
     # Semantic seg

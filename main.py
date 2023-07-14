@@ -102,6 +102,11 @@ class MainWindow(QMainWindow):
         self.ui.back_bn.clicked.connect(lambda: buttonPressed(self, 'down', -1))
         self.ui.back_bn.setIcon(QIcon(resource_path(os.path.join("images","bn_images", "back.png"))))
 
+        self.ui.window1_bn.clicked.connect(lambda: buttonPressed(self, 'bn_workflow', 99))
+        self.ui.window2_bn.clicked.connect(lambda: buttonPressed(self, 'bn_goptions', 99))
+        self.ui.window3_bn.clicked.connect(lambda: buttonPressed(self, 'bn_train', 99))
+        self.ui.window4_bn.clicked.connect(lambda: buttonPressed(self, 'bn_test', 99))
+        
         self.ui.workflow_view1_seemore_bn.clicked.connect(lambda: UIFunction.obtain_workflow_description(self, -1))
         self.ui.workflow_view2_seemore_bn.clicked.connect(lambda: UIFunction.obtain_workflow_description(self, 0))
         self.ui.workflow_view3_seemore_bn.clicked.connect(lambda: UIFunction.obtain_workflow_description(self, 1))
