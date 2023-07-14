@@ -7,7 +7,7 @@
 [BiaPy](https://github.com/danifranco/BiaPy) is an open source Python library for building bioimage analysis pipelines. This repository is actively under development by the Biomedical Computer Vision group at the [University of the Basque Country](https://www.ehu.eus/en/en-home) and the [Donostia International Physics Center](http://dipc.ehu.es/). 
 
 
-## Run GUI 
+## Download GUI 
 
 - [Windows 64-bit (outdated)](https://github.com/danifranco/BiaPy-GUI/raw/main/dist-win/BiaPy.exe) 
 - [Linux 64-bit](https://github.com/danifranco/BiaPy-GUI/raw/main/dist-linux/BiaPy) 
