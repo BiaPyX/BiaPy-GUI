@@ -43,7 +43,7 @@ class MainWindow(QMainWindow):
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.ui.bn_min.clicked.connect(self.showMinimized)
-        self.ui.bn_close.clicked.connect(self.close)
+        self.ui.bn_close.clicked.connect(self.close_all)
 
         gpu_regex = QtCore.QRegExp('^[0-9][0-9]*\s*(,\s*[0-9][0-9]*\s*)*$')
         self.gpu_validator = QtGui.QRegExpValidator(gpu_regex)
@@ -589,6 +589,11 @@ class MainWindow(QMainWindow):
 
         self.yes_no.create_question(question)
         self.yes_no.exec_()
+
+    def close_all(self):
+        self.yes_no_exec("Are you sure you want to exit?")
+        if self.yes_no.answer:
+            self.close()
 
 if __name__ == "__main__":
     window = None
