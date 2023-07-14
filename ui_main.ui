@@ -73,7 +73,7 @@
         <widget class="QFrame" name="frame_bottom_west">
          <property name="minimumSize">
           <size>
-           <width>240</width>
+           <width>262</width>
            <height>0</height>
           </size>
          </property>
@@ -294,8 +294,8 @@ color: white;
            <widget class="QFrame" name="frame_home">
             <property name="maximumSize">
              <size>
-              <width>240</width>
-              <height>55</height>
+              <width>255</width>
+              <height>52</height>
              </size>
             </property>
             <property name="font">
@@ -330,14 +330,14 @@ color: white;
               <widget class="QPushButton" name="bn_home">
                <property name="minimumSize">
                 <size>
-                 <width>240</width>
-                 <height>55</height>
+                 <width>0</width>
+                 <height>0</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>240</width>
-                 <height>55</height>
+                 <width>255</width>
+                 <height>52</height>
                 </size>
                </property>
                <property name="font">
@@ -386,8 +386,8 @@ QPushButton:pressed {
            <widget class="QFrame" name="frame_workflow">
             <property name="maximumSize">
              <size>
-              <width>240</width>
-              <height>55</height>
+              <width>255</width>
+              <height>52</height>
              </size>
             </property>
             <property name="font">
@@ -428,14 +428,14 @@ QPushButton:pressed {
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>240</width>
-                 <height>55</height>
+                 <width>255</width>
+                 <height>52</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>240</width>
-                 <height>55</height>
+                 <width>255</width>
+                 <height>52</height>
                 </size>
                </property>
                <property name="font">
@@ -468,7 +468,7 @@ QPushButton:pressed {
                </property>
                <property name="iconSize">
                 <size>
-                 <width>202</width>
+                 <width>225</width>
                  <height>48</height>
                 </size>
                </property>
@@ -482,10 +482,16 @@ QPushButton:pressed {
           </item>
           <item>
            <widget class="QFrame" name="frame_goptions">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="maximumSize">
              <size>
-              <width>240</width>
-              <height>55</height>
+              <width>255</width>
+              <height>52</height>
              </size>
             </property>
             <property name="font">
@@ -505,7 +511,7 @@ QPushButton:pressed {
               <number>0</number>
              </property>
              <property name="leftMargin">
-              <number>0</number>
+              <number>14</number>
              </property>
              <property name="topMargin">
               <number>0</number>
@@ -520,14 +526,14 @@ QPushButton:pressed {
               <widget class="QPushButton" name="bn_goptions">
                <property name="minimumSize">
                 <size>
-                 <width>240</width>
-                 <height>55</height>
+                 <width>0</width>
+                 <height>0</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>240</width>
-                 <height>55</height>
+                 <width>255</width>
+                 <height>52</height>
                 </size>
                </property>
                <property name="font">
@@ -560,7 +566,7 @@ QPushButton:pressed {
                </property>
                <property name="iconSize">
                 <size>
-                 <width>202</width>
+                 <width>238</width>
                  <height>48</height>
                 </size>
                </property>
@@ -582,8 +588,8 @@ QPushButton:pressed {
             </property>
             <property name="maximumSize">
              <size>
-              <width>240</width>
-              <height>55</height>
+              <width>255</width>
+              <height>52</height>
              </size>
             </property>
             <property name="font">
@@ -618,14 +624,14 @@ QPushButton:pressed {
               <widget class="QPushButton" name="bn_train">
                <property name="minimumSize">
                 <size>
-                 <width>240</width>
-                 <height>55</height>
+                 <width>255</width>
+                 <height>52</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>240</width>
-                 <height>55</height>
+                 <width>255</width>
+                 <height>52</height>
                 </size>
                </property>
                <property name="font">
@@ -686,8 +692,8 @@ QPushButton:pressed {
             </property>
             <property name="maximumSize">
              <size>
-              <width>240</width>
-              <height>55</height>
+              <width>255</width>
+              <height>52</height>
              </size>
             </property>
             <property name="font">
@@ -722,14 +728,14 @@ QPushButton:pressed {
               <widget class="QPushButton" name="bn_test">
                <property name="minimumSize">
                 <size>
-                 <width>240</width>
-                 <height>55</height>
+                 <width>255</width>
+                 <height>52</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>240</width>
-                 <height>55</height>
+                 <width>255</width>
+                 <height>52</height>
                 </size>
                </property>
                <property name="font">
@@ -784,8 +790,8 @@ QPushButton:pressed {
             </property>
             <property name="maximumSize">
              <size>
-              <width>240</width>
-              <height>55</height>
+              <width>255</width>
+              <height>52</height>
              </size>
             </property>
             <property name="font">
@@ -826,8 +832,8 @@ QPushButton:pressed {
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>240</width>
-                 <height>55</height>
+                 <width>255</width>
+                 <height>52</height>
                 </size>
                </property>
                <property name="font">
@@ -876,7 +882,7 @@ QPushButton:pressed {
            <widget class="QFrame" name="frame_8">
             <property name="maximumSize">
              <size>
-              <width>16777215</width>
+              <width>255</width>
               <height>50</height>
              </size>
             </property>
@@ -1431,6 +1437,12 @@ QPushButton:pressed {
                        </item>
                        <item>
                         <widget class="QLabel" name="biapy_description_label">
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>171</height>
+                          </size>
+                         </property>
                          <property name="maximumSize">
                           <size>
                            <width>930</width>
@@ -1444,7 +1456,7 @@ QPushButton:pressed {
                           </font>
                          </property>
                          <property name="text">
-                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/danifranco/BiaPy&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;BiaPy&lt;/span&gt;&lt;/a&gt; is an open source Python library for building bioimage analysis pipelines, also called workflows. This repository is actively under development by the Biomedical Computer Vision group at the &lt;a href=&quot;https://github.com/danifranco/BiaPy&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;University of the Basque Country &lt;/span&gt;&lt;/a&gt;and the &lt;a href=&quot;http://dipc.ehu.es/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Donostia International Physics Center&lt;/span&gt;&lt;/a&gt;. The library provides an easy way to create image processing pipelines that are commonly used in the analysis of biology microscopy images in 2D and 3D. Specifically, BiaPy contains ready-to-use solutions for tasks such as &lt;a href=&quot;https://biapy.readthedocs.io/en/latest/workflows/semantic_segmentation.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;semantic segmentation&lt;/span&gt;&lt;/a&gt;, &lt;a href=&quot;https://biapy.readthedocs.io/en/latest/workflows/instance_segmentation.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;instance segmentation&lt;/span&gt;&lt;/a&gt;, &lt;a href=&quot;https://biapy.readthedocs.io/en/latest/workflows/detection.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;object detection&lt;/span&gt;&lt;/a&gt;, &lt;a href=&quot;https://biapy.readthedocs.io/en/latest/workflows/denoising.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;image denoising&lt;/span&gt;&lt;/a&gt;, &lt;a href=&quot;https://biapy.readthedocs.io/en/latest/workflows/super_resolution.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;single image super-resolution&lt;/span&gt;&lt;/a&gt;, &lt;a href=&quot;https://biapy.readthedocs.io/en/latest/workflows/self_supervision.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;self-supervised learning&lt;/span&gt;&lt;/a&gt; and &lt;a href=&quot;https://biapy.readthedocs.io/en/latest/workflows/classification.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;image classification&lt;/span&gt;&lt;/a&gt;. The source code is based on Keras/TensorFlow as the backend. As BiaPy’s core is based on deep learning, it is recommended to use a machine with a graphics processing unit (GPU) for faster training and execution.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/danifranco/BiaPy&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;BiaPy&lt;/span&gt;&lt;/a&gt; is an open source Python library for building bioimage analysis pipelines, also called workflows. Specifically, BiaPy contains ready-to-use solutions for tasks such as &lt;a href=&quot;https://biapy.readthedocs.io/en/latest/workflows/semantic_segmentation.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;semantic segmentation&lt;/span&gt;&lt;/a&gt;, &lt;a href=&quot;https://biapy.readthedocs.io/en/latest/workflows/instance_segmentation.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;instance segmentation&lt;/span&gt;&lt;/a&gt;, &lt;a href=&quot;https://biapy.readthedocs.io/en/latest/workflows/detection.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;object detection&lt;/span&gt;&lt;/a&gt;, &lt;a href=&quot;https://biapy.readthedocs.io/en/latest/workflows/denoising.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;image denoising&lt;/span&gt;&lt;/a&gt;, &lt;a href=&quot;https://biapy.readthedocs.io/en/latest/workflows/super_resolution.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;single image super-resolution&lt;/span&gt;&lt;/a&gt;, &lt;a href=&quot;https://biapy.readthedocs.io/en/latest/workflows/self_supervision.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;self-supervised learning&lt;/span&gt;&lt;/a&gt; and &lt;a href=&quot;https://biapy.readthedocs.io/en/latest/workflows/classification.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;image classification&lt;/span&gt;&lt;/a&gt;. The source code is based on Keras/TensorFlow as the backend. As BiaPy’s core is based on deep learning, it is recommended to use a machine with a graphics processing unit (GPU) for faster training and execution.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                          </property>
                          <property name="wordWrap">
                           <bool>true</bool>
@@ -1490,6 +1502,56 @@ QPushButton:pressed {
                        <property name="verticalSpacing">
                         <number>0</number>
                        </property>
+                       <item row="0" column="0">
+                        <widget class="QLabel" name="dependencies_label">
+                         <property name="maximumSize">
+                          <size>
+                           <width>16777215</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>DejaVu Math TeX Gyre</family>
+                           <pointsize>12</pointsize>
+                           <weight>75</weight>
+                           <bold>true</bold>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>Dependency error</string>
+                         </property>
+                         <property name="openExternalLinks">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="3" column="2">
+                        <spacer name="horizontalSpacer">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                       <item row="3" column="0">
+                        <widget class="QLabel" name="docker_logo">
+                         <property name="minimumSize">
+                          <size>
+                           <width>250</width>
+                           <height>80</height>
+                          </size>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                        </widget>
+                       </item>
                        <item row="3" column="1">
                         <widget class="QLabel" name="docker_status_label">
                          <property name="minimumSize">
@@ -1518,56 +1580,6 @@ QPushButton:pressed {
                          </property>
                          <property name="openExternalLinks">
                           <bool>true</bool>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="3" column="2">
-                        <spacer name="horizontalSpacer">
-                         <property name="orientation">
-                          <enum>Qt::Horizontal</enum>
-                         </property>
-                         <property name="sizeHint" stdset="0">
-                          <size>
-                           <width>40</width>
-                           <height>20</height>
-                          </size>
-                         </property>
-                        </spacer>
-                       </item>
-                       <item row="0" column="0">
-                        <widget class="QLabel" name="dependencies_label">
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>30</height>
-                          </size>
-                         </property>
-                         <property name="font">
-                          <font>
-                           <family>DejaVu Math TeX Gyre</family>
-                           <pointsize>12</pointsize>
-                           <weight>75</weight>
-                           <bold>true</bold>
-                          </font>
-                         </property>
-                         <property name="text">
-                          <string>Dependency error</string>
-                         </property>
-                         <property name="openExternalLinks">
-                          <bool>true</bool>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="3" column="0">
-                        <widget class="QLabel" name="docker_logo">
-                         <property name="minimumSize">
-                          <size>
-                           <width>250</width>
-                           <height>80</height>
-                          </size>
-                         </property>
-                         <property name="text">
-                          <string/>
                          </property>
                         </widget>
                        </item>
@@ -1625,7 +1637,7 @@ QPushButton:pressed {
 }</string>
                        </property>
                        <property name="text">
-                        <string>Create new YAML file</string>
+                        <string>Create new workflow</string>
                        </property>
                        <property name="iconSize">
                         <size>
@@ -1665,7 +1677,7 @@ QPushButton:pressed {
 }</string>
                        </property>
                        <property name="text">
-                        <string>Continue with my own YAML file</string>
+                        <string>Use pre-existing workflow</string>
                        </property>
                        <property name="iconSize">
                         <size>
@@ -1752,7 +1764,7 @@ QPushButton:pressed {
                        </font>
                       </property>
                       <property name="currentIndex">
-                       <number>3</number>
+                       <number>1</number>
                       </property>
                       <widget class="QWidget" name="workflow_selection_page">
                        <property name="minimumSize">
@@ -2649,7 +2661,7 @@ QPushButton:pressed {
                              <rect>
                               <x>0</x>
                               <y>0</y>
-                              <width>928</width>
+                              <width>898</width>
                               <height>493</height>
                              </rect>
                             </property>
@@ -3021,8 +3033,8 @@ QPushButton:pressed {
                                     <rect>
                                      <x>0</x>
                                      <y>0</y>
-                                     <width>880</width>
-                                     <height>174</height>
+                                     <width>346</width>
+                                     <height>169</height>
                                     </rect>
                                    </property>
                                    <layout class="QGridLayout" name="gridLayout_2">
@@ -3697,7 +3709,7 @@ QPushButton:pressed {
                                 <property name="geometry">
                                  <rect>
                                   <x>0</x>
-                                  <y>-40</y>
+                                  <y>0</y>
                                   <width>934</width>
                                   <height>5832</height>
                                  </rect>
@@ -11889,8 +11901,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>925</width>
-                                         <height>342</height>
+                                         <width>529</width>
+                                         <height>301</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_18">
@@ -12335,8 +12347,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>915</width>
-                                         <height>340</height>
+                                         <width>529</width>
+                                         <height>181</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_17">
@@ -12738,8 +12750,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>913</width>
-                                         <height>338</height>
+                                         <width>529</width>
+                                         <height>217</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_19">
@@ -13121,8 +13133,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>913</width>
-                                         <height>338</height>
+                                         <width>546</width>
+                                         <height>210</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_49">
@@ -13440,8 +13452,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>913</width>
-                                         <height>338</height>
+                                         <width>340</width>
+                                         <height>99</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_50">
@@ -13599,8 +13611,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>927</width>
-                                         <height>342</height>
+                                         <width>380</width>
+                                         <height>135</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_51">
@@ -13810,8 +13822,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>913</width>
-                                         <height>338</height>
+                                         <width>399</width>
+                                         <height>44</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_52">
@@ -14046,7 +14058,7 @@ QPushButton:pressed {
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>917</width>
+                                  <width>814</width>
                                   <height>995</height>
                                  </rect>
                                 </property>
@@ -15481,8 +15493,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>927</width>
-                                       <height>354</height>
+                                       <width>464</width>
+                                       <height>291</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_61">
@@ -15861,8 +15873,8 @@ QPushButton:pressed {
                                      <property name="geometry">
                                       <rect>
                                        <x>0</x>
-                                       <y>-769</y>
-                                       <width>913</width>
+                                       <y>0</y>
+                                       <width>582</width>
                                        <height>1128</height>
                                       </rect>
                                      </property>
@@ -17230,7 +17242,7 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>913</width>
+                                       <width>552</width>
                                        <height>732</height>
                                       </rect>
                                      </property>
@@ -18121,8 +18133,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>927</width>
-                                       <height>354</height>
+                                       <width>372</width>
+                                       <height>44</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_64">
@@ -18198,8 +18210,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>927</width>
-                                       <height>354</height>
+                                       <width>426</width>
+                                       <height>44</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_65">
@@ -18275,8 +18287,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>927</width>
-                                       <height>354</height>
+                                       <width>488</width>
+                                       <height>44</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_66">
@@ -18352,8 +18364,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>927</width>
-                                       <height>354</height>
+                                       <width>399</width>
+                                       <height>44</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_67">
@@ -19149,8 +19161,8 @@ QPushButton:pressed {
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>889</width>
-                               <height>104</height>
+                               <width>96</width>
+                               <height>26</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_32">

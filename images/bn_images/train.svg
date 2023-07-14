@@ -7,7 +7,7 @@
    id="svg5"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
    sodipodi:docname="train.svg"
-   inkscape:export-filename="/home/dfranco/Documents/0.thesis/BiaPy_GUI/images/bn_images/train.png"
+   inkscape:export-filename="/home/dfranco/Documents/0.thesis/BiaPy-GUI-arg4/images/bn_images/train.png"
    inkscape:export-xdpi="53.443878"
    inkscape:export-ydpi="53.443878"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -38,13 +38,13 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="2.5620932"
-     inkscape:cx="91.136418"
-     inkscape:cy="25.565034"
+     inkscape:zoom="0.6405233"
+     inkscape:cx="328.63754"
+     inkscape:cy="214.66822"
      inkscape:window-width="1846"
      inkscape:window-height="1136"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-x="1994"
+     inkscape:window-y="27"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0" />
@@ -64,7 +64,7 @@
      transform="translate(-7.0888724,-5.4919925)">
     <text
        xml:space="preserve"
-       transform="matrix(0.26458333,0,0,0.26458333,-2.4639538,0.93011271)"
+       transform="matrix(0.26458333,0,0,0.26458333,8.1193796,0.93011271)"
        id="text4476"
        style="font-style:normal;font-weight:normal;font-size:32px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect4478);fill:#000000;fill-opacity:1;stroke:none"
        inkscape:export-filename="/home/dfranco/Documents/0.thesis/BiaPy_GUI/Minimalistic-Flat-Modern-GUI-Template/icons/1x/new/text4476.png"
@@ -72,15 +72,15 @@
        inkscape:export-ydpi="44.358955"><tspan
          x="143.7832"
          y="71.662109"
-         id="tspan921"><tspan
+         id="tspan1123"><tspan
            style="font-family:'DejaVu Serif';-inkscape-font-specification:'DejaVu Serif'"
-           id="tspan919">Train</tspan></tspan></text>
+           id="tspan1121">Train</tspan></tspan></text>
     <g
        id="System / Data"
        transform="matrix(8.8194444,0,0,8.8194444,-119.39815,-99.308656)" />
     <g
        id="System / Data-7"
-       transform="matrix(0.89844897,0,0,0.89844897,7.3128779,6.0158974)"
+       transform="matrix(0.89844897,0,0,0.89844897,17.896212,6.0158974)"
        style="fill:none;stroke-width:1.11303;stroke-miterlimit:4;stroke-dasharray:none">
       <path
          id="Vector"

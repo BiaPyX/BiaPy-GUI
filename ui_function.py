@@ -17,8 +17,7 @@ class UIFunction(MainWindow):
             self.ui.frame_home.setStyleSheet("background:rgb(255,255,255)") 
             oninit_checks(self)
             
-            self.ui.biapy_logo_label.setPixmap(QPixmap(resource_path(os.path.join("images","superminimal_ark_biapy2.png"))))
-            self.ui.docker_logo.setPixmap(QPixmap(resource_path(os.path.join("images","superminimal_ark_biapy2.png"))))
+            self.ui.biapy_logo_label.setPixmap(QPixmap(resource_path(os.path.join("images","biapy_logo.png"))))
             self.ui.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","closeAsset 43.png"))))
             self.ui.bn_min.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","hideAsset 53.png"))))
 

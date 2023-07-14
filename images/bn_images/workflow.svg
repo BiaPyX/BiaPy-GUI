@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   width="95.995621mm"
+   width="106.99562mm"
    height="22.812717mm"
-   viewBox="0 0 95.995621 22.812717"
+   viewBox="0 0 106.99562 22.812717"
    version="1.1"
    id="svg5"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
    sodipodi:docname="workflow.svg"
-   inkscape:export-filename="/home/dfranco/Documents/0.thesis/BiaPy_GUI/images/bn_images/workflow.png"
+   inkscape:export-filename="/home/dfranco/Documents/0.thesis/BiaPy-GUI-arg4/images/bn_images/workflow.png"
    inkscape:export-xdpi="53.443878"
    inkscape:export-ydpi="53.443878"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -38,13 +38,13 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="5.1241865"
-     inkscape:cx="61.765902"
-     inkscape:cy="34.639645"
+     inkscape:zoom="5.1241864"
+     inkscape:cx="128.89851"
+     inkscape:cy="37.371787"
      inkscape:window-width="1846"
      inkscape:window-height="1136"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-x="1994"
+     inkscape:window-y="27"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0" />
@@ -53,8 +53,8 @@
     <rect
        x="143.78255"
        y="43.349037"
-       width="237.34542"
-       height="89.664531"
+       width="237.34541"
+       height="89.664528"
        id="rect4478" />
   </defs>
   <g
@@ -64,7 +64,7 @@
      transform="translate(-7.0888724,-5.4919925)">
     <text
        xml:space="preserve"
-       transform="matrix(0.26458333,0,0,0.26458333,-12.970011,1.0130161)"
+       transform="matrix(0.26458333,0,0,0.26458333,13.488322,1.0130161)"
        id="text4476"
        style="font-style:normal;font-weight:normal;font-size:32px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect4478);fill:#000000;fill-opacity:1;stroke:none"
        inkscape:export-filename="/home/dfranco/Documents/0.thesis/BiaPy_GUI/Minimalistic-Flat-Modern-GUI-Template/icons/1x/new/text4476.png"
@@ -72,13 +72,13 @@
        inkscape:export-ydpi="44.358955"
        x="89.667969"
        y="0"><tspan
-         x="186.12012"
+         x="145.53418"
          y="71.662109"
-         id="tspan915"><tspan
+         id="tspan881"><tspan
            style="font-family:'DejaVu Serif';-inkscape-font-specification:'DejaVu Serif';text-align:center;text-anchor:middle"
-           id="tspan913">Workflow</tspan></tspan></text>
+           id="tspan879">New workflow</tspan></tspan></text>
     <path
-       d="m 24.712886,20.650323 v -3.115397 h -3.926951 l -2.303837,-2.303835 v -1.629353 a 2.725972,2.725972 0 1 0 -0.778846,0 v 1.615334 l -2.317858,2.317854 h -3.912937 v 3.115397 H 9.9147584 v 3.894246 h 3.8942456 v -3.894246 h -1.557698 v -2.336548 h 3.082685 l 2.75089,2.751675 2.752453,-2.751675 h 3.096707 v 2.336548 h -1.557704 v 3.894246 H 26.27059 V 20.650323 Z M 13.030155,23.76572 h -2.336548 v -2.336548 h 2.336548 z m 3.115394,-12.851012 a 1.9471229,1.9471229 0 1 1 1.947119,1.947124 1.9471229,1.9471229 0 0 1 -1.947119,-1.947124 z m 1.935446,9.060353 -2.025006,-2.025008 1.94712,-1.947122 h 0.155771 l 1.94712,1.947122 z m 7.410751,3.790659 h -2.336549 v -2.336548 h 2.336549 z"
+       d="m 42.704555,20.650323 v -3.115397 h -3.926951 l -2.303837,-2.303835 v -1.629353 a 2.725972,2.725972 0 1 0 -0.778846,0 v 1.615334 l -2.317858,2.317854 h -3.912937 v 3.115397 h -1.557699 v 3.894246 h 3.894246 v -3.894246 h -1.557698 v -2.336548 h 3.082685 l 2.75089,2.751675 2.752453,-2.751675 h 3.096707 v 2.336548 h -1.557704 v 3.894246 h 3.894253 V 20.650323 Z M 31.021824,23.76572 h -2.336548 v -2.336548 h 2.336548 z m 3.115394,-12.851012 a 1.9471229,1.9471229 0 1 1 1.947119,1.947124 1.9471229,1.9471229 0 0 1 -1.947119,-1.947124 z m 1.935446,9.060353 -2.025006,-2.025008 1.94712,-1.947122 h 0.155771 l 1.94712,1.947122 z m 7.410751,3.790659 h -2.336549 v -2.336548 h 2.336549 z"
        id="path2"
        style="stroke:#000000;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
   </g>

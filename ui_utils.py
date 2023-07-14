@@ -261,7 +261,7 @@ def oninit_checks(self):
         self.ui.docker_frame.setStyleSheet("")
     else:
         self.ui.docker_status_label.setText("Docker installation not found. Please, install it before running BiaPy in \
-                <a href=\"https://biapy.readthedocs.io/en/latest/get_started/installation.html#docker-installation/\">our documentation</a>. \
+                <a href=\"https://biapy.readthedocs.io/en/latest/get_started/installation.html#docker-installation/\">its documentation</a>. \
                 Once you have done that please restart this application.")
         self.ui.dependencies_label.setText("Dependency error")
         self.ui.docker_frame.setStyleSheet("#docker_frame { border: 3px solid red; }")
