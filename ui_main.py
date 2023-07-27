@@ -816,7 +816,7 @@ class Ui_MainWindow(object):
         self.workflow_view2_seemore_bn.setMinimumSize(QSize(140, 30))
         font3 = QFont()
         font3.setFamily(u"DejaVu Math TeX Gyre")
-        font3.setPointSize(9)
+        font3.setPointSize(11)
         self.workflow_view2_seemore_bn.setFont(font3)
         self.workflow_view2_seemore_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"

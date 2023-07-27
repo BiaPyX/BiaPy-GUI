@@ -2149,7 +2149,7 @@ border-radius: 25px;
                                  <property name="font">
                                   <font>
                                    <family>DejaVu Math TeX Gyre</family>
-                                   <pointsize>9</pointsize>
+                                   <pointsize>11</pointsize>
                                   </font>
                                  </property>
                                  <property name="styleSheet">
