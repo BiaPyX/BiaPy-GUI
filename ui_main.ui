@@ -21,7 +21,7 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
-    <string notr="true">background:rgb(91,90,90);</string>
+    <string notr="true">background: rgb(91,90,90);</string>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <property name="spacing">
@@ -946,6 +946,9 @@ QPushButton:pressed {
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="frameShape">
        <enum>QFrame::NoFrame</enum>
       </property>
@@ -1764,7 +1767,7 @@ QPushButton:pressed {
                        </font>
                       </property>
                       <property name="currentIndex">
-                       <number>0</number>
+                       <number>1</number>
                       </property>
                       <widget class="QWidget" name="workflow_selection_page">
                        <property name="minimumSize">
@@ -2168,7 +2171,7 @@ QPushButton:pressed {
 }</string>
                                  </property>
                                  <property name="text">
-                                  <string>See more . . .</string>
+                                  <string>Learn more . . .</string>
                                  </property>
                                 </widget>
                                </item>
@@ -2704,7 +2707,7 @@ QPushButton:pressed {
                                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Load previous training weigths (needed for test/inference phase or to train again but not from scratch). If the checkpoint file is empty, BiaPy will search for the checkpoint in the following manner: if the output folder and the job name match, BiaPy will locate the model's weights within the 'checkpoints' directory. On the other hand, if the checkpoint file path is specified that path will be used instead&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                   </property>
                                   <property name="text">
-                                   <string>Load checkpoint</string>
+                                   <string>Load already existing model</string>
                                   </property>
                                  </widget>
                                 </item>
@@ -2733,7 +2736,7 @@ QPushButton:pressed {
                                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Path to the model's checkpoint that will be loaded. Leave it blank to let BiaPy find it. If the output folder and the job name match, BiaPy will locate the model's weights within the 'checkpoints' directory&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                   </property>
                                   <property name="text">
-                                   <string>Checkpoint file</string>
+                                   <string>Model file</string>
                                   </property>
                                  </widget>
                                 </item>
@@ -2995,7 +2998,7 @@ QPushButton:pressed {
                                           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Math seed to use. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be an integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                          </property>
                                          <property name="text">
-                                          <string>Seed</string>
+                                          <string>Math seed</string>
                                          </property>
                                         </widget>
                                        </item>
@@ -3251,10 +3254,10 @@ QPushButton:pressed {
                                    </font>
                                   </property>
                                   <property name="toolTip">
-                                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Number of dimensions of the problem&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Number of dimensions of the input images&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                   </property>
                                   <property name="text">
-                                   <string>Dimensions</string>
+                                   <string>Image dimension</string>
                                   </property>
                                  </widget>
                                 </item>
@@ -3276,7 +3279,7 @@ QPushButton:pressed {
                                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;YAML file name&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                   </property>
                                   <property name="text">
-                                   <string>YAML name</string>
+                                   <string>Configuration file name</string>
                                   </property>
                                  </widget>
                                 </item>
@@ -3298,7 +3301,7 @@ QPushButton:pressed {
                                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Path to store the YAML file&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                   </property>
                                   <property name="text">
-                                   <string>YAML file path</string>
+                                   <string>Configuration file directory</string>
                                   </property>
                                  </widget>
                                 </item>
@@ -19018,8 +19021,8 @@ QPushButton:pressed {
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>96</width>
-                               <height>26</height>
+                               <width>889</width>
+                               <height>104</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_32">

@@ -600,9 +600,16 @@ if __name__ == "__main__":
     os.makedirs(log_dir, exist_ok=True)
     logger = logging.getLogger('BiaPy')
     logging.basicConfig(filename=log_file, level=logging.ERROR)
+    StyleSheet = """ 
+        QComboBox {
+            selection-background-color: rgb(64,144,253);
+        }
+        """
+
     try:
         app = QApplication(sys.argv)
         app.setWindowIcon(QIcon(resource_path(os.path.join("images","biapy_logo_icon.ico"))))
+        app.setStyleSheet(StyleSheet)
         window = MainWindow(log_file, log_dir)
         window.show()
         app.exec_()
