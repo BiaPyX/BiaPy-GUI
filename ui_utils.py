@@ -166,7 +166,7 @@ def set_workflow_page(self):
     self.ui.workflow_view1_name_label.setText(self.cfg.settings['workflow_names'][self.cfg.settings['selected_workflow']-1])
 
     # Mid view
-    self.ui.workflow_view2_label.setPixmap(self.cfg.settings['workflow_images_selec'][self.cfg.settings['selected_workflow']])
+    self.ui.workflow_view2_label.setPixmap(self.cfg.settings['workflow_images'][self.cfg.settings['selected_workflow']])
     self.ui.workflow_view2_name_label.setText(self.cfg.settings['workflow_names'][self.cfg.settings['selected_workflow']])
 
     # Right view

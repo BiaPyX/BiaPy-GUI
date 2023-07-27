@@ -35,18 +35,19 @@ class UIFunction(MainWindow):
             self.ui.test_advanced_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","down_arrow.svg"))))
 
             UIFunction.init_main_page(self)
+            UIFunction.init_workflow_page(self)
             UIFunction.init_goptions_page(self)
             UIFunction.init_train_page(self)
             UIFunction.init_test_page(self)
 
             self.cfg.settings['init'] = True
     
-    def obtain_workflow_description(self, offset):
+    def obtain_workflow_description(self):
         # Load first time
         if not 'workflow_description_images' in self.cfg.settings:
             self.cfg.load_workflow_detail_page()
 
-        s_workflow = self.cfg.settings['selected_workflow'] + offset
+        s_workflow = self.cfg.settings['selected_workflow'] 
         if s_workflow < 0:
             s_workflow = len(self.cfg.settings['workflow_names'])-1
         if s_workflow == len(self.cfg.settings['workflow_names']):
@@ -68,6 +69,11 @@ class UIFunction(MainWindow):
     ###############
     # Workflow page 
     ###############
+
+    def init_workflow_page(self):
+        self.ui.workflow_view1_frame.setEnabled(False)
+        self.ui.workflow_view3_frame.setEnabled(False)
+
     def move_workflow_view(self, isleft):
         if isleft:
             self.cfg.settings['selected_workflow'] = self.cfg.settings['selected_workflow'] - 1 if self.cfg.settings['selected_workflow'] != 0 else len(self.cfg.settings['workflow_names'])-1

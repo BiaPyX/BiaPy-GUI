@@ -92,16 +92,6 @@ class Settings():
             QPixmap(resource_path(os.path.join("images","classification.png")))
         ]
 
-        self.settings['workflow_images_selec'] = [
-            QPixmap(resource_path(os.path.join("images","semantic_seg_selected.png"))),
-            QPixmap(resource_path(os.path.join("images","instance_seg_selected.png"))),
-            QPixmap(resource_path(os.path.join("images","detection_selected.png"))),
-            QPixmap(resource_path(os.path.join("images","denoising_selected.png"))),
-            QPixmap(resource_path(os.path.join("images","sr_selected.png"))),
-            QPixmap(resource_path(os.path.join("images","ssl_selected.png"))),
-            QPixmap(resource_path(os.path.join("images","classification_selected.png")))
-        ]
-
     def load_workflow_detail_page(self):    
         self.settings['workflow_description_images'] = [
             [QPixmap(resource_path(os.path.join("images","semantic_seg_raw.png"))),QPixmap(resource_path(os.path.join("images","semantic_seg_label.png")))],

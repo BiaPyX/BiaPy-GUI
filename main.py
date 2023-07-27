@@ -107,9 +107,7 @@ class MainWindow(QMainWindow):
         self.ui.window3_bn.clicked.connect(lambda: buttonPressed(self, 'bn_train', 99))
         self.ui.window4_bn.clicked.connect(lambda: buttonPressed(self, 'bn_test', 99))
         
-        self.ui.workflow_view1_seemore_bn.clicked.connect(lambda: UIFunction.obtain_workflow_description(self, -1))
-        self.ui.workflow_view2_seemore_bn.clicked.connect(lambda: UIFunction.obtain_workflow_description(self, 0))
-        self.ui.workflow_view3_seemore_bn.clicked.connect(lambda: UIFunction.obtain_workflow_description(self, 1))
+        self.ui.workflow_view2_seemore_bn.clicked.connect(lambda: UIFunction.obtain_workflow_description(self))
 
         # General options page buttons
         self.ui.gpu_input.setValidator(self.gpu_validator)
