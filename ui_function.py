@@ -90,7 +90,7 @@ class UIFunction(MainWindow):
         self.ui.checkpoint_file_path_browse_bn.setVisible(False)
         self.ui.checkpoint_file_path_browse_label.setVisible(False)
 
-        self.ui.maxcpu_combobox.addItem("-1")
+        self.ui.maxcpu_combobox.addItem("All")
         for i in range(multiprocessing.cpu_count()):
             self.ui.maxcpu_combobox.addItem(str(i+1))
 

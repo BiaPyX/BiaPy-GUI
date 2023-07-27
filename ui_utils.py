@@ -280,7 +280,9 @@ def create_yaml_file(self):
     # System
     biapy_config['SYSTEM'] = {}
     
-    biapy_config['SYSTEM']['NUM_CPUS'] = int(get_text(self.ui.maxcpu_combobox))
+    cpus = get_text(self.ui.maxcpu_combobox)
+    cpus = -1 if cpus == "all" else int(cpus)
+    biapy_config['SYSTEM']['NUM_CPUS'] = cpus
 
     # Problem specification
     workflow_names_yaml = ['SEMANTIC_SEG', 'INSTANCE_SEG', 'DETECTION', 'DENOISING', 'SUPER_RESOLUTION', 
