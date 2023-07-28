@@ -69,7 +69,6 @@ class UIFunction(MainWindow):
     ###############
     # Workflow page 
     ###############
-
     def init_workflow_page(self):
         self.ui.workflow_view1_frame.setEnabled(False)
         self.ui.workflow_view3_frame.setEnabled(False)

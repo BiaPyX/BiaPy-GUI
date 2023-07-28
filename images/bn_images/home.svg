@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   width="95.995621mm"
-   height="22.812717mm"
-   viewBox="0 0 95.995621 22.812717"
+   width="126mm"
+   height="23mm"
+   viewBox="0 0 126 23"
    version="1.1"
    id="svg5"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
    sodipodi:docname="home.svg"
-   inkscape:export-filename="/home/dfranco/Documents/0.thesis/BiaPy_GUI/images/bn_images/home.png"
-   inkscape:export-xdpi="53.443878"
-   inkscape:export-ydpi="53.443878"
+   inkscape:export-filename="/home/dfranco/Documents/0.thesis/BiaPy-GUI-arg4/images/bn_images/home.png"
+   inkscape:export-xdpi="51.90435"
+   inkscape:export-ydpi="51.90435"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -39,11 +39,11 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="2"
-     inkscape:cx="76.25"
-     inkscape:cy="12.25"
+     inkscape:cx="184.75"
+     inkscape:cy="16"
      inkscape:window-width="1846"
-     inkscape:window-height="1136"
-     inkscape:window-x="0"
+     inkscape:window-height="1163"
+     inkscape:window-x="74"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1"
@@ -72,9 +72,9 @@
        inkscape:export-ydpi="44.358955"><tspan
          x="143.7832"
          y="71.662109"
-         id="tspan1154"><tspan
+         id="tspan841"><tspan
            style="font-family:'DejaVu Serif';-inkscape-font-specification:'DejaVu Serif'"
-           id="tspan1152">Home</tspan></tspan></text>
+           id="tspan839">Home</tspan></tspan></text>
     <g
        id="System / Data"
        transform="matrix(8.8194444,0,0,8.8194444,-119.39815,-99.308656)" />
