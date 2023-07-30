@@ -193,7 +193,7 @@ class Ui_Dialog(object):
         self.lab_heading.setText("")
         self.bn_min.setText("")
         self.bn_close.setText("")
-        self.label.setText(QCoreApplication.translate("Dialog", u"The YAML configuration file was created in the following path:", None))
+        self.label.setText(QCoreApplication.translate("Dialog", u"The configuration file was created in the following path:", None))
         self.yaml_path_label.setText("")
         self.ok_bn.setText(QCoreApplication.translate("Dialog", u"OK", None))
     # retranslateUi

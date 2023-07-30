@@ -862,20 +862,20 @@ def create_yaml_file(self):
 
     # Checking the directory
     if self.cfg.settings['yaml_config_file_path'] == "":
-        self.error_exec("YAML file path must be defined", "yaml_config_file_path")
+        self.error_exec("Configuration file path must be defined", "yaml_config_file_path")
         return True
     if not os.path.exists(self.cfg.settings['yaml_config_file_path']):
-        self.error_exec("The directory '{}' does not exist. That folder was selected to store the YAML file"\
+        self.error_exec("The directory '{}' does not exist. That folder was selected to store the configuration file"\
             .format(self.cfg.settings['yaml_config_file_path']), "yaml_config_file_path")
         return True
 
     # Checking YAML file name
     self.cfg.settings['yaml_config_filename'] = get_text(self.ui.goptions_yaml_name_input)
     if self.cfg.settings['yaml_config_filename'] == "":
-        self.error_exec("The YAML filename must be defined", "goptions_yaml_name_input")
+        self.error_exec("The configuration filename must be defined", "goptions_yaml_name_input")
         return True
     if not self.cfg.settings['yaml_config_filename'].endswith(".yaml") and not self.cfg.settings['yaml_config_filename'].endswith(".yml"):
-        self.error_exec("The YAML filename must have .yaml or .yml extension. You should change it to: {}"\
+        self.error_exec("The configuration filename must have .yaml or .yml extension. You should change it to: {}"\
             .format(self.cfg.settings['yaml_config_filename']+".yaml"), "goptions_yaml_name_input")
         return True
 
@@ -899,14 +899,14 @@ def create_yaml_file(self):
 def load_yaml_config(self, checks=True):
     if checks:
         if self.cfg.settings['yaml_config_filename'] == "":
-            self.error_exec("A YAML file must be selected", "select_yaml_name_label")
+            self.error_exec("A configuration file must be selected", "select_yaml_name_label")
             return False
         yaml_file = get_text(self.ui.select_yaml_name_label)
         if not os.path.exists(yaml_file):
-            self.error_exec("The YAML file does not exist!", "select_yaml_name_label")
+            self.error_exec("The configuration file does not exist!", "select_yaml_name_label")
             return False
         if not str(yaml_file).endswith(".yaml") and not str(yaml_file).endswith(".yml"):
-            self.error_exec("The YAML filename must have .yaml or .yml extension", "select_yaml_name_label")
+            self.error_exec("The configuration filename must have .yaml or .yml extension", "select_yaml_name_label")
             return False
     self.cfg.settings['biapy_cfg'] = Config("/home/","jobname")
     
@@ -921,6 +921,6 @@ def load_yaml_config(self, checks=True):
         self.ui.check_yaml_file_errors_label.setText(errors)
         self.ui.check_yaml_file_errors_frame.setStyleSheet("border: 2px solid red;")    
     else:
-        self.ui.check_yaml_file_errors_label.setText("No errors found in the YAML file")
+        self.ui.check_yaml_file_errors_label.setText("No errors found in the configuration file")
         self.ui.check_yaml_file_errors_frame.setStyleSheet("")
         return True

@@ -4802,7 +4802,7 @@ class Ui_MainWindow(object):
         self.test_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 796, 1005))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 880, 1005))
         self.gridLayout_37 = QGridLayout(self.scrollAreaWidgetContents_5)
         self.gridLayout_37.setObjectName(u"gridLayout_37")
         self.test_advanced_options_frame = QFrame(self.scrollAreaWidgetContents_5)
@@ -5331,7 +5331,7 @@ class Ui_MainWindow(object):
         self.scrollArea_8.setWidgetResizable(True)
         self.scrollAreaWidgetContents_12 = QWidget()
         self.scrollAreaWidgetContents_12.setObjectName(u"scrollAreaWidgetContents_12")
-        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 435, 293))
+        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 927, 354))
         self.gridLayout_61 = QGridLayout(self.scrollAreaWidgetContents_12)
         self.gridLayout_61.setObjectName(u"gridLayout_61")
         self.label_82 = QLabel(self.scrollAreaWidgetContents_12)
@@ -6754,7 +6754,7 @@ class Ui_MainWindow(object):
         self.check_yaml_file_errors_frame.setWidgetResizable(True)
         self.scrollAreaWidgetContents_19 = QWidget()
         self.scrollAreaWidgetContents_19.setObjectName(u"scrollAreaWidgetContents_19")
-        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 48, 19))
+        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 869, 104))
         self.verticalLayout_32 = QVBoxLayout(self.scrollAreaWidgetContents_19)
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
         self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)
@@ -6877,11 +6877,11 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
-        self.stackedWidget_create_yaml_frame.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget_create_yaml_frame.setCurrentIndex(3)
         self.train_tab_widget.setCurrentIndex(0)
         self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(1)
-        self.test_tab_widget.setCurrentIndex(0)
+        self.test_tab_widget.setCurrentIndex(1)
         self.test_workflow_specific_tab_stackedWidget.setCurrentIndex(2)
 
 
@@ -8609,6 +8609,6 @@ class Ui_MainWindow(object):
 #if QT_CONFIG(tooltip)
         self.select_yaml_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">YAML configuration file to run BiaPy with. If you completed the proccess of creating a new YAML file this value will be set pointing to file. However, you can change it too.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.select_yaml_label.setText(QCoreApplication.translate("MainWindow", u"Select YAML configuration file", None))
+        self.select_yaml_label.setText(QCoreApplication.translate("MainWindow", u"Select configuration file", None))
     # retranslateUi
 

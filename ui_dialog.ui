@@ -288,7 +288,7 @@ QPushButton:pressed {
             <string notr="true"/>
            </property>
            <property name="text">
-            <string>The YAML configuration file was created in the following path:</string>
+            <string>The configuration file was created in the following path:</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>

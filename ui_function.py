@@ -361,7 +361,7 @@ class UIFunction(MainWindow):
             self.error_exec("Job name can not be empty", "jobname")
             return
         if os.path.basename(get_text(self.ui.select_yaml_name_label)) == jobname:
-            self.error_exec("Job name can not have the same name as the YAML configuration file", "jobname")
+            self.error_exec("Job name can not have the same name as the configuration file", "jobname")
             return
 
         # Output folder check
