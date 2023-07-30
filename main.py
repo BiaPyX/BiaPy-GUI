@@ -373,13 +373,74 @@ class MainWindow(QMainWindow):
             {"sem_seg_z_filtering_size_label": "Yes", "sem_seg_z_filtering_size_input": "Yes"}))
 
         self.ui.inst_seg_data_channels_input.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "inst_seg_data_channels_input",
-            {"inst_seg_b_channel_th_label": ["BC", "BP", "BD", "BCM", "BCD", "BCDv2","BDv2"], "inst_seg_b_channel_th_input": ["BC", "BP", "BD", "BCM", "BCD", "BCDv2","BDv2"], 
-             "inst_seg_c_channel_th_label": ["BC", "BCM", "BCD", "BCDv2"], "inst_seg_c_channel_th_input": ["BC", "BCM", "BCD", "BCDv2"],
-             "inst_seg_d_channel_th_label": ["BD", "BCD", "BCDv2","BDv2", "Dv2"], "inst_seg_d_channel_th_input": ["BD", "BCD", "BCDv2","BDv2", "Dv2"], 
-             "inst_seg_p_channel_th_label": "BP", "inst_seg_p_channel_th_input": "BP", "inst_seg_repare_large_blobs_label": "BP", "inst_seg_repare_large_blobs_input": "BP",
-             "inst_seg_remove_close_points_label": "BP","inst_seg_remove_close_points_input": "BP","inst_seg_remove_close_points_radius_label": "BP", "inst_seg_remove_close_points_radius_input": "BP",
-             "inst_seg_fore_mask_th_label": ["BC", "BP", "BD", "BCM", "BCD", "BCDv2","BDv2"], "inst_seg_fore_mask_th_input": ["BC", "BP", "BD", "BCM", "BCD", "BCDv2","BDv2"],
-             "inst_seg_voronoi_label": ["BC", "BCM"], "inst_seg_voronoi_input": ["BC", "BCM"]}))
+            {"inst_seg_b_channel_th_label": [
+                "Binary mask + Contours", 
+                "Binary mask + Central points", 
+                "Binary mask + Distance map", 
+                "Binary mask + Contours + Foreground mask", 
+                "Binary mask + Contours + Distance map", 
+                "Binary mask + Contours + Distance map with background (experimental)",
+                "Binary mask + Distance map with background (experimental)"], 
+             "inst_seg_b_channel_th_input": [
+                "Binary mask + Contours", 
+                "Binary mask + Central points", 
+                "Binary mask + Distance map", 
+                "Binary mask + Contours + Foreground mask",
+                "Binary mask + Contours + Distance map", 
+                "Binary mask + Contours + Distance map with background (experimental)",
+                "Binary mask + Distance map with background (experimental)"], 
+             "inst_seg_c_channel_th_label": [
+                "Binary mask + Contours", 
+                "Binary mask + Contours + Foreground mask", 
+                "Binary mask + Contours + Distance map", 
+                "Binary mask + Contours + Distance map with background (experimental)"], 
+             "inst_seg_c_channel_th_input": [
+                "Binary mask + Contours", 
+                "Binary mask + Contours + Foreground mask", 
+                "Binary mask + Contours + Distance map", 
+                "Binary mask + Contours + Distance map with background (experimental)"],
+             "inst_seg_d_channel_th_label": [
+                "Binary mask + Distance map", 
+                "Binary mask + Contours + Distance map", 
+                "Binary mask + Contours + Distance map with background (experimental)",
+                "Binary mask + Distance map with background (experimental)", 
+                "Distance map with background (experimental)"], 
+             "inst_seg_d_channel_th_input": [
+                "Binary mask + Distance map", 
+                "Binary mask + Contours + Distance map", 
+                "Binary mask + Contours + Distance map with background (experimental)",
+                "Binary mask + Distance map with background (experimental)", 
+                "Distance map with background (experimental)"], 
+             "inst_seg_p_channel_th_label": "Binary mask + Central points", 
+             "inst_seg_p_channel_th_input": "Binary mask + Central points", 
+             "inst_seg_repare_large_blobs_label": "Binary mask + Central points", 
+             "inst_seg_repare_large_blobs_input": "Binary mask + Central points",
+             "inst_seg_remove_close_points_label": "Binary mask + Central points",
+             "inst_seg_remove_close_points_input": "Binary mask + Central points",
+             "inst_seg_remove_close_points_radius_label": "Binary mask + Central points", 
+             "inst_seg_remove_close_points_radius_input": "Binary mask + Central points",
+             "inst_seg_fore_mask_th_label": [
+                "Binary mask + Contours", 
+                "Binary mask + Central points", 
+                "Binary mask + Distance map", 
+                "Binary mask + Contours + Foreground mask", 
+                "Binary mask + Contours + Distance map", 
+                "Binary mask + Contours + Distance map with background (experimental)",
+                "Binary mask + Distance map with background (experimental)"], 
+             "inst_seg_fore_mask_th_input": [
+                "Binary mask + Contours", 
+                "Binary mask + Central points", 
+                "Binary mask + Distance map", 
+                "Binary mask + Contours + Foreground mask", 
+                "Binary mask + Contours + Distance map", 
+                "Binary mask + Contours + Distance map with background (experimental)",
+                "Binary mask + Distance map with background (experimental)"],
+             "inst_seg_voronoi_label": [
+                "Binary mask + Contours", 
+                "Binary mask + Contours + Foreground mask"], 
+             "inst_seg_voronoi_input": [
+                "Binary mask + Contours", 
+                "Binary mask + Contours + Foreground mask"]}))
         self.ui.inst_seg_ero_dil_fore_input.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "inst_seg_ero_dil_fore_input",
             {"inst_seg_fore_dil_label": "Yes", "inst_seg_fore_dil_input": "Yes", 
              "inst_seg_fore_ero_label": "Yes", "inst_seg_fore_ero_input": "Yes"}))

@@ -390,19 +390,38 @@ def create_yaml_file(self):
     ### INSTANCE_SEG
     if self.cfg.settings['selected_workflow'] == 1:
         biapy_config['PROBLEM']['INSTANCE_SEG'] = {}
-        biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_CHANNELS'] = get_text(self.ui.inst_seg_data_channels_input)
+        
+        # Transcribe problem representation
+        problem_channels = 'BC'
+        if get_text(self.ui.inst_seg_data_channels_input) == "Binary mask + Contours":
+            problem_channels = 'BC'
+        elif get_text(self.ui.inst_seg_data_channels_input) == "Binary mask + Central points":
+            problem_channels = 'BP'
+        elif get_text(self.ui.inst_seg_data_channels_input) == "Binary mask + Distance map":
+            problem_channels = 'BD'
+        elif get_text(self.ui.inst_seg_data_channels_input) == "Binary mask + Contours + Foreground mask":
+            problem_channels = 'BCM'
+        elif get_text(self.ui.inst_seg_data_channels_input) == "Binary mask + Contours + Distance map":
+            problem_channels = 'BCD'
+        elif get_text(self.ui.inst_seg_data_channels_input) == "Binary mask + Contours + Distance map with background (experimental)":
+            problem_channels = 'BCDv2'
+        elif get_text(self.ui.inst_seg_data_channels_input) == "Binary mask + Distance map with background (experimental)":
+            problem_channels = 'BDv2'
+        else: # Distance map with background (experimental)
+            problem_channels = 'Dv2'
+        biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_CHANNELS'] = problem_channels
         biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_CHANNEL_WEIGHTS'] = get_text(self.ui.inst_seg_channel_weigths_input) 
         if get_text(self.ui.inst_seg_contour_mode_combobox) != "thick":
             biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_CONTOUR_MODE'] = get_text(self.ui.inst_seg_contour_mode_combobox)
 
-        if 'B' in get_text(self.ui.inst_seg_data_channels_input):
+        if 'B' in problem_channels:
             biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_BINARY_MASK'] = float(get_text(self.ui.inst_seg_b_channel_th_input))
             biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_FOREGROUND'] = float(get_text(self.ui.inst_seg_fore_mask_th_input))
-        if 'C' in get_text(self.ui.inst_seg_data_channels_input):
+        if 'C' in problem_channels:
             biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_CONTOUR'] = float(get_text(self.ui.inst_seg_c_channel_th_input))
-        if 'D' in get_text(self.ui.inst_seg_data_channels_input):    
+        if 'D' in problem_channels:    
             biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_DISTANCE'] = float(get_text(self.ui.inst_seg_d_channel_th_input))
-        if 'P' in get_text(self.ui.inst_seg_data_channels_input): 
+        if 'P' in problem_channels: 
             biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_POINTS'] = float(get_text(self.ui.inst_seg_p_channel_th_input))
         if get_text(self.ui.inst_seg_small_obj_fil_before_input) == "Yes":
             biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_REMOVE_BEFORE_MW'] = True
@@ -808,9 +827,9 @@ def create_yaml_file(self):
                 biapy_config['TEST']['POST_PROCESSING']['Z_FILTERING_SIZE'] = int(get_text(self.ui.inst_seg_z_filtering_size_input))
             if float(get_text(self.ui.inst_seg_circularity_filtering_input)) != -1:
                 biapy_config['TEST']['POST_PROCESSING']['WATERSHED_CIRCULARITY'] = float(get_text(self.ui.inst_seg_circularity_filtering_input))
-            if get_text(self.ui.inst_seg_data_channels_input) in ["BC", "BCM"] and get_text(self.ui.inst_seg_voronoi_input) == "Yes":
+            if problem_channels in ["BC", "BCM"] and get_text(self.ui.inst_seg_voronoi_input) == "Yes":
                 biapy_config['TEST']['POST_PROCESSING']['VORONOI_ON_MASK'] = True 
-            if get_text(self.ui.inst_seg_data_channels_input) == "BP":
+            if problem_channels == "BP":
                 if int(get_text(self.ui.inst_seg_repare_large_blobs_input)) != -1:
                     biapy_config['TEST']['POST_PROCESSING']['REPARE_LARGE_BLOBS_SIZE'] = int(get_text(self.ui.inst_seg_repare_large_blobs_input))
                 if get_text(self.ui.inst_seg_remove_close_points_input) == "Yes":

@@ -1353,7 +1353,7 @@ QPushButton:pressed {
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>0</number>
+                <number>1</number>
                </property>
                <widget class="QWidget" name="page_home">
                 <property name="styleSheet">
@@ -1922,7 +1922,7 @@ QPushButton:pressed {
                        </font>
                       </property>
                       <property name="currentIndex">
-                       <number>1</number>
+                       <number>2</number>
                       </property>
                       <widget class="QWidget" name="workflow_selection_page">
                        <property name="minimumSize">
@@ -11853,7 +11853,7 @@ QPushButton:pressed {
                                    </font>
                                   </property>
                                   <property name="currentIndex">
-                                   <number>2</number>
+                                   <number>1</number>
                                   </property>
                                   <widget class="QWidget" name="train_workflow_specific_tab_semantic_seg_page">
                                    <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -11891,8 +11891,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>490</width>
-                                         <height>303</height>
+                                         <width>895</width>
+                                         <height>343</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_18">
@@ -12337,8 +12337,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>490</width>
-                                         <height>183</height>
+                                         <width>895</width>
+                                         <height>343</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_17">
@@ -12520,7 +12520,7 @@ QPushButton:pressed {
                                               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;This variable determines the channels to be created based on input instance masks. These option are composed from these individual options:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;	- 'B' stands for 'Binary segmentation', containing each instance region without the contour. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;	- 'C' stands for 'Contour', containing each instance contour. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;	- 'D' stands for 'Distance', each pixel containing the distance of it to the instance contour. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;	- 'M' stands for 'Mask', contains the B and the C channels, i.e. the foreground mask. Is simply achieved by binarizing input instance masks. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;	- 'P' stands for 'Points' and contains the central points of an instance (as in Detection workflow)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;	- 'Dv2' stands for 'Distance V2', which is an updated version of 'D' channel calculating background distance as well. This option is experimental.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                              </property>
                                              <property name="text">
-                                              <string>Data channels</string>
+                                              <string>Problem representation</string>
                                              </property>
                                             </widget>
                                            </item>
@@ -12528,7 +12528,7 @@ QPushButton:pressed {
                                             <widget class="QComboBox" name="inst_seg_data_channels_input">
                                              <property name="minimumSize">
                                               <size>
-                                               <width>200</width>
+                                               <width>600</width>
                                                <height>30</height>
                                               </size>
                                              </property>
@@ -12546,42 +12546,42 @@ QPushButton:pressed {
                                              </property>
                                              <item>
                                               <property name="text">
-                                               <string>BC</string>
+                                               <string>Binary mask + Contours</string>
                                               </property>
                                              </item>
                                              <item>
                                               <property name="text">
-                                               <string>BP</string>
+                                               <string>Binary mask + Central points</string>
                                               </property>
                                              </item>
                                              <item>
                                               <property name="text">
-                                               <string>BD</string>
+                                               <string>Binary mask + Distance map</string>
                                               </property>
                                              </item>
                                              <item>
                                               <property name="text">
-                                               <string>BCM</string>
+                                               <string>Binary mask + Contours + Foreground mask</string>
                                               </property>
                                              </item>
                                              <item>
                                               <property name="text">
-                                               <string>BCD</string>
+                                               <string>Binary mask + Contours + Distance map</string>
                                               </property>
                                              </item>
                                              <item>
                                               <property name="text">
-                                               <string>BCDv2</string>
+                                               <string>Binary mask + Contours + Distance map with background (experimental)</string>
                                               </property>
                                              </item>
                                              <item>
                                               <property name="text">
-                                               <string>BDv2</string>
+                                               <string>Binary mask + Distance map with background (experimental)</string>
                                               </property>
                                              </item>
                                              <item>
                                               <property name="text">
-                                               <string>Dv2</string>
+                                               <string>Distance map with background (experimental)</string>
                                               </property>
                                              </item>
                                             </widget>
@@ -12740,8 +12740,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>490</width>
-                                         <height>219</height>
+                                         <width>893</width>
+                                         <height>341</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_19">
@@ -13123,8 +13123,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>506</width>
-                                         <height>210</height>
+                                         <width>893</width>
+                                         <height>341</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_49">
@@ -13442,8 +13442,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>326</width>
-                                         <height>101</height>
+                                         <width>893</width>
+                                         <height>341</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_50">
@@ -13601,8 +13601,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>361</width>
-                                         <height>137</height>
+                                         <width>893</width>
+                                         <height>341</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_51">
@@ -13812,8 +13812,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>346</width>
-                                         <height>44</height>
+                                         <width>893</width>
+                                         <height>341</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_52">
