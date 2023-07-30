@@ -45,9 +45,6 @@ class MainWindow(QMainWindow):
         self.ui.bn_min.clicked.connect(self.showMinimized)
         self.ui.bn_close.clicked.connect(self.close_all)
 
-        gpu_regex = QtCore.QRegExp('^[0-9][0-9]*\s*(,\s*[0-9][0-9]*\s*)*$')
-        self.gpu_validator = QtGui.QRegExpValidator(gpu_regex)
-
         two_pos_number_regex = QtCore.QRegExp('^\s*[0-9][0-9]*\s*,\s*[0-9][0-9]*\s*$')
         self.two_pos_number_validator = QtGui.QRegExpValidator(two_pos_number_regex)
 
@@ -110,7 +107,6 @@ class MainWindow(QMainWindow):
         self.ui.workflow_view2_seemore_bn.clicked.connect(lambda: UIFunction.obtain_workflow_description(self))
 
         # General options page buttons
-        self.ui.gpu_input.setValidator(self.gpu_validator)
         self.ui.seed_input.setValidator(self.int_validator)
         self.ui.dimensions_comboBox.currentIndexChanged.connect(lambda: self.change_problem_dimensions(self.ui.dimensions_comboBox.currentIndex()))
         self.change_problem_dimensions(0)

@@ -1353,7 +1353,7 @@ QPushButton:pressed {
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>1</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="page_home">
                 <property name="styleSheet">
@@ -1448,8 +1448,8 @@ QPushButton:pressed {
                          </property>
                          <property name="maximumSize">
                           <size>
-                           <width>930</width>
-                           <height>20</height>
+                           <width>16777215</width>
+                           <height>16777215</height>
                           </size>
                          </property>
                          <property name="font">
@@ -1470,12 +1470,12 @@ QPushButton:pressed {
                          <property name="minimumSize">
                           <size>
                            <width>0</width>
-                           <height>171</height>
+                           <height>0</height>
                           </size>
                          </property>
                          <property name="maximumSize">
                           <size>
-                           <width>930</width>
+                           <width>16777215</width>
                            <height>16777215</height>
                           </size>
                          </property>
@@ -1500,7 +1500,7 @@ QPushButton:pressed {
                      </widget>
                     </item>
                     <item>
-                     <widget class="QFrame" name="docker_frame">
+                     <widget class="QFrame" name="dependencies_frame">
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
@@ -1510,7 +1510,7 @@ QPushButton:pressed {
                       <property name="maximumSize">
                        <size>
                         <width>16777215</width>
-                        <height>300</height>
+                        <height>16777215</height>
                        </size>
                       </property>
                       <property name="styleSheet">
@@ -1530,14 +1530,103 @@ QPushButton:pressed {
                         <number>15</number>
                        </property>
                        <property name="verticalSpacing">
-                        <number>0</number>
+                        <number>9</number>
                        </property>
+                       <item row="1" column="0">
+                        <widget class="QFrame" name="docker_frame">
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_28">
+                          <property name="spacing">
+                           <number>6</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>9</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>9</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>9</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>9</number>
+                          </property>
+                          <item>
+                           <widget class="QLabel" name="docker_logo">
+                            <property name="minimumSize">
+                             <size>
+                              <width>250</width>
+                              <height>90</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>16777215</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="docker_status_label">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>0</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>16777215</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>DejaVu Math TeX Gyre</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>TextLabel</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                            <property name="wordWrap">
+                             <bool>true</bool>
+                            </property>
+                            <property name="openExternalLinks">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
                        <item row="0" column="0">
-                        <widget class="QLabel" name="dependencies_label">
+                        <widget class="QLabel" name="docker_head_label">
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>15</height>
+                          </size>
+                         </property>
                          <property name="maximumSize">
                           <size>
                            <width>16777215</width>
-                           <height>30</height>
+                           <height>16777215</height>
                           </size>
                          </property>
                          <property name="font">
@@ -1549,68 +1638,107 @@ QPushButton:pressed {
                           </font>
                          </property>
                          <property name="text">
-                          <string>Dependency error</string>
+                          <string>Docker dependency</string>
                          </property>
                          <property name="openExternalLinks">
                           <bool>true</bool>
                          </property>
                         </widget>
                        </item>
-                       <item row="3" column="2">
-                        <spacer name="horizontalSpacer">
-                         <property name="orientation">
-                          <enum>Qt::Horizontal</enum>
-                         </property>
-                         <property name="sizeHint" stdset="0">
-                          <size>
-                           <width>40</width>
-                           <height>20</height>
-                          </size>
-                         </property>
-                        </spacer>
-                       </item>
-                       <item row="3" column="0">
-                        <widget class="QLabel" name="docker_logo">
-                         <property name="minimumSize">
-                          <size>
-                           <width>250</width>
-                           <height>80</height>
-                          </size>
-                         </property>
-                         <property name="text">
-                          <string/>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="3" column="1">
-                        <widget class="QLabel" name="docker_status_label">
-                         <property name="minimumSize">
-                          <size>
-                           <width>270</width>
-                           <height>100</height>
-                          </size>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>100</width>
-                           <height>16777215</height>
-                          </size>
-                         </property>
+                       <item row="0" column="1">
+                        <widget class="QLabel" name="gpu_head_label">
                          <property name="font">
                           <font>
-                           <family>DejaVu Math TeX Gyre</family>
                            <pointsize>12</pointsize>
+                           <weight>75</weight>
+                           <bold>true</bold>
                           </font>
                          </property>
                          <property name="text">
-                          <string>TextLabel</string>
+                          <string>GPU dependency</string>
                          </property>
-                         <property name="wordWrap">
-                          <bool>true</bool>
+                        </widget>
+                       </item>
+                       <item row="1" column="1">
+                        <widget class="QFrame" name="gpu_frame">
+                         <property name="toolTipDuration">
+                          <number>3</number>
                          </property>
-                         <property name="openExternalLinks">
-                          <bool>true</bool>
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
                          </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_33">
+                          <property name="spacing">
+                           <number>6</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>9</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>9</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>9</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>9</number>
+                          </property>
+                          <item>
+                           <widget class="QLabel" name="gpu_icon_label">
+                            <property name="minimumSize">
+                             <size>
+                              <width>250</width>
+                              <height>90</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>16777215</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="frameShape">
+                             <enum>QFrame::NoFrame</enum>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="gpu_status_label">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>0</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>TextLabel</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                            <property name="wordWrap">
+                             <bool>true</bool>
+                            </property>
+                            <property name="openExternalLinks">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
                         </widget>
                        </item>
                       </layout>
@@ -1640,7 +1768,7 @@ QPushButton:pressed {
                        <property name="geometry">
                         <rect>
                          <x>120</x>
-                         <y>70</y>
+                         <y>40</y>
                          <width>241</width>
                          <height>40</height>
                         </rect>
@@ -1680,7 +1808,7 @@ QPushButton:pressed {
                        <property name="geometry">
                         <rect>
                          <x>460</x>
-                         <y>70</y>
+                         <y>40</y>
                          <width>361</width>
                          <height>40</height>
                         </rect>
@@ -1794,7 +1922,7 @@ QPushButton:pressed {
                        </font>
                       </property>
                       <property name="currentIndex">
-                       <number>3</number>
+                       <number>1</number>
                       </property>
                       <widget class="QWidget" name="workflow_selection_page">
                        <property name="minimumSize">
@@ -2921,7 +3049,7 @@ QPushButton:pressed {
                                      <x>0</x>
                                      <y>0</y>
                                      <width>856</width>
-                                     <height>180</height>
+                                     <height>175</height>
                                     </rect>
                                    </property>
                                    <layout class="QGridLayout" name="gridLayout_2">
@@ -3048,31 +3176,6 @@ QPushButton:pressed {
                                            <family>DejaVu Math TeX Gyre</family>
                                            <pointsize>12</pointsize>
                                           </font>
-                                         </property>
-                                        </widget>
-                                       </item>
-                                       <item row="0" column="2">
-                                        <widget class="QLineEdit" name="gpu_input">
-                                         <property name="minimumSize">
-                                          <size>
-                                           <width>200</width>
-                                           <height>30</height>
-                                          </size>
-                                         </property>
-                                         <property name="maximumSize">
-                                          <size>
-                                           <width>200</width>
-                                           <height>30</height>
-                                          </size>
-                                         </property>
-                                         <property name="font">
-                                          <font>
-                                           <family>DejaVu Math TeX Gyre</family>
-                                           <pointsize>12</pointsize>
-                                          </font>
-                                         </property>
-                                         <property name="text">
-                                          <string>0</string>
                                          </property>
                                         </widget>
                                        </item>
@@ -3596,7 +3699,7 @@ QPushButton:pressed {
                                 <property name="geometry">
                                  <rect>
                                   <x>0</x>
-                                  <y>-169</y>
+                                  <y>0</y>
                                   <width>895</width>
                                   <height>5842</height>
                                  </rect>
@@ -12637,8 +12740,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>893</width>
-                                         <height>341</height>
+                                         <width>490</width>
+                                         <height>219</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_19">
@@ -13945,7 +14048,7 @@ QPushButton:pressed {
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>880</width>
+                                  <width>796</width>
                                   <height>1005</height>
                                  </rect>
                                 </property>
@@ -17129,7 +17232,7 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>910</width>
+                                       <width>510</width>
                                        <height>736</height>
                                       </rect>
                                      </property>
@@ -19048,8 +19151,8 @@ QPushButton:pressed {
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>869</width>
-                               <height>104</height>
+                               <width>96</width>
+                               <height>26</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_32">

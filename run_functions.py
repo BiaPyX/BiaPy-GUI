@@ -164,8 +164,8 @@ class run_worker(QObject):
             dt_string = now.strftime("%Y%m%d_%H%M%S")
             jobname = get_text(self.main_gui.ui.job_name_input)
             cfg_file = get_text(self.main_gui.ui.select_yaml_name_label)
-            gpus = get_text(self.main_gui.ui.gpu_input)
-            gpus = sorted([int(x) for x in gpus.split(',')])
+            gpus = self.main_gui.ui.gpu_input.currentData()
+            gpus = sorted([int(x[0]) for x in gpus])
             gpus = list(dict.fromkeys(gpus))
             gpus = ','.join(str(x) for x in gpus)
             command=["-cfg", "{}".format(cfg_file), "-rdir", "{}".format(self.output_folder),

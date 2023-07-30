@@ -3,11 +3,14 @@ import sys
 import re
 import multiprocessing
 
+from PySide2.QtCore import  QSize
+
 import settings
 from main import * 
 from run_functions import run_worker
 from build_functions import build_worker
 from ui_utils import get_text, resource_path, set_workflow_page, update_container_status, oninit_checks, load_yaml_config
+from checkableComboBox import CheckableComboBox
 
 class UIFunction(MainWindow):
 
@@ -62,9 +65,12 @@ class UIFunction(MainWindow):
     # Home page 
     ###########
     def init_main_page(self):
-        pixmap = QPixmap(resource_path(os.path.join("images","docker_logo.png")))
-        pixmap = pixmap.scaled(QSize(201,51),aspectRatioMode=QtCore.Qt.AspectRatioMode.KeepAspectRatio)
+        pixmap = QPixmap(resource_path(os.path.join("images","docker_logo.svg")))
+        pixmap = pixmap.scaledToWidth(220,aspectRatioMode=QtCore.Qt.AspectRatioMode.KeepAspectRatio)
         self.ui.docker_logo.setPixmap(pixmap)
+        pixmap = QPixmap(resource_path(os.path.join("images","gpu_icon.svg")))
+        pixmap = pixmap.scaledToHeight(90,aspectRatioMode=QtCore.Qt.AspectRatioMode.KeepAspectRatio)
+        self.ui.gpu_icon_label.setPixmap(pixmap)
 
     ###############
     # Workflow page 
@@ -92,6 +98,20 @@ class UIFunction(MainWindow):
         self.ui.maxcpu_combobox.addItem("All")
         for i in range(multiprocessing.cpu_count()):
             self.ui.maxcpu_combobox.addItem(str(i+1))
+        
+        # Create GPU input field
+        self.ui.gpu_input = CheckableComboBox(self.ui.frame_2)
+        self.ui.gpu_input.setObjectName(u"gpu_input")
+        self.ui.gpu_input.setMinimumSize(QSize(400, 30))
+        self.ui.gpu_input.setMaximumSize(QSize(400, 30))
+        font = QFont()
+        font.setFamily(u"DejaVu Math TeX Gyre")
+        font.setPointSize(12)
+        self.ui.gpu_input.setFont(font)
+        self.ui.gridLayout_5.addWidget(self.ui.gpu_input, 0, 2, 1, 1)
+
+        for i, gpu in enumerate(self.cfg.settings['GPUs']):
+            self.ui.gpu_input.addItem("{} : {} ".format(i, gpu.name), check=True if i == 0 else False)
 
     ############
     # Train page 

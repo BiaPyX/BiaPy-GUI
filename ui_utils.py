@@ -3,6 +3,7 @@ import sys
 import traceback
 import docker
 import ast 
+import GPUtil
 
 from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtCore import QUrl
@@ -323,28 +324,43 @@ def update_container_status(self, signal):
     # If the container was built correctly 
     if signal == 0:
         self.cfg.settings['biapy_container_ready'] = True
-        self.ui.dependencies_label.setText("Dependency check")
+        self.ui.docker_head_label.setText("Dependencies")
         self.ui.docker_frame.setStyleSheet("")
 
 def oninit_checks(self):
+    # Docker check
     try:
         docker_client = docker.from_env()
         self.cfg.settings['docker_found'] = True
     except:
         self.cfg.settings['docker_found'] = False
         print(traceback.format_exc())
-
     if self.cfg.settings['docker_found']:
         self.ui.docker_status_label.setText("<br>Docker installation found")
         self.cfg.settings['biapy_container_ready'] = True
-        self.ui.dependencies_label.setText("Dependency check")
-        self.ui.docker_frame.setStyleSheet("")
+        self.ui.docker_head_label.setText("Docker dependency")
+        self.ui.docker_frame.setStyleSheet("#gpu_frame { border: 3px solid green; border-radius: 25px;}")
     else:
         self.ui.docker_status_label.setText("Docker installation not found. Please, install it before running BiaPy in \
                 <a href=\"https://biapy.readthedocs.io/en/latest/get_started/installation.html#docker-installation/\">its documentation</a>. \
                 Once you have done that please restart this application.")
-        self.ui.dependencies_label.setText("Dependency error")
-        self.ui.docker_frame.setStyleSheet("#docker_frame { border: 3px solid red; }")
+        self.ui.docker_head_label.setText("Docker dependency error")
+        self.ui.docker_frame.setStyleSheet("#docker_frame { border: 3px solid red; border-radius: 25px;}")
+
+    # GPU check
+    self.cfg.settings['GPUs'] = GPUtil.getGPUs()
+    if len(self.cfg.settings['GPUs']) > 0:
+        if len(self.cfg.settings['GPUs']) == 1:
+            self.ui.gpu_status_label.setText("1 NVIDIA GPU card found")
+        else:
+            self.ui.gpu_status_label.setText("{} NVIDIA GPU cards found".format(len(self.cfg.settings['GPUs'])))
+        self.ui.gpu_head_label.setText("GPU dependency")
+        self.ui.gpu_frame.setStyleSheet("#gpu_frame { border: 3px solid green; border-radius: 25px;}")
+    else:
+        self.ui.gpu_status_label.setText("No NVIDIA GPU card was found. BiaPy will run on the CPU, which is much slower!")
+        self.ui.gpu_head_label.setText("GPU dependency error")
+        self.ui.gpu_frame.setStyleSheet("#gpu_frame { border: 3px solid red; border-radius: 25px;}")
+
 
 def get_text(obj):
     if isinstance(obj, QComboBox):
