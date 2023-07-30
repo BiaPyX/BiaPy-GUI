@@ -377,7 +377,7 @@ def create_yaml_file(self):
     biapy_config['SYSTEM'] = {}
     
     cpus = get_text(self.ui.maxcpu_combobox)
-    cpus = -1 if cpus == "all" else int(cpus)
+    cpus = -1 if cpus == "All" else int(cpus)
     biapy_config['SYSTEM']['NUM_CPUS'] = cpus
 
     # Problem specification
