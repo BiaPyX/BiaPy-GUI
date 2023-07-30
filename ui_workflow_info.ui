@@ -335,6 +335,7 @@ QPushButton:pressed {
                      <property name="font">
                       <font>
                        <family>DejaVu Math TeX Gyre</family>
+                       <pointsize>12</pointsize>
                       </font>
                      </property>
                      <property name="text">
@@ -375,6 +376,7 @@ QPushButton:pressed {
                      <property name="font">
                       <font>
                        <family>DejaVu Math TeX Gyre</family>
+                       <pointsize>12</pointsize>
                       </font>
                      </property>
                      <property name="text">

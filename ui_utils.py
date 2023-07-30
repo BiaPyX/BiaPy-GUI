@@ -42,8 +42,13 @@ def combobox_hide_visible_action(main_window, combobox, frames_dict, frames_dict
         visible_values = frames_dict[key]
         if not isinstance(visible_values, list):
             visible_values = [visible_values]
-
-        vis = True if str(getattr(main_window.ui, combobox).currentText()) in visible_values else False
+        if main_window.cfg.settings['selected_workflow'] in [3,5,6]:
+            if '_gt_' in key:
+                vis = False
+            else:
+                vis = True if str(getattr(main_window.ui, combobox).currentText()) in visible_values else False
+        else:
+            vis = True if str(getattr(main_window.ui, combobox).currentText()) in visible_values else False
         getattr(main_window.ui, key).setVisible(vis)
 
     if frames_dict_values_to_set is not None:
@@ -187,36 +192,100 @@ def move_between_pages(self, to_page):
         models = self.cfg.settings['semantic_models']
         self.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.train_workflow_specific_tab_semantic_seg_page)
         self.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.test_workflow_specific_tab_semantic_seg_page)
+        # Train page
+        self.ui.train_gt_label.setText("Input label folder")
+        self.ui.train_gt_label.setVisible(True)
+        self.ui.train_data_gt_input.setVisible(True)
+        self.ui.train_data_gt_input_browse_bn.setVisible(True)
+        self.ui.validation_data_gt_label.setText("Input label folder")
+        # Test page
+        self.ui.test_data_gt_label.setText("Input label folder")
+        self.ui.test_exists_gt_label.setText("Do you have test labels?")
+        self.ui.test_exists_gt_label.setVisible(True)
+        self.ui.test_exists_gt_input.setVisible(True)
     # Instance seg
     elif self.cfg.settings['selected_workflow'] == 1:
         jobname = "my_instance_segmentation"
         models = self.cfg.settings['instance_models']
         self.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.train_workflow_specific_tab_instance_seg_page)
         self.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.test_workflow_specific_tab_instance_seg_page)
+        # Train page
+        self.ui.train_gt_label.setText("Input label folder")
+        self.ui.train_gt_label.setVisible(True)
+        self.ui.train_data_gt_input.setVisible(True)
+        self.ui.train_data_gt_input_browse_bn.setVisible(True)
+        self.ui.validation_data_gt_label.setText("Input label folder")
+        # Test page
+        self.ui.test_data_gt_label.setText("Input label folder")
+        self.ui.test_exists_gt_label.setText("Do you have test labels?")
+        self.ui.test_exists_gt_label.setVisible(True)
+        self.ui.test_exists_gt_input.setVisible(True)
     # Detection
     elif self.cfg.settings['selected_workflow'] == 2:
         jobname = "my_detection"
         models = self.cfg.settings['detection_models']
         self.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.train_workflow_specific_tab_detection_page)
         self.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.test_workflow_specific_tab_detection_page)
+        # Train page
+        self.ui.train_gt_label.setText("Input CSV folder")
+        self.ui.train_gt_label.setVisible(True)
+        self.ui.train_data_gt_input.setVisible(True)
+        self.ui.train_data_gt_input_browse_bn.setVisible(True)
+        self.ui.validation_data_gt_label.setText("Input CSV folder")
+        # Test page
+        self.ui.test_data_gt_label.setText("Input CSV folder")
+        self.ui.test_exists_gt_label.setText("Do you have CSV files for test data?")
+        self.ui.test_exists_gt_label.setVisible(True)
+        self.ui.test_exists_gt_input.setVisible(True)
     # Denoising
     elif self.cfg.settings['selected_workflow'] == 3:
         jobname = "my_denoising"
         models = self.cfg.settings['denoising_models']
         self.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.train_workflow_specific_tab_denoising_page)
         self.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.test_workflow_specific_tab_denoising_page)
+        # Train page
+        self.ui.train_gt_label.setVisible(False)
+        self.ui.train_data_gt_input.setVisible(False)
+        self.ui.train_data_gt_input_browse_bn.setVisible(False)
+        # Test page
+        self.ui.test_data_gt_label.setVisible(False)
+        self.ui.test_data_gt_input.setVisible(False)
+        self.ui.test_data_gt_input_browse_bn.setVisible(False)
+        self.ui.test_exists_gt_label.setVisible(False)
+        self.ui.test_exists_gt_input.setVisible(False)
     # Super resolution
     elif self.cfg.settings['selected_workflow'] == 4:
         jobname = "my_super_resolution"
         models = self.cfg.settings['sr_models']
         self.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.train_workflow_specific_tab_sr_page)
         self.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.test_workflow_specific_tab_sr_page)
+        # Train page
+        self.ui.train_gt_label.setText("Input high-resolution image folder")
+        self.ui.train_gt_label.setVisible(True)
+        self.ui.train_data_gt_input.setVisible(True)
+        self.ui.train_data_gt_input_browse_bn.setVisible(True)
+        self.ui.validation_data_gt_label.setText("Input high-resolution image folder")
+        # Test page
+        self.ui.test_data_gt_label.setText("Input high-resolution image folder")
+        self.ui.test_exists_gt_label.setText("Do you have high-resolution test data?")
+        self.ui.test_exists_gt_label.setVisible(True)
+        self.ui.test_exists_gt_input.setVisible(True)
     # Self-supevised learning
     elif self.cfg.settings['selected_workflow'] == 5:
         jobname = "my_self_supervised_learning"
         models = self.cfg.settings['ssl_models']
         self.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.train_workflow_specific_tab_ssl_page)
         self.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.test_workflow_specific_tab_ssl_page)
+        # Train page
+        self.ui.train_gt_label.setVisible(False)
+        self.ui.train_data_gt_input.setVisible(False)
+        self.ui.train_data_gt_input_browse_bn.setVisible(False)
+        # Test page
+        self.ui.test_data_gt_label.setVisible(False)
+        self.ui.test_data_gt_input.setVisible(False)
+        self.ui.test_data_gt_input_browse_bn.setVisible(False)
+        self.ui.test_exists_gt_label.setVisible(False)
+        self.ui.test_exists_gt_input.setVisible(False)
     # Classification
     elif self.cfg.settings['selected_workflow'] == 6:
         jobname = "my_classification"
@@ -224,7 +293,18 @@ def move_between_pages(self, to_page):
         goptions_tab_widget_visible = True
         self.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.train_workflow_specific_tab_classification_page)
         self.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.test_workflow_specific_tab_classification_page)
-    
+        # Train page
+        self.ui.train_gt_label.setVisible(False)
+        self.ui.train_data_gt_input.setVisible(False)
+        self.ui.train_data_gt_input_browse_bn.setVisible(False)
+        # Test page
+        self.ui.test_data_gt_label.setVisible(False)
+        self.ui.test_data_gt_input.setVisible(False)
+        self.ui.test_data_gt_input_browse_bn.setVisible(False)
+        self.ui.test_exists_gt_label.setText("Is the test separated in classes?")
+        self.ui.test_exists_gt_label.setVisible(True)
+        self.ui.test_exists_gt_input.setVisible(True)
+
     actual_name = get_text(self.ui.job_name_input)
     if actual_name in ["", "my_semantic_segmentation", "my_instance_segmentation", "my_detection", "my_denoising", \
         "my_super_resolution", "my_self_supervised_learning", "my_classification"]:
@@ -385,7 +465,8 @@ def create_yaml_file(self):
         
         biapy_config['DATA']['TRAIN']['IN_MEMORY'] = True if get_text(self.ui.train_in_memory_comboBox) == "Yes" else False
         biapy_config['DATA']['TRAIN']['PATH'] = get_text(self.ui.train_data_input)
-        biapy_config['DATA']['TRAIN']['GT_PATH'] = get_text(self.ui.train_data_gt_input)
+        if self.cfg.settings['selected_workflow'] not in [4,6,7]:
+            biapy_config['DATA']['TRAIN']['GT_PATH'] = get_text(self.ui.train_data_gt_input)
         if int(get_text(self.ui.replicate_data_input)) != 0:
             biapy_config['DATA']['TRAIN']['REPLICATE'] = int(get_text(self.ui.replicate_data_input))
         biapy_config['DATA']['TRAIN']['OVERLAP'] = get_text(self.ui.train_overlap_input)
@@ -418,7 +499,8 @@ def create_yaml_file(self):
             biapy_config['DATA']['VAL']['FROM_TRAIN'] = False
             biapy_config['DATA']['VAL']['IN_MEMORY'] = True if get_text(self.ui.val_in_memory_comboBox) == "Yes" else False 
             biapy_config['DATA']['VAL']['PATH'] = get_text(self.ui.validation_data_input)
-            biapy_config['DATA']['VAL']['GT_PATH'] = get_text(self.ui.validation_data_gt_input)
+            if self.cfg.settings['selected_workflow'] not in [4,6,7]:
+                biapy_config['DATA']['VAL']['GT_PATH'] = get_text(self.ui.validation_data_gt_input)
             biapy_config['DATA']['VAL']['OVERLAP'] = get_text(self.ui.validation_overlap_input)
             biapy_config['DATA']['VAL']['PADDING'] = get_text(self.ui.validation_padding_input)
 
@@ -438,7 +520,8 @@ def create_yaml_file(self):
         else:
             if get_text(self.ui.test_exists_gt_input) == "Yes":
                 biapy_config['DATA']['TEST']['LOAD_GT'] = True
-                biapy_config['DATA']['TEST']['GT_PATH'] = get_text(self.ui.test_data_gt_input)
+                if self.cfg.settings['selected_workflow'] not in [4,6,7]:
+                    biapy_config['DATA']['TEST']['GT_PATH'] = get_text(self.ui.test_data_gt_input)
             else:
                 biapy_config['DATA']['TEST']['LOAD_GT'] = False
             biapy_config['DATA']['TEST']['PATH'] = get_text(self.ui.test_data_input)
