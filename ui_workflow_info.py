@@ -25,16 +25,16 @@ class Ui_Workflow_info(object):
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.frame_2 = QFrame(Workflow_info)
-        self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setStyleSheet(u"background:rgb(255,255,255);")
-        self.frame_2.setFrameShape(QFrame.NoFrame)
-        self.frame_2.setFrameShadow(QFrame.Plain)
-        self.verticalLayout_2 = QVBoxLayout(self.frame_2)
+        self.centralwidget = QFrame(Workflow_info)
+        self.centralwidget.setObjectName(u"centralwidget")
+        self.centralwidget.setStyleSheet(u"background:rgb(255,255,255);")
+        self.centralwidget.setFrameShape(QFrame.NoFrame)
+        self.centralwidget.setFrameShadow(QFrame.Plain)
+        self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
         self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.frame_top = QFrame(self.frame_2)
+        self.frame_top = QFrame(self.centralwidget)
         self.frame_top.setObjectName(u"frame_top")
         self.frame_top.setMinimumSize(QSize(0, 40))
         self.frame_top.setMaximumSize(QSize(16777215, 40))
@@ -45,6 +45,13 @@ class Ui_Workflow_info(object):
         self.horizontalLayout.setSpacing(0)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.icon_label = QLabel(self.frame_top)
+        self.icon_label.setObjectName(u"icon_label")
+        self.icon_label.setMinimumSize(QSize(40, 40))
+        self.icon_label.setMaximumSize(QSize(40, 40))
+
+        self.horizontalLayout.addWidget(self.icon_label)
+
         self.lab_heading = QLabel(self.frame_top)
         self.lab_heading.setObjectName(u"lab_heading")
         font = QFont()
@@ -58,8 +65,13 @@ class Ui_Workflow_info(object):
 
         self.bn_close = QPushButton(self.frame_top)
         self.bn_close.setObjectName(u"bn_close")
-        self.bn_close.setMinimumSize(QSize(55, 35))
-        self.bn_close.setMaximumSize(QSize(55, 35))
+        sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bn_close.sizePolicy().hasHeightForWidth())
+        self.bn_close.setSizePolicy(sizePolicy)
+        self.bn_close.setMinimumSize(QSize(55, 40))
+        self.bn_close.setMaximumSize(QSize(55, 40))
         self.bn_close.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgba(0,0,0,0);\n"
@@ -82,7 +94,7 @@ class Ui_Workflow_info(object):
 
         self.verticalLayout_2.addWidget(self.frame_top)
 
-        self.frame_bottom = QFrame(self.frame_2)
+        self.frame_bottom = QFrame(self.centralwidget)
         self.frame_bottom.setObjectName(u"frame_bottom")
         font1 = QFont()
         font1.setFamily(u"DejaVu Math TeX Gyre")
@@ -115,9 +127,6 @@ class Ui_Workflow_info(object):
         self.workflow_name_label = QLabel(self.frame_6)
         self.workflow_name_label.setObjectName(u"workflow_name_label")
         self.workflow_name_label.setEnabled(True)
-        sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.workflow_name_label.sizePolicy().hasHeightForWidth())
         self.workflow_name_label.setSizePolicy(sizePolicy)
         font2 = QFont()
@@ -273,7 +282,7 @@ class Ui_Workflow_info(object):
         self.verticalLayout_2.addWidget(self.frame_bottom)
 
 
-        self.verticalLayout.addWidget(self.frame_2)
+        self.verticalLayout.addWidget(self.centralwidget)
 
 
         self.retranslateUi(Workflow_info)
@@ -283,6 +292,7 @@ class Ui_Workflow_info(object):
 
     def retranslateUi(self, Workflow_info):
         Workflow_info.setWindowTitle(QCoreApplication.translate("Workflow_info", u"Workflow info", None))
+        self.icon_label.setText("")
         self.lab_heading.setText("")
         self.bn_close.setText("")
         self.workflow_name_label.setText("")

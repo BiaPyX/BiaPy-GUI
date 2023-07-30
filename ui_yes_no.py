@@ -25,16 +25,36 @@ class Ui_yes_no(object):
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.frame_2 = QFrame(yes_no)
-        self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setStyleSheet(u"background: rgb(255,255,255);")
-        self.frame_2.setFrameShape(QFrame.NoFrame)
-        self.frame_2.setFrameShadow(QFrame.Plain)
-        self.verticalLayout_2 = QVBoxLayout(self.frame_2)
+        self.centralwidget = QFrame(yes_no)
+        self.centralwidget.setObjectName(u"centralwidget")
+        self.centralwidget.setStyleSheet(u"background: rgb(255,255,255);")
+        self.centralwidget.setFrameShape(QFrame.NoFrame)
+        self.centralwidget.setFrameShadow(QFrame.Plain)
+        self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
         self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout_2.setContentsMargins(2, 2, 2, 2)
-        self.frame_bottom = QFrame(self.frame_2)
+        self.frame_top = QFrame(self.centralwidget)
+        self.frame_top.setObjectName(u"frame_top")
+        self.frame_top.setMinimumSize(QSize(40, 40))
+        self.frame_top.setMaximumSize(QSize(40, 40))
+        self.frame_top.setFrameShape(QFrame.NoFrame)
+        self.frame_top.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout = QHBoxLayout(self.frame_top)
+        self.horizontalLayout.setSpacing(0)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.icon_label = QLabel(self.frame_top)
+        self.icon_label.setObjectName(u"icon_label")
+        self.icon_label.setMinimumSize(QSize(40, 40))
+        self.icon_label.setMaximumSize(QSize(40, 40))
+
+        self.horizontalLayout.addWidget(self.icon_label)
+
+
+        self.verticalLayout_2.addWidget(self.frame_top)
+
+        self.frame_bottom = QFrame(self.centralwidget)
         self.frame_bottom.setObjectName(u"frame_bottom")
         font = QFont()
         font.setFamily(u"DejaVu Math TeX Gyre")
@@ -55,6 +75,7 @@ class Ui_yes_no(object):
         font1.setKerning(True)
         self.question_label.setFont(font1)
         self.question_label.setStyleSheet(u"")
+        self.question_label.setAlignment(Qt.AlignCenter)
         self.question_label.setWordWrap(True)
 
         self.verticalLayout_3.addWidget(self.question_label)
@@ -118,7 +139,7 @@ class Ui_yes_no(object):
         self.verticalLayout_2.addWidget(self.frame_bottom)
 
 
-        self.verticalLayout.addWidget(self.frame_2)
+        self.verticalLayout.addWidget(self.centralwidget)
 
 
         self.retranslateUi(yes_no)
@@ -128,6 +149,7 @@ class Ui_yes_no(object):
 
     def retranslateUi(self, yes_no):
         yes_no.setWindowTitle(QCoreApplication.translate("yes_no", u"yes_no", None))
+        self.icon_label.setText("")
         self.question_label.setText(QCoreApplication.translate("yes_no", u"TEXT", None))
         self.yes_bn.setText(QCoreApplication.translate("yes_no", u"Yes", None))
         self.no_bn.setText(QCoreApplication.translate("yes_no", u"No", None))

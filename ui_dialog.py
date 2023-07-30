@@ -25,16 +25,16 @@ class Ui_Dialog(object):
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.frame_2 = QFrame(Dialog)
-        self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setStyleSheet(u"background:rgb(255,255,255);")
-        self.frame_2.setFrameShape(QFrame.NoFrame)
-        self.frame_2.setFrameShadow(QFrame.Plain)
-        self.verticalLayout_2 = QVBoxLayout(self.frame_2)
+        self.centralwidget = QFrame(Dialog)
+        self.centralwidget.setObjectName(u"centralwidget")
+        self.centralwidget.setStyleSheet(u"background:rgb(255,255,255);")
+        self.centralwidget.setFrameShape(QFrame.NoFrame)
+        self.centralwidget.setFrameShadow(QFrame.Plain)
+        self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
         self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout_2.setContentsMargins(2, 2, 2, 2)
-        self.frame_top = QFrame(self.frame_2)
+        self.frame_top = QFrame(self.centralwidget)
         self.frame_top.setObjectName(u"frame_top")
         self.frame_top.setMinimumSize(QSize(0, 40))
         self.frame_top.setMaximumSize(QSize(16777215, 40))
@@ -45,6 +45,13 @@ class Ui_Dialog(object):
         self.horizontalLayout.setSpacing(0)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.icon_label = QLabel(self.frame_top)
+        self.icon_label.setObjectName(u"icon_label")
+        self.icon_label.setMinimumSize(QSize(40, 40))
+        self.icon_label.setMaximumSize(QSize(40, 40))
+
+        self.horizontalLayout.addWidget(self.icon_label)
+
         self.lab_heading = QLabel(self.frame_top)
         self.lab_heading.setObjectName(u"lab_heading")
         font = QFont()
@@ -58,8 +65,8 @@ class Ui_Dialog(object):
 
         self.bn_min = QPushButton(self.frame_top)
         self.bn_min.setObjectName(u"bn_min")
-        self.bn_min.setMinimumSize(QSize(55, 35))
-        self.bn_min.setMaximumSize(QSize(55, 35))
+        self.bn_min.setMinimumSize(QSize(55, 40))
+        self.bn_min.setMaximumSize(QSize(55, 40))
         self.bn_min.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgba(0,0,0,0);\n"
@@ -81,8 +88,8 @@ class Ui_Dialog(object):
 
         self.bn_close = QPushButton(self.frame_top)
         self.bn_close.setObjectName(u"bn_close")
-        self.bn_close.setMinimumSize(QSize(55, 35))
-        self.bn_close.setMaximumSize(QSize(55, 35))
+        self.bn_close.setMinimumSize(QSize(55, 40))
+        self.bn_close.setMaximumSize(QSize(55, 40))
         self.bn_close.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgba(0,0,0,0);\n"
@@ -105,7 +112,7 @@ class Ui_Dialog(object):
 
         self.verticalLayout_2.addWidget(self.frame_top)
 
-        self.frame_bottom = QFrame(self.frame_2)
+        self.frame_bottom = QFrame(self.centralwidget)
         self.frame_bottom.setObjectName(u"frame_bottom")
         self.frame_bottom.setFont(font)
         self.frame_bottom.setStyleSheet(u"")
@@ -123,6 +130,7 @@ class Ui_Dialog(object):
         font1.setKerning(True)
         self.label.setFont(font1)
         self.label.setStyleSheet(u"")
+        self.label.setAlignment(Qt.AlignCenter)
         self.label.setWordWrap(True)
 
         self.verticalLayout_3.addWidget(self.label)
@@ -171,7 +179,7 @@ class Ui_Dialog(object):
         self.verticalLayout_2.addWidget(self.frame_bottom)
 
 
-        self.verticalLayout.addWidget(self.frame_2)
+        self.verticalLayout.addWidget(self.centralwidget)
 
 
         self.retranslateUi(Dialog)
@@ -181,6 +189,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
+        self.icon_label.setText("")
         self.lab_heading.setText("")
         self.bn_min.setText("")
         self.bn_close.setText("")

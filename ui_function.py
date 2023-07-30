@@ -4,6 +4,7 @@ import re
 import multiprocessing
 
 from PySide2.QtCore import  QSize
+from PySide2.QtSvg import QSvgWidget
 
 import settings
 from main import * 
@@ -18,7 +19,6 @@ class UIFunction(MainWindow):
         if not self.cfg.settings['init']:
             self.ui.stackedWidget.setCurrentWidget(self.ui.page_home)
             self.ui.frame_home.setStyleSheet("background:rgb(255,255,255)") 
-            oninit_checks(self)
             
             self.ui.biapy_logo_label.setPixmap(QPixmap(resource_path(os.path.join("images","biapy_logo.png"))))
             self.ui.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","closeAsset 43.png"))))
@@ -38,6 +38,7 @@ class UIFunction(MainWindow):
             self.ui.test_advanced_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","down_arrow.svg"))))
 
             UIFunction.init_main_page(self)
+            oninit_checks(self)
             UIFunction.init_workflow_page(self)
             UIFunction.init_goptions_page(self)
             UIFunction.init_train_page(self)
@@ -65,12 +66,46 @@ class UIFunction(MainWindow):
     # Home page 
     ###########
     def init_main_page(self):
-        pixmap = QPixmap(resource_path(os.path.join("images","docker_logo.svg")))
-        pixmap = pixmap.scaledToWidth(220,aspectRatioMode=QtCore.Qt.AspectRatioMode.KeepAspectRatio)
-        self.ui.docker_logo.setPixmap(pixmap)
-        pixmap = QPixmap(resource_path(os.path.join("images","gpu_icon.svg")))
-        pixmap = pixmap.scaledToHeight(90,aspectRatioMode=QtCore.Qt.AspectRatioMode.KeepAspectRatio)
-        self.ui.gpu_icon_label.setPixmap(pixmap)
+        # pixmap = QPixmap(resource_path(os.path.join("images","docker_logo.png")))
+        # pixmap = pixmap.scaledToWidth(220,aspectRatioMode=QtCore.Qt.AspectRatioMode.KeepAspectRatio)
+
+        font = QFont()
+        font.setFamily(u"DejaVu Math TeX Gyre")
+        font.setPointSize(12)
+
+        # Create docker logo and text here. This last is necessary to do it here and not in ui_main.py
+        # because they are inserted in order 
+        self.ui.docker_logo = QSvgWidget(resource_path(os.path.join("images","docker_logo.svg")))
+        self.ui.docker_logo.setObjectName(u"docker_logo")
+        self.ui.docker_logo.setMinimumSize(QSize(220, 56))
+        self.ui.docker_logo.setMaximumSize(QSize(220, 56))
+        self.ui.verticalLayout_28.addWidget(self.ui.docker_logo, alignment=QtCore.Qt.AlignCenter)
+
+        self.ui.docker_status_label = QLabel(self.ui.docker_frame)
+        self.ui.docker_status_label.setObjectName(u"docker_status_label")
+        self.ui.docker_status_label.setMinimumSize(QSize(0, 0))
+        self.ui.docker_status_label.setMaximumSize(QSize(16777215, 16777215))
+        self.ui.docker_status_label.setFont(font)
+        self.ui.docker_status_label.setAlignment(Qt.AlignCenter)
+        self.ui.docker_status_label.setWordWrap(True)
+        self.ui.docker_status_label.setOpenExternalLinks(True)
+        self.ui.verticalLayout_28.addWidget(self.ui.docker_status_label)
+
+        # GPU logo and text
+        self.ui.gpu_icon_label = QSvgWidget(resource_path(os.path.join("images","gpu_icon.svg")))
+        self.ui.gpu_icon_label.setObjectName(u"gpu_icon_label")
+        self.ui.gpu_icon_label.setMinimumSize(QSize(122, 80))
+        self.ui.gpu_icon_label.setMaximumSize(QSize(122, 80))
+        self.ui.verticalLayout_33.addWidget(self.ui.gpu_icon_label, alignment=QtCore.Qt.AlignCenter)
+
+        self.ui.gpu_status_label = QLabel(self.ui.gpu_frame)
+        self.ui.gpu_status_label.setObjectName(u"gpu_status_label")
+        self.ui.gpu_status_label.setMinimumSize(QSize(0, 0))
+        self.ui.gpu_status_label.setFont(font)
+        self.ui.gpu_status_label.setAlignment(Qt.AlignCenter)
+        self.ui.gpu_status_label.setWordWrap(True)
+        self.ui.gpu_status_label.setOpenExternalLinks(True)
+        self.ui.verticalLayout_33.addWidget(self.ui.gpu_status_label)
 
     ###############
     # Workflow page 

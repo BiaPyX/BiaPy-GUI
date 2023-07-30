@@ -25,16 +25,16 @@ class Ui_Error(object):
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.frame_2 = QFrame(Error)
-        self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setStyleSheet(u"background:rgb(255,255,255);")
-        self.frame_2.setFrameShape(QFrame.NoFrame)
-        self.frame_2.setFrameShadow(QFrame.Plain)
-        self.verticalLayout_2 = QVBoxLayout(self.frame_2)
+        self.centralwidget = QFrame(Error)
+        self.centralwidget.setObjectName(u"centralwidget")
+        self.centralwidget.setStyleSheet(u"background:rgb(255,255,255);")
+        self.centralwidget.setFrameShape(QFrame.NoFrame)
+        self.centralwidget.setFrameShadow(QFrame.Plain)
+        self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
         self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout_2.setContentsMargins(2, 2, 2, 2)
-        self.frame_top = QFrame(self.frame_2)
+        self.frame_top = QFrame(self.centralwidget)
         self.frame_top.setObjectName(u"frame_top")
         self.frame_top.setMinimumSize(QSize(0, 40))
         self.frame_top.setMaximumSize(QSize(16777215, 40))
@@ -47,29 +47,25 @@ class Ui_Error(object):
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.icon_label = QLabel(self.frame_top)
         self.icon_label.setObjectName(u"icon_label")
-        self.icon_label.setMinimumSize(QSize(35, 35))
-        self.icon_label.setMaximumSize(QSize(35, 35))
+        self.icon_label.setMinimumSize(QSize(40, 40))
+        self.icon_label.setMaximumSize(QSize(40, 40))
         self.icon_label.setFrameShape(QFrame.NoFrame)
         self.icon_label.setScaledContents(True)
 
         self.horizontalLayout.addWidget(self.icon_label)
 
-        self.lab_heading = QLabel(self.frame_top)
-        self.lab_heading.setObjectName(u"lab_heading")
-        font = QFont()
-        font.setFamily(u"DejaVu Math TeX Gyre")
-        font.setPointSize(12)
-        self.lab_heading.setFont(font)
-        self.lab_heading.setStyleSheet(u"background:rgb(255,255,255);")
-        self.lab_heading.setAlignment(Qt.AlignCenter)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.horizontalLayout.addWidget(self.lab_heading)
+        self.horizontalLayout.addItem(self.horizontalSpacer)
 
 
         self.verticalLayout_2.addWidget(self.frame_top)
 
-        self.frame_bottom = QFrame(self.frame_2)
+        self.frame_bottom = QFrame(self.centralwidget)
         self.frame_bottom.setObjectName(u"frame_bottom")
+        font = QFont()
+        font.setFamily(u"DejaVu Math TeX Gyre")
+        font.setPointSize(12)
         self.frame_bottom.setFont(font)
         self.frame_bottom.setStyleSheet(u"")
         self.frame_bottom.setFrameShape(QFrame.NoFrame)
@@ -92,6 +88,7 @@ class Ui_Error(object):
         self.error_message_label = QLabel(self.scrollAreaWidgetContents)
         self.error_message_label.setObjectName(u"error_message_label")
         self.error_message_label.setStyleSheet(u"background:rgb(255,255,255);")
+        self.error_message_label.setAlignment(Qt.AlignCenter)
         self.error_message_label.setWordWrap(True)
         self.error_message_label.setOpenExternalLinks(True)
         self.error_message_label.setTextInteractionFlags(Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
@@ -138,7 +135,7 @@ class Ui_Error(object):
         self.verticalLayout_2.addWidget(self.frame_bottom)
 
 
-        self.verticalLayout.addWidget(self.frame_2)
+        self.verticalLayout.addWidget(self.centralwidget)
 
 
         self.retranslateUi(Error)
@@ -149,7 +146,6 @@ class Ui_Error(object):
     def retranslateUi(self, Error):
         Error.setWindowTitle(QCoreApplication.translate("Error", u"Error", None))
         self.icon_label.setText("")
-        self.lab_heading.setText("")
         self.error_message_label.setText("")
         self.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"Go to correct", None))
     # retranslateUi

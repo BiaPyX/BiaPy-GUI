@@ -22,6 +22,7 @@ class runBiaPy_Ui(QDialog):
         self.run_window.bn_close.clicked.connect(self.close_all)
         self.run_window.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","closeAsset 43.png"))))
         self.run_window.bn_min.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","hideAsset 53.png"))))
+        self.run_window.icon_label.setPixmap(QPixmap(resource_path(os.path.join("images","bn_images","info.png"))).scaledToWidth(40,aspectRatioMode=QtCore.Qt.AspectRatioMode.KeepAspectRatio))
         self.run_window.stop_container_bn.clicked.connect(self.parent_worker.stop_worker)
         self.run_window.container_state_label.setText("BiaPy state [ Initializing ]")
         self.run_window.train_progress_bar.setValue(0)

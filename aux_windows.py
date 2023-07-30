@@ -17,12 +17,13 @@ class workflow_explanation_Ui(QDialog):
         super(workflow_explanation_Ui, self).__init__(parent)
         self.workflow_info_window = Ui_Workflow_info()
         self.workflow_info_window.setupUi(self)
-        self.setWindowFlags(QtCore.Qt.FramelessWindowHint) 
+        self.setWindowFlags(Qt.Window | Qt.FramelessWindowHint)
         self.workflow_info_window.bn_close.clicked.connect(self.close)
         self.workflow_info_window.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","closeAsset 43.png"))))
         self.workflow_info_window.ok_bn.clicked.connect(self.close)
         self.workflow_info_window.workflow_description_label.setOpenExternalLinks(True)
-        self.setStyleSheet("QWidget{font-size:16px}")
+        self.workflow_info_window.icon_label.setPixmap(QPixmap(resource_path(os.path.join("images","bn_images","info.png"))).scaledToWidth(40,aspectRatioMode=QtCore.Qt.AspectRatioMode.KeepAspectRatio))
+        self.setStyleSheet("#centralwidget{ border: 1px solid black;} QWidget{ font-size:16px;}")
 
         self.dragPos = self.pos()  
         def movedialogWindow(event):
@@ -58,7 +59,8 @@ class dialog_Ui(QDialog):
         self.info_window.bn_close.clicked.connect(self.close)
         self.info_window.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","closeAsset 43.png"))))
         self.info_window.ok_bn.clicked.connect(self.close)
-        self.setStyleSheet("QWidget{font-size:16px}")
+        self.info_window.icon_label.setPixmap(QPixmap(resource_path(os.path.join("images","bn_images","info.png"))).scaledToWidth(40,aspectRatioMode=QtCore.Qt.AspectRatioMode.KeepAspectRatio))
+        self.setStyleSheet("#centralwidget{ border: 1px solid black;} QWidget{ font-size:16px;}")
 
         self.dragPos = self.pos()  
         def movedialogWindow(event):
@@ -83,9 +85,10 @@ class error_Ui(QDialog):
         self.parent_ui = parent_ui
         self.error_window.setupUi(self)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint) 
-        self.upbar_icon = [QPixmap("images/bn_images/error.png"),QPixmap("images/bn_images/info.png")]
+        self.upbar_icon = [QPixmap(resource_path(os.path.join("images","bn_images","error.png"))),
+                           QPixmap(resource_path(os.path.join("images","bn_images","info.png"))).scaledToWidth(40,aspectRatioMode=QtCore.Qt.AspectRatioMode.KeepAspectRatio)]
         self.dragPos = self.pos()  
-        self.setStyleSheet("QWidget{font-size:16px}")
+        self.setStyleSheet("#centralwidget{ border: 1px solid black;} QWidget{ font-size:16px;}")
 
         def moveErrorWindow(event):
             if event.buttons() == Qt.LeftButton:
@@ -157,7 +160,9 @@ class yes_no_Ui(QDialog):
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint) 
         self.yes_no_window.yes_bn.clicked.connect(lambda: self.submitclose(True))
         self.yes_no_window.no_bn.clicked.connect(lambda: self.submitclose(False))
-        self.setStyleSheet("QWidget{font-size:16px}")
+        self.yes_no_window.icon_label.setPixmap(QPixmap(resource_path(os.path.join("images","bn_images","info.png"))).scaledToWidth(40,aspectRatioMode=QtCore.Qt.AspectRatioMode.KeepAspectRatio))
+        self.setStyleSheet("#centralwidget{ border: 1px solid black;} QWidget{ font-size:16px;}")
+        self.answer = False 
 
     def create_question(self, question):
         self.yes_no_window.question_label.setText(question)

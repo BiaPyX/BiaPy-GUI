@@ -587,25 +587,6 @@ class Ui_MainWindow(object):
         self.verticalLayout_28.setSpacing(6)
         self.verticalLayout_28.setObjectName(u"verticalLayout_28")
         self.verticalLayout_28.setContentsMargins(9, 9, 9, 9)
-        self.docker_logo = QLabel(self.docker_frame)
-        self.docker_logo.setObjectName(u"docker_logo")
-        self.docker_logo.setMinimumSize(QSize(250, 90))
-        self.docker_logo.setMaximumSize(QSize(16777215, 16777215))
-        self.docker_logo.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout_28.addWidget(self.docker_logo)
-
-        self.docker_status_label = QLabel(self.docker_frame)
-        self.docker_status_label.setObjectName(u"docker_status_label")
-        self.docker_status_label.setMinimumSize(QSize(0, 0))
-        self.docker_status_label.setMaximumSize(QSize(16777215, 16777215))
-        self.docker_status_label.setFont(font)
-        self.docker_status_label.setAlignment(Qt.AlignCenter)
-        self.docker_status_label.setWordWrap(True)
-        self.docker_status_label.setOpenExternalLinks(True)
-
-        self.verticalLayout_28.addWidget(self.docker_status_label)
-
 
         self.gridLayout_68.addWidget(self.docker_frame, 1, 0, 1, 1)
 
@@ -637,27 +618,6 @@ class Ui_MainWindow(object):
         self.verticalLayout_33.setSpacing(6)
         self.verticalLayout_33.setObjectName(u"verticalLayout_33")
         self.verticalLayout_33.setContentsMargins(9, 9, 9, 9)
-        self.gpu_icon_label = QLabel(self.gpu_frame)
-        self.gpu_icon_label.setObjectName(u"gpu_icon_label")
-        self.gpu_icon_label.setMinimumSize(QSize(250, 90))
-        self.gpu_icon_label.setMaximumSize(QSize(16777215, 16777215))
-        self.gpu_icon_label.setFrameShape(QFrame.NoFrame)
-        self.gpu_icon_label.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout_33.addWidget(self.gpu_icon_label)
-
-        self.gpu_status_label = QLabel(self.gpu_frame)
-        self.gpu_status_label.setObjectName(u"gpu_status_label")
-        self.gpu_status_label.setMinimumSize(QSize(0, 0))
-        font4 = QFont()
-        font4.setPointSize(12)
-        self.gpu_status_label.setFont(font4)
-        self.gpu_status_label.setAlignment(Qt.AlignCenter)
-        self.gpu_status_label.setWordWrap(True)
-        self.gpu_status_label.setOpenExternalLinks(True)
-
-        self.verticalLayout_33.addWidget(self.gpu_status_label)
-
 
         self.gridLayout_68.addWidget(self.gpu_frame, 1, 1, 1, 1)
 
@@ -874,10 +834,10 @@ class Ui_MainWindow(object):
         self.workflow_view2_seemore_bn = QPushButton(self.frame_59)
         self.workflow_view2_seemore_bn.setObjectName(u"workflow_view2_seemore_bn")
         self.workflow_view2_seemore_bn.setMinimumSize(QSize(140, 30))
-        font5 = QFont()
-        font5.setFamily(u"DejaVu Math TeX Gyre")
-        font5.setPointSize(11)
-        self.workflow_view2_seemore_bn.setFont(font5)
+        font4 = QFont()
+        font4.setFamily(u"DejaVu Math TeX Gyre")
+        font4.setPointSize(11)
+        self.workflow_view2_seemore_bn.setFont(font4)
         self.workflow_view2_seemore_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgb(255,255,255);\n"
@@ -6014,7 +5974,7 @@ class Ui_MainWindow(object):
         self.scrollArea_10.setWidgetResizable(True)
         self.scrollAreaWidgetContents_14 = QWidget()
         self.scrollAreaWidgetContents_14.setObjectName(u"scrollAreaWidgetContents_14")
-        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 510, 736))
+        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 910, 736))
         self.gridLayout_47 = QGridLayout(self.scrollAreaWidgetContents_14)
         self.gridLayout_47.setObjectName(u"gridLayout_47")
         self.label_100 = QLabel(self.scrollAreaWidgetContents_14)
@@ -6478,12 +6438,12 @@ class Ui_MainWindow(object):
         self.page_create_yaml_bottom_frame.setObjectName(u"page_create_yaml_bottom_frame")
         self.page_create_yaml_bottom_frame.setMinimumSize(QSize(0, 103))
         self.page_create_yaml_bottom_frame.setMaximumSize(QSize(16777215, 16777215))
-        font6 = QFont()
-        font6.setFamily(u"DejaVu Math TeX Gyre")
-        font6.setPointSize(12)
-        font6.setBold(False)
-        font6.setWeight(50)
-        self.page_create_yaml_bottom_frame.setFont(font6)
+        font5 = QFont()
+        font5.setFamily(u"DejaVu Math TeX Gyre")
+        font5.setPointSize(12)
+        font5.setBold(False)
+        font5.setWeight(50)
+        self.page_create_yaml_bottom_frame.setFont(font5)
         self.page_create_yaml_bottom_frame.setFrameShape(QFrame.NoFrame)
         self.page_create_yaml_bottom_frame.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_8 = QHBoxLayout(self.page_create_yaml_bottom_frame)
@@ -6528,13 +6488,13 @@ class Ui_MainWindow(object):
         self.continue_bn.setObjectName(u"continue_bn")
         self.continue_bn.setMinimumSize(QSize(0, 0))
         self.continue_bn.setMaximumSize(QSize(200, 77))
-        font7 = QFont()
-        font7.setFamily(u"DejaVu Math TeX Gyre")
-        font7.setPointSize(12)
-        font7.setBold(False)
-        font7.setWeight(50)
-        font7.setStrikeOut(False)
-        self.continue_bn.setFont(font7)
+        font6 = QFont()
+        font6.setFamily(u"DejaVu Math TeX Gyre")
+        font6.setPointSize(12)
+        font6.setBold(False)
+        font6.setWeight(50)
+        font6.setStrikeOut(False)
+        self.continue_bn.setFont(font6)
         self.continue_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgb(64,144,253);\n"
@@ -6716,10 +6676,10 @@ class Ui_MainWindow(object):
         self.run_biapy_docker_bn.setObjectName(u"run_biapy_docker_bn")
         self.run_biapy_docker_bn.setMinimumSize(QSize(300, 40))
         self.run_biapy_docker_bn.setMaximumSize(QSize(300, 16777215))
-        font8 = QFont()
-        font8.setFamily(u"DejaVu Math TeX Gyre")
-        font8.setPointSize(20)
-        self.run_biapy_docker_bn.setFont(font8)
+        font7 = QFont()
+        font7.setFamily(u"DejaVu Math TeX Gyre")
+        font7.setPointSize(20)
+        self.run_biapy_docker_bn.setFont(font7)
         self.run_biapy_docker_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgb(64,144,253);\n"
@@ -6794,7 +6754,7 @@ class Ui_MainWindow(object):
         self.check_yaml_file_errors_frame.setWidgetResizable(True)
         self.scrollAreaWidgetContents_19 = QWidget()
         self.scrollAreaWidgetContents_19.setObjectName(u"scrollAreaWidgetContents_19")
-        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 96, 26))
+        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 48, 19))
         self.verticalLayout_32 = QVBoxLayout(self.scrollAreaWidgetContents_19)
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
         self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)
@@ -6917,7 +6877,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(0)
         self.stackedWidget_create_yaml_frame.setCurrentIndex(2)
         self.train_tab_widget.setCurrentIndex(0)
         self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(1)
@@ -6967,12 +6927,8 @@ class Ui_MainWindow(object):
         self.biapy_title_label.setText(QCoreApplication.translate("MainWindow", u"BiaPy: Bioimage analysis pipelines in Python", None))
         self.biapy_description_label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><a href=\"https://github.com/danifranco/BiaPy\"><span style=\" text-decoration: underline; color:#0000ff;\">BiaPy</span></a> is an open source Python library for building bioimage analysis pipelines, also called workflows. Specifically, BiaPy contains ready-to-use solutions for tasks such as <a href=\"https://biapy.readthedocs.io/en/latest/workflows/semantic_segmentation.html\"><span style=\" text-decoration: underline; color:#0000ff;\">semantic segmentation</span></a>, <a href=\"https://biapy.readthedocs.io/en/latest/workflows/instance_segmentation.html\"><span style=\" text-decoration: underline; color:#0000ff;\">instance segmentation</span></a>, <a href=\"https://biapy.readthedocs.io/en/latest/workflows/detection.html\"><span style=\" text-decoration: underline; color:#0000ff;\">object detection</span></a>, <a href=\"https://biapy.readthedocs.io/en/latest/workflows/denoising.html\"><span style=\" text-decoration: underline; color:#0000ff;\">image denoising</span></a>, <a href=\"https:/"
                         "/biapy.readthedocs.io/en/latest/workflows/super_resolution.html\"><span style=\" text-decoration: underline; color:#0000ff;\">single image super-resolution</span></a>, <a href=\"https://biapy.readthedocs.io/en/latest/workflows/self_supervision.html\"><span style=\" text-decoration: underline; color:#0000ff;\">self-supervised learning</span></a> and <a href=\"https://biapy.readthedocs.io/en/latest/workflows/classification.html\"><span style=\" text-decoration: underline; color:#0000ff;\">image classification</span></a>. The source code is based on Keras/TensorFlow as the backend. As BiaPy\u2019s core is based on deep learning, it is recommended to use a machine with a graphics processing unit (GPU) for faster training and execution.</p></body></html>", None))
-        self.docker_logo.setText("")
-        self.docker_status_label.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.docker_head_label.setText(QCoreApplication.translate("MainWindow", u"Docker dependency", None))
         self.gpu_head_label.setText(QCoreApplication.translate("MainWindow", u"GPU dependency", None))
-        self.gpu_icon_label.setText("")
-        self.gpu_status_label.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.create_yaml_bn.setText(QCoreApplication.translate("MainWindow", u"Create new workflow", None))
         self.continue_yaml_bn.setText(QCoreApplication.translate("MainWindow", u"Use pre-existing workflow", None))
         self.left_arrow_bn.setText("")

@@ -45,7 +45,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QFrame" name="frame_2">
+    <widget class="QFrame" name="centralwidget">
      <property name="styleSheet">
       <string notr="true">background:rgb(255,255,255);</string>
      </property>
@@ -111,6 +111,25 @@
           <number>0</number>
          </property>
          <item>
+          <widget class="QLabel" name="icon_label">
+           <property name="minimumSize">
+            <size>
+             <width>40</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>40</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QLabel" name="lab_heading">
            <property name="font">
             <font>
@@ -131,16 +150,22 @@
          </item>
          <item>
           <widget class="QPushButton" name="bn_close">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
              <width>55</width>
-             <height>35</height>
+             <height>40</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>55</width>
-             <height>35</height>
+             <height>40</height>
             </size>
            </property>
            <property name="styleSheet">
