@@ -621,6 +621,7 @@ class MainWindow(QMainWindow):
             self.diag = dialog_Ui()
             
         self.diag.dialog_constrict(message)
+        center_window(self.diag, self.geometry())
         self.diag.exec_()
     
     def error_exec(self, message, reason):
@@ -628,6 +629,7 @@ class MainWindow(QMainWindow):
             self.error = error_Ui(self)
 
         self.error.error_constrict(message, reason)
+        center_window(self.error, self.geometry())
         self.error.exec_()
 
     def workflow_info_exec(self, workflow_name, workflow_images, workflow_description):
@@ -636,6 +638,7 @@ class MainWindow(QMainWindow):
             
         self.wokflow_info.infoConstrict(workflow_name, workflow_images[0], 
             workflow_images[1], workflow_description)
+        center_window(self.wokflow_info, self.geometry())
         self.wokflow_info.exec_()
 
     def yes_no_exec(self, question):
@@ -643,6 +646,7 @@ class MainWindow(QMainWindow):
             self.yes_no = yes_no_Ui()
 
         self.yes_no.create_question(question)
+        center_window(self.yes_no, self.geometry())
         self.yes_no.exec_()
 
     def close_all(self):
@@ -650,6 +654,17 @@ class MainWindow(QMainWindow):
         if self.yes_no.answer:
             self.close()
 
+def center_window(widget, geometry):
+    window = widget.window()
+    window.setGeometry(
+        QtWidgets.QStyle.alignedRect(
+            QtCore.Qt.LeftToRight,
+            QtCore.Qt.AlignCenter,
+            window.size(),
+            geometry,
+        ),
+    )
+        
 if __name__ == "__main__":
     window = None
     log_dir = os.path.join(tempfile._get_default_tempdir(), "BiaPy")
@@ -669,6 +684,11 @@ if __name__ == "__main__":
         app.setStyleSheet(StyleSheet)
         window = MainWindow(log_file, log_dir)
         window.show()
+
+        # Center the main GUI in the middle of the first screen
+        all_screens = app.screens()
+        center_window(window, all_screens[0].availableGeometry())
+
         app.exec_()
     except KeyboardInterrupt:
         print("KeyboardInterrupt")

@@ -115,7 +115,7 @@
            <property name="font">
             <font>
              <family>DejaVu Math TeX Gyre</family>
-             <pointsize>12</pointsize>
+             <pointsize>13</pointsize>
             </font>
            </property>
            <property name="styleSheet">

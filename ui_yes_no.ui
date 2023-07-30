@@ -26,7 +26,7 @@
    <string>yes_no</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background:rgb(255,255,255);</string>
+   <string notr="true">background: rgb(255,255,255);</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -47,7 +47,7 @@
    <item>
     <widget class="QFrame" name="frame_2">
      <property name="styleSheet">
-      <string notr="true">background:rgb(255,255,255);</string>
+      <string notr="true">background: rgb(255,255,255);</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
@@ -80,7 +80,7 @@
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">background:rgb(255,255,255);</string>
+         <string notr="true"/>
         </property>
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
@@ -123,6 +123,9 @@
          </item>
          <item>
           <widget class="QFrame" name="frame">
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
            <property name="frameShape">
             <enum>QFrame::NoFrame</enum>
            </property>
