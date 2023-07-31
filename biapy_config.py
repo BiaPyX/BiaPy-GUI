@@ -1,7 +1,8 @@
-## Copied from BiaPy commit: 45fc1f8dffc4b26cbd74ec7c68715abdaf71e51e
+## Copied from BiaPy commit: fbe831c7c26243ce20e33b30049becae37b1ad59
 
 import os
 from yacs.config import CfgNode as CN
+
 
 class Config:
     def __init__(self, job_dir, job_identifier):
@@ -53,7 +54,11 @@ class Config:
         # Contour creation mode. Corresponds to 'mode' arg of find_boundaries function from ``scikit-image``. More
         # info in: https://scikit-image.org/docs/stable/api/skimage.segmentation.html#skimage.segmentation.find_boundaries.
         # It can be also set as "dense", to label as contour every pixel that is not in ``B`` channel. 
-        _C.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE = "thick"
+        _C.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE = "thick" 
+        # Whether if the threshold are going to be set as automaticaly (with Otsu thresholding) or manually. 
+        # Options available: 'auto' or 'manual'. If this last is used PROBLEM.INSTANCE_SEG.DATA_MW_TH_* need to be set.
+        # In case 'auto' was selected you will still need to set 
+        _C.PROBLEM.INSTANCE_SEG.DATA_MW_TH_TYPE = "auto" 
 
         # To convert the model predictions, which are between 0 and 1 range, into instances with marked controlled
         # watershed (MW) a few thresholds need to be set. There can be up to three channels, as explained above and
@@ -68,9 +73,7 @@ class Config:
         # TH_FOREGROUND acts over the channel 'B' and is used to limit how much the seeds can be grow
         _C.PROBLEM.INSTANCE_SEG.DATA_MW_TH_FOREGROUND = 0.3
         # TH_DISTANCE controls channel 'D' in the creation of the MW seeds
-        _C.PROBLEM.INSTANCE_SEG.DATA_MW_TH_DISTANCE = 2.
-        # TH_DIST_FOREGROUND acts over the channel 'D' and is used to limit how much the seeds can be grow
-        _C.PROBLEM.INSTANCE_SEG.DATA_MW_TH_DIST_FOREGROUND = 1.2
+        _C.PROBLEM.INSTANCE_SEG.DATA_MW_TH_DISTANCE = 1.
         # TH_POINTS controls channel 'P' in the creation of the MW seeds
         _C.PROBLEM.INSTANCE_SEG.DATA_MW_TH_POINTS = 0.5
         # Size of small objects to be removed after doing watershed
@@ -120,7 +123,7 @@ class Config:
         _C.PROBLEM.DENOISING.N2V_MANIPULATOR = 'uniform_withCP'
         # This variable corresponds to n2v_neighborhood_radius from Noise2Void. Size of the neighborhood to compute the replacement
         _C.PROBLEM.DENOISING.N2V_NEIGHBORHOOD_RADIUS = 5
-        # To apply a structured mask as is proposed in Noise2Void to alleviate the limitation of the method of not removing efectively 
+        # To apply a structured mask as is proposed in Noise2Void to alleviate the limitation of the method of not removing effectively 
         # the structured noise (section 4.4 of their paper). 
         _C.PROBLEM.DENOISING.N2V_STRUCTMASK = False
 
@@ -130,6 +133,13 @@ class Config:
 
         ### SELF_SUPERVISED
         _C.PROBLEM.SELF_SUPERVISED = CN()
+        # Pretext task to do. Options are as follows:
+        #   - 'crappify': crappifies input image by adding Gaussian noise and downsampling and upsampling it so the resolution
+        #                 gets worsen. Then, the model is trained to recover the original images.  
+        #   - 'masking': mask input image and the model needs to recover the original image. This option can only
+        #                be done with 'mae' transformer. This strategy follows the one proposed in: 
+        #                Masked Autoencoders Are Scalable Vision Learners (https://arxiv.org/pdf/2111.06377.pdf)
+        _C.PROBLEM.SELF_SUPERVISED.PRETEXT_TASK = 'crappify'
         # Downsizing factor to reshape the image. It will be downsampled and upsampled again by this factor so the 
         # quality of the image is worsens
         _C.PROBLEM.SELF_SUPERVISED.RESIZING_FACTOR = 4
@@ -208,11 +218,11 @@ class Config:
         # Whether to load ground truth (GT)
         _C.DATA.TEST.LOAD_GT = False
         # Whether to use validation data as test instead of trying to load test from _C.DATA.TEST.PATH and
-        # _C.DATA.TEST.GT_PATH. Currently only used if _C.PROBLEM.TYPE == 'CLASSIFICATION'
+        # _C.DATA.TEST.GT_PATH. _C.DATA.VAL.CROSS_VAL needs to be True.
         _C.DATA.TEST.USE_VAL_AS_TEST = False
-        # Path to load the test data from. Not used when _C.DATA.TEST.USE_VAL == True
+        # Path to load the test data from. Not used when _C.DATA.TEST.USE_VAL_AS_TEST == True
         _C.DATA.TEST.PATH = os.path.join("user_data", 'test', 'x')
-        # Path to load the test data masks from. Not used when _C.DATA.TEST.USE_VAL == True
+        # Path to load the test data masks from. Not used when _C.DATA.TEST.USE_VAL_AS_TEST == True
         _C.DATA.TEST.GT_PATH = os.path.join("user_data", 'test', 'y')
         # File to load/save data prepared with the appropiate channels in a instance segmentation problem.
         # E.g. _C.PROBLEM.TYPE ='INSTANCE_SEG' and _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS != 'B'
@@ -267,12 +277,12 @@ class Config:
         _C.DATA.VAL.SSL_SOURCE_DIR = os.path.join("user_data", 'val', 'x_ssl_source')
         # Percentage of overlap in (y,x)/(z,y,x) when cropping validation. Set to 0 to calculate  the minimun overlap.
         # The values must be floats between range [0, 1). It needs to be a 2D tuple when using _C.PROBLEM.NDIM='2D' and
-        # 3D tuple when using _C.PROBLEM.NDIM='3D'
+        # 3D tuple when using _C.PROBLEM.NDIM='3D'. This is only used when the validation is loaded from disk, and thus, 
+        # not extracted from training. 
         _C.DATA.VAL.OVERLAP = (0,0)
-        # Padding to be done in (y,x)/(z,y,x) when reconstructing validation data. Useful to avoid patch 'border effect'
+        # Padding to be done in (y,x)/(z,y,x) when cropping validation data. Useful to avoid patch 'border effect'. This 
+        # is only used when the validation is loaded from disk, and thus, not extracted from training. 
         _C.DATA.VAL.PADDING = (0,0)
-        # Whether to use median values to fill padded pixels or zeros
-        _C.DATA.VAL.MEDIAN_PADDING = False
         # Directory where validation binary masks should be located. This binary mask will be applied only when MW_TH*
         # optimized values are find, that is, when _C.PROBLEM.INSTANCE_SEG.DATA_MW_OPTIMIZE_THS = True and _C.TEST.POST_PROCESSING.APPLY_MASK = True
         _C.DATA.VAL.BINARY_MASKS = os.path.join("user_data", 'val', 'bin_mask')
@@ -464,13 +474,14 @@ class Config:
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         _C.MODEL = CN()
         # Architecture of the network. Possible values are: 'unet', 'resunet', 'attention_unet', 'fcn32', 'fcn8', 'nnunet', 'tiramisu', 
-        # 'mnet', 'multiresunet', 'seunet', 'simple_cnn', 'EfficientNetB0', 'unetr', 'edsr'
+        # 'mnet', 'multiresunet', 'seunet', 'simple_cnn', 'EfficientNetB0', 'unetr', 'edsr', 'ViT'
         _C.MODEL.ARCHITECTURE = 'unet'
         # Number of feature maps on each level of the network.
         _C.MODEL.FEATURE_MAPS = [16, 32, 64, 128, 256]
         # To activate the Spatial Dropout instead of use the "normal" dropout layer
         _C.MODEL.SPATIAL_DROPOUT = False
-        # Values to make the dropout with. Set to 0 to prevent dropout
+        # Values to make the dropout with. Set to 0 to prevent dropout. When using it with 'ViT', 'unetr' or 'tiramisu' 
+        # a list with just one number must be provided 
         _C.MODEL.DROPOUT_VALUES = [0., 0., 0., 0., 0.]
         # To active batch normalization
         _C.MODEL.BATCH_NORMALIZATION = False
@@ -491,25 +502,36 @@ class Config:
         _C.MODEL.Z_DOWN = [0, 0, 0, 0]
         # Checkpoint: set to True to load previous training weigths (needed for inference or to make fine-tunning)
         _C.MODEL.LOAD_CHECKPOINT = False
-
+        # Create a png with the model's architecture. You must install pydot (`pip install pydot`) and install graphviz 
+        # (in the OS, see instructions at https://graphviz.gitlab.io/download/) for plot_model to work
+        _C.MODEL.MAKE_PLOT = False
+        
         # TIRAMISU
         # Depth of the network. Only used when MODEL.ARCHITECTURE = 'tiramisu'. For the rest options it is inferred.
         _C.MODEL.TIRAMISU_DEPTH = 3
 
-        # UNETR
+        # TRANSFORMERS MODELS
         # Size of the patches that are extracted from the input image.
-        _C.MODEL.UNETR_TOKEN_SIZE = 16
+        _C.MODEL.VIT_TOKEN_SIZE = 16
         # Dimension of the embedding space
-        _C.MODEL.UNETR_EMBED_DIM = 768
+        _C.MODEL.VIT_HIDDEN_SIZE = 768
         # Number of transformer encoder layers
-        _C.MODEL.UNETR_DEPTH = 12
-        # Number of units in the MLP blocks. 
-        _C.MODEL.UNETR_MLP_HIDDEN_UNITS = [3072, 768]
+        _C.MODEL.VIT_NUM_LAYERS = 12
         # Number of heads in the multi-head attention layer.
-        _C.MODEL.UNETR_NUM_HEADS = 4
+        _C.MODEL.VIT_NUM_HEADS = 12
+        # Size of the dense layers of the final classifier
+        _C.MODEL.VIT_MLP_DIMS = 3072
+
+        # UNETR
         # Multiple of the transformer encoder layers from of which the skip connection signal is going to be extracted
         _C.MODEL.UNETR_VIT_HIDD_MULT = 3
-        
+        # Number of filters in the first UNETR's layer of the decoder. In each layer the previous number of filters is doubled.
+        _C.MODEL.UNETR_VIT_NUM_FILTERS = 16
+        # Decoder activation
+        _C.MODEL.UNETR_DEC_ACTIVATION = 'relu'
+        # Kernel type to use on convolution layers
+        _C.MODEL.UNETR_DEC_KERNEL_INIT = 'he_normal'
+
 
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Loss
@@ -525,10 +547,12 @@ class Config:
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         _C.TRAIN = CN()
         _C.TRAIN.ENABLE = False
-        # Optimizer to use. Possible values: "SGD" or "ADAM"
+        # Optimizer to use. Possible values: "SGD", "ADAM" or "ADAMW"
         _C.TRAIN.OPTIMIZER = 'SGD'
         # Learning rate 
         _C.TRAIN.LR = 1.E-4
+        # Weight decay (AdamW)
+        _C.TRAIN.W_DECAY = 0.004
         # Batch size
         _C.TRAIN.BATCH_SIZE = 2
         # Number of epochs to train the model
@@ -629,6 +653,9 @@ class Config:
         ### Instance segmentation
         # Whether to apply Voronoi using 'BC' or 'M' channels need to be present
         _C.TEST.POST_PROCESSING.VORONOI_ON_MASK = False
+        # Threshold to be applied to the 'M' channel when expanding the instances with Voronoi. Need to be in [0,1] range.
+        # Leave it to 0 to adjust the threhold with Otsu
+        _C.TEST.POST_PROCESSING.VORONOI_TH = 0.
         # Set it to try to repare large instances by merging their neighbors with them and removing possible central holes.  
         # Its value determines which instances are going to be repared by size (number of pixels that compose the instance)
         # This option is useful when PROBLEM.INSTANCE_SEG.DATA_CHANNELS is 'BP', as multiple central seeds may appear in big 
