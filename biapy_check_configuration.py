@@ -1,5 +1,4 @@
-## Copied from BiaPy commit: 45fc1f8dffc4b26cbd74ec7c68715abdaf71e51e
-
+## Copied from BiaPy commit: fbe831c7c26243ce20e33b30049becae37b1ad59
 import os
 import numpy as np
 
@@ -7,6 +6,7 @@ def check_configuration(cfg):
     """
     Check if the configuration is good. 
     """
+
     dim_count = 2 if cfg.PROBLEM.NDIM == '2D' else 3
 
     # Adjust overlap and padding in the default setting if it was not set
@@ -36,13 +36,21 @@ def check_configuration(cfg):
                 opts.extend(['PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS', (1,)*channels_provided])    
         
     # Adjust dropout to feature maps
-    if len(cfg.MODEL.FEATURE_MAPS) != len(cfg.MODEL.DROPOUT_VALUES):
+    if cfg.MODEL.ARCHITECTURE in ['ViT', 'unetr', 'tiramisu', 'mae']:
         if all(x == 0 for x in cfg.MODEL.DROPOUT_VALUES):
-            opts.extend(['MODEL.DROPOUT_VALUES', (0.,)*len(cfg.MODEL.FEATURE_MAPS)])
-        elif any(not check_value(x) for x in cfg.MODEL.DROPOUT_VALUES):
+            opts.extend(['MODEL.DROPOUT_VALUES', (0.,)])
+        elif len(cfg.MODEL.DROPOUT_VALUES) != 1:
+            raise ValueError("'MODEL.DROPOUT_VALUES' must be list of an unique number when 'MODEL.ARCHITECTURE' is one among ['ViT', 'mae', 'unetr', 'tiramisu']")
+        elif not check_value(cfg.MODEL.DROPOUT_VALUES[0]):
             raise ValueError("'MODEL.DROPOUT_VALUES' not in [0, 1] range")
-        else:
-            raise ValueError("'MODEL.FEATURE_MAPS' and 'MODEL.DROPOUT_VALUES' lengths must be equal")
+    else:
+        if len(cfg.MODEL.FEATURE_MAPS) != len(cfg.MODEL.DROPOUT_VALUES):
+            if all(x == 0 for x in cfg.MODEL.DROPOUT_VALUES):
+                opts.extend(['MODEL.DROPOUT_VALUES', (0.,)*len(cfg.MODEL.FEATURE_MAPS)])
+            elif any(not check_value(x) for x in cfg.MODEL.DROPOUT_VALUES):
+                raise ValueError("'MODEL.DROPOUT_VALUES' not in [0, 1] range")
+            else:
+                raise ValueError("'MODEL.FEATURE_MAPS' and 'MODEL.DROPOUT_VALUES' lengths must be equal")
 
     # Adjust Z_DOWN values to feature maps
     if len(cfg.MODEL.FEATURE_MAPS)-1 != len(cfg.MODEL.Z_DOWN):
@@ -105,10 +113,10 @@ def check_configuration(cfg):
                 " 'TEST.ANALIZE_2D_IMGS_AS_3D_STACK' is enabled. Enable this last or disable those post-processing methods "
                 "because it can not be applied to 2D images")
     if (cfg.TEST.POST_PROCESSING.YZ_FILTERING or cfg.TEST.POST_PROCESSING.Z_FILTERING) \
-        and cfg.PROBLEM.TYPE == 'CLASSIFICATION':
-        raise ValueError("'TEST.POST_PROCESSING.YZ_FILTERING' or 'TEST.POST_PROCESSING.Z_FILTERING' can not be enabled "
-            "when 'PROBLEM.TYPE' is 'CLASSIFICATION'")
-
+        and cfg.PROBLEM.TYPE not in ['SEMANTIC_SEG', 'INSTANCE_SEG', 'DETECTION']:
+        raise ValueError("'TEST.POST_PROCESSING.YZ_FILTERING' or 'TEST.POST_PROCESSING.Z_FILTERING' can only be enabled "
+            "when 'PROBLEM.TYPE' is among ['SEMANTIC_SEG', 'INSTANCE_SEG', 'DETECTION']")
+ 
 
     if len(opts) > 0:
         cfg.merge_from_list(opts)
@@ -118,15 +126,15 @@ def check_configuration(cfg):
     assert cfg.PROBLEM.TYPE in ['SEMANTIC_SEG', 'INSTANCE_SEG', 'CLASSIFICATION', 'DETECTION', 'DENOISING', 'SUPER_RESOLUTION', 'SELF_SUPERVISED'],\
         "PROBLEM.TYPE not in ['SEMANTIC_SEG', 'INSTANCE_SEG', 'CLASSIFICATION', 'DETECTION', 'DENOISING', 'SUPER_RESOLUTION', 'SELF_SUPERVISED']"
 
-    if not cfg.TEST.STATS.PER_PATCH and not cfg.TEST.STATS.FULL_IMG:
-        raise ValueError("One between 'TEST.STATS.PER_PATCH' or 'TEST.STATS.FULL_IMG' need to be True")
+    if cfg.PROBLEM.NDIM == "2D" and not cfg.TEST.STATS.PER_PATCH and not cfg.TEST.STATS.FULL_IMG:
+        raise ValueError("At least one between 'TEST.STATS.PER_PATCH' or 'TEST.STATS.FULL_IMG' need to be True")
 
-    if cfg.PROBLEM.NDIM == '3D' and not cfg.TEST.STATS.PER_PATCH and not cfg.TEST.STATS.MERGE_PATCHES and cfg.PROBLEM.TYPE != "CLASSIFICATION":
-        raise ValueError("One between 'TEST.STATS.PER_PATCH' or 'TEST.STATS.MERGE_PATCHES' need to be True when 'PROBLEM.NDIM'=='3D'")
-    
-    if cfg.PROBLEM.NDIM == '3D' and cfg.TEST.STATS.FULL_IMG:
-        print("WARNING: TEST.STATS.FULL_IMG == True while using PROBLEM.NDIM == '3D'. As 3D images are usually 'huge'"
-            ", full image statistics will be disabled to avoid GPU memory overflow")
+    if cfg.PROBLEM.NDIM == '3D':
+        if not cfg.TEST.STATS.PER_PATCH and not cfg.TEST.STATS.MERGE_PATCHES and cfg.PROBLEM.TYPE != "CLASSIFICATION":
+            raise ValueError("At least one between 'TEST.STATS.PER_PATCH' or 'TEST.STATS.MERGE_PATCHES' need to be True when 'PROBLEM.NDIM'=='3D'")
+        if cfg.TEST.STATS.FULL_IMG:
+            print("WARNING: TEST.STATS.FULL_IMG == True while using PROBLEM.NDIM == '3D'. As 3D images are usually 'huge'"
+                ", full image statistics will be disabled to avoid GPU memory overflow")
 
     if cfg.LOSS.TYPE != "CE" and cfg.PROBLEM.TYPE not in ['SEMANTIC_SEG', 'DETECTION']:
         raise ValueError("Not implemented pipeline option: LOSS.TYPE != 'CE' only available in 'SEMANTIC_SEG' and 'DETECTION'")
@@ -147,16 +155,19 @@ def check_configuration(cfg):
     #### Instance segmentation ####
     if cfg.PROBLEM.TYPE == 'INSTANCE_SEG':
         assert cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS in ['BC', 'BCM', 'BCD', 'BCDv2', 'Dv2', 'BDv2', 'BP', 'BD'],\
-        "PROBLEM.INSTANCE_SEG.DATA_CHANNELS not in ['BC', 'BCM', 'BCD', 'BCDv2', 'Dv2', 'BDv2', 'BP', 'BD']"
+            "PROBLEM.INSTANCE_SEG.DATA_CHANNELS not in ['BC', 'BCM', 'BCD', 'BCDv2', 'Dv2', 'BDv2', 'BP', 'BD']"
         if cfg.MODEL.N_CLASSES > 1:
             raise ValueError("Not implemented pipeline option for INSTANCE_SEGMENTATION")
         if len(cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS) != channels_provided:
             raise ValueError("'PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS' needs to be of the same length as the channels selected in 'PROBLEM.INSTANCE_SEG.DATA_CHANNELS'. "
                             "E.g. 'PROBLEM.INSTANCE_SEG.DATA_CHANNELS'='BC' 'PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS'=[1,0.5]. "
                             "'PROBLEM.INSTANCE_SEG.DATA_CHANNELS'='BCD' 'PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS'=[0.5,0.5,1]")
-        if cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS not in ['BC', 'BCM', 'BCD', 'BCDv2'] and cfg.TEST.POST_PROCESSING.VORONOI_ON_MASK:
-            raise ValueError("'PROBLEM.INSTANCE_SEG.DATA_CHANNELS' need to be one between ['BC', 'BCM', 'BCD', 'BCDv2'] "
-                            "when 'TEST.POST_PROCESSING.VORONOI_ON_MASK' is enabled")
+        if cfg.TEST.POST_PROCESSING.VORONOI_ON_MASK:
+            if cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS not in ['BC', 'BCM', 'BCD', 'BCDv2']:
+                raise ValueError("'PROBLEM.INSTANCE_SEG.DATA_CHANNELS' need to be one between ['BC', 'BCM', 'BCD', 'BCDv2'] "
+                                "when 'TEST.POST_PROCESSING.VORONOI_ON_MASK' is enabled")
+            if not check_value(cfg.TEST.POST_PROCESSING.VORONOI_TH):
+                raise ValueError("'TEST.POST_PROCESSING.VORONOI_TH' not in [0, 1] range")   
         if cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS not in ["BC", "BCM", "BCD", "BP"] and cfg.PROBLEM.INSTANCE_SEG.ERODE_AND_DILATE_FOREGROUND:
             raise ValueError("'PROBLEM.INSTANCE_SEG.ERODE_AND_DILATE_FOREGROUND' can only be used with 'BC', 'BCM', 'BP' or 'BCD' channels")
         for morph_operation in cfg.PROBLEM.INSTANCE_SEG.SEED_MORPH_SEQUENCE:
@@ -178,7 +189,7 @@ def check_configuration(cfg):
         if cfg.TEST.POST_PROCESSING.DET_WATERSHED:
             if any(len(x) != dim_count for x in cfg.TEST.POST_PROCESSING.DET_WATERSHED_FIRST_DILATION):
                 raise ValueError("Each structure object defined in 'TEST.POST_PROCESSING.DET_WATERSHED_FIRST_DILATION' "
-                                "need to be of {} dimension".format(dim_count))
+                                 "need to be of {} dimension".format(dim_count))
             if cfg.TEST.POST_PROCESSING.WATERSHED_CIRCULARITY == -1:
                 raise ValueError("'TEST.POST_PROCESSING.WATERSHED_CIRCULARITY' need to be set when 'TEST.POST_PROCESSING.DET_WATERSHED' is enabled")
 
@@ -194,11 +205,16 @@ def check_configuration(cfg):
 
     #### Self-supervision ####
     elif cfg.PROBLEM.TYPE == 'SELF_SUPERVISED':
-        if cfg.PROBLEM.SELF_SUPERVISED.RESIZING_FACTOR not in [2,4,6]:
-            raise ValueError("PROBLEM.SELF_SUPERVISED.RESIZING_FACTOR not in [2,4,6]")
-        if not check_value(cfg.PROBLEM.SELF_SUPERVISED.NOISE):
-            raise ValueError("PROBLEM.SELF_SUPERVISED.NOISE not in [0, 1] range")
-
+        if cfg.PROBLEM.SELF_SUPERVISED.PRETEXT_TASK == "crappify":
+            if cfg.PROBLEM.SELF_SUPERVISED.RESIZING_FACTOR not in [2,4,6]:
+                raise ValueError("PROBLEM.SELF_SUPERVISED.RESIZING_FACTOR not in [2,4,6]")
+            if not check_value(cfg.PROBLEM.SELF_SUPERVISED.NOISE):
+                raise ValueError("PROBLEM.SELF_SUPERVISED.NOISE not in [0, 1] range")
+        elif cfg.PROBLEM.SELF_SUPERVISED.PRETEXT_TASK == "masking":
+            if cfg.MODEL.ARCHITECTURE != 'mae':
+                raise ValueError("'MODEL.ARCHITECTURE' need to be 'mae' when 'PROBLEM.SELF_SUPERVISED.PRETEXT_TASK' is 'masking'")  
+        else:
+            raise ValueError("'PROBLEM.SELF_SUPERVISED.PRETEXT_TASK' need to be among these options: ['crappify', 'masking']")
     #### Denoising ####
     elif cfg.PROBLEM.TYPE == 'DENOISING':
         if cfg.DATA.TEST.LOAD_GT:
@@ -207,7 +223,7 @@ def check_configuration(cfg):
             raise NotImplementedError
         if not check_value(cfg.PROBLEM.DENOISING.N2V_PERC_PIX):
             raise ValueError("PROBLEM.DENOISING.N2V_PERC_PIX not in [0, 1] range")
-        
+           
 
     ### Pre-processing ###
     if cfg.DATA.EXTRACT_RANDOM_PATCH and cfg.DATA.PROBABILITY_MAP:
@@ -218,17 +234,17 @@ def check_configuration(cfg):
     if cfg.TRAIN.ENABLE:
         if not os.path.exists(cfg.DATA.TRAIN.PATH):
             raise ValueError("Train data dir not found: {}".format(cfg.DATA.TRAIN.PATH))
-        if not os.path.exists(cfg.DATA.TRAIN.GT_PATH) and cfg.PROBLEM.TYPE not in ['DENOISING', "CLASSIFICATION"]:
+        if not os.path.exists(cfg.DATA.TRAIN.GT_PATH) and cfg.PROBLEM.TYPE not in ['DENOISING', "CLASSIFICATION", "SELF_SUPERVISED"]:
             raise ValueError("Train mask data dir not found: {}".format(cfg.DATA.TRAIN.GT_PATH))
         if not cfg.DATA.VAL.FROM_TRAIN and not cfg.DATA.VAL.IN_MEMORY:
             if not os.path.exists(cfg.DATA.VAL.PATH):
                 raise ValueError("Validation data dir not found: {}".format(cfg.DATA.VAL.PATH))
-            if not os.path.exists(cfg.DATA.VAL.GT_PATH) and cfg.PROBLEM.TYPE not in ['DENOISING', "CLASSIFICATION"]:
+            if not os.path.exists(cfg.DATA.VAL.GT_PATH) and cfg.PROBLEM.TYPE not in ['DENOISING', "CLASSIFICATION", "SELF_SUPERVISED"]:
                 raise ValueError("Validation mask data dir not found: {}".format(cfg.DATA.VAL.GT_PATH))
     if cfg.TEST.ENABLE and not cfg.DATA.TEST.USE_VAL_AS_TEST:
         if not os.path.exists(cfg.DATA.TEST.PATH):
             raise ValueError("Test data not found: {}".format(cfg.DATA.TEST.PATH))
-        if cfg.DATA.TEST.LOAD_GT and not os.path.exists(cfg.DATA.TEST.GT_PATH) and cfg.PROBLEM.TYPE not in ["CLASSIFICATION"]:
+        if cfg.DATA.TEST.LOAD_GT and not os.path.exists(cfg.DATA.TEST.GT_PATH) and cfg.PROBLEM.TYPE not in ["CLASSIFICATION", "SELF_SUPERVISED"]:
             raise ValueError("Test data mask not found: {}".format(cfg.DATA.TEST.GT_PATH))
 
     if cfg.DATA.EXTRACT_RANDOM_PATCH and cfg.DATA.PROBABILITY_MAP:
@@ -240,7 +256,7 @@ def check_configuration(cfg):
     
     if cfg.DATA.VAL.FROM_TRAIN and not cfg.DATA.TRAIN.IN_MEMORY:
         raise ValueError("Validation can not be extracted from train when 'DATA.TRAIN.IN_MEMORY' == False. Please set"
-                        " 'DATA.VAL.FROM_TRAIN' to False and configure 'DATA.VAL.PATH'/'DATA.VAL.GT_PATH'")
+                         " 'DATA.VAL.FROM_TRAIN' to False and configure 'DATA.VAL.PATH'/'DATA.VAL.GT_PATH'")
     if cfg.DATA.VAL.CROSS_VAL: 
         if not cfg.DATA.VAL.FROM_TRAIN:
             raise ValueError("'DATA.VAL.CROSS_VAL' can only be used when 'DATA.VAL.FROM_TRAIN' is True")
@@ -261,40 +277,40 @@ def check_configuration(cfg):
 
     if len(cfg.DATA.TRAIN.OVERLAP) != dim_count:
         raise ValueError("When PROBLEM.NDIM == {} DATA.TRAIN.OVERLAP tuple must be lenght {}, given {}."
-                        .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.TRAIN.OVERLAP))
+                         .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.TRAIN.OVERLAP))
     if any(not check_value(x) for x in cfg.DATA.TRAIN.OVERLAP):
             raise ValueError("DATA.TRAIN.OVERLAP not in [0, 1] range")
     if len(cfg.DATA.TRAIN.PADDING) != dim_count:
         raise ValueError("When PROBLEM.NDIM == {} DATA.TRAIN.PADDING tuple must be lenght {}, given {}."
-                        .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.TRAIN.PADDING))
+                         .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.TRAIN.PADDING))
     if len(cfg.DATA.VAL.OVERLAP) != dim_count:
         raise ValueError("When PROBLEM.NDIM == {} DATA.VAL.OVERLAP tuple must be lenght {}, given {}."
-                        .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.VAL.OVERLAP))
+                         .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.VAL.OVERLAP))
     if any(not check_value(x) for x in cfg.DATA.VAL.OVERLAP):
             raise ValueError("DATA.VAL.OVERLAP not in [0, 1] range")
     if len(cfg.DATA.VAL.PADDING) != dim_count:
         raise ValueError("When PROBLEM.NDIM == {} DATA.VAL.PADDING tuple must be lenght {}, given {}."
-                        .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.VAL.PADDING))
+                         .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.VAL.PADDING))
     if len(cfg.DATA.TEST.OVERLAP) != dim_count:
         raise ValueError("When PROBLEM.NDIM == {} DATA.TEST.OVERLAP tuple must be lenght {}, given {}."
-                        .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.TEST.OVERLAP))
+                         .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.TEST.OVERLAP))
     if any(not check_value(x) for x in cfg.DATA.TEST.OVERLAP):
             raise ValueError("DATA.TEST.OVERLAP not in [0, 1] range")
     if len(cfg.DATA.TEST.PADDING) != dim_count:
         raise ValueError("When PROBLEM.NDIM == {} DATA.TEST.PADDING tuple must be lenght {}, given {}."
-                        .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.TEST.PADDING))
+                         .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.TEST.PADDING))
     if len(cfg.DATA.PATCH_SIZE) != dim_count+1:
         raise ValueError("When PROBLEM.NDIM == {} DATA.PATCH_SIZE tuple must be lenght {}, given {}."
-                        .format(cfg.PROBLEM.NDIM, dim_count+1, cfg.DATA.PATCH_SIZE))
+                         .format(cfg.PROBLEM.NDIM, dim_count+1, cfg.DATA.PATCH_SIZE))
     if len(cfg.DATA.TRAIN.RESOLUTION) != 1 and len(cfg.DATA.TRAIN.RESOLUTION) != dim_count:
         raise ValueError("When PROBLEM.NDIM == {} DATA.TRAIN.RESOLUTION tuple must be lenght {}, given {}."
-                        .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.TRAIN.RESOLUTION))
+                         .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.TRAIN.RESOLUTION))
     if len(cfg.DATA.VAL.RESOLUTION) != 1 and len(cfg.DATA.VAL.RESOLUTION) != dim_count:
         raise ValueError("When PROBLEM.NDIM == {} DATA.VAL.RESOLUTION tuple must be lenght {}, given {}."
-                        .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.VAL.RESOLUTION))
+                         .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.VAL.RESOLUTION))
     if len(cfg.DATA.TEST.RESOLUTION) != 1 and len(cfg.DATA.TEST.RESOLUTION) != dim_count:
         raise ValueError("When PROBLEM.NDIM == {} DATA.TEST.RESOLUTION tuple must be lenght {}, given {}."
-                        .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.TEST.RESOLUTION))
+                         .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.TEST.RESOLUTION))
     assert cfg.DATA.NORMALIZATION.TYPE in ['div', 'custom'], "DATA.NORMALIZATION.TYPE not in ['div', 'custom']"
     if cfg.DATA.NORMALIZATION.TYPE == 'custom':
         if cfg.DATA.NORMALIZATION.CUSTOM_MEAN == -1 and cfg.DATA.NORMALIZATION.CUSTOM_STD == -1:
@@ -306,41 +322,42 @@ def check_configuration(cfg):
     ### Model ###
     assert cfg.MODEL.ARCHITECTURE in ['unet', 'resunet', 'attention_unet', 'fcn32', 'fcn8', 'tiramisu', 'mnet',
                                       'multiresunet', 'seunet', 'simple_cnn', 'EfficientNetB0', 'unetr', 'edsr',
-                                      'srunet', 'rcan', 'dfcan', 'wdsr'], \
-        "MODEL.ARCHITECTURE not in ['unet', 'resunet', 'attention_unet', 'fcn32', 'fcn8', 'tiramisu', 'mnet','multiresunet', 'seunet', 'simple_cnn', 'EfficientNetB0', 'unetr', 'edsr', 'srunet', 'rcan', 'dfcan', 'wdsr']"
-
-    if cfg.MODEL.ARCHITECTURE not in ['unet', 'resunet', 'seunet', 'attention_unet'] and cfg.PROBLEM.NDIM == '3D' and cfg.PROBLEM.TYPE != "CLASSIFICATION":
+                                      'srunet', 'rcan', 'dfcan', 'wdsr', 'ViT', 'mae'],\
+        "MODEL.ARCHITECTURE not in ['unet', 'resunet', 'attention_unet', 'fcn32', 'fcn8', 'tiramisu', 'mnet',\
+        'multiresunet', 'seunet', 'simple_cnn', 'EfficientNetB0', 'unetr', 'edsr', 'srunet', 'rcan', 'dfcan', \
+        'wdsr', 'ViT', 'mae']"
+    if cfg.MODEL.ARCHITECTURE not in ['unet', 'resunet', 'seunet', 'attention_unet', 'unetr'] and cfg.PROBLEM.NDIM == '3D' and cfg.PROBLEM.TYPE != "CLASSIFICATION":
         raise ValueError("For 3D these models are available: {}".format(['unet', 'resunet', 'seunet', 'attention_unet']))
-    if cfg.MODEL.ARCHITECTURE == "unetr":
-        if cfg.MODEL.UNETR_EMBED_DIM != cfg.MODEL.UNETR_MLP_HIDDEN_UNITS[1]:
-            raise ValueError("'MODEL.UNETR_EMBED_DIM' and 'MODEL.UNETR_MLP_HIDDEN_UNITS[1]' need to ")
     if cfg.MODEL.N_CLASSES > 1 and cfg.PROBLEM.TYPE != "CLASSIFICATION" and cfg.MODEL.ARCHITECTURE not in ['unet', 'resunet', 'seunet', 'attention_unet']:
         raise ValueError("'MODEL.N_CLASSES' > 1 can only be used with 'MODEL.ARCHITECTURE' in ['unet', 'resunet', 'seunet', 'attention_unet']")
     if cfg.MODEL.LAST_ACTIVATION not in ['softmax', 'sigmoid', 'linear']:
         raise ValueError("'MODEL.LAST_ACTIVATION' need to be in ['softmax','sigmoid','linear']. Provided {}"
-                        .format(cfg.MODEL.LAST_ACTIVATION))
+                         .format(cfg.MODEL.LAST_ACTIVATION))
     if cfg.MODEL.UPSAMPLE_LAYER.lower() not in ["upsampling", "convtranspose"]:
         raise ValueError("cfg.MODEL.UPSAMPLE_LAYER' need to be one between ['upsampling', 'convtranspose']. Provided {}"
-                        .format(cfg.MODEL.UPSAMPLE_LAYER))
+                          .format(cfg.MODEL.UPSAMPLE_LAYER))
     if cfg.PROBLEM.TYPE == "SEMANTIC_SEG" and cfg.MODEL.ARCHITECTURE not in ['unet', 'resunet', 'attention_unet', 'fcn32', \
         'fcn8', 'tiramisu', 'mnet', 'multiresunet', 'seunet', 'unetr']:
         raise ValueError("Not implemented pipeline option: semantic segmentation models are ['unet', 'resunet', "
-                        "'attention_unet', 'fcn32', 'fcn8', 'tiramisu', 'mnet', 'multiresunet', 'seunet', 'unetr']")
-    if cfg.PROBLEM.TYPE == "INSTANCE_SEG" and cfg.MODEL.ARCHITECTURE not in ['unet', 'resunet', 'seunet', 'attention_unet']:
+                         "'attention_unet', 'fcn32', 'fcn8', 'tiramisu', 'mnet', 'multiresunet', 'seunet', 'unetr']")
+    if cfg.PROBLEM.TYPE == "INSTANCE_SEG" and cfg.MODEL.ARCHITECTURE not in ['unet', 'resunet', 'seunet', 'attention_unet', 'unetr']:
         raise ValueError("Not implemented pipeline option: instance segmentation models are ['unet', 'resunet', 'seunet', 'attention_unet']")    
     if cfg.PROBLEM.TYPE in ['DETECTION', 'DENOISING'] and \
         cfg.MODEL.ARCHITECTURE not in ['unet', 'resunet', 'seunet', 'attention_unet']:
         raise ValueError("Architectures available for {} are: ['unet', 'resunet', 'seunet', 'attention_unet']"
-                        .format(cfg.PROBLEM.TYPE))
+                         .format(cfg.PROBLEM.TYPE))
     if cfg.PROBLEM.TYPE == 'SUPER_RESOLUTION' and cfg.MODEL.ARCHITECTURE not in ['edsr', 'srunet', 'rcan', 'dfcan', 'wdsr']:
         raise ValueError("Architectures available for 'SUPER_RESOLUTION' are: ['edsr', 'srunet', 'rcan', 'dfcan', 'wdsr']")
-    if cfg.PROBLEM.TYPE == 'CLASSIFICATION' and cfg.MODEL.ARCHITECTURE not in ['simple_cnn', 'EfficientNetB0']:
-        raise ValueError("Architectures available for 'CLASSIFICATION' are: ['simple_cnn', 'EfficientNetB0']")
-    if cfg.MODEL.ARCHITECTURE == "unetr" and cfg.TEST.STATS.FULL_IMG:
-        raise ValueError("'TEST.STATS.FULL_IMG' can not be activate when using UNETR") 
+    if cfg.PROBLEM.TYPE == 'CLASSIFICATION' and cfg.MODEL.ARCHITECTURE not in ['simple_cnn', 'EfficientNetB0', 'ViT']:
+        raise ValueError("Architectures available for 'CLASSIFICATION' are: ['simple_cnn', 'EfficientNetB0', 'ViT']")
+    if cfg.MODEL.ARCHITECTURE in ['unetr', 'ViT', 'mae']:    
+        if cfg.MODEL.VIT_HIDDEN_SIZE % cfg.MODEL.VIT_NUM_HEADS != 0:
+            raise ValueError("'MODEL.VIT_HIDDEN_SIZE' should be divisible by 'MODEL.VIT_NUM_HEADS'")
+        if not all([i == cfg.DATA.PATCH_SIZE[0] for i in cfg.DATA.PATCH_SIZE[:-1]]):      
+            raise ValueError("'unetr', 'ViT' 'mae' models need to have same shape in all dimensions (e.g. DATA.PATCH_SIZE = (80,80,80,1) )")
 
     ### Train ###
-    assert cfg.TRAIN.OPTIMIZER in ['SGD', 'ADAM'], "TRAIN.OPTIMIZER not in ['SGD', 'ADAM']"
+    assert cfg.TRAIN.OPTIMIZER in ['SGD', 'ADAM', 'ADAMW'], "TRAIN.OPTIMIZER not in ['SGD', 'ADAM', 'ADAMW']"
     assert cfg.LOSS.TYPE in ['CE', 'W_CE_DICE', 'MASKED_BCE'], "LOSS.TYPE not in ['CE', 'W_CE_DICE', 'MASKED_BCE']"
     if cfg.TRAIN.LR_SCHEDULER.NAME != '':
         if cfg.TRAIN.LR_SCHEDULER.NAME not in ['reduceonplateau', 'warmupcosine', 'onecycle']:
@@ -353,7 +370,7 @@ def check_configuration(cfg):
                 raise ValueError("'TRAIN.LR_SCHEDULER.REDUCEONPLATEAU_PATIENCE' need to be set when 'TRAIN.LR_SCHEDULER.NAME' is 'reduceonplateau'")
             if cfg.TRAIN.LR_SCHEDULER.REDUCEONPLATEAU_PATIENCE >= cfg.TRAIN.PATIENCE:
                 raise ValueError("'TRAIN.LR_SCHEDULER.REDUCEONPLATEAU_PATIENCE' need to be less than 'TRAIN.PATIENCE' ")
-    
+      
         if cfg.TRAIN.LR_SCHEDULER.NAME == 'warmupcosine':
             if cfg.TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_LR == -1.:
                 raise ValueError("'TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_LR' need to be set when 'TRAIN.LR_SCHEDULER.NAME' is 'warmupcosine'")
@@ -363,7 +380,7 @@ def check_configuration(cfg):
                 raise ValueError("'TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_HOLD_EPOCHS' need to be set when 'TRAIN.LR_SCHEDULER.NAME' is 'warmupcosine'")
             if cfg.TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_EPOCHS == -1:
                 raise ValueError("'TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_EPOCHS' need to be set when 'TRAIN.LR_SCHEDULER.NAME' is 'warmupcosine'")
-            
+             
     #### Augmentation ####
     if cfg.AUGMENTOR.ENABLE:
         if not check_value(cfg.AUGMENTOR.DA_PROB):
@@ -418,14 +435,14 @@ def check_configuration(cfg):
                 raise ValueError("cfg.AUGMENTOR.GRID_D_RANGE values not in [0, 1] range")
             if not check_value(cfg.AUGMENTOR.GRID_ROTATE):
                 raise ValueError("AUGMENTOR.GRID_ROTATE not in [0, 1] range")
-                            
+                             
     #### Post-processing ####
     if cfg.TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS:
         if len(cfg.DATA.TEST.RESOLUTION) == 1:
             raise ValueError("'DATA.TEST.RESOLUTION' must be set when using 'TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS'")
         if len(cfg.DATA.TEST.RESOLUTION) != dim_count:
             raise ValueError("'DATA.TEST.RESOLUTION' must match in length to {}, which is the number of "
-                            "dimensions".format(dim_count))
+                             "dimensions".format(dim_count))
         if cfg.TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS_RADIUS[0] == -1:
             raise ValueError("'TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS' need to be set when 'TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS' is True")   
 
