@@ -91,6 +91,7 @@ class MainWindow(QMainWindow):
         # Home page buttons 
         self.ui.continue_yaml_bn.clicked.connect(lambda: buttonPressed(self,'bn_run_biapy',99))
         self.ui.create_yaml_bn.clicked.connect(lambda: buttonPressed(self, 'bn_workflow', 99))
+        self.ui.load_yaml_bn.clicked.connect(lambda: buttonPressed(self, 'bn_workflow', 99))
 
         # Workflow page buttons
         self.ui.left_arrow_bn.clicked.connect(lambda: UIFunction.move_workflow_view(self, True))
@@ -131,13 +132,15 @@ class MainWindow(QMainWindow):
         self.ui.tiramisu_depth_input.setValidator(self.int_validator)
         self.ui.tiramisu_feature_maps_input.setValidator(self.int_validator)
         self.ui.tiramisu_dropout_input.setValidator(self.float_validator)
-        self.ui.unetr_token_size_input.setValidator(self.int_validator)
-        self.ui.unetr_embed_dims_input.setValidator(self.int_validator)
-        self.ui.unetr_depth_input.setValidator(self.int_validator)
-        self.ui.unetr_mlp_hidden_units_input.setValidator(self.two_pos_number_bracket_validator)
-        self.ui.unetr_num_heads_input.setValidator(self.int_validator)
+        self.ui.vit_token_size_input.setValidator(self.int_validator)
+        self.ui.vit_hidden_size_input.setValidator(self.int_validator)
+        self.ui.vit_num_layers_input.setValidator(self.int_validator)
+        self.ui.vit_mlp_dims_input.setValidator(self.two_pos_number_bracket_validator)
+        self.ui.vit_num_heads_input.setValidator(self.int_validator)
         self.ui.unetr_vit_hidden_multiple_input.setValidator(self.int_validator)
+        self.ui.unetr_num_filters_input.setValidator(self.int_validator)
         self.ui.learning_rate_input.setValidator(self.float_validator)
+        self.ui.adamw_weight_decay_input.setValidator(self.float_validator)
         self.ui.batch_size_input.setValidator(self.int_validator)
         self.ui.profiler_batch_range_input.setValidator(self.two_pos_number_validator)
         # self.ui.lr_schel_min_lr_input.setValidator(self.float_validator)
@@ -206,6 +209,7 @@ class MainWindow(QMainWindow):
         self.ui.inst_seg_matching_stats_colores_img_ths_input.setValidator(self.no_limit_0_1_float_number_bracket_validator)
         self.ui.inst_seg_yz_filtering_size_input.setValidator(self.int_validator)
         self.ui.inst_seg_z_filtering_size_input.setValidator(self.int_validator)
+        self.ui.inst_seg_voronoi_mask_th_input.setValidator(self.float_validator)
         # self.ui.inst_seg_circularity_filtering_input.setValidator(self.float_validator)
         # self.ui.inst_seg_repare_large_blobs_input.setValidator(self.int_validator)
         # self.ui.inst_seg_remove_close_points_radius_input.setValidator(self.no_limit_0_1_float_number_bracket_validator)
@@ -267,6 +271,8 @@ class MainWindow(QMainWindow):
             "validation_padding_label": "Not extracted from train (path needed)", "validation_padding_input": "Not extracted from train (path needed)", }))
         self.ui.train_advanced_bn.clicked.connect(lambda: expand_hide_advanced_options(self, "train_advanced_bn", "train_advanced_options_frame"))
         self.ui.model_input.currentIndexChanged.connect(lambda: UIFunction.model_combobox_changed(self, str(self.ui.model_input.currentText())))
+        self.ui.optimizer_input.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "optimizer_input",
+            {"adamw_weight_decay_input": "ADAMW", "adamw_weight_decay_label": "ADAMW"}))
         self.ui.profiler_input.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "profiler_input",
             {"profiler_batch_range_label": "Yes", "profiler_batch_range_input": "Yes"}))
         self.ui.normalization_type_input.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "normalization_type_input",
@@ -350,6 +356,10 @@ class MainWindow(QMainWindow):
         self.ui.da_salt_pepper_input.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "da_salt_pepper_input",
             {"da_salt_pepper_amount_label": "Yes", "da_salt_pepper_amount_input": "Yes",
              "da_salt_pepper_prop_label": "Yes", "da_salt_pepper_prop_input": "Yes"}))
+        self.ui.pretext_task_input.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "pretext_task_input",
+            {"ssl_resizing_factor_label": "crappify", "ssl_resizing_factor_input": "crappify",
+             "ssl_noise_label": "crappify", "ssl_noise_input": "crappify"}))
+        
 
         # Test page buttons
         self.ui.enable_test_input.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "enable_test_input",
@@ -380,7 +390,9 @@ class MainWindow(QMainWindow):
                 "Binary mask + Contours + Foreground mask", 
                 "Binary mask + Contours + Distance map", 
                 "Binary mask + Contours + Distance map with background (experimental)",
-                "Binary mask + Distance map with background (experimental)"], 
+                "Binary mask + Distance map with background (experimental)",
+                ("inst_seg_th_config_input", ["manual"])
+                ], 
              "inst_seg_b_channel_th_input": [
                 "Binary mask + Contours", 
                 "Binary mask + Central points", 
@@ -388,31 +400,45 @@ class MainWindow(QMainWindow):
                 "Binary mask + Contours + Foreground mask",
                 "Binary mask + Contours + Distance map", 
                 "Binary mask + Contours + Distance map with background (experimental)",
-                "Binary mask + Distance map with background (experimental)"], 
+                "Binary mask + Distance map with background (experimental)",
+                ("inst_seg_th_config_input", "manual")
+                ], 
              "inst_seg_c_channel_th_label": [
                 "Binary mask + Contours", 
                 "Binary mask + Contours + Foreground mask", 
                 "Binary mask + Contours + Distance map", 
-                "Binary mask + Contours + Distance map with background (experimental)"], 
+                "Binary mask + Contours + Distance map with background (experimental)",
+                ("inst_seg_th_config_input", ["manual"])
+                ], 
              "inst_seg_c_channel_th_input": [
                 "Binary mask + Contours", 
                 "Binary mask + Contours + Foreground mask", 
                 "Binary mask + Contours + Distance map", 
-                "Binary mask + Contours + Distance map with background (experimental)"],
+                "Binary mask + Contours + Distance map with background (experimental)",
+                ("inst_seg_th_config_input", ["manual"])
+                ],
              "inst_seg_d_channel_th_label": [
                 "Binary mask + Distance map", 
                 "Binary mask + Contours + Distance map", 
                 "Binary mask + Contours + Distance map with background (experimental)",
                 "Binary mask + Distance map with background (experimental)", 
-                "Distance map with background (experimental)"], 
+                "Distance map with background (experimental)"
+                ], 
              "inst_seg_d_channel_th_input": [
                 "Binary mask + Distance map", 
                 "Binary mask + Contours + Distance map", 
                 "Binary mask + Contours + Distance map with background (experimental)",
                 "Binary mask + Distance map with background (experimental)", 
-                "Distance map with background (experimental)"], 
-             "inst_seg_p_channel_th_label": "Binary mask + Central points", 
-             "inst_seg_p_channel_th_input": "Binary mask + Central points", 
+                "Distance map with background (experimental)"
+                ], 
+             "inst_seg_p_channel_th_label": [
+                "Binary mask + Central points",
+                ("inst_seg_th_config_input", ["manual"])
+                ], 
+             "inst_seg_p_channel_th_input": [
+                "Binary mask + Central points",
+                ("inst_seg_th_config_input", ["manual"])
+                ], 
              "inst_seg_repare_large_blobs_label": "Binary mask + Central points", 
              "inst_seg_repare_large_blobs_input": "Binary mask + Central points",
              "inst_seg_remove_close_points_label": "Binary mask + Central points",
@@ -426,7 +452,9 @@ class MainWindow(QMainWindow):
                 "Binary mask + Contours + Foreground mask", 
                 "Binary mask + Contours + Distance map", 
                 "Binary mask + Contours + Distance map with background (experimental)",
-                "Binary mask + Distance map with background (experimental)"], 
+                "Binary mask + Distance map with background (experimental)",
+                ("inst_seg_th_config_input", ["manual"])
+                ], 
              "inst_seg_fore_mask_th_input": [
                 "Binary mask + Contours", 
                 "Binary mask + Central points", 
@@ -434,13 +462,17 @@ class MainWindow(QMainWindow):
                 "Binary mask + Contours + Foreground mask", 
                 "Binary mask + Contours + Distance map", 
                 "Binary mask + Contours + Distance map with background (experimental)",
-                "Binary mask + Distance map with background (experimental)"],
+                "Binary mask + Distance map with background (experimental)",
+                ("inst_seg_th_config_input", ["manual"])
+                ],
              "inst_seg_voronoi_label": [
                 "Binary mask + Contours", 
-                "Binary mask + Contours + Foreground mask"], 
+                "Binary mask + Contours + Foreground mask"
+                ], 
              "inst_seg_voronoi_input": [
                 "Binary mask + Contours", 
-                "Binary mask + Contours + Foreground mask"]}))
+                "Binary mask + Contours + Foreground mask"
+                ]},frames_to_hide_if_empty=["inst_seg_ths_frame"]))
         self.ui.inst_seg_ero_dil_fore_input.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "inst_seg_ero_dil_fore_input",
             {"inst_seg_fore_dil_label": "Yes", "inst_seg_fore_dil_input": "Yes", 
              "inst_seg_fore_ero_label": "Yes", "inst_seg_fore_ero_input": "Yes"}))
@@ -457,6 +489,107 @@ class MainWindow(QMainWindow):
         self.ui.inst_seg_matching_stats_input.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "inst_seg_matching_stats_input",
             {"inst_seg_matching_stats_ths_label": "Yes", "inst_seg_matching_stats_ths_input": "Yes",
             "inst_seg_matching_stats_colores_img_ths_label": "Yes", "inst_seg_matching_stats_colores_img_ths_input": "Yes",}))
+        self.ui.inst_seg_voronoi_input.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "inst_seg_voronoi_input",
+            {"inst_seg_voronoi_mask_th_label": "Yes", "inst_seg_voronoi_mask_th_input": "Yes"}))
+        self.ui.inst_seg_th_config_input.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "inst_seg_th_config_input",
+            {"inst_seg_b_channel_th_label": [
+                "manual", 
+                ("inst_seg_data_channels_input", [
+                    "Binary mask + Contours", 
+                    "Binary mask + Central points",
+                    "Binary mask + Distance map",
+                    "Binary mask + Contours + Foreground mask",
+                    "Binary mask + Contours + Distance map",
+                    "Binary mask + Contours + Distance map with background (experimental)",
+                    "Binary mask + Distance map with background (experimental)"]
+                ), 
+                ], 
+            "inst_seg_b_channel_th_input": [
+                "manual", 
+                ("inst_seg_data_channels_input", [ 
+                    "Binary mask + Contours", 
+                    "Binary mask + Central points",
+                    "Binary mask + Distance map",
+                    "Binary mask + Contours + Foreground mask",
+                    "Binary mask + Contours + Distance map",
+                    "Binary mask + Contours + Distance map with background (experimental)",
+                    "Binary mask + Distance map with background (experimental)"]
+                ), 
+                ], 
+            "inst_seg_c_channel_th_label": [
+                "manual", 
+                ("inst_seg_data_channels_input", [
+                    "Binary mask + Contours",
+                    "Binary mask + Contours + Foreground mask",
+                    "Binary mask + Contours + Distance map",
+                    "Binary mask + Contours + Distance map with background (experimental)"]
+                ),
+                ], 
+            "inst_seg_c_channel_th_input": [
+                "manual", 
+                ("inst_seg_data_channels_input", [
+                    "Binary mask + Contours",
+                    "Binary mask + Contours + Foreground mask", 
+                    "Binary mask + Contours + Distance map", 
+                    "Binary mask + Contours + Distance map with background (experimental)"]
+                ), 
+                ],
+            "inst_seg_p_channel_th_label": [
+                "manual", 
+                ("inst_seg_data_channels_input", [
+                    "Binary mask + Central points"]
+                ),
+                ], 
+            "inst_seg_p_channel_th_input": [
+                "manual", 
+                ("inst_seg_data_channels_input", [
+                    "Binary mask + Central points"]
+                ),
+                ],
+            "inst_seg_d_channel_th_label": [
+                "manual", "auto",
+                ("inst_seg_data_channels_input", [
+                    "Binary mask + Distance map", 
+                    "Binary mask + Contours + Distance map", 
+                    "Binary mask + Contours + Distance map with background (experimental)",
+                    "Binary mask + Distance map with background (experimental)", 
+                    "Distance map with background (experimental)"]
+                ),
+                ],
+            "inst_seg_d_channel_th_input": [
+                "manual", "auto",
+                ("inst_seg_data_channels_input", [
+                    "Binary mask + Distance map", 
+                    "Binary mask + Contours + Distance map", 
+                    "Binary mask + Contours + Distance map with background (experimental)",
+                    "Binary mask + Distance map with background (experimental)", 
+                    "Distance map with background (experimental)"]
+                ),
+                ],
+            "inst_seg_fore_mask_th_label": [
+                "manual", 
+                ("inst_seg_data_channels_input", [
+                    "Binary mask + Contours",
+                    "Binary mask + Central points",
+                    "Binary mask + Distance map",
+                    "Binary mask + Contours + Foreground mask",
+                    "Binary mask + Contours + Distance map",
+                    "Binary mask + Contours + Distance map with background (experimental)",
+                    "Binary mask + Distance map with background (experimental)"]
+                ),
+                ], 
+            "inst_seg_fore_mask_th_input": [
+                "manual", 
+                ("inst_seg_data_channels_input", [
+                    "Binary mask + Contours",
+                    "Binary mask + Central points",
+                    "Binary mask + Distance map",
+                    "Binary mask + Contours + Foreground mask",
+                    "Binary mask + Contours + Distance map",
+                    "Binary mask + Contours + Distance map with background (experimental)",
+                    "Binary mask + Distance map with background (experimental)"]
+                ),
+                ]},frames_to_hide_if_empty=["inst_seg_ths_frame"]))
 
         self.ui.det_local_max_coords_input.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "det_local_max_coords_input",
             {"det_min_th_to_be_peak_label": "Yes", "det_min_th_to_be_peak_input": "Yes"}))

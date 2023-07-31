@@ -601,6 +601,7 @@ class Ui_MainWindow(object):
 
         self.gpu_head_label = QLabel(self.dependencies_frame)
         self.gpu_head_label.setObjectName(u"gpu_head_label")
+        self.gpu_head_label.setMinimumSize(QSize(0, 15))
         font3 = QFont()
         font3.setPointSize(12)
         font3.setBold(True)
@@ -630,9 +631,28 @@ class Ui_MainWindow(object):
         self.frame_6.setFont(font)
         self.frame_6.setFrameShape(QFrame.NoFrame)
         self.frame_6.setFrameShadow(QFrame.Raised)
-        self.create_yaml_bn = QPushButton(self.frame_6)
+        self.verticalLayout_34 = QVBoxLayout(self.frame_6)
+        self.verticalLayout_34.setObjectName(u"verticalLayout_34")
+        self.what_do_you_want_label = QLabel(self.frame_6)
+        self.what_do_you_want_label.setObjectName(u"what_do_you_want_label")
+        self.what_do_you_want_label.setMinimumSize(QSize(0, 15))
+        self.what_do_you_want_label.setMaximumSize(QSize(16777215, 16777215))
+        self.what_do_you_want_label.setFont(font2)
+        self.what_do_you_want_label.setAlignment(Qt.AlignCenter)
+        self.what_do_you_want_label.setOpenExternalLinks(True)
+
+        self.verticalLayout_34.addWidget(self.what_do_you_want_label)
+
+        self.frame_38 = QFrame(self.frame_6)
+        self.frame_38.setObjectName(u"frame_38")
+        self.frame_38.setFrameShape(QFrame.NoFrame)
+        self.frame_38.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_21 = QHBoxLayout(self.frame_38)
+        self.horizontalLayout_21.setObjectName(u"horizontalLayout_21")
+        self.create_yaml_bn = QPushButton(self.frame_38)
         self.create_yaml_bn.setObjectName(u"create_yaml_bn")
-        self.create_yaml_bn.setGeometry(QRect(120, 40, 241, 40))
+        self.create_yaml_bn.setMinimumSize(QSize(0, 40))
+        self.create_yaml_bn.setMaximumSize(QSize(200, 16777215))
         self.create_yaml_bn.setFont(font)
         self.create_yaml_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
@@ -648,9 +668,38 @@ class Ui_MainWindow(object):
 "	border: 2px solid rgb(0, 0, 0);\n"
 "}")
         self.create_yaml_bn.setIconSize(QSize(215, 33))
+
+        self.horizontalLayout_21.addWidget(self.create_yaml_bn)
+
+        self.load_yaml_bn = QPushButton(self.frame_38)
+        self.load_yaml_bn.setObjectName(u"load_yaml_bn")
+        self.load_yaml_bn.setMinimumSize(QSize(0, 40))
+        self.load_yaml_bn.setMaximumSize(QSize(400, 16777215))
+        self.load_yaml_bn.setFont(font)
+        self.load_yaml_bn.setStyleSheet(u"QPushButton {\n"
+"	border: none;\n"
+"	border-radius: 15px;\n"
+"	background-color: rgb(64,144,253);\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}")
+        self.load_yaml_bn.setIconSize(QSize(215, 33))
+
+        self.horizontalLayout_21.addWidget(self.load_yaml_bn)
+
+
+        self.verticalLayout_34.addWidget(self.frame_38)
+
         self.continue_yaml_bn = QPushButton(self.frame_6)
         self.continue_yaml_bn.setObjectName(u"continue_yaml_bn")
-        self.continue_yaml_bn.setGeometry(QRect(460, 40, 361, 40))
+        self.continue_yaml_bn.setMinimumSize(QSize(350, 40))
+        self.continue_yaml_bn.setMaximumSize(QSize(400, 16777215))
         self.continue_yaml_bn.setFont(font)
         self.continue_yaml_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
@@ -666,6 +715,9 @@ class Ui_MainWindow(object):
 "	border: 2px solid rgb(0, 0, 0);\n"
 "}")
         self.continue_yaml_bn.setIconSize(QSize(341, 33))
+
+        self.verticalLayout_34.addWidget(self.continue_yaml_bn, 0, Qt.AlignHCenter)
+
 
         self.verticalLayout_5.addWidget(self.frame_6)
 
@@ -1344,7 +1396,7 @@ class Ui_MainWindow(object):
         self.train_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 895, 5842))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, -1432, 895, 6015))
         self.scrollAreaWidgetContents_3.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout_3 = QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
@@ -3027,33 +3079,180 @@ class Ui_MainWindow(object):
         self.frame_28.setFrameShadow(QFrame.Raised)
         self.gridLayout_29 = QGridLayout(self.frame_28)
         self.gridLayout_29.setObjectName(u"gridLayout_29")
-        self.lr_schel_reduce_on_plat_patience_label = QLabel(self.frame_28)
-        self.lr_schel_reduce_on_plat_patience_label.setObjectName(u"lr_schel_reduce_on_plat_patience_label")
-        self.lr_schel_reduce_on_plat_patience_label.setFont(font)
+        self.label_151 = QLabel(self.frame_28)
+        self.label_151.setObjectName(u"label_151")
+        self.label_151.setFont(font)
 
-        self.gridLayout_29.addWidget(self.lr_schel_reduce_on_plat_patience_label, 11, 0, 1, 1)
+        self.gridLayout_29.addWidget(self.label_151, 2, 0, 1, 1)
 
-        self.lr_schel_warmupcosine_lr_label = QLabel(self.frame_28)
-        self.lr_schel_warmupcosine_lr_label.setObjectName(u"lr_schel_warmupcosine_lr_label")
-        self.lr_schel_warmupcosine_lr_label.setFont(font)
+        self.lr_schel_warmupcosine_epochs_label = QLabel(self.frame_28)
+        self.lr_schel_warmupcosine_epochs_label.setObjectName(u"lr_schel_warmupcosine_epochs_label")
+        self.lr_schel_warmupcosine_epochs_label.setFont(font)
 
-        self.gridLayout_29.addWidget(self.lr_schel_warmupcosine_lr_label, 14, 0, 1, 1)
+        self.gridLayout_29.addWidget(self.lr_schel_warmupcosine_epochs_label, 17, 0, 1, 1)
 
-        self.verticalSpacer_14 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.label_143 = QLabel(self.frame_28)
+        self.label_143.setObjectName(u"label_143")
+        self.label_143.setFont(font)
 
-        self.gridLayout_29.addItem(self.verticalSpacer_14, 19, 0, 1, 1)
+        self.gridLayout_29.addWidget(self.label_143, 0, 0, 1, 1)
+
+        self.lr_schel_warmupcosine_hold_epochs_label = QLabel(self.frame_28)
+        self.lr_schel_warmupcosine_hold_epochs_label.setObjectName(u"lr_schel_warmupcosine_hold_epochs_label")
+        self.lr_schel_warmupcosine_hold_epochs_label.setFont(font)
+
+        self.gridLayout_29.addWidget(self.lr_schel_warmupcosine_hold_epochs_label, 20, 0, 1, 1)
+
+        self.profiler_batch_range_label = QLabel(self.frame_28)
+        self.profiler_batch_range_label.setObjectName(u"profiler_batch_range_label")
+        self.profiler_batch_range_label.setFont(font)
+
+        self.gridLayout_29.addWidget(self.profiler_batch_range_label, 24, 0, 1, 1)
+
+        self.profiler_batch_range_input = QLineEdit(self.frame_28)
+        self.profiler_batch_range_input.setObjectName(u"profiler_batch_range_input")
+        self.profiler_batch_range_input.setMinimumSize(QSize(200, 0))
+        self.profiler_batch_range_input.setMaximumSize(QSize(200, 30))
+        self.profiler_batch_range_input.setFont(font)
+
+        self.gridLayout_29.addWidget(self.profiler_batch_range_input, 24, 1, 1, 1)
+
+        self.profiler_input = QComboBox(self.frame_28)
+        self.profiler_input.addItem("")
+        self.profiler_input.addItem("")
+        self.profiler_input.setObjectName(u"profiler_input")
+        self.profiler_input.setMinimumSize(QSize(200, 0))
+        self.profiler_input.setMaximumSize(QSize(200, 30))
+        self.profiler_input.setFont(font)
+
+        self.gridLayout_29.addWidget(self.profiler_input, 21, 1, 1, 1)
+
+        self.label_160 = QLabel(self.frame_28)
+        self.label_160.setObjectName(u"label_160")
+        self.label_160.setFont(font)
+
+        self.gridLayout_29.addWidget(self.label_160, 21, 0, 1, 1)
+
+        self.model_plot_input = QComboBox(self.frame_28)
+        self.model_plot_input.addItem("")
+        self.model_plot_input.addItem("")
+        self.model_plot_input.setObjectName(u"model_plot_input")
+        self.model_plot_input.setMinimumSize(QSize(200, 0))
+        self.model_plot_input.setMaximumSize(QSize(200, 30))
+        font5 = QFont()
+        font5.setPointSize(12)
+        self.model_plot_input.setFont(font5)
+
+        self.gridLayout_29.addWidget(self.model_plot_input, 26, 1, 1, 1)
+
+        self.model_plot_label = QLabel(self.frame_28)
+        self.model_plot_label.setObjectName(u"model_plot_label")
+        self.model_plot_label.setFont(font5)
+
+        self.gridLayout_29.addWidget(self.model_plot_label, 26, 0, 1, 1)
+
+        self.early_stopping_input = QComboBox(self.frame_28)
+        self.early_stopping_input.addItem("")
+        self.early_stopping_input.addItem("")
+        self.early_stopping_input.setObjectName(u"early_stopping_input")
+        self.early_stopping_input.setMinimumSize(QSize(200, 0))
+        self.early_stopping_input.setMaximumSize(QSize(200, 30))
+        self.early_stopping_input.setFont(font)
+
+        self.gridLayout_29.addWidget(self.early_stopping_input, 5, 1, 1, 1)
+
+        self.lr_schel_warmupcosine_hold_epochs_input = QLineEdit(self.frame_28)
+        self.lr_schel_warmupcosine_hold_epochs_input.setObjectName(u"lr_schel_warmupcosine_hold_epochs_input")
+        self.lr_schel_warmupcosine_hold_epochs_input.setMinimumSize(QSize(200, 30))
+        self.lr_schel_warmupcosine_hold_epochs_input.setMaximumSize(QSize(200, 30))
+        self.lr_schel_warmupcosine_hold_epochs_input.setFont(font)
+
+        self.gridLayout_29.addWidget(self.lr_schel_warmupcosine_hold_epochs_input, 20, 1, 1, 1)
+
+        self.lr_schel_reduce_on_plat_patience_input = QLineEdit(self.frame_28)
+        self.lr_schel_reduce_on_plat_patience_input.setObjectName(u"lr_schel_reduce_on_plat_patience_input")
+        self.lr_schel_reduce_on_plat_patience_input.setMinimumSize(QSize(200, 30))
+        self.lr_schel_reduce_on_plat_patience_input.setMaximumSize(QSize(200, 30))
+        self.lr_schel_reduce_on_plat_patience_input.setFont(font)
+
+        self.gridLayout_29.addWidget(self.lr_schel_reduce_on_plat_patience_input, 13, 1, 1, 1)
+
+        self.lr_schel_reduce_on_plat_factor_input = QLineEdit(self.frame_28)
+        self.lr_schel_reduce_on_plat_factor_input.setObjectName(u"lr_schel_reduce_on_plat_factor_input")
+        self.lr_schel_reduce_on_plat_factor_input.setMinimumSize(QSize(200, 30))
+        self.lr_schel_reduce_on_plat_factor_input.setMaximumSize(QSize(200, 30))
+        self.lr_schel_reduce_on_plat_factor_input.setFont(font)
+
+        self.gridLayout_29.addWidget(self.lr_schel_reduce_on_plat_factor_input, 14, 1, 1, 1)
+
+        self.lr_schel_warmupcosine_lr_input = QLineEdit(self.frame_28)
+        self.lr_schel_warmupcosine_lr_input.setObjectName(u"lr_schel_warmupcosine_lr_input")
+        self.lr_schel_warmupcosine_lr_input.setMinimumSize(QSize(200, 30))
+        self.lr_schel_warmupcosine_lr_input.setMaximumSize(QSize(200, 30))
+        self.lr_schel_warmupcosine_lr_input.setFont(font)
+
+        self.gridLayout_29.addWidget(self.lr_schel_warmupcosine_lr_input, 16, 1, 1, 1)
+
+        self.checkpoint_monitor_input = QComboBox(self.frame_28)
+        self.checkpoint_monitor_input.addItem("")
+        self.checkpoint_monitor_input.addItem("")
+        self.checkpoint_monitor_input.setObjectName(u"checkpoint_monitor_input")
+        self.checkpoint_monitor_input.setMinimumSize(QSize(200, 0))
+        self.checkpoint_monitor_input.setMaximumSize(QSize(200, 30))
+        self.checkpoint_monitor_input.setFont(font)
+
+        self.gridLayout_29.addWidget(self.checkpoint_monitor_input, 6, 1, 1, 1)
+
+        self.optimizer_input = QComboBox(self.frame_28)
+        self.optimizer_input.addItem("")
+        self.optimizer_input.addItem("")
+        self.optimizer_input.addItem("")
+        self.optimizer_input.setObjectName(u"optimizer_input")
+        self.optimizer_input.setMinimumSize(QSize(200, 0))
+        self.optimizer_input.setMaximumSize(QSize(200, 30))
+        self.optimizer_input.setFont(font)
+
+        self.gridLayout_29.addWidget(self.optimizer_input, 0, 1, 1, 1)
 
         self.lr_schel_reduce_on_plat_factor_label = QLabel(self.frame_28)
         self.lr_schel_reduce_on_plat_factor_label.setObjectName(u"lr_schel_reduce_on_plat_factor_label")
         self.lr_schel_reduce_on_plat_factor_label.setFont(font)
 
-        self.gridLayout_29.addWidget(self.lr_schel_reduce_on_plat_factor_label, 12, 0, 1, 1)
+        self.gridLayout_29.addWidget(self.lr_schel_reduce_on_plat_factor_label, 14, 0, 1, 1)
+
+        self.lr_schel_reduce_on_plat_patience_label = QLabel(self.frame_28)
+        self.lr_schel_reduce_on_plat_patience_label.setObjectName(u"lr_schel_reduce_on_plat_patience_label")
+        self.lr_schel_reduce_on_plat_patience_label.setFont(font)
+
+        self.gridLayout_29.addWidget(self.lr_schel_reduce_on_plat_patience_label, 13, 0, 1, 1)
+
+        self.lr_schel_warmupcosine_lr_label = QLabel(self.frame_28)
+        self.lr_schel_warmupcosine_lr_label.setObjectName(u"lr_schel_warmupcosine_lr_label")
+        self.lr_schel_warmupcosine_lr_label.setFont(font)
+
+        self.gridLayout_29.addWidget(self.lr_schel_warmupcosine_lr_label, 16, 0, 1, 1)
+
+        self.lr_schel_warmupcosine_epochs_input = QLineEdit(self.frame_28)
+        self.lr_schel_warmupcosine_epochs_input.setObjectName(u"lr_schel_warmupcosine_epochs_input")
+        self.lr_schel_warmupcosine_epochs_input.setMinimumSize(QSize(200, 30))
+        self.lr_schel_warmupcosine_epochs_input.setMaximumSize(QSize(200, 30))
+        self.lr_schel_warmupcosine_epochs_input.setFont(font)
+
+        self.gridLayout_29.addWidget(self.lr_schel_warmupcosine_epochs_input, 17, 1, 1, 1)
+
+        self.horizontalSpacer_21 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_29.addItem(self.horizontalSpacer_21, 4, 2, 1, 1)
+
+        self.verticalSpacer_14 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.gridLayout_29.addItem(self.verticalSpacer_14, 25, 0, 1, 1)
 
         self.label_149 = QLabel(self.frame_28)
         self.label_149.setObjectName(u"label_149")
         self.label_149.setFont(font)
 
-        self.gridLayout_29.addWidget(self.label_149, 2, 0, 1, 1)
+        self.gridLayout_29.addWidget(self.label_149, 4, 0, 1, 1)
 
         self.lr_schel_input = QComboBox(self.frame_28)
         self.lr_schel_input.addItem("")
@@ -3065,7 +3264,7 @@ class Ui_MainWindow(object):
         self.lr_schel_input.setMaximumSize(QSize(200, 30))
         self.lr_schel_input.setFont(font)
 
-        self.gridLayout_29.addWidget(self.lr_schel_input, 7, 1, 1, 1)
+        self.gridLayout_29.addWidget(self.lr_schel_input, 9, 1, 1, 1)
 
         self.lr_schel_min_lr_input = QLineEdit(self.frame_28)
         self.lr_schel_min_lr_input.setObjectName(u"lr_schel_min_lr_input")
@@ -3073,33 +3272,7 @@ class Ui_MainWindow(object):
         self.lr_schel_min_lr_input.setMaximumSize(QSize(200, 30))
         self.lr_schel_min_lr_input.setFont(font)
 
-        self.gridLayout_29.addWidget(self.lr_schel_min_lr_input, 9, 1, 1, 1)
-
-        self.horizontalSpacer_21 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.gridLayout_29.addItem(self.horizontalSpacer_21, 2, 2, 1, 1)
-
-        self.lr_schel_warmupcosine_epochs_input = QLineEdit(self.frame_28)
-        self.lr_schel_warmupcosine_epochs_input.setObjectName(u"lr_schel_warmupcosine_epochs_input")
-        self.lr_schel_warmupcosine_epochs_input.setMinimumSize(QSize(200, 30))
-        self.lr_schel_warmupcosine_epochs_input.setMaximumSize(QSize(200, 30))
-        self.lr_schel_warmupcosine_epochs_input.setFont(font)
-
-        self.gridLayout_29.addWidget(self.lr_schel_warmupcosine_epochs_input, 15, 1, 1, 1)
-
-        self.profiler_batch_range_input = QLineEdit(self.frame_28)
-        self.profiler_batch_range_input.setObjectName(u"profiler_batch_range_input")
-        self.profiler_batch_range_input.setMinimumSize(QSize(200, 0))
-        self.profiler_batch_range_input.setMaximumSize(QSize(200, 30))
-        self.profiler_batch_range_input.setFont(font)
-
-        self.gridLayout_29.addWidget(self.profiler_batch_range_input, 6, 1, 1, 1)
-
-        self.lr_schel_min_lr_label = QLabel(self.frame_28)
-        self.lr_schel_min_lr_label.setObjectName(u"lr_schel_min_lr_label")
-        self.lr_schel_min_lr_label.setFont(font)
-
-        self.gridLayout_29.addWidget(self.lr_schel_min_lr_label, 9, 0, 1, 1)
+        self.gridLayout_29.addWidget(self.lr_schel_min_lr_input, 11, 1, 1, 1)
 
         self.learning_rate_input = QLineEdit(self.frame_28)
         self.learning_rate_input.setObjectName(u"learning_rate_input")
@@ -3107,13 +3280,7 @@ class Ui_MainWindow(object):
         self.learning_rate_input.setMaximumSize(QSize(200, 30))
         self.learning_rate_input.setFont(font)
 
-        self.gridLayout_29.addWidget(self.learning_rate_input, 1, 1, 1, 1)
-
-        self.label_159 = QLabel(self.frame_28)
-        self.label_159.setObjectName(u"label_159")
-        self.label_159.setFont(font)
-
-        self.gridLayout_29.addWidget(self.label_159, 4, 0, 1, 1)
+        self.gridLayout_29.addWidget(self.learning_rate_input, 2, 1, 1, 1)
 
         self.batch_size_input = QLineEdit(self.frame_28)
         self.batch_size_input.setObjectName(u"batch_size_input")
@@ -3121,127 +3288,45 @@ class Ui_MainWindow(object):
         self.batch_size_input.setMaximumSize(QSize(200, 30))
         self.batch_size_input.setFont(font)
 
-        self.gridLayout_29.addWidget(self.batch_size_input, 2, 1, 1, 1)
+        self.gridLayout_29.addWidget(self.batch_size_input, 4, 1, 1, 1)
+
+        self.lr_schel_min_lr_label = QLabel(self.frame_28)
+        self.lr_schel_min_lr_label.setObjectName(u"lr_schel_min_lr_label")
+        self.lr_schel_min_lr_label.setFont(font)
+
+        self.gridLayout_29.addWidget(self.lr_schel_min_lr_label, 11, 0, 1, 1)
 
         self.label_150 = QLabel(self.frame_28)
         self.label_150.setObjectName(u"label_150")
         self.label_150.setFont(font)
 
-        self.gridLayout_29.addWidget(self.label_150, 3, 0, 1, 1)
+        self.gridLayout_29.addWidget(self.label_150, 5, 0, 1, 1)
 
         self.label_162 = QLabel(self.frame_28)
         self.label_162.setObjectName(u"label_162")
         self.label_162.setFont(font)
 
-        self.gridLayout_29.addWidget(self.label_162, 7, 0, 1, 1)
+        self.gridLayout_29.addWidget(self.label_162, 9, 0, 1, 1)
 
-        self.label_143 = QLabel(self.frame_28)
-        self.label_143.setObjectName(u"label_143")
-        self.label_143.setFont(font)
+        self.label_159 = QLabel(self.frame_28)
+        self.label_159.setObjectName(u"label_159")
+        self.label_159.setFont(font)
 
-        self.gridLayout_29.addWidget(self.label_143, 0, 0, 1, 1)
+        self.gridLayout_29.addWidget(self.label_159, 6, 0, 1, 1)
 
-        self.label_151 = QLabel(self.frame_28)
-        self.label_151.setObjectName(u"label_151")
-        self.label_151.setFont(font)
+        self.adamw_weight_decay_input = QLineEdit(self.frame_28)
+        self.adamw_weight_decay_input.setObjectName(u"adamw_weight_decay_input")
+        self.adamw_weight_decay_input.setMinimumSize(QSize(200, 30))
+        self.adamw_weight_decay_input.setMaximumSize(QSize(200, 30))
+        self.adamw_weight_decay_input.setFont(font5)
 
-        self.gridLayout_29.addWidget(self.label_151, 1, 0, 1, 1)
+        self.gridLayout_29.addWidget(self.adamw_weight_decay_input, 3, 1, 1, 1)
 
-        self.lr_schel_warmupcosine_epochs_label = QLabel(self.frame_28)
-        self.lr_schel_warmupcosine_epochs_label.setObjectName(u"lr_schel_warmupcosine_epochs_label")
-        self.lr_schel_warmupcosine_epochs_label.setFont(font)
+        self.adamw_weight_decay_label = QLabel(self.frame_28)
+        self.adamw_weight_decay_label.setObjectName(u"adamw_weight_decay_label")
+        self.adamw_weight_decay_label.setFont(font5)
 
-        self.gridLayout_29.addWidget(self.lr_schel_warmupcosine_epochs_label, 15, 0, 1, 1)
-
-        self.label_160 = QLabel(self.frame_28)
-        self.label_160.setObjectName(u"label_160")
-        self.label_160.setFont(font)
-
-        self.gridLayout_29.addWidget(self.label_160, 5, 0, 1, 1)
-
-        self.lr_schel_warmupcosine_hold_epochs_label = QLabel(self.frame_28)
-        self.lr_schel_warmupcosine_hold_epochs_label.setObjectName(u"lr_schel_warmupcosine_hold_epochs_label")
-        self.lr_schel_warmupcosine_hold_epochs_label.setFont(font)
-
-        self.gridLayout_29.addWidget(self.lr_schel_warmupcosine_hold_epochs_label, 18, 0, 1, 1)
-
-        self.profiler_input = QComboBox(self.frame_28)
-        self.profiler_input.addItem("")
-        self.profiler_input.addItem("")
-        self.profiler_input.setObjectName(u"profiler_input")
-        self.profiler_input.setMinimumSize(QSize(200, 0))
-        self.profiler_input.setMaximumSize(QSize(200, 30))
-        self.profiler_input.setFont(font)
-
-        self.gridLayout_29.addWidget(self.profiler_input, 5, 1, 1, 1)
-
-        self.profiler_batch_range_label = QLabel(self.frame_28)
-        self.profiler_batch_range_label.setObjectName(u"profiler_batch_range_label")
-        self.profiler_batch_range_label.setFont(font)
-
-        self.gridLayout_29.addWidget(self.profiler_batch_range_label, 6, 0, 1, 1)
-
-        self.checkpoint_monitor_input = QComboBox(self.frame_28)
-        self.checkpoint_monitor_input.addItem("")
-        self.checkpoint_monitor_input.addItem("")
-        self.checkpoint_monitor_input.setObjectName(u"checkpoint_monitor_input")
-        self.checkpoint_monitor_input.setMinimumSize(QSize(200, 0))
-        self.checkpoint_monitor_input.setMaximumSize(QSize(200, 30))
-        self.checkpoint_monitor_input.setFont(font)
-
-        self.gridLayout_29.addWidget(self.checkpoint_monitor_input, 4, 1, 1, 1)
-
-        self.lr_schel_warmupcosine_lr_input = QLineEdit(self.frame_28)
-        self.lr_schel_warmupcosine_lr_input.setObjectName(u"lr_schel_warmupcosine_lr_input")
-        self.lr_schel_warmupcosine_lr_input.setMinimumSize(QSize(200, 30))
-        self.lr_schel_warmupcosine_lr_input.setMaximumSize(QSize(200, 30))
-        self.lr_schel_warmupcosine_lr_input.setFont(font)
-
-        self.gridLayout_29.addWidget(self.lr_schel_warmupcosine_lr_input, 14, 1, 1, 1)
-
-        self.optimizer_input = QComboBox(self.frame_28)
-        self.optimizer_input.addItem("")
-        self.optimizer_input.addItem("")
-        self.optimizer_input.setObjectName(u"optimizer_input")
-        self.optimizer_input.setMinimumSize(QSize(200, 0))
-        self.optimizer_input.setMaximumSize(QSize(200, 30))
-        self.optimizer_input.setFont(font)
-
-        self.gridLayout_29.addWidget(self.optimizer_input, 0, 1, 1, 1)
-
-        self.early_stopping_input = QComboBox(self.frame_28)
-        self.early_stopping_input.addItem("")
-        self.early_stopping_input.addItem("")
-        self.early_stopping_input.setObjectName(u"early_stopping_input")
-        self.early_stopping_input.setMinimumSize(QSize(200, 0))
-        self.early_stopping_input.setMaximumSize(QSize(200, 30))
-        self.early_stopping_input.setFont(font)
-
-        self.gridLayout_29.addWidget(self.early_stopping_input, 3, 1, 1, 1)
-
-        self.lr_schel_reduce_on_plat_factor_input = QLineEdit(self.frame_28)
-        self.lr_schel_reduce_on_plat_factor_input.setObjectName(u"lr_schel_reduce_on_plat_factor_input")
-        self.lr_schel_reduce_on_plat_factor_input.setMinimumSize(QSize(200, 30))
-        self.lr_schel_reduce_on_plat_factor_input.setMaximumSize(QSize(200, 30))
-        self.lr_schel_reduce_on_plat_factor_input.setFont(font)
-
-        self.gridLayout_29.addWidget(self.lr_schel_reduce_on_plat_factor_input, 12, 1, 1, 1)
-
-        self.lr_schel_warmupcosine_hold_epochs_input = QLineEdit(self.frame_28)
-        self.lr_schel_warmupcosine_hold_epochs_input.setObjectName(u"lr_schel_warmupcosine_hold_epochs_input")
-        self.lr_schel_warmupcosine_hold_epochs_input.setMinimumSize(QSize(200, 30))
-        self.lr_schel_warmupcosine_hold_epochs_input.setMaximumSize(QSize(200, 30))
-        self.lr_schel_warmupcosine_hold_epochs_input.setFont(font)
-
-        self.gridLayout_29.addWidget(self.lr_schel_warmupcosine_hold_epochs_input, 18, 1, 1, 1)
-
-        self.lr_schel_reduce_on_plat_patience_input = QLineEdit(self.frame_28)
-        self.lr_schel_reduce_on_plat_patience_input.setObjectName(u"lr_schel_reduce_on_plat_patience_input")
-        self.lr_schel_reduce_on_plat_patience_input.setMinimumSize(QSize(200, 30))
-        self.lr_schel_reduce_on_plat_patience_input.setMaximumSize(QSize(200, 30))
-        self.lr_schel_reduce_on_plat_patience_input.setFont(font)
-
-        self.gridLayout_29.addWidget(self.lr_schel_reduce_on_plat_patience_input, 11, 1, 1, 1)
+        self.gridLayout_29.addWidget(self.adamw_weight_decay_label, 3, 0, 1, 1)
 
 
         self.gridLayout_4.addWidget(self.frame_28, 13, 0, 1, 1)
@@ -3421,12 +3506,12 @@ class Ui_MainWindow(object):
 
         self.gridLayout_4.addWidget(self.frame_19, 5, 0, 1, 1)
 
-        self.unetr_label = QLabel(self.train_advanced_options_frame_2)
-        self.unetr_label.setObjectName(u"unetr_label")
-        self.unetr_label.setMaximumSize(QSize(16777215, 16777215))
-        self.unetr_label.setFont(font)
+        self.transformers_label = QLabel(self.train_advanced_options_frame_2)
+        self.transformers_label.setObjectName(u"transformers_label")
+        self.transformers_label.setMaximumSize(QSize(16777215, 16777215))
+        self.transformers_label.setFont(font)
 
-        self.gridLayout_4.addWidget(self.unetr_label, 10, 0, 1, 1)
+        self.gridLayout_4.addWidget(self.transformers_label, 10, 0, 1, 1)
 
         self.tiramisu_frame = QFrame(self.train_advanced_options_frame_2)
         self.tiramisu_frame.setObjectName(u"tiramisu_frame")
@@ -3490,16 +3575,16 @@ class Ui_MainWindow(object):
 
         self.gridLayout_4.addWidget(self.tiramisu_frame, 9, 0, 1, 1)
 
-        self.unetr_frame = QFrame(self.train_advanced_options_frame_2)
-        self.unetr_frame.setObjectName(u"unetr_frame")
-        self.unetr_frame.setMinimumSize(QSize(0, 0))
-        self.unetr_frame.setFont(font)
-        self.unetr_frame.setStyleSheet(u"background: rgb(246,246,246);")
-        self.unetr_frame.setFrameShape(QFrame.Box)
-        self.unetr_frame.setFrameShadow(QFrame.Raised)
-        self.gridLayout_23 = QGridLayout(self.unetr_frame)
+        self.transformers_frame = QFrame(self.train_advanced_options_frame_2)
+        self.transformers_frame.setObjectName(u"transformers_frame")
+        self.transformers_frame.setMinimumSize(QSize(0, 0))
+        self.transformers_frame.setFont(font)
+        self.transformers_frame.setStyleSheet(u"background: rgb(246,246,246);")
+        self.transformers_frame.setFrameShape(QFrame.Box)
+        self.transformers_frame.setFrameShadow(QFrame.Raised)
+        self.gridLayout_23 = QGridLayout(self.transformers_frame)
         self.gridLayout_23.setObjectName(u"gridLayout_23")
-        self.unetr_vit_hidden_multiple_input = QLineEdit(self.unetr_frame)
+        self.unetr_vit_hidden_multiple_input = QLineEdit(self.transformers_frame)
         self.unetr_vit_hidden_multiple_input.setObjectName(u"unetr_vit_hidden_multiple_input")
         self.unetr_vit_hidden_multiple_input.setMinimumSize(QSize(200, 30))
         self.unetr_vit_hidden_multiple_input.setMaximumSize(QSize(200, 30))
@@ -3507,94 +3592,147 @@ class Ui_MainWindow(object):
 
         self.gridLayout_23.addWidget(self.unetr_vit_hidden_multiple_input, 5, 1, 1, 1)
 
-        self.unetr_num_heads_input = QLineEdit(self.unetr_frame)
-        self.unetr_num_heads_input.setObjectName(u"unetr_num_heads_input")
-        self.unetr_num_heads_input.setMinimumSize(QSize(200, 30))
-        self.unetr_num_heads_input.setMaximumSize(QSize(200, 30))
-        self.unetr_num_heads_input.setFont(font)
-
-        self.gridLayout_23.addWidget(self.unetr_num_heads_input, 4, 1, 1, 1)
-
-        self.unetr_mlp_hidden_units_input = QLineEdit(self.unetr_frame)
-        self.unetr_mlp_hidden_units_input.setObjectName(u"unetr_mlp_hidden_units_input")
-        self.unetr_mlp_hidden_units_input.setMinimumSize(QSize(200, 30))
-        self.unetr_mlp_hidden_units_input.setMaximumSize(QSize(200, 30))
-        self.unetr_mlp_hidden_units_input.setFont(font)
-
-        self.gridLayout_23.addWidget(self.unetr_mlp_hidden_units_input, 3, 1, 1, 1)
-
-        self.label_52 = QLabel(self.unetr_frame)
+        self.label_52 = QLabel(self.transformers_frame)
         self.label_52.setObjectName(u"label_52")
         self.label_52.setMaximumSize(QSize(16777215, 16777215))
         self.label_52.setFont(font)
 
         self.gridLayout_23.addWidget(self.label_52, 4, 0, 1, 1)
 
-        self.label_53 = QLabel(self.unetr_frame)
-        self.label_53.setObjectName(u"label_53")
-        self.label_53.setMaximumSize(QSize(16777215, 16777215))
-        self.label_53.setFont(font)
+        self.vit_num_heads_input = QLineEdit(self.transformers_frame)
+        self.vit_num_heads_input.setObjectName(u"vit_num_heads_input")
+        self.vit_num_heads_input.setMinimumSize(QSize(200, 30))
+        self.vit_num_heads_input.setMaximumSize(QSize(200, 30))
+        self.vit_num_heads_input.setFont(font)
 
-        self.gridLayout_23.addWidget(self.label_53, 2, 0, 1, 1)
+        self.gridLayout_23.addWidget(self.vit_num_heads_input, 4, 1, 1, 1)
 
-        self.label_50 = QLabel(self.unetr_frame)
+        self.vit_mlp_dims_input = QLineEdit(self.transformers_frame)
+        self.vit_mlp_dims_input.setObjectName(u"vit_mlp_dims_input")
+        self.vit_mlp_dims_input.setMinimumSize(QSize(200, 30))
+        self.vit_mlp_dims_input.setMaximumSize(QSize(200, 30))
+        self.vit_mlp_dims_input.setFont(font)
+
+        self.gridLayout_23.addWidget(self.vit_mlp_dims_input, 3, 1, 1, 1)
+
+        self.label_50 = QLabel(self.transformers_frame)
         self.label_50.setObjectName(u"label_50")
         self.label_50.setMaximumSize(QSize(16777215, 16777215))
         self.label_50.setFont(font)
 
         self.gridLayout_23.addWidget(self.label_50, 0, 0, 1, 1)
 
-        self.label_54 = QLabel(self.unetr_frame)
-        self.label_54.setObjectName(u"label_54")
-        self.label_54.setMaximumSize(QSize(16777215, 16777215))
-        self.label_54.setFont(font)
+        self.label_53 = QLabel(self.transformers_frame)
+        self.label_53.setObjectName(u"label_53")
+        self.label_53.setMaximumSize(QSize(16777215, 16777215))
+        self.label_53.setFont(font)
 
-        self.gridLayout_23.addWidget(self.label_54, 5, 0, 1, 1)
+        self.gridLayout_23.addWidget(self.label_53, 2, 0, 1, 1)
 
-        self.label_51 = QLabel(self.unetr_frame)
+        self.unetr_vit_hidden_multiple_label = QLabel(self.transformers_frame)
+        self.unetr_vit_hidden_multiple_label.setObjectName(u"unetr_vit_hidden_multiple_label")
+        self.unetr_vit_hidden_multiple_label.setMaximumSize(QSize(16777215, 16777215))
+        self.unetr_vit_hidden_multiple_label.setFont(font)
+
+        self.gridLayout_23.addWidget(self.unetr_vit_hidden_multiple_label, 5, 0, 1, 1)
+
+        self.label_51 = QLabel(self.transformers_frame)
         self.label_51.setObjectName(u"label_51")
         self.label_51.setMaximumSize(QSize(16777215, 16777215))
         self.label_51.setFont(font)
 
         self.gridLayout_23.addWidget(self.label_51, 1, 0, 1, 1)
 
-        self.unetr_token_size_input = QLineEdit(self.unetr_frame)
-        self.unetr_token_size_input.setObjectName(u"unetr_token_size_input")
-        self.unetr_token_size_input.setMinimumSize(QSize(200, 30))
-        self.unetr_token_size_input.setMaximumSize(QSize(200, 30))
-        self.unetr_token_size_input.setFont(font)
-
-        self.gridLayout_23.addWidget(self.unetr_token_size_input, 0, 1, 1, 1)
-
-        self.label_55 = QLabel(self.unetr_frame)
+        self.label_55 = QLabel(self.transformers_frame)
         self.label_55.setObjectName(u"label_55")
         self.label_55.setMaximumSize(QSize(16777215, 16777215))
         self.label_55.setFont(font)
 
         self.gridLayout_23.addWidget(self.label_55, 3, 0, 1, 1)
 
-        self.unetr_embed_dims_input = QLineEdit(self.unetr_frame)
-        self.unetr_embed_dims_input.setObjectName(u"unetr_embed_dims_input")
-        self.unetr_embed_dims_input.setMinimumSize(QSize(200, 30))
-        self.unetr_embed_dims_input.setMaximumSize(QSize(200, 30))
-        self.unetr_embed_dims_input.setFont(font)
+        self.vit_token_size_input = QLineEdit(self.transformers_frame)
+        self.vit_token_size_input.setObjectName(u"vit_token_size_input")
+        self.vit_token_size_input.setMinimumSize(QSize(200, 30))
+        self.vit_token_size_input.setMaximumSize(QSize(200, 30))
+        self.vit_token_size_input.setFont(font)
 
-        self.gridLayout_23.addWidget(self.unetr_embed_dims_input, 1, 1, 1, 1)
+        self.gridLayout_23.addWidget(self.vit_token_size_input, 0, 1, 1, 1)
 
-        self.unetr_depth_input = QLineEdit(self.unetr_frame)
-        self.unetr_depth_input.setObjectName(u"unetr_depth_input")
-        self.unetr_depth_input.setMinimumSize(QSize(200, 30))
-        self.unetr_depth_input.setMaximumSize(QSize(200, 30))
-        self.unetr_depth_input.setFont(font)
+        self.vit_hidden_size_input = QLineEdit(self.transformers_frame)
+        self.vit_hidden_size_input.setObjectName(u"vit_hidden_size_input")
+        self.vit_hidden_size_input.setMinimumSize(QSize(200, 30))
+        self.vit_hidden_size_input.setMaximumSize(QSize(200, 30))
+        self.vit_hidden_size_input.setFont(font)
 
-        self.gridLayout_23.addWidget(self.unetr_depth_input, 2, 1, 1, 1)
+        self.gridLayout_23.addWidget(self.vit_hidden_size_input, 1, 1, 1, 1)
+
+        self.vit_num_layers_input = QLineEdit(self.transformers_frame)
+        self.vit_num_layers_input.setObjectName(u"vit_num_layers_input")
+        self.vit_num_layers_input.setMinimumSize(QSize(200, 30))
+        self.vit_num_layers_input.setMaximumSize(QSize(200, 30))
+        self.vit_num_layers_input.setFont(font)
+
+        self.gridLayout_23.addWidget(self.vit_num_layers_input, 2, 1, 1, 1)
 
         self.horizontalSpacer_14 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.gridLayout_23.addItem(self.horizontalSpacer_14, 3, 2, 1, 1)
 
+        self.unetr_num_filters_label = QLabel(self.transformers_frame)
+        self.unetr_num_filters_label.setObjectName(u"unetr_num_filters_label")
+        self.unetr_num_filters_label.setFont(font5)
 
-        self.gridLayout_4.addWidget(self.unetr_frame, 11, 0, 1, 1)
+        self.gridLayout_23.addWidget(self.unetr_num_filters_label, 6, 0, 1, 1)
+
+        self.unetr_dec_act_input = QComboBox(self.transformers_frame)
+        self.unetr_dec_act_input.addItem("")
+        self.unetr_dec_act_input.addItem("")
+        self.unetr_dec_act_input.addItem("")
+        self.unetr_dec_act_input.setObjectName(u"unetr_dec_act_input")
+        self.unetr_dec_act_input.setMinimumSize(QSize(200, 30))
+        self.unetr_dec_act_input.setMaximumSize(QSize(200, 30))
+        self.unetr_dec_act_input.setFont(font5)
+
+        self.gridLayout_23.addWidget(self.unetr_dec_act_input, 7, 1, 1, 1)
+
+        self.unetr_num_filters_input = QLineEdit(self.transformers_frame)
+        self.unetr_num_filters_input.setObjectName(u"unetr_num_filters_input")
+        self.unetr_num_filters_input.setMinimumSize(QSize(200, 30))
+        self.unetr_num_filters_input.setMaximumSize(QSize(200, 30))
+        self.unetr_num_filters_input.setFont(font5)
+
+        self.gridLayout_23.addWidget(self.unetr_num_filters_input, 6, 1, 1, 1)
+
+        self.unetr_dec_kernel_init_input = QComboBox(self.transformers_frame)
+        self.unetr_dec_kernel_init_input.addItem("")
+        self.unetr_dec_kernel_init_input.addItem("")
+        self.unetr_dec_kernel_init_input.addItem("")
+        self.unetr_dec_kernel_init_input.addItem("")
+        self.unetr_dec_kernel_init_input.addItem("")
+        self.unetr_dec_kernel_init_input.addItem("")
+        self.unetr_dec_kernel_init_input.addItem("")
+        self.unetr_dec_kernel_init_input.addItem("")
+        self.unetr_dec_kernel_init_input.setObjectName(u"unetr_dec_kernel_init_input")
+        self.unetr_dec_kernel_init_input.setMinimumSize(QSize(200, 30))
+        self.unetr_dec_kernel_init_input.setMaximumSize(QSize(200, 30))
+        self.unetr_dec_kernel_init_input.setFont(font5)
+
+        self.gridLayout_23.addWidget(self.unetr_dec_kernel_init_input, 8, 1, 1, 1)
+
+        self.unetr_dec_act_label = QLabel(self.transformers_frame)
+        self.unetr_dec_act_label.setObjectName(u"unetr_dec_act_label")
+        self.unetr_dec_act_label.setFont(font5)
+
+        self.gridLayout_23.addWidget(self.unetr_dec_act_label, 7, 0, 1, 1)
+
+        self.unetr_dec_kernel_init_label = QLabel(self.transformers_frame)
+        self.unetr_dec_kernel_init_label.setObjectName(u"unetr_dec_kernel_init_label")
+        self.unetr_dec_kernel_init_label.setFont(font5)
+
+        self.gridLayout_23.addWidget(self.unetr_dec_kernel_init_label, 8, 0, 1, 1)
+
+
+        self.gridLayout_4.addWidget(self.transformers_frame, 11, 0, 1, 1)
 
         self.label_10 = QLabel(self.train_advanced_options_frame_2)
         self.label_10.setObjectName(u"label_10")
@@ -4630,45 +4768,41 @@ class Ui_MainWindow(object):
         self.scrollAreaWidgetContents_10.setGeometry(QRect(0, 0, 893, 341))
         self.gridLayout_51 = QGridLayout(self.scrollAreaWidgetContents_10)
         self.gridLayout_51.setObjectName(u"gridLayout_51")
-        self.verticalSpacer_22 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
-
-        self.gridLayout_51.addItem(self.verticalSpacer_22, 3, 0, 1, 1)
-
         self.label_96 = QLabel(self.scrollAreaWidgetContents_10)
         self.label_96.setObjectName(u"label_96")
         self.label_96.setFont(font)
 
-        self.gridLayout_51.addWidget(self.label_96, 0, 0, 1, 1)
+        self.gridLayout_51.addWidget(self.label_96, 1, 0, 1, 1)
 
-        self.frame_49 = QFrame(self.scrollAreaWidgetContents_10)
-        self.frame_49.setObjectName(u"frame_49")
-        self.frame_49.setMinimumSize(QSize(0, 0))
-        self.frame_49.setStyleSheet(u"background: rgb(246,246,246);")
-        self.frame_49.setFrameShape(QFrame.Box)
-        self.frame_49.setFrameShadow(QFrame.Raised)
-        self.gridLayout_57 = QGridLayout(self.frame_49)
+        self.pretext_frame = QFrame(self.scrollAreaWidgetContents_10)
+        self.pretext_frame.setObjectName(u"pretext_frame")
+        self.pretext_frame.setMinimumSize(QSize(0, 0))
+        self.pretext_frame.setStyleSheet(u"background: rgb(246,246,246);")
+        self.pretext_frame.setFrameShape(QFrame.Box)
+        self.pretext_frame.setFrameShadow(QFrame.Raised)
+        self.gridLayout_57 = QGridLayout(self.pretext_frame)
         self.gridLayout_57.setObjectName(u"gridLayout_57")
-        self.ssl_resizing_factor_label = QLabel(self.frame_49)
+        self.ssl_resizing_factor_label = QLabel(self.pretext_frame)
         self.ssl_resizing_factor_label.setObjectName(u"ssl_resizing_factor_label")
         self.ssl_resizing_factor_label.setFont(font)
 
-        self.gridLayout_57.addWidget(self.ssl_resizing_factor_label, 0, 0, 1, 1)
+        self.gridLayout_57.addWidget(self.ssl_resizing_factor_label, 1, 0, 1, 1)
 
-        self.ssl_noise_input = QLineEdit(self.frame_49)
+        self.ssl_noise_input = QLineEdit(self.pretext_frame)
         self.ssl_noise_input.setObjectName(u"ssl_noise_input")
         self.ssl_noise_input.setMinimumSize(QSize(200, 30))
         self.ssl_noise_input.setMaximumSize(QSize(200, 30))
         self.ssl_noise_input.setFont(font)
 
-        self.gridLayout_57.addWidget(self.ssl_noise_input, 1, 1, 1, 1)
+        self.gridLayout_57.addWidget(self.ssl_noise_input, 2, 1, 1, 1)
 
-        self.ssl_noise_label = QLabel(self.frame_49)
+        self.ssl_noise_label = QLabel(self.pretext_frame)
         self.ssl_noise_label.setObjectName(u"ssl_noise_label")
         self.ssl_noise_label.setFont(font)
 
-        self.gridLayout_57.addWidget(self.ssl_noise_label, 1, 0, 1, 1)
+        self.gridLayout_57.addWidget(self.ssl_noise_label, 2, 0, 1, 1)
 
-        self.ssl_resizing_factor_input = QComboBox(self.frame_49)
+        self.ssl_resizing_factor_input = QComboBox(self.pretext_frame)
         self.ssl_resizing_factor_input.addItem("")
         self.ssl_resizing_factor_input.addItem("")
         self.ssl_resizing_factor_input.addItem("")
@@ -4677,18 +4811,38 @@ class Ui_MainWindow(object):
         self.ssl_resizing_factor_input.setMaximumSize(QSize(200, 30))
         self.ssl_resizing_factor_input.setFont(font)
 
-        self.gridLayout_57.addWidget(self.ssl_resizing_factor_input, 0, 1, 1, 1)
+        self.gridLayout_57.addWidget(self.ssl_resizing_factor_input, 1, 1, 1, 1)
 
         self.horizontalSpacer_46 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.gridLayout_57.addItem(self.horizontalSpacer_46, 0, 2, 1, 1)
+        self.gridLayout_57.addItem(self.horizontalSpacer_46, 1, 2, 1, 1)
+
+        self.pretext_task_label = QLabel(self.pretext_frame)
+        self.pretext_task_label.setObjectName(u"pretext_task_label")
+        self.pretext_task_label.setFont(font5)
+
+        self.gridLayout_57.addWidget(self.pretext_task_label, 0, 0, 1, 1)
+
+        self.pretext_task_input = QComboBox(self.pretext_frame)
+        self.pretext_task_input.addItem("")
+        self.pretext_task_input.addItem("")
+        self.pretext_task_input.setObjectName(u"pretext_task_input")
+        self.pretext_task_input.setMinimumSize(QSize(200, 30))
+        self.pretext_task_input.setMaximumSize(QSize(200, 30))
+        self.pretext_task_input.setFont(font5)
+
+        self.gridLayout_57.addWidget(self.pretext_task_input, 0, 1, 1, 1)
 
 
-        self.gridLayout_51.addWidget(self.frame_49, 2, 0, 1, 1)
+        self.gridLayout_51.addWidget(self.pretext_frame, 3, 0, 1, 1)
 
         self.horizontalSpacer_41 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.gridLayout_51.addItem(self.horizontalSpacer_41, 2, 1, 1, 1)
+        self.gridLayout_51.addItem(self.horizontalSpacer_41, 3, 1, 1, 1)
+
+        self.verticalSpacer_22 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.gridLayout_51.addItem(self.verticalSpacer_22, 4, 0, 1, 1)
 
         self.scrollArea_6.setWidget(self.scrollAreaWidgetContents_10)
 
@@ -5311,7 +5465,7 @@ class Ui_MainWindow(object):
         self.test_workflow_specific_tab.setObjectName(u"test_workflow_specific_tab")
         self.frame_39 = QFrame(self.test_workflow_specific_tab)
         self.frame_39.setObjectName(u"frame_39")
-        self.frame_39.setGeometry(QRect(-1, -1, 929, 356))
+        self.frame_39.setGeometry(QRect(-1, -1, 901, 312))
         self.frame_39.setFrameShape(QFrame.NoFrame)
         self.frame_39.setFrameShadow(QFrame.Raised)
         self.verticalLayout_11 = QVBoxLayout(self.frame_39)
@@ -5331,7 +5485,7 @@ class Ui_MainWindow(object):
         self.scrollArea_8.setWidgetResizable(True)
         self.scrollAreaWidgetContents_12 = QWidget()
         self.scrollAreaWidgetContents_12.setObjectName(u"scrollAreaWidgetContents_12")
-        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 927, 354))
+        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 435, 293))
         self.gridLayout_61 = QGridLayout(self.scrollAreaWidgetContents_12)
         self.gridLayout_61.setObjectName(u"gridLayout_61")
         self.label_82 = QLabel(self.scrollAreaWidgetContents_12)
@@ -5476,7 +5630,7 @@ class Ui_MainWindow(object):
         self.scrollArea_9.setWidgetResizable(True)
         self.scrollAreaWidgetContents_13 = QWidget()
         self.scrollAreaWidgetContents_13.setObjectName(u"scrollAreaWidgetContents_13")
-        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 534, 1132))
+        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 882, 1204))
         self.gridLayout_44 = QGridLayout(self.scrollAreaWidgetContents_13)
         self.gridLayout_44.setObjectName(u"gridLayout_44")
         self.horizontalSpacer_35 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
@@ -5494,7 +5648,98 @@ class Ui_MainWindow(object):
         self.label_86.setObjectName(u"label_86")
         self.label_86.setFont(font)
 
-        self.gridLayout_44.addWidget(self.label_86, 3, 0, 1, 1)
+        self.gridLayout_44.addWidget(self.label_86, 4, 0, 1, 1)
+
+        self.label_97 = QLabel(self.scrollAreaWidgetContents_13)
+        self.label_97.setObjectName(u"label_97")
+        self.label_97.setFont(font)
+
+        self.gridLayout_44.addWidget(self.label_97, 6, 0, 1, 1)
+
+        self.inst_seg_metrics_label = QLabel(self.scrollAreaWidgetContents_13)
+        self.inst_seg_metrics_label.setObjectName(u"inst_seg_metrics_label")
+        self.inst_seg_metrics_label.setFont(font)
+
+        self.gridLayout_44.addWidget(self.inst_seg_metrics_label, 8, 0, 1, 1)
+
+        self.inst_seg_ths_frame = QFrame(self.scrollAreaWidgetContents_13)
+        self.inst_seg_ths_frame.setObjectName(u"inst_seg_ths_frame")
+        self.inst_seg_ths_frame.setStyleSheet(u"background: rgb(246,246,246);")
+        self.inst_seg_ths_frame.setFrameShape(QFrame.Box)
+        self.inst_seg_ths_frame.setFrameShadow(QFrame.Raised)
+        self.gridLayout_45 = QGridLayout(self.inst_seg_ths_frame)
+        self.gridLayout_45.setObjectName(u"gridLayout_45")
+        self.inst_seg_b_channel_th_input = QLineEdit(self.inst_seg_ths_frame)
+        self.inst_seg_b_channel_th_input.setObjectName(u"inst_seg_b_channel_th_input")
+        self.inst_seg_b_channel_th_input.setMaximumSize(QSize(200, 30))
+        self.inst_seg_b_channel_th_input.setFont(font)
+
+        self.gridLayout_45.addWidget(self.inst_seg_b_channel_th_input, 0, 1, 1, 1)
+
+        self.inst_seg_c_channel_th_label = QLabel(self.inst_seg_ths_frame)
+        self.inst_seg_c_channel_th_label.setObjectName(u"inst_seg_c_channel_th_label")
+        self.inst_seg_c_channel_th_label.setFont(font)
+
+        self.gridLayout_45.addWidget(self.inst_seg_c_channel_th_label, 1, 0, 1, 1)
+
+        self.inst_seg_d_channel_th_label = QLabel(self.inst_seg_ths_frame)
+        self.inst_seg_d_channel_th_label.setObjectName(u"inst_seg_d_channel_th_label")
+        self.inst_seg_d_channel_th_label.setFont(font)
+
+        self.gridLayout_45.addWidget(self.inst_seg_d_channel_th_label, 2, 0, 1, 1)
+
+        self.inst_seg_fore_mask_th_label = QLabel(self.inst_seg_ths_frame)
+        self.inst_seg_fore_mask_th_label.setObjectName(u"inst_seg_fore_mask_th_label")
+        self.inst_seg_fore_mask_th_label.setFont(font)
+
+        self.gridLayout_45.addWidget(self.inst_seg_fore_mask_th_label, 6, 0, 1, 1)
+
+        self.inst_seg_b_channel_th_label = QLabel(self.inst_seg_ths_frame)
+        self.inst_seg_b_channel_th_label.setObjectName(u"inst_seg_b_channel_th_label")
+        self.inst_seg_b_channel_th_label.setFont(font)
+
+        self.gridLayout_45.addWidget(self.inst_seg_b_channel_th_label, 0, 0, 1, 1)
+
+        self.inst_seg_p_channel_th_label = QLabel(self.inst_seg_ths_frame)
+        self.inst_seg_p_channel_th_label.setObjectName(u"inst_seg_p_channel_th_label")
+        self.inst_seg_p_channel_th_label.setFont(font)
+
+        self.gridLayout_45.addWidget(self.inst_seg_p_channel_th_label, 5, 0, 1, 1)
+
+        self.inst_seg_d_channel_th_input = QLineEdit(self.inst_seg_ths_frame)
+        self.inst_seg_d_channel_th_input.setObjectName(u"inst_seg_d_channel_th_input")
+        self.inst_seg_d_channel_th_input.setMaximumSize(QSize(200, 30))
+        self.inst_seg_d_channel_th_input.setFont(font)
+
+        self.gridLayout_45.addWidget(self.inst_seg_d_channel_th_input, 2, 1, 1, 1)
+
+        self.inst_seg_c_channel_th_input = QLineEdit(self.inst_seg_ths_frame)
+        self.inst_seg_c_channel_th_input.setObjectName(u"inst_seg_c_channel_th_input")
+        self.inst_seg_c_channel_th_input.setMaximumSize(QSize(200, 30))
+        self.inst_seg_c_channel_th_input.setFont(font)
+
+        self.gridLayout_45.addWidget(self.inst_seg_c_channel_th_input, 1, 1, 1, 1)
+
+        self.inst_seg_fore_mask_th_input = QLineEdit(self.inst_seg_ths_frame)
+        self.inst_seg_fore_mask_th_input.setObjectName(u"inst_seg_fore_mask_th_input")
+        self.inst_seg_fore_mask_th_input.setMaximumSize(QSize(200, 30))
+        self.inst_seg_fore_mask_th_input.setFont(font)
+
+        self.gridLayout_45.addWidget(self.inst_seg_fore_mask_th_input, 6, 1, 1, 1)
+
+        self.inst_seg_p_channel_th_input = QLineEdit(self.inst_seg_ths_frame)
+        self.inst_seg_p_channel_th_input.setObjectName(u"inst_seg_p_channel_th_input")
+        self.inst_seg_p_channel_th_input.setMaximumSize(QSize(200, 30))
+        self.inst_seg_p_channel_th_input.setFont(font)
+
+        self.gridLayout_45.addWidget(self.inst_seg_p_channel_th_input, 5, 1, 1, 1)
+
+        self.horizontalSpacer_36 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_45.addItem(self.horizontalSpacer_36, 0, 2, 1, 1)
+
+
+        self.gridLayout_44.addWidget(self.inst_seg_ths_frame, 3, 0, 1, 1)
 
         self.frame_50 = QFrame(self.scrollAreaWidgetContents_13)
         self.frame_50.setObjectName(u"frame_50")
@@ -5510,13 +5755,19 @@ class Ui_MainWindow(object):
         self.inst_seg_repare_large_blobs_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_repare_large_blobs_input.setFont(font)
 
-        self.gridLayout_58.addWidget(self.inst_seg_repare_large_blobs_input, 6, 1, 1, 1)
+        self.gridLayout_58.addWidget(self.inst_seg_repare_large_blobs_input, 7, 1, 1, 1)
 
         self.inst_seg_repare_large_blobs_label = QLabel(self.frame_50)
         self.inst_seg_repare_large_blobs_label.setObjectName(u"inst_seg_repare_large_blobs_label")
         self.inst_seg_repare_large_blobs_label.setFont(font)
 
-        self.gridLayout_58.addWidget(self.inst_seg_repare_large_blobs_label, 6, 0, 1, 1)
+        self.gridLayout_58.addWidget(self.inst_seg_repare_large_blobs_label, 7, 0, 1, 1)
+
+        self.inst_seg_voronoi_label = QLabel(self.frame_50)
+        self.inst_seg_voronoi_label.setObjectName(u"inst_seg_voronoi_label")
+        self.inst_seg_voronoi_label.setFont(font)
+
+        self.gridLayout_58.addWidget(self.inst_seg_voronoi_label, 5, 0, 1, 1)
 
         self.inst_seg_circularity_filtering_label = QLabel(self.frame_50)
         self.inst_seg_circularity_filtering_label.setObjectName(u"inst_seg_circularity_filtering_label")
@@ -5524,11 +5775,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_58.addWidget(self.inst_seg_circularity_filtering_label, 4, 0, 1, 1)
 
-        self.inst_seg_voronoi_label = QLabel(self.frame_50)
-        self.inst_seg_voronoi_label.setObjectName(u"inst_seg_voronoi_label")
-        self.inst_seg_voronoi_label.setFont(font)
+        self.inst_seg_circularity_filtering_input = QLineEdit(self.frame_50)
+        self.inst_seg_circularity_filtering_input.setObjectName(u"inst_seg_circularity_filtering_input")
+        self.inst_seg_circularity_filtering_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_circularity_filtering_input.setMaximumSize(QSize(200, 30))
+        self.inst_seg_circularity_filtering_input.setFont(font)
 
-        self.gridLayout_58.addWidget(self.inst_seg_voronoi_label, 5, 0, 1, 1)
+        self.gridLayout_58.addWidget(self.inst_seg_circularity_filtering_input, 4, 1, 1, 1)
 
         self.inst_seg_voronoi_input = QComboBox(self.frame_50)
         self.inst_seg_voronoi_input.addItem("")
@@ -5539,20 +5792,6 @@ class Ui_MainWindow(object):
         self.inst_seg_voronoi_input.setFont(font)
 
         self.gridLayout_58.addWidget(self.inst_seg_voronoi_input, 5, 1, 1, 1)
-
-        self.inst_seg_circularity_filtering_input = QLineEdit(self.frame_50)
-        self.inst_seg_circularity_filtering_input.setObjectName(u"inst_seg_circularity_filtering_input")
-        self.inst_seg_circularity_filtering_input.setMinimumSize(QSize(200, 30))
-        self.inst_seg_circularity_filtering_input.setMaximumSize(QSize(200, 30))
-        self.inst_seg_circularity_filtering_input.setFont(font)
-
-        self.gridLayout_58.addWidget(self.inst_seg_circularity_filtering_input, 4, 1, 1, 1)
-
-        self.inst_seg_yz_filtering_label = QLabel(self.frame_50)
-        self.inst_seg_yz_filtering_label.setObjectName(u"inst_seg_yz_filtering_label")
-        self.inst_seg_yz_filtering_label.setFont(font)
-
-        self.gridLayout_58.addWidget(self.inst_seg_yz_filtering_label, 0, 0, 1, 1)
 
         self.inst_seg_yz_filtering_size_label = QLabel(self.frame_50)
         self.inst_seg_yz_filtering_size_label.setObjectName(u"inst_seg_yz_filtering_size_label")
@@ -5566,19 +5805,17 @@ class Ui_MainWindow(object):
 
         self.gridLayout_58.addWidget(self.inst_seg_z_filtering_size_label, 3, 0, 1, 1)
 
+        self.inst_seg_yz_filtering_label = QLabel(self.frame_50)
+        self.inst_seg_yz_filtering_label.setObjectName(u"inst_seg_yz_filtering_label")
+        self.inst_seg_yz_filtering_label.setFont(font)
+
+        self.gridLayout_58.addWidget(self.inst_seg_yz_filtering_label, 0, 0, 1, 1)
+
         self.inst_seg_z_filtering_label = QLabel(self.frame_50)
         self.inst_seg_z_filtering_label.setObjectName(u"inst_seg_z_filtering_label")
         self.inst_seg_z_filtering_label.setFont(font)
 
         self.gridLayout_58.addWidget(self.inst_seg_z_filtering_label, 2, 0, 1, 1)
-
-        self.inst_seg_z_filtering_size_input = QLineEdit(self.frame_50)
-        self.inst_seg_z_filtering_size_input.setObjectName(u"inst_seg_z_filtering_size_input")
-        self.inst_seg_z_filtering_size_input.setMinimumSize(QSize(200, 30))
-        self.inst_seg_z_filtering_size_input.setMaximumSize(QSize(200, 30))
-        self.inst_seg_z_filtering_size_input.setFont(font)
-
-        self.gridLayout_58.addWidget(self.inst_seg_z_filtering_size_input, 3, 1, 1, 1)
 
         self.inst_seg_yz_filtering_size_input = QLineEdit(self.frame_50)
         self.inst_seg_yz_filtering_size_input.setObjectName(u"inst_seg_yz_filtering_size_input")
@@ -5587,6 +5824,17 @@ class Ui_MainWindow(object):
         self.inst_seg_yz_filtering_size_input.setFont(font)
 
         self.gridLayout_58.addWidget(self.inst_seg_yz_filtering_size_input, 1, 1, 1, 1)
+
+        self.inst_seg_z_filtering_size_input = QLineEdit(self.frame_50)
+        self.inst_seg_z_filtering_size_input.setObjectName(u"inst_seg_z_filtering_size_input")
+        self.inst_seg_z_filtering_size_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_z_filtering_size_input.setMaximumSize(QSize(200, 30))
+        font6 = QFont()
+        font6.setFamily(u"DejaVu Math TeX Gyre")
+        font6.setPointSize(17)
+        self.inst_seg_z_filtering_size_input.setFont(font6)
+
+        self.gridLayout_58.addWidget(self.inst_seg_z_filtering_size_input, 3, 1, 1, 1)
 
         self.inst_seg_yz_filtering_input = QComboBox(self.frame_50)
         self.inst_seg_yz_filtering_input.addItem("")
@@ -5616,7 +5864,7 @@ class Ui_MainWindow(object):
         self.inst_seg_remove_close_points_label.setObjectName(u"inst_seg_remove_close_points_label")
         self.inst_seg_remove_close_points_label.setFont(font)
 
-        self.gridLayout_58.addWidget(self.inst_seg_remove_close_points_label, 7, 0, 1, 1)
+        self.gridLayout_58.addWidget(self.inst_seg_remove_close_points_label, 8, 0, 1, 1)
 
         self.inst_seg_remove_close_points_input = QComboBox(self.frame_50)
         self.inst_seg_remove_close_points_input.addItem("")
@@ -5626,13 +5874,13 @@ class Ui_MainWindow(object):
         self.inst_seg_remove_close_points_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_remove_close_points_input.setFont(font)
 
-        self.gridLayout_58.addWidget(self.inst_seg_remove_close_points_input, 7, 1, 1, 1)
+        self.gridLayout_58.addWidget(self.inst_seg_remove_close_points_input, 8, 1, 1, 1)
 
         self.inst_seg_remove_close_points_radius_label = QLabel(self.frame_50)
         self.inst_seg_remove_close_points_radius_label.setObjectName(u"inst_seg_remove_close_points_radius_label")
         self.inst_seg_remove_close_points_radius_label.setFont(font)
 
-        self.gridLayout_58.addWidget(self.inst_seg_remove_close_points_radius_label, 8, 0, 1, 1)
+        self.gridLayout_58.addWidget(self.inst_seg_remove_close_points_radius_label, 9, 0, 1, 1)
 
         self.inst_seg_remove_close_points_radius_input = QLineEdit(self.frame_50)
         self.inst_seg_remove_close_points_radius_input.setObjectName(u"inst_seg_remove_close_points_radius_input")
@@ -5640,89 +5888,87 @@ class Ui_MainWindow(object):
         self.inst_seg_remove_close_points_radius_input.setMaximumSize(QSize(200, 30))
         self.inst_seg_remove_close_points_radius_input.setFont(font)
 
-        self.gridLayout_58.addWidget(self.inst_seg_remove_close_points_radius_input, 8, 1, 1, 1)
+        self.gridLayout_58.addWidget(self.inst_seg_remove_close_points_radius_input, 9, 1, 1, 1)
+
+        self.inst_seg_voronoi_mask_th_label = QLabel(self.frame_50)
+        self.inst_seg_voronoi_mask_th_label.setObjectName(u"inst_seg_voronoi_mask_th_label")
+        self.inst_seg_voronoi_mask_th_label.setFont(font5)
+
+        self.gridLayout_58.addWidget(self.inst_seg_voronoi_mask_th_label, 6, 0, 1, 1)
+
+        self.inst_seg_voronoi_mask_th_input = QLineEdit(self.frame_50)
+        self.inst_seg_voronoi_mask_th_input.setObjectName(u"inst_seg_voronoi_mask_th_input")
+        self.inst_seg_voronoi_mask_th_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_voronoi_mask_th_input.setMaximumSize(QSize(200, 30))
+        self.inst_seg_voronoi_mask_th_input.setFont(font5)
+
+        self.gridLayout_58.addWidget(self.inst_seg_voronoi_mask_th_input, 6, 1, 1, 1)
 
 
-        self.gridLayout_44.addWidget(self.frame_50, 6, 0, 1, 1)
+        self.gridLayout_44.addWidget(self.frame_50, 7, 0, 1, 1)
 
-        self.frame_42 = QFrame(self.scrollAreaWidgetContents_13)
-        self.frame_42.setObjectName(u"frame_42")
-        self.frame_42.setStyleSheet(u"background: rgb(246,246,246);")
-        self.frame_42.setFrameShape(QFrame.Box)
-        self.frame_42.setFrameShadow(QFrame.Raised)
-        self.gridLayout_45 = QGridLayout(self.frame_42)
-        self.gridLayout_45.setObjectName(u"gridLayout_45")
-        self.inst_seg_b_channel_th_input = QLineEdit(self.frame_42)
-        self.inst_seg_b_channel_th_input.setObjectName(u"inst_seg_b_channel_th_input")
-        self.inst_seg_b_channel_th_input.setMaximumSize(QSize(200, 30))
-        self.inst_seg_b_channel_th_input.setFont(font)
+        self.inst_seg_metrics_frame = QFrame(self.scrollAreaWidgetContents_13)
+        self.inst_seg_metrics_frame.setObjectName(u"inst_seg_metrics_frame")
+        self.inst_seg_metrics_frame.setMinimumSize(QSize(0, 0))
+        self.inst_seg_metrics_frame.setStyleSheet(u"background: rgb(246,246,246);")
+        self.inst_seg_metrics_frame.setFrameShape(QFrame.Box)
+        self.inst_seg_metrics_frame.setFrameShadow(QFrame.Raised)
+        self.gridLayout_55 = QGridLayout(self.inst_seg_metrics_frame)
+        self.gridLayout_55.setObjectName(u"gridLayout_55")
+        self.inst_seg_matching_stats_label = QLabel(self.inst_seg_metrics_frame)
+        self.inst_seg_matching_stats_label.setObjectName(u"inst_seg_matching_stats_label")
+        self.inst_seg_matching_stats_label.setFont(font)
 
-        self.gridLayout_45.addWidget(self.inst_seg_b_channel_th_input, 0, 1, 1, 1)
+        self.gridLayout_55.addWidget(self.inst_seg_matching_stats_label, 0, 0, 1, 1)
 
-        self.inst_seg_c_channel_th_label = QLabel(self.frame_42)
-        self.inst_seg_c_channel_th_label.setObjectName(u"inst_seg_c_channel_th_label")
-        self.inst_seg_c_channel_th_label.setFont(font)
+        self.inst_seg_matching_stats_ths_label = QLabel(self.inst_seg_metrics_frame)
+        self.inst_seg_matching_stats_ths_label.setObjectName(u"inst_seg_matching_stats_ths_label")
+        self.inst_seg_matching_stats_ths_label.setFont(font)
 
-        self.gridLayout_45.addWidget(self.inst_seg_c_channel_th_label, 1, 0, 1, 1)
+        self.gridLayout_55.addWidget(self.inst_seg_matching_stats_ths_label, 1, 0, 1, 1)
 
-        self.inst_seg_d_channel_th_label = QLabel(self.frame_42)
-        self.inst_seg_d_channel_th_label.setObjectName(u"inst_seg_d_channel_th_label")
-        self.inst_seg_d_channel_th_label.setFont(font)
+        self.inst_seg_matching_stats_colores_img_ths_label = QLabel(self.inst_seg_metrics_frame)
+        self.inst_seg_matching_stats_colores_img_ths_label.setObjectName(u"inst_seg_matching_stats_colores_img_ths_label")
+        self.inst_seg_matching_stats_colores_img_ths_label.setFont(font)
 
-        self.gridLayout_45.addWidget(self.inst_seg_d_channel_th_label, 2, 0, 1, 1)
+        self.gridLayout_55.addWidget(self.inst_seg_matching_stats_colores_img_ths_label, 2, 0, 1, 1)
 
-        self.inst_seg_fore_mask_th_label = QLabel(self.frame_42)
-        self.inst_seg_fore_mask_th_label.setObjectName(u"inst_seg_fore_mask_th_label")
-        self.inst_seg_fore_mask_th_label.setFont(font)
+        self.verticalSpacer_26 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
-        self.gridLayout_45.addWidget(self.inst_seg_fore_mask_th_label, 6, 0, 1, 1)
+        self.gridLayout_55.addItem(self.verticalSpacer_26, 3, 0, 1, 1)
 
-        self.inst_seg_b_channel_th_label = QLabel(self.frame_42)
-        self.inst_seg_b_channel_th_label.setObjectName(u"inst_seg_b_channel_th_label")
-        self.inst_seg_b_channel_th_label.setFont(font)
+        self.inst_seg_matching_stats_input = QComboBox(self.inst_seg_metrics_frame)
+        self.inst_seg_matching_stats_input.addItem("")
+        self.inst_seg_matching_stats_input.addItem("")
+        self.inst_seg_matching_stats_input.setObjectName(u"inst_seg_matching_stats_input")
+        self.inst_seg_matching_stats_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_matching_stats_input.setMaximumSize(QSize(200, 30))
+        self.inst_seg_matching_stats_input.setFont(font)
 
-        self.gridLayout_45.addWidget(self.inst_seg_b_channel_th_label, 0, 0, 1, 1)
+        self.gridLayout_55.addWidget(self.inst_seg_matching_stats_input, 0, 1, 1, 1)
 
-        self.inst_seg_p_channel_th_label = QLabel(self.frame_42)
-        self.inst_seg_p_channel_th_label.setObjectName(u"inst_seg_p_channel_th_label")
-        self.inst_seg_p_channel_th_label.setFont(font)
+        self.inst_seg_matching_stats_ths_input = QLineEdit(self.inst_seg_metrics_frame)
+        self.inst_seg_matching_stats_ths_input.setObjectName(u"inst_seg_matching_stats_ths_input")
+        self.inst_seg_matching_stats_ths_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_matching_stats_ths_input.setMaximumSize(QSize(200, 30))
+        self.inst_seg_matching_stats_ths_input.setFont(font)
 
-        self.gridLayout_45.addWidget(self.inst_seg_p_channel_th_label, 5, 0, 1, 1)
+        self.gridLayout_55.addWidget(self.inst_seg_matching_stats_ths_input, 1, 1, 1, 1)
 
-        self.inst_seg_d_channel_th_input = QLineEdit(self.frame_42)
-        self.inst_seg_d_channel_th_input.setObjectName(u"inst_seg_d_channel_th_input")
-        self.inst_seg_d_channel_th_input.setMaximumSize(QSize(200, 30))
-        self.inst_seg_d_channel_th_input.setFont(font)
+        self.inst_seg_matching_stats_colores_img_ths_input = QLineEdit(self.inst_seg_metrics_frame)
+        self.inst_seg_matching_stats_colores_img_ths_input.setObjectName(u"inst_seg_matching_stats_colores_img_ths_input")
+        self.inst_seg_matching_stats_colores_img_ths_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_matching_stats_colores_img_ths_input.setMaximumSize(QSize(200, 30))
+        self.inst_seg_matching_stats_colores_img_ths_input.setFont(font)
 
-        self.gridLayout_45.addWidget(self.inst_seg_d_channel_th_input, 2, 1, 1, 1)
+        self.gridLayout_55.addWidget(self.inst_seg_matching_stats_colores_img_ths_input, 2, 1, 1, 1)
 
-        self.inst_seg_c_channel_th_input = QLineEdit(self.frame_42)
-        self.inst_seg_c_channel_th_input.setObjectName(u"inst_seg_c_channel_th_input")
-        self.inst_seg_c_channel_th_input.setMaximumSize(QSize(200, 30))
-        self.inst_seg_c_channel_th_input.setFont(font)
+        self.horizontalSpacer_49 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.gridLayout_45.addWidget(self.inst_seg_c_channel_th_input, 1, 1, 1, 1)
-
-        self.inst_seg_fore_mask_th_input = QLineEdit(self.frame_42)
-        self.inst_seg_fore_mask_th_input.setObjectName(u"inst_seg_fore_mask_th_input")
-        self.inst_seg_fore_mask_th_input.setMaximumSize(QSize(200, 30))
-        self.inst_seg_fore_mask_th_input.setFont(font)
-
-        self.gridLayout_45.addWidget(self.inst_seg_fore_mask_th_input, 6, 1, 1, 1)
-
-        self.inst_seg_p_channel_th_input = QLineEdit(self.frame_42)
-        self.inst_seg_p_channel_th_input.setObjectName(u"inst_seg_p_channel_th_input")
-        self.inst_seg_p_channel_th_input.setMaximumSize(QSize(200, 30))
-        self.inst_seg_p_channel_th_input.setFont(font)
-
-        self.gridLayout_45.addWidget(self.inst_seg_p_channel_th_input, 5, 1, 1, 1)
-
-        self.horizontalSpacer_36 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.gridLayout_45.addItem(self.horizontalSpacer_36, 0, 2, 1, 1)
+        self.gridLayout_55.addItem(self.horizontalSpacer_49, 1, 2, 1, 1)
 
 
-        self.gridLayout_44.addWidget(self.frame_42, 2, 0, 1, 1)
+        self.gridLayout_44.addWidget(self.inst_seg_metrics_frame, 9, 0, 1, 1)
 
         self.frame_43 = QFrame(self.scrollAreaWidgetContents_13)
         self.frame_43.setObjectName(u"frame_43")
@@ -5881,82 +6127,38 @@ class Ui_MainWindow(object):
         self.gridLayout_46.addItem(self.horizontalSpacer_47, 1, 4, 1, 1)
 
 
-        self.gridLayout_44.addWidget(self.frame_43, 4, 0, 1, 1)
+        self.gridLayout_44.addWidget(self.frame_43, 5, 0, 1, 1)
 
-        self.label_97 = QLabel(self.scrollAreaWidgetContents_13)
-        self.label_97.setObjectName(u"label_97")
-        self.label_97.setFont(font)
+        self.frame_49 = QFrame(self.scrollAreaWidgetContents_13)
+        self.frame_49.setObjectName(u"frame_49")
+        self.frame_49.setFrameShape(QFrame.NoFrame)
+        self.frame_49.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_23 = QHBoxLayout(self.frame_49)
+        self.horizontalLayout_23.setSpacing(9)
+        self.horizontalLayout_23.setObjectName(u"horizontalLayout_23")
+        self.horizontalLayout_23.setContentsMargins(0, 0, 0, 0)
+        self.label_13 = QLabel(self.frame_49)
+        self.label_13.setObjectName(u"label_13")
+        self.label_13.setFont(font5)
 
-        self.gridLayout_44.addWidget(self.label_97, 5, 0, 1, 1)
+        self.horizontalLayout_23.addWidget(self.label_13)
 
-        self.inst_seg_metrics_frame = QFrame(self.scrollAreaWidgetContents_13)
-        self.inst_seg_metrics_frame.setObjectName(u"inst_seg_metrics_frame")
-        self.inst_seg_metrics_frame.setMinimumSize(QSize(0, 0))
-        self.inst_seg_metrics_frame.setStyleSheet(u"background: rgb(246,246,246);")
-        self.inst_seg_metrics_frame.setFrameShape(QFrame.Box)
-        self.inst_seg_metrics_frame.setFrameShadow(QFrame.Raised)
-        self.gridLayout_55 = QGridLayout(self.inst_seg_metrics_frame)
-        self.gridLayout_55.setObjectName(u"gridLayout_55")
-        self.inst_seg_matching_stats_label = QLabel(self.inst_seg_metrics_frame)
-        self.inst_seg_matching_stats_label.setObjectName(u"inst_seg_matching_stats_label")
-        self.inst_seg_matching_stats_label.setFont(font)
+        self.inst_seg_th_config_input = QComboBox(self.frame_49)
+        self.inst_seg_th_config_input.addItem("")
+        self.inst_seg_th_config_input.addItem("")
+        self.inst_seg_th_config_input.setObjectName(u"inst_seg_th_config_input")
+        self.inst_seg_th_config_input.setMinimumSize(QSize(200, 30))
+        self.inst_seg_th_config_input.setMaximumSize(QSize(200, 30))
+        self.inst_seg_th_config_input.setFont(font5)
 
-        self.gridLayout_55.addWidget(self.inst_seg_matching_stats_label, 0, 0, 1, 1)
+        self.horizontalLayout_23.addWidget(self.inst_seg_th_config_input)
 
-        self.inst_seg_matching_stats_ths_label = QLabel(self.inst_seg_metrics_frame)
-        self.inst_seg_matching_stats_ths_label.setObjectName(u"inst_seg_matching_stats_ths_label")
-        self.inst_seg_matching_stats_ths_label.setFont(font)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.gridLayout_55.addWidget(self.inst_seg_matching_stats_ths_label, 1, 0, 1, 1)
-
-        self.inst_seg_matching_stats_colores_img_ths_label = QLabel(self.inst_seg_metrics_frame)
-        self.inst_seg_matching_stats_colores_img_ths_label.setObjectName(u"inst_seg_matching_stats_colores_img_ths_label")
-        self.inst_seg_matching_stats_colores_img_ths_label.setFont(font)
-
-        self.gridLayout_55.addWidget(self.inst_seg_matching_stats_colores_img_ths_label, 2, 0, 1, 1)
-
-        self.verticalSpacer_26 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
-
-        self.gridLayout_55.addItem(self.verticalSpacer_26, 3, 0, 1, 1)
-
-        self.inst_seg_matching_stats_input = QComboBox(self.inst_seg_metrics_frame)
-        self.inst_seg_matching_stats_input.addItem("")
-        self.inst_seg_matching_stats_input.addItem("")
-        self.inst_seg_matching_stats_input.setObjectName(u"inst_seg_matching_stats_input")
-        self.inst_seg_matching_stats_input.setMinimumSize(QSize(200, 30))
-        self.inst_seg_matching_stats_input.setMaximumSize(QSize(200, 30))
-        self.inst_seg_matching_stats_input.setFont(font)
-
-        self.gridLayout_55.addWidget(self.inst_seg_matching_stats_input, 0, 1, 1, 1)
-
-        self.inst_seg_matching_stats_ths_input = QLineEdit(self.inst_seg_metrics_frame)
-        self.inst_seg_matching_stats_ths_input.setObjectName(u"inst_seg_matching_stats_ths_input")
-        self.inst_seg_matching_stats_ths_input.setMinimumSize(QSize(200, 30))
-        self.inst_seg_matching_stats_ths_input.setMaximumSize(QSize(200, 30))
-        self.inst_seg_matching_stats_ths_input.setFont(font)
-
-        self.gridLayout_55.addWidget(self.inst_seg_matching_stats_ths_input, 1, 1, 1, 1)
-
-        self.inst_seg_matching_stats_colores_img_ths_input = QLineEdit(self.inst_seg_metrics_frame)
-        self.inst_seg_matching_stats_colores_img_ths_input.setObjectName(u"inst_seg_matching_stats_colores_img_ths_input")
-        self.inst_seg_matching_stats_colores_img_ths_input.setMinimumSize(QSize(200, 30))
-        self.inst_seg_matching_stats_colores_img_ths_input.setMaximumSize(QSize(200, 30))
-        self.inst_seg_matching_stats_colores_img_ths_input.setFont(font)
-
-        self.gridLayout_55.addWidget(self.inst_seg_matching_stats_colores_img_ths_input, 2, 1, 1, 1)
-
-        self.horizontalSpacer_49 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.gridLayout_55.addItem(self.horizontalSpacer_49, 1, 2, 1, 1)
+        self.horizontalLayout_23.addItem(self.horizontalSpacer)
 
 
-        self.gridLayout_44.addWidget(self.inst_seg_metrics_frame, 8, 0, 1, 1)
-
-        self.inst_seg_metrics_label = QLabel(self.scrollAreaWidgetContents_13)
-        self.inst_seg_metrics_label.setObjectName(u"inst_seg_metrics_label")
-        self.inst_seg_metrics_label.setFont(font)
-
-        self.gridLayout_44.addWidget(self.inst_seg_metrics_label, 7, 0, 1, 1)
+        self.gridLayout_44.addWidget(self.frame_49, 1, 0, 1, 1)
 
         self.scrollArea_9.setWidget(self.scrollAreaWidgetContents_13)
 
@@ -5974,7 +6176,7 @@ class Ui_MainWindow(object):
         self.scrollArea_10.setWidgetResizable(True)
         self.scrollAreaWidgetContents_14 = QWidget()
         self.scrollAreaWidgetContents_14.setObjectName(u"scrollAreaWidgetContents_14")
-        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 910, 736))
+        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 882, 736))
         self.gridLayout_47 = QGridLayout(self.scrollAreaWidgetContents_14)
         self.gridLayout_47.setObjectName(u"gridLayout_47")
         self.label_100 = QLabel(self.scrollAreaWidgetContents_14)
@@ -6438,12 +6640,12 @@ class Ui_MainWindow(object):
         self.page_create_yaml_bottom_frame.setObjectName(u"page_create_yaml_bottom_frame")
         self.page_create_yaml_bottom_frame.setMinimumSize(QSize(0, 103))
         self.page_create_yaml_bottom_frame.setMaximumSize(QSize(16777215, 16777215))
-        font5 = QFont()
-        font5.setFamily(u"DejaVu Math TeX Gyre")
-        font5.setPointSize(12)
-        font5.setBold(False)
-        font5.setWeight(50)
-        self.page_create_yaml_bottom_frame.setFont(font5)
+        font7 = QFont()
+        font7.setFamily(u"DejaVu Math TeX Gyre")
+        font7.setPointSize(12)
+        font7.setBold(False)
+        font7.setWeight(50)
+        self.page_create_yaml_bottom_frame.setFont(font7)
         self.page_create_yaml_bottom_frame.setFrameShape(QFrame.NoFrame)
         self.page_create_yaml_bottom_frame.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_8 = QHBoxLayout(self.page_create_yaml_bottom_frame)
@@ -6488,13 +6690,13 @@ class Ui_MainWindow(object):
         self.continue_bn.setObjectName(u"continue_bn")
         self.continue_bn.setMinimumSize(QSize(0, 0))
         self.continue_bn.setMaximumSize(QSize(200, 77))
-        font6 = QFont()
-        font6.setFamily(u"DejaVu Math TeX Gyre")
-        font6.setPointSize(12)
-        font6.setBold(False)
-        font6.setWeight(50)
-        font6.setStrikeOut(False)
-        self.continue_bn.setFont(font6)
+        font8 = QFont()
+        font8.setFamily(u"DejaVu Math TeX Gyre")
+        font8.setPointSize(12)
+        font8.setBold(False)
+        font8.setWeight(50)
+        font8.setStrikeOut(False)
+        self.continue_bn.setFont(font8)
         self.continue_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgb(64,144,253);\n"
@@ -6676,10 +6878,10 @@ class Ui_MainWindow(object):
         self.run_biapy_docker_bn.setObjectName(u"run_biapy_docker_bn")
         self.run_biapy_docker_bn.setMinimumSize(QSize(300, 40))
         self.run_biapy_docker_bn.setMaximumSize(QSize(300, 16777215))
-        font7 = QFont()
-        font7.setFamily(u"DejaVu Math TeX Gyre")
-        font7.setPointSize(20)
-        self.run_biapy_docker_bn.setFont(font7)
+        font9 = QFont()
+        font9.setFamily(u"DejaVu Math TeX Gyre")
+        font9.setPointSize(20)
+        self.run_biapy_docker_bn.setFont(font9)
         self.run_biapy_docker_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgb(64,144,253);\n"
@@ -6754,7 +6956,7 @@ class Ui_MainWindow(object):
         self.check_yaml_file_errors_frame.setWidgetResizable(True)
         self.scrollAreaWidgetContents_19 = QWidget()
         self.scrollAreaWidgetContents_19.setObjectName(u"scrollAreaWidgetContents_19")
-        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 869, 104))
+        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 31, 19))
         self.verticalLayout_32 = QVBoxLayout(self.scrollAreaWidgetContents_19)
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
         self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)
@@ -6878,11 +7080,11 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.stackedWidget.setCurrentIndex(1)
-        self.stackedWidget_create_yaml_frame.setCurrentIndex(3)
+        self.stackedWidget_create_yaml_frame.setCurrentIndex(2)
         self.train_tab_widget.setCurrentIndex(0)
         self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(1)
-        self.test_tab_widget.setCurrentIndex(1)
-        self.test_workflow_specific_tab_stackedWidget.setCurrentIndex(2)
+        self.test_tab_widget.setCurrentIndex(0)
+        self.test_workflow_specific_tab_stackedWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -6929,8 +7131,10 @@ class Ui_MainWindow(object):
                         "/biapy.readthedocs.io/en/latest/workflows/super_resolution.html\"><span style=\" text-decoration: underline; color:#0000ff;\">single image super-resolution</span></a>, <a href=\"https://biapy.readthedocs.io/en/latest/workflows/self_supervision.html\"><span style=\" text-decoration: underline; color:#0000ff;\">self-supervised learning</span></a> and <a href=\"https://biapy.readthedocs.io/en/latest/workflows/classification.html\"><span style=\" text-decoration: underline; color:#0000ff;\">image classification</span></a>. The source code is based on Keras/TensorFlow as the backend. As BiaPy\u2019s core is based on deep learning, it is recommended to use a machine with a graphics processing unit (GPU) for faster training and execution.</p></body></html>", None))
         self.docker_head_label.setText(QCoreApplication.translate("MainWindow", u"Docker dependency", None))
         self.gpu_head_label.setText(QCoreApplication.translate("MainWindow", u"GPU dependency", None))
+        self.what_do_you_want_label.setText(QCoreApplication.translate("MainWindow", u"What do you want to do?", None))
         self.create_yaml_bn.setText(QCoreApplication.translate("MainWindow", u"Create new workflow", None))
-        self.continue_yaml_bn.setText(QCoreApplication.translate("MainWindow", u"Use pre-existing workflow", None))
+        self.load_yaml_bn.setText(QCoreApplication.translate("MainWindow", u"Load pre-existing workflow and make changes", None))
+        self.continue_yaml_bn.setText(QCoreApplication.translate("MainWindow", u"Use pre-existing workflow to run directly", None))
         self.left_arrow_bn.setText("")
         self.workflow_view1_label.setText("")
         self.workflow_view1_name_label.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
@@ -7586,7 +7790,8 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.label_39.setText(QCoreApplication.translate("MainWindow", u"Batch normalization", None))
 #if QT_CONFIG(tooltip)
-        self.label_37.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><a name=\"docs-internal-guid-7aa00324-7fff-fb61-fe4f-e2f1b72eacd0\"/><span style=\" font-family:'Arial'; font-size:12pt; color:#000000; background-color:transparent;\">V</span><span style=\" font-family:'Arial'; font-size:12pt; color:#000000; background-color:transparent;\">alues to make the dropout on each model level. </span><span style=\" font-size:12pt;\">Brackets are needed and each number must be a float between 0 and 1. </span><span style=\" font-family:'Arial'; font-size:12pt; color:#000000; background-color:transparent;\">Set to 0 to prevent dropout. E.g. </span><span style=\" font-family:'Arial'; font-size:12pt; font-weight:600; color:#000000; background-color:transparent;\">[0, 0.1, 0.2, 0.3]</span><span style=\" font-family:'Arial'; font-size:12pt; color:#000000; background-color:transparent;\"> on a 4 level U-Net </span></p></body></html>", None))
+        self.label_37.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><a name=\"docs-internal-guid-7aa00324-7fff-fb61-fe4f-e2f1b72eacd0\"/><span style=\" font-family:'Arial'; font-size:12pt; color:#000000; background-color:transparent;\"> V</span><span style=\" font-family:'Arial'; font-size:12pt; color:#000000; background-color:transparent;\">alues to make the dropout on each model level. </span><span style=\" font-size:12pt;\">Brackets are needed and each number must be a float between 0 and 1. </span><span style=\" font-family:'Arial'; font-size:12pt; color:#000000; background-color:transparent;\">Set to 0 to prevent dropout. </span><a name=\"docs-internal-guid-7aa00324-7fff-fb61-fe4f-e2f1b72eacd0\"/><span style=\" font-family:'Arial'; font-size:12pt; color:#000000; background-color:transparent;\">W</span><span style=\" font-family:'Arial'; font-size:12pt; color:#000000; background-color:transparent;\">hen using it with 'ViT', 'unetr' or 'tiramisu' a list with just one number must be provided. E. .g. </span><span style=\" font-family:'Arial'; font-size:1"
+                        "2pt; font-weight:600; color:#000000; background-color:transparent;\">[0, 0.1, 0.2, 0.3]</span><span style=\" font-family:'Arial'; font-size:12pt; color:#000000; background-color:transparent;\"> on a 4 level U-Net </span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.label_37.setText(QCoreApplication.translate("MainWindow", u"Dropout values", None))
 #if QT_CONFIG(tooltip)
@@ -7715,6 +7920,59 @@ class Ui_MainWindow(object):
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Ubuntu';\">-1.0</span></p></body></html>", None))
         self.label_31.setText(QCoreApplication.translate("MainWindow", u"Validation data", None))
 #if QT_CONFIG(tooltip)
+        self.label_151.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Learning rate during training phase. The learning rate is a hyperparameter that controls how much to change the model in response to the estimated error each time the model weights are updated. Choosing the learning rate is challenging as a value too small may result in a long training process that could get stuck, whereas a value too large may result in learning a sub-optimal set of weights too fast or an unstable training process</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.label_151.setText(QCoreApplication.translate("MainWindow", u"Learning rate", None))
+#if QT_CONFIG(tooltip)
+        self.lr_schel_warmupcosine_epochs_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Epochs to do the warming up in 'warmupcosine' scheduler. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.lr_schel_warmupcosine_epochs_label.setText(QCoreApplication.translate("MainWindow", u"Warmup cosine decay epochs", None))
+#if QT_CONFIG(tooltip)
+        self.label_143.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Optimizer to use during the model training.  Optimizers are algorithms or methods used to minimize an error function (the loss function) </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.label_143.setText(QCoreApplication.translate("MainWindow", u"Optimizer", None))
+#if QT_CONFIG(tooltip)
+        self.lr_schel_warmupcosine_hold_epochs_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of steps to hold base learning rate before decaying in 'warmupcosine' scheduler. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.lr_schel_warmupcosine_hold_epochs_label.setText(QCoreApplication.translate("MainWindow", u"Warmup cosine decay hold epochs", None))
+#if QT_CONFIG(tooltip)
+        self.profiler_batch_range_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Batch range to be analyzed in the profiler. Must two positive integers separated by a comma.</span><span style=\" font-size:12pt; font-weight:600;\"> E.g. (10, 100) means that the profiler will analise the batches from the 10th to the 100th </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.profiler_batch_range_label.setText(QCoreApplication.translate("MainWindow", u"Profiler batch range", None))
+        self.profiler_batch_range_input.setText(QCoreApplication.translate("MainWindow", u"10, 100", None))
+        self.profiler_input.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.profiler_input.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+#if QT_CONFIG(tooltip)
+        self.label_160.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\"> Whether to add profiler callback to the training </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.label_160.setText(QCoreApplication.translate("MainWindow", u"Profiler", None))
+        self.model_plot_input.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.model_plot_input.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+#if QT_CONFIG(tooltip)
+        self.model_plot_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Create a png with the model's architecture. You must install pydot (`pip install pydot`) and install graphviz (in the OS, see instructions at https://graphviz.gitlab.io/download/) for plot_model to work</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.model_plot_label.setText(QCoreApplication.translate("MainWindow", u"Make plot of the model", None))
+        self.early_stopping_input.setItemText(0, QCoreApplication.translate("MainWindow", u"val_loss", None))
+        self.early_stopping_input.setItemText(1, QCoreApplication.translate("MainWindow", u"loss", None))
+
+        self.lr_schel_warmupcosine_hold_epochs_input.setText(QCoreApplication.translate("MainWindow", u"-1", None))
+        self.lr_schel_reduce_on_plat_patience_input.setText(QCoreApplication.translate("MainWindow", u"-1", None))
+        self.lr_schel_reduce_on_plat_factor_input.setText(QCoreApplication.translate("MainWindow", u"0.5", None))
+        self.lr_schel_warmupcosine_lr_input.setText(QCoreApplication.translate("MainWindow", u"-1", None))
+        self.checkpoint_monitor_input.setItemText(0, QCoreApplication.translate("MainWindow", u"val_loss", None))
+        self.checkpoint_monitor_input.setItemText(1, QCoreApplication.translate("MainWindow", u"loss", None))
+
+        self.optimizer_input.setItemText(0, QCoreApplication.translate("MainWindow", u"ADAM", None))
+        self.optimizer_input.setItemText(1, QCoreApplication.translate("MainWindow", u"SGD", None))
+        self.optimizer_input.setItemText(2, QCoreApplication.translate("MainWindow", u"ADAMW", None))
+
+#if QT_CONFIG(tooltip)
+        self.lr_schel_reduce_on_plat_factor_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Factor by which the learning rate will be reduced in 'reduceonplateau' scheduler. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a float between 0 and 1</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.lr_schel_reduce_on_plat_factor_label.setText(QCoreApplication.translate("MainWindow", u"Reduce on plateau factor", None))
+#if QT_CONFIG(tooltip)
         self.lr_schel_reduce_on_plat_patience_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of epochs with no improvement after which learning rate will be reduced in 'reduceonplateau' scheduler. Need to be less than training patience otherwise it makes no sense. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.lr_schel_reduce_on_plat_patience_label.setText(QCoreApplication.translate("MainWindow", u"Reduce on plateau patience", None))
@@ -7722,10 +7980,7 @@ class Ui_MainWindow(object):
         self.lr_schel_warmupcosine_lr_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Initial learning rate to start the warm up from in 'warmupcosine' scheduler . You can set it to 0 or a value lower than training learning rate. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a float</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.lr_schel_warmupcosine_lr_label.setText(QCoreApplication.translate("MainWindow", u"Warmup cosine decay learning rate", None))
-#if QT_CONFIG(tooltip)
-        self.lr_schel_reduce_on_plat_factor_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Factor by which the learning rate will be reduced in 'reduceonplateau' scheduler. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a float between 0 and 1</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.lr_schel_reduce_on_plat_factor_label.setText(QCoreApplication.translate("MainWindow", u"Reduce on plateau factor", None))
+        self.lr_schel_warmupcosine_epochs_input.setText(QCoreApplication.translate("MainWindow", u"-1", None))
 #if QT_CONFIG(tooltip)
         self.label_149.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Batch size of the training process. It is a hyperparameter that defines the number of samples to work through before updating the internal model parameters. This determines how many images will be loaded into the GPU at once so a high value will lead to a GPU memory error. Set it according to your GPU memory. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -7736,18 +7991,12 @@ class Ui_MainWindow(object):
         self.lr_schel_input.setItemText(3, QCoreApplication.translate("MainWindow", u"onecycle", None))
 
         self.lr_schel_min_lr_input.setText(QCoreApplication.translate("MainWindow", u"-1", None))
-        self.lr_schel_warmupcosine_epochs_input.setText(QCoreApplication.translate("MainWindow", u"-1", None))
-        self.profiler_batch_range_input.setText(QCoreApplication.translate("MainWindow", u"10, 100", None))
+        self.learning_rate_input.setText(QCoreApplication.translate("MainWindow", u"0.0001", None))
+        self.batch_size_input.setText(QCoreApplication.translate("MainWindow", u"2", None))
 #if QT_CONFIG(tooltip)
         self.lr_schel_min_lr_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Lower bound on the learning rate used in 'warmupcosine' and 'reduceonplateau'. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive float</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.lr_schel_min_lr_label.setText(QCoreApplication.translate("MainWindow", u"Minimum learning rate", None))
-        self.learning_rate_input.setText(QCoreApplication.translate("MainWindow", u"0.0001", None))
-#if QT_CONFIG(tooltip)
-        self.label_159.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">To determine which value monitor to consider save the best model. If that value is improved a checkpoint of the &quot;best&quot; model will be saved. 'val_loss' refer to the validation loss, while 'loss' refers to training data loss</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.label_159.setText(QCoreApplication.translate("MainWindow", u"Checkpoint monitor", None))
-        self.batch_size_input.setText(QCoreApplication.translate("MainWindow", u"2", None))
 #if QT_CONFIG(tooltip)
         self.label_150.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">To determine which value monitor to stop the training. 'val_loss' refer to the validation loss, while 'loss' refers to training data loss</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -7758,45 +8007,14 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.label_162.setText(QCoreApplication.translate("MainWindow", u"Learning rate scheduler name", None))
 #if QT_CONFIG(tooltip)
-        self.label_143.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Optimizer to use during the model training.  Optimizers are algorithms or methods used to minimize an error function (the loss function) </span></p></body></html>", None))
+        self.label_159.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">To determine which value monitor to consider save the best model. If that value is improved a checkpoint of the &quot;best&quot; model will be saved. 'val_loss' refer to the validation loss, while 'loss' refers to training data loss</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.label_143.setText(QCoreApplication.translate("MainWindow", u"Optimizer", None))
+        self.label_159.setText(QCoreApplication.translate("MainWindow", u"Checkpoint monitor", None))
+        self.adamw_weight_decay_input.setText(QCoreApplication.translate("MainWindow", u"0.004", None))
 #if QT_CONFIG(tooltip)
-        self.label_151.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Learning rate during training phase. The learning rate is a hyperparameter that controls how much to change the model in response to the estimated error each time the model weights are updated. Choosing the learning rate is challenging as a value too small may result in a long training process that could get stuck, whereas a value too large may result in learning a sub-optimal set of weights too fast or an unstable training process</span></p></body></html>", None))
+        self.adamw_weight_decay_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Weight decay for AdamW optimizer</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.label_151.setText(QCoreApplication.translate("MainWindow", u"Learning rate", None))
-#if QT_CONFIG(tooltip)
-        self.lr_schel_warmupcosine_epochs_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Epochs to do the warming up in 'warmupcosine' scheduler. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.lr_schel_warmupcosine_epochs_label.setText(QCoreApplication.translate("MainWindow", u"Warmup cosine decay epochs", None))
-#if QT_CONFIG(tooltip)
-        self.label_160.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\"> Whether to add profiler callback to the training </span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.label_160.setText(QCoreApplication.translate("MainWindow", u"Profiler", None))
-#if QT_CONFIG(tooltip)
-        self.lr_schel_warmupcosine_hold_epochs_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of steps to hold base learning rate before decaying in 'warmupcosine' scheduler. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.lr_schel_warmupcosine_hold_epochs_label.setText(QCoreApplication.translate("MainWindow", u"Warmup cosine decay hold epochs", None))
-        self.profiler_input.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.profiler_input.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-#if QT_CONFIG(tooltip)
-        self.profiler_batch_range_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Batch range to be analyzed in the profiler. Must two positive integers separated by a comma.</span><span style=\" font-size:12pt; font-weight:600;\"> E.g. (10, 100) means that the profiler will analise the batches from the 10th to the 100th </span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.profiler_batch_range_label.setText(QCoreApplication.translate("MainWindow", u"Profiler batch range", None))
-        self.checkpoint_monitor_input.setItemText(0, QCoreApplication.translate("MainWindow", u"val_loss", None))
-        self.checkpoint_monitor_input.setItemText(1, QCoreApplication.translate("MainWindow", u"loss", None))
-
-        self.lr_schel_warmupcosine_lr_input.setText(QCoreApplication.translate("MainWindow", u"-1", None))
-        self.optimizer_input.setItemText(0, QCoreApplication.translate("MainWindow", u"ADAM", None))
-        self.optimizer_input.setItemText(1, QCoreApplication.translate("MainWindow", u"SGD", None))
-
-        self.early_stopping_input.setItemText(0, QCoreApplication.translate("MainWindow", u"val_loss", None))
-        self.early_stopping_input.setItemText(1, QCoreApplication.translate("MainWindow", u"loss", None))
-
-        self.lr_schel_reduce_on_plat_factor_input.setText(QCoreApplication.translate("MainWindow", u"0.5", None))
-        self.lr_schel_warmupcosine_hold_epochs_input.setText(QCoreApplication.translate("MainWindow", u"-1", None))
-        self.lr_schel_reduce_on_plat_patience_input.setText(QCoreApplication.translate("MainWindow", u"-1", None))
+        self.adamw_weight_decay_label.setText(QCoreApplication.translate("MainWindow", u"Weight decay", None))
 #if QT_CONFIG(tooltip)
         self.label_22.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Percentage of overlap in (y,x)/(z,y,x) when cropping training data. Set to 0 to calculate the minimum overlap. Parentheses are needed. The values must be floats between range [0, 1). It needs to be a 2D tuple in 2D problems and 3D tuple in 3D problems. E.g. </span><span style=\" font-size:12pt; font-weight:600;\">(0,0)</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -7845,7 +8063,7 @@ class Ui_MainWindow(object):
         self.label_33.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Validation data resolution. </span><span style=\" font-size:12pt; font-weight:600;\">Currently not used in the code, but added just in case it is needed in a future</span><span style=\" font-size:12pt;\">. If defined it need to be (y,x)/(z,y,x) and needs to be to be a 2D tuple when in 2D problems and 3D tuple when in 3D problems</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.label_33.setText(QCoreApplication.translate("MainWindow", u"Resolution", None))
-        self.unetr_label.setText(QCoreApplication.translate("MainWindow", u"UNETR", None))
+        self.transformers_label.setText(QCoreApplication.translate("MainWindow", u"UNETR", None))
         self.tiramisu_depth_input.setText(QCoreApplication.translate("MainWindow", u"3", None))
         self.tiramisu_depth_input.setProperty("plainText", QCoreApplication.translate("MainWindow", u"3", None))
 #if QT_CONFIG(tooltip)
@@ -7874,43 +8092,69 @@ class Ui_MainWindow(object):
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Ubuntu';\">[0., 0., 0., 0., 0.]</span></p></body></html>", None))
         self.unetr_vit_hidden_multiple_input.setText(QCoreApplication.translate("MainWindow", u"3", None))
         self.unetr_vit_hidden_multiple_input.setProperty("plainText", QCoreApplication.translate("MainWindow", u"3", None))
-        self.unetr_num_heads_input.setText(QCoreApplication.translate("MainWindow", u"4", None))
-        self.unetr_num_heads_input.setProperty("plainText", QCoreApplication.translate("MainWindow", u"4", None))
-#if QT_CONFIG(tooltip)
-        self.unetr_mlp_hidden_units_input.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.unetr_mlp_hidden_units_input.setText(QCoreApplication.translate("MainWindow", u"[3072, 768]", None))
-        self.unetr_mlp_hidden_units_input.setProperty("plainText", QCoreApplication.translate("MainWindow", u"[3072, 768]", None))
 #if QT_CONFIG(tooltip)
         self.label_52.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of heads in the multi-head attention layer. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.label_52.setText(QCoreApplication.translate("MainWindow", u"Numer of heads", None))
+        self.vit_num_heads_input.setText(QCoreApplication.translate("MainWindow", u"12", None))
+        self.vit_num_heads_input.setProperty("plainText", QCoreApplication.translate("MainWindow", u"4", None))
 #if QT_CONFIG(tooltip)
-        self.label_53.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of transformer encoder layers. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
+        self.vit_mlp_dims_input.setToolTip("")
 #endif // QT_CONFIG(tooltip)
-        self.label_53.setText(QCoreApplication.translate("MainWindow", u"Depth", None))
+        self.vit_mlp_dims_input.setText(QCoreApplication.translate("MainWindow", u"3072", None))
+        self.vit_mlp_dims_input.setProperty("plainText", QCoreApplication.translate("MainWindow", u"[3072, 768]", None))
 #if QT_CONFIG(tooltip)
         self.label_50.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Size of the patches that are extracted from the input image. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.label_50.setText(QCoreApplication.translate("MainWindow", u"Token size", None))
 #if QT_CONFIG(tooltip)
-        self.label_54.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Multiple of the transformer encoder layers from of which the skip connection signal is going to be extracted. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
+        self.label_53.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of transformer encoder layers. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.label_54.setText(QCoreApplication.translate("MainWindow", u"ViT Hidden multiple", None))
+        self.label_53.setText(QCoreApplication.translate("MainWindow", u"Number of layers", None))
+#if QT_CONFIG(tooltip)
+        self.unetr_vit_hidden_multiple_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Multiple of the transformer encoder layers from of which the skip connection signal is going to be extracted. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.unetr_vit_hidden_multiple_label.setText(QCoreApplication.translate("MainWindow", u"ViT Hidden multiple", None))
 #if QT_CONFIG(tooltip)
         self.label_51.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Dimension of the embedding space. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.label_51.setText(QCoreApplication.translate("MainWindow", u"Embedding dimension", None))
-        self.unetr_token_size_input.setText(QCoreApplication.translate("MainWindow", u"16", None))
-        self.unetr_token_size_input.setProperty("plainText", QCoreApplication.translate("MainWindow", u"16", None))
+        self.label_51.setText(QCoreApplication.translate("MainWindow", u"Hidden size", None))
 #if QT_CONFIG(tooltip)
         self.label_55.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of units in the MLP blocks. Brackets are needed. E.g. </span><span style=\" font-size:12pt; font-weight:600;\">[3072, 768]</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.label_55.setText(QCoreApplication.translate("MainWindow", u"MLP hidden units", None))
-        self.unetr_embed_dims_input.setText(QCoreApplication.translate("MainWindow", u"768", None))
-        self.unetr_embed_dims_input.setProperty("plainText", QCoreApplication.translate("MainWindow", u"768", None))
-        self.unetr_depth_input.setText(QCoreApplication.translate("MainWindow", u"12", None))
-        self.unetr_depth_input.setProperty("plainText", QCoreApplication.translate("MainWindow", u"12", None))
+        self.vit_token_size_input.setText(QCoreApplication.translate("MainWindow", u"16", None))
+        self.vit_token_size_input.setProperty("plainText", QCoreApplication.translate("MainWindow", u"16", None))
+        self.vit_hidden_size_input.setText(QCoreApplication.translate("MainWindow", u"768", None))
+        self.vit_hidden_size_input.setProperty("plainText", QCoreApplication.translate("MainWindow", u"768", None))
+        self.vit_num_layers_input.setText(QCoreApplication.translate("MainWindow", u"12", None))
+        self.vit_num_layers_input.setProperty("plainText", QCoreApplication.translate("MainWindow", u"12", None))
+#if QT_CONFIG(tooltip)
+        self.unetr_num_filters_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of filters in the first UNETR's layer of the decoder. In each layer the previous number of filters is doubled. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive int</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.unetr_num_filters_label.setText(QCoreApplication.translate("MainWindow", u"Decoder numer of filters", None))
+        self.unetr_dec_act_input.setItemText(0, QCoreApplication.translate("MainWindow", u"relu", None))
+        self.unetr_dec_act_input.setItemText(1, QCoreApplication.translate("MainWindow", u"selu", None))
+        self.unetr_dec_act_input.setItemText(2, QCoreApplication.translate("MainWindow", u"elu", None))
+
+        self.unetr_num_filters_input.setText(QCoreApplication.translate("MainWindow", u"16", None))
+        self.unetr_dec_kernel_init_input.setItemText(0, QCoreApplication.translate("MainWindow", u"he_normal", None))
+        self.unetr_dec_kernel_init_input.setItemText(1, QCoreApplication.translate("MainWindow", u"he_uniform", None))
+        self.unetr_dec_kernel_init_input.setItemText(2, QCoreApplication.translate("MainWindow", u"glorot_normal", None))
+        self.unetr_dec_kernel_init_input.setItemText(3, QCoreApplication.translate("MainWindow", u"glorot_uniform", None))
+        self.unetr_dec_kernel_init_input.setItemText(4, QCoreApplication.translate("MainWindow", u"random_normal", None))
+        self.unetr_dec_kernel_init_input.setItemText(5, QCoreApplication.translate("MainWindow", u"random_uniform", None))
+        self.unetr_dec_kernel_init_input.setItemText(6, QCoreApplication.translate("MainWindow", u"zeros", None))
+        self.unetr_dec_kernel_init_input.setItemText(7, QCoreApplication.translate("MainWindow", u"ones", None))
+
+#if QT_CONFIG(tooltip)
+        self.unetr_dec_act_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Activation of the decoder</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.unetr_dec_act_label.setText(QCoreApplication.translate("MainWindow", u"Decoder activation", None))
+#if QT_CONFIG(tooltip)
+        self.unetr_dec_kernel_init_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Kernel type to use on convolution layers</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.unetr_dec_kernel_init_label.setText(QCoreApplication.translate("MainWindow", u"Decoder kernel init", None))
 #if QT_CONFIG(tooltip)
         self.label_10.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">IDs of the GPU to run the job in. If you want to use more than one GPU add them sepated by commas. E.g. &quot;0,1,2,3&quot; </span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -8144,7 +8388,7 @@ class Ui_MainWindow(object):
         self.sr_upscaling_input.setItemText(1, QCoreApplication.translate("MainWindow", u"4", None))
 
         self.label_95.setText(QCoreApplication.translate("MainWindow", u"Model output options", None))
-        self.label_96.setText(QCoreApplication.translate("MainWindow", u"Pretext task GT creation options", None))
+        self.label_96.setText(QCoreApplication.translate("MainWindow", u"Pretext task options", None))
 #if QT_CONFIG(tooltip)
         self.ssl_resizing_factor_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Downsizing factor to reshape the image. It will be downsampled and upsampled again by this factor so the quality of the image is worsens</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -8157,6 +8401,13 @@ class Ui_MainWindow(object):
         self.ssl_resizing_factor_input.setItemText(0, QCoreApplication.translate("MainWindow", u"4", None))
         self.ssl_resizing_factor_input.setItemText(1, QCoreApplication.translate("MainWindow", u"2", None))
         self.ssl_resizing_factor_input.setItemText(2, QCoreApplication.translate("MainWindow", u"6", None))
+
+#if QT_CONFIG(tooltip)
+        self.pretext_task_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Pretext task to do. Options are as follows:</span></p><p><span style=\" font-size:12pt;\">- 'crappify': crappifies input image by adding Gaussian noise and downsampling and upsampling it so the resolution gets worsen. Then, the model is trained to recover the original images. </span></p><p><span style=\" font-size:12pt;\">- 'masking': mask input image and the model needs to recover the original image. This option can only be done with 'mae' transformer. This strategy follows the one proposed in: Masked Autoencoders Are Scalable Vision Learners (</span><a href=\"https://arxiv.org/pdf/2111.06377.pdf\"><span style=\" font-size:12pt; text-decoration: underline; color:#0000ff;\">https://arxiv.org/pdf/2111.06377.pdf</span></a><span style=\" font-size:12pt;\">)</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.pretext_task_label.setText(QCoreApplication.translate("MainWindow", u"Type of task", None))
+        self.pretext_task_input.setItemText(0, QCoreApplication.translate("MainWindow", u"crappify", None))
+        self.pretext_task_input.setItemText(1, QCoreApplication.translate("MainWindow", u"masking", None))
 
         self.label_25.setText(QCoreApplication.translate("MainWindow", u"There are no specific options for classification", None))
         self.train_tab_widget.setTabText(self.train_tab_widget.indexOf(self.train_workflow_specific_tab), QCoreApplication.translate("MainWindow", u"Workflow specific options", None))
@@ -8329,59 +8580,8 @@ class Ui_MainWindow(object):
 
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Data channels", None))
         self.label_86.setText(QCoreApplication.translate("MainWindow", u"Watershed instance processing options", None))
-        self.inst_seg_repare_large_blobs_input.setText(QCoreApplication.translate("MainWindow", u"-1", None))
-#if QT_CONFIG(tooltip)
-        self.inst_seg_repare_large_blobs_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Set it to try to repare large instances by merging their neighbors with them and removing possible central holes. Its value determines which instances are going to be repared by size (number of pixels that compose the instance). This option is useful when PROBLEM.INSTANCE_SEG.DATA_CHANNELS is 'BP', as multiple central seeds may appear in big instances. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.inst_seg_repare_large_blobs_label.setText(QCoreApplication.translate("MainWindow", u"Repare large blobs ", None))
-#if QT_CONFIG(tooltip)
-        self.inst_seg_circularity_filtering_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Minimum circularity that each instance need to haveto not be removed from the image. It removed, it will be marked as 'Strange' in the output csv files. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a float between 0 and 1.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.inst_seg_circularity_filtering_label.setText(QCoreApplication.translate("MainWindow", u"Circularity filtering", None))
-#if QT_CONFIG(tooltip)
-        self.inst_seg_voronoi_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to apply Voronoi based on a mask that is defined using 'BC' or 'M' channels</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.inst_seg_voronoi_label.setText(QCoreApplication.translate("MainWindow", u"Apply Voronoi on mask", None))
-        self.inst_seg_voronoi_input.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.inst_seg_voronoi_input.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-        self.inst_seg_circularity_filtering_input.setText(QCoreApplication.translate("MainWindow", u"-1", None))
-#if QT_CONFIG(tooltip)
-        self.inst_seg_yz_filtering_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Apply Y and Z axes filtering. It usually improves 3D output for 2D models when 'ANALIZE_2D_IMGS_AS_3D_STACK' was selected </span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.inst_seg_yz_filtering_label.setText(QCoreApplication.translate("MainWindow", u"Y and Z axis filtering", None))
-#if QT_CONFIG(tooltip)
-        self.inst_seg_yz_filtering_size_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Size of Y and Z axes filter. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.inst_seg_yz_filtering_size_label.setText(QCoreApplication.translate("MainWindow", u"Y and Z axis filtering size", None))
-#if QT_CONFIG(tooltip)
-        self.inst_seg_z_filtering_size_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Size of Z axis filter. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.inst_seg_z_filtering_size_label.setText(QCoreApplication.translate("MainWindow", u"Z axis filtering size ", None))
-#if QT_CONFIG(tooltip)
-        self.inst_seg_z_filtering_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Apply Z axis filtering. It usually improves 3D output for 2D models when 'ANALIZE_2D_IMGS_AS_3D_STACK' was selected </span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.inst_seg_z_filtering_label.setText(QCoreApplication.translate("MainWindow", u"Z axis filtering", None))
-        self.inst_seg_z_filtering_size_input.setText(QCoreApplication.translate("MainWindow", u"5", None))
-        self.inst_seg_yz_filtering_size_input.setText(QCoreApplication.translate("MainWindow", u"5", None))
-        self.inst_seg_yz_filtering_input.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.inst_seg_yz_filtering_input.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-        self.inst_seg_z_filtering_input.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.inst_seg_z_filtering_input.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-#if QT_CONFIG(tooltip)
-        self.inst_seg_remove_close_points_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">To remove close points to each other</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.inst_seg_remove_close_points_label.setText(QCoreApplication.translate("MainWindow", u"Remove close points", None))
-        self.inst_seg_remove_close_points_input.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.inst_seg_remove_close_points_input.setItemText(1, QCoreApplication.translate("MainWindow", u"True", None))
-
-#if QT_CONFIG(tooltip)
-        self.inst_seg_remove_close_points_radius_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Distance between points to be considered the same. The distance calculated is the euclidean and it takes into account the data resolution. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a list of positive floats (one float per class). E.g [15.3,10.0] if there are two classes</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.inst_seg_remove_close_points_radius_label.setText(QCoreApplication.translate("MainWindow", u"Remove close points radius", None))
-        self.inst_seg_remove_close_points_radius_input.setText(QCoreApplication.translate("MainWindow", u"[-1.0]", None))
+        self.label_97.setText(QCoreApplication.translate("MainWindow", u"Post-processing options", None))
+        self.inst_seg_metrics_label.setText(QCoreApplication.translate("MainWindow", u"Metrics options", None))
         self.inst_seg_b_channel_th_input.setText(QCoreApplication.translate("MainWindow", u"0.5", None))
 #if QT_CONFIG(tooltip)
         self.inst_seg_c_channel_th_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Controls channel 'C', i.e. contour channel, in the creation of the MW seeds. This value willl be used to binarize that channel. Find a more complete description of its usage in our documentation (</span><a href=\"https://biapy.readthedocs.io/en/latest/workflows/instance_segmentation.html#problem-resolution\"><span style=\" font-size:12pt; text-decoration: underline; color:#0000ff;\">Instance segmentation channels)</span></a><a href=\"https://biapy.readthedocs.io/en/latest/workflows/instance_segmentation.html#problem-resolution\"><span style=\" font-size:12pt; text-decoration: underline; color:#000000;\">.</span></a><a href=\"https://biapy.readthedocs.io/en/latest/workflows/instance_segmentation.html#problem-resolution\"><span style=\" font-size:12pt; text-decoration: underline; color:#0000ff;\"/></a><span style=\" font-size:12pt; font-weight:600;\">Must be a float between 0 and 1.</span></p></body></html>", None))
@@ -8403,10 +8603,85 @@ class Ui_MainWindow(object):
         self.inst_seg_p_channel_th_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Controls channel 'P', i.e. central point channel, in the creation of the MW seeds. This value willl be used to binarize that channel. Find a more complete description of its usage in our documentation (</span><a href=\"https://biapy.readthedocs.io/en/latest/workflows/instance_segmentation.html#problem-resolution\"><span style=\" font-size:12pt; text-decoration: underline; color:#0000ff;\">Instance segmentation channels)</span></a><a href=\"https://biapy.readthedocs.io/en/latest/workflows/instance_segmentation.html#problem-resolution\"><span style=\" font-size:12pt; text-decoration: underline; color:#000000;\">.</span></a><a href=\"https://biapy.readthedocs.io/en/latest/workflows/instance_segmentation.html#problem-resolution\"><span style=\" font-size:12pt; text-decoration: underline; color:#0000ff;\"/></a><span style=\" font-size:12pt; font-weight:600;\">Must be a float between 0 and 1.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.inst_seg_p_channel_th_label.setText(QCoreApplication.translate("MainWindow", u"Central point threshold", None))
-        self.inst_seg_d_channel_th_input.setText(QCoreApplication.translate("MainWindow", u"2", None))
+        self.inst_seg_d_channel_th_input.setText(QCoreApplication.translate("MainWindow", u"1", None))
         self.inst_seg_c_channel_th_input.setText(QCoreApplication.translate("MainWindow", u"0.2", None))
         self.inst_seg_fore_mask_th_input.setText(QCoreApplication.translate("MainWindow", u"0.3", None))
         self.inst_seg_p_channel_th_input.setText(QCoreApplication.translate("MainWindow", u"0.5", None))
+        self.inst_seg_repare_large_blobs_input.setText(QCoreApplication.translate("MainWindow", u"-1", None))
+#if QT_CONFIG(tooltip)
+        self.inst_seg_repare_large_blobs_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Set it to try to repare large instances by merging their neighbors with them and removing possible central holes. Its value determines which instances are going to be repared by size (number of pixels that compose the instance). This option is useful when PROBLEM.INSTANCE_SEG.DATA_CHANNELS is 'BP', as multiple central seeds may appear in big instances. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.inst_seg_repare_large_blobs_label.setText(QCoreApplication.translate("MainWindow", u"Repare large blobs ", None))
+#if QT_CONFIG(tooltip)
+        self.inst_seg_voronoi_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to apply Voronoi based on a mask that is defined using 'BC' or 'M' channels</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.inst_seg_voronoi_label.setText(QCoreApplication.translate("MainWindow", u"Apply Voronoi on mask", None))
+#if QT_CONFIG(tooltip)
+        self.inst_seg_circularity_filtering_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Minimum circularity that each instance need to haveto not be removed from the image. It removed, it will be marked as 'Strange' in the output csv files. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a float between 0 and 1.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.inst_seg_circularity_filtering_label.setText(QCoreApplication.translate("MainWindow", u"Circularity filtering", None))
+        self.inst_seg_circularity_filtering_input.setText(QCoreApplication.translate("MainWindow", u"-1", None))
+        self.inst_seg_voronoi_input.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.inst_seg_voronoi_input.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+#if QT_CONFIG(tooltip)
+        self.inst_seg_yz_filtering_size_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Size of Y and Z axes filter. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.inst_seg_yz_filtering_size_label.setText(QCoreApplication.translate("MainWindow", u"Y and Z axis filtering size", None))
+#if QT_CONFIG(tooltip)
+        self.inst_seg_z_filtering_size_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Size of Z axis filter. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.inst_seg_z_filtering_size_label.setText(QCoreApplication.translate("MainWindow", u"Z axis filtering size ", None))
+#if QT_CONFIG(tooltip)
+        self.inst_seg_yz_filtering_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Apply Y and Z axes filtering. It usually improves 3D output for 2D models when 'ANALIZE_2D_IMGS_AS_3D_STACK' was selected </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.inst_seg_yz_filtering_label.setText(QCoreApplication.translate("MainWindow", u"Y and Z axis filtering", None))
+#if QT_CONFIG(tooltip)
+        self.inst_seg_z_filtering_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Apply Z axis filtering. It usually improves 3D output for 2D models when 'ANALIZE_2D_IMGS_AS_3D_STACK' was selected </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.inst_seg_z_filtering_label.setText(QCoreApplication.translate("MainWindow", u"Z axis filtering", None))
+        self.inst_seg_yz_filtering_size_input.setText(QCoreApplication.translate("MainWindow", u"5", None))
+        self.inst_seg_z_filtering_size_input.setText(QCoreApplication.translate("MainWindow", u"5", None))
+        self.inst_seg_yz_filtering_input.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.inst_seg_yz_filtering_input.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+        self.inst_seg_z_filtering_input.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.inst_seg_z_filtering_input.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+#if QT_CONFIG(tooltip)
+        self.inst_seg_remove_close_points_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">To remove close points to each other</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.inst_seg_remove_close_points_label.setText(QCoreApplication.translate("MainWindow", u"Remove close points", None))
+        self.inst_seg_remove_close_points_input.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.inst_seg_remove_close_points_input.setItemText(1, QCoreApplication.translate("MainWindow", u"True", None))
+
+#if QT_CONFIG(tooltip)
+        self.inst_seg_remove_close_points_radius_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Distance between points to be considered the same. The distance calculated is the euclidean and it takes into account the data resolution. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a list of positive floats (one float per class). E.g [15.3,10.0] if there are two classes</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.inst_seg_remove_close_points_radius_label.setText(QCoreApplication.translate("MainWindow", u"Remove close points radius", None))
+        self.inst_seg_remove_close_points_radius_input.setText(QCoreApplication.translate("MainWindow", u"[-1.0]", None))
+#if QT_CONFIG(tooltip)
+        self.inst_seg_voronoi_mask_th_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Threshold to be applied to the 'M' channel when expanding the instances with Voronoi. Leave it to 0 to adjust the threhold with Otsu. </span><span style=\" font-size:12pt; font-weight:600;\">Need to be a float in [0,1] range.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.inst_seg_voronoi_mask_th_label.setText(QCoreApplication.translate("MainWindow", u"Voronoi mask threshold", None))
+        self.inst_seg_voronoi_mask_th_input.setText(QCoreApplication.translate("MainWindow", u"0.", None))
+#if QT_CONFIG(tooltip)
+        self.inst_seg_matching_stats_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to calculate matching statistics (average overlap, accuracy, recall, precision, etc.)</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.inst_seg_matching_stats_label.setText(QCoreApplication.translate("MainWindow", u"Matching stats", None))
+#if QT_CONFIG(tooltip)
+        self.inst_seg_matching_stats_ths_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Theshold of overlap to consider a TP when calculating the metrics. If more than one value is provided the process is repeated with each of the threshold values</span></p><p><br/></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.inst_seg_matching_stats_ths_label.setText(QCoreApplication.translate("MainWindow", u"Matching stats thresholds", None))
+#if QT_CONFIG(tooltip)
+        self.inst_seg_matching_stats_colores_img_ths_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Decide in which thresholds to create a colored image of the TPs, FNs and FPs. The green values correspond to TP, blue to FP and red to FN. </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.inst_seg_matching_stats_colores_img_ths_label.setText(QCoreApplication.translate("MainWindow", u"Matching stats colored image threshold", None))
+        self.inst_seg_matching_stats_input.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
+        self.inst_seg_matching_stats_input.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
+
+        self.inst_seg_matching_stats_ths_input.setText(QCoreApplication.translate("MainWindow", u"[0.3, 0.5, 0.75]", None))
+        self.inst_seg_matching_stats_colores_img_ths_input.setText(QCoreApplication.translate("MainWindow", u"[0.3]", None))
 #if QT_CONFIG(tooltip)
         self.inst_seg_fore_ero_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Radius to dilate the foreground mask</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -8465,25 +8740,13 @@ class Ui_MainWindow(object):
         self.inst_seg_save_water_files_input.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
         self.inst_seg_save_water_files_input.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
 
-        self.label_97.setText(QCoreApplication.translate("MainWindow", u"Post-processing options", None))
 #if QT_CONFIG(tooltip)
-        self.inst_seg_matching_stats_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to calculate matching statistics (average overlap, accuracy, recall, precision, etc.)</span></p></body></html>", None))
+        self.label_13.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether if the threshold are going to be set as automaticaly (with Otsu thresholding) or manually. If &quot;manual&quot; is used PROBLEM.INSTANCE_SEG.DATA_MW_TH_* need to be set . In case 'auto' was selected you will still need to set distance threshold.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.inst_seg_matching_stats_label.setText(QCoreApplication.translate("MainWindow", u"Matching stats", None))
-#if QT_CONFIG(tooltip)
-        self.inst_seg_matching_stats_ths_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Theshold of overlap to consider a TP when calculating the metrics. If more than one value is provided the process is repeated with each of the threshold values</span></p><p><br/></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.inst_seg_matching_stats_ths_label.setText(QCoreApplication.translate("MainWindow", u"Matching stats thresholds", None))
-#if QT_CONFIG(tooltip)
-        self.inst_seg_matching_stats_colores_img_ths_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Decide in which thresholds to create a colored image of the TPs, FNs and FPs. The green values correspond to TP, blue to FP and red to FN. </span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.inst_seg_matching_stats_colores_img_ths_label.setText(QCoreApplication.translate("MainWindow", u"Matching stats colored image threshold", None))
-        self.inst_seg_matching_stats_input.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
-        self.inst_seg_matching_stats_input.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
+        self.label_13.setText(QCoreApplication.translate("MainWindow", u"Threshold setting", None))
+        self.inst_seg_th_config_input.setItemText(0, QCoreApplication.translate("MainWindow", u"auto", None))
+        self.inst_seg_th_config_input.setItemText(1, QCoreApplication.translate("MainWindow", u"manual", None))
 
-        self.inst_seg_matching_stats_ths_input.setText(QCoreApplication.translate("MainWindow", u"[0.3, 0.5, 0.75]", None))
-        self.inst_seg_matching_stats_colores_img_ths_input.setText(QCoreApplication.translate("MainWindow", u"[0.3]", None))
-        self.inst_seg_metrics_label.setText(QCoreApplication.translate("MainWindow", u"Metrics options", None))
         self.label_100.setText(QCoreApplication.translate("MainWindow", u"Post-processing options", None))
 #if QT_CONFIG(tooltip)
         self.label_108.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Minimum circularity that each instance need to haveto not be removed from the image. It removed, it will be marked as 'Strange' in the output csv files. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a float between 0 and 1.</span></p></body></html>", None))

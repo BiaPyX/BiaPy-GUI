@@ -61,17 +61,17 @@ class Settings():
         self.settings['semantic_models'] = ['unet', 'resunet', 'attention_unet', 'fcn32', \
                 'fcn8', 'tiramisu', 'mnet', 'multiresunet', 'seunet', 'unetr']
         # Instance segmentation
-        self.settings['instance_models'] = ['unet', 'resunet', 'seunet', 'attention_unet']
+        self.settings['instance_models'] = ['unet', 'resunet', 'seunet', 'attention_unet', 'unetr']
         # Detection
-        self.settings['detection_models'] = ['unet', 'resunet', 'seunet', 'attention_unet']
+        self.settings['detection_models'] = ['unet', 'resunet', 'seunet', 'attention_unet', 'unetr']
         # Denoising
-        self.settings['denoising_models'] = ['unet', 'resunet', 'seunet', 'attention_unet']
+        self.settings['denoising_models'] = ['unet', 'resunet', 'seunet', 'attention_unet', 'unetr']
         # Super resolution
         self.settings['sr_models'] = ['edsr', 'srunet', 'rcan', 'dfcan', 'wdsr']
         # Self-supervised learning
-        self.settings['ssl_models'] = ['unet', 'resunet', 'seunet', 'attention_unet']
+        self.settings['ssl_models'] = ['mae', 'unet', 'resunet', 'seunet', 'attention_unet', 'unetr']
         # Classification
-        self.settings['classification_models'] = ['simple_cnn', 'EfficientNetB0']
+        self.settings['classification_models'] = ['ViT', 'simple_cnn', 'EfficientNetB0']
 
         # Paths
         self.settings['train_data_input_path'] = None

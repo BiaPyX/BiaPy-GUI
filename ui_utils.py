@@ -38,23 +38,71 @@ def examine(main_window, save_in_obj_tag=None, is_file=True):
         elif save_in_obj_tag == "test_data_gt_input":
             main_window.cfg.settings['test_data_gt_input_path'] = out  
 
-def combobox_hide_visible_action(main_window, combobox, frames_dict, frames_dict_values_to_set=None):
+def combobox_hide_visible_action(main_window, combobox, frames_dict, frames_dict_values_to_set=None, frames_to_hide_if_empty=None):
+    """
+    frames_dict : Dict of list of (str and tuples)
+        A list that is composed by three different parts: 1) the name of the widget; 2) a sequence of str until the first tuple; 
+        and 3) a sequence of tuples. So the widget (1) is visible all the conditions must be True. Each definition is as follows: 
+        1) Widget that will be modified when the combobox changed; 2) sequence of str that the combobox need to have; 3) Other 
+        conditions. For instance, if the tuple is ("widgetA", ["valueA", "valueB"]) means that the widget called "widgetA" needs to 
+        have a value between ["valueA, "valueB"]. When conditions (2) and (3) are True the widget (1) is set to visible. 
+    """
+    cbox_value = str(getattr(main_window.ui, combobox).currentText())
     for key in frames_dict:
         visible_values = frames_dict[key]
         if not isinstance(visible_values, list):
             visible_values = [visible_values]
+
+        all_conditions = []
         if main_window.cfg.settings['selected_workflow'] in [3,5,6]:
             if '_gt_' in key:
-                vis = False
+                all_conditions.append(False)
             else:
-                vis = True if str(getattr(main_window.ui, combobox).currentText()) in visible_values else False
+                for visible_condition in visible_values:
+                    if not isinstance(visible_condition, tuple):
+                        if cbox_value == visible_condition:
+                            all_conditions.append(True)
+                    else:
+                        if len(all_conditions) == 0:
+                            all_conditions.append(False)
+                            break
+                        if get_text(getattr(main_window.ui, visible_condition[0])) in visible_condition[1]:
+                            all_conditions.append(True)
+                        else:
+                            all_conditions.append(False)
+                            break
         else:
-            vis = True if str(getattr(main_window.ui, combobox).currentText()) in visible_values else False
+            for visible_condition in visible_values:
+                if not isinstance(visible_condition, tuple):
+                    if cbox_value == visible_condition:
+                        all_conditions.append(True)
+                else:
+                    if len(all_conditions) == 0:
+                        all_conditions.append(False)
+                        break
+                    if get_text(getattr(main_window.ui, visible_condition[0])) in visible_condition[1]:
+                        all_conditions.append(True)
+                    else:
+                        all_conditions.append(False)
+                        break
+        if len(all_conditions) == 0: all_conditions.append(False)
+        vis = True if all(all_conditions) else False
         getattr(main_window.ui, key).setVisible(vis)
 
     if frames_dict_values_to_set is not None:
         for key in frames_dict_values_to_set:
             getattr(main_window.ui, key).setCurrentText(frames_dict_values_to_set[key]) 
+
+    # Frames to hide if all the childs are not visible 
+    if frames_to_hide_if_empty is not None:
+        for frame in frames_to_hide_if_empty:
+            all_conditions = []
+            for x in getattr(main_window.ui, frame).findChildren(QLabel):
+                all_conditions.append(x.isVisibleTo(getattr(main_window.ui, frame)) )
+            if any(all_conditions):
+                getattr(main_window.ui, frame).setVisible(True)
+            else:
+                getattr(main_window.ui, frame).setVisible(False)
 
 def mark_syntax_error(main_window, obj, validator_type=["empty"]):
     error = False
@@ -414,6 +462,7 @@ def create_yaml_file(self):
         if get_text(self.ui.inst_seg_contour_mode_combobox) != "thick":
             biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_CONTOUR_MODE'] = get_text(self.ui.inst_seg_contour_mode_combobox)
 
+        biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_TYPE'] = get_text(self.ui.inst_seg_th_config_input)
         if 'B' in problem_channels:
             biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_BINARY_MASK'] = float(get_text(self.ui.inst_seg_b_channel_th_input))
             biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_FOREGROUND'] = float(get_text(self.ui.inst_seg_fore_mask_th_input))
@@ -465,8 +514,10 @@ def create_yaml_file(self):
     ### SELF_SUPERVISED
     elif self.cfg.settings['selected_workflow'] == 5:
         biapy_config['PROBLEM']['SELF_SUPERVISED'] = {}
-        biapy_config['PROBLEM']['SELF_SUPERVISED']['RESIZING_FACTOR'] = int(get_text(self.ui.ssl_resizing_factor_input))
-        biapy_config['PROBLEM']['SELF_SUPERVISED']['NOISE'] = float(get_text(self.ui.ssl_noise_input))
+        biapy_config['PROBLEM']['SELF_SUPERVISED']['PRETEXT_TASK'] = get_text(self.ui.pretext_task_input)
+        if get_text(self.ui.pretext_task_input) == "crappify":
+            biapy_config['PROBLEM']['SELF_SUPERVISED']['RESIZING_FACTOR'] = int(get_text(self.ui.ssl_resizing_factor_input))
+            biapy_config['PROBLEM']['SELF_SUPERVISED']['NOISE'] = float(get_text(self.ui.ssl_noise_input))
 
     # Dataset
     biapy_config['DATA'] = {}
@@ -721,19 +772,28 @@ def create_yaml_file(self):
         biapy_config['MODEL']['TIRAMISU_DEPTH'] = int(get_text(self.ui.tiramisu_depth_input))
         biapy_config['MODEL']['FEATURE_MAPS'] = int(get_text(self.ui.tiramisu_feature_maps_input))
         biapy_config['MODEL']['DROPOUT_VALUES'] = float(get_text(self.ui.tiramisu_dropout_input))
-    elif get_text(self.ui.model_input) == "unetr":
-        biapy_config['MODEL']['UNETR_TOKEN_SIZE'] = int(get_text(self.ui.unetr_token_size_input))
-        biapy_config['MODEL']['UNETR_EMBED_DIM'] = int(get_text(self.ui.unetr_embed_dims_input))
-        biapy_config['MODEL']['UNETR_DEPTH'] = int(get_text(self.ui.unetr_depth_input))
-        biapy_config['MODEL']['UNETR_MLP_HIDDEN_UNITS'] = ast.literal_eval(get_text(self.ui.unetr_mlp_hidden_units_input))
-        biapy_config['MODEL']['UNETR_NUM_HEADS'] = int(get_text(self.ui.unetr_num_heads_input))
-        biapy_config['MODEL']['UNETR_VIT_HIDD_MULT'] = int(get_text(self.ui.unetr_vit_hidden_multiple_input)) 
+    elif get_text(self.ui.model_input) in ["unetr", "mae", "ViT"]:
+        biapy_config['MODEL']['VIT_TOKEN_SIZE'] = int(get_text(self.ui.vit_token_size_input))
+        biapy_config['MODEL']['VIT_HIDDEN_SIZE'] = int(get_text(self.ui.vit_hidden_size_input))
+        biapy_config['MODEL']['VIT_NUM_LAYERS'] = int(get_text(self.ui.vit_num_layers_input))
+        biapy_config['MODEL']['VIT_MLP_DIMS'] = get_text(self.ui.vit_mlp_dims_input)
+        biapy_config['MODEL']['VIT_NUM_HEADS'] = int(get_text(self.ui.vit_num_heads_input))
+
+        # UNETR
+        if get_text(self.ui.model_input) in "unetr":
+            biapy_config['MODEL']['UNETR_VIT_HIDD_MULT'] = int(get_text(self.ui.unetr_vit_hidden_multiple_input)) 
+            biapy_config['MODEL']['UNETR_VIT_NUM_FILTERS'] = int(get_text(self.ui.unetr_num_filters_input)) 
+            biapy_config['MODEL']['UNETR_DEC_ACTIVATION'] = get_text(self.ui.unetr_dec_act_input)
+            biapy_config['MODEL']['UNETR_DEC_KERNEL_INIT'] = get_text(self.ui.unetr_dec_kernel_init_input)
 
     if get_text(self.ui.checkpoint_load_input) == "Yes":
         biapy_config['MODEL']['LOAD_CHECKPOINT'] = True 
         biapy_config['PATHS'] = {}
         if get_text(self.ui.checkpoint_file_path_input) != "":
             biapy_config['PATHS']['CHECKPOINT_FILE'] = get_text(self.ui.checkpoint_file_path_input)
+    
+    if get_text(self.ui.model_plot_input) == "Yes":
+        biapy_config['MODEL']['MAKE_PLOT'] = True
 
     # Loss (in detection only)
     if self.cfg.settings['selected_workflow'] == 2:
@@ -746,6 +806,8 @@ def create_yaml_file(self):
         biapy_config['TRAIN']['ENABLE'] = True 
         biapy_config['TRAIN']['OPTIMIZER'] = get_text(self.ui.optimizer_input)
         biapy_config['TRAIN']['LR'] = float(get_text(self.ui.learning_rate_input))
+        if biapy_config['TRAIN']['OPTIMIZER'] == "ADAMW":
+            biapy_config['TRAIN']['W_DECAY'] = float(get_text(self.ui.adamw_weight_decay_input))
         biapy_config['TRAIN']['BATCH_SIZE'] = int(get_text(self.ui.batch_size_input))
         biapy_config['TRAIN']['EPOCHS'] = int(get_text(self.ui.number_of_epochs_input)) 
         biapy_config['TRAIN']['PATIENCE'] = int(get_text(self.ui.patience_input))
@@ -829,6 +891,8 @@ def create_yaml_file(self):
                 biapy_config['TEST']['POST_PROCESSING']['WATERSHED_CIRCULARITY'] = float(get_text(self.ui.inst_seg_circularity_filtering_input))
             if problem_channels in ["BC", "BCM"] and get_text(self.ui.inst_seg_voronoi_input) == "Yes":
                 biapy_config['TEST']['POST_PROCESSING']['VORONOI_ON_MASK'] = True 
+                biapy_config['TEST']['POST_PROCESSING']['VORONOI_TH'] = float(get_text(self.ui.inst_seg_voronoi_mask_th_input))
+                
             if problem_channels == "BP":
                 if int(get_text(self.ui.inst_seg_repare_large_blobs_input)) != -1:
                     biapy_config['TEST']['POST_PROCESSING']['REPARE_LARGE_BLOBS_SIZE'] = int(get_text(self.ui.inst_seg_repare_large_blobs_input))
