@@ -42,7 +42,7 @@ class Ui_Workflow_info(object):
         self.frame_top.setFrameShape(QFrame.NoFrame)
         self.frame_top.setFrameShadow(QFrame.Plain)
         self.horizontalLayout = QHBoxLayout(self.frame_top)
-        self.horizontalLayout.setSpacing(0)
+        self.horizontalLayout.setSpacing(9)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.icon_label = QLabel(self.frame_top)
@@ -52,12 +52,21 @@ class Ui_Workflow_info(object):
 
         self.horizontalLayout.addWidget(self.icon_label)
 
-        self.lab_heading = QLabel(self.frame_top)
-        self.lab_heading.setObjectName(u"lab_heading")
+        self.window_des_label = QLabel(self.frame_top)
+        self.window_des_label.setObjectName(u"window_des_label")
         font = QFont()
         font.setFamily(u"DejaVu Math TeX Gyre")
-        font.setPointSize(13)
-        self.lab_heading.setFont(font)
+        font.setPointSize(12)
+        self.window_des_label.setFont(font)
+
+        self.horizontalLayout.addWidget(self.window_des_label)
+
+        self.lab_heading = QLabel(self.frame_top)
+        self.lab_heading.setObjectName(u"lab_heading")
+        font1 = QFont()
+        font1.setFamily(u"DejaVu Math TeX Gyre")
+        font1.setPointSize(13)
+        self.lab_heading.setFont(font1)
         self.lab_heading.setStyleSheet(u"")
         self.lab_heading.setAlignment(Qt.AlignCenter)
 
@@ -96,10 +105,7 @@ class Ui_Workflow_info(object):
 
         self.frame_bottom = QFrame(self.centralwidget)
         self.frame_bottom.setObjectName(u"frame_bottom")
-        font1 = QFont()
-        font1.setFamily(u"DejaVu Math TeX Gyre")
-        font1.setPointSize(12)
-        self.frame_bottom.setFont(font1)
+        self.frame_bottom.setFont(font)
         self.frame_bottom.setStyleSheet(u"")
         self.frame_bottom.setFrameShape(QFrame.NoFrame)
         self.frame_bottom.setFrameShadow(QFrame.Raised)
@@ -163,7 +169,7 @@ class Ui_Workflow_info(object):
         self.input_description_label.setObjectName(u"input_description_label")
         self.input_description_label.setMinimumSize(QSize(250, 0))
         self.input_description_label.setMaximumSize(QSize(250, 16777215))
-        self.input_description_label.setFont(font1)
+        self.input_description_label.setFont(font)
         self.input_description_label.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_3.addWidget(self.input_description_label)
@@ -176,7 +182,7 @@ class Ui_Workflow_info(object):
         self.gt_description_label.setObjectName(u"gt_description_label")
         self.gt_description_label.setMinimumSize(QSize(250, 0))
         self.gt_description_label.setMaximumSize(QSize(250, 16777215))
-        self.gt_description_label.setFont(font1)
+        self.gt_description_label.setFont(font)
         self.gt_description_label.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_3.addWidget(self.gt_description_label)
@@ -200,7 +206,7 @@ class Ui_Workflow_info(object):
         self.ok_bn.setObjectName(u"ok_bn")
         self.ok_bn.setMinimumSize(QSize(100, 30))
         self.ok_bn.setMaximumSize(QSize(100, 16777215))
-        self.ok_bn.setFont(font1)
+        self.ok_bn.setFont(font)
         self.ok_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	border-radius: 15px;\n"
@@ -293,6 +299,7 @@ class Ui_Workflow_info(object):
     def retranslateUi(self, Workflow_info):
         Workflow_info.setWindowTitle(QCoreApplication.translate("Workflow_info", u"Workflow info", None))
         self.icon_label.setText("")
+        self.window_des_label.setText(QCoreApplication.translate("Workflow_info", u"TextLabel", None))
         self.lab_heading.setText("")
         self.bn_close.setText("")
         self.workflow_name_label.setText("")

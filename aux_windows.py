@@ -24,6 +24,7 @@ class workflow_explanation_Ui(QDialog):
         self.workflow_info_window.workflow_description_label.setOpenExternalLinks(True)
         self.workflow_info_window.icon_label.setPixmap(QPixmap(resource_path(os.path.join("images","bn_images","info.png"))))
         self.setStyleSheet("#centralwidget{ border: 1px solid black;} QWidget{ font-size:16px;}")
+        self.workflow_info_window.window_des_label.setText("Workflow information")
 
         self.dragPos = self.pos()  
         def movedialogWindow(event):
@@ -60,6 +61,7 @@ class dialog_Ui(QDialog):
         self.info_window.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","closeAsset 43.png"))))
         self.info_window.ok_bn.clicked.connect(self.close)
         self.info_window.icon_label.setPixmap(QPixmap(resource_path(os.path.join("images","bn_images","info.png"))))
+        self.info_window.window_des_label.setText("Information")
         self.setStyleSheet("#centralwidget{ border: 1px solid black;} QWidget{ font-size:16px;}")
 
         self.dragPos = self.pos()  
@@ -103,24 +105,28 @@ class error_Ui(QDialog):
 
     def error_constrict(self, message, reason):
         self.setFixedSize(self.width(), 235)
+        self.error_window.window_des_label.setText("Error")
+        self.error_window.icon_label.setPixmap(self.upbar_icon[1])
         if reason is not None:
             if reason == "main_window_error":
                 self.error_window.icon_label.setPixmap(self.upbar_icon[0])
+                self.error_window.window_des_label.setText("Error")
                 self.error_window.error_message_label.setText("This error was not expected. Please contact BiaPy developers copying the output of the temporary file: {}".format(message))
                 self.error_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"Close BiaPy GUI", None))
                 self.error_window.go_to_correct_bn.clicked.connect(self.close_all)
             elif reason == "load_yaml_error":
                 self.error_window.icon_label.setPixmap(self.upbar_icon[0])
+                self.error_window.window_des_label.setText("Error")
                 self.error_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"OK", None))
                 self.error_window.error_message_label.setText("Configuration file not loaded because of the following errors:<br>{}".format(message))
                 self.error_window.go_to_correct_bn.clicked.connect(self.close)
             elif reason == "load_yaml_ok":
-                self.error_window.icon_label.setPixmap(self.upbar_icon[1])
+                self.error_window.window_des_label.setText("Information")
                 self.error_window.go_to_correct_bn.setText(QCoreApplication.translate("OK", u"OK", None))
                 self.error_window.error_message_label.setText(message)
                 self.error_window.go_to_correct_bn.clicked.connect(self.close_and_go)
             elif reason == "load_yaml_ok_but_errors":
-                self.error_window.icon_label.setPixmap(self.upbar_icon[1])
+                self.error_window.window_des_label.setText("Information")
                 self.error_window.go_to_correct_bn.setText(QCoreApplication.translate("OK", u"OK", None))
                 m = "Configuration file loaded but with some errors. Please send BiaPy developers\
                     the following errors:"
@@ -130,7 +136,6 @@ class error_Ui(QDialog):
                 self.error_window.go_to_correct_bn.clicked.connect(self.close_and_go)
             else:
                 self.setFixedSize(self.width(), self.minimumSizeHint().height())
-                self.error_window.icon_label.setPixmap(self.upbar_icon[1])
                 if reason == "docker_installation":
                     self.error_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"OK", None))
                 else:

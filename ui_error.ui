@@ -96,7 +96,7 @@
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <property name="spacing">
-          <number>0</number>
+          <number>9</number>
          </property>
          <property name="leftMargin">
           <number>0</number>
@@ -132,6 +132,19 @@
            </property>
            <property name="scaledContents">
             <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="window_des_label">
+           <property name="font">
+            <font>
+             <family>DejaVu Math TeX Gyre</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>TextLabel</string>
            </property>
           </widget>
          </item>

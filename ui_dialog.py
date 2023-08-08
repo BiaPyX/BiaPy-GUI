@@ -52,11 +52,17 @@ class Ui_Dialog(object):
 
         self.horizontalLayout.addWidget(self.icon_label)
 
-        self.lab_heading = QLabel(self.frame_top)
-        self.lab_heading.setObjectName(u"lab_heading")
+        self.window_des_label = QLabel(self.frame_top)
+        self.window_des_label.setObjectName(u"window_des_label")
         font = QFont()
         font.setFamily(u"DejaVu Math TeX Gyre")
         font.setPointSize(12)
+        self.window_des_label.setFont(font)
+
+        self.horizontalLayout.addWidget(self.window_des_label)
+
+        self.lab_heading = QLabel(self.frame_top)
+        self.lab_heading.setObjectName(u"lab_heading")
         self.lab_heading.setFont(font)
         self.lab_heading.setStyleSheet(u"")
         self.lab_heading.setAlignment(Qt.AlignCenter)
@@ -190,6 +196,7 @@ class Ui_Dialog(object):
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
         self.icon_label.setText("")
+        self.window_des_label.setText(QCoreApplication.translate("Dialog", u"TextLabel", None))
         self.lab_heading.setText("")
         self.bn_min.setText("")
         self.bn_close.setText("")

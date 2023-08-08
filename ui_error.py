@@ -42,7 +42,7 @@ class Ui_Error(object):
         self.frame_top.setFrameShape(QFrame.NoFrame)
         self.frame_top.setFrameShadow(QFrame.Plain)
         self.horizontalLayout = QHBoxLayout(self.frame_top)
-        self.horizontalLayout.setSpacing(0)
+        self.horizontalLayout.setSpacing(9)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.icon_label = QLabel(self.frame_top)
@@ -54,6 +54,15 @@ class Ui_Error(object):
 
         self.horizontalLayout.addWidget(self.icon_label)
 
+        self.window_des_label = QLabel(self.frame_top)
+        self.window_des_label.setObjectName(u"window_des_label")
+        font = QFont()
+        font.setFamily(u"DejaVu Math TeX Gyre")
+        font.setPointSize(12)
+        self.window_des_label.setFont(font)
+
+        self.horizontalLayout.addWidget(self.window_des_label)
+
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout.addItem(self.horizontalSpacer)
@@ -63,9 +72,6 @@ class Ui_Error(object):
 
         self.frame_bottom = QFrame(self.centralwidget)
         self.frame_bottom.setObjectName(u"frame_bottom")
-        font = QFont()
-        font.setFamily(u"DejaVu Math TeX Gyre")
-        font.setPointSize(12)
         self.frame_bottom.setFont(font)
         self.frame_bottom.setStyleSheet(u"")
         self.frame_bottom.setFrameShape(QFrame.NoFrame)
@@ -149,6 +155,7 @@ class Ui_Error(object):
     def retranslateUi(self, Error):
         Error.setWindowTitle(QCoreApplication.translate("Error", u"Error", None))
         self.icon_label.setText("")
+        self.window_des_label.setText(QCoreApplication.translate("Error", u"TextLabel", None))
         self.error_message_label.setText("")
         self.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"Go to correct", None))
     # retranslateUi
