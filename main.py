@@ -7,7 +7,7 @@ import io
 
 from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtCore import (QThread, QCoreApplication, QPropertyAnimation, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
-from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
+from PySide2.QtGui import (QDesktopServices, QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
 from PySide2.QtWidgets import *
 
 from ui_main import Ui_MainWindow 
@@ -93,6 +93,12 @@ class MainWindow(QMainWindow):
         self.ui.continue_yaml_bn.clicked.connect(lambda: buttonPressed(self,'bn_run_biapy',99))
         self.ui.create_yaml_bn.clicked.connect(lambda: buttonPressed(self, 'bn_workflow', 99))
         self.ui.load_yaml_bn.clicked.connect(lambda: load_yaml_to_GUI(self))
+        self.ui.biapy_github_bn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://github.com/danifranco/BiaPy")))
+        self.ui.biapy_forum_bn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://forum.image.sc/")))
+        self.ui.biapy_templates_bn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://github.com/danifranco/BiaPy/tree/master/templates")))
+        self.ui.biapy_doc_bn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://biapy.readthedocs.io/en/latest/")))
+        self.ui.biapy_notebooks_bn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://github.com/danifranco/BiaPy/tree/master/notebooks")))
+        self.ui.biapy_citation_bn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://github.com/danifranco/BiaPy#citation")))
 
         # Workflow page buttons
         self.ui.left_arrow_bn.clicked.connect(lambda: UIFunction.move_workflow_view(self, True))

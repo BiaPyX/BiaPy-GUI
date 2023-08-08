@@ -92,7 +92,7 @@ class Ui_Workflow_info(object):
 "	background-color: rgba(0,0,0,0);\n"
 "}")
         icon = QIcon()
-        icon.addFile(u"images/bn_images/closeAsset 43.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u"images/bn_images/close_icon.png", QSize(), QIcon.Normal, QIcon.Off)
         self.bn_close.setIcon(icon)
         self.bn_close.setIconSize(QSize(22, 22))
         self.bn_close.setAutoDefault(False)

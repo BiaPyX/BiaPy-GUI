@@ -21,8 +21,8 @@ class UIFunction(MainWindow):
             self.ui.frame_home.setStyleSheet("background:rgb(255,255,255)") 
             
             self.ui.biapy_logo_label.setPixmap(QPixmap(resource_path(os.path.join("images","biapy_logo.png"))))
-            self.ui.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","closeAsset 43.png"))))
-            self.ui.bn_min.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","hideAsset 53.png"))))
+            self.ui.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","close_icon.png"))))
+            self.ui.bn_min.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","hide_icon.png"))))
 
             self.ui.bn_home.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","home.png"))))
             self.ui.bn_workflow.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","workflow.png"))))
@@ -72,6 +72,19 @@ class UIFunction(MainWindow):
         font = QFont()
         font.setFamily(u"DejaVu Math TeX Gyre")
         font.setPointSize(12)
+
+        self.ui.biapy_github_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","github_icon.svg"))))
+        self.ui.biapy_github_bn.setIconSize(QSize(40, 40))
+        self.ui.biapy_forum_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","forum_icon.svg"))))
+        self.ui.biapy_forum_bn.setIconSize(QSize(40, 40))
+        self.ui.biapy_templates_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","template_icon.svg"))))
+        self.ui.biapy_templates_bn.setIconSize(QSize(40, 40))
+        self.ui.biapy_doc_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","doc_icon.svg"))))
+        self.ui.biapy_doc_bn.setIconSize(QSize(40, 40))
+        self.ui.biapy_notebooks_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","notebook_icon.svg"))))
+        self.ui.biapy_notebooks_bn.setIconSize(QSize(40, 40))
+        self.ui.biapy_citation_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","citation_icon.svg"))))
+        self.ui.biapy_citation_bn.setIconSize(QSize(31, 31))
 
         # Create docker logo and text here. This last is necessary to do it here and not in ui_main.py
         # because they are inserted in order 

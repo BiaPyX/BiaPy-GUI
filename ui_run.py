@@ -84,7 +84,7 @@ class Ui_RunBiaPy(object):
 "	background-color: rgba(0,0,0,0);\n"
 "}")
         icon = QIcon()
-        icon.addFile(u"images/bn_images/hideAsset 53.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u"images/bn_images/hide_icon.png", QSize(), QIcon.Normal, QIcon.Off)
         self.bn_min.setIcon(icon)
         self.bn_min.setIconSize(QSize(22, 12))
         self.bn_min.setAutoDefault(False)
@@ -107,7 +107,7 @@ class Ui_RunBiaPy(object):
 "	background-color: rgba(0,0,0,0);\n"
 "}")
         icon1 = QIcon()
-        icon1.addFile(u"images/bn_images/closeAsset 43.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon1.addFile(u"images/bn_images/close_icon.png", QSize(), QIcon.Normal, QIcon.Off)
         self.bn_close.setIcon(icon1)
         self.bn_close.setIconSize(QSize(22, 22))
         self.bn_close.setAutoDefault(False)

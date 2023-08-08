@@ -255,7 +255,7 @@ color: white;
                <property name="font">
                 <font>
                  <family>DejaVu Math TeX Gyre</family>
-                 <pointsize>8</pointsize>
+                 <pointsize>7</pointsize>
                 </font>
                </property>
                <property name="styleSheet">
@@ -267,7 +267,7 @@ color: white;
                 <number>0</number>
                </property>
                <property name="text">
-                <string>BiaPy GUI - Version 1.0</string>
+                <string>BiaPy (2.0) - BiaPy GUI (1.0)</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -1068,7 +1068,7 @@ QPushButton:pressed {
               <number>0</number>
              </property>
              <property name="leftMargin">
-              <number>9</number>
+              <number>15</number>
              </property>
              <property name="topMargin">
               <number>0</number>
@@ -1079,33 +1079,6 @@ QPushButton:pressed {
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item>
-              <widget class="QLabel" name="biapy_title_label">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>15</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <family>DejaVu Math TeX Gyre</family>
-                 <pointsize>12</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="text">
-                <string>BiaPy: Bioimage analysis pipelines in Python</string>
-               </property>
-              </widget>
-             </item>
             </layout>
            </widget>
           </item>
@@ -1185,7 +1158,7 @@ QPushButton:pressed {
                </property>
                <property name="icon">
                 <iconset>
-                 <normaloff>images/bn_images/hideAsset 53.png</normaloff>images/bn_images/hideAsset 53.png</iconset>
+                 <normaloff>images/bn_images/hide_icon.png</normaloff>images/bn_images/hide_icon.png</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -1277,7 +1250,7 @@ QPushButton:pressed {
                </property>
                <property name="icon">
                 <iconset>
-                 <normaloff>images/bn_images/closeAsset 43.png</normaloff>images/bn_images/closeAsset 43.png</iconset>
+                 <normaloff>images/bn_images/close_icon.png</normaloff>images/bn_images/close_icon.png</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -1436,24 +1409,18 @@ QPushButton:pressed {
                      <number>0</number>
                     </property>
                     <item>
-                     <widget class="QFrame" name="frame_5">
+                     <widget class="QFrame" name="frame_38">
                       <property name="minimumSize">
                        <size>
-                        <width>775</width>
-                        <height>120</height>
+                        <width>0</width>
+                        <height>0</height>
                        </size>
                       </property>
                       <property name="maximumSize">
                        <size>
                         <width>16777215</width>
-                        <height>120</height>
+                        <height>140</height>
                        </size>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <family>DejaVu Math TeX Gyre</family>
-                        <pointsize>12</pointsize>
-                       </font>
                       </property>
                       <property name="frameShape">
                        <enum>QFrame::NoFrame</enum>
@@ -1463,44 +1430,540 @@ QPushButton:pressed {
                       </property>
                       <layout class="QHBoxLayout" name="horizontalLayout_21">
                        <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <property name="leftMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="topMargin">
                         <number>15</number>
                        </property>
-                       <property name="bottomMargin">
-                        <number>40</number>
+                       <property name="rightMargin">
+                        <number>0</number>
                        </property>
-                       <item>
-                        <widget class="QPushButton" name="biapy_citation_bn">
-                         <property name="text">
-                          <string>PushButton</string>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
+                       <item alignment="Qt::AlignHCenter">
+                        <widget class="QFrame" name="github_frame">
+                         <property name="frameShape">
+                          <enum>QFrame::NoFrame</enum>
                          </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_34">
+                          <property name="spacing">
+                           <number>0</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>0</number>
+                          </property>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QPushButton" name="biapy_github_bn">
+                            <property name="minimumSize">
+                             <size>
+                              <width>55</width>
+                              <height>55</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>55</width>
+                              <height>55</height>
+                             </size>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">QPushButton {
+	border: none;
+	border-radius: 15px;
+	background-color: rgb(64,144,253);
+}
+QPushButton:hover {
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}
+QPushButton:pressed {	
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}</string>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>45</width>
+                              <height>45</height>
+                             </size>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="label_16">
+                            <property name="maximumSize">
+                             <size>
+                              <width>110</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>DejaVu Math TeX Gyre</family>
+                              <pointsize>10</pointsize>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Project page&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
                         </widget>
                        </item>
-                       <item>
-                        <widget class="QPushButton" name="biapy_github_bn">
-                         <property name="text">
-                          <string>PushButton</string>
+                       <item alignment="Qt::AlignHCenter">
+                        <widget class="QFrame" name="forum_frame">
+                         <property name="frameShape">
+                          <enum>QFrame::NoFrame</enum>
                          </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_15">
+                          <property name="spacing">
+                           <number>0</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>0</number>
+                          </property>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QPushButton" name="biapy_forum_bn">
+                            <property name="minimumSize">
+                             <size>
+                              <width>55</width>
+                              <height>55</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>55</width>
+                              <height>55</height>
+                             </size>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">QPushButton {
+	border: none;
+	border-radius: 15px;
+	background-color: rgb(64,144,253);
+}
+QPushButton:hover {
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}
+QPushButton:pressed {	
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}</string>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>45</width>
+                              <height>45</height>
+                             </size>
+                            </property>
+                           </widget>
+                          </item>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QLabel" name="label_112">
+                            <property name="font">
+                             <font>
+                              <family>DejaVu Math TeX Gyre</family>
+                              <pointsize>10</pointsize>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Forum&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
                         </widget>
                        </item>
-                       <item>
-                        <widget class="QPushButton" name="biapy_templates_bn">
-                         <property name="text">
-                          <string>PushButton</string>
+                       <item alignment="Qt::AlignHCenter">
+                        <widget class="QFrame" name="doc_frame">
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>0</height>
+                          </size>
                          </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>16777215</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="frameShape">
+                          <enum>QFrame::NoFrame</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_36">
+                          <property name="spacing">
+                           <number>0</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>0</number>
+                          </property>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QPushButton" name="biapy_doc_bn">
+                            <property name="minimumSize">
+                             <size>
+                              <width>55</width>
+                              <height>55</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>55</width>
+                              <height>55</height>
+                             </size>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">QPushButton {
+	border: none;
+	border-radius: 15px;
+	background-color: rgb(64,144,253);
+}
+QPushButton:hover {
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}
+QPushButton:pressed {	
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}</string>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>45</width>
+                              <height>45</height>
+                             </size>
+                            </property>
+                           </widget>
+                          </item>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QLabel" name="label_32">
+                            <property name="maximumSize">
+                             <size>
+                              <width>110</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>DejaVu Math TeX Gyre</family>
+                              <pointsize>10</pointsize>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Documentation&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
                         </widget>
                        </item>
-                       <item>
-                        <widget class="QPushButton" name="biapy_doc_bn">
-                         <property name="text">
-                          <string>PushButton</string>
+                       <item alignment="Qt::AlignHCenter">
+                        <widget class="QFrame" name="templates_frame">
+                         <property name="frameShape">
+                          <enum>QFrame::NoFrame</enum>
                          </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_35">
+                          <property name="spacing">
+                           <number>0</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>0</number>
+                          </property>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QPushButton" name="biapy_templates_bn">
+                            <property name="minimumSize">
+                             <size>
+                              <width>55</width>
+                              <height>55</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>55</width>
+                              <height>55</height>
+                             </size>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">QPushButton {
+	border: none;
+	border-radius: 15px;
+	background-color: rgb(64,144,253);
+}
+QPushButton:hover {
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}
+QPushButton:pressed {	
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}</string>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>45</width>
+                              <height>45</height>
+                             </size>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="label_24">
+                            <property name="maximumSize">
+                             <size>
+                              <width>110</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>DejaVu Math TeX Gyre</family>
+                              <pointsize>10</pointsize>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Templates&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
                         </widget>
                        </item>
-                       <item>
-                        <widget class="QPushButton" name="biapy_notebooks_bn">
-                         <property name="text">
-                          <string>PushButton</string>
+                       <item alignment="Qt::AlignHCenter">
+                        <widget class="QFrame" name="notebooks_frame">
+                         <property name="frameShape">
+                          <enum>QFrame::NoFrame</enum>
                          </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_37">
+                          <property name="spacing">
+                           <number>0</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>0</number>
+                          </property>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QPushButton" name="biapy_notebooks_bn">
+                            <property name="minimumSize">
+                             <size>
+                              <width>55</width>
+                              <height>55</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>55</width>
+                              <height>55</height>
+                             </size>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">QPushButton {
+	border: none;
+	border-radius: 15px;
+	background-color: rgb(64,144,253);
+}
+QPushButton:hover {
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}
+QPushButton:pressed {	
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}</string>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>45</width>
+                              <height>45</height>
+                             </size>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="label_54">
+                            <property name="maximumSize">
+                             <size>
+                              <width>110</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>DejaVu Math TeX Gyre</family>
+                              <pointsize>10</pointsize>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Notebooks&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                       <item alignment="Qt::AlignHCenter">
+                        <widget class="QFrame" name="citation_frame">
+                         <property name="frameShape">
+                          <enum>QFrame::NoFrame</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_38">
+                          <property name="spacing">
+                           <number>0</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>0</number>
+                          </property>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QPushButton" name="biapy_citation_bn">
+                            <property name="minimumSize">
+                             <size>
+                              <width>55</width>
+                              <height>55</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>55</width>
+                              <height>55</height>
+                             </size>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">QPushButton {
+	border: none;
+	border-radius: 15px;
+	background-color: rgb(64,144,253);
+}
+QPushButton:hover {
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}
+QPushButton:pressed {	
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}</string>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>33</width>
+                              <height>33</height>
+                             </size>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="label_58">
+                            <property name="maximumSize">
+                             <size>
+                              <width>110</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>DejaVu Math TeX Gyre</family>
+                              <pointsize>10</pointsize>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Citation&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
                         </widget>
                        </item>
                       </layout>
@@ -1511,7 +1974,7 @@ QPushButton:pressed {
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
-                        <height>0</height>
+                        <height>220</height>
                        </size>
                       </property>
                       <property name="maximumSize">
@@ -1533,6 +1996,9 @@ QPushButton:pressed {
                        <number>1</number>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_68">
+                       <property name="topMargin">
+                        <number>40</number>
+                       </property>
                        <property name="bottomMargin">
                         <number>40</number>
                        </property>
@@ -1542,6 +2008,57 @@ QPushButton:pressed {
                        <property name="verticalSpacing">
                         <number>9</number>
                        </property>
+                       <item row="1" column="1">
+                        <widget class="QFrame" name="gpu_frame">
+                         <property name="toolTipDuration">
+                          <number>3</number>
+                         </property>
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_33">
+                          <property name="spacing">
+                           <number>6</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>9</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>9</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>9</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>9</number>
+                          </property>
+                         </layout>
+                        </widget>
+                       </item>
+                       <item row="0" column="1">
+                        <widget class="QLabel" name="gpu_head_label">
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>15</height>
+                          </size>
+                         </property>
+                         <property name="font">
+                          <font>
+                          <family>DejaVu Math TeX Gyre</family>
+                           <pointsize>12</pointsize>
+                           <weight>75</weight>
+                           <bold>true</bold>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>GPU dependency</string>
+                         </property>
+                        </widget>
+                       </item>
                        <item row="1" column="0">
                         <widget class="QFrame" name="docker_frame">
                          <property name="frameShape">
@@ -1599,61 +2116,17 @@ QPushButton:pressed {
                          </property>
                         </widget>
                        </item>
-                       <item row="0" column="1">
-                        <widget class="QLabel" name="gpu_head_label">
-                         <property name="minimumSize">
-                          <size>
-                           <width>0</width>
-                           <height>15</height>
-                          </size>
-                         </property>
-                         <property name="font">
-                          <font>
-                           <pointsize>12</pointsize>
-                           <weight>75</weight>
-                           <bold>true</bold>
-                          </font>
-                         </property>
-                         <property name="text">
-                          <string>GPU dependency</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="1" column="1">
-                        <widget class="QFrame" name="gpu_frame">
-                         <property name="toolTipDuration">
-                          <number>3</number>
-                         </property>
-                         <property name="frameShape">
-                          <enum>QFrame::StyledPanel</enum>
-                         </property>
-                         <property name="frameShadow">
-                          <enum>QFrame::Raised</enum>
-                         </property>
-                         <layout class="QVBoxLayout" name="verticalLayout_33">
-                          <property name="spacing">
-                           <number>6</number>
-                          </property>
-                          <property name="leftMargin">
-                           <number>9</number>
-                          </property>
-                          <property name="topMargin">
-                           <number>9</number>
-                          </property>
-                          <property name="rightMargin">
-                           <number>9</number>
-                          </property>
-                          <property name="bottomMargin">
-                           <number>9</number>
-                          </property>
-                         </layout>
-                        </widget>
-                       </item>
                       </layout>
                      </widget>
                     </item>
                     <item>
                      <widget class="QFrame" name="frame_6">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>180</height>
+                       </size>
+                      </property>
                       <property name="maximumSize">
                        <size>
                         <width>16777215</width>
@@ -2758,8 +3231,8 @@ QPushButton:pressed {
                              <rect>
                               <x>0</x>
                               <y>0</y>
-                              <width>898</width>
-                              <height>493</height>
+                              <width>904</width>
+                              <height>495</height>
                              </rect>
                             </property>
                             <property name="layoutDirection">
@@ -3130,8 +3603,8 @@ QPushButton:pressed {
                                     <rect>
                                      <x>0</x>
                                      <y>0</y>
-                                     <width>346</width>
-                                     <height>159</height>
+                                     <width>856</width>
+                                     <height>175</height>
                                     </rect>
                                    </property>
                                    <layout class="QGridLayout" name="gridLayout_2">
@@ -3782,8 +4255,8 @@ QPushButton:pressed {
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>934</width>
-                                  <height>5973</height>
+                                  <width>895</width>
+                                  <height>5979</height>
                                  </rect>
                                 </property>
                                 <property name="layoutDirection">
@@ -9736,6 +10209,7 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="font">
                                              <font>
+                                             <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -10801,6 +11275,7 @@ p, li { white-space: pre-wrap; }
                                            <widget class="QLabel" name="unetr_num_filters_label">
                                             <property name="font">
                                              <font>
+                                             <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -10828,6 +11303,7 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="font">
                                              <font>
+                                             <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -10864,6 +11340,7 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="font">
                                              <font>
+                                             <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -10888,6 +11365,7 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="font">
                                              <font>
+                                             <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -10937,6 +11415,7 @@ p, li { white-space: pre-wrap; }
                                            <widget class="QLabel" name="unetr_dec_act_label">
                                             <property name="font">
                                              <font>
+                                             <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -10952,6 +11431,7 @@ p, li { white-space: pre-wrap; }
                                            <widget class="QLabel" name="unetr_dec_kernel_init_label">
                                             <property name="font">
                                              <font>
+                                             <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -12181,8 +12661,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>529</width>
-                                         <height>301</height>
+                                         <width>490</width>
+                                         <height>303</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_18">
@@ -12627,8 +13107,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>851</width>
-                                         <height>181</height>
+                                         <width>823</width>
+                                         <height>183</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_17">
@@ -13030,8 +13510,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>529</width>
-                                         <height>217</height>
+                                         <width>490</width>
+                                         <height>219</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_19">
@@ -13413,7 +13893,7 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>546</width>
+                                         <width>506</width>
                                          <height>210</height>
                                         </rect>
                                        </property>
@@ -13732,8 +14212,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>340</width>
-                                         <height>99</height>
+                                         <width>326</width>
+                                         <height>101</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_50">
@@ -13891,8 +14371,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>380</width>
-                                         <height>171</height>
+                                         <width>361</width>
+                                         <height>173</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_51">
@@ -14038,6 +14518,7 @@ QPushButton:pressed {
                                             <widget class="QLabel" name="pretext_task_label">
                                              <property name="font">
                                               <font>
+                                              <family>DejaVu Math TeX Gyre</family>
                                                <pointsize>12</pointsize>
                                               </font>
                                              </property>
@@ -14065,6 +14546,7 @@ QPushButton:pressed {
                                              </property>
                                              <property name="font">
                                               <font>
+                                              <family>DejaVu Math TeX Gyre</family>
                                                <pointsize>12</pointsize>
                                               </font>
                                              </property>
@@ -14148,7 +14630,7 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>399</width>
+                                         <width>346</width>
                                          <height>44</height>
                                         </rect>
                                        </property>
@@ -14384,8 +14866,8 @@ QPushButton:pressed {
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>825</width>
-                                  <height>995</height>
+                                  <width>796</width>
+                                  <height>1005</height>
                                  </rect>
                                 </property>
                                 <layout class="QGridLayout" name="gridLayout_37">
@@ -15819,8 +16301,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>464</width>
-                                       <height>291</height>
+                                       <width>899</width>
+                                       <height>310</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_61">
@@ -16200,8 +16682,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>582</width>
-                                       <height>1200</height>
+                                       <width>534</width>
+                                       <height>1204</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_44">
@@ -17602,6 +18084,7 @@ QPushButton:pressed {
                                           <widget class="QLabel" name="label_13">
                                            <property name="font">
                                             <font>
+                                            <family>DejaVu Math TeX Gyre</family>
                                              <pointsize>12</pointsize>
                                             </font>
                                            </property>
@@ -17629,6 +18112,7 @@ QPushButton:pressed {
                                            </property>
                                            <property name="font">
                                             <font>
+                                            <family>DejaVu Math TeX Gyre</family>
                                              <pointsize>12</pointsize>
                                             </font>
                                            </property>
@@ -17693,8 +18177,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>552</width>
-                                       <height>732</height>
+                                       <width>510</width>
+                                       <height>736</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_47">
@@ -18584,7 +19068,7 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>372</width>
+                                       <width>326</width>
                                        <height>44</height>
                                       </rect>
                                      </property>
@@ -18661,7 +19145,7 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>426</width>
+                                       <width>372</width>
                                        <height>44</height>
                                       </rect>
                                      </property>
@@ -18738,7 +19222,7 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>488</width>
+                                       <width>425</width>
                                        <height>44</height>
                                       </rect>
                                      </property>
@@ -18815,7 +19299,7 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>399</width>
+                                       <width>346</width>
                                        <height>44</height>
                                       </rect>
                                      </property>
@@ -19612,8 +20096,8 @@ QPushButton:pressed {
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>96</width>
-                               <height>26</height>
+                               <width>48</width>
+                               <height>19</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_32">

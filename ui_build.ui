@@ -179,7 +179,7 @@ QPushButton:pressed {
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>images/bn_images/hideAsset 53.png</normaloff>images/bn_images/hideAsset 53.png</iconset>
+             <normaloff>images/bn_images/hide_icon.png</normaloff>images/bn_images/hide_icon.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -226,7 +226,7 @@ QPushButton:pressed {
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>images/bn_images/closeAsset 43.png</normaloff>images/bn_images/closeAsset 43.png</iconset>
+             <normaloff>images/bn_images/close_icon.png</normaloff>images/bn_images/close_icon.png</iconset>
            </property>
            <property name="iconSize">
             <size>

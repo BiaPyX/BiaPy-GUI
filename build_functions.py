@@ -22,8 +22,8 @@ class buildBiapy_Ui(QDialog):
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint) 
         self.run_window.bn_min.clicked.connect(self.showMinimized)
         self.run_window.bn_close.clicked.connect(self.close_all)
-        self.run_window.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","closeAsset 43.png"))))
-        self.run_window.bn_min.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","hideAsset 53.png"))))
+        self.run_window.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","close_icon.png"))))
+        self.run_window.bn_min.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","hide_icon.png"))))
         self.run_window.icon_label.setPixmap(QPixmap(resource_path(os.path.join("images","bn_images","info.png"))))
         self.run_window.build_progress_bar.setValue(0)
         self.progress_first_time = True

@@ -101,7 +101,7 @@ class Ui_MainWindow(object):
         self.biapy_version.setMaximumSize(QSize(16777215, 16777215))
         font1 = QFont()
         font1.setFamily(u"DejaVu Math TeX Gyre")
-        font1.setPointSize(8)
+        font1.setPointSize(7)
         self.biapy_version.setFont(font1)
         self.biapy_version.setStyleSheet(u"QLabel {\n"
 "color: white;\n"
@@ -412,20 +412,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_9 = QHBoxLayout(self.frame_empty)
         self.horizontalLayout_9.setSpacing(0)
         self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
-        self.horizontalLayout_9.setContentsMargins(9, 0, 0, 0)
-        self.biapy_title_label = QLabel(self.frame_empty)
-        self.biapy_title_label.setObjectName(u"biapy_title_label")
-        self.biapy_title_label.setMinimumSize(QSize(0, 15))
-        self.biapy_title_label.setMaximumSize(QSize(16777215, 16777215))
-        font2 = QFont()
-        font2.setFamily(u"DejaVu Math TeX Gyre")
-        font2.setPointSize(12)
-        font2.setBold(True)
-        font2.setWeight(75)
-        self.biapy_title_label.setFont(font2)
-
-        self.horizontalLayout_9.addWidget(self.biapy_title_label)
-
+        self.horizontalLayout_9.setContentsMargins(15, 0, 0, 0)
 
         self.horizontalLayout_4.addWidget(self.frame_empty)
 
@@ -455,7 +442,7 @@ class Ui_MainWindow(object):
 "	background-color: rgba(0,0,0,0);\n"
 "}")
         icon6 = QIcon()
-        icon6.addFile(u"images/bn_images/hideAsset 53.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon6.addFile(u"images/bn_images/hide_icon.png", QSize(), QIcon.Normal, QIcon.Off)
         self.bn_min.setIcon(icon6)
         self.bn_min.setIconSize(QSize(22, 22))
         self.bn_min.setFlat(True)
@@ -491,7 +478,7 @@ class Ui_MainWindow(object):
 "	background-color: rgba(0,0,0,0);\n"
 "}")
         icon7 = QIcon()
-        icon7.addFile(u"images/bn_images/closeAsset 43.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon7.addFile(u"images/bn_images/close_icon.png", QSize(), QIcon.Normal, QIcon.Off)
         self.bn_close.setIcon(icon7)
         self.bn_close.setIconSize(QSize(22, 22))
         self.bn_close.setFlat(True)
@@ -544,48 +531,260 @@ class Ui_MainWindow(object):
         self.verticalLayout_5 = QVBoxLayout(self.frame_4)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.frame_5 = QFrame(self.frame_4)
-        self.frame_5.setObjectName(u"frame_5")
-        self.frame_5.setMinimumSize(QSize(775, 120))
-        self.frame_5.setMaximumSize(QSize(16777215, 120))
-        self.frame_5.setFont(font)
-        self.frame_5.setFrameShape(QFrame.NoFrame)
-        self.frame_5.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_21 = QHBoxLayout(self.frame_5)
-        self.horizontalLayout_21.setSpacing(15)
+        self.frame_38 = QFrame(self.frame_4)
+        self.frame_38.setObjectName(u"frame_38")
+        self.frame_38.setMinimumSize(QSize(0, 0))
+        self.frame_38.setMaximumSize(QSize(16777215, 140))
+        self.frame_38.setFrameShape(QFrame.NoFrame)
+        self.frame_38.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_21 = QHBoxLayout(self.frame_38)
+        self.horizontalLayout_21.setSpacing(0)
         self.horizontalLayout_21.setObjectName(u"horizontalLayout_21")
-        self.horizontalLayout_21.setContentsMargins(-1, -1, -1, 40)
-        self.biapy_citation_bn = QPushButton(self.frame_5)
-        self.biapy_citation_bn.setObjectName(u"biapy_citation_bn")
-
-        self.horizontalLayout_21.addWidget(self.biapy_citation_bn)
-
-        self.biapy_github_bn = QPushButton(self.frame_5)
+        self.horizontalLayout_21.setContentsMargins(0, 15, 0, 0)
+        self.github_frame = QFrame(self.frame_38)
+        self.github_frame.setObjectName(u"github_frame")
+        self.github_frame.setFrameShape(QFrame.NoFrame)
+        self.github_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_34 = QVBoxLayout(self.github_frame)
+        self.verticalLayout_34.setSpacing(0)
+        self.verticalLayout_34.setObjectName(u"verticalLayout_34")
+        self.verticalLayout_34.setContentsMargins(0, 0, 0, 0)
+        self.biapy_github_bn = QPushButton(self.github_frame)
         self.biapy_github_bn.setObjectName(u"biapy_github_bn")
+        self.biapy_github_bn.setMinimumSize(QSize(55, 55))
+        self.biapy_github_bn.setMaximumSize(QSize(55, 55))
+        self.biapy_github_bn.setStyleSheet(u"QPushButton {\n"
+"	border: none;\n"
+"	border-radius: 15px;\n"
+"	background-color: rgb(64,144,253);\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}")
+        self.biapy_github_bn.setIconSize(QSize(45, 45))
 
-        self.horizontalLayout_21.addWidget(self.biapy_github_bn)
+        self.verticalLayout_34.addWidget(self.biapy_github_bn, 0, Qt.AlignHCenter)
 
-        self.biapy_templates_bn = QPushButton(self.frame_5)
-        self.biapy_templates_bn.setObjectName(u"biapy_templates_bn")
+        self.label_16 = QLabel(self.github_frame)
+        self.label_16.setObjectName(u"label_16")
+        self.label_16.setMaximumSize(QSize(110, 16777215))
+        font2 = QFont()
+        font2.setFamily(u"DejaVu Math TeX Gyre")
+        font2.setPointSize(10)
+        self.label_16.setFont(font2)
 
-        self.horizontalLayout_21.addWidget(self.biapy_templates_bn)
+        self.verticalLayout_34.addWidget(self.label_16)
 
-        self.biapy_doc_bn = QPushButton(self.frame_5)
+
+        self.horizontalLayout_21.addWidget(self.github_frame, 0, Qt.AlignHCenter)
+
+        self.forum_frame = QFrame(self.frame_38)
+        self.forum_frame.setObjectName(u"forum_frame")
+        self.forum_frame.setFrameShape(QFrame.NoFrame)
+        self.forum_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_15 = QVBoxLayout(self.forum_frame)
+        self.verticalLayout_15.setSpacing(0)
+        self.verticalLayout_15.setObjectName(u"verticalLayout_15")
+        self.verticalLayout_15.setContentsMargins(0, 0, 0, 0)
+        self.biapy_forum_bn = QPushButton(self.forum_frame)
+        self.biapy_forum_bn.setObjectName(u"biapy_forum_bn")
+        self.biapy_forum_bn.setMinimumSize(QSize(55, 55))
+        self.biapy_forum_bn.setMaximumSize(QSize(55, 55))
+        self.biapy_forum_bn.setStyleSheet(u"QPushButton {\n"
+"	border: none;\n"
+"	border-radius: 15px;\n"
+"	background-color: rgb(64,144,253);\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}")
+        self.biapy_forum_bn.setIconSize(QSize(45, 45))
+
+        self.verticalLayout_15.addWidget(self.biapy_forum_bn, 0, Qt.AlignHCenter)
+
+        self.label_112 = QLabel(self.forum_frame)
+        self.label_112.setObjectName(u"label_112")
+        self.label_112.setFont(font2)
+
+        self.verticalLayout_15.addWidget(self.label_112, 0, Qt.AlignHCenter)
+
+
+        self.horizontalLayout_21.addWidget(self.forum_frame, 0, Qt.AlignHCenter)
+
+        self.doc_frame = QFrame(self.frame_38)
+        self.doc_frame.setObjectName(u"doc_frame")
+        self.doc_frame.setMinimumSize(QSize(0, 0))
+        self.doc_frame.setMaximumSize(QSize(16777215, 16777215))
+        self.doc_frame.setFrameShape(QFrame.NoFrame)
+        self.doc_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_36 = QVBoxLayout(self.doc_frame)
+        self.verticalLayout_36.setSpacing(0)
+        self.verticalLayout_36.setObjectName(u"verticalLayout_36")
+        self.verticalLayout_36.setContentsMargins(0, 0, 0, 0)
+        self.biapy_doc_bn = QPushButton(self.doc_frame)
         self.biapy_doc_bn.setObjectName(u"biapy_doc_bn")
+        self.biapy_doc_bn.setMinimumSize(QSize(55, 55))
+        self.biapy_doc_bn.setMaximumSize(QSize(55, 55))
+        self.biapy_doc_bn.setStyleSheet(u"QPushButton {\n"
+"	border: none;\n"
+"	border-radius: 15px;\n"
+"	background-color: rgb(64,144,253);\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}")
+        self.biapy_doc_bn.setIconSize(QSize(45, 45))
 
-        self.horizontalLayout_21.addWidget(self.biapy_doc_bn)
+        self.verticalLayout_36.addWidget(self.biapy_doc_bn, 0, Qt.AlignHCenter)
 
-        self.biapy_notebooks_bn = QPushButton(self.frame_5)
+        self.label_32 = QLabel(self.doc_frame)
+        self.label_32.setObjectName(u"label_32")
+        self.label_32.setMaximumSize(QSize(110, 16777215))
+        self.label_32.setFont(font2)
+
+        self.verticalLayout_36.addWidget(self.label_32, 0, Qt.AlignHCenter)
+
+
+        self.horizontalLayout_21.addWidget(self.doc_frame, 0, Qt.AlignHCenter)
+
+        self.templates_frame = QFrame(self.frame_38)
+        self.templates_frame.setObjectName(u"templates_frame")
+        self.templates_frame.setFrameShape(QFrame.NoFrame)
+        self.templates_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_35 = QVBoxLayout(self.templates_frame)
+        self.verticalLayout_35.setSpacing(0)
+        self.verticalLayout_35.setObjectName(u"verticalLayout_35")
+        self.verticalLayout_35.setContentsMargins(0, 0, 0, 0)
+        self.biapy_templates_bn = QPushButton(self.templates_frame)
+        self.biapy_templates_bn.setObjectName(u"biapy_templates_bn")
+        self.biapy_templates_bn.setMinimumSize(QSize(55, 55))
+        self.biapy_templates_bn.setMaximumSize(QSize(55, 55))
+        self.biapy_templates_bn.setStyleSheet(u"QPushButton {\n"
+"	border: none;\n"
+"	border-radius: 15px;\n"
+"	background-color: rgb(64,144,253);\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}")
+        self.biapy_templates_bn.setIconSize(QSize(45, 45))
+
+        self.verticalLayout_35.addWidget(self.biapy_templates_bn, 0, Qt.AlignHCenter)
+
+        self.label_24 = QLabel(self.templates_frame)
+        self.label_24.setObjectName(u"label_24")
+        self.label_24.setMaximumSize(QSize(110, 16777215))
+        self.label_24.setFont(font2)
+
+        self.verticalLayout_35.addWidget(self.label_24)
+
+
+        self.horizontalLayout_21.addWidget(self.templates_frame, 0, Qt.AlignHCenter)
+
+        self.notebooks_frame = QFrame(self.frame_38)
+        self.notebooks_frame.setObjectName(u"notebooks_frame")
+        self.notebooks_frame.setFrameShape(QFrame.NoFrame)
+        self.notebooks_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_37 = QVBoxLayout(self.notebooks_frame)
+        self.verticalLayout_37.setSpacing(0)
+        self.verticalLayout_37.setObjectName(u"verticalLayout_37")
+        self.verticalLayout_37.setContentsMargins(0, 0, 0, 0)
+        self.biapy_notebooks_bn = QPushButton(self.notebooks_frame)
         self.biapy_notebooks_bn.setObjectName(u"biapy_notebooks_bn")
+        self.biapy_notebooks_bn.setMinimumSize(QSize(55, 55))
+        self.biapy_notebooks_bn.setMaximumSize(QSize(55, 55))
+        self.biapy_notebooks_bn.setStyleSheet(u"QPushButton {\n"
+"	border: none;\n"
+"	border-radius: 15px;\n"
+"	background-color: rgb(64,144,253);\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}")
+        self.biapy_notebooks_bn.setIconSize(QSize(45, 45))
 
-        self.horizontalLayout_21.addWidget(self.biapy_notebooks_bn)
+        self.verticalLayout_37.addWidget(self.biapy_notebooks_bn, 0, Qt.AlignHCenter)
+
+        self.label_54 = QLabel(self.notebooks_frame)
+        self.label_54.setObjectName(u"label_54")
+        self.label_54.setMaximumSize(QSize(110, 16777215))
+        self.label_54.setFont(font2)
+
+        self.verticalLayout_37.addWidget(self.label_54)
 
 
-        self.verticalLayout_5.addWidget(self.frame_5)
+        self.horizontalLayout_21.addWidget(self.notebooks_frame, 0, Qt.AlignHCenter)
+
+        self.citation_frame = QFrame(self.frame_38)
+        self.citation_frame.setObjectName(u"citation_frame")
+        self.citation_frame.setFrameShape(QFrame.NoFrame)
+        self.citation_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_38 = QVBoxLayout(self.citation_frame)
+        self.verticalLayout_38.setSpacing(0)
+        self.verticalLayout_38.setObjectName(u"verticalLayout_38")
+        self.verticalLayout_38.setContentsMargins(0, 0, 0, 0)
+        self.biapy_citation_bn = QPushButton(self.citation_frame)
+        self.biapy_citation_bn.setObjectName(u"biapy_citation_bn")
+        self.biapy_citation_bn.setMinimumSize(QSize(55, 55))
+        self.biapy_citation_bn.setMaximumSize(QSize(55, 55))
+        self.biapy_citation_bn.setStyleSheet(u"QPushButton {\n"
+"	border: none;\n"
+"	border-radius: 15px;\n"
+"	background-color: rgb(64,144,253);\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}")
+        self.biapy_citation_bn.setIconSize(QSize(33, 33))
+
+        self.verticalLayout_38.addWidget(self.biapy_citation_bn, 0, Qt.AlignHCenter)
+
+        self.label_58 = QLabel(self.citation_frame)
+        self.label_58.setObjectName(u"label_58")
+        self.label_58.setMaximumSize(QSize(110, 16777215))
+        self.label_58.setFont(font2)
+
+        self.verticalLayout_38.addWidget(self.label_58)
+
+
+        self.horizontalLayout_21.addWidget(self.citation_frame, 0, Qt.AlignHCenter)
+
+
+        self.verticalLayout_5.addWidget(self.frame_38)
 
         self.dependencies_frame = QFrame(self.frame_4)
         self.dependencies_frame.setObjectName(u"dependencies_frame")
-        self.dependencies_frame.setMinimumSize(QSize(0, 0))
+        self.dependencies_frame.setMinimumSize(QSize(0, 220))
         self.dependencies_frame.setMaximumSize(QSize(16777215, 16777215))
         self.dependencies_frame.setStyleSheet(u"")
         self.dependencies_frame.setFrameShape(QFrame.NoFrame)
@@ -595,7 +794,31 @@ class Ui_MainWindow(object):
         self.gridLayout_68.setObjectName(u"gridLayout_68")
         self.gridLayout_68.setHorizontalSpacing(15)
         self.gridLayout_68.setVerticalSpacing(9)
-        self.gridLayout_68.setContentsMargins(-1, -1, -1, 40)
+        self.gridLayout_68.setContentsMargins(-1, 40, -1, 40)
+        self.gpu_frame = QFrame(self.dependencies_frame)
+        self.gpu_frame.setObjectName(u"gpu_frame")
+        self.gpu_frame.setToolTipDuration(3)
+        self.gpu_frame.setFrameShape(QFrame.StyledPanel)
+        self.gpu_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_33 = QVBoxLayout(self.gpu_frame)
+        self.verticalLayout_33.setSpacing(6)
+        self.verticalLayout_33.setObjectName(u"verticalLayout_33")
+        self.verticalLayout_33.setContentsMargins(9, 9, 9, 9)
+
+        self.gridLayout_68.addWidget(self.gpu_frame, 1, 1, 1, 1)
+
+        self.gpu_head_label = QLabel(self.dependencies_frame)
+        self.gpu_head_label.setObjectName(u"gpu_head_label")
+        self.gpu_head_label.setMinimumSize(QSize(0, 15))
+        font3 = QFont()
+        font3.setFamily(u"DejaVu Math TeX Gyre")
+        font3.setPointSize(12)
+        font3.setBold(True)
+        font3.setWeight(75)
+        self.gpu_head_label.setFont(font3)
+
+        self.gridLayout_68.addWidget(self.gpu_head_label, 0, 1, 1, 1)
+
         self.docker_frame = QFrame(self.dependencies_frame)
         self.docker_frame.setObjectName(u"docker_frame")
         self.docker_frame.setFrameShape(QFrame.StyledPanel)
@@ -611,39 +834,17 @@ class Ui_MainWindow(object):
         self.docker_head_label.setObjectName(u"docker_head_label")
         self.docker_head_label.setMinimumSize(QSize(0, 15))
         self.docker_head_label.setMaximumSize(QSize(16777215, 16777215))
-        self.docker_head_label.setFont(font2)
+        self.docker_head_label.setFont(font3)
         self.docker_head_label.setOpenExternalLinks(True)
 
         self.gridLayout_68.addWidget(self.docker_head_label, 0, 0, 1, 1)
-
-        self.gpu_head_label = QLabel(self.dependencies_frame)
-        self.gpu_head_label.setObjectName(u"gpu_head_label")
-        self.gpu_head_label.setMinimumSize(QSize(0, 15))
-        font3 = QFont()
-        font3.setPointSize(12)
-        font3.setBold(True)
-        font3.setWeight(75)
-        self.gpu_head_label.setFont(font3)
-
-        self.gridLayout_68.addWidget(self.gpu_head_label, 0, 1, 1, 1)
-
-        self.gpu_frame = QFrame(self.dependencies_frame)
-        self.gpu_frame.setObjectName(u"gpu_frame")
-        self.gpu_frame.setToolTipDuration(3)
-        self.gpu_frame.setFrameShape(QFrame.StyledPanel)
-        self.gpu_frame.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_33 = QVBoxLayout(self.gpu_frame)
-        self.verticalLayout_33.setSpacing(6)
-        self.verticalLayout_33.setObjectName(u"verticalLayout_33")
-        self.verticalLayout_33.setContentsMargins(9, 9, 9, 9)
-
-        self.gridLayout_68.addWidget(self.gpu_frame, 1, 1, 1, 1)
 
 
         self.verticalLayout_5.addWidget(self.dependencies_frame)
 
         self.frame_6 = QFrame(self.frame_4)
         self.frame_6.setObjectName(u"frame_6")
+        self.frame_6.setMinimumSize(QSize(0, 180))
         self.frame_6.setMaximumSize(QSize(16777215, 16777215))
         self.frame_6.setFont(font)
         self.frame_6.setFrameShape(QFrame.NoFrame)
@@ -1054,7 +1255,7 @@ class Ui_MainWindow(object):
         self.goptions_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 898, 493))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 904, 495))
         self.scrollAreaWidgetContents.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout.setObjectName(u"gridLayout")
@@ -1188,7 +1389,7 @@ class Ui_MainWindow(object):
         self.goptions_advanced_options_scrollarea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 346, 159))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 856, 175))
         self.gridLayout_2 = QGridLayout(self.scrollAreaWidgetContents_2)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.frame_2 = QFrame(self.scrollAreaWidgetContents_2)
@@ -1415,7 +1616,7 @@ class Ui_MainWindow(object):
         self.train_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 934, 5973))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 895, 5979))
         self.scrollAreaWidgetContents_3.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout_3 = QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
@@ -3337,7 +3538,7 @@ class Ui_MainWindow(object):
         self.TRAIN__W_DECAY__INPUT.setObjectName(u"TRAIN__W_DECAY__INPUT")
         self.TRAIN__W_DECAY__INPUT.setMinimumSize(QSize(200, 30))
         self.TRAIN__W_DECAY__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__W_DECAY__INPUT.setFont(font6)
+        self.TRAIN__W_DECAY__INPUT.setFont(font)
 
         self.gridLayout_29.addWidget(self.TRAIN__W_DECAY__INPUT, 3, 1, 1, 1)
 
@@ -3683,7 +3884,7 @@ class Ui_MainWindow(object):
 
         self.unetr_num_filters_label = QLabel(self.transformers_frame)
         self.unetr_num_filters_label.setObjectName(u"unetr_num_filters_label")
-        self.unetr_num_filters_label.setFont(font6)
+        self.unetr_num_filters_label.setFont(font)
 
         self.gridLayout_23.addWidget(self.unetr_num_filters_label, 6, 0, 1, 1)
 
@@ -3694,7 +3895,7 @@ class Ui_MainWindow(object):
         self.MODEL__UNETR_DEC_ACTIVATION__INPUT.setObjectName(u"MODEL__UNETR_DEC_ACTIVATION__INPUT")
         self.MODEL__UNETR_DEC_ACTIVATION__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__UNETR_DEC_ACTIVATION__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__UNETR_DEC_ACTIVATION__INPUT.setFont(font6)
+        self.MODEL__UNETR_DEC_ACTIVATION__INPUT.setFont(font)
 
         self.gridLayout_23.addWidget(self.MODEL__UNETR_DEC_ACTIVATION__INPUT, 7, 1, 1, 1)
 
@@ -3702,7 +3903,7 @@ class Ui_MainWindow(object):
         self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT.setObjectName(u"MODEL__UNETR_VIT_NUM_FILTERS__INPUT")
         self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT.setFont(font6)
+        self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT.setFont(font)
 
         self.gridLayout_23.addWidget(self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT, 6, 1, 1, 1)
 
@@ -3718,19 +3919,19 @@ class Ui_MainWindow(object):
         self.MODEL__UNETR_DEC_KERNEL_INIT__INPUT.setObjectName(u"MODEL__UNETR_DEC_KERNEL_INIT__INPUT")
         self.MODEL__UNETR_DEC_KERNEL_INIT__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__UNETR_DEC_KERNEL_INIT__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__UNETR_DEC_KERNEL_INIT__INPUT.setFont(font6)
+        self.MODEL__UNETR_DEC_KERNEL_INIT__INPUT.setFont(font)
 
         self.gridLayout_23.addWidget(self.MODEL__UNETR_DEC_KERNEL_INIT__INPUT, 8, 1, 1, 1)
 
         self.unetr_dec_act_label = QLabel(self.transformers_frame)
         self.unetr_dec_act_label.setObjectName(u"unetr_dec_act_label")
-        self.unetr_dec_act_label.setFont(font6)
+        self.unetr_dec_act_label.setFont(font)
 
         self.gridLayout_23.addWidget(self.unetr_dec_act_label, 7, 0, 1, 1)
 
         self.unetr_dec_kernel_init_label = QLabel(self.transformers_frame)
         self.unetr_dec_kernel_init_label.setObjectName(u"unetr_dec_kernel_init_label")
-        self.unetr_dec_kernel_init_label.setFont(font6)
+        self.unetr_dec_kernel_init_label.setFont(font)
 
         self.gridLayout_23.addWidget(self.unetr_dec_kernel_init_label, 8, 0, 1, 1)
 
@@ -4164,7 +4365,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_6 = QWidget()
         self.scrollAreaWidgetContents_6.setObjectName(u"scrollAreaWidgetContents_6")
-        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 529, 301))
+        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 490, 303))
         self.gridLayout_18 = QGridLayout(self.scrollAreaWidgetContents_6)
         self.gridLayout_18.setObjectName(u"gridLayout_18")
         self.verticalSpacer_8 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -4316,7 +4517,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 851, 181))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 823, 183))
         self.gridLayout_17 = QGridLayout(self.scrollAreaWidgetContents_4)
         self.gridLayout_17.setObjectName(u"gridLayout_17")
         self.verticalSpacer_9 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -4455,7 +4656,7 @@ class Ui_MainWindow(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollAreaWidgetContents_7 = QWidget()
         self.scrollAreaWidgetContents_7.setObjectName(u"scrollAreaWidgetContents_7")
-        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 529, 217))
+        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 490, 219))
         self.gridLayout_19 = QGridLayout(self.scrollAreaWidgetContents_7)
         self.gridLayout_19.setObjectName(u"gridLayout_19")
         self.label_48 = QLabel(self.scrollAreaWidgetContents_7)
@@ -4590,7 +4791,7 @@ class Ui_MainWindow(object):
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollAreaWidgetContents_8 = QWidget()
         self.scrollAreaWidgetContents_8.setObjectName(u"scrollAreaWidgetContents_8")
-        self.scrollAreaWidgetContents_8.setGeometry(QRect(0, 0, 546, 210))
+        self.scrollAreaWidgetContents_8.setGeometry(QRect(0, 0, 506, 210))
         self.gridLayout_49 = QGridLayout(self.scrollAreaWidgetContents_8)
         self.gridLayout_49.setObjectName(u"gridLayout_49")
         self.frame_44 = QFrame(self.scrollAreaWidgetContents_8)
@@ -4704,7 +4905,7 @@ class Ui_MainWindow(object):
         self.scrollArea_5.setWidgetResizable(True)
         self.scrollAreaWidgetContents_9 = QWidget()
         self.scrollAreaWidgetContents_9.setObjectName(u"scrollAreaWidgetContents_9")
-        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, 0, 340, 99))
+        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, 0, 326, 101))
         self.gridLayout_50 = QGridLayout(self.scrollAreaWidgetContents_9)
         self.gridLayout_50.setObjectName(u"gridLayout_50")
         self.verticalSpacer_21 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -4768,7 +4969,7 @@ class Ui_MainWindow(object):
         self.scrollArea_6.setWidgetResizable(True)
         self.scrollAreaWidgetContents_10 = QWidget()
         self.scrollAreaWidgetContents_10.setObjectName(u"scrollAreaWidgetContents_10")
-        self.scrollAreaWidgetContents_10.setGeometry(QRect(0, 0, 380, 171))
+        self.scrollAreaWidgetContents_10.setGeometry(QRect(0, 0, 361, 173))
         self.gridLayout_51 = QGridLayout(self.scrollAreaWidgetContents_10)
         self.gridLayout_51.setObjectName(u"gridLayout_51")
         self.label_96 = QLabel(self.scrollAreaWidgetContents_10)
@@ -4822,7 +5023,7 @@ class Ui_MainWindow(object):
 
         self.pretext_task_label = QLabel(self.pretext_frame)
         self.pretext_task_label.setObjectName(u"pretext_task_label")
-        self.pretext_task_label.setFont(font6)
+        self.pretext_task_label.setFont(font)
 
         self.gridLayout_57.addWidget(self.pretext_task_label, 0, 0, 1, 1)
 
@@ -4832,7 +5033,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT.setObjectName(u"PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT")
         self.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT.setFont(font6)
+        self.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT.setFont(font)
 
         self.gridLayout_57.addWidget(self.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT, 0, 1, 1, 1)
 
@@ -4864,7 +5065,7 @@ class Ui_MainWindow(object):
         self.scrollArea_7.setWidgetResizable(True)
         self.scrollAreaWidgetContents_11 = QWidget()
         self.scrollAreaWidgetContents_11.setObjectName(u"scrollAreaWidgetContents_11")
-        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, 0, 399, 44))
+        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, 0, 346, 44))
         self.gridLayout_52 = QGridLayout(self.scrollAreaWidgetContents_11)
         self.gridLayout_52.setObjectName(u"gridLayout_52")
         self.horizontalSpacer_42 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
@@ -4959,7 +5160,7 @@ class Ui_MainWindow(object):
         self.test_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 825, 995))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 796, 1005))
         self.gridLayout_37 = QGridLayout(self.scrollAreaWidgetContents_5)
         self.gridLayout_37.setObjectName(u"gridLayout_37")
         self.test_advanced_options_frame = QFrame(self.scrollAreaWidgetContents_5)
@@ -5488,7 +5689,7 @@ class Ui_MainWindow(object):
         self.scrollArea_8.setWidgetResizable(True)
         self.scrollAreaWidgetContents_12 = QWidget()
         self.scrollAreaWidgetContents_12.setObjectName(u"scrollAreaWidgetContents_12")
-        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 464, 291))
+        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 899, 310))
         self.gridLayout_61 = QGridLayout(self.scrollAreaWidgetContents_12)
         self.gridLayout_61.setObjectName(u"gridLayout_61")
         self.label_82 = QLabel(self.scrollAreaWidgetContents_12)
@@ -5633,7 +5834,7 @@ class Ui_MainWindow(object):
         self.scrollArea_9.setWidgetResizable(True)
         self.scrollAreaWidgetContents_13 = QWidget()
         self.scrollAreaWidgetContents_13.setObjectName(u"scrollAreaWidgetContents_13")
-        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 582, 1200))
+        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 534, 1204))
         self.gridLayout_44 = QGridLayout(self.scrollAreaWidgetContents_13)
         self.gridLayout_44.setObjectName(u"gridLayout_44")
         self.horizontalSpacer_35 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
@@ -6139,7 +6340,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_23.setContentsMargins(0, 0, 0, 0)
         self.label_13 = QLabel(self.frame_49)
         self.label_13.setObjectName(u"label_13")
-        self.label_13.setFont(font6)
+        self.label_13.setFont(font)
 
         self.horizontalLayout_23.addWidget(self.label_13)
 
@@ -6149,7 +6350,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT")
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT.setFont(font6)
+        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT.setFont(font)
 
         self.horizontalLayout_23.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT)
 
@@ -6176,7 +6377,7 @@ class Ui_MainWindow(object):
         self.scrollArea_10.setWidgetResizable(True)
         self.scrollAreaWidgetContents_14 = QWidget()
         self.scrollAreaWidgetContents_14.setObjectName(u"scrollAreaWidgetContents_14")
-        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 552, 732))
+        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 510, 736))
         self.gridLayout_47 = QGridLayout(self.scrollAreaWidgetContents_14)
         self.gridLayout_47.setObjectName(u"gridLayout_47")
         self.label_100 = QLabel(self.scrollAreaWidgetContents_14)
@@ -6500,7 +6701,7 @@ class Ui_MainWindow(object):
         self.scrollArea_11.setWidgetResizable(True)
         self.scrollAreaWidgetContents_15 = QWidget()
         self.scrollAreaWidgetContents_15.setObjectName(u"scrollAreaWidgetContents_15")
-        self.scrollAreaWidgetContents_15.setGeometry(QRect(0, 0, 372, 44))
+        self.scrollAreaWidgetContents_15.setGeometry(QRect(0, 0, 326, 44))
         self.gridLayout_64 = QGridLayout(self.scrollAreaWidgetContents_15)
         self.gridLayout_64.setObjectName(u"gridLayout_64")
         self.verticalSpacer_27 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -6533,7 +6734,7 @@ class Ui_MainWindow(object):
         self.scrollArea_12.setWidgetResizable(True)
         self.scrollAreaWidgetContents_16 = QWidget()
         self.scrollAreaWidgetContents_16.setObjectName(u"scrollAreaWidgetContents_16")
-        self.scrollAreaWidgetContents_16.setGeometry(QRect(0, 0, 426, 44))
+        self.scrollAreaWidgetContents_16.setGeometry(QRect(0, 0, 372, 44))
         self.gridLayout_65 = QGridLayout(self.scrollAreaWidgetContents_16)
         self.gridLayout_65.setObjectName(u"gridLayout_65")
         self.label_102 = QLabel(self.scrollAreaWidgetContents_16)
@@ -6566,7 +6767,7 @@ class Ui_MainWindow(object):
         self.scrollArea_13.setWidgetResizable(True)
         self.scrollAreaWidgetContents_17 = QWidget()
         self.scrollAreaWidgetContents_17.setObjectName(u"scrollAreaWidgetContents_17")
-        self.scrollAreaWidgetContents_17.setGeometry(QRect(0, 0, 488, 44))
+        self.scrollAreaWidgetContents_17.setGeometry(QRect(0, 0, 425, 44))
         self.gridLayout_66 = QGridLayout(self.scrollAreaWidgetContents_17)
         self.gridLayout_66.setObjectName(u"gridLayout_66")
         self.label_106 = QLabel(self.scrollAreaWidgetContents_17)
@@ -6599,7 +6800,7 @@ class Ui_MainWindow(object):
         self.scrollArea_14.setWidgetResizable(True)
         self.scrollAreaWidgetContents_18 = QWidget()
         self.scrollAreaWidgetContents_18.setObjectName(u"scrollAreaWidgetContents_18")
-        self.scrollAreaWidgetContents_18.setGeometry(QRect(0, 0, 399, 44))
+        self.scrollAreaWidgetContents_18.setGeometry(QRect(0, 0, 346, 44))
         self.gridLayout_67 = QGridLayout(self.scrollAreaWidgetContents_18)
         self.gridLayout_67.setObjectName(u"gridLayout_67")
         self.label_111 = QLabel(self.scrollAreaWidgetContents_18)
@@ -6956,7 +7157,7 @@ class Ui_MainWindow(object):
         self.check_yaml_file_errors_frame.setWidgetResizable(True)
         self.scrollAreaWidgetContents_19 = QWidget()
         self.scrollAreaWidgetContents_19.setObjectName(u"scrollAreaWidgetContents_19")
-        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 96, 26))
+        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 48, 19))
         self.verticalLayout_32 = QVBoxLayout(self.scrollAreaWidgetContents_19)
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
         self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)
@@ -7093,7 +7294,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.biapy_logo_label.setText("")
-        self.biapy_version.setText(QCoreApplication.translate("MainWindow", u"BiaPy GUI - Version 1.0", None))
+        self.biapy_version.setText(QCoreApplication.translate("MainWindow", u"BiaPy (2.0) - BiaPy GUI (1.0)", None))
 #if QT_CONFIG(tooltip)
         self.bn_home.setToolTip("")
 #endif // QT_CONFIG(tooltip)
@@ -7118,7 +7319,6 @@ class Ui_MainWindow(object):
         self.bn_run_biapy.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.bn_run_biapy.setText("")
-        self.biapy_title_label.setText(QCoreApplication.translate("MainWindow", u"BiaPy: Bioimage analysis pipelines in Python", None))
 #if QT_CONFIG(tooltip)
         self.bn_min.setToolTip(QCoreApplication.translate("MainWindow", u"Minimize", None))
 #endif // QT_CONFIG(tooltip)
@@ -7127,13 +7327,20 @@ class Ui_MainWindow(object):
         self.bn_close.setToolTip(QCoreApplication.translate("MainWindow", u"Close", None))
 #endif // QT_CONFIG(tooltip)
         self.bn_close.setText("")
-        self.biapy_citation_bn.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
-        self.biapy_github_bn.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
-        self.biapy_templates_bn.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
-        self.biapy_doc_bn.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
-        self.biapy_notebooks_bn.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
-        self.docker_head_label.setText(QCoreApplication.translate("MainWindow", u"Docker dependency", None))
+        self.biapy_github_bn.setText("")
+        self.label_16.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:10pt; font-weight:600;\">Project page</span></p></body></html>", None))
+        self.biapy_forum_bn.setText("")
+        self.label_112.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:10pt; font-weight:600;\">Forum</span></p></body></html>", None))
+        self.biapy_doc_bn.setText("")
+        self.label_32.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:10pt; font-weight:600;\">Documentation</span></p></body></html>", None))
+        self.biapy_templates_bn.setText("")
+        self.label_24.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:10pt; font-weight:600;\">Templates</span></p></body></html>", None))
+        self.biapy_notebooks_bn.setText("")
+        self.label_54.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:10pt; font-weight:600;\">Notebooks</span></p></body></html>", None))
+        self.biapy_citation_bn.setText("")
+        self.label_58.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:10pt; font-weight:600;\">Citation</span></p></body></html>", None))
         self.gpu_head_label.setText(QCoreApplication.translate("MainWindow", u"GPU dependency", None))
+        self.docker_head_label.setText(QCoreApplication.translate("MainWindow", u"Docker dependency", None))
         self.yes_no_diagram_ques_label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\">Load pre-existing</p><p align=\"center\">workflow?</p></body></html>", None))
         self.continue_yaml_bn.setText(QCoreApplication.translate("MainWindow", u"Run workflow", None))
         self.create_yaml_bn.setText(QCoreApplication.translate("MainWindow", u"Create new workflow", None))
