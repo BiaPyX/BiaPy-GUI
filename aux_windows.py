@@ -55,7 +55,7 @@ class dialog_Ui(QDialog):
         self.info_window.setupUi(self)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint) 
         self.info_window.bn_min.clicked.connect(self.showMinimized)
-        self.info_window.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","hideAsset 53.png.png"))))
+        self.info_window.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","hideAsset 53.png"))))
         self.info_window.bn_close.clicked.connect(self.close)
         self.info_window.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","closeAsset 43.png"))))
         self.info_window.ok_bn.clicked.connect(self.close)
@@ -97,20 +97,37 @@ class error_Ui(QDialog):
                 event.accept()
 
         self.error_window.frame_top.mouseMoveEvent = moveErrorWindow  
-        self.setVisible(False)
 
     def mousePressEvent(self, event):
         self.dragPos = event.globalPos()
 
     def error_constrict(self, message, reason):
-        self.setVisible(False)
+        self.setFixedSize(self.width(), 235)
         if reason is not None:
             if reason == "main_window_error":
-                self.setFixedSize(self.width(), 235)
                 self.error_window.icon_label.setPixmap(self.upbar_icon[0])
-                self.error_window.error_message_label.setText("<b>This error was not expected. Please contact BiaPy developers copying the output of the temporary file: {}".format(message))
+                self.error_window.error_message_label.setText("This error was not expected. Please contact BiaPy developers copying the output of the temporary file: {}".format(message))
                 self.error_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"Close BiaPy GUI", None))
                 self.error_window.go_to_correct_bn.clicked.connect(self.close_all)
+            elif reason == "load_yaml_error":
+                self.error_window.icon_label.setPixmap(self.upbar_icon[0])
+                self.error_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"OK", None))
+                self.error_window.error_message_label.setText("Configuration file not loaded because of the following errors:<br>{}".format(message))
+                self.error_window.go_to_correct_bn.clicked.connect(self.close)
+            elif reason == "load_yaml_ok":
+                self.error_window.icon_label.setPixmap(self.upbar_icon[1])
+                self.error_window.go_to_correct_bn.setText(QCoreApplication.translate("OK", u"OK", None))
+                self.error_window.error_message_label.setText(message)
+                self.error_window.go_to_correct_bn.clicked.connect(self.close_and_go)
+            elif reason == "load_yaml_ok_but_errors":
+                self.error_window.icon_label.setPixmap(self.upbar_icon[1])
+                self.error_window.go_to_correct_bn.setText(QCoreApplication.translate("OK", u"OK", None))
+                m = "Configuration file loaded but with some errors. Please send BiaPy developers\
+                    the following errors:"
+                for i, mes in enumerate(message):
+                    m += "<br>"+str(i+1)+". {}".format(mes)
+                self.error_window.error_message_label.setText(m)
+                self.error_window.go_to_correct_bn.clicked.connect(self.close_and_go)
             else:
                 self.setFixedSize(self.width(), self.minimumSizeHint().height())
                 self.error_window.icon_label.setPixmap(self.upbar_icon[1])
@@ -121,12 +138,14 @@ class error_Ui(QDialog):
                 self.error_window.go_to_correct_bn.clicked.connect(lambda: self.run_func_and_close(reason))
                 self.error_window.error_message_label.setText(message)
         else:
-            self.setFixedSize(self.width(), 235)
             self.error_window.icon_label.setPixmap(self.upbar_icon[0])
             self.error_window.error_message_label.setText("<b>This error was not expected. Please contact BiaPy developers with the following message:</b><br><br>"+message)
             self.error_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"Close BiaPy GUI", None))
             self.error_window.go_to_correct_bn.clicked.connect(self.close_all)
-        self.setVisible(True)
+
+    def close_and_go(self):
+        buttonPressed(self.parent_ui, 'bn_workflow', 99)
+        self.close()
 
     def close_all(self):
         self.close()

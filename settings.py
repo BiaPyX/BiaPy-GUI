@@ -60,18 +60,26 @@ class Settings():
         # Semantic segmentation
         self.settings['semantic_models'] = ['unet', 'resunet', 'attention_unet', 'fcn32', \
                 'fcn8', 'tiramisu', 'mnet', 'multiresunet', 'seunet', 'unetr']
+        self.settings['semantic_models_real_names'] = ['U-Net', 'Residual U-Net', 'Attention U-Net', 'FCN32', \
+                'FCN8', 'Tiramisu', 'MNet', 'MultiResUnet', 'SEUnet', 'UNETR']
         # Instance segmentation
         self.settings['instance_models'] = ['unet', 'resunet', 'seunet', 'attention_unet', 'unetr']
+        self.settings['instance_models_real_names'] = ['U-Net', 'Residual U-Net', 'SEUnet', 'Attention U-Net', 'UNETR']
         # Detection
         self.settings['detection_models'] = ['unet', 'resunet', 'seunet', 'attention_unet', 'unetr']
+        self.settings['detection_models_real_names'] = ['U-Net', 'Residual U-Net', 'SEUnet', 'Attention U-Net', 'UNETR']
         # Denoising
         self.settings['denoising_models'] = ['unet', 'resunet', 'seunet', 'attention_unet', 'unetr']
+        self.settings['denoising_models_real_names'] = ['U-Net', 'Residual U-Net', 'SEUnet', 'Attention U-Net', 'UNETR']
         # Super resolution
-        self.settings['sr_models'] = ['edsr', 'srunet', 'rcan', 'dfcan', 'wdsr']
+        self.settings['sr_models'] = ['edsr', 'rcan', 'dfcan', 'wdsr']
+        self.settings['sr_models_real_names'] = ['EDSR', 'RCAN', 'DFCAN', 'WDSR']
         # Self-supervised learning
         self.settings['ssl_models'] = ['mae', 'unet', 'resunet', 'seunet', 'attention_unet', 'unetr']
+        self.settings['ssl_models_real_names'] = ['MAE', 'U-Net', 'Residual U-Net', 'SEUnet', 'Attention U-Net', 'UNETR']
         # Classification
         self.settings['classification_models'] = ['ViT', 'simple_cnn', 'EfficientNetB0']
+        self.settings['classification_models_real_names'] = ['ViT', 'EfficientNetB0', 'Simple CNN']
 
         # Paths
         self.settings['train_data_input_path'] = None
@@ -80,7 +88,18 @@ class Settings():
         self.settings['validation_data_gt_input_path'] = None
         self.settings['test_data_input_path'] = None
         self.settings['test_data_gt_input_path'] = None
-        
+
+    def translate_model_names(self, model, inv=False):
+        s = "_models_real_names" if not inv else "_models"
+        s2 = "_models" if not inv else "_models_real_names"
+        for x in ["semantic", "instance", "detection", "denoising", "sr", "ssl", "classification"]:
+            try:
+                idx = list(self.settings[x+s]).index(model)
+            except:
+                pass
+            else:
+                return list(self.settings[x+s2])[idx]
+
     def load_workflow_page(self):
         self.settings['workflow_images'] = [
             QPixmap(resource_path(os.path.join("images","semantic_seg.png"))),

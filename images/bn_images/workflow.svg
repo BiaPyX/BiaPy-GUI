@@ -38,16 +38,18 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="0.6405233"
-     inkscape:cx="96.015243"
-     inkscape:cy="211.54578"
+     inkscape:zoom="0.90583675"
+     inkscape:cx="206.99094"
+     inkscape:cy="159.52102"
      inkscape:window-width="1846"
      inkscape:window-height="1136"
-     inkscape:window-x="1994"
-     inkscape:window-y="27"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1"
-     inkscape:document-rotation="0" />
+     inkscape:document-rotation="0"
+     inkscape:showpageshadow="2"
+     inkscape:deskcolor="#d1d1d1" />
   <defs
      id="defs2">
     <rect
@@ -64,7 +66,7 @@
      transform="translate(-7.0888724,-5.4919925)">
     <text
        xml:space="preserve"
-       transform="matrix(0.26458333,0,0,0.26458333,-2.8734569,1.0130161)"
+       transform="matrix(0.26458333,0,0,0.26458333,-11.548822,1.0130161)"
        id="text4476"
        style="font-style:normal;font-weight:normal;font-size:32px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect4478);fill:#000000;fill-opacity:1;stroke:none"
        inkscape:export-filename="/home/dfranco/Documents/0.thesis/BiaPy_GUI/Minimalistic-Flat-Modern-GUI-Template/icons/1x/new/text4476.png"
@@ -72,11 +74,11 @@
        inkscape:export-ydpi="44.358955"
        x="89.667969"
        y="0"><tspan
-         x="145.53418"
+         x="186.12012"
          y="71.662109"
-         id="tspan854"><tspan
+         id="tspan839"><tspan
            style="font-family:'DejaVu Serif';-inkscape-font-specification:'DejaVu Serif';text-align:center;text-anchor:middle"
-           id="tspan852">New workflow</tspan></tspan></text>
+           id="tspan837">Workflow</tspan></tspan></text>
     <path
        d="m 25.213,20.650323 v -3.115397 h -3.926951 l -2.303837,-2.303835 v -1.629353 a 2.725972,2.725972 0 1 0 -0.778846,0 v 1.615334 l -2.317858,2.317854 h -3.912937 v 3.115397 h -1.557699 v 3.894246 h 3.894246 V 20.650323 H 12.75142 v -2.336548 h 3.082685 l 2.75089,2.751675 2.752453,-2.751675 h 3.096707 v 2.336548 h -1.557704 v 3.894246 h 3.894253 V 20.650323 Z M 13.530269,23.76572 h -2.336548 v -2.336548 h 2.336548 z m 3.115394,-12.851012 a 1.9471229,1.9471229 0 1 1 1.947119,1.947124 1.9471229,1.9471229 0 0 1 -1.947119,-1.947124 z m 1.935446,9.060353 -2.025006,-2.025008 1.94712,-1.947122 h 0.155771 l 1.94712,1.947122 z m 7.410751,3.790659 h -2.336549 v -2.336548 h 2.336549 z"
        id="path2"
