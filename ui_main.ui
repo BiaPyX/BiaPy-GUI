@@ -4202,7 +4202,7 @@ QPushButton:pressed {
                             </font>
                            </property>
                            <property name="currentIndex">
-                            <number>1</number>
+                            <number>0</number>
                            </property>
                            <widget class="QWidget" name="train_general_options_tab">
                             <property name="maximumSize">
@@ -4254,7 +4254,7 @@ QPushButton:pressed {
                                 <property name="geometry">
                                  <rect>
                                   <x>0</x>
-                                  <y>-1192</y>
+                                  <y>0</y>
                                   <width>895</width>
                                   <height>5979</height>
                                  </rect>
@@ -12661,8 +12661,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>895</width>
-                                         <height>343</height>
+                                         <width>490</width>
+                                         <height>303</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_18">
@@ -13107,8 +13107,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>895</width>
-                                         <height>343</height>
+                                         <width>823</width>
+                                         <height>183</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_17">
@@ -13510,8 +13510,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>893</width>
-                                         <height>341</height>
+                                         <width>490</width>
+                                         <height>219</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_19">
@@ -13893,8 +13893,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>893</width>
-                                         <height>341</height>
+                                         <width>506</width>
+                                         <height>210</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_49">
@@ -14361,7 +14361,7 @@ QPushButton:pressed {
                                             <widget class="QLabel" name="MODEL__UNET_SR_UPSAMPLE_POSITION__LABEL">
                                              <property name="font">
                                               <font>
-                                              <family>DejaVu Math TeX Gyre</family>
+                                               <family>DejaVu Math TeX Gyre</family>
                                                <pointsize>12</pointsize>
                                               </font>
                                              </property>
@@ -14380,7 +14380,7 @@ QPushButton:pressed {
                                              </property>
                                              <property name="font">
                                               <font>
-                                              <family>DejaVu Math TeX Gyre</family>
+                                               <family>DejaVu Math TeX Gyre</family>
                                                <pointsize>12</pointsize>
                                               </font>
                                              </property>
@@ -14438,8 +14438,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>893</width>
-                                         <height>341</height>
+                                         <width>361</width>
+                                         <height>173</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_51">
@@ -14697,8 +14697,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>893</width>
-                                         <height>341</height>
+                                         <width>346</width>
+                                         <height>44</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_52">

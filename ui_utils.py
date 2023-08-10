@@ -17,10 +17,8 @@ from biapy_check_configuration import check_configuration
 def examine(main_window, save_in_obj_tag=None, is_file=True):
     if not is_file:
         out = QFileDialog.getExistingDirectory(main_window, 'Select a directory')
-        out_write = os.path.basename(os.path.normpath(out))
     else:
         out = QFileDialog.getOpenFileName()[0]
-        out_write = os.path.basename(out)
 
     if out == "": return # If no file was selected 
 
@@ -1035,7 +1033,7 @@ def load_yaml_to_GUI(self):
     try:
         tmp_cfg._C.merge_from_file(yaml_file)
         tmp_cfg = tmp_cfg.get_cfg_defaults()
-        check_configuration(tmp_cfg)
+        check_configuration(tmp_cfg, check_data_paths=False)
     except Exception as errors:  
         errors = str(errors) 
         print(errors) 
@@ -1073,7 +1071,7 @@ def load_yaml_to_GUI(self):
         move_between_pages(self, self.cfg.settings['selected_workflow'])
 
         # Go over configuration file
-        errors, variables_set = analyze_dict(self, loaded_cfg, "")
+        errors, variables_set = analyze_dict(self, loaded_cfg, work_dim, "")
         print("Variables updated: ")
         for i, k in enumerate(variables_set.keys()):
             print("{}. {}: {}".format(i+1, k, variables_set[k]))
@@ -1085,6 +1083,9 @@ def load_yaml_to_GUI(self):
         if len(errors) == 0:
             self.error_exec("Configuration file succesfully loaded! You will "\
                 "be redirected to the workflow page so you can modify the configuration.", "load_yaml_ok")
+            self.cfg.settings['yaml_config_file_path'] = os.path.dirname(yaml_file)
+            self.ui.goptions_browse_yaml_path_input.setText(os.path.dirname(yaml_file))
+            self.ui.goptions_yaml_name_input.setText(os.path.basename(yaml_file))
         else:
             self.error_exec(errors, "load_yaml_ok_but_errors")
 
