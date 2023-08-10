@@ -301,7 +301,7 @@ QPushButton:pressed {
             <string notr="true"/>
            </property>
            <property name="text">
-            <string>The configuration file was created in the following path:</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The configuration file was created in the following path:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -321,6 +321,9 @@ QPushButton:pressed {
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
            <property name="wordWrap">
             <bool>true</bool>

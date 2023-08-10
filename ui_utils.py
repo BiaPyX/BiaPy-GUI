@@ -968,9 +968,15 @@ def create_yaml_file(self):
         return True
 
     # Writing YAML file
-    print("Creating YAML file") 
-    with open(os.path.join(self.cfg.settings['yaml_config_file_path'], self.cfg.settings['yaml_config_filename']), 'w') as outfile:
-        yaml.dump(biapy_config, outfile, default_flow_style=False)
+    replace = True
+    if os.path.exists(os.path.join(self.cfg.settings['yaml_config_file_path'], self.cfg.settings['yaml_config_filename'])):
+        self.yes_no_exec("The file '{}' already exists. Do you want to overwrite it?".format(self.cfg.settings['yaml_config_filename']))
+        replace = True if self.yes_no.answer else False
+        
+    if replace:
+        print("Creating YAML file") 
+        with open(os.path.join(self.cfg.settings['yaml_config_file_path'], self.cfg.settings['yaml_config_filename']), 'w') as outfile:
+            yaml.dump(biapy_config, outfile, default_flow_style=False)
 
     # Update GUI with the new YAML file path
     self.ui.select_yaml_name_label.setText(os.path.join(self.cfg.settings['yaml_config_file_path'], self.cfg.settings['yaml_config_filename']))
@@ -978,10 +984,11 @@ def create_yaml_file(self):
     # Load configuration
     load_yaml_config(self, False)
     
-    # Advise user where the YAML file has been saved 
-    message = "{}".format(os.path.join(self.cfg.settings['yaml_config_file_path'], self.cfg.settings['yaml_config_filename']))
-    self.dialog_exec(message)
-        
+    if replace:
+        # Advise user where the YAML file has been saved 
+        message = "{}".format(os.path.join(self.cfg.settings['yaml_config_file_path'], self.cfg.settings['yaml_config_filename']))
+        self.dialog_exec(message)
+            
     return False
 
 def load_yaml_config(self, checks=True):

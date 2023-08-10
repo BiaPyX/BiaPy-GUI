@@ -144,6 +144,7 @@ class Ui_Dialog(object):
         self.yaml_path_label = QLabel(self.frame_bottom)
         self.yaml_path_label.setObjectName(u"yaml_path_label")
         self.yaml_path_label.setFont(font)
+        self.yaml_path_label.setAlignment(Qt.AlignCenter)
         self.yaml_path_label.setWordWrap(True)
         self.yaml_path_label.setTextInteractionFlags(Qt.LinksAccessibleByMouse)
 
@@ -200,7 +201,7 @@ class Ui_Dialog(object):
         self.lab_heading.setText("")
         self.bn_min.setText("")
         self.bn_close.setText("")
-        self.label.setText(QCoreApplication.translate("Dialog", u"The configuration file was created in the following path:", None))
+        self.label.setText(QCoreApplication.translate("Dialog", u"<html><head/><body><p>The configuration file was created in the following path:</p></body></html>", None))
         self.yaml_path_label.setText("")
         self.ok_bn.setText(QCoreApplication.translate("Dialog", u"OK", None))
     # retranslateUi
