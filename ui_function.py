@@ -418,25 +418,25 @@ class UIFunction(MainWindow):
         # Job name check
         jobname = get_text(self.ui.job_name_input)
         if jobname == "":
-            self.error_exec("Job name can not be empty", "jobname")
+            self.dialog_exec("Job name can not be empty", "jobname")
             return
         if os.path.basename(get_text(self.ui.select_yaml_name_label)) == jobname:
-            self.error_exec("Job name can not have the same name as the configuration file", "jobname")
+            self.dialog_exec("Job name can not have the same name as the configuration file", "jobname")
             return
 
         # Output folder check
         if self.cfg.settings['output_folder'] == "":
-            self.error_exec("Output folder must be defined", "output_folder")
+            self.dialog_exec("Output folder must be defined", "output_folder")
             return 
 
         # Docker installation check
         if not self.cfg.settings['docker_found']:
-            self.error_exec("Docker installation not found. Please, install it before running BiaPy in its\
+            self.dialog_exec("Docker installation not found. Please, install it before running BiaPy in its\
                     <a href=\"https://docs.docker.com/get-docker/\">official documentation</a>. Once you have \
                     done that please restart this application.", "docker_installation")
             return
         if not self.cfg.settings['biapy_container_ready']:
-            self.error_exec("You need to build BiaPy's container first. You will be redirected yo the main page "
+            self.dialog_exec("You need to build BiaPy's container first. You will be redirected yo the main page "
                 "so you can do it.", "docker_installation")
             return
 

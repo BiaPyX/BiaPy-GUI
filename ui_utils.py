@@ -950,20 +950,20 @@ def create_yaml_file(self):
 
     # Checking the directory
     if self.cfg.settings['yaml_config_file_path'] == "":
-        self.error_exec("Configuration file path must be defined", "yaml_config_file_path")
+        self.dialog_exec("Configuration file path must be defined", "yaml_config_file_path")
         return True
     if not os.path.exists(self.cfg.settings['yaml_config_file_path']):
-        self.error_exec("The directory '{}' does not exist. That folder was selected to store the configuration file"\
+        self.dialog_exec("The directory '{}' does not exist. That folder was selected to store the configuration file"\
             .format(self.cfg.settings['yaml_config_file_path']), "yaml_config_file_path")
         return True
 
     # Checking YAML file name
     self.cfg.settings['yaml_config_filename'] = get_text(self.ui.goptions_yaml_name_input)
     if self.cfg.settings['yaml_config_filename'] == "":
-        self.error_exec("The configuration filename must be defined", "goptions_yaml_name_input")
+        self.dialog_exec("The configuration filename must be defined", "goptions_yaml_name_input")
         return True
     if not self.cfg.settings['yaml_config_filename'].endswith(".yaml") and not self.cfg.settings['yaml_config_filename'].endswith(".yml"):
-        self.error_exec("The configuration filename must have .yaml or .yml extension. You should change it to: {}"\
+        self.dialog_exec("The configuration filename must have .yaml or .yml extension. You should change it to: {}"\
             .format(self.cfg.settings['yaml_config_filename']+".yaml"), "goptions_yaml_name_input")
         return True
 
@@ -987,21 +987,21 @@ def create_yaml_file(self):
     if replace:
         # Advise user where the YAML file has been saved 
         message = "{}".format(os.path.join(self.cfg.settings['yaml_config_file_path'], self.cfg.settings['yaml_config_filename']))
-        self.dialog_exec(message)
+        self.dialog_exec(message, reason="inform_user")
             
     return False
 
 def load_yaml_config(self, checks=True):
     if checks:
         if self.cfg.settings['yaml_config_filename'] == "":
-            self.error_exec("A configuration file must be selected", "select_yaml_name_label")
+            self.dialog_exec("A configuration file must be selected", "select_yaml_name_label")
             return False
         yaml_file = get_text(self.ui.select_yaml_name_label)
         if not os.path.exists(yaml_file):
-            self.error_exec("The configuration file does not exist!", "select_yaml_name_label")
+            self.dialog_exec("The configuration file does not exist!", "select_yaml_name_label")
             return False
         if not str(yaml_file).endswith(".yaml") and not str(yaml_file).endswith(".yml"):
-            self.error_exec("The configuration filename must have .yaml or .yml extension", "select_yaml_name_label")
+            self.dialog_exec("The configuration filename must have .yaml or .yml extension", "select_yaml_name_label")
             return False
     self.cfg.settings['biapy_cfg'] = Config("/home/","jobname")
     
@@ -1044,7 +1044,7 @@ def load_yaml_to_GUI(self):
     except Exception as errors:  
         errors = str(errors) 
         print(errors) 
-        self.error_exec(errors, "load_yaml_error")
+        self.dialog_exec(errors, "load_yaml_error")
     else:
         
         # Find the workflow
@@ -1088,13 +1088,13 @@ def load_yaml_to_GUI(self):
 
         # Message for the user
         if len(errors) == 0:
-            self.error_exec("Configuration file succesfully loaded! You will "\
-                "be redirected to the workflow page so you can modify the configuration.", "load_yaml_ok")
+            self.dialog_exec("Configuration file succesfully loaded! You will "\
+                "be redirected to the workflow page so you can modify the configuration.", "inform_user")
             self.cfg.settings['yaml_config_file_path'] = os.path.dirname(yaml_file)
             self.ui.goptions_browse_yaml_path_input.setText(os.path.dirname(yaml_file))
             self.ui.goptions_yaml_name_input.setText(os.path.basename(yaml_file))
         else:
-            self.error_exec(errors, "load_yaml_ok_but_errors")
+            self.dialog_exec(errors, "load_yaml_ok_but_errors")
 
 def analyze_dict(self, d, workflow_str, work_dim, s=""):
     errors = []

@@ -28,6 +28,7 @@ class runBiaPy_Ui(QDialog):
         self.run_window.container_state_label.setText("BiaPy state [ Initializing ]")
         self.run_window.train_progress_bar.setValue(0)
         self.run_window.test_progress_bar.setValue(0)
+        self.setStyleSheet("#centralwidget{ border: 1px solid black;} QWidget{ font-size:16px;}")
         self.dragPos = self.pos()  
         def movedialogWindow(event):
             if event.buttons() == Qt.LeftButton:
@@ -215,7 +216,7 @@ class run_worker(QObject):
                 self.gui.run_window.test_progress_label.setEnabled(False)
                 self.gui.run_window.test_progress_bar.setEnabled(False)
                 self.gui.run_window.test_files_label.setEnabled(False)
-
+            
             # Run container
             self.biapy_container = self.docker_client.containers.run(
                 self.container_name, 

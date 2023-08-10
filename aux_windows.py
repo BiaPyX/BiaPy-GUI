@@ -7,7 +7,6 @@ from PySide2.QtGui import (QDesktopServices, QBrush, QColor, QConicalGradient, Q
 from PySide2.QtWidgets import *
 
 from ui_dialog import Ui_Dialog 
-from ui_error import Ui_Error 
 from ui_yes_no import Ui_yes_no 
 from ui_workflow_info import Ui_Workflow_info 
 from ui_utils import mark_syntax_error, resource_path, buttonPressed
@@ -173,43 +172,12 @@ class workflow_explanation_Ui(QDialog):
         self.signals_created = True
 
 class dialog_Ui(QDialog):
-    def __init__(self, parent=None):
-
-        super(dialog_Ui, self).__init__(parent)
-        self.info_window = Ui_Dialog()
-        self.info_window.setupUi(self)
-        self.setWindowFlags(QtCore.Qt.FramelessWindowHint) 
-        self.info_window.bn_min.clicked.connect(self.showMinimized)
-        self.info_window.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","hide_icon.png"))))
-        self.info_window.bn_close.clicked.connect(self.close)
-        self.info_window.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","close_icon.png"))))
-        self.info_window.ok_bn.clicked.connect(self.close)
-        self.info_window.icon_label.setPixmap(QPixmap(resource_path(os.path.join("images","bn_images","info.png"))))
-        self.info_window.window_des_label.setText("Information")
-        self.setStyleSheet("#centralwidget{ border: 1px solid black;} QWidget{ font-size:16px;}")
-
-        self.dragPos = self.pos()  
-        def movedialogWindow(event):
-            if event.buttons() == Qt.LeftButton:
-                self.move(self.pos() + event.globalPos() - self.dragPos)
-                self.dragPos = event.globalPos()
-                event.accept()
-
-        self.info_window.frame_top.mouseMoveEvent = movedialogWindow  
-
-    def mousePressEvent(self, event):
-        self.dragPos = event.globalPos()
-
-    def dialog_constrict(self, message):
-        self.info_window.yaml_path_label.setText(message)
-
-class error_Ui(QDialog):
     def __init__(self, parent_ui=None):
 
-        super(error_Ui, self).__init__()
-        self.error_window = Ui_Error()
+        super(dialog_Ui, self).__init__()
+        self.dialog_window = Ui_Dialog()
         self.parent_ui = parent_ui
-        self.error_window.setupUi(self)
+        self.dialog_window.setupUi(self)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint) 
         self.upbar_icon = [QPixmap(resource_path(os.path.join("images","bn_images","error.png"))),
                            QPixmap(resource_path(os.path.join("images","bn_images","info.png")))]
@@ -222,55 +190,54 @@ class error_Ui(QDialog):
                 self.dragPos = event.globalPos()
                 event.accept()
 
-        self.error_window.frame_top.mouseMoveEvent = moveErrorWindow  
+        self.dialog_window.frame_top.mouseMoveEvent = moveErrorWindow  
 
     def mousePressEvent(self, event):
         self.dragPos = event.globalPos()
 
-    def error_constrict(self, message, reason):
+    def dialog_constrict(self, message, reason):
         self.setFixedSize(self.width(), 235)
-        self.error_window.window_des_label.setText("Error")
-        self.error_window.icon_label.setPixmap(self.upbar_icon[1])
+        self.dialog_window.window_des_label.setText("Error")
+        self.dialog_window.icon_label.setPixmap(self.upbar_icon[0])
         if reason is not None:
             if reason == "main_window_error":
-                self.error_window.icon_label.setPixmap(self.upbar_icon[0])
-                self.error_window.window_des_label.setText("Error")
-                self.error_window.error_message_label.setText("This error was not expected. Please contact BiaPy developers copying the output of the temporary file: {}".format(message))
-                self.error_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"Close BiaPy GUI", None))
-                self.error_window.go_to_correct_bn.clicked.connect(self.close_all)
+                self.dialog_window.window_des_label.setText("Error")
+                self.dialog_window.error_message_label.setText("This error was not expected. Please contact BiaPy developers copying the output of the temporary file: {}".format(message))
+                self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"Close BiaPy GUI", None))
+                self.dialog_window.go_to_correct_bn.clicked.connect(self.close_all)
             elif reason == "load_yaml_error":
-                self.error_window.icon_label.setPixmap(self.upbar_icon[0])
-                self.error_window.window_des_label.setText("Error")
-                self.error_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"OK", None))
-                self.error_window.error_message_label.setText("Configuration file not loaded because of the following errors:<br>{}".format(message))
-                self.error_window.go_to_correct_bn.clicked.connect(self.close)
-            elif reason == "load_yaml_ok":
-                self.error_window.window_des_label.setText("Information")
-                self.error_window.go_to_correct_bn.setText(QCoreApplication.translate("OK", u"OK", None))
-                self.error_window.error_message_label.setText(message)
-                self.error_window.go_to_correct_bn.clicked.connect(self.close_and_go)
+                self.dialog_window.window_des_label.setText("Error")
+                self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"OK", None))
+                self.dialog_window.error_message_label.setText("Configuration file not loaded because of the following errors:<br>{}".format(message))
+                self.dialog_window.go_to_correct_bn.clicked.connect(self.close)
             elif reason == "load_yaml_ok_but_errors":
-                self.error_window.window_des_label.setText("Information")
-                self.error_window.go_to_correct_bn.setText(QCoreApplication.translate("OK", u"OK", None))
+                self.dialog_window.icon_label.setPixmap(self.upbar_icon[1])
+                self.dialog_window.window_des_label.setText("Information")
+                self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("OK", u"OK", None))
                 m = "Configuration file loaded but with some errors. Please send BiaPy developers\
                     the following errors:"
                 for i, mes in enumerate(message):
                     m += "<br>"+str(i+1)+". {}".format(mes)
-                self.error_window.error_message_label.setText(m)
-                self.error_window.go_to_correct_bn.clicked.connect(self.close_and_go)
+                self.dialog_window.error_message_label.setText(m)
+                self.dialog_window.go_to_correct_bn.clicked.connect(self.close_and_go)
+            elif reason == "inform_user":
+                self.dialog_window.icon_label.setPixmap(self.upbar_icon[1])
+                self.dialog_window.window_des_label.setText("Information")
+                self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("OK", u"OK", None))
+                self.dialog_window.error_message_label.setText(message)
+                self.dialog_window.go_to_correct_bn.clicked.connect(self.close_and_go)
             else:
                 self.setFixedSize(self.width(), self.minimumSizeHint().height())
                 if reason == "docker_installation":
-                    self.error_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"OK", None))
+                    self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"OK", None))
                 else:
-                    self.error_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"Go to correct", None))
-                self.error_window.go_to_correct_bn.clicked.connect(lambda: self.run_func_and_close(reason))
-                self.error_window.error_message_label.setText(message)
+                    self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"Go to correct", None))
+                self.dialog_window.go_to_correct_bn.clicked.connect(lambda: self.run_func_and_close(reason))
+                self.dialog_window.error_message_label.setText(message)
         else:
-            self.error_window.icon_label.setPixmap(self.upbar_icon[0])
-            self.error_window.error_message_label.setText("<b>This error was not expected. Please contact BiaPy developers with the following message:</b><br><br>"+message)
-            self.error_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"Close BiaPy GUI", None))
-            self.error_window.go_to_correct_bn.clicked.connect(self.close_all)
+            self.dialog_window.error_message_label.setText("<b>This error was not expected. Please contact BiaPy developers with the following message:</b><br><br>"+message)
+            self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"Close BiaPy GUI", None))
+            self.dialog_window.go_to_correct_bn.clicked.connect(self.close_all)
 
     def close_and_go(self):
         buttonPressed(self.parent_ui, 'bn_workflow', 99)

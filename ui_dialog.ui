@@ -12,8 +12,8 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>600</width>
-    <height>235</height>
+    <width>0</width>
+    <height>0</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -86,7 +86,7 @@
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true"/>
+         <string notr="true">background:rgb(255,255,255);</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
@@ -96,7 +96,7 @@
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <property name="spacing">
-          <number>0</number>
+          <number>9</number>
          </property>
          <property name="leftMargin">
           <number>0</number>
@@ -124,8 +124,14 @@
              <height>40</height>
             </size>
            </property>
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
+           </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -143,117 +149,17 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="lab_heading">
-           <property name="font">
-            <font>
-             <family>DejaVu Math TeX Gyre</family>
-             <pointsize>12</pointsize>
-            </font>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
            </property>
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="bn_min">
-           <property name="minimumSize">
+           <property name="sizeHint" stdset="0">
             <size>
-             <width>55</width>
-             <height>40</height>
+             <width>40</width>
+             <height>20</height>
             </size>
            </property>
-           <property name="maximumSize">
-            <size>
-             <width>55</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton {
-	border: none;
-	background-color: rgba(0,0,0,0);
-}
-QPushButton:hover {
-	background-color: rgb(64,144,253);
-}
-QPushButton:pressed {	
-	background-color: rgba(0,0,0,0);
-}</string>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset>
-             <normaloff>images/bn_images/hide_icon.png</normaloff>images/bn_images/hide_icon.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>22</width>
-             <height>12</height>
-            </size>
-           </property>
-           <property name="autoDefault">
-            <bool>false</bool>
-           </property>
-           <property name="flat">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="bn_close">
-           <property name="minimumSize">
-            <size>
-             <width>55</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>55</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton {
-	border: none;
-	background-color: rgba(0,0,0,0);
-}
-QPushButton:hover {
-	background-color: rgb(64,144,253);
-}
-QPushButton:pressed {	
-	background-color: rgba(0,0,0,0);
-}</string>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset>
-             <normaloff>images/bn_images/close_icon.png</normaloff>images/bn_images/close_icon.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>22</width>
-             <height>22</height>
-            </size>
-           </property>
-           <property name="autoDefault">
-            <bool>false</bool>
-           </property>
-           <property name="flat">
-            <bool>true</bool>
-           </property>
-          </widget>
+          </spacer>
          </item>
         </layout>
        </widget>
@@ -289,48 +195,67 @@ QPushButton:pressed {
           <number>0</number>
          </property>
          <item>
-          <widget class="QLabel" name="label">
-           <property name="font">
-            <font>
-             <family>DejaVu Math TeX Gyre</family>
-             <pointsize>12</pointsize>
-             <kerning>true</kerning>
-            </font>
+          <widget class="QScrollArea" name="scrollArea">
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
            </property>
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
-           <property name="text">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The configuration file was created in the following path:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-           <property name="wordWrap">
+           <property name="widgetResizable">
             <bool>true</bool>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="yaml_path_label">
-           <property name="font">
-            <font>
-             <family>DejaVu Math TeX Gyre</family>
-             <pointsize>12</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
-           </property>
-           <property name="textInteractionFlags">
-            <set>Qt::LinksAccessibleByMouse</set>
-           </property>
+           <widget class="QWidget" name="scrollAreaWidgetContents">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>578</width>
+              <height>152</height>
+             </rect>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="error_message_label">
+               <property name="font">
+                <font>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background:rgb(255,255,255);</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+               <property name="openExternalLinks">
+                <bool>true</bool>
+               </property>
+               <property name="textInteractionFlags">
+                <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
           </widget>
          </item>
          <item>
@@ -358,16 +283,16 @@ QPushButton:pressed {
              <number>0</number>
             </property>
             <item>
-             <widget class="QPushButton" name="ok_bn">
+             <widget class="QPushButton" name="go_to_correct_bn">
               <property name="minimumSize">
                <size>
-                <width>50</width>
+                <width>150</width>
                 <height>30</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>50</width>
+                <width>150</width>
                 <height>16777215</height>
                </size>
               </property>
@@ -380,8 +305,8 @@ QPushButton:pressed {
               <property name="styleSheet">
                <string notr="true">QPushButton {
 	border: none;
-	background-color: rgb(64,144,253);
 	border-radius: 15px;
+	background-color: rgb(64,144,253);
 }
 QPushButton:hover {
 	background-color: rgb(255,255,255);
@@ -393,7 +318,7 @@ QPushButton:pressed {
 }</string>
               </property>
               <property name="text">
-               <string>OK</string>
+               <string>Go to correct</string>
               </property>
              </widget>
             </item>

@@ -26,6 +26,7 @@ class buildBiapy_Ui(QDialog):
         self.run_window.bn_min.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","hide_icon.png"))))
         self.run_window.icon_label.setPixmap(QPixmap(resource_path(os.path.join("images","bn_images","info.png"))))
         self.run_window.build_progress_bar.setValue(0)
+        self.setStyleSheet("#centralwidget{ border: 1px solid black;} QWidget{ font-size:16px;}")
         self.progress_first_time = True
 
         self.dragPos = self.pos()  

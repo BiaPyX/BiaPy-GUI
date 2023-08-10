@@ -18,7 +18,7 @@ class Ui_Dialog(object):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
         Dialog.resize(600, 235)
-        Dialog.setMinimumSize(QSize(600, 235))
+        Dialog.setMinimumSize(QSize(0, 0))
         Dialog.setMaximumSize(QSize(600, 235))
         Dialog.setStyleSheet(u"background:rgb(255,255,255);")
         self.verticalLayout = QVBoxLayout(Dialog)
@@ -38,17 +38,19 @@ class Ui_Dialog(object):
         self.frame_top.setObjectName(u"frame_top")
         self.frame_top.setMinimumSize(QSize(0, 40))
         self.frame_top.setMaximumSize(QSize(16777215, 40))
-        self.frame_top.setStyleSheet(u"")
+        self.frame_top.setStyleSheet(u"background:rgb(255,255,255);")
         self.frame_top.setFrameShape(QFrame.NoFrame)
         self.frame_top.setFrameShadow(QFrame.Plain)
         self.horizontalLayout = QHBoxLayout(self.frame_top)
-        self.horizontalLayout.setSpacing(0)
+        self.horizontalLayout.setSpacing(9)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.icon_label = QLabel(self.frame_top)
         self.icon_label.setObjectName(u"icon_label")
         self.icon_label.setMinimumSize(QSize(40, 40))
         self.icon_label.setMaximumSize(QSize(40, 40))
+        self.icon_label.setFrameShape(QFrame.NoFrame)
+        self.icon_label.setScaledContents(True)
 
         self.horizontalLayout.addWidget(self.icon_label)
 
@@ -61,59 +63,9 @@ class Ui_Dialog(object):
 
         self.horizontalLayout.addWidget(self.window_des_label)
 
-        self.lab_heading = QLabel(self.frame_top)
-        self.lab_heading.setObjectName(u"lab_heading")
-        self.lab_heading.setFont(font)
-        self.lab_heading.setStyleSheet(u"")
-        self.lab_heading.setAlignment(Qt.AlignCenter)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.horizontalLayout.addWidget(self.lab_heading)
-
-        self.bn_min = QPushButton(self.frame_top)
-        self.bn_min.setObjectName(u"bn_min")
-        self.bn_min.setMinimumSize(QSize(55, 40))
-        self.bn_min.setMaximumSize(QSize(55, 40))
-        self.bn_min.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgba(0,0,0,0);\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(64,144,253);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgba(0,0,0,0);\n"
-"}")
-        icon = QIcon()
-        icon.addFile(u"images/bn_images/hide_icon.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.bn_min.setIcon(icon)
-        self.bn_min.setIconSize(QSize(22, 12))
-        self.bn_min.setAutoDefault(False)
-        self.bn_min.setFlat(True)
-
-        self.horizontalLayout.addWidget(self.bn_min)
-
-        self.bn_close = QPushButton(self.frame_top)
-        self.bn_close.setObjectName(u"bn_close")
-        self.bn_close.setMinimumSize(QSize(55, 40))
-        self.bn_close.setMaximumSize(QSize(55, 40))
-        self.bn_close.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgba(0,0,0,0);\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(64,144,253);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgba(0,0,0,0);\n"
-"}")
-        icon1 = QIcon()
-        icon1.addFile(u"images/bn_images/close_icon.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.bn_close.setIcon(icon1)
-        self.bn_close.setIconSize(QSize(22, 22))
-        self.bn_close.setAutoDefault(False)
-        self.bn_close.setFlat(True)
-
-        self.horizontalLayout.addWidget(self.bn_close)
+        self.horizontalLayout.addItem(self.horizontalSpacer)
 
 
         self.verticalLayout_2.addWidget(self.frame_top)
@@ -128,27 +80,33 @@ class Ui_Dialog(object):
         self.verticalLayout_3.setSpacing(0)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_3.setContentsMargins(9, -1, 9, 0)
-        self.label = QLabel(self.frame_bottom)
-        self.label.setObjectName(u"label")
+        self.scrollArea = QScrollArea(self.frame_bottom)
+        self.scrollArea.setObjectName(u"scrollArea")
+        self.scrollArea.setFrameShape(QFrame.NoFrame)
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollAreaWidgetContents = QWidget()
+        self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 578, 152))
+        self.verticalLayout_4 = QVBoxLayout(self.scrollAreaWidgetContents)
+        self.verticalLayout_4.setSpacing(0)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.error_message_label = QLabel(self.scrollAreaWidgetContents)
+        self.error_message_label.setObjectName(u"error_message_label")
         font1 = QFont()
-        font1.setFamily(u"DejaVu Math TeX Gyre")
         font1.setPointSize(12)
-        font1.setKerning(True)
-        self.label.setFont(font1)
-        self.label.setStyleSheet(u"")
-        self.label.setAlignment(Qt.AlignCenter)
-        self.label.setWordWrap(True)
+        self.error_message_label.setFont(font1)
+        self.error_message_label.setStyleSheet(u"background:rgb(255,255,255);")
+        self.error_message_label.setAlignment(Qt.AlignCenter)
+        self.error_message_label.setWordWrap(True)
+        self.error_message_label.setOpenExternalLinks(True)
+        self.error_message_label.setTextInteractionFlags(Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
-        self.verticalLayout_3.addWidget(self.label)
+        self.verticalLayout_4.addWidget(self.error_message_label)
 
-        self.yaml_path_label = QLabel(self.frame_bottom)
-        self.yaml_path_label.setObjectName(u"yaml_path_label")
-        self.yaml_path_label.setFont(font)
-        self.yaml_path_label.setAlignment(Qt.AlignCenter)
-        self.yaml_path_label.setWordWrap(True)
-        self.yaml_path_label.setTextInteractionFlags(Qt.LinksAccessibleByMouse)
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
-        self.verticalLayout_3.addWidget(self.yaml_path_label)
+        self.verticalLayout_3.addWidget(self.scrollArea)
 
         self.frame = QFrame(self.frame_bottom)
         self.frame.setObjectName(u"frame")
@@ -158,15 +116,15 @@ class Ui_Dialog(object):
         self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.ok_bn = QPushButton(self.frame)
-        self.ok_bn.setObjectName(u"ok_bn")
-        self.ok_bn.setMinimumSize(QSize(50, 30))
-        self.ok_bn.setMaximumSize(QSize(50, 16777215))
-        self.ok_bn.setFont(font)
-        self.ok_bn.setStyleSheet(u"QPushButton {\n"
+        self.go_to_correct_bn = QPushButton(self.frame)
+        self.go_to_correct_bn.setObjectName(u"go_to_correct_bn")
+        self.go_to_correct_bn.setMinimumSize(QSize(150, 30))
+        self.go_to_correct_bn.setMaximumSize(QSize(150, 16777215))
+        self.go_to_correct_bn.setFont(font)
+        self.go_to_correct_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
-"	background-color: rgb(64,144,253);\n"
 "	border-radius: 15px;\n"
+"	background-color: rgb(64,144,253);\n"
 "}\n"
 "QPushButton:hover {\n"
 "	background-color: rgb(255,255,255);\n"
@@ -177,7 +135,7 @@ class Ui_Dialog(object):
 "	border: 2px solid rgb(0, 0, 0);\n"
 "}")
 
-        self.horizontalLayout_2.addWidget(self.ok_bn)
+        self.horizontalLayout_2.addWidget(self.go_to_correct_bn)
 
 
         self.verticalLayout_3.addWidget(self.frame)
@@ -198,11 +156,7 @@ class Ui_Dialog(object):
         Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
         self.icon_label.setText("")
         self.window_des_label.setText(QCoreApplication.translate("Dialog", u"TextLabel", None))
-        self.lab_heading.setText("")
-        self.bn_min.setText("")
-        self.bn_close.setText("")
-        self.label.setText(QCoreApplication.translate("Dialog", u"<html><head/><body><p>The configuration file was created in the following path:</p></body></html>", None))
-        self.yaml_path_label.setText("")
-        self.ok_bn.setText(QCoreApplication.translate("Dialog", u"OK", None))
+        self.error_message_label.setText("")
+        self.go_to_correct_bn.setText(QCoreApplication.translate("Dialog", u"Go to correct", None))
     # retranslateUi
 

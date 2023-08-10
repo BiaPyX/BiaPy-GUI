@@ -15,7 +15,7 @@ from ui_function import *
 from ui_utils import (examine, combobox_hide_visible_action, mark_syntax_error, expand_hide_advanced_options, buttonPressed, 
     load_yaml_config, resource_path, load_yaml_to_GUI)
 from settings import Settings
-from aux_windows import dialog_Ui, error_Ui, workflow_explanation_Ui, yes_no_Ui
+from aux_windows import dialog_Ui, workflow_explanation_Ui, yes_no_Ui
 
 os.environ['QT_MAC_WANTS_LAYER'] = '1'
 
@@ -621,9 +621,8 @@ class MainWindow(QMainWindow):
         self.ui.check_yaml_file_bn.clicked.connect(lambda: load_yaml_config(self))
         self.ui.run_biapy_docker_bn.clicked.connect(lambda: UIFunction.run_biapy(self))
 
-        self.diag = None
         self.yes_no = None
-        self.error = None
+        self.diag = None
         self.wokflow_info = None
 
         self.dragPos = self.pos()
@@ -756,21 +755,13 @@ class MainWindow(QMainWindow):
     def mousePressEvent(self, event):
         self.dragPos = event.globalPos()
     
-    def dialog_exec(self, message):
+    def dialog_exec(self, message, reason):
         if self.diag is None: 
-            self.diag = dialog_Ui()
-            
-        self.diag.dialog_constrict(message)
+            self.diag = dialog_Ui(self)
+
+        self.diag.dialog_constrict(message, reason)
         center_window(self.diag, self.geometry())
         self.diag.exec_()
-    
-    def error_exec(self, message, reason):
-        if self.error is None: 
-            self.error = error_Ui(self)
-
-        self.error.error_constrict(message, reason)
-        center_window(self.error, self.geometry())
-        self.error.exec_()
 
     def workflow_info_exec(self, workflow_name, workflow_images, workflow_description, 
         workflow_doc, workflow_ready_to_use_examples):
@@ -840,8 +831,8 @@ if __name__ == "__main__":
         logger.error(traceback.format_exc())
         
         # Advise the user for the error
-        error = error_Ui(window) if window is not None else error_Ui()
-        error.error_constrict(log_file, "main_window_error")
+        error = dialog_Ui(window) if window is not None else dialog_Ui()
+        error.dialog_constrict(log_file, "main_window_error")
         error.exec_()
         
         # Print the error in command line for debugging 
