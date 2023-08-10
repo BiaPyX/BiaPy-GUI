@@ -772,12 +772,14 @@ class MainWindow(QMainWindow):
         center_window(self.error, self.geometry())
         self.error.exec_()
 
-    def workflow_info_exec(self, workflow_name, workflow_images, workflow_description):
+    def workflow_info_exec(self, workflow_name, workflow_images, workflow_description, 
+        workflow_doc, workflow_ready_to_use_examples):
         if self.wokflow_info is None: 
             self.wokflow_info = workflow_explanation_Ui()
             
         self.wokflow_info.infoConstrict(workflow_name, workflow_images[0], 
-            workflow_images[1], workflow_description)
+            workflow_images[1], workflow_description, workflow_doc, 
+            workflow_ready_to_use_examples)
         center_window(self.wokflow_info, self.geometry())
         self.wokflow_info.exec_()
 

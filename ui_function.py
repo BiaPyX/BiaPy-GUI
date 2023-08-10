@@ -47,6 +47,9 @@ class UIFunction(MainWindow):
             self.cfg.settings['init'] = True
     
     def obtain_workflow_description(self):
+        """
+        Starts workflow description page. 
+        """
         # Load first time
         if not 'workflow_description_images' in self.cfg.settings:
             self.cfg.load_workflow_detail_page()
@@ -60,7 +63,10 @@ class UIFunction(MainWindow):
         workflow_name = self.cfg.settings['workflow_names'][s_workflow].replace("\n"," ") 
         workflow_images = self.cfg.settings['workflow_description_images'][s_workflow]
         workflow_description = self.cfg.settings['workflow_descriptions'][s_workflow]
-        self.workflow_info_exec(workflow_name, workflow_images, workflow_description)
+        workflow_ready_examples = self.cfg.settings['ready_to_use_workflows'][s_workflow]
+        workflow_doc = self.cfg.settings['workflow_description_doc'][s_workflow]
+        self.workflow_info_exec(workflow_name, workflow_images, workflow_description, workflow_doc,
+            workflow_ready_examples)
 
     ###########
     # Home page 

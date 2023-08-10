@@ -15,3 +15,6 @@ shiboken2==5.15.2.1
 urllib3==1.26.15
 websocket-client==1.5.1
 yacs==0.1.6
+wget==3.2
+gdown==4.7.1
+GPUtil==1.4.0

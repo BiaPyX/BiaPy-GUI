@@ -1,8 +1,10 @@
 import os
+import gdown
+import wget
 
 from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtCore import (QThread, QCoreApplication, QPropertyAnimation, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
-from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
+from PySide2.QtGui import (QDesktopServices, QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
 from PySide2.QtWidgets import *
 
 from ui_dialog import Ui_Dialog 
@@ -25,6 +27,7 @@ class workflow_explanation_Ui(QDialog):
         self.workflow_info_window.icon_label.setPixmap(QPixmap(resource_path(os.path.join("images","bn_images","info.png"))))
         self.setStyleSheet("#centralwidget{ border: 1px solid black;} QWidget{ font-size:16px;}")
         self.workflow_info_window.window_des_label.setText("Workflow information")
+        self.number_of_ready_to_use_examples = 10
 
         self.dragPos = self.pos()  
         def movedialogWindow(event):
@@ -35,10 +38,102 @@ class workflow_explanation_Ui(QDialog):
 
         self.workflow_info_window.frame_top.mouseMoveEvent = movedialogWindow  
 
+        # Create ready to use example's frames 
+        icon1 = QIcon()
+        icon1.addFile(resource_path(os.path.join("images","ready_to_use_examples","dataset_bn.svg")), QSize(), QIcon.Normal, QIcon.Off)
+        icon2 = QIcon()
+        icon2.addFile(resource_path(os.path.join("images","ready_to_use_examples","template_bn.svg")), QSize(), QIcon.Normal, QIcon.Off)
+        font = QFont()
+        font.setFamily(u"DejaVu Math TeX Gyre")
+        font.setPointSize(12)
+        self.ready_to_use_examples_frames = []
+        self.ready_to_use_examples_images = []
+        self.ready_to_use_examples_headings = []
+        self.ready_to_use_examples_datasets = []
+        self.ready_to_use_examples_templates = []
+        for i in range(self.number_of_ready_to_use_examples):
+            # Create the frame
+            self.ready_to_use_examples_frames.append(QFrame(self.workflow_info_window.ready_to_use_samples_frame))
+            self.ready_to_use_examples_frames[-1].setObjectName(u"ready_to_use_examples_frame_{}".format(i))
+            self.ready_to_use_examples_frames[-1].setStyleSheet(
+                "#ready_to_use_examples_frame_{}".format(i)+
+                "{\nborder: 2px solid rgb(64,144,253);\nborder-radius: 15px;\n}")
+            self.ready_to_use_examples_frames[-1].setFrameShape(QFrame.StyledPanel)
+            self.ready_to_use_examples_frames[-1].setFrameShadow(QFrame.Raised)
+            self.ready_to_use_examples_frames[-1].setMaximumSize(QSize(360, 143))
+            self.ready_to_use_examples_frames[-1].setMinimumSize(QSize(360, 143))
+            self.workflow_info_window.gridLayout_2.addWidget(self.ready_to_use_examples_frames[-1], i//2, i%2, 1, 1)
+
+            # Image
+            self.ready_to_use_examples_images.append(QLabel(self.ready_to_use_examples_frames[-1]))
+            self.ready_to_use_examples_images[-1].setObjectName("ready_to_use_examples_image_{}".format(i))
+            self.ready_to_use_examples_images[-1].setGeometry(QRect(20, 34, 91, 91))
+            self.ready_to_use_examples_images[-1].setPixmap(QPixmap(u"images/ready_to_use_examples/classification_2d_butterfly.jpg"))
+            self.ready_to_use_examples_images[-1].setScaledContents(True)
+
+            # Heading
+            self.ready_to_use_examples_headings.append(QLabel(self.ready_to_use_examples_frames[-1]))
+            self.ready_to_use_examples_headings[-1].setObjectName("ready_to_use_examples_head_{}".format(i))
+            self.ready_to_use_examples_headings[-1].setGeometry(QRect(13, 10, 330, 20))
+            self.ready_to_use_examples_headings[-1].setFont(font)
+
+            # Dataset bn
+            self.ready_to_use_examples_datasets.append(QPushButton(self.ready_to_use_examples_frames[-1]))
+            self.ready_to_use_examples_datasets[-1].setObjectName("ready_to_use_examples_dataset_{}".format(i))
+            self.ready_to_use_examples_datasets[-1].setGeometry(QRect(130, 34, 155, 41))
+            self.ready_to_use_examples_datasets[-1].setIcon(icon1)
+            self.ready_to_use_examples_datasets[-1].setIconSize(QSize(140, 400))
+            self.ready_to_use_examples_datasets[-1].setStyleSheet(u"QPushButton {\n"
+            "	border: none;\n"
+            "	background-color: rgb(255,255,255);\n"
+            "	border-radius: 15px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "	background-color: rgb(255,255,255);\n"
+            "	border: 2px solid rgb(0, 0, 0);\n"
+            "}\n"
+            "QPushButton:pressed {	\n"
+            "	background-color: rgb(255,255,255);\n"
+            "	border: 2px solid rgb(0, 0, 0);\n"
+            "}")
+            self.ready_to_use_examples_datasets[-1].clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://github.com/danifranco/BiaPy")))
+            self.ready_to_use_examples_datasets[-1].setToolTip("<html><head/><body><p><span style=\" font-size:12pt;\">"
+                "Download dataset</span></p></body></html>")
+
+            # Template bn         
+            self.ready_to_use_examples_templates.append(QPushButton(self.ready_to_use_examples_frames[-1]))
+            self.ready_to_use_examples_templates[-1].setObjectName("ready_to_use_examples_temp_{}".format(i))
+            self.ready_to_use_examples_templates[-1].setGeometry(QRect(130, 84, 155, 41))
+            self.ready_to_use_examples_templates[-1].setIcon(icon2)
+            self.ready_to_use_examples_templates[-1].setIconSize(QSize(140, 400))
+            self.ready_to_use_examples_templates[-1].setStyleSheet(u"QPushButton {\n"
+            "	border: none;\n"
+            "	background-color: rgb(255,255,255);\n"
+            "	border-radius: 15px;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "	background-color: rgb(255,255,255);\n"
+            "	border: 2px solid rgb(0, 0, 0);\n"
+            "}\n"
+            "QPushButton:pressed {	\n"
+            "	background-color: rgb(255,255,255);\n"
+            "	border: 2px solid rgb(0, 0, 0);\n"
+            "}")
+            self.ready_to_use_examples_templates[-1].setToolTip("<html><head/><body><p><span style=\" font-size:12pt;\">"
+                "Download template</span></p></body></html>")
+
     def mousePressEvent(self, event):
         self.dragPos = event.globalPos()
 
-    def infoConstrict(self, workflow_name, input_img, gt_img, workflow_description):
+    def download_item(self, id):
+        directory = QFileDialog.getExistingDirectory(self, 'Select a directory')
+        if "http" in id:
+            filename = wget.download(id)
+        else:
+            gdown.download(id=id, output=directory)
+
+    def infoConstrict(self, workflow_name, input_img, gt_img, workflow_description, 
+        workflow_doc, workflow_ready_to_use_examples):
         self.workflow_info_window.workflow_name_label.setText(workflow_name)
         self.workflow_info_window.input_image_label.setPixmap(input_img)
         self.workflow_info_window.gt_image_label.setPixmap(gt_img)
@@ -47,6 +142,21 @@ class workflow_explanation_Ui(QDialog):
             self.workflow_info_window.gt_description_label.setText("Output")
         else:
             self.workflow_info_window.gt_description_label.setText("Ground truth")
+        self.workflow_info_window.documentation_bn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl(workflow_doc)))
+        self.workflow_info_window.documentation_bn.setToolTip("<html><head/><body><p><span style=\" font-size:12pt;\">"
+                "Open {} documentation</span></p></body></html>".format(workflow_name.lower()))
+
+        c = 0
+        for x in workflow_ready_to_use_examples:
+            self.ready_to_use_examples_headings[c].setText(x['name'])
+            self.ready_to_use_examples_images[c].setPixmap(x['image'])
+            self.ready_to_use_examples_templates[c].clicked.connect(lambda: self.download_item(x['template']))
+            self.ready_to_use_examples_frames[c].setVisible(True)
+            c += 1
+
+        # Hide the rest not used 
+        for i in range(c, self.number_of_ready_to_use_examples):
+            self.ready_to_use_examples_frames[i].setVisible(False)
 
 class dialog_Ui(QDialog):
     def __init__(self, parent=None):

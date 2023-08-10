@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="65mm"
+   height="20mm"
+   viewBox="0 0 65 20"
+   version="1.1"
+   id="svg9088"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="dataset_bn.svg"
+   inkscape:export-filename="/home/dfranco/Documents/0.thesis/BiaPy-GUI-arg4/images/ready_to_use_examples/dataset_bn.png"
+   inkscape:export-xdpi="51.9044"
+   inkscape:export-ydpi="51.9044"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview9090"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="3.6233469"
+     inkscape:cx="78.656558"
+     inkscape:cy="68.031023"
+     inkscape:window-width="1551"
+     inkscape:window-height="970"
+     inkscape:window-x="26"
+     inkscape:window-y="23"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs9085" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-22.088377,-36.736211)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.85493px;line-height:1.25;font-family:'DejaVu Math TeX Gyre';-inkscape-font-specification:'DejaVu Math TeX Gyre, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.196373"
+       x="46.580696"
+       y="49.906693"
+       id="text3728"><tspan
+         sodipodi:role="line"
+         id="tspan3726"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.11389px;font-family:'DejaVu Math TeX Gyre';-inkscape-font-specification:'DejaVu Math TeX Gyre, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.196373"
+         x="46.580696"
+         y="49.906693">Dataset</tspan></text>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#text3728"
+       id="use2771"
+       width="100%"
+       height="100%" />
+    <g
+       id="g2043"
+       transform="matrix(0.50339236,0,0,0.65957938,21.114326,24.773524)"
+       style="stroke:#000000;stroke-width:0.867727;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
+      <path
+         d="m 21.086882,23.586081 c -4.947836,0 -9.955405,1.351434 -9.955405,3.932743 v 12.385952 c 0,2.708826 5.129025,4.171091 9.955405,4.171091 4.82638,0 9.955405,-1.462265 9.955405,-4.171091 V 27.518824 c 0,-2.581309 -5.007569,-3.932743 -9.955405,-3.932743 z m 0,19.298046 c -5.551134,0 -8.959864,-1.735174 -8.959864,-2.979351 v -4.618188 c 1.700383,1.397911 5.34207,2.123681 8.959864,2.123681 3.617794,0 7.259481,-0.726961 8.959864,-2.123681 v 4.618188 c 0,1.244177 -3.40873,2.979351 -8.959864,2.979351 z m 0,-6.665598 c -5.469499,0 -8.959864,-1.624342 -8.959864,-2.741003 v -4.14964 c 1.700383,1.397912 5.34207,2.123682 8.959864,2.123682 3.617794,0 7.259481,-0.726962 8.959864,-2.123682 v 4.14964 c 0,1.117853 -3.490365,2.741003 -8.959864,2.741003 z m 0,-5.958702 c -5.469499,0 -8.959864,-1.624342 -8.959864,-2.741003 0,-1.11666 3.490365,-2.741002 8.959864,-2.741002 5.469499,0 8.959864,1.62315 8.959864,2.741002 0,1.117853 -3.490365,2.741003 -8.959864,2.741003 z"
+         id="path2031"
+         style="stroke:#000000;stroke-width:0.945156;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         sodipodi:nodetypes="ssssssssscscsssscscsssssss" />
+    </g>
+  </g>
+</svg>

@@ -80,7 +80,7 @@ class Settings():
         # Classification
         self.settings['classification_models'] = ['ViT', 'simple_cnn', 'EfficientNetB0']
         self.settings['classification_models_real_names'] = ['ViT', 'EfficientNetB0', 'Simple CNN']
-
+        
         # Paths
         self.settings['train_data_input_path'] = None
         self.settings['train_data_gt_input_path'] = None
@@ -120,6 +120,128 @@ class Settings():
             [QPixmap(resource_path(os.path.join("images","sr_raw.png"))),QPixmap(resource_path(os.path.join("images","sr_pred.png")))],
             [QPixmap(resource_path(os.path.join("images","ssl_raw.png"))),QPixmap(resource_path(os.path.join("images","ssl_pred.png")))],
             [QPixmap(resource_path(os.path.join("images","classification_raw.png"))),QPixmap(resource_path(os.path.join("images","classification_label.png")))]
+        ]
+        self.settings['workflow_description_doc'] = [
+            "https://biapy.readthedocs.io/en/latest/workflows/semantic_segmentation.html",
+            "https://biapy.readthedocs.io/en/latest/workflows/instance_segmentation.html",
+            "https://biapy.readthedocs.io/en/latest/workflows/detection.html",
+            "https://biapy.readthedocs.io/en/latest/workflows/denoising.html",
+            "https://biapy.readthedocs.io/en/latest/workflows/super_resolution.html",
+            "https://biapy.readthedocs.io/en/latest/workflows/self_supervision.html",
+            "https://biapy.readthedocs.io/en/latest/workflows/classification.html"
+        ]
+
+        self.settings['ready_to_use_workflows'] = [
+            [ # Semantic segmentation
+                {
+                    'name': 'Embryo wound segmentation (2D)', 
+                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'semantic_seg_2d_droso_embryo.png'))), 
+                    'data': 'https://drive.google.com/file/d/1qehkWYVJRXfMwvbpayKhb4nmPyYvclAj/view?usp=sharing', 
+                    'template': 'https://github.com/danifranco/BiaPy/blob/master/templates/semantic_segmentation/2d_semantic_segmentation.yaml'
+                },
+                {
+                    'name': 'Mitochondria segmentation (3D)', 
+                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'semantic_seg_3d_mitochondria.png'))), 
+                    'data': 'https://drive.google.com/file/d/10Cf11PtERq4pDHCJroekxu_hf10EZzwG/view?usp=drive_link', 
+                    'template': 'https://github.com/danifranco/BiaPy/blob/master/templates/semantic_segmentation/3d_semantic_segmentation.yaml'
+                }
+            ],
+            [ # Instance segmentation
+                {
+                    'name': 'Cell instance segmentation (2D)', 
+                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'instance_seg_2d_cell.png'))), 
+                    'data': 'https://drive.google.com/file/d/1b7_WDDGEEaEoIpO_1EefVr0w0VQaetmg/view?usp=drive_link', 
+                    'template': 'https://github.com/danifranco/BiaPy/blob/master/templates/instance_segmentation/2d_instances_segmentation.yaml.yaml'
+                },
+                {
+                    'name': 'Nuclei instance segmentation (3D)', 
+                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'instance_seg_3d_nuclei.png'))), 
+                    'data': 'https://drive.google.com/file/d/1fdL35ZTNw5hhiKau1gadaGu-rc5ZU_C7/view?usp=drive_link', 
+                    'template': 'https://github.com/danifranco/BiaPy/blob/master/templates/instance_segmentation/3d_instances_segmentation.yaml.yaml'
+                },
+            ],
+            [ # Detection
+                {
+                    'name': 'Cell detection (2D)', 
+                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'instance_seg_2d_cell.png'))), 
+                    'data': 'https://drive.google.com/file/d/1pWqQhcWY15b5fVLZDkPS-vnE-RU6NlYf/view?usp=drive_link', 
+                    'template': 'https://github.com/danifranco/BiaPy/blob/master/templates/detection/2d_detection.yaml'
+                },
+                {
+                    'name': 'Nuclei detection (3D)', 
+                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'detection_3d_nuclei.png'))), 
+                    'data': 'https://drive.google.com/file/d/19P4AcvBPJXeW7QRj92Jh1keunGa5fi8d/view?usp=drive_link', 
+                    'template': 'https://github.com/danifranco/BiaPy/blob/master/templates/detection/3d_detection.yaml'
+                }
+            ],
+            [ # Denoising
+                {
+                    'name': 'C. Majalist denoising (2D)', 
+                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'denoising_2d_c_majalis.png'))), 
+                    'data': 'https://drive.google.com/file/d/1TFvOySOiIgVIv9p4pbHdEbai-d2YGDvV/view?usp=drive_link', 
+                    'template': 'https://github.com/danifranco/BiaPy/blob/master/templates/denoising/2d_denoising.yaml'
+                },
+                {
+                    'name': 'Fly wing denoising (3D)', 
+                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'denoising_3d_flywing.png'))), 
+                    'data': 'https://drive.google.com/file/d/1OIjnUoJKdnbClBlpzk7V5R8wtoLont-r/view?usp=drive_link', 
+                    'template': 'https://github.com/danifranco/BiaPy/blob/master/templates/denoising/3d_denoising.yaml'
+                }
+            ],
+            [ # SR
+                {
+                    'name': 'F-actin super-resolution (2D)', 
+                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'sr_2d_factin.png'))), 
+                    'data': 'https://drive.google.com/file/d/1rtrR_jt8hcBEqvwx_amFBNR7CMP5NXLo/view?usp=sharing', 
+                    'template': 'https://github.com/danifranco/BiaPy/blob/master/templates/classification/2d_super-resolution.yaml'
+                },
+                {
+                    'name': 'Cardiomyoblast super-resolution (3D)', 
+                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'sr_3d_cardiomyoblast.png'))), 
+                    'data': 'https://drive.google.com/file/d/1rtrR_jt8hcBEqvwx_amFBNR7CMP5NXLo/view?usp=sharing', 
+                    'template': 'https://github.com/danifranco/BiaPy/blob/master/templates/classification/3d_super-resolution.yaml'
+                },
+                {
+                    'name': 'Urban super-resolution (2D)', 
+                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'sr_2d_urban100.png'))), 
+                    'data': 'https://drive.google.com/file/d/1Dzlz2dbFw-fz4JDykrWu-SU0v45YBjbj/view?usp=sharing', 
+                    'template': 'https://github.com/danifranco/BiaPy/blob/master/templates/classification/2d_super-resolution.yaml'
+                }
+            ],
+            [ # SSL
+                {
+                    'name': 'Self-supervision in EM images (2D)', 
+                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'semantic_seg_3d_mitochondria.png'))), 
+                    'data': 'https://drive.google.com/file/d/1DfUoVHf__xk-s4BWSKbkfKYMnES-9RJt/view?usp=drive_link', 
+                    'template': 'https://github.com/danifranco/BiaPy/blob/master/templates/classification/2d_self-supervised.yaml'
+                },
+                {
+                    'name': 'Self-supervision in EM images (3D)', 
+                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'detection_3d_nuclei.png'))), 
+                    'data': 'https://drive.google.com/file/d/19P4AcvBPJXeW7QRj92Jh1keunGa5fi8d/view?usp=drive_link', 
+                    'template': 'https://github.com/danifranco/BiaPy/blob/master/templates/classification/3d_self-supervised.yaml'
+                }
+            ],
+            [ # Classification
+                {
+                    'name': 'Skin lesion classification (2D)', 
+                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'classification_2d_dermaMNIST.png'))), 
+                    'data': 'https://drive.google.com/file/d/15_pnH4_tJcwhOhNqFsm26NQuJbNbFSIN/view?usp=drive_link', 
+                    'template': 'https://github.com/danifranco/BiaPy/blob/master/templates/classification/classification_2d.yaml'
+                },
+                {
+                    'name': 'Organ classification (3D)', 
+                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'classification_3d_organMNIST.png'))), 
+                    'data': 'https://drive.google.com/file/d/1pypWJ4Z9sRLPlVHbG6zpwmS6COkm3wUg/view?usp=drive_link', 
+                    'template': 'https://github.com/danifranco/BiaPy/blob/master/templates/classification/classification_3d.yaml'
+                },
+                {
+                    'name': 'Butterfly classification (2D)', 
+                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'classification_2d_butterfly.jpg'))), 
+                    'data': 'https://drive.google.com/file/d/1m4_3UAgUsZ8FDjB4HyfA50Sht7_XkfdB/view?usp=drive_link', 
+                    'template': 'https://github.com/danifranco/BiaPy/blob/master/templates/classification/classification_2d.yaml'
+                }
+            ]
         ]
 
         self.settings['workflow_descriptions'] = [
