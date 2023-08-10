@@ -306,7 +306,10 @@ def move_between_pages(self, to_page):
     # Super resolution
     elif self.cfg.settings['selected_workflow'] == 4:
         jobname = "my_super_resolution"
-        models = self.cfg.settings['sr_models_real_names']
+        if get_text(self.ui.PROBLEM__NDIM__INPUT) == "2D":
+            models = self.cfg.settings['sr_2d_models_real_names']
+        else:
+            models = self.cfg.settings['sr_3d_models_real_names']
         self.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.train_workflow_specific_tab_sr_page)
         self.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.test_workflow_specific_tab_sr_page)
         # Train page
@@ -765,7 +768,7 @@ def create_yaml_file(self):
 
     # Model definition
     biapy_config['MODEL'] = {}
-    model_name = self.cfg.translate_model_names(get_text(self.ui.MODEL__ARCHITECTURE__INPUT)) 
+    model_name = self.cfg.translate_model_names(get_text(self.ui.MODEL__ARCHITECTURE__INPUT), get_text(self.ui.PROBLEM__NDIM__INPUT))
     biapy_config['MODEL']['ARCHITECTURE'] = model_name
     if model_name in ['unet', 'resunet', 'seunet', 'attention_unet']:
         biapy_config['MODEL']['FEATURE_MAPS'] = ast.literal_eval(get_text(self.ui.MODEL__FEATURE_MAPS__INPUT))
@@ -785,6 +788,10 @@ def create_yaml_file(self):
             biapy_config['MODEL']['LAST_ACTIVATION'] = get_text(self.ui.MODEL__LAST_ACTIVATION__INPUT)
         biapy_config['MODEL']['N_CLASSES'] = int(get_text(self.ui.MODEL__N_CLASSES__INPUT))
         biapy_config['MODEL']['Z_DOWN'] = ast.literal_eval(get_text(self.ui.MODEL__Z_DOWN__INPUT)) 
+        if self.cfg.settings['selected_workflow'] == 4 and get_text(self.ui.PROBLEM__NDIM__INPUT) == "3D": # SR
+            r = "pre" if get_text(self.ui.MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT) == "Before model" else "post"
+            biapy_config['MODEL']['UNET_SR_UPSAMPLE_POSITION'] = r
+            
     elif model_name == "tiramisu":
         biapy_config['MODEL']['TIRAMISU_DEPTH'] = int(get_text(self.ui.MODEL__TIRAMISU_DEPTH__INPUT))
         biapy_config['MODEL']['FEATURE_MAPS'] = int(get_text(self.ui.MODEL__TIRAMISU_FEATURE_MAPS__INPUT))
@@ -1014,6 +1021,7 @@ def load_yaml_to_GUI(self):
     """
     # Load YAML file
     yaml_file = QFileDialog.getOpenFileName()[0]
+    if yaml_file == "": return # If no file was selected 
     with open(yaml_file, "r") as stream:
         try:
             loaded_cfg = yaml.safe_load(stream)
@@ -1036,6 +1044,10 @@ def load_yaml_to_GUI(self):
         
         # Find the workflow
         workflow_str = ""
+        try:
+            work_dim = loaded_cfg['PROBLEM']['NDIM']
+        except:
+            work_dim = "2D"
         try:
             work_id = loaded_cfg['PROBLEM']['TYPE']
         except: 
@@ -1076,12 +1088,12 @@ def load_yaml_to_GUI(self):
         else:
             self.error_exec(errors, "load_yaml_ok_but_errors")
 
-def analyze_dict(self, d, workflow_str, s=""):
+def analyze_dict(self, d, workflow_str, work_dim, s=""):
     errors = []
     variables_set = {}
     for k, v in d.items():
         if isinstance(v, dict):
-            err, _vars = analyze_dict(self,v,workflow_str,s+k if s == "" else s+"__"+k)
+            err, _vars = analyze_dict(self,v,workflow_str,work_dim,s+k if s == "" else s+"__"+k)
             if err is not None: 
                 errors +=err
                 variables_set.update(_vars)
@@ -1128,7 +1140,9 @@ def analyze_dict(self, d, workflow_str, s=""):
                 other_widgets_to_set.append("DATA__VAL__TYPE__INPUT")
                 other_widgets_values_to_set.append("Extract from train (cross validation)")
             elif widget_name == "MODEL__ARCHITECTURE__INPUT":    
-                v = self.cfg.translate_model_names(v, inv=True)
+                v = self.cfg.translate_model_names(v, work_dim, inv=True)
+            elif widget_name == "MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT":
+                v = "Before model" if v == "pre" else "After model"
             elif widget_name == "DATA__TRAIN__MINIMUM_FOREGROUND_PER__INPUT":
                 widget_name = "DATA__TRAIN__MINIMUM_FOREGROUND_PER__{}__INPUT".format(workflow_str)
             elif widget_name == "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__INPUT":

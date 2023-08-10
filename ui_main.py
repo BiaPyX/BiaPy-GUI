@@ -1547,7 +1547,7 @@ class Ui_MainWindow(object):
         self.train_page.setObjectName(u"train_page")
         self.train_general_frame = QFrame(self.train_page)
         self.train_general_frame.setObjectName(u"train_general_frame")
-        self.train_general_frame.setGeometry(QRect(0, 0, 921, 463))
+        self.train_general_frame.setGeometry(QRect(0, 0, 921, 452))
         self.train_general_frame.setMinimumSize(QSize(0, 0))
         self.train_general_frame.setFont(font)
         self.train_general_frame.setFrameShape(QFrame.NoFrame)
@@ -1616,7 +1616,7 @@ class Ui_MainWindow(object):
         self.train_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 895, 5979))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, -1192, 895, 5979))
         self.scrollAreaWidgetContents_3.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout_3 = QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
@@ -4365,7 +4365,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_6 = QWidget()
         self.scrollAreaWidgetContents_6.setObjectName(u"scrollAreaWidgetContents_6")
-        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 490, 303))
+        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 895, 343))
         self.gridLayout_18 = QGridLayout(self.scrollAreaWidgetContents_6)
         self.gridLayout_18.setObjectName(u"gridLayout_18")
         self.verticalSpacer_8 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -4517,7 +4517,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 823, 183))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 895, 343))
         self.gridLayout_17 = QGridLayout(self.scrollAreaWidgetContents_4)
         self.gridLayout_17.setObjectName(u"gridLayout_17")
         self.verticalSpacer_9 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -4656,7 +4656,7 @@ class Ui_MainWindow(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollAreaWidgetContents_7 = QWidget()
         self.scrollAreaWidgetContents_7.setObjectName(u"scrollAreaWidgetContents_7")
-        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 490, 219))
+        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 893, 341))
         self.gridLayout_19 = QGridLayout(self.scrollAreaWidgetContents_7)
         self.gridLayout_19.setObjectName(u"gridLayout_19")
         self.label_48 = QLabel(self.scrollAreaWidgetContents_7)
@@ -4791,7 +4791,7 @@ class Ui_MainWindow(object):
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollAreaWidgetContents_8 = QWidget()
         self.scrollAreaWidgetContents_8.setObjectName(u"scrollAreaWidgetContents_8")
-        self.scrollAreaWidgetContents_8.setGeometry(QRect(0, 0, 506, 210))
+        self.scrollAreaWidgetContents_8.setGeometry(QRect(0, 0, 893, 341))
         self.gridLayout_49 = QGridLayout(self.scrollAreaWidgetContents_8)
         self.gridLayout_49.setObjectName(u"gridLayout_49")
         self.frame_44 = QFrame(self.scrollAreaWidgetContents_8)
@@ -4905,12 +4905,14 @@ class Ui_MainWindow(object):
         self.scrollArea_5.setWidgetResizable(True)
         self.scrollAreaWidgetContents_9 = QWidget()
         self.scrollAreaWidgetContents_9.setObjectName(u"scrollAreaWidgetContents_9")
-        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, 0, 326, 101))
+        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, 0, 893, 330))
         self.gridLayout_50 = QGridLayout(self.scrollAreaWidgetContents_9)
         self.gridLayout_50.setObjectName(u"gridLayout_50")
-        self.verticalSpacer_21 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.sr_unet_like_heading = QLabel(self.scrollAreaWidgetContents_9)
+        self.sr_unet_like_heading.setObjectName(u"sr_unet_like_heading")
+        self.sr_unet_like_heading.setFont(font)
 
-        self.gridLayout_50.addItem(self.verticalSpacer_21, 3, 0, 1, 1)
+        self.gridLayout_50.addWidget(self.sr_unet_like_heading, 2, 0, 1, 1)
 
         self.frame_48 = QFrame(self.scrollAreaWidgetContents_9)
         self.frame_48.setObjectName(u"frame_48")
@@ -4942,15 +4944,44 @@ class Ui_MainWindow(object):
 
         self.gridLayout_50.addWidget(self.frame_48, 1, 0, 1, 1)
 
+        self.verticalSpacer_21 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.gridLayout_50.addItem(self.verticalSpacer_21, 4, 0, 1, 1)
+
+        self.horizontalSpacer_40 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_50.addItem(self.horizontalSpacer_40, 1, 1, 1, 1)
+
         self.label_95 = QLabel(self.scrollAreaWidgetContents_9)
         self.label_95.setObjectName(u"label_95")
         self.label_95.setFont(font)
 
         self.gridLayout_50.addWidget(self.label_95, 0, 0, 1, 1)
 
-        self.horizontalSpacer_40 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.sr_unet_like_frame = QFrame(self.scrollAreaWidgetContents_9)
+        self.sr_unet_like_frame.setObjectName(u"sr_unet_like_frame")
+        self.sr_unet_like_frame.setStyleSheet(u"background: rgb(246,246,246);")
+        self.sr_unet_like_frame.setFrameShape(QFrame.Box)
+        self.sr_unet_like_frame.setFrameShadow(QFrame.Raised)
+        self.gridLayout_10 = QGridLayout(self.sr_unet_like_frame)
+        self.gridLayout_10.setObjectName(u"gridLayout_10")
+        self.MODEL__UNET_SR_UPSAMPLE_POSITION__LABEL = QLabel(self.sr_unet_like_frame)
+        self.MODEL__UNET_SR_UPSAMPLE_POSITION__LABEL.setObjectName(u"MODEL__UNET_SR_UPSAMPLE_POSITION__LABEL")
+        self.MODEL__UNET_SR_UPSAMPLE_POSITION__LABEL.setFont(font)
 
-        self.gridLayout_50.addItem(self.horizontalSpacer_40, 1, 1, 1, 1)
+        self.gridLayout_10.addWidget(self.MODEL__UNET_SR_UPSAMPLE_POSITION__LABEL, 0, 0, 1, 1)
+
+        self.MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT = QComboBox(self.sr_unet_like_frame)
+        self.MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT.addItem("")
+        self.MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT.addItem("")
+        self.MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT.setObjectName(u"MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT")
+        self.MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT.setMinimumSize(QSize(0, 30))
+        self.MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT.setFont(font)
+
+        self.gridLayout_10.addWidget(self.MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT, 0, 1, 1, 1)
+
+
+        self.gridLayout_50.addWidget(self.sr_unet_like_frame, 3, 0, 1, 1)
 
         self.scrollArea_5.setWidget(self.scrollAreaWidgetContents_9)
 
@@ -4969,7 +5000,7 @@ class Ui_MainWindow(object):
         self.scrollArea_6.setWidgetResizable(True)
         self.scrollAreaWidgetContents_10 = QWidget()
         self.scrollAreaWidgetContents_10.setObjectName(u"scrollAreaWidgetContents_10")
-        self.scrollAreaWidgetContents_10.setGeometry(QRect(0, 0, 361, 173))
+        self.scrollAreaWidgetContents_10.setGeometry(QRect(0, 0, 893, 341))
         self.gridLayout_51 = QGridLayout(self.scrollAreaWidgetContents_10)
         self.gridLayout_51.setObjectName(u"gridLayout_51")
         self.label_96 = QLabel(self.scrollAreaWidgetContents_10)
@@ -5065,7 +5096,7 @@ class Ui_MainWindow(object):
         self.scrollArea_7.setWidgetResizable(True)
         self.scrollAreaWidgetContents_11 = QWidget()
         self.scrollAreaWidgetContents_11.setObjectName(u"scrollAreaWidgetContents_11")
-        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, 0, 346, 44))
+        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, 0, 893, 341))
         self.gridLayout_52 = QGridLayout(self.scrollAreaWidgetContents_11)
         self.gridLayout_52.setObjectName(u"gridLayout_52")
         self.horizontalSpacer_42 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
@@ -5689,7 +5720,7 @@ class Ui_MainWindow(object):
         self.scrollArea_8.setWidgetResizable(True)
         self.scrollAreaWidgetContents_12 = QWidget()
         self.scrollAreaWidgetContents_12.setObjectName(u"scrollAreaWidgetContents_12")
-        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 899, 310))
+        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 435, 293))
         self.gridLayout_61 = QGridLayout(self.scrollAreaWidgetContents_12)
         self.gridLayout_61.setObjectName(u"gridLayout_61")
         self.label_82 = QLabel(self.scrollAreaWidgetContents_12)
@@ -7157,7 +7188,7 @@ class Ui_MainWindow(object):
         self.check_yaml_file_errors_frame.setWidgetResizable(True)
         self.scrollAreaWidgetContents_19 = QWidget()
         self.scrollAreaWidgetContents_19.setObjectName(u"scrollAreaWidgetContents_19")
-        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 48, 19))
+        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 96, 26))
         self.verticalLayout_32 = QVBoxLayout(self.scrollAreaWidgetContents_19)
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
         self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)
@@ -7280,10 +7311,10 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
         self.stackedWidget_create_yaml_frame.setCurrentIndex(2)
-        self.train_tab_widget.setCurrentIndex(0)
-        self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(0)
+        self.train_tab_widget.setCurrentIndex(1)
+        self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(4)
         self.test_tab_widget.setCurrentIndex(0)
         self.test_workflow_specific_tab_stackedWidget.setCurrentIndex(0)
 
@@ -8584,6 +8615,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__DENOISING__N2V_MANIPULATOR__INPUT.setItemText(7, QCoreApplication.translate("MainWindow", u"identity", None))
 
         self.label_15.setText(QCoreApplication.translate("MainWindow", u"Noise2Void specific parameters", None))
+        self.sr_unet_like_heading.setText(QCoreApplication.translate("MainWindow", u"U-Net model-like configuration", None))
 #if QT_CONFIG(tooltip)
         self.sr_upscaling_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Times to upscale the input image to obtain the result</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -8592,6 +8624,10 @@ class Ui_MainWindow(object):
         self.PROBLEM__SUPER_RESOLUTION__UPSCALING__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"4", None))
 
         self.label_95.setText(QCoreApplication.translate("MainWindow", u"Model output options", None))
+        self.MODEL__UNET_SR_UPSAMPLE_POSITION__LABEL.setText(QCoreApplication.translate("MainWindow", u"Upsample position", None))
+        self.MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Before model", None))
+        self.MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"After model", None))
+
         self.label_96.setText(QCoreApplication.translate("MainWindow", u"Pretext task options", None))
 #if QT_CONFIG(tooltip)
         self.ssl_resizing_factor_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Downsizing factor to reshape the image. It will be downsampled and upsampled again by this factor so the quality of the image is worsens</span></p></body></html>", None))

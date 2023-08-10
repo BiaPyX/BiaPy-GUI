@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: fbe831c7c26243ce20e33b30049becae37b1ad59
+## Copied from BiaPy commit: 94d18dbabb7766c69d509cffe08c1c05cab3e3b0
 
 import os
 from yacs.config import CfgNode as CN
@@ -474,7 +474,8 @@ class Config:
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         _C.MODEL = CN()
         # Architecture of the network. Possible values are: 'unet', 'resunet', 'attention_unet', 'fcn32', 'fcn8', 'nnunet', 'tiramisu', 
-        # 'mnet', 'multiresunet', 'seunet', 'simple_cnn', 'EfficientNetB0', 'unetr', 'edsr', 'ViT'
+        # 'mnet', 'multiresunet', 'seunet', 'simple_cnn', 'EfficientNetB0', 'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'ViT'
+        # 'mae'
         _C.MODEL.ARCHITECTURE = 'unet'
         # Number of feature maps on each level of the network.
         _C.MODEL.FEATURE_MAPS = [16, 32, 64, 128, 256]
@@ -532,6 +533,8 @@ class Config:
         # Kernel type to use on convolution layers
         _C.MODEL.UNETR_DEC_KERNEL_INIT = 'he_normal'
 
+        # Specific for SR models based on U-Net architectures. Options are ["pre", "post"]
+        _C.MODEL.UNET_SR_UPSAMPLE_POSITION = "pre"
 
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Loss

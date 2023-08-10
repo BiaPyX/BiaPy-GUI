@@ -315,26 +315,26 @@ class UIFunction(MainWindow):
         self.ui.extract_random_patch_frame.setVisible(False)
 
     def model_combobox_changed(self, model_name):
-        model_name = self.cfg.translate_model_names(model_name) 
+        model_name = self.cfg.translate_model_names(model_name, get_text(self.ui.PROBLEM__NDIM__INPUT)) 
+
+        self.ui.unet_model_like_frame.setVisible(False)
+        self.ui.unet_model_like_label.setVisible(False)
+        self.ui.tiramisu_frame.setVisible(False)
+        self.ui.tiramisu_label.setVisible(False)
+        self.ui.transformers_frame.setVisible(False)
+        self.ui.transformers_label.setVisible(False)
+        self.ui.sr_unet_like_heading.setVisible(False)
+        self.ui.sr_unet_like_frame.setVisible(False)
+
         if model_name in ['unet', 'resunet', 'seunet', 'attention_unet']:
             self.ui.unet_model_like_frame.setVisible(True)
             self.ui.unet_model_like_label.setVisible(True)
-            self.ui.tiramisu_frame.setVisible(False)
-            self.ui.tiramisu_label.setVisible(False)
-            self.ui.transformers_frame.setVisible(False)
-            self.ui.transformers_label.setVisible(False)
+            self.ui.sr_unet_like_heading.setVisible(True)
+            self.ui.sr_unet_like_frame.setVisible(True)
         elif model_name == "tiramisu":
-            self.ui.unet_model_like_frame.setVisible(False)
-            self.ui.unet_model_like_label.setVisible(False)
             self.ui.tiramisu_frame.setVisible(True)
             self.ui.tiramisu_label.setVisible(True)
-            self.ui.transformers_frame.setVisible(False)
-            self.ui.transformers_label.setVisible(False)
         elif model_name in ["unetr", "ViT", "mae"]:
-            self.ui.unet_model_like_frame.setVisible(False)
-            self.ui.unet_model_like_label.setVisible(False)
-            self.ui.tiramisu_frame.setVisible(False)
-            self.ui.tiramisu_label.setVisible(False)
             self.ui.transformers_frame.setVisible(True)
             self.ui.transformers_label.setVisible(True)
 
@@ -361,13 +361,6 @@ class UIFunction(MainWindow):
                     self.ui.transformers_label.setText("ViT")
                 else: # MAE
                     self.ui.transformers_label.setText("MAE")
-        else:
-            self.ui.unet_model_like_frame.setVisible(False)
-            self.ui.unet_model_like_label.setVisible(False)
-            self.ui.tiramisu_frame.setVisible(False)
-            self.ui.tiramisu_label.setVisible(False)
-            self.ui.transformers_frame.setVisible(False)
-            self.ui.transformers_label.setVisible(False)
 
     ###########
     # Test page 

@@ -72,8 +72,10 @@ class Settings():
         self.settings['denoising_models'] = ['unet', 'resunet', 'seunet', 'attention_unet', 'unetr']
         self.settings['denoising_models_real_names'] = ['U-Net', 'Residual U-Net', 'SEUnet', 'Attention U-Net', 'UNETR']
         # Super resolution
-        self.settings['sr_models'] = ['edsr', 'rcan', 'dfcan', 'wdsr']
-        self.settings['sr_models_real_names'] = ['EDSR', 'RCAN', 'DFCAN', 'WDSR']
+        self.settings['sr_2d_models'] = ['edsr', 'rcan', 'dfcan', 'wdsr']
+        self.settings['sr_2d_models_real_names'] = ['EDSR', 'RCAN', 'DFCAN', 'WDSR']
+        self.settings['sr_3d_models'] = ['unet', 'resunet', 'seunet', 'attention_unet']
+        self.settings['sr_3d_models_real_names'] = ['U-Net', 'Residual U-Net', 'SEUnet', 'Attention U-Net']
         # Self-supervised learning
         self.settings['ssl_models'] = ['mae', 'unet', 'resunet', 'seunet', 'attention_unet', 'unetr']
         self.settings['ssl_models_real_names'] = ['MAE', 'U-Net', 'Residual U-Net', 'SEUnet', 'Attention U-Net', 'UNETR']
@@ -89,16 +91,21 @@ class Settings():
         self.settings['test_data_input_path'] = None
         self.settings['test_data_gt_input_path'] = None
 
-    def translate_model_names(self, model, inv=False):
+    def translate_model_names(self, model, dim, inv=False):
         s = "_models_real_names" if not inv else "_models"
         s2 = "_models" if not inv else "_models_real_names"
         for x in ["semantic", "instance", "detection", "denoising", "sr", "ssl", "classification"]:
             try:
-                idx = list(self.settings[x+s]).index(model)
+                d = ""
+                if x == "sr" and dim == "2D":
+                    d="_2d_"
+                elif x == "sr" and dim == "3D": 
+                    d="_3d_"
+                idx = list(self.settings[x+d+s]).index(model)
             except:
                 pass
             else:
-                return list(self.settings[x+s2])[idx]
+                return list(self.settings[x+d+s2])[idx]
 
     def load_workflow_page(self):
         self.settings['workflow_images'] = [

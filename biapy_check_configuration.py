@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: fbe831c7c26243ce20e33b30049becae37b1ad59
+## Copied from BiaPy commit: 94d18dbabb7766c69d509cffe08c1c05cab3e3b0
 import os
 import numpy as np
 
@@ -34,32 +34,6 @@ def check_configuration(cfg):
         if len(cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS) != channels_provided:
             if cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS == (1, 1):
                 opts.extend(['PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS', (1,)*channels_provided])    
-        
-    # Adjust dropout to feature maps
-    if cfg.MODEL.ARCHITECTURE in ['ViT', 'unetr', 'tiramisu', 'mae']:
-        if all(x == 0 for x in cfg.MODEL.DROPOUT_VALUES):
-            opts.extend(['MODEL.DROPOUT_VALUES', (0.,)])
-        elif len(cfg.MODEL.DROPOUT_VALUES) != 1:
-            raise ValueError("'MODEL.DROPOUT_VALUES' must be list of an unique number when 'MODEL.ARCHITECTURE' is one among ['ViT', 'mae', 'unetr', 'tiramisu']")
-        elif not check_value(cfg.MODEL.DROPOUT_VALUES[0]):
-            raise ValueError("'MODEL.DROPOUT_VALUES' not in [0, 1] range")
-    else:
-        if len(cfg.MODEL.FEATURE_MAPS) != len(cfg.MODEL.DROPOUT_VALUES):
-            if all(x == 0 for x in cfg.MODEL.DROPOUT_VALUES):
-                opts.extend(['MODEL.DROPOUT_VALUES', (0.,)*len(cfg.MODEL.FEATURE_MAPS)])
-            elif any(not check_value(x) for x in cfg.MODEL.DROPOUT_VALUES):
-                raise ValueError("'MODEL.DROPOUT_VALUES' not in [0, 1] range")
-            else:
-                raise ValueError("'MODEL.FEATURE_MAPS' and 'MODEL.DROPOUT_VALUES' lengths must be equal")
-
-    # Adjust Z_DOWN values to feature maps
-    if len(cfg.MODEL.FEATURE_MAPS)-1 != len(cfg.MODEL.Z_DOWN):
-        if all(x == 0 for x in cfg.MODEL.Z_DOWN):
-            opts.extend(['MODEL.Z_DOWN', (2,)*(len(cfg.MODEL.FEATURE_MAPS)-1)])
-        elif any([False for x in cfg.MODEL.Z_DOWN if x != 1 and x != 2]):
-            raise ValueError("'MODEL.Z_DOWN' need to be 1 or 2")
-        else:
-            raise ValueError("'MODEL.FEATURE_MAPS' length minus one and 'MODEL.Z_DOWN' length must be equal")
 
     if cfg.DATA.TRAIN.MINIMUM_FOREGROUND_PER != -1:
         if not check_value(cfg.DATA.TRAIN.MINIMUM_FOREGROUND_PER):
@@ -139,8 +113,6 @@ def check_configuration(cfg):
     if cfg.LOSS.TYPE != "CE" and cfg.PROBLEM.TYPE not in ['SEMANTIC_SEG', 'DETECTION']:
         raise ValueError("Not implemented pipeline option: LOSS.TYPE != 'CE' only available in 'SEMANTIC_SEG' and 'DETECTION'")
     
-    if cfg.PROBLEM.TYPE != 'SUPER_RESOLUTION' and cfg.PROBLEM.SUPER_RESOLUTION.UPSCALING != 1:
-        raise ValueError("'PROBLEM.SUPER_RESOLUTION.UPSCALING' can only be 1 if the problem is not 'SUPER_RESOLUTION'")
     if cfg.TEST.ENABLE and cfg.TEST.ANALIZE_2D_IMGS_AS_3D_STACK and cfg.PROBLEM.NDIM == "3D":
         raise ValueError("'TEST.ANALIZE_2D_IMGS_AS_3D_STACK' makes no sense when the problem is 3D. Disable it.")
 
@@ -198,10 +170,6 @@ def check_configuration(cfg):
         if cfg.PROBLEM.SUPER_RESOLUTION.UPSCALING == 1:
             raise ValueError("Resolution scale must be provided with 'PROBLEM.SUPER_RESOLUTION.UPSCALING' variable")
         assert cfg.PROBLEM.SUPER_RESOLUTION.UPSCALING in [2, 4], "PROBLEM.SUPER_RESOLUTION.UPSCALING not in [2, 4]"
-        if cfg.DATA.NORMALIZATION.TYPE == 'custom':
-            raise NotImplementedError
-        if cfg.PROBLEM.NDIM == '3D':
-            raise NotImplementedError
 
     #### Self-supervision ####
     elif cfg.PROBLEM.TYPE == 'SELF_SUPERVISED':
@@ -322,14 +290,41 @@ def check_configuration(cfg):
     ### Model ###
     assert cfg.MODEL.ARCHITECTURE in ['unet', 'resunet', 'attention_unet', 'fcn32', 'fcn8', 'tiramisu', 'mnet',
                                       'multiresunet', 'seunet', 'simple_cnn', 'EfficientNetB0', 'unetr', 'edsr',
-                                      'srunet', 'rcan', 'dfcan', 'wdsr', 'ViT', 'mae'],\
+                                      'rcan', 'dfcan', 'wdsr', 'ViT', 'mae'],\
         "MODEL.ARCHITECTURE not in ['unet', 'resunet', 'attention_unet', 'fcn32', 'fcn8', 'tiramisu', 'mnet',\
-        'multiresunet', 'seunet', 'simple_cnn', 'EfficientNetB0', 'unetr', 'edsr', 'srunet', 'rcan', 'dfcan', \
+        'multiresunet', 'seunet', 'simple_cnn', 'EfficientNetB0', 'unetr', 'edsr', 'rcan', 'dfcan', \
         'wdsr', 'ViT', 'mae']"
-    if cfg.MODEL.ARCHITECTURE not in ['unet', 'resunet', 'seunet', 'attention_unet', 'unetr'] and cfg.PROBLEM.NDIM == '3D' and cfg.PROBLEM.TYPE != "CLASSIFICATION":
+    if cfg.MODEL.ARCHITECTURE not in ['unet', 'resunet', 'seunet', 'attention_unet', 'unetr', 'ViT', 'mae'] and cfg.PROBLEM.NDIM == '3D' and cfg.PROBLEM.TYPE != "CLASSIFICATION":
         raise ValueError("For 3D these models are available: {}".format(['unet', 'resunet', 'seunet', 'attention_unet']))
     if cfg.MODEL.N_CLASSES > 1 and cfg.PROBLEM.TYPE != "CLASSIFICATION" and cfg.MODEL.ARCHITECTURE not in ['unet', 'resunet', 'seunet', 'attention_unet']:
         raise ValueError("'MODEL.N_CLASSES' > 1 can only be used with 'MODEL.ARCHITECTURE' in ['unet', 'resunet', 'seunet', 'attention_unet']")
+    
+    # Adjust dropout to feature maps
+    if cfg.MODEL.ARCHITECTURE in ['ViT', 'unetr', 'tiramisu', 'mae']:
+        if all(x == 0 for x in cfg.MODEL.DROPOUT_VALUES):
+            opts.extend(['MODEL.DROPOUT_VALUES', (0.,)])
+        elif len(cfg.MODEL.DROPOUT_VALUES) != 1:
+            raise ValueError("'MODEL.DROPOUT_VALUES' must be list of an unique number when 'MODEL.ARCHITECTURE' is one among ['ViT', 'mae', 'unetr', 'tiramisu']")
+        elif not check_value(cfg.MODEL.DROPOUT_VALUES[0]):
+            raise ValueError("'MODEL.DROPOUT_VALUES' not in [0, 1] range")
+    else:
+        if len(cfg.MODEL.FEATURE_MAPS) != len(cfg.MODEL.DROPOUT_VALUES):
+            if all(x == 0 for x in cfg.MODEL.DROPOUT_VALUES):
+                opts.extend(['MODEL.DROPOUT_VALUES', (0.,)*len(cfg.MODEL.FEATURE_MAPS)])
+            elif any(not check_value(x) for x in cfg.MODEL.DROPOUT_VALUES):
+                raise ValueError("'MODEL.DROPOUT_VALUES' not in [0, 1] range")
+            else:
+                raise ValueError("'MODEL.FEATURE_MAPS' and 'MODEL.DROPOUT_VALUES' lengths must be equal")
+
+    # Adjust Z_DOWN values to feature maps
+    if len(cfg.MODEL.FEATURE_MAPS)-1 == len(cfg.MODEL.Z_DOWN):
+        if all(x == 0 for x in cfg.MODEL.Z_DOWN):
+            opts.extend(['MODEL.Z_DOWN', (2,)*(len(cfg.MODEL.FEATURE_MAPS)-1)])
+        elif any([False for x in cfg.MODEL.Z_DOWN if x != 1 and x != 2]):
+            raise ValueError("'MODEL.Z_DOWN' need to be 1 or 2")
+    else:
+        raise ValueError("'MODEL.FEATURE_MAPS' length minus one and 'MODEL.Z_DOWN' length must be equal")
+
     if cfg.MODEL.LAST_ACTIVATION not in ['softmax', 'sigmoid', 'linear']:
         raise ValueError("'MODEL.LAST_ACTIVATION' need to be in ['softmax','sigmoid','linear']. Provided {}"
                          .format(cfg.MODEL.LAST_ACTIVATION))
@@ -346,8 +341,13 @@ def check_configuration(cfg):
         cfg.MODEL.ARCHITECTURE not in ['unet', 'resunet', 'seunet', 'attention_unet']:
         raise ValueError("Architectures available for {} are: ['unet', 'resunet', 'seunet', 'attention_unet']"
                          .format(cfg.PROBLEM.TYPE))
-    if cfg.PROBLEM.TYPE == 'SUPER_RESOLUTION' and cfg.MODEL.ARCHITECTURE not in ['edsr', 'srunet', 'rcan', 'dfcan', 'wdsr']:
-        raise ValueError("Architectures available for 'SUPER_RESOLUTION' are: ['edsr', 'srunet', 'rcan', 'dfcan', 'wdsr']")
+    if cfg.PROBLEM.TYPE == 'SUPER_RESOLUTION':
+        if cfg.PROBLEM.NDIM == '2D' and cfg.MODEL.ARCHITECTURE not in ['edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'seunet', 'attention_unet']:
+            raise ValueError("Architectures available for 2D 'SUPER_RESOLUTION' are: ['edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'seunet', 'attention_unet']")
+        elif cfg.PROBLEM.NDIM == '3D':
+            if cfg.MODEL.ARCHITECTURE not in ['unet', 'resunet', 'seunet', 'attention_unet']:
+                raise ValueError("Architectures available for 3D 'SUPER_RESOLUTION' are: ['unet', 'resunet', 'seunet', 'attention_unet']")
+            assert cfg.MODEL.UNET_SR_UPSAMPLE_POSITION in ["pre", "post"], "'MODEL.UNET_SR_UPSAMPLE_POSITION' not in ['pre', 'post']"
     if cfg.PROBLEM.TYPE == 'CLASSIFICATION' and cfg.MODEL.ARCHITECTURE not in ['simple_cnn', 'EfficientNetB0', 'ViT']:
         raise ValueError("Architectures available for 'CLASSIFICATION' are: ['simple_cnn', 'EfficientNetB0', 'ViT']")
     if cfg.MODEL.ARCHITECTURE in ['unetr', 'ViT', 'mae']:    
@@ -355,6 +355,14 @@ def check_configuration(cfg):
             raise ValueError("'MODEL.VIT_HIDDEN_SIZE' should be divisible by 'MODEL.VIT_NUM_HEADS'")
         if not all([i == cfg.DATA.PATCH_SIZE[0] for i in cfg.DATA.PATCH_SIZE[:-1]]):      
             raise ValueError("'unetr', 'ViT' 'mae' models need to have same shape in all dimensions (e.g. DATA.PATCH_SIZE = (80,80,80,1) )")
+    # Check that the input patch size is divisible in every level of the U-Net's like architectures, as the model
+    # will throw an error not very clear for users
+    if cfg.MODEL.ARCHITECTURE in ['unet', 'resunet', 'seunet', 'attention_unet']:
+        for i in range(len(cfg.MODEL.FEATURE_MAPS)-1):
+            sizes = cfg.DATA.PATCH_SIZE[1:-1] if cfg.MODEL.Z_DOWN[i] == 1 else cfg.DATA.PATCH_SIZE[:-1]
+            if not all([False for x in sizes if x%(np.power(2,(i+1))) != 0 or x == 0]):
+                raise ValueError("The 'DATA.PATCH_SIZE' provided is not divisible by 2 in each of the U-Net's levels. You can reduce the number "
+                "of levels (by reducing 'cfg.MODEL.FEATURE_MAPS' array's length) or increase the 'DATA.PATCH_SIZE'")
 
     ### Train ###
     assert cfg.TRAIN.OPTIMIZER in ['SGD', 'ADAM', 'ADAMW'], "TRAIN.OPTIMIZER not in ['SGD', 'ADAM', 'ADAMW']"
