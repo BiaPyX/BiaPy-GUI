@@ -151,13 +151,13 @@ class Settings():
                     'name': 'Cell instance segmentation (2D)', 
                     'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'instance_seg_2d_cell.png'))), 
                     'data': 'https://drive.google.com/file/d/1b7_WDDGEEaEoIpO_1EefVr0w0VQaetmg/view?usp=drive_link', 
-                    'template': 'https://github.com/danifranco/BiaPy/blob/master/templates/instance_segmentation/2d_instances_segmentation.yaml.yaml'
+                    'template': 'https://github.com/danifranco/BiaPy/blob/master/templates/instance_segmentation/2d_instances_segmentation.yaml'
                 },
                 {
                     'name': 'Nuclei instance segmentation (3D)', 
                     'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'instance_seg_3d_nuclei.png'))), 
                     'data': 'https://drive.google.com/file/d/1fdL35ZTNw5hhiKau1gadaGu-rc5ZU_C7/view?usp=drive_link', 
-                    'template': 'https://github.com/danifranco/BiaPy/blob/master/templates/instance_segmentation/3d_instances_segmentation.yaml.yaml'
+                    'template': 'https://github.com/danifranco/BiaPy/blob/master/templates/instance_segmentation/3d_instances_segmentation.yaml'
                 },
             ],
             [ # Detection

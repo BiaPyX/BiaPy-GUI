@@ -216,7 +216,7 @@ class Ui_Workflow_info(object):
         self.horizontalLayout_2 = QHBoxLayout(self.frame)
         self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.horizontalLayout_2.setContentsMargins(0, 50, 0, 0)
+        self.horizontalLayout_2.setContentsMargins(0, 35, 0, 0)
         self.ok_bn = QPushButton(self.frame)
         self.ok_bn.setObjectName(u"ok_bn")
         self.ok_bn.setMinimumSize(QSize(100, 30))
@@ -260,10 +260,10 @@ class Ui_Workflow_info(object):
         self.frame_2.setFrameShadow(QFrame.Raised)
         self.verticalLayout_6 = QVBoxLayout(self.frame_2)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
-        self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_6.setContentsMargins(0, 15, 0, 0)
         self.documentation_bn = QPushButton(self.frame_2)
         self.documentation_bn.setObjectName(u"documentation_bn")
-        self.documentation_bn.setMinimumSize(QSize(220, 30))
+        self.documentation_bn.setMinimumSize(QSize(240, 30))
         self.documentation_bn.setMaximumSize(QSize(16777215, 16777215))
         self.documentation_bn.setFont(font)
         self.documentation_bn.setStyleSheet(u"QPushButton {\n"
@@ -348,7 +348,7 @@ class Ui_Workflow_info(object):
 #if QT_CONFIG(tooltip)
         self.documentation_bn.setToolTip(QCoreApplication.translate("Workflow_info", u"<html><head/><body><p><span style=\" font-size:12pt;\">Open</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.documentation_bn.setText(QCoreApplication.translate("Workflow_info", u"Documentation", None))
+        self.documentation_bn.setText(QCoreApplication.translate("Workflow_info", u"Workflow documentation", None))
         self.label.setText(QCoreApplication.translate("Workflow_info", u"Ready to use examples:", None))
     # retranslateUi
 

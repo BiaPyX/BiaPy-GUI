@@ -1,6 +1,5 @@
 import os
-import gdown
-import wget
+from functools import partial
 
 from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtCore import (QThread, QCoreApplication, QPropertyAnimation, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
@@ -28,6 +27,7 @@ class workflow_explanation_Ui(QDialog):
         self.setStyleSheet("#centralwidget{ border: 1px solid black;} QWidget{ font-size:16px;}")
         self.workflow_info_window.window_des_label.setText("Workflow information")
         self.number_of_ready_to_use_examples = 10
+        self.signals_created = False
 
         self.dragPos = self.pos()  
         def movedialogWindow(event):
@@ -51,6 +51,7 @@ class workflow_explanation_Ui(QDialog):
         self.ready_to_use_examples_headings = []
         self.ready_to_use_examples_datasets = []
         self.ready_to_use_examples_templates = []
+        self.ready_to_use_examples_signals_created = []
         for i in range(self.number_of_ready_to_use_examples):
             # Create the frame
             self.ready_to_use_examples_frames.append(QFrame(self.workflow_info_window.ready_to_use_samples_frame))
@@ -96,7 +97,6 @@ class workflow_explanation_Ui(QDialog):
             "	background-color: rgb(255,255,255);\n"
             "	border: 2px solid rgb(0, 0, 0);\n"
             "}")
-            self.ready_to_use_examples_datasets[-1].clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://github.com/danifranco/BiaPy")))
             self.ready_to_use_examples_datasets[-1].setToolTip("<html><head/><body><p><span style=\" font-size:12pt;\">"
                 "Download dataset</span></p></body></html>")
 
@@ -121,16 +121,17 @@ class workflow_explanation_Ui(QDialog):
             "}")
             self.ready_to_use_examples_templates[-1].setToolTip("<html><head/><body><p><span style=\" font-size:12pt;\">"
                 "Download template</span></p></body></html>")
+            
+            self.ready_to_use_examples_signals_created.append(False)
 
     def mousePressEvent(self, event):
         self.dragPos = event.globalPos()
 
-    def download_item(self, id):
-        directory = QFileDialog.getExistingDirectory(self, 'Select a directory')
-        if "http" in id:
-            filename = wget.download(id)
-        else:
-            gdown.download(id=id, output=directory)
+    def openlink(self, link):
+        print(link)
+        print(type(link))
+        a = QDesktopServices.openUrl(link)
+        del a
 
     def infoConstrict(self, workflow_name, input_img, gt_img, workflow_description, 
         workflow_doc, workflow_ready_to_use_examples):
@@ -142,7 +143,11 @@ class workflow_explanation_Ui(QDialog):
             self.workflow_info_window.gt_description_label.setText("Output")
         else:
             self.workflow_info_window.gt_description_label.setText("Ground truth")
-        self.workflow_info_window.documentation_bn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl(workflow_doc)))
+
+        if self.signals_created:
+            self.workflow_info_window.documentation_bn.clicked.disconnect() 
+        
+        self.workflow_info_window.documentation_bn.clicked.connect(lambda: self.openlink(workflow_doc))
         self.workflow_info_window.documentation_bn.setToolTip("<html><head/><body><p><span style=\" font-size:12pt;\">"
                 "Open {} documentation</span></p></body></html>".format(workflow_name.lower()))
 
@@ -150,13 +155,22 @@ class workflow_explanation_Ui(QDialog):
         for x in workflow_ready_to_use_examples:
             self.ready_to_use_examples_headings[c].setText(x['name'])
             self.ready_to_use_examples_images[c].setPixmap(x['image'])
-            self.ready_to_use_examples_templates[c].clicked.connect(lambda: self.download_item(x['template']))
+            # Control if at least one signal was added so we can disconnect it
+            if self.ready_to_use_examples_signals_created[c]:
+                self.ready_to_use_examples_datasets[c].clicked.disconnect()
+                self.ready_to_use_examples_templates[c].clicked.disconnect()
+            else:
+                self.ready_to_use_examples_signals_created[c] = True
+            self.ready_to_use_examples_datasets[c].clicked.connect(partial(self.openlink, x['data']))
+            self.ready_to_use_examples_templates[c].clicked.connect(partial(self.openlink, x['template']))
             self.ready_to_use_examples_frames[c].setVisible(True)
             c += 1
 
         # Hide the rest not used 
         for i in range(c, self.number_of_ready_to_use_examples):
             self.ready_to_use_examples_frames[i].setVisible(False)
+
+        self.signals_created = True
 
 class dialog_Ui(QDialog):
     def __init__(self, parent=None):

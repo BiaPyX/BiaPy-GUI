@@ -388,7 +388,7 @@ def oninit_checks(self):
         self.ui.docker_status_label.setText("<br>Docker installation found")
         self.cfg.settings['biapy_container_ready'] = True
         self.ui.docker_head_label.setText("Docker dependency")
-        self.ui.docker_frame.setStyleSheet("#gpu_frame { border: 3px solid green; border-radius: 25px;}")
+        self.ui.docker_frame.setStyleSheet("#docker_frame { border: 3px solid green; border-radius: 25px;}")
     else:
         self.ui.docker_status_label.setText("Docker installation not found. Please, install it before running BiaPy in \
                 <a href=\"https://biapy.readthedocs.io/en/latest/get_started/installation.html#docker-installation/\">its documentation</a>. \

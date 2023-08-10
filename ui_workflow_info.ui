@@ -480,7 +480,7 @@ QPushButton:pressed {
                     <number>0</number>
                    </property>
                    <property name="topMargin">
-                    <number>50</number>
+                    <number>35</number>
                    </property>
                    <property name="rightMargin">
                     <number>0</number>
@@ -570,7 +570,7 @@ QPushButton:pressed {
                     <number>0</number>
                    </property>
                    <property name="topMargin">
-                    <number>0</number>
+                    <number>15</number>
                    </property>
                    <property name="rightMargin">
                     <number>0</number>
@@ -582,7 +582,7 @@ QPushButton:pressed {
                     <widget class="QPushButton" name="documentation_bn">
                      <property name="minimumSize">
                       <size>
-                       <width>220</width>
+                       <width>240</width>
                        <height>30</height>
                       </size>
                      </property>
@@ -617,7 +617,7 @@ QPushButton:pressed {
 }</string>
                      </property>
                      <property name="text">
-                      <string>Documentation</string>
+                      <string>Workflow documentation</string>
                      </property>
                     </widget>
                    </item>
