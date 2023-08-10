@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: a68e8e2a0935a6087a46b2bfab06ffdd71c10bed
+## Copied from BiaPy commit: c67407bc9652a85de9622b9498c7ca84b5873e36
 import os
 import numpy as np
 
@@ -322,8 +322,8 @@ def check_configuration(cfg, check_data_paths=True):
             opts.extend(['MODEL.Z_DOWN', (2,)*(len(cfg.MODEL.FEATURE_MAPS)-1)])
         elif any([False for x in cfg.MODEL.Z_DOWN if x != 1 and x != 2]):
             raise ValueError("'MODEL.Z_DOWN' need to be 1 or 2")
-    else:
-        raise ValueError("'MODEL.FEATURE_MAPS' length minus one and 'MODEL.Z_DOWN' length must be equal")
+        else: 
+            raise ValueError("'MODEL.FEATURE_MAPS' length minus one and 'MODEL.Z_DOWN' length must be equal")
 
     if cfg.MODEL.LAST_ACTIVATION not in ['softmax', 'sigmoid', 'linear']:
         raise ValueError("'MODEL.LAST_ACTIVATION' need to be in ['softmax','sigmoid','linear']. Provided {}"
