@@ -314,7 +314,7 @@ class Ui_RunBiaPy(object):
         self.lab_heading.setText("")
         self.bn_min.setText("")
         self.bn_close.setText("")
-        self.biapy_container_info_label.setText(QCoreApplication.translate("RunBiaPy", u"TextLabel", None))
+        self.biapy_container_info_label.setText(QCoreApplication.translate("RunBiaPy", u"INITIALIZING . . . ", None))
         self.container_state_label.setText(QCoreApplication.translate("RunBiaPy", u"TextLabel", None))
         self.stop_container_bn.setText(QCoreApplication.translate("RunBiaPy", u"   Stop running   ", None))
         self.test_progress_label.setText(QCoreApplication.translate("RunBiaPy", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Test</span></p><p align=\"center\"><span style=\" font-size:12pt;\">phase</span></p></body></html>", None))

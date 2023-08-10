@@ -2477,7 +2477,7 @@ border-radius: 15px;</string>
                        </font>
                       </property>
                       <property name="currentIndex">
-                       <number>2</number>
+                       <number>1</number>
                       </property>
                       <widget class="QWidget" name="workflow_selection_page">
                        <property name="minimumSize">
@@ -12623,7 +12623,7 @@ QPushButton:pressed {
                                    </font>
                                   </property>
                                   <property name="currentIndex">
-                                   <number>4</number>
+                                   <number>0</number>
                                   </property>
                                   <widget class="QWidget" name="train_workflow_specific_tab_semantic_seg_page">
                                    <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -12661,8 +12661,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>490</width>
-                                         <height>303</height>
+                                         <width>895</width>
+                                         <height>332</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_18">
@@ -14933,7 +14933,7 @@ QPushButton:pressed {
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>796</width>
+                                  <width>880</width>
                                   <height>1005</height>
                                  </rect>
                                 </property>
@@ -16339,7 +16339,7 @@ QPushButton:pressed {
                               <item>
                                <widget class="QStackedWidget" name="test_workflow_specific_tab_stackedWidget">
                                 <property name="currentIndex">
-                                 <number>0</number>
+                                 <number>3</number>
                                 </property>
                                 <widget class="QWidget" name="test_workflow_specific_tab_semantic_seg_page">
                                  <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -16368,8 +16368,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>435</width>
-                                       <height>293</height>
+                                       <width>899</width>
+                                       <height>310</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_61">
@@ -16749,7 +16749,7 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>534</width>
+                                       <width>882</width>
                                        <height>1204</height>
                                       </rect>
                                      </property>
@@ -18244,7 +18244,7 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>510</width>
+                                       <width>882</width>
                                        <height>736</height>
                                       </rect>
                                      </property>
@@ -19135,8 +19135,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>326</width>
-                                       <height>44</height>
+                                       <width>899</width>
+                                       <height>310</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_64">
@@ -19212,8 +19212,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>372</width>
-                                       <height>44</height>
+                                       <width>899</width>
+                                       <height>310</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_65">
@@ -19289,8 +19289,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>425</width>
-                                       <height>44</height>
+                                       <width>899</width>
+                                       <height>310</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_66">
@@ -20163,8 +20163,8 @@ QPushButton:pressed {
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>96</width>
-                               <height>26</height>
+                               <width>869</width>
+                               <height>103</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_32">

@@ -991,7 +991,7 @@ def create_yaml_file(self):
             
     return False
 
-def load_yaml_config(self, checks=True):
+def load_yaml_config(self, checks=True, advise_user=False):
     if checks:
         if self.cfg.settings['yaml_config_filename'] == "":
             self.dialog_exec("A configuration file must be selected", "select_yaml_name_label")
@@ -1015,9 +1015,15 @@ def load_yaml_config(self, checks=True):
         errors = str(errors)
         self.ui.check_yaml_file_errors_label.setText(errors)
         self.ui.check_yaml_file_errors_frame.setStyleSheet("border: 2px solid red;")    
+        if advise_user:
+            self.dialog_exec("Configuration file checked and some errors were found. "
+            "Please correct them before proceeding.", reason="error")
     else:
         self.ui.check_yaml_file_errors_label.setText("No errors found in the configuration file")
         self.ui.check_yaml_file_errors_frame.setStyleSheet("")
+        if advise_user:
+            self.dialog_exec("Configuration file checked and no errors found.", reason="inform_user")
+            
         return True
 
 def load_yaml_to_GUI(self):
@@ -1089,7 +1095,7 @@ def load_yaml_to_GUI(self):
         # Message for the user
         if len(errors) == 0:
             self.dialog_exec("Configuration file succesfully loaded! You will "\
-                "be redirected to the workflow page so you can modify the configuration.", "inform_user")
+                "be redirected to the workflow page so you can modify the configuration.", "inform_user_and_go")
             self.cfg.settings['yaml_config_file_path'] = os.path.dirname(yaml_file)
             self.ui.goptions_browse_yaml_path_input.setText(os.path.dirname(yaml_file))
             self.ui.goptions_yaml_name_input.setText(os.path.basename(yaml_file))

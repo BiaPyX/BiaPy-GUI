@@ -189,7 +189,7 @@ class dialog_Ui(QDialog):
                 self.move(self.pos() + event.globalPos() - self.dragPos)
                 self.dragPos = event.globalPos()
                 event.accept()
-
+        self.signals_created = False
         self.dialog_window.frame_top.mouseMoveEvent = moveErrorWindow  
 
     def mousePressEvent(self, event):
@@ -199,6 +199,10 @@ class dialog_Ui(QDialog):
         self.setFixedSize(self.width(), 235)
         self.dialog_window.window_des_label.setText("Error")
         self.dialog_window.icon_label.setPixmap(self.upbar_icon[0])
+        if self.signals_created:
+            self.dialog_window.go_to_correct_bn.clicked.disconnect() 
+        else:
+            self.signals_created = True
         if reason is not None:
             if reason == "main_window_error":
                 self.dialog_window.window_des_label.setText("Error")
@@ -220,37 +224,34 @@ class dialog_Ui(QDialog):
                     m += "<br>"+str(i+1)+". {}".format(mes)
                 self.dialog_window.error_message_label.setText(m)
                 self.dialog_window.go_to_correct_bn.clicked.connect(self.close_and_go)
-            elif reason == "inform_user":
+            elif reason in ["inform_user", "inform_user_and_go"]:
                 self.dialog_window.icon_label.setPixmap(self.upbar_icon[1])
                 self.dialog_window.window_des_label.setText("Information")
                 self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("OK", u"OK", None))
                 self.dialog_window.error_message_label.setText(message)
-                self.dialog_window.go_to_correct_bn.clicked.connect(self.close_and_go)
+                self.dialog_window.go_to_correct_bn.clicked.connect(lambda: self.redirect_and_close(reason))
             else:
-                self.setFixedSize(self.width(), self.minimumSizeHint().height())
                 if reason == "docker_installation":
                     self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"OK", None))
                 else:
                     self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"Go to correct", None))
-                self.dialog_window.go_to_correct_bn.clicked.connect(lambda: self.run_func_and_close(reason))
+                self.dialog_window.go_to_correct_bn.clicked.connect(lambda: self.redirect_and_close(reason))
                 self.dialog_window.error_message_label.setText(message)
         else:
-            self.dialog_window.error_message_label.setText("<b>This error was not expected. Please contact BiaPy developers with the following message:</b><br><br>"+message)
+            self.dialog_window.error_message_label.setText("This error was not expected. Please contact BiaPy developers with the following message:<br><br>"+message)
             self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"Close BiaPy GUI", None))
             self.dialog_window.go_to_correct_bn.clicked.connect(self.close_all)
-
-    def close_and_go(self):
-        buttonPressed(self.parent_ui, 'bn_workflow', 99)
-        self.close()
 
     def close_all(self):
         self.close()
         if self.parent_ui is not None:
             self.parent_ui.close()
 
-    def run_func_and_close(self, reason):
+    def redirect_and_close(self, reason):
         if reason == "jobname":
             buttonPressed(self.parent_ui, 'bn_run_biapy', 99)
+        elif reason == "inform_user_and_go":
+            buttonPressed(self.parent_ui, 'bn_workflow', 99)
         elif reason == "yaml_config_file_path":
             buttonPressed(self.parent_ui, 'bn_goptions', 99)
             mark_syntax_error(self.parent_ui, "goptions_browse_yaml_path_input", ["empty", "exists"])

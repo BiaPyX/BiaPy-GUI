@@ -357,7 +357,7 @@ QPushButton:pressed {
                   </font>
                  </property>
                  <property name="text">
-                  <string>TextLabel</string>
+                  <string>INITIALIZING . . . </string>
                  </property>
                  <property name="openExternalLinks">
                   <bool>true</bool>
