@@ -8,7 +8,7 @@ from PySide2.QtCore import Qt, QObject, QUrl
 from PySide2.QtGui import QPixmap
 from PySide2.QtWidgets import *
 
-from ui_utils import get_text, resource_path
+from ui_utils import get_text, resource_path, path_in_list
 from ui_run import Ui_RunBiaPy 
 
 class runBiaPy_Ui(QDialog):
@@ -24,7 +24,7 @@ class runBiaPy_Ui(QDialog):
         self.run_window.bn_min.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","hide_icon.png"))))
         self.run_window.icon_label.setPixmap(QPixmap(resource_path(os.path.join("images","bn_images","info.png"))))
         self.run_window.window_des_label.setText("  Running information")
-        self.run_window.stop_container_bn.clicked.connect(self.parent_worker.stop_worker)
+        self.run_window.stop_container_bn.clicked.connect(lambda: self.parent_worker.stop_worker())
         self.run_window.container_state_label.setText("BiaPy state [ Initializing ]")
         self.run_window.train_progress_bar.setValue(0)
         self.run_window.test_progress_bar.setValue(0)
@@ -70,16 +70,18 @@ class runBiaPy_Ui(QDialog):
             self.update_cont_state(1)
 
     def update_cont_state(self, svalue):
+        st = "unknown"
         if svalue == 1:
-            self.parent_worker.biapy_container.reload()
-            st = self.parent_worker.biapy_container.status
-            if st == "running":
-                st = "<span style=\"color:green;\">"+st+"</span>"
-            elif st == "exited":
-                st = "<span style=\"color:red;\">"+st+"</span>"
-                self.run_window.stop_container_bn.setEnabled(False)
-            elif st == "created":
-                st = "<span style=\"color:yellow;\">"+st+"</span>"
+            if self.parent_worker.biapy_container is not None:
+                self.parent_worker.biapy_container.reload()
+                st = self.parent_worker.biapy_container.status
+                if st == "running":
+                    st = "<span style=\"color:green;\">"+st+"</span>"
+                elif st == "exited":
+                    st = "<span style=\"color:red;\">"+st+"</span>"
+                    self.run_window.stop_container_bn.setEnabled(False)
+                elif st == "created":
+                    st = "<span style=\"color:yellow;\">"+st+"</span>"
         # When the signal is 0 the container has finished good
         else:
             st = "finished"
@@ -120,7 +122,7 @@ class run_worker(QObject):
     # Signal to indicate the main thread to update the GUI with the new progress of the test phase
     update_test_progress_signal = QtCore.Signal(int)
 
-    def __init__(self, main_gui, config, container_name, worker_id, output_folder, user_host):
+    def __init__(self, main_gui, config, container_name, worker_id, output_folder, user_host, use_gpu):
         super(run_worker, self).__init__()
         self.main_gui = main_gui
         self.config = config
@@ -128,6 +130,7 @@ class run_worker(QObject):
         self.worker_id = worker_id
         self.output_folder = output_folder
         self.user_host = user_host
+        self.use_gpu = use_gpu
         self.gui = runBiaPy_Ui(self)
         self.gui.open()
         self.docker_client = docker.from_env()
@@ -135,17 +138,20 @@ class run_worker(QObject):
         self.container_info = 'NONE'
 
     def stop_worker(self):
+        print("Stopping the container . . . ")
         if self.biapy_container is not None:
             self.biapy_container.stop(timeout=1)
-        self.update_cont_state_signal.emit(1)
-        self.gui.run_window.stop_container_bn.setEnabled(False)
-        self.gui.run_window.test_progress_label.setEnabled(False)
-        self.gui.run_window.test_progress_bar.setEnabled(False)
-        self.gui.run_window.test_files_label.setEnabled(False)
-        self.gui.run_window.train_progress_label.setEnabled(False)
-        self.gui.run_window.train_progress_bar.setEnabled(False)
-        self.gui.run_window.train_epochs_label.setEnabled(False)
-
+            self.update_cont_state_signal.emit(1)
+            self.gui.run_window.stop_container_bn.setEnabled(False)
+            self.gui.run_window.test_progress_label.setEnabled(False)
+            self.gui.run_window.test_progress_bar.setEnabled(False)
+            self.gui.run_window.test_files_label.setEnabled(False)
+            self.gui.run_window.train_progress_label.setEnabled(False)
+            self.gui.run_window.train_progress_bar.setEnabled(False)
+            self.gui.run_window.train_epochs_label.setEnabled(False)
+        else:
+            print("Container not running yet")
+            
     def init_gui(self):
         self.gui.init_log(self.container_info)
         if self.config['TRAIN']['ENABLE']:
@@ -167,12 +173,13 @@ class run_worker(QObject):
             dt_string = now.strftime("%Y%m%d_%H%M%S")
             jobname = get_text(self.main_gui.ui.job_name_input)
             cfg_file = get_text(self.main_gui.ui.select_yaml_name_label)
-            gpus = self.main_gui.ui.gpu_input.currentData()
-            gpus = sorted([int(x[0]) for x in gpus])
-            gpus = list(dict.fromkeys(gpus))
-            gpus = ','.join(str(x) for x in gpus)
+            gpus = " "
+            if self.use_gpu:
+                gpus = self.main_gui.ui.gpu_input.currentData()
+                gpus = [int(x[0]) for x in gpus]
+                gpus = ','.join(str(x) for x in gpus)
             command=["-cfg", "{}".format(cfg_file), "-rdir", "{}".format(self.output_folder),
-                "-name", "{}".format(jobname), "-rid", "0", "-gpu", gpus]
+                "-name", "{}".format(jobname), "-rid", "1", "-gpu", gpus]
             
             # Create the result dir
             container_out_dir = os.path.join(self.output_folder, jobname)
@@ -184,24 +191,59 @@ class run_worker(QObject):
             volumes = {}
             volumes[cfg_file] = {"bind": cfg_file, "mode": "ro"}
             volumes[self.output_folder] = {"bind": self.output_folder, "mode": "rw"}
-            if self.config['TRAIN']['ENABLE']:
+            paths = []
+            paths.append(self.output_folder)
+            if self.config['TRAIN']['ENABLE']: # mirar los paths que se repiten y bindear solo uan vez, si no error
                 self.total_epochs = int(self.config['TRAIN']['EPOCHS'])
                 self.gui.run_window.train_progress_bar.setMaximum(self.total_epochs)
-                volumes[self.config['DATA']['TRAIN']['PATH']] = {"bind": self.config['DATA']['TRAIN']['PATH'], "mode": "ro"}
-                volumes[self.config['DATA']['TRAIN']['GT_PATH']] = {"bind": self.config['DATA']['TRAIN']['GT_PATH'], "mode": "ro"}
+
+                # Train path
+                p = os.path.realpath(os.path.join(self.config['DATA']['TRAIN']['PATH'], '..'))
+                if not path_in_list(paths,p):
+                    paths.append(p)
+                    volumes[p] = {"bind": p, "mode": "ro"}
+                
+                # Train GT path
+                p = os.path.realpath(os.path.join(self.config['DATA']['TRAIN']['GT_PATH'], '..'))
+                if not path_in_list(paths,p):
+                    paths.append(p)    
+                    volumes[p] = {"bind": p, "mode": "ro"}
+
                 if not self.config['DATA']['VAL']['FROM_TRAIN']:
-                    volumes[self.config['DATA']['VAL']['PATH']] = {"bind": self.config['DATA']['VAL']['PATH'], "mode": "ro"}
-                    volumes[self.config['DATA']['VAL']['GT_PATH']] = {"bind": self.config['DATA']['VAL']['GT_PATH'], "mode": "ro"}
+                    # Val path
+                    p = os.path.realpath(os.path.join(self.config['DATA']['VAL']['PATH'], '..'))
+                    if not path_in_list(paths,p):
+                        paths.append(p)
+                        volumes[p] = {"bind": p, "mode": "ro"}
+
+                    # Val GT path
+                    p = os.path.realpath(os.path.join(self.config['DATA']['VAL']['GT_PATH'], '..'))
+                    if not path_in_list(paths,p):
+                        paths.append(p)
+                        volumes[p] = {"bind": p, "mode": "ro"}
             else:
                 self.gui.run_window.train_progress_label.setVisible(False)
                 self.gui.run_window.train_progress_bar.setVisible(False)
                 self.gui.run_window.train_epochs_label.setVisible(False)
             if self.config['TEST']['ENABLE'] and not self.config['DATA']['TEST']['USE_VAL_AS_TEST']:
-                volumes[self.config['DATA']['TEST']['PATH']] = {"bind": self.config['DATA']['TEST']['PATH'], "mode": "ro"}
+                # Test path
+                p = os.path.realpath(os.path.join(self.config['DATA']['TEST']['PATH'], '..'))
+                if not path_in_list(paths,p):
+                    paths.append(p)
+                    volumes[p] = {"bind": p, "mode": "ro"}
+
                 if self.config['DATA']['TEST']['LOAD_GT']:
-                    volumes[self.config['DATA']['TEST']['GT_PATH']] = {"bind": self.config['DATA']['TEST']['GT_PATH'], "mode": "ro"}    
-            if self.config['MODEL']['LOAD_CHECKPOINT']:
-                volumes[self.config['PATHS']['CHECKPOINT_FILE']] = {"bind": self.config['PATHS']['CHECKPOINT_FILE'], "mode": "ro"} 
+                    # Test GT path
+                    p = os.path.realpath(os.path.join(self.config['DATA']['TEST']['GT_PATH'], '..'))
+                    if not path_in_list(paths,p):
+                        paths.append(p)
+                        volumes[p] = {"bind": p, "mode": "ro"}    
+
+            if self.config['MODEL']['LOAD_CHECKPOINT']: 
+                p = os.path.realpath(os.path.join(self.config['PATHS']['CHECKPOINT_FILE'], '..'))
+                if not path_in_list(paths,p):
+                    paths.append(p)
+                    volumes[p] = {"bind": p, "mode": "ro"} 
 
             if not self.config['TEST']['ENABLE']:
                 self.gui.run_window.test_progress_label.setVisible(False)
@@ -217,6 +259,7 @@ class run_worker(QObject):
                 self.gui.run_window.test_progress_bar.setEnabled(False)
                 self.gui.run_window.test_files_label.setEnabled(False)
             
+            device_requests=[ docker.types.DeviceRequest(count=-1, capabilities=[['gpu']]) ] if self.use_gpu else None
             # Run container
             self.biapy_container = self.docker_client.containers.run(
                 self.container_name, 
@@ -224,8 +267,9 @@ class run_worker(QObject):
                 detach=True,
                 volumes=volumes,
                 user=self.user_host,
-                device_requests=[ docker.types.DeviceRequest(count=-1, capabilities=[['gpu']]) ]
+                device_requests=device_requests
             )
+            print("Container created!")
 
             # Set the window header 
             self.container_info = \

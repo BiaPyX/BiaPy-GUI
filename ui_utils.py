@@ -5,6 +5,7 @@ import docker
 import ast 
 import GPUtil
 import yaml
+from pathlib import PurePath, Path
 
 from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtCore import QUrl
@@ -122,7 +123,7 @@ def mark_syntax_error(main_window, obj, validator_type=["empty"]):
             out_write = os.path.basename(out)
             main_window.cfg.settings['yaml_config_filename'] = out_write
             main_window.cfg.settings['yaml_config_file_path'] = os.path.dirname(out)
-            main_window.ui.job_name_input.setPlainText(os.path.splitext(out_write)[0]+"_experiment")
+            main_window.ui.job_name_input.setPlainText(os.path.splitext(out_write)[0])
         elif obj == "output_folder_input":
             main_window.cfg.settings['output_folder'] = out 
 
@@ -980,9 +981,6 @@ def create_yaml_file(self):
 
     # Update GUI with the new YAML file path
     self.ui.select_yaml_name_label.setText(os.path.join(self.cfg.settings['yaml_config_file_path'], self.cfg.settings['yaml_config_filename']))
-
-    # Load configuration
-    load_yaml_config(self, False)
     
     if replace:
         # Advise user where the YAML file has been saved 
@@ -1003,7 +1001,11 @@ def load_yaml_config(self, checks=True, advise_user=False):
         if not str(yaml_file).endswith(".yaml") and not str(yaml_file).endswith(".yml"):
             self.dialog_exec("The configuration filename must have .yaml or .yml extension", "select_yaml_name_label")
             return False
-    self.cfg.settings['biapy_cfg'] = Config("/home/","jobname")
+
+    ofolder = self.cfg.settings['output_folder'] if self.cfg.settings['output_folder'] != "" else str(Path.home())
+    jobname = get_text(self.ui.job_name_input) if get_text(self.ui.job_name_input) != "" else "jobname"
+    ofolder = os.path.join(ofolder, jobname+"_1")
+    self.cfg.settings['biapy_cfg'] = Config(ofolder, jobname)
     
     errors = ""
     try:
@@ -1188,3 +1190,12 @@ def analyze_dict(self, d, workflow_str, work_dim, s=""):
                         print("Setting {} : {} ({})".format(widget_name, y, k))
                     
     return errors, variables_set
+
+def path_in_list(list, path):
+    if path in list:
+        return True
+    else:
+        for i in list:
+            if PurePath(path).is_relative_to(PurePath(i)):
+                return True
+    return False

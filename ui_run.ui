@@ -357,7 +357,7 @@ QPushButton:pressed {
                   </font>
                  </property>
                  <property name="text">
-                  <string>INITIALIZING . . . </string>
+                  <string>INITIALIZING . . . (this may take a while)</string>
                  </property>
                  <property name="openExternalLinks">
                   <bool>true</bool>
@@ -654,11 +654,24 @@ QPushButton:pressed {
           </widget>
          </item>
          <item>
+          <widget class="QLabel" name="label">
+           <property name="font">
+            <font>
+             <family>DejaVu Math TeX Gyre</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Last lines of the log (updating every 3 seconds):</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QTextBrowser" name="run_biapy_log">
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>210</height>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">

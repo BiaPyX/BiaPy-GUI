@@ -440,10 +440,15 @@ class UIFunction(MainWindow):
                 "so you can do it.", "docker_installation")
             return
 
+        # GPU check
+        use_gpu = True
+        if len(self.cfg.settings['GPUs']) == 0 or len(self.ui.gpu_input.currentData()) == 0:
+            use_gpu = False 
+
         self.cfg.settings['running_threads'].append(QThread())
         worker_id = len(self.cfg.settings['running_workers'])
         self.cfg.settings['running_workers'].append(run_worker(self, self.cfg.settings['biapy_cfg'], self.cfg.settings['biapy_container_name'], 
-            worker_id, self.cfg.settings['output_folder'], self.cfg.settings['user_host']))
+            worker_id, self.cfg.settings['output_folder'], self.cfg.settings['user_host'], use_gpu))
         self.cfg.settings['running_workers'][worker_id].moveToThread(self.cfg.settings['running_threads'][worker_id])
         self.cfg.settings['running_threads'][worker_id].started.connect(self.cfg.settings['running_workers'][worker_id].run)
         self.cfg.settings['running_workers'][worker_id].finished_signal.connect(self.cfg.settings['running_threads'][worker_id].quit)

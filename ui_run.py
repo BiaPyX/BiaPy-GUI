@@ -282,9 +282,15 @@ class Ui_RunBiaPy(object):
 
         self.verticalLayout_3.addWidget(self.frame_3)
 
+        self.label = QLabel(self.frame_bottom)
+        self.label.setObjectName(u"label")
+        self.label.setFont(font)
+
+        self.verticalLayout_3.addWidget(self.label)
+
         self.run_biapy_log = QTextBrowser(self.frame_bottom)
         self.run_biapy_log.setObjectName(u"run_biapy_log")
-        self.run_biapy_log.setMinimumSize(QSize(0, 210))
+        self.run_biapy_log.setMinimumSize(QSize(0, 0))
         self.run_biapy_log.setMaximumSize(QSize(16777215, 16777215))
         font3 = QFont()
         font3.setFamily(u"Monospace")
@@ -314,12 +320,13 @@ class Ui_RunBiaPy(object):
         self.lab_heading.setText("")
         self.bn_min.setText("")
         self.bn_close.setText("")
-        self.biapy_container_info_label.setText(QCoreApplication.translate("RunBiaPy", u"INITIALIZING . . . ", None))
+        self.biapy_container_info_label.setText(QCoreApplication.translate("RunBiaPy", u"INITIALIZING . . . (this may take a while)", None))
         self.container_state_label.setText(QCoreApplication.translate("RunBiaPy", u"TextLabel", None))
         self.stop_container_bn.setText(QCoreApplication.translate("RunBiaPy", u"   Stop running   ", None))
         self.test_progress_label.setText(QCoreApplication.translate("RunBiaPy", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Test</span></p><p align=\"center\"><span style=\" font-size:12pt;\">phase</span></p></body></html>", None))
         self.train_progress_label.setText(QCoreApplication.translate("RunBiaPy", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Training</span></p><p align=\"center\"><span style=\" font-size:12pt;\">phase</span></p></body></html>", None))
         self.train_epochs_label.setText(QCoreApplication.translate("RunBiaPy", u"<html><head/><body><p align=\"center\">Epochs</p><p align=\"center\">-/-</p></body></html>", None))
         self.test_files_label.setText(QCoreApplication.translate("RunBiaPy", u"<html><head/><body><p align=\"center\">Files</p><p align=\"center\">-/-</p></body></html>", None))
+        self.label.setText(QCoreApplication.translate("RunBiaPy", u"Last lines of the log (updating every 3 seconds):", None))
     # retranslateUi
 
