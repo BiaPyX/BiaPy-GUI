@@ -124,6 +124,10 @@ def mark_syntax_error(main_window, obj, validator_type=["empty"]):
             main_window.cfg.settings['yaml_config_filename'] = out_write
             main_window.cfg.settings['yaml_config_file_path'] = os.path.dirname(out)
             main_window.ui.job_name_input.setPlainText(os.path.splitext(out_write)[0])
+
+            # Reset the check
+            main_window.ui.check_yaml_file_errors_label.setText("")
+            main_window.ui.check_yaml_file_errors_frame.setStyleSheet("") 
         elif obj == "output_folder_input":
             main_window.cfg.settings['output_folder'] = out 
 
@@ -954,7 +958,7 @@ def create_yaml_file(self):
         self.dialog_exec("Configuration file path must be defined", "yaml_config_file_path")
         return True
     if not os.path.exists(self.cfg.settings['yaml_config_file_path']):
-        self.dialog_exec("The directory '{}' does not exist. That folder was selected to store the configuration file"\
+        self.dialog_exec("The directory '{}' where the configuration file is going to be saves does not exist."
             .format(self.cfg.settings['yaml_config_file_path']), "yaml_config_file_path")
         return True
 
@@ -964,8 +968,8 @@ def create_yaml_file(self):
         self.dialog_exec("The configuration filename must be defined", "goptions_yaml_name_input")
         return True
     if not self.cfg.settings['yaml_config_filename'].endswith(".yaml") and not self.cfg.settings['yaml_config_filename'].endswith(".yml"):
-        self.dialog_exec("The configuration filename must have .yaml or .yml extension. You should change it to: {}"\
-            .format(self.cfg.settings['yaml_config_filename']+".yaml"), "goptions_yaml_name_input")
+        self.dialog_exec("The configuration filename '{}' must have .yaml or .yml extension. You should change it to: {}"\
+            .format(self.cfg.settings['yaml_config_filename'], self.cfg.settings['yaml_config_filename']+".yaml"), "goptions_yaml_name_input")
         return True
 
     # Writing YAML file
@@ -996,10 +1000,11 @@ def load_yaml_config(self, checks=True, advise_user=False):
             return False
         yaml_file = get_text(self.ui.select_yaml_name_label)
         if not os.path.exists(yaml_file):
-            self.dialog_exec("The configuration file does not exist!", "select_yaml_name_label")
+            self.dialog_exec("The configuration file '{}' does not exist!".format(yaml_file), "select_yaml_name_label")
             return False
         if not str(yaml_file).endswith(".yaml") and not str(yaml_file).endswith(".yml"):
-            self.dialog_exec("The configuration filename must have .yaml or .yml extension", "select_yaml_name_label")
+            self.dialog_exec("The configuration filename '{}' must have .yaml or .yml extension".format(yaml_file), 
+                "select_yaml_name_label")
             return False
 
     ofolder = self.cfg.settings['output_folder'] if self.cfg.settings['output_folder'] != "" else str(Path.home())
@@ -1022,7 +1027,7 @@ def load_yaml_config(self, checks=True, advise_user=False):
             "Please correct them before proceeding.", reason="error")
     else:
         self.ui.check_yaml_file_errors_label.setText("No errors found in the configuration file")
-        self.ui.check_yaml_file_errors_frame.setStyleSheet("")
+        self.ui.check_yaml_file_errors_frame.setStyleSheet("border: 2px solid green;") 
         if advise_user:
             self.dialog_exec("Configuration file checked and no errors found.", reason="inform_user")
             

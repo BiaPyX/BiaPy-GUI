@@ -420,9 +420,6 @@ class UIFunction(MainWindow):
         if jobname == "":
             self.dialog_exec("Job name can not be empty", "jobname")
             return
-        if os.path.basename(get_text(self.ui.select_yaml_name_label)) == jobname:
-            self.dialog_exec("Job name can not have the same name as the configuration file", "jobname")
-            return
 
         # Output folder check
         if self.cfg.settings['output_folder'] == "":
