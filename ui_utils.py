@@ -984,7 +984,7 @@ def create_yaml_file(self):
     
     if replace:
         # Advise user where the YAML file has been saved 
-        message = "{}".format(os.path.join(self.cfg.settings['yaml_config_file_path'], self.cfg.settings['yaml_config_filename']))
+        message = "Configuration file created:\n{}".format(os.path.join(self.cfg.settings['yaml_config_file_path'], self.cfg.settings['yaml_config_filename']))
         self.dialog_exec(message, reason="inform_user")
             
     return False
@@ -1090,9 +1090,10 @@ def load_yaml_to_GUI(self):
         print("Variables updated: ")
         for i, k in enumerate(variables_set.keys()):
             print("{}. {}: {}".format(i+1, k, variables_set[k]))
-        print("Errors: ")
-        for i in range(len(errors)):
-            print("{}. : {}".format(i+1, errors[i]))
+        if len(errors) > 0:
+            print("Errors: ")
+            for i in range(len(errors)):
+                print("{}. : {}".format(i+1, errors[i]))
 
         # Message for the user
         if len(errors) == 0:
