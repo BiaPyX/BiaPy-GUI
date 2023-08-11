@@ -48,6 +48,7 @@ class Ui_yes_no(object):
         self.icon_label.setObjectName(u"icon_label")
         self.icon_label.setMinimumSize(QSize(40, 40))
         self.icon_label.setMaximumSize(QSize(40, 40))
+        self.icon_label.setScaledContents(True)
 
         self.horizontalLayout.addWidget(self.icon_label)
 
