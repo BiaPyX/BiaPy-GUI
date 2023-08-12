@@ -237,157 +237,406 @@ class MainWindow(QMainWindow):
         self.ui.PROBLEM__DENOISING__N2V_NEIGHBORHOOD_RADIUS__INPUT.setValidator(self.int_validator)
 
         self.ui.MODEL__LOAD_CHECKPOINT__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "MODEL__LOAD_CHECKPOINT__INPUT",
-            {"PATHS__CHECKPOINT_FILE__INPUT": "Yes", "checkpoint_file_path_browse_bn": "Yes", "checkpoint_file_path_browse_label": "Yes"}))
+            {
+            "PATHS__CHECKPOINT_FILE__INPUT": "Yes", 
+            "checkpoint_file_path_browse_bn": "Yes", 
+            "checkpoint_file_path_browse_label": "Yes"
+            }))
         self.ui.job_name_input.textChanged.connect(lambda: mark_syntax_error(self, "job_name_input", ["empty"]))   
         self.ui.goptions_yaml_name_input.textChanged.connect(lambda: mark_syntax_error(self, "goptions_yaml_name_input", ["empty"]))
         self.ui.goptions_browse_yaml_path_input.textChanged.connect(lambda: mark_syntax_error(self, "goptions_browse_yaml_path_input", ["empty"]))      
         self.ui.TRAIN__ENABLE__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "TRAIN__ENABLE__INPUT",
-            {"train_tab_widget": "Yes"}))        
+            {
+            "train_tab_widget": "Yes"
+            }))        
         self.ui.train_data_input_browse_bn.clicked.connect(lambda: examine(self, "DATA__TRAIN__PATH__INPUT", False))
         self.ui.train_data_gt_input_browse_bn.clicked.connect(lambda: examine(self, "DATA__TRAIN__GT_PATH__INPUT", False))
         self.ui.val_data_input_browse_bn.clicked.connect(lambda: examine(self, "DATA__VAL__PATH__INPUT", False))
         self.ui.val_data_gt_input_browse_bn.clicked.connect(lambda: examine(self, "DATA__VAL__GT_PATH__INPUT", False))
         self.ui.DATA__TRAIN__IN_MEMORY__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "DATA__TRAIN__IN_MEMORY__INPUT",
-            {"DATA__VAL__PATH__LABEL": "No", "DATA__VAL__PATH__INPUT": "No", "val_data_input_browse_bn": "No", 
-            "validation_data_gt_label": "No", "DATA__VAL__GT_PATH__INPUT": "No", "val_data_gt_input_browse_bn": "No", 
-            "val_in_memory_label": "No", "DATA__VAL__IN_MEMORY__INPUT": "No", "percentage_validation_label": "Yes", 
-            "DATA__VAL__SPLIT_TRAIN__INPUT": "Yes"},
-            frames_dict_values_to_set={"DATA__VAL__TYPE__INPUT": "Not extracted from train (path needed)"}))
+            {},
+            frames_dict_values_to_set=
+            [
+                (["DATA__VAL__TYPE__INPUT", "Not extracted from train (path needed)"], ["No"])
+            ]
+            ))
         self.ui.DATA__VAL__TYPE__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "DATA__VAL__TYPE__INPUT",
-            {"percentage_validation_label": "Extract from train (split training)", "DATA__VAL__SPLIT_TRAIN__INPUT": "Extract from train (split training)", 
-            "cross_validation_nfolds_label": "Extract from train (cross validation)", "DATA__VAL__CROSS_VAL_NFOLD__INPUT": "Extract from train (cross validation)",
-            "cross_validation_fold_label": "Extract from train (cross validation)", "DATA__VAL__CROSS_VAL_FOLD__INPUT": "Extract from train (cross validation)",
-            "use_val_as_test": "Extract from train (cross validation)", "DATA__TEST__USE_VAL_AS_TEST__INPUT": "Extract from train (cross validation)",
-            "DATA__VAL__PATH__LABEL": "Not extracted from train (path needed)", "DATA__VAL__PATH__INPUT": "Not extracted from train (path needed)", 
-            "val_data_input_browse_bn": "Not extracted from train (path needed)", "validation_data_gt_label": "Not extracted from train (path needed)", 
-            "DATA__VAL__GT_PATH__INPUT": "Not extracted from train (path needed)", "val_data_gt_input_browse_bn": "Not extracted from train (path needed)", 
-            "val_in_memory_label": "Not extracted from train (path needed)", "DATA__VAL__IN_MEMORY__INPUT": "Not extracted from train (path needed)", 
-            "test_data_label": ["Not extracted from train (path needed)","Extract from train (split training)"], 
-            "DATA__TEST__PATH__INPUT": ["Not extracted from train (path needed)","Extract from train (split training)"], 
-            "test_data_input_browse_bn": ["Not extracted from train (path needed)","Extract from train (split training)"], 
-            "test_exists_gt_label": ["Not extracted from train (path needed)","Extract from train (split training)"], 
-            "DATA__TEST__LOAD_GT__INPUT": ["Not extracted from train (path needed)","Extract from train (split training)"],
-            "test_data_gt_label": ["Not extracted from train (path needed)","Extract from train (split training)"], 
-            "DATA__TEST__GT_PATH__INPUT": ["Not extracted from train (path needed)","Extract from train (split training)"], 
-            "test_data_gt_input_browse_bn": ["Not extracted from train (path needed)","Extract from train (split training)"],
-            "test_data_in_memory_label": ["Not extracted from train (path needed)","Extract from train (split training)"],
-            "DATA__TEST__IN_MEMORY__INPUT": ["Not extracted from train (path needed)","Extract from train (split training)"],
+            {
+            "percentage_validation_label": 
+            [
+                "Extract from train (split training)", 
+            ],    
+            "DATA__VAL__SPLIT_TRAIN__INPUT": [
+                "Extract from train (split training)", 
+            ],
+            "cross_validation_nfolds_label": "Extract from train (cross validation)", 
+            "DATA__VAL__CROSS_VAL_NFOLD__INPUT": "Extract from train (cross validation)",
+            "cross_validation_fold_label": "Extract from train (cross validation)", 
+            "DATA__VAL__CROSS_VAL_FOLD__INPUT": "Extract from train (cross validation)",
+            "use_val_as_test": "Extract from train (cross validation)", 
+            "DATA__TEST__USE_VAL_AS_TEST__INPUT": "Extract from train (cross validation)",
+            "DATA__VAL__PATH__LABEL": [
+                "Not extracted from train (path needed)", 
+            ],
+            "DATA__VAL__PATH__INPUT": [
+                "Not extracted from train (path needed)", 
+            ],
+            "val_data_input_browse_bn": [
+                "Not extracted from train (path needed)", 
+            ],
+            "validation_data_gt_label": [
+                "Not extracted from train (path needed)",
+            ], 
+            "DATA__VAL__GT_PATH__INPUT": [
+                "Not extracted from train (path needed)", 
+            ],
+            "val_data_gt_input_browse_bn": [
+                "Not extracted from train (path needed)", 
+            ],
+            "val_in_memory_label": [
+                "Not extracted from train (path needed)",
+            ],
+            "DATA__VAL__IN_MEMORY__INPUT": [
+                "Not extracted from train (path needed)", 
+            ],
+            # "test_data_label": [
+            #     ["Not extracted from train (path needed)", "Extract from train (split training)"], 
+            #     ("DATA__TEST__USE_VAL_AS_TEST__INPUT", ["No"])
+            # ],
+            # "DATA__TEST__PATH__INPUT": [
+            #     ["Not extracted from train (path needed)","Extract from train (split training)"], 
+            #     ("DATA__TEST__USE_VAL_AS_TEST__INPUT", ["No"])
+            # ],
+            # "test_data_input_browse_bn": [
+            #     ["Not extracted from train (path needed)","Extract from train (split training)"], 
+            #     ("DATA__TEST__USE_VAL_AS_TEST__INPUT", ["No"])
+            # ],
+            # "test_exists_gt_label": [
+            #     ["Not extracted from train (path needed)","Extract from train (split training)"], 
+            #     ("DATA__TEST__USE_VAL_AS_TEST__INPUT", ["No"]),
+            # ],
+            # "DATA__TEST__LOAD_GT__INPUT": [
+            #     ["Not extracted from train (path needed)","Extract from train (split training)"],
+            #     ("DATA__TEST__USE_VAL_AS_TEST__INPUT", ["No"]),
+            # ],
+            # "test_data_gt_label": [
+            #     ["Not extracted from train (path needed)","Extract from train (split training)"], 
+            #     ("DATA__TEST__USE_VAL_AS_TEST__INPUT", ["No"]),
+            #     ("DATA__TEST__LOAD_GT__INPUT", ["Yes"])
+            # ],
+            # "DATA__TEST__GT_PATH__INPUT": [
+            #     ["Not extracted from train (path needed)","Extract from train (split training)"],
+            #     ("DATA__TEST__LOAD_GT__INPUT", ["Yes"]), 
+            #     ("DATA__TEST__USE_VAL_AS_TEST__INPUT", ["No"])
+            # ],
+            # "test_data_gt_input_browse_bn": [
+            #     ["Not extracted from train (path needed)","Extract from train (split training)"],
+            #     ("DATA__TEST__LOAD_GT__INPUT", ["Yes"]), 
+            #     ("DATA__TEST__USE_VAL_AS_TEST__INPUT", ["No"])
+            # ],
+            # "test_data_in_memory_label": [
+            #     ["Not extracted from train (path needed)","Extract from train (split training)"],
+            #     ("DATA__TEST__USE_VAL_AS_TEST__INPUT", ["No"])
+            # ],
+            # "DATA__TEST__IN_MEMORY__INPUT": [
+            #     ["Not extracted from train (path needed)","Extract from train (split training)"],
+            #     ("DATA__TEST__USE_VAL_AS_TEST__INPUT", ["No"])
+            # ],
             "random_val_label": ["Extract from train (cross validation)","Extract from train (split training)"],
             "DATA__VAL__RANDOM__INPUT": ["Extract from train (cross validation)","Extract from train (split training)"],
-            "validation_overlap_label": "Not extracted from train (path needed)", "DATA__VAL__OVERLAP__INPUT": "Not extracted from train (path needed)", 
-            "validation_padding_label": "Not extracted from train (path needed)", "DATA__VAL__PADDING__INPUT": "Not extracted from train (path needed)", }))
+            "validation_overlap_label": "Not extracted from train (path needed)", 
+            "DATA__VAL__OVERLAP__INPUT": "Not extracted from train (path needed)", 
+            "validation_padding_label": "Not extracted from train (path needed)", 
+            "DATA__VAL__PADDING__INPUT": "Not extracted from train (path needed)"
+            },
+            frames_dict_values_to_set=
+            [
+                (["DATA__TRAIN__IN_MEMORY__INPUT", "Yes"], ["Extract from train (split training)","Extract from train (cross validation)"])
+            ]))
         self.ui.train_advanced_bn.clicked.connect(lambda: expand_hide_advanced_options(self, "train_advanced_bn", "train_advanced_options_frame"))
         self.ui.MODEL__ARCHITECTURE__INPUT.currentIndexChanged.connect(lambda: UIFunction.model_combobox_changed(self, str(self.ui.MODEL__ARCHITECTURE__INPUT.currentText())))
         self.ui.TRAIN__OPTIMIZER__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "TRAIN__OPTIMIZER__INPUT",
-            {"TRAIN__W_DECAY__INPUT": "ADAMW", "adamw_weight_decay_label": "ADAMW"}))
+            {
+            "TRAIN__W_DECAY__INPUT": "ADAMW", 
+            "adamw_weight_decay_label": "ADAMW"
+            }))
         self.ui.TRAIN__PROFILER__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "TRAIN__PROFILER__INPUT",
-            {"profiler_batch_range_label": "Yes", "TRAIN__PROFILER_BATCH_RANGE__INPUT": "Yes"}))
+            {
+            "profiler_batch_range_label": "Yes", 
+            "TRAIN__PROFILER_BATCH_RANGE__INPUT": "Yes"}))
         self.ui.DATA__NORMALIZATION__TYPE__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "DATA__NORMALIZATION__TYPE__INPUT",
-            {"custom_mean_label": "custom", "DATA__NORMALIZATION__CUSTOM_MEAN__INPUT": "custom", "custom_std_label": "custom", "DATA__NORMALIZATION__CUSTOM_STD__INPUT": "custom"}))
+            {
+            "custom_mean_label": "custom", 
+            "DATA__NORMALIZATION__CUSTOM_MEAN__INPUT": "custom", 
+            "custom_std_label": "custom", 
+            "DATA__NORMALIZATION__CUSTOM_STD__INPUT": "custom"
+            }))
         self.ui.DATA__EXTRACT_RANDOM_PATCH__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "DATA__EXTRACT_RANDOM_PATCH__INPUT",
-            {"extract_random_patch_frame_label": "Yes", "extract_random_patch_frame": "Yes"}))    
+            {
+            "extract_random_patch_frame_label": "Yes", 
+            "extract_random_patch_frame": "Yes"
+            }))    
         self.ui.TRAIN__LR_SCHEDULER__NAME__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "TRAIN__LR_SCHEDULER__NAME__INPUT",
-            {"lr_schel_warmupcosine_lr_label": "warmupcosine", "TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_LR__INPUT": "warmupcosine",
-             "lr_schel_warmupcosine_epochs_label": "warmupcosine", "TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT": "warmupcosine",\
-             "lr_schel_warmupcosine_hold_epochs_label": "warmupcosine", "TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_HOLD_EPOCHS__INPUT": "warmupcosine",\
-             "lr_schel_min_lr_label": ["warmupcosine","reduceonplateau"], "TRAIN__LR_SCHEDULER__MIN_LR__INPUT": ["warmupcosine","reduceonplateau"],
-             "lr_schel_reduce_on_plat_patience_label": "reduceonplateau", "TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT": "reduceonplateau",\
-             "lr_schel_reduce_on_plat_factor_label": "reduceonplateau", "TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT": "reduceonplateau"}))
+            {
+            "lr_schel_warmupcosine_lr_label": "warmupcosine", 
+            "TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_LR__INPUT": "warmupcosine",
+            "lr_schel_warmupcosine_epochs_label": "warmupcosine", 
+            "TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT": "warmupcosine",
+            "lr_schel_warmupcosine_hold_epochs_label": "warmupcosine", 
+            "TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_HOLD_EPOCHS__INPUT": "warmupcosine",
+            "lr_schel_min_lr_label": ["warmupcosine","reduceonplateau"], 
+            "TRAIN__LR_SCHEDULER__MIN_LR__INPUT": ["warmupcosine","reduceonplateau"],
+            "lr_schel_reduce_on_plat_patience_label": "reduceonplateau", 
+            "TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT": "reduceonplateau",
+            "lr_schel_reduce_on_plat_factor_label": "reduceonplateau", 
+            "TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT": "reduceonplateau"
+            }))
         self.ui.AUGMENTOR__ENABLE__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__ENABLE__INPUT",
-            {"da_frame": "Yes"}))
+            {
+            "da_frame": "Yes"
+            }))
         self.ui.AUGMENTOR__SHEAR__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__SHEAR__INPUT",
-            {"da_random_rot_range_label": "Yes", "AUGMENTOR__SHEAR__INPUT": "Yes"}))
+            {
+            "da_random_rot_range_label": "Yes", 
+            "AUGMENTOR__SHEAR__INPUT": "Yes"
+            }))
         self.ui.AUGMENTOR__SHEAR__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__SHEAR__INPUT",
-            {"da_shear_range_label": "Yes", "AUGMENTOR__SHEAR__INPUT": "Yes"}))
+            {
+            "da_shear_range_label": "Yes", 
+            "AUGMENTOR__SHEAR__INPUT": "Yes"
+            }))
         self.ui.AUGMENTOR__ZOOM__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__ZOOM__INPUT",
-            {"da_zoom_range_label": "Yes", "AUGMENTOR__SHEAR__INPUT": "Yes"}))
+            {
+            "da_zoom_range_label": "Yes", 
+            "AUGMENTOR__SHEAR__INPUT": "Yes"
+            }))
         self.ui.AUGMENTOR__SHIFT__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__SHIFT__INPUT",
-            {"da_shift_range_label": "Yes", "AUGMENTOR__SHEAR__INPUT": "Yes"}))
+            {
+            "da_shift_range_label": "Yes", 
+            "AUGMENTOR__SHEAR__INPUT": "Yes"
+            }))
         self.ui.AUGMENTOR__ELASTIC__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__ELASTIC__INPUT",
-            {"da_elastic_alpha_label": "Yes", "AUGMENTOR__E_ALPHA__INPUT": "Yes", "da_elastic_sigma_label": "Yes", "AUGMENTOR__E_SIGMA__INPUT": "Yes",\
-            "da_elastic_mode_label": "Yes", "AUGMENTOR__E_MODE__INPUT": "Yes"}))
+            {
+            "da_elastic_alpha_label": "Yes", 
+            "AUGMENTOR__E_ALPHA__INPUT": "Yes", 
+            "da_elastic_sigma_label": "Yes", 
+            "AUGMENTOR__E_SIGMA__INPUT": "Yes",
+            "da_elastic_mode_label": "Yes", 
+            "AUGMENTOR__E_MODE__INPUT": "Yes"
+            }))
         self.ui.AUGMENTOR__G_BLUR__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__G_BLUR__INPUT",
-            {"da_gaussian_sigma_label": "Yes", "AUGMENTOR__G_SIGMA__INPUT": "Yes"}))
+            {
+            "da_gaussian_sigma_label": "Yes", 
+            "AUGMENTOR__G_SIGMA__INPUT": "Yes"
+            }))
         self.ui.AUGMENTOR__MEDIAN_BLUR__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__MEDIAN_BLUR__INPUT",
-            {"da_median_blur_k_size_label": "Yes", "AUGMENTOR__MB_KERNEL__INPUT": "Yes"}))
+            {
+            "da_median_blur_k_size_label": "Yes", 
+            "AUGMENTOR__MB_KERNEL__INPUT": "Yes"
+            }))
         self.ui.AUGMENTOR__MOTION_BLUR__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__MOTION_BLUR__INPUT",
-            {"da_motion_blur_k_size_label": "Yes", "AUGMENTOR__MOTB_K_RANGE__INPUT": "Yes"}))
+            {
+            "da_motion_blur_k_size_label": "Yes", 
+            "AUGMENTOR__MOTB_K_RANGE__INPUT": "Yes"
+            }))
         self.ui.AUGMENTOR__GAMMA_CONTRAST__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__GAMMA_CONTRAST__INPUT",
-            {"da_gamma_contrast_range_label": "Yes", "AUGMENTOR__GC_GAMMA__INPUT": "Yes"}))
+            {
+            "da_gamma_contrast_range_label": "Yes", 
+            "AUGMENTOR__GC_GAMMA__INPUT": "Yes"
+            }))
         self.ui.AUGMENTOR__BRIGHTNESS__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__BRIGHTNESS__INPUT",
-            {"da_brightness_factor_range_label": "Yes", "AUGMENTOR__BRIGHTNESS_FACTOR__INPUT": "Yes",
-             "da_brightness_mode_label": "Yes", "AUGMENTOR__BRIGHTNESS_MODE__INPUT": "Yes"}))
+            {
+            "da_brightness_factor_range_label": "Yes", 
+            "AUGMENTOR__BRIGHTNESS_FACTOR__INPUT": "Yes",
+            "da_brightness_mode_label": "Yes", 
+            "AUGMENTOR__BRIGHTNESS_MODE__INPUT": "Yes"
+             }))
         self.ui.AUGMENTOR__CONTRAST__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__CONTRAST__INPUT",
-            {"da_contrast_factor_range_label": "Yes", "AUGMENTOR__CONTRAST_FACTOR__INPUT": "Yes",
-             "da_contrast_mode_label": "Yes", "AUGMENTOR__CONTRAST_MODE__INPUT": "Yes"}))
+            {
+            "da_contrast_factor_range_label": "Yes", 
+            "AUGMENTOR__CONTRAST_FACTOR__INPUT": "Yes",
+            "da_contrast_mode_label": "Yes", 
+            "AUGMENTOR__CONTRAST_MODE__INPUT": "Yes"
+            }))
         self.ui.AUGMENTOR__BRIGHTNESS_EM__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__BRIGHTNESS_EM__INPUT",
-            {"da_brightness_em_factor_label": "Yes", "AUGMENTOR__BRIGHTNESS_EM_FACTOR__INPUT": "Yes",
-             "da_brightness_em_mode_label": "Yes", "AUGMENTOR__BRIGHTNESS_EM_MODE__INPUT": "Yes"}))
+            {
+            "da_brightness_em_factor_label": "Yes", 
+            "AUGMENTOR__BRIGHTNESS_EM_FACTOR__INPUT": "Yes",
+            "da_brightness_em_mode_label": "Yes", 
+            "AUGMENTOR__BRIGHTNESS_EM_MODE__INPUT": "Yes"
+            }))
         self.ui.AUGMENTOR__CONTRAST_EM__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__CONTRAST_EM__INPUT",
-             {"da_contrast_em_factor_label": "Yes", "AUGMENTOR__CONTRAST_EM_FACTOR__INPUT": "Yes",
-             "da_contrast_em_mode_label": "Yes", "AUGMENTOR__CONTRAST_EM_MODE__INPUT": "Yes"}))
+            {
+            "da_contrast_em_factor_label": "Yes", 
+            "AUGMENTOR__CONTRAST_EM_FACTOR__INPUT": "Yes",
+            "da_contrast_em_mode_label": "Yes", 
+            "AUGMENTOR__CONTRAST_EM_MODE__INPUT": "Yes"
+            }))
         self.ui.AUGMENTOR__DROPOUT__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__DROPOUT__INPUT",
-            {"da_dropout_range_label": "Yes", "AUGMENTOR__DROP_RANGE__INPUT": "Yes"}))
+            {
+            "da_dropout_range_label": "Yes", 
+            "AUGMENTOR__DROP_RANGE__INPUT": "Yes"
+            }))
         self.ui.AUGMENTOR__CUTOUT__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__CUTOUT__INPUT",
-            {"da_cutout_number_iterations_label": "Yes", "AUGMENTOR__COUT_NB_ITERATIONS__INPUT": "Yes",
-             "da_cutout_size_label": "Yes", "AUGMENTOR__COUT_SIZE__INPUT": "Yes",
-             "da_cuout_cval_label": "Yes", "AUGMENTOR__COUT_CVAL__INPUT": "Yes"}))
+            {
+            "da_cutout_number_iterations_label": "Yes", 
+            "AUGMENTOR__COUT_NB_ITERATIONS__INPUT": "Yes",
+            "da_cutout_size_label": "Yes", 
+            "AUGMENTOR__COUT_SIZE__INPUT": "Yes",
+            "da_cuout_cval_label": "Yes", 
+            "AUGMENTOR__COUT_CVAL__INPUT": "Yes"}))
         self.ui.AUGMENTOR__CUTBLUR__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__CUTBLUR__INPUT",
-            {"da_cutblur_size_range_label": "Yes", "AUGMENTOR__CBLUR_SIZE__INPUT": "Yes",
-             "da_cutblut_down_range_label": "Yes", "AUGMENTOR__CBLUR_DOWN_RANGE__INPUT": "Yes",
-             "da_cutblur_inside_label": "Yes", "AUGMENTOR__CBLUR_INSIDE__INPUT": "Yes"}))
+            {
+            "da_cutblur_size_range_label": "Yes", 
+            "AUGMENTOR__CBLUR_SIZE__INPUT": "Yes",
+            "da_cutblut_down_range_label": "Yes", 
+            "AUGMENTOR__CBLUR_DOWN_RANGE__INPUT": "Yes",
+            "da_cutblur_inside_label": "Yes", 
+            "AUGMENTOR__CBLUR_INSIDE__INPUT": "Yes"
+            }))
         self.ui.AUGMENTOR__CUTMIX__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__CUTMIX__INPUT",
-            {"da_cutmix_size_range_label": "Yes", "AUGMENTOR__CMIX_SIZE__INPUT": "Yes"}))
+            {
+            "da_cutmix_size_range_label": "Yes", 
+            "AUGMENTOR__CMIX_SIZE__INPUT": "Yes"
+            }))
         self.ui.AUGMENTOR__CUTNOISE__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__CUTNOISE__INPUT",
-            {"da_cutnoise_scale_range_label": "Yes", "AUGMENTOR__CNOISE_SCALE__INPUT": "Yes",
-             "da_cutnoise_number_iter_label": "Yes", "AUGMENTOR__CNOISE_NB_ITERATIONS__INPUT": "Yes",
-             "da_cutnoise_size_range_label": "Yes", "AUGMENTOR__CNOISE_SIZE__INPUT": "Yes"}))
+            {
+            "da_cutnoise_scale_range_label": "Yes", 
+            "AUGMENTOR__CNOISE_SCALE__INPUT": "Yes",
+            "da_cutnoise_number_iter_label": "Yes",
+            "AUGMENTOR__CNOISE_NB_ITERATIONS__INPUT": "Yes",
+            "da_cutnoise_size_range_label": "Yes", 
+            "AUGMENTOR__CNOISE_SIZE__INPUT": "Yes"
+            }))
         self.ui.AUGMENTOR__MISALIGNMENT__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__MISALIGNMENT__INPUT",
-            {"da_misaligment_displacement_label": "Yes", "AUGMENTOR__MS_DISPLACEMENT__INPUT": "Yes",
-             "da_misaligment_rotate_ratio_label": "Yes", "AUGMENTOR__MS_ROTATE_RATIO__INPUT": "Yes"}))
+            {
+            "da_misaligment_displacement_label": "Yes", 
+            "AUGMENTOR__MS_DISPLACEMENT__INPUT": "Yes",
+            "da_misaligment_rotate_ratio_label": "Yes", 
+            "AUGMENTOR__MS_ROTATE_RATIO__INPUT": "Yes"
+            }))
         self.ui.AUGMENTOR__MISSING_SECTIONS__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__MISSING_SECTIONS__INPUT",
-            {"da_missing_sections_iteration_range_label": "Yes", "AUGMENTOR__MISSP_ITERATIONS__INPUT": "Yes"}))
+            {
+            "da_missing_sections_iteration_range_label": "Yes", 
+            "AUGMENTOR__MISSP_ITERATIONS__INPUT": "Yes"
+            }))
         self.ui.AUGMENTOR__GRIDMASK__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__GRIDMASK__INPUT",
-            {"da_grid_ratio_label": "Yes", "AUGMENTOR__GRID_RATIO__INPUT": "Yes",
-             "da_grid_d_range_label": "Yes", "AUGMENTOR__GRID_D_RANGE__INPUT": "Yes",
-             "da_grid_rotate_label": "Yes", "AUGMENTOR__GRID_ROTATE__INPUT": "Yes",
-             "da_grid_invert_label": "Yes", "AUGMENTOR__GRID_INVERT__INPUT": "Yes"}))
+            {
+            "da_grid_ratio_label": "Yes", 
+            "AUGMENTOR__GRID_RATIO__INPUT": "Yes",
+            "da_grid_d_range_label": "Yes", 
+            "AUGMENTOR__GRID_D_RANGE__INPUT": "Yes",
+            "da_grid_rotate_label": "Yes", 
+            "AUGMENTOR__GRID_ROTATE__INPUT": "Yes",
+            "da_grid_invert_label": "Yes", 
+            "AUGMENTOR__GRID_INVERT__INPUT": "Yes"
+            }))
         self.ui.AUGMENTOR__GAUSSIAN_NOISE__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__GAUSSIAN_NOISE__INPUT",
-            {"da_gaussian_noise_mean_label": "Yes", "AUGMENTOR__GAUSSIAN_NOISE_MEAN__INPUT": "Yes",
-             "da_gaussian_noise_var_label": "Yes", "AUGMENTOR__GAUSSIAN_NOISE_VAR__INPUT": "Yes",
-             "da_gaussian_noise_use_input_img_label": "Yes", "AUGMENTOR__GAUSSIAN_NOISE_USE_INPUT_IMG_MEAN_AND_VAR__INPUT": "Yes"}))
+            {
+            "da_gaussian_noise_mean_label": "Yes", 
+            "AUGMENTOR__GAUSSIAN_NOISE_MEAN__INPUT": "Yes",
+            "da_gaussian_noise_var_label": "Yes", 
+            "AUGMENTOR__GAUSSIAN_NOISE_VAR__INPUT": "Yes",
+            "da_gaussian_noise_use_input_img_label": "Yes", 
+            "AUGMENTOR__GAUSSIAN_NOISE_USE_INPUT_IMG_MEAN_AND_VAR__INPUT": "Yes"
+             }))
         self.ui.AUGMENTOR__SALT__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__SALT__INPUT",
-            {"da_salt_amount_label": "Yes", "AUGMENTOR__SALT_AMOUNT__INPUT": "Yes"}))
+            {
+            "da_salt_amount_label": "Yes", 
+            "AUGMENTOR__SALT_AMOUNT__INPUT": "Yes"
+            }))
         self.ui.AUGMENTOR__PEPPER__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__PEPPER__INPUT",
-            {"da_pepper_amount_label": "Yes", "AUGMENTOR__PEPPER_AMOUNT__INPUT": "Yes"}))
+            {
+            "da_pepper_amount_label": "Yes", 
+            "AUGMENTOR__PEPPER_AMOUNT__INPUT": "Yes"
+            }))
         self.ui.AUGMENTOR__SALT_AND_PEPPER__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__SALT_AND_PEPPER__INPUT",
-            {"da_salt_pepper_amount_label": "Yes", "AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INPUT": "Yes",
-             "da_salt_pepper_prop_label": "Yes", "AUGMENTOR__SALT_AND_PEPPER_PROP__INPUT": "Yes"}))
+            {
+            "da_salt_pepper_amount_label": "Yes", 
+            "AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INPUT": "Yes",
+            "da_salt_pepper_prop_label": "Yes", 
+            "AUGMENTOR__SALT_AND_PEPPER_PROP__INPUT": "Yes"
+             }))
         self.ui.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT",
-            {"ssl_resizing_factor_label": "crappify", "PROBLEM__SELF_SUPERVISED__RESIZING_FACTOR__INPUT": "crappify",
-             "ssl_noise_label": "crappify", "PROBLEM__SELF_SUPERVISED__NOISE__INPUT": "crappify"}))
+            {
+            "ssl_resizing_factor_label": "crappify", 
+            "PROBLEM__SELF_SUPERVISED__RESIZING_FACTOR__INPUT": "crappify",
+            "ssl_noise_label": "crappify", 
+            "PROBLEM__SELF_SUPERVISED__NOISE__INPUT": "crappify"
+             }))
         
 
         # Test page buttons
         self.ui.TEST__ENABLE__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "TEST__ENABLE__INPUT",
-            {"test_tab_widget": "Yes"}))
+            {
+            "test_tab_widget": "Yes"
+            }))
         self.ui.test_data_input_browse_bn.clicked.connect(lambda: examine(self, "DATA__TEST__PATH__INPUT", False))
         self.ui.test_data_gt_input_browse_bn.clicked.connect(lambda: examine(self, "DATA__TEST__GT_PATH__INPUT", False))
         self.ui.DATA__TEST__LOAD_GT__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "DATA__TEST__LOAD_GT__INPUT",
-            {"test_data_gt_label": "Yes", "DATA__TEST__GT_PATH__INPUT": "Yes", "test_data_gt_input_browse_bn": "Yes",
-             "inst_seg_metrics_label": "Yes", "inst_seg_metrics_frame": "Yes", "det_metrics_label": "Yes", "det_metrics_frame": "Yes"}))
+            {
+            "test_data_gt_label": [
+                "Yes", 
+            ],
+            "DATA__TEST__GT_PATH__INPUT": [
+                "Yes", 
+            ],
+            "test_data_gt_input_browse_bn": [
+                "Yes",
+            ],
+            "inst_seg_metrics_label": "Yes", 
+            "inst_seg_metrics_frame": "Yes", 
+            "det_metrics_label": "Yes", 
+            "det_metrics_frame": "Yes"
+            }))
         self.ui.DATA__TEST__USE_VAL_AS_TEST__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "DATA__TEST__USE_VAL_AS_TEST__INPUT",
-            {"test_data_label": "No", "DATA__TEST__PATH__INPUT": "No", "test_data_input_browse_bn": "No",
-             "test_exists_gt_label": "No", "DATA__TEST__LOAD_GT__INPUT": "No", 
-             "test_data_gt_label": "No", "DATA__TEST__GT_PATH__INPUT": "No", "test_data_gt_input_browse_bn": "No",
-             "test_data_in_memory_label": "No", "DATA__TEST__IN_MEMORY__INPUT": "No", 
-             }))
+            {
+            "test_data_label": [
+                "No", 
+            ],
+            "DATA__TEST__PATH__INPUT": [
+                "No",
+            ],
+            "test_data_input_browse_bn": [
+                "No",
+            ],
+            "test_exists_gt_label": [
+                "No", 
+            ],
+            "DATA__TEST__LOAD_GT__INPUT": [
+                "No", 
+            ],
+            "test_data_gt_label": [
+                "No", 
+                ("DATA__TEST__LOAD_GT__INPUT", ["Yes"])
+            ],
+            "DATA__TEST__GT_PATH__INPUT": [
+                "No", 
+                ("DATA__TEST__LOAD_GT__INPUT", ["Yes"]),
+            ],
+            "test_data_gt_input_browse_bn": [
+                "No",
+                ("DATA__TEST__LOAD_GT__INPUT", ["Yes"]),
+            ],
+            "test_data_in_memory_label": [
+                "No", 
+            ], 
+            "DATA__TEST__IN_MEMORY__INPUT": [
+                "No", 
+            ],
+            }))
         self.ui.test_advanced_bn.clicked.connect(lambda: expand_hide_advanced_options(self, "test_advanced_bn", "test_advanced_options_frame"))
 
         self.ui.TEST__POST_PROCESSING__YZ_FILTERING__SEM_SEG__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "TEST__POST_PROCESSING__YZ_FILTERING__SEM_SEG__INPUT",
-            {"sem_seg_yz_filtering_size_label": "Yes", "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__SEM_SEG__INPUT": "Yes"}))
+            {
+            "sem_seg_yz_filtering_size_label": "Yes", 
+            "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__SEM_SEG__INPUT": "Yes"
+            }))
         self.ui.TEST__POST_PROCESSING__Z_FILTERING__SEM_SEG__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "TEST__POST_PROCESSING__Z_FILTERING__SEM_SEG__INPUT",
-            {"sem_seg_z_filtering_size_label": "Yes", "TEST__POST_PROCESSING__Z_FILTERING_SIZE__SEM_SEG__INPUT": "Yes"}))
+            {
+            "sem_seg_z_filtering_size_label": "Yes", 
+            "TEST__POST_PROCESSING__Z_FILTERING_SIZE__SEM_SEG__INPUT": "Yes"
+            }))
 
         self.ui.PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT",
             {"inst_seg_b_channel_th_label": [
@@ -481,21 +730,43 @@ class MainWindow(QMainWindow):
                 "Binary mask + Contours + Foreground mask"
                 ]},frames_to_hide_if_empty=["inst_seg_ths_frame"]))
         self.ui.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INPUT",
-            {"inst_seg_fore_dil_label": "Yes", "PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INPUT": "Yes", 
-             "inst_seg_fore_ero_label": "Yes", "PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INPUT": "Yes"}))
+            {
+            "inst_seg_fore_dil_label": "Yes", 
+            "PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INPUT": "Yes", 
+            "inst_seg_fore_ero_label": "Yes", 
+            "PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INPUT": "Yes"
+            }))
         self.ui.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INPUT",
-            {"inst_seg_small_obj_fil_before_size_label": "Yes", "PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INPUT": "Yes"}))
+            {
+            "inst_seg_small_obj_fil_before_size_label": "Yes", 
+            "PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INPUT": "Yes"
+            }))
         self.ui.PROBLEM__INSTANCE_SEG__DATA_REMOVE_AFTER_MW__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "PROBLEM__INSTANCE_SEG__DATA_REMOVE_AFTER_MW__INPUT",
-            {"inst_seg_small_obj_fil_after_size_label": "Yes", "PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_AFTER__INPUT": "Yes"}))
+            {
+            "inst_seg_small_obj_fil_after_size_label": "Yes", 
+            "PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_AFTER__INPUT": "Yes"
+            }))
         self.ui.TEST__POST_PROCESSING__YZ_FILTERING__INST_SEG__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "TEST__POST_PROCESSING__YZ_FILTERING__INST_SEG__INPUT",
-            {"inst_seg_yz_filtering_size_label": "Yes", "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__INST_SEG__INPUT": "Yes"}))
+            {
+            "inst_seg_yz_filtering_size_label": "Yes", 
+            "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__INST_SEG__INPUT": "Yes"
+            }))
         self.ui.TEST__POST_PROCESSING__Z_FILTERING__INST_SEG__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "TEST__POST_PROCESSING__Z_FILTERING__INST_SEG__INPUT",
-            {"inst_seg_z_filtering_size_label": "Yes", "TEST__POST_PROCESSING__Z_FILTERING_SIZE__INST_SEG__INPUT": "Yes"}))
+            {
+            "inst_seg_z_filtering_size_label": "Yes", 
+            "TEST__POST_PROCESSING__Z_FILTERING_SIZE__INST_SEG__INPUT": "Yes"
+            }))
         self.ui.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__INST_SEG__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__INST_SEG__INPUT",
-            {"inst_seg_remove_close_points_radius_label": "Yes", "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INPUT": "Yes"}))
+            {
+            "inst_seg_remove_close_points_radius_label": "Yes", 
+            "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INPUT": "Yes"
+            }))
         self.ui.TEST__MATCHING_STATS__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "TEST__MATCHING_STATS__INPUT",
-            {"inst_seg_matching_stats_ths_label": "Yes", "TEST__MATCHING_STATS_THS__INPUT": "Yes",
-            "inst_seg_matching_stats_colores_img_ths_label": "Yes", "TEST__MATCHING_STATS_THS_COLORED_IMG__INPUT": "Yes",}))
+            {
+            "inst_seg_matching_stats_ths_label": "Yes", 
+            "TEST__MATCHING_STATS_THS__INPUT": "Yes",
+            "inst_seg_matching_stats_colores_img_ths_label": "Yes", 
+            "TEST__MATCHING_STATS_THS_COLORED_IMG__INPUT": "Yes",}))
         self.ui.TEST__POST_PROCESSING__VORONOI_ON_MASK__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "TEST__POST_PROCESSING__VORONOI_ON_MASK__INPUT",
             {"inst_seg_voronoi_mask_th_label": "Yes", "TEST__POST_PROCESSING__VORONOI_TH__INPUT": "Yes"}))
         self.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT",
@@ -599,19 +870,38 @@ class MainWindow(QMainWindow):
                 ]},frames_to_hide_if_empty=["inst_seg_ths_frame"]))
 
         self.ui.TEST__DET_LOCAL_MAX_COORDS__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "TEST__DET_LOCAL_MAX_COORDS__INPUT",
-            {"det_min_th_to_be_peak_label": "Yes", "TEST__DET_MIN_TH_TO_BE_PEAK__INPUT": "Yes"}))
+            {
+            "det_min_th_to_be_peak_label": "Yes", 
+            "TEST__DET_MIN_TH_TO_BE_PEAK__INPUT": "Yes"
+            }))
         self.ui.TEST__POST_PROCESSING__YZ_FILTERING__DET__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "TEST__POST_PROCESSING__YZ_FILTERING__DET__INPUT",
-            {"det_yz_filtering_size_label": "Yes", "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__DET__INPUT": "Yes"}))
+            {
+            "det_yz_filtering_size_label": "Yes", 
+            "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__DET__INPUT": "Yes"
+            }))
         self.ui.TEST__POST_PROCESSING__Z_FILTERING__DET__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "TEST__POST_PROCESSING__Z_FILTERING__DET__INPUT",
-            {"det_z_filtering_size_label": "Yes", "TEST__POST_PROCESSING__Z_FILTERING_SIZE__DET__INPUT": "Yes"}))
+            {
+            "det_z_filtering_size_label": "Yes", 
+            "TEST__POST_PROCESSING__Z_FILTERING_SIZE__DET__INPUT": "Yes"
+            }))
         self.ui.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INPUT",
-            {"det_remove_close_points_radius_label": "Yes", "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__DET__INPUT": "Yes"}))
-        self.ui.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INPUT",
-            {"det_watershed_first_dilation_label": "Yes", "TEST__POST_PROCESSING__DET_WATERSHED_FIRST_DILATION__INPUT": "Yes",
-             "det_watershed_donuts_classes_label": "Yes", "TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_CLASSES__INPUT": "Yes",
-             "det_watershed_donuts_patch_label": "Yes", "TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_PATCH__INPUT": "Yes",
-             "det_watershed_donuts_nucleus_diam_label": "Yes", "TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER__INPUT": "Yes",
-             "det_data_watetshed_check_label": "Yes", "PROBLEM__DETECTION__DATA_CHECK_MW__INPUT": "Yes"}))
+            {
+            "det_remove_close_points_radius_label": "Yes", 
+            "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__DET__INPUT": "Yes"
+            }))
+        self.ui.TEST__POST_PROCESSING__DET_WATERSHED__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "TEST__POST_PROCESSING__DET_WATERSHED__INPUT",
+            {
+            "det_watershed_first_dilation_label": "Yes", 
+            "TEST__POST_PROCESSING__DET_WATERSHED_FIRST_DILATION__INPUT": "Yes",
+            "det_watershed_donuts_classes_label": "Yes", 
+            "TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_CLASSES__INPUT": "Yes",
+            "det_watershed_donuts_patch_label": "Yes", 
+            "TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_PATCH__INPUT": "Yes",
+            "det_watershed_donuts_nucleus_diam_label": "Yes", 
+            "TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER__INPUT": "Yes",
+            "det_data_watetshed_check_label": "Yes", 
+            "PROBLEM__DETECTION__DATA_CHECK_MW__INPUT": "Yes"
+            }))
         
         # Run page buttons 
         self.ui.select_yaml_name_label.textChanged.connect(lambda: mark_syntax_error(self, "select_yaml_name_label", ["empty"]))                        
@@ -672,28 +962,16 @@ class MainWindow(QMainWindow):
             self.ui.TEST__STATS__FULL_IMG__INPUT.setVisible(True)  
             self.ui.inst_seg_yz_filtering_label.setVisible(True) 
             self.ui.TEST__POST_PROCESSING__YZ_FILTERING__INST_SEG__INPUT.setVisible(True) 
-            self.ui.inst_seg_yz_filtering_size_label.setVisible(True) 
-            self.ui.TEST__POST_PROCESSING__YZ_FILTERING_SIZE__INST_SEG__INPUT.setVisible(True) 
             self.ui.inst_seg_z_filtering_label.setVisible(True) 
             self.ui.TEST__POST_PROCESSING__Z_FILTERING__INST_SEG__INPUT.setVisible(True) 
-            self.ui.inst_seg_z_filtering_size_label.setVisible(True) 
-            self.ui.TEST__POST_PROCESSING__Z_FILTERING_SIZE__INST_SEG__INPUT.setVisible(True) 
             self.ui.sem_seg_yz_filtering_label.setVisible(True) 
             self.ui.TEST__POST_PROCESSING__YZ_FILTERING__SEM_SEG__INPUT.setVisible(True) 
-            self.ui.sem_seg_yz_filtering_size_label.setVisible(True) 
-            self.ui.TEST__POST_PROCESSING__YZ_FILTERING_SIZE__SEM_SEG__INPUT.setVisible(True) 
             self.ui.sem_seg_z_filtering_label.setVisible(True) 
             self.ui.TEST__POST_PROCESSING__Z_FILTERING__SEM_SEG__INPUT.setVisible(True) 
-            self.ui.sem_seg_z_filtering_size_label.setVisible(True) 
-            self.ui.TEST__POST_PROCESSING__Z_FILTERING_SIZE__SEM_SEG__INPUT.setVisible(True) 
             self.ui.det_yz_filtering_label.setVisible(True) 
             self.ui.TEST__POST_PROCESSING__YZ_FILTERING__DET__INPUT.setVisible(True) 
-            self.ui.det_yz_filtering_size_label.setVisible(True) 
-            self.ui.TEST__POST_PROCESSING__YZ_FILTERING_SIZE__DET__INPUT.setVisible(True) 
             self.ui.det_z_filtering_label.setVisible(True) 
             self.ui.TEST__POST_PROCESSING__Z_FILTERING__DET__INPUT.setVisible(True) 
-            self.ui.det_z_filtering_size_label.setVisible(True) 
-            self.ui.TEST__POST_PROCESSING__Z_FILTERING_SIZE__DET__INPUT.setVisible(True) 
         # 3D
         else:
             self.ui.DATA__PATCH_SIZE__INPUT.setValidator(self.four_number_parenthesis_validator)
@@ -729,28 +1007,16 @@ class MainWindow(QMainWindow):
             self.ui.TEST__STATS__FULL_IMG__INPUT.setCurrentText("No") 
             self.ui.inst_seg_yz_filtering_label.setVisible(False) 
             self.ui.TEST__POST_PROCESSING__YZ_FILTERING__INST_SEG__INPUT.setVisible(False) 
-            self.ui.inst_seg_yz_filtering_size_label.setVisible(False) 
-            self.ui.TEST__POST_PROCESSING__YZ_FILTERING_SIZE__INST_SEG__INPUT.setVisible(False) 
             self.ui.inst_seg_z_filtering_label.setVisible(False) 
             self.ui.TEST__POST_PROCESSING__Z_FILTERING__INST_SEG__INPUT.setVisible(False) 
-            self.ui.inst_seg_z_filtering_size_label.setVisible(False) 
-            self.ui.TEST__POST_PROCESSING__Z_FILTERING_SIZE__INST_SEG__INPUT.setVisible(False) 
             self.ui.sem_seg_yz_filtering_label.setVisible(False) 
             self.ui.TEST__POST_PROCESSING__YZ_FILTERING__SEM_SEG__INPUT.setVisible(False) 
-            self.ui.sem_seg_yz_filtering_size_label.setVisible(False) 
-            self.ui.TEST__POST_PROCESSING__YZ_FILTERING_SIZE__SEM_SEG__INPUT.setVisible(False) 
             self.ui.sem_seg_z_filtering_label.setVisible(False) 
             self.ui.TEST__POST_PROCESSING__Z_FILTERING__SEM_SEG__INPUT.setVisible(False) 
-            self.ui.sem_seg_z_filtering_size_label.setVisible(False) 
-            self.ui.TEST__POST_PROCESSING__Z_FILTERING_SIZE__SEM_SEG__INPUT.setVisible(False) 
             self.ui.det_yz_filtering_label.setVisible(False) 
             self.ui.TEST__POST_PROCESSING__YZ_FILTERING__DET__INPUT.setVisible(False) 
-            self.ui.det_yz_filtering_size_label.setVisible(False) 
-            self.ui.TEST__POST_PROCESSING__YZ_FILTERING_SIZE__DET__INPUT.setVisible(False) 
             self.ui.det_z_filtering_label.setVisible(False) 
             self.ui.TEST__POST_PROCESSING__Z_FILTERING__DET__INPUT.setVisible(False) 
-            self.ui.det_z_filtering_size_label.setVisible(False) 
-            self.ui.TEST__POST_PROCESSING__Z_FILTERING_SIZE__DET__INPUT.setVisible(False) 
 
     def mousePressEvent(self, event):
         self.dragPos = event.globalPos()

@@ -54,32 +54,17 @@ def combobox_hide_visible_action(main_window, combobox, frames_dict, frames_dict
             visible_values = [visible_values]
 
         all_conditions = []
-        if main_window.cfg.settings['selected_workflow'] in [3,5,6]:
-            if '_gt_' in key:
-                all_conditions.append(False)
-            else:
-                for visible_condition in visible_values:
-                    if not isinstance(visible_condition, tuple):
-                        if cbox_value == visible_condition:
-                            all_conditions.append(True)
-                    else:
-                        if len(all_conditions) == 0:
-                            all_conditions.append(False)
-                            break
-                        if get_text(getattr(main_window.ui, visible_condition[0])) in visible_condition[1]:
-                            all_conditions.append(True)
-                        else:
-                            all_conditions.append(False)
-                            break
+        if main_window.cfg.settings['selected_workflow'] in [3,5,6] and '_gt_' in key.lower():
+            all_conditions.append(False)
         else:
             for visible_condition in visible_values:
                 if not isinstance(visible_condition, tuple):
                     if cbox_value == visible_condition:
                         all_conditions.append(True)
-                else:
-                    if len(all_conditions) == 0:
+                    else:
                         all_conditions.append(False)
                         break
+                else:
                     if get_text(getattr(main_window.ui, visible_condition[0])) in visible_condition[1]:
                         all_conditions.append(True)
                     else:
@@ -90,8 +75,9 @@ def combobox_hide_visible_action(main_window, combobox, frames_dict, frames_dict
         getattr(main_window.ui, key).setVisible(vis)
 
     if frames_dict_values_to_set is not None:
-        for key in frames_dict_values_to_set:
-            getattr(main_window.ui, key).setCurrentText(frames_dict_values_to_set[key]) 
+        for tup in frames_dict_values_to_set:
+            if cbox_value in tup[1]:
+                getattr(main_window.ui, tup[0][0]).setCurrentText(tup[0][1]) 
 
     # Frames to hide if all the childs are not visible 
     if frames_to_hide_if_empty is not None:
