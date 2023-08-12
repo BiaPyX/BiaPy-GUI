@@ -27,7 +27,7 @@ class Ui_RunBiaPy(object):
         self.verticalLayout.setContentsMargins(0, 0, 0, 6)
         self.centralwidget = QFrame(RunBiaPy)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.centralwidget.setStyleSheet(u"")
+        self.centralwidget.setStyleSheet(u"background:rgb(255,255,255);")
         self.centralwidget.setFrameShape(QFrame.NoFrame)
         self.centralwidget.setFrameShadow(QFrame.Plain)
         self.verticalLayout_2 = QVBoxLayout(self.centralwidget)

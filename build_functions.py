@@ -37,6 +37,9 @@ class buildBiapy_Ui(QDialog):
                 event.accept()
         self.run_window.frame_top.mouseMoveEvent = movedialogWindow  
 
+    def closeEvent(self, event):
+        self.close_all()
+        
     def close_all(self):
         self.parent_worker.finished_signal.emit(self.parent_worker.finished_good)
         self.parent_worker.close_signal.emit()

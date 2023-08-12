@@ -242,6 +242,9 @@ class dialog_Ui(QDialog):
             self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"Close BiaPy GUI", None))
             self.dialog_window.go_to_correct_bn.clicked.connect(self.close_all)
 
+    def closeEvent(self, event):
+        self.dialog_window.go_to_correct_bn.click()
+
     def close_all(self):
         self.close()
         if self.parent_ui is not None:

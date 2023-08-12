@@ -969,6 +969,10 @@ def create_yaml_file(self):
         with open(os.path.join(self.cfg.settings['yaml_config_file_path'], self.cfg.settings['yaml_config_filename']), 'w') as outfile:
             yaml.dump(biapy_config, outfile, default_flow_style=False)
 
+    # Reset the check 
+    self.ui.check_yaml_file_errors_label.setText("")
+    self.ui.check_yaml_file_errors_frame.setStyleSheet("") 
+    
     # Update GUI with the new YAML file path
     self.ui.select_yaml_name_label.setText(os.path.join(self.cfg.settings['yaml_config_file_path'], self.cfg.settings['yaml_config_filename']))
     
