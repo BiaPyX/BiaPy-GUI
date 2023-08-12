@@ -158,10 +158,10 @@ class MainWindow(QMainWindow):
         # self.ui.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_HOLD_EPOCHS__INPUT.setValidator(self.int_validator)
         self.ui.AUGMENTOR__DA_PROB__INPUT.setValidator(self.float_validator)
         self.ui.AUGMENTOR__AUG_NUM_SAMPLES__INPUT.setValidator(self.int_validator)
+        self.ui.AUGMENTOR__RANDOM_ROT_RANGE__INPUT.setValidator(self.two_number_parenthesis_validator)
         self.ui.AUGMENTOR__SHEAR__INPUT.setValidator(self.two_number_parenthesis_validator)
-        self.ui.AUGMENTOR__SHEAR__INPUT.setValidator(self.two_number_parenthesis_validator)
-        self.ui.AUGMENTOR__SHEAR__INPUT.setValidator(self.two_0_2_float_number_parenthesis_validator)
-        self.ui.AUGMENTOR__SHEAR__INPUT.setValidator(self.two_pos_0_1_float_number_parenthesis_validator)
+        self.ui.AUGMENTOR__ZOOM_RANGE__INPUT.setValidator(self.two_0_2_float_number_parenthesis_validator)
+        self.ui.AUGMENTOR__SHIFT_RANGE__INPUT.setValidator(self.two_pos_0_1_float_number_parenthesis_validator)
         self.ui.AUGMENTOR__E_ALPHA__INPUT.setValidator(self.two_number_parenthesis_validator)   
         self.ui.AUGMENTOR__G_SIGMA__INPUT.setValidator(self.two_pos_float_number_parenthesis_validator)
         self.ui.AUGMENTOR__MB_KERNEL__INPUT.setValidator(self.two_number_parenthesis_validator)
@@ -395,25 +395,25 @@ class MainWindow(QMainWindow):
             {
             "da_frame": "Yes"
             }))
-        self.ui.AUGMENTOR__SHEAR__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__SHEAR__INPUT",
+        self.ui.AUGMENTOR__RANDOM_ROT__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__RANDOM_ROT__INPUT",
             {
             "da_random_rot_range_label": "Yes", 
-            "AUGMENTOR__SHEAR__INPUT": "Yes"
+            "AUGMENTOR__RANDOM_ROT_RANGE__INPUT": "Yes"
             }))
         self.ui.AUGMENTOR__SHEAR__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__SHEAR__INPUT",
             {
             "da_shear_range_label": "Yes", 
-            "AUGMENTOR__SHEAR__INPUT": "Yes"
+            "AUGMENTOR__SHEAR_RANGE__INPUT": "Yes"
             }))
         self.ui.AUGMENTOR__ZOOM__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__ZOOM__INPUT",
             {
             "da_zoom_range_label": "Yes", 
-            "AUGMENTOR__SHEAR__INPUT": "Yes"
+            "AUGMENTOR__ZOOM_RANGE__INPUT": "Yes"
             }))
         self.ui.AUGMENTOR__SHIFT__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__SHIFT__INPUT",
             {
             "da_shift_range_label": "Yes", 
-            "AUGMENTOR__SHEAR__INPUT": "Yes"
+            "AUGMENTOR__SHIFT_RANGE__INPUT": "Yes"
             }))
         self.ui.AUGMENTOR__ELASTIC__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__ELASTIC__INPUT",
             {
@@ -484,7 +484,8 @@ class MainWindow(QMainWindow):
             "da_cutout_size_label": "Yes", 
             "AUGMENTOR__COUT_SIZE__INPUT": "Yes",
             "da_cuout_cval_label": "Yes", 
-            "AUGMENTOR__COUT_CVAL__INPUT": "Yes"}))
+            "AUGMENTOR__COUT_CVAL__INPUT": "Yes"
+            }))
         self.ui.AUGMENTOR__CUTBLUR__INPUT.currentIndexChanged.connect(lambda: combobox_hide_visible_action(self, "AUGMENTOR__CUTBLUR__INPUT",
             {
             "da_cutblur_size_range_label": "Yes", 
