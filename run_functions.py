@@ -10,6 +10,7 @@ from PySide2.QtWidgets import *
 
 from ui_utils import get_text, resource_path, path_in_list
 from ui_run import Ui_RunBiaPy 
+from aux_windows import yes_no_Ui
 
 class runBiaPy_Ui(QDialog):
     def __init__(self, parent_worker):
@@ -19,7 +20,7 @@ class runBiaPy_Ui(QDialog):
         self.run_window.setupUi(self)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint) 
         self.run_window.bn_min.clicked.connect(self.showMinimized)
-        self.run_window.bn_close.clicked.connect(self.close_all)
+        self.run_window.bn_close.clicked.connect(self.close_with_question)
         self.run_window.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","close_icon.png"))))
         self.run_window.bn_min.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","hide_icon.png"))))
         self.run_window.icon_label.setPixmap(QPixmap(resource_path(os.path.join("images","bn_images","info.png"))))
@@ -36,9 +37,42 @@ class runBiaPy_Ui(QDialog):
                 self.dragPos = event.globalPos()
                 event.accept()
         self.run_window.frame_top.mouseMoveEvent = movedialogWindow  
+        self.yes_no = yes_no_Ui()
+
+    def close_with_question(self):
+        if self.run_window.stop_container_bn.isEnabled():
+            m = "Are you sure that you want to exit? Running container will be stopped"
+        else:
+            m = "Are you sure that you want to exit?"
+        self.yes_no.create_question(m)
+        self.center_window(self.yes_no, self.geometry())
+        self.yes_no.exec_()
+        if self.yes_no.answer:
+            self.close_all()
+
+    def center_window(self, widget, geometry):
+        window = widget.window()
+        window.setGeometry(
+            QtWidgets.QStyle.alignedRect(
+                QtCore.Qt.LeftToRight,
+                QtCore.Qt.AlignCenter,
+                window.size(),
+                geometry,
+            ),
+        )
 
     def closeEvent(self, event):
-        self.close_all()
+        if self.run_window.stop_container_bn.isEnabled():
+            m = "Are you sure that you want to exit? Running container will be stopped"
+        else:
+            m = "Are you sure that you want to exit?"
+        self.yes_no.create_question(m)
+        self.center_window(self.yes_no, self.geometry())
+        self.yes_no.exec_()
+        if self.yes_no.answer:
+            self.close_all()
+        else:
+            event.ignore()
 
     def close_all(self):
         self.parent_worker.stop_worker()
