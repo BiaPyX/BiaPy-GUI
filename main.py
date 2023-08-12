@@ -44,7 +44,7 @@ class MainWindow(QMainWindow):
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.ui.bn_min.clicked.connect(self.showMinimized)
-        self.ui.bn_close.clicked.connect(self.close_all)
+        self.ui.bn_close.clicked.connect(self.close)
 
         two_pos_number_regex = QtCore.QRegExp('^\s*[0-9][0-9]*\s*,\s*[0-9][0-9]*\s*$')
         self.two_pos_number_validator = QtGui.QRegExpValidator(two_pos_number_regex)
@@ -1049,10 +1049,29 @@ class MainWindow(QMainWindow):
         center_window(self.yes_no, self.geometry())
         self.yes_no.exec_()
 
-    def close_all(self):
-        self.yes_no_exec("Are you sure you want to exit?")
+    def closeEvent(self, event):
+        # Find if some window is still running 
+        still_running = False
+        for x in self.cfg.settings['running_workers']:
+            if x.gui.run_window.stop_container_bn.isEnabled(): # Means that is running
+                still_running = True
+                break 
+
+        if still_running:
+            self.yes_no_exec("Are you sure you want to exit? All running windows will be stopped")
+        else:
+            self.yes_no_exec("Are you sure you want to exit?")
         if self.yes_no.answer:
+            # Kill all run windows
+            for x in self.cfg.settings['running_workers']:
+                print("Killing subprocess . . .")
+                x.gui.forcing_close = True
+                x.gui.close()
+
+            # Finally close the main window    
             self.close()
+        else:
+            event.ignore()  
 
 def center_window(widget, geometry):
     window = widget.window()
