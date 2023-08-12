@@ -4254,7 +4254,7 @@ QPushButton:pressed {
                                 <property name="geometry">
                                  <rect>
                                   <x>0</x>
-                                  <y>-3123</y>
+                                  <y>0</y>
                                   <width>895</width>
                                   <height>5979</height>
                                  </rect>
@@ -6262,7 +6262,7 @@ QPushButton:pressed {
                                              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Range of number of areas to fill the image with. Each time the augmentation is applied a random value in the specified range will be selected. Values need to be positive integers. Reasonable values between range (0,4). E.g. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;(1,3)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                             </property>
                                             <property name="text">
-                                             <string>Cuout number iterations</string>
+                                             <string>Cutout number iterations</string>
                                             </property>
                                            </widget>
                                           </item>

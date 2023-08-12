@@ -4517,7 +4517,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 823, 183))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 895, 332))
         self.gridLayout_17 = QGridLayout(self.scrollAreaWidgetContents_4)
         self.gridLayout_17.setObjectName(u"gridLayout_17")
         self.verticalSpacer_9 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -5865,7 +5865,7 @@ class Ui_MainWindow(object):
         self.scrollArea_9.setWidgetResizable(True)
         self.scrollAreaWidgetContents_13 = QWidget()
         self.scrollAreaWidgetContents_13.setObjectName(u"scrollAreaWidgetContents_13")
-        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 879, 1178))
+        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 882, 1178))
         self.gridLayout_44 = QGridLayout(self.scrollAreaWidgetContents_13)
         self.gridLayout_44.setObjectName(u"gridLayout_44")
         self.label_86 = QLabel(self.scrollAreaWidgetContents_13)
@@ -7304,12 +7304,12 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(2)
-        self.stackedWidget_create_yaml_frame.setCurrentIndex(3)
+        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget_create_yaml_frame.setCurrentIndex(2)
         self.train_tab_widget.setCurrentIndex(0)
-        self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(0)
+        self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(1)
         self.test_tab_widget.setCurrentIndex(0)
-        self.test_workflow_specific_tab_stackedWidget.setCurrentIndex(0)
+        self.test_workflow_specific_tab_stackedWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -7698,7 +7698,7 @@ class Ui_MainWindow(object):
 #if QT_CONFIG(tooltip)
         self.da_cutout_number_iterations_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Range of number of areas to fill the image with. Each time the augmentation is applied a random value in the specified range will be selected. Values need to be positive integers. Reasonable values between range (0,4). E.g. </span><span style=\" font-size:12pt; font-weight:600;\">(1,3)</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.da_cutout_number_iterations_label.setText(QCoreApplication.translate("MainWindow", u"Cuout number iterations", None))
+        self.da_cutout_number_iterations_label.setText(QCoreApplication.translate("MainWindow", u"Cutout number iterations", None))
 #if QT_CONFIG(tooltip)
         self.label_60.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Probability of each transformation. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a float between 0 and 1</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)

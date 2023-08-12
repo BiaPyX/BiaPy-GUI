@@ -160,6 +160,7 @@ class run_worker(QObject):
         self.container_name = container_name
         self.worker_id = worker_id
         self.output_folder_in_host = output_folder
+        self.windows_os = True if "win" in self.main_gui.cfg.settings['os_host'].lower() else False
         self.user_host = user_host
         self.use_gpu = use_gpu
         self.gui = runBiaPy_Ui(self)
@@ -327,14 +328,17 @@ class run_worker(QObject):
             with open(real_cfg_input, 'w') as outfile:
                 yaml.dump(temp_cfg, outfile, default_flow_style=False)
 
-            device_requests=[ docker.types.DeviceRequest(count=-1, capabilities=[['gpu']]) ] if self.use_gpu else None
+            if self.use_gpu and self.windows_os:
+                device_requests = [ docker.types.DeviceRequest(count=-1, capabilities=[['gpu']]) ]
+            else:
+                device_requests = None
             # Run container
             self.biapy_container = self.docker_client.containers.run(
                 self.container_name, 
                 command=command,
                 detach=True,
                 volumes=volumes,
-                user=self.user_host,
+                user=self.user_host if not self.windows_os else None,
                 device_requests=device_requests
             )
             print("Container created!")
@@ -352,7 +356,7 @@ class run_worker(QObject):
             </table>"\
             .format(str(self.biapy_container.image).replace('<','').replace('>',''), self.biapy_container.short_id,
                 now.strftime("%Y/%m/%d %H:%M:%S"), jobname,
-                bytearray(QUrl.fromLocalFile(cfg_file).toEncoded()).decode(), cfg_file,
+                bytearray(QUrl.fromLocalFile(get_text(self.main_gui.ui.select_yaml_name_label)).toEncoded()).decode(), get_text(self.main_gui.ui.select_yaml_name_label),
                 bytearray(QUrl.fromLocalFile(container_out_dir_in_host).toEncoded()).decode(), container_out_dir_in_host,
                 bytearray(QUrl.fromLocalFile(self.container_stdout_file).toEncoded()).decode(), self.container_stdout_file,
                 bytearray(QUrl.fromLocalFile(self.container_stderr_file).toEncoded()).decode(), self.container_stderr_file)
@@ -373,8 +377,14 @@ class run_worker(QObject):
             start_test = False
             for log in self.biapy_container.logs(stream=True):
                 l = log.decode("utf-8")
-                print(l)
-                f.write(l)
+                try:
+                    print(l.encode("utf-8") if self.windows_os else l)
+                except: 
+                    pass 
+                try:
+                    f.write(l)
+                except: 
+                    pass 
 
                 # Update training progress bar
                 if self.config['TRAIN']['ENABLE'] and "Epoch {}/{}".format(self.epoch_count+1,self.total_epochs) in l:
