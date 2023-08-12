@@ -1,6 +1,7 @@
 import os
 import traceback
 import docker
+import yaml
 from datetime import datetime, timedelta
 
 from PySide2 import QtCore, QtGui, QtWidgets
@@ -8,7 +9,7 @@ from PySide2.QtCore import Qt, QObject, QUrl
 from PySide2.QtGui import QPixmap
 from PySide2.QtWidgets import *
 
-from ui_utils import get_text, resource_path, path_in_list
+from ui_utils import get_text, resource_path, path_in_list, path_to_linux
 from ui_run import Ui_RunBiaPy 
 from aux_windows import yes_no_Ui
 
@@ -20,7 +21,7 @@ class runBiaPy_Ui(QDialog):
         self.run_window.setupUi(self)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint) 
         self.run_window.bn_min.clicked.connect(self.showMinimized)
-        self.run_window.bn_close.clicked.connect(self.close_with_question)
+        self.run_window.bn_close.clicked.connect(self.close)
         self.run_window.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","close_icon.png"))))
         self.run_window.bn_min.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","hide_icon.png"))))
         self.run_window.icon_label.setPixmap(QPixmap(resource_path(os.path.join("images","bn_images","info.png"))))
@@ -38,17 +39,7 @@ class runBiaPy_Ui(QDialog):
                 event.accept()
         self.run_window.frame_top.mouseMoveEvent = movedialogWindow  
         self.yes_no = yes_no_Ui()
-
-    def close_with_question(self):
-        if self.run_window.stop_container_bn.isEnabled():
-            m = "Are you sure that you want to exit? Running container will be stopped"
-        else:
-            m = "Are you sure that you want to exit?"
-        self.yes_no.create_question(m)
-        self.center_window(self.yes_no, self.geometry())
-        self.yes_no.exec_()
-        if self.yes_no.answer:
-            self.close_all()
+        self.forcing_close = False
 
     def center_window(self, widget, geometry):
         window = widget.window()
@@ -62,19 +53,22 @@ class runBiaPy_Ui(QDialog):
         )
 
     def closeEvent(self, event):
-        if self.run_window.stop_container_bn.isEnabled():
-            m = "Are you sure that you want to exit? Running container will be stopped"
+        if self.forcing_close:
+            self.kill_all_processes()
         else:
-            m = "Are you sure that you want to exit?"
-        self.yes_no.create_question(m)
-        self.center_window(self.yes_no, self.geometry())
-        self.yes_no.exec_()
-        if self.yes_no.answer:
-            self.close_all()
-        else:
-            event.ignore()
+            if self.run_window.stop_container_bn.isEnabled():
+                m = "Are you sure that you want to exit? Running container will be stopped"
+            else:
+                m = "Are you sure that you want to exit?"
+            self.yes_no.create_question(m)
+            self.center_window(self.yes_no, self.geometry())
+            self.yes_no.exec_()
+            if self.yes_no.answer:
+                self.kill_all_processes()
+            else:
+                event.ignore()
 
-    def close_all(self):
+    def kill_all_processes(self):
         self.parent_worker.stop_worker()
         self.parent_worker.finished_signal.emit()
         self.close()
@@ -165,7 +159,7 @@ class run_worker(QObject):
         self.config = config
         self.container_name = container_name
         self.worker_id = worker_id
-        self.output_folder = output_folder
+        self.output_folder_in_host = output_folder
         self.user_host = user_host
         self.use_gpu = use_gpu
         self.gui = runBiaPy_Ui(self)
@@ -209,55 +203,79 @@ class run_worker(QObject):
             now = datetime.now()
             dt_string = now.strftime("%Y%m%d_%H%M%S")
             jobname = get_text(self.main_gui.ui.job_name_input)
-            cfg_file = get_text(self.main_gui.ui.select_yaml_name_label)
+
+            cfg_file = get_text(self.main_gui.ui.select_yaml_name_label).replace('\\','/')
+            # Need to create a new copy of the input config file to adapt Windows paths to linux (container's OS)
+            real_cfg_input = os.path.normpath(os.path.join(self.main_gui.log_dir,"input.yaml"))
+            with open(cfg_file, "r") as stream:
+                try:
+                    temp_cfg = yaml.safe_load(stream)
+                except yaml.YAMLError as exc:
+                    print(exc)
+                
             gpus = " "
+            self.output_folder_in_container = path_to_linux(self.output_folder_in_host, self.main_gui.cfg.settings['os_host']) 
             if self.use_gpu:
                 gpus = self.main_gui.ui.gpu_input.currentData()
                 gpus = [int(x[0]) for x in gpus]
                 gpus = ','.join(str(x) for x in gpus)
-            command=["-cfg", "{}".format(cfg_file), "-rdir", "{}".format(self.output_folder),
+            command=["-cfg", "/BiaPy_files/input.yaml", "-rdir", "{}".format(self.output_folder_in_container),
                 "-name", "{}".format(jobname), "-rid", "1", "-gpu", gpus]
             
             # Create the result dir
-            container_out_dir = os.path.join(self.output_folder, jobname)
-            self.container_stdout_file = os.path.join(container_out_dir, jobname+"_out_"+dt_string)
-            self.container_stderr_file = os.path.join(container_out_dir, jobname+"_err_"+dt_string)
-            os.makedirs(container_out_dir, exist_ok=True)
-            
+            container_out_dir_in_host = os.path.normpath(os.path.join(self.output_folder_in_host, jobname))
+            self.container_stdout_file = os.path.normpath(os.path.join(container_out_dir_in_host, jobname+"_out_"+dt_string))
+            self.container_stderr_file = os.path.normpath(os.path.join(container_out_dir_in_host, jobname+"_err_"+dt_string))
+            os.makedirs(container_out_dir_in_host, exist_ok=True)
+
             # Docker mount points 
             volumes = {}
-            volumes[cfg_file] = {"bind": cfg_file, "mode": "ro"}
-            volumes[self.output_folder] = {"bind": self.output_folder, "mode": "rw"}
+            volumes[real_cfg_input] = {"bind": "/BiaPy_files/input.yaml", "mode": "ro"}
+
+            volumes[self.output_folder_in_host] = {"bind": self.output_folder_in_container, "mode": "rw"}
             paths = []
-            paths.append(self.output_folder)
+            paths.append(self.output_folder_in_container)
+            
             if self.config['TRAIN']['ENABLE']: # mirar los paths que se repiten y bindear solo uan vez, si no error
                 self.total_epochs = int(self.config['TRAIN']['EPOCHS'])
                 self.gui.run_window.train_progress_bar.setMaximum(self.total_epochs)
 
                 # Train path
-                p = os.path.realpath(os.path.join(self.config['DATA']['TRAIN']['PATH'], '..'))
+                p = os.path.realpath(os.path.join(self.config['DATA']['TRAIN']['PATH'], '..')) 
+                p = path_to_linux(p, self.main_gui.cfg.settings['os_host'])
                 if not path_in_list(paths,p):
                     paths.append(p)
                     volumes[p] = {"bind": p, "mode": "ro"}
-                
+                p = path_to_linux(self.config['DATA']['TRAIN']['PATH'], self.main_gui.cfg.settings['os_host'])
+                temp_cfg['DATA']['TRAIN']['PATH'] = p
+
                 # Train GT path
                 p = os.path.realpath(os.path.join(self.config['DATA']['TRAIN']['GT_PATH'], '..'))
+                p = path_to_linux(p, self.main_gui.cfg.settings['os_host'])
                 if not path_in_list(paths,p):
                     paths.append(p)    
                     volumes[p] = {"bind": p, "mode": "ro"}
+                p = path_to_linux(self.config['DATA']['TRAIN']['GT_PATH'], self.main_gui.cfg.settings['os_host'])
+                temp_cfg['DATA']['TRAIN']['GT_PATH'] = p
 
                 if not self.config['DATA']['VAL']['FROM_TRAIN']:
                     # Val path
                     p = os.path.realpath(os.path.join(self.config['DATA']['VAL']['PATH'], '..'))
+                    p = path_to_linux(p, self.main_gui.cfg.settings['os_host'])
                     if not path_in_list(paths,p):
                         paths.append(p)
                         volumes[p] = {"bind": p, "mode": "ro"}
+                    p = path_to_linux(self.config['DATA']['VAL']['PATH'], self.main_gui.cfg.settings['os_host'])
+                    temp_cfg['DATA']['VAL']['PATH'] = p
 
                     # Val GT path
                     p = os.path.realpath(os.path.join(self.config['DATA']['VAL']['GT_PATH'], '..'))
+                    p = path_to_linux(p, self.main_gui.cfg.settings['os_host'])
                     if not path_in_list(paths,p):
                         paths.append(p)
                         volumes[p] = {"bind": p, "mode": "ro"}
+                    p = path_to_linux(self.config['DATA']['VAL']['GT_PATH'], self.main_gui.cfg.settings['os_host'])
+                    temp_cfg['DATA']['VAL']['GT_PATH'] = p
             else:
                 self.gui.run_window.train_progress_label.setVisible(False)
                 self.gui.run_window.train_progress_bar.setVisible(False)
@@ -265,22 +283,31 @@ class run_worker(QObject):
             if self.config['TEST']['ENABLE'] and not self.config['DATA']['TEST']['USE_VAL_AS_TEST']:
                 # Test path
                 p = os.path.realpath(os.path.join(self.config['DATA']['TEST']['PATH'], '..'))
+                p = path_to_linux(p, self.main_gui.cfg.settings['os_host'])
                 if not path_in_list(paths,p):
                     paths.append(p)
                     volumes[p] = {"bind": p, "mode": "ro"}
+                p = path_to_linux(self.config['DATA']['TEST']['PATH'], self.main_gui.cfg.settings['os_host'])
+                temp_cfg['DATA']['TEST']['PATH'] = p
 
                 if self.config['DATA']['TEST']['LOAD_GT']:
                     # Test GT path
-                    p = os.path.realpath(os.path.join(self.config['DATA']['TEST']['GT_PATH'], '..'))
+                    p = os.path.realpath(os.path.join(self.config['DATA']['TEST']['GT_PATH'], '..'))   
+                    p = path_to_linux(p, self.main_gui.cfg.settings['os_host'])
                     if not path_in_list(paths,p):
                         paths.append(p)
-                        volumes[p] = {"bind": p, "mode": "ro"}    
+                        volumes[p] = {"bind": p, "mode": "ro"} 
+                    p = path_to_linux(self.config['DATA']['TEST']['GT_PATH'], self.main_gui.cfg.settings['os_host'])
+                    temp_cfg['DATA']['TEST']['GT_PATH'] = p   
 
             if self.config['MODEL']['LOAD_CHECKPOINT']: 
                 p = os.path.realpath(os.path.join(self.config['PATHS']['CHECKPOINT_FILE'], '..'))
+                p = path_to_linux(p, self.main_gui.cfg.settings['os_host'])
                 if not path_in_list(paths,p):
                     paths.append(p)
                     volumes[p] = {"bind": p, "mode": "ro"} 
+                p = path_to_linux(self.config['PATHS']['CHECKPOINT_FILE'], self.main_gui.cfg.settings['os_host'])
+                temp_cfg['PATHS']['CHECKPOINT_FILE'] = p
 
             if not self.config['TEST']['ENABLE']:
                 self.gui.run_window.test_progress_label.setVisible(False)
@@ -296,6 +323,10 @@ class run_worker(QObject):
                 self.gui.run_window.test_progress_bar.setEnabled(False)
                 self.gui.run_window.test_files_label.setEnabled(False)
             
+            print("Creating temporal input YAML file") 
+            with open(real_cfg_input, 'w') as outfile:
+                yaml.dump(temp_cfg, outfile, default_flow_style=False)
+
             device_requests=[ docker.types.DeviceRequest(count=-1, capabilities=[['gpu']]) ] if self.use_gpu else None
             # Run container
             self.biapy_container = self.docker_client.containers.run(
@@ -322,7 +353,7 @@ class run_worker(QObject):
             .format(str(self.biapy_container.image).replace('<','').replace('>',''), self.biapy_container.short_id,
                 now.strftime("%Y/%m/%d %H:%M:%S"), jobname,
                 bytearray(QUrl.fromLocalFile(cfg_file).toEncoded()).decode(), cfg_file,
-                bytearray(QUrl.fromLocalFile(container_out_dir).toEncoded()).decode(), container_out_dir,
+                bytearray(QUrl.fromLocalFile(container_out_dir_in_host).toEncoded()).decode(), container_out_dir_in_host,
                 bytearray(QUrl.fromLocalFile(self.container_stdout_file).toEncoded()).decode(), self.container_stdout_file,
                 bytearray(QUrl.fromLocalFile(self.container_stderr_file).toEncoded()).decode(), self.container_stderr_file)
             

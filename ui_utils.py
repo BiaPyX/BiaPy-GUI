@@ -5,7 +5,7 @@ import docker
 import ast 
 import GPUtil
 import yaml
-from pathlib import PurePath, Path
+from pathlib import PurePath, Path, PureWindowsPath
 
 from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtCore import QUrl
@@ -24,7 +24,7 @@ def examine(main_window, save_in_obj_tag=None, is_file=True):
     if out == "": return # If no file was selected 
 
     if save_in_obj_tag is not None:
-        getattr(main_window.ui, save_in_obj_tag).setText(out)
+        getattr(main_window.ui, save_in_obj_tag).setText(os.path.normpath(out))
         if save_in_obj_tag == "DATA__TRAIN__PATH__INPUT":
             main_window.cfg.settings['train_data_input_path'] = out 
         elif save_in_obj_tag == "DATA__TRAIN__GT_PATH__INPUT":
@@ -419,7 +419,10 @@ def set_text(obj, s):
         else:
             return "{} couldn't be loaded in {}".format(s,obj)
     elif isinstance(obj, QLineEdit):
-        obj.setText(s)
+        if "PATH" in obj.objectName():
+            obj.setText(os.path.normpath(s))
+        else:
+            obj.setText(s)
     else: #QTextBrowser
         obj.setText(s)
 
@@ -974,11 +977,11 @@ def create_yaml_file(self):
     self.ui.check_yaml_file_errors_frame.setStyleSheet("") 
     
     # Update GUI with the new YAML file path
-    self.ui.select_yaml_name_label.setText(os.path.join(self.cfg.settings['yaml_config_file_path'], self.cfg.settings['yaml_config_filename']))
+    self.ui.select_yaml_name_label.setText(os.path.normpath(os.path.join(self.cfg.settings['yaml_config_file_path'], self.cfg.settings['yaml_config_filename'])))
     
     if replace:
         # Advise user where the YAML file has been saved 
-        message = "Configuration file created:\n{}".format(os.path.join(self.cfg.settings['yaml_config_file_path'], self.cfg.settings['yaml_config_filename']))
+        message = "Configuration file created:\n{}".format(os.path.normpath(os.path.join(self.cfg.settings['yaml_config_file_path'], self.cfg.settings['yaml_config_filename'])))
         self.dialog_exec(message, reason="inform_user")
             
     return False
@@ -1095,8 +1098,8 @@ def load_yaml_to_GUI(self):
             self.dialog_exec("Configuration file succesfully loaded! You will "\
                 "be redirected to the workflow page so you can modify the configuration.", "inform_user_and_go")
             self.cfg.settings['yaml_config_file_path'] = os.path.dirname(yaml_file)
-            self.ui.goptions_browse_yaml_path_input.setText(os.path.dirname(yaml_file))
-            self.ui.goptions_yaml_name_input.setText(os.path.basename(yaml_file))
+            self.ui.goptions_browse_yaml_path_input.setText(os.path.normpath(os.path.dirname(yaml_file)))
+            self.ui.goptions_yaml_name_input.setText(os.path.normpath(os.path.basename(yaml_file)))
         else:
             self.dialog_exec(errors, "load_yaml_ok_but_errors")
 
@@ -1195,3 +1198,9 @@ def path_in_list(list, path):
             if PurePath(path).is_relative_to(PurePath(i)):
                 return True
     return False
+
+def path_to_linux(p, orig_os="win"):
+    if "win" in orig_os.lower():
+        p = PureWindowsPath(p)
+        p = os.path.join("/"+p.parts[0][0],*p.parts[1:]).replace('\\','/')
+    return p 
