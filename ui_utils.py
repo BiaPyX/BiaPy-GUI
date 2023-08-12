@@ -183,7 +183,7 @@ def buttonPressed(self, buttonName, to_page):
         adjust_window_progress(self)
 
     elif buttonName=='bn_test' or ('bn_' not in buttonName and to_page == 4):
-        self.ui.continue_bn.setText("Generate YAML")
+        self.ui.continue_bn.setText("Create configuration file")
         self.ui.stackedWidget.setCurrentWidget(self.ui.page_create_yaml)
         self.ui.stackedWidget_create_yaml_frame.setCurrentWidget(self.ui.test_page)
         self.ui.frame_test.setStyleSheet("background:rgb(255,255,255)") 

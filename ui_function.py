@@ -487,4 +487,6 @@ class UIFunction(MainWindow):
         self.cfg.settings['running_workers'][worker_id].update_cont_state_signal.connect(self.cfg.settings['running_workers'][worker_id].gui.update_cont_state)
         self.cfg.settings['running_workers'][worker_id].update_train_progress_signal.connect(self.cfg.settings['running_workers'][worker_id].gui.update_train_progress)
         self.cfg.settings['running_workers'][worker_id].update_test_progress_signal.connect(self.cfg.settings['running_workers'][worker_id].gui.update_test_progress)
+        self.cfg.settings['running_workers'][worker_id].update_pulling_progress_signal.connect(self.cfg.settings['running_workers'][worker_id].gui.update_pulling_progress)
+        self.cfg.settings['running_workers'][worker_id].update_pulling_signal.connect(self.cfg.settings['running_workers'][worker_id].gui.pulling_progress)
         self.cfg.settings['running_threads'][worker_id].start()

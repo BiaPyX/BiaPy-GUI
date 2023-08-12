@@ -1353,7 +1353,7 @@ QPushButton:pressed {
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>1</number>
+                <number>2</number>
                </property>
                <widget class="QWidget" name="page_home">
                 <property name="styleSheet">
@@ -2477,7 +2477,7 @@ border-radius: 15px;</string>
                        </font>
                       </property>
                       <property name="currentIndex">
-                       <number>2</number>
+                       <number>3</number>
                       </property>
                       <widget class="QWidget" name="workflow_selection_page">
                        <property name="minimumSize">
@@ -3231,7 +3231,7 @@ QPushButton:pressed {
                              <rect>
                               <x>0</x>
                               <y>0</y>
-                              <width>898</width>
+                              <width>904</width>
                               <height>495</height>
                              </rect>
                             </property>
@@ -3603,8 +3603,8 @@ QPushButton:pressed {
                                     <rect>
                                      <x>0</x>
                                      <y>0</y>
-                                     <width>331</width>
-                                     <height>161</height>
+                                     <width>856</width>
+                                     <height>175</height>
                                     </rect>
                                    </property>
                                    <layout class="QGridLayout" name="gridLayout_2">
@@ -12661,8 +12661,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>895</width>
-                                         <height>332</height>
+                                         <width>490</width>
+                                         <height>303</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_18">
@@ -16368,8 +16368,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>896</width>
-                                       <height>310</height>
+                                       <width>435</width>
+                                       <height>293</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_61">
@@ -18225,7 +18225,7 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>879</width>
+                                       <width>510</width>
                                        <height>736</height>
                                       </rect>
                                      </property>
@@ -19116,8 +19116,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>896</width>
-                                       <height>310</height>
+                                       <width>326</width>
+                                       <height>44</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_64">
@@ -19193,8 +19193,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>896</width>
-                                       <height>310</height>
+                                       <width>372</width>
+                                       <height>44</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_65">
@@ -19270,8 +19270,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>896</width>
-                                       <height>310</height>
+                                       <width>425</width>
+                                       <height>44</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_66">
@@ -19347,8 +19347,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>896</width>
-                                       <height>310</height>
+                                       <width>346</width>
+                                       <height>44</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_67">
@@ -19560,7 +19560,7 @@ QPushButton:pressed {
                             </property>
                             <property name="maximumSize">
                              <size>
-                              <width>200</width>
+                              <width>220</width>
                               <height>77</height>
                              </size>
                             </property>
@@ -19589,7 +19589,7 @@ QPushButton:pressed {
 }</string>
                             </property>
                             <property name="text">
-                             <string>CONTINUE</string>
+                             <string>Continue</string>
                             </property>
                             <property name="iconSize">
                              <size>
@@ -20003,7 +20003,7 @@ QPushButton:pressed {
 }</string>
                          </property>
                          <property name="text">
-                          <string>RUN BiaPy</string>
+                          <string>Run BiaPy</string>
                          </property>
                          <property name="iconSize">
                           <size>

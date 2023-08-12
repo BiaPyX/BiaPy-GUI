@@ -2,6 +2,7 @@ import os
 import traceback
 import docker
 import yaml
+import numpy as np
 from datetime import datetime, timedelta
 
 from PySide2 import QtCore, QtGui, QtWidgets
@@ -40,6 +41,7 @@ class runBiaPy_Ui(QDialog):
         self.run_window.frame_top.mouseMoveEvent = movedialogWindow  
         self.yes_no = yes_no_Ui()
         self.forcing_close = False
+        self.progress_pulling_time = True
 
     def center_window(self, widget, geometry):
         window = widget.window()
@@ -89,7 +91,7 @@ class runBiaPy_Ui(QDialog):
     def update_log(self):
         finished_good = False
         with open(self.parent_worker.container_stdout_file, 'r') as f:
-            last_lines = f.readlines()[-11:]
+            last_lines = f.readlines()[-13:]
             last_lines = ''.join(last_lines).replace("\x08", "").replace("[A", "").replace("", "")           
             self.run_window.run_biapy_log.setText(str(last_lines))
             if "FINISHED JOB" in last_lines:
@@ -107,12 +109,12 @@ class runBiaPy_Ui(QDialog):
                 self.parent_worker.biapy_container.reload()
                 st = self.parent_worker.biapy_container.status
                 if st == "running":
-                    st = "<span style=\"color:green;\">"+st+"</span>"
+                    st = "<span style=\"color:green;\">R"+st[1:]+"</span>"
                 elif st == "exited":
-                    st = "<span style=\"color:red;\">"+st+"</span>"
+                    st = "<span style=\"color:red;\">E"+st[1:]+"</span>"
                     self.run_window.stop_container_bn.setEnabled(False)
                 elif st == "created":
-                    st = "<span style=\"color:yellow;\">"+st+"</span>"
+                    st = "<span style=\"color:orange;\">C"+st[1:]+"</span>"
         # When the signal is 0 the container has finished good
         else:
             st = "finished"
@@ -132,6 +134,21 @@ class runBiaPy_Ui(QDialog):
             style=\"font-size:12pt;\">"+"{}/{}".format(self.parent_worker.test_image_count, \
             self.parent_worker.test_files)+"</span></p></body></html>") 
         
+    def update_pulling_progress(self, value):
+        if self.progress_pulling_time:
+            self.run_window.biapy_image_pulling_progress_bar.setMaximum(len(self.parent_worker.total_layers)*10)
+        self.run_window.biapy_image_pulling_progress_bar.setValue(value)
+
+    def pulling_progress(self, value):
+        if value == 0: # Start of the pulling process 
+            self.run_window.biapy_image_status.setText("BiaPy image [ <span style=\"color:orange;\"> Pulling </span> ]")
+            self.run_window.container_pulling_frame.setVisible(True)
+            self.run_window.biapy_container_info_label.setText("Waiting until the image is completely downloaded!")
+        else:
+            self.run_window.container_pulling_frame.setVisible(False)
+            self.run_window.biapy_image_status.setText("BiaPy image [ <span style=\"color:green;\">Downloaded</span> ]")
+            self.run_window.biapy_container_info_label.setText("INITIALIZING . . . (this may take a while)")
+
     def mousePressEvent(self, event):
         self.dragPos = event.globalPos()
 
@@ -152,6 +169,12 @@ class run_worker(QObject):
 
     # Signal to indicate the main thread to update the GUI with the new progress of the test phase
     update_test_progress_signal = QtCore.Signal(int)
+
+    # Signal to indicate the main thread to update the GUI to advice user in the pulling process steps
+    update_pulling_signal = QtCore.Signal(int)
+
+    # Signal to indicate the main thread to update the GUI with the pulling progress
+    update_pulling_progress_signal = QtCore.Signal(int)
 
     def __init__(self, main_gui, config, container_name, worker_id, output_folder, user_host, use_gpu):
         super(run_worker, self).__init__()
@@ -200,6 +223,31 @@ class run_worker(QObject):
     def run(self): 
         f = None
         try:       
+            images = self.docker_client.images.list(name=self.main_gui.cfg.settings['biapy_container_name'])
+            if len(images) == 0:
+                self.update_pulling_signal.emit(0)
+
+                # Collect the output of the container and update the GUI
+                self.total_layers = {}
+                for item in self.docker_client.api.pull(self.main_gui.cfg.settings['biapy_container_name'], stream=True, decode=True):
+                    print(item)
+                    if item["status"] == 'Pulling fs layer':
+                        self.total_layers[item["id"]+"_download"] = 0
+                        self.total_layers[item["id"]+"_extract"] = 0
+                    elif item["status"] == "Downloading":
+                        self.total_layers[item["id"]+"_download"] = item["progressDetail"]['current']/item["progressDetail"]['total']
+                    elif item["status"] == "Extracting": 
+                        self.total_layers[item["id"]+"_extract"] = item["progressDetail"]['current']/item["progressDetail"]['total'] 
+                    elif item["status"] == "Pull complete": 
+                        self.total_layers[item["id"]+"_download"] = 1
+                        self.total_layers[item["id"]+"_extract"] = 1
+                    
+                    # Update GUI 
+                    steps = np.sum([int(float(x)*10) for x in self.total_layers.values()])
+                    self.update_pulling_progress_signal.emit(steps)
+
+            self.update_pulling_signal.emit(1)                
+
             # BiaPy call construction
             now = datetime.now()
             dt_string = now.strftime("%Y%m%d_%H%M%S")
@@ -328,7 +376,7 @@ class run_worker(QObject):
             with open(real_cfg_input, 'w') as outfile:
                 yaml.dump(temp_cfg, outfile, default_flow_style=False)
 
-            if self.use_gpu and self.windows_os:
+            if self.use_gpu and not self.windows_os:
                 device_requests = [ docker.types.DeviceRequest(count=-1, capabilities=[['gpu']]) ]
             else:
                 device_requests = None

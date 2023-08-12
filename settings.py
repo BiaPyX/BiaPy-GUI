@@ -19,7 +19,6 @@ class Settings():
 
         # OS
         self.settings['os_host'] = platform.system()
-        self.settings['user_to_replace'] = "biapy_user" 
         if "win" in self.settings['os_host'].lower():
             self.settings['user_host'] = getpass.getuser()
             #environ["USERNAME"] if platform.startswith("win") else environ["USER"]

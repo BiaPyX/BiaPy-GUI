@@ -7,19 +7,19 @@
     <x>0</x>
     <y>0</y>
     <width>1181</width>
-    <height>520</height>
+    <height>650</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>1181</width>
-    <height>520</height>
+    <height>650</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>1181</width>
-    <height>500</height>
+    <height>650</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -280,7 +280,7 @@ QPushButton:pressed {
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <property name="spacing">
-          <number>9</number>
+          <number>15</number>
          </property>
          <property name="leftMargin">
           <number>9</number>
@@ -291,6 +291,21 @@ QPushButton:pressed {
          <property name="bottomMargin">
           <number>0</number>
          </property>
+         <item>
+          <widget class="QLabel" name="biapy_image_status">
+           <property name="font">
+            <font>
+             <family>DejaVu Math TeX Gyre</family>
+             <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>BiaPy image [ ]</string>
+           </property>
+          </widget>
+         </item>
          <item>
           <widget class="QFrame" name="frame_3">
            <property name="frameShape">
@@ -331,7 +346,7 @@ QPushButton:pressed {
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_4">
                <property name="spacing">
-                <number>0</number>
+                <number>6</number>
                </property>
                <property name="leftMargin">
                 <number>0</number>
@@ -345,6 +360,44 @@ QPushButton:pressed {
                <property name="bottomMargin">
                 <number>0</number>
                </property>
+               <item>
+                <widget class="QFrame" name="container_pulling_frame">
+                 <property name="frameShape">
+                  <enum>QFrame::NoFrame</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_3">
+                  <property name="spacing">
+                   <number>15</number>
+                  </property>
+                  <property name="leftMargin">
+                   <number>30</number>
+                  </property>
+                  <item>
+                   <widget class="QLabel" name="label_2">
+                    <property name="font">
+                     <font>
+                      <family>DejaVu Math TeX Gyre</family>
+                      <pointsize>12</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>Downloading BiaPy image (only done once)</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QProgressBar" name="biapy_image_pulling_progress_bar">
+                    <property name="value">
+                     <number>24</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
                <item>
                 <widget class="QLabel" name="biapy_container_info_label">
                  <property name="minimumSize">
@@ -420,7 +473,7 @@ QPushButton:pressed {
                      </font>
                     </property>
                     <property name="text">
-                     <string>TextLabel</string>
+                     <string>BiaPy state [  ]</string>
                     </property>
                    </widget>
                   </item>
@@ -428,7 +481,7 @@ QPushButton:pressed {
                    <widget class="QPushButton" name="stop_container_bn">
                     <property name="minimumSize">
                      <size>
-                      <width>0</width>
+                      <width>100</width>
                       <height>40</height>
                      </size>
                     </property>
@@ -454,7 +507,7 @@ QPushButton:pressed {
 }</string>
                     </property>
                     <property name="text">
-                     <string>   Stop running   </string>
+                     <string>Stop</string>
                     </property>
                    </widget>
                   </item>
