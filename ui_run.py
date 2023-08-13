@@ -360,5 +360,10 @@ class Ui_RunBiaPy(object):
         self.train_epochs_label.setText(QCoreApplication.translate("RunBiaPy", u"<html><head/><body><p align=\"center\">Epochs</p><p align=\"center\">-/-</p></body></html>", None))
         self.test_files_label.setText(QCoreApplication.translate("RunBiaPy", u"<html><head/><body><p align=\"center\">Files</p><p align=\"center\">-/-</p></body></html>", None))
         self.label.setText(QCoreApplication.translate("RunBiaPy", u"Last lines of the log (updating every 3 seconds):", None))
+        self.run_biapy_log.setHtml(QCoreApplication.translate("RunBiaPy", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Monospace'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600;\">Please wait, the first screen update may take a while depending on your OS</span></p></body></html>", None))
     # retranslateUi
 

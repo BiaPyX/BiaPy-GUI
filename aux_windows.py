@@ -127,10 +127,7 @@ class workflow_explanation_Ui(QDialog):
         self.dragPos = event.globalPos()
 
     def openlink(self, link):
-        print(link)
-        print(type(link))
-        a = QDesktopServices.openUrl(link)
-        del a
+        QDesktopServices.openUrl(link)
 
     def infoConstrict(self, workflow_name, input_img, gt_img, workflow_description, 
         workflow_doc, workflow_ready_to_use_examples):
