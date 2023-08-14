@@ -971,7 +971,7 @@ class Ui_MainWindow(object):
         self.workflow_selection_page.setMinimumSize(QSize(0, 0))
         self.page_create_yaml_mid_frame = QFrame(self.workflow_selection_page)
         self.page_create_yaml_mid_frame.setObjectName(u"page_create_yaml_mid_frame")
-        self.page_create_yaml_mid_frame.setGeometry(QRect(0, 0, 951, 447))
+        self.page_create_yaml_mid_frame.setGeometry(QRect(0, 0, 951, 440))
         self.page_create_yaml_mid_frame.setFont(font)
         self.page_create_yaml_mid_frame.setFrameShape(QFrame.NoFrame)
         self.page_create_yaml_mid_frame.setFrameShadow(QFrame.Raised)
