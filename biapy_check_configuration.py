@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: c67407bc9652a85de9622b9498c7ca84b5873e36
+## Copied from BiaPy commit: 98c7489d0da8aaf7ea696ca58822098cedc0d21b
 import os
 import numpy as np
 
@@ -90,10 +90,11 @@ def check_configuration(cfg, check_data_paths=True):
         and cfg.PROBLEM.TYPE not in ['SEMANTIC_SEG', 'INSTANCE_SEG', 'DETECTION']:
         raise ValueError("'TEST.POST_PROCESSING.YZ_FILTERING' or 'TEST.POST_PROCESSING.Z_FILTERING' can only be enabled "
             "when 'PROBLEM.TYPE' is among ['SEMANTIC_SEG', 'INSTANCE_SEG', 'DETECTION']")
- 
 
+    # First update is done here as some checks from this point need to have those updates 
     if len(opts) > 0:
         cfg.merge_from_list(opts)
+        opts = []
 
     #### General checks ####
     assert cfg.PROBLEM.NDIM in ['2D', '3D'], "Problem need to be '2D' or '3D'"
@@ -187,12 +188,9 @@ def check_configuration(cfg, check_data_paths=True):
     elif cfg.PROBLEM.TYPE == 'DENOISING':
         if cfg.DATA.TEST.LOAD_GT:
             raise ValueError("Denoising is made in an unsupervised way so there is no ground truth required. Disable 'DATA.TEST.LOAD_GT'")
-        if not cfg.DATA.TRAIN.IN_MEMORY or not cfg.DATA.VAL.IN_MEMORY:
-            raise NotImplementedError
         if not check_value(cfg.PROBLEM.DENOISING.N2V_PERC_PIX):
             raise ValueError("PROBLEM.DENOISING.N2V_PERC_PIX not in [0, 1] range")
            
-
     ### Pre-processing ###
     if cfg.DATA.EXTRACT_RANDOM_PATCH and cfg.DATA.PROBABILITY_MAP:
         if cfg.DATA.W_FOREGROUND+cfg.DATA.W_BACKGROUND != 1:
@@ -317,12 +315,18 @@ def check_configuration(cfg, check_data_paths=True):
                 raise ValueError("'MODEL.FEATURE_MAPS' and 'MODEL.DROPOUT_VALUES' lengths must be equal")
 
     # Adjust Z_DOWN values to feature maps
-    if len(cfg.MODEL.FEATURE_MAPS)-1 == len(cfg.MODEL.Z_DOWN):
-        if all(x == 0 for x in cfg.MODEL.Z_DOWN):
+    if all(x == 0 for x in cfg.MODEL.Z_DOWN):
+        if cfg.PROBLEM.TYPE == 'SUPER_RESOLUTION' and cfg.PROBLEM.NDIM == '3D':
+            opts.extend(['MODEL.Z_DOWN', (1,)*(len(cfg.MODEL.FEATURE_MAPS)-1)])
+        else:
             opts.extend(['MODEL.Z_DOWN', (2,)*(len(cfg.MODEL.FEATURE_MAPS)-1)])
-        elif any([False for x in cfg.MODEL.Z_DOWN if x != 1 and x != 2]):
-            raise ValueError("'MODEL.Z_DOWN' need to be 1 or 2")
-        else: 
+    elif (cfg.PROBLEM.TYPE == 'SUPER_RESOLUTION' and cfg.PROBLEM.NDIM == '3D') and \
+        any(x != 1 for x in cfg.MODEL.Z_DOWN):
+        raise ValueError("'MODEL.Z_DOWN' != 1 not allowed in super-resolution workflow")
+    elif any([False for x in cfg.MODEL.Z_DOWN if x != 1 and x != 2]):
+        raise ValueError("'MODEL.Z_DOWN' need to be 1 or 2")
+    else:
+        if len(cfg.MODEL.FEATURE_MAPS)-1 != len(cfg.MODEL.Z_DOWN):
             raise ValueError("'MODEL.FEATURE_MAPS' length minus one and 'MODEL.Z_DOWN' length must be equal")
 
     if cfg.MODEL.LAST_ACTIVATION not in ['softmax', 'sigmoid', 'linear']:
@@ -359,7 +363,10 @@ def check_configuration(cfg, check_data_paths=True):
     # will throw an error not very clear for users
     if cfg.MODEL.ARCHITECTURE in ['unet', 'resunet', 'seunet', 'attention_unet']:
         for i in range(len(cfg.MODEL.FEATURE_MAPS)-1):
-            sizes = cfg.DATA.PATCH_SIZE[1:-1] if cfg.MODEL.Z_DOWN[i] == 1 else cfg.DATA.PATCH_SIZE[:-1]
+            if cfg.MODEL.Z_DOWN[i] == 1 or (cfg.PROBLEM.TYPE == 'SUPER_RESOLUTION' and cfg.PROBLEM.NDIM == '3D'):
+                sizes = cfg.DATA.PATCH_SIZE[1:-1] 
+            else:
+                sizes = cfg.DATA.PATCH_SIZE[:-1]
             if not all([False for x in sizes if x%(np.power(2,(i+1))) != 0 or x == 0]):
                 raise ValueError("The 'DATA.PATCH_SIZE' provided is not divisible by 2 in each of the U-Net's levels. You can reduce the number "
                 "of levels (by reducing 'cfg.MODEL.FEATURE_MAPS' array's length) or increase the 'DATA.PATCH_SIZE'")
@@ -453,6 +460,9 @@ def check_configuration(cfg, check_data_paths=True):
                              "dimensions".format(dim_count))
         if cfg.TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS_RADIUS[0] == -1:
             raise ValueError("'TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS' need to be set when 'TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS' is True")   
+
+    if len(opts) > 0:
+        cfg.merge_from_list(opts)
 
 def check_value(value, value_range=(0,1)):
     """Checks if a value is within a range """

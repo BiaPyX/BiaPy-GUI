@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: c67407bc9652a85de9622b9498c7ca84b5873e36
+## Copied from BiaPy commit: 98c7489d0da8aaf7ea696ca58822098cedc0d21b
 
 import os
 from yacs.config import CfgNode as CN

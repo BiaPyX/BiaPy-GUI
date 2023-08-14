@@ -204,14 +204,14 @@ class Settings():
                 {
                     'name': 'Cardiomyoblast super-resolution (3D)', 
                     'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'sr_3d_cardiomyoblast.png'))), 
-                    'data': 'https://drive.google.com/file/d/1rtrR_jt8hcBEqvwx_amFBNR7CMP5NXLo/view?usp=sharing', 
+                    'data': 'https://drive.google.com/file/d/1g7GnAnRuQxgqqaTsqDHnaSS9HRgBedvm/view?usp=sharing', 
                     'template': 'https://github.com/danifranco/BiaPy/blob/master/templates/super-resolution/3d_super-resolution.yaml'
                 },
                 {
                     'name': 'Urban super-resolution (2D)', 
                     'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'sr_2d_urban100.png'))), 
                     'data': 'https://drive.google.com/file/d/1Dzlz2dbFw-fz4JDykrWu-SU0v45YBjbj/view?usp=sharing', 
-                    'template': 'https://github.com/danifranco/BiaPy/blob/master/templates/super-resolution/2d_super-resolution.yaml'
+                    'template': 'https://github.com/danifranco/BiaPy/blob/master/templates/super-resolution/2d_super-resolution_rgb.yaml'
                 }
             ],
             [ # SSL
@@ -245,7 +245,7 @@ class Settings():
                     'name': 'Butterfly classification (2D)', 
                     'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'classification_2d_butterfly.jpg'))), 
                     'data': 'https://drive.google.com/file/d/1m4_3UAgUsZ8FDjB4HyfA50Sht7_XkfdB/view?usp=drive_link', 
-                    'template': 'https://github.com/danifranco/BiaPy/blob/master/templates/classification/2d_classification.yaml'
+                    'template': 'https://github.com/danifranco/BiaPy/blob/master/templates/classification/2d_classification_rgb.yaml'
                 }
             ]
         ]
