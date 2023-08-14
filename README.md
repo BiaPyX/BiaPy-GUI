@@ -9,7 +9,7 @@
 
 ## Download GUI 
 
-- [Windows 64-bit)](https://github.com/danifranco/BiaPy-GUI/raw/main/dist-win/BiaPy.exe) 
+- [Windows 64-bit](https://github.com/danifranco/BiaPy-GUI/raw/main/dist-win/BiaPy.exe) 
 - [Linux 64-bit](https://github.com/danifranco/BiaPy-GUI/raw/main/dist-linux/BiaPy) 
 - [macOS 64-bit](https://github.com/danifranco/BiaPy-GUI/raw/main/dist-macOS/BiaPy-macOS.zip) 
 
