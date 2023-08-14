@@ -26,6 +26,7 @@ class runBiaPy_Ui(QDialog):
         self.run_window.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","close_icon.png"))))
         self.run_window.bn_min.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","hide_icon.png"))))
         self.run_window.icon_label.setPixmap(QPixmap(resource_path(os.path.join("images","bn_images","info.png"))))
+        self.run_window.return_icon_label.setPixmap(QPixmap(resource_path(os.path.join("images","bn_images","return_icon.png"))))
         self.run_window.window_des_label.setText("  Running information")
         self.run_window.stop_container_bn.clicked.connect(lambda: self.parent_worker.stop_worker())
         self.run_window.container_state_label.setText("BiaPy state [ Initializing ]")
@@ -58,8 +59,10 @@ class runBiaPy_Ui(QDialog):
         if self.forcing_close:
             self.kill_all_processes()
         else:
-            if self.run_window.stop_container_bn.isEnabled():
+            if "run" in self.parent_worker.process_steps:
                 m = "Are you sure that you want to exit? Running container will be stopped"
+            elif "pull" in self.parent_worker.process_steps:
+                m = "Are you sure that you want to exit? Container's pulling process will be stopped"
             else:
                 m = "Are you sure that you want to exit?"
             self.yes_no.create_question(m)
@@ -142,8 +145,10 @@ class runBiaPy_Ui(QDialog):
     def pulling_progress(self, value):
         if value == 0: # Start of the pulling process 
             self.run_window.biapy_image_status.setText("BiaPy image [ <span style=\"color:orange;\"> Pulling </span> ]")
+            self.run_window.pulling_label.setText("Downloading BiaPy image (only done once) - Total size: {}"
+                .format(self.parent_worker.main_gui.cfg.settings['biapy_container_size']))
             self.run_window.container_pulling_frame.setVisible(True)
-            self.run_window.biapy_container_info_label.setText("Waiting until the image is completely downloaded!")
+            self.run_window.biapy_container_info_label.setText("Wait for the image to download completely.")
         else:
             self.run_window.container_pulling_frame.setVisible(False)
             self.run_window.biapy_image_status.setText("BiaPy image [ <span style=\"color:green;\">Downloaded</span> ]")
@@ -191,6 +196,8 @@ class run_worker(QObject):
         self.docker_client = docker.from_env()
         self.biapy_container = None
         self.container_info = 'NONE'
+        self.process_steps = "NONE"
+        self.break_pulling = False
 
     def stop_worker(self):
         print("Stopping the container . . . ")
@@ -205,7 +212,9 @@ class run_worker(QObject):
             self.gui.run_window.train_progress_bar.setEnabled(False)
             self.gui.run_window.train_epochs_label.setEnabled(False)
         else:
-            print("Container not running yet")
+            print("Container not running yet")      
+            # To kill pulling process if it is running 
+            self.break_pulling = True
             
     def init_gui(self):
         self.gui.init_log(self.container_info)
@@ -223,10 +232,13 @@ class run_worker(QObject):
     def run(self): 
         f = None
         try:       
+            ###########
+            # PULLING #
+            ###########
             images = self.docker_client.images.list(name=self.main_gui.cfg.settings['biapy_container_name'])
             if len(images) == 0:
                 self.update_pulling_signal.emit(0)
-
+                self.process_steps = "pulling"
                 # Collect the output of the container and update the GUI
                 self.total_layers = {}
                 for item in self.docker_client.api.pull(self.main_gui.cfg.settings['biapy_container_name'], stream=True, decode=True):
@@ -241,17 +253,23 @@ class run_worker(QObject):
                     elif item["status"] == "Pull complete": 
                         self.total_layers[item["id"]+"_download"] = 1
                         self.total_layers[item["id"]+"_extract"] = 1
-                    
+
+                    if self.break_pulling:
+                        print("Stopping pulling process . . .")
+                        return 
                     # Update GUI 
                     steps = np.sum([int(float(x)*10) for x in self.total_layers.values()])
                     self.update_pulling_progress_signal.emit(steps)
 
-            self.update_pulling_signal.emit(1)                
+            self.update_pulling_signal.emit(1)     
 
-            # BiaPy call construction
+            #################
+            # RUN CONTAINER #
+            #################
             now = datetime.now()
             dt_string = now.strftime("%Y%m%d_%H%M%S")
             jobname = get_text(self.main_gui.ui.job_name_input)
+            self.process_steps = "pre-running"
 
             cfg_file = get_text(self.main_gui.ui.select_yaml_name_label).replace('\\','/')
             # Need to create a new copy of the input config file to adapt Windows paths to linux (container's OS)
@@ -389,6 +407,7 @@ class run_worker(QObject):
                 user=self.user_host if not self.windows_os else None,
                 device_requests=device_requests
             )
+            self.process_steps = "running"
             print("Container created!")
 
             # Set the window header 
@@ -468,7 +487,7 @@ class run_worker(QObject):
                 self.gui.run_window.test_progress_label.setEnabled(False)
                 self.gui.run_window.test_progress_bar.setEnabled(False)
                 self.gui.run_window.test_files_label.setEnabled(False)
-
+            self.process_steps = "finished"
             f.close()
         except:
             # Print first the traceback (only visible through terminal)

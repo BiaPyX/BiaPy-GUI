@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1181</width>
+    <width>1210</width>
     <height>592</height>
    </rect>
   </property>
@@ -1353,7 +1353,7 @@ QPushButton:pressed {
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>2</number>
+                <number>1</number>
                </property>
                <widget class="QWidget" name="page_home">
                 <property name="styleSheet">
@@ -2491,7 +2491,7 @@ border-radius: 15px;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>921</width>
+                          <width>951</width>
                           <height>456</height>
                          </rect>
                         </property>
@@ -3165,7 +3165,7 @@ QPushButton:pressed {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>921</width>
+                          <width>951</width>
                           <height>456</height>
                          </rect>
                         </property>
@@ -3231,8 +3231,8 @@ QPushButton:pressed {
                              <rect>
                               <x>0</x>
                               <y>0</y>
-                              <width>904</width>
-                              <height>495</height>
+                              <width>937</width>
+                              <height>493</height>
                              </rect>
                             </property>
                             <property name="layoutDirection">
@@ -3603,8 +3603,8 @@ QPushButton:pressed {
                                     <rect>
                                      <x>0</x>
                                      <y>0</y>
-                                     <width>856</width>
-                                     <height>175</height>
+                                     <width>889</width>
+                                     <height>174</height>
                                     </rect>
                                    </property>
                                    <layout class="QGridLayout" name="gridLayout_2">
@@ -4041,7 +4041,7 @@ QPushButton:pressed {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>921</width>
+                          <width>951</width>
                           <height>452</height>
                          </rect>
                         </property>
@@ -4255,8 +4255,8 @@ QPushButton:pressed {
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>895</width>
-                                  <height>5979</height>
+                                  <width>934</width>
+                                  <height>5973</height>
                                  </rect>
                                 </property>
                                 <property name="layoutDirection">
@@ -12360,7 +12360,7 @@ QPushButton:pressed {
                                      <widget class="QLabel" name="train_gt_label">
                                       <property name="maximumSize">
                                        <size>
-                                        <width>200</width>
+                                        <width>16777215</width>
                                         <height>35</height>
                                        </size>
                                       </property>
@@ -12593,7 +12593,7 @@ QPushButton:pressed {
                                 </font>
                                </property>
                                <property name="frameShape">
-                                <enum>QFrame::StyledPanel</enum>
+                                <enum>QFrame::NoFrame</enum>
                                </property>
                                <property name="frameShadow">
                                 <enum>QFrame::Raised</enum>
@@ -12623,7 +12623,7 @@ QPushButton:pressed {
                                    </font>
                                   </property>
                                   <property name="currentIndex">
-                                   <number>1</number>
+                                   <number>5</number>
                                   </property>
                                   <widget class="QWidget" name="train_workflow_specific_tab_semantic_seg_page">
                                    <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -12661,8 +12661,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>490</width>
-                                         <height>303</height>
+                                         <width>929</width>
+                                         <height>335</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_18">
@@ -13107,8 +13107,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>895</width>
-                                         <height>332</height>
+                                         <width>929</width>
+                                         <height>335</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_17">
@@ -13502,6 +13502,9 @@ QPushButton:pressed {
                                         <pointsize>12</pointsize>
                                        </font>
                                       </property>
+                                      <property name="frameShape">
+                                       <enum>QFrame::NoFrame</enum>
+                                      </property>
                                       <property name="widgetResizable">
                                        <bool>true</bool>
                                       </property>
@@ -13510,8 +13513,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>490</width>
-                                         <height>219</height>
+                                         <width>929</width>
+                                         <height>335</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_19">
@@ -13885,6 +13888,9 @@ QPushButton:pressed {
                                         <pointsize>12</pointsize>
                                        </font>
                                       </property>
+                                      <property name="frameShape">
+                                       <enum>QFrame::NoFrame</enum>
+                                      </property>
                                       <property name="widgetResizable">
                                        <bool>true</bool>
                                       </property>
@@ -13893,8 +13899,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>506</width>
-                                         <height>210</height>
+                                         <width>929</width>
+                                         <height>335</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_49">
@@ -14204,6 +14210,9 @@ QPushButton:pressed {
                                         <pointsize>12</pointsize>
                                        </font>
                                       </property>
+                                      <property name="frameShape">
+                                       <enum>QFrame::NoFrame</enum>
+                                      </property>
                                       <property name="widgetResizable">
                                        <bool>true</bool>
                                       </property>
@@ -14212,8 +14221,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>326</width>
-                                         <height>184</height>
+                                         <width>929</width>
+                                         <height>335</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_50">
@@ -14430,6 +14439,9 @@ QPushButton:pressed {
                                         <pointsize>12</pointsize>
                                        </font>
                                       </property>
+                                      <property name="frameShape">
+                                       <enum>QFrame::NoFrame</enum>
+                                      </property>
                                       <property name="widgetResizable">
                                        <bool>true</bool>
                                       </property>
@@ -14438,8 +14450,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>361</width>
-                                         <height>173</height>
+                                         <width>929</width>
+                                         <height>335</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_51">
@@ -14689,6 +14701,9 @@ QPushButton:pressed {
                                         <pointsize>12</pointsize>
                                        </font>
                                       </property>
+                                      <property name="frameShape">
+                                       <enum>QFrame::NoFrame</enum>
+                                      </property>
                                       <property name="widgetResizable">
                                        <bool>true</bool>
                                       </property>
@@ -14697,8 +14712,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>346</width>
-                                         <height>44</height>
+                                         <width>929</width>
+                                         <height>335</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_52">
@@ -14765,7 +14780,7 @@ QPushButton:pressed {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>921</width>
+                          <width>951</width>
                           <height>463</height>
                          </rect>
                         </property>
@@ -14933,8 +14948,8 @@ QPushButton:pressed {
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>880</width>
-                                  <height>1005</height>
+                                  <width>915</width>
+                                  <height>995</height>
                                  </rect>
                                 </property>
                                 <layout class="QGridLayout" name="gridLayout_37">
@@ -16310,8 +16325,8 @@ QPushButton:pressed {
                               <rect>
                                <x>-1</x>
                                <y>-1</y>
-                               <width>901</width>
-                               <height>312</height>
+                               <width>931</width>
+                               <height>348</height>
                               </rect>
                              </property>
                              <property name="frameShape">
@@ -16339,7 +16354,7 @@ QPushButton:pressed {
                               <item>
                                <widget class="QStackedWidget" name="test_workflow_specific_tab_stackedWidget">
                                 <property name="currentIndex">
-                                 <number>1</number>
+                                 <number>6</number>
                                 </property>
                                 <widget class="QWidget" name="test_workflow_specific_tab_semantic_seg_page">
                                  <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -16360,6 +16375,9 @@ QPushButton:pressed {
                                   </property>
                                   <item>
                                    <widget class="QScrollArea" name="scrollArea_8">
+                                    <property name="frameShape">
+                                     <enum>QFrame::NoFrame</enum>
+                                    </property>
                                     <property name="widgetResizable">
                                      <bool>true</bool>
                                     </property>
@@ -16368,8 +16386,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>435</width>
-                                       <height>293</height>
+                                       <width>931</width>
+                                       <height>348</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_61">
@@ -16741,6 +16759,9 @@ QPushButton:pressed {
                                   </property>
                                   <item>
                                    <widget class="QScrollArea" name="scrollArea_9">
+                                    <property name="frameShape">
+                                     <enum>QFrame::NoFrame</enum>
+                                    </property>
                                     <property name="widgetResizable">
                                      <bool>true</bool>
                                     </property>
@@ -16749,8 +16770,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>882</width>
-                                       <height>1178</height>
+                                       <width>917</width>
+                                       <height>1174</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_44">
@@ -18217,6 +18238,9 @@ QPushButton:pressed {
                                   </property>
                                   <item>
                                    <widget class="QScrollArea" name="scrollArea_10">
+                                    <property name="frameShape">
+                                     <enum>QFrame::NoFrame</enum>
+                                    </property>
                                     <property name="widgetResizable">
                                      <bool>true</bool>
                                     </property>
@@ -18225,8 +18249,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>510</width>
-                                       <height>736</height>
+                                       <width>917</width>
+                                       <height>732</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_47">
@@ -19108,6 +19132,9 @@ QPushButton:pressed {
                                   </property>
                                   <item>
                                    <widget class="QScrollArea" name="scrollArea_11">
+                                    <property name="frameShape">
+                                     <enum>QFrame::NoFrame</enum>
+                                    </property>
                                     <property name="widgetResizable">
                                      <bool>true</bool>
                                     </property>
@@ -19116,8 +19143,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>326</width>
-                                       <height>44</height>
+                                       <width>931</width>
+                                       <height>348</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_64">
@@ -19185,6 +19212,9 @@ QPushButton:pressed {
                                   </property>
                                   <item>
                                    <widget class="QScrollArea" name="scrollArea_12">
+                                    <property name="frameShape">
+                                     <enum>QFrame::NoFrame</enum>
+                                    </property>
                                     <property name="widgetResizable">
                                      <bool>true</bool>
                                     </property>
@@ -19193,8 +19223,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>372</width>
-                                       <height>44</height>
+                                       <width>931</width>
+                                       <height>348</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_65">
@@ -19262,6 +19292,9 @@ QPushButton:pressed {
                                   </property>
                                   <item>
                                    <widget class="QScrollArea" name="scrollArea_13">
+                                    <property name="frameShape">
+                                     <enum>QFrame::NoFrame</enum>
+                                    </property>
                                     <property name="widgetResizable">
                                      <bool>true</bool>
                                     </property>
@@ -19270,8 +19303,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>425</width>
-                                       <height>44</height>
+                                       <width>931</width>
+                                       <height>348</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_66">
@@ -19339,6 +19372,9 @@ QPushButton:pressed {
                                   </property>
                                   <item>
                                    <widget class="QScrollArea" name="scrollArea_14">
+                                    <property name="frameShape">
+                                     <enum>QFrame::NoFrame</enum>
+                                    </property>
                                     <property name="widgetResizable">
                                      <bool>true</bool>
                                     </property>
@@ -19347,8 +19383,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>346</width>
-                                       <height>44</height>
+                                       <width>931</width>
+                                       <height>348</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_67">
@@ -20144,7 +20180,7 @@ QPushButton:pressed {
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>869</width>
+                               <width>898</width>
                                <height>103</height>
                               </rect>
                              </property>

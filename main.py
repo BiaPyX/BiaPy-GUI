@@ -1053,7 +1053,7 @@ class MainWindow(QMainWindow):
         # Find if some window is still running 
         still_running = False
         for x in self.cfg.settings['running_workers']:
-            if x.gui.run_window.stop_container_bn.isEnabled(): # Means that is running
+            if "run" in x.process_steps: # Means that is running
                 still_running = True
                 break 
 

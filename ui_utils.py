@@ -224,7 +224,7 @@ def adjust_window_progress(self):
     self.ui.window3_bn.setIcon(self.cfg.settings['dot_images'][0] if self.cfg.settings['page_number'] >= 3 else self.cfg.settings['dot_images'][1])
     self.ui.window4_bn.setIcon(self.cfg.settings['dot_images'][0] if self.cfg.settings['page_number'] >= 4 else self.cfg.settings['dot_images'][1])
 
-def move_between_pages(self, to_page):
+def move_between_pages(self, to_page, dims=None):
     # Semantic seg
     if self.cfg.settings['selected_workflow'] == 0:
         jobname = "my_semantic_segmentation"
@@ -295,10 +295,16 @@ def move_between_pages(self, to_page):
     # Super resolution
     elif self.cfg.settings['selected_workflow'] == 4:
         jobname = "my_super_resolution"
-        if get_text(self.ui.PROBLEM__NDIM__INPUT) == "2D":
-            models = self.cfg.settings['sr_2d_models_real_names']
+        if dims is None:
+            if get_text(self.ui.PROBLEM__NDIM__INPUT) == "2D":
+                models = self.cfg.settings['sr_2d_models_real_names']
+            else:
+                models = self.cfg.settings['sr_3d_models_real_names']
         else:
-            models = self.cfg.settings['sr_3d_models_real_names']
+            if dims == "2D":
+                models = self.cfg.settings['sr_2d_models_real_names']
+            else:
+                models = self.cfg.settings['sr_3d_models_real_names']
         self.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.train_workflow_specific_tab_sr_page)
         self.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(self.ui.test_workflow_specific_tab_sr_page)
         # Train page
@@ -417,7 +423,7 @@ def set_text(obj, s):
         if index >= 0:
             obj.setCurrentIndex(index)
         else:
-            return "{} couldn't be loaded in {}".format(s,obj)
+            return "{} couldn't be loaded in {}".format(s,obj.objectName())
     elif isinstance(obj, QLineEdit):
         if "PATH" in obj.objectName():
             obj.setText(os.path.normpath(s))
@@ -561,7 +567,7 @@ def create_yaml_file(self):
         
         biapy_config['DATA']['TRAIN']['IN_MEMORY'] = True if get_text(self.ui.DATA__TRAIN__IN_MEMORY__INPUT) == "Yes" else False
         biapy_config['DATA']['TRAIN']['PATH'] = get_text(self.ui.DATA__TRAIN__PATH__INPUT)
-        if self.cfg.settings['selected_workflow'] not in [4,6,7]:
+        if self.cfg.settings['selected_workflow'] not in [5,6,7]:
             biapy_config['DATA']['TRAIN']['GT_PATH'] = get_text(self.ui.DATA__TRAIN__GT_PATH__INPUT)
         if int(get_text(self.ui.DATA__TRAIN__REPLICATE__INPUT)) != 0:
             biapy_config['DATA']['TRAIN']['REPLICATE'] = int(get_text(self.ui.DATA__TRAIN__REPLICATE__INPUT))
@@ -595,7 +601,7 @@ def create_yaml_file(self):
             biapy_config['DATA']['VAL']['FROM_TRAIN'] = False
             biapy_config['DATA']['VAL']['IN_MEMORY'] = True if get_text(self.ui.DATA__VAL__IN_MEMORY__INPUT) == "Yes" else False 
             biapy_config['DATA']['VAL']['PATH'] = get_text(self.ui.DATA__VAL__PATH__INPUT)
-            if self.cfg.settings['selected_workflow'] not in [4,6,7]:
+            if self.cfg.settings['selected_workflow'] not in [5,6,7]:
                 biapy_config['DATA']['VAL']['GT_PATH'] = get_text(self.ui.DATA__VAL__GT_PATH__INPUT)
             biapy_config['DATA']['VAL']['OVERLAP'] = get_text(self.ui.DATA__VAL__OVERLAP__INPUT)
             biapy_config['DATA']['VAL']['PADDING'] = get_text(self.ui.DATA__VAL__PADDING__INPUT)
@@ -617,7 +623,7 @@ def create_yaml_file(self):
         else:
             if get_text(self.ui.DATA__TEST__LOAD_GT__INPUT) == "Yes":
                 biapy_config['DATA']['TEST']['LOAD_GT'] = True
-                if self.cfg.settings['selected_workflow'] not in [4,6,7]:
+                if self.cfg.settings['selected_workflow'] not in [5,6,7]:
                     biapy_config['DATA']['TEST']['GT_PATH'] = get_text(self.ui.DATA__TEST__GT_PATH__INPUT)
             else:
                 biapy_config['DATA']['TEST']['LOAD_GT'] = False
@@ -1081,7 +1087,7 @@ def load_yaml_to_GUI(self):
             self.cfg.settings['selected_workflow'] = 5
         else: # CLASSIFICATION
             self.cfg.settings['selected_workflow'] = 6
-        move_between_pages(self, self.cfg.settings['selected_workflow'])
+        move_between_pages(self, self.cfg.settings['selected_workflow'], work_dim)
 
         # Go over configuration file
         errors, variables_set = analyze_dict(self, loaded_cfg, work_dim, "")

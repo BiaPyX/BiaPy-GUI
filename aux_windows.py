@@ -220,7 +220,7 @@ class dialog_Ui(QDialog):
                 for i, mes in enumerate(message):
                     m += "<br>"+str(i+1)+". {}".format(mes)
                 self.dialog_window.error_message_label.setText(m)
-                self.dialog_window.go_to_correct_bn.clicked.connect(self.close_and_go)
+                self.dialog_window.go_to_correct_bn.clicked.connect(self.close)
             elif reason in ["inform_user", "inform_user_and_go"]:
                 self.dialog_window.icon_label.setPixmap(self.upbar_icon[1])
                 self.dialog_window.window_des_label.setText("Information")

@@ -27,6 +27,7 @@ class Settings():
 
         # Biapy 
         self.settings['biapy_container_name'] = "danifranco/biapy:v1.0"
+        self.settings['biapy_container_size'] = "11.1GB"
         self.settings['biapy_container_dockerfile'] = "https://raw.githubusercontent.com/danifranco/BiaPy/master/utils/env/Dockerfile"
         self.settings['yaml_config_file_path'] =''
         self.settings['yaml_config_filename'] = ''
