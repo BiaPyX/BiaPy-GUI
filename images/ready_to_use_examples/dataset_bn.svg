@@ -14,7 +14,6 @@
    inkscape:export-ydpi="51.9044"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <sodipodi:namedview
@@ -28,13 +27,13 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="3.6233469"
-     inkscape:cx="78.656558"
-     inkscape:cy="68.031023"
-     inkscape:window-width="1551"
-     inkscape:window-height="970"
-     inkscape:window-x="26"
-     inkscape:window-y="23"
-     inkscape:window-maximized="0"
+     inkscape:cx="120.19274"
+     inkscape:cy="71.342879"
+     inkscape:window-width="1850"
+     inkscape:window-height="1136"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
      inkscape:current-layer="layer1" />
   <defs
      id="defs9085" />
@@ -43,24 +42,6 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-22.088377,-36.736211)">
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.85493px;line-height:1.25;font-family:'DejaVu Math TeX Gyre';-inkscape-font-specification:'DejaVu Math TeX Gyre, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.196373"
-       x="46.580696"
-       y="49.906693"
-       id="text3728"><tspan
-         sodipodi:role="line"
-         id="tspan3726"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.11389px;font-family:'DejaVu Math TeX Gyre';-inkscape-font-specification:'DejaVu Math TeX Gyre, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.196373"
-         x="46.580696"
-         y="49.906693">Dataset</tspan></text>
-    <use
-       x="0"
-       y="0"
-       xlink:href="#text3728"
-       id="use2771"
-       width="100%"
-       height="100%" />
     <g
        id="g2043"
        transform="matrix(0.50339236,0,0,0.65957938,21.114326,24.773524)"
@@ -71,5 +52,16 @@
          style="stroke:#000000;stroke-width:0.945156;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          sodipodi:nodetypes="ssssssssscscsssscscsssssss" />
     </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:8.11389px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="46.581112"
+       y="49.906235"
+       id="text6246"><tspan
+         sodipodi:role="line"
+         id="tspan6244"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.11389px;font-family:'DejaVu Math TeX Gyre';-inkscape-font-specification:'DejaVu Math TeX Gyre, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+         x="46.581112"
+         y="49.906235">Dataset</tspan></text>
   </g>
 </svg>
