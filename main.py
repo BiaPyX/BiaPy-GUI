@@ -40,7 +40,6 @@ class MainWindow(QMainWindow):
                 
         self.setWindowTitle("BiaPy") 
         UIFunction.initStackTab(self)
-        
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.ui.bn_min.clicked.connect(self.showMinimized)
@@ -1101,6 +1100,16 @@ if __name__ == "__main__":
         app = QApplication(sys.argv)
         app.setWindowIcon(QIcon(resource_path(os.path.join("images","biapy_logo_icon.ico"))))
         app.setStyleSheet(StyleSheet)
+        
+        # For disabling wheel in combo boxes
+        class WheelEventFilter(QtCore.QObject):
+            def eventFilter(self, obj, ev):
+                if obj.inherits("QComboBox") and ev.type() == QtCore.QEvent.Wheel:
+                    return True
+                return False
+        filter = WheelEventFilter()
+        app.installEventFilter(filter)
+
         window = MainWindow(log_file, log_dir)
         window.show()
 

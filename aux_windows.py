@@ -82,7 +82,7 @@ class workflow_explanation_Ui(QDialog):
             self.ready_to_use_examples_datasets[-1].setObjectName("ready_to_use_examples_dataset_{}".format(i))
             self.ready_to_use_examples_datasets[-1].setGeometry(QRect(130, 34, 155, 41))
             self.ready_to_use_examples_datasets[-1].setIcon(icon1)
-            self.ready_to_use_examples_datasets[-1].setIconSize(QSize(140, 400))
+            self.ready_to_use_examples_datasets[-1].setIconSize(QSize(133, 41))
             self.ready_to_use_examples_datasets[-1].setStyleSheet(u"QPushButton {\n"
             "	border: none;\n"
             "	background-color: rgb(255,255,255);\n"
@@ -104,7 +104,7 @@ class workflow_explanation_Ui(QDialog):
             self.ready_to_use_examples_templates[-1].setObjectName("ready_to_use_examples_temp_{}".format(i))
             self.ready_to_use_examples_templates[-1].setGeometry(QRect(130, 84, 155, 41))
             self.ready_to_use_examples_templates[-1].setIcon(icon2)
-            self.ready_to_use_examples_templates[-1].setIconSize(QSize(140, 400))
+            self.ready_to_use_examples_templates[-1].setIconSize(QSize(133, 41))
             self.ready_to_use_examples_templates[-1].setStyleSheet(u"QPushButton {\n"
             "	border: none;\n"
             "	background-color: rgb(255,255,255);\n"
