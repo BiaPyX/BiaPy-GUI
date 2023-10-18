@@ -94,7 +94,7 @@ class runBiaPy_Ui(QDialog):
     def update_log(self):
         finished_good = False
         with open(self.parent_worker.container_stdout_file, 'r') as f:
-            last_lines = f.readlines()[-13:]
+            last_lines = f.readlines()[-20:]
             last_lines = ''.join(last_lines).replace("\x08", "").replace("[A", "").replace("", "")           
             self.run_window.run_biapy_log.setText(str(last_lines))
             if "FINISHED JOB" in last_lines:
@@ -271,34 +271,37 @@ class run_worker(QObject):
             jobname = get_text(self.main_gui.ui.job_name_input)
             self.process_steps = "pre-running"
 
-            cfg_file = get_text(self.main_gui.ui.select_yaml_name_label).replace('\\','/')
+            # Paths definition
             # Need to create a new copy of the input config file to adapt Windows paths to linux (container's OS)
-            real_cfg_input = os.path.normpath(os.path.join(self.main_gui.log_dir,"input.yaml"))
+            cfg_file = get_text(self.main_gui.ui.select_yaml_name_label).replace('\\','/')
+            container_out_dir_in_host = os.path.normpath(os.path.join(self.output_folder_in_host, jobname))
+            self.container_stdout_file = os.path.normpath(os.path.join(container_out_dir_in_host, jobname+"_out_"+dt_string))
+            self.container_stderr_file = os.path.normpath(os.path.join(container_out_dir_in_host, jobname+"_err_"+dt_string))
+            self.output_folder_in_container = path_to_linux(self.output_folder_in_host, self.main_gui.cfg.settings['os_host']) 
+            cfg_input = os.path.join(container_out_dir_in_host, "input_config")
+            real_cfg_input = os.path.join(cfg_input, "input"+dt_string+".yaml")
+            os.makedirs(cfg_input, exist_ok=True)
+
+            # Read the configuration file
             with open(cfg_file, "r") as stream:
                 try:
                     temp_cfg = yaml.safe_load(stream)
                 except yaml.YAMLError as exc:
                     print(exc)
-                
+
+
+            command = ["--config", "/BiaPy_files/input.yaml", "--result_dir", "{}".format(self.output_folder_in_container),
+                "--name", "{}".format(jobname), "--run_id", "1"]   
             gpus = " "
-            self.output_folder_in_container = path_to_linux(self.output_folder_in_host, self.main_gui.cfg.settings['os_host']) 
             if self.use_gpu:
                 gpus = self.main_gui.ui.gpu_input.currentData()
                 gpus = [int(x[0]) for x in gpus]
                 gpus = ','.join(str(x) for x in gpus)
-            command=["-cfg", "/BiaPy_files/input.yaml", "-rdir", "{}".format(self.output_folder_in_container),
-                "-name", "{}".format(jobname), "-rid", "1", "-gpu", gpus]
-            
-            # Create the result dir
-            container_out_dir_in_host = os.path.normpath(os.path.join(self.output_folder_in_host, jobname))
-            self.container_stdout_file = os.path.normpath(os.path.join(container_out_dir_in_host, jobname+"_out_"+dt_string))
-            self.container_stderr_file = os.path.normpath(os.path.join(container_out_dir_in_host, jobname+"_err_"+dt_string))
-            os.makedirs(container_out_dir_in_host, exist_ok=True)
+                command += ["--gpu", gpus]
 
             # Docker mount points 
             volumes = {}
             volumes[real_cfg_input] = {"bind": "/BiaPy_files/input.yaml", "mode": "ro"}
-
             volumes[self.output_folder_in_host] = {"bind": self.output_folder_in_container, "mode": "rw"}
             paths = []
             paths.append(self.output_folder_in_container)
@@ -398,6 +401,7 @@ class run_worker(QObject):
                 device_requests = [ docker.types.DeviceRequest(count=-1, capabilities=[['gpu']]) ]
             else:
                 device_requests = None
+
             # Run container
             self.biapy_container = self.docker_client.containers.run(
                 self.container_name, 
@@ -405,7 +409,8 @@ class run_worker(QObject):
                 detach=True,
                 volumes=volumes,
                 user=self.user_host if not self.windows_os else None,
-                device_requests=device_requests
+                device_requests=device_requests,
+                shm_size="512m", 
             )
             self.process_steps = "running"
             print("Container created!")
@@ -450,6 +455,7 @@ class run_worker(QObject):
                     pass 
                 try:
                     f.write(l)
+                    f.flush()
                 except: 
                     pass 
 
@@ -476,11 +482,10 @@ class run_worker(QObject):
                     self.test_image_count += 1
                     self.update_test_progress_signal.emit(self.test_image_count)
 
-                # Update GUI after a few seconds
                 if datetime.now() - last_write > timedelta(seconds=3):
                     self.update_log_signal.emit(1)
                     last_write = datetime.now()
-
+                    
             self.update_log_signal.emit(1)
 
             if self.config['TEST']['ENABLE']:

@@ -1,6 +1,7 @@
-## Copied from BiaPy commit: 98c7489d0da8aaf7ea696ca58822098cedc0d21b
+## Copied from BiaPy commit: d287a2c3c2c43d6f6df527622f02ac823c491f23
 import os
 import numpy as np
+import collections
 
 def check_configuration(cfg, check_data_paths=True):
     """
@@ -69,12 +70,41 @@ def check_configuration(cfg, check_data_paths=True):
             if len(cfg.TEST.POST_PROCESSING.DET_WATERSHED_DONUTS_PATCH) != dim_count:
                 raise ValueError("'TEST.POST_PROCESSING.DET_WATERSHED_DONUTS_PATCH' need to be of dimension {} for {} problem".format(dim_count, cfg.PROBLEM.NDIM))
 
-    if cfg.TEST.POST_PROCESSING.WATERSHED_CIRCULARITY != -1:
-        if not check_value(cfg.TEST.POST_PROCESSING.WATERSHED_CIRCULARITY):
-            raise ValueError("'TEST.POST_PROCESSING.WATERSHED_CIRCULARITY' not in [0, 1] range")
-    if cfg.PROBLEM.TYPE != 'INSTANCE_SEG':
-        if cfg.TEST.POST_PROCESSING.WATERSHED_CIRCULARITY != -1 and cfg.PROBLEM.TYPE != 'DETECTION':
-            raise ValueError("'TEST.POST_PROCESSING.WATERSHED_CIRCULARITY' can only be set in 'DETECTION' or 'INSTANCE_SEG' problems")    
+    if cfg.PROBLEM.TYPE == 'DETECTION':
+        for i in range(len(cfg.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES)):
+            if len(cfg.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES[i]) > 1:
+                raise ValueError("In DETECTION 'TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES' can only be used for filtering 'circularity'.")
+            if len(cfg.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES[i]) == 1 and cfg.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES[i][0] != 'circularity':  
+                raise ValueError("In DETECTION 'TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES' can only be used for filtering 'circularity'.")
+
+    for i in range(len(cfg.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES)):
+        if len(cfg.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES[i]) == 0 or \
+           len(cfg.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES_VALUES[i]) == 0 or \
+           len(cfg.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES_SIGN[i]) == 0:
+           raise ValueError("'TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES', 'TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES_VALUES' and "
+                "'TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES_SIGN' can not be defined as [[]]. Leave them as []")
+
+        if not (len(cfg.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES[i]) == \
+            len(cfg.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES_VALUES[i]) == \
+            len(cfg.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES_SIGN[i])):
+            raise ValueError("'TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES', 'TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES_VALUES' and "
+                "'TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES_SIGN' need to have same length")
+
+        if len(cfg.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES[i]) > 0 and cfg.PROBLEM.TYPE not in ['INSTANCE_SEG', 'DETECTION']:
+            raise ValueError("'TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES' can only be used in INSTANCE_SEG and DETECTION workflows")
+
+        # Check for unique values 
+        if len([item for item, count in collections.Counter(cfg.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES[i]).items() if count > 1]) > 0:
+            raise ValueError("Non repeated values are allowed in 'TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES'")
+        for j in range(len(cfg.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES[i])):
+            if cfg.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES[i][j] not in ['circularity', 'npixels', 'area', 'diameter']:
+                raise ValueError("'TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES' can only be one among these: ['circularity', 'npixels', 'area', 'diameter']")
+            if cfg.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES_SIGN[i][j] not in ['gt', 'ge', 'lt', 'le']:
+                raise ValueError("'TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES_SIGN' can only be one among these: ['gt', 'ge', 'lt', 'le']")
+            if cfg.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES[i][j] == "circularity" and not check_value(cfg.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES_VALUES[i][j]):
+                raise ValueError("Circularity can only have values in [0, 1] range (check  'TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES_VALUES' values)")
+                
+    if cfg.PROBLEM.TYPE != 'INSTANCE_SEG':  
         if cfg.TEST.POST_PROCESSING.VORONOI_ON_MASK:
             raise ValueError("'TEST.POST_PROCESSING.VORONOI_ON_MASK' can only be enabled in a 'INSTANCE_SEG' problem")
     if cfg.TEST.POST_PROCESSING.DET_WATERSHED and cfg.PROBLEM.TYPE != 'DETECTION':
@@ -117,20 +147,19 @@ def check_configuration(cfg, check_data_paths=True):
     if cfg.TEST.ENABLE and cfg.TEST.ANALIZE_2D_IMGS_AS_3D_STACK and cfg.PROBLEM.NDIM == "3D":
         raise ValueError("'TEST.ANALIZE_2D_IMGS_AS_3D_STACK' makes no sense when the problem is 3D. Disable it.")
 
+    model_arch = cfg.MODEL.ARCHITECTURE.lower()
     #### Semantic segmentation ####
     if cfg.PROBLEM.TYPE == 'SEMANTIC_SEG':
-        if cfg.MODEL.N_CLASSES == 0:
-            raise ValueError("'MODEL.N_CLASSES' can not be 0")
+        if cfg.MODEL.N_CLASSES < 2:
+            raise ValueError("'MODEL.N_CLASSES' need to be greater or equal 2 (binary case)")
         if cfg.LOSS.TYPE == "MASKED_BCE":
-            if cfg.MODEL.N_CLASSES > 1:
-                raise ValueError("Not implemented pipeline option: N_CLASSES > 1 and MASKED_BCE")
+            if cfg.MODEL.N_CLASSES > 2:
+                raise ValueError("Not implemented pipeline option: N_CLASSES > 2 and MASKED_BCE")
                     
     #### Instance segmentation ####
     if cfg.PROBLEM.TYPE == 'INSTANCE_SEG':
         assert cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS in ['BC', 'BCM', 'BCD', 'BCDv2', 'Dv2', 'BDv2', 'BP', 'BD'],\
             "PROBLEM.INSTANCE_SEG.DATA_CHANNELS not in ['BC', 'BCM', 'BCD', 'BCDv2', 'Dv2', 'BDv2', 'BP', 'BD']"
-        if cfg.MODEL.N_CLASSES > 1:
-            raise ValueError("Not implemented pipeline option for INSTANCE_SEGMENTATION")
         if len(cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS) != channels_provided:
             raise ValueError("'PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS' needs to be of the same length as the channels selected in 'PROBLEM.INSTANCE_SEG.DATA_CHANNELS'. "
                             "E.g. 'PROBLEM.INSTANCE_SEG.DATA_CHANNELS'='BC' 'PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS'=[1,0.5]. "
@@ -157,15 +186,17 @@ def check_configuration(cfg, check_data_paths=True):
 
     #### Detection ####
     if cfg.PROBLEM.TYPE == 'DETECTION':
-        if cfg.MODEL.N_CLASSES == 0:
-            raise ValueError("'MODEL.N_CLASSES' can not be 0")
+        if cfg.MODEL.N_CLASSES < 2:
+            raise ValueError("'MODEL.N_CLASSES' need to be greater or equal 2 (binary case)")
         if cfg.TEST.POST_PROCESSING.DET_WATERSHED:
             if any(len(x) != dim_count for x in cfg.TEST.POST_PROCESSING.DET_WATERSHED_FIRST_DILATION):
                 raise ValueError("Each structure object defined in 'TEST.POST_PROCESSING.DET_WATERSHED_FIRST_DILATION' "
                                  "need to be of {} dimension".format(dim_count))
-            if cfg.TEST.POST_PROCESSING.WATERSHED_CIRCULARITY == -1:
-                raise ValueError("'TEST.POST_PROCESSING.WATERSHED_CIRCULARITY' need to be set when 'TEST.POST_PROCESSING.DET_WATERSHED' is enabled")
-
+            if len(cfg.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES[0]) != 0: 
+                raise ValueError("'TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES' need to be set to 'circularity' filtering when 'TEST.POST_PROCESSING.DET_WATERSHED' is enabled")
+            if cfg.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES[0][0] != 'circularity': 
+                raise ValueError("'TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES' need to be set to 'circularity' filtering when 'TEST.POST_PROCESSING.DET_WATERSHED' is enabled")
+    
     #### Super-resolution ####
     elif cfg.PROBLEM.TYPE == 'SUPER_RESOLUTION':
         if cfg.PROBLEM.SUPER_RESOLUTION.UPSCALING == 1:
@@ -180,7 +211,7 @@ def check_configuration(cfg, check_data_paths=True):
             if not check_value(cfg.PROBLEM.SELF_SUPERVISED.NOISE):
                 raise ValueError("PROBLEM.SELF_SUPERVISED.NOISE not in [0, 1] range")
         elif cfg.PROBLEM.SELF_SUPERVISED.PRETEXT_TASK == "masking":
-            if cfg.MODEL.ARCHITECTURE != 'mae':
+            if model_arch != 'mae':
                 raise ValueError("'MODEL.ARCHITECTURE' need to be 'mae' when 'PROBLEM.SELF_SUPERVISED.PRETEXT_TASK' is 'masking'")  
         else:
             raise ValueError("'PROBLEM.SELF_SUPERVISED.PRETEXT_TASK' need to be among these options: ['crappify', 'masking']")
@@ -286,23 +317,23 @@ def check_configuration(cfg, check_data_paths=True):
                         "when DATA.NORMALIZATION.TYPE == 'custom', DATA.TRAIN.IN_MEMORY need to be True")
 
     ### Model ###
-    assert cfg.MODEL.ARCHITECTURE in ['unet', 'resunet', 'attention_unet', 'fcn32', 'fcn8', 'tiramisu', 'mnet',
-                                      'multiresunet', 'seunet', 'simple_cnn', 'EfficientNetB0', 'unetr', 'edsr',
-                                      'rcan', 'dfcan', 'wdsr', 'ViT', 'mae'],\
-        "MODEL.ARCHITECTURE not in ['unet', 'resunet', 'attention_unet', 'fcn32', 'fcn8', 'tiramisu', 'mnet',\
-        'multiresunet', 'seunet', 'simple_cnn', 'EfficientNetB0', 'unetr', 'edsr', 'rcan', 'dfcan', \
-        'wdsr', 'ViT', 'mae']"
-    if cfg.MODEL.ARCHITECTURE not in ['unet', 'resunet', 'seunet', 'attention_unet', 'unetr', 'ViT', 'mae'] and cfg.PROBLEM.NDIM == '3D' and cfg.PROBLEM.TYPE != "CLASSIFICATION":
-        raise ValueError("For 3D these models are available: {}".format(['unet', 'resunet', 'seunet', 'attention_unet']))
-    if cfg.MODEL.N_CLASSES > 1 and cfg.PROBLEM.TYPE != "CLASSIFICATION" and cfg.MODEL.ARCHITECTURE not in ['unet', 'resunet', 'seunet', 'attention_unet']:
-        raise ValueError("'MODEL.N_CLASSES' > 1 can only be used with 'MODEL.ARCHITECTURE' in ['unet', 'resunet', 'seunet', 'attention_unet']")
+    assert model_arch in ['unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'simple_cnn', 'efficientnet_b0', 
+        'efficientnet_b1', 'efficientnet_b2', 'efficientnet_b3', 'efficientnet_b4','efficientnet_b5','efficientnet_b6','efficientnet_b7',
+        'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'vit', 'mae'],\
+        "MODEL.ARCHITECTURE not in ['unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'simple_cnn', 'efficientnet_b[0-7]', 'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'vit', 'mae']"
+    if model_arch not in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet', 'unetr', 'vit', 'mae'] and cfg.PROBLEM.NDIM == '3D' and cfg.PROBLEM.TYPE != "CLASSIFICATION":
+        raise ValueError("For 3D these models are available: {}".format(['unet', 'resunet', 'resunet++', 'seunet', 'multiresunet', 'attention_unet', 'unetr', 'vit', 'mae']))
+    if cfg.MODEL.N_CLASSES > 2 and cfg.PROBLEM.TYPE != "CLASSIFICATION" and model_arch not in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']:
+        raise ValueError("'MODEL.N_CLASSES' > 2 can only be used with 'MODEL.ARCHITECTURE' in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']")
+    
+    assert len(cfg.MODEL.FEATURE_MAPS) > 2, "'MODEL.FEATURE_MAPS' needs to have at least 3 values"
     
     # Adjust dropout to feature maps
-    if cfg.MODEL.ARCHITECTURE in ['ViT', 'unetr', 'tiramisu', 'mae']:
+    if model_arch in ['vit', 'unetr', 'mae']:
         if all(x == 0 for x in cfg.MODEL.DROPOUT_VALUES):
             opts.extend(['MODEL.DROPOUT_VALUES', (0.,)])
         elif len(cfg.MODEL.DROPOUT_VALUES) != 1:
-            raise ValueError("'MODEL.DROPOUT_VALUES' must be list of an unique number when 'MODEL.ARCHITECTURE' is one among ['ViT', 'mae', 'unetr', 'tiramisu']")
+            raise ValueError("'MODEL.DROPOUT_VALUES' must be list of an unique number when 'MODEL.ARCHITECTURE' is one among ['vit', 'mae', 'unetr']")
         elif not check_value(cfg.MODEL.DROPOUT_VALUES[0]):
             raise ValueError("'MODEL.DROPOUT_VALUES' not in [0, 1] range")
     else:
@@ -326,42 +357,48 @@ def check_configuration(cfg, check_data_paths=True):
     elif any([False for x in cfg.MODEL.Z_DOWN if x != 1 and x != 2]):
         raise ValueError("'MODEL.Z_DOWN' need to be 1 or 2")
     else:
-        if len(cfg.MODEL.FEATURE_MAPS)-1 != len(cfg.MODEL.Z_DOWN):
+        if model_arch == 'multiresunet' and len(cfg.MODEL.Z_DOWN) != 4:
+            raise ValueError("'MODEL.Z_DOWN' length must be 4 when using 'multiresunet'")
+        elif len(cfg.MODEL.FEATURE_MAPS)-1 != len(cfg.MODEL.Z_DOWN):
             raise ValueError("'MODEL.FEATURE_MAPS' length minus one and 'MODEL.Z_DOWN' length must be equal")
 
-    if cfg.MODEL.LAST_ACTIVATION not in ['softmax', 'sigmoid', 'linear']:
-        raise ValueError("'MODEL.LAST_ACTIVATION' need to be in ['softmax','sigmoid','linear']. Provided {}"
-                         .format(cfg.MODEL.LAST_ACTIVATION))
+    if len(opts) > 0:
+        cfg.merge_from_list(opts)
+
+    assert cfg.MODEL.LAST_ACTIVATION.lower() in ["relu", "tanh", "leaky_relu", "elu", "gelu", "silu", "sigmoid","softmax", "linear", "none"], \
+        "Get unknown activation key {}".format(activation)
+ 
     if cfg.MODEL.UPSAMPLE_LAYER.lower() not in ["upsampling", "convtranspose"]:
         raise ValueError("cfg.MODEL.UPSAMPLE_LAYER' need to be one between ['upsampling', 'convtranspose']. Provided {}"
                           .format(cfg.MODEL.UPSAMPLE_LAYER))
-    if cfg.PROBLEM.TYPE == "SEMANTIC_SEG" and cfg.MODEL.ARCHITECTURE not in ['unet', 'resunet', 'attention_unet', 'fcn32', \
-        'fcn8', 'tiramisu', 'mnet', 'multiresunet', 'seunet', 'unetr']:
-        raise ValueError("Not implemented pipeline option: semantic segmentation models are ['unet', 'resunet', "
-                         "'attention_unet', 'fcn32', 'fcn8', 'tiramisu', 'mnet', 'multiresunet', 'seunet', 'unetr']")
-    if cfg.PROBLEM.TYPE == "INSTANCE_SEG" and cfg.MODEL.ARCHITECTURE not in ['unet', 'resunet', 'seunet', 'attention_unet', 'unetr']:
-        raise ValueError("Not implemented pipeline option: instance segmentation models are ['unet', 'resunet', 'seunet', 'attention_unet']")    
+    if cfg.PROBLEM.TYPE == "SEMANTIC_SEG" and model_arch not in ['unet', 'resunet', 'resunet++', 'attention_unet', \
+        'multiresunet', 'seunet', 'unetr']:
+        raise ValueError("Not implemented pipeline option: semantic segmentation models are ['unet', 'resunet', 'resunet++', "
+                         "'attention_unet', 'multiresunet', 'seunet', 'unetr']")
+    if cfg.PROBLEM.TYPE == "INSTANCE_SEG" and model_arch not in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'unetr', 'multiresunet']:
+        raise ValueError("Not implemented pipeline option: instance segmentation models are ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'unetr', 'multiresunet']")    
     if cfg.PROBLEM.TYPE in ['DETECTION', 'DENOISING'] and \
-        cfg.MODEL.ARCHITECTURE not in ['unet', 'resunet', 'seunet', 'attention_unet']:
-        raise ValueError("Architectures available for {} are: ['unet', 'resunet', 'seunet', 'attention_unet']"
+        model_arch not in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet']:
+        raise ValueError("Architectures available for {} are: ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet']"
                          .format(cfg.PROBLEM.TYPE))
     if cfg.PROBLEM.TYPE == 'SUPER_RESOLUTION':
-        if cfg.PROBLEM.NDIM == '2D' and cfg.MODEL.ARCHITECTURE not in ['edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'seunet', 'attention_unet']:
-            raise ValueError("Architectures available for 2D 'SUPER_RESOLUTION' are: ['edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'seunet', 'attention_unet']")
+        if cfg.PROBLEM.NDIM == '2D' and model_arch not in ['edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']:
+            raise ValueError("Architectures available for 2D 'SUPER_RESOLUTION' are: ['edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']")
         elif cfg.PROBLEM.NDIM == '3D':
-            if cfg.MODEL.ARCHITECTURE not in ['unet', 'resunet', 'seunet', 'attention_unet']:
-                raise ValueError("Architectures available for 3D 'SUPER_RESOLUTION' are: ['unet', 'resunet', 'seunet', 'attention_unet']")
+            if model_arch not in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']:
+                raise ValueError("Architectures available for 3D 'SUPER_RESOLUTION' are: ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']")
             assert cfg.MODEL.UNET_SR_UPSAMPLE_POSITION in ["pre", "post"], "'MODEL.UNET_SR_UPSAMPLE_POSITION' not in ['pre', 'post']"
-    if cfg.PROBLEM.TYPE == 'CLASSIFICATION' and cfg.MODEL.ARCHITECTURE not in ['simple_cnn', 'EfficientNetB0', 'ViT']:
-        raise ValueError("Architectures available for 'CLASSIFICATION' are: ['simple_cnn', 'EfficientNetB0', 'ViT']")
-    if cfg.MODEL.ARCHITECTURE in ['unetr', 'ViT', 'mae']:    
-        if cfg.MODEL.VIT_HIDDEN_SIZE % cfg.MODEL.VIT_NUM_HEADS != 0:
-            raise ValueError("'MODEL.VIT_HIDDEN_SIZE' should be divisible by 'MODEL.VIT_NUM_HEADS'")
+    if cfg.PROBLEM.TYPE == 'CLASSIFICATION' and model_arch not in ['simple_cnn', 'vit'] and \
+        'efficientnet' not in model_arch:
+        raise ValueError("Architectures available for 'CLASSIFICATION' are: ['simple_cnn', 'efficientnet_b[0-7]', 'vit']")
+    if model_arch in ['unetr', 'vit', 'mae']:    
+        if cfg.MODEL.VIT_EMBED_DIM % cfg.MODEL.VIT_NUM_HEADS != 0:
+            raise ValueError("'MODEL.VIT_EMBED_DIM' should be divisible by 'MODEL.VIT_NUM_HEADS'")
         if not all([i == cfg.DATA.PATCH_SIZE[0] for i in cfg.DATA.PATCH_SIZE[:-1]]):      
-            raise ValueError("'unetr', 'ViT' 'mae' models need to have same shape in all dimensions (e.g. DATA.PATCH_SIZE = (80,80,80,1) )")
+            raise ValueError("'unetr', 'vit' 'mae' models need to have same shape in all dimensions (e.g. DATA.PATCH_SIZE = (80,80,80,1) )")
     # Check that the input patch size is divisible in every level of the U-Net's like architectures, as the model
     # will throw an error not very clear for users
-    if cfg.MODEL.ARCHITECTURE in ['unet', 'resunet', 'seunet', 'attention_unet']:
+    if model_arch in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']:
         for i in range(len(cfg.MODEL.FEATURE_MAPS)-1):
             if cfg.MODEL.Z_DOWN[i] == 1 or (cfg.PROBLEM.TYPE == 'SUPER_RESOLUTION' and cfg.PROBLEM.NDIM == '3D'):
                 sizes = cfg.DATA.PATCH_SIZE[1:-1] 
@@ -387,12 +424,6 @@ def check_configuration(cfg, check_data_paths=True):
                 raise ValueError("'TRAIN.LR_SCHEDULER.REDUCEONPLATEAU_PATIENCE' need to be less than 'TRAIN.PATIENCE' ")
       
         if cfg.TRAIN.LR_SCHEDULER.NAME == 'warmupcosine':
-            if cfg.TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_LR == -1.:
-                raise ValueError("'TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_LR' need to be set when 'TRAIN.LR_SCHEDULER.NAME' is 'warmupcosine'")
-            if cfg.TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_LR >= cfg.TRAIN.LR:
-                raise ValueError("'TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_LR' need to be lower than 'TRAIN.LR'")
-            if cfg.TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_HOLD_EPOCHS == -1:
-                raise ValueError("'TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_HOLD_EPOCHS' need to be set when 'TRAIN.LR_SCHEDULER.NAME' is 'warmupcosine'")
             if cfg.TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_EPOCHS == -1:
                 raise ValueError("'TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_EPOCHS' need to be set when 'TRAIN.LR_SCHEDULER.NAME' is 'warmupcosine'")
              
@@ -461,8 +492,6 @@ def check_configuration(cfg, check_data_paths=True):
         if cfg.TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS_RADIUS[0] == -1:
             raise ValueError("'TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS' need to be set when 'TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS' is True")   
 
-    if len(opts) > 0:
-        cfg.merge_from_list(opts)
 
 def check_value(value, value_range=(0,1)):
     """Checks if a value is within a range """

@@ -418,28 +418,53 @@ QPushButton:pressed {
                 </widget>
                </item>
                <item>
-                <widget class="QLabel" name="biapy_container_info_label">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>160</height>
-                  </size>
+                <widget class="QScrollArea" name="scrollArea">
+                 <property name="frameShape">
+                  <enum>QFrame::NoFrame</enum>
                  </property>
-                 <property name="font">
-                  <font>
-                   <family>DejaVu Math TeX Gyre</family>
-                   <pointsize>11</pointsize>
-                  </font>
+                 <property name="verticalScrollBarPolicy">
+                  <enum>Qt::ScrollBarAlwaysOff</enum>
                  </property>
-                 <property name="text">
-                  <string>INITIALIZING . . . (this may take a while)</string>
-                 </property>
-                 <property name="openExternalLinks">
+                 <property name="widgetResizable">
                   <bool>true</bool>
                  </property>
-                 <property name="textInteractionFlags">
-                  <set>Qt::LinksAccessibleByKeyboard|Qt::LinksAccessibleByMouse|Qt::TextBrowserInteraction|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
-                 </property>
+                 <widget class="QWidget" name="scrollAreaWidgetContents">
+                  <property name="geometry">
+                   <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>939</width>
+                    <height>178</height>
+                   </rect>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_5">
+                   <item>
+                    <widget class="QLabel" name="biapy_container_info_label">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>160</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>DejaVu Math TeX Gyre</family>
+                       <pointsize>11</pointsize>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>INITIALIZING . . . (this may take a while)</string>
+                     </property>
+                     <property name="openExternalLinks">
+                      <bool>true</bool>
+                     </property>
+                     <property name="textInteractionFlags">
+                      <set>Qt::LinksAccessibleByKeyboard|Qt::LinksAccessibleByMouse|Qt::TextBrowserInteraction|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
                 </widget>
                </item>
                <item>
@@ -758,8 +783,13 @@ QPushButton:pressed {
            <property name="font">
             <font>
              <family>Monospace</family>
-             <pointsize>10</pointsize>
+             <pointsize>-1</pointsize>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color : black ; 
+color : white; 
+font-size: 9px;</string>
            </property>
            <property name="horizontalScrollBarPolicy">
             <enum>Qt::ScrollBarAlwaysOff</enum>
@@ -771,8 +801,8 @@ QPushButton:pressed {
             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Monospace'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Please wait, the first screen update may take a while depending on your OS&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Monospace'; font-size:9px; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Please wait, the first screen update may take a while depending on your OS&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
          </item>

@@ -38,58 +38,6 @@ def examine(main_window, save_in_obj_tag=None, is_file=True):
         elif save_in_obj_tag == "DATA__TEST__GT_PATH__INPUT":
             main_window.cfg.settings['test_data_gt_input_path'] = out  
 
-def combobox_hide_visible_action(main_window, combobox, frames_dict, frames_dict_values_to_set=None, frames_to_hide_if_empty=None):
-    """
-    frames_dict : Dict of list of (str and tuples)
-        A list that is composed by three different parts: 1) the name of the widget; 2) a sequence of str until the first tuple; 
-        and 3) a sequence of tuples. So the widget (1) is visible all the conditions must be True. Each definition is as follows: 
-        1) Widget that will be modified when the combobox changed; 2) sequence of str that the combobox need to have; 3) Other 
-        conditions. For instance, if the tuple is ("widgetA", ["valueA", "valueB"]) means that the widget called "widgetA" needs to 
-        have a value between ["valueA, "valueB"]. When conditions (2) and (3) are True the widget (1) is set to visible. 
-    """
-    cbox_value = str(getattr(main_window.ui, combobox).currentText())
-    for key in frames_dict:
-        visible_values = frames_dict[key]
-        if not isinstance(visible_values, list):
-            visible_values = [visible_values]
-
-        all_conditions = []
-        if main_window.cfg.settings['selected_workflow'] in [3,5,6] and '_gt_' in key.lower():
-            all_conditions.append(False)
-        else:
-            for visible_condition in visible_values:
-                if not isinstance(visible_condition, tuple):
-                    if cbox_value == visible_condition:
-                        all_conditions.append(True)
-                    else:
-                        all_conditions.append(False)
-                        break
-                else:
-                    if get_text(getattr(main_window.ui, visible_condition[0])) in visible_condition[1]:
-                        all_conditions.append(True)
-                    else:
-                        all_conditions.append(False)
-                        break
-        if len(all_conditions) == 0: all_conditions.append(False)
-        vis = True if all(all_conditions) else False
-        getattr(main_window.ui, key).setVisible(vis)
-
-    if frames_dict_values_to_set is not None:
-        for tup in frames_dict_values_to_set:
-            if cbox_value in tup[1]:
-                getattr(main_window.ui, tup[0][0]).setCurrentText(tup[0][1]) 
-
-    # Frames to hide if all the childs are not visible 
-    if frames_to_hide_if_empty is not None:
-        for frame in frames_to_hide_if_empty:
-            all_conditions = []
-            for x in getattr(main_window.ui, frame).findChildren(QLabel):
-                all_conditions.append(x.isVisibleTo(getattr(main_window.ui, frame)) )
-            if any(all_conditions):
-                getattr(main_window.ui, frame).setVisible(True)
-            else:
-                getattr(main_window.ui, frame).setVisible(False)
-
 def mark_syntax_error(main_window, obj, validator_type=["empty"]):
     error = False
     for v in validator_type:
@@ -441,6 +389,7 @@ def create_yaml_file(self):
     cpus = get_text(self.ui.SYSTEM__NUM_CPUS__INPUT)
     cpus = -1 if cpus == "All" else int(cpus)
     biapy_config['SYSTEM']['NUM_CPUS'] = cpus
+    biapy_config['SYSTEM']['SEED'] = get_text(self.ui.seed_input)
 
     # Problem specification
     workflow_names_yaml = ['SEMANTIC_SEG', 'INSTANCE_SEG', 'DETECTION', 'DENOISING', 'SUPER_RESOLUTION', 
@@ -448,9 +397,15 @@ def create_yaml_file(self):
     biapy_config['PROBLEM'] = {}
     biapy_config['PROBLEM']['TYPE'] = workflow_names_yaml[self.cfg.settings['selected_workflow']]
     biapy_config['PROBLEM']['NDIM'] = get_text(self.ui.PROBLEM__NDIM__INPUT)
+    
+    ### SEMANTIC_SEG
+    if self.cfg.settings['selected_workflow'] == 0:
+        biapy_config['PROBLEM']['SEMANTIC_SEG'] = {}
+        if get_text(self.ui.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INPUT) != 0:
+            biapy_config['PROBLEM']['SEMANTIC_SEG']['IGNORE_CLASS_ID'] = get_text(self.ui.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INPUT)
 
     ### INSTANCE_SEG
-    if self.cfg.settings['selected_workflow'] == 1:
+    elif self.cfg.settings['selected_workflow'] == 1:
         biapy_config['PROBLEM']['INSTANCE_SEG'] = {}
         
         # Transcribe problem representation
@@ -485,14 +440,13 @@ def create_yaml_file(self):
             biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_CONTOUR'] = float(get_text(self.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INPUT))
         if 'D' in problem_channels:    
             biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_DISTANCE'] = float(get_text(self.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INPUT))
+            if get_text(self.ui.PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__INPUT) == "Yes":
+                biapy_config['PROBLEM']['INSTANCE_SEG']['DISTANCE_CHANNEL_MASK'] = True
         if 'P' in problem_channels: 
             biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_POINTS'] = float(get_text(self.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_POINTS__INPUT))
         if get_text(self.ui.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INPUT) == "Yes":
             biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_REMOVE_BEFORE_MW'] = True
             biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_REMOVE_SMALL_OBJ_BEFORE'] = int(get_text(self.ui.PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INPUT))
-        if get_text(self.ui.PROBLEM__INSTANCE_SEG__DATA_REMOVE_AFTER_MW__INPUT) == "Yes":
-            biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_REMOVE_AFTER_MW'] = True
-            biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_REMOVE_SMALL_OBJ_AFTER'] = int(get_text(self.ui.PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_AFTER__INPUT))
         if get_text(self.ui.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT) != "[]":
             biapy_config['PROBLEM']['INSTANCE_SEG']['SEED_MORPH_SEQUENCE'] = ast.literal_eval(get_text(self.ui.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT) )
         if get_text(self.ui.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INPUT) != "[]":
@@ -768,19 +722,15 @@ def create_yaml_file(self):
     biapy_config['MODEL'] = {}
     model_name = self.cfg.translate_model_names(get_text(self.ui.MODEL__ARCHITECTURE__INPUT), get_text(self.ui.PROBLEM__NDIM__INPUT))
     biapy_config['MODEL']['ARCHITECTURE'] = model_name
-    if model_name in ['unet', 'resunet', 'seunet', 'attention_unet']:
+    if model_name in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet']:
         biapy_config['MODEL']['FEATURE_MAPS'] = ast.literal_eval(get_text(self.ui.MODEL__FEATURE_MAPS__INPUT))
-        if get_text(self.ui.MODEL__SPATIAL_DROPOUT__INPUT) == "Yes":
-            biapy_config['MODEL']['SPATIAL_DROPOUT'] = True  
         biapy_config['MODEL']['DROPOUT_VALUES'] = ast.literal_eval(get_text(self.ui.MODEL__DROPOUT_VALUES__INPUT)) 
         biapy_config['MODEL']['BATCH_NORMALIZATION'] = True if get_text(self.ui.MODEL__BATCH_NORMALIZATION__INPUT) == "Yes" else False 
-        if get_text(self.ui.MODEL__KERNEL_INIT__INPUT) != "he_normal":
-            biapy_config['MODEL']['KERNEL_INIT'] = get_text(self.ui.MODEL__KERNEL_INIT__INPUT)
         if int(get_text(self.ui.MODEL__KERNEL_SIZE__INPUT)) != 3:
             biapy_config['MODEL']['KERNEL_SIZE'] = int(get_text(self.ui.MODEL__KERNEL_SIZE__INPUT))
         if get_text(self.ui.MODEL__UPSAMPLE_LAYER__INPUT) != "convtranspose":
             biapy_config['MODEL']['UPSAMPLE_LAYER'] = get_text(self.ui.MODEL__UPSAMPLE_LAYER__INPUT) 
-        if get_text(self.ui.MODEL__ACTIVATION__INPUT) != 'elu':
+        if get_text(self.ui.MODEL__ACTIVATION__INPUT) != 'ELU':
             biapy_config['MODEL']['ACTIVATION'] = get_text(self.ui.MODEL__ACTIVATION__INPUT)
         if get_text(self.ui.MODEL__LAST_ACTIVATION__INPUT) != 'sigmoid':
             biapy_config['MODEL']['LAST_ACTIVATION'] = get_text(self.ui.MODEL__LAST_ACTIVATION__INPUT)
@@ -789,33 +739,38 @@ def create_yaml_file(self):
         if self.cfg.settings['selected_workflow'] == 4 and get_text(self.ui.PROBLEM__NDIM__INPUT) == "3D": # SR
             r = "pre" if get_text(self.ui.MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT) == "Before model" else "post"
             biapy_config['MODEL']['UNET_SR_UPSAMPLE_POSITION'] = r
-            
-    elif model_name == "tiramisu":
-        biapy_config['MODEL']['TIRAMISU_DEPTH'] = int(get_text(self.ui.MODEL__TIRAMISU_DEPTH__INPUT))
-        biapy_config['MODEL']['FEATURE_MAPS'] = int(get_text(self.ui.MODEL__TIRAMISU_FEATURE_MAPS__INPUT))
-        biapy_config['MODEL']['DROPOUT_VALUES'] = float(get_text(self.ui.MODEL__TIRAMISU_DROPOUT_VALUES__INPUT))
     elif model_name in ["unetr", "mae", "ViT"]:
         biapy_config['MODEL']['VIT_TOKEN_SIZE'] = int(get_text(self.ui.MODEL__VIT_TOKEN_SIZE__INPUT))
-        biapy_config['MODEL']['VIT_HIDDEN_SIZE'] = int(get_text(self.ui.MODEL__VIT_HIDDEN_SIZE__INPUT))
+        biapy_config['MODEL']['VIT_EMBED_DIM'] = int(get_text(self.ui.MODEL__VIT_EMBED_DIM__INPUT))
         biapy_config['MODEL']['VIT_NUM_LAYERS'] = int(get_text(self.ui.MODEL__VIT_NUM_LAYERS__INPUT))
-        biapy_config['MODEL']['VIT_MLP_DIMS'] = get_text(self.ui.MODEL__VIT_MLP_DIMS__INPUT)
+        biapy_config['MODEL']['VIT_MLP_RATIO'] = get_text(self.ui.MODEL__VIT_MLP_RATIO__INPUT)
         biapy_config['MODEL']['VIT_NUM_HEADS'] = int(get_text(self.ui.MODEL__VIT_NUM_HEADS__INPUT))
+        biapy_config['MODEL']['VIT_NORM_EPS'] = get_text(self.ui.MODEL__VIT_NORM_EPS__INPUT)
 
         # UNETR
         if model_name in "unetr":
             biapy_config['MODEL']['UNETR_VIT_HIDD_MULT'] = int(get_text(self.ui.MODEL__UNETR_VIT_HIDD_MULT__INPUT)) 
             biapy_config['MODEL']['UNETR_VIT_NUM_FILTERS'] = int(get_text(self.ui.MODEL__UNETR_VIT_NUM_FILTERS__INPUT)) 
             biapy_config['MODEL']['UNETR_DEC_ACTIVATION'] = get_text(self.ui.MODEL__UNETR_DEC_ACTIVATION__INPUT)
-            biapy_config['MODEL']['UNETR_DEC_KERNEL_INIT'] = get_text(self.ui.MODEL__UNETR_DEC_KERNEL_INIT__INPUT)
+        
+        # MAE
+        if model_name in "mae":
+            biapy_config['MODEL']['MAE_DEC_HIDDEN_SIZE'] = int(get_text(self.ui.MODEL__MAE_DEC_HIDDEN_SIZE__INPUT)) 
+            biapy_config['MODEL']['MAE_DEC_NUM_LAYERS'] = int(get_text(self.ui.MODEL__MAE_DEC_NUM_LAYERS__INPUT)) 
+            biapy_config['MODEL']['MAE_DEC_NUM_HEADS'] = get_text(self.ui.MODEL__MAE_DEC_NUM_HEADS__INPUT)
+            biapy_config['MODEL']['MAE_DEC_MLP_DIMS'] = get_text(self.ui.MODEL__MAE_DEC_MLP_DIMS__INPUT)
 
     if get_text(self.ui.MODEL__LOAD_CHECKPOINT__INPUT) == "Yes":
         biapy_config['MODEL']['LOAD_CHECKPOINT'] = True 
         biapy_config['PATHS'] = {}
         if get_text(self.ui.PATHS__CHECKPOINT_FILE__INPUT) != "":
             biapy_config['PATHS']['CHECKPOINT_FILE'] = get_text(self.ui.PATHS__CHECKPOINT_FILE__INPUT)
-    
-    if get_text(self.ui.MODEL__MAKE_PLOT__INPUT) == "Yes":
-        biapy_config['MODEL']['MAKE_PLOT'] = True
+        if get_text(self.ui.MODEL__SAVE_CKPT_FREQ__INPUT) != -1:
+            biapy_config['MODEL']['SAVE_CKPT_FREQ'] = get_text(self.ui.MODEL__SAVE_CKPT_FREQ__INPUT)
+        if get_text(self.ui.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT) != "best_on_val":
+            biapy_config['MODEL']['LOAD_CHECKPOINT_EPOCH'] = get_text(self.ui.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT)
+        if get_text(self.ui.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT) != "Yes":
+            biapy_config['MODEL']['LOAD_CHECKPOINT_ONLY_WEIGHTS'] = get_text(self.ui.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT)
 
     # Loss (in detection only)
     if self.cfg.settings['selected_workflow'] == 2:
@@ -832,6 +787,8 @@ def create_yaml_file(self):
             biapy_config['TRAIN']['W_DECAY'] = float(get_text(self.ui.TRAIN__W_DECAY__INPUT))
         biapy_config['TRAIN']['BATCH_SIZE'] = int(get_text(self.ui.TRAIN__BATCH_SIZE__INPUT))
         biapy_config['TRAIN']['EPOCHS'] = int(get_text(self.ui.TRAIN__EPOCHS__INPUT)) 
+        if get_text(self.ui.TRAIN__ACCUM_ITER__INPUT) != 1:
+            biapy_config['TRAIN']['ACCUM_ITER'] = int(get_text(self.ui.TRAIN__ACCUM_ITER__INPUT)) 
         biapy_config['TRAIN']['PATIENCE'] = int(get_text(self.ui.TRAIN__PATIENCE__INPUT))
 
         # LR Scheduler
@@ -844,18 +801,12 @@ def create_yaml_file(self):
                 biapy_config['TRAIN']['LR_SCHEDULER']['REDUCEONPLATEAU_FACTOR'] = float(get_text(self.ui.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT)) 
                 biapy_config['TRAIN']['LR_SCHEDULER']['REDUCEONPLATEAU_PATIENCE'] = int(get_text(self.ui.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT))
             if get_text(self.ui.TRAIN__LR_SCHEDULER__NAME__INPUT) == "warmupcosine":  
-                biapy_config['TRAIN']['LR_SCHEDULER']['WARMUP_COSINE_DECAY_LR'] = float(get_text(self.ui.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_LR__INPUT))
                 biapy_config['TRAIN']['LR_SCHEDULER']['WARMUP_COSINE_DECAY_EPOCHS'] = int(get_text(self.ui.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT))
-                biapy_config['TRAIN']['LR_SCHEDULER']['WARMUP_COSINE_DECAY_HOLD_EPOCHS'] = int(get_text(self.ui.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_HOLD_EPOCHS__INPUT))
 
         # Callbacks
-        if get_text(self.ui.TRAIN__EARLYSTOPPING_MONITOR__INPUT) != 'val_loss':
-            biapy_config['TRAIN']['EARLYSTOPPING_MONITOR'] = get_text(self.ui.TRAIN__EARLYSTOPPING_MONITOR__INPUT) 
-        if get_text(self.ui.TRAIN__CHECKPOINT_MONITOR__INPUT) != 'val_loss':
-            biapy_config['TRAIN']['CHECKPOINT_MONITOR'] = get_text(self.ui.TRAIN__CHECKPOINT_MONITOR__INPUT)
-        if get_text(self.ui.TRAIN__PROFILER__INPUT) == "Yes": 
-            biapy_config['TRAIN']['PROFILER'] = True 
-            biapy_config['TRAIN']['PROFILER_BATCH_RANGE'] = get_text(self.ui.TRAIN__PROFILER_BATCH_RANGE__INPUT)
+        # if get_text(self.ui.TRAIN__PROFILER__INPUT) == "Yes": 
+        #     biapy_config['TRAIN']['PROFILER'] = True 
+        #     biapy_config['TRAIN']['PROFILER_BATCH_RANGE'] = get_text(self.ui.TRAIN__PROFILER_BATCH_RANGE__INPUT)
     else:
         biapy_config['TRAIN']['ENABLE'] = False 
 
@@ -909,12 +860,13 @@ def create_yaml_file(self):
             if get_text(self.ui.TEST__POST_PROCESSING__Z_FILTERING__INST_SEG__INPUT) == "Yes":
                 biapy_config['TEST']['POST_PROCESSING']['Z_FILTERING'] = True
                 biapy_config['TEST']['POST_PROCESSING']['Z_FILTERING_SIZE'] = int(get_text(self.ui.TEST__POST_PROCESSING__Z_FILTERING_SIZE__INST_SEG__INPUT))
-            if float(get_text(self.ui.TEST__POST_PROCESSING__WATERSHED_CIRCULARITY__INST_SEG__INPUT)) != -1:
-                biapy_config['TEST']['POST_PROCESSING']['WATERSHED_CIRCULARITY'] = float(get_text(self.ui.TEST__POST_PROCESSING__WATERSHED_CIRCULARITY__INST_SEG__INPUT))
             if problem_channels in ["BC", "BCM"] and get_text(self.ui.TEST__POST_PROCESSING__VORONOI_ON_MASK__INPUT) == "Yes":
                 biapy_config['TEST']['POST_PROCESSING']['VORONOI_ON_MASK'] = True 
                 biapy_config['TEST']['POST_PROCESSING']['VORONOI_TH'] = float(get_text(self.ui.TEST__POST_PROCESSING__VORONOI_TH__INPUT))
-                
+            if get_text(self.ui.TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES__INST_SEG__INPUT) != "[]":
+                biapy_config['TEST']['POST_PROCESSING']['REMOVE_BY_PROPERTIES'] = ast.literal_eval(get_text(self.ui.TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES__INST_SEG__INPUT) ) 
+                biapy_config['TEST']['POST_PROCESSING']['REMOVE_BY_PROPERTIES_VALUES'] = ast.literal_eval(get_text(self.ui.TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_VALUES__INST_SEG__INPUT) ) 
+                biapy_config['TEST']['POST_PROCESSING']['REMOVE_BY_PROPERTIES_SIGN'] = ast.literal_eval(get_text(self.ui.TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_SIGN__INST_SEG__INPUT) ) 
             if problem_channels == "BP":
                 if int(get_text(self.ui.TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INPUT)) != -1:
                     biapy_config['TEST']['POST_PROCESSING']['REPARE_LARGE_BLOBS_SIZE'] = int(get_text(self.ui.TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INPUT))
@@ -929,8 +881,6 @@ def create_yaml_file(self):
             if get_text(self.ui.TEST__POST_PROCESSING__Z_FILTERING__DET__INPUT) == "Yes":
                 biapy_config['TEST']['POST_PROCESSING']['Z_FILTERING'] = True 
                 biapy_config['TEST']['POST_PROCESSING']['Z_FILTERING_SIZE'] = int(get_text(self.ui.TEST__POST_PROCESSING__Z_FILTERING_SIZE__DET__INPUT))
-            if float(get_text(self.ui.TEST__POST_PROCESSING__WATERSHED_CIRCULARITY__DET__INPUT)) != -1:
-                biapy_config['TEST']['POST_PROCESSING']['WATERSHED_CIRCULARITY'] = float(get_text(self.ui.TEST__POST_PROCESSING__WATERSHED_CIRCULARITY__DET__INPUT))
             if get_text(self.ui.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INPUT) == "Yes":
                 biapy_config['TEST']['POST_PROCESSING']['REMOVE_CLOSE_POINTS'] = True 
                 biapy_config['TEST']['POST_PROCESSING']['REMOVE_CLOSE_POINTS_RADIUS'] = float(get_text(self.ui.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__DET__INPUT))
@@ -940,8 +890,14 @@ def create_yaml_file(self):
                 biapy_config['TEST']['POST_PROCESSING']['DET_WATERSHED_DONUTS_CLASSES'] = ast.literal_eval(get_text(self.ui.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_CLASSES__INPUT) )
                 biapy_config['TEST']['POST_PROCESSING']['DET_WATERSHED_DONUTS_PATCH'] = ast.literal_eval(get_text(self.ui.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_PATCH__INPUT) )
                 biapy_config['TEST']['POST_PROCESSING']['DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER'] = int(get_text(self.ui.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER__INPUT)) 
+            if get_text(self.ui.TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES__DET__INPUT) != "[]":
+                biapy_config['TEST']['POST_PROCESSING']['REMOVE_BY_PROPERTIES'] = ast.literal_eval(get_text(self.ui.TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES__DET__INPUT) ) 
+                biapy_config['TEST']['POST_PROCESSING']['REMOVE_BY_PROPERTIES_VALUES'] = ast.literal_eval(get_text(self.ui.TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_VALUES__DET__INPUT) ) 
+                biapy_config['TEST']['POST_PROCESSING']['REMOVE_BY_PROPERTIES_SIGN'] = ast.literal_eval(get_text(self.ui.TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_SIGN__DET__INPUT) ) 
         if get_text(self.ui.TEST__POST_PROCESSING__APPLY_MASK__INPUT) == "Yes":
             biapy_config['TEST']['POST_PROCESSING']['APPLY_MASK'] = True
+        if get_text(self.ui.TEST__POST_PROCESSING__CLEAR_BORDER__INPUT) == "Yes":
+            biapy_config['TEST']['POST_PROCESSING']['CLEAR_BORDER'] = True
 
         if not biapy_config['TEST']['POST_PROCESSING']:
             del biapy_config['TEST']['POST_PROCESSING']
@@ -1170,8 +1126,12 @@ def analyze_dict(self, d, workflow_str, work_dim, s=""):
                 widget_name = "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__{}__INPUT".format(workflow_str)
             elif widget_name == "TEST__POST_PROCESSING__Z_FILTERING_SIZE__INPUT":
                 widget_name = "TEST__POST_PROCESSING__Z_FILTERING_SIZE__{}__INPUT".format(workflow_str)
-            elif widget_name == "TEST__POST_PROCESSING__Z_FILTERING_SIZE__INPUT":
-                widget_name = "TEST__POST_PROCESSING__WATERSHED_CIRCULARITY__{}__INPUT".format(workflow_str)
+            elif widget_name == "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES__INPUT":
+                widget_name = "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES__{}__INPUT".format(workflow_str)
+            elif widget_name == "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_VALUES__INPUT":
+                widget_name = "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_VALUES__{}__INPUT".format(workflow_str)
+            elif widget_name == "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_SIGN__INPUT":
+                widget_name = "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_SIGN__{}__INPUT".format(workflow_str)
             elif widget_name == "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INPUT":
                 widget_name = "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__{}__INPUT".format(workflow_str)
 

@@ -1,8 +1,7 @@
-## Copied from BiaPy commit: 98c7489d0da8aaf7ea696ca58822098cedc0d21b
+## Copied from BiaPy commit: d287a2c3c2c43d6f6df527622f02ac823c491f23
 
 import os
 from yacs.config import CfgNode as CN
-
 
 class Config:
     def __init__(self, job_dir, job_identifier):
@@ -21,10 +20,14 @@ class Config:
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         _C.SYSTEM = CN()
         # Number of CPUs to use
-        _C.SYSTEM.NUM_CPUS = -1
+        _C.SYSTEM.NUM_CPUS = 10
+        # Do not set it as its value will be calculated based in --gpu input arg
+        _C.SYSTEM.NUM_GPUS = 0
+
         # Math seed
         _C.SYSTEM.SEED = 0
-
+        # Pin CPU memory in DataLoader for more efficient (sometimes) transfer to GPU.
+        _C.SYSTEM.PIN_MEM = True
 
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Problem specification
@@ -35,6 +38,11 @@ class Config:
         _C.PROBLEM.TYPE = 'SEMANTIC_SEG'
         # Possible options: '2D' and '3D'
         _C.PROBLEM.NDIM = '2D'
+
+        ### SEMANTIC_SEG
+        _C.PROBLEM.SEMANTIC_SEG = CN()
+        # Class id to ignore when MODEL.N_CLASSES > 2. Normally is 0 as it is consider the background 
+        _C.PROBLEM.SEMANTIC_SEG.IGNORE_CLASS_ID = 0
 
         ### INSTANCE_SEG
         _C.PROBLEM.INSTANCE_SEG = CN()
@@ -48,6 +56,9 @@ class Config:
         #   - 'Dv2' stands for 'Distance V2', which is an updated version of 'D' channel calculating background distance as well.
         #   - 'P' stands for 'Points' and contains the central points of an instance (as in Detection workflow) 
         _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS = 'BC'
+        # Whether to mask the distance channel to only calculate the loss in those regions where the binary mask
+        # defined by B channel is present
+        _C.PROBLEM.INSTANCE_SEG.DISTANCE_CHANNEL_MASK = True
 
         # Weights to be applied to the channels.
         _C.PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS = (1, 1)
@@ -80,10 +91,6 @@ class Config:
         _C.PROBLEM.INSTANCE_SEG.DATA_REMOVE_SMALL_OBJ_BEFORE = 10
         # Whether to remove objects before watershed 
         _C.PROBLEM.INSTANCE_SEG.DATA_REMOVE_BEFORE_MW = False
-        # Size of small objects to be removed after doing watershed
-        _C.PROBLEM.INSTANCE_SEG.DATA_REMOVE_SMALL_OBJ_AFTER = 100
-        # Whether to remove objects after watershed 
-        _C.PROBLEM.INSTANCE_SEG.DATA_REMOVE_AFTER_MW = False
         # Sequence of string to determine the morphological filters to apply to instance seeds. They will be done in that order.
         # Possible options 'dilate' and 'erode'. E.g. ['erode','dilate'] to erode first and dilate later.
         _C.PROBLEM.INSTANCE_SEG.SEED_MORPH_SEQUENCE = []
@@ -96,10 +103,6 @@ class Config:
         _C.PROBLEM.INSTANCE_SEG.FORE_EROSION_RADIUS = 5
         # Radius to dilate the foreground mask
         _C.PROBLEM.INSTANCE_SEG.FORE_DILATION_RADIUS = 5
-
-        # Whether to find an optimum value for each threshold with the validation data. If True the previous MW_TH*
-        # variables will be replaced by the optimum values found
-        _C.PROBLEM.INSTANCE_SEG.DATA_MW_OPTIMIZE_THS = False
         # Whether to save watershed check files
         _C.PROBLEM.INSTANCE_SEG.DATA_CHECK_MW = True
         
@@ -177,7 +180,7 @@ class Config:
         _C.DATA.NORMALIZATION.TYPE = 'div'
         _C.DATA.NORMALIZATION.CUSTOM_MEAN = -1.0
         _C.DATA.NORMALIZATION.CUSTOM_STD = -1.0
-
+        
         # Train
         _C.DATA.TRAIN = CN()
         # Whether to check if the data mask contains correct values, e.g. same classes as defined
@@ -249,6 +252,8 @@ class Config:
 
         # Validation
         _C.DATA.VAL = CN()
+        # Enabling distributed evaluation (recommended during training)
+        _C.DATA.VAL.DIST_EVAL = True
         # Whether to create validation data from training set or read it from a directory
         _C.DATA.VAL.FROM_TRAIN = True
         # Use a cross validation strategy instead of just split the train data in two
@@ -473,55 +478,66 @@ class Config:
         # Model definition
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         _C.MODEL = CN()
-        # Architecture of the network. Possible values are: 'unet', 'resunet', 'attention_unet', 'fcn32', 'fcn8', 'nnunet', 'tiramisu', 
-        # 'mnet', 'multiresunet', 'seunet', 'simple_cnn', 'EfficientNetB0', 'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'ViT'
+        # Architecture of the network. Possible values are: 'unet', 'resunet', 'resunet++', 'attention_unet', 'nnunet',  
+        # 'multiresunet', 'seunet', 'simple_cnn', 'efficientnet_b[0-7]', 'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'ViT'
         # 'mae'
         _C.MODEL.ARCHITECTURE = 'unet'
         # Number of feature maps on each level of the network.
         _C.MODEL.FEATURE_MAPS = [16, 32, 64, 128, 256]
-        # To activate the Spatial Dropout instead of use the "normal" dropout layer
-        _C.MODEL.SPATIAL_DROPOUT = False
-        # Values to make the dropout with. Set to 0 to prevent dropout. When using it with 'ViT', 'unetr' or 'tiramisu' 
+        # Values to make the dropout with. Set to 0 to prevent dropout. When using it with 'ViT' or 'unetr' 
         # a list with just one number must be provided 
         _C.MODEL.DROPOUT_VALUES = [0., 0., 0., 0., 0.]
         # To active batch normalization
-        _C.MODEL.BATCH_NORMALIZATION = False
-        # Kernel type to use on convolution layers
-        _C.MODEL.KERNEL_INIT = 'he_normal'
+        _C.MODEL.BATCH_NORMALIZATION = True
         # Kernel size
         _C.MODEL.KERNEL_SIZE = 3
-        # Upsampling layer to use in the model
+        # Upsampling layer to use in the model. Options: ["upsampling", "convtranspose"]
         _C.MODEL.UPSAMPLE_LAYER = "convtranspose"
         # Activation function to use along the model
-        _C.MODEL.ACTIVATION = 'elu'
+        _C.MODEL.ACTIVATION = 'ELU'
         # Las activation to use. Options 'sigmoid', 'softmax' or 'linear'
         _C.MODEL.LAST_ACTIVATION = 'sigmoid' 
         # Number of classes without counting the background class (that should be using 0 label)
-        _C.MODEL.N_CLASSES = 1
+        _C.MODEL.N_CLASSES = 2
         # Downsampling to be made in Z. This value will be the third integer of the MaxPooling operation. When facing
         # anysotropic datasets set it to get better performance
         _C.MODEL.Z_DOWN = [0, 0, 0, 0]
         # Checkpoint: set to True to load previous training weigths (needed for inference or to make fine-tunning)
         _C.MODEL.LOAD_CHECKPOINT = False
-        # Create a png with the model's architecture. You must install pydot (`pip install pydot`) and install graphviz 
-        # (in the OS, see instructions at https://graphviz.gitlab.io/download/) for plot_model to work
-        _C.MODEL.MAKE_PLOT = False
-        
-        # TIRAMISU
-        # Depth of the network. Only used when MODEL.ARCHITECTURE = 'tiramisu'. For the rest options it is inferred.
-        _C.MODEL.TIRAMISU_DEPTH = 3
+        # When loading checkpoints whether if only model's weights are going to be loaded or optimizer, epochs and loss_scaler. 
+        _C.MODEL.LOAD_CHECKPOINT_ONLY_WEIGHTS = True
+        # Decide which checkpoint to load from job's dir if PATHS.CHECKPOINT_FILE is ''. 
+        # Options: 'best_on_val' or 'last_on_train'
+        _C.MODEL.LOAD_CHECKPOINT_EPOCH = 'best_on_val' 
+        # Epochs to save a checkpoint of the model apart from the ones saved with LOAD_CHECKPOINT_ONLY_WEIGHTS. Set it to -1 to 
+        # not do it.
+        _C.MODEL.SAVE_CKPT_FREQ = -1
 
         # TRANSFORMERS MODELS
+        # Type of model. Options are "custom", "vit_base_patch16", "vit_large_patch16" and "vit_huge_patch16". On custom setting 
+        # the rest of the ViT parameters can be modified as other options will set them automatically. 
+        _C.MODEL.VIT_MODEL = "custom"
         # Size of the patches that are extracted from the input image.
         _C.MODEL.VIT_TOKEN_SIZE = 16
         # Dimension of the embedding space
-        _C.MODEL.VIT_HIDDEN_SIZE = 768
+        _C.MODEL.VIT_EMBED_DIM = 768
         # Number of transformer encoder layers
         _C.MODEL.VIT_NUM_LAYERS = 12
         # Number of heads in the multi-head attention layer.
         _C.MODEL.VIT_NUM_HEADS = 12
+        # Size of the dense layers of the final classifier. This value will mutiply 'VIT_EMBED_DIM'
+        _C.MODEL.VIT_MLP_RATIO = 4.
+        # Normalization layer epsion
+        _C.MODEL.VIT_NORM_EPS = 1e-6
+
+        # Dimension of the embedding space for the MAE decoder 
+        _C.MODEL.MAE_DEC_HIDDEN_SIZE = 512
+        # Number of transformer encoder layers
+        _C.MODEL.MAE_DEC_NUM_LAYERS = 8
+        # Number of heads in the multi-head attention layer.
+        _C.MODEL.MAE_DEC_NUM_HEADS = 16
         # Size of the dense layers of the final classifier
-        _C.MODEL.VIT_MLP_DIMS = 3072
+        _C.MODEL.MAE_DEC_MLP_DIMS = 2048
 
         # UNETR
         # Multiple of the transformer encoder layers from of which the skip connection signal is going to be extracted
@@ -530,11 +546,10 @@ class Config:
         _C.MODEL.UNETR_VIT_NUM_FILTERS = 16
         # Decoder activation
         _C.MODEL.UNETR_DEC_ACTIVATION = 'relu'
-        # Kernel type to use on convolution layers
-        _C.MODEL.UNETR_DEC_KERNEL_INIT = 'he_normal'
 
         # Specific for SR models based on U-Net architectures. Options are ["pre", "post"]
         _C.MODEL.UNET_SR_UPSAMPLE_POSITION = "pre"
+
 
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Loss
@@ -554,15 +569,19 @@ class Config:
         _C.TRAIN.OPTIMIZER = 'SGD'
         # Learning rate 
         _C.TRAIN.LR = 1.E-4
-        # Weight decay (AdamW)
-        _C.TRAIN.W_DECAY = 0.004
+        # Weight decay
+        _C.TRAIN.W_DECAY = 0.05
         # Batch size
         _C.TRAIN.BATCH_SIZE = 2
+        # Here the effective batch size is 64 (batch_size per gpu) * 8 (nodes) * 8 (gpus per node) = 4096. 
+        # If memory or # gpus is limited, use --accum_iter to maintain the effective batch size, which is 
+        # batch_size (per gpu) * nodes * 8 (gpus per node) * accum_iter.
+        _C.TRAIN.ACCUM_ITER = 1
         # Number of epochs to train the model
         _C.TRAIN.EPOCHS = 360
         # Epochs to wait with no validation data improvement until the training is stopped
         _C.TRAIN.PATIENCE = 50
-
+        
         # LR Scheduler
         _C.TRAIN.LR_SCHEDULER = CN()
         _C.TRAIN.LR_SCHEDULER.NAME = '' # Possible options: 'warmupcosine', 'reduceonplateau', 'onecycle'
@@ -574,28 +593,23 @@ class Config:
         # otherwise it makes no sense
         _C.TRAIN.LR_SCHEDULER.REDUCEONPLATEAU_PATIENCE = -1
         # Cosine decay with a warm up consist in 2 phases: 1) a warm up phase which consists of increasing 
-        # the learning rate from TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_LR to TRAIN.LR value by a factor 
-        # during a certain number of epochs defined by 'TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_HOLD_EPOCHS' 
+        # the learning rate from TRAIN.LR_SCHEDULER.MIN_LR to TRAIN.LR value by a factor 
+        # during a certain number of epochs defined by 'TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_EPOCHS' 
         # 2) after this will began the decay of the learning rate value using the cosine function.
         # Find a detailed explanation in: https://scorrea92.medium.com/cosine-learning-rate-decay-e8b50aa455b
         #
-        # Initial learning rate to start the warm up from. You can set it to 0 or a value lower than 'TRAIN.LR'
-        _C.TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_LR = -1.
         # Epochs to do the warming up. 
         _C.TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_EPOCHS = -1
-        # Number of steps to hold base learning rate before decaying
-        _C.TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_HOLD_EPOCHS = -1
 
         # Callbacks
-        # To determine which value monitor to stop the training
-        _C.TRAIN.EARLYSTOPPING_MONITOR = 'val_loss'
         # To determine which value monitor to consider which epoch consider the best to save
         _C.TRAIN.CHECKPOINT_MONITOR = 'val_loss'
         # Add profiler callback to the training
-        _C.TRAIN.PROFILER = False
-        # Batch range to be analyzed
-        _C.TRAIN.PROFILER_BATCH_RANGE='10, 100'
+        # _C.TRAIN.PROFILER = False
+        # # Batch range to be analyzed
+        # _C.TRAIN.PROFILER_BATCH_RANGE='10, 100'
 
+        # _C.TRAIN.MAE_CALLBACK_EPOCHS = 5
 
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Inference phase
@@ -650,8 +664,51 @@ class Config:
         _C.TEST.POST_PROCESSING.Z_FILTERING_SIZE = 5
         # Apply a binary mask to remove possible segmentation outside it
         _C.TEST.POST_PROCESSING.APPLY_MASK = False
-        # Circularity that each instance need to be greater than to not be marked as 'Strange'. Need to be in [0,1] range.
-        _C.TEST.POST_PROCESSING.WATERSHED_CIRCULARITY = -1.
+
+        # Remove instances by the conditions based in each instance properties. The three variables, i.e. TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES,
+        # TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES_VALUES and TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES_SIGN will compose a list 
+        # of conditions to remove the instances. They are list of list of conditions. For instance, the conditions can be 
+        # like this: [['A'], ['B','C']]. Then, if the instance satisfy the first list of conditions, only 'A' in this first case 
+        # (from ['A'] list), or satisfy 'B' and 'C' (from ['B','C'] list) it will be removed from the image. In each sublist all the conditions
+        # must be satisfied. Available properties are: ['circularity', 'npixels', 'area', 'diameter']. When this post-processing step is 
+        # selected two .csv files will be created, one with the properties of each instance from the original image (will be placed in 
+        # PATHS.RESULT_DIR.PER_IMAGE_INSTANCES path), and another with only instances that remain once this post-processing has been 
+        # applied (will be placed in PATHS.RESULT_DIR.PER_IMAGE_POST_PROCESSING path). In those csv files two more information columns will 
+        # appear: a list of conditions that each instance has satisfy or not ('Satisfied', 'No satisfied' respectively), and a comment with two 
+        # possible values, 'Strange' and 'Correct', telling you if the instance has been removed or not, respectively. 
+        # Each property descrition:
+        #   * 'circularity' of an area instance indicates how compact or elongated the instance is. A value of 1 indicates that the instance 
+        #     is a perfect circle (compact), and 0 indicates that it is a line (elongated). Calculated as: (4 * PI * area) / (perimeter^2).
+        #     In 3D, circularity is only measured in the center slices of the instance (one slice before the central slice, the central 
+        #     slice, and one after it). 
+        #   * 'area' correspond to the number of pixels taking into account the image resolution (we call it 'area' also even in a 3D 
+        #     image for simplicity, but that will be the volume in that case). In the resulting statistics 'volume' will appear in that 
+        #     case too.
+        #   * 'npixels' corresponds to the sum of pixels that compose an instance.
+        #   * 'diameter' calculated with the bounding box and by taking the maximum value of the box in x and y axes. In 3D, z axis 
+        #      is also taken into account. Does not take into account the image resolution. 
+        _C.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES = []
+        # Values of the properties listed in TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES that the instances need to satisfy to
+        # not be droped. Values for each property:
+        # * 'circularity' must be a float in [0,1] range. 
+        # * 'area', 'npixels' and 'diameter' can be integer/float. 
+        _C.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES_VALUES = []
+        # Sign to do the comparison. Options: ['gt', 'ge', 'lt', 'le'] that corresponds to "greather than", e.g. ">", 
+        # "greather equal", e.g. ">=", "less than", e.g. "<", and "less equal" e.g. "<=" comparisons.
+        _C.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES_SIGN = []
+        # A full example of this post-processing: 
+        # If you want to remove those instances that have less than 100 pixels and circularity less equal to 0.7 you should 
+        # declare the above three variables as follows:
+        # _C.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES = [['npixels', 'circularity']]
+        # _C.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES_VALUES = [[100, 0.7]]
+        # _C.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES_SIGN = [['lt', 'le']]
+        # You can also concatenate more restrictions and they will be applied in order. For instance, if you want to remove those 
+        # instances that are bigger than an specific area, and do that before the condition described above, you can define the 
+        # variables this way:
+        # _C.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES = [['area'], ['npixels', 'circularity']]
+        # _C.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES_VALUES = [[500], [100, 0.7]]
+        # _C.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES_SIGN = [['gt'], ['lt', 'le']]        
+        # This way, the instances will be removed by 'area' and then by 'npixels' and 'circularity'
 
         ### Instance segmentation
         # Whether to apply Voronoi using 'BC' or 'M' channels need to be present
@@ -664,6 +721,8 @@ class Config:
         # This option is useful when PROBLEM.INSTANCE_SEG.DATA_CHANNELS is 'BP', as multiple central seeds may appear in big 
         # instances.
         _C.TEST.POST_PROCESSING.REPARE_LARGE_BLOBS_SIZE = -1
+        # Clear objects connected to the label image border
+        _C.TEST.POST_PROCESSING.CLEAR_BORDER = False
 
         ### Detection 
         # To remove close points to each other. This can also be set when using 'BP' channels for instance segmentation.
@@ -722,7 +781,7 @@ class Config:
         # Name of the folder where weights files will be stored/loaded from.
         _C.PATHS.CHECKPOINT = os.path.join(job_dir, 'checkpoints')
         # Checkpoint file to load/store the model weights
-        _C.PATHS.CHECKPOINT_FILE = os.path.join(_C.PATHS.CHECKPOINT, 'model_weights_' + job_identifier + '.h5')
+        _C.PATHS.CHECKPOINT_FILE = ''
         # Name of the folder to store the probability map to avoid recalculating it on every run
         _C.PATHS.PROB_MAP_DIR = os.path.join(job_dir, 'prob_map')
         _C.PATHS.PROB_MAP_FILENAME = 'prob_map.npy'
@@ -730,6 +789,17 @@ class Config:
         _C.PATHS.WATERSHED_DIR = os.path.join(_C.PATHS.RESULT_DIR.PATH, 'watershed')
         _C.PATHS.MEAN_INFO_FILE = os.path.join(_C.PATHS.CHECKPOINT, 'normalization_mean_value.npy')
         _C.PATHS.STD_INFO_FILE = os.path.join(_C.PATHS.CHECKPOINT, 'normalization_std_value.npy')
+        # mae CALLBACK PATH
+        _C.PATHS.MAE_CALLBACK_OUT_DIR = os.path.join(_C.PATHS.RESULT_DIR.PATH, 'MAE_checks')
+        
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # Logging
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        _C.LOG = CN()
+        _C.LOG.LOG_DIR = os.path.join(job_dir, 'train_logs')
+        _C.LOG.TENSORBOARD_LOG_DIR = os.path.join(_C.PATHS.RESULT_DIR.PATH, 'tensorboard')
+        _C.LOG.LOG_FILE_PREFIX = job_identifier
+        _C.LOG.CHART_CREATION_FREQ = 5
 
         self._C = _C
 

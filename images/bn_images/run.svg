@@ -40,10 +40,10 @@
      showgrid="false"
      inkscape:zoom="1.2810466"
      inkscape:cx="134.65552"
-     inkscape:cy="64.790773"
-     inkscape:window-width="1846"
-     inkscape:window-height="1163"
-     inkscape:window-x="74"
+     inkscape:cy="64.400468"
+     inkscape:window-width="1850"
+     inkscape:window-height="1136"
+     inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1"
@@ -74,9 +74,9 @@
        inkscape:export-ydpi="44.358955"><tspan
          x="143.7832"
          y="71.662109"
-         id="tspan841"><tspan
+         id="tspan4820"><tspan
            style="font-family:'DejaVu Serif';-inkscape-font-specification:'DejaVu Serif'"
-           id="tspan839">Run BiaPy</tspan></tspan></text>
+           id="tspan4818">Run Workflow</tspan></tspan></text>
     <g
        id="System / Data"
        transform="matrix(8.8194444,0,0,8.8194444,-119.39815,-99.308656)" />

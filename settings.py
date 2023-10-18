@@ -25,9 +25,10 @@ class Settings():
         else: # Linux, macOS
             self.settings['user_host'] = str(os.getuid())+":"+str(os.getgid())
 
-        # Biapy 
-        self.settings['biapy_container_name'] = "danifranco/biapy:v1.0"
-        self.settings['biapy_container_size'] = "11.1GB"
+        # BiaPy 
+        # self.settings['biapy_container_name'] = "danifranco/biapy:v1.0"
+        self.settings['biapy_container_name'] = "danifranco/biapy:v3.0"
+        self.settings['biapy_container_size'] = "12.6GB"
         self.settings['biapy_container_dockerfile'] = "https://raw.githubusercontent.com/danifranco/BiaPy/master/utils/env/Dockerfile"
         self.settings['yaml_config_file_path'] =''
         self.settings['yaml_config_filename'] = ''
@@ -58,30 +59,30 @@ class Settings():
         self.settings['continue_bn_icons'] = None
 
         # Semantic segmentation
-        self.settings['semantic_models'] = ['unet', 'resunet', 'attention_unet', 'fcn32', \
-                'fcn8', 'tiramisu', 'mnet', 'multiresunet', 'seunet', 'unetr']
-        self.settings['semantic_models_real_names'] = ['U-Net', 'Residual U-Net', 'Attention U-Net', 'FCN32', \
-                'FCN8', 'Tiramisu', 'MNet', 'MultiResUnet', 'SEUnet', 'UNETR']
+        self.settings['semantic_models'] = ['unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'unetr']
+        self.settings['semantic_models_real_names'] = ['U-Net', 'Residual U-Net', 'ResUNet++', 'Attention U-Net', 'MultiResUnet', 'SEUnet', 'UNETR']
         # Instance segmentation
-        self.settings['instance_models'] = ['unet', 'resunet', 'seunet', 'attention_unet', 'unetr']
-        self.settings['instance_models_real_names'] = ['U-Net', 'Residual U-Net', 'SEUnet', 'Attention U-Net', 'UNETR']
+        self.settings['instance_models'] = ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet', 'unetr']
+        self.settings['instance_models_real_names'] = ['U-Net', 'Residual U-Net', 'ResUNet++', 'SEUnet', 'Attention U-Net', 'MultiResUnet', 'UNETR']
         # Detection
-        self.settings['detection_models'] = ['unet', 'resunet', 'seunet', 'attention_unet', 'unetr']
-        self.settings['detection_models_real_names'] = ['U-Net', 'Residual U-Net', 'SEUnet', 'Attention U-Net', 'UNETR']
+        self.settings['detection_models'] = ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet', 'unetr']
+        self.settings['detection_models_real_names'] = ['U-Net', 'Residual U-Net', 'ResUNet++', 'SEUnet', 'Attention U-Net', 'MultiResUnet', 'UNETR']
         # Denoising
-        self.settings['denoising_models'] = ['unet', 'resunet', 'seunet', 'attention_unet', 'unetr']
-        self.settings['denoising_models_real_names'] = ['U-Net', 'Residual U-Net', 'SEUnet', 'Attention U-Net', 'UNETR']
+        self.settings['denoising_models'] = ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet', 'unetr']
+        self.settings['denoising_models_real_names'] = ['U-Net', 'Residual U-Net', 'ResUNet++', 'SEUnet', 'Attention U-Net', 'MultiResUnet', 'UNETR']
         # Super resolution
-        self.settings['sr_2d_models'] = ['edsr', 'rcan', 'dfcan', 'wdsr']
-        self.settings['sr_2d_models_real_names'] = ['EDSR', 'RCAN', 'DFCAN', 'WDSR']
-        self.settings['sr_3d_models'] = ['unet', 'resunet', 'seunet', 'attention_unet']
-        self.settings['sr_3d_models_real_names'] = ['U-Net', 'Residual U-Net', 'SEUnet', 'Attention U-Net']
+        self.settings['sr_2d_models'] = ['edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']
+        self.settings['sr_2d_models_real_names'] = ['EDSR', 'RCAN', 'DFCAN', 'WDSR', 'U-Net', 'Residual U-Net', 'ResUNet++', 'SEUnet', 'Attention U-Net', 'MultiResUnet']
+        self.settings['sr_3d_models'] = ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']
+        self.settings['sr_3d_models_real_names'] = ['U-Net', 'Residual U-Net', 'ResUNet++', 'SEUnet', 'Attention U-Net', 'MultiResUnet']
         # Self-supervised learning
-        self.settings['ssl_models'] = ['mae', 'unet', 'resunet', 'seunet', 'attention_unet', 'unetr']
-        self.settings['ssl_models_real_names'] = ['MAE', 'U-Net', 'Residual U-Net', 'SEUnet', 'Attention U-Net', 'UNETR']
+        self.settings['ssl_models'] = ['mae', 'unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet', 'unetr']
+        self.settings['ssl_models_real_names'] = ['MAE', 'U-Net', 'Residual U-Net', 'ResUNet++', 'SEUnet', 'Attention U-Net', 'MultiResUnet', 'UNETR']
         # Classification
-        self.settings['classification_models'] = ['ViT', 'simple_cnn', 'EfficientNetB0']
-        self.settings['classification_models_real_names'] = ['ViT', 'EfficientNetB0', 'Simple CNN']
+        self.settings['classification_models'] = ['ViT', 'simple_cnn', 'efficientnet_b0', 'efficientnet_b1', 'efficientnet_b2', 
+            'efficientnet_b3', 'efficientnet_b4','efficientnet_b5','efficientnet_b6','efficientnet_b7']
+        self.settings['classification_models_real_names'] = ['ViT', 'Simple CNN', 'EfficientNetB0', 'EfficientNetB1', 'EfficientNetB2', 
+            'EfficientNetB3', 'EfficientNetB4', 'EfficientNetB5', 'EfficientNetB6', 'EfficientNetB7']
         
         # Paths
         self.settings['train_data_input_path'] = None
@@ -275,10 +276,9 @@ class Settings():
             where each pixel will have the probability of being of class 1.</p>\
             <p>If there are <strong>3 or more classes</strong>, the output will be a multi-channel image, \
             with the same number of channels as classes, and the same pixel in each channel will be the \
-            probability (in <code><span>[0-1]</span></code> \
-            range) of being of the class that represents that channel number. For instance, with 3 classes, \
-            e.g. background, mitochondria and contours, the fist channel will represent background, the second\
-                mitochondria and the last contour class.</p>',
+            probability (in <code><span>[0-1]</span></code> range) of being of the class that represents that channel number. \
+            For instance, with 3 classes, e.g. background, mitochondria and contours, the fist channel will represent background, the second\
+            mitochondria and the last contour class.</p>',
 
             # Instance segmentation
             '<p>The goal of this workflow is assign an unique id, i.e. integer, to each object of the input image.</p>\

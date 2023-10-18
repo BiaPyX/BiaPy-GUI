@@ -187,7 +187,17 @@ class Ui_RunBiaPy(object):
 
         self.verticalLayout_4.addWidget(self.container_pulling_frame)
 
-        self.biapy_container_info_label = QLabel(self.frame_4)
+        self.scrollArea = QScrollArea(self.frame_4)
+        self.scrollArea.setObjectName(u"scrollArea")
+        self.scrollArea.setFrameShape(QFrame.NoFrame)
+        self.scrollArea.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollAreaWidgetContents = QWidget()
+        self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 939, 178))
+        self.verticalLayout_5 = QVBoxLayout(self.scrollAreaWidgetContents)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.biapy_container_info_label = QLabel(self.scrollAreaWidgetContents)
         self.biapy_container_info_label.setObjectName(u"biapy_container_info_label")
         self.biapy_container_info_label.setMinimumSize(QSize(0, 160))
         font2 = QFont()
@@ -197,7 +207,11 @@ class Ui_RunBiaPy(object):
         self.biapy_container_info_label.setOpenExternalLinks(True)
         self.biapy_container_info_label.setTextInteractionFlags(Qt.LinksAccessibleByKeyboard|Qt.LinksAccessibleByMouse|Qt.TextBrowserInteraction|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
-        self.verticalLayout_4.addWidget(self.biapy_container_info_label)
+        self.verticalLayout_5.addWidget(self.biapy_container_info_label)
+
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+
+        self.verticalLayout_4.addWidget(self.scrollArea)
 
         self.frame = QFrame(self.frame_4)
         self.frame.setObjectName(u"frame")
@@ -331,8 +345,10 @@ class Ui_RunBiaPy(object):
         self.run_biapy_log.setMaximumSize(QSize(16777215, 16777215))
         font3 = QFont()
         font3.setFamily(u"Monospace")
-        font3.setPointSize(10)
         self.run_biapy_log.setFont(font3)
+        self.run_biapy_log.setStyleSheet(u"background-color : black ; \n"
+"color : white; \n"
+"font-size: 9px;")
         self.run_biapy_log.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.run_biapy_log.setLineWrapMode(QTextEdit.WidgetWidth)
 
@@ -371,7 +387,7 @@ class Ui_RunBiaPy(object):
         self.run_biapy_log.setHtml(QCoreApplication.translate("RunBiaPy", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Monospace'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600;\">Please wait, the first screen update may take a while depending on your OS</span></p></body></html>", None))
+"</style></head><body style=\" font-family:'Monospace'; font-size:9px; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Please wait, the first screen update may take a while depending on your OS</p></body></html>", None))
     # retranslateUi
 

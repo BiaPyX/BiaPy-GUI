@@ -43,6 +43,7 @@ class UIFunction(MainWindow):
             UIFunction.init_goptions_page(self)
             UIFunction.init_train_page(self)
             UIFunction.init_test_page(self)
+            UIFunction.init_run(self)
 
             self.cfg.settings['init'] = True
     
@@ -91,6 +92,13 @@ class UIFunction(MainWindow):
         self.ui.biapy_notebooks_bn.setIconSize(QSize(40, 40))
         self.ui.biapy_citation_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","citation_icon.svg"))))
         self.ui.biapy_citation_bn.setIconSize(QSize(31, 31))
+
+        self.ui.biapy_github_ext_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","open_external_link.svg"))))
+        self.ui.biapy_forum_ext_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","open_external_link.svg"))))
+        self.ui.biapy_templates_ext_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","open_external_link.svg"))))
+        self.ui.biapy_doc_ext_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","open_external_link.svg"))))
+        self.ui.biapy_notebooks_ext_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","open_external_link.svg"))))
+        self.ui.biapy_citation_ext_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","open_external_link.svg"))))
 
         # Create docker logo and text here. This last is necessary to do it here and not in ui_main.py
         # because they are inserted in order 
@@ -162,25 +170,13 @@ class UIFunction(MainWindow):
         self.ui.PATHS__CHECKPOINT_FILE__INPUT.setVisible(False)
         self.ui.checkpoint_file_path_browse_bn.setVisible(False)
         self.ui.checkpoint_file_path_browse_label.setVisible(False)
+        self.ui.checkpoint_loading_opt_label.setVisible(False)
+        self.ui.checkpoint_loading_opt_frame.setVisible(False)
 
         self.ui.SYSTEM__NUM_CPUS__INPUT.addItem("All")
         for i in range(multiprocessing.cpu_count()):
             self.ui.SYSTEM__NUM_CPUS__INPUT.addItem(str(i+1))
         
-        # Create GPU input field
-        self.ui.gpu_input = CheckableComboBox(self.ui.frame_2)
-        self.ui.gpu_input.setObjectName(u"gpu_input")
-        self.ui.gpu_input.setMinimumSize(QSize(400, 30))
-        self.ui.gpu_input.setMaximumSize(QSize(400, 30))
-        font = QFont()
-        font.setFamily(u"DejaVu Math TeX Gyre")
-        font.setPointSize(12)
-        self.ui.gpu_input.setFont(font)
-        self.ui.gridLayout_5.addWidget(self.ui.gpu_input, 0, 2, 1, 1)
-
-        for i, gpu in enumerate(self.cfg.settings['GPUs']):
-            self.ui.gpu_input.addItem("{} : {} ".format(i, gpu.name), check=True if i == 0 else False)
-
     ############
     # Train page 
     ############
@@ -215,12 +211,8 @@ class UIFunction(MainWindow):
         self.ui.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setVisible(False)
         self.ui.lr_schel_reduce_on_plat_factor_label.setVisible(False)
         self.ui.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setVisible(False)
-        self.ui.lr_schel_warmupcosine_lr_label.setVisible(False)
-        self.ui.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_LR__INPUT.setVisible(False)
         self.ui.lr_schel_warmupcosine_epochs_label.setVisible(False)
         self.ui.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setVisible(False)
-        self.ui.lr_schel_warmupcosine_hold_epochs_label.setVisible(False)
-        self.ui.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_HOLD_EPOCHS__INPUT.setVisible(False)
         self.ui.da_frame.setVisible(False)
         self.ui.da_random_rot_range_label.setVisible(False)
         self.ui.AUGMENTOR__RANDOM_ROT_RANGE__INPUT.setVisible(False)
@@ -318,53 +310,9 @@ class UIFunction(MainWindow):
         self.ui.extract_random_patch_frame_label.setVisible(False)
         self.ui.extract_random_patch_frame.setVisible(False)
 
-    def model_combobox_changed(self, model_name):
-        model_name = self.cfg.translate_model_names(model_name, get_text(self.ui.PROBLEM__NDIM__INPUT)) 
-
-        self.ui.unet_model_like_frame.setVisible(False)
-        self.ui.unet_model_like_label.setVisible(False)
-        self.ui.tiramisu_frame.setVisible(False)
-        self.ui.tiramisu_label.setVisible(False)
-        self.ui.transformers_frame.setVisible(False)
-        self.ui.transformers_label.setVisible(False)
-        self.ui.sr_unet_like_heading.setVisible(False)
-        self.ui.sr_unet_like_frame.setVisible(False)
-
-        if model_name in ['unet', 'resunet', 'seunet', 'attention_unet']:
-            self.ui.unet_model_like_frame.setVisible(True)
-            self.ui.unet_model_like_label.setVisible(True)
-            self.ui.sr_unet_like_heading.setVisible(True)
-            self.ui.sr_unet_like_frame.setVisible(True)
-        elif model_name == "tiramisu":
-            self.ui.tiramisu_frame.setVisible(True)
-            self.ui.tiramisu_label.setVisible(True)
-        elif model_name in ["unetr", "ViT", "mae"]:
-            self.ui.transformers_frame.setVisible(True)
-            self.ui.transformers_label.setVisible(True)
-
-            if model_name == "unetr":
-                self.ui.transformers_label.setText("UNETR")
-                self.ui.unetr_vit_hidden_multiple_label.setVisible(True)
-                self.ui.MODEL__UNETR_VIT_HIDD_MULT__INPUT.setVisible(True)
-                self.ui.unetr_num_filters_label.setVisible(True)
-                self.ui.MODEL__UNETR_VIT_NUM_FILTERS__INPUT.setVisible(True)
-                self.ui.unetr_dec_act_label.setVisible(True)
-                self.ui.MODEL__UNETR_DEC_ACTIVATION__INPUT.setVisible(True)
-                self.ui.unetr_dec_kernel_init_label.setVisible(True)
-                self.ui.MODEL__UNETR_DEC_KERNEL_INIT__INPUT.setVisible(True)
-            else:
-                self.ui.unetr_vit_hidden_multiple_label.setVisible(False)
-                self.ui.MODEL__UNETR_VIT_HIDD_MULT__INPUT.setVisible(False)
-                self.ui.unetr_num_filters_label.setVisible(False)
-                self.ui.MODEL__UNETR_VIT_NUM_FILTERS__INPUT.setVisible(False)
-                self.ui.unetr_dec_act_label.setVisible(False)
-                self.ui.MODEL__UNETR_DEC_ACTIVATION__INPUT.setVisible(False)
-                self.ui.unetr_dec_kernel_init_label.setVisible(False)
-                self.ui.MODEL__UNETR_DEC_KERNEL_INIT__INPUT.setVisible(False)
-                if model_name == "ViT":
-                    self.ui.transformers_label.setText("ViT")
-                else: # MAE
-                    self.ui.transformers_label.setText("MAE")
+        # Instance seg
+        self.ui.PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__LABEL.setVisible(False)
+        self.ui.PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__INPUT.setVisible(False)
 
     ###########
     # Test page 
@@ -393,8 +341,6 @@ class UIFunction(MainWindow):
         self.ui.PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INPUT.setVisible(False)
         self.ui.inst_seg_small_obj_fil_before_size_label.setVisible(False)
         self.ui.PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INPUT.setVisible(False)
-        self.ui.inst_seg_small_obj_fil_after_size_label.setVisible(False)
-        self.ui.PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_AFTER__INPUT.setVisible(False)
         self.ui.inst_seg_yz_filtering_size_label.setVisible(False)
         self.ui.TEST__POST_PROCESSING__YZ_FILTERING_SIZE__INST_SEG__INPUT.setVisible(False)
         self.ui.inst_seg_z_filtering_size_label.setVisible(False)
@@ -424,6 +370,24 @@ class UIFunction(MainWindow):
         self.ui.det_data_watetshed_check_label.setVisible(False)
         self.ui.PROBLEM__DETECTION__DATA_CHECK_MW__INPUT.setVisible(False)
         self.ui.test_advanced_options_frame.setVisible(False)
+
+    def init_run(self):
+        if len(self.cfg.settings['GPUs']) > 0:
+            # Create GPU input field
+            self.ui.gpu_input = CheckableComboBox(self.ui.gpu_list_frame)
+            self.ui.gpu_input.setObjectName(u"gpu_input")
+            self.ui.gpu_input.setMinimumSize(QSize(400, 30))
+            self.ui.gpu_input.setMaximumSize(QSize(400, 30))
+            font = QFont()
+            font.setFamily(u"DejaVu Math TeX Gyre")
+            font.setPointSize(12)
+            self.ui.gpu_input.setFont(font)
+            self.ui.verticalLayout_40.addWidget(self.ui.gpu_input, 0, Qt.AlignHCenter)
+            for i, gpu in enumerate(self.cfg.settings['GPUs']):
+                self.ui.gpu_input.addItem("{} : {} ".format(i, gpu.name), check=True if i == 0 else False)
+        else:
+            self.ui.gpu_list_frame.setVisible(False)
+            self.ui.run_workflow_frame.setFrameShape(QFrame.NoFrame)
 
     def build_container(self):
         self.cfg.settings['building_thread'] = None

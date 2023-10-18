@@ -143,6 +143,7 @@ class Ui_Workflow_info(object):
         font2.setWeight(75)
         self.workflow_name_label.setFont(font2)
         self.workflow_name_label.setAlignment(Qt.AlignCenter)
+        self.workflow_name_label.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
         self.verticalLayout_5.addWidget(self.workflow_name_label)
 
@@ -195,6 +196,7 @@ class Ui_Workflow_info(object):
         self.input_description_label.setMaximumSize(QSize(250, 16777215))
         self.input_description_label.setFont(font)
         self.input_description_label.setAlignment(Qt.AlignCenter)
+        self.input_description_label.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
         self.horizontalLayout_3.addWidget(self.input_description_label)
 
@@ -204,6 +206,7 @@ class Ui_Workflow_info(object):
         self.gt_description_label.setMaximumSize(QSize(250, 16777215))
         self.gt_description_label.setFont(font)
         self.gt_description_label.setAlignment(Qt.AlignCenter)
+        self.gt_description_label.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
         self.horizontalLayout_3.addWidget(self.gt_description_label)
 
@@ -251,6 +254,7 @@ class Ui_Workflow_info(object):
         self.workflow_description_label.setFont(font3)
         self.workflow_description_label.setStyleSheet(u"")
         self.workflow_description_label.setWordWrap(True)
+        self.workflow_description_label.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
         self.gridLayout.addWidget(self.workflow_description_label, 3, 0, 1, 1)
 
@@ -291,6 +295,7 @@ class Ui_Workflow_info(object):
         font4.setBold(True)
         font4.setWeight(75)
         self.label.setFont(font4)
+        self.label.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
         self.verticalLayout_6.addWidget(self.label)
 

@@ -320,6 +320,9 @@ QPushButton:pressed {
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
                   </property>
+                  <property name="textInteractionFlags">
+                   <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+                  </property>
                  </widget>
                 </item>
                </layout>
@@ -434,6 +437,9 @@ QPushButton:pressed {
                      <property name="alignment">
                       <set>Qt::AlignCenter</set>
                      </property>
+                     <property name="textInteractionFlags">
+                      <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+                     </property>
                     </widget>
                    </item>
                    <item>
@@ -461,6 +467,9 @@ QPushButton:pressed {
                      </property>
                      <property name="alignment">
                       <set>Qt::AlignCenter</set>
+                     </property>
+                     <property name="textInteractionFlags">
+                      <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
                      </property>
                     </widget>
                    </item>
@@ -552,6 +561,9 @@ QPushButton:pressed {
                   <property name="wordWrap">
                    <bool>true</bool>
                   </property>
+                  <property name="textInteractionFlags">
+                   <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+                  </property>
                  </widget>
                 </item>
                 <item row="4" column="0">
@@ -636,6 +648,9 @@ QPushButton:pressed {
                      </property>
                      <property name="text">
                       <string>Ready to use examples:</string>
+                     </property>
+                     <property name="textInteractionFlags">
+                      <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
                      </property>
                     </widget>
                    </item>
