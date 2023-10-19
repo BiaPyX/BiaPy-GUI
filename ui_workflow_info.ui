@@ -46,6 +46,12 @@
    </property>
    <item>
     <widget class="QFrame" name="centralwidget">
+     <property name="font">
+      <font>
+       <family>DejaVu Math TeX Gyre</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
      <property name="styleSheet">
       <string notr="true">background:rgb(255,255,255);</string>
      </property>
@@ -84,9 +90,6 @@
           <width>16777215</width>
           <height>40</height>
          </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
         </property>
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
@@ -141,7 +144,10 @@
             </font>
            </property>
            <property name="text">
-            <string>TextLabel</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="textInteractionFlags">
+            <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard</set>
            </property>
           </widget>
          </item>
@@ -255,6 +261,12 @@ QPushButton:pressed {
          </property>
          <item>
           <widget class="QScrollArea" name="scrollArea">
+           <property name="font">
+            <font>
+             <family>DejaVu Math TeX Gyre</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
            <property name="frameShape">
             <enum>QFrame::NoFrame</enum>
            </property>
@@ -269,6 +281,12 @@ QPushButton:pressed {
               <width>800</width>
               <height>660</height>
              </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>DejaVu Math TeX Gyre</family>
+              <pointsize>12</pointsize>
+             </font>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_4">
              <item>
@@ -300,12 +318,6 @@ QPushButton:pressed {
                   <property name="enabled">
                    <bool>true</bool>
                   </property>
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
                   <property name="font">
                    <font>
                     <family>DejaVu Math TeX Gyre</family>
@@ -315,7 +327,7 @@ QPushButton:pressed {
                    </font>
                   </property>
                   <property name="text">
-                   <string/>
+                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -330,6 +342,12 @@ QPushButton:pressed {
              </item>
              <item>
               <widget class="QFrame" name="frame_3">
+               <property name="font">
+                <font>
+                 <family>DejaVu Math TeX Gyre</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
                </property>
@@ -401,6 +419,12 @@ QPushButton:pressed {
                 </item>
                 <item row="1" column="0">
                  <widget class="QFrame" name="frame_4">
+                  <property name="font">
+                   <font>
+                    <family>DejaVu Math TeX Gyre</family>
+                    <pointsize>12</pointsize>
+                   </font>
+                  </property>
                   <property name="frameShape">
                    <enum>QFrame::NoFrame</enum>
                   </property>
@@ -415,13 +439,13 @@ QPushButton:pressed {
                     <widget class="QLabel" name="input_description_label">
                      <property name="minimumSize">
                       <size>
-                       <width>250</width>
+                       <width>200</width>
                        <height>0</height>
                       </size>
                      </property>
                      <property name="maximumSize">
                       <size>
-                       <width>250</width>
+                       <width>200</width>
                        <height>16777215</height>
                       </size>
                      </property>
@@ -432,7 +456,7 @@ QPushButton:pressed {
                       </font>
                      </property>
                      <property name="text">
-                      <string>Input image</string>
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Input image&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                      </property>
                      <property name="alignment">
                       <set>Qt::AlignCenter</set>
@@ -446,13 +470,13 @@ QPushButton:pressed {
                     <widget class="QLabel" name="gt_description_label">
                      <property name="minimumSize">
                       <size>
-                       <width>250</width>
+                       <width>200</width>
                        <height>0</height>
                       </size>
                      </property>
                      <property name="maximumSize">
                       <size>
-                       <width>250</width>
+                       <width>200</width>
                        <height>16777215</height>
                       </size>
                      </property>
@@ -549,14 +573,10 @@ QPushButton:pressed {
                    <font>
                     <family>DejaVu Math TeX Gyre</family>
                     <pointsize>12</pointsize>
-                    <kerning>true</kerning>
                    </font>
                   </property>
-                  <property name="styleSheet">
-                   <string notr="true"/>
-                  </property>
                   <property name="text">
-                   <string>Description</string>
+                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                   </property>
                   <property name="wordWrap">
                    <bool>true</bool>

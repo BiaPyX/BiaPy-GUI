@@ -1360,7 +1360,7 @@ QPushButton:pressed {
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>2</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="page_home">
                 <property name="styleSheet">
@@ -1576,7 +1576,7 @@ QPushButton:pressed {
                             </property>
                             <property name="maximumSize">
                              <size>
-                              <width>100</width>
+                              <width>16777215</width>
                               <height>16777215</height>
                              </size>
                             </property>
@@ -1584,10 +1584,12 @@ QPushButton:pressed {
                              <font>
                               <family>DejaVu Math TeX Gyre</family>
                               <pointsize>10</pointsize>
+                              <weight>50</weight>
+                              <bold>false</bold>
                              </font>
                             </property>
                             <property name="text">
-                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Project page&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Project page&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                             </property>
                            </widget>
                           </item>
@@ -1719,7 +1721,7 @@ QPushButton:pressed {
                             </property>
                             <property name="maximumSize">
                              <size>
-                              <width>100</width>
+                              <width>16777215</width>
                               <height>16777215</height>
                              </size>
                             </property>
@@ -1727,10 +1729,12 @@ QPushButton:pressed {
                              <font>
                               <family>DejaVu Math TeX Gyre</family>
                               <pointsize>10</pointsize>
+                              <weight>50</weight>
+                              <bold>false</bold>
                              </font>
                             </property>
                             <property name="text">
-                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Forum&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Forum&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                             </property>
                            </widget>
                           </item>
@@ -1874,7 +1878,7 @@ QPushButton:pressed {
                             </property>
                             <property name="maximumSize">
                              <size>
-                              <width>100</width>
+                              <width>16777215</width>
                               <height>16777215</height>
                              </size>
                             </property>
@@ -1882,10 +1886,12 @@ QPushButton:pressed {
                              <font>
                               <family>DejaVu Math TeX Gyre</family>
                               <pointsize>10</pointsize>
+                              <weight>50</weight>
+                              <bold>false</bold>
                              </font>
                             </property>
                             <property name="text">
-                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Documentation&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Documentation&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                             </property>
                            </widget>
                           </item>
@@ -2017,7 +2023,7 @@ QPushButton:pressed {
                             </property>
                             <property name="maximumSize">
                              <size>
-                              <width>100</width>
+                              <width>16777215</width>
                               <height>16777215</height>
                              </size>
                             </property>
@@ -2025,10 +2031,12 @@ QPushButton:pressed {
                              <font>
                               <family>DejaVu Math TeX Gyre</family>
                               <pointsize>10</pointsize>
+                              <weight>50</weight>
+                              <bold>false</bold>
                              </font>
                             </property>
                             <property name="text">
-                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Templates&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Templates&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                             </property>
                            </widget>
                           </item>
@@ -2160,7 +2168,7 @@ QPushButton:pressed {
                             </property>
                             <property name="maximumSize">
                              <size>
-                              <width>100</width>
+                              <width>16777215</width>
                               <height>16777215</height>
                              </size>
                             </property>
@@ -2168,10 +2176,12 @@ QPushButton:pressed {
                              <font>
                               <family>DejaVu Math TeX Gyre</family>
                               <pointsize>10</pointsize>
+                              <weight>50</weight>
+                              <bold>false</bold>
                              </font>
                             </property>
                             <property name="text">
-                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Notebooks&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Notebooks&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                             </property>
                            </widget>
                           </item>
@@ -2303,7 +2313,7 @@ QPushButton:pressed {
                             </property>
                             <property name="maximumSize">
                              <size>
-                              <width>100</width>
+                              <width>16777215</width>
                               <height>16777215</height>
                              </size>
                             </property>
@@ -2311,10 +2321,12 @@ QPushButton:pressed {
                              <font>
                               <family>DejaVu Math TeX Gyre</family>
                               <pointsize>10</pointsize>
+                              <weight>50</weight>
+                              <bold>false</bold>
                              </font>
                             </property>
                             <property name="text">
-                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Citation&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Citation&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                             </property>
                            </widget>
                           </item>
@@ -2329,7 +2341,7 @@ QPushButton:pressed {
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
-                        <height>220</height>
+                        <height>240</height>
                        </size>
                       </property>
                       <property name="maximumSize">
@@ -2352,10 +2364,10 @@ QPushButton:pressed {
                       </property>
                       <layout class="QGridLayout" name="gridLayout_68">
                        <property name="topMargin">
-                        <number>40</number>
+                        <number>20</number>
                        </property>
                        <property name="bottomMargin">
-                        <number>40</number>
+                        <number>20</number>
                        </property>
                        <property name="horizontalSpacing">
                         <number>15</number>
@@ -2398,7 +2410,7 @@ QPushButton:pressed {
                          <property name="minimumSize">
                           <size>
                            <width>0</width>
-                           <height>15</height>
+                           <height>20</height>
                           </size>
                          </property>
                          <property name="font">
@@ -2446,7 +2458,7 @@ QPushButton:pressed {
                          <property name="minimumSize">
                           <size>
                            <width>0</width>
-                           <height>15</height>
+                           <height>20</height>
                           </size>
                          </property>
                          <property name="maximumSize">
@@ -15109,7 +15121,7 @@ QPushButton:pressed {
                             </font>
                            </property>
                            <property name="currentIndex">
-                            <number>1</number>
+                            <number>0</number>
                            </property>
                            <widget class="QWidget" name="test_general_options_tab">
                             <attribute name="title">
