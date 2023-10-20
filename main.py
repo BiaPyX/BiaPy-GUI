@@ -355,11 +355,12 @@ class MainWindow(QMainWindow):
         self.ui.test_data_input_browse_bn.clicked.connect(lambda: examine(self, "DATA__TEST__PATH__INPUT", False))
         self.ui.test_data_gt_input_browse_bn.clicked.connect(lambda: examine(self, "DATA__TEST__GT_PATH__INPUT", False))
         self.ui.DATA__TEST__LOAD_GT__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
-            ["inst_seg_metrics_label","inst_seg_metrics_frame","det_metrics_label","det_metrics_frame"]))
+            ["inst_seg_metrics_label","inst_seg_metrics_frame","det_metrics_label","det_metrics_frame",
+            "test_data_gt_label", "DATA__TEST__GT_PATH__INPUT", "test_data_gt_input_browse_bn"]))
         self.ui.DATA__TEST__USE_VAL_AS_TEST__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["test_data_label","DATA__TEST__PATH__INPUT","test_data_input_browse_bn","test_exists_gt_label","DATA__TEST__LOAD_GT__INPUT",
              "test_data_gt_label","DATA__TEST__GT_PATH__INPUT","test_data_gt_input_browse_bn","test_data_in_memory_label",
-             "DATA__TEST__IN_MEMORY__INPUT"]))
+             "DATA__TEST__IN_MEMORY__INPUT","validation_overlap_label"]))
         self.ui.test_advanced_bn.clicked.connect(lambda: expand_hide_advanced_options(self, "test_advanced_bn", "test_advanced_options_frame"))
 
         self.ui.TEST__POST_PROCESSING__YZ_FILTERING__SEM_SEG__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
