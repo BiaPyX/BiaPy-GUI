@@ -343,7 +343,12 @@ def oninit_checks(self):
         self.ui.docker_frame.setStyleSheet("#docker_frame { border: 3px solid red; border-radius: 25px;}")
 
     # GPU check
-    self.cfg.settings['GPUs'] = GPUtil.getGPUs()
+    try:
+        self.cfg.settings['GPUs'] = GPUtil.getGPUs()
+    except Exception as gpu_check_error:
+        self.cfg.settings['GPUs'] = []
+        print(f"ERROR during driver check: {gpu_check_error}")
+
     if len(self.cfg.settings['GPUs']) > 0:
         if len(self.cfg.settings['GPUs']) == 1:
             self.ui.gpu_status_label.setText("1 NVIDIA GPU card found")
