@@ -13,10 +13,10 @@ from PySide2.QtWidgets import *
 from ui_main import Ui_MainWindow 
 from ui_function import * 
 from ui_utils import (examine, mark_syntax_error, expand_hide_advanced_options, buttonPressed, 
-    load_yaml_config, resource_path, load_yaml_to_GUI)
+    load_yaml_config, resource_path, load_yaml_to_GUI, set_text)
 from settings import Settings
 from widget_conditions import Widget_conditions
-from aux_windows import dialog_Ui, workflow_explanation_Ui, yes_no_Ui
+from aux_windows import dialog_Ui, workflow_explanation_Ui, yes_no_Ui, spinner_Ui
 
 os.environ['QT_MAC_WANTS_LAYER'] = '1'
 
@@ -80,7 +80,7 @@ class MainWindow(QMainWindow):
         self.float_validator = QtGui.QDoubleValidator(0.,1.,3)
         self.large_range_float_validator = QtGui.QDoubleValidator(0.,10.,3)
         self.int_validator = QtGui.QIntValidator(0, 99999)
-
+        
         # Left buttons
         self.ui.bn_home.clicked.connect(lambda: buttonPressed(self, 'bn_home', 99))
         self.ui.bn_workflow.clicked.connect(lambda: buttonPressed(self, 'bn_workflow', 99))
@@ -427,6 +427,9 @@ class MainWindow(QMainWindow):
         self.yes_no = None
         self.diag = None
         self.wokflow_info = None
+        self.spinner = None
+        self.thread_list = []
+        self.worker_list = []
 
         self.dragPos = self.pos()
         def moveWindow(event):
@@ -438,7 +441,7 @@ class MainWindow(QMainWindow):
         self.ui.frame_empty.mouseMoveEvent = moveWindow
         self.ui.frame_8.mouseMoveEvent = moveWindow
         self.ui.biapy_logo_frame.mouseMoveEvent = moveWindow
-
+        
     def change_problem_dimensions(self, idx):
         # 2D
         if idx == 0:
@@ -561,6 +564,92 @@ class MainWindow(QMainWindow):
         center_window(self.yes_no, self.geometry())
         self.yes_no.exec_()
 
+    def update_variable_in_GUI(self, variable_name, variable_value):
+        """
+        Update a GUI's variable called ``variable_name`` with ``variable_value``.
+
+        Parameters
+        ----------
+        variable_name : str
+            Variable name to change.
+
+        variable_value : str
+            Variable value to set.
+        
+        Returns
+        -------
+        err : str
+            Error given in the process. It is ``None`` if not error was thrown.
+        """
+        err = set_text(getattr(self.ui, variable_name), str(variable_value))
+        self.thread_queue.put(err)
+        return err
+
+    def spinner_exec(self):
+        """
+        Runs the spin window.
+        """
+        if self.spinner is None: 
+            self.spinner = spinner_Ui(self)
+        self.spinner.start()
+        self.spinner.exec_()
+
+    def loading_phase(self, signal):
+        """
+        Activates and deactivates the main window. Useful for the spin window to wait until a process 
+        is done. 
+
+        Parameters 
+        ----------
+        signal : int
+            Signal emited by a thread. If 0 means that the main window needs to be disabled and enabled 
+            otherwise. 
+        """
+        if signal == 0:
+            self.ui.centralwidget.setEnabled(False)
+
+            # Update home page logos' color to be as blocked
+            self.docker_logo_bytearray_str = self.docker_logo_bytearray_str.replace(bytes("#2396ed", encoding='utf8'),bytes("#a9a9a9", encoding='utf8'))
+            self.ui.docker_logo.load(self.docker_logo_bytearray_str)
+            self.gpu_icon_bytearray_str = self.gpu_icon_bytearray_str.replace(bytes("#000000", encoding='utf8'),bytes("#a9a9a9", encoding='utf8'))
+            self.ui.gpu_icon_label.load(self.gpu_icon_bytearray_str)
+
+            self.spinner_exec()
+        else:
+            self.spinner.close()
+
+            # Update home page logos' color to be as blocked
+            self.docker_logo_bytearray_str = self.docker_logo_bytearray_str.replace(bytes("#a9a9a9", encoding='utf8'),bytes("#2396ed", encoding='utf8'))
+            self.ui.docker_logo.load(self.docker_logo_bytearray_str)
+            self.gpu_icon_bytearray_str = self.gpu_icon_bytearray_str.replace(bytes("#a9a9a9", encoding='utf8'),bytes("#000000", encoding='utf8'))
+            self.ui.gpu_icon_label.load(self.gpu_icon_bytearray_str)
+
+            self.ui.centralwidget.setEnabled(True)
+
+    def report_yaml_load(self, errors, yaml_file):
+        """
+        Report to the user the result of loading the YAML file. If an error was found a dialog 
+        will be launched. 
+
+        Parameters
+        ----------
+
+        errors : List of str
+            List of errors loading the YAML file. 
+
+        yaml_file : str
+            Path to the YAML configuration file loaded.
+        """
+        if len(errors) == 0:
+            self.yaml_file = yaml_file
+            self.dialog_exec("Configuration file succesfully loaded! You will "\
+                "be redirected to the workflow page so you can modify the configuration.", "inform_user_and_go")
+            self.cfg.settings['yaml_config_file_path'] = os.path.dirname(self.yaml_file)
+            self.ui.goptions_browse_yaml_path_input.setText(os.path.normpath(os.path.dirname(self.yaml_file)))
+            self.ui.goptions_yaml_name_input.setText(os.path.normpath(os.path.basename(self.yaml_file)))
+        else:
+            self.dialog_exec(errors, "load_yaml_ok_but_errors")
+            
     def closeEvent(self, event):
         # Find if some window is still running 
         still_running = False
@@ -606,6 +695,9 @@ if __name__ == "__main__":
     StyleSheet = """ 
         QComboBox {
             selection-background-color: rgb(64,144,253);
+        }
+        QFrame:disabled {
+        background-color:#000000;
         }
         """
 

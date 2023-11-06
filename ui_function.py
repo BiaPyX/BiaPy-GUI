@@ -3,7 +3,7 @@ import sys
 import re
 import multiprocessing
 
-from PySide2.QtCore import  QSize
+from PySide2.QtCore import  QSize, QFile 
 from PySide2.QtSvg import QSvgWidget
 
 import settings
@@ -102,10 +102,15 @@ class UIFunction(MainWindow):
 
         # Create docker logo and text here. This last is necessary to do it here and not in ui_main.py
         # because they are inserted in order 
-        self.ui.docker_logo = QSvgWidget(resource_path(os.path.join("images","docker_logo.svg")))
+        dockerlogo = QtCore.QFile(resource_path(os.path.join("images","docker_logo.svg")))
+        dockerlogo.open(QtCore.QIODevice.ReadWrite)
+        self.docker_logo_bytearray_str = dockerlogo.readAll()
+        dockerlogo.close()
+        self.ui.docker_logo = QSvgWidget()
         self.ui.docker_logo.setObjectName(u"docker_logo")
         self.ui.docker_logo.setMinimumSize(QSize(220, 56))
         self.ui.docker_logo.setMaximumSize(QSize(220, 56))
+        self.ui.docker_logo.load(self.docker_logo_bytearray_str)
         self.ui.verticalLayout_28.addWidget(self.ui.docker_logo, alignment=QtCore.Qt.AlignCenter)
 
         self.ui.docker_status_label = QLabel(self.ui.docker_frame)
@@ -119,10 +124,15 @@ class UIFunction(MainWindow):
         self.ui.verticalLayout_28.addWidget(self.ui.docker_status_label)
 
         # GPU logo and text
-        self.ui.gpu_icon_label = QSvgWidget(resource_path(os.path.join("images","gpu_icon.svg")))
+        gpu_icon = QtCore.QFile(resource_path(os.path.join("images","gpu_icon.svg")))
+        gpu_icon.open(QtCore.QIODevice.ReadWrite)
+        self.gpu_icon_bytearray_str = gpu_icon.readAll()
+        gpu_icon.close()
+        self.ui.gpu_icon_label = QSvgWidget()
         self.ui.gpu_icon_label.setObjectName(u"gpu_icon_label")
         self.ui.gpu_icon_label.setMinimumSize(QSize(122, 80))
         self.ui.gpu_icon_label.setMaximumSize(QSize(122, 80))
+        self.ui.gpu_icon_label.load(self.gpu_icon_bytearray_str)
         self.ui.verticalLayout_33.addWidget(self.ui.gpu_icon_label, alignment=QtCore.Qt.AlignCenter)
 
         self.ui.gpu_status_label = QLabel(self.ui.gpu_frame)

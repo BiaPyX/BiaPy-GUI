@@ -8,8 +8,10 @@ from PySide2.QtWidgets import *
 
 from ui_dialog import Ui_Dialog 
 from ui_yes_no import Ui_yes_no 
+from spinner import Ui_spinner
 from ui_workflow_info import Ui_Workflow_info 
 from ui_utils import mark_syntax_error, resource_path, buttonPressed
+from waitingspinnerwidget import QtWaitingSpinner
 
 class workflow_explanation_Ui(QDialog):
     def __init__(self, parent=None):
@@ -227,6 +229,11 @@ class dialog_Ui(QDialog):
                 self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("OK", u"OK", None))
                 self.dialog_window.error_message_label.setText(message)
                 self.dialog_window.go_to_correct_bn.clicked.connect(lambda: self.redirect_and_close(reason))
+            elif reason == "error":
+                self.dialog_window.window_des_label.setText("Error")
+                self.dialog_window.error_message_label.setText("{}".format(message))
+                self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"OK", None))
+                self.dialog_window.go_to_correct_bn.clicked.connect(self.close)
             else:
                 if reason == "docker_installation":
                     self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"OK", None))
@@ -286,3 +293,36 @@ class yes_no_Ui(QDialog):
     def submitclose(self, answer):
         self.answer = answer 
         self.accept()
+
+class spinner_Ui(QDialog):
+    def __init__(self, parent=None):
+        super(spinner_Ui, self).__init__()
+        self.spinner_window = Ui_spinner()
+        self.spinner_window.setupUi(self)
+        
+        # Create spinner 
+        self.spinner = QtWaitingSpinner(parent, True, True)
+        self.spinner.setRoundness(150.0)
+        self.spinner.setMinimumTrailOpacity(15.0)
+        self.spinner.setTrailFadePercentage(70.0)
+        self.spinner.setNumberOfLines(8)
+        self.spinner.setLineLength(40)
+        self.spinner.setLineWidth(20)
+        self.spinner.setInnerRadius(30)
+        self.spinner.setRevolutionsPerSecond(0.5)
+        self.spinner.setColor(QColor(64,144,253))
+        self.spinner_window.verticalLayout.addWidget(self.spinner)
+        
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint) 
+        self.setAttribute(Qt.WA_TranslucentBackground)
+
+    def stop(self):
+        self.spinner.stop()
+        self.close()
+
+    def start(self):
+        self.spinner.start()
+        
+    def closeEvent(self, event):
+        self.spinner.stop()
+        super().close()

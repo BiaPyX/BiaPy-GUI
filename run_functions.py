@@ -289,7 +289,6 @@ class run_worker(QObject):
                 except yaml.YAMLError as exc:
                     print(exc)
 
-
             command = ["--config", "/BiaPy_files/input.yaml", "--result_dir", "{}".format(self.output_folder_in_container),
                 "--name", "{}".format(jobname), "--run_id", "1"]   
             gpus = " "

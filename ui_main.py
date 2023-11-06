@@ -22,8 +22,15 @@ class Ui_MainWindow(object):
         MainWindow.setStyleSheet(u"")
         self.centralwidget = QFrame(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.centralwidget.setStyleSheet(u"background: rgb(91,90,90);\n"
-"")
+        self.centralwidget.setStyleSheet(u"QWidget:disabled {\n"
+"background-color:#D3D3D3;\n"
+"}\n"
+"QFrame:disabled {\n"
+"background-color:#D3D3D3;\n"
+"}\n"
+"QPushButton:disabled {\n"
+"background-color:#D3D3D3;\n"
+"}")
         self.centralwidget.setFrameShape(QFrame.StyledPanel)
         self.horizontalLayout = QHBoxLayout(self.centralwidget)
         self.horizontalLayout.setSpacing(0)
@@ -46,7 +53,12 @@ class Ui_MainWindow(object):
         self.frame_bottom_west.setMinimumSize(QSize(260, 0))
         self.frame_bottom_west.setMaximumSize(QSize(80, 16777215))
         self.frame_bottom_west.setFont(font)
-        self.frame_bottom_west.setStyleSheet(u"background:rgb(64,144,253);")
+        self.frame_bottom_west.setStyleSheet(u"QFrame{\n"
+"background:rgb(64,144,253);\n"
+"}\n"
+"QFrame:disabled {\n"
+"background-color:#D3D3D3;\n"
+"}")
         self.frame_bottom_west.setFrameShape(QFrame.NoFrame)
         self.frame_bottom_west.setFrameShadow(QFrame.Plain)
         self.verticalLayout_14 = QVBoxLayout(self.frame_bottom_west)
@@ -58,6 +70,7 @@ class Ui_MainWindow(object):
         self.biapy_logo_frame.setMinimumSize(QSize(0, 0))
         self.biapy_logo_frame.setMaximumSize(QSize(16777215, 16777215))
         self.biapy_logo_frame.setFont(font)
+        self.biapy_logo_frame.setStyleSheet(u"")
         self.biapy_logo_frame.setFrameShape(QFrame.NoFrame)
         self.biapy_logo_frame.setFrameShadow(QFrame.Plain)
         self.biapy_logo_frame.setLineWidth(0)
@@ -130,6 +143,9 @@ class Ui_MainWindow(object):
         self.frame_home.setMinimumSize(QSize(0, 0))
         self.frame_home.setMaximumSize(QSize(260, 52))
         self.frame_home.setFont(font)
+        self.frame_home.setStyleSheet(u"QFrame:disabled {\n"
+"background-color: rgb(169,169,169);\n"
+"}")
         self.frame_home.setFrameShape(QFrame.NoFrame)
         self.frame_home.setFrameShadow(QFrame.Plain)
         self.horizontalLayout_15 = QHBoxLayout(self.frame_home)
@@ -399,7 +415,12 @@ class Ui_MainWindow(object):
         self.frame_top_east.setMinimumSize(QSize(0, 0))
         self.frame_top_east.setMaximumSize(QSize(16777215, 35))
         self.frame_top_east.setFont(font)
-        self.frame_top_east.setStyleSheet(u"background:rgb(255,255,255);")
+        self.frame_top_east.setStyleSheet(u"QFrame{\n"
+"background:rgb(255,255,255);\n"
+"}\n"
+"QFrame:disabled {\n"
+"background-color:#D3D3D3;\n"
+"}")
         self.frame_top_east.setFrameShape(QFrame.NoFrame)
         self.frame_top_east.setFrameShadow(QFrame.Plain)
         self.horizontalLayout_4 = QHBoxLayout(self.frame_top_east)
@@ -520,7 +541,12 @@ class Ui_MainWindow(object):
         self.stackedWidget.setStyleSheet(u"")
         self.page_home = QWidget()
         self.page_home.setObjectName(u"page_home")
-        self.page_home.setStyleSheet(u"background:rgb(255,255,255);")
+        self.page_home.setStyleSheet(u"QFrame {\n"
+"background:rgb(255,255,255);\n"
+"}\n"
+"QFrame:disabled {\n"
+"background-color:#D3D3D3;\n"
+"}")
         self.verticalLayout_13 = QVBoxLayout(self.page_home)
         self.verticalLayout_13.setSpacing(0)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
@@ -589,6 +615,10 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(255,255,255);\n"
 "	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"\n"
+"QPushButton:disabled {\n"
+"background-color:#A9A9A9;\n"
 "}")
         self.biapy_github_bn.setIconSize(QSize(45, 45))
 
@@ -655,6 +685,10 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(255,255,255);\n"
 "	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"\n"
+"QPushButton:disabled {\n"
+"background-color:#A9A9A9;\n"
 "}")
         self.biapy_forum_bn.setIconSize(QSize(45, 45))
 
@@ -718,6 +752,10 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(255,255,255);\n"
 "	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"\n"
+"QPushButton:disabled {\n"
+"background-color:#A9A9A9;\n"
 "}")
         self.biapy_doc_bn.setIconSize(QSize(45, 45))
 
@@ -779,6 +817,10 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(255,255,255);\n"
 "	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"\n"
+"QPushButton:disabled {\n"
+"background-color:#A9A9A9;\n"
 "}")
         self.biapy_templates_bn.setIconSize(QSize(45, 45))
 
@@ -840,6 +882,10 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(255,255,255);\n"
 "	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"\n"
+"QPushButton:disabled {\n"
+"background-color:#A9A9A9;\n"
 "}")
         self.biapy_notebooks_bn.setIconSize(QSize(45, 45))
 
@@ -901,6 +947,10 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(255,255,255);\n"
 "	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"\n"
+"QPushButton:disabled {\n"
+"background-color:#A9A9A9;\n"
 "}")
         self.biapy_citation_bn.setIconSize(QSize(33, 33))
 
@@ -936,6 +986,10 @@ class Ui_MainWindow(object):
         self.gpu_frame = QFrame(self.dependencies_frame)
         self.gpu_frame.setObjectName(u"gpu_frame")
         self.gpu_frame.setToolTipDuration(3)
+        self.gpu_frame.setStyleSheet(u"QLabel:disabled {\n"
+"border: 3px solid 	rgb(169,169,169);\n"
+"border-radius: 25px;\n"
+"}")
         self.gpu_frame.setFrameShape(QFrame.StyledPanel)
         self.gpu_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_33 = QVBoxLayout(self.gpu_frame)
@@ -959,6 +1013,11 @@ class Ui_MainWindow(object):
 
         self.docker_frame = QFrame(self.dependencies_frame)
         self.docker_frame.setObjectName(u"docker_frame")
+        self.docker_frame.setStyleSheet(u"QLabel:disabled {\n"
+"border: 3px solid 	rgb(169,169,169);\n"
+"border-radius: 25px;\n"
+"}\n"
+"")
         self.docker_frame.setFrameShape(QFrame.StyledPanel)
         self.docker_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_28 = QVBoxLayout(self.docker_frame)
@@ -998,8 +1057,15 @@ class Ui_MainWindow(object):
         font4.setBold(False)
         font4.setWeight(50)
         self.yes_no_diagram_ques_label.setFont(font4)
-        self.yes_no_diagram_ques_label.setStyleSheet(u"border: 2px solid rgb(64,144,253);\n"
-"border-radius: 15px;")
+        self.yes_no_diagram_ques_label.setStyleSheet(u"QLabel {\n"
+"border: 2px solid rgb(64,144,253);\n"
+"border-radius: 15px;\n"
+"}\n"
+"\n"
+"QLabel:disabled {\n"
+"border: 2px solid 	rgb(169,169,169);\n"
+"border-radius: 15px;\n"
+"}")
         self.yes_no_diagram_ques_label.setFrameShape(QFrame.NoFrame)
         self.yes_no_diagram_ques_label.setLineWidth(2)
         self.yes_no_diagram_ques_label.setAlignment(Qt.AlignCenter)
@@ -1022,6 +1088,10 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(255,255,255);\n"
 "	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"\n"
+"QPushButton:disabled {\n"
+"background-color:#A9A9A9;\n"
 "}")
         self.continue_yaml_bn.setIconSize(QSize(341, 33))
         self.create_yaml_bn = QPushButton(self.frame_6)
@@ -1042,6 +1112,10 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(255,255,255);\n"
 "	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"\n"
+"QPushButton:disabled {\n"
+"background-color:#A9A9A9;\n"
 "}")
         self.create_yaml_bn.setIconSize(QSize(215, 33))
         self.load_yaml_bn = QPushButton(self.frame_6)
@@ -1062,6 +1136,10 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(255,255,255);\n"
 "	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"\n"
+"QPushButton:disabled {\n"
+"background-color:#A9A9A9;\n"
 "}")
         self.load_yaml_bn.setIconSize(QSize(215, 33))
         self.yes_no_diagram_ques2_label = QLabel(self.frame_6)
@@ -1070,8 +1148,15 @@ class Ui_MainWindow(object):
         self.yes_no_diagram_ques2_label.setMinimumSize(QSize(0, 15))
         self.yes_no_diagram_ques2_label.setMaximumSize(QSize(16777215, 16777215))
         self.yes_no_diagram_ques2_label.setFont(font4)
-        self.yes_no_diagram_ques2_label.setStyleSheet(u"border: 2px solid rgb(64,144,253);\n"
-"border-radius: 15px;")
+        self.yes_no_diagram_ques2_label.setStyleSheet(u"QLabel{\n"
+"border: 2px solid rgb(64,144,253);\n"
+"border-radius: 15px;\n"
+"}\n"
+"\n"
+"QLabel:disabled {\n"
+"border: 2px solid 	rgb(169,169,169);\n"
+"border-radius: 15px;\n"
+"}")
         self.yes_no_diagram_ques2_label.setFrameShape(QFrame.NoFrame)
         self.yes_no_diagram_ques2_label.setLineWidth(2)
         self.yes_no_diagram_ques2_label.setAlignment(Qt.AlignCenter)
@@ -1394,7 +1479,7 @@ class Ui_MainWindow(object):
         self.goptions_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 932, 493))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 898, 493))
         self.scrollAreaWidgetContents.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout.setObjectName(u"gridLayout")
@@ -1534,7 +1619,7 @@ class Ui_MainWindow(object):
         self.goptions_advanced_options_scrollarea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 870, 248))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 459, 248))
         self.gridLayout_2 = QGridLayout(self.scrollAreaWidgetContents_2)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.label = QLabel(self.scrollAreaWidgetContents_2)
@@ -5980,7 +6065,7 @@ class Ui_MainWindow(object):
         self.scrollArea_9.setWidgetResizable(True)
         self.scrollAreaWidgetContents_13 = QWidget()
         self.scrollAreaWidgetContents_13.setObjectName(u"scrollAreaWidgetContents_13")
-        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 913, 1210))
+        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 582, 1210))
         self.gridLayout_44 = QGridLayout(self.scrollAreaWidgetContents_13)
         self.gridLayout_44.setObjectName(u"gridLayout_44")
         self.label_86 = QLabel(self.scrollAreaWidgetContents_13)
@@ -6531,7 +6616,7 @@ class Ui_MainWindow(object):
         self.scrollArea_10.setWidgetResizable(True)
         self.scrollAreaWidgetContents_14 = QWidget()
         self.scrollAreaWidgetContents_14.setObjectName(u"scrollAreaWidgetContents_14")
-        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 913, 804))
+        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 546, 804))
         self.gridLayout_47 = QGridLayout(self.scrollAreaWidgetContents_14)
         self.gridLayout_47.setObjectName(u"gridLayout_47")
         self.label_100 = QLabel(self.scrollAreaWidgetContents_14)
@@ -7371,7 +7456,7 @@ class Ui_MainWindow(object):
         self.check_yaml_file_errors_frame.setWidgetResizable(True)
         self.scrollAreaWidgetContents_19 = QWidget()
         self.scrollAreaWidgetContents_19.setObjectName(u"scrollAreaWidgetContents_19")
-        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 896, 101))
+        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 96, 26))
         self.verticalLayout_32 = QVBoxLayout(self.scrollAreaWidgetContents_19)
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
         self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)

@@ -5,15 +5,19 @@ import docker
 import ast 
 import GPUtil
 import yaml
+import queue
 from pathlib import PurePath, Path, PureWindowsPath
 
 from PySide2 import QtCore, QtGui, QtWidgets
-from PySide2.QtCore import QUrl
+from PySide2.QtCore import QUrl, QObject, QThread
 from PySide2.QtWidgets import *
 
 import settings
 from biapy_config import Config
 from biapy_check_configuration import check_configuration
+
+worker = None
+thread = None
 
 def examine(main_window, save_in_obj_tag=None, is_file=True):
     if not is_file:
@@ -334,13 +338,14 @@ def oninit_checks(self):
         self.ui.docker_status_label.setText("<br>Docker installation found")
         self.cfg.settings['biapy_container_ready'] = True
         self.ui.docker_head_label.setText("Docker dependency")
-        self.ui.docker_frame.setStyleSheet("#docker_frame { border: 3px solid green; border-radius: 25px;}")
+
+        self.ui.docker_frame.setStyleSheet("#docker_frame { border: 3px solid green; border-radius: 25px;}\n#docker_frame:disabled {border: 3px solid rgb(169,169,169);}")
     else:
         self.ui.docker_status_label.setText("Docker installation not found. Please, install it before running BiaPy in \
                 <a href=\"https://biapy.readthedocs.io/en/latest/get_started/installation.html#docker-installation/\">its documentation</a>. \
                 Once you have done that please restart this application.")
         self.ui.docker_head_label.setText("Docker dependency error")
-        self.ui.docker_frame.setStyleSheet("#docker_frame { border: 3px solid red; border-radius: 25px;}")
+        self.ui.docker_frame.setStyleSheet("#docker_frame { border: 3px solid red; border-radius: 25px;}\n#docker_frame:disabled {border: 3px solid rgb(169,169,169);}")
 
     # GPU check
     try:
@@ -355,11 +360,11 @@ def oninit_checks(self):
         else:
             self.ui.gpu_status_label.setText("{} NVIDIA GPU cards found".format(len(self.cfg.settings['GPUs'])))
         self.ui.gpu_head_label.setText("GPU dependency")
-        self.ui.gpu_frame.setStyleSheet("#gpu_frame { border: 3px solid green; border-radius: 25px;}")
+        self.ui.gpu_frame.setStyleSheet("#gpu_frame { border: 3px solid green; border-radius: 25px;}\n#gpu_frame:disabled {border: 3px solid rgb(169,169,169);}")
     else:
         self.ui.gpu_status_label.setText("No NVIDIA GPU card was found. BiaPy will run on the CPU, which is much slower!")
         self.ui.gpu_head_label.setText("GPU dependency error")
-        self.ui.gpu_frame.setStyleSheet("#gpu_frame { border: 3px solid red; border-radius: 25px;}")
+        self.ui.gpu_frame.setStyleSheet("#gpu_frame { border: 3px solid red; border-radius: 25px;}\n#gpu_frame:disabled {border: 3px solid rgb(169,169,169);}")
 
 
 def get_text(obj):
@@ -993,175 +998,271 @@ def load_yaml_config(self, checks=True, advise_user=False):
             
         return True
 
-def load_yaml_to_GUI(self):
+def load_yaml_to_GUI(main_window):
     """
 
     """
     # Load YAML file
     yaml_file = QFileDialog.getOpenFileName()[0]
     if yaml_file == "": return # If no file was selected 
-    with open(yaml_file, "r") as stream:
-        try:
-            loaded_cfg = yaml.safe_load(stream)
-        except yaml.YAMLError as exc:
-            print(exc)
-    print(loaded_cfg)
+    
+    main_window.thread_queue = queue.Queue()
+    main_window.thread_list.append(QThread())
+    main_window.worker_list.append(load_yaml_to_GUI_engine(main_window, yaml_file, main_window.thread_queue))
+    worker_id = len(main_window.worker_list)-1
 
-    # Load configuration file and check possible errors
-    tmp_cfg = Config("/home/","jobname")
-    errors = ""
-    try:
-        tmp_cfg._C.merge_from_file(yaml_file)
-        tmp_cfg = tmp_cfg.get_cfg_defaults()
-        check_configuration(tmp_cfg, check_data_paths=False)
-    except Exception as errors:  
-        errors = str(errors) 
-        print(errors) 
-        self.dialog_exec(errors, "load_yaml_error")
-    else:
-        
-        # Find the workflow
-        workflow_str = ""
-        try:
-            work_dim = loaded_cfg['PROBLEM']['NDIM']
-        except:
-            work_dim = "2D"
-        try:
-            work_id = loaded_cfg['PROBLEM']['TYPE']
-        except: 
-            work_id = "SEMANTIC_SEG"
-            workflow_str = "SEM_SEG"
-        if work_id == "SEMANTIC_SEG":
-            self.cfg.settings['selected_workflow'] = 0
-            workflow_str = "SEM_SEG"
-        elif work_id == "INSTANCE_SEG":
-            self.cfg.settings['selected_workflow'] = 1
-            workflow_str = "INST_SEG"
-        elif work_id == "DETECTION":
-            self.cfg.settings['selected_workflow'] = 2
-            workflow_str = "DET"
-        elif work_id == "DENOISING":
-            self.cfg.settings['selected_workflow'] = 3
-        elif work_id == "SUPER_RESOLUTION":
-            self.cfg.settings['selected_workflow'] = 4
-        elif work_id == "SELF_SUPERVISED":
-            self.cfg.settings['selected_workflow'] = 5
-        else: # CLASSIFICATION
-            self.cfg.settings['selected_workflow'] = 6
-        move_between_pages(self, self.cfg.settings['selected_workflow'], work_dim)
+    main_window.worker_list[worker_id].moveToThread(main_window.thread_list[worker_id])
+    main_window.thread_list[worker_id].started.connect(main_window.worker_list[worker_id].run)
+   
+    main_window.worker_list[worker_id].state_signal.connect(main_window.loading_phase)
+    main_window.worker_list[worker_id].update_var_signal.connect(main_window.update_variable_in_GUI)
+    main_window.worker_list[worker_id].error_signal.connect(main_window.dialog_exec)
+    main_window.worker_list[worker_id].report_yaml_load_result.connect(main_window.report_yaml_load)
+    main_window.worker_list[worker_id].finished_signal.connect(main_window.thread_list[worker_id].quit)
+    main_window.worker_list[worker_id].finished_signal.connect(main_window.worker_list[worker_id].deleteLater)
+    main_window.thread_list[worker_id].finished.connect(main_window.thread_list[worker_id].deleteLater)
+    main_window.thread_list[worker_id].start()       
 
-        # Go over configuration file
-        errors, variables_set = analyze_dict(self, loaded_cfg, work_dim, "")
-        print("Variables updated: ")
-        for i, k in enumerate(variables_set.keys()):
-            print("{}. {}: {}".format(i+1, k, variables_set[k]))
-        if len(errors) > 0:
-            print("Errors: ")
-            for i in range(len(errors)):
-                print("{}. : {}".format(i+1, errors[i]))
+class load_yaml_to_GUI_engine(QObject):
+    # Signal to indicate the state of the process 
+    state_signal = QtCore.Signal(int)
 
-        # Message for the user
-        if len(errors) == 0:
-            self.dialog_exec("Configuration file succesfully loaded! You will "\
-                "be redirected to the workflow page so you can modify the configuration.", "inform_user_and_go")
-            self.cfg.settings['yaml_config_file_path'] = os.path.dirname(yaml_file)
-            self.ui.goptions_browse_yaml_path_input.setText(os.path.normpath(os.path.dirname(yaml_file)))
-            self.ui.goptions_yaml_name_input.setText(os.path.normpath(os.path.basename(yaml_file)))
+    # Signal to update variables in GUI
+    update_var_signal = QtCore.Signal(str,str)
+
+    # Signal to indicate the main thread that there was an error
+    error_signal = QtCore.Signal(str, str)
+
+    # Signal to indicate the main thread that there was an error
+    report_yaml_load_result = QtCore.Signal(str, str)
+
+    # Signal to indicate the main thread that the worker has finished 
+    finished_signal = QtCore.Signal()
+
+    def __init__(self, main_window, yaml_file, thread_queue):
+        """
+        Class to load the YAML configuration file into the GUI. It is done in a separated thread and sends signals
+        to the main thread, as this will be locked in the spin window. 
+
+        Parameters 
+        ----------
+        main_window : QMainWindow
+            Main window of the application. 
+
+        yaml_file : str
+            YAML configuration file path to load. 
+        """
+        super(load_yaml_to_GUI_engine, self).__init__()
+        self.main_window =  main_window
+        self.yaml_file = yaml_file
+        self.thread_queue = thread_queue
+    
+    def run(self):
+        self.state_signal.emit(0)
+
+        with open(self.yaml_file, "r") as stream:
+            try:
+                loaded_cfg = yaml.safe_load(stream)
+            except yaml.YAMLError as exc:
+                print(exc)
+                self.error_signal.emit(f"Following error found when loading configuration file: {errors}", "error")
+                self.state_signal.emit(1)
+                self.finished_signal.emit()
+                return 
+        print(loaded_cfg)
+
+        # Load configuration file and check possible errors
+        tmp_cfg = Config("/home/","jobname")
+        errors = ""
+        try:
+            tmp_cfg._C.merge_from_file(self.yaml_file)
+            tmp_cfg = tmp_cfg.get_cfg_defaults()
+            check_configuration(tmp_cfg, check_data_paths=False)
+        except Exception as errors:  
+            errors = str(errors) 
+            print(errors) 
+            self.error_signal.emit(errors, "load_yaml_error")
         else:
-            self.dialog_exec(errors, "load_yaml_ok_but_errors")
-
-def analyze_dict(self, d, workflow_str, work_dim, s=""):
-    errors = []
-    variables_set = {}
-    for k, v in d.items():
-        if isinstance(v, dict):
-            err, _vars = analyze_dict(self,v,workflow_str,work_dim,s+k if s == "" else s+"__"+k)
-            if err is not None: 
-                errors +=err
-                variables_set.update(_vars)
-        else:
-            widget_name = s+"__"+k+"__INPUT"
-            other_widgets_to_set = []
-            other_widgets_values_to_set = []
-            set_var = True 
             
-            # Boolean cases 
-            if isinstance(v, bool) and v:
-                v = "Yes" 
-            elif isinstance(v, bool) and not v:
-                v = "No"
+            # Find the workflow
+            self.workflow_str = ""
+            try:
+                self.work_dim = loaded_cfg['PROBLEM']['NDIM']
+            except:
+                self.work_dim = "2D"
+            try:
+                work_id = loaded_cfg['PROBLEM']['TYPE']
+            except: 
+                work_id = "SEMANTIC_SEG"
+                self.workflow_str = "SEM_SEG"
+            if work_id == "SEMANTIC_SEG":
+                self.main_window.cfg.settings['selected_workflow'] = 0
+                self.workflow_str = "SEM_SEG"
+            elif work_id == "INSTANCE_SEG":
+                self.main_window.cfg.settings['selected_workflow'] = 1
+                self.workflow_str = "INST_SEG"
+            elif work_id == "DETECTION":
+                self.main_window.cfg.settings['selected_workflow'] = 2
+                self.workflow_str = "DET"
+            elif work_id == "DENOISING":
+                self.main_window.cfg.settings['selected_workflow'] = 3
+            elif work_id == "SUPER_RESOLUTION":
+                self.main_window.cfg.settings['selected_workflow'] = 4
+            elif work_id == "self.main_window_SUPERVISED":
+                self.main_window.cfg.settings['selected_workflow'] = 5
+            else: # CLASSIFICATION
+                self.main_window.cfg.settings['selected_workflow'] = 6
+            move_between_pages(self.main_window, self.main_window.cfg.settings['selected_workflow'], self.work_dim)
 
-            # Special cases
-            if widget_name == "DATA__VAL__FROM_TRAIN__INPUT":
-                set_var = False
-            elif widget_name == "SYSTEM__NUM_CPUS__INPUT":
-                v = "All" if v == -1 else v
-            elif widget_name == "PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT":
-                if v == 'BC':
-                    v = "Binary mask + Contours"
-                elif v == 'BP':
-                    v = "Binary mask + Central points"
-                elif v == 'BD':
-                    v = "Binary mask + Distance map"
-                elif v == 'BCM':
-                    v = "Binary mask + Contours + Foreground mask"
-                elif v == 'BCD':
-                    v = "Binary mask + Contours + Distance map"
-                elif v == 'BCDv2':
-                    v = "Binary mask + Contours + Distance map with background (experimental)"
-                elif v == 'BDv2':
-                    v = "Binary mask + Distance map with background (experimental)"
-                else: 
-                    v = "Distance map with background (experimental)"
-            elif widget_name == "PROBLEM__TYPE__INPUT":
-                set_var = False
-            elif widget_name == "DATA__VAL__SPLIT_TRAIN__INPUT":
-                other_widgets_to_set.append("DATA__VAL__TYPE__INPUT")
-                other_widgets_values_to_set.append("Extract from train (split training)")
-            elif widget_name == "DATA__VAL__CROSS_VAL__INPUT":
-                other_widgets_to_set.append("DATA__VAL__TYPE__INPUT")
-                other_widgets_values_to_set.append("Extract from train (cross validation)")
-            elif widget_name == "MODEL__ARCHITECTURE__INPUT":    
-                v = self.cfg.translate_model_names(v, work_dim, inv=True)
-            elif widget_name == "MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT":
-                v = "Before model" if v == "pre" else "After model"
-            elif widget_name == "DATA__TRAIN__MINIMUM_FOREGROUND_PER__INPUT":
-                widget_name = "DATA__TRAIN__MINIMUM_FOREGROUND_PER__{}__INPUT".format(workflow_str)
-            elif widget_name == "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__INPUT":
-                widget_name = "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__{}__INPUT".format(workflow_str)
-            elif widget_name == "TEST__POST_PROCESSING__Z_FILTERING_SIZE__INPUT":
-                widget_name = "TEST__POST_PROCESSING__Z_FILTERING_SIZE__{}__INPUT".format(workflow_str)
-            elif widget_name == "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES__INPUT":
-                widget_name = "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES__{}__INPUT".format(workflow_str)
-            elif widget_name == "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_VALUES__INPUT":
-                widget_name = "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_VALUES__{}__INPUT".format(workflow_str)
-            elif widget_name == "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_SIGN__INPUT":
-                widget_name = "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_SIGN__{}__INPUT".format(workflow_str)
-            elif widget_name == "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INPUT":
-                widget_name = "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__{}__INPUT".format(workflow_str)
+            # Go over configuration file
+            errors, variables_set = self.analyze_dict(conf=loaded_cfg, sep="")
+            print("Variables updated: ")
+            for i, k in enumerate(variables_set.keys()):
+                print("{}. {}: {}".format(i+1, k, variables_set[k]))
+            if len(errors) > 0:
+                print("Errors: ")
+                for i in range(len(errors)):
+                    print("{}. : {}".format(i+1, errors[i]))
 
-            # Set variable values
-            if set_var: 
-                all_widgets_to_set = [widget_name]
-                all_widgets_to_set_values = [v]
+            # Message for the user
+            self.report_yaml_load_result.emit(errors, self.yaml_file)
+            
+        self.state_signal.emit(1)
+        self.finished_signal.emit()
 
-                all_widgets_to_set += other_widgets_to_set
-                all_widgets_to_set_values += other_widgets_values_to_set
+    def analyze_dict(self, conf, sep=""):
+        """
+        Analizes loaded YAML configuration recursively and sets GUI variables with the same name as found 
+        variables.
 
-                for x, y in zip(all_widgets_to_set, all_widgets_to_set_values):
-                    if hasattr(self.ui, x):
-                        err = set_text(getattr(self.ui, x), str(y))
-                    else:
-                        err = "{} widget does not exist".format(x)
-                    if err is not None:
-                        errors.append(err)
-                    else:
-                        variables_set[widget_name] = y
-                        print("Setting {} : {} ({})".format(widget_name, y, k))
-                    
-    return errors, variables_set
+        Parameters
+        ----------
+        conf : dict
+            YAML configuration read.
+
+        sep : str, optional
+            Variable separator. It is going to be filled on each call, constructing the variable name to be set 
+            in the GUI. 
+        
+        Returns
+        -------
+        errors : List of str
+            List of errors loading the YAML file. 
+
+        variables_set : dict
+            Variables of the GUI to be set with their respective values.
+        """
+        errors = []
+        variables_set = {}
+        for k, v in conf.items():
+            if isinstance(v, dict):
+                err, _vars = self.analyze_dict(v,sep+k if sep == "" else sep+"__"+k)
+                if err is not None: 
+                    errors +=err
+                    variables_set.update(_vars)
+            else:
+                widget_name = sep+"__"+k+"__INPUT"
+                other_widgets_to_set = []
+                other_widgets_values_to_set = []
+                set_var = True 
+                
+                # Boolean cases 
+                if isinstance(v, bool) and v:
+                    v = "Yes" 
+                elif isinstance(v, bool) and not v:
+                    v = "No"
+
+                # Special cases
+                if widget_name == "DATA__VAL__FROM_TRAIN__INPUT":
+                    set_var = False
+                elif widget_name == "SYSTEM__NUM_CPUS__INPUT":
+                    v = "All" if v == -1 else v
+                elif widget_name == "PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT":
+                    if v == 'BC':
+                        v = "Binary mask + Contours"
+                    elif v == 'BP':
+                        v = "Binary mask + Central points"
+                    elif v == 'BD':
+                        v = "Binary mask + Distance map"
+                    elif v == 'BCM':
+                        v = "Binary mask + Contours + Foreground mask"
+                    elif v == 'BCD':
+                        v = "Binary mask + Contours + Distance map"
+                    elif v == 'BCDv2':
+                        v = "Binary mask + Contours + Distance map with background (experimental)"
+                    elif v == 'BDv2':
+                        v = "Binary mask + Distance map with background (experimental)"
+                    else: 
+                        v = "Distance map with background (experimental)"
+                elif widget_name == "PROBLEM__TYPE__INPUT":
+                    set_var = False
+                elif widget_name == "DATA__VAL__SPLIT_TRAIN__INPUT":
+                    other_widgets_to_set.append("DATA__VAL__TYPE__INPUT")
+                    other_widgets_values_to_set.append("Extract from train (split training)")
+                elif widget_name == "DATA__VAL__CROSS_VAL__INPUT":
+                    other_widgets_to_set.append("DATA__VAL__TYPE__INPUT")
+                    other_widgets_values_to_set.append("Extract from train (cross validation)")
+                elif widget_name == "MODEL__ARCHITECTURE__INPUT":    
+                    v = self.main_window.cfg.translate_model_names(v, self.work_dim, inv=True)
+                elif widget_name == "MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT":
+                    v = "Before model" if v == "pre" else "After model"
+                elif widget_name == "DATA__TRAIN__MINIMUM_FOREGROUND_PER__INPUT":
+                    widget_name = "DATA__TRAIN__MINIMUM_FOREGROUND_PER__{}__INPUT".format(self.workflow_str)
+                elif widget_name == "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__INPUT":
+                    widget_name = "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__{}__INPUT".format(self.workflow_str)
+                elif widget_name == "TEST__POST_PROCESSING__Z_FILTERING_SIZE__INPUT":
+                    widget_name = "TEST__POST_PROCESSING__Z_FILTERING_SIZE__{}__INPUT".format(self.workflow_str)
+                elif widget_name == "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES__INPUT":
+                    widget_name = "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES__{}__INPUT".format(self.workflow_str)
+                elif widget_name == "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_VALUES__INPUT":
+                    widget_name = "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_VALUES__{}__INPUT".format(self.workflow_str)
+                elif widget_name == "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_SIGN__INPUT":
+                    widget_name = "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_SIGN__{}__INPUT".format(self.workflow_str)
+                elif widget_name == "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INPUT":
+                    widget_name = "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__{}__INPUT".format(self.workflow_str)
+
+                # Set variable values
+                if set_var: 
+                    all_widgets_to_set = [widget_name]
+                    all_widgets_to_set_values = [v]
+
+                    all_widgets_to_set += other_widgets_to_set
+                    all_widgets_to_set_values += other_widgets_values_to_set
+
+                    for x, y in zip(all_widgets_to_set, all_widgets_to_set_values):
+                        if hasattr(self.main_window.ui, x):
+                            self.update_var_signal.emit(x, str(y))
+                            err = self.thread_queue.get()
+                        else:
+                            err = "{} widget does not exist".format(x)
+
+                        if err is not None:
+                            errors.append(err)
+                        else:
+                            variables_set[widget_name] = y
+                            print("Setting {} : {} ({})".format(widget_name, y, k))
+                        
+        return errors, variables_set
 
 def path_in_list(list, path):
+    """
+    Check whether the given path is in the list. It also checks if the path is relative 
+    to another one present in the list. E.g. ``list=[/home/user/Downloads]`` and 
+    ``path=/home/user/Downloads/examples`` will return ``True``. 
+
+    Parameters
+    ----------
+    list : List of str
+        List of paths to loop over finding ``path``.
+    
+    path : str
+        Path to check if is inside ``list``.
+    
+    Returns
+    -------
+    bool : bool
+        ``True``if ``path`` is contained in ``list`` or is relative to any of the paths there.
+    """
     if path in list:
         return True
     else:
@@ -1171,6 +1272,22 @@ def path_in_list(list, path):
     return False
 
 def path_to_linux(p, orig_os="win"):
+    """
+    Converts given path to Linux. 
+
+    Parameters
+    ----------
+    p : str
+        Path to convert.
+
+    orig_os : str
+        Origin of the path given. If it is 'win' the path will be converted to Linux. 
+
+    Returns
+    -------
+    p : str
+        Converted path to Linux.
+    """
     if "win" in orig_os.lower():
         p = PureWindowsPath(p)
         p = os.path.join("/"+p.parts[0][0],*p.parts[1:]).replace('\\','/')
