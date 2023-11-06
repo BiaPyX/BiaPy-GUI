@@ -1479,7 +1479,7 @@ class Ui_MainWindow(object):
         self.goptions_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 898, 493))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, -45, 932, 493))
         self.scrollAreaWidgetContents.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout.setObjectName(u"gridLayout")
@@ -1619,7 +1619,7 @@ class Ui_MainWindow(object):
         self.goptions_advanced_options_scrollarea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 459, 248))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 870, 248))
         self.gridLayout_2 = QGridLayout(self.scrollAreaWidgetContents_2)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.label = QLabel(self.scrollAreaWidgetContents_2)
@@ -1888,7 +1888,7 @@ class Ui_MainWindow(object):
         self.train_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 934, 5797))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 934, 5847))
         self.scrollAreaWidgetContents_3.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout_3 = QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
@@ -3872,7 +3872,7 @@ class Ui_MainWindow(object):
 
         self.DATA__TRAIN__PADDING__INPUT = QLineEdit(self.frame_16)
         self.DATA__TRAIN__PADDING__INPUT.setObjectName(u"DATA__TRAIN__PADDING__INPUT")
-        self.DATA__TRAIN__PADDING__INPUT.setMinimumSize(QSize(200, 0))
+        self.DATA__TRAIN__PADDING__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TRAIN__PADDING__INPUT.setMaximumSize(QSize(200, 30))
         self.DATA__TRAIN__PADDING__INPUT.setFont(font)
 
@@ -3880,7 +3880,7 @@ class Ui_MainWindow(object):
 
         self.DATA__TRAIN__RESOLUTION__INPUT = QLineEdit(self.frame_16)
         self.DATA__TRAIN__RESOLUTION__INPUT.setObjectName(u"DATA__TRAIN__RESOLUTION__INPUT")
-        self.DATA__TRAIN__RESOLUTION__INPUT.setMinimumSize(QSize(200, 0))
+        self.DATA__TRAIN__RESOLUTION__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TRAIN__RESOLUTION__INPUT.setMaximumSize(QSize(200, 30))
         self.DATA__TRAIN__RESOLUTION__INPUT.setFont(font)
 
@@ -3888,7 +3888,7 @@ class Ui_MainWindow(object):
 
         self.DATA__TRAIN__REPLICATE__INPUT = QLineEdit(self.frame_16)
         self.DATA__TRAIN__REPLICATE__INPUT.setObjectName(u"DATA__TRAIN__REPLICATE__INPUT")
-        self.DATA__TRAIN__REPLICATE__INPUT.setMinimumSize(QSize(200, 0))
+        self.DATA__TRAIN__REPLICATE__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TRAIN__REPLICATE__INPUT.setMaximumSize(QSize(200, 30))
         self.DATA__TRAIN__REPLICATE__INPUT.setFont(font)
 
@@ -3903,7 +3903,7 @@ class Ui_MainWindow(object):
 
         self.DATA__TRAIN__OVERLAP__INPUT = QLineEdit(self.frame_16)
         self.DATA__TRAIN__OVERLAP__INPUT.setObjectName(u"DATA__TRAIN__OVERLAP__INPUT")
-        self.DATA__TRAIN__OVERLAP__INPUT.setMinimumSize(QSize(200, 0))
+        self.DATA__TRAIN__OVERLAP__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TRAIN__OVERLAP__INPUT.setMaximumSize(QSize(200, 30))
         self.DATA__TRAIN__OVERLAP__INPUT.setFont(font)
 
@@ -3960,9 +3960,7 @@ class Ui_MainWindow(object):
 
         self.adamw_weight_decay_label = QLabel(self.frame_28)
         self.adamw_weight_decay_label.setObjectName(u"adamw_weight_decay_label")
-        font6 = QFont()
-        font6.setPointSize(12)
-        self.adamw_weight_decay_label.setFont(font6)
+        self.adamw_weight_decay_label.setFont(font)
 
         self.gridLayout_29.addWidget(self.adamw_weight_decay_label, 3, 0, 1, 1)
 
@@ -3980,7 +3978,7 @@ class Ui_MainWindow(object):
 
         self.TRAIN__PROFILER_BATCH_RANGE__INPUT = QLineEdit(self.frame_28)
         self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setObjectName(u"TRAIN__PROFILER_BATCH_RANGE__INPUT")
-        self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setMinimumSize(QSize(200, 0))
+        self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setMinimumSize(QSize(200, 30))
         self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setMaximumSize(QSize(200, 30))
         self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setFont(font)
 
@@ -3996,7 +3994,7 @@ class Ui_MainWindow(object):
         self.TRAIN__PROFILER__INPUT.addItem("")
         self.TRAIN__PROFILER__INPUT.addItem("")
         self.TRAIN__PROFILER__INPUT.setObjectName(u"TRAIN__PROFILER__INPUT")
-        self.TRAIN__PROFILER__INPUT.setMinimumSize(QSize(200, 0))
+        self.TRAIN__PROFILER__INPUT.setMinimumSize(QSize(200, 30))
         self.TRAIN__PROFILER__INPUT.setMaximumSize(QSize(200, 30))
         self.TRAIN__PROFILER__INPUT.setFont(font)
 
@@ -4023,7 +4021,7 @@ class Ui_MainWindow(object):
         self.TRAIN__OPTIMIZER__INPUT.addItem("")
         self.TRAIN__OPTIMIZER__INPUT.addItem("")
         self.TRAIN__OPTIMIZER__INPUT.setObjectName(u"TRAIN__OPTIMIZER__INPUT")
-        self.TRAIN__OPTIMIZER__INPUT.setMinimumSize(QSize(200, 0))
+        self.TRAIN__OPTIMIZER__INPUT.setMinimumSize(QSize(200, 30))
         self.TRAIN__OPTIMIZER__INPUT.setMaximumSize(QSize(200, 30))
         self.TRAIN__OPTIMIZER__INPUT.setFont(font)
 
@@ -4069,7 +4067,7 @@ class Ui_MainWindow(object):
         self.TRAIN__LR_SCHEDULER__NAME__INPUT.addItem("")
         self.TRAIN__LR_SCHEDULER__NAME__INPUT.addItem("")
         self.TRAIN__LR_SCHEDULER__NAME__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__NAME__INPUT")
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setMinimumSize(QSize(200, 0))
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setMinimumSize(QSize(200, 30))
         self.TRAIN__LR_SCHEDULER__NAME__INPUT.setMaximumSize(QSize(200, 30))
         self.TRAIN__LR_SCHEDULER__NAME__INPUT.setFont(font)
 
@@ -4091,7 +4089,7 @@ class Ui_MainWindow(object):
 
         self.TRAIN__LR__INPUT = QLineEdit(self.frame_28)
         self.TRAIN__LR__INPUT.setObjectName(u"TRAIN__LR__INPUT")
-        self.TRAIN__LR__INPUT.setMinimumSize(QSize(200, 0))
+        self.TRAIN__LR__INPUT.setMinimumSize(QSize(200, 30))
         self.TRAIN__LR__INPUT.setMaximumSize(QSize(200, 30))
         self.TRAIN__LR__INPUT.setFont(font)
 
@@ -4105,7 +4103,7 @@ class Ui_MainWindow(object):
 
         self.TRAIN__BATCH_SIZE__INPUT = QLineEdit(self.frame_28)
         self.TRAIN__BATCH_SIZE__INPUT.setObjectName(u"TRAIN__BATCH_SIZE__INPUT")
-        self.TRAIN__BATCH_SIZE__INPUT.setMinimumSize(QSize(200, 0))
+        self.TRAIN__BATCH_SIZE__INPUT.setMinimumSize(QSize(200, 30))
         self.TRAIN__BATCH_SIZE__INPUT.setMaximumSize(QSize(200, 30))
         self.TRAIN__BATCH_SIZE__INPUT.setFont(font)
 
@@ -4528,7 +4526,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_6 = QWidget()
         self.scrollAreaWidgetContents_6.setObjectName(u"scrollAreaWidgetContents_6")
-        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 529, 337))
+        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 914, 337))
         self.gridLayout_18 = QGridLayout(self.scrollAreaWidgetContents_6)
         self.gridLayout_18.setObjectName(u"gridLayout_18")
         self.verticalSpacer_8 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -4694,7 +4692,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 851, 181))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 928, 333))
         self.gridLayout_17 = QGridLayout(self.scrollAreaWidgetContents_4)
         self.gridLayout_17.setObjectName(u"gridLayout_17")
         self.verticalSpacer_9 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -4850,7 +4848,7 @@ class Ui_MainWindow(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollAreaWidgetContents_7 = QWidget()
         self.scrollAreaWidgetContents_7.setObjectName(u"scrollAreaWidgetContents_7")
-        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 529, 217))
+        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 928, 333))
         self.gridLayout_19 = QGridLayout(self.scrollAreaWidgetContents_7)
         self.gridLayout_19.setObjectName(u"gridLayout_19")
         self.label_48 = QLabel(self.scrollAreaWidgetContents_7)
@@ -4986,7 +4984,7 @@ class Ui_MainWindow(object):
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollAreaWidgetContents_8 = QWidget()
         self.scrollAreaWidgetContents_8.setObjectName(u"scrollAreaWidgetContents_8")
-        self.scrollAreaWidgetContents_8.setGeometry(QRect(0, 0, 546, 210))
+        self.scrollAreaWidgetContents_8.setGeometry(QRect(0, 0, 928, 333))
         self.gridLayout_49 = QGridLayout(self.scrollAreaWidgetContents_8)
         self.gridLayout_49.setObjectName(u"gridLayout_49")
         self.frame_44 = QFrame(self.scrollAreaWidgetContents_8)
@@ -5101,7 +5099,7 @@ class Ui_MainWindow(object):
         self.scrollArea_5.setWidgetResizable(True)
         self.scrollAreaWidgetContents_9 = QWidget()
         self.scrollAreaWidgetContents_9.setObjectName(u"scrollAreaWidgetContents_9")
-        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, 0, 342, 180))
+        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, 0, 928, 333))
         self.gridLayout_50 = QGridLayout(self.scrollAreaWidgetContents_9)
         self.gridLayout_50.setObjectName(u"gridLayout_50")
         self.sr_unet_like_heading = QLabel(self.scrollAreaWidgetContents_9)
@@ -5197,7 +5195,7 @@ class Ui_MainWindow(object):
         self.scrollArea_6.setWidgetResizable(True)
         self.scrollAreaWidgetContents_10 = QWidget()
         self.scrollAreaWidgetContents_10.setObjectName(u"scrollAreaWidgetContents_10")
-        self.scrollAreaWidgetContents_10.setGeometry(QRect(0, 0, 380, 171))
+        self.scrollAreaWidgetContents_10.setGeometry(QRect(0, 0, 928, 333))
         self.gridLayout_51 = QGridLayout(self.scrollAreaWidgetContents_10)
         self.gridLayout_51.setObjectName(u"gridLayout_51")
         self.label_96 = QLabel(self.scrollAreaWidgetContents_10)
@@ -5294,7 +5292,7 @@ class Ui_MainWindow(object):
         self.scrollArea_7.setWidgetResizable(True)
         self.scrollAreaWidgetContents_11 = QWidget()
         self.scrollAreaWidgetContents_11.setObjectName(u"scrollAreaWidgetContents_11")
-        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, 0, 399, 44))
+        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, 0, 928, 333))
         self.gridLayout_52 = QGridLayout(self.scrollAreaWidgetContents_11)
         self.gridLayout_52.setObjectName(u"gridLayout_52")
         self.horizontalSpacer_42 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
@@ -5919,7 +5917,7 @@ class Ui_MainWindow(object):
         self.scrollArea_8.setWidgetResizable(True)
         self.scrollAreaWidgetContents_12 = QWidget()
         self.scrollAreaWidgetContents_12.setObjectName(u"scrollAreaWidgetContents_12")
-        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 464, 291))
+        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 927, 312))
         self.gridLayout_61 = QGridLayout(self.scrollAreaWidgetContents_12)
         self.gridLayout_61.setObjectName(u"gridLayout_61")
         self.label_82 = QLabel(self.scrollAreaWidgetContents_12)
@@ -6065,7 +6063,7 @@ class Ui_MainWindow(object):
         self.scrollArea_9.setWidgetResizable(True)
         self.scrollAreaWidgetContents_13 = QWidget()
         self.scrollAreaWidgetContents_13.setObjectName(u"scrollAreaWidgetContents_13")
-        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 582, 1210))
+        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 913, 1255))
         self.gridLayout_44 = QGridLayout(self.scrollAreaWidgetContents_13)
         self.gridLayout_44.setObjectName(u"gridLayout_44")
         self.label_86 = QLabel(self.scrollAreaWidgetContents_13)
@@ -6095,6 +6093,7 @@ class Ui_MainWindow(object):
         self.gridLayout_45.setObjectName(u"gridLayout_45")
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INPUT = QLineEdit(self.inst_seg_ths_frame)
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INPUT")
+        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INPUT.setMaximumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INPUT.setFont(font)
 
@@ -6132,6 +6131,7 @@ class Ui_MainWindow(object):
 
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INPUT = QLineEdit(self.inst_seg_ths_frame)
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INPUT")
+        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INPUT.setMaximumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INPUT.setFont(font)
 
@@ -6139,6 +6139,7 @@ class Ui_MainWindow(object):
 
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INPUT = QLineEdit(self.inst_seg_ths_frame)
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INPUT")
+        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INPUT.setMaximumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INPUT.setFont(font)
 
@@ -6146,6 +6147,7 @@ class Ui_MainWindow(object):
 
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INPUT = QLineEdit(self.inst_seg_ths_frame)
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INPUT")
+        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INPUT.setMaximumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INPUT.setFont(font)
 
@@ -6153,6 +6155,7 @@ class Ui_MainWindow(object):
 
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_POINTS__INPUT = QLineEdit(self.inst_seg_ths_frame)
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_POINTS__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_MW_TH_POINTS__INPUT")
+        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_POINTS__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_POINTS__INPUT.setMaximumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_POINTS__INPUT.setFont(font)
 
@@ -6450,6 +6453,7 @@ class Ui_MainWindow(object):
 
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INPUT = QLineEdit(self.frame_43)
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INPUT")
+        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INPUT.setMaximumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INPUT.setFont(font)
 
@@ -6479,7 +6483,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INPUT.addItem("")
         self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INPUT.addItem("")
         self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INPUT")
-        self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INPUT.setMinimumSize(QSize(100, 0))
+        self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INPUT.setMaximumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INPUT.setFont(font)
 
@@ -6505,6 +6509,7 @@ class Ui_MainWindow(object):
 
         self.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INPUT = QLineEdit(self.frame_43)
         self.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INPUT")
+        self.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INPUT.setMaximumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INPUT.setFont(font)
 
@@ -6534,6 +6539,7 @@ class Ui_MainWindow(object):
 
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT = QLineEdit(self.frame_43)
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT")
+        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT.setMaximumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT.setFont(font)
 
@@ -6616,7 +6622,7 @@ class Ui_MainWindow(object):
         self.scrollArea_10.setWidgetResizable(True)
         self.scrollAreaWidgetContents_14 = QWidget()
         self.scrollAreaWidgetContents_14.setObjectName(u"scrollAreaWidgetContents_14")
-        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 546, 804))
+        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 913, 804))
         self.gridLayout_47 = QGridLayout(self.scrollAreaWidgetContents_14)
         self.gridLayout_47.setObjectName(u"gridLayout_47")
         self.label_100 = QLabel(self.scrollAreaWidgetContents_14)
@@ -6969,7 +6975,7 @@ class Ui_MainWindow(object):
         self.scrollArea_11.setWidgetResizable(True)
         self.scrollAreaWidgetContents_15 = QWidget()
         self.scrollAreaWidgetContents_15.setObjectName(u"scrollAreaWidgetContents_15")
-        self.scrollAreaWidgetContents_15.setGeometry(QRect(0, 0, 372, 44))
+        self.scrollAreaWidgetContents_15.setGeometry(QRect(0, 0, 927, 312))
         self.gridLayout_64 = QGridLayout(self.scrollAreaWidgetContents_15)
         self.gridLayout_64.setObjectName(u"gridLayout_64")
         self.verticalSpacer_27 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -7003,7 +7009,7 @@ class Ui_MainWindow(object):
         self.scrollArea_12.setWidgetResizable(True)
         self.scrollAreaWidgetContents_16 = QWidget()
         self.scrollAreaWidgetContents_16.setObjectName(u"scrollAreaWidgetContents_16")
-        self.scrollAreaWidgetContents_16.setGeometry(QRect(0, 0, 426, 44))
+        self.scrollAreaWidgetContents_16.setGeometry(QRect(0, 0, 927, 312))
         self.gridLayout_65 = QGridLayout(self.scrollAreaWidgetContents_16)
         self.gridLayout_65.setObjectName(u"gridLayout_65")
         self.label_102 = QLabel(self.scrollAreaWidgetContents_16)
@@ -7037,7 +7043,7 @@ class Ui_MainWindow(object):
         self.scrollArea_13.setWidgetResizable(True)
         self.scrollAreaWidgetContents_17 = QWidget()
         self.scrollAreaWidgetContents_17.setObjectName(u"scrollAreaWidgetContents_17")
-        self.scrollAreaWidgetContents_17.setGeometry(QRect(0, 0, 488, 44))
+        self.scrollAreaWidgetContents_17.setGeometry(QRect(0, 0, 927, 312))
         self.gridLayout_66 = QGridLayout(self.scrollAreaWidgetContents_17)
         self.gridLayout_66.setObjectName(u"gridLayout_66")
         self.label_106 = QLabel(self.scrollAreaWidgetContents_17)
@@ -7071,7 +7077,7 @@ class Ui_MainWindow(object):
         self.scrollArea_14.setWidgetResizable(True)
         self.scrollAreaWidgetContents_18 = QWidget()
         self.scrollAreaWidgetContents_18.setObjectName(u"scrollAreaWidgetContents_18")
-        self.scrollAreaWidgetContents_18.setGeometry(QRect(0, 0, 399, 44))
+        self.scrollAreaWidgetContents_18.setGeometry(QRect(0, 0, 927, 312))
         self.gridLayout_67 = QGridLayout(self.scrollAreaWidgetContents_18)
         self.gridLayout_67.setObjectName(u"gridLayout_67")
         self.label_111 = QLabel(self.scrollAreaWidgetContents_18)
@@ -7112,12 +7118,12 @@ class Ui_MainWindow(object):
         self.page_create_yaml_bottom_frame.setObjectName(u"page_create_yaml_bottom_frame")
         self.page_create_yaml_bottom_frame.setMinimumSize(QSize(0, 103))
         self.page_create_yaml_bottom_frame.setMaximumSize(QSize(16777215, 16777215))
-        font7 = QFont()
-        font7.setFamily(u"DejaVu Math TeX Gyre")
-        font7.setPointSize(12)
-        font7.setBold(False)
-        font7.setWeight(50)
-        self.page_create_yaml_bottom_frame.setFont(font7)
+        font6 = QFont()
+        font6.setFamily(u"DejaVu Math TeX Gyre")
+        font6.setPointSize(12)
+        font6.setBold(False)
+        font6.setWeight(50)
+        self.page_create_yaml_bottom_frame.setFont(font6)
         self.page_create_yaml_bottom_frame.setFrameShape(QFrame.NoFrame)
         self.page_create_yaml_bottom_frame.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_8 = QHBoxLayout(self.page_create_yaml_bottom_frame)
@@ -7162,13 +7168,13 @@ class Ui_MainWindow(object):
         self.continue_bn.setObjectName(u"continue_bn")
         self.continue_bn.setMinimumSize(QSize(0, 40))
         self.continue_bn.setMaximumSize(QSize(220, 77))
-        font8 = QFont()
-        font8.setFamily(u"DejaVu Math TeX Gyre")
-        font8.setPointSize(12)
-        font8.setBold(False)
-        font8.setWeight(50)
-        font8.setStrikeOut(False)
-        self.continue_bn.setFont(font8)
+        font7 = QFont()
+        font7.setFamily(u"DejaVu Math TeX Gyre")
+        font7.setPointSize(12)
+        font7.setBold(False)
+        font7.setWeight(50)
+        font7.setStrikeOut(False)
+        self.continue_bn.setFont(font7)
         self.continue_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgb(64,144,253);\n"
@@ -7375,10 +7381,10 @@ class Ui_MainWindow(object):
         self.run_biapy_docker_bn.setObjectName(u"run_biapy_docker_bn")
         self.run_biapy_docker_bn.setMinimumSize(QSize(300, 40))
         self.run_biapy_docker_bn.setMaximumSize(QSize(300, 16777215))
-        font9 = QFont()
-        font9.setFamily(u"DejaVu Math TeX Gyre")
-        font9.setPointSize(20)
-        self.run_biapy_docker_bn.setFont(font9)
+        font8 = QFont()
+        font8.setFamily(u"DejaVu Math TeX Gyre")
+        font8.setPointSize(20)
+        self.run_biapy_docker_bn.setFont(font8)
         self.run_biapy_docker_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgb(64,144,253);\n"
@@ -7456,7 +7462,7 @@ class Ui_MainWindow(object):
         self.check_yaml_file_errors_frame.setWidgetResizable(True)
         self.scrollAreaWidgetContents_19 = QWidget()
         self.scrollAreaWidgetContents_19.setObjectName(u"scrollAreaWidgetContents_19")
-        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 96, 26))
+        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 896, 101))
         self.verticalLayout_32 = QVBoxLayout(self.scrollAreaWidgetContents_19)
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
         self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)
@@ -7579,12 +7585,12 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(2)
         self.stackedWidget_create_yaml_frame.setCurrentIndex(3)
         self.train_tab_widget.setCurrentIndex(0)
-        self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(1)
+        self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(0)
         self.test_tab_widget.setCurrentIndex(0)
-        self.test_workflow_specific_tab_stackedWidget.setCurrentIndex(1)
+        self.test_workflow_specific_tab_stackedWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
