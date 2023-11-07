@@ -46,7 +46,8 @@ class UIFunction(MainWindow):
             UIFunction.init_run(self)
 
             self.cfg.settings['init'] = True
-    
+            self.last_selected_workflow = -1
+
     def obtain_workflow_description(self):
         """
         Starts workflow description page. 
@@ -73,9 +74,6 @@ class UIFunction(MainWindow):
     # Home page 
     ###########
     def init_main_page(self):
-        # pixmap = QPixmap(resource_path(os.path.join("images","docker_logo.png")))
-        # pixmap = pixmap.scaledToWidth(220,aspectRatioMode=QtCore.Qt.AspectRatioMode.KeepAspectRatio)
-
         font = QFont()
         font.setFamily(u"DejaVu Math TeX Gyre")
         font.setPointSize(12)
@@ -166,6 +164,7 @@ class UIFunction(MainWindow):
         self.ui.workflow_view3_frame.setEnabled(False)
 
     def move_workflow_view(self, isleft):
+        self.last_selected_workflow = self.cfg.settings['selected_workflow']
         if isleft:
             self.cfg.settings['selected_workflow'] = self.cfg.settings['selected_workflow'] - 1 if self.cfg.settings['selected_workflow'] != 0 else len(self.cfg.settings['workflow_names'])-1
         else: 
@@ -186,7 +185,99 @@ class UIFunction(MainWindow):
         self.ui.SYSTEM__NUM_CPUS__INPUT.addItem("All")
         for i in range(multiprocessing.cpu_count()):
             self.ui.SYSTEM__NUM_CPUS__INPUT.addItem(str(i+1))
-        
+
+    def change_problem_dimensions(main_window, idx):
+        # 2D
+        if idx == 0:
+            main_window.ui.DATA__PATCH_SIZE__INPUT.setValidator(main_window.three_number_parenthesis_validator)
+            main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(256,256,1)")
+            main_window.ui.DATA__TRAIN__RESOLUTION__INPUT.setValidator(main_window.two_pos_number_parenthesis_validator)
+            main_window.ui.DATA__TRAIN__RESOLUTION__INPUT.setText("(1,1)")
+            main_window.ui.DATA__TRAIN__OVERLAP__INPUT.setValidator(main_window.two_pos_number_parenthesis_validator)
+            main_window.ui.DATA__TRAIN__OVERLAP__INPUT.setText("(0,0)")
+            main_window.ui.DATA__TRAIN__PADDING__INPUT.setValidator(main_window.two_pos_number_parenthesis_validator)
+            main_window.ui.DATA__TRAIN__PADDING__INPUT.setText("(0,0)")
+            main_window.ui.DATA__VAL__RESOLUTION__INPUT.setValidator(main_window.two_pos_number_parenthesis_validator)
+            main_window.ui.DATA__VAL__RESOLUTION__INPUT.setText("(1,1)")
+            main_window.ui.DATA__VAL__OVERLAP__INPUT.setValidator(main_window.two_pos_number_parenthesis_validator)
+            main_window.ui.DATA__VAL__OVERLAP__INPUT.setText("(0,0)")
+            main_window.ui.DATA__VAL__PADDING__INPUT.setValidator(main_window.two_pos_number_parenthesis_validator)
+            main_window.ui.DATA__VAL__PADDING__INPUT.setText("(0,0)")
+            main_window.ui.DATA__TEST__RESOLUTION__INPUT.setValidator(main_window.two_pos_number_parenthesis_validator)
+            main_window.ui.DATA__TEST__RESOLUTION__INPUT.setText("(1,1)")
+            main_window.ui.DATA__TEST__OVERLAP__INPUT.setValidator(main_window.two_pos_number_parenthesis_validator)
+            main_window.ui.DATA__TEST__OVERLAP__INPUT.setText("(0,0)")
+            main_window.ui.DATA__TEST__PADDING__INPUT.setValidator(main_window.two_pos_number_parenthesis_validator)
+            main_window.ui.DATA__TEST__PADDING__INPUT.setText("(0,0)")
+            main_window.ui.da_z_flip_label.setVisible(False)
+            main_window.ui.AUGMENTOR__ZFLIP__INPUT.setVisible(False)
+            main_window.ui.test_2d_as_3d_stack_label.setVisible(True)
+            main_window.ui.TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INPUT.setVisible(True)
+            main_window.ui.test_reduce_memory_label.setVisible(False)
+            main_window.ui.TEST__REDUCE_MEMORY__INPUT.setVisible(False)
+            main_window.ui.TEST__STATS__PER_PATCH__INPUT.setCurrentText("No")
+            main_window.ui.TEST__STATS__MERGE_PATCHES__INPUT.setCurrentText("No")
+            main_window.ui.TEST__STATS__FULL_IMG__INPUT.setCurrentText("Yes") 
+            main_window.ui.test_full_image_label.setVisible(True)
+            main_window.ui.TEST__STATS__FULL_IMG__INPUT.setVisible(True)  
+            main_window.ui.inst_seg_yz_filtering_label.setVisible(True) 
+            main_window.ui.TEST__POST_PROCESSING__YZ_FILTERING__INST_SEG__INPUT.setVisible(True) 
+            main_window.ui.inst_seg_z_filtering_label.setVisible(True) 
+            main_window.ui.TEST__POST_PROCESSING__Z_FILTERING__INST_SEG__INPUT.setVisible(True) 
+            main_window.ui.sem_seg_yz_filtering_label.setVisible(True) 
+            main_window.ui.TEST__POST_PROCESSING__YZ_FILTERING__SEM_SEG__INPUT.setVisible(True) 
+            main_window.ui.sem_seg_z_filtering_label.setVisible(True) 
+            main_window.ui.TEST__POST_PROCESSING__Z_FILTERING__SEM_SEG__INPUT.setVisible(True) 
+            main_window.ui.det_yz_filtering_label.setVisible(True) 
+            main_window.ui.TEST__POST_PROCESSING__YZ_FILTERING__DET__INPUT.setVisible(True) 
+            main_window.ui.det_z_filtering_label.setVisible(True) 
+            main_window.ui.TEST__POST_PROCESSING__Z_FILTERING__DET__INPUT.setVisible(True) 
+        # 3D
+        else:
+            main_window.ui.DATA__PATCH_SIZE__INPUT.setValidator(main_window.four_number_parenthesis_validator)
+            main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(40,128,128,1)")
+            main_window.ui.DATA__TRAIN__RESOLUTION__INPUT.setValidator(main_window.three_number_parenthesis_validator)
+            main_window.ui.DATA__TRAIN__RESOLUTION__INPUT.setText("(1,1,1)")
+            main_window.ui.DATA__TRAIN__OVERLAP__INPUT.setValidator(main_window.three_number_parenthesis_validator)
+            main_window.ui.DATA__TRAIN__OVERLAP__INPUT.setText("(0,0,0)")
+            main_window.ui.DATA__TRAIN__PADDING__INPUT.setValidator(main_window.three_number_parenthesis_validator)
+            main_window.ui.DATA__TRAIN__PADDING__INPUT.setText("(0,0,0)")
+            main_window.ui.DATA__VAL__RESOLUTION__INPUT.setValidator(main_window.three_number_parenthesis_validator)
+            main_window.ui.DATA__VAL__RESOLUTION__INPUT.setText("(1,1,1)")
+            main_window.ui.DATA__VAL__OVERLAP__INPUT.setValidator(main_window.three_number_parenthesis_validator)
+            main_window.ui.DATA__VAL__OVERLAP__INPUT.setText("(0,0,0)")
+            main_window.ui.DATA__VAL__PADDING__INPUT.setValidator(main_window.three_number_parenthesis_validator)
+            main_window.ui.DATA__VAL__PADDING__INPUT.setText("(0,0,0)")
+            main_window.ui.DATA__TEST__RESOLUTION__INPUT.setValidator(main_window.three_number_parenthesis_validator)
+            main_window.ui.DATA__TEST__RESOLUTION__INPUT.setText("(1,1,1)")
+            main_window.ui.DATA__TEST__OVERLAP__INPUT.setValidator(main_window.three_number_parenthesis_validator)
+            main_window.ui.DATA__TEST__OVERLAP__INPUT.setText("(0,0,0)")
+            main_window.ui.DATA__TEST__PADDING__INPUT.setValidator(main_window.three_number_parenthesis_validator)
+            main_window.ui.DATA__TEST__PADDING__INPUT.setText("(0,0,0)")
+            main_window.ui.da_z_flip_label.setVisible(True)
+            main_window.ui.AUGMENTOR__ZFLIP__INPUT.setVisible(True)
+            main_window.ui.test_2d_as_3d_stack_label.setVisible(False)
+            main_window.ui.TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INPUT.setVisible(False)
+            main_window.ui.test_reduce_memory_label.setVisible(True)
+            main_window.ui.TEST__REDUCE_MEMORY__INPUT.setVisible(True)
+            main_window.ui.test_full_image_label.setVisible(False)
+            main_window.ui.TEST__STATS__FULL_IMG__INPUT.setVisible(False)
+            main_window.ui.TEST__STATS__PER_PATCH__INPUT.setCurrentText("Yes")
+            main_window.ui.TEST__STATS__MERGE_PATCHES__INPUT.setCurrentText("Yes")
+            main_window.ui.TEST__STATS__FULL_IMG__INPUT.setCurrentText("No") 
+            main_window.ui.inst_seg_yz_filtering_label.setVisible(False) 
+            main_window.ui.TEST__POST_PROCESSING__YZ_FILTERING__INST_SEG__INPUT.setVisible(False) 
+            main_window.ui.inst_seg_z_filtering_label.setVisible(False) 
+            main_window.ui.TEST__POST_PROCESSING__Z_FILTERING__INST_SEG__INPUT.setVisible(False) 
+            main_window.ui.sem_seg_yz_filtering_label.setVisible(False) 
+            main_window.ui.TEST__POST_PROCESSING__YZ_FILTERING__SEM_SEG__INPUT.setVisible(False) 
+            main_window.ui.sem_seg_z_filtering_label.setVisible(False) 
+            main_window.ui.TEST__POST_PROCESSING__Z_FILTERING__SEM_SEG__INPUT.setVisible(False) 
+            main_window.ui.det_yz_filtering_label.setVisible(False) 
+            main_window.ui.TEST__POST_PROCESSING__YZ_FILTERING__DET__INPUT.setVisible(False) 
+            main_window.ui.det_z_filtering_label.setVisible(False) 
+            main_window.ui.TEST__POST_PROCESSING__Z_FILTERING__DET__INPUT.setVisible(False) 
+
     ############
     # Train page 
     ############

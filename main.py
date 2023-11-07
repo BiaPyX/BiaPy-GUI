@@ -117,8 +117,8 @@ class MainWindow(QMainWindow):
         # General options page buttons
         self.ui.seed_input.setValidator(self.int_validator)
         self.ui.MODEL__SAVE_CKPT_FREQ__INPUT.setValidator(self.int_validator)
-        self.ui.PROBLEM__NDIM__INPUT.currentIndexChanged.connect(lambda: self.change_problem_dimensions(self.ui.PROBLEM__NDIM__INPUT.currentIndex()))
-        self.change_problem_dimensions(0)
+        self.ui.PROBLEM__NDIM__INPUT.currentIndexChanged.connect(lambda: UIFunction.change_problem_dimensions(self, self.ui.PROBLEM__NDIM__INPUT.currentIndex()))
+        UIFunction.change_problem_dimensions(self, 0)
         self.ui.goptions_advanced_bn.clicked.connect(lambda: expand_hide_advanced_options(self, "goptions_advanced_bn", "goptions_advanced_options_scrollarea"))
         self.ui.goptions_browse_yaml_path_bn.clicked.connect(lambda: examine(self, "goptions_browse_yaml_path_input", False))
         self.ui.checkpoint_file_path_browse_bn.clicked.connect(lambda: examine(self, "PATHS__CHECKPOINT_FILE__INPUT"))
@@ -428,9 +428,12 @@ class MainWindow(QMainWindow):
         self.diag = None
         self.wokflow_info = None
         self.spinner = None
+
+        # Variables to control the threads/workers of spin window 
         self.thread_list = []
         self.worker_list = []
 
+        # Options to allow user moving the GUI
         self.dragPos = self.pos()
         def moveWindow(event):
             if event.buttons() == Qt.LeftButton:
@@ -441,98 +444,6 @@ class MainWindow(QMainWindow):
         self.ui.frame_empty.mouseMoveEvent = moveWindow
         self.ui.frame_8.mouseMoveEvent = moveWindow
         self.ui.biapy_logo_frame.mouseMoveEvent = moveWindow
-        
-    def change_problem_dimensions(self, idx):
-        # 2D
-        if idx == 0:
-            self.ui.DATA__PATCH_SIZE__INPUT.setValidator(self.three_number_parenthesis_validator)
-            self.ui.DATA__PATCH_SIZE__INPUT.setText("(256,256,1)")
-            self.ui.DATA__TRAIN__RESOLUTION__INPUT.setValidator(self.two_pos_number_parenthesis_validator)
-            self.ui.DATA__TRAIN__RESOLUTION__INPUT.setText("(1,1)")
-            self.ui.DATA__TRAIN__OVERLAP__INPUT.setValidator(self.two_pos_number_parenthesis_validator)
-            self.ui.DATA__TRAIN__OVERLAP__INPUT.setText("(0,0)")
-            self.ui.DATA__TRAIN__PADDING__INPUT.setValidator(self.two_pos_number_parenthesis_validator)
-            self.ui.DATA__TRAIN__PADDING__INPUT.setText("(0,0)")
-            self.ui.DATA__VAL__RESOLUTION__INPUT.setValidator(self.two_pos_number_parenthesis_validator)
-            self.ui.DATA__VAL__RESOLUTION__INPUT.setText("(1,1)")
-            self.ui.DATA__VAL__OVERLAP__INPUT.setValidator(self.two_pos_number_parenthesis_validator)
-            self.ui.DATA__VAL__OVERLAP__INPUT.setText("(0,0)")
-            self.ui.DATA__VAL__PADDING__INPUT.setValidator(self.two_pos_number_parenthesis_validator)
-            self.ui.DATA__VAL__PADDING__INPUT.setText("(0,0)")
-            self.ui.DATA__TEST__RESOLUTION__INPUT.setValidator(self.two_pos_number_parenthesis_validator)
-            self.ui.DATA__TEST__RESOLUTION__INPUT.setText("(1,1)")
-            self.ui.DATA__TEST__OVERLAP__INPUT.setValidator(self.two_pos_number_parenthesis_validator)
-            self.ui.DATA__TEST__OVERLAP__INPUT.setText("(0,0)")
-            self.ui.DATA__TEST__PADDING__INPUT.setValidator(self.two_pos_number_parenthesis_validator)
-            self.ui.DATA__TEST__PADDING__INPUT.setText("(0,0)")
-            self.ui.da_z_flip_label.setVisible(False)
-            self.ui.AUGMENTOR__ZFLIP__INPUT.setVisible(False)
-            self.ui.test_2d_as_3d_stack_label.setVisible(True)
-            self.ui.TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INPUT.setVisible(True)
-            self.ui.test_reduce_memory_label.setVisible(False)
-            self.ui.TEST__REDUCE_MEMORY__INPUT.setVisible(False)
-            self.ui.TEST__STATS__PER_PATCH__INPUT.setCurrentText("No")
-            self.ui.TEST__STATS__MERGE_PATCHES__INPUT.setCurrentText("No")
-            self.ui.TEST__STATS__FULL_IMG__INPUT.setCurrentText("Yes") 
-            self.ui.test_full_image_label.setVisible(True)
-            self.ui.TEST__STATS__FULL_IMG__INPUT.setVisible(True)  
-            self.ui.inst_seg_yz_filtering_label.setVisible(True) 
-            self.ui.TEST__POST_PROCESSING__YZ_FILTERING__INST_SEG__INPUT.setVisible(True) 
-            self.ui.inst_seg_z_filtering_label.setVisible(True) 
-            self.ui.TEST__POST_PROCESSING__Z_FILTERING__INST_SEG__INPUT.setVisible(True) 
-            self.ui.sem_seg_yz_filtering_label.setVisible(True) 
-            self.ui.TEST__POST_PROCESSING__YZ_FILTERING__SEM_SEG__INPUT.setVisible(True) 
-            self.ui.sem_seg_z_filtering_label.setVisible(True) 
-            self.ui.TEST__POST_PROCESSING__Z_FILTERING__SEM_SEG__INPUT.setVisible(True) 
-            self.ui.det_yz_filtering_label.setVisible(True) 
-            self.ui.TEST__POST_PROCESSING__YZ_FILTERING__DET__INPUT.setVisible(True) 
-            self.ui.det_z_filtering_label.setVisible(True) 
-            self.ui.TEST__POST_PROCESSING__Z_FILTERING__DET__INPUT.setVisible(True) 
-        # 3D
-        else:
-            self.ui.DATA__PATCH_SIZE__INPUT.setValidator(self.four_number_parenthesis_validator)
-            self.ui.DATA__PATCH_SIZE__INPUT.setText("(40,128,128,1)")
-            self.ui.DATA__TRAIN__RESOLUTION__INPUT.setValidator(self.three_number_parenthesis_validator)
-            self.ui.DATA__TRAIN__RESOLUTION__INPUT.setText("(1,1,1)")
-            self.ui.DATA__TRAIN__OVERLAP__INPUT.setValidator(self.three_number_parenthesis_validator)
-            self.ui.DATA__TRAIN__OVERLAP__INPUT.setText("(0,0,0)")
-            self.ui.DATA__TRAIN__PADDING__INPUT.setValidator(self.three_number_parenthesis_validator)
-            self.ui.DATA__TRAIN__PADDING__INPUT.setText("(0,0,0)")
-            self.ui.DATA__VAL__RESOLUTION__INPUT.setValidator(self.three_number_parenthesis_validator)
-            self.ui.DATA__VAL__RESOLUTION__INPUT.setText("(1,1,1)")
-            self.ui.DATA__VAL__OVERLAP__INPUT.setValidator(self.three_number_parenthesis_validator)
-            self.ui.DATA__VAL__OVERLAP__INPUT.setText("(0,0,0)")
-            self.ui.DATA__VAL__PADDING__INPUT.setValidator(self.three_number_parenthesis_validator)
-            self.ui.DATA__VAL__PADDING__INPUT.setText("(0,0,0)")
-            self.ui.DATA__TEST__RESOLUTION__INPUT.setValidator(self.three_number_parenthesis_validator)
-            self.ui.DATA__TEST__RESOLUTION__INPUT.setText("(1,1,1)")
-            self.ui.DATA__TEST__OVERLAP__INPUT.setValidator(self.three_number_parenthesis_validator)
-            self.ui.DATA__TEST__OVERLAP__INPUT.setText("(0,0,0)")
-            self.ui.DATA__TEST__PADDING__INPUT.setValidator(self.three_number_parenthesis_validator)
-            self.ui.DATA__TEST__PADDING__INPUT.setText("(0,0,0)")
-            self.ui.da_z_flip_label.setVisible(True)
-            self.ui.AUGMENTOR__ZFLIP__INPUT.setVisible(True)
-            self.ui.test_2d_as_3d_stack_label.setVisible(False)
-            self.ui.TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INPUT.setVisible(False)
-            self.ui.test_reduce_memory_label.setVisible(True)
-            self.ui.TEST__REDUCE_MEMORY__INPUT.setVisible(True)
-            self.ui.test_full_image_label.setVisible(False)
-            self.ui.TEST__STATS__FULL_IMG__INPUT.setVisible(False)
-            self.ui.TEST__STATS__PER_PATCH__INPUT.setCurrentText("Yes")
-            self.ui.TEST__STATS__MERGE_PATCHES__INPUT.setCurrentText("Yes")
-            self.ui.TEST__STATS__FULL_IMG__INPUT.setCurrentText("No") 
-            self.ui.inst_seg_yz_filtering_label.setVisible(False) 
-            self.ui.TEST__POST_PROCESSING__YZ_FILTERING__INST_SEG__INPUT.setVisible(False) 
-            self.ui.inst_seg_z_filtering_label.setVisible(False) 
-            self.ui.TEST__POST_PROCESSING__Z_FILTERING__INST_SEG__INPUT.setVisible(False) 
-            self.ui.sem_seg_yz_filtering_label.setVisible(False) 
-            self.ui.TEST__POST_PROCESSING__YZ_FILTERING__SEM_SEG__INPUT.setVisible(False) 
-            self.ui.sem_seg_z_filtering_label.setVisible(False) 
-            self.ui.TEST__POST_PROCESSING__Z_FILTERING__SEM_SEG__INPUT.setVisible(False) 
-            self.ui.det_yz_filtering_label.setVisible(False) 
-            self.ui.TEST__POST_PROCESSING__YZ_FILTERING__DET__INPUT.setVisible(False) 
-            self.ui.det_z_filtering_label.setVisible(False) 
-            self.ui.TEST__POST_PROCESSING__Z_FILTERING__DET__INPUT.setVisible(False) 
 
     def mousePressEvent(self, event):
         self.dragPos = event.globalPos()

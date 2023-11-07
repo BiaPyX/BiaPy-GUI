@@ -316,8 +316,10 @@ def move_between_pages(self, to_page, dims=None):
         self.ui.goptions_advanced_options_scrollarea.setVisible(False)
 
     # Train page
-    self.ui.MODEL__ARCHITECTURE__INPUT.clear()
-    self.ui.MODEL__ARCHITECTURE__INPUT.addItems(models)
+    if self.last_selected_workflow != self.cfg.settings['selected_workflow']:
+        self.last_selected_workflow = self.cfg.settings['selected_workflow']
+        self.ui.MODEL__ARCHITECTURE__INPUT.clear()
+        self.ui.MODEL__ARCHITECTURE__INPUT.addItems(models)
 
 def update_container_status(self, signal):
     # If the container was built correctly 
