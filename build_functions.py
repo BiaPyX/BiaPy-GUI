@@ -11,7 +11,7 @@ from PySide2.QtGui import QPixmap
 from PySide2.QtWidgets import *
 
 from ui_utils import resource_path, get_text
-from ui_build import Ui_BuildBiaPy 
+from ui.ui_build import Ui_BuildBiaPy 
 
 class buildBiapy_Ui(QDialog):
     def __init__(self, parent_worker):

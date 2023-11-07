@@ -6,12 +6,12 @@ from PySide2.QtCore import (QThread, QCoreApplication, QPropertyAnimation, QDate
 from PySide2.QtGui import (QDesktopServices, QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
 from PySide2.QtWidgets import *
 
-from ui_dialog import Ui_Dialog 
-from ui_yes_no import Ui_yes_no 
-from spinner import Ui_spinner
-from ui_workflow_info import Ui_Workflow_info 
-from ui_utils import mark_syntax_error, resource_path, buttonPressed
-from waitingspinnerwidget import QtWaitingSpinner
+from ui_utils import mark_syntax_error, resource_path, change_page
+from ui.ui_dialog import Ui_Dialog 
+from ui.ui_yes_no import Ui_yes_no 
+from ui.spinner import Ui_spinner
+from ui.ui_workflow_info import Ui_Workflow_info 
+from aux_classes.waitingspinnerwidget import QtWaitingSpinner
 
 class workflow_explanation_Ui(QDialog):
     def __init__(self, parent=None):
@@ -256,23 +256,23 @@ class dialog_Ui(QDialog):
 
     def redirect_and_close(self, reason):
         if reason == "jobname":
-            buttonPressed(self.parent_ui, 'bn_run_biapy', 99)
+            change_page(self.parent_ui, 'bn_run_biapy', 99)
         elif reason == "inform_user_and_go":
-            buttonPressed(self.parent_ui, 'bn_workflow', 99)
+            change_page(self.parent_ui, 'bn_workflow', 99)
         elif reason == "yaml_config_file_path":
-            buttonPressed(self.parent_ui, 'bn_goptions', 99)
+            change_page(self.parent_ui, 'bn_goptions', 99)
             mark_syntax_error(self.parent_ui, "goptions_browse_yaml_path_input", ["empty", "exists"])
         elif reason == "output_folder":
-            buttonPressed(self.parent_ui, 'bn_run_biapy', 99)
+            change_page(self.parent_ui, 'bn_run_biapy', 99)
             mark_syntax_error(self.parent_ui, "output_folder_input", ["empty"])
         elif reason == "select_yaml_name_label":
-            buttonPressed(self.parent_ui, 'bn_run_biapy',99)
+            change_page(self.parent_ui, 'bn_run_biapy',99)
             mark_syntax_error(self.parent_ui, "select_yaml_name_label", ["empty"])
         elif reason == "goptions_yaml_name_input":
-            buttonPressed(self.parent_ui, 'bn_goptions',99)
+            change_page(self.parent_ui, 'bn_goptions',99)
             mark_syntax_error(self.parent_ui, "goptions_yaml_name_input", ["empty"])
         elif reason == "docker_installation":
-            buttonPressed(self.parent_ui, 'bn_home',99)
+            change_page(self.parent_ui, 'bn_home',99)
         self.close()
     
 class yes_no_Ui(QDialog):

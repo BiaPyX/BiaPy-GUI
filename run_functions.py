@@ -11,8 +11,8 @@ from PySide2.QtGui import QPixmap
 from PySide2.QtWidgets import *
 
 from ui_utils import get_text, resource_path, path_in_list, path_to_linux
-from ui_run import Ui_RunBiaPy 
-from aux_windows import yes_no_Ui
+from ui.ui_run import Ui_RunBiaPy 
+from ui.aux_windows import yes_no_Ui
 
 class runBiaPy_Ui(QDialog):
     def __init__(self, parent_worker):
@@ -75,7 +75,10 @@ class runBiaPy_Ui(QDialog):
 
     def kill_all_processes(self):
         self.parent_worker.stop_worker()
-        self.parent_worker.finished_signal.emit()
+        try:
+            self.parent_worker.finished_signal.emit()
+        except Exception as e:
+            print(f"Possible expected error during BiaPy's running thread deletion: {e}")
         self.close()
         
     def init_log(self, container_info):
@@ -203,7 +206,10 @@ class run_worker(QObject):
         print("Stopping the container . . . ")
         if self.biapy_container is not None:
             self.biapy_container.stop(timeout=1)
-            self.update_cont_state_signal.emit(1)
+            try:
+                self.update_cont_state_signal.emit(1)
+            except Exception as e:
+                print(f"Possible expected error during BiaPy's running thread deletion: {e}")
             self.gui.run_window.stop_container_bn.setEnabled(False)
             self.gui.run_window.test_progress_label.setEnabled(False)
             self.gui.run_window.test_progress_bar.setEnabled(False)

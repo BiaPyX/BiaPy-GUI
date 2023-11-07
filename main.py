@@ -10,19 +10,29 @@ from PySide2.QtCore import (QThread, QCoreApplication, QPropertyAnimation, QDate
 from PySide2.QtGui import (QDesktopServices, QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
 from PySide2.QtWidgets import *
 
-from ui_main import Ui_MainWindow 
 from ui_function import * 
-from ui_utils import (examine, mark_syntax_error, expand_hide_advanced_options, buttonPressed, 
+from ui_utils import (examine, mark_syntax_error, expand_hide_advanced_options, change_page, 
     load_yaml_config, resource_path, load_yaml_to_GUI, set_text)
 from settings import Settings
 from widget_conditions import Widget_conditions
-from aux_windows import dialog_Ui, workflow_explanation_Ui, yes_no_Ui, spinner_Ui
+from ui.ui_main import Ui_MainWindow 
+from ui.aux_windows import dialog_Ui, workflow_explanation_Ui, yes_no_Ui, spinner_Ui
 
 os.environ['QT_MAC_WANTS_LAYER'] = '1'
 
 class MainWindow(QMainWindow):
     def __init__(self, log_file, log_dir):
+        """ 
+        Main window constructor. 
 
+        Parameters
+        ----------
+        log_file : str
+            File to log the output. 
+        
+        log_dir : str
+            Logging directory for the current BiaPy GUI execution. 
+        """
         super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -82,16 +92,16 @@ class MainWindow(QMainWindow):
         self.int_validator = QtGui.QIntValidator(0, 99999)
         
         # Left buttons
-        self.ui.bn_home.clicked.connect(lambda: buttonPressed(self, 'bn_home', 99))
-        self.ui.bn_workflow.clicked.connect(lambda: buttonPressed(self, 'bn_workflow', 99))
-        self.ui.bn_goptions.clicked.connect(lambda: buttonPressed(self, 'bn_goptions', 99))
-        self.ui.bn_train.clicked.connect(lambda: buttonPressed(self, 'bn_train', 99))
-        self.ui.bn_test.clicked.connect(lambda: buttonPressed(self, 'bn_test', 99))
-        self.ui.bn_run_biapy.clicked.connect(lambda: buttonPressed(self,'bn_run_biapy',99))
+        self.ui.bn_home.clicked.connect(lambda: change_page(self, 'bn_home', 99))
+        self.ui.bn_workflow.clicked.connect(lambda: change_page(self, 'bn_workflow', 99))
+        self.ui.bn_goptions.clicked.connect(lambda: change_page(self, 'bn_goptions', 99))
+        self.ui.bn_train.clicked.connect(lambda: change_page(self, 'bn_train', 99))
+        self.ui.bn_test.clicked.connect(lambda: change_page(self, 'bn_test', 99))
+        self.ui.bn_run_biapy.clicked.connect(lambda: change_page(self,'bn_run_biapy',99))
 
         # Home page buttons 
-        self.ui.continue_yaml_bn.clicked.connect(lambda: buttonPressed(self,'bn_run_biapy',99))
-        self.ui.create_yaml_bn.clicked.connect(lambda: buttonPressed(self, 'bn_workflow', 99))
+        self.ui.continue_yaml_bn.clicked.connect(lambda: change_page(self,'bn_run_biapy',99))
+        self.ui.create_yaml_bn.clicked.connect(lambda: change_page(self, 'bn_workflow', 99))
         self.ui.load_yaml_bn.clicked.connect(lambda: load_yaml_to_GUI(self))
         self.ui.biapy_github_bn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://github.com/danifranco/BiaPy")))
         self.ui.biapy_forum_bn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://forum.image.sc/")))
@@ -103,14 +113,14 @@ class MainWindow(QMainWindow):
         # Workflow page buttons
         self.ui.left_arrow_bn.clicked.connect(lambda: UIFunction.move_workflow_view(self, True))
         self.ui.right_arrow_bn.clicked.connect(lambda: UIFunction.move_workflow_view(self, False))
-        self.ui.continue_bn.clicked.connect(lambda: buttonPressed(self, 'up', -1))
-        self.ui.back_bn.clicked.connect(lambda: buttonPressed(self, 'down', -1))
+        self.ui.continue_bn.clicked.connect(lambda: change_page(self, 'up', -1))
+        self.ui.back_bn.clicked.connect(lambda: change_page(self, 'down', -1))
         self.ui.back_bn.setIcon(QIcon(resource_path(os.path.join("images","bn_images", "back.png"))))
 
-        self.ui.window1_bn.clicked.connect(lambda: buttonPressed(self, 'bn_workflow', 99))
-        self.ui.window2_bn.clicked.connect(lambda: buttonPressed(self, 'bn_goptions', 99))
-        self.ui.window3_bn.clicked.connect(lambda: buttonPressed(self, 'bn_train', 99))
-        self.ui.window4_bn.clicked.connect(lambda: buttonPressed(self, 'bn_test', 99))
+        self.ui.window1_bn.clicked.connect(lambda: change_page(self, 'bn_workflow', 99))
+        self.ui.window2_bn.clicked.connect(lambda: change_page(self, 'bn_goptions', 99))
+        self.ui.window3_bn.clicked.connect(lambda: change_page(self, 'bn_train', 99))
+        self.ui.window4_bn.clicked.connect(lambda: change_page(self, 'bn_test', 99))
         
         self.ui.workflow_view2_seemore_bn.clicked.connect(lambda: UIFunction.obtain_workflow_description(self))
 
@@ -430,8 +440,8 @@ class MainWindow(QMainWindow):
         self.spinner = None
 
         # Variables to control the threads/workers of spin window 
-        self.thread_list = []
-        self.worker_list = []
+        self.thread_spin = None
+        self.worker_spin = None
 
         # Options to allow user moving the GUI
         self.dragPos = self.pos()
@@ -446,9 +456,28 @@ class MainWindow(QMainWindow):
         self.ui.biapy_logo_frame.mouseMoveEvent = moveWindow
 
     def mousePressEvent(self, event):
+        """ 
+        Mouse press event handler to grad the GUI.
+
+        Parameters
+        ----------
+        event : QT event
+            Mouse drag event.
+        """
         self.dragPos = event.globalPos()
     
     def dialog_exec(self, message, reason):
+        """ 
+        Starts a dialog to inform the user of something. 
+
+        Parameters
+        ----------
+        message : str
+            Message to be displayed for the user.
+
+        reason : str
+            Reason code.
+        """
         if self.diag is None: 
             self.diag = dialog_Ui(self)
 
@@ -458,6 +487,26 @@ class MainWindow(QMainWindow):
 
     def workflow_info_exec(self, workflow_name, workflow_images, workflow_description, 
         workflow_doc, workflow_ready_to_use_examples):
+        """ 
+        Starts a new window with the workflow's description.
+
+        Parameters
+        ----------
+        workflow_name : str
+            Name of the workflow.
+
+        workflow_images : str
+            images of the workflow to use to fill the GUI.
+        
+        workflow_description : str
+            Description of the workflow. 
+        
+        workflow_doc : str
+            Link to the workflow's documentation.
+
+        workflow_ready_to_use_examples : List of dict
+            Ready-to-use example information to display.
+        """
         if self.wokflow_info is None: 
             self.wokflow_info = workflow_explanation_Ui()
             
@@ -468,6 +517,14 @@ class MainWindow(QMainWindow):
         self.wokflow_info.exec_()
 
     def yes_no_exec(self, question):
+        """ 
+        Starts a dialog with a yes or no question to be answered by the user. 
+
+        Parameters
+        ----------
+        question : str
+            Question formulation.
+        """
         if self.yes_no is None: 
             self.yes_no = yes_no_Ui()
 
@@ -562,6 +619,14 @@ class MainWindow(QMainWindow):
             self.dialog_exec(errors, "load_yaml_ok_but_errors")
             
     def closeEvent(self, event):
+        """
+        Manage closing event to ensure all threads are killed. 
+                
+        Parameters
+        ----------
+        event : QMainWindow
+            Main window of the application.
+        """
         # Find if some window is still running 
         still_running = False
         for x in self.cfg.settings['running_workers']:
@@ -580,6 +645,12 @@ class MainWindow(QMainWindow):
                 x.gui.forcing_close = True
                 x.gui.close()
 
+            # Ensure there is no spin process there 
+            if self.thread_spin is not None:
+                try:
+                    self.thread_spin.quit()
+                except Exception as e:
+                    print(f"Possible expected error during thread_spin deletion: {e}")
             # Finally close the main window    
             self.close()
         else:
