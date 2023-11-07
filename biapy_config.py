@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: d287a2c3c2c43d6f6df527622f02ac823c491f23
+## Copied from BiaPy commit: 9d290bc3ff45f031ceafe5f21bf1a22b6f40bc12
 
 import os
 from yacs.config import CfgNode as CN
@@ -41,7 +41,7 @@ class Config:
 
         ### SEMANTIC_SEG
         _C.PROBLEM.SEMANTIC_SEG = CN()
-        # Class id to ignore when MODEL.N_CLASSES > 2. Normally is 0 as it is consider the background 
+        # Class id to ignore when MODEL.N_CLASSES > 2 
         _C.PROBLEM.SEMANTIC_SEG.IGNORE_CLASS_ID = 0
 
         ### INSTANCE_SEG
@@ -532,12 +532,14 @@ class Config:
 
         # Dimension of the embedding space for the MAE decoder 
         _C.MODEL.MAE_DEC_HIDDEN_SIZE = 512
-        # Number of transformer encoder layers
+        # Number of transformer decoder layers
         _C.MODEL.MAE_DEC_NUM_LAYERS = 8
         # Number of heads in the multi-head attention layer.
         _C.MODEL.MAE_DEC_NUM_HEADS = 16
         # Size of the dense layers of the final classifier
         _C.MODEL.MAE_DEC_MLP_DIMS = 2048
+        # Percentage of the input image to mask. Value between 0 and 1. 
+        _C.MODEL.MAE_MASK_RATIO = 0.5
 
         # UNETR
         # Multiple of the transformer encoder layers from of which the skip connection signal is going to be extracted
@@ -549,7 +551,6 @@ class Config:
 
         # Specific for SR models based on U-Net architectures. Options are ["pre", "post"]
         _C.MODEL.UNET_SR_UPSAMPLE_POSITION = "pre"
-
 
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Loss
@@ -573,14 +574,13 @@ class Config:
         _C.TRAIN.W_DECAY = 0.05
         # Batch size
         _C.TRAIN.BATCH_SIZE = 2
-        # Here the effective batch size is 64 (batch_size per gpu) * 8 (nodes) * 8 (gpus per node) = 4096. 
-        # If memory or # gpus is limited, use --accum_iter to maintain the effective batch size, which is 
-        # batch_size (per gpu) * nodes * 8 (gpus per node) * accum_iter.
+        # If memory or # gpus is limited, use this variable to maintain the effective batch size, which is 
+        # batch_size (per gpu) * nodes * (gpus per node) * accum_iter.
         _C.TRAIN.ACCUM_ITER = 1
         # Number of epochs to train the model
         _C.TRAIN.EPOCHS = 360
         # Epochs to wait with no validation data improvement until the training is stopped
-        _C.TRAIN.PATIENCE = 50
+        _C.TRAIN.PATIENCE = -1
         
         # LR Scheduler
         _C.TRAIN.LR_SCHEDULER = CN()
@@ -616,8 +616,40 @@ class Config:
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         _C.TEST = CN()
         _C.TEST.ENABLE = False
-        # Tries to reduce the memory footprint by separating crop/merge operations (it is slower). 
+        # Tries to reduce the memory footprint by separating crop/merge operations and by changing dtype of the predictions.
+        # It is slower and not as precise as the "normal" inference process but saves memory. In 'TEST.BY_CHUNKS' it will
+        # only save memory with the datatype change.
         _C.TEST.REDUCE_MEMORY = False
+        # In the processing of 3D images, the primary image is segmented into smaller patches. These patches are subsequently 
+        # passed through a computational network. The outcome is a new image, typically saved as a TIF file, that retains the 
+        # dimensions of the original input. Notably, if the input image is sizable, this process can be memory-intensive. This 
+        # is because the quantity of patches is contingent on both the dimensions of the input and the selected padding/overlap 
+        # parameters (defined as 'DATA.TEST.PADDING' and 'DATA.TEST.OVERLAP').
+        # To alleviate potential memory constraints, we offer an alternative: producing an H5/Zarr file with the predicted patches. 
+        # This method ensures efficient memory usage, as patches are individually incorporated into the H5/Zarr file in their respective 
+        # positions. This negates the need to store all patches simultaneously for image reconstruction. Importantly, in this 
+        # approach, only the 'DATA.TEST.PADDING' parameter is considered, excluding 'DATA.TEST.OVERLAP', which sufficiently 
+        # addresses border effect issues. If the source image is also an H5/Zarr file, it will be processed incrementally, further 
+        # optimizing memory usage.
+        _C.TEST.BY_CHUNKS = CN()
+        _C.TEST.BY_CHUNKS.ENABLE = False
+        # Type of format used to write data. Options available: ["H5", "Zarr"]
+        _C.TEST.BY_CHUNKS.FORMAT = 'H5' 
+        # In the process of 'TEST.BY_CHUNKS' you can enable this variable to save the reconstructed prediction as a TIF too. 
+        # Be aware of this option and be sure that the prediction can fit in you memory entirely, as it is needed for saving as TIF.
+        _C.TEST.BY_CHUNKS.SAVE_OUT_TIF = False
+        # In how many iterations the H5 writer needs to flush the data. No need to do so with Zarr files.
+        _C.TEST.BY_CHUNKS.FLUSH_EACH = 100
+        # Whether if after reconstructing the prediction the pipeline will continue each workflow specific steps. For this process
+        # the prediction image needs to be loaded into memory so be sure that it can fit in you memory. E.g. in instance 
+        # segmentation the instances will be created from the prediction.
+        _C.TEST.BY_CHUNKS.WORKFLOW_PROCESS = CN() 
+        _C.TEST.BY_CHUNKS.WORKFLOW_PROCESS.ENABLE = True
+        # How the workflow process is going to be done. There are two options:
+        #    * 'chunk_by_chunk' : each chunk will be considered as an individual file. Select this operation if you have not enough
+        #      memory to process the entire prediction image with 'entire_pred'.
+        #    * 'entire_pred': the predicted image will be loaded in memory and processed entirely (be aware of your  memory budget)     
+        _C.TEST.BY_CHUNKS.WORKFLOW_PROCESS.TYPE = "chunk_by_chunk"
         # Enable verbosity
         _C.TEST.VERBOSE = True
         # Make test-time augmentation. Infer over 8 possible rotations for 2D img and 16 when 3D
@@ -644,11 +676,25 @@ class Config:
         _C.TEST.MATCHING_SEGCOMPARE = False
 
         ### Detection
-        # Whether to return local maximum coords
-        _C.TEST.DET_LOCAL_MAX_COORDS = False
+        # To decide which function is going to be used to create point from probabilities. Options: ['peak_local_max', 'blob_log']
+        # 'peak_local_max': https://scikit-image.org/docs/stable/api/skimage.feature.html#skimage.feature.peak_local_max 
+        # 'blob_log': https://scikit-image.org/docs/stable/api/skimage.feature.html#skimage.feature.blob_log
+        _C.TEST.DET_POINT_CREATION_FUNCTION = 'peak_local_max'
+
         # Minimun value to consider a point as a peak. Corresponds to 'threshold_abs' argument of the function
-        # 'peak_local_max' of skimage.feature
-        _C.TEST.DET_MIN_TH_TO_BE_PEAK = [0.2]        
+        # 'peak_local_max' of skimage.feature or 'threshold' argument of 'blob_log'
+        _C.TEST.DET_MIN_TH_TO_BE_PEAK = [0.2]  
+        # Corresponds to 'min_sigma' argument of 'blob_log' function. It is the minimum standard deviation for Gaussian kernel. 
+        # Keep this low to detect smaller blobs. The standard deviations of the Gaussian filter are given for each axis as a 
+        # sequence, or as a single number, in which case it is equal for all axes.
+        _C.TEST.DET_BLOB_LOG_MIN_SIGMA = 5
+        # Corresponds to 'max_sigma' argument of 'blob_log' function. It is the maximum standard deviation for Gaussian kernel. 
+        # Keep this high to detect larger blobs. The standard deviations of the Gaussian filter are given for each axis as a 
+        # sequence, or as a single number, in which case it is equal for all axes.
+        _C.TEST.DET_BLOB_LOG_MAX_SIGMA = 10
+        # Corresponds to 'num_sigma' argument of 'blob_log' function. The number of intermediate values of standard deviations 
+        # to consider between min_sigma and max_sigma.
+        _C.TEST.DET_BLOB_LOG_NUM_SIGMA = 2
         # Maximum distance far away from a GT point to consider a point as a true positive
         _C.TEST.DET_TOLERANCE = [10]
 
@@ -789,8 +835,8 @@ class Config:
         _C.PATHS.WATERSHED_DIR = os.path.join(_C.PATHS.RESULT_DIR.PATH, 'watershed')
         _C.PATHS.MEAN_INFO_FILE = os.path.join(_C.PATHS.CHECKPOINT, 'normalization_mean_value.npy')
         _C.PATHS.STD_INFO_FILE = os.path.join(_C.PATHS.CHECKPOINT, 'normalization_std_value.npy')
-        # mae CALLBACK PATH
-        _C.PATHS.MAE_CALLBACK_OUT_DIR = os.path.join(_C.PATHS.RESULT_DIR.PATH, 'MAE_checks')
+        # Path where the images used in MAE will be saved suring inference
+        _C.PATHS.MAE_OUT_DIR = os.path.join(_C.PATHS.RESULT_DIR.PATH, 'MAE_checks')
         
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Logging

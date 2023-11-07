@@ -542,6 +542,16 @@ class UIFunction(MainWindow):
         main_window.ui.det_data_watetshed_check_label.setVisible(False)
         main_window.ui.PROBLEM__DETECTION__DATA_CHECK_MW__INPUT.setVisible(False)
         main_window.ui.test_advanced_options_frame.setVisible(False)
+        main_window.ui.process_by_chunks_label.setVisible(False)
+        main_window.ui.process_by_chunks_frame.setVisible(False)
+        main_window.ui.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__LABEL.setVisible(False)
+        main_window.ui.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INPUT.setVisible(False)
+        main_window.ui.TEST__DET_BLOB_LOG_MIN_SIGMA__LABEL.setVisible(False)
+        main_window.ui.TEST__DET_BLOB_LOG_MIN_SIGMA__INPUT.setVisible(False)
+        main_window.ui.TEST__DET_BLOB_LOG_MAX_SIGMA__LABEL.setVisible(False)
+        main_window.ui.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT.setVisible(False)
+        main_window.ui.TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL.setVisible(False)
+        main_window.ui.TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT.setVisible(False)
 
     def init_run(main_window):
         """

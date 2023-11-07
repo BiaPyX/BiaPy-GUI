@@ -241,31 +241,29 @@ class run_worker(QObject):
             ###########
             # PULLING #
             ###########
-            images = self.docker_client.images.list(name=self.main_gui.cfg.settings['biapy_container_name'])
-            if len(images) == 0:
-                self.update_pulling_signal.emit(0)
-                self.process_steps = "pulling"
-                # Collect the output of the container and update the GUI
-                self.total_layers = {}
-                for item in self.docker_client.api.pull(self.main_gui.cfg.settings['biapy_container_name'], stream=True, decode=True):
-                    print(item)
-                    if item["status"] == 'Pulling fs layer':
-                        self.total_layers[item["id"]+"_download"] = 0
-                        self.total_layers[item["id"]+"_extract"] = 0
-                    elif item["status"] == "Downloading":
-                        self.total_layers[item["id"]+"_download"] = item["progressDetail"]['current']/item["progressDetail"]['total']
-                    elif item["status"] == "Extracting": 
-                        self.total_layers[item["id"]+"_extract"] = item["progressDetail"]['current']/item["progressDetail"]['total'] 
-                    elif item["status"] == "Pull complete": 
-                        self.total_layers[item["id"]+"_download"] = 1
-                        self.total_layers[item["id"]+"_extract"] = 1
+            self.update_pulling_signal.emit(0)
+            self.process_steps = "pulling"
+            # Collect the output of the container and update the GUI
+            self.total_layers = {}
+            for item in self.docker_client.api.pull(self.main_gui.cfg.settings['biapy_container_name'], stream=True, decode=True):
+                print(item)
+                if item["status"] == 'Pulling fs layer':
+                    self.total_layers[item["id"]+"_download"] = 0
+                    self.total_layers[item["id"]+"_extract"] = 0
+                elif item["status"] == "Downloading":
+                    self.total_layers[item["id"]+"_download"] = item["progressDetail"]['current']/item["progressDetail"]['total']
+                elif item["status"] == "Extracting": 
+                    self.total_layers[item["id"]+"_extract"] = item["progressDetail"]['current']/item["progressDetail"]['total'] 
+                elif item["status"] == "Pull complete": 
+                    self.total_layers[item["id"]+"_download"] = 1
+                    self.total_layers[item["id"]+"_extract"] = 1
 
-                    if self.break_pulling:
-                        print("Stopping pulling process . . .")
-                        return 
-                    # Update GUI 
-                    steps = np.sum([int(float(x)*10) for x in self.total_layers.values()])
-                    self.update_pulling_progress_signal.emit(steps)
+                if self.break_pulling:
+                    print("Stopping pulling process . . .")
+                    return 
+                # Update GUI 
+                steps = np.sum([int(float(x)*10) for x in self.total_layers.values()])
+                self.update_pulling_progress_signal.emit(steps)
 
             self.update_pulling_signal.emit(1)     
 
@@ -440,7 +438,9 @@ class run_worker(QObject):
             
             self.update_log_signal.emit(0)
 
-            # Log the output in a file             
+            # Log the output in a file     
+            f = open(self.container_stderr_file, "x")
+            f.close()       
             f = open(self.container_stdout_file, "w")
             f.write("#########################################################\n")
             f.write(self.container_info.replace("<tr><td>", "").replace("</td><td>", ": ").replace("</td></tr>", "")\

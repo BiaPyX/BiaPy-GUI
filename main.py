@@ -139,7 +139,7 @@ class MainWindow(QMainWindow):
         self.ui.DATA__VAL__SPLIT_TRAIN__INPUT.setValidator(self.float_validator)
         self.ui.TRAIN__EPOCHS__INPUT.setValidator(self.int_validator)
         self.ui.TRAIN__ACCUM_ITER__INPUT.setValidator(self.int_validator)
-        self.ui.TRAIN__PATIENCE__INPUT.setValidator(self.float_validator)
+        # self.ui.TRAIN__PATIENCE__INPUT.setValidator(self.float_validator)
         self.ui.MODEL__N_CLASSES__INPUT.setValidator(self.float_validator)
         # self.ui.DATA__NORMALIZATION__CUSTOM_MEAN__INPUT.setValidator(self.float_validator)
         # self.ui.DATA__NORMALIZATION__CUSTOM_STD__INPUT.setValidator(self.float_validator)
@@ -152,6 +152,7 @@ class MainWindow(QMainWindow):
         self.ui.MODEL__VIT_EMBED_DIM__INPUT.setValidator(self.int_validator)
         self.ui.MODEL__VIT_NUM_LAYERS__INPUT.setValidator(self.int_validator)
         self.ui.MODEL__VIT_MLP_RATIO__INPUT.setValidator(self.large_range_float_validator)
+        self.ui.MODEL__MAE_MASK_RATIO__INPUT.setValidator(self.float_validator)
         self.ui.MODEL__MAE_DEC_HIDDEN_SIZE__INPUT.setValidator(self.int_validator)
         self.ui.MODEL__MAE_DEC_NUM_LAYERS__INPUT.setValidator(self.int_validator)
         self.ui.MODEL__MAE_DEC_NUM_HEADS__INPUT.setValidator(self.int_validator)
@@ -235,6 +236,9 @@ class MainWindow(QMainWindow):
         self.ui.DATA__TRAIN__MINIMUM_FOREGROUND_PER__DET__INPUT.setValidator(self.float_validator)
         self.ui.PROBLEM__DETECTION__CENTRAL_POINT_DILATION__INPUT.setValidator(self.int_validator)
         self.ui.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT.setValidator(self.no_limit_0_1_float_number_bracket_validator)
+        self.ui.TEST__DET_BLOB_LOG_MIN_SIGMA__INPUT.setValidator(self.int_validator)
+        self.ui.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT.setValidator(self.int_validator)
+        self.ui.TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT.setValidator(self.int_validator)
         self.ui.TEST__POST_PROCESSING__YZ_FILTERING_SIZE__DET__INPUT.setValidator(self.int_validator)
         self.ui.TEST__POST_PROCESSING__Z_FILTERING_SIZE__DET__INPUT.setValidator(self.int_validator)
         # self.ui.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__DET__INPUT.setValidator(self.float_validator)
@@ -242,6 +246,7 @@ class MainWindow(QMainWindow):
         self.ui.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_PATCH__INPUT.setValidator(self.no_limit_number_bracket_validator)
         self.ui.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER__INPUT.setValidator(self.int_validator)
         self.ui.TEST__DET_TOLERANCE__INPUT.setValidator(self.no_limit_number_min_one_number_bracket_validator)
+        self.ui.TEST__BY_CHUNKS__FLUSH_EACH__INPUT.setValidator(self.int_validator)
 
         self.ui.PROBLEM__DENOISING__N2V_PERC_PIX__INPUT.setValidator(self.float_validator)
         self.ui.PROBLEM__DENOISING__N2V_NEIGHBORHOOD_RADIUS__INPUT.setValidator(self.int_validator)
@@ -280,7 +285,8 @@ class MainWindow(QMainWindow):
         self.ui.MODEL__ARCHITECTURE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["unet_model_like_frame", "unet_model_like_label", "sr_unet_like_heading", "sr_unet_like_frame", "transformers_frame", "transformers_label", 
             "unetr_vit_hidden_multiple_label", "MODEL__UNETR_VIT_HIDD_MULT__INPUT", "unetr_num_filters_label", "MODEL__UNETR_VIT_NUM_FILTERS__INPUT", 
-            "unetr_dec_act_label", "MODEL__UNETR_DEC_ACTIVATION__INPUT", "MODEL__MAE_DEC_HIDDEN_SIZE__INPUT", "MODEL__MAE_DEC_HIDDEN_SIZE__LABEL", 
+            "unetr_dec_act_label", "MODEL__UNETR_DEC_ACTIVATION__INPUT", "MODEL__MAE_MASK_RATIO__INPUT", "MODEL__MAE_MASK_RATIO__LABEL",
+            "MODEL__MAE_DEC_HIDDEN_SIZE__INPUT", "MODEL__MAE_DEC_HIDDEN_SIZE__LABEL", 
             "MODEL__MAE_DEC_NUM_LAYERS__INPUT", "MODEL__MAE_DEC_NUM_LAYERS__LABEL", "MODEL__MAE_DEC_NUM_HEADS__INPUT", "MODEL__MAE_DEC_NUM_HEADS__LABEL",
             "MODEL__MAE_DEC_MLP_DIMS__INPUT", "MODEL__MAE_DEC_HIDDEN_SIZE__INPUT", "MODEL__MAE_DEC_MLP_DIMS__LABEL"], 
             widgets_to_set=["transformers_label"]))
@@ -372,6 +378,10 @@ class MainWindow(QMainWindow):
              "test_data_gt_label","DATA__TEST__GT_PATH__INPUT","test_data_gt_input_browse_bn","test_data_in_memory_label",
              "DATA__TEST__IN_MEMORY__INPUT","validation_overlap_label"]))
         self.ui.test_advanced_bn.clicked.connect(lambda: expand_hide_advanced_options(self, "test_advanced_bn", "test_advanced_options_frame"))
+        self.ui.TEST__BY_CHUNKS__ENABLE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
+            ["process_by_chunks_label","process_by_chunks_frame"]))
+        self.ui.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
+            ["TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__LABEL","TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INPUT"]))
 
         self.ui.TEST__POST_PROCESSING__YZ_FILTERING__SEM_SEG__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["sem_seg_yz_filtering_size_label","TEST__POST_PROCESSING__YZ_FILTERING_SIZE__SEM_SEG__INPUT"]))
@@ -411,8 +421,9 @@ class MainWindow(QMainWindow):
              "inst_seg_d_channel_th_label","PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INPUT","PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__INPUT",
              "inst_seg_fore_mask_th_label", "PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INPUT"],frames_to_hide_if_empty=["inst_seg_ths_frame"]))
 
-        self.ui.TEST__DET_LOCAL_MAX_COORDS__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
-            ["det_min_th_to_be_peak_label","TEST__DET_MIN_TH_TO_BE_PEAK__INPUT"]))
+        self.ui.TEST__DET_POINT_CREATION_FUNCTION__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["TEST__DET_BLOB_LOG_MIN_SIGMA__LABEL","TEST__DET_BLOB_LOG_MIN_SIGMA__INPUT", "TEST__DET_BLOB_LOG_MAX_SIGMA__LABEL",
+             "TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT", "TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL", "TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT"]))
         self.ui.TEST__POST_PROCESSING__YZ_FILTERING__DET__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["det_yz_filtering_size_label","TEST__POST_PROCESSING__YZ_FILTERING_SIZE__DET__INPUT"]))
         self.ui.TEST__POST_PROCESSING__Z_FILTERING__DET__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 

@@ -26,8 +26,7 @@ class Settings():
             self.settings['user_host'] = str(os.getuid())+":"+str(os.getgid())
 
         # BiaPy 
-        # self.settings['biapy_container_name'] = "danifranco/biapy:v1.0"
-        self.settings['biapy_container_name'] = "danifranco/biapy:v3.0"
+        self.settings['biapy_container_name'] = "danifranco/biapy"
         self.settings['biapy_container_size'] = "12.6GB"
         self.settings['biapy_container_dockerfile'] = "https://raw.githubusercontent.com/danifranco/BiaPy/master/utils/env/Dockerfile"
         self.settings['yaml_config_file_path'] =''

@@ -571,7 +571,7 @@ def create_yaml_file(main_window):
         biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_CHANNEL_WEIGHTS'] = get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_CHANNELS_WEIGHTS__INPUT) 
         if get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__INPUT) != "thick":
             biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_CONTOUR_MODE'] = get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__INPUT)
-        biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_CHECK_MW'] = get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__INPUT)
+        biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_CHECK_MW'] = True if get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INPUT) == "Yes" else False
         if get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT) == "Yes":
             biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_TYPE'] = get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT)
         if 'B' in problem_channels:
@@ -895,6 +895,7 @@ def create_yaml_file(main_window):
         
         # MAE
         if model_name in "mae":
+            biapy_config['MODEL']['MAE_MASK_RATIO_SIZE'] = int(get_text(main_window.ui.MODEL__MAE_MASK_RATIO__INPUT)) 
             biapy_config['MODEL']['MAE_DEC_HIDDEN_SIZE'] = int(get_text(main_window.ui.MODEL__MAE_DEC_HIDDEN_SIZE__INPUT)) 
             biapy_config['MODEL']['MAE_DEC_NUM_LAYERS'] = int(get_text(main_window.ui.MODEL__MAE_DEC_NUM_LAYERS__INPUT)) 
             biapy_config['MODEL']['MAE_DEC_NUM_HEADS'] = get_text(main_window.ui.MODEL__MAE_DEC_NUM_HEADS__INPUT)
@@ -968,6 +969,17 @@ def create_yaml_file(main_window):
         if get_text(main_window.ui.TEST__STATS__FULL_IMG__INPUT) == "Yes" and get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "2D":
             biapy_config['TEST']['STATS']['FULL_IMG'] = True 
 
+        if get_text(main_window.ui.TEST__BY_CHUNKS__ENABLE__INPUT) == "Yes":
+            biapy_config['TEST']['BY_CHUNKS'] = {}
+            biapy_config['TEST']['BY_CHUNKS']['ENABLE'] = True
+            biapy_config['TEST']['BY_CHUNKS']['FORMAT'] = get_text(main_window.ui.TEST__BY_CHUNKS__FORMAT__INPUT)
+            biapy_config['TEST']['BY_CHUNKS']['SAVE_OUT_TIF'] = True if get_text(main_window.ui.TEST__BY_CHUNKS__SAVE_OUT_TIF__INPUT) == "Yes" else False 
+            biapy_config['TEST']['BY_CHUNKS']['FLUSH_EACH'] = get_text(main_window.ui.TEST__BY_CHUNKS__FLUSH_EACH__INPUT)
+            if get_text(main_window.ui.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INPUT) == "Yes":
+                biapy_config['TEST']['BY_CHUNKS']['WORKFLOW_PROCESS'] = {}
+                biapy_config['TEST']['BY_CHUNKS']['WORKFLOW_PROCESS']['ENABLE'] = True
+                biapy_config['TEST']['BY_CHUNKS']['WORKFLOW_PROCESS']['TYPE'] = get_text(main_window.ui.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INPUT)
+
         ### Instance segmentation
         if main_window.cfg.settings['selected_workflow'] == 1:
             biapy_config['TEST']['MATCHING_STATS'] = True if get_text(main_window.ui.TEST__MATCHING_STATS__INPUT) == "Yes" else False 
@@ -978,9 +990,13 @@ def create_yaml_file(main_window):
 
         ### Detection
         elif main_window.cfg.settings['selected_workflow'] == 2:
-            biapy_config['TEST']['DET_LOCAL_MAX_COORDS'] = True if get_text(main_window.ui.TEST__DET_LOCAL_MAX_COORDS__INPUT) == "Yes" else False 
+            biapy_config['TEST']['DET_POINT_CREATION_FUNCTION'] = get_text(main_window.ui.TEST__DET_POINT_CREATION_FUNCTION__INPUT)
             biapy_config['TEST']['DET_MIN_TH_TO_BE_PEAK'] = ast.literal_eval(get_text(main_window.ui.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT))
             biapy_config['TEST']['DET_TOLERANCE'] = ast.literal_eval(get_text(main_window.ui.TEST__DET_TOLERANCE__INPUT))
+            if get_text(main_window.ui.TEST__DET_POINT_CREATION_FUNCTION__INPUT) == "blob_log":
+                biapy_config['TEST']['DET_BLOB_LOG_MIN_SIGMA'] = get_text(main_window.ui.TEST__DET_BLOB_LOG_MIN_SIGMA__INPUT)    
+                biapy_config['TEST']['DET_BLOB_LOG_MAX_SIGMA'] = get_text(main_window.ui.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT) 
+                biapy_config['TEST']['DET_BLOB_LOG_NUM_SIGMA'] = get_text(main_window.ui.TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT) 
 
         # Post-processing
         biapy_config['TEST']['POST_PROCESSING'] = {}

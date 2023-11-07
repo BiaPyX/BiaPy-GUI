@@ -289,7 +289,7 @@ color: white;
                 <number>0</number>
                </property>
                <property name="text">
-                <string>BiaPy (3.0) - BiaPy GUI (2.0)</string>
+                <string>BiaPy (3.1.0) - BiaPy GUI (1.0.0)</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -2937,7 +2937,7 @@ border-radius: 15px;
                        </font>
                       </property>
                       <property name="currentIndex">
-                       <number>2</number>
+                       <number>3</number>
                       </property>
                       <widget class="QWidget" name="workflow_selection_page">
                        <property name="minimumSize">
@@ -3691,7 +3691,7 @@ QPushButton:pressed {
                             <property name="geometry">
                              <rect>
                               <x>0</x>
-                              <y>-45</y>
+                              <y>0</y>
                               <width>932</width>
                               <height>493</height>
                              </rect>
@@ -4840,9 +4840,9 @@ QPushButton:pressed {
                                 <property name="geometry">
                                  <rect>
                                   <x>0</x>
-                                  <y>-494</y>
+                                  <y>0</y>
                                   <width>934</width>
-                                  <height>5847</height>
+                                  <height>5883</height>
                                  </rect>
                                 </property>
                                 <property name="layoutDirection">
@@ -5303,6 +5303,219 @@ QPushButton:pressed {
                                           <enum>QFrame::Raised</enum>
                                          </property>
                                          <layout class="QGridLayout" name="gridLayout_23">
+                                          <item row="2" column="0">
+                                           <widget class="QLabel" name="label_53">
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>16777215</width>
+                                              <height>16777215</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Number of transformer encoder layers. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Number of layers</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="5" column="2">
+                                           <spacer name="horizontalSpacer_14">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="orientation">
+                                             <enum>Qt::Horizontal</enum>
+                                            </property>
+                                            <property name="sizeHint" stdset="0">
+                                             <size>
+                                              <width>40</width>
+                                              <height>20</height>
+                                             </size>
+                                            </property>
+                                           </spacer>
+                                          </item>
+                                          <item row="14" column="0">
+                                           <widget class="QLabel" name="MODEL__MAE_DEC_NUM_HEADS__LABEL">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Number of heads in the multi-head attention layer. Must be a positive integer.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>MAE - Decoder number heads</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="5" column="1">
+                                           <widget class="QLineEdit" name="MODEL__VIT_MLP_RATIO__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string/>
+                                            </property>
+                                            <property name="text">
+                                             <string>4.</string>
+                                            </property>
+                                            <property name="plainText" stdset="0">
+                                             <string>[3072, 768]</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="12" column="1">
+                                           <widget class="QLineEdit" name="MODEL__MAE_DEC_HIDDEN_SIZE__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>512</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="1" column="0">
+                                           <widget class="QLabel" name="label_51">
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>16777215</width>
+                                              <height>16777215</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Dimension of the embedding space. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Embedding dimension</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="0" column="1">
+                                           <widget class="QLineEdit" name="MODEL__VIT_TOKEN_SIZE__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>16</string>
+                                            </property>
+                                            <property name="plainText" stdset="0">
+                                             <string>16</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="14" column="1">
+                                           <widget class="QLineEdit" name="MODEL__MAE_DEC_NUM_HEADS__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>16</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="15" column="1">
+                                           <widget class="QLineEdit" name="MODEL__MAE_DEC_MLP_DIMS__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>2048</string>
+                                            </property>
+                                           </widget>
+                                          </item>
                                           <item row="3" column="1">
                                            <widget class="QLineEdit" name="MODEL__VIT_NUM_HEADS__INPUT">
                                             <property name="minimumSize">
@@ -5331,8 +5544,8 @@ QPushButton:pressed {
                                             </property>
                                            </widget>
                                           </item>
-                                          <item row="3" column="0">
-                                           <widget class="QLabel" name="label_52">
+                                          <item row="5" column="0">
+                                           <widget class="QLabel" name="label_55">
                                             <property name="maximumSize">
                                              <size>
                                               <width>16777215</width>
@@ -5346,15 +5559,31 @@ QPushButton:pressed {
                                              </font>
                                             </property>
                                             <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Number of heads in the multi-head attention layer. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Size of the dense layers of the final classifier. This value will mutiply 'VIT_EMBED_DIM'&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                             </property>
                                             <property name="text">
-                                             <string>Numer of heads</string>
+                                             <string>MLP ratio</string>
                                             </property>
                                            </widget>
                                           </item>
-                                          <item row="10" column="1">
-                                           <widget class="QLineEdit" name="MODEL__MAE_DEC_HIDDEN_SIZE__INPUT">
+                                          <item row="13" column="0">
+                                           <widget class="QLabel" name="MODEL__MAE_DEC_NUM_LAYERS__LABEL">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Number of transformer decoder layers. Must be a positive integer. &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>MAE - Decoder number of  layers</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="7" column="1">
+                                           <widget class="QLineEdit" name="MODEL__UNETR_VIT_HIDD_MULT__INPUT">
                                             <property name="minimumSize">
                                              <size>
                                               <width>200</width>
@@ -5374,7 +5603,180 @@ QPushButton:pressed {
                                              </font>
                                             </property>
                                             <property name="text">
-                                             <string>512</string>
+                                             <string>3</string>
+                                            </property>
+                                            <property name="plainText" stdset="0">
+                                             <string>3</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="9" column="0">
+                                           <widget class="QLabel" name="unetr_dec_act_label">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Activation of the decoder&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>UNETR - Decoder activation</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="7" column="0">
+                                           <widget class="QLabel" name="unetr_vit_hidden_multiple_label">
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>16777215</width>
+                                              <height>16777215</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Multiple of the transformer encoder layers from of which the skip connection signal is going to be extracted. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>UNETR - ViT Hidden multiple</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="15" column="0">
+                                           <widget class="QLabel" name="MODEL__MAE_DEC_MLP_DIMS__LABEL">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Size of the dense layers of the final classifier&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>MAE - Decoder MLP dimension</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="13" column="1">
+                                           <widget class="QLineEdit" name="MODEL__MAE_DEC_NUM_LAYERS__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>8</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="0" column="0">
+                                           <widget class="QLabel" name="label_50">
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>16777215</width>
+                                              <height>16777215</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Size of the patches that are extracted from the input image. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Token size</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="8" column="1">
+                                           <widget class="QLineEdit" name="MODEL__UNETR_VIT_NUM_FILTERS__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>16</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="2" column="1">
+                                           <widget class="QLineEdit" name="MODEL__VIT_NUM_LAYERS__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>12</string>
+                                            </property>
+                                            <property name="plainText" stdset="0">
+                                             <string>12</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="8" column="0">
+                                           <widget class="QLabel" name="unetr_num_filters_label">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Number of filters in the first UNETR's layer of the decoder. In each layer the previous number of filters is doubled. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive int&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>UNETR - Decoder numer of filters</string>
                                             </property>
                                            </widget>
                                           </item>
@@ -5415,241 +5817,6 @@ QPushButton:pressed {
                                             </item>
                                            </widget>
                                           </item>
-                                          <item row="9" column="0">
-                                           <widget class="QLabel" name="unetr_dec_act_label">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Activation of the decoder&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>UNETR - Decoder activation</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="5" column="2">
-                                           <spacer name="horizontalSpacer_14">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="orientation">
-                                             <enum>Qt::Horizontal</enum>
-                                            </property>
-                                            <property name="sizeHint" stdset="0">
-                                             <size>
-                                              <width>40</width>
-                                              <height>20</height>
-                                             </size>
-                                            </property>
-                                           </spacer>
-                                          </item>
-                                          <item row="2" column="1">
-                                           <widget class="QLineEdit" name="MODEL__VIT_NUM_LAYERS__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>12</string>
-                                            </property>
-                                            <property name="plainText" stdset="0">
-                                             <string>12</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="8" column="1">
-                                           <widget class="QLineEdit" name="MODEL__UNETR_VIT_NUM_FILTERS__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>16</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="5" column="1">
-                                           <widget class="QLineEdit" name="MODEL__VIT_MLP_RATIO__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string/>
-                                            </property>
-                                            <property name="text">
-                                             <string>4.</string>
-                                            </property>
-                                            <property name="plainText" stdset="0">
-                                             <string>[3072, 768]</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="0" column="0">
-                                           <widget class="QLabel" name="label_50">
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>16777215</width>
-                                              <height>16777215</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Size of the patches that are extracted from the input image. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>Token size</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="2" column="0">
-                                           <widget class="QLabel" name="label_53">
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>16777215</width>
-                                              <height>16777215</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Number of transformer encoder layers. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>Number of layers</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="7" column="0">
-                                           <widget class="QLabel" name="unetr_vit_hidden_multiple_label">
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>16777215</width>
-                                              <height>16777215</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Multiple of the transformer encoder layers from of which the skip connection signal is going to be extracted. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>UNETR - ViT Hidden multiple</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="0" column="1">
-                                           <widget class="QLineEdit" name="MODEL__VIT_TOKEN_SIZE__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>16</string>
-                                            </property>
-                                            <property name="plainText" stdset="0">
-                                             <string>16</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="1" column="0">
-                                           <widget class="QLabel" name="label_51">
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>16777215</width>
-                                              <height>16777215</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Dimension of the embedding space. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>Embedding dimension</string>
-                                            </property>
-                                           </widget>
-                                          </item>
                                           <item row="1" column="1">
                                            <widget class="QLineEdit" name="MODEL__VIT_EMBED_DIM__INPUT">
                                             <property name="minimumSize">
@@ -5678,8 +5845,8 @@ QPushButton:pressed {
                                             </property>
                                            </widget>
                                           </item>
-                                          <item row="5" column="0">
-                                           <widget class="QLabel" name="label_55">
+                                          <item row="3" column="0">
+                                           <widget class="QLabel" name="label_52">
                                             <property name="maximumSize">
                                              <size>
                                               <width>16777215</width>
@@ -5693,70 +5860,10 @@ QPushButton:pressed {
                                              </font>
                                             </property>
                                             <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Size of the dense layers of the final classifier. This value will mutiply 'VIT_EMBED_DIM'&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Number of heads in the multi-head attention layer. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                             </property>
                                             <property name="text">
-                                             <string>MLP ratio</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="8" column="0">
-                                           <widget class="QLabel" name="unetr_num_filters_label">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Number of filters in the first UNETR's layer of the decoder. In each layer the previous number of filters is doubled. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive int&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>UNETR - Decoder numer of filters</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="7" column="1">
-                                           <widget class="QLineEdit" name="MODEL__UNETR_VIT_HIDD_MULT__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>3</string>
-                                            </property>
-                                            <property name="plainText" stdset="0">
-                                             <string>3</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="6" column="0">
-                                           <widget class="QLabel" name="MODEL__VIT_NORM_EPS__LABEL">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Normalization layer epsion&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>Normalization epsilon</string>
+                                             <string>Numer of heads</string>
                                             </property>
                                            </widget>
                                           </item>
@@ -5785,82 +5892,7 @@ QPushButton:pressed {
                                             </property>
                                            </widget>
                                           </item>
-                                          <item row="12" column="1">
-                                           <widget class="QLineEdit" name="MODEL__MAE_DEC_NUM_HEADS__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>16</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="13" column="1">
-                                           <widget class="QLineEdit" name="MODEL__MAE_DEC_MLP_DIMS__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>2048</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="11" column="1">
-                                           <widget class="QLineEdit" name="MODEL__MAE_DEC_NUM_LAYERS__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>8</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="10" column="0">
+                                          <item row="12" column="0">
                                            <widget class="QLabel" name="MODEL__MAE_DEC_HIDDEN_SIZE__LABEL">
                                             <property name="font">
                                              <font>
@@ -5876,8 +5908,24 @@ QPushButton:pressed {
                                             </property>
                                            </widget>
                                           </item>
+                                          <item row="6" column="0">
+                                           <widget class="QLabel" name="MODEL__VIT_NORM_EPS__LABEL">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Normalization layer epsion&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Normalization epsilon</string>
+                                            </property>
+                                           </widget>
+                                          </item>
                                           <item row="11" column="0">
-                                           <widget class="QLabel" name="MODEL__MAE_DEC_NUM_LAYERS__LABEL">
+                                           <widget class="QLabel" name="MODEL__MAE_MASK_RATIO__LABEL">
                                             <property name="font">
                                              <font>
                                               <family>DejaVu Math TeX Gyre</family>
@@ -5885,42 +5933,35 @@ QPushButton:pressed {
                                              </font>
                                             </property>
                                             <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Number of transformer decoder layers. Must be a positive integer. &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Percentage of the input image to mask. Must be a float between 0 and 1. &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                             </property>
                                             <property name="text">
-                                             <string>MAE - Decoder number of  layers</string>
+                                             <string>MAE - Mask ratio</string>
                                             </property>
                                            </widget>
                                           </item>
-                                          <item row="12" column="0">
-                                           <widget class="QLabel" name="MODEL__MAE_DEC_NUM_HEADS__LABEL">
+                                          <item row="11" column="1">
+                                           <widget class="QLineEdit" name="MODEL__MAE_MASK_RATIO__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
                                             <property name="font">
                                              <font>
                                               <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Number of heads in the multi-head attention layer. Must be a positive integer.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
                                             <property name="text">
-                                             <string>MAE - Decoder number heads</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="13" column="0">
-                                           <widget class="QLabel" name="MODEL__MAE_DEC_MLP_DIMS__LABEL">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Size of the dense layers of the final classifier&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>MAE - Decoder MLP dimension</string>
+                                             <string>0.5</string>
                                             </property>
                                            </widget>
                                           </item>
@@ -11165,7 +11206,7 @@ p, li { white-space: pre-wrap; }
                                              </font>
                                             </property>
                                             <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;If memory or # gpus is limited, use this variable to maintain the effective batch size, which is batch_size (per gpu) * nodes * (gpus per node) * accum_iter. Need to be a positive integer. &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;If memory or # gpus is limited, use this variable to maintain the effective batch size, which is batch_size (per gpu) * nodes * (gpus per node) * accum_iter. Must be a positive integer.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                             </property>
                                             <property name="text">
                                              <string>Accumulate iterations</string>
@@ -12050,7 +12091,7 @@ QPushButton:pressed {
                                        </font>
                                       </property>
                                       <property name="text">
-                                       <string>50</string>
+                                       <string>-1</string>
                                       </property>
                                      </widget>
                                     </item>
@@ -13361,8 +13402,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>928</width>
-                                         <height>333</height>
+                                         <width>851</width>
+                                         <height>181</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_17">
@@ -13815,8 +13856,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>928</width>
-                                         <height>333</height>
+                                         <width>529</width>
+                                         <height>217</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_19">
@@ -14201,8 +14242,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>928</width>
-                                         <height>333</height>
+                                         <width>546</width>
+                                         <height>210</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_49">
@@ -14523,8 +14564,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>928</width>
-                                         <height>333</height>
+                                         <width>342</width>
+                                         <height>180</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_50">
@@ -14752,8 +14793,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>928</width>
-                                         <height>333</height>
+                                         <width>380</width>
+                                         <height>171</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_51">
@@ -15014,8 +15055,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>928</width>
-                                         <height>333</height>
+                                         <width>399</width>
+                                         <height>44</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_52">
@@ -15082,8 +15123,8 @@ QPushButton:pressed {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>950</width>
-                          <height>450</height>
+                          <width>951</width>
+                          <height>451</height>
                          </rect>
                         </property>
                         <property name="frameShape">
@@ -15096,19 +15137,6 @@ QPushButton:pressed {
                          <property name="spacing">
                           <number>9</number>
                          </property>
-                         <item row="0" column="1">
-                          <spacer name="horizontalSpacer_27">
-                           <property name="orientation">
-                            <enum>Qt::Horizontal</enum>
-                           </property>
-                           <property name="sizeHint" stdset="0">
-                            <size>
-                             <width>40</width>
-                             <height>20</height>
-                            </size>
-                           </property>
-                          </spacer>
-                         </item>
                          <item row="0" column="0">
                           <widget class="QFrame" name="frame_35">
                            <property name="minimumSize">
@@ -15206,6 +15234,32 @@ QPushButton:pressed {
                            </layout>
                           </widget>
                          </item>
+                         <item row="1" column="0">
+                          <spacer name="verticalSpacer_12">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>40</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item row="0" column="1">
+                          <spacer name="horizontalSpacer_27">
+                           <property name="orientation">
+                            <enum>Qt::Horizontal</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>40</width>
+                             <height>20</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
                          <item row="2" column="0" colspan="2">
                           <widget class="QTabWidget" name="test_tab_widget">
                            <property name="font">
@@ -15250,8 +15304,8 @@ QPushButton:pressed {
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>914</width>
-                                  <height>995</height>
+                                  <width>915</width>
+                                  <height>1256</height>
                                  </rect>
                                 </property>
                                 <layout class="QGridLayout" name="gridLayout_37">
@@ -15310,46 +15364,324 @@ QPushButton:pressed {
                                        <enum>QFrame::Plain</enum>
                                       </property>
                                       <layout class="QGridLayout" name="gridLayout_8">
-                                       <item row="2" column="0" rowspan="2" colspan="2">
-                                        <widget class="QLabel" name="label_89">
-                                         <property name="font">
-                                          <font>
-                                           <family>DejaVu Math TeX Gyre</family>
-                                           <pointsize>12</pointsize>
-                                          </font>
+                                       <item row="11" column="0">
+                                        <widget class="QFrame" name="frame_46">
+                                         <property name="minimumSize">
+                                          <size>
+                                           <width>0</width>
+                                           <height>0</height>
+                                          </size>
                                          </property>
-                                         <property name="text">
-                                          <string>Test data</string>
+                                         <property name="styleSheet">
+                                          <string notr="true">background: rgb(246,246,246);
+</string>
                                          </property>
+                                         <property name="frameShape">
+                                          <enum>QFrame::Box</enum>
+                                         </property>
+                                         <property name="frameShadow">
+                                          <enum>QFrame::Raised</enum>
+                                         </property>
+                                         <layout class="QGridLayout" name="gridLayout_54">
+                                          <item row="3" column="0">
+                                           <widget class="QLabel" name="test_full_image_label">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;To fed the network with the complete image instead of doing in patch by patch with 'per patch' and 'merge patches' options. It can only be done with 2D images, as the 3D ones can normally not be fit in the GPU &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Full images</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="3" column="1">
+                                           <widget class="QComboBox" name="TEST__STATS__FULL_IMG__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <item>
+                                             <property name="text">
+                                              <string>Yes</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>No</string>
+                                             </property>
+                                            </item>
+                                           </widget>
+                                          </item>
+                                          <item row="2" column="1">
+                                           <widget class="QComboBox" name="TEST__STATS__MERGE_PATCHES__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <item>
+                                             <property name="text">
+                                              <string>No</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>Yes</string>
+                                             </property>
+                                            </item>
+                                           </widget>
+                                          </item>
+                                          <item row="4" column="0">
+                                           <spacer name="verticalSpacer_24">
+                                            <property name="orientation">
+                                             <enum>Qt::Vertical</enum>
+                                            </property>
+                                            <property name="sizeHint" stdset="0">
+                                             <size>
+                                              <width>20</width>
+                                              <height>40</height>
+                                             </size>
+                                            </property>
+                                           </spacer>
+                                          </item>
+                                          <item row="2" column="0">
+                                           <widget class="QLabel" name="test_merge_patches_label">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Calculate metrics when all the patches are merged. It can slightly vary from 'per patch' calculation&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Merge patches</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="0" column="0">
+                                           <widget class="QLabel" name="test_evaluate_label">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Whether to evaluate model metrics, i.e. test loss and test metric (which can be, for instance, the IoU in a semantic segmentation workflow)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Evaluate</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="0" column="1">
+                                           <widget class="QComboBox" name="TEST__EVALUATE__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <item>
+                                             <property name="text">
+                                              <string>Yes</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>No</string>
+                                             </property>
+                                            </item>
+                                           </widget>
+                                          </item>
+                                          <item row="1" column="0">
+                                           <widget class="QLabel" name="test_per_patch_label">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Calculate metrics per patch&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Per patch</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="1" column="1">
+                                           <widget class="QComboBox" name="TEST__STATS__PER_PATCH__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <item>
+                                             <property name="text">
+                                              <string>No</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>Yes</string>
+                                             </property>
+                                            </item>
+                                           </widget>
+                                          </item>
+                                          <item row="0" column="2">
+                                           <spacer name="horizontalSpacer_43">
+                                            <property name="orientation">
+                                             <enum>Qt::Horizontal</enum>
+                                            </property>
+                                            <property name="sizeHint" stdset="0">
+                                             <size>
+                                              <width>40</width>
+                                              <height>20</height>
+                                             </size>
+                                            </property>
+                                           </spacer>
+                                          </item>
+                                         </layout>
                                         </widget>
                                        </item>
-                                       <item row="6" column="0">
-                                        <widget class="QLabel" name="label_105">
-                                         <property name="font">
-                                          <font>
-                                           <family>DejaVu Math TeX Gyre</family>
-                                           <pointsize>12</pointsize>
-                                          </font>
+                                       <item row="9" column="0">
+                                        <widget class="QFrame" name="frame_55">
+                                         <property name="styleSheet">
+                                          <string notr="true">background: rgb(246,246,246);
+</string>
                                          </property>
-                                         <property name="text">
-                                          <string>Post-processing options</string>
+                                         <property name="frameShape">
+                                          <enum>QFrame::Box</enum>
                                          </property>
+                                         <property name="frameShadow">
+                                          <enum>QFrame::Raised</enum>
+                                         </property>
+                                         <layout class="QGridLayout" name="gridLayout_63">
+                                          <item row="0" column="1">
+                                           <widget class="QComboBox" name="TEST__POST_PROCESSING__APPLY_MASK__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <item>
+                                             <property name="text">
+                                              <string>No</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>Yes</string>
+                                             </property>
+                                            </item>
+                                           </widget>
+                                          </item>
+                                          <item row="0" column="0">
+                                           <widget class="QLabel" name="test_apply_bin_mask_label">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Apply a binary mask to remove possible segmentation outside it&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Apply binary mask</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="0" column="2">
+                                           <spacer name="horizontalSpacer_57">
+                                            <property name="orientation">
+                                             <enum>Qt::Horizontal</enum>
+                                            </property>
+                                            <property name="sizeHint" stdset="0">
+                                             <size>
+                                              <width>40</width>
+                                              <height>20</height>
+                                             </size>
+                                            </property>
+                                           </spacer>
+                                          </item>
+                                         </layout>
                                         </widget>
                                        </item>
-                                       <item row="0" column="0">
-                                        <widget class="QLabel" name="label_92">
-                                         <property name="font">
-                                          <font>
-                                           <family>DejaVu Math TeX Gyre</family>
-                                           <pointsize>12</pointsize>
-                                          </font>
-                                         </property>
-                                         <property name="text">
-                                          <string>Test phase</string>
-                                         </property>
-                                        </widget>
-                                       </item>
-                                       <item row="4" column="0" colspan="2">
+                                       <item row="6" column="0" colspan="2">
                                         <widget class="QFrame" name="frame_41">
                                          <property name="minimumSize">
                                           <size>
@@ -15594,321 +15926,69 @@ QPushButton:pressed {
                                          </layout>
                                         </widget>
                                        </item>
-                                       <item row="7" column="0">
-                                        <widget class="QFrame" name="frame_55">
-                                         <property name="styleSheet">
-                                          <string notr="true">background: rgb(246,246,246);
-</string>
+                                       <item row="0" column="0">
+                                        <widget class="QLabel" name="label_92">
+                                         <property name="font">
+                                          <font>
+                                           <family>DejaVu Math TeX Gyre</family>
+                                           <pointsize>12</pointsize>
+                                          </font>
                                          </property>
-                                         <property name="frameShape">
-                                          <enum>QFrame::Box</enum>
+                                         <property name="text">
+                                          <string>Test phase</string>
                                          </property>
-                                         <property name="frameShadow">
-                                          <enum>QFrame::Raised</enum>
-                                         </property>
-                                         <layout class="QGridLayout" name="gridLayout_63">
-                                          <item row="0" column="1">
-                                           <widget class="QComboBox" name="TEST__POST_PROCESSING__APPLY_MASK__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <item>
-                                             <property name="text">
-                                              <string>No</string>
-                                             </property>
-                                            </item>
-                                            <item>
-                                             <property name="text">
-                                              <string>Yes</string>
-                                             </property>
-                                            </item>
-                                           </widget>
-                                          </item>
-                                          <item row="0" column="0">
-                                           <widget class="QLabel" name="test_apply_bin_mask_label">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Apply a binary mask to remove possible segmentation outside it&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>Apply binary mask</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="0" column="2">
-                                           <spacer name="horizontalSpacer_57">
-                                            <property name="orientation">
-                                             <enum>Qt::Horizontal</enum>
-                                            </property>
-                                            <property name="sizeHint" stdset="0">
-                                             <size>
-                                              <width>40</width>
-                                              <height>20</height>
-                                             </size>
-                                            </property>
-                                           </spacer>
-                                          </item>
-                                         </layout>
                                         </widget>
                                        </item>
-                                       <item row="9" column="0">
-                                        <widget class="QFrame" name="frame_46">
-                                         <property name="minimumSize">
-                                          <size>
-                                           <width>0</width>
-                                           <height>0</height>
-                                          </size>
+                                       <item row="2" column="0">
+                                        <widget class="QLabel" name="process_by_chunks_label">
+                                         <property name="font">
+                                          <font>
+                                           <family>DejaVu Math TeX Gyre</family>
+                                           <pointsize>12</pointsize>
+                                          </font>
                                          </property>
-                                         <property name="styleSheet">
-                                          <string notr="true">background: rgb(246,246,246);
-</string>
+                                         <property name="text">
+                                          <string>Process by chunks </string>
                                          </property>
-                                         <property name="frameShape">
-                                          <enum>QFrame::Box</enum>
+                                        </widget>
+                                       </item>
+                                       <item row="4" column="0" rowspan="2" colspan="2">
+                                        <widget class="QLabel" name="label_89">
+                                         <property name="font">
+                                          <font>
+                                           <family>DejaVu Math TeX Gyre</family>
+                                           <pointsize>12</pointsize>
+                                          </font>
                                          </property>
-                                         <property name="frameShadow">
-                                          <enum>QFrame::Raised</enum>
+                                         <property name="text">
+                                          <string>Test data</string>
                                          </property>
-                                         <layout class="QGridLayout" name="gridLayout_54">
-                                          <item row="3" column="0">
-                                           <widget class="QLabel" name="test_full_image_label">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;To fed the network with the complete image instead of doing in patch by patch with 'per patch' and 'merge patches' options. It can only be done with 2D images, as the 3D ones can normally not be fit in the GPU &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>Full images</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="3" column="1">
-                                           <widget class="QComboBox" name="TEST__STATS__FULL_IMG__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <item>
-                                             <property name="text">
-                                              <string>Yes</string>
-                                             </property>
-                                            </item>
-                                            <item>
-                                             <property name="text">
-                                              <string>No</string>
-                                             </property>
-                                            </item>
-                                           </widget>
-                                          </item>
-                                          <item row="2" column="1">
-                                           <widget class="QComboBox" name="TEST__STATS__MERGE_PATCHES__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <item>
-                                             <property name="text">
-                                              <string>No</string>
-                                             </property>
-                                            </item>
-                                            <item>
-                                             <property name="text">
-                                              <string>Yes</string>
-                                             </property>
-                                            </item>
-                                           </widget>
-                                          </item>
-                                          <item row="4" column="0">
-                                           <spacer name="verticalSpacer_24">
-                                            <property name="orientation">
-                                             <enum>Qt::Vertical</enum>
-                                            </property>
-                                            <property name="sizeHint" stdset="0">
-                                             <size>
-                                              <width>20</width>
-                                              <height>40</height>
-                                             </size>
-                                            </property>
-                                           </spacer>
-                                          </item>
-                                          <item row="2" column="0">
-                                           <widget class="QLabel" name="test_merge_patches_label">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Calculate metrics when all the patches are merged. It can slightly vary from 'per patch' calculation&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>Merge patches</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="0" column="0">
-                                           <widget class="QLabel" name="test_evaluate_label">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Whether to evaluate model metrics, i.e. test loss and test metric (which can be, for instance, the IoU in a semantic segmentation workflow)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>Evaluate</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="0" column="1">
-                                           <widget class="QComboBox" name="TEST__EVALUATE__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <item>
-                                             <property name="text">
-                                              <string>Yes</string>
-                                             </property>
-                                            </item>
-                                            <item>
-                                             <property name="text">
-                                              <string>No</string>
-                                             </property>
-                                            </item>
-                                           </widget>
-                                          </item>
-                                          <item row="1" column="0">
-                                           <widget class="QLabel" name="test_per_patch_label">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Calculate metrics per patch&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>Per patch</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="1" column="1">
-                                           <widget class="QComboBox" name="TEST__STATS__PER_PATCH__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <item>
-                                             <property name="text">
-                                              <string>No</string>
-                                             </property>
-                                            </item>
-                                            <item>
-                                             <property name="text">
-                                              <string>Yes</string>
-                                             </property>
-                                            </item>
-                                           </widget>
-                                          </item>
-                                          <item row="0" column="2">
-                                           <spacer name="horizontalSpacer_43">
-                                            <property name="orientation">
-                                             <enum>Qt::Horizontal</enum>
-                                            </property>
-                                            <property name="sizeHint" stdset="0">
-                                             <size>
-                                              <width>40</width>
-                                              <height>20</height>
-                                             </size>
-                                            </property>
-                                           </spacer>
-                                          </item>
-                                         </layout>
+                                        </widget>
+                                       </item>
+                                       <item row="8" column="0">
+                                        <widget class="QLabel" name="label_105">
+                                         <property name="font">
+                                          <font>
+                                           <family>DejaVu Math TeX Gyre</family>
+                                           <pointsize>12</pointsize>
+                                          </font>
+                                         </property>
+                                         <property name="text">
+                                          <string>Post-processing options</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item row="10" column="0">
+                                        <widget class="QLabel" name="label_98">
+                                         <property name="font">
+                                          <font>
+                                           <family>DejaVu Math TeX Gyre</family>
+                                           <pointsize>12</pointsize>
+                                          </font>
+                                         </property>
+                                         <property name="text">
+                                          <string>Test metrics</string>
+                                         </property>
                                         </widget>
                                        </item>
                                        <item row="1" column="0">
@@ -15930,166 +16010,6 @@ QPushButton:pressed {
                                           <enum>QFrame::Raised</enum>
                                          </property>
                                          <layout class="QGridLayout" name="gridLayout_53">
-                                          <item row="0" column="0">
-                                           <widget class="QLabel" name="test_reduce_memory_label">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Tries to reduce the memory footprint by separating crop/merge operations (it is slower)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>Reduce memory</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="3" column="0">
-                                           <widget class="QLabel" name="test_tta_label">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Make test-time augmentation. Infer over 8 possible rotations for 2D img and 16 when 3D. This takes more time to produce each test samples but it should achieve more robust results&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>Test time augmentation</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="3" column="1">
-                                           <widget class="QComboBox" name="TEST__AUGMENTATION__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <item>
-                                             <property name="text">
-                                              <string>No</string>
-                                             </property>
-                                            </item>
-                                            <item>
-                                             <property name="text">
-                                              <string>Yes</string>
-                                             </property>
-                                            </item>
-                                           </widget>
-                                          </item>
-                                          <item row="4" column="1">
-                                           <widget class="QComboBox" name="TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <item>
-                                             <property name="text">
-                                              <string>No</string>
-                                             </property>
-                                            </item>
-                                            <item>
-                                             <property name="text">
-                                              <string>Yes</string>
-                                             </property>
-                                            </item>
-                                           </widget>
-                                          </item>
-                                          <item row="4" column="0">
-                                           <widget class="QLabel" name="test_2d_as_3d_stack_label">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Stack 2D images into a 3D image and then process it entirely instead of going image per image. This stacks images that have been merged with 'TEST.STATS.MERGE_PATCHES' = True or 'TEST.STATS.FULL_IMG' (priorizes this later)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>Analize 2D images as 3D stack</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="1" column="1">
-                                           <widget class="QComboBox" name="TEST__VERBOSE__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <item>
-                                             <property name="text">
-                                              <string>Yes</string>
-                                             </property>
-                                            </item>
-                                            <item>
-                                             <property name="text">
-                                              <string>No</string>
-                                             </property>
-                                            </item>
-                                           </widget>
-                                          </item>
-                                          <item row="1" column="0">
-                                           <widget class="QLabel" name="test_verbose_label">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Enable verbosity to print more detailed information&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>Verbose</string>
-                                            </property>
-                                           </widget>
-                                          </item>
                                           <item row="0" column="1">
                                            <widget class="QComboBox" name="TEST__REDUCE_MEMORY__INPUT">
                                             <property name="minimumSize">
@@ -16122,20 +16042,39 @@ QPushButton:pressed {
                                             </item>
                                            </widget>
                                           </item>
-                                          <item row="1" column="2">
-                                           <spacer name="horizontalSpacer_44">
-                                            <property name="orientation">
-                                             <enum>Qt::Horizontal</enum>
-                                            </property>
-                                            <property name="sizeHint" stdset="0">
+                                          <item row="5" column="1">
+                                           <widget class="QComboBox" name="TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INPUT">
+                                            <property name="minimumSize">
                                              <size>
-                                              <width>40</width>
-                                              <height>20</height>
+                                              <width>200</width>
+                                              <height>30</height>
                                              </size>
                                             </property>
-                                           </spacer>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <item>
+                                             <property name="text">
+                                              <string>No</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>Yes</string>
+                                             </property>
+                                            </item>
+                                           </widget>
                                           </item>
-                                          <item row="5" column="1">
+                                          <item row="6" column="1">
                                            <spacer name="verticalSpacer_25">
                                             <property name="orientation">
                                              <enum>Qt::Vertical</enum>
@@ -16148,20 +16087,458 @@ QPushButton:pressed {
                                             </property>
                                            </spacer>
                                           </item>
+                                          <item row="4" column="0">
+                                           <widget class="QLabel" name="test_tta_label">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Make test-time augmentation. Infer over 8 possible rotations for 2D img and 16 when 3D. This takes more time to produce each test samples but it should achieve more robust results&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Test time augmentation</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="2" column="0">
+                                           <widget class="QLabel" name="test_verbose_label">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Enable verbosity to print more detailed information&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Verbose</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="0" column="0">
+                                           <widget class="QLabel" name="test_reduce_memory_label">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Tries to reduce the memory footprint by separating crop/merge operations and by changing dtype of the predictions. It is slower and not as precise as the &amp;quot;normal&amp;quot; inference process but saves memory. In 'TEST.BY_CHUNKS' it will only save memory with the datatype change.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Reduce memory</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="4" column="1">
+                                           <widget class="QComboBox" name="TEST__AUGMENTATION__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <item>
+                                             <property name="text">
+                                              <string>No</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>Yes</string>
+                                             </property>
+                                            </item>
+                                           </widget>
+                                          </item>
+                                          <item row="5" column="0">
+                                           <widget class="QLabel" name="test_2d_as_3d_stack_label">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Stack 2D images into a 3D image and then process it entirely instead of going image per image. This stacks images that have been merged with 'TEST.STATS.MERGE_PATCHES' = True or 'TEST.STATS.FULL_IMG' (priorizes this later)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Analize 2D images as 3D stack</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="2" column="1">
+                                           <widget class="QComboBox" name="TEST__VERBOSE__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <item>
+                                             <property name="text">
+                                              <string>Yes</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>No</string>
+                                             </property>
+                                            </item>
+                                           </widget>
+                                          </item>
+                                          <item row="2" column="2">
+                                           <spacer name="horizontalSpacer_44">
+                                            <property name="orientation">
+                                             <enum>Qt::Horizontal</enum>
+                                            </property>
+                                            <property name="sizeHint" stdset="0">
+                                             <size>
+                                              <width>40</width>
+                                              <height>20</height>
+                                             </size>
+                                            </property>
+                                           </spacer>
+                                          </item>
+                                          <item row="1" column="1">
+                                           <widget class="QComboBox" name="TEST__BY_CHUNKS__ENABLE__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <item>
+                                             <property name="text">
+                                              <string>No</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>Yes</string>
+                                             </property>
+                                            </item>
+                                           </widget>
+                                          </item>
+                                          <item row="1" column="0">
+                                           <widget class="QLabel" name="TEST__BY_CHUNKS__ENABLE__LABEL">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;In the processing of 3D images, the primary image is segmented into smaller patches. These patches are subsequently passed through a computational network. The outcome is a new image, typically saved as a TIF file, that retains thedimensions of the original input. Notably, if the input image is sizable, this process can be memory-intensive. This is because the quantity of patches is contingent on both the dimensions of the input and the selected padding/overlap parameters (defined as 'DATA.TEST.PADDING' and 'DATA.TEST.OVERLAP'). To alleviate potential memory constraints, we offer an alternative: producing an H5/Zarr file with the predicted patches. This method ensures efficient memory usage, as patches are individually incorporated into the H5/Zarr file in their respective positions. This negates the need to store all patches simultaneously for image reconstruction. Importantly, in this approach, only the 'DATA.TEST.PADDING' parameter is considered, excluding 'DATA.TEST.OVERLAP', which sufficiently addresses border effect issues. If the source image is also an H5/Zarr file, it will be processed incrementally, further optimizing memory usage.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Process by chunks</string>
+                                            </property>
+                                           </widget>
+                                          </item>
                                          </layout>
                                         </widget>
                                        </item>
-                                       <item row="8" column="0">
-                                        <widget class="QLabel" name="label_98">
-                                         <property name="font">
-                                          <font>
-                                           <family>DejaVu Math TeX Gyre</family>
-                                           <pointsize>12</pointsize>
-                                          </font>
+                                       <item row="3" column="0">
+                                        <widget class="QFrame" name="process_by_chunks_frame">
+                                         <property name="styleSheet">
+                                          <string notr="true">background: rgb(246,246,246);
+</string>
                                          </property>
-                                         <property name="text">
-                                          <string>Test metrics</string>
+                                         <property name="frameShape">
+                                          <enum>QFrame::Box</enum>
                                          </property>
+                                         <property name="frameShadow">
+                                          <enum>QFrame::Raised</enum>
+                                         </property>
+                                         <layout class="QGridLayout" name="gridLayout_70">
+                                          <item row="5" column="1">
+                                           <widget class="QComboBox" name="TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <item>
+                                             <property name="text">
+                                              <string>chunk_by_chunk</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>entire_pred</string>
+                                             </property>
+                                            </item>
+                                           </widget>
+                                          </item>
+                                          <item row="1" column="0">
+                                           <widget class="QLabel" name="label_40">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;In the process of 'TEST.BY_CHUNKS' you can enable this variable to save the reconstructed prediction as a TIF too. Be aware of this option and be sure that the prediction can fit in you memory entirely, as it is needed for saving as TIF.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Save output tif</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="2" column="0">
+                                           <widget class="QLabel" name="label_54">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;In how many iterations the H5 writer needs to flush the data. No need to do so with Zarr files.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Flush data iterations</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="5" column="0">
+                                           <widget class="QLabel" name="TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__LABEL">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;How the workflow process is going to be done. There are two options:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;* 'chunk_by_chunk' : each chunk will be considered as an individual file. Select this operation if you have not enough memory to process the entire prediction image with 'entire_pred'.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;* 'entire_pred': the predicted image will be loaded in memory and processed entirely (be aware of your  memory budget)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Workflow process type</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="3" column="0">
+                                           <widget class="QLabel" name="label_56">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Whether if after reconstructing the prediction the pipeline will continue each workflow specific steps. For this process the prediction image needs to be loaded into memory so be sure that it can fit in you memory. E.g. in instance segmentation the instances will be created from the prediction.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Workflow process</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="0" column="0">
+                                           <widget class="QLabel" name="label_32">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Type of format used to write data. Options available: [&amp;quot;H5&amp;quot;, &amp;quot;Zarr&amp;quot;]&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Output format</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="3" column="1">
+                                           <widget class="QComboBox" name="TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <item>
+                                             <property name="text">
+                                              <string>No</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>Yes</string>
+                                             </property>
+                                            </item>
+                                           </widget>
+                                          </item>
+                                          <item row="1" column="1">
+                                           <widget class="QComboBox" name="TEST__BY_CHUNKS__SAVE_OUT_TIF__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <item>
+                                             <property name="text">
+                                              <string>No</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>Yes</string>
+                                             </property>
+                                            </item>
+                                           </widget>
+                                          </item>
+                                          <item row="2" column="1">
+                                           <widget class="QLineEdit" name="TEST__BY_CHUNKS__FLUSH_EACH__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>100</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="0" column="1">
+                                           <widget class="QComboBox" name="TEST__BY_CHUNKS__FORMAT__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <item>
+                                             <property name="text">
+                                              <string>H5</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>Zarr</string>
+                                             </property>
+                                            </item>
+                                           </widget>
+                                          </item>
+                                          <item row="0" column="2">
+                                           <spacer name="horizontalSpacer_55">
+                                            <property name="orientation">
+                                             <enum>Qt::Horizontal</enum>
+                                            </property>
+                                            <property name="sizeHint" stdset="0">
+                                             <size>
+                                              <width>40</width>
+                                              <height>20</height>
+                                             </size>
+                                            </property>
+                                           </spacer>
+                                          </item>
+                                         </layout>
                                         </widget>
                                        </item>
                                       </layout>
@@ -18643,7 +19020,7 @@ QPushButton:pressed {
                                        <x>0</x>
                                        <y>0</y>
                                        <width>913</width>
-                                       <height>804</height>
+                                       <height>912</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_47">
@@ -18793,8 +19170,8 @@ QPushButton:pressed {
                                          <enum>QFrame::Raised</enum>
                                         </property>
                                         <layout class="QGridLayout" name="gridLayout_62">
-                                         <item row="0" column="0">
-                                          <widget class="QLabel" name="det_local_max_coords_label">
+                                         <item row="3" column="0">
+                                          <widget class="QLabel" name="TEST__DET_BLOB_LOG_MAX_SIGMA__LABEL">
                                            <property name="font">
                                             <font>
                                              <family>DejaVu Math TeX Gyre</family>
@@ -18802,12 +19179,25 @@ QPushButton:pressed {
                                             </font>
                                            </property>
                                            <property name="toolTip">
-                                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Whether to return local maximum coords&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Corresponds to 'max_sigma' argument of 'blob_log' function. It is the maximum standard deviation for Gaussian kernel.  Keep this high to detect larger blobs. The standard deviations of the Gaussian filter are given for each axis as a sequence, or as a single number, in which case it is equal for all axes. Must be a positive integer.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                            </property>
                                            <property name="text">
-                                            <string>Local maximum coords</string>
+                                            <string>Blob_log - Maximum sigma</string>
                                            </property>
                                           </widget>
+                                         </item>
+                                         <item row="0" column="2">
+                                          <spacer name="horizontalSpacer_61">
+                                           <property name="orientation">
+                                            <enum>Qt::Horizontal</enum>
+                                           </property>
+                                           <property name="sizeHint" stdset="0">
+                                            <size>
+                                             <width>40</width>
+                                             <height>20</height>
+                                            </size>
+                                           </property>
+                                          </spacer>
                                          </item>
                                          <item row="1" column="1">
                                           <widget class="QLineEdit" name="TEST__DET_MIN_TH_TO_BE_PEAK__INPUT">
@@ -18843,15 +19233,31 @@ QPushButton:pressed {
                                             </font>
                                            </property>
                                            <property name="toolTip">
-                                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Minimun value to consider a point as a peak. Corresponds to 'threshold_abs' argument of the function 'peak_local_max' of skimage.feature&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Minimun value to consider a point as a peak. Corresponds to 'threshold_abs' argument of the function 'peak_local_max' of skimage.feature or 'threshold' argument of 'blob_log'. Must be a float between 0 and 1.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                            </property>
                                            <property name="text">
                                             <string>Min threshold to be peak</string>
                                            </property>
                                           </widget>
                                          </item>
+                                         <item row="2" column="0">
+                                          <widget class="QLabel" name="TEST__DET_BLOB_LOG_MIN_SIGMA__LABEL">
+                                           <property name="font">
+                                            <font>
+                                             <family>DejaVu Math TeX Gyre</family>
+                                             <pointsize>12</pointsize>
+                                            </font>
+                                           </property>
+                                           <property name="toolTip">
+                                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Corresponds to 'min_sigma' argument of 'blob_log' function. It is the minimum standard deviation for Gaussian kernel. Keep this low to detect smaller blobs. The standard deviations of the Gaussian filter are given for each axis as a sequence, or as a single number, in which case it is equal for all axes. Muste be a positive integer.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                           </property>
+                                           <property name="text">
+                                            <string>Blob_log - Minimum sigma</string>
+                                           </property>
+                                          </widget>
+                                         </item>
                                          <item row="0" column="1">
-                                          <widget class="QComboBox" name="TEST__DET_LOCAL_MAX_COORDS__INPUT">
+                                          <widget class="QComboBox" name="TEST__DET_POINT_CREATION_FUNCTION__INPUT">
                                            <property name="minimumSize">
                                             <size>
                                              <width>200</width>
@@ -18872,28 +19278,122 @@ QPushButton:pressed {
                                            </property>
                                            <item>
                                             <property name="text">
-                                             <string>Yes</string>
+                                             <string>peak_local_max</string>
                                             </property>
                                            </item>
                                            <item>
                                             <property name="text">
-                                             <string>No</string>
+                                             <string>blob_log</string>
                                             </property>
                                            </item>
                                           </widget>
                                          </item>
-                                         <item row="0" column="2">
-                                          <spacer name="horizontalSpacer_61">
-                                           <property name="orientation">
-                                            <enum>Qt::Horizontal</enum>
+                                         <item row="0" column="0">
+                                          <widget class="QLabel" name="TEST__DET_POINT_CREATION_FUNCTION__LABEL">
+                                           <property name="font">
+                                            <font>
+                                             <family>DejaVu Math TeX Gyre</family>
+                                             <pointsize>12</pointsize>
+                                            </font>
                                            </property>
-                                           <property name="sizeHint" stdset="0">
+                                           <property name="toolTip">
+                                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;To decide which function is going to be used to create point from probabilities. Options: ['peak_local_max', 'blob_log']:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;- 'peak_local_max': https://scikit-image.org/docs/stable/api/skimage.feature.html#skimage.feature.peak_local_max &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;- 'blob_log': https://scikit-image.org/docs/stable/api/skimage.feature.html#skimage.feature.blob_log&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                           </property>
+                                           <property name="text">
+                                            <string>Point creation function</string>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item row="4" column="0">
+                                          <widget class="QLabel" name="TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL">
+                                           <property name="font">
+                                            <font>
+                                             <family>DejaVu Math TeX Gyre</family>
+                                             <pointsize>12</pointsize>
+                                            </font>
+                                           </property>
+                                           <property name="toolTip">
+                                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Corresponds to 'num_sigma' argument of 'blob_log' function. The number of intermediate values of standard deviations to consider between min_sigma and max_sigma. Must be a positive integer.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                           </property>
+                                           <property name="text">
+                                            <string>Blob_log - Number values</string>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item row="2" column="1">
+                                          <widget class="QLineEdit" name="TEST__DET_BLOB_LOG_MIN_SIGMA__INPUT">
+                                           <property name="minimumSize">
                                             <size>
-                                             <width>40</width>
-                                             <height>20</height>
+                                             <width>200</width>
+                                             <height>30</height>
                                             </size>
                                            </property>
-                                          </spacer>
+                                           <property name="maximumSize">
+                                            <size>
+                                             <width>200</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="font">
+                                            <font>
+                                             <family>DejaVu Math TeX Gyre</family>
+                                             <pointsize>12</pointsize>
+                                            </font>
+                                           </property>
+                                           <property name="text">
+                                            <string>5</string>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item row="3" column="1">
+                                          <widget class="QLineEdit" name="TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT">
+                                           <property name="minimumSize">
+                                            <size>
+                                             <width>200</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="maximumSize">
+                                            <size>
+                                             <width>200</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="font">
+                                            <font>
+                                             <family>DejaVu Math TeX Gyre</family>
+                                             <pointsize>12</pointsize>
+                                            </font>
+                                           </property>
+                                           <property name="text">
+                                            <string>10</string>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item row="4" column="1">
+                                          <widget class="QLineEdit" name="TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT">
+                                           <property name="minimumSize">
+                                            <size>
+                                             <width>200</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="maximumSize">
+                                            <size>
+                                             <width>200</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="font">
+                                            <font>
+                                             <family>DejaVu Math TeX Gyre</family>
+                                             <pointsize>12</pointsize>
+                                            </font>
+                                           </property>
+                                           <property name="text">
+                                            <string>2</string>
+                                           </property>
+                                          </widget>
                                          </item>
                                         </layout>
                                        </widget>
@@ -19915,19 +20415,6 @@ QPushButton:pressed {
                            </widget>
                           </widget>
                          </item>
-                         <item row="1" column="0">
-                          <spacer name="verticalSpacer_12">
-                           <property name="orientation">
-                            <enum>Qt::Vertical</enum>
-                           </property>
-                           <property name="sizeHint" stdset="0">
-                            <size>
-                             <width>20</width>
-                             <height>40</height>
-                            </size>
-                           </property>
-                          </spacer>
-                         </item>
                         </layout>
                        </widget>
                       </widget>
@@ -20724,8 +21211,8 @@ QPushButton:pressed {
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>896</width>
-                               <height>101</height>
+                               <width>96</width>
+                               <height>26</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_32">

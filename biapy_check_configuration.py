@@ -1,4 +1,5 @@
-## Copied from BiaPy commit: d287a2c3c2c43d6f6df527622f02ac823c491f23
+## Copied from BiaPy commit: 9d290bc3ff45f031ceafe5f21bf1a22b6f40bc12
+
 import os
 import numpy as np
 import collections
@@ -196,7 +197,9 @@ def check_configuration(cfg, check_data_paths=True):
                 raise ValueError("'TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES' need to be set to 'circularity' filtering when 'TEST.POST_PROCESSING.DET_WATERSHED' is enabled")
             if cfg.TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES[0][0] != 'circularity': 
                 raise ValueError("'TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES' need to be set to 'circularity' filtering when 'TEST.POST_PROCESSING.DET_WATERSHED' is enabled")
-    
+        if cfg.TEST.DET_POINT_CREATION_FUNCTION not in ['peak_local_max', 'blob_log']:
+            raise ValueError("'TEST.DET_POINT_CREATION_FUNCTION' must be one between: ['peak_local_max', 'blob_log']")
+
     #### Super-resolution ####
     elif cfg.PROBLEM.TYPE == 'SUPER_RESOLUTION':
         if cfg.PROBLEM.SUPER_RESOLUTION.UPSCALING == 1:
@@ -221,7 +224,12 @@ def check_configuration(cfg, check_data_paths=True):
             raise ValueError("Denoising is made in an unsupervised way so there is no ground truth required. Disable 'DATA.TEST.LOAD_GT'")
         if not check_value(cfg.PROBLEM.DENOISING.N2V_PERC_PIX):
             raise ValueError("PROBLEM.DENOISING.N2V_PERC_PIX not in [0, 1] range")
-           
+            
+    #### Classification ####
+    elif cfg.PROBLEM.TYPE == 'CLASSIFICATION':
+        if cfg.TEST.BY_CHUNKS.ENABLE:
+            raise ValueError("'TEST.BY_CHUNKS.ENABLE' can not be activated for CLASSIFICATION workflow")
+
     ### Pre-processing ###
     if cfg.DATA.EXTRACT_RANDOM_PATCH and cfg.DATA.PROBABILITY_MAP:
         if cfg.DATA.W_FOREGROUND+cfg.DATA.W_BACKGROUND != 1:
@@ -243,6 +251,14 @@ def check_configuration(cfg, check_data_paths=True):
             raise ValueError("Test data not found: {}".format(cfg.DATA.TEST.PATH))
         if cfg.DATA.TEST.LOAD_GT and not os.path.exists(cfg.DATA.TEST.GT_PATH) and cfg.PROBLEM.TYPE not in ["CLASSIFICATION", "SELF_SUPERVISED"]:
             raise ValueError("Test data mask not found: {}".format(cfg.DATA.TEST.GT_PATH))
+    if cfg.TEST.BY_CHUNKS.ENABLE:
+        if cfg.PROBLEM.NDIM == '2D':
+            raise ValueError("'TEST.BY_CHUNKS' can not be activated when 'PROBLEM.NDIM' is 2D")
+        assert cfg.TEST.BY_CHUNKS.FORMAT.lower() in ["h5", "zarr"], "'TEST.BY_CHUNKS.FORMAT' needs to be one between ['H5', 'Zarr']"
+        opts.extend(['TEST.BY_CHUNKS.FORMAT', cfg.TEST.BY_CHUNKS.FORMAT.lower()])
+        if cfg.TEST.BY_CHUNKS.WORKFLOW_PROCESS.ENABLE:     
+            assert cfg.TEST.BY_CHUNKS.WORKFLOW_PROCESS.TYPE in ["chunk_by_chunk", "entire_pred"], \
+                "'TEST.BY_CHUNKS.WORKFLOW_PROCESS.TYPE' needs to be one between ['chunk_by_chunk', 'entire_pred']"
 
     if cfg.DATA.EXTRACT_RANDOM_PATCH and cfg.DATA.PROBABILITY_MAP:
         if not cfg.PROBLEM.TYPE == 'SEMANTIC_SEG':
@@ -314,7 +330,7 @@ def check_configuration(cfg, check_data_paths=True):
             if not os.path.exists(cfg.PATHS.MEAN_INFO_FILE) or not os.path.exists(cfg.PATHS.STD_INFO_FILE):
                 if not cfg.DATA.TRAIN.IN_MEMORY:
                     raise ValueError("If no 'DATA.NORMALIZATION.CUSTOM_MEAN' and 'DATA.NORMALIZATION.CUSTOM_STD' were provided "
-                        "when DATA.NORMALIZATION.TYPE == 'custom', DATA.TRAIN.IN_MEMORY need to be True")
+                        "when DATA.NORMALIZATION.TYPE == 'custom', DATA.TRAIN.IN_MEMORY needs to be True")
 
     ### Model ###
     assert model_arch in ['unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'simple_cnn', 'efficientnet_b0', 
@@ -355,7 +371,7 @@ def check_configuration(cfg, check_data_paths=True):
         any(x != 1 for x in cfg.MODEL.Z_DOWN):
         raise ValueError("'MODEL.Z_DOWN' != 1 not allowed in super-resolution workflow")
     elif any([False for x in cfg.MODEL.Z_DOWN if x != 1 and x != 2]):
-        raise ValueError("'MODEL.Z_DOWN' need to be 1 or 2")
+        raise ValueError("'MODEL.Z_DOWN' needs to be 1 or 2")
     else:
         if model_arch == 'multiresunet' and len(cfg.MODEL.Z_DOWN) != 4:
             raise ValueError("'MODEL.Z_DOWN' length must be 4 when using 'multiresunet'")
@@ -369,7 +385,7 @@ def check_configuration(cfg, check_data_paths=True):
         "Get unknown activation key {}".format(activation)
  
     if cfg.MODEL.UPSAMPLE_LAYER.lower() not in ["upsampling", "convtranspose"]:
-        raise ValueError("cfg.MODEL.UPSAMPLE_LAYER' need to be one between ['upsampling', 'convtranspose']. Provided {}"
+        raise ValueError("cfg.MODEL.UPSAMPLE_LAYER' needs to be one between ['upsampling', 'convtranspose']. Provided {}"
                           .format(cfg.MODEL.UPSAMPLE_LAYER))
     if cfg.PROBLEM.TYPE == "SEMANTIC_SEG" and model_arch not in ['unet', 'resunet', 'resunet++', 'attention_unet', \
         'multiresunet', 'seunet', 'unetr']:
@@ -388,10 +404,17 @@ def check_configuration(cfg, check_data_paths=True):
             if model_arch not in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']:
                 raise ValueError("Architectures available for 3D 'SUPER_RESOLUTION' are: ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']")
             assert cfg.MODEL.UNET_SR_UPSAMPLE_POSITION in ["pre", "post"], "'MODEL.UNET_SR_UPSAMPLE_POSITION' not in ['pre', 'post']"
+    if cfg.PROBLEM.TYPE == 'SELF_SUPERVISED':
+        if model_arch not in ['unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet',  
+            'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'vit', 'mae']:
+            raise ValueError("'SELF_SUPERVISED' models available are these: ['unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', " 
+                "'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'vit', 'mae']")
     if cfg.PROBLEM.TYPE == 'CLASSIFICATION' and model_arch not in ['simple_cnn', 'vit'] and \
         'efficientnet' not in model_arch:
         raise ValueError("Architectures available for 'CLASSIFICATION' are: ['simple_cnn', 'efficientnet_b[0-7]', 'vit']")
     if model_arch in ['unetr', 'vit', 'mae']:    
+        if model_arch == 'mae' and cfg.PROBLEM.TYPE != 'SELF_SUPERVISED':
+            raise ValueError("'mae' model can only be used in 'SELF_SUPERVISED' workflow")
         if cfg.MODEL.VIT_EMBED_DIM % cfg.MODEL.VIT_NUM_HEADS != 0:
             raise ValueError("'MODEL.VIT_EMBED_DIM' should be divisible by 'MODEL.VIT_NUM_HEADS'")
         if not all([i == cfg.DATA.PATCH_SIZE[0] for i in cfg.DATA.PATCH_SIZE[:-1]]):      
@@ -415,17 +438,17 @@ def check_configuration(cfg, check_data_paths=True):
         if cfg.TRAIN.LR_SCHEDULER.NAME not in ['reduceonplateau', 'warmupcosine', 'onecycle']:
             raise ValueError("'TRAIN.LR_SCHEDULER.NAME' must be one between ['reduceonplateau', 'warmupcosine', 'onecycle']")
         if cfg.TRAIN.LR_SCHEDULER.MIN_LR == -1. and cfg.TRAIN.LR_SCHEDULER.NAME != 'onecycle':
-            raise ValueError("'TRAIN.LR_SCHEDULER.MIN_LR' need to be set when 'TRAIN.LR_SCHEDULER.NAME' is between ['reduceonplateau', 'warmupcosine']")
+            raise ValueError("'TRAIN.LR_SCHEDULER.MIN_LR' needs to be set when 'TRAIN.LR_SCHEDULER.NAME' is between ['reduceonplateau', 'warmupcosine']")
 
         if cfg.TRAIN.LR_SCHEDULER.NAME == 'reduceonplateau':
             if cfg.TRAIN.LR_SCHEDULER.REDUCEONPLATEAU_PATIENCE == -1:
-                raise ValueError("'TRAIN.LR_SCHEDULER.REDUCEONPLATEAU_PATIENCE' need to be set when 'TRAIN.LR_SCHEDULER.NAME' is 'reduceonplateau'")
+                raise ValueError("'TRAIN.LR_SCHEDULER.REDUCEONPLATEAU_PATIENCE' needs to be set when 'TRAIN.LR_SCHEDULER.NAME' is 'reduceonplateau'")
             if cfg.TRAIN.LR_SCHEDULER.REDUCEONPLATEAU_PATIENCE >= cfg.TRAIN.PATIENCE:
-                raise ValueError("'TRAIN.LR_SCHEDULER.REDUCEONPLATEAU_PATIENCE' need to be less than 'TRAIN.PATIENCE' ")
+                raise ValueError("'TRAIN.LR_SCHEDULER.REDUCEONPLATEAU_PATIENCE' needs to be less than 'TRAIN.PATIENCE' ")
       
         if cfg.TRAIN.LR_SCHEDULER.NAME == 'warmupcosine':
             if cfg.TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_EPOCHS == -1:
-                raise ValueError("'TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_EPOCHS' need to be set when 'TRAIN.LR_SCHEDULER.NAME' is 'warmupcosine'")
+                raise ValueError("'TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_EPOCHS' needs to be set when 'TRAIN.LR_SCHEDULER.NAME' is 'warmupcosine'")
              
     #### Augmentation ####
     if cfg.AUGMENTOR.ENABLE:
@@ -433,10 +456,10 @@ def check_configuration(cfg, check_data_paths=True):
             raise ValueError("AUGMENTOR.DA_PROB not in [0, 1] range")
         if cfg.AUGMENTOR.RANDOM_ROT:
             if not check_value(cfg.AUGMENTOR.RANDOM_ROT_RANGE, (-360,360)):
-                raise ValueError("AUGMENTOR.RANDOM_ROT_RANGE values need to be between [-360,360]")
+                raise ValueError("AUGMENTOR.RANDOM_ROT_RANGE values needs to be between [-360,360]")
         if cfg.AUGMENTOR.SHEAR:
             if not check_value(cfg.AUGMENTOR.SHEAR_RANGE, (-360,360)):
-                raise ValueError("AUGMENTOR.SHEAR_RANGE values need to be between [-360,360]")
+                raise ValueError("AUGMENTOR.SHEAR_RANGE values needs to be between [-360,360]")
         if cfg.AUGMENTOR.ELASTIC:
             if cfg.AUGMENTOR.E_MODE not in ['constant', 'nearest', 'reflect', 'wrap']:
                 raise ValueError("AUGMENTOR.E_MODE not in ['constant', 'nearest', 'reflect', 'wrap']")

@@ -1572,20 +1572,6 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
-            "det_min_th_to_be_peak_label": 
-                {
-                    "TEST__DET_LOCAL_MAX_COORDS__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
-            "TEST__DET_MIN_TH_TO_BE_PEAK__INPUT": 
-                {
-                    "TEST__DET_LOCAL_MAX_COORDS__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
             "det_yz_filtering_size_label": 
                 {
                     "TEST__POST_PROCESSING__YZ_FILTERING__DET__INPUT": 
@@ -1808,6 +1794,20 @@ class Widget_conditions():
                         'UNETR', 
                     ],
                 }, 
+            "MODEL__MAE_MASK_RATIO__INPUT": 
+                {
+                    "MODEL__ARCHITECTURE__INPUT": 
+                    [
+                        'MAE', 
+                    ],
+                }, 
+            "MODEL__MAE_MASK_RATIO__LABEL": 
+                {
+                    "MODEL__ARCHITECTURE__INPUT": 
+                    [
+                        'MAE', 
+                    ],
+                },
             "MODEL__MAE_DEC_HIDDEN_SIZE__INPUT": 
                 {
                     "MODEL__ARCHITECTURE__INPUT": 
@@ -1857,13 +1857,6 @@ class Widget_conditions():
                         'MAE', 
                     ],
                 }, 
-            "MODEL__MAE_DEC_HIDDEN_SIZE__INPUT": 
-                {
-                    "MODEL__ARCHITECTURE__INPUT": 
-                    [
-                        'MAE', 
-                    ],
-                },
             "MODEL__MAE_DEC_MLP_DIMS__LABEL": 
                 {
                     "MODEL__ARCHITECTURE__INPUT": 
@@ -1871,7 +1864,79 @@ class Widget_conditions():
                         'MAE', 
                     ],
                 }, 
-    }
+            "process_by_chunks_label": 
+                {
+                    "TEST__BY_CHUNKS__ENABLE__INPUT": 
+                    [
+                        'Yes', 
+                    ],
+                }, 
+            "process_by_chunks_frame": 
+                {
+                    "TEST__BY_CHUNKS__ENABLE__INPUT": 
+                    [
+                        'Yes', 
+                    ],
+                },
+            "TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__LABEL": 
+                {
+                    "TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INPUT": 
+                    [
+                        'Yes', 
+                    ],
+                }, 
+            "TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INPUT": 
+                {
+                    "TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INPUT": 
+                    [
+                        'Yes', 
+                    ],
+                },
+            
+
+            "TEST__DET_BLOB_LOG_MIN_SIGMA__LABEL": 
+                {
+                    "TEST__DET_POINT_CREATION_FUNCTION__INPUT": 
+                    [
+                        'blob_log', 
+                    ],
+                },
+            "TEST__DET_BLOB_LOG_MIN_SIGMA__INPUT": 
+                {
+                    "TEST__DET_POINT_CREATION_FUNCTION__INPUT": 
+                    [
+                        'blob_log', 
+                    ],
+                },
+            "TEST__DET_BLOB_LOG_MAX_SIGMA__LABEL": 
+                {
+                    "TEST__DET_POINT_CREATION_FUNCTION__INPUT": 
+                    [
+                        'blob_log', 
+                    ],
+                },
+            "TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT": 
+                {
+                    "TEST__DET_POINT_CREATION_FUNCTION__INPUT": 
+                    [
+                        'blob_log', 
+                    ],
+                },
+            "TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL": 
+                {
+                    "TEST__DET_POINT_CREATION_FUNCTION__INPUT": 
+                    [
+                        'blob_log', 
+                    ],
+                },
+            "TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT": 
+                {
+                    "TEST__DET_POINT_CREATION_FUNCTION__INPUT": 
+                    [
+                        'blob_log', 
+                    ],
+                },
+    }   
 
     def combobox_hide_visible_action(self, main_window, list_of_widgets_to_update, widgets_to_set_cond=None, 
         widgets_to_set=None, updated_widget=None, frames_to_hide_if_empty=None):
