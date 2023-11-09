@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: 9d290bc3ff45f031ceafe5f21bf1a22b6f40bc12
+## Copied from BiaPy commit: 2469cdbfe2e14f83607d7c7b3d50bd05219cb65a
 
 import os
 from yacs.config import CfgNode as CN
@@ -104,7 +104,7 @@ class Config:
         # Radius to dilate the foreground mask
         _C.PROBLEM.INSTANCE_SEG.FORE_DILATION_RADIUS = 5
         # Whether to save watershed check files
-        _C.PROBLEM.INSTANCE_SEG.DATA_CHECK_MW = True
+        _C.PROBLEM.INSTANCE_SEG.DATA_CHECK_MW = False
         
         ### DETECTION
         _C.PROBLEM.DETECTION = CN()
@@ -112,7 +112,7 @@ class Config:
         _C.PROBLEM.DETECTION.CENTRAL_POINT_DILATION = 3
         _C.PROBLEM.DETECTION.CHECK_POINTS_CREATED = True
         # Whether to save watershed check files
-        _C.PROBLEM.DETECTION.DATA_CHECK_MW = True
+        _C.PROBLEM.DETECTION.DATA_CHECK_MW = False
 
         ### DENOISING
         # Based Noise2Void paper: https://arxiv.org/abs/1811.10980 
@@ -132,7 +132,8 @@ class Config:
 
         ### SUPER_RESOLUTION
         _C.PROBLEM.SUPER_RESOLUTION = CN()
-        _C.PROBLEM.SUPER_RESOLUTION.UPSCALING = 1
+        # Upscaling to be done to the input images. Options: [2, 4]
+        _C.PROBLEM.SUPER_RESOLUTION.UPSCALING = 2
 
         ### SELF_SUPERVISED
         _C.PROBLEM.SELF_SUPERVISED = CN()
@@ -263,7 +264,7 @@ class Config:
         # Number of the fold to choose as validation. Used when _C.DATA.VAL.CROSS_VAL == True
         _C.DATA.VAL.CROSS_VAL_FOLD = 1
         # Percentage of the training data used as validation. Used when _C.DATA.VAL.FROM_TRAIN = True and _C.DATA.VAL.CROSS_VAL == False
-        _C.DATA.VAL.SPLIT_TRAIN = 0.0
+        _C.DATA.VAL.SPLIT_TRAIN = 0.1
         # Create the validation data with random images of the training data. Used when _C.DATA.VAL.FROM_TRAIN = True
         _C.DATA.VAL.RANDOM = True
         # Used when _C.DATA.VAL.FROM_TRAIN = False, as DATA.VAL.FROM_TRAIN = True always implies DATA.VAL.IN_MEMORY = True
@@ -602,7 +603,7 @@ class Config:
         _C.TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_EPOCHS = -1
 
         # Callbacks
-        # To determine which value monitor to consider which epoch consider the best to save
+        # To determine which value monitor to consider which epoch consider the best to save. Currently not used.
         _C.TRAIN.CHECKPOINT_MONITOR = 'val_loss'
         # Add profiler callback to the training
         # _C.TRAIN.PROFILER = False
@@ -673,7 +674,6 @@ class Config:
         _C.TEST.MATCHING_STATS_THS = [0.3, 0.5, 0.75]
         # Decide in which thresholds to create a colored image of the TPs, FNs and FPs
         _C.TEST.MATCHING_STATS_THS_COLORED_IMG = [0.3]
-        _C.TEST.MATCHING_SEGCOMPARE = False
 
         ### Detection
         # To decide which function is going to be used to create point from probabilities. Options: ['peak_local_max', 'blob_log']

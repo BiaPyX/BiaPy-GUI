@@ -530,7 +530,7 @@ def create_yaml_file(main_window):
     cpus = get_text(main_window.ui.SYSTEM__NUM_CPUS__INPUT)
     cpus = -1 if cpus == "All" else int(cpus)
     biapy_config['SYSTEM']['NUM_CPUS'] = cpus
-    biapy_config['SYSTEM']['SEED'] = get_text(main_window.ui.seed_input)
+    biapy_config['SYSTEM']['SEED'] = int(get_text(main_window.ui.SYSTEM__SEED__INPUT))
 
     # Problem specification
     workflow_names_yaml = ['SEMANTIC_SEG', 'INSTANCE_SEG', 'DETECTION', 'DENOISING', 'SUPER_RESOLUTION', 
@@ -568,12 +568,13 @@ def create_yaml_file(main_window):
         else: # Distance map with background (experimental)
             problem_channels = 'Dv2'
         biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_CHANNELS'] = problem_channels
-        biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_CHANNEL_WEIGHTS'] = get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_CHANNELS_WEIGHTS__INPUT) 
+        if get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_CHANNEL_WEIGHTS__INPUT) != (1,1):
+            biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_CHANNEL_WEIGHTS'] = get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_CHANNEL_WEIGHTS__INPUT) 
         if get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__INPUT) != "thick":
             biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_CONTOUR_MODE'] = get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__INPUT)
-        biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_CHECK_MW'] = True if get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INPUT) == "Yes" else False
-        if get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT) == "Yes":
-            biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_TYPE'] = get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT)
+        if get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INPUT) == "Yes":
+            biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_CHECK_MW'] = True 
+        biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_TYPE'] = get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT)
         if 'B' in problem_channels:
             biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_BINARY_MASK'] = float(get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INPUT))
             biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_FOREGROUND'] = float(get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INPUT))
@@ -597,9 +598,6 @@ def create_yaml_file(main_window):
             biapy_config['PROBLEM']['INSTANCE_SEG']['FORE_EROSION_RADIUS'] = int(get_text(main_window.ui.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INPUT))
             biapy_config['PROBLEM']['INSTANCE_SEG']['FORE_DILATION_RADIUS'] = int(get_text(main_window.ui.PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INPUT))
 
-        # biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_OPTIMIZE_THS'] = False
-        # biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_CHECK_MW'] = True
-        
     ### DETECTION
     elif main_window.cfg.settings['selected_workflow'] == 2:
         biapy_config['PROBLEM']['DETECTION'] = {}
@@ -737,8 +735,9 @@ def create_yaml_file(main_window):
     if get_text(main_window.ui.AUGMENTOR__ENABLE__INPUT) == "Yes":
         biapy_config['AUGMENTOR']['ENABLE'] = True  
         biapy_config['AUGMENTOR']['DA_PROB'] = float(get_text(main_window.ui.AUGMENTOR__DA_PROB__INPUT))
-        biapy_config['AUGMENTOR']['AUG_SAMPLES'] = True if get_text(main_window.ui.AUGMENTOR__AUG_SAMPLES__INPUT) == "Yes" else False 
-        biapy_config['AUGMENTOR']['DRAW_GRID'] = True if get_text(main_window.ui.AUGMENTOR__DRAW_GRID__INPUT) == "Yes" else False 
+        biapy_config['AUGMENTOR']['AUG_SAMPLES'] = True if get_text(main_window.ui.AUGMENTOR__AUG_SAMPLES__INPUT) == "Yes" else False
+        if get_text(main_window.ui.AUGMENTOR__DRAW_GRID__INPUT) == "False": 
+            biapy_config['AUGMENTOR']['DRAW_GRID'] = False
         if int(get_text(main_window.ui.AUGMENTOR__AUG_NUM_SAMPLES__INPUT)) != 10:
             biapy_config['AUGMENTOR']['AUG_NUM_SAMPLES'] = int(get_text(main_window.ui.AUGMENTOR__AUG_NUM_SAMPLES__INPUT))
         biapy_config['AUGMENTOR']['SHUFFLE_TRAIN_DATA_EACH_EPOCH'] = True if get_text(main_window.ui.AUGMENTOR__SHUFFLE_TRAIN_DATA_EACH_EPOCH__INPUT) == "Yes" else False 
@@ -865,16 +864,18 @@ def create_yaml_file(main_window):
     if model_name in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet']:
         biapy_config['MODEL']['FEATURE_MAPS'] = ast.literal_eval(get_text(main_window.ui.MODEL__FEATURE_MAPS__INPUT))
         biapy_config['MODEL']['DROPOUT_VALUES'] = ast.literal_eval(get_text(main_window.ui.MODEL__DROPOUT_VALUES__INPUT)) 
-        biapy_config['MODEL']['BATCH_NORMALIZATION'] = True if get_text(main_window.ui.MODEL__BATCH_NORMALIZATION__INPUT) == "Yes" else False 
+        if get_text(main_window.ui.MODEL__BATCH_NORMALIZATION__INPUT) == "No":
+            biapy_config['MODEL']['BATCH_NORMALIZATION'] = False 
         if int(get_text(main_window.ui.MODEL__KERNEL_SIZE__INPUT)) != 3:
             biapy_config['MODEL']['KERNEL_SIZE'] = int(get_text(main_window.ui.MODEL__KERNEL_SIZE__INPUT))
         if get_text(main_window.ui.MODEL__UPSAMPLE_LAYER__INPUT) != "convtranspose":
             biapy_config['MODEL']['UPSAMPLE_LAYER'] = get_text(main_window.ui.MODEL__UPSAMPLE_LAYER__INPUT) 
-        if get_text(main_window.ui.MODEL__ACTIVATION__INPUT) != 'ELU':
+        if get_text(main_window.ui.MODEL__ACTIVATION__INPUT) != 'elu':
             biapy_config['MODEL']['ACTIVATION'] = get_text(main_window.ui.MODEL__ACTIVATION__INPUT)
         if get_text(main_window.ui.MODEL__LAST_ACTIVATION__INPUT) != 'sigmoid':
             biapy_config['MODEL']['LAST_ACTIVATION'] = get_text(main_window.ui.MODEL__LAST_ACTIVATION__INPUT)
-        biapy_config['MODEL']['N_CLASSES'] = int(get_text(main_window.ui.MODEL__N_CLASSES__INPUT))
+        if int(get_text(main_window.ui.MODEL__N_CLASSES__INPUT)) != 2:
+            biapy_config['MODEL']['N_CLASSES'] = int(get_text(main_window.ui.MODEL__N_CLASSES__INPUT))
         biapy_config['MODEL']['Z_DOWN'] = ast.literal_eval(get_text(main_window.ui.MODEL__Z_DOWN__INPUT)) 
         if main_window.cfg.settings['selected_workflow'] == 4 and get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "3D": # SR
             r = "pre" if get_text(main_window.ui.MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT) == "Before model" else "post"
@@ -907,7 +908,7 @@ def create_yaml_file(main_window):
         if get_text(main_window.ui.PATHS__CHECKPOINT_FILE__INPUT) != "":
             biapy_config['PATHS']['CHECKPOINT_FILE'] = get_text(main_window.ui.PATHS__CHECKPOINT_FILE__INPUT)
         if get_text(main_window.ui.MODEL__SAVE_CKPT_FREQ__INPUT) != -1:
-            biapy_config['MODEL']['SAVE_CKPT_FREQ'] = get_text(main_window.ui.MODEL__SAVE_CKPT_FREQ__INPUT)
+            biapy_config['MODEL']['SAVE_CKPT_FREQ'] = int(get_text(main_window.ui.MODEL__SAVE_CKPT_FREQ__INPUT))
         if get_text(main_window.ui.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT) != "best_on_val":
             biapy_config['MODEL']['LOAD_CHECKPOINT_EPOCH'] = get_text(main_window.ui.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT)
         if get_text(main_window.ui.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT) != "Yes":
@@ -955,9 +956,11 @@ def create_yaml_file(main_window):
     biapy_config['TEST'] = {}
     if get_text(main_window.ui.TEST__ENABLE__INPUT) == "Yes":    
         biapy_config['TEST']['ENABLE'] = True  
-        biapy_config['TEST']['REDUCE_MEMORY'] = True if get_text(main_window.ui.TEST__REDUCE_MEMORY__INPUT) == "Yes" else False 
-        biapy_config['TEST']['VERBOSE'] = True if get_text(main_window.ui.TEST__VERBOSE__INPUT) == "Yes" else False 
-        biapy_config['TEST']['AUGMENTATION'] = True if get_text(main_window.ui.TEST__AUGMENTATION__INPUT) == "Yes" else False
+        if get_text(main_window.ui.TEST__REDUCE_MEMORY__INPUT) == "Yes":
+            biapy_config['TEST']['REDUCE_MEMORY'] = True
+        biapy_config['TEST']['VERBOSE'] = True if get_text(main_window.ui.TEST__VERBOSE__INPUT) == "Yes" else False
+        if get_text(main_window.ui.TEST__AUGMENTATION__INPUT) == "Yes":
+            biapy_config['TEST']['AUGMENTATION'] = True 
         if get_text(main_window.ui.TEST__EVALUATE__INPUT) == "Yes" :
             biapy_config['TEST']['EVALUATE'] = True 
         if get_text(main_window.ui.TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INPUT) == "Yes" and get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "2D":
@@ -973,7 +976,8 @@ def create_yaml_file(main_window):
             biapy_config['TEST']['BY_CHUNKS'] = {}
             biapy_config['TEST']['BY_CHUNKS']['ENABLE'] = True
             biapy_config['TEST']['BY_CHUNKS']['FORMAT'] = get_text(main_window.ui.TEST__BY_CHUNKS__FORMAT__INPUT)
-            biapy_config['TEST']['BY_CHUNKS']['SAVE_OUT_TIF'] = True if get_text(main_window.ui.TEST__BY_CHUNKS__SAVE_OUT_TIF__INPUT) == "Yes" else False 
+            if get_text(main_window.ui.TEST__BY_CHUNKS__SAVE_OUT_TIF__INPUT) == "Yes":
+                biapy_config['TEST']['BY_CHUNKS']['SAVE_OUT_TIF'] = True  
             biapy_config['TEST']['BY_CHUNKS']['FLUSH_EACH'] = get_text(main_window.ui.TEST__BY_CHUNKS__FLUSH_EACH__INPUT)
             if get_text(main_window.ui.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INPUT) == "Yes":
                 biapy_config['TEST']['BY_CHUNKS']['WORKFLOW_PROCESS'] = {}
@@ -986,7 +990,6 @@ def create_yaml_file(main_window):
             biapy_config['TEST']['MATCHING_STATS_THS'] = ast.literal_eval(get_text(main_window.ui.TEST__MATCHING_STATS_THS__INPUT)) 
             if get_text(main_window.ui.TEST__MATCHING_STATS_THS_COLORED_IMG__INPUT) != "[0.3]":
                 biapy_config['TEST']['MATCHING_STATS_THS_COLORED_IMG'] = ast.literal_eval(get_text(main_window.ui.TEST__MATCHING_STATS_THS_COLORED_IMG__INPUT))
-            # biapy_config['TEST']['MATCHING_SEGCOMPARE'] = False 
 
         ### Detection
         elif main_window.cfg.settings['selected_workflow'] == 2:
@@ -1226,7 +1229,22 @@ class load_yaml_to_GUI_engine(QObject):
         self.main_window =  main_window
         self.yaml_file = yaml_file
         self.thread_queue = thread_queue
+        self.white_list = [
+            "DATA__VAL__CROSS_VAL__INPUT", "DATA__TEST__BINARY_MASKS__INPUT",
+            "DATA__TEST__DETECTION_MASK_DIR__INPUT", "DATA__TEST__INSTANCE_CHANNELS_DIR__INPUT",
+            "DATA__TEST__INSTANCE_CHANNELS_MASK_DIR__INPUT", "DATA__TEST__SSL_SOURCE_DIR__INPUT",
+            "DATA__TRAIN__DETECTION_MASK_DIR__INPUT", "DATA__TRAIN__INSTANCE_CHANNELS_DIR__INPUT",
+            "DATA__TRAIN__INSTANCE_CHANNELS_MASK_DIR__INPUT", "DATA__TRAIN__SSL_SOURCE_DIR__INPUT",
+            "DATA__VAL__BINARY_MASKS__INPUT", "DATA__VAL__DETECTION_MASK_DIR__INPUT",
+            "DATA__VAL__INSTANCE_CHANNELS_DIR__INPUT", "DATA__VAL__INSTANCE_CHANNELS_MASK_DIR__INPUT",
+            "DATA__VAL__SSL_SOURCE_DIR__INPUT", "LOG__CHART_CREATION_FREQ__INPUT", "LOG__LOG_DIR__INPUT",
+            "LOG__LOG_FILE_PREFIX__INPUT", "LOG__TENSORBOARD_LOG_DIR__INPUT", "SYSTEM__NUM_GPUS__INPUT",
 
+            # Not used or decided to not insert in GUI
+            "SYSTEM__PIN_MEM__INPUT", "TRAIN__CHECKPOINT_MONITOR__INPUT","DATA__VAL__DIST_EVAL__INPUT",
+            "MODEL__VIT_MODEL__INPUT"
+        ]
+        
     def run(self):
         """
         Process of loading YAML file into GUI.
@@ -1238,11 +1256,16 @@ class load_yaml_to_GUI_engine(QObject):
                 loaded_cfg = yaml.safe_load(stream)
             except yaml.YAMLError as exc:
                 print(exc)
-                self.error_signal.emit(f"Following error found when loading configuration file: {errors}", "error")
+                self.error_signal.emit(f"Following error found when loading configuration file: \n{exc}", "error")
                 self.state_signal.emit(1)
                 self.finished_signal.emit()
                 return 
-        print(loaded_cfg)
+        if loaded_cfg is None:
+            self.error_signal.emit(f"The input config file seems to be empty", "error")
+            self.state_signal.emit(1)
+            self.finished_signal.emit()
+            return  
+        print(f"Loaded: {loaded_cfg}")
 
         # Load configuration file and check possible errors
         tmp_cfg = Config("/home/","jobname")
@@ -1381,8 +1404,12 @@ class load_yaml_to_GUI_engine(QObject):
                     v = "Before model" if v == "pre" else "After model"
                 elif widget_name == "DATA__TRAIN__MINIMUM_FOREGROUND_PER__INPUT":
                     widget_name = "DATA__TRAIN__MINIMUM_FOREGROUND_PER__{}__INPUT".format(self.workflow_str)
+                elif widget_name == "TEST__POST_PROCESSING__YZ_FILTERING__INPUT":
+                    widget_name = "TEST__POST_PROCESSING__YZ_FILTERING__{}__INPUT".format(self.workflow_str)
                 elif widget_name == "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__INPUT":
                     widget_name = "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__{}__INPUT".format(self.workflow_str)
+                elif widget_name == "TEST__POST_PROCESSING__Z_FILTERING__INPUT":
+                    widget_name = "TEST__POST_PROCESSING__Z_FILTERING__{}__INPUT".format(self.workflow_str)
                 elif widget_name == "TEST__POST_PROCESSING__Z_FILTERING_SIZE__INPUT":
                     widget_name = "TEST__POST_PROCESSING__Z_FILTERING_SIZE__{}__INPUT".format(self.workflow_str)
                 elif widget_name == "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES__INPUT":
@@ -1391,8 +1418,12 @@ class load_yaml_to_GUI_engine(QObject):
                     widget_name = "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_VALUES__{}__INPUT".format(self.workflow_str)
                 elif widget_name == "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_SIGN__INPUT":
                     widget_name = "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_SIGN__{}__INPUT".format(self.workflow_str)
+                elif widget_name == "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__INPUT":
+                    widget_name = "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__{}__INPUT".format(self.workflow_str)
                 elif widget_name == "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INPUT":
                     widget_name = "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__{}__INPUT".format(self.workflow_str)
+                elif widget_name in ["MODEL__ACTIVATION__INPUT", "MODEL__UNETR_DEC_ACTIVATION__INPUT"]:
+                    v = v.lower()
 
                 # Set variable values
                 if set_var: 
@@ -1403,11 +1434,13 @@ class load_yaml_to_GUI_engine(QObject):
                     all_widgets_to_set_values += other_widgets_values_to_set
 
                     for x, y in zip(all_widgets_to_set, all_widgets_to_set_values):
+                        err = None
                         if hasattr(self.main_window.ui, x):
                             self.update_var_signal.emit(x, str(y))
                             err = self.thread_queue.get()
                         else:
-                            err = "{} widget does not exist".format(x)
+                            if x not in self.white_list and not x.startswith("PATHS__"):
+                                err = "{} widget does not exist".format(x)
 
                         if err is not None:
                             errors.append(err)

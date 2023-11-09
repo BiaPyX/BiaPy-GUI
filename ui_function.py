@@ -172,7 +172,7 @@ class UIFunction(MainWindow):
         main_window.ui.yes_no_diagram1_label.raise_()
         main_window.ui.yes_no_diagram2_label = QSvgWidget(resource_path(os.path.join("images","bn_images","yes_no_arrow.svg")), parent=main_window.ui.frame_6)
         main_window.ui.yes_no_diagram2_label.setObjectName(u"yes_no_diagram2_label")
-        main_window.ui.yes_no_diagram2_label.setGeometry(QRect(480, 60, 121, 120))
+        main_window.ui.yes_no_diagram2_label.setGeometry(QRect(480, 50, 121, 120))
         main_window.ui.yes_no_diagram2_label.setMinimumSize(QSize(121, 120))
         main_window.ui.yes_no_diagram2_label.setMaximumSize(QSize(121, 120))
         main_window.ui.yes_no_diagram2_label.raise_()

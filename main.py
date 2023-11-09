@@ -125,7 +125,7 @@ class MainWindow(QMainWindow):
         self.ui.workflow_view2_seemore_bn.clicked.connect(lambda: UIFunction.obtain_workflow_description(self))
 
         # General options page buttons
-        self.ui.seed_input.setValidator(self.int_validator)
+        self.ui.SYSTEM__SEED__INPUT.setValidator(self.int_validator)
         self.ui.MODEL__SAVE_CKPT_FREQ__INPUT.setValidator(self.int_validator)
         self.ui.PROBLEM__NDIM__INPUT.currentIndexChanged.connect(lambda: UIFunction.change_problem_dimensions(self, self.ui.PROBLEM__NDIM__INPUT.currentIndex()))
         UIFunction.change_problem_dimensions(self, 0)
@@ -215,7 +215,7 @@ class MainWindow(QMainWindow):
         self.ui.TEST__POST_PROCESSING__Z_FILTERING_SIZE__SEM_SEG__INPUT.setValidator(self.int_validator)
 
         self.ui.DATA__TRAIN__MINIMUM_FOREGROUND_PER__INST_SEG__INPUT.setValidator(self.float_validator)
-        self.ui.PROBLEM__INSTANCE_SEG__DATA_CHANNELS_WEIGHTS__INPUT.setValidator(self.two_pos_0_1_float_number_parenthesis_validator)
+        self.ui.PROBLEM__INSTANCE_SEG__DATA_CHANNEL_WEIGHTS__INPUT.setValidator(self.two_pos_0_1_float_number_parenthesis_validator)
         self.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INPUT.setValidator(self.float_validator)
         self.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INPUT.setValidator(self.float_validator)
         self.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INPUT.setValidator(self.large_range_float_validator)
@@ -694,41 +694,38 @@ if __name__ == "__main__":
         }
         """
 
-    try:
-        app = QApplication(sys.argv)
-        app.setWindowIcon(QIcon(resource_path(os.path.join("images","biapy_logo_icon.ico"))))
-        app.setStyleSheet(StyleSheet)
-        
-        # For disabling wheel in combo boxes
-        class WheelEventFilter(QtCore.QObject):
-            def eventFilter(self, obj, ev):
-                if obj.inherits("QComboBox") and ev.type() == QtCore.QEvent.Wheel:
-                    return True
-                return False
-        filter = WheelEventFilter()
-        app.installEventFilter(filter)
+    app = QApplication(sys.argv)
+    app.setWindowIcon(QIcon(resource_path(os.path.join("images","biapy_logo_icon.ico"))))
+    app.setStyleSheet(StyleSheet)
+    
+    # For disabling wheel in combo boxes
+    class WheelEventFilter(QtCore.QObject):
+        def eventFilter(self, obj, ev):
+            if obj.inherits("QComboBox") and ev.type() == QtCore.QEvent.Wheel:
+                return True
+            return False
+    filter = WheelEventFilter()
+    app.installEventFilter(filter)
 
-        window = MainWindow(log_file, log_dir)
-        window.show()
+    window = MainWindow(log_file, log_dir)
+    window.show()
 
-        # Center the main GUI in the middle of the first screen
-        all_screens = app.screens()
-        center_window(window, all_screens[0].availableGeometry())
+    # Center the main GUI in the middle of the first screen
+    all_screens = app.screens()
+    center_window(window, all_screens[0].availableGeometry())
 
-        app.exec_()
-    except KeyboardInterrupt:
-        print("KeyboardInterrupt")
-    except:
-        # Log the error
-        logger.exception("Main window error:")
-        logger.error(traceback.format_exc())
-        
-        # Advise the user for the error
-        error = dialog_Ui(window) if window is not None else dialog_Ui()
-        error.dialog_constrict(log_file, "main_window_error")
-        error.exec_()
-        
-        # Print the error in command line for debugging 
-        print("Logging into file: {}".format(log_file))
-        traceback.print_exc()
+    def excepthook(exc_type, exc_value, exc_tb):
+        tb = "".join(traceback.format_exception(exc_type, exc_value, exc_tb))
+        print("error message:\n", tb)
+        tb += f"\nYou can also provide the log error here: \n{log_file}\n"
+        tb += "\nExiting BiaPy as its functionality may be damaged!\n"
+
+        # Log the error in stderr
+        logger.error(" Main window error:\n"+"".join(traceback.format_exception(exc_type, exc_value, exc_tb)))
+
+        window.dialog_exec(f"Unexpected error. Please contact BiaPy developers with the following error: \n{tb}", "error")
+        QtWidgets.QApplication.quit()
+    sys.excepthook = excepthook
+
+    app.exec_()
 

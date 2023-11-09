@@ -289,7 +289,7 @@ color: white;
                 <number>0</number>
                </property>
                <property name="text">
-                <string>BiaPy (3.1.0) - BiaPy GUI (1.0.0)</string>
+                <string>Version 3.1.0 - GUI: 1.0.0</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -2639,7 +2639,7 @@ border-radius: 15px;
                        <property name="geometry">
                         <rect>
                          <x>620</x>
-                         <y>130</y>
+                         <y>35</y>
                          <width>200</width>
                          <height>40</height>
                         </rect>
@@ -2751,7 +2751,7 @@ background-color:#A9A9A9;
                        <property name="geometry">
                         <rect>
                          <x>620</x>
-                         <y>40</y>
+                         <y>120</y>
                          <width>200</width>
                          <height>40</height>
                         </rect>
@@ -2937,7 +2937,7 @@ border-radius: 15px;
                        </font>
                       </property>
                       <property name="currentIndex">
-                       <number>3</number>
+                       <number>1</number>
                       </property>
                       <widget class="QWidget" name="workflow_selection_page">
                        <property name="minimumSize">
@@ -4088,7 +4088,7 @@ QPushButton:pressed {
                                    <property name="geometry">
                                     <rect>
                                      <x>0</x>
-                                     <y>0</y>
+                                     <y>-58</y>
                                      <width>870</width>
                                      <height>248</height>
                                     </rect>
@@ -4225,7 +4225,7 @@ QPushButton:pressed {
                                         </widget>
                                        </item>
                                        <item row="3" column="2">
-                                        <widget class="QLineEdit" name="seed_input">
+                                        <widget class="QLineEdit" name="SYSTEM__SEED__INPUT">
                                          <property name="minimumSize">
                                           <size>
                                            <width>200</width>
@@ -5802,17 +5802,17 @@ QPushButton:pressed {
                                             </property>
                                             <item>
                                              <property name="text">
-                                              <string>ReLU</string>
+                                              <string>relu</string>
                                              </property>
                                             </item>
                                             <item>
                                              <property name="text">
-                                              <string>ELU</string>
+                                              <string>elu</string>
                                              </property>
                                             </item>
                                             <item>
                                              <property name="text">
-                                              <string>SELU</string>
+                                              <string>selu</string>
                                              </property>
                                             </item>
                                            </widget>
@@ -11172,153 +11172,7 @@ p, li { white-space: pre-wrap; }
                                           <enum>QFrame::Raised</enum>
                                          </property>
                                          <layout class="QGridLayout" name="gridLayout_29">
-                                          <item row="5" column="1">
-                                           <widget class="QLineEdit" name="TRAIN__ACCUM_ITER__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>1</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="5" column="0">
-                                           <widget class="QLabel" name="label_114">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;If memory or # gpus is limited, use this variable to maintain the effective batch size, which is batch_size (per gpu) * nodes * (gpus per node) * accum_iter. Must be a positive integer.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>Accumulate iterations</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="16" column="0">
-                                           <widget class="QLabel" name="lr_schel_warmupcosine_epochs_label">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Epochs to do the warming up in 'warmupcosine' scheduler. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>Warmup cosine decay epochs</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="2" column="0">
-                                           <widget class="QLabel" name="label_151">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Learning rate during training phase. The learning rate is a hyperparameter that controls how much to change the model in response to the estimated error each time the model weights are updated. Choosing the learning rate is challenging as a value too small may result in a long training process that could get stuck, whereas a value too large may result in learning a sub-optimal set of weights too fast or an unstable training process&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>Learning rate</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="3" column="1">
-                                           <widget class="QLineEdit" name="TRAIN__W_DECAY__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>0.004</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="3" column="0">
-                                           <widget class="QLabel" name="adamw_weight_decay_label">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Weight decay for AdamW optimizer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>Weight decay</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="22" column="0">
-                                           <widget class="QLabel" name="profiler_batch_range_label">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Batch range to be analyzed in the profiler. Must two positive integers separated by a comma.&lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt; E.g. (10, 100) means that the profiler will analise the batches from the 10th to the 100th &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>Profiler batch range</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="0" column="0">
-                                           <widget class="QLabel" name="label_143">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Optimizer to use during the model training.  Optimizers are algorithms or methods used to minimize an error function (the loss function) &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>Optimizer</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="22" column="1">
+                                          <item row="21" column="1">
                                            <widget class="QLineEdit" name="TRAIN__PROFILER_BATCH_RANGE__INPUT">
                                             <property name="minimumSize">
                                              <size>
@@ -11343,241 +11197,7 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                            </widget>
                                           </item>
-                                          <item row="19" column="0">
-                                           <widget class="QLabel" name="label_160">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; Whether to add profiler callback to the training &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>Profiler</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="19" column="1">
-                                           <widget class="QComboBox" name="TRAIN__PROFILER__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <item>
-                                             <property name="text">
-                                              <string>No</string>
-                                             </property>
-                                            </item>
-                                            <item>
-                                             <property name="text">
-                                              <string>Yes</string>
-                                             </property>
-                                            </item>
-                                           </widget>
-                                          </item>
-                                          <item row="14" column="1">
-                                           <widget class="QLineEdit" name="TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>0.5</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="13" column="1">
-                                           <widget class="QLineEdit" name="TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>-1</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="0" column="1">
-                                           <widget class="QComboBox" name="TRAIN__OPTIMIZER__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <item>
-                                             <property name="text">
-                                              <string>ADAM</string>
-                                             </property>
-                                            </item>
-                                            <item>
-                                             <property name="text">
-                                              <string>SGD</string>
-                                             </property>
-                                            </item>
-                                            <item>
-                                             <property name="text">
-                                              <string>ADAMW</string>
-                                             </property>
-                                            </item>
-                                           </widget>
-                                          </item>
-                                          <item row="16" column="1">
-                                           <widget class="QLineEdit" name="TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>-1</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="14" column="0">
-                                           <widget class="QLabel" name="lr_schel_reduce_on_plat_factor_label">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Factor by which the learning rate will be reduced in 'reduceonplateau' scheduler. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a float between 0 and 1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>Reduce on plateau factor</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="13" column="0">
-                                           <widget class="QLabel" name="lr_schel_reduce_on_plat_patience_label">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Number of epochs with no improvement after which learning rate will be reduced in 'reduceonplateau' scheduler. Need to be less than training patience otherwise it makes no sense. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>Reduce on plateau patience</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="23" column="0">
-                                           <spacer name="verticalSpacer_14">
-                                            <property name="orientation">
-                                             <enum>Qt::Vertical</enum>
-                                            </property>
-                                            <property name="sizeHint" stdset="0">
-                                             <size>
-                                              <width>20</width>
-                                              <height>40</height>
-                                             </size>
-                                            </property>
-                                           </spacer>
-                                          </item>
-                                          <item row="4" column="2">
-                                           <spacer name="horizontalSpacer_21">
-                                            <property name="orientation">
-                                             <enum>Qt::Horizontal</enum>
-                                            </property>
-                                            <property name="sizeHint" stdset="0">
-                                             <size>
-                                              <width>40</width>
-                                              <height>20</height>
-                                             </size>
-                                            </property>
-                                           </spacer>
-                                          </item>
-                                          <item row="4" column="0">
-                                           <widget class="QLabel" name="label_149">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Batch size of the training process. It is a hyperparameter that defines the number of samples to work through before updating the internal model parameters. This determines how many images will be loaded into the GPU at once so a high value will lead to a GPU memory error. Set it according to your GPU memory. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>Batch size</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="9" column="1">
+                                          <item row="8" column="1">
                                            <widget class="QComboBox" name="TRAIN__LR_SCHEDULER__NAME__INPUT">
                                             <property name="minimumSize">
                                              <size>
@@ -11619,8 +11239,211 @@ p, li { white-space: pre-wrap; }
                                             </item>
                                            </widget>
                                           </item>
-                                          <item row="11" column="1">
-                                           <widget class="QLineEdit" name="TRAIN__LR_SCHEDULER__MIN_LR__INPUT">
+                                          <item row="13" column="0">
+                                           <widget class="QLabel" name="lr_schel_reduce_on_plat_factor_label">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Factor by which the learning rate will be reduced in 'reduceonplateau' scheduler. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a float between 0 and 1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Reduce on plateau factor</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="3" column="0">
+                                           <widget class="QLabel" name="adamw_weight_decay_label">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Weight decay for AdamW optimizer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Weight decay</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="21" column="0">
+                                           <widget class="QLabel" name="profiler_batch_range_label">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Batch range to be analyzed in the profiler. Must two positive integers separated by a comma.&lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt; E.g. (10, 100) means that the profiler will analise the batches from the 10th to the 100th &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Profiler batch range</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="15" column="0">
+                                           <widget class="QLabel" name="lr_schel_warmupcosine_epochs_label">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Epochs to do the warming up in 'warmupcosine' scheduler. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Warmup cosine decay epochs</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="5" column="1">
+                                           <widget class="QLineEdit" name="TRAIN__ACCUM_ITER__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>1</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="0" column="1">
+                                           <widget class="QComboBox" name="TRAIN__OPTIMIZER__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <item>
+                                             <property name="text">
+                                              <string>ADAM</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>SGD</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>ADAMW</string>
+                                             </property>
+                                            </item>
+                                           </widget>
+                                          </item>
+                                          <item row="18" column="0">
+                                           <widget class="QLabel" name="label_160">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; Whether to add profiler callback to the training &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Profiler</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="2" column="0">
+                                           <widget class="QLabel" name="label_151">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Learning rate during training phase. The learning rate is a hyperparameter that controls how much to change the model in response to the estimated error each time the model weights are updated. Choosing the learning rate is challenging as a value too small may result in a long training process that could get stuck, whereas a value too large may result in learning a sub-optimal set of weights too fast or an unstable training process&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Learning rate</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="18" column="1">
+                                           <widget class="QComboBox" name="TRAIN__PROFILER__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <item>
+                                             <property name="text">
+                                              <string>No</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>Yes</string>
+                                             </property>
+                                            </item>
+                                           </widget>
+                                          </item>
+                                          <item row="4" column="2">
+                                           <spacer name="horizontalSpacer_21">
+                                            <property name="orientation">
+                                             <enum>Qt::Horizontal</enum>
+                                            </property>
+                                            <property name="sizeHint" stdset="0">
+                                             <size>
+                                              <width>40</width>
+                                              <height>20</height>
+                                             </size>
+                                            </property>
+                                           </spacer>
+                                          </item>
+                                          <item row="12" column="1">
+                                           <widget class="QLineEdit" name="TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT">
                                             <property name="minimumSize">
                                              <size>
                                               <width>200</width>
@@ -11644,24 +11467,8 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                            </widget>
                                           </item>
-                                          <item row="9" column="0">
-                                           <widget class="QLabel" name="label_162">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Set up a learning rate scheduler. A Learning rate scheduler is a predefined framework that adjusts the learning rate between epochs or iterations as the training progresses. Leave it with the first option blank to avoid applying it. Three options available: 'warmupcosine', 'reduceonplateau', 'onecycle'. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;- 'warmupcosine' refers to a cosine decay with a warm up consist in 2 phases: 1) a warm up phase which consists of increasing the learning rate from 'warmup cosine decay' to 'training learning rate' value by a factor during a certain number of epochs defined by 'warmup cosine decay hold epochs'; 2) after this will began the decay of the learning rate value using the cosine function. Find a detailed explanation in &lt;/span&gt;&lt;a href=&quot;https://scorrea92.medium.com/cosine-learning-rate-decay-e8b50aa455b &quot;&gt;&lt;span style=&quot; font-size:12pt; text-decoration: underline; color:#0000ff;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;- 'reduceonplateau' reduces the learning rate when a metric has stopped improving. Models often benefit from reducing the learning rate by a factor of 2-10 once learning stagnates. This callback monitors a quantity and if no improvement is seen for a 'patience' number of epochs, the learning rate is reduced.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;- 'onecycle', sets the learning rate of each parameter group according to the 1cycle learning rate policy. The 1cycle policy anneals the learning rate from an initial learning rate to some maximum learning rate and then from that maximum learning rate to some minimum learning rate much lower than the initial learning rate. This policy was initially described in the paper: &lt;/span&gt;&lt;a href=&quot;https://arxiv.org/abs/1708.07120&quot;&gt;&lt;span style=&quot; font-size:12pt; text-decoration: underline; color:#0000ff;&quot;&gt;&amp;quot;Super-Convergence: Very Fast Training of Neural Networks Using Large Learning Rates&amp;quot;&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string>Learning rate scheduler name</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="2" column="1">
-                                           <widget class="QLineEdit" name="TRAIN__LR__INPUT">
+                                          <item row="13" column="1">
+                                           <widget class="QLineEdit" name="TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT">
                                             <property name="minimumSize">
                                              <size>
                                               <width>200</width>
@@ -11681,23 +11488,32 @@ p, li { white-space: pre-wrap; }
                                              </font>
                                             </property>
                                             <property name="text">
-                                             <string>0.0001</string>
+                                             <string>0.5</string>
                                             </property>
                                            </widget>
                                           </item>
-                                          <item row="11" column="0">
-                                           <widget class="QLabel" name="lr_schel_min_lr_label">
+                                          <item row="3" column="1">
+                                           <widget class="QLineEdit" name="TRAIN__W_DECAY__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
                                             <property name="font">
                                              <font>
                                               <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Lower bound on the learning rate used in 'warmupcosine' and 'reduceonplateau'. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive float&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
                                             <property name="text">
-                                             <string>Minimum learning rate</string>
+                                             <string>0.004</string>
                                             </property>
                                            </widget>
                                           </item>
@@ -11723,6 +11539,47 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="text">
                                              <string>2</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="10" column="1">
+                                           <widget class="QLineEdit" name="TRAIN__LR_SCHEDULER__MIN_LR__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>-1</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="4" column="0">
+                                           <widget class="QLabel" name="label_149">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Batch size of the training process. It is a hyperparameter that defines the number of samples to work through before updating the internal model parameters. This determines how many images will be loaded into the GPU at once so a high value will lead to a GPU memory error. Set it according to your GPU memory. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Batch size</string>
                                             </property>
                                            </widget>
                                           </item>
@@ -11764,6 +11621,149 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="text">
                                              <string>-1</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="8" column="0">
+                                           <widget class="QLabel" name="label_162">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Set up a learning rate scheduler. A Learning rate scheduler is a predefined framework that adjusts the learning rate between epochs or iterations as the training progresses. Leave it with the first option blank to avoid applying it. Three options available: 'warmupcosine', 'reduceonplateau', 'onecycle'. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;- 'warmupcosine' refers to a cosine decay with a warm up consist in 2 phases: 1) a warm up phase which consists of increasing the learning rate from 'warmup cosine decay' to 'training learning rate' value by a factor during a certain number of epochs defined by 'warmup cosine decay hold epochs'; 2) after this will began the decay of the learning rate value using the cosine function. Find a detailed explanation in &lt;/span&gt;&lt;a href=&quot;https://scorrea92.medium.com/cosine-learning-rate-decay-e8b50aa455b &quot;&gt;&lt;span style=&quot; font-size:12pt; text-decoration: underline; color:#0000ff;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;- 'reduceonplateau' reduces the learning rate when a metric has stopped improving. Models often benefit from reducing the learning rate by a factor of 2-10 once learning stagnates. This callback monitors a quantity and if no improvement is seen for a 'patience' number of epochs, the learning rate is reduced.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;- 'onecycle', sets the learning rate of each parameter group according to the 1cycle learning rate policy. The 1cycle policy anneals the learning rate from an initial learning rate to some maximum learning rate and then from that maximum learning rate to some minimum learning rate much lower than the initial learning rate. This policy was initially described in the paper: &lt;/span&gt;&lt;a href=&quot;https://arxiv.org/abs/1708.07120&quot;&gt;&lt;span style=&quot; font-size:12pt; text-decoration: underline; color:#0000ff;&quot;&gt;&amp;quot;Super-Convergence: Very Fast Training of Neural Networks Using Large Learning Rates&amp;quot;&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Learning rate scheduler name</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="0" column="0">
+                                           <widget class="QLabel" name="label_143">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Optimizer to use during the model training.  Optimizers are algorithms or methods used to minimize an error function (the loss function) &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Optimizer</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="22" column="0">
+                                           <spacer name="verticalSpacer_14">
+                                            <property name="orientation">
+                                             <enum>Qt::Vertical</enum>
+                                            </property>
+                                            <property name="sizeHint" stdset="0">
+                                             <size>
+                                              <width>20</width>
+                                              <height>40</height>
+                                             </size>
+                                            </property>
+                                           </spacer>
+                                          </item>
+                                          <item row="12" column="0">
+                                           <widget class="QLabel" name="lr_schel_reduce_on_plat_patience_label">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Number of epochs with no improvement after which learning rate will be reduced in 'reduceonplateau' scheduler. Need to be less than training patience otherwise it makes no sense. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Reduce on plateau patience</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="5" column="0">
+                                           <widget class="QLabel" name="label_114">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;If memory or # gpus is limited, use this variable to maintain the effective batch size, which is batch_size (per gpu) * nodes * (gpus per node) * accum_iter. Must be a positive integer.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Accumulate iterations</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="2" column="1">
+                                           <widget class="QLineEdit" name="TRAIN__LR__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>0.0001</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="15" column="1">
+                                           <widget class="QLineEdit" name="TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>-1</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="10" column="0">
+                                           <widget class="QLabel" name="lr_schel_min_lr_label">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Lower bound on the learning rate used in 'warmupcosine' and 'reduceonplateau'. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive float&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string>Minimum learning rate</string>
                                             </property>
                                            </widget>
                                           </item>
@@ -12380,7 +12380,7 @@ QPushButton:pressed {
                                        </font>
                                       </property>
                                       <property name="text">
-                                       <string>0.2</string>
+                                       <string>0.1</string>
                                       </property>
                                      </widget>
                                     </item>
@@ -12874,7 +12874,7 @@ QPushButton:pressed {
                                    </font>
                                   </property>
                                   <property name="currentIndex">
-                                   <number>0</number>
+                                   <number>4</number>
                                   </property>
                                   <widget class="QWidget" name="train_workflow_specific_tab_semantic_seg_page">
                                    <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -13668,7 +13668,7 @@ QPushButton:pressed {
                                             </widget>
                                            </item>
                                            <item row="1" column="1">
-                                            <widget class="QLineEdit" name="PROBLEM__INSTANCE_SEG__DATA_CHANNELS_WEIGHTS__INPUT">
+                                            <widget class="QLineEdit" name="PROBLEM__INSTANCE_SEG__DATA_CHANNEL_WEIGHTS__INPUT">
                                              <property name="minimumSize">
                                               <size>
                                                <width>200</width>
@@ -14564,8 +14564,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>342</width>
-                                         <height>180</height>
+                                         <width>928</width>
+                                         <height>333</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_50">
@@ -14603,7 +14603,7 @@ QPushButton:pressed {
                                               </font>
                                              </property>
                                              <property name="toolTip">
-                                              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Times to upscale the input image to obtain the result&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Upscaling to be done to the input images. Options: [2, 4]&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                              </property>
                                              <property name="text">
                                               <string>Upscaling</string>
@@ -16515,12 +16515,12 @@ QPushButton:pressed {
                                             </property>
                                             <item>
                                              <property name="text">
-                                              <string>H5</string>
+                                              <string>h5</string>
                                              </property>
                                             </item>
                                             <item>
                                              <property name="text">
-                                              <string>Zarr</string>
+                                              <string>zarr</string>
                                              </property>
                                             </item>
                                            </widget>
@@ -17033,7 +17033,7 @@ QPushButton:pressed {
                               <item>
                                <widget class="QStackedWidget" name="test_workflow_specific_tab_stackedWidget">
                                 <property name="currentIndex">
-                                 <number>2</number>
+                                 <number>1</number>
                                 </property>
                                 <widget class="QWidget" name="test_workflow_specific_tab_semantic_seg_page">
                                  <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -17065,8 +17065,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>927</width>
-                                       <height>312</height>
+                                       <width>464</width>
+                                       <height>291</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_61">
@@ -17448,7 +17448,7 @@ QPushButton:pressed {
                                      <property name="geometry">
                                       <rect>
                                        <x>0</x>
-                                       <y>0</y>
+                                       <y>-943</y>
                                        <width>913</width>
                                        <height>1255</height>
                                       </rect>
@@ -18764,7 +18764,7 @@ QPushButton:pressed {
                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Whether to save watershed check files&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                            </property>
                                            <property name="text">
-                                            <string>Save watershed files</string>
+                                            <string>Check watershed data</string>
                                            </property>
                                           </widget>
                                          </item>
@@ -18848,7 +18848,7 @@ QPushButton:pressed {
                                           </spacer>
                                          </item>
                                          <item row="11" column="3">
-                                          <widget class="QComboBox" name="PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT_2">
+                                          <widget class="QComboBox" name="PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INPUT">
                                            <property name="minimumSize">
                                             <size>
                                              <width>200</width>
@@ -18869,12 +18869,12 @@ QPushButton:pressed {
                                            </property>
                                            <item>
                                             <property name="text">
-                                             <string>Yes</string>
+                                             <string>No</string>
                                             </property>
                                            </item>
                                            <item>
                                             <property name="text">
-                                             <string>No</string>
+                                             <string>Yes</string>
                                             </property>
                                            </item>
                                           </widget>
@@ -19962,12 +19962,12 @@ QPushButton:pressed {
                                            </property>
                                            <item>
                                             <property name="text">
-                                             <string>Yes</string>
+                                             <string>No</string>
                                             </property>
                                            </item>
                                            <item>
                                             <property name="text">
-                                             <string>No</string>
+                                             <string>Yes</string>
                                             </property>
                                            </item>
                                           </widget>
@@ -20118,8 +20118,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>927</width>
-                                       <height>312</height>
+                                       <width>372</width>
+                                       <height>44</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_64">
@@ -20198,8 +20198,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>927</width>
-                                       <height>312</height>
+                                       <width>426</width>
+                                       <height>44</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_65">
@@ -20278,8 +20278,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>927</width>
-                                       <height>312</height>
+                                       <width>488</width>
+                                       <height>44</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_66">
@@ -20358,8 +20358,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>927</width>
-                                       <height>312</height>
+                                       <width>399</width>
+                                       <height>44</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_67">

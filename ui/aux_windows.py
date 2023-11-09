@@ -195,7 +195,6 @@ class dialog_Ui(QDialog):
         self.dragPos = event.globalPos()
 
     def dialog_constrict(self, message, reason):
-        self.setFixedSize(self.width(), 235)
         self.dialog_window.window_des_label.setText("Error")
         self.dialog_window.icon_label.setPixmap(self.upbar_icon[0])
         if self.signals_created:
@@ -203,12 +202,7 @@ class dialog_Ui(QDialog):
         else:
             self.signals_created = True
         if reason is not None:
-            if reason == "main_window_error":
-                self.dialog_window.window_des_label.setText("Error")
-                self.dialog_window.error_message_label.setText("This error was not expected. Please contact BiaPy developers copying the output of the temporary file: {}".format(message))
-                self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"Close BiaPy GUI", None))
-                self.dialog_window.go_to_correct_bn.clicked.connect(self.close_all)
-            elif reason == "load_yaml_error":
+            if reason == "load_yaml_error":
                 self.dialog_window.window_des_label.setText("Error")
                 self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"OK", None))
                 self.dialog_window.error_message_label.setText("Configuration file not loaded because of the following errors:<br>{}".format(message))
@@ -224,6 +218,7 @@ class dialog_Ui(QDialog):
                 self.dialog_window.error_message_label.setText(m)
                 self.dialog_window.go_to_correct_bn.clicked.connect(self.close)
             elif reason in ["inform_user", "inform_user_and_go"]:
+                self.dialog_window.error_message_label.setWordWrap(True)
                 self.dialog_window.icon_label.setPixmap(self.upbar_icon[1])
                 self.dialog_window.window_des_label.setText("Information")
                 self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("OK", u"OK", None))
@@ -235,6 +230,7 @@ class dialog_Ui(QDialog):
                 self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"OK", None))
                 self.dialog_window.go_to_correct_bn.clicked.connect(self.close)
             else:
+                self.dialog_window.error_message_label.setWordWrap(True)
                 if reason == "docker_installation":
                     self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"OK", None))
                 else:
@@ -247,6 +243,7 @@ class dialog_Ui(QDialog):
             self.dialog_window.go_to_correct_bn.clicked.connect(self.close_all)
 
     def closeEvent(self, event):
+        self.dialog_window.error_message_label.setWordWrap(False)
         self.dialog_window.go_to_correct_bn.click()
 
     def close_all(self):
@@ -299,7 +296,8 @@ class spinner_Ui(QDialog):
         super(spinner_Ui, self).__init__()
         self.spinner_window = Ui_spinner()
         self.spinner_window.setupUi(self)
-        
+        self.parent = parent 
+
         # Create spinner 
         self.spinner = QtWaitingSpinner(parent, True, True)
         self.spinner.setRoundness(150.0)
@@ -324,5 +322,9 @@ class spinner_Ui(QDialog):
         self.spinner.start()
         
     def closeEvent(self, event):
+        try:
+            self.parent.worker_spin.state_signal.emit(1)
+        except Exception as e:
+            print(f"Possible expected error during closing spin window: {e}")
         self.spinner.stop()
         super().close()
