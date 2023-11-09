@@ -215,16 +215,17 @@ def change_page(main_window, buttonName, to_page):
 
     elif buttonName=='bn_run_biapy' or ('bn_' not in buttonName and to_page == 5):            
         error = False
+        created = False
         if ('bn_' not in buttonName and to_page == 5):
-            error = create_yaml_file(main_window)
-
+            error, created = create_yaml_file(main_window)
         # If there is an error do not make the movement, as the error dialog will redirect the user to the 
         # field that raises the error 
-        if not error:
+        if not error and created: 
             main_window.ui.stackedWidget.setCurrentWidget(main_window.ui.page_run_biapy)
             main_window.ui.frame_run_biapy.setStyleSheet("background:rgb(255,255,255)") 
             main_window.cfg.settings['page_number'] = 5
-
+        if not created:
+            main_window.cfg.settings['page_number'] -= 1    
     move_between_workflows(main_window, to_page)
 
 def set_workflow_page(main_window):
@@ -521,6 +522,14 @@ def create_yaml_file(main_window):
     ----------
     main_window : QMainWindow
         Main window of the application.
+
+    Returns
+    -------
+    errors : bool
+        True if there was an error during the config file creation.
+
+    created : bool
+        True if the YAML file was finally created.
     """       
     biapy_config = {}
 
@@ -1066,21 +1075,21 @@ def create_yaml_file(main_window):
     # Checking the directory
     if main_window.cfg.settings['yaml_config_file_path'] == "":
         main_window.dialog_exec("Configuration file path must be defined", "yaml_config_file_path")
-        return True
+        return True, False
     if not os.path.exists(main_window.cfg.settings['yaml_config_file_path']):
         main_window.dialog_exec("The directory '{}' where the configuration file is going to be saves does not exist."
             .format(main_window.cfg.settings['yaml_config_file_path']), "yaml_config_file_path")
-        return True
+        return True, False
 
     # Checking YAML file name
     main_window.cfg.settings['yaml_config_filename'] = get_text(main_window.ui.goptions_yaml_name_input)
     if main_window.cfg.settings['yaml_config_filename'] == "":
         main_window.dialog_exec("The configuration filename must be defined", "goptions_yaml_name_input")
-        return True
+        return True, False
     if not main_window.cfg.settings['yaml_config_filename'].endswith(".yaml") and not main_window.cfg.settings['yaml_config_filename'].endswith(".yml"):
         main_window.dialog_exec("The configuration filename '{}' must have .yaml or .yml extension. You should change it to: {}"\
             .format(main_window.cfg.settings['yaml_config_filename'], main_window.cfg.settings['yaml_config_filename']+".yaml"), "goptions_yaml_name_input")
-        return True
+        return True, False
 
     # Writing YAML file
     replace = True
@@ -1105,7 +1114,7 @@ def create_yaml_file(main_window):
         message = "Configuration file created:\n{}".format(os.path.normpath(os.path.join(main_window.cfg.settings['yaml_config_file_path'], main_window.cfg.settings['yaml_config_filename'])))
         main_window.dialog_exec(message, reason="inform_user")
             
-    return False
+    return False, replace
 
 def load_yaml_config(main_window, advise_user=False):
     """
