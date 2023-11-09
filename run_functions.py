@@ -406,8 +406,10 @@ class run_worker(QObject):
                 device_requests = None
 
             # Run container
+            # check_command = [ "python3", "-u", "-c", "'import torch; print(torch.cuda.is_available())'"]
             self.biapy_container = self.docker_client.containers.run(
                 self.container_name, 
+                # entrypoint=[ "/bin/bash", "-l", "-c" ],
                 command=command,
                 detach=True,
                 volumes=volumes,
@@ -455,7 +457,7 @@ class run_worker(QObject):
             for log in self.biapy_container.logs(stream=True):
                 l = log.decode("utf-8")
                 try:
-                    print(l.encode("utf-8") if self.windows_os else l)
+                    print(l.encode("utf-8") if self.windows_os else l, end="")
                 except: 
                     pass 
                 try:

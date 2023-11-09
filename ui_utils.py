@@ -215,7 +215,7 @@ def change_page(main_window, buttonName, to_page):
 
     elif buttonName=='bn_run_biapy' or ('bn_' not in buttonName and to_page == 5):            
         error = False
-        created = False
+        created = True
         if ('bn_' not in buttonName and to_page == 5):
             error, created = create_yaml_file(main_window)
         # If there is an error do not make the movement, as the error dialog will redirect the user to the 
@@ -455,6 +455,21 @@ def oninit_checks(main_window):
     # GPU check
     try:
         main_window.cfg.settings['GPUs'] = GPUtil.getGPUs()
+
+        # Find the container that
+        pos = -1
+        if len(main_window.cfg.settings['GPUs']) > 0:
+            driver_version = float(".".join(main_window.cfg.settings['GPUs'][0].driver.split('.')[:2]))
+            for i in range(len(main_window.cfg.settings['NVIDIA_driver_list'])):
+                pos = i
+                if driver_version < main_window.cfg.settings['NVIDIA_driver_list'][i]:
+                    break
+
+        main_window.cfg.settings['biapy_container_name'] = \
+            main_window.cfg.settings['biapy_container_basename'] + ":latest-"+str(main_window.cfg.settings['CUDA_version'][pos])
+        main_window.cfg.settings['biapy_container_size'] = main_window.cfg.settings['biapy_container_sizes'][pos]
+        print(f"Using {main_window.cfg.settings['biapy_container_name']} container")
+
     except Exception as gpu_check_error:
         main_window.cfg.settings['GPUs'] = []
         print(f"ERROR during driver check: {gpu_check_error}")

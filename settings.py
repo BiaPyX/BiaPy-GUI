@@ -25,9 +25,15 @@ class Settings():
         else: # Linux, macOS
             self.settings['user_host'] = str(os.getuid())+":"+str(os.getgid())
 
+        # CUDA version match to decide the container to donwload 
+        self.settings['NVIDIA_driver_list'] = [440.33, 520.61]
+        self.settings['CUDA_version'] = [10.2, 11.8]
+
         # BiaPy 
-        self.settings['biapy_container_name'] = "danifranco/biapy"
-        self.settings['biapy_container_size'] = "12.6GB"
+        self.settings['biapy_container_basename'] = "danifranco/biapy"
+        self.settings['biapy_container_name'] = self.settings['biapy_container_basename']+":latest-"+str(self.settings['CUDA_version'][-1])
+        self.settings['biapy_container_sizes'] = ["12.9GB", "12.9GB"]
+        self.settings['biapy_container_size'] = self.settings['biapy_container_sizes'][-1]
         self.settings['biapy_container_dockerfile'] = "https://raw.githubusercontent.com/danifranco/BiaPy/master/utils/env/Dockerfile"
         self.settings['yaml_config_file_path'] =''
         self.settings['yaml_config_filename'] = ''
