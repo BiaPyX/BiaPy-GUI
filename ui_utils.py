@@ -446,9 +446,8 @@ def oninit_checks(main_window):
 
         main_window.ui.docker_frame.setStyleSheet("#docker_frame { border: 3px solid green; border-radius: 25px;}\n#docker_frame:disabled {border: 3px solid rgb(169,169,169);}")
     else:
-        main_window.ui.docker_status_label.setText("Docker installation not found. Please, install it before running BiaPy in \
-                <a href=\"https://biapy.readthedocs.io/en/latest/get_started/installation.html#docker-installation/\">its documentation</a>. \
-                Once you have done that please restart this application.")
+        main_window.ui.docker_status_label.setText("Docker installation not found. Follow the \
+                <a href=\"https://biapy.readthedocs.io/en/latest/get_started/installation.html#docker-installation/\">documentation</a> to install it.")
         main_window.ui.docker_head_label.setText("Docker dependency error")
         main_window.ui.docker_frame.setStyleSheet("#docker_frame { border: 3px solid red; border-radius: 25px;}\n#docker_frame:disabled {border: 3px solid rgb(169,169,169);}")
 

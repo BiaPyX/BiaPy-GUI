@@ -112,13 +112,6 @@ class UIFunction(MainWindow):
         main_window.ui.biapy_citation_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","citation_icon.svg"))))
         main_window.ui.biapy_citation_bn.setIconSize(QSize(31, 31))
 
-        main_window.ui.biapy_github_ext_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","open_external_link.svg"))))
-        main_window.ui.biapy_forum_ext_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","open_external_link.svg"))))
-        main_window.ui.biapy_templates_ext_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","open_external_link.svg"))))
-        main_window.ui.biapy_doc_ext_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","open_external_link.svg"))))
-        main_window.ui.biapy_notebooks_ext_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","open_external_link.svg"))))
-        main_window.ui.biapy_citation_ext_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","open_external_link.svg"))))
-
         # Create docker logo and text here. This last is necessary to do it here and not in ui_main.py
         # because they are inserted in order 
         dockerlogo = QtCore.QFile(resource_path(os.path.join("images","docker_logo.svg")))
@@ -162,20 +155,6 @@ class UIFunction(MainWindow):
         main_window.ui.gpu_status_label.setWordWrap(True)
         main_window.ui.gpu_status_label.setOpenExternalLinks(True)
         main_window.ui.verticalLayout_33.addWidget(main_window.ui.gpu_status_label)
-
-        # yes no diagram svg
-        main_window.ui.yes_no_diagram1_label = QSvgWidget(resource_path(os.path.join("images","bn_images","yes_no_arrow.svg")), parent=main_window.ui.frame_6)
-        main_window.ui.yes_no_diagram1_label.setObjectName(u"yes_no_diagram1_label")
-        main_window.ui.yes_no_diagram1_label.setGeometry(QRect(180, 30, 121, 120))
-        main_window.ui.yes_no_diagram1_label.setMinimumSize(QSize(121, 120))
-        main_window.ui.yes_no_diagram1_label.setMaximumSize(QSize(121, 120))
-        main_window.ui.yes_no_diagram1_label.raise_()
-        main_window.ui.yes_no_diagram2_label = QSvgWidget(resource_path(os.path.join("images","bn_images","yes_no_arrow.svg")), parent=main_window.ui.frame_6)
-        main_window.ui.yes_no_diagram2_label.setObjectName(u"yes_no_diagram2_label")
-        main_window.ui.yes_no_diagram2_label.setGeometry(QRect(480, 50, 121, 120))
-        main_window.ui.yes_no_diagram2_label.setMinimumSize(QSize(121, 120))
-        main_window.ui.yes_no_diagram2_label.setMaximumSize(QSize(121, 120))
-        main_window.ui.yes_no_diagram2_label.raise_()
 
     ###############
     # Workflow page 
