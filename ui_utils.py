@@ -1101,9 +1101,8 @@ def create_yaml_file(main_window):
         main_window.dialog_exec("The configuration filename must be defined", "goptions_yaml_name_input")
         return True, False
     if not main_window.cfg.settings['yaml_config_filename'].endswith(".yaml") and not main_window.cfg.settings['yaml_config_filename'].endswith(".yml"):
-        main_window.dialog_exec("The configuration filename '{}' must have .yaml or .yml extension. You should change it to: {}"\
-            .format(main_window.cfg.settings['yaml_config_filename'], main_window.cfg.settings['yaml_config_filename']+".yaml"), "goptions_yaml_name_input")
-        return True, False
+        main_window.cfg.settings['yaml_config_filename'] = main_window.cfg.settings['yaml_config_filename']+".yaml"
+        set_text(main_window.ui.goptions_yaml_name_input, main_window.cfg.settings['yaml_config_filename'])
 
     # Writing YAML file
     replace = True

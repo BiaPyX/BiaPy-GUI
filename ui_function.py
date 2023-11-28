@@ -2,6 +2,7 @@ import os
 import sys
 import re
 import multiprocessing
+import datetime
 
 from PySide2.QtCore import  QSize, QFile 
 from PySide2.QtSvg import QSvgWidget
@@ -201,6 +202,9 @@ class UIFunction(MainWindow):
         main_window.ui.SYSTEM__NUM_CPUS__INPUT.addItem("All")
         for i in range(multiprocessing.cpu_count()):
             main_window.ui.SYSTEM__NUM_CPUS__INPUT.addItem(str(i+1))
+
+        time = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+        main_window.ui.goptions_yaml_name_input.setText("my_experiment_"+get_text(main_window.ui.PROBLEM__NDIM__INPUT)+"_"+time+".yaml")
 
     def change_problem_dimensions(main_window, idx):
         """
