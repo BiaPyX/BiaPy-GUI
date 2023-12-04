@@ -1385,7 +1385,7 @@ QPushButton:pressed {
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>0</number>
+                <number>1</number>
                </property>
                <widget class="QWidget" name="page_home">
                 <property name="styleSheet">
@@ -1516,7 +1516,7 @@ background-color:#D3D3D3;
                          </property>
                          <layout class="QVBoxLayout" name="verticalLayout_34">
                           <property name="spacing">
-                           <number>0</number>
+                           <number>10</number>
                           </property>
                           <property name="leftMargin">
                            <number>0</number>
@@ -1614,7 +1614,7 @@ background-color:#A9A9A9;
                          </property>
                          <layout class="QVBoxLayout" name="verticalLayout_15">
                           <property name="spacing">
-                           <number>0</number>
+                           <number>10</number>
                           </property>
                           <property name="leftMargin">
                            <number>0</number>
@@ -1724,7 +1724,7 @@ background-color:#A9A9A9;
                          </property>
                          <layout class="QVBoxLayout" name="verticalLayout_35">
                           <property name="spacing">
-                           <number>0</number>
+                           <number>10</number>
                           </property>
                           <property name="leftMargin">
                            <number>0</number>
@@ -1822,7 +1822,7 @@ background-color:#A9A9A9;
                          </property>
                          <layout class="QVBoxLayout" name="verticalLayout_36">
                           <property name="spacing">
-                           <number>0</number>
+                           <number>10</number>
                           </property>
                           <property name="leftMargin">
                            <number>0</number>
@@ -1920,7 +1920,7 @@ background-color:#A9A9A9;
                          </property>
                          <layout class="QVBoxLayout" name="verticalLayout_37">
                           <property name="spacing">
-                           <number>0</number>
+                           <number>10</number>
                           </property>
                           <property name="leftMargin">
                            <number>0</number>
@@ -2018,7 +2018,7 @@ background-color:#A9A9A9;
                          </property>
                          <layout class="QVBoxLayout" name="verticalLayout_38">
                           <property name="spacing">
-                           <number>0</number>
+                           <number>10</number>
                           </property>
                           <property name="leftMargin">
                            <number>0</number>
@@ -2621,7 +2621,7 @@ background-color:#A9A9A9;
                        </font>
                       </property>
                       <property name="currentIndex">
-                       <number>2</number>
+                       <number>0</number>
                       </property>
                       <widget class="QWidget" name="workflow_selection_page">
                        <property name="minimumSize">
@@ -2635,7 +2635,7 @@ background-color:#A9A9A9;
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>951</width>
+                          <width>954</width>
                           <height>440</height>
                          </rect>
                         </property>
@@ -2651,38 +2651,29 @@ background-color:#A9A9A9;
                         <property name="frameShadow">
                          <enum>QFrame::Raised</enum>
                         </property>
-                        <layout class="QHBoxLayout" name="horizontalLayout_3">
-                         <property name="spacing">
-                          <number>0</number>
+                        <widget class="QPushButton" name="left_arrow_bn">
+                         <property name="geometry">
+                          <rect>
+                           <x>5</x>
+                           <y>195</y>
+                           <width>30</width>
+                           <height>50</height>
+                          </rect>
                          </property>
-                         <property name="leftMargin">
-                          <number>0</number>
+                         <property name="maximumSize">
+                          <size>
+                           <width>30</width>
+                           <height>50</height>
+                          </size>
                          </property>
-                         <property name="topMargin">
-                          <number>0</number>
+                         <property name="font">
+                          <font>
+                           <family>DejaVu Math TeX Gyre</family>
+                           <pointsize>12</pointsize>
+                          </font>
                          </property>
-                         <property name="rightMargin">
-                          <number>0</number>
-                         </property>
-                         <property name="bottomMargin">
-                          <number>0</number>
-                         </property>
-                         <item>
-                          <widget class="QPushButton" name="left_arrow_bn">
-                           <property name="maximumSize">
-                            <size>
-                             <width>30</width>
-                             <height>50</height>
-                            </size>
-                           </property>
-                           <property name="font">
-                            <font>
-                             <family>DejaVu Math TeX Gyre</family>
-                             <pointsize>12</pointsize>
-                            </font>
-                           </property>
-                           <property name="styleSheet">
-                            <string notr="true">QPushButton {
+                         <property name="styleSheet">
+                          <string notr="true">QPushButton {
 	border: none;
 	background-color: rgba(0,0,0,0);
 }
@@ -2692,325 +2683,162 @@ QPushButton:hover {
 QPushButton:pressed {	
 	border: 2px solid rgb(0, 0, 0);
 }</string>
-                           </property>
-                           <property name="text">
-                            <string/>
-                           </property>
-                           <property name="icon">
-                            <iconset>
-                             <normaloff>images/bn_images/left_arrow.svg</normaloff>images/bn_images/left_arrow.svg</iconset>
-                           </property>
-                           <property name="iconSize">
-                            <size>
-                             <width>32</width>
-                             <height>32</height>
-                            </size>
-                           </property>
-                          </widget>
-                         </item>
-                         <item>
-                          <widget class="QFrame" name="frame_17">
-                           <property name="minimumSize">
-                            <size>
-                             <width>0</width>
-                             <height>0</height>
-                            </size>
-                           </property>
-                           <property name="maximumSize">
-                            <size>
-                             <width>10</width>
-                             <height>16777215</height>
-                            </size>
-                           </property>
-                           <property name="font">
-                            <font>
-                             <family>DejaVu Math TeX Gyre</family>
-                             <pointsize>12</pointsize>
-                            </font>
-                           </property>
-                           <property name="frameShape">
-                            <enum>QFrame::NoFrame</enum>
-                           </property>
-                           <property name="frameShadow">
-                            <enum>QFrame::Raised</enum>
-                           </property>
-                          </widget>
-                         </item>
-                         <item>
-                          <widget class="QFrame" name="workflow_view1_frame">
-                           <property name="maximumSize">
-                            <size>
-                             <width>267</width>
-                             <height>16777215</height>
-                            </size>
-                           </property>
-                           <property name="font">
-                            <font>
-                             <family>DejaVu Math TeX Gyre</family>
-                             <pointsize>12</pointsize>
-                            </font>
-                           </property>
-                           <property name="styleSheet">
-                            <string notr="true">background:rgb(240,240,240);
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="icon">
+                          <iconset>
+                           <normaloff>images/bn_images/left_arrow.svg</normaloff>images/bn_images/left_arrow.svg</iconset>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>32</width>
+                           <height>32</height>
+                          </size>
+                         </property>
+                        </widget>
+                        <widget class="QFrame" name="workflow_view1_frame">
+                         <property name="geometry">
+                          <rect>
+                           <x>35</x>
+                           <y>0</y>
+                           <width>267</width>
+                           <height>440</height>
+                          </rect>
+                         </property>
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>267</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>DejaVu Math TeX Gyre</family>
+                           <pointsize>12</pointsize>
+                          </font>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">background:rgb(240,240,240);
 border-radius: 25px;		</string>
-                           </property>
-                           <property name="frameShape">
-                            <enum>QFrame::NoFrame</enum>
-                           </property>
-                           <property name="frameShadow">
-                            <enum>QFrame::Raised</enum>
-                           </property>
-                           <layout class="QVBoxLayout" name="verticalLayout_29">
-                            <property name="spacing">
-                             <number>0</number>
+                         </property>
+                         <property name="frameShape">
+                          <enum>QFrame::NoFrame</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_29">
+                          <property name="spacing">
+                           <number>6</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>17</number>
+                          </property>
+                          <item>
+                           <spacer name="verticalSpacer_34">
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
                             </property>
-                            <property name="topMargin">
-                             <number>17</number>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>20</width>
+                              <height>40</height>
+                             </size>
                             </property>
-                            <item>
-                             <spacer name="verticalSpacer_34">
-                              <property name="orientation">
-                               <enum>Qt::Vertical</enum>
-                              </property>
-                              <property name="sizeHint" stdset="0">
-                               <size>
-                                <width>20</width>
-                                <height>40</height>
-                               </size>
-                              </property>
-                             </spacer>
-                            </item>
-                            <item>
-                             <widget class="QLabel" name="workflow_view1_label">
-                              <property name="maximumSize">
-                               <size>
-                                <width>250</width>
-                                <height>250</height>
-                               </size>
-                              </property>
-                              <property name="font">
-                               <font>
-                                <family>DejaVu Math TeX Gyre</family>
-                                <pointsize>12</pointsize>
-                               </font>
-                              </property>
-                              <property name="frameShape">
-                               <enum>QFrame::NoFrame</enum>
-                              </property>
-                              <property name="text">
-                               <string/>
-                              </property>
-                              <property name="alignment">
-                               <set>Qt::AlignCenter</set>
-                              </property>
-                             </widget>
-                            </item>
-                            <item>
-                             <spacer name="verticalSpacer_33">
-                              <property name="orientation">
-                               <enum>Qt::Vertical</enum>
-                              </property>
-                              <property name="sizeHint" stdset="0">
-                               <size>
-                                <width>20</width>
-                                <height>40</height>
-                               </size>
-                              </property>
-                             </spacer>
-                            </item>
-                            <item>
-                             <widget class="QLabel" name="workflow_view1_name_label">
-                              <property name="maximumSize">
-                               <size>
-                                <width>16777215</width>
-                                <height>16777215</height>
-                               </size>
-                              </property>
-                              <property name="font">
-                               <font>
-                                <family>DejaVu Math TeX Gyre</family>
-                                <pointsize>12</pointsize>
-                               </font>
-                              </property>
-                              <property name="text">
-                               <string>TextLabel</string>
-                              </property>
-                              <property name="alignment">
-                               <set>Qt::AlignCenter</set>
-                              </property>
-                             </widget>
-                            </item>
-                            <item>
-                             <spacer name="verticalSpacer_39">
-                              <property name="orientation">
-                               <enum>Qt::Vertical</enum>
-                              </property>
-                              <property name="sizeHint" stdset="0">
-                               <size>
-                                <width>20</width>
-                                <height>40</height>
-                               </size>
-                              </property>
-                             </spacer>
-                            </item>
-                           </layout>
-                          </widget>
-                         </item>
-                         <item>
-                          <widget class="QFrame" name="workflow_mid_separator1_frame">
-                           <property name="minimumSize">
-                            <size>
-                             <width>0</width>
-                             <height>0</height>
-                            </size>
-                           </property>
-                           <property name="maximumSize">
-                            <size>
-                             <width>30</width>
-                             <height>16777215</height>
-                            </size>
-                           </property>
-                           <property name="font">
-                            <font>
-                             <family>DejaVu Math TeX Gyre</family>
-                             <pointsize>12</pointsize>
-                            </font>
-                           </property>
-                           <property name="frameShape">
-                            <enum>QFrame::NoFrame</enum>
-                           </property>
-                           <property name="frameShadow">
-                            <enum>QFrame::Raised</enum>
-                           </property>
-                          </widget>
-                         </item>
-                         <item>
-                          <widget class="QFrame" name="workflow_view2_frame">
-                           <property name="minimumSize">
-                            <size>
-                             <width>0</width>
-                             <height>0</height>
-                            </size>
-                           </property>
-                           <property name="maximumSize">
-                            <size>
-                             <width>267</width>
-                             <height>16777215</height>
-                            </size>
-                           </property>
-                           <property name="font">
-                            <font>
-                             <family>DejaVu Math TeX Gyre</family>
-                             <pointsize>12</pointsize>
-                            </font>
-                           </property>
-                           <property name="styleSheet">
-                            <string notr="true">#workflow_view2_frame {
-border: 5px solid rgb(64,144,253);
-border-radius: 25px;
-}</string>
-                           </property>
-                           <property name="frameShape">
-                            <enum>QFrame::NoFrame</enum>
-                           </property>
-                           <property name="frameShadow">
-                            <enum>QFrame::Raised</enum>
-                           </property>
-                           <layout class="QVBoxLayout" name="verticalLayout_30">
-                            <property name="topMargin">
-                             <number>0</number>
+                           </spacer>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="workflow_view1_label">
+                            <property name="maximumSize">
+                             <size>
+                              <width>250</width>
+                              <height>250</height>
+                             </size>
                             </property>
-                            <item>
-                             <spacer name="verticalSpacer_36">
-                              <property name="orientation">
-                               <enum>Qt::Vertical</enum>
-                              </property>
-                              <property name="sizeHint" stdset="0">
-                               <size>
-                                <width>20</width>
-                                <height>40</height>
-                               </size>
-                              </property>
-                             </spacer>
-                            </item>
-                            <item>
-                             <widget class="QLabel" name="workflow_view2_label">
-                              <property name="maximumSize">
-                               <size>
-                                <width>250</width>
-                                <height>250</height>
-                               </size>
-                              </property>
-                              <property name="font">
-                               <font>
-                                <family>DejaVu Math TeX Gyre</family>
-                                <pointsize>12</pointsize>
-                               </font>
-                              </property>
-                              <property name="frameShape">
-                               <enum>QFrame::NoFrame</enum>
-                              </property>
-                              <property name="text">
-                               <string/>
-                              </property>
-                              <property name="alignment">
-                               <set>Qt::AlignCenter</set>
-                              </property>
-                             </widget>
-                            </item>
-                            <item>
-                             <widget class="QFrame" name="frame_59">
-                              <property name="frameShape">
-                               <enum>QFrame::NoFrame</enum>
-                              </property>
-                              <property name="frameShadow">
-                               <enum>QFrame::Raised</enum>
-                              </property>
-                              <layout class="QHBoxLayout" name="horizontalLayout_22">
-                               <property name="spacing">
-                                <number>0</number>
+                            <property name="font">
+                             <font>
+                              <family>DejaVu Math TeX Gyre</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="frameShape">
+                             <enum>QFrame::NoFrame</enum>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QFrame" name="frame_17">
+                            <property name="frameShape">
+                             <enum>QFrame::NoFrame</enum>
+                            </property>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                            <layout class="QHBoxLayout" name="horizontalLayout_3">
+                             <property name="spacing">
+                              <number>0</number>
+                             </property>
+                             <property name="leftMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="topMargin">
+                              <number>4</number>
+                             </property>
+                             <property name="rightMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="bottomMargin">
+                              <number>0</number>
+                             </property>
+                             <item>
+                              <spacer name="horizontalSpacer_68">
+                               <property name="orientation">
+                                <enum>Qt::Horizontal</enum>
                                </property>
-                               <property name="leftMargin">
-                                <number>0</number>
+                               <property name="sizeHint" stdset="0">
+                                <size>
+                                 <width>106</width>
+                                 <height>20</height>
+                                </size>
                                </property>
-                               <property name="topMargin">
-                                <number>4</number>
+                              </spacer>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="workflow_view1_seemore_bn">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>140</width>
+                                 <height>30</height>
+                                </size>
                                </property>
-                               <property name="rightMargin">
-                                <number>0</number>
+                               <property name="font">
+                                <font>
+                                 <family>DejaVu Math TeX Gyre</family>
+                                 <pointsize>11</pointsize>
+                                </font>
                                </property>
-                               <property name="bottomMargin">
-                                <number>0</number>
-                               </property>
-                               <item>
-                                <spacer name="horizontalSpacer_62">
-                                 <property name="orientation">
-                                  <enum>Qt::Horizontal</enum>
-                                 </property>
-                                 <property name="sizeHint" stdset="0">
-                                  <size>
-                                   <width>40</width>
-                                   <height>20</height>
-                                  </size>
-                                 </property>
-                                </spacer>
-                               </item>
-                               <item>
-                                <widget class="QPushButton" name="workflow_view2_seemore_bn">
-                                 <property name="minimumSize">
-                                  <size>
-                                   <width>140</width>
-                                   <height>30</height>
-                                  </size>
-                                 </property>
-                                 <property name="font">
-                                  <font>
-                                   <family>DejaVu Math TeX Gyre</family>
-                                   <pointsize>11</pointsize>
-                                  </font>
-                                 </property>
-                                 <property name="styleSheet">
-                                  <string notr="true">QPushButton {
+                               <property name="styleSheet">
+                                <string notr="true">QPushButton {
 	border: none;
 	background-color: rgb(255,255,255);
 	border-radius: 15px;
@@ -3024,258 +2852,495 @@ QPushButton:pressed {
 	background-color: rgb(255,255,255);
 	border: 2px solid rgb(0, 0, 0);
 }</string>
-                                 </property>
-                                 <property name="text">
-                                  <string>Learn more . . .</string>
-                                 </property>
-                                </widget>
-                               </item>
-                              </layout>
-                             </widget>
-                            </item>
-                            <item>
-                             <spacer name="verticalSpacer_35">
-                              <property name="orientation">
-                               <enum>Qt::Vertical</enum>
-                              </property>
-                              <property name="sizeHint" stdset="0">
-                               <size>
-                                <width>20</width>
-                                <height>40</height>
-                               </size>
-                              </property>
-                             </spacer>
-                            </item>
-                            <item>
-                             <widget class="QLabel" name="workflow_view2_name_label">
-                              <property name="maximumSize">
-                               <size>
-                                <width>16777215</width>
-                                <height>16777215</height>
-                               </size>
-                              </property>
-                              <property name="font">
-                               <font>
-                                <family>DejaVu Math TeX Gyre</family>
-                                <pointsize>12</pointsize>
-                               </font>
-                              </property>
-                              <property name="text">
-                               <string>TextLabel</string>
-                              </property>
-                              <property name="alignment">
-                               <set>Qt::AlignCenter</set>
-                              </property>
-                             </widget>
-                            </item>
-                            <item>
-                             <spacer name="verticalSpacer_40">
-                              <property name="orientation">
-                               <enum>Qt::Vertical</enum>
-                              </property>
-                              <property name="sizeHint" stdset="0">
-                               <size>
-                                <width>20</width>
-                                <height>40</height>
-                               </size>
-                              </property>
-                             </spacer>
-                            </item>
-                           </layout>
-                          </widget>
-                         </item>
-                         <item>
-                          <widget class="QFrame" name="workflow_mid_separator2_frame">
-                           <property name="minimumSize">
-                            <size>
-                             <width>0</width>
-                             <height>0</height>
-                            </size>
-                           </property>
-                           <property name="maximumSize">
-                            <size>
-                             <width>30</width>
-                             <height>16777215</height>
-                            </size>
-                           </property>
-                           <property name="font">
-                            <font>
-                             <family>DejaVu Math TeX Gyre</family>
-                             <pointsize>12</pointsize>
-                            </font>
-                           </property>
-                           <property name="frameShape">
-                            <enum>QFrame::NoFrame</enum>
-                           </property>
-                           <property name="frameShadow">
-                            <enum>QFrame::Raised</enum>
-                           </property>
-                          </widget>
-                         </item>
-                         <item>
-                          <widget class="QFrame" name="workflow_view3_frame">
-                           <property name="maximumSize">
-                            <size>
-                             <width>267</width>
-                             <height>16777215</height>
-                            </size>
-                           </property>
-                           <property name="font">
-                            <font>
-                             <family>DejaVu Math TeX Gyre</family>
-                             <pointsize>12</pointsize>
-                            </font>
-                           </property>
-                           <property name="styleSheet">
-                            <string notr="true">background:rgb(240,240,240);
+                               </property>
+                               <property name="text">
+                                <string>Learn more . . .</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </widget>
+                          </item>
+                          <item>
+                           <spacer name="verticalSpacer_33">
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>20</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                           </spacer>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="workflow_view1_name_label">
+                            <property name="maximumSize">
+                             <size>
+                              <width>16777215</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>DejaVu Math TeX Gyre</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>TextLabel</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <spacer name="verticalSpacer_39">
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>20</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                           </spacer>
+                          </item>
+                         </layout>
+                        </widget>
+                        <widget class="QFrame" name="workflow_view2_frame">
+                         <property name="geometry">
+                          <rect>
+                           <x>340</x>
+                           <y>0</y>
+                           <width>267</width>
+                           <height>440</height>
+                          </rect>
+                         </property>
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>267</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>DejaVu Math TeX Gyre</family>
+                           <pointsize>12</pointsize>
+                          </font>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">#workflow_view2_frame {
+border: 5px solid rgb(64,144,253);
+border-radius: 25px;
+}</string>
+                         </property>
+                         <property name="frameShape">
+                          <enum>QFrame::NoFrame</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_30">
+                          <property name="topMargin">
+                           <number>17</number>
+                          </property>
+                          <item>
+                           <spacer name="verticalSpacer_36">
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>20</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                           </spacer>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="workflow_view2_label">
+                            <property name="maximumSize">
+                             <size>
+                              <width>250</width>
+                              <height>250</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>DejaVu Math TeX Gyre</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="frameShape">
+                             <enum>QFrame::NoFrame</enum>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QFrame" name="frame_59">
+                            <property name="frameShape">
+                             <enum>QFrame::NoFrame</enum>
+                            </property>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                            <layout class="QHBoxLayout" name="horizontalLayout_22">
+                             <property name="spacing">
+                              <number>0</number>
+                             </property>
+                             <property name="leftMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="topMargin">
+                              <number>4</number>
+                             </property>
+                             <property name="rightMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="bottomMargin">
+                              <number>0</number>
+                             </property>
+                             <item>
+                              <spacer name="horizontalSpacer_62">
+                               <property name="orientation">
+                                <enum>Qt::Horizontal</enum>
+                               </property>
+                               <property name="sizeHint" stdset="0">
+                                <size>
+                                 <width>40</width>
+                                 <height>20</height>
+                                </size>
+                               </property>
+                              </spacer>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="workflow_view2_seemore_bn">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>140</width>
+                                 <height>30</height>
+                                </size>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <family>DejaVu Math TeX Gyre</family>
+                                 <pointsize>11</pointsize>
+                                </font>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">QPushButton {
+	border: none;
+	background-color: rgb(255,255,255);
+	border-radius: 15px;
+   border: 2px solid rgb(0, 0, 0);
+}
+QPushButton:hover {
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}
+QPushButton:pressed {	
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}</string>
+                               </property>
+                               <property name="text">
+                                <string>Learn more . . .</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </widget>
+                          </item>
+                          <item>
+                           <spacer name="verticalSpacer_35">
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>20</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                           </spacer>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="workflow_view2_name_label">
+                            <property name="maximumSize">
+                             <size>
+                              <width>16777215</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>DejaVu Math TeX Gyre</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>TextLabel</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <spacer name="verticalSpacer_40">
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>20</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                           </spacer>
+                          </item>
+                         </layout>
+                        </widget>
+                        <widget class="QFrame" name="workflow_view3_frame">
+                         <property name="geometry">
+                          <rect>
+                           <x>645</x>
+                           <y>0</y>
+                           <width>267</width>
+                           <height>440</height>
+                          </rect>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>267</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>DejaVu Math TeX Gyre</family>
+                           <pointsize>12</pointsize>
+                          </font>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">background:rgb(240,240,240);
 border-radius: 25px;		</string>
-                           </property>
-                           <property name="frameShape">
-                            <enum>QFrame::NoFrame</enum>
-                           </property>
-                           <property name="frameShadow">
-                            <enum>QFrame::Raised</enum>
-                           </property>
-                           <layout class="QVBoxLayout" name="verticalLayout_31">
-                            <property name="spacing">
-                             <number>0</number>
+                         </property>
+                         <property name="frameShape">
+                          <enum>QFrame::NoFrame</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_31">
+                          <property name="spacing">
+                           <number>6</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>17</number>
+                          </property>
+                          <item>
+                           <spacer name="verticalSpacer_37">
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
                             </property>
-                            <property name="topMargin">
-                             <number>17</number>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>20</width>
+                              <height>40</height>
+                             </size>
                             </property>
-                            <item>
-                             <spacer name="verticalSpacer_37">
-                              <property name="orientation">
-                               <enum>Qt::Vertical</enum>
-                              </property>
-                              <property name="sizeHint" stdset="0">
-                               <size>
-                                <width>20</width>
-                                <height>40</height>
-                               </size>
-                              </property>
-                             </spacer>
-                            </item>
-                            <item>
-                             <widget class="QLabel" name="workflow_view3_label">
-                              <property name="maximumSize">
-                               <size>
-                                <width>250</width>
-                                <height>250</height>
-                               </size>
-                              </property>
-                              <property name="font">
-                               <font>
-                                <family>DejaVu Math TeX Gyre</family>
-                                <pointsize>12</pointsize>
-                               </font>
-                              </property>
-                              <property name="frameShape">
-                               <enum>QFrame::NoFrame</enum>
-                              </property>
-                              <property name="text">
-                               <string/>
-                              </property>
-                              <property name="alignment">
-                               <set>Qt::AlignCenter</set>
-                              </property>
-                             </widget>
-                            </item>
-                            <item>
-                             <spacer name="verticalSpacer_38">
-                              <property name="orientation">
-                               <enum>Qt::Vertical</enum>
-                              </property>
-                              <property name="sizeHint" stdset="0">
-                               <size>
-                                <width>20</width>
-                                <height>40</height>
-                               </size>
-                              </property>
-                             </spacer>
-                            </item>
-                            <item>
-                             <widget class="QLabel" name="workflow_view3_name_label">
-                              <property name="maximumSize">
-                               <size>
-                                <width>16777215</width>
-                                <height>16777215</height>
-                               </size>
-                              </property>
-                              <property name="font">
-                               <font>
-                                <family>DejaVu Math TeX Gyre</family>
-                                <pointsize>12</pointsize>
-                               </font>
-                              </property>
-                              <property name="text">
-                               <string>TextLabel</string>
-                              </property>
-                              <property name="alignment">
-                               <set>Qt::AlignCenter</set>
-                              </property>
-                             </widget>
-                            </item>
-                            <item>
-                             <spacer name="verticalSpacer_41">
-                              <property name="orientation">
-                               <enum>Qt::Vertical</enum>
-                              </property>
-                              <property name="sizeHint" stdset="0">
-                               <size>
-                                <width>20</width>
-                                <height>40</height>
-                               </size>
-                              </property>
-                             </spacer>
-                            </item>
-                           </layout>
-                          </widget>
-                         </item>
-                         <item>
-                          <widget class="QFrame" name="frame_18">
-                           <property name="minimumSize">
-                            <size>
-                             <width>0</width>
-                             <height>0</height>
-                            </size>
-                           </property>
-                           <property name="maximumSize">
-                            <size>
-                             <width>10</width>
-                             <height>16777215</height>
-                            </size>
-                           </property>
-                           <property name="font">
-                            <font>
-                             <family>DejaVu Math TeX Gyre</family>
-                             <pointsize>12</pointsize>
-                            </font>
-                           </property>
-                           <property name="frameShape">
-                            <enum>QFrame::NoFrame</enum>
-                           </property>
-                           <property name="frameShadow">
-                            <enum>QFrame::Raised</enum>
-                           </property>
-                          </widget>
-                         </item>
-                         <item>
-                          <widget class="QPushButton" name="right_arrow_bn">
-                           <property name="maximumSize">
-                            <size>
-                             <width>30</width>
-                             <height>50</height>
-                            </size>
-                           </property>
-                           <property name="font">
-                            <font>
-                             <family>DejaVu Math TeX Gyre</family>
-                             <pointsize>12</pointsize>
-                            </font>
-                           </property>
-                           <property name="styleSheet">
-                            <string notr="true">QPushButton {
+                           </spacer>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="workflow_view3_label">
+                            <property name="maximumSize">
+                             <size>
+                              <width>250</width>
+                              <height>250</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>DejaVu Math TeX Gyre</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="frameShape">
+                             <enum>QFrame::NoFrame</enum>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QFrame" name="frame_18">
+                            <property name="frameShape">
+                             <enum>QFrame::NoFrame</enum>
+                            </property>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                            <layout class="QHBoxLayout" name="horizontalLayout_27">
+                             <property name="spacing">
+                              <number>0</number>
+                             </property>
+                             <property name="leftMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="topMargin">
+                              <number>4</number>
+                             </property>
+                             <property name="rightMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="bottomMargin">
+                              <number>0</number>
+                             </property>
+                             <item>
+                              <spacer name="horizontalSpacer_69">
+                               <property name="orientation">
+                                <enum>Qt::Horizontal</enum>
+                               </property>
+                               <property name="sizeHint" stdset="0">
+                                <size>
+                                 <width>106</width>
+                                 <height>20</height>
+                                </size>
+                               </property>
+                              </spacer>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="workflow_view3_seemore_bn">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>140</width>
+                                 <height>30</height>
+                                </size>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <family>DejaVu Math TeX Gyre</family>
+                                 <pointsize>11</pointsize>
+                                </font>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">QPushButton {
+	border: none;
+	background-color: rgb(255,255,255);
+	border-radius: 15px;
+   border: 2px solid rgb(0, 0, 0);
+}
+QPushButton:hover {
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}
+QPushButton:pressed {	
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}</string>
+                               </property>
+                               <property name="text">
+                                <string>Learn more . . .</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </widget>
+                          </item>
+                          <item>
+                           <spacer name="verticalSpacer_38">
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>20</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                           </spacer>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="workflow_view3_name_label">
+                            <property name="maximumSize">
+                             <size>
+                              <width>16777215</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>DejaVu Math TeX Gyre</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>TextLabel</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <spacer name="verticalSpacer_41">
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>20</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                           </spacer>
+                          </item>
+                         </layout>
+                        </widget>
+                        <widget class="QPushButton" name="right_arrow_bn">
+                         <property name="geometry">
+                          <rect>
+                           <x>915</x>
+                           <y>195</y>
+                           <width>30</width>
+                           <height>50</height>
+                          </rect>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>30</width>
+                           <height>50</height>
+                          </size>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>DejaVu Math TeX Gyre</family>
+                           <pointsize>12</pointsize>
+                          </font>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">QPushButton {
 	border: none;
 	background-color: rgba(0,0,0,0);
 }
@@ -3285,23 +3350,825 @@ QPushButton:hover {
 QPushButton:pressed {	
 	border: 2px solid rgb(0, 0, 0);
 }</string>
-                           </property>
-                           <property name="text">
-                            <string/>
-                           </property>
-                           <property name="icon">
-                            <iconset>
-                             <normaloff>images/bn_images/right_arrow.svg</normaloff>images/bn_images/right_arrow.svg</iconset>
-                           </property>
-                           <property name="iconSize">
-                            <size>
-                             <width>32</width>
-                             <height>32</height>
-                            </size>
-                           </property>
-                          </widget>
-                         </item>
-                        </layout>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="icon">
+                          <iconset>
+                           <normaloff>images/bn_images/right_arrow.svg</normaloff>images/bn_images/right_arrow.svg</iconset>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>32</width>
+                           <height>32</height>
+                          </size>
+                         </property>
+                        </widget>
+                        <widget class="QFrame" name="workflow_view4_frame">
+                         <property name="geometry">
+                          <rect>
+                           <x>950</x>
+                           <y>0</y>
+                           <width>267</width>
+                           <height>440</height>
+                          </rect>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>267</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>DejaVu Math TeX Gyre</family>
+                           <pointsize>12</pointsize>
+                          </font>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">background:rgb(240,240,240);
+border-radius: 25px;		</string>
+                         </property>
+                         <property name="frameShape">
+                          <enum>QFrame::NoFrame</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_43">
+                          <property name="spacing">
+                           <number>6</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>17</number>
+                          </property>
+                          <item>
+                           <spacer name="verticalSpacer_42">
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>20</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                           </spacer>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="workflow_view4_label">
+                            <property name="maximumSize">
+                             <size>
+                              <width>250</width>
+                              <height>250</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>DejaVu Math TeX Gyre</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="frameShape">
+                             <enum>QFrame::NoFrame</enum>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QFrame" name="frame_42">
+                            <property name="frameShape">
+                             <enum>QFrame::NoFrame</enum>
+                            </property>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                            <layout class="QHBoxLayout" name="horizontalLayout_30">
+                             <property name="spacing">
+                              <number>0</number>
+                             </property>
+                             <property name="leftMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="topMargin">
+                              <number>4</number>
+                             </property>
+                             <property name="rightMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="bottomMargin">
+                              <number>0</number>
+                             </property>
+                             <item>
+                              <spacer name="horizontalSpacer_70">
+                               <property name="orientation">
+                                <enum>Qt::Horizontal</enum>
+                               </property>
+                               <property name="sizeHint" stdset="0">
+                                <size>
+                                 <width>106</width>
+                                 <height>20</height>
+                                </size>
+                               </property>
+                              </spacer>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="workflow_view4_seemore_bn">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>140</width>
+                                 <height>30</height>
+                                </size>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <family>DejaVu Math TeX Gyre</family>
+                                 <pointsize>11</pointsize>
+                                </font>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">QPushButton {
+	border: none;
+	background-color: rgb(255,255,255);
+	border-radius: 15px;
+   border: 2px solid rgb(0, 0, 0);
+}
+QPushButton:hover {
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}
+QPushButton:pressed {	
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}</string>
+                               </property>
+                               <property name="text">
+                                <string>Learn more . . .</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </widget>
+                          </item>
+                          <item>
+                           <spacer name="verticalSpacer_43">
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>20</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                           </spacer>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="workflow_view4_name_label">
+                            <property name="maximumSize">
+                             <size>
+                              <width>16777215</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>DejaVu Math TeX Gyre</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>TextLabel</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <spacer name="verticalSpacer_44">
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>20</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                           </spacer>
+                          </item>
+                         </layout>
+                        </widget>
+                        <widget class="QFrame" name="workflow_view5_frame">
+                         <property name="geometry">
+                          <rect>
+                           <x>1255</x>
+                           <y>0</y>
+                           <width>267</width>
+                           <height>440</height>
+                          </rect>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>267</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>DejaVu Math TeX Gyre</family>
+                           <pointsize>12</pointsize>
+                          </font>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">background:rgb(240,240,240);
+border-radius: 25px;		</string>
+                         </property>
+                         <property name="frameShape">
+                          <enum>QFrame::NoFrame</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_44">
+                          <property name="spacing">
+                           <number>6</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>17</number>
+                          </property>
+                          <item>
+                           <spacer name="verticalSpacer_45">
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>20</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                           </spacer>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="workflow_view5_label">
+                            <property name="maximumSize">
+                             <size>
+                              <width>250</width>
+                              <height>250</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>DejaVu Math TeX Gyre</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="frameShape">
+                             <enum>QFrame::NoFrame</enum>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QFrame" name="frame_53">
+                            <property name="frameShape">
+                             <enum>QFrame::NoFrame</enum>
+                            </property>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                            <layout class="QHBoxLayout" name="horizontalLayout_31">
+                             <property name="spacing">
+                              <number>0</number>
+                             </property>
+                             <property name="leftMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="topMargin">
+                              <number>4</number>
+                             </property>
+                             <property name="rightMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="bottomMargin">
+                              <number>0</number>
+                             </property>
+                             <item>
+                              <spacer name="horizontalSpacer_71">
+                               <property name="orientation">
+                                <enum>Qt::Horizontal</enum>
+                               </property>
+                               <property name="sizeHint" stdset="0">
+                                <size>
+                                 <width>106</width>
+                                 <height>20</height>
+                                </size>
+                               </property>
+                              </spacer>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="workflow_view5_seemore_bn">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>140</width>
+                                 <height>30</height>
+                                </size>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <family>DejaVu Math TeX Gyre</family>
+                                 <pointsize>11</pointsize>
+                                </font>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">QPushButton {
+	border: none;
+	background-color: rgb(255,255,255);
+	border-radius: 15px;
+   border: 2px solid rgb(0, 0, 0);
+}
+QPushButton:hover {
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}
+QPushButton:pressed {	
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}</string>
+                               </property>
+                               <property name="text">
+                                <string>Learn more . . .</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </widget>
+                          </item>
+                          <item>
+                           <spacer name="verticalSpacer_46">
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>20</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                           </spacer>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="workflow_view5_name_label">
+                            <property name="maximumSize">
+                             <size>
+                              <width>16777215</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>DejaVu Math TeX Gyre</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>TextLabel</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <spacer name="verticalSpacer_47">
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>20</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                           </spacer>
+                          </item>
+                         </layout>
+                        </widget>
+                        <widget class="QFrame" name="workflow_view6_frame">
+                         <property name="geometry">
+                          <rect>
+                           <x>1560</x>
+                           <y>0</y>
+                           <width>267</width>
+                           <height>440</height>
+                          </rect>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>267</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>DejaVu Math TeX Gyre</family>
+                           <pointsize>12</pointsize>
+                          </font>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">background:rgb(240,240,240);
+border-radius: 25px;		</string>
+                         </property>
+                         <property name="frameShape">
+                          <enum>QFrame::NoFrame</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_45">
+                          <property name="spacing">
+                           <number>6</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>17</number>
+                          </property>
+                          <item>
+                           <spacer name="verticalSpacer_48">
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>20</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                           </spacer>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="workflow_view6_label">
+                            <property name="maximumSize">
+                             <size>
+                              <width>250</width>
+                              <height>250</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>DejaVu Math TeX Gyre</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="frameShape">
+                             <enum>QFrame::NoFrame</enum>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QFrame" name="frame_56">
+                            <property name="frameShape">
+                             <enum>QFrame::NoFrame</enum>
+                            </property>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                            <layout class="QHBoxLayout" name="horizontalLayout_32">
+                             <property name="spacing">
+                              <number>0</number>
+                             </property>
+                             <property name="leftMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="topMargin">
+                              <number>4</number>
+                             </property>
+                             <property name="rightMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="bottomMargin">
+                              <number>0</number>
+                             </property>
+                             <item>
+                              <spacer name="horizontalSpacer_72">
+                               <property name="orientation">
+                                <enum>Qt::Horizontal</enum>
+                               </property>
+                               <property name="sizeHint" stdset="0">
+                                <size>
+                                 <width>106</width>
+                                 <height>20</height>
+                                </size>
+                               </property>
+                              </spacer>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="workflow_view6_seemore_bn">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>140</width>
+                                 <height>30</height>
+                                </size>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <family>DejaVu Math TeX Gyre</family>
+                                 <pointsize>11</pointsize>
+                                </font>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">QPushButton {
+	border: none;
+	background-color: rgb(255,255,255);
+	border-radius: 15px;
+   border: 2px solid rgb(0, 0, 0);
+}
+QPushButton:hover {
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}
+QPushButton:pressed {	
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}</string>
+                               </property>
+                               <property name="text">
+                                <string>Learn more . . .</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </widget>
+                          </item>
+                          <item>
+                           <spacer name="verticalSpacer_49">
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>20</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                           </spacer>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="workflow_view6_name_label">
+                            <property name="maximumSize">
+                             <size>
+                              <width>16777215</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>DejaVu Math TeX Gyre</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>TextLabel</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <spacer name="verticalSpacer_50">
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>20</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                           </spacer>
+                          </item>
+                         </layout>
+                        </widget>
+                        <widget class="QFrame" name="workflow_view7_frame">
+                         <property name="geometry">
+                          <rect>
+                           <x>1865</x>
+                           <y>0</y>
+                           <width>267</width>
+                           <height>440</height>
+                          </rect>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>267</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>DejaVu Math TeX Gyre</family>
+                           <pointsize>12</pointsize>
+                          </font>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">background:rgb(240,240,240);
+border-radius: 25px;		</string>
+                         </property>
+                         <property name="frameShape">
+                          <enum>QFrame::NoFrame</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_46">
+                          <property name="spacing">
+                           <number>6</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>17</number>
+                          </property>
+                          <item>
+                           <spacer name="verticalSpacer_51">
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>20</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                           </spacer>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="workflow_view7_label">
+                            <property name="maximumSize">
+                             <size>
+                              <width>250</width>
+                              <height>250</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>DejaVu Math TeX Gyre</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="frameShape">
+                             <enum>QFrame::NoFrame</enum>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QFrame" name="frame_60">
+                            <property name="frameShape">
+                             <enum>QFrame::NoFrame</enum>
+                            </property>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                            <layout class="QHBoxLayout" name="horizontalLayout_33">
+                             <property name="spacing">
+                              <number>0</number>
+                             </property>
+                             <property name="leftMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="topMargin">
+                              <number>4</number>
+                             </property>
+                             <property name="rightMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="bottomMargin">
+                              <number>0</number>
+                             </property>
+                             <item>
+                              <spacer name="horizontalSpacer_73">
+                               <property name="orientation">
+                                <enum>Qt::Horizontal</enum>
+                               </property>
+                               <property name="sizeHint" stdset="0">
+                                <size>
+                                 <width>106</width>
+                                 <height>20</height>
+                                </size>
+                               </property>
+                              </spacer>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="workflow_view7_seemore_bn">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>140</width>
+                                 <height>30</height>
+                                </size>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <family>DejaVu Math TeX Gyre</family>
+                                 <pointsize>11</pointsize>
+                                </font>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">QPushButton {
+	border: none;
+	background-color: rgb(255,255,255);
+	border-radius: 15px;
+   border: 2px solid rgb(0, 0, 0);
+}
+QPushButton:hover {
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}
+QPushButton:pressed {	
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}</string>
+                               </property>
+                               <property name="text">
+                                <string>Learn more . . .</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </widget>
+                          </item>
+                          <item>
+                           <spacer name="verticalSpacer_52">
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>20</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                           </spacer>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="workflow_view7_name_label">
+                            <property name="maximumSize">
+                             <size>
+                              <width>16777215</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>DejaVu Math TeX Gyre</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>TextLabel</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <spacer name="verticalSpacer_53">
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>20</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                           </spacer>
+                          </item>
+                         </layout>
+                        </widget>
                        </widget>
                       </widget>
                       <widget class="QWidget" name="goptions_page">
@@ -3376,7 +4243,7 @@ QPushButton:pressed {
                              <rect>
                               <x>0</x>
                               <y>0</y>
-                              <width>932</width>
+                              <width>916</width>
                               <height>493</height>
                              </rect>
                             </property>
@@ -3540,7 +4407,7 @@ QPushButton:pressed {
                                    </font>
                                   </property>
                                   <property name="toolTip">
-                                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Load previous training weigths (needed for test/inference phase or to train again but not from scratch). If the checkpoint file is empty, BiaPy will search for the checkpoint in the following manner: if the output folder and the job name match, BiaPy will locate the model's weights within the 'checkpoints' directory. On the other hand, if the checkpoint file path is specified that path will be used instead&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                   <string/>
                                   </property>
                                   <property name="text">
                                    <string>Load already existing model</string>
@@ -3619,10 +4486,66 @@ QPushButton:pressed {
                                    </font>
                                   </property>
                                   <property name="toolTip">
-                                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Path to the model's checkpoint that will be loaded. Leave it blank to let BiaPy find it. If the output folder and the job name match, BiaPy will locate the model's weights within the 'checkpoints' directory&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                   <string/>
                                   </property>
                                   <property name="text">
                                    <string>Model file</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="1" column="2">
+                                 <widget class="QLabel" name="MODEL__LOAD_CHECKPOINT__LABEL">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>30</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
+                                  <property name="maximumSize">
+                                   <size>
+                                    <width>30</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
+                                  <property name="toolTip">
+                                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Load previous training weigths (needed for test/inference phase or to train again but not from scratch). If the checkpoint file is empty, BiaPy will search for the checkpoint in the following manner: if the output folder and the job name match, BiaPy will locate the model's weights within the 'checkpoints' directory. On the other hand, if the checkpoint file path is specified that path will be used instead&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true"/>
+                                  </property>
+                                  <property name="text">
+                                   <string/>
+                                  </property>
+                                  <property name="scaledContents">
+                                   <bool>true</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="2" column="2">
+                                 <widget class="QLabel" name="PATHS__CHECKPOINT_FILE__INFO">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>30</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
+                                  <property name="maximumSize">
+                                   <size>
+                                    <width>30</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
+                                  <property name="toolTip">
+                                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Path to the model's checkpoint that will be loaded. Leave it blank to let BiaPy find it. If the output folder and the job name match, BiaPy will locate the model's weights within the 'checkpoints' directory&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true"/>
+                                  </property>
+                                  <property name="text">
+                                   <string/>
+                                  </property>
+                                  <property name="scaledContents">
+                                   <bool>true</bool>
                                   </property>
                                  </widget>
                                 </item>
@@ -3773,7 +4696,7 @@ QPushButton:pressed {
                                     <rect>
                                      <x>0</x>
                                      <y>0</y>
-                                     <width>870</width>
+                                     <width>495</width>
                                      <height>248</height>
                                     </rect>
                                    </property>
@@ -3863,7 +4786,7 @@ QPushButton:pressed {
                                           </font>
                                          </property>
                                          <property name="toolTip">
-                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Maximum number of CPU that BiaPy will be allowed to use. Set it to &amp;quot;-1&amp;quot; to set any limit. Normally a few cores will be used in this last case, as the biggest calculations will be on the GPU.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                          <string/>
                                          </property>
                                          <property name="text">
                                           <string>Max. CPUs</string>
@@ -3879,7 +4802,7 @@ QPushButton:pressed {
                                           </font>
                                          </property>
                                          <property name="toolTip">
-                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Math seed to use. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be an integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                          <string/>
                                          </property>
                                          <property name="text">
                                           <string>Math seed</string>
@@ -3952,6 +4875,59 @@ QPushButton:pressed {
                                          </property>
                                         </spacer>
                                        </item>
+                                       <item row="1" column="1">
+                                        <widget class="QLabel" name="SYSTEM__NUM_CPUS__INFO">
+                                         <property name="minimumSize">
+                                          <size>
+                                           <width>30</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="maximumSize">
+                                          <size>
+                                           <width>30</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="toolTip">
+                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Maximum number of CPU that BiaPy will be allowed to use. Set it to &amp;quot;-1&amp;quot; to set any limit. Normally a few cores will be used in this last case, as the biggest calculations will be on the GPU.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                         </property>
+                                         <property name="styleSheet">
+                                          <string notr="true"/>
+                                         </property>
+                                         <property name="text">
+                                          <string/>
+                                         </property>
+                                         <property name="scaledContents">
+                                          <bool>true</bool>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item row="3" column="1">
+                                        <widget class="QLabel" name="SYSTEM__SEED__INFO">
+                                         <property name="minimumSize">
+                                          <size>
+                                           <width>30</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="maximumSize">
+                                          <size>
+                                           <width>30</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="toolTip">
+                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Math seed to use. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be an integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                         </property>
+                                         <property name="text">
+                                          <string/>
+                                         </property>
+                                         <property name="scaledContents">
+                                          <bool>true</bool>
+                                         </property>
+                                        </widget>
+                                       </item>
                                       </layout>
                                      </widget>
                                     </item>
@@ -3968,7 +4944,7 @@ QPushButton:pressed {
                                        <enum>QFrame::Raised</enum>
                                       </property>
                                       <layout class="QGridLayout" name="gridLayout_24">
-                                       <item row="0" column="1">
+                                       <item row="0" column="2">
                                         <widget class="QComboBox" name="MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT">
                                          <property name="minimumSize">
                                           <size>
@@ -4000,39 +4976,7 @@ QPushButton:pressed {
                                          </item>
                                         </widget>
                                        </item>
-                                       <item row="0" column="0">
-                                        <widget class="QLabel" name="label_4">
-                                         <property name="font">
-                                          <font>
-                                           <family>DejaVu Math TeX Gyre</family>
-                                           <pointsize>12</pointsize>
-                                          </font>
-                                         </property>
-                                         <property name="toolTip">
-                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;When loading checkpoints whether if only model's weights are going to be loaded or optimizer, epochs and loss_scaler.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                         </property>
-                                         <property name="text">
-                                          <string>Load only model weigths</string>
-                                         </property>
-                                        </widget>
-                                       </item>
-                                       <item row="3" column="0">
-                                        <widget class="QLabel" name="label_38">
-                                         <property name="font">
-                                          <font>
-                                           <family>DejaVu Math TeX Gyre</family>
-                                           <pointsize>12</pointsize>
-                                          </font>
-                                         </property>
-                                         <property name="toolTip">
-                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Decide which checkpoint to load from job's dir if PATHS.CHECKPOINT_FILE is empty. Options: 'best_on_val' or 'last_on_train'&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                         </property>
-                                         <property name="text">
-                                          <string>Epoch of the checkpoint</string>
-                                         </property>
-                                        </widget>
-                                       </item>
-                                       <item row="0" column="2">
+                                       <item row="0" column="3">
                                         <spacer name="horizontalSpacer_15">
                                          <property name="orientation">
                                           <enum>Qt::Horizontal</enum>
@@ -4045,7 +4989,7 @@ QPushButton:pressed {
                                          </property>
                                         </spacer>
                                        </item>
-                                       <item row="3" column="1">
+                                       <item row="3" column="2">
                                         <widget class="QComboBox" name="MODEL__LOAD_CHECKPOINT_EPOCH__INPUT">
                                          <property name="minimumSize">
                                           <size>
@@ -4075,6 +5019,88 @@ QPushButton:pressed {
                                            <string>last_on_train</string>
                                           </property>
                                          </item>
+                                        </widget>
+                                       </item>
+                                       <item row="0" column="0">
+                                        <widget class="QLabel" name="label_4">
+                                         <property name="font">
+                                          <font>
+                                           <family>DejaVu Math TeX Gyre</family>
+                                           <pointsize>12</pointsize>
+                                          </font>
+                                         </property>
+                                         <property name="toolTip">
+                                          <string/>
+                                         </property>
+                                         <property name="text">
+                                          <string>Load only model weigths</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item row="3" column="0">
+                                        <widget class="QLabel" name="label_38">
+                                         <property name="font">
+                                          <font>
+                                           <family>DejaVu Math TeX Gyre</family>
+                                           <pointsize>12</pointsize>
+                                          </font>
+                                         </property>
+                                         <property name="toolTip">
+                                          <string/>
+                                         </property>
+                                         <property name="text">
+                                          <string>Epoch of the checkpoint</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item row="0" column="1">
+                                        <widget class="QLabel" name="MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO">
+                                         <property name="minimumSize">
+                                          <size>
+                                           <width>30</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="maximumSize">
+                                          <size>
+                                           <width>30</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="toolTip">
+                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;When loading checkpoints whether if only model's weights are going to be loaded or optimizer, epochs and loss_scaler.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                         </property>
+                                         <property name="text">
+                                          <string/>
+                                         </property>
+                                         <property name="scaledContents">
+                                          <bool>true</bool>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item row="3" column="1">
+                                        <widget class="QLabel" name="MODEL__LOAD_CHECKPOINT_EPOCH__INFO">
+                                         <property name="minimumSize">
+                                          <size>
+                                           <width>30</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="maximumSize">
+                                          <size>
+                                           <width>30</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="toolTip">
+                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Decide which checkpoint to load from job's dir if PATHS.CHECKPOINT_FILE is empty. Options: 'best_on_val' or 'last_on_train'&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                         </property>
+                                         <property name="text">
+                                          <string/>
+                                         </property>
+                                         <property name="scaledContents">
+                                          <bool>true</bool>
+                                         </property>
                                         </widget>
                                        </item>
                                       </layout>
@@ -4115,12 +5141,18 @@ QPushButton:pressed {
                                 <enum>QFrame::Raised</enum>
                                </property>
                                <layout class="QGridLayout" name="gridLayout_27">
-                                <item row="3" column="5">
-                                 <widget class="QPushButton" name="goptions_browse_yaml_path_bn">
+                                <item row="3" column="4">
+                                 <widget class="QLineEdit" name="goptions_browse_yaml_path_input">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>500</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
                                   <property name="maximumSize">
                                    <size>
-                                    <width>130</width>
-                                    <height>16777215</height>
+                                    <width>500</width>
+                                    <height>30</height>
                                    </size>
                                   </property>
                                   <property name="font">
@@ -4129,12 +5161,34 @@ QPushButton:pressed {
                                     <pointsize>12</pointsize>
                                    </font>
                                   </property>
-                                  <property name="text">
-                                   <string>Browse</string>
+                                  <property name="statusTip">
+                                   <string/>
                                   </property>
                                  </widget>
                                 </item>
-                                <item row="5" column="3">
+                                <item row="0" column="1" colspan="2">
+                                 <widget class="QLabel" name="PROBLEM__NDIM__LABEL">
+                                  <property name="maximumSize">
+                                   <size>
+                                    <width>200</width>
+                                    <height>35</height>
+                                   </size>
+                                  </property>
+                                  <property name="font">
+                                   <font>
+                                    <family>DejaVu Math TeX Gyre</family>
+                                    <pointsize>12</pointsize>
+                                   </font>
+                                  </property>
+                                  <property name="toolTip">
+                                   <string/>
+                                  </property>
+                                  <property name="text">
+                                   <string>Image dimension</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="5" column="4">
                                  <widget class="QLineEdit" name="goptions_yaml_name_input">
                                   <property name="minimumSize">
                                    <size>
@@ -4162,7 +5216,42 @@ QPushButton:pressed {
                                   </property>
                                  </widget>
                                 </item>
-                                <item row="0" column="3">
+                                <item row="5" column="1">
+                                 <widget class="QLabel" name="goptions_yaml_name_label">
+                                  <property name="maximumSize">
+                                   <size>
+                                    <width>250</width>
+                                    <height>35</height>
+                                   </size>
+                                  </property>
+                                  <property name="font">
+                                   <font>
+                                    <family>DejaVu Math TeX Gyre</family>
+                                    <pointsize>12</pointsize>
+                                   </font>
+                                  </property>
+                                  <property name="toolTip">
+                                   <string/>
+                                  </property>
+                                  <property name="text">
+                                   <string>Configuration file name</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="3" column="7">
+                                 <spacer name="horizontalSpacer_28">
+                                  <property name="orientation">
+                                   <enum>Qt::Horizontal</enum>
+                                  </property>
+                                  <property name="sizeHint" stdset="0">
+                                   <size>
+                                    <width>40</width>
+                                    <height>20</height>
+                                   </size>
+                                  </property>
+                                 </spacer>
+                                </item>
+                                <item row="0" column="4">
                                  <widget class="QComboBox" name="PROBLEM__NDIM__INPUT">
                                   <property name="minimumSize">
                                    <size>
@@ -4194,12 +5283,12 @@ QPushButton:pressed {
                                   </item>
                                  </widget>
                                 </item>
-                                <item row="0" column="1" colspan="2">
-                                 <widget class="QLabel" name="dimension_label">
+                                <item row="3" column="6">
+                                 <widget class="QPushButton" name="goptions_browse_yaml_path_bn">
                                   <property name="maximumSize">
                                    <size>
-                                    <width>200</width>
-                                    <height>35</height>
+                                    <width>130</width>
+                                    <height>16777215</height>
                                    </size>
                                   </property>
                                   <property name="font">
@@ -4208,33 +5297,8 @@ QPushButton:pressed {
                                     <pointsize>12</pointsize>
                                    </font>
                                   </property>
-                                  <property name="toolTip">
-                                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Number of dimensions of the input images&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                  </property>
                                   <property name="text">
-                                   <string>Image dimension</string>
-                                  </property>
-                                 </widget>
-                                </item>
-                                <item row="5" column="1">
-                                 <widget class="QLabel" name="goptions_yaml_name_label">
-                                  <property name="maximumSize">
-                                   <size>
-                                    <width>250</width>
-                                    <height>35</height>
-                                   </size>
-                                  </property>
-                                  <property name="font">
-                                   <font>
-                                    <family>DejaVu Math TeX Gyre</family>
-                                    <pointsize>12</pointsize>
-                                   </font>
-                                  </property>
-                                  <property name="toolTip">
-                                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;YAML file name&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                  </property>
-                                  <property name="text">
-                                   <string>Configuration file name</string>
+                                   <string>Browse</string>
                                   </property>
                                  </widget>
                                 </item>
@@ -4253,45 +5317,97 @@ QPushButton:pressed {
                                    </font>
                                   </property>
                                   <property name="toolTip">
-                                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Path to store the YAML file&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                   <string/>
                                   </property>
                                   <property name="text">
                                    <string>Configuration file directory</string>
                                   </property>
                                  </widget>
                                 </item>
-                                <item row="3" column="6">
-                                 <spacer name="horizontalSpacer_28">
-                                  <property name="orientation">
-                                   <enum>Qt::Horizontal</enum>
-                                  </property>
-                                  <property name="sizeHint" stdset="0">
-                                   <size>
-                                    <width>40</width>
-                                    <height>20</height>
-                                   </size>
-                                  </property>
-                                 </spacer>
-                                </item>
-                                <item row="3" column="3">
-                                 <widget class="QLineEdit" name="goptions_browse_yaml_path_input">
+                                <item row="0" column="3">
+                                 <widget class="QLabel" name="PROBLEM__NDIM__INFO">
                                   <property name="minimumSize">
                                    <size>
-                                    <width>500</width>
+                                    <width>30</width>
                                     <height>30</height>
                                    </size>
                                   </property>
                                   <property name="maximumSize">
                                    <size>
-                                    <width>500</width>
+                                    <width>30</width>
                                     <height>30</height>
                                    </size>
                                   </property>
-                                  <property name="font">
-                                   <font>
-                                    <family>DejaVu Math TeX Gyre</family>
-                                    <pointsize>12</pointsize>
-                                   </font>
+                                  <property name="toolTip">
+                                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Number of dimensions of the input images&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                  </property>
+                                  <property name="statusTip">
+                                   <string/>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true"/>
+                                  </property>
+                                  <property name="text">
+                                   <string/>
+                                  </property>
+                                  <property name="scaledContents">
+                                   <bool>true</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="3" column="3">
+                                 <widget class="QLabel" name="goptions_browse_yaml_path_info">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>30</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
+                                  <property name="maximumSize">
+                                   <size>
+                                    <width>30</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
+                                  <property name="toolTip">
+                                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Path to store the YAML file&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true"/>
+                                  </property>
+                                  <property name="text">
+                                   <string/>
+                                  </property>
+                                  <property name="scaledContents">
+                                   <bool>true</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="5" column="3">
+                                 <widget class="QLabel" name="goptions_yaml_name_info">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>30</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
+                                  <property name="maximumSize">
+                                   <size>
+                                    <width>30</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
+                                  <property name="toolTip">
+                                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;YAML file name&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true"/>
+                                  </property>
+                                  <property name="text">
+                                   <string/>
+                                  </property>
+                                  <property name="scaledContents">
+                                   <bool>true</bool>
                                   </property>
                                  </widget>
                                 </item>
@@ -4524,7 +5640,7 @@ QPushButton:pressed {
                                 <property name="geometry">
                                  <rect>
                                   <x>0</x>
-                                  <y>-2725</y>
+                                  <y>0</y>
                                   <width>934</width>
                                   <height>5883</height>
                                  </rect>
@@ -13540,8 +14656,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>928</width>
-                                         <height>333</height>
+                                         <width>529</width>
+                                         <height>217</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_19">
@@ -17133,7 +18249,7 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>913</width>
+                                       <width>582</width>
                                        <height>1255</height>
                                       </rect>
                                      </property>
@@ -20895,8 +22011,8 @@ QPushButton:pressed {
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>34</width>
-                               <height>19</height>
+                               <width>96</width>
+                               <height>26</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_32">

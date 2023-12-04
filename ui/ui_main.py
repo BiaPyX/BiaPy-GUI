@@ -562,6 +562,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_5.setContentsMargins(4, 0, 0, 0)
         self.label_16 = QLabel(self.frame_4)
         self.label_16.setObjectName(u"label_16")
+        self.label_16.setMinimumSize(QSize(0, 0))
         self.label_16.setFont(font)
 
         self.verticalLayout_5.addWidget(self.label_16)
@@ -583,7 +584,7 @@ class Ui_MainWindow(object):
         self.github_frame.setFrameShape(QFrame.NoFrame)
         self.github_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_34 = QVBoxLayout(self.github_frame)
-        self.verticalLayout_34.setSpacing(0)
+        self.verticalLayout_34.setSpacing(10)
         self.verticalLayout_34.setObjectName(u"verticalLayout_34")
         self.verticalLayout_34.setContentsMargins(0, 0, 0, 0)
         self.biapy_github_bn = QPushButton(self.github_frame)
@@ -632,7 +633,7 @@ class Ui_MainWindow(object):
         self.forum_frame.setFrameShape(QFrame.NoFrame)
         self.forum_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_15 = QVBoxLayout(self.forum_frame)
-        self.verticalLayout_15.setSpacing(0)
+        self.verticalLayout_15.setSpacing(10)
         self.verticalLayout_15.setObjectName(u"verticalLayout_15")
         self.verticalLayout_15.setContentsMargins(0, 0, 0, 0)
         self.biapy_forum_bn = QPushButton(self.forum_frame)
@@ -678,7 +679,7 @@ class Ui_MainWindow(object):
         self.doc_frame.setFrameShape(QFrame.NoFrame)
         self.doc_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_35 = QVBoxLayout(self.doc_frame)
-        self.verticalLayout_35.setSpacing(0)
+        self.verticalLayout_35.setSpacing(10)
         self.verticalLayout_35.setObjectName(u"verticalLayout_35")
         self.verticalLayout_35.setContentsMargins(0, 0, 0, 0)
         self.biapy_doc_bn = QPushButton(self.doc_frame)
@@ -722,7 +723,7 @@ class Ui_MainWindow(object):
         self.templates_frame.setFrameShape(QFrame.NoFrame)
         self.templates_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_36 = QVBoxLayout(self.templates_frame)
-        self.verticalLayout_36.setSpacing(0)
+        self.verticalLayout_36.setSpacing(10)
         self.verticalLayout_36.setObjectName(u"verticalLayout_36")
         self.verticalLayout_36.setContentsMargins(0, 0, 0, 0)
         self.biapy_templates_bn = QPushButton(self.templates_frame)
@@ -766,7 +767,7 @@ class Ui_MainWindow(object):
         self.notebooks_frame.setFrameShape(QFrame.NoFrame)
         self.notebooks_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_37 = QVBoxLayout(self.notebooks_frame)
-        self.verticalLayout_37.setSpacing(0)
+        self.verticalLayout_37.setSpacing(10)
         self.verticalLayout_37.setObjectName(u"verticalLayout_37")
         self.verticalLayout_37.setContentsMargins(0, 0, 0, 0)
         self.biapy_notebooks_bn = QPushButton(self.notebooks_frame)
@@ -810,7 +811,7 @@ class Ui_MainWindow(object):
         self.citation_frame.setFrameShape(QFrame.NoFrame)
         self.citation_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_38 = QVBoxLayout(self.citation_frame)
-        self.verticalLayout_38.setSpacing(0)
+        self.verticalLayout_38.setSpacing(10)
         self.verticalLayout_38.setObjectName(u"verticalLayout_38")
         self.verticalLayout_38.setContentsMargins(0, 0, 0, 0)
         self.biapy_citation_bn = QPushButton(self.citation_frame)
@@ -1075,16 +1076,13 @@ class Ui_MainWindow(object):
         self.workflow_selection_page.setMinimumSize(QSize(0, 0))
         self.page_create_yaml_mid_frame = QFrame(self.workflow_selection_page)
         self.page_create_yaml_mid_frame.setObjectName(u"page_create_yaml_mid_frame")
-        self.page_create_yaml_mid_frame.setGeometry(QRect(0, 0, 951, 440))
+        self.page_create_yaml_mid_frame.setGeometry(QRect(0, 0, 954, 440))
         self.page_create_yaml_mid_frame.setFont(font)
         self.page_create_yaml_mid_frame.setFrameShape(QFrame.NoFrame)
         self.page_create_yaml_mid_frame.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_3 = QHBoxLayout(self.page_create_yaml_mid_frame)
-        self.horizontalLayout_3.setSpacing(0)
-        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.left_arrow_bn = QPushButton(self.page_create_yaml_mid_frame)
         self.left_arrow_bn.setObjectName(u"left_arrow_bn")
+        self.left_arrow_bn.setGeometry(QRect(5, 195, 30, 50))
         self.left_arrow_bn.setMaximumSize(QSize(30, 50))
         self.left_arrow_bn.setFont(font)
         self.left_arrow_bn.setStyleSheet(u"QPushButton {\n"
@@ -1101,21 +1099,12 @@ class Ui_MainWindow(object):
         icon8.addFile(u"images/bn_images/left_arrow.svg", QSize(), QIcon.Normal, QIcon.Off)
         self.left_arrow_bn.setIcon(icon8)
         self.left_arrow_bn.setIconSize(QSize(32, 32))
-
-        self.horizontalLayout_3.addWidget(self.left_arrow_bn)
-
-        self.frame_17 = QFrame(self.page_create_yaml_mid_frame)
-        self.frame_17.setObjectName(u"frame_17")
-        self.frame_17.setMinimumSize(QSize(0, 0))
-        self.frame_17.setMaximumSize(QSize(10, 16777215))
-        self.frame_17.setFont(font)
-        self.frame_17.setFrameShape(QFrame.NoFrame)
-        self.frame_17.setFrameShadow(QFrame.Raised)
-
-        self.horizontalLayout_3.addWidget(self.frame_17)
-
         self.workflow_view1_frame = QFrame(self.page_create_yaml_mid_frame)
         self.workflow_view1_frame.setObjectName(u"workflow_view1_frame")
+        self.workflow_view1_frame.setGeometry(QRect(35, 0, 267, 440))
+        sizePolicy1.setHeightForWidth(self.workflow_view1_frame.sizePolicy().hasHeightForWidth())
+        self.workflow_view1_frame.setSizePolicy(sizePolicy1)
+        self.workflow_view1_frame.setMinimumSize(QSize(0, 0))
         self.workflow_view1_frame.setMaximumSize(QSize(267, 16777215))
         self.workflow_view1_frame.setFont(font)
         self.workflow_view1_frame.setStyleSheet(u"background:rgb(240,240,240);\n"
@@ -1123,7 +1112,7 @@ class Ui_MainWindow(object):
         self.workflow_view1_frame.setFrameShape(QFrame.NoFrame)
         self.workflow_view1_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_29 = QVBoxLayout(self.workflow_view1_frame)
-        self.verticalLayout_29.setSpacing(0)
+        self.verticalLayout_29.setSpacing(6)
         self.verticalLayout_29.setObjectName(u"verticalLayout_29")
         self.verticalLayout_29.setContentsMargins(-1, 17, -1, -1)
         self.verticalSpacer_34 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -1138,6 +1127,45 @@ class Ui_MainWindow(object):
         self.workflow_view1_label.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_29.addWidget(self.workflow_view1_label)
+
+        self.frame_17 = QFrame(self.workflow_view1_frame)
+        self.frame_17.setObjectName(u"frame_17")
+        self.frame_17.setFrameShape(QFrame.NoFrame)
+        self.frame_17.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_3 = QHBoxLayout(self.frame_17)
+        self.horizontalLayout_3.setSpacing(0)
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.horizontalLayout_3.setContentsMargins(0, 4, 0, 0)
+        self.horizontalSpacer_68 = QSpacerItem(106, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_3.addItem(self.horizontalSpacer_68)
+
+        self.workflow_view1_seemore_bn = QPushButton(self.frame_17)
+        self.workflow_view1_seemore_bn.setObjectName(u"workflow_view1_seemore_bn")
+        self.workflow_view1_seemore_bn.setMinimumSize(QSize(140, 30))
+        font4 = QFont()
+        font4.setFamily(u"DejaVu Math TeX Gyre")
+        font4.setPointSize(11)
+        self.workflow_view1_seemore_bn.setFont(font4)
+        self.workflow_view1_seemore_bn.setStyleSheet(u"QPushButton {\n"
+"	border: none;\n"
+"	background-color: rgb(255,255,255);\n"
+"	border-radius: 15px;\n"
+"   border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}")
+
+        self.horizontalLayout_3.addWidget(self.workflow_view1_seemore_bn)
+
+
+        self.verticalLayout_29.addWidget(self.frame_17)
 
         self.verticalSpacer_33 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
@@ -1155,21 +1183,9 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_29.addItem(self.verticalSpacer_39)
 
-
-        self.horizontalLayout_3.addWidget(self.workflow_view1_frame)
-
-        self.workflow_mid_separator1_frame = QFrame(self.page_create_yaml_mid_frame)
-        self.workflow_mid_separator1_frame.setObjectName(u"workflow_mid_separator1_frame")
-        self.workflow_mid_separator1_frame.setMinimumSize(QSize(0, 0))
-        self.workflow_mid_separator1_frame.setMaximumSize(QSize(30, 16777215))
-        self.workflow_mid_separator1_frame.setFont(font)
-        self.workflow_mid_separator1_frame.setFrameShape(QFrame.NoFrame)
-        self.workflow_mid_separator1_frame.setFrameShadow(QFrame.Raised)
-
-        self.horizontalLayout_3.addWidget(self.workflow_mid_separator1_frame)
-
         self.workflow_view2_frame = QFrame(self.page_create_yaml_mid_frame)
         self.workflow_view2_frame.setObjectName(u"workflow_view2_frame")
+        self.workflow_view2_frame.setGeometry(QRect(340, 0, 267, 440))
         self.workflow_view2_frame.setMinimumSize(QSize(0, 0))
         self.workflow_view2_frame.setMaximumSize(QSize(267, 16777215))
         self.workflow_view2_frame.setFont(font)
@@ -1181,7 +1197,7 @@ class Ui_MainWindow(object):
         self.workflow_view2_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_30 = QVBoxLayout(self.workflow_view2_frame)
         self.verticalLayout_30.setObjectName(u"verticalLayout_30")
-        self.verticalLayout_30.setContentsMargins(-1, 0, -1, -1)
+        self.verticalLayout_30.setContentsMargins(-1, 17, -1, -1)
         self.verticalSpacer_36 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.verticalLayout_30.addItem(self.verticalSpacer_36)
@@ -1210,9 +1226,6 @@ class Ui_MainWindow(object):
         self.workflow_view2_seemore_bn = QPushButton(self.frame_59)
         self.workflow_view2_seemore_bn.setObjectName(u"workflow_view2_seemore_bn")
         self.workflow_view2_seemore_bn.setMinimumSize(QSize(140, 30))
-        font4 = QFont()
-        font4.setFamily(u"DejaVu Math TeX Gyre")
-        font4.setPointSize(11)
         self.workflow_view2_seemore_bn.setFont(font4)
         self.workflow_view2_seemore_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
@@ -1250,21 +1263,9 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_30.addItem(self.verticalSpacer_40)
 
-
-        self.horizontalLayout_3.addWidget(self.workflow_view2_frame)
-
-        self.workflow_mid_separator2_frame = QFrame(self.page_create_yaml_mid_frame)
-        self.workflow_mid_separator2_frame.setObjectName(u"workflow_mid_separator2_frame")
-        self.workflow_mid_separator2_frame.setMinimumSize(QSize(0, 0))
-        self.workflow_mid_separator2_frame.setMaximumSize(QSize(30, 16777215))
-        self.workflow_mid_separator2_frame.setFont(font)
-        self.workflow_mid_separator2_frame.setFrameShape(QFrame.NoFrame)
-        self.workflow_mid_separator2_frame.setFrameShadow(QFrame.Raised)
-
-        self.horizontalLayout_3.addWidget(self.workflow_mid_separator2_frame)
-
         self.workflow_view3_frame = QFrame(self.page_create_yaml_mid_frame)
         self.workflow_view3_frame.setObjectName(u"workflow_view3_frame")
+        self.workflow_view3_frame.setGeometry(QRect(645, 0, 267, 440))
         self.workflow_view3_frame.setMaximumSize(QSize(267, 16777215))
         self.workflow_view3_frame.setFont(font)
         self.workflow_view3_frame.setStyleSheet(u"background:rgb(240,240,240);\n"
@@ -1272,7 +1273,7 @@ class Ui_MainWindow(object):
         self.workflow_view3_frame.setFrameShape(QFrame.NoFrame)
         self.workflow_view3_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_31 = QVBoxLayout(self.workflow_view3_frame)
-        self.verticalLayout_31.setSpacing(0)
+        self.verticalLayout_31.setSpacing(6)
         self.verticalLayout_31.setObjectName(u"verticalLayout_31")
         self.verticalLayout_31.setContentsMargins(-1, 17, -1, -1)
         self.verticalSpacer_37 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -1287,6 +1288,42 @@ class Ui_MainWindow(object):
         self.workflow_view3_label.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_31.addWidget(self.workflow_view3_label)
+
+        self.frame_18 = QFrame(self.workflow_view3_frame)
+        self.frame_18.setObjectName(u"frame_18")
+        self.frame_18.setFrameShape(QFrame.NoFrame)
+        self.frame_18.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_27 = QHBoxLayout(self.frame_18)
+        self.horizontalLayout_27.setSpacing(0)
+        self.horizontalLayout_27.setObjectName(u"horizontalLayout_27")
+        self.horizontalLayout_27.setContentsMargins(0, 4, 0, 0)
+        self.horizontalSpacer_69 = QSpacerItem(106, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_27.addItem(self.horizontalSpacer_69)
+
+        self.workflow_view3_seemore_bn = QPushButton(self.frame_18)
+        self.workflow_view3_seemore_bn.setObjectName(u"workflow_view3_seemore_bn")
+        self.workflow_view3_seemore_bn.setMinimumSize(QSize(140, 30))
+        self.workflow_view3_seemore_bn.setFont(font4)
+        self.workflow_view3_seemore_bn.setStyleSheet(u"QPushButton {\n"
+"	border: none;\n"
+"	background-color: rgb(255,255,255);\n"
+"	border-radius: 15px;\n"
+"   border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}")
+
+        self.horizontalLayout_27.addWidget(self.workflow_view3_seemore_bn)
+
+
+        self.verticalLayout_31.addWidget(self.frame_18)
 
         self.verticalSpacer_38 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
@@ -1304,21 +1341,9 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_31.addItem(self.verticalSpacer_41)
 
-
-        self.horizontalLayout_3.addWidget(self.workflow_view3_frame)
-
-        self.frame_18 = QFrame(self.page_create_yaml_mid_frame)
-        self.frame_18.setObjectName(u"frame_18")
-        self.frame_18.setMinimumSize(QSize(0, 0))
-        self.frame_18.setMaximumSize(QSize(10, 16777215))
-        self.frame_18.setFont(font)
-        self.frame_18.setFrameShape(QFrame.NoFrame)
-        self.frame_18.setFrameShadow(QFrame.Raised)
-
-        self.horizontalLayout_3.addWidget(self.frame_18)
-
         self.right_arrow_bn = QPushButton(self.page_create_yaml_mid_frame)
         self.right_arrow_bn.setObjectName(u"right_arrow_bn")
+        self.right_arrow_bn.setGeometry(QRect(915, 195, 30, 50))
         self.right_arrow_bn.setMaximumSize(QSize(30, 50))
         self.right_arrow_bn.setFont(font)
         self.right_arrow_bn.setStyleSheet(u"QPushButton {\n"
@@ -1335,8 +1360,317 @@ class Ui_MainWindow(object):
         icon9.addFile(u"images/bn_images/right_arrow.svg", QSize(), QIcon.Normal, QIcon.Off)
         self.right_arrow_bn.setIcon(icon9)
         self.right_arrow_bn.setIconSize(QSize(32, 32))
+        self.workflow_view4_frame = QFrame(self.page_create_yaml_mid_frame)
+        self.workflow_view4_frame.setObjectName(u"workflow_view4_frame")
+        self.workflow_view4_frame.setGeometry(QRect(950, 0, 267, 440))
+        self.workflow_view4_frame.setMaximumSize(QSize(267, 16777215))
+        self.workflow_view4_frame.setFont(font)
+        self.workflow_view4_frame.setStyleSheet(u"background:rgb(240,240,240);\n"
+"border-radius: 25px;		")
+        self.workflow_view4_frame.setFrameShape(QFrame.NoFrame)
+        self.workflow_view4_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_43 = QVBoxLayout(self.workflow_view4_frame)
+        self.verticalLayout_43.setSpacing(6)
+        self.verticalLayout_43.setObjectName(u"verticalLayout_43")
+        self.verticalLayout_43.setContentsMargins(-1, 17, -1, -1)
+        self.verticalSpacer_42 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
-        self.horizontalLayout_3.addWidget(self.right_arrow_bn)
+        self.verticalLayout_43.addItem(self.verticalSpacer_42)
+
+        self.workflow_view4_label = QLabel(self.workflow_view4_frame)
+        self.workflow_view4_label.setObjectName(u"workflow_view4_label")
+        self.workflow_view4_label.setMaximumSize(QSize(250, 250))
+        self.workflow_view4_label.setFont(font)
+        self.workflow_view4_label.setFrameShape(QFrame.NoFrame)
+        self.workflow_view4_label.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_43.addWidget(self.workflow_view4_label)
+
+        self.frame_42 = QFrame(self.workflow_view4_frame)
+        self.frame_42.setObjectName(u"frame_42")
+        self.frame_42.setFrameShape(QFrame.NoFrame)
+        self.frame_42.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_30 = QHBoxLayout(self.frame_42)
+        self.horizontalLayout_30.setSpacing(0)
+        self.horizontalLayout_30.setObjectName(u"horizontalLayout_30")
+        self.horizontalLayout_30.setContentsMargins(0, 4, 0, 0)
+        self.horizontalSpacer_70 = QSpacerItem(106, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_30.addItem(self.horizontalSpacer_70)
+
+        self.workflow_view4_seemore_bn = QPushButton(self.frame_42)
+        self.workflow_view4_seemore_bn.setObjectName(u"workflow_view4_seemore_bn")
+        self.workflow_view4_seemore_bn.setMinimumSize(QSize(140, 30))
+        self.workflow_view4_seemore_bn.setFont(font4)
+        self.workflow_view4_seemore_bn.setStyleSheet(u"QPushButton {\n"
+"	border: none;\n"
+"	background-color: rgb(255,255,255);\n"
+"	border-radius: 15px;\n"
+"   border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}")
+
+        self.horizontalLayout_30.addWidget(self.workflow_view4_seemore_bn)
+
+
+        self.verticalLayout_43.addWidget(self.frame_42)
+
+        self.verticalSpacer_43 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_43.addItem(self.verticalSpacer_43)
+
+        self.workflow_view4_name_label = QLabel(self.workflow_view4_frame)
+        self.workflow_view4_name_label.setObjectName(u"workflow_view4_name_label")
+        self.workflow_view4_name_label.setMaximumSize(QSize(16777215, 16777215))
+        self.workflow_view4_name_label.setFont(font)
+        self.workflow_view4_name_label.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_43.addWidget(self.workflow_view4_name_label)
+
+        self.verticalSpacer_44 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_43.addItem(self.verticalSpacer_44)
+
+        self.workflow_view5_frame = QFrame(self.page_create_yaml_mid_frame)
+        self.workflow_view5_frame.setObjectName(u"workflow_view5_frame")
+        self.workflow_view5_frame.setGeometry(QRect(1255, 0, 267, 440))
+        self.workflow_view5_frame.setMaximumSize(QSize(267, 16777215))
+        self.workflow_view5_frame.setFont(font)
+        self.workflow_view5_frame.setStyleSheet(u"background:rgb(240,240,240);\n"
+"border-radius: 25px;		")
+        self.workflow_view5_frame.setFrameShape(QFrame.NoFrame)
+        self.workflow_view5_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_44 = QVBoxLayout(self.workflow_view5_frame)
+        self.verticalLayout_44.setSpacing(6)
+        self.verticalLayout_44.setObjectName(u"verticalLayout_44")
+        self.verticalLayout_44.setContentsMargins(-1, 17, -1, -1)
+        self.verticalSpacer_45 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_44.addItem(self.verticalSpacer_45)
+
+        self.workflow_view5_label = QLabel(self.workflow_view5_frame)
+        self.workflow_view5_label.setObjectName(u"workflow_view5_label")
+        self.workflow_view5_label.setMaximumSize(QSize(250, 250))
+        self.workflow_view5_label.setFont(font)
+        self.workflow_view5_label.setFrameShape(QFrame.NoFrame)
+        self.workflow_view5_label.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_44.addWidget(self.workflow_view5_label)
+
+        self.frame_53 = QFrame(self.workflow_view5_frame)
+        self.frame_53.setObjectName(u"frame_53")
+        self.frame_53.setFrameShape(QFrame.NoFrame)
+        self.frame_53.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_31 = QHBoxLayout(self.frame_53)
+        self.horizontalLayout_31.setSpacing(0)
+        self.horizontalLayout_31.setObjectName(u"horizontalLayout_31")
+        self.horizontalLayout_31.setContentsMargins(0, 4, 0, 0)
+        self.horizontalSpacer_71 = QSpacerItem(106, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_31.addItem(self.horizontalSpacer_71)
+
+        self.workflow_view5_seemore_bn = QPushButton(self.frame_53)
+        self.workflow_view5_seemore_bn.setObjectName(u"workflow_view5_seemore_bn")
+        self.workflow_view5_seemore_bn.setMinimumSize(QSize(140, 30))
+        self.workflow_view5_seemore_bn.setFont(font4)
+        self.workflow_view5_seemore_bn.setStyleSheet(u"QPushButton {\n"
+"	border: none;\n"
+"	background-color: rgb(255,255,255);\n"
+"	border-radius: 15px;\n"
+"   border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}")
+
+        self.horizontalLayout_31.addWidget(self.workflow_view5_seemore_bn)
+
+
+        self.verticalLayout_44.addWidget(self.frame_53)
+
+        self.verticalSpacer_46 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_44.addItem(self.verticalSpacer_46)
+
+        self.workflow_view5_name_label = QLabel(self.workflow_view5_frame)
+        self.workflow_view5_name_label.setObjectName(u"workflow_view5_name_label")
+        self.workflow_view5_name_label.setMaximumSize(QSize(16777215, 16777215))
+        self.workflow_view5_name_label.setFont(font)
+        self.workflow_view5_name_label.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_44.addWidget(self.workflow_view5_name_label)
+
+        self.verticalSpacer_47 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_44.addItem(self.verticalSpacer_47)
+
+        self.workflow_view6_frame = QFrame(self.page_create_yaml_mid_frame)
+        self.workflow_view6_frame.setObjectName(u"workflow_view6_frame")
+        self.workflow_view6_frame.setGeometry(QRect(1560, 0, 267, 440))
+        self.workflow_view6_frame.setMaximumSize(QSize(267, 16777215))
+        self.workflow_view6_frame.setFont(font)
+        self.workflow_view6_frame.setStyleSheet(u"background:rgb(240,240,240);\n"
+"border-radius: 25px;		")
+        self.workflow_view6_frame.setFrameShape(QFrame.NoFrame)
+        self.workflow_view6_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_45 = QVBoxLayout(self.workflow_view6_frame)
+        self.verticalLayout_45.setSpacing(6)
+        self.verticalLayout_45.setObjectName(u"verticalLayout_45")
+        self.verticalLayout_45.setContentsMargins(-1, 17, -1, -1)
+        self.verticalSpacer_48 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_45.addItem(self.verticalSpacer_48)
+
+        self.workflow_view6_label = QLabel(self.workflow_view6_frame)
+        self.workflow_view6_label.setObjectName(u"workflow_view6_label")
+        self.workflow_view6_label.setMaximumSize(QSize(250, 250))
+        self.workflow_view6_label.setFont(font)
+        self.workflow_view6_label.setFrameShape(QFrame.NoFrame)
+        self.workflow_view6_label.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_45.addWidget(self.workflow_view6_label)
+
+        self.frame_56 = QFrame(self.workflow_view6_frame)
+        self.frame_56.setObjectName(u"frame_56")
+        self.frame_56.setFrameShape(QFrame.NoFrame)
+        self.frame_56.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_32 = QHBoxLayout(self.frame_56)
+        self.horizontalLayout_32.setSpacing(0)
+        self.horizontalLayout_32.setObjectName(u"horizontalLayout_32")
+        self.horizontalLayout_32.setContentsMargins(0, 4, 0, 0)
+        self.horizontalSpacer_72 = QSpacerItem(106, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_32.addItem(self.horizontalSpacer_72)
+
+        self.workflow_view6_seemore_bn = QPushButton(self.frame_56)
+        self.workflow_view6_seemore_bn.setObjectName(u"workflow_view6_seemore_bn")
+        self.workflow_view6_seemore_bn.setMinimumSize(QSize(140, 30))
+        self.workflow_view6_seemore_bn.setFont(font4)
+        self.workflow_view6_seemore_bn.setStyleSheet(u"QPushButton {\n"
+"	border: none;\n"
+"	background-color: rgb(255,255,255);\n"
+"	border-radius: 15px;\n"
+"   border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}")
+
+        self.horizontalLayout_32.addWidget(self.workflow_view6_seemore_bn)
+
+
+        self.verticalLayout_45.addWidget(self.frame_56)
+
+        self.verticalSpacer_49 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_45.addItem(self.verticalSpacer_49)
+
+        self.workflow_view6_name_label = QLabel(self.workflow_view6_frame)
+        self.workflow_view6_name_label.setObjectName(u"workflow_view6_name_label")
+        self.workflow_view6_name_label.setMaximumSize(QSize(16777215, 16777215))
+        self.workflow_view6_name_label.setFont(font)
+        self.workflow_view6_name_label.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_45.addWidget(self.workflow_view6_name_label)
+
+        self.verticalSpacer_50 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_45.addItem(self.verticalSpacer_50)
+
+        self.workflow_view7_frame = QFrame(self.page_create_yaml_mid_frame)
+        self.workflow_view7_frame.setObjectName(u"workflow_view7_frame")
+        self.workflow_view7_frame.setGeometry(QRect(1865, 0, 267, 440))
+        self.workflow_view7_frame.setMaximumSize(QSize(267, 16777215))
+        self.workflow_view7_frame.setFont(font)
+        self.workflow_view7_frame.setStyleSheet(u"background:rgb(240,240,240);\n"
+"border-radius: 25px;		")
+        self.workflow_view7_frame.setFrameShape(QFrame.NoFrame)
+        self.workflow_view7_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_46 = QVBoxLayout(self.workflow_view7_frame)
+        self.verticalLayout_46.setSpacing(6)
+        self.verticalLayout_46.setObjectName(u"verticalLayout_46")
+        self.verticalLayout_46.setContentsMargins(-1, 17, -1, -1)
+        self.verticalSpacer_51 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_46.addItem(self.verticalSpacer_51)
+
+        self.workflow_view7_label = QLabel(self.workflow_view7_frame)
+        self.workflow_view7_label.setObjectName(u"workflow_view7_label")
+        self.workflow_view7_label.setMaximumSize(QSize(250, 250))
+        self.workflow_view7_label.setFont(font)
+        self.workflow_view7_label.setFrameShape(QFrame.NoFrame)
+        self.workflow_view7_label.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_46.addWidget(self.workflow_view7_label)
+
+        self.frame_60 = QFrame(self.workflow_view7_frame)
+        self.frame_60.setObjectName(u"frame_60")
+        self.frame_60.setFrameShape(QFrame.NoFrame)
+        self.frame_60.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_33 = QHBoxLayout(self.frame_60)
+        self.horizontalLayout_33.setSpacing(0)
+        self.horizontalLayout_33.setObjectName(u"horizontalLayout_33")
+        self.horizontalLayout_33.setContentsMargins(0, 4, 0, 0)
+        self.horizontalSpacer_73 = QSpacerItem(106, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_33.addItem(self.horizontalSpacer_73)
+
+        self.workflow_view7_seemore_bn = QPushButton(self.frame_60)
+        self.workflow_view7_seemore_bn.setObjectName(u"workflow_view7_seemore_bn")
+        self.workflow_view7_seemore_bn.setMinimumSize(QSize(140, 30))
+        self.workflow_view7_seemore_bn.setFont(font4)
+        self.workflow_view7_seemore_bn.setStyleSheet(u"QPushButton {\n"
+"	border: none;\n"
+"	background-color: rgb(255,255,255);\n"
+"	border-radius: 15px;\n"
+"   border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}")
+
+        self.horizontalLayout_33.addWidget(self.workflow_view7_seemore_bn)
+
+
+        self.verticalLayout_46.addWidget(self.frame_60)
+
+        self.verticalSpacer_52 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_46.addItem(self.verticalSpacer_52)
+
+        self.workflow_view7_name_label = QLabel(self.workflow_view7_frame)
+        self.workflow_view7_name_label.setObjectName(u"workflow_view7_name_label")
+        self.workflow_view7_name_label.setMaximumSize(QSize(16777215, 16777215))
+        self.workflow_view7_name_label.setFont(font)
+        self.workflow_view7_name_label.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_46.addWidget(self.workflow_view7_name_label)
+
+        self.verticalSpacer_53 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_46.addItem(self.verticalSpacer_53)
 
         self.stackedWidget_create_yaml_frame.addWidget(self.workflow_selection_page)
         self.goptions_page = QWidget()
@@ -1360,7 +1694,7 @@ class Ui_MainWindow(object):
         self.goptions_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 932, 493))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 916, 493))
         self.scrollAreaWidgetContents.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout.setObjectName(u"gridLayout")
@@ -1458,6 +1792,24 @@ class Ui_MainWindow(object):
 
         self.gridLayout_26.addWidget(self.checkpoint_file_path_browse_label, 2, 1, 1, 1)
 
+        self.MODEL__LOAD_CHECKPOINT__LABEL = QLabel(self.train_disable_checkpoint_frame)
+        self.MODEL__LOAD_CHECKPOINT__LABEL.setObjectName(u"MODEL__LOAD_CHECKPOINT__LABEL")
+        self.MODEL__LOAD_CHECKPOINT__LABEL.setMinimumSize(QSize(30, 30))
+        self.MODEL__LOAD_CHECKPOINT__LABEL.setMaximumSize(QSize(30, 30))
+        self.MODEL__LOAD_CHECKPOINT__LABEL.setStyleSheet(u"")
+        self.MODEL__LOAD_CHECKPOINT__LABEL.setScaledContents(True)
+
+        self.gridLayout_26.addWidget(self.MODEL__LOAD_CHECKPOINT__LABEL, 1, 2, 1, 1)
+
+        self.PATHS__CHECKPOINT_FILE__INFO = QLabel(self.train_disable_checkpoint_frame)
+        self.PATHS__CHECKPOINT_FILE__INFO.setObjectName(u"PATHS__CHECKPOINT_FILE__INFO")
+        self.PATHS__CHECKPOINT_FILE__INFO.setMinimumSize(QSize(30, 30))
+        self.PATHS__CHECKPOINT_FILE__INFO.setMaximumSize(QSize(30, 30))
+        self.PATHS__CHECKPOINT_FILE__INFO.setStyleSheet(u"")
+        self.PATHS__CHECKPOINT_FILE__INFO.setScaledContents(True)
+
+        self.gridLayout_26.addWidget(self.PATHS__CHECKPOINT_FILE__INFO, 2, 2, 1, 1)
+
 
         self.gridLayout.addWidget(self.train_disable_checkpoint_frame, 6, 0, 1, 3)
 
@@ -1500,7 +1852,7 @@ class Ui_MainWindow(object):
         self.goptions_advanced_options_scrollarea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 870, 248))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 495, 248))
         self.gridLayout_2 = QGridLayout(self.scrollAreaWidgetContents_2)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.label = QLabel(self.scrollAreaWidgetContents_2)
@@ -1560,6 +1912,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_5.addItem(self.horizontalSpacer_2, 1, 3, 1, 1)
 
+        self.SYSTEM__NUM_CPUS__INFO = QLabel(self.frame_2)
+        self.SYSTEM__NUM_CPUS__INFO.setObjectName(u"SYSTEM__NUM_CPUS__INFO")
+        self.SYSTEM__NUM_CPUS__INFO.setMinimumSize(QSize(30, 30))
+        self.SYSTEM__NUM_CPUS__INFO.setMaximumSize(QSize(30, 30))
+        self.SYSTEM__NUM_CPUS__INFO.setStyleSheet(u"")
+        self.SYSTEM__NUM_CPUS__INFO.setScaledContents(True)
+
+        self.gridLayout_5.addWidget(self.SYSTEM__NUM_CPUS__INFO, 1, 1, 1, 1)
+
+        self.SYSTEM__SEED__INFO = QLabel(self.frame_2)
+        self.SYSTEM__SEED__INFO.setObjectName(u"SYSTEM__SEED__INFO")
+        self.SYSTEM__SEED__INFO.setMinimumSize(QSize(30, 30))
+        self.SYSTEM__SEED__INFO.setMaximumSize(QSize(30, 30))
+        self.SYSTEM__SEED__INFO.setScaledContents(True)
+
+        self.gridLayout_5.addWidget(self.SYSTEM__SEED__INFO, 3, 1, 1, 1)
+
 
         self.gridLayout_2.addWidget(self.frame_2, 1, 0, 1, 1)
 
@@ -1579,7 +1948,21 @@ class Ui_MainWindow(object):
         self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.setMaximumSize(QSize(200, 30))
         self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.setFont(font)
 
-        self.gridLayout_24.addWidget(self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT, 0, 1, 1, 1)
+        self.gridLayout_24.addWidget(self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT, 0, 2, 1, 1)
+
+        self.horizontalSpacer_15 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_24.addItem(self.horizontalSpacer_15, 0, 3, 1, 1)
+
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT = QComboBox(self.checkpoint_loading_opt_frame)
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.addItem("")
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.addItem("")
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setObjectName(u"MODEL__LOAD_CHECKPOINT_EPOCH__INPUT")
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setFont(font)
+
+        self.gridLayout_24.addWidget(self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT, 3, 2, 1, 1)
 
         self.label_4 = QLabel(self.checkpoint_loading_opt_frame)
         self.label_4.setObjectName(u"label_4")
@@ -1593,19 +1976,21 @@ class Ui_MainWindow(object):
 
         self.gridLayout_24.addWidget(self.label_38, 3, 0, 1, 1)
 
-        self.horizontalSpacer_15 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO = QLabel(self.checkpoint_loading_opt_frame)
+        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO.setObjectName(u"MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO")
+        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO.setScaledContents(True)
 
-        self.gridLayout_24.addItem(self.horizontalSpacer_15, 0, 2, 1, 1)
+        self.gridLayout_24.addWidget(self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO, 0, 1, 1, 1)
 
-        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT = QComboBox(self.checkpoint_loading_opt_frame)
-        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.addItem("")
-        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.addItem("")
-        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setObjectName(u"MODEL__LOAD_CHECKPOINT_EPOCH__INPUT")
-        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setFont(font)
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO = QLabel(self.checkpoint_loading_opt_frame)
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setObjectName(u"MODEL__LOAD_CHECKPOINT_EPOCH__INFO")
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setScaledContents(True)
 
-        self.gridLayout_24.addWidget(self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT, 3, 1, 1, 1)
+        self.gridLayout_24.addWidget(self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO, 3, 1, 1, 1)
 
 
         self.gridLayout_2.addWidget(self.checkpoint_loading_opt_frame, 3, 0, 1, 1)
@@ -1630,12 +2015,20 @@ class Ui_MainWindow(object):
         self.frame_21.setFrameShadow(QFrame.Raised)
         self.gridLayout_27 = QGridLayout(self.frame_21)
         self.gridLayout_27.setObjectName(u"gridLayout_27")
-        self.goptions_browse_yaml_path_bn = QPushButton(self.frame_21)
-        self.goptions_browse_yaml_path_bn.setObjectName(u"goptions_browse_yaml_path_bn")
-        self.goptions_browse_yaml_path_bn.setMaximumSize(QSize(130, 16777215))
-        self.goptions_browse_yaml_path_bn.setFont(font)
+        self.goptions_browse_yaml_path_input = QLineEdit(self.frame_21)
+        self.goptions_browse_yaml_path_input.setObjectName(u"goptions_browse_yaml_path_input")
+        self.goptions_browse_yaml_path_input.setMinimumSize(QSize(500, 30))
+        self.goptions_browse_yaml_path_input.setMaximumSize(QSize(500, 30))
+        self.goptions_browse_yaml_path_input.setFont(font)
 
-        self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_bn, 3, 5, 1, 1)
+        self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_input, 3, 4, 1, 1)
+
+        self.PROBLEM__NDIM__LABEL = QLabel(self.frame_21)
+        self.PROBLEM__NDIM__LABEL.setObjectName(u"PROBLEM__NDIM__LABEL")
+        self.PROBLEM__NDIM__LABEL.setMaximumSize(QSize(200, 35))
+        self.PROBLEM__NDIM__LABEL.setFont(font)
+
+        self.gridLayout_27.addWidget(self.PROBLEM__NDIM__LABEL, 0, 1, 1, 2)
 
         self.goptions_yaml_name_input = QLineEdit(self.frame_21)
         self.goptions_yaml_name_input.setObjectName(u"goptions_yaml_name_input")
@@ -1643,7 +2036,18 @@ class Ui_MainWindow(object):
         self.goptions_yaml_name_input.setMaximumSize(QSize(500, 30))
         self.goptions_yaml_name_input.setFont(font)
 
-        self.gridLayout_27.addWidget(self.goptions_yaml_name_input, 5, 3, 1, 1)
+        self.gridLayout_27.addWidget(self.goptions_yaml_name_input, 5, 4, 1, 1)
+
+        self.goptions_yaml_name_label = QLabel(self.frame_21)
+        self.goptions_yaml_name_label.setObjectName(u"goptions_yaml_name_label")
+        self.goptions_yaml_name_label.setMaximumSize(QSize(250, 35))
+        self.goptions_yaml_name_label.setFont(font)
+
+        self.gridLayout_27.addWidget(self.goptions_yaml_name_label, 5, 1, 1, 1)
+
+        self.horizontalSpacer_28 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_27.addItem(self.horizontalSpacer_28, 3, 7, 1, 1)
 
         self.PROBLEM__NDIM__INPUT = QComboBox(self.frame_21)
         self.PROBLEM__NDIM__INPUT.addItem("")
@@ -1653,21 +2057,14 @@ class Ui_MainWindow(object):
         self.PROBLEM__NDIM__INPUT.setMaximumSize(QSize(100, 30))
         self.PROBLEM__NDIM__INPUT.setFont(font)
 
-        self.gridLayout_27.addWidget(self.PROBLEM__NDIM__INPUT, 0, 3, 1, 1)
+        self.gridLayout_27.addWidget(self.PROBLEM__NDIM__INPUT, 0, 4, 1, 1)
 
-        self.dimension_label = QLabel(self.frame_21)
-        self.dimension_label.setObjectName(u"dimension_label")
-        self.dimension_label.setMaximumSize(QSize(200, 35))
-        self.dimension_label.setFont(font)
+        self.goptions_browse_yaml_path_bn = QPushButton(self.frame_21)
+        self.goptions_browse_yaml_path_bn.setObjectName(u"goptions_browse_yaml_path_bn")
+        self.goptions_browse_yaml_path_bn.setMaximumSize(QSize(130, 16777215))
+        self.goptions_browse_yaml_path_bn.setFont(font)
 
-        self.gridLayout_27.addWidget(self.dimension_label, 0, 1, 1, 2)
-
-        self.goptions_yaml_name_label = QLabel(self.frame_21)
-        self.goptions_yaml_name_label.setObjectName(u"goptions_yaml_name_label")
-        self.goptions_yaml_name_label.setMaximumSize(QSize(250, 35))
-        self.goptions_yaml_name_label.setFont(font)
-
-        self.gridLayout_27.addWidget(self.goptions_yaml_name_label, 5, 1, 1, 1)
+        self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_bn, 3, 6, 1, 1)
 
         self.goptions_browse_yaml_path_label = QLabel(self.frame_21)
         self.goptions_browse_yaml_path_label.setObjectName(u"goptions_browse_yaml_path_label")
@@ -1676,17 +2073,32 @@ class Ui_MainWindow(object):
 
         self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_label, 3, 1, 1, 2)
 
-        self.horizontalSpacer_28 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.PROBLEM__NDIM__INFO = QLabel(self.frame_21)
+        self.PROBLEM__NDIM__INFO.setObjectName(u"PROBLEM__NDIM__INFO")
+        self.PROBLEM__NDIM__INFO.setMinimumSize(QSize(30, 30))
+        self.PROBLEM__NDIM__INFO.setMaximumSize(QSize(30, 30))
+        self.PROBLEM__NDIM__INFO.setStyleSheet(u"")
+        self.PROBLEM__NDIM__INFO.setScaledContents(True)
 
-        self.gridLayout_27.addItem(self.horizontalSpacer_28, 3, 6, 1, 1)
+        self.gridLayout_27.addWidget(self.PROBLEM__NDIM__INFO, 0, 3, 1, 1)
 
-        self.goptions_browse_yaml_path_input = QLineEdit(self.frame_21)
-        self.goptions_browse_yaml_path_input.setObjectName(u"goptions_browse_yaml_path_input")
-        self.goptions_browse_yaml_path_input.setMinimumSize(QSize(500, 30))
-        self.goptions_browse_yaml_path_input.setMaximumSize(QSize(500, 30))
-        self.goptions_browse_yaml_path_input.setFont(font)
+        self.goptions_browse_yaml_path_info = QLabel(self.frame_21)
+        self.goptions_browse_yaml_path_info.setObjectName(u"goptions_browse_yaml_path_info")
+        self.goptions_browse_yaml_path_info.setMinimumSize(QSize(30, 30))
+        self.goptions_browse_yaml_path_info.setMaximumSize(QSize(30, 30))
+        self.goptions_browse_yaml_path_info.setStyleSheet(u"")
+        self.goptions_browse_yaml_path_info.setScaledContents(True)
 
-        self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_input, 3, 3, 1, 1)
+        self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_info, 3, 3, 1, 1)
+
+        self.goptions_yaml_name_info = QLabel(self.frame_21)
+        self.goptions_yaml_name_info.setObjectName(u"goptions_yaml_name_info")
+        self.goptions_yaml_name_info.setMinimumSize(QSize(30, 30))
+        self.goptions_yaml_name_info.setMaximumSize(QSize(30, 30))
+        self.goptions_yaml_name_info.setStyleSheet(u"")
+        self.goptions_yaml_name_info.setScaledContents(True)
+
+        self.gridLayout_27.addWidget(self.goptions_yaml_name_info, 5, 3, 1, 1)
 
 
         self.gridLayout.addWidget(self.frame_21, 0, 0, 2, 5)
@@ -1769,7 +2181,7 @@ class Ui_MainWindow(object):
         self.train_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, -2725, 934, 5883))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 934, 5883))
         self.scrollAreaWidgetContents_3.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout_3 = QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
@@ -4743,7 +5155,7 @@ class Ui_MainWindow(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollAreaWidgetContents_7 = QWidget()
         self.scrollAreaWidgetContents_7.setObjectName(u"scrollAreaWidgetContents_7")
-        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 928, 333))
+        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 529, 217))
         self.gridLayout_19 = QGridLayout(self.scrollAreaWidgetContents_7)
         self.gridLayout_19.setObjectName(u"gridLayout_19")
         self.label_48 = QLabel(self.scrollAreaWidgetContents_7)
@@ -6077,7 +6489,7 @@ class Ui_MainWindow(object):
         self.scrollArea_9.setWidgetResizable(True)
         self.scrollAreaWidgetContents_13 = QWidget()
         self.scrollAreaWidgetContents_13.setObjectName(u"scrollAreaWidgetContents_13")
-        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 913, 1255))
+        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 582, 1255))
         self.gridLayout_44 = QGridLayout(self.scrollAreaWidgetContents_13)
         self.gridLayout_44.setObjectName(u"gridLayout_44")
         self.label_86 = QLabel(self.scrollAreaWidgetContents_13)
@@ -7514,7 +7926,7 @@ class Ui_MainWindow(object):
         self.check_yaml_file_errors_frame.setWidgetResizable(True)
         self.scrollAreaWidgetContents_19 = QWidget()
         self.scrollAreaWidgetContents_19.setObjectName(u"scrollAreaWidgetContents_19")
-        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 34, 19))
+        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 96, 26))
         self.verticalLayout_32 = QVBoxLayout(self.scrollAreaWidgetContents_19)
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
         self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)
@@ -7637,8 +8049,8 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
-        self.stackedWidget_create_yaml_frame.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget_create_yaml_frame.setCurrentIndex(0)
         self.train_tab_widget.setCurrentIndex(0)
         self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(2)
         self.test_tab_widget.setCurrentIndex(0)
@@ -7704,13 +8116,27 @@ class Ui_MainWindow(object):
         self.continue_yaml_bn.setText(QCoreApplication.translate("MainWindow", u"Run workflow", None))
         self.left_arrow_bn.setText("")
         self.workflow_view1_label.setText("")
+        self.workflow_view1_seemore_bn.setText(QCoreApplication.translate("MainWindow", u"Learn more . . .", None))
         self.workflow_view1_name_label.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.workflow_view2_label.setText("")
         self.workflow_view2_seemore_bn.setText(QCoreApplication.translate("MainWindow", u"Learn more . . .", None))
         self.workflow_view2_name_label.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.workflow_view3_label.setText("")
+        self.workflow_view3_seemore_bn.setText(QCoreApplication.translate("MainWindow", u"Learn more . . .", None))
         self.workflow_view3_name_label.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.right_arrow_bn.setText("")
+        self.workflow_view4_label.setText("")
+        self.workflow_view4_seemore_bn.setText(QCoreApplication.translate("MainWindow", u"Learn more . . .", None))
+        self.workflow_view4_name_label.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.workflow_view5_label.setText("")
+        self.workflow_view5_seemore_bn.setText(QCoreApplication.translate("MainWindow", u"Learn more . . .", None))
+        self.workflow_view5_name_label.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.workflow_view6_label.setText("")
+        self.workflow_view6_seemore_bn.setText(QCoreApplication.translate("MainWindow", u"Learn more . . .", None))
+        self.workflow_view6_name_label.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.workflow_view7_label.setText("")
+        self.workflow_view7_seemore_bn.setText(QCoreApplication.translate("MainWindow", u"Learn more . . .", None))
+        self.workflow_view7_name_label.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
 #if QT_CONFIG(tooltip)
         self.goptions_scrollArea.setToolTip("")
 #endif // QT_CONFIG(tooltip)
@@ -7718,7 +8144,7 @@ class Ui_MainWindow(object):
         self.goptions_advanced_bn.setText("")
         self.checkpoint_file_path_browse_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
 #if QT_CONFIG(tooltip)
-        self.label_148.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Load previous training weigths (needed for test/inference phase or to train again but not from scratch). If the checkpoint file is empty, BiaPy will search for the checkpoint in the following manner: if the output folder and the job name match, BiaPy will locate the model's weights within the 'checkpoints' directory. On the other hand, if the checkpoint file path is specified that path will be used instead</span></p></body></html>", None))
+        self.label_148.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.label_148.setText(QCoreApplication.translate("MainWindow", u"Load already existing model", None))
         self.MODEL__LOAD_CHECKPOINT__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
@@ -7726,55 +8152,97 @@ class Ui_MainWindow(object):
 
         self.PATHS__CHECKPOINT_FILE__INPUT.setText(QCoreApplication.translate("MainWindow", u"model_weights.pth", None))
 #if QT_CONFIG(tooltip)
-        self.checkpoint_file_path_browse_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the model's checkpoint that will be loaded. Leave it blank to let BiaPy find it. If the output folder and the job name match, BiaPy will locate the model's weights within the 'checkpoints' directory</span></p></body></html>", None))
+        self.checkpoint_file_path_browse_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.checkpoint_file_path_browse_label.setText(QCoreApplication.translate("MainWindow", u"Model file", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__LOAD_CHECKPOINT__LABEL.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Load previous training weigths (needed for test/inference phase or to train again but not from scratch). If the checkpoint file is empty, BiaPy will search for the checkpoint in the following manner: if the output folder and the job name match, BiaPy will locate the model's weights within the 'checkpoints' directory. On the other hand, if the checkpoint file path is specified that path will be used instead</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__LOAD_CHECKPOINT__LABEL.setText("")
+#if QT_CONFIG(tooltip)
+        self.PATHS__CHECKPOINT_FILE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the model's checkpoint that will be loaded. Leave it blank to let BiaPy find it. If the output folder and the job name match, BiaPy will locate the model's weights within the 'checkpoints' directory</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.PATHS__CHECKPOINT_FILE__INFO.setText("")
         self.train_disable_checkpoint_label.setText(QCoreApplication.translate("MainWindow", u"Checkpoint configuration", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Hardware", None))
 #if QT_CONFIG(tooltip)
-        self.label_8.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Maximum number of CPU that BiaPy will be allowed to use. Set it to &quot;-1&quot; to set any limit. Normally a few cores will be used in this last case, as the biggest calculations will be on the GPU.</span></p></body></html>", None))
+        self.label_8.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.label_8.setText(QCoreApplication.translate("MainWindow", u"Max. CPUs", None))
 #if QT_CONFIG(tooltip)
-        self.label_2.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Math seed to use. </span><span style=\" font-size:12pt; font-weight:600;\">Must be an integer</span></p></body></html>", None))
+        self.label_2.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Math seed", None))
         self.SYSTEM__SEED__INPUT.setText(QCoreApplication.translate("MainWindow", u"0", None))
+#if QT_CONFIG(tooltip)
+        self.SYSTEM__NUM_CPUS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Maximum number of CPU that BiaPy will be allowed to use. Set it to &quot;-1&quot; to set any limit. Normally a few cores will be used in this last case, as the biggest calculations will be on the GPU.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.SYSTEM__NUM_CPUS__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.SYSTEM__SEED__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Math seed to use. </span><span style=\" font-size:12pt; font-weight:600;\">Must be an integer</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.SYSTEM__SEED__INFO.setText("")
         self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
         self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
 
-#if QT_CONFIG(tooltip)
-        self.label_4.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">When loading checkpoints whether if only model's weights are going to be loaded or optimizer, epochs and loss_scaler.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.label_4.setText(QCoreApplication.translate("MainWindow", u"Load only model weigths", None))
-#if QT_CONFIG(tooltip)
-        self.label_38.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Decide which checkpoint to load from job's dir if PATHS.CHECKPOINT_FILE is empty. Options: 'best_on_val' or 'last_on_train'</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.label_38.setText(QCoreApplication.translate("MainWindow", u"Epoch of the checkpoint", None))
         self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"best_on_val", None))
         self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"last_on_train", None))
 
+#if QT_CONFIG(tooltip)
+        self.label_4.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_4.setText(QCoreApplication.translate("MainWindow", u"Load only model weigths", None))
+#if QT_CONFIG(tooltip)
+        self.label_38.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_38.setText(QCoreApplication.translate("MainWindow", u"Epoch of the checkpoint", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">When loading checkpoints whether if only model's weights are going to be loaded or optimizer, epochs and loss_scaler.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Decide which checkpoint to load from job's dir if PATHS.CHECKPOINT_FILE is empty. Options: 'best_on_val' or 'last_on_train'</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setText("")
         self.checkpoint_loading_opt_label.setText(QCoreApplication.translate("MainWindow", u"Checkpoint loading options", None))
-        self.goptions_browse_yaml_path_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
+#if QT_CONFIG(statustip)
+        self.goptions_browse_yaml_path_input.setStatusTip("")
+#endif // QT_CONFIG(statustip)
+#if QT_CONFIG(tooltip)
+        self.PROBLEM__NDIM__LABEL.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.PROBLEM__NDIM__LABEL.setText(QCoreApplication.translate("MainWindow", u"Image dimension", None))
 #if QT_CONFIG(tooltip)
         self.goptions_yaml_name_input.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.goptions_yaml_name_input.setText("")
+#if QT_CONFIG(tooltip)
+        self.goptions_yaml_name_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.goptions_yaml_name_label.setText(QCoreApplication.translate("MainWindow", u"Configuration file name", None))
         self.PROBLEM__NDIM__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"2D", None))
         self.PROBLEM__NDIM__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"3D", None))
 
+        self.goptions_browse_yaml_path_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
 #if QT_CONFIG(tooltip)
-        self.dimension_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of dimensions of the input images</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.dimension_label.setText(QCoreApplication.translate("MainWindow", u"Image dimension", None))
-#if QT_CONFIG(tooltip)
-        self.goptions_yaml_name_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">YAML file name</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.goptions_yaml_name_label.setText(QCoreApplication.translate("MainWindow", u"Configuration file name", None))
-#if QT_CONFIG(tooltip)
-        self.goptions_browse_yaml_path_label.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to store the YAML file</span></p></body></html>", None))
+        self.goptions_browse_yaml_path_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.goptions_browse_yaml_path_label.setText(QCoreApplication.translate("MainWindow", u"Configuration file directory", None))
+#if QT_CONFIG(tooltip)
+        self.PROBLEM__NDIM__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of dimensions of the input images</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(statustip)
+        self.PROBLEM__NDIM__INFO.setStatusTip("")
+#endif // QT_CONFIG(statustip)
+        self.PROBLEM__NDIM__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.goptions_browse_yaml_path_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to store the YAML file</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.goptions_browse_yaml_path_info.setText("")
+#if QT_CONFIG(tooltip)
+        self.goptions_yaml_name_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">YAML file name</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.goptions_yaml_name_info.setText("")
 #if QT_CONFIG(tooltip)
         self.label_49.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to enable the training phase or not</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)

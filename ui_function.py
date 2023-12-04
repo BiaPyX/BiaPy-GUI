@@ -3,6 +3,7 @@ import sys
 import re
 import multiprocessing
 import datetime
+from collections import deque
 
 from PySide2.QtCore import  QSize, QFile 
 from PySide2.QtSvg import QSvgWidget
@@ -11,7 +12,7 @@ import settings
 from main import * 
 from run_functions import run_worker
 from build_functions import build_worker
-from ui_utils import get_text, resource_path, set_workflow_page, oninit_checks, load_yaml_config
+from ui_utils import get_text, resource_path, oninit_checks, load_yaml_config
 from aux_classes.checkableComboBox import CheckableComboBox
 
 class UIFunction(MainWindow):
@@ -57,7 +58,7 @@ class UIFunction(MainWindow):
             main_window.cfg.settings['init'] = True
             main_window.last_selected_workflow = -1
 
-    def obtain_workflow_description(main_window):
+    def obtain_workflow_description(main_window, s_workflow):
         """
         Starts workflow description page. 
                 
@@ -69,12 +70,6 @@ class UIFunction(MainWindow):
         # Load first time
         if not 'workflow_description_images' in main_window.cfg.settings:
             main_window.cfg.load_workflow_detail_page()
-
-        s_workflow = main_window.cfg.settings['selected_workflow'] 
-        if s_workflow < 0:
-            s_workflow = len(main_window.cfg.settings['workflow_names'])-1
-        if s_workflow == len(main_window.cfg.settings['workflow_names']):
-            s_workflow = 0
 
         workflow_name = main_window.cfg.settings['workflow_names'][s_workflow].replace("\n"," ") 
         workflow_images = main_window.cfg.settings['workflow_description_images'][s_workflow]
@@ -157,6 +152,17 @@ class UIFunction(MainWindow):
         main_window.ui.gpu_status_label.setOpenExternalLinks(True)
         main_window.ui.verticalLayout_33.addWidget(main_window.ui.gpu_status_label)
 
+        # Info icons
+        main_window.ui.PROBLEM__NDIM__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.goptions_browse_yaml_path_info.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.goptions_yaml_name_info.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.MODEL__LOAD_CHECKPOINT__LABEL.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.PATHS__CHECKPOINT_FILE__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.SYSTEM__NUM_CPUS__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.SYSTEM__SEED__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setPixmap(main_window.cfg.settings['info_image'])
+
     ###############
     # Workflow page 
     ###############
@@ -170,15 +176,96 @@ class UIFunction(MainWindow):
             Main window of the application.
         """
         main_window.ui.workflow_view1_frame.setEnabled(False)
+        main_window.ui.workflow_view2_frame.setEnabled(True)
         main_window.ui.workflow_view3_frame.setEnabled(False)
+        main_window.ui.workflow_view4_frame.setEnabled(False)
+        main_window.ui.workflow_view5_frame.setEnabled(False)
+        main_window.ui.workflow_view6_frame.setEnabled(False)
+        main_window.ui.workflow_view7_frame.setEnabled(False)
+        
+        main_window.workflow_view_queue = deque([1, 2, 3, 4, 5, 6, 7])
+
+        class MouseObserver(QObject):
+            def __init__(self, widget, parent):
+                super().__init__(widget)
+                self._widget = widget
+                self.parent = parent
+                self.widget.installEventFilter(self)
+
+            @property
+            def widget(self):
+                return self._widget
+
+            def eventFilter(self, obj, event):
+                if obj is self.widget and event.type() == QEvent.MouseButtonPress:
+                    post = int(obj.objectName().split('_')[1][-1])
+                    left = False if main_window.workflow_view_queue[0] == post else True
+                    UIFunction.move_workflow_view(self.parent, left)
+                return super().eventFilter(obj, event)
+
+        main_window.observer1 = MouseObserver(main_window.ui.workflow_view1_frame, main_window)
+        main_window.observer2 = MouseObserver(main_window.ui.workflow_view2_frame, main_window)
+        main_window.observer3 = MouseObserver(main_window.ui.workflow_view3_frame, main_window)
+        main_window.observer4 = MouseObserver(main_window.ui.workflow_view4_frame, main_window)
+        main_window.observer5 = MouseObserver(main_window.ui.workflow_view5_frame, main_window)
+        main_window.observer6 = MouseObserver(main_window.ui.workflow_view6_frame, main_window)
+        main_window.observer7 = MouseObserver(main_window.ui.workflow_view7_frame, main_window)
+
+        main_window.cfg.load_workflow_page()
+        main_window.ui.workflow_view1_label.setPixmap(main_window.cfg.settings['workflow_images'][0])
+        main_window.ui.workflow_view1_name_label.setText(main_window.cfg.settings['workflow_names'][0])
+        main_window.ui.workflow_view2_label.setPixmap(main_window.cfg.settings['workflow_images'][1])
+        main_window.ui.workflow_view2_name_label.setText(main_window.cfg.settings['workflow_names'][1])
+        main_window.ui.workflow_view3_label.setPixmap(main_window.cfg.settings['workflow_images'][2])
+        main_window.ui.workflow_view3_name_label.setText(main_window.cfg.settings['workflow_names'][2])
+        main_window.ui.workflow_view4_label.setPixmap(main_window.cfg.settings['workflow_images'][3])
+        main_window.ui.workflow_view4_name_label.setText(main_window.cfg.settings['workflow_names'][3])
+        main_window.ui.workflow_view5_label.setPixmap(main_window.cfg.settings['workflow_images'][4])
+        main_window.ui.workflow_view5_name_label.setText(main_window.cfg.settings['workflow_names'][4])
+        main_window.ui.workflow_view6_label.setPixmap(main_window.cfg.settings['workflow_images'][5])
+        main_window.ui.workflow_view6_name_label.setText(main_window.cfg.settings['workflow_names'][5])
+        main_window.ui.workflow_view7_label.setPixmap(main_window.cfg.settings['workflow_images'][6])
+        main_window.ui.workflow_view7_name_label.setText(main_window.cfg.settings['workflow_names'][6])
 
     def move_workflow_view(main_window, isleft):
         main_window.last_selected_workflow = main_window.cfg.settings['selected_workflow']
-        if isleft:
-            main_window.cfg.settings['selected_workflow'] = main_window.cfg.settings['selected_workflow'] - 1 if main_window.cfg.settings['selected_workflow'] != 0 else len(main_window.cfg.settings['workflow_names'])-1
+
+        first_element_x_pos = 35
+        step_x = 305
+        first_not_visible_element_x_pos = 950
+        x = first_element_x_pos 
+        if isleft:            
+            while x+step_x > first_element_x_pos:
+                for i in range(7):
+                    getattr(main_window.ui, f"workflow_view{main_window.workflow_view_queue[i]}_frame").move(x+(step_x*i), 0)
+                    getattr(main_window.ui, f"workflow_view{main_window.workflow_view_queue[i]}_frame").repaint()
+                x -= 30
+            
+            item = main_window.workflow_view_queue.popleft()
+            main_window.workflow_view_queue.append(item) 
+            item = 0
         else: 
-            main_window.cfg.settings['selected_workflow'] = main_window.cfg.settings['selected_workflow'] + 1 if main_window.cfg.settings['selected_workflow'] != len(main_window.cfg.settings['workflow_names'])-1 else 0
-        set_workflow_page(main_window)
+            while x < first_not_visible_element_x_pos:
+                for i in range(7):
+                    getattr(main_window.ui, f"workflow_view{main_window.workflow_view_queue[i]}_frame").move(x+(step_x*i), 0)
+                    getattr(main_window.ui, f"workflow_view{main_window.workflow_view_queue[i]}_frame").repaint()
+                x += 30
+            
+            item = main_window.workflow_view_queue.pop()
+            main_window.workflow_view_queue.appendleft(item) 
+            item = 2
+
+        main_window.cfg.settings['selected_workflow'] = main_window.workflow_view_queue[1]-1
+
+        # Final positions
+        for i in range(7):
+            getattr(main_window.ui, f"workflow_view{main_window.workflow_view_queue[i]}_frame").move(first_element_x_pos+(step_x*i), 0)
+            getattr(main_window.ui, f"workflow_view{main_window.workflow_view_queue[i]}_frame").repaint()
+        
+        getattr(main_window.ui, f"workflow_view{main_window.workflow_view_queue[1]}_frame").setEnabled(True)
+        getattr(main_window.ui, f"workflow_view{main_window.workflow_view_queue[1]}_frame").setStyleSheet(f"#workflow_view{main_window.workflow_view_queue[1]}_frame "+"{\nborder: 5px solid rgb(64,144,253);\nborder-radius: 25px;\n}")
+        getattr(main_window.ui, f"workflow_view{main_window.workflow_view_queue[item]}_frame").setEnabled(False)
+        getattr(main_window.ui, f"workflow_view{main_window.workflow_view_queue[item]}_frame").setStyleSheet("background:rgb(240,240,240);\nborder-radius: 25px;")
 
     ######################
     # General options page 

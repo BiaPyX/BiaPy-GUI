@@ -52,6 +52,7 @@ class Settings():
             QPixmap(resource_path(os.path.join("images","bn_images","up_arrow.svg"))),
             QPixmap(resource_path(os.path.join("images","bn_images","down_arrow.svg")))
         ]
+        self.settings['info_image'] = QPixmap(resource_path(os.path.join("images","bn_images","info.png")))
 
         # Workflow page
         self.settings['workflow_names'] = ["Semantic\nSegmentation", "Instance\nsegmentation", "Object\ndetection", "Image\ndenoising", "Super\nresolution",\

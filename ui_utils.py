@@ -180,12 +180,10 @@ def change_page(main_window, buttonName, to_page):
         main_window.cfg.settings['page_number'] = 0
 
     elif buttonName=='bn_workflow' or ('bn_' not in buttonName and to_page == 1):
-        main_window.cfg.load_workflow_page()
         main_window.ui.continue_bn.setText("Continue")
         main_window.ui.stackedWidget.setCurrentWidget(main_window.ui.page_create_yaml)
         main_window.ui.stackedWidget_create_yaml_frame.setCurrentWidget(main_window.ui.workflow_selection_page)
         main_window.ui.frame_workflow.setStyleSheet("background:rgb(255,255,255)") 
-        set_workflow_page(main_window)
         main_window.cfg.settings['page_number'] = 1
         adjust_window_progress(main_window)
 
@@ -226,29 +224,7 @@ def change_page(main_window, buttonName, to_page):
             main_window.cfg.settings['page_number'] = 5
         if not created:
             main_window.cfg.settings['page_number'] -= 1    
-    move_between_workflows(main_window, to_page)
-
-def set_workflow_page(main_window):
-    """
-    Changes workflow images in the workflow page. 
-    
-    Parameters
-    ----------
-    main_window : QMainWindow
-        Main window of the application.
-    """
-    # Left view
-    main_window.ui.workflow_view1_label.setPixmap(main_window.cfg.settings['workflow_images'][main_window.cfg.settings['selected_workflow']-1])
-    main_window.ui.workflow_view1_name_label.setText(main_window.cfg.settings['workflow_names'][main_window.cfg.settings['selected_workflow']-1])
-
-    # Mid view
-    main_window.ui.workflow_view2_label.setPixmap(main_window.cfg.settings['workflow_images'][main_window.cfg.settings['selected_workflow']])
-    main_window.ui.workflow_view2_name_label.setText(main_window.cfg.settings['workflow_names'][main_window.cfg.settings['selected_workflow']])
-
-    # Right view
-    p = main_window.cfg.settings['selected_workflow']+1 if main_window.cfg.settings['selected_workflow']+1 < len(main_window.cfg.settings['workflow_names']) else 0
-    main_window.ui.workflow_view3_label.setPixmap(main_window.cfg.settings['workflow_images'][p])
-    main_window.ui.workflow_view3_name_label.setText(main_window.cfg.settings['workflow_names'][p])     
+    move_between_workflows(main_window, to_page)   
 
 def adjust_window_progress(main_window):
     """
@@ -557,7 +533,7 @@ def create_yaml_file(main_window):
 
     # Problem specification
     workflow_names_yaml = ['SEMANTIC_SEG', 'INSTANCE_SEG', 'DETECTION', 'DENOISING', 'SUPER_RESOLUTION', 
-        'main_window_SUPERVISED', 'CLASSIFICATION']
+        'SELF_SUPERVISED', 'CLASSIFICATION']
     biapy_config['PROBLEM'] = {}
     biapy_config['PROBLEM']['TYPE'] = workflow_names_yaml[main_window.cfg.settings['selected_workflow']]
     biapy_config['PROBLEM']['NDIM'] = get_text(main_window.ui.PROBLEM__NDIM__INPUT)
@@ -642,13 +618,13 @@ def create_yaml_file(main_window):
         biapy_config['PROBLEM']['SUPER_RESOLUTION'] = {}
         biapy_config['PROBLEM']['SUPER_RESOLUTION']['UPSCALING'] = int(get_text(main_window.ui.PROBLEM__SUPER_RESOLUTION__UPSCALING__INPUT))
 
-    ### main_window_SUPERVISED
+    ### SELF_SUPERVISED
     elif main_window.cfg.settings['selected_workflow'] == 5:
-        biapy_config['PROBLEM']['main_window_SUPERVISED'] = {}
-        biapy_config['PROBLEM']['main_window_SUPERVISED']['PRETEXT_TASK'] = get_text(main_window.ui.PROBLEM__main_window_SUPERVISED__PRETEXT_TASK__INPUT)
-        if get_text(main_window.ui.PROBLEM__main_window_SUPERVISED__PRETEXT_TASK__INPUT) == "crappify":
-            biapy_config['PROBLEM']['main_window_SUPERVISED']['RESIZING_FACTOR'] = int(get_text(main_window.ui.PROBLEM__main_window_SUPERVISED__RESIZING_FACTOR__INPUT))
-            biapy_config['PROBLEM']['main_window_SUPERVISED']['NOISE'] = float(get_text(main_window.ui.PROBLEM__main_window_SUPERVISED__NOISE__INPUT))
+        biapy_config['PROBLEM']['SELF_SUPERVISED'] = {}
+        biapy_config['PROBLEM']['SELF_SUPERVISED']['PRETEXT_TASK'] = get_text(main_window.ui.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT)
+        if get_text(main_window.ui.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT) == "crappify":
+            biapy_config['PROBLEM']['SELF_SUPERVISED']['RESIZING_FACTOR'] = int(get_text(main_window.ui.PROBLEM__SELF_SUPERVISED__RESIZING_FACTOR__INPUT))
+            biapy_config['PROBLEM']['SELF_SUPERVISED']['NOISE'] = float(get_text(main_window.ui.PROBLEM__SELF_SUPERVISED__NOISE__INPUT))
 
     # Dataset
     biapy_config['DATA'] = {}
@@ -1326,7 +1302,7 @@ class load_yaml_to_GUI_engine(QObject):
                 self.main_window.cfg.settings['selected_workflow'] = 3
             elif work_id == "SUPER_RESOLUTION":
                 self.main_window.cfg.settings['selected_workflow'] = 4
-            elif work_id == "self.main_window_SUPERVISED":
+            elif work_id == "SELF_SUPERVISED":
                 self.main_window.cfg.settings['selected_workflow'] = 5
             else: # CLASSIFICATION
                 self.main_window.cfg.settings['selected_workflow'] = 6

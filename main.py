@@ -36,10 +36,16 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        
+
         self.log_file = log_file
         self.log_dir = log_dir
         self.cfg = Settings()
+
+        self.workflow_view_queue = None
+        self.observer1 = None
+        self.observer2 = None
+        self.observer3 = None
+        self.observer4 = None
 
         # Adjust font cross-platform 
         self.setStyleSheet("QWidget{ font-size:16px;}")
@@ -111,8 +117,8 @@ class MainWindow(QMainWindow):
         self.ui.biapy_citation_bn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://github.com/danifranco/BiaPy#citation")))
 
         # Workflow page buttons
-        self.ui.left_arrow_bn.clicked.connect(lambda: UIFunction.move_workflow_view(self, True))
-        self.ui.right_arrow_bn.clicked.connect(lambda: UIFunction.move_workflow_view(self, False))
+        self.ui.left_arrow_bn.clicked.connect(lambda: UIFunction.move_workflow_view(self, False))
+        self.ui.right_arrow_bn.clicked.connect(lambda: UIFunction.move_workflow_view(self, True))
         self.ui.continue_bn.clicked.connect(lambda: change_page(self, 'up', -1))
         self.ui.back_bn.clicked.connect(lambda: change_page(self, 'down', -1))
         self.ui.back_bn.setIcon(QIcon(resource_path(os.path.join("images","bn_images", "back.png"))))
@@ -122,7 +128,13 @@ class MainWindow(QMainWindow):
         self.ui.window3_bn.clicked.connect(lambda: change_page(self, 'bn_train', 99))
         self.ui.window4_bn.clicked.connect(lambda: change_page(self, 'bn_test', 99))
         
-        self.ui.workflow_view2_seemore_bn.clicked.connect(lambda: UIFunction.obtain_workflow_description(self))
+        self.ui.workflow_view1_seemore_bn.clicked.connect(lambda: UIFunction.obtain_workflow_description(self, 0))
+        self.ui.workflow_view2_seemore_bn.clicked.connect(lambda: UIFunction.obtain_workflow_description(self, 1))
+        self.ui.workflow_view3_seemore_bn.clicked.connect(lambda: UIFunction.obtain_workflow_description(self, 2))
+        self.ui.workflow_view4_seemore_bn.clicked.connect(lambda: UIFunction.obtain_workflow_description(self, 3))
+        self.ui.workflow_view5_seemore_bn.clicked.connect(lambda: UIFunction.obtain_workflow_description(self, 4))
+        self.ui.workflow_view6_seemore_bn.clicked.connect(lambda: UIFunction.obtain_workflow_description(self, 5))
+        self.ui.workflow_view7_seemore_bn.clicked.connect(lambda: UIFunction.obtain_workflow_description(self, 6))
 
         # General options page buttons
         self.ui.SYSTEM__SEED__INPUT.setValidator(self.int_validator)
