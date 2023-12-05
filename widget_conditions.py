@@ -20,6 +20,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 },
+            "PATHS__CHECKPOINT_FILE__INFO": 
+                {
+                    "MODEL__LOAD_CHECKPOINT__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                },
             "checkpoint_file_path_browse_bn": 
                 {
                     "MODEL__LOAD_CHECKPOINT__INPUT": 
@@ -62,6 +69,13 @@ class Widget_conditions():
                         "Extract from train (split training)"
                     ],
                 }, 
+            "percentage_validation_info": 
+                {
+                    "DATA__VAL__TYPE__INPUT": 
+                    [
+                        "Extract from train (split training)"
+                    ],
+                }, 
             "DATA__VAL__SPLIT_TRAIN__INPUT": 
                 {
                     "DATA__VAL__TYPE__INPUT": 
@@ -76,6 +90,13 @@ class Widget_conditions():
                         "Extract from train (cross validation)"
                     ],
                 },
+            "cross_validation_nfolds_info": 
+                {
+                    "DATA__VAL__TYPE__INPUT": 
+                    [
+                        "Extract from train (cross validation)"
+                    ],
+                },
             "DATA__VAL__CROSS_VAL_NFOLD__INPUT": 
                 {
                     "DATA__VAL__TYPE__INPUT": 
@@ -84,6 +105,13 @@ class Widget_conditions():
                     ],
                 },
             "cross_validation_fold_label": 
+                {
+                    "DATA__VAL__TYPE__INPUT": 
+                    [
+                        "Extract from train (cross validation)"
+                    ],
+                },
+            "cross_validation_fold_info": 
                 {
                     "DATA__VAL__TYPE__INPUT": 
                     [
@@ -111,6 +139,13 @@ class Widget_conditions():
                         "Extract from train (cross validation)"
                     ],
                 }, 
+            "DATA__TEST__USE_VAL_AS_TEST__INFO": 
+                {
+                    "DATA__VAL__TYPE__INPUT": 
+                    [
+                        "Extract from train (cross validation)"
+                    ],
+                },
             "DATA__VAL__PATH__LABEL": 
                 {
                     "DATA__VAL__TYPE__INPUT": 
@@ -118,6 +153,13 @@ class Widget_conditions():
                         "Not extracted from train (path needed)"
                     ],
                 }, 
+            "DATA__VAL__PATH__INFO": 
+                {
+                    "DATA__VAL__TYPE__INPUT": 
+                    [
+                        "Not extracted from train (path needed)"
+                    ],
+                },
             "DATA__VAL__PATH__INPUT": 
                 {
                     "DATA__VAL__TYPE__INPUT": 
@@ -133,6 +175,13 @@ class Widget_conditions():
                     ],
                 }, 
             "validation_data_gt_label": 
+                {
+                    "DATA__VAL__TYPE__INPUT": 
+                    [
+                        "Not extracted from train (path needed)"
+                    ],
+                }, 
+            "validation_data_gt_info": 
                 {
                     "DATA__VAL__TYPE__INPUT": 
                     [
@@ -160,6 +209,13 @@ class Widget_conditions():
                         "Not extracted from train (path needed)"
                     ],
                 }, 
+            "val_in_memory_info": 
+                {
+                    "DATA__VAL__TYPE__INPUT": 
+                    [
+                        "Not extracted from train (path needed)"
+                    ],
+                }, 
             "DATA__VAL__IN_MEMORY__INPUT": 
                 {
                     "DATA__VAL__TYPE__INPUT": 
@@ -180,6 +236,18 @@ class Widget_conditions():
                     ]
                 }, 
             "DATA__TEST__PATH__INPUT": 
+                {
+                    "DATA__VAL__TYPE__INPUT": 
+                    [
+                        "Not extracted from train (path needed)", 
+                        "Extract from train (split training)"
+                    ],
+                    "DATA__TEST__USE_VAL_AS_TEST__INPUT":
+                    [
+                        "No"
+                    ]
+                }, 
+            "DATA__TEST__PATH__INFO": 
                 {
                     "DATA__VAL__TYPE__INPUT": 
                     [
@@ -227,6 +295,18 @@ class Widget_conditions():
                         "No"
                     ]
                 }, 
+            "DATA__TEST__LOAD_GT__INFO": 
+                {
+                    "DATA__VAL__TYPE__INPUT": 
+                    [
+                        "Not extracted from train (path needed)", 
+                        "Extract from train (split training)"
+                    ],
+                    "DATA__TEST__USE_VAL_AS_TEST__INPUT":
+                    [
+                        "No"
+                    ]
+                }, 
             "test_data_gt_label": 
                 {
                     "DATA__VAL__TYPE__INPUT": 
@@ -244,6 +324,22 @@ class Widget_conditions():
                     ]
                 }, 
             "DATA__TEST__GT_PATH__INPUT": 
+                {
+                    "DATA__VAL__TYPE__INPUT": 
+                    [
+                        "Not extracted from train (path needed)", 
+                        "Extract from train (split training)"
+                    ],
+                    "DATA__TEST__USE_VAL_AS_TEST__INPUT":
+                    [
+                        "No"
+                    ],
+                    "DATA__TEST__LOAD_GT__INPUT":
+                    [
+                        "Yes"
+                    ]
+                },
+            "DATA__TEST__GT_PATH__INFO": 
                 {
                     "DATA__VAL__TYPE__INPUT": 
                     [
@@ -288,6 +384,18 @@ class Widget_conditions():
                     ]
                 }, 
             "DATA__TEST__IN_MEMORY__INPUT": 
+                {
+                    "DATA__VAL__TYPE__INPUT": 
+                    [
+                        "Not extracted from train (path needed)", 
+                        "Extract from train (split training)"
+                    ],
+                    "DATA__TEST__USE_VAL_AS_TEST__INPUT":
+                    [
+                        "No"
+                    ]
+                }, 
+            "DATA__TEST__IN_MEMORY__INFO": 
                 {
                     "DATA__VAL__TYPE__INPUT": 
                     [
@@ -362,6 +470,13 @@ class Widget_conditions():
                         "ADAMW"
                     ],
                 }, 
+            "TRAIN__W_DECAY__INFO": 
+                {
+                    "TRAIN__OPTIMIZER__INPUT": 
+                    [
+                        "ADAMW"
+                    ],
+                }, 
             "profiler_batch_range_label": 
                 {
                     "TRAIN__PROFILER__INPUT": 
@@ -370,6 +485,13 @@ class Widget_conditions():
                     ],
                 }, 
             "TRAIN__PROFILER_BATCH_RANGE__INPUT": 
+                {
+                    "TRAIN__PROFILER__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "TRAIN__PROFILER_BATCH_RANGE__INFO": 
                 {
                     "TRAIN__PROFILER__INPUT": 
                     [
@@ -390,6 +512,13 @@ class Widget_conditions():
                         "custom"
                     ],
                 }, 
+            "DATA__NORMALIZATION__CUSTOM_MEAN__INFO": 
+                {
+                    "DATA__NORMALIZATION__TYPE__INPUT": 
+                    [
+                        "custom"
+                    ],
+                },
             "custom_std_label": 
                 {
                     "DATA__NORMALIZATION__TYPE__INPUT": 
@@ -398,6 +527,13 @@ class Widget_conditions():
                     ],
                 }, 
             "DATA__NORMALIZATION__CUSTOM_STD__INPUT": 
+                {
+                    "DATA__NORMALIZATION__TYPE__INPUT": 
+                    [
+                        "custom"
+                    ],
+                }, 
+            "DATA__NORMALIZATION__CUSTOM_STD__INFO": 
                 {
                     "DATA__NORMALIZATION__TYPE__INPUT": 
                     [
@@ -432,6 +568,13 @@ class Widget_conditions():
                         "warmupcosine"
                     ],
                 },
+            "TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO": 
+                {
+                    "TRAIN__LR_SCHEDULER__NAME__INPUT": 
+                    [
+                        "warmupcosine"
+                    ],
+                },
             "lr_schel_min_lr_label": 
                 {
                     "TRAIN__LR_SCHEDULER__NAME__INPUT": 
@@ -441,6 +584,14 @@ class Widget_conditions():
                     ],
                 },
             "TRAIN__LR_SCHEDULER__MIN_LR__INPUT": 
+                {
+                    "TRAIN__LR_SCHEDULER__NAME__INPUT": 
+                    [
+                        "warmupcosine",
+                        "reduceonplateau"
+                    ],
+                }, 
+            "TRAIN__LR_SCHEDULER__MIN_LR__INFO": 
                 {
                     "TRAIN__LR_SCHEDULER__NAME__INPUT": 
                     [
@@ -462,6 +613,13 @@ class Widget_conditions():
                         "reduceonplateau"
                     ],
                 },
+            "TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO": 
+                {
+                    "TRAIN__LR_SCHEDULER__NAME__INPUT": 
+                    [
+                        "reduceonplateau"
+                    ],
+                },
             "lr_schel_reduce_on_plat_factor_label": 
                 {
                     "TRAIN__LR_SCHEDULER__NAME__INPUT": 
@@ -470,6 +628,13 @@ class Widget_conditions():
                     ],
                 }, 
             "TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT": 
+                {
+                    "TRAIN__LR_SCHEDULER__NAME__INPUT": 
+                    [
+                        "reduceonplateau"
+                    ],
+                }, 
+            "TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO": 
                 {
                     "TRAIN__LR_SCHEDULER__NAME__INPUT": 
                     [
@@ -497,6 +662,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "AUGMENTOR__RANDOM_ROT_RANGE__INFO": 
+                {
+                    "AUGMENTOR__RANDOM_ROT__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                },
             "da_shear_range_label": 
                 {
                     "AUGMENTOR__SHEAR__INPUT": 
@@ -505,6 +677,13 @@ class Widget_conditions():
                     ],
                 }, 
             "AUGMENTOR__SHEAR_RANGE__INPUT": 
+                {
+                    "AUGMENTOR__SHEAR__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "AUGMENTOR__SHEAR_RANGE__INFO": 
                 {
                     "AUGMENTOR__SHEAR__INPUT": 
                     [
@@ -525,6 +704,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "AUGMENTOR__ZOOM_RANGE__INFO": 
+                {
+                    "AUGMENTOR__ZOOM__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
             "da_shift_range_label": 
                 {
                     "AUGMENTOR__SHIFT__INPUT": 
@@ -533,6 +719,13 @@ class Widget_conditions():
                     ],
                 }, 
             "AUGMENTOR__SHIFT_RANGE__INPUT": 
+                {
+                    "AUGMENTOR__SHIFT__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "AUGMENTOR__SHIFT_RANGE__INFO": 
                 {
                     "AUGMENTOR__SHIFT__INPUT": 
                     [
@@ -553,6 +746,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "AUGMENTOR__E_ALPHA__INFO": 
+                {
+                    "AUGMENTOR__ELASTIC__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
             "da_elastic_sigma_label": 
                 {
                     "AUGMENTOR__ELASTIC__INPUT": 
@@ -561,6 +761,13 @@ class Widget_conditions():
                     ],
                 }, 
             "AUGMENTOR__E_SIGMA__INPUT": 
+                {
+                    "AUGMENTOR__ELASTIC__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "AUGMENTOR__E_SIGMA__INFO": 
                 {
                     "AUGMENTOR__ELASTIC__INPUT": 
                     [
@@ -581,6 +788,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "AUGMENTOR__E_MODE__INFO": 
+                {
+                    "AUGMENTOR__ELASTIC__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
             "da_gaussian_sigma_label": 
                 {
                     "AUGMENTOR__G_BLUR__INPUT": 
@@ -589,6 +803,13 @@ class Widget_conditions():
                     ],
                 }, 
             "AUGMENTOR__G_SIGMA__INPUT": 
+                {
+                    "AUGMENTOR__G_BLUR__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "AUGMENTOR__G_SIGMA__INFO": 
                 {
                     "AUGMENTOR__G_BLUR__INPUT": 
                     [
@@ -609,6 +830,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "AUGMENTOR__MB_KERNEL__INFO": 
+                {
+                    "AUGMENTOR__MEDIAN_BLUR__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
             "da_motion_blur_k_size_label": 
                 {
                     "AUGMENTOR__MOTION_BLUR__INPUT": 
@@ -617,6 +845,13 @@ class Widget_conditions():
                     ],
                 }, 
             "AUGMENTOR__MOTB_K_RANGE__INPUT": 
+                {
+                    "AUGMENTOR__MOTION_BLUR__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "AUGMENTOR__MOTB_K_RANGE__INFO": 
                 {
                     "AUGMENTOR__MOTION_BLUR__INPUT": 
                     [
@@ -637,6 +872,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "AUGMENTOR__GC_GAMMA__INFO": 
+                {
+                    "AUGMENTOR__GAMMA_CONTRAST__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
             "da_brightness_factor_range_label": 
                 {
                     "AUGMENTOR__BRIGHTNESS__INPUT": 
@@ -651,6 +893,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "AUGMENTOR__BRIGHTNESS_FACTOR__INFO": 
+                {
+                    "AUGMENTOR__BRIGHTNESS__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                },
             "da_brightness_mode_label": 
                 {
                     "AUGMENTOR__BRIGHTNESS__INPUT": 
@@ -659,6 +908,13 @@ class Widget_conditions():
                     ],
                 }, 
             "AUGMENTOR__BRIGHTNESS_MODE__INPUT": 
+                {
+                    "AUGMENTOR__BRIGHTNESS__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "AUGMENTOR__BRIGHTNESS_MODE__INFO": 
                 {
                     "AUGMENTOR__BRIGHTNESS__INPUT": 
                     [
@@ -679,6 +935,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "AUGMENTOR__CONTRAST_FACTOR__INFO": 
+                {
+                    "AUGMENTOR__CONTRAST__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
             "da_contrast_mode_label": 
                 {
                     "AUGMENTOR__CONTRAST__INPUT": 
@@ -687,6 +950,13 @@ class Widget_conditions():
                     ],
                 }, 
             "AUGMENTOR__CONTRAST_MODE__INPUT": 
+                {
+                    "AUGMENTOR__CONTRAST__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "AUGMENTOR__CONTRAST_MODE__INFO": 
                 {
                     "AUGMENTOR__CONTRAST__INPUT": 
                     [
@@ -707,6 +977,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "AUGMENTOR__BRIGHTNESS_EM_FACTOR__INFO": 
+                {
+                    "AUGMENTOR__BRIGHTNESS_EM__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
             "da_brightness_em_mode_label": 
                 {
                     "AUGMENTOR__BRIGHTNESS_EM__INPUT": 
@@ -715,6 +992,13 @@ class Widget_conditions():
                     ],
                 }, 
             "AUGMENTOR__BRIGHTNESS_EM_MODE__INPUT": 
+                {
+                    "AUGMENTOR__BRIGHTNESS_EM__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                },
+            "AUGMENTOR__BRIGHTNESS_EM_MODE__INFO": 
                 {
                     "AUGMENTOR__BRIGHTNESS_EM__INPUT": 
                     [
@@ -735,6 +1019,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "AUGMENTOR__CONTRAST_EM_FACTOR__INFO": 
+                {
+                    "AUGMENTOR__CONTRAST_EM__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
             "da_contrast_em_mode_label": 
                 {
                     "AUGMENTOR__CONTRAST_EM__INPUT": 
@@ -743,6 +1034,13 @@ class Widget_conditions():
                     ],
                 }, 
             "AUGMENTOR__CONTRAST_EM_MODE__INPUT": 
+                {
+                    "AUGMENTOR__CONTRAST_EM__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "AUGMENTOR__CONTRAST_EM_MODE__INFO": 
                 {
                     "AUGMENTOR__CONTRAST_EM__INPUT": 
                     [
@@ -763,6 +1061,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "AUGMENTOR__DROP_RANGE__INFO": 
+                {
+                    "AUGMENTOR__DROPOUT__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
             "da_cutout_number_iterations_label": 
                 {
                     "AUGMENTOR__CUTOUT__INPUT": 
@@ -771,6 +1076,13 @@ class Widget_conditions():
                     ],
                 }, 
             "AUGMENTOR__COUT_NB_ITERATIONS__INPUT": 
+                {
+                    "AUGMENTOR__CUTOUT__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "AUGMENTOR__COUT_NB_ITERATIONS__INFO": 
                 {
                     "AUGMENTOR__CUTOUT__INPUT": 
                     [
@@ -791,6 +1103,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 },
+            "AUGMENTOR__COUT_SIZE__INFO": 
+                {
+                    "AUGMENTOR__CUTOUT__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                },
             "da_cuout_cval_label": 
                 {
                     "AUGMENTOR__CUTOUT__INPUT": 
@@ -799,6 +1118,34 @@ class Widget_conditions():
                     ],
                 }, 
             "AUGMENTOR__COUT_CVAL__INPUT": 
+                {
+                    "AUGMENTOR__CUTOUT__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "AUGMENTOR__COUT_CVAL__INFO": 
+                {
+                    "AUGMENTOR__CUTOUT__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "da_cutout_to_mask_label": 
+                {
+                    "AUGMENTOR__CUTOUT__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "AUGMENTOR__COUT_APPLY_TO_MASK__INFO": 
+                {
+                    "AUGMENTOR__CUTOUT__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "AUGMENTOR__COUT_APPLY_TO_MASK__INPUT": 
                 {
                     "AUGMENTOR__CUTOUT__INPUT": 
                     [
@@ -819,6 +1166,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "AUGMENTOR__CBLUR_SIZE__INFO": 
+                {
+                    "AUGMENTOR__CUTBLUR__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
             "da_cutblut_down_range_label": 
                 {
                     "AUGMENTOR__CUTBLUR__INPUT": 
@@ -827,6 +1181,13 @@ class Widget_conditions():
                     ],
                 },
             "AUGMENTOR__CBLUR_DOWN_RANGE__INPUT": 
+                {
+                    "AUGMENTOR__CUTBLUR__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "AUGMENTOR__CBLUR_DOWN_RANGE__INFO": 
                 {
                     "AUGMENTOR__CUTBLUR__INPUT": 
                     [
@@ -847,6 +1208,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "AUGMENTOR__CBLUR_INSIDE__INFO": 
+                {
+                    "AUGMENTOR__CUTBLUR__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
             "da_cutmix_size_range_label": 
                 {
                     "AUGMENTOR__CUTMIX__INPUT": 
@@ -855,6 +1223,13 @@ class Widget_conditions():
                     ],
                 }, 
             "AUGMENTOR__CMIX_SIZE__INPUT": 
+                {
+                    "AUGMENTOR__CUTMIX__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                },
+            "AUGMENTOR__CMIX_SIZE__INFO": 
                 {
                     "AUGMENTOR__CUTMIX__INPUT": 
                     [
@@ -875,6 +1250,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "AUGMENTOR__CNOISE_SCALE__INFO": 
+                {
+                    "AUGMENTOR__CUTNOISE__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
             "da_cutnoise_number_iter_label": 
                 {
                     "AUGMENTOR__CUTNOISE__INPUT": 
@@ -883,6 +1265,13 @@ class Widget_conditions():
                     ],
                 }, 
             "AUGMENTOR__CNOISE_NB_ITERATIONS__INPUT": 
+                {
+                    "AUGMENTOR__CUTNOISE__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "AUGMENTOR__CNOISE_NB_ITERATIONS__INFO": 
                 {
                     "AUGMENTOR__CUTNOISE__INPUT": 
                     [
@@ -903,6 +1292,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "AUGMENTOR__CNOISE_SIZE__INFO": 
+                {
+                    "AUGMENTOR__CUTNOISE__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
             "da_misaligment_displacement_label": 
                 {
                     "AUGMENTOR__MISALIGNMENT__INPUT": 
@@ -911,6 +1307,13 @@ class Widget_conditions():
                     ],
                 },
             "AUGMENTOR__MS_DISPLACEMENT__INPUT": 
+                {
+                    "AUGMENTOR__MISALIGNMENT__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                },
+            "AUGMENTOR__MS_DISPLACEMENT__INFO": 
                 {
                     "AUGMENTOR__MISALIGNMENT__INPUT": 
                     [
@@ -931,6 +1334,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 },
+            "AUGMENTOR__MS_ROTATE_RATIO__INFO": 
+                {
+                    "AUGMENTOR__MISALIGNMENT__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                },
             "da_missing_sections_iteration_range_label": 
                 {
                     "AUGMENTOR__MISSING_SECTIONS__INPUT": 
@@ -939,6 +1349,13 @@ class Widget_conditions():
                     ],
                 },
             "AUGMENTOR__MISSP_ITERATIONS__INPUT": 
+                {
+                    "AUGMENTOR__MISSING_SECTIONS__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                },
+            "AUGMENTOR__MISSP_ITERATIONS__INFO": 
                 {
                     "AUGMENTOR__MISSING_SECTIONS__INPUT": 
                     [
@@ -959,6 +1376,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 },
+            "AUGMENTOR__GRID_RATIO__INFO": 
+                {
+                    "AUGMENTOR__GRIDMASK__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                },
             "da_grid_d_range_label": 
                 {
                     "AUGMENTOR__GRIDMASK__INPUT": 
@@ -967,6 +1391,13 @@ class Widget_conditions():
                     ],
                 },
             "AUGMENTOR__GRID_D_RANGE__INPUT": 
+                {
+                    "AUGMENTOR__GRIDMASK__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                },
+            "AUGMENTOR__GRID_D_RANGE__INFO": 
                 {
                     "AUGMENTOR__GRIDMASK__INPUT": 
                     [
@@ -987,6 +1418,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 },
+            "AUGMENTOR__GRID_ROTATE__INFO": 
+                {
+                    "AUGMENTOR__GRIDMASK__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                },
             "da_grid_invert_label": 
                 {
                     "AUGMENTOR__GRIDMASK__INPUT": 
@@ -995,6 +1433,13 @@ class Widget_conditions():
                     ],
                 },
             "AUGMENTOR__GRID_INVERT__INPUT": 
+                {
+                    "AUGMENTOR__GRIDMASK__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                },
+            "AUGMENTOR__GRID_INVERT__INFO": 
                 {
                     "AUGMENTOR__GRIDMASK__INPUT": 
                     [
@@ -1015,6 +1460,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "AUGMENTOR__GAUSSIAN_NOISE_MEAN__INFO": 
+                {
+                    "AUGMENTOR__GAUSSIAN_NOISE__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
             "da_gaussian_noise_var_label": 
                 {
                     "AUGMENTOR__GAUSSIAN_NOISE__INPUT": 
@@ -1023,6 +1475,13 @@ class Widget_conditions():
                     ],
                 }, 
             "AUGMENTOR__GAUSSIAN_NOISE_VAR__INPUT": 
+                {
+                    "AUGMENTOR__GAUSSIAN_NOISE__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                },
+            "AUGMENTOR__GAUSSIAN_NOISE_VAR__INFO": 
                 {
                     "AUGMENTOR__GAUSSIAN_NOISE__INPUT": 
                     [
@@ -1043,6 +1502,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "AUGMENTOR__GAUSSIAN_NOISE_USE_INPUT_IMG_MEAN_AND_VAR__INFO": 
+                {
+                    "AUGMENTOR__GAUSSIAN_NOISE__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
             "da_salt_amount_label": 
                 {
                     "AUGMENTOR__SALT__INPUT": 
@@ -1051,6 +1517,13 @@ class Widget_conditions():
                     ],
                 }, 
             "AUGMENTOR__SALT_AMOUNT__INPUT": 
+                {
+                    "AUGMENTOR__SALT__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "AUGMENTOR__SALT_AMOUNT__INFO": 
                 {
                     "AUGMENTOR__SALT__INPUT": 
                     [
@@ -1071,6 +1544,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "AUGMENTOR__PEPPER_AMOUNT__INFO": 
+                {
+                    "AUGMENTOR__PEPPER__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
             "da_salt_pepper_amount_label": 
                 {
                     "AUGMENTOR__SALT_AND_PEPPER__INPUT": 
@@ -1079,6 +1559,13 @@ class Widget_conditions():
                     ],
                 }, 
             "AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INPUT": 
+                {
+                    "AUGMENTOR__SALT_AND_PEPPER__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                },
+            "AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INFO": 
                 {
                     "AUGMENTOR__SALT_AND_PEPPER__INPUT": 
                     [
@@ -1098,26 +1585,54 @@ class Widget_conditions():
                     [
                         "Yes"
                     ],
+                },
+            "AUGMENTOR__SALT_AND_PEPPER_PROP__INFO": 
+                {
+                    "AUGMENTOR__SALT_AND_PEPPER__INPUT": 
+                    [
+                        "Yes"
+                    ],
                 }, 
             "ssl_resizing_factor_label": 
                 {
                     "PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT": 
                     [
-                        "Yes"
+                        "crappify"
                     ],
                 }, 
             "PROBLEM__SELF_SUPERVISED__RESIZING_FACTOR__INPUT": 
                 {
                     "PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT": 
                     [
-                        "Yes"
+                        "crappify"
+                    ],
+                }, 
+            "PROBLEM__SELF_SUPERVISED__RESIZING_FACTOR__INFO": 
+                {
+                    "PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT": 
+                    [
+                        "crappify"
                     ],
                 }, 
             "ssl_noise_label": 
                 {
                     "PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT": 
                     [
-                        "Yes"
+                        "crappify"
+                    ],
+                }, 
+            "PROBLEM__SELF_SUPERVISED__NOISE__INFO": 
+                {
+                    "PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT": 
+                    [
+                        "crappify"
+                    ],
+                }, 
+            "PROBLEM__SELF_SUPERVISED__NOISE__INPUT": 
+                {
+                    "PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT": 
+                    [
+                        "crappify"
                     ],
                 }, 
             "test_tab_widget": 
@@ -1169,6 +1684,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__SEM_SEG__INFO": 
+                {
+                    "TEST__POST_PROCESSING__YZ_FILTERING__SEM_SEG__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
             "sem_seg_z_filtering_size_label": 
                 {
                     "TEST__POST_PROCESSING__Z_FILTERING__SEM_SEG__INPUT": 
@@ -1177,6 +1699,13 @@ class Widget_conditions():
                     ],
                 }, 
             "TEST__POST_PROCESSING__Z_FILTERING_SIZE__SEM_SEG__INPUT": 
+                {
+                    "TEST__POST_PROCESSING__Z_FILTERING__SEM_SEG__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "TEST__POST_PROCESSING__Z_FILTERING_SIZE__SEM_SEG__INFO": 
                 {
                     "TEST__POST_PROCESSING__Z_FILTERING__SEM_SEG__INPUT": 
                     [
@@ -1217,6 +1746,23 @@ class Widget_conditions():
                         "manual"
                     ]
                 }, 
+            "PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INFO": 
+                {
+                    "PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT": 
+                    [
+                        "Binary mask + Contours", 
+                        "Binary mask + Central points", 
+                        "Binary mask + Distance map", 
+                        "Binary mask + Contours + Foreground mask", 
+                        "Binary mask + Contours + Distance map", 
+                        "Binary mask + Contours + Distance map with background (experimental)",
+                        "Binary mask + Distance map with background (experimental)",
+                    ],
+                    "PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT":
+                    [
+                        "manual"
+                    ]
+                },
             "inst_seg_c_channel_th_label": 
                 {
                     "PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT": 
@@ -1232,6 +1778,20 @@ class Widget_conditions():
                     ]
                 }, 
             "PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INPUT": 
+                {
+                    "PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT": 
+                    [
+                        "Binary mask + Contours", 
+                        "Binary mask + Contours + Foreground mask", 
+                        "Binary mask + Contours + Distance map", 
+                        "Binary mask + Contours + Distance map with background (experimental)",
+                    ],
+                    "PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT":
+                    [
+                        "manual"
+                    ]
+                }, 
+            "PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INFO": 
                 {
                     "PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT": 
                     [
@@ -1261,6 +1821,22 @@ class Widget_conditions():
                     ]
                 }, 
             "PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INPUT": 
+                {
+                    "PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT": 
+                    [
+                        "Binary mask + Distance map", 
+                        "Binary mask + Contours + Distance map", 
+                        "Binary mask + Contours + Distance map with background (experimental)",
+                        "Binary mask + Distance map with background (experimental)", 
+                        "Distance map with background (experimental)",
+                    ],
+                    "PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT":
+                    [
+                        "manual",
+                        "auto"
+                    ]
+                }, 
+            "PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INFO": 
                 {
                     "PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT": 
                     [
@@ -1314,6 +1890,17 @@ class Widget_conditions():
                         "manual"
                     ]
                 }, 
+            "PROBLEM__INSTANCE_SEG__DATA_MW_TH_POINTS__INFO": 
+                {
+                    "PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT": 
+                    [
+                        "Binary mask + Central points",
+                    ],
+                    "PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT":
+                    [
+                        "manual"
+                    ]
+                },
             "inst_seg_repare_large_blobs_label": 
                 {
                     "PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT": 
@@ -1322,6 +1909,13 @@ class Widget_conditions():
                     ],
                 },
             "TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INPUT": 
+                {
+                    "PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT": 
+                    [
+                        "Binary mask + Central points",
+                    ],
+                },
+            "TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INFO": 
                 {
                     "PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT": 
                     [
@@ -1342,14 +1936,14 @@ class Widget_conditions():
                         "Binary mask + Central points",
                     ],
                 },
-            "inst_seg_remove_close_points_radius_label": 
+            "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__INST_SEG__INFO": 
                 {
                     "PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT": 
                     [
                         "Binary mask + Central points",
                     ],
                 },
-            "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INPUT": 
+            "inst_seg_remove_close_points_radius_label": 
                 {
                     "PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT": 
                     [
@@ -1390,6 +1984,23 @@ class Widget_conditions():
                         "manual"
                     ]
                 }, 
+            "PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INFO": 
+                {
+                    "PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT": 
+                    [
+                        "Binary mask + Contours", 
+                        "Binary mask + Central points", 
+                        "Binary mask + Distance map", 
+                        "Binary mask + Contours + Foreground mask", 
+                        "Binary mask + Contours + Distance map", 
+                        "Binary mask + Contours + Distance map with background (experimental)",
+                        "Binary mask + Distance map with background (experimental)",
+                    ],
+                    "PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT":
+                    [
+                        "manual"
+                    ]
+                }, 
             "inst_seg_voronoi_label": 
                 {
                     "PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT": 
@@ -1406,7 +2017,25 @@ class Widget_conditions():
                         "Binary mask + Contours + Foreground mask"
                     ],
                 },
+            "TEST__POST_PROCESSING__VORONOI_ON_MASK__INFO": 
+                {
+                    "PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT": 
+                    [
+                        "Binary mask + Contours", 
+                        "Binary mask + Contours + Foreground mask"
+                    ],
+                },
             "PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__LABEL": 
+                {
+                    "PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT": 
+                    [
+                        "Binary mask + Distance map", 
+                        "Binary mask + Contours + Distance map", 
+                        "Binary mask + Contours + Distance map with background (experimental)",
+                        "Binary mask + Distance map with background (experimental)",  
+                    ],
+                },
+            "PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__INFO": 
                 {
                     "PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT": 
                     [
@@ -1446,6 +2075,16 @@ class Widget_conditions():
                         "Binary mask + Contours + Distance map with background (experimental)",
                     ],
                 },
+            "PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__INFO": 
+                {
+                    "PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT": 
+                    [
+                        "Binary mask + Contours", 
+                        "Binary mask + Contours + Foreground mask", 
+                        "Binary mask + Contours + Distance map", 
+                        "Binary mask + Contours + Distance map with background (experimental)",
+                    ],
+                },
             "inst_seg_fore_dil_label": 
                 {
                     "PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INPUT": 
@@ -1454,6 +2093,13 @@ class Widget_conditions():
                     ],
                 }, 
             "PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INPUT": 
+                {
+                    "PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INFO": 
                 {
                     "PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INPUT": 
                     [
@@ -1474,6 +2120,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INFO": 
+                {
+                    "PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
             "inst_seg_small_obj_fil_before_size_label": 
                 {
                     "PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INPUT": 
@@ -1482,6 +2135,13 @@ class Widget_conditions():
                     ],
                 },
             "PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INPUT": 
+                {
+                    "PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INFO": 
                 {
                     "PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INPUT": 
                     [
@@ -1502,6 +2162,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__INST_SEG__INFO": 
+                {
+                    "TEST__POST_PROCESSING__YZ_FILTERING__INST_SEG__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
             "inst_seg_z_filtering_size_label": 
                 {
                     "TEST__POST_PROCESSING__Z_FILTERING__INST_SEG__INPUT": 
@@ -1510,6 +2177,13 @@ class Widget_conditions():
                     ],
                 }, 
             "TEST__POST_PROCESSING__Z_FILTERING_SIZE__INST_SEG__INPUT": 
+                {
+                    "TEST__POST_PROCESSING__Z_FILTERING__INST_SEG__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "TEST__POST_PROCESSING__Z_FILTERING_SIZE__INST_SEG__INFO": 
                 {
                     "TEST__POST_PROCESSING__Z_FILTERING__INST_SEG__INPUT": 
                     [
@@ -1529,6 +2203,21 @@ class Widget_conditions():
                     [
                         "Yes"
                     ],
+                    "PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT": 
+                    [
+                        "Binary mask + Central points",
+                    ],
+                }, 
+            "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INFO": 
+                {
+                    "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__INST_SEG__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                    "PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT": 
+                    [
+                        "Binary mask + Central points",
+                    ],
                 }, 
             "inst_seg_matching_stats_ths_label": 
                 {
@@ -1538,6 +2227,13 @@ class Widget_conditions():
                     ],
                 }, 
             "TEST__MATCHING_STATS_THS__INPUT": 
+                {
+                    "TEST__MATCHING_STATS__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "TEST__MATCHING_STATS_THS__INFO": 
                 {
                     "TEST__MATCHING_STATS__INPUT": 
                     [
@@ -1557,7 +2253,14 @@ class Widget_conditions():
                     [
                         "Yes"
                     ],
-                }, 
+                },
+            "TEST__MATCHING_STATS_THS_COLORED_IMG__INFO": 
+                {
+                    "TEST__MATCHING_STATS__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                },  
             "inst_seg_voronoi_mask_th_label": 
                 {
                     "TEST__POST_PROCESSING__VORONOI_ON_MASK__INPUT": 
@@ -1566,6 +2269,13 @@ class Widget_conditions():
                     ],
                 }, 
             "TEST__POST_PROCESSING__VORONOI_TH__INPUT": 
+                {
+                    "TEST__POST_PROCESSING__VORONOI_ON_MASK__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "TEST__POST_PROCESSING__VORONOI_TH__INFO": 
                 {
                     "TEST__POST_PROCESSING__VORONOI_ON_MASK__INPUT": 
                     [
@@ -1586,6 +2296,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__DET__INFO": 
+                {
+                    "TEST__POST_PROCESSING__YZ_FILTERING__DET__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
             "det_z_filtering_size_label": 
                 {
                     "TEST__POST_PROCESSING__Z_FILTERING__DET__INPUT": 
@@ -1600,6 +2317,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "TEST__POST_PROCESSING__Z_FILTERING_SIZE__DET__INFO": 
+                {
+                    "TEST__POST_PROCESSING__Z_FILTERING__DET__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                },
             "det_remove_close_points_radius_label": 
                 {
                     "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INPUT": 
@@ -1608,6 +2332,13 @@ class Widget_conditions():
                     ],
                 }, 
             "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__DET__INPUT": 
+                {
+                    "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__DET__INFO": 
                 {
                     "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INPUT": 
                     [
@@ -1628,6 +2359,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "TEST__POST_PROCESSING__DET_WATERSHED_FIRST_DILATION__INFO": 
+                {
+                    "TEST__POST_PROCESSING__DET_WATERSHED__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
             "det_watershed_donuts_classes_label": 
                 {
                     "TEST__POST_PROCESSING__DET_WATERSHED__INPUT": 
@@ -1636,6 +2374,13 @@ class Widget_conditions():
                     ],
                 }, 
             "TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_CLASSES__INPUT": 
+                {
+                    "TEST__POST_PROCESSING__DET_WATERSHED__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_CLASSES__INFO": 
                 {
                     "TEST__POST_PROCESSING__DET_WATERSHED__INPUT": 
                     [
@@ -1656,6 +2401,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_PATCH__INFO": 
+                {
+                    "TEST__POST_PROCESSING__DET_WATERSHED__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
             "det_watershed_donuts_nucleus_diam_label": 
                 {
                     "TEST__POST_PROCESSING__DET_WATERSHED__INPUT": 
@@ -1670,6 +2422,13 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER__INFO": 
+                {
+                    "TEST__POST_PROCESSING__DET_WATERSHED__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
             "det_data_watetshed_check_label": 
                 {
                     "TEST__POST_PROCESSING__DET_WATERSHED__INPUT": 
@@ -1678,6 +2437,13 @@ class Widget_conditions():
                     ],
                 }, 
             "PROBLEM__DETECTION__DATA_CHECK_MW__INPUT": 
+                {
+                    "TEST__POST_PROCESSING__DET_WATERSHED__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "PROBLEM__DETECTION__DATA_CHECK_MW__INFO": 
                 {
                     "TEST__POST_PROCESSING__DET_WATERSHED__INPUT": 
                     [
@@ -1892,8 +2658,13 @@ class Widget_conditions():
                         'Yes', 
                     ],
                 },
-            
-
+            "TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INFO": 
+                {
+                    "TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INPUT": 
+                    [
+                        'Yes', 
+                    ],
+                },
             "TEST__DET_BLOB_LOG_MIN_SIGMA__LABEL": 
                 {
                     "TEST__DET_POINT_CREATION_FUNCTION__INPUT": 
@@ -1902,6 +2673,13 @@ class Widget_conditions():
                     ],
                 },
             "TEST__DET_BLOB_LOG_MIN_SIGMA__INPUT": 
+                {
+                    "TEST__DET_POINT_CREATION_FUNCTION__INPUT": 
+                    [
+                        'blob_log', 
+                    ],
+                },
+            "TEST__DET_BLOB_LOG_MIN_SIGMA__INFO": 
                 {
                     "TEST__DET_POINT_CREATION_FUNCTION__INPUT": 
                     [
@@ -1922,6 +2700,13 @@ class Widget_conditions():
                         'blob_log', 
                     ],
                 },
+            "TEST__DET_BLOB_LOG_MAX_SIGMA__INFO": 
+                {
+                    "TEST__DET_POINT_CREATION_FUNCTION__INPUT": 
+                    [
+                        'blob_log', 
+                    ],
+                },
             "TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL": 
                 {
                     "TEST__DET_POINT_CREATION_FUNCTION__INPUT": 
@@ -1930,6 +2715,13 @@ class Widget_conditions():
                     ],
                 },
             "TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT": 
+                {
+                    "TEST__DET_POINT_CREATION_FUNCTION__INPUT": 
+                    [
+                        'blob_log', 
+                    ],
+                },
+            "TEST__DET_BLOB_LOG_NUM_SIGMA__INFO": 
                 {
                     "TEST__DET_POINT_CREATION_FUNCTION__INPUT": 
                     [

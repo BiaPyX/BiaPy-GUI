@@ -264,6 +264,7 @@ def move_between_workflows(main_window, to_page, dims=None):
         # Train page
         main_window.ui.train_gt_label.setText("Input label folder")
         main_window.ui.train_gt_label.setVisible(True)
+        main_window.ui.train_gt_info.setVisible(True)
         main_window.ui.DATA__TRAIN__GT_PATH__INPUT.setVisible(True)
         main_window.ui.train_data_gt_input_browse_bn.setVisible(True)
         main_window.ui.validation_data_gt_label.setText("Input label folder")
@@ -272,6 +273,7 @@ def move_between_workflows(main_window, to_page, dims=None):
         main_window.ui.test_exists_gt_label.setText("Do you have test labels?")
         main_window.ui.test_exists_gt_label.setVisible(True)
         main_window.ui.DATA__TEST__LOAD_GT__INPUT.setVisible(True)
+        main_window.ui.DATA__TEST__LOAD_GT__INFO.setVisible(True)
     # Instance seg
     elif main_window.cfg.settings['selected_workflow'] == 1:
         jobname = "my_instance_segmentation"
@@ -281,6 +283,7 @@ def move_between_workflows(main_window, to_page, dims=None):
         # Train page
         main_window.ui.train_gt_label.setText("Input label folder")
         main_window.ui.train_gt_label.setVisible(True)
+        main_window.ui.train_gt_info.setVisible(True)
         main_window.ui.DATA__TRAIN__GT_PATH__INPUT.setVisible(True)
         main_window.ui.train_data_gt_input_browse_bn.setVisible(True)
         main_window.ui.validation_data_gt_label.setText("Input label folder")
@@ -289,6 +292,7 @@ def move_between_workflows(main_window, to_page, dims=None):
         main_window.ui.test_exists_gt_label.setText("Do you have test labels?")
         main_window.ui.test_exists_gt_label.setVisible(True)
         main_window.ui.DATA__TEST__LOAD_GT__INPUT.setVisible(True)
+        main_window.ui.DATA__TEST__LOAD_GT__INFO.setVisible(True)
     # Detection
     elif main_window.cfg.settings['selected_workflow'] == 2:
         jobname = "my_detection"
@@ -298,6 +302,7 @@ def move_between_workflows(main_window, to_page, dims=None):
         # Train page
         main_window.ui.train_gt_label.setText("Input CSV folder")
         main_window.ui.train_gt_label.setVisible(True)
+        main_window.ui.train_gt_info.setVisible(True)
         main_window.ui.DATA__TRAIN__GT_PATH__INPUT.setVisible(True)
         main_window.ui.train_data_gt_input_browse_bn.setVisible(True)
         main_window.ui.validation_data_gt_label.setText("Input CSV folder")
@@ -306,6 +311,7 @@ def move_between_workflows(main_window, to_page, dims=None):
         main_window.ui.test_exists_gt_label.setText("Do you have CSV files for test data?")
         main_window.ui.test_exists_gt_label.setVisible(True)
         main_window.ui.DATA__TEST__LOAD_GT__INPUT.setVisible(True)
+        main_window.ui.DATA__TEST__LOAD_GT__INFO.setVisible(True)
     # Denoising
     elif main_window.cfg.settings['selected_workflow'] == 3:
         jobname = "my_denoising"
@@ -314,14 +320,17 @@ def move_between_workflows(main_window, to_page, dims=None):
         main_window.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.test_workflow_specific_tab_denoising_page)
         # Train page
         main_window.ui.train_gt_label.setVisible(False)
+        main_window.ui.train_gt_info.setVisible(True)
         main_window.ui.DATA__TRAIN__GT_PATH__INPUT.setVisible(False)
         main_window.ui.train_data_gt_input_browse_bn.setVisible(False)
         # Test page
         main_window.ui.test_data_gt_label.setVisible(False)
         main_window.ui.DATA__TEST__GT_PATH__INPUT.setVisible(False)
+        main_window.ui.DATA__TEST__GT_PATH__INFO.setVisible(False)
         main_window.ui.test_data_gt_input_browse_bn.setVisible(False)
         main_window.ui.test_exists_gt_label.setVisible(False)
         main_window.ui.DATA__TEST__LOAD_GT__INPUT.setVisible(False)
+        main_window.ui.DATA__TEST__LOAD_GT__INFO.setVisible(True)
     # Super resolution
     elif main_window.cfg.settings['selected_workflow'] == 4:
         jobname = "my_super_resolution"
@@ -340,6 +349,7 @@ def move_between_workflows(main_window, to_page, dims=None):
         # Train page
         main_window.ui.train_gt_label.setText("Input high-resolution image folder")
         main_window.ui.train_gt_label.setVisible(True)
+        main_window.ui.train_gt_info.setVisible(True)
         main_window.ui.DATA__TRAIN__GT_PATH__INPUT.setVisible(True)
         main_window.ui.train_data_gt_input_browse_bn.setVisible(True)
         main_window.ui.validation_data_gt_label.setText("Input high-resolution image folder")
@@ -348,6 +358,7 @@ def move_between_workflows(main_window, to_page, dims=None):
         main_window.ui.test_exists_gt_label.setText("Do you have high-resolution test data?")
         main_window.ui.test_exists_gt_label.setVisible(True)
         main_window.ui.DATA__TEST__LOAD_GT__INPUT.setVisible(True)
+        main_window.ui.DATA__TEST__LOAD_GT__INFO.setVisible(True)
     # Self-supevised learning
     elif main_window.cfg.settings['selected_workflow'] == 5:
         jobname = "my_self_supervised_learning"
@@ -356,14 +367,17 @@ def move_between_workflows(main_window, to_page, dims=None):
         main_window.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.test_workflow_specific_tab_ssl_page)
         # Train page
         main_window.ui.train_gt_label.setVisible(False)
+        main_window.ui.train_gt_info.setVisible(False)
         main_window.ui.DATA__TRAIN__GT_PATH__INPUT.setVisible(False)
         main_window.ui.train_data_gt_input_browse_bn.setVisible(False)
         # Test page
         main_window.ui.test_data_gt_label.setVisible(False)
         main_window.ui.DATA__TEST__GT_PATH__INPUT.setVisible(False)
+        main_window.ui.DATA__TEST__GT_PATH__INFO.setVisible(False)
         main_window.ui.test_data_gt_input_browse_bn.setVisible(False)
         main_window.ui.test_exists_gt_label.setVisible(False)
         main_window.ui.DATA__TEST__LOAD_GT__INPUT.setVisible(False)
+        main_window.ui.DATA__TEST__LOAD_GT__INFO.setVisible(True)
     # Classification
     elif main_window.cfg.settings['selected_workflow'] == 6:
         jobname = "my_classification"
@@ -373,15 +387,18 @@ def move_between_workflows(main_window, to_page, dims=None):
         main_window.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.test_workflow_specific_tab_classification_page)
         # Train page
         main_window.ui.train_gt_label.setVisible(False)
+        main_window.ui.train_gt_info.setVisible(False)
         main_window.ui.DATA__TRAIN__GT_PATH__INPUT.setVisible(False)
         main_window.ui.train_data_gt_input_browse_bn.setVisible(False)
         # Test page
         main_window.ui.test_data_gt_label.setVisible(False)
         main_window.ui.DATA__TEST__GT_PATH__INPUT.setVisible(False)
+        main_window.ui.DATA__TEST__GT_PATH__INFO.setVisible(False)
         main_window.ui.test_data_gt_input_browse_bn.setVisible(False)
         main_window.ui.test_exists_gt_label.setText("Is the test separated in classes?")
         main_window.ui.test_exists_gt_label.setVisible(True)
         main_window.ui.DATA__TEST__LOAD_GT__INPUT.setVisible(True)
+        main_window.ui.DATA__TEST__LOAD_GT__INFO.setVisible(True)
 
     actual_name = get_text(main_window.ui.job_name_input)
     if actual_name in ["", "my_semantic_segmentation", "my_instance_segmentation", "my_detection", "my_denoising", \
@@ -996,9 +1013,9 @@ def create_yaml_file(main_window):
             biapy_config['TEST']['DET_MIN_TH_TO_BE_PEAK'] = ast.literal_eval(get_text(main_window.ui.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT))
             biapy_config['TEST']['DET_TOLERANCE'] = ast.literal_eval(get_text(main_window.ui.TEST__DET_TOLERANCE__INPUT))
             if get_text(main_window.ui.TEST__DET_POINT_CREATION_FUNCTION__INPUT) == "blob_log":
-                biapy_config['TEST']['DET_BLOB_LOG_MIN_SIGMA'] = get_text(main_window.ui.TEST__DET_BLOB_LOG_MIN_SIGMA__INPUT)    
-                biapy_config['TEST']['DET_BLOB_LOG_MAX_SIGMA'] = get_text(main_window.ui.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT) 
-                biapy_config['TEST']['DET_BLOB_LOG_NUM_SIGMA'] = get_text(main_window.ui.TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT) 
+                biapy_config['TEST']['DET_BLOB_LOG_MIN_SIGMA'] = int(get_text(main_window.ui.TEST__DET_BLOB_LOG_MIN_SIGMA__INPUT))    
+                biapy_config['TEST']['DET_BLOB_LOG_MAX_SIGMA'] = int(get_text(main_window.ui.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT)) 
+                biapy_config['TEST']['DET_BLOB_LOG_NUM_SIGMA'] = int(get_text(main_window.ui.TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT)) 
 
         # Post-processing
         biapy_config['TEST']['POST_PROCESSING'] = {}
