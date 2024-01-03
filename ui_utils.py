@@ -263,17 +263,11 @@ def move_between_workflows(main_window, to_page, dims=None):
         main_window.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.test_workflow_specific_tab_semantic_seg_page)
         # Train page
         main_window.ui.train_gt_label.setText("Input label folder")
-        main_window.ui.train_gt_label.setVisible(True)
-        main_window.ui.train_gt_info.setVisible(True)
-        main_window.ui.DATA__TRAIN__GT_PATH__INPUT.setVisible(True)
-        main_window.ui.train_data_gt_input_browse_bn.setVisible(True)
         main_window.ui.validation_data_gt_label.setText("Input label folder")
         # Test page
         main_window.ui.test_data_gt_label.setText("Input label folder")
         main_window.ui.test_exists_gt_label.setText("Do you have test labels?")
-        main_window.ui.test_exists_gt_label.setVisible(True)
-        main_window.ui.DATA__TEST__LOAD_GT__INPUT.setVisible(True)
-        main_window.ui.DATA__TEST__LOAD_GT__INFO.setVisible(True)
+        main_window.ui.WORKFLOW_SELECTED_LABEL.setText("SEMANTIC_SEG")
     # Instance seg
     elif main_window.cfg.settings['selected_workflow'] == 1:
         jobname = "my_instance_segmentation"
@@ -282,17 +276,11 @@ def move_between_workflows(main_window, to_page, dims=None):
         main_window.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.test_workflow_specific_tab_instance_seg_page)
         # Train page
         main_window.ui.train_gt_label.setText("Input label folder")
-        main_window.ui.train_gt_label.setVisible(True)
-        main_window.ui.train_gt_info.setVisible(True)
-        main_window.ui.DATA__TRAIN__GT_PATH__INPUT.setVisible(True)
-        main_window.ui.train_data_gt_input_browse_bn.setVisible(True)
         main_window.ui.validation_data_gt_label.setText("Input label folder")
         # Test page
         main_window.ui.test_data_gt_label.setText("Input label folder")
         main_window.ui.test_exists_gt_label.setText("Do you have test labels?")
-        main_window.ui.test_exists_gt_label.setVisible(True)
-        main_window.ui.DATA__TEST__LOAD_GT__INPUT.setVisible(True)
-        main_window.ui.DATA__TEST__LOAD_GT__INFO.setVisible(True)
+        main_window.ui.WORKFLOW_SELECTED_LABEL.setText("INSTANCE_SEG")
     # Detection
     elif main_window.cfg.settings['selected_workflow'] == 2:
         jobname = "my_detection"
@@ -301,36 +289,19 @@ def move_between_workflows(main_window, to_page, dims=None):
         main_window.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.test_workflow_specific_tab_detection_page)
         # Train page
         main_window.ui.train_gt_label.setText("Input CSV folder")
-        main_window.ui.train_gt_label.setVisible(True)
-        main_window.ui.train_gt_info.setVisible(True)
-        main_window.ui.DATA__TRAIN__GT_PATH__INPUT.setVisible(True)
-        main_window.ui.train_data_gt_input_browse_bn.setVisible(True)
         main_window.ui.validation_data_gt_label.setText("Input CSV folder")
         # Test page
         main_window.ui.test_data_gt_label.setText("Input CSV folder")
         main_window.ui.test_exists_gt_label.setText("Do you have CSV files for test data?")
-        main_window.ui.test_exists_gt_label.setVisible(True)
-        main_window.ui.DATA__TEST__LOAD_GT__INPUT.setVisible(True)
-        main_window.ui.DATA__TEST__LOAD_GT__INFO.setVisible(True)
+        main_window.ui.WORKFLOW_SELECTED_LABEL.setText("DETECTION")
     # Denoising
     elif main_window.cfg.settings['selected_workflow'] == 3:
         jobname = "my_denoising"
         models = main_window.cfg.settings['denoising_models_real_names']
         main_window.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.train_workflow_specific_tab_denoising_page)
         main_window.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.test_workflow_specific_tab_denoising_page)
-        # Train page
-        main_window.ui.train_gt_label.setVisible(False)
-        main_window.ui.train_gt_info.setVisible(True)
-        main_window.ui.DATA__TRAIN__GT_PATH__INPUT.setVisible(False)
-        main_window.ui.train_data_gt_input_browse_bn.setVisible(False)
         # Test page
-        main_window.ui.test_data_gt_label.setVisible(False)
-        main_window.ui.DATA__TEST__GT_PATH__INPUT.setVisible(False)
-        main_window.ui.DATA__TEST__GT_PATH__INFO.setVisible(False)
-        main_window.ui.test_data_gt_input_browse_bn.setVisible(False)
-        main_window.ui.test_exists_gt_label.setVisible(False)
-        main_window.ui.DATA__TEST__LOAD_GT__INPUT.setVisible(False)
-        main_window.ui.DATA__TEST__LOAD_GT__INFO.setVisible(True)
+        main_window.ui.WORKFLOW_SELECTED_LABEL.setText("DENOISING")
     # Super resolution
     elif main_window.cfg.settings['selected_workflow'] == 4:
         jobname = "my_super_resolution"
@@ -348,36 +319,19 @@ def move_between_workflows(main_window, to_page, dims=None):
         main_window.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.test_workflow_specific_tab_sr_page)
         # Train page
         main_window.ui.train_gt_label.setText("Input high-resolution image folder")
-        main_window.ui.train_gt_label.setVisible(True)
-        main_window.ui.train_gt_info.setVisible(True)
-        main_window.ui.DATA__TRAIN__GT_PATH__INPUT.setVisible(True)
-        main_window.ui.train_data_gt_input_browse_bn.setVisible(True)
         main_window.ui.validation_data_gt_label.setText("Input high-resolution image folder")
         # Test page
         main_window.ui.test_data_gt_label.setText("Input high-resolution image folder")
         main_window.ui.test_exists_gt_label.setText("Do you have high-resolution test data?")
-        main_window.ui.test_exists_gt_label.setVisible(True)
-        main_window.ui.DATA__TEST__LOAD_GT__INPUT.setVisible(True)
-        main_window.ui.DATA__TEST__LOAD_GT__INFO.setVisible(True)
+        main_window.ui.WORKFLOW_SELECTED_LABEL.setText("SUPER_RESOLUTION")
     # Self-supevised learning
     elif main_window.cfg.settings['selected_workflow'] == 5:
         jobname = "my_self_supervised_learning"
         models = main_window.cfg.settings['ssl_models_real_names']
         main_window.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.train_workflow_specific_tab_ssl_page)
         main_window.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.test_workflow_specific_tab_ssl_page)
-        # Train page
-        main_window.ui.train_gt_label.setVisible(False)
-        main_window.ui.train_gt_info.setVisible(False)
-        main_window.ui.DATA__TRAIN__GT_PATH__INPUT.setVisible(False)
-        main_window.ui.train_data_gt_input_browse_bn.setVisible(False)
         # Test page
-        main_window.ui.test_data_gt_label.setVisible(False)
-        main_window.ui.DATA__TEST__GT_PATH__INPUT.setVisible(False)
-        main_window.ui.DATA__TEST__GT_PATH__INFO.setVisible(False)
-        main_window.ui.test_data_gt_input_browse_bn.setVisible(False)
-        main_window.ui.test_exists_gt_label.setVisible(False)
-        main_window.ui.DATA__TEST__LOAD_GT__INPUT.setVisible(False)
-        main_window.ui.DATA__TEST__LOAD_GT__INFO.setVisible(True)
+        main_window.ui.WORKFLOW_SELECTED_LABEL.setText("SELF_SUPERVISED")
     # Classification
     elif main_window.cfg.settings['selected_workflow'] == 6:
         jobname = "my_classification"
@@ -385,20 +339,14 @@ def move_between_workflows(main_window, to_page, dims=None):
         goptions_tab_widget_visible = True
         main_window.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.train_workflow_specific_tab_classification_page)
         main_window.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.test_workflow_specific_tab_classification_page)
-        # Train page
-        main_window.ui.train_gt_label.setVisible(False)
-        main_window.ui.train_gt_info.setVisible(False)
-        main_window.ui.DATA__TRAIN__GT_PATH__INPUT.setVisible(False)
-        main_window.ui.train_data_gt_input_browse_bn.setVisible(False)
         # Test page
-        main_window.ui.test_data_gt_label.setVisible(False)
-        main_window.ui.DATA__TEST__GT_PATH__INPUT.setVisible(False)
-        main_window.ui.DATA__TEST__GT_PATH__INFO.setVisible(False)
-        main_window.ui.test_data_gt_input_browse_bn.setVisible(False)
         main_window.ui.test_exists_gt_label.setText("Is the test separated in classes?")
-        main_window.ui.test_exists_gt_label.setVisible(True)
-        main_window.ui.DATA__TEST__LOAD_GT__INPUT.setVisible(True)
-        main_window.ui.DATA__TEST__LOAD_GT__INFO.setVisible(True)
+        main_window.ui.WORKFLOW_SELECTED_LABEL.setText("CLASSIFICATION")
+
+    main_window.condition_db.combobox_hide_visible_action(main_window,
+        ["test_exists_gt_label", "DATA__TEST__LOAD_GT__INPUT", "DATA__TEST__LOAD_GT__INFO", 
+         "test_data_gt_label", "DATA__TEST__GT_PATH__INPUT", "DATA__TEST__GT_PATH__INFO", "test_data_gt_input_browse_bn",
+         "train_gt_label", "train_gt_info", "DATA__TRAIN__GT_PATH__INPUT", "train_data_gt_input_browse_bn"])
 
     actual_name = get_text(main_window.ui.job_name_input)
     if actual_name in ["", "my_semantic_segmentation", "my_instance_segmentation", "my_detection", "my_denoising", \
@@ -490,7 +438,7 @@ def get_text(gui_widget):
     """
     if isinstance(gui_widget, QComboBox):
         return gui_widget.currentText()
-    elif isinstance(gui_widget, QLineEdit):
+    elif isinstance(gui_widget, QLineEdit) or isinstance(gui_widget, QLabel):
         return gui_widget.text()
     else: #QTextBrowser
         return gui_widget.toPlainText()
@@ -513,7 +461,7 @@ def set_text(gui_widget, new_value):
             gui_widget.setCurrentIndex(index)
         else:
             return "{} couldn't be loaded in {}".format(new_value,gui_widget.objectName())
-    elif isinstance(gui_widget, QLineEdit):
+    elif isinstance(gui_widget, QLineEdit) or isinstance(gui_widget, QLabel):
         if "PATH" in gui_widget.objectName():
             gui_widget.setText(os.path.normpath(new_value))
         else:

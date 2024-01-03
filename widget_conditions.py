@@ -1,4 +1,5 @@
 from PySide2.QtWidgets import *
+from ui_utils import get_text
 
 class Widget_conditions():
     def __init__(self):
@@ -273,47 +274,48 @@ class Widget_conditions():
                 }, 
             "test_exists_gt_label": 
                 {
-                    "DATA__VAL__TYPE__INPUT": 
-                    [
-                        "Not extracted from train (path needed)", 
-                        "Extract from train (split training)"
-                    ],
                     "DATA__TEST__USE_VAL_AS_TEST__INPUT":
                     [
                         "No"
+                    ], 
+                    "WORKFLOW_SELECTED_LABEL": [
+                        "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
+                        "DETECTION",
+                        "SUPER_RESOLUTION",
+                        "CLASSIFICATION",
                     ]
                 }, 
             "DATA__TEST__LOAD_GT__INPUT": 
                 {
-                    "DATA__VAL__TYPE__INPUT": 
-                    [
-                        "Not extracted from train (path needed)", 
-                        "Extract from train (split training)"
-                    ],
                     "DATA__TEST__USE_VAL_AS_TEST__INPUT":
                     [
                         "No"
+                    ], 
+                    "WORKFLOW_SELECTED_LABEL": [
+                        "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
+                        "DETECTION",
+                        "SUPER_RESOLUTION",
+                        "CLASSIFICATION",
                     ]
                 }, 
             "DATA__TEST__LOAD_GT__INFO": 
                 {
-                    "DATA__VAL__TYPE__INPUT": 
-                    [
-                        "Not extracted from train (path needed)", 
-                        "Extract from train (split training)"
-                    ],
                     "DATA__TEST__USE_VAL_AS_TEST__INPUT":
                     [
                         "No"
+                    ], 
+                    "WORKFLOW_SELECTED_LABEL": [
+                        "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
+                        "DETECTION",
+                        "SUPER_RESOLUTION",
+                        "CLASSIFICATION",
                     ]
                 }, 
             "test_data_gt_label": 
                 {
-                    "DATA__VAL__TYPE__INPUT": 
-                    [
-                        "Not extracted from train (path needed)", 
-                        "Extract from train (split training)"
-                    ],
                     "DATA__TEST__USE_VAL_AS_TEST__INPUT":
                     [
                         "No"
@@ -321,15 +323,17 @@ class Widget_conditions():
                     "DATA__TEST__LOAD_GT__INPUT":
                     [
                         "Yes"
+                    ], 
+                    "WORKFLOW_SELECTED_LABEL": [
+                        "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
+                        "DETECTION",
+                        "SUPER_RESOLUTION",
+                        "CLASSIFICATION",
                     ]
                 }, 
             "DATA__TEST__GT_PATH__INPUT": 
                 {
-                    "DATA__VAL__TYPE__INPUT": 
-                    [
-                        "Not extracted from train (path needed)", 
-                        "Extract from train (split training)"
-                    ],
                     "DATA__TEST__USE_VAL_AS_TEST__INPUT":
                     [
                         "No"
@@ -337,15 +341,17 @@ class Widget_conditions():
                     "DATA__TEST__LOAD_GT__INPUT":
                     [
                         "Yes"
+                    ], 
+                    "WORKFLOW_SELECTED_LABEL": [
+                        "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
+                        "DETECTION",
+                        "SUPER_RESOLUTION",
+                        "CLASSIFICATION",
                     ]
                 },
             "DATA__TEST__GT_PATH__INFO": 
                 {
-                    "DATA__VAL__TYPE__INPUT": 
-                    [
-                        "Not extracted from train (path needed)", 
-                        "Extract from train (split training)"
-                    ],
                     "DATA__TEST__USE_VAL_AS_TEST__INPUT":
                     [
                         "No"
@@ -353,15 +359,17 @@ class Widget_conditions():
                     "DATA__TEST__LOAD_GT__INPUT":
                     [
                         "Yes"
+                    ], 
+                    "WORKFLOW_SELECTED_LABEL": [
+                        "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
+                        "DETECTION",
+                        "SUPER_RESOLUTION",
+                        "CLASSIFICATION",
                     ]
                 },
             "test_data_gt_input_browse_bn": 
                 {
-                    "DATA__VAL__TYPE__INPUT": 
-                    [
-                        "Not extracted from train (path needed)", 
-                        "Extract from train (split training)"
-                    ],
                     "DATA__TEST__USE_VAL_AS_TEST__INPUT":
                     [
                         "No"
@@ -369,8 +377,52 @@ class Widget_conditions():
                     "DATA__TEST__LOAD_GT__INPUT":
                     [
                         "Yes"
+                    ], 
+                    "WORKFLOW_SELECTED_LABEL": [
+                        "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
+                        "DETECTION",
+                        "SUPER_RESOLUTION",
+                        "CLASSIFICATION",
                     ]
                 },  
+
+            "train_gt_label": 
+                {
+                    "WORKFLOW_SELECTED_LABEL": [
+                        "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
+                        "DETECTION",
+                        "SUPER_RESOLUTION",
+                    ]
+                }, 
+            "train_gt_info": 
+                {
+                    "WORKFLOW_SELECTED_LABEL": [
+                        "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
+                        "DETECTION",
+                        "SUPER_RESOLUTION",
+                    ]
+                }, 
+            "DATA__TRAIN__GT_PATH__INPUT": 
+                {
+                    "WORKFLOW_SELECTED_LABEL": [
+                        "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
+                        "DETECTION",
+                        "SUPER_RESOLUTION",
+                    ]
+                }, 
+            "train_data_gt_input_browse_bn": 
+                {
+                    "WORKFLOW_SELECTED_LABEL": [
+                        "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
+                        "DETECTION",
+                        "SUPER_RESOLUTION",
+                    ]
+                }, 
             "test_data_in_memory_label": 
                 {
                     "DATA__VAL__TYPE__INPUT": 
@@ -415,6 +467,14 @@ class Widget_conditions():
                         "Extract from train (split training)"
                     ],
                 }, 
+            "DATA__VAL__RANDOM__INFO": 
+                {
+                    "DATA__VAL__TYPE__INPUT": 
+                    [
+                        "Extract from train (cross validation)", 
+                        "Extract from train (split training)"
+                    ],
+                }, 
             "DATA__VAL__RANDOM__INPUT": 
                 {
                     "DATA__VAL__TYPE__INPUT": 
@@ -430,9 +490,9 @@ class Widget_conditions():
                     [
                         "Not extracted from train (path needed)", 
                     ],
-                    "DATA__TEST__USE_VAL_AS_TEST__INPUT":
+                    "DATA__VAL__IN_MEMORY__INPUT":
                     [
-                        "No"
+                        "Yes"
                     ]
                 }, 
             "DATA__VAL__OVERLAP__INPUT": 
@@ -441,20 +501,54 @@ class Widget_conditions():
                     [
                         "Not extracted from train (path needed)"
                     ],
+                    "DATA__VAL__IN_MEMORY__INPUT":
+                    [
+                        "Yes"
+                    ]
+                }, 
+            "DATA__VAL__OVERLAP__INFO": 
+                {
+                    "DATA__VAL__TYPE__INPUT": 
+                    [
+                        "Not extracted from train (path needed)"
+                    ],
+                    "DATA__VAL__IN_MEMORY__INPUT":
+                    [
+                        "Yes"
+                    ]
                 }, 
             "validation_padding_label": 
                 {
                     "DATA__VAL__TYPE__INPUT": 
                     [
-                        "Extract from train (split training)"
+                        "Not extracted from train (path needed)"
                     ],
+                    "DATA__VAL__IN_MEMORY__INPUT":
+                    [
+                        "Yes"
+                    ]
+                },
+            "DATA__VAL__PADDING__INFO": 
+                {
+                    "DATA__VAL__TYPE__INPUT": 
+                    [
+                        "Not extracted from train (path needed)"
+                    ],
+                    "DATA__VAL__IN_MEMORY__INPUT":
+                    [
+                        "Yes"
+                    ]
                 }, 
             "DATA__VAL__PADDING__INPUT": 
                 {
                     "DATA__VAL__TYPE__INPUT": 
                     [
-                        "Extract from train (split training)"
+                        "Not extracted from train (path needed)"
                     ],
+                    "DATA__VAL__IN_MEMORY__INPUT":
+                    [
+                        "Yes"
+                    ]
                 }, 
             "TRAIN__W_DECAY__INPUT": 
                 {
@@ -2525,6 +2619,13 @@ class Widget_conditions():
                         'UNETR', 
                     ],
                 }, 
+            "MODEL__UNETR_VIT_HIDD_MULT__INFO": 
+                {
+                    "MODEL__ARCHITECTURE__INPUT": 
+                    [
+                        'UNETR', 
+                    ],
+                },
             "MODEL__UNETR_VIT_HIDD_MULT__INPUT": 
                 {
                     "MODEL__ARCHITECTURE__INPUT": 
@@ -2539,6 +2640,13 @@ class Widget_conditions():
                         'UNETR', 
                     ],
                 }, 
+            "MODEL__UNETR_VIT_NUM_FILTERS__INFO": 
+                {
+                    "MODEL__ARCHITECTURE__INPUT": 
+                    [
+                        'UNETR', 
+                    ],
+                }, 
             "MODEL__UNETR_VIT_NUM_FILTERS__INPUT": 
                 {
                     "MODEL__ARCHITECTURE__INPUT": 
@@ -2547,6 +2655,13 @@ class Widget_conditions():
                     ],
                 }, 
             "unetr_dec_act_label": 
+                {
+                    "MODEL__ARCHITECTURE__INPUT": 
+                    [
+                        'UNETR', 
+                    ],
+                }, 
+            "MODEL__UNETR_DEC_ACTIVATION__INFO": 
                 {
                     "MODEL__ARCHITECTURE__INPUT": 
                     [
@@ -2574,6 +2689,13 @@ class Widget_conditions():
                         'MAE', 
                     ],
                 },
+            "MODEL__MAE_MASK_RATIO__INFO": 
+                {
+                    "MODEL__ARCHITECTURE__INPUT": 
+                    [
+                        'MAE', 
+                    ],
+                },
             "MODEL__MAE_DEC_HIDDEN_SIZE__INPUT": 
                 {
                     "MODEL__ARCHITECTURE__INPUT": 
@@ -2588,7 +2710,21 @@ class Widget_conditions():
                         'MAE', 
                     ],
                 }, 
+            "MODEL__MAE_DEC_HIDDEN_SIZE__INFO": 
+                {
+                    "MODEL__ARCHITECTURE__INPUT": 
+                    [
+                        'MAE', 
+                    ],
+                }, 
             "MODEL__MAE_DEC_NUM_LAYERS__INPUT": 
+                {
+                    "MODEL__ARCHITECTURE__INPUT": 
+                    [
+                        'MAE', 
+                    ],
+                }, 
+            "MODEL__MAE_DEC_NUM_LAYERS__INFO": 
                 {
                     "MODEL__ARCHITECTURE__INPUT": 
                     [
@@ -2616,7 +2752,21 @@ class Widget_conditions():
                         'MAE', 
                     ],
                 }, 
+            "MODEL__MAE_DEC_NUM_HEADS__INFO": 
+                {
+                    "MODEL__ARCHITECTURE__INPUT": 
+                    [
+                        'MAE', 
+                    ],
+                }, 
             "MODEL__MAE_DEC_MLP_DIMS__INPUT": 
+                {
+                    "MODEL__ARCHITECTURE__INPUT": 
+                    [
+                        'MAE', 
+                    ],
+                }, 
+            "MODEL__MAE_DEC_MLP_DIMS__INFO": 
                 {
                     "MODEL__ARCHITECTURE__INPUT": 
                     [
@@ -2778,7 +2928,7 @@ class Widget_conditions():
 
             # Check conditions
             for cond_widget in self.conditions[widget]:
-                value = str(getattr(main_window.ui, cond_widget).currentText())
+                value = str(get_text(getattr(main_window.ui, cond_widget)))
                 if value not in self.conditions[widget][cond_widget]:
                     visible = False  
                     break  
@@ -2787,14 +2937,14 @@ class Widget_conditions():
 
         # Widgets to set with a value based on condition
         if updated_widget is not None and widgets_to_set_cond is not None:
-            cbox_value = str(getattr(main_window.ui, updated_widget).currentText())
+            cbox_value = str(get_text(getattr(main_window.ui, updated_widget)))
             for tup in widgets_to_set_cond:
                 if cbox_value in tup[1]:
                     getattr(main_window.ui, tup[0][0]).setCurrentText(tup[0][1]) 
 
         # Widgets to set with a value
         if updated_widget is not None and widgets_to_set is not None:
-            cbox_value = str(getattr(main_window.ui, updated_widget).currentText())
+            cbox_value = str(get_text(getattr(main_window.ui, updated_widget)))
             for wid in widgets_to_set:
                 getattr(main_window.ui, wid).setCurrentText(cbox_value)
                  

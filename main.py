@@ -264,6 +264,7 @@ class MainWindow(QMainWindow):
         self.ui.PROBLEM__DENOISING__N2V_NEIGHBORHOOD_RADIUS__INPUT.setValidator(self.int_validator)
 
         self.condition_db = Widget_conditions()
+
         self.ui.MODEL__LOAD_CHECKPOINT__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
             ["PATHS__CHECKPOINT_FILE__INPUT", "PATHS__CHECKPOINT_FILE__INFO", "checkpoint_file_path_browse_bn", "checkpoint_file_path_browse_label",
              "checkpoint_loading_opt_label", "checkpoint_loading_opt_frame"]))
@@ -286,21 +287,26 @@ class MainWindow(QMainWindow):
             "DATA__VAL__PATH__LABEL", "DATA__VAL__PATH__INFO", "DATA__VAL__PATH__INPUT", "val_data_input_browse_bn", "validation_data_gt_label", "validation_data_gt_info", "DATA__VAL__GT_PATH__INPUT",
             "val_data_gt_input_browse_bn", "val_in_memory_label", "val_in_memory_info", "DATA__VAL__IN_MEMORY__INPUT", "test_data_label", "DATA__TEST__PATH__INPUT","DATA__TEST__PATH__INFO",
             "test_data_input_browse_bn", "test_exists_gt_label", "DATA__TEST__LOAD_GT__INPUT", "DATA__TEST__LOAD_GT__INFO","test_data_gt_label", "DATA__TEST__GT_PATH__INPUT","DATA__TEST__GT_PATH__INFO",
-            "test_data_gt_input_browse_bn", "test_data_in_memory_label", "DATA__TEST__IN_MEMORY__INPUT", "DATA__TEST__IN_MEMORY__INFO","random_val_label", "DATA__VAL__RANDOM__INPUT",
-            "validation_overlap_label", "DATA__VAL__OVERLAP__INPUT", "validation_padding_label", "DATA__VAL__PADDING__INPUT",
+            "test_data_gt_input_browse_bn", "test_data_in_memory_label", "DATA__TEST__IN_MEMORY__INPUT", "DATA__TEST__IN_MEMORY__INFO","random_val_label", "DATA__VAL__RANDOM__INPUT","DATA__VAL__RANDOM__INFO",
+            "validation_overlap_label", "DATA__VAL__OVERLAP__INFO", "DATA__VAL__OVERLAP__INPUT", "validation_padding_label", "DATA__VAL__PADDING__INFO", "DATA__VAL__PADDING__INPUT",
             ],
             widgets_to_set_cond=
             [
                 (["DATA__TRAIN__IN_MEMORY__INPUT", "Yes"], ["Extract from train (split training)","Extract from train (cross validation)"])
             ], updated_widget="DATA__VAL__TYPE__INPUT"))
+        self.ui.DATA__VAL__IN_MEMORY__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
+            ["validation_overlap_label", "DATA__VAL__OVERLAP__INFO", "DATA__VAL__OVERLAP__INPUT", "validation_padding_label", "DATA__VAL__PADDING__INFO", "DATA__VAL__PADDING__INPUT"]))
         self.ui.train_advanced_bn.clicked.connect(lambda: expand_hide_advanced_options(self, "train_advanced_bn", "train_advanced_options_frame"))
         self.ui.MODEL__ARCHITECTURE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["unet_model_like_frame", "unet_model_like_label", "sr_unet_like_heading", "sr_unet_like_frame", "transformers_frame", "transformers_label", 
-            "unetr_vit_hidden_multiple_label", "MODEL__UNETR_VIT_HIDD_MULT__INPUT", "unetr_num_filters_label", "MODEL__UNETR_VIT_NUM_FILTERS__INPUT", 
-            "unetr_dec_act_label", "MODEL__UNETR_DEC_ACTIVATION__INPUT", "MODEL__MAE_MASK_RATIO__INPUT", "MODEL__MAE_MASK_RATIO__LABEL",
-            "MODEL__MAE_DEC_HIDDEN_SIZE__INPUT", "MODEL__MAE_DEC_HIDDEN_SIZE__LABEL", 
-            "MODEL__MAE_DEC_NUM_LAYERS__INPUT", "MODEL__MAE_DEC_NUM_LAYERS__LABEL", "MODEL__MAE_DEC_NUM_HEADS__INPUT", "MODEL__MAE_DEC_NUM_HEADS__LABEL",
-            "MODEL__MAE_DEC_MLP_DIMS__INPUT", "MODEL__MAE_DEC_HIDDEN_SIZE__INPUT", "MODEL__MAE_DEC_MLP_DIMS__LABEL"], 
+            "unetr_vit_hidden_multiple_label", "MODEL__UNETR_VIT_HIDD_MULT__INFO", "MODEL__UNETR_VIT_HIDD_MULT__INPUT", 
+            "unetr_num_filters_label", "MODEL__UNETR_VIT_NUM_FILTERS__INFO", "MODEL__UNETR_VIT_NUM_FILTERS__INPUT", 
+            "unetr_dec_act_label", "MODEL__UNETR_DEC_ACTIVATION__INFO", "MODEL__UNETR_DEC_ACTIVATION__INPUT", 
+            "MODEL__MAE_MASK_RATIO__INPUT", "MODEL__MAE_MASK_RATIO__LABEL", "MODEL__MAE_MASK_RATIO__INFO",
+            "MODEL__MAE_DEC_HIDDEN_SIZE__INPUT", "MODEL__MAE_DEC_HIDDEN_SIZE__LABEL", "MODEL__MAE_DEC_HIDDEN_SIZE__INFO", 
+            "MODEL__MAE_DEC_NUM_LAYERS__INPUT", "MODEL__MAE_DEC_NUM_LAYERS__LABEL", "MODEL__MAE_DEC_NUM_LAYERS__INFO", 
+            "MODEL__MAE_DEC_NUM_HEADS__INPUT", "MODEL__MAE_DEC_NUM_HEADS__LABEL", "MODEL__MAE_DEC_NUM_HEADS__INFO", 
+            "MODEL__MAE_DEC_MLP_DIMS__INPUT", "MODEL__MAE_DEC_MLP_DIMS__INFO", "MODEL__MAE_DEC_MLP_DIMS__LABEL"], 
             widgets_to_set=["transformers_label"]))
         self.ui.TRAIN__OPTIMIZER__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["TRAIN__W_DECAY__INPUT", "adamw_weight_decay_label", "TRAIN__W_DECAY__INFO"]))
@@ -404,9 +410,10 @@ class MainWindow(QMainWindow):
             ["inst_seg_metrics_label","inst_seg_metrics_frame","det_metrics_label","det_metrics_frame",
             "test_data_gt_label", "DATA__TEST__GT_PATH__INPUT", "DATA__TEST__GT_PATH__INFO", "test_data_gt_input_browse_bn"]))
         self.ui.DATA__TEST__USE_VAL_AS_TEST__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
-            ["test_data_label","DATA__TEST__PATH__INPUT","test_data_input_browse_bn","test_exists_gt_label","DATA__TEST__LOAD_GT__INPUT",
-            "DATA__TEST__LOAD_GT__INFO",
-             "test_data_gt_label","DATA__TEST__GT_PATH__INPUT","DATA__TEST__GT_PATH__INFO","test_data_gt_input_browse_bn","test_data_in_memory_label",
+            ["test_data_label","DATA__TEST__PATH__INPUT","test_data_input_browse_bn",
+             "test_exists_gt_label","DATA__TEST__LOAD_GT__INPUT","DATA__TEST__LOAD_GT__INFO",
+             "test_data_gt_label","DATA__TEST__GT_PATH__INPUT","DATA__TEST__GT_PATH__INFO",
+             "test_data_gt_input_browse_bn","test_data_in_memory_label",
              "DATA__TEST__IN_MEMORY__INPUT","DATA__TEST__IN_MEMORY__INFO","validation_overlap_label"]))
         self.ui.test_advanced_bn.clicked.connect(lambda: expand_hide_advanced_options(self, "test_advanced_bn", "test_advanced_options_frame"))
         self.ui.TEST__BY_CHUNKS__ENABLE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
