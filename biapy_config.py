@@ -1,4 +1,5 @@
-## Copied from BiaPy commit: 2469cdbfe2e14f83607d7c7b3d50bd05219cb65a
+## Copied from BiaPy commit: c6cc49d8e728d9c1d1f30f57e23ea698eeca4316
+# Model definition variables (source BMZ/BiaPy/Torchvision) not updated yet
 
 import os
 from yacs.config import CfgNode as CN
@@ -133,7 +134,7 @@ class Config:
         ### SUPER_RESOLUTION
         _C.PROBLEM.SUPER_RESOLUTION = CN()
         # Upscaling to be done to the input images. Options: [2, 4]
-        _C.PROBLEM.SUPER_RESOLUTION.UPSCALING = 2
+        _C.PROBLEM.SUPER_RESOLUTION.UPSCALING = 1
 
         ### SELF_SUPERVISED
         _C.PROBLEM.SELF_SUPERVISED = CN()
@@ -182,6 +183,10 @@ class Config:
         _C.DATA.NORMALIZATION.CUSTOM_MEAN = -1.0
         _C.DATA.NORMALIZATION.CUSTOM_STD = -1.0
         
+        # If 'DATA.PATCH_SIZE' selected has 3 channels, e.g. RGB images are expected, so will force grayscale images to be
+        # converted into RGB (e.g. in ImageNet some of the images are grayscale)
+        _C.DATA.FORCE_RGB = False
+
         # Train
         _C.DATA.TRAIN = CN()
         # Whether to check if the data mask contains correct values, e.g. same classes as defined
@@ -479,6 +484,79 @@ class Config:
         # Model definition
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         _C.MODEL = CN()
+        # Whether to define manually the model ('biapy'), load a pretrained one from Bioimage Model Zoo ('bmz') or use one 
+        # available in TorchVision ('torchvision'). 
+        # Options: ["biapy", "bmz", "torchvision"]
+        _C.MODEL.SOURCE = "biapy"
+
+        _C.MODEL.BMZ = CN()
+        # DOI of the model from BMZ to load. It can not be empty if MODEL.SOURCE = "bmz".
+        _C.MODEL.BMZ.SOURCE_MODEL_DOI = ""
+        # BMZ model export options
+        _C.MODEL.BMZ.EXPORT_MODEL = CN()
+        # Whether to export the model to BMZ format or not
+        _C.MODEL.BMZ.EXPORT_MODEL.ENABLE = False
+        # Name of the model
+        _C.MODEL.BMZ.EXPORT_MODEL.NAME = ""
+        # Description of the model
+        _C.MODEL.BMZ.EXPORT_MODEL.DESCRIPTION = ""
+        # Authors of the model. Need to be a list of dicts, e.g. authors=[{"name": "Gizmo"}]
+        _C.MODEL.BMZ.EXPORT_MODEL.AUTHORS = []
+        # License of the model. E.g. "CC-BY-4.0"
+        _C.MODEL.BMZ.EXPORT_MODEL.LICENSE = ""
+        # Tags to make models more findable on the website, e.g. tags=["nucleus-segmentation"]
+        _C.MODEL.BMZ.EXPORT_MODEL.TAGS = []
+        # List of dictionaries of citations associated, e.g. [{"text": "Gizmo et al.", "doi": "doi:10.1002/xyzacab123"}]
+        _C.MODEL.BMZ.EXPORT_MODEL.CITE = []
+        # Path to a file with a documentation of the model in markdown, e.g. "my-model/doc.md"
+        _C.MODEL.BMZ.EXPORT_MODEL.DOCUMENTATION = ""
+
+        # BiaPy support using models of Torchvision . It can not be empty if MODEL.SOURCE = "torchvision".
+        # Models available here: https://pytorch.org/vision/stable/models.html
+        # They can be listed with: "from torchvision.models import list_models; list_models()"
+        #
+        # Semantic segmentation (https://pytorch.org/vision/stable/models.html#semantic-segmentation):
+        # 'deeplabv3_mobilenet_v3_large', 'deeplabv3_resnet101', 'deeplabv3_resnet50', 'fcn_resnet101', 'fcn_resnet50',
+        # 'lraspp_mobilenet_v3_large'
+        # 
+        # Object Detection (https://pytorch.org/vision/stable/models.html#object-detection-instance-segmentation-and-person-keypoint-detection)
+        # 'fasterrcnn_mobilenet_v3_large_320_fpn', 'fasterrcnn_mobilenet_v3_large_fpn', 'fasterrcnn_resnet50_fpn', 
+        # 'fasterrcnn_resnet50_fpn_v2', 'fcos_resnet50_fpn', 'ssd300_vgg16', 'ssdlite320_mobilenet_v3_large',
+        # 'retinanet_resnet50_fpn', 'retinanet_resnet50_fpn_v2',
+        #
+        # Instance Segmentation (https://pytorch.org/vision/stable/models.html#object-detection-instance-segmentation-and-person-keypoint-detection)
+        # 'maskrcnn_resnet50_fpn', 'maskrcnn_resnet50_fpn_v2'
+        # 
+        # Image classification (https://pytorch.org/vision/stable/models.html#classification):
+        # 'alexnet', 'convnext_base', 'convnext_large', 'convnext_small', 'convnext_tiny', 'densenet121', 'densenet161', 
+        # 'densenet169', 'densenet201', 'efficientnet_b0', 'efficientnet_b1', 'efficientnet_b2', 'efficientnet_b3', 
+        # 'efficientnet_b4', 'efficientnet_b5', 'efficientnet_b6', 'efficientnet_b7', 'efficientnet_v2_l', 'efficientnet_v2_m', 
+        # 'efficientnet_v2_s', 'googlenet', 'inception_v3', 'maxvit_t', 'mnasnet0_5', 'mnasnet0_75', 'mnasnet1_0', 'mnasnet1_3', 
+        # 'mobilenet_v2', 'mobilenet_v3_large', 'mobilenet_v3_small',  'quantized_googlenet', 'quantized_inception_v3', 
+        # 'quantized_mobilenet_v2', 'quantized_mobilenet_v3_large', 'quantized_resnet18', 'quantized_resnet50', 
+        # 'quantized_resnext101_32x8d', 'quantized_resnext101_64x4d', 'quantized_shufflenet_v2_x0_5', 'quantized_shufflenet_v2_x1_0', 
+        # 'quantized_shufflenet_v2_x1_5', 'quantized_shufflenet_v2_x2_0', 'regnet_x_16gf', 'regnet_x_1_6gf', 'regnet_x_32gf', 
+        # 'regnet_x_3_2gf', 'regnet_x_400mf', 'regnet_x_800mf', 'regnet_x_8gf', 'regnet_y_128gf', 'regnet_y_16gf', 'regnet_y_1_6gf', 
+        # 'regnet_y_32gf', 'regnet_y_3_2gf', 'regnet_y_400mf', 'regnet_y_800mf', 'regnet_y_8gf', 'resnet101', 'resnet152', 
+        # 'resnet18', 'resnet34', 'resnet50', 'resnext101_32x8d', 'resnext101_64x4d', 'resnext50_32x4d', 'retinanet_resnet50_fpn', 
+        # 'shufflenet_v2_x0_5', 'shufflenet_v2_x1_0', 'shufflenet_v2_x1_5', 'shufflenet_v2_x2_0', 
+        # 'squeezenet1_0', 'squeezenet1_1', 'swin_b', 'swin_s', 'swin_t', 'swin_v2_b', 'swin_v2_s', 'swin_v2_t', 
+        # 'vgg11', 'vgg11_bn', 'vgg13', 'vgg13_bn', 'vgg16', 'vgg16_bn', 'vgg19', 'vgg19_bn', 'vit_b_16', 'vit_b_32', 
+        # 'vit_h_14', 'vit_l_16', 'vit_l_32', 'wide_resnet101_2', 'wide_resnet50_2'
+        # 
+        # Listed but not supported:
+        # 
+        # (NOT SUPPORTED) Video classification (https://pytorch.org/vision/stable/models.html#video-classification):
+        # 'mc3_18', 'mvit_v1_b', 'mvit_v2_s', 'r2plus1d_18', 'r3d_18','swin3d_s', 'swin3d_t', 's3d', 'swin3d_b'
+        #
+        # (NOT SUPPORTED) Optical flow (https://pytorch.org/vision/stable/models.html#optical-flow):
+        # 'raft_large', 'raft_small'
+        # 
+        # (NOT SUPPORTED) Person Keypoint Detection (https://pytorch.org/vision/stable/models.html#object-detection-instance-segmentation-and-person-keypoint-detection)
+        # 'keypointrcnn_resnet50_fpn'
+        # 
+        _C.MODEL.TORCHVISION_MODEL_NAME = ""
+
         # Architecture of the network. Possible values are: 'unet', 'resunet', 'resunet++', 'attention_unet', 'nnunet',  
         # 'multiresunet', 'seunet', 'simple_cnn', 'efficientnet_b[0-7]', 'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'ViT'
         # 'mae'
@@ -498,7 +576,7 @@ class Config:
         _C.MODEL.ACTIVATION = 'ELU'
         # Las activation to use. Options 'sigmoid', 'softmax' or 'linear'
         _C.MODEL.LAST_ACTIVATION = 'sigmoid' 
-        # Number of classes without counting the background class (that should be using 0 label)
+        # Number of classes including the background class (that should be using 0 label)
         _C.MODEL.N_CLASSES = 2
         # Downsampling to be made in Z. This value will be the third integer of the MaxPooling operation. When facing
         # anysotropic datasets set it to get better performance
@@ -641,6 +719,8 @@ class Config:
         _C.TEST.BY_CHUNKS.SAVE_OUT_TIF = False
         # In how many iterations the H5 writer needs to flush the data. No need to do so with Zarr files.
         _C.TEST.BY_CHUNKS.FLUSH_EACH = 100
+        # Input Numpy/Zarr/H5 image's axes order. Options: ['TZCYX', 'TZYXC', 'ZCYX', 'ZYXC']
+        _C.TEST.BY_CHUNKS.INPUT_IMG_AXES_ORDER = 'TZCYX'
         # Whether if after reconstructing the prediction the pipeline will continue each workflow specific steps. For this process
         # the prediction image needs to be loaded into memory so be sure that it can fit in you memory. E.g. in instance 
         # segmentation the instances will be created from the prediction.
@@ -680,9 +760,8 @@ class Config:
         # 'peak_local_max': https://scikit-image.org/docs/stable/api/skimage.feature.html#skimage.feature.peak_local_max 
         # 'blob_log': https://scikit-image.org/docs/stable/api/skimage.feature.html#skimage.feature.blob_log
         _C.TEST.DET_POINT_CREATION_FUNCTION = 'peak_local_max'
-
         # Minimun value to consider a point as a peak. Corresponds to 'threshold_abs' argument of the function
-        # 'peak_local_max' of skimage.feature or 'threshold' argument of 'blob_log'
+        # 'peak_local_max' of skimage.feature
         _C.TEST.DET_MIN_TH_TO_BE_PEAK = [0.2]  
         # Corresponds to 'min_sigma' argument of 'blob_log' function. It is the minimum standard deviation for Gaussian kernel. 
         # Keep this low to detect smaller blobs. The standard deviations of the Gaussian filter are given for each axis as a 
@@ -837,6 +916,8 @@ class Config:
         _C.PATHS.STD_INFO_FILE = os.path.join(_C.PATHS.CHECKPOINT, 'normalization_std_value.npy')
         # Path where the images used in MAE will be saved suring inference
         _C.PATHS.MAE_OUT_DIR = os.path.join(_C.PATHS.RESULT_DIR.PATH, 'MAE_checks')
+        # Paths where all file for Bioimage Model Zoo integration will be placed 
+        _C.PATHS.RESULT_DIR.BMZ_BUILD = os.path.join(_C.PATHS.RESULT_DIR.PATH, 'bmz_model')
         
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Logging

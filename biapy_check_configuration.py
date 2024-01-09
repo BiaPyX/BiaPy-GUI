@@ -1,8 +1,9 @@
-## Copied from BiaPy commit: 2469cdbfe2e14f83607d7c7b3d50bd05219cb65a
+## Copied from BiaPy commit: c6cc49d8e728d9c1d1f30f57e23ea698eeca4316
 
 import os
 import numpy as np
 import collections
+import requests
 
 def check_configuration(cfg, check_data_paths=True):
     """
@@ -148,15 +149,97 @@ def check_configuration(cfg, check_data_paths=True):
     if cfg.TEST.ENABLE and cfg.TEST.ANALIZE_2D_IMGS_AS_3D_STACK and cfg.PROBLEM.NDIM == "3D":
         raise ValueError("'TEST.ANALIZE_2D_IMGS_AS_3D_STACK' makes no sense when the problem is 3D. Disable it.")
 
+    if cfg.MODEL.SOURCE not in ["biapy", "bmz", "torchvision"]:
+        raise ValueError("'MODEL.SOURCE' needs to be one between ['biapy', 'bmz', 'torchvision']")
+
+    if cfg.MODEL.SOURCE == "bmz":
+        if cfg.TRAIN.ENABLE:
+            raise ValueError("Currently not supported to train a BMZ model")
+        if cfg.MODEL.BMZ.SOURCE_MODEL_DOI == "":
+            raise ValueError("'MODEL.BMZ.SOURCE_MODEL_DOI' needs to be configured when 'MODEL.SOURCE' is 'bmz'")
+
+        # Check if the model exists
+        url = 'http://www.doi.org/'+cfg.MODEL.BMZ.SOURCE_MODEL_DOI
+        r = requests.get(url, stream=True, verify=True)
+        if r.status_code >= 200 and r.status_code < 400:
+            print(f'BMZ model DOI: {cfg.MODEL.BMZ.SOURCE_MODEL_DOI} found')
+        else:
+            raise ValueError(f'BMZ model DOI: {cfg.MODEL.BMZ.SOURCE_MODEL_DOI} not found. Aborting!')
+
+    if cfg.MODEL.BMZ.EXPORT_MODEL.ENABLE:
+        if cfg.MODEL.BMZ.EXPORT_MODEL.NAME == "":
+            raise ValueError("'MODEL.BMZ.EXPORT_MODEL.NAME' can not be empty when 'MODEL.BMZ.EXPORT_MODEL.ENABLE' is True")
+        if cfg.MODEL.BMZ.EXPORT_MODEL.DESCRIPTION == "":
+            raise ValueError("'MODEL.BMZ.EXPORT_MODEL.DESCRIPTION' can not be empty when 'MODEL.BMZ.EXPORT_MODEL.ENABLE' is True")
+        # Authors of the model. Need to be a list of dicts, e.g. authors=[{"name": "Daniel"}]
+        if not isinstance(cfg.MODEL.BMZ.EXPORT_MODEL.AUTHORS, list):
+            raise ValueError("'MODEL.BMZ.EXPORT_MODEL.AUTHORS' needs to be a list of dicts. E.g. [{'name': 'Daniel'}]")
+        else:
+            if len(cfg.MODEL.BMZ.EXPORT_MODEL.AUTHORS) == 0:
+                raise ValueError("'MODEL.BMZ.EXPORT_MODEL.AUTHORS' can not be empty when 'MODEL.BMZ.EXPORT_MODEL.ENABLE' is True")
+            for d in cfg.MODEL.BMZ.EXPORT_MODEL.AUTHORS:
+                if not isinstance(d, dict):
+                    raise ValueError("'MODEL.BMZ.EXPORT_MODEL.AUTHORS' must be a list of dicts. E.g. [{'name': 'Daniel'}]")
+        if cfg.MODEL.BMZ.EXPORT_MODEL.LICENSE == "":
+                raise ValueError("'MODEL.BMZ.EXPORT_MODEL.LICENSE' can not be empty. E.g. 'CC-BY-4.0'")
+        if not isinstance(cfg.MODEL.BMZ.EXPORT_MODEL.TAGS, list):
+            raise ValueError("'MODEL.BMZ.EXPORT_MODEL.TAGS' needs to be a list of strings. E.g. [{'modality': 'electron-microscopy', 'content': 'mitochondria'}]")
+        else:
+            if len(cfg.MODEL.BMZ.EXPORT_MODEL.TAGS) == 0:
+                raise ValueError("'MODEL.BMZ.EXPORT_MODEL.TAGS' can not be empty when 'MODEL.BMZ.EXPORT_MODEL.ENABLE' is True")
+            for d in cfg.MODEL.BMZ.EXPORT_MODEL.TAGS:
+                if not isinstance(d, dict):
+                    raise ValueError("'MODEL.BMZ.EXPORT_MODEL.TAGS' must be a list of strings. E.g. [{'modality': 'electron-microscopy', 'content': 'mitochondria'}]")                    
+        if not isinstance(cfg.MODEL.BMZ.EXPORT_MODEL.CITE, list):
+            raise ValueError("'MODEL.BMZ.EXPORT_MODEL.CITE' needs to be a list of dicts. E.g. [{'text': 'Gizmo et al.', 'doi': 'doi:10.1002/xyzacab123'}]")
+        else:
+            for d in cfg.MODEL.BMZ.EXPORT_MODEL.CITE:
+                if not isinstance(d, dict):
+                    raise ValueError("'MODEL.BMZ.EXPORT_MODEL.CITE' needs to be a list of dicts. E.g. [{'text': 'Gizmo et al.', 'doi': 'doi:10.1002/xyzacab123'}]")
+        if cfg.MODEL.BMZ.EXPORT_MODEL.DOCUMENTATION == "":
+            raise ValueError("'MODEL.BMZ.EXPORT_MODEL.DOCUMENTATION' can not be empty. E.g. '/home/user/my-model/doc.md'")
+        else:
+            if not os.path.exists(cfg.MODEL.BMZ.EXPORT_MODEL.DOCUMENTATION):
+                raise ValueError("'MODEL.BMZ.EXPORT_MODEL.DOCUMENTATION' file does not exist!")
+
+    elif cfg.MODEL.SOURCE == "torchvision":
+        if cfg.MODEL.TORCHVISION_MODEL_NAME == "":
+            raise ValueError("'MODEL.TORCHVISION_MODEL_NAME' needs to be configured when 'MODEL.SOURCE' is 'torchvision'")
+        if cfg.TEST.AUGMENTATION:
+            print("WARNING: 'TEST.AUGMENTATION' is not available using TorchVision models")
+
+    if cfg.TEST.AUGMENTATION and cfg.TEST.REDUCE_MEMORY:
+        raise ValueError("'TEST.AUGMENTATION' and 'TEST.REDUCE_MEMORY' are incompatible as the function used to make the rotation "
+            "does not support float16 data type.") 
+
     model_arch = cfg.MODEL.ARCHITECTURE.lower()
     #### Semantic segmentation ####
     if cfg.PROBLEM.TYPE == 'SEMANTIC_SEG':
-        if cfg.MODEL.N_CLASSES < 2:
-            raise ValueError("'MODEL.N_CLASSES' need to be greater or equal 2 (binary case)")
-        if cfg.LOSS.TYPE == "MASKED_BCE":
-            if cfg.MODEL.N_CLASSES > 2:
-                raise ValueError("Not implemented pipeline option: N_CLASSES > 2 and MASKED_BCE")
-                    
+        if cfg.MODEL.SOURCE == "biapy":
+            if cfg.MODEL.N_CLASSES < 2:
+                raise ValueError("'MODEL.N_CLASSES' need to be greater or equal 2 (binary case)")
+            if cfg.LOSS.TYPE == "MASKED_BCE":
+                if cfg.MODEL.N_CLASSES > 2:
+                    raise ValueError("Not implemented pipeline option: N_CLASSES > 2 and MASKED_BCE")
+        elif cfg.MODEL.SOURCE == "torchvision":
+            if cfg.MODEL.TORCHVISION_MODEL_NAME not in ['deeplabv3_mobilenet_v3_large', 'deeplabv3_resnet101', 'deeplabv3_resnet50', \
+                'fcn_resnet101', 'fcn_resnet50', 'lraspp_mobilenet_v3_large']:
+                raise ValueError("'MODEL.SOURCE' must be one between ['deeplabv3_mobilenet_v3_large', 'deeplabv3_resnet101', "
+                    "'deeplabv3_resnet50', 'fcn_resnet101', 'fcn_resnet50', 'lraspp_mobilenet_v3_large' ]")
+            if cfg.MODEL.TORCHVISION_MODEL_NAME in ['deeplabv3_mobilenet_v3_large'] and cfg.DATA.PATCH_SIZE[-1] != 3:
+                raise ValueError("'deeplabv3_mobilenet_v3_large' model expects 3 channel data (RGB). "
+                    f"'DATA.PATCH_SIZE' set is {cfg.DATA.PATCH_SIZE}")
+            if cfg.PROBLEM.NDIM == '3D':
+                raise ValueError("TorchVision model's for semantic segmentation are only available for 2D images")
+            if not cfg.TEST.STATS.FULL_IMG:
+                raise ValueError("With TorchVision models for semantic segmentation workflow only 'TEST.STATS.FULL_IMG' setting is available, so "
+                    "please set it.")
+            if cfg.TEST.STATS.PER_PATCH or cfg.TEST.STATS.MERGE_PATCHES:
+                raise ValueError("With TorchVision models for semantic segmentation workflow only 'TEST.STATS.FULL_IMG' setting is available, so "
+                    "please enable it and disable 'TEST.STATS.PER_PATCH' and 'TEST.STATS.MERGE_PATCHES'")
+            if cfg.LOSS.TYPE != "CE":
+                raise ValueError("Only 'LOSS.TYPE' = 'CE' is available in semantic segmentation workflow using TorchVision models")
+
     #### Instance segmentation ####
     if cfg.PROBLEM.TYPE == 'INSTANCE_SEG':
         assert cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS in ['BC', 'BCM', 'BCD', 'BCDv2', 'Dv2', 'BDv2', 'BP', 'BD'],\
@@ -184,10 +267,28 @@ def check_configuration(cfg, check_data_paths=True):
         if cfg.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE == 'dense' and cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS == "BCM":
             raise ValueError("'PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE' can not be 'dense' when 'PROBLEM.INSTANCE_SEG.DATA_CHANNELS' is 'BCM'"
                 " as it does not have sense")
+        if cfg.MODEL.N_CLASSES > 2:
+            raise ValueError("'MODEL.N_CLASSES' greater than 2 is not allowed in Instance Segmentation workflow")
+        if cfg.MODEL.SOURCE == "torchvision":
+            if cfg.MODEL.TORCHVISION_MODEL_NAME not in ['maskrcnn_resnet50_fpn', 'maskrcnn_resnet50_fpn_v2']:
+                raise ValueError("'MODEL.SOURCE' must be one between ['maskrcnn_resnet50_fpn', 'maskrcnn_resnet50_fpn_v2']")
+            if cfg.PROBLEM.NDIM == '3D':
+                raise ValueError("TorchVision model's for instance segmentation are only available for 2D images")
+            if cfg.TRAIN.ENABLE:
+                raise NotImplementedError # require bbox generator etc.
+            if cfg.TEST.ANALIZE_2D_IMGS_AS_3D_STACK:
+                raise ValueError("'TEST.ANALIZE_2D_IMGS_AS_3D_STACK' can not be activated with TorchVision models for instance segmentation "
+                    "workflow")
+            if not cfg.TEST.STATS.FULL_IMG:
+                raise ValueError("With TorchVision models for instance segmentation workflow only 'TEST.STATS.FULL_IMG' setting is available, so "
+                    "please set it.")
+            if cfg.TEST.STATS.PER_PATCH or cfg.TEST.STATS.MERGE_PATCHES:
+                raise ValueError("With TorchVision models for instance segmentation workflow only 'TEST.STATS.FULL_IMG' setting is available, so "
+                    "please enable it and disable 'TEST.STATS.PER_PATCH' and 'TEST.STATS.MERGE_PATCHES'")
 
     #### Detection ####
     if cfg.PROBLEM.TYPE == 'DETECTION':
-        if cfg.MODEL.N_CLASSES < 2:
+        if cfg.MODEL.SOURCE == "biapy" and cfg.MODEL.N_CLASSES < 2:
             raise ValueError("'MODEL.N_CLASSES' need to be greater or equal 2 (binary case)")
         if cfg.TEST.POST_PROCESSING.DET_WATERSHED:
             if any(len(x) != dim_count for x in cfg.TEST.POST_PROCESSING.DET_WATERSHED_FIRST_DILATION):
@@ -199,12 +300,31 @@ def check_configuration(cfg, check_data_paths=True):
                 raise ValueError("'TEST.POST_PROCESSING.REMOVE_BY_PROPERTIES' need to be set to 'circularity' filtering when 'TEST.POST_PROCESSING.DET_WATERSHED' is enabled")
         if cfg.TEST.DET_POINT_CREATION_FUNCTION not in ['peak_local_max', 'blob_log']:
             raise ValueError("'TEST.DET_POINT_CREATION_FUNCTION' must be one between: ['peak_local_max', 'blob_log']")
+        if cfg.MODEL.SOURCE == "torchvision":
+            if cfg.MODEL.TORCHVISION_MODEL_NAME not in ['fasterrcnn_mobilenet_v3_large_320_fpn', 'fasterrcnn_mobilenet_v3_large_fpn', \
+                'fasterrcnn_resnet50_fpn', 'fasterrcnn_resnet50_fpn_v2', 'fcos_resnet50_fpn', 'ssd300_vgg16', 'ssdlite320_mobilenet_v3_large', \
+                'retinanet_resnet50_fpn', 'retinanet_resnet50_fpn_v2']:
+                raise ValueError("'MODEL.SOURCE' must be one between ['fasterrcnn_mobilenet_v3_large_320_fpn', 'fasterrcnn_mobilenet_v3_large_fpn', "
+                    "'fasterrcnn_resnet50_fpn', 'fasterrcnn_resnet50_fpn_v2', 'fcos_resnet50_fpn', 'ssd300_vgg16', 'ssdlite320_mobilenet_v3_large', "
+                    "'retinanet_resnet50_fpn', 'retinanet_resnet50_fpn_v2']")
+            if cfg.PROBLEM.NDIM == '3D':
+                raise ValueError("TorchVision model's for detection are only available for 2D images")
+            if cfg.TRAIN.ENABLE:
+                raise NotImplementedError # require bbox generator etc.
+            if not cfg.TEST.STATS.FULL_IMG:
+                raise ValueError("With TorchVision models for detection workflow only 'TEST.STATS.FULL_IMG' setting is available, so "
+                    "please set it.")
+            if cfg.TEST.STATS.PER_PATCH or cfg.TEST.STATS.MERGE_PATCHES:
+                raise ValueError("With TorchVision models for detection workflow only 'TEST.STATS.FULL_IMG' setting is available, so "
+                    "please enable it and disable 'TEST.STATS.PER_PATCH' and 'TEST.STATS.MERGE_PATCHES'")
 
     #### Super-resolution ####
     elif cfg.PROBLEM.TYPE == 'SUPER_RESOLUTION':
         if cfg.PROBLEM.SUPER_RESOLUTION.UPSCALING == 1:
             raise ValueError("Resolution scale must be provided with 'PROBLEM.SUPER_RESOLUTION.UPSCALING' variable")
         assert cfg.PROBLEM.SUPER_RESOLUTION.UPSCALING in [2, 4], "PROBLEM.SUPER_RESOLUTION.UPSCALING not in [2, 4]"
+        if cfg.MODEL.SOURCE == "torchvision":
+            raise ValueError("'MODEL.SOURCE' as 'torchvision' is not available in super-resolution workflow")
 
     #### Self-supervision ####
     elif cfg.PROBLEM.TYPE == 'SELF_SUPERVISED':
@@ -218,18 +338,59 @@ def check_configuration(cfg, check_data_paths=True):
                 raise ValueError("'MODEL.ARCHITECTURE' need to be 'mae' when 'PROBLEM.SELF_SUPERVISED.PRETEXT_TASK' is 'masking'")  
         else:
             raise ValueError("'PROBLEM.SELF_SUPERVISED.PRETEXT_TASK' need to be among these options: ['crappify', 'masking']")
+        if cfg.MODEL.SOURCE == "torchvision":
+            raise ValueError("'MODEL.SOURCE' as 'torchvision' is not available in super-resolution workflow")
+
     #### Denoising ####
     elif cfg.PROBLEM.TYPE == 'DENOISING':
         if cfg.DATA.TEST.LOAD_GT:
             raise ValueError("Denoising is made in an unsupervised way so there is no ground truth required. Disable 'DATA.TEST.LOAD_GT'")
         if not check_value(cfg.PROBLEM.DENOISING.N2V_PERC_PIX):
             raise ValueError("PROBLEM.DENOISING.N2V_PERC_PIX not in [0, 1] range")
+        if cfg.MODEL.SOURCE == "torchvision":
+            raise ValueError("'MODEL.SOURCE' as 'torchvision' is not available in super-resolution workflow")
             
     #### Classification ####
     elif cfg.PROBLEM.TYPE == 'CLASSIFICATION':
         if cfg.TEST.BY_CHUNKS.ENABLE:
             raise ValueError("'TEST.BY_CHUNKS.ENABLE' can not be activated for CLASSIFICATION workflow")
-
+        if cfg.MODEL.SOURCE == "torchvision":
+            if cfg.MODEL.TORCHVISION_MODEL_NAME not in [
+                'alexnet', 'convnext_base', 'convnext_large', 'convnext_small', 'convnext_tiny', 'densenet121', 'densenet161', \
+                'densenet169', 'densenet201', 'efficientnet_b0', 'efficientnet_b1', 'efficientnet_b2', 'efficientnet_b3', \
+                'efficientnet_b4', 'efficientnet_b5', 'efficientnet_b6', 'efficientnet_b7', 'efficientnet_v2_l', 'efficientnet_v2_m', \
+                'efficientnet_v2_s', 'googlenet', 'inception_v3', 'maxvit_t', 'mnasnet0_5', 'mnasnet0_75', 'mnasnet1_0', 'mnasnet1_3', \
+                'mobilenet_v2', 'mobilenet_v3_large', 'mobilenet_v3_small',  'quantized_googlenet', 'quantized_inception_v3', \
+                'quantized_mobilenet_v2', 'quantized_mobilenet_v3_large', 'quantized_resnet18', 'quantized_resnet50', \
+                'quantized_resnext101_32x8d', 'quantized_resnext101_64x4d', 'quantized_shufflenet_v2_x0_5', 'quantized_shufflenet_v2_x1_0', \
+                'quantized_shufflenet_v2_x1_5', 'quantized_shufflenet_v2_x2_0', 'regnet_x_16gf', 'regnet_x_1_6gf', 'regnet_x_32gf', \
+                'regnet_x_3_2gf', 'regnet_x_400mf', 'regnet_x_800mf', 'regnet_x_8gf', 'regnet_y_128gf', 'regnet_y_16gf', 'regnet_y_1_6gf', \
+                'regnet_y_32gf', 'regnet_y_3_2gf', 'regnet_y_400mf', 'regnet_y_800mf', 'regnet_y_8gf', 'resnet101', 'resnet152', \
+                'resnet18', 'resnet34', 'resnet50', 'resnext101_32x8d', 'resnext101_64x4d', 'resnext50_32x4d', 'retinanet_resnet50_fpn', \
+                'shufflenet_v2_x0_5', 'shufflenet_v2_x1_0', 'shufflenet_v2_x1_5', 'shufflenet_v2_x2_0', \
+                'squeezenet1_0', 'squeezenet1_1', 'swin_b', 'swin_s', 'swin_t', 'swin_v2_b', 'swin_v2_s', 'swin_v2_t', \
+                'vgg11', 'vgg11_bn', 'vgg13', 'vgg13_bn', 'vgg16', 'vgg16_bn', 'vgg19', 'vgg19_bn', 'vit_b_16', 'vit_b_32', \
+                'vit_h_14', 'vit_l_16', 'vit_l_32', 'wide_resnet101_2', 'wide_resnet50_2']:
+                raise ValueError("'MODEL.SOURCE' must be one between [ "
+                    "'alexnet', 'convnext_base', 'convnext_large', 'convnext_small', 'convnext_tiny', 'densenet121', 'densenet161', "
+                    "'densenet169', 'densenet201', 'efficientnet_b0', 'efficientnet_b1', 'efficientnet_b2', 'efficientnet_b3', "
+                    "'efficientnet_b4', 'efficientnet_b5', 'efficientnet_b6', 'efficientnet_b7', 'efficientnet_v2_l', 'efficientnet_v2_m', "
+                    "'efficientnet_v2_s', 'googlenet', 'inception_v3', 'maxvit_t', 'mnasnet0_5', 'mnasnet0_75', 'mnasnet1_0', 'mnasnet1_3', "
+                    "'mobilenet_v2', 'mobilenet_v3_large', 'mobilenet_v3_small',  'quantized_googlenet', 'quantized_inception_v3', "
+                    "'quantized_mobilenet_v2', 'quantized_mobilenet_v3_large', 'quantized_resnet18', 'quantized_resnet50', "
+                    "'quantized_resnext101_32x8d', 'quantized_resnext101_64x4d', 'quantized_shufflenet_v2_x0_5', 'quantized_shufflenet_v2_x1_0', "
+                    "'quantized_shufflenet_v2_x1_5', 'quantized_shufflenet_v2_x2_0', 'regnet_x_16gf', 'regnet_x_1_6gf', 'regnet_x_32gf', "
+                    "'regnet_x_3_2gf', 'regnet_x_400mf', 'regnet_x_800mf', 'regnet_x_8gf', 'regnet_y_128gf', 'regnet_y_16gf', 'regnet_y_1_6gf', "
+                    "'regnet_y_32gf', 'regnet_y_3_2gf', 'regnet_y_400mf', 'regnet_y_800mf', 'regnet_y_8gf', 'resnet101', 'resnet152', "
+                    "'resnet18', 'resnet34', 'resnet50', 'resnext101_32x8d', 'resnext101_64x4d', 'resnext50_32x4d', 'retinanet_resnet50_fpn', "
+                    "'shufflenet_v2_x0_5', 'shufflenet_v2_x1_0', 'shufflenet_v2_x1_5', 'shufflenet_v2_x2_0', "
+                    "'squeezenet1_0', 'squeezenet1_1', 'swin_b', 'swin_s', 'swin_t', 'swin_v2_b', 'swin_v2_s', 'swin_v2_t', "
+                    "'vgg11', 'vgg11_bn', 'vgg13', 'vgg13_bn', 'vgg16', 'vgg16_bn', 'vgg19', 'vgg19_bn', 'vit_b_16', 'vit_b_32', "
+                    "'vit_h_14', 'vit_l_16', 'vit_l_32', 'wide_resnet101_2', 'wide_resnet50_2' "
+                    "]")
+            if cfg.PROBLEM.NDIM == '3D':
+                raise ValueError("TorchVision model's for classification are only available for 2D images")
+            
     ### Pre-processing ###
     if cfg.DATA.EXTRACT_RANDOM_PATCH and cfg.DATA.PROBABILITY_MAP:
         if cfg.DATA.W_FOREGROUND+cfg.DATA.W_BACKGROUND != 1:
@@ -259,6 +420,9 @@ def check_configuration(cfg, check_data_paths=True):
         if cfg.TEST.BY_CHUNKS.WORKFLOW_PROCESS.ENABLE:     
             assert cfg.TEST.BY_CHUNKS.WORKFLOW_PROCESS.TYPE in ["chunk_by_chunk", "entire_pred"], \
                 "'TEST.BY_CHUNKS.WORKFLOW_PROCESS.TYPE' needs to be one between ['chunk_by_chunk', 'entire_pred']"
+        if cfg.TEST.BY_CHUNKS.INPUT_IMG_AXES_ORDER not in ['TZCYX', 'TZYXC', 'ZCYX', 'ZYXC']:
+            raise ValueError("'TEST.BY_CHUNKS.INPUT_IMG_AXES_ORDER' can only be one between ['TZCYX', 'TZYXC', 'ZCYX', 'ZYXC']")
+            
     if cfg.TRAIN.ENABLE:
         if cfg.DATA.EXTRACT_RANDOM_PATCH and cfg.DATA.PROBABILITY_MAP:
             if not cfg.PROBLEM.TYPE == 'SEMANTIC_SEG':
@@ -269,7 +433,7 @@ def check_configuration(cfg, check_data_paths=True):
         
         if cfg.DATA.VAL.FROM_TRAIN and not cfg.DATA.TRAIN.IN_MEMORY:
             raise ValueError("Validation can not be extracted from train when 'DATA.TRAIN.IN_MEMORY' == False. Please set"
-                            " 'DATA.VAL.FROM_TRAIN' to False and configure 'DATA.VAL.PATH'/'DATA.VAL.GT_PATH'")                            
+                             " 'DATA.VAL.FROM_TRAIN' to False and configure 'DATA.VAL.PATH'/'DATA.VAL.GT_PATH'")
     if cfg.DATA.VAL.CROSS_VAL: 
         if not cfg.DATA.VAL.FROM_TRAIN:
             raise ValueError("'DATA.VAL.CROSS_VAL' can only be used when 'DATA.VAL.FROM_TRAIN' is True")
@@ -333,103 +497,109 @@ def check_configuration(cfg, check_data_paths=True):
                         "when DATA.NORMALIZATION.TYPE == 'custom', DATA.TRAIN.IN_MEMORY needs to be True")
 
     ### Model ###
-    assert model_arch in ['unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'simple_cnn', 'efficientnet_b0', 
-        'efficientnet_b1', 'efficientnet_b2', 'efficientnet_b3', 'efficientnet_b4','efficientnet_b5','efficientnet_b6','efficientnet_b7',
-        'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'vit', 'mae'],\
-        "MODEL.ARCHITECTURE not in ['unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'simple_cnn', 'efficientnet_b[0-7]', 'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'vit', 'mae']"
-    if model_arch not in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet', 'unetr', 'vit', 'mae'] and cfg.PROBLEM.NDIM == '3D' and cfg.PROBLEM.TYPE != "CLASSIFICATION":
-        raise ValueError("For 3D these models are available: {}".format(['unet', 'resunet', 'resunet++', 'seunet', 'multiresunet', 'attention_unet', 'unetr', 'vit', 'mae']))
-    if cfg.MODEL.N_CLASSES > 2 and cfg.PROBLEM.TYPE != "CLASSIFICATION" and model_arch not in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']:
-        raise ValueError("'MODEL.N_CLASSES' > 2 can only be used with 'MODEL.ARCHITECTURE' in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']")
-    
-    assert len(cfg.MODEL.FEATURE_MAPS) > 2, "'MODEL.FEATURE_MAPS' needs to have at least 3 values"
-    
-    # Adjust dropout to feature maps
-    if model_arch in ['vit', 'unetr', 'mae']:
-        if all(x == 0 for x in cfg.MODEL.DROPOUT_VALUES):
-            opts.extend(['MODEL.DROPOUT_VALUES', (0.,)])
-        elif len(cfg.MODEL.DROPOUT_VALUES) != 1:
-            raise ValueError("'MODEL.DROPOUT_VALUES' must be list of an unique number when 'MODEL.ARCHITECTURE' is one among ['vit', 'mae', 'unetr']")
-        elif not check_value(cfg.MODEL.DROPOUT_VALUES[0]):
-            raise ValueError("'MODEL.DROPOUT_VALUES' not in [0, 1] range")
-    else:
-        if len(cfg.MODEL.FEATURE_MAPS) != len(cfg.MODEL.DROPOUT_VALUES):
+    if cfg.MODEL.SOURCE == "biapy":
+        assert model_arch in ['unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'simple_cnn', 'efficientnet_b0', 
+            'efficientnet_b1', 'efficientnet_b2', 'efficientnet_b3', 'efficientnet_b4','efficientnet_b5','efficientnet_b6','efficientnet_b7',
+            'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'vit', 'mae'],\
+            "MODEL.ARCHITECTURE not in ['unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'simple_cnn', 'efficientnet_b[0-7]', 'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'vit', 'mae']"
+        if model_arch not in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet', 'unetr', 'vit', 'mae'] and cfg.PROBLEM.NDIM == '3D' and cfg.PROBLEM.TYPE != "CLASSIFICATION":
+            raise ValueError("For 3D these models are available: {}".format(['unet', 'resunet', 'resunet++', 'seunet', 'multiresunet', 'attention_unet', 'unetr', 'vit', 'mae']))
+        if cfg.MODEL.N_CLASSES > 2 and cfg.PROBLEM.TYPE != "CLASSIFICATION" and model_arch not in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']:
+            raise ValueError("'MODEL.N_CLASSES' > 2 can only be used with 'MODEL.ARCHITECTURE' in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']")
+        
+        assert len(cfg.MODEL.FEATURE_MAPS) > 2, "'MODEL.FEATURE_MAPS' needs to have at least 3 values"
+        
+        # Adjust dropout to feature maps
+        if model_arch in ['vit', 'unetr', 'mae']:
             if all(x == 0 for x in cfg.MODEL.DROPOUT_VALUES):
-                opts.extend(['MODEL.DROPOUT_VALUES', (0.,)*len(cfg.MODEL.FEATURE_MAPS)])
-            elif any(not check_value(x) for x in cfg.MODEL.DROPOUT_VALUES):
+                opts.extend(['MODEL.DROPOUT_VALUES', (0.,)])
+            elif len(cfg.MODEL.DROPOUT_VALUES) != 1:
+                raise ValueError("'MODEL.DROPOUT_VALUES' must be list of an unique number when 'MODEL.ARCHITECTURE' is one among ['vit', 'mae', 'unetr']")
+            elif not check_value(cfg.MODEL.DROPOUT_VALUES[0]):
                 raise ValueError("'MODEL.DROPOUT_VALUES' not in [0, 1] range")
-            else:
-                raise ValueError("'MODEL.FEATURE_MAPS' and 'MODEL.DROPOUT_VALUES' lengths must be equal")
-
-    # Adjust Z_DOWN values to feature maps
-    if all(x == 0 for x in cfg.MODEL.Z_DOWN):
-        if cfg.PROBLEM.TYPE == 'SUPER_RESOLUTION' and cfg.PROBLEM.NDIM == '3D':
-            opts.extend(['MODEL.Z_DOWN', (1,)*(len(cfg.MODEL.FEATURE_MAPS)-1)])
         else:
-            opts.extend(['MODEL.Z_DOWN', (2,)*(len(cfg.MODEL.FEATURE_MAPS)-1)])
-    elif (cfg.PROBLEM.TYPE == 'SUPER_RESOLUTION' and cfg.PROBLEM.NDIM == '3D') and \
-        any(x != 1 for x in cfg.MODEL.Z_DOWN):
-        raise ValueError("'MODEL.Z_DOWN' != 1 not allowed in super-resolution workflow")
-    elif any([False for x in cfg.MODEL.Z_DOWN if x != 1 and x != 2]):
-        raise ValueError("'MODEL.Z_DOWN' needs to be 1 or 2")
-    else:
-        if model_arch == 'multiresunet' and len(cfg.MODEL.Z_DOWN) != 4:
-            raise ValueError("'MODEL.Z_DOWN' length must be 4 when using 'multiresunet'")
-        elif len(cfg.MODEL.FEATURE_MAPS)-1 != len(cfg.MODEL.Z_DOWN):
-            raise ValueError("'MODEL.FEATURE_MAPS' length minus one and 'MODEL.Z_DOWN' length must be equal")
+            if len(cfg.MODEL.FEATURE_MAPS) != len(cfg.MODEL.DROPOUT_VALUES):
+                if all(x == 0 for x in cfg.MODEL.DROPOUT_VALUES):
+                    opts.extend(['MODEL.DROPOUT_VALUES', (0.,)*len(cfg.MODEL.FEATURE_MAPS)])
+                elif any(not check_value(x) for x in cfg.MODEL.DROPOUT_VALUES):
+                    raise ValueError("'MODEL.DROPOUT_VALUES' not in [0, 1] range")
+                else:
+                    raise ValueError("'MODEL.FEATURE_MAPS' and 'MODEL.DROPOUT_VALUES' lengths must be equal")
+
+        # Adjust Z_DOWN values to feature maps
+        if all(x == 0 for x in cfg.MODEL.Z_DOWN):
+            if cfg.PROBLEM.TYPE == 'SUPER_RESOLUTION' and cfg.PROBLEM.NDIM == '3D':
+                opts.extend(['MODEL.Z_DOWN', (1,)*(len(cfg.MODEL.FEATURE_MAPS)-1)])
+            else:
+                opts.extend(['MODEL.Z_DOWN', (2,)*(len(cfg.MODEL.FEATURE_MAPS)-1)])
+        elif (cfg.PROBLEM.TYPE == 'SUPER_RESOLUTION' and cfg.PROBLEM.NDIM == '3D') and \
+            any(x != 1 for x in cfg.MODEL.Z_DOWN):
+            raise ValueError("'MODEL.Z_DOWN' != 1 not allowed in super-resolution workflow")
+        elif any([False for x in cfg.MODEL.Z_DOWN if x != 1 and x != 2]):
+            raise ValueError("'MODEL.Z_DOWN' needs to be 1 or 2")
+        else:
+            if model_arch == 'multiresunet' and len(cfg.MODEL.Z_DOWN) != 4:
+                raise ValueError("'MODEL.Z_DOWN' length must be 4 when using 'multiresunet'")
+            elif len(cfg.MODEL.FEATURE_MAPS)-1 != len(cfg.MODEL.Z_DOWN):
+                raise ValueError("'MODEL.FEATURE_MAPS' length minus one and 'MODEL.Z_DOWN' length must be equal")
 
     if len(opts) > 0:
         cfg.merge_from_list(opts)
 
-    assert cfg.MODEL.LAST_ACTIVATION.lower() in ["relu", "tanh", "leaky_relu", "elu", "gelu", "silu", "sigmoid","softmax", "linear", "none"], \
-        "Get unknown activation key {}".format(activation)
- 
-    if cfg.MODEL.UPSAMPLE_LAYER.lower() not in ["upsampling", "convtranspose"]:
-        raise ValueError("cfg.MODEL.UPSAMPLE_LAYER' needs to be one between ['upsampling', 'convtranspose']. Provided {}"
-                          .format(cfg.MODEL.UPSAMPLE_LAYER))
-    if cfg.PROBLEM.TYPE == "SEMANTIC_SEG" and model_arch not in ['unet', 'resunet', 'resunet++', 'attention_unet', \
-        'multiresunet', 'seunet', 'unetr']:
-        raise ValueError("Not implemented pipeline option: semantic segmentation models are ['unet', 'resunet', 'resunet++', "
-                         "'attention_unet', 'multiresunet', 'seunet', 'unetr']")
-    if cfg.PROBLEM.TYPE == "INSTANCE_SEG" and model_arch not in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'unetr', 'multiresunet']:
-        raise ValueError("Not implemented pipeline option: instance segmentation models are ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'unetr', 'multiresunet']")    
-    if cfg.PROBLEM.TYPE in ['DETECTION', 'DENOISING'] and \
-        model_arch not in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet']:
-        raise ValueError("Architectures available for {} are: ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet']"
-                         .format(cfg.PROBLEM.TYPE))
-    if cfg.PROBLEM.TYPE == 'SUPER_RESOLUTION':
-        if cfg.PROBLEM.NDIM == '2D' and model_arch not in ['edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']:
-            raise ValueError("Architectures available for 2D 'SUPER_RESOLUTION' are: ['edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']")
-        elif cfg.PROBLEM.NDIM == '3D':
-            if model_arch not in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']:
-                raise ValueError("Architectures available for 3D 'SUPER_RESOLUTION' are: ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']")
-            assert cfg.MODEL.UNET_SR_UPSAMPLE_POSITION in ["pre", "post"], "'MODEL.UNET_SR_UPSAMPLE_POSITION' not in ['pre', 'post']"
-    if cfg.PROBLEM.TYPE == 'SELF_SUPERVISED':
-        if model_arch not in ['unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet',  
-            'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'vit', 'mae']:
-            raise ValueError("'SELF_SUPERVISED' models available are these: ['unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', " 
-                "'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'vit', 'mae']")
-    if cfg.PROBLEM.TYPE == 'CLASSIFICATION' and model_arch not in ['simple_cnn', 'vit'] and \
-        'efficientnet' not in model_arch:
-        raise ValueError("Architectures available for 'CLASSIFICATION' are: ['simple_cnn', 'efficientnet_b[0-7]', 'vit']")
-    if model_arch in ['unetr', 'vit', 'mae']:    
-        if model_arch == 'mae' and cfg.PROBLEM.TYPE != 'SELF_SUPERVISED':
-            raise ValueError("'mae' model can only be used in 'SELF_SUPERVISED' workflow")
-        if cfg.MODEL.VIT_EMBED_DIM % cfg.MODEL.VIT_NUM_HEADS != 0:
-            raise ValueError("'MODEL.VIT_EMBED_DIM' should be divisible by 'MODEL.VIT_NUM_HEADS'")
-        if not all([i == cfg.DATA.PATCH_SIZE[0] for i in cfg.DATA.PATCH_SIZE[:-1]]):      
-            raise ValueError("'unetr', 'vit' 'mae' models need to have same shape in all dimensions (e.g. DATA.PATCH_SIZE = (80,80,80,1) )")
-    # Check that the input patch size is divisible in every level of the U-Net's like architectures, as the model
-    # will throw an error not very clear for users
-    if model_arch in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']:
-        for i in range(len(cfg.MODEL.FEATURE_MAPS)-1):
-            if cfg.MODEL.Z_DOWN[i] == 1 or (cfg.PROBLEM.TYPE == 'SUPER_RESOLUTION' and cfg.PROBLEM.NDIM == '3D'):
-                sizes = cfg.DATA.PATCH_SIZE[1:-1] 
-            else:
-                sizes = cfg.DATA.PATCH_SIZE[:-1]
-            if not all([False for x in sizes if x%(np.power(2,(i+1))) != 0 or x == 0]):
-                raise ValueError("The 'DATA.PATCH_SIZE' provided is not divisible by 2 in each of the U-Net's levels. You can reduce the number "
-                "of levels (by reducing 'cfg.MODEL.FEATURE_MAPS' array's length) or increase the 'DATA.PATCH_SIZE'")
+    if cfg.MODEL.SOURCE == "biapy":
+        assert cfg.MODEL.LAST_ACTIVATION.lower() in ["relu", "tanh", "leaky_relu", "elu", "gelu", "silu", "sigmoid","softmax", "linear", "none"], \
+            "Get unknown activation key {}".format(activation)
+    
+        if cfg.MODEL.UPSAMPLE_LAYER.lower() not in ["upsampling", "convtranspose"]:
+            raise ValueError("cfg.MODEL.UPSAMPLE_LAYER' needs to be one between ['upsampling', 'convtranspose']. Provided {}"
+                            .format(cfg.MODEL.UPSAMPLE_LAYER))
+        if cfg.PROBLEM.TYPE == "SEMANTIC_SEG" and model_arch not in ['unet', 'resunet', 'resunet++', 'attention_unet', \
+            'multiresunet', 'seunet', 'unetr']:
+            raise ValueError("Not implemented pipeline option: semantic segmentation models are ['unet', 'resunet', 'resunet++', "
+                            "'attention_unet', 'multiresunet', 'seunet', 'unetr']")
+        if cfg.PROBLEM.TYPE == "INSTANCE_SEG" and model_arch not in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'unetr', 'multiresunet']:
+            raise ValueError("Not implemented pipeline option: instance segmentation models are ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'unetr', 'multiresunet']")    
+        if cfg.PROBLEM.TYPE in ['DETECTION', 'DENOISING'] and \
+            model_arch not in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet']:
+            raise ValueError("Architectures available for {} are: ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet']"
+                            .format(cfg.PROBLEM.TYPE))
+        if cfg.PROBLEM.TYPE == 'SUPER_RESOLUTION':
+            if cfg.PROBLEM.NDIM == '2D' and model_arch not in ['edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']:
+                raise ValueError("Architectures available for 2D 'SUPER_RESOLUTION' are: ['edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']")
+            elif cfg.PROBLEM.NDIM == '3D':
+                if model_arch not in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']:
+                    raise ValueError("Architectures available for 3D 'SUPER_RESOLUTION' are: ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']")
+                assert cfg.MODEL.UNET_SR_UPSAMPLE_POSITION in ["pre", "post"], "'MODEL.UNET_SR_UPSAMPLE_POSITION' not in ['pre', 'post']"
+        if cfg.PROBLEM.TYPE == 'SELF_SUPERVISED':
+            if model_arch not in ['unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet',  
+                'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'vit', 'mae']:
+                raise ValueError("'SELF_SUPERVISED' models available are these: ['unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', " 
+                    "'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'vit', 'mae']")
+        if cfg.PROBLEM.TYPE == 'CLASSIFICATION' and model_arch not in ['simple_cnn', 'vit'] and \
+            'efficientnet' not in model_arch:
+            raise ValueError("Architectures available for 'CLASSIFICATION' are: ['simple_cnn', 'efficientnet_b[0-7]', 'vit']")
+        if model_arch in ['unetr', 'vit', 'mae']:    
+            if model_arch == 'mae' and cfg.PROBLEM.TYPE != 'SELF_SUPERVISED':
+                raise ValueError("'mae' model can only be used in 'SELF_SUPERVISED' workflow")
+            if cfg.MODEL.VIT_EMBED_DIM % cfg.MODEL.VIT_NUM_HEADS != 0:
+                raise ValueError("'MODEL.VIT_EMBED_DIM' should be divisible by 'MODEL.VIT_NUM_HEADS'")
+            if not all([i == cfg.DATA.PATCH_SIZE[0] for i in cfg.DATA.PATCH_SIZE[:-1]]):      
+                raise ValueError("'unetr', 'vit' 'mae' models need to have same shape in all dimensions (e.g. DATA.PATCH_SIZE = (80,80,80,1) )")
+        # Check that the input patch size is divisible in every level of the U-Net's like architectures, as the model
+        # will throw an error not very clear for users
+        if model_arch in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']:
+            for i in range(len(cfg.MODEL.FEATURE_MAPS)-1):
+                if cfg.MODEL.Z_DOWN[i] == 1 or (cfg.PROBLEM.TYPE == 'SUPER_RESOLUTION' and cfg.PROBLEM.NDIM == '3D'):
+                    sizes = cfg.DATA.PATCH_SIZE[1:-1] 
+                else:
+                    sizes = cfg.DATA.PATCH_SIZE[:-1]
+                if not all([False for x in sizes if x%(np.power(2,(i+1))) != 0 or x == 0]):
+                    m = "The 'DATA.PATCH_SIZE' provided is not divisible by 2 in each of the U-Net's levels. You can:\n 1) Reduce the number " + \
+                            "of levels (by reducing 'cfg.MODEL.FEATURE_MAPS' array's length)\n 2) Increase 'DATA.PATCH_SIZE'"
+                    if cfg.PROBLEM.NDIM == '3D':
+                        m += "\n 3) If the Z axis is the problem, as the patch size is normally less than in other axis due to resolution, you " + \
+                            "can tune 'MODEL.Z_DOWN' variable to not downsample the image in all U-Net levels"
+                    raise ValueError(m)
 
     ### Train ###
     assert cfg.TRAIN.OPTIMIZER in ['SGD', 'ADAM', 'ADAMW'], "TRAIN.OPTIMIZER not in ['SGD', 'ADAM', 'ADAMW']"
@@ -513,17 +683,24 @@ def check_configuration(cfg, check_data_paths=True):
             raise ValueError("'DATA.TEST.RESOLUTION' must match in length to {}, which is the number of "
                              "dimensions".format(dim_count))
         if cfg.TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS_RADIUS[0] == -1:
-            raise ValueError("'TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS' need to be set when 'TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS' is True")   
-
+            raise ValueError("'TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS' needs to be set when 'TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS' is True")   
 
 def check_value(value, value_range=(0,1)):
     """Checks if a value is within a range """
     if isinstance(value, list) or isinstance(value, tuple):
         for i in range(len(value)):
-            if not (value_range[0] <= value[i] <= value_range[1]):    
-                return False
+            if isinstance(value[i], np.ndarray):
+                if value_range[0] <= np.min(value[i]) or np.max(value[i]) <= value_range[1]:
+                    return False
+            else:
+                if not (value_range[0] <= value[i] <= value_range[1]):    
+                    return False
         return True 
-    else:   
-        if value_range[0] <= value <= value_range[1]:
-            return True
+    else:
+        if isinstance(value, np.ndarray):
+            if value_range[0] <= np.min(value) and np.max(value) <= value_range[1]:
+                return True
+        else:  
+            if value_range[0] <= value <= value_range[1]:
+                return True
         return False

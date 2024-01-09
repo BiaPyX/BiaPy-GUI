@@ -596,6 +596,9 @@ def create_yaml_file(main_window):
     if get_text(main_window.ui.DATA__CHECK_GENERATORS__INPUT) == "Yes":
         biapy_config['DATA']['CHECK_GENERATORS'] = True
 
+    if get_text(main_window.ui.DATA__FORCE_RGB__INPUT) == "Yes":
+        biapy_config['DATA']['FORCE_RGB'] = True
+
     biapy_config['DATA']['PATCH_SIZE'] = get_text(main_window.ui.DATA__PATCH_SIZE__INPUT)
     if get_text(main_window.ui.DATA__EXTRACT_RANDOM_PATCH__INPUT) == "Yes":
         biapy_config['DATA']['EXTRACT_RANDOM_PATCH'] = True
@@ -942,7 +945,8 @@ def create_yaml_file(main_window):
             biapy_config['TEST']['BY_CHUNKS']['FORMAT'] = get_text(main_window.ui.TEST__BY_CHUNKS__FORMAT__INPUT)
             if get_text(main_window.ui.TEST__BY_CHUNKS__SAVE_OUT_TIF__INPUT) == "Yes":
                 biapy_config['TEST']['BY_CHUNKS']['SAVE_OUT_TIF'] = True  
-            biapy_config['TEST']['BY_CHUNKS']['FLUSH_EACH'] = get_text(main_window.ui.TEST__BY_CHUNKS__FLUSH_EACH__INPUT)
+            biapy_config['TEST']['BY_CHUNKS']['FLUSH_EACH'] = int(get_text(main_window.ui.TEST__BY_CHUNKS__FLUSH_EACH__INPUT))
+            biapy_config['TEST']['BY_CHUNKS']['INPUT_IMG_AXES_ORDER'] = get_text(main_window.ui.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INPUT)
             if get_text(main_window.ui.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INPUT) == "Yes":
                 biapy_config['TEST']['BY_CHUNKS']['WORKFLOW_PROCESS'] = {}
                 biapy_config['TEST']['BY_CHUNKS']['WORKFLOW_PROCESS']['ENABLE'] = True

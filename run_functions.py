@@ -407,6 +407,8 @@ class run_worker(QObject):
 
             # Run container
             # check_command = [ "python3", "-u", "-c", "'import torch; print(torch.cuda.is_available())'"]
+            print(f"Command: {command}")
+            print(f"Volumes:  {volumes}")
             self.biapy_container = self.docker_client.containers.run(
                 self.container_name, 
                 # entrypoint=[ "/bin/bash", "-l", "-c" ],
