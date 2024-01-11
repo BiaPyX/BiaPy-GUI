@@ -881,7 +881,7 @@ def create_yaml_file(main_window):
         biapy_config['PATHS'] = {}
         if get_text(main_window.ui.PATHS__CHECKPOINT_FILE__INPUT) != "":
             biapy_config['PATHS']['CHECKPOINT_FILE'] = get_text(main_window.ui.PATHS__CHECKPOINT_FILE__INPUT, strip=False)
-        if get_text(main_window.ui.MODEL__SAVE_CKPT_FREQ__INPUT) != -1:
+        if int(get_text(main_window.ui.MODEL__SAVE_CKPT_FREQ__INPUT)) != -1:
             biapy_config['MODEL']['SAVE_CKPT_FREQ'] = int(get_text(main_window.ui.MODEL__SAVE_CKPT_FREQ__INPUT))
         if get_text(main_window.ui.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT) != "best_on_val":
             biapy_config['MODEL']['LOAD_CHECKPOINT_EPOCH'] = get_text(main_window.ui.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT)

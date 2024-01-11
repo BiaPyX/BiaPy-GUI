@@ -3,6 +3,7 @@ import sys
 import re
 import multiprocessing
 import datetime
+import ast 
 from collections import deque
 
 from PySide2.QtCore import  QSize, QFile 
@@ -308,17 +309,55 @@ class UIFunction(MainWindow):
         """
         # 2D
         if idx == 0:
-            main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(256,256,1)")
-            main_window.ui.DATA__PATCH_SIZE__TEST__INPUT.setText("(256,256,1)")
-            main_window.ui.DATA__TRAIN__RESOLUTION__INPUT.setText("(1,1)")
-            main_window.ui.DATA__TRAIN__OVERLAP__INPUT.setText("(0,0)")
-            main_window.ui.DATA__TRAIN__PADDING__INPUT.setText("(0,0)")
-            main_window.ui.DATA__VAL__RESOLUTION__INPUT.setText("(1,1)")
-            main_window.ui.DATA__VAL__OVERLAP__INPUT.setText("(0,0)")
-            main_window.ui.DATA__VAL__PADDING__INPUT.setText("(0,0)")
-            main_window.ui.DATA__TEST__RESOLUTION__INPUT.setText("(1,1)")
-            main_window.ui.DATA__TEST__OVERLAP__INPUT.setText("(0,0)")
-            main_window.ui.DATA__TEST__PADDING__INPUT.setText("(32,32)")
+            # Only change values the first time and if they were not modified 
+            if get_text(main_window.ui.DATA__TEST__RESOLUTION__INPUT) == "":
+                main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(256,256,1)")
+                main_window.ui.DATA__PATCH_SIZE__TEST__INPUT.setText("(256,256,1)")
+                main_window.ui.DATA__TRAIN__RESOLUTION__INPUT.setText("(1,1)")
+                main_window.ui.DATA__TRAIN__OVERLAP__INPUT.setText("(0,0)")
+                main_window.ui.DATA__TRAIN__PADDING__INPUT.setText("(0,0)")
+                main_window.ui.DATA__VAL__RESOLUTION__INPUT.setText("(1,1)")
+                main_window.ui.DATA__VAL__OVERLAP__INPUT.setText("(0,0)")
+                main_window.ui.DATA__VAL__PADDING__INPUT.setText("(0,0)")
+                main_window.ui.DATA__TEST__RESOLUTION__INPUT.setText("(1,1)")
+                main_window.ui.DATA__TEST__OVERLAP__INPUT.setText("(0,0)")
+                main_window.ui.DATA__TEST__PADDING__INPUT.setText("(32,32)")
+            else:
+                if get_text(main_window.ui.TRAIN__ENABLE__INPUT) == "Yes":
+                    aux = ast.literal_eval(get_text(main_window.ui.DATA__PATCH_SIZE__INPUT) )
+                else:
+                    aux = ast.literal_eval(get_text(main_window.ui.DATA__PATCH_SIZE__TEST__INPUT) )
+                if isinstance(aux, tuple) and aux == (40,128,128,1):
+                    main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(256,256,1)")
+                    main_window.ui.DATA__PATCH_SIZE__TEST__INPUT.setText("(256,256,1)")
+                aux = ast.literal_eval(get_text(main_window.ui.DATA__TRAIN__RESOLUTION__INPUT) )
+                if isinstance(aux, tuple) and aux == (1,1,1):
+                    main_window.ui.DATA__TRAIN__RESOLUTION__INPUT.setText("(1,1)")
+                aux = ast.literal_eval(get_text(main_window.ui.DATA__TRAIN__OVERLAP__INPUT) )
+                if isinstance(aux, tuple) and aux == (0,0,0):
+                    main_window.ui.DATA__TRAIN__OVERLAP__INPUT.setText("(0,0)")
+                aux = ast.literal_eval(get_text(main_window.ui.DATA__TRAIN__PADDING__INPUT) )
+                if isinstance(aux, tuple) and aux == (0,0,0):
+                    main_window.ui.DATA__TRAIN__PADDING__INPUT.setText("(0,0)")
+                aux = ast.literal_eval(get_text(main_window.ui.DATA__VAL__RESOLUTION__INPUT) )
+                if isinstance(aux, tuple) and aux == (1,1,1):
+                    main_window.ui.DATA__VAL__RESOLUTION__INPUT.setText("(1,1)")
+                aux = ast.literal_eval(get_text(main_window.ui.DATA__VAL__OVERLAP__INPUT) )
+                if isinstance(aux, tuple) and aux == (0,0,0):
+                    main_window.ui.DATA__VAL__OVERLAP__INPUT.setText("(0,0)")
+                aux = ast.literal_eval(get_text(main_window.ui.DATA__VAL__PADDING__INPUT) )
+                if isinstance(aux, tuple) and aux == (0,0,0):
+                    main_window.ui.DATA__VAL__PADDING__INPUT.setText("(0,0)")
+                aux = ast.literal_eval(get_text(main_window.ui.DATA__TEST__RESOLUTION__INPUT) )
+                if isinstance(aux, tuple) and aux == (1,1,1):
+                    main_window.ui.DATA__TEST__RESOLUTION__INPUT.setText("(1,1)")
+                aux = ast.literal_eval(get_text(main_window.ui.DATA__TEST__OVERLAP__INPUT) )
+                if isinstance(aux, tuple) and aux == (0,0,0):
+                    main_window.ui.DATA__TEST__OVERLAP__INPUT.setText("(0,0)")
+                aux = ast.literal_eval(get_text(main_window.ui.DATA__TEST__PADDING__INPUT) )
+                if isinstance(aux, tuple) and aux == ((5,16,16)):
+                    main_window.ui.DATA__TEST__PADDING__INPUT.setText("(32,32)")
+
             main_window.ui.da_z_flip_label.setVisible(False)
             main_window.ui.AUGMENTOR__ZFLIP__INFO.setVisible(False)
             main_window.ui.AUGMENTOR__ZFLIP__INPUT.setVisible(False)
@@ -352,17 +391,42 @@ class UIFunction(MainWindow):
                 models = main_window.cfg.settings['sr_2d_models_real_names']
         # 3D
         else:
-            main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(40,128,128,1)")
-            main_window.ui.DATA__PATCH_SIZE__TEST__INPUT.setText("(40,128,128,1)")
-            main_window.ui.DATA__TRAIN__RESOLUTION__INPUT.setText("(1,1,1)")
-            main_window.ui.DATA__TRAIN__OVERLAP__INPUT.setText("(0,0,0)")
-            main_window.ui.DATA__TRAIN__PADDING__INPUT.setText("(0,0,0)")
-            main_window.ui.DATA__VAL__RESOLUTION__INPUT.setText("(1,1,1)")
-            main_window.ui.DATA__VAL__OVERLAP__INPUT.setText("(0,0,0)")
-            main_window.ui.DATA__VAL__PADDING__INPUT.setText("(0,0,0)")
-            main_window.ui.DATA__TEST__RESOLUTION__INPUT.setText("(1,1,1)")
-            main_window.ui.DATA__TEST__OVERLAP__INPUT.setText("(0,0,0)")
-            main_window.ui.DATA__TEST__PADDING__INPUT.setText("(5,16,16)")
+            # Only change values the first time and if they were not modified 
+            if get_text(main_window.ui.TRAIN__ENABLE__INPUT) == "Yes":
+                aux = ast.literal_eval(get_text(main_window.ui.DATA__PATCH_SIZE__INPUT) )
+            else:
+                aux = ast.literal_eval(get_text(main_window.ui.DATA__PATCH_SIZE__TEST__INPUT) )
+            if isinstance(aux, tuple) and aux == (256,256,1):
+                main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(40,128,128,1)")
+                main_window.ui.DATA__PATCH_SIZE__TEST__INPUT.setText("(40,128,128,1)")
+            aux = ast.literal_eval(get_text(main_window.ui.DATA__TRAIN__RESOLUTION__INPUT) )
+            if isinstance(aux, tuple) and aux == (1,1):
+                main_window.ui.DATA__TRAIN__RESOLUTION__INPUT.setText("(1,1,1)")
+            aux = ast.literal_eval(get_text(main_window.ui.DATA__TRAIN__OVERLAP__INPUT) )
+            if isinstance(aux, tuple) and aux == (0,0):
+                main_window.ui.DATA__TRAIN__OVERLAP__INPUT.setText("(0,0,0)")
+            aux = ast.literal_eval(get_text(main_window.ui.DATA__TRAIN__PADDING__INPUT) )
+            if isinstance(aux, tuple) and aux == (0,0):
+                main_window.ui.DATA__TRAIN__PADDING__INPUT.setText("(0,0,0)")
+            aux = ast.literal_eval(get_text(main_window.ui.DATA__VAL__RESOLUTION__INPUT) )
+            if isinstance(aux, tuple) and aux == (1,1):
+                main_window.ui.DATA__VAL__RESOLUTION__INPUT.setText("(1,1,1)")
+            aux = ast.literal_eval(get_text(main_window.ui.DATA__VAL__OVERLAP__INPUT) )
+            if isinstance(aux, tuple) and aux == (0,0):
+                main_window.ui.DATA__VAL__OVERLAP__INPUT.setText("(0,0,0)")
+            aux = ast.literal_eval(get_text(main_window.ui.DATA__VAL__PADDING__INPUT) )
+            if isinstance(aux, tuple) and aux == (0,0):
+                main_window.ui.DATA__VAL__PADDING__INPUT.setText("(0,0,0)")
+            aux = ast.literal_eval(get_text(main_window.ui.DATA__TEST__RESOLUTION__INPUT) )
+            if isinstance(aux, tuple) and aux == (1,1):
+                main_window.ui.DATA__TEST__RESOLUTION__INPUT.setText("(1,1,1)")
+            aux = ast.literal_eval(get_text(main_window.ui.DATA__TEST__OVERLAP__INPUT) )
+            if isinstance(aux, tuple) and aux == (0,0):
+                main_window.ui.DATA__TEST__OVERLAP__INPUT.setText("(0,0,0)")
+            aux = ast.literal_eval(get_text(main_window.ui.DATA__TEST__PADDING__INPUT) )
+            if isinstance(aux, tuple) and aux == ((32,32)):
+                main_window.ui.DATA__TEST__PADDING__INPUT.setText("(5,16,16)")
+
             main_window.ui.da_z_flip_label.setVisible(True)
             main_window.ui.AUGMENTOR__ZFLIP__INFO.setVisible(True)
             main_window.ui.AUGMENTOR__ZFLIP__INPUT.setVisible(True)
