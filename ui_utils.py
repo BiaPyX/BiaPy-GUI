@@ -85,14 +85,16 @@ def mark_syntax_error(main_window, gui_widget_name, validator_type=["empty"]):
     else:
         getattr(main_window.ui, gui_widget_name).setStyleSheet("")
 
-        out = get_text(getattr(main_window.ui, gui_widget_name))
+        out = get_text(getattr(main_window.ui, gui_widget_name), strip=False)
         if gui_widget_name == "goptions_browse_yaml_path_input":
             main_window.cfg.settings['yaml_config_file_path'] = out
         elif gui_widget_name == "select_yaml_name_label":
             out_write = os.path.basename(out)
             main_window.cfg.settings['yaml_config_filename'] = out_write
             main_window.cfg.settings['yaml_config_file_path'] = os.path.dirname(out)
-            main_window.ui.job_name_input.setPlainText(os.path.splitext(out_write)[0])
+
+            if get_text(main_window.ui.job_name_input) == "":
+                main_window.ui.job_name_input.setPlainText(os.path.splitext(out_write)[0])
 
             # Reset the check
             main_window.ui.check_yaml_file_errors_label.setText("")
@@ -427,7 +429,7 @@ def oninit_checks(main_window):
         main_window.ui.gpu_frame.setStyleSheet("#gpu_frame { border: 3px solid red; border-radius: 25px;}\n#gpu_frame:disabled {border: 3px solid rgb(169,169,169);}")
 
 
-def get_text(gui_widget):
+def get_text(gui_widget, strip=True):
     """
     Gets the value of the input widget. 
     
@@ -437,11 +439,13 @@ def get_text(gui_widget):
         Widget to get the value from. 
     """
     if isinstance(gui_widget, QComboBox):
-        return gui_widget.currentText()
+        v = gui_widget.currentText()
     elif isinstance(gui_widget, QLineEdit) or isinstance(gui_widget, QLabel):
-        return gui_widget.text()
+        v = gui_widget.text()
     else: #QTextBrowser
-        return gui_widget.toPlainText()
+        v = gui_widget.toPlainText()
+    if strip: v = v.strip()
+    return v
 
 def set_text(gui_widget, new_value):
     """
@@ -599,7 +603,10 @@ def create_yaml_file(main_window):
     if get_text(main_window.ui.DATA__FORCE_RGB__INPUT) == "Yes":
         biapy_config['DATA']['FORCE_RGB'] = True
 
-    biapy_config['DATA']['PATCH_SIZE'] = get_text(main_window.ui.DATA__PATCH_SIZE__INPUT)
+    if get_text(main_window.ui.TRAIN__ENABLE__INPUT) == "Yes":
+        biapy_config['DATA']['PATCH_SIZE'] = get_text(main_window.ui.DATA__PATCH_SIZE__INPUT)
+    else:
+        biapy_config['DATA']['PATCH_SIZE'] = get_text(main_window.ui.DATA__PATCH_SIZE__TEST__INPUT)
     if get_text(main_window.ui.DATA__EXTRACT_RANDOM_PATCH__INPUT) == "Yes":
         biapy_config['DATA']['EXTRACT_RANDOM_PATCH'] = True
         if get_text(main_window.ui.DATA__PROBABILITY_MAP__INPUT) == "Yes":
@@ -626,9 +633,9 @@ def create_yaml_file(main_window):
             biapy_config['DATA']['TRAIN']['CHECK_DATA'] = True
         
         biapy_config['DATA']['TRAIN']['IN_MEMORY'] = True if get_text(main_window.ui.DATA__TRAIN__IN_MEMORY__INPUT) == "Yes" else False
-        biapy_config['DATA']['TRAIN']['PATH'] = get_text(main_window.ui.DATA__TRAIN__PATH__INPUT)
+        biapy_config['DATA']['TRAIN']['PATH'] = get_text(main_window.ui.DATA__TRAIN__PATH__INPUT, strip=False)
         if main_window.cfg.settings['selected_workflow'] not in [5,6,7]:
-            biapy_config['DATA']['TRAIN']['GT_PATH'] = get_text(main_window.ui.DATA__TRAIN__GT_PATH__INPUT)
+            biapy_config['DATA']['TRAIN']['GT_PATH'] = get_text(main_window.ui.DATA__TRAIN__GT_PATH__INPUT, strip=False)
         if int(get_text(main_window.ui.DATA__TRAIN__REPLICATE__INPUT)) != 0:
             biapy_config['DATA']['TRAIN']['REPLICATE'] = int(get_text(main_window.ui.DATA__TRAIN__REPLICATE__INPUT))
         biapy_config['DATA']['TRAIN']['OVERLAP'] = get_text(main_window.ui.DATA__TRAIN__OVERLAP__INPUT)
@@ -660,9 +667,9 @@ def create_yaml_file(main_window):
         else:
             biapy_config['DATA']['VAL']['FROM_TRAIN'] = False
             biapy_config['DATA']['VAL']['IN_MEMORY'] = True if get_text(main_window.ui.DATA__VAL__IN_MEMORY__INPUT) == "Yes" else False 
-            biapy_config['DATA']['VAL']['PATH'] = get_text(main_window.ui.DATA__VAL__PATH__INPUT)
+            biapy_config['DATA']['VAL']['PATH'] = get_text(main_window.ui.DATA__VAL__PATH__INPUT, strip=False)
             if main_window.cfg.settings['selected_workflow'] not in [5,6,7]:
-                biapy_config['DATA']['VAL']['GT_PATH'] = get_text(main_window.ui.DATA__VAL__GT_PATH__INPUT)
+                biapy_config['DATA']['VAL']['GT_PATH'] = get_text(main_window.ui.DATA__VAL__GT_PATH__INPUT, strip=False)
             biapy_config['DATA']['VAL']['OVERLAP'] = get_text(main_window.ui.DATA__VAL__OVERLAP__INPUT)
             biapy_config['DATA']['VAL']['PADDING'] = get_text(main_window.ui.DATA__VAL__PADDING__INPUT)
 
@@ -684,10 +691,10 @@ def create_yaml_file(main_window):
             if get_text(main_window.ui.DATA__TEST__LOAD_GT__INPUT) == "Yes":
                 biapy_config['DATA']['TEST']['LOAD_GT'] = True
                 if main_window.cfg.settings['selected_workflow'] not in [5,6,7]:
-                    biapy_config['DATA']['TEST']['GT_PATH'] = get_text(main_window.ui.DATA__TEST__GT_PATH__INPUT)
+                    biapy_config['DATA']['TEST']['GT_PATH'] = get_text(main_window.ui.DATA__TEST__GT_PATH__INPUT, strip=False)
             else:
                 biapy_config['DATA']['TEST']['LOAD_GT'] = False
-            biapy_config['DATA']['TEST']['PATH'] = get_text(main_window.ui.DATA__TEST__PATH__INPUT)
+            biapy_config['DATA']['TEST']['PATH'] = get_text(main_window.ui.DATA__TEST__PATH__INPUT, strip=False)
             
         biapy_config['DATA']['TEST']['OVERLAP'] = get_text(main_window.ui.DATA__TEST__OVERLAP__INPUT)
         biapy_config['DATA']['TEST']['PADDING'] = get_text(main_window.ui.DATA__TEST__PADDING__INPUT)
@@ -873,7 +880,7 @@ def create_yaml_file(main_window):
         biapy_config['MODEL']['LOAD_CHECKPOINT'] = True 
         biapy_config['PATHS'] = {}
         if get_text(main_window.ui.PATHS__CHECKPOINT_FILE__INPUT) != "":
-            biapy_config['PATHS']['CHECKPOINT_FILE'] = get_text(main_window.ui.PATHS__CHECKPOINT_FILE__INPUT)
+            biapy_config['PATHS']['CHECKPOINT_FILE'] = get_text(main_window.ui.PATHS__CHECKPOINT_FILE__INPUT, strip=False)
         if get_text(main_window.ui.MODEL__SAVE_CKPT_FREQ__INPUT) != -1:
             biapy_config['MODEL']['SAVE_CKPT_FREQ'] = int(get_text(main_window.ui.MODEL__SAVE_CKPT_FREQ__INPUT))
         if get_text(main_window.ui.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT) != "best_on_val":
@@ -990,10 +997,15 @@ def create_yaml_file(main_window):
             if problem_channels in ["BC", "BCM"] and get_text(main_window.ui.TEST__POST_PROCESSING__VORONOI_ON_MASK__INPUT) == "Yes":
                 biapy_config['TEST']['POST_PROCESSING']['VORONOI_ON_MASK'] = True 
                 biapy_config['TEST']['POST_PROCESSING']['VORONOI_TH'] = float(get_text(main_window.ui.TEST__POST_PROCESSING__VORONOI_TH__INPUT))
-            if get_text(main_window.ui.TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES__INST_SEG__INPUT) != "[]":
-                biapy_config['TEST']['POST_PROCESSING']['REMOVE_BY_PROPERTIES'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES__INST_SEG__INPUT) ) 
-                biapy_config['TEST']['POST_PROCESSING']['REMOVE_BY_PROPERTIES_VALUES'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_VALUES__INST_SEG__INPUT) ) 
-                biapy_config['TEST']['POST_PROCESSING']['REMOVE_BY_PROPERTIES_SIGN'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_SIGN__INST_SEG__INPUT) ) 
+            if get_text(main_window.ui.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INPUT) == "Yes":
+                biapy_config['TEST']['POST_PROCESSING']['MEASURE_PROPERTIES'] = {}
+                biapy_config['TEST']['POST_PROCESSING']['MEASURE_PROPERTIES']['ENABLE'] = True
+                if get_text(main_window.ui.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__INPUT) == "Yes":
+                    biapy_config['TEST']['POST_PROCESSING']['MEASURE_PROPERTIES']['REMOVE_BY_PROPERTIES'] = {}
+                    biapy_config['TEST']['POST_PROCESSING']['MEASURE_PROPERTIES']['REMOVE_BY_PROPERTIES']['ENABLE'] = True
+                    biapy_config['TEST']['POST_PROCESSING']['MEASURE_PROPERTIES']['REMOVE_BY_PROPERTIES']['PROPS'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INST_SEG__INPUT) ) 
+                    biapy_config['TEST']['POST_PROCESSING']['MEASURE_PROPERTIES']['REMOVE_BY_PROPERTIES']['VALUES'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INST_SEG__INPUT) ) 
+                    biapy_config['TEST']['POST_PROCESSING']['MEASURE_PROPERTIES']['REMOVE_BY_PROPERTIES']['SIGN'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INPUT) ) 
             if problem_channels == "BP":
                 if int(get_text(main_window.ui.TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INPUT)) != -1:
                     biapy_config['TEST']['POST_PROCESSING']['REPARE_LARGE_BLOBS_SIZE'] = int(get_text(main_window.ui.TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INPUT))
@@ -1017,10 +1029,15 @@ def create_yaml_file(main_window):
                 biapy_config['TEST']['POST_PROCESSING']['DET_WATERSHED_DONUTS_CLASSES'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_CLASSES__INPUT) )
                 biapy_config['TEST']['POST_PROCESSING']['DET_WATERSHED_DONUTS_PATCH'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_PATCH__INPUT) )
                 biapy_config['TEST']['POST_PROCESSING']['DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER'] = int(get_text(main_window.ui.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER__INPUT)) 
-            if get_text(main_window.ui.TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES__DET__INPUT) != "[]":
-                biapy_config['TEST']['POST_PROCESSING']['REMOVE_BY_PROPERTIES'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES__DET__INPUT) ) 
-                biapy_config['TEST']['POST_PROCESSING']['REMOVE_BY_PROPERTIES_VALUES'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_VALUES__DET__INPUT) ) 
-                biapy_config['TEST']['POST_PROCESSING']['REMOVE_BY_PROPERTIES_SIGN'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_SIGN__DET__INPUT) ) 
+                if get_text(main_window.ui.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__INPUT) == "Yes":
+                    biapy_config['TEST']['POST_PROCESSING']['MEASURE_PROPERTIES'] = {}
+                    biapy_config['TEST']['POST_PROCESSING']['MEASURE_PROPERTIES']['ENABLE'] = True
+                    if get_text(main_window.ui.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__INPUT) == "Yes":
+                        biapy_config['TEST']['POST_PROCESSING']['MEASURE_PROPERTIES']['REMOVE_BY_PROPERTIES'] = {}
+                        biapy_config['TEST']['POST_PROCESSING']['MEASURE_PROPERTIES']['REMOVE_BY_PROPERTIES']['ENABLE'] = True
+                        biapy_config['TEST']['POST_PROCESSING']['MEASURE_PROPERTIES']['REMOVE_BY_PROPERTIES']['PROPS'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__INPUT) ) 
+                        biapy_config['TEST']['POST_PROCESSING']['MEASURE_PROPERTIES']['REMOVE_BY_PROPERTIES']['VALUES'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__INPUT) ) 
+                        biapy_config['TEST']['POST_PROCESSING']['MEASURE_PROPERTIES']['REMOVE_BY_PROPERTIES']['SIGN'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INPUT) ) 
         if get_text(main_window.ui.TEST__POST_PROCESSING__APPLY_MASK__INPUT) == "Yes":
             biapy_config['TEST']['POST_PROCESSING']['APPLY_MASK'] = True
         if get_text(main_window.ui.TEST__POST_PROCESSING__CLEAR_BORDER__INPUT) == "Yes":
@@ -1111,7 +1128,7 @@ def load_yaml_config(main_window, advise_user=False):
     try:
         main_window.cfg.settings['biapy_cfg']._C.merge_from_file(os.path.join(main_window.cfg.settings['yaml_config_file_path'], main_window.cfg.settings['yaml_config_filename']))
         main_window.cfg.settings['biapy_cfg'] = main_window.cfg.settings['biapy_cfg'].get_cfg_defaults()
-        check_configuration(main_window.cfg.settings['biapy_cfg'])
+        check_configuration(main_window.cfg.settings['biapy_cfg'], jobname)
         
     except Exception as errors:   
         errors = str(errors)
@@ -1219,14 +1236,29 @@ class load_yaml_to_GUI_engine(QObject):
         self.state_signal.emit(0)
 
         with open(self.yaml_file, "r") as stream:
+            cfg_content = stream.read()
+            tab_detected_mss = ""
+            if '\t' in cfg_content:
+                tab_detected_mss = "WARNING: Tabs have been identified and substituted with two spaces. This error may be "+\
+                    "attributed to this, so please eliminate them.\n"
+                cfg_content = cfg_content.replace('\t', '  ')
             try:
-                loaded_cfg = yaml.safe_load(stream)
+                loaded_cfg = yaml.safe_load(cfg_content)
             except yaml.YAMLError as exc:
                 print(exc)
-                self.error_signal.emit(f"Following error found when loading configuration file: \n{exc}", "error")
+                self.error_signal.emit(f"{tab_detected_mss}Following error found when loading configuration file: \n{exc}", "error")
                 self.state_signal.emit(1)
                 self.finished_signal.emit()
                 return 
+
+        if tab_detected_mss != "":
+            yaml_file_final = os.path.join(self.main_window.log_dir, "tmp_load_yaml.yaml")
+            f = open(self.yaml_file, "w")
+            f.write(cfg_content)
+            f.close()
+        else:
+            yaml_file_final = self.yaml_file
+
         if loaded_cfg is None:
             self.error_signal.emit(f"The input config file seems to be empty", "error")
             self.state_signal.emit(1)
@@ -1238,13 +1270,13 @@ class load_yaml_to_GUI_engine(QObject):
         tmp_cfg = Config("/home/","jobname")
         errors = ""
         try:
-            tmp_cfg._C.merge_from_file(self.yaml_file)
+            tmp_cfg._C.merge_from_file(yaml_file_final)
             tmp_cfg = tmp_cfg.get_cfg_defaults()
-            check_configuration(tmp_cfg, check_data_paths=False)
+            check_configuration(tmp_cfg, get_text(self.main_window.ui.job_name_input), check_data_paths=False)
         except Exception as errors:  
             errors = str(errors) 
             print(errors) 
-            self.error_signal.emit(errors, "load_yaml_error")
+            self.error_signal.emit(tab_detected_mss+errors, "load_yaml_error")
         else:
             
             # Find the workflow
@@ -1357,6 +1389,9 @@ class load_yaml_to_GUI_engine(QObject):
                         v = "Binary mask + Distance map with background (experimental)"
                     else: 
                         v = "Distance map with background (experimental)"
+                elif widget_name == "DATA__PATCH_SIZE__INPUT":
+                    other_widgets_to_set.append("DATA__PATCH_SIZE__TEST__INPUT")
+                    other_widgets_values_to_set.append(v)
                 elif widget_name == "PROBLEM__TYPE__INPUT":
                     set_var = False
                 elif widget_name == "DATA__VAL__SPLIT_TRAIN__INPUT":
@@ -1378,13 +1413,17 @@ class load_yaml_to_GUI_engine(QObject):
                 elif widget_name == "TEST__POST_PROCESSING__Z_FILTERING__INPUT":
                     widget_name = "TEST__POST_PROCESSING__Z_FILTERING__{}__INPUT".format(self.workflow_str)
                 elif widget_name == "TEST__POST_PROCESSING__Z_FILTERING_SIZE__INPUT":
-                    widget_name = "TEST__POST_PROCESSING__Z_FILTERING_SIZE__{}__INPUT".format(self.workflow_str)
-                elif widget_name == "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES__INPUT":
-                    widget_name = "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES__{}__INPUT".format(self.workflow_str)
-                elif widget_name == "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_VALUES__INPUT":
-                    widget_name = "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_VALUES__{}__INPUT".format(self.workflow_str)
-                elif widget_name == "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_SIGN__INPUT":
-                    widget_name = "TEST__POST_PROCESSING__REMOVE_BY_PROPERTIES_SIGN__{}__INPUT".format(self.workflow_str)
+                    widget_name = "TEST__POST_PROCESSING__Z_FILTERING_SIZE__{}__INPUT".format(self.workflow_str)                
+                elif widget_name == "TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INPUT":
+                    widget_name = "TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__{}__INPUT".format(self.workflow_str)
+                elif widget_name == "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INPUT":
+                    widget_name = "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__{}__INPUT".format(self.workflow_str)
+                elif widget_name == "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INPUT":
+                    widget_name = "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__{}__INPUT".format(self.workflow_str)
+                elif widget_name == "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INPUT":
+                    widget_name = "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__{}__INPUT".format(self.workflow_str)
+                elif widget_name == "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INPUT":
+                    widget_name = "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__{}__INPUT".format(self.workflow_str)
                 elif widget_name == "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__INPUT":
                     widget_name = "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__{}__INPUT".format(self.workflow_str)
                 elif widget_name == "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INPUT":
@@ -1412,8 +1451,8 @@ class load_yaml_to_GUI_engine(QObject):
                         if err is not None:
                             errors.append(err)
                         else:
-                            variables_set[widget_name] = y
-                            print("Setting {} : {} ({})".format(widget_name, y, k))
+                            variables_set[x] = y
+                            print("Setting {} : {} ({})".format(x, y, k))
                         
         return errors, variables_set
 

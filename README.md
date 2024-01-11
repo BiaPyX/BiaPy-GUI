@@ -1,21 +1,21 @@
 # Graphical user interface for BiaPy: Bioimage analysis pipelines in Python
 
 <kbd>
-  <img src="https://raw.githubusercontent.com/danifranco/BiaPy-GUI/main/images/BiaPy_GUI_main_page.png">
+  <img src="https://raw.githubusercontent.com/BiaPyX/BiaPy-GUI/main/images/BiaPy_GUI_main_page.png">
 </kbd>
 
-[BiaPy](https://github.com/danifranco/BiaPy) is an open source Python library for building bioimage analysis pipelines. This repository is actively under development by the Biomedical Computer Vision group at the [University of the Basque Country](https://www.ehu.eus/en/en-home) and the [Donostia International Physics Center](http://dipc.ehu.es/). 
+[BiaPy](https://github.com/BiaPyX/BiaPy) is an open source Python library for building bioimage analysis pipelines. This repository is actively under development by the Biomedical Computer Vision group at the [University of the Basque Country](https://www.ehu.eus/en/en-home) and the [Donostia International Physics Center](http://dipc.ehu.es/). 
 
 
 ## Download GUI 
 
-- [Windows 64-bit](https://github.com/danifranco/BiaPy-GUI/raw/main/dist-win/BiaPy.exe) 
-- [Linux 64-bit](https://github.com/danifranco/BiaPy-GUI/raw/main/dist-linux/BiaPy) 
-- [macOS 64-bit](https://github.com/danifranco/BiaPy-GUI/raw/main/dist-macOS/BiaPy-macOS.zip) 
+- [Windows 64-bit](https://github.com/BiaPyX/BiaPy-GUI/raw/main/dist-win/BiaPy.exe) 
+- [Linux 64-bit](https://github.com/BiaPyX/BiaPy-GUI/raw/main/dist-linux/BiaPy) 
+- [macOS 64-bit](https://github.com/BiaPyX/BiaPy-GUI/raw/main/dist-macOS/BiaPy-macOS.zip) 
 
 ## Troubleshooting
 
-In macOS an error like ["BiaPy cannot be opened because the developer cannot be verified"](https://raw.githubusercontent.com/danifranco/BiaPy-GUI/main/images/macOS_binary_error.png) may appear. To solve that you can open a terminal and remove quarantine attribute from the file with the following command:
+In macOS an error like ["BiaPy cannot be opened because the developer cannot be verified"](https://raw.githubusercontent.com/BiaPyX/BiaPy-GUI/main/images/macOS_binary_error.png) may appear. To solve that you can open a terminal and remove quarantine attribute from the file with the following command:
 
 ```shell
 xattr -d com.apple.quarantine BiaPy.app  
@@ -26,7 +26,7 @@ xattr -d com.apple.quarantine BiaPy.app
 Download the repository first:
 
 ```shell
-git clone https://github.com/danifranco/BiaPy-GUI.git
+git clone https://github.com/BiaPyX/BiaPy-GUI.git
 ```
 
 This will create a folder called ``BiaPy-GUI`` that contains all the files of the repository. Then you need to create a conda environment and install the dependencies:

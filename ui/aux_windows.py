@@ -205,7 +205,7 @@ class dialog_Ui(QDialog):
             if reason == "load_yaml_error":
                 self.dialog_window.window_des_label.setText("Error")
                 self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"OK", None))
-                self.dialog_window.error_message_label.setText("Configuration file not loaded because of the following errors:<br>{}".format(message))
+                self.dialog_window.error_message_label.setText("Configuration file not loaded because of the following errors:\n{}".format(message))
                 self.dialog_window.go_to_correct_bn.clicked.connect(self.close)
             elif reason == "load_yaml_ok_but_errors":
                 self.dialog_window.icon_label.setPixmap(self.upbar_icon[1])
@@ -214,7 +214,7 @@ class dialog_Ui(QDialog):
                 m = "Configuration file loaded but with some errors. Please send BiaPy developers\
                     the following errors:"
                 for i, mes in enumerate(message):
-                    m += "<br>"+str(i+1)+". {}".format(mes)
+                    m += "\n"+str(i+1)+". {}".format(mes)
                 self.dialog_window.error_message_label.setText(m)
                 self.dialog_window.go_to_correct_bn.clicked.connect(self.close)
             elif reason in ["inform_user", "inform_user_and_go"]:
@@ -238,7 +238,7 @@ class dialog_Ui(QDialog):
                 self.dialog_window.go_to_correct_bn.clicked.connect(lambda: self.redirect_and_close(reason))
                 self.dialog_window.error_message_label.setText(message)
         else:
-            self.dialog_window.error_message_label.setText("This error was not expected. Please contact BiaPy developers with the following message:<br><br>"+message)
+            self.dialog_window.error_message_label.setText("This error was not expected. Please contact BiaPy developers with the following message:\n\n"+message)
             self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"Close BiaPy GUI", None))
             self.dialog_window.go_to_correct_bn.clicked.connect(self.close_all)
 
