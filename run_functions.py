@@ -293,8 +293,9 @@ class run_worker(QObject):
                 except yaml.YAMLError as exc:
                     print(exc)
 
+            dist_backend = "gloo" if self.windows_os else "nccl"
             command = ["--config", "/BiaPy_files/input.yaml", "--result_dir", "{}".format(self.output_folder_in_container),
-                "--name", "{}".format(jobname), "--run_id", "1"]   
+                "--name", "{}".format(jobname), "--run_id", "1", "--dist_backend", f"{dist_backend}"]   
             gpus = " "
             if self.use_gpu:
                 gpus = self.main_gui.ui.gpu_input.currentData()
@@ -400,7 +401,7 @@ class run_worker(QObject):
             with open(real_cfg_input, 'w') as outfile:
                 yaml.dump(temp_cfg, outfile, default_flow_style=False)
 
-            if self.use_gpu and not self.windows_os:
+            if self.use_gpu:
                 device_requests = [ docker.types.DeviceRequest(count=-1, capabilities=[['gpu']]) ]
             else:
                 device_requests = None
