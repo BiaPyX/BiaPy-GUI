@@ -309,7 +309,8 @@ class run_worker(QObject):
             volumes[self.output_folder_in_host] = {"bind": self.output_folder_in_container, "mode": "rw"}
             paths = []
             paths.append(self.output_folder_in_container)
-            
+
+            mode = "rw" if self.config['PROBLEM']['TYPE'] in ['INSTANCE_SEG', 'DETECTION', 'SELF_SUPERVISED'] else "ro"
             if self.config['TRAIN']['ENABLE']: # mirar los paths que se repiten y bindear solo uan vez, si no error
                 self.total_epochs = int(self.config['TRAIN']['EPOCHS'])
                 self.gui.run_window.train_progress_bar.setMaximum(self.total_epochs)
@@ -319,7 +320,7 @@ class run_worker(QObject):
                 p = path_to_linux(p, self.main_gui.cfg.settings['os_host'])
                 if not path_in_list(paths,p):
                     paths.append(p)
-                    volumes[p] = {"bind": p, "mode": "ro"}
+                    volumes[p] = {"bind": p, "mode": mode}
                 p = path_to_linux(self.config['DATA']['TRAIN']['PATH'], self.main_gui.cfg.settings['os_host'])
                 temp_cfg['DATA']['TRAIN']['PATH'] = p
 
@@ -328,7 +329,7 @@ class run_worker(QObject):
                 p = path_to_linux(p, self.main_gui.cfg.settings['os_host'])
                 if not path_in_list(paths,p):
                     paths.append(p)    
-                    volumes[p] = {"bind": p, "mode": "ro"}
+                    volumes[p] = {"bind": p, "mode": mode}
                 p = path_to_linux(self.config['DATA']['TRAIN']['GT_PATH'], self.main_gui.cfg.settings['os_host'])
                 temp_cfg['DATA']['TRAIN']['GT_PATH'] = p
 
@@ -338,7 +339,7 @@ class run_worker(QObject):
                     p = path_to_linux(p, self.main_gui.cfg.settings['os_host'])
                     if not path_in_list(paths,p):
                         paths.append(p)
-                        volumes[p] = {"bind": p, "mode": "ro"}
+                        volumes[p] = {"bind": p, "mode": mode}
                     p = path_to_linux(self.config['DATA']['VAL']['PATH'], self.main_gui.cfg.settings['os_host'])
                     temp_cfg['DATA']['VAL']['PATH'] = p
 
@@ -347,7 +348,7 @@ class run_worker(QObject):
                     p = path_to_linux(p, self.main_gui.cfg.settings['os_host'])
                     if not path_in_list(paths,p):
                         paths.append(p)
-                        volumes[p] = {"bind": p, "mode": "ro"}
+                        volumes[p] = {"bind": p, "mode": mode}
                     p = path_to_linux(self.config['DATA']['VAL']['GT_PATH'], self.main_gui.cfg.settings['os_host'])
                     temp_cfg['DATA']['VAL']['GT_PATH'] = p
             else:
@@ -360,7 +361,7 @@ class run_worker(QObject):
                 p = path_to_linux(p, self.main_gui.cfg.settings['os_host'])
                 if not path_in_list(paths,p):
                     paths.append(p)
-                    volumes[p] = {"bind": p, "mode": "ro"}
+                    volumes[p] = {"bind": p, "mode": mode}
                 p = path_to_linux(self.config['DATA']['TEST']['PATH'], self.main_gui.cfg.settings['os_host'])
                 temp_cfg['DATA']['TEST']['PATH'] = p
 
@@ -370,7 +371,7 @@ class run_worker(QObject):
                     p = path_to_linux(p, self.main_gui.cfg.settings['os_host'])
                     if not path_in_list(paths,p):
                         paths.append(p)
-                        volumes[p] = {"bind": p, "mode": "ro"} 
+                        volumes[p] = {"bind": p, "mode": mode} 
                     p = path_to_linux(self.config['DATA']['TEST']['GT_PATH'], self.main_gui.cfg.settings['os_host'])
                     temp_cfg['DATA']['TEST']['GT_PATH'] = p   
 
