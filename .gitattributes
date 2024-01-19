@@ -1,7 +1,0 @@
-dist-win/BiaPy.exe filter=lfs diff=lfs merge=lfs -text
-dist-linux/BiaPy filter=lfs diff=lfs merge=lfs -text
-dist-macOS/BiaPy-macOS.zip filter=lfs diff=lfs merge=lfs -text
-dist filter=lfs diff=lfs merge=lfs -text
-dist-linux filter=lfs diff=lfs merge=lfs -text
-dist-macOS filter=lfs diff=lfs merge=lfs -text
-dist-win filter=lfs diff=lfs merge=lfs -text
