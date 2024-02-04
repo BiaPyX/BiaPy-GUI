@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: 6ef1a39b03197fed605a8ae4e874f123695f156a
+## Copied from BiaPy commit: 7fc18c0773bd90ae0cdcdaa3245e809f35ddc747
 # Model definition variables (source BMZ/BiaPy/Torchvision) not updated yet
 
 import os

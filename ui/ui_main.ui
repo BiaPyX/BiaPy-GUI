@@ -2624,7 +2624,7 @@ background-color:#A9A9A9;
                        </font>
                       </property>
                       <property name="currentIndex">
-                       <number>2</number>
+                       <number>3</number>
                       </property>
                       <widget class="QWidget" name="workflow_selection_page">
                        <property name="minimumSize">
@@ -19439,7 +19439,7 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>526</width>
+                                         <width>907</width>
                                          <height>339</height>
                                         </rect>
                                        </property>
@@ -30056,12 +30056,12 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                            <item>
                                             <property name="text">
-                                             <string>Yes</string>
+                                             <string>No</string>
                                             </property>
                                            </item>
                                            <item>
                                             <property name="text">
-                                             <string>No</string>
+                                             <string>Yes</string>
                                             </property>
                                            </item>
                                           </widget>
@@ -31619,8 +31619,8 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>930</width>
-                                       <height>335</height>
+                                       <width>346</width>
+                                       <height>44</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_67">
@@ -32472,8 +32472,8 @@ QPushButton:pressed {
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>896</width>
-                               <height>101</height>
+                               <width>96</width>
+                               <height>26</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_32">
