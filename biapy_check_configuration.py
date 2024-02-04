@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: d084bedbecc4d1618965f60f1f18f703172801b0
+## Copied from BiaPy commit: 6ef1a39b03197fed605a8ae4e874f123695f156a
 import os
 import numpy as np
 import collections
@@ -152,15 +152,9 @@ def check_configuration(cfg, jobname, check_data_paths=True):
     assert cfg.PROBLEM.TYPE in ['SEMANTIC_SEG', 'INSTANCE_SEG', 'CLASSIFICATION', 'DETECTION', 'DENOISING', 'SUPER_RESOLUTION', 'SELF_SUPERVISED'],\
         "PROBLEM.TYPE not in ['SEMANTIC_SEG', 'INSTANCE_SEG', 'CLASSIFICATION', 'DETECTION', 'DENOISING', 'SUPER_RESOLUTION', 'SELF_SUPERVISED']"
 
-    if cfg.PROBLEM.NDIM == "2D" and not cfg.TEST.STATS.PER_PATCH and not cfg.TEST.STATS.FULL_IMG:
-        raise ValueError("At least one between 'TEST.STATS.PER_PATCH' or 'TEST.STATS.FULL_IMG' needs to be True")
-
-    if cfg.PROBLEM.NDIM == '3D':
-        if not cfg.TEST.STATS.PER_PATCH and not cfg.TEST.STATS.MERGE_PATCHES and cfg.PROBLEM.TYPE != "CLASSIFICATION":
-            raise ValueError("At least one between 'TEST.STATS.PER_PATCH' or 'TEST.STATS.MERGE_PATCHES' needs to be True when 'PROBLEM.NDIM'=='3D'")
-        if cfg.TEST.STATS.FULL_IMG:
-            print("WARNING: TEST.STATS.FULL_IMG == True while using PROBLEM.NDIM == '3D'. As 3D images are usually 'huge'"
-                ", full image statistics will be disabled to avoid GPU memory overflow")
+    if cfg.PROBLEM.NDIM == '3D' and cfg.TEST.FULL_IMG:
+        print("WARNING: TEST.FULL_IMG == True while using PROBLEM.NDIM == '3D'. As 3D images are usually 'huge'"
+            ", full image statistics will be disabled to avoid GPU memory overflow")
 
     if cfg.LOSS.TYPE != "CE" and cfg.PROBLEM.TYPE not in ['SEMANTIC_SEG', 'DETECTION']:
         raise ValueError("Not implemented pipeline option: LOSS.TYPE != 'CE' only available in 'SEMANTIC_SEG' and 'DETECTION'")
@@ -184,42 +178,6 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             print(f'BMZ model DOI: {cfg.MODEL.BMZ.SOURCE_MODEL_DOI} found')
         else:
             raise ValueError(f'BMZ model DOI: {cfg.MODEL.BMZ.SOURCE_MODEL_DOI} not found. Aborting!')
-
-    if cfg.MODEL.BMZ.EXPORT_MODEL.ENABLE:
-        if cfg.MODEL.BMZ.EXPORT_MODEL.NAME == "":
-            raise ValueError("'MODEL.BMZ.EXPORT_MODEL.NAME' can not be empty when 'MODEL.BMZ.EXPORT_MODEL.ENABLE' is True")
-        if cfg.MODEL.BMZ.EXPORT_MODEL.DESCRIPTION == "":
-            raise ValueError("'MODEL.BMZ.EXPORT_MODEL.DESCRIPTION' can not be empty when 'MODEL.BMZ.EXPORT_MODEL.ENABLE' is True")
-        # Authors of the model. Need to be a list of dicts, e.g. authors=[{"name": "Daniel"}]
-        if not isinstance(cfg.MODEL.BMZ.EXPORT_MODEL.AUTHORS, list):
-            raise ValueError("'MODEL.BMZ.EXPORT_MODEL.AUTHORS' needs to be a list of dicts. E.g. [{'name': 'Daniel'}]")
-        else:
-            if len(cfg.MODEL.BMZ.EXPORT_MODEL.AUTHORS) == 0:
-                raise ValueError("'MODEL.BMZ.EXPORT_MODEL.AUTHORS' can not be empty when 'MODEL.BMZ.EXPORT_MODEL.ENABLE' is True")
-            for d in cfg.MODEL.BMZ.EXPORT_MODEL.AUTHORS:
-                if not isinstance(d, dict):
-                    raise ValueError("'MODEL.BMZ.EXPORT_MODEL.AUTHORS' must be a list of dicts. E.g. [{'name': 'Daniel'}]")
-        if cfg.MODEL.BMZ.EXPORT_MODEL.LICENSE == "":
-                raise ValueError("'MODEL.BMZ.EXPORT_MODEL.LICENSE' can not be empty. E.g. 'CC-BY-4.0'")
-        if not isinstance(cfg.MODEL.BMZ.EXPORT_MODEL.TAGS, list):
-            raise ValueError("'MODEL.BMZ.EXPORT_MODEL.TAGS' needs to be a list of strings. E.g. [{'modality': 'electron-microscopy', 'content': 'mitochondria'}]")
-        else:
-            if len(cfg.MODEL.BMZ.EXPORT_MODEL.TAGS) == 0:
-                raise ValueError("'MODEL.BMZ.EXPORT_MODEL.TAGS' can not be empty when 'MODEL.BMZ.EXPORT_MODEL.ENABLE' is True")
-            for d in cfg.MODEL.BMZ.EXPORT_MODEL.TAGS:
-                if not isinstance(d, dict):
-                    raise ValueError("'MODEL.BMZ.EXPORT_MODEL.TAGS' must be a list of strings. E.g. [{'modality': 'electron-microscopy', 'content': 'mitochondria'}]")                    
-        if not isinstance(cfg.MODEL.BMZ.EXPORT_MODEL.CITE, list):
-            raise ValueError("'MODEL.BMZ.EXPORT_MODEL.CITE' needs to be a list of dicts. E.g. [{'text': 'Gizmo et al.', 'doi': 'doi:10.1002/xyzacab123'}]")
-        else:
-            for d in cfg.MODEL.BMZ.EXPORT_MODEL.CITE:
-                if not isinstance(d, dict):
-                    raise ValueError("'MODEL.BMZ.EXPORT_MODEL.CITE' needs to be a list of dicts. E.g. [{'text': 'Gizmo et al.', 'doi': 'doi:10.1002/xyzacab123'}]")
-        if cfg.MODEL.BMZ.EXPORT_MODEL.DOCUMENTATION == "":
-            raise ValueError("'MODEL.BMZ.EXPORT_MODEL.DOCUMENTATION' can not be empty. E.g. '/home/user/my-model/doc.md'")
-        else:
-            if not os.path.exists(cfg.MODEL.BMZ.EXPORT_MODEL.DOCUMENTATION):
-                raise ValueError("'MODEL.BMZ.EXPORT_MODEL.DOCUMENTATION' file does not exist!")
 
     elif cfg.MODEL.SOURCE == "torchvision":
         if cfg.MODEL.TORCHVISION_MODEL_NAME == "":
@@ -250,12 +208,9 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                     f"'DATA.PATCH_SIZE' set is {cfg.DATA.PATCH_SIZE}")
             if cfg.PROBLEM.NDIM == '3D':
                 raise ValueError("TorchVision model's for semantic segmentation are only available for 2D images")
-            if not cfg.TEST.STATS.FULL_IMG:
-                raise ValueError("With TorchVision models for semantic segmentation workflow only 'TEST.STATS.FULL_IMG' setting is available, so "
+            if not cfg.TEST.FULL_IMG:
+                raise ValueError("With TorchVision models for semantic segmentation workflow only 'TEST.FULL_IMG' setting is available, so "
                     "please set it.")
-            if cfg.TEST.STATS.PER_PATCH or cfg.TEST.STATS.MERGE_PATCHES:
-                raise ValueError("With TorchVision models for semantic segmentation workflow only 'TEST.STATS.FULL_IMG' setting is available, so "
-                    "please enable it and disable 'TEST.STATS.PER_PATCH' and 'TEST.STATS.MERGE_PATCHES'")
             if cfg.LOSS.TYPE != "CE":
                 raise ValueError("Only 'LOSS.TYPE' = 'CE' is available in semantic segmentation workflow using TorchVision models")
 
@@ -298,12 +253,9 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             if cfg.TEST.ANALIZE_2D_IMGS_AS_3D_STACK:
                 raise ValueError("'TEST.ANALIZE_2D_IMGS_AS_3D_STACK' can not be activated with TorchVision models for instance segmentation "
                     "workflow")
-            if not cfg.TEST.STATS.FULL_IMG:
-                raise ValueError("With TorchVision models for instance segmentation workflow only 'TEST.STATS.FULL_IMG' setting is available, so "
+            if not cfg.TEST.FULL_IMG:
+                raise ValueError("With TorchVision models for instance segmentation workflow only 'TEST.FULL_IMG' setting is available, so "
                     "please set it.")
-            if cfg.TEST.STATS.PER_PATCH or cfg.TEST.STATS.MERGE_PATCHES:
-                raise ValueError("With TorchVision models for instance segmentation workflow only 'TEST.STATS.FULL_IMG' setting is available, so "
-                    "please enable it and disable 'TEST.STATS.PER_PATCH' and 'TEST.STATS.MERGE_PATCHES'")
 
     #### Detection ####
     if cfg.PROBLEM.TYPE == 'DETECTION':
@@ -336,12 +288,9 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 raise ValueError("TorchVision model's for detection are only available for 2D images")
             if cfg.TRAIN.ENABLE:
                 raise NotImplementedError # require bbox generator etc.
-            if not cfg.TEST.STATS.FULL_IMG:
-                raise ValueError("With TorchVision models for detection workflow only 'TEST.STATS.FULL_IMG' setting is available, so "
+            if not cfg.TEST.FULL_IMG:
+                raise ValueError("With TorchVision models for detection workflow only 'TEST.FULL_IMG' setting is available, so "
                     "please set it.")
-            if cfg.TEST.STATS.PER_PATCH or cfg.TEST.STATS.MERGE_PATCHES:
-                raise ValueError("With TorchVision models for detection workflow only 'TEST.STATS.FULL_IMG' setting is available, so "
-                    "please enable it and disable 'TEST.STATS.PER_PATCH' and 'TEST.STATS.MERGE_PATCHES'")
 
     #### Super-resolution ####
     elif cfg.PROBLEM.TYPE == 'SUPER_RESOLUTION':
@@ -350,6 +299,8 @@ def check_configuration(cfg, jobname, check_data_paths=True):
         assert cfg.PROBLEM.SUPER_RESOLUTION.UPSCALING in [2, 4], "PROBLEM.SUPER_RESOLUTION.UPSCALING not in [2, 4]"
         if cfg.MODEL.SOURCE == "torchvision":
             raise ValueError("'MODEL.SOURCE' as 'torchvision' is not available in super-resolution workflow")
+        if cfg.DATA.NORMALIZATION.TYPE != "div":
+            raise ValueError("'DATA.NORMALIZATION.TYPE' can only be set to 'div' in SR workflow")
 
     #### Self-supervision ####
     elif cfg.PROBLEM.TYPE == 'SELF_SUPERVISED':
@@ -416,10 +367,40 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             if cfg.PROBLEM.NDIM == '3D':
                 raise ValueError("TorchVision model's for classification are only available for 2D images")
             
-    ### Pre-processing ###
     if cfg.DATA.EXTRACT_RANDOM_PATCH and cfg.DATA.PROBABILITY_MAP:
         if cfg.DATA.W_FOREGROUND+cfg.DATA.W_BACKGROUND != 1:
             raise ValueError("cfg.DATA.W_FOREGROUND+cfg.DATA.W_BACKGROUND need to sum 1. E.g. 0.94 and 0.06 respectively.")
+        if not cfg.DATA.TRAIN.IN_MEMORY and cfg.DATA.PREPROCESS.TRAIN:
+            raise ValueError('To use preprocessing DATA.TRAIN.IN_MEMORY needs to be True.')
+        if not cfg.DATA.VAL.IN_MEMORY and cfg.DATA.PREPROCESS.VAL:
+            raise ValueError('To use preprocessing DATA.VAL.IN_MEMORY needs to be True.')
+        if not cfg.DATA.TEST.IN_MEMORY and cfg.DATA.PREPROCESS.TEST:
+            raise ValueError('To use preprocessing DATA.TEST.IN_MEMORY needs to be True.')
+    
+    ### Pre-processing ###
+    if cfg.DATA.PREPROCESS.TRAIN or cfg.DATA.PREPROCESS.TEST or cfg.DATA.PREPROCESS.VAL:
+        if cfg.DATA.PREPROCESS.RESIZE.ENABLE:
+            if cfg.PROBLEM.TYPE == 'DETECTION':
+                raise ValueError('Resizing preprocessing is not available for the DETECTION workflow.')
+            if cfg.PROBLEM.NDIM == '3D':
+                if cfg.DATA.PREPROCESS.RESIZE.OUTPUT_SHAPE == (512,512):
+                    opts.extend(['DATA.PREPROCESS.RESIZE.OUTPUT_SHAPE', (512,512,512)])
+                elif len(cfg.DATA.PREPROCESS.RESIZE.OUTPUT_SHAPE) != 3:
+                    raise ValueError("When 'PROBLEM.NDIM' is 3D, 'DATA.PREPROCESS.RESIZE.OUTPUT_SHAPE' must indicate desired size for each dimension."
+                                    f"Given shape ({cfg.DATA.PREPROCESS.RESIZE.OUTPUT_SHAPE}) is not compatible.")
+            if cfg.PROBLEM.NDIM == '2D' and len(cfg.DATA.PREPROCESS.RESIZE.OUTPUT_SHAPE) != 2:
+                    raise ValueError("When 'PROBLEM.NDIM' is 2D, 'DATA.PREPROCESS.RESIZE.OUTPUT_SHAPE' must indicate desired size for each dimension."
+                                    f"Given shape ({cfg.DATA.PREPROCESS.RESIZE.OUTPUT_SHAPE}) is not compatible.")
+            for i, s in enumerate(cfg.DATA.PREPROCESS.RESIZE.OUTPUT_SHAPE):
+                if cfg.DATA.PATCH_SIZE[i] > s:
+                    raise ValueError(f"'DATA.PREPROCESS.RESIZE.OUTPUT_SHAPE' {cfg.DATA.PREPROCESS.RESIZE.OUTPUT_SHAPE} can not be smaller than 'DATA.PATCH_SIZE' {cfg.DATA.PATCH_SIZE}.")
+        if cfg.DATA.PREPROCESS.CANNY.ENABLE and cfg.PROBLEM.NDIM != '2D':
+            raise ValueError("Canny or edge detection can not be activated when 'PROBLEM.NDIM' is 2D.")
+        if not cfg.DATA.PREPROCESS.VAL and cfg.DATA.VAL.FROM_TRAIN and cfg.DATA.PREPROCESS.TRAIN:
+            raise ValueError("When 'DATA.VAL.FROM_TRAIN' is True and 'DATA.PREPROCESS.TRAIN' is True, 'DATA.PREPROCESS.VAL' also needs to be True.")
+        if cfg.DATA.PREPROCESS.MATCH_HISTOGRAM.ENABLE:
+            if not os.path.exists(cfg.DATA.PREPROCESS.MATCH_HISTOGRAM.REFERENCE_PATH):
+                raise ValueError(f"Path pointed by 'DATA.PREPROCESS.MATCH_HISTOGRAM.REFERENCE_PATH' does not exist: {cfg.DATA.PREPROCESS.MATCH_HISTOGRAM.REFERENCE_PATH}")
 
     #### Data #### 
     if cfg.TRAIN.ENABLE and check_data_paths:
@@ -445,9 +426,9 @@ def check_configuration(cfg, jobname, check_data_paths=True):
         if cfg.TEST.BY_CHUNKS.WORKFLOW_PROCESS.ENABLE:     
             assert cfg.TEST.BY_CHUNKS.WORKFLOW_PROCESS.TYPE in ["chunk_by_chunk", "entire_pred"], \
                 "'TEST.BY_CHUNKS.WORKFLOW_PROCESS.TYPE' needs to be one between ['chunk_by_chunk', 'entire_pred']"
-        if cfg.TEST.BY_CHUNKS.INPUT_IMG_AXES_ORDER not in ['TZCYX', 'TZYXC', 'ZCYX', 'ZYXC']:
-            raise ValueError("'TEST.BY_CHUNKS.INPUT_IMG_AXES_ORDER' can only be one between ['TZCYX', 'TZYXC', 'ZCYX', 'ZYXC']")
-            
+        if len(cfg.TEST.BY_CHUNKS.INPUT_IMG_AXES_ORDER) < 4:
+            raise ValueError("'TEST.BY_CHUNKS.INPUT_IMG_AXES_ORDER' needs to be at least of length 4, e.g., 'ZCYX'")
+
     if cfg.TRAIN.ENABLE:
         if cfg.DATA.EXTRACT_RANDOM_PATCH and cfg.DATA.PROBABILITY_MAP:
             if not cfg.PROBLEM.TYPE == 'SEMANTIC_SEG':
@@ -478,40 +459,40 @@ def check_configuration(cfg, jobname, check_data_paths=True):
         raise ValueError("Test resolution needs to be a tuple with {} values".format(dim_count))
 
     if len(cfg.DATA.TRAIN.OVERLAP) != dim_count:
-        raise ValueError("When PROBLEM.NDIM == {} DATA.TRAIN.OVERLAP tuple must be lenght {}, given {}."
+        raise ValueError("When PROBLEM.NDIM == {} DATA.TRAIN.OVERLAP tuple must be length {}, given {}."
                          .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.TRAIN.OVERLAP))
     if any(not check_value(x) for x in cfg.DATA.TRAIN.OVERLAP):
             raise ValueError("DATA.TRAIN.OVERLAP not in [0, 1] range")
     if len(cfg.DATA.TRAIN.PADDING) != dim_count:
-        raise ValueError("When PROBLEM.NDIM == {} DATA.TRAIN.PADDING tuple must be lenght {}, given {}."
+        raise ValueError("When PROBLEM.NDIM == {} DATA.TRAIN.PADDING tuple must be length {}, given {}."
                          .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.TRAIN.PADDING))
     if len(cfg.DATA.VAL.OVERLAP) != dim_count:
-        raise ValueError("When PROBLEM.NDIM == {} DATA.VAL.OVERLAP tuple must be lenght {}, given {}."
+        raise ValueError("When PROBLEM.NDIM == {} DATA.VAL.OVERLAP tuple must be length {}, given {}."
                          .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.VAL.OVERLAP))
     if any(not check_value(x) for x in cfg.DATA.VAL.OVERLAP):
             raise ValueError("DATA.VAL.OVERLAP not in [0, 1] range")
     if len(cfg.DATA.VAL.PADDING) != dim_count:
-        raise ValueError("When PROBLEM.NDIM == {} DATA.VAL.PADDING tuple must be lenght {}, given {}."
+        raise ValueError("When PROBLEM.NDIM == {} DATA.VAL.PADDING tuple must be length {}, given {}."
                          .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.VAL.PADDING))
     if len(cfg.DATA.TEST.OVERLAP) != dim_count:
-        raise ValueError("When PROBLEM.NDIM == {} DATA.TEST.OVERLAP tuple must be lenght {}, given {}."
+        raise ValueError("When PROBLEM.NDIM == {} DATA.TEST.OVERLAP tuple must be length {}, given {}."
                          .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.TEST.OVERLAP))
     if any(not check_value(x) for x in cfg.DATA.TEST.OVERLAP):
             raise ValueError("DATA.TEST.OVERLAP not in [0, 1] range")
     if len(cfg.DATA.TEST.PADDING) != dim_count:
-        raise ValueError("When PROBLEM.NDIM == {} DATA.TEST.PADDING tuple must be lenght {}, given {}."
+        raise ValueError("When PROBLEM.NDIM == {} DATA.TEST.PADDING tuple must be length {}, given {}."
                          .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.TEST.PADDING))
     if len(cfg.DATA.PATCH_SIZE) != dim_count+1:
-        raise ValueError("When PROBLEM.NDIM == {} DATA.PATCH_SIZE tuple must be lenght {}, given {}."
+        raise ValueError("When PROBLEM.NDIM == {} DATA.PATCH_SIZE tuple must be length {}, given {}."
                          .format(cfg.PROBLEM.NDIM, dim_count+1, cfg.DATA.PATCH_SIZE))
     if len(cfg.DATA.TRAIN.RESOLUTION) != 1 and len(cfg.DATA.TRAIN.RESOLUTION) != dim_count:
-        raise ValueError("When PROBLEM.NDIM == {} DATA.TRAIN.RESOLUTION tuple must be lenght {}, given {}."
+        raise ValueError("When PROBLEM.NDIM == {} DATA.TRAIN.RESOLUTION tuple must be length {}, given {}."
                          .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.TRAIN.RESOLUTION))
     if len(cfg.DATA.VAL.RESOLUTION) != 1 and len(cfg.DATA.VAL.RESOLUTION) != dim_count:
-        raise ValueError("When PROBLEM.NDIM == {} DATA.VAL.RESOLUTION tuple must be lenght {}, given {}."
+        raise ValueError("When PROBLEM.NDIM == {} DATA.VAL.RESOLUTION tuple must be length {}, given {}."
                          .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.VAL.RESOLUTION))
     if len(cfg.DATA.TEST.RESOLUTION) != 1 and len(cfg.DATA.TEST.RESOLUTION) != dim_count:
-        raise ValueError("When PROBLEM.NDIM == {} DATA.TEST.RESOLUTION tuple must be lenght {}, given {}."
+        raise ValueError("When PROBLEM.NDIM == {} DATA.TEST.RESOLUTION tuple must be length {}, given {}."
                          .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.TEST.RESOLUTION))
     assert cfg.DATA.NORMALIZATION.TYPE in ['div', 'custom'], "DATA.NORMALIZATION.TYPE not in ['div', 'custom']"
     if cfg.DATA.NORMALIZATION.TYPE == 'custom':

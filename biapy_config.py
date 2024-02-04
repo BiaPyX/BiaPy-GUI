@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: d084bedbecc4d1618965f60f1f18f703172801b0
+## Copied from BiaPy commit: 6ef1a39b03197fed605a8ae4e874f123695f156a
 # Model definition variables (source BMZ/BiaPy/Torchvision) not updated yet
 
 import os
@@ -218,6 +218,72 @@ class Config:
         # Minimum foreground percentage that each image loaded need to have to not discard it. This option is only valid for SEMANTIC_SEG, 
         # INSTANCE_SEG and DETECTION. 
         _C.DATA.TRAIN.MINIMUM_FOREGROUND_PER = -1.
+
+        # PREPROCESSING
+        # Same preprocessing will be applied to all selected datasets
+        _C.DATA.PREPROCESS = CN()
+        # Apply preprocessing to training dataset
+        _C.DATA.PREPROCESS.TRAIN = False
+        # Apply preprocessing to validation dataset
+        _C.DATA.PREPROCESS.VAL = False
+        # Apply preprocessing to testing dataset
+        _C.DATA.PREPROCESS.TEST = False
+
+        # Resize datasets
+        _C.DATA.PREPROCESS.RESIZE = CN()
+        _C.DATA.PREPROCESS.RESIZE.ENABLE = False
+        # Desired resize size. when using 3D data, size must be also in 3D (ex. (512,512,512))
+        _C.DATA.PREPROCESS.RESIZE.OUTPUT_SHAPE = (512,512)
+        # interpolation order: {0: Nearest-neighbor, 1: Bi-linear (default), 2: Bi-quadratic, 3: Bi-cubic, 4: Bi-quartic, 5: Bi-quintic}
+        _C.DATA.PREPROCESS.RESIZE.ORDER = 1
+        # Points outside the boundaries of the input are filled according to the given mode: {‘constant’, ‘edge’, ‘symmetric’, ‘reflect’, ‘wrap’}
+        _C.DATA.PREPROCESS.RESIZE.MODE = 'reflect'
+        # Used in conjunction with mode ‘constant’, the value outside the image boundaries.
+        _C.DATA.PREPROCESS.RESIZE.CVAL = 0.
+        # Whether to clip the output to the range of values of the input image.
+        _C.DATA.PREPROCESS.RESIZE.CLIP = True
+        # Whether to keep the original range of values.
+        _C.DATA.PREPROCESS.RESIZE.PRESERVE_RANGE = True
+        # Whether to apply a Gaussian filter to smooth the image prior to downsampling.
+        _C.DATA.PREPROCESS.RESIZE.ANTI_ALIASING = False
+
+        # Gaussian blur
+        _C.DATA.PREPROCESS.GAUSSIAN_BLUR = CN()
+        _C.DATA.PREPROCESS.GAUSSIAN_BLUR.ENABLE = False
+        # Standard deviation for Gaussian kernel.
+        _C.DATA.PREPROCESS.GAUSSIAN_BLUR.SIGMA = 1
+        # The mode parameter determines how the array borders are handled: {‘reflect’, ‘constant’, ‘nearest’, ‘mirror’, ‘wrap’} ‘constant’ value = 0
+        _C.DATA.PREPROCESS.GAUSSIAN_BLUR.MODE = 'nearest'
+        # If None, the image is assumed to be a grayscale (single channel) image. 
+        # Otherwise, this parameter indicates which axis of the array corresponds to channels.
+        _C.DATA.PREPROCESS.GAUSSIAN_BLUR.CHANNEL_AXIS = None
+
+        # Median blur
+        _C.DATA.PREPROCESS.MEDIAN_BLUR = CN()
+        _C.DATA.PREPROCESS.MEDIAN_BLUR.ENABLE = False
+        
+        # Histogram matching. More info at: https://en.wikipedia.org/wiki/Histogram_matching
+        _C.DATA.PREPROCESS.MATCH_HISTOGRAM = CN()
+        _C.DATA.PREPROCESS.MATCH_HISTOGRAM.ENABLE = False
+        # the path of the reference images, from which the reference histogram will be extracted 
+        _C.DATA.PREPROCESS.MATCH_HISTOGRAM.REFERENCE_PATH = os.path.join("user_data", 'test', 'x')
+
+        # Contrast Limited Adaptive Histogram Equalization. More info at: https://en.wikipedia.org/wiki/Adaptive_histogram_equalization#Contrast_Limited_AHE
+        _C.DATA.PREPROCESS.CLAHE = CN()
+        _C.DATA.PREPROCESS.CLAHE.ENABLE = False
+        # Defines the shape of contextual regions used in the algorithm. 
+        # By default, kernel_size is 1/8 of image height by 1/8 of its width.
+        _C.DATA.PREPROCESS.CLAHE.KERNEL_SIZE = None
+        # Clipping limit, normalized between 0 and 1 (higher values give more contrast).
+        _C.DATA.PREPROCESS.CLAHE.CLIP_LIMIT = 0.01
+
+        # Canny or edge detection (only 2D - grayscale or RGB)
+        _C.DATA.PREPROCESS.CANNY = CN()
+        _C.DATA.PREPROCESS.CANNY.ENABLE = False
+        # Lower bound for hysteresis thresholding (linking edges). If None, low_threshold is set to 10% of dtype’s max.
+        _C.DATA.PREPROCESS.CANNY.LOW_THRESHOLD = None
+        # Upper bound for hysteresis thresholding (linking edges). If None, high_threshold is set to 20% of dtype’s max.
+        _C.DATA.PREPROCESS.CANNY.HIGH_THRESHOLD = None
 
         # Test
         _C.DATA.TEST = CN()
@@ -493,23 +559,6 @@ class Config:
         # DOI of the model from BMZ to load. It can not be empty if MODEL.SOURCE = "bmz".
         _C.MODEL.BMZ.SOURCE_MODEL_DOI = ""
         # BMZ model export options
-        _C.MODEL.BMZ.EXPORT_MODEL = CN()
-        # Whether to export the model to BMZ format or not
-        _C.MODEL.BMZ.EXPORT_MODEL.ENABLE = False
-        # Name of the model
-        _C.MODEL.BMZ.EXPORT_MODEL.NAME = ""
-        # Description of the model
-        _C.MODEL.BMZ.EXPORT_MODEL.DESCRIPTION = ""
-        # Authors of the model. Need to be a list of dicts, e.g. authors=[{"name": "Gizmo"}]
-        _C.MODEL.BMZ.EXPORT_MODEL.AUTHORS = []
-        # License of the model. E.g. "CC-BY-4.0"
-        _C.MODEL.BMZ.EXPORT_MODEL.LICENSE = ""
-        # Tags to make models more findable on the website, e.g. tags=["nucleus-segmentation"]
-        _C.MODEL.BMZ.EXPORT_MODEL.TAGS = []
-        # List of dictionaries of citations associated, e.g. [{"text": "Gizmo et al.", "doi": "doi:10.1002/xyzacab123"}]
-        _C.MODEL.BMZ.EXPORT_MODEL.CITE = []
-        # Path to a file with a documentation of the model in markdown, e.g. "my-model/doc.md"
-        _C.MODEL.BMZ.EXPORT_MODEL.DOCUMENTATION = ""
 
         # BiaPy support using models of Torchvision . It can not be empty if MODEL.SOURCE = "torchvision".
         # Models available here: https://pytorch.org/vision/stable/models.html
@@ -737,14 +786,12 @@ class Config:
         _C.TEST.AUGMENTATION = False
         # Whether to evaluate or not
         _C.TEST.EVALUATE = True
-        # Stack 2D images into a 3D image and then process it entirely instead of going image per image. This stacks
-        # images that have been merged with 'TEST.STATS.MERGE_PATCHES' = True or 'TEST.STATS.FULL_IMG' (priorizes this later)  
+        # Stack 2D images into a 3D image and then process it entirely instead of going image per image
         _C.TEST.ANALIZE_2D_IMGS_AS_3D_STACK = False
 
-        _C.TEST.STATS = CN()
-        _C.TEST.STATS.PER_PATCH = False
-        _C.TEST.STATS.MERGE_PATCHES = False # Only used when _C.TEST.STATS.PER_PATCH = True
-        _C.TEST.STATS.FULL_IMG = True # Only when if PROBLEM.NDIM = '2D' as 3D images are huge for the GPU
+        # If PROBLEM.NDIM = '2D' this can be activated to process each image entirely instead of patch by patch. Only can be done 
+        # if the neural network is fully convolutional
+        _C.TEST.FULL_IMG = False 
 
         ### Instance segmentation
         # Whether to calculate matching statistics (average overlap, accuracy, recall, precision, etc.)
@@ -762,7 +809,10 @@ class Config:
         _C.TEST.DET_POINT_CREATION_FUNCTION = 'peak_local_max'
         # Minimun value to consider a point as a peak. Corresponds to 'threshold_abs' argument of the function
         # 'peak_local_max' of skimage.feature
-        _C.TEST.DET_MIN_TH_TO_BE_PEAK = [0.2]  
+        _C.TEST.DET_MIN_TH_TO_BE_PEAK = [0.2]
+        # Corresponds to 'exclude_border' argument of 'peak_local_max' or 'blob_log' function of skimage. If True it will exclude
+        # peaks from the border of the image to avoid partial detection.
+        _C.TEST.DET_EXCLUDE_BORDER = True
         # Corresponds to 'min_sigma' argument of 'blob_log' function. It is the minimum standard deviation for Gaussian kernel. 
         # Keep this low to detect smaller blobs. The standard deviations of the Gaussian filter are given for each axis as a 
         # sequence, or as a single number, in which case it is equal for all axes.
@@ -780,8 +830,7 @@ class Config:
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Post-processing
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # When PROBLEM.NDIM = '2D' only applies when _C.TEST.STATS.FULL_IMG = True, if PROBLEM.NDIM = '3D' is applied
-        # when _C.TEST.STATS.MERGE_PATCHES = True
+        # When PROBLEM.NDIM = '2D' only applies when _C.TEST.ANALIZE_2D_IMGS_AS_3D_STACK = True
         _C.TEST.POST_PROCESSING = CN()
         _C.TEST.POST_PROCESSING.YZ_FILTERING = False
         _C.TEST.POST_PROCESSING.YZ_FILTERING_SIZE = 5
@@ -851,7 +900,7 @@ class Config:
         _C.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES = CN() 
         # Whether to enable or not the filtering by properties
         _C.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.ENABLE = False 
-        # List of list of properties to apply a filter. Available properties are: ['circularity', 'elongation', 'npixels', 'area', 'diameter', 
+        # List of lists of properties to apply a filter. Available properties are: ['circularity', 'elongation', 'npixels', 'area', 'diameter', 
         # 'perimeter', 'sphericity']  
         _C.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS = []
         # List of ints/float that represent the values of the properties listed in TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES 
@@ -860,7 +909,6 @@ class Config:
         # List of list of signs to do the comparison. Options: ['gt', 'ge', 'lt', 'le'] that corresponds to "greather than", e.g. ">", 
         # "greather equal", e.g. ">=", "less than", e.g. "<", and "less equal" e.g. "<=" comparisons.
         _C.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.SIGN = []
-
 
         ### Instance segmentation
         # Whether to apply Voronoi using 'BC' or 'M' channels need to be present
@@ -909,6 +957,9 @@ class Config:
         _C.PATHS.RESULT_DIR.PER_IMAGE_POST_PROCESSING = os.path.join(_C.PATHS.RESULT_DIR.PATH, 'per_image_post_processing')
         _C.PATHS.RESULT_DIR.FULL_IMAGE = os.path.join(_C.PATHS.RESULT_DIR.PATH, 'full_image')
         _C.PATHS.RESULT_DIR.FULL_IMAGE_BIN = os.path.join(_C.PATHS.RESULT_DIR.PATH, 'full_image_binarized')
+        _C.PATHS.RESULT_DIR.FULL_IMAGE_INSTANCES = os.path.join(_C.PATHS.RESULT_DIR.PATH, 'full_image_instances')
+        _C.PATHS.RESULT_DIR.FULL_IMAGE_POST_PROCESSING = os.path.join(_C.PATHS.RESULT_DIR.PATH, 'full_image_post_processing')
+        _C.PATHS.RESULT_DIR.AS_3D_STACK = os.path.join(_C.PATHS.RESULT_DIR.PATH, 'as_3d_stack')
         _C.PATHS.RESULT_DIR.AS_3D_STACK_POST_PROCESSING = os.path.join(_C.PATHS.RESULT_DIR.PATH, 'as_3d_stack_post_processing')
         _C.PATHS.RESULT_DIR.DET_LOCAL_MAX_COORDS_CHECK = os.path.join(_C.PATHS.RESULT_DIR.PATH, 'per_image_local_max_check')
         _C.PATHS.RESULT_DIR.DET_ASSOC_POINTS = os.path.join(_C.PATHS.RESULT_DIR.PATH, 'point_associations')
@@ -943,8 +994,6 @@ class Config:
         _C.PATHS.STD_INFO_FILE = os.path.join(_C.PATHS.CHECKPOINT, 'normalization_std_value.npy')
         # Path where the images used in MAE will be saved suring inference
         _C.PATHS.MAE_OUT_DIR = os.path.join(_C.PATHS.RESULT_DIR.PATH, 'MAE_checks')
-        # Paths where all file for Bioimage Model Zoo integration will be placed 
-        _C.PATHS.RESULT_DIR.BMZ_BUILD = os.path.join(_C.PATHS.RESULT_DIR.PATH, 'bmz_model')
         
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Logging

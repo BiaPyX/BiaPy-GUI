@@ -348,7 +348,8 @@ def move_between_workflows(main_window, to_page, dims=None):
     main_window.condition_db.combobox_hide_visible_action(main_window,
         ["test_exists_gt_label", "DATA__TEST__LOAD_GT__INPUT", "DATA__TEST__LOAD_GT__INFO", 
          "test_data_gt_label", "DATA__TEST__GT_PATH__INPUT", "DATA__TEST__GT_PATH__INFO", "test_data_gt_input_browse_bn",
-         "train_gt_label", "train_gt_info", "DATA__TRAIN__GT_PATH__INPUT", "train_data_gt_input_browse_bn"])
+         "train_gt_label", "train_gt_info", "DATA__TRAIN__GT_PATH__INPUT", "train_data_gt_input_browse_bn",
+         "MODEL__N_CLASSES__LABEL", "MODEL__N_CLASSES__INFO", "MODEL__N_CLASSES__INPUT"])
 
     actual_name = get_text(main_window.ui.job_name_input)
     if actual_name in ["", "my_semantic_segmentation", "my_instance_segmentation", "my_detection", "my_denoising", \
@@ -377,7 +378,7 @@ def oninit_checks(main_window):
     """
     # Docker check
     try:
-        docker_client = docker.from_env()
+        main_window.docker_client = docker.from_env()
         main_window.cfg.settings['docker_found'] = True
     except:
         main_window.cfg.settings['docker_found'] = False
@@ -489,7 +490,22 @@ def create_yaml_file(main_window):
 
     created : bool
         True if the YAML file was finally created.
-    """       
+    """    
+    # Checking the directory
+    if main_window.cfg.settings['yaml_config_file_path'] == "":
+        main_window.dialog_exec("Configuration file path must be defined", "yaml_config_file_path")
+        return True, False
+    if not os.path.exists(main_window.cfg.settings['yaml_config_file_path']):
+        main_window.dialog_exec("The directory '{}' where the configuration file is going to be saves does not exist."
+            .format(main_window.cfg.settings['yaml_config_file_path']), "yaml_config_file_path")
+        return True, False
+
+    # Checking YAML file name
+    main_window.cfg.settings['yaml_config_filename'] = get_text(main_window.ui.goptions_yaml_name_input)
+    if main_window.cfg.settings['yaml_config_filename'] == "":
+        main_window.dialog_exec("The configuration filename must be defined", "goptions_yaml_name_input")
+        return True, False
+
     biapy_config = {}
 
     # System
@@ -602,6 +618,135 @@ def create_yaml_file(main_window):
 
     if get_text(main_window.ui.DATA__FORCE_RGB__INPUT) == "Yes":
         biapy_config['DATA']['FORCE_RGB'] = True
+    
+    preprocess_done = False
+    if get_text(main_window.ui.DATA__PREPROCESS__TRAIN__INPUT) == "Yes" or \
+        get_text(main_window.ui.DATA__PREPROCESS__VAL__INPUT) == "Yes":
+        preprocess_done = True
+        biapy_config['DATA']['PREPROCESS'] = {}
+        biapy_config['DATA']['PREPROCESS']['TRAIN'] = True if get_text(main_window.ui.DATA__PREPROCESS__TRAIN__INPUT) == "Yes" else False
+        if biapy_config['DATA']['PREPROCESS']['TRAIN'] and get_text(main_window.ui.DATA__VAL__TYPE__INPUT) in ["Extract from train (cross validation)","Extract from train (split training)"]:
+            biapy_config['DATA']['PREPROCESS']['VAL'] = True
+        else:
+            biapy_config['DATA']['PREPROCESS']['VAL'] = True if get_text(main_window.ui.DATA__PREPROCESS__VAL__INPUT) == "Yes" else False
+        if get_text(main_window.ui.DATA__PREPROCESS__RESIZE__ENABLE__INPUT) == "Yes":
+            biapy_config['DATA']['PREPROCESS']['RESIZE'] = {}
+            biapy_config['DATA']['PREPROCESS']['RESIZE']['ENABLE'] = True
+            biapy_config['DATA']['PREPROCESS']['RESIZE']['OUTPUT_SHAPE'] = get_text(main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT)
+            order = 1
+            if get_text(main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT) == "Nearest-neighbor":
+                order = 0
+            elif get_text(main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT) == "Bi-linear":
+                order = 1
+            elif get_text(main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT) == "Bi-quadratic":
+                order = 2
+            elif get_text(main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT) == "Bi-cubic":
+                order = 3
+            elif get_text(main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT) == "Bi-quartic":
+                order = 4
+            elif get_text(main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT) == "Bi-quintic":
+                order = 5
+            biapy_config['DATA']['PREPROCESS']['RESIZE']['ORDER'] = order
+            biapy_config['DATA']['PREPROCESS']['RESIZE']['MODE'] = get_text(main_window.ui.DATA__PREPROCESS__RESIZE__MODE__INPUT)
+            biapy_config['DATA']['PREPROCESS']['RESIZE']['CVAL'] = float(get_text(main_window.ui.DATA__PREPROCESS__RESIZE__CVAL__INPUT))
+            biapy_config['DATA']['PREPROCESS']['RESIZE']['CLIP'] = True if get_text(main_window.ui.DATA__PREPROCESS__RESIZE__CLIP__INPUT) else False
+            biapy_config['DATA']['PREPROCESS']['RESIZE']['PRESERVE_RANGE'] = True if get_text(main_window.ui.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT) else False
+            biapy_config['DATA']['PREPROCESS']['RESIZE']['ANTI_ALIASING'] = True if get_text(main_window.ui.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT) else False
+        
+        if get_text(main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT) == "Yes":
+            biapy_config['DATA']['PREPROCESS']['GAUSSIAN_BLUR'] = {}
+            biapy_config['DATA']['PREPROCESS']['GAUSSIAN_BLUR']['ENABLE'] = True
+            biapy_config['DATA']['PREPROCESS']['GAUSSIAN_BLUR']['SIGMA'] = int(get_text(main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT))
+            biapy_config['DATA']['PREPROCESS']['GAUSSIAN_BLUR']['MODE'] = get_text(main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT)
+            if get_text(main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT) != "":
+                biapy_config['DATA']['PREPROCESS']['GAUSSIAN_BLUR']['CHANNEL_AXIS'] = int(get_text(main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT))
+        
+        if get_text(main_window.ui.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT) == "Yes":
+            biapy_config['DATA']['PREPROCESS']['MEDIAN_BLUR'] = {}
+            biapy_config['DATA']['PREPROCESS']['MEDIAN_BLUR']['ENABLE'] = True
+
+        if get_text(main_window.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT) == "Yes":
+            biapy_config['DATA']['PREPROCESS']['MATCH_HISTOGRAM'] = {}
+            biapy_config['DATA']['PREPROCESS']['MATCH_HISTOGRAM']['ENABLE'] = True
+            biapy_config['DATA']['PREPROCESS']['MATCH_HISTOGRAM']['REFERENCE_PATH'] = get_text(main_window.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT, strip=False)
+
+        if get_text(main_window.ui.DATA__PREPROCESS__CLAHE__ENABLE__INPUT) == "Yes":
+            biapy_config['DATA']['PREPROCESS']['CLAHE'] = {}
+            biapy_config['DATA']['PREPROCESS']['CLAHE']['ENABLE'] = True
+            if get_text(main_window.ui.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT) != "":
+                biapy_config['DATA']['PREPROCESS']['CLAHE']['KERNEL_SIZE'] = int(get_text(main_window.ui.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT))
+            biapy_config['DATA']['PREPROCESS']['CLAHE']['CLIP_LIMIT'] = float(get_text(main_window.ui.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT))
+        
+        if get_text(main_window.ui.DATA__PREPROCESS__CANNY__ENABLE__INPUT) == "Yes":
+            biapy_config['DATA']['PREPROCESS']['CANNY'] = {}
+            biapy_config['DATA']['PREPROCESS']['CANNY']['ENABLE'] = True
+            if get_text(main_window.ui.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT) != "":
+                biapy_config['DATA']['PREPROCESS']['CANNY']['LOW_THRESHOLD'] = float(get_text(main_window.ui.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT))
+            if get_text(main_window.ui.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT) != "":
+                biapy_config['DATA']['PREPROCESS']['CANNY']['HIGH_THRESHOLD'] = float(get_text(main_window.ui.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT))
+    
+    # Extract preprocessing from the test fields
+    if get_text(main_window.ui.DATA__PREPROCESS__TEST__INPUT) == "Yes":
+        if not preprocess_done:
+            biapy_config['DATA']['PREPROCESS'] = {}
+        biapy_config['DATA']['PREPROCESS']['TEST'] = True if get_text(main_window.ui.DATA__PREPROCESS__TEST__INPUT) == "Yes" else False
+        if not preprocess_done:
+            if get_text(main_window.ui.DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT) == "Yes":
+                biapy_config['DATA']['PREPROCESS']['RESIZE'] = {}
+                biapy_config['DATA']['PREPROCESS']['RESIZE']['ENABLE'] = True
+                biapy_config['DATA']['PREPROCESS']['RESIZE']['OUTPUT_SHAPE'] = get_text(main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT)
+                order = 1
+                if get_text(main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT) == "Nearest-neighbor":
+                    order = 0
+                elif get_text(main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT) == "Bi-linear":
+                    order = 1
+                elif get_text(main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT) == "Bi-quadratic":
+                    order = 2
+                elif get_text(main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT) == "Bi-cubic":
+                    order = 3
+                elif get_text(main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT) == "Bi-quartic":
+                    order = 4
+                elif get_text(main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT) == "Bi-quintic":
+                    order = 5
+                biapy_config['DATA']['PREPROCESS']['RESIZE']['ORDER'] = order
+                biapy_config['DATA']['PREPROCESS']['RESIZE']['MODE'] = get_text(main_window.ui.DATA__PREPROCESS__RESIZE__MODE__TEST__INPUT)
+                biapy_config['DATA']['PREPROCESS']['RESIZE']['CVAL'] = float(get_text(main_window.ui.DATA__PREPROCESS__RESIZE__CVAL__TEST__INPUT))
+                biapy_config['DATA']['PREPROCESS']['RESIZE']['CLIP'] = True if get_text(main_window.ui.DATA__PREPROCESS__RESIZE__CLIP__TEST__INPUT) else False
+                biapy_config['DATA']['PREPROCESS']['RESIZE']['PRESERVE_RANGE'] = True if get_text(main_window.ui.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__INPUT) else False
+                biapy_config['DATA']['PREPROCESS']['RESIZE']['ANTI_ALIASING'] = True if get_text(main_window.ui.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__INPUT) else False
+            
+            if get_text(main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__TEST__INPUT) == "Yes":
+                biapy_config['DATA']['PREPROCESS']['GAUSSIAN_BLUR'] = {}
+                biapy_config['DATA']['PREPROCESS']['GAUSSIAN_BLUR']['ENABLE'] = True
+                biapy_config['DATA']['PREPROCESS']['GAUSSIAN_BLUR']['SIGMA'] = int(get_text(main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__INPUT))
+                biapy_config['DATA']['PREPROCESS']['GAUSSIAN_BLUR']['MODE'] = get_text(main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__INPUT)
+                if get_text(main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__INPUT) != "":
+                    biapy_config['DATA']['PREPROCESS']['GAUSSIAN_BLUR']['CHANNEL_AXIS'] = int(get_text(main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__INPUT))
+            
+            if get_text(main_window.ui.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__TEST__INPUT) == "Yes":
+                biapy_config['DATA']['PREPROCESS']['MEDIAN_BLUR'] = {}
+                biapy_config['DATA']['PREPROCESS']['MEDIAN_BLUR']['ENABLE'] = True
+
+            if get_text(main_window.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__TEST__INPUT) == "Yes":
+                biapy_config['DATA']['PREPROCESS']['MATCH_HISTOGRAM'] = {}
+                biapy_config['DATA']['PREPROCESS']['MATCH_HISTOGRAM']['ENABLE'] = True
+                biapy_config['DATA']['PREPROCESS']['MATCH_HISTOGRAM']['REFERENCE_PATH'] = get_text(main_window.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INPUT, strip=False)
+
+            if get_text(main_window.ui.DATA__PREPROCESS__CLAHE__ENABLE__TEST__INPUT) == "Yes":
+                biapy_config['DATA']['PREPROCESS']['CLAHE'] = {}
+                biapy_config['DATA']['PREPROCESS']['CLAHE']['ENABLE'] = True
+                if get_text(main_window.ui.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__INPUT) != "":
+                    biapy_config['DATA']['PREPROCESS']['CLAHE']['KERNEL_SIZE'] = int(get_text(main_window.ui.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__INPUT))
+                biapy_config['DATA']['PREPROCESS']['CLAHE']['CLIP_LIMIT'] = float(get_text(main_window.ui.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__INPUT))
+            
+            if get_text(main_window.ui.DATA__PREPROCESS__CANNY__ENABLE__TEST__INPUT) == "Yes":
+                biapy_config['DATA']['PREPROCESS']['CANNY'] = {}
+                biapy_config['DATA']['PREPROCESS']['CANNY']['ENABLE'] = True
+                if get_text(main_window.ui.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INPUT) != "":
+                    biapy_config['DATA']['PREPROCESS']['CANNY']['LOW_THRESHOLD'] = float(get_text(main_window.ui.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INPUT))
+                if get_text(main_window.ui.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INPUT) != "":
+                    biapy_config['DATA']['PREPROCESS']['CANNY']['HIGH_THRESHOLD'] = float(get_text(main_window.ui.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INPUT))
+            
 
     if get_text(main_window.ui.TRAIN__ENABLE__INPUT) == "Yes":
         biapy_config['DATA']['PATCH_SIZE'] = get_text(main_window.ui.DATA__PATCH_SIZE__INPUT)
@@ -940,11 +1085,8 @@ def create_yaml_file(main_window):
         if get_text(main_window.ui.TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INPUT) == "Yes" and get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "2D":
             biapy_config['TEST']['ANALIZE_2D_IMGS_AS_3D_STACK'] = True
 
-        biapy_config['TEST']['STATS'] = {}
-        biapy_config['TEST']['STATS']['PER_PATCH'] = True if get_text(main_window.ui.TEST__STATS__PER_PATCH__INPUT) == "Yes" else False 
-        biapy_config['TEST']['STATS']['MERGE_PATCHES'] = True if get_text(main_window.ui.TEST__STATS__MERGE_PATCHES__INPUT) == "Yes" else False 
-        if get_text(main_window.ui.TEST__STATS__FULL_IMG__INPUT) == "Yes" and get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "2D":
-            biapy_config['TEST']['STATS']['FULL_IMG'] = True 
+        if get_text(main_window.ui.TEST__FULL_IMG__INPUT) == "Yes" and get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "2D":
+            biapy_config['TEST']['FULL_IMG'] = True 
 
         if get_text(main_window.ui.TEST__BY_CHUNKS__ENABLE__INPUT) == "Yes":
             biapy_config['TEST']['BY_CHUNKS'] = {}
@@ -970,6 +1112,7 @@ def create_yaml_file(main_window):
         elif main_window.cfg.settings['selected_workflow'] == 2:
             biapy_config['TEST']['DET_POINT_CREATION_FUNCTION'] = get_text(main_window.ui.TEST__DET_POINT_CREATION_FUNCTION__INPUT)
             biapy_config['TEST']['DET_MIN_TH_TO_BE_PEAK'] = ast.literal_eval(get_text(main_window.ui.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT))
+            biapy_config['TEST']['DET_EXCLUDE_BORDER'] = True if get_text(main_window.ui.TEST__DET_EXCLUDE_BORDER__INPUT) == "Yes" else False
             biapy_config['TEST']['DET_TOLERANCE'] = ast.literal_eval(get_text(main_window.ui.TEST__DET_TOLERANCE__INPUT))
             if get_text(main_window.ui.TEST__DET_POINT_CREATION_FUNCTION__INPUT) == "blob_log":
                 biapy_config['TEST']['DET_BLOB_LOG_MIN_SIGMA'] = int(get_text(main_window.ui.TEST__DET_BLOB_LOG_MIN_SIGMA__INPUT))    
@@ -1048,20 +1191,6 @@ def create_yaml_file(main_window):
     else:
         biapy_config['TEST']['ENABLE'] = False
 
-    # Checking the directory
-    if main_window.cfg.settings['yaml_config_file_path'] == "":
-        main_window.dialog_exec("Configuration file path must be defined", "yaml_config_file_path")
-        return True, False
-    if not os.path.exists(main_window.cfg.settings['yaml_config_file_path']):
-        main_window.dialog_exec("The directory '{}' where the configuration file is going to be saves does not exist."
-            .format(main_window.cfg.settings['yaml_config_file_path']), "yaml_config_file_path")
-        return True, False
-
-    # Checking YAML file name
-    main_window.cfg.settings['yaml_config_filename'] = get_text(main_window.ui.goptions_yaml_name_input)
-    if main_window.cfg.settings['yaml_config_filename'] == "":
-        main_window.dialog_exec("The configuration filename must be defined", "goptions_yaml_name_input")
-        return True, False
     if not main_window.cfg.settings['yaml_config_filename'].endswith(".yaml") and not main_window.cfg.settings['yaml_config_filename'].endswith(".yml"):
         main_window.cfg.settings['yaml_config_filename'] = main_window.cfg.settings['yaml_config_filename']+".yaml"
         set_text(main_window.ui.goptions_yaml_name_input, main_window.cfg.settings['yaml_config_filename'])
@@ -1120,15 +1249,15 @@ def load_yaml_config(main_window, advise_user=False):
 
     ofolder = main_window.cfg.settings['output_folder'] if main_window.cfg.settings['output_folder'] != "" else str(Path.home())
     jobname = get_text(main_window.ui.job_name_input) if get_text(main_window.ui.job_name_input) != "" else "jobname"
-    ofolder = os.path.join(ofolder, jobname+"_1")
-    main_window.cfg.settings['biapy_cfg'] = Config(ofolder, jobname)
+    ofolder = os.path.join(ofolder, jobname)
+    main_window.cfg.settings['biapy_cfg'] = Config(ofolder, jobname+"_1")
     
     # Merge loaded configuration with the YACS defaults to see if everything is correct or not 
     errors = ""
     try:
         main_window.cfg.settings['biapy_cfg']._C.merge_from_file(os.path.join(main_window.cfg.settings['yaml_config_file_path'], main_window.cfg.settings['yaml_config_filename']))
         main_window.cfg.settings['biapy_cfg'] = main_window.cfg.settings['biapy_cfg'].get_cfg_defaults()
-        check_configuration(main_window.cfg.settings['biapy_cfg'], jobname)
+        check_configuration(main_window.cfg.settings['biapy_cfg'], jobname+"_1")
         
     except Exception as errors:   
         errors = str(errors)
@@ -1308,6 +1437,20 @@ class load_yaml_to_GUI_engine(QObject):
             else: # CLASSIFICATION
                 self.main_window.cfg.settings['selected_workflow'] = 6
             move_between_workflows(self.main_window, self.main_window.cfg.settings['selected_workflow'], self.work_dim)
+            
+            # Preprocessing
+            try:
+                self.train_preprocessing = loaded_cfg['DATA']['PREPROCESS']['TRAIN']
+            except:
+                self.train_preprocessing = False
+            try:
+                self.val_preprocessing = loaded_cfg['DATA']['PREPROCESS']['VAL']
+            except:
+                self.val_preprocessing = False
+            try:
+                self.test_preprocessing = loaded_cfg['DATA']['PREPROCESS']['TEST']
+            except:
+                self.test_preprocessing = False
 
             # Go over configuration file
             errors, variables_set = self.analyze_dict(conf=loaded_cfg, sep="")
@@ -1389,6 +1532,21 @@ class load_yaml_to_GUI_engine(QObject):
                         v = "Binary mask + Distance map with background (experimental)"
                     else: 
                         v = "Distance map with background (experimental)"
+                elif widget_name == "DATA__PREPROCESS__RESIZE__ORDER__INPUT":
+                    if v == 0:
+                        v = "Nearest-neighbor"
+                    elif v == 1:
+                        v = "Bi-linear"
+                    elif v == 2:
+                        v = "Bi-quadratic"
+                    elif v == 3:
+                        v = "Bi-cubic"
+                    elif v == 4:
+                        v = "Bi-quartic"
+                    elif v == 5:
+                        v = "Bi-quintic"
+                    else:
+                        v = "Bi-linear"
                 elif widget_name == "DATA__PATCH_SIZE__INPUT":
                     other_widgets_to_set.append("DATA__PATCH_SIZE__TEST__INPUT")
                     other_widgets_values_to_set.append(v)
@@ -1430,6 +1588,18 @@ class load_yaml_to_GUI_engine(QObject):
                     widget_name = "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__{}__INPUT".format(self.workflow_str)
                 elif widget_name in ["MODEL__ACTIVATION__INPUT", "MODEL__UNETR_DEC_ACTIVATION__INPUT"]:
                     v = v.lower()
+
+                if "DATA__PREPROCESS__" in widget_name and widget_name not in ["DATA__PREPROCESS__TRAIN__INPUT", \
+                    "DATA__PREPROCESS__VAL__INPUT", "DATA__PREPROCESS__TEST__INPUT"]:
+                    if self.train_preprocessing or self.val_preprocessing:
+                        if self.test_preprocessing:
+                            aux = widget_name if "__TEST" in widget_name else widget_name.replace("__INPUT", "__TEST__INPUT")
+                            other_widgets_to_set.append(aux)
+                            other_widgets_values_to_set.append(v)
+                    else:
+                        if self.test_preprocessing:
+                            if "__TEST" not in widget_name:
+                                widget_name = widget_name.replace("__INPUT", "__TEST__INPUT")
 
                 # Set variable values
                 if set_var: 

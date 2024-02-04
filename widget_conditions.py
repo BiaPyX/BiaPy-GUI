@@ -3208,6 +3208,599 @@ class Widget_conditions():
                         'blob_log', 
                     ],
                 },
+            "MODEL__N_CLASSES__LABEL": 
+                {
+                    "WORKFLOW_SELECTED_LABEL": [
+                        "SEMANTIC_SEG",
+                        "DETECTION",
+                    ]
+                },
+            "MODEL__N_CLASSES__INFO": 
+                {
+                    "WORKFLOW_SELECTED_LABEL": [
+                        "SEMANTIC_SEG",
+                        "DETECTION",
+                    ]
+                },
+            "MODEL__N_CLASSES__INPUT": 
+                {
+                    "WORKFLOW_SELECTED_LABEL": [
+                        "SEMANTIC_SEG",
+                        "DETECTION",
+                    ]
+                },
+            "preprocessing_frame": 
+                {
+                    "or_operation_mode": True,
+                    "DATA__PREPROCESS__TRAIN__INPUT": [
+                        "Yes",
+                    ],
+                    "DATA__PREPROCESS__VAL__INPUT": [
+                        "Yes",
+                    ],
+                },
+            "DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__LABEL": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__ORDER__LABEL": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__ORDER__INFO": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__ORDER__INPUT": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__MODE__LABEL": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__MODE__INFO": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__MODE__INPUT": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__CVAL__LABEL": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__CVAL__INFO": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__CVAL__INPUT": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__CLIP__LABEL": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__CLIP__INFO": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__CLIP__INPUT": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__LABEL": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__ANTI_ALIASING__LABEL": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+
+            "DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__LABEL": 
+                {
+                    "DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO": 
+                {
+                    "DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT": 
+                {
+                    "DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__LABEL": 
+                {
+                    "DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO": 
+                {
+                    "DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT": 
+                {
+                    "DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__LABEL": 
+                {
+                    "DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO": 
+                {
+                    "DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT": 
+                {
+                    "DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            
+            "DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__LABEL": 
+                {
+                    "DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO": 
+                {
+                    "DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT": 
+                {
+                    "DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN": 
+                {
+                    "DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__CLAHE__KERNEL_SIZE__LABEL": 
+                {
+                    "DATA__PREPROCESS__CLAHE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO": 
+                {
+                    "DATA__PREPROCESS__CLAHE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT": 
+                {
+                    "DATA__PREPROCESS__CLAHE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__CLAHE__CLIP_LIMIT__LABEL": 
+                {
+                    "DATA__PREPROCESS__CLAHE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO": 
+                {
+                    "DATA__PREPROCESS__CLAHE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT": 
+                {
+                    "DATA__PREPROCESS__CLAHE__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__CANNY__LOW_THRESHOLD__LABEL": 
+                {
+                    "DATA__PREPROCESS__CANNY__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO": 
+                {
+                    "DATA__PREPROCESS__CANNY__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT": 
+                {
+                    "DATA__PREPROCESS__CANNY__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__LABEL": 
+                {
+                    "DATA__PREPROCESS__CANNY__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO": 
+                {
+                    "DATA__PREPROCESS__CANNY__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT": 
+                {
+                    "DATA__PREPROCESS__CANNY__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "preprocessing_test_frame": 
+                {
+                    "DATA__PREPROCESS__TEST__INPUT": [
+                        "Yes",
+                    ],
+                },
+            "DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__LABEL": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INFO": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__ORDER__TEST__LABEL": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__ORDER__TEST__INFO": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__ORDER__TEST__INPUT": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__MODE__TEST__LABEL": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__MODE__TEST__INFO": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__MODE__TEST__INPUT": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__CVAL__TEST__LABEL": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__CVAL__TEST__INFO": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__CVAL__TEST__INPUT": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__CLIP__TEST__LABEL": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__CLIP__TEST__INFO": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__CLIP__TEST__INPUT": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__LABEL": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__INFO": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__INPUT": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__LABEL": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__INFO": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__INPUT": 
+                {
+                    "DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+
+            "DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__LABEL": 
+                {
+                    "DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__INFO": 
+                {
+                    "DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__INPUT": 
+                {
+                    "DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__LABEL": 
+                {
+                    "DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__INFO": 
+                {
+                    "DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__INPUT": 
+                {
+                    "DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__LABEL": 
+                {
+                    "DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__INFO": 
+                {
+                    "DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__INPUT": 
+                {
+                    "DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            
+            "DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__LABEL": 
+                {
+                    "DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INFO": 
+                {
+                    "DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INPUT": 
+                {
+                    "DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__BN": 
+                {
+                    "DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__LABEL": 
+                {
+                    "DATA__PREPROCESS__CLAHE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__INFO": 
+                {
+                    "DATA__PREPROCESS__CLAHE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__INPUT": 
+                {
+                    "DATA__PREPROCESS__CLAHE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__LABEL": 
+                {
+                    "DATA__PREPROCESS__CLAHE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__INFO": 
+                {
+                    "DATA__PREPROCESS__CLAHE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__INPUT": 
+                {
+                    "DATA__PREPROCESS__CLAHE__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__LABEL": 
+                {
+                    "DATA__PREPROCESS__CANNY__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INFO": 
+                {
+                    "DATA__PREPROCESS__CANNY__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INPUT": 
+                {
+                    "DATA__PREPROCESS__CANNY__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__LABEL": 
+                {
+                    "DATA__PREPROCESS__CANNY__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INFO": 
+                {
+                    "DATA__PREPROCESS__CANNY__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INPUT": 
+                {
+                    "DATA__PREPROCESS__CANNY__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
     }   
 
     def combobox_hide_visible_action(self, main_window, list_of_widgets_to_update, widgets_to_set_cond=None, 
@@ -3227,6 +3820,7 @@ class Widget_conditions():
             "A": { "B": ["C", "D"], "E": ["F", "G", "H"]}. This mean that the widget "A" is visible if two 
             conditions are satisfied: 1) the widget "B" need to have "C" or "D" value and 2) "E" widget
             need to have a value between "F", "G" or "H".
+            If ``or_operation_mode`` property exist, the AND condition is changed to OR.
 
         widgets_to_set_cond : List of tuples, optional
             List of tuples containing the widgets that need to be set with an specific value. 
@@ -3257,11 +3851,20 @@ class Widget_conditions():
                 raise ValueError("{} widget not declared yet".format(widget))
 
             # Check conditions
-            for cond_widget in self.conditions[widget]:
-                value = str(get_text(getattr(main_window.ui, cond_widget)))
-                if value not in self.conditions[widget][cond_widget]:
-                    visible = False  
-                    break  
+            if 'or_operation_mode' in self.conditions[widget]:
+                visible = False
+                for cond_widget in self.conditions[widget]:
+                    if cond_widget != 'or_operation_mode':
+                        value = str(get_text(getattr(main_window.ui, cond_widget)))
+                        if value in self.conditions[widget][cond_widget]:
+                            visible = True  
+                            break      
+            else:
+                for cond_widget in self.conditions[widget]:
+                    value = str(get_text(getattr(main_window.ui, cond_widget)))
+                    if value not in self.conditions[widget][cond_widget]:
+                        visible = False  
+                        break  
         
             getattr(main_window.ui, widget).setVisible(visible)        
 

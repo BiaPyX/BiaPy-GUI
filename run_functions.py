@@ -303,6 +303,16 @@ class run_worker(QObject):
                 gpus = ','.join(str(x) for x in gpus)
                 command += ["--gpu", gpus]
 
+            # dist_backend = "gloo" if self.windows_os else "nccl"
+            # command = ["-c", f"from biapy import BiaPy; BiaPy( '/BiaPy_files/input.yaml', result_dir='{self.output_folder_in_container}', name='{jobname}', run_id=1, dist_backend='{dist_backend}'"]
+            # gpus = " "
+            # if self.use_gpu:
+            #     gpus = self.main_gui.ui.gpu_input.currentData()
+            #     gpus = [int(x[0]) for x in gpus]
+            #     gpus = ','.join(str(x) for x in gpus)
+            #     command[-1] += f", gpu='{gpus}'"
+            # command[-1] += ")"
+
             # Docker mount points 
             volumes = {}
             volumes[real_cfg_input] = {"bind": "/BiaPy_files/input.yaml", "mode": "ro"}
@@ -382,6 +392,8 @@ class run_worker(QObject):
                     paths.append(p)
                     volumes[p] = {"bind": p, "mode": "ro"} 
                 p = path_to_linux(self.config['PATHS']['CHECKPOINT_FILE'], self.main_gui.cfg.settings['os_host'])
+                if 'PATHS' not in temp_cfg:
+                    temp_cfg['PATHS'] = {}
                 temp_cfg['PATHS']['CHECKPOINT_FILE'] = p
 
             if not self.config['TEST']['ENABLE']:
@@ -411,6 +423,7 @@ class run_worker(QObject):
             # check_command = [ "python3", "-u", "-c", "'import torch; print(torch.cuda.is_available())'"]
             print(f"Command: {command}")
             print(f"Volumes:  {volumes}")
+            nofile_limit = docker.types.Ulimit(name='nofile', soft=10000, hard=10000)
             self.biapy_container = self.docker_client.containers.run(
                 self.container_name, 
                 # entrypoint=[ "/bin/bash", "-l", "-c" ],
@@ -420,6 +433,7 @@ class run_worker(QObject):
                 user=self.user_host if not self.windows_os else None,
                 device_requests=device_requests,
                 shm_size="512m", 
+                ulimits=[nofile_limit]
             )
             self.process_steps = "running"
             print("Container created!")

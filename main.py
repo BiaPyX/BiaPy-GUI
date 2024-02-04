@@ -155,6 +155,12 @@ class MainWindow(QMainWindow):
         self.ui.MODEL__N_CLASSES__INPUT.setValidator(self.float_validator)
         # self.ui.DATA__NORMALIZATION__CUSTOM_MEAN__INPUT.setValidator(self.float_validator)
         # self.ui.DATA__NORMALIZATION__CUSTOM_STD__INPUT.setValidator(self.float_validator)
+        self.ui.DATA__PREPROCESS__RESIZE__CVAL__INPUT.setValidator(self.float_validator)
+        self.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT.setValidator(self.int_validator)
+        self.ui.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT.setValidator(self.float_validator)
+        self.ui.DATA__PREPROCESS__RESIZE__CVAL__TEST__INPUT.setValidator(self.float_validator)
+        self.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__INPUT.setValidator(self.int_validator)
+        self.ui.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__INPUT.setValidator(self.float_validator)
         self.ui.DATA__TRAIN__REPLICATE__INPUT.setValidator(self.int_validator)
         # self.ui.MODEL__FEATURE_MAPS__INPUT.setValidator(self.no_limit_number_min_one_number_bracket_validator)
         # self.ui.MODEL__DROPOUT_VALUES__INPUT.setValidator(self.no_limit_0_1_float_number_bracket_validator)
@@ -276,6 +282,8 @@ class MainWindow(QMainWindow):
         self.ui.train_data_input_browse_bn.clicked.connect(lambda: examine(self, "DATA__TRAIN__PATH__INPUT", False))
         self.ui.train_data_gt_input_browse_bn.clicked.connect(lambda: examine(self, "DATA__TRAIN__GT_PATH__INPUT", False))
         self.ui.val_data_input_browse_bn.clicked.connect(lambda: examine(self, "DATA__VAL__PATH__INPUT", False))
+        self.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN.clicked.connect(lambda: examine(self, "DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT", False))
+        self.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__BN.clicked.connect(lambda: examine(self, "DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INPUT", False))
         self.ui.val_data_gt_input_browse_bn.clicked.connect(lambda: examine(self, "DATA__VAL__GT_PATH__INPUT", False))
         self.ui.DATA__TRAIN__IN_MEMORY__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             [], widgets_to_set_cond=[
@@ -315,6 +323,55 @@ class MainWindow(QMainWindow):
         self.ui.DATA__NORMALIZATION__TYPE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["custom_mean_label", "DATA__NORMALIZATION__CUSTOM_MEAN__INPUT", "DATA__NORMALIZATION__CUSTOM_MEAN__INFO",
             "custom_std_label", "DATA__NORMALIZATION__CUSTOM_STD__INPUT", "DATA__NORMALIZATION__CUSTOM_STD__INFO"]))
+        self.ui.DATA__PREPROCESS__TRAIN__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["preprocessing_frame"]))
+        self.ui.DATA__PREPROCESS__VAL__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["preprocessing_frame"]))
+        self.ui.DATA__PREPROCESS__TEST__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["preprocessing_test_frame"]))
+        self.ui.DATA__PREPROCESS__RESIZE__ENABLE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__LABEL", "DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO", "DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT",
+             "DATA__PREPROCESS__RESIZE__ORDER__LABEL", "DATA__PREPROCESS__RESIZE__ORDER__INFO", "DATA__PREPROCESS__RESIZE__ORDER__INPUT",
+             "DATA__PREPROCESS__RESIZE__MODE__LABEL", "DATA__PREPROCESS__RESIZE__MODE__INFO", "DATA__PREPROCESS__RESIZE__MODE__INPUT",
+             "DATA__PREPROCESS__RESIZE__CVAL__LABEL", "DATA__PREPROCESS__RESIZE__CVAL__INFO", "DATA__PREPROCESS__RESIZE__CVAL__INPUT",
+             "DATA__PREPROCESS__RESIZE__CLIP__LABEL", "DATA__PREPROCESS__RESIZE__CLIP__INFO", "DATA__PREPROCESS__RESIZE__CLIP__INPUT",
+             "DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__LABEL", "DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO", "DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT",
+             "DATA__PREPROCESS__RESIZE__ANTI_ALIASING__LABEL", "DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO", "DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT",]))
+        self.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__LABEL", "DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO", "DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT",
+             "DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__LABEL", "DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO", "DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT",
+             "DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__LABEL", "DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO", "DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT"]))
+        self.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__LABEL", "DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO", "DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT",
+             "DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN"]))
+        self.ui.DATA__PREPROCESS__CLAHE__ENABLE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["DATA__PREPROCESS__CLAHE__KERNEL_SIZE__LABEL", "DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO", "DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT",
+             "DATA__PREPROCESS__CLAHE__CLIP_LIMIT__LABEL", "DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO", "DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT"]))
+        self.ui.DATA__PREPROCESS__CANNY__ENABLE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["DATA__PREPROCESS__CANNY__LOW_THRESHOLD__LABEL", "DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO", "DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT",
+             "DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__LABEL", "DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO", "DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT"]))
+        self.ui.DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__LABEL", "DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INFO", "DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT",
+             "DATA__PREPROCESS__RESIZE__ORDER__TEST__LABEL", "DATA__PREPROCESS__RESIZE__ORDER__TEST__INFO", "DATA__PREPROCESS__RESIZE__ORDER__TEST__INPUT",
+             "DATA__PREPROCESS__RESIZE__MODE__TEST__LABEL", "DATA__PREPROCESS__RESIZE__MODE__TEST__INFO", "DATA__PREPROCESS__RESIZE__MODE__TEST__INPUT",
+             "DATA__PREPROCESS__RESIZE__CVAL__TEST__LABEL", "DATA__PREPROCESS__RESIZE__CVAL__TEST__INFO", "DATA__PREPROCESS__RESIZE__CVAL__TEST__INPUT",
+             "DATA__PREPROCESS__RESIZE__CLIP__TEST__LABEL", "DATA__PREPROCESS__RESIZE__CLIP__TEST__INFO", "DATA__PREPROCESS__RESIZE__CLIP__TEST__INPUT",
+             "DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__LABEL", "DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__INFO", "DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__INPUT",
+             "DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__LABEL", "DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__INFO", "DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__INPUT",]))
+        self.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__TEST__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__LABEL", "DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__INFO", "DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__INPUT",
+             "DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__LABEL", "DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__INFO", "DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__INPUT",
+             "DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__LABEL", "DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__INFO", "DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__INPUT"]))
+        self.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__TEST__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__LABEL", "DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INFO", "DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INPUT",
+             "DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN"]))
+        self.ui.DATA__PREPROCESS__CLAHE__ENABLE__TEST__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__LABEL", "DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__INFO", "DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__INPUT",
+             "DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__LABEL", "DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__INFO", "DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__INPUT"]))
+        self.ui.DATA__PREPROCESS__CANNY__ENABLE__TEST__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__LABEL", "DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INFO", "DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INPUT",
+             "DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__LABEL", "DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INFO", "DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INPUT"]))
+
         self.ui.DATA__EXTRACT_RANDOM_PATCH__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["extract_random_patch_frame_label", "extract_random_patch_frame"]))    
         self.ui.TRAIN__LR_SCHEDULER__NAME__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 

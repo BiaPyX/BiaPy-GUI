@@ -5,6 +5,7 @@ import multiprocessing
 import datetime
 import ast 
 from collections import deque
+import requests
 
 from PySide2.QtCore import  QSize, QFile 
 from PySide2.QtSvg import QSvgWidget
@@ -152,7 +153,9 @@ class UIFunction(MainWindow):
         main_window.ui.gpu_status_label.setWordWrap(True)
         main_window.ui.gpu_status_label.setOpenExternalLinks(True)
         main_window.ui.verticalLayout_33.addWidget(main_window.ui.gpu_status_label)
-
+        
+        main_window.ui.biapy_version.setText(f"Version {main_window.cfg.settings['biapy_code_version']} - GUI: {main_window.cfg.settings['biapy_gui_version']}")
+        
     ###############
     # Workflow page 
     ###############
@@ -322,6 +325,8 @@ class UIFunction(MainWindow):
                 main_window.ui.DATA__TEST__RESOLUTION__INPUT.setText("(1,1)")
                 main_window.ui.DATA__TEST__OVERLAP__INPUT.setText("(0,0)")
                 main_window.ui.DATA__TEST__PADDING__INPUT.setText("(32,32)")
+                main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT.setText("(512,512)")
+                main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT.setText("(512,512)")
             else:
                 if get_text(main_window.ui.TRAIN__ENABLE__INPUT) == "Yes":
                     aux = ast.literal_eval(get_text(main_window.ui.DATA__PATCH_SIZE__INPUT) )
@@ -357,6 +362,12 @@ class UIFunction(MainWindow):
                 aux = ast.literal_eval(get_text(main_window.ui.DATA__TEST__PADDING__INPUT) )
                 if isinstance(aux, tuple) and aux == ((5,16,16)):
                     main_window.ui.DATA__TEST__PADDING__INPUT.setText("(32,32)")
+                aux = ast.literal_eval(get_text(main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT) )
+                if isinstance(aux, tuple) and aux == ((512,512,512)):
+                    main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT.setText("(512,512)")
+                aux = ast.literal_eval(get_text(main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT) )
+                if isinstance(aux, tuple) and aux == ((512,512,512)):
+                    main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT.setText("(512,512)")
 
             main_window.ui.da_z_flip_label.setVisible(False)
             main_window.ui.AUGMENTOR__ZFLIP__INFO.setVisible(False)
@@ -367,12 +378,10 @@ class UIFunction(MainWindow):
             main_window.ui.test_reduce_memory_label.setVisible(False)
             main_window.ui.TEST__REDUCE_MEMORY__INPUT.setVisible(False)
             main_window.ui.TEST__REDUCE_MEMORY__INFO.setVisible(False)
-            main_window.ui.TEST__STATS__PER_PATCH__INPUT.setCurrentText("No")
-            main_window.ui.TEST__STATS__MERGE_PATCHES__INPUT.setCurrentText("No")
-            main_window.ui.TEST__STATS__FULL_IMG__INPUT.setCurrentText("Yes") 
+            main_window.ui.TEST__FULL_IMG__INPUT.setCurrentText("Yes") 
             main_window.ui.test_full_image_label.setVisible(True)
-            main_window.ui.TEST__STATS__FULL_IMG__INFO.setVisible(True)  
-            main_window.ui.TEST__STATS__FULL_IMG__INPUT.setVisible(True)  
+            main_window.ui.TEST__FULL_IMG__INFO.setVisible(True)  
+            main_window.ui.TEST__FULL_IMG__INPUT.setVisible(True)  
             main_window.ui.inst_seg_yz_filtering_label.setVisible(True) 
             main_window.ui.TEST__POST_PROCESSING__YZ_FILTERING__INST_SEG__INPUT.setVisible(True) 
             main_window.ui.TEST__POST_PROCESSING__YZ_FILTERING__INST_SEG__INFO.setVisible(True) 
@@ -426,6 +435,12 @@ class UIFunction(MainWindow):
             aux = ast.literal_eval(get_text(main_window.ui.DATA__TEST__PADDING__INPUT) )
             if isinstance(aux, tuple) and aux == ((32,32)):
                 main_window.ui.DATA__TEST__PADDING__INPUT.setText("(5,16,16)")
+            aux = ast.literal_eval(get_text(main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT) )
+            if isinstance(aux, tuple) and aux == ((512,512)):
+                main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT.setText("(512,512,512)")
+            aux = ast.literal_eval(get_text(main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT) )
+            if isinstance(aux, tuple) and aux == ((512,512)):
+                main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT.setText("(512,512,512)")
 
             main_window.ui.da_z_flip_label.setVisible(True)
             main_window.ui.AUGMENTOR__ZFLIP__INFO.setVisible(True)
@@ -437,11 +452,9 @@ class UIFunction(MainWindow):
             main_window.ui.TEST__REDUCE_MEMORY__INPUT.setVisible(True)
             main_window.ui.TEST__REDUCE_MEMORY__INFO.setVisible(True)
             main_window.ui.test_full_image_label.setVisible(False)
-            main_window.ui.TEST__STATS__FULL_IMG__INFO.setVisible(False)
-            main_window.ui.TEST__STATS__FULL_IMG__INPUT.setVisible(False)
-            main_window.ui.TEST__STATS__PER_PATCH__INPUT.setCurrentText("Yes")
-            main_window.ui.TEST__STATS__MERGE_PATCHES__INPUT.setCurrentText("Yes")
-            main_window.ui.TEST__STATS__FULL_IMG__INPUT.setCurrentText("No") 
+            main_window.ui.TEST__FULL_IMG__INFO.setVisible(False)
+            main_window.ui.TEST__FULL_IMG__INPUT.setVisible(False)
+            main_window.ui.TEST__FULL_IMG__INPUT.setCurrentText("No") 
             main_window.ui.inst_seg_yz_filtering_label.setVisible(False) 
             main_window.ui.TEST__POST_PROCESSING__YZ_FILTERING__INST_SEG__INPUT.setVisible(False) 
             main_window.ui.TEST__POST_PROCESSING__YZ_FILTERING__INST_SEG__INFO.setVisible(False) 
@@ -509,6 +522,101 @@ class UIFunction(MainWindow):
         main_window.ui.custom_std_label.setVisible(False)
         main_window.ui.DATA__NORMALIZATION__CUSTOM_STD__INPUT.setVisible(False)
         main_window.ui.DATA__NORMALIZATION__CUSTOM_STD__INFO.setVisible(False)
+        main_window.ui.preprocessing_frame.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__ORDER__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__ORDER__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__ORDER__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__MODE__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__MODE__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__MODE__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__CVAL__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__CVAL__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__CVAL__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__CLIP__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__CLIP__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__CLIP__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT.setVisible(False)
+        main_window.ui.preprocessing_test_frame.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__ORDER__TEST__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__ORDER__TEST__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__ORDER__TEST__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__MODE__TEST__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__MODE__TEST__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__MODE__TEST__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__CVAL__TEST__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__CVAL__TEST__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__CVAL__TEST__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__CLIP__TEST__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__CLIP__TEST__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__CLIP__TEST__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__BN.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INPUT.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INPUT.setVisible(False)
         main_window.ui.lr_schel_min_lr_label.setVisible(False)
         main_window.ui.TRAIN__LR_SCHEDULER__MIN_LR__INPUT.setVisible(False)
         main_window.ui.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setVisible(False)
@@ -691,6 +799,53 @@ class UIFunction(MainWindow):
         main_window.ui.DATA__NORMALIZATION__CUSTOM_STD__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.DATA__CHECK_GENERATORS__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.DATA__FORCE_RGB__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__TRAIN__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__VAL__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__TEST__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__RESIZE__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__RESIZE__ORDER__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__RESIZE__MODE__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__RESIZE__CVAL__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__RESIZE__CLIP__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__MEDIAN_BLUR__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__CLAHE__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__CANNY__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__RESIZE__TEST__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__RESIZE__ORDER__TEST__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__RESIZE__MODE__TEST__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__RESIZE__CVAL__TEST__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__RESIZE__CLIP__TEST__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__TEST__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__MEDIAN_BLUR__TEST__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__TEST__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__CLAHE__TEST__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__CANNY__TEST__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.DATA__TRAIN__REPLICATE__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.DATA__TRAIN__RESOLUTION__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.DATA__TRAIN__OVERLAP__INFO.setPixmap(main_window.cfg.settings['info_image'])
@@ -1003,9 +1158,7 @@ class UIFunction(MainWindow):
         main_window.ui.DATA__TEST__ARGMAX_TO_OUTPUT__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.TEST__POST_PROCESSING__APPLY_MASK__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.TEST__EVALUATE__INFO.setPixmap(main_window.cfg.settings['info_image'])
-        main_window.ui.TEST__STATS__PER_PATCH__INFO.setPixmap(main_window.cfg.settings['info_image'])
-        main_window.ui.TEST__STATS__MERGE_PATCHES__INFO.setPixmap(main_window.cfg.settings['info_image'])
-        main_window.ui.TEST__STATS__FULL_IMG__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.TEST__FULL_IMG__INFO.setPixmap(main_window.cfg.settings['info_image'])
 
         main_window.ui.DATA__TEST__CHECK_DATA__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.TEST__POST_PROCESSING__YZ_FILTERING__SEM_SEG__INFO.setPixmap(main_window.cfg.settings['info_image'])
@@ -1045,6 +1198,7 @@ class UIFunction(MainWindow):
         main_window.ui.TEST__MATCHING_STATS_THS_COLORED_IMG__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.TEST__DET_POINT_CREATION_FUNCTION__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.TEST__DET_MIN_TH_TO_BE_PEAK__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.TEST__DET_EXCLUDE_BORDER__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.TEST__DET_BLOB_LOG_MIN_SIGMA__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.TEST__DET_BLOB_LOG_MAX_SIGMA__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO.setPixmap(main_window.cfg.settings['info_image'])
@@ -1176,29 +1330,75 @@ class UIFunction(MainWindow):
                 "so you can do it.", "docker_installation")
             return
 
-        # GPU check
-        use_gpu = True
-        if len(main_window.cfg.settings['GPUs']) == 0 or len(main_window.ui.gpu_input.currentData()) == 0:
-            use_gpu = False 
+        # Check if a pull is necessary 
+        local_images = main_window.docker_client.images.list()
+        local_biapy_image_tag = ""
+        old_biapy_images = []
+        if len(local_images) > 0:    
+            # Capture local BiaPy image 
+            for i in range(len(local_images)):
+                if len(local_images[i].attrs.get("RepoTags")) > 0:
+                    if local_images[i].attrs.get("RepoTags")[0] == main_window.cfg.settings['biapy_container_name']:
+                        local_biapy_image_tag = local_images[i].attrs.get("RepoDigests")[0].replace("biapyx/biapy@","")  
+                else:
+                    if len(local_images[i].attrs.get("RepoDigests"))>0:
+                        if 'biapyx/biapy' in local_images[i].attrs.get("RepoDigests")[0]:
+                            old_biapy_images.append(local_images[i].attrs['Id'])
 
-        # Initialize thread/worker 
-        main_window.cfg.settings['running_threads'].append(QThread())
-        worker_id = len(main_window.cfg.settings['running_workers'])
-        main_window.cfg.settings['running_workers'].append(run_worker(main_window, main_window.cfg.settings['biapy_cfg'], main_window.cfg.settings['biapy_container_name'], 
-            worker_id, main_window.cfg.settings['output_folder'], main_window.cfg.settings['user_host'], use_gpu))
+            res = requests.get("https://registry.hub.docker.com/v2/repositories/biapyx/biapy/tags/")
+            res = res.json()
+            dockerhub_image_tag = ""
+            for i in range(len(res['results'])):
+                if res['results'][i]['name'] == main_window.cfg.settings['biapy_container_name'].split(':')[-1]:
+                    dockerhub_image_tag = res['results'][i]['images'][0]['digest']    
 
-        # Set up signals so the mainn thread, in charge of updating the GUI, can do it
-        main_window.cfg.settings['running_workers'][worker_id].moveToThread(main_window.cfg.settings['running_threads'][worker_id])
-        main_window.cfg.settings['running_threads'][worker_id].started.connect(main_window.cfg.settings['running_workers'][worker_id].run)
-        main_window.cfg.settings['running_workers'][worker_id].finished_signal.connect(main_window.cfg.settings['running_threads'][worker_id].quit)
-        main_window.cfg.settings['running_workers'][worker_id].finished_signal.connect(main_window.cfg.settings['running_workers'][worker_id].deleteLater)
-        main_window.cfg.settings['running_threads'][worker_id].finished.connect(main_window.cfg.settings['running_threads'][worker_id].deleteLater)
-        main_window.cfg.settings['running_workers'][worker_id].update_log_signal.connect(main_window.cfg.settings['running_workers'][worker_id].gui.update_gui)
-        main_window.cfg.settings['running_workers'][worker_id].update_cont_state_signal.connect(main_window.cfg.settings['running_workers'][worker_id].gui.update_cont_state)
-        main_window.cfg.settings['running_workers'][worker_id].update_train_progress_signal.connect(main_window.cfg.settings['running_workers'][worker_id].gui.update_train_progress)
-        main_window.cfg.settings['running_workers'][worker_id].update_test_progress_signal.connect(main_window.cfg.settings['running_workers'][worker_id].gui.update_test_progress)
-        main_window.cfg.settings['running_workers'][worker_id].update_pulling_progress_signal.connect(main_window.cfg.settings['running_workers'][worker_id].gui.update_pulling_progress)
-        main_window.cfg.settings['running_workers'][worker_id].update_pulling_signal.connect(main_window.cfg.settings['running_workers'][worker_id].gui.pulling_progress)
+            # Remove possible untagged BiaPy containers
+            if len(old_biapy_images) > 0:
+                main_window.yes_no_exec("Seems that there is one or more old BiaPy containers. Do yo want to remove them to save disk space?")
+                if main_window.yes_no.answer:
+                    print("Removing old containers")
+                    for i in range(len(old_biapy_images)):
+                        main_window.docker_client.images.remove(old_biapy_images[i], force=True)
+
+            # Replace BiaPy container 
+            if dockerhub_image_tag != "" and local_biapy_image_tag != "":
+                if dockerhub_image_tag != local_biapy_image_tag:
+                    main_window.yes_no_exec("There is another BiaPy container. Do yo want to remove the current one to save disk space?")
+                    if main_window.yes_no.answer:
+                        print("Removing last valid container")
+                        main_window.docker_client.images.remove(main_window.cfg.settings['biapy_container_name'], force=True)
+
+        # Firs time 
+        run_biapy_cond = True
+        if local_biapy_image_tag == "":
+            main_window.yes_no_exec("The first time you run BiaPy you need to download its Docker container. "
+                f"This process will be done just once and needs {main_window.cfg.settings['biapy_container_size']} of disk space. Proceed?")
+            run_biapy_cond = main_window.yes_no.answer
         
-        # Start thread 
-        main_window.cfg.settings['running_threads'][worker_id].start()
+        if run_biapy_cond:
+            # GPU check
+            use_gpu = True
+            if len(main_window.cfg.settings['GPUs']) == 0 or len(main_window.ui.gpu_input.currentData()) == 0:
+                use_gpu = False 
+
+            # Initialize thread/worker 
+            main_window.cfg.settings['running_threads'].append(QThread())
+            worker_id = len(main_window.cfg.settings['running_workers'])
+            main_window.cfg.settings['running_workers'].append(run_worker(main_window, main_window.cfg.settings['biapy_cfg'], main_window.cfg.settings['biapy_container_name'], 
+                worker_id, main_window.cfg.settings['output_folder'], main_window.cfg.settings['user_host'], use_gpu))
+
+            # Set up signals so the mainn thread, in charge of updating the GUI, can do it
+            main_window.cfg.settings['running_workers'][worker_id].moveToThread(main_window.cfg.settings['running_threads'][worker_id])
+            main_window.cfg.settings['running_threads'][worker_id].started.connect(main_window.cfg.settings['running_workers'][worker_id].run)
+            main_window.cfg.settings['running_workers'][worker_id].finished_signal.connect(main_window.cfg.settings['running_threads'][worker_id].quit)
+            main_window.cfg.settings['running_workers'][worker_id].finished_signal.connect(main_window.cfg.settings['running_workers'][worker_id].deleteLater)
+            main_window.cfg.settings['running_threads'][worker_id].finished.connect(main_window.cfg.settings['running_threads'][worker_id].deleteLater)
+            main_window.cfg.settings['running_workers'][worker_id].update_log_signal.connect(main_window.cfg.settings['running_workers'][worker_id].gui.update_gui)
+            main_window.cfg.settings['running_workers'][worker_id].update_cont_state_signal.connect(main_window.cfg.settings['running_workers'][worker_id].gui.update_cont_state)
+            main_window.cfg.settings['running_workers'][worker_id].update_train_progress_signal.connect(main_window.cfg.settings['running_workers'][worker_id].gui.update_train_progress)
+            main_window.cfg.settings['running_workers'][worker_id].update_test_progress_signal.connect(main_window.cfg.settings['running_workers'][worker_id].gui.update_test_progress)
+            main_window.cfg.settings['running_workers'][worker_id].update_pulling_progress_signal.connect(main_window.cfg.settings['running_workers'][worker_id].gui.update_pulling_progress)
+            main_window.cfg.settings['running_workers'][worker_id].update_pulling_signal.connect(main_window.cfg.settings['running_workers'][worker_id].gui.pulling_progress)
+            
+            # Start thread 
+            main_window.cfg.settings['running_threads'][worker_id].start()

@@ -14,5 +14,5 @@ requests==2.31.0
 shiboken2==5.15.2.1
 urllib3==1.26.15
 websocket-client==1.5.1
-yacs==0.1.6
+yacs==0.1.8
 GPUtil==1.4.0
