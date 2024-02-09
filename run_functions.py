@@ -4,6 +4,7 @@ import docker
 import yaml
 import numpy as np
 from datetime import datetime, timedelta
+import multiprocessing
 
 from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtCore import Qt, QObject, QUrl
@@ -303,6 +304,13 @@ class run_worker(QObject):
                 gpus = ','.join(str(x) for x in gpus)
                 command += ["--gpu", gpus]
 
+            # Limit a bit the proccesses used in Docker if it's using a GPU, as multiGPU is not supported yet through the GUI
+            if self.use_gpu:
+                cpu_count = min(multiprocessing.cpu_count(), 5)
+            else:
+                cpu_count = multiprocessing.cpu_count()
+            shm_size = f"{128*cpu_count}m"
+
             # dist_backend = "gloo" if self.windows_os else "nccl"
             # command = ["-c", f"from biapy import BiaPy; BiaPy( '/BiaPy_files/input.yaml', result_dir='{self.output_folder_in_container}', name='{jobname}', run_id=1, dist_backend='{dist_backend}'"]
             # gpus = " "
@@ -418,6 +426,7 @@ class run_worker(QObject):
             # check_command = [ "python3", "-u", "-c", "'import torch; print(torch.cuda.is_available())'"]
             print(f"Command: {command}")
             print(f"Volumes:  {volumes}")
+            print(f"CPUs: {cpu_count}")
             nofile_limit = docker.types.Ulimit(name='nofile', soft=10000, hard=10000)
             self.biapy_container = self.docker_client.containers.run(
                 self.container_name, 
@@ -427,8 +436,9 @@ class run_worker(QObject):
                 volumes=volumes,
                 user=self.user_host if not self.windows_os else None,
                 device_requests=device_requests,
-                shm_size="512m", 
-                ulimits=[nofile_limit]
+                shm_size=shm_size, 
+                ulimits=[nofile_limit],
+                nano_cpus=1000000000*cpu_count,
             )
             self.process_steps = "running"
             print("Container created!")
