@@ -1330,6 +1330,11 @@ class UIFunction(MainWindow):
                 "so you can do it.", "docker_installation")
             return
 
+        # Allow only one GPU through the GUI for the moment 
+        if len(main_window.ui.gpu_input.currentData()) > 1:
+            main_window.dialog_exec("Currently use a multi-GPU setting is not supported. Please, select just one GPU.", "error")
+            return 
+
         # Check if a pull is necessary 
         local_images = main_window.docker_client.images.list()
         local_biapy_image_tag = ""
