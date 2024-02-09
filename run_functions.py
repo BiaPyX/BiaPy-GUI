@@ -426,7 +426,9 @@ class run_worker(QObject):
             # check_command = [ "python3", "-u", "-c", "'import torch; print(torch.cuda.is_available())'"]
             print(f"Command: {command}")
             print(f"Volumes:  {volumes}")
+            print(f"GPU: {gpus}")
             print(f"CPUs: {cpu_count}")
+            print(f"GUI version: {main_gui.cfg.settings['biapy_gui_version']}")
             nofile_limit = docker.types.Ulimit(name='nofile', soft=10000, hard=10000)
             self.biapy_container = self.docker_client.containers.run(
                 self.container_name, 
@@ -439,6 +441,7 @@ class run_worker(QObject):
                 shm_size=shm_size, 
                 ulimits=[nofile_limit],
                 nano_cpus=1000000000*cpu_count,
+                cpu_count=cpu_count,
             )
             self.process_steps = "running"
             print("Container created!")
@@ -472,7 +475,13 @@ class run_worker(QObject):
                 .replace("<table>", "\n").replace("</table>", "\n").replace('<b>','').replace('</b>','').replace('<br>','').strip())
             f.write("#########################################################\n")
             f.write(f"Command: {command}")
+            f.write("#########################################################\n")
             f.write(f"Volumes: {volumes}")
+            f.write("#########################################################\n")
+            f.write(f"GUI version: {main_gui.cfg.settings['biapy_gui_version']}")
+            if self.use_gpu:
+                f.write(f"GPU: {gpus}")
+            f.write(f"CPUs: {cpu_count}")
             f.write("#########################################################\n")
 
             # Collect the output of the container and update the GUI
