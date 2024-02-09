@@ -428,7 +428,7 @@ class run_worker(QObject):
             print(f"Volumes:  {volumes}")
             print(f"GPU: {gpus}")
             print(f"CPUs: {cpu_count}")
-            print(f"GUI version: {main_gui.cfg.settings['biapy_gui_version']}")
+            print(f"GUI version: {self.main_gui.cfg.settings['biapy_gui_version']}")
             nofile_limit = docker.types.Ulimit(name='nofile', soft=10000, hard=10000)
             self.biapy_container = self.docker_client.containers.run(
                 self.container_name, 
@@ -478,7 +478,7 @@ class run_worker(QObject):
             f.write("#########################################################\n")
             f.write(f"Volumes: {volumes}")
             f.write("#########################################################\n")
-            f.write(f"GUI version: {main_gui.cfg.settings['biapy_gui_version']}")
+            f.write(f"GUI version: {self.main_gui.cfg.settings['biapy_gui_version']}")
             if self.use_gpu:
                 f.write(f"GPU: {gpus}")
             f.write(f"CPUs: {cpu_count}")
