@@ -30,7 +30,7 @@ class Settings():
         self.settings['CUDA_version'] = [10.2, 11.8]
 
         # BiaPy 
-        self.settings['biapy_code_version'] = "v3.3.3"
+        self.settings['biapy_code_version'] = "v3.3.4"
         self.settings['biapy_gui_version'] = "v1.0.0"
         self.settings['biapy_container_basename'] = "biapyx/biapy"
         self.settings['biapy_container_name'] = self.settings['biapy_container_basename']+":latest-"+str(self.settings['CUDA_version'][-1])

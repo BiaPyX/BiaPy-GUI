@@ -404,11 +404,6 @@ class run_worker(QObject):
                 self.test_filenames = sorted(next(os.walk(self.config['DATA']['TEST']['PATH']))[2])
                 self.test_files = len(sorted(next(os.walk(self.config['DATA']['TEST']['PATH']))[2]))
                 self.gui.run_window.test_progress_bar.setMaximum(self.test_files)
-
-            if self.config['TEST']['ENABLE'] and self.config['TEST']['ENABLE']:
-                self.gui.run_window.test_progress_label.setEnabled(False)
-                self.gui.run_window.test_progress_bar.setEnabled(False)
-                self.gui.run_window.test_files_label.setEnabled(False)
             
             print("Creating temporal input YAML file") 
             with open(real_cfg_input, 'w') as outfile:
@@ -465,6 +460,9 @@ class run_worker(QObject):
             f.write("#########################################################\n")
             f.write(self.container_info.replace("<tr><td>", "").replace("</td><td>", ": ").replace("</td></tr>", "")\
                 .replace("<table>", "\n").replace("</table>", "\n").replace('<b>','').replace('</b>','').replace('<br>','').strip())
+            f.write("#########################################################\n")
+            f.write(f"Command: {command}")
+            f.write(f"Volumes: {volumes}")
             f.write("#########################################################\n")
 
             # Collect the output of the container and update the GUI
