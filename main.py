@@ -848,6 +848,8 @@ if __name__ == "__main__":
         }
         """
 
+    # os.environ["QT_SCALE_FACTOR"] = "1"
+    os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
     app = QApplication(sys.argv)
     app.setWindowIcon(QIcon(resource_path(os.path.join("images","biapy_logo_icon.ico"))))
     app.setStyleSheet(StyleSheet)
