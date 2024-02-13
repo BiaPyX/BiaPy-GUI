@@ -281,6 +281,7 @@ class UIFunction(MainWindow):
         main_window.ui.checkpoint_loading_opt_frame.setVisible(False)
 
         main_window.ui.SYSTEM__NUM_CPUS__INPUT.addItem("All")
+        main_window.ui.SYSTEM__NUM_CPUS__INPUT.addItem("0")
         for i in range(multiprocessing.cpu_count()):
             main_window.ui.SYSTEM__NUM_CPUS__INPUT.addItem(str(i+1))
 
@@ -327,6 +328,8 @@ class UIFunction(MainWindow):
                 main_window.ui.DATA__TEST__PADDING__INPUT.setText("(32,32)")
                 main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT.setText("(512,512)")
                 main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT.setText("(512,512)")
+                main_window.ui.MODEL__FEATURE_MAPS__INPUT.setText("[16, 32, 64, 128, 256]")
+                main_window.ui.MODEL__DROPOUT_VALUES__INPUT.setText("[0., 0., 0., 0., 0.]")
             else:
                 if get_text(main_window.ui.TRAIN__ENABLE__INPUT) == "Yes":
                     aux = ast.literal_eval(get_text(main_window.ui.DATA__PATCH_SIZE__INPUT) )
@@ -368,7 +371,16 @@ class UIFunction(MainWindow):
                 aux = ast.literal_eval(get_text(main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT) )
                 if isinstance(aux, tuple) and aux == ((512,512,512)):
                     main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT.setText("(512,512)")
+                aux = ast.literal_eval(get_text(main_window.ui.MODEL__FEATURE_MAPS__INPUT) )
+                if isinstance(aux, list) and aux == [32, 64, 128]:
+                    main_window.ui.MODEL__FEATURE_MAPS__INPUT.setText("[16, 32, 64, 128, 256]")
+                    aux = ast.literal_eval(get_text(main_window.ui.MODEL__DROPOUT_VALUES__INPUT) )
+                    if isinstance(aux, list) and aux == [0., 0., 0.]:
+                        main_window.ui.MODEL__DROPOUT_VALUES__INPUT.setText("[0., 0., 0., 0., 0.]")
 
+            main_window.ui.MODEL__Z_DOWN__INPUT.setVisible(False)
+            main_window.ui.MODEL__Z_DOWN__LABEL.setVisible(False)
+            main_window.ui.MODEL__Z_DOWN__INFO.setVisible(False)
             main_window.ui.da_z_flip_label.setVisible(False)
             main_window.ui.AUGMENTOR__ZFLIP__INFO.setVisible(False)
             main_window.ui.AUGMENTOR__ZFLIP__INPUT.setVisible(False)
@@ -441,7 +453,16 @@ class UIFunction(MainWindow):
             aux = ast.literal_eval(get_text(main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT) )
             if isinstance(aux, tuple) and aux == ((512,512)):
                 main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT.setText("(512,512,512)")
-
+            aux = ast.literal_eval(get_text(main_window.ui.MODEL__FEATURE_MAPS__INPUT) )
+            if isinstance(aux, list) and aux == [16, 32, 64, 128, 256]:
+                main_window.ui.MODEL__FEATURE_MAPS__INPUT.setText("[32, 64, 128]")
+                aux = ast.literal_eval(get_text(main_window.ui.MODEL__DROPOUT_VALUES__INPUT) )
+                if isinstance(aux, list) and aux == [0., 0., 0., 0., 0.]:
+                    main_window.ui.MODEL__DROPOUT_VALUES__INPUT.setText("[0., 0., 0.]")
+                
+            main_window.ui.MODEL__Z_DOWN__INPUT.setVisible(True)
+            main_window.ui.MODEL__Z_DOWN__LABEL.setVisible(True)
+            main_window.ui.MODEL__Z_DOWN__INFO.setVisible(True)
             main_window.ui.da_z_flip_label.setVisible(True)
             main_window.ui.AUGMENTOR__ZFLIP__INFO.setVisible(True)
             main_window.ui.AUGMENTOR__ZFLIP__INPUT.setVisible(True)

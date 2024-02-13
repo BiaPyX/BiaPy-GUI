@@ -165,7 +165,7 @@ class MainWindow(QMainWindow):
         # self.ui.MODEL__FEATURE_MAPS__INPUT.setValidator(self.no_limit_number_min_one_number_bracket_validator)
         # self.ui.MODEL__DROPOUT_VALUES__INPUT.setValidator(self.no_limit_0_1_float_number_bracket_validator)
         self.ui.MODEL__KERNEL_SIZE__INPUT.setValidator(self.int_validator)
-        self.ui.MODEL__Z_DOWN__INPUT.setValidator(self.z_down_bracket_validator)
+        # self.ui.MODEL__Z_DOWN__INPUT.setValidator(self.z_down_bracket_validator)
         self.ui.MODEL__VIT_TOKEN_SIZE__INPUT.setValidator(self.int_validator)
         self.ui.MODEL__VIT_EMBED_DIM__INPUT.setValidator(self.int_validator)
         self.ui.MODEL__VIT_NUM_LAYERS__INPUT.setValidator(self.int_validator)
