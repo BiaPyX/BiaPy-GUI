@@ -6,6 +6,8 @@ import ast
 import GPUtil
 import yaml
 import queue
+import subprocess
+import re
 from pathlib import PurePath, Path, PureWindowsPath
 
 from PySide2 import QtCore, QtGui, QtWidgets
@@ -1636,6 +1638,19 @@ class load_yaml_to_GUI_engine(QObject):
                         
         return errors, variables_set
 
+def get_git_revision_short_hash(main_window) -> str:
+    sha = None 
+    vtag = None
+    try:
+        repo_url = 'https://github.com/path/to/your/repo.git'
+        process = subprocess.Popen(["git", "ls-remote", main_window.cfg.settings['biapy_gui_github']], stdout=subprocess.PIPE)
+        stdout, stderr = process.communicate()
+        sha = re.split(r'\t+', stdout.decode('ascii'))[0]
+        vtag = str(re.split(r'\t+', stdout.decode('ascii'))[-1]).replace("refs/tags/","").replace('^{}',"")  
+    except Exception: 
+        pass
+    return sha, vtag
+        
 def path_in_list(list, path):
     """
     Check whether the given path is in the list. It also checks if the path is relative 
@@ -1684,3 +1699,4 @@ def path_to_linux(p, orig_os="win"):
         p = PureWindowsPath(p)
         p = os.path.join("/"+p.parts[0][0],*p.parts[1:]).replace('\\','/')
     return p 
+

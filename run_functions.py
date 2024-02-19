@@ -308,7 +308,8 @@ class run_worker(QObject):
             if self.use_gpu:
                 cpu_count = min(multiprocessing.cpu_count(), 5)
             else:
-                cpu_count = multiprocessing.cpu_count()
+                cpus = get_text(self.main_gui.ui.SYSTEM__NUM_CPUS__INPUT)
+                cpus = multiprocessing.cpu_count() if cpus == "All" else int(cpus)
             shm_size = f"{128*cpu_count}m"
 
             # dist_backend = "gloo" if self.windows_os else "nccl"
@@ -426,7 +427,7 @@ class run_worker(QObject):
             # check_command = [ "python3", "-u", "-c", "'import torch; print(torch.cuda.is_available())'"]
             print(f"Command: {command}")
             print(f"Volumes:  {volumes}")
-            print(f"GPU: {gpus}")
+            print(f"GPU (IDs): {gpus}")
             print(f"CPUs: {cpu_count}")
             print(f"GUI version: {self.main_gui.cfg.settings['biapy_gui_version']}")
             nofile_limit = docker.types.Ulimit(name='nofile', soft=10000, hard=10000)

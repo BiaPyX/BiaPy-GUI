@@ -11,7 +11,7 @@ from PySide2.QtGui import (QDesktopServices, QBrush, QColor, QConicalGradient, Q
 from PySide2.QtWidgets import *
 
 from ui_function import * 
-from ui_utils import (examine, mark_syntax_error, expand_hide_advanced_options, change_page, 
+from ui_utils import (examine, mark_syntax_error, expand_hide_advanced_options, change_page, get_git_revision_short_hash,
     load_yaml_config, resource_path, load_yaml_to_GUI, set_text)
 from settings import Settings
 from widget_conditions import Widget_conditions
@@ -820,6 +820,17 @@ class MainWindow(QMainWindow):
         else:
             event.ignore()  
 
+    def check_new_gui_version(self):
+        # Changed version
+        sha, vtag = get_git_revision_short_hash(self)
+        print(f"Local GUI version: {self.cfg.settings['biapy_gui_version']}")
+        print(f"Remote last version's hash: {sha}")
+        print(f"Remote last version: {vtag}")
+        if sha is not None and vtag is not None and sha != self.cfg.settings['biapy_gui_last_version_hash'] and \
+            vtag != self.cfg.settings['biapy_gui_version']:
+            self.dialog_exec("There is a new version of BiaPy's graphical user interface available. Please, "
+                "download it <a href='https://biapyx.github.io'>here</a>", reason="inform_user")
+ 
 def center_window(widget, geometry):
     window = widget.window()
     window.setGeometry(
@@ -868,6 +879,9 @@ if __name__ == "__main__":
     # Center the main GUI in the middle of the first screen
     all_screens = app.screens()
     center_window(window, all_screens[0].availableGeometry())
+
+    # Check new versions of the GUI
+    window.check_new_gui_version()
 
     def excepthook(exc_type, exc_value, exc_tb):
         tb = "".join(traceback.format_exception(exc_type, exc_value, exc_tb))
