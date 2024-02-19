@@ -1682,8 +1682,8 @@ class Ui_MainWindow(object):
         self.goptions_page.setObjectName(u"goptions_page")
         self.goptions_general_frame = QFrame(self.goptions_page)
         self.goptions_general_frame.setObjectName(u"goptions_general_frame")
-        self.goptions_general_frame.setGeometry(QRect(0, 0, 946, 448))
-        self.goptions_general_frame.setMinimumSize(QSize(921, 396))
+        self.goptions_general_frame.setGeometry(QRect(0, 0, 946, 441))
+        self.goptions_general_frame.setMinimumSize(QSize(921, 398))
         self.goptions_general_frame.setFont(font)
         self.goptions_general_frame.setFrameShape(QFrame.NoFrame)
         self.goptions_general_frame.setFrameShadow(QFrame.Raised)
@@ -1857,7 +1857,7 @@ class Ui_MainWindow(object):
         self.goptions_advanced_options_scrollarea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 870, 248))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, -5, 870, 284))
         self.gridLayout_2 = QGridLayout(self.scrollAreaWidgetContents_2)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.label = QLabel(self.scrollAreaWidgetContents_2)
@@ -1897,13 +1897,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_5.addWidget(self.label_2, 3, 0, 1, 1)
 
-        self.SYSTEM__NUM_CPUS__INPUT = QComboBox(self.frame_2)
-        self.SYSTEM__NUM_CPUS__INPUT.setObjectName(u"SYSTEM__NUM_CPUS__INPUT")
-        self.SYSTEM__NUM_CPUS__INPUT.setMinimumSize(QSize(200, 30))
-        self.SYSTEM__NUM_CPUS__INPUT.setMaximumSize(QSize(200, 30))
-        self.SYSTEM__NUM_CPUS__INPUT.setFont(font)
+        self.SYSTEM__NUM_WORKERS__INPUT = QComboBox(self.frame_2)
+        self.SYSTEM__NUM_WORKERS__INPUT.setObjectName(u"SYSTEM__NUM_WORKERS__INPUT")
+        self.SYSTEM__NUM_WORKERS__INPUT.setMinimumSize(QSize(200, 30))
+        self.SYSTEM__NUM_WORKERS__INPUT.setMaximumSize(QSize(200, 30))
+        self.SYSTEM__NUM_WORKERS__INPUT.setFont(font)
 
-        self.gridLayout_5.addWidget(self.SYSTEM__NUM_CPUS__INPUT, 1, 2, 1, 1)
+        self.gridLayout_5.addWidget(self.SYSTEM__NUM_WORKERS__INPUT, 1, 2, 1, 1)
 
         self.SYSTEM__SEED__INPUT = QLineEdit(self.frame_2)
         self.SYSTEM__SEED__INPUT.setObjectName(u"SYSTEM__SEED__INPUT")
@@ -1917,14 +1917,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_5.addItem(self.horizontalSpacer_2, 1, 3, 1, 1)
 
-        self.SYSTEM__NUM_CPUS__INFO = QLabel(self.frame_2)
-        self.SYSTEM__NUM_CPUS__INFO.setObjectName(u"SYSTEM__NUM_CPUS__INFO")
-        self.SYSTEM__NUM_CPUS__INFO.setMinimumSize(QSize(30, 30))
-        self.SYSTEM__NUM_CPUS__INFO.setMaximumSize(QSize(30, 30))
-        self.SYSTEM__NUM_CPUS__INFO.setStyleSheet(u"")
-        self.SYSTEM__NUM_CPUS__INFO.setScaledContents(True)
+        self.SYSTEM__NUM_WORKERS__INFO = QLabel(self.frame_2)
+        self.SYSTEM__NUM_WORKERS__INFO.setObjectName(u"SYSTEM__NUM_WORKERS__INFO")
+        self.SYSTEM__NUM_WORKERS__INFO.setMinimumSize(QSize(30, 30))
+        self.SYSTEM__NUM_WORKERS__INFO.setMaximumSize(QSize(30, 30))
+        self.SYSTEM__NUM_WORKERS__INFO.setStyleSheet(u"")
+        self.SYSTEM__NUM_WORKERS__INFO.setScaledContents(True)
 
-        self.gridLayout_5.addWidget(self.SYSTEM__NUM_CPUS__INFO, 1, 1, 1, 1)
+        self.gridLayout_5.addWidget(self.SYSTEM__NUM_WORKERS__INFO, 1, 1, 1, 1)
 
         self.SYSTEM__SEED__INFO = QLabel(self.frame_2)
         self.SYSTEM__SEED__INFO.setObjectName(u"SYSTEM__SEED__INFO")
@@ -1933,6 +1933,29 @@ class Ui_MainWindow(object):
         self.SYSTEM__SEED__INFO.setScaledContents(True)
 
         self.gridLayout_5.addWidget(self.SYSTEM__SEED__INFO, 3, 1, 1, 1)
+
+        self.SYSTEM__NUM_CPUS__LABEL = QLabel(self.frame_2)
+        self.SYSTEM__NUM_CPUS__LABEL.setObjectName(u"SYSTEM__NUM_CPUS__LABEL")
+        self.SYSTEM__NUM_CPUS__LABEL.setFont(font)
+
+        self.gridLayout_5.addWidget(self.SYSTEM__NUM_CPUS__LABEL, 0, 0, 1, 1)
+
+        self.SYSTEM__NUM_CPUS__INFO = QLabel(self.frame_2)
+        self.SYSTEM__NUM_CPUS__INFO.setObjectName(u"SYSTEM__NUM_CPUS__INFO")
+        self.SYSTEM__NUM_CPUS__INFO.setMinimumSize(QSize(30, 30))
+        self.SYSTEM__NUM_CPUS__INFO.setMaximumSize(QSize(30, 30))
+        self.SYSTEM__NUM_CPUS__INFO.setFont(font)
+        self.SYSTEM__NUM_CPUS__INFO.setScaledContents(True)
+
+        self.gridLayout_5.addWidget(self.SYSTEM__NUM_CPUS__INFO, 0, 1, 1, 1)
+
+        self.SYSTEM__NUM_CPUS__INPUT = QComboBox(self.frame_2)
+        self.SYSTEM__NUM_CPUS__INPUT.setObjectName(u"SYSTEM__NUM_CPUS__INPUT")
+        self.SYSTEM__NUM_CPUS__INPUT.setMinimumSize(QSize(200, 30))
+        self.SYSTEM__NUM_CPUS__INPUT.setMaximumSize(QSize(200, 30))
+        self.SYSTEM__NUM_CPUS__INPUT.setFont(font)
+
+        self.gridLayout_5.addWidget(self.SYSTEM__NUM_CPUS__INPUT, 0, 2, 1, 1)
 
 
         self.gridLayout_2.addWidget(self.frame_2, 1, 0, 1, 1)
@@ -2186,7 +2209,7 @@ class Ui_MainWindow(object):
         self.train_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 985, 6769))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 985, 6805))
         self.scrollAreaWidgetContents_3.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout_3 = QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
@@ -3694,8 +3717,6 @@ class Ui_MainWindow(object):
         self.gridLayout_25.addWidget(self.da_missing_sections_iteration_range_label, 65, 0, 1, 1)
 
         self.AUGMENTOR__AFFINE_MODE__INPUT = QComboBox(self.da_frame)
-        self.AUGMENTOR__AFFINE_MODE__INPUT.addItem("")
-        self.AUGMENTOR__AFFINE_MODE__INPUT.addItem("")
         self.AUGMENTOR__AFFINE_MODE__INPUT.addItem("")
         self.AUGMENTOR__AFFINE_MODE__INPUT.addItem("")
         self.AUGMENTOR__AFFINE_MODE__INPUT.addItem("")
@@ -5623,6 +5644,13 @@ class Ui_MainWindow(object):
         self.frame_28.setFrameShadow(QFrame.Raised)
         self.gridLayout_29 = QGridLayout(self.frame_28)
         self.gridLayout_29.setObjectName(u"gridLayout_29")
+        self.profiler_batch_range_label = QLabel(self.frame_28)
+        self.profiler_batch_range_label.setObjectName(u"profiler_batch_range_label")
+        self.profiler_batch_range_label.setFont(font)
+        self.profiler_batch_range_label.setIndent(15)
+
+        self.gridLayout_29.addWidget(self.profiler_batch_range_label, 21, 0, 1, 1)
+
         self.TRAIN__LR_SCHEDULER__NAME__INPUT = QComboBox(self.frame_28)
         self.TRAIN__LR_SCHEDULER__NAME__INPUT.addItem("")
         self.TRAIN__LR_SCHEDULER__NAME__INPUT.addItem("")
@@ -5639,13 +5667,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addItem(self.horizontalSpacer_21, 4, 3, 1, 1)
 
-        self.profiler_batch_range_label = QLabel(self.frame_28)
-        self.profiler_batch_range_label.setObjectName(u"profiler_batch_range_label")
-        self.profiler_batch_range_label.setFont(font)
-        self.profiler_batch_range_label.setIndent(15)
-
-        self.gridLayout_29.addWidget(self.profiler_batch_range_label, 21, 0, 1, 1)
-
         self.TRAIN__PROFILER__INPUT = QComboBox(self.frame_28)
         self.TRAIN__PROFILER__INPUT.addItem("")
         self.TRAIN__PROFILER__INPUT.addItem("")
@@ -5656,6 +5677,12 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addWidget(self.TRAIN__PROFILER__INPUT, 18, 2, 1, 1)
 
+        self.MODEL__SAVE_CKPT_FREQ__LABEL = QLabel(self.frame_28)
+        self.MODEL__SAVE_CKPT_FREQ__LABEL.setObjectName(u"MODEL__SAVE_CKPT_FREQ__LABEL")
+        self.MODEL__SAVE_CKPT_FREQ__LABEL.setFont(font)
+
+        self.gridLayout_29.addWidget(self.MODEL__SAVE_CKPT_FREQ__LABEL, 6, 0, 1, 1)
+
         self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT = QLineEdit(self.frame_28)
         self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__MIN_LR__INPUT")
         self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT.setMinimumSize(QSize(200, 30))
@@ -5664,23 +5691,25 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT, 10, 2, 1, 1)
 
+        self.label_114 = QLabel(self.frame_28)
+        self.label_114.setObjectName(u"label_114")
+        self.label_114.setFont(font)
+
+        self.gridLayout_29.addWidget(self.label_114, 5, 0, 1, 1)
+
         self.label_151 = QLabel(self.frame_28)
         self.label_151.setObjectName(u"label_151")
         self.label_151.setFont(font)
 
         self.gridLayout_29.addWidget(self.label_151, 2, 0, 1, 1)
 
-        self.MODEL__SAVE_CKPT_FREQ__LABEL = QLabel(self.frame_28)
-        self.MODEL__SAVE_CKPT_FREQ__LABEL.setObjectName(u"MODEL__SAVE_CKPT_FREQ__LABEL")
-        self.MODEL__SAVE_CKPT_FREQ__LABEL.setFont(font)
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT = QLineEdit(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT")
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setFont(font)
 
-        self.gridLayout_29.addWidget(self.MODEL__SAVE_CKPT_FREQ__LABEL, 6, 0, 1, 1)
-
-        self.label_114 = QLabel(self.frame_28)
-        self.label_114.setObjectName(u"label_114")
-        self.label_114.setFont(font)
-
-        self.gridLayout_29.addWidget(self.label_114, 5, 0, 1, 1)
+        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT, 13, 2, 1, 1)
 
         self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT = QLineEdit(self.frame_28)
         self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT")
@@ -5690,13 +5719,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT, 12, 2, 1, 1)
 
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT = QLineEdit(self.frame_28)
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT")
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setFont(font)
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT = QLineEdit(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT")
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setFont(font)
 
-        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT, 13, 2, 1, 1)
+        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT, 15, 2, 1, 1)
 
         self.TRAIN__OPTIMIZER__INPUT = QComboBox(self.frame_28)
         self.TRAIN__OPTIMIZER__INPUT.addItem("")
@@ -5709,14 +5738,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addWidget(self.TRAIN__OPTIMIZER__INPUT, 0, 2, 1, 1)
 
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT = QLineEdit(self.frame_28)
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT")
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setFont(font)
-
-        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT, 15, 2, 1, 1)
-
         self.TRAIN__PROFILER_BATCH_RANGE__INPUT = QLineEdit(self.frame_28)
         self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setObjectName(u"TRAIN__PROFILER_BATCH_RANGE__INPUT")
         self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setMinimumSize(QSize(200, 30))
@@ -5724,18 +5745,6 @@ class Ui_MainWindow(object):
         self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setFont(font)
 
         self.gridLayout_29.addWidget(self.TRAIN__PROFILER_BATCH_RANGE__INPUT, 21, 2, 1, 1)
-
-        self.verticalSpacer_14 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
-
-        self.gridLayout_29.addItem(self.verticalSpacer_14, 22, 0, 1, 1)
-
-        self.TRAIN__ACCUM_ITER__INPUT = QLineEdit(self.frame_28)
-        self.TRAIN__ACCUM_ITER__INPUT.setObjectName(u"TRAIN__ACCUM_ITER__INPUT")
-        self.TRAIN__ACCUM_ITER__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__ACCUM_ITER__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__ACCUM_ITER__INPUT.setFont(font)
-
-        self.gridLayout_29.addWidget(self.TRAIN__ACCUM_ITER__INPUT, 5, 2, 1, 1)
 
         self.TRAIN__LR__INPUT = QLineEdit(self.frame_28)
         self.TRAIN__LR__INPUT.setObjectName(u"TRAIN__LR__INPUT")
@@ -5745,19 +5754,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addWidget(self.TRAIN__LR__INPUT, 2, 2, 1, 1)
 
+        self.TRAIN__ACCUM_ITER__INPUT = QLineEdit(self.frame_28)
+        self.TRAIN__ACCUM_ITER__INPUT.setObjectName(u"TRAIN__ACCUM_ITER__INPUT")
+        self.TRAIN__ACCUM_ITER__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__ACCUM_ITER__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__ACCUM_ITER__INPUT.setFont(font)
+
+        self.gridLayout_29.addWidget(self.TRAIN__ACCUM_ITER__INPUT, 5, 2, 1, 1)
+
         self.label_143 = QLabel(self.frame_28)
         self.label_143.setObjectName(u"label_143")
         self.label_143.setFont(font)
 
         self.gridLayout_29.addWidget(self.label_143, 0, 0, 1, 1)
 
-        self.MODEL__SAVE_CKPT_FREQ__INPUT = QLineEdit(self.frame_28)
-        self.MODEL__SAVE_CKPT_FREQ__INPUT.setObjectName(u"MODEL__SAVE_CKPT_FREQ__INPUT")
-        self.MODEL__SAVE_CKPT_FREQ__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__SAVE_CKPT_FREQ__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__SAVE_CKPT_FREQ__INPUT.setFont(font)
+        self.verticalSpacer_14 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
-        self.gridLayout_29.addWidget(self.MODEL__SAVE_CKPT_FREQ__INPUT, 6, 2, 1, 1)
+        self.gridLayout_29.addItem(self.verticalSpacer_14, 22, 0, 1, 1)
 
         self.TRAIN__BATCH_SIZE__INPUT = QLineEdit(self.frame_28)
         self.TRAIN__BATCH_SIZE__INPUT.setObjectName(u"TRAIN__BATCH_SIZE__INPUT")
@@ -5767,18 +5780,20 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__INPUT, 4, 2, 1, 1)
 
+        self.MODEL__SAVE_CKPT_FREQ__INPUT = QLineEdit(self.frame_28)
+        self.MODEL__SAVE_CKPT_FREQ__INPUT.setObjectName(u"MODEL__SAVE_CKPT_FREQ__INPUT")
+        self.MODEL__SAVE_CKPT_FREQ__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__SAVE_CKPT_FREQ__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__SAVE_CKPT_FREQ__INPUT.setFont(font)
+
+        self.gridLayout_29.addWidget(self.MODEL__SAVE_CKPT_FREQ__INPUT, 6, 2, 1, 1)
+
         self.lr_schel_min_lr_label = QLabel(self.frame_28)
         self.lr_schel_min_lr_label.setObjectName(u"lr_schel_min_lr_label")
         self.lr_schel_min_lr_label.setFont(font)
         self.lr_schel_min_lr_label.setIndent(15)
 
         self.gridLayout_29.addWidget(self.lr_schel_min_lr_label, 10, 0, 1, 1)
-
-        self.label_160 = QLabel(self.frame_28)
-        self.label_160.setObjectName(u"label_160")
-        self.label_160.setFont(font)
-
-        self.gridLayout_29.addWidget(self.label_160, 18, 0, 1, 1)
 
         self.lr_schel_warmupcosine_epochs_label = QLabel(self.frame_28)
         self.lr_schel_warmupcosine_epochs_label.setObjectName(u"lr_schel_warmupcosine_epochs_label")
@@ -5787,17 +5802,24 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addWidget(self.lr_schel_warmupcosine_epochs_label, 15, 0, 1, 1)
 
+        self.label_160 = QLabel(self.frame_28)
+        self.label_160.setObjectName(u"label_160")
+        self.label_160.setFont(font)
+
+        self.gridLayout_29.addWidget(self.label_160, 18, 0, 1, 1)
+
         self.label_149 = QLabel(self.frame_28)
         self.label_149.setObjectName(u"label_149")
         self.label_149.setFont(font)
 
         self.gridLayout_29.addWidget(self.label_149, 4, 0, 1, 1)
 
-        self.label_162 = QLabel(self.frame_28)
-        self.label_162.setObjectName(u"label_162")
-        self.label_162.setFont(font)
+        self.adamw_weight_decay_label = QLabel(self.frame_28)
+        self.adamw_weight_decay_label.setObjectName(u"adamw_weight_decay_label")
+        self.adamw_weight_decay_label.setFont(font)
+        self.adamw_weight_decay_label.setIndent(15)
 
-        self.gridLayout_29.addWidget(self.label_162, 8, 0, 1, 1)
+        self.gridLayout_29.addWidget(self.adamw_weight_decay_label, 3, 0, 1, 1)
 
         self.TRAIN__W_DECAY__INPUT = QLineEdit(self.frame_28)
         self.TRAIN__W_DECAY__INPUT.setObjectName(u"TRAIN__W_DECAY__INPUT")
@@ -5814,19 +5836,11 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addWidget(self.lr_schel_reduce_on_plat_factor_label, 13, 0, 1, 1)
 
-        self.adamw_weight_decay_label = QLabel(self.frame_28)
-        self.adamw_weight_decay_label.setObjectName(u"adamw_weight_decay_label")
-        self.adamw_weight_decay_label.setFont(font)
-        self.adamw_weight_decay_label.setIndent(15)
+        self.label_162 = QLabel(self.frame_28)
+        self.label_162.setObjectName(u"label_162")
+        self.label_162.setFont(font)
 
-        self.gridLayout_29.addWidget(self.adamw_weight_decay_label, 3, 0, 1, 1)
-
-        self.lr_schel_reduce_on_plat_patience_label = QLabel(self.frame_28)
-        self.lr_schel_reduce_on_plat_patience_label.setObjectName(u"lr_schel_reduce_on_plat_patience_label")
-        self.lr_schel_reduce_on_plat_patience_label.setFont(font)
-        self.lr_schel_reduce_on_plat_patience_label.setIndent(15)
-
-        self.gridLayout_29.addWidget(self.lr_schel_reduce_on_plat_patience_label, 12, 0, 1, 1)
+        self.gridLayout_29.addWidget(self.label_162, 8, 0, 1, 1)
 
         self.TRAIN__OPTIMIZER__INFO = QLabel(self.frame_28)
         self.TRAIN__OPTIMIZER__INFO.setObjectName(u"TRAIN__OPTIMIZER__INFO")
@@ -5835,6 +5849,13 @@ class Ui_MainWindow(object):
         self.TRAIN__OPTIMIZER__INFO.setScaledContents(True)
 
         self.gridLayout_29.addWidget(self.TRAIN__OPTIMIZER__INFO, 0, 1, 1, 1)
+
+        self.lr_schel_reduce_on_plat_patience_label = QLabel(self.frame_28)
+        self.lr_schel_reduce_on_plat_patience_label.setObjectName(u"lr_schel_reduce_on_plat_patience_label")
+        self.lr_schel_reduce_on_plat_patience_label.setFont(font)
+        self.lr_schel_reduce_on_plat_patience_label.setIndent(15)
+
+        self.gridLayout_29.addWidget(self.lr_schel_reduce_on_plat_patience_label, 12, 0, 1, 1)
 
         self.TRAIN__LR__INFO = QLabel(self.frame_28)
         self.TRAIN__LR__INFO.setObjectName(u"TRAIN__LR__INFO")
@@ -5868,13 +5889,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addWidget(self.TRAIN__ACCUM_ITER__INFO, 5, 1, 1, 1)
 
-        self.MODEL__SAVE_CKPT_FREQ__INFO = QLabel(self.frame_28)
-        self.MODEL__SAVE_CKPT_FREQ__INFO.setObjectName(u"MODEL__SAVE_CKPT_FREQ__INFO")
-        self.MODEL__SAVE_CKPT_FREQ__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__SAVE_CKPT_FREQ__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__SAVE_CKPT_FREQ__INFO.setScaledContents(True)
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO = QLabel(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__MIN_LR__INFO")
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setScaledContents(True)
 
-        self.gridLayout_29.addWidget(self.MODEL__SAVE_CKPT_FREQ__INFO, 6, 1, 1, 1)
+        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__MIN_LR__INFO, 10, 1, 1, 1)
 
         self.TRAIN__LR_SCHEDULER__NAME__INFO = QLabel(self.frame_28)
         self.TRAIN__LR_SCHEDULER__NAME__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__NAME__INFO")
@@ -5884,21 +5905,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__NAME__INFO, 8, 1, 1, 1)
 
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO = QLabel(self.frame_28)
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__MIN_LR__INFO")
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setScaledContents(True)
+        self.MODEL__SAVE_CKPT_FREQ__INFO = QLabel(self.frame_28)
+        self.MODEL__SAVE_CKPT_FREQ__INFO.setObjectName(u"MODEL__SAVE_CKPT_FREQ__INFO")
+        self.MODEL__SAVE_CKPT_FREQ__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__SAVE_CKPT_FREQ__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__SAVE_CKPT_FREQ__INFO.setScaledContents(True)
 
-        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__MIN_LR__INFO, 10, 1, 1, 1)
-
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO = QLabel(self.frame_28)
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO")
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setScaledContents(True)
-
-        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO, 12, 1, 1, 1)
+        self.gridLayout_29.addWidget(self.MODEL__SAVE_CKPT_FREQ__INFO, 6, 1, 1, 1)
 
         self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO = QLabel(self.frame_28)
         self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO")
@@ -5924,6 +5937,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addWidget(self.TRAIN__PROFILER__INFO, 18, 1, 1, 1)
 
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO = QLabel(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO")
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setScaledContents(True)
+
+        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO, 12, 1, 1, 1)
+
         self.TRAIN__PROFILER_BATCH_RANGE__INFO = QLabel(self.frame_28)
         self.TRAIN__PROFILER_BATCH_RANGE__INFO.setObjectName(u"TRAIN__PROFILER_BATCH_RANGE__INFO")
         self.TRAIN__PROFILER_BATCH_RANGE__INFO.setMinimumSize(QSize(30, 30))
@@ -5931,6 +5952,33 @@ class Ui_MainWindow(object):
         self.TRAIN__PROFILER_BATCH_RANGE__INFO.setScaledContents(True)
 
         self.gridLayout_29.addWidget(self.TRAIN__PROFILER_BATCH_RANGE__INFO, 21, 1, 1, 1)
+
+        self.TRAIN__VERBOSE__LABEL = QLabel(self.frame_28)
+        self.TRAIN__VERBOSE__LABEL.setObjectName(u"TRAIN__VERBOSE__LABEL")
+        self.TRAIN__VERBOSE__LABEL.setFont(font)
+
+        self.gridLayout_29.addWidget(self.TRAIN__VERBOSE__LABEL, 23, 0, 1, 1)
+
+        self.TRAIN__VERBOSE__INPUT = QComboBox(self.frame_28)
+        self.TRAIN__VERBOSE__INPUT.addItem("")
+        self.TRAIN__VERBOSE__INPUT.addItem("")
+        self.TRAIN__VERBOSE__INPUT.setObjectName(u"TRAIN__VERBOSE__INPUT")
+        self.TRAIN__VERBOSE__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__VERBOSE__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__VERBOSE__INPUT.setFont(font)
+
+        self.gridLayout_29.addWidget(self.TRAIN__VERBOSE__INPUT, 23, 2, 1, 1)
+
+        self.TRAIN__VERBOSE__INFO = QLabel(self.frame_28)
+        self.TRAIN__VERBOSE__INFO.setObjectName(u"TRAIN__VERBOSE__INFO")
+        self.TRAIN__VERBOSE__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__VERBOSE__INFO.setMaximumSize(QSize(30, 30))
+        font6 = QFont()
+        font6.setPointSize(12)
+        self.TRAIN__VERBOSE__INFO.setFont(font6)
+        self.TRAIN__VERBOSE__INFO.setScaledContents(True)
+
+        self.gridLayout_29.addWidget(self.TRAIN__VERBOSE__INFO, 23, 1, 1, 1)
 
 
         self.gridLayout_4.addWidget(self.frame_28, 14, 0, 1, 1)
@@ -6711,7 +6759,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_6 = QWidget()
         self.scrollAreaWidgetContents_6.setObjectName(u"scrollAreaWidgetContents_6")
-        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 912, 337))
+        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 565, 337))
         self.gridLayout_18 = QGridLayout(self.scrollAreaWidgetContents_6)
         self.gridLayout_18.setObjectName(u"gridLayout_18")
         self.verticalSpacer_8 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -7774,7 +7822,7 @@ class Ui_MainWindow(object):
         self.test_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 915, 2070))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 881, 2070))
         self.gridLayout_37 = QGridLayout(self.scrollAreaWidgetContents_5)
         self.gridLayout_37.setObjectName(u"gridLayout_37")
         self.test_advanced_options_frame = QFrame(self.scrollAreaWidgetContents_5)
@@ -9172,7 +9220,7 @@ class Ui_MainWindow(object):
         self.test_workflow_specific_tab.setObjectName(u"test_workflow_specific_tab")
         self.frame_39 = QFrame(self.test_workflow_specific_tab)
         self.frame_39.setObjectName(u"frame_39")
-        self.frame_39.setGeometry(QRect(-1, -1, 930, 335))
+        self.frame_39.setGeometry(QRect(-1, -1, 928, 302))
         self.frame_39.setFrameShape(QFrame.NoFrame)
         self.frame_39.setFrameShadow(QFrame.Raised)
         self.verticalLayout_11 = QVBoxLayout(self.frame_39)
@@ -9381,7 +9429,7 @@ class Ui_MainWindow(object):
         self.scrollArea_9.setWidgetResizable(True)
         self.scrollAreaWidgetContents_13 = QWidget()
         self.scrollAreaWidgetContents_13.setObjectName(u"scrollAreaWidgetContents_13")
-        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 633, 1327))
+        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 633, 1363))
         self.gridLayout_44 = QGridLayout(self.scrollAreaWidgetContents_13)
         self.gridLayout_44.setObjectName(u"gridLayout_44")
         self.label_86 = QLabel(self.scrollAreaWidgetContents_13)
@@ -10005,18 +10053,18 @@ class Ui_MainWindow(object):
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INPUT, 2, 3, 1, 1)
 
-        self.inst_seg_moph_op_rad_label = QLabel(self.frame_43)
-        self.inst_seg_moph_op_rad_label.setObjectName(u"inst_seg_moph_op_rad_label")
-        self.inst_seg_moph_op_rad_label.setFont(font)
-
-        self.gridLayout_46.addWidget(self.inst_seg_moph_op_rad_label, 2, 1, 1, 1)
-
         self.inst_seg_small_obj_fil_before_size_label = QLabel(self.frame_43)
         self.inst_seg_small_obj_fil_before_size_label.setObjectName(u"inst_seg_small_obj_fil_before_size_label")
         self.inst_seg_small_obj_fil_before_size_label.setFont(font)
         self.inst_seg_small_obj_fil_before_size_label.setIndent(15)
 
         self.gridLayout_46.addWidget(self.inst_seg_small_obj_fil_before_size_label, 8, 1, 1, 1)
+
+        self.inst_seg_moph_op_rad_label = QLabel(self.frame_43)
+        self.inst_seg_moph_op_rad_label.setObjectName(u"inst_seg_moph_op_rad_label")
+        self.inst_seg_moph_op_rad_label.setFont(font)
+
+        self.gridLayout_46.addWidget(self.inst_seg_moph_op_rad_label, 2, 1, 1, 1)
 
         self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INPUT = QLineEdit(self.frame_43)
         self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INPUT")
@@ -10036,18 +10084,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INPUT, 4, 3, 1, 1)
 
-        self.inst_seg_ero_dil_fore_label = QLabel(self.frame_43)
-        self.inst_seg_ero_dil_fore_label.setObjectName(u"inst_seg_ero_dil_fore_label")
-        self.inst_seg_ero_dil_fore_label.setFont(font)
-
-        self.gridLayout_46.addWidget(self.inst_seg_ero_dil_fore_label, 4, 1, 1, 1)
-
-        self.inst_seg_moph_op_label = QLabel(self.frame_43)
-        self.inst_seg_moph_op_label.setObjectName(u"inst_seg_moph_op_label")
-        self.inst_seg_moph_op_label.setFont(font)
-
-        self.gridLayout_46.addWidget(self.inst_seg_moph_op_label, 1, 1, 1, 1)
-
         self.inst_seg_fore_dil_label = QLabel(self.frame_43)
         self.inst_seg_fore_dil_label.setObjectName(u"inst_seg_fore_dil_label")
         self.inst_seg_fore_dil_label.setFont(font)
@@ -10063,6 +10099,38 @@ class Ui_MainWindow(object):
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INPUT, 5, 3, 1, 1)
 
+        self.inst_seg_ero_dil_fore_label = QLabel(self.frame_43)
+        self.inst_seg_ero_dil_fore_label.setObjectName(u"inst_seg_ero_dil_fore_label")
+        self.inst_seg_ero_dil_fore_label.setFont(font)
+
+        self.gridLayout_46.addWidget(self.inst_seg_ero_dil_fore_label, 4, 1, 1, 1)
+
+        self.inst_seg_moph_op_label = QLabel(self.frame_43)
+        self.inst_seg_moph_op_label.setObjectName(u"inst_seg_moph_op_label")
+        self.inst_seg_moph_op_label.setFont(font)
+
+        self.gridLayout_46.addWidget(self.inst_seg_moph_op_label, 1, 1, 1, 1)
+
+        self.inst_seg_small_obj_fil_before_label = QLabel(self.frame_43)
+        self.inst_seg_small_obj_fil_before_label.setObjectName(u"inst_seg_small_obj_fil_before_label")
+        self.inst_seg_small_obj_fil_before_label.setFont(font)
+
+        self.gridLayout_46.addWidget(self.inst_seg_small_obj_fil_before_label, 7, 1, 1, 1)
+
+        self.inst_seg_save_water_files_label = QLabel(self.frame_43)
+        self.inst_seg_save_water_files_label.setObjectName(u"inst_seg_save_water_files_label")
+        self.inst_seg_save_water_files_label.setFont(font)
+
+        self.gridLayout_46.addWidget(self.inst_seg_save_water_files_label, 11, 1, 1, 1)
+
+        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT = QLineEdit(self.frame_43)
+        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT")
+        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT.setMinimumSize(QSize(200, 30))
+        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT.setMaximumSize(QSize(200, 30))
+        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT.setFont(font)
+
+        self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT, 1, 3, 1, 1)
+
         self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INPUT = QComboBox(self.frame_43)
         self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INPUT.addItem("")
         self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INPUT.addItem("")
@@ -10073,25 +10141,9 @@ class Ui_MainWindow(object):
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INPUT, 7, 3, 1, 1)
 
-        self.inst_seg_save_water_files_label = QLabel(self.frame_43)
-        self.inst_seg_save_water_files_label.setObjectName(u"inst_seg_save_water_files_label")
-        self.inst_seg_save_water_files_label.setFont(font)
+        self.horizontalSpacer_47 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.gridLayout_46.addWidget(self.inst_seg_save_water_files_label, 11, 1, 1, 1)
-
-        self.inst_seg_small_obj_fil_before_label = QLabel(self.frame_43)
-        self.inst_seg_small_obj_fil_before_label.setObjectName(u"inst_seg_small_obj_fil_before_label")
-        self.inst_seg_small_obj_fil_before_label.setFont(font)
-
-        self.gridLayout_46.addWidget(self.inst_seg_small_obj_fil_before_label, 7, 1, 1, 1)
-
-        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT = QLineEdit(self.frame_43)
-        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT")
-        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT.setMinimumSize(QSize(200, 30))
-        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT.setFont(font)
-
-        self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT, 1, 3, 1, 1)
+        self.gridLayout_46.addItem(self.horizontalSpacer_47, 1, 4, 1, 1)
 
         self.PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INPUT = QLineEdit(self.frame_43)
         self.PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INPUT")
@@ -10100,10 +10152,6 @@ class Ui_MainWindow(object):
         self.PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INPUT.setFont(font)
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INPUT, 6, 3, 1, 1)
-
-        self.horizontalSpacer_47 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.gridLayout_46.addItem(self.horizontalSpacer_47, 1, 4, 1, 1)
 
         self.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INPUT = QComboBox(self.frame_43)
         self.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INPUT.addItem("")
@@ -10115,14 +10163,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INPUT, 11, 3, 1, 1)
 
-        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO = QLabel(self.frame_43)
-        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO")
-        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO.setMinimumSize(QSize(30, 30))
-        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO.setScaledContents(True)
-
-        self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO, 1, 2, 1, 1)
-
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INFO = QLabel(self.frame_43)
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INFO")
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INFO.setMinimumSize(QSize(30, 30))
@@ -10131,13 +10171,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INFO, 2, 2, 1, 1)
 
-        self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO = QLabel(self.frame_43)
-        self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO")
-        self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO.setMinimumSize(QSize(30, 30))
-        self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO.setScaledContents(True)
+        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO = QLabel(self.frame_43)
+        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO")
+        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO.setMinimumSize(QSize(30, 30))
+        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO.setMaximumSize(QSize(30, 30))
+        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO.setScaledContents(True)
 
-        self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO, 4, 2, 1, 1)
+        self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO, 1, 2, 1, 1)
 
         self.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INFO = QLabel(self.frame_43)
         self.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INFO")
@@ -10155,13 +10195,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INFO, 6, 2, 1, 1)
 
-        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO = QLabel(self.frame_43)
-        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO")
-        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO.setMinimumSize(QSize(30, 30))
-        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO.setScaledContents(True)
+        self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO = QLabel(self.frame_43)
+        self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO")
+        self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO.setMinimumSize(QSize(30, 30))
+        self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO.setMaximumSize(QSize(30, 30))
+        self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO.setScaledContents(True)
 
-        self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO, 7, 2, 1, 1)
+        self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO, 4, 2, 1, 1)
 
         self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INFO = QLabel(self.frame_43)
         self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INFO")
@@ -10178,6 +10218,38 @@ class Ui_MainWindow(object):
         self.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INFO.setScaledContents(True)
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INFO, 11, 2, 1, 1)
+
+        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO = QLabel(self.frame_43)
+        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO")
+        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO.setMinimumSize(QSize(30, 30))
+        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO.setMaximumSize(QSize(30, 30))
+        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO.setScaledContents(True)
+
+        self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO, 7, 2, 1, 1)
+
+        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__LABEL = QLabel(self.frame_43)
+        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__LABEL.setObjectName(u"PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__LABEL")
+        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__LABEL.setFont(font)
+
+        self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__LABEL, 12, 1, 1, 1)
+
+        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INPUT = QComboBox(self.frame_43)
+        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INPUT.addItem("")
+        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INPUT.addItem("")
+        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INPUT")
+        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INPUT.setMinimumSize(QSize(200, 30))
+        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INPUT.setMaximumSize(QSize(200, 30))
+        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INPUT.setFont(font)
+
+        self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INPUT, 12, 3, 1, 1)
+
+        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INFO = QLabel(self.frame_43)
+        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INFO")
+        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INFO.setMinimumSize(QSize(30, 30))
+        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INFO.setMaximumSize(QSize(30, 30))
+        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INFO.setScaledContents(True)
+
+        self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INFO, 12, 2, 1, 1)
 
 
         self.gridLayout_44.addWidget(self.frame_43, 5, 0, 1, 1)
@@ -10234,7 +10306,7 @@ class Ui_MainWindow(object):
         self.scrollArea_10.setWidgetResizable(True)
         self.scrollAreaWidgetContents_14 = QWidget()
         self.scrollAreaWidgetContents_14.setObjectName(u"scrollAreaWidgetContents_14")
-        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 597, 1020))
+        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 597, 1056))
         self.gridLayout_47 = QGridLayout(self.scrollAreaWidgetContents_14)
         self.gridLayout_47.setObjectName(u"gridLayout_47")
         self.label_100 = QLabel(self.scrollAreaWidgetContents_14)
@@ -10306,6 +10378,77 @@ class Ui_MainWindow(object):
         self.frame_54.setFrameShadow(QFrame.Raised)
         self.gridLayout_62 = QGridLayout(self.frame_54)
         self.gridLayout_62.setObjectName(u"gridLayout_62")
+        self.TEST__DET_EXCLUDE_BORDER__INPUT = QComboBox(self.frame_54)
+        self.TEST__DET_EXCLUDE_BORDER__INPUT.addItem("")
+        self.TEST__DET_EXCLUDE_BORDER__INPUT.addItem("")
+        self.TEST__DET_EXCLUDE_BORDER__INPUT.setObjectName(u"TEST__DET_EXCLUDE_BORDER__INPUT")
+        self.TEST__DET_EXCLUDE_BORDER__INPUT.setMinimumSize(QSize(200, 30))
+        self.TEST__DET_EXCLUDE_BORDER__INPUT.setMaximumSize(QSize(200, 30))
+        self.TEST__DET_EXCLUDE_BORDER__INPUT.setFont(font6)
+
+        self.gridLayout_62.addWidget(self.TEST__DET_EXCLUDE_BORDER__INPUT, 9, 2, 1, 1)
+
+        self.TEST__DET_MIN_TH_TO_BE_PEAK__INFO = QLabel(self.frame_54)
+        self.TEST__DET_MIN_TH_TO_BE_PEAK__INFO.setObjectName(u"TEST__DET_MIN_TH_TO_BE_PEAK__INFO")
+        self.TEST__DET_MIN_TH_TO_BE_PEAK__INFO.setMinimumSize(QSize(30, 30))
+        self.TEST__DET_MIN_TH_TO_BE_PEAK__INFO.setMaximumSize(QSize(30, 30))
+        self.TEST__DET_MIN_TH_TO_BE_PEAK__INFO.setScaledContents(True)
+
+        self.gridLayout_62.addWidget(self.TEST__DET_MIN_TH_TO_BE_PEAK__INFO, 7, 1, 1, 1)
+
+        self.det_min_th_to_be_peak_label = QLabel(self.frame_54)
+        self.det_min_th_to_be_peak_label.setObjectName(u"det_min_th_to_be_peak_label")
+        self.det_min_th_to_be_peak_label.setFont(font)
+
+        self.gridLayout_62.addWidget(self.det_min_th_to_be_peak_label, 7, 0, 1, 1)
+
+        self.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT = QLineEdit(self.frame_54)
+        self.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT.setObjectName(u"TEST__DET_MIN_TH_TO_BE_PEAK__INPUT")
+        self.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT.setMinimumSize(QSize(200, 30))
+        self.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT.setMaximumSize(QSize(200, 30))
+        self.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT.setFont(font)
+
+        self.gridLayout_62.addWidget(self.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT, 7, 2, 1, 1)
+
+        self.TEST__DET_EXCLUDE_BORDER__LABEL = QLabel(self.frame_54)
+        self.TEST__DET_EXCLUDE_BORDER__LABEL.setObjectName(u"TEST__DET_EXCLUDE_BORDER__LABEL")
+        self.TEST__DET_EXCLUDE_BORDER__LABEL.setFont(font6)
+
+        self.gridLayout_62.addWidget(self.TEST__DET_EXCLUDE_BORDER__LABEL, 9, 0, 1, 1)
+
+        self.TEST__DET_EXCLUDE_BORDER__INFO = QLabel(self.frame_54)
+        self.TEST__DET_EXCLUDE_BORDER__INFO.setObjectName(u"TEST__DET_EXCLUDE_BORDER__INFO")
+        self.TEST__DET_EXCLUDE_BORDER__INFO.setMinimumSize(QSize(30, 30))
+        self.TEST__DET_EXCLUDE_BORDER__INFO.setMaximumSize(QSize(30, 30))
+        self.TEST__DET_EXCLUDE_BORDER__INFO.setFont(font6)
+        self.TEST__DET_EXCLUDE_BORDER__INFO.setScaledContents(True)
+
+        self.gridLayout_62.addWidget(self.TEST__DET_EXCLUDE_BORDER__INFO, 9, 1, 1, 1)
+
+        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INFO = QLabel(self.frame_54)
+        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INFO.setObjectName(u"TEST__DET_BLOB_LOG_MAX_SIGMA__INFO")
+        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INFO.setMinimumSize(QSize(30, 30))
+        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INFO.setMaximumSize(QSize(30, 30))
+        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INFO.setScaledContents(True)
+
+        self.gridLayout_62.addWidget(self.TEST__DET_BLOB_LOG_MAX_SIGMA__INFO, 4, 1, 1, 1)
+
+        self.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO = QLabel(self.frame_54)
+        self.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO.setObjectName(u"TEST__DET_BLOB_LOG_NUM_SIGMA__INFO")
+        self.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO.setMinimumSize(QSize(30, 30))
+        self.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO.setMaximumSize(QSize(30, 30))
+        self.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO.setScaledContents(True)
+
+        self.gridLayout_62.addWidget(self.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO, 5, 1, 1, 1)
+
+        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT = QLineEdit(self.frame_54)
+        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT.setObjectName(u"TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT")
+        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT.setMinimumSize(QSize(200, 30))
+        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT.setMaximumSize(QSize(200, 30))
+        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT.setFont(font)
+
+        self.gridLayout_62.addWidget(self.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT, 4, 2, 1, 1)
+
         self.TEST__DET_BLOB_LOG_MAX_SIGMA__LABEL = QLabel(self.frame_54)
         self.TEST__DET_BLOB_LOG_MAX_SIGMA__LABEL.setObjectName(u"TEST__DET_BLOB_LOG_MAX_SIGMA__LABEL")
         self.TEST__DET_BLOB_LOG_MAX_SIGMA__LABEL.setFont(font)
@@ -10321,25 +10464,9 @@ class Ui_MainWindow(object):
 
         self.gridLayout_62.addWidget(self.TEST__DET_BLOB_LOG_MIN_SIGMA__INPUT, 3, 2, 1, 1)
 
-        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT = QLineEdit(self.frame_54)
-        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT.setObjectName(u"TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT")
-        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT.setMinimumSize(QSize(200, 30))
-        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT.setFont(font)
-
-        self.gridLayout_62.addWidget(self.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT, 4, 2, 1, 1)
-
         self.horizontalSpacer_61 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.gridLayout_62.addItem(self.horizontalSpacer_61, 0, 3, 1, 1)
-
-        self.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT = QLineEdit(self.frame_54)
-        self.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT.setObjectName(u"TEST__DET_MIN_TH_TO_BE_PEAK__INPUT")
-        self.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT.setMinimumSize(QSize(200, 30))
-        self.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT.setFont(font)
-
-        self.gridLayout_62.addWidget(self.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT, 1, 2, 1, 1)
 
         self.TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT = QLineEdit(self.frame_54)
         self.TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT.setObjectName(u"TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT")
@@ -10348,12 +10475,6 @@ class Ui_MainWindow(object):
         self.TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT.setFont(font)
 
         self.gridLayout_62.addWidget(self.TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT, 5, 2, 1, 1)
-
-        self.det_min_th_to_be_peak_label = QLabel(self.frame_54)
-        self.det_min_th_to_be_peak_label.setObjectName(u"det_min_th_to_be_peak_label")
-        self.det_min_th_to_be_peak_label.setFont(font)
-
-        self.gridLayout_62.addWidget(self.det_min_th_to_be_peak_label, 1, 0, 1, 1)
 
         self.TEST__DET_POINT_CREATION_FUNCTION__INPUT = QComboBox(self.frame_54)
         self.TEST__DET_POINT_CREATION_FUNCTION__INPUT.addItem("")
@@ -10371,13 +10492,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout_62.addWidget(self.TEST__DET_POINT_CREATION_FUNCTION__LABEL, 0, 0, 1, 1)
 
-        self.TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL = QLabel(self.frame_54)
-        self.TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL.setObjectName(u"TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL")
-        self.TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL.setFont(font)
-        self.TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL.setIndent(15)
-
-        self.gridLayout_62.addWidget(self.TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL, 5, 0, 1, 1)
-
         self.TEST__DET_BLOB_LOG_MIN_SIGMA__LABEL = QLabel(self.frame_54)
         self.TEST__DET_BLOB_LOG_MIN_SIGMA__LABEL.setObjectName(u"TEST__DET_BLOB_LOG_MIN_SIGMA__LABEL")
         self.TEST__DET_BLOB_LOG_MIN_SIGMA__LABEL.setFont(font)
@@ -10385,13 +10499,12 @@ class Ui_MainWindow(object):
 
         self.gridLayout_62.addWidget(self.TEST__DET_BLOB_LOG_MIN_SIGMA__LABEL, 3, 0, 1, 1)
 
-        self.TEST__DET_MIN_TH_TO_BE_PEAK__INFO = QLabel(self.frame_54)
-        self.TEST__DET_MIN_TH_TO_BE_PEAK__INFO.setObjectName(u"TEST__DET_MIN_TH_TO_BE_PEAK__INFO")
-        self.TEST__DET_MIN_TH_TO_BE_PEAK__INFO.setMinimumSize(QSize(30, 30))
-        self.TEST__DET_MIN_TH_TO_BE_PEAK__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__DET_MIN_TH_TO_BE_PEAK__INFO.setScaledContents(True)
+        self.TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL = QLabel(self.frame_54)
+        self.TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL.setObjectName(u"TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL")
+        self.TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL.setFont(font)
+        self.TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL.setIndent(15)
 
-        self.gridLayout_62.addWidget(self.TEST__DET_MIN_TH_TO_BE_PEAK__INFO, 1, 1, 1, 1)
+        self.gridLayout_62.addWidget(self.TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL, 5, 0, 1, 1)
 
         self.TEST__DET_POINT_CREATION_FUNCTION__INFO = QLabel(self.frame_54)
         self.TEST__DET_POINT_CREATION_FUNCTION__INFO.setObjectName(u"TEST__DET_POINT_CREATION_FUNCTION__INFO")
@@ -10409,48 +10522,27 @@ class Ui_MainWindow(object):
 
         self.gridLayout_62.addWidget(self.TEST__DET_BLOB_LOG_MIN_SIGMA__INFO, 3, 1, 1, 1)
 
-        self.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO = QLabel(self.frame_54)
-        self.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO.setObjectName(u"TEST__DET_BLOB_LOG_NUM_SIGMA__INFO")
-        self.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO.setMinimumSize(QSize(30, 30))
-        self.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO.setScaledContents(True)
+        self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__LABEL = QLabel(self.frame_54)
+        self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__LABEL.setObjectName(u"TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__LABEL")
+        self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__LABEL.setFont(font)
+        self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__LABEL.setIndent(15)
 
-        self.gridLayout_62.addWidget(self.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO, 5, 1, 1, 1)
+        self.gridLayout_62.addWidget(self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__LABEL, 6, 0, 1, 1)
 
-        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INFO = QLabel(self.frame_54)
-        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INFO.setObjectName(u"TEST__DET_BLOB_LOG_MAX_SIGMA__INFO")
-        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INFO.setMinimumSize(QSize(30, 30))
-        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INFO.setScaledContents(True)
+        self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INPUT = QLineEdit(self.frame_54)
+        self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INPUT.setObjectName(u"TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INPUT")
+        self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INPUT.setMinimumSize(QSize(200, 30))
+        self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INPUT.setMaximumSize(QSize(200, 30))
+        self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INPUT.setFont(font)
 
-        self.gridLayout_62.addWidget(self.TEST__DET_BLOB_LOG_MAX_SIGMA__INFO, 4, 1, 1, 1)
+        self.gridLayout_62.addWidget(self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INPUT, 6, 2, 1, 1)
 
-        self.TEST__DET_EXCLUDE_BORDER__LABEL = QLabel(self.frame_54)
-        self.TEST__DET_EXCLUDE_BORDER__LABEL.setObjectName(u"TEST__DET_EXCLUDE_BORDER__LABEL")
-        font6 = QFont()
-        font6.setPointSize(12)
-        self.TEST__DET_EXCLUDE_BORDER__LABEL.setFont(font6)
+        self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INFO = QLabel(self.frame_54)
+        self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INFO.setObjectName(u"TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INFO")
+        self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INFO.setMinimumSize(QSize(30, 30))
+        self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INFO.setMaximumSize(QSize(30, 30))
 
-        self.gridLayout_62.addWidget(self.TEST__DET_EXCLUDE_BORDER__LABEL, 2, 0, 1, 1)
-
-        self.TEST__DET_EXCLUDE_BORDER__INPUT = QComboBox(self.frame_54)
-        self.TEST__DET_EXCLUDE_BORDER__INPUT.addItem("")
-        self.TEST__DET_EXCLUDE_BORDER__INPUT.addItem("")
-        self.TEST__DET_EXCLUDE_BORDER__INPUT.setObjectName(u"TEST__DET_EXCLUDE_BORDER__INPUT")
-        self.TEST__DET_EXCLUDE_BORDER__INPUT.setMinimumSize(QSize(200, 30))
-        self.TEST__DET_EXCLUDE_BORDER__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__DET_EXCLUDE_BORDER__INPUT.setFont(font6)
-
-        self.gridLayout_62.addWidget(self.TEST__DET_EXCLUDE_BORDER__INPUT, 2, 2, 1, 1)
-
-        self.TEST__DET_EXCLUDE_BORDER__INFO = QLabel(self.frame_54)
-        self.TEST__DET_EXCLUDE_BORDER__INFO.setObjectName(u"TEST__DET_EXCLUDE_BORDER__INFO")
-        self.TEST__DET_EXCLUDE_BORDER__INFO.setMinimumSize(QSize(30, 30))
-        self.TEST__DET_EXCLUDE_BORDER__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__DET_EXCLUDE_BORDER__INFO.setFont(font6)
-        self.TEST__DET_EXCLUDE_BORDER__INFO.setScaledContents(True)
-
-        self.gridLayout_62.addWidget(self.TEST__DET_EXCLUDE_BORDER__INFO, 2, 1, 1, 1)
+        self.gridLayout_62.addWidget(self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INFO, 6, 1, 1, 1)
 
 
         self.gridLayout_47.addWidget(self.frame_54, 1, 0, 1, 1)
@@ -11534,7 +11626,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.biapy_logo_label.setText("")
-        self.biapy_version.setText(QCoreApplication.translate("MainWindow", u"Version 3.3.1 - GUI: 1.0.0", None))
+        self.biapy_version.setText(QCoreApplication.translate("MainWindow", u"Version 3.3.8 - GUI: 1.0.0", None))
 #if QT_CONFIG(tooltip)
         self.bn_home.setToolTip("")
 #endif // QT_CONFIG(tooltip)
@@ -11647,13 +11739,18 @@ class Ui_MainWindow(object):
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Math seed", None))
         self.SYSTEM__SEED__INPUT.setText(QCoreApplication.translate("MainWindow", u"0", None))
 #if QT_CONFIG(tooltip)
-        self.SYSTEM__NUM_CPUS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Maximum number of workers to load data in parallel. Set it to &quot;-1&quot; to set any limit. Normally a few cores will be used in this last case, as the biggest calculations will be on the GPU.</span></p></body></html>", None))
+        self.SYSTEM__NUM_WORKERS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Maximum number of workers to load data in parallel. You can disable this option by setting 0.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.SYSTEM__NUM_CPUS__INFO.setText("")
+        self.SYSTEM__NUM_WORKERS__INFO.setText("")
 #if QT_CONFIG(tooltip)
-        self.SYSTEM__SEED__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Math seed to use. </span><span style=\" font-size:12pt; font-weight:600;\">Must be an integer</span></p></body></html>", None))
+        self.SYSTEM__SEED__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Math seed to generate random numbers. Used to ensure reproducibility in the results. </span><span style=\" font-size:12pt; font-weight:600;\">Must be an integer</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.SYSTEM__SEED__INFO.setText("")
+        self.SYSTEM__NUM_CPUS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Number of CPUs", None))
+#if QT_CONFIG(tooltip)
+        self.SYSTEM__NUM_CPUS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Maximum number of CPUs to use. Set it to &quot;-1&quot; to not set a limit.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.SYSTEM__NUM_CPUS__INFO.setText("")
         self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
         self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
 
@@ -11790,7 +11887,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"Patch size", None))
 #if QT_CONFIG(tooltip)
-        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to reshape de dimensions that do not satisfy the patch shape selected by padding it with reflection.</span></p></body></html>", None))
+        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to reshape the dimensions that do not satisfy the patch shape selected by padding it with reflection.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO.setText("")
 #if QT_CONFIG(tooltip)
@@ -12393,10 +12490,8 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.da_missing_sections_iteration_range_label.setText(QCoreApplication.translate("MainWindow", u"Missing sections iteration range", None))
         self.AUGMENTOR__AFFINE_MODE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"constant", None))
-        self.AUGMENTOR__AFFINE_MODE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"edge", None))
-        self.AUGMENTOR__AFFINE_MODE__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"symmetric", None))
-        self.AUGMENTOR__AFFINE_MODE__INPUT.setItemText(3, QCoreApplication.translate("MainWindow", u"reflect", None))
-        self.AUGMENTOR__AFFINE_MODE__INPUT.setItemText(4, QCoreApplication.translate("MainWindow", u"wrap", None))
+        self.AUGMENTOR__AFFINE_MODE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"reflect", None))
+        self.AUGMENTOR__AFFINE_MODE__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"wrap", None))
 
 #if QT_CONFIG(tooltip)
         self.da_cutout_number_iterations_label.setToolTip("")
@@ -13134,84 +13229,84 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__TRAIN__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
 
         self.label_24.setText(QCoreApplication.translate("MainWindow", u"Train preprocessing", None))
+#if QT_CONFIG(tooltip)
+        self.profiler_batch_range_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.profiler_batch_range_label.setText(QCoreApplication.translate("MainWindow", u"Profiler batch range", None))
         self.TRAIN__LR_SCHEDULER__NAME__INPUT.setItemText(0, "")
         self.TRAIN__LR_SCHEDULER__NAME__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"warmupcosine", None))
         self.TRAIN__LR_SCHEDULER__NAME__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"reduceonplateau", None))
         self.TRAIN__LR_SCHEDULER__NAME__INPUT.setItemText(3, QCoreApplication.translate("MainWindow", u"onecycle", None))
 
-#if QT_CONFIG(tooltip)
-        self.profiler_batch_range_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.profiler_batch_range_label.setText(QCoreApplication.translate("MainWindow", u"Profiler batch range", None))
         self.TRAIN__PROFILER__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
         self.TRAIN__PROFILER__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
 
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1", None))
-#if QT_CONFIG(tooltip)
-        self.label_151.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_151.setText(QCoreApplication.translate("MainWindow", u"Learning rate", None))
 #if QT_CONFIG(tooltip)
         self.MODEL__SAVE_CKPT_FREQ__LABEL.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.MODEL__SAVE_CKPT_FREQ__LABEL.setText(QCoreApplication.translate("MainWindow", u"Save checkpoint frequency", None))
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1", None))
 #if QT_CONFIG(tooltip)
         self.label_114.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.label_114.setText(QCoreApplication.translate("MainWindow", u"Accumulate iterations", None))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1", None))
+#if QT_CONFIG(tooltip)
+        self.label_151.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_151.setText(QCoreApplication.translate("MainWindow", u"Learning rate", None))
         self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.5", None))
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1", None))
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1", None))
         self.TRAIN__OPTIMIZER__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"ADAM", None))
         self.TRAIN__OPTIMIZER__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"SGD", None))
         self.TRAIN__OPTIMIZER__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"ADAMW", None))
 
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1", None))
         self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setText(QCoreApplication.translate("MainWindow", u"10, 100", None))
-        self.TRAIN__ACCUM_ITER__INPUT.setText(QCoreApplication.translate("MainWindow", u"1", None))
         self.TRAIN__LR__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.0001", None))
+        self.TRAIN__ACCUM_ITER__INPUT.setText(QCoreApplication.translate("MainWindow", u"1", None))
 #if QT_CONFIG(tooltip)
         self.label_143.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.label_143.setText(QCoreApplication.translate("MainWindow", u"Optimizer", None))
-        self.MODEL__SAVE_CKPT_FREQ__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1", None))
         self.TRAIN__BATCH_SIZE__INPUT.setText(QCoreApplication.translate("MainWindow", u"2", None))
+        self.MODEL__SAVE_CKPT_FREQ__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1", None))
 #if QT_CONFIG(tooltip)
         self.lr_schel_min_lr_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.lr_schel_min_lr_label.setText(QCoreApplication.translate("MainWindow", u"Minimum learning rate", None))
 #if QT_CONFIG(tooltip)
-        self.label_160.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_160.setText(QCoreApplication.translate("MainWindow", u"Profiler", None))
-#if QT_CONFIG(tooltip)
         self.lr_schel_warmupcosine_epochs_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.lr_schel_warmupcosine_epochs_label.setText(QCoreApplication.translate("MainWindow", u"Warmup cosine decay epochs", None))
+#if QT_CONFIG(tooltip)
+        self.label_160.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_160.setText(QCoreApplication.translate("MainWindow", u"Profiler", None))
 #if QT_CONFIG(tooltip)
         self.label_149.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.label_149.setText(QCoreApplication.translate("MainWindow", u"Batch size", None))
 #if QT_CONFIG(tooltip)
-        self.label_162.setToolTip("")
+        self.adamw_weight_decay_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
-        self.label_162.setText(QCoreApplication.translate("MainWindow", u"Learning rate scheduler name", None))
+        self.adamw_weight_decay_label.setText(QCoreApplication.translate("MainWindow", u"Weight decay", None))
         self.TRAIN__W_DECAY__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.004", None))
 #if QT_CONFIG(tooltip)
         self.lr_schel_reduce_on_plat_factor_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.lr_schel_reduce_on_plat_factor_label.setText(QCoreApplication.translate("MainWindow", u"Reduce on plateau factor", None))
 #if QT_CONFIG(tooltip)
-        self.adamw_weight_decay_label.setToolTip("")
+        self.label_162.setToolTip("")
 #endif // QT_CONFIG(tooltip)
-        self.adamw_weight_decay_label.setText(QCoreApplication.translate("MainWindow", u"Weight decay", None))
-#if QT_CONFIG(tooltip)
-        self.lr_schel_reduce_on_plat_patience_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.lr_schel_reduce_on_plat_patience_label.setText(QCoreApplication.translate("MainWindow", u"Reduce on plateau patience", None))
+        self.label_162.setText(QCoreApplication.translate("MainWindow", u"Learning rate scheduler name", None))
 #if QT_CONFIG(tooltip)
         self.TRAIN__OPTIMIZER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Optimizer to use during the model training.  Optimizers are algorithms or methods used to minimize an error function (the loss function) </span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.TRAIN__OPTIMIZER__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.lr_schel_reduce_on_plat_patience_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.lr_schel_reduce_on_plat_patience_label.setText(QCoreApplication.translate("MainWindow", u"Reduce on plateau patience", None))
 #if QT_CONFIG(tooltip)
         self.TRAIN__LR__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Learning rate during training phase. The learning rate is a hyperparameter that controls how much to change the model in response to the estimated error each time the model weights are updated. Choosing the learning rate is challenging as a value too small may result in a long training process that could get stuck, whereas a value too large may result in learning a sub-optimal set of weights too fast or an unstable training process</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -13229,22 +13324,18 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.TRAIN__ACCUM_ITER__INFO.setText("")
 #if QT_CONFIG(tooltip)
-        self.MODEL__SAVE_CKPT_FREQ__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Epochs to save a checkpoint of the model apart from the ones saved with LOAD_CHECKPOINT_ONLY_WEIGHTS. Set it to -1 to not do it.</span></p></body></html>", None))
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Lower bound on the learning rate used in 'warmupcosine' and 'reduceonplateau'. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive float</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.MODEL__SAVE_CKPT_FREQ__INFO.setText("")
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setText("")
 #if QT_CONFIG(tooltip)
         self.TRAIN__LR_SCHEDULER__NAME__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Set up a learning rate scheduler. A Learning rate scheduler is a predefined framework that adjusts the learning rate between epochs or iterations as the training progresses. Leave it with the first option blank to avoid applying it. Three options available: 'warmupcosine', 'reduceonplateau', 'onecycle'. </span></p><p><span style=\" font-size:12pt;\">- 'warmupcosine' refers to a cosine decay with a warm up consist in 2 phases: 1) a warm up phase which consists of increasing the learning rate from 'warmup cosine decay' to 'training learning rate' value by a factor during a certain number of epochs defined by 'warmup cosine decay hold epochs'; 2) after this will began the decay of the learning rate value using the cosine function. Find a detailed explanation in </span><a href=\"https://scorrea92.medium.com/cosine-learning-rate-decay-e8b50aa455b \"><span style=\" font-size:12pt; text-decoration: underline; color:#0000ff;\">here</span></a></p><p><span style=\" "
                         "font-size:12pt;\">- 'reduceonplateau' reduces the learning rate when a metric has stopped improving. Models often benefit from reducing the learning rate by a factor of 2-10 once learning stagnates. This callback monitors a quantity and if no improvement is seen for a 'patience' number of epochs, the learning rate is reduced.</span></p><p><span style=\" font-size:12pt;\">- 'onecycle', sets the learning rate of each parameter group according to the 1cycle learning rate policy. The 1cycle policy anneals the learning rate from an initial learning rate to some maximum learning rate and then from that maximum learning rate to some minimum learning rate much lower than the initial learning rate. This policy was initially described in the paper: </span><a href=\"https://arxiv.org/abs/1708.07120\"><span style=\" font-size:12pt; text-decoration: underline; color:#0000ff;\">&quot;Super-Convergence: Very Fast Training of Neural Networks Using Large Learning Rates&quot;</span></a></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.TRAIN__LR_SCHEDULER__NAME__INFO.setText("")
 #if QT_CONFIG(tooltip)
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Lower bound on the learning rate used in 'warmupcosine' and 'reduceonplateau'. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive float</span></p></body></html>", None))
+        self.MODEL__SAVE_CKPT_FREQ__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Epochs to save a checkpoint of the model apart from the ones saved with LOAD_CHECKPOINT_ONLY_WEIGHTS. Set it to -1 to not do it.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of epochs with no improvement after which learning rate will be reduced in 'reduceonplateau' scheduler. Need to be less than training patience otherwise it makes no sense. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setText("")
+        self.MODEL__SAVE_CKPT_FREQ__INFO.setText("")
 #if QT_CONFIG(tooltip)
         self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Factor by which the learning rate will be reduced in 'reduceonplateau' scheduler. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a float between 0 and 1</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -13258,9 +13349,21 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.TRAIN__PROFILER__INFO.setText("")
 #if QT_CONFIG(tooltip)
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of epochs with no improvement after which learning rate will be reduced in 'reduceonplateau' scheduler. Need to be less than training patience otherwise it makes no sense. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setText("")
+#if QT_CONFIG(tooltip)
         self.TRAIN__PROFILER_BATCH_RANGE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Batch range to be analyzed in the profiler. Must two positive integers separated by a comma.</span><span style=\" font-size:12pt; font-weight:600;\"> E.g. (10, 100) means that the profiler will analise the batches from the 10th to the 100th </span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.TRAIN__PROFILER_BATCH_RANGE__INFO.setText("")
+        self.TRAIN__VERBOSE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Verbose", None))
+        self.TRAIN__VERBOSE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.TRAIN__VERBOSE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+#if QT_CONFIG(tooltip)
+        self.TRAIN__VERBOSE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Train verbosity to print more info on each batch process</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__VERBOSE__INFO.setText("")
         self.unet_model_like_label.setText(QCoreApplication.translate("MainWindow", u"U-Net model-like configuration", None))
         self.label_42.setText(QCoreApplication.translate("MainWindow", u"Advanced training parameters", None))
         self.label_30.setText(QCoreApplication.translate("MainWindow", u"Train data", None))
@@ -13926,8 +14029,8 @@ class Ui_MainWindow(object):
         self.test_resolution_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.test_resolution_label.setText(QCoreApplication.translate("MainWindow", u"Resolution", None))
-        self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+        self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
+        self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
 
         self.DATA__TEST__MEDIAN_PADDING__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
         self.DATA__TEST__MEDIAN_PADDING__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
@@ -14499,17 +14602,22 @@ class Ui_MainWindow(object):
         self.inst_seg_fore_ero_label.setText(QCoreApplication.translate("MainWindow", u"Foreground erosion radius", None))
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
 #if QT_CONFIG(tooltip)
-        self.inst_seg_moph_op_rad_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.inst_seg_moph_op_rad_label.setText(QCoreApplication.translate("MainWindow", u"Morphological operations radius", None))
-#if QT_CONFIG(tooltip)
         self.inst_seg_small_obj_fil_before_size_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.inst_seg_small_obj_fil_before_size_label.setText(QCoreApplication.translate("MainWindow", u"Small object size (before growth)", None))
+#if QT_CONFIG(tooltip)
+        self.inst_seg_moph_op_rad_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.inst_seg_moph_op_rad_label.setText(QCoreApplication.translate("MainWindow", u"Morphological operations radius", None))
         self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INPUT.setText(QCoreApplication.translate("MainWindow", u"10", None))
         self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
         self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
 
+#if QT_CONFIG(tooltip)
+        self.inst_seg_fore_dil_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.inst_seg_fore_dil_label.setText(QCoreApplication.translate("MainWindow", u"Foreground dilation radius", None))
+        self.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INPUT.setText(QCoreApplication.translate("MainWindow", u"5", None))
 #if QT_CONFIG(tooltip)
         self.inst_seg_ero_dil_fore_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
@@ -14519,38 +14627,29 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.inst_seg_moph_op_label.setText(QCoreApplication.translate("MainWindow", u"Morphological operations to seeds", None))
 #if QT_CONFIG(tooltip)
-        self.inst_seg_fore_dil_label.setToolTip("")
+        self.inst_seg_small_obj_fil_before_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
-        self.inst_seg_fore_dil_label.setText(QCoreApplication.translate("MainWindow", u"Foreground dilation radius", None))
-        self.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INPUT.setText(QCoreApplication.translate("MainWindow", u"5", None))
-        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
+        self.inst_seg_small_obj_fil_before_label.setText(QCoreApplication.translate("MainWindow", u"Small objects filtering before growth", None))
 #if QT_CONFIG(tooltip)
         self.inst_seg_save_water_files_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.inst_seg_save_water_files_label.setText(QCoreApplication.translate("MainWindow", u"Check watershed data", None))
-#if QT_CONFIG(tooltip)
-        self.inst_seg_small_obj_fil_before_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.inst_seg_small_obj_fil_before_label.setText(QCoreApplication.translate("MainWindow", u"Small objects filtering before growth", None))
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
+        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
         self.PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INPUT.setText(QCoreApplication.translate("MainWindow", u"5", None))
         self.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
         self.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
 
 #if QT_CONFIG(tooltip)
-        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Sequence of string to determine the morphological filters to apply to instance seeds. They will be done in that order. Possible options 'dilate' and 'erode'.</span><span style=\" font-size:12pt; font-weight:600;\"> E.g. ['erode','dilate'] to erode first and dilate later.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO.setText("")
-#if QT_CONFIG(tooltip)
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Sequence of ints to determine the radius of the erosion or dilation for instance seeds. </span><span style=\" font-size:12pt; font-weight:600;\">E.g. [2,3]</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INFO.setText("")
 #if QT_CONFIG(tooltip)
-        self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">To erode and dilate the foreground mask before using marker controlled watershed. The idea is to remove the small holes  that may be produced so the instances grow without them</span></p></body></html>", None))
+        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Sequence of string to determine the morphological filters to apply to instance seeds. They will be done in that order. Possible options 'dilate' and 'erode'.</span><span style=\" font-size:12pt; font-weight:600;\"> E.g. ['erode','dilate'] to erode first and dilate later.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO.setText("")
+        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO.setText("")
 #if QT_CONFIG(tooltip)
         self.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Radius to erode the foreground mask</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -14560,9 +14659,9 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INFO.setText("")
 #if QT_CONFIG(tooltip)
-        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to remove objects before watershed </span></p></body></html>", None))
+        self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">To erode and dilate the foreground mask before using marker controlled watershed. The idea is to remove the small holes  that may be produced so the instances grow without them</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO.setText("")
+        self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO.setText("")
 #if QT_CONFIG(tooltip)
         self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Size of small objects to be removed before doing watershed</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -14571,6 +14670,18 @@ class Ui_MainWindow(object):
         self.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to save watershed check files</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to remove objects before watershed </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO.setText("")
+        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__LABEL.setText(QCoreApplication.translate("MainWindow", u"Watershed by 2D slices", None))
+        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+#if QT_CONFIG(tooltip)
+        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to apply or not the watershed to create instances slice by slice in a 3D problem. This can solve instances invading others if the objects in Z axis overlap too much.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INFO.setText("")
 #if QT_CONFIG(tooltip)
         self.label_13.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether if the threshold are going to be set as automaticaly (with Otsu thresholding) or manually. If &quot;manual&quot; is used PROBLEM.INSTANCE_SEG.DATA_MW_TH_* need to be set . In case 'auto' was selected you will still need to set distance threshold.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -14590,18 +14701,38 @@ class Ui_MainWindow(object):
         self.TEST__DET_TOLERANCE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Maximum distance far away from a GT point to consider a point as a true positive</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.TEST__DET_TOLERANCE__INFO.setText("")
+        self.TEST__DET_EXCLUDE_BORDER__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.TEST__DET_EXCLUDE_BORDER__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
 #if QT_CONFIG(tooltip)
-        self.TEST__DET_BLOB_LOG_MAX_SIGMA__LABEL.setToolTip("")
+        self.TEST__DET_MIN_TH_TO_BE_PEAK__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Minimun value to consider a point as a peak. Corresponds to 'threshold_abs' argument of the function 'peak_local_max' of skimage.feature or 'threshold' argument of 'blob_log'. Must be a float between 0 and 1.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.TEST__DET_BLOB_LOG_MAX_SIGMA__LABEL.setText(QCoreApplication.translate("MainWindow", u"Blob_log - Maximum sigma", None))
-        self.TEST__DET_BLOB_LOG_MIN_SIGMA__INPUT.setText(QCoreApplication.translate("MainWindow", u"5", None))
-        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT.setText(QCoreApplication.translate("MainWindow", u"10", None))
-        self.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT.setText(QCoreApplication.translate("MainWindow", u"[0.2]", None))
-        self.TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT.setText(QCoreApplication.translate("MainWindow", u"2", None))
+        self.TEST__DET_MIN_TH_TO_BE_PEAK__INFO.setText("")
 #if QT_CONFIG(tooltip)
         self.det_min_th_to_be_peak_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.det_min_th_to_be_peak_label.setText(QCoreApplication.translate("MainWindow", u"Min threshold to be peak", None))
+        self.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT.setText(QCoreApplication.translate("MainWindow", u"[0.2]", None))
+        self.TEST__DET_EXCLUDE_BORDER__LABEL.setText(QCoreApplication.translate("MainWindow", u"Exclude border", None))
+#if QT_CONFIG(tooltip)
+        self.TEST__DET_EXCLUDE_BORDER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt;\">Corresponds to 'exclude_border' argument of 'peak_local_max' or 'blob_log' function of skimage. If True it will exclude peaks from the border of the image to avoid partial detection.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TEST__DET_EXCLUDE_BORDER__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Corresponds to 'max_sigma' argument of 'blob_log' function. It is the maximum standard deviation for Gaussian kernel.  Keep this high to detect larger blobs. The standard deviations of the Gaussian filter are given for each axis as a sequence, or as a single number, in which case it is equal for all axes. Must be a positive integer.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Corresponds to 'num_sigma' argument of 'blob_log' function. The number of intermediate values of standard deviations to consider between min_sigma and max_sigma. Must be a positive integer.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO.setText("")
+        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT.setText(QCoreApplication.translate("MainWindow", u"10", None))
+#if QT_CONFIG(tooltip)
+        self.TEST__DET_BLOB_LOG_MAX_SIGMA__LABEL.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.TEST__DET_BLOB_LOG_MAX_SIGMA__LABEL.setText(QCoreApplication.translate("MainWindow", u"Maximum sigma", None))
+        self.TEST__DET_BLOB_LOG_MIN_SIGMA__INPUT.setText(QCoreApplication.translate("MainWindow", u"5", None))
+        self.TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT.setText(QCoreApplication.translate("MainWindow", u"2", None))
         self.TEST__DET_POINT_CREATION_FUNCTION__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"peak_local_max", None))
         self.TEST__DET_POINT_CREATION_FUNCTION__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"blob_log", None))
 
@@ -14610,17 +14741,13 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.TEST__DET_POINT_CREATION_FUNCTION__LABEL.setText(QCoreApplication.translate("MainWindow", u"Point creation function", None))
 #if QT_CONFIG(tooltip)
-        self.TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL.setText(QCoreApplication.translate("MainWindow", u"Blob_log - Number values", None))
-#if QT_CONFIG(tooltip)
         self.TEST__DET_BLOB_LOG_MIN_SIGMA__LABEL.setToolTip("")
 #endif // QT_CONFIG(tooltip)
-        self.TEST__DET_BLOB_LOG_MIN_SIGMA__LABEL.setText(QCoreApplication.translate("MainWindow", u"Blob_log - Minimum sigma", None))
+        self.TEST__DET_BLOB_LOG_MIN_SIGMA__LABEL.setText(QCoreApplication.translate("MainWindow", u"Minimum sigma", None))
 #if QT_CONFIG(tooltip)
-        self.TEST__DET_MIN_TH_TO_BE_PEAK__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Minimun value to consider a point as a peak. Corresponds to 'threshold_abs' argument of the function 'peak_local_max' of skimage.feature or 'threshold' argument of 'blob_log'. Must be a float between 0 and 1.</span></p></body></html>", None))
+        self.TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL.setToolTip("")
 #endif // QT_CONFIG(tooltip)
-        self.TEST__DET_MIN_TH_TO_BE_PEAK__INFO.setText("")
+        self.TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL.setText(QCoreApplication.translate("MainWindow", u"Number values", None))
 #if QT_CONFIG(tooltip)
         self.TEST__DET_POINT_CREATION_FUNCTION__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">To decide which function is going to be used to create point from probabilities. Options: ['peak_local_max', 'blob_log']:</span></p><p><span style=\" font-size:12pt;\">- 'peak_local_max': https://scikit-image.org/docs/stable/api/skimage.feature.html#skimage.feature.peak_local_max </span></p><p><span style=\" font-size:12pt;\">- 'blob_log': https://scikit-image.org/docs/stable/api/skimage.feature.html#skimage.feature.blob_log</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -14629,22 +14756,12 @@ class Ui_MainWindow(object):
         self.TEST__DET_BLOB_LOG_MIN_SIGMA__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Corresponds to 'min_sigma' argument of 'blob_log' function. It is the minimum standard deviation for Gaussian kernel. Keep this low to detect smaller blobs. The standard deviations of the Gaussian filter are given for each axis as a sequence, or as a single number, in which case it is equal for all axes. Muste be a positive integer.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.TEST__DET_BLOB_LOG_MIN_SIGMA__INFO.setText("")
+        self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Minimum distance", None))
+        self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INPUT.setText(QCoreApplication.translate("MainWindow", u"1", None))
 #if QT_CONFIG(tooltip)
-        self.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Corresponds to 'num_sigma' argument of 'blob_log' function. The number of intermediate values of standard deviations to consider between min_sigma and max_sigma. Must be a positive integer.</span></p></body></html>", None))
+        self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">The minimal allowed distance separating peaks. To find the maximum number of peaks, use 1.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Corresponds to 'max_sigma' argument of 'blob_log' function. It is the maximum standard deviation for Gaussian kernel.  Keep this high to detect larger blobs. The standard deviations of the Gaussian filter are given for each axis as a sequence, or as a single number, in which case it is equal for all axes. Must be a positive integer.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INFO.setText("")
-        self.TEST__DET_EXCLUDE_BORDER__LABEL.setText(QCoreApplication.translate("MainWindow", u"Exclude border", None))
-        self.TEST__DET_EXCLUDE_BORDER__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.TEST__DET_EXCLUDE_BORDER__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-#if QT_CONFIG(tooltip)
-        self.TEST__DET_EXCLUDE_BORDER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt;\">Corresponds to 'exclude_border' argument of 'peak_local_max' or 'blob_log' function of skimage. If True it will exclude peaks from the border of the image to avoid partial detection.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TEST__DET_EXCLUDE_BORDER__INFO.setText("")
+        self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INFO.setText("")
         self.TEST__POST_PROCESSING__YZ_FILTERING__DET__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
         self.TEST__POST_PROCESSING__YZ_FILTERING__DET__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
 

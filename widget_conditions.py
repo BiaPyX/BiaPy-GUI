@@ -3208,10 +3208,32 @@ class Widget_conditions():
                         'blob_log', 
                     ],
                 },
+            "TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__LABEL": 
+                {
+                    "TEST__DET_POINT_CREATION_FUNCTION__INPUT": 
+                    [
+                        'peak_local_max', 
+                    ],
+                },
+            "TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INFO": 
+                {
+                    "TEST__DET_POINT_CREATION_FUNCTION__INPUT": 
+                    [
+                        'peak_local_max', 
+                    ],
+                },
+            "TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INPUT": 
+                {
+                    "TEST__DET_POINT_CREATION_FUNCTION__INPUT": 
+                    [
+                        'peak_local_max', 
+                    ],
+                },
             "MODEL__N_CLASSES__LABEL": 
                 {
                     "WORKFLOW_SELECTED_LABEL": [
                         "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
                         "DETECTION",
                     ]
                 },
@@ -3219,6 +3241,7 @@ class Widget_conditions():
                 {
                     "WORKFLOW_SELECTED_LABEL": [
                         "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
                         "DETECTION",
                     ]
                 },
@@ -3226,6 +3249,7 @@ class Widget_conditions():
                 {
                     "WORKFLOW_SELECTED_LABEL": [
                         "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
                         "DETECTION",
                     ]
                 },

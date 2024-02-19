@@ -514,6 +514,7 @@ def create_yaml_file(main_window):
     cpus = get_text(main_window.ui.SYSTEM__NUM_CPUS__INPUT)
     cpus = -1 if cpus == "All" else int(cpus)
     biapy_config['SYSTEM']['NUM_CPUS'] = cpus
+    biapy_config['SYSTEM']['NUM_WORKERS'] = int(get_text(main_window.ui.SYSTEM__NUM_WORKERS__INPUT))
     biapy_config['SYSTEM']['SEED'] = int(get_text(main_window.ui.SYSTEM__SEED__INPUT))
 
     # Problem specification
@@ -581,6 +582,8 @@ def create_yaml_file(main_window):
             biapy_config['PROBLEM']['INSTANCE_SEG']['ERODE_AND_DILATE_FOREGROUND'] = True
             biapy_config['PROBLEM']['INSTANCE_SEG']['FORE_EROSION_RADIUS'] = int(get_text(main_window.ui.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INPUT))
             biapy_config['PROBLEM']['INSTANCE_SEG']['FORE_DILATION_RADIUS'] = int(get_text(main_window.ui.PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INPUT))
+        if get_text(main_window.ui.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INPUT) == "Yes":
+            biapy_config['PROBLEM']['INSTANCE_SEG']['WATERSHED_BY_2D_SLICES'] = True
 
     ### DETECTION
     elif main_window.cfg.settings['selected_workflow'] == 2:
@@ -994,7 +997,10 @@ def create_yaml_file(main_window):
         if get_text(main_window.ui.MODEL__LAST_ACTIVATION__INPUT) != 'sigmoid':
             biapy_config['MODEL']['LAST_ACTIVATION'] = get_text(main_window.ui.MODEL__LAST_ACTIVATION__INPUT)
         if int(get_text(main_window.ui.MODEL__N_CLASSES__INPUT)) != 2:
-            biapy_config['MODEL']['N_CLASSES'] = int(get_text(main_window.ui.MODEL__N_CLASSES__INPUT))
+            classes = int(get_text(main_window.ui.MODEL__N_CLASSES__INPUT))
+            if classses == 1: 
+                classes = 2
+            biapy_config['MODEL']['N_CLASSES'] = classes
         if get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "3D":
             biapy_config['MODEL']['Z_DOWN'] = ast.literal_eval(get_text(main_window.ui.MODEL__Z_DOWN__INPUT)) 
         if main_window.cfg.settings['selected_workflow'] == 4 and get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "3D": # SR
@@ -1069,6 +1075,9 @@ def create_yaml_file(main_window):
         # if get_text(main_window.ui.TRAIN__PROFILER__INPUT) == "Yes": 
         #     biapy_config['TRAIN']['PROFILER'] = True 
         #     biapy_config['TRAIN']['PROFILER_BATCH_RANGE'] = get_text(main_window.ui.TRAIN__PROFILER_BATCH_RANGE__INPUT)
+        
+        if get_text(main_window.ui.TRAIN__VERBOSE__INPUT) == "Yes":
+            biapy_config['TRAIN']['VERBOSE'] = True 
     else:
         biapy_config['TRAIN']['ENABLE'] = False 
 

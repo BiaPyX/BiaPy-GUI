@@ -281,9 +281,12 @@ class UIFunction(MainWindow):
         main_window.ui.checkpoint_loading_opt_frame.setVisible(False)
 
         main_window.ui.SYSTEM__NUM_CPUS__INPUT.addItem("All")
-        main_window.ui.SYSTEM__NUM_CPUS__INPUT.addItem("0")
         for i in range(multiprocessing.cpu_count()):
             main_window.ui.SYSTEM__NUM_CPUS__INPUT.addItem(str(i+1))
+
+        main_window.ui.SYSTEM__NUM_WORKERS__INPUT.addItem("0")
+        for i in range(min(multiprocessing.cpu_count(),10)):
+            main_window.ui.SYSTEM__NUM_WORKERS__INPUT.addItem(str(i+1))
 
         time = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
         main_window.ui.goptions_yaml_name_input.setText("my_experiment_"+get_text(main_window.ui.PROBLEM__NDIM__INPUT)+"_"+time+".yaml")
@@ -295,6 +298,7 @@ class UIFunction(MainWindow):
         main_window.ui.MODEL__LOAD_CHECKPOINT__LABEL.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.PATHS__CHECKPOINT_FILE__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.SYSTEM__NUM_CPUS__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.SYSTEM__NUM_WORKERS__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.SYSTEM__SEED__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setPixmap(main_window.cfg.settings['info_image'])
@@ -910,6 +914,7 @@ class UIFunction(MainWindow):
         main_window.ui.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.TRAIN__PROFILER__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.TRAIN__PROFILER_BATCH_RANGE__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.TRAIN__VERBOSE__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.AUGMENTOR__DA_PROB__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.AUGMENTOR__AUG_SAMPLES__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.AUGMENTOR__DRAW_GRID__INFO.setPixmap(main_window.cfg.settings['info_image'])
@@ -1153,7 +1158,9 @@ class UIFunction(MainWindow):
         main_window.ui.TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL.setVisible(False)
         main_window.ui.TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT.setVisible(False)
         main_window.ui.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO.setVisible(False)
-
+        main_window.ui.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__LABEL.setVisible(False)
+        main_window.ui.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INFO.setVisible(False)
+        main_window.ui.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INPUT.setVisible(False)
         # Info icons
         main_window.ui.DATA__TEST__USE_VAL_AS_TEST__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.DATA__TEST__PATH__INFO.setPixmap(main_window.cfg.settings['info_image'])
@@ -1199,6 +1206,7 @@ class UIFunction(MainWindow):
         main_window.ui.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.TEST__POST_PROCESSING__YZ_FILTERING__INST_SEG__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.TEST__POST_PROCESSING__YZ_FILTERING_SIZE__INST_SEG__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.TEST__POST_PROCESSING__Z_FILTERING__INST_SEG__INFO.setPixmap(main_window.cfg.settings['info_image'])
@@ -1223,6 +1231,7 @@ class UIFunction(MainWindow):
         main_window.ui.TEST__DET_BLOB_LOG_MIN_SIGMA__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.TEST__DET_BLOB_LOG_MAX_SIGMA__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.TEST__POST_PROCESSING__YZ_FILTERING__DET__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.TEST__POST_PROCESSING__YZ_FILTERING_SIZE__DET__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.TEST__POST_PROCESSING__Z_FILTERING__DET__INFO.setPixmap(main_window.cfg.settings['info_image'])
@@ -1352,7 +1361,7 @@ class UIFunction(MainWindow):
             return
 
         # Allow only one GPU through the GUI for the moment 
-        if len(main_window.ui.gpu_input.currentData()) > 1:
+        if len(main_window.cfg.settings['GPUs']) > 0 and len(main_window.ui.gpu_input.currentData()) > 1:
             main_window.dialog_exec("Currently use a multi-GPU setting is not supported. Please, select just one GPU.", "error")
             return 
 
@@ -1404,9 +1413,10 @@ class UIFunction(MainWindow):
         if run_biapy_cond:
             # GPU check
             use_gpu = True
-            if len(main_window.cfg.settings['GPUs']) == 0 or len(main_window.ui.gpu_input.currentData()) == 0:
+            if len(main_window.cfg.settings['GPUs']) == 0:
                 use_gpu = False 
-
+            elif len(main_window.cfg.settings['GPUs']) > 0 and len(main_window.ui.gpu_input.currentData()) == 0:
+                use_gpu = False 
             # Initialize thread/worker 
             main_window.cfg.settings['running_threads'].append(QThread())
             worker_id = len(main_window.cfg.settings['running_workers'])

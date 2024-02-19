@@ -289,7 +289,7 @@ color: white;
                 <number>0</number>
                </property>
                <property name="text">
-                <string>Version 3.3.1 - GUI: 1.0.0</string>
+                <string>Version 3.3.8 - GUI: 1.0.0</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -4200,13 +4200,13 @@ QPushButton:pressed {
                           <x>0</x>
                           <y>0</y>
                           <width>946</width>
-                          <height>448</height>
+                          <height>441</height>
                          </rect>
                         </property>
                         <property name="minimumSize">
                          <size>
                           <width>921</width>
-                          <height>396</height>
+                          <height>398</height>
                          </size>
                         </property>
                         <property name="font">
@@ -4717,9 +4717,9 @@ QPushButton:pressed {
                                    <property name="geometry">
                                     <rect>
                                      <x>0</x>
-                                     <y>0</y>
+                                     <y>-5</y>
                                      <width>870</width>
-                                     <height>248</height>
+                                     <height>284</height>
                                     </rect>
                                    </property>
                                    <layout class="QGridLayout" name="gridLayout_2">
@@ -4832,7 +4832,7 @@ QPushButton:pressed {
                                         </widget>
                                        </item>
                                        <item row="1" column="2">
-                                        <widget class="QComboBox" name="SYSTEM__NUM_CPUS__INPUT">
+                                        <widget class="QComboBox" name="SYSTEM__NUM_WORKERS__INPUT">
                                          <property name="minimumSize">
                                           <size>
                                            <width>200</width>
@@ -4898,7 +4898,7 @@ QPushButton:pressed {
                                         </spacer>
                                        </item>
                                        <item row="1" column="1">
-                                        <widget class="QLabel" name="SYSTEM__NUM_CPUS__INFO">
+                                        <widget class="QLabel" name="SYSTEM__NUM_WORKERS__INFO">
                                          <property name="minimumSize">
                                           <size>
                                            <width>30</width>
@@ -4912,7 +4912,7 @@ QPushButton:pressed {
                                           </size>
                                          </property>
                                          <property name="toolTip">
-                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Maximum number of workers to load data in parallel. Set it to &amp;quot;-1&amp;quot; to set any limit. Normally a few cores will be used in this last case, as the biggest calculations will be on the GPU.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Maximum number of workers to load data in parallel. You can disable this option by setting 0.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                          </property>
                                          <property name="styleSheet">
                                           <string notr="true"/>
@@ -4940,13 +4940,79 @@ QPushButton:pressed {
                                           </size>
                                          </property>
                                          <property name="toolTip">
-                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Math seed to use. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be an integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Math seed to generate random numbers. Used to ensure reproducibility in the results. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be an integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                          </property>
                                          <property name="text">
                                           <string/>
                                          </property>
                                          <property name="scaledContents">
                                           <bool>true</bool>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item row="0" column="0">
+                                        <widget class="QLabel" name="SYSTEM__NUM_CPUS__LABEL">
+                                         <property name="font">
+                                          <font>
+                                           <family>DejaVu Math TeX Gyre</family>
+                                           <pointsize>12</pointsize>
+                                          </font>
+                                         </property>
+                                         <property name="text">
+                                          <string>Number of CPUs</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item row="0" column="1">
+                                        <widget class="QLabel" name="SYSTEM__NUM_CPUS__INFO">
+                                         <property name="minimumSize">
+                                          <size>
+                                           <width>30</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="maximumSize">
+                                          <size>
+                                           <width>30</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="font">
+                                          <font>
+                                           <family>DejaVu Math TeX Gyre</family>
+                                           <pointsize>12</pointsize>
+                                          </font>
+                                         </property>
+                                         <property name="toolTip">
+                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Maximum number of CPUs to use. Set it to &amp;quot;-1&amp;quot; to not set a limit.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                         </property>
+                                         <property name="text">
+                                          <string/>
+                                         </property>
+                                         <property name="scaledContents">
+                                          <bool>true</bool>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item row="0" column="2">
+                                        <widget class="QComboBox" name="SYSTEM__NUM_CPUS__INPUT">
+                                         <property name="minimumSize">
+                                          <size>
+                                           <width>200</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="maximumSize">
+                                          <size>
+                                           <width>200</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="font">
+                                          <font>
+                                           <family>DejaVu Math TeX Gyre</family>
+                                           <pointsize>12</pointsize>
+                                          </font>
                                          </property>
                                         </widget>
                                        </item>
@@ -5664,7 +5730,7 @@ QPushButton:pressed {
                                   <x>0</x>
                                   <y>0</y>
                                   <width>985</width>
-                                  <height>6769</height>
+                                  <height>6805</height>
                                  </rect>
                                 </property>
                                 <property name="layoutDirection">
@@ -6266,7 +6332,7 @@ p, li { white-space: pre-wrap; }
                                              </size>
                                             </property>
                                             <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Whether to reshape de dimensions that do not satisfy the patch shape selected by padding it with reflection.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Whether to reshape the dimensions that do not satisfy the patch shape selected by padding it with reflection.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                             </property>
                                             <property name="text">
                                              <string/>
@@ -10332,16 +10398,6 @@ p, li { white-space: pre-wrap; }
                                             <item>
                                              <property name="text">
                                               <string>constant</string>
-                                             </property>
-                                            </item>
-                                            <item>
-                                             <property name="text">
-                                              <string>edge</string>
-                                             </property>
-                                            </item>
-                                            <item>
-                                             <property name="text">
-                                              <string>symmetric</string>
                                              </property>
                                             </item>
                                             <item>
@@ -16213,6 +16269,25 @@ p, li { white-space: pre-wrap; }
                                           <enum>QFrame::Raised</enum>
                                          </property>
                                          <layout class="QGridLayout" name="gridLayout_29">
+                                          <item row="21" column="0">
+                                           <widget class="QLabel" name="profiler_batch_range_label">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string/>
+                                            </property>
+                                            <property name="text">
+                                             <string>Profiler batch range</string>
+                                            </property>
+                                            <property name="indent">
+                                             <number>15</number>
+                                            </property>
+                                           </widget>
+                                          </item>
                                           <item row="8" column="2">
                                            <widget class="QComboBox" name="TRAIN__LR_SCHEDULER__NAME__INPUT">
                                             <property name="minimumSize">
@@ -16268,25 +16343,6 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                            </spacer>
                                           </item>
-                                          <item row="21" column="0">
-                                           <widget class="QLabel" name="profiler_batch_range_label">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string/>
-                                            </property>
-                                            <property name="text">
-                                             <string>Profiler batch range</string>
-                                            </property>
-                                            <property name="indent">
-                                             <number>15</number>
-                                            </property>
-                                           </widget>
-                                          </item>
                                           <item row="18" column="2">
                                            <widget class="QComboBox" name="TRAIN__PROFILER__INPUT">
                                             <property name="minimumSize">
@@ -16319,6 +16375,22 @@ p, li { white-space: pre-wrap; }
                                             </item>
                                            </widget>
                                           </item>
+                                          <item row="6" column="0">
+                                           <widget class="QLabel" name="MODEL__SAVE_CKPT_FREQ__LABEL">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string/>
+                                            </property>
+                                            <property name="text">
+                                             <string>Save checkpoint frequency</string>
+                                            </property>
+                                           </widget>
+                                          </item>
                                           <item row="10" column="2">
                                            <widget class="QLineEdit" name="TRAIN__LR_SCHEDULER__MIN_LR__INPUT">
                                             <property name="minimumSize">
@@ -16344,6 +16416,22 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                            </widget>
                                           </item>
+                                          <item row="5" column="0">
+                                           <widget class="QLabel" name="label_114">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string/>
+                                            </property>
+                                            <property name="text">
+                                             <string>Accumulate iterations</string>
+                                            </property>
+                                           </widget>
+                                          </item>
                                           <item row="2" column="0">
                                            <widget class="QLabel" name="label_151">
                                             <property name="font">
@@ -16360,35 +16448,28 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                            </widget>
                                           </item>
-                                          <item row="6" column="0">
-                                           <widget class="QLabel" name="MODEL__SAVE_CKPT_FREQ__LABEL">
+                                          <item row="13" column="2">
+                                           <widget class="QLineEdit" name="TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
                                             <property name="font">
                                              <font>
                                               <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
-                                            <property name="toolTip">
-                                             <string/>
-                                            </property>
                                             <property name="text">
-                                             <string>Save checkpoint frequency</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="5" column="0">
-                                           <widget class="QLabel" name="label_114">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string/>
-                                            </property>
-                                            <property name="text">
-                                             <string>Accumulate iterations</string>
+                                             <string>0.5</string>
                                             </property>
                                            </widget>
                                           </item>
@@ -16417,8 +16498,8 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                            </widget>
                                           </item>
-                                          <item row="13" column="2">
-                                           <widget class="QLineEdit" name="TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT">
+                                          <item row="15" column="2">
+                                           <widget class="QLineEdit" name="TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT">
                                             <property name="minimumSize">
                                              <size>
                                               <width>200</width>
@@ -16438,7 +16519,7 @@ p, li { white-space: pre-wrap; }
                                              </font>
                                             </property>
                                             <property name="text">
-                                             <string>0.5</string>
+                                             <string>-1</string>
                                             </property>
                                            </widget>
                                           </item>
@@ -16479,31 +16560,6 @@ p, li { white-space: pre-wrap; }
                                             </item>
                                            </widget>
                                           </item>
-                                          <item row="15" column="2">
-                                           <widget class="QLineEdit" name="TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>-1</string>
-                                            </property>
-                                           </widget>
-                                          </item>
                                           <item row="21" column="2">
                                            <widget class="QLineEdit" name="TRAIN__PROFILER_BATCH_RANGE__INPUT">
                                             <property name="minimumSize">
@@ -16526,44 +16582,6 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="text">
                                              <string>10, 100</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="22" column="0">
-                                           <spacer name="verticalSpacer_14">
-                                            <property name="orientation">
-                                             <enum>Qt::Vertical</enum>
-                                            </property>
-                                            <property name="sizeHint" stdset="0">
-                                             <size>
-                                              <width>20</width>
-                                              <height>40</height>
-                                             </size>
-                                            </property>
-                                           </spacer>
-                                          </item>
-                                          <item row="5" column="2">
-                                           <widget class="QLineEdit" name="TRAIN__ACCUM_ITER__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>1</string>
                                             </property>
                                            </widget>
                                           </item>
@@ -16592,6 +16610,31 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                            </widget>
                                           </item>
+                                          <item row="5" column="2">
+                                           <widget class="QLineEdit" name="TRAIN__ACCUM_ITER__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>1</string>
+                                            </property>
+                                           </widget>
+                                          </item>
                                           <item row="0" column="0">
                                            <widget class="QLabel" name="label_143">
                                             <property name="font">
@@ -16605,6 +16648,44 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="text">
                                              <string>Optimizer</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="22" column="0">
+                                           <spacer name="verticalSpacer_14">
+                                            <property name="orientation">
+                                             <enum>Qt::Vertical</enum>
+                                            </property>
+                                            <property name="sizeHint" stdset="0">
+                                             <size>
+                                              <width>20</width>
+                                              <height>40</height>
+                                             </size>
+                                            </property>
+                                           </spacer>
+                                          </item>
+                                          <item row="4" column="2">
+                                           <widget class="QLineEdit" name="TRAIN__BATCH_SIZE__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>2</string>
                                             </property>
                                            </widget>
                                           </item>
@@ -16633,31 +16714,6 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                            </widget>
                                           </item>
-                                          <item row="4" column="2">
-                                           <widget class="QLineEdit" name="TRAIN__BATCH_SIZE__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>2</string>
-                                            </property>
-                                           </widget>
-                                          </item>
                                           <item row="10" column="0">
                                            <widget class="QLabel" name="lr_schel_min_lr_label">
                                             <property name="font">
@@ -16674,22 +16730,6 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="indent">
                                              <number>15</number>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="18" column="0">
-                                           <widget class="QLabel" name="label_160">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string/>
-                                            </property>
-                                            <property name="text">
-                                             <string>Profiler</string>
                                             </property>
                                            </widget>
                                           </item>
@@ -16712,6 +16752,22 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                            </widget>
                                           </item>
+                                          <item row="18" column="0">
+                                           <widget class="QLabel" name="label_160">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string/>
+                                            </property>
+                                            <property name="text">
+                                             <string>Profiler</string>
+                                            </property>
+                                           </widget>
+                                          </item>
                                           <item row="4" column="0">
                                            <widget class="QLabel" name="label_149">
                                             <property name="font">
@@ -16728,8 +16784,8 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                            </widget>
                                           </item>
-                                          <item row="8" column="0">
-                                           <widget class="QLabel" name="label_162">
+                                          <item row="3" column="0">
+                                           <widget class="QLabel" name="adamw_weight_decay_label">
                                             <property name="font">
                                              <font>
                                               <family>DejaVu Math TeX Gyre</family>
@@ -16740,7 +16796,10 @@ p, li { white-space: pre-wrap; }
                                              <string/>
                                             </property>
                                             <property name="text">
-                                             <string>Learning rate scheduler name</string>
+                                             <string>Weight decay</string>
+                                            </property>
+                                            <property name="indent">
+                                             <number>15</number>
                                             </property>
                                            </widget>
                                           </item>
@@ -16788,8 +16847,8 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                            </widget>
                                           </item>
-                                          <item row="3" column="0">
-                                           <widget class="QLabel" name="adamw_weight_decay_label">
+                                          <item row="8" column="0">
+                                           <widget class="QLabel" name="label_162">
                                             <property name="font">
                                              <font>
                                               <family>DejaVu Math TeX Gyre</family>
@@ -16800,29 +16859,7 @@ p, li { white-space: pre-wrap; }
                                              <string/>
                                             </property>
                                             <property name="text">
-                                             <string>Weight decay</string>
-                                            </property>
-                                            <property name="indent">
-                                             <number>15</number>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="12" column="0">
-                                           <widget class="QLabel" name="lr_schel_reduce_on_plat_patience_label">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string/>
-                                            </property>
-                                            <property name="text">
-                                             <string>Reduce on plateau patience</string>
-                                            </property>
-                                            <property name="indent">
-                                             <number>15</number>
+                                             <string>Learning rate scheduler name</string>
                                             </property>
                                            </widget>
                                           </item>
@@ -16848,6 +16885,25 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="scaledContents">
                                              <bool>true</bool>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="12" column="0">
+                                           <widget class="QLabel" name="lr_schel_reduce_on_plat_patience_label">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string/>
+                                            </property>
+                                            <property name="text">
+                                             <string>Reduce on plateau patience</string>
+                                            </property>
+                                            <property name="indent">
+                                             <number>15</number>
                                             </property>
                                            </widget>
                                           </item>
@@ -16951,8 +17007,8 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                            </widget>
                                           </item>
-                                          <item row="6" column="1">
-                                           <widget class="QLabel" name="MODEL__SAVE_CKPT_FREQ__INFO">
+                                          <item row="10" column="1">
+                                           <widget class="QLabel" name="TRAIN__LR_SCHEDULER__MIN_LR__INFO">
                                             <property name="minimumSize">
                                              <size>
                                               <width>30</width>
@@ -16966,7 +17022,7 @@ p, li { white-space: pre-wrap; }
                                              </size>
                                             </property>
                                             <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Epochs to save a checkpoint of the model apart from the ones saved with LOAD_CHECKPOINT_ONLY_WEIGHTS. Set it to -1 to not do it.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Lower bound on the learning rate used in 'warmupcosine' and 'reduceonplateau'. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive float&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                             </property>
                                             <property name="text">
                                              <string/>
@@ -17001,8 +17057,8 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                            </widget>
                                           </item>
-                                          <item row="10" column="1">
-                                           <widget class="QLabel" name="TRAIN__LR_SCHEDULER__MIN_LR__INFO">
+                                          <item row="6" column="1">
+                                           <widget class="QLabel" name="MODEL__SAVE_CKPT_FREQ__INFO">
                                             <property name="minimumSize">
                                              <size>
                                               <width>30</width>
@@ -17016,32 +17072,7 @@ p, li { white-space: pre-wrap; }
                                              </size>
                                             </property>
                                             <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Lower bound on the learning rate used in 'warmupcosine' and 'reduceonplateau'. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive float&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string/>
-                                            </property>
-                                            <property name="scaledContents">
-                                             <bool>true</bool>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="12" column="1">
-                                           <widget class="QLabel" name="TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Number of epochs with no improvement after which learning rate will be reduced in 'reduceonplateau' scheduler. Need to be less than training patience otherwise it makes no sense. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Epochs to save a checkpoint of the model apart from the ones saved with LOAD_CHECKPOINT_ONLY_WEIGHTS. Set it to -1 to not do it.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                             </property>
                                             <property name="text">
                                              <string/>
@@ -17126,6 +17157,31 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                            </widget>
                                           </item>
+                                          <item row="12" column="1">
+                                           <widget class="QLabel" name="TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Number of epochs with no improvement after which learning rate will be reduced in 'reduceonplateau' scheduler. Need to be less than training patience otherwise it makes no sense. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string/>
+                                            </property>
+                                            <property name="scaledContents">
+                                             <bool>true</bool>
+                                            </property>
+                                           </widget>
+                                          </item>
                                           <item row="21" column="1">
                                            <widget class="QLabel" name="TRAIN__PROFILER_BATCH_RANGE__INFO">
                                             <property name="minimumSize">
@@ -17142,6 +17198,81 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="toolTip">
                                              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Batch range to be analyzed in the profiler. Must two positive integers separated by a comma.&lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt; E.g. (10, 100) means that the profiler will analise the batches from the 10th to the 100th &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string/>
+                                            </property>
+                                            <property name="scaledContents">
+                                             <bool>true</bool>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="23" column="0">
+                                           <widget class="QLabel" name="TRAIN__VERBOSE__LABEL">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>Verbose</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="23" column="2">
+                                           <widget class="QComboBox" name="TRAIN__VERBOSE__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <item>
+                                             <property name="text">
+                                              <string>No</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>Yes</string>
+                                             </property>
+                                            </item>
+                                           </widget>
+                                          </item>
+                                          <item row="23" column="1">
+                                           <widget class="QLabel" name="TRAIN__VERBOSE__INFO">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Train verbosity to print more info on each batch process&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                             </property>
                                             <property name="text">
                                              <string/>
@@ -19439,7 +19570,7 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>912</width>
+                                         <width>565</width>
                                          <height>337</height>
                                         </rect>
                                        </property>
@@ -22449,7 +22580,7 @@ QPushButton:pressed {
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>915</width>
+                                  <width>881</width>
                                   <height>2070</height>
                                  </rect>
                                 </property>
@@ -23827,12 +23958,12 @@ QPushButton:pressed {
                                             </property>
                                             <item>
                                              <property name="text">
-                                              <string>No</string>
+                                              <string>Yes</string>
                                              </property>
                                             </item>
                                             <item>
                                              <property name="text">
-                                              <string>Yes</string>
+                                              <string>No</string>
                                              </property>
                                             </item>
                                            </widget>
@@ -26429,8 +26560,8 @@ QPushButton:pressed {
                               <rect>
                                <x>-1</x>
                                <y>-1</y>
-                               <width>930</width>
-                               <height>335</height>
+                               <width>928</width>
+                               <height>302</height>
                               </rect>
                              </property>
                              <property name="frameShape">
@@ -26991,7 +27122,7 @@ QPushButton:pressed {
                                        <x>0</x>
                                        <y>0</y>
                                        <width>633</width>
-                                       <height>1327</height>
+                                       <height>1363</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_44">
@@ -28821,22 +28952,6 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                           </widget>
                                          </item>
-                                         <item row="2" column="1">
-                                          <widget class="QLabel" name="inst_seg_moph_op_rad_label">
-                                           <property name="font">
-                                            <font>
-                                             <family>DejaVu Math TeX Gyre</family>
-                                             <pointsize>12</pointsize>
-                                            </font>
-                                           </property>
-                                           <property name="toolTip">
-                                            <string/>
-                                           </property>
-                                           <property name="text">
-                                            <string>Morphological operations radius</string>
-                                           </property>
-                                          </widget>
-                                         </item>
                                          <item row="8" column="1">
                                           <widget class="QLabel" name="inst_seg_small_obj_fil_before_size_label">
                                            <property name="font">
@@ -28853,6 +28968,22 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                            <property name="indent">
                                             <number>15</number>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item row="2" column="1">
+                                          <widget class="QLabel" name="inst_seg_moph_op_rad_label">
+                                           <property name="font">
+                                            <font>
+                                             <family>DejaVu Math TeX Gyre</family>
+                                             <pointsize>12</pointsize>
+                                            </font>
+                                           </property>
+                                           <property name="toolTip">
+                                            <string/>
+                                           </property>
+                                           <property name="text">
+                                            <string>Morphological operations radius</string>
                                            </property>
                                           </widget>
                                          </item>
@@ -28913,38 +29044,6 @@ p, li { white-space: pre-wrap; }
                                            </item>
                                           </widget>
                                          </item>
-                                         <item row="4" column="1">
-                                          <widget class="QLabel" name="inst_seg_ero_dil_fore_label">
-                                           <property name="font">
-                                            <font>
-                                             <family>DejaVu Math TeX Gyre</family>
-                                             <pointsize>12</pointsize>
-                                            </font>
-                                           </property>
-                                           <property name="toolTip">
-                                            <string/>
-                                           </property>
-                                           <property name="text">
-                                            <string>Erode and dilate foreground</string>
-                                           </property>
-                                          </widget>
-                                         </item>
-                                         <item row="1" column="1">
-                                          <widget class="QLabel" name="inst_seg_moph_op_label">
-                                           <property name="font">
-                                            <font>
-                                             <family>DejaVu Math TeX Gyre</family>
-                                             <pointsize>12</pointsize>
-                                            </font>
-                                           </property>
-                                           <property name="toolTip">
-                                            <string/>
-                                           </property>
-                                           <property name="text">
-                                            <string>Morphological operations to seeds</string>
-                                           </property>
-                                          </widget>
-                                         </item>
                                          <item row="5" column="1">
                                           <widget class="QLabel" name="inst_seg_fore_dil_label">
                                            <property name="font">
@@ -28989,6 +29088,95 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                           </widget>
                                          </item>
+                                         <item row="4" column="1">
+                                          <widget class="QLabel" name="inst_seg_ero_dil_fore_label">
+                                           <property name="font">
+                                            <font>
+                                             <family>DejaVu Math TeX Gyre</family>
+                                             <pointsize>12</pointsize>
+                                            </font>
+                                           </property>
+                                           <property name="toolTip">
+                                            <string/>
+                                           </property>
+                                           <property name="text">
+                                            <string>Erode and dilate foreground</string>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item row="1" column="1">
+                                          <widget class="QLabel" name="inst_seg_moph_op_label">
+                                           <property name="font">
+                                            <font>
+                                             <family>DejaVu Math TeX Gyre</family>
+                                             <pointsize>12</pointsize>
+                                            </font>
+                                           </property>
+                                           <property name="toolTip">
+                                            <string/>
+                                           </property>
+                                           <property name="text">
+                                            <string>Morphological operations to seeds</string>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item row="7" column="1">
+                                          <widget class="QLabel" name="inst_seg_small_obj_fil_before_label">
+                                           <property name="font">
+                                            <font>
+                                             <family>DejaVu Math TeX Gyre</family>
+                                             <pointsize>12</pointsize>
+                                            </font>
+                                           </property>
+                                           <property name="toolTip">
+                                            <string/>
+                                           </property>
+                                           <property name="text">
+                                            <string>Small objects filtering before growth</string>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item row="11" column="1">
+                                          <widget class="QLabel" name="inst_seg_save_water_files_label">
+                                           <property name="font">
+                                            <font>
+                                             <family>DejaVu Math TeX Gyre</family>
+                                             <pointsize>12</pointsize>
+                                            </font>
+                                           </property>
+                                           <property name="toolTip">
+                                            <string/>
+                                           </property>
+                                           <property name="text">
+                                            <string>Check watershed data</string>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item row="1" column="3">
+                                          <widget class="QLineEdit" name="PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT">
+                                           <property name="minimumSize">
+                                            <size>
+                                             <width>200</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="maximumSize">
+                                            <size>
+                                             <width>200</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="font">
+                                            <font>
+                                             <family>DejaVu Math TeX Gyre</family>
+                                             <pointsize>12</pointsize>
+                                            </font>
+                                           </property>
+                                           <property name="text">
+                                            <string>[]</string>
+                                           </property>
+                                          </widget>
+                                         </item>
                                          <item row="7" column="3">
                                           <widget class="QComboBox" name="PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INPUT">
                                            <property name="minimumSize">
@@ -29021,62 +29209,18 @@ p, li { white-space: pre-wrap; }
                                            </item>
                                           </widget>
                                          </item>
-                                         <item row="11" column="1">
-                                          <widget class="QLabel" name="inst_seg_save_water_files_label">
-                                           <property name="font">
-                                            <font>
-                                             <family>DejaVu Math TeX Gyre</family>
-                                             <pointsize>12</pointsize>
-                                            </font>
+                                         <item row="1" column="4">
+                                          <spacer name="horizontalSpacer_47">
+                                           <property name="orientation">
+                                            <enum>Qt::Horizontal</enum>
                                            </property>
-                                           <property name="toolTip">
-                                            <string/>
-                                           </property>
-                                           <property name="text">
-                                            <string>Check watershed data</string>
-                                           </property>
-                                          </widget>
-                                         </item>
-                                         <item row="7" column="1">
-                                          <widget class="QLabel" name="inst_seg_small_obj_fil_before_label">
-                                           <property name="font">
-                                            <font>
-                                             <family>DejaVu Math TeX Gyre</family>
-                                             <pointsize>12</pointsize>
-                                            </font>
-                                           </property>
-                                           <property name="toolTip">
-                                            <string/>
-                                           </property>
-                                           <property name="text">
-                                            <string>Small objects filtering before growth</string>
-                                           </property>
-                                          </widget>
-                                         </item>
-                                         <item row="1" column="3">
-                                          <widget class="QLineEdit" name="PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT">
-                                           <property name="minimumSize">
+                                           <property name="sizeHint" stdset="0">
                                             <size>
-                                             <width>200</width>
-                                             <height>30</height>
+                                             <width>40</width>
+                                             <height>20</height>
                                             </size>
                                            </property>
-                                           <property name="maximumSize">
-                                            <size>
-                                             <width>200</width>
-                                             <height>30</height>
-                                            </size>
-                                           </property>
-                                           <property name="font">
-                                            <font>
-                                             <family>DejaVu Math TeX Gyre</family>
-                                             <pointsize>12</pointsize>
-                                            </font>
-                                           </property>
-                                           <property name="text">
-                                            <string>[]</string>
-                                           </property>
-                                          </widget>
+                                          </spacer>
                                          </item>
                                          <item row="6" column="3">
                                           <widget class="QLineEdit" name="PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INPUT">
@@ -29102,19 +29246,6 @@ p, li { white-space: pre-wrap; }
                                             <string>5</string>
                                            </property>
                                           </widget>
-                                         </item>
-                                         <item row="1" column="4">
-                                          <spacer name="horizontalSpacer_47">
-                                           <property name="orientation">
-                                            <enum>Qt::Horizontal</enum>
-                                           </property>
-                                           <property name="sizeHint" stdset="0">
-                                            <size>
-                                             <width>40</width>
-                                             <height>20</height>
-                                            </size>
-                                           </property>
-                                          </spacer>
                                          </item>
                                          <item row="11" column="3">
                                           <widget class="QComboBox" name="PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INPUT">
@@ -29148,31 +29279,6 @@ p, li { white-space: pre-wrap; }
                                            </item>
                                           </widget>
                                          </item>
-                                         <item row="1" column="2">
-                                          <widget class="QLabel" name="PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO">
-                                           <property name="minimumSize">
-                                            <size>
-                                             <width>30</width>
-                                             <height>30</height>
-                                            </size>
-                                           </property>
-                                           <property name="maximumSize">
-                                            <size>
-                                             <width>30</width>
-                                             <height>30</height>
-                                            </size>
-                                           </property>
-                                           <property name="toolTip">
-                                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Sequence of string to determine the morphological filters to apply to instance seeds. They will be done in that order. Possible options 'dilate' and 'erode'.&lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt; E.g. ['erode','dilate'] to erode first and dilate later.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                           </property>
-                                           <property name="text">
-                                            <string/>
-                                           </property>
-                                           <property name="scaledContents">
-                                            <bool>true</bool>
-                                           </property>
-                                          </widget>
-                                         </item>
                                          <item row="2" column="2">
                                           <widget class="QLabel" name="PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INFO">
                                            <property name="minimumSize">
@@ -29198,8 +29304,8 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                           </widget>
                                          </item>
-                                         <item row="4" column="2">
-                                          <widget class="QLabel" name="PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO">
+                                         <item row="1" column="2">
+                                          <widget class="QLabel" name="PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO">
                                            <property name="minimumSize">
                                             <size>
                                              <width>30</width>
@@ -29213,7 +29319,7 @@ p, li { white-space: pre-wrap; }
                                             </size>
                                            </property>
                                            <property name="toolTip">
-                                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;To erode and dilate the foreground mask before using marker controlled watershed. The idea is to remove the small holes  that may be produced so the instances grow without them&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Sequence of string to determine the morphological filters to apply to instance seeds. They will be done in that order. Possible options 'dilate' and 'erode'.&lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt; E.g. ['erode','dilate'] to erode first and dilate later.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                            </property>
                                            <property name="text">
                                             <string/>
@@ -29273,8 +29379,8 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                           </widget>
                                          </item>
-                                         <item row="7" column="2">
-                                          <widget class="QLabel" name="PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO">
+                                         <item row="4" column="2">
+                                          <widget class="QLabel" name="PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO">
                                            <property name="minimumSize">
                                             <size>
                                              <width>30</width>
@@ -29288,7 +29394,7 @@ p, li { white-space: pre-wrap; }
                                             </size>
                                            </property>
                                            <property name="toolTip">
-                                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Whether to remove objects before watershed &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;To erode and dilate the foreground mask before using marker controlled watershed. The idea is to remove the small holes  that may be produced so the instances grow without them&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                            </property>
                                            <property name="text">
                                             <string/>
@@ -29339,6 +29445,101 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                            <property name="toolTip">
                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Whether to save watershed check files&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                           </property>
+                                           <property name="text">
+                                            <string/>
+                                           </property>
+                                           <property name="scaledContents">
+                                            <bool>true</bool>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item row="7" column="2">
+                                          <widget class="QLabel" name="PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO">
+                                           <property name="minimumSize">
+                                            <size>
+                                             <width>30</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="maximumSize">
+                                            <size>
+                                             <width>30</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="toolTip">
+                                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Whether to remove objects before watershed &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                           </property>
+                                           <property name="text">
+                                            <string/>
+                                           </property>
+                                           <property name="scaledContents">
+                                            <bool>true</bool>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item row="12" column="1">
+                                          <widget class="QLabel" name="PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__LABEL">
+                                           <property name="font">
+                                            <font>
+                                             <family>DejaVu Math TeX Gyre</family>
+                                             <pointsize>12</pointsize>
+                                            </font>
+                                           </property>
+                                           <property name="text">
+                                            <string>Watershed by 2D slices</string>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item row="12" column="3">
+                                          <widget class="QComboBox" name="PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INPUT">
+                                           <property name="minimumSize">
+                                            <size>
+                                             <width>200</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="maximumSize">
+                                            <size>
+                                             <width>200</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="font">
+                                            <font>
+                                             <family>DejaVu Math TeX Gyre</family>
+                                             <pointsize>12</pointsize>
+                                            </font>
+                                           </property>
+                                           <item>
+                                            <property name="text">
+                                             <string>No</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>Yes</string>
+                                            </property>
+                                           </item>
+                                          </widget>
+                                         </item>
+                                         <item row="12" column="2">
+                                          <widget class="QLabel" name="PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INFO">
+                                           <property name="minimumSize">
+                                            <size>
+                                             <width>30</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="maximumSize">
+                                            <size>
+                                             <width>30</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="toolTip">
+                                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Whether to apply or not the watershed to create instances slice by slice in a 3D problem. This can solve instances invading others if the objects in Z axis overlap too much.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                            </property>
                                            <property name="text">
                                             <string/>
@@ -29489,7 +29690,7 @@ p, li { white-space: pre-wrap; }
                                        <x>0</x>
                                        <y>0</y>
                                        <width>597</width>
-                                       <height>1020</height>
+                                       <height>1056</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_47">
@@ -29664,6 +29865,220 @@ p, li { white-space: pre-wrap; }
                                          <enum>QFrame::Raised</enum>
                                         </property>
                                         <layout class="QGridLayout" name="gridLayout_62">
+                                         <item row="9" column="2">
+                                          <widget class="QComboBox" name="TEST__DET_EXCLUDE_BORDER__INPUT">
+                                           <property name="minimumSize">
+                                            <size>
+                                             <width>200</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="maximumSize">
+                                            <size>
+                                             <width>200</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="font">
+                                            <font>
+                                             <pointsize>12</pointsize>
+                                            </font>
+                                           </property>
+                                           <item>
+                                            <property name="text">
+                                             <string>No</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>Yes</string>
+                                            </property>
+                                           </item>
+                                          </widget>
+                                         </item>
+                                         <item row="7" column="1">
+                                          <widget class="QLabel" name="TEST__DET_MIN_TH_TO_BE_PEAK__INFO">
+                                           <property name="minimumSize">
+                                            <size>
+                                             <width>30</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="maximumSize">
+                                            <size>
+                                             <width>30</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="toolTip">
+                                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Minimun value to consider a point as a peak. Corresponds to 'threshold_abs' argument of the function 'peak_local_max' of skimage.feature or 'threshold' argument of 'blob_log'. Must be a float between 0 and 1.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                           </property>
+                                           <property name="text">
+                                            <string/>
+                                           </property>
+                                           <property name="scaledContents">
+                                            <bool>true</bool>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item row="7" column="0">
+                                          <widget class="QLabel" name="det_min_th_to_be_peak_label">
+                                           <property name="font">
+                                            <font>
+                                             <family>DejaVu Math TeX Gyre</family>
+                                             <pointsize>12</pointsize>
+                                            </font>
+                                           </property>
+                                           <property name="toolTip">
+                                            <string/>
+                                           </property>
+                                           <property name="text">
+                                            <string>Min threshold to be peak</string>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item row="7" column="2">
+                                          <widget class="QLineEdit" name="TEST__DET_MIN_TH_TO_BE_PEAK__INPUT">
+                                           <property name="minimumSize">
+                                            <size>
+                                             <width>200</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="maximumSize">
+                                            <size>
+                                             <width>200</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="font">
+                                            <font>
+                                             <family>DejaVu Math TeX Gyre</family>
+                                             <pointsize>12</pointsize>
+                                            </font>
+                                           </property>
+                                           <property name="text">
+                                            <string>[0.2]</string>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item row="9" column="0">
+                                          <widget class="QLabel" name="TEST__DET_EXCLUDE_BORDER__LABEL">
+                                           <property name="font">
+                                            <font>
+                                             <pointsize>12</pointsize>
+                                            </font>
+                                           </property>
+                                           <property name="text">
+                                            <string>Exclude border</string>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item row="9" column="1">
+                                          <widget class="QLabel" name="TEST__DET_EXCLUDE_BORDER__INFO">
+                                           <property name="minimumSize">
+                                            <size>
+                                             <width>30</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="maximumSize">
+                                            <size>
+                                             <width>30</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="font">
+                                            <font>
+                                             <pointsize>12</pointsize>
+                                            </font>
+                                           </property>
+                                           <property name="toolTip">
+                                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Corresponds to 'exclude_border' argument of 'peak_local_max' or 'blob_log' function of skimage. If True it will exclude peaks from the border of the image to avoid partial detection.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                           </property>
+                                           <property name="text">
+                                            <string/>
+                                           </property>
+                                           <property name="scaledContents">
+                                            <bool>true</bool>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item row="4" column="1">
+                                          <widget class="QLabel" name="TEST__DET_BLOB_LOG_MAX_SIGMA__INFO">
+                                           <property name="minimumSize">
+                                            <size>
+                                             <width>30</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="maximumSize">
+                                            <size>
+                                             <width>30</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="toolTip">
+                                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Corresponds to 'max_sigma' argument of 'blob_log' function. It is the maximum standard deviation for Gaussian kernel.  Keep this high to detect larger blobs. The standard deviations of the Gaussian filter are given for each axis as a sequence, or as a single number, in which case it is equal for all axes. Must be a positive integer.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                           </property>
+                                           <property name="text">
+                                            <string/>
+                                           </property>
+                                           <property name="scaledContents">
+                                            <bool>true</bool>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item row="5" column="1">
+                                          <widget class="QLabel" name="TEST__DET_BLOB_LOG_NUM_SIGMA__INFO">
+                                           <property name="minimumSize">
+                                            <size>
+                                             <width>30</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="maximumSize">
+                                            <size>
+                                             <width>30</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="toolTip">
+                                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Corresponds to 'num_sigma' argument of 'blob_log' function. The number of intermediate values of standard deviations to consider between min_sigma and max_sigma. Must be a positive integer.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                           </property>
+                                           <property name="text">
+                                            <string/>
+                                           </property>
+                                           <property name="scaledContents">
+                                            <bool>true</bool>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item row="4" column="2">
+                                          <widget class="QLineEdit" name="TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT">
+                                           <property name="minimumSize">
+                                            <size>
+                                             <width>200</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="maximumSize">
+                                            <size>
+                                             <width>200</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="font">
+                                            <font>
+                                             <family>DejaVu Math TeX Gyre</family>
+                                             <pointsize>12</pointsize>
+                                            </font>
+                                           </property>
+                                           <property name="text">
+                                            <string>10</string>
+                                           </property>
+                                          </widget>
+                                         </item>
                                          <item row="4" column="0">
                                           <widget class="QLabel" name="TEST__DET_BLOB_LOG_MAX_SIGMA__LABEL">
                                            <property name="font">
@@ -29676,7 +30091,7 @@ p, li { white-space: pre-wrap; }
                                             <string/>
                                            </property>
                                            <property name="text">
-                                            <string>Blob_log - Maximum sigma</string>
+                                            <string>Maximum sigma</string>
                                            </property>
                                            <property name="indent">
                                             <number>15</number>
@@ -29708,31 +30123,6 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                           </widget>
                                          </item>
-                                         <item row="4" column="2">
-                                          <widget class="QLineEdit" name="TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT">
-                                           <property name="minimumSize">
-                                            <size>
-                                             <width>200</width>
-                                             <height>30</height>
-                                            </size>
-                                           </property>
-                                           <property name="maximumSize">
-                                            <size>
-                                             <width>200</width>
-                                             <height>30</height>
-                                            </size>
-                                           </property>
-                                           <property name="font">
-                                            <font>
-                                             <family>DejaVu Math TeX Gyre</family>
-                                             <pointsize>12</pointsize>
-                                            </font>
-                                           </property>
-                                           <property name="text">
-                                            <string>10</string>
-                                           </property>
-                                          </widget>
-                                         </item>
                                          <item row="0" column="3">
                                           <spacer name="horizontalSpacer_61">
                                            <property name="orientation">
@@ -29745,31 +30135,6 @@ p, li { white-space: pre-wrap; }
                                             </size>
                                            </property>
                                           </spacer>
-                                         </item>
-                                         <item row="1" column="2">
-                                          <widget class="QLineEdit" name="TEST__DET_MIN_TH_TO_BE_PEAK__INPUT">
-                                           <property name="minimumSize">
-                                            <size>
-                                             <width>200</width>
-                                             <height>30</height>
-                                            </size>
-                                           </property>
-                                           <property name="maximumSize">
-                                            <size>
-                                             <width>200</width>
-                                             <height>30</height>
-                                            </size>
-                                           </property>
-                                           <property name="font">
-                                            <font>
-                                             <family>DejaVu Math TeX Gyre</family>
-                                             <pointsize>12</pointsize>
-                                            </font>
-                                           </property>
-                                           <property name="text">
-                                            <string>[0.2]</string>
-                                           </property>
-                                          </widget>
                                          </item>
                                          <item row="5" column="2">
                                           <widget class="QLineEdit" name="TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT">
@@ -29793,22 +30158,6 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                            <property name="text">
                                             <string>2</string>
-                                           </property>
-                                          </widget>
-                                         </item>
-                                         <item row="1" column="0">
-                                          <widget class="QLabel" name="det_min_th_to_be_peak_label">
-                                           <property name="font">
-                                            <font>
-                                             <family>DejaVu Math TeX Gyre</family>
-                                             <pointsize>12</pointsize>
-                                            </font>
-                                           </property>
-                                           <property name="toolTip">
-                                            <string/>
-                                           </property>
-                                           <property name="text">
-                                            <string>Min threshold to be peak</string>
                                            </property>
                                           </widget>
                                          </item>
@@ -29860,25 +30209,6 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                           </widget>
                                          </item>
-                                         <item row="5" column="0">
-                                          <widget class="QLabel" name="TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL">
-                                           <property name="font">
-                                            <font>
-                                             <family>DejaVu Math TeX Gyre</family>
-                                             <pointsize>12</pointsize>
-                                            </font>
-                                           </property>
-                                           <property name="toolTip">
-                                            <string/>
-                                           </property>
-                                           <property name="text">
-                                            <string>Blob_log - Number values</string>
-                                           </property>
-                                           <property name="indent">
-                                            <number>15</number>
-                                           </property>
-                                          </widget>
-                                         </item>
                                          <item row="3" column="0">
                                           <widget class="QLabel" name="TEST__DET_BLOB_LOG_MIN_SIGMA__LABEL">
                                            <property name="font">
@@ -29891,35 +30221,29 @@ p, li { white-space: pre-wrap; }
                                             <string/>
                                            </property>
                                            <property name="text">
-                                            <string>Blob_log - Minimum sigma</string>
+                                            <string>Minimum sigma</string>
                                            </property>
                                            <property name="indent">
                                             <number>15</number>
                                            </property>
                                           </widget>
                                          </item>
-                                         <item row="1" column="1">
-                                          <widget class="QLabel" name="TEST__DET_MIN_TH_TO_BE_PEAK__INFO">
-                                           <property name="minimumSize">
-                                            <size>
-                                             <width>30</width>
-                                             <height>30</height>
-                                            </size>
-                                           </property>
-                                           <property name="maximumSize">
-                                            <size>
-                                             <width>30</width>
-                                             <height>30</height>
-                                            </size>
+                                         <item row="5" column="0">
+                                          <widget class="QLabel" name="TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL">
+                                           <property name="font">
+                                            <font>
+                                             <family>DejaVu Math TeX Gyre</family>
+                                             <pointsize>12</pointsize>
+                                            </font>
                                            </property>
                                            <property name="toolTip">
-                                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Minimun value to consider a point as a peak. Corresponds to 'threshold_abs' argument of the function 'peak_local_max' of skimage.feature or 'threshold' argument of 'blob_log'. Must be a float between 0 and 1.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                           </property>
-                                           <property name="text">
                                             <string/>
                                            </property>
-                                           <property name="scaledContents">
-                                            <bool>true</bool>
+                                           <property name="text">
+                                            <string>Number values</string>
+                                           </property>
+                                           <property name="indent">
+                                            <number>15</number>
                                            </property>
                                           </widget>
                                          </item>
@@ -29973,70 +30297,24 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                           </widget>
                                          </item>
-                                         <item row="5" column="1">
-                                          <widget class="QLabel" name="TEST__DET_BLOB_LOG_NUM_SIGMA__INFO">
-                                           <property name="minimumSize">
-                                            <size>
-                                             <width>30</width>
-                                             <height>30</height>
-                                            </size>
-                                           </property>
-                                           <property name="maximumSize">
-                                            <size>
-                                             <width>30</width>
-                                             <height>30</height>
-                                            </size>
-                                           </property>
-                                           <property name="toolTip">
-                                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Corresponds to 'num_sigma' argument of 'blob_log' function. The number of intermediate values of standard deviations to consider between min_sigma and max_sigma. Must be a positive integer.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                           </property>
-                                           <property name="text">
-                                            <string/>
-                                           </property>
-                                           <property name="scaledContents">
-                                            <bool>true</bool>
-                                           </property>
-                                          </widget>
-                                         </item>
-                                         <item row="4" column="1">
-                                          <widget class="QLabel" name="TEST__DET_BLOB_LOG_MAX_SIGMA__INFO">
-                                           <property name="minimumSize">
-                                            <size>
-                                             <width>30</width>
-                                             <height>30</height>
-                                            </size>
-                                           </property>
-                                           <property name="maximumSize">
-                                            <size>
-                                             <width>30</width>
-                                             <height>30</height>
-                                            </size>
-                                           </property>
-                                           <property name="toolTip">
-                                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Corresponds to 'max_sigma' argument of 'blob_log' function. It is the maximum standard deviation for Gaussian kernel.  Keep this high to detect larger blobs. The standard deviations of the Gaussian filter are given for each axis as a sequence, or as a single number, in which case it is equal for all axes. Must be a positive integer.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                           </property>
-                                           <property name="text">
-                                            <string/>
-                                           </property>
-                                           <property name="scaledContents">
-                                            <bool>true</bool>
-                                           </property>
-                                          </widget>
-                                         </item>
-                                         <item row="2" column="0">
-                                          <widget class="QLabel" name="TEST__DET_EXCLUDE_BORDER__LABEL">
+                                         <item row="6" column="0">
+                                          <widget class="QLabel" name="TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__LABEL">
                                            <property name="font">
                                             <font>
+                                             <family>DejaVu Math TeX Gyre</family>
                                              <pointsize>12</pointsize>
                                             </font>
                                            </property>
                                            <property name="text">
-                                            <string>Exclude border</string>
+                                            <string>Minimum distance</string>
+                                           </property>
+                                           <property name="indent">
+                                            <number>15</number>
                                            </property>
                                           </widget>
                                          </item>
-                                         <item row="2" column="2">
-                                          <widget class="QComboBox" name="TEST__DET_EXCLUDE_BORDER__INPUT">
+                                         <item row="6" column="2">
+                                          <widget class="QLineEdit" name="TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INPUT">
                                            <property name="minimumSize">
                                             <size>
                                              <width>200</width>
@@ -30051,23 +30329,17 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                            <property name="font">
                                             <font>
+                                             <family>DejaVu Math TeX Gyre</family>
                                              <pointsize>12</pointsize>
                                             </font>
                                            </property>
-                                           <item>
-                                            <property name="text">
-                                             <string>No</string>
-                                            </property>
-                                           </item>
-                                           <item>
-                                            <property name="text">
-                                             <string>Yes</string>
-                                            </property>
-                                           </item>
+                                           <property name="text">
+                                            <string>1</string>
+                                           </property>
                                           </widget>
                                          </item>
-                                         <item row="2" column="1">
-                                          <widget class="QLabel" name="TEST__DET_EXCLUDE_BORDER__INFO">
+                                         <item row="6" column="1">
+                                          <widget class="QLabel" name="TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INFO">
                                            <property name="minimumSize">
                                             <size>
                                              <width>30</width>
@@ -30080,19 +30352,11 @@ p, li { white-space: pre-wrap; }
                                              <height>30</height>
                                             </size>
                                            </property>
-                                           <property name="font">
-                                            <font>
-                                             <pointsize>12</pointsize>
-                                            </font>
-                                           </property>
                                            <property name="toolTip">
-                                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Corresponds to 'exclude_border' argument of 'peak_local_max' or 'blob_log' function of skimage. If True it will exclude peaks from the border of the image to avoid partial detection.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;The minimal allowed distance separating peaks. To find the maximum number of peaks, use 1.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                            </property>
                                            <property name="text">
                                             <string/>
-                                           </property>
-                                           <property name="scaledContents">
-                                            <bool>true</bool>
                                            </property>
                                           </widget>
                                          </item>

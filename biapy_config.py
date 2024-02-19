@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: 7fc18c0773bd90ae0cdcdaa3245e809f35ddc747
+## Copied from BiaPy commit: d8f265649849c00766c9b671707fee69cb9f89e6
 # Model definition variables (source BMZ/BiaPy/Torchvision) not updated yet
 
 import os
@@ -20,12 +20,14 @@ class Config:
         # System
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         _C.SYSTEM = CN()
-        # Number of CPUs to use
-        _C.SYSTEM.NUM_CPUS = 10
+        # Maximum number of CPUs to use. Set it to "-1" to not set a limit.
+        _C.SYSTEM.NUM_CPUS = -1
+        # Maximum number of workers to load data in parallel. You can disable this option by setting 0.
+        _C.SYSTEM.NUM_WORKERS = 5
         # Do not set it as its value will be calculated based in --gpu input arg
         _C.SYSTEM.NUM_GPUS = 0
 
-        # Math seed
+        # Math seed to generate random numbers. Used to ensure reproducibility in the results. 
         _C.SYSTEM.SEED = 0
         # Pin CPU memory in DataLoader for more efficient (sometimes) transfer to GPU.
         _C.SYSTEM.PIN_MEM = True
@@ -106,7 +108,10 @@ class Config:
         _C.PROBLEM.INSTANCE_SEG.FORE_DILATION_RADIUS = 5
         # Whether to save watershed check files
         _C.PROBLEM.INSTANCE_SEG.DATA_CHECK_MW = False
-        
+        # Whether to apply or not the watershed to create instances slice by slice in a 3D problem. This can solve instances invading 
+        # others if the objects in Z axis overlap too much. 
+        _C.PROBLEM.INSTANCE_SEG.WATERSHED_BY_2D_SLICES = False
+
         ### DETECTION
         _C.PROBLEM.DETECTION = CN()
         # Size of the disk that will be used to dilate the central point created from the CSV file. 0 to not dilate and only create a 3x3 square.
@@ -171,7 +176,7 @@ class Config:
         _C.DATA.W_FOREGROUND = 0.94 # Used when _C.DATA.PROBABILITY_MAP=True
         _C.DATA.W_BACKGROUND = 0.06 # Used when _C.DATA.PROBABILITY_MAP=True
 
-        # Whether to reshape de dimensions that does not satisfy the pathc shape selected by padding it with reflect.
+        # Whether to reshape the dimensions that does not satisfy the patch shape selected by padding it with reflect.
         _C.DATA.REFLECT_TO_COMPLETE_SHAPE = False
 
         _C.DATA.NORMALIZATION = CN()
@@ -320,7 +325,7 @@ class Config:
         # Test data resolution. Need to be provided in (z,y,x) order. Only applies when _C.PROBLEM.TYPE = 'DETECTION' now.
         _C.DATA.TEST.RESOLUTION = (-1,)
         # Whether to apply argmax to the predicted images 
-        _C.DATA.TEST.ARGMAX_TO_OUTPUT = False
+        _C.DATA.TEST.ARGMAX_TO_OUTPUT = True
 
         # Validation
         _C.DATA.VAL = CN()
@@ -405,7 +410,8 @@ class Config:
         # “no change” and 0.5 denotes “half of the axis size”.
         _C.AUGMENTOR.SHIFT_RANGE = (0.1, 0.2)
         # How to fill up the new values created with affine transformations (rotations, shear, shift and zoom).
-        # Same meaning as in skimage (and numpy.pad()): 'constant', 'edge', 'symmetric', 'reflect' and 'wrap'
+        # Same meaning as in scipy: 'reflect', 'grid-mirror', 'constant', 'grid-constant', 'nearest', 'mirror', 
+        # 'grid-wrap' and 'wrap'. 
         _C.AUGMENTOR.AFFINE_MODE = 'constant'
         # Make vertical flips
         _C.AUGMENTOR.VFLIP = False
@@ -555,11 +561,17 @@ class Config:
         # Options: ["biapy", "bmz", "torchvision"]
         _C.MODEL.SOURCE = "biapy"
 
+        #
+        # BMZ BACKEND MODELS AND OPTIONS
+        #
         _C.MODEL.BMZ = CN()
         # DOI of the model from BMZ to load. It can not be empty if MODEL.SOURCE = "bmz".
         _C.MODEL.BMZ.SOURCE_MODEL_DOI = ""
         # BMZ model export options
 
+        #
+        # TOCHIVISION BACKEND MODELS AND OPTIONS
+        #
         # BiaPy support using models of Torchvision . It can not be empty if MODEL.SOURCE = "torchvision".
         # Models available here: https://pytorch.org/vision/stable/models.html
         # They can be listed with: "from torchvision.models import list_models; list_models()"
@@ -606,9 +618,17 @@ class Config:
         # 
         _C.MODEL.TORCHVISION_MODEL_NAME = ""
 
-        # Architecture of the network. Possible values are: 'unet', 'resunet', 'resunet++', 'attention_unet', 'nnunet',  
-        # 'multiresunet', 'seunet', 'simple_cnn', 'efficientnet_b[0-7]', 'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'ViT'
-        # 'mae'
+        #
+        # BIAPY BACKEND MODELS
+        #
+        # Architecture of the network. Possible values are: 
+        #   * Semantic segmentation: 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'unetr'
+        #   * Instance segmentation: 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'unetr'
+        #   * Detection: 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'unetr' 
+        #   * Denoising: 'unet', 'resunet', 'resunet++', 'attention_unet', 'seunet' 
+        #   * Super-resolution: 'edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet' 
+        #   * Self-supervision: 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'vit', 'mae' 
+        #   * Classification: 'simple_cnn', 'vit', 'efficientnet_b[0-7]' (only 2D)
         _C.MODEL.ARCHITECTURE = 'unet'
         # Number of feature maps on each level of the network.
         _C.MODEL.FEATURE_MAPS = [16, 32, 64, 128, 256]
@@ -694,6 +714,8 @@ class Config:
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         _C.TRAIN = CN()
         _C.TRAIN.ENABLE = False
+        # Enable verbosity
+        _C.TRAIN.VERBOSE = False
         # Optimizer to use. Possible values: "SGD", "ADAM" or "ADAMW"
         _C.TRAIN.OPTIMIZER = 'SGD'
         # Learning rate 
@@ -807,12 +829,14 @@ class Config:
         # 'peak_local_max': https://scikit-image.org/docs/stable/api/skimage.feature.html#skimage.feature.peak_local_max 
         # 'blob_log': https://scikit-image.org/docs/stable/api/skimage.feature.html#skimage.feature.blob_log
         _C.TEST.DET_POINT_CREATION_FUNCTION = 'peak_local_max'
+        # The minimal allowed distance separating peaks. To find the maximum number of peaks, use min_distance=1.
+        _C.TEST.DET_PEAK_LOCAL_MAX_MIN_DISTANCE = 1
         # Minimun value to consider a point as a peak. Corresponds to 'threshold_abs' argument of the function
         # 'peak_local_max' of skimage.feature
         _C.TEST.DET_MIN_TH_TO_BE_PEAK = [0.2]
         # Corresponds to 'exclude_border' argument of 'peak_local_max' or 'blob_log' function of skimage. If True it will exclude
         # peaks from the border of the image to avoid partial detection.
-        _C.TEST.DET_EXCLUDE_BORDER = True
+        _C.TEST.DET_EXCLUDE_BORDER = False
         # Corresponds to 'min_sigma' argument of 'blob_log' function. It is the minimum standard deviation for Gaussian kernel. 
         # Keep this low to detect smaller blobs. The standard deviations of the Gaussian filter are given for each axis as a 
         # sequence, or as a single number, in which case it is equal for all axes.
@@ -843,10 +867,9 @@ class Config:
         # 'perimeter', 'sphericity' (3D)
         _C.TEST.POST_PROCESSING.MEASURE_PROPERTIES = CN() 
         _C.TEST.POST_PROCESSING.MEASURE_PROPERTIES.ENABLE = False
-        # Remove instances by the conditions based in each instance properties. The three variables, i.e. 
-        # TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS, TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.VALUES 
-        # and TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.SIGN will compose a list of conditions to remove the instances. 
-        # They are list of list of conditions. For instance, the conditions can be like this: [['A'], ['B','C']]. Then, if the instance satisfy 
+        # Remove instances by the conditions based in each instance properties. The three variables, TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS, 
+        # TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.VALUES and TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.SIGN will compose a list 
+        # of conditions to remove the instances. They are list of list of conditions. For instance, the conditions can be like this: [['A'], ['B','C']]. Then, if the instance satisfies 
         # the first list of conditions, only 'A' in this first case (from ['A'] list), or satisfy 'B' and 'C' (from ['B','C'] list) it will be 
         # removed from the image. In each sublist all the conditions must be satisfied. Available properties are: ['circularity', 'elongation',
         # 'npixels', 'area', 'diameter', 'perimeter', 'sphericity']. When this post-processing step is selected two .csv files 

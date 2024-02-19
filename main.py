@@ -547,10 +547,9 @@ class MainWindow(QMainWindow):
 
         self.ui.TEST__DET_POINT_CREATION_FUNCTION__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["TEST__DET_BLOB_LOG_MIN_SIGMA__LABEL","TEST__DET_BLOB_LOG_MIN_SIGMA__INPUT", "TEST__DET_BLOB_LOG_MIN_SIGMA__INFO",
-            "TEST__DET_BLOB_LOG_MAX_SIGMA__LABEL",
-             "TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT", "TEST__DET_BLOB_LOG_MAX_SIGMA__INFO",
-             "TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL", "TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT",
-             "TEST__DET_BLOB_LOG_NUM_SIGMA__INFO"]))
+            "TEST__DET_BLOB_LOG_MAX_SIGMA__LABEL", "TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT", "TEST__DET_BLOB_LOG_MAX_SIGMA__INFO",
+            "TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL", "TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT", "TEST__DET_BLOB_LOG_NUM_SIGMA__INFO",
+            "TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__LABEL", "TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INFO", "TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INPUT"]))
         self.ui.TEST__POST_PROCESSING__YZ_FILTERING__DET__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["det_yz_filtering_size_label", "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__DET__INPUT",
              "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__DET__INFO"]))
