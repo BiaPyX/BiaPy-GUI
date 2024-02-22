@@ -32,7 +32,7 @@ class Settings():
         # BiaPy 
         self.settings['biapy_code_version'] = "v3.3.9"
         self.settings['biapy_code_github'] = "https://github.com/BiaPyX/BiaPy"
-        self.settings['biapy_gui_version'] = "v1.0.2"
+        self.settings['biapy_gui_version'] = "v1.0.3"
         self.settings['biapy_gui_github'] = "https://github.com/BiaPyX/BiaPy-GUI"
         self.settings['biapy_gui_last_version_hash'] = "6aadbc94b47cdc9ad4c321b841dc97ddc7fc16bc"
         self.settings['biapy_container_basename'] = "biapyx/biapy"

@@ -793,12 +793,12 @@ def create_yaml_file(main_window):
         if get_text(main_window.ui.DATA__TRAIN__RESOLUTION__INPUT) != "(1,1,1)" and get_text(main_window.ui.DATA__TRAIN__RESOLUTION__INPUT) != "(1,1)":
             biapy_config['DATA']['TRAIN']['RESOLUTION'] = get_text(main_window.ui.DATA__TRAIN__RESOLUTION__INPUT)
         
-        if main_window.cfg.settings['selected_workflow'] == 0 and int(get_text(main_window.ui.DATA__TRAIN__MINIMUM_FOREGROUND_PER__SEM_SEG__INPUT)) != 0:
-            biapy_config['DATA']['TRAIN']['MINIMUM_FOREGROUND_PER'] = int(get_text(main_window.ui.DATA__TRAIN__MINIMUM_FOREGROUND_PER__SEM_SEG__INPUT))
-        if main_window.cfg.settings['selected_workflow'] == 1 and int(get_text(main_window.ui.DATA__TRAIN__MINIMUM_FOREGROUND_PER__INST_SEG__INPUT)) != 0:
-            biapy_config['DATA']['TRAIN']['MINIMUM_FOREGROUND_PER'] = int(get_text(main_window.ui.DATA__TRAIN__MINIMUM_FOREGROUND_PER__INST_SEG__INPUT))
-        if main_window.cfg.settings['selected_workflow'] == 2 and int(get_text(main_window.ui.DATA__TRAIN__MINIMUM_FOREGROUND_PER__DET__INPUT)) != 0:
-            biapy_config['DATA']['TRAIN']['MINIMUM_FOREGROUND_PER'] = int(get_text(main_window.ui.DATA__TRAIN__MINIMUM_FOREGROUND_PER__DET__INPUT))
+        if main_window.cfg.settings['selected_workflow'] == 0 and float(get_text(main_window.ui.DATA__TRAIN__MINIMUM_FOREGROUND_PER__SEM_SEG__INPUT)) != 0:
+            biapy_config['DATA']['TRAIN']['MINIMUM_FOREGROUND_PER'] = float(get_text(main_window.ui.DATA__TRAIN__MINIMUM_FOREGROUND_PER__SEM_SEG__INPUT))
+        if main_window.cfg.settings['selected_workflow'] == 1 and float(get_text(main_window.ui.DATA__TRAIN__MINIMUM_FOREGROUND_PER__INST_SEG__INPUT)) != 0:
+            biapy_config['DATA']['TRAIN']['MINIMUM_FOREGROUND_PER'] = float(get_text(main_window.ui.DATA__TRAIN__MINIMUM_FOREGROUND_PER__INST_SEG__INPUT))
+        if main_window.cfg.settings['selected_workflow'] == 2 and float(get_text(main_window.ui.DATA__TRAIN__MINIMUM_FOREGROUND_PER__DET__INPUT)) != 0:
+            biapy_config['DATA']['TRAIN']['MINIMUM_FOREGROUND_PER'] = float(get_text(main_window.ui.DATA__TRAIN__MINIMUM_FOREGROUND_PER__DET__INPUT))
         
         # Validation
         biapy_config['DATA']['VAL'] = {}
