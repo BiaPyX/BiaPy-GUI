@@ -1646,7 +1646,7 @@ def get_git_revision_short_hash(main_window) -> str:
         process = subprocess.Popen(["git", "ls-remote", main_window.cfg.settings['biapy_gui_github']], stdout=subprocess.PIPE)
         stdout, stderr = process.communicate()
         sha = re.split(r'\t+', stdout.decode('ascii'))[0]
-        vtag = str(re.split(r'\t+', stdout.decode('ascii'))[-1]).replace("refs/tags/","").replace('^{}',"")  
+        vtag = str(re.split(r'\t+', stdout.decode('ascii'))[-1]).replace("refs/tags/","").replace('^{}',"").replace('\n',"")   
     except Exception: 
         pass
     return sha, vtag
