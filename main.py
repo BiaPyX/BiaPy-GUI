@@ -317,7 +317,8 @@ class MainWindow(QMainWindow):
             "MODEL__MAE_DEC_MLP_DIMS__INPUT", "MODEL__MAE_DEC_MLP_DIMS__INFO", "MODEL__MAE_DEC_MLP_DIMS__LABEL"], 
             widgets_to_set=["transformers_label"]))
         self.ui.TRAIN__OPTIMIZER__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
-            ["TRAIN__W_DECAY__INPUT", "adamw_weight_decay_label", "TRAIN__W_DECAY__INFO"]))
+            ["TRAIN__W_DECAY__INPUT", "adamw_weight_decay_label", "TRAIN__W_DECAY__INFO",
+            "TRAIN__OPT_BETAS__INPUT", "TRAIN__OPT_BETAS__LABEL", "TRAIN__OPT_BETAS__INFO"]))
         self.ui.TRAIN__PROFILER__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
             ["profiler_batch_range_label", "TRAIN__PROFILER_BATCH_RANGE__INPUT", "TRAIN__PROFILER_BATCH_RANGE__INFO"]))
         self.ui.DATA__NORMALIZATION__TYPE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 

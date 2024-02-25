@@ -1,6 +1,5 @@
-## Copied from BiaPy commit: 5505d3e3c0499fbed2e4f162e665a529931ca110
+## Copied from BiaPy commit: a0f3ee1e03b9e5a7d749ca029d4e8dcecc02adc1 (3.3.10)
 # Model definition variables (source BMZ/BiaPy/Torchvision) not updated yet
-
 import os
 from yacs.config import CfgNode as CN
 
@@ -138,8 +137,8 @@ class Config:
 
         ### SUPER_RESOLUTION
         _C.PROBLEM.SUPER_RESOLUTION = CN()
-        # Upscaling to be done to the input images. Options: [2, 4]
-        _C.PROBLEM.SUPER_RESOLUTION.UPSCALING = 1
+        # Upscaling to be done to the input images on every dimension. Examples: (2,2) in 2D or (2,2,2) in 3D.
+        _C.PROBLEM.SUPER_RESOLUTION.UPSCALING = ()
 
         ### SELF_SUPERVISED
         _C.PROBLEM.SELF_SUPERVISED = CN()
@@ -410,7 +409,7 @@ class Config:
         # “no change” and 0.5 denotes “half of the axis size”.
         _C.AUGMENTOR.SHIFT_RANGE = (0.1, 0.2)
         # How to fill up the new values created with affine transformations (rotations, shear, shift and zoom).
-        # Same meaning as in scipy: 'reflect', 'grid-mirror', 'constant', 'grid-constant', 'nearest', 'mirror', 
+        # Same meaning as in scipy: 'reflect', grid-'mirror', 'constant', 'grid-constant', 'nearest', 'mirror', 
         # 'grid-wrap' and 'wrap'. 
         _C.AUGMENTOR.AFFINE_MODE = 'constant'
         # Make vertical flips
@@ -721,7 +720,9 @@ class Config:
         # Learning rate 
         _C.TRAIN.LR = 1.E-4
         # Weight decay
-        _C.TRAIN.W_DECAY = 0.05
+        _C.TRAIN.W_DECAY = 0.02
+        # Coefficients used for computing running averages of gradient and its square. Used in ADAM and ADAMW optimizers
+        _C.TRAIN.OPT_BETAS = (0.9, 0.999)
         # Batch size
         _C.TRAIN.BATCH_SIZE = 2
         # If memory or # gpus is limited, use this variable to maintain the effective batch size, which is 

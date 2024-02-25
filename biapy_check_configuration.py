@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: 5505d3e3c0499fbed2e4f162e665a529931ca110
+## Copied from BiaPy commit: a0f3ee1e03b9e5a7d749ca029d4e8dcecc02adc1 (3.3.10)
 import os
 import numpy as np
 import collections
@@ -9,6 +9,9 @@ def check_configuration(cfg, jobname, check_data_paths=True):
     """
     Check if the configuration is good. 
     """
+
+    if cfg.SYSTEM.NUM_WORKERS < 0:
+        raise ValueError("'SYSTEM.NUM_WORKERS' can not be less than 0")
 
     dim_count = 2 if cfg.PROBLEM.NDIM == '2D' else 3
 
@@ -148,8 +151,8 @@ def check_configuration(cfg, jobname, check_data_paths=True):
 
     #### General checks ####
     assert cfg.PROBLEM.NDIM in ['2D', '3D'], "Problem needs to be '2D' or '3D'"
-    assert cfg.PROBLEM.TYPE in ['SEMANTIC_SEG', 'INSTANCE_SEG', 'CLASSIFICATION', 'DETECTION', 'DENOISING', 'SUPER_RESOLUTION', 'SELF_SUPERVISED'],\
-        "PROBLEM.TYPE not in ['SEMANTIC_SEG', 'INSTANCE_SEG', 'CLASSIFICATION', 'DETECTION', 'DENOISING', 'SUPER_RESOLUTION', 'SELF_SUPERVISED']"
+    assert cfg.PROBLEM.TYPE in ['SEMANTIC_SEG', 'INSTANCE_SEG', 'CLASSIFICATION', 'DETECTION', 'DENOISING', 'SUPER_RESOLUTION', 'SELF_SUPERVISED', 'IMAGE_TO_IMAGE'],\
+        "PROBLEM.TYPE not in ['SEMANTIC_SEG', 'INSTANCE_SEG', 'CLASSIFICATION', 'DETECTION', 'DENOISING', 'SUPER_RESOLUTION', 'SELF_SUPERVISED', 'IMAGE_TO_IMAGE']"
 
     if cfg.PROBLEM.NDIM == '3D' and cfg.TEST.FULL_IMG:
         print("WARNING: TEST.FULL_IMG == True while using PROBLEM.NDIM == '3D'. As 3D images are usually 'huge'"
@@ -300,9 +303,11 @@ def check_configuration(cfg, jobname, check_data_paths=True):
 
     #### Super-resolution ####
     elif cfg.PROBLEM.TYPE == 'SUPER_RESOLUTION':
-        if cfg.PROBLEM.SUPER_RESOLUTION.UPSCALING == 1:
+        if not( cfg.PROBLEM.SUPER_RESOLUTION.UPSCALING ):
             raise ValueError("Resolution scale must be provided with 'PROBLEM.SUPER_RESOLUTION.UPSCALING' variable")
-        assert cfg.PROBLEM.SUPER_RESOLUTION.UPSCALING in [2, 4], "PROBLEM.SUPER_RESOLUTION.UPSCALING not in [2, 4]"
+        assert all( i > 0 for i in cfg.PROBLEM.SUPER_RESOLUTION.UPSCALING), "'PROBLEM.SUPER_RESOLUTION.UPSCALING' are not positive integers"
+        if len(cfg.PROBLEM.SUPER_RESOLUTION.UPSCALING) != dim_count:
+            raise ValueError(f"'PROBLEM.SUPER_RESOLUTION.UPSCALING' needs to be a tuple of {dim_count} integers")
         if cfg.MODEL.SOURCE == "torchvision":
             raise ValueError("'MODEL.SOURCE' as 'torchvision' is not available in super-resolution workflow")
         if cfg.DATA.NORMALIZATION.TYPE != "div":
@@ -539,15 +544,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
 
         # Adjust Z_DOWN values to feature maps
         if all(x == 0 for x in cfg.MODEL.Z_DOWN):
-                opts.extend(['MODEL.Z_DOWN', (2,)*(len(cfg.MODEL.FEATURE_MAPS)-1)])
-                opts.extend(['MODEL.Z_DOWN', (2,)*(len(cfg.MODEL.FEATURE_MAPS)-1)])
-        elif (cfg.PROBLEM.TYPE == 'SUPER_RESOLUTION' and cfg.PROBLEM.NDIM == '3D') and \
-            any(x != 1 for x in cfg.MODEL.Z_DOWN):
-            raise ValueError("'MODEL.Z_DOWN' != 1 not allowed in super-resolution workflow")
             opts.extend(['MODEL.Z_DOWN', (2,)*(len(cfg.MODEL.FEATURE_MAPS)-1)])
-        elif (cfg.PROBLEM.TYPE == 'SUPER_RESOLUTION' and cfg.PROBLEM.NDIM == '3D') and \
-            any(x != 1 for x in cfg.MODEL.Z_DOWN):
-            raise ValueError("'MODEL.Z_DOWN' != 1 not allowed in super-resolution workflow")
         elif any([False for x in cfg.MODEL.Z_DOWN if x != 1 and x != 2]):
             raise ValueError("'MODEL.Z_DOWN' needs to be 1 or 2")
         else:
@@ -555,6 +552,10 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 raise ValueError("'MODEL.Z_DOWN' length must be 4 when using 'multiresunet'")
             elif len(cfg.MODEL.FEATURE_MAPS)-1 != len(cfg.MODEL.Z_DOWN):
                 raise ValueError("'MODEL.FEATURE_MAPS' length minus one and 'MODEL.Z_DOWN' length must be equal")
+
+    # Correct UPSCALING for other workflows than SR
+    if len(cfg.PROBLEM.SUPER_RESOLUTION.UPSCALING) == 0:
+        opts.extend(['PROBLEM.SUPER_RESOLUTION.UPSCALING', (1,)*dim_count])
 
     if len(opts) > 0:
         cfg.merge_from_list(opts)

@@ -606,7 +606,7 @@ def create_yaml_file(main_window):
     ### SUPER_RESOLUTION
     elif main_window.cfg.settings['selected_workflow'] == 4:
         biapy_config['PROBLEM']['SUPER_RESOLUTION'] = {}
-        biapy_config['PROBLEM']['SUPER_RESOLUTION']['UPSCALING'] = int(get_text(main_window.ui.PROBLEM__SUPER_RESOLUTION__UPSCALING__INPUT))
+        biapy_config['PROBLEM']['SUPER_RESOLUTION']['UPSCALING'] = get_text(main_window.ui.PROBLEM__SUPER_RESOLUTION__UPSCALING__INPUT)
 
     ### SELF_SUPERVISED
     elif main_window.cfg.settings['selected_workflow'] == 5:
@@ -1055,6 +1055,7 @@ def create_yaml_file(main_window):
         biapy_config['TRAIN']['LR'] = float(get_text(main_window.ui.TRAIN__LR__INPUT))
         if biapy_config['TRAIN']['OPTIMIZER'] == "ADAMW":
             biapy_config['TRAIN']['W_DECAY'] = float(get_text(main_window.ui.TRAIN__W_DECAY__INPUT))
+            biapy_config['TRAIN']['OPT_BETAS'] = float(get_text(main_window.ui.TRAIN__OPT_BETAS__INPUT))
         biapy_config['TRAIN']['BATCH_SIZE'] = int(get_text(main_window.ui.TRAIN__BATCH_SIZE__INPUT))
         biapy_config['TRAIN']['EPOCHS'] = int(get_text(main_window.ui.TRAIN__EPOCHS__INPUT)) 
         if get_text(main_window.ui.TRAIN__ACCUM_ITER__INPUT) != 1:

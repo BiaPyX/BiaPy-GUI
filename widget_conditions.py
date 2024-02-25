@@ -571,6 +571,30 @@ class Widget_conditions():
                         "ADAMW"
                     ],
                 }, 
+            "TRAIN__OPT_BETAS__INFO": 
+                {
+                    "TRAIN__OPTIMIZER__INPUT": 
+                    [
+                        "ADAMW",
+                        "ADAM"
+                    ],
+                },
+            "TRAIN__OPT_BETAS__LABEL": 
+                {
+                    "TRAIN__OPTIMIZER__INPUT": 
+                    [
+                        "ADAMW",
+                        "ADAM"
+                    ],
+                },
+            "TRAIN__OPT_BETAS__INPUT": 
+                {
+                    "TRAIN__OPTIMIZER__INPUT": 
+                    [
+                        "ADAMW",
+                        "ADAM"
+                    ],
+                },
             "profiler_batch_range_label": 
                 {
                     "TRAIN__PROFILER__INPUT": 
