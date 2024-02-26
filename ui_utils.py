@@ -1000,7 +1000,7 @@ def create_yaml_file(main_window):
             biapy_config['MODEL']['LAST_ACTIVATION'] = get_text(main_window.ui.MODEL__LAST_ACTIVATION__INPUT)
         if int(get_text(main_window.ui.MODEL__N_CLASSES__INPUT)) != 2:
             classes = int(get_text(main_window.ui.MODEL__N_CLASSES__INPUT))
-            if classses == 1: 
+            if classes == 1: 
                 classes = 2
             biapy_config['MODEL']['N_CLASSES'] = classes
         if get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "3D":

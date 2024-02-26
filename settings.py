@@ -30,11 +30,11 @@ class Settings():
         self.settings['CUDA_version'] = [10.2, 11.8]
 
         # BiaPy 
-        self.settings['biapy_code_version'] = "v3.3.10"
+        self.settings['biapy_code_version'] = "v3.3.12"
         self.settings['biapy_code_github'] = "https://github.com/BiaPyX/BiaPy"
-        self.settings['biapy_gui_version'] = "v1.0.4"
+        self.settings['biapy_gui_version'] = "v1.0.5"
         self.settings['biapy_gui_github'] = "https://github.com/BiaPyX/BiaPy-GUI"
-        self.settings['biapy_gui_last_version_hash'] = "69a6e455261ebb15f87035984470265c1c301ab7"
+        self.settings['biapy_gui_last_version_hash'] = "e09855a723f1bf493590b17fe454f7db424ded14"
         self.settings['biapy_container_basename'] = "biapyx/biapy"
         self.settings['biapy_container_name'] = self.settings['biapy_container_basename']+":latest-"+str(self.settings['CUDA_version'][-1])
         self.settings['biapy_container_sizes'] = ["7.68GB", "11.6GB"]
