@@ -3259,6 +3259,7 @@ class Widget_conditions():
                         "SEMANTIC_SEG",
                         "INSTANCE_SEG",
                         "DETECTION",
+                        "CLASSIFICATION",
                     ]
                 },
             "MODEL__N_CLASSES__INFO": 
@@ -3267,6 +3268,7 @@ class Widget_conditions():
                         "SEMANTIC_SEG",
                         "INSTANCE_SEG",
                         "DETECTION",
+                        "CLASSIFICATION",
                     ]
                 },
             "MODEL__N_CLASSES__INPUT": 
@@ -3275,6 +3277,7 @@ class Widget_conditions():
                         "SEMANTIC_SEG",
                         "INSTANCE_SEG",
                         "DETECTION",
+                        "CLASSIFICATION",
                     ]
                 },
             "preprocessing_frame": 

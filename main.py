@@ -152,7 +152,7 @@ class MainWindow(QMainWindow):
         self.ui.TRAIN__EPOCHS__INPUT.setValidator(self.int_validator)
         self.ui.TRAIN__ACCUM_ITER__INPUT.setValidator(self.int_validator)
         # self.ui.TRAIN__PATIENCE__INPUT.setValidator(self.float_validator)
-        self.ui.MODEL__N_CLASSES__INPUT.setValidator(self.float_validator)
+        self.ui.MODEL__N_CLASSES__INPUT.setValidator(self.int_validator)
         # self.ui.DATA__NORMALIZATION__CUSTOM_MEAN__INPUT.setValidator(self.float_validator)
         # self.ui.DATA__NORMALIZATION__CUSTOM_STD__INPUT.setValidator(self.float_validator)
         self.ui.DATA__PREPROCESS__RESIZE__CVAL__INPUT.setValidator(self.float_validator)
