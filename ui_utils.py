@@ -998,11 +998,6 @@ def create_yaml_file(main_window):
             biapy_config['MODEL']['ACTIVATION'] = get_text(main_window.ui.MODEL__ACTIVATION__INPUT)
         if get_text(main_window.ui.MODEL__LAST_ACTIVATION__INPUT) != 'sigmoid':
             biapy_config['MODEL']['LAST_ACTIVATION'] = get_text(main_window.ui.MODEL__LAST_ACTIVATION__INPUT)
-        if int(get_text(main_window.ui.MODEL__N_CLASSES__INPUT)) != 2:
-            classes = int(get_text(main_window.ui.MODEL__N_CLASSES__INPUT))
-            if classes == 1: 
-                classes = 2
-            biapy_config['MODEL']['N_CLASSES'] = classes
         if get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "3D":
             biapy_config['MODEL']['Z_DOWN'] = ast.literal_eval(get_text(main_window.ui.MODEL__Z_DOWN__INPUT)) 
         if main_window.cfg.settings['selected_workflow'] == 4 and get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "3D": # SR
@@ -1029,7 +1024,13 @@ def create_yaml_file(main_window):
             biapy_config['MODEL']['MAE_DEC_NUM_LAYERS'] = int(get_text(main_window.ui.MODEL__MAE_DEC_NUM_LAYERS__INPUT)) 
             biapy_config['MODEL']['MAE_DEC_NUM_HEADS'] = get_text(main_window.ui.MODEL__MAE_DEC_NUM_HEADS__INPUT)
             biapy_config['MODEL']['MAE_DEC_MLP_DIMS'] = get_text(main_window.ui.MODEL__MAE_DEC_MLP_DIMS__INPUT)
-
+    
+    if main_window.cfg.settings['selected_workflow'] in [0,1,2,6] and int(get_text(main_window.ui.MODEL__N_CLASSES__INPUT)) != 2:
+        classes = int(get_text(main_window.ui.MODEL__N_CLASSES__INPUT))
+        if classes == 1: 
+            classes = 2
+        biapy_config['MODEL']['N_CLASSES'] = classes
+        
     if get_text(main_window.ui.MODEL__LOAD_CHECKPOINT__INPUT) == "Yes":
         biapy_config['MODEL']['LOAD_CHECKPOINT'] = True 
         biapy_config['PATHS'] = {}
