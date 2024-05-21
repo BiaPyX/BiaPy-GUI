@@ -175,6 +175,7 @@ class dialog_Ui(QDialog):
 
         super(dialog_Ui, self).__init__()
         self.dialog_window = Ui_Dialog()
+        self.original_width = self.geometry().width()
         self.parent_ui = parent_ui
         self.dialog_window.setupUi(self)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint) 
@@ -195,6 +196,7 @@ class dialog_Ui(QDialog):
         self.dragPos = event.globalPos()
 
     def dialog_constrict(self, message, reason):
+        self.resize(self.original_width,self.geometry().height())
         self.dialog_window.window_des_label.setText("Error")
         self.dialog_window.icon_label.setPixmap(self.upbar_icon[0])
         if self.signals_created:
@@ -218,6 +220,7 @@ class dialog_Ui(QDialog):
                 self.dialog_window.error_message_label.setText(m)
                 self.dialog_window.go_to_correct_bn.clicked.connect(self.close)
             elif reason in ["inform_user", "inform_user_and_go"]:
+                self.resize(0.9*self.parent_ui.width(),self.geometry().height())
                 self.dialog_window.error_message_label.setWordWrap(True)
                 self.dialog_window.icon_label.setPixmap(self.upbar_icon[1])
                 self.dialog_window.window_des_label.setText("Information")
