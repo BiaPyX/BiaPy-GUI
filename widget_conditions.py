@@ -202,12 +202,28 @@ class Widget_conditions():
                     [
                         "Not extracted from train (path needed)"
                     ],
+                    "WORKFLOW_SELECTED_LABEL": 
+                    [
+                        "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
+                        "DETECTION",
+                        "SUPER_RESOLUTION",
+                        "IMAGE_TO_IMAGE",
+                    ],
                 }, 
             "validation_data_gt_info": 
                 {
                     "DATA__VAL__TYPE__INPUT": 
                     [
                         "Not extracted from train (path needed)"
+                    ],
+                    "WORKFLOW_SELECTED_LABEL": 
+                    [
+                        "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
+                        "DETECTION",
+                        "SUPER_RESOLUTION",
+                        "IMAGE_TO_IMAGE",
                     ],
                 }, 
             "DATA__VAL__GT_PATH__INPUT": 
@@ -216,12 +232,28 @@ class Widget_conditions():
                     [
                         "Not extracted from train (path needed)"
                     ],
+                    "WORKFLOW_SELECTED_LABEL": 
+                    [
+                        "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
+                        "DETECTION",
+                        "SUPER_RESOLUTION",
+                        "IMAGE_TO_IMAGE",
+                    ],
                 }, 
             "val_data_gt_input_browse_bn": 
                 {
                     "DATA__VAL__TYPE__INPUT": 
                     [
                         "Not extracted from train (path needed)"
+                    ],
+                    "WORKFLOW_SELECTED_LABEL": 
+                    [
+                        "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
+                        "DETECTION",
+                        "SUPER_RESOLUTION",
+                        "IMAGE_TO_IMAGE",
                     ],
                 }, 
             "val_in_memory_label": 
@@ -338,6 +370,7 @@ class Widget_conditions():
                         "DETECTION",
                         "SUPER_RESOLUTION",
                         "CLASSIFICATION",
+                        "IMAGE_TO_IMAGE",
                     ]
                 }, 
             "DATA__TEST__LOAD_GT__INPUT": 
@@ -352,6 +385,7 @@ class Widget_conditions():
                         "DETECTION",
                         "SUPER_RESOLUTION",
                         "CLASSIFICATION",
+                        "IMAGE_TO_IMAGE",
                     ]
                 }, 
             "DATA__TEST__LOAD_GT__INFO": 
@@ -366,6 +400,7 @@ class Widget_conditions():
                         "DETECTION",
                         "SUPER_RESOLUTION",
                         "CLASSIFICATION",
+                        "IMAGE_TO_IMAGE",
                     ]
                 }, 
             "test_data_gt_label": 
@@ -384,6 +419,7 @@ class Widget_conditions():
                         "DETECTION",
                         "SUPER_RESOLUTION",
                         "CLASSIFICATION",
+                        "IMAGE_TO_IMAGE",
                     ]
                 }, 
             "DATA__TEST__GT_PATH__INPUT": 
@@ -402,6 +438,7 @@ class Widget_conditions():
                         "DETECTION",
                         "SUPER_RESOLUTION",
                         "CLASSIFICATION",
+                        "IMAGE_TO_IMAGE",
                     ]
                 },
             "DATA__TEST__GT_PATH__INFO": 
@@ -420,6 +457,7 @@ class Widget_conditions():
                         "DETECTION",
                         "SUPER_RESOLUTION",
                         "CLASSIFICATION",
+                        "IMAGE_TO_IMAGE",
                     ]
                 },
             "test_data_gt_input_browse_bn": 
@@ -438,6 +476,7 @@ class Widget_conditions():
                         "DETECTION",
                         "SUPER_RESOLUTION",
                         "CLASSIFICATION",
+                        "IMAGE_TO_IMAGE",
                     ]
                 },  
 
@@ -448,6 +487,7 @@ class Widget_conditions():
                         "INSTANCE_SEG",
                         "DETECTION",
                         "SUPER_RESOLUTION",
+                        "IMAGE_TO_IMAGE",
                     ]
                 }, 
             "train_gt_info": 
@@ -457,6 +497,7 @@ class Widget_conditions():
                         "INSTANCE_SEG",
                         "DETECTION",
                         "SUPER_RESOLUTION",
+                        "IMAGE_TO_IMAGE",
                     ]
                 }, 
             "DATA__TRAIN__GT_PATH__INPUT": 
@@ -466,6 +507,7 @@ class Widget_conditions():
                         "INSTANCE_SEG",
                         "DETECTION",
                         "SUPER_RESOLUTION",
+                        "IMAGE_TO_IMAGE",
                     ]
                 }, 
             "train_data_gt_input_browse_bn": 
@@ -475,6 +517,7 @@ class Widget_conditions():
                         "INSTANCE_SEG",
                         "DETECTION",
                         "SUPER_RESOLUTION",
+                        "IMAGE_TO_IMAGE",
                     ]
                 }, 
             "test_data_in_memory_label": 
