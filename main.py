@@ -135,6 +135,7 @@ class MainWindow(QMainWindow):
         self.ui.workflow_view5_seemore_bn.clicked.connect(lambda: UIFunction.obtain_workflow_description(self, 4))
         self.ui.workflow_view6_seemore_bn.clicked.connect(lambda: UIFunction.obtain_workflow_description(self, 5))
         self.ui.workflow_view7_seemore_bn.clicked.connect(lambda: UIFunction.obtain_workflow_description(self, 6))
+        self.ui.workflow_view8_seemore_bn.clicked.connect(lambda: UIFunction.obtain_workflow_description(self, 7))
 
         # General options page buttons
         self.ui.SYSTEM__SEED__INPUT.setValidator(self.int_validator)
@@ -179,6 +180,7 @@ class MainWindow(QMainWindow):
         self.ui.MODEL__VIT_NUM_HEADS__INPUT.setValidator(self.int_validator)
         self.ui.MODEL__UNETR_VIT_HIDD_MULT__INPUT.setValidator(self.int_validator)
         self.ui.MODEL__UNETR_VIT_NUM_FILTERS__INPUT.setValidator(self.int_validator)
+        self.ui.MODEL__UNETR_DEC_KERNEL_SIZE__INPUT.setValidator(self.int_validator)
         self.ui.TRAIN__LR__INPUT.setValidator(self.float_validator)
         self.ui.TRAIN__W_DECAY__INPUT.setValidator(self.float_validator)
         self.ui.TRAIN__BATCH_SIZE__INPUT.setValidator(self.int_validator)
@@ -286,8 +288,10 @@ class MainWindow(QMainWindow):
         self.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__BN.clicked.connect(lambda: examine(self, "DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INPUT", False))
         self.ui.val_data_gt_input_browse_bn.clicked.connect(lambda: examine(self, "DATA__VAL__GT_PATH__INPUT", False))
         self.ui.DATA__TRAIN__IN_MEMORY__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
-            [], widgets_to_set_cond=[
-                (["DATA__VAL__TYPE__INPUT", "Not extracted from train (path needed)"], ["No"])
+            ["DATA__PREPROCESS__TRAIN__LABEL","DATA__PREPROCESS__TRAIN__INFO","DATA__PREPROCESS__TRAIN__INPUT"], 
+            widgets_to_set_cond=[
+                (["DATA__VAL__TYPE__INPUT", "Not extracted from train (path needed)"], ["No"]),
+                (["DATA__NORMALIZATION__APPLICATION_MODE__INPUT", "image"], ["No"]),
             ], updated_widget="DATA__TRAIN__IN_MEMORY__INPUT"))
         self.ui.DATA__VAL__TYPE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
             ["percentage_validation_label", "percentage_validation_info", "DATA__VAL__SPLIT_TRAIN__INPUT", "cross_validation_nfolds_label", "cross_validation_nfolds_info", "DATA__VAL__CROSS_VAL_NFOLD__INPUT",
@@ -297,30 +301,41 @@ class MainWindow(QMainWindow):
             "test_data_input_browse_bn", "test_exists_gt_label", "DATA__TEST__LOAD_GT__INPUT", "DATA__TEST__LOAD_GT__INFO","test_data_gt_label", "DATA__TEST__GT_PATH__INPUT","DATA__TEST__GT_PATH__INFO",
             "test_data_gt_input_browse_bn", "test_data_in_memory_label", "DATA__TEST__IN_MEMORY__INPUT", "DATA__TEST__IN_MEMORY__INFO","random_val_label", "DATA__VAL__RANDOM__INPUT","DATA__VAL__RANDOM__INFO",
             "validation_overlap_label", "DATA__VAL__OVERLAP__INFO", "DATA__VAL__OVERLAP__INPUT", "validation_padding_label", "DATA__VAL__PADDING__INFO", "DATA__VAL__PADDING__INPUT",
-            ],
+            "DATA__PREPROCESS__VAL__LABEL","DATA__PREPROCESS__VAL__INFO", "DATA__PREPROCESS__VAL__INPUT"],
             widgets_to_set_cond=
             [
                 (["DATA__TRAIN__IN_MEMORY__INPUT", "Yes"], ["Extract from train (split training)","Extract from train (cross validation)"])
             ], updated_widget="DATA__VAL__TYPE__INPUT"))
         self.ui.DATA__VAL__IN_MEMORY__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
-            ["validation_overlap_label", "DATA__VAL__OVERLAP__INFO", "DATA__VAL__OVERLAP__INPUT", "validation_padding_label", "DATA__VAL__PADDING__INFO", "DATA__VAL__PADDING__INPUT"]))
+            ["validation_overlap_label", "DATA__VAL__OVERLAP__INFO", "DATA__VAL__OVERLAP__INPUT", "validation_padding_label", 
+            "DATA__VAL__PADDING__INFO", "DATA__VAL__PADDING__INPUT","DATA__PREPROCESS__VAL__LABEL","DATA__PREPROCESS__VAL__INFO",
+            "DATA__PREPROCESS__VAL__INPUT"]))
         self.ui.train_advanced_bn.clicked.connect(lambda: expand_hide_advanced_options(self, "train_advanced_bn", "train_advanced_options_frame"))
         self.ui.MODEL__ARCHITECTURE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["unet_model_like_frame", "unet_model_like_label", "sr_unet_like_heading", "sr_unet_like_frame", "transformers_frame", "transformers_label", 
             "unetr_vit_hidden_multiple_label", "MODEL__UNETR_VIT_HIDD_MULT__INFO", "MODEL__UNETR_VIT_HIDD_MULT__INPUT", 
             "unetr_num_filters_label", "MODEL__UNETR_VIT_NUM_FILTERS__INFO", "MODEL__UNETR_VIT_NUM_FILTERS__INPUT", 
             "unetr_dec_act_label", "MODEL__UNETR_DEC_ACTIVATION__INFO", "MODEL__UNETR_DEC_ACTIVATION__INPUT", 
+            "MODEL__UNETR_DEC_KERNEL_SIZE__LABEL", "MODEL__UNETR_DEC_KERNEL_SIZE__INFO", "MODEL__UNETR_DEC_KERNEL_SIZE__INPUT",
+            "MODEL__MAE_MASK_TYPE__LABEL", "MODEL__MAE_MASK_TYPE__INFO", "MODEL__MAE_MASK_TYPE__INPUT",
             "MODEL__MAE_MASK_RATIO__INPUT", "MODEL__MAE_MASK_RATIO__LABEL", "MODEL__MAE_MASK_RATIO__INFO",
             "MODEL__MAE_DEC_HIDDEN_SIZE__INPUT", "MODEL__MAE_DEC_HIDDEN_SIZE__LABEL", "MODEL__MAE_DEC_HIDDEN_SIZE__INFO", 
             "MODEL__MAE_DEC_NUM_LAYERS__INPUT", "MODEL__MAE_DEC_NUM_LAYERS__LABEL", "MODEL__MAE_DEC_NUM_LAYERS__INFO", 
             "MODEL__MAE_DEC_NUM_HEADS__INPUT", "MODEL__MAE_DEC_NUM_HEADS__LABEL", "MODEL__MAE_DEC_NUM_HEADS__INFO", 
             "MODEL__MAE_DEC_MLP_DIMS__INPUT", "MODEL__MAE_DEC_MLP_DIMS__INFO", "MODEL__MAE_DEC_MLP_DIMS__LABEL"], 
-            widgets_to_set=["transformers_label"]))
+            widgets_to_set_cond=
+            [
+                (["PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT", "masking"], ["MAE"]),
+                (["PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT", "crappify"], ['U-Net', 'Residual U-Net', 'ResUNet++', 'Attention U-Net', 'MultiResUnet', 'SEUnet', "UNETR"])
+            ], updated_widget="MODEL__ARCHITECTURE__INPUT"))
         self.ui.TRAIN__OPTIMIZER__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["TRAIN__W_DECAY__INPUT", "adamw_weight_decay_label", "TRAIN__W_DECAY__INFO",
             "TRAIN__OPT_BETAS__INPUT", "TRAIN__OPT_BETAS__LABEL", "TRAIN__OPT_BETAS__INFO"]))
         self.ui.TRAIN__PROFILER__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
             ["profiler_batch_range_label", "TRAIN__PROFILER_BATCH_RANGE__INPUT", "TRAIN__PROFILER_BATCH_RANGE__INFO"]))
+        self.ui.DATA__NORMALIZATION__PERC_CLIP__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["DATA__NORMALIZATION__PERC_LOWER__LABEL", "DATA__NORMALIZATION__PERC_LOWER__INFO", "DATA__NORMALIZATION__PERC_LOWER__INPUT",
+            "DATA__NORMALIZATION__PERC_UPPER__LABEL", "DATA__NORMALIZATION__PERC_UPPER__INFO", "DATA__NORMALIZATION__PERC_UPPER__INPUT"]))
         self.ui.DATA__NORMALIZATION__TYPE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["custom_mean_label", "DATA__NORMALIZATION__CUSTOM_MEAN__INPUT", "DATA__NORMALIZATION__CUSTOM_MEAN__INFO",
             "custom_std_label", "DATA__NORMALIZATION__CUSTOM_STD__INPUT", "DATA__NORMALIZATION__CUSTOM_STD__INFO"]))
@@ -372,7 +387,16 @@ class MainWindow(QMainWindow):
         self.ui.DATA__PREPROCESS__CANNY__ENABLE__TEST__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__LABEL", "DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INFO", "DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INPUT",
              "DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__LABEL", "DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INFO", "DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INPUT"]))
+        self.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL", "DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO", "DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT",
+             "DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL", "DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO", "DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT"]))
+        self.ui.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL", "DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO", "DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT",
+             "DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL", "DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO", "DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT"]))
 
+        self.ui.MODEL__MAE_MASK_TYPE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["MODEL__MAE_MASK_RATIO__LABEL", "MODEL__MAE_MASK_RATIO__INFO", "MODEL__MAE_MASK_RATIO__INPUT" ]))
+             
         self.ui.DATA__EXTRACT_RANDOM_PATCH__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["extract_random_patch_frame_label", "extract_random_patch_frame"]))    
         self.ui.TRAIN__LR_SCHEDULER__NAME__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
@@ -458,7 +482,11 @@ class MainWindow(QMainWindow):
             "AUGMENTOR__SALT_AND_PEPPER_PROP__INPUT","AUGMENTOR__SALT_AND_PEPPER_PROP__INFO"]))
         self.ui.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["ssl_resizing_factor_label","PROBLEM__SELF_SUPERVISED__RESIZING_FACTOR__INPUT","PROBLEM__SELF_SUPERVISED__RESIZING_FACTOR__INFO",
-            "ssl_noise_label","PROBLEM__SELF_SUPERVISED__NOISE__INPUT", "PROBLEM__SELF_SUPERVISED__NOISE__INFO"]))
+            "ssl_noise_label","PROBLEM__SELF_SUPERVISED__NOISE__INPUT", "PROBLEM__SELF_SUPERVISED__NOISE__INFO"]
+            , widgets_to_set_cond=[
+                (["MODEL__ARCHITECTURE__INPUT", "Attention U-Net"], ["crappify"]),
+                (["MODEL__ARCHITECTURE__INPUT", "MAE"], ["masking"])
+                ], updated_widget="PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT"))
         
         # Test page buttons
         self.ui.TEST__ENABLE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,["test_tab_widget"]))
@@ -476,10 +504,15 @@ class MainWindow(QMainWindow):
         self.ui.test_advanced_bn.clicked.connect(lambda: expand_hide_advanced_options(self, "test_advanced_bn", "test_advanced_options_frame"))
         self.ui.TEST__BY_CHUNKS__ENABLE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
             ["process_by_chunks_label","process_by_chunks_frame"]))
+        self.ui.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
+            ["TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL","TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO","TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT",
+            "TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL","TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO","TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT",]))
         self.ui.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
             ["TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__LABEL","TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INPUT","TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INFO"]))
         self.ui.TRAIN__ENABLE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
             ["DATA__PATCH_SIZE__TEST__LABEL","DATA__PATCH_SIZE__TEST__INFO","DATA__PATCH_SIZE__TEST__INPUT"]))
+        self.ui.DATA__TEST__IN_MEMORY__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
+            ["DATA__PREPROCESS__TEST__FRAME", "preprocessing_test_frame"]))
 
         self.ui.TEST__POST_PROCESSING__YZ_FILTERING__SEM_SEG__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["sem_seg_yz_filtering_size_label","TEST__POST_PROCESSING__YZ_FILTERING_SIZE__SEM_SEG__INPUT","TEST__POST_PROCESSING__YZ_FILTERING_SIZE__SEM_SEG__INFO"]))
@@ -827,8 +860,7 @@ class MainWindow(QMainWindow):
         print(f"Local GUI version: {self.cfg.settings['biapy_gui_version']}")
         print(f"Remote last version's hash: {sha}")
         print(f"Remote last version: {vtag}")
-        if sha is not None and vtag is not None and sha != self.cfg.settings['biapy_gui_last_version_hash'] and \
-            vtag != self.cfg.settings['biapy_gui_version']:
+        if sha is not None and vtag is not None and vtag != self.cfg.settings['biapy_gui_version']:
             self.dialog_exec("There is a new version of BiaPy's graphical user interface available. Please, "
                 "download it <a href='https://biapyx.github.io'>here</a>", reason="inform_user")
  

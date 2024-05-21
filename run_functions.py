@@ -113,7 +113,11 @@ class runBiaPy_Ui(QDialog):
         st = "unknown"
         if svalue == 1:
             if self.parent_worker.biapy_container is not None:
-                self.parent_worker.biapy_container.reload()
+                try:
+                    self.parent_worker.biapy_container.reload()
+                except Exception as e:
+                    print(f"Possible expected error during container status reload(): {e}")
+                    
                 st = self.parent_worker.biapy_container.status
                 if st == "running":
                     st = "<span style=\"color:green;\">R"+st[1:]+"</span>"

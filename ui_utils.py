@@ -268,6 +268,7 @@ def move_between_workflows(main_window, to_page, dims=None):
         # Train page
         main_window.ui.train_gt_label.setText("Input label folder")
         main_window.ui.validation_data_gt_label.setText("Input label folder")
+        main_window.ui.transformers_label.setText("UNETR")
         # Test page
         main_window.ui.test_data_gt_label.setText("Input label folder")
         main_window.ui.test_exists_gt_label.setText("Do you have test labels?")
@@ -281,6 +282,7 @@ def move_between_workflows(main_window, to_page, dims=None):
         # Train page
         main_window.ui.train_gt_label.setText("Input label folder")
         main_window.ui.validation_data_gt_label.setText("Input label folder")
+        main_window.ui.transformers_label.setText("UNETR")
         # Test page
         main_window.ui.test_data_gt_label.setText("Input label folder")
         main_window.ui.test_exists_gt_label.setText("Do you have test labels?")
@@ -294,6 +296,7 @@ def move_between_workflows(main_window, to_page, dims=None):
         # Train page
         main_window.ui.train_gt_label.setText("Input CSV folder")
         main_window.ui.validation_data_gt_label.setText("Input CSV folder")
+        main_window.ui.transformers_label.setText("UNETR")
         # Test page
         main_window.ui.test_data_gt_label.setText("Input CSV folder")
         main_window.ui.test_exists_gt_label.setText("Do you have CSV files for test data?")
@@ -304,6 +307,8 @@ def move_between_workflows(main_window, to_page, dims=None):
         models = main_window.cfg.settings['denoising_models_real_names']
         main_window.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.train_workflow_specific_tab_denoising_page)
         main_window.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.test_workflow_specific_tab_denoising_page)
+        # Train page
+        main_window.ui.transformers_label.setText("UNETR")
         # Test page
         main_window.ui.WORKFLOW_SELECTED_LABEL.setText("DENOISING")
     # Super resolution
@@ -334,6 +339,8 @@ def move_between_workflows(main_window, to_page, dims=None):
         models = main_window.cfg.settings['ssl_models_real_names']
         main_window.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.train_workflow_specific_tab_ssl_page)
         main_window.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.test_workflow_specific_tab_ssl_page)
+        # Train page
+        main_window.ui.transformers_label.setText("MAE")
         # Test page
         main_window.ui.WORKFLOW_SELECTED_LABEL.setText("SELF_SUPERVISED")
     # Classification
@@ -346,6 +353,21 @@ def move_between_workflows(main_window, to_page, dims=None):
         # Test page
         main_window.ui.test_exists_gt_label.setText("Is the test separated in classes?")
         main_window.ui.WORKFLOW_SELECTED_LABEL.setText("CLASSIFICATION")
+    # Image to image
+    elif main_window.cfg.settings['selected_workflow'] == 7:
+        jobname = "my_image_to_image"
+        models = main_window.cfg.settings['i2i_models_real_names']
+        goptions_tab_widget_visible = True
+        main_window.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.train_workflow_specific_tab_i2i_page)
+        main_window.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.test_workflow_specific_tab_i2i_page)
+        # Train page
+        main_window.ui.train_gt_label.setText("Input target folder")
+        main_window.ui.validation_data_gt_label.setText("Input target folder")
+        main_window.ui.transformers_label.setText("UNETR")
+        # Test page
+        main_window.ui.test_data_gt_label.setText("Input target folder")
+        main_window.ui.test_exists_gt_label.setText("Do you have target test data?")
+        main_window.ui.WORKFLOW_SELECTED_LABEL.setText("IMAGE_TO_IMAGE")
 
     main_window.condition_db.combobox_hide_visible_action(main_window,
         ["test_exists_gt_label", "DATA__TEST__LOAD_GT__INPUT", "DATA__TEST__LOAD_GT__INFO", 
@@ -355,7 +377,7 @@ def move_between_workflows(main_window, to_page, dims=None):
 
     actual_name = get_text(main_window.ui.job_name_input)
     if actual_name in ["", "my_semantic_segmentation", "my_instance_segmentation", "my_detection", "my_denoising", \
-        "my_super_resolution", "my_self_supervised_learning", "my_classification"]:
+        "my_super_resolution", "my_self_supervised_learning", "my_classification", "my_image_to_image"]:
         if to_page == 5:
             main_window.ui.job_name_input.setPlainText(jobname)
 
@@ -521,7 +543,7 @@ def create_yaml_file(main_window):
 
     # Problem specification
     workflow_names_yaml = ['SEMANTIC_SEG', 'INSTANCE_SEG', 'DETECTION', 'DENOISING', 'SUPER_RESOLUTION', 
-        'SELF_SUPERVISED', 'CLASSIFICATION']
+        'SELF_SUPERVISED', 'CLASSIFICATION', "IMAGE_TO_IMAGE"]
     biapy_config['PROBLEM'] = {}
     biapy_config['PROBLEM']['TYPE'] = workflow_names_yaml[main_window.cfg.settings['selected_workflow']]
     biapy_config['PROBLEM']['NDIM'] = get_text(main_window.ui.PROBLEM__NDIM__INPUT)
@@ -530,7 +552,7 @@ def create_yaml_file(main_window):
     if main_window.cfg.settings['selected_workflow'] == 0:
         biapy_config['PROBLEM']['SEMANTIC_SEG'] = {}
         if get_text(main_window.ui.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INPUT) != 0:
-            biapy_config['PROBLEM']['SEMANTIC_SEG']['IGNORE_CLASS_ID'] = get_text(main_window.ui.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INPUT)
+            biapy_config['PROBLEM']['SEMANTIC_SEG']['IGNORE_CLASS_ID'] = int(get_text(main_window.ui.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INPUT))
 
     ### INSTANCE_SEG
     elif main_window.cfg.settings['selected_workflow'] == 1:
@@ -615,6 +637,11 @@ def create_yaml_file(main_window):
         if get_text(main_window.ui.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT) == "crappify":
             biapy_config['PROBLEM']['SELF_SUPERVISED']['RESIZING_FACTOR'] = int(get_text(main_window.ui.PROBLEM__SELF_SUPERVISED__RESIZING_FACTOR__INPUT))
             biapy_config['PROBLEM']['SELF_SUPERVISED']['NOISE'] = float(get_text(main_window.ui.PROBLEM__SELF_SUPERVISED__NOISE__INPUT))
+
+    ### IMAGE_TO_IMAGE
+    elif main_window.cfg.settings['selected_workflow'] == 7:
+        biapy_config['PROBLEM']['IMAGE_TO_IMAGE'] = {}
+        biapy_config['PROBLEM']['IMAGE_TO_IMAGE']['MULTIPLE_RAW_ONE_TARGET_LOADER'] = True if get_text(main_window.ui.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INPUT) == "Yes" else False
 
     # Dataset
     biapy_config['DATA'] = {}
@@ -769,12 +796,21 @@ def create_yaml_file(main_window):
     if get_text(main_window.ui.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT) == "Yes":
         biapy_config['DATA']['REFLECT_TO_COMPLETE_SHAPE'] = True
 
-    if get_text(main_window.ui.DATA__NORMALIZATION__TYPE__INPUT) == "custom":
+    if get_text(main_window.ui.DATA__NORMALIZATION__PERC_CLIP__INPUT) == "Yes":
         biapy_config['DATA']['NORMALIZATION'] = {}
+        biapy_config['DATA']['NORMALIZATION']['PERC_CLIP'] = True
+        biapy_config['DATA']['NORMALIZATION']['PERC_LOWER'] = float(get_text(main_window.ui.DATA__NORMALIZATION__PERC_LOWER__INPUT)) 
+        biapy_config['DATA']['NORMALIZATION']['PERC_UPPER'] = float(get_text(main_window.ui.DATA__NORMALIZATION__PERC_UPPER__INPUT)) 
+        biapy_config['DATA']['NORMALIZATION']['APPLICATION_MODE'] = get_text(main_window.ui.DATA__NORMALIZATION__APPLICATION_MODE__INPUT)
+
+    if get_text(main_window.ui.DATA__NORMALIZATION__TYPE__INPUT) == "custom":
+        if 'NORMALIZATION' not in biapy_config['DATA']:
+            biapy_config['DATA']['NORMALIZATION'] = {}
         biapy_config['DATA']['NORMALIZATION']['TYPE'] = 'custom'
         biapy_config['DATA']['NORMALIZATION']['CUSTOM_MEAN'] = float(get_text(main_window.ui.DATA__NORMALIZATION__CUSTOM_MEAN__INPUT)) 
         biapy_config['DATA']['NORMALIZATION']['CUSTOM_STD'] = float(get_text(main_window.ui.DATA__NORMALIZATION__CUSTOM_STD__INPUT)) 
-
+        biapy_config['DATA']['NORMALIZATION']['APPLICATION_MODE'] = get_text(main_window.ui.DATA__NORMALIZATION__APPLICATION_MODE__INPUT)
+        
     # Train
     if get_text(main_window.ui.TRAIN__ENABLE__INPUT) == "Yes":
         biapy_config['DATA']['TRAIN'] = {}
@@ -800,6 +836,17 @@ def create_yaml_file(main_window):
         if main_window.cfg.settings['selected_workflow'] == 2 and float(get_text(main_window.ui.DATA__TRAIN__MINIMUM_FOREGROUND_PER__DET__INPUT)) != 0:
             biapy_config['DATA']['TRAIN']['MINIMUM_FOREGROUND_PER'] = float(get_text(main_window.ui.DATA__TRAIN__MINIMUM_FOREGROUND_PER__DET__INPUT))
         
+        if get_text(main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT) == "Yes":
+            biapy_config['DATA']['TRAIN']['INPUT_ZARR_MULTIPLE_DATA'] = True
+            biapy_config['DATA']['TRAIN']['INPUT_ZARR_MULTIPLE_DATA_RAW_PATH'] = get_text(main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT)
+            biapy_config['DATA']['TRAIN']['INPUT_ZARR_MULTIPLE_DATA_GT_PATH'] = get_text(main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT)
+
+        if get_text(main_window.ui.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INPUT) != "TZCYX":
+            biapy_config['DATA']['TRAIN']['INPUT_IMG_AXES_ORDER'] = get_text(main_window.ui.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INPUT)
+
+        if get_text(main_window.ui.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT) != "TZCYX":
+            biapy_config['DATA']['TRAIN']['INPUT_MASK_AXES_ORDER'] = get_text(main_window.ui.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT)
+
         # Validation
         biapy_config['DATA']['VAL'] = {}
 
@@ -824,6 +871,17 @@ def create_yaml_file(main_window):
             biapy_config['DATA']['VAL']['PADDING'] = get_text(main_window.ui.DATA__VAL__PADDING__INPUT)
 
         biapy_config['DATA']['VAL']['RESOLUTION'] = get_text(main_window.ui.DATA__VAL__RESOLUTION__INPUT)
+
+        if get_text(main_window.ui.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT) == "Yes":
+            biapy_config['DATA']['VAL']['INPUT_ZARR_MULTIPLE_DATA'] = True
+            biapy_config['DATA']['VAL']['INPUT_ZARR_MULTIPLE_DATA_RAW_PATH'] = get_text(main_window.ui.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT)
+            biapy_config['DATA']['VAL']['INPUT_ZARR_MULTIPLE_DATA_GT_PATH'] = get_text(main_window.ui.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT)
+
+        if get_text(main_window.ui.DATA__VAL__INPUT_IMG_AXES_ORDER__INPUT) != "TZCYX":
+            biapy_config['DATA']['VAL']['INPUT_IMG_AXES_ORDER'] = get_text(main_window.ui.DATA__VAL__INPUT_IMG_AXES_ORDER__INPUT)
+
+        if get_text(main_window.ui.DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT) != "TZCYX":
+            biapy_config['DATA']['VAL']['INPUT_MASK_AXES_ORDER'] = get_text(main_window.ui.DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT)
 
     # Test
     if get_text(main_window.ui.TEST__ENABLE__INPUT) == "Yes":
@@ -1016,10 +1074,13 @@ def create_yaml_file(main_window):
             biapy_config['MODEL']['UNETR_VIT_HIDD_MULT'] = int(get_text(main_window.ui.MODEL__UNETR_VIT_HIDD_MULT__INPUT)) 
             biapy_config['MODEL']['UNETR_VIT_NUM_FILTERS'] = int(get_text(main_window.ui.MODEL__UNETR_VIT_NUM_FILTERS__INPUT)) 
             biapy_config['MODEL']['UNETR_DEC_ACTIVATION'] = get_text(main_window.ui.MODEL__UNETR_DEC_ACTIVATION__INPUT)
-        
+            biapy_config['MODEL']['UNETR_DEC_KERNEL_SIZE'] = int(get_text(main_window.ui.MODEL__UNETR_DEC_KERNEL_SIZE__INPUT))
+
         # MAE
         if model_name in "mae":
-            biapy_config['MODEL']['MAE_MASK_RATIO_SIZE'] = int(get_text(main_window.ui.MODEL__MAE_MASK_RATIO__INPUT)) 
+            biapy_config['MODEL']['MAE_MASK_TYPE'] = get_text(main_window.ui.MODEL__MAE_MASK_TYPE__INPUT)
+            if get_text(main_window.ui.MODEL__MAE_MASK_TYPE__INPUT) == "random":
+                biapy_config['MODEL']['MAE_MASK_RATIO'] = float(get_text(main_window.ui.MODEL__MAE_MASK_RATIO__INPUT))
             biapy_config['MODEL']['MAE_DEC_HIDDEN_SIZE'] = int(get_text(main_window.ui.MODEL__MAE_DEC_HIDDEN_SIZE__INPUT)) 
             biapy_config['MODEL']['MAE_DEC_NUM_LAYERS'] = int(get_text(main_window.ui.MODEL__MAE_DEC_NUM_LAYERS__INPUT)) 
             biapy_config['MODEL']['MAE_DEC_NUM_HEADS'] = get_text(main_window.ui.MODEL__MAE_DEC_NUM_HEADS__INPUT)
@@ -1096,6 +1157,8 @@ def create_yaml_file(main_window):
             biapy_config['TEST']['AUGMENTATION'] = True 
         if get_text(main_window.ui.TEST__EVALUATE__INPUT) == "Yes" :
             biapy_config['TEST']['EVALUATE'] = True 
+        if get_text(main_window.ui.TEST__REUSE_PREDICTIONS__INPUT) == "Yes" :
+            biapy_config['TEST']['REUSE_PREDICTIONS'] = True 
         if get_text(main_window.ui.TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INPUT) == "Yes" and get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "2D":
             biapy_config['TEST']['ANALIZE_2D_IMGS_AS_3D_STACK'] = True
 
@@ -1110,6 +1173,11 @@ def create_yaml_file(main_window):
                 biapy_config['TEST']['BY_CHUNKS']['SAVE_OUT_TIF'] = True  
             biapy_config['TEST']['BY_CHUNKS']['FLUSH_EACH'] = int(get_text(main_window.ui.TEST__BY_CHUNKS__FLUSH_EACH__INPUT))
             biapy_config['TEST']['BY_CHUNKS']['INPUT_IMG_AXES_ORDER'] = get_text(main_window.ui.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INPUT)
+            biapy_config['TEST']['BY_CHUNKS']['INPUT_MASK_AXES_ORDER'] = get_text(main_window.ui.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INPUT)
+            if get_text(main_window.ui.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT) == "Yes":
+                biapy_config['TEST']['BY_CHUNKS']['INPUT_ZARR_MULTIPLE_DATA'] = True
+                biapy_config['TEST']['BY_CHUNKS']['INPUT_ZARR_MULTIPLE_DATA_RAW_PATH'] = get_text(main_window.ui.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT)
+                biapy_config['TEST']['BY_CHUNKS']['INPUT_ZARR_MULTIPLE_DATA_GT_PATH'] = get_text(main_window.ui.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT)
             if get_text(main_window.ui.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INPUT) == "Yes":
                 biapy_config['TEST']['BY_CHUNKS']['WORKFLOW_PROCESS'] = {}
                 biapy_config['TEST']['BY_CHUNKS']['WORKFLOW_PROCESS']['ENABLE'] = True
@@ -1362,10 +1430,10 @@ class load_yaml_to_GUI_engine(QObject):
             "DATA__TEST__INSTANCE_CHANNELS_MASK_DIR__INPUT", "DATA__TEST__SSL_SOURCE_DIR__INPUT",
             "DATA__TRAIN__DETECTION_MASK_DIR__INPUT", "DATA__TRAIN__INSTANCE_CHANNELS_DIR__INPUT",
             "DATA__TRAIN__INSTANCE_CHANNELS_MASK_DIR__INPUT", "DATA__TRAIN__SSL_SOURCE_DIR__INPUT",
-            "DATA__VAL__BINARY_MASKS__INPUT", "DATA__VAL__DETECTION_MASK_DIR__INPUT",
-            "DATA__VAL__INSTANCE_CHANNELS_DIR__INPUT", "DATA__VAL__INSTANCE_CHANNELS_MASK_DIR__INPUT",
-            "DATA__VAL__SSL_SOURCE_DIR__INPUT", "LOG__CHART_CREATION_FREQ__INPUT", "LOG__LOG_DIR__INPUT",
-            "LOG__LOG_FILE_PREFIX__INPUT", "LOG__TENSORBOARD_LOG_DIR__INPUT", "SYSTEM__NUM_GPUS__INPUT",
+            "DATA__VAL__DETECTION_MASK_DIR__INPUT", "DATA__VAL__INSTANCE_CHANNELS_DIR__INPUT", 
+            "DATA__VAL__INSTANCE_CHANNELS_MASK_DIR__INPUT", "DATA__VAL__SSL_SOURCE_DIR__INPUT", 
+            "LOG__CHART_CREATION_FREQ__INPUT", "LOG__LOG_DIR__INPUT", "LOG__LOG_FILE_PREFIX__INPUT", 
+            "LOG__TENSORBOARD_LOG_DIR__INPUT", "SYSTEM__NUM_GPUS__INPUT",
 
             # Not used or decided to not insert in GUI
             "SYSTEM__PIN_MEM__INPUT", "TRAIN__CHECKPOINT_MONITOR__INPUT","DATA__VAL__DIST_EVAL__INPUT",
@@ -1448,8 +1516,10 @@ class load_yaml_to_GUI_engine(QObject):
                 self.main_window.cfg.settings['selected_workflow'] = 4
             elif work_id == "SELF_SUPERVISED":
                 self.main_window.cfg.settings['selected_workflow'] = 5
-            else: # CLASSIFICATION
+            elif work_id == "CLASSIFICATION":
                 self.main_window.cfg.settings['selected_workflow'] = 6
+            else: # IMAGE_TO_IMAGE
+                self.main_window.cfg.settings['selected_workflow'] = 7
             move_between_workflows(self.main_window, self.main_window.cfg.settings['selected_workflow'], self.work_dim)
             
             # Preprocessing
@@ -1644,7 +1714,6 @@ def get_git_revision_short_hash(main_window) -> str:
     sha = None 
     vtag = None
     try:
-        repo_url = 'https://github.com/path/to/your/repo.git'
         process = subprocess.Popen(["git", "ls-remote", main_window.cfg.settings['biapy_gui_github']], stdout=subprocess.PIPE)
         stdout, stderr = process.communicate()
         sha = re.split(r'\t+', stdout.decode('ascii'))[0]

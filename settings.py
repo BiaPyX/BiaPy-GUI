@@ -30,11 +30,10 @@ class Settings():
         self.settings['CUDA_version'] = [10.2, 11.8]
 
         # BiaPy 
-        self.settings['biapy_code_version'] = "v3.3.12"
+        self.settings['biapy_code_version'] = "v3.4.4"
         self.settings['biapy_code_github'] = "https://github.com/BiaPyX/BiaPy"
-        self.settings['biapy_gui_version'] = "v1.0.6"
+        self.settings['biapy_gui_version'] = "v1.0.7"
         self.settings['biapy_gui_github'] = "https://github.com/BiaPyX/BiaPy-GUI"
-        self.settings['biapy_gui_last_version_hash'] = "23e56b87cbbf90cc498ea158bd0726575d3dbc0b"
         self.settings['biapy_container_basename'] = "biapyx/biapy"
         self.settings['biapy_container_name'] = self.settings['biapy_container_basename']+":latest-"+str(self.settings['CUDA_version'][-1])
         self.settings['biapy_container_sizes'] = ["7.68GB", "11.6GB"]
@@ -61,7 +60,7 @@ class Settings():
 
         # Workflow page
         self.settings['workflow_names'] = ["Semantic\nSegmentation", "Instance\nsegmentation", "Object\ndetection", "Image\ndenoising", "Super\nresolution",\
-            "Self-supervised\nlearning", "Image\nclassification"]
+            "Self-supervised\nlearning", "Image\nclassification", "Image to image"]
         self.settings['selected_workflow'] = 1
         self.settings['dot_images'] = self.settings['dot_images'] = [
             QPixmap(resource_path(os.path.join("images","bn_images","dot_enable.svg"))),
@@ -94,7 +93,10 @@ class Settings():
             'efficientnet_b3', 'efficientnet_b4','efficientnet_b5','efficientnet_b6','efficientnet_b7']
         self.settings['classification_models_real_names'] = ['ViT', 'Simple CNN', 'EfficientNetB0', 'EfficientNetB1', 'EfficientNetB2', 
             'EfficientNetB3', 'EfficientNetB4', 'EfficientNetB5', 'EfficientNetB6', 'EfficientNetB7']
-        
+        # Image to image
+        self.settings['i2i_models'] = ['edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'unetr', 'multiresunet']
+        self.settings['i2i_models_real_names'] = ['EDSR', 'RCAN', 'DFCAN', 'WDSR', 'U-Net', 'Residual U-Net', 'ResUNet++', 'SEUnet', 'Attention U-Net', 'UNETR', 'MultiResUnet']
+
         # Paths
         self.settings['train_data_input_path'] = None
         self.settings['train_data_gt_input_path'] = None
@@ -106,7 +108,7 @@ class Settings():
     def translate_model_names(self, model, dim, inv=False):
         s = "_models_real_names" if not inv else "_models"
         s2 = "_models" if not inv else "_models_real_names"
-        for x in ["semantic", "instance", "detection", "denoising", "sr", "ssl", "classification"]:
+        for x in ["semantic", "instance", "detection", "denoising", "sr", "ssl", "classification", "i2i"]:
             try:
                 d = ""
                 if x == "sr" and dim == "2D":
@@ -127,7 +129,8 @@ class Settings():
             QPixmap(resource_path(os.path.join("images","denoising.png"))),
             QPixmap(resource_path(os.path.join("images","sr.png"))),
             QPixmap(resource_path(os.path.join("images","ssl.png"))),
-            QPixmap(resource_path(os.path.join("images","classification.png")))
+            QPixmap(resource_path(os.path.join("images","classification.png"))),
+            QPixmap(resource_path(os.path.join("images","i2i.png")))
         ]
 
     def load_workflow_detail_page(self):    
@@ -138,7 +141,8 @@ class Settings():
             [QPixmap(resource_path(os.path.join("images","denoising_raw.png"))),QPixmap(resource_path(os.path.join("images","denoising_pred.png")))],
             [QPixmap(resource_path(os.path.join("images","sr_raw.png"))),QPixmap(resource_path(os.path.join("images","sr_pred.png")))],
             [QPixmap(resource_path(os.path.join("images","ssl_raw.png"))),QPixmap(resource_path(os.path.join("images","ssl_pred.png")))],
-            [QPixmap(resource_path(os.path.join("images","classification_raw.png"))),QPixmap(resource_path(os.path.join("images","classification_label.png")))]
+            [QPixmap(resource_path(os.path.join("images","classification_raw.png"))),QPixmap(resource_path(os.path.join("images","classification_label.png")))],
+            [QPixmap(resource_path(os.path.join("images","i2i_raw.png"))),QPixmap(resource_path(os.path.join("images","i2i_target.png")))]
         ]
         self.settings['workflow_description_doc'] = [
             "https://biapy.readthedocs.io/en/latest/workflows/semantic_segmentation.html",
@@ -147,7 +151,8 @@ class Settings():
             "https://biapy.readthedocs.io/en/latest/workflows/denoising.html",
             "https://biapy.readthedocs.io/en/latest/workflows/super_resolution.html",
             "https://biapy.readthedocs.io/en/latest/workflows/self_supervision.html",
-            "https://biapy.readthedocs.io/en/latest/workflows/classification.html"
+            "https://biapy.readthedocs.io/en/latest/workflows/classification.html",
+            "https://biapy.readthedocs.io/en/latest/workflows/image_to_image.html"
         ]
 
         self.settings['ready_to_use_workflows'] = [
@@ -259,6 +264,20 @@ class Settings():
                     'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'classification_2d_butterfly.jpg'))), 
                     'data': 'https://drive.google.com/file/d/1m4_3UAgUsZ8FDjB4HyfA50Sht7_XkfdB/view?usp=drive_link', 
                     'template': 'https://github.com/BiaPyX/BiaPy/blob/master/templates/classification/2d_classification_rgb.yaml'
+                }
+            ],
+            [ # I2I
+                {
+                    'name': 'lifeact-RFP and sir-DNA translation (2D)', 
+                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'i2i_2d_lifeact-RFP.png'))), 
+                    'data': 'https://drive.google.com/file/d/1L8AXNjh0_updVI3-v1duf6CbcZb8uZK7/view?usp=drive_link', 
+                    'template': 'https://github.com/BiaPyX/BiaPy/blob/master/templates/image-to-image/2d_image-to-image.yaml'
+                },
+                {
+                    'name': 'Nuclear Pore image restoration (3D)', 
+                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'i2i_3d_pore.png'))), 
+                    'data': 'https://drive.google.com/file/d/1jL0bn2X3OFaV5T-6KR1g6fPDllH-LWzm/view?usp=drive_link', 
+                    'template': 'https://github.com/BiaPyX/BiaPy/blob/master/templates/image-to-image/3d_image-to-image.yaml'
                 }
             ]
         ]
@@ -374,7 +393,7 @@ class Settings():
                 </li>\
                 <li><dl>\
                     <dt><strong>Output:</strong></dt><dd><ul>\
-                    <li><p>Image with noise.</p></li>\
+                    <li><p>Image without noise.</p></li>\
                     </ul></dd></dl>\
                 </li>\
             </ul>\
@@ -443,4 +462,24 @@ class Settings():
             Each of these examples are of a different class and were obtained from \
             <a href="https://www.nature.com/articles/s41597-022-01721-8">MedMNIST v2</a>, concretely from \
             DermaMNIST dataset which is a large collection of multi-source dermatoscopic images of common \
-            pigmented skin lesions.</p>']
+            pigmented skin lesions.</p>',
+            
+            # I2I
+            '<p>The goal of this workflow is to translate/map input images into target images. \
+            This workflow is as the super-resolution one but with no upsampling, e.g. with the scaling factor to x1.</p>\
+            <ul>\
+                <li><dl>\
+                    <dt><strong>Input:</strong></dt><dd><ul>\
+                        <li><p>Lifeact-RFP cells.</p></li>\
+                    </ul></dd></dl>\
+                </li>\
+                <li><dl>\
+                    <dt><strong>Output:</strong></dt><dd><ul>\
+                    <li><p>SiR-DNA of cells.</p></li>\
+                    </ul></dd></dl>\
+                </li>\
+            </ul>\
+            <p>In the figure above a few example of paired microscopy images (fluorescence) of lifeact-RFP \
+            (input) and sir-DNA is depicted (output). The images were obtained from \
+            <a href="https://zenodo.org/records/3941889#.XxrkzWMzaV4">ZeroCostDL4Mic pix2pix dataset example</a>.</p>',
+            ]

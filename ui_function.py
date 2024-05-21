@@ -175,8 +175,9 @@ class UIFunction(MainWindow):
         main_window.ui.workflow_view5_frame.setEnabled(False)
         main_window.ui.workflow_view6_frame.setEnabled(False)
         main_window.ui.workflow_view7_frame.setEnabled(False)
-        
-        main_window.workflow_view_queue = deque([1, 2, 3, 4, 5, 6, 7])
+        main_window.ui.workflow_view8_frame.setEnabled(False)
+
+        main_window.workflow_view_queue = deque([1, 2, 3, 4, 5, 6, 7, 8])
 
         class MouseObserver(QObject):
             def __init__(self, widget, parent):
@@ -203,6 +204,7 @@ class UIFunction(MainWindow):
         main_window.observer5 = MouseObserver(main_window.ui.workflow_view5_frame, main_window)
         main_window.observer6 = MouseObserver(main_window.ui.workflow_view6_frame, main_window)
         main_window.observer7 = MouseObserver(main_window.ui.workflow_view7_frame, main_window)
+        main_window.observer8 = MouseObserver(main_window.ui.workflow_view8_frame, main_window)
 
         main_window.cfg.load_workflow_page()
         main_window.ui.workflow_view1_label.setPixmap(main_window.cfg.settings['workflow_images'][0])
@@ -219,6 +221,8 @@ class UIFunction(MainWindow):
         main_window.ui.workflow_view6_name_label.setText(main_window.cfg.settings['workflow_names'][5])
         main_window.ui.workflow_view7_label.setPixmap(main_window.cfg.settings['workflow_images'][6])
         main_window.ui.workflow_view7_name_label.setText(main_window.cfg.settings['workflow_names'][6])
+        main_window.ui.workflow_view8_label.setPixmap(main_window.cfg.settings['workflow_images'][7])
+        main_window.ui.workflow_view8_name_label.setText(main_window.cfg.settings['workflow_names'][7])
 
     def move_workflow_view(main_window, isleft):
         main_window.last_selected_workflow = main_window.cfg.settings['selected_workflow']
@@ -229,7 +233,7 @@ class UIFunction(MainWindow):
         x = first_element_x_pos 
         if isleft:            
             while x+step_x > first_element_x_pos:
-                for i in range(7):
+                for i in range(8):
                     getattr(main_window.ui, f"workflow_view{main_window.workflow_view_queue[i]}_frame").move(x+(step_x*i), 0)
                     getattr(main_window.ui, f"workflow_view{main_window.workflow_view_queue[i]}_frame").repaint()
                 x -= 30
@@ -239,7 +243,7 @@ class UIFunction(MainWindow):
             item = 0
         else: 
             while x < first_not_visible_element_x_pos:
-                for i in range(7):
+                for i in range(8):
                     getattr(main_window.ui, f"workflow_view{main_window.workflow_view_queue[i]}_frame").move(x+(step_x*i), 0)
                     getattr(main_window.ui, f"workflow_view{main_window.workflow_view_queue[i]}_frame").repaint()
                 x += 30
@@ -251,7 +255,7 @@ class UIFunction(MainWindow):
         main_window.cfg.settings['selected_workflow'] = main_window.workflow_view_queue[1]-1
 
         # Final positions
-        for i in range(7):
+        for i in range(8):
             getattr(main_window.ui, f"workflow_view{main_window.workflow_view_queue[i]}_frame").move(first_element_x_pos+(step_x*i), 0)
             getattr(main_window.ui, f"workflow_view{main_window.workflow_view_queue[i]}_frame").repaint()
         
@@ -410,6 +414,79 @@ class UIFunction(MainWindow):
             main_window.ui.TEST__POST_PROCESSING__Z_FILTERING__DET__INFO.setVisible(True) 
             if main_window.cfg.settings['selected_workflow'] == 4:
                 models = main_window.cfg.settings['sr_2d_models_real_names']
+
+            # Zarr related variables
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False) 
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setVisible(False)
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT.setVisible(False) 
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setVisible(False)
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setVisible(False) 
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setVisible(False)
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setVisible(False) 
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setVisible(False)
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setVisible(False) 
+            main_window.ui.DATA__TRAIN__INPUT_IMG_AXES_ORDER__LABEL.setVisible(False)
+            main_window.ui.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO.setVisible(False) 
+            main_window.ui.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INPUT.setVisible(False)
+            main_window.ui.DATA__TRAIN__INPUT_MASK_AXES_ORDER__LABEL.setVisible(False) 
+            main_window.ui.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO.setVisible(False)
+            main_window.ui.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT.setVisible(False) 
+
+            main_window.ui.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False) 
+            main_window.ui.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO.setVisible(False)
+            main_window.ui.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT.setVisible(False) 
+            main_window.ui.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setVisible(False)
+            main_window.ui.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setVisible(False) 
+            main_window.ui.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setVisible(False)
+            main_window.ui.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setVisible(False) 
+            main_window.ui.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setVisible(False)
+            main_window.ui.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setVisible(False) 
+            main_window.ui.DATA__VAL__INPUT_IMG_AXES_ORDER__LABEL.setVisible(False)
+            main_window.ui.DATA__VAL__INPUT_IMG_AXES_ORDER__INFO.setVisible(False) 
+            main_window.ui.DATA__VAL__INPUT_IMG_AXES_ORDER__INPUT.setVisible(False)
+            main_window.ui.DATA__VAL__INPUT_MASK_AXES_ORDER__LABEL.setVisible(False) 
+            main_window.ui.DATA__VAL__INPUT_MASK_AXES_ORDER__INFO.setVisible(False)
+            main_window.ui.DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT.setVisible(False) 
+
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False)
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False) 
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False)
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False) 
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False)
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False) 
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False)
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False) 
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False)
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False) 
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False)
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False) 
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False)
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False) 
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False)
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False) 
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False)
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False) 
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False)
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False) 
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False)
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False) 
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False)
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False) 
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False)
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False) 
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False)
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False) 
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False)
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False) 
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False)
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False) 
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False)
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False) 
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False)
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False) 
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False)
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False) 
+            main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False)
         # 3D
         else:
             # Only change values the first time and if they were not modified 
@@ -528,6 +605,12 @@ class UIFunction(MainWindow):
         main_window.ui.cross_validation_fold_info.setVisible(False)
         main_window.ui.DATA__VAL__CROSS_VAL_FOLD__INPUT.setVisible(False)
         main_window.ui.train_advanced_options_frame.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__VAL__LABEL.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__VAL__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__VAL__INPUT.setVisible(False)
+        main_window.ui.MODEL__MAE_MASK_RATIO__LABEL.setVisible(False)
+        main_window.ui.MODEL__MAE_MASK_RATIO__INFO.setVisible(False)
+        main_window.ui.MODEL__MAE_MASK_RATIO__INPUT.setVisible(False)
         main_window.ui.adamw_weight_decay_label.setVisible(False)
         main_window.ui.TRAIN__W_DECAY__INFO.setVisible(False)
         main_window.ui.TRAIN__W_DECAY__INPUT.setVisible(False)
@@ -537,6 +620,12 @@ class UIFunction(MainWindow):
         main_window.ui.profiler_batch_range_label.setVisible(False)
         main_window.ui.TRAIN__PROFILER_BATCH_RANGE__INPUT.setVisible(False)
         main_window.ui.TRAIN__PROFILER_BATCH_RANGE__INFO.setVisible(False)
+        main_window.ui.DATA__NORMALIZATION__PERC_LOWER__LABEL.setVisible(False)
+        main_window.ui.DATA__NORMALIZATION__PERC_LOWER__INFO.setVisible(False)
+        main_window.ui.DATA__NORMALIZATION__PERC_LOWER__INPUT.setVisible(False)
+        main_window.ui.DATA__NORMALIZATION__PERC_UPPER__LABEL.setVisible(False)
+        main_window.ui.DATA__NORMALIZATION__PERC_UPPER__INFO.setVisible(False)
+        main_window.ui.DATA__NORMALIZATION__PERC_UPPER__INPUT.setVisible(False)
         main_window.ui.custom_mean_label.setVisible(False)
         main_window.ui.DATA__NORMALIZATION__CUSTOM_MEAN__INPUT.setVisible(False)
         main_window.ui.DATA__NORMALIZATION__CUSTOM_MEAN__INFO.setVisible(False)
@@ -590,6 +679,19 @@ class UIFunction(MainWindow):
         main_window.ui.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__LABEL.setVisible(False)
         main_window.ui.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO.setVisible(False)
         main_window.ui.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT.setVisible(False)
+        main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setVisible(False)
+        main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setVisible(False)
+        main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setVisible(False)
+        main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setVisible(False)
+        main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setVisible(False)
+        main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setVisible(False)
+        main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setVisible(False)
+        main_window.ui.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setVisible(False)
+        main_window.ui.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setVisible(False)
+        main_window.ui.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setVisible(False)
+        main_window.ui.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setVisible(False)
+        main_window.ui.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setVisible(False)
+        main_window.ui.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setVisible(False)
         main_window.ui.preprocessing_test_frame.setVisible(False)
         main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__LABEL.setVisible(False)
         main_window.ui.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INFO.setVisible(False)
@@ -815,11 +917,20 @@ class UIFunction(MainWindow):
         main_window.ui.DATA__PATCH_SIZE__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.DATA__EXTRACT_RANDOM_PATCH__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__NORMALIZATION__PERC_CLIP__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__NORMALIZATION__PERC_LOWER__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__NORMALIZATION__PERC_UPPER__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.DATA__NORMALIZATION__TYPE__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.DATA__NORMALIZATION__CUSTOM_MEAN__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__NORMALIZATION__APPLICATION_MODE__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.DATA__NORMALIZATION__CUSTOM_STD__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.DATA__CHECK_GENERATORS__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.DATA__FORCE_RGB__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.DATA__PREPROCESS__TRAIN__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.DATA__PREPROCESS__VAL__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.DATA__PREPROCESS__TEST__INFO.setPixmap(main_window.cfg.settings['info_image'])
@@ -875,6 +986,11 @@ class UIFunction(MainWindow):
         main_window.ui.DATA__VAL__OVERLAP__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.DATA__VAL__PADDING__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.DATA__VAL__RESOLUTION__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__VAL__INPUT_IMG_AXES_ORDER__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.DATA__VAL__INPUT_MASK_AXES_ORDER__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.MODEL__FEATURE_MAPS__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.MODEL__DROPOUT_VALUES__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.MODEL__BATCH_NORMALIZATION__INFO.setPixmap(main_window.cfg.settings['info_image'])
@@ -892,6 +1008,8 @@ class UIFunction(MainWindow):
         main_window.ui.MODEL__UNETR_VIT_HIDD_MULT__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.MODEL__UNETR_VIT_NUM_FILTERS__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.MODEL__UNETR_DEC_ACTIVATION__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.MODEL__MAE_MASK_TYPE__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.MODEL__MAE_MASK_RATIO__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.MODEL__MAE_DEC_HIDDEN_SIZE__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.MODEL__MAE_DEC_NUM_LAYERS__INFO.setPixmap(main_window.cfg.settings['info_image'])
@@ -1022,7 +1140,7 @@ class UIFunction(MainWindow):
         main_window.ui.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.PROBLEM__SELF_SUPERVISED__RESIZING_FACTOR__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.PROBLEM__SELF_SUPERVISED__NOISE__INFO.setPixmap(main_window.cfg.settings['info_image'])
-        
+        main_window.ui.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INFO.setPixmap(main_window.cfg.settings['info_image'])
 
     ###########
     # Test page 
@@ -1043,6 +1161,7 @@ class UIFunction(MainWindow):
         main_window.ui.use_val_as_test.setVisible(False)
         main_window.ui.DATA__TEST__USE_VAL_AS_TEST__INPUT.setVisible(False)
         main_window.ui.DATA__TEST__USE_VAL_AS_TEST__INFO.setVisible(False)
+        main_window.ui.DATA__PREPROCESS__TEST__FRAME.setVisible(False)
         main_window.ui.inst_seg_ths_frame.setVisible(False)
         main_window.ui.inst_seg_b_channel_th_label.setVisible(False)
         main_window.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INPUT.setVisible(False)
@@ -1143,6 +1262,12 @@ class UIFunction(MainWindow):
         main_window.ui.test_advanced_options_frame.setVisible(False)
         main_window.ui.process_by_chunks_label.setVisible(False)
         main_window.ui.process_by_chunks_frame.setVisible(False)
+        main_window.ui.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setVisible(False)
+        main_window.ui.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setVisible(False)
+        main_window.ui.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setVisible(False)
+        main_window.ui.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setVisible(False)
+        main_window.ui.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setVisible(False)
+        main_window.ui.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setVisible(False)
         main_window.ui.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__LABEL.setVisible(False)
         main_window.ui.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INPUT.setVisible(False)
         main_window.ui.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INFO.setVisible(False)
@@ -1173,6 +1298,10 @@ class UIFunction(MainWindow):
         main_window.ui.TEST__BY_CHUNKS__SAVE_OUT_TIF__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.TEST__BY_CHUNKS__FLUSH_EACH__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.DATA__PATCH_SIZE__TEST__INFO.setPixmap(main_window.cfg.settings['info_image'])
@@ -1183,6 +1312,7 @@ class UIFunction(MainWindow):
         main_window.ui.DATA__TEST__ARGMAX_TO_OUTPUT__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.TEST__POST_PROCESSING__APPLY_MASK__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.TEST__EVALUATE__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.TEST__REUSE_PREDICTIONS__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.TEST__FULL_IMG__INFO.setPixmap(main_window.cfg.settings['info_image'])
 
         main_window.ui.DATA__TEST__CHECK_DATA__INFO.setPixmap(main_window.cfg.settings['info_image'])

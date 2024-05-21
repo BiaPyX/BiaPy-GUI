@@ -63,6 +63,27 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "DATA__PREPROCESS__TRAIN__LABEL": 
+                {
+                    "DATA__TRAIN__IN_MEMORY__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "DATA__PREPROCESS__TRAIN__INFO": 
+                {
+                    "DATA__TRAIN__IN_MEMORY__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "DATA__PREPROCESS__TRAIN__INPUT": 
+                {
+                    "DATA__TRAIN__IN_MEMORY__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
             "percentage_validation_label": 
                 {
                     "DATA__VAL__TYPE__INPUT": 
@@ -222,6 +243,39 @@ class Widget_conditions():
                     "DATA__VAL__TYPE__INPUT": 
                     [
                         "Not extracted from train (path needed)"
+                    ],
+                },
+            "DATA__PREPROCESS__VAL__LABEL": 
+                {
+                    "DATA__VAL__TYPE__INPUT": 
+                    [
+                        "Not extracted from train (path needed)"
+                    ],
+                    "DATA__VAL__IN_MEMORY__INPUT":
+                    [
+                        "Yes"
+                    ],
+                },
+            "DATA__PREPROCESS__VAL__INFO": 
+                {
+                    "DATA__VAL__TYPE__INPUT": 
+                    [
+                        "Not extracted from train (path needed)"
+                    ],
+                    "DATA__VAL__IN_MEMORY__INPUT":
+                    [
+                        "Yes"
+                    ],
+                },
+            "DATA__PREPROCESS__VAL__INPUT": 
+                {
+                    "DATA__VAL__TYPE__INPUT": 
+                    [
+                        "Not extracted from train (path needed)"
+                    ],
+                    "DATA__VAL__IN_MEMORY__INPUT":
+                    [
+                        "Yes"
                     ],
                 }, 
             "test_data_label": 
@@ -612,6 +666,48 @@ class Widget_conditions():
             "TRAIN__PROFILER_BATCH_RANGE__INFO": 
                 {
                     "TRAIN__PROFILER__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "DATA__NORMALIZATION__PERC_LOWER__LABEL": 
+                {
+                    "DATA__NORMALIZATION__PERC_CLIP__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "DATA__NORMALIZATION__PERC_LOWER__INFO": 
+                {
+                    "DATA__NORMALIZATION__PERC_CLIP__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "DATA__NORMALIZATION__PERC_LOWER__INPUT": 
+                {
+                    "DATA__NORMALIZATION__PERC_CLIP__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "DATA__NORMALIZATION__PERC_UPPER__LABEL": 
+                {
+                    "DATA__NORMALIZATION__PERC_CLIP__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "DATA__NORMALIZATION__PERC_UPPER__INFO": 
+                {
+                    "DATA__NORMALIZATION__PERC_CLIP__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "DATA__NORMALIZATION__PERC_UPPER__INPUT": 
+                {
+                    "DATA__NORMALIZATION__PERC_CLIP__INPUT": 
                     [
                         "Yes"
                     ],
@@ -3008,11 +3104,57 @@ class Widget_conditions():
                         'UNETR', 
                     ],
                 }, 
+            "MODEL__UNETR_DEC_KERNEL_SIZE__LABEL": 
+                {
+                    "MODEL__ARCHITECTURE__INPUT": 
+                    [
+                        'UNETR', 
+                    ],
+                }, 
+            "MODEL__UNETR_DEC_KERNEL_SIZE__INFO": 
+                {
+                    "MODEL__ARCHITECTURE__INPUT": 
+                    [
+                        'UNETR', 
+                    ],
+                }, 
+            "MODEL__UNETR_DEC_KERNEL_SIZE__INPUT": 
+                {
+                    "MODEL__ARCHITECTURE__INPUT": 
+                    [
+                        'UNETR', 
+                    ],
+                },
+            "MODEL__MAE_MASK_TYPE__LABEL": 
+                {
+                    "MODEL__ARCHITECTURE__INPUT": 
+                    [
+                        'MAE', 
+                    ],
+                }, 
+            "MODEL__MAE_MASK_TYPE__INFO": 
+                {
+                    "MODEL__ARCHITECTURE__INPUT": 
+                    [
+                        'MAE', 
+                    ],
+                }, 
+            "MODEL__MAE_MASK_TYPE__INPUT": 
+                {
+                    "MODEL__ARCHITECTURE__INPUT": 
+                    [
+                        'MAE', 
+                    ],
+                }, 
             "MODEL__MAE_MASK_RATIO__INPUT": 
                 {
                     "MODEL__ARCHITECTURE__INPUT": 
                     [
                         'MAE', 
+                    ],
+                    "MODEL__MAE_MASK_TYPE__INPUT":
+                    [
+                        'random', 
                     ],
                 }, 
             "MODEL__MAE_MASK_RATIO__LABEL": 
@@ -3021,12 +3163,20 @@ class Widget_conditions():
                     [
                         'MAE', 
                     ],
+                    "MODEL__MAE_MASK_TYPE__INPUT":
+                    [
+                        'random', 
+                    ],
                 },
             "MODEL__MAE_MASK_RATIO__INFO": 
                 {
                     "MODEL__ARCHITECTURE__INPUT": 
                     [
                         'MAE', 
+                    ],
+                    "MODEL__MAE_MASK_TYPE__INPUT":
+                    [
+                        'random', 
                     ],
                 },
             "MODEL__MAE_DEC_HIDDEN_SIZE__INPUT": 
@@ -3134,6 +3284,48 @@ class Widget_conditions():
                         'Yes', 
                     ],
                 }, 
+            "TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL": 
+                {
+                    "TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT": 
+                    [
+                        'Yes', 
+                    ],
+                }, 
+            "TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO": 
+                {
+                    "TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT": 
+                    [
+                        'Yes', 
+                    ],
+                }, 
+            "TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT": 
+                {
+                    "TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT": 
+                    [
+                        'Yes', 
+                    ],
+                }, 
+            "TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL": 
+                {
+                    "TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT": 
+                    [
+                        'Yes', 
+                    ],
+                }, 
+            "TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO": 
+                {
+                    "TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT": 
+                    [
+                        'Yes', 
+                    ],
+                }, 
+            "TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT": 
+                {
+                    "TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT": 
+                    [
+                        'Yes', 
+                    ],
+                }, 
             "TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INPUT": 
                 {
                     "TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INPUT": 
@@ -3167,6 +3359,13 @@ class Widget_conditions():
                     "TRAIN__ENABLE__INPUT": 
                     [
                         'No', 
+                    ],
+                },
+            "DATA__PREPROCESS__TEST__FRAME": 
+                {
+                    "DATA__TEST__IN_MEMORY__INPUT": 
+                    [
+                        'Yes', 
                     ],
                 },
             "TEST__DET_BLOB_LOG_MIN_SIGMA__LABEL": 
@@ -3573,6 +3772,9 @@ class Widget_conditions():
                     "DATA__PREPROCESS__TEST__INPUT": [
                         "Yes",
                     ],
+                    "DATA__TEST__IN_MEMORY__INPUT": [
+                        "Yes",
+                    ],
                 },
             "DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__LABEL": 
                 {
@@ -3852,6 +4054,78 @@ class Widget_conditions():
                         "Yes",
                     ]
                 },
+            "DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL": 
+                {
+                    "DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO": 
+                {
+                    "DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT": 
+                {
+                    "DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL": 
+                {
+                    "DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO": 
+                {
+                    "DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT": 
+                {
+                    "DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL": 
+                {
+                    "DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO": 
+                {
+                    "DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT": 
+                {
+                    "DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL": 
+                {
+                    "DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO": 
+                {
+                    "DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT": 
+                {
+                    "DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT": [
+                        "Yes",
+                    ]
+                },
     }   
 
     def combobox_hide_visible_action(self, main_window, list_of_widgets_to_update, widgets_to_set_cond=None, 
@@ -3930,6 +4204,7 @@ class Widget_conditions():
         if updated_widget is not None and widgets_to_set is not None:
             cbox_value = str(get_text(getattr(main_window.ui, updated_widget)))
             for wid in widgets_to_set:
+                print(f"WID: {wid} {cbox_value}")
                 getattr(main_window.ui, wid).setCurrentText(cbox_value)
                  
         # Frames to hide if all the childs are not visible 
