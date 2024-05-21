@@ -312,8 +312,8 @@ class run_worker(QObject):
             if self.use_gpu:
                 cpu_count = min(multiprocessing.cpu_count(), 5)
             else:
-                cpus = get_text(self.main_gui.ui.SYSTEM__NUM_CPUS__INPUT)
-                cpus = multiprocessing.cpu_count() if cpus == "All" else int(cpus)
+                cpu_count = get_text(self.main_gui.ui.SYSTEM__NUM_CPUS__INPUT)
+                cpu_count = multiprocessing.cpu_count() if cpu_count == "All" else int(cpu_count)
             shm_size = f"{128*cpu_count}m"
 
             # dist_backend = "gloo" if self.windows_os else "nccl"
