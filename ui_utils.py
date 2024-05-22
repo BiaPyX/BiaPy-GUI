@@ -406,7 +406,9 @@ def oninit_checks(main_window):
         main_window.cfg.settings['docker_found'] = True
     except:
         main_window.cfg.settings['docker_found'] = False
-        print(traceback.format_exc())
+        main_window.logger.info("The following error is expected as Docker has not been found in the system:")
+        main_window.logger.warning(traceback.format_exc())
+        main_window.logger.info("Below this point the we expect no more errors!")
     if main_window.cfg.settings['docker_found']:
         main_window.ui.docker_status_label.setText("<br>Docker installation found")
         main_window.cfg.settings['biapy_container_ready'] = True
@@ -435,11 +437,11 @@ def oninit_checks(main_window):
         main_window.cfg.settings['biapy_container_name'] = \
             main_window.cfg.settings['biapy_container_basename'] + ":latest-"+str(main_window.cfg.settings['CUDA_version'][pos])
         main_window.cfg.settings['biapy_container_size'] = main_window.cfg.settings['biapy_container_sizes'][pos]
-        print(f"Using {main_window.cfg.settings['biapy_container_name']} container")
+        main_window.logger.info(f"Using {main_window.cfg.settings['biapy_container_name']} container")
 
     except Exception as gpu_check_error:
         main_window.cfg.settings['GPUs'] = []
-        print(f"ERROR during driver check: {gpu_check_error}")
+        main_window.logger.warning(f"ERROR during driver check: {gpu_check_error}")
 
     if len(main_window.cfg.settings['GPUs']) > 0:
         if len(main_window.cfg.settings['GPUs']) == 1:
@@ -1284,7 +1286,7 @@ def create_yaml_file(main_window):
         replace = True if main_window.yes_no.answer else False
         
     if replace:
-        print("Creating YAML file") 
+        main_window.logger.info("Creating YAML file") 
         with open(os.path.join(main_window.cfg.settings['yaml_config_file_path'], main_window.cfg.settings['yaml_config_filename']), 'w') as outfile:
             yaml.dump(biapy_config, outfile, default_flow_style=False)
 
@@ -1339,7 +1341,7 @@ def load_yaml_config(main_window, advise_user=False):
     try:
         main_window.cfg.settings['biapy_cfg']._C.merge_from_file(os.path.join(main_window.cfg.settings['yaml_config_file_path'], main_window.cfg.settings['yaml_config_filename']))
         main_window.cfg.settings['biapy_cfg'] = main_window.cfg.settings['biapy_cfg'].get_cfg_defaults()
-        check_configuration(main_window.cfg.settings['biapy_cfg'], jobname+"_1")
+        check_configuration(main_window.cfg.settings['biapy_cfg'], jobname+"_1", logger=main_window.logger)
         
     except Exception as errors:   
         errors = str(errors)
@@ -1456,7 +1458,7 @@ class load_yaml_to_GUI_engine(QObject):
             try:
                 loaded_cfg = yaml.safe_load(cfg_content)
             except yaml.YAMLError as exc:
-                print(exc)
+                main_window.logger.warning(exc)
                 self.error_signal.emit(f"{tab_detected_mss}Following error found when loading configuration file: \n{exc}", "error")
                 self.state_signal.emit(1)
                 self.finished_signal.emit()
@@ -1475,7 +1477,7 @@ class load_yaml_to_GUI_engine(QObject):
             self.state_signal.emit(1)
             self.finished_signal.emit()
             return  
-        print(f"Loaded: {loaded_cfg}")
+        main_window.logger.info(f"Loaded: {loaded_cfg}")
 
         # Load configuration file and check possible errors
         tmp_cfg = Config("/home/","jobname")
@@ -1483,10 +1485,11 @@ class load_yaml_to_GUI_engine(QObject):
         try:
             tmp_cfg._C.merge_from_file(yaml_file_final)
             tmp_cfg = tmp_cfg.get_cfg_defaults()
-            check_configuration(tmp_cfg, get_text(self.main_window.ui.job_name_input), check_data_paths=False)
+            check_configuration(tmp_cfg, get_text(self.main_window.ui.job_name_input), check_data_paths=False, 
+                logger=main_window.logger)
         except Exception as errors:  
             errors = str(errors) 
-            print(errors) 
+            main_window.logger.error(errors) 
             self.error_signal.emit(tab_detected_mss+errors, "load_yaml_error")
         else:
             
@@ -1538,13 +1541,13 @@ class load_yaml_to_GUI_engine(QObject):
 
             # Go over configuration file
             errors, variables_set = self.analyze_dict(conf=loaded_cfg, sep="")
-            print("Variables updated: ")
+            main_window.logger.info("Variables updated: ")
             for i, k in enumerate(variables_set.keys()):
-                print("{}. {}: {}".format(i+1, k, variables_set[k]))
+                main_window.logger.info("{}. {}: {}".format(i+1, k, variables_set[k]))
             if len(errors) > 0:
-                print("Errors: ")
+                main_window.logger.info("Errors: ")
                 for i in range(len(errors)):
-                    print("{}. : {}".format(i+1, errors[i]))
+                    main_window.logger.info("{}. : {}".format(i+1, errors[i]))
 
             # Message for the user
             self.report_yaml_load_result.emit(errors, self.yaml_file)
@@ -1706,7 +1709,7 @@ class load_yaml_to_GUI_engine(QObject):
                             errors.append(err)
                         else:
                             variables_set[x] = y
-                            print("Setting {} : {} ({})".format(x, y, k))
+                            main_window.logger.info("Setting {} : {} ({})".format(x, y, k))
                         
         return errors, variables_set
 

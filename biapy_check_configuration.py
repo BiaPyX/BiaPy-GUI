@@ -5,7 +5,7 @@ import collections
 import requests
 from pathlib import Path
 
-def check_configuration(cfg, jobname, check_data_paths=True):
+def check_configuration(cfg, jobname, check_data_paths=True, logger=None):
     """
     Check if the configuration is good. 
     """
@@ -156,7 +156,8 @@ def check_configuration(cfg, jobname, check_data_paths=True):
         "PROBLEM.TYPE not in ['SEMANTIC_SEG', 'INSTANCE_SEG', 'CLASSIFICATION', 'DETECTION', 'DENOISING', 'SUPER_RESOLUTION', 'SELF_SUPERVISED', 'IMAGE_TO_IMAGE']"
 
     if cfg.PROBLEM.NDIM == '3D' and cfg.TEST.FULL_IMG:
-        print("WARNING: TEST.FULL_IMG == True while using PROBLEM.NDIM == '3D'. As 3D images are usually 'huge'"
+        if logger is not None:
+            logger.warning("TEST.FULL_IMG == True while using PROBLEM.NDIM == '3D'. As 3D images are usually 'huge'"
             ", full image statistics will be disabled to avoid GPU memory overflow")
 
     if cfg.LOSS.TYPE != "CE" and cfg.PROBLEM.TYPE not in ['SEMANTIC_SEG', 'DETECTION']:
@@ -178,7 +179,8 @@ def check_configuration(cfg, jobname, check_data_paths=True):
         url = 'http://www.doi.org/'+cfg.MODEL.BMZ.SOURCE_MODEL_DOI
         r = requests.get(url, stream=True, verify=True)
         if r.status_code >= 200 and r.status_code < 400:
-            print(f'BMZ model DOI: {cfg.MODEL.BMZ.SOURCE_MODEL_DOI} found')
+            if logger is not None:
+                logger.info(f'BMZ model DOI: {cfg.MODEL.BMZ.SOURCE_MODEL_DOI} found')
         else:
             raise ValueError(f'BMZ model DOI: {cfg.MODEL.BMZ.SOURCE_MODEL_DOI} not found. Aborting!')
 
@@ -186,7 +188,8 @@ def check_configuration(cfg, jobname, check_data_paths=True):
         if cfg.MODEL.TORCHVISION_MODEL_NAME == "":
             raise ValueError("'MODEL.TORCHVISION_MODEL_NAME' needs to be configured when 'MODEL.SOURCE' is 'torchvision'")
         if cfg.TEST.AUGMENTATION:
-            print("WARNING: 'TEST.AUGMENTATION' is not available using TorchVision models")
+            if logger is not None:
+                logger.info("WARNING: 'TEST.AUGMENTATION' is not available using TorchVision models")
 
     if cfg.TEST.AUGMENTATION and cfg.TEST.REDUCE_MEMORY:
         raise ValueError("'TEST.AUGMENTATION' and 'TEST.REDUCE_MEMORY' are incompatible as the function used to make the rotation "
@@ -406,7 +409,8 @@ def check_configuration(cfg, jobname, check_data_paths=True):
         raise ValueError('To use preprocessing DATA.TRAIN.IN_MEMORY needs to be True.')
     if not cfg.DATA.VAL.IN_MEMORY and cfg.DATA.PREPROCESS.VAL:
         if cfg.DATA.VAL.FROM_TRAIN:
-            print("WARNING: validation preprocessing will be done based on 'DATA.PREPROCESS.TRAIN', as 'DATA.VAL.FROM_TRAIN' is selected")
+            if logger is not None:
+                logger.info("WARNING: validation preprocessing will be done based on 'DATA.PREPROCESS.TRAIN', as 'DATA.VAL.FROM_TRAIN' is selected")
         else:
             raise ValueError('To use preprocessing DATA.VAL.IN_MEMORY needs to be True.')
     if not cfg.DATA.TEST.IN_MEMORY and cfg.DATA.PREPROCESS.TEST:
@@ -525,11 +529,13 @@ def check_configuration(cfg, jobname, check_data_paths=True):
         if cfg.DATA.VAL.CROSS_VAL_NFOLD < cfg.DATA.VAL.CROSS_VAL_FOLD:
             raise ValueError("'DATA.VAL.CROSS_VAL_NFOLD' can not be less than 'DATA.VAL.CROSS_VAL_FOLD'")
         if not cfg.DATA.VAL.IN_MEMORY:
-            print("WARNING: ignoring 'DATA.VAL.IN_MEMORY' as it is always True when 'DATA.VAL.CROSS_VAL' is enabled")
+            if logger is not None:
+                logger.info("WARNING: ignoring 'DATA.VAL.IN_MEMORY' as it is always True when 'DATA.VAL.CROSS_VAL' is enabled")
     if cfg.DATA.TEST.USE_VAL_AS_TEST and not cfg.DATA.VAL.CROSS_VAL:
         raise ValueError("'DATA.TEST.USE_VAL_AS_TEST' can only be used when 'DATA.VAL.CROSS_VAL' is selected")
     if cfg.DATA.TEST.USE_VAL_AS_TEST and not cfg.TRAIN.ENABLE and cfg.DATA.TEST.IN_MEMORY:
-        print("WARNING: 'DATA.TEST.IN_MEMORY' is disabled when 'DATA.TEST.USE_VAL_AS_TEST' is enabled")
+        if logger is not None:
+            logger.warning("'DATA.TEST.IN_MEMORY' is disabled when 'DATA.TEST.USE_VAL_AS_TEST' is enabled")
     if len(cfg.DATA.TRAIN.RESOLUTION) != 1 and len(cfg.DATA.TRAIN.RESOLUTION) != dim_count:
         raise ValueError("When PROBLEM.NDIM == {} DATA.TRAIN.RESOLUTION tuple must be length {}, given {}."
                          .format(cfg.PROBLEM.NDIM, dim_count, cfg.DATA.TRAIN.RESOLUTION))
@@ -588,7 +594,8 @@ def check_configuration(cfg, jobname, check_data_paths=True):
     if cfg.DATA.TRAIN.REPLICATE:
         if cfg.PROBLEM.TYPE == 'CLASSIFICATION' or \
         (cfg.PROBLEM.TYPE == 'SELF_SUPERVISED' and cfg.PROBLEM.SELF_SUPERVISED.PRETEXT_TASK == "masking"):
-            print("WARNING: 'DATA.TRAIN.REPLICATE' has no effect in the selected workflow")
+            if logger is not None:
+                logger.warning("'DATA.TRAIN.REPLICATE' has no effect in the selected workflow")
 
     ### Model ###
     if cfg.MODEL.SOURCE == "biapy":

@@ -21,15 +21,15 @@ from ui.aux_windows import dialog_Ui, workflow_explanation_Ui, yes_no_Ui, spinne
 os.environ['QT_MAC_WANTS_LAYER'] = '1'
 
 class MainWindow(QMainWindow):
-    def __init__(self, log_file, log_dir):
+    def __init__(self, logger, log_dir):
         """ 
         Main window constructor. 
 
         Parameters
         ----------
-        log_file : str
-            File to log the output. 
-        
+        logger : str
+            Logger to log the file to log all the information. 
+
         log_dir : str
             Logging directory for the current BiaPy GUI execution. 
         """
@@ -37,7 +37,7 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.log_file = log_file
+        self.logger = logger
         self.log_dir = log_dir
         self.cfg = Settings()
 
@@ -839,7 +839,7 @@ class MainWindow(QMainWindow):
         if self.yes_no.answer:
             # Kill all run windows
             for x in self.cfg.settings['running_workers']:
-                print("Killing subprocess . . .")
+                self.logger.info("Killing subprocess . . .")
                 x.gui.forcing_close = True
                 x.gui.close()
 
@@ -848,7 +848,7 @@ class MainWindow(QMainWindow):
                 try:
                     self.thread_spin.quit()
                 except Exception as e:
-                    print(f"Possible expected error during thread_spin deletion: {e}")
+                    self.logger.error(f"Possible expected error during thread_spin deletion: {e}")
             # Finally close the main window    
             self.close()
         else:
@@ -857,9 +857,9 @@ class MainWindow(QMainWindow):
     def check_new_gui_version(self):
         # Changed version
         sha, vtag = get_git_revision_short_hash(self)
-        print(f"Local GUI version: {self.cfg.settings['biapy_gui_version']}")
-        print(f"Remote last version's hash: {sha}")
-        print(f"Remote last version: {vtag}")
+        self.logger.info(f"Local GUI version: {self.cfg.settings['biapy_gui_version']}")
+        self.logger.info(f"Remote last version's hash: {sha}")
+        self.logger.info(f"Remote last version: {vtag}")
         if sha is not None and vtag is not None and vtag != self.cfg.settings['biapy_gui_version']:
             self.dialog_exec("There is a new version of BiaPy's graphical user interface available. Please, "
                 "download it <a href='https://biapyx.github.io'>here</a>", reason="inform_user")
@@ -878,10 +878,12 @@ def center_window(widget, geometry):
 if __name__ == "__main__":
     window = None
     log_dir = os.path.join(tempfile._get_default_tempdir(), "BiaPy")
-    log_file = os.path.join(log_dir, "BiaPy_"+next(tempfile._get_candidate_names())) 
+    random_str = next(tempfile._get_candidate_names())
+    log_file = os.path.join(log_dir, f"BiaPy_{random_str}") 
     os.makedirs(log_dir, exist_ok=True)
-    logger = logging.getLogger('BiaPy')
-    logging.basicConfig(filename=log_file, level=logging.ERROR)
+    logging.basicConfig(filename=log_file, format='%(asctime)s %(message)s', filemode='w')
+    logger = logging.getLogger()
+    logger.setLevel(logging.DEBUG) 
     StyleSheet = """ 
         QComboBox {
             selection-background-color: rgb(64,144,253);
@@ -906,7 +908,7 @@ if __name__ == "__main__":
     filter = WheelEventFilter()
     app.installEventFilter(filter)
 
-    window = MainWindow(log_file, log_dir)
+    window = MainWindow(logger, log_dir)
     window.show()
 
     # Center the main GUI in the middle of the first screen
@@ -918,7 +920,7 @@ if __name__ == "__main__":
 
     def excepthook(exc_type, exc_value, exc_tb):
         tb = "".join(traceback.format_exception(exc_type, exc_value, exc_tb))
-        print("error message:\n", tb)
+        logger.info("error message:\n", tb)
         tb += f"\nYou can also provide the log error here: \n{log_file}\n"
         tb += "\nExiting BiaPy as its functionality may be damaged!\n"
 

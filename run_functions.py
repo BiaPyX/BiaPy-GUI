@@ -79,7 +79,7 @@ class runBiaPy_Ui(QDialog):
         try:
             self.parent_worker.finished_signal.emit()
         except Exception as e:
-            print(f"Possible expected error during BiaPy's running thread deletion: {e}")
+            self.parent_worker.main_gui.logger.error(f"Possible expected error during BiaPy's running thread deletion: {e}")
         self.close()
         
     def init_log(self, container_info):
@@ -93,7 +93,7 @@ class runBiaPy_Ui(QDialog):
         elif signal == 1:
             self.update_log()
         else:
-            print("Nothing")
+            self.parent_worker.main_gui.logger.info("Nothing")
             
     def update_log(self):
         finished_good = False
@@ -116,7 +116,7 @@ class runBiaPy_Ui(QDialog):
                 try:
                     self.parent_worker.biapy_container.reload()
                 except Exception as e:
-                    print(f"Possible expected error during container status reload(): {e}")
+                    self.parent_worker.main_gui.logger.error(f"Possible expected error during container status reload(): {e}")
                     
                 st = self.parent_worker.biapy_container.status
                 if st == "running":
@@ -208,13 +208,13 @@ class run_worker(QObject):
         self.break_pulling = False
 
     def stop_worker(self):
-        print("Stopping the container . . . ")
+        self.main_gui.logger.info("Stopping the container . . . ")
         if self.biapy_container is not None:
             self.biapy_container.stop(timeout=1)
             try:
                 self.update_cont_state_signal.emit(1)
             except Exception as e:
-                print(f"Possible expected error during BiaPy's running thread deletion: {e}")
+                self.main_gui.logger.error(f"Possible expected error during BiaPy's running thread deletion: {e}")
             self.gui.run_window.stop_container_bn.setEnabled(False)
             self.gui.run_window.test_progress_label.setEnabled(False)
             self.gui.run_window.test_progress_bar.setEnabled(False)
@@ -223,7 +223,7 @@ class run_worker(QObject):
             self.gui.run_window.train_progress_bar.setEnabled(False)
             self.gui.run_window.train_epochs_label.setEnabled(False)
         else:
-            print("Container not running yet")      
+            self.main_gui.logger.info("Container not running yet")      
             # To kill pulling process if it is running 
             self.break_pulling = True
             
@@ -251,7 +251,7 @@ class run_worker(QObject):
             # Collect the output of the container and update the GUI
             self.total_layers = {}
             for item in self.docker_client.api.pull(self.main_gui.cfg.settings['biapy_container_name'], stream=True, decode=True):
-                print(item)
+                self.main_gui.logger.info(item)
                 if item["status"] == 'Pulling fs layer':
                     self.total_layers[item["id"]+"_download"] = 0
                     self.total_layers[item["id"]+"_extract"] = 0
@@ -264,7 +264,7 @@ class run_worker(QObject):
                     self.total_layers[item["id"]+"_extract"] = 1
 
                 if self.break_pulling:
-                    print("Stopping pulling process . . .")
+                    self.main_gui.logger.info("Stopping pulling process . . .")
                     return 
                 # Update GUI 
                 steps = np.sum([int(float(x)*10) for x in self.total_layers.values()])
@@ -296,7 +296,7 @@ class run_worker(QObject):
                 try:
                     temp_cfg = yaml.safe_load(stream)
                 except yaml.YAMLError as exc:
-                    print(exc)
+                    self.main_gui.logger.error(exc)
 
             dist_backend = "gloo" if self.windows_os else "nccl"
             command = ["--config", "/BiaPy_files/input.yaml", "--result_dir", "{}".format(self.output_folder_in_container),
@@ -418,7 +418,7 @@ class run_worker(QObject):
                 self.test_files = len(sorted(next(os.walk(self.config['DATA']['TEST']['PATH']))[2]))
                 self.gui.run_window.test_progress_bar.setMaximum(self.test_files)
             
-            print("Creating temporal input YAML file") 
+            self.main_gui.logger.info("Creating temporal input YAML file") 
             with open(real_cfg_input, 'w') as outfile:
                 yaml.dump(temp_cfg, outfile, default_flow_style=False)
 
@@ -429,11 +429,11 @@ class run_worker(QObject):
 
             # Run container
             # check_command = [ "python3", "-u", "-c", "'import torch; print(torch.cuda.is_available())'"]
-            print(f"Command: {command}")
-            print(f"Volumes:  {volumes}")
-            print(f"GPU (IDs): {gpus}")
-            print(f"CPUs: {cpu_count}")
-            print(f"GUI version: {self.main_gui.cfg.settings['biapy_gui_version']}")
+            self.main_gui.logger.info(f"Command: {command}")
+            self.main_gui.logger.info(f"Volumes:  {volumes}")
+            self.main_gui.logger.info(f"GPU (IDs): {gpus}")
+            self.main_gui.logger.info(f"CPUs: {cpu_count}")
+            self.main_gui.logger.info(f"GUI version: {self.main_gui.cfg.settings['biapy_gui_version']}")
             nofile_limit = docker.types.Ulimit(name='nofile', soft=10000, hard=10000)
             self.biapy_container = self.docker_client.containers.run(
                 self.container_name, 
@@ -449,7 +449,7 @@ class run_worker(QObject):
                 cpu_count=cpu_count,
             )
             self.process_steps = "running"
-            print("Container created!")
+            self.main_gui.logger.info("Container created!")
 
             # Set the window header 
             self.container_info = \
@@ -497,7 +497,7 @@ class run_worker(QObject):
             for log in self.biapy_container.logs(stream=True):
                 l = log.decode("utf-8")
                 try:
-                    print(l.encode("utf-8") if self.windows_os else l, end="")
+                    self.main_gui.logger.info(l.encode("utf-8") if self.windows_os else l, end="")
                 except: 
                     pass 
                 try:
@@ -543,7 +543,7 @@ class run_worker(QObject):
             f.close()
         except:
             # Print first the traceback (only visible through terminal)
-            print(traceback.format_exc())
+            self.main_gui.logger.error(traceback.format_exc())
 
             # Try to log the error in the error file
             ferr = open(self.container_stderr_file, "w")

@@ -4247,7 +4247,6 @@ class Widget_conditions():
         if updated_widget is not None and widgets_to_set is not None:
             cbox_value = str(get_text(getattr(main_window.ui, updated_widget)))
             for wid in widgets_to_set:
-                print(f"WID: {wid} {cbox_value}")
                 getattr(main_window.ui, wid).setCurrentText(cbox_value)
                  
         # Frames to hide if all the childs are not visible 

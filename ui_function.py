@@ -1518,7 +1518,7 @@ class UIFunction(MainWindow):
             if len(old_biapy_images) > 0:
                 main_window.yes_no_exec("Seems that there is one or more old BiaPy containers. Do yo want to remove them to save disk space?")
                 if main_window.yes_no.answer:
-                    print("Removing old containers")
+                    main_window.logger.info("Removing old containers")
                     for i in range(len(old_biapy_images)):
                         main_window.docker_client.images.remove(old_biapy_images[i], force=True)
 
@@ -1527,7 +1527,7 @@ class UIFunction(MainWindow):
                 if dockerhub_image_tag != local_biapy_image_tag:
                     main_window.yes_no_exec("There is another BiaPy container. Do yo want to remove the current one to save disk space?")
                     if main_window.yes_no.answer:
-                        print("Removing last valid container")
+                        main_window.logger.info("Removing last valid container")
                         main_window.docker_client.images.remove(main_window.cfg.settings['biapy_container_name'], force=True)
 
         # Firs time 
