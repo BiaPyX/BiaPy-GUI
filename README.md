@@ -32,6 +32,7 @@ Download the repository first:
 
 ```shell
 git clone https://github.com/BiaPyX/BiaPy-GUI.git
+cd BiaPy-GUI
 ```
 
 This will create a folder called ``BiaPy-GUI`` that contains all the files of the repository. Then you need to create a conda environment and install the dependencies:
@@ -45,14 +46,12 @@ pip install -r requirements.txt
 After that simply run the ``main.py`` :
 
 ```shell
-cd BiaPy-GUI
 python main.py
 ```
 
 To create the binary files:
 
 ```shell
-cd BiaPy-GUI
 pyinstaller -F main.py
 ```
 
