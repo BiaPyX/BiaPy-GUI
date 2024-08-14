@@ -504,19 +504,23 @@ class run_worker(QObject):
             self.main_gui.logger.info(f"CPUs: {cpu_count}")
             self.main_gui.logger.info(f"GUI version: {self.main_gui.cfg.settings['biapy_gui_version']}")
             nofile_limit = docker.types.Ulimit(name='nofile', soft=10000, hard=10000)
-            self.biapy_container = self.docker_client.containers.run(
-                self.container_name, 
-                # entrypoint=[ "/bin/bash", "-l", "-c" ],
-                command=command,
-                detach=True,
-                volumes=volumes,
-                user=self.user_host if not self.windows_os else None,
-                device_requests=device_requests,
-                shm_size=shm_size, 
-                ulimits=[nofile_limit],
-                nano_cpus=1000000000*cpu_count,
-                cpu_count=cpu_count,
-            )
+            try:
+                self.biapy_container = self.docker_client.containers.run(
+                    self.container_name, 
+                    # entrypoint=[ "/bin/bash", "-l", "-c" ],
+                    command=command,
+                    detach=True,
+                    volumes=volumes,
+                    user=self.user_host if not self.windows_os else None,
+                    device_requests=device_requests,
+                    shm_size=shm_size, 
+                    ulimits=[nofile_limit],
+                    nano_cpus=1000000000*cpu_count,
+                    cpu_count=cpu_count,
+                )
+            except Exception as e:
+                self.main_gui.logger.error(f"Error while starting to run BiaPy: {e}")
+                
             self.process_steps = "running"
             self.main_gui.logger.info("Container created!")
 
