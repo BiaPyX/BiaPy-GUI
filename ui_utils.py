@@ -10,11 +10,11 @@ import subprocess
 import re
 from pathlib import PurePath, Path, PureWindowsPath
 
-from PySide2 import QtCore, QtGui, QtWidgets
-from PySide2.QtCore import QUrl, QObject, QThread
+from PySide2 import QtCore
+from PySide2.QtCore import QObject, QThread, QItemSelectionModel, QItemSelection
 from PySide2.QtWidgets import *
+from PySide2.QtGui import  QBrush, QColor
 
-import settings
 from biapy_config import Config
 from biapy_check_configuration import check_configuration
 
@@ -183,52 +183,203 @@ def change_page(main_window, buttonName, to_page):
         main_window.ui.frame_home.setStyleSheet("background:rgb(255,255,255)") 
         main_window.cfg.settings['page_number'] = 0
 
-    elif buttonName=='bn_workflow' or ('bn_' not in buttonName and to_page == 1):
+    elif buttonName=='bn_wizard' or (buttonName=='down' and to_page == 1):
+        main_window.ui.stackedWidget.setCurrentWidget(main_window.ui.page_wizard)
+        main_window.ui.frame_wizard.setStyleSheet("background:rgb(255,255,255)") 
+        main_window.cfg.settings['page_number'] = 1
+
+    elif buttonName=='bn_workflow' or ('bn_' not in buttonName and to_page == 2):
         main_window.ui.continue_bn.setText("Continue")
         main_window.ui.stackedWidget.setCurrentWidget(main_window.ui.page_create_yaml)
         main_window.ui.stackedWidget_create_yaml_frame.setCurrentWidget(main_window.ui.workflow_selection_page)
         main_window.ui.frame_workflow.setStyleSheet("background:rgb(255,255,255)") 
-        main_window.cfg.settings['page_number'] = 1
+        main_window.cfg.settings['page_number'] = 2
         adjust_window_progress(main_window)
 
-    elif buttonName=='bn_goptions' or ('bn_' not in buttonName and to_page == 2):
+    elif buttonName=='bn_goptions' or ('bn_' not in buttonName and to_page == 3):
         main_window.ui.continue_bn.setText("Continue")
         main_window.ui.stackedWidget.setCurrentWidget(main_window.ui.page_create_yaml)
         main_window.ui.stackedWidget_create_yaml_frame.setCurrentWidget(main_window.ui.goptions_page)
         main_window.ui.frame_goptions.setStyleSheet("background:rgb(255,255,255)") 
-        main_window.cfg.settings['page_number'] = 2
+        main_window.cfg.settings['page_number'] = 3
         adjust_window_progress(main_window)
 
-    elif buttonName=='bn_train' or ('bn_' not in buttonName and to_page == 3):
+    elif buttonName=='bn_train' or ('bn_' not in buttonName and to_page == 4):
         main_window.ui.continue_bn.setText("Continue")
         main_window.ui.stackedWidget.setCurrentWidget(main_window.ui.page_create_yaml)
         main_window.ui.stackedWidget_create_yaml_frame.setCurrentWidget(main_window.ui.train_page)
         main_window.ui.frame_train.setStyleSheet("background:rgb(255,255,255)") 
-        main_window.cfg.settings['page_number'] = 3
+        main_window.cfg.settings['page_number'] = 4
         adjust_window_progress(main_window)
 
-    elif buttonName=='bn_test' or ('bn_' not in buttonName and to_page == 4):
+    elif buttonName=='bn_test' or ('bn_' not in buttonName and to_page == 5):
         main_window.ui.continue_bn.setText("Create configuration file")
         main_window.ui.stackedWidget.setCurrentWidget(main_window.ui.page_create_yaml)
         main_window.ui.stackedWidget_create_yaml_frame.setCurrentWidget(main_window.ui.test_page)
         main_window.ui.frame_test.setStyleSheet("background:rgb(255,255,255)") 
-        main_window.cfg.settings['page_number'] = 4
+        main_window.cfg.settings['page_number'] = 5
         adjust_window_progress(main_window)
 
-    elif buttonName=='bn_run_biapy' or ('bn_' not in buttonName and to_page == 5):            
+    elif buttonName=='bn_run_biapy' or ('bn_' not in buttonName and to_page == 6):            
         error = False
         created = True
-        if ('bn_' not in buttonName and to_page == 5):
+        if ('bn_' not in buttonName and to_page == 6):
             error, created = create_yaml_file(main_window)
         # If there is an error do not make the movement, as the error dialog will redirect the user to the 
         # field that raises the error 
         if not error and created: 
             main_window.ui.stackedWidget.setCurrentWidget(main_window.ui.page_run_biapy)
             main_window.ui.frame_run_biapy.setStyleSheet("background:rgb(255,255,255)") 
-            main_window.cfg.settings['page_number'] = 5
+            main_window.cfg.settings['page_number'] = 6
         if not created:
             main_window.cfg.settings['page_number'] -= 1    
     move_between_workflows(main_window, to_page)   
+
+def eval_wizard_answer(main_window):
+    """
+    Stores the answer given for the current question and mark it to advice the user.
+    
+    Parameters
+    ----------
+    main_window : QMainWindow
+        Main window of the application.
+    """
+    mark_as_answered = False
+    if main_window.ui.wizard_question_answer.isVisible():
+        if main_window.allow_change_wizard_question_answer and main_window.ui.wizard_question_answer.currentIndex() != -1:
+            mark_as_answered = True
+            # Remember current answer
+            main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] = main_window.ui.wizard_question_answer.currentIndex()
+    else:
+        te = get_text(main_window.ui.wizard_path_input)
+        if te != "":
+            main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] = te    
+            mark_as_answered = True
+            set_text(main_window.ui.wizard_path_input, "")
+
+    if mark_as_answered:        
+        # Mark section as answered in TOC
+        index = main_window.cfg.settings['wizard_from_question_index_to_toc'][main_window.cfg.settings['wizard_question_index']]        
+        main_window.wizard_toc_model.item(index[0]).child(index[1]).setForeground(QColor(64,144,253))
+
+        # If all child questions are answered mark the header as answered too
+        if not any([True for i in main_window.cfg.settings['wizard_from_toc_to_question_index'][index[0]] if main_window.cfg.settings["wizard_question_answered_index"][i] == -1]):
+            main_window.wizard_toc_model.item(index[0]).setForeground(QBrush(QColor(64,144,253)))
+
+def change_wizard_page(main_window, val, based_on_toc=False):
+    """
+    Changes wizard page.
+
+    Parameters
+    ----------
+    main_window : QMainWindow
+        Main window of the application.
+    
+    val : int
+        Number of question to move to. If ``based_on_toc`` is provided it needs to be calculated internally.
+
+    based_on_toc : bool, optional
+        If the call was triggered from QTreeView that represents the TOC. It advices the function that needs to 
+        recalculated ``val`` value according to the selected index in TOC.
+    """
+    if based_on_toc:
+        if main_window.not_allow_change_question:
+            return
+        index = main_window.ui.wizard_treeView.selectionModel().selectedIndexes()
+        if len(index) == 0:
+            return 
+        if len(index) > 1:
+            raise ValueError(f"Found internal error in indexes: {index}. Contact BiaPy team!")
+        index = index[0]
+        if index.parent().row() != -1: 
+            val = main_window.cfg.settings['wizard_from_toc_to_question_index'][index.parent().row()][index.row()]
+
+    if not based_on_toc:
+        eval_wizard_answer(main_window)
+
+    # Go to the first view of the wizard
+    if val == -1 and main_window.cfg.settings['wizard_question_index'] == 0:
+        main_window.ui.wizard_main_frame.setCurrentWidget(main_window.ui.wizard_start_page)
+    elif val == main_window.cfg.settings['wizard_number_of_questions']:
+        main_window.ui.wizard_main_frame.setCurrentWidget(main_window.ui.summary_page)
+    else:
+        main_window.ui.wizard_main_frame.setCurrentWidget(main_window.ui.questionary_page)
+
+        main_window.cfg.settings['wizard_question_index'] = val
+        main_window.cfg.settings['wizard_question_index'] = max(0,main_window.cfg.settings['wizard_question_index'])
+        main_window.cfg.settings['wizard_question_index'] = min(
+            main_window.cfg.settings['wizard_number_of_questions']-1, 
+            main_window.cfg.settings['wizard_question_index']
+        )
+
+        # Change question
+        set_text(
+            main_window.ui.wizard_question, 
+            main_window.cfg.settings['wizard_questions'][
+                main_window.cfg.settings['wizard_question_index']
+                ]
+            )
+        
+        if main_window.cfg.settings['wizard_possible_answers'][main_window.cfg.settings['wizard_question_index']][0] == "PATH":
+            main_window.ui.wizard_path_input_frame.setVisible(True)
+            main_window.ui.wizard_question_answer.setVisible(False)
+
+            # Remember the answer if the question was previously answered
+            if main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] != -1:
+                set_text(main_window.ui.wizard_path_input, main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']])
+        else:
+            main_window.ui.wizard_path_input_frame.setVisible(False)
+            main_window.ui.wizard_question_answer.setVisible(True)
+                
+            # Prevent eval_wizard_answer functionality during wizard_question_answer's currentIndexChanged trigger. It triggers a few times 
+            # when clearing and inserting new data 
+            main_window.allow_change_wizard_question_answer = False
+
+            # Prepare combobox with the answers of the new question
+            main_window.ui.wizard_question_answer.clear()
+            for ans in main_window.cfg.settings['wizard_possible_answers'][
+                    main_window.cfg.settings['wizard_question_index']
+                    ]:
+                main_window.ui.wizard_question_answer.addItem(ans)
+            
+            # Remember the answer if the question was previously answered
+            if main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] != -1:
+                main_window.ui.wizard_question_answer.setCurrentIndex(main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']])
+            else:
+                main_window.ui.wizard_question_answer.setCurrentIndex(-1)
+
+            # Enable eval_wizard_answer calls again
+            main_window.allow_change_wizard_question_answer = True
+        
+    if not based_on_toc:
+        index_in_toc = main_window.cfg.settings['wizard_from_question_index_to_toc'][main_window.cfg.settings['wizard_question_index']]
+        index = main_window.wizard_toc_model.item(index_in_toc[0]).child(index_in_toc[1])
+        if index is not None:
+            # As wizard_treeView is triggered when changing it's index we use this flag to block change_wizard_page functionality, 
+            # as it has been done already
+            main_window.not_allow_change_question = True
+            
+            main_window.ui.wizard_treeView.setCurrentIndex(index.index())
+
+            # Activate again possible triggers of wizard_treeView
+            main_window.not_allow_change_question = False
+
+def clear_answers(main_window):
+    """
+    Clear all answers. 
+
+    Parameters
+    ----------
+    main_window : QMainWindow
+        Main window of the application.
+    """
+    main_window.yes_no_exec("Are you sure you want to clear all answers?")
+    if main_window.yes_no.answer:
+        main_window.cfg.settings["wizard_question_answered_index"] = [-1,]*main_window.cfg.settings["wizard_number_of_questions"] 
+        for i in range(main_window.wizard_toc_model.rowCount()):
+            main_window.wizard_toc_model.item(i).setForeground(QColor(0,0,0))
+            for j in range(main_window.wizard_toc_model.item(i).rowCount()):
+                main_window.wizard_toc_model.item(i).child(j).setForeground(QColor(0,0,0))
 
 def adjust_window_progress(main_window):
     """
@@ -239,10 +390,10 @@ def adjust_window_progress(main_window):
     main_window : QMainWindow
         Main window of the application.
     """
-    main_window.ui.window1_bn.setIcon(main_window.cfg.settings['dot_images'][0] if main_window.cfg.settings['page_number'] >= 1 else main_window.cfg.settings['dot_images'][1])
-    main_window.ui.window2_bn.setIcon(main_window.cfg.settings['dot_images'][0] if main_window.cfg.settings['page_number'] >= 2 else main_window.cfg.settings['dot_images'][1])
-    main_window.ui.window3_bn.setIcon(main_window.cfg.settings['dot_images'][0] if main_window.cfg.settings['page_number'] >= 3 else main_window.cfg.settings['dot_images'][1])
-    main_window.ui.window4_bn.setIcon(main_window.cfg.settings['dot_images'][0] if main_window.cfg.settings['page_number'] >= 4 else main_window.cfg.settings['dot_images'][1])
+    main_window.ui.window1_bn.setIcon(main_window.cfg.settings['dot_images'][0] if main_window.cfg.settings['page_number'] >= 2 else main_window.cfg.settings['dot_images'][1])
+    main_window.ui.window2_bn.setIcon(main_window.cfg.settings['dot_images'][0] if main_window.cfg.settings['page_number'] >= 3 else main_window.cfg.settings['dot_images'][1])
+    main_window.ui.window3_bn.setIcon(main_window.cfg.settings['dot_images'][0] if main_window.cfg.settings['page_number'] >= 4 else main_window.cfg.settings['dot_images'][1])
+    main_window.ui.window4_bn.setIcon(main_window.cfg.settings['dot_images'][0] if main_window.cfg.settings['page_number'] >= 5 else main_window.cfg.settings['dot_images'][1])
 
 def move_between_workflows(main_window, to_page, dims=None):
     """
@@ -390,6 +541,46 @@ def move_between_workflows(main_window, to_page, dims=None):
         main_window.last_selected_workflow = main_window.cfg.settings['selected_workflow']
         main_window.ui.MODEL__ARCHITECTURE__INPUT.clear()
         main_window.ui.MODEL__ARCHITECTURE__INPUT.addItems(models)
+
+
+def start_questionary(main_window):
+    """
+    Starts questionary.
+            
+    Parameters
+    ----------
+    main_window : QMainWindow
+        Main window of the application.
+    """
+    main_window.ui.goptions_advanced_options_scrollarea.setVisible(False)
+    main_window.ui.continue_bn.setText("Create configuration file")
+    main_window.ui.wizard_main_frame.setCurrentWidget(main_window.ui.questionary_page)
+
+    set_text(
+        main_window.ui.wizard_question, 
+        main_window.cfg.settings['wizard_questions'][
+            main_window.cfg.settings['wizard_question_index']
+            ]
+        )
+    
+    # Prevent eval_wizard_answer functionality during wizard_question_answer's currentIndexChanged trigger. It triggers a few times 
+    # when clearing and inserting new data
+    main_window.allow_change_wizard_question_answer = False
+
+    main_window.ui.wizard_question_answer.clear()
+    for ans in main_window.cfg.settings['wizard_possible_answers'][
+            main_window.cfg.settings['wizard_question_index']
+            ]:
+        main_window.ui.wizard_question_answer.addItem(ans)
+
+    # Remember the answer if the question was previously answered
+    if main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] != -1:
+        main_window.ui.wizard_question_answer.setCurrentIndex(main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']])
+    else:
+        main_window.ui.wizard_question_answer.setCurrentIndex(-1)
+
+    # Enable eval_wizard_answer calls again
+    main_window.allow_change_wizard_question_answer = True
 
 def oninit_checks(main_window):
     """
@@ -822,7 +1013,7 @@ def create_yaml_file(main_window):
         
         biapy_config['DATA']['TRAIN']['IN_MEMORY'] = True if get_text(main_window.ui.DATA__TRAIN__IN_MEMORY__INPUT) == "Yes" else False
         biapy_config['DATA']['TRAIN']['PATH'] = get_text(main_window.ui.DATA__TRAIN__PATH__INPUT, strip=False)
-        if main_window.cfg.settings['selected_workflow'] not in [5,6,7]:
+        if main_window.cfg.settings['selected_workflow'] not in [3,5,6]:
             biapy_config['DATA']['TRAIN']['GT_PATH'] = get_text(main_window.ui.DATA__TRAIN__GT_PATH__INPUT, strip=False)
         if int(get_text(main_window.ui.DATA__TRAIN__REPLICATE__INPUT)) != 0:
             biapy_config['DATA']['TRAIN']['REPLICATE'] = int(get_text(main_window.ui.DATA__TRAIN__REPLICATE__INPUT))
@@ -867,7 +1058,7 @@ def create_yaml_file(main_window):
             biapy_config['DATA']['VAL']['FROM_TRAIN'] = False
             biapy_config['DATA']['VAL']['IN_MEMORY'] = True if get_text(main_window.ui.DATA__VAL__IN_MEMORY__INPUT) == "Yes" else False 
             biapy_config['DATA']['VAL']['PATH'] = get_text(main_window.ui.DATA__VAL__PATH__INPUT, strip=False)
-            if main_window.cfg.settings['selected_workflow'] not in [5,6,7]:
+            if main_window.cfg.settings['selected_workflow'] not in [3,5,6]:
                 biapy_config['DATA']['VAL']['GT_PATH'] = get_text(main_window.ui.DATA__VAL__GT_PATH__INPUT, strip=False)
             biapy_config['DATA']['VAL']['OVERLAP'] = get_text(main_window.ui.DATA__VAL__OVERLAP__INPUT)
             biapy_config['DATA']['VAL']['PADDING'] = get_text(main_window.ui.DATA__VAL__PADDING__INPUT)
@@ -900,7 +1091,7 @@ def create_yaml_file(main_window):
         else:
             if get_text(main_window.ui.DATA__TEST__LOAD_GT__INPUT) == "Yes":
                 biapy_config['DATA']['TEST']['LOAD_GT'] = True
-                if main_window.cfg.settings['selected_workflow'] not in [5,6,7]:
+                if main_window.cfg.settings['selected_workflow'] not in [3,5,6]:
                     biapy_config['DATA']['TEST']['GT_PATH'] = get_text(main_window.ui.DATA__TEST__GT_PATH__INPUT, strip=False)
             else:
                 biapy_config['DATA']['TEST']['LOAD_GT'] = False
@@ -1458,7 +1649,7 @@ class load_yaml_to_GUI_engine(QObject):
             try:
                 loaded_cfg = yaml.safe_load(cfg_content)
             except yaml.YAMLError as exc:
-                main_window.logger.warning(exc)
+                self.main_window.logger.warning(exc)
                 self.error_signal.emit(f"{tab_detected_mss}Following error found when loading configuration file: \n{exc}", "error")
                 self.state_signal.emit(1)
                 self.finished_signal.emit()
@@ -1477,7 +1668,7 @@ class load_yaml_to_GUI_engine(QObject):
             self.state_signal.emit(1)
             self.finished_signal.emit()
             return  
-        main_window.logger.info(f"Loaded: {loaded_cfg}")
+        self.main_window.logger.info(f"Loaded: {loaded_cfg}")
 
         # Load configuration file and check possible errors
         tmp_cfg = Config("/home/","jobname")
@@ -1486,10 +1677,10 @@ class load_yaml_to_GUI_engine(QObject):
             tmp_cfg._C.merge_from_file(yaml_file_final)
             tmp_cfg = tmp_cfg.get_cfg_defaults()
             check_configuration(tmp_cfg, get_text(self.main_window.ui.job_name_input), check_data_paths=False, 
-                logger=main_window.logger)
+                logger=self.main_window.logger)
         except Exception as errors:  
             errors = str(errors) 
-            main_window.logger.error(errors) 
+            self.main_window.logger.error(errors) 
             self.error_signal.emit(tab_detected_mss+errors, "load_yaml_error")
         else:
             
@@ -1541,13 +1732,13 @@ class load_yaml_to_GUI_engine(QObject):
 
             # Go over configuration file
             errors, variables_set = self.analyze_dict(conf=loaded_cfg, sep="")
-            main_window.logger.info("Variables updated: ")
+            self.main_window.logger.info("Variables updated: ")
             for i, k in enumerate(variables_set.keys()):
-                main_window.logger.info("{}. {}: {}".format(i+1, k, variables_set[k]))
+                self.main_window.logger.info("{}. {}: {}".format(i+1, k, variables_set[k]))
             if len(errors) > 0:
-                main_window.logger.info("Errors: ")
+                self.main_window.logger.info("Errors: ")
                 for i in range(len(errors)):
-                    main_window.logger.info("{}. : {}".format(i+1, errors[i]))
+                    self.main_window.logger.info("{}. : {}".format(i+1, errors[i]))
 
             # Message for the user
             self.report_yaml_load_result.emit(errors, self.yaml_file)
@@ -1709,7 +1900,7 @@ class load_yaml_to_GUI_engine(QObject):
                             errors.append(err)
                         else:
                             variables_set[x] = y
-                            main_window.logger.info("Setting {} : {} ({})".format(x, y, k))
+                            self.main_window.logger.info("Setting {} : {} ({})".format(x, y, k))
                         
         return errors, variables_set
 

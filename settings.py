@@ -1,12 +1,13 @@
-import os 
+import os
 import platform
 import getpass
-
-from PySide2.QtGui import QPixmap
+from PySide2.QtGui import QPixmap, QMovie
+from PySide2.QtCore import QSize
 from ui_utils import resource_path
 
-class Settings():
-    
+
+class Settings:
+
     def __init__(self):
         self.settings = {}
         self.init_default_settings()
@@ -14,96 +15,654 @@ class Settings():
     def init_default_settings(self):
         self.settings = {}
 
-        self.settings['init'] = False 
-        self.settings['page_number'] = 0
+        self.settings["init"] = False
+        self.settings["page_number"] = 0
 
         # OS
-        self.settings['os_host'] = platform.system()
-        if "win" in self.settings['os_host'].lower():
-            self.settings['user_host'] = getpass.getuser()
-            #environ["USERNAME"] if platform.startswith("win") else environ["USER"]
-        else: # Linux, macOS
-            self.settings['user_host'] = str(os.getuid())+":"+str(os.getgid())
+        self.settings["os_host"] = platform.system()
+        if "win" in self.settings["os_host"].lower():
+            self.settings["user_host"] = getpass.getuser()
+            # environ["USERNAME"] if platform.startswith("win") else environ["USER"]
+        else:  # Linux, macOS
+            self.settings["user_host"] = str(os.getuid()) + ":" + str(os.getgid())
 
-        # CUDA version match to decide the container to donwload 
-        self.settings['NVIDIA_driver_list'] = [440.33, 520.61]
-        self.settings['CUDA_version'] = [10.2, 11.8]
+        # CUDA version match to decide the container to donwload
+        self.settings["NVIDIA_driver_list"] = [440.33, 520.61]
+        self.settings["CUDA_version"] = [10.2, 11.8]
 
-        # BiaPy 
-        self.settings['biapy_code_version'] = "v3.4.4"
-        self.settings['biapy_code_github'] = "https://github.com/BiaPyX/BiaPy"
-        self.settings['biapy_gui_version'] = "v1.0.8"
-        self.settings['biapy_gui_github'] = "https://github.com/BiaPyX/BiaPy-GUI"
-        self.settings['biapy_container_basename'] = "biapyx/biapy"
-        self.settings['biapy_container_name'] = self.settings['biapy_container_basename']+":latest-"+str(self.settings['CUDA_version'][-1])
-        self.settings['biapy_container_sizes'] = ["7.68GB", "11.6GB"]
-        self.settings['biapy_container_size'] = self.settings['biapy_container_sizes'][-1]
-        self.settings['biapy_container_dockerfile'] = "https://raw.githubusercontent.com/BiaPyX/BiaPy/master/biapy/utils/env/Dockerfile"
-        self.settings['yaml_config_file_path'] =''
-        self.settings['yaml_config_filename'] = ''
-        self.settings['output_folder'] = ''
-        self.settings['biapy_cfg'] = None
-        self.settings['biapy_container_ready'] = False
+        # BiaPy
+        self.settings["biapy_code_version"] = "v3.4.4"
+        self.settings["biapy_code_github"] = "https://github.com/BiaPyX/BiaPy"
+        self.settings["biapy_gui_version"] = "v1.0.8"
+        self.settings["biapy_gui_github"] = "https://github.com/BiaPyX/BiaPy-GUI"
+        self.settings["biapy_container_basename"] = "biapyx/biapy"
+        self.settings["biapy_container_name"] = (
+            self.settings["biapy_container_basename"] + ":latest-" + str(self.settings["CUDA_version"][-1])
+        )
+        self.settings["biapy_container_sizes"] = ["7.68GB", "11.6GB"]
+        self.settings["biapy_container_size"] = self.settings["biapy_container_sizes"][-1]
+        self.settings["biapy_container_dockerfile"] = (
+            "https://raw.githubusercontent.com/BiaPyX/BiaPy/master/biapy/utils/env/Dockerfile"
+        )
+        self.settings["yaml_config_file_path"] = ""
+        self.settings["yaml_config_filename"] = ""
+        self.settings["output_folder"] = ""
+        self.settings["biapy_cfg"] = None
+        self.settings["biapy_container_ready"] = False
 
-        # Docker 
-        self.settings['docker_client'] = None
-        self.settings['docker_found'] = False
-        self.settings['running_threads'] = []
-        self.settings['running_workers'] = []
+        # Docker
+        self.settings["docker_client"] = None
+        self.settings["docker_found"] = False
+        self.settings["running_threads"] = []
+        self.settings["running_workers"] = []
 
-        # For all pages 
-        self.settings['advanced_frame_images'] = [
-            QPixmap(resource_path(os.path.join("images","bn_images","up_arrow.svg"))),
-            QPixmap(resource_path(os.path.join("images","bn_images","down_arrow.svg")))
+        # For all pages
+        self.settings["advanced_frame_images"] = [
+            QPixmap(resource_path(os.path.join("images", "bn_images", "up_arrow.svg"))),
+            QPixmap(resource_path(os.path.join("images", "bn_images", "down_arrow.svg"))),
         ]
-        self.settings['info_image'] = QPixmap(resource_path(os.path.join("images","bn_images","info.png")))
+        self.settings["info_image"] = QPixmap(resource_path(os.path.join("images", "bn_images", "info.png")))
+
+        # Wizard icons 
+        self.settings["wizard_img"] = QPixmap(resource_path(os.path.join("images", "wizard.png")))
+        self.settings["wizard_animation_img"] = QMovie(resource_path(os.path.join("images", "wizard_question_animation.gif")))
 
         # Workflow page
-        self.settings['workflow_names'] = ["Semantic\nSegmentation", "Instance\nsegmentation", "Object\ndetection", "Image\ndenoising", "Super\nresolution",\
-            "Self-supervised\nlearning", "Image\nclassification", "Image to image"]
-        self.settings['selected_workflow'] = 1
-        self.settings['dot_images'] = self.settings['dot_images'] = [
-            QPixmap(resource_path(os.path.join("images","bn_images","dot_enable.svg"))),
-            QPixmap(resource_path(os.path.join("images","bn_images","dot_disable.svg")))
+        self.settings["workflow_names"] = [
+            "Semantic\nSegmentation",
+            "Instance\nsegmentation",
+            "Object\ndetection",
+            "Image\ndenoising",
+            "Super\nresolution",
+            "Self-supervised\nlearning",
+            "Image\nclassification",
+            "Image to image",
         ]
-        self.settings['continue_bn_icons'] = None
+        self.settings["selected_workflow"] = 1
+        self.settings["dot_images"] = self.settings["dot_images"] = [
+            QPixmap(resource_path(os.path.join("images", "bn_images", "dot_enable.svg"))),
+            QPixmap(resource_path(os.path.join("images", "bn_images", "dot_disable.svg"))),
+        ]
+        self.settings["continue_bn_icons"] = None
 
         # Semantic segmentation
-        self.settings['semantic_models'] = ['unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'unetr']
-        self.settings['semantic_models_real_names'] = ['U-Net', 'Residual U-Net', 'ResUNet++', 'Attention U-Net', 'MultiResUnet', 'SEUnet', 'UNETR']
+        self.settings["semantic_models"] = [
+            "unet",
+            "resunet",
+            "resunet++",
+            "attention_unet",
+            "multiresunet",
+            "seunet",
+            "unetr",
+        ]
+        self.settings["semantic_models_real_names"] = [
+            "U-Net",
+            "Residual U-Net",
+            "ResUNet++",
+            "Attention U-Net",
+            "MultiResUnet",
+            "SEUnet",
+            "UNETR",
+        ]
         # Instance segmentation
-        self.settings['instance_models'] = ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet', 'unetr']
-        self.settings['instance_models_real_names'] = ['U-Net', 'Residual U-Net', 'ResUNet++', 'SEUnet', 'Attention U-Net', 'MultiResUnet', 'UNETR']
+        self.settings["instance_models"] = [
+            "unet",
+            "resunet",
+            "resunet++",
+            "seunet",
+            "attention_unet",
+            "multiresunet",
+            "unetr",
+        ]
+        self.settings["instance_models_real_names"] = [
+            "U-Net",
+            "Residual U-Net",
+            "ResUNet++",
+            "SEUnet",
+            "Attention U-Net",
+            "MultiResUnet",
+            "UNETR",
+        ]
         # Detection
-        self.settings['detection_models'] = ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet', 'unetr']
-        self.settings['detection_models_real_names'] = ['U-Net', 'Residual U-Net', 'ResUNet++', 'SEUnet', 'Attention U-Net', 'MultiResUnet', 'UNETR']
+        self.settings["detection_models"] = [
+            "unet",
+            "resunet",
+            "resunet++",
+            "seunet",
+            "attention_unet",
+            "multiresunet",
+            "unetr",
+        ]
+        self.settings["detection_models_real_names"] = [
+            "U-Net",
+            "Residual U-Net",
+            "ResUNet++",
+            "SEUnet",
+            "Attention U-Net",
+            "MultiResUnet",
+            "UNETR",
+        ]
         # Denoising
-        self.settings['denoising_models'] = ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet', 'unetr']
-        self.settings['denoising_models_real_names'] = ['U-Net', 'Residual U-Net', 'ResUNet++', 'SEUnet', 'Attention U-Net', 'MultiResUnet', 'UNETR']
+        self.settings["denoising_models"] = [
+            "unet",
+            "resunet",
+            "resunet++",
+            "seunet",
+            "attention_unet",
+            "multiresunet",
+            "unetr",
+        ]
+        self.settings["denoising_models_real_names"] = [
+            "U-Net",
+            "Residual U-Net",
+            "ResUNet++",
+            "SEUnet",
+            "Attention U-Net",
+            "MultiResUnet",
+            "UNETR",
+        ]
         # Super resolution
-        self.settings['sr_2d_models'] = ['edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']
-        self.settings['sr_2d_models_real_names'] = ['EDSR', 'RCAN', 'DFCAN', 'WDSR', 'U-Net', 'Residual U-Net', 'ResUNet++', 'SEUnet', 'Attention U-Net', 'MultiResUnet']
-        self.settings['sr_3d_models'] = ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet']
-        self.settings['sr_3d_models_real_names'] = ['U-Net', 'Residual U-Net', 'ResUNet++', 'SEUnet', 'Attention U-Net', 'MultiResUnet']
+        self.settings["sr_2d_models"] = [
+            "edsr",
+            "rcan",
+            "dfcan",
+            "wdsr",
+            "unet",
+            "resunet",
+            "resunet++",
+            "seunet",
+            "attention_unet",
+            "multiresunet",
+        ]
+        self.settings["sr_2d_models_real_names"] = [
+            "EDSR",
+            "RCAN",
+            "DFCAN",
+            "WDSR",
+            "U-Net",
+            "Residual U-Net",
+            "ResUNet++",
+            "SEUnet",
+            "Attention U-Net",
+            "MultiResUnet",
+        ]
+        self.settings["sr_3d_models"] = ["unet", "resunet", "resunet++", "seunet", "attention_unet", "multiresunet"]
+        self.settings["sr_3d_models_real_names"] = [
+            "U-Net",
+            "Residual U-Net",
+            "ResUNet++",
+            "SEUnet",
+            "Attention U-Net",
+            "MultiResUnet",
+        ]
         # Self-supervised learning
-        self.settings['ssl_models'] = ['mae', 'unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'multiresunet', 'unetr']
-        self.settings['ssl_models_real_names'] = ['MAE', 'U-Net', 'Residual U-Net', 'ResUNet++', 'SEUnet', 'Attention U-Net', 'MultiResUnet', 'UNETR']
+        self.settings["ssl_models"] = [
+            "mae",
+            "unet",
+            "resunet",
+            "resunet++",
+            "seunet",
+            "attention_unet",
+            "multiresunet",
+            "unetr",
+        ]
+        self.settings["ssl_models_real_names"] = [
+            "MAE",
+            "U-Net",
+            "Residual U-Net",
+            "ResUNet++",
+            "SEUnet",
+            "Attention U-Net",
+            "MultiResUnet",
+            "UNETR",
+        ]
         # Classification
-        self.settings['classification_models'] = ['ViT', 'simple_cnn', 'efficientnet_b0', 'efficientnet_b1', 'efficientnet_b2', 
-            'efficientnet_b3', 'efficientnet_b4','efficientnet_b5','efficientnet_b6','efficientnet_b7']
-        self.settings['classification_models_real_names'] = ['ViT', 'Simple CNN', 'EfficientNetB0', 'EfficientNetB1', 'EfficientNetB2', 
-            'EfficientNetB3', 'EfficientNetB4', 'EfficientNetB5', 'EfficientNetB6', 'EfficientNetB7']
+        self.settings["classification_models"] = [
+            "ViT",
+            "simple_cnn",
+            "efficientnet_b0",
+            "efficientnet_b1",
+            "efficientnet_b2",
+            "efficientnet_b3",
+            "efficientnet_b4",
+            "efficientnet_b5",
+            "efficientnet_b6",
+            "efficientnet_b7",
+        ]
+        self.settings["classification_models_real_names"] = [
+            "ViT",
+            "Simple CNN",
+            "EfficientNetB0",
+            "EfficientNetB1",
+            "EfficientNetB2",
+            "EfficientNetB3",
+            "EfficientNetB4",
+            "EfficientNetB5",
+            "EfficientNetB6",
+            "EfficientNetB7",
+        ]
         # Image to image
-        self.settings['i2i_models'] = ['edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'unetr', 'multiresunet']
-        self.settings['i2i_models_real_names'] = ['EDSR', 'RCAN', 'DFCAN', 'WDSR', 'U-Net', 'Residual U-Net', 'ResUNet++', 'SEUnet', 'Attention U-Net', 'UNETR', 'MultiResUnet']
+        self.settings["i2i_models"] = [
+            "edsr",
+            "rcan",
+            "dfcan",
+            "wdsr",
+            "unet",
+            "resunet",
+            "resunet++",
+            "seunet",
+            "attention_unet",
+            "unetr",
+            "multiresunet",
+        ]
+        self.settings["i2i_models_real_names"] = [
+            "EDSR",
+            "RCAN",
+            "DFCAN",
+            "WDSR",
+            "U-Net",
+            "Residual U-Net",
+            "ResUNet++",
+            "SEUnet",
+            "Attention U-Net",
+            "UNETR",
+            "MultiResUnet",
+        ]
 
         # Paths
-        self.settings['train_data_input_path'] = None
-        self.settings['train_data_gt_input_path'] = None
-        self.settings['validation_data_input_path'] = None
-        self.settings['validation_data_gt_input_path'] = None
-        self.settings['test_data_input_path'] = None
-        self.settings['test_data_gt_input_path'] = None
+        self.settings["train_data_input_path"] = None
+        self.settings["train_data_gt_input_path"] = None
+        self.settings["validation_data_input_path"] = None
+        self.settings["validation_data_gt_input_path"] = None
+        self.settings["test_data_input_path"] = None
+        self.settings["test_data_gt_input_path"] = None
+
+        #################################
+        # Questions to identify workflow
+        #################################
+        self.settings["wizard_question_index"] = 0
+        self.settings["wizard_variable_to_map"] = {}
+        self.settings["wizard_question_condition"] = {}
+        self.settings["wizard_questions"] = []
+        self.settings["wizard_possible_answers"] = []
+        self.settings["wizard_sections"] = []
+        self.settings['wizard_from_toc_to_question_index'] = []
+        self.settings['wizard_from_question_index_to_toc'] = []
+
+        self.settings["wizard_sections"] += [["Problem description",[]]]
+        self.settings['wizard_from_toc_to_question_index'].append([])
+        q_count = 0
+
+        ######
+        # Q1 #
+        ######
+        self.settings["wizard_questions"] = [
+            "Are your images in 3D?",
+        ]
+        self.settings["wizard_variable_to_map"]["Q1"] = {}
+        self.settings["wizard_possible_answers"] += [["Yes", "No", "No but I would like to have a 3D stack output"]]
+        self.settings["wizard_variable_to_map"]["Q1"]["PROBLEM.NDIM"] = ["3D", "2D", "2D"]
+        self.settings["wizard_variable_to_map"]["Q1"]["TEST.ANALIZE_2D_IMGS_AS_3D_STACK"] = [False, False, True]
+        self.settings["wizard_sections"][-1][1] += ["Dimensions"]
+        self.settings['wizard_from_question_index_to_toc'].append([0,len(self.settings['wizard_from_toc_to_question_index'][-1])])
+        self.settings['wizard_from_toc_to_question_index'][-1].append(q_count)
+        q_count += 1
+
+        ######
+        # Q2 #
+        ######
+        self.settings["wizard_questions"] += [
+            "Do you want to:",
+        ]
+        self.settings["wizard_possible_answers"] += [
+            [
+                "Generate masks of different (or just one) objects/regions within the image",
+                "Generate masks for each object in the image",
+                "Count/locate objects within the images and don’t care of the exact mask that circumscribes the objects",
+                "Clean noisy images",
+                "Upsample images into higher resolution",
+                "Pretrain a model using input images and then apply that model afterwards",
+                "Assign a label to each image",
+                "I want to restore a degraded image",
+                "I want to generate new images based on an input one",
+            ]
+        ]
+        self.settings["wizard_variable_to_map"]["Q2"] = {}
+        self.settings["wizard_variable_to_map"]["Q2"]["PROBLEM.TYPE"] = [
+            "SEMANTIC_SEG",
+            "INSTANCE_SEG",
+            "DETECTION",
+            "DENOISING",
+            "SUPER_RESOLUTION",
+            "SELF_SUPERVISED",
+            "CLASSIFICATION",
+            "IMAGE_TO_IMAGE",
+        ]
+        self.settings["wizard_sections"][-1][1] += ["Workflow"]
+        self.settings['wizard_from_question_index_to_toc'].append([0,len(self.settings['wizard_from_toc_to_question_index'][-1])])
+        self.settings['wizard_from_toc_to_question_index'][-1].append(q_count)
+        q_count += 1
+
+        ######
+        # Q3 #
+        ######
+        self.settings["wizard_questions"] += [
+            "Do you want to use a pre-trained model?",
+        ]
+        self.settings["wizard_possible_answers"] += [
+            [
+                "No, I want to build a model from scratch",
+                "Yes, I have a model previously trained in BiaPy",
+                "Yes, I want to check if there is a model in BioImage Model Zoo that I can use",
+                "Yes, I want to use a model from TorchVision",
+            ]
+        ]
+        self.settings["wizard_variable_to_map"]["Q3"] = {}
+        self.settings["wizard_variable_to_map"]["Q3"]["MODEL.SOURCE"] = ["biapy", "biapy", "bmz", "torchvision"]
+        self.settings["wizard_sections"][-1][1] += ["Model source"]
+        self.settings['wizard_from_question_index_to_toc'].append([0,len(self.settings['wizard_from_toc_to_question_index'][-1])])
+        self.settings['wizard_from_toc_to_question_index'][-1].append(q_count)
+        q_count += 1
+
+        ######
+        # Q4 #
+        ######
+        self.settings["wizard_question_condition"]["Q4"] = {
+            "or_cond": [
+                "PROBLEM.TYPE",
+                [
+                    "SEMANTIC_SEG",
+                    "INSTANCE_SEG",
+                    "DETECTION",
+                    "CLASSIFICATION",
+                    "IMAGE_TO_IMAGE",
+                ],
+            ],
+            "and_cond": ["MODEL.SOURCE", "biapy"],
+        }
+        self.settings["wizard_questions"] += [
+            "What is the median object width/height in pixels?",
+        ]
+        self.settings["wizard_possible_answers"] += [
+            [
+                "< 50 px",
+                "50-100 px",
+                "100-200 px",
+                "200-500 px",
+                "500-1000 px",
+                "1000 px >",
+            ]
+        ]
+        self.settings["wizard_variable_to_map"]["Q4"] = {}
+        self.settings["wizard_variable_to_map"]["Q4"]["_q4"] = [
+            (256, 256),
+            (256, 256),
+            (512, 512),
+            (512, 512),
+            (1024, 1024),
+            (1024, 1024),
+        ]
+        self.settings["wizard_sections"] += [["Data",[]]]
+        self.settings['wizard_from_toc_to_question_index'].append([])
+        self.settings["wizard_sections"][-1][1] += ["Object size (xy)"] 
+        self.settings['wizard_from_question_index_to_toc'].append([1,len(self.settings['wizard_from_toc_to_question_index'][-1])])
+        self.settings['wizard_from_toc_to_question_index'][-1].append(q_count)
+        q_count += 1
+
+        ######
+        # Q5 #
+        ######
+        self.settings["wizard_question_condition"]["Q5"] = {
+            "and_cond": ["PROBLEM.NDIM", "3D", "MODEL.SOURCE", "biapy"],
+            "or_cond": [
+                "PROBLEM.TYPE",
+                [
+                    "SEMANTIC_SEG",
+                    "INSTANCE_SEG",
+                    "DETECTION",
+                    "CLASSIFICATION",
+                    "IMAGE_TO_IMAGE",
+                ],
+            ],
+        }
+        self.settings["wizard_questions"] += [
+            "In how many slices can be present the same object?",
+        ]
+        self.settings["wizard_possible_answers"] += [
+            [
+                "1-5",
+                "5-10",
+                "10-20",
+                "20-60",
+                ">60",
+            ]
+        ]
+        self.settings["wizard_variable_to_map"]["Q5"] = {}
+        self.settings["wizard_variable_to_map"]["Q5"]["_q5"] = [5, 10, 20, 40, 80]
+        # self.settings["wizard_variable_to_map"]["Q5"]["PROBLEM.PATCH_SIZE"] = 
+        self.settings["wizard_sections"][-1][1] += ["Object size (z)"] 
+        self.settings['wizard_from_question_index_to_toc'].append([1,len(self.settings['wizard_from_toc_to_question_index'][-1])])
+        self.settings['wizard_from_toc_to_question_index'][-1].append(q_count)
+        q_count += 1
+
+        ######
+        # Q6 #
+        ######
+        self.settings["wizard_question_condition"]["Q6"] = {
+            "and_cond": [],
+            "or_cond": ["MODEL.SOURCE", ["biapy", "bmz"]],
+        }
+        self.settings["wizard_questions"] += [
+            "What do you want to do?",
+        ]
+        self.settings["wizard_possible_answers"] += [
+            [
+                "Train a model",
+                "Test a model",
+                "Train and test the model",
+            ]
+        ]
+        self.settings["wizard_variable_to_map"]["Q6"] = {}
+        self.settings["wizard_variable_to_map"]["Q6"]["TRAIN.ENABLE"] = [True, False, True]
+        self.settings["wizard_variable_to_map"]["Q6"]["TEST.ENABLE"] = [False, True, True]
+        self.settings["wizard_sections"][-1][1] += ["Phases"] 
+        self.settings['wizard_from_question_index_to_toc'].append([1,len(self.settings['wizard_from_toc_to_question_index'][-1])])
+        self.settings['wizard_from_toc_to_question_index'][-1].append(q_count)
+        q_count += 1
+
+        ######
+        # Q7 #
+        ######
+        self.settings["wizard_question_condition"]["Q7"] = {
+            "and_cond": ["TRAIN.ENABLE", True],
+            "or_cond": [ ],
+        }
+        self.settings["wizard_questions"] += [
+            "Please insert training raw image folder",
+        ]
+        self.settings["wizard_possible_answers"] += [["PATH"]]
+        self.settings["wizard_variable_to_map"]["Q7"] = {}
+        self.settings["wizard_variable_to_map"]["Q7"]["DATA.TRAIN.PATH"] = ""
+        self.settings["wizard_sections"][-1][1] += ["Train data (raw)"] 
+        self.settings['wizard_from_question_index_to_toc'].append([1,len(self.settings['wizard_from_toc_to_question_index'][-1])])
+        self.settings['wizard_from_toc_to_question_index'][-1].append(q_count)
+        q_count += 1
+
+        ######
+        # Q8 #
+        ######
+        self.settings["wizard_question_condition"]["Q8"] = {
+            "and_cond": ["TRAIN.ENABLE", True],
+            "or_cond": [
+                "PROBLEM.TYPE",
+                [
+                    "SEMANTIC_SEG",
+                    "INSTANCE_SEG",
+                    "DETECTION",
+                    "SUPER_RESOLUTION",
+                    "IMAGE_TO_IMAGE",
+                ],
+            ],
+        }
+        self.settings["wizard_questions"] += [
+            "Please insert training ground truth folder",
+        ]
+        self.settings["wizard_possible_answers"] += [["PATH"]]
+        self.settings["wizard_variable_to_map"]["Q8"] = {}
+        self.settings["wizard_variable_to_map"]["Q8"]["DATA.TRAIN.GT_PATH"] = ""
+        self.settings["wizard_sections"][-1][1] += ["Train data (ground truth)"]
+        self.settings['wizard_from_question_index_to_toc'].append([1,len(self.settings['wizard_from_toc_to_question_index'][-1])])
+        self.settings['wizard_from_toc_to_question_index'][-1].append(q_count)
+        q_count += 1
+
+        ######
+        # Q9 #
+        ######
+        self.settings["wizard_question_condition"]["Q9"] = {
+            "and_cond": ["TRAIN.ENABLE", True],
+            "or_cond": [
+                "PROBLEM.TYPE",
+                [
+                    "SEMANTIC_SEG",
+                    "INSTANCE_SEG",
+                    "DETECTION",
+                    "SUPER_RESOLUTION",
+                    "IMAGE_TO_IMAGE",
+                ],
+            ],
+        }
+        self.settings["wizard_questions"] += [
+            "Do you want to use part of the training data as validation?",
+        ]
+        self.settings["wizard_possible_answers"] += [["Yes", "No, I want to use another data"]]
+        self.settings["wizard_variable_to_map"]["Q9"] = {}
+        self.settings["wizard_variable_to_map"]["Q9"]["DATA.VAL.FROM_TRAIN"] = [True, False]
+        self.settings["wizard_sections"][-1][1] += ["Validation data"]
+        self.settings['wizard_from_question_index_to_toc'].append([1,len(self.settings['wizard_from_toc_to_question_index'][-1])])
+        self.settings['wizard_from_toc_to_question_index'][-1].append(q_count)
+        q_count += 1
+
+        #######
+        # Q10 #
+        #######
+        self.settings["wizard_question_condition"]["Q10"] = {
+            "and_cond": ["TRAIN.ENABLE", True, "DATA.VAL.FROM_TRAIN", True],
+            "or_cond": [
+                "PROBLEM.TYPE",
+                [
+                    "SEMANTIC_SEG",
+                    "INSTANCE_SEG",
+                    "DETECTION",
+                    "SUPER_RESOLUTION",
+                    "IMAGE_TO_IMAGE",
+                ],
+            ],
+        }
+        self.settings["wizard_questions"] += [
+            "How much training data samples do you want to use as validation?",
+        ]
+        self.settings["wizard_possible_answers"] += [["10%", "20%"]]
+        self.settings["wizard_variable_to_map"]["Q10"] = {}
+        self.settings["wizard_variable_to_map"]["Q10"]["DATA.VAL.SPLIT_TRAIN"] = [0.1, 0.2]
+        self.settings["wizard_sections"][-1][1] += ["Validation data (train split)"]
+        self.settings['wizard_from_question_index_to_toc'].append([1,len(self.settings['wizard_from_toc_to_question_index'][-1])])
+        self.settings['wizard_from_toc_to_question_index'][-1].append(q_count)
+        q_count += 1
+
+        #######
+        # Q11 #
+        #######
+        self.settings["wizard_question_condition"]["Q11"] = {
+            "and_cond": ["TRAIN.ENABLE", True, "DATA.VAL.FROM_TRAIN", False],
+            "or_cond": [
+                "PROBLEM.TYPE",
+                [
+                    "SEMANTIC_SEG",
+                    "INSTANCE_SEG",
+                    "DETECTION",
+                    "SUPER_RESOLUTION",
+                    "IMAGE_TO_IMAGE",
+                ],
+            ],
+        }
+        self.settings["wizard_questions"] += [
+            "Please insert validation raw image folder",
+        ]
+        self.settings["wizard_possible_answers"] += [["PATH"]]
+        self.settings["wizard_variable_to_map"]["Q11"] = {}
+        self.settings["wizard_variable_to_map"]["Q11"]["DATA.VAL.PATH"] = ""
+        self.settings["wizard_sections"][-1][1] += ["Validation data (raw)"]
+        self.settings['wizard_from_question_index_to_toc'].append([1,len(self.settings['wizard_from_toc_to_question_index'][-1])])
+        self.settings['wizard_from_toc_to_question_index'][-1].append(q_count)
+        q_count += 1
+
+        #######
+        # Q12 #
+        #######
+        self.settings["wizard_question_condition"]["Q12"] = {
+            "and_cond": ["TRAIN.ENABLE", True, "DATA.VAL.FROM_TRAIN", False],
+            "or_cond": [
+                "PROBLEM.TYPE",
+                [
+                    "SEMANTIC_SEG",
+                    "INSTANCE_SEG",
+                    "DETECTION",
+                    "SUPER_RESOLUTION",
+                    "IMAGE_TO_IMAGE",
+                ],
+            ],
+        }
+        self.settings["wizard_questions"] += [
+            "Please insert validation ground truth folder",
+        ]
+        self.settings["wizard_possible_answers"] += [["PATH"]]
+        self.settings["wizard_variable_to_map"]["Q12"] = {}
+        self.settings["wizard_variable_to_map"]["Q12"]["DATA.VAL.GT_PATH"] = ""
+        self.settings["wizard_sections"][-1][1] += ["Validation data (ground truth)"]
+        self.settings['wizard_from_question_index_to_toc'].append([1,len(self.settings['wizard_from_toc_to_question_index'][-1])])
+        self.settings['wizard_from_toc_to_question_index'][-1].append(q_count)
+        q_count += 1
+
+        # ######
+        # # QX #
+        # ######
+        # self.settings["wizard_question_condition"]["QX"] = {
+        #     "or_cond": [],
+        #     "and_cond": ["PROBLEM.TYPE", "INSTANCE_SEG"],
+        # }
+        # self.settings["wizard_questions"] += [
+        #     "Should objects touching the border of the image be removed?",
+        # ]
+        # self.settings["wizard_possible_answers"] += [
+        #     [
+        #         "Yes",
+        #         "No",
+        #     ]
+        # ]
+        # self.settings["wizard_variable_to_map"]["QX"] = {}
+        # self.settings["wizard_variable_to_map"]["TEST.POST_PROCESSING.CLEAR_BORDER"] = [True, False]
+
+        # ######
+        # # QX2 #
+        # ######
+        # self.settings["wizard_question_condition"]["QX2"] = {
+        #     "or_cond": [],
+        #     "and_cond": ["PROBLEM.TYPE", "INSTANCE_SEG"],
+        # }
+        # self.settings["wizard_questions"] += [
+        #     "Which object-intrinsic measurements should be made? Select all that apply",
+        # ]
+        # self.settings["wizard_possible_answers"] += [
+        #     [
+        #         "Yes",
+        #         "No",
+        #     ]
+        # ]
+        # self.settings["wizard_variable_to_map"]["QX2"] = {}
+        # self.settings["wizard_variable_to_map"]["TEST.POST_PROCESSING.CLEAR_BORDER"] = [True, False]
+
+        self.settings["wizard_number_of_questions"] = len(self.settings["wizard_questions"])
+        self.settings["wizard_question_answered_index"] = [-1,]*self.settings["wizard_number_of_questions"]
 
     def translate_model_names(self, model, dim, inv=False):
         s = "_models_real_names" if not inv else "_models"
@@ -112,39 +671,63 @@ class Settings():
             try:
                 d = ""
                 if x == "sr" and dim == "2D":
-                    d="_2d_"
-                elif x == "sr" and dim == "3D": 
-                    d="_3d_"
-                idx = list(self.settings[x+d+s]).index(model)
+                    d = "_2d_"
+                elif x == "sr" and dim == "3D":
+                    d = "_3d_"
+                idx = list(self.settings[x + d + s]).index(model)
             except:
                 pass
             else:
-                return list(self.settings[x+d+s2])[idx]
+                return list(self.settings[x + d + s2])[idx]
 
     def load_workflow_page(self):
-        self.settings['workflow_images'] = [
-            QPixmap(resource_path(os.path.join("images","semantic_seg.png"))),
-            QPixmap(resource_path(os.path.join("images","instance_seg.png"))),
-            QPixmap(resource_path(os.path.join("images","detection.png"))),
-            QPixmap(resource_path(os.path.join("images","denoising.png"))),
-            QPixmap(resource_path(os.path.join("images","sr.png"))),
-            QPixmap(resource_path(os.path.join("images","ssl.png"))),
-            QPixmap(resource_path(os.path.join("images","classification.png"))),
-            QPixmap(resource_path(os.path.join("images","i2i.png")))
+        self.settings["workflow_images"] = [
+            QPixmap(resource_path(os.path.join("images", "semantic_seg.png"))),
+            QPixmap(resource_path(os.path.join("images", "instance_seg.png"))),
+            QPixmap(resource_path(os.path.join("images", "detection.png"))),
+            QPixmap(resource_path(os.path.join("images", "denoising.png"))),
+            QPixmap(resource_path(os.path.join("images", "sr.png"))),
+            QPixmap(resource_path(os.path.join("images", "ssl.png"))),
+            QPixmap(resource_path(os.path.join("images", "classification.png"))),
+            QPixmap(resource_path(os.path.join("images", "i2i.png"))),
         ]
 
-    def load_workflow_detail_page(self):    
-        self.settings['workflow_description_images'] = [
-            [QPixmap(resource_path(os.path.join("images","semantic_seg_raw.png"))),QPixmap(resource_path(os.path.join("images","semantic_seg_label.png")))],
-            [QPixmap(resource_path(os.path.join("images","instance_seg_raw.png"))),QPixmap(resource_path(os.path.join("images","instance_seg_label.png")))],
-            [QPixmap(resource_path(os.path.join("images","detection_raw.png"))),QPixmap(resource_path(os.path.join("images","detection_csv_input.png")))],
-            [QPixmap(resource_path(os.path.join("images","denoising_raw.png"))),QPixmap(resource_path(os.path.join("images","denoising_pred.png")))],
-            [QPixmap(resource_path(os.path.join("images","sr_raw.png"))),QPixmap(resource_path(os.path.join("images","sr_pred.png")))],
-            [QPixmap(resource_path(os.path.join("images","ssl_raw.png"))),QPixmap(resource_path(os.path.join("images","ssl_pred.png")))],
-            [QPixmap(resource_path(os.path.join("images","classification_raw.png"))),QPixmap(resource_path(os.path.join("images","classification_label.png")))],
-            [QPixmap(resource_path(os.path.join("images","i2i_raw.png"))),QPixmap(resource_path(os.path.join("images","i2i_target.png")))]
+    def load_workflow_detail_page(self):
+        self.settings["workflow_description_images"] = [
+            [
+                QPixmap(resource_path(os.path.join("images", "semantic_seg_raw.png"))),
+                QPixmap(resource_path(os.path.join("images", "semantic_seg_label.png"))),
+            ],
+            [
+                QPixmap(resource_path(os.path.join("images", "instance_seg_raw.png"))),
+                QPixmap(resource_path(os.path.join("images", "instance_seg_label.png"))),
+            ],
+            [
+                QPixmap(resource_path(os.path.join("images", "detection_raw.png"))),
+                QPixmap(resource_path(os.path.join("images", "detection_csv_input.png"))),
+            ],
+            [
+                QPixmap(resource_path(os.path.join("images", "denoising_raw.png"))),
+                QPixmap(resource_path(os.path.join("images", "denoising_pred.png"))),
+            ],
+            [
+                QPixmap(resource_path(os.path.join("images", "sr_raw.png"))),
+                QPixmap(resource_path(os.path.join("images", "sr_pred.png"))),
+            ],
+            [
+                QPixmap(resource_path(os.path.join("images", "ssl_raw.png"))),
+                QPixmap(resource_path(os.path.join("images", "ssl_pred.png"))),
+            ],
+            [
+                QPixmap(resource_path(os.path.join("images", "classification_raw.png"))),
+                QPixmap(resource_path(os.path.join("images", "classification_label.png"))),
+            ],
+            [
+                QPixmap(resource_path(os.path.join("images", "i2i_raw.png"))),
+                QPixmap(resource_path(os.path.join("images", "i2i_target.png"))),
+            ],
         ]
-        self.settings['workflow_description_doc'] = [
+        self.settings["workflow_description_doc"] = [
             "https://biapy.readthedocs.io/en/latest/workflows/semantic_segmentation.html",
             "https://biapy.readthedocs.io/en/latest/workflows/instance_segmentation.html",
             "https://biapy.readthedocs.io/en/latest/workflows/detection.html",
@@ -152,139 +735,185 @@ class Settings():
             "https://biapy.readthedocs.io/en/latest/workflows/super_resolution.html",
             "https://biapy.readthedocs.io/en/latest/workflows/self_supervision.html",
             "https://biapy.readthedocs.io/en/latest/workflows/classification.html",
-            "https://biapy.readthedocs.io/en/latest/workflows/image_to_image.html"
+            "https://biapy.readthedocs.io/en/latest/workflows/image_to_image.html",
         ]
 
-        self.settings['ready_to_use_workflows'] = [
-            [ # Semantic segmentation
+        self.settings["ready_to_use_workflows"] = [
+            [  # Semantic segmentation
                 {
-                    'name': 'Embryo wound segmentation (2D)', 
-                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'semantic_seg_2d_droso_embryo.png'))), 
-                    'data': 'https://drive.google.com/file/d/1qehkWYVJRXfMwvbpayKhb4nmPyYvclAj/view?usp=sharing', 
-                    'template': 'https://github.com/BiaPyX/BiaPy/blob/master/templates/semantic_segmentation/2d_semantic_segmentation.yaml'
+                    "name": "Embryo wound segmentation (2D)",
+                    "image": QPixmap(
+                        resource_path(
+                            os.path.join("images", "ready_to_use_examples", "semantic_seg_2d_droso_embryo.png")
+                        )
+                    ),
+                    "data": "https://drive.google.com/file/d/1qehkWYVJRXfMwvbpayKhb4nmPyYvclAj/view?usp=sharing",
+                    "template": "https://github.com/BiaPyX/BiaPy/blob/master/templates/semantic_segmentation/2d_semantic_segmentation.yaml",
                 },
                 {
-                    'name': 'Mitochondria segmentation (3D)', 
-                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'semantic_seg_3d_mitochondria.png'))), 
-                    'data': 'https://drive.google.com/file/d/10Cf11PtERq4pDHCJroekxu_hf10EZzwG/view?usp=drive_link', 
-                    'template': 'https://github.com/BiaPyX/BiaPy/blob/master/templates/semantic_segmentation/3d_semantic_segmentation.yaml'
-                }
-            ],
-            [ # Instance segmentation
-                {
-                    'name': 'Cell instance segmentation (2D)', 
-                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'instance_seg_2d_cell.png'))), 
-                    'data': 'https://drive.google.com/file/d/1b7_WDDGEEaEoIpO_1EefVr0w0VQaetmg/view?usp=drive_link', 
-                    'template': 'https://github.com/BiaPyX/BiaPy/blob/master/templates/instance_segmentation/2d_instance_segmentation.yaml'
-                },
-                {
-                    'name': 'Nuclei instance segmentation (3D)', 
-                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'instance_seg_3d_nuclei.png'))), 
-                    'data': 'https://drive.google.com/file/d/1fdL35ZTNw5hhiKau1gadaGu-rc5ZU_C7/view?usp=drive_link', 
-                    'template': 'https://github.com/BiaPyX/BiaPy/blob/master/templates/instance_segmentation/3d_instance_segmentation.yaml'
+                    "name": "Mitochondria segmentation (3D)",
+                    "image": QPixmap(
+                        resource_path(
+                            os.path.join("images", "ready_to_use_examples", "semantic_seg_3d_mitochondria.png")
+                        )
+                    ),
+                    "data": "https://drive.google.com/file/d/10Cf11PtERq4pDHCJroekxu_hf10EZzwG/view?usp=drive_link",
+                    "template": "https://github.com/BiaPyX/BiaPy/blob/master/templates/semantic_segmentation/3d_semantic_segmentation.yaml",
                 },
             ],
-            [ # Detection
+            [  # Instance segmentation
                 {
-                    'name': 'Cell detection (2D)', 
-                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'instance_seg_2d_cell.png'))), 
-                    'data': 'https://drive.google.com/file/d/1pWqQhcWY15b5fVLZDkPS-vnE-RU6NlYf/view?usp=drive_link', 
-                    'template': 'https://github.com/BiaPyX/BiaPy/blob/master/templates/detection/2d_detection.yaml'
+                    "name": "Cell instance segmentation (2D)",
+                    "image": QPixmap(
+                        resource_path(os.path.join("images", "ready_to_use_examples", "instance_seg_2d_cell.png"))
+                    ),
+                    "data": "https://drive.google.com/file/d/1b7_WDDGEEaEoIpO_1EefVr0w0VQaetmg/view?usp=drive_link",
+                    "template": "https://github.com/BiaPyX/BiaPy/blob/master/templates/instance_segmentation/2d_instance_segmentation.yaml",
                 },
                 {
-                    'name': 'Nuclei detection (3D)', 
-                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'detection_3d_nuclei.png'))), 
-                    'data': 'https://drive.google.com/file/d/19P4AcvBPJXeW7QRj92Jh1keunGa5fi8d/view?usp=drive_link', 
-                    'template': 'https://github.com/BiaPyX/BiaPy/blob/master/templates/detection/3d_detection.yaml'
-                }
+                    "name": "Nuclei instance segmentation (3D)",
+                    "image": QPixmap(
+                        resource_path(os.path.join("images", "ready_to_use_examples", "instance_seg_3d_nuclei.png"))
+                    ),
+                    "data": "https://drive.google.com/file/d/1fdL35ZTNw5hhiKau1gadaGu-rc5ZU_C7/view?usp=drive_link",
+                    "template": "https://github.com/BiaPyX/BiaPy/blob/master/templates/instance_segmentation/3d_instance_segmentation.yaml",
+                },
             ],
-            [ # Denoising
+            [  # Detection
                 {
-                    'name': 'C. Majalist denoising (2D)', 
-                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'denoising_2d_c_majalis.png'))), 
-                    'data': 'https://drive.google.com/file/d/1TFvOySOiIgVIv9p4pbHdEbai-d2YGDvV/view?usp=drive_link', 
-                    'template': 'https://github.com/BiaPyX/BiaPy/blob/master/templates/denoising/2d_denoising.yaml'
+                    "name": "Cell detection (2D)",
+                    "image": QPixmap(
+                        resource_path(os.path.join("images", "ready_to_use_examples", "instance_seg_2d_cell.png"))
+                    ),
+                    "data": "https://drive.google.com/file/d/1pWqQhcWY15b5fVLZDkPS-vnE-RU6NlYf/view?usp=drive_link",
+                    "template": "https://github.com/BiaPyX/BiaPy/blob/master/templates/detection/2d_detection.yaml",
                 },
                 {
-                    'name': 'Fly wing denoising (3D)', 
-                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'denoising_3d_flywing.png'))), 
-                    'data': 'https://drive.google.com/file/d/1OIjnUoJKdnbClBlpzk7V5R8wtoLont-r/view?usp=drive_link', 
-                    'template': 'https://github.com/BiaPyX/BiaPy/blob/master/templates/denoising/3d_denoising.yaml'
-                }
+                    "name": "Nuclei detection (3D)",
+                    "image": QPixmap(
+                        resource_path(os.path.join("images", "ready_to_use_examples", "detection_3d_nuclei.png"))
+                    ),
+                    "data": "https://drive.google.com/file/d/19P4AcvBPJXeW7QRj92Jh1keunGa5fi8d/view?usp=drive_link",
+                    "template": "https://github.com/BiaPyX/BiaPy/blob/master/templates/detection/3d_detection.yaml",
+                },
             ],
-            [ # SR
+            [  # Denoising
                 {
-                    'name': 'F-actin super-resolution (2D)', 
-                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'sr_2d_factin.png'))), 
-                    'data': 'https://drive.google.com/file/d/1rtrR_jt8hcBEqvwx_amFBNR7CMP5NXLo/view?usp=sharing', 
-                    'template': 'https://github.com/BiaPyX/BiaPy/blob/master/templates/super-resolution/2d_super-resolution.yaml'
+                    "name": "C. Majalist denoising (2D)",
+                    "image": QPixmap(
+                        resource_path(os.path.join("images", "ready_to_use_examples", "denoising_2d_c_majalis.png"))
+                    ),
+                    "data": "https://drive.google.com/file/d/1TFvOySOiIgVIv9p4pbHdEbai-d2YGDvV/view?usp=drive_link",
+                    "template": "https://github.com/BiaPyX/BiaPy/blob/master/templates/denoising/2d_denoising.yaml",
                 },
                 {
-                    'name': 'Cardiomyoblast super-resolution (3D)', 
-                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'sr_3d_cardiomyoblast.png'))), 
-                    'data': 'https://drive.google.com/file/d/1g7GnAnRuQxgqqaTsqDHnaSS9HRgBedvm/view?usp=sharing', 
-                    'template': 'https://github.com/BiaPyX/BiaPy/blob/master/templates/super-resolution/3d_super-resolution.yaml'
+                    "name": "Fly wing denoising (3D)",
+                    "image": QPixmap(
+                        resource_path(os.path.join("images", "ready_to_use_examples", "denoising_3d_flywing.png"))
+                    ),
+                    "data": "https://drive.google.com/file/d/1OIjnUoJKdnbClBlpzk7V5R8wtoLont-r/view?usp=drive_link",
+                    "template": "https://github.com/BiaPyX/BiaPy/blob/master/templates/denoising/3d_denoising.yaml",
                 },
-                {
-                    'name': 'Urban super-resolution (2D)', 
-                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'sr_2d_urban100.png'))), 
-                    'data': 'https://drive.google.com/file/d/1Dzlz2dbFw-fz4JDykrWu-SU0v45YBjbj/view?usp=sharing', 
-                    'template': 'https://github.com/BiaPyX/BiaPy/blob/master/templates/super-resolution/2d_super-resolution_rgb.yaml'
-                }
             ],
-            [ # SSL
+            [  # SR
                 {
-                    'name': 'Self-supervision in EM images (2D)', 
-                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'semantic_seg_3d_mitochondria.png'))), 
-                    'data': 'https://drive.google.com/file/d/1DfUoVHf__xk-s4BWSKbkfKYMnES-9RJt/view?usp=drive_link', 
-                    'template': 'https://github.com/BiaPyX/BiaPy/blob/master/templates/self-supervised/2d_self-supervised.yaml'
+                    "name": "F-actin super-resolution (2D)",
+                    "image": QPixmap(
+                        resource_path(os.path.join("images", "ready_to_use_examples", "sr_2d_factin.png"))
+                    ),
+                    "data": "https://drive.google.com/file/d/1rtrR_jt8hcBEqvwx_amFBNR7CMP5NXLo/view?usp=sharing",
+                    "template": "https://github.com/BiaPyX/BiaPy/blob/master/templates/super-resolution/2d_super-resolution.yaml",
                 },
                 {
-                    'name': 'Self-supervision in EM images (3D)', 
-                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'detection_3d_nuclei.png'))), 
-                    'data': 'https://drive.google.com/file/d/19P4AcvBPJXeW7QRj92Jh1keunGa5fi8d/view?usp=drive_link', 
-                    'template': 'https://github.com/BiaPyX/BiaPy/blob/master/templates/self-supervised/3d_self-supervised.yaml'
-                }
+                    "name": "Cardiomyoblast super-resolution (3D)",
+                    "image": QPixmap(
+                        resource_path(os.path.join("images", "ready_to_use_examples", "sr_3d_cardiomyoblast.png"))
+                    ),
+                    "data": "https://drive.google.com/file/d/1g7GnAnRuQxgqqaTsqDHnaSS9HRgBedvm/view?usp=sharing",
+                    "template": "https://github.com/BiaPyX/BiaPy/blob/master/templates/super-resolution/3d_super-resolution.yaml",
+                },
+                {
+                    "name": "Urban super-resolution (2D)",
+                    "image": QPixmap(
+                        resource_path(os.path.join("images", "ready_to_use_examples", "sr_2d_urban100.png"))
+                    ),
+                    "data": "https://drive.google.com/file/d/1Dzlz2dbFw-fz4JDykrWu-SU0v45YBjbj/view?usp=sharing",
+                    "template": "https://github.com/BiaPyX/BiaPy/blob/master/templates/super-resolution/2d_super-resolution_rgb.yaml",
+                },
             ],
-            [ # Classification
+            [  # SSL
                 {
-                    'name': 'Skin lesion classification (2D)', 
-                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'classification_2d_dermaMNIST.png'))), 
-                    'data': 'https://drive.google.com/file/d/15_pnH4_tJcwhOhNqFsm26NQuJbNbFSIN/view?usp=drive_link', 
-                    'template': 'https://github.com/BiaPyX/BiaPy/blob/master/templates/classification/2d_classification.yaml'
+                    "name": "Self-supervision in EM images (2D)",
+                    "image": QPixmap(
+                        resource_path(
+                            os.path.join("images", "ready_to_use_examples", "semantic_seg_3d_mitochondria.png")
+                        )
+                    ),
+                    "data": "https://drive.google.com/file/d/1DfUoVHf__xk-s4BWSKbkfKYMnES-9RJt/view?usp=drive_link",
+                    "template": "https://github.com/BiaPyX/BiaPy/blob/master/templates/self-supervised/2d_self-supervised.yaml",
                 },
                 {
-                    'name': 'Organ classification (3D)', 
-                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'classification_3d_organMNIST.png'))), 
-                    'data': 'https://drive.google.com/file/d/1pypWJ4Z9sRLPlVHbG6zpwmS6COkm3wUg/view?usp=drive_link', 
-                    'template': 'https://github.com/BiaPyX/BiaPy/blob/master/templates/classification/3d_classification.yaml'
+                    "name": "Self-supervision in EM images (3D)",
+                    "image": QPixmap(
+                        resource_path(os.path.join("images", "ready_to_use_examples", "detection_3d_nuclei.png"))
+                    ),
+                    "data": "https://drive.google.com/file/d/19P4AcvBPJXeW7QRj92Jh1keunGa5fi8d/view?usp=drive_link",
+                    "template": "https://github.com/BiaPyX/BiaPy/blob/master/templates/self-supervised/3d_self-supervised.yaml",
                 },
-                {
-                    'name': 'Butterfly classification (2D)', 
-                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'classification_2d_butterfly.jpg'))), 
-                    'data': 'https://drive.google.com/file/d/1m4_3UAgUsZ8FDjB4HyfA50Sht7_XkfdB/view?usp=drive_link', 
-                    'template': 'https://github.com/BiaPyX/BiaPy/blob/master/templates/classification/2d_classification_rgb.yaml'
-                }
             ],
-            [ # I2I
+            [  # Classification
                 {
-                    'name': 'lifeact-RFP and sir-DNA translation (2D)', 
-                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'i2i_2d_lifeact-RFP.png'))), 
-                    'data': 'https://drive.google.com/file/d/1L8AXNjh0_updVI3-v1duf6CbcZb8uZK7/view?usp=drive_link', 
-                    'template': 'https://github.com/BiaPyX/BiaPy/blob/master/templates/image-to-image/2d_image-to-image.yaml'
+                    "name": "Skin lesion classification (2D)",
+                    "image": QPixmap(
+                        resource_path(
+                            os.path.join("images", "ready_to_use_examples", "classification_2d_dermaMNIST.png")
+                        )
+                    ),
+                    "data": "https://drive.google.com/file/d/15_pnH4_tJcwhOhNqFsm26NQuJbNbFSIN/view?usp=drive_link",
+                    "template": "https://github.com/BiaPyX/BiaPy/blob/master/templates/classification/2d_classification.yaml",
                 },
                 {
-                    'name': 'Nuclear Pore image restoration (3D)', 
-                    'image': QPixmap(resource_path(os.path.join("images","ready_to_use_examples",'i2i_3d_pore.png'))), 
-                    'data': 'https://drive.google.com/file/d/1jL0bn2X3OFaV5T-6KR1g6fPDllH-LWzm/view?usp=drive_link', 
-                    'template': 'https://github.com/BiaPyX/BiaPy/blob/master/templates/image-to-image/3d_image-to-image.yaml'
-                }
-            ]
+                    "name": "Organ classification (3D)",
+                    "image": QPixmap(
+                        resource_path(
+                            os.path.join("images", "ready_to_use_examples", "classification_3d_organMNIST.png")
+                        )
+                    ),
+                    "data": "https://drive.google.com/file/d/1pypWJ4Z9sRLPlVHbG6zpwmS6COkm3wUg/view?usp=drive_link",
+                    "template": "https://github.com/BiaPyX/BiaPy/blob/master/templates/classification/3d_classification.yaml",
+                },
+                {
+                    "name": "Butterfly classification (2D)",
+                    "image": QPixmap(
+                        resource_path(
+                            os.path.join("images", "ready_to_use_examples", "classification_2d_butterfly.jpg")
+                        )
+                    ),
+                    "data": "https://drive.google.com/file/d/1m4_3UAgUsZ8FDjB4HyfA50Sht7_XkfdB/view?usp=drive_link",
+                    "template": "https://github.com/BiaPyX/BiaPy/blob/master/templates/classification/2d_classification_rgb.yaml",
+                },
+            ],
+            [  # I2I
+                {
+                    "name": "lifeact-RFP and sir-DNA translation (2D)",
+                    "image": QPixmap(
+                        resource_path(os.path.join("images", "ready_to_use_examples", "i2i_2d_lifeact-RFP.png"))
+                    ),
+                    "data": "https://drive.google.com/file/d/1L8AXNjh0_updVI3-v1duf6CbcZb8uZK7/view?usp=drive_link",
+                    "template": "https://github.com/BiaPyX/BiaPy/blob/master/templates/image-to-image/2d_image-to-image.yaml",
+                },
+                {
+                    "name": "Nuclear Pore image restoration (3D)",
+                    "image": QPixmap(resource_path(os.path.join("images", "ready_to_use_examples", "i2i_3d_pore.png"))),
+                    "data": "https://drive.google.com/file/d/1jL0bn2X3OFaV5T-6KR1g6fPDllH-LWzm/view?usp=drive_link",
+                    "template": "https://github.com/BiaPyX/BiaPy/blob/master/templates/image-to-image/3d_image-to-image.yaml",
+                },
+            ],
         ]
 
-        self.settings['workflow_descriptions'] = [
+        self.settings["workflow_descriptions"] = [
             # Semantic segmentation
-            '<p>The goal of this workflow is assign a class to each pixel of the input image.</p>\
+            "<p>The goal of this workflow is assign a class to each pixel of the input image.</p>\
             <ul>\
                 <li><dl>\
                     <dt><strong>Input:</strong></dt><dd><ul>\
@@ -308,10 +937,9 @@ class Settings():
             with the same number of channels as classes, and the same pixel in each channel will be the \
             probability (in <code><span>[0-1]</span></code> range) of being of the class that represents that channel number. \
             For instance, with 3 classes, e.g. background, mitochondria and contours, the fist channel will represent background, the second\
-            mitochondria and the last contour class.</p>',
-
+            mitochondria and the last contour class.</p>",
             # Instance segmentation
-            '<p>The goal of this workflow is assign an unique id, i.e. integer, to each object of the input image.</p>\
+            "<p>The goal of this workflow is assign an unique id, i.e. integer, to each object of the input image.</p>\
             <ul>\
                 <li><dl>\
                     <dt><strong>Input:</strong></dt><dd><ul>\
@@ -326,8 +954,7 @@ class Settings():
                 </li>\
             </ul>\
             <p>In the figure above an example of this workflow’s input is depicted. Each color in the mask corresponds \
-            to a unique object.</p>',
-            
+            to a unique object.</p>",
             # Detection
             '<p>The goal of this workflow is to localize objects in the input image, not requiring a pixel-level class. \
             Common strategies produce either bounding boxes containing the objects or individual points at their center \
@@ -369,15 +996,18 @@ class Settings():
             <table style="text-align: center;">\
             <tbody>\
             <tr><td style="text-align: center;">\
-            <img src="'+resource_path(os.path.join("images","detection_raw.png"))+'"> <p><span>Input image.</span></p>\
+            <img src="'
+            + resource_path(os.path.join("images", "detection_raw.png"))
+            + '"> <p><span>Input image.</span></p>\
             </td>\
             <td style="text-align: center;">\
-            <img src="'+resource_path(os.path.join("images","detection_label.png"))+'"><p><span>Model\'s GT.</span></p>\
+            <img src="'
+            + resource_path(os.path.join("images", "detection_label.png"))
+            + "\"><p><span>Model's GT.</span></p>\
             </td>\
             </tr>\
             </tbody>\
-            </table>',
-
+            </table>",
             # Denoising
             '<p>The goal is to remove noise from an image. Our library includes \
             <a href="https://openaccess.thecvf.com/content_CVPR_2019/html/Krull_Noise2Void_-_Learning_Denoising_From_Single_Noisy_Images_CVPR_2019_paper.html">Nosei2Void</a>\
@@ -401,8 +1031,7 @@ class Settings():
             This image was obtained from a <a href="https://zenodo.org/record/5156913">Convallaria dataset</a> \
             used in \
             <a href="https://openaccess.thecvf.com/content_CVPR_2019/html/Krull_Noise2Void_-_Learning_Denoising_From_Single_Noisy_Images_CVPR_2019_paper.html">Nosei2Void</a>\
-            project.</p>',      
-
+            project.</p>',
             # Super resolution
             '<p>The goal of this workflow aims at reconstructing high-resolution (HR) images from low-resolution (LR) ones.</p>\
             <ul>\
@@ -422,9 +1051,8 @@ class Settings():
             <a href="https://github.com/HenriquesLab/ZeroCostDL4Mic">ZeroCostDL4Mic</a> project. \
             <p>Notice that in this example the LR and HR images has been resized but actually they are \
             <code><span>502x502</span></code> and <code><span>1004x1004</span></code>, respectively.</p>',
-
             # Self-supervised learning
-            '<p>The idea of this workflow is to pretrain the backbone model by solving a so-called pretext \
+            "<p>The idea of this workflow is to pretrain the backbone model by solving a so-called pretext \
             task without labels. This way, the model learns a representation that can be later transferred \
             to solve a downstream task in a labeled (but smaller) dataset. In BiaPy we adopt the pretext \
             task of recover a worstened version of the input image. </p>\
@@ -442,8 +1070,7 @@ class Settings():
             </ul>\
             <p>The worstened version of the input is automatically created by BiaPy. Each input image is used \
             to create its worstened version and the model’s task is to recover the input image from its worstened version.\
-            In the figure above an example of the two pair images used in this workflow is depicted.</p>',
-
+            In the figure above an example of the two pair images used in this workflow is depicted.</p>",
             # Classification
             '<p>The goal of this workflow is to assing a label to the input image.</p>\
             <ul>\
@@ -463,7 +1090,6 @@ class Settings():
             <a href="https://www.nature.com/articles/s41597-022-01721-8">MedMNIST v2</a>, concretely from \
             DermaMNIST dataset which is a large collection of multi-source dermatoscopic images of common \
             pigmented skin lesions.</p>',
-            
             # I2I
             '<p>The goal of this workflow is to translate/map input images into target images. \
             This workflow is as the super-resolution one but with no upsampling, e.g. with the scaling factor to x1.</p>\
@@ -482,4 +1108,4 @@ class Settings():
             <p>In the figure above a few example of paired microscopy images (fluorescence) of lifeact-RFP \
             (input) and sir-DNA is depicted (output). The images were obtained from \
             <a href="https://zenodo.org/records/3941889#.XxrkzWMzaV4">ZeroCostDL4Mic pix2pix dataset example</a>.</p>',
-            ]
+        ]

@@ -128,7 +128,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.addWidget(self.biapy_version)
 
 
-        self.verticalLayout_14.addWidget(self.biapy_logo_frame, 0, Qt.AlignHCenter)
+        self.verticalLayout_14.addWidget(self.biapy_logo_frame)
 
         self.line = QFrame(self.frame_bottom_west)
         self.line.setObjectName(u"line")
@@ -167,9 +167,6 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(255,255,255);\n"
 "}")
-        icon = QIcon()
-        icon.addFile(u"images/bn_images/home.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.bn_home.setIcon(icon)
         self.bn_home.setIconSize(QSize(257, 48))
         self.bn_home.setFlat(True)
 
@@ -177,6 +174,37 @@ class Ui_MainWindow(object):
 
 
         self.verticalLayout_14.addWidget(self.frame_home)
+
+        self.frame_wizard = QFrame(self.frame_bottom_west)
+        self.frame_wizard.setObjectName(u"frame_wizard")
+        self.frame_wizard.setMaximumSize(QSize(260, 52))
+        self.frame_wizard.setFont(font)
+        self.frame_wizard.setFrameShape(QFrame.NoFrame)
+        self.frame_wizard.setFrameShadow(QFrame.Plain)
+        self.verticalLayout_4 = QVBoxLayout(self.frame_wizard)
+        self.verticalLayout_4.setSpacing(0)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.bn_wizard = QPushButton(self.frame_wizard)
+        self.bn_wizard.setObjectName(u"bn_wizard")
+        self.bn_wizard.setMinimumSize(QSize(52, 0))
+        self.bn_wizard.setMaximumSize(QSize(260, 52))
+        self.bn_wizard.setStyleSheet(u"QPushButton {\n"
+"	border: none;\n"
+"	background-color: rgba(0,0,0,0);\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(255,255,255);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(255,255,255);\n"
+"}")
+        self.bn_wizard.setIconSize(QSize(257, 48))
+
+        self.verticalLayout_4.addWidget(self.bn_wizard)
+
+
+        self.verticalLayout_14.addWidget(self.frame_wizard)
 
         self.frame_workflow = QFrame(self.frame_bottom_west)
         self.frame_workflow.setObjectName(u"frame_workflow")
@@ -209,9 +237,6 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(255,255,255);\n"
 "}")
-        icon1 = QIcon()
-        icon1.addFile(u"images/bn_images/workflow.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.bn_workflow.setIcon(icon1)
         self.bn_workflow.setIconSize(QSize(257, 48))
         self.bn_workflow.setFlat(True)
 
@@ -246,9 +271,6 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(255,255,255);\n"
 "}")
-        icon2 = QIcon()
-        icon2.addFile(u"images/bn_images/goptions.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.bn_goptions.setIcon(icon2)
         self.bn_goptions.setIconSize(QSize(257, 48))
         self.bn_goptions.setFlat(True)
 
@@ -289,9 +311,6 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(255,255,255);\n"
 "}")
-        icon3 = QIcon()
-        icon3.addFile(u"images/bn_images/train.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.bn_train.setIcon(icon3)
         self.bn_train.setIconSize(QSize(257, 48))
         self.bn_train.setFlat(True)
 
@@ -328,9 +347,6 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(255,255,255);\n"
 "}")
-        icon4 = QIcon()
-        icon4.addFile(u"images/bn_images/test.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.bn_test.setIcon(icon4)
         self.bn_test.setIconSize(QSize(257, 48))
         self.bn_test.setFlat(True)
 
@@ -367,9 +383,6 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(255,255,255);\n"
 "}")
-        icon5 = QIcon()
-        icon5.addFile(u"images/bn_images/run.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.bn_run_biapy.setIcon(icon5)
         self.bn_run_biapy.setIconSize(QSize(257, 48))
         self.bn_run_biapy.setFlat(True)
 
@@ -377,19 +390,6 @@ class Ui_MainWindow(object):
 
 
         self.verticalLayout_14.addWidget(self.frame_run_biapy)
-
-        self.frame_8 = QFrame(self.frame_bottom_west)
-        self.frame_8.setObjectName(u"frame_8")
-        self.frame_8.setMaximumSize(QSize(260, 52))
-        self.frame_8.setFont(font)
-        self.frame_8.setFrameShape(QFrame.NoFrame)
-        self.frame_8.setFrameShadow(QFrame.Plain)
-        self.verticalLayout_4 = QVBoxLayout(self.frame_8)
-        self.verticalLayout_4.setSpacing(0)
-        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
-
-        self.verticalLayout_14.addWidget(self.frame_8)
 
 
         self.horizontalLayout_2.addWidget(self.frame_bottom_west)
@@ -465,9 +465,9 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgba(0,0,0,0);\n"
 "}")
-        icon6 = QIcon()
-        icon6.addFile(u"images/bn_images/hide_icon.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.bn_min.setIcon(icon6)
+        icon = QIcon()
+        icon.addFile(u"images/bn_images/hide_icon.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.bn_min.setIcon(icon)
         self.bn_min.setIconSize(QSize(22, 22))
         self.bn_min.setFlat(True)
 
@@ -501,9 +501,9 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgba(0,0,0,0);\n"
 "}")
-        icon7 = QIcon()
-        icon7.addFile(u"images/bn_images/close_icon.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.bn_close.setIcon(icon7)
+        icon1 = QIcon()
+        icon1.addFile(u"images/bn_images/close_icon.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.bn_close.setIcon(icon1)
         self.bn_close.setIconSize(QSize(22, 22))
         self.bn_close.setFlat(True)
 
@@ -1051,6 +1051,472 @@ class Ui_MainWindow(object):
         self.verticalLayout_13.addWidget(self.frame_4)
 
         self.stackedWidget.addWidget(self.page_home)
+        self.page_wizard = QWidget()
+        self.page_wizard.setObjectName(u"page_wizard")
+        self.page_wizard.setStyleSheet(u"QFrame {\n"
+"background:rgb(255,255,255);\n"
+"}\n"
+"QFrame:disabled {\n"
+"background-color:#D3D3D3;\n"
+"}")
+        self.wizard_frame = QFrame(self.page_wizard)
+        self.wizard_frame.setObjectName(u"wizard_frame")
+        self.wizard_frame.setGeometry(QRect(0, 0, 948, 568))
+        self.wizard_frame.setFrameShape(QFrame.NoFrame)
+        self.wizard_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_48 = QVBoxLayout(self.wizard_frame)
+        self.verticalLayout_48.setSpacing(0)
+        self.verticalLayout_48.setObjectName(u"verticalLayout_48")
+        self.verticalLayout_48.setContentsMargins(0, 0, 0, 0)
+        self.wizard_main_frame = QStackedWidget(self.wizard_frame)
+        self.wizard_main_frame.setObjectName(u"wizard_main_frame")
+        self.wizard_start_page = QWidget()
+        self.wizard_start_page.setObjectName(u"wizard_start_page")
+        self.verticalLayout_54 = QVBoxLayout(self.wizard_start_page)
+        self.verticalLayout_54.setSpacing(0)
+        self.verticalLayout_54.setObjectName(u"verticalLayout_54")
+        self.verticalLayout_54.setContentsMargins(0, 0, 0, 0)
+        self.frame_67 = QFrame(self.wizard_start_page)
+        self.frame_67.setObjectName(u"frame_67")
+        self.frame_67.setFrameShape(QFrame.NoFrame)
+        self.frame_67.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_53 = QVBoxLayout(self.frame_67)
+        self.verticalLayout_53.setObjectName(u"verticalLayout_53")
+        self.frame_68 = QFrame(self.frame_67)
+        self.frame_68.setObjectName(u"frame_68")
+        self.frame_68.setMinimumSize(QSize(0, 300))
+        self.frame_68.setFrameShape(QFrame.NoFrame)
+        self.frame_68.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_39 = QHBoxLayout(self.frame_68)
+        self.horizontalLayout_39.setSpacing(30)
+        self.horizontalLayout_39.setObjectName(u"horizontalLayout_39")
+        self.horizontalLayout_39.setContentsMargins(180, 50, 180, 50)
+        self.wizard_start_message = QLabel(self.frame_68)
+        self.wizard_start_message.setObjectName(u"wizard_start_message")
+        self.wizard_start_message.setMinimumSize(QSize(400, 0))
+        self.wizard_start_message.setMaximumSize(QSize(400, 16777215))
+        self.wizard_start_message.setFont(font)
+        self.wizard_start_message.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.wizard_start_message.setWordWrap(True)
+
+        self.horizontalLayout_39.addWidget(self.wizard_start_message)
+
+        self.wizard_start_wizard_icon = QLabel(self.frame_68)
+        self.wizard_start_wizard_icon.setObjectName(u"wizard_start_wizard_icon")
+        self.wizard_start_wizard_icon.setMinimumSize(QSize(130, 148))
+        self.wizard_start_wizard_icon.setMaximumSize(QSize(130, 148))
+        self.wizard_start_wizard_icon.setFont(font)
+        self.wizard_start_wizard_icon.setScaledContents(True)
+
+        self.horizontalLayout_39.addWidget(self.wizard_start_wizard_icon)
+
+
+        self.verticalLayout_53.addWidget(self.frame_68)
+
+        self.frame_69 = QFrame(self.frame_67)
+        self.frame_69.setObjectName(u"frame_69")
+        self.frame_69.setFrameShape(QFrame.NoFrame)
+        self.frame_69.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_55 = QVBoxLayout(self.frame_69)
+        self.verticalLayout_55.setObjectName(u"verticalLayout_55")
+        self.wizard_start_bn = QPushButton(self.frame_69)
+        self.wizard_start_bn.setObjectName(u"wizard_start_bn")
+        self.wizard_start_bn.setMinimumSize(QSize(200, 30))
+        self.wizard_start_bn.setMaximumSize(QSize(200, 30))
+        self.wizard_start_bn.setFont(font)
+        self.wizard_start_bn.setStyleSheet(u"QPushButton {\n"
+"	border: none;\n"
+"	background-color: rgb(64,144,253);\n"
+"	border-radius: 15px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}")
+
+        self.verticalLayout_55.addWidget(self.wizard_start_bn)
+
+
+        self.verticalLayout_53.addWidget(self.frame_69, 0, Qt.AlignHCenter|Qt.AlignVCenter)
+
+
+        self.verticalLayout_54.addWidget(self.frame_67)
+
+        self.wizard_main_frame.addWidget(self.wizard_start_page)
+        self.questionary_page = QWidget()
+        self.questionary_page.setObjectName(u"questionary_page")
+        self.verticalLayout_49 = QVBoxLayout(self.questionary_page)
+        self.verticalLayout_49.setSpacing(0)
+        self.verticalLayout_49.setObjectName(u"verticalLayout_49")
+        self.verticalLayout_49.setContentsMargins(0, 0, 0, 0)
+        self.frame_8 = QFrame(self.questionary_page)
+        self.frame_8.setObjectName(u"frame_8")
+        self.frame_8.setFrameShape(QFrame.NoFrame)
+        self.frame_8.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_40 = QHBoxLayout(self.frame_8)
+        self.horizontalLayout_40.setObjectName(u"horizontalLayout_40")
+        self.frame_70 = QFrame(self.frame_8)
+        self.frame_70.setObjectName(u"frame_70")
+        self.frame_70.setMinimumSize(QSize(250, 0))
+        self.frame_70.setMaximumSize(QSize(250, 16777215))
+        self.frame_70.setFrameShape(QFrame.NoFrame)
+        self.frame_70.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_56 = QVBoxLayout(self.frame_70)
+        self.verticalLayout_56.setSpacing(0)
+        self.verticalLayout_56.setObjectName(u"verticalLayout_56")
+        self.verticalLayout_56.setContentsMargins(0, 0, 0, 0)
+        self.wizard_treeView = QTreeView(self.frame_70)
+        self.wizard_treeView.setObjectName(u"wizard_treeView")
+        self.wizard_treeView.setMinimumSize(QSize(0, 0))
+        self.wizard_treeView.setMaximumSize(QSize(16777215, 16777215))
+        font4 = QFont()
+        font4.setFamily(u"Arial")
+        font4.setPointSize(12)
+        self.wizard_treeView.setFont(font4)
+        self.wizard_treeView.setFrameShape(QFrame.NoFrame)
+        self.wizard_treeView.setEditTriggers(QAbstractItemView.DoubleClicked)
+        self.wizard_treeView.setAlternatingRowColors(False)
+        self.wizard_treeView.setHeaderHidden(True)
+
+        self.verticalLayout_56.addWidget(self.wizard_treeView)
+
+        self.frame_74 = QFrame(self.frame_70)
+        self.frame_74.setObjectName(u"frame_74")
+        self.frame_74.setFrameShape(QFrame.NoFrame)
+        self.frame_74.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_43 = QHBoxLayout(self.frame_74)
+        self.horizontalLayout_43.setObjectName(u"horizontalLayout_43")
+        self.wizard_clear_answers_bn = QPushButton(self.frame_74)
+        self.wizard_clear_answers_bn.setObjectName(u"wizard_clear_answers_bn")
+        self.wizard_clear_answers_bn.setMinimumSize(QSize(140, 30))
+        self.wizard_clear_answers_bn.setFont(font4)
+        self.wizard_clear_answers_bn.setStyleSheet(u"QPushButton {\n"
+"	border: none;\n"
+"	background-color: rgb(64,144,253);\n"
+"	border-radius: 15px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}")
+
+        self.horizontalLayout_43.addWidget(self.wizard_clear_answers_bn)
+
+        self.horizontalSpacer_85 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_43.addItem(self.horizontalSpacer_85)
+
+
+        self.verticalLayout_56.addWidget(self.frame_74)
+
+
+        self.horizontalLayout_40.addWidget(self.frame_70)
+
+        self.frame_65 = QFrame(self.frame_8)
+        self.frame_65.setObjectName(u"frame_65")
+        self.frame_65.setMinimumSize(QSize(0, 0))
+        self.frame_65.setFrameShape(QFrame.NoFrame)
+        self.frame_65.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_51 = QVBoxLayout(self.frame_65)
+        self.verticalLayout_51.setSpacing(20)
+        self.verticalLayout_51.setObjectName(u"verticalLayout_51")
+        self.frame_66 = QFrame(self.frame_65)
+        self.frame_66.setObjectName(u"frame_66")
+        self.frame_66.setMinimumSize(QSize(0, 100))
+        self.frame_66.setMaximumSize(QSize(16777215, 100))
+        self.frame_66.setFrameShape(QFrame.NoFrame)
+        self.frame_66.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_38 = QHBoxLayout(self.frame_66)
+        self.horizontalLayout_38.setSpacing(0)
+        self.horizontalLayout_38.setObjectName(u"horizontalLayout_38")
+        self.horizontalLayout_38.setContentsMargins(0, 0, 0, 0)
+        self.horizontalSpacer_82 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_38.addItem(self.horizontalSpacer_82)
+
+        self.wizard_question_wizard_icon = QPushButton(self.frame_66)
+        self.wizard_question_wizard_icon.setObjectName(u"wizard_question_wizard_icon")
+        self.wizard_question_wizard_icon.setMinimumSize(QSize(194, 85))
+        self.wizard_question_wizard_icon.setMaximumSize(QSize(194, 85))
+        self.wizard_question_wizard_icon.setStyleSheet(u"QPushButton {\n"
+"	border: none;\n"
+"	background-color: rgb(255,255,255);\n"
+"	border-radius: 10px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(200,200,200);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(200,200,200);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"")
+        self.wizard_question_wizard_icon.setIconSize(QSize(184, 75))
+
+        self.horizontalLayout_38.addWidget(self.wizard_question_wizard_icon)
+
+
+        self.verticalLayout_51.addWidget(self.frame_66)
+
+        self.wizard_quest_frame = QFrame(self.frame_65)
+        self.wizard_quest_frame.setObjectName(u"wizard_quest_frame")
+        self.wizard_quest_frame.setStyleSheet(u"#wizard_quest_frame {\n"
+"border: 5px solid rgb(64,144,253);\n"
+"border-radius: 35px;\n"
+"}")
+        self.wizard_quest_frame.setFrameShape(QFrame.NoFrame)
+        self.wizard_quest_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_52 = QVBoxLayout(self.wizard_quest_frame)
+        self.verticalLayout_52.setSpacing(0)
+        self.verticalLayout_52.setObjectName(u"verticalLayout_52")
+        self.verticalLayout_52.setContentsMargins(30, 30, 30, 30)
+        self.wizard_question = QLabel(self.wizard_quest_frame)
+        self.wizard_question.setObjectName(u"wizard_question")
+        self.wizard_question.setMinimumSize(QSize(0, 100))
+        self.wizard_question.setFont(font)
+        self.wizard_question.setStyleSheet(u"")
+        self.wizard_question.setFrameShape(QFrame.NoFrame)
+        self.wizard_question.setFrameShadow(QFrame.Plain)
+        self.wizard_question.setWordWrap(True)
+
+        self.verticalLayout_52.addWidget(self.wizard_question)
+
+
+        self.verticalLayout_51.addWidget(self.wizard_quest_frame)
+
+        self.wizard_question_answer = QComboBox(self.frame_65)
+        self.wizard_question_answer.setObjectName(u"wizard_question_answer")
+        self.wizard_question_answer.setMinimumSize(QSize(0, 0))
+        self.wizard_question_answer.setFont(font4)
+
+        self.verticalLayout_51.addWidget(self.wizard_question_answer)
+
+        self.wizard_path_input_frame = QFrame(self.frame_65)
+        self.wizard_path_input_frame.setObjectName(u"wizard_path_input_frame")
+        self.wizard_path_input_frame.setFrameShape(QFrame.NoFrame)
+        self.wizard_path_input_frame.setFrameShadow(QFrame.Raised)
+        self.gridLayout_80 = QGridLayout(self.wizard_path_input_frame)
+        self.gridLayout_80.setObjectName(u"gridLayout_80")
+        self.gridLayout_80.setContentsMargins(0, 0, 0, 0)
+        self.horizontalSpacer_86 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_80.addItem(self.horizontalSpacer_86, 1, 2, 1, 1)
+
+        self.wizard_path_input = QLineEdit(self.wizard_path_input_frame)
+        self.wizard_path_input.setObjectName(u"wizard_path_input")
+        self.wizard_path_input.setMinimumSize(QSize(500, 30))
+        self.wizard_path_input.setMaximumSize(QSize(500, 16777215))
+        self.wizard_path_input.setFont(font4)
+
+        self.gridLayout_80.addWidget(self.wizard_path_input, 1, 0, 1, 1)
+
+        self.label_112 = QLabel(self.wizard_path_input_frame)
+        self.label_112.setObjectName(u"label_112")
+        self.label_112.setFont(font4)
+
+        self.gridLayout_80.addWidget(self.label_112, 0, 0, 1, 1)
+
+        self.wizard_path_input_bn = QPushButton(self.wizard_path_input_frame)
+        self.wizard_path_input_bn.setObjectName(u"wizard_path_input_bn")
+        self.wizard_path_input_bn.setFont(font4)
+
+        self.gridLayout_80.addWidget(self.wizard_path_input_bn, 1, 1, 1, 1)
+
+
+        self.verticalLayout_51.addWidget(self.wizard_path_input_frame)
+
+        self.verticalSpacer_31 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_51.addItem(self.verticalSpacer_31)
+
+        self.frame_52 = QFrame(self.frame_65)
+        self.frame_52.setObjectName(u"frame_52")
+        self.frame_52.setMinimumSize(QSize(0, 50))
+        self.frame_52.setMaximumSize(QSize(16777215, 50))
+        self.frame_52.setFrameShape(QFrame.NoFrame)
+        self.frame_52.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_37 = QHBoxLayout(self.frame_52)
+        self.horizontalLayout_37.setSpacing(0)
+        self.horizontalLayout_37.setObjectName(u"horizontalLayout_37")
+        self.horizontalLayout_37.setContentsMargins(0, 0, 0, 0)
+        self.wizard_back_bn = QPushButton(self.frame_52)
+        self.wizard_back_bn.setObjectName(u"wizard_back_bn")
+        self.wizard_back_bn.setMinimumSize(QSize(100, 35))
+        font5 = QFont()
+        font5.setFamily(u"Arial")
+        font5.setPointSize(20)
+        self.wizard_back_bn.setFont(font5)
+        self.wizard_back_bn.setStyleSheet(u"QPushButton {\n"
+"	border: none;\n"
+"	background-color: rgb(64,144,253);\n"
+"	border-radius: 15px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}")
+
+        self.horizontalLayout_37.addWidget(self.wizard_back_bn)
+
+        self.horizontalSpacer_81 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_37.addItem(self.horizontalSpacer_81)
+
+        self.wizard_cont_bn = QPushButton(self.frame_52)
+        self.wizard_cont_bn.setObjectName(u"wizard_cont_bn")
+        self.wizard_cont_bn.setMinimumSize(QSize(100, 35))
+        self.wizard_cont_bn.setFont(font5)
+        self.wizard_cont_bn.setStyleSheet(u"QPushButton {\n"
+"	border: none;\n"
+"	background-color: rgb(64,144,253);\n"
+"	border-radius: 15px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}")
+
+        self.horizontalLayout_37.addWidget(self.wizard_cont_bn)
+
+
+        self.verticalLayout_51.addWidget(self.frame_52)
+
+
+        self.horizontalLayout_40.addWidget(self.frame_65)
+
+
+        self.verticalLayout_49.addWidget(self.frame_8)
+
+        self.wizard_main_frame.addWidget(self.questionary_page)
+        self.summary_page = QWidget()
+        self.summary_page.setObjectName(u"summary_page")
+        self.frame_71 = QFrame(self.summary_page)
+        self.frame_71.setObjectName(u"frame_71")
+        self.frame_71.setGeometry(QRect(9, 9, 974, 541))
+        self.frame_71.setFrameShape(QFrame.StyledPanel)
+        self.frame_71.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_50 = QVBoxLayout(self.frame_71)
+        self.verticalLayout_50.setObjectName(u"verticalLayout_50")
+        self.verticalLayout_50.setContentsMargins(0, 0, 0, 0)
+        self.frame_72 = QFrame(self.frame_71)
+        self.frame_72.setObjectName(u"frame_72")
+        self.frame_72.setMinimumSize(QSize(0, 450))
+        self.frame_72.setFrameShape(QFrame.StyledPanel)
+        self.frame_72.setFrameShadow(QFrame.Raised)
+        self.gridLayout_79 = QGridLayout(self.frame_72)
+        self.gridLayout_79.setObjectName(u"gridLayout_79")
+        self.label_24 = QLabel(self.frame_72)
+        self.label_24.setObjectName(u"label_24")
+
+        self.gridLayout_79.addWidget(self.label_24, 1, 0, 1, 1)
+
+        self.label_44 = QLabel(self.frame_72)
+        self.label_44.setObjectName(u"label_44")
+
+        self.gridLayout_79.addWidget(self.label_44, 2, 0, 1, 1)
+
+        self.label_101 = QLabel(self.frame_72)
+        self.label_101.setObjectName(u"label_101")
+
+        self.gridLayout_79.addWidget(self.label_101, 4, 0, 1, 1)
+
+        self.label_75 = QLabel(self.frame_72)
+        self.label_75.setObjectName(u"label_75")
+
+        self.gridLayout_79.addWidget(self.label_75, 3, 0, 1, 1)
+
+        self.label_108 = QLabel(self.frame_72)
+        self.label_108.setObjectName(u"label_108")
+
+        self.gridLayout_79.addWidget(self.label_108, 0, 0, 1, 1)
+
+
+        self.verticalLayout_50.addWidget(self.frame_72)
+
+        self.frame_73 = QFrame(self.frame_71)
+        self.frame_73.setObjectName(u"frame_73")
+        self.frame_73.setFrameShape(QFrame.StyledPanel)
+        self.frame_73.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_42 = QHBoxLayout(self.frame_73)
+        self.horizontalLayout_42.setObjectName(u"horizontalLayout_42")
+        self.wizard_summary_back_bn = QPushButton(self.frame_73)
+        self.wizard_summary_back_bn.setObjectName(u"wizard_summary_back_bn")
+        self.wizard_summary_back_bn.setMinimumSize(QSize(91, 24))
+        font6 = QFont()
+        font6.setPointSize(12)
+        self.wizard_summary_back_bn.setFont(font6)
+        self.wizard_summary_back_bn.setStyleSheet(u"QPushButton {\n"
+"	border: none;\n"
+"	background-color: rgba(0,0,0,0);\n"
+"}\n"
+"QPushButton:hover {\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}")
+        self.wizard_summary_back_bn.setIconSize(QSize(80, 14))
+
+        self.horizontalLayout_42.addWidget(self.wizard_summary_back_bn)
+
+        self.horizontalSpacer_83 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_42.addItem(self.horizontalSpacer_83)
+
+        self.pushButton = QPushButton(self.frame_73)
+        self.pushButton.setObjectName(u"pushButton")
+        self.pushButton.setMinimumSize(QSize(180, 35))
+        self.pushButton.setFont(font4)
+        self.pushButton.setStyleSheet(u"QPushButton {\n"
+"	border: none;\n"
+"	background-color: rgb(64,144,253);\n"
+"	border-radius: 15px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}")
+
+        self.horizontalLayout_42.addWidget(self.pushButton)
+
+        self.horizontalSpacer_84 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_42.addItem(self.horizontalSpacer_84)
+
+
+        self.verticalLayout_50.addWidget(self.frame_73, 0, Qt.AlignVCenter)
+
+        self.wizard_main_frame.addWidget(self.summary_page)
+        self.end_page = QWidget()
+        self.end_page.setObjectName(u"end_page")
+        self.wizard_main_frame.addWidget(self.end_page)
+
+        self.verticalLayout_48.addWidget(self.wizard_main_frame)
+
+        self.stackedWidget.addWidget(self.page_wizard)
         self.page_create_yaml = QWidget()
         self.page_create_yaml.setObjectName(u"page_create_yaml")
         self.page_create_yaml.setStyleSheet(u"background:rgb(255,255,255);")
@@ -1077,7 +1543,7 @@ class Ui_MainWindow(object):
         self.workflow_selection_page.setMinimumSize(QSize(0, 0))
         self.page_create_yaml_mid_frame = QFrame(self.workflow_selection_page)
         self.page_create_yaml_mid_frame.setObjectName(u"page_create_yaml_mid_frame")
-        self.page_create_yaml_mid_frame.setGeometry(QRect(0, 0, 947, 443))
+        self.page_create_yaml_mid_frame.setGeometry(QRect(0, 0, 947, 435))
         self.page_create_yaml_mid_frame.setFont(font)
         self.page_create_yaml_mid_frame.setFrameShape(QFrame.NoFrame)
         self.page_create_yaml_mid_frame.setFrameShadow(QFrame.Raised)
@@ -1096,13 +1562,13 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	border: 2px solid rgb(0, 0, 0);\n"
 "}")
-        icon8 = QIcon()
-        icon8.addFile(u"images/bn_images/left_arrow.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.left_arrow_bn.setIcon(icon8)
+        icon2 = QIcon()
+        icon2.addFile(u"images/bn_images/left_arrow.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.left_arrow_bn.setIcon(icon2)
         self.left_arrow_bn.setIconSize(QSize(32, 32))
         self.workflow_view1_frame = QFrame(self.page_create_yaml_mid_frame)
         self.workflow_view1_frame.setObjectName(u"workflow_view1_frame")
-        self.workflow_view1_frame.setGeometry(QRect(35, 0, 267, 440))
+        self.workflow_view1_frame.setGeometry(QRect(35, 0, 267, 435))
         sizePolicy1.setHeightForWidth(self.workflow_view1_frame.sizePolicy().hasHeightForWidth())
         self.workflow_view1_frame.setSizePolicy(sizePolicy1)
         self.workflow_view1_frame.setMinimumSize(QSize(0, 0))
@@ -1144,10 +1610,10 @@ class Ui_MainWindow(object):
         self.workflow_view1_seemore_bn = QPushButton(self.frame_17)
         self.workflow_view1_seemore_bn.setObjectName(u"workflow_view1_seemore_bn")
         self.workflow_view1_seemore_bn.setMinimumSize(QSize(140, 30))
-        font4 = QFont()
-        font4.setFamily(u"DejaVu Math TeX Gyre")
-        font4.setPointSize(11)
-        self.workflow_view1_seemore_bn.setFont(font4)
+        font7 = QFont()
+        font7.setFamily(u"DejaVu Math TeX Gyre")
+        font7.setPointSize(11)
+        self.workflow_view1_seemore_bn.setFont(font7)
         self.workflow_view1_seemore_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgb(255,255,255);\n"
@@ -1186,7 +1652,7 @@ class Ui_MainWindow(object):
 
         self.workflow_view2_frame = QFrame(self.page_create_yaml_mid_frame)
         self.workflow_view2_frame.setObjectName(u"workflow_view2_frame")
-        self.workflow_view2_frame.setGeometry(QRect(340, 0, 267, 440))
+        self.workflow_view2_frame.setGeometry(QRect(340, 0, 267, 435))
         self.workflow_view2_frame.setMinimumSize(QSize(0, 0))
         self.workflow_view2_frame.setMaximumSize(QSize(267, 16777215))
         self.workflow_view2_frame.setFont(font)
@@ -1227,7 +1693,7 @@ class Ui_MainWindow(object):
         self.workflow_view2_seemore_bn = QPushButton(self.frame_59)
         self.workflow_view2_seemore_bn.setObjectName(u"workflow_view2_seemore_bn")
         self.workflow_view2_seemore_bn.setMinimumSize(QSize(140, 30))
-        self.workflow_view2_seemore_bn.setFont(font4)
+        self.workflow_view2_seemore_bn.setFont(font7)
         self.workflow_view2_seemore_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgb(255,255,255);\n"
@@ -1266,7 +1732,7 @@ class Ui_MainWindow(object):
 
         self.workflow_view3_frame = QFrame(self.page_create_yaml_mid_frame)
         self.workflow_view3_frame.setObjectName(u"workflow_view3_frame")
-        self.workflow_view3_frame.setGeometry(QRect(645, 0, 267, 440))
+        self.workflow_view3_frame.setGeometry(QRect(645, 0, 267, 435))
         self.workflow_view3_frame.setMaximumSize(QSize(267, 16777215))
         self.workflow_view3_frame.setFont(font)
         self.workflow_view3_frame.setStyleSheet(u"background:rgb(240,240,240);\n"
@@ -1305,7 +1771,7 @@ class Ui_MainWindow(object):
         self.workflow_view3_seemore_bn = QPushButton(self.frame_18)
         self.workflow_view3_seemore_bn.setObjectName(u"workflow_view3_seemore_bn")
         self.workflow_view3_seemore_bn.setMinimumSize(QSize(140, 30))
-        self.workflow_view3_seemore_bn.setFont(font4)
+        self.workflow_view3_seemore_bn.setFont(font7)
         self.workflow_view3_seemore_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgb(255,255,255);\n"
@@ -1357,13 +1823,13 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	border: 2px solid rgb(0, 0, 0);\n"
 "}")
-        icon9 = QIcon()
-        icon9.addFile(u"images/bn_images/right_arrow.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.right_arrow_bn.setIcon(icon9)
+        icon3 = QIcon()
+        icon3.addFile(u"images/bn_images/right_arrow.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.right_arrow_bn.setIcon(icon3)
         self.right_arrow_bn.setIconSize(QSize(32, 32))
         self.workflow_view4_frame = QFrame(self.page_create_yaml_mid_frame)
         self.workflow_view4_frame.setObjectName(u"workflow_view4_frame")
-        self.workflow_view4_frame.setGeometry(QRect(950, 0, 267, 440))
+        self.workflow_view4_frame.setGeometry(QRect(950, 0, 267, 435))
         self.workflow_view4_frame.setMaximumSize(QSize(267, 16777215))
         self.workflow_view4_frame.setFont(font)
         self.workflow_view4_frame.setStyleSheet(u"background:rgb(240,240,240);\n"
@@ -1402,7 +1868,7 @@ class Ui_MainWindow(object):
         self.workflow_view4_seemore_bn = QPushButton(self.frame_42)
         self.workflow_view4_seemore_bn.setObjectName(u"workflow_view4_seemore_bn")
         self.workflow_view4_seemore_bn.setMinimumSize(QSize(140, 30))
-        self.workflow_view4_seemore_bn.setFont(font4)
+        self.workflow_view4_seemore_bn.setFont(font7)
         self.workflow_view4_seemore_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgb(255,255,255);\n"
@@ -1441,7 +1907,7 @@ class Ui_MainWindow(object):
 
         self.workflow_view5_frame = QFrame(self.page_create_yaml_mid_frame)
         self.workflow_view5_frame.setObjectName(u"workflow_view5_frame")
-        self.workflow_view5_frame.setGeometry(QRect(1255, 0, 267, 440))
+        self.workflow_view5_frame.setGeometry(QRect(1255, 0, 267, 435))
         self.workflow_view5_frame.setMaximumSize(QSize(267, 16777215))
         self.workflow_view5_frame.setFont(font)
         self.workflow_view5_frame.setStyleSheet(u"background:rgb(240,240,240);\n"
@@ -1480,7 +1946,7 @@ class Ui_MainWindow(object):
         self.workflow_view5_seemore_bn = QPushButton(self.frame_53)
         self.workflow_view5_seemore_bn.setObjectName(u"workflow_view5_seemore_bn")
         self.workflow_view5_seemore_bn.setMinimumSize(QSize(140, 30))
-        self.workflow_view5_seemore_bn.setFont(font4)
+        self.workflow_view5_seemore_bn.setFont(font7)
         self.workflow_view5_seemore_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgb(255,255,255);\n"
@@ -1519,7 +1985,7 @@ class Ui_MainWindow(object):
 
         self.workflow_view6_frame = QFrame(self.page_create_yaml_mid_frame)
         self.workflow_view6_frame.setObjectName(u"workflow_view6_frame")
-        self.workflow_view6_frame.setGeometry(QRect(1560, 0, 267, 440))
+        self.workflow_view6_frame.setGeometry(QRect(1560, 0, 267, 435))
         self.workflow_view6_frame.setMaximumSize(QSize(267, 16777215))
         self.workflow_view6_frame.setFont(font)
         self.workflow_view6_frame.setStyleSheet(u"background:rgb(240,240,240);\n"
@@ -1558,7 +2024,7 @@ class Ui_MainWindow(object):
         self.workflow_view6_seemore_bn = QPushButton(self.frame_56)
         self.workflow_view6_seemore_bn.setObjectName(u"workflow_view6_seemore_bn")
         self.workflow_view6_seemore_bn.setMinimumSize(QSize(140, 30))
-        self.workflow_view6_seemore_bn.setFont(font4)
+        self.workflow_view6_seemore_bn.setFont(font7)
         self.workflow_view6_seemore_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgb(255,255,255);\n"
@@ -1597,7 +2063,7 @@ class Ui_MainWindow(object):
 
         self.workflow_view7_frame = QFrame(self.page_create_yaml_mid_frame)
         self.workflow_view7_frame.setObjectName(u"workflow_view7_frame")
-        self.workflow_view7_frame.setGeometry(QRect(1865, 0, 267, 440))
+        self.workflow_view7_frame.setGeometry(QRect(1865, 0, 267, 435))
         self.workflow_view7_frame.setMaximumSize(QSize(267, 16777215))
         self.workflow_view7_frame.setFont(font)
         self.workflow_view7_frame.setStyleSheet(u"background:rgb(240,240,240);\n"
@@ -1636,7 +2102,7 @@ class Ui_MainWindow(object):
         self.workflow_view7_seemore_bn = QPushButton(self.frame_60)
         self.workflow_view7_seemore_bn.setObjectName(u"workflow_view7_seemore_bn")
         self.workflow_view7_seemore_bn.setMinimumSize(QSize(140, 30))
-        self.workflow_view7_seemore_bn.setFont(font4)
+        self.workflow_view7_seemore_bn.setFont(font7)
         self.workflow_view7_seemore_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgb(255,255,255);\n"
@@ -1679,7 +2145,7 @@ class Ui_MainWindow(object):
         self.WORKFLOW_SELECTED_LABEL.setFont(font)
         self.workflow_view8_frame = QFrame(self.page_create_yaml_mid_frame)
         self.workflow_view8_frame.setObjectName(u"workflow_view8_frame")
-        self.workflow_view8_frame.setGeometry(QRect(2170, 0, 267, 440))
+        self.workflow_view8_frame.setGeometry(QRect(2170, 0, 267, 435))
         self.workflow_view8_frame.setMaximumSize(QSize(267, 16777215))
         self.workflow_view8_frame.setFont(font)
         self.workflow_view8_frame.setStyleSheet(u"background:rgb(240,240,240);\n"
@@ -1718,7 +2184,7 @@ class Ui_MainWindow(object):
         self.workflow_view8_seemore_bn = QPushButton(self.frame_62)
         self.workflow_view8_seemore_bn.setObjectName(u"workflow_view8_seemore_bn")
         self.workflow_view8_seemore_bn.setMinimumSize(QSize(140, 30))
-        self.workflow_view8_seemore_bn.setFont(font4)
+        self.workflow_view8_seemore_bn.setFont(font7)
         self.workflow_view8_seemore_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgb(255,255,255);\n"
@@ -1760,7 +2226,7 @@ class Ui_MainWindow(object):
         self.goptions_page.setObjectName(u"goptions_page")
         self.goptions_general_frame = QFrame(self.goptions_page)
         self.goptions_general_frame.setObjectName(u"goptions_general_frame")
-        self.goptions_general_frame.setGeometry(QRect(0, 0, 946, 441))
+        self.goptions_general_frame.setGeometry(QRect(0, 0, 946, 435))
         self.goptions_general_frame.setMinimumSize(QSize(921, 398))
         self.goptions_general_frame.setFont(font)
         self.goptions_general_frame.setFrameShape(QFrame.NoFrame)
@@ -1777,7 +2243,7 @@ class Ui_MainWindow(object):
         self.goptions_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 932, 493))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 929, 495))
         self.scrollAreaWidgetContents.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout.setObjectName(u"gridLayout")
@@ -1811,9 +2277,9 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	border: 2px solid rgb(0, 0, 0);\n"
 "}")
-        icon10 = QIcon()
-        icon10.addFile(u"images/bn_images/down_arrow.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.goptions_advanced_bn.setIcon(icon10)
+        icon4 = QIcon()
+        icon4.addFile(u"images/bn_images/down_arrow.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.goptions_advanced_bn.setIcon(icon4)
 
         self.gridLayout_28.addWidget(self.goptions_advanced_bn, 0, 1, 1, 1)
 
@@ -1935,7 +2401,7 @@ class Ui_MainWindow(object):
         self.goptions_advanced_options_scrollarea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 870, 284))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 864, 288))
         self.gridLayout_2 = QGridLayout(self.scrollAreaWidgetContents_2)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.label = QLabel(self.scrollAreaWidgetContents_2)
@@ -2287,7 +2753,7 @@ class Ui_MainWindow(object):
         self.train_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, -736, 985, 7417))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 946, 7435))
         self.scrollAreaWidgetContents_3.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout_3 = QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
@@ -2599,9 +3065,7 @@ class Ui_MainWindow(object):
         self.DATA__NORMALIZATION__PERC_UPPER__INFO.setObjectName(u"DATA__NORMALIZATION__PERC_UPPER__INFO")
         self.DATA__NORMALIZATION__PERC_UPPER__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__NORMALIZATION__PERC_UPPER__INFO.setMaximumSize(QSize(30, 30))
-        font5 = QFont()
-        font5.setPointSize(12)
-        self.DATA__NORMALIZATION__PERC_UPPER__INFO.setFont(font5)
+        self.DATA__NORMALIZATION__PERC_UPPER__INFO.setFont(font6)
         self.DATA__NORMALIZATION__PERC_UPPER__INFO.setScaledContents(True)
 
         self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__PERC_UPPER__INFO, 12, 3, 1, 1)
@@ -2670,7 +3134,7 @@ class Ui_MainWindow(object):
         self.DATA__NORMALIZATION__PERC_CLIP__INFO.setObjectName(u"DATA__NORMALIZATION__PERC_CLIP__INFO")
         self.DATA__NORMALIZATION__PERC_CLIP__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__NORMALIZATION__PERC_CLIP__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__NORMALIZATION__PERC_CLIP__INFO.setFont(font5)
+        self.DATA__NORMALIZATION__PERC_CLIP__INFO.setFont(font6)
         self.DATA__NORMALIZATION__PERC_CLIP__INFO.setScaledContents(True)
 
         self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__PERC_CLIP__INFO, 10, 3, 1, 1)
@@ -2779,7 +3243,7 @@ class Ui_MainWindow(object):
         self.DATA__NORMALIZATION__PERC_LOWER__INFO.setObjectName(u"DATA__NORMALIZATION__PERC_LOWER__INFO")
         self.DATA__NORMALIZATION__PERC_LOWER__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__NORMALIZATION__PERC_LOWER__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__NORMALIZATION__PERC_LOWER__INFO.setFont(font5)
+        self.DATA__NORMALIZATION__PERC_LOWER__INFO.setFont(font6)
         self.DATA__NORMALIZATION__PERC_LOWER__INFO.setScaledContents(True)
 
         self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__PERC_LOWER__INFO, 11, 3, 1, 1)
@@ -5698,9 +6162,9 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__RESIZE__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__INFO")
         self.DATA__PREPROCESS__RESIZE__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__RESIZE__INFO.setMaximumSize(QSize(30, 30))
-        font6 = QFont()
-        font6.setFamily(u"URW Gothic [urw]")
-        self.DATA__PREPROCESS__RESIZE__INFO.setFont(font6)
+        font8 = QFont()
+        font8.setFamily(u"URW Gothic [urw]")
+        self.DATA__PREPROCESS__RESIZE__INFO.setFont(font8)
         self.DATA__PREPROCESS__RESIZE__INFO.setScaledContents(True)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__INFO, 0, 1, 1, 1)
@@ -6410,7 +6874,7 @@ class Ui_MainWindow(object):
         self.TRAIN__VERBOSE__INFO.setObjectName(u"TRAIN__VERBOSE__INFO")
         self.TRAIN__VERBOSE__INFO.setMinimumSize(QSize(30, 30))
         self.TRAIN__VERBOSE__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__VERBOSE__INFO.setFont(font5)
+        self.TRAIN__VERBOSE__INFO.setFont(font6)
         self.TRAIN__VERBOSE__INFO.setScaledContents(True)
 
         self.gridLayout_29.addWidget(self.TRAIN__VERBOSE__INFO, 24, 1, 1, 1)
@@ -7187,7 +7651,7 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	border: 2px solid rgb(0, 0, 0);\n"
 "}")
-        self.train_advanced_bn.setIcon(icon10)
+        self.train_advanced_bn.setIcon(icon4)
 
         self.horizontalLayout_10.addWidget(self.train_advanced_bn)
 
@@ -7242,7 +7706,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_6 = QWidget()
         self.scrollAreaWidgetContents_6.setObjectName(u"scrollAreaWidgetContents_6")
-        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, -13, 915, 337))
+        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 526, 339))
         self.gridLayout_18 = QGridLayout(self.scrollAreaWidgetContents_6)
         self.gridLayout_18.setObjectName(u"gridLayout_18")
         self.verticalSpacer_8 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -7458,7 +7922,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 929, 324))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 865, 183))
         self.gridLayout_17 = QGridLayout(self.scrollAreaWidgetContents_4)
         self.gridLayout_17.setObjectName(u"gridLayout_17")
         self.verticalSpacer_9 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -7656,7 +8120,7 @@ class Ui_MainWindow(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollAreaWidgetContents_7 = QWidget()
         self.scrollAreaWidgetContents_7.setObjectName(u"scrollAreaWidgetContents_7")
-        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 929, 324))
+        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 927, 323))
         self.gridLayout_19 = QGridLayout(self.scrollAreaWidgetContents_7)
         self.gridLayout_19.setObjectName(u"gridLayout_19")
         self.label_48 = QLabel(self.scrollAreaWidgetContents_7)
@@ -7824,7 +8288,7 @@ class Ui_MainWindow(object):
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollAreaWidgetContents_8 = QWidget()
         self.scrollAreaWidgetContents_8.setObjectName(u"scrollAreaWidgetContents_8")
-        self.scrollAreaWidgetContents_8.setGeometry(QRect(0, 0, 926, 334))
+        self.scrollAreaWidgetContents_8.setGeometry(QRect(0, 0, 542, 210))
         self.gridLayout_49 = QGridLayout(self.scrollAreaWidgetContents_8)
         self.gridLayout_49.setObjectName(u"gridLayout_49")
         self.frame_44 = QFrame(self.scrollAreaWidgetContents_8)
@@ -7971,7 +8435,7 @@ class Ui_MainWindow(object):
         self.scrollArea_5.setWidgetResizable(True)
         self.scrollAreaWidgetContents_9 = QWidget()
         self.scrollAreaWidgetContents_9.setObjectName(u"scrollAreaWidgetContents_9")
-        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, 0, 926, 334))
+        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, 0, 362, 184))
         self.gridLayout_50 = QGridLayout(self.scrollAreaWidgetContents_9)
         self.gridLayout_50.setObjectName(u"gridLayout_50")
         self.sr_unet_like_heading = QLabel(self.scrollAreaWidgetContents_9)
@@ -8081,7 +8545,7 @@ class Ui_MainWindow(object):
         self.scrollArea_6.setWidgetResizable(True)
         self.scrollAreaWidgetContents_10 = QWidget()
         self.scrollAreaWidgetContents_10.setObjectName(u"scrollAreaWidgetContents_10")
-        self.scrollAreaWidgetContents_10.setGeometry(QRect(0, 0, 926, 334))
+        self.scrollAreaWidgetContents_10.setGeometry(QRect(0, 0, 412, 173))
         self.gridLayout_51 = QGridLayout(self.scrollAreaWidgetContents_10)
         self.gridLayout_51.setObjectName(u"gridLayout_51")
         self.label_96 = QLabel(self.scrollAreaWidgetContents_10)
@@ -8204,7 +8668,7 @@ class Ui_MainWindow(object):
         self.scrollArea_7.setWidgetResizable(True)
         self.scrollAreaWidgetContents_11 = QWidget()
         self.scrollAreaWidgetContents_11.setObjectName(u"scrollAreaWidgetContents_11")
-        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, 0, 926, 334))
+        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, 0, 346, 44))
         self.gridLayout_52 = QGridLayout(self.scrollAreaWidgetContents_11)
         self.gridLayout_52.setObjectName(u"gridLayout_52")
         self.horizontalSpacer_42 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
@@ -8367,7 +8831,7 @@ class Ui_MainWindow(object):
         self.test_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 915, 2250))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 854, 2262))
         self.gridLayout_37 = QGridLayout(self.scrollAreaWidgetContents_5)
         self.gridLayout_37.setObjectName(u"gridLayout_37")
         self.test_advanced_options_frame = QFrame(self.scrollAreaWidgetContents_5)
@@ -9501,7 +9965,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__RESIZE__TEST__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__TEST__INFO")
         self.DATA__PREPROCESS__RESIZE__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__RESIZE__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__TEST__INFO.setFont(font6)
+        self.DATA__PREPROCESS__RESIZE__TEST__INFO.setFont(font8)
         self.DATA__PREPROCESS__RESIZE__TEST__INFO.setScaledContents(True)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__TEST__INFO, 0, 1, 1, 1)
@@ -9704,7 +10168,7 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	border: 2px solid rgb(0, 0, 0);\n"
 "}")
-        self.test_advanced_bn.setIcon(icon10)
+        self.test_advanced_bn.setIcon(icon4)
 
         self.horizontalLayout_14.addWidget(self.test_advanced_bn)
 
@@ -9903,7 +10367,7 @@ class Ui_MainWindow(object):
         self.scrollArea_8.setWidgetResizable(True)
         self.scrollAreaWidgetContents_12 = QWidget()
         self.scrollAreaWidgetContents_12.setObjectName(u"scrollAreaWidgetContents_12")
-        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 928, 331))
+        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 486, 293))
         self.gridLayout_61 = QGridLayout(self.scrollAreaWidgetContents_12)
         self.gridLayout_61.setObjectName(u"gridLayout_61")
         self.label_82 = QLabel(self.scrollAreaWidgetContents_12)
@@ -10091,7 +10555,7 @@ class Ui_MainWindow(object):
         self.scrollArea_9.setWidgetResizable(True)
         self.scrollAreaWidgetContents_13 = QWidget()
         self.scrollAreaWidgetContents_13.setObjectName(u"scrollAreaWidgetContents_13")
-        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, -947, 914, 1363))
+        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 911, 1369))
         self.gridLayout_44 = QGridLayout(self.scrollAreaWidgetContents_13)
         self.gridLayout_44.setObjectName(u"gridLayout_44")
         self.label_86 = QLabel(self.scrollAreaWidgetContents_13)
@@ -10968,7 +11432,7 @@ class Ui_MainWindow(object):
         self.scrollArea_10.setWidgetResizable(True)
         self.scrollAreaWidgetContents_14 = QWidget()
         self.scrollAreaWidgetContents_14.setObjectName(u"scrollAreaWidgetContents_14")
-        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 914, 1056))
+        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 555, 1060))
         self.gridLayout_47 = QGridLayout(self.scrollAreaWidgetContents_14)
         self.gridLayout_47.setObjectName(u"gridLayout_47")
         self.label_100 = QLabel(self.scrollAreaWidgetContents_14)
@@ -11644,7 +12108,7 @@ class Ui_MainWindow(object):
         self.scrollArea_11.setWidgetResizable(True)
         self.scrollAreaWidgetContents_15 = QWidget()
         self.scrollAreaWidgetContents_15.setObjectName(u"scrollAreaWidgetContents_15")
-        self.scrollAreaWidgetContents_15.setGeometry(QRect(0, 0, 928, 331))
+        self.scrollAreaWidgetContents_15.setGeometry(QRect(0, 0, 326, 44))
         self.gridLayout_64 = QGridLayout(self.scrollAreaWidgetContents_15)
         self.gridLayout_64.setObjectName(u"gridLayout_64")
         self.verticalSpacer_27 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -11678,7 +12142,7 @@ class Ui_MainWindow(object):
         self.scrollArea_12.setWidgetResizable(True)
         self.scrollAreaWidgetContents_16 = QWidget()
         self.scrollAreaWidgetContents_16.setObjectName(u"scrollAreaWidgetContents_16")
-        self.scrollAreaWidgetContents_16.setGeometry(QRect(0, 0, 928, 331))
+        self.scrollAreaWidgetContents_16.setGeometry(QRect(0, 0, 372, 44))
         self.gridLayout_65 = QGridLayout(self.scrollAreaWidgetContents_16)
         self.gridLayout_65.setObjectName(u"gridLayout_65")
         self.label_102 = QLabel(self.scrollAreaWidgetContents_16)
@@ -11712,7 +12176,7 @@ class Ui_MainWindow(object):
         self.scrollArea_13.setWidgetResizable(True)
         self.scrollAreaWidgetContents_17 = QWidget()
         self.scrollAreaWidgetContents_17.setObjectName(u"scrollAreaWidgetContents_17")
-        self.scrollAreaWidgetContents_17.setGeometry(QRect(0, 0, 928, 331))
+        self.scrollAreaWidgetContents_17.setGeometry(QRect(0, 0, 425, 44))
         self.gridLayout_66 = QGridLayout(self.scrollAreaWidgetContents_17)
         self.gridLayout_66.setObjectName(u"gridLayout_66")
         self.label_106 = QLabel(self.scrollAreaWidgetContents_17)
@@ -11746,7 +12210,7 @@ class Ui_MainWindow(object):
         self.scrollArea_14.setWidgetResizable(True)
         self.scrollAreaWidgetContents_18 = QWidget()
         self.scrollAreaWidgetContents_18.setObjectName(u"scrollAreaWidgetContents_18")
-        self.scrollAreaWidgetContents_18.setGeometry(QRect(0, 0, 928, 331))
+        self.scrollAreaWidgetContents_18.setGeometry(QRect(0, 0, 346, 44))
         self.gridLayout_67 = QGridLayout(self.scrollAreaWidgetContents_18)
         self.gridLayout_67.setObjectName(u"gridLayout_67")
         self.label_111 = QLabel(self.scrollAreaWidgetContents_18)
@@ -11810,12 +12274,12 @@ class Ui_MainWindow(object):
         self.page_create_yaml_bottom_frame.setObjectName(u"page_create_yaml_bottom_frame")
         self.page_create_yaml_bottom_frame.setMinimumSize(QSize(0, 103))
         self.page_create_yaml_bottom_frame.setMaximumSize(QSize(16777215, 16777215))
-        font7 = QFont()
-        font7.setFamily(u"DejaVu Math TeX Gyre")
-        font7.setPointSize(12)
-        font7.setBold(False)
-        font7.setWeight(50)
-        self.page_create_yaml_bottom_frame.setFont(font7)
+        font9 = QFont()
+        font9.setFamily(u"DejaVu Math TeX Gyre")
+        font9.setPointSize(12)
+        font9.setBold(False)
+        font9.setWeight(50)
+        self.page_create_yaml_bottom_frame.setFont(font9)
         self.page_create_yaml_bottom_frame.setFrameShape(QFrame.NoFrame)
         self.page_create_yaml_bottom_frame.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_8 = QHBoxLayout(self.page_create_yaml_bottom_frame)
@@ -11829,7 +12293,7 @@ class Ui_MainWindow(object):
         self.frame_20.setFrameShadow(QFrame.Raised)
         self.back_bn = QPushButton(self.frame_20)
         self.back_bn.setObjectName(u"back_bn")
-        self.back_bn.setGeometry(QRect(0, 0, 91, 23))
+        self.back_bn.setGeometry(QRect(0, 0, 91, 24))
         self.back_bn.setFont(font)
         self.back_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
@@ -11841,9 +12305,9 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	border: 2px solid rgb(0, 0, 0);\n"
 "}")
-        icon11 = QIcon()
-        icon11.addFile(u"images/bn_images/back.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.back_bn.setIcon(icon11)
+        icon5 = QIcon()
+        icon5.addFile(u"images/bn_images/back.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.back_bn.setIcon(icon5)
         self.back_bn.setIconSize(QSize(80, 12))
 
         self.horizontalLayout_8.addWidget(self.frame_20)
@@ -11860,13 +12324,13 @@ class Ui_MainWindow(object):
         self.continue_bn.setObjectName(u"continue_bn")
         self.continue_bn.setMinimumSize(QSize(0, 40))
         self.continue_bn.setMaximumSize(QSize(220, 77))
-        font8 = QFont()
-        font8.setFamily(u"DejaVu Math TeX Gyre")
-        font8.setPointSize(12)
-        font8.setBold(False)
-        font8.setWeight(50)
-        font8.setStrikeOut(False)
-        self.continue_bn.setFont(font8)
+        font10 = QFont()
+        font10.setFamily(u"DejaVu Math TeX Gyre")
+        font10.setPointSize(12)
+        font10.setBold(False)
+        font10.setWeight(50)
+        font10.setStrikeOut(False)
+        self.continue_bn.setFont(font10)
         self.continue_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgb(64,144,253);\n"
@@ -11918,9 +12382,9 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(255,255,255);\n"
 "}")
-        icon12 = QIcon()
-        icon12.addFile(u"images/bn_images/dot_enable.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.window1_bn.setIcon(icon12)
+        icon6 = QIcon()
+        icon6.addFile(u"images/bn_images/dot_enable.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.window1_bn.setIcon(icon6)
         self.window1_bn.setIconSize(QSize(12, 12))
 
         self.horizontalLayout_11.addWidget(self.window1_bn)
@@ -11939,9 +12403,9 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(255,255,255);\n"
 "}")
-        icon13 = QIcon()
-        icon13.addFile(u"images/bn_images/dot_disable.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.window2_bn.setIcon(icon13)
+        icon7 = QIcon()
+        icon7.addFile(u"images/bn_images/dot_disable.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.window2_bn.setIcon(icon7)
         self.window2_bn.setIconSize(QSize(12, 12))
 
         self.horizontalLayout_11.addWidget(self.window2_bn)
@@ -11961,7 +12425,7 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(255,255,255);\n"
 "}")
-        self.window3_bn.setIcon(icon13)
+        self.window3_bn.setIcon(icon7)
         self.window3_bn.setIconSize(QSize(12, 12))
         self.window3_bn.setAutoRepeatInterval(100)
 
@@ -11981,7 +12445,7 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(255,255,255);\n"
 "}")
-        self.window4_bn.setIcon(icon13)
+        self.window4_bn.setIcon(icon7)
         self.window4_bn.setIconSize(QSize(12, 12))
 
         self.horizontalLayout_11.addWidget(self.window4_bn)
@@ -12073,10 +12537,10 @@ class Ui_MainWindow(object):
         self.run_biapy_docker_bn.setObjectName(u"run_biapy_docker_bn")
         self.run_biapy_docker_bn.setMinimumSize(QSize(300, 40))
         self.run_biapy_docker_bn.setMaximumSize(QSize(300, 16777215))
-        font9 = QFont()
-        font9.setFamily(u"DejaVu Math TeX Gyre")
-        font9.setPointSize(20)
-        self.run_biapy_docker_bn.setFont(font9)
+        font11 = QFont()
+        font11.setFamily(u"DejaVu Math TeX Gyre")
+        font11.setPointSize(20)
+        self.run_biapy_docker_bn.setFont(font11)
         self.run_biapy_docker_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgb(64,144,253);\n"
@@ -12154,7 +12618,7 @@ class Ui_MainWindow(object):
         self.check_yaml_file_errors_frame.setWidgetResizable(True)
         self.scrollAreaWidgetContents_19 = QWidget()
         self.scrollAreaWidgetContents_19.setObjectName(u"scrollAreaWidgetContents_19")
-        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 34, 19))
+        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 896, 101))
         self.verticalLayout_32 = QVBoxLayout(self.scrollAreaWidgetContents_19)
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
         self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)
@@ -12302,7 +12766,8 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.stackedWidget.setCurrentIndex(1)
-        self.stackedWidget_create_yaml_frame.setCurrentIndex(2)
+        self.wizard_main_frame.setCurrentIndex(1)
+        self.stackedWidget_create_yaml_frame.setCurrentIndex(0)
         self.train_tab_widget.setCurrentIndex(0)
         self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(2)
         self.test_tab_widget.setCurrentIndex(0)
@@ -12320,6 +12785,7 @@ class Ui_MainWindow(object):
         self.bn_home.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.bn_home.setText("")
+        self.bn_wizard.setText("")
 #if QT_CONFIG(tooltip)
         self.bn_workflow.setToolTip("")
 #endif // QT_CONFIG(tooltip)
@@ -12366,6 +12832,23 @@ class Ui_MainWindow(object):
         self.create_yaml_bn.setText(QCoreApplication.translate("MainWindow", u"Create new workflow", None))
         self.load_yaml_bn.setText(QCoreApplication.translate("MainWindow", u"Load and modify workflow", None))
         self.continue_yaml_bn.setText(QCoreApplication.translate("MainWindow", u"Run workflow", None))
+        self.wizard_start_message.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Hello, I'm the wizard of BiaPy, and I'll be guiding you through this process. During the questionnaire, you can click on me to get more information about each question.</span></p><p><span style=\" font-size:12pt;\">Click &quot;Start&quot; to begin the questionnaire that will help generate the required configuration file for running BiaPy.</span></p></body></html>", None))
+        self.wizard_start_wizard_icon.setText("")
+        self.wizard_start_bn.setText(QCoreApplication.translate("MainWindow", u"Start", None))
+        self.wizard_clear_answers_bn.setText(QCoreApplication.translate("MainWindow", u"Clear all answers", None))
+        self.wizard_question_wizard_icon.setText("")
+        self.wizard_question.setText("")
+        self.label_112.setText(QCoreApplication.translate("MainWindow", u"Path", None))
+        self.wizard_path_input_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
+        self.wizard_back_bn.setText(QCoreApplication.translate("MainWindow", u"<", None))
+        self.wizard_cont_bn.setText(QCoreApplication.translate("MainWindow", u">", None))
+        self.label_24.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.label_44.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.label_101.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.label_75.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.label_108.setText(QCoreApplication.translate("MainWindow", u"SUMMARY", None))
+        self.wizard_summary_back_bn.setText("")
+        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"OK", None))
         self.left_arrow_bn.setText("")
         self.workflow_view1_label.setText("")
         self.workflow_view1_seemore_bn.setText(QCoreApplication.translate("MainWindow", u"Learn more . . .", None))
@@ -12893,7 +13376,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.AUGMENTOR__GRIDMASK__INFO.setText("")
 #if QT_CONFIG(tooltip)
-        self.AUGMENTOR__RANDOM_ROT_RANGE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Range of random rotations. Each time the augmentation is applied a random value in the specified range will be selected. </span><span style=\" font-family:'arial,sans-serif'; font-size:16px; color:#202124; background-color:#ffffff;\">Parentheses</span><span style=\" font-size:12pt;\"> are needed. E.g. </span><span style=\" font-size:12pt; font-weight:600;\">(-90, 90)</span></p></body></html>", None))
+        self.AUGMENTOR__RANDOM_ROT_RANGE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Range of random rotations. Each time the augmentation is applied a random value in the specified range will be selected. </span><span style=\" font-family:'DejaVu Math TeX Gyre,sans-serif'; font-size:16px; color:#202124; background-color:#ffffff;\">Parentheses</span><span style=\" font-size:12pt;\"> are needed. E.g. </span><span style=\" font-size:12pt; font-weight:600;\">(-90, 90)</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.AUGMENTOR__RANDOM_ROT_RANGE__INFO.setText("")
 #if QT_CONFIG(tooltip)
@@ -13686,12 +14169,12 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.MODEL__BATCH_NORMALIZATION__INFO.setText("")
 #if QT_CONFIG(tooltip)
-        self.MODEL__DROPOUT_VALUES__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><a name=\"docs-internal-guid-7aa00324-7fff-fb61-fe4f-e2f1b72eacd0\"/><span style=\" font-family:'Arial'; font-size:12pt; color:#000000; background-color:transparent;\"> V</span><span style=\" font-family:'Arial'; font-size:12pt; color:#000000; background-color:transparent;\">alues to make the dropout on each model level. </span><span style=\" font-size:12pt;\">Brackets are needed and each number must be a float between 0 and 1. </span><span style=\" font-family:'Arial'; font-size:12pt; color:#000000; background-color:transparent;\">Set to 0 to prevent dropout. </span><a name=\"docs-internal-guid-7aa00324-7fff-fb61-fe4f-e2f1b72eacd0\"/><span style=\" font-family:'Arial'; font-size:12pt; color:#000000; background-color:transparent;\">W</span><span style=\" font-family:'Arial'; font-size:12pt; color:#000000; background-color:transparent;\">hen using it with 'ViT' or 'unetr' a list with just one number must be provided. E. .g. </span><span style=\" font-family:'Arial'; font-size:12pt; font-we"
-                        "ight:600; color:#000000; background-color:transparent;\">[0, 0.1, 0.2, 0.3]</span><span style=\" font-family:'Arial'; font-size:12pt; color:#000000; background-color:transparent;\"> on a 4 level U-Net </span></p></body></html>", None))
+        self.MODEL__DROPOUT_VALUES__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><a name=\"docs-internal-guid-7aa00324-7fff-fb61-fe4f-e2f1b72eacd0\"/><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; color:#000000; background-color:transparent;\"> V</span><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; color:#000000; background-color:transparent;\">alues to make the dropout on each model level. </span><span style=\" font-size:12pt;\">Brackets are needed and each number must be a float between 0 and 1. </span><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; color:#000000; background-color:transparent;\">Set to 0 to prevent dropout. </span><a name=\"docs-internal-guid-7aa00324-7fff-fb61-fe4f-e2f1b72eacd0\"/><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; color:#000000; background-color:transparent;\">W</span><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; color:#000000; background-color:transparent;\">hen using it with 'ViT' or 'unetr' a list with just one number must be provided"
+                        ". E. .g. </span><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:600; color:#000000; background-color:transparent;\">[0, 0.1, 0.2, 0.3]</span><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; color:#000000; background-color:transparent;\"> on a 4 level U-Net </span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.MODEL__DROPOUT_VALUES__INFO.setText("")
 #if QT_CONFIG(tooltip)
-        self.MODEL__FEATURE_MAPS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of feature maps on each level of the network. Brackets are needed. </span><span style=\" font-family:'Arial'; font-size:12pt; color:#000000; background-color:transparent;\">E.g.</span><span style=\" font-family:'Arial'; font-size:12pt; font-weight:600; color:#000000; background-color:transparent;\"> [16, 32, 64, 128, 256]</span><span style=\" font-family:'Arial'; font-size:12pt; color:#000000; background-color:transparent;\"> on a 5 level U-Net </span></p></body></html>", None))
+        self.MODEL__FEATURE_MAPS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of feature maps on each level of the network. Brackets are needed. </span><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; color:#000000; background-color:transparent;\">E.g.</span><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:600; color:#000000; background-color:transparent;\"> [16, 32, 64, 128, 256]</span><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; color:#000000; background-color:transparent;\"> on a 5 level U-Net </span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.MODEL__FEATURE_MAPS__INFO.setText("")
 #if QT_CONFIG(tooltip)

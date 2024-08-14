@@ -3,16 +3,15 @@ import sys
 import tempfile
 import logging
 import traceback
-import io
 
 from PySide2 import QtCore, QtGui, QtWidgets
-from PySide2.QtCore import (QThread, QCoreApplication, QPropertyAnimation, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
-from PySide2.QtGui import (QDesktopServices, QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
 from PySide2.QtWidgets import *
+from PySide2.QtCore import *
+from PySide2.QtGui import *
 
 from ui_function import * 
 from ui_utils import (examine, mark_syntax_error, expand_hide_advanced_options, change_page, get_git_revision_short_hash,
-    load_yaml_config, resource_path, load_yaml_to_GUI, set_text)
+    load_yaml_config, resource_path, load_yaml_to_GUI, set_text, start_questionary, change_wizard_page, eval_wizard_answer, clear_answers)
 from settings import Settings
 from widget_conditions import Widget_conditions
 from ui.ui_main import Ui_MainWindow 
@@ -99,6 +98,7 @@ class MainWindow(QMainWindow):
         
         # Left buttons
         self.ui.bn_home.clicked.connect(lambda: change_page(self, 'bn_home', 99))
+        self.ui.bn_wizard.clicked.connect(lambda: change_page(self, 'bn_wizard', 99))
         self.ui.bn_workflow.clicked.connect(lambda: change_page(self, 'bn_workflow', 99))
         self.ui.bn_goptions.clicked.connect(lambda: change_page(self, 'bn_goptions', 99))
         self.ui.bn_train.clicked.connect(lambda: change_page(self, 'bn_train', 99))
@@ -115,6 +115,19 @@ class MainWindow(QMainWindow):
         self.ui.biapy_doc_bn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://biapy.readthedocs.io/en/latest/")))
         self.ui.biapy_notebooks_bn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://github.com/BiaPyX/BiaPy/tree/master/notebooks")))
         self.ui.biapy_citation_bn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://github.com/BiaPyX/BiaPy#citation")))
+
+        # Wizard page buttons
+        self.ui.wizard_start_bn.clicked.connect(lambda: start_questionary(self))
+        self.ui.wizard_back_bn.clicked.connect(lambda: change_wizard_page(self, self.cfg.settings['wizard_question_index'] - 1))
+        self.ui.wizard_cont_bn.clicked.connect(lambda: change_wizard_page(self, self.cfg.settings['wizard_question_index'] + 1))
+        self.ui.wizard_question_answer.currentIndexChanged.connect(lambda: eval_wizard_answer(self))
+        self.ui.wizard_summary_back_bn.clicked.connect(lambda: change_wizard_page(self, self.cfg.settings['wizard_question_index']))
+        self.ui.wizard_summary_back_bn.setIcon(QIcon(resource_path(os.path.join("images","bn_images", "back.png"))))
+        self.ui.wizard_clear_answers_bn.clicked.connect(lambda: clear_answers(self))
+        self.ui.wizard_path_input_bn.clicked.connect(lambda: examine(self, "wizard_path_input", False))
+        self.allow_change_wizard_question_answer = False 
+        self.not_allow_change_question = False
+        self.ui.wizard_question_wizard_icon.clicked.connect(lambda: UIFunction.display_wizard_help_window(self, 1))
 
         # Workflow page buttons
         self.ui.left_arrow_bn.clicked.connect(lambda: UIFunction.move_workflow_view(self, False))

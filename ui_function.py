@@ -1,20 +1,19 @@
 import os
-import sys
-import re
 import multiprocessing
 import datetime
 import ast 
 from collections import deque
 import requests
 
-from PySide2.QtCore import  QSize, QFile 
+from PySide2.QtGui import QPixmap, QFont, QStandardItemModel, QStandardItem, QBrush, QColor, QIcon
+from PySide2.QtCore import QSize, QThread, QFile, QIODevice, QEvent, QObject, Qt 
 from PySide2.QtSvg import QSvgWidget
+from PySide2.QtWidgets import QLabel, QFrame
 
-import settings
-from main import * 
+from main import MainWindow
 from run_functions import run_worker
 from build_functions import build_worker
-from ui_utils import get_text, resource_path, oninit_checks, load_yaml_config
+from ui_utils import get_text, resource_path, oninit_checks, load_yaml_config, change_wizard_page
 from aux_classes.checkableComboBox import CheckableComboBox
 
 class UIFunction(MainWindow):
@@ -37,6 +36,7 @@ class UIFunction(MainWindow):
             main_window.ui.bn_min.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","hide_icon.png"))))
 
             main_window.ui.bn_home.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","home.png"))))
+            main_window.ui.bn_wizard.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","wizard.png"))))
             main_window.ui.bn_workflow.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","workflow.png"))))
             main_window.ui.bn_goptions.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","goptions.png"))))
             main_window.ui.bn_train.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","train.png"))))
@@ -52,6 +52,7 @@ class UIFunction(MainWindow):
             UIFunction.init_main_page(main_window)
             oninit_checks(main_window)
             UIFunction.init_workflow_page(main_window)
+            UIFunction.init_wizard_page(main_window)
             UIFunction.init_goptions_page(main_window)
             UIFunction.init_train_page(main_window)
             UIFunction.init_test_page(main_window)
@@ -112,8 +113,8 @@ class UIFunction(MainWindow):
 
         # Create docker logo and text here. This last is necessary to do it here and not in ui_main.py
         # because they are inserted in order 
-        dockerlogo = QtCore.QFile(resource_path(os.path.join("images","docker_logo.svg")))
-        dockerlogo.open(QtCore.QIODevice.ReadWrite)
+        dockerlogo = QFile(resource_path(os.path.join("images","docker_logo.svg")))
+        dockerlogo.open(QIODevice.ReadWrite)
         main_window.docker_logo_bytearray_str = dockerlogo.readAll()
         dockerlogo.close()
         main_window.ui.docker_logo = QSvgWidget()
@@ -121,7 +122,7 @@ class UIFunction(MainWindow):
         main_window.ui.docker_logo.setMinimumSize(QSize(220, 56))
         main_window.ui.docker_logo.setMaximumSize(QSize(220, 56))
         main_window.ui.docker_logo.load(main_window.docker_logo_bytearray_str)
-        main_window.ui.verticalLayout_28.addWidget(main_window.ui.docker_logo, alignment=QtCore.Qt.AlignCenter)
+        main_window.ui.verticalLayout_28.addWidget(main_window.ui.docker_logo, alignment=Qt.AlignCenter)
 
         main_window.ui.docker_status_label = QLabel(main_window.ui.docker_frame)
         main_window.ui.docker_status_label.setObjectName(u"docker_status_label")
@@ -134,8 +135,8 @@ class UIFunction(MainWindow):
         main_window.ui.verticalLayout_28.addWidget(main_window.ui.docker_status_label)
 
         # GPU logo and text
-        gpu_icon = QtCore.QFile(resource_path(os.path.join("images","gpu_icon.svg")))
-        gpu_icon.open(QtCore.QIODevice.ReadWrite)
+        gpu_icon = QFile(resource_path(os.path.join("images","gpu_icon.svg")))
+        gpu_icon.open(QIODevice.ReadWrite)
         main_window.gpu_icon_bytearray_str = gpu_icon.readAll()
         gpu_icon.close()
         main_window.ui.gpu_icon_label = QSvgWidget()
@@ -143,7 +144,7 @@ class UIFunction(MainWindow):
         main_window.ui.gpu_icon_label.setMinimumSize(QSize(122, 80))
         main_window.ui.gpu_icon_label.setMaximumSize(QSize(122, 80))
         main_window.ui.gpu_icon_label.load(main_window.gpu_icon_bytearray_str)
-        main_window.ui.verticalLayout_33.addWidget(main_window.ui.gpu_icon_label, alignment=QtCore.Qt.AlignCenter)
+        main_window.ui.verticalLayout_33.addWidget(main_window.ui.gpu_icon_label, alignment=Qt.AlignCenter)
 
         main_window.ui.gpu_status_label = QLabel(main_window.ui.gpu_frame)
         main_window.ui.gpu_status_label.setObjectName(u"gpu_status_label")
@@ -155,8 +156,97 @@ class UIFunction(MainWindow):
         main_window.ui.verticalLayout_33.addWidget(main_window.ui.gpu_status_label)
         
         main_window.ui.biapy_version.setText(f"Version {main_window.cfg.settings['biapy_code_version']} - GUI: {main_window.cfg.settings['biapy_gui_version']}")
-        
+
     ###############
+    # Wizard page 
+    ###############
+    def init_wizard_page(main_window):
+        """
+        Initialize wizard page.
+                
+        Parameters
+        ----------
+        main_window : QMainWindow
+            Main window of the application.
+        """
+        main_window.ui.wizard_start_wizard_icon.setPixmap(main_window.cfg.settings['wizard_img'])
+        # main_window.cfg.settings["wizard_animation_img"].setScaledSize(QSize(main_window.ui.wizard_question_wizard_icon.width(), main_window.ui.wizard_question_wizard_icon.height()))
+        
+        def update_ani(self):
+            main_window.ui.wizard_question_wizard_icon.setIcon(QIcon(main_window.cfg.settings["wizard_animation_img"].currentPixmap()))
+            
+        main_window.cfg.settings['wizard_animation_img'].start()
+        main_window.cfg.settings["wizard_animation_img"].frameChanged.connect(update_ani)
+        main_window.ui.wizard_question_wizard_icon.setIcon(main_window.cfg.settings["wizard_animation_img"].currentPixmap())
+        # main_window.ui.wizard_question_wizard_icon.setMovie(main_window.cfg.settings['wizard_animation_img'])
+        main_window.wizard_toc_model = QStandardItemModel()
+        UIFunction.configure_from_list(main_window.wizard_toc_model, main_window.cfg.settings["wizard_sections"])     
+        main_window.ui.wizard_treeView.setModel(main_window.wizard_toc_model)
+        main_window.ui.wizard_treeView.expandAll()
+        main_window.ui.wizard_treeView.selectionModel()
+        main_window.ui.wizard_treeView.setCurrentIndex(main_window.wizard_toc_model.item(0).child(0).index())
+        main_window.ui.wizard_treeView.selectionModel().selectionChanged.connect(
+            lambda: change_wizard_page(main_window, main_window.cfg.settings['wizard_question_index'], based_on_toc=True))
+        
+        main_window.ui.wizard_path_input_frame.setVisible(False)
+        main_window.ui.wizard_question_answer.setVisible(True)
+
+
+    def configure_from_list(model, _list): 
+        """
+        Initialize QStandardItemModel ``model`` with ``_list`` list items. This function is not recursive and only 
+        can handle depth 1 lists.
+                
+        Parameters
+        ----------
+        model : QStandardItemModel
+            Model to be filled with items from ``_list``. 
+
+        _list : QStandardItemModel
+            List of objects to fill the model with.
+        """
+        parent_item = model.invisibleRootItem() 
+        for line in _list:
+            item = QStandardItem()
+            item.setText(line[0])
+            item.setEditable(False)
+            item.setSelectable(False)
+            parent_item.appendRow(item)
+
+            # Add subchilds if any
+            if len(line) > 1 and isinstance(line[1], list) and len(line[1]) > 0:
+                for x in line[1]:
+                    subitem = QStandardItem()
+                    subitem.setText(x)
+                    subitem.setEditable(False)
+                    item.appendRow(subitem)
+        
+    def display_wizard_help_window(main_window, question_number):
+        """
+        Starts workflow description page. 
+                
+        Parameters
+        ----------
+        main_window : QMainWindow
+            Main window of the application.
+        
+        question_number: int
+            Number of the question.
+        """
+        # Load first time
+        print("HEERE")
+        # if not 'workflow_description_images' in main_window.cfg.settings:
+        #     main_window.cfg.load_workflow_detail_page()
+
+        # workflow_name = main_window.cfg.settings['workflow_names'][s_workflow].replace("\n"," ") 
+        # workflow_images = main_window.cfg.settings['workflow_description_images'][s_workflow]
+        # workflow_description = main_window.cfg.settings['workflow_descriptions'][s_workflow]
+        # workflow_ready_examples = main_window.cfg.settings['ready_to_use_workflows'][s_workflow]
+        # workflow_doc = main_window.cfg.settings['workflow_description_doc'][s_workflow]
+        # main_window.workflow_info_exec(workflow_name, workflow_images, workflow_description, workflow_doc,
+        #     workflow_ready_examples)
+        
+    ############### 
     # Workflow page 
     ###############
     def init_workflow_page(main_window):
