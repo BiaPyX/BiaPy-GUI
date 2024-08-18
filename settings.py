@@ -63,9 +63,11 @@ class Settings:
         ]
         self.settings["info_image"] = QPixmap(resource_path(os.path.join("images", "bn_images", "info.png")))
 
-        # Wizard icons 
+        # Wizard icons
         self.settings["wizard_img"] = QPixmap(resource_path(os.path.join("images", "wizard.png")))
-        self.settings["wizard_animation_img"] = QMovie(resource_path(os.path.join("images", "wizard_question_animation.gif")))
+        self.settings["wizard_animation_img"] = QMovie(
+            resource_path(os.path.join("images", "wizard_question_animation.gif"))
+        )
 
         # Workflow page
         self.settings["workflow_names"] = [
@@ -286,11 +288,14 @@ class Settings:
         self.settings["wizard_questions"] = []
         self.settings["wizard_possible_answers"] = []
         self.settings["wizard_sections"] = []
-        self.settings['wizard_from_toc_to_question_index'] = []
-        self.settings['wizard_from_question_index_to_toc'] = []
+        self.settings["wizard_from_toc_to_question_index"] = []
+        self.settings["wizard_from_question_index_to_toc"] = []
+        self.settings["wizard_question_additional_info"] = []
+        self.settings["wizard_question_visible"] = []
+        self.settings["wizard_answers"] = {}
 
-        self.settings["wizard_sections"] += [["Problem description",[]]]
-        self.settings['wizard_from_toc_to_question_index'].append([])
+        self.settings["wizard_sections"] += [["Problem description", []]]
+        self.settings["wizard_from_toc_to_question_index"].append([])
         q_count = 0
 
         ######
@@ -303,10 +308,46 @@ class Settings:
         self.settings["wizard_possible_answers"] += [["Yes", "No", "No but I would like to have a 3D stack output"]]
         self.settings["wizard_variable_to_map"]["Q1"]["PROBLEM.NDIM"] = ["3D", "2D", "2D"]
         self.settings["wizard_variable_to_map"]["Q1"]["TEST.ANALIZE_2D_IMGS_AS_3D_STACK"] = [False, False, True]
+        self.settings["wizard_answers"]["PROBLEM.NDIM"] = -1
+        self.settings["wizard_answers"]["TEST.ANALIZE_2D_IMGS_AS_3D_STACK"] = -1
         self.settings["wizard_sections"][-1][1] += ["Dimensions"]
-        self.settings['wizard_from_question_index_to_toc'].append([0,len(self.settings['wizard_from_toc_to_question_index'][-1])])
-        self.settings['wizard_from_toc_to_question_index'][-1].append(q_count)
+        self.settings["wizard_from_question_index_to_toc"].append(
+            [0, len(self.settings["wizard_from_toc_to_question_index"][-1])]
+        )
+        self.settings["wizard_from_toc_to_question_index"][-1].append(q_count)
+        self.settings["wizard_question_visible"].append(True)
         q_count += 1
+
+        # Q1 additional information
+        dani = resource_path(os.path.join("images", "semantic_seg_raw.png"))
+        self.settings["wizard_question_additional_info"] += [
+            f"<p>The goal of this workflow is assign a class to each pixel of the input image.</p>\
+            <ul>\
+                <li><dl>\
+                    <dt><strong>Input:</strong></dt><dd><ul>\
+                        <li><p>Image.</p></li>\
+                        <li><p>Class mask where each pixel is labeled with an integer representing a class.</p></li>\
+                    </ul></dd></dl>\
+                </li>\
+                <li><dl>\
+                    <dt><strong>Output:</strong></dt><dd><ul>\
+                    <li><p>Image with the probability of being part of each class.</p></li>\
+                    </ul></dd></dl>\
+                </li>\
+            </ul>\
+            <img src='{dani}' alt='Italian Trulli'>\
+            <p>In the figure above an example of this workflow’s <strong>input</strong> is depicted. \
+            This image is a wound of a Drosophila embryo and the goal is to segment the contour of that wound\
+            correctly. There, only two labels are present in the mask: black pixels, with value 0, represent the background \
+            and white ones the contour of the wound, labeled with 1. </p>\
+            <p>The <strong>output</strong> in case that only two classes are present, as in this example, will be an image \
+            where each pixel will have the probability of being of class 1.</p>\
+            <p>If there are <strong>3 or more classes</strong>, the output will be a multi-channel image, \
+            with the same number of channels as classes, and the same pixel in each channel will be the \
+            probability (in <code><span>[0-1]</span></code> range) of being of the class that represents that channel number. \
+            For instance, with 3 classes, e.g. background, mitochondria and contours, the fist channel will represent background, the second\
+            mitochondria and the last contour class.</p>"
+        ]
 
         ######
         # Q2 #
@@ -338,9 +379,13 @@ class Settings:
             "CLASSIFICATION",
             "IMAGE_TO_IMAGE",
         ]
+        self.settings["wizard_answers"]["PROBLEM.TYPE"] = -1
         self.settings["wizard_sections"][-1][1] += ["Workflow"]
-        self.settings['wizard_from_question_index_to_toc'].append([0,len(self.settings['wizard_from_toc_to_question_index'][-1])])
-        self.settings['wizard_from_toc_to_question_index'][-1].append(q_count)
+        self.settings["wizard_from_question_index_to_toc"].append(
+            [0, len(self.settings["wizard_from_toc_to_question_index"][-1])]
+        )
+        self.settings["wizard_from_toc_to_question_index"][-1].append(q_count)
+        self.settings["wizard_question_visible"].append(True)
         q_count += 1
 
         ######
@@ -359,9 +404,13 @@ class Settings:
         ]
         self.settings["wizard_variable_to_map"]["Q3"] = {}
         self.settings["wizard_variable_to_map"]["Q3"]["MODEL.SOURCE"] = ["biapy", "biapy", "bmz", "torchvision"]
+        self.settings["wizard_answers"]["MODEL.SOURCE"] = -1 
         self.settings["wizard_sections"][-1][1] += ["Model source"]
-        self.settings['wizard_from_question_index_to_toc'].append([0,len(self.settings['wizard_from_toc_to_question_index'][-1])])
-        self.settings['wizard_from_toc_to_question_index'][-1].append(q_count)
+        self.settings["wizard_from_question_index_to_toc"].append(
+            [0, len(self.settings["wizard_from_toc_to_question_index"][-1])]
+        )
+        self.settings["wizard_from_toc_to_question_index"][-1].append(q_count)
+        self.settings["wizard_question_visible"].append(True)
         q_count += 1
 
         ######
@@ -369,16 +418,23 @@ class Settings:
         ######
         self.settings["wizard_question_condition"]["Q4"] = {
             "or_cond": [
-                "PROBLEM.TYPE",
                 [
-                    "SEMANTIC_SEG",
-                    "INSTANCE_SEG",
-                    "DETECTION",
-                    "CLASSIFICATION",
-                    "IMAGE_TO_IMAGE",
-                ],
+                    "PROBLEM.TYPE",  # Depends on Q2
+                    [
+                        "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
+                        "DETECTION",
+                        "CLASSIFICATION",
+                        "IMAGE_TO_IMAGE",
+                    ],
+                ]
             ],
-            "and_cond": ["MODEL.SOURCE", "biapy"],
+            "and_cond": [
+                [
+                    "MODEL.SOURCE",
+                    "biapy"
+                ], 
+            ],
         }
         self.settings["wizard_questions"] += [
             "What is the median object width/height in pixels?",
@@ -402,27 +458,42 @@ class Settings:
             (1024, 1024),
             (1024, 1024),
         ]
-        self.settings["wizard_sections"] += [["Data",[]]]
-        self.settings['wizard_from_toc_to_question_index'].append([])
-        self.settings["wizard_sections"][-1][1] += ["Object size (xy)"] 
-        self.settings['wizard_from_question_index_to_toc'].append([1,len(self.settings['wizard_from_toc_to_question_index'][-1])])
-        self.settings['wizard_from_toc_to_question_index'][-1].append(q_count)
+        self.settings["wizard_answers"]["_q4"] = -1
+        self.settings["wizard_sections"] += [["Data", []]]
+        self.settings["wizard_from_toc_to_question_index"].append([])
+        self.settings["wizard_sections"][-1][1] += ["Object size (xy)"]
+        self.settings["wizard_from_question_index_to_toc"].append(
+            [1, len(self.settings["wizard_from_toc_to_question_index"][-1])]
+        )
+        self.settings["wizard_from_toc_to_question_index"][-1].append(q_count)
+        self.settings["wizard_question_visible"].append(False)
         q_count += 1
 
         ######
         # Q5 #
         ######
         self.settings["wizard_question_condition"]["Q5"] = {
-            "and_cond": ["PROBLEM.NDIM", "3D", "MODEL.SOURCE", "biapy"],
-            "or_cond": [
-                "PROBLEM.TYPE",
+            "and_cond": [
                 [
-                    "SEMANTIC_SEG",
-                    "INSTANCE_SEG",
-                    "DETECTION",
-                    "CLASSIFICATION",
-                    "IMAGE_TO_IMAGE",
-                ],
+                    "PROBLEM.NDIM", 
+                    "3D"
+                ], 
+                [
+                    "MODEL.SOURCE", 
+                    "biapy"
+                ]
+            ],
+            "or_cond": [
+                [
+                    "PROBLEM.TYPE",
+                    [
+                        "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
+                        "DETECTION",
+                        "CLASSIFICATION",
+                        "IMAGE_TO_IMAGE",
+                    ],
+                ]
             ],
         }
         self.settings["wizard_questions"] += [
@@ -439,19 +510,19 @@ class Settings:
         ]
         self.settings["wizard_variable_to_map"]["Q5"] = {}
         self.settings["wizard_variable_to_map"]["Q5"]["_q5"] = [5, 10, 20, 40, 80]
-        # self.settings["wizard_variable_to_map"]["Q5"]["PROBLEM.PATCH_SIZE"] = 
-        self.settings["wizard_sections"][-1][1] += ["Object size (z)"] 
-        self.settings['wizard_from_question_index_to_toc'].append([1,len(self.settings['wizard_from_toc_to_question_index'][-1])])
-        self.settings['wizard_from_toc_to_question_index'][-1].append(q_count)
+        self.settings["wizard_answers"]["_q5"] = -1
+        # self.settings["wizard_variable_to_map"]["Q5"]["PROBLEM.PATCH_SIZE"] =
+        self.settings["wizard_sections"][-1][1] += ["Object size (z)"]
+        self.settings["wizard_from_question_index_to_toc"].append(
+            [1, len(self.settings["wizard_from_toc_to_question_index"][-1])]
+        )
+        self.settings["wizard_from_toc_to_question_index"][-1].append(q_count)
+        self.settings["wizard_question_visible"].append(False)
         q_count += 1
 
         ######
         # Q6 #
         ######
-        self.settings["wizard_question_condition"]["Q6"] = {
-            "and_cond": [],
-            "or_cond": ["MODEL.SOURCE", ["biapy", "bmz"]],
-        }
         self.settings["wizard_questions"] += [
             "What do you want to do?",
         ]
@@ -465,17 +536,27 @@ class Settings:
         self.settings["wizard_variable_to_map"]["Q6"] = {}
         self.settings["wizard_variable_to_map"]["Q6"]["TRAIN.ENABLE"] = [True, False, True]
         self.settings["wizard_variable_to_map"]["Q6"]["TEST.ENABLE"] = [False, True, True]
-        self.settings["wizard_sections"][-1][1] += ["Phases"] 
-        self.settings['wizard_from_question_index_to_toc'].append([1,len(self.settings['wizard_from_toc_to_question_index'][-1])])
-        self.settings['wizard_from_toc_to_question_index'][-1].append(q_count)
+        self.settings["wizard_answers"]["TRAIN.ENABLE"] = -1
+        self.settings["wizard_answers"]["TEST.ENABLE"] = -1
+        self.settings["wizard_sections"][-1][1] += ["Phases"]
+        self.settings["wizard_from_question_index_to_toc"].append(
+            [1, len(self.settings["wizard_from_toc_to_question_index"][-1])]
+        )
+        self.settings["wizard_from_toc_to_question_index"][-1].append(q_count)
+        self.settings["wizard_question_visible"].append(True)
         q_count += 1
 
         ######
         # Q7 #
         ######
         self.settings["wizard_question_condition"]["Q7"] = {
-            "and_cond": ["TRAIN.ENABLE", True],
-            "or_cond": [ ],
+            "and_cond": [
+                [
+                    "TRAIN.ENABLE", 
+                    True
+                ]
+            ],
+            "or_cond": [],
         }
         self.settings["wizard_questions"] += [
             "Please insert training raw image folder",
@@ -483,25 +564,36 @@ class Settings:
         self.settings["wizard_possible_answers"] += [["PATH"]]
         self.settings["wizard_variable_to_map"]["Q7"] = {}
         self.settings["wizard_variable_to_map"]["Q7"]["DATA.TRAIN.PATH"] = ""
-        self.settings["wizard_sections"][-1][1] += ["Train data (raw)"] 
-        self.settings['wizard_from_question_index_to_toc'].append([1,len(self.settings['wizard_from_toc_to_question_index'][-1])])
-        self.settings['wizard_from_toc_to_question_index'][-1].append(q_count)
+        self.settings["wizard_answers"]["DATA.TRAIN.PATH"] = -1
+        self.settings["wizard_sections"][-1][1] += ["Train data (raw)"]
+        self.settings["wizard_from_question_index_to_toc"].append(
+            [1, len(self.settings["wizard_from_toc_to_question_index"][-1])]
+        )
+        self.settings["wizard_from_toc_to_question_index"][-1].append(q_count)
+        self.settings["wizard_question_visible"].append(False)
         q_count += 1
 
         ######
         # Q8 #
         ######
         self.settings["wizard_question_condition"]["Q8"] = {
-            "and_cond": ["TRAIN.ENABLE", True],
-            "or_cond": [
-                "PROBLEM.TYPE",
+            "and_cond": [
                 [
-                    "SEMANTIC_SEG",
-                    "INSTANCE_SEG",
-                    "DETECTION",
-                    "SUPER_RESOLUTION",
-                    "IMAGE_TO_IMAGE",
-                ],
+                    "TRAIN.ENABLE", 
+                    True
+                ]
+            ],
+            "or_cond": [
+                [
+                    "PROBLEM.TYPE",
+                    [
+                        "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
+                        "DETECTION",
+                        "SUPER_RESOLUTION",
+                        "IMAGE_TO_IMAGE",
+                    ],
+                ]
             ],
         }
         self.settings["wizard_questions"] += [
@@ -510,25 +602,36 @@ class Settings:
         self.settings["wizard_possible_answers"] += [["PATH"]]
         self.settings["wizard_variable_to_map"]["Q8"] = {}
         self.settings["wizard_variable_to_map"]["Q8"]["DATA.TRAIN.GT_PATH"] = ""
+        self.settings["wizard_answers"]["DATA.TRAIN.GT_PATH"] = -1
         self.settings["wizard_sections"][-1][1] += ["Train data (ground truth)"]
-        self.settings['wizard_from_question_index_to_toc'].append([1,len(self.settings['wizard_from_toc_to_question_index'][-1])])
-        self.settings['wizard_from_toc_to_question_index'][-1].append(q_count)
+        self.settings["wizard_from_question_index_to_toc"].append(
+            [1, len(self.settings["wizard_from_toc_to_question_index"][-1])]
+        )
+        self.settings["wizard_from_toc_to_question_index"][-1].append(q_count)
+        self.settings["wizard_question_visible"].append(False)
         q_count += 1
 
         ######
         # Q9 #
         ######
         self.settings["wizard_question_condition"]["Q9"] = {
-            "and_cond": ["TRAIN.ENABLE", True],
-            "or_cond": [
-                "PROBLEM.TYPE",
+            "and_cond": [
                 [
-                    "SEMANTIC_SEG",
-                    "INSTANCE_SEG",
-                    "DETECTION",
-                    "SUPER_RESOLUTION",
-                    "IMAGE_TO_IMAGE",
-                ],
+                    "TRAIN.ENABLE", 
+                    True
+                ]
+            ],
+            "or_cond": [
+                [
+                    "PROBLEM.TYPE",
+                    [
+                        "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
+                        "DETECTION",
+                        "SUPER_RESOLUTION",
+                        "IMAGE_TO_IMAGE",
+                    ],
+                ]
             ],
         }
         self.settings["wizard_questions"] += [
@@ -537,25 +640,40 @@ class Settings:
         self.settings["wizard_possible_answers"] += [["Yes", "No, I want to use another data"]]
         self.settings["wizard_variable_to_map"]["Q9"] = {}
         self.settings["wizard_variable_to_map"]["Q9"]["DATA.VAL.FROM_TRAIN"] = [True, False]
+        self.settings["wizard_answers"]["DATA.VAL.FROM_TRAIN"] = -1
         self.settings["wizard_sections"][-1][1] += ["Validation data"]
-        self.settings['wizard_from_question_index_to_toc'].append([1,len(self.settings['wizard_from_toc_to_question_index'][-1])])
-        self.settings['wizard_from_toc_to_question_index'][-1].append(q_count)
+        self.settings["wizard_from_question_index_to_toc"].append(
+            [1, len(self.settings["wizard_from_toc_to_question_index"][-1])]
+        )
+        self.settings["wizard_from_toc_to_question_index"][-1].append(q_count)
+        self.settings["wizard_question_visible"].append(False)
         q_count += 1
 
         #######
         # Q10 #
         #######
         self.settings["wizard_question_condition"]["Q10"] = {
-            "and_cond": ["TRAIN.ENABLE", True, "DATA.VAL.FROM_TRAIN", True],
-            "or_cond": [
-                "PROBLEM.TYPE",
+            "and_cond": [
                 [
-                    "SEMANTIC_SEG",
-                    "INSTANCE_SEG",
-                    "DETECTION",
-                    "SUPER_RESOLUTION",
-                    "IMAGE_TO_IMAGE",
-                ],
+                    "TRAIN.ENABLE", 
+                    True
+                ], 
+                [
+                    "DATA.VAL.FROM_TRAIN",
+                    True
+                ]
+            ],
+            "or_cond": [
+                [
+                    "PROBLEM.TYPE",
+                    [
+                        "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
+                        "DETECTION",
+                        "SUPER_RESOLUTION",
+                        "IMAGE_TO_IMAGE",
+                    ],
+                ]
             ],
         }
         self.settings["wizard_questions"] += [
@@ -564,25 +682,40 @@ class Settings:
         self.settings["wizard_possible_answers"] += [["10%", "20%"]]
         self.settings["wizard_variable_to_map"]["Q10"] = {}
         self.settings["wizard_variable_to_map"]["Q10"]["DATA.VAL.SPLIT_TRAIN"] = [0.1, 0.2]
+        self.settings["wizard_answers"]["DATA.VAL.SPLIT_TRAIN"] = -1
         self.settings["wizard_sections"][-1][1] += ["Validation data (train split)"]
-        self.settings['wizard_from_question_index_to_toc'].append([1,len(self.settings['wizard_from_toc_to_question_index'][-1])])
-        self.settings['wizard_from_toc_to_question_index'][-1].append(q_count)
+        self.settings["wizard_from_question_index_to_toc"].append(
+            [1, len(self.settings["wizard_from_toc_to_question_index"][-1])]
+        )
+        self.settings["wizard_from_toc_to_question_index"][-1].append(q_count)
+        self.settings["wizard_question_visible"].append(False)
         q_count += 1
 
         #######
         # Q11 #
         #######
         self.settings["wizard_question_condition"]["Q11"] = {
-            "and_cond": ["TRAIN.ENABLE", True, "DATA.VAL.FROM_TRAIN", False],
-            "or_cond": [
-                "PROBLEM.TYPE",
+            "and_cond": [
                 [
-                    "SEMANTIC_SEG",
-                    "INSTANCE_SEG",
-                    "DETECTION",
-                    "SUPER_RESOLUTION",
-                    "IMAGE_TO_IMAGE",
+                    "TRAIN.ENABLE",
+                    True,
                 ],
+                [
+                    "DATA.VAL.FROM_TRAIN", 
+                    False
+                ],
+            ],
+            "or_cond": [
+                [
+                    "PROBLEM.TYPE",
+                    [
+                        "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
+                        "DETECTION",
+                        "SUPER_RESOLUTION",
+                        "IMAGE_TO_IMAGE",
+                    ],
+                ]
             ],
         }
         self.settings["wizard_questions"] += [
@@ -591,25 +724,40 @@ class Settings:
         self.settings["wizard_possible_answers"] += [["PATH"]]
         self.settings["wizard_variable_to_map"]["Q11"] = {}
         self.settings["wizard_variable_to_map"]["Q11"]["DATA.VAL.PATH"] = ""
+        self.settings["wizard_answers"]["DATA.VAL.PATH"] = -1
         self.settings["wizard_sections"][-1][1] += ["Validation data (raw)"]
-        self.settings['wizard_from_question_index_to_toc'].append([1,len(self.settings['wizard_from_toc_to_question_index'][-1])])
-        self.settings['wizard_from_toc_to_question_index'][-1].append(q_count)
+        self.settings["wizard_from_question_index_to_toc"].append(
+            [1, len(self.settings["wizard_from_toc_to_question_index"][-1])]
+        )
+        self.settings["wizard_from_toc_to_question_index"][-1].append(q_count)
+        self.settings["wizard_question_visible"].append(False)
         q_count += 1
 
         #######
         # Q12 #
         #######
         self.settings["wizard_question_condition"]["Q12"] = {
-            "and_cond": ["TRAIN.ENABLE", True, "DATA.VAL.FROM_TRAIN", False],
-            "or_cond": [
-                "PROBLEM.TYPE",
+            "and_cond": [
                 [
-                    "SEMANTIC_SEG",
-                    "INSTANCE_SEG",
-                    "DETECTION",
-                    "SUPER_RESOLUTION",
-                    "IMAGE_TO_IMAGE",
+                    "TRAIN.ENABLE",
+                    True,
                 ],
+                [
+                    "DATA.VAL.FROM_TRAIN", 
+                    False
+                ],
+            ],
+            "or_cond": [
+                [
+                    "PROBLEM.TYPE",
+                    [
+                        "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
+                        "DETECTION",
+                        "SUPER_RESOLUTION",
+                        "IMAGE_TO_IMAGE",
+                    ],
+                ]
             ],
         }
         self.settings["wizard_questions"] += [
@@ -618,9 +766,13 @@ class Settings:
         self.settings["wizard_possible_answers"] += [["PATH"]]
         self.settings["wizard_variable_to_map"]["Q12"] = {}
         self.settings["wizard_variable_to_map"]["Q12"]["DATA.VAL.GT_PATH"] = ""
+        self.settings["wizard_answers"]["DATA.VAL.GT_PATH"] = -1
         self.settings["wizard_sections"][-1][1] += ["Validation data (ground truth)"]
-        self.settings['wizard_from_question_index_to_toc'].append([1,len(self.settings['wizard_from_toc_to_question_index'][-1])])
-        self.settings['wizard_from_toc_to_question_index'][-1].append(q_count)
+        self.settings["wizard_from_question_index_to_toc"].append(
+            [1, len(self.settings["wizard_from_toc_to_question_index"][-1])]
+        )
+        self.settings["wizard_from_toc_to_question_index"][-1].append(q_count)
+        self.settings["wizard_question_visible"].append(False)
         q_count += 1
 
         # ######
@@ -662,7 +814,8 @@ class Settings:
         # self.settings["wizard_variable_to_map"]["TEST.POST_PROCESSING.CLEAR_BORDER"] = [True, False]
 
         self.settings["wizard_number_of_questions"] = len(self.settings["wizard_questions"])
-        self.settings["wizard_question_answered_index"] = [-1,]*self.settings["wizard_number_of_questions"]
+        self.settings["wizard_question_answered_index"] = [-1]*len(self.settings["wizard_questions"])
+        self.settings["wizard_question_visible_default"] = self.settings["wizard_question_visible"].copy()
 
     def translate_model_names(self, model, dim, inv=False):
         s = "_models_real_names" if not inv else "_models"

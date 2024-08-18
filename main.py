@@ -15,7 +15,7 @@ from ui_utils import (examine, mark_syntax_error, expand_hide_advanced_options, 
 from settings import Settings
 from widget_conditions import Widget_conditions
 from ui.ui_main import Ui_MainWindow 
-from ui.aux_windows import dialog_Ui, workflow_explanation_Ui, yes_no_Ui, spinner_Ui
+from ui.aux_windows import dialog_Ui, workflow_explanation_Ui, yes_no_Ui, spinner_Ui, basic_Ui
 
 os.environ['QT_MAC_WANTS_LAYER'] = '1'
 
@@ -118,16 +118,17 @@ class MainWindow(QMainWindow):
 
         # Wizard page buttons
         self.ui.wizard_start_bn.clicked.connect(lambda: start_questionary(self))
-        self.ui.wizard_back_bn.clicked.connect(lambda: change_wizard_page(self, self.cfg.settings['wizard_question_index'] - 1))
-        self.ui.wizard_cont_bn.clicked.connect(lambda: change_wizard_page(self, self.cfg.settings['wizard_question_index'] + 1))
+        self.ui.wizard_back_bn.clicked.connect(lambda: change_wizard_page(self, self.cfg.settings['wizard_question_index'], False, added_val=-1))
+        self.ui.wizard_cont_bn.clicked.connect(lambda: change_wizard_page(self, self.cfg.settings['wizard_question_index'], False, added_val=1))
         self.ui.wizard_question_answer.currentIndexChanged.connect(lambda: eval_wizard_answer(self))
-        self.ui.wizard_summary_back_bn.clicked.connect(lambda: change_wizard_page(self, self.cfg.settings['wizard_question_index']))
+        self.ui.wizard_summary_back_bn.clicked.connect(lambda: change_wizard_page(self, self.cfg.settings['wizard_question_index'], False, added_val=0))
         self.ui.wizard_summary_back_bn.setIcon(QIcon(resource_path(os.path.join("images","bn_images", "back.png"))))
         self.ui.wizard_clear_answers_bn.clicked.connect(lambda: clear_answers(self))
         self.ui.wizard_path_input_bn.clicked.connect(lambda: examine(self, "wizard_path_input", False))
         self.allow_change_wizard_question_answer = False 
         self.not_allow_change_question = False
         self.ui.wizard_question_wizard_icon.clicked.connect(lambda: UIFunction.display_wizard_help_window(self, 1))
+        self.ui.wizard_path_input.textChanged.connect(lambda: eval_wizard_answer(self))
 
         # Workflow page buttons
         self.ui.left_arrow_bn.clicked.connect(lambda: UIFunction.move_workflow_view(self, False))
@@ -649,6 +650,7 @@ class MainWindow(QMainWindow):
         self.diag = None
         self.wokflow_info = None
         self.spinner = None
+        self.basic_dialog = None
 
         # Variables to control the threads/workers of spin window 
         self.thread_spin = None
@@ -742,6 +744,23 @@ class MainWindow(QMainWindow):
         self.yes_no.create_question(question)
         center_window(self.yes_no, self.geometry())
         self.yes_no.exec_()
+
+    def basic_dialog_exec(self, text):
+        """ 
+        Starts a basic dialog to display additional information such as for wizard page questions. 
+
+        Parameters
+        ----------
+        text : str
+            Text to display.
+        """
+        if self.basic_dialog is None: 
+            self.basic_dialog = basic_Ui()
+
+        self.basic_dialog.set_info(text)
+        center_window(self.basic_dialog, self.geometry())
+        self.basic_dialog.exec_()
+
 
     def update_variable_in_GUI(self, variable_name, variable_value):
         """

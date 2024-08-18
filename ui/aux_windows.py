@@ -1,15 +1,16 @@
 import os
 from functools import partial
 
-from PySide2 import QtCore, QtGui, QtWidgets
-from PySide2.QtCore import (QThread, QCoreApplication, QPropertyAnimation, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
-from PySide2.QtGui import (QDesktopServices, QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
+from PySide2 import QtCore
+from PySide2.QtCore import ( QCoreApplication, QRect, QSize, Qt, QEvent)
+from PySide2.QtGui import (QDesktopServices, QColor, QFont, QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
 from PySide2.QtWidgets import *
 
 from ui_utils import mark_syntax_error, resource_path, change_page
 from ui.ui_dialog import Ui_Dialog 
 from ui.ui_yes_no import Ui_yes_no 
 from ui.spinner import Ui_spinner
+from ui.ui_basic import Ui_basic 
 from ui.ui_workflow_info import Ui_Workflow_info 
 from aux_classes.waitingspinnerwidget import QtWaitingSpinner
 
@@ -331,3 +332,20 @@ class spinner_Ui(QDialog):
             print(f"Possible expected error during closing spin window: {e}")
         self.spinner.stop()
         super().close()
+
+class basic_Ui(QDialog):
+    def __init__(self, parent=None):
+        super(basic_Ui, self).__init__(parent)
+        self.basic_window = Ui_basic()
+        self.basic_window.setupUi(self)
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint) 
+        self.basic_window.bn_close.clicked.connect(self.close)
+        self.basic_window.ok_bn.clicked.connect(self.close)
+        self.basic_window.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","close_icon.png"))))
+        self.basic_window.icon_label.setPixmap(QPixmap(resource_path(os.path.join("images","bn_images","info.png"))))
+        self.setStyleSheet("#centralwidget{ border: 1px solid black;} QWidget{ font-size:16px;}")
+        self.basic_window.message_label.setOpenExternalLinks(True)
+
+    def set_info(self, text):
+        self.basic_window.message_label.setText(text)
+

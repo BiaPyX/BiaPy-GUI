@@ -11,7 +11,7 @@ import re
 from pathlib import PurePath, Path, PureWindowsPath
 
 from PySide2 import QtCore
-from PySide2.QtCore import QObject, QThread, QItemSelectionModel, QItemSelection
+from PySide2.QtCore import QObject, QThread
 from PySide2.QtWidgets import *
 from PySide2.QtGui import  QBrush, QColor
 
@@ -244,29 +244,93 @@ def eval_wizard_answer(main_window):
     main_window : QMainWindow
         Main window of the application.
     """
-    mark_as_answered = False
-    if main_window.ui.wizard_question_answer.isVisible():
-        if main_window.allow_change_wizard_question_answer and main_window.ui.wizard_question_answer.currentIndex() != -1:
-            mark_as_answered = True
-            # Remember current answer
-            main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] = main_window.ui.wizard_question_answer.currentIndex()
-    else:
-        te = get_text(main_window.ui.wizard_path_input)
-        if te != "":
-            main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] = te    
-            mark_as_answered = True
-            set_text(main_window.ui.wizard_path_input, "")
+    if main_window.allow_change_wizard_question_answer:
+        mark_as_answered = False
+        
+        # Remember current answer
+        if main_window.ui.wizard_question_answer_frame.isVisible():
+            if main_window.ui.wizard_question_answer.currentIndex() != -1:
+                mark_as_answered = True
+                main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] = main_window.ui.wizard_question_answer.currentIndex()
+                for key, values in main_window.cfg.settings["wizard_variable_to_map"]["Q"+str(main_window.cfg.settings['wizard_question_index']+1)].items():
+                    main_window.cfg.settings["wizard_answers"][key] = values[main_window.ui.wizard_question_answer.currentIndex()]
+        else:
+            te = get_text(main_window.ui.wizard_path_input)
+            if te != "":
+                key = main_window.cfg.settings["wizard_variable_to_map"]["Q"+str(main_window.cfg.settings['wizard_question_index']+1)].keys()[0]
+                main_window.cfg.settings["wizard_answers"][key] = te
+                main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] = te    
+                mark_as_answered = True
+                set_text(main_window.ui.wizard_path_input, "")
 
-    if mark_as_answered:        
-        # Mark section as answered in TOC
-        index = main_window.cfg.settings['wizard_from_question_index_to_toc'][main_window.cfg.settings['wizard_question_index']]        
-        main_window.wizard_toc_model.item(index[0]).child(index[1]).setForeground(QColor(64,144,253))
+        if mark_as_answered:        
+            # Mark section as answered in TOC
+            index = main_window.cfg.settings['wizard_from_question_index_to_toc'][main_window.cfg.settings['wizard_question_index']]        
+            main_window.wizard_toc_model.item(index[0]).child(index[1]).setForeground(QColor(64,144,253))
 
-        # If all child questions are answered mark the header as answered too
-        if not any([True for i in main_window.cfg.settings['wizard_from_toc_to_question_index'][index[0]] if main_window.cfg.settings["wizard_question_answered_index"][i] == -1]):
-            main_window.wizard_toc_model.item(index[0]).setForeground(QBrush(QColor(64,144,253)))
+            # If all child questions are answered mark the header as answered too
+            if not any([True for i in main_window.cfg.settings['wizard_from_toc_to_question_index'][index[0]] if main_window.cfg.settings["wizard_question_answered_index"][i] == -1]):
+                main_window.wizard_toc_model.item(index[0]).setForeground(QBrush(QColor(64,144,253)))
 
-def change_wizard_page(main_window, val, based_on_toc=False):
+        # Check the questions that need to hide/appear
+        for question in main_window.cfg.settings["wizard_question_condition"]:
+            make_visible = True
+            set_default_value = True 
+            
+            # AND conditions
+            if len(main_window.cfg.settings["wizard_question_condition"][question]["and_cond"]) > 0:
+                for cond in main_window.cfg.settings["wizard_question_condition"][question]["and_cond"]:
+                    if main_window.cfg.settings["wizard_answers"][cond[0]] != -1:
+                        set_default_value = False
+                        if main_window.cfg.settings["wizard_answers"][cond[0]] != cond[1]:
+                            make_visible = False
+                            break
+                    else:
+                        make_visible = False
+                        break
+
+            if make_visible:
+                # OR conditions
+                if len(main_window.cfg.settings["wizard_question_condition"][question]["or_cond"]) > 0:
+                    for cond in main_window.cfg.settings["wizard_question_condition"][question]["or_cond"]:
+                        if main_window.cfg.settings["wizard_answers"][cond[0]] != -1:
+                            set_default_value = False
+                            if main_window.cfg.settings["wizard_answers"][cond[0]] not in cond[1]:
+                                make_visible = False
+                                break
+                        else:
+                            make_visible = False
+                            break
+
+            if not set_default_value:
+                question_number = int(question.replace("Q",""))-1
+                if make_visible:
+                    if not main_window.cfg.settings["wizard_question_visible"][question_number]:
+                        print(f"{question} Showing up ...")     
+                        main_window.cfg.settings['wizard_question_visible'][question_number] = True
+                        index_in_toc = main_window.cfg.settings['wizard_from_question_index_to_toc'][question_number]
+                        main_window.ui.wizard_treeView.setRowHidden(index_in_toc[1], main_window.wizard_toc_model.index(index_in_toc[0],0), False)
+                    else: 
+                        print(f"{question} Already visible")
+                    
+                else:
+                    if main_window.cfg.settings["wizard_question_visible"][question_number]:
+                        print(f"{question} Hiding ...")
+                        main_window.cfg.settings['wizard_question_visible'][question_number] = False
+                        index_in_toc = main_window.cfg.settings['wizard_from_question_index_to_toc'][question_number]
+                        main_window.ui.wizard_treeView.setRowHidden(index_in_toc[1], main_window.wizard_toc_model.index(index_in_toc[0],0), True)
+                    else:
+                        print(f"{question} Already hidden")
+
+        # Check if the headers need to be hiden or not
+        # for i in range(len(main_window.cfg.settings['wizard_from_toc_to_question_index'])):
+        #     start = main_window.cfg.settings['wizard_from_toc_to_question_index'][i][0]
+        #     end = main_window.cfg.settings['wizard_from_toc_to_question_index'][i][-1]
+        #     visible = True if any(main_window.cfg.settings['wizard_question_visible'][start:end]) else False
+        #     main_window.ui.wizard_treeView.setRowHidden(i, main_window.wizard_toc_model.invisibleRootItem().index() , not visible)
+
+
+def change_wizard_page(main_window, val, based_on_toc=False, added_val=0):
     """
     Changes wizard page.
 
@@ -281,6 +345,9 @@ def change_wizard_page(main_window, val, based_on_toc=False):
     based_on_toc : bool, optional
         If the call was triggered from QTreeView that represents the TOC. It advices the function that needs to 
         recalculated ``val`` value according to the selected index in TOC.
+    
+    added_val : bool, optional
+        The value to be added to ``val`` in order to calculate where to continue: next or previous question.
     """
     if based_on_toc:
         if main_window.not_allow_change_question:
@@ -294,13 +361,28 @@ def change_wizard_page(main_window, val, based_on_toc=False):
         if index.parent().row() != -1: 
             val = main_window.cfg.settings['wizard_from_toc_to_question_index'][index.parent().row()][index.row()]
 
-    if not based_on_toc:
-        eval_wizard_answer(main_window)
+    eval_wizard_answer(main_window)
 
+    # Calculate valid next/previous question
+    if not based_on_toc:
+        if added_val > 0:
+            val += 1
+            for i in range(val,len(main_window.cfg.settings['wizard_question_visible'])):
+                if main_window.cfg.settings['wizard_question_visible'][i]:
+                    val = i
+                    break 
+        if added_val < 0:
+            val -= 1
+            for i in range(val,0,-1):
+                if main_window.cfg.settings['wizard_question_visible'][i]:
+                    val = i
+                    break 
+    
     # Go to the first view of the wizard
+    last_shown = len(main_window.cfg.settings['wizard_question_visible']) - main_window.cfg.settings['wizard_question_visible'][::-1].index(True) -1
     if val == -1 and main_window.cfg.settings['wizard_question_index'] == 0:
         main_window.ui.wizard_main_frame.setCurrentWidget(main_window.ui.wizard_start_page)
-    elif val == main_window.cfg.settings['wizard_number_of_questions']:
+    elif val == last_shown+1:
         main_window.ui.wizard_main_frame.setCurrentWidget(main_window.ui.summary_page)
     else:
         main_window.ui.wizard_main_frame.setCurrentWidget(main_window.ui.questionary_page)
@@ -308,7 +390,7 @@ def change_wizard_page(main_window, val, based_on_toc=False):
         main_window.cfg.settings['wizard_question_index'] = val
         main_window.cfg.settings['wizard_question_index'] = max(0,main_window.cfg.settings['wizard_question_index'])
         main_window.cfg.settings['wizard_question_index'] = min(
-            main_window.cfg.settings['wizard_number_of_questions']-1, 
+            len(main_window.cfg.settings['wizard_from_question_index_to_toc'])-1, 
             main_window.cfg.settings['wizard_question_index']
         )
 
@@ -322,14 +404,16 @@ def change_wizard_page(main_window, val, based_on_toc=False):
         
         if main_window.cfg.settings['wizard_possible_answers'][main_window.cfg.settings['wizard_question_index']][0] == "PATH":
             main_window.ui.wizard_path_input_frame.setVisible(True)
-            main_window.ui.wizard_question_answer.setVisible(False)
+            main_window.ui.wizard_question_answer_frame.setVisible(False)
 
             # Remember the answer if the question was previously answered
             if main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] != -1:
                 set_text(main_window.ui.wizard_path_input, main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']])
+            else:
+                set_text(main_window.ui.wizard_path_input, "")
         else:
             main_window.ui.wizard_path_input_frame.setVisible(False)
-            main_window.ui.wizard_question_answer.setVisible(True)
+            main_window.ui.wizard_question_answer_frame.setVisible(True)
                 
             # Prevent eval_wizard_answer functionality during wizard_question_answer's currentIndexChanged trigger. It triggers a few times 
             # when clearing and inserting new data 
@@ -376,6 +460,8 @@ def clear_answers(main_window):
     main_window.yes_no_exec("Are you sure you want to clear all answers?")
     if main_window.yes_no.answer:
         main_window.cfg.settings["wizard_question_answered_index"] = [-1,]*main_window.cfg.settings["wizard_number_of_questions"] 
+        for key, _ in main_window.cfg.settings["wizard_answers"].items():
+            main_window.cfg.settings["wizard_answers"][key] = -1
         for i in range(main_window.wizard_toc_model.rowCount()):
             main_window.wizard_toc_model.item(i).setForeground(QColor(0,0,0))
             for j in range(main_window.wizard_toc_model.item(i).rowCount()):

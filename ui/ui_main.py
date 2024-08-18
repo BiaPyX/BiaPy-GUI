@@ -1061,7 +1061,7 @@ class Ui_MainWindow(object):
 "}")
         self.wizard_frame = QFrame(self.page_wizard)
         self.wizard_frame.setObjectName(u"wizard_frame")
-        self.wizard_frame.setGeometry(QRect(0, 0, 948, 568))
+        self.wizard_frame.setGeometry(QRect(0, 0, 948, 555))
         self.wizard_frame.setFrameShape(QFrame.NoFrame)
         self.wizard_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_48 = QVBoxLayout(self.wizard_frame)
@@ -1085,6 +1085,9 @@ class Ui_MainWindow(object):
         self.frame_68 = QFrame(self.frame_67)
         self.frame_68.setObjectName(u"frame_68")
         self.frame_68.setMinimumSize(QSize(0, 300))
+        font4 = QFont()
+        font4.setFamily(u"DejaVu Math TeX Gyre")
+        self.frame_68.setFont(font4)
         self.frame_68.setFrameShape(QFrame.NoFrame)
         self.frame_68.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_39 = QHBoxLayout(self.frame_68)
@@ -1163,23 +1166,21 @@ class Ui_MainWindow(object):
         self.frame_70.setObjectName(u"frame_70")
         self.frame_70.setMinimumSize(QSize(250, 0))
         self.frame_70.setMaximumSize(QSize(250, 16777215))
-        self.frame_70.setFrameShape(QFrame.NoFrame)
-        self.frame_70.setFrameShadow(QFrame.Raised)
+        self.frame_70.setFrameShape(QFrame.StyledPanel)
+        self.frame_70.setFrameShadow(QFrame.Plain)
         self.verticalLayout_56 = QVBoxLayout(self.frame_70)
-        self.verticalLayout_56.setSpacing(0)
+        self.verticalLayout_56.setSpacing(10)
         self.verticalLayout_56.setObjectName(u"verticalLayout_56")
-        self.verticalLayout_56.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_56.setContentsMargins(6, 6, 6, 6)
         self.wizard_treeView = QTreeView(self.frame_70)
         self.wizard_treeView.setObjectName(u"wizard_treeView")
         self.wizard_treeView.setMinimumSize(QSize(0, 0))
         self.wizard_treeView.setMaximumSize(QSize(16777215, 16777215))
-        font4 = QFont()
-        font4.setFamily(u"Arial")
-        font4.setPointSize(12)
-        self.wizard_treeView.setFont(font4)
+        self.wizard_treeView.setFont(font)
         self.wizard_treeView.setFrameShape(QFrame.NoFrame)
         self.wizard_treeView.setEditTriggers(QAbstractItemView.DoubleClicked)
         self.wizard_treeView.setAlternatingRowColors(False)
+        self.wizard_treeView.setIndentation(10)
         self.wizard_treeView.setHeaderHidden(True)
 
         self.verticalLayout_56.addWidget(self.wizard_treeView)
@@ -1192,8 +1193,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_43.setObjectName(u"horizontalLayout_43")
         self.wizard_clear_answers_bn = QPushButton(self.frame_74)
         self.wizard_clear_answers_bn.setObjectName(u"wizard_clear_answers_bn")
-        self.wizard_clear_answers_bn.setMinimumSize(QSize(140, 30))
-        self.wizard_clear_answers_bn.setFont(font4)
+        self.wizard_clear_answers_bn.setMinimumSize(QSize(160, 30))
+        self.wizard_clear_answers_bn.setFont(font)
         self.wizard_clear_answers_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgb(64,144,253);\n"
@@ -1210,12 +1211,8 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_43.addWidget(self.wizard_clear_answers_bn)
 
-        self.horizontalSpacer_85 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.horizontalLayout_43.addItem(self.horizontalSpacer_85)
-
-
-        self.verticalLayout_56.addWidget(self.frame_74)
+        self.verticalLayout_56.addWidget(self.frame_74, 0, Qt.AlignHCenter)
 
 
         self.horizontalLayout_40.addWidget(self.frame_70)
@@ -1253,12 +1250,12 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "QPushButton:hover {\n"
-"	background-color: rgb(200,200,200);\n"
+"	background-color: rgb(197,234,250);\n"
 "	border: 2px solid rgb(0, 0, 0);\n"
 "}\n"
 "\n"
 "QPushButton:pressed {	\n"
-"	background-color: rgb(200,200,200);\n"
+"	background-color: rgb(197,234,250);\n"
 "	border: 2px solid rgb(0, 0, 0);\n"
 "}\n"
 "")
@@ -1271,6 +1268,7 @@ class Ui_MainWindow(object):
 
         self.wizard_quest_frame = QFrame(self.frame_65)
         self.wizard_quest_frame.setObjectName(u"wizard_quest_frame")
+        self.wizard_quest_frame.setMinimumSize(QSize(0, 0))
         self.wizard_quest_frame.setStyleSheet(u"#wizard_quest_frame {\n"
 "border: 5px solid rgb(64,144,253);\n"
 "border-radius: 35px;\n"
@@ -1295,43 +1293,99 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_51.addWidget(self.wizard_quest_frame)
 
-        self.wizard_question_answer = QComboBox(self.frame_65)
+        self.wizard_question_answer_frame = QFrame(self.frame_65)
+        self.wizard_question_answer_frame.setObjectName(u"wizard_question_answer_frame")
+        self.wizard_question_answer_frame.setFrameShape(QFrame.NoFrame)
+        self.wizard_question_answer_frame.setFrameShadow(QFrame.Raised)
+        self.gridLayout_81 = QGridLayout(self.wizard_question_answer_frame)
+        self.gridLayout_81.setObjectName(u"gridLayout_81")
+        self.gridLayout_81.setHorizontalSpacing(6)
+        self.gridLayout_81.setContentsMargins(0, 0, 0, 0)
+        self.wizard_question_answer = QComboBox(self.wizard_question_answer_frame)
         self.wizard_question_answer.setObjectName(u"wizard_question_answer")
         self.wizard_question_answer.setMinimumSize(QSize(0, 0))
-        self.wizard_question_answer.setFont(font4)
+        self.wizard_question_answer.setFont(font)
 
-        self.verticalLayout_51.addWidget(self.wizard_question_answer)
+        self.gridLayout_81.addWidget(self.wizard_question_answer, 1, 0, 1, 1)
+
+        self.label_113 = QLabel(self.wizard_question_answer_frame)
+        self.label_113.setObjectName(u"label_113")
+        self.label_113.setFont(font)
+
+        self.gridLayout_81.addWidget(self.label_113, 0, 0, 1, 1)
+
+
+        self.verticalLayout_51.addWidget(self.wizard_question_answer_frame)
 
         self.wizard_path_input_frame = QFrame(self.frame_65)
         self.wizard_path_input_frame.setObjectName(u"wizard_path_input_frame")
         self.wizard_path_input_frame.setFrameShape(QFrame.NoFrame)
         self.wizard_path_input_frame.setFrameShadow(QFrame.Raised)
-        self.gridLayout_80 = QGridLayout(self.wizard_path_input_frame)
-        self.gridLayout_80.setObjectName(u"gridLayout_80")
-        self.gridLayout_80.setContentsMargins(0, 0, 0, 0)
-        self.horizontalSpacer_86 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.verticalLayout_57 = QVBoxLayout(self.wizard_path_input_frame)
+        self.verticalLayout_57.setObjectName(u"verticalLayout_57")
+        self.verticalLayout_57.setContentsMargins(0, 0, 0, 9)
+        self.label_112 = QLabel(self.wizard_path_input_frame)
+        self.label_112.setObjectName(u"label_112")
+        self.label_112.setFont(font)
 
-        self.gridLayout_80.addItem(self.horizontalSpacer_86, 1, 2, 1, 1)
+        self.verticalLayout_57.addWidget(self.label_112)
 
-        self.wizard_path_input = QLineEdit(self.wizard_path_input_frame)
+        self.frame_75 = QFrame(self.wizard_path_input_frame)
+        self.frame_75.setObjectName(u"frame_75")
+        self.frame_75.setFrameShape(QFrame.StyledPanel)
+        self.frame_75.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_41 = QHBoxLayout(self.frame_75)
+        self.horizontalLayout_41.setObjectName(u"horizontalLayout_41")
+        self.horizontalLayout_41.setContentsMargins(0, 0, 0, 0)
+        self.wizard_path_input = QLineEdit(self.frame_75)
         self.wizard_path_input.setObjectName(u"wizard_path_input")
         self.wizard_path_input.setMinimumSize(QSize(500, 30))
         self.wizard_path_input.setMaximumSize(QSize(500, 16777215))
-        self.wizard_path_input.setFont(font4)
+        self.wizard_path_input.setFont(font)
+        self.wizard_path_input.setReadOnly(True)
 
-        self.gridLayout_80.addWidget(self.wizard_path_input, 1, 0, 1, 1)
+        self.horizontalLayout_41.addWidget(self.wizard_path_input)
 
-        self.label_112 = QLabel(self.wizard_path_input_frame)
-        self.label_112.setObjectName(u"label_112")
-        self.label_112.setFont(font4)
-
-        self.gridLayout_80.addWidget(self.label_112, 0, 0, 1, 1)
-
-        self.wizard_path_input_bn = QPushButton(self.wizard_path_input_frame)
+        self.wizard_path_input_bn = QPushButton(self.frame_75)
         self.wizard_path_input_bn.setObjectName(u"wizard_path_input_bn")
-        self.wizard_path_input_bn.setFont(font4)
+        self.wizard_path_input_bn.setFont(font)
 
-        self.gridLayout_80.addWidget(self.wizard_path_input_bn, 1, 1, 1, 1)
+        self.horizontalLayout_41.addWidget(self.wizard_path_input_bn)
+
+
+        self.verticalLayout_57.addWidget(self.frame_75)
+
+        self.frame_76 = QFrame(self.wizard_path_input_frame)
+        self.frame_76.setObjectName(u"frame_76")
+        self.frame_76.setFrameShape(QFrame.StyledPanel)
+        self.frame_76.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_58 = QVBoxLayout(self.frame_76)
+        self.verticalLayout_58.setObjectName(u"verticalLayout_58")
+        self.pushButton_2 = QPushButton(self.frame_76)
+        self.pushButton_2.setObjectName(u"pushButton_2")
+        self.pushButton_2.setMinimumSize(QSize(100, 35))
+        font5 = QFont()
+        font5.setFamily(u"Arial")
+        font5.setPointSize(12)
+        self.pushButton_2.setFont(font5)
+        self.pushButton_2.setStyleSheet(u"QPushButton {\n"
+"	border: none;\n"
+"	background-color: rgb(64,144,253);\n"
+"	border-radius: 15px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(255,255,255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"}")
+
+        self.verticalLayout_58.addWidget(self.pushButton_2)
+
+
+        self.verticalLayout_57.addWidget(self.frame_76, 0, Qt.AlignHCenter|Qt.AlignVCenter)
 
 
         self.verticalLayout_51.addWidget(self.wizard_path_input_frame)
@@ -1353,10 +1407,10 @@ class Ui_MainWindow(object):
         self.wizard_back_bn = QPushButton(self.frame_52)
         self.wizard_back_bn.setObjectName(u"wizard_back_bn")
         self.wizard_back_bn.setMinimumSize(QSize(100, 35))
-        font5 = QFont()
-        font5.setFamily(u"Arial")
-        font5.setPointSize(20)
-        self.wizard_back_bn.setFont(font5)
+        font6 = QFont()
+        font6.setFamily(u"DejaVu Math TeX Gyre")
+        font6.setPointSize(20)
+        self.wizard_back_bn.setFont(font6)
         self.wizard_back_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgb(64,144,253);\n"
@@ -1380,7 +1434,7 @@ class Ui_MainWindow(object):
         self.wizard_cont_bn = QPushButton(self.frame_52)
         self.wizard_cont_bn.setObjectName(u"wizard_cont_bn")
         self.wizard_cont_bn.setMinimumSize(QSize(100, 35))
-        self.wizard_cont_bn.setFont(font5)
+        self.wizard_cont_bn.setFont(font6)
         self.wizard_cont_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgb(64,144,253);\n"
@@ -1411,7 +1465,7 @@ class Ui_MainWindow(object):
         self.summary_page.setObjectName(u"summary_page")
         self.frame_71 = QFrame(self.summary_page)
         self.frame_71.setObjectName(u"frame_71")
-        self.frame_71.setGeometry(QRect(9, 9, 974, 541))
+        self.frame_71.setGeometry(QRect(0, 0, 949, 556))
         self.frame_71.setFrameShape(QFrame.StyledPanel)
         self.frame_71.setFrameShadow(QFrame.Raised)
         self.verticalLayout_50 = QVBoxLayout(self.frame_71)
@@ -1426,26 +1480,31 @@ class Ui_MainWindow(object):
         self.gridLayout_79.setObjectName(u"gridLayout_79")
         self.label_24 = QLabel(self.frame_72)
         self.label_24.setObjectName(u"label_24")
+        self.label_24.setFont(font4)
 
         self.gridLayout_79.addWidget(self.label_24, 1, 0, 1, 1)
 
         self.label_44 = QLabel(self.frame_72)
         self.label_44.setObjectName(u"label_44")
+        self.label_44.setFont(font4)
 
         self.gridLayout_79.addWidget(self.label_44, 2, 0, 1, 1)
 
         self.label_101 = QLabel(self.frame_72)
         self.label_101.setObjectName(u"label_101")
+        self.label_101.setFont(font4)
 
         self.gridLayout_79.addWidget(self.label_101, 4, 0, 1, 1)
 
         self.label_75 = QLabel(self.frame_72)
         self.label_75.setObjectName(u"label_75")
+        self.label_75.setFont(font4)
 
         self.gridLayout_79.addWidget(self.label_75, 3, 0, 1, 1)
 
         self.label_108 = QLabel(self.frame_72)
         self.label_108.setObjectName(u"label_108")
+        self.label_108.setFont(font4)
 
         self.gridLayout_79.addWidget(self.label_108, 0, 0, 1, 1)
 
@@ -1461,9 +1520,9 @@ class Ui_MainWindow(object):
         self.wizard_summary_back_bn = QPushButton(self.frame_73)
         self.wizard_summary_back_bn.setObjectName(u"wizard_summary_back_bn")
         self.wizard_summary_back_bn.setMinimumSize(QSize(91, 24))
-        font6 = QFont()
-        font6.setPointSize(12)
-        self.wizard_summary_back_bn.setFont(font6)
+        font7 = QFont()
+        font7.setPointSize(12)
+        self.wizard_summary_back_bn.setFont(font7)
         self.wizard_summary_back_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgba(0,0,0,0);\n"
@@ -1485,7 +1544,7 @@ class Ui_MainWindow(object):
         self.pushButton = QPushButton(self.frame_73)
         self.pushButton.setObjectName(u"pushButton")
         self.pushButton.setMinimumSize(QSize(180, 35))
-        self.pushButton.setFont(font4)
+        self.pushButton.setFont(font)
         self.pushButton.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgb(64,144,253);\n"
@@ -1610,15 +1669,14 @@ class Ui_MainWindow(object):
         self.workflow_view1_seemore_bn = QPushButton(self.frame_17)
         self.workflow_view1_seemore_bn.setObjectName(u"workflow_view1_seemore_bn")
         self.workflow_view1_seemore_bn.setMinimumSize(QSize(140, 30))
-        font7 = QFont()
-        font7.setFamily(u"DejaVu Math TeX Gyre")
-        font7.setPointSize(11)
-        self.workflow_view1_seemore_bn.setFont(font7)
+        font8 = QFont()
+        font8.setFamily(u"DejaVu Math TeX Gyre")
+        font8.setPointSize(11)
+        self.workflow_view1_seemore_bn.setFont(font8)
         self.workflow_view1_seemore_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
-"	background-color: rgb(255,255,255);\n"
+"	background-color: rgb(64,144,253);\n"
 "	border-radius: 15px;\n"
-"   border: 2px solid rgb(0, 0, 0);\n"
 "}\n"
 "QPushButton:hover {\n"
 "	background-color: rgb(255,255,255);\n"
@@ -1693,12 +1751,11 @@ class Ui_MainWindow(object):
         self.workflow_view2_seemore_bn = QPushButton(self.frame_59)
         self.workflow_view2_seemore_bn.setObjectName(u"workflow_view2_seemore_bn")
         self.workflow_view2_seemore_bn.setMinimumSize(QSize(140, 30))
-        self.workflow_view2_seemore_bn.setFont(font7)
+        self.workflow_view2_seemore_bn.setFont(font8)
         self.workflow_view2_seemore_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
-"	background-color: rgb(255,255,255);\n"
+"	background-color: rgb(64,144,253);\n"
 "	border-radius: 15px;\n"
-"   border: 2px solid rgb(0, 0, 0);\n"
 "}\n"
 "QPushButton:hover {\n"
 "	background-color: rgb(255,255,255);\n"
@@ -1771,12 +1828,11 @@ class Ui_MainWindow(object):
         self.workflow_view3_seemore_bn = QPushButton(self.frame_18)
         self.workflow_view3_seemore_bn.setObjectName(u"workflow_view3_seemore_bn")
         self.workflow_view3_seemore_bn.setMinimumSize(QSize(140, 30))
-        self.workflow_view3_seemore_bn.setFont(font7)
+        self.workflow_view3_seemore_bn.setFont(font8)
         self.workflow_view3_seemore_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
-"	background-color: rgb(255,255,255);\n"
+"	background-color: rgb(64,144,253);\n"
 "	border-radius: 15px;\n"
-"   border: 2px solid rgb(0, 0, 0);\n"
 "}\n"
 "QPushButton:hover {\n"
 "	background-color: rgb(255,255,255);\n"
@@ -1868,12 +1924,11 @@ class Ui_MainWindow(object):
         self.workflow_view4_seemore_bn = QPushButton(self.frame_42)
         self.workflow_view4_seemore_bn.setObjectName(u"workflow_view4_seemore_bn")
         self.workflow_view4_seemore_bn.setMinimumSize(QSize(140, 30))
-        self.workflow_view4_seemore_bn.setFont(font7)
+        self.workflow_view4_seemore_bn.setFont(font8)
         self.workflow_view4_seemore_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
-"	background-color: rgb(255,255,255);\n"
+"	background-color: rgb(64,144,253);\n"
 "	border-radius: 15px;\n"
-"   border: 2px solid rgb(0, 0, 0);\n"
 "}\n"
 "QPushButton:hover {\n"
 "	background-color: rgb(255,255,255);\n"
@@ -1946,12 +2001,11 @@ class Ui_MainWindow(object):
         self.workflow_view5_seemore_bn = QPushButton(self.frame_53)
         self.workflow_view5_seemore_bn.setObjectName(u"workflow_view5_seemore_bn")
         self.workflow_view5_seemore_bn.setMinimumSize(QSize(140, 30))
-        self.workflow_view5_seemore_bn.setFont(font7)
+        self.workflow_view5_seemore_bn.setFont(font8)
         self.workflow_view5_seemore_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
-"	background-color: rgb(255,255,255);\n"
+"	background-color: rgb(64,144,253);\n"
 "	border-radius: 15px;\n"
-"   border: 2px solid rgb(0, 0, 0);\n"
 "}\n"
 "QPushButton:hover {\n"
 "	background-color: rgb(255,255,255);\n"
@@ -2024,12 +2078,11 @@ class Ui_MainWindow(object):
         self.workflow_view6_seemore_bn = QPushButton(self.frame_56)
         self.workflow_view6_seemore_bn.setObjectName(u"workflow_view6_seemore_bn")
         self.workflow_view6_seemore_bn.setMinimumSize(QSize(140, 30))
-        self.workflow_view6_seemore_bn.setFont(font7)
+        self.workflow_view6_seemore_bn.setFont(font8)
         self.workflow_view6_seemore_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
-"	background-color: rgb(255,255,255);\n"
+"	background-color: rgb(64,144,253);\n"
 "	border-radius: 15px;\n"
-"   border: 2px solid rgb(0, 0, 0);\n"
 "}\n"
 "QPushButton:hover {\n"
 "	background-color: rgb(255,255,255);\n"
@@ -2102,12 +2155,11 @@ class Ui_MainWindow(object):
         self.workflow_view7_seemore_bn = QPushButton(self.frame_60)
         self.workflow_view7_seemore_bn.setObjectName(u"workflow_view7_seemore_bn")
         self.workflow_view7_seemore_bn.setMinimumSize(QSize(140, 30))
-        self.workflow_view7_seemore_bn.setFont(font7)
+        self.workflow_view7_seemore_bn.setFont(font8)
         self.workflow_view7_seemore_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
-"	background-color: rgb(255,255,255);\n"
+"	background-color: rgb(64,144,253);\n"
 "	border-radius: 15px;\n"
-"   border: 2px solid rgb(0, 0, 0);\n"
 "}\n"
 "QPushButton:hover {\n"
 "	background-color: rgb(255,255,255);\n"
@@ -2184,12 +2236,11 @@ class Ui_MainWindow(object):
         self.workflow_view8_seemore_bn = QPushButton(self.frame_62)
         self.workflow_view8_seemore_bn.setObjectName(u"workflow_view8_seemore_bn")
         self.workflow_view8_seemore_bn.setMinimumSize(QSize(140, 30))
-        self.workflow_view8_seemore_bn.setFont(font7)
+        self.workflow_view8_seemore_bn.setFont(font8)
         self.workflow_view8_seemore_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
-"	background-color: rgb(255,255,255);\n"
+"	background-color: rgb(64,144,253);\n"
 "	border-radius: 15px;\n"
-"   border: 2px solid rgb(0, 0, 0);\n"
 "}\n"
 "QPushButton:hover {\n"
 "	background-color: rgb(255,255,255);\n"
@@ -3065,7 +3116,7 @@ class Ui_MainWindow(object):
         self.DATA__NORMALIZATION__PERC_UPPER__INFO.setObjectName(u"DATA__NORMALIZATION__PERC_UPPER__INFO")
         self.DATA__NORMALIZATION__PERC_UPPER__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__NORMALIZATION__PERC_UPPER__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__NORMALIZATION__PERC_UPPER__INFO.setFont(font6)
+        self.DATA__NORMALIZATION__PERC_UPPER__INFO.setFont(font7)
         self.DATA__NORMALIZATION__PERC_UPPER__INFO.setScaledContents(True)
 
         self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__PERC_UPPER__INFO, 12, 3, 1, 1)
@@ -3134,7 +3185,7 @@ class Ui_MainWindow(object):
         self.DATA__NORMALIZATION__PERC_CLIP__INFO.setObjectName(u"DATA__NORMALIZATION__PERC_CLIP__INFO")
         self.DATA__NORMALIZATION__PERC_CLIP__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__NORMALIZATION__PERC_CLIP__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__NORMALIZATION__PERC_CLIP__INFO.setFont(font6)
+        self.DATA__NORMALIZATION__PERC_CLIP__INFO.setFont(font7)
         self.DATA__NORMALIZATION__PERC_CLIP__INFO.setScaledContents(True)
 
         self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__PERC_CLIP__INFO, 10, 3, 1, 1)
@@ -3243,7 +3294,7 @@ class Ui_MainWindow(object):
         self.DATA__NORMALIZATION__PERC_LOWER__INFO.setObjectName(u"DATA__NORMALIZATION__PERC_LOWER__INFO")
         self.DATA__NORMALIZATION__PERC_LOWER__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__NORMALIZATION__PERC_LOWER__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__NORMALIZATION__PERC_LOWER__INFO.setFont(font6)
+        self.DATA__NORMALIZATION__PERC_LOWER__INFO.setFont(font7)
         self.DATA__NORMALIZATION__PERC_LOWER__INFO.setScaledContents(True)
 
         self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__PERC_LOWER__INFO, 11, 3, 1, 1)
@@ -6162,9 +6213,9 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__RESIZE__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__INFO")
         self.DATA__PREPROCESS__RESIZE__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__RESIZE__INFO.setMaximumSize(QSize(30, 30))
-        font8 = QFont()
-        font8.setFamily(u"URW Gothic [urw]")
-        self.DATA__PREPROCESS__RESIZE__INFO.setFont(font8)
+        font9 = QFont()
+        font9.setFamily(u"URW Gothic [urw]")
+        self.DATA__PREPROCESS__RESIZE__INFO.setFont(font9)
         self.DATA__PREPROCESS__RESIZE__INFO.setScaledContents(True)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__INFO, 0, 1, 1, 1)
@@ -6874,7 +6925,7 @@ class Ui_MainWindow(object):
         self.TRAIN__VERBOSE__INFO.setObjectName(u"TRAIN__VERBOSE__INFO")
         self.TRAIN__VERBOSE__INFO.setMinimumSize(QSize(30, 30))
         self.TRAIN__VERBOSE__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__VERBOSE__INFO.setFont(font6)
+        self.TRAIN__VERBOSE__INFO.setFont(font7)
         self.TRAIN__VERBOSE__INFO.setScaledContents(True)
 
         self.gridLayout_29.addWidget(self.TRAIN__VERBOSE__INFO, 24, 1, 1, 1)
@@ -8120,7 +8171,7 @@ class Ui_MainWindow(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollAreaWidgetContents_7 = QWidget()
         self.scrollAreaWidgetContents_7.setObjectName(u"scrollAreaWidgetContents_7")
-        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 927, 323))
+        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 526, 219))
         self.gridLayout_19 = QGridLayout(self.scrollAreaWidgetContents_7)
         self.gridLayout_19.setObjectName(u"gridLayout_19")
         self.label_48 = QLabel(self.scrollAreaWidgetContents_7)
@@ -9965,7 +10016,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__RESIZE__TEST__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__TEST__INFO")
         self.DATA__PREPROCESS__RESIZE__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__RESIZE__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__TEST__INFO.setFont(font8)
+        self.DATA__PREPROCESS__RESIZE__TEST__INFO.setFont(font9)
         self.DATA__PREPROCESS__RESIZE__TEST__INFO.setScaledContents(True)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__TEST__INFO, 0, 1, 1, 1)
@@ -12274,12 +12325,12 @@ class Ui_MainWindow(object):
         self.page_create_yaml_bottom_frame.setObjectName(u"page_create_yaml_bottom_frame")
         self.page_create_yaml_bottom_frame.setMinimumSize(QSize(0, 103))
         self.page_create_yaml_bottom_frame.setMaximumSize(QSize(16777215, 16777215))
-        font9 = QFont()
-        font9.setFamily(u"DejaVu Math TeX Gyre")
-        font9.setPointSize(12)
-        font9.setBold(False)
-        font9.setWeight(50)
-        self.page_create_yaml_bottom_frame.setFont(font9)
+        font10 = QFont()
+        font10.setFamily(u"DejaVu Math TeX Gyre")
+        font10.setPointSize(12)
+        font10.setBold(False)
+        font10.setWeight(50)
+        self.page_create_yaml_bottom_frame.setFont(font10)
         self.page_create_yaml_bottom_frame.setFrameShape(QFrame.NoFrame)
         self.page_create_yaml_bottom_frame.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_8 = QHBoxLayout(self.page_create_yaml_bottom_frame)
@@ -12324,13 +12375,13 @@ class Ui_MainWindow(object):
         self.continue_bn.setObjectName(u"continue_bn")
         self.continue_bn.setMinimumSize(QSize(0, 40))
         self.continue_bn.setMaximumSize(QSize(220, 77))
-        font10 = QFont()
-        font10.setFamily(u"DejaVu Math TeX Gyre")
-        font10.setPointSize(12)
-        font10.setBold(False)
-        font10.setWeight(50)
-        font10.setStrikeOut(False)
-        self.continue_bn.setFont(font10)
+        font11 = QFont()
+        font11.setFamily(u"DejaVu Math TeX Gyre")
+        font11.setPointSize(12)
+        font11.setBold(False)
+        font11.setWeight(50)
+        font11.setStrikeOut(False)
+        self.continue_bn.setFont(font11)
         self.continue_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgb(64,144,253);\n"
@@ -12537,10 +12588,7 @@ class Ui_MainWindow(object):
         self.run_biapy_docker_bn.setObjectName(u"run_biapy_docker_bn")
         self.run_biapy_docker_bn.setMinimumSize(QSize(300, 40))
         self.run_biapy_docker_bn.setMaximumSize(QSize(300, 16777215))
-        font11 = QFont()
-        font11.setFamily(u"DejaVu Math TeX Gyre")
-        font11.setPointSize(20)
-        self.run_biapy_docker_bn.setFont(font11)
+        self.run_biapy_docker_bn.setFont(font6)
         self.run_biapy_docker_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgb(64,144,253);\n"
@@ -12618,7 +12666,7 @@ class Ui_MainWindow(object):
         self.check_yaml_file_errors_frame.setWidgetResizable(True)
         self.scrollAreaWidgetContents_19 = QWidget()
         self.scrollAreaWidgetContents_19.setObjectName(u"scrollAreaWidgetContents_19")
-        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 896, 101))
+        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 31, 19))
         self.verticalLayout_32 = QVBoxLayout(self.scrollAreaWidgetContents_19)
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
         self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)
@@ -12766,7 +12814,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.stackedWidget.setCurrentIndex(1)
-        self.wizard_main_frame.setCurrentIndex(1)
+        self.wizard_main_frame.setCurrentIndex(0)
         self.stackedWidget_create_yaml_frame.setCurrentIndex(0)
         self.train_tab_widget.setCurrentIndex(0)
         self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(2)
@@ -12838,8 +12886,10 @@ class Ui_MainWindow(object):
         self.wizard_clear_answers_bn.setText(QCoreApplication.translate("MainWindow", u"Clear all answers", None))
         self.wizard_question_wizard_icon.setText("")
         self.wizard_question.setText("")
+        self.label_113.setText(QCoreApplication.translate("MainWindow", u"Options", None))
         self.label_112.setText(QCoreApplication.translate("MainWindow", u"Path", None))
         self.wizard_path_input_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
+        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"Check data", None))
         self.wizard_back_bn.setText(QCoreApplication.translate("MainWindow", u"<", None))
         self.wizard_cont_bn.setText(QCoreApplication.translate("MainWindow", u">", None))
         self.label_24.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))

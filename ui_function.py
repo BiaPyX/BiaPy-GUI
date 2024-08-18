@@ -6,7 +6,7 @@ from collections import deque
 import requests
 
 from PySide2.QtGui import QPixmap, QFont, QStandardItemModel, QStandardItem, QBrush, QColor, QIcon
-from PySide2.QtCore import QSize, QThread, QFile, QIODevice, QEvent, QObject, Qt 
+from PySide2.QtCore import QSize, QThread, QFile, QIODevice, QEvent, QObject, Qt, QSortFilterProxyModel 
 from PySide2.QtSvg import QSvgWidget
 from PySide2.QtWidgets import QLabel, QFrame
 
@@ -178,7 +178,7 @@ class UIFunction(MainWindow):
         main_window.cfg.settings['wizard_animation_img'].start()
         main_window.cfg.settings["wizard_animation_img"].frameChanged.connect(update_ani)
         main_window.ui.wizard_question_wizard_icon.setIcon(main_window.cfg.settings["wizard_animation_img"].currentPixmap())
-        # main_window.ui.wizard_question_wizard_icon.setMovie(main_window.cfg.settings['wizard_animation_img'])
+
         main_window.wizard_toc_model = QStandardItemModel()
         UIFunction.configure_from_list(main_window.wizard_toc_model, main_window.cfg.settings["wizard_sections"])     
         main_window.ui.wizard_treeView.setModel(main_window.wizard_toc_model)
@@ -188,6 +188,12 @@ class UIFunction(MainWindow):
         main_window.ui.wizard_treeView.selectionModel().selectionChanged.connect(
             lambda: change_wizard_page(main_window, main_window.cfg.settings['wizard_question_index'], based_on_toc=True))
         
+        # Set TOC item visibility 
+        for i, vis in enumerate(main_window.cfg.settings['wizard_question_visible']):
+            vis = main_window.cfg.settings['wizard_question_visible'][i]
+            index_in_toc = main_window.cfg.settings['wizard_from_question_index_to_toc'][i]
+            main_window.ui.wizard_treeView.setRowHidden(index_in_toc[1], main_window.wizard_toc_model.index(index_in_toc[0],0), not vis)
+                
         main_window.ui.wizard_path_input_frame.setVisible(False)
         main_window.ui.wizard_question_answer.setVisible(True)
 
@@ -234,7 +240,8 @@ class UIFunction(MainWindow):
             Number of the question.
         """
         # Load first time
-        print("HEERE")
+        main_window.basic_dialog_exec(main_window.cfg.settings["wizard_question_additional_info"][0])
+
         # if not 'workflow_description_images' in main_window.cfg.settings:
         #     main_window.cfg.load_workflow_detail_page()
 
