@@ -359,7 +359,7 @@ class Settings:
             [
                 "Generate masks of different (or just one) objects/regions within the image",
                 "Generate masks for each object in the image",
-                "Count/locate objects within the images and don’t care of the exact mask that circumscribes the objects",
+                "Count/locate roundish objects within the images (don’t care of the exact mask that circumscribes the objects)",
                 "Clean noisy images",
                 "Upsample images into higher resolution",
                 "Pretrain a model using input images and then apply that model afterwards",
@@ -398,13 +398,14 @@ class Settings:
             [
                 "No, I want to build a model from scratch",
                 "Yes, I have a model previously trained in BiaPy",
-                "Yes, I want to check if there is a model in BioImage Model Zoo that I can use",
-                "Yes, I want to use a model from TorchVision",
+                "Yes, I want to check if there is a pretrained model I can use",
             ]
         ]
         self.settings["wizard_variable_to_map"]["Q3"] = {}
-        self.settings["wizard_variable_to_map"]["Q3"]["MODEL.SOURCE"] = ["biapy", "biapy", "bmz", "torchvision"]
+        self.settings["wizard_variable_to_map"]["Q3"]["MODEL.SOURCE"] = ["biapy", "biapy", "bmz"]
+        self.settings["wizard_variable_to_map"]["Q3"]["MODEL.LOAD_CHECKPOINT"] = ["False", "True", "False"]
         self.settings["wizard_answers"]["MODEL.SOURCE"] = -1 
+        self.settings["wizard_answers"]["MODEL.LOAD_CHECKPOINT"] = -1 
         self.settings["wizard_sections"][-1][1] += ["Model source"]
         self.settings["wizard_from_question_index_to_toc"].append(
             [0, len(self.settings["wizard_from_toc_to_question_index"][-1])]
@@ -417,6 +418,76 @@ class Settings:
         # Q4 #
         ######
         self.settings["wizard_question_condition"]["Q4"] = {
+            "or_cond": [ ],
+            "and_cond": [
+                ["MODEL.SOURCE", "biapy"],
+                ["MODEL.LOAD_CHECKPOINT", "True"],
+            ],
+        }
+        self.settings["wizard_questions"] += [
+            "Please select the pretrained model trained with BiaPy before:",
+        ]
+        self.settings["wizard_possible_answers"] += [["MODEL_BIAPY",]]
+        self.settings["wizard_variable_to_map"]["Q4"] = {}
+        self.settings["wizard_variable_to_map"]["Q4"]["PATHS.CHECKPOINT_FILE"] = ""
+        self.settings["wizard_answers"]["PATHS.CHECKPOINT_FILE"] = -1
+        self.settings["wizard_sections"][-1][1] += ["Path to model"]
+        self.settings["wizard_from_question_index_to_toc"].append(
+            [0, len(self.settings["wizard_from_toc_to_question_index"][-1])]
+        )
+        self.settings["wizard_from_toc_to_question_index"][-1].append(q_count)
+        self.settings["wizard_question_visible"].append(False)
+        q_count += 1
+
+        ######
+        # Q5 #
+        ######
+        self.settings["wizard_question_condition"]["Q5"] = {
+            "or_cond": [
+                [
+                    "MODEL.SOURCE",
+                    ["bmz", "torchvision"]
+                ],
+                [
+                    "PROBLEM.TYPE",
+                    [
+                        "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
+                        "DETECTION",
+                        "DENOISING",
+                        "SUPER_RESOLUTION",
+                        "SELF_SUPERVISED",
+                        "CLASSIFICATION",
+                        "IMAGE_TO_IMAGE",
+                    ]
+                ],
+                [
+                    "PROBLEM.NDIM", 
+                    ["2D", "3D"]
+                ], 
+            ],
+            "and_cond": [], 
+        }
+        self.settings["wizard_questions"] += [
+            "Please select a pretrained model by pressing 'Check models' below. This process "
+            "requires internet connection and may take a while.",
+        ]
+        self.settings["wizard_possible_answers"] += [["MODEL_OTHERS",]]
+        self.settings["wizard_variable_to_map"]["Q5"] = {}
+        self.settings["wizard_variable_to_map"]["Q5"]["MODEL.BMZ.SOURCE_MODEL_ID"] = ""
+        self.settings["wizard_answers"]["MODEL.BMZ.SOURCE_MODEL_ID"] = -1
+        self.settings["wizard_sections"][-1][1] += ["Select model"]
+        self.settings["wizard_from_question_index_to_toc"].append(
+            [0, len(self.settings["wizard_from_toc_to_question_index"][-1])]
+        )
+        self.settings["wizard_from_toc_to_question_index"][-1].append(q_count)
+        self.settings["wizard_question_visible"].append(False)
+        q_count += 1
+
+        ######
+        # Q6 #
+        ######
+        self.settings["wizard_question_condition"]["Q6"] = {
             "or_cond": [
                 [
                     "PROBLEM.TYPE",  # Depends on Q2
@@ -449,8 +520,8 @@ class Settings:
                 "1000 px >",
             ]
         ]
-        self.settings["wizard_variable_to_map"]["Q4"] = {}
-        self.settings["wizard_variable_to_map"]["Q4"]["_q4"] = [
+        self.settings["wizard_variable_to_map"]["Q6"] = {}
+        self.settings["wizard_variable_to_map"]["Q6"]["PATCH_SIZE_XY"] = [
             (256, 256),
             (256, 256),
             (512, 512),
@@ -458,7 +529,7 @@ class Settings:
             (1024, 1024),
             (1024, 1024),
         ]
-        self.settings["wizard_answers"]["_q4"] = -1
+        self.settings["wizard_answers"]["PATCH_SIZE_XY"] = -1
         self.settings["wizard_sections"] += [["Data", []]]
         self.settings["wizard_from_toc_to_question_index"].append([])
         self.settings["wizard_sections"][-1][1] += ["Object size (xy)"]
@@ -470,9 +541,9 @@ class Settings:
         q_count += 1
 
         ######
-        # Q5 #
+        # Q7 #
         ######
-        self.settings["wizard_question_condition"]["Q5"] = {
+        self.settings["wizard_question_condition"]["Q7"] = {
             "and_cond": [
                 [
                     "PROBLEM.NDIM", 
@@ -508,10 +579,9 @@ class Settings:
                 ">60",
             ]
         ]
-        self.settings["wizard_variable_to_map"]["Q5"] = {}
-        self.settings["wizard_variable_to_map"]["Q5"]["_q5"] = [5, 10, 20, 40, 80]
-        self.settings["wizard_answers"]["_q5"] = -1
-        # self.settings["wizard_variable_to_map"]["Q5"]["PROBLEM.PATCH_SIZE"] =
+        self.settings["wizard_variable_to_map"]["Q7"] = {}
+        self.settings["wizard_variable_to_map"]["Q7"]["PATCH_SIZE_Z"] = [5, 10, 20, 40, 80]
+        self.settings["wizard_answers"]["PATCH_SIZE_Z"] = -1
         self.settings["wizard_sections"][-1][1] += ["Object size (z)"]
         self.settings["wizard_from_question_index_to_toc"].append(
             [1, len(self.settings["wizard_from_toc_to_question_index"][-1])]
@@ -521,7 +591,7 @@ class Settings:
         q_count += 1
 
         ######
-        # Q6 #
+        # Q8 #
         ######
         self.settings["wizard_questions"] += [
             "What do you want to do?",
@@ -533,9 +603,9 @@ class Settings:
                 "Train and test the model",
             ]
         ]
-        self.settings["wizard_variable_to_map"]["Q6"] = {}
-        self.settings["wizard_variable_to_map"]["Q6"]["TRAIN.ENABLE"] = [True, False, True]
-        self.settings["wizard_variable_to_map"]["Q6"]["TEST.ENABLE"] = [False, True, True]
+        self.settings["wizard_variable_to_map"]["Q8"] = {}
+        self.settings["wizard_variable_to_map"]["Q8"]["TRAIN.ENABLE"] = [True, False, True]
+        self.settings["wizard_variable_to_map"]["Q8"]["TEST.ENABLE"] = [False, True, True]
         self.settings["wizard_answers"]["TRAIN.ENABLE"] = -1
         self.settings["wizard_answers"]["TEST.ENABLE"] = -1
         self.settings["wizard_sections"][-1][1] += ["Phases"]
@@ -547,9 +617,9 @@ class Settings:
         q_count += 1
 
         ######
-        # Q7 #
+        # Q9 #
         ######
-        self.settings["wizard_question_condition"]["Q7"] = {
+        self.settings["wizard_question_condition"]["Q9"] = {
             "and_cond": [
                 [
                     "TRAIN.ENABLE", 
@@ -562,8 +632,8 @@ class Settings:
             "Please insert training raw image folder",
         ]
         self.settings["wizard_possible_answers"] += [["PATH"]]
-        self.settings["wizard_variable_to_map"]["Q7"] = {}
-        self.settings["wizard_variable_to_map"]["Q7"]["DATA.TRAIN.PATH"] = ""
+        self.settings["wizard_variable_to_map"]["Q9"] = {}
+        self.settings["wizard_variable_to_map"]["Q9"]["DATA.TRAIN.PATH"] = ""
         self.settings["wizard_answers"]["DATA.TRAIN.PATH"] = -1
         self.settings["wizard_sections"][-1][1] += ["Train data (raw)"]
         self.settings["wizard_from_question_index_to_toc"].append(
@@ -574,9 +644,9 @@ class Settings:
         q_count += 1
 
         ######
-        # Q8 #
+        # Q10 #
         ######
-        self.settings["wizard_question_condition"]["Q8"] = {
+        self.settings["wizard_question_condition"]["Q10"] = {
             "and_cond": [
                 [
                     "TRAIN.ENABLE", 
@@ -600,174 +670,10 @@ class Settings:
             "Please insert training ground truth folder",
         ]
         self.settings["wizard_possible_answers"] += [["PATH"]]
-        self.settings["wizard_variable_to_map"]["Q8"] = {}
-        self.settings["wizard_variable_to_map"]["Q8"]["DATA.TRAIN.GT_PATH"] = ""
+        self.settings["wizard_variable_to_map"]["Q10"] = {}
+        self.settings["wizard_variable_to_map"]["Q10"]["DATA.TRAIN.GT_PATH"] = ""
         self.settings["wizard_answers"]["DATA.TRAIN.GT_PATH"] = -1
         self.settings["wizard_sections"][-1][1] += ["Train data (ground truth)"]
-        self.settings["wizard_from_question_index_to_toc"].append(
-            [1, len(self.settings["wizard_from_toc_to_question_index"][-1])]
-        )
-        self.settings["wizard_from_toc_to_question_index"][-1].append(q_count)
-        self.settings["wizard_question_visible"].append(False)
-        q_count += 1
-
-        ######
-        # Q9 #
-        ######
-        self.settings["wizard_question_condition"]["Q9"] = {
-            "and_cond": [
-                [
-                    "TRAIN.ENABLE", 
-                    True
-                ]
-            ],
-            "or_cond": [
-                [
-                    "PROBLEM.TYPE",
-                    [
-                        "SEMANTIC_SEG",
-                        "INSTANCE_SEG",
-                        "DETECTION",
-                        "SUPER_RESOLUTION",
-                        "IMAGE_TO_IMAGE",
-                    ],
-                ]
-            ],
-        }
-        self.settings["wizard_questions"] += [
-            "Do you want to use part of the training data as validation?",
-        ]
-        self.settings["wizard_possible_answers"] += [["Yes", "No, I want to use another data"]]
-        self.settings["wizard_variable_to_map"]["Q9"] = {}
-        self.settings["wizard_variable_to_map"]["Q9"]["DATA.VAL.FROM_TRAIN"] = [True, False]
-        self.settings["wizard_answers"]["DATA.VAL.FROM_TRAIN"] = -1
-        self.settings["wizard_sections"][-1][1] += ["Validation data"]
-        self.settings["wizard_from_question_index_to_toc"].append(
-            [1, len(self.settings["wizard_from_toc_to_question_index"][-1])]
-        )
-        self.settings["wizard_from_toc_to_question_index"][-1].append(q_count)
-        self.settings["wizard_question_visible"].append(False)
-        q_count += 1
-
-        #######
-        # Q10 #
-        #######
-        self.settings["wizard_question_condition"]["Q10"] = {
-            "and_cond": [
-                [
-                    "TRAIN.ENABLE", 
-                    True
-                ], 
-                [
-                    "DATA.VAL.FROM_TRAIN",
-                    True
-                ]
-            ],
-            "or_cond": [
-                [
-                    "PROBLEM.TYPE",
-                    [
-                        "SEMANTIC_SEG",
-                        "INSTANCE_SEG",
-                        "DETECTION",
-                        "SUPER_RESOLUTION",
-                        "IMAGE_TO_IMAGE",
-                    ],
-                ]
-            ],
-        }
-        self.settings["wizard_questions"] += [
-            "How much training data samples do you want to use as validation?",
-        ]
-        self.settings["wizard_possible_answers"] += [["10%", "20%"]]
-        self.settings["wizard_variable_to_map"]["Q10"] = {}
-        self.settings["wizard_variable_to_map"]["Q10"]["DATA.VAL.SPLIT_TRAIN"] = [0.1, 0.2]
-        self.settings["wizard_answers"]["DATA.VAL.SPLIT_TRAIN"] = -1
-        self.settings["wizard_sections"][-1][1] += ["Validation data (train split)"]
-        self.settings["wizard_from_question_index_to_toc"].append(
-            [1, len(self.settings["wizard_from_toc_to_question_index"][-1])]
-        )
-        self.settings["wizard_from_toc_to_question_index"][-1].append(q_count)
-        self.settings["wizard_question_visible"].append(False)
-        q_count += 1
-
-        #######
-        # Q11 #
-        #######
-        self.settings["wizard_question_condition"]["Q11"] = {
-            "and_cond": [
-                [
-                    "TRAIN.ENABLE",
-                    True,
-                ],
-                [
-                    "DATA.VAL.FROM_TRAIN", 
-                    False
-                ],
-            ],
-            "or_cond": [
-                [
-                    "PROBLEM.TYPE",
-                    [
-                        "SEMANTIC_SEG",
-                        "INSTANCE_SEG",
-                        "DETECTION",
-                        "SUPER_RESOLUTION",
-                        "IMAGE_TO_IMAGE",
-                    ],
-                ]
-            ],
-        }
-        self.settings["wizard_questions"] += [
-            "Please insert validation raw image folder",
-        ]
-        self.settings["wizard_possible_answers"] += [["PATH"]]
-        self.settings["wizard_variable_to_map"]["Q11"] = {}
-        self.settings["wizard_variable_to_map"]["Q11"]["DATA.VAL.PATH"] = ""
-        self.settings["wizard_answers"]["DATA.VAL.PATH"] = -1
-        self.settings["wizard_sections"][-1][1] += ["Validation data (raw)"]
-        self.settings["wizard_from_question_index_to_toc"].append(
-            [1, len(self.settings["wizard_from_toc_to_question_index"][-1])]
-        )
-        self.settings["wizard_from_toc_to_question_index"][-1].append(q_count)
-        self.settings["wizard_question_visible"].append(False)
-        q_count += 1
-
-        #######
-        # Q12 #
-        #######
-        self.settings["wizard_question_condition"]["Q12"] = {
-            "and_cond": [
-                [
-                    "TRAIN.ENABLE",
-                    True,
-                ],
-                [
-                    "DATA.VAL.FROM_TRAIN", 
-                    False
-                ],
-            ],
-            "or_cond": [
-                [
-                    "PROBLEM.TYPE",
-                    [
-                        "SEMANTIC_SEG",
-                        "INSTANCE_SEG",
-                        "DETECTION",
-                        "SUPER_RESOLUTION",
-                        "IMAGE_TO_IMAGE",
-                    ],
-                ]
-            ],
-        }
-        self.settings["wizard_questions"] += [
-            "Please insert validation ground truth folder",
-        ]
-        self.settings["wizard_possible_answers"] += [["PATH"]]
-        self.settings["wizard_variable_to_map"]["Q12"] = {}
-        self.settings["wizard_variable_to_map"]["Q12"]["DATA.VAL.GT_PATH"] = ""
-        self.settings["wizard_answers"]["DATA.VAL.GT_PATH"] = -1
-        self.settings["wizard_sections"][-1][1] += ["Validation data (ground truth)"]
         self.settings["wizard_from_question_index_to_toc"].append(
             [1, len(self.settings["wizard_from_toc_to_question_index"][-1])]
         )

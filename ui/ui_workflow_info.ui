@@ -553,10 +553,6 @@ QPushButton:pressed {
 QPushButton:hover {
 	background-color: rgb(255,255,255);
 	border: 2px solid rgb(0, 0, 0);
-}
-QPushButton:pressed {	
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
 }</string>
                      </property>
                      <property name="text">
@@ -643,10 +639,6 @@ QPushButton:pressed {
 	background-color: rgb(64,144,253);
 }
 QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}
-QPushButton:pressed {	
 	background-color: rgb(255,255,255);
 	border: 2px solid rgb(0, 0, 0);
 }</string>

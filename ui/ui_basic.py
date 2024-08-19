@@ -151,10 +151,6 @@ class Ui_basic(object):
 "QPushButton:hover {\n"
 "	background-color: rgb(255,255,255);\n"
 "	border: 2px solid rgb(0, 0, 0);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
 "}")
 
         self.horizontalLayout_2.addWidget(self.ok_bn)

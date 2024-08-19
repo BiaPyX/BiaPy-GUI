@@ -61,6 +61,9 @@ background-color:#D3D3D3;
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:rgba(0, 0, 0, 0);</string>
+      </property>
       <property name="frameShape">
        <enum>QFrame::NoFrame</enum>
       </property>
@@ -107,9 +110,7 @@ background-color:#D3D3D3;
           <string notr="true">QFrame{
 background:rgb(64,144,253);
 }
-QFrame:disabled {
-background-color:#D3D3D3;
-}</string>
+</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
@@ -154,7 +155,7 @@ background-color:#D3D3D3;
              </font>
             </property>
             <property name="styleSheet">
-             <string notr="true"/>
+             <string notr="true">background-color:rgba(0, 0, 0, 0);</string>
             </property>
             <property name="frameShape">
              <enum>QFrame::NoFrame</enum>
@@ -185,6 +186,9 @@ background-color:#D3D3D3;
                  <width>240</width>
                  <height>0</height>
                 </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color:rgba(0, 0, 0, 0);</string>
                </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
@@ -231,6 +235,7 @@ background-color:#D3D3D3;
                   <property name="styleSheet">
                    <string notr="true">QLabel {
 color: white;
+background-color:rgba(0, 0, 0, 0);
 }</string>
                   </property>
                   <property name="lineWidth">
@@ -255,6 +260,9 @@ color: white;
              </item>
              <item>
               <widget class="Line" name="line_2">
+               <property name="styleSheet">
+                <string notr="true">background-color:rgba(0, 0, 0, 0);</string>
+               </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
@@ -283,6 +291,7 @@ color: white;
                <property name="styleSheet">
                 <string notr="true">QLabel {
 color: white;
+background-color:rgba(0, 0, 0, 0);
 }</string>
                </property>
                <property name="lineWidth">
@@ -2922,10 +2931,6 @@ QPushButton:pressed {
 QPushButton:hover {
 	background-color: rgb(255,255,255);
 	border: 2px solid rgb(0, 0, 0);
-}
-QPushButton:pressed {	
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
 }</string>
                                  </property>
                                  <property name="text">
@@ -3123,182 +3128,247 @@ border-radius: 35px;
                              </widget>
                             </item>
                             <item>
-                             <widget class="QFrame" name="wizard_question_answer_frame">
+                             <widget class="QScrollArea" name="scrollArea_17">
                               <property name="frameShape">
                                <enum>QFrame::NoFrame</enum>
                               </property>
-                              <property name="frameShadow">
-                               <enum>QFrame::Raised</enum>
+                              <property name="widgetResizable">
+                               <bool>true</bool>
                               </property>
-                              <layout class="QGridLayout" name="gridLayout_81">
-                               <property name="leftMargin">
-                                <number>0</number>
+                              <widget class="QWidget" name="scrollAreaWidgetContents_22">
+                               <property name="geometry">
+                                <rect>
+                                 <x>0</x>
+                                 <y>-141</y>
+                                 <width>642</width>
+                                 <height>280</height>
+                                </rect>
                                </property>
-                               <property name="topMargin">
-                                <number>0</number>
-                               </property>
-                               <property name="rightMargin">
-                                <number>0</number>
-                               </property>
-                               <property name="bottomMargin">
-                                <number>0</number>
-                               </property>
-                               <property name="horizontalSpacing">
-                                <number>6</number>
-                               </property>
-                               <item row="1" column="0">
-                                <widget class="QComboBox" name="wizard_question_answer">
-                                 <property name="minimumSize">
-                                  <size>
-                                   <width>0</width>
-                                   <height>0</height>
-                                  </size>
-                                 </property>
-                                 <property name="font">
-                                  <font>
-                                   <family>DejaVu Math TeX Gyre</family>
-                                   <pointsize>12</pointsize>
-                                  </font>
-                                 </property>
-                                </widget>
-                               </item>
-                               <item row="0" column="0">
-                                <widget class="QLabel" name="label_113">
-                                 <property name="font">
-                                  <font>
-                                   <family>DejaVu Math TeX Gyre</family>
-                                   <pointsize>12</pointsize>
-                                  </font>
-                                 </property>
-                                 <property name="text">
-                                  <string>Options</string>
-                                 </property>
-                                </widget>
-                               </item>
-                              </layout>
-                             </widget>
-                            </item>
-                            <item>
-                             <widget class="QFrame" name="wizard_path_input_frame">
-                              <property name="frameShape">
-                               <enum>QFrame::NoFrame</enum>
-                              </property>
-                              <property name="frameShadow">
-                               <enum>QFrame::Raised</enum>
-                              </property>
-                              <layout class="QVBoxLayout" name="verticalLayout_57">
-                               <property name="leftMargin">
-                                <number>0</number>
-                               </property>
-                               <property name="topMargin">
-                                <number>0</number>
-                               </property>
-                               <property name="rightMargin">
-                                <number>0</number>
-                               </property>
-                               <property name="bottomMargin">
-                                <number>9</number>
-                               </property>
-                               <item>
-                                <widget class="QLabel" name="label_112">
-                                 <property name="font">
-                                  <font>
-                                   <family>DejaVu Math TeX Gyre</family>
-                                   <pointsize>12</pointsize>
-                                  </font>
-                                 </property>
-                                 <property name="text">
-                                  <string>Path</string>
-                                 </property>
-                                </widget>
-                               </item>
-                               <item>
-                                <widget class="QFrame" name="frame_75">
-                                 <property name="frameShape">
-                                  <enum>QFrame::NoFrame</enum>
-                                 </property>
-                                 <property name="frameShadow">
-                                  <enum>QFrame::Raised</enum>
-                                 </property>
-                                 <layout class="QHBoxLayout" name="horizontalLayout_41">
-                                  <property name="leftMargin">
-                                   <number>0</number>
+                               <layout class="QVBoxLayout" name="verticalLayout_59">
+                                <property name="spacing">
+                                 <number>6</number>
+                                </property>
+                                <property name="leftMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="topMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="rightMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="bottomMargin">
+                                 <number>0</number>
+                                </property>
+                                <item>
+                                 <widget class="QFrame" name="wizard_question_answer_frame">
+                                  <property name="frameShape">
+                                   <enum>QFrame::NoFrame</enum>
                                   </property>
-                                  <property name="topMargin">
-                                   <number>0</number>
+                                  <property name="frameShadow">
+                                   <enum>QFrame::Raised</enum>
                                   </property>
-                                  <property name="rightMargin">
-                                   <number>0</number>
+                                  <layout class="QGridLayout" name="gridLayout_81">
+                                   <property name="leftMargin">
+                                    <number>0</number>
+                                   </property>
+                                   <property name="topMargin">
+                                    <number>0</number>
+                                   </property>
+                                   <property name="rightMargin">
+                                    <number>0</number>
+                                   </property>
+                                   <property name="bottomMargin">
+                                    <number>0</number>
+                                   </property>
+                                   <property name="horizontalSpacing">
+                                    <number>6</number>
+                                   </property>
+                                   <item row="1" column="0">
+                                    <widget class="QComboBox" name="wizard_question_answer">
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>0</width>
+                                       <height>30</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>DejaVu Math TeX Gyre</family>
+                                       <pointsize>12</pointsize>
+                                      </font>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="0" column="0">
+                                    <widget class="QLabel" name="label_113">
+                                     <property name="font">
+                                      <font>
+                                       <family>DejaVu Math TeX Gyre</family>
+                                       <pointsize>12</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>Options</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="2" column="0">
+                                    <spacer name="verticalSpacer_57">
+                                     <property name="orientation">
+                                      <enum>Qt::Vertical</enum>
+                                     </property>
+                                     <property name="sizeHint" stdset="0">
+                                      <size>
+                                       <width>20</width>
+                                       <height>40</height>
+                                      </size>
+                                     </property>
+                                    </spacer>
+                                   </item>
+                                  </layout>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QFrame" name="wizard_path_input_frame">
+                                  <property name="frameShape">
+                                   <enum>QFrame::NoFrame</enum>
                                   </property>
-                                  <property name="bottomMargin">
-                                   <number>0</number>
+                                  <property name="frameShadow">
+                                   <enum>QFrame::Raised</enum>
                                   </property>
-                                  <item>
-                                   <widget class="QLineEdit" name="wizard_path_input">
-                                    <property name="minimumSize">
-                                     <size>
-                                      <width>500</width>
-                                      <height>30</height>
-                                     </size>
-                                    </property>
-                                    <property name="maximumSize">
-                                     <size>
-                                      <width>500</width>
-                                      <height>16777215</height>
-                                     </size>
-                                    </property>
-                                    <property name="font">
-                                     <font>
-                                      <family>DejaVu Math TeX Gyre</family>
-                                      <pointsize>12</pointsize>
-                                     </font>
-                                    </property>
-                                    <property name="readOnly">
-                                     <bool>true</bool>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item>
-                                   <widget class="QPushButton" name="wizard_path_input_bn">
-                                    <property name="font">
-                                     <font>
-                                      <family>DejaVu Math TeX Gyre</family>
-                                      <pointsize>12</pointsize>
-                                     </font>
-                                    </property>
-                                    <property name="text">
-                                     <string>Browse</string>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                 </layout>
-                                </widget>
-                               </item>
-                               <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
-                                <widget class="QFrame" name="frame_76">
-                                 <property name="frameShape">
-                                  <enum>QFrame::NoFrame</enum>
-                                 </property>
-                                 <property name="frameShadow">
-                                  <enum>QFrame::Raised</enum>
-                                 </property>
-                                 <layout class="QVBoxLayout" name="verticalLayout_58">
-                                  <item>
-                                   <widget class="QPushButton" name="pushButton_2">
-                                    <property name="minimumSize">
-                                     <size>
-                                      <width>100</width>
-                                      <height>35</height>
-                                     </size>
-                                    </property>
-                                    <property name="font">
-                                     <font>
-                                      <family>Arial</family>
-                                      <pointsize>12</pointsize>
-                                     </font>
-                                    </property>
-                                    <property name="styleSheet">
-                                     <string notr="true">QPushButton {
+                                  <layout class="QVBoxLayout" name="verticalLayout_57">
+                                   <property name="leftMargin">
+                                    <number>0</number>
+                                   </property>
+                                   <property name="topMargin">
+                                    <number>0</number>
+                                   </property>
+                                   <property name="rightMargin">
+                                    <number>0</number>
+                                   </property>
+                                   <property name="bottomMargin">
+                                    <number>9</number>
+                                   </property>
+                                   <item>
+                                    <widget class="QLabel" name="label_112">
+                                     <property name="font">
+                                      <font>
+                                       <family>DejaVu Math TeX Gyre</family>
+                                       <pointsize>12</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>Path</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item>
+                                    <widget class="QFrame" name="frame_75">
+                                     <property name="frameShape">
+                                      <enum>QFrame::NoFrame</enum>
+                                     </property>
+                                     <property name="frameShadow">
+                                      <enum>QFrame::Raised</enum>
+                                     </property>
+                                     <layout class="QHBoxLayout" name="horizontalLayout_41">
+                                      <property name="leftMargin">
+                                       <number>0</number>
+                                      </property>
+                                      <property name="topMargin">
+                                       <number>0</number>
+                                      </property>
+                                      <property name="rightMargin">
+                                       <number>0</number>
+                                      </property>
+                                      <property name="bottomMargin">
+                                       <number>0</number>
+                                      </property>
+                                      <item>
+                                       <widget class="QLineEdit" name="wizard_path_input">
+                                        <property name="minimumSize">
+                                         <size>
+                                          <width>500</width>
+                                          <height>30</height>
+                                         </size>
+                                        </property>
+                                        <property name="maximumSize">
+                                         <size>
+                                          <width>500</width>
+                                          <height>16777215</height>
+                                         </size>
+                                        </property>
+                                        <property name="font">
+                                         <font>
+                                          <family>DejaVu Math TeX Gyre</family>
+                                          <pointsize>12</pointsize>
+                                         </font>
+                                        </property>
+                                        <property name="readOnly">
+                                         <bool>true</bool>
+                                        </property>
+                                       </widget>
+                                      </item>
+                                      <item>
+                                       <widget class="QPushButton" name="wizard_path_input_bn">
+                                        <property name="minimumSize">
+                                         <size>
+                                          <width>0</width>
+                                          <height>30</height>
+                                         </size>
+                                        </property>
+                                        <property name="font">
+                                         <font>
+                                          <family>DejaVu Math TeX Gyre</family>
+                                          <pointsize>12</pointsize>
+                                         </font>
+                                        </property>
+                                        <property name="text">
+                                         <string>Browse</string>
+                                        </property>
+                                       </widget>
+                                      </item>
+                                      <item>
+                                       <spacer name="horizontalSpacer_86">
+                                        <property name="orientation">
+                                         <enum>Qt::Horizontal</enum>
+                                        </property>
+                                        <property name="sizeHint" stdset="0">
+                                         <size>
+                                          <width>40</width>
+                                          <height>20</height>
+                                         </size>
+                                        </property>
+                                       </spacer>
+                                      </item>
+                                     </layout>
+                                    </widget>
+                                   </item>
+                                   <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+                                    <widget class="QFrame" name="frame_76">
+                                     <property name="frameShape">
+                                      <enum>QFrame::NoFrame</enum>
+                                     </property>
+                                     <property name="frameShadow">
+                                      <enum>QFrame::Raised</enum>
+                                     </property>
+                                     <layout class="QVBoxLayout" name="verticalLayout_58">
+                                      <item>
+                                       <widget class="QPushButton" name="wizard_path_check">
+                                        <property name="minimumSize">
+                                         <size>
+                                          <width>100</width>
+                                          <height>35</height>
+                                         </size>
+                                        </property>
+                                        <property name="font">
+                                         <font>
+                                          <family>DejaVu Math TeX Gyre</family>
+                                          <pointsize>12</pointsize>
+                                         </font>
+                                        </property>
+                                        <property name="styleSheet">
+                                         <string notr="true">QPushButton {
 	border: none;
 	background-color: rgb(64,144,253);
 	border-radius: 15px;
@@ -3306,35 +3376,184 @@ border-radius: 35px;
 QPushButton:hover {
 	background-color: rgb(255,255,255);
 	border: 2px solid rgb(0, 0, 0);
+}</string>
+                                        </property>
+                                        <property name="text">
+                                         <string>Check data</string>
+                                        </property>
+                                       </widget>
+                                      </item>
+                                     </layout>
+                                    </widget>
+                                   </item>
+                                   <item>
+                                    <spacer name="verticalSpacer_58">
+                                     <property name="orientation">
+                                      <enum>Qt::Vertical</enum>
+                                     </property>
+                                     <property name="sizeHint" stdset="0">
+                                      <size>
+                                       <width>20</width>
+                                       <height>40</height>
+                                      </size>
+                                     </property>
+                                    </spacer>
+                                   </item>
+                                  </layout>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QFrame" name="wizard_model_input_frame">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>0</width>
+                                    <height>0</height>
+                                   </size>
+                                  </property>
+                                  <property name="frameShape">
+                                   <enum>QFrame::NoFrame</enum>
+                                  </property>
+                                  <property name="frameShadow">
+                                   <enum>QFrame::Raised</enum>
+                                  </property>
+                                  <layout class="QVBoxLayout" name="verticalLayout_60">
+                                   <item>
+                                    <widget class="QLabel" name="label_116">
+                                     <property name="font">
+                                      <font>
+                                       <family>DejaVu Math TeX Gyre</family>
+                                       <pointsize>12</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>Model</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item>
+                                    <widget class="QFrame" name="frame_77">
+                                     <property name="frameShape">
+                                      <enum>QFrame::NoFrame</enum>
+                                     </property>
+                                     <property name="frameShadow">
+                                      <enum>QFrame::Raised</enum>
+                                     </property>
+                                     <layout class="QHBoxLayout" name="horizontalLayout_44">
+                                      <property name="leftMargin">
+                                       <number>0</number>
+                                      </property>
+                                      <property name="topMargin">
+                                       <number>0</number>
+                                      </property>
+                                      <property name="rightMargin">
+                                       <number>0</number>
+                                      </property>
+                                      <property name="bottomMargin">
+                                       <number>0</number>
+                                      </property>
+                                      <item>
+                                       <widget class="QLineEdit" name="wizard_model_input">
+                                        <property name="minimumSize">
+                                         <size>
+                                          <width>350</width>
+                                          <height>30</height>
+                                         </size>
+                                        </property>
+                                        <property name="font">
+                                         <font>
+                                          <family>DejaVu Math TeX Gyre</family>
+                                          <pointsize>12</pointsize>
+                                         </font>
+                                        </property>
+                                        <property name="readOnly">
+                                         <bool>true</bool>
+                                        </property>
+                                       </widget>
+                                      </item>
+                                      <item>
+                                       <widget class="QPushButton" name="wizard_model_browse_bn">
+                                        <property name="minimumSize">
+                                         <size>
+                                          <width>0</width>
+                                          <height>30</height>
+                                         </size>
+                                        </property>
+                                        <property name="font">
+                                         <font>
+                                          <family>DejaVu Math TeX Gyre</family>
+                                          <pointsize>12</pointsize>
+                                         </font>
+                                        </property>
+                                        <property name="text">
+                                         <string>Browse</string>
+                                        </property>
+                                       </widget>
+                                      </item>
+                                      <item>
+                                       <widget class="QPushButton" name="wizard_model_check_bn">
+                                        <property name="minimumSize">
+                                         <size>
+                                          <width>170</width>
+                                          <height>35</height>
+                                         </size>
+                                        </property>
+                                        <property name="font">
+                                         <font>
+                                          <family>DejaVu Math TeX Gyre</family>
+                                          <pointsize>12</pointsize>
+                                         </font>
+                                        </property>
+                                        <property name="styleSheet">
+                                         <string notr="true">QPushButton {
+	border: none;
+	background-color: rgb(64,144,253);
+	border-radius: 15px;
 }
-QPushButton:pressed {	
+QPushButton:hover {
 	background-color: rgb(255,255,255);
 	border: 2px solid rgb(0, 0, 0);
 }</string>
-                                    </property>
-                                    <property name="text">
-                                     <string>Check data</string>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                 </layout>
-                                </widget>
-                               </item>
-                              </layout>
+                                        </property>
+                                        <property name="text">
+                                         <string>Check models</string>
+                                        </property>
+                                       </widget>
+                                      </item>
+                                      <item>
+                                       <spacer name="horizontalSpacer_85">
+                                        <property name="orientation">
+                                         <enum>Qt::Horizontal</enum>
+                                        </property>
+                                        <property name="sizeHint" stdset="0">
+                                         <size>
+                                          <width>40</width>
+                                          <height>20</height>
+                                         </size>
+                                        </property>
+                                       </spacer>
+                                      </item>
+                                     </layout>
+                                    </widget>
+                                   </item>
+                                   <item>
+                                    <spacer name="verticalSpacer_59">
+                                     <property name="orientation">
+                                      <enum>Qt::Vertical</enum>
+                                     </property>
+                                     <property name="sizeHint" stdset="0">
+                                      <size>
+                                       <width>20</width>
+                                       <height>40</height>
+                                      </size>
+                                     </property>
+                                    </spacer>
+                                   </item>
+                                  </layout>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </widget>
                              </widget>
-                            </item>
-                            <item>
-                             <spacer name="verticalSpacer_31">
-                              <property name="orientation">
-                               <enum>Qt::Vertical</enum>
-                              </property>
-                              <property name="sizeHint" stdset="0">
-                               <size>
-                                <width>20</width>
-                                <height>40</height>
-                               </size>
-                              </property>
-                             </spacer>
                             </item>
                             <item>
                              <widget class="QFrame" name="frame_52">
@@ -3395,10 +3614,6 @@ QPushButton:pressed {
 QPushButton:hover {
 	background-color: rgb(255,255,255);
 	border: 2px solid rgb(0, 0, 0);
-}
-QPushButton:pressed {	
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
 }</string>
                                  </property>
                                  <property name="text">
@@ -3440,10 +3655,6 @@ QPushButton:pressed {
 	border-radius: 15px;
 }
 QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}
-QPushButton:pressed {	
 	background-color: rgb(255,255,255);
 	border: 2px solid rgb(0, 0, 0);
 }</string>
@@ -5593,8 +5804,8 @@ QPushButton:pressed {
                              <rect>
                               <x>0</x>
                               <y>0</y>
-                              <width>929</width>
-                              <height>495</height>
+                              <width>932</width>
+                              <height>493</height>
                              </rect>
                             </property>
                             <property name="layoutDirection">
@@ -6046,8 +6257,8 @@ QPushButton:pressed {
                                     <rect>
                                      <x>0</x>
                                      <y>0</y>
-                                     <width>864</width>
-                                     <height>288</height>
+                                     <width>870</width>
+                                     <height>284</height>
                                     </rect>
                                    </property>
                                    <layout class="QGridLayout" name="gridLayout_2">
@@ -7057,8 +7268,8 @@ QPushButton:pressed {
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>946</width>
-                                  <height>7435</height>
+                                  <width>985</width>
+                                  <height>7417</height>
                                  </rect>
                                 </property>
                                 <property name="layoutDirection">
@@ -22097,8 +22308,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>526</width>
-                                         <height>339</height>
+                                         <width>565</width>
+                                         <height>337</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_18">
@@ -22743,8 +22954,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>865</width>
-                                         <height>183</height>
+                                         <width>895</width>
+                                         <height>181</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_17">
@@ -23328,8 +23539,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>526</width>
-                                         <height>219</height>
+                                         <width>565</width>
+                                         <height>217</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_19">
@@ -23814,7 +24025,7 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>542</width>
+                                         <width>582</width>
                                          <height>210</height>
                                         </rect>
                                        </property>
@@ -24236,8 +24447,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>362</width>
-                                         <height>184</height>
+                                         <width>378</width>
+                                         <height>180</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_50">
@@ -24508,8 +24719,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>412</width>
-                                         <height>173</height>
+                                         <width>431</width>
+                                         <height>171</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_51">
@@ -24851,7 +25062,7 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>346</width>
+                                         <width>399</width>
                                          <height>44</height>
                                         </rect>
                                        </property>
@@ -25263,8 +25474,8 @@ QPushButton:pressed {
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>854</width>
-                                  <height>2262</height>
+                                  <width>881</width>
+                                  <height>2250</height>
                                  </rect>
                                 </property>
                                 <layout class="QGridLayout" name="gridLayout_37">
@@ -29646,8 +29857,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>486</width>
-                                       <height>293</height>
+                                       <width>515</width>
+                                       <height>291</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_61">
@@ -30146,8 +30357,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>911</width>
-                                       <height>1369</height>
+                                       <width>914</width>
+                                       <height>1363</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_44">
@@ -32714,8 +32925,8 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>555</width>
-                                       <height>1060</height>
+                                       <width>597</width>
+                                       <height>1056</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_47">
@@ -34671,7 +34882,7 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>326</width>
+                                       <width>372</width>
                                        <height>44</height>
                                       </rect>
                                      </property>
@@ -34751,7 +34962,7 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>372</width>
+                                       <width>426</width>
                                        <height>44</height>
                                       </rect>
                                      </property>
@@ -34831,7 +35042,7 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>425</width>
+                                       <width>488</width>
                                        <height>44</height>
                                       </rect>
                                      </property>
@@ -34911,7 +35122,7 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>346</width>
+                                       <width>399</width>
                                        <height>44</height>
                                       </rect>
                                      </property>
@@ -35197,10 +35408,6 @@ QPushButton:pressed {
 	border-radius: 15px;
 }
 QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}
-QPushButton:pressed {	
 	background-color: rgb(255,255,255);
 	border: 2px solid rgb(0, 0, 0);
 }</string>
@@ -35830,8 +36037,8 @@ QPushButton:pressed {
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>31</width>
-                               <height>19</height>
+                               <width>896</width>
+                               <height>101</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_32">

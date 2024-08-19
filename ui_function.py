@@ -196,6 +196,7 @@ class UIFunction(MainWindow):
                 
         main_window.ui.wizard_path_input_frame.setVisible(False)
         main_window.ui.wizard_question_answer.setVisible(True)
+        main_window.ui.wizard_model_input_frame.setVisible(False)
 
 
     def configure_from_list(model, _list): 

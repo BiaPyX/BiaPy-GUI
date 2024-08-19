@@ -8,6 +8,9 @@ import yaml
 import queue
 import subprocess
 import re
+import pooch
+import json 
+
 from pathlib import PurePath, Path, PureWindowsPath
 
 from PySide2 import QtCore
@@ -17,6 +20,7 @@ from PySide2.QtGui import  QBrush, QColor
 
 from biapy_config import Config
 from biapy_check_configuration import check_configuration
+from biapy_aux_functions import check_bmz_model_compatibility
 
 def examine(main_window, save_in_obj_tag=None, is_file=True):
     """ 
@@ -55,6 +59,9 @@ def examine(main_window, save_in_obj_tag=None, is_file=True):
         elif save_in_obj_tag == "DATA__TEST__GT_PATH__INPUT":
             main_window.cfg.settings['test_data_gt_input_path'] = out  
 
+def check_data_from_path(main_window):
+    print("Check data from path")
+    
 def mark_syntax_error(main_window, gui_widget_name, validator_type=["empty"]):
     """ 
     Functionality for the advanced option button (Down/UP arrows in GUI). 
@@ -405,16 +412,35 @@ def change_wizard_page(main_window, val, based_on_toc=False, added_val=0):
         if main_window.cfg.settings['wizard_possible_answers'][main_window.cfg.settings['wizard_question_index']][0] == "PATH":
             main_window.ui.wizard_path_input_frame.setVisible(True)
             main_window.ui.wizard_question_answer_frame.setVisible(False)
+            main_window.ui.wizard_model_input_frame.setVisible(False)
 
             # Remember the answer if the question was previously answered
             if main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] != -1:
                 set_text(main_window.ui.wizard_path_input, main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']])
             else:
                 set_text(main_window.ui.wizard_path_input, "")
+        elif main_window.cfg.settings['wizard_possible_answers'][main_window.cfg.settings['wizard_question_index']][0] in ["MODEL_BIAPY", "MODEL_OTHERS"]:
+            main_window.ui.wizard_path_input_frame.setVisible(False)
+            main_window.ui.wizard_question_answer_frame.setVisible(False)
+            main_window.ui.wizard_model_input_frame.setVisible(True)
+
+            if main_window.cfg.settings['wizard_possible_answers'][main_window.cfg.settings['wizard_question_index']][0] == "MODEL_BIAPY":
+                main_window.ui.wizard_model_check_bn.setVisible(False)
+                main_window.ui.wizard_model_browse_bn.setVisible(True)
+            else: # "MODEL_OTHERS"
+                main_window.ui.wizard_model_check_bn.setVisible(True)
+                main_window.ui.wizard_model_browse_bn.setVisible(False)
+                
+            # Remember the answer if the question was previously answered
+            if main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] != -1:
+                set_text(main_window.ui.wizard_model_input, main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']])
+            else:
+                set_text(main_window.ui.wizard_model_input, "")
         else:
             main_window.ui.wizard_path_input_frame.setVisible(False)
             main_window.ui.wizard_question_answer_frame.setVisible(True)
-                
+            main_window.ui.wizard_model_input_frame.setVisible(False)
+
             # Prevent eval_wizard_answer functionality during wizard_question_answer's currentIndexChanged trigger. It triggers a few times 
             # when clearing and inserting new data 
             main_window.allow_change_wizard_question_answer = False
@@ -466,6 +492,135 @@ def clear_answers(main_window):
             main_window.wizard_toc_model.item(i).setForeground(QColor(0,0,0))
             for j in range(main_window.wizard_toc_model.item(i).rowCount()):
                 main_window.wizard_toc_model.item(i).child(j).setForeground(QColor(0,0,0))
+
+
+def check_models_from_other_sources(main_window):
+    """
+    Check available model compatible with BiaPy from external sources such as BioImage Model Zoo (BMZ)
+    and Torchvision.
+    
+    Parameters
+    ----------
+    main_window : QMainWindow
+        Main window of the application.
+    """
+    main_window.thread_spin = QThread()
+    main_window.worker_spin = check_models_from_other_sources_engine(main_window)
+    main_window.worker_spin.moveToThread(main_window.thread_spin)
+    main_window.thread_spin.started.connect(main_window.worker_spin.run)
+   
+    # Set up signals
+    main_window.worker_spin.state_signal.connect(main_window.loading_phase)
+    main_window.worker_spin.update_var_signal.connect(main_window.update_variable_in_GUI)
+    main_window.worker_spin.error_signal.connect(main_window.dialog_exec)
+    main_window.worker_spin.add_model_card_signal.connect(main_window.add_model_card)
+    main_window.worker_spin.report_yaml_model_check_result.connect(main_window.external_model_list_built)
+    main_window.worker_spin.finished_signal.connect(main_window.thread_spin.quit)
+    main_window.worker_spin.finished_signal.connect(main_window.worker_spin.deleteLater)
+    main_window.thread_spin.finished.connect(main_window.thread_spin.deleteLater)
+
+    # Start thread 
+    main_window.thread_spin.start()       
+    
+        
+class check_models_from_other_sources_engine(QObject):
+    # Signal to indicate the state of the process 
+    state_signal = QtCore.Signal(int)
+
+    # Signal to update variables in GUI
+    update_var_signal = QtCore.Signal(str,str)
+
+    # Signal to indicate the main thread that there was an error
+    error_signal = QtCore.Signal(str, str)
+
+    # Signal to send a message to the user about the result of model checking
+    add_model_card_signal = QtCore.Signal(int, dict)
+
+    # Signal to send a message to the user about the result of model checking
+    report_yaml_model_check_result = QtCore.Signal(int)
+
+    # Signal to indicate the main thread that the worker has finished 
+    finished_signal = QtCore.Signal()
+
+    def __init__(self, main_window):
+        """
+        Class to check available model compatible with BiaPy from external sources such as BioImage Model Zoo (BMZ)
+        and Torchvision.
+
+        Parameters 
+        ----------
+        main_window : QMainWindow
+            Main window of the application. 
+        """
+        super(check_models_from_other_sources_engine, self).__init__()
+        self.main_window =  main_window
+        self.COLLECTION_URL = "https://raw.githubusercontent.com/bioimage-io/collection-bioimage-io/gh-pages/collection.json"
+        # COLLECTION_URL = "https://uk1s3.embassy.ebi.ac.uk/public-datasets/bioimage.io/collection.json"
+
+    def run(self):
+        """
+        Checks possible model available in BioImage Model Zoo and Torchivision for the workflow specified by Wizards form. 
+        
+        Parameters
+        ----------
+        main_window : QMainWindow
+            Main window of the application.
+        """
+        ## Functionality copied from BiaPy commit: 0ed2222869300316839af7202ce1d55761c6eb88 (3.5.1) - (check_bmz_args function)
+        self.state_signal.emit(0)
+        try:
+            # Checking BMZ model compatibility using the available model list provided by BMZ
+            collection_path = Path(pooch.retrieve(self.COLLECTION_URL, known_hash=None))
+            with collection_path.open() as f:
+                collection = json.load(f)
+
+            # Collect all the models in BMZs
+            model_urls = [entry["rdf_source"] for entry in collection["collection"] if entry["type"] == "model"]
+
+            # Check each model compatibility
+            model_rdfs = []
+            model_count = 0
+            for mu in model_urls:
+                with open(Path(pooch.retrieve(mu, known_hash=None))) as stream:
+                    model_rdfs.append(yaml.safe_load(stream))
+                    print("Checking entry: {}".format(model_rdfs[-1]['name']))
+                    
+                    workflow_specs = {}
+                    workflow_specs["workflow_type"] = self.main_window.cfg.settings["wizard_answers"]["PROBLEM.TYPE"]
+                    workflow_specs["ndim"] = self.main_window.cfg.settings["wizard_answers"]["PROBLEM.NDIM"]
+                    workflow_specs["nclasses"] = "all"
+
+                    _, error, _ = check_bmz_model_compatibility(model_rdfs[-1], workflow_specs=workflow_specs)
+
+                    if not error:
+                        doi = "/".join(model_rdfs[-1]['id'].split("/")[:2])
+                        model_info = {
+                            'name': model_rdfs[-1]['name'],
+                            'source': "BioImage Model Zoo",
+                            'description': model_rdfs[-1]['description'],
+                            'nickname': model_rdfs[-1]['config']['bioimageio']['nickname'],
+                            'nickname_icon': model_rdfs[-1]['config']['bioimageio']['nickname_icon'],
+                            'id': doi,
+                            'covers': model_rdfs[-1]['covers'][0],
+                            'url': f"https://bioimage.io/#/?id={doi}",
+                        }
+                        self.add_model_card_signal.emit(model_count, model_info)
+
+                        model_count += 1
+
+            # TODO: check Torchvision models 
+            
+        except Exception as exc:
+            self.main_window.logger.warning(exc)
+            self.error_signal.emit(f"Following error found when checking available models: \n{exc}", "error")
+            self.state_signal.emit(1)
+            self.finished_signal.emit()
+            return     
+
+        self.report_yaml_model_check_result.emit(model_count)
+        self.state_signal.emit(1)
+        self.finished_signal.emit()
+
 
 def adjust_window_progress(main_window):
     """

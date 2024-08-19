@@ -242,10 +242,6 @@ class Ui_RunBiaPy(object):
 "QPushButton:hover {\n"
 "	background-color: rgb(255,255,255);\n"
 "	border: 2px solid rgb(0, 0, 0);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
 "}")
 
         self.gridLayout.addWidget(self.stop_container_bn, 0, 1, 1, 1)
@@ -388,6 +384,6 @@ class Ui_RunBiaPy(object):
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Monospace'; font-size:9px; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Please wait, the first screen update may take a while depending on your OS</p></body></html>", None))
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9px;\">Please wait, the first screen update may take a while depending on your OS</span></p></body></html>", None))
     # retranslateUi
 

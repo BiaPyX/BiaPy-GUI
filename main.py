@@ -11,11 +11,12 @@ from PySide2.QtGui import *
 
 from ui_function import * 
 from ui_utils import (examine, mark_syntax_error, expand_hide_advanced_options, change_page, get_git_revision_short_hash,
-    load_yaml_config, resource_path, load_yaml_to_GUI, set_text, start_questionary, change_wizard_page, eval_wizard_answer, clear_answers)
+    load_yaml_config, resource_path, load_yaml_to_GUI, set_text, start_questionary, change_wizard_page, eval_wizard_answer, 
+    clear_answers, check_models_from_other_sources, check_data_from_path)
 from settings import Settings
 from widget_conditions import Widget_conditions
 from ui.ui_main import Ui_MainWindow 
-from ui.aux_windows import dialog_Ui, workflow_explanation_Ui, yes_no_Ui, spinner_Ui, basic_Ui
+from ui.aux_windows import dialog_Ui, workflow_explanation_Ui, yes_no_Ui, spinner_Ui, basic_Ui, model_card_carrousel_Ui
 
 os.environ['QT_MAC_WANTS_LAYER'] = '1'
 
@@ -129,6 +130,9 @@ class MainWindow(QMainWindow):
         self.not_allow_change_question = False
         self.ui.wizard_question_wizard_icon.clicked.connect(lambda: UIFunction.display_wizard_help_window(self, 1))
         self.ui.wizard_path_input.textChanged.connect(lambda: eval_wizard_answer(self))
+        self.ui.wizard_model_check_bn.clicked.connect(lambda: check_models_from_other_sources(self))
+        self.ui.wizard_model_browse_bn.clicked.connect(lambda: examine(self, "wizard_model_input", True))
+        self.ui.wizard_path_check.clicked.connect(lambda: check_data_from_path(self))
 
         # Workflow page buttons
         self.ui.left_arrow_bn.clicked.connect(lambda: UIFunction.move_workflow_view(self, False))
@@ -651,6 +655,10 @@ class MainWindow(QMainWindow):
         self.wokflow_info = None
         self.spinner = None
         self.basic_dialog = None
+        self.model_carrousel_dialog = None
+
+        # Variable to store model cards 
+        self.model_cards = None
 
         # Variables to control the threads/workers of spin window 
         self.thread_spin = None
@@ -762,6 +770,40 @@ class MainWindow(QMainWindow):
         self.basic_dialog.exec_()
 
 
+    def add_model_card(self, model_count, model_info):
+        """ 
+        Add model card to model carrousel window. This function is called by model chgecking thread. 
+        """
+        if self.model_carrousel_dialog is None: 
+            self.model_carrousel_dialog = model_card_carrousel_Ui(self)
+
+        self.model_carrousel_dialog.create_model_card(model_count, model_info)
+
+    def model_carrousel_dialog_exec(self):
+        """ 
+        Starts a window providing model cards from sources like BioImage Model Zoo and Torchvision. 
+        """
+        if self.model_carrousel_dialog is None: 
+            self.model_carrousel_dialog = model_card_carrousel_Ui(self)
+
+        center_window(self.model_carrousel_dialog, self.geometry())
+        self.model_carrousel_dialog.exec_()
+
+    def select_external_model(self, model_selected, model_source):
+        self.yes_no_exec(f"Do you want to select '{model_selected}' model?")
+        if self.yes_no.answer:
+            set_text(self.ui.wizard_model_input, model_selected+"({})".format(model_source))
+            if "BioImage Model Zoo" == model_source:
+                self.cfg.settings["wizard_answers"]["MODEL.SOURCE"] = "bmz"
+                self.cfg.settings["wizard_answers"]["MODEL.BMZ.SOURCE_MODEL_ID"] = model_selected
+            else:
+                self.cfg.settings["wizard_answers"]["MODEL.SOURCE"] = "torchvision"
+                self.cfg.settings["wizard_answers"]["MODEL.TORCHVISION_MODEL_NAME"] = model_selected
+            self.cfg.settings["wizard_answers"]["MODEL.LOAD_CHECKPOINT"] = False
+            
+            # Close window
+            self.model_carrousel_dialog.close()
+
     def update_variable_in_GUI(self, variable_name, variable_value):
         """
         Update a GUI's variable called ``variable_name`` with ``variable_value``.
@@ -847,7 +889,14 @@ class MainWindow(QMainWindow):
             self.ui.goptions_yaml_name_input.setText(os.path.normpath(os.path.basename(self.yaml_file)))
         else:
             self.dialog_exec(errors, "load_yaml_ok_but_errors")
-            
+
+    def external_model_list_built(self, model_count):
+        if model_count > 0:
+            self.model_carrousel_dialog_exec()
+        else:
+            self.dialog_exec("There are no models in the BioImage Model Zoo or Torchvision that are compatible with BiaPy "
+                "for the selected workflow characteristics.", "inform_user")
+                    
     def closeEvent(self, event):
         """
         Manage closing event to ensure all threads are killed. 

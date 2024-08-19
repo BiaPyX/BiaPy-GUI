@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'ui_dialog.ui'
+## Form generated from reading UI file 'ui_model_carrousel.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -13,19 +13,15 @@ from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 
 
-class Ui_Dialog(object):
-    def setupUi(self, Dialog):
-        if not Dialog.objectName():
-            Dialog.setObjectName(u"Dialog")
-        Dialog.resize(507, 247)
-        Dialog.setMinimumSize(QSize(0, 0))
-        Dialog.setMaximumSize(QSize(16777215, 16777215))
-        Dialog.setStyleSheet(u"background:rgb(255,255,255);")
-        self.verticalLayout = QVBoxLayout(Dialog)
-        self.verticalLayout.setSpacing(0)
+class Ui_model_card_carrousel_dialog(object):
+    def setupUi(self, model_card_carrousel_dialog):
+        if not model_card_carrousel_dialog.objectName():
+            model_card_carrousel_dialog.setObjectName(u"model_card_carrousel_dialog")
+        model_card_carrousel_dialog.resize(842, 452)
+        self.verticalLayout = QVBoxLayout(model_card_carrousel_dialog)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.centralwidget = QFrame(Dialog)
+        self.centralwidget = QFrame(model_card_carrousel_dialog)
         self.centralwidget.setObjectName(u"centralwidget")
         self.centralwidget.setStyleSheet(u"background:rgb(255,255,255);")
         self.centralwidget.setFrameShape(QFrame.NoFrame)
@@ -42,7 +38,6 @@ class Ui_Dialog(object):
         self.frame_top.setFrameShape(QFrame.NoFrame)
         self.frame_top.setFrameShadow(QFrame.Plain)
         self.horizontalLayout = QHBoxLayout(self.frame_top)
-        self.horizontalLayout.setSpacing(9)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.icon_label = QLabel(self.frame_top)
@@ -67,6 +62,34 @@ class Ui_Dialog(object):
 
         self.horizontalLayout.addItem(self.horizontalSpacer)
 
+        self.bn_close = QPushButton(self.frame_top)
+        self.bn_close.setObjectName(u"bn_close")
+        sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.bn_close.sizePolicy().hasHeightForWidth())
+        self.bn_close.setSizePolicy(sizePolicy)
+        self.bn_close.setMinimumSize(QSize(55, 40))
+        self.bn_close.setMaximumSize(QSize(55, 40))
+        self.bn_close.setStyleSheet(u"QPushButton {\n"
+"	border: none;\n"
+"	background-color: rgba(0,0,0,0);\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(64,144,253);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgba(0,0,0,0);\n"
+"}")
+        icon = QIcon()
+        icon.addFile(u"images/bn_images/close_icon.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.bn_close.setIcon(icon)
+        self.bn_close.setIconSize(QSize(22, 22))
+        self.bn_close.setAutoDefault(False)
+        self.bn_close.setFlat(True)
+
+        self.horizontalLayout.addWidget(self.bn_close)
+
 
         self.verticalLayout_2.addWidget(self.frame_top)
 
@@ -79,45 +102,19 @@ class Ui_Dialog(object):
         self.verticalLayout_3 = QVBoxLayout(self.frame_bottom)
         self.verticalLayout_3.setSpacing(0)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.verticalLayout_3.setContentsMargins(9, -1, 9, 0)
-        self.error_message_label = QLabel(self.frame_bottom)
-        self.error_message_label.setObjectName(u"error_message_label")
-        self.error_message_label.setFont(font)
-        self.error_message_label.setStyleSheet(u"background:rgb(255,255,255);")
-        self.error_message_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
-        self.error_message_label.setWordWrap(False)
-        self.error_message_label.setOpenExternalLinks(True)
-        self.error_message_label.setTextInteractionFlags(Qt.LinksAccessibleByKeyboard|Qt.LinksAccessibleByMouse|Qt.TextBrowserInteraction|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
+        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.model_carrousel_scrollarea = QScrollArea(self.frame_bottom)
+        self.model_carrousel_scrollarea.setObjectName(u"model_carrousel_scrollarea")
+        self.model_carrousel_scrollarea.setFrameShape(QFrame.NoFrame)
+        self.model_carrousel_scrollarea.setWidgetResizable(True)
+        self.scrollAreaWidgetContents = QWidget()
+        self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 838, 408))
+        self.verticalLayout_6 = QVBoxLayout(self.scrollAreaWidgetContents)
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
+        self.model_carrousel_scrollarea.setWidget(self.scrollAreaWidgetContents)
 
-        self.verticalLayout_3.addWidget(self.error_message_label)
-
-        self.frame = QFrame(self.frame_bottom)
-        self.frame.setObjectName(u"frame")
-        self.frame.setFrameShape(QFrame.NoFrame)
-        self.frame.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_2 = QHBoxLayout(self.frame)
-        self.horizontalLayout_2.setSpacing(0)
-        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.go_to_correct_bn = QPushButton(self.frame)
-        self.go_to_correct_bn.setObjectName(u"go_to_correct_bn")
-        self.go_to_correct_bn.setMinimumSize(QSize(150, 30))
-        self.go_to_correct_bn.setMaximumSize(QSize(150, 16777215))
-        self.go_to_correct_bn.setFont(font)
-        self.go_to_correct_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	border-radius: 15px;\n"
-"	background-color: rgb(64,144,253);\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
-
-        self.horizontalLayout_2.addWidget(self.go_to_correct_bn)
-
-
-        self.verticalLayout_3.addWidget(self.frame)
+        self.verticalLayout_3.addWidget(self.model_carrousel_scrollarea)
 
 
         self.verticalLayout_2.addWidget(self.frame_bottom)
@@ -126,16 +123,15 @@ class Ui_Dialog(object):
         self.verticalLayout.addWidget(self.centralwidget)
 
 
-        self.retranslateUi(Dialog)
+        self.retranslateUi(model_card_carrousel_dialog)
 
-        QMetaObject.connectSlotsByName(Dialog)
+        QMetaObject.connectSlotsByName(model_card_carrousel_dialog)
     # setupUi
 
-    def retranslateUi(self, Dialog):
-        Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
+    def retranslateUi(self, model_card_carrousel_dialog):
+        model_card_carrousel_dialog.setWindowTitle(QCoreApplication.translate("model_card_carrousel_dialog", u"Dialog", None))
         self.icon_label.setText("")
-        self.window_des_label.setText(QCoreApplication.translate("Dialog", u"TextLabel", None))
-        self.error_message_label.setText(QCoreApplication.translate("Dialog", u"<html><head/><body><p><span style=\" font-size:12pt;\">TEXT</span></p></body></html>", None))
-        self.go_to_correct_bn.setText(QCoreApplication.translate("Dialog", u"Go to correct", None))
+        self.window_des_label.setText(QCoreApplication.translate("model_card_carrousel_dialog", u"Available pretrained models", None))
+        self.bn_close.setText("")
     # retranslateUi
 

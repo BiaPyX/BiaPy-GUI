@@ -241,10 +241,6 @@
 QPushButton:hover {
 	background-color: rgb(255,255,255);
 	border: 2px solid rgb(0, 0, 0);
-}
-QPushButton:pressed {	
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
 }</string>
               </property>
               <property name="text">
@@ -262,6 +258,7 @@ QPushButton:pressed {
               </property>
               <property name="font">
                <font>
+                <family>DejaVu Math TeX Gyre</family>
                 <pointsize>12</pointsize>
                </font>
               </property>
@@ -272,10 +269,6 @@ QPushButton:pressed {
 	border-radius: 15px;
 }
 QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}
-QPushButton:pressed {	
 	background-color: rgb(255,255,255);
 	border: 2px solid rgb(0, 0, 0);
 }</string>

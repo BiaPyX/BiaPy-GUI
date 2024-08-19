@@ -1,4 +1,5 @@
 import os
+import pooch
 from functools import partial
 
 from PySide2 import QtCore
@@ -11,6 +12,8 @@ from ui.ui_dialog import Ui_Dialog
 from ui.ui_yes_no import Ui_yes_no 
 from ui.spinner import Ui_spinner
 from ui.ui_basic import Ui_basic 
+from ui.ui_model_carrousel import Ui_model_card_carrousel_dialog 
+
 from ui.ui_workflow_info import Ui_Workflow_info 
 from aux_classes.waitingspinnerwidget import QtWaitingSpinner
 
@@ -349,3 +352,147 @@ class basic_Ui(QDialog):
     def set_info(self, text):
         self.basic_window.message_label.setText(text)
 
+
+class model_card_carrousel_Ui(QDialog):
+    def __init__(self, parent=None):
+        super(model_card_carrousel_Ui, self).__init__()
+        self.model_carrousel_window = Ui_model_card_carrousel_dialog()
+        self.model_carrousel_window.setupUi(self)
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint) 
+        self.model_carrousel_window.bn_close.clicked.connect(self.close)
+        self.model_carrousel_window.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","close_icon.png"))))
+        self.model_carrousel_window.icon_label.setPixmap(QPixmap(resource_path(os.path.join("images","bn_images","info.png"))))
+        self.setStyleSheet("#centralwidget{ border: 1px solid black;} QWidget{ font-size:16px;}")
+        self.parent = parent
+
+        # Create base font
+        self.font = QFont()
+        self.font.setFamily(u"DejaVu Math TeX Gyre")
+        self.font.setPointSize(12)      
+
+        self.total_model_cards_created = 0
+        self.model_cards = []
+        self.model_row, self.model_col = -1, 0
+        self.source_logo = []
+        self.source_logo.append(QPixmap(resource_path(os.path.join("images","bmz_logo.png"))))
+        self.source_logo.append(QPixmap(resource_path(os.path.join("images","torchvision_logo.png"))))
+
+    def create_model_card(self, model_number, model_info):
+        print("Creating model card . . .")
+        # Create model card the first time (future checks will reuse the widgets)
+        if model_number > (self.total_model_cards_created - 1):
+            self.model_cards.append({})
+
+            self.model_cards[model_number][f"model_card_frame_{model_number}"] = QFrame(self.model_carrousel_window.scrollAreaWidgetContents)
+            self.model_cards[model_number][f"model_card_frame_{model_number}"].setObjectName(f"model_card_frame_{model_number}")
+            self.model_cards[model_number][f"model_card_frame_{model_number}"].setMinimumSize(QSize(800, 200))
+            self.model_cards[model_number][f"model_card_frame_{model_number}"].setMaximumSize(QSize(435, 400))
+            self.model_cards[model_number][f"model_card_frame_{model_number}"].setStyleSheet(f"#model_card_frame_{model_number}"" {\n"
+                "border: 2px solid rgb(120,120,120);\n"
+                "border-radius: 15px;\n"
+                "}\n"
+                "\n"
+                f"#model_card_frame_{model_number}:hover"" {\n"
+                "	background-color: rgb(240,240,240);\n"
+                "	border: 2px solid rgb(64, 144, 253);\n"
+                "   border-radius: 15px;\n"
+                "}")           
+            self.model_cards[model_number][f"verticalLayout_5_{model_number}"] = QVBoxLayout(self.model_cards[model_number][f"model_card_frame_{model_number}"])
+            self.model_cards[model_number][f"verticalLayout_5_{model_number}"].setObjectName(f"verticalLayout_5_{model_number}")
+            self.model_cards[model_number][f"model_name_{model_number}"] = QLabel(self.model_cards[model_number][f"model_card_frame_{model_number}"])
+            self.model_cards[model_number][f"model_name_{model_number}"].setObjectName(f"model_name_{model_number}")
+            self.model_cards[model_number][f"model_name_{model_number}"].setFont(self.font)
+            self.model_cards[model_number][f"model_name_{model_number}"].setStyleSheet(u"color: rgb(64,144,253);\n"
+                "font-weight:bold;\nbackground-color:rgba(0, 0, 0, 0);")
+            self.model_cards[model_number][f"verticalLayout_5_{model_number}"].addWidget(self.model_cards[model_number][f"model_name_{model_number}"], 0, Qt.AlignHCenter)
+            self.model_cards[model_number][f"frame_2model_source_from_frame_{model_number}"] = QFrame(self.model_cards[model_number][f"model_card_frame_{model_number}"])
+            self.model_cards[model_number][f"frame_2model_source_from_frame_{model_number}"].setObjectName(f"frame_2model_source_from_frame_{model_number}")
+            self.model_cards[model_number][f"frame_2model_source_from_frame_{model_number}"].setFrameShape(QFrame.NoFrame)
+            self.model_cards[model_number][f"frame_2model_source_from_frame_{model_number}"].setFrameShadow(QFrame.Raised)
+            self.model_cards[model_number][f"frame_2model_source_from_frame_{model_number}"].setStyleSheet('background-color:rgba(0, 0, 0, 0);') 
+            self.model_cards[model_number][f"horizontalLayout_4{model_number}"] = QHBoxLayout(self.model_cards[model_number][f"frame_2model_source_from_frame_{model_number}"])
+            self.model_cards[model_number][f"horizontalLayout_4{model_number}"].setObjectName(f"horizontalLayout_4{model_number}")
+            self.model_cards[model_number][f"horizontalLayout_4{model_number}"].setContentsMargins(5, 5, 5, 5)
+            self.model_cards[model_number][f"model_source_from_text_{model_number}"] = QLabel(self.model_cards[model_number][f"frame_2model_source_from_frame_{model_number}"])
+            self.model_cards[model_number][f"model_source_from_text_{model_number}"].setObjectName(f"model_source_from_text_{model_number}")
+            self.model_cards[model_number][f"model_source_from_text_{model_number}"].setFont(self.font)
+            self.model_cards[model_number][f"model_source_from_text_{model_number}"].setStyleSheet(u"color: rgb(120,120,120); font-size: 11px;")
+            self.model_cards[model_number][f"horizontalLayout_4{model_number}"].addWidget(self.model_cards[model_number][f"model_source_from_text_{model_number}"])
+            self.model_cards[model_number][f"model_source_icon_{model_number}"] = QLabel(self.model_cards[model_number][f"frame_2model_source_from_frame_{model_number}"])
+            self.model_cards[model_number][f"model_source_icon_{model_number}"].setObjectName(f"model_source_icon_{model_number}")
+            self.model_cards[model_number][f"model_source_icon_{model_number}"].setMinimumSize(QSize(30, 30))
+            self.model_cards[model_number][f"model_source_icon_{model_number}"].setMaximumSize(QSize(30, 30))
+            self.model_cards[model_number][f"model_source_icon_{model_number}"].setScaledContents(True)
+            self.model_cards[model_number][f"horizontalLayout_4{model_number}"].addWidget(self.model_cards[model_number][f"model_source_icon_{model_number}"])
+            self.model_cards[model_number][f"verticalLayout_5_{model_number}"].addWidget(self.model_cards[model_number][f"frame_2model_source_from_frame_{model_number}"], 0, Qt.AlignHCenter)
+            self.model_cards[model_number][f"model_card_subframe_{model_number}"] = QFrame(self.model_cards[model_number][f"model_card_frame_{model_number}"])
+            self.model_cards[model_number][f"model_card_subframe_{model_number}"].setObjectName(f"model_card_subframe_{model_number}")
+            self.model_cards[model_number][f"model_card_subframe_{model_number}"].setMinimumSize(QSize(0, 160))
+            self.model_cards[model_number][f"model_card_subframe_{model_number}"].setFrameShape(QFrame.NoFrame)
+            self.model_cards[model_number][f"model_card_subframe_{model_number}"].setFrameShadow(QFrame.Raised)
+            self.model_cards[model_number][f"model_card_subframe_{model_number}"].setStyleSheet('background-color:rgba(0, 0, 0, 0);') 
+            self.model_cards[model_number][f"horizontalLayout_2{model_number}"] = QHBoxLayout(self.model_cards[model_number][f"model_card_subframe_{model_number}"])
+            self.model_cards[model_number][f"horizontalLayout_2{model_number}"].setObjectName(f"horizontalLayout_2{model_number}")
+            self.model_cards[model_number][f"model_img_{model_number}"] = QLabel(self.model_cards[model_number][f"model_card_subframe_{model_number}"])
+            self.model_cards[model_number][f"model_img_{model_number}"].setObjectName(f"model_img_{model_number}")
+            self.model_cards[model_number][f"model_img_{model_number}"].setMinimumSize(QSize(130, 130))
+            self.model_cards[model_number][f"model_img_{model_number}"].setMaximumSize(QSize(130, 130))
+            self.model_cards[model_number][f"model_img_{model_number}"].setFont(self.font)
+            self.model_cards[model_number][f"model_img_{model_number}"].setScaledContents(True)
+            self.model_cards[model_number][f"horizontalLayout_2{model_number}"].addWidget(self.model_cards[model_number][f"model_img_{model_number}"])
+            self.model_cards[model_number][f"model_info_frame_{model_number}"] = QFrame(self.model_cards[model_number][f"model_card_subframe_{model_number}"])
+            self.model_cards[model_number][f"model_info_frame_{model_number}"].setObjectName(f"model_info_frame_{model_number}")
+            self.model_cards[model_number][f"model_info_frame_{model_number}"].setFrameShape(QFrame.NoFrame)
+            self.model_cards[model_number][f"model_info_frame_{model_number}"].setFrameShadow(QFrame.Raised)
+            self.model_cards[model_number][f"gridLayout{model_number}"] = QGridLayout(self.model_cards[model_number][f"model_info_frame_{model_number}"])
+            self.model_cards[model_number][f"gridLayout{model_number}"].setObjectName(f"gridLayout{model_number}")
+            self.model_cards[model_number][f"model_nick_id_frame_{model_number}"] = QFrame(self.model_cards[model_number][f"model_info_frame_{model_number}"])
+            self.model_cards[model_number][f"model_nick_id_frame_{model_number}"].setObjectName(f"model_nick_id_frame_{model_number}")
+            self.model_cards[model_number][f"model_nick_id_frame_{model_number}"].setFrameShape(QFrame.NoFrame)
+            self.model_cards[model_number][f"model_nick_id_frame_{model_number}"].setFrameShadow(QFrame.Raised)
+            self.model_cards[model_number][f"horizontalLayout_3{model_number}"] = QHBoxLayout(self.model_cards[model_number][f"model_nick_id_frame_{model_number}"])
+            self.model_cards[model_number][f"horizontalLayout_3{model_number}"].setObjectName(f"horizontalLayout_3{model_number}")
+            self.model_cards[model_number][f"horizontalLayout_3{model_number}"].setContentsMargins(0, 0, 0, 0)
+            self.model_cards[model_number][f"model_nickname_{model_number}"] = QLabel(self.model_cards[model_number][f"model_nick_id_frame_{model_number}"])
+            self.model_cards[model_number][f"model_nickname_{model_number}"].setObjectName(f"model_nickname_{model_number}")
+            self.model_cards[model_number][f"model_nickname_{model_number}"].setFont(self.font)
+            self.model_cards[model_number][f"horizontalLayout_3{model_number}"].addWidget(self.model_cards[model_number][f"model_nickname_{model_number}"])
+            self.model_cards[model_number][f"model_id_{model_number}"] = QLabel(self.model_cards[model_number][f"model_nick_id_frame_{model_number}"])
+            self.model_cards[model_number][f"model_id_{model_number}"].setObjectName(f"model_id_{model_number}")
+            self.model_cards[model_number][f"model_id_{model_number}"].setFont(self.font)
+            self.model_cards[model_number][f"horizontalLayout_3{model_number}"].addWidget(self.model_cards[model_number][f"model_id_{model_number}"])
+            self.model_cards[model_number][f"gridLayout{model_number}"].addWidget(self.model_cards[model_number][f"model_nick_id_frame_{model_number}"], 0, 0, 1, 1)
+            self.model_cards[model_number][f"model_description_{model_number}"] = QLabel(self.model_cards[model_number][f"model_info_frame_{model_number}"])
+            self.model_cards[model_number][f"model_description_{model_number}"].setObjectName(f"model_description_{model_number}")
+            self.model_cards[model_number][f"model_description_{model_number}"].setFont(self.font)
+            self.model_cards[model_number][f"model_description_{model_number}"].setWordWrap(True)
+            self.model_cards[model_number][f"gridLayout{model_number}"].addWidget(self.model_cards[model_number][f"model_description_{model_number}"], 1, 0, 1, 1)
+            self.model_cards[model_number][f"model_link_{model_number}"] = QLabel(self.model_cards[model_number][f"model_info_frame_{model_number}"])
+            self.model_cards[model_number][f"model_link_{model_number}"].setObjectName(f"model_link_{model_number}")
+            self.model_cards[model_number][f"model_link_{model_number}"].setFont(self.font)
+            self.model_cards[model_number][f"model_link_{model_number}"].setWordWrap(True)
+            self.model_cards[model_number][f"model_link_{model_number}"].setOpenExternalLinks(True)
+            self.model_cards[model_number][f"gridLayout{model_number}"].addWidget(self.model_cards[model_number][f"model_link_{model_number}"], 2, 0, 1, 1)
+            self.model_cards[model_number][f"horizontalLayout_2{model_number}"].addWidget(self.model_cards[model_number][f"model_info_frame_{model_number}"])
+            self.model_cards[model_number][f"verticalLayout_5_{model_number}"].addWidget(self.model_cards[model_number][f"model_card_subframe_{model_number}"])
+            self.model_carrousel_window.verticalLayout_6.addWidget(self.model_cards[model_number][f"model_card_frame_{model_number}"])
+
+            self.model_cards[model_number][f"model_card_frame_{model_number}"].mousePressEvent = lambda event, a=model_info['nickname'],b=model_info['source']: self.parent.select_external_model(a,b)
+
+            self.total_model_cards_created += 1
+
+        # Set model description accordingly 
+        try:
+            local_path = pooch.retrieve(model_info['covers'], known_hash=None)
+        except: 
+            local_path = os.path.join("images", "bmz_model_not_found.png")
+        local_path = resource_path(local_path)
+        self.model_cards[model_number][f"model_name_{model_number}"].setText(model_info['name'])
+        self.model_cards[model_number][f"model_source_from_text_{model_number}"].setText("from " + model_info['source'])
+        source_logo = self.source_logo[0] if model_info['source'] == "BioImage Model Zoo" else self.source_logo[1]
+        self.model_cards[model_number][f"model_source_icon_{model_number}"].setPixmap(source_logo)
+        self.model_cards[model_number][f"model_nickname_{model_number}"].setText("<span style='color:#4090FD';>Name: </span>" + model_info['nickname']+" (" + model_info['nickname_icon'] + ")")
+        self.model_cards[model_number][f"model_id_{model_number}"].setText("<span style=\"color:#4090FD\";>ID: </span>"  + model_info['id'])
+        self.model_cards[model_number][f"model_description_{model_number}"].setText("<span style=\"color:#4090FD\";>Description: </span>"  + model_info['description'])
+        self.model_cards[model_number][f"model_link_{model_number}"].setText("<span style=\"color:#4090FD\";>URL: </span> <a href=\""+  model_info['url'] + "\">"+model_info['url']+"</a>")
+        self.model_cards[model_number][f"model_img_{model_number}"].setPixmap(QPixmap(local_path))
