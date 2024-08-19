@@ -477,7 +477,7 @@ class model_card_carrousel_Ui(QDialog):
             self.model_cards[model_number][f"verticalLayout_5_{model_number}"].addWidget(self.model_cards[model_number][f"model_card_subframe_{model_number}"])
             self.model_carrousel_window.verticalLayout_6.addWidget(self.model_cards[model_number][f"model_card_frame_{model_number}"])
 
-            self.model_cards[model_number][f"model_card_frame_{model_number}"].mousePressEvent = lambda event, a=model_info['nickname'],b=model_info['source']: self.parent.select_external_model(a,b)
+            self.model_cards[model_number][f"model_card_frame_{model_number}"].mousePressEvent = lambda event, a=model_info['nickname'],b=model_info['source'],c=model_info['restrictions_cmd']: self.parent.select_external_model(a,b,c)
 
             self.total_model_cards_created += 1
 
@@ -485,14 +485,29 @@ class model_card_carrousel_Ui(QDialog):
         try:
             local_path = pooch.retrieve(model_info['covers'], known_hash=None)
         except: 
-            local_path = os.path.join("images", "bmz_model_not_found.png")
+            if model_info['source'] == "BioImage Model Zoo":
+                local_path = os.path.join("images", "bmz_model_not_found.png")
+            else:
+                local_path = os.path.join("images", "torchvision_logo.png")
         local_path = resource_path(local_path)
+        
         self.model_cards[model_number][f"model_name_{model_number}"].setText(model_info['name'])
         self.model_cards[model_number][f"model_source_from_text_{model_number}"].setText("from " + model_info['source'])
-        source_logo = self.source_logo[0] if model_info['source'] == "BioImage Model Zoo" else self.source_logo[1]
-        self.model_cards[model_number][f"model_source_icon_{model_number}"].setPixmap(source_logo)
-        self.model_cards[model_number][f"model_nickname_{model_number}"].setText("<span style='color:#4090FD';>Name: </span>" + model_info['nickname']+" (" + model_info['nickname_icon'] + ")")
-        self.model_cards[model_number][f"model_id_{model_number}"].setText("<span style=\"color:#4090FD\";>ID: </span>"  + model_info['id'])
-        self.model_cards[model_number][f"model_description_{model_number}"].setText("<span style=\"color:#4090FD\";>Description: </span>"  + model_info['description'])
-        self.model_cards[model_number][f"model_link_{model_number}"].setText("<span style=\"color:#4090FD\";>URL: </span> <a href=\""+  model_info['url'] + "\">"+model_info['url']+"</a>")
-        self.model_cards[model_number][f"model_img_{model_number}"].setPixmap(QPixmap(local_path))
+        if model_info['source'] == "BioImage Model Zoo":
+            self.model_cards[model_number][f"model_source_icon_{model_number}"].setPixmap(self.source_logo[0])
+            self.model_cards[model_number][f"model_nickname_{model_number}"].setVisible(True)
+            self.model_cards[model_number][f"model_nickname_{model_number}"].setText("<span style='color:#4090FD';>Name: </span>" + model_info['nickname']+" (" + model_info['nickname_icon'] + ")")
+            self.model_cards[model_number][f"model_id_{model_number}"].setText("<span style=\"color:#4090FD\";>ID: </span>"  + model_info['id'])
+            self.model_cards[model_number][f"model_description_{model_number}"].setText("<span style=\"color:#4090FD\";>Description: </span>"  + model_info['description'])
+            self.model_cards[model_number][f"model_link_{model_number}"].setText("<span style=\"color:#4090FD\";>URL: </span> <a href=\""+  model_info['url'] + "\">"+model_info['url']+"</a>")
+            self.model_cards[model_number][f"model_img_{model_number}"].setPixmap(QPixmap(local_path))
+        else:
+            self.model_cards[model_number][f"model_source_icon_{model_number}"].setPixmap(self.source_logo[1])
+            self.model_cards[model_number][f"model_nickname_{model_number}"].setVisible(False)
+            # ID changed for description
+            self.model_cards[model_number][f"model_id_{model_number}"].setText("<span style=\"color:#4090FD\";>Description: </span>"  + model_info['description'])
+            # Description changed for URL
+            self.model_cards[model_number][f"model_description_{model_number}"].setText("<span style=\"color:#4090FD\";>URL: </span> <a href=\""+  model_info['url'] + "\">"+model_info['url']+"</a>")
+            # URL used for restrictions
+            self.model_cards[model_number][f"model_link_{model_number}"].setText("<span style=\"color:#4090FD\";>Restrictions: </span><span style=\"color:#FF0000\";>"+ model_info['restrictions'] + "</span>")
+            self.model_cards[model_number][f"model_img_{model_number}"].setPixmap(QPixmap(local_path))

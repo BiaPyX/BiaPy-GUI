@@ -19,7 +19,7 @@ from PySide2.QtWidgets import *
 from PySide2.QtGui import  QBrush, QColor
 
 from biapy_config import Config
-from biapy_check_configuration import check_configuration
+from biapy_check_configuration import check_configuration, check_torchvision_available_models
 from biapy_aux_functions import check_bmz_model_compatibility
 
 def examine(main_window, save_in_obj_tag=None, is_file=True):
@@ -603,13 +603,31 @@ class check_models_from_other_sources_engine(QObject):
                             'id': doi,
                             'covers': model_rdfs[-1]['covers'][0],
                             'url': f"https://bioimage.io/#/?id={doi}",
+                            'restrictions_cmd': [],
                         }
                         self.add_model_card_signal.emit(model_count, model_info)
 
                         model_count += 1
 
-            # TODO: check Torchvision models 
-            
+            # Check Torchvision models 
+            models, model_restrictions_description, model_restrictions = check_torchvision_available_models(
+                self.main_window.cfg.settings["wizard_answers"]["PROBLEM.TYPE"], 
+                self.main_window.cfg.settings["wizard_answers"]["PROBLEM.NDIM"]
+            )
+            for m, res, res_cmd in zip(models, model_restrictions_description, model_restrictions):
+                print(f"Creating model card for: {m} . . .")
+                model_info = {
+                    'name': m,
+                    'nickname': m,
+                    'source': "Torchvision",
+                    'description': "Loaded with its default weights (normally on ImageNet data). More info in the link below",
+                    'url': "https://pytorch.org/vision/main/models.html",
+                    'restrictions': res,
+                    'restrictions_cmd': res_cmd,
+                }
+                self.add_model_card_signal.emit(model_count, model_info)
+                model_count += 1
+
         except Exception as exc:
             self.main_window.logger.warning(exc)
             self.error_signal.emit(f"Following error found when checking available models: \n{exc}", "error")
@@ -621,6 +639,18 @@ class check_models_from_other_sources_engine(QObject):
         self.state_signal.emit(1)
         self.finished_signal.emit()
 
+def export_wizard_summary(main_window):
+    print("Preparing the function to export the wizard's summary")
+
+    # Fix by model restriction
+    self.cfg.settings["wizard_answers"]["model_restrictions"]
+    del self.cfg.settings["wizard_answers"]["model_restrictions"]
+    
+    # Merge into one
+    self.settings["wizard_answers"]["PATCH_SIZE_XY"]
+    self.settings["wizard_answers"]["PATCH_SIZE_Z"]
+    del self.settings["wizard_answers"]["PATCH_SIZE_XY"]
+    del self.settings["wizard_answers"]["PATCH_SIZE_Z"]
 
 def adjust_window_progress(main_window):
     """

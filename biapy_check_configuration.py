@@ -1,5 +1,6 @@
 ## Copied from BiaPy commit: a3bac956929b07fcc1571a2fd592bccf15e9ac9d (3.4.4)
 import os
+import glob
 import numpy as np
 import collections
 import requests
@@ -831,3 +832,185 @@ def check_value(value, value_range=(0,1)):
             if value_range[0] <= value <= value_range[1]:
                 return True
         return False
+    
+
+# Function extracted from check_configuration checks 
+def check_torchvision_available_models(workflow, ndim):
+    if ndim == "3D": # quick return as there are no 3D models
+        return [], [], []
+    
+    models, model_restrictions_description, model_restrictions = [], [], []
+    if workflow == "SEMANTIC_SEG":
+        models = [
+            "deeplabv3_mobilenet_v3_large",
+            "deeplabv3_resnet101",
+            "deeplabv3_resnet50",
+            "fcn_resnet101",
+            "fcn_resnet50",
+            "lraspp_mobilenet_v3_large",
+        ]
+        model_restrictions_description = [
+            "- Images must be RGB", 
+            "", 
+            "", 
+            "", 
+            "", 
+            ""
+        ]
+        model_restrictions = [
+            ["DATA.PATCH_SIZE[-1]", 3],
+            [], 
+            [],
+            [],
+            [],
+            [],
+        ]
+    elif workflow == "INSTANCE_SEG":
+        models = [
+            "maskrcnn_resnet50_fpn",
+            "maskrcnn_resnet50_fpn_v2",
+        ]
+        model_restrictions_description = ["- Only available for testing"]*len(models) 
+        model_restrictions = [["TRAIN.ENABLE", False],]*len(models)  
+    elif workflow == "DETECTION":
+        models = [
+            "fasterrcnn_mobilenet_v3_large_320_fpn",
+            "fasterrcnn_mobilenet_v3_large_fpn",
+            "fasterrcnn_resnet50_fpn",
+            "fasterrcnn_resnet50_fpn_v2",
+            "fcos_resnet50_fpn",
+            "ssd300_vgg16",
+            "ssdlite320_mobilenet_v3_large",
+            "retinanet_resnet50_fpn",
+            "retinanet_resnet50_fpn_v2",
+        ]
+        model_restrictions_description = ["- Only available for testing"]*len(models) 
+        model_restrictions = [["TRAIN.ENABLE", False],]*len(models) 
+    elif workflow == "SUPER_RESOLUTION":
+        models = []
+        model_restrictions_description = []
+        model_restrictions = []
+    elif workflow == "SELF_SUPERVISED":
+        models = []
+        model_restrictions_description = []
+        model_restrictions = []
+    elif workflow == "DENOISING":
+        models = []
+        model_restrictions_description = []
+        model_restrictions = []
+    elif workflow == "IMAGE_TO_IMAGE":
+        models = []
+        model_restrictions_description = []
+        model_restrictions = []
+    elif workflow == "CLASSIFICATION":
+        models = [
+            "alexnet",
+            "convnext_base",
+            "convnext_large",
+            "convnext_small",
+            "convnext_tiny",
+            "densenet121",
+            "densenet161",
+            "densenet169",
+            "densenet201",
+            "efficientnet_b0",
+            "efficientnet_b1",
+            "efficientnet_b2",
+            "efficientnet_b3",
+            "efficientnet_b4",
+            "efficientnet_b5",
+            "efficientnet_b6",
+            "efficientnet_b7",
+            "efficientnet_v2_l",
+            "efficientnet_v2_m",
+            "efficientnet_v2_s",
+            "googlenet",
+            "inception_v3",
+            "maxvit_t",
+            "mnasnet0_5",
+            "mnasnet0_75",
+            "mnasnet1_0",
+            "mnasnet1_3",
+            "mobilenet_v2",
+            "mobilenet_v3_large",
+            "mobilenet_v3_small",
+            "quantized_googlenet",
+            "quantized_inception_v3",
+            "quantized_mobilenet_v2",
+            "quantized_mobilenet_v3_large",
+            "quantized_resnet18",
+            "quantized_resnet50",
+            "quantized_resnext101_32x8d",
+            "quantized_resnext101_64x4d",
+            "quantized_shufflenet_v2_x0_5",
+            "quantized_shufflenet_v2_x1_0",
+            "quantized_shufflenet_v2_x1_5",
+            "quantized_shufflenet_v2_x2_0",
+            "regnet_x_16gf",
+            "regnet_x_1_6gf",
+            "regnet_x_32gf",
+            "regnet_x_3_2gf",
+            "regnet_x_400mf",
+            "regnet_x_800mf",
+            "regnet_x_8gf",
+            "regnet_y_128gf",
+            "regnet_y_16gf",
+            "regnet_y_1_6gf",
+            "regnet_y_32gf",
+            "regnet_y_3_2gf",
+            "regnet_y_400mf",
+            "regnet_y_800mf",
+            "regnet_y_8gf",
+            "resnet101",
+            "resnet152",
+            "resnet18",
+            "resnet34",
+            "resnet50",
+            "resnext101_32x8d",
+            "resnext101_64x4d",
+            "resnext50_32x4d",
+            "retinanet_resnet50_fpn",
+            "shufflenet_v2_x0_5",
+            "shufflenet_v2_x1_0",
+            "shufflenet_v2_x1_5",
+            "shufflenet_v2_x2_0",
+            "squeezenet1_0",
+            "squeezenet1_1",
+            "swin_b",
+            "swin_s",
+            "swin_t",
+            "swin_v2_b",
+            "swin_v2_s",
+            "swin_v2_t",
+            "vgg11",
+            "vgg11_bn",
+            "vgg13",
+            "vgg13_bn",
+            "vgg16",
+            "vgg16_bn",
+            "vgg19",
+            "vgg19_bn",
+            "vit_b_16",
+            "vit_b_32",
+            "vit_h_14",
+            "vit_l_16",
+            "vit_l_32",
+            "wide_resnet101_2",
+            "wide_resnet50_2",
+        ]
+        model_restrictions_description = []
+        model_restrictions = []
+
+    # Add common restrictions for all workflows
+    for i in range(len(model_restrictions)):
+        model_restrictions[i] += [
+            "PROBLEM.NDIM" , "2D", 
+            "TEST.ANALIZE_2D_IMGS_AS_3D_STACK", "False",
+            "TEST.AUGMENTATION", "False",
+            "TEST.FULL_IMG", "True",
+        ]
+        model_restrictions_description[i] += "\n- Only for 2D images"
+        if workflow != "CLASSIFICATION":
+            model_restrictions[i] += ["TEST.FULL_IMG", "True"]
+
+    return models, model_restrictions_description, model_restrictions
