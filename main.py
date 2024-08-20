@@ -12,7 +12,7 @@ from PySide2.QtGui import *
 from ui_function import * 
 from ui_utils import (examine, mark_syntax_error, expand_hide_advanced_options, change_page, get_git_revision_short_hash,
     load_yaml_config, resource_path, load_yaml_to_GUI, set_text, start_questionary, change_wizard_page, eval_wizard_answer, 
-    clear_answers, check_models_from_other_sources, check_data_from_path)
+    clear_answers, check_models_from_other_sources, check_data_from_path, export_wizard_summary)
 from settings import Settings
 from widget_conditions import Widget_conditions
 from ui.ui_main import Ui_MainWindow 

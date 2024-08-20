@@ -264,11 +264,11 @@ def eval_wizard_answer(main_window):
         else:
             te = get_text(main_window.ui.wizard_path_input)
             if te != "":
-                key = main_window.cfg.settings["wizard_variable_to_map"]["Q"+str(main_window.cfg.settings['wizard_question_index']+1)].keys()[0]
+                key = next(iter(main_window.cfg.settings["wizard_variable_to_map"]["Q"+str(main_window.cfg.settings['wizard_question_index']+1)]))
                 main_window.cfg.settings["wizard_answers"][key] = te
                 main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] = te    
                 mark_as_answered = True
-                set_text(main_window.ui.wizard_path_input, "")
+                set_text(main_window.ui.wizard_path_input, te)
 
         if mark_as_answered:        
             # Mark section as answered in TOC
@@ -391,6 +391,22 @@ def change_wizard_page(main_window, val, based_on_toc=False, added_val=0):
         main_window.ui.wizard_main_frame.setCurrentWidget(main_window.ui.wizard_start_page)
     elif val == last_shown+1:
         main_window.ui.wizard_main_frame.setCurrentWidget(main_window.ui.summary_page)
+
+        # Only visualice those questions that were answered and visible
+        for i in range(len(main_window.cfg.settings["wizard_questions"])):
+            if main_window.cfg.settings['wizard_question_visible'][i] and \
+               main_window.cfg.settings["wizard_question_answered_index"][i] != -1:
+                main_window.question_cards[i][f"summary_question_frame_{i}"].setVisible(True)
+                set_text(main_window.question_cards[i][f"summary_question_text{i}"], main_window.cfg.settings['wizard_questions'][i])
+                if isinstance(main_window.cfg.settings["wizard_question_answered_index"][i], str):
+                    set_text(main_window.question_cards[i][f"summary_question_text_answer_{i}"], 
+                        main_window.cfg.settings["wizard_question_answered_index"][i])
+                else:
+                    set_text(main_window.question_cards[i][f"summary_question_text_answer_{i}"], 
+                        str(main_window.cfg.settings['wizard_possible_answers'][i][main_window.cfg.settings["wizard_question_answered_index"][i]]))
+            else:
+                main_window.question_cards[i][f"summary_question_frame_{i}"].setVisible(False)
+
     else:
         main_window.ui.wizard_main_frame.setCurrentWidget(main_window.ui.questionary_page)
 
@@ -642,15 +658,30 @@ class check_models_from_other_sources_engine(QObject):
 def export_wizard_summary(main_window):
     print("Preparing the function to export the wizard's summary")
 
-    # Fix by model restriction
-    self.cfg.settings["wizard_answers"]["model_restrictions"]
-    del self.cfg.settings["wizard_answers"]["model_restrictions"]
+    # Check if there are not answered questions
+    finished = True
+    for i in range(len(main_window.cfg.settings['wizard_question_visible'])):
+        if main_window.cfg.settings['wizard_question_visible'][i] and \
+            main_window.cfg.settings["wizard_question_answered_index"][i] == -1:
+            finished = False
+            break
     
-    # Merge into one
-    self.settings["wizard_answers"]["PATCH_SIZE_XY"]
-    self.settings["wizard_answers"]["PATCH_SIZE_Z"]
-    del self.settings["wizard_answers"]["PATCH_SIZE_XY"]
-    del self.settings["wizard_answers"]["PATCH_SIZE_Z"]
+    if not finished:
+        main_window.dialog_exec("There are still some questions not answered. Please go back and do "
+            "it before continue.", "inform_user")
+    else:
+        print("blablabla")    
+        
+        # # Fix by model restriction
+        # self.cfg.settings["wizard_answers"]["model_restrictions"]
+        # del self.cfg.settings["wizard_answers"]["model_restrictions"]
+        
+        # # Merge into one
+        # self.settings["wizard_answers"]["PATCH_SIZE_XY"]
+        # self.settings["wizard_answers"]["PATCH_SIZE_Z"]
+        # del self.settings["wizard_answers"]["PATCH_SIZE_XY"]
+        # del self.settings["wizard_answers"]["PATCH_SIZE_Z"]
+
 
 def adjust_window_progress(main_window):
     """

@@ -8,7 +8,7 @@ import requests
 from PySide2.QtGui import QPixmap, QFont, QStandardItemModel, QStandardItem, QBrush, QColor, QIcon
 from PySide2.QtCore import QSize, QThread, QFile, QIODevice, QEvent, QObject, Qt, QSortFilterProxyModel 
 from PySide2.QtSvg import QSvgWidget
-from PySide2.QtWidgets import QLabel, QFrame
+from PySide2.QtWidgets import QLabel, QFrame, QVBoxLayout, QHBoxLayout, QSpacerItem, QSizePolicy
 
 from main import MainWindow
 from run_functions import run_worker
@@ -198,6 +198,55 @@ class UIFunction(MainWindow):
         main_window.ui.wizard_question_answer.setVisible(True)
         main_window.ui.wizard_model_input_frame.setVisible(False)
 
+        # Create summary page 
+        main_window.question_cards = []
+        font7 = QFont()
+        font7.setFamily(u"DejaVu Math TeX Gyre")
+        font7.setBold(False)
+        font7.setItalic(True)
+        font7.setWeight(50)
+        font8 = QFont()
+        font8.setFamily(u"DejaVu Math TeX Gyre")
+        font8.setPointSize(11)
+    
+        for i in range(len(main_window.cfg.settings["wizard_questions"])):
+            main_window.question_cards.append({})
+
+            main_window.question_cards[i][f"summary_question_frame_{i}"] = QFrame(main_window.ui.scrollAreaWidgetContents_23)
+            main_window.question_cards[i][f"summary_question_frame_{i}"].setObjectName(f"summary_question_frame_{i}")
+            main_window.question_cards[i][f"summary_question_frame_{i}"].setMinimumSize(QSize(700, 100))
+            main_window.question_cards[i][f"summary_question_frame_{i}"].setMaximumSize(QSize(700, 9999))
+            main_window.question_cards[i][f"verticalLayout_61{i}"] = QVBoxLayout(main_window.question_cards[i][f"summary_question_frame_{i}"])
+            main_window.question_cards[i][f"verticalLayout_61{i}"].setObjectName(f"verticalLayout_61{i}")
+            main_window.question_cards[i][f"summary_question_text_frame{i}"] = QFrame(main_window.question_cards[i][f"summary_question_frame_{i}"])
+            main_window.question_cards[i][f"summary_question_text_frame{i}"].setObjectName(f"summary_question_text_frame{i}")
+            main_window.question_cards[i][f"summary_question_text_frame{i}"].setFrameShape(QFrame.NoFrame)
+            main_window.question_cards[i][f"summary_question_text_frame{i}"].setFrameShadow(QFrame.Raised)
+            main_window.question_cards[i][f"horizontalLayout_45{i}"] = QHBoxLayout(main_window.question_cards[i][f"summary_question_text_frame{i}"])
+            main_window.question_cards[i][f"horizontalLayout_45{i}"].setObjectName(f"horizontalLayout_45{i}")
+            main_window.question_cards[i][f"summary_question_text_bullet{i}"] = QLabel(main_window.question_cards[i][f"summary_question_text_frame{i}"])
+            main_window.question_cards[i][f"summary_question_text_bullet{i}"].setObjectName(f"summary_question_text_bullet{i}")
+            main_window.question_cards[i][f"summary_question_text_bullet{i}"].setMinimumSize(QSize(20, 20))
+            main_window.question_cards[i][f"summary_question_text_bullet{i}"].setMaximumSize(QSize(20, 20))
+            main_window.question_cards[i][f"summary_question_text_bullet{i}"].setStyleSheet(u"background-color: rgb(64,144,253);\n")
+            main_window.question_cards[i][f"horizontalLayout_45{i}"].addWidget(main_window.question_cards[i][f"summary_question_text_bullet{i}"])
+            main_window.question_cards[i][f"summary_question_text{i}"] = QLabel(main_window.question_cards[i][f"summary_question_text_frame{i}"])
+            main_window.question_cards[i][f"summary_question_text{i}"].setObjectName(f"summary_question_text{i}")
+            main_window.question_cards[i][f"summary_question_text{i}"].setFont(font7)
+            main_window.question_cards[i][f"summary_question_text{i}"].setStyleSheet(u"color: rgb(120,120,120);\nfont: italic;")
+            main_window.question_cards[i][f"summary_question_text{i}"].setWordWrap(True)
+            main_window.question_cards[i][f"horizontalLayout_45{i}"].addWidget(main_window.question_cards[i][f"summary_question_text{i}"])
+            main_window.question_cards[i][f"verticalLayout_61{i}"].addWidget(main_window.question_cards[i][f"summary_question_text_frame{i}"])
+            main_window.question_cards[i][f"summary_question_text_answer_{i}"] = QLabel(main_window.question_cards[i][f"summary_question_frame_{i}"])
+            main_window.question_cards[i][f"summary_question_text_answer_{i}"].setObjectName(f"summary_question_text_answer_{i}")
+            main_window.question_cards[i][f"summary_question_text_answer_{i}"].setFont(font8)
+            main_window.question_cards[i][f"summary_question_text_answer_{i}"].setWordWrap(True)
+            main_window.question_cards[i][f"summary_question_text_answer_{i}"].setIndent(45)
+            main_window.question_cards[i][f"verticalLayout_61{i}"].addWidget(main_window.question_cards[i][f"summary_question_text_answer_{i}"])
+            main_window.ui.verticalLayout_62.addWidget(main_window.question_cards[i][f"summary_question_frame_{i}"])
+
+        main_window.ui.verticalSpacer_60 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        main_window.ui.verticalLayout_62.addItem(main_window.ui.verticalSpacer_60)
 
     def configure_from_list(model, _list): 
         """
