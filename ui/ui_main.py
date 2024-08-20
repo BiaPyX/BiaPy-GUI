@@ -1298,7 +1298,7 @@ class Ui_MainWindow(object):
         self.scrollArea_17.setWidgetResizable(True)
         self.scrollAreaWidgetContents_22 = QWidget()
         self.scrollAreaWidgetContents_22.setObjectName(u"scrollAreaWidgetContents_22")
-        self.scrollAreaWidgetContents_22.setGeometry(QRect(0, -141, 642, 280))
+        self.scrollAreaWidgetContents_22.setGeometry(QRect(0, -32, 642, 298))
         self.verticalLayout_59 = QVBoxLayout(self.scrollAreaWidgetContents_22)
         self.verticalLayout_59.setSpacing(6)
         self.verticalLayout_59.setObjectName(u"verticalLayout_59")
@@ -1378,11 +1378,12 @@ class Ui_MainWindow(object):
         self.frame_76.setObjectName(u"frame_76")
         self.frame_76.setFrameShape(QFrame.NoFrame)
         self.frame_76.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_58 = QVBoxLayout(self.frame_76)
-        self.verticalLayout_58.setObjectName(u"verticalLayout_58")
+        self.horizontalLayout_45 = QHBoxLayout(self.frame_76)
+        self.horizontalLayout_45.setSpacing(30)
+        self.horizontalLayout_45.setObjectName(u"horizontalLayout_45")
         self.wizard_path_check = QPushButton(self.frame_76)
         self.wizard_path_check.setObjectName(u"wizard_path_check")
-        self.wizard_path_check.setMinimumSize(QSize(100, 35))
+        self.wizard_path_check.setMinimumSize(QSize(170, 35))
         self.wizard_path_check.setFont(font)
         self.wizard_path_check.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
@@ -1394,10 +1395,16 @@ class Ui_MainWindow(object):
 "	border: 2px solid rgb(0, 0, 0);\n"
 "}")
 
-        self.verticalLayout_58.addWidget(self.wizard_path_check)
+        self.horizontalLayout_45.addWidget(self.wizard_path_check, 0, Qt.AlignHCenter)
+
+        self.wizard_data_checked_label = QLabel(self.frame_76)
+        self.wizard_data_checked_label.setObjectName(u"wizard_data_checked_label")
+        self.wizard_data_checked_label.setFont(font)
+
+        self.horizontalLayout_45.addWidget(self.wizard_data_checked_label, 0, Qt.AlignHCenter)
 
 
-        self.verticalLayout_57.addWidget(self.frame_76, 0, Qt.AlignHCenter|Qt.AlignVCenter)
+        self.verticalLayout_57.addWidget(self.frame_76, 0, Qt.AlignHCenter)
 
         self.verticalSpacer_58 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
@@ -1413,6 +1420,7 @@ class Ui_MainWindow(object):
         self.wizard_model_input_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_60 = QVBoxLayout(self.wizard_model_input_frame)
         self.verticalLayout_60.setObjectName(u"verticalLayout_60")
+        self.verticalLayout_60.setContentsMargins(0, 0, 0, 0)
         self.label_116 = QLabel(self.wizard_model_input_frame)
         self.label_116.setObjectName(u"label_116")
         self.label_116.setFont(font)
@@ -1428,7 +1436,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_44.setContentsMargins(0, 0, 0, 0)
         self.wizard_model_input = QLineEdit(self.frame_77)
         self.wizard_model_input.setObjectName(u"wizard_model_input")
-        self.wizard_model_input.setMinimumSize(QSize(350, 30))
+        self.wizard_model_input.setMinimumSize(QSize(500, 30))
         self.wizard_model_input.setFont(font)
         self.wizard_model_input.setReadOnly(True)
 
@@ -1441,7 +1449,14 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_44.addWidget(self.wizard_model_browse_bn)
 
-        self.wizard_model_check_bn = QPushButton(self.frame_77)
+        self.horizontalSpacer_85 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_44.addItem(self.horizontalSpacer_85)
+
+
+        self.verticalLayout_60.addWidget(self.frame_77)
+
+        self.wizard_model_check_bn = QPushButton(self.wizard_model_input_frame)
         self.wizard_model_check_bn.setObjectName(u"wizard_model_check_bn")
         self.wizard_model_check_bn.setMinimumSize(QSize(170, 35))
         self.wizard_model_check_bn.setFont(font)
@@ -1455,14 +1470,7 @@ class Ui_MainWindow(object):
 "	border: 2px solid rgb(0, 0, 0);\n"
 "}")
 
-        self.horizontalLayout_44.addWidget(self.wizard_model_check_bn)
-
-        self.horizontalSpacer_85 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.horizontalLayout_44.addItem(self.horizontalSpacer_85)
-
-
-        self.verticalLayout_60.addWidget(self.frame_77)
+        self.verticalLayout_60.addWidget(self.wizard_model_check_bn, 0, Qt.AlignHCenter)
 
         self.verticalSpacer_59 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
@@ -12961,6 +12969,7 @@ class Ui_MainWindow(object):
         self.label_112.setText(QCoreApplication.translate("MainWindow", u"Path", None))
         self.wizard_path_input_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
         self.wizard_path_check.setText(QCoreApplication.translate("MainWindow", u"Check data", None))
+        self.wizard_data_checked_label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:16pt;\">\u2190</span> Data not checked yet</p></body></html>", None))
         self.label_116.setText(QCoreApplication.translate("MainWindow", u"Model", None))
         self.wizard_model_browse_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
         self.wizard_model_check_bn.setText(QCoreApplication.translate("MainWindow", u"Check models", None))

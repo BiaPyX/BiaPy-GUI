@@ -20,7 +20,8 @@ from PySide2.QtGui import  QBrush, QColor
 
 from biapy_config import Config
 from biapy_check_configuration import check_configuration, check_torchvision_available_models
-from biapy_aux_functions import check_bmz_model_compatibility
+from biapy_aux_functions import check_bmz_model_compatibility, check_images, check_csv_files, check_classification_images
+
 
 def examine(main_window, save_in_obj_tag=None, is_file=True):
     """ 
@@ -59,9 +60,142 @@ def examine(main_window, save_in_obj_tag=None, is_file=True):
         elif save_in_obj_tag == "DATA__TEST__GT_PATH__INPUT":
             main_window.cfg.settings['test_data_gt_input_path'] = out  
 
+def wizard_path_changed(main_window, save_in_obj_tag=None, is_file=True):
+    # Reset path check
+    if examine(main_window, save_in_obj_tag, is_file) != "":
+        # Reset again colors and checks so the user must check again the folder
+        key = next(iter(main_window.cfg.settings["wizard_variable_to_map"]["Q"+str(main_window.cfg.settings['wizard_question_index']+1)]))
+        if f"CHECKED {key}" in main_window.cfg.settings["wizard_answers"]:
+            main_window.cfg.settings["wizard_answers"][f"CHECKED {key}"] = -1
+            set_text(main_window.ui.wizard_data_checked_label, "<span style='color:#ff3300'><span style='font-size:16pt;'>&larr;</span> Data not checked yet!</span>")
+            index = main_window.cfg.settings['wizard_from_question_index_to_toc'][main_window.cfg.settings['wizard_question_index']]        
+            main_window.wizard_toc_model.item(index[0]).child(index[1]).setForeground(QColor(0,0,0))
+
 def check_data_from_path(main_window):
-    print("Check data from path")
+    """
+    Check available model compatible with BiaPy from external sources such as BioImage Model Zoo (BMZ)
+    and Torchvision.
     
+    Parameters
+    ----------
+    main_window : QMainWindow
+        Main window of the application.
+    """
+    main_window.yes_no_exec("This process may take a while as all images will be checked one by one. Are you sure you want to proceed?")
+    if main_window.yes_no.answer:
+
+        def set_folder_checked(constraints, key):
+            print(f"Data {key} checked!")
+            main_window.cfg.settings["data_constraints"] = constraints
+            main_window.cfg.settings["wizard_answers"][f"CHECKED {key}"] = 1
+            set_text(main_window.ui.wizard_data_checked_label, "<span style='color:#04aa6d'>Data checked!</span>")
+        
+        print("Checking data from path")
+        main_window.thread_spin = QThread()
+        main_window.worker_spin = check_data_from_path_engine(main_window)
+        main_window.worker_spin.moveToThread(main_window.thread_spin)
+        main_window.thread_spin.started.connect(main_window.worker_spin.run)
+    
+        # Set up signals
+        main_window.worker_spin.state_signal.connect(main_window.loading_phase)
+        main_window.worker_spin.update_var_signal.connect(main_window.update_variable_in_GUI)
+        main_window.worker_spin.error_signal.connect(main_window.dialog_exec)
+        main_window.worker_spin.add_model_card_signal.connect(main_window.add_model_card)
+        main_window.worker_spin.report_path_check_result.connect(set_folder_checked)
+        main_window.worker_spin.finished_signal.connect(main_window.thread_spin.quit)
+        main_window.worker_spin.finished_signal.connect(main_window.worker_spin.deleteLater)
+        main_window.thread_spin.finished.connect(main_window.thread_spin.deleteLater)
+
+        # Start thread 
+        main_window.thread_spin.start()       
+        
+class check_data_from_path_engine(QObject):
+    # Signal to indicate the state of the process 
+    state_signal = QtCore.Signal(int)
+
+    # Signal to update variables in GUI
+    update_var_signal = QtCore.Signal(str,str)
+
+    # Signal to indicate the main thread that there was an error
+    error_signal = QtCore.Signal(str, str)
+
+    # Signal to send a message to the user about the result of model checking
+    add_model_card_signal = QtCore.Signal(int, dict)
+
+    # Signal to send a message to the user about the result of model checking
+    report_path_check_result = QtCore.Signal(dict, str)
+
+    # Signal to indicate the main thread that the worker has finished 
+    finished_signal = QtCore.Signal()
+
+    def __init__(self, main_window):
+        """
+        Class to check available model compatible with BiaPy from external sources such as BioImage Model Zoo (BMZ)
+        and Torchvision.
+
+        Parameters 
+        ----------
+        main_window : QMainWindow
+            Main window of the application. 
+        """
+        super(check_data_from_path_engine, self).__init__()
+        self.main_window =  main_window
+
+    def run(self):
+        """
+        Checks possible model available in BioImage Model Zoo and Torchivision for the workflow specified by Wizards form. 
+        
+        Parameters
+        ----------
+        main_window : QMainWindow
+            Main window of the application.
+        """
+        try:
+            self.state_signal.emit(0)
+
+            self.main_window.cfg.settings["wizard_question_answered_index"]
+            self.main_window.cfg.settings['wizard_question_index']
+            folder = self.main_window.cfg.settings["wizard_question_answered_index"][self.main_window.cfg.settings['wizard_question_index']]
+            if self.main_window.cfg.settings["wizard_answers"]["PROBLEM.TYPE"] == -1:
+                self.error_signal.emit(f"You need to answer 'Workflow' question before checking the data.", "inform_user")
+            elif self.main_window.cfg.settings["wizard_answers"]["PROBLEM.NDIM"] == -1:
+                self.error_signal.emit("You need to answer 'Dimensions' question before checking the data.", "inform_user")
+            else:
+                workflow = self.main_window.cfg.settings["wizard_answers"]["PROBLEM.TYPE"]
+                ndim = self.main_window.cfg.settings["wizard_answers"]["PROBLEM.NDIM"]
+                key = next(iter(self.main_window.cfg.settings["wizard_variable_to_map"]["Q"+str(self.main_window.cfg.settings['wizard_question_index']+1)]))
+                if workflow == "SEMANTIC_SEG":
+                    error, error_message, constraints = check_images(
+                        folder, is_mask=("GT_PATH" in key), semantic_mask=("GT_PATH" in key), 
+                        is_3d=(ndim=="3D"))
+                elif workflow == "INSTANCE_SEG": 
+                    error, error_message, constraints = check_images(folder, is_mask=("GT_PATH" in key), 
+                        is_3d=(ndim=="3D"))
+                elif workflow == "DETECTION":
+                    if "GT_PATH" not in key: 
+                        error, error_message, constraints = check_images(folder, is_3d=(ndim=="3D"))
+                    else:
+                        # TODO check_csv_files
+                        error, error_message, constraints = check_csv_files(folder, is_3d=(ndim=="3D")) 
+                elif workflow == "CLASSIFICATION": 
+                    # TODO check_classification_images
+                    error, error_message, constraints = check_classification_images(folder, is_3d=(ndim=="3D"))
+                elif workflow in ["DENOISING", "SUPER_RESOLUTION", "SELF_SUPERVISED", "IMAGE_TO_IMAGE"]:   
+                    error, error_message, constraints = check_images(folder, is_3d=(ndim=="3D"))
+
+                if error:
+                    self.error_signal.emit(f"Following error found when checking the folder: \n{error_message}", "error")
+                else:
+                    self.report_path_check_result.emit(constraints, key)
+        except Exception as exc:
+            self.main_window.logger.warning(exc)
+            self.error_signal.emit(f"Following error found when checking available models: \n{exc}", "unexpected_error")
+            self.state_signal.emit(1)
+            self.finished_signal.emit()        
+        
+        self.state_signal.emit(1)
+        self.finished_signal.emit()
+
 def mark_syntax_error(main_window, gui_widget_name, validator_type=["empty"]):
     """ 
     Functionality for the advanced option button (Down/UP arrows in GUI). 
@@ -267,17 +401,18 @@ def eval_wizard_answer(main_window):
                 key = next(iter(main_window.cfg.settings["wizard_variable_to_map"]["Q"+str(main_window.cfg.settings['wizard_question_index']+1)]))
                 main_window.cfg.settings["wizard_answers"][key] = te
                 main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] = te    
-                mark_as_answered = True
                 set_text(main_window.ui.wizard_path_input, te)
 
-        if mark_as_answered:        
+                # Check if the data was checked 
+                if main_window.cfg.settings["wizard_answers"][f"CHECKED {key}"] == -1:
+                    mark_as_answered = False
+                else:
+                    mark_as_answered = True
+
+        if mark_as_answered:    
             # Mark section as answered in TOC
             index = main_window.cfg.settings['wizard_from_question_index_to_toc'][main_window.cfg.settings['wizard_question_index']]        
             main_window.wizard_toc_model.item(index[0]).child(index[1]).setForeground(QColor(64,144,253))
-
-            # If all child questions are answered mark the header as answered too
-            if not any([True for i in main_window.cfg.settings['wizard_from_toc_to_question_index'][index[0]] if main_window.cfg.settings["wizard_question_answered_index"][i] == -1]):
-                main_window.wizard_toc_model.item(index[0]).setForeground(QBrush(QColor(64,144,253)))
 
         # Check the questions that need to hide/appear
         for question in main_window.cfg.settings["wizard_question_condition"]:
@@ -313,28 +448,14 @@ def eval_wizard_answer(main_window):
                 question_number = int(question.replace("Q",""))-1
                 if make_visible:
                     if not main_window.cfg.settings["wizard_question_visible"][question_number]:
-                        print(f"{question} Showing up ...")     
                         main_window.cfg.settings['wizard_question_visible'][question_number] = True
                         index_in_toc = main_window.cfg.settings['wizard_from_question_index_to_toc'][question_number]
                         main_window.ui.wizard_treeView.setRowHidden(index_in_toc[1], main_window.wizard_toc_model.index(index_in_toc[0],0), False)
-                    else: 
-                        print(f"{question} Already visible")
-                    
                 else:
                     if main_window.cfg.settings["wizard_question_visible"][question_number]:
-                        print(f"{question} Hiding ...")
                         main_window.cfg.settings['wizard_question_visible'][question_number] = False
                         index_in_toc = main_window.cfg.settings['wizard_from_question_index_to_toc'][question_number]
                         main_window.ui.wizard_treeView.setRowHidden(index_in_toc[1], main_window.wizard_toc_model.index(index_in_toc[0],0), True)
-                    else:
-                        print(f"{question} Already hidden")
-
-        # Check if the headers need to be hiden or not
-        # for i in range(len(main_window.cfg.settings['wizard_from_toc_to_question_index'])):
-        #     start = main_window.cfg.settings['wizard_from_toc_to_question_index'][i][0]
-        #     end = main_window.cfg.settings['wizard_from_toc_to_question_index'][i][-1]
-        #     visible = True if any(main_window.cfg.settings['wizard_question_visible'][start:end]) else False
-        #     main_window.ui.wizard_treeView.setRowHidden(i, main_window.wizard_toc_model.invisibleRootItem().index() , not visible)
 
 
 def change_wizard_page(main_window, val, based_on_toc=False, added_val=0):
@@ -433,8 +554,15 @@ def change_wizard_page(main_window, val, based_on_toc=False, added_val=0):
             # Remember the answer if the question was previously answered
             if main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] != -1:
                 set_text(main_window.ui.wizard_path_input, main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']])
+                key = next(iter(main_window.cfg.settings["wizard_variable_to_map"]["Q"+str(main_window.cfg.settings['wizard_question_index']+1)]))
+                if main_window.cfg.settings["wizard_answers"][f"CHECKED {key}"] == -1:
+                    set_text(main_window.ui.wizard_data_checked_label, "<span style='color:#ff3300'><span style='font-size:16pt;'>&larr;</span> Data not checked yet!</span>")
+                else:
+                    set_text(main_window.ui.wizard_data_checked_label, "<span style='color:#04aa6d'>Data checked!</span>")
             else:
                 set_text(main_window.ui.wizard_path_input, "")
+                set_text(main_window.ui.wizard_data_checked_label, "<span style='color:#ff3300'><span style='font-size:16pt;'>&larr;</span> Data not checked yet!</span>")
+
         elif main_window.cfg.settings['wizard_possible_answers'][main_window.cfg.settings['wizard_question_index']][0] in ["MODEL_BIAPY", "MODEL_OTHERS"]:
             main_window.ui.wizard_path_input_frame.setVisible(False)
             main_window.ui.wizard_question_answer_frame.setVisible(False)
@@ -508,7 +636,6 @@ def clear_answers(main_window):
             main_window.wizard_toc_model.item(i).setForeground(QColor(0,0,0))
             for j in range(main_window.wizard_toc_model.item(i).rowCount()):
                 main_window.wizard_toc_model.item(i).child(j).setForeground(QColor(0,0,0))
-
 
 def check_models_from_other_sources(main_window):
     """
@@ -646,7 +773,7 @@ class check_models_from_other_sources_engine(QObject):
 
         except Exception as exc:
             self.main_window.logger.warning(exc)
-            self.error_signal.emit(f"Following error found when checking available models: \n{exc}", "error")
+            self.error_signal.emit(f"Following error found when checking available models: \n{exc}", "unexpected_error")
             self.state_signal.emit(1)
             self.finished_signal.emit()
             return     
@@ -660,28 +787,40 @@ def export_wizard_summary(main_window):
 
     # Check if there are not answered questions
     finished = True
+    finished_data_checks = True
     for i in range(len(main_window.cfg.settings['wizard_question_visible'])):
         if main_window.cfg.settings['wizard_question_visible'][i] and \
             main_window.cfg.settings["wizard_question_answered_index"][i] == -1:
             finished = False
             break
-    
+            
+        if main_window.cfg.settings['wizard_possible_answers'][i][0] == "PATH":
+            key = next(iter(main_window.cfg.settings["wizard_variable_to_map"][f"Q{(i+1)}"].keys()))
+            if f"CHECKED {key}" in main_window.cfg.settings["wizard_answers"]:
+                if main_window.cfg.settings["wizard_answers"][f"CHECKED {key}"] == -1:
+                    finished_data_checks = False
+
+    # Check if the data folder was checked 
     if not finished:
         main_window.dialog_exec("There are still some questions not answered. Please go back and do "
             "it before continue.", "inform_user")
-    else:
+    elif not finished_data_checks:
+        main_window.dialog_exec("Please check the data in training/test paths selected in order to prevent future errors.", "inform_user")
+    else:  
         print("blablabla")    
-        
+
         # # Fix by model restriction
         # self.cfg.settings["wizard_answers"]["model_restrictions"]
         # del self.cfg.settings["wizard_answers"]["model_restrictions"]
         
         # # Merge into one
-        # self.settings["wizard_answers"]["PATCH_SIZE_XY"]
-        # self.settings["wizard_answers"]["PATCH_SIZE_Z"]
-        # del self.settings["wizard_answers"]["PATCH_SIZE_XY"]
-        # del self.settings["wizard_answers"]["PATCH_SIZE_Z"]
+        # self.settings["wizard_answers"]["DATA.PATCH_SIZE_XY"]
+        # self.settings["wizard_answers"]["DATA.PATCH_SIZE_Z"]
+        # del self.settings["wizard_answers"]["DATA.PATCH_SIZE_XY"]
+        # del self.settings["wizard_answers"]["DATA.PATCH_SIZE_Z"]
 
+        # main_window.cfg.settings["data_constraints"]
+        # del main_window.cfg.settings["data_constraints"]
 
 def adjust_window_progress(main_window):
     """

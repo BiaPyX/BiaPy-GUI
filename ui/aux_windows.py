@@ -231,7 +231,13 @@ class dialog_Ui(QDialog):
                 self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("OK", u"OK", None))
                 self.dialog_window.error_message_label.setText(message)
                 self.dialog_window.go_to_correct_bn.clicked.connect(lambda: self.redirect_and_close(reason))
+            elif reason == "unexpected_error":
+                self.dialog_window.window_des_label.setText("Error")
+                self.dialog_window.error_message_label.setText("{}".format(message))
+                self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"OK", None))
+                self.dialog_window.go_to_correct_bn.clicked.connect(self.close)
             elif reason == "error":
+                self.dialog_window.error_message_label.setWordWrap(True)
                 self.dialog_window.window_des_label.setText("Error")
                 self.dialog_window.error_message_label.setText("{}".format(message))
                 self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", u"OK", None))

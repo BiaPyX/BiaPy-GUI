@@ -3139,9 +3139,9 @@ border-radius: 35px;
                                <property name="geometry">
                                 <rect>
                                  <x>0</x>
-                                 <y>-141</y>
+                                 <y>-32</y>
                                  <width>642</width>
-                                 <height>280</height>
+                                 <height>298</height>
                                 </rect>
                                </property>
                                <layout class="QVBoxLayout" name="verticalLayout_59">
@@ -3344,7 +3344,7 @@ border-radius: 35px;
                                      </layout>
                                     </widget>
                                    </item>
-                                   <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+                                   <item alignment="Qt::AlignHCenter">
                                     <widget class="QFrame" name="frame_76">
                                      <property name="frameShape">
                                       <enum>QFrame::NoFrame</enum>
@@ -3352,12 +3352,15 @@ border-radius: 35px;
                                      <property name="frameShadow">
                                       <enum>QFrame::Raised</enum>
                                      </property>
-                                     <layout class="QVBoxLayout" name="verticalLayout_58">
-                                      <item>
+                                     <layout class="QHBoxLayout" name="horizontalLayout_45">
+                                      <property name="spacing">
+                                       <number>30</number>
+                                      </property>
+                                      <item alignment="Qt::AlignHCenter">
                                        <widget class="QPushButton" name="wizard_path_check">
                                         <property name="minimumSize">
                                          <size>
-                                          <width>100</width>
+                                          <width>170</width>
                                           <height>35</height>
                                          </size>
                                         </property>
@@ -3380,6 +3383,19 @@ QPushButton:hover {
                                         </property>
                                         <property name="text">
                                          <string>Check data</string>
+                                        </property>
+                                       </widget>
+                                      </item>
+                                      <item alignment="Qt::AlignHCenter">
+                                       <widget class="QLabel" name="wizard_data_checked_label">
+                                        <property name="font">
+                                         <font>
+                                          <family>DejaVu Math TeX Gyre</family>
+                                          <pointsize>12</pointsize>
+                                         </font>
+                                        </property>
+                                        <property name="text">
+                                         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;←&lt;/span&gt; Data not checked yet&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                         </property>
                                        </widget>
                                       </item>
@@ -3417,6 +3433,18 @@ QPushButton:hover {
                                    <enum>QFrame::Raised</enum>
                                   </property>
                                   <layout class="QVBoxLayout" name="verticalLayout_60">
+                                   <property name="leftMargin">
+                                    <number>0</number>
+                                   </property>
+                                   <property name="topMargin">
+                                    <number>0</number>
+                                   </property>
+                                   <property name="rightMargin">
+                                    <number>0</number>
+                                   </property>
+                                   <property name="bottomMargin">
+                                    <number>0</number>
+                                   </property>
                                    <item>
                                     <widget class="QLabel" name="label_116">
                                      <property name="font">
@@ -3455,7 +3483,7 @@ QPushButton:hover {
                                        <widget class="QLineEdit" name="wizard_model_input">
                                         <property name="minimumSize">
                                          <size>
-                                          <width>350</width>
+                                          <width>500</width>
                                           <height>30</height>
                                          </size>
                                         </property>
@@ -3490,36 +3518,6 @@ QPushButton:hover {
                                        </widget>
                                       </item>
                                       <item>
-                                       <widget class="QPushButton" name="wizard_model_check_bn">
-                                        <property name="minimumSize">
-                                         <size>
-                                          <width>170</width>
-                                          <height>35</height>
-                                         </size>
-                                        </property>
-                                        <property name="font">
-                                         <font>
-                                          <family>DejaVu Math TeX Gyre</family>
-                                          <pointsize>12</pointsize>
-                                         </font>
-                                        </property>
-                                        <property name="styleSheet">
-                                         <string notr="true">QPushButton {
-	border: none;
-	background-color: rgb(64,144,253);
-	border-radius: 15px;
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}</string>
-                                        </property>
-                                        <property name="text">
-                                         <string>Check models</string>
-                                        </property>
-                                       </widget>
-                                      </item>
-                                      <item>
                                        <spacer name="horizontalSpacer_85">
                                         <property name="orientation">
                                          <enum>Qt::Horizontal</enum>
@@ -3533,6 +3531,36 @@ QPushButton:hover {
                                        </spacer>
                                       </item>
                                      </layout>
+                                    </widget>
+                                   </item>
+                                   <item alignment="Qt::AlignHCenter">
+                                    <widget class="QPushButton" name="wizard_model_check_bn">
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>170</width>
+                                       <height>35</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>DejaVu Math TeX Gyre</family>
+                                       <pointsize>12</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="styleSheet">
+                                      <string notr="true">QPushButton {
+	border: none;
+	background-color: rgb(64,144,253);
+	border-radius: 15px;
+}
+QPushButton:hover {
+	background-color: rgb(255,255,255);
+	border: 2px solid rgb(0, 0, 0);
+}</string>
+                                     </property>
+                                     <property name="text">
+                                      <string>Check models</string>
+                                     </property>
                                     </widget>
                                    </item>
                                    <item>

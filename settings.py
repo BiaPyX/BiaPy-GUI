@@ -521,7 +521,7 @@ class Settings:
             ]
         ]
         self.settings["wizard_variable_to_map"]["Q6"] = {}
-        self.settings["wizard_variable_to_map"]["Q6"]["PATCH_SIZE_XY"] = [
+        self.settings["wizard_variable_to_map"]["Q6"]["DATA.PATCH_SIZE_XY"] = [
             (256, 256),
             (256, 256),
             (512, 512),
@@ -529,7 +529,7 @@ class Settings:
             (1024, 1024),
             (1024, 1024),
         ]
-        self.settings["wizard_answers"]["PATCH_SIZE_XY"] = -1
+        self.settings["wizard_answers"]["DATA.PATCH_SIZE_XY"] = -1
         self.settings["wizard_sections"] += [["Data", []]]
         self.settings["wizard_from_toc_to_question_index"].append([])
         self.settings["wizard_sections"][-1][1] += ["Object size (xy)"]
@@ -580,8 +580,8 @@ class Settings:
             ]
         ]
         self.settings["wizard_variable_to_map"]["Q7"] = {}
-        self.settings["wizard_variable_to_map"]["Q7"]["PATCH_SIZE_Z"] = [5, 10, 20, 40, 80]
-        self.settings["wizard_answers"]["PATCH_SIZE_Z"] = -1
+        self.settings["wizard_variable_to_map"]["Q7"]["DATA.PATCH_SIZE_Z"] = [5, 10, 20, 40, 80]
+        self.settings["wizard_answers"]["DATA.PATCH_SIZE_Z"] = -1
         self.settings["wizard_sections"][-1][1] += ["Object size (z)"]
         self.settings["wizard_from_question_index_to_toc"].append(
             [1, len(self.settings["wizard_from_toc_to_question_index"][-1])]
@@ -635,6 +635,7 @@ class Settings:
         self.settings["wizard_variable_to_map"]["Q9"] = {}
         self.settings["wizard_variable_to_map"]["Q9"]["DATA.TRAIN.PATH"] = ""
         self.settings["wizard_answers"]["DATA.TRAIN.PATH"] = -1
+        self.settings["wizard_answers"]["CHECKED DATA.TRAIN.PATH"] = -1
         self.settings["wizard_sections"][-1][1] += ["Train data (raw)"]
         self.settings["wizard_from_question_index_to_toc"].append(
             [1, len(self.settings["wizard_from_toc_to_question_index"][-1])]
@@ -643,9 +644,9 @@ class Settings:
         self.settings["wizard_question_visible"].append(False)
         q_count += 1
 
-        ######
+        #######
         # Q10 #
-        ######
+        #######
         self.settings["wizard_question_condition"]["Q10"] = {
             "and_cond": [
                 [
@@ -673,6 +674,7 @@ class Settings:
         self.settings["wizard_variable_to_map"]["Q10"] = {}
         self.settings["wizard_variable_to_map"]["Q10"]["DATA.TRAIN.GT_PATH"] = ""
         self.settings["wizard_answers"]["DATA.TRAIN.GT_PATH"] = -1
+        self.settings["wizard_answers"]["CHECKED DATA.TRAIN.GT_PATH"] = -1
         self.settings["wizard_sections"][-1][1] += ["Train data (ground truth)"]
         self.settings["wizard_from_question_index_to_toc"].append(
             [1, len(self.settings["wizard_from_toc_to_question_index"][-1])]

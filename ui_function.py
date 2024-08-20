@@ -13,7 +13,7 @@ from PySide2.QtWidgets import QLabel, QFrame, QVBoxLayout, QHBoxLayout, QSpacerI
 from main import MainWindow
 from run_functions import run_worker
 from build_functions import build_worker
-from ui_utils import get_text, resource_path, oninit_checks, load_yaml_config, change_wizard_page
+from ui_utils import get_text, resource_path, oninit_checks, load_yaml_config, change_wizard_page, set_text
 from aux_classes.checkableComboBox import CheckableComboBox
 
 class UIFunction(MainWindow):
@@ -198,6 +198,8 @@ class UIFunction(MainWindow):
         main_window.ui.wizard_question_answer.setVisible(True)
         main_window.ui.wizard_model_input_frame.setVisible(False)
 
+        set_text(main_window.ui.wizard_data_checked_label, "<span style='color:#ff3300'><span style='font-size:16pt;'>&larr;</span> Data not checked yet!</span>")
+        
         # Create summary page 
         main_window.question_cards = []
         font7 = QFont()

@@ -17,3 +17,4 @@ websocket-client==1.5.1
 yacs==0.1.8
 GPUtil==1.4.0
 bioimageio.core==0.6.7
+scikit-image==0.24.0

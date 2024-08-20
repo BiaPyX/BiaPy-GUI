@@ -1,3 +1,7 @@
+import os
+import numpy as np
+from skimage.io import imread
+
 from typing import Optional, Dict, Tuple, List
 from packaging.version import Version
 
@@ -170,3 +174,139 @@ def check_bmz_model_compatibility(
         reason_message += f"[{specific_workflow}] pytorch_state_dict not found in model RDF\n"
 
     return preproc_info, error, reason_message
+
+
+def check_images(data_dir, is_mask=False, semantic_mask=False, is_3d=False):
+    print(f"Checking images from {data_dir}")
+    
+    nclasses = 0
+    channel_expected = -1
+    data_range_expected = -1
+    error = False
+    error_message = ""
+
+    try:
+        ids = sorted(next(os.walk(data_dir))[2])
+    except Exception as exc:
+        error = True
+        error_message = f"Something strange happens when listing files in {data_dir}. Error:\n{exc}"
+
+    if len(ids) == 0:
+        error = True
+        error_message = f"No images found in dir {data_dir}"
+ 
+    for id_ in ids:
+        img_path = os.path.join(data_dir, id_)
+        if id_.endswith(".npy"):
+            img = np.load(img_path)
+        else:
+            try:
+                img = imread(img_path)
+            except Exception:
+                error = True
+                error_message = f"Couldn't load image: {img_path}"
+                break 
+
+        img = np.squeeze(img)
+
+        # Shape adjust
+        if not is_3d:
+            if img.ndim > 3:
+                error = True
+                error_message = f"The following image appears to be 2D, but you selected a 2D problem under the 'Dimension' question: {img_path}"
+
+            if img.ndim == 2:
+                img = np.expand_dims(img, -1)
+            else:
+                if img.shape[0] <= 3:
+                    img = img.transpose((1, 2, 0))
+        else:
+            if img.ndim < 3:
+                error = True
+                error_message = f"The following image appears to be 2D, but you selected a 3D problem under the 'Dimension' question: {img_path}"
+
+            if img.ndim == 3:
+                img = np.expand_dims(img, -1)
+            else:
+                min_val = min(img.shape)
+                channel_pos = img.shape.index(min_val)
+                if channel_pos != 3 and img.shape[channel_pos] <= 4:
+                    new_pos = [x for x in range(4) if x != channel_pos] + [
+                        channel_pos,
+                    ]
+                    img = img.transpose(new_pos)
+
+        # Channel check
+        if channel_expected == -1:
+            channel_expected = img.shape[-1]
+        if img.shape[-1] != channel_expected:
+            error = True
+            error_message = "All images need to have the same number of channels and represent same information to "\
+                "ensure the deep learning model can be trained correctly. However, the following image (with "\
+                f"{channel_expected} channels) appears to have a different number of channels than the first image "\
+                f"(with {img.shape[-1]} channels) in the folder: {img_path}"
+
+        # Data range check
+        if not is_mask:
+            if data_range_expected == -1:
+                data_range_expected = data_range(img)
+            drange = data_range(img)
+            if data_range_expected != drange:
+                error = True
+                error_message = "All images must be within the same data range. However, the following image (with a "\
+                    f"range of {drange}) appears to be in a different data range than the first image (with a range "\
+                    f"of {data_range_expected}) in the folder: {img_path}"
+
+        if error:
+            break 
+
+        if semantic_mask:
+            nclasses = max(nclasses, len(np.unique(img)))
+        
+    constraints = [
+        ["DATA.PATCH_SIZE_C", channel_expected],
+        ["MODEL.N_CLASSES", nclasses],
+    ]
+    return error, error_message, constraints
+
+def check_csv_files(folder):
+    print("Checking CSV files . . .")
+    import pdb; pdb.set_trace()
+
+def check_classification_images(folder):
+    print("Checking classification images . . .")
+    import pdb; pdb.set_trace()
+
+def data_range(x):
+    if not isinstance(x, np.ndarray):
+        raise ValueError("Input array of type {} and not numpy array".format(type(x)))
+    if check_value(x, (0, 1)):
+        return "01 range"
+    elif check_value(x, (0, 255)):
+        return "uint8 range"
+    elif check_value(x, (0, 65535)):
+        return "uint16 range"
+    else:
+        return "none_range"
+    
+def check_value(value, value_range=(0, 1)):
+    """
+    Checks if a value is within a range
+    """
+    if isinstance(value, list) or isinstance(value, tuple):
+        for i in range(len(value)):
+            if isinstance(value[i], np.ndarray):
+                if value_range[0] <= np.min(value[i]) or np.max(value[i]) <= value_range[1]:
+                    return False
+            else:
+                if not (value_range[0] <= value[i] <= value_range[1]):
+                    return False
+        return True
+    else:
+        if isinstance(value, np.ndarray):
+            if value_range[0] <= np.min(value) and np.max(value) <= value_range[1]:
+                return True
+        else:
+            if value_range[0] <= value <= value_range[1]:
+                return True
+        return False

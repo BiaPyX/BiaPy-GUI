@@ -12,7 +12,7 @@ from PySide2.QtGui import *
 from ui_function import * 
 from ui_utils import (examine, mark_syntax_error, expand_hide_advanced_options, change_page, get_git_revision_short_hash,
     load_yaml_config, resource_path, load_yaml_to_GUI, set_text, start_questionary, change_wizard_page, eval_wizard_answer, 
-    clear_answers, check_models_from_other_sources, check_data_from_path, export_wizard_summary)
+    clear_answers, check_models_from_other_sources, check_data_from_path, export_wizard_summary, wizard_path_changed)
 from settings import Settings
 from widget_conditions import Widget_conditions
 from ui.ui_main import Ui_MainWindow 
@@ -125,7 +125,7 @@ class MainWindow(QMainWindow):
         self.ui.wizard_summary_back_bn.clicked.connect(lambda: change_wizard_page(self, self.cfg.settings['wizard_question_index'], False, added_val=0))
         self.ui.wizard_summary_back_bn.setIcon(QIcon(resource_path(os.path.join("images","bn_images", "back.png"))))
         self.ui.wizard_clear_answers_bn.clicked.connect(lambda: clear_answers(self))
-        self.ui.wizard_path_input_bn.clicked.connect(lambda: examine(self, "wizard_path_input", False))
+        self.ui.wizard_path_input_bn.clicked.connect(lambda: wizard_path_changed(self, "wizard_path_input", False))
         self.allow_change_wizard_question_answer = False 
         self.not_allow_change_question = False
         self.ui.wizard_question_wizard_icon.clicked.connect(lambda: UIFunction.display_wizard_help_window(self, 1))
@@ -1011,7 +1011,7 @@ if __name__ == "__main__":
         # Log the error in stderr
         logger.error(" Main window error:\n"+"".join(traceback.format_exception(exc_type, exc_value, exc_tb)))
 
-        window.dialog_exec(f"Unexpected error. Please contact BiaPy developers with the following error: \n{tb}", "error")
+        window.dialog_exec(f"Unexpected error. Please contact BiaPy developers with the following error: \n{tb}", "unexpected_error")
         QtWidgets.QApplication.quit()
     sys.excepthook = excepthook
 
