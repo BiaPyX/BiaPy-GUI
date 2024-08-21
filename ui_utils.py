@@ -175,7 +175,6 @@ class check_data_from_path_engine(QObject):
                     if "GT_PATH" not in key: 
                         error, error_message, constraints = check_images(folder, is_3d=(ndim=="3D"))
                     else:
-                        # TODO check_csv_files
                         error, error_message, constraints = check_csv_files(folder, is_3d=(ndim=="3D")) 
                 elif workflow == "CLASSIFICATION": 
                     # TODO check_classification_images

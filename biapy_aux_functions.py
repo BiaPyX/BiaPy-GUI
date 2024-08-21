@@ -1,5 +1,6 @@
 import os
 import numpy as np
+import pandas as pd
 from skimage.io import imread
 
 from typing import Optional, Dict, Tuple, List
@@ -27,10 +28,10 @@ def check_bmz_model_compatibility(
         Preprocessing names that the model is using.
 
     error : bool
-        Whether it there is a problem to consume the model in BiaPy or not.
+        Whether if there is a problem to consume the model in BiaPy or not.
 
     reason_message: str
-        Reason why the model can not be consumed if there is any.
+        Reason why the model can not be consumed (if any).
     """
     specific_workflow = "all" if workflow_specs is None else workflow_specs["workflow_type"]
     specific_dims = "all" if workflow_specs is None else workflow_specs["ndim"]
@@ -177,9 +178,37 @@ def check_bmz_model_compatibility(
 
 
 def check_images(data_dir, is_mask=False, semantic_mask=False, is_3d=False):
+    """
+    Check images in folder.
+
+    Parameters
+    ----------
+    data_dir : str
+        Directory to check images from. 
+    
+    is_mask : bool, optional
+        Whether the images to check are masks and not raw images. It disables data range checking. 
+
+    semantic_mask : bool, optional
+        Whether the images to check are semantic masks. It checks the number of classes within masks. 
+
+    is_3d: bool, optional
+        Whether to expect to read 3D images or 2D. 
+
+    Returns
+    -------
+    error : bool
+        ``True`` if something went wrong during folder check. 
+
+    error_message: str
+        Reason of the error (if any). 
+    
+    constraints: list of list of two str
+        BiaPy variables to set. This info is extracted from the images read. E.g. ``[["DATA.PATCH_SIZE", 1]]``
+    """
     print(f"Checking images from {data_dir}")
     
-    nclasses = 0
+    nclasses = 2
     channel_expected = -1
     data_range_expected = -1
     error = False
@@ -263,15 +292,97 @@ def check_images(data_dir, is_mask=False, semantic_mask=False, is_3d=False):
         if semantic_mask:
             nclasses = max(nclasses, len(np.unique(img)))
         
-    constraints = [
-        ["DATA.PATCH_SIZE_C", channel_expected],
-        ["MODEL.N_CLASSES", nclasses],
-    ]
+    constraints = [["DATA.PATCH_SIZE_C", channel_expected]]
+    if nclasses > 2:
+        constraints += [["MODEL.N_CLASSES", nclasses]]
+        
     return error, error_message, constraints
 
-def check_csv_files(folder):
+def check_csv_files(data_dir, is_3d=False):
+    """
+    Check CSV files in folder.
+
+    Parameters
+    ----------
+    data_dir : str
+        Directory to check images from. 
+    
+    is_3d: bool, optional
+        Whether to expect to read 3D images or 2D. 
+
+    Returns
+    -------
+    error : bool
+        ``True`` if something went wrong during folder check. 
+
+    error_message: str
+        Reason of the error (if any). 
+    
+    constraints: list of list of two str
+        BiaPy variables to set. This info is extracted from the images read. E.g. ``[["DATA.PATCH_SIZE", 1]]``
+    """
     print("Checking CSV files . . .")
-    import pdb; pdb.set_trace()
+    nclasses = 0
+    error = False
+    error_message = ""
+    try:
+        ids = sorted(next(os.walk(data_dir))[2])
+    except Exception as exc:
+        error = True
+        error_message = f"Something strange happens when listing files in {data_dir}. Error:\n{exc}"
+
+    if len(ids) == 0:
+        error = True
+        error_message = f"No images found in dir {data_dir}"
+ 
+    req_columns = ["axis-0", "axis-1"] if not is_3d else ["axis-0", "axis-1", "axis-2"] 
+
+    for id_ in ids:
+        csv_path = os.path.join(data_dir, id_)
+        try:
+            df = pd.read_csv(csv_path)
+        except Exception:
+            error = True
+            error_message = f"Couldn't load CSV file: {csv_path}"
+            break 
+        df = df.dropna()
+      
+        # Check columns in csv
+        # Discard first index column to not have error if it is not sorted
+        p_number = df.iloc[:, 0].to_list()
+        df = df.rename(columns=lambda x: x.strip())  # trim spaces in column names
+        cols_not_in_file = [x for x in req_columns if x not in df.columns]
+        if len(cols_not_in_file) > 0:
+            error = True
+            if len(cols_not_in_file) == 1:
+                error_message = f"'{cols_not_in_file[0]}' column is not present in CSV file: {csv_path}"
+            else:
+                error_message = f"{cols_not_in_file} columns are not present in CSV file: {csv_path}"
+
+        # Check class in columns
+        if 'class' in df.columns:
+            df["class"] = df["class"].astype("int")
+            class_point = np.array(df["class"])
+
+            uniq = np.sort(np.unique(class_point))
+            if uniq[0] != 1:
+                error_message = f"Class number must start with 1 in CSV file: {csv_path}"
+                error = True
+            if not all(uniq == np.array(range(1, uniq.max()+ 1))):
+                error = True
+                error_message = f"Classes must be consecutive, e.g [1,2,3,4,...]. Given {uniq} in CSV file: {csv_path}"
+            
+            nclasses = uniq.max()
+
+        if error:
+            break 
+
+    constraints = []
+    if 'class' in df.columns:
+        constraints += [["MODEL.N_CLASSES", nclasses]]
+
+    return error, error_message, constraints
+
 
 def check_classification_images(folder):
     print("Checking classification images . . .")
