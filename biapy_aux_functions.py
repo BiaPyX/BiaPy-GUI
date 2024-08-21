@@ -384,9 +384,126 @@ def check_csv_files(data_dir, is_3d=False):
     return error, error_message, constraints
 
 
-def check_classification_images(folder):
+def check_classification_images(data_dir, is_3d=False):
+    """
+    Check classification images in folder.
+
+    Parameters
+    ----------
+    data_dir : str
+        Directory to check images from. 
+    
+    is_3d: bool, optional
+        Whether to expect to read 3D images or 2D. 
+
+    Returns
+    -------
+    error : bool
+        ``True`` if something went wrong during folder check. 
+
+    error_message: str
+        Reason of the error (if any). 
+    
+    constraints: list of list of two str
+        BiaPy variables to set. This info is extracted from the images read. E.g. ``[["DATA.PATCH_SIZE", 1]]``
+    """
     print("Checking classification images . . .")
-    import pdb; pdb.set_trace()
+
+    error_message = ""
+    error = False 
+    channel_expected = -1 
+    data_range_expected = -1
+    class_names = sorted(next(os.walk(data_dir))[1])
+    if len(class_names) < 1:
+        error_message = "There is no folder/class in {}".format(data_dir)
+        error = True 
+
+    # Loop over each class/folder
+    for folder in class_names:
+        class_folder = os.path.join(data_dir, folder)
+        print(f"Analizing folder {class_folder}")
+        
+        ids = sorted(next(os.walk(class_folder))[2])
+        if len(ids) == 0:
+            error_message = "There are no images in class {}".format(class_folder)
+            error = True
+        else:
+            print("Found {} samples".format(len(ids)))
+
+        # Check images of each class/folder
+        for id_ in ids:
+            img_path = os.path.join(class_folder, id_)
+            if id_.endswith(".npy"):
+                img = np.load(img_path)
+            else:
+                try:
+                    img = imread(img_path)
+                except Exception:
+                    error = True
+                    error_message = f"Couldn't load image: {img_path}"
+                    break 
+
+            img = np.squeeze(img)
+
+            # Shape adjust
+            if not is_3d:
+                if img.ndim > 3:
+                    error = True
+                    error_message = f"The following image appears to be 2D, but you selected a 2D problem under the 'Dimension' question: {img_path}"
+
+                if img.ndim == 2:
+                    img = np.expand_dims(img, -1)
+                else:
+                    if img.shape[0] <= 3:
+                        img = img.transpose((1, 2, 0))
+            else:
+                if img.ndim < 3:
+                    error = True
+                    error_message = f"The following image appears to be 2D, but you selected a 3D problem under the 'Dimension' question: {img_path}"
+
+                if img.ndim == 3:
+                    img = np.expand_dims(img, -1)
+                else:
+                    min_val = min(img.shape)
+                    channel_pos = img.shape.index(min_val)
+                    if channel_pos != 3 and img.shape[channel_pos] <= 4:
+                        new_pos = [x for x in range(4) if x != channel_pos] + [
+                            channel_pos,
+                        ]
+                        img = img.transpose(new_pos)
+
+            # Channel check
+            if channel_expected == -1:
+                channel_expected = img.shape[-1]
+            if img.shape[-1] != channel_expected:
+                error = True
+                error_message = "All images need to have the same number of channels and represent same information to "\
+                    "ensure the deep learning model can be trained correctly. However, the following image (with "\
+                    f"{channel_expected} channels) appears to have a different number of channels than the first image "\
+                    f"(with {img.shape[-1]} channels) in the folder: {img_path}"
+
+            # Data range check
+            if data_range_expected == -1:
+                data_range_expected = data_range(img)
+            drange = data_range(img)
+            if data_range_expected != drange:
+                error = True
+                error_message = "All images must be within the same data range. However, the following image (with a "\
+                    f"range of {drange}) appears to be in a different data range than the first image (with a range "\
+                    f"of {data_range_expected}) in the folder: {img_path}"
+
+            if error:
+                break 
+
+        if error:
+            break 
+
+    constraints = [
+        ["DATA.PATCH_SIZE_C", channel_expected],
+        ["MODEL.N_CLASSES", len(class_names)],
+    ]
+
+    return error, error_message, constraints
 
 def data_range(x):
     if not isinstance(x, np.ndarray):

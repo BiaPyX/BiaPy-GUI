@@ -378,6 +378,7 @@ class Settings:
             "SELF_SUPERVISED",
             "CLASSIFICATION",
             "IMAGE_TO_IMAGE",
+            "IMAGE_TO_IMAGE",
         ]
         self.settings["wizard_answers"]["PROBLEM.TYPE"] = -1
         self.settings["wizard_sections"][-1][1] += ["Workflow"]

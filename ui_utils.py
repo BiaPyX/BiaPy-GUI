@@ -81,34 +81,37 @@ def check_data_from_path(main_window):
     main_window : QMainWindow
         Main window of the application.
     """
-    main_window.yes_no_exec("This process may take a while as all images will be checked one by one. Are you sure you want to proceed?")
-    if main_window.yes_no.answer:
+    if main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] == -1:
+        main_window.dialog_exec("Please select first a folder to check", reason="error")
+    else:
+        main_window.yes_no_exec("This process may take a while as all images will be checked one by one. Are you sure you want to proceed?")
+        if main_window.yes_no.answer:
 
-        def set_folder_checked(constraints, key):
-            print(f"Data {key} checked!")
-            main_window.cfg.settings["data_constraints"] = constraints
-            main_window.cfg.settings["wizard_answers"][f"CHECKED {key}"] = 1
-            set_text(main_window.ui.wizard_data_checked_label, "<span style='color:#04aa6d'>Data checked!</span>")
+            def set_folder_checked(constraints, key):
+                print(f"Data {key} checked!")
+                main_window.cfg.settings["data_constraints"] = constraints
+                main_window.cfg.settings["wizard_answers"][f"CHECKED {key}"] = 1
+                set_text(main_window.ui.wizard_data_checked_label, "<span style='color:#04aa6d'>Data checked!</span>")
+            
+            print("Checking data from path")
+            main_window.thread_spin = QThread()
+            main_window.worker_spin = check_data_from_path_engine(main_window)
+            main_window.worker_spin.moveToThread(main_window.thread_spin)
+            main_window.thread_spin.started.connect(main_window.worker_spin.run)
         
-        print("Checking data from path")
-        main_window.thread_spin = QThread()
-        main_window.worker_spin = check_data_from_path_engine(main_window)
-        main_window.worker_spin.moveToThread(main_window.thread_spin)
-        main_window.thread_spin.started.connect(main_window.worker_spin.run)
-    
-        # Set up signals
-        main_window.worker_spin.state_signal.connect(main_window.loading_phase)
-        main_window.worker_spin.update_var_signal.connect(main_window.update_variable_in_GUI)
-        main_window.worker_spin.error_signal.connect(main_window.dialog_exec)
-        main_window.worker_spin.add_model_card_signal.connect(main_window.add_model_card)
-        main_window.worker_spin.report_path_check_result.connect(set_folder_checked)
-        main_window.worker_spin.finished_signal.connect(main_window.thread_spin.quit)
-        main_window.worker_spin.finished_signal.connect(main_window.worker_spin.deleteLater)
-        main_window.thread_spin.finished.connect(main_window.thread_spin.deleteLater)
+            # Set up signals
+            main_window.worker_spin.state_signal.connect(main_window.loading_phase)
+            main_window.worker_spin.update_var_signal.connect(main_window.update_variable_in_GUI)
+            main_window.worker_spin.error_signal.connect(main_window.dialog_exec)
+            main_window.worker_spin.add_model_card_signal.connect(main_window.add_model_card)
+            main_window.worker_spin.report_path_check_result.connect(set_folder_checked)
+            main_window.worker_spin.finished_signal.connect(main_window.thread_spin.quit)
+            main_window.worker_spin.finished_signal.connect(main_window.worker_spin.deleteLater)
+            main_window.thread_spin.finished.connect(main_window.thread_spin.deleteLater)
 
-        # Start thread 
-        main_window.thread_spin.start()       
-        
+            # Start thread 
+            main_window.thread_spin.start()       
+            
 class check_data_from_path_engine(QObject):
     # Signal to indicate the state of the process 
     state_signal = QtCore.Signal(int)
@@ -177,7 +180,6 @@ class check_data_from_path_engine(QObject):
                     else:
                         error, error_message, constraints = check_csv_files(folder, is_3d=(ndim=="3D")) 
                 elif workflow == "CLASSIFICATION": 
-                    # TODO check_classification_images
                     error, error_message, constraints = check_classification_images(folder, is_3d=(ndim=="3D"))
                 elif workflow in ["DENOISING", "SUPER_RESOLUTION", "SELF_SUPERVISED", "IMAGE_TO_IMAGE"]:   
                     error, error_message, constraints = check_images(folder, is_3d=(ndim=="3D"))
