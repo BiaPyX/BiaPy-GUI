@@ -834,6 +834,9 @@ class MainWindow(QMainWindow):
         """
         if self.spinner is None: 
             self.spinner = spinner_Ui(self)
+        
+        center_window(self.spinner, self.geometry())
+
         self.spinner.start()
         self.spinner.exec_()
 
