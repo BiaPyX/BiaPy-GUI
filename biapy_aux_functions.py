@@ -177,7 +177,7 @@ def check_bmz_model_compatibility(
     return preproc_info, error, reason_message
 
 
-def check_images(data_dir, is_mask=False, semantic_mask=False, is_3d=False):
+def check_images(data_dir, is_mask=False, mask_type="", is_3d=False):
     """
     Check images in folder.
 
@@ -189,8 +189,9 @@ def check_images(data_dir, is_mask=False, semantic_mask=False, is_3d=False):
     is_mask : bool, optional
         Whether the images to check are masks and not raw images. It disables data range checking. 
 
-    semantic_mask : bool, optional
-        Whether the images to check are semantic masks. It checks the number of classes within masks. 
+    mask_type : bool, optional
+        Whether the images to check are semantic masks (``semantic_mask``) or instace masks (``instance_mask``).
+        It checks the number of classes within masks. 
 
     is_3d: bool, optional
         Whether to expect to read 3D images or 2D. 
@@ -206,6 +207,8 @@ def check_images(data_dir, is_mask=False, semantic_mask=False, is_3d=False):
     constraints: list of list of two str
         BiaPy variables to set. This info is extracted from the images read. E.g. ``[["DATA.PATCH_SIZE", 1]]``
     """
+    assert mask_type in ["", "semantic_mask", "instance_mask"]
+
     print(f"Checking images from {data_dir}")
     
     nclasses = 2
@@ -242,7 +245,7 @@ def check_images(data_dir, is_mask=False, semantic_mask=False, is_3d=False):
         if not is_3d:
             if img.ndim > 3:
                 error = True
-                error_message = f"The following image appears to be 2D, but you selected a 2D problem under the 'Dimension' question: {img_path}"
+                error_message = f"The following image appears to be 3D, but you selected a 2D problem under the 'Dimension' question: {img_path}"
 
             if img.ndim == 2:
                 img = np.expand_dims(img, -1)
@@ -289,9 +292,22 @@ def check_images(data_dir, is_mask=False, semantic_mask=False, is_3d=False):
         if error:
             break 
 
-        if semantic_mask:
-            nclasses = max(nclasses, len(np.unique(img)))
-        
+        if mask_type == "semantic_mask":
+            if channel_expected != 1:
+                error = True
+                error_message = f"Semantic masks are expected to have just one channel. Image analized: {img_path}"
+            else:
+                nclasses = max(nclasses, len(np.unique(img)))
+        elif mask_type == "instance_mask":
+            if channel_expected == 2:
+                nclasses = max(nclasses, len(np.unique(img[...,1])))
+            else:
+                if channel_expected != 1:
+                    error = True
+                    error_message = f"Instance masks are expected to have one or two channels. In case two channels are provided "\
+                        "the first one must have the instance IDs and one their corresponding semantic (class) labels. "\
+                        f"Image analized: {img_path}"
+                    
     constraints = [["DATA.PATCH_SIZE_C", channel_expected]]
     if nclasses > 2:
         constraints += [["MODEL.N_CLASSES", nclasses]]

@@ -167,24 +167,30 @@ class check_data_from_path_engine(QObject):
                 workflow = self.main_window.cfg.settings["wizard_answers"]["PROBLEM.TYPE"]
                 ndim = self.main_window.cfg.settings["wizard_answers"]["PROBLEM.NDIM"]
                 key = next(iter(self.main_window.cfg.settings["wizard_variable_to_map"]["Q"+str(self.main_window.cfg.settings['wizard_question_index']+1)]))
+                is_3d = (ndim=="3D")
                 if workflow == "SEMANTIC_SEG":
+                    mask_type = "semantic_mask" if ("GT_PATH" in key) else ""
                     error, error_message, constraints = check_images(
-                        folder, is_mask=("GT_PATH" in key), semantic_mask=("GT_PATH" in key), 
-                        is_3d=(ndim=="3D"))
+                        folder, is_mask=("GT_PATH" in key), mask_type=mask_type, 
+                        is_3d=is_3d)
                 elif workflow == "INSTANCE_SEG": 
+                    mask_type = "instance_mask" if ("GT_PATH" in key) else ""
                     error, error_message, constraints = check_images(folder, is_mask=("GT_PATH" in key), 
-                        is_3d=(ndim=="3D"))
+                        mask_type=mask_type, is_3d=is_3d)
                 elif workflow == "DETECTION":
                     if "GT_PATH" not in key: 
-                        error, error_message, constraints = check_images(folder, is_3d=(ndim=="3D"))
+                        error, error_message, constraints = check_images(folder, is_3d=is_3d)
                     else:
-                        error, error_message, constraints = check_csv_files(folder, is_3d=(ndim=="3D")) 
+                        error, error_message, constraints = check_csv_files(folder, is_3d=is_3d) 
                 elif workflow == "CLASSIFICATION": 
-                    error, error_message, constraints = check_classification_images(folder, is_3d=(ndim=="3D"))
+                    error, error_message, constraints = check_classification_images(folder, is_3d=is_3d)
                 elif workflow in ["DENOISING", "SUPER_RESOLUTION", "SELF_SUPERVISED", "IMAGE_TO_IMAGE"]:   
-                    error, error_message, constraints = check_images(folder, is_3d=(ndim=="3D"))
-
+                    error, error_message, constraints = check_images(folder, is_3d=is_3d)
+                
+                print(f"Constraints: {constraints}")
                 if error:
+                    print(f"Error: {error}")
+                    print(f"Message: {error_message}")
                     self.error_signal.emit(f"Following error found when checking the folder: \n{error_message}", "error")
                 else:
                     self.report_path_check_result.emit(constraints, key)
