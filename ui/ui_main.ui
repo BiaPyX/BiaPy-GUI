@@ -2618,7 +2618,7 @@ background-color:#D3D3D3;
                   <item>
                    <widget class="QStackedWidget" name="wizard_main_frame">
                     <property name="currentIndex">
-                     <number>0</number>
+                     <number>1</number>
                     </property>
                     <widget class="QWidget" name="wizard_start_page">
                      <layout class="QVBoxLayout" name="verticalLayout_54">
@@ -3139,7 +3139,7 @@ border-radius: 35px;
                                <property name="geometry">
                                 <rect>
                                  <x>0</x>
-                                 <y>-32</y>
+                                 <y>0</y>
                                  <width>642</width>
                                  <height>298</height>
                                 </rect>

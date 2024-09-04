@@ -204,8 +204,8 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False):
     error_message: str
         Reason of the error (if any). 
     
-    constraints: list of list of two str
-        BiaPy variables to set. This info is extracted from the images read. E.g. ``[["DATA.PATCH_SIZE", 1]]``
+    constraints: dict
+        BiaPy variables to set. This info is extracted from the images read. E.g. ``{"DATA.PATCH_SIZE": 1}``
     """
     assert mask_type in ["", "semantic_mask", "instance_mask"]
 
@@ -308,9 +308,9 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False):
                         "the first one must have the instance IDs and one their corresponding semantic (class) labels. "\
                         f"Image analized: {img_path}"
                     
-    constraints = [["DATA.PATCH_SIZE_C", channel_expected]]
+    constraints = {"DATA.PATCH_SIZE_C": channel_expected}
     if nclasses > 2:
-        constraints += [["MODEL.N_CLASSES", nclasses]]
+        constraints["MODEL.N_CLASSES"] = nclasses
         
     return error, error_message, constraints
 
@@ -334,8 +334,8 @@ def check_csv_files(data_dir, is_3d=False):
     error_message: str
         Reason of the error (if any). 
     
-    constraints: list of list of two str
-        BiaPy variables to set. This info is extracted from the images read. E.g. ``[["DATA.PATCH_SIZE", 1]]``
+    constraints: dict
+        BiaPy variables to set. This info is extracted from the images read. E.g. ``{"DATA.PATCH_SIZE": 1}``
     """
     print("Checking CSV files . . .")
     nclasses = 0
@@ -393,9 +393,9 @@ def check_csv_files(data_dir, is_3d=False):
         if error:
             break 
 
-    constraints = []
+    constraints = {}
     if 'class' in df.columns:
-        constraints += [["MODEL.N_CLASSES", nclasses]]
+        constraints["MODEL.N_CLASSES"] = nclasses
 
     return error, error_message, constraints
 
@@ -420,8 +420,8 @@ def check_classification_images(data_dir, is_3d=False):
     error_message: str
         Reason of the error (if any). 
     
-    constraints: list of list of two str
-        BiaPy variables to set. This info is extracted from the images read. E.g. ``[["DATA.PATCH_SIZE", 1]]``
+    constraints: dict
+        BiaPy variables to set. This info is extracted from the images read. E.g. ``{"DATA.PATCH_SIZE": 1}``
     """
     print("Checking classification images . . .")
 
@@ -514,10 +514,10 @@ def check_classification_images(data_dir, is_3d=False):
         if error:
             break 
 
-    constraints = [
-        ["DATA.PATCH_SIZE_C", channel_expected],
-        ["MODEL.N_CLASSES", len(class_names)],
-    ]
+    constraints = {
+        "DATA.PATCH_SIZE_C": channel_expected,
+        "MODEL.N_CLASSES": len(class_names),
+    }
 
     return error, error_message, constraints
 

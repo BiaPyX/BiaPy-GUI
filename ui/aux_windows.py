@@ -515,5 +515,5 @@ class model_card_carrousel_Ui(QDialog):
             # Description changed for URL
             self.model_cards[model_number][f"model_description_{model_number}"].setText("<span style=\"color:#4090FD\";>URL: </span> <a href=\""+  model_info['url'] + "\">"+model_info['url']+"</a>")
             # URL used for restrictions
-            self.model_cards[model_number][f"model_link_{model_number}"].setText("<span style=\"color:#4090FD\";>Restrictions: </span><span style=\"color:#FF0000\";>"+ model_info['restrictions'] + "</span>")
+            self.model_cards[model_number][f"model_link_{model_number}"].setText("<span style=\"color:#4090FD\";>Restrictions: </span><span style=\"color:#FF0000\";><br>"+ model_info['restrictions'].replace("\n","<br>") + "</span>")
             self.model_cards[model_number][f"model_img_{model_number}"].setPixmap(QPixmap(local_path))

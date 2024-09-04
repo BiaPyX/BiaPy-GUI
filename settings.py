@@ -405,8 +405,10 @@ class Settings:
         self.settings["wizard_variable_to_map"]["Q3"] = {}
         self.settings["wizard_variable_to_map"]["Q3"]["MODEL.SOURCE"] = ["biapy", "biapy", "bmz"]
         self.settings["wizard_variable_to_map"]["Q3"]["MODEL.LOAD_CHECKPOINT"] = ["False", "True", "False"]
+        self.settings["wizard_variable_to_map"]["Q3"]["MODEL.LOAD_MODEL_FROM_CHECKPOINT"] = ["False", "True", "False"]
         self.settings["wizard_answers"]["MODEL.SOURCE"] = -1 
         self.settings["wizard_answers"]["MODEL.LOAD_CHECKPOINT"] = -1 
+        self.settings["wizard_answers"]["MODEL.LOAD_MODEL_FROM_CHECKPOINT"] = -1
         self.settings["wizard_sections"][-1][1] += ["Model source"]
         self.settings["wizard_from_question_index_to_toc"].append(
             [0, len(self.settings["wizard_from_toc_to_question_index"][-1])]
@@ -725,6 +727,7 @@ class Settings:
         self.settings["wizard_number_of_questions"] = len(self.settings["wizard_questions"])
         self.settings["wizard_question_answered_index"] = [-1]*len(self.settings["wizard_questions"])
         self.settings["wizard_question_visible_default"] = self.settings["wizard_question_visible"].copy()
+        self.settings["original_wizard_answers"] = self.settings["wizard_answers"].copy()
 
     def translate_model_names(self, model, dim, inv=False):
         s = "_models_real_names" if not inv else "_models"

@@ -804,6 +804,11 @@ class MainWindow(QMainWindow):
                 
             self.cfg.settings["wizard_answers"]["MODEL.LOAD_CHECKPOINT"] = False
             
+            # Mark section as answered in TOC and remember answer
+            index = self.cfg.settings['wizard_from_question_index_to_toc'][self.cfg.settings['wizard_question_index']]        
+            self.wizard_toc_model.item(index[0]).child(index[1]).setForeground(QColor(64,144,253))
+            self.cfg.settings["wizard_question_answered_index"][self.cfg.settings['wizard_question_index']] = model_selected
+            
             # Close window
             self.model_carrousel_dialog.close()
 

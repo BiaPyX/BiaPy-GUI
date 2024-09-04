@@ -850,7 +850,7 @@ def check_torchvision_available_models(workflow, ndim):
             "lraspp_mobilenet_v3_large",
         ]
         model_restrictions_description = [
-            "- Images must be RGB", 
+            "- Images must be RGB\n", 
             "", 
             "", 
             "", 
@@ -858,20 +858,20 @@ def check_torchvision_available_models(workflow, ndim):
             ""
         ]
         model_restrictions = [
-            ["DATA.PATCH_SIZE[-1]", 3],
-            [], 
-            [],
-            [],
-            [],
-            [],
+            {"DATA.PATCH_SIZE_C": 3},
+            {}, 
+            {},
+            {},
+            {},
+            {},
         ]
     elif workflow == "INSTANCE_SEG":
         models = [
             "maskrcnn_resnet50_fpn",
             "maskrcnn_resnet50_fpn_v2",
         ]
-        model_restrictions_description = ["- Only available for testing"]*len(models) 
-        model_restrictions = [["TRAIN.ENABLE", False],]*len(models)  
+        model_restrictions_description = ["- Only available for testing\n"]*len(models) 
+        model_restrictions = [{"TRAIN.ENABLE": False}]*len(models)  
     elif workflow == "DETECTION":
         models = [
             "fasterrcnn_mobilenet_v3_large_320_fpn",
@@ -884,8 +884,8 @@ def check_torchvision_available_models(workflow, ndim):
             "retinanet_resnet50_fpn",
             "retinanet_resnet50_fpn_v2",
         ]
-        model_restrictions_description = ["- Only available for testing"]*len(models) 
-        model_restrictions = [["TRAIN.ENABLE", False],]*len(models) 
+        model_restrictions_description = ["- Only available for testing\n"]*len(models) 
+        model_restrictions = [{"TRAIN.ENABLE": False}]*len(models) 
     elif workflow == "SUPER_RESOLUTION":
         models = []
         model_restrictions_description = []
@@ -1002,15 +1002,17 @@ def check_torchvision_available_models(workflow, ndim):
         model_restrictions = []
 
     # Add common restrictions for all workflows
-    for i in range(len(model_restrictions)):
-        model_restrictions[i] += [
-            "PROBLEM.NDIM" , "2D", 
-            "TEST.ANALIZE_2D_IMGS_AS_3D_STACK", "False",
-            "TEST.AUGMENTATION", "False",
-            "TEST.FULL_IMG", "True",
-        ]
-        model_restrictions_description[i] += "\n- Only for 2D images"
+    for i in range(len(models)):
+        if len(model_restrictions) == i:
+            model_restrictions.append({})
+        model_restrictions[i]["PROBLEM.NDIM"] = "2D"
+        model_restrictions[i]["TEST.ANALIZE_2D_IMGS_AS_3D_STACK"] = False
+        model_restrictions[i]["TEST.AUGMENTATION"] = False
         if workflow != "CLASSIFICATION":
-            model_restrictions[i] += ["TEST.FULL_IMG", "True"]
+            model_restrictions[i]["TEST.FULL_IMG"] = True
 
+        if len(model_restrictions_description) == i:
+            model_restrictions_description.append("")
+        model_restrictions_description[i] += "- Only for 2D images\n"
+        
     return models, model_restrictions_description, model_restrictions

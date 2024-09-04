@@ -643,6 +643,9 @@ def clear_answers(main_window):
             main_window.wizard_toc_model.item(i).setForeground(QColor(0,0,0))
             for j in range(main_window.wizard_toc_model.item(i).rowCount()):
                 main_window.wizard_toc_model.item(i).child(j).setForeground(QColor(0,0,0))
+        
+        # Rewrite all keys
+        main_window.cfg.settings["wizard_answers"] = main_window.cfg.settings["original_wizard_answers"].copy()
 
 def check_models_from_other_sources(main_window):
     """
@@ -814,20 +817,168 @@ def export_wizard_summary(main_window):
     elif not finished_data_checks:
         main_window.dialog_exec("Please check the data in training/test paths selected in order to prevent future errors.", "inform_user")
     else:  
-        print("blablabla")    
+        biapy_cfg = main_window.cfg.settings["wizard_answers"].copy()
 
-        # # Fix by model restriction
-        # self.cfg.settings["wizard_answers"]["model_restrictions"]
-        # del self.cfg.settings["wizard_answers"]["model_restrictions"]
+        # Special variables that need to be processed 
+        # PATCH_SIZE 
+        patch_size = ()
+        if biapy_cfg["DATA.PATCH_SIZE_Z"] != -1:
+            patch_size = (main_window.cfg.settings["wizard_answers"]["DATA.PATCH_SIZE_Z"],)
+        del biapy_cfg["DATA.PATCH_SIZE_Z"]
+        import pdb; pdb.set_trace()
+        patch_size += biapy_cfg["DATA.PATCH_SIZE_XY"]
+        patch_size += (main_window.cfg.settings["data_constraints"]["DATA.PATCH_SIZE_C"],)
+        del biapy_cfg["DATA.PATCH_SIZE_XY"]
+        biapy_cfg["DATA.PATCH_SIZE"] = patch_size
+
+        # Variables found by checking the data 
+        data_constraints = main_window.cfg.settings["data_constraints"]
+        del data_constraints["DATA.PATCH_SIZE_C"]
+        for key, value in data_constraints.items():
+            biapy_cfg[key] = value
+
+        # Constraints imposed by the model
+        if "model_restrictions" in main_window.cfg.settings["wizard_answers"]:
+            for key, value in main_window.cfg.settings["wizard_answers"]["model_restrictions"].items():
+                if "PATCH_SIZE_C" in key:
+                    biapy_cfg["DATA.PATCH_SIZE"] = biapy_cfg["DATA.PATCH_SIZE"][:-1]+(value,)
+                else:
+                    biapy_cfg[key] = value
+
+        # Remove control values 
+        keys_to_remove = [x for x in main_window.cfg.settings["wizard_answers"].keys() if "CHECKED " in x]
+        for k in keys_to_remove:
+            del biapy_cfg[k]
+
+        def create_dict_from_key(cfg_key, value, out_cfg, cont):
+            print(cfg_key, value, out_cfg)
+            keys = cfg_key.split(".")
+            if keys[0] not in out_cfg:
+                out_cfg[keys[0]] = {}
+            if len(keys) == 2:
+                out_cfg[keys[0]][keys[1]] = value    
+            else:
+                create_dict_from_key(".".join(keys[1:]), value, out_cfg[keys[0]], cont+1)  
         
-        # # Merge into one
-        # self.settings["wizard_answers"]["DATA.PATCH_SIZE_XY"]
-        # self.settings["wizard_answers"]["DATA.PATCH_SIZE_Z"]
-        # del self.settings["wizard_answers"]["DATA.PATCH_SIZE_XY"]
-        # del self.settings["wizard_answers"]["DATA.PATCH_SIZE_Z"]
+        # Generate config from answers 
+        out_config = {}
+        for key, value in biapy_cfg.items():
+            if value != -1:
+                create_dict_from_key(key, value, out_config,0)
 
-        # main_window.cfg.settings["data_constraints"]
-        # del main_window.cfg.settings["data_constraints"]
+        biapy_cfg = set_default_config(biapy_cfg.copy())
+
+        import pdb; pdb.set_trace()
+        # save file
+        # with open( yaml_file, 'w') as outfile:
+        #     yaml.dump(biapy_config, outfile, default_flow_style=False)
+        
+
+def set_default_config(cfg):
+    """
+    Set default variables depending on the workflow.
+    """
+    ##################
+    # GENERAL CONFIG #
+    ##################
+    # System 
+    cfg["SYSTEM"] = {}
+    cfg["SYSTEM"]["NUM_CPUS"] = -1
+    cfg["SYSTEM"]["NUM_WORKERS"] = 5
+
+    ########
+    # DATA #
+    ########
+    # Train data 
+    cfg["DATA"]["TRAIN"]["IN_MEMORY"] = True
+    # Validation data
+    cfg["DATA"]["VAL"]["FROM_TRAIN"] = True
+    cfg["DATA"]["VAL"]["SPLIT_TRAIN"] = 0.1
+    # Test data
+    cfg["DATA"]["TEST"]["IN_MEMORY"] = False
+    # Adjust test padding accordingly
+    patch_size = cfg["DATA"]["PATCH_SIZE"]
+    if len(patch_size) == 3:
+        padding = (patch_size[0] // 8, patch_size[1] // 8)
+    else:
+        padding = (patch_size[0] // 8, patch_size[1] // 8, patch_size[2] // 8)
+    cfg['DATA']['TEST']['PADDING'] = padding
+
+    #######################
+    # TRAINING PARAMETERS #
+    #######################
+    cfg['TRAIN']['EPOCHS'] = 1000
+    cfg['TRAIN']['PATIENCE'] = 50
+    cfg['TRAIN']['BATCH_SIZE'] = 1 # TODO: Depending on the GPU/CPU
+    cfg['TRAIN']['OPTIMIZER'] = "ADAMW"
+    cfg['TRAIN']['LR'] = 1.E-4
+    # Learning rate scheduler
+    cfg['TRAIN']['LR_SCHEDULER'] = {}
+    cfg['TRAIN']['LR_SCHEDULER']['NAME'] = 'warmupcosine'
+    cfg['TRAIN']['LR_SCHEDULER']['MIN_LR'] = 5.E-6
+    cfg['TRAIN']['LR_SCHEDULER']['WARMUP_COSINE_DECAY_EPOCHS'] = 0
+
+    #########
+    # MODEL #
+    #########
+    if cfg['MODEL']['SOURCE'] == "biapy":
+        if cfg["PROBLEM"]["TYPE"] in [
+            "SEMANTIC_SEG",
+            "INSTANCE_SEG",
+            "DETECTION",
+            "DENOISING",
+            "IMAGE_TO_IMAGE"
+        ]:
+            cfg["MODEL"]["ARCHITECTURE"] = "resunet"
+        elif cfg["PROBLEM"]["TYPE"] == "SUPER_RESOLUTION":
+            cfg["MODEL"]["ARCHITECTURE"] = "rcan"
+        elif cfg["PROBLEM"]["TYPE"] == "SELF_SUPERVISED":
+            cfg["MODEL"]["ARCHITECTURE"] = "unet"
+        elif cfg["PROBLEM"]["TYPE"] == "CLASSIFICATION":
+            cfg["MODEL"]["ARCHITECTURE"] = "vit"
+
+    #####################
+    # DATA AUGMENTATION #
+    #####################
+    cfg['AUGMENTOR'] = {}
+    cfg['AUGMENTOR']["ENABLE"] = True
+    cfg['AUGMENTOR']["RANDOM_ROT"] = True
+    cfg['AUGMENTOR']["VFLIP"] = True
+    cfg['AUGMENTOR']["HFLIP"] = True
+    cfg['AUGMENTOR']["BRIGHTNESS"] = True
+    cfg['AUGMENTOR']["BRIGHTNESS_FACTOR"] = (-0.2, 0.2)
+    cfg['AUGMENTOR']["CONTRAST"] = True
+    cfg['AUGMENTOR']["CONTRAST_FACTOR"] = (-0.2, 0.2)
+    cfg['AUGMENTOR']["ELASTIC"] = True
+    cfg['AUGMENTOR']["ZOOM"] = True
+    cfg['AUGMENTOR']["ZOOM_RANGE"] = (0.8, 1.2)
+    cfg['AUGMENTOR']["AFFINE_MODE"] = 'reflect'
+
+    ############################
+    # WORKFLOW SPECIFIC CONFIG #
+    ############################
+    if cfg["PROBLEM"]["TYPE"] == "SEMANTIC_SEG":
+        pass
+    elif cfg["PROBLEM"]["TYPE"] == "INSTANCE_SEG":
+        pass
+    elif cfg["PROBLEM"]["TYPE"] == "DETECTION":
+        pass
+    elif cfg["PROBLEM"]["TYPE"] == "DENOISING":
+        pass
+    elif cfg["PROBLEM"]["TYPE"] == "SUPER_RESOLUTION":
+        pass
+    elif cfg["PROBLEM"]["TYPE"] == "SELF_SUPERVISED":
+        pass
+        # # SSL configuration
+        # cfg['PROBLEM']['SELF_SUPERVISED'] = {}
+        # cfg['PROBLEM']['SELF_SUPERVISED']['PRETEXT_TASK'] = pretext_task
+    elif cfg["PROBLEM"]["TYPE"] == "CLASSIFICATION":
+        pass
+    elif cfg["PROBLEM"]["TYPE"] == "IMAGE_TO_IMAGE":
+        pass
+
+    return cfg 
+
 
 def adjust_window_progress(main_window):
     """
