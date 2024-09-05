@@ -483,7 +483,7 @@ class model_card_carrousel_Ui(QDialog):
             self.model_cards[model_number][f"verticalLayout_5_{model_number}"].addWidget(self.model_cards[model_number][f"model_card_subframe_{model_number}"])
             self.model_carrousel_window.verticalLayout_6.addWidget(self.model_cards[model_number][f"model_card_frame_{model_number}"])
 
-            self.model_cards[model_number][f"model_card_frame_{model_number}"].mousePressEvent = lambda event, a=model_info['nickname'],b=model_info['source'],c=model_info['restrictions_cmd']: self.parent.select_external_model(a,b,c)
+            self.model_cards[model_number][f"model_card_frame_{model_number}"].mousePressEvent = lambda event, a=model_info['nickname'],b=model_info['source'],c=model_info['imposed_vars']: self.parent.select_external_model(a,b,c)
 
             self.total_model_cards_created += 1
 

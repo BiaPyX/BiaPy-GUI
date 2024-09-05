@@ -16,11 +16,13 @@ from pathlib import PurePath, Path, PureWindowsPath
 from PySide2 import QtCore
 from PySide2.QtCore import QObject, QThread
 from PySide2.QtWidgets import *
-from PySide2.QtGui import  QBrush, QColor
+from PySide2.QtGui import QBrush, QColor
+
+from bioimageio.spec import load_description
 
 from biapy_config import Config
 from biapy_check_configuration import check_configuration, check_torchvision_available_models
-from biapy_aux_functions import check_bmz_model_compatibility, check_images, check_csv_files, check_classification_images
+from biapy_aux_functions import check_bmz_model_compatibility, check_images, check_csv_files, check_classification_images, check_model_restrictions
 
 
 def examine(main_window, save_in_obj_tag=None, is_file=True):
@@ -43,7 +45,7 @@ def examine(main_window, save_in_obj_tag=None, is_file=True):
     else:
         out = QFileDialog.getOpenFileName()[0]
 
-    if out == "": return # If no file was selected 
+    if out == "": return out # If no file was selected 
 
     if save_in_obj_tag is not None:
         getattr(main_window.ui, save_in_obj_tag).setText(os.path.normpath(out))
@@ -59,6 +61,8 @@ def examine(main_window, save_in_obj_tag=None, is_file=True):
             main_window.cfg.settings['test_data_input_path'] = out 
         elif save_in_obj_tag == "DATA__TEST__GT_PATH__INPUT":
             main_window.cfg.settings['test_data_gt_input_path'] = out  
+
+    return out 
 
 def wizard_path_changed(main_window, save_in_obj_tag=None, is_file=True):
     # Reset path check
@@ -89,13 +93,17 @@ def check_data_from_path(main_window):
 
             def set_folder_checked(constraints, key):
                 print(f"Data {key} checked!")
-                main_window.cfg.settings["data_constraints"] = constraints
+                if "data_constraints" not in main_window.cfg.settings["wizard_answers"]:
+                    main_window.cfg.settings["wizard_answers"]["data_constraints"] = constraints
+                else:
+                    main_window.cfg.settings["wizard_answers"]["data_constraints"].update(constraints)
                 main_window.cfg.settings["wizard_answers"][f"CHECKED {key}"] = 1
                 set_text(main_window.ui.wizard_data_checked_label, "<span style='color:#04aa6d'>Data checked!</span>")
             
             print("Checking data from path")
+            dir_name = next(iter(main_window.cfg.settings["wizard_variable_to_map"]["Q"+str(main_window.cfg.settings['wizard_question_index']+1)]))
             main_window.thread_spin = QThread()
-            main_window.worker_spin = check_data_from_path_engine(main_window)
+            main_window.worker_spin = check_data_from_path_engine(main_window, dir_name)
             main_window.worker_spin.moveToThread(main_window.thread_spin)
             main_window.thread_spin.started.connect(main_window.worker_spin.run)
         
@@ -131,7 +139,7 @@ class check_data_from_path_engine(QObject):
     # Signal to indicate the main thread that the worker has finished 
     finished_signal = QtCore.Signal()
 
-    def __init__(self, main_window):
+    def __init__(self, main_window, dir_name):
         """
         Class to check available model compatible with BiaPy from external sources such as BioImage Model Zoo (BMZ)
         and Torchvision.
@@ -143,6 +151,7 @@ class check_data_from_path_engine(QObject):
         """
         super(check_data_from_path_engine, self).__init__()
         self.main_window =  main_window
+        self.dir_name = dir_name
 
     def run(self):
         """
@@ -172,20 +181,20 @@ class check_data_from_path_engine(QObject):
                     mask_type = "semantic_mask" if ("GT_PATH" in key) else ""
                     error, error_message, constraints = check_images(
                         folder, is_mask=("GT_PATH" in key), mask_type=mask_type, 
-                        is_3d=is_3d)
+                        is_3d=is_3d, dir_name=self.dir_name)
                 elif workflow == "INSTANCE_SEG": 
                     mask_type = "instance_mask" if ("GT_PATH" in key) else ""
                     error, error_message, constraints = check_images(folder, is_mask=("GT_PATH" in key), 
-                        mask_type=mask_type, is_3d=is_3d)
+                        mask_type=mask_type, is_3d=is_3d, dir_name=self.dir_name)
                 elif workflow == "DETECTION":
                     if "GT_PATH" not in key: 
-                        error, error_message, constraints = check_images(folder, is_3d=is_3d)
+                        error, error_message, constraints = check_images(folder, is_3d=is_3d, dir_name=self.dir_name)
                     else:
-                        error, error_message, constraints = check_csv_files(folder, is_3d=is_3d) 
+                        error, error_message, constraints = check_csv_files(folder, is_3d=is_3d, dir_name=self.dir_name) 
                 elif workflow == "CLASSIFICATION": 
-                    error, error_message, constraints = check_classification_images(folder, is_3d=is_3d)
+                    error, error_message, constraints = check_classification_images(folder, is_3d=is_3d, dir_name=self.dir_name)
                 elif workflow in ["DENOISING", "SUPER_RESOLUTION", "SELF_SUPERVISED", "IMAGE_TO_IMAGE"]:   
-                    error, error_message, constraints = check_images(folder, is_3d=is_3d)
+                    error, error_message, constraints = check_images(folder, is_3d=is_3d, dir_name=self.dir_name)
                 
                 print(f"Constraints: {constraints}")
                 if error:
@@ -534,7 +543,9 @@ def change_wizard_page(main_window, val, based_on_toc=False, added_val=0):
                         str(main_window.cfg.settings['wizard_possible_answers'][i][main_window.cfg.settings["wizard_question_answered_index"][i]]))
             else:
                 main_window.question_cards[i][f"summary_question_frame_{i}"].setVisible(False)
-
+        
+        # Visualice the yaml_file name 
+        set_text(main_window.ui.wizard_config_file_label, os.path.join(get_text(main_window.ui.wizard_browse_yaml_path_input), get_text(main_window.ui.wizard_yaml_name_input)))
     else:
         main_window.ui.wizard_main_frame.setCurrentWidget(main_window.ui.questionary_page)
 
@@ -746,6 +757,10 @@ class check_models_from_other_sources_engine(QObject):
                     _, error, _ = check_bmz_model_compatibility(model_rdfs[-1], workflow_specs=workflow_specs)
 
                     if not error:
+                        # Creating BMZ model object
+                        model = load_description(model_rdfs[-1]['config']['bioimageio']['nickname'])
+
+                        biapy_imposed_vars = check_model_restrictions(model)
                         doi = "/".join(model_rdfs[-1]['id'].split("/")[:2])
                         model_info = {
                             'name': model_rdfs[-1]['name'],
@@ -756,7 +771,7 @@ class check_models_from_other_sources_engine(QObject):
                             'id': doi,
                             'covers': model_rdfs[-1]['covers'][0],
                             'url': f"https://bioimage.io/#/?id={doi}",
-                            'restrictions_cmd': [],
+                            'imposed_vars': biapy_imposed_vars,
                         }
                         self.add_model_card_signal.emit(model_count, model_info)
 
@@ -776,7 +791,7 @@ class check_models_from_other_sources_engine(QObject):
                     'description': "Loaded with its default weights (normally on ImageNet data). More info in the link below",
                     'url': "https://pytorch.org/vision/main/models.html",
                     'restrictions': res,
-                    'restrictions_cmd': res_cmd,
+                    'imposed_vars': res_cmd,
                 }
                 self.add_model_card_signal.emit(model_count, model_info)
                 model_count += 1
@@ -819,60 +834,121 @@ def export_wizard_summary(main_window):
     else:  
         biapy_cfg = main_window.cfg.settings["wizard_answers"].copy()
 
-        # Special variables that need to be processed 
-        # PATCH_SIZE 
-        patch_size = ()
-        if biapy_cfg["DATA.PATCH_SIZE_Z"] != -1:
-            patch_size = (main_window.cfg.settings["wizard_answers"]["DATA.PATCH_SIZE_Z"],)
-        del biapy_cfg["DATA.PATCH_SIZE_Z"]
-        import pdb; pdb.set_trace()
-        patch_size += biapy_cfg["DATA.PATCH_SIZE_XY"]
-        patch_size += (main_window.cfg.settings["data_constraints"]["DATA.PATCH_SIZE_C"],)
-        del biapy_cfg["DATA.PATCH_SIZE_XY"]
-        biapy_cfg["DATA.PATCH_SIZE"] = patch_size
-
-        # Variables found by checking the data 
-        data_constraints = main_window.cfg.settings["data_constraints"]
-        del data_constraints["DATA.PATCH_SIZE_C"]
-        for key, value in data_constraints.items():
-            biapy_cfg[key] = value
-
-        # Constraints imposed by the model
-        if "model_restrictions" in main_window.cfg.settings["wizard_answers"]:
-            for key, value in main_window.cfg.settings["wizard_answers"]["model_restrictions"].items():
+        # Special variables that need to be processed
+        # Constraints imposed by the model. Patch size will be determined by the model
+        if "model_restrictions" in biapy_cfg:
+            for key, value in biapy_cfg["model_restrictions"].items():
                 if "PATCH_SIZE_C" in key:
                     biapy_cfg["DATA.PATCH_SIZE"] = biapy_cfg["DATA.PATCH_SIZE"][:-1]+(value,)
                 else:
                     biapy_cfg[key] = value
+            del biapy_cfg["DATA.PATCH_SIZE_Z"]
+            del biapy_cfg["DATA.PATCH_SIZE_XY"]
+            del biapy_cfg["model_restrictions"]
+        else:
+            patch_size = ()
+            if biapy_cfg["DATA.PATCH_SIZE_Z"] != -1:
+                patch_size = (biapy_cfg["DATA.PATCH_SIZE_Z"],)
+            del biapy_cfg["DATA.PATCH_SIZE_Z"]
+
+            patch_size += biapy_cfg["DATA.PATCH_SIZE_XY"]
+            patch_size += (biapy_cfg["data_constraints"]["DATA.PATCH_SIZE_C"],)
+            del biapy_cfg["DATA.PATCH_SIZE_XY"]
+            biapy_cfg["DATA.PATCH_SIZE"] = patch_size
+
+        # Channel compatibility
+        model_channels = biapy_cfg["DATA.PATCH_SIZE"][-1]
+        data_channels = biapy_cfg["data_constraints"]["DATA.PATCH_SIZE_C"]
+        if data_channels != model_channels:
+            main_window.dialog_exec(f"Incompatibility found: data provided seems to have {data_channels} channels whereas "
+                f"the pretrained model expects {model_channels} channels. Please select another pretrained model.", reason="error")
+            return
+        del biapy_cfg["data_constraints"]["DATA.PATCH_SIZE_C"]
+
+        # Check number of samples between provided paths 
+        for phase in ["TRAIN","TEST"]:
+            if biapy_cfg[f"{phase}.ENABLE"]:
+                if f"DATA.{phase}.GT_PATH" in biapy_cfg["data_constraints"]:
+                    if biapy_cfg["data_constraints"][f"DATA.{phase}.GT_PATH"] != biapy_cfg["data_constraints"][f"DATA.{phase}.PATH"]:
+                        m = "Incompatibility found: number of raw images and ground truth mismatch. Each raw image must "\
+                            "have a ground truth image. Please check both directories:\n"\
+                            "    - {} items found in {}\n"\
+                            "    - {} items found in {}\n".format(
+                                biapy_cfg["data_constraints"][f"DATA.{phase}.PATH"],
+                                biapy_cfg["data_constraints"][f"DATA.{phase}.PATH_path"],
+                                biapy_cfg["data_constraints"][f"DATA.{phase}.GT_PATH"],
+                                biapy_cfg["data_constraints"][f"DATA.{phase}.GT_PATH_path"]
+                                )
+                        main_window.dialog_exec(m, reason="error")
+                        return
+                    del biapy_cfg["data_constraints"][f"DATA.{phase}.PATH"]
+                    del biapy_cfg["data_constraints"][f"DATA.{phase}.PATH_path"]
+                    del biapy_cfg["data_constraints"][f"DATA.{phase}.GT_PATH"]
+                    del biapy_cfg["data_constraints"][f"DATA.{phase}.GT_PATH_path"]
+
+        # Set the rest of the variables found by checking the data 
+        for key, value in biapy_cfg["data_constraints"].items():
+            biapy_cfg[key] = value
+        del biapy_cfg["data_constraints"]
 
         # Remove control values 
-        keys_to_remove = [x for x in main_window.cfg.settings["wizard_answers"].keys() if "CHECKED " in x]
+        keys_to_remove = [x for x in biapy_cfg.keys() if "CHECKED " in x]
         for k in keys_to_remove:
             del biapy_cfg[k]
 
-        def create_dict_from_key(cfg_key, value, out_cfg, cont):
-            print(cfg_key, value, out_cfg)
+        def create_dict_from_key(cfg_key, value, out_cfg):
             keys = cfg_key.split(".")
             if keys[0] not in out_cfg:
                 out_cfg[keys[0]] = {}
             if len(keys) == 2:
+                if isinstance(value, tuple):
+                    value = str(value)
                 out_cfg[keys[0]][keys[1]] = value    
             else:
-                create_dict_from_key(".".join(keys[1:]), value, out_cfg[keys[0]], cont+1)  
-        
+                create_dict_from_key(".".join(keys[1:]), value, out_cfg[keys[0]])  
+
         # Generate config from answers 
         out_config = {}
         for key, value in biapy_cfg.items():
             if value != -1:
-                create_dict_from_key(key, value, out_config,0)
+                if isinstance(key, str):
+                    create_dict_from_key(key, value, out_config)
+                else:
+                    raise ValueError(f"Error found in config: {key}. Contact BiaPy team!")
 
-        biapy_cfg = set_default_config(biapy_cfg.copy())
-
-        import pdb; pdb.set_trace()
-        # save file
-        # with open( yaml_file, 'w') as outfile:
-        #     yaml.dump(biapy_config, outfile, default_flow_style=False)
+        out_config = set_default_config(out_config.copy())
         
+        yaml_file = os.path.join(get_text(main_window.ui.wizard_browse_yaml_path_input), get_text(main_window.ui.wizard_yaml_name_input))
+        if not yaml_file.endswith(".yaml") and not yaml_file.endswith(".yml"):
+            yaml_file +=".yaml"
+        main_window.cfg.settings['yaml_config_filename'] = yaml_file 
+
+        # Writing YAML file
+        replace = True
+        if os.path.exists(yaml_file):
+            main_window.yes_no_exec("The file '{}' already exists. Do you want to overwrite it?".format(yaml_file))
+            replace = True if main_window.yes_no.answer else False
+        if replace:
+            main_window.logger.info("Creating YAML file") 
+            with open(yaml_file, 'w') as outfile:
+                yaml.dump(out_config, outfile, default_flow_style=False)
+
+        # Update GUI with the new YAML file path and resets the check 
+        main_window.ui.select_yaml_name_label.setText(os.path.normpath(yaml_file))
+        actual_name = get_text(main_window.ui.job_name_input)
+        if actual_name in ["", "my_semantic_segmentation", "my_instance_segmentation", "my_detection", "my_denoising", \
+            "my_super_resolution", "my_self_supervised_learning", "my_classification", "my_image_to_image"]:
+            main_window.ui.job_name_input.setPlainText("my_"+ cfg["PROBLEM"]["TYPE"].lower())
+        main_window.ui.check_yaml_file_errors_label.setText("")
+        main_window.ui.check_yaml_file_errors_frame.setStyleSheet("") 
+
+        if replace:
+            # Advise user where the YAML file has been saved 
+            message = "Configuration file created:\n{}".format(yaml_file)
+            main_window.dialog_exec(message, reason="inform_user")
+        
+        change_page(main_window,'bn_run_biapy',99)
+
 
 def set_default_config(cfg):
     """
@@ -889,34 +965,46 @@ def set_default_config(cfg):
     ########
     # DATA #
     ########
-    # Train data 
-    cfg["DATA"]["TRAIN"]["IN_MEMORY"] = True
-    # Validation data
-    cfg["DATA"]["VAL"]["FROM_TRAIN"] = True
-    cfg["DATA"]["VAL"]["SPLIT_TRAIN"] = 0.1
-    # Test data
-    cfg["DATA"]["TEST"]["IN_MEMORY"] = False
-    # Adjust test padding accordingly
-    patch_size = cfg["DATA"]["PATCH_SIZE"]
-    if len(patch_size) == 3:
-        padding = (patch_size[0] // 8, patch_size[1] // 8)
-    else:
-        padding = (patch_size[0] // 8, patch_size[1] // 8, patch_size[2] // 8)
-    cfg['DATA']['TEST']['PADDING'] = padding
+    cfg['DATA']['REFLECT_TO_COMPLETE_SHAPE'] = True
+    if cfg['TRAIN']['ENABLE']:
+        # Train data 
+        cfg["DATA"]["TRAIN"]["IN_MEMORY"] = False
+        # Validation data
+        cfg['DATA']['VAL'] = {}
+        cfg['DATA']['VAL']['IN_MEMORY'] = False
+        cfg["DATA"]["VAL"]["FROM_TRAIN"] = True
+        cfg["DATA"]["VAL"]["SPLIT_TRAIN"] = 0.1
+    
+    if cfg['TEST']['ENABLE']:
+        # Test data
+        cfg['DATA']['TEST'] = {}
+        cfg["DATA"]["TEST"]["IN_MEMORY"] = False
+
+        # Adjust test padding accordingly
+        if cfg['DATA']['PATCH_SIZE'] != -1:
+            cfg['DATA']['TEST']['PADDING'] = str(tuple([x//6 for x in cfg['DATA']['PATCH_SIZE'][:-1]]))
+
+    # Normalization
+    cfg['DATA']['NORMALIZATION'] = {}
+    cfg['DATA']['NORMALIZATION']['TYPE'] = 'custom'
+    cfg['DATA']['NORMALIZATION']['PERC_CLIP'] = True
+    cfg['DATA']['NORMALIZATION']['PERC_LOWER'] = 0.1
+    cfg['DATA']['NORMALIZATION']['PERC_UPPER'] = 99.9
 
     #######################
     # TRAINING PARAMETERS #
     #######################
-    cfg['TRAIN']['EPOCHS'] = 1000
-    cfg['TRAIN']['PATIENCE'] = 50
-    cfg['TRAIN']['BATCH_SIZE'] = 1 # TODO: Depending on the GPU/CPU
-    cfg['TRAIN']['OPTIMIZER'] = "ADAMW"
-    cfg['TRAIN']['LR'] = 1.E-4
-    # Learning rate scheduler
-    cfg['TRAIN']['LR_SCHEDULER'] = {}
-    cfg['TRAIN']['LR_SCHEDULER']['NAME'] = 'warmupcosine'
-    cfg['TRAIN']['LR_SCHEDULER']['MIN_LR'] = 5.E-6
-    cfg['TRAIN']['LR_SCHEDULER']['WARMUP_COSINE_DECAY_EPOCHS'] = 0
+    if cfg['TRAIN']['ENABLE']:
+        cfg['TRAIN']['EPOCHS'] = 1000
+        cfg['TRAIN']['PATIENCE'] = 50
+        cfg['TRAIN']['BATCH_SIZE'] = 1 # TODO: Depending on the GPU/CPU
+        cfg['TRAIN']['OPTIMIZER'] = "ADAMW"
+        cfg['TRAIN']['LR'] = 1.E-4
+        # Learning rate scheduler
+        cfg['TRAIN']['LR_SCHEDULER'] = {}
+        cfg['TRAIN']['LR_SCHEDULER']['NAME'] = 'warmupcosine'
+        cfg['TRAIN']['LR_SCHEDULER']['MIN_LR'] = 5.E-6
+        cfg['TRAIN']['LR_SCHEDULER']['WARMUP_COSINE_DECAY_EPOCHS'] = 5
 
     #########
     # MODEL #
@@ -940,41 +1028,83 @@ def set_default_config(cfg):
     #####################
     # DATA AUGMENTATION #
     #####################
-    cfg['AUGMENTOR'] = {}
-    cfg['AUGMENTOR']["ENABLE"] = True
-    cfg['AUGMENTOR']["RANDOM_ROT"] = True
-    cfg['AUGMENTOR']["VFLIP"] = True
-    cfg['AUGMENTOR']["HFLIP"] = True
-    cfg['AUGMENTOR']["BRIGHTNESS"] = True
-    cfg['AUGMENTOR']["BRIGHTNESS_FACTOR"] = (-0.2, 0.2)
-    cfg['AUGMENTOR']["CONTRAST"] = True
-    cfg['AUGMENTOR']["CONTRAST_FACTOR"] = (-0.2, 0.2)
-    cfg['AUGMENTOR']["ELASTIC"] = True
-    cfg['AUGMENTOR']["ZOOM"] = True
-    cfg['AUGMENTOR']["ZOOM_RANGE"] = (0.8, 1.2)
-    cfg['AUGMENTOR']["AFFINE_MODE"] = 'reflect'
+    if cfg['TRAIN']['ENABLE']:
+        cfg['AUGMENTOR'] = {}
+        cfg['AUGMENTOR']["ENABLE"] = True
+        cfg['AUGMENTOR']["AFFINE_MODE"] = 'reflect'
+        cfg['AUGMENTOR']["VFLIP"] = True
+        cfg['AUGMENTOR']["HFLIP"] = True
+        if cfg['PROBLEM']['NDIM'] == "3D":
+            cfg['AUGMENTOR']['ZFLIP'] = True
+        
+    ###################
+    # TEST PARAMETERS #
+    ###################
+    if cfg['TEST']['ENABLE']:
+        cfg['TEST']['FULL_IMG'] = False
 
     ############################
     # WORKFLOW SPECIFIC CONFIG #
     ############################
-    if cfg["PROBLEM"]["TYPE"] == "SEMANTIC_SEG":
-        pass
-    elif cfg["PROBLEM"]["TYPE"] == "INSTANCE_SEG":
-        pass
-    elif cfg["PROBLEM"]["TYPE"] == "DETECTION":
-        pass
+    data_channels = cfg["DATA"]["PATCH_SIZE"][-1]
+    if cfg["PROBLEM"]["TYPE"] in [
+            "SEMANTIC_SEG",
+            "INSTANCE_SEG",
+            "DETECTION",
+            "IMAGE_TO_IMAGE"
+        ]:
+        cfg['AUGMENTOR']['BRIGHTNESS'] = True
+        cfg['AUGMENTOR']['BRIGHTNESS_FACTOR'] = str((-0.2, 0.2))
+        cfg['AUGMENTOR']['CONTRAST'] = True
+        cfg['AUGMENTOR']['CONTRAST_FACTOR'] = str((-0.2, 0.2))
+        cfg['AUGMENTOR']['ELASTIC'] = True
+        cfg['AUGMENTOR']['ZOOM'] = True
+        cfg['AUGMENTOR']['ZOOM_RANGE'] = str((-0.2, 0.2))
+        cfg['AUGMENTOR']['RANDOM_ROT'] = True
+
+        if cfg['PROBLEM']['TYPE'] == 'INSTANCE_SEG':
+            cfg['PROBLEM']['INSTANCE_SEG'] = {}
+            cfg['PROBLEM']['INSTANCE_SEG']['DATA_CHANNELS'] = 'BC'
+            cfg['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_TYPE'] = "auto"
+
+        elif cfg['PROBLEM']['TYPE'] == 'DETECTION':  
+            if cfg['TEST']['ENABLE']:
+                cfg['TEST']['DET_TOLERANCE'] = [int(0.8*cfg['TEST']['POST_PROCESSING']["REMOVE_CLOSE_POINTS_RADIUS"])] 
+                cfg['TEST']['DET_MIN_TH_TO_BE_PEAK'] = [0.5] 
+                cfg['TEST']['POST_PROCESSING']["REMOVE_CLOSE_POINTS"] = True
+
     elif cfg["PROBLEM"]["TYPE"] == "DENOISING":
-        pass
+        if cfg['DATA']['PATCH_SIZE'] != -1:
+            if cfg['DATA']['NDIM'] == "2D":
+                cfg['DATA']['PATCH_SIZE'] = str((64,64)+(data_channels,))
+            else:
+                cfg['DATA']['PATCH_SIZE'] = str((12,64,64)+(data_channels,))
+            cfg['DATA']['TEST']['PADDING'] = str(tuple([x//6 for x in cfg['DATA']['PATCH_SIZE'][:-1]]))
+
+        # Config as Noise2Void default parameters
+        cfg['PROBLEM']['DENOISING'] = {}
+        cfg['PROBLEM']['DENOISING']['N2V_STRUCTMASK'] = True
+        cfg['MODEL']['ARCHITECTURE'] = 'unet'
+        cfg['MODEL']['FEATURE_MAPS'] = [32, 64, 96]
+        cfg['MODEL']['KERNEL_SIZE'] = 3
+        cfg['MODEL']['UPSAMPLE_LAYER'] = "upsampling"
+        cfg['MODEL']['DROPOUT_VALUES'] = [0, 0, 0]
+        cfg['MODEL']['ACTIVATION'] = 'relu'
+        cfg['MODEL']['LAST_ACTIVATION'] = 'linear'
+        cfg['MODEL']['NORMALIZATION'] = 'bn'
+        
+        if cfg['TRAIN']['ENABLE']:
+            cfg['TRAIN']['BATCH_SIZE'] = 1 # TODO: Depending on the GPU/CPU. In denoising the value can be higher  
+        
     elif cfg["PROBLEM"]["TYPE"] == "SUPER_RESOLUTION":
-        pass
-    elif cfg["PROBLEM"]["TYPE"] == "SELF_SUPERVISED":
-        pass
-        # # SSL configuration
-        # cfg['PROBLEM']['SELF_SUPERVISED'] = {}
-        # cfg['PROBLEM']['SELF_SUPERVISED']['PRETEXT_TASK'] = pretext_task
+        if cfg['DATA']['PATCH_SIZE'] != -1:
+            if cfg['DATA']['NDIM'] == "2D":
+                cfg['DATA']['PATCH_SIZE'] = str((48,48)+(data_channels,))
+            else:
+                cfg['DATA']['PATCH_SIZE'] = str((6,128,128)+(data_channels,))
+            cfg['DATA']['TEST']['PADDING'] = str(tuple([x//6 for x in cfg['DATA']['PATCH_SIZE'][:-1]]))
+
     elif cfg["PROBLEM"]["TYPE"] == "CLASSIFICATION":
-        pass
-    elif cfg["PROBLEM"]["TYPE"] == "IMAGE_TO_IMAGE":
         pass
 
     return cfg 
@@ -1151,6 +1281,13 @@ def start_questionary(main_window):
     main_window : QMainWindow
         Main window of the application.
     """
+    if get_text(main_window.ui.wizard_browse_yaml_path_input) == "":
+        main_window.dialog_exec("Configuration file path must be defined", "error")
+        return
+    elif get_text(main_window.ui.wizard_yaml_name_input) == "":
+        main_window.dialog_exec("Configuration file name must be defined", "error")
+        return
+    
     main_window.ui.goptions_advanced_options_scrollarea.setVisible(False)
     main_window.ui.continue_bn.setText("Create configuration file")
     main_window.ui.wizard_main_frame.setCurrentWidget(main_window.ui.questionary_page)

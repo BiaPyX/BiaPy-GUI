@@ -1,18 +1,21 @@
 import os
+import functools
 import numpy as np
 import pandas as pd
 from skimage.io import imread
 
 from typing import Optional, Dict, Tuple, List
 from packaging.version import Version
+from bioimageio.core.digest_spec import get_test_inputs
 
-## Copied from BiaPy commit: 0ed2222869300316839af7202ce1d55761c6eb88 (3.5.1)
+## Copied from BiaPy commit: ada4f14cf13f5d2b74d66e1f9aa2b526a133f296 (3.5.1)
 def check_bmz_model_compatibility(
     model_rdf: Dict,
     workflow_specs: Optional[Dict] = None,
 ) -> Tuple[List[str], bool, str]:
     """
-    Checks model compatibility with BiaPy.
+    Checks one model compatibility with BiaPy by looking at its RDF file provided by BMZ. This function is the one
+    used in BMZ's continuous integration with BiaPy.
 
     Parameters
     ----------
@@ -135,25 +138,25 @@ def check_bmz_model_compatibility(
 
         # Check preprocessing
         if "preprocessing" in model_rdf["inputs"][0]:
-            for preprocs in model_rdf["inputs"][0]["preprocessing"]:
-                key_to_find = "id" if model_version > Version("0.5.0") else "name"
+            preproc_info = model_rdf["inputs"][0]["preprocessing"]
+            if isinstance(preproc_info, list) and len(preproc_info) > 1:
+                error = True
+                reason_message += f"[{specific_workflow}] More than one preprocessing from BMZ not implemented yet {axes_order}\n"
 
-                if key_to_find in preprocs:
-                    if preprocs[key_to_find] not in [
-                        "zero_mean_unit_variance",
-                        "fixed_zero_mean_unit_variance",
-                        "scale_range",
-                        "scale_linear",
-                    ]:
-                        error = True
-                        reason_message += f"[{specific_workflow}] Not recognized preprocessing found: {preprocs[key_to_find]}\n"
-                        break
-                else:
+            key_to_find = "id" if model_version > Version("0.5.0") else "name"
+
+            if key_to_find in preproc_info:
+                if preproc_info[key_to_find] not in [
+                    "zero_mean_unit_variance",
+                    "fixed_zero_mean_unit_variance",
+                    "scale_range",
+                    "scale_linear",
+                ]:
                     error = True
-                    reason_message += f"[{specific_workflow}] Not recognized preprocessing structure found: {preprocs}\n"
-                    break
-
-                preproc_info = preprocs
+                    reason_message += f"[{specific_workflow}] Not recognized preprocessing found: {preproc_info[key_to_find]}\n"
+            else:
+                error = True
+                reason_message += f"[{specific_workflow}] Not recognized preprocessing structure found: {preproc_info}\n"
 
         # Check post-processing
         if model_version > Version("0.5.0"):
@@ -176,8 +179,84 @@ def check_bmz_model_compatibility(
 
     return preproc_info, error, reason_message
 
+# Adapted from BiaPy commit: ada4f14cf13f5d2b74d66e1f9aa2b526a133f296 (3.5.1)
+def check_model_restrictions(
+    model_rdf,
+):
+    """
+    Checks model restrictions to be applied into the current configuration.
 
-def check_images(data_dir, is_mask=False, mask_type="", is_3d=False):
+    Parameters
+    ----------
+    model_rdf : BMZ model
+        RDF of BMZ model. 
+ 
+    Returns
+    -------
+    option_list: dict
+        variables and values to change in current configuration. These changes
+        are imposed by the selected model. 
+    """
+    opts = {}    
+
+    # 1) Change PATCH_SIZE with the one stored in the RDF
+    inputs = get_test_inputs(model_rdf)
+    if "input0" in inputs.members:
+        input_image_shape = inputs.members["input0"]._data.shape
+    elif "raw" in inputs.members:
+        input_image_shape = inputs.members["raw"]._data.shape
+    else:
+        raise ValueError(f"Couldn't load input info from BMZ model's RDF: {inputs}")   
+    opts["DATA.PATCH_SIZE"] = input_image_shape[2:] + (input_image_shape[1],)
+
+    preproc_info = model_rdf.inputs[0].preprocessing
+    if len(preproc_info) == 0:
+        return opts
+    
+    # 2) Change preprocessing to the one stablished by BMZ by translate BMZ keywords into BiaPy's
+    if len(preproc_info) > 0:
+        # 'zero_mean_unit_variance' and 'fixed_zero_mean_unit_variance' norms of BMZ can be translated to our 'custom' norm 
+        # providing mean and std
+        if preproc_info["name"] in ["fixed_zero_mean_unit_variance", "zero_mean_unit_variance"]:
+            if (
+                "kwargs" in preproc_info
+                and "mean" in preproc_info["kwargs"]
+            ):
+                mean = preproc_info["kwargs"]["mean"]
+                std = preproc_info["kwargs"]["std"]
+            elif "mean" in preproc_info:
+                mean = preproc_info["mean"]
+                std = preproc_info["std"]
+            else:
+                mean, std = -1., -1.
+
+            opts["DATA.NORMALIZATION.TYPE"] = "custom"
+            opts["DATA.NORMALIZATION.CUSTOM_MEAN"] = mean
+            opts["DATA.NORMALIZATION.CUSTOM_STD"] = std
+
+        # 'scale_linear' norm of BMZ is close to our 'div' norm (TODO: we need to control the "gain" arg)
+        elif preproc_info["name"] == "scale_linear":
+            opts["DATA.NORMALIZATION.TYPE"] = "div"
+
+        # 'scale_range' norm of BMZ is as our PERC_CLIP + 'scale_range' norm
+        elif preproc_info["name"] == "scale_range":
+            opts["DATA.NORMALIZATION.TYPE"] = "scale_range"
+            if (
+                float(preproc_info["kwargs"]["min_percentile"]) != 0
+                or float(preproc_info["kwargs"]["max_percentile"]) != 100
+            ):
+                opts["DATA.NORMALIZATION.PERC_CLIP"] = True
+                opts["DATA.NORMALIZATION.PERC_LOWER"] = float(preproc_info["kwargs"]["min_percentile"])
+                opts["DATA.NORMALIZATION.PERC_UPPER"] = float(preproc_info["kwargs"]["max_percentile"])
+
+    return opts
+
+def get_cfg_key_value(obj, attr, *args):
+    def _getattr(obj, attr):
+        return getattr(obj, attr, *args)
+    return functools.reduce(_getattr, [obj] + attr.split('.'))
+
+def check_images(data_dir, is_mask=False, mask_type="", is_3d=False, dir_name=None):
     """
     Check images in folder.
 
@@ -195,6 +274,9 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False):
 
     is_3d: bool, optional
         Whether to expect to read 3D images or 2D. 
+
+    dir_name : str, optional
+        Name of the directory processed.
 
     Returns
     -------
@@ -214,19 +296,17 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False):
     nclasses = 2
     channel_expected = -1
     data_range_expected = -1
-    error = False
-    error_message = ""
 
     try:
         ids = sorted(next(os.walk(data_dir))[2])
     except Exception as exc:
-        error = True
         error_message = f"Something strange happens when listing files in {data_dir}. Error:\n{exc}"
+        return True, error_message, {}    
 
     if len(ids) == 0:
-        error = True
-        error_message = f"No images found in dir {data_dir}"
- 
+        error_message = f"No images found in folder:\n{data_dir}"
+        return True, error_message, {}    
+
     for id_ in ids:
         img_path = os.path.join(data_dir, id_)
         if id_.endswith(".npy"):
@@ -235,48 +315,24 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False):
             try:
                 img = imread(img_path)
             except Exception:
-                error = True
-                error_message = f"Couldn't load image: {img_path}"
-                break 
-
-        img = np.squeeze(img)
+                error_message = f"Couldn't load image:\n{img_path}"
+                return True, error_message, {}    
 
         # Shape adjust
         if not is_3d:
-            if img.ndim > 3:
-                error = True
-                error_message = f"The following image appears to be 3D, but you selected a 2D problem under the 'Dimension' question: {img_path}"
-
-            if img.ndim == 2:
-                img = np.expand_dims(img, -1)
-            else:
-                if img.shape[0] <= 3:
-                    img = img.transpose((1, 2, 0))
+            img = ensure_2d_shape(img.squeeze(), path=img_path)
         else:
-            if img.ndim < 3:
-                error = True
-                error_message = f"The following image appears to be 2D, but you selected a 3D problem under the 'Dimension' question: {img_path}"
-
-            if img.ndim == 3:
-                img = np.expand_dims(img, -1)
-            else:
-                min_val = min(img.shape)
-                channel_pos = img.shape.index(min_val)
-                if channel_pos != 3 and img.shape[channel_pos] <= 4:
-                    new_pos = [x for x in range(4) if x != channel_pos] + [
-                        channel_pos,
-                    ]
-                    img = img.transpose(new_pos)
+            img = ensure_3d_shape(img.squeeze(), path=img_path)
 
         # Channel check
         if channel_expected == -1:
             channel_expected = img.shape[-1]
         if img.shape[-1] != channel_expected:
-            error = True
-            error_message = "All images need to have the same number of channels and represent same information to "\
-                "ensure the deep learning model can be trained correctly. However, the following image (with "\
-                f"{channel_expected} channels) appears to have a different number of channels than the first image "\
-                f"(with {img.shape[-1]} channels) in the folder: {img_path}"
+            error_message = f"All images need to have the same number of channels and represent same information to "\
+                "ensure the deep learning model can be trained correctly. However, the current image (with "\
+                f"{channel_expected} channels) appears to have a different number of channels than the first image"\
+                f"(with {img.shape[-1]} channels) in the folder. Current image:\n{img_path}"
+            return True, error_message, {}    
 
         # Data range check
         if not is_mask:
@@ -284,18 +340,15 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False):
                 data_range_expected = data_range(img)
             drange = data_range(img)
             if data_range_expected != drange:
-                error = True
-                error_message = "All images must be within the same data range. However, the following image (with a "\
+                error_message = f"All images must be within the same data range. However, the current image (with a "\
                     f"range of {drange}) appears to be in a different data range than the first image (with a range "\
-                    f"of {data_range_expected}) in the folder: {img_path}"
-
-        if error:
-            break 
+                    f"of {data_range_expected}) in the folder. Current image:\n{img_path}"
+                return True, error_message, {}    
 
         if mask_type == "semantic_mask":
             if channel_expected != 1:
-                error = True
-                error_message = f"Semantic masks are expected to have just one channel. Image analized: {img_path}"
+                error_message = f"Semantic masks are expected to have just one channel. Image analized:\n{img_path}"
+                return True, error_message, {}    
             else:
                 nclasses = max(nclasses, len(np.unique(img)))
         elif mask_type == "instance_mask":
@@ -303,18 +356,89 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False):
                 nclasses = max(nclasses, len(np.unique(img[...,1])))
             else:
                 if channel_expected != 1:
-                    error = True
                     error_message = f"Instance masks are expected to have one or two channels. In case two channels are provided "\
                         "the first one must have the instance IDs and one their corresponding semantic (class) labels. "\
-                        f"Image analized: {img_path}"
-                    
-    constraints = {"DATA.PATCH_SIZE_C": channel_expected}
+                        f"Image analized:\n{img_path}"
+                    return True, error_message, {}    
+
+    constraints = {"DATA.PATCH_SIZE_C": channel_expected, }
     if nclasses > 2:
         constraints["MODEL.N_CLASSES"] = nclasses
-        
-    return error, error_message, constraints
 
-def check_csv_files(data_dir, is_3d=False):
+    if dir_name is not None:
+        constraints[dir_name] = len(ids)
+        constraints[dir_name+"_path"] = data_dir
+
+    return False, "", constraints
+
+def ensure_2d_shape(img, path=None):
+    """
+    Read an image from a given path.
+
+    Parameters
+    ----------
+    img : ndarray
+        Image read.
+
+    path : str
+        Path of the image (just use to print possible errors).
+
+    Returns
+    -------
+    img : Numpy 3D array
+        Image read. E.g. ``(y, x, num_classes)``.
+    """
+    if img.ndim > 3:
+        if path is not None:
+            m = "Read image seems to be 3D:\n{}.\nPath:\n{}".format(img.shape, path)
+        else:
+            m = "Read image seems to be 3D:\n{}".format(img.shape)
+        raise ValueError(m)
+
+    if img.ndim == 2:
+        img = np.expand_dims(img, -1)
+    else:
+        if img.shape[0] <= 3:
+            img = img.transpose((1, 2, 0))
+    return img
+
+def ensure_3d_shape(img, path=None):
+    """
+    Read an image from a given path.
+
+    Parameters
+    ----------
+    img : ndarray
+        Image read.
+
+    path : str
+        Path of the image (just use to print possible errors).
+
+    Returns
+    -------
+    img : Numpy 4D array
+        Image read. E.g. ``(z, y, x, num_classes)``.
+    """
+    if img.ndim < 3:
+        if path is not None:
+            m = "Read image seems to be 2D:\n{}.\nPath:\n{}".format(img.shape, path)
+        else:
+            m = "Read image seems to be 2D:\n{}".format(img.shape)
+        raise ValueError(m)
+
+    if img.ndim == 3:
+        img = np.expand_dims(img, -1)
+    else:
+        min_val = min(img.shape)
+        channel_pos = img.shape.index(min_val)
+        if channel_pos != 3 and img.shape[channel_pos] <= 4:
+            new_pos = [x for x in range(4) if x != channel_pos] + [
+                channel_pos,
+            ]
+            img = img.transpose(new_pos)
+    return img
+
+def check_csv_files(data_dir, is_3d=False, dir_name=None):
     """
     Check CSV files in folder.
 
@@ -325,6 +449,9 @@ def check_csv_files(data_dir, is_3d=False):
     
     is_3d: bool, optional
         Whether to expect to read 3D images or 2D. 
+
+    dir_name : str, optional
+        Name of the directory processed.
 
     Returns
     -------
@@ -339,18 +466,16 @@ def check_csv_files(data_dir, is_3d=False):
     """
     print("Checking CSV files . . .")
     nclasses = 0
-    error = False
-    error_message = ""
     try:
         ids = sorted(next(os.walk(data_dir))[2])
     except Exception as exc:
-        error = True
-        error_message = f"Something strange happens when listing files in {data_dir}. Error:\n{exc}"
-
+        error_message = f"Something strange happens when listing files in folder:\n{data_dir}.\nError:\n{exc}"
+        return True, error_message, {}  
+    
     if len(ids) == 0:
-        error = True
-        error_message = f"No images found in dir {data_dir}"
- 
+        error_message = f"No images found in folder:\n{data_dir}"
+        return True, error_message, {}  
+    
     req_columns = ["axis-0", "axis-1"] if not is_3d else ["axis-0", "axis-1", "axis-2"] 
 
     for id_ in ids:
@@ -358,9 +483,9 @@ def check_csv_files(data_dir, is_3d=False):
         try:
             df = pd.read_csv(csv_path)
         except Exception:
-            error = True
-            error_message = f"Couldn't load CSV file: {csv_path}"
-            break 
+            error_message = f"Couldn't load CSV file:\n{csv_path}"
+            return True, error_message, {}  
+         
         df = df.dropna()
       
         # Check columns in csv
@@ -369,12 +494,12 @@ def check_csv_files(data_dir, is_3d=False):
         df = df.rename(columns=lambda x: x.strip())  # trim spaces in column names
         cols_not_in_file = [x for x in req_columns if x not in df.columns]
         if len(cols_not_in_file) > 0:
-            error = True
             if len(cols_not_in_file) == 1:
-                error_message = f"'{cols_not_in_file[0]}' column is not present in CSV file: {csv_path}"
+                error_message = f"'{cols_not_in_file[0]}' column is not present in CSV file:\n{csv_path}"
             else:
-                error_message = f"{cols_not_in_file} columns are not present in CSV file: {csv_path}"
-
+                error_message = f"{cols_not_in_file} columns are not present in CSV file:\n{csv_path}"
+            return True, error_message, {}  
+        
         # Check class in columns
         if 'class' in df.columns:
             df["class"] = df["class"].astype("int")
@@ -382,25 +507,26 @@ def check_csv_files(data_dir, is_3d=False):
 
             uniq = np.sort(np.unique(class_point))
             if uniq[0] != 1:
-                error_message = f"Class number must start with 1 in CSV file: {csv_path}"
-                error = True
+                error_message = f"Class number must start with 1 in CSV file:\n{csv_path}"
+                return True, error_message, {}  
             if not all(uniq == np.array(range(1, uniq.max()+ 1))):
-                error = True
-                error_message = f"Classes must be consecutive, e.g [1,2,3,4,...]. Given {uniq} in CSV file: {csv_path}"
+                error_message = f"Classes must be consecutive, e.g [1,2,3,4,...]. Given {uniq} in CSV file:\n{csv_path}"
+                return True, error_message, {}  
             
             nclasses = uniq.max()
 
-        if error:
-            break 
 
     constraints = {}
     if 'class' in df.columns:
         constraints["MODEL.N_CLASSES"] = nclasses
+    if dir_name is not None:
+        constraints[dir_name] = len(ids)
+        constraints[dir_name+"_path"] = data_dir
 
-    return error, error_message, constraints
+    return False, "", constraints
 
 
-def check_classification_images(data_dir, is_3d=False):
+def check_classification_images(data_dir, is_3d=False, dir_name=None):
     """
     Check classification images in folder.
 
@@ -411,6 +537,9 @@ def check_classification_images(data_dir, is_3d=False):
     
     is_3d: bool, optional
         Whether to expect to read 3D images or 2D. 
+
+    dir_name : str, optional
+        Name of the directory processed.
 
     Returns
     -------
@@ -425,15 +554,14 @@ def check_classification_images(data_dir, is_3d=False):
     """
     print("Checking classification images . . .")
 
-    error_message = ""
-    error = False 
     channel_expected = -1 
     data_range_expected = -1
     class_names = sorted(next(os.walk(data_dir))[1])
     if len(class_names) < 1:
-        error_message = "There is no folder/class in {}".format(data_dir)
-        error = True 
-
+        error_message = "There is no folder/class in folder:\n{}".format(data_dir)
+        return True, error_message, {}  
+    
+    tot_samples = 0
     # Loop over each class/folder
     for folder in class_names:
         class_folder = os.path.join(data_dir, folder)
@@ -441,12 +569,13 @@ def check_classification_images(data_dir, is_3d=False):
         
         ids = sorted(next(os.walk(class_folder))[2])
         if len(ids) == 0:
-            error_message = "There are no images in class {}".format(class_folder)
-            error = True
+            error_message = "There are no images in class folder:\n{}".format(class_folder)
+            return True, error_message, {}  
         else:
             print("Found {} samples".format(len(ids)))
 
         # Check images of each class/folder
+        tot_samples += len(ids)
         for id_ in ids:
             img_path = os.path.join(class_folder, id_)
             if id_.endswith(".npy"):
@@ -455,71 +584,45 @@ def check_classification_images(data_dir, is_3d=False):
                 try:
                     img = imread(img_path)
                 except Exception:
-                    error = True
-                    error_message = f"Couldn't load image: {img_path}"
-                    break 
+                    error_message = f"Couldn't load image:\n{img_path}"
+                    return True, error_message, {}  
 
             img = np.squeeze(img)
-
             # Shape adjust
             if not is_3d:
-                if img.ndim > 3:
-                    error = True
-                    error_message = f"The following image appears to be 2D, but you selected a 2D problem under the 'Dimension' question: {img_path}"
-
-                if img.ndim == 2:
-                    img = np.expand_dims(img, -1)
-                else:
-                    if img.shape[0] <= 3:
-                        img = img.transpose((1, 2, 0))
+                img = ensure_2d_shape(img.squeeze(), path=img_path)
             else:
-                if img.ndim < 3:
-                    error = True
-                    error_message = f"The following image appears to be 2D, but you selected a 3D problem under the 'Dimension' question: {img_path}"
-
-                if img.ndim == 3:
-                    img = np.expand_dims(img, -1)
-                else:
-                    min_val = min(img.shape)
-                    channel_pos = img.shape.index(min_val)
-                    if channel_pos != 3 and img.shape[channel_pos] <= 4:
-                        new_pos = [x for x in range(4) if x != channel_pos] + [
-                            channel_pos,
-                        ]
-                        img = img.transpose(new_pos)
-
+                img = ensure_3d_shape(img.squeeze(), path=img_path)
+                
             # Channel check
             if channel_expected == -1:
                 channel_expected = img.shape[-1]
             if img.shape[-1] != channel_expected:
-                error = True
                 error_message = "All images need to have the same number of channels and represent same information to "\
                     "ensure the deep learning model can be trained correctly. However, the following image (with "\
                     f"{channel_expected} channels) appears to have a different number of channels than the first image "\
-                    f"(with {img.shape[-1]} channels) in the folder: {img_path}"
-
+                    f"(with {img.shape[-1]} channels) in the folder:\n{img_path}"
+                return True, error_message, {}  
+            
             # Data range check
             if data_range_expected == -1:
                 data_range_expected = data_range(img)
             drange = data_range(img)
             if data_range_expected != drange:
-                error = True
                 error_message = "All images must be within the same data range. However, the following image (with a "\
                     f"range of {drange}) appears to be in a different data range than the first image (with a range "\
-                    f"of {data_range_expected}) in the folder: {img_path}"
-
-            if error:
-                break 
-
-        if error:
-            break 
-
+                    f"of {data_range_expected}) in the folder:\n{img_path}"
+                return True, error_message, {}  
+        
     constraints = {
         "DATA.PATCH_SIZE_C": channel_expected,
         "MODEL.N_CLASSES": len(class_names),
     }
+    if dir_name is not None:
+        constraints[dir_name] = tot_samples
+        constraints[dir_name+"_path"] = data_dir
 
-    return error, error_message, constraints
+    return False, "", constraints
 
 def data_range(x):
     if not isinstance(x, np.ndarray):

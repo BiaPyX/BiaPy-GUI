@@ -515,7 +515,8 @@ class Settings:
         ]
         self.settings["wizard_possible_answers"] += [
             [
-                "< 50 px",
+                "0-25 px",
+                "25-50 px",
                 "50-100 px",
                 "100-200 px",
                 "200-500 px",
@@ -527,12 +528,23 @@ class Settings:
         self.settings["wizard_variable_to_map"]["Q6"]["DATA.PATCH_SIZE_XY"] = [
             (256, 256),
             (256, 256),
+            (256, 256),
             (512, 512),
             (512, 512),
             (1024, 1024),
             (1024, 1024),
         ]
+        self.settings["wizard_variable_to_map"]["Q6"]["TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS_RADIUS"] = [
+            [10],
+            [20],
+            [30],
+            [30],
+            [30],
+            [30],
+            [30],
+        ]
         self.settings["wizard_answers"]["DATA.PATCH_SIZE_XY"] = -1
+        self.settings["wizard_answers"]["TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS_RADIUS"] = -1
         self.settings["wizard_sections"] += [["Data", []]]
         self.settings["wizard_from_toc_to_question_index"].append([])
         self.settings["wizard_sections"][-1][1] += ["Object size (xy)"]
@@ -579,7 +591,7 @@ class Settings:
                 "5-10",
                 "10-20",
                 "20-60",
-                ">60",
+                "> 60",
             ]
         ]
         self.settings["wizard_variable_to_map"]["Q7"] = {}

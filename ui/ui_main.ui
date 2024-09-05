@@ -2618,7 +2618,7 @@ background-color:#D3D3D3;
                   <item>
                    <widget class="QStackedWidget" name="wizard_main_frame">
                     <property name="currentIndex">
-                     <number>1</number>
+                     <number>0</number>
                     </property>
                     <widget class="QWidget" name="wizard_start_page">
                      <layout class="QVBoxLayout" name="verticalLayout_54">
@@ -2737,6 +2737,240 @@ background-color:#D3D3D3;
                               </property>
                               <property name="scaledContents">
                                <bool>true</bool>
+                              </property>
+                             </widget>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QFrame" name="frame_80">
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>0</height>
+                            </size>
+                           </property>
+                           <property name="frameShape">
+                            <enum>QFrame::NoFrame</enum>
+                           </property>
+                           <property name="frameShadow">
+                            <enum>QFrame::Raised</enum>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_80">
+                            <item row="3" column="3">
+                             <widget class="QLabel" name="goptions_browse_yaml_path_info_2">
+                              <property name="minimumSize">
+                               <size>
+                                <width>30</width>
+                                <height>30</height>
+                               </size>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>30</width>
+                                <height>30</height>
+                               </size>
+                              </property>
+                              <property name="toolTip">
+                               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Path to store the YAML file&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                              </property>
+                              <property name="styleSheet">
+                               <string notr="true"/>
+                              </property>
+                              <property name="text">
+                               <string/>
+                              </property>
+                              <property name="scaledContents">
+                               <bool>true</bool>
+                              </property>
+                             </widget>
+                            </item>
+                            <item row="0" column="3">
+                             <widget class="QLabel" name="PROBLEM__NDIM__INFO_2">
+                              <property name="minimumSize">
+                               <size>
+                                <width>30</width>
+                                <height>30</height>
+                               </size>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>30</width>
+                                <height>30</height>
+                               </size>
+                              </property>
+                              <property name="toolTip">
+                               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Number of dimensions of the input images&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                              </property>
+                              <property name="statusTip">
+                               <string/>
+                              </property>
+                              <property name="styleSheet">
+                               <string notr="true"/>
+                              </property>
+                              <property name="text">
+                               <string/>
+                              </property>
+                              <property name="scaledContents">
+                               <bool>true</bool>
+                              </property>
+                             </widget>
+                            </item>
+                            <item row="0" column="6">
+                             <widget class="QPushButton" name="wizard_browse_yaml_path_bn">
+                              <property name="maximumSize">
+                               <size>
+                                <width>130</width>
+                                <height>16777215</height>
+                               </size>
+                              </property>
+                              <property name="font">
+                               <font>
+                                <family>DejaVu Math TeX Gyre</family>
+                                <pointsize>12</pointsize>
+                               </font>
+                              </property>
+                              <property name="text">
+                               <string>Browse</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item row="0" column="5">
+                             <widget class="QLineEdit" name="wizard_browse_yaml_path_input">
+                              <property name="minimumSize">
+                               <size>
+                                <width>500</width>
+                                <height>30</height>
+                               </size>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>500</width>
+                                <height>30</height>
+                               </size>
+                              </property>
+                              <property name="font">
+                               <font>
+                                <family>DejaVu Math TeX Gyre</family>
+                                <pointsize>12</pointsize>
+                               </font>
+                              </property>
+                              <property name="statusTip">
+                               <string/>
+                              </property>
+                             </widget>
+                            </item>
+                            <item row="0" column="7">
+                             <spacer name="horizontalSpacer_87">
+                              <property name="orientation">
+                               <enum>Qt::Horizontal</enum>
+                              </property>
+                              <property name="sizeHint" stdset="0">
+                               <size>
+                                <width>40</width>
+                                <height>20</height>
+                               </size>
+                              </property>
+                             </spacer>
+                            </item>
+                            <item row="5" column="3">
+                             <widget class="QLabel" name="goptions_yaml_name_info_2">
+                              <property name="minimumSize">
+                               <size>
+                                <width>30</width>
+                                <height>30</height>
+                               </size>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>30</width>
+                                <height>30</height>
+                               </size>
+                              </property>
+                              <property name="toolTip">
+                               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;YAML file name&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                              </property>
+                              <property name="styleSheet">
+                               <string notr="true"/>
+                              </property>
+                              <property name="text">
+                               <string/>
+                              </property>
+                              <property name="scaledContents">
+                               <bool>true</bool>
+                              </property>
+                             </widget>
+                            </item>
+                            <item row="0" column="1">
+                             <widget class="QLabel" name="wizard_browse_yaml_path_label">
+                              <property name="maximumSize">
+                               <size>
+                                <width>250</width>
+                                <height>35</height>
+                               </size>
+                              </property>
+                              <property name="font">
+                               <font>
+                                <family>DejaVu Math TeX Gyre</family>
+                                <pointsize>12</pointsize>
+                               </font>
+                              </property>
+                              <property name="toolTip">
+                               <string/>
+                              </property>
+                              <property name="text">
+                               <string>Configuration file directory</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item row="3" column="1">
+                             <widget class="QLabel" name="wizard_yaml_name_label">
+                              <property name="maximumSize">
+                               <size>
+                                <width>250</width>
+                                <height>35</height>
+                               </size>
+                              </property>
+                              <property name="font">
+                               <font>
+                                <family>DejaVu Math TeX Gyre</family>
+                                <pointsize>12</pointsize>
+                               </font>
+                              </property>
+                              <property name="toolTip">
+                               <string/>
+                              </property>
+                              <property name="text">
+                               <string>Configuration file name</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item row="3" column="5">
+                             <widget class="QLineEdit" name="wizard_yaml_name_input">
+                              <property name="minimumSize">
+                               <size>
+                                <width>0</width>
+                                <height>30</height>
+                               </size>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>500</width>
+                                <height>30</height>
+                               </size>
+                              </property>
+                              <property name="font">
+                               <font>
+                                <family>DejaVu Math TeX Gyre</family>
+                                <pointsize>12</pointsize>
+                               </font>
+                              </property>
+                              <property name="toolTip">
+                               <string/>
+                              </property>
+                              <property name="text">
+                               <string/>
                               </property>
                              </widget>
                             </item>
@@ -3747,6 +3981,9 @@ QPushButton:hover {
                           <enum>QFrame::Raised</enum>
                          </property>
                          <layout class="QVBoxLayout" name="verticalLayout_61">
+                          <property name="spacing">
+                           <number>25</number>
+                          </property>
                           <item>
                            <widget class="QLabel" name="label_108">
                             <property name="maximumSize">
@@ -3772,6 +4009,69 @@ font-weight: bold;</string>
                            </widget>
                           </item>
                           <item>
+                           <widget class="QFrame" name="frame_78">
+                            <property name="frameShape">
+                             <enum>QFrame::NoFrame</enum>
+                            </property>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                            <layout class="QGridLayout" name="gridLayout_79">
+                             <property name="leftMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="topMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="rightMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="bottomMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="horizontalSpacing">
+                              <number>0</number>
+                             </property>
+                             <property name="verticalSpacing">
+                              <number>10</number>
+                             </property>
+                             <item row="0" column="0">
+                              <widget class="QLabel" name="label_24">
+                               <property name="font">
+                                <font>
+                                 <family>DejaVu Math TeX Gyre</family>
+                                 <pointsize>12</pointsize>
+                                </font>
+                               </property>
+                               <property name="text">
+                                <string>Configuration file</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="1" column="0">
+                              <widget class="QLabel" name="wizard_config_file_label">
+                               <property name="font">
+                                <font>
+                                 <family>DejaVu Math TeX Gyre</family>
+                                 <pointsize>12</pointsize>
+                                 <weight>50</weight>
+                                 <italic>true</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">color: rgb(120,120,120);
+font: italic;</string>
+                               </property>
+                               <property name="text">
+                                <string>TextLabel</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </widget>
+                          </item>
+                          <item>
                            <widget class="QScrollArea" name="scrollArea_18">
                             <property name="styleSheet">
                              <string notr="true">background:rgb(255,255,255);
@@ -3789,7 +4089,7 @@ font-weight: bold;</string>
                                <x>0</x>
                                <y>0</y>
                                <width>930</width>
-                               <height>225</height>
+                               <height>172</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_62"/>
@@ -4000,7 +4300,7 @@ QPushButton:pressed {
                        </font>
                       </property>
                       <property name="currentIndex">
-                       <number>0</number>
+                       <number>1</number>
                       </property>
                       <widget class="QWidget" name="workflow_selection_page">
                        <property name="minimumSize">

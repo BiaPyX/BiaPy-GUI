@@ -134,6 +134,7 @@ class MainWindow(QMainWindow):
         self.ui.wizard_model_browse_bn.clicked.connect(lambda: examine(self, "wizard_model_input", True))
         self.ui.wizard_path_check.clicked.connect(lambda: check_data_from_path(self))
         self.ui.summary_end_bn.clicked.connect(lambda: export_wizard_summary(self))
+        self.ui.wizard_browse_yaml_path_bn.clicked.connect(lambda: examine(self, "wizard_browse_yaml_path_input", False))
 
         # Workflow page buttons
         self.ui.left_arrow_bn.clicked.connect(lambda: UIFunction.move_workflow_view(self, False))
@@ -800,8 +801,8 @@ class MainWindow(QMainWindow):
             else:
                 self.cfg.settings["wizard_answers"]["MODEL.SOURCE"] = "torchvision"
                 self.cfg.settings["wizard_answers"]["MODEL.TORCHVISION_MODEL_NAME"] = model_selected
-                self.cfg.settings["wizard_answers"]["model_restrictions"] = model_restrictions
-                
+
+            self.cfg.settings["wizard_answers"]["model_restrictions"] = model_restrictions    
             self.cfg.settings["wizard_answers"]["MODEL.LOAD_CHECKPOINT"] = False
             
             # Mark section as answered in TOC and remember answer
