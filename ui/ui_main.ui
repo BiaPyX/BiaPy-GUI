@@ -2618,7 +2618,7 @@ background-color:#D3D3D3;
                   <item>
                    <widget class="QStackedWidget" name="wizard_main_frame">
                     <property name="currentIndex">
-                     <number>1</number>
+                     <number>2</number>
                     </property>
                     <widget class="QWidget" name="wizard_start_page">
                      <layout class="QVBoxLayout" name="verticalLayout_54">
@@ -4300,7 +4300,7 @@ QPushButton:pressed {
                        </font>
                       </property>
                       <property name="currentIndex">
-                       <number>2</number>
+                       <number>1</number>
                       </property>
                       <widget class="QWidget" name="workflow_selection_page">
                        <property name="minimumSize">
@@ -6068,14 +6068,14 @@ QPushButton:pressed {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>946</width>
-                          <height>435</height>
+                          <width>948</width>
+                          <height>441</height>
                          </rect>
                         </property>
                         <property name="minimumSize">
                          <size>
-                          <width>921</width>
-                          <height>398</height>
+                          <width>948</width>
+                          <height>441</height>
                          </size>
                         </property>
                         <property name="font">
@@ -6126,6 +6126,9 @@ QPushButton:pressed {
                            <property name="frameShape">
                             <enum>QFrame::NoFrame</enum>
                            </property>
+                           <property name="horizontalScrollBarPolicy">
+                            <enum>Qt::ScrollBarAsNeeded</enum>
+                           </property>
                            <property name="widgetResizable">
                             <bool>true</bool>
                            </property>
@@ -6133,9 +6136,9 @@ QPushButton:pressed {
                             <property name="geometry">
                              <rect>
                               <x>0</x>
-                              <y>0</y>
-                              <width>929</width>
-                              <height>495</height>
+                              <y>-69</y>
+                              <width>931</width>
+                              <height>567</height>
                              </rect>
                             </property>
                             <property name="layoutDirection">
@@ -6263,50 +6266,36 @@ QPushButton:pressed {
                                 <enum>QFrame::Raised</enum>
                                </property>
                                <layout class="QGridLayout" name="gridLayout_26">
-                                <item row="2" column="5">
-                                 <spacer name="horizontalSpacer_20">
-                                  <property name="orientation">
-                                   <enum>Qt::Horizontal</enum>
-                                  </property>
-                                  <property name="sizeHint" stdset="0">
+                                <item row="1" column="2">
+                                 <widget class="QLabel" name="LOAD_PRETRAINED_MODEL__INFO">
+                                  <property name="minimumSize">
                                    <size>
-                                    <width>40</width>
-                                    <height>20</height>
+                                    <width>30</width>
+                                    <height>30</height>
                                    </size>
                                   </property>
-                                 </spacer>
-                                </item>
-                                <item row="2" column="4">
-                                 <widget class="QPushButton" name="checkpoint_file_path_browse_bn">
+                                  <property name="maximumSize">
+                                   <size>
+                                    <width>30</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
                                   <property name="font">
                                    <font>
-                                    <family>DejaVu Math TeX Gyre</family>
+                                    <family>Arial</family>
                                     <pointsize>12</pointsize>
                                    </font>
                                   </property>
                                   <property name="text">
-                                   <string>Browse</string>
-                                  </property>
-                                 </widget>
-                                </item>
-                                <item row="1" column="1">
-                                 <widget class="QLabel" name="label_148">
-                                  <property name="font">
-                                   <font>
-                                    <family>DejaVu Math TeX Gyre</family>
-                                    <pointsize>12</pointsize>
-                                   </font>
-                                  </property>
-                                  <property name="toolTip">
                                    <string/>
                                   </property>
-                                  <property name="text">
-                                   <string>Load already existing model</string>
+                                  <property name="scaledContents">
+                                   <bool>true</bool>
                                   </property>
                                  </widget>
                                 </item>
                                 <item row="1" column="3">
-                                 <widget class="QComboBox" name="MODEL__LOAD_CHECKPOINT__INPUT">
+                                 <widget class="QComboBox" name="LOAD_PRETRAINED_MODEL__INPUT">
                                   <property name="minimumSize">
                                    <size>
                                     <width>200</width>
@@ -6321,15 +6310,9 @@ QPushButton:pressed {
                                   </property>
                                   <property name="font">
                                    <font>
-                                    <family>DejaVu Math TeX Gyre</family>
+                                    <family>Arial</family>
                                     <pointsize>12</pointsize>
                                    </font>
-                                  </property>
-                                  <property name="focusPolicy">
-                                   <enum>Qt::WheelFocus</enum>
-                                  </property>
-                                  <property name="contextMenuPolicy">
-                                   <enum>Qt::DefaultContextMenu</enum>
                                   </property>
                                   <item>
                                    <property name="text">
@@ -6343,7 +6326,184 @@ QPushButton:pressed {
                                   </item>
                                  </widget>
                                 </item>
+                                <item row="2" column="2">
+                                 <widget class="QLabel" name="MODEL__SOURCE__INFO">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>30</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
+                                  <property name="maximumSize">
+                                   <size>
+                                    <width>30</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
+                                  <property name="font">
+                                   <font>
+                                    <family>Arial</family>
+                                    <pointsize>12</pointsize>
+                                   </font>
+                                  </property>
+                                  <property name="toolTip">
+                                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Source of the pretrained model&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                  </property>
+                                  <property name="text">
+                                   <string/>
+                                  </property>
+                                  <property name="scaledContents">
+                                   <bool>true</bool>
+                                  </property>
+                                 </widget>
+                                </item>
                                 <item row="2" column="3">
+                                 <widget class="QComboBox" name="MODEL__SOURCE__INPUT">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>300</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
+                                  <property name="maximumSize">
+                                   <size>
+                                    <width>300</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
+                                  <property name="font">
+                                   <font>
+                                    <family>Arial</family>
+                                    <pointsize>12</pointsize>
+                                   </font>
+                                  </property>
+                                  <item>
+                                   <property name="text">
+                                    <string>I have a model trained with BiaPy</string>
+                                   </property>
+                                  </item>
+                                  <item>
+                                   <property name="text">
+                                    <string>I want to check other online sources</string>
+                                   </property>
+                                  </item>
+                                 </widget>
+                                </item>
+                                <item row="5" column="1">
+                                 <widget class="QLabel" name="MODEL__BMZ__SOURCE_MODEL_ID__LABEL">
+                                  <property name="font">
+                                   <font>
+                                    <family>Arial</family>
+                                    <pointsize>12</pointsize>
+                                   </font>
+                                  </property>
+                                  <property name="text">
+                                   <string>Model ID</string>
+                                  </property>
+                                  <property name="indent">
+                                   <number>15</number>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="1" column="1">
+                                 <widget class="QLabel" name="LOAD_PRETRAINED_MODEL__LABEL">
+                                  <property name="font">
+                                   <font>
+                                    <family>Arial</family>
+                                    <pointsize>12</pointsize>
+                                   </font>
+                                  </property>
+                                  <property name="text">
+                                   <string>Load pretrained model</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="2" column="1">
+                                 <widget class="QLabel" name="MODEL__SOURCE__LABEL">
+                                  <property name="font">
+                                   <font>
+                                    <family>Arial</family>
+                                    <pointsize>12</pointsize>
+                                   </font>
+                                  </property>
+                                  <property name="text">
+                                   <string>Source of the model</string>
+                                  </property>
+                                  <property name="indent">
+                                   <number>15</number>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="5" column="3">
+                                 <widget class="QLineEdit" name="MODEL__BMZ__SOURCE_MODEL_ID__INPUT">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>500</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
+                                  <property name="maximumSize">
+                                   <size>
+                                    <width>500</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
+                                  <property name="font">
+                                   <font>
+                                    <family>Arial</family>
+                                    <pointsize>12</pointsize>
+                                   </font>
+                                  </property>
+                                  <property name="readOnly">
+                                   <bool>true</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="4" column="4">
+                                 <widget class="QPushButton" name="checkpoint_file_path_browse_bn">
+                                  <property name="font">
+                                   <font>
+                                    <family>DejaVu Math TeX Gyre</family>
+                                    <pointsize>12</pointsize>
+                                   </font>
+                                  </property>
+                                  <property name="text">
+                                   <string>Browse</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="5" column="2">
+                                 <widget class="QLabel" name="MODEL__BMZ__SOURCE_MODEL_ID__INFO">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>30</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
+                                  <property name="maximumSize">
+                                   <size>
+                                    <width>30</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
+                                  <property name="font">
+                                   <font>
+                                    <family>Arial</family>
+                                    <pointsize>12</pointsize>
+                                   </font>
+                                  </property>
+                                  <property name="toolTip">
+                                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Model identifier&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                  </property>
+                                  <property name="text">
+                                   <string/>
+                                  </property>
+                                  <property name="scaledContents">
+                                   <bool>true</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="4" column="3">
                                  <widget class="QLineEdit" name="PATHS__CHECKPOINT_FILE__INPUT">
                                   <property name="minimumSize">
                                    <size>
@@ -6359,7 +6519,7 @@ QPushButton:pressed {
                                   </property>
                                   <property name="font">
                                    <font>
-                                    <family>DejaVu Math TeX Gyre</family>
+                                    <family>Arial</family>
                                     <pointsize>12</pointsize>
                                    </font>
                                   </property>
@@ -6368,7 +6528,7 @@ QPushButton:pressed {
                                   </property>
                                  </widget>
                                 </item>
-                                <item row="2" column="1">
+                                <item row="4" column="1">
                                  <widget class="QLabel" name="checkpoint_file_path_browse_label">
                                   <property name="font">
                                    <font>
@@ -6382,37 +6542,12 @@ QPushButton:pressed {
                                   <property name="text">
                                    <string>Model file</string>
                                   </property>
-                                 </widget>
-                                </item>
-                                <item row="1" column="2">
-                                 <widget class="QLabel" name="MODEL__LOAD_CHECKPOINT__LABEL">
-                                  <property name="minimumSize">
-                                   <size>
-                                    <width>30</width>
-                                    <height>30</height>
-                                   </size>
-                                  </property>
-                                  <property name="maximumSize">
-                                   <size>
-                                    <width>30</width>
-                                    <height>30</height>
-                                   </size>
-                                  </property>
-                                  <property name="toolTip">
-                                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Load previous training weigths (needed for test/inference phase or to train again but not from scratch). If the checkpoint file is empty, BiaPy will search for the checkpoint in the following manner: if the output folder and the job name match, BiaPy will locate the model's weights within the 'checkpoints' directory. On the other hand, if the checkpoint file path is specified that path will be used instead&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                  </property>
-                                  <property name="styleSheet">
-                                   <string notr="true"/>
-                                  </property>
-                                  <property name="text">
-                                   <string/>
-                                  </property>
-                                  <property name="scaledContents">
-                                   <bool>true</bool>
+                                  <property name="indent">
+                                   <number>15</number>
                                   </property>
                                  </widget>
                                 </item>
-                                <item row="2" column="2">
+                                <item row="4" column="2">
                                  <widget class="QLabel" name="PATHS__CHECKPOINT_FILE__INFO">
                                   <property name="minimumSize">
                                    <size>
@@ -6439,6 +6574,38 @@ QPushButton:pressed {
                                    <bool>true</bool>
                                   </property>
                                  </widget>
+                                </item>
+                                <item row="5" column="4">
+                                 <widget class="QPushButton" name="MODEL__BMZ__SOURCE_MODEL_ID__BN">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>130</width>
+                                    <height>0</height>
+                                   </size>
+                                  </property>
+                                  <property name="font">
+                                   <font>
+                                    <family>Arial</family>
+                                    <pointsize>12</pointsize>
+                                   </font>
+                                  </property>
+                                  <property name="text">
+                                   <string>Check models</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="4" column="5">
+                                 <spacer name="horizontalSpacer_10">
+                                  <property name="orientation">
+                                   <enum>Qt::Horizontal</enum>
+                                  </property>
+                                  <property name="sizeHint" stdset="0">
+                                   <size>
+                                    <width>40</width>
+                                    <height>20</height>
+                                   </size>
+                                  </property>
+                                 </spacer>
                                 </item>
                                </layout>
                               </widget>
@@ -6481,7 +6648,7 @@ QPushButton:pressed {
                                </property>
                               </spacer>
                              </item>
-                             <item row="8" column="0" colspan="5">
+                             <item row="8" column="0" colspan="3">
                               <widget class="QFrame" name="goptions_advanced_options_frame">
                                <property name="minimumSize">
                                 <size>
@@ -6587,7 +6754,7 @@ QPushButton:pressed {
                                     <rect>
                                      <x>0</x>
                                      <y>0</y>
-                                     <width>864</width>
+                                     <width>854</width>
                                      <height>288</height>
                                     </rect>
                                    </property>
@@ -7098,53 +7265,6 @@ QPushButton:pressed {
                                 <enum>QFrame::Raised</enum>
                                </property>
                                <layout class="QGridLayout" name="gridLayout_27">
-                                <item row="3" column="4">
-                                 <widget class="QLineEdit" name="goptions_browse_yaml_path_input">
-                                  <property name="minimumSize">
-                                   <size>
-                                    <width>500</width>
-                                    <height>30</height>
-                                   </size>
-                                  </property>
-                                  <property name="maximumSize">
-                                   <size>
-                                    <width>500</width>
-                                    <height>30</height>
-                                   </size>
-                                  </property>
-                                  <property name="font">
-                                   <font>
-                                    <family>DejaVu Math TeX Gyre</family>
-                                    <pointsize>12</pointsize>
-                                   </font>
-                                  </property>
-                                  <property name="statusTip">
-                                   <string/>
-                                  </property>
-                                 </widget>
-                                </item>
-                                <item row="0" column="1" colspan="2">
-                                 <widget class="QLabel" name="PROBLEM__NDIM__LABEL">
-                                  <property name="maximumSize">
-                                   <size>
-                                    <width>200</width>
-                                    <height>35</height>
-                                   </size>
-                                  </property>
-                                  <property name="font">
-                                   <font>
-                                    <family>DejaVu Math TeX Gyre</family>
-                                    <pointsize>12</pointsize>
-                                   </font>
-                                  </property>
-                                  <property name="toolTip">
-                                   <string/>
-                                  </property>
-                                  <property name="text">
-                                   <string>Image dimension</string>
-                                  </property>
-                                 </widget>
-                                </item>
                                 <item row="5" column="4">
                                  <widget class="QLineEdit" name="goptions_yaml_name_input">
                                   <property name="minimumSize">
@@ -7173,6 +7293,31 @@ QPushButton:pressed {
                                   </property>
                                  </widget>
                                 </item>
+                                <item row="3" column="4">
+                                 <widget class="QLineEdit" name="goptions_browse_yaml_path_input">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>500</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
+                                  <property name="maximumSize">
+                                   <size>
+                                    <width>500</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
+                                  <property name="font">
+                                   <font>
+                                    <family>DejaVu Math TeX Gyre</family>
+                                    <pointsize>12</pointsize>
+                                   </font>
+                                  </property>
+                                  <property name="statusTip">
+                                   <string/>
+                                  </property>
+                                 </widget>
+                                </item>
                                 <item row="5" column="1">
                                  <widget class="QLabel" name="goptions_yaml_name_label">
                                   <property name="maximumSize">
@@ -7194,19 +7339,6 @@ QPushButton:pressed {
                                    <string>Configuration file name</string>
                                   </property>
                                  </widget>
-                                </item>
-                                <item row="3" column="7">
-                                 <spacer name="horizontalSpacer_28">
-                                  <property name="orientation">
-                                   <enum>Qt::Horizontal</enum>
-                                  </property>
-                                  <property name="sizeHint" stdset="0">
-                                   <size>
-                                    <width>40</width>
-                                    <height>20</height>
-                                   </size>
-                                  </property>
-                                 </spacer>
                                 </item>
                                 <item row="0" column="4">
                                  <widget class="QComboBox" name="PROBLEM__NDIM__INPUT">
@@ -7281,6 +7413,34 @@ QPushButton:pressed {
                                   </property>
                                  </widget>
                                 </item>
+                                <item row="3" column="3">
+                                 <widget class="QLabel" name="goptions_browse_yaml_path_info">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>30</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
+                                  <property name="maximumSize">
+                                   <size>
+                                    <width>30</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
+                                  <property name="toolTip">
+                                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Path to store the YAML file&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true"/>
+                                  </property>
+                                  <property name="text">
+                                   <string/>
+                                  </property>
+                                  <property name="scaledContents">
+                                   <bool>true</bool>
+                                  </property>
+                                 </widget>
+                                </item>
                                 <item row="0" column="3">
                                  <widget class="QLabel" name="PROBLEM__NDIM__INFO">
                                   <property name="minimumSize">
@@ -7300,34 +7460,6 @@ QPushButton:pressed {
                                   </property>
                                   <property name="statusTip">
                                    <string/>
-                                  </property>
-                                  <property name="styleSheet">
-                                   <string notr="true"/>
-                                  </property>
-                                  <property name="text">
-                                   <string/>
-                                  </property>
-                                  <property name="scaledContents">
-                                   <bool>true</bool>
-                                  </property>
-                                 </widget>
-                                </item>
-                                <item row="3" column="3">
-                                 <widget class="QLabel" name="goptions_browse_yaml_path_info">
-                                  <property name="minimumSize">
-                                   <size>
-                                    <width>30</width>
-                                    <height>30</height>
-                                   </size>
-                                  </property>
-                                  <property name="maximumSize">
-                                   <size>
-                                    <width>30</width>
-                                    <height>30</height>
-                                   </size>
-                                  </property>
-                                  <property name="toolTip">
-                                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Path to store the YAML file&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                   </property>
                                   <property name="styleSheet">
                                    <string notr="true"/>
@@ -7365,6 +7497,41 @@ QPushButton:pressed {
                                   </property>
                                   <property name="scaledContents">
                                    <bool>true</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="3" column="7">
+                                 <spacer name="horizontalSpacer_28">
+                                  <property name="orientation">
+                                   <enum>Qt::Horizontal</enum>
+                                  </property>
+                                  <property name="sizeHint" stdset="0">
+                                   <size>
+                                    <width>40</width>
+                                    <height>20</height>
+                                   </size>
+                                  </property>
+                                 </spacer>
+                                </item>
+                                <item row="0" column="1">
+                                 <widget class="QLabel" name="PROBLEM__NDIM__LABEL">
+                                  <property name="maximumSize">
+                                   <size>
+                                    <width>200</width>
+                                    <height>35</height>
+                                   </size>
+                                  </property>
+                                  <property name="font">
+                                   <font>
+                                    <family>DejaVu Math TeX Gyre</family>
+                                    <pointsize>12</pointsize>
+                                   </font>
+                                  </property>
+                                  <property name="toolTip">
+                                   <string/>
+                                  </property>
+                                  <property name="text">
+                                   <string>Image dimension</string>
                                   </property>
                                  </widget>
                                 </item>
@@ -7597,7 +7764,7 @@ QPushButton:pressed {
                                 <property name="geometry">
                                  <rect>
                                   <x>0</x>
-                                  <y>-169</y>
+                                  <y>0</y>
                                   <width>931</width>
                                   <height>7950</height>
                                  </rect>
@@ -37188,8 +37355,8 @@ QPushButton:pressed {
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>31</width>
-                               <height>19</height>
+                               <width>896</width>
+                               <height>101</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_32">

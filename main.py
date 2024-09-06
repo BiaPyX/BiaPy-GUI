@@ -165,6 +165,7 @@ class MainWindow(QMainWindow):
         self.ui.goptions_advanced_bn.clicked.connect(lambda: expand_hide_advanced_options(self, "goptions_advanced_bn", "goptions_advanced_options_scrollarea"))
         self.ui.goptions_browse_yaml_path_bn.clicked.connect(lambda: examine(self, "goptions_browse_yaml_path_input", False))
         self.ui.checkpoint_file_path_browse_bn.clicked.connect(lambda: examine(self, "PATHS__CHECKPOINT_FILE__INPUT"))
+        self.ui.MODEL__BMZ__SOURCE_MODEL_ID__BN.clicked.connect(lambda: check_models_from_other_sources(self, from_wizard=False))
 
         # Train page buttons 
         self.ui.DATA__VAL__CROSS_VAL_NFOLD__INPUT.setValidator(self.int_validator)
@@ -283,9 +284,17 @@ class MainWindow(QMainWindow):
 
         self.condition_db = Widget_conditions()
 
-        self.ui.MODEL__LOAD_CHECKPOINT__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
-            ["PATHS__CHECKPOINT_FILE__INPUT", "PATHS__CHECKPOINT_FILE__INFO", "checkpoint_file_path_browse_bn", "checkpoint_file_path_browse_label",
-             "checkpoint_loading_opt_label", "checkpoint_loading_opt_frame"]))
+        self.ui.LOAD_PRETRAINED_MODEL__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
+            ["MODEL__SOURCE__LABEL","MODEL__SOURCE__INFO","MODEL__SOURCE__INPUT",
+             "checkpoint_file_path_browse_label", "PATHS__CHECKPOINT_FILE__INFO","PATHS__CHECKPOINT_FILE__INPUT","checkpoint_file_path_browse_bn", 
+             "checkpoint_loading_opt_label", "checkpoint_loading_opt_frame", 
+             "MODEL__BMZ__SOURCE_MODEL_ID__LABEL","MODEL__BMZ__SOURCE_MODEL_ID__INFO","MODEL__BMZ__SOURCE_MODEL_ID__INPUT","MODEL__BMZ__SOURCE_MODEL_ID__BN"]))
+
+        self.ui.MODEL__SOURCE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
+            ["checkpoint_file_path_browse_label", "PATHS__CHECKPOINT_FILE__INFO","PATHS__CHECKPOINT_FILE__INPUT","checkpoint_file_path_browse_bn", 
+             "checkpoint_loading_opt_label", "checkpoint_loading_opt_frame", 
+             "MODEL__BMZ__SOURCE_MODEL_ID__LABEL","MODEL__BMZ__SOURCE_MODEL_ID__INFO","MODEL__BMZ__SOURCE_MODEL_ID__INPUT","MODEL__BMZ__SOURCE_MODEL_ID__BN",]))
+        
         self.ui.job_name_input.textChanged.connect(lambda: mark_syntax_error(self, "job_name_input", ["empty"]))   
         self.ui.goptions_yaml_name_input.textChanged.connect(lambda: mark_syntax_error(self, "goptions_yaml_name_input", ["empty"]))
         self.ui.goptions_browse_yaml_path_input.textChanged.connect(lambda: mark_syntax_error(self, "goptions_browse_yaml_path_input", ["empty"]))      
@@ -646,6 +655,8 @@ class MainWindow(QMainWindow):
         # Variables to control the threads/workers of spin window 
         self.thread_spin = None
         self.worker_spin = None
+        
+        self.external_model_restrictions = None
 
         # Options to allow user moving the GUI
         self.dragPos = self.pos()
@@ -753,14 +764,14 @@ class MainWindow(QMainWindow):
         self.basic_dialog.exec_()
 
 
-    def add_model_card(self, model_count, model_info):
+    def add_model_card(self, model_count, model_info, from_wizard):
         """ 
         Add model card to model carrousel window. This function is called by model chgecking thread. 
         """
         if self.model_carrousel_dialog is None: 
             self.model_carrousel_dialog = model_card_carrousel_Ui(self)
 
-        self.model_carrousel_dialog.create_model_card(model_count, model_info)
+        self.model_carrousel_dialog.create_model_card(model_count, model_info, from_wizard=from_wizard)
 
     def model_carrousel_dialog_exec(self):
         """ 
@@ -772,25 +783,29 @@ class MainWindow(QMainWindow):
         center_window(self.model_carrousel_dialog, self.geometry())
         self.model_carrousel_dialog.exec_()
 
-    def select_external_model(self, model_selected, model_source, model_restrictions):
+    def select_external_model(self, model_selected, model_source, model_restrictions, from_wizard=True):
         self.yes_no_exec(f"Do you want to select '{model_selected}' model?")
         if self.yes_no.answer:
-            set_text(self.ui.wizard_model_input, model_selected+"({})".format(model_source))
-            if "BioImage Model Zoo" == model_source:
-                self.cfg.settings["wizard_answers"]["MODEL.SOURCE"] = "bmz"
-                self.cfg.settings["wizard_answers"]["MODEL.BMZ.SOURCE_MODEL_ID"] = model_selected
-            else:
-                self.cfg.settings["wizard_answers"]["MODEL.SOURCE"] = "torchvision"
-                self.cfg.settings["wizard_answers"]["MODEL.TORCHVISION_MODEL_NAME"] = model_selected
+            if from_wizard:
+                set_text(self.ui.wizard_model_input, model_selected+" ({})".format(model_source))
+                if "BioImage Model Zoo" == model_source:
+                    self.cfg.settings["wizard_answers"]["MODEL.SOURCE"] = "bmz"
+                    self.cfg.settings["wizard_answers"]["MODEL.BMZ.SOURCE_MODEL_ID"] = model_selected
+                else:
+                    self.cfg.settings["wizard_answers"]["MODEL.SOURCE"] = "torchvision"
+                    self.cfg.settings["wizard_answers"]["MODEL.TORCHVISION_MODEL_NAME"] = model_selected
 
-            self.cfg.settings["wizard_answers"]["model_restrictions"] = model_restrictions    
-            self.cfg.settings["wizard_answers"]["MODEL.LOAD_CHECKPOINT"] = False
-            
-            # Mark section as answered in TOC and remember answer
-            index = self.cfg.settings['wizard_from_question_index_to_toc'][self.cfg.settings['wizard_question_index']]        
-            self.wizard_toc_model.item(index[0]).child(index[1]).setForeground(QColor(64,144,253))
-            self.cfg.settings["wizard_question_answered_index"][self.cfg.settings['wizard_question_index']] = model_selected
-            
+                self.cfg.settings["wizard_answers"]["model_restrictions"] = model_restrictions    
+                self.cfg.settings["wizard_answers"]["MODEL.LOAD_CHECKPOINT"] = False
+                
+                # Mark section as answered in TOC and remember answer
+                index = self.cfg.settings['wizard_from_question_index_to_toc'][self.cfg.settings['wizard_question_index']]        
+                self.wizard_toc_model.item(index[0]).child(index[1]).setForeground(QColor(64,144,253))
+                self.cfg.settings["wizard_question_answered_index"][self.cfg.settings['wizard_question_index']] = model_selected
+            else:
+                set_text(self.ui.MODEL__BMZ__SOURCE_MODEL_ID__INPUT, model_selected+" ({})".format(model_source))
+                self.external_model_restrictions = model_restrictions
+
             # Close window
             self.model_carrousel_dialog.close()
 

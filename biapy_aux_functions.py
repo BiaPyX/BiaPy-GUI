@@ -194,7 +194,7 @@ def check_model_restrictions(
     Returns
     -------
     option_list: dict
-        variables and values to change in current configuration. These changes
+        Variables and values to change in current configuration. These changes
         are imposed by the selected model. 
     """
     opts = {}    

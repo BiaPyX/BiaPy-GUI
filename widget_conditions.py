@@ -14,46 +14,147 @@ class Widget_conditions():
         # So the widget "A" is visible if two conditions are satisfied: 1) the widget "B" need to have "C" or "D" value and 2) "E" widget
         # need to have a value between "F", "G" or "H".
         self.conditions = {
-            "PATHS__CHECKPOINT_FILE__INPUT": 
+            "MODEL__BMZ__SOURCE_MODEL_ID__LABEL": 
                 {
-                    "MODEL__LOAD_CHECKPOINT__INPUT": 
+                    "LOAD_PRETRAINED_MODEL__INPUT": 
                     [
                         "Yes"
+                    ],
+                    "MODEL__SOURCE__INPUT": 
+                    [
+                        "I want to check other online sources"
+                    ],
+                },
+            "MODEL__BMZ__SOURCE_MODEL_ID__INFO": 
+                {
+                    "LOAD_PRETRAINED_MODEL__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                    "MODEL__SOURCE__INPUT": 
+                    [
+                        "I want to check other online sources"
+                    ],
+                },
+            "MODEL__BMZ__SOURCE_MODEL_ID__INPUT": 
+                {
+                    "LOAD_PRETRAINED_MODEL__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                    "MODEL__SOURCE__INPUT": 
+                    [
+                        "I want to check other online sources"
+                    ],
+                },
+            "MODEL__BMZ__SOURCE_MODEL_ID__BN": 
+                {
+                    "LOAD_PRETRAINED_MODEL__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                    "MODEL__SOURCE__INPUT": 
+                    [
+                        "I want to check other online sources"
+                    ],
+                },
+            "MODEL__SOURCE__LABEL": 
+                {
+                    "LOAD_PRETRAINED_MODEL__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                    "MODEL__SOURCE__INPUT": 
+                    [
+                        "I have a model trained with BiaPy"
+                    ],
+                },
+            "MODEL__SOURCE__INFO": 
+                {
+                    "LOAD_PRETRAINED_MODEL__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                    "MODEL__SOURCE__INPUT": 
+                    [
+                        "I have a model trained with BiaPy"
+                    ],
+                },
+            "MODEL__SOURCE__INPUT": 
+                {
+                    "LOAD_PRETRAINED_MODEL__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                    "MODEL__SOURCE__INPUT": 
+                    [
+                        "I have a model trained with BiaPy"
+                    ],
+                },
+            "PATHS__CHECKPOINT_FILE__INPUT": 
+                {
+                    "LOAD_PRETRAINED_MODEL__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                    "MODEL__SOURCE__INPUT": 
+                    [
+                        "I have a model trained with BiaPy"
                     ],
                 },
             "PATHS__CHECKPOINT_FILE__INFO": 
                 {
-                    "MODEL__LOAD_CHECKPOINT__INPUT": 
+                    "LOAD_PRETRAINED_MODEL__INPUT": 
                     [
                         "Yes"
+                    ],
+                    "MODEL__SOURCE__INPUT": 
+                    [
+                        "I have a model trained with BiaPy"
                     ],
                 },
             "checkpoint_file_path_browse_bn": 
                 {
-                    "MODEL__LOAD_CHECKPOINT__INPUT": 
+                    "LOAD_PRETRAINED_MODEL__INPUT": 
                     [
                         "Yes"
+                    ],
+                    "MODEL__SOURCE__INPUT": 
+                    [
+                        "I have a model trained with BiaPy"
                     ],
                 },
             "checkpoint_file_path_browse_label": 
                 {
-                    "MODEL__LOAD_CHECKPOINT__INPUT": 
+                    "LOAD_PRETRAINED_MODEL__INPUT": 
                     [
                         "Yes"
+                    ],
+                    "MODEL__SOURCE__INPUT": 
+                    [
+                        "I have a model trained with BiaPy"
                     ],
                 }, 
             "checkpoint_loading_opt_label": 
                 {
-                    "MODEL__LOAD_CHECKPOINT__INPUT": 
+                    "LOAD_PRETRAINED_MODEL__INPUT": 
                     [
                         "Yes"
+                    ],
+                    "MODEL__SOURCE__INPUT": 
+                    [
+                        "I have a model trained with BiaPy"
                     ],
                 },
             "checkpoint_loading_opt_frame": 
                 {
-                    "MODEL__LOAD_CHECKPOINT__INPUT": 
+                    "LOAD_PRETRAINED_MODEL__INPUT": 
                     [
                         "Yes"
+                    ],
+                    "MODEL__SOURCE__INPUT": 
+                    [
+                        "I have a model trained with BiaPy"
                     ],
                 },
             "train_tab_widget": 

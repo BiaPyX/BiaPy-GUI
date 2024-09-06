@@ -383,7 +383,7 @@ class model_card_carrousel_Ui(QDialog):
         self.source_logo.append(QPixmap(resource_path(os.path.join("images","bmz_logo.png"))))
         self.source_logo.append(QPixmap(resource_path(os.path.join("images","torchvision_logo.png"))))
 
-    def create_model_card(self, model_number, model_info):
+    def create_model_card(self, model_number, model_info, from_wizard=True):
         print("Creating model card . . .")
         # Create model card the first time (future checks will reuse the widgets)
         if model_number > (self.total_model_cards_created - 1):
@@ -483,7 +483,7 @@ class model_card_carrousel_Ui(QDialog):
             self.model_cards[model_number][f"verticalLayout_5_{model_number}"].addWidget(self.model_cards[model_number][f"model_card_subframe_{model_number}"])
             self.model_carrousel_window.verticalLayout_6.addWidget(self.model_cards[model_number][f"model_card_frame_{model_number}"])
 
-            self.model_cards[model_number][f"model_card_frame_{model_number}"].mousePressEvent = lambda event, a=model_info['nickname'],b=model_info['source'],c=model_info['imposed_vars']: self.parent.select_external_model(a,b,c)
+            self.model_cards[model_number][f"model_card_frame_{model_number}"].mousePressEvent = lambda event, a=model_info['nickname'],b=model_info['source'],c=model_info['imposed_vars'],d=from_wizard: self.parent.select_external_model(a,b,c,d)
 
             self.total_model_cards_created += 1
 

@@ -426,10 +426,21 @@ class UIFunction(MainWindow):
             Main window of the application.
         """
         main_window.ui.goptions_advanced_options_scrollarea.setVisible(False)
+
+        main_window.ui.MODEL__SOURCE__LABEL.setVisible(False)
+        main_window.ui.MODEL__SOURCE__INFO.setVisible(False)
+        main_window.ui.MODEL__SOURCE__INPUT.setVisible(False)
+
         main_window.ui.PATHS__CHECKPOINT_FILE__INPUT.setVisible(False)
         main_window.ui.PATHS__CHECKPOINT_FILE__INFO.setVisible(False)
         main_window.ui.checkpoint_file_path_browse_bn.setVisible(False)
         main_window.ui.checkpoint_file_path_browse_label.setVisible(False)
+
+        main_window.ui.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setVisible(False)
+        main_window.ui.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setVisible(False)
+        main_window.ui.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setVisible(False)
+        main_window.ui.MODEL__BMZ__SOURCE_MODEL_ID__BN.setVisible(False)
+
         main_window.ui.checkpoint_loading_opt_label.setVisible(False)
         main_window.ui.checkpoint_loading_opt_frame.setVisible(False)
 
@@ -448,7 +459,9 @@ class UIFunction(MainWindow):
         main_window.ui.PROBLEM__NDIM__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.goptions_browse_yaml_path_info.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.goptions_yaml_name_info.setPixmap(main_window.cfg.settings['info_image'])
-        main_window.ui.MODEL__LOAD_CHECKPOINT__LABEL.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.LOAD_PRETRAINED_MODEL__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.MODEL__SOURCE__INFO.setPixmap(main_window.cfg.settings['info_image'])
+        main_window.ui.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.PATHS__CHECKPOINT_FILE__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.SYSTEM__NUM_CPUS__INFO.setPixmap(main_window.cfg.settings['info_image'])
         main_window.ui.SYSTEM__NUM_WORKERS__INFO.setPixmap(main_window.cfg.settings['info_image'])

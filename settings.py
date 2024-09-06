@@ -80,6 +80,16 @@ class Settings:
             "Image\nclassification",
             "Image to image",
         ]
+        self.settings["workflow_key_names"] = [
+            "SEMANTIC_SEG",
+            "INSTANCE_SEG",
+            "DETECTION",
+            "DENOISING",
+            "SUPER_RESOLUTION",
+            "SELF_SUPERVISED",
+            "CLASSIFICATION",
+            "IMAGE_TO_IMAGE",
+        ]
         self.settings["selected_workflow"] = 1
         self.settings["dot_images"] = self.settings["dot_images"] = [
             QPixmap(resource_path(os.path.join("images", "bn_images", "dot_enable.svg"))),

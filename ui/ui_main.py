@@ -2471,8 +2471,8 @@ class Ui_MainWindow(object):
         self.goptions_page.setObjectName(u"goptions_page")
         self.goptions_general_frame = QFrame(self.goptions_page)
         self.goptions_general_frame.setObjectName(u"goptions_general_frame")
-        self.goptions_general_frame.setGeometry(QRect(0, 0, 946, 435))
-        self.goptions_general_frame.setMinimumSize(QSize(921, 398))
+        self.goptions_general_frame.setGeometry(QRect(0, 0, 948, 441))
+        self.goptions_general_frame.setMinimumSize(QSize(948, 441))
         self.goptions_general_frame.setFont(font)
         self.goptions_general_frame.setFrameShape(QFrame.NoFrame)
         self.goptions_general_frame.setFrameShadow(QFrame.Raised)
@@ -2485,10 +2485,11 @@ class Ui_MainWindow(object):
         self.goptions_scrollArea.setMinimumSize(QSize(0, 30))
         self.goptions_scrollArea.setFont(font)
         self.goptions_scrollArea.setFrameShape(QFrame.NoFrame)
+        self.goptions_scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
         self.goptions_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 929, 495))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, -69, 931, 567))
         self.scrollAreaWidgetContents.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout.setObjectName(u"gridLayout")
@@ -2544,56 +2545,105 @@ class Ui_MainWindow(object):
         self.train_disable_checkpoint_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_26 = QGridLayout(self.train_disable_checkpoint_frame)
         self.gridLayout_26.setObjectName(u"gridLayout_26")
-        self.horizontalSpacer_20 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.LOAD_PRETRAINED_MODEL__INFO = QLabel(self.train_disable_checkpoint_frame)
+        self.LOAD_PRETRAINED_MODEL__INFO.setObjectName(u"LOAD_PRETRAINED_MODEL__INFO")
+        self.LOAD_PRETRAINED_MODEL__INFO.setMinimumSize(QSize(30, 30))
+        self.LOAD_PRETRAINED_MODEL__INFO.setMaximumSize(QSize(30, 30))
+        font10 = QFont()
+        font10.setFamily(u"Arial")
+        font10.setPointSize(12)
+        self.LOAD_PRETRAINED_MODEL__INFO.setFont(font10)
+        self.LOAD_PRETRAINED_MODEL__INFO.setScaledContents(True)
 
-        self.gridLayout_26.addItem(self.horizontalSpacer_20, 2, 5, 1, 1)
+        self.gridLayout_26.addWidget(self.LOAD_PRETRAINED_MODEL__INFO, 1, 2, 1, 1)
+
+        self.LOAD_PRETRAINED_MODEL__INPUT = QComboBox(self.train_disable_checkpoint_frame)
+        self.LOAD_PRETRAINED_MODEL__INPUT.addItem("")
+        self.LOAD_PRETRAINED_MODEL__INPUT.addItem("")
+        self.LOAD_PRETRAINED_MODEL__INPUT.setObjectName(u"LOAD_PRETRAINED_MODEL__INPUT")
+        self.LOAD_PRETRAINED_MODEL__INPUT.setMinimumSize(QSize(200, 30))
+        self.LOAD_PRETRAINED_MODEL__INPUT.setMaximumSize(QSize(200, 30))
+        self.LOAD_PRETRAINED_MODEL__INPUT.setFont(font10)
+
+        self.gridLayout_26.addWidget(self.LOAD_PRETRAINED_MODEL__INPUT, 1, 3, 1, 1)
+
+        self.MODEL__SOURCE__INFO = QLabel(self.train_disable_checkpoint_frame)
+        self.MODEL__SOURCE__INFO.setObjectName(u"MODEL__SOURCE__INFO")
+        self.MODEL__SOURCE__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__SOURCE__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__SOURCE__INFO.setFont(font10)
+        self.MODEL__SOURCE__INFO.setScaledContents(True)
+
+        self.gridLayout_26.addWidget(self.MODEL__SOURCE__INFO, 2, 2, 1, 1)
+
+        self.MODEL__SOURCE__INPUT = QComboBox(self.train_disable_checkpoint_frame)
+        self.MODEL__SOURCE__INPUT.addItem("")
+        self.MODEL__SOURCE__INPUT.addItem("")
+        self.MODEL__SOURCE__INPUT.setObjectName(u"MODEL__SOURCE__INPUT")
+        self.MODEL__SOURCE__INPUT.setMinimumSize(QSize(300, 30))
+        self.MODEL__SOURCE__INPUT.setMaximumSize(QSize(300, 30))
+        self.MODEL__SOURCE__INPUT.setFont(font10)
+
+        self.gridLayout_26.addWidget(self.MODEL__SOURCE__INPUT, 2, 3, 1, 1)
+
+        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL = QLabel(self.train_disable_checkpoint_frame)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__LABEL")
+        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setFont(font10)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setIndent(15)
+
+        self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL, 5, 1, 1, 1)
+
+        self.LOAD_PRETRAINED_MODEL__LABEL = QLabel(self.train_disable_checkpoint_frame)
+        self.LOAD_PRETRAINED_MODEL__LABEL.setObjectName(u"LOAD_PRETRAINED_MODEL__LABEL")
+        self.LOAD_PRETRAINED_MODEL__LABEL.setFont(font10)
+
+        self.gridLayout_26.addWidget(self.LOAD_PRETRAINED_MODEL__LABEL, 1, 1, 1, 1)
+
+        self.MODEL__SOURCE__LABEL = QLabel(self.train_disable_checkpoint_frame)
+        self.MODEL__SOURCE__LABEL.setObjectName(u"MODEL__SOURCE__LABEL")
+        self.MODEL__SOURCE__LABEL.setFont(font10)
+        self.MODEL__SOURCE__LABEL.setIndent(15)
+
+        self.gridLayout_26.addWidget(self.MODEL__SOURCE__LABEL, 2, 1, 1, 1)
+
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT = QLineEdit(self.train_disable_checkpoint_frame)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__INPUT")
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setMinimumSize(QSize(500, 30))
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setMaximumSize(QSize(500, 30))
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setFont(font10)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setReadOnly(True)
+
+        self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT, 5, 3, 1, 1)
 
         self.checkpoint_file_path_browse_bn = QPushButton(self.train_disable_checkpoint_frame)
         self.checkpoint_file_path_browse_bn.setObjectName(u"checkpoint_file_path_browse_bn")
         self.checkpoint_file_path_browse_bn.setFont(font)
 
-        self.gridLayout_26.addWidget(self.checkpoint_file_path_browse_bn, 2, 4, 1, 1)
+        self.gridLayout_26.addWidget(self.checkpoint_file_path_browse_bn, 4, 4, 1, 1)
 
-        self.label_148 = QLabel(self.train_disable_checkpoint_frame)
-        self.label_148.setObjectName(u"label_148")
-        self.label_148.setFont(font)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO = QLabel(self.train_disable_checkpoint_frame)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__INFO")
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setFont(font10)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setScaledContents(True)
 
-        self.gridLayout_26.addWidget(self.label_148, 1, 1, 1, 1)
-
-        self.MODEL__LOAD_CHECKPOINT__INPUT = QComboBox(self.train_disable_checkpoint_frame)
-        self.MODEL__LOAD_CHECKPOINT__INPUT.addItem("")
-        self.MODEL__LOAD_CHECKPOINT__INPUT.addItem("")
-        self.MODEL__LOAD_CHECKPOINT__INPUT.setObjectName(u"MODEL__LOAD_CHECKPOINT__INPUT")
-        self.MODEL__LOAD_CHECKPOINT__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__LOAD_CHECKPOINT__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__LOAD_CHECKPOINT__INPUT.setFont(font)
-        self.MODEL__LOAD_CHECKPOINT__INPUT.setFocusPolicy(Qt.WheelFocus)
-        self.MODEL__LOAD_CHECKPOINT__INPUT.setContextMenuPolicy(Qt.DefaultContextMenu)
-
-        self.gridLayout_26.addWidget(self.MODEL__LOAD_CHECKPOINT__INPUT, 1, 3, 1, 1)
+        self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__INFO, 5, 2, 1, 1)
 
         self.PATHS__CHECKPOINT_FILE__INPUT = QLineEdit(self.train_disable_checkpoint_frame)
         self.PATHS__CHECKPOINT_FILE__INPUT.setObjectName(u"PATHS__CHECKPOINT_FILE__INPUT")
         self.PATHS__CHECKPOINT_FILE__INPUT.setMinimumSize(QSize(500, 30))
         self.PATHS__CHECKPOINT_FILE__INPUT.setMaximumSize(QSize(500, 30))
-        self.PATHS__CHECKPOINT_FILE__INPUT.setFont(font)
+        self.PATHS__CHECKPOINT_FILE__INPUT.setFont(font10)
 
-        self.gridLayout_26.addWidget(self.PATHS__CHECKPOINT_FILE__INPUT, 2, 3, 1, 1)
+        self.gridLayout_26.addWidget(self.PATHS__CHECKPOINT_FILE__INPUT, 4, 3, 1, 1)
 
         self.checkpoint_file_path_browse_label = QLabel(self.train_disable_checkpoint_frame)
         self.checkpoint_file_path_browse_label.setObjectName(u"checkpoint_file_path_browse_label")
         self.checkpoint_file_path_browse_label.setFont(font)
+        self.checkpoint_file_path_browse_label.setIndent(15)
 
-        self.gridLayout_26.addWidget(self.checkpoint_file_path_browse_label, 2, 1, 1, 1)
-
-        self.MODEL__LOAD_CHECKPOINT__LABEL = QLabel(self.train_disable_checkpoint_frame)
-        self.MODEL__LOAD_CHECKPOINT__LABEL.setObjectName(u"MODEL__LOAD_CHECKPOINT__LABEL")
-        self.MODEL__LOAD_CHECKPOINT__LABEL.setMinimumSize(QSize(30, 30))
-        self.MODEL__LOAD_CHECKPOINT__LABEL.setMaximumSize(QSize(30, 30))
-        self.MODEL__LOAD_CHECKPOINT__LABEL.setStyleSheet(u"")
-        self.MODEL__LOAD_CHECKPOINT__LABEL.setScaledContents(True)
-
-        self.gridLayout_26.addWidget(self.MODEL__LOAD_CHECKPOINT__LABEL, 1, 2, 1, 1)
+        self.gridLayout_26.addWidget(self.checkpoint_file_path_browse_label, 4, 1, 1, 1)
 
         self.PATHS__CHECKPOINT_FILE__INFO = QLabel(self.train_disable_checkpoint_frame)
         self.PATHS__CHECKPOINT_FILE__INFO.setObjectName(u"PATHS__CHECKPOINT_FILE__INFO")
@@ -2602,7 +2652,18 @@ class Ui_MainWindow(object):
         self.PATHS__CHECKPOINT_FILE__INFO.setStyleSheet(u"")
         self.PATHS__CHECKPOINT_FILE__INFO.setScaledContents(True)
 
-        self.gridLayout_26.addWidget(self.PATHS__CHECKPOINT_FILE__INFO, 2, 2, 1, 1)
+        self.gridLayout_26.addWidget(self.PATHS__CHECKPOINT_FILE__INFO, 4, 2, 1, 1)
+
+        self.MODEL__BMZ__SOURCE_MODEL_ID__BN = QPushButton(self.train_disable_checkpoint_frame)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__BN")
+        self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setMinimumSize(QSize(130, 0))
+        self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setFont(font10)
+
+        self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__BN, 5, 4, 1, 1)
+
+        self.horizontalSpacer_10 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_26.addItem(self.horizontalSpacer_10, 4, 5, 1, 1)
 
 
         self.gridLayout.addWidget(self.train_disable_checkpoint_frame, 6, 0, 1, 3)
@@ -2646,7 +2707,7 @@ class Ui_MainWindow(object):
         self.goptions_advanced_options_scrollarea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 864, 288))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 854, 288))
         self.gridLayout_2 = QGridLayout(self.scrollAreaWidgetContents_2)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.label = QLabel(self.scrollAreaWidgetContents_2)
@@ -2823,7 +2884,7 @@ class Ui_MainWindow(object):
         self.formLayout.setWidget(0, QFormLayout.FieldRole, self.goptions_advanced_options_scrollarea)
 
 
-        self.gridLayout.addWidget(self.goptions_advanced_options_frame, 8, 0, 1, 5)
+        self.gridLayout.addWidget(self.goptions_advanced_options_frame, 8, 0, 1, 3)
 
         self.frame_21 = QFrame(self.scrollAreaWidgetContents)
         self.frame_21.setObjectName(u"frame_21")
@@ -2832,21 +2893,6 @@ class Ui_MainWindow(object):
         self.frame_21.setFrameShadow(QFrame.Raised)
         self.gridLayout_27 = QGridLayout(self.frame_21)
         self.gridLayout_27.setObjectName(u"gridLayout_27")
-        self.goptions_browse_yaml_path_input = QLineEdit(self.frame_21)
-        self.goptions_browse_yaml_path_input.setObjectName(u"goptions_browse_yaml_path_input")
-        self.goptions_browse_yaml_path_input.setMinimumSize(QSize(500, 30))
-        self.goptions_browse_yaml_path_input.setMaximumSize(QSize(500, 30))
-        self.goptions_browse_yaml_path_input.setFont(font)
-
-        self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_input, 3, 4, 1, 1)
-
-        self.PROBLEM__NDIM__LABEL = QLabel(self.frame_21)
-        self.PROBLEM__NDIM__LABEL.setObjectName(u"PROBLEM__NDIM__LABEL")
-        self.PROBLEM__NDIM__LABEL.setMaximumSize(QSize(200, 35))
-        self.PROBLEM__NDIM__LABEL.setFont(font)
-
-        self.gridLayout_27.addWidget(self.PROBLEM__NDIM__LABEL, 0, 1, 1, 2)
-
         self.goptions_yaml_name_input = QLineEdit(self.frame_21)
         self.goptions_yaml_name_input.setObjectName(u"goptions_yaml_name_input")
         self.goptions_yaml_name_input.setMinimumSize(QSize(0, 30))
@@ -2855,16 +2901,20 @@ class Ui_MainWindow(object):
 
         self.gridLayout_27.addWidget(self.goptions_yaml_name_input, 5, 4, 1, 1)
 
+        self.goptions_browse_yaml_path_input = QLineEdit(self.frame_21)
+        self.goptions_browse_yaml_path_input.setObjectName(u"goptions_browse_yaml_path_input")
+        self.goptions_browse_yaml_path_input.setMinimumSize(QSize(500, 30))
+        self.goptions_browse_yaml_path_input.setMaximumSize(QSize(500, 30))
+        self.goptions_browse_yaml_path_input.setFont(font)
+
+        self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_input, 3, 4, 1, 1)
+
         self.goptions_yaml_name_label = QLabel(self.frame_21)
         self.goptions_yaml_name_label.setObjectName(u"goptions_yaml_name_label")
         self.goptions_yaml_name_label.setMaximumSize(QSize(250, 35))
         self.goptions_yaml_name_label.setFont(font)
 
         self.gridLayout_27.addWidget(self.goptions_yaml_name_label, 5, 1, 1, 1)
-
-        self.horizontalSpacer_28 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.gridLayout_27.addItem(self.horizontalSpacer_28, 3, 7, 1, 1)
 
         self.PROBLEM__NDIM__INPUT = QComboBox(self.frame_21)
         self.PROBLEM__NDIM__INPUT.addItem("")
@@ -2890,15 +2940,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_label, 3, 1, 1, 2)
 
-        self.PROBLEM__NDIM__INFO = QLabel(self.frame_21)
-        self.PROBLEM__NDIM__INFO.setObjectName(u"PROBLEM__NDIM__INFO")
-        self.PROBLEM__NDIM__INFO.setMinimumSize(QSize(30, 30))
-        self.PROBLEM__NDIM__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__NDIM__INFO.setStyleSheet(u"")
-        self.PROBLEM__NDIM__INFO.setScaledContents(True)
-
-        self.gridLayout_27.addWidget(self.PROBLEM__NDIM__INFO, 0, 3, 1, 1)
-
         self.goptions_browse_yaml_path_info = QLabel(self.frame_21)
         self.goptions_browse_yaml_path_info.setObjectName(u"goptions_browse_yaml_path_info")
         self.goptions_browse_yaml_path_info.setMinimumSize(QSize(30, 30))
@@ -2908,6 +2949,15 @@ class Ui_MainWindow(object):
 
         self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_info, 3, 3, 1, 1)
 
+        self.PROBLEM__NDIM__INFO = QLabel(self.frame_21)
+        self.PROBLEM__NDIM__INFO.setObjectName(u"PROBLEM__NDIM__INFO")
+        self.PROBLEM__NDIM__INFO.setMinimumSize(QSize(30, 30))
+        self.PROBLEM__NDIM__INFO.setMaximumSize(QSize(30, 30))
+        self.PROBLEM__NDIM__INFO.setStyleSheet(u"")
+        self.PROBLEM__NDIM__INFO.setScaledContents(True)
+
+        self.gridLayout_27.addWidget(self.PROBLEM__NDIM__INFO, 0, 3, 1, 1)
+
         self.goptions_yaml_name_info = QLabel(self.frame_21)
         self.goptions_yaml_name_info.setObjectName(u"goptions_yaml_name_info")
         self.goptions_yaml_name_info.setMinimumSize(QSize(30, 30))
@@ -2916,6 +2966,17 @@ class Ui_MainWindow(object):
         self.goptions_yaml_name_info.setScaledContents(True)
 
         self.gridLayout_27.addWidget(self.goptions_yaml_name_info, 5, 3, 1, 1)
+
+        self.horizontalSpacer_28 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_27.addItem(self.horizontalSpacer_28, 3, 7, 1, 1)
+
+        self.PROBLEM__NDIM__LABEL = QLabel(self.frame_21)
+        self.PROBLEM__NDIM__LABEL.setObjectName(u"PROBLEM__NDIM__LABEL")
+        self.PROBLEM__NDIM__LABEL.setMaximumSize(QSize(200, 35))
+        self.PROBLEM__NDIM__LABEL.setFont(font)
+
+        self.gridLayout_27.addWidget(self.PROBLEM__NDIM__LABEL, 0, 1, 1, 1)
 
 
         self.gridLayout.addWidget(self.frame_21, 0, 0, 2, 5)
@@ -2998,7 +3059,7 @@ class Ui_MainWindow(object):
         self.train_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, -169, 931, 7950))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 931, 7950))
         self.scrollAreaWidgetContents_3.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout_3 = QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
@@ -3256,9 +3317,6 @@ class Ui_MainWindow(object):
         self.gridLayout_29.setObjectName(u"gridLayout_29")
         self.LOSS__CLASS_REBALANCE__LABEL = QLabel(self.frame_28)
         self.LOSS__CLASS_REBALANCE__LABEL.setObjectName(u"LOSS__CLASS_REBALANCE__LABEL")
-        font10 = QFont()
-        font10.setFamily(u"Arial")
-        font10.setPointSize(12)
         self.LOSS__CLASS_REBALANCE__LABEL.setFont(font10)
 
         self.gridLayout_29.addWidget(self.LOSS__CLASS_REBALANCE__LABEL, 3, 0, 1, 1)
@@ -13156,7 +13214,7 @@ class Ui_MainWindow(object):
         self.check_yaml_file_errors_frame.setWidgetResizable(True)
         self.scrollAreaWidgetContents_19 = QWidget()
         self.scrollAreaWidgetContents_19.setObjectName(u"scrollAreaWidgetContents_19")
-        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 31, 19))
+        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 896, 101))
         self.verticalLayout_32 = QVBoxLayout(self.scrollAreaWidgetContents_19)
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
         self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)
@@ -13304,8 +13362,8 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.stackedWidget.setCurrentIndex(2)
-        self.wizard_main_frame.setCurrentIndex(1)
-        self.stackedWidget_create_yaml_frame.setCurrentIndex(2)
+        self.wizard_main_frame.setCurrentIndex(2)
+        self.stackedWidget_create_yaml_frame.setCurrentIndex(1)
         self.train_tab_widget.setCurrentIndex(0)
         self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(1)
         self.test_tab_widget.setCurrentIndex(0)
@@ -13454,27 +13512,35 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.goptions_advanced_label.setText(QCoreApplication.translate("MainWindow", u"Advanced options", None))
         self.goptions_advanced_bn.setText("")
+        self.LOAD_PRETRAINED_MODEL__INFO.setText("")
+        self.LOAD_PRETRAINED_MODEL__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.LOAD_PRETRAINED_MODEL__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+#if QT_CONFIG(tooltip)
+        self.MODEL__SOURCE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Source of the pretrained model</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__SOURCE__INFO.setText("")
+        self.MODEL__SOURCE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"I have a model trained with BiaPy", None))
+        self.MODEL__SOURCE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"I want to check other online sources", None))
+
+        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setText(QCoreApplication.translate("MainWindow", u"Model ID", None))
+        self.LOAD_PRETRAINED_MODEL__LABEL.setText(QCoreApplication.translate("MainWindow", u"Load pretrained model", None))
+        self.MODEL__SOURCE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Source of the model", None))
         self.checkpoint_file_path_browse_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
 #if QT_CONFIG(tooltip)
-        self.label_148.setToolTip("")
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Model identifier</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.label_148.setText(QCoreApplication.translate("MainWindow", u"Load already existing model", None))
-        self.MODEL__LOAD_CHECKPOINT__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.MODEL__LOAD_CHECKPOINT__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setText("")
         self.PATHS__CHECKPOINT_FILE__INPUT.setText(QCoreApplication.translate("MainWindow", u"model_weights.pth", None))
 #if QT_CONFIG(tooltip)
         self.checkpoint_file_path_browse_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.checkpoint_file_path_browse_label.setText(QCoreApplication.translate("MainWindow", u"Model file", None))
 #if QT_CONFIG(tooltip)
-        self.MODEL__LOAD_CHECKPOINT__LABEL.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Load previous training weigths (needed for test/inference phase or to train again but not from scratch). If the checkpoint file is empty, BiaPy will search for the checkpoint in the following manner: if the output folder and the job name match, BiaPy will locate the model's weights within the 'checkpoints' directory. On the other hand, if the checkpoint file path is specified that path will be used instead</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__LOAD_CHECKPOINT__LABEL.setText("")
-#if QT_CONFIG(tooltip)
         self.PATHS__CHECKPOINT_FILE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the model's checkpoint that will be loaded. Leave it blank to let BiaPy find it. If the output folder and the job name match, BiaPy will locate the model's weights within the 'checkpoints' directory</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.PATHS__CHECKPOINT_FILE__INFO.setText("")
+        self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setText(QCoreApplication.translate("MainWindow", u"Check models", None))
         self.train_disable_checkpoint_label.setText(QCoreApplication.translate("MainWindow", u"Checkpoint configuration", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Hardware", None))
 #if QT_CONFIG(tooltip)
@@ -13522,17 +13588,13 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setText("")
         self.checkpoint_loading_opt_label.setText(QCoreApplication.translate("MainWindow", u"Checkpoint loading options", None))
-#if QT_CONFIG(statustip)
-        self.goptions_browse_yaml_path_input.setStatusTip("")
-#endif // QT_CONFIG(statustip)
-#if QT_CONFIG(tooltip)
-        self.PROBLEM__NDIM__LABEL.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.PROBLEM__NDIM__LABEL.setText(QCoreApplication.translate("MainWindow", u"Image dimension", None))
 #if QT_CONFIG(tooltip)
         self.goptions_yaml_name_input.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.goptions_yaml_name_input.setText("")
+#if QT_CONFIG(statustip)
+        self.goptions_browse_yaml_path_input.setStatusTip("")
+#endif // QT_CONFIG(statustip)
 #if QT_CONFIG(tooltip)
         self.goptions_yaml_name_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
@@ -13546,6 +13608,10 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.goptions_browse_yaml_path_label.setText(QCoreApplication.translate("MainWindow", u"Configuration file directory", None))
 #if QT_CONFIG(tooltip)
+        self.goptions_browse_yaml_path_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to store the YAML file</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.goptions_browse_yaml_path_info.setText("")
+#if QT_CONFIG(tooltip)
         self.PROBLEM__NDIM__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of dimensions of the input images</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
 #if QT_CONFIG(statustip)
@@ -13553,13 +13619,13 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(statustip)
         self.PROBLEM__NDIM__INFO.setText("")
 #if QT_CONFIG(tooltip)
-        self.goptions_browse_yaml_path_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to store the YAML file</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.goptions_browse_yaml_path_info.setText("")
-#if QT_CONFIG(tooltip)
         self.goptions_yaml_name_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">YAML file name</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.goptions_yaml_name_info.setText("")
+#if QT_CONFIG(tooltip)
+        self.PROBLEM__NDIM__LABEL.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.PROBLEM__NDIM__LABEL.setText(QCoreApplication.translate("MainWindow", u"Image dimension", None))
 #if QT_CONFIG(tooltip)
         self.label_49.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to enable the training phase or not</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)

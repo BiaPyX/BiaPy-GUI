@@ -658,7 +658,7 @@ def clear_answers(main_window):
         # Rewrite all keys
         main_window.cfg.settings["wizard_answers"] = main_window.cfg.settings["original_wizard_answers"].copy()
 
-def check_models_from_other_sources(main_window):
+def check_models_from_other_sources(main_window, ask_user=False, from_wizard=True):
     """
     Check available model compatible with BiaPy from external sources such as BioImage Model Zoo (BMZ)
     and Torchvision.
@@ -668,8 +668,13 @@ def check_models_from_other_sources(main_window):
     main_window : QMainWindow
         Main window of the application.
     """
+    if not from_wizard:
+        main_window.yes_no_exec("This process needs internet connection and may take a while. Do you want to proceed?")
+        if not main_window.yes_no.answer:
+            return
+
     main_window.thread_spin = QThread()
-    main_window.worker_spin = check_models_from_other_sources_engine(main_window)
+    main_window.worker_spin = check_models_from_other_sources_engine(main_window, from_wizard)
     main_window.worker_spin.moveToThread(main_window.thread_spin)
     main_window.thread_spin.started.connect(main_window.worker_spin.run)
    
@@ -698,7 +703,7 @@ class check_models_from_other_sources_engine(QObject):
     error_signal = QtCore.Signal(str, str)
 
     # Signal to send a message to the user about the result of model checking
-    add_model_card_signal = QtCore.Signal(int, dict)
+    add_model_card_signal = QtCore.Signal(int, dict, bool)
 
     # Signal to send a message to the user about the result of model checking
     report_yaml_model_check_result = QtCore.Signal(int)
@@ -706,7 +711,7 @@ class check_models_from_other_sources_engine(QObject):
     # Signal to indicate the main thread that the worker has finished 
     finished_signal = QtCore.Signal()
 
-    def __init__(self, main_window):
+    def __init__(self, main_window, from_wizard):
         """
         Class to check available model compatible with BiaPy from external sources such as BioImage Model Zoo (BMZ)
         and Torchvision.
@@ -720,15 +725,11 @@ class check_models_from_other_sources_engine(QObject):
         self.main_window =  main_window
         self.COLLECTION_URL = "https://raw.githubusercontent.com/bioimage-io/collection-bioimage-io/gh-pages/collection.json"
         # COLLECTION_URL = "https://uk1s3.embassy.ebi.ac.uk/public-datasets/bioimage.io/collection.json"
+        self.from_wizard = from_wizard
 
     def run(self):
         """
         Checks possible model available in BioImage Model Zoo and Torchivision for the workflow specified by Wizards form. 
-        
-        Parameters
-        ----------
-        main_window : QMainWindow
-            Main window of the application.
         """
         ## Functionality copied from BiaPy commit: 0ed2222869300316839af7202ce1d55761c6eb88 (3.5.1) - (check_bmz_args function)
         self.state_signal.emit(0)
@@ -749,9 +750,16 @@ class check_models_from_other_sources_engine(QObject):
                     model_rdfs.append(yaml.safe_load(stream))
                     print("Checking entry: {}".format(model_rdfs[-1]['name']))
                     
+                    if self.from_wizard:
+                        problem_type = self.main_window.cfg.settings["wizard_answers"]["PROBLEM.TYPE"]
+                        problem_ndim = self.main_window.cfg.settings["wizard_answers"]["PROBLEM.NDIM"]
+                    else:
+                        problem_type = self.main_window.cfg.settings["workflow_key_names"][self.main_window.cfg.settings['selected_workflow']]
+                        problem_ndim = get_text(self.main_window.ui.PROBLEM__NDIM__INPUT)
+
                     workflow_specs = {}
-                    workflow_specs["workflow_type"] = self.main_window.cfg.settings["wizard_answers"]["PROBLEM.TYPE"]
-                    workflow_specs["ndim"] = self.main_window.cfg.settings["wizard_answers"]["PROBLEM.NDIM"]
+                    workflow_specs["workflow_type"] = problem_type
+                    workflow_specs["ndim"] = problem_ndim
                     workflow_specs["nclasses"] = "all"
 
                     _, error, _ = check_bmz_model_compatibility(model_rdfs[-1], workflow_specs=workflow_specs)
@@ -773,14 +781,14 @@ class check_models_from_other_sources_engine(QObject):
                             'url': f"https://bioimage.io/#/?id={doi}",
                             'imposed_vars': biapy_imposed_vars,
                         }
-                        self.add_model_card_signal.emit(model_count, model_info)
+                        self.add_model_card_signal.emit(model_count, model_info, self.from_wizard)
 
                         model_count += 1
 
             # Check Torchvision models 
             models, model_restrictions_description, model_restrictions = check_torchvision_available_models(
-                self.main_window.cfg.settings["wizard_answers"]["PROBLEM.TYPE"], 
-                self.main_window.cfg.settings["wizard_answers"]["PROBLEM.NDIM"]
+                problem_type, 
+                problem_ndim
             )
             for m, res, res_cmd in zip(models, model_restrictions_description, model_restrictions):
                 print(f"Creating model card for: {m} . . .")
@@ -793,7 +801,7 @@ class check_models_from_other_sources_engine(QObject):
                     'restrictions': res,
                     'imposed_vars': res_cmd,
                 }
-                self.add_model_card_signal.emit(model_count, model_info)
+                self.add_model_card_signal.emit(model_count, model_info, self.from_wizard)
                 model_count += 1
 
         except Exception as exc:
@@ -895,17 +903,6 @@ def export_wizard_summary(main_window):
         keys_to_remove = [x for x in biapy_cfg.keys() if "CHECKED " in x]
         for k in keys_to_remove:
             del biapy_cfg[k]
-
-        def create_dict_from_key(cfg_key, value, out_cfg):
-            keys = cfg_key.split(".")
-            if keys[0] not in out_cfg:
-                out_cfg[keys[0]] = {}
-            if len(keys) == 2:
-                if isinstance(value, tuple):
-                    value = str(value)
-                out_cfg[keys[0]][keys[1]] = value    
-            else:
-                create_dict_from_key(".".join(keys[1:]), value, out_cfg[keys[0]])  
 
         # Generate config from answers 
         out_config = {}
@@ -1141,7 +1138,8 @@ def move_between_workflows(main_window, to_page, dims=None):
         Image dimension choosen. E.g. ``2D`` or ``3D``.
     """
     # Semantic seg
-    if main_window.cfg.settings['selected_workflow'] == 0:
+    workflow_key_name = main_window.cfg.settings["workflow_key_names"][main_window.cfg.settings['selected_workflow']]
+    if workflow_key_name == "SEMANTIC_SEG":
         jobname = "my_semantic_segmentation"
         models = main_window.cfg.settings['semantic_models_real_names']
         losses = main_window.cfg.settings['semantic_losses_real_names']
@@ -1157,7 +1155,7 @@ def move_between_workflows(main_window, to_page, dims=None):
         main_window.ui.test_exists_gt_label.setText("Do you have test labels?")
         main_window.ui.WORKFLOW_SELECTED_LABEL.setText("SEMANTIC_SEG")
     # Instance seg
-    elif main_window.cfg.settings['selected_workflow'] == 1:
+    elif workflow_key_name == "INSTANCE_SEG":
         jobname = "my_instance_segmentation"
         models = main_window.cfg.settings['instance_models_real_names']
         losses = main_window.cfg.settings['instance_losses_real_names']
@@ -1173,7 +1171,7 @@ def move_between_workflows(main_window, to_page, dims=None):
         main_window.ui.test_exists_gt_label.setText("Do you have test labels?")
         main_window.ui.WORKFLOW_SELECTED_LABEL.setText("INSTANCE_SEG")
     # Detection
-    elif main_window.cfg.settings['selected_workflow'] == 2:
+    elif workflow_key_name == "DETECTION":
         jobname = "my_detection"
         models = main_window.cfg.settings['detection_models_real_names']
         losses = main_window.cfg.settings['detection_losses_real_names']
@@ -1189,7 +1187,7 @@ def move_between_workflows(main_window, to_page, dims=None):
         main_window.ui.test_exists_gt_label.setText("Do you have CSV files for test data?")
         main_window.ui.WORKFLOW_SELECTED_LABEL.setText("DETECTION")
     # Denoising
-    elif main_window.cfg.settings['selected_workflow'] == 3:
+    elif workflow_key_name == "DENOISING":
         jobname = "my_denoising"
         models = main_window.cfg.settings['denoising_models_real_names']
         losses = main_window.cfg.settings['denoising_losses_real_names']
@@ -1201,7 +1199,7 @@ def move_between_workflows(main_window, to_page, dims=None):
         # Test page
         main_window.ui.WORKFLOW_SELECTED_LABEL.setText("DENOISING")
     # Super resolution
-    elif main_window.cfg.settings['selected_workflow'] == 4:
+    elif workflow_key_name == "SUPER_RESOLUTION":
         jobname = "my_super_resolution"
         if dims is None:
             if get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "2D":
@@ -1225,7 +1223,7 @@ def move_between_workflows(main_window, to_page, dims=None):
         main_window.ui.test_exists_gt_label.setText("Do you have high-resolution test data?")
         main_window.ui.WORKFLOW_SELECTED_LABEL.setText("SUPER_RESOLUTION")
     # Self-supevised learning
-    elif main_window.cfg.settings['selected_workflow'] == 5:
+    elif workflow_key_name == "SELF_SUPERVISED":
         jobname = "my_self_supervised_learning"
         models = main_window.cfg.settings['ssl_models_real_names']
         losses = main_window.cfg.settings['ssl_losses_real_names']
@@ -1237,7 +1235,7 @@ def move_between_workflows(main_window, to_page, dims=None):
         # Test page
         main_window.ui.WORKFLOW_SELECTED_LABEL.setText("SELF_SUPERVISED")
     # Classification
-    elif main_window.cfg.settings['selected_workflow'] == 6:
+    elif workflow_key_name == "CLASSIFICATION":
         jobname = "my_classification"
         models = main_window.cfg.settings['classification_models_real_names']
         losses = main_window.cfg.settings['classification_losses_real_names']
@@ -1249,7 +1247,7 @@ def move_between_workflows(main_window, to_page, dims=None):
         main_window.ui.test_exists_gt_label.setText("Is the test separated in classes?")
         main_window.ui.WORKFLOW_SELECTED_LABEL.setText("CLASSIFICATION")
     # Image to image
-    elif main_window.cfg.settings['selected_workflow'] == 7:
+    elif workflow_key_name == "IMAGE_TO_IMAGE":
         jobname = "my_image_to_image"
         models = main_window.cfg.settings['i2i_models_real_names']
         losses = main_window.cfg.settings['i2i_losses_real_names']
@@ -1490,20 +1488,19 @@ def create_yaml_file(main_window):
     biapy_config['SYSTEM']['SEED'] = int(get_text(main_window.ui.SYSTEM__SEED__INPUT))
 
     # Problem specification
-    workflow_names_yaml = ['SEMANTIC_SEG', 'INSTANCE_SEG', 'DETECTION', 'DENOISING', 'SUPER_RESOLUTION', 
-        'SELF_SUPERVISED', 'CLASSIFICATION', "IMAGE_TO_IMAGE"]
     biapy_config['PROBLEM'] = {}
-    biapy_config['PROBLEM']['TYPE'] = workflow_names_yaml[main_window.cfg.settings['selected_workflow']]
+    biapy_config['PROBLEM']['TYPE'] = main_window.cfg.settings["workflow_key_names"][main_window.cfg.settings['selected_workflow']]
     biapy_config['PROBLEM']['NDIM'] = get_text(main_window.ui.PROBLEM__NDIM__INPUT)
     
+    workflow_key_name = main_window.cfg.settings["workflow_key_names"][main_window.cfg.settings['selected_workflow']]
     ### SEMANTIC_SEG
-    if main_window.cfg.settings['selected_workflow'] == 0:
+    if workflow_key_name == "SEMANTIC_SEG":
         biapy_config['PROBLEM']['SEMANTIC_SEG'] = {}
         if get_text(main_window.ui.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INPUT) != 0:
             biapy_config['PROBLEM']['SEMANTIC_SEG']['IGNORE_CLASS_ID'] = int(get_text(main_window.ui.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INPUT))
 
     ### INSTANCE_SEG
-    elif main_window.cfg.settings['selected_workflow'] == 1:
+    elif workflow_key_name == "INSTANCE_SEG":
         biapy_config['PROBLEM']['INSTANCE_SEG'] = {}
         
         # Transcribe problem representation
@@ -1562,7 +1559,7 @@ def create_yaml_file(main_window):
             biapy_config['PROBLEM']['INSTANCE_SEG']['WATERSHED_BY_2D_SLICES'] = True
 
     ### DETECTION
-    elif main_window.cfg.settings['selected_workflow'] == 2:
+    elif workflow_key_name == "DETECTION":
         biapy_config['PROBLEM']['DETECTION'] = {}
         biapy_config['PROBLEM']['DETECTION']['CENTRAL_POINT_DILATION'] = ast.literal_eval(get_text(main_window.ui.PROBLEM__DETECTION__CENTRAL_POINT_DILATION__INPUT))
         biapy_config['PROBLEM']['DETECTION']['CHECK_POINTS_CREATED'] = True if get_text(main_window.ui.PROBLEM__DETECTION__CHECK_POINTS_CREATED__INPUT) == "Yes" else False
@@ -1570,7 +1567,7 @@ def create_yaml_file(main_window):
             biapy_config['PROBLEM']['DETECTION']['DATA_CHECK_MW'] = True
 
     ### DENOISING
-    elif main_window.cfg.settings['selected_workflow'] == 3:
+    elif workflow_key_name == "DENOISING":
         biapy_config['PROBLEM']['DENOISING'] = {}
         biapy_config['PROBLEM']['DENOISING']['N2V_PERC_PIX'] = float(get_text(main_window.ui.PROBLEM__DENOISING__N2V_PERC_PIX__INPUT))
         biapy_config['PROBLEM']['DENOISING']['N2V_MANIPULATOR'] = get_text(main_window.ui.PROBLEM__DENOISING__N2V_MANIPULATOR__INPUT)
@@ -1578,12 +1575,12 @@ def create_yaml_file(main_window):
         biapy_config['PROBLEM']['DENOISING']['N2V_STRUCTMASK'] = True if get_text(main_window.ui.PROBLEM__DENOISING__N2V_STRUCTMASK__INPUT) == "Yes" else False
 
     ### SUPER_RESOLUTION
-    elif main_window.cfg.settings['selected_workflow'] == 4:
+    elif workflow_key_name == "SUPER_RESOLUTION":
         biapy_config['PROBLEM']['SUPER_RESOLUTION'] = {}
         biapy_config['PROBLEM']['SUPER_RESOLUTION']['UPSCALING'] = get_text(main_window.ui.PROBLEM__SUPER_RESOLUTION__UPSCALING__INPUT)
 
     ### SELF_SUPERVISED
-    elif main_window.cfg.settings['selected_workflow'] == 5:
+    elif workflow_key_name == "SELF_SUPERVISED":
         biapy_config['PROBLEM']['SELF_SUPERVISED'] = {}
         biapy_config['PROBLEM']['SELF_SUPERVISED']['PRETEXT_TASK'] = get_text(main_window.ui.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT)
         if get_text(main_window.ui.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT) == "crappify":
@@ -1591,7 +1588,7 @@ def create_yaml_file(main_window):
             biapy_config['PROBLEM']['SELF_SUPERVISED']['NOISE'] = float(get_text(main_window.ui.PROBLEM__SELF_SUPERVISED__NOISE__INPUT))
 
     ### IMAGE_TO_IMAGE
-    elif main_window.cfg.settings['selected_workflow'] == 7:
+    elif workflow_key_name == "IMAGE_TO_IMAGE":
         biapy_config['PROBLEM']['IMAGE_TO_IMAGE'] = {}
         biapy_config['PROBLEM']['IMAGE_TO_IMAGE']['MULTIPLE_RAW_ONE_TARGET_LOADER'] = True if get_text(main_window.ui.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INPUT) == "Yes" else False
 
@@ -1767,12 +1764,12 @@ def create_yaml_file(main_window):
     if get_text(main_window.ui.TRAIN__ENABLE__INPUT) == "Yes":
         biapy_config['DATA']['TRAIN'] = {}
 
-        if main_window.cfg.settings['selected_workflow'] == 0 and get_text(main_window.ui.DATA__TRAIN__CHECK_DATA__INPUT) == "Yes":
+        if workflow_key_name == "SEMANTIC_SEG" and get_text(main_window.ui.DATA__TRAIN__CHECK_DATA__INPUT) == "Yes":
             biapy_config['DATA']['TRAIN']['CHECK_DATA'] = True
         
         biapy_config['DATA']['TRAIN']['IN_MEMORY'] = True if get_text(main_window.ui.DATA__TRAIN__IN_MEMORY__INPUT) == "Yes" else False
         biapy_config['DATA']['TRAIN']['PATH'] = get_text(main_window.ui.DATA__TRAIN__PATH__INPUT, strip=False)
-        if main_window.cfg.settings['selected_workflow'] not in [3,5,6]:
+        if workflow_key_name not in ["DENOISING","SELF_SUPERVISED","CLASSIFICATION"]:
             biapy_config['DATA']['TRAIN']['GT_PATH'] = get_text(main_window.ui.DATA__TRAIN__GT_PATH__INPUT, strip=False)
         if int(get_text(main_window.ui.DATA__TRAIN__REPLICATE__INPUT)) != 0:
             biapy_config['DATA']['TRAIN']['REPLICATE'] = int(get_text(main_window.ui.DATA__TRAIN__REPLICATE__INPUT))
@@ -1816,7 +1813,7 @@ def create_yaml_file(main_window):
         else:
             biapy_config['DATA']['VAL']['FROM_TRAIN'] = False
             biapy_config['DATA']['VAL']['PATH'] = get_text(main_window.ui.DATA__VAL__PATH__INPUT, strip=False)
-            if main_window.cfg.settings['selected_workflow'] not in [3,5,6]:
+            if workflow_key_name not in ["DENOISING","SELF_SUPERVISED","CLASSIFICATION"]:
                 biapy_config['DATA']['VAL']['GT_PATH'] = get_text(main_window.ui.DATA__VAL__GT_PATH__INPUT, strip=False)
             biapy_config['DATA']['VAL']['OVERLAP'] = get_text(main_window.ui.DATA__VAL__OVERLAP__INPUT)
             biapy_config['DATA']['VAL']['PADDING'] = get_text(main_window.ui.DATA__VAL__PADDING__INPUT)
@@ -1844,7 +1841,7 @@ def create_yaml_file(main_window):
     # Test
     if get_text(main_window.ui.TEST__ENABLE__INPUT) == "Yes":
         biapy_config['DATA']['TEST'] = {}
-        if main_window.cfg.settings['selected_workflow'] == 0 and get_text(main_window.ui.DATA__TEST__CHECK_DATA__INPUT) == "Yes":
+        if workflow_key_name == "SEMANTIC_SEG" and get_text(main_window.ui.DATA__TEST__CHECK_DATA__INPUT) == "Yes":
             biapy_config['DATA']['TEST']['CHECK_DATA'] = True
         biapy_config['DATA']['TEST']['IN_MEMORY'] = True if get_text(main_window.ui.DATA__TEST__IN_MEMORY__INPUT) == "Yes" else False
         if get_text(main_window.ui.DATA__TEST__USE_VAL_AS_TEST__INPUT) == "Yes" and\
@@ -1853,7 +1850,7 @@ def create_yaml_file(main_window):
         else:
             if get_text(main_window.ui.DATA__TEST__LOAD_GT__INPUT) == "Yes":
                 biapy_config['DATA']['TEST']['LOAD_GT'] = True
-                if main_window.cfg.settings['selected_workflow'] not in [3,5,6]:
+                if workflow_key_name not in ["DENOISING","SELF_SUPERVISED","CLASSIFICATION"]:
                     biapy_config['DATA']['TEST']['GT_PATH'] = get_text(main_window.ui.DATA__TEST__GT_PATH__INPUT, strip=False)
             else:
                 biapy_config['DATA']['TEST']['LOAD_GT'] = False
@@ -2018,7 +2015,7 @@ def create_yaml_file(main_window):
             biapy_config['MODEL']['ISOTROPY'] = ast.literal_eval(get_text(main_window.ui.MODEL__ISOTROPY__INPUT)) 
         if get_text(main_window.ui.MODEL__LAGER_IO__INPUT) == "Yes":
             biapy_config['MODEL']['LAGER_IO'] = True
-        if main_window.cfg.settings['selected_workflow'] == 4 and get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "3D": # SR
+        if workflow_key_name == "SUPER_RESOLUTION" and get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "3D": # SR
             r = "pre" if get_text(main_window.ui.MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT) == "Before model" else "post"
             biapy_config['MODEL']['UNET_SR_UPSAMPLE_POSITION'] = r
     elif model_name in ["unetr", "mae", "ViT"]:
@@ -2053,23 +2050,33 @@ def create_yaml_file(main_window):
             biapy_config['MODEL']['CONVNEXT_LAYER_SCALE'] = float(get_text(main_window.ui.MODEL__CONVNEXT_LAYER_SCALE__INPUT))
             biapy_config['MODEL']['CONVNEXT_STEM_K_SIZE'] = int(get_text(main_window.ui.MODEL__CONVNEXT_STEM_K_SIZE__INPUT))
 
-    if main_window.cfg.settings['selected_workflow'] in [0,1,2,6] and int(get_text(main_window.ui.MODEL__N_CLASSES__INPUT)) != 2:
+    if workflow_key_name in ["SEMANTIC_SEG","INSTANCE_SEG","DETECTION","CLASSIFICATION"] and int(get_text(main_window.ui.MODEL__N_CLASSES__INPUT)) != 2:
         classes = int(get_text(main_window.ui.MODEL__N_CLASSES__INPUT))
         if classes == 1: 
             classes = 2
         biapy_config['MODEL']['N_CLASSES'] = classes
-        
-    if get_text(main_window.ui.MODEL__LOAD_CHECKPOINT__INPUT) == "Yes":
-        biapy_config['MODEL']['LOAD_CHECKPOINT'] = True 
-        biapy_config['PATHS'] = {}
-        if get_text(main_window.ui.PATHS__CHECKPOINT_FILE__INPUT) != "":
-            biapy_config['PATHS']['CHECKPOINT_FILE'] = get_text(main_window.ui.PATHS__CHECKPOINT_FILE__INPUT, strip=False)
-        if int(get_text(main_window.ui.MODEL__SAVE_CKPT_FREQ__INPUT)) != -1:
-            biapy_config['MODEL']['SAVE_CKPT_FREQ'] = int(get_text(main_window.ui.MODEL__SAVE_CKPT_FREQ__INPUT))
-        if get_text(main_window.ui.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT) != "best_on_val":
-            biapy_config['MODEL']['LOAD_CHECKPOINT_EPOCH'] = get_text(main_window.ui.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT)
-        if get_text(main_window.ui.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT) != "Yes":
-            biapy_config['MODEL']['LOAD_CHECKPOINT_ONLY_WEIGHTS'] = get_text(main_window.ui.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT)
+    
+    if get_text(main_window.ui.LOAD_PRETRAINED_MODEL__INPUT) == "Yes":
+        if get_text(main_window.ui.MODEL__SOURCE__INPUT) == "I have a model trained with BiaPy":
+            biapy_config['MODEL']['LOAD_CHECKPOINT'] = True 
+            biapy_config['PATHS'] = {}
+            if get_text(main_window.ui.PATHS__CHECKPOINT_FILE__INPUT) != "":
+                biapy_config['PATHS']['CHECKPOINT_FILE'] = get_text(main_window.ui.PATHS__CHECKPOINT_FILE__INPUT, strip=False)
+            if int(get_text(main_window.ui.MODEL__SAVE_CKPT_FREQ__INPUT)) != -1:
+                biapy_config['MODEL']['SAVE_CKPT_FREQ'] = int(get_text(main_window.ui.MODEL__SAVE_CKPT_FREQ__INPUT))
+            if get_text(main_window.ui.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT) != "best_on_val":
+                biapy_config['MODEL']['LOAD_CHECKPOINT_EPOCH'] = get_text(main_window.ui.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT)
+            if get_text(main_window.ui.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT) != "Yes":
+                biapy_config['MODEL']['LOAD_CHECKPOINT_ONLY_WEIGHTS'] = get_text(main_window.ui.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT)
+        else: # BMZ or Torchvision
+            if get_text(main_window.ui.MODEL__BMZ__SOURCE_MODEL_ID__INPUT) != "":
+                arr = get_text(main_window.ui.MODEL__BMZ__SOURCE_MODEL_ID__INPUT).split("(")
+                model = arr[0].strip()
+                if "BioImage Model Zoo" in arr[1]:
+                    biapy_config['MODEL']['BMZ'] = {}
+                    biapy_config['MODEL']['BMZ']['SOURCE_MODEL_ID'] = str(model)
+                else:
+                    biapy_config['MODEL']['TORCHVISION_MODEL_NAME '] = str(model)
 
     # Loss
     loss_name = main_window.cfg.translate_names(get_text(main_window.ui.LOSS__TYPE__INPUT), key_str="losses")
@@ -2156,14 +2163,14 @@ def create_yaml_file(main_window):
                 biapy_config['TEST']['BY_CHUNKS']['WORKFLOW_PROCESS']['TYPE'] = get_text(main_window.ui.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INPUT)
 
         ### Instance segmentation
-        if main_window.cfg.settings['selected_workflow'] == 1:
+        if workflow_key_name == "INSTANCE_SEG":
             biapy_config['TEST']['MATCHING_STATS'] = True if get_text(main_window.ui.TEST__MATCHING_STATS__INPUT) == "Yes" else False 
             biapy_config['TEST']['MATCHING_STATS_THS'] = ast.literal_eval(get_text(main_window.ui.TEST__MATCHING_STATS_THS__INPUT)) 
             if get_text(main_window.ui.TEST__MATCHING_STATS_THS_COLORED_IMG__INPUT) != "[0.3]":
                 biapy_config['TEST']['MATCHING_STATS_THS_COLORED_IMG'] = ast.literal_eval(get_text(main_window.ui.TEST__MATCHING_STATS_THS_COLORED_IMG__INPUT))
 
         ### Detection
-        elif main_window.cfg.settings['selected_workflow'] == 2:
+        elif workflow_key_name == "DETECTION":
             biapy_config['TEST']['DET_POINT_CREATION_FUNCTION'] = get_text(main_window.ui.TEST__DET_POINT_CREATION_FUNCTION__INPUT)
             biapy_config['TEST']['DET_MIN_TH_TO_BE_PEAK'] = ast.literal_eval(get_text(main_window.ui.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT))
             biapy_config['TEST']['DET_EXCLUDE_BORDER'] = True if get_text(main_window.ui.TEST__DET_EXCLUDE_BORDER__INPUT) == "Yes" else False
@@ -2177,13 +2184,13 @@ def create_yaml_file(main_window):
         # Post-processing
         biapy_config['TEST']['POST_PROCESSING'] = {}
         ### Semantic segmentation
-        if main_window.cfg.settings['selected_workflow'] == 0:
+        if workflow_key_name == "SEMANTIC_SEG":
             if get_text(main_window.ui.TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INPUT) == "Yes":
                 biapy_config['TEST']['POST_PROCESSING']['MEDIAN_FILTER'] = True
                 biapy_config['TEST']['POST_PROCESSING']['MEDIAN_FILTER_AXIS'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__INPUT))
                 biapy_config['TEST']['POST_PROCESSING']['MEDIAN_FILTER_SIZE'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__INPUT))
         ### Instance segmentation
-        elif main_window.cfg.settings['selected_workflow'] == 1:
+        elif workflow_key_name == "INSTANCE_SEG":
             if get_text(main_window.ui.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT) == "Yes":
                 biapy_config['TEST']['POST_PROCESSING']['MEDIAN_FILTER'] = True
                 biapy_config['TEST']['POST_PROCESSING']['MEDIAN_FILTER_AXIS'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INPUT))
@@ -2207,7 +2214,7 @@ def create_yaml_file(main_window):
                     biapy_config['TEST']['POST_PROCESSING']['REMOVE_CLOSE_POINTS'] = True 
                     biapy_config['TEST']['POST_PROCESSING']['REMOVE_CLOSE_POINTS_RADIUS'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INPUT))
         ### Detection
-        elif main_window.cfg.settings['selected_workflow'] == 2:
+        elif workflow_key_name == "DETECTION":
             if get_text(main_window.ui.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT) == "Yes":
                 biapy_config['TEST']['POST_PROCESSING']['MEDIAN_FILTER'] = True
                 biapy_config['TEST']['POST_PROCESSING']['MEDIAN_FILTER_AXIS'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INPUT))
@@ -2240,6 +2247,27 @@ def create_yaml_file(main_window):
             del biapy_config['TEST']['POST_PROCESSING']
     else:
         biapy_config['TEST']['ENABLE'] = False
+
+    # Imposed variables due to loaded pretrained model 
+    if main_window.external_model_restrictions is not None:
+        m=""
+        for key, val in main_window.external_model_restrictions.items():
+            if "PATCH_SIZE_C" in key:
+                val = "PATCH_SIZE (channel)"
+            m  += f"    - {key} : {val}\n"
+        main_window.dialog_exec("The following variables will be set automatically as they are imposed by the pretrained model selected:\n"+m, 
+            "inform_user")
+
+        # Generate config from answers 
+        model_restrictions = {}
+        for key, value in main_window.external_model_restrictions.items():
+            if value != -1:
+                if isinstance(key, str):
+                    create_dict_from_key(key, value, model_restrictions)
+                else:
+                    raise ValueError(f"Error found in config: {key}. Contact BiaPy team!")
+        
+        biapy_config.update(model_restrictions)         
 
     if not main_window.cfg.settings['yaml_config_filename'].endswith(".yaml") and not main_window.cfg.settings['yaml_config_filename'].endswith(".yml"):
         main_window.cfg.settings['yaml_config_filename'] = main_window.cfg.settings['yaml_config_filename']+".yaml"
@@ -2307,7 +2335,7 @@ def load_yaml_config(main_window, advise_user=False):
     try:
         main_window.cfg.settings['biapy_cfg']._C.merge_from_file(os.path.join(main_window.cfg.settings['yaml_config_file_path'], main_window.cfg.settings['yaml_config_filename']))
         main_window.cfg.settings['biapy_cfg'] = main_window.cfg.settings['biapy_cfg'].get_cfg_defaults()
-        check_configuration(main_window.cfg.settings['biapy_cfg'], jobname+"_1", logger=main_window.logger)
+        check_configuration(main_window.cfg.settings['biapy_cfg'], jobname+"_1")
         
     except Exception as errors:   
         errors = str(errors)
@@ -2453,8 +2481,7 @@ class load_yaml_to_GUI_engine(QObject):
         try:
             tmp_cfg._C.merge_from_file(yaml_file_final)
             tmp_cfg = tmp_cfg.get_cfg_defaults()
-            check_configuration(tmp_cfg, get_text(self.main_window.ui.job_name_input), check_data_paths=False, 
-                logger=self.main_window.logger)
+            check_configuration(tmp_cfg, get_text(self.main_window.ui.job_name_input), check_data_paths=False)
         except Exception as errors:  
             errors = str(errors) 
             self.main_window.logger.error(errors) 
@@ -2742,3 +2769,13 @@ def path_to_linux(p, orig_os="win"):
         p = os.path.join("/"+p.parts[0][0],*p.parts[1:]).replace('\\','/')
     return p 
 
+def create_dict_from_key(cfg_key, value, out_cfg):
+    keys = cfg_key.split(".")
+    if keys[0] not in out_cfg:
+        out_cfg[keys[0]] = {}
+    if len(keys) == 2:
+        if isinstance(value, tuple):
+            value = str(value)
+        out_cfg[keys[0]][keys[1]] = value    
+    else:
+        create_dict_from_key(".".join(keys[1:]), value, out_cfg[keys[0]])  
