@@ -92,6 +92,8 @@ class Settings:
             "unet",
             "resunet",
             "resunet++",
+            "resunet_se",
+            "unext_v1",
             "attention_unet",
             "multiresunet",
             "seunet",
@@ -101,16 +103,36 @@ class Settings:
             "U-Net",
             "Residual U-Net",
             "ResUNet++",
+            "ResUNet SE",
+            "U-NeXT V1",
             "Attention U-Net",
             "MultiResUnet",
             "SEUnet",
             "UNETR",
+        ]
+        self.settings["semantic_losses"] = [
+            "CE",
+            "DICE",
+            "W_CE_DICE"
+        ]
+        self.settings["semantic_losses_real_names"] = [
+            "Cross Entropy (CE)",
+            "DICE",
+            "Weighted CE + DICE"
+        ]
+        self.settings["semantic_metrics"] = [
+            "iou",
+        ]
+        self.settings["semantic_metrics_real_names"] = [
+            "Intersection over union (IoU/Jaccard)",
         ]
         # Instance segmentation
         self.settings["instance_models"] = [
             "unet",
             "resunet",
             "resunet++",
+            "resunet_se",
+            "unext_v1",
             "seunet",
             "attention_unet",
             "multiresunet",
@@ -120,16 +142,36 @@ class Settings:
             "U-Net",
             "Residual U-Net",
             "ResUNet++",
+            "ResUNet SE",
+            "U-NeXT V1",
             "SEUnet",
             "Attention U-Net",
             "MultiResUnet",
             "UNETR",
+        ]
+        self.settings["instance_losses"] = [
+            "CE",
+            "DICE",
+            "W_CE_DICE"
+        ]
+        self.settings["instance_losses_real_names"] = [
+            "Cross Entropy (CE)",
+            "DICE",
+            "Weighted CE + DICE"
+        ]
+        self.settings["instance_metrics"] = [
+            "iou",
+        ]
+        self.settings["instance_metrics_real_names"] = [
+            "Intersection over union (IoU/Jaccard)",
         ]
         # Detection
         self.settings["detection_models"] = [
             "unet",
             "resunet",
             "resunet++",
+            "resunet_se",
+            "unext_v1",
             "seunet",
             "attention_unet",
             "multiresunet",
@@ -139,16 +181,36 @@ class Settings:
             "U-Net",
             "Residual U-Net",
             "ResUNet++",
+            "ResUNet SE",
+            "U-NeXT V1",
             "SEUnet",
             "Attention U-Net",
             "MultiResUnet",
             "UNETR",
+        ]
+        self.settings["detection_losses"] = [
+            "CE",
+            "DICE",
+            "W_CE_DICE"
+        ]
+        self.settings["detection_losses_real_names"] = [
+            "Cross Entropy (CE)",
+            "DICE",
+            "Weighted CE + DICE"
+        ]
+        self.settings["detection_metrics"] = [
+            "iou",
+        ]
+        self.settings["detection_metrics_real_names"] = [
+            "Intersection over union (IoU/Jaccard)",
         ]
         # Denoising
         self.settings["denoising_models"] = [
             "unet",
             "resunet",
             "resunet++",
+            "resunet_se",
+            "unext_v1",
             "seunet",
             "attention_unet",
             "multiresunet",
@@ -158,10 +220,26 @@ class Settings:
             "U-Net",
             "Residual U-Net",
             "ResUNet++",
+            "ResUNet SE",
+            "U-NeXT V1",
             "SEUnet",
             "Attention U-Net",
             "MultiResUnet",
             "UNETR",
+        ]
+        self.settings["denoising_losses"] = [
+            "MSE",
+        ]
+        self.settings["denoising_losses_real_names"] = [
+            "Mean square error (MSE/L2)",
+        ]
+        self.settings["denoising_metrics"] = [
+            "mae",
+            "mse"
+        ]
+        self.settings["denoising_metrics_real_names"] = [
+            "Mean absolute error (MAE/L1)",
+            "Mean square error (MSE/L2)",
         ]
         # Super resolution
         self.settings["sr_2d_models"] = [
@@ -172,6 +250,8 @@ class Settings:
             "unet",
             "resunet",
             "resunet++",
+            "resunet_se",
+            "unext_v1",
             "seunet",
             "attention_unet",
             "multiresunet",
@@ -184,18 +264,42 @@ class Settings:
             "U-Net",
             "Residual U-Net",
             "ResUNet++",
+            "ResUNet SE",
+            "U-NeXT V1",
             "SEUnet",
             "Attention U-Net",
             "MultiResUnet",
         ]
-        self.settings["sr_3d_models"] = ["unet", "resunet", "resunet++", "seunet", "attention_unet", "multiresunet"]
+        self.settings["sr_3d_models"] = ["unet", "resunet", "resunet++", "resunet_se", "seunet", "attention_unet", "multiresunet"]
         self.settings["sr_3d_models_real_names"] = [
             "U-Net",
             "Residual U-Net",
             "ResUNet++",
+            "ResUNet SE",
+            "U-NeXT V1",
             "SEUnet",
             "Attention U-Net",
             "MultiResUnet",
+        ]
+        self.settings["sr_losses"] = [
+            "MAE",
+            "MSE",
+        ]
+        self.settings["sr_losses_real_names"] = [
+            "Mean absolute error (MAE/L1)",
+            "Mean square error (MSE/L2)",
+        ]
+        self.settings["sr_metrics"] = [
+            "psnr",
+            "mae",
+            "mse",
+            "ssim",
+        ]
+        self.settings["sr_metrics_real_names"] = [
+            "Peak signal-to-noise ratio (PSNR)"
+            "Mean absolute error (MAE/L1)",
+            "Mean square error (MSE/L2)",
+            "Structural similarity index measure (SSIM)"
         ]
         # Self-supervised learning
         self.settings["ssl_models"] = [
@@ -203,6 +307,8 @@ class Settings:
             "unet",
             "resunet",
             "resunet++",
+            "resunet_se",
+            "unext_v1",
             "seunet",
             "attention_unet",
             "multiresunet",
@@ -213,10 +319,32 @@ class Settings:
             "U-Net",
             "Residual U-Net",
             "ResUNet++",
+            "ResUNet SE",
+            "U-NeXT V1",
             "SEUnet",
             "Attention U-Net",
             "MultiResUnet",
             "UNETR",
+        ]
+        self.settings["ssl_losses"] = [
+            "MAE",
+            "MSE",
+        ]
+        self.settings["ssl_losses_real_names"] = [
+            "Mean absolute error (MAE/L1)",
+            "Mean square error (MSE/L2)",
+        ]
+        self.settings["ssl_metrics"] = [
+            "psnr",
+            "mae",
+            "mse",
+            "ssim",
+        ]
+        self.settings["ssl_metrics_real_names"] = [
+            "Peak signal-to-noise ratio (PSNR)"
+            "Mean absolute error (MAE/L1)",
+            "Mean square error (MSE/L2)",
+            "Structural similarity index measure (SSIM)"
         ]
         # Classification
         self.settings["classification_models"] = [
@@ -243,6 +371,20 @@ class Settings:
             "EfficientNetB6",
             "EfficientNetB7",
         ]
+        self.settings["classification_losses"] = [
+            "CE",
+        ]
+        self.settings["classification_losses_real_names"] = [
+            "Cross Entropy (CE)",
+        ]
+        self.settings["classification_metrics"] = [
+            "accuracy",
+            "top-5-accuracy",
+        ]
+        self.settings["classification_metrics_real_names"] = [
+            "Accuracy"
+            "Top-5 Accuracy",
+        ]
         # Image to image
         self.settings["i2i_models"] = [
             "edsr",
@@ -252,6 +394,8 @@ class Settings:
             "unet",
             "resunet",
             "resunet++",
+            "resunet_se",
+            "unext_v1",
             "seunet",
             "attention_unet",
             "unetr",
@@ -265,10 +409,32 @@ class Settings:
             "U-Net",
             "Residual U-Net",
             "ResUNet++",
+            "ResUNet SE",
+            "U-NeXT V1",
             "SEUnet",
             "Attention U-Net",
             "UNETR",
             "MultiResUnet",
+        ]
+        self.settings["i2i_losses"] = [
+            "MAE",
+            "MSE",
+        ]
+        self.settings["i2i_losses_real_names"] = [
+            "Mean absolute error (MAE/L1)",
+            "Mean square error (MSE/L2)",
+        ]
+        self.settings["i2i_metrics"] = [
+            "psnr",
+            "mae",
+            "mse",
+            "ssim",
+        ]
+        self.settings["i2i_metrics_real_names"] = [
+            "Peak signal-to-noise ratio (PSNR)"
+            "Mean absolute error (MAE/L1)",
+            "Mean square error (MSE/L2)",
+            "Structural similarity index measure (SSIM)"
         ]
 
         # Paths
@@ -756,7 +922,18 @@ class Settings:
                 pass
             else:
                 return list(self.settings[x + d + s2])[idx]
-
+            
+    def translate_names(self, model, key_str="", inv=False):
+        s = f"_{key_str}_real_names" if not inv else f"_{key_str}"
+        s2 = f"_{key_str}" if not inv else f"_{key_str}_real_names"
+        for x in ["semantic", "instance", "detection", "denoising", "sr", "ssl", "classification", "i2i"]:
+            try:
+                idx = list(self.settings[x + s]).index(model)
+            except:
+                pass
+            else:
+                return list(self.settings[x + s2])[idx]
+            
     def load_workflow_page(self):
         self.settings["workflow_images"] = [
             QPixmap(resource_path(os.path.join("images", "semantic_seg.png"))),

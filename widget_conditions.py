@@ -63,27 +63,6 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
-            "DATA__PREPROCESS__TRAIN__LABEL": 
-                {
-                    "DATA__TRAIN__IN_MEMORY__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
-            "DATA__PREPROCESS__TRAIN__INFO": 
-                {
-                    "DATA__TRAIN__IN_MEMORY__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
-            "DATA__PREPROCESS__TRAIN__INPUT": 
-                {
-                    "DATA__TRAIN__IN_MEMORY__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
             "percentage_validation_label": 
                 {
                     "DATA__VAL__TYPE__INPUT": 
@@ -256,36 +235,11 @@ class Widget_conditions():
                         "IMAGE_TO_IMAGE",
                     ],
                 }, 
-            "val_in_memory_label": 
-                {
-                    "DATA__VAL__TYPE__INPUT": 
-                    [
-                        "Not extracted from train (path needed)"
-                    ],
-                }, 
-            "val_in_memory_info": 
-                {
-                    "DATA__VAL__TYPE__INPUT": 
-                    [
-                        "Not extracted from train (path needed)"
-                    ],
-                }, 
-            "DATA__VAL__IN_MEMORY__INPUT": 
-                {
-                    "DATA__VAL__TYPE__INPUT": 
-                    [
-                        "Not extracted from train (path needed)"
-                    ],
-                },
             "DATA__PREPROCESS__VAL__LABEL": 
                 {
                     "DATA__VAL__TYPE__INPUT": 
                     [
                         "Not extracted from train (path needed)"
-                    ],
-                    "DATA__VAL__IN_MEMORY__INPUT":
-                    [
-                        "Yes"
                     ],
                 },
             "DATA__PREPROCESS__VAL__INFO": 
@@ -294,20 +248,12 @@ class Widget_conditions():
                     [
                         "Not extracted from train (path needed)"
                     ],
-                    "DATA__VAL__IN_MEMORY__INPUT":
-                    [
-                        "Yes"
-                    ],
                 },
             "DATA__PREPROCESS__VAL__INPUT": 
                 {
                     "DATA__VAL__TYPE__INPUT": 
                     [
                         "Not extracted from train (path needed)"
-                    ],
-                    "DATA__VAL__IN_MEMORY__INPUT":
-                    [
-                        "Yes"
                     ],
                 }, 
             "test_data_label": 
@@ -357,7 +303,7 @@ class Widget_conditions():
                     [
                         "No"
                     ]
-                }, 
+                },  
             "test_exists_gt_label": 
                 {
                     "DATA__TEST__USE_VAL_AS_TEST__INPUT":
@@ -520,42 +466,6 @@ class Widget_conditions():
                         "IMAGE_TO_IMAGE",
                     ]
                 }, 
-            "test_data_in_memory_label": 
-                {
-                    "DATA__VAL__TYPE__INPUT": 
-                    [
-                        "Not extracted from train (path needed)", 
-                        "Extract from train (split training)"
-                    ],
-                    "DATA__TEST__USE_VAL_AS_TEST__INPUT":
-                    [
-                        "No"
-                    ]
-                }, 
-            "DATA__TEST__IN_MEMORY__INPUT": 
-                {
-                    "DATA__VAL__TYPE__INPUT": 
-                    [
-                        "Not extracted from train (path needed)", 
-                        "Extract from train (split training)"
-                    ],
-                    "DATA__TEST__USE_VAL_AS_TEST__INPUT":
-                    [
-                        "No"
-                    ]
-                }, 
-            "DATA__TEST__IN_MEMORY__INFO": 
-                {
-                    "DATA__VAL__TYPE__INPUT": 
-                    [
-                        "Not extracted from train (path needed)", 
-                        "Extract from train (split training)"
-                    ],
-                    "DATA__TEST__USE_VAL_AS_TEST__INPUT":
-                    [
-                        "No"
-                    ]
-                }, 
             "random_val_label": 
                 {
                     "DATA__VAL__TYPE__INPUT": 
@@ -587,10 +497,6 @@ class Widget_conditions():
                     [
                         "Not extracted from train (path needed)", 
                     ],
-                    "DATA__VAL__IN_MEMORY__INPUT":
-                    [
-                        "Yes"
-                    ]
                 }, 
             "DATA__VAL__OVERLAP__INPUT": 
                 {
@@ -598,10 +504,6 @@ class Widget_conditions():
                     [
                         "Not extracted from train (path needed)"
                     ],
-                    "DATA__VAL__IN_MEMORY__INPUT":
-                    [
-                        "Yes"
-                    ]
                 }, 
             "DATA__VAL__OVERLAP__INFO": 
                 {
@@ -609,10 +511,6 @@ class Widget_conditions():
                     [
                         "Not extracted from train (path needed)"
                     ],
-                    "DATA__VAL__IN_MEMORY__INPUT":
-                    [
-                        "Yes"
-                    ]
                 }, 
             "validation_padding_label": 
                 {
@@ -620,10 +518,6 @@ class Widget_conditions():
                     [
                         "Not extracted from train (path needed)"
                     ],
-                    "DATA__VAL__IN_MEMORY__INPUT":
-                    [
-                        "Yes"
-                    ]
                 },
             "DATA__VAL__PADDING__INFO": 
                 {
@@ -631,10 +525,6 @@ class Widget_conditions():
                     [
                         "Not extracted from train (path needed)"
                     ],
-                    "DATA__VAL__IN_MEMORY__INPUT":
-                    [
-                        "Yes"
-                    ]
                 }, 
             "DATA__VAL__PADDING__INPUT": 
                 {
@@ -642,10 +532,6 @@ class Widget_conditions():
                     [
                         "Not extracted from train (path needed)"
                     ],
-                    "DATA__VAL__IN_MEMORY__INPUT":
-                    [
-                        "Yes"
-                    ]
                 }, 
             "TRAIN__W_DECAY__INPUT": 
                 {
@@ -968,6 +854,27 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
+            "da_zoom_in_z_label": 
+                {
+                    "AUGMENTOR__ZOOM__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "AUGMENTOR__ZOOM_IN_Z__INFO": 
+                {
+                    "AUGMENTOR__ZOOM__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "AUGMENTOR__ZOOM_IN_Z__INPUT": 
+                {
+                    "AUGMENTOR__ZOOM__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
             "da_shift_range_label": 
                 {
                     "AUGMENTOR__SHIFT__INPUT": 
@@ -1216,90 +1123,6 @@ class Widget_conditions():
             "AUGMENTOR__CONTRAST_MODE__INFO": 
                 {
                     "AUGMENTOR__CONTRAST__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
-            "da_brightness_em_factor_label": 
-                {
-                    "AUGMENTOR__BRIGHTNESS_EM__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
-            "AUGMENTOR__BRIGHTNESS_EM_FACTOR__INPUT": 
-                {
-                    "AUGMENTOR__BRIGHTNESS_EM__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
-            "AUGMENTOR__BRIGHTNESS_EM_FACTOR__INFO": 
-                {
-                    "AUGMENTOR__BRIGHTNESS_EM__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
-            "da_brightness_em_mode_label": 
-                {
-                    "AUGMENTOR__BRIGHTNESS_EM__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
-            "AUGMENTOR__BRIGHTNESS_EM_MODE__INPUT": 
-                {
-                    "AUGMENTOR__BRIGHTNESS_EM__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                },
-            "AUGMENTOR__BRIGHTNESS_EM_MODE__INFO": 
-                {
-                    "AUGMENTOR__BRIGHTNESS_EM__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                },
-            "da_contrast_em_factor_label": 
-                {
-                    "AUGMENTOR__CONTRAST_EM__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
-            "AUGMENTOR__CONTRAST_EM_FACTOR__INPUT": 
-                {
-                    "AUGMENTOR__CONTRAST_EM__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
-            "AUGMENTOR__CONTRAST_EM_FACTOR__INFO": 
-                {
-                    "AUGMENTOR__CONTRAST_EM__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
-            "da_contrast_em_mode_label": 
-                {
-                    "AUGMENTOR__CONTRAST_EM__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
-            "AUGMENTOR__CONTRAST_EM_MODE__INPUT": 
-                {
-                    "AUGMENTOR__CONTRAST_EM__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
-            "AUGMENTOR__CONTRAST_EM_MODE__INFO": 
-                {
-                    "AUGMENTOR__CONTRAST_EM__INPUT": 
                     [
                         "Yes"
                     ],
@@ -1927,48 +1750,6 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
-            "sem_seg_yz_filtering_size_label": 
-                {
-                    "TEST__POST_PROCESSING__YZ_FILTERING__SEM_SEG__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
-            "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__SEM_SEG__INPUT": 
-                {
-                    "TEST__POST_PROCESSING__YZ_FILTERING__SEM_SEG__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
-            "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__SEM_SEG__INFO": 
-                {
-                    "TEST__POST_PROCESSING__YZ_FILTERING__SEM_SEG__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
-            "sem_seg_z_filtering_size_label": 
-                {
-                    "TEST__POST_PROCESSING__Z_FILTERING__SEM_SEG__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
-            "TEST__POST_PROCESSING__Z_FILTERING_SIZE__SEM_SEG__INPUT": 
-                {
-                    "TEST__POST_PROCESSING__Z_FILTERING__SEM_SEG__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
-            "TEST__POST_PROCESSING__Z_FILTERING_SIZE__SEM_SEG__INFO": 
-                {
-                    "TEST__POST_PROCESSING__Z_FILTERING__SEM_SEG__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
             "inst_seg_b_channel_th_label": 
                 {
                     "PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT": 
@@ -2405,48 +2186,6 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
-            "inst_seg_yz_filtering_size_label": 
-                {
-                    "TEST__POST_PROCESSING__YZ_FILTERING__INST_SEG__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
-            "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__INST_SEG__INPUT": 
-                {
-                    "TEST__POST_PROCESSING__YZ_FILTERING__INST_SEG__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
-            "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__INST_SEG__INFO": 
-                {
-                    "TEST__POST_PROCESSING__YZ_FILTERING__INST_SEG__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
-            "inst_seg_z_filtering_size_label": 
-                {
-                    "TEST__POST_PROCESSING__Z_FILTERING__INST_SEG__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
-            "TEST__POST_PROCESSING__Z_FILTERING_SIZE__INST_SEG__INFO": 
-                {
-                    "TEST__POST_PROCESSING__Z_FILTERING__INST_SEG__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
-            "TEST__POST_PROCESSING__Z_FILTERING_SIZE__INST_SEG__INPUT": 
-                {
-                    "TEST__POST_PROCESSING__Z_FILTERING__INST_SEG__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                }, 
             "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__LABEL": 
                 {
                     "TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INPUT": 
@@ -2659,48 +2398,195 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
-            "det_yz_filtering_size_label": 
+            "TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__LABEL": 
                 {
-                    "TEST__POST_PROCESSING__YZ_FILTERING__DET__INPUT": 
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INPUT": 
                     [
                         "Yes"
                     ],
                 }, 
-            "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__DET__INPUT": 
+            "TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INFO": 
                 {
-                    "TEST__POST_PROCESSING__YZ_FILTERING__DET__INPUT": 
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INPUT": 
                     [
                         "Yes"
                     ],
                 }, 
-            "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__DET__INFO": 
+            "TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INPUT": 
                 {
-                    "TEST__POST_PROCESSING__YZ_FILTERING__DET__INPUT": 
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INPUT": 
                     [
                         "Yes"
                     ],
                 }, 
-            "det_z_filtering_size_label": 
+            "TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__LABEL": 
                 {
-                    "TEST__POST_PROCESSING__Z_FILTERING__DET__INPUT": 
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INPUT": 
                     [
                         "Yes"
                     ],
                 }, 
-            "TEST__POST_PROCESSING__Z_FILTERING_SIZE__DET__INPUT": 
+            "TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__INFO": 
                 {
-                    "TEST__POST_PROCESSING__Z_FILTERING__DET__INPUT": 
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INPUT": 
                     [
                         "Yes"
                     ],
                 }, 
-            "TEST__POST_PROCESSING__Z_FILTERING_SIZE__DET__INFO": 
+            "TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__INPUT": 
                 {
-                    "TEST__POST_PROCESSING__Z_FILTERING__DET__INPUT": 
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INPUT": 
                     [
                         "Yes"
                     ],
                 },
+            "TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__LABEL": 
+                {
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__INFO": 
+                {
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__INPUT": 
+                {
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                },  
+            "TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__LABEL": 
+                {
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INFO": 
+                {
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT": 
+                {
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__LABEL": 
+                {
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO": 
+                {
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INPUT": 
+                {
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                },
+            "TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__LABEL": 
+                {
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO": 
+                {
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INPUT": 
+                {
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                },  
+            "TEST__POST_PROCESSING__MEDIAN_FILTER__DET__LABEL": 
+                {
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INFO": 
+                {
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT": 
+                {
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__LABEL": 
+                {
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO": 
+                {
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INPUT": 
+                {
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                },
+            "TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__LABEL": 
+                {
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO": 
+                {
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                }, 
+            "TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INPUT": 
+                {
+                    "TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                },  
             "TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__LABEL": 
                 {
                     "TEST__POST_PROCESSING__DET_WATERSHED__INPUT": 
@@ -3024,7 +2910,9 @@ class Widget_conditions():
                     [
                         'U-Net', 
                         'Residual U-Net', 
-                        'ResUNet++', 
+                        'ResUNet++',
+                        'ResUNet SE',
+                        'U-NeXT V1', 
                         'Attention U-Net', 
                         'MultiResUnet', 
                         'SEUnet', 
@@ -3036,7 +2924,9 @@ class Widget_conditions():
                     [
                         'U-Net', 
                         'Residual U-Net', 
-                        'ResUNet++', 
+                        'ResUNet++',
+                        'ResUNet SE',
+                        'U-NeXT V1', 
                         'Attention U-Net', 
                         'MultiResUnet', 
                         'SEUnet', 
@@ -3048,7 +2938,9 @@ class Widget_conditions():
                     [
                         'U-Net', 
                         'Residual U-Net', 
-                        'ResUNet++', 
+                        'ResUNet++',
+                        'ResUNet SE',
+                        'U-NeXT V1', 
                         'Attention U-Net', 
                         'MultiResUnet', 
                         'SEUnet', 
@@ -3060,7 +2952,9 @@ class Widget_conditions():
                     [
                         'U-Net', 
                         'Residual U-Net', 
-                        'ResUNet++', 
+                        'ResUNet++',
+                        'ResUNet SE',
+                        'U-NeXT V1', 
                         'Attention U-Net', 
                         'MultiResUnet', 
                         'SEUnet', 
@@ -3082,6 +2976,20 @@ class Widget_conditions():
                         'MAE', 
                         'UNETR', 
                         'ViT', 
+                    ],
+                }, 
+            "convnext_label": 
+                {
+                    "MODEL__ARCHITECTURE__INPUT": 
+                    [
+                        'U-NeXT V1', 
+                    ],
+                }, 
+            "convnext_frame": 
+                {
+                    "MODEL__ARCHITECTURE__INPUT": 
+                    [
+                        'U-NeXT V1', 
                     ],
                 }, 
             "unetr_vit_hidden_multiple_label": 
@@ -3404,13 +3312,6 @@ class Widget_conditions():
                         'No', 
                     ],
                 },
-            "DATA__PREPROCESS__TEST__FRAME": 
-                {
-                    "DATA__TEST__IN_MEMORY__INPUT": 
-                    [
-                        'Yes', 
-                    ],
-                },
             "TEST__DET_BLOB_LOG_MIN_SIGMA__LABEL": 
                 {
                     "TEST__DET_POINT_CREATION_FUNCTION__INPUT": 
@@ -3713,7 +3614,42 @@ class Widget_conditions():
                         "Yes",
                     ]
                 },
-            
+            "DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL": 
+                {
+                    "DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO": 
+                {
+                    "DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT": 
+                {
+                    "DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__LABEL": 
+                {
+                    "DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INFO": 
+                {
+                    "DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INPUT": 
+                {
+                    "DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__TEST__INPUT": [
+                        "Yes",
+                    ]
+                },
             "DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__LABEL": 
                 {
                     "DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT": [
@@ -3813,9 +3749,6 @@ class Widget_conditions():
             "preprocessing_test_frame": 
                 {
                     "DATA__PREPROCESS__TEST__INPUT": [
-                        "Yes",
-                    ],
-                    "DATA__TEST__IN_MEMORY__INPUT": [
                         "Yes",
                     ],
                 },
@@ -4097,6 +4030,24 @@ class Widget_conditions():
                         "Yes",
                     ]
                 },
+            "TEST__AUGMENTATION_MODE__LABEL": 
+                {
+                    "TEST__AUGMENTATION__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "TEST__AUGMENTATION_MODE__INFO": 
+                {
+                    "TEST__AUGMENTATION__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "TEST__AUGMENTATION_MODE__INPUT": 
+                {
+                    "TEST__AUGMENTATION__INPUT": [
+                        "Yes",
+                    ]
+                },
             "DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL": 
                 {
                     "DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT": [
@@ -4130,6 +4081,171 @@ class Widget_conditions():
             "DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT": 
                 {
                     "DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL": 
+                {
+                    "DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO": 
+                {
+                    "DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT": 
+                {
+                    "DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL": 
+                {
+                    "DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO": 
+                {
+                    "DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT": 
+                {
+                    "DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL": 
+                {
+                    "DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO": 
+                {
+                    "DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT": 
+                {
+                    "DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+
+            "DATA__VAL__FILTER_SAMPLES__PROPS__LABEL": 
+                {
+                    "DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__VAL__FILTER_SAMPLES__PROPS__INFO": 
+                {
+                    "DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__VAL__FILTER_SAMPLES__PROPS__INPUT": 
+                {
+                    "DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__VAL__FILTER_SAMPLES__VALUES__LABEL": 
+                {
+                    "DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__VAL__FILTER_SAMPLES__VALUES__INFO": 
+                {
+                    "DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__VAL__FILTER_SAMPLES__VALUES__INPUT": 
+                {
+                    "DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL": 
+                {
+                    "DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__VAL__FILTER_SAMPLES__SIGNS__INFO": 
+                {
+                    "DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT": 
+                {
+                    "DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+
+
+            "DATA__TEST__FILTER_SAMPLES__PROPS__LABEL": 
+                {
+                    "DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TEST__FILTER_SAMPLES__PROPS__INFO": 
+                {
+                    "DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TEST__FILTER_SAMPLES__PROPS__INPUT": 
+                {
+                    "DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TEST__FILTER_SAMPLES__VALUES__LABEL": 
+                {
+                    "DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TEST__FILTER_SAMPLES__VALUES__INFO": 
+                {
+                    "DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TEST__FILTER_SAMPLES__VALUES__INPUT": 
+                {
+                    "DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL": 
+                {
+                    "DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TEST__FILTER_SAMPLES__SIGNS__INFO": 
+                {
+                    "DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT": 
+                {
+                    "DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT": [
                         "Yes",
                     ]
                 },

@@ -196,6 +196,9 @@ class MainWindow(QMainWindow):
         self.ui.MODEL__MAE_DEC_NUM_LAYERS__INPUT.setValidator(self.int_validator)
         self.ui.MODEL__MAE_DEC_NUM_HEADS__INPUT.setValidator(self.int_validator)
         self.ui.MODEL__MAE_DEC_MLP_DIMS__INPUT.setValidator(self.int_validator) 
+        self.ui.MODEL__CONVNEXT_SD_PROB__INPUT.setValidator(self.float_validator) 
+        self.ui.MODEL__CONVNEXT_LAYER_SCALE__INPUT.setValidator(self.float_validator) 
+        self.ui.MODEL__CONVNEXT_STEM_K_SIZE__INPUT.setValidator(self.int_validator) 
         self.ui.MODEL__VIT_NORM_EPS__INPUT.setValidator(self.float_validator)
         self.ui.MODEL__VIT_NUM_HEADS__INPUT.setValidator(self.int_validator)
         self.ui.MODEL__UNETR_VIT_HIDD_MULT__INPUT.setValidator(self.int_validator)
@@ -222,8 +225,6 @@ class MainWindow(QMainWindow):
         self.ui.AUGMENTOR__GC_GAMMA__INPUT.setValidator(self.two_pos_float_number_parenthesis_validator)
         self.ui.AUGMENTOR__BRIGHTNESS_FACTOR__INPUT.setValidator(self.two_0_1_float_number_parenthesis_validator)
         self.ui.AUGMENTOR__CONTRAST_FACTOR__INPUT.setValidator(self.two_0_1_float_number_parenthesis_validator)
-        self.ui.AUGMENTOR__BRIGHTNESS_EM_FACTOR__INPUT.setValidator(self.two_0_1_float_number_parenthesis_validator)
-        self.ui.AUGMENTOR__CONTRAST_EM_FACTOR__INPUT.setValidator(self.two_0_1_float_number_parenthesis_validator)
         self.ui.AUGMENTOR__DROP_RANGE__INPUT.setValidator(self.two_pos_0_1_float_number_parenthesis_validator)
         self.ui.AUGMENTOR__COUT_NB_ITERATIONS__INPUT.setValidator(self.two_pos_number_parenthesis_validator)
         self.ui.AUGMENTOR__COUT_SIZE__INPUT.setValidator(self.two_pos_0_1_float_number_parenthesis_validator)
@@ -250,11 +251,6 @@ class MainWindow(QMainWindow):
         self.ui.DATA__W_FOREGROUND__INPUT.setValidator(self.float_validator)
         self.ui.DATA__W_BACKGROUND__INPUT.setValidator(self.float_validator)
         self.ui.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INPUT.setValidator(self.int_validator)
-        self.ui.DATA__TRAIN__MINIMUM_FOREGROUND_PER__SEM_SEG__INPUT.setValidator(self.float_validator)
-        self.ui.TEST__POST_PROCESSING__YZ_FILTERING_SIZE__SEM_SEG__INPUT.setValidator(self.int_validator)
-        self.ui.TEST__POST_PROCESSING__Z_FILTERING_SIZE__SEM_SEG__INPUT.setValidator(self.int_validator)
-
-        self.ui.DATA__TRAIN__MINIMUM_FOREGROUND_PER__INST_SEG__INPUT.setValidator(self.float_validator)
         self.ui.PROBLEM__INSTANCE_SEG__DATA_CHANNEL_WEIGHTS__INPUT.setValidator(self.two_pos_0_1_float_number_parenthesis_validator)
         self.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INPUT.setValidator(self.float_validator)
         self.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INPUT.setValidator(self.float_validator)
@@ -267,20 +263,14 @@ class MainWindow(QMainWindow):
         self.ui.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INPUT.setValidator(self.no_limit_number_bracket_validator)
         # self.ui.TEST__MATCHING_STATS_THS__INPUT.setValidator(self.no_limit_0_1_float_number_bracket_validator)
         # self.ui.TEST__MATCHING_STATS_THS_COLORED_IMG__INPUT.setValidator(self.no_limit_0_1_float_number_bracket_validator)
-        self.ui.TEST__POST_PROCESSING__YZ_FILTERING_SIZE__INST_SEG__INPUT.setValidator(self.int_validator)
-        self.ui.TEST__POST_PROCESSING__Z_FILTERING_SIZE__INST_SEG__INPUT.setValidator(self.int_validator)
         self.ui.TEST__POST_PROCESSING__VORONOI_TH__INPUT.setValidator(self.float_validator)
         # self.ui.TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INPUT.setValidator(self.int_validator)
         # self.ui.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INPUT.setValidator(self.no_limit_0_1_float_number_bracket_validator)
 
-        self.ui.DATA__TRAIN__MINIMUM_FOREGROUND_PER__DET__INPUT.setValidator(self.float_validator)
-        self.ui.PROBLEM__DETECTION__CENTRAL_POINT_DILATION__INPUT.setValidator(self.int_validator)
         # self.ui.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT.setValidator(self.no_limit_0_1_float_number_bracket_validator)
         self.ui.TEST__DET_BLOB_LOG_MIN_SIGMA__INPUT.setValidator(self.int_validator)
         self.ui.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT.setValidator(self.int_validator)
         self.ui.TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT.setValidator(self.int_validator)
-        self.ui.TEST__POST_PROCESSING__YZ_FILTERING_SIZE__DET__INPUT.setValidator(self.int_validator)
-        self.ui.TEST__POST_PROCESSING__Z_FILTERING_SIZE__DET__INPUT.setValidator(self.int_validator)
         # self.ui.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__DET__INPUT.setValidator(self.float_validator)
         # self.ui.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_CLASSES__INPUT.setValidator(self.no_limit_number_bracket_validator)
         self.ui.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_PATCH__INPUT.setValidator(self.no_limit_number_bracket_validator)
@@ -307,29 +297,12 @@ class MainWindow(QMainWindow):
         self.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN.clicked.connect(lambda: examine(self, "DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT", False))
         self.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__BN.clicked.connect(lambda: examine(self, "DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INPUT", False))
         self.ui.val_data_gt_input_browse_bn.clicked.connect(lambda: examine(self, "DATA__VAL__GT_PATH__INPUT", False))
-        self.ui.DATA__TRAIN__IN_MEMORY__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
-            ["DATA__PREPROCESS__TRAIN__LABEL","DATA__PREPROCESS__TRAIN__INFO","DATA__PREPROCESS__TRAIN__INPUT"], 
-            widgets_to_set_cond=[
-                (["DATA__VAL__TYPE__INPUT", "Not extracted from train (path needed)"], ["No"]),
-                (["DATA__NORMALIZATION__APPLICATION_MODE__INPUT", "image"], ["No"]),
-            ], updated_widget="DATA__TRAIN__IN_MEMORY__INPUT"))
         self.ui.DATA__VAL__TYPE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
             ["percentage_validation_label", "percentage_validation_info", "DATA__VAL__SPLIT_TRAIN__INPUT", "cross_validation_nfolds_label", "cross_validation_nfolds_info", "DATA__VAL__CROSS_VAL_NFOLD__INPUT",
-            "cross_validation_fold_label", "cross_validation_fold_info", "DATA__VAL__CROSS_VAL_FOLD__INPUT", "use_val_as_test", "DATA__TEST__USE_VAL_AS_TEST__INPUT","DATA__TEST__USE_VAL_AS_TEST__INFO",
+            "cross_validation_fold_label", "cross_validation_fold_info", "DATA__VAL__CROSS_VAL_FOLD__INPUT",
             "DATA__VAL__PATH__LABEL", "DATA__VAL__PATH__INFO", "DATA__VAL__PATH__INPUT", "val_data_input_browse_bn", "validation_data_gt_label", "validation_data_gt_info", "DATA__VAL__GT_PATH__INPUT",
-            "val_data_gt_input_browse_bn", "val_in_memory_label", "val_in_memory_info", "DATA__VAL__IN_MEMORY__INPUT", "test_data_label", "DATA__TEST__PATH__INPUT","DATA__TEST__PATH__INFO",
-            "test_data_input_browse_bn", "test_exists_gt_label", "DATA__TEST__LOAD_GT__INPUT", "DATA__TEST__LOAD_GT__INFO","test_data_gt_label", "DATA__TEST__GT_PATH__INPUT","DATA__TEST__GT_PATH__INFO",
-            "test_data_gt_input_browse_bn", "test_data_in_memory_label", "DATA__TEST__IN_MEMORY__INPUT", "DATA__TEST__IN_MEMORY__INFO","random_val_label", "DATA__VAL__RANDOM__INPUT","DATA__VAL__RANDOM__INFO",
-            "validation_overlap_label", "DATA__VAL__OVERLAP__INFO", "DATA__VAL__OVERLAP__INPUT", "validation_padding_label", "DATA__VAL__PADDING__INFO", "DATA__VAL__PADDING__INPUT",
-            "DATA__PREPROCESS__VAL__LABEL","DATA__PREPROCESS__VAL__INFO", "DATA__PREPROCESS__VAL__INPUT"],
-            widgets_to_set_cond=
-            [
-                (["DATA__TRAIN__IN_MEMORY__INPUT", "Yes"], ["Extract from train (split training)","Extract from train (cross validation)"])
-            ], updated_widget="DATA__VAL__TYPE__INPUT"))
-        self.ui.DATA__VAL__IN_MEMORY__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
-            ["validation_overlap_label", "DATA__VAL__OVERLAP__INFO", "DATA__VAL__OVERLAP__INPUT", "validation_padding_label", 
-            "DATA__VAL__PADDING__INFO", "DATA__VAL__PADDING__INPUT","DATA__PREPROCESS__VAL__LABEL","DATA__PREPROCESS__VAL__INFO",
-            "DATA__PREPROCESS__VAL__INPUT"]))
+            "val_data_gt_input_browse_bn", "random_val_label", "DATA__VAL__RANDOM__INPUT","DATA__VAL__RANDOM__INFO",
+            "validation_overlap_label", "DATA__VAL__OVERLAP__INFO", "DATA__VAL__OVERLAP__INPUT", "validation_padding_label", "DATA__VAL__PADDING__INFO", "DATA__VAL__PADDING__INPUT"]))
         self.ui.train_advanced_bn.clicked.connect(lambda: expand_hide_advanced_options(self, "train_advanced_bn", "train_advanced_options_frame"))
         self.ui.MODEL__ARCHITECTURE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["unet_model_like_frame", "unet_model_like_label", "sr_unet_like_heading", "sr_unet_like_frame", "transformers_frame", "transformers_label", 
@@ -342,7 +315,8 @@ class MainWindow(QMainWindow):
             "MODEL__MAE_DEC_HIDDEN_SIZE__INPUT", "MODEL__MAE_DEC_HIDDEN_SIZE__LABEL", "MODEL__MAE_DEC_HIDDEN_SIZE__INFO", 
             "MODEL__MAE_DEC_NUM_LAYERS__INPUT", "MODEL__MAE_DEC_NUM_LAYERS__LABEL", "MODEL__MAE_DEC_NUM_LAYERS__INFO", 
             "MODEL__MAE_DEC_NUM_HEADS__INPUT", "MODEL__MAE_DEC_NUM_HEADS__LABEL", "MODEL__MAE_DEC_NUM_HEADS__INFO", 
-            "MODEL__MAE_DEC_MLP_DIMS__INPUT", "MODEL__MAE_DEC_MLP_DIMS__INFO", "MODEL__MAE_DEC_MLP_DIMS__LABEL"], 
+            "MODEL__MAE_DEC_MLP_DIMS__INPUT", "MODEL__MAE_DEC_MLP_DIMS__INFO", "MODEL__MAE_DEC_MLP_DIMS__LABEL",
+            "convnext_label", "convnext_frame"], 
             widgets_to_set_cond=
             [
                 (["PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT", "masking"], ["MAE"]),
@@ -377,6 +351,10 @@ class MainWindow(QMainWindow):
             ["DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__LABEL", "DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO", "DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT",
              "DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__LABEL", "DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO", "DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT",
              "DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__LABEL", "DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO", "DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT"]))
+        self.ui.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL", "DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO", "DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT"]))
+        self.ui.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__TEST__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__LABEL", "DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INFO", "DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INPUT"]))
         self.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__LABEL", "DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO", "DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT",
              "DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN"]))
@@ -407,6 +385,8 @@ class MainWindow(QMainWindow):
         self.ui.DATA__PREPROCESS__CANNY__ENABLE__TEST__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__LABEL", "DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INFO", "DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INPUT",
              "DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__LABEL", "DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INFO", "DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INPUT"]))
+        self.ui.TEST__AUGMENTATION__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["TEST__AUGMENTATION_MODE__LABEL", "TEST__AUGMENTATION_MODE__INFO", "TEST__AUGMENTATION_MODE__INPUT"]))
         self.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL", "DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO", "DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT",
              "DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL", "DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO", "DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT"]))
@@ -414,6 +394,21 @@ class MainWindow(QMainWindow):
             ["DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL", "DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO", "DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT",
              "DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL", "DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO", "DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT"]))
 
+        self.ui.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL", "DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO", "DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT",
+             "DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL", "DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO", "DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT",
+             "DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL", "DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO", "DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT"]))
+
+        self.ui.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["DATA__VAL__FILTER_SAMPLES__PROPS__LABEL", "DATA__VAL__FILTER_SAMPLES__PROPS__INFO", "DATA__VAL__FILTER_SAMPLES__PROPS__INPUT",
+             "DATA__VAL__FILTER_SAMPLES__VALUES__LABEL", "DATA__VAL__FILTER_SAMPLES__VALUES__INFO", "DATA__VAL__FILTER_SAMPLES__VALUES__INPUT",
+             "DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL", "DATA__VAL__FILTER_SAMPLES__SIGNS__INFO", "DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT"]))
+
+        self.ui.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["DATA__TEST__FILTER_SAMPLES__PROPS__LABEL", "DATA__TEST__FILTER_SAMPLES__PROPS__INFO", "DATA__TEST__FILTER_SAMPLES__PROPS__INPUT",
+             "DATA__TEST__FILTER_SAMPLES__VALUES__LABEL", "DATA__TEST__FILTER_SAMPLES__VALUES__INFO", "DATA__TEST__FILTER_SAMPLES__VALUES__INPUT",
+             "DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL", "DATA__TEST__FILTER_SAMPLES__SIGNS__INFO", "DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT"]))
+                
         self.ui.MODEL__MAE_MASK_TYPE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["MODEL__MAE_MASK_RATIO__LABEL", "MODEL__MAE_MASK_RATIO__INFO", "MODEL__MAE_MASK_RATIO__INPUT" ]))
              
@@ -434,7 +429,9 @@ class MainWindow(QMainWindow):
         self.ui.AUGMENTOR__SHEAR__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["da_shear_range_label", "AUGMENTOR__SHEAR_RANGE__INPUT", "AUGMENTOR__SHEAR_RANGE__INFO"]))
         self.ui.AUGMENTOR__ZOOM__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
-            ["da_zoom_range_label", "AUGMENTOR__ZOOM_RANGE__INPUT", "AUGMENTOR__ZOOM_RANGE__INFO"]))
+            ["da_zoom_range_label", "AUGMENTOR__ZOOM_RANGE__INPUT", "AUGMENTOR__ZOOM_RANGE__INFO",
+             "da_zoom_in_z_label", "AUGMENTOR__ZOOM_IN_Z__INFO", "AUGMENTOR__ZOOM_IN_Z__INPUT",
+            ]))
         self.ui.AUGMENTOR__SHIFT__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["da_shift_range_label", "AUGMENTOR__SHIFT_RANGE__INPUT", "AUGMENTOR__SHIFT_RANGE__INFO"]))
         self.ui.AUGMENTOR__ELASTIC__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
@@ -454,12 +451,6 @@ class MainWindow(QMainWindow):
         self.ui.AUGMENTOR__CONTRAST__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["da_contrast_factor_range_label", "AUGMENTOR__CONTRAST_FACTOR__INPUT", "da_contrast_mode_label", 
             "AUGMENTOR__CONTRAST_FACTOR__INFO", "AUGMENTOR__CONTRAST_MODE__INPUT", "AUGMENTOR__CONTRAST_MODE__INFO"]))
-        self.ui.AUGMENTOR__BRIGHTNESS_EM__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
-            ["da_brightness_em_factor_label", "AUGMENTOR__BRIGHTNESS_EM_FACTOR__INPUT", "AUGMENTOR__BRIGHTNESS_EM_FACTOR__INFO", 
-                "da_brightness_em_mode_label", "AUGMENTOR__BRIGHTNESS_EM_MODE__INPUT", "AUGMENTOR__BRIGHTNESS_EM_MODE__INFO"]))
-        self.ui.AUGMENTOR__CONTRAST_EM__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
-            ["da_contrast_em_factor_label","AUGMENTOR__CONTRAST_EM_FACTOR__INPUT","AUGMENTOR__CONTRAST_EM_FACTOR__INFO","da_contrast_em_mode_label",
-            "AUGMENTOR__CONTRAST_EM_MODE__INPUT", "AUGMENTOR__CONTRAST_EM_MODE__INFO", "AUGMENTOR__CONTRAST_EM_MODE__INFO"]))
         self.ui.AUGMENTOR__DROPOUT__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
             ["da_dropout_range_label","AUGMENTOR__DROP_RANGE__INPUT","AUGMENTOR__DROP_RANGE__INFO"]))
         self.ui.AUGMENTOR__CUTOUT__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
@@ -516,11 +507,10 @@ class MainWindow(QMainWindow):
             ["inst_seg_metrics_label","inst_seg_metrics_frame","det_metrics_label","det_metrics_frame",
             "test_data_gt_label", "DATA__TEST__GT_PATH__INPUT", "DATA__TEST__GT_PATH__INFO", "test_data_gt_input_browse_bn"]))
         self.ui.DATA__TEST__USE_VAL_AS_TEST__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
-            ["test_data_label","DATA__TEST__PATH__INPUT","test_data_input_browse_bn",
+            ["test_data_label","DATA__TEST__PATH__INPUT","test_data_input_browse_bn","DATA__TEST__PATH__INFO",
              "test_exists_gt_label","DATA__TEST__LOAD_GT__INPUT","DATA__TEST__LOAD_GT__INFO",
              "test_data_gt_label","DATA__TEST__GT_PATH__INPUT","DATA__TEST__GT_PATH__INFO",
-             "test_data_gt_input_browse_bn","test_data_in_memory_label",
-             "DATA__TEST__IN_MEMORY__INPUT","DATA__TEST__IN_MEMORY__INFO","validation_overlap_label"]))
+             "test_data_gt_input_browse_bn","validation_overlap_label"]))
         self.ui.test_advanced_bn.clicked.connect(lambda: expand_hide_advanced_options(self, "test_advanced_bn", "test_advanced_options_frame"))
         self.ui.TEST__BY_CHUNKS__ENABLE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
             ["process_by_chunks_label","process_by_chunks_frame"]))
@@ -531,13 +521,7 @@ class MainWindow(QMainWindow):
             ["TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__LABEL","TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INPUT","TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INFO"]))
         self.ui.TRAIN__ENABLE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
             ["DATA__PATCH_SIZE__TEST__LABEL","DATA__PATCH_SIZE__TEST__INFO","DATA__PATCH_SIZE__TEST__INPUT"]))
-        self.ui.DATA__TEST__IN_MEMORY__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
-            ["DATA__PREPROCESS__TEST__FRAME", "preprocessing_test_frame"]))
 
-        self.ui.TEST__POST_PROCESSING__YZ_FILTERING__SEM_SEG__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
-            ["sem_seg_yz_filtering_size_label","TEST__POST_PROCESSING__YZ_FILTERING_SIZE__SEM_SEG__INPUT","TEST__POST_PROCESSING__YZ_FILTERING_SIZE__SEM_SEG__INFO"]))
-        self.ui.TEST__POST_PROCESSING__Z_FILTERING__SEM_SEG__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
-            ["sem_seg_z_filtering_size_label","TEST__POST_PROCESSING__Z_FILTERING_SIZE__SEM_SEG__INPUT","TEST__POST_PROCESSING__Z_FILTERING_SIZE__SEM_SEG__INFO"]))
         self.ui.PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["inst_seg_b_channel_th_label","PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INPUT","PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INFO",
              "inst_seg_c_channel_th_label",
@@ -563,12 +547,6 @@ class MainWindow(QMainWindow):
         self.ui.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["inst_seg_small_obj_fil_before_size_label","PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INPUT",
             "PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INFO"]))
-        self.ui.TEST__POST_PROCESSING__YZ_FILTERING__INST_SEG__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
-            ["inst_seg_yz_filtering_size_label","TEST__POST_PROCESSING__YZ_FILTERING_SIZE__INST_SEG__INPUT",
-            "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__INST_SEG__INFO"]))
-        self.ui.TEST__POST_PROCESSING__Z_FILTERING__INST_SEG__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
-            ["inst_seg_z_filtering_size_label", "TEST__POST_PROCESSING__Z_FILTERING_SIZE__INST_SEG__INPUT",
-            "TEST__POST_PROCESSING__Z_FILTERING_SIZE__INST_SEG__INFO"]))
         self.ui.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__LABEL", "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__INFO",
             "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__INPUT", "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INST_SEG__LABEL",
@@ -604,12 +582,15 @@ class MainWindow(QMainWindow):
             "TEST__DET_BLOB_LOG_MAX_SIGMA__LABEL", "TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT", "TEST__DET_BLOB_LOG_MAX_SIGMA__INFO",
             "TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL", "TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT", "TEST__DET_BLOB_LOG_NUM_SIGMA__INFO",
             "TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__LABEL", "TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INFO", "TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INPUT"]))
-        self.ui.TEST__POST_PROCESSING__YZ_FILTERING__DET__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
-            ["det_yz_filtering_size_label", "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__DET__INPUT",
-             "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__DET__INFO"]))
-        self.ui.TEST__POST_PROCESSING__Z_FILTERING__DET__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
-            ["det_z_filtering_size_label","TEST__POST_PROCESSING__Z_FILTERING_SIZE__DET__INPUT",
-            "TEST__POST_PROCESSING__Z_FILTERING_SIZE__DET__INFO"]))
+        self.ui.TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__LABEL","TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__INFO", "TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__INPUT",
+            "TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__LABEL","TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__INFO", "TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__INPUT",]))
+        self.ui.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__LABEL","TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO", "TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INPUT",
+            "TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__LABEL","TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO", "TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INPUT",]))
+        self.ui.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__LABEL","TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO", "TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INPUT",
+            "TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__LABEL","TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO", "TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INPUT",]))
         self.ui.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__LABEL","TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__INFO",
             "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__INPUT", "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__LABEL",

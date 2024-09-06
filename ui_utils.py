@@ -938,7 +938,7 @@ def export_wizard_summary(main_window):
         actual_name = get_text(main_window.ui.job_name_input)
         if actual_name in ["", "my_semantic_segmentation", "my_instance_segmentation", "my_detection", "my_denoising", \
             "my_super_resolution", "my_self_supervised_learning", "my_classification", "my_image_to_image"]:
-            main_window.ui.job_name_input.setPlainText("my_"+ cfg["PROBLEM"]["TYPE"].lower())
+            main_window.ui.job_name_input.setPlainText("my_"+ out_config["PROBLEM"]["TYPE"].lower())
         main_window.ui.check_yaml_file_errors_label.setText("")
         main_window.ui.check_yaml_file_errors_frame.setStyleSheet("") 
 
@@ -1005,6 +1005,7 @@ def set_default_config(cfg):
         cfg['TRAIN']['LR_SCHEDULER']['NAME'] = 'warmupcosine'
         cfg['TRAIN']['LR_SCHEDULER']['MIN_LR'] = 5.E-6
         cfg['TRAIN']['LR_SCHEDULER']['WARMUP_COSINE_DECAY_EPOCHS'] = 5
+        cfg['LOSS']['CLASS_REBALANCE'] = True 
 
     #########
     # MODEL #
@@ -1143,6 +1144,8 @@ def move_between_workflows(main_window, to_page, dims=None):
     if main_window.cfg.settings['selected_workflow'] == 0:
         jobname = "my_semantic_segmentation"
         models = main_window.cfg.settings['semantic_models_real_names']
+        losses = main_window.cfg.settings['semantic_losses_real_names']
+        metrics = main_window.cfg.settings['semantic_metrics_real_names']
         main_window.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.train_workflow_specific_tab_semantic_seg_page)
         main_window.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.test_workflow_specific_tab_semantic_seg_page)
         # Train page
@@ -1157,6 +1160,8 @@ def move_between_workflows(main_window, to_page, dims=None):
     elif main_window.cfg.settings['selected_workflow'] == 1:
         jobname = "my_instance_segmentation"
         models = main_window.cfg.settings['instance_models_real_names']
+        losses = main_window.cfg.settings['instance_losses_real_names']
+        metrics = main_window.cfg.settings['instance_metrics_real_names']
         main_window.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.train_workflow_specific_tab_instance_seg_page)
         main_window.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.test_workflow_specific_tab_instance_seg_page)
         # Train page
@@ -1171,6 +1176,8 @@ def move_between_workflows(main_window, to_page, dims=None):
     elif main_window.cfg.settings['selected_workflow'] == 2:
         jobname = "my_detection"
         models = main_window.cfg.settings['detection_models_real_names']
+        losses = main_window.cfg.settings['detection_losses_real_names']
+        metrics = main_window.cfg.settings['detection_metrics_real_names']
         main_window.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.train_workflow_specific_tab_detection_page)
         main_window.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.test_workflow_specific_tab_detection_page)
         # Train page
@@ -1185,6 +1192,8 @@ def move_between_workflows(main_window, to_page, dims=None):
     elif main_window.cfg.settings['selected_workflow'] == 3:
         jobname = "my_denoising"
         models = main_window.cfg.settings['denoising_models_real_names']
+        losses = main_window.cfg.settings['denoising_losses_real_names']
+        metrics = main_window.cfg.settings['denoising_metrics_real_names']
         main_window.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.train_workflow_specific_tab_denoising_page)
         main_window.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.test_workflow_specific_tab_denoising_page)
         # Train page
@@ -1204,6 +1213,8 @@ def move_between_workflows(main_window, to_page, dims=None):
                 models = main_window.cfg.settings['sr_2d_models_real_names']
             else:
                 models = main_window.cfg.settings['sr_3d_models_real_names']
+        losses = main_window.cfg.settings['sr_losses_real_names']
+        metrics = main_window.cfg.settings['sr_metrics_real_names']
         main_window.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.train_workflow_specific_tab_sr_page)
         main_window.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.test_workflow_specific_tab_sr_page)
         # Train page
@@ -1217,6 +1228,8 @@ def move_between_workflows(main_window, to_page, dims=None):
     elif main_window.cfg.settings['selected_workflow'] == 5:
         jobname = "my_self_supervised_learning"
         models = main_window.cfg.settings['ssl_models_real_names']
+        losses = main_window.cfg.settings['ssl_losses_real_names']
+        metrics = main_window.cfg.settings['ssl_metrics_real_names']
         main_window.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.train_workflow_specific_tab_ssl_page)
         main_window.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.test_workflow_specific_tab_ssl_page)
         # Train page
@@ -1227,6 +1240,8 @@ def move_between_workflows(main_window, to_page, dims=None):
     elif main_window.cfg.settings['selected_workflow'] == 6:
         jobname = "my_classification"
         models = main_window.cfg.settings['classification_models_real_names']
+        losses = main_window.cfg.settings['classification_losses_real_names']
+        metrics = main_window.cfg.settings['classification_metrics_real_names']
         goptions_tab_widget_visible = True
         main_window.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.train_workflow_specific_tab_classification_page)
         main_window.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.test_workflow_specific_tab_classification_page)
@@ -1237,6 +1252,8 @@ def move_between_workflows(main_window, to_page, dims=None):
     elif main_window.cfg.settings['selected_workflow'] == 7:
         jobname = "my_image_to_image"
         models = main_window.cfg.settings['i2i_models_real_names']
+        losses = main_window.cfg.settings['i2i_losses_real_names']
+        metrics = main_window.cfg.settings['i2i_metrics_real_names']
         goptions_tab_widget_visible = True
         main_window.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.train_workflow_specific_tab_i2i_page)
         main_window.ui.test_workflow_specific_tab_stackedWidget.setCurrentWidget(main_window.ui.test_workflow_specific_tab_i2i_page)
@@ -1270,6 +1287,8 @@ def move_between_workflows(main_window, to_page, dims=None):
         main_window.last_selected_workflow = main_window.cfg.settings['selected_workflow']
         main_window.ui.MODEL__ARCHITECTURE__INPUT.clear()
         main_window.ui.MODEL__ARCHITECTURE__INPUT.addItems(models)
+        main_window.ui.LOSS__TYPE__INPUT.clear()
+        main_window.ui.LOSS__TYPE__INPUT.addItems(losses)
 
 
 def start_questionary(main_window):
@@ -1499,6 +1518,10 @@ def create_yaml_file(main_window):
             problem_channels = 'BCM'
         elif get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT) == "Binary mask + Contours + Distance map":
             problem_channels = 'BCD'
+        elif get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT) == "Contours":
+            problem_channels = 'C'
+        elif get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT) == "Affinities":
+            problem_channels = 'A'
         elif get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT) == "Binary mask + Contours + Distance map with background (experimental)":
             problem_channels = 'BCDv2'
         elif get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT) == "Binary mask + Distance map with background (experimental)":
@@ -1541,7 +1564,7 @@ def create_yaml_file(main_window):
     ### DETECTION
     elif main_window.cfg.settings['selected_workflow'] == 2:
         biapy_config['PROBLEM']['DETECTION'] = {}
-        biapy_config['PROBLEM']['DETECTION']['CENTRAL_POINT_DILATION'] = int(get_text(main_window.ui.PROBLEM__DETECTION__CENTRAL_POINT_DILATION__INPUT))
+        biapy_config['PROBLEM']['DETECTION']['CENTRAL_POINT_DILATION'] = ast.literal_eval(get_text(main_window.ui.PROBLEM__DETECTION__CENTRAL_POINT_DILATION__INPUT))
         biapy_config['PROBLEM']['DETECTION']['CHECK_POINTS_CREATED'] = True if get_text(main_window.ui.PROBLEM__DETECTION__CHECK_POINTS_CREATED__INPUT) == "Yes" else False
         if get_text(main_window.ui.PROBLEM__DETECTION__DATA_CHECK_MW__INPUT) == "Yes" and get_text(main_window.ui.TEST__POST_PROCESSING__DET_WATERSHED__INPUT) == "Yes":
             biapy_config['PROBLEM']['DETECTION']['DATA_CHECK_MW'] = True
@@ -1625,6 +1648,7 @@ def create_yaml_file(main_window):
         if get_text(main_window.ui.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT) == "Yes":
             biapy_config['DATA']['PREPROCESS']['MEDIAN_BLUR'] = {}
             biapy_config['DATA']['PREPROCESS']['MEDIAN_BLUR']['ENABLE'] = True
+            biapy_config['DATA']['PREPROCESS']['MEDIAN_BLUR']['KERNEL_SIZE'] = ast.literal_eval(get_text(main_window.ui.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT))
 
         if get_text(main_window.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT) == "Yes":
             biapy_config['DATA']['PREPROCESS']['MATCH_HISTOGRAM'] = {}
@@ -1687,6 +1711,7 @@ def create_yaml_file(main_window):
             if get_text(main_window.ui.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__TEST__INPUT) == "Yes":
                 biapy_config['DATA']['PREPROCESS']['MEDIAN_BLUR'] = {}
                 biapy_config['DATA']['PREPROCESS']['MEDIAN_BLUR']['ENABLE'] = True
+                biapy_config['DATA']['PREPROCESS']['MEDIAN_BLUR']['KERNEL_SIZE'] = ast.literal_eval(get_text(main_window.ui.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INPUT))
 
             if get_text(main_window.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__TEST__INPUT) == "Yes":
                 biapy_config['DATA']['PREPROCESS']['MATCH_HISTOGRAM'] = {}
@@ -1730,7 +1755,6 @@ def create_yaml_file(main_window):
         biapy_config['DATA']['NORMALIZATION']['PERC_CLIP'] = True
         biapy_config['DATA']['NORMALIZATION']['PERC_LOWER'] = float(get_text(main_window.ui.DATA__NORMALIZATION__PERC_LOWER__INPUT)) 
         biapy_config['DATA']['NORMALIZATION']['PERC_UPPER'] = float(get_text(main_window.ui.DATA__NORMALIZATION__PERC_UPPER__INPUT)) 
-        biapy_config['DATA']['NORMALIZATION']['APPLICATION_MODE'] = get_text(main_window.ui.DATA__NORMALIZATION__APPLICATION_MODE__INPUT)
 
     if get_text(main_window.ui.DATA__NORMALIZATION__TYPE__INPUT) == "custom":
         if 'NORMALIZATION' not in biapy_config['DATA']:
@@ -1738,7 +1762,6 @@ def create_yaml_file(main_window):
         biapy_config['DATA']['NORMALIZATION']['TYPE'] = 'custom'
         biapy_config['DATA']['NORMALIZATION']['CUSTOM_MEAN'] = float(get_text(main_window.ui.DATA__NORMALIZATION__CUSTOM_MEAN__INPUT)) 
         biapy_config['DATA']['NORMALIZATION']['CUSTOM_STD'] = float(get_text(main_window.ui.DATA__NORMALIZATION__CUSTOM_STD__INPUT)) 
-        biapy_config['DATA']['NORMALIZATION']['APPLICATION_MODE'] = get_text(main_window.ui.DATA__NORMALIZATION__APPLICATION_MODE__INPUT)
         
     # Train
     if get_text(main_window.ui.TRAIN__ENABLE__INPUT) == "Yes":
@@ -1758,13 +1781,6 @@ def create_yaml_file(main_window):
         if get_text(main_window.ui.DATA__TRAIN__RESOLUTION__INPUT) != "(1,1,1)" and get_text(main_window.ui.DATA__TRAIN__RESOLUTION__INPUT) != "(1,1)":
             biapy_config['DATA']['TRAIN']['RESOLUTION'] = get_text(main_window.ui.DATA__TRAIN__RESOLUTION__INPUT)
         
-        if main_window.cfg.settings['selected_workflow'] == 0 and float(get_text(main_window.ui.DATA__TRAIN__MINIMUM_FOREGROUND_PER__SEM_SEG__INPUT)) != 0:
-            biapy_config['DATA']['TRAIN']['MINIMUM_FOREGROUND_PER'] = float(get_text(main_window.ui.DATA__TRAIN__MINIMUM_FOREGROUND_PER__SEM_SEG__INPUT))
-        if main_window.cfg.settings['selected_workflow'] == 1 and float(get_text(main_window.ui.DATA__TRAIN__MINIMUM_FOREGROUND_PER__INST_SEG__INPUT)) != 0:
-            biapy_config['DATA']['TRAIN']['MINIMUM_FOREGROUND_PER'] = float(get_text(main_window.ui.DATA__TRAIN__MINIMUM_FOREGROUND_PER__INST_SEG__INPUT))
-        if main_window.cfg.settings['selected_workflow'] == 2 and float(get_text(main_window.ui.DATA__TRAIN__MINIMUM_FOREGROUND_PER__DET__INPUT)) != 0:
-            biapy_config['DATA']['TRAIN']['MINIMUM_FOREGROUND_PER'] = float(get_text(main_window.ui.DATA__TRAIN__MINIMUM_FOREGROUND_PER__DET__INPUT))
-        
         if get_text(main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT) == "Yes":
             biapy_config['DATA']['TRAIN']['INPUT_ZARR_MULTIPLE_DATA'] = True
             biapy_config['DATA']['TRAIN']['INPUT_ZARR_MULTIPLE_DATA_RAW_PATH'] = get_text(main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT)
@@ -1776,9 +1792,16 @@ def create_yaml_file(main_window):
         if get_text(main_window.ui.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT) != "TZCYX":
             biapy_config['DATA']['TRAIN']['INPUT_MASK_AXES_ORDER'] = get_text(main_window.ui.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT)
 
+        if get_text(main_window.ui.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT) == "Yes":
+            biapy_config['DATA']['TRAIN']['FILTER_SAMPLES'] = {}
+            biapy_config['DATA']['TRAIN']['FILTER_SAMPLES']['ENABLE'] = True
+            biapy_config['DATA']['TRAIN']['FILTER_SAMPLES']['PROPS'] = ast.literal_eval(get_text(main_window.ui.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT))
+            biapy_config['DATA']['TRAIN']['FILTER_SAMPLES']['VALUES'] = ast.literal_eval(get_text(main_window.ui.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT))
+            biapy_config['DATA']['TRAIN']['FILTER_SAMPLES']['SIGNS'] = ast.literal_eval(get_text(main_window.ui.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT))
+
         # Validation
         biapy_config['DATA']['VAL'] = {}
-
+        biapy_config['DATA']['VAL']['IN_MEMORY'] = True if get_text(main_window.ui.DATA__VAL__IN_MEMORY__INPUT) == "Yes" else False
         if get_text(main_window.ui.DATA__VAL__TYPE__INPUT) == "Extract from train (split training)":
             biapy_config['DATA']['VAL']['FROM_TRAIN'] = True
             biapy_config['DATA']['VAL']['SPLIT_TRAIN'] = float(get_text(main_window.ui.DATA__VAL__SPLIT_TRAIN__INPUT))
@@ -1792,7 +1815,6 @@ def create_yaml_file(main_window):
         # Not extracted from train (path needed)
         else:
             biapy_config['DATA']['VAL']['FROM_TRAIN'] = False
-            biapy_config['DATA']['VAL']['IN_MEMORY'] = True if get_text(main_window.ui.DATA__VAL__IN_MEMORY__INPUT) == "Yes" else False 
             biapy_config['DATA']['VAL']['PATH'] = get_text(main_window.ui.DATA__VAL__PATH__INPUT, strip=False)
             if main_window.cfg.settings['selected_workflow'] not in [3,5,6]:
                 biapy_config['DATA']['VAL']['GT_PATH'] = get_text(main_window.ui.DATA__VAL__GT_PATH__INPUT, strip=False)
@@ -1812,15 +1834,19 @@ def create_yaml_file(main_window):
         if get_text(main_window.ui.DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT) != "TZCYX":
             biapy_config['DATA']['VAL']['INPUT_MASK_AXES_ORDER'] = get_text(main_window.ui.DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT)
 
+        if get_text(main_window.ui.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT) == "Yes":
+            biapy_config['DATA']['VAL']['FILTER_SAMPLES'] = {}
+            biapy_config['DATA']['VAL']['FILTER_SAMPLES']['ENABLE'] = True
+            biapy_config['DATA']['VAL']['FILTER_SAMPLES']['PROPS'] = ast.literal_eval(get_text(main_window.ui.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT))
+            biapy_config['DATA']['VAL']['FILTER_SAMPLES']['VALUES'] = ast.literal_eval(get_text(main_window.ui.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT))
+            biapy_config['DATA']['VAL']['FILTER_SAMPLES']['SIGNS'] = ast.literal_eval(get_text(main_window.ui.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT))
+
     # Test
     if get_text(main_window.ui.TEST__ENABLE__INPUT) == "Yes":
         biapy_config['DATA']['TEST'] = {}
         if main_window.cfg.settings['selected_workflow'] == 0 and get_text(main_window.ui.DATA__TEST__CHECK_DATA__INPUT) == "Yes":
             biapy_config['DATA']['TEST']['CHECK_DATA'] = True
-        if get_text(main_window.ui.DATA__TEST__IN_MEMORY__INPUT) == "Yes":
-            biapy_config['DATA']['TEST']['IN_MEMORY'] = True
-        else:
-            biapy_config['DATA']['TEST']['IN_MEMORY'] = False
+        biapy_config['DATA']['TEST']['IN_MEMORY'] = True if get_text(main_window.ui.DATA__TEST__IN_MEMORY__INPUT) == "Yes" else False
         if get_text(main_window.ui.DATA__TEST__USE_VAL_AS_TEST__INPUT) == "Yes" and\
             get_text(main_window.ui.DATA__VAL__TYPE__INPUT) == "Extract from train (cross validation)":
             biapy_config['DATA']['TEST']['USE_VAL_AS_TEST'] = True
@@ -1840,6 +1866,13 @@ def create_yaml_file(main_window):
         biapy_config['DATA']['TEST']['RESOLUTION'] = get_text(main_window.ui.DATA__TEST__RESOLUTION__INPUT)
         if get_text(main_window.ui.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT) == "Yes":
             biapy_config['DATA']['TEST']['ARGMAX_TO_OUTPUT'] = True
+
+    if get_text(main_window.ui.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT) == "Yes":
+        biapy_config['DATA']['TEST']['FILTER_SAMPLES'] = {}
+        biapy_config['DATA']['TEST']['FILTER_SAMPLES']['ENABLE'] = True
+        biapy_config['DATA']['TEST']['FILTER_SAMPLES']['PROPS'] = ast.literal_eval(get_text(main_window.ui.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT))
+        biapy_config['DATA']['TEST']['FILTER_SAMPLES']['VALUES'] = ast.literal_eval(get_text(main_window.ui.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT))
+        biapy_config['DATA']['TEST']['FILTER_SAMPLES']['SIGNS'] = ast.literal_eval(get_text(main_window.ui.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT))
 
     # Data augmentation (DA)
     biapy_config['AUGMENTOR'] = {}
@@ -1864,6 +1897,8 @@ def create_yaml_file(main_window):
         if get_text(main_window.ui.AUGMENTOR__ZOOM__INPUT) == "Yes":
             biapy_config['AUGMENTOR']['ZOOM'] = True  
             biapy_config['AUGMENTOR']['ZOOM_RANGE'] = get_text(main_window.ui.AUGMENTOR__ZOOM_RANGE__INPUT)
+            if get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "3D":
+                biapy_config['AUGMENTOR']['ZOOM_IN_Z'] = get_text(main_window.ui.AUGMENTOR__ZOOM_IN_Z__INPUT)
         if get_text(main_window.ui.AUGMENTOR__SHIFT__INPUT) == "Yes":
             biapy_config['AUGMENTOR']['SHIFT'] = True 
             biapy_config['AUGMENTOR']['SHIFT_RANGE'] = get_text(main_window.ui.AUGMENTOR__SHIFT_RANGE__INPUT)
@@ -1874,7 +1909,7 @@ def create_yaml_file(main_window):
             biapy_config['AUGMENTOR']['VFLIP'] = True 
         if get_text(main_window.ui.AUGMENTOR__HFLIP__INPUT) == "Yes":
             biapy_config['AUGMENTOR']['HFLIP'] = True 
-        if get_text(main_window.ui.AUGMENTOR__ZFLIP__INPUT) == "Yes":
+        if get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "3D" and get_text(main_window.ui.AUGMENTOR__ZFLIP__INPUT) == "Yes":
             biapy_config['AUGMENTOR']['ZFLIP'] = True 
         if get_text(main_window.ui.AUGMENTOR__ELASTIC__INPUT) == "Yes":
             biapy_config['AUGMENTOR']['ELASTIC'] = True 
@@ -1901,14 +1936,6 @@ def create_yaml_file(main_window):
             biapy_config['AUGMENTOR']['CONTRAST'] = True
             biapy_config['AUGMENTOR']['CONTRAST_FACTOR'] = get_text(main_window.ui.AUGMENTOR__CONTRAST_FACTOR__INPUT)
             biapy_config['AUGMENTOR']['CONTRAST_MODE'] = get_text(main_window.ui.AUGMENTOR__CONTRAST_MODE__INPUT)
-        if get_text(main_window.ui.AUGMENTOR__BRIGHTNESS_EM__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['BRIGHTNESS_EM'] = True
-            biapy_config['AUGMENTOR']['BRIGHTNESS_EM_FACTOR'] = get_text(main_window.ui.AUGMENTOR__BRIGHTNESS_EM_FACTOR__INPUT)
-            biapy_config['AUGMENTOR']['BRIGHTNESS_EM_MODE'] = get_text(main_window.ui.AUGMENTOR__BRIGHTNESS_EM_MODE__INPUT)
-        if get_text(main_window.ui.AUGMENTOR__CONTRAST_EM__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['CONTRAST_EM'] = True
-            biapy_config['AUGMENTOR']['CONTRAST_EM_FACTOR'] = get_text(main_window.ui.AUGMENTOR__CONTRAST_EM_FACTOR__INPUT)
-            biapy_config['AUGMENTOR']['CONTRAST_EM_MODE'] = get_text(main_window.ui.AUGMENTOR__CONTRAST_EM_MODE__INPUT)
         if get_text(main_window.ui.AUGMENTOR__DROPOUT__INPUT) == "Yes":
             biapy_config['AUGMENTOR']['DROPOUT'] = True
             biapy_config['AUGMENTOR']['DROP_RANGE'] = get_text(main_window.ui.AUGMENTOR__DROP_RANGE__INPUT)
@@ -1975,8 +2002,8 @@ def create_yaml_file(main_window):
     if model_name in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet']:
         biapy_config['MODEL']['FEATURE_MAPS'] = ast.literal_eval(get_text(main_window.ui.MODEL__FEATURE_MAPS__INPUT))
         biapy_config['MODEL']['DROPOUT_VALUES'] = ast.literal_eval(get_text(main_window.ui.MODEL__DROPOUT_VALUES__INPUT)) 
-        if get_text(main_window.ui.MODEL__BATCH_NORMALIZATION__INPUT) == "No":
-            biapy_config['MODEL']['BATCH_NORMALIZATION'] = False 
+        if get_text(main_window.ui.MODEL__NORMALIZATION__INPUT) != "bn":
+            biapy_config['MODEL']['NORMALIZATION'] = get_text(main_window.ui.MODEL__NORMALIZATION__INPUT) 
         if int(get_text(main_window.ui.MODEL__KERNEL_SIZE__INPUT)) != 3:
             biapy_config['MODEL']['KERNEL_SIZE'] = int(get_text(main_window.ui.MODEL__KERNEL_SIZE__INPUT))
         if get_text(main_window.ui.MODEL__UPSAMPLE_LAYER__INPUT) != "convtranspose":
@@ -1987,6 +2014,10 @@ def create_yaml_file(main_window):
             biapy_config['MODEL']['LAST_ACTIVATION'] = get_text(main_window.ui.MODEL__LAST_ACTIVATION__INPUT)
         if get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "3D":
             biapy_config['MODEL']['Z_DOWN'] = ast.literal_eval(get_text(main_window.ui.MODEL__Z_DOWN__INPUT)) 
+        if get_text(main_window.ui.MODEL__ISOTROPY__INPUT) != "[True, True, True, True, True]":
+            biapy_config['MODEL']['ISOTROPY'] = ast.literal_eval(get_text(main_window.ui.MODEL__ISOTROPY__INPUT)) 
+        if get_text(main_window.ui.MODEL__LAGER_IO__INPUT) == "Yes":
+            biapy_config['MODEL']['LAGER_IO'] = True
         if main_window.cfg.settings['selected_workflow'] == 4 and get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "3D": # SR
             r = "pre" if get_text(main_window.ui.MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT) == "Before model" else "post"
             biapy_config['MODEL']['UNET_SR_UPSAMPLE_POSITION'] = r
@@ -2014,7 +2045,14 @@ def create_yaml_file(main_window):
             biapy_config['MODEL']['MAE_DEC_NUM_LAYERS'] = int(get_text(main_window.ui.MODEL__MAE_DEC_NUM_LAYERS__INPUT)) 
             biapy_config['MODEL']['MAE_DEC_NUM_HEADS'] = get_text(main_window.ui.MODEL__MAE_DEC_NUM_HEADS__INPUT)
             biapy_config['MODEL']['MAE_DEC_MLP_DIMS'] = get_text(main_window.ui.MODEL__MAE_DEC_MLP_DIMS__INPUT)
-    
+
+        # ConvNeXT 
+        if model_name in "unext_v1":
+            biapy_config['MODEL']['CONVNEXT_LAYERS'] = ast.literal_eval(get_text(main_window.ui.MODEL__CONVNEXT_LAYERS__INPUT))
+            biapy_config['MODEL']['CONVNEXT_SD_PROB'] = float(get_text(main_window.ui.MODEL__CONVNEXT_SD_PROB__INPUT))
+            biapy_config['MODEL']['CONVNEXT_LAYER_SCALE'] = float(get_text(main_window.ui.MODEL__CONVNEXT_LAYER_SCALE__INPUT))
+            biapy_config['MODEL']['CONVNEXT_STEM_K_SIZE'] = int(get_text(main_window.ui.MODEL__CONVNEXT_STEM_K_SIZE__INPUT))
+
     if main_window.cfg.settings['selected_workflow'] in [0,1,2,6] and int(get_text(main_window.ui.MODEL__N_CLASSES__INPUT)) != 2:
         classes = int(get_text(main_window.ui.MODEL__N_CLASSES__INPUT))
         if classes == 1: 
@@ -2033,10 +2071,16 @@ def create_yaml_file(main_window):
         if get_text(main_window.ui.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT) != "Yes":
             biapy_config['MODEL']['LOAD_CHECKPOINT_ONLY_WEIGHTS'] = get_text(main_window.ui.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT)
 
-    # Loss (in detection only)
-    if main_window.cfg.settings['selected_workflow'] == 2:
-        biapy_config['LOSS'] = {}
-        biapy_config['LOSS']['TYPE'] = get_text(main_window.ui.LOSS__TYPE__INPUT)
+    # Loss
+    loss_name = main_window.cfg.translate_names(get_text(main_window.ui.LOSS__TYPE__INPUT), key_str="losses")
+    biapy_config['LOSS'] = {}
+    biapy_config['LOSS']['TYPE'] = loss_name
+    biapy_config['LOSS']['WEIGHTS'] = ast.literal_eval(get_text(main_window.ui.LOSS__WEIGHTS__INPUT)) 
+    biapy_config['LOSS']['CLASS_REBALANCE'] = True if get_text(main_window.ui.LOSS__CLASS_REBALANCE__INPUT) == "Yes" else False
+    
+    # Metrics 
+    biapy_config['TRAIN'] = {}
+    biapy_config['TRAIN']['METRICS'] = ast.literal_eval(get_text(main_window.ui.TRAIN__METRICS__INPUT))
 
     # Training phase
     biapy_config['TRAIN'] = {}
@@ -2084,8 +2128,7 @@ def create_yaml_file(main_window):
         biapy_config['TEST']['VERBOSE'] = True if get_text(main_window.ui.TEST__VERBOSE__INPUT) == "Yes" else False
         if get_text(main_window.ui.TEST__AUGMENTATION__INPUT) == "Yes":
             biapy_config['TEST']['AUGMENTATION'] = True 
-        if get_text(main_window.ui.TEST__EVALUATE__INPUT) == "Yes" :
-            biapy_config['TEST']['EVALUATE'] = True 
+            biapy_config['TEST']['AUGMENTATION_MODE'] = get_text(main_window.ui.TEST__AUGMENTATION_MODE__INPUT) 
         if get_text(main_window.ui.TEST__REUSE_PREDICTIONS__INPUT) == "Yes" :
             biapy_config['TEST']['REUSE_PREDICTIONS'] = True 
         if get_text(main_window.ui.TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INPUT) == "Yes" and get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "2D":
@@ -2125,6 +2168,7 @@ def create_yaml_file(main_window):
             biapy_config['TEST']['DET_MIN_TH_TO_BE_PEAK'] = ast.literal_eval(get_text(main_window.ui.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT))
             biapy_config['TEST']['DET_EXCLUDE_BORDER'] = True if get_text(main_window.ui.TEST__DET_EXCLUDE_BORDER__INPUT) == "Yes" else False
             biapy_config['TEST']['DET_TOLERANCE'] = ast.literal_eval(get_text(main_window.ui.TEST__DET_TOLERANCE__INPUT))
+            biapy_config['TEST']['DET_IGNORE_POINTS_OUTSIDE_BOX'] = ast.literal_eval(get_text(main_window.ui.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INPUT))
             if get_text(main_window.ui.TEST__DET_POINT_CREATION_FUNCTION__INPUT) == "blob_log":
                 biapy_config['TEST']['DET_BLOB_LOG_MIN_SIGMA'] = int(get_text(main_window.ui.TEST__DET_BLOB_LOG_MIN_SIGMA__INPUT))    
                 biapy_config['TEST']['DET_BLOB_LOG_MAX_SIGMA'] = int(get_text(main_window.ui.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT)) 
@@ -2134,20 +2178,16 @@ def create_yaml_file(main_window):
         biapy_config['TEST']['POST_PROCESSING'] = {}
         ### Semantic segmentation
         if main_window.cfg.settings['selected_workflow'] == 0:
-            if get_text(main_window.ui.TEST__POST_PROCESSING__YZ_FILTERING__SEM_SEG__INPUT) == "Yes":
-                biapy_config['TEST']['POST_PROCESSING']['YZ_FILTERING'] = True 
-                biapy_config['TEST']['POST_PROCESSING']['YZ_FILTERING_SIZE'] = int(get_text(main_window.ui.TEST__POST_PROCESSING__YZ_FILTERING_SIZE__SEM_SEG__INPUT))
-            if get_text(main_window.ui.TEST__POST_PROCESSING__Z_FILTERING__SEM_SEG__INPUT) == "Yes":
-                biapy_config['TEST']['POST_PROCESSING']['Z_FILTERING'] = True 
-                biapy_config['TEST']['POST_PROCESSING']['Z_FILTERING_SIZE'] = int(get_text(main_window.ui.TEST__POST_PROCESSING__Z_FILTERING_SIZE__SEM_SEG__INPUT))
+            if get_text(main_window.ui.TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INPUT) == "Yes":
+                biapy_config['TEST']['POST_PROCESSING']['MEDIAN_FILTER'] = True
+                biapy_config['TEST']['POST_PROCESSING']['MEDIAN_FILTER_AXIS'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__INPUT))
+                biapy_config['TEST']['POST_PROCESSING']['MEDIAN_FILTER_SIZE'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__INPUT))
         ### Instance segmentation
         elif main_window.cfg.settings['selected_workflow'] == 1:
-            if get_text(main_window.ui.TEST__POST_PROCESSING__YZ_FILTERING__INST_SEG__INPUT) == "Yes":
-                biapy_config['TEST']['POST_PROCESSING']['YZ_FILTERING'] = True 
-                biapy_config['TEST']['POST_PROCESSING']['YZ_FILTERING_SIZE'] = int(get_text(main_window.ui.TEST__POST_PROCESSING__YZ_FILTERING_SIZE__INST_SEG__INPUT))
-            if get_text(main_window.ui.TEST__POST_PROCESSING__Z_FILTERING__INST_SEG__INPUT) == "Yes":
-                biapy_config['TEST']['POST_PROCESSING']['Z_FILTERING'] = True
-                biapy_config['TEST']['POST_PROCESSING']['Z_FILTERING_SIZE'] = int(get_text(main_window.ui.TEST__POST_PROCESSING__Z_FILTERING_SIZE__INST_SEG__INPUT))
+            if get_text(main_window.ui.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT) == "Yes":
+                biapy_config['TEST']['POST_PROCESSING']['MEDIAN_FILTER'] = True
+                biapy_config['TEST']['POST_PROCESSING']['MEDIAN_FILTER_AXIS'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INPUT))
+                biapy_config['TEST']['POST_PROCESSING']['MEDIAN_FILTER_SIZE'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INPUT))
             if problem_channels in ["BC", "BCM"] and get_text(main_window.ui.TEST__POST_PROCESSING__VORONOI_ON_MASK__INPUT) == "Yes":
                 biapy_config['TEST']['POST_PROCESSING']['VORONOI_ON_MASK'] = True 
                 biapy_config['TEST']['POST_PROCESSING']['VORONOI_TH'] = float(get_text(main_window.ui.TEST__POST_PROCESSING__VORONOI_TH__INPUT))
@@ -2168,12 +2208,11 @@ def create_yaml_file(main_window):
                     biapy_config['TEST']['POST_PROCESSING']['REMOVE_CLOSE_POINTS_RADIUS'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INPUT))
         ### Detection
         elif main_window.cfg.settings['selected_workflow'] == 2:
-            if get_text(main_window.ui.TEST__POST_PROCESSING__YZ_FILTERING__DET__INPUT) == "Yes":
-                biapy_config['TEST']['POST_PROCESSING']['YZ_FILTERING'] = True 
-                biapy_config['TEST']['POST_PROCESSING']['YZ_FILTERING_SIZE'] = int(get_text(main_window.ui.TEST__POST_PROCESSING__YZ_FILTERING_SIZE__DET__INPUT))
-            if get_text(main_window.ui.TEST__POST_PROCESSING__Z_FILTERING__DET__INPUT) == "Yes":
-                biapy_config['TEST']['POST_PROCESSING']['Z_FILTERING'] = True 
-                biapy_config['TEST']['POST_PROCESSING']['Z_FILTERING_SIZE'] = int(get_text(main_window.ui.TEST__POST_PROCESSING__Z_FILTERING_SIZE__DET__INPUT))
+            if get_text(main_window.ui.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT) == "Yes":
+                biapy_config['TEST']['POST_PROCESSING']['MEDIAN_FILTER'] = True
+                biapy_config['TEST']['POST_PROCESSING']['MEDIAN_FILTER_AXIS'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INPUT))
+                biapy_config['TEST']['POST_PROCESSING']['MEDIAN_FILTER_SIZE'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INPUT))
+
             if get_text(main_window.ui.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INPUT) == "Yes":
                 biapy_config['TEST']['POST_PROCESSING']['REMOVE_CLOSE_POINTS'] = True 
                 biapy_config['TEST']['POST_PROCESSING']['REMOVE_CLOSE_POINTS_RADIUS'] = float(get_text(main_window.ui.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__DET__INPUT))
@@ -2366,7 +2405,9 @@ class load_yaml_to_GUI_engine(QObject):
 
             # Not used or decided to not insert in GUI
             "SYSTEM__PIN_MEM__INPUT", "TRAIN__CHECKPOINT_MONITOR__INPUT","DATA__VAL__DIST_EVAL__INPUT",
-            "MODEL__VIT_MODEL__INPUT"
+            "MODEL__VIT_MODEL__INPUT", "SYSTEM__DEVICE", "DATA__PREPROCESS__ZOOM", 
+            "DATA__PREPROCESS__ZOOM__ENABLE", "DATA__PREPROCESS__ZOOM__ZOOM_FACTOR",
+            "DATA__TRAIN__FILTER_SAMPLES__SIGNS","DATA__FILTER_BY_IMAGE"
         ]
         
     def run(self):
@@ -2540,6 +2581,10 @@ class load_yaml_to_GUI_engine(QObject):
                         v = "Binary mask + Contours + Foreground mask"
                     elif v == 'BCD':
                         v = "Binary mask + Contours + Distance map"
+                    elif v == 'C':
+                        v = "Contours"
+                    elif v == 'A':
+                        v = "Affinities"
                     elif v == 'BCDv2':
                         v = "Binary mask + Contours + Distance map with background (experimental)"
                     elif v == 'BDv2':
@@ -2574,18 +2619,10 @@ class load_yaml_to_GUI_engine(QObject):
                     other_widgets_values_to_set.append("Extract from train (cross validation)")
                 elif widget_name == "MODEL__ARCHITECTURE__INPUT":    
                     v = self.main_window.cfg.translate_model_names(v, self.work_dim, inv=True)
+                elif widget_name == "LOSS__TYPE__INPUT":    
+                    v = self.main_window.cfg.translate_names(v, "losses", inv=True)
                 elif widget_name == "MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT":
-                    v = "Before model" if v == "pre" else "After model"
-                elif widget_name == "DATA__TRAIN__MINIMUM_FOREGROUND_PER__INPUT":
-                    widget_name = "DATA__TRAIN__MINIMUM_FOREGROUND_PER__{}__INPUT".format(self.workflow_str)
-                elif widget_name == "TEST__POST_PROCESSING__YZ_FILTERING__INPUT":
-                    widget_name = "TEST__POST_PROCESSING__YZ_FILTERING__{}__INPUT".format(self.workflow_str)
-                elif widget_name == "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__INPUT":
-                    widget_name = "TEST__POST_PROCESSING__YZ_FILTERING_SIZE__{}__INPUT".format(self.workflow_str)
-                elif widget_name == "TEST__POST_PROCESSING__Z_FILTERING__INPUT":
-                    widget_name = "TEST__POST_PROCESSING__Z_FILTERING__{}__INPUT".format(self.workflow_str)
-                elif widget_name == "TEST__POST_PROCESSING__Z_FILTERING_SIZE__INPUT":
-                    widget_name = "TEST__POST_PROCESSING__Z_FILTERING_SIZE__{}__INPUT".format(self.workflow_str)                
+                    v = "Before model" if v == "pre" else "After model"              
                 elif widget_name == "TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INPUT":
                     widget_name = "TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__{}__INPUT".format(self.workflow_str)
                 elif widget_name == "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INPUT":
@@ -2602,6 +2639,10 @@ class load_yaml_to_GUI_engine(QObject):
                     widget_name = "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__{}__INPUT".format(self.workflow_str)
                 elif widget_name in ["MODEL__ACTIVATION__INPUT", "MODEL__UNETR_DEC_ACTIVATION__INPUT"]:
                     v = v.lower()
+                elif widget_name == "DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INPUT":
+                    widget_name = "DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__{}__INPUT".format(self.workflow_str)
+                elif widget_name == "TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INPUT":
+                    widget_name = "TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__{}__INPUT".format(self.workflow_str)
 
                 if "DATA__PREPROCESS__" in widget_name and widget_name not in ["DATA__PREPROCESS__TRAIN__INPUT", \
                     "DATA__PREPROCESS__VAL__INPUT", "DATA__PREPROCESS__TEST__INPUT"]:
