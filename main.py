@@ -169,7 +169,7 @@ class MainWindow(QMainWindow):
         # Train page buttons 
         self.ui.DATA__VAL__CROSS_VAL_NFOLD__INPUT.setValidator(self.int_validator)
         self.ui.DATA__VAL__CROSS_VAL_FOLD__INPUT.setValidator(self.int_validator)
-        self.ui.DATA__VAL__SPLIT_TRAIN__INPUT.setValidator(self.float_validator)
+        self.ui.DATA__VAL__SPLIT_TRAIN__INPUT.setValidator(self.int_validator)
         self.ui.TRAIN__EPOCHS__INPUT.setValidator(self.int_validator)
         self.ui.TRAIN__ACCUM_ITER__INPUT.setValidator(self.int_validator)
         # self.ui.TRAIN__PATIENCE__INPUT.setValidator(self.float_validator)

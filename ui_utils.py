@@ -1804,7 +1804,7 @@ def create_yaml_file(main_window):
         biapy_config['DATA']['VAL']['IN_MEMORY'] = True if get_text(main_window.ui.DATA__VAL__IN_MEMORY__INPUT) == "Yes" else False
         if get_text(main_window.ui.DATA__VAL__TYPE__INPUT) == "Extract from train (split training)":
             biapy_config['DATA']['VAL']['FROM_TRAIN'] = True
-            biapy_config['DATA']['VAL']['SPLIT_TRAIN'] = float(get_text(main_window.ui.DATA__VAL__SPLIT_TRAIN__INPUT))
+            biapy_config['DATA']['VAL']['SPLIT_TRAIN'] = float(int(get_text(main_window.ui.DATA__VAL__SPLIT_TRAIN__INPUT))/100)
             biapy_config['DATA']['VAL']['RANDOM'] = True if get_text(main_window.ui.DATA__VAL__RANDOM__INPUT) == "Yes" else False 
         elif get_text(main_window.ui.DATA__VAL__TYPE__INPUT) == "Extract from train (cross validation)":
             biapy_config['DATA']['VAL']['FROM_TRAIN'] = True

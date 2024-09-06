@@ -4300,7 +4300,7 @@ QPushButton:pressed {
                        </font>
                       </property>
                       <property name="currentIndex">
-                       <number>3</number>
+                       <number>2</number>
                       </property>
                       <widget class="QWidget" name="workflow_selection_page">
                        <property name="minimumSize">
@@ -7597,7 +7597,7 @@ QPushButton:pressed {
                                 <property name="geometry">
                                  <rect>
                                   <x>0</x>
-                                  <y>0</y>
+                                  <y>-169</y>
                                   <width>931</width>
                                   <height>7950</height>
                                  </rect>
@@ -8181,7 +8181,7 @@ QPushButton:pressed {
                                        </font>
                                       </property>
                                       <property name="text">
-                                       <string>0.1</string>
+                                       <string>10</string>
                                       </property>
                                      </widget>
                                     </item>
@@ -8225,7 +8225,7 @@ QPushButton:pressed {
                                        </size>
                                       </property>
                                       <property name="toolTip">
-                                       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Percentage of the training data used as validation during the model training. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a float between 0 and 1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Percentage of the training data used as validation during the model training. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive integer between 0 and 100&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                       </property>
                                       <property name="text">
                                        <string/>

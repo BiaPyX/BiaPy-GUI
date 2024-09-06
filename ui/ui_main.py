@@ -2998,7 +2998,7 @@ class Ui_MainWindow(object):
         self.train_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 931, 7950))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, -169, 931, 7950))
         self.scrollAreaWidgetContents_3.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout_3 = QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
@@ -10790,21 +10790,17 @@ class Ui_MainWindow(object):
 
         self.gridLayout_38.addWidget(self.test_data_input_browse_bn, 2, 4, 1, 1)
 
-        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.test_data_label = QLabel(self.frame_36)
+        self.test_data_label.setObjectName(u"test_data_label")
+        self.test_data_label.setFont(font)
 
-        self.gridLayout_38.addItem(self.horizontalSpacer_4, 2, 5, 1, 1)
+        self.gridLayout_38.addWidget(self.test_data_label, 2, 1, 1, 1)
 
         self.test_data_gt_input_browse_bn = QPushButton(self.frame_36)
         self.test_data_gt_input_browse_bn.setObjectName(u"test_data_gt_input_browse_bn")
         self.test_data_gt_input_browse_bn.setFont(font)
 
         self.gridLayout_38.addWidget(self.test_data_gt_input_browse_bn, 4, 4, 1, 1)
-
-        self.test_data_label = QLabel(self.frame_36)
-        self.test_data_label.setObjectName(u"test_data_label")
-        self.test_data_label.setFont(font)
-
-        self.gridLayout_38.addWidget(self.test_data_label, 2, 1, 1, 1)
 
         self.test_exists_gt_label = QLabel(self.frame_36)
         self.test_exists_gt_label.setObjectName(u"test_exists_gt_label")
@@ -10820,6 +10816,12 @@ class Ui_MainWindow(object):
 
         self.gridLayout_38.addWidget(self.use_val_as_test, 1, 1, 1, 1)
 
+        self.test_data_in_memory_label = QLabel(self.frame_36)
+        self.test_data_in_memory_label.setObjectName(u"test_data_in_memory_label")
+        self.test_data_in_memory_label.setFont(font)
+
+        self.gridLayout_38.addWidget(self.test_data_in_memory_label, 5, 1, 1, 1)
+
         self.DATA__TEST__USE_VAL_AS_TEST__INPUT = QComboBox(self.frame_36)
         self.DATA__TEST__USE_VAL_AS_TEST__INPUT.addItem("")
         self.DATA__TEST__USE_VAL_AS_TEST__INPUT.addItem("")
@@ -10829,12 +10831,6 @@ class Ui_MainWindow(object):
         self.DATA__TEST__USE_VAL_AS_TEST__INPUT.setFont(font)
 
         self.gridLayout_38.addWidget(self.DATA__TEST__USE_VAL_AS_TEST__INPUT, 1, 3, 1, 1)
-
-        self.test_data_in_memory_label = QLabel(self.frame_36)
-        self.test_data_in_memory_label.setObjectName(u"test_data_in_memory_label")
-        self.test_data_in_memory_label.setFont(font)
-
-        self.gridLayout_38.addWidget(self.test_data_in_memory_label, 5, 1, 1, 1)
 
         self.DATA__TEST__LOAD_GT__INPUT = QComboBox(self.frame_36)
         self.DATA__TEST__LOAD_GT__INPUT.addItem("")
@@ -10853,6 +10849,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_38.addWidget(self.test_data_gt_label, 4, 1, 1, 1)
 
+        self.DATA__TEST__GT_PATH__INPUT = QLineEdit(self.frame_36)
+        self.DATA__TEST__GT_PATH__INPUT.setObjectName(u"DATA__TEST__GT_PATH__INPUT")
+        self.DATA__TEST__GT_PATH__INPUT.setMinimumSize(QSize(500, 30))
+        self.DATA__TEST__GT_PATH__INPUT.setMaximumSize(QSize(500, 30))
+        self.DATA__TEST__GT_PATH__INPUT.setFont(font)
+
+        self.gridLayout_38.addWidget(self.DATA__TEST__GT_PATH__INPUT, 4, 3, 1, 1)
+
         self.DATA__TEST__PATH__INPUT = QLineEdit(self.frame_36)
         self.DATA__TEST__PATH__INPUT.setObjectName(u"DATA__TEST__PATH__INPUT")
         self.DATA__TEST__PATH__INPUT.setMinimumSize(QSize(500, 30))
@@ -10861,13 +10865,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_38.addWidget(self.DATA__TEST__PATH__INPUT, 2, 3, 1, 1)
 
-        self.DATA__TEST__GT_PATH__INPUT = QLineEdit(self.frame_36)
-        self.DATA__TEST__GT_PATH__INPUT.setObjectName(u"DATA__TEST__GT_PATH__INPUT")
-        self.DATA__TEST__GT_PATH__INPUT.setMinimumSize(QSize(500, 30))
-        self.DATA__TEST__GT_PATH__INPUT.setMaximumSize(QSize(500, 30))
-        self.DATA__TEST__GT_PATH__INPUT.setFont(font)
+        self.DATA__TEST__GT_PATH__INFO = QLabel(self.frame_36)
+        self.DATA__TEST__GT_PATH__INFO.setObjectName(u"DATA__TEST__GT_PATH__INFO")
+        self.DATA__TEST__GT_PATH__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TEST__GT_PATH__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TEST__GT_PATH__INFO.setScaledContents(True)
 
-        self.gridLayout_38.addWidget(self.DATA__TEST__GT_PATH__INPUT, 4, 3, 1, 1)
+        self.gridLayout_38.addWidget(self.DATA__TEST__GT_PATH__INFO, 4, 2, 1, 1)
 
         self.DATA__TEST__IN_MEMORY__INPUT = QComboBox(self.frame_36)
         self.DATA__TEST__IN_MEMORY__INPUT.addItem("")
@@ -10878,14 +10882,6 @@ class Ui_MainWindow(object):
         self.DATA__TEST__IN_MEMORY__INPUT.setFont(font)
 
         self.gridLayout_38.addWidget(self.DATA__TEST__IN_MEMORY__INPUT, 5, 3, 1, 1)
-
-        self.DATA__TEST__GT_PATH__INFO = QLabel(self.frame_36)
-        self.DATA__TEST__GT_PATH__INFO.setObjectName(u"DATA__TEST__GT_PATH__INFO")
-        self.DATA__TEST__GT_PATH__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__TEST__GT_PATH__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__GT_PATH__INFO.setScaledContents(True)
-
-        self.gridLayout_38.addWidget(self.DATA__TEST__GT_PATH__INFO, 4, 2, 1, 1)
 
         self.DATA__TEST__LOAD_GT__INFO = QLabel(self.frame_36)
         self.DATA__TEST__LOAD_GT__INFO.setObjectName(u"DATA__TEST__LOAD_GT__INFO")
@@ -10918,6 +10914,10 @@ class Ui_MainWindow(object):
         self.DATA__TEST__IN_MEMORY__INFO.setScaledContents(True)
 
         self.gridLayout_38.addWidget(self.DATA__TEST__IN_MEMORY__INFO, 5, 2, 1, 1)
+
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_38.addItem(self.horizontalSpacer_4, 2, 5, 1, 1)
 
 
         self.gridLayout_37.addWidget(self.frame_36, 1, 0, 1, 2)
@@ -13156,7 +13156,7 @@ class Ui_MainWindow(object):
         self.check_yaml_file_errors_frame.setWidgetResizable(True)
         self.scrollAreaWidgetContents_19 = QWidget()
         self.scrollAreaWidgetContents_19.setObjectName(u"scrollAreaWidgetContents_19")
-        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 48, 19))
+        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 31, 19))
         self.verticalLayout_32 = QVBoxLayout(self.scrollAreaWidgetContents_19)
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
         self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)
@@ -13629,13 +13629,13 @@ class Ui_MainWindow(object):
         self.percentage_validation_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.percentage_validation_label.setText(QCoreApplication.translate("MainWindow", u"Train percentage for validation", None))
-        self.DATA__VAL__SPLIT_TRAIN__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.1", None))
+        self.DATA__VAL__SPLIT_TRAIN__INPUT.setText(QCoreApplication.translate("MainWindow", u"10", None))
 #if QT_CONFIG(tooltip)
         self.val_in_memory_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to load all validation data in memory or not. It speeds up the evaluation process that is done after each epoch</span></p><p><br/></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.val_in_memory_info.setText("")
 #if QT_CONFIG(tooltip)
-        self.percentage_validation_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Percentage of the training data used as validation during the model training. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a float between 0 and 1</span></p></body></html>", None))
+        self.percentage_validation_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Percentage of the training data used as validation during the model training. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer between 0 and 100</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.percentage_validation_info.setText("")
         self.label_30.setText(QCoreApplication.translate("MainWindow", u"Train data", None))
@@ -16216,11 +16216,11 @@ class Ui_MainWindow(object):
         self.test_advanced_bn.setText("")
         self.label_85.setText(QCoreApplication.translate("MainWindow", u"Test data", None))
         self.test_data_input_browse_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
-        self.test_data_gt_input_browse_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
 #if QT_CONFIG(tooltip)
         self.test_data_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.test_data_label.setText(QCoreApplication.translate("MainWindow", u"Input raw image folder", None))
+        self.test_data_gt_input_browse_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
 #if QT_CONFIG(tooltip)
         self.test_exists_gt_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
@@ -16229,13 +16229,13 @@ class Ui_MainWindow(object):
         self.use_val_as_test.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.use_val_as_test.setText(QCoreApplication.translate("MainWindow", u"Use validation as test", None))
-        self.DATA__TEST__USE_VAL_AS_TEST__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.DATA__TEST__USE_VAL_AS_TEST__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
 #if QT_CONFIG(tooltip)
         self.test_data_in_memory_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.test_data_in_memory_label.setText(QCoreApplication.translate("MainWindow", u"In memory", None))
+        self.DATA__TEST__USE_VAL_AS_TEST__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.DATA__TEST__USE_VAL_AS_TEST__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
         self.DATA__TEST__LOAD_GT__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
         self.DATA__TEST__LOAD_GT__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
 
@@ -16243,15 +16243,15 @@ class Ui_MainWindow(object):
         self.test_data_gt_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.test_data_gt_label.setText(QCoreApplication.translate("MainWindow", u"Input label folder", None))
-        self.DATA__TEST__PATH__INPUT.setText(QCoreApplication.translate("MainWindow", u"images", None))
         self.DATA__TEST__GT_PATH__INPUT.setText(QCoreApplication.translate("MainWindow", u"gt", None))
-        self.DATA__TEST__IN_MEMORY__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.DATA__TEST__IN_MEMORY__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
+        self.DATA__TEST__PATH__INPUT.setText(QCoreApplication.translate("MainWindow", u"images", None))
 #if QT_CONFIG(tooltip)
         self.DATA__TEST__GT_PATH__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to load the test gt data from</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.DATA__TEST__GT_PATH__INFO.setText("")
+        self.DATA__TEST__IN_MEMORY__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.DATA__TEST__IN_MEMORY__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
 #if QT_CONFIG(tooltip)
         self.DATA__TEST__LOAD_GT__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether there is a ground truth for the test data or not. If so, the model performance will be evaluated comparing the predictions to the ground truth data.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
