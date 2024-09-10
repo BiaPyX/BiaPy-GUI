@@ -1376,7 +1376,7 @@ class Ui_MainWindow(object):
         self.scrollArea_17.setWidgetResizable(True)
         self.scrollAreaWidgetContents_22 = QWidget()
         self.scrollAreaWidgetContents_22.setObjectName(u"scrollAreaWidgetContents_22")
-        self.scrollAreaWidgetContents_22.setGeometry(QRect(0, 0, 639, 304))
+        self.scrollAreaWidgetContents_22.setGeometry(QRect(0, 0, 592, 298))
         self.verticalLayout_59 = QVBoxLayout(self.scrollAreaWidgetContents_22)
         self.verticalLayout_59.setSpacing(6)
         self.verticalLayout_59.setObjectName(u"verticalLayout_59")
@@ -1691,7 +1691,7 @@ class Ui_MainWindow(object):
         self.scrollArea_18.setWidgetResizable(True)
         self.scrollAreaWidgetContents_23 = QWidget()
         self.scrollAreaWidgetContents_23.setObjectName(u"scrollAreaWidgetContents_23")
-        self.scrollAreaWidgetContents_23.setGeometry(QRect(0, 0, 930, 171))
+        self.scrollAreaWidgetContents_23.setGeometry(QRect(0, 0, 930, 172))
         self.verticalLayout_62 = QVBoxLayout(self.scrollAreaWidgetContents_23)
         self.verticalLayout_62.setObjectName(u"verticalLayout_62")
         self.scrollArea_18.setWidget(self.scrollAreaWidgetContents_23)
@@ -2489,7 +2489,7 @@ class Ui_MainWindow(object):
         self.goptions_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, -69, 931, 567))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 934, 565))
         self.scrollAreaWidgetContents.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout.setObjectName(u"gridLayout")
@@ -2549,10 +2549,7 @@ class Ui_MainWindow(object):
         self.LOAD_PRETRAINED_MODEL__INFO.setObjectName(u"LOAD_PRETRAINED_MODEL__INFO")
         self.LOAD_PRETRAINED_MODEL__INFO.setMinimumSize(QSize(30, 30))
         self.LOAD_PRETRAINED_MODEL__INFO.setMaximumSize(QSize(30, 30))
-        font10 = QFont()
-        font10.setFamily(u"Arial")
-        font10.setPointSize(12)
-        self.LOAD_PRETRAINED_MODEL__INFO.setFont(font10)
+        self.LOAD_PRETRAINED_MODEL__INFO.setFont(font)
         self.LOAD_PRETRAINED_MODEL__INFO.setScaledContents(True)
 
         self.gridLayout_26.addWidget(self.LOAD_PRETRAINED_MODEL__INFO, 1, 2, 1, 1)
@@ -2563,7 +2560,7 @@ class Ui_MainWindow(object):
         self.LOAD_PRETRAINED_MODEL__INPUT.setObjectName(u"LOAD_PRETRAINED_MODEL__INPUT")
         self.LOAD_PRETRAINED_MODEL__INPUT.setMinimumSize(QSize(200, 30))
         self.LOAD_PRETRAINED_MODEL__INPUT.setMaximumSize(QSize(200, 30))
-        self.LOAD_PRETRAINED_MODEL__INPUT.setFont(font10)
+        self.LOAD_PRETRAINED_MODEL__INPUT.setFont(font)
 
         self.gridLayout_26.addWidget(self.LOAD_PRETRAINED_MODEL__INPUT, 1, 3, 1, 1)
 
@@ -2571,7 +2568,7 @@ class Ui_MainWindow(object):
         self.MODEL__SOURCE__INFO.setObjectName(u"MODEL__SOURCE__INFO")
         self.MODEL__SOURCE__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__SOURCE__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__SOURCE__INFO.setFont(font10)
+        self.MODEL__SOURCE__INFO.setFont(font)
         self.MODEL__SOURCE__INFO.setScaledContents(True)
 
         self.gridLayout_26.addWidget(self.MODEL__SOURCE__INFO, 2, 2, 1, 1)
@@ -2582,26 +2579,26 @@ class Ui_MainWindow(object):
         self.MODEL__SOURCE__INPUT.setObjectName(u"MODEL__SOURCE__INPUT")
         self.MODEL__SOURCE__INPUT.setMinimumSize(QSize(300, 30))
         self.MODEL__SOURCE__INPUT.setMaximumSize(QSize(300, 30))
-        self.MODEL__SOURCE__INPUT.setFont(font10)
+        self.MODEL__SOURCE__INPUT.setFont(font)
 
         self.gridLayout_26.addWidget(self.MODEL__SOURCE__INPUT, 2, 3, 1, 1)
 
         self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL = QLabel(self.train_disable_checkpoint_frame)
         self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__LABEL")
-        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setFont(font10)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setFont(font)
         self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setIndent(15)
 
         self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL, 5, 1, 1, 1)
 
         self.LOAD_PRETRAINED_MODEL__LABEL = QLabel(self.train_disable_checkpoint_frame)
         self.LOAD_PRETRAINED_MODEL__LABEL.setObjectName(u"LOAD_PRETRAINED_MODEL__LABEL")
-        self.LOAD_PRETRAINED_MODEL__LABEL.setFont(font10)
+        self.LOAD_PRETRAINED_MODEL__LABEL.setFont(font)
 
         self.gridLayout_26.addWidget(self.LOAD_PRETRAINED_MODEL__LABEL, 1, 1, 1, 1)
 
         self.MODEL__SOURCE__LABEL = QLabel(self.train_disable_checkpoint_frame)
         self.MODEL__SOURCE__LABEL.setObjectName(u"MODEL__SOURCE__LABEL")
-        self.MODEL__SOURCE__LABEL.setFont(font10)
+        self.MODEL__SOURCE__LABEL.setFont(font)
         self.MODEL__SOURCE__LABEL.setIndent(15)
 
         self.gridLayout_26.addWidget(self.MODEL__SOURCE__LABEL, 2, 1, 1, 1)
@@ -2610,7 +2607,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__INPUT")
         self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setMinimumSize(QSize(500, 30))
         self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setMaximumSize(QSize(500, 30))
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setFont(font10)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setFont(font)
         self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setReadOnly(True)
 
         self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT, 5, 3, 1, 1)
@@ -2625,7 +2622,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__INFO")
         self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setFont(font10)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setFont(font)
         self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setScaledContents(True)
 
         self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__INFO, 5, 2, 1, 1)
@@ -2634,7 +2631,7 @@ class Ui_MainWindow(object):
         self.PATHS__CHECKPOINT_FILE__INPUT.setObjectName(u"PATHS__CHECKPOINT_FILE__INPUT")
         self.PATHS__CHECKPOINT_FILE__INPUT.setMinimumSize(QSize(500, 30))
         self.PATHS__CHECKPOINT_FILE__INPUT.setMaximumSize(QSize(500, 30))
-        self.PATHS__CHECKPOINT_FILE__INPUT.setFont(font10)
+        self.PATHS__CHECKPOINT_FILE__INPUT.setFont(font)
 
         self.gridLayout_26.addWidget(self.PATHS__CHECKPOINT_FILE__INPUT, 4, 3, 1, 1)
 
@@ -2657,7 +2654,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__SOURCE_MODEL_ID__BN = QPushButton(self.train_disable_checkpoint_frame)
         self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__BN")
         self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setMinimumSize(QSize(130, 0))
-        self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setFont(font10)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setFont(font)
 
         self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__BN, 5, 4, 1, 1)
 
@@ -2707,7 +2704,7 @@ class Ui_MainWindow(object):
         self.goptions_advanced_options_scrollarea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 854, 288))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 860, 284))
         self.gridLayout_2 = QGridLayout(self.scrollAreaWidgetContents_2)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.label = QLabel(self.scrollAreaWidgetContents_2)
@@ -3059,7 +3056,7 @@ class Ui_MainWindow(object):
         self.train_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 931, 7950))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 970, 7930))
         self.scrollAreaWidgetContents_3.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout_3 = QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
@@ -3317,7 +3314,7 @@ class Ui_MainWindow(object):
         self.gridLayout_29.setObjectName(u"gridLayout_29")
         self.LOSS__CLASS_REBALANCE__LABEL = QLabel(self.frame_28)
         self.LOSS__CLASS_REBALANCE__LABEL.setObjectName(u"LOSS__CLASS_REBALANCE__LABEL")
-        self.LOSS__CLASS_REBALANCE__LABEL.setFont(font10)
+        self.LOSS__CLASS_REBALANCE__LABEL.setFont(font)
 
         self.gridLayout_29.addWidget(self.LOSS__CLASS_REBALANCE__LABEL, 3, 0, 1, 1)
 
@@ -3325,7 +3322,7 @@ class Ui_MainWindow(object):
         self.LOSS__CLASS_REBALANCE__INFO.setObjectName(u"LOSS__CLASS_REBALANCE__INFO")
         self.LOSS__CLASS_REBALANCE__INFO.setMinimumSize(QSize(30, 30))
         self.LOSS__CLASS_REBALANCE__INFO.setMaximumSize(QSize(30, 30))
-        self.LOSS__CLASS_REBALANCE__INFO.setFont(font10)
+        self.LOSS__CLASS_REBALANCE__INFO.setFont(font)
         self.LOSS__CLASS_REBALANCE__INFO.setScaledContents(True)
 
         self.gridLayout_29.addWidget(self.LOSS__CLASS_REBALANCE__INFO, 3, 1, 1, 1)
@@ -3336,7 +3333,7 @@ class Ui_MainWindow(object):
         self.LOSS__CLASS_REBALANCE__INPUT.setObjectName(u"LOSS__CLASS_REBALANCE__INPUT")
         self.LOSS__CLASS_REBALANCE__INPUT.setMinimumSize(QSize(200, 30))
         self.LOSS__CLASS_REBALANCE__INPUT.setMaximumSize(QSize(200, 30))
-        self.LOSS__CLASS_REBALANCE__INPUT.setFont(font10)
+        self.LOSS__CLASS_REBALANCE__INPUT.setFont(font)
 
         self.gridLayout_29.addWidget(self.LOSS__CLASS_REBALANCE__INPUT, 3, 2, 1, 1)
 
@@ -3344,13 +3341,13 @@ class Ui_MainWindow(object):
         self.LOSS__WEIGHTS__INPUT.setObjectName(u"LOSS__WEIGHTS__INPUT")
         self.LOSS__WEIGHTS__INPUT.setMinimumSize(QSize(200, 30))
         self.LOSS__WEIGHTS__INPUT.setMaximumSize(QSize(200, 30))
-        self.LOSS__WEIGHTS__INPUT.setFont(font10)
+        self.LOSS__WEIGHTS__INPUT.setFont(font)
 
         self.gridLayout_29.addWidget(self.LOSS__WEIGHTS__INPUT, 2, 2, 1, 1)
 
         self.LOSS__WEIGHTS__LABEL = QLabel(self.frame_28)
         self.LOSS__WEIGHTS__LABEL.setObjectName(u"LOSS__WEIGHTS__LABEL")
-        self.LOSS__WEIGHTS__LABEL.setFont(font10)
+        self.LOSS__WEIGHTS__LABEL.setFont(font)
 
         self.gridLayout_29.addWidget(self.LOSS__WEIGHTS__LABEL, 2, 0, 1, 1)
 
@@ -3358,7 +3355,7 @@ class Ui_MainWindow(object):
         self.LOSS__WEIGHTS__INFO.setObjectName(u"LOSS__WEIGHTS__INFO")
         self.LOSS__WEIGHTS__INFO.setMinimumSize(QSize(30, 30))
         self.LOSS__WEIGHTS__INFO.setMaximumSize(QSize(30, 30))
-        self.LOSS__WEIGHTS__INFO.setFont(font10)
+        self.LOSS__WEIGHTS__INFO.setFont(font)
         self.LOSS__WEIGHTS__INFO.setScaledContents(True)
 
         self.gridLayout_29.addWidget(self.LOSS__WEIGHTS__INFO, 2, 1, 1, 1)
@@ -3722,7 +3719,7 @@ class Ui_MainWindow(object):
 
         self.TRAIN__METRICS__LABEL = QLabel(self.frame_28)
         self.TRAIN__METRICS__LABEL.setObjectName(u"TRAIN__METRICS__LABEL")
-        self.TRAIN__METRICS__LABEL.setFont(font10)
+        self.TRAIN__METRICS__LABEL.setFont(font)
 
         self.gridLayout_29.addWidget(self.TRAIN__METRICS__LABEL, 4, 0, 1, 1)
 
@@ -3730,7 +3727,7 @@ class Ui_MainWindow(object):
         self.TRAIN__METRICS__INFO.setObjectName(u"TRAIN__METRICS__INFO")
         self.TRAIN__METRICS__INFO.setMinimumSize(QSize(30, 30))
         self.TRAIN__METRICS__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__METRICS__INFO.setFont(font10)
+        self.TRAIN__METRICS__INFO.setFont(font)
         self.TRAIN__METRICS__INFO.setScaledContents(True)
 
         self.gridLayout_29.addWidget(self.TRAIN__METRICS__INFO, 4, 1, 1, 1)
@@ -3739,7 +3736,7 @@ class Ui_MainWindow(object):
         self.LOSS__TYPE__INFO.setObjectName(u"LOSS__TYPE__INFO")
         self.LOSS__TYPE__INFO.setMinimumSize(QSize(30, 30))
         self.LOSS__TYPE__INFO.setMaximumSize(QSize(30, 30))
-        self.LOSS__TYPE__INFO.setFont(font10)
+        self.LOSS__TYPE__INFO.setFont(font)
         self.LOSS__TYPE__INFO.setScaledContents(True)
 
         self.gridLayout_29.addWidget(self.LOSS__TYPE__INFO, 1, 1, 1, 1)
@@ -3748,13 +3745,13 @@ class Ui_MainWindow(object):
         self.LOSS__TYPE__INPUT.setObjectName(u"LOSS__TYPE__INPUT")
         self.LOSS__TYPE__INPUT.setMinimumSize(QSize(200, 30))
         self.LOSS__TYPE__INPUT.setMaximumSize(QSize(200, 30))
-        self.LOSS__TYPE__INPUT.setFont(font10)
+        self.LOSS__TYPE__INPUT.setFont(font)
 
         self.gridLayout_29.addWidget(self.LOSS__TYPE__INPUT, 1, 2, 1, 1)
 
         self.LOSS__TYPE__LABEL = QLabel(self.frame_28)
         self.LOSS__TYPE__LABEL.setObjectName(u"LOSS__TYPE__LABEL")
-        self.LOSS__TYPE__LABEL.setFont(font10)
+        self.LOSS__TYPE__LABEL.setFont(font)
 
         self.gridLayout_29.addWidget(self.LOSS__TYPE__LABEL, 1, 0, 1, 1)
 
@@ -3762,7 +3759,7 @@ class Ui_MainWindow(object):
         self.TRAIN__METRICS__INPUT.setObjectName(u"TRAIN__METRICS__INPUT")
         self.TRAIN__METRICS__INPUT.setMinimumSize(QSize(200, 30))
         self.TRAIN__METRICS__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__METRICS__INPUT.setFont(font10)
+        self.TRAIN__METRICS__INPUT.setFont(font)
 
         self.gridLayout_29.addWidget(self.TRAIN__METRICS__INPUT, 4, 2, 1, 1)
 
@@ -6454,27 +6451,27 @@ class Ui_MainWindow(object):
 
         self.DATA__VAL__FILTER_SAMPLES__ENABLE__LABEL = QLabel(self.frame_19)
         self.DATA__VAL__FILTER_SAMPLES__ENABLE__LABEL.setObjectName(u"DATA__VAL__FILTER_SAMPLES__ENABLE__LABEL")
-        self.DATA__VAL__FILTER_SAMPLES__ENABLE__LABEL.setFont(font10)
+        self.DATA__VAL__FILTER_SAMPLES__ENABLE__LABEL.setFont(font)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__ENABLE__LABEL, 9, 0, 1, 1)
 
         self.DATA__VAL__FILTER_SAMPLES__PROPS__LABEL = QLabel(self.frame_19)
         self.DATA__VAL__FILTER_SAMPLES__PROPS__LABEL.setObjectName(u"DATA__VAL__FILTER_SAMPLES__PROPS__LABEL")
-        self.DATA__VAL__FILTER_SAMPLES__PROPS__LABEL.setFont(font10)
+        self.DATA__VAL__FILTER_SAMPLES__PROPS__LABEL.setFont(font)
         self.DATA__VAL__FILTER_SAMPLES__PROPS__LABEL.setIndent(15)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__PROPS__LABEL, 10, 0, 1, 1)
 
         self.DATA__VAL__FILTER_SAMPLES__VALUES__LABEL = QLabel(self.frame_19)
         self.DATA__VAL__FILTER_SAMPLES__VALUES__LABEL.setObjectName(u"DATA__VAL__FILTER_SAMPLES__VALUES__LABEL")
-        self.DATA__VAL__FILTER_SAMPLES__VALUES__LABEL.setFont(font10)
+        self.DATA__VAL__FILTER_SAMPLES__VALUES__LABEL.setFont(font)
         self.DATA__VAL__FILTER_SAMPLES__VALUES__LABEL.setIndent(15)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__VALUES__LABEL, 11, 0, 1, 1)
 
         self.DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL = QLabel(self.frame_19)
         self.DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL.setObjectName(u"DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL")
-        self.DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL.setFont(font10)
+        self.DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL.setFont(font)
         self.DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL.setIndent(15)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL, 12, 0, 1, 1)
@@ -6490,7 +6487,7 @@ class Ui_MainWindow(object):
         self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.setSizePolicy(sizePolicy2)
         self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.setFont(font10)
+        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.setFont(font)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT, 9, 3, 1, 1)
 
@@ -6503,7 +6500,7 @@ class Ui_MainWindow(object):
         self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT.setSizePolicy(sizePolicy3)
         self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT.setFont(font10)
+        self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT.setFont(font)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT, 10, 3, 1, 1)
 
@@ -6513,7 +6510,7 @@ class Ui_MainWindow(object):
         self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT.setSizePolicy(sizePolicy3)
         self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT.setFont(font10)
+        self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT.setFont(font)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT, 11, 3, 1, 1)
 
@@ -6523,7 +6520,7 @@ class Ui_MainWindow(object):
         self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT.setSizePolicy(sizePolicy3)
         self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT.setFont(font10)
+        self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT.setFont(font)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT, 12, 3, 1, 1)
 
@@ -6871,9 +6868,9 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__RESIZE__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__INFO")
         self.DATA__PREPROCESS__RESIZE__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__RESIZE__INFO.setMaximumSize(QSize(30, 30))
-        font11 = QFont()
-        font11.setFamily(u"URW Gothic [urw]")
-        self.DATA__PREPROCESS__RESIZE__INFO.setFont(font11)
+        font10 = QFont()
+        font10.setFamily(u"URW Gothic [urw]")
+        self.DATA__PREPROCESS__RESIZE__INFO.setFont(font10)
         self.DATA__PREPROCESS__RESIZE__INFO.setScaledContents(True)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__INFO, 0, 1, 1, 1)
@@ -7159,7 +7156,7 @@ class Ui_MainWindow(object):
 
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL = QLabel(self.preprocessing_frame)
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL")
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL.setFont(font10)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL.setFont(font)
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL.setIndent(15)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL, 13, 0, 1, 1)
@@ -7168,7 +7165,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO")
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setFont(font10)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setFont(font)
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setScaledContents(True)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO, 13, 1, 1, 1)
@@ -7177,7 +7174,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT")
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT.setFont(font10)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT.setFont(font)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT, 13, 3, 1, 1)
 
@@ -7925,21 +7922,21 @@ class Ui_MainWindow(object):
 
         self.DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL = QLabel(self.frame_16)
         self.DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL")
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL.setFont(font10)
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL.setFont(font)
         self.DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL.setIndent(15)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL, 10, 0, 1, 1)
 
         self.DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL = QLabel(self.frame_16)
         self.DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL")
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL.setFont(font10)
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL.setFont(font)
         self.DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL.setIndent(15)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL, 11, 0, 1, 1)
 
         self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__LABEL = QLabel(self.frame_16)
         self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__LABEL.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__ENABLE__LABEL")
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__LABEL.setFont(font10)
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__LABEL.setFont(font)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__LABEL, 9, 0, 1, 1)
 
@@ -7949,7 +7946,7 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT")
         self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.setFont(font10)
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.setFont(font)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT, 9, 3, 1, 1)
 
@@ -7957,14 +7954,14 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO")
         self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setFont(font10)
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setFont(font)
         self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setScaledContents(True)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO, 9, 2, 1, 1)
 
         self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL = QLabel(self.frame_16)
         self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL")
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL.setFont(font10)
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL.setFont(font)
         self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL.setIndent(15)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL, 12, 0, 1, 1)
@@ -7973,7 +7970,7 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO")
         self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setFont(font10)
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setFont(font)
         self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setScaledContents(True)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO, 10, 2, 1, 1)
@@ -7982,7 +7979,7 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO")
         self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setFont(font10)
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setFont(font)
         self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setScaledContents(True)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO, 11, 2, 1, 1)
@@ -7991,7 +7988,7 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO")
         self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setFont(font10)
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setFont(font)
         self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setScaledContents(True)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO, 12, 2, 1, 1)
@@ -8000,7 +7997,7 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT")
         self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT.setFont(font10)
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT.setFont(font)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT, 10, 3, 1, 1)
 
@@ -8008,7 +8005,7 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT")
         self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT.setFont(font10)
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT.setFont(font)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT, 11, 3, 1, 1)
 
@@ -8016,7 +8013,7 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT")
         self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT.setFont(font10)
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT.setFont(font)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT, 12, 3, 1, 1)
 
@@ -8342,7 +8339,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_6 = QWidget()
         self.scrollAreaWidgetContents_6.setObjectName(u"scrollAreaWidgetContents_6")
-        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 910, 339))
+        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 565, 337))
         self.gridLayout_18 = QGridLayout(self.scrollAreaWidgetContents_6)
         self.gridLayout_18.setObjectName(u"gridLayout_18")
         self.verticalSpacer_8 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -8558,7 +8555,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 927, 323))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 895, 100))
         self.gridLayout_17 = QGridLayout(self.scrollAreaWidgetContents_4)
         self.gridLayout_17.setObjectName(u"gridLayout_17")
         self.verticalSpacer_9 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -8714,7 +8711,7 @@ class Ui_MainWindow(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollAreaWidgetContents_7 = QWidget()
         self.scrollAreaWidgetContents_7.setObjectName(u"scrollAreaWidgetContents_7")
-        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 927, 323))
+        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 468, 138))
         self.gridLayout_19 = QGridLayout(self.scrollAreaWidgetContents_7)
         self.gridLayout_19.setObjectName(u"gridLayout_19")
         self.verticalSpacer_10 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -8813,7 +8810,7 @@ class Ui_MainWindow(object):
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollAreaWidgetContents_8 = QWidget()
         self.scrollAreaWidgetContents_8.setObjectName(u"scrollAreaWidgetContents_8")
-        self.scrollAreaWidgetContents_8.setGeometry(QRect(0, 0, 927, 323))
+        self.scrollAreaWidgetContents_8.setGeometry(QRect(0, 0, 582, 210))
         self.gridLayout_49 = QGridLayout(self.scrollAreaWidgetContents_8)
         self.gridLayout_49.setObjectName(u"gridLayout_49")
         self.frame_44 = QFrame(self.scrollAreaWidgetContents_8)
@@ -8960,7 +8957,7 @@ class Ui_MainWindow(object):
         self.scrollArea_5.setWidgetResizable(True)
         self.scrollAreaWidgetContents_9 = QWidget()
         self.scrollAreaWidgetContents_9.setObjectName(u"scrollAreaWidgetContents_9")
-        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, 0, 362, 184))
+        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, 0, 378, 180))
         self.gridLayout_50 = QGridLayout(self.scrollAreaWidgetContents_9)
         self.gridLayout_50.setObjectName(u"gridLayout_50")
         self.sr_unet_like_heading = QLabel(self.scrollAreaWidgetContents_9)
@@ -9070,7 +9067,7 @@ class Ui_MainWindow(object):
         self.scrollArea_6.setWidgetResizable(True)
         self.scrollAreaWidgetContents_10 = QWidget()
         self.scrollAreaWidgetContents_10.setObjectName(u"scrollAreaWidgetContents_10")
-        self.scrollAreaWidgetContents_10.setGeometry(QRect(0, 0, 412, 173))
+        self.scrollAreaWidgetContents_10.setGeometry(QRect(0, 0, 431, 171))
         self.gridLayout_51 = QGridLayout(self.scrollAreaWidgetContents_10)
         self.gridLayout_51.setObjectName(u"gridLayout_51")
         self.label_96 = QLabel(self.scrollAreaWidgetContents_10)
@@ -9193,7 +9190,7 @@ class Ui_MainWindow(object):
         self.scrollArea_7.setWidgetResizable(True)
         self.scrollAreaWidgetContents_11 = QWidget()
         self.scrollAreaWidgetContents_11.setObjectName(u"scrollAreaWidgetContents_11")
-        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, 0, 346, 44))
+        self.scrollAreaWidgetContents_11.setGeometry(QRect(0, 0, 399, 44))
         self.gridLayout_52 = QGridLayout(self.scrollAreaWidgetContents_11)
         self.gridLayout_52.setObjectName(u"gridLayout_52")
         self.horizontalSpacer_42 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
@@ -9356,7 +9353,7 @@ class Ui_MainWindow(object):
         self.test_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 910, 2442))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 881, 2430))
         self.gridLayout_37 = QGridLayout(self.scrollAreaWidgetContents_5)
         self.gridLayout_37.setObjectName(u"gridLayout_37")
         self.test_advanced_options_frame = QFrame(self.scrollAreaWidgetContents_5)
@@ -9524,7 +9521,7 @@ class Ui_MainWindow(object):
 
         self.TEST__AUGMENTATION_MODE__LABEL = QLabel(self.frame_45)
         self.TEST__AUGMENTATION_MODE__LABEL.setObjectName(u"TEST__AUGMENTATION_MODE__LABEL")
-        self.TEST__AUGMENTATION_MODE__LABEL.setFont(font10)
+        self.TEST__AUGMENTATION_MODE__LABEL.setFont(font)
         self.TEST__AUGMENTATION_MODE__LABEL.setIndent(15)
 
         self.gridLayout_53.addWidget(self.TEST__AUGMENTATION_MODE__LABEL, 5, 0, 1, 1)
@@ -9533,7 +9530,7 @@ class Ui_MainWindow(object):
         self.TEST__AUGMENTATION_MODE__INFO.setObjectName(u"TEST__AUGMENTATION_MODE__INFO")
         self.TEST__AUGMENTATION_MODE__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__AUGMENTATION_MODE__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__AUGMENTATION_MODE__INFO.setFont(font10)
+        self.TEST__AUGMENTATION_MODE__INFO.setFont(font)
         self.TEST__AUGMENTATION_MODE__INFO.setScaledContents(True)
 
         self.gridLayout_53.addWidget(self.TEST__AUGMENTATION_MODE__INFO, 5, 1, 1, 1)
@@ -9545,7 +9542,7 @@ class Ui_MainWindow(object):
         self.TEST__AUGMENTATION_MODE__INPUT.setObjectName(u"TEST__AUGMENTATION_MODE__INPUT")
         self.TEST__AUGMENTATION_MODE__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__AUGMENTATION_MODE__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__AUGMENTATION_MODE__INPUT.setFont(font10)
+        self.TEST__AUGMENTATION_MODE__INPUT.setFont(font)
 
         self.gridLayout_53.addWidget(self.TEST__AUGMENTATION_MODE__INPUT, 5, 2, 1, 1)
 
@@ -10081,14 +10078,14 @@ class Ui_MainWindow(object):
 
         self.DATA__TEST__FILTER_SAMPLES__PROPS__LABEL = QLabel(self.frame_41)
         self.DATA__TEST__FILTER_SAMPLES__PROPS__LABEL.setObjectName(u"DATA__TEST__FILTER_SAMPLES__PROPS__LABEL")
-        self.DATA__TEST__FILTER_SAMPLES__PROPS__LABEL.setFont(font10)
+        self.DATA__TEST__FILTER_SAMPLES__PROPS__LABEL.setFont(font)
         self.DATA__TEST__FILTER_SAMPLES__PROPS__LABEL.setIndent(15)
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__PROPS__LABEL, 7, 0, 1, 1)
 
         self.DATA__TEST__FILTER_SAMPLES__VALUES__LABEL = QLabel(self.frame_41)
         self.DATA__TEST__FILTER_SAMPLES__VALUES__LABEL.setObjectName(u"DATA__TEST__FILTER_SAMPLES__VALUES__LABEL")
-        self.DATA__TEST__FILTER_SAMPLES__VALUES__LABEL.setFont(font10)
+        self.DATA__TEST__FILTER_SAMPLES__VALUES__LABEL.setFont(font)
         self.DATA__TEST__FILTER_SAMPLES__VALUES__LABEL.setIndent(15)
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__VALUES__LABEL, 8, 0, 1, 1)
@@ -10097,20 +10094,20 @@ class Ui_MainWindow(object):
         self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setObjectName(u"DATA__TEST__FILTER_SAMPLES__ENABLE__INFO")
         self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setFont(font10)
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setFont(font)
         self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setScaledContents(True)
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO, 6, 1, 1, 1)
 
         self.DATA__TEST__FILTER_SAMPLES__ENABLE__LABEL = QLabel(self.frame_41)
         self.DATA__TEST__FILTER_SAMPLES__ENABLE__LABEL.setObjectName(u"DATA__TEST__FILTER_SAMPLES__ENABLE__LABEL")
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__LABEL.setFont(font10)
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__LABEL.setFont(font)
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__ENABLE__LABEL, 6, 0, 1, 1)
 
         self.DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL = QLabel(self.frame_41)
         self.DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL.setObjectName(u"DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL")
-        self.DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL.setFont(font10)
+        self.DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL.setFont(font)
         self.DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL.setIndent(15)
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL, 9, 0, 1, 1)
@@ -10119,7 +10116,7 @@ class Ui_MainWindow(object):
         self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setObjectName(u"DATA__TEST__FILTER_SAMPLES__SIGNS__INFO")
         self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setFont(font10)
+        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setFont(font)
         self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setScaledContents(True)
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO, 9, 1, 1, 1)
@@ -10128,7 +10125,7 @@ class Ui_MainWindow(object):
         self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO.setObjectName(u"DATA__TEST__FILTER_SAMPLES__VALUES__INFO")
         self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO.setFont(font10)
+        self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO.setFont(font)
         self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO.setScaledContents(True)
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO, 8, 1, 1, 1)
@@ -10137,7 +10134,7 @@ class Ui_MainWindow(object):
         self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO.setObjectName(u"DATA__TEST__FILTER_SAMPLES__PROPS__INFO")
         self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO.setFont(font10)
+        self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO.setFont(font)
         self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO.setScaledContents(True)
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO, 7, 1, 1, 1)
@@ -10146,7 +10143,7 @@ class Ui_MainWindow(object):
         self.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT.setObjectName(u"DATA__TEST__FILTER_SAMPLES__PROPS__INPUT")
         self.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT.setFont(font10)
+        self.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT.setFont(font)
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT, 7, 2, 1, 1)
 
@@ -10154,7 +10151,7 @@ class Ui_MainWindow(object):
         self.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT.setObjectName(u"DATA__TEST__FILTER_SAMPLES__VALUES__INPUT")
         self.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT.setFont(font10)
+        self.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT.setFont(font)
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT, 8, 2, 1, 1)
 
@@ -10162,7 +10159,7 @@ class Ui_MainWindow(object):
         self.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT.setObjectName(u"DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT")
         self.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT.setFont(font10)
+        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT.setFont(font)
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT, 9, 2, 1, 1)
 
@@ -10172,7 +10169,7 @@ class Ui_MainWindow(object):
         self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.setObjectName(u"DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT")
         self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.setFont(font10)
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.setFont(font)
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT, 6, 2, 1, 1)
 
@@ -10549,7 +10546,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__RESIZE__TEST__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__TEST__INFO")
         self.DATA__PREPROCESS__RESIZE__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__RESIZE__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__TEST__INFO.setFont(font11)
+        self.DATA__PREPROCESS__RESIZE__TEST__INFO.setFont(font10)
         self.DATA__PREPROCESS__RESIZE__TEST__INFO.setScaledContents(True)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__TEST__INFO, 0, 1, 1, 1)
@@ -10752,20 +10749,20 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INPUT.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INPUT")
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INPUT.setFont(font10)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INPUT.setFont(font)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INPUT, 13, 3, 1, 1)
 
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INFO = QLabel(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INFO.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INFO")
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INFO.setFont(font10)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INFO.setFont(font)
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INFO.setScaledContents(True)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INFO, 13, 1, 1, 1)
 
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__LABEL = QLabel(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__LABEL.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__LABEL")
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__LABEL.setFont(font10)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__LABEL.setFont(font)
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__LABEL.setIndent(15)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__LABEL, 13, 0, 1, 1)
@@ -11014,7 +11011,7 @@ class Ui_MainWindow(object):
         self.scrollArea_8.setWidgetResizable(True)
         self.scrollAreaWidgetContents_12 = QWidget()
         self.scrollAreaWidgetContents_12.setObjectName(u"scrollAreaWidgetContents_12")
-        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 928, 301))
+        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 452, 255))
         self.gridLayout_61 = QGridLayout(self.scrollAreaWidgetContents_12)
         self.gridLayout_61.setObjectName(u"gridLayout_61")
         self.label_82 = QLabel(self.scrollAreaWidgetContents_12)
@@ -11178,7 +11175,7 @@ class Ui_MainWindow(object):
         self.scrollArea_9.setWidgetResizable(True)
         self.scrollAreaWidgetContents_13 = QWidget()
         self.scrollAreaWidgetContents_13.setObjectName(u"scrollAreaWidgetContents_13")
-        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, -552, 911, 1333))
+        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 633, 1327))
         self.gridLayout_44 = QGridLayout(self.scrollAreaWidgetContents_13)
         self.gridLayout_44.setObjectName(u"gridLayout_44")
         self.label_86 = QLabel(self.scrollAreaWidgetContents_13)
@@ -11333,14 +11330,14 @@ class Ui_MainWindow(object):
         self.gridLayout_58.setObjectName(u"gridLayout_58")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__LABEL = QLabel(self.frame_50)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__LABEL")
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__LABEL.setFont(font10)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__LABEL.setFont(font)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__LABEL.setIndent(15)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__LABEL, 1, 0, 1, 1)
 
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__LABEL = QLabel(self.frame_50)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__LABEL")
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__LABEL.setFont(font10)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__LABEL.setFont(font)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__LABEL, 0, 0, 1, 1)
 
@@ -11609,7 +11606,7 @@ class Ui_MainWindow(object):
 
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__LABEL = QLabel(self.frame_50)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__LABEL")
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__LABEL.setFont(font10)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__LABEL.setFont(font)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__LABEL.setIndent(15)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__LABEL, 2, 0, 1, 1)
@@ -11618,7 +11615,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO.setFont(font10)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO.setFont(font)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO.setScaledContents(True)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO, 2, 1, 1, 1)
@@ -11627,7 +11624,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO.setFont(font10)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO.setFont(font)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO.setScaledContents(True)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO, 1, 1, 1, 1)
@@ -11636,7 +11633,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INFO.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INFO")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INFO.setFont(font10)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INFO.setFont(font)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INFO.setScaledContents(True)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INFO, 0, 1, 1, 1)
@@ -11647,7 +11644,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT.setFont(font10)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT.setFont(font)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT, 0, 2, 1, 1)
 
@@ -11655,7 +11652,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INPUT")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INPUT.setFont(font10)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INPUT.setFont(font)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INPUT, 1, 2, 1, 1)
 
@@ -11663,7 +11660,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INPUT")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INPUT.setFont(font10)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INPUT.setFont(font)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INPUT, 2, 2, 1, 1)
 
@@ -12034,7 +12031,7 @@ class Ui_MainWindow(object):
         self.scrollArea_10.setWidgetResizable(True)
         self.scrollAreaWidgetContents_14 = QWidget()
         self.scrollAreaWidgetContents_14.setObjectName(u"scrollAreaWidgetContents_14")
-        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 911, 1060))
+        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 597, 1056))
         self.gridLayout_47 = QGridLayout(self.scrollAreaWidgetContents_14)
         self.gridLayout_47.setObjectName(u"gridLayout_47")
         self.label_100 = QLabel(self.scrollAreaWidgetContents_14)
@@ -12094,7 +12091,7 @@ class Ui_MainWindow(object):
 
         self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__LABEL = QLabel(self.det_metrics_frame)
         self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__LABEL.setObjectName(u"TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__LABEL")
-        self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__LABEL.setFont(font10)
+        self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__LABEL.setFont(font)
 
         self.gridLayout_41.addWidget(self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__LABEL, 1, 0, 1, 1)
 
@@ -12102,7 +12099,7 @@ class Ui_MainWindow(object):
         self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INPUT.setObjectName(u"TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INPUT")
         self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INPUT.setFont(font10)
+        self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INPUT.setFont(font)
 
         self.gridLayout_41.addWidget(self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INPUT, 1, 2, 1, 1)
 
@@ -12110,7 +12107,7 @@ class Ui_MainWindow(object):
         self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INFO.setObjectName(u"TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INFO")
         self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INFO.setFont(font10)
+        self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INFO.setFont(font)
         self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INFO.setScaledContents(True)
 
         self.gridLayout_41.addWidget(self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INFO, 1, 1, 1, 1)
@@ -12620,20 +12617,20 @@ class Ui_MainWindow(object):
 
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__LABEL = QLabel(self.frame_51)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER__DET__LABEL")
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__LABEL.setFont(font10)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__LABEL.setFont(font)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__LABEL, 0, 0, 1, 1)
 
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__LABEL = QLabel(self.frame_51)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__LABEL")
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__LABEL.setFont(font10)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__LABEL.setFont(font)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__LABEL.setIndent(15)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__LABEL, 1, 0, 1, 1)
 
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__LABEL = QLabel(self.frame_51)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__LABEL")
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__LABEL.setFont(font10)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__LABEL.setFont(font)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__LABEL.setIndent(15)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__LABEL, 2, 0, 1, 1)
@@ -12642,7 +12639,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO.setFont(font10)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO.setFont(font)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO.setScaledContents(True)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO, 2, 1, 1, 1)
@@ -12651,7 +12648,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO.setFont(font10)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO.setFont(font)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO.setScaledContents(True)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO, 1, 1, 1, 1)
@@ -12660,7 +12657,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INFO.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INFO")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INFO.setFont(font10)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INFO.setFont(font)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INFO.setScaledContents(True)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INFO, 0, 1, 1, 1)
@@ -12671,7 +12668,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT.setFont(font10)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT.setFont(font)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT, 0, 2, 1, 1)
 
@@ -12679,7 +12676,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INPUT")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INPUT.setFont(font10)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INPUT.setFont(font)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INPUT, 1, 2, 1, 1)
 
@@ -12687,7 +12684,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INPUT")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INPUT.setFont(font10)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INPUT.setFont(font)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INPUT, 2, 2, 1, 1)
 
@@ -12711,7 +12708,7 @@ class Ui_MainWindow(object):
         self.scrollArea_11.setWidgetResizable(True)
         self.scrollAreaWidgetContents_15 = QWidget()
         self.scrollAreaWidgetContents_15.setObjectName(u"scrollAreaWidgetContents_15")
-        self.scrollAreaWidgetContents_15.setGeometry(QRect(0, 0, 928, 301))
+        self.scrollAreaWidgetContents_15.setGeometry(QRect(0, 0, 372, 44))
         self.gridLayout_64 = QGridLayout(self.scrollAreaWidgetContents_15)
         self.gridLayout_64.setObjectName(u"gridLayout_64")
         self.verticalSpacer_27 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -12745,7 +12742,7 @@ class Ui_MainWindow(object):
         self.scrollArea_12.setWidgetResizable(True)
         self.scrollAreaWidgetContents_16 = QWidget()
         self.scrollAreaWidgetContents_16.setObjectName(u"scrollAreaWidgetContents_16")
-        self.scrollAreaWidgetContents_16.setGeometry(QRect(0, 0, 372, 44))
+        self.scrollAreaWidgetContents_16.setGeometry(QRect(0, 0, 426, 44))
         self.gridLayout_65 = QGridLayout(self.scrollAreaWidgetContents_16)
         self.gridLayout_65.setObjectName(u"gridLayout_65")
         self.label_102 = QLabel(self.scrollAreaWidgetContents_16)
@@ -12779,7 +12776,7 @@ class Ui_MainWindow(object):
         self.scrollArea_13.setWidgetResizable(True)
         self.scrollAreaWidgetContents_17 = QWidget()
         self.scrollAreaWidgetContents_17.setObjectName(u"scrollAreaWidgetContents_17")
-        self.scrollAreaWidgetContents_17.setGeometry(QRect(0, 0, 425, 44))
+        self.scrollAreaWidgetContents_17.setGeometry(QRect(0, 0, 488, 44))
         self.gridLayout_66 = QGridLayout(self.scrollAreaWidgetContents_17)
         self.gridLayout_66.setObjectName(u"gridLayout_66")
         self.label_106 = QLabel(self.scrollAreaWidgetContents_17)
@@ -12813,7 +12810,7 @@ class Ui_MainWindow(object):
         self.scrollArea_14.setWidgetResizable(True)
         self.scrollAreaWidgetContents_18 = QWidget()
         self.scrollAreaWidgetContents_18.setObjectName(u"scrollAreaWidgetContents_18")
-        self.scrollAreaWidgetContents_18.setGeometry(QRect(0, 0, 346, 44))
+        self.scrollAreaWidgetContents_18.setGeometry(QRect(0, 0, 399, 44))
         self.gridLayout_67 = QGridLayout(self.scrollAreaWidgetContents_18)
         self.gridLayout_67.setObjectName(u"gridLayout_67")
         self.label_111 = QLabel(self.scrollAreaWidgetContents_18)
@@ -12877,12 +12874,12 @@ class Ui_MainWindow(object):
         self.page_create_yaml_bottom_frame.setObjectName(u"page_create_yaml_bottom_frame")
         self.page_create_yaml_bottom_frame.setMinimumSize(QSize(0, 103))
         self.page_create_yaml_bottom_frame.setMaximumSize(QSize(16777215, 16777215))
-        font12 = QFont()
-        font12.setFamily(u"DejaVu Math TeX Gyre")
-        font12.setPointSize(12)
-        font12.setBold(False)
-        font12.setWeight(50)
-        self.page_create_yaml_bottom_frame.setFont(font12)
+        font11 = QFont()
+        font11.setFamily(u"DejaVu Math TeX Gyre")
+        font11.setPointSize(12)
+        font11.setBold(False)
+        font11.setWeight(50)
+        self.page_create_yaml_bottom_frame.setFont(font11)
         self.page_create_yaml_bottom_frame.setFrameShape(QFrame.NoFrame)
         self.page_create_yaml_bottom_frame.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_8 = QHBoxLayout(self.page_create_yaml_bottom_frame)
@@ -12927,13 +12924,13 @@ class Ui_MainWindow(object):
         self.continue_bn.setObjectName(u"continue_bn")
         self.continue_bn.setMinimumSize(QSize(0, 40))
         self.continue_bn.setMaximumSize(QSize(220, 77))
-        font13 = QFont()
-        font13.setFamily(u"DejaVu Math TeX Gyre")
-        font13.setPointSize(12)
-        font13.setBold(False)
-        font13.setWeight(50)
-        font13.setStrikeOut(False)
-        self.continue_bn.setFont(font13)
+        font12 = QFont()
+        font12.setFamily(u"DejaVu Math TeX Gyre")
+        font12.setPointSize(12)
+        font12.setBold(False)
+        font12.setWeight(50)
+        font12.setStrikeOut(False)
+        self.continue_bn.setFont(font12)
         self.continue_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgb(64,144,253);\n"
@@ -13214,7 +13211,7 @@ class Ui_MainWindow(object):
         self.check_yaml_file_errors_frame.setWidgetResizable(True)
         self.scrollAreaWidgetContents_19 = QWidget()
         self.scrollAreaWidgetContents_19.setObjectName(u"scrollAreaWidgetContents_19")
-        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 896, 101))
+        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 96, 26))
         self.verticalLayout_32 = QVBoxLayout(self.scrollAreaWidgetContents_19)
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
         self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)
@@ -13361,8 +13358,8 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(2)
-        self.wizard_main_frame.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(1)
+        self.wizard_main_frame.setCurrentIndex(0)
         self.stackedWidget_create_yaml_frame.setCurrentIndex(1)
         self.train_tab_widget.setCurrentIndex(0)
         self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(1)

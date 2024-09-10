@@ -1407,7 +1407,7 @@ QPushButton:pressed {
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>2</number>
+                <number>1</number>
                </property>
                <widget class="QWidget" name="page_home">
                 <property name="styleSheet">
@@ -2618,7 +2618,7 @@ background-color:#D3D3D3;
                   <item>
                    <widget class="QStackedWidget" name="wizard_main_frame">
                     <property name="currentIndex">
-                     <number>2</number>
+                     <number>0</number>
                     </property>
                     <widget class="QWidget" name="wizard_start_page">
                      <layout class="QVBoxLayout" name="verticalLayout_54">
@@ -3374,8 +3374,8 @@ border-radius: 35px;
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>639</width>
-                                 <height>304</height>
+                                 <width>592</width>
+                                 <height>298</height>
                                 </rect>
                                </property>
                                <layout class="QVBoxLayout" name="verticalLayout_59">
@@ -4089,7 +4089,7 @@ font: italic;</string>
                                <x>0</x>
                                <y>0</y>
                                <width>930</width>
-                               <height>171</height>
+                               <height>172</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_62"/>
@@ -6136,9 +6136,9 @@ QPushButton:pressed {
                             <property name="geometry">
                              <rect>
                               <x>0</x>
-                              <y>-69</y>
-                              <width>931</width>
-                              <height>567</height>
+                              <y>0</y>
+                              <width>934</width>
+                              <height>565</height>
                              </rect>
                             </property>
                             <property name="layoutDirection">
@@ -6282,7 +6282,7 @@ QPushButton:pressed {
                                   </property>
                                   <property name="font">
                                    <font>
-                                    <family>Arial</family>
+                                    <family>DejaVu Math TeX Gyre</family>
                                     <pointsize>12</pointsize>
                                    </font>
                                   </property>
@@ -6310,7 +6310,7 @@ QPushButton:pressed {
                                   </property>
                                   <property name="font">
                                    <font>
-                                    <family>Arial</family>
+                                    <family>DejaVu Math TeX Gyre</family>
                                     <pointsize>12</pointsize>
                                    </font>
                                   </property>
@@ -6342,7 +6342,7 @@ QPushButton:pressed {
                                   </property>
                                   <property name="font">
                                    <font>
-                                    <family>Arial</family>
+                                    <family>DejaVu Math TeX Gyre</family>
                                     <pointsize>12</pointsize>
                                    </font>
                                   </property>
@@ -6373,7 +6373,7 @@ QPushButton:pressed {
                                   </property>
                                   <property name="font">
                                    <font>
-                                    <family>Arial</family>
+                                    <family>DejaVu Math TeX Gyre</family>
                                     <pointsize>12</pointsize>
                                    </font>
                                   </property>
@@ -6393,7 +6393,7 @@ QPushButton:pressed {
                                  <widget class="QLabel" name="MODEL__BMZ__SOURCE_MODEL_ID__LABEL">
                                   <property name="font">
                                    <font>
-                                    <family>Arial</family>
+                                    <family>DejaVu Math TeX Gyre</family>
                                     <pointsize>12</pointsize>
                                    </font>
                                   </property>
@@ -6409,7 +6409,7 @@ QPushButton:pressed {
                                  <widget class="QLabel" name="LOAD_PRETRAINED_MODEL__LABEL">
                                   <property name="font">
                                    <font>
-                                    <family>Arial</family>
+                                    <family>DejaVu Math TeX Gyre</family>
                                     <pointsize>12</pointsize>
                                    </font>
                                   </property>
@@ -6422,7 +6422,7 @@ QPushButton:pressed {
                                  <widget class="QLabel" name="MODEL__SOURCE__LABEL">
                                   <property name="font">
                                    <font>
-                                    <family>Arial</family>
+                                    <family>DejaVu Math TeX Gyre</family>
                                     <pointsize>12</pointsize>
                                    </font>
                                   </property>
@@ -6450,7 +6450,7 @@ QPushButton:pressed {
                                   </property>
                                   <property name="font">
                                    <font>
-                                    <family>Arial</family>
+                                    <family>DejaVu Math TeX Gyre</family>
                                     <pointsize>12</pointsize>
                                    </font>
                                   </property>
@@ -6488,7 +6488,7 @@ QPushButton:pressed {
                                   </property>
                                   <property name="font">
                                    <font>
-                                    <family>Arial</family>
+                                    <family>DejaVu Math TeX Gyre</family>
                                     <pointsize>12</pointsize>
                                    </font>
                                   </property>
@@ -6519,7 +6519,7 @@ QPushButton:pressed {
                                   </property>
                                   <property name="font">
                                    <font>
-                                    <family>Arial</family>
+                                    <family>DejaVu Math TeX Gyre</family>
                                     <pointsize>12</pointsize>
                                    </font>
                                   </property>
@@ -6585,7 +6585,7 @@ QPushButton:pressed {
                                   </property>
                                   <property name="font">
                                    <font>
-                                    <family>Arial</family>
+                                    <family>DejaVu Math TeX Gyre</family>
                                     <pointsize>12</pointsize>
                                    </font>
                                   </property>
@@ -6754,8 +6754,8 @@ QPushButton:pressed {
                                     <rect>
                                      <x>0</x>
                                      <y>0</y>
-                                     <width>854</width>
-                                     <height>288</height>
+                                     <width>860</width>
+                                     <height>284</height>
                                     </rect>
                                    </property>
                                    <layout class="QGridLayout" name="gridLayout_2">
@@ -7765,8 +7765,8 @@ QPushButton:pressed {
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>931</width>
-                                  <height>7950</height>
+                                  <width>970</width>
+                                  <height>7930</height>
                                  </rect>
                                 </property>
                                 <property name="layoutDirection">
@@ -8525,7 +8525,7 @@ QPushButton:pressed {
                                            <widget class="QLabel" name="LOSS__CLASS_REBALANCE__LABEL">
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -8550,7 +8550,7 @@ QPushButton:pressed {
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -8581,7 +8581,7 @@ QPushButton:pressed {
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -8613,7 +8613,7 @@ QPushButton:pressed {
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -8626,7 +8626,7 @@ QPushButton:pressed {
                                            <widget class="QLabel" name="LOSS__WEIGHTS__LABEL">
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -8651,7 +8651,7 @@ QPushButton:pressed {
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -9749,7 +9749,7 @@ QPushButton:pressed {
                                            <widget class="QLabel" name="TRAIN__METRICS__LABEL">
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -9774,7 +9774,7 @@ QPushButton:pressed {
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -9805,7 +9805,7 @@ QPushButton:pressed {
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -9836,7 +9836,7 @@ QPushButton:pressed {
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -9846,7 +9846,7 @@ QPushButton:pressed {
                                            <widget class="QLabel" name="LOSS__TYPE__LABEL">
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -9871,7 +9871,7 @@ QPushButton:pressed {
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -18188,7 +18188,7 @@ p, li { white-space: pre-wrap; }
                                            <widget class="QLabel" name="DATA__VAL__FILTER_SAMPLES__ENABLE__LABEL">
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -18201,7 +18201,7 @@ p, li { white-space: pre-wrap; }
                                            <widget class="QLabel" name="DATA__VAL__FILTER_SAMPLES__PROPS__LABEL">
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -18217,7 +18217,7 @@ p, li { white-space: pre-wrap; }
                                            <widget class="QLabel" name="DATA__VAL__FILTER_SAMPLES__VALUES__LABEL">
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -18233,7 +18233,7 @@ p, li { white-space: pre-wrap; }
                                            <widget class="QLabel" name="DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL">
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -18267,7 +18267,7 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -18305,7 +18305,7 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -18336,7 +18336,7 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -18367,7 +18367,7 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -20208,7 +20208,7 @@ p, li { white-space: pre-wrap; }
                                            <widget class="QLabel" name="DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL">
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -20236,7 +20236,7 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -20267,7 +20267,7 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -22494,7 +22494,7 @@ p, li { white-space: pre-wrap; }
                                            <widget class="QLabel" name="DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL">
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -22510,7 +22510,7 @@ p, li { white-space: pre-wrap; }
                                            <widget class="QLabel" name="DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL">
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -22526,7 +22526,7 @@ p, li { white-space: pre-wrap; }
                                            <widget class="QLabel" name="DATA__TRAIN__FILTER_SAMPLES__ENABLE__LABEL">
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -22551,7 +22551,7 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -22583,7 +22583,7 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -22602,7 +22602,7 @@ p, li { white-space: pre-wrap; }
                                            <widget class="QLabel" name="DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL">
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -22630,7 +22630,7 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -22661,7 +22661,7 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -22692,7 +22692,7 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -22723,7 +22723,7 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -22748,7 +22748,7 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -22773,7 +22773,7 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -23710,8 +23710,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>910</width>
-                                         <height>339</height>
+                                         <width>565</width>
+                                         <height>337</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_18">
@@ -24356,8 +24356,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>927</width>
-                                         <height>323</height>
+                                         <width>895</width>
+                                         <height>100</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_17">
@@ -24829,8 +24829,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>927</width>
-                                         <height>323</height>
+                                         <width>468</width>
+                                         <height>138</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_19">
@@ -25115,8 +25115,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>927</width>
-                                         <height>323</height>
+                                         <width>582</width>
+                                         <height>210</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_49">
@@ -25537,8 +25537,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>362</width>
-                                         <height>184</height>
+                                         <width>378</width>
+                                         <height>180</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_50">
@@ -25809,8 +25809,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>412</width>
-                                         <height>173</height>
+                                         <width>431</width>
+                                         <height>171</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_51">
@@ -26152,7 +26152,7 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>346</width>
+                                         <width>399</width>
                                          <height>44</height>
                                         </rect>
                                        </property>
@@ -26564,8 +26564,8 @@ QPushButton:pressed {
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>910</width>
-                                  <height>2442</height>
+                                  <width>881</width>
+                                  <height>2430</height>
                                  </rect>
                                 </property>
                                 <layout class="QGridLayout" name="gridLayout_37">
@@ -27051,7 +27051,7 @@ QPushButton:pressed {
                                            <widget class="QLabel" name="TEST__AUGMENTATION_MODE__LABEL">
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -27079,7 +27079,7 @@ QPushButton:pressed {
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -27110,7 +27110,7 @@ QPushButton:pressed {
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -28647,7 +28647,7 @@ QPushButton:pressed {
                                            <widget class="QLabel" name="DATA__TEST__FILTER_SAMPLES__PROPS__LABEL">
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -28663,7 +28663,7 @@ QPushButton:pressed {
                                            <widget class="QLabel" name="DATA__TEST__FILTER_SAMPLES__VALUES__LABEL">
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -28691,7 +28691,7 @@ QPushButton:pressed {
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -28710,7 +28710,7 @@ QPushButton:pressed {
                                            <widget class="QLabel" name="DATA__TEST__FILTER_SAMPLES__ENABLE__LABEL">
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -28723,7 +28723,7 @@ QPushButton:pressed {
                                            <widget class="QLabel" name="DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL">
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -28751,7 +28751,7 @@ QPushButton:pressed {
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -28782,7 +28782,7 @@ QPushButton:pressed {
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -28813,7 +28813,7 @@ QPushButton:pressed {
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -28844,7 +28844,7 @@ QPushButton:pressed {
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -28869,7 +28869,7 @@ QPushButton:pressed {
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -28894,7 +28894,7 @@ QPushButton:pressed {
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -28919,7 +28919,7 @@ QPushButton:pressed {
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -30598,7 +30598,7 @@ QPushButton:pressed {
                                             </property>
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -30611,7 +30611,7 @@ QPushButton:pressed {
                                            <widget class="QLabel" name="DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INFO">
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -30627,7 +30627,7 @@ QPushButton:pressed {
                                            <widget class="QLabel" name="DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__LABEL">
                                             <property name="font">
                                              <font>
-                                              <family>Arial</family>
+                                              <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
@@ -31307,8 +31307,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>928</width>
-                                       <height>301</height>
+                                       <width>452</width>
+                                       <height>255</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_61">
@@ -31736,9 +31736,9 @@ QPushButton:pressed {
                                      <property name="geometry">
                                       <rect>
                                        <x>0</x>
-                                       <y>-552</y>
-                                       <width>911</width>
-                                       <height>1333</height>
+                                       <y>0</y>
+                                       <width>633</width>
+                                       <height>1327</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_44">
@@ -32161,7 +32161,7 @@ QPushButton:pressed {
                                           <widget class="QLabel" name="TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__LABEL">
                                            <property name="font">
                                             <font>
-                                             <family>Arial</family>
+                                             <family>DejaVu Math TeX Gyre</family>
                                              <pointsize>12</pointsize>
                                             </font>
                                            </property>
@@ -32177,7 +32177,7 @@ QPushButton:pressed {
                                           <widget class="QLabel" name="TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__LABEL">
                                            <property name="font">
                                             <font>
-                                             <family>Arial</family>
+                                             <family>DejaVu Math TeX Gyre</family>
                                              <pointsize>12</pointsize>
                                             </font>
                                            </property>
@@ -33000,7 +33000,7 @@ p, li { white-space: pre-wrap; }
                                           <widget class="QLabel" name="TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__LABEL">
                                            <property name="font">
                                             <font>
-                                             <family>Arial</family>
+                                             <family>DejaVu Math TeX Gyre</family>
                                              <pointsize>12</pointsize>
                                             </font>
                                            </property>
@@ -33028,7 +33028,7 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                            <property name="font">
                                             <font>
-                                             <family>Arial</family>
+                                             <family>DejaVu Math TeX Gyre</family>
                                              <pointsize>12</pointsize>
                                             </font>
                                            </property>
@@ -33059,7 +33059,7 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                            <property name="font">
                                             <font>
-                                             <family>Arial</family>
+                                             <family>DejaVu Math TeX Gyre</family>
                                              <pointsize>12</pointsize>
                                             </font>
                                            </property>
@@ -33090,7 +33090,7 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                            <property name="font">
                                             <font>
-                                             <family>Arial</family>
+                                             <family>DejaVu Math TeX Gyre</family>
                                              <pointsize>12</pointsize>
                                             </font>
                                            </property>
@@ -33121,7 +33121,7 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                            <property name="font">
                                             <font>
-                                             <family>Arial</family>
+                                             <family>DejaVu Math TeX Gyre</family>
                                              <pointsize>12</pointsize>
                                             </font>
                                            </property>
@@ -33153,7 +33153,7 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                            <property name="font">
                                             <font>
-                                             <family>Arial</family>
+                                             <family>DejaVu Math TeX Gyre</family>
                                              <pointsize>12</pointsize>
                                             </font>
                                            </property>
@@ -33178,7 +33178,7 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                            <property name="font">
                                             <font>
-                                             <family>Arial</family>
+                                             <family>DejaVu Math TeX Gyre</family>
                                              <pointsize>12</pointsize>
                                             </font>
                                            </property>
@@ -34241,8 +34241,8 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>911</width>
-                                       <height>1060</height>
+                                       <width>597</width>
+                                       <height>1056</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_47">
@@ -34393,7 +34393,7 @@ p, li { white-space: pre-wrap; }
                                           <widget class="QLabel" name="TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__LABEL">
                                            <property name="font">
                                             <font>
-                                             <family>Arial</family>
+                                             <family>DejaVu Math TeX Gyre</family>
                                              <pointsize>12</pointsize>
                                             </font>
                                            </property>
@@ -34418,7 +34418,7 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                            <property name="font">
                                             <font>
-                                             <family>Arial</family>
+                                             <family>DejaVu Math TeX Gyre</family>
                                              <pointsize>12</pointsize>
                                             </font>
                                            </property>
@@ -34443,7 +34443,7 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                            <property name="font">
                                             <font>
-                                             <family>Arial</family>
+                                             <family>DejaVu Math TeX Gyre</family>
                                              <pointsize>12</pointsize>
                                             </font>
                                            </property>
@@ -35945,7 +35945,7 @@ p, li { white-space: pre-wrap; }
                                           <widget class="QLabel" name="TEST__POST_PROCESSING__MEDIAN_FILTER__DET__LABEL">
                                            <property name="font">
                                             <font>
-                                             <family>Arial</family>
+                                             <family>DejaVu Math TeX Gyre</family>
                                              <pointsize>12</pointsize>
                                             </font>
                                            </property>
@@ -35958,7 +35958,7 @@ p, li { white-space: pre-wrap; }
                                           <widget class="QLabel" name="TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__LABEL">
                                            <property name="font">
                                             <font>
-                                             <family>Arial</family>
+                                             <family>DejaVu Math TeX Gyre</family>
                                              <pointsize>12</pointsize>
                                             </font>
                                            </property>
@@ -35974,7 +35974,7 @@ p, li { white-space: pre-wrap; }
                                           <widget class="QLabel" name="TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__LABEL">
                                            <property name="font">
                                             <font>
-                                             <family>Arial</family>
+                                             <family>DejaVu Math TeX Gyre</family>
                                              <pointsize>12</pointsize>
                                             </font>
                                            </property>
@@ -36002,7 +36002,7 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                            <property name="font">
                                             <font>
-                                             <family>Arial</family>
+                                             <family>DejaVu Math TeX Gyre</family>
                                              <pointsize>12</pointsize>
                                             </font>
                                            </property>
@@ -36033,7 +36033,7 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                            <property name="font">
                                             <font>
-                                             <family>Arial</family>
+                                             <family>DejaVu Math TeX Gyre</family>
                                              <pointsize>12</pointsize>
                                             </font>
                                            </property>
@@ -36064,7 +36064,7 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                            <property name="font">
                                             <font>
-                                             <family>Arial</family>
+                                             <family>DejaVu Math TeX Gyre</family>
                                              <pointsize>12</pointsize>
                                             </font>
                                            </property>
@@ -36095,7 +36095,7 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                            <property name="font">
                                             <font>
-                                             <family>Arial</family>
+                                             <family>DejaVu Math TeX Gyre</family>
                                              <pointsize>12</pointsize>
                                             </font>
                                            </property>
@@ -36127,7 +36127,7 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                            <property name="font">
                                             <font>
-                                             <family>Arial</family>
+                                             <family>DejaVu Math TeX Gyre</family>
                                              <pointsize>12</pointsize>
                                             </font>
                                            </property>
@@ -36152,7 +36152,7 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                            <property name="font">
                                             <font>
-                                             <family>Arial</family>
+                                             <family>DejaVu Math TeX Gyre</family>
                                              <pointsize>12</pointsize>
                                             </font>
                                            </property>
@@ -36200,8 +36200,8 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>928</width>
-                                       <height>301</height>
+                                       <width>372</width>
+                                       <height>44</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_64">
@@ -36280,7 +36280,7 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>372</width>
+                                       <width>426</width>
                                        <height>44</height>
                                       </rect>
                                      </property>
@@ -36360,7 +36360,7 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>425</width>
+                                       <width>488</width>
                                        <height>44</height>
                                       </rect>
                                      </property>
@@ -36440,7 +36440,7 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>346</width>
+                                       <width>399</width>
                                        <height>44</height>
                                       </rect>
                                      </property>
@@ -37355,8 +37355,8 @@ QPushButton:pressed {
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>896</width>
-                               <height>101</height>
+                               <width>96</width>
+                               <height>26</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_32">
