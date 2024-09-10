@@ -2059,6 +2059,7 @@ def create_yaml_file(main_window):
     if get_text(main_window.ui.LOAD_PRETRAINED_MODEL__INPUT) == "Yes":
         if get_text(main_window.ui.MODEL__SOURCE__INPUT) == "I have a model trained with BiaPy":
             biapy_config['MODEL']['LOAD_CHECKPOINT'] = True 
+            biapy_config['MODEL']["SOURCE"] = "biapy"
             biapy_config['PATHS'] = {}
             if get_text(main_window.ui.PATHS__CHECKPOINT_FILE__INPUT) != "":
                 biapy_config['PATHS']['CHECKPOINT_FILE'] = get_text(main_window.ui.PATHS__CHECKPOINT_FILE__INPUT, strip=False)
@@ -2073,10 +2074,12 @@ def create_yaml_file(main_window):
                 arr = get_text(main_window.ui.MODEL__BMZ__SOURCE_MODEL_ID__INPUT).split("(")
                 model = arr[0].strip()
                 if "BioImage Model Zoo" in arr[1]:
+                    biapy_config['MODEL']["SOURCE"] = "bmz"
                     biapy_config['MODEL']['BMZ'] = {}
                     biapy_config['MODEL']['BMZ']['SOURCE_MODEL_ID'] = str(model)
                 else:
-                    biapy_config['MODEL']['TORCHVISION_MODEL_NAME '] = str(model)
+                    biapy_config['MODEL']["SOURCE"] = "torchvision"
+                    biapy_config['MODEL']['TORCHVISION_MODEL_NAME'] = str(model)
 
     # Loss
     loss_name = main_window.cfg.translate_names(get_text(main_window.ui.LOSS__TYPE__INPUT), key_str="losses")
@@ -2534,8 +2537,18 @@ class load_yaml_to_GUI_engine(QObject):
             except:
                 self.test_preprocessing = False
 
+            # BiaPy pretrained model
+            self.biapy_pretrained = (tmp_cfg['MODEL']['SOURCE'] == "biapy" and tmp_cfg['MODEL']['LOAD_CHECKPOINT'])
+
+            # BMZ pretrained model
+            self.bmz_pretrained = (tmp_cfg['MODEL']['SOURCE'] == "bmz" and tmp_cfg['MODEL']['BMZ']['SOURCE_MODEL_ID'] != "")
+
+            # Torchvision pretrained model
+            self.torchvision_pretrained = (tmp_cfg['MODEL']['SOURCE'] == "torchvision" and tmp_cfg['MODEL']['TORCHVISION_MODEL_NAME'] != "")
+            
             # Go over configuration file
             errors, variables_set = self.analyze_dict(conf=loaded_cfg, sep="")
+            
             self.main_window.logger.info("Variables updated: ")
             for i, k in enumerate(variables_set.keys()):
                 self.main_window.logger.info("{}. {}: {}".format(i+1, k, variables_set[k]))
@@ -2670,7 +2683,26 @@ class load_yaml_to_GUI_engine(QObject):
                     widget_name = "DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__{}__INPUT".format(self.workflow_str)
                 elif widget_name == "TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INPUT":
                     widget_name = "TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__{}__INPUT".format(self.workflow_str)
-
+                elif widget_name == "MODEL__SOURCE__INPUT":
+                    if self.biapy_pretrained: 
+                        v = "I have a model trained with BiaPy" 
+                        other_widgets_to_set.append("LOAD_PRETRAINED_MODEL__INPUT")
+                        other_widgets_values_to_set.append("Yes") 
+                    elif self.bmz_pretrained:
+                        v = "I want to check other online sources"
+                        other_widgets_to_set.append("LOAD_PRETRAINED_MODEL__INPUT")
+                        other_widgets_values_to_set.append("Yes") 
+                    elif self.torchvision_pretrained:
+                        v = "I want to check other online sources"
+                        other_widgets_to_set.append("LOAD_PRETRAINED_MODEL__INPUT")
+                        other_widgets_values_to_set.append("Yes") 
+                elif widget_name == "MODEL__BMZ__SOURCE_MODEL_ID__INPUT":
+                    if self.bmz_pretrained:
+                        v += " (BioImage Model Zoo)"
+                elif widget_name == "MODEL__TORCHVISION_MODEL_NAME__INPUT":
+                    if self.torchvision_pretrained:
+                        v += " (Torchvision)"
+                
                 if "DATA__PREPROCESS__" in widget_name and widget_name not in ["DATA__PREPROCESS__TRAIN__INPUT", \
                     "DATA__PREPROCESS__VAL__INPUT", "DATA__PREPROCESS__TEST__INPUT"]:
                     if self.train_preprocessing or self.val_preprocessing:
