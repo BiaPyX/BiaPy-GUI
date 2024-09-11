@@ -61,13 +61,13 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>40</height>
+          <height>0</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>40</height>
+          <height>16777215</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -80,30 +80,33 @@
          <enum>QFrame::Plain</enum>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout">
+         <property name="spacing">
+          <number>15</number>
+         </property>
          <property name="leftMargin">
-          <number>0</number>
+          <number>9</number>
          </property>
          <property name="topMargin">
-          <number>0</number>
+          <number>9</number>
          </property>
          <property name="rightMargin">
-          <number>0</number>
+          <number>9</number>
          </property>
          <property name="bottomMargin">
-          <number>0</number>
+          <number>9</number>
          </property>
          <item>
           <widget class="QLabel" name="icon_label">
            <property name="minimumSize">
             <size>
-             <width>40</width>
-             <height>40</height>
+             <width>48</width>
+             <height>55</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>40</width>
-             <height>40</height>
+             <width>48</width>
+             <height>55</height>
             </size>
            </property>
            <property name="frameShape">
@@ -122,11 +125,13 @@
            <property name="font">
             <font>
              <family>DejaVu Math TeX Gyre</family>
-             <pointsize>12</pointsize>
+             <pointsize>14</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
            <property name="text">
-            <string>Additional information</string>
+            <string>Wizard help</string>
            </property>
           </widget>
          </item>
@@ -246,7 +251,7 @@ QPushButton:pressed {
               <x>0</x>
               <y>0</y>
               <width>646</width>
-              <height>416</height>
+              <height>383</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_4">

@@ -874,6 +874,74 @@ class Settings:
         self.settings["wizard_question_visible"].append(False)
         q_count += 1
 
+
+        #######
+        # Q11 #
+        #######
+        self.settings["wizard_question_condition"]["Q11"] = {
+            "and_cond": [
+                [
+                    "TEST.ENABLE", 
+                    True
+                ]
+            ],
+            "or_cond": [],
+        }
+        self.settings["wizard_questions"] += [
+            "Please insert test raw image folder",
+        ]
+        self.settings["wizard_possible_answers"] += [["PATH"]]
+        self.settings["wizard_variable_to_map"]["Q11"] = {}
+        self.settings["wizard_variable_to_map"]["Q11"]["DATA.TEST.PATH"] = ""
+        self.settings["wizard_answers"]["DATA.TEST.PATH"] = -1
+        self.settings["wizard_answers"]["CHECKED DATA.TEST.PATH"] = -1
+        self.settings["wizard_sections"][-1][1] += ["Test data (raw)"]
+        self.settings["wizard_from_question_index_to_toc"].append(
+            [1, len(self.settings["wizard_from_toc_to_question_index"][-1])]
+        )
+        self.settings["wizard_from_toc_to_question_index"][-1].append(q_count)
+        self.settings["wizard_question_visible"].append(False)
+        q_count += 1
+
+        #######
+        # Q12 #
+        #######
+        self.settings["wizard_question_condition"]["Q12"] = {
+            "and_cond": [
+                [
+                    "TEST.ENABLE", 
+                    True
+                ]
+            ],
+            "or_cond": [
+                [
+                    "PROBLEM.TYPE",
+                    [
+                        "SEMANTIC_SEG",
+                        "INSTANCE_SEG",
+                        "DETECTION",
+                        "SUPER_RESOLUTION",
+                        "IMAGE_TO_IMAGE",
+                    ],
+                ]
+            ],
+        }
+        self.settings["wizard_questions"] += [
+            "Please insert test ground truth folder",
+        ]
+        self.settings["wizard_possible_answers"] += [["PATH"]]
+        self.settings["wizard_variable_to_map"]["Q12"] = {}
+        self.settings["wizard_variable_to_map"]["Q12"]["DATA.TEST.GT_PATH"] = ""
+        self.settings["wizard_answers"]["DATA.TEST.GT_PATH"] = -1
+        self.settings["wizard_answers"]["CHECKED DATA.TEST.GT_PATH"] = -1
+        self.settings["wizard_sections"][-1][1] += ["Test data (ground truth)"]
+        self.settings["wizard_from_question_index_to_toc"].append(
+            [1, len(self.settings["wizard_from_toc_to_question_index"][-1])]
+        )
+        self.settings["wizard_from_toc_to_question_index"][-1].append(q_count)
+        self.settings["wizard_question_visible"].append(False)
+        q_count += 1
+
         # ######
         # # QX #
         # ######

@@ -3374,7 +3374,7 @@ border-radius: 35px;
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>592</width>
+                                 <width>642</width>
                                  <height>298</height>
                                 </rect>
                                </property>
@@ -3443,7 +3443,7 @@ border-radius: 35px;
                                       </font>
                                      </property>
                                      <property name="text">
-                                      <string>Options</string>
+                                      <string>Answers</string>
                                      </property>
                                     </widget>
                                    </item>
@@ -4088,8 +4088,8 @@ font: italic;</string>
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>930</width>
-                               <height>172</height>
+                               <width>100</width>
+                               <height>30</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_62"/>
@@ -6137,7 +6137,7 @@ QPushButton:pressed {
                              <rect>
                               <x>0</x>
                               <y>0</y>
-                              <width>934</width>
+                              <width>922</width>
                               <height>565</height>
                              </rect>
                             </property>
@@ -6754,7 +6754,7 @@ QPushButton:pressed {
                                     <rect>
                                      <x>0</x>
                                      <y>0</y>
-                                     <width>860</width>
+                                     <width>495</width>
                                      <height>284</height>
                                     </rect>
                                    </property>
