@@ -39,7 +39,7 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <property name="spacing">
-       <number>0</number>
+       <number>15</number>
       </property>
       <property name="leftMargin">
        <number>2</number>
@@ -196,6 +196,19 @@ QPushButton:pressed {
         </layout>
        </widget>
       </item>
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <family>DejaVu Math TeX Gyre</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Double-click to select the model</string>
+        </property>
+       </widget>
+      </item>
       <item>
        <widget class="QFrame" name="frame_bottom">
         <property name="font">
@@ -243,7 +256,7 @@ QPushButton:pressed {
               <x>0</x>
               <y>0</y>
               <width>838</width>
-              <height>408</height>
+              <height>361</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_6"/>

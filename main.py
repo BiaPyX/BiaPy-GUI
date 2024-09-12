@@ -784,7 +784,7 @@ class MainWindow(QMainWindow):
         self.model_carrousel_dialog.exec_()
 
     def select_external_model(self, model_selected, model_source, model_restrictions, from_wizard=True):
-        self.yes_no_exec(f"Do you want to select '{model_selected}' model?")
+        self.yes_no_exec(f"Do you want to select '{model_selected}' model\nfrom {model_source}?")
         if self.yes_no.answer:
             if from_wizard:
                 set_text(self.ui.wizard_model_input, model_selected+" ({})".format(model_source))

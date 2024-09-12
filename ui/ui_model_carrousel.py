@@ -27,7 +27,7 @@ class Ui_model_card_carrousel_dialog(object):
         self.centralwidget.setFrameShape(QFrame.NoFrame)
         self.centralwidget.setFrameShadow(QFrame.Plain)
         self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
-        self.verticalLayout_2.setSpacing(0)
+        self.verticalLayout_2.setSpacing(15)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout_2.setContentsMargins(2, 2, 2, 2)
         self.frame_top = QFrame(self.centralwidget)
@@ -93,6 +93,12 @@ class Ui_model_card_carrousel_dialog(object):
 
         self.verticalLayout_2.addWidget(self.frame_top)
 
+        self.label = QLabel(self.centralwidget)
+        self.label.setObjectName(u"label")
+        self.label.setFont(font)
+
+        self.verticalLayout_2.addWidget(self.label, 0, Qt.AlignHCenter)
+
         self.frame_bottom = QFrame(self.centralwidget)
         self.frame_bottom.setObjectName(u"frame_bottom")
         self.frame_bottom.setFont(font)
@@ -109,7 +115,7 @@ class Ui_model_card_carrousel_dialog(object):
         self.model_carrousel_scrollarea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 838, 408))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 838, 361))
         self.verticalLayout_6 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.model_carrousel_scrollarea.setWidget(self.scrollAreaWidgetContents)
@@ -133,5 +139,6 @@ class Ui_model_card_carrousel_dialog(object):
         self.icon_label.setText("")
         self.window_des_label.setText(QCoreApplication.translate("model_card_carrousel_dialog", u"Available pretrained models", None))
         self.bn_close.setText("")
+        self.label.setText(QCoreApplication.translate("model_card_carrousel_dialog", u"Double-click to select the model", None))
     # retranslateUi
 
