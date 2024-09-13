@@ -351,7 +351,7 @@ class basic_Ui(QDialog):
         self.basic_window.bn_close.clicked.connect(self.close)
         self.basic_window.ok_bn.clicked.connect(self.close)
         self.basic_window.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","close_icon.png"))))
-        self.basic_window.icon_label.setPixmap(QPixmap(resource_path(os.path.join("images","wizard.png"))))
+        self.basic_window.icon_label.setPixmap(QPixmap(resource_path(os.path.join("images", "wizard", "wizard.png"))))
         self.setStyleSheet("#centralwidget{ border: 1px solid black;} QWidget{ font-size:16px;}")
         self.basic_window.message_label.setOpenExternalLinks(True)
 

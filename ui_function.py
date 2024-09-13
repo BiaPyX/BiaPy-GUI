@@ -292,7 +292,7 @@ class UIFunction(MainWindow):
             Number of the question.
         """
         # Load first time
-        main_window.basic_dialog_exec(main_window.cfg.settings["wizard_question_additional_info"][0])
+        main_window.basic_dialog_exec(main_window.cfg.settings["wizard_question_additional_info"][main_window.cfg.settings['wizard_question_index']])
 
         # if not 'workflow_description_images' in main_window.cfg.settings:
         #     main_window.cfg.load_workflow_detail_page()

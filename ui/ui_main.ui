@@ -2859,6 +2859,9 @@ background-color:#D3D3D3;
                               <property name="statusTip">
                                <string/>
                               </property>
+                              <property name="readOnly">
+                               <bool>true</bool>
+                              </property>
                              </widget>
                             </item>
                             <item row="0" column="7">
@@ -3064,13 +3067,13 @@ QPushButton:pressed {
                           <widget class="QFrame" name="frame_70">
                            <property name="minimumSize">
                             <size>
-                             <width>250</width>
+                             <width>300</width>
                              <height>0</height>
                             </size>
                            </property>
                            <property name="maximumSize">
                             <size>
-                             <width>250</width>
+                             <width>300</width>
                              <height>16777215</height>
                             </size>
                            </property>
@@ -3232,6 +3235,19 @@ QPushButton:hover {
                                <property name="bottomMargin">
                                 <number>0</number>
                                </property>
+                               <item alignment="Qt::AlignBottom">
+                                <widget class="QLabel" name="wizard_question_label">
+                                 <property name="font">
+                                  <font>
+                                   <family>DejaVu Math TeX Gyre</family>
+                                   <pointsize>12</pointsize>
+                                  </font>
+                                 </property>
+                                 <property name="text">
+                                  <string>Question 1</string>
+                                 </property>
+                                </widget>
+                               </item>
                                <item>
                                 <spacer name="horizontalSpacer_82">
                                  <property name="orientation">
@@ -3373,8 +3389,8 @@ border-radius: 35px;
                                <property name="geometry">
                                 <rect>
                                  <x>0</x>
-                                 <y>-159</y>
-                                 <width>642</width>
+                                 <y>0</y>
+                                 <width>592</width>
                                  <height>298</height>
                                 </rect>
                                </property>
@@ -3493,7 +3509,7 @@ border-radius: 35px;
                                       </font>
                                      </property>
                                      <property name="text">
-                                      <string>Path</string>
+                                      <string>Selected path</string>
                                      </property>
                                     </widget>
                                    </item>
@@ -4088,8 +4104,8 @@ font: italic;</string>
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>930</width>
-                               <height>172</height>
+                               <width>100</width>
+                               <height>30</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_62"/>
@@ -6137,7 +6153,7 @@ QPushButton:pressed {
                              <rect>
                               <x>0</x>
                               <y>0</y>
-                              <width>934</width>
+                              <width>922</width>
                               <height>565</height>
                              </rect>
                             </property>
@@ -6754,7 +6770,7 @@ QPushButton:pressed {
                                     <rect>
                                      <x>0</x>
                                      <y>0</y>
-                                     <width>860</width>
+                                     <width>495</width>
                                      <height>284</height>
                                     </rect>
                                    </property>
@@ -34234,7 +34250,7 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>914</width>
+                                       <width>597</width>
                                        <height>1056</height>
                                       </rect>
                                      </property>
@@ -37348,8 +37364,8 @@ QPushButton:pressed {
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>34</width>
-                               <height>19</height>
+                               <width>96</width>
+                               <height>26</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_32">

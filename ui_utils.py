@@ -563,6 +563,10 @@ def change_wizard_page(main_window, val, based_on_toc=False, added_val=0):
                 main_window.cfg.settings['wizard_question_index']
                 ]
             )
+        set_text(
+            main_window.ui.wizard_question_label, 
+            "Question {}".format(main_window.cfg.settings['wizard_question_index']+1)
+            )
         
         if main_window.cfg.settings['wizard_possible_answers'][main_window.cfg.settings['wizard_question_index']][0] == "PATH":
             main_window.ui.wizard_path_input_frame.setVisible(True)
