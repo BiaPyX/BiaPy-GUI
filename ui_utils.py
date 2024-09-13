@@ -741,8 +741,8 @@ class check_models_from_other_sources_engine(QObject):
         """
         super(check_models_from_other_sources_engine, self).__init__()
         self.main_window =  main_window
-        self.COLLECTION_URL = "https://raw.githubusercontent.com/bioimage-io/collection-bioimage-io/gh-pages/collection.json"
-        # COLLECTION_URL = "https://uk1s3.embassy.ebi.ac.uk/public-datasets/bioimage.io/collection.json"
+        # self.COLLECTION_URL = "https://raw.githubusercontent.com/bioimage-io/collection-bioimage-io/gh-pages/collection.json"
+        self.COLLECTION_URL = "https://uk1s3.embassy.ebi.ac.uk/public-datasets/bioimage.io/collection.json"
         self.from_wizard = from_wizard
 
     def run(self):
@@ -751,6 +751,7 @@ class check_models_from_other_sources_engine(QObject):
         """
         ## Functionality copied from BiaPy commit: 0ed2222869300316839af7202ce1d55761c6eb88 (3.5.1) - (check_bmz_args function)
         self.state_signal.emit(0)
+        model_name = ""
         try:
             # Checking BMZ model compatibility using the available model list provided by BMZ
             collection_path = Path(pooch.retrieve(self.COLLECTION_URL, known_hash=None))
@@ -766,7 +767,8 @@ class check_models_from_other_sources_engine(QObject):
             for mu in model_urls:
                 with open(Path(pooch.retrieve(mu, known_hash=None))) as stream:
                     model_rdfs.append(yaml.safe_load(stream))
-                    print("Checking entry: {}".format(model_rdfs[-1]['name']))
+                    model_name = model_rdfs[-1]['name']
+                    print("Checking entry: {}".format(model_name))
                     
                     if self.from_wizard:
                         problem_type = self.main_window.cfg.settings["wizard_answers"]["PROBLEM.TYPE"]
@@ -780,28 +782,34 @@ class check_models_from_other_sources_engine(QObject):
                     workflow_specs["ndim"] = problem_ndim
                     workflow_specs["nclasses"] = "all"
 
-                    _, error, _ = check_bmz_model_compatibility(model_rdfs[-1], workflow_specs=workflow_specs)
+                    _, error, em = check_bmz_model_compatibility(model_rdfs[-1], workflow_specs=workflow_specs)
 
                     if not error:
                         # Creating BMZ model object
-                        model = load_description(model_rdfs[-1]['config']['bioimageio']['nickname'])
-
-                        biapy_imposed_vars = check_model_restrictions(model)
+                        # model = load_description(model_rdfs[-1]['config']['bioimageio']['nickname'])
+                        # abs url: model.covers[0].absolute() (covers[0] is RelativeFilePath)
+                        biapy_imposed_vars = check_model_restrictions(model_rdfs[-1])
                         doi = "/".join(model_rdfs[-1]['id'].split("/")[:2])
+                        nickname = model_rdfs[-1]['config']['bioimageio']['nickname']
+                        cover_url = "https://uk1s3.embassy.ebi.ac.uk/public-datasets/bioimage.io/"+nickname+"/"+str(model_rdfs[-1]["version"])+"/files/"+model_rdfs[-1]['covers'][0]
                         model_info = {
-                            'name': model_rdfs[-1]['name'],
+                            'name': model_name,
                             'source': "BioImage Model Zoo",
                             'description': model_rdfs[-1]['description'],
-                            'nickname': model_rdfs[-1]['config']['bioimageio']['nickname'],
+                            'nickname': nickname,
                             'nickname_icon': model_rdfs[-1]['config']['bioimageio']['nickname_icon'],
                             'id': doi,
-                            'covers': model_rdfs[-1]['covers'][0],
+                            'covers': cover_url,
                             'url': f"https://bioimage.io/#/?id={doi}",
                             'imposed_vars': biapy_imposed_vars,
                         }
                         self.add_model_card_signal.emit(model_count, model_info, self.from_wizard)
 
                         model_count += 1
+                    else:
+                        print(f"Error message: {em}")
+            
+            print("Finish checking BMZ model . . .")
 
             # Check Torchvision models 
             models, model_restrictions_description, model_restrictions = check_torchvision_available_models(
@@ -822,9 +830,11 @@ class check_models_from_other_sources_engine(QObject):
                 self.add_model_card_signal.emit(model_count, model_info, self.from_wizard)
                 model_count += 1
 
-        except Exception as exc:
+        except:
+            exc = traceback.format_exc()
+            print(exc)
             self.main_window.logger.warning(exc)
-            self.error_signal.emit(f"Following error found when checking available models: \n{exc}", "unexpected_error")
+            self.error_signal.emit(f"Error found when checking {model_name} model:\n{exc}", "unexpected_error")
             self.state_signal.emit(1)
             self.finished_signal.emit()
             return     

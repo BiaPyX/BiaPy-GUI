@@ -8,7 +8,7 @@ from typing import Optional, Dict, Tuple, List
 from packaging.version import Version
 from bioimageio.core.digest_spec import get_test_inputs
 
-## Copied from BiaPy commit: ada4f14cf13f5d2b74d66e1f9aa2b526a133f296 (3.5.1)
+## Copied from BiaPy commit: 5f38106d8e271501489a2e2d9d3a03e257263874 (3.5.1)
 def check_bmz_model_compatibility(
     model_rdf: Dict,
     workflow_specs: Optional[Dict] = None,
@@ -47,9 +47,7 @@ def check_bmz_model_compatibility(
     # Accepting models that are exported in pytorch_state_dict and with just one input
     if "pytorch_state_dict" in model_rdf["weights"] and len(model_rdf["inputs"]) == 1:
         
-        model_version = Version("0.5")
-        if "format_version" in model_rdf:
-            model_version = Version(model_rdf["format_version"])
+        model_version = Version(model_rdf["format_version"])
 
         # Check problem type
         if (specific_workflow in ["all", "SEMANTIC_SEG"]) and (
@@ -142,9 +140,8 @@ def check_bmz_model_compatibility(
             if isinstance(preproc_info, list) and len(preproc_info) > 1:
                 error = True
                 reason_message += f"[{specific_workflow}] More than one preprocessing from BMZ not implemented yet {axes_order}\n"
-
+            preproc_info = preproc_info[0]
             key_to_find = "id" if model_version > Version("0.5.0") else "name"
-
             if key_to_find in preproc_info:
                 if preproc_info[key_to_find] not in [
                     "zero_mean_unit_variance",
@@ -159,27 +156,25 @@ def check_bmz_model_compatibility(
                 reason_message += f"[{specific_workflow}] Not recognized preprocessing structure found: {preproc_info}\n"
 
         # Check post-processing
-        if model_version > Version("0.5.0"):
-            if (
-                "postprocessing" in model_rdf["weights"]["pytorch_state_dict"]["architecture"]["kwargs"]
-                and model_rdf["weights"]["pytorch_state_dict"]["architecture"]["kwargs"]["postprocessing"] is not None
-            ):
-                error = True
-                reason_message += f"[{specific_workflow}] Currently no postprocessing is supported. Found: {model_rdf['weights']['pytorch_state_dict']['kwargs']['postprocessing']}\n"
-        else:
-            if (
-                "postprocessing" in model_rdf["weights"]["pytorch_state_dict"]["kwargs"]
-                and model_rdf["weights"]["pytorch_state_dict"]["kwargs"]["postprocessing"] is not None
-            ):
-                error = True
-                reason_message += f"[{specific_workflow}] Currently no postprocessing is supported. Found: {model_rdf['weights']['pytorch_state_dict']['kwargs']['postprocessing']}\n"
+        model_kwargs = None
+        if "kwargs" in model_rdf["weights"]["pytorch_state_dict"]:
+            model_kwargs = model_rdf["weights"]["pytorch_state_dict"]["kwargs"]
+        elif "architecture" in model_rdf["weights"]["pytorch_state_dict"] and "kwargs" in model_rdf["weights"]["pytorch_state_dict"]["architecture"]:
+            model_kwargs = model_rdf["weights"]["pytorch_state_dict"]["architecture"]["kwargs"] 
+        if (
+            model_kwargs is not None  
+            and "postprocessing" in model_kwargs
+            and model_kwargs["postprocessing"] is not None
+        ):
+            error = True
+            reason_message += f"[{specific_workflow}] Currently no postprocessing is supported. Found: {model_kwargs['postprocessing']}\n"
     else:
         error = True
         reason_message += f"[{specific_workflow}] pytorch_state_dict not found in model RDF\n"
 
     return preproc_info, error, reason_message
 
-# Adapted from BiaPy commit: ada4f14cf13f5d2b74d66e1f9aa2b526a133f296 (3.5.1)
+# Adapted from BiaPy commit: 5f38106d8e271501489a2e2d9d3a03e257263874 (3.5.1)
 def check_model_restrictions(
     model_rdf,
 ):
@@ -188,66 +183,78 @@ def check_model_restrictions(
 
     Parameters
     ----------
-    model_rdf : BMZ model
-        RDF of BMZ model. 
- 
+    model_rdf : dict
+        BMZ model RDF that contains all the information of the model.
+
     Returns
     -------
     option_list: dict
         Variables and values to change in current configuration. These changes
         are imposed by the selected model. 
     """
+    # Version of the model
+    model_version = Version(model_rdf["format_version"])
     opts = {}    
 
-    # 1) Change PATCH_SIZE with the one stored in the RDF
-    inputs = get_test_inputs(model_rdf)
-    if "input0" in inputs.members:
-        input_image_shape = inputs.members["input0"]._data.shape
-    elif "raw" in inputs.members:
-        input_image_shape = inputs.members["raw"]._data.shape
+    # 1) Change PATCH_SIZE with the one stored in the model description. This differs from the code of BiaPy where
+    # get_test_inputs() is simply used as there a ModelDescr is build out of the RDF. Here we try to do it manually 
+    # to avoid fetching files using the network as it may be slow. 
+    if "shape" in model_rdf["inputs"][0]:
+        input_image_shape = model_rdf["inputs"][0]["shape"]
+    # elif "raw" in model_rdf["inputs"][0]:
+    #     input_image_shape = model_rdf["inputs"][0]["raw"]["shape"]
     else:
-        raise ValueError(f"Couldn't load input info from BMZ model's RDF: {inputs}")   
-    opts["DATA.PATCH_SIZE"] = input_image_shape[2:] + (input_image_shape[1],)
+        raise ValueError("Couldn't load input info from BMZ model's RDF: {}".format(model_rdf["inputs"][0]))   
+    # "CebraNET Cellular Membranes in Volume SEM" ('format_version': '0.4.10')
+    #   have: {'min': [1, 1, 64, 64, 64], 'step': [0, 0, 16, 16, 16]}
+    if isinstance(input_image_shape, dict) and "min" in input_image_shape:
+        input_image_shape = input_image_shape["min"]
 
-    preproc_info = model_rdf.inputs[0].preprocessing
-    if len(preproc_info) == 0:
+    opts["DATA.PATCH_SIZE"] = tuple(input_image_shape[2:]) + (input_image_shape[1],)
+
+    if "preprocessing" not in model_rdf["inputs"][0]:
         return opts
     
+    preproc_info = model_rdf["inputs"][0]["preprocessing"]
+    if len(preproc_info) == 0:
+        return opts
+    preproc_info = preproc_info[0]
+
     # 2) Change preprocessing to the one stablished by BMZ by translate BMZ keywords into BiaPy's
-    if len(preproc_info) > 0:
-        # 'zero_mean_unit_variance' and 'fixed_zero_mean_unit_variance' norms of BMZ can be translated to our 'custom' norm 
-        # providing mean and std
-        if preproc_info["name"] in ["fixed_zero_mean_unit_variance", "zero_mean_unit_variance"]:
-            if (
-                "kwargs" in preproc_info
-                and "mean" in preproc_info["kwargs"]
-            ):
-                mean = preproc_info["kwargs"]["mean"]
-                std = preproc_info["kwargs"]["std"]
-            elif "mean" in preproc_info:
-                mean = preproc_info["mean"]
-                std = preproc_info["std"]
-            else:
-                mean, std = -1., -1.
+    # 'zero_mean_unit_variance' and 'fixed_zero_mean_unit_variance' norms of BMZ can be translated to our 'custom' norm 
+    # providing mean and std
+    key_to_find = "id" if model_version > Version("0.5.0") else "name"
+    if preproc_info[key_to_find] in ["fixed_zero_mean_unit_variance", "zero_mean_unit_variance"]:
+        if (
+            "kwargs" in preproc_info
+            and "mean" in preproc_info["kwargs"]
+        ):
+            mean = preproc_info["kwargs"]["mean"]
+            std = preproc_info["kwargs"]["std"]
+        elif "mean" in preproc_info:
+            mean = preproc_info["mean"]
+            std = preproc_info["std"]
+        else:
+            mean, std = -1., -1.
 
-            opts["DATA.NORMALIZATION.TYPE"] = "custom"
-            opts["DATA.NORMALIZATION.CUSTOM_MEAN"] = mean
-            opts["DATA.NORMALIZATION.CUSTOM_STD"] = std
+        opts["DATA.NORMALIZATION.TYPE"] = "custom"
+        opts["DATA.NORMALIZATION.CUSTOM_MEAN"] = mean
+        opts["DATA.NORMALIZATION.CUSTOM_STD"] = std
 
-        # 'scale_linear' norm of BMZ is close to our 'div' norm (TODO: we need to control the "gain" arg)
-        elif preproc_info["name"] == "scale_linear":
-            opts["DATA.NORMALIZATION.TYPE"] = "div"
+    # 'scale_linear' norm of BMZ is close to our 'div' norm (TODO: we need to control the "gain" arg)
+    elif preproc_info[key_to_find] == "scale_linear":
+        opts["DATA.NORMALIZATION.TYPE"] = "div"
 
-        # 'scale_range' norm of BMZ is as our PERC_CLIP + 'scale_range' norm
-        elif preproc_info["name"] == "scale_range":
-            opts["DATA.NORMALIZATION.TYPE"] = "scale_range"
-            if (
-                float(preproc_info["kwargs"]["min_percentile"]) != 0
-                or float(preproc_info["kwargs"]["max_percentile"]) != 100
-            ):
-                opts["DATA.NORMALIZATION.PERC_CLIP"] = True
-                opts["DATA.NORMALIZATION.PERC_LOWER"] = float(preproc_info["kwargs"]["min_percentile"])
-                opts["DATA.NORMALIZATION.PERC_UPPER"] = float(preproc_info["kwargs"]["max_percentile"])
+    # 'scale_range' norm of BMZ is as our PERC_CLIP + 'scale_range' norm
+    elif preproc_info[key_to_find] == "scale_range":
+        opts["DATA.NORMALIZATION.TYPE"] = "scale_range"
+        if (
+            float(preproc_info["kwargs"]["min_percentile"]) != 0
+            or float(preproc_info["kwargs"]["max_percentile"]) != 100
+        ):
+            opts["DATA.NORMALIZATION.PERC_CLIP"] = True
+            opts["DATA.NORMALIZATION.PERC_LOWER"] = float(preproc_info["kwargs"]["min_percentile"])
+            opts["DATA.NORMALIZATION.PERC_UPPER"] = float(preproc_info["kwargs"]["max_percentile"])
 
     return opts
 

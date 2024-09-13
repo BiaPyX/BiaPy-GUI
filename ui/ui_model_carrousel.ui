@@ -202,6 +202,8 @@ QPushButton:pressed {
          <font>
           <family>DejaVu Math TeX Gyre</family>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -256,7 +258,7 @@ QPushButton:pressed {
               <x>0</x>
               <y>0</y>
               <width>838</width>
-              <height>361</height>
+              <height>359</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_6"/>
