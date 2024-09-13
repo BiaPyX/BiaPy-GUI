@@ -10,7 +10,7 @@ import subprocess
 import re
 import pooch
 import json 
-
+import http.client as httplib
 from pathlib import PurePath, Path, PureWindowsPath
 
 from PySide2 import QtCore
@@ -662,6 +662,16 @@ def clear_answers(main_window):
         # Rewrite all keys
         main_window.cfg.settings["wizard_answers"] = main_window.cfg.settings["original_wizard_answers"].copy()
 
+def have_internet():
+    conn = httplib.HTTPSConnection("8.8.8.8", timeout=5)
+    try:
+        conn.request("HEAD", "/")
+        return True
+    except Exception:
+        return False
+    finally:
+        conn.close()
+    
 def check_models_from_other_sources(main_window, ask_user=False, from_wizard=True):
     """
     Check available model compatible with BiaPy from external sources such as BioImage Model Zoo (BMZ)
@@ -676,6 +686,10 @@ def check_models_from_other_sources(main_window, ask_user=False, from_wizard=Tru
         main_window.yes_no_exec("This process needs internet connection and may take a while. Do you want to proceed?")
         if not main_window.yes_no.answer:
             return
+
+    if not have_internet():
+        main_window.dialog_exec("There is no internet connection. Check aborted!", reason="error")
+        return 
 
     main_window.thread_spin = QThread()
     main_window.worker_spin = check_models_from_other_sources_engine(main_window, from_wizard)
