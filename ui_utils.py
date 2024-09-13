@@ -92,7 +92,7 @@ def check_data_from_path(main_window):
         if main_window.yes_no.answer:
 
             def set_folder_checked(constraints, key):
-                print(f"Data {key} checked!")
+                main_window.logger.info(f"Data {key} checked!")
                 if "data_constraints" not in main_window.cfg.settings["wizard_answers"]:
                     main_window.cfg.settings["wizard_answers"]["data_constraints"] = constraints
                 else:
@@ -100,7 +100,7 @@ def check_data_from_path(main_window):
                 main_window.cfg.settings["wizard_answers"][f"CHECKED {key}"] = 1
                 set_text(main_window.ui.wizard_data_checked_label, "<span style='color:#04aa6d'>Data checked!</span>")
             
-            print("Checking data from path")
+            main_window.logger.info("Checking data from path")
             dir_name = next(iter(main_window.cfg.settings["wizard_variable_to_map"]["Q"+str(main_window.cfg.settings['wizard_question_index']+1)]))
             main_window.thread_spin = QThread()
             main_window.worker_spin = check_data_from_path_engine(main_window, dir_name)
@@ -196,18 +196,20 @@ class check_data_from_path_engine(QObject):
                 elif workflow in ["DENOISING", "SUPER_RESOLUTION", "SELF_SUPERVISED", "IMAGE_TO_IMAGE"]:   
                     error, error_message, constraints = check_images(folder, is_3d=is_3d, dir_name=self.dir_name)
                 
-                print(f"Constraints: {constraints}")
+                self.main_window.logger.info(f"Constraints: {constraints}")
                 if error:
-                    print(f"Error: {error}")
-                    print(f"Message: {error_message}")
+                    self.main_window.logger.info(f"Error: {error}")
+                    self.main_window.logger.info(f"Message: {error_message}")
                     self.error_signal.emit(f"Following error found when checking the folder: \n{error_message}", "error")
                 else:
                     self.report_path_check_result.emit(constraints, key)
-        except Exception as exc:
+        except:
+            exc = traceback.format_exc()
+            self.main_window.logger.info(exc)
             self.main_window.logger.warning(exc)
-            self.error_signal.emit(f"Following error found when checking available models: \n{exc}", "unexpected_error")
+            self.error_signal.emit(f"Error checking the data:\n{exc}", "unexpected_error")
             self.state_signal.emit(1)
-            self.finished_signal.emit()        
+            self.finished_signal.emit() 
         
         self.state_signal.emit(1)
         self.finished_signal.emit()
@@ -768,7 +770,7 @@ class check_models_from_other_sources_engine(QObject):
                 with open(Path(pooch.retrieve(mu, known_hash=None))) as stream:
                     model_rdfs.append(yaml.safe_load(stream))
                     model_name = model_rdfs[-1]['name']
-                    print("Checking entry: {}".format(model_name))
+                    self.main_window.logger.info("Checking entry: {}".format(model_name))
                     
                     if self.from_wizard:
                         problem_type = self.main_window.cfg.settings["wizard_answers"]["PROBLEM.TYPE"]
@@ -807,9 +809,9 @@ class check_models_from_other_sources_engine(QObject):
 
                         model_count += 1
                     else:
-                        print(f"Error message: {em}")
+                        self.main_window.logger.info(f"Error message: {em}")
             
-            print("Finish checking BMZ model . . .")
+            self.main_window.logger.info("Finish checking BMZ model . . .")
 
             # Check Torchvision models 
             models, model_restrictions_description, model_restrictions = check_torchvision_available_models(
@@ -817,7 +819,7 @@ class check_models_from_other_sources_engine(QObject):
                 problem_ndim
             )
             for m, res, res_cmd in zip(models, model_restrictions_description, model_restrictions):
-                print(f"Creating model card for: {m} . . .")
+                self.main_window.logger.info(f"Creating model card for: {m} . . .")
                 model_info = {
                     'name': m,
                     'nickname': m,
@@ -832,7 +834,7 @@ class check_models_from_other_sources_engine(QObject):
 
         except:
             exc = traceback.format_exc()
-            print(exc)
+            self.main_window.logger.info(exc)
             self.main_window.logger.warning(exc)
             self.error_signal.emit(f"Error found when checking {model_name} model:\n{exc}", "unexpected_error")
             self.state_signal.emit(1)
@@ -844,7 +846,7 @@ class check_models_from_other_sources_engine(QObject):
         self.finished_signal.emit()
 
 def export_wizard_summary(main_window):
-    print("Preparing the function to export the wizard's summary")
+    main_window.logger.info("Preparing the function to export the wizard's summary")
 
     # Check if there are not answered questions
     finished = True
@@ -2474,51 +2476,38 @@ class load_yaml_to_GUI_engine(QObject):
         Process of loading YAML file into GUI.
         """
         self.state_signal.emit(0)
-
-        with open(self.yaml_file, "r") as stream:
-            cfg_content = stream.read()
-            tab_detected_mss = ""
-            if '\t' in cfg_content:
-                tab_detected_mss = "WARNING: Tabs have been identified and substituted with two spaces. This error may be "+\
-                    "attributed to this, so please eliminate them.\n"
-                cfg_content = cfg_content.replace('\t', '  ')
-            try:
+        try:
+            with open(self.yaml_file, "r") as stream:
+                cfg_content = stream.read()
+                tab_detected_mss = ""
+                if '\t' in cfg_content:
+                    tab_detected_mss = "WARNING: Tabs have been identified and substituted with two spaces. This error may be "+\
+                        "attributed to this, so please eliminate them.\n"
+                    cfg_content = cfg_content.replace('\t', '  ')
                 loaded_cfg = yaml.safe_load(cfg_content)
-            except yaml.YAMLError as exc:
-                self.main_window.logger.warning(exc)
-                self.error_signal.emit(f"{tab_detected_mss}Following error found when loading configuration file: \n{exc}", "error")
+
+            if tab_detected_mss != "":
+                yaml_file_final = os.path.join(self.main_window.log_dir, "tmp_load_yaml.yaml")
+                f = open(self.yaml_file, "w")
+                f.write(cfg_content)
+                f.close()
+            else:
+                yaml_file_final = self.yaml_file
+
+            if loaded_cfg is None:
+                self.error_signal.emit(f"The input config file seems to be empty", "error")
                 self.state_signal.emit(1)
                 self.finished_signal.emit()
-                return 
+                return  
+            self.main_window.logger.info(f"Loaded: {loaded_cfg}")
 
-        if tab_detected_mss != "":
-            yaml_file_final = os.path.join(self.main_window.log_dir, "tmp_load_yaml.yaml")
-            f = open(self.yaml_file, "w")
-            f.write(cfg_content)
-            f.close()
-        else:
-            yaml_file_final = self.yaml_file
-
-        if loaded_cfg is None:
-            self.error_signal.emit(f"The input config file seems to be empty", "error")
-            self.state_signal.emit(1)
-            self.finished_signal.emit()
-            return  
-        self.main_window.logger.info(f"Loaded: {loaded_cfg}")
-
-        # Load configuration file and check possible errors
-        tmp_cfg = Config("/home/","jobname")
-        errors = ""
-        try:
+            # Load configuration file and check possible errors
+            tmp_cfg = Config("/home/","jobname")
+            errors = ""
             tmp_cfg._C.merge_from_file(yaml_file_final)
             tmp_cfg = tmp_cfg.get_cfg_defaults()
             check_configuration(tmp_cfg, get_text(self.main_window.ui.job_name_input), check_data_paths=False)
-        except Exception as errors:  
-            errors = str(errors) 
-            self.main_window.logger.error(errors) 
-            self.error_signal.emit(tab_detected_mss+errors, "load_yaml_error")
-        else:
-            
+        
             # Find the workflow
             self.workflow_str = ""
             try:
@@ -2587,9 +2576,16 @@ class load_yaml_to_GUI_engine(QObject):
 
             # Message for the user
             self.report_yaml_load_result.emit(errors, self.yaml_file)
-            
-        self.state_signal.emit(1)
-        self.finished_signal.emit()
+        except:
+            exc = traceback.format_exc()
+            self.main_window.logger.info(exc)
+            self.main_window.logger.warning(exc)
+            self.error_signal.emit(f"Error found loading YAML to the GUI:\n{exc}", "unexpected_error")
+            self.state_signal.emit(1)
+            self.finished_signal.emit()
+        else:                 
+            self.state_signal.emit(1)
+            self.finished_signal.emit()
 
     def analyze_dict(self, conf, sep=""):
         """
@@ -2839,3 +2835,12 @@ def create_dict_from_key(cfg_key, value, out_cfg):
         out_cfg[keys[0]][keys[1]] = value    
     else:
         create_dict_from_key(".".join(keys[1:]), value, out_cfg[keys[0]])  
+
+class Logger(object):
+    def __init__(self, file):
+        self.terminal = sys.stdout
+        self.log = open(file, "a")
+
+    def write(self, message):
+        self.terminal.write(message)
+        self.log.write(message)  

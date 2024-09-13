@@ -966,6 +966,8 @@ def center_window(widget, geometry):
         
 if __name__ == "__main__":
     window = None
+
+    # Log output to file
     log_dir = os.path.join(tempfile._get_default_tempdir(), "BiaPy")
     random_str = next(tempfile._get_candidate_names())
     log_file = os.path.join(log_dir, f"BiaPy_{random_str}") 
@@ -973,6 +975,14 @@ if __name__ == "__main__":
     logging.basicConfig(filename=log_file, format='%(asctime)s %(message)s', filemode='w')
     logger = logging.getLogger()
     logger.setLevel(logging.DEBUG) 
+
+    # Log to console
+    console = logging.StreamHandler()
+    console.setLevel(logging.DEBUG)
+    formatter = logging.Formatter('%(asctime)s %(message)s')
+    console.setFormatter(formatter)
+    logging.getLogger('').addHandler(console)
+
     StyleSheet = """ 
         QComboBox {
             selection-background-color: rgb(64,144,253);
