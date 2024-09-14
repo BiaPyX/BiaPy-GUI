@@ -499,6 +499,7 @@ class model_card_carrousel_Ui(QDialog):
                 local_path = os.path.join("images", "torchvision_logo.png")
         local_path = resource_path(local_path)
         
+        self.model_cards[model_number][f"model_card_frame_{model_number}"].setVisible(True)
         self.model_cards[model_number][f"model_name_{model_number}"].setText(model_info['name'])
         self.model_cards[model_number][f"model_source_from_text_{model_number}"].setText("from " + model_info['source'])
         if model_info['source'] == "BioImage Model Zoo":
@@ -517,5 +518,11 @@ class model_card_carrousel_Ui(QDialog):
             # Description changed for URL
             self.model_cards[model_number][f"model_description_{model_number}"].setText("<span style=\"color:#4090FD\";>URL: </span> <a href=\""+  model_info['url'] + "\">"+model_info['url']+"</a>")
             # URL used for restrictions
-            self.model_cards[model_number][f"model_link_{model_number}"].setText("<span style=\"color:#4090FD\";>Restrictions: </span><span style=\"color:#FF0000\";><br>"+ model_info['restrictions'].replace("\n","<br>") + "</span>")
+            if model_info['restrictions'] != "":
+                self.model_cards[model_number][f"model_link_{model_number}"].setText("<span style=\"color:#4090FD\";>Restrictions: </span><span style=\"color:#FF0000\";><br>"+ model_info['restrictions'].replace("\n","<br>") + "</span>")
             self.model_cards[model_number][f"model_img_{model_number}"].setPixmap(QPixmap(local_path))
+            
+    def close(self):
+        for i, model in enumerate(self.model_cards):
+            model[f"model_card_frame_{i}"].setVisible(False)
+        super().close()
