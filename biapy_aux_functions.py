@@ -6,9 +6,8 @@ from skimage.io import imread
 
 from typing import Optional, Dict, Tuple, List
 from packaging.version import Version
-from bioimageio.core.digest_spec import get_test_inputs
 
-## Copied from BiaPy commit: 5f38106d8e271501489a2e2d9d3a03e257263874 (3.5.1)
+## Copied from BiaPy commit: d3e90f754cf6ec3894e8e6b22f9fb77eed9c9897 (3.5.1)
 def check_bmz_model_compatibility(
     model_rdf: Dict,
     workflow_specs: Optional[Dict] = None,
@@ -51,7 +50,8 @@ def check_bmz_model_compatibility(
 
         # Check problem type
         if (specific_workflow in ["all", "SEMANTIC_SEG"]) and (
-            "semantic-segmentation" in model_rdf["tags"] or "segmentation" in model_rdf["tags"]
+            "semantic-segmentation" in model_rdf["tags"] or 
+            ("segmentation" in model_rdf["tags"] and "instance-segmentation" not in model_rdf["tags"])
         ):
             # Check number of classes
             classes = -1
@@ -75,6 +75,7 @@ def check_bmz_model_compatibility(
                 error = True
 
         elif specific_workflow in ["all", "INSTANCE_SEG"] and "instance-segmentation" in model_rdf["tags"]:
+            # TODO: add cellpose tag and create flow post-processing to create images 
             pass
         elif specific_workflow in ["all", "DETECTION"] and "detection" in model_rdf["tags"]:
             pass
@@ -97,36 +98,37 @@ def check_bmz_model_compatibility(
             reason_message += "[{}] no workflow tag recognized in {}.\n".format(specific_workflow, model_rdf["tags"])
             error = True
 
-        # Check axes and dimension
-        if model_version > Version("0.5.0"):
-            axes_order = ""
-            for axis in model_rdf["inputs"][0]["axes"]:
+        # Check axes
+        axes_order = model_rdf["inputs"][0]["axes"]
+        if isinstance(axes_order, list):
+            _axes_order = ""
+            for axis in axes_order:
                 if 'type' in axis:
                     if axis['type'] == "batch":
-                        axes_order += "b"
+                        _axes_order += "b"
                     elif axis['type'] == "channel":
-                        axes_order += "c"
+                        _axes_order += "c"
                     elif 'id' in axis:
-                        axes_order += axis['id']
+                        _axes_order += axis['id']
                 elif 'id' in axis:
                     if axis['id'] == "channel":
-                        axes_order += "c"
+                        _axes_order += "c"
                     else:
-                        axes_order += axis['id']
-        else:
-            axes_order = model_rdf["inputs"][0]["axes"]
+                        _axes_order += axis['id']
+            axes_order = _axes_order
+
         if specific_dims == "2D":
             if axes_order != "bcyx":
                 error = True
                 reason_message += f"[{specific_workflow}] In a 2D problem the axes need to be 'bcyx', found {axes_order}\n"
-            elif "2d" not in model_rdf["tags"]:
+            elif "2d" not in model_rdf["tags"] and "3d" in model_rdf["tags"]:
                 error = True
                 reason_message += f"[{specific_workflow}] Selected model seems to not be 2D\n"
         elif specific_dims == "3D":
             if axes_order != "bczyx":
                 error = True
                 reason_message += f"[{specific_workflow}] In a 3D problem the axes need to be 'bczyx', found {axes_order}\n"
-            elif "3d" not in model_rdf["tags"]:
+            elif "3d" not in model_rdf["tags"] and "2d" in model_rdf["tags"]:
                 error = True
                 reason_message += f"[{specific_workflow}] Selected model seems to not be 3D\n"
         else:  # All
@@ -137,23 +139,33 @@ def check_bmz_model_compatibility(
         # Check preprocessing
         if "preprocessing" in model_rdf["inputs"][0]:
             preproc_info = model_rdf["inputs"][0]["preprocessing"]
-            if isinstance(preproc_info, list) and len(preproc_info) > 1:
-                error = True
-                reason_message += f"[{specific_workflow}] More than one preprocessing from BMZ not implemented yet {axes_order}\n"
-            preproc_info = preproc_info[0]
             key_to_find = "id" if model_version > Version("0.5.0") else "name"
-            if key_to_find in preproc_info:
-                if preproc_info[key_to_find] not in [
-                    "zero_mean_unit_variance",
-                    "fixed_zero_mean_unit_variance",
-                    "scale_range",
-                    "scale_linear",
-                ]:
+            if isinstance(preproc_info, list):
+                # Remove "ensure_dtype" preprocessing when casting to float, as BiaPy will alsways do it like that
+                new_preproc_info = []
+                for preproc in preproc_info:
+                    if key_to_find in preproc and not (preproc[key_to_find] == "ensure_dtype" and 'kwargs' in preproc and 'dtype' in preproc['kwargs'] and 'float' in preproc['kwargs']['dtype']):
+                        new_preproc_info.append(preproc)
+                preproc_info = new_preproc_info.copy()
+                
+                # Then if there is still more than one preprocessing not continue as it is not implemented yet
+                if len(preproc_info) > 1:
                     error = True
-                    reason_message += f"[{specific_workflow}] Not recognized preprocessing found: {preproc_info[key_to_find]}\n"
-            else:
-                error = True
-                reason_message += f"[{specific_workflow}] Not recognized preprocessing structure found: {preproc_info}\n"
+                    reason_message += f"[{specific_workflow}] More than one preprocessing from BMZ not implemented yet {axes_order}\n"
+                elif len(preproc_info) == 1:
+                    preproc_info = preproc_info[0]
+                    if key_to_find in preproc_info:
+                        if preproc_info[key_to_find] not in [
+                            "zero_mean_unit_variance",
+                            "fixed_zero_mean_unit_variance",
+                            "scale_range",
+                            "scale_linear",
+                        ]:
+                            error = True
+                            reason_message += f"[{specific_workflow}] Not recognized preprocessing found: {preproc_info[key_to_find]}\n"
+                    else:
+                        error = True
+                        reason_message += f"[{specific_workflow}] Not recognized preprocessing structure found: {preproc_info}\n"
 
         # Check post-processing
         model_kwargs = None
@@ -174,7 +186,7 @@ def check_bmz_model_compatibility(
 
     return preproc_info, error, reason_message
 
-# Adapted from BiaPy commit: 5f38106d8e271501489a2e2d9d3a03e257263874 (3.5.1)
+# Adapted from BiaPy commit: d3e90f754cf6ec3894e8e6b22f9fb77eed9c9897 (3.5.1)
 def check_model_restrictions(
     model_rdf,
 ):
@@ -198,17 +210,38 @@ def check_model_restrictions(
 
     # 1) Change PATCH_SIZE with the one stored in the model description. This differs from the code of BiaPy where
     # get_test_inputs() is simply used as there a ModelDescr is build out of the RDF. Here we try to do it manually 
-    # to avoid fetching files using the network as it may be slow. 
+    # to avoid fetching files using the network as it may be slow.
+    input_image_shape = []
     if "shape" in model_rdf["inputs"][0]:
         input_image_shape = model_rdf["inputs"][0]["shape"]
-    # elif "raw" in model_rdf["inputs"][0]:
-    #     input_image_shape = model_rdf["inputs"][0]["raw"]["shape"]
+        # "CebraNET Cellular Membranes in Volume SEM" ('format_version': '0.4.10')
+        #   have: {'min': [1, 1, 64, 64, 64], 'step': [0, 0, 16, 16, 16]}
+        if isinstance(input_image_shape, dict) and "min" in input_image_shape:
+            input_image_shape = input_image_shape["min"]
     else:
+        # Check axes and dimension
+        input_image_shape = []
+        for axis in model_rdf["inputs"][0]["axes"]:
+            if 'type' in axis:
+                if axis['type'] == "batch":
+                    input_image_shape += [1,]
+                elif axis['type'] == "channel":
+                    input_image_shape += [1,]
+                elif 'id' in axis and 'size' in axis:
+                    if isinstance(axis['size'], int):
+                        input_image_shape += [axis['size'],]
+                    elif 'min' in axis['size']:
+                        input_image_shape += [axis['size']['min'],]
+            elif 'id' in axis:
+                if axis['id'] == "channel":
+                    input_image_shape += [1,]
+                else:
+                    if isinstance(axis['size'], int):
+                        input_image_shape += [axis['size'],]
+                    elif 'min' in axis['size']:
+                        input_image_shape += [axis['size']['min'],]
+    if len(input_image_shape) == 0:
         raise ValueError("Couldn't load input info from BMZ model's RDF: {}".format(model_rdf["inputs"][0]))   
-    # "CebraNET Cellular Membranes in Volume SEM" ('format_version': '0.4.10')
-    #   have: {'min': [1, 1, 64, 64, 64], 'step': [0, 0, 16, 16, 16]}
-    if isinstance(input_image_shape, dict) and "min" in input_image_shape:
-        input_image_shape = input_image_shape["min"]
 
     opts["DATA.PATCH_SIZE"] = tuple(input_image_shape[2:]) + (input_image_shape[1],)
 

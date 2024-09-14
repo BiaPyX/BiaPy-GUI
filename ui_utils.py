@@ -18,8 +18,6 @@ from PySide2.QtCore import QObject, QThread
 from PySide2.QtWidgets import *
 from PySide2.QtGui import QBrush, QColor
 
-from bioimageio.spec import load_description
-
 from biapy_config import Config
 from biapy_check_configuration import check_configuration, check_torchvision_available_models
 from biapy_aux_functions import check_bmz_model_compatibility, check_images, check_csv_files, check_classification_images, check_model_restrictions
@@ -205,8 +203,7 @@ class check_data_from_path_engine(QObject):
                     self.report_path_check_result.emit(constraints, key)
         except:
             exc = traceback.format_exc()
-            self.main_window.logger.info(exc)
-            self.main_window.logger.warning(exc)
+            self.main_window.logger.error(exc)
             self.error_signal.emit(f"Error checking the data:\n{exc}", "unexpected_error")
             self.state_signal.emit(1)
             self.finished_signal.emit() 
@@ -787,19 +784,29 @@ class check_models_from_other_sources_engine(QObject):
                     _, error, em = check_bmz_model_compatibility(model_rdfs[-1], workflow_specs=workflow_specs)
 
                     if not error:
+                        self.main_window.logger.info("Compatible model")
                         # Creating BMZ model object
                         # model = load_description(model_rdfs[-1]['config']['bioimageio']['nickname'])
                         # abs url: model.covers[0].absolute() (covers[0] is RelativeFilePath)
                         biapy_imposed_vars = check_model_restrictions(model_rdfs[-1])
                         doi = "/".join(model_rdfs[-1]['id'].split("/")[:2])
-                        nickname = model_rdfs[-1]['config']['bioimageio']['nickname']
+                        # Extract nickname and its icon
+                        if 'nickname' in model_rdfs[-1]['config']['bioimageio']:
+                            nickname = model_rdfs[-1]['config']['bioimageio']['nickname']
+                            nickname_icon = model_rdfs[-1]['config']['bioimageio']['nickname_icon']
+                        elif 'id' in model_rdfs[-1]['config']['bioimageio']:
+                            nickname = model_rdfs[-1]['config']['bioimageio']['id']
+                            nickname_icon = model_rdfs[-1]['config']['bioimageio']['id_emoji']
+                        else:
+                            nickname = doi
+                            nickname_icon = doi
                         cover_url = "https://uk1s3.embassy.ebi.ac.uk/public-datasets/bioimage.io/"+nickname+"/"+str(model_rdfs[-1]["version"])+"/files/"+model_rdfs[-1]['covers'][0]
                         model_info = {
                             'name': model_name,
                             'source': "BioImage Model Zoo",
                             'description': model_rdfs[-1]['description'],
                             'nickname': nickname,
-                            'nickname_icon': model_rdfs[-1]['config']['bioimageio']['nickname_icon'],
+                            'nickname_icon': nickname_icon,
                             'id': doi,
                             'covers': cover_url,
                             'url': f"https://bioimage.io/#/?id={doi}",
@@ -809,6 +816,7 @@ class check_models_from_other_sources_engine(QObject):
 
                         model_count += 1
                     else:
+                        self.main_window.logger.info("Not compatible model")
                         self.main_window.logger.info(f"Error message: {em}")
             
             self.main_window.logger.info("Finish checking BMZ model . . .")
@@ -834,8 +842,7 @@ class check_models_from_other_sources_engine(QObject):
 
         except:
             exc = traceback.format_exc()
-            self.main_window.logger.info(exc)
-            self.main_window.logger.warning(exc)
+            self.main_window.logger.error(exc)
             self.error_signal.emit(f"Error found when checking {model_name} model:\n{exc}", "unexpected_error")
             self.state_signal.emit(1)
             self.finished_signal.emit()
@@ -2578,8 +2585,7 @@ class load_yaml_to_GUI_engine(QObject):
             self.report_yaml_load_result.emit(errors, self.yaml_file)
         except:
             exc = traceback.format_exc()
-            self.main_window.logger.info(exc)
-            self.main_window.logger.warning(exc)
+            self.main_window.logger.error(exc)
             self.error_signal.emit(f"Error found loading YAML to the GUI:\n{exc}", "unexpected_error")
             self.state_signal.emit(1)
             self.finished_signal.emit()
@@ -2835,12 +2841,3 @@ def create_dict_from_key(cfg_key, value, out_cfg):
         out_cfg[keys[0]][keys[1]] = value    
     else:
         create_dict_from_key(".".join(keys[1:]), value, out_cfg[keys[0]])  
-
-class Logger(object):
-    def __init__(self, file):
-        self.terminal = sys.stdout
-        self.log = open(file, "a")
-
-    def write(self, message):
-        self.terminal.write(message)
-        self.log.write(message)  

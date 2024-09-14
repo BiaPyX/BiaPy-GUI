@@ -1876,6 +1876,5 @@ def check_torchvision_available_models(workflow, ndim):
 
         if len(model_restrictions_description) == i:
             model_restrictions_description.append("")
-        model_restrictions_description[i] += "- Only for 2D images\n"
         
     return models, model_restrictions_description, model_restrictions
