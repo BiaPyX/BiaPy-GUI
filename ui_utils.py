@@ -407,10 +407,14 @@ def eval_wizard_answer(main_window):
         if main_window.ui.wizard_question_answer_frame.isVisible():
             if main_window.ui.wizard_question_answer.currentIndex() != -1:
                 mark_as_answered = True
-                main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] = main_window.ui.wizard_question_answer.currentIndex()
+                changed_answer = False
+                if main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] != main_window.ui.wizard_question_answer.currentIndex():
+                    main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] = main_window.ui.wizard_question_answer.currentIndex()
+                    changed_answer = True 
+
                 for key, values in main_window.cfg.settings["wizard_variable_to_map"]["Q"+str(main_window.cfg.settings['wizard_question_index']+1)].items():
                     main_window.cfg.settings["wizard_answers"][key] = values[main_window.ui.wizard_question_answer.currentIndex()]
-        else:
+        elif main_window.ui.wizard_path_input_frame.isVisible():
             te = get_text(main_window.ui.wizard_path_input)
             if te != "":
                 key = next(iter(main_window.cfg.settings["wizard_variable_to_map"]["Q"+str(main_window.cfg.settings['wizard_question_index']+1)]))
@@ -472,6 +476,18 @@ def eval_wizard_answer(main_window):
                         index_in_toc = main_window.cfg.settings['wizard_from_question_index_to_toc'][question_number]
                         main_window.ui.wizard_treeView.setRowHidden(index_in_toc[1], main_window.wizard_toc_model.index(index_in_toc[0],0), True)
 
+        # Reset data checks if dimensionality or workflow changed, as the data check is different 
+        if main_window.ui.wizard_question_answer_frame.isVisible() and changed_answer:
+            key = next(iter(main_window.cfg.settings["wizard_variable_to_map"]["Q"+str(main_window.cfg.settings['wizard_question_index']+1)]))
+            if "PROBLEM.NDIM" == key or "PROBLEM.TYPE" == key:
+                for key, val in main_window.cfg.settings["wizard_answers"].items():
+                    if "CHECKED" in key: 
+                        main_window.cfg.settings["wizard_answers"][key] = -1
+                        
+                for i in range(main_window.cfg.settings["wizard_number_of_questions"]):
+                    if main_window.cfg.settings['wizard_possible_answers'][i][0] == "PATH":
+                        index = main_window.cfg.settings['wizard_from_question_index_to_toc'][i]        
+                        main_window.wizard_toc_model.item(index[0]).child(index[1]).setForeground(QColor(0,0,0))
 
 def change_wizard_page(main_window, val, based_on_toc=False, added_val=0):
     """
@@ -570,7 +586,6 @@ def change_wizard_page(main_window, val, based_on_toc=False, added_val=0):
 
             # Activate again possible triggers of wizard_treeView
             main_window.not_allow_change_question = False
-
 
 def prepare_question(main_window):
     """
