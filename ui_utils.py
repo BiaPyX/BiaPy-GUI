@@ -555,77 +555,9 @@ def change_wizard_page(main_window, val, based_on_toc=False, added_val=0):
             main_window.cfg.settings['wizard_question_index']
         )
 
-        # Change question
-        set_text(
-            main_window.ui.wizard_question, 
-            main_window.cfg.settings['wizard_questions'][
-                main_window.cfg.settings['wizard_question_index']
-                ]
-            )
-        set_text(
-            main_window.ui.wizard_question_label, 
-            "Question {}".format(main_window.cfg.settings['wizard_question_index']+1)
-            )
-        
-        if main_window.cfg.settings['wizard_possible_answers'][main_window.cfg.settings['wizard_question_index']][0] == "PATH":
-            main_window.ui.wizard_path_input_frame.setVisible(True)
-            main_window.ui.wizard_question_answer_frame.setVisible(False)
-            main_window.ui.wizard_model_input_frame.setVisible(False)
+        prepare_question(main_window)
 
-            # Remember the answer if the question was previously answered
-            if main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] != -1:
-                set_text(main_window.ui.wizard_path_input, main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']])
-                key = next(iter(main_window.cfg.settings["wizard_variable_to_map"]["Q"+str(main_window.cfg.settings['wizard_question_index']+1)]))
-                if main_window.cfg.settings["wizard_answers"][f"CHECKED {key}"] == -1:
-                    set_text(main_window.ui.wizard_data_checked_label, "<span style='color:#ff3300'><span style='font-size:16pt;'>&larr;</span> Data not checked yet!</span>")
-                else:
-                    set_text(main_window.ui.wizard_data_checked_label, "<span style='color:#04aa6d'>Data checked!</span>")
-            else:
-                set_text(main_window.ui.wizard_path_input, "")
-                set_text(main_window.ui.wizard_data_checked_label, "<span style='color:#ff3300'><span style='font-size:16pt;'>&larr;</span> Data not checked yet!</span>")
-
-        elif main_window.cfg.settings['wizard_possible_answers'][main_window.cfg.settings['wizard_question_index']][0] in ["MODEL_BIAPY", "MODEL_OTHERS"]:
-            main_window.ui.wizard_path_input_frame.setVisible(False)
-            main_window.ui.wizard_question_answer_frame.setVisible(False)
-            main_window.ui.wizard_model_input_frame.setVisible(True)
-
-            if main_window.cfg.settings['wizard_possible_answers'][main_window.cfg.settings['wizard_question_index']][0] == "MODEL_BIAPY":
-                main_window.ui.wizard_model_check_bn.setVisible(False)
-                main_window.ui.wizard_model_browse_bn.setVisible(True)
-            else: # "MODEL_OTHERS"
-                main_window.ui.wizard_model_check_bn.setVisible(True)
-                main_window.ui.wizard_model_browse_bn.setVisible(False)
-                
-            # Remember the answer if the question was previously answered
-            if main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] != -1:
-                set_text(main_window.ui.wizard_model_input, main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']])
-            else:
-                set_text(main_window.ui.wizard_model_input, "")
-        else:
-            main_window.ui.wizard_path_input_frame.setVisible(False)
-            main_window.ui.wizard_question_answer_frame.setVisible(True)
-            main_window.ui.wizard_model_input_frame.setVisible(False)
-
-            # Prevent eval_wizard_answer functionality during wizard_question_answer's currentIndexChanged trigger. It triggers a few times 
-            # when clearing and inserting new data 
-            main_window.allow_change_wizard_question_answer = False
-
-            # Prepare combobox with the answers of the new question
-            main_window.ui.wizard_question_answer.clear()
-            for ans in main_window.cfg.settings['wizard_possible_answers'][
-                    main_window.cfg.settings['wizard_question_index']
-                    ]:
-                main_window.ui.wizard_question_answer.addItem(ans)
-            
-            # Remember the answer if the question was previously answered
-            if main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] != -1:
-                main_window.ui.wizard_question_answer.setCurrentIndex(main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']])
-            else:
-                main_window.ui.wizard_question_answer.setCurrentIndex(-1)
-
-            # Enable eval_wizard_answer calls again
-            main_window.allow_change_wizard_question_answer = True
-        
+    # Change TOC index
     if not based_on_toc:
         index_in_toc = main_window.cfg.settings['wizard_from_question_index_to_toc'][main_window.cfg.settings['wizard_question_index']]
         index = main_window.wizard_toc_model.item(index_in_toc[0]).child(index_in_toc[1])
@@ -639,7 +571,85 @@ def change_wizard_page(main_window, val, based_on_toc=False, added_val=0):
             # Activate again possible triggers of wizard_treeView
             main_window.not_allow_change_question = False
 
-def clear_answers(main_window):
+
+def prepare_question(main_window):
+    """
+    Prepare current question.
+    """
+    # Change question
+    set_text(
+        main_window.ui.wizard_question, 
+        main_window.cfg.settings['wizard_questions'][
+            main_window.cfg.settings['wizard_question_index']
+            ]
+        )
+    set_text(
+        main_window.ui.wizard_question_label, 
+        "Question {}".format(main_window.cfg.settings['wizard_question_index']+1)
+        )
+    
+    # Set bottom part of the question. Depeding on the question type different things must be done
+    if main_window.cfg.settings['wizard_possible_answers'][main_window.cfg.settings['wizard_question_index']][0] == "PATH":
+        main_window.ui.wizard_path_input_frame.setVisible(True)
+        main_window.ui.wizard_question_answer_frame.setVisible(False)
+        main_window.ui.wizard_model_input_frame.setVisible(False)
+
+        # Remember the answer if the question was previously answered
+        if main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] != -1:
+            set_text(main_window.ui.wizard_path_input, main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']])
+            key = next(iter(main_window.cfg.settings["wizard_variable_to_map"]["Q"+str(main_window.cfg.settings['wizard_question_index']+1)]))
+            if main_window.cfg.settings["wizard_answers"][f"CHECKED {key}"] == -1:
+                set_text(main_window.ui.wizard_data_checked_label, "<span style='color:#ff3300'><span style='font-size:16pt;'>&larr;</span> Data not checked yet!</span>")
+            else:
+                set_text(main_window.ui.wizard_data_checked_label, "<span style='color:#04aa6d'>Data checked!</span>")
+        else:
+            set_text(main_window.ui.wizard_path_input, "")
+            set_text(main_window.ui.wizard_data_checked_label, "<span style='color:#ff3300'><span style='font-size:16pt;'>&larr;</span> Data not checked yet!</span>")
+
+    elif main_window.cfg.settings['wizard_possible_answers'][main_window.cfg.settings['wizard_question_index']][0] in ["MODEL_BIAPY", "MODEL_OTHERS"]:
+        main_window.ui.wizard_path_input_frame.setVisible(False)
+        main_window.ui.wizard_question_answer_frame.setVisible(False)
+        main_window.ui.wizard_model_input_frame.setVisible(True)
+
+        if main_window.cfg.settings['wizard_possible_answers'][main_window.cfg.settings['wizard_question_index']][0] == "MODEL_BIAPY":
+            main_window.ui.wizard_model_check_bn.setVisible(False)
+            main_window.ui.wizard_model_browse_bn.setVisible(True)
+        else: # "MODEL_OTHERS"
+            main_window.ui.wizard_model_check_bn.setVisible(True)
+            main_window.ui.wizard_model_browse_bn.setVisible(False)
+            
+        # Remember the answer if the question was previously answered
+        if main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] != -1:
+            set_text(main_window.ui.wizard_model_input, main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']])
+        else:
+            set_text(main_window.ui.wizard_model_input, "")
+    else:
+        main_window.ui.wizard_path_input_frame.setVisible(False)
+        main_window.ui.wizard_question_answer_frame.setVisible(True)
+        main_window.ui.wizard_model_input_frame.setVisible(False)
+
+        # Prevent eval_wizard_answer functionality during wizard_question_answer's currentIndexChanged trigger. It triggers a few times 
+        # when clearing and inserting new data 
+        main_window.allow_change_wizard_question_answer = False
+
+        # Prepare combobox with the answers of the new question
+        main_window.ui.wizard_question_answer.clear()
+        for ans in main_window.cfg.settings['wizard_possible_answers'][
+                main_window.cfg.settings['wizard_question_index']
+                ]:
+            main_window.ui.wizard_question_answer.addItem(ans)
+        
+        # Remember the answer if the question was previously answered
+        if main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] != -1:
+            main_window.ui.wizard_question_answer.setCurrentIndex(main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']])
+        else:
+            main_window.ui.wizard_question_answer.setCurrentIndex(-1)
+
+        # Enable eval_wizard_answer calls again
+        main_window.allow_change_wizard_question_answer = True
+    
+
+def clear_answers(main_window, ask_user=True):
     """
     Clear all answers. 
 
@@ -647,12 +657,20 @@ def clear_answers(main_window):
     ----------
     main_window : QMainWindow
         Main window of the application.
+
+    ask_user : bool, optional  
+        Whether to ask the user before proceed. 
     """
-    main_window.yes_no_exec("Are you sure you want to clear all answers?")
-    if main_window.yes_no.answer:
+    continue_clearing = True
+    if ask_user:
+        main_window.yes_no_exec("Are you sure you want to clear all answers?")
+        if not main_window.yes_no.answer:
+            continue_clearing = False 
+
+    if continue_clearing:
         main_window.cfg.settings["wizard_question_answered_index"] = [-1,]*main_window.cfg.settings["wizard_number_of_questions"] 
-        for key, _ in main_window.cfg.settings["wizard_answers"].items():
-            main_window.cfg.settings["wizard_answers"][key] = -1
+
+        # Reset TOC colors
         for i in range(main_window.wizard_toc_model.rowCount()):
             main_window.wizard_toc_model.item(i).setForeground(QColor(0,0,0))
             for j in range(main_window.wizard_toc_model.item(i).rowCount()):
@@ -660,6 +678,8 @@ def clear_answers(main_window):
         
         # Rewrite all keys
         main_window.cfg.settings["wizard_answers"] = main_window.cfg.settings["original_wizard_answers"].copy()
+
+        main_window.cfg.settings['wizard_question_index'] = 0
 
 def have_internet():
     conn = httplib.HTTPSConnection("8.8.8.8", timeout=5)
@@ -866,9 +886,9 @@ def export_wizard_summary(main_window):
             
         if main_window.cfg.settings['wizard_possible_answers'][i][0] == "PATH":
             key = next(iter(main_window.cfg.settings["wizard_variable_to_map"][f"Q{(i+1)}"].keys()))
-            if f"CHECKED {key}" in main_window.cfg.settings["wizard_answers"]:
-                if main_window.cfg.settings["wizard_answers"][f"CHECKED {key}"] == -1:
-                    finished_data_checks = False
+            phase = "TRAIN" if "TRAIN" in key else "TEST"
+            if main_window.cfg.settings["wizard_answers"][f"{phase}.ENABLE"] and f"CHECKED {key}" in main_window.cfg.settings["wizard_answers"] and main_window.cfg.settings["wizard_answers"][f"CHECKED {key}"] == -1:
+                finished_data_checks = False
 
     # Check if the data folder was checked 
     if not finished:
@@ -877,7 +897,14 @@ def export_wizard_summary(main_window):
     elif not finished_data_checks:
         main_window.dialog_exec("Please check the data in training/test paths selected in order to prevent future errors.", "inform_user")
     else:  
+        main_window.yes_no_exec("Do you want to finish wizard and create the configuration based on your answers?")
+        if not main_window.yes_no.answer:
+            return 
+        
         biapy_cfg = main_window.cfg.settings["wizard_answers"].copy()
+        biapy_cfg["data_constraints"] = main_window.cfg.settings["wizard_answers"]["data_constraints"].copy()
+        if "model_restrictions" in biapy_cfg:
+            biapy_cfg["model_restrictions"] = main_window.cfg.settings["wizard_answers"]["model_restrictions"].copy()
 
         # Special variables that need to be processed
         # Constraints imposed by the model. Patch size will be determined by the model
@@ -896,7 +923,10 @@ def export_wizard_summary(main_window):
                 patch_size = (biapy_cfg["DATA.PATCH_SIZE_Z"],)
             del biapy_cfg["DATA.PATCH_SIZE_Z"]
 
-            patch_size += biapy_cfg["DATA.PATCH_SIZE_XY"]
+            if biapy_cfg["DATA.PATCH_SIZE_XY"] == -1:
+                patch_size = (-1,)
+            else:
+                patch_size += biapy_cfg["DATA.PATCH_SIZE_XY"]
             patch_size += (biapy_cfg["data_constraints"]["DATA.PATCH_SIZE_C"],)
             del biapy_cfg["DATA.PATCH_SIZE_XY"]
             biapy_cfg["DATA.PATCH_SIZE"] = patch_size
@@ -930,6 +960,49 @@ def export_wizard_summary(main_window):
                     del biapy_cfg["data_constraints"][f"DATA.{phase}.PATH_path"]
                     del biapy_cfg["data_constraints"][f"DATA.{phase}.GT_PATH"]
                     del biapy_cfg["data_constraints"][f"DATA.{phase}.GT_PATH_path"]
+
+                    y_upscaling = -1
+                    for x, y in zip(
+                        biapy_cfg["data_constraints"][f"DATA.{phase}.PATH_path_shapes"], 
+                        biapy_cfg["data_constraints"][f"DATA.{phase}.GT_PATH_path_shapes"]
+                    ):
+                        if y_upscaling == -1 and biapy_cfg["PROBLEM.TYPE"] == "SUPER_RESOLUTION":
+                            y_upscaling = []
+                            for i in range(len(x[:-1])):
+                                div = y[i] / x[i]
+                                if div % 1 != 0:
+                                    main_window.dialog_exec("Raw images and their corresponding targets seem to not have an integer division. "
+                                        "Remember that in super-resolution workflow an upsampled version of the raw images are expected as target. "
+                                        "For instance, if raw image shape is 512x512 the expected target image shape need to be 1024x1024 in a x2 "
+                                        "upsampling. Here we found {} and {} shapes for raw images and target respectively. Check the data to "
+                                        "proceed.".format(x,y), reason="error")
+                                    return
+                                else:
+                                    y_upscaling.append(int(div))
+                            y_upscaling = tuple(y_upscaling)
+
+                        if biapy_cfg["PROBLEM.TYPE"] == "SUPER_RESOLUTION":
+                            if biapy_cfg["PROBLEM.NDIM"] == "3D":
+                                expected_y_shape = (
+                                    x[0] * y_upscaling[0],
+                                    x[1] * y_upscaling[1],
+                                    x[2] * y_upscaling[2],
+                                    x[3],
+                                )
+                            else:
+                                expected_y_shape = (
+                                    x[0] * y_upscaling[0],
+                                    x[1] * y_upscaling[1],
+                                    x[2],
+                                )
+                        else:
+                            expected_y_shape = x
+                            
+                        if y[:-1] != expected_y_shape[:-1]:
+                            main_window.dialog_exec("Raw images and their corresponding targets seem to not match in shape. "
+                                "Expected {} and {}. Found {} and {} for raw images and target respectively"\
+                                .format(x[:-1],expected_y_shape[:-1],x[:-1],y[:-1]), reason="error")
+                            return    
 
         # Set the rest of the variables found by checking the data 
         for key, value in biapy_cfg["data_constraints"].items():
@@ -982,7 +1055,10 @@ def export_wizard_summary(main_window):
             main_window.dialog_exec(message, reason="inform_user")
         
         change_page(main_window,'bn_run_biapy',99)
-
+        
+        # Resets wizard 
+        main_window.ui.wizard_main_frame.setCurrentWidget(main_window.ui.wizard_start_page)
+        clear_answers(main_window, ask_user=False)
 
 def set_default_config(cfg):
     """
@@ -1015,7 +1091,7 @@ def set_default_config(cfg):
         cfg["DATA"]["TEST"]["IN_MEMORY"] = False
 
         # Adjust test padding accordingly
-        if cfg['DATA']['PATCH_SIZE'] != -1:
+        if cfg['DATA']['PATCH_SIZE'][0] != -1:
             cfg['DATA']['TEST']['PADDING'] = str(tuple([x//6 for x in cfg['DATA']['PATCH_SIZE'][:-1]]))
 
     # Normalization
@@ -1039,6 +1115,7 @@ def set_default_config(cfg):
         cfg['TRAIN']['LR_SCHEDULER']['NAME'] = 'warmupcosine'
         cfg['TRAIN']['LR_SCHEDULER']['MIN_LR'] = 5.E-6
         cfg['TRAIN']['LR_SCHEDULER']['WARMUP_COSINE_DECAY_EPOCHS'] = 5
+        cfg['LOSS'] = {}
         cfg['LOSS']['CLASS_REBALANCE'] = True 
 
     #########
@@ -1109,12 +1186,13 @@ def set_default_config(cfg):
                 cfg['TEST']['POST_PROCESSING']["REMOVE_CLOSE_POINTS"] = True
 
     elif cfg["PROBLEM"]["TYPE"] == "DENOISING":
-        if cfg['DATA']['PATCH_SIZE'] != -1:
-            if cfg['DATA']['NDIM'] == "2D":
+        if cfg['DATA']['PATCH_SIZE'][0] != -1:
+            if cfg['PROBLEM']['NDIM'] == "2D":
                 cfg['DATA']['PATCH_SIZE'] = str((64,64)+(data_channels,))
             else:
                 cfg['DATA']['PATCH_SIZE'] = str((12,64,64)+(data_channels,))
-            cfg['DATA']['TEST']['PADDING'] = str(tuple([x//6 for x in cfg['DATA']['PATCH_SIZE'][:-1]]))
+            if cfg['TEST']['ENABLE']:
+                cfg['DATA']['TEST']['PADDING'] = str(tuple([x//6 for x in cfg['DATA']['PATCH_SIZE'][:-1]]))
 
         # Config as Noise2Void default parameters
         cfg['PROBLEM']['DENOISING'] = {}
@@ -1132,12 +1210,14 @@ def set_default_config(cfg):
             cfg['TRAIN']['BATCH_SIZE'] = 1 # TODO: Depending on the GPU/CPU. In denoising the value can be higher  
         
     elif cfg["PROBLEM"]["TYPE"] == "SUPER_RESOLUTION":
-        if cfg['DATA']['PATCH_SIZE'] != -1:
-            if cfg['DATA']['NDIM'] == "2D":
+        if cfg['DATA']['PATCH_SIZE'][0] != -1:
+            if cfg['PROBLEM']['NDIM'] == "2D":
                 cfg['DATA']['PATCH_SIZE'] = str((48,48)+(data_channels,))
             else:
                 cfg['DATA']['PATCH_SIZE'] = str((6,128,128)+(data_channels,))
-            cfg['DATA']['TEST']['PADDING'] = str(tuple([x//6 for x in cfg['DATA']['PATCH_SIZE'][:-1]]))
+
+            if cfg['TEST']['ENABLE']:
+                cfg['DATA']['TEST']['PADDING'] = str(tuple([x//6 for x in cfg['DATA']['PATCH_SIZE'][:-1]]))
 
     elif cfg["PROBLEM"]["TYPE"] == "CLASSIFICATION":
         pass
@@ -1326,7 +1406,7 @@ def move_between_workflows(main_window, to_page, dims=None):
         main_window.ui.LOSS__TYPE__INPUT.addItems(losses)
 
 
-def start_questionary(main_window):
+def start_wizard_questionary(main_window):
     """
     Starts questionary.
             
@@ -1346,32 +1426,21 @@ def start_questionary(main_window):
     main_window.ui.continue_bn.setText("Create configuration file")
     main_window.ui.wizard_main_frame.setCurrentWidget(main_window.ui.questionary_page)
 
-    set_text(
-        main_window.ui.wizard_question, 
-        main_window.cfg.settings['wizard_questions'][
-            main_window.cfg.settings['wizard_question_index']
-            ]
-        )
-    
-    # Prevent eval_wizard_answer functionality during wizard_question_answer's currentIndexChanged trigger. It triggers a few times 
-    # when clearing and inserting new data
-    main_window.allow_change_wizard_question_answer = False
+    prepare_question(main_window)
 
-    main_window.ui.wizard_question_answer.clear()
-    for ans in main_window.cfg.settings['wizard_possible_answers'][
-            main_window.cfg.settings['wizard_question_index']
-            ]:
-        main_window.ui.wizard_question_answer.addItem(ans)
+    # Change TOC index
+    index_in_toc = main_window.cfg.settings['wizard_from_question_index_to_toc'][main_window.cfg.settings['wizard_question_index']]
+    index = main_window.wizard_toc_model.item(index_in_toc[0]).child(index_in_toc[1])
+    if index is not None:
+        # As wizard_treeView is triggered when changing it's index we use this flag to block change_wizard_page functionality, 
+        # as it has been done already
+        main_window.not_allow_change_question = True
+        
+        main_window.ui.wizard_treeView.setCurrentIndex(index.index())
 
-    # Remember the answer if the question was previously answered
-    if main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] != -1:
-        main_window.ui.wizard_question_answer.setCurrentIndex(main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']])
-    else:
-        main_window.ui.wizard_question_answer.setCurrentIndex(-1)
-
-    # Enable eval_wizard_answer calls again
-    main_window.allow_change_wizard_question_answer = True
-
+        # Activate again possible triggers of wizard_treeView
+        main_window.not_allow_change_question = False
+                
 def oninit_checks(main_window):
     """
     Initial checks of the GUI. Specifically, Docker installation and GPU are checked.  

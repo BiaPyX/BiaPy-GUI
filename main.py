@@ -11,7 +11,7 @@ from PySide2.QtGui import *
 
 from ui_function import * 
 from ui_utils import (examine, mark_syntax_error, expand_hide_advanced_options, change_page, get_git_revision_short_hash,
-    load_yaml_config, resource_path, load_yaml_to_GUI, set_text, start_questionary, change_wizard_page, eval_wizard_answer, 
+    load_yaml_config, resource_path, load_yaml_to_GUI, set_text, start_wizard_questionary, change_wizard_page, eval_wizard_answer, 
     clear_answers, check_models_from_other_sources, check_data_from_path, export_wizard_summary, wizard_path_changed)
 from settings import Settings
 from widget_conditions import Widget_conditions
@@ -118,7 +118,7 @@ class MainWindow(QMainWindow):
         self.ui.biapy_citation_bn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://github.com/BiaPyX/BiaPy#citation")))
 
         # Wizard page buttons
-        self.ui.wizard_start_bn.clicked.connect(lambda: start_questionary(self))
+        self.ui.wizard_start_bn.clicked.connect(lambda: start_wizard_questionary(self))
         self.ui.wizard_back_bn.clicked.connect(lambda: change_wizard_page(self, self.cfg.settings['wizard_question_index'], False, added_val=-1))
         self.ui.wizard_cont_bn.clicked.connect(lambda: change_wizard_page(self, self.cfg.settings['wizard_question_index'], False, added_val=1))
         self.ui.wizard_question_answer.currentIndexChanged.connect(lambda: eval_wizard_answer(self))

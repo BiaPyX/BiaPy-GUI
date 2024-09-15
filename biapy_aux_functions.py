@@ -347,6 +347,7 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False, dir_name=No
         error_message = f"No images found in folder:\n{data_dir}"
         return True, error_message, {}    
 
+    shapes = []
     for id_ in ids:
         img_path = os.path.join(data_dir, id_)
         if id_.endswith(".npy"):
@@ -373,6 +374,7 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False, dir_name=No
                 f"{channel_expected} channels) appears to have a different number of channels than the first image"\
                 f"(with {img.shape[-1]} channels) in the folder. Current image:\n{img_path}"
             return True, error_message, {}    
+        shapes.append(img.shape)
 
         # Data range check
         if not is_mask:
@@ -408,6 +410,7 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False, dir_name=No
     if dir_name is not None:
         constraints[dir_name] = len(ids)
         constraints[dir_name+"_path"] = data_dir
+        constraints[dir_name+"_path_shapes"] = shapes
 
     return False, "", constraints
 
