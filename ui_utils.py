@@ -961,48 +961,52 @@ def export_wizard_summary(main_window):
                     del biapy_cfg["data_constraints"][f"DATA.{phase}.GT_PATH"]
                     del biapy_cfg["data_constraints"][f"DATA.{phase}.GT_PATH_path"]
 
-                    y_upscaling = -1
-                    for x, y in zip(
-                        biapy_cfg["data_constraints"][f"DATA.{phase}.PATH_path_shapes"], 
-                        biapy_cfg["data_constraints"][f"DATA.{phase}.GT_PATH_path_shapes"]
+                    if (
+                        f"DATA.{phase}.PATH_path_shapes" in biapy_cfg["data_constraints"] 
+                        and f"DATA.{phase}.GT_PATH_path_shapes" in biapy_cfg["data_constraints"]
                     ):
-                        if y_upscaling == -1 and biapy_cfg["PROBLEM.TYPE"] == "SUPER_RESOLUTION":
-                            y_upscaling = []
-                            for i in range(len(x[:-1])):
-                                div = y[i] / x[i]
-                                if div % 1 != 0:
-                                    main_window.dialog_exec("Raw images and their corresponding targets seem to not have an integer division. "
-                                        "Remember that in super-resolution workflow an upsampled version of the raw images are expected as target. "
-                                        "For instance, if raw image shape is 512x512 the expected target image shape need to be 1024x1024 in a x2 "
-                                        "upsampling. Here we found {} and {} shapes for raw images and target respectively. Check the data to "
-                                        "proceed.".format(x,y), reason="error")
-                                    return
-                                else:
-                                    y_upscaling.append(int(div))
-                            y_upscaling = tuple(y_upscaling)
+                        y_upscaling = -1
+                        for x, y in zip(
+                            biapy_cfg["data_constraints"][f"DATA.{phase}.PATH_path_shapes"], 
+                            biapy_cfg["data_constraints"][f"DATA.{phase}.GT_PATH_path_shapes"]
+                        ):
+                            if y_upscaling == -1 and biapy_cfg["PROBLEM.TYPE"] == "SUPER_RESOLUTION":
+                                y_upscaling = []
+                                for i in range(len(x[:-1])):
+                                    div = y[i] / x[i]
+                                    if div % 1 != 0:
+                                        main_window.dialog_exec("Raw images and their corresponding targets seem to not have an integer division. "
+                                            "Remember that in super-resolution workflow an upsampled version of the raw images are expected as target. "
+                                            "For instance, if raw image shape is 512x512 the expected target image shape need to be 1024x1024 in a x2 "
+                                            "upsampling. Here we found {} and {} shapes for raw images and target respectively. Check the data to "
+                                            "proceed.".format(x,y), reason="error")
+                                        return
+                                    else:
+                                        y_upscaling.append(int(div))
+                                y_upscaling = tuple(y_upscaling)
 
-                        if biapy_cfg["PROBLEM.TYPE"] == "SUPER_RESOLUTION":
-                            if biapy_cfg["PROBLEM.NDIM"] == "3D":
-                                expected_y_shape = (
-                                    x[0] * y_upscaling[0],
-                                    x[1] * y_upscaling[1],
-                                    x[2] * y_upscaling[2],
-                                    x[3],
-                                )
+                            if biapy_cfg["PROBLEM.TYPE"] == "SUPER_RESOLUTION":
+                                if biapy_cfg["PROBLEM.NDIM"] == "3D":
+                                    expected_y_shape = (
+                                        x[0] * y_upscaling[0],
+                                        x[1] * y_upscaling[1],
+                                        x[2] * y_upscaling[2],
+                                        x[3],
+                                    )
+                                else:
+                                    expected_y_shape = (
+                                        x[0] * y_upscaling[0],
+                                        x[1] * y_upscaling[1],
+                                        x[2],
+                                    )
                             else:
-                                expected_y_shape = (
-                                    x[0] * y_upscaling[0],
-                                    x[1] * y_upscaling[1],
-                                    x[2],
-                                )
-                        else:
-                            expected_y_shape = x
-                            
-                        if y[:-1] != expected_y_shape[:-1]:
-                            main_window.dialog_exec("Raw images and their corresponding targets seem to not match in shape. "
-                                "Expected {} and {}. Found {} and {} for raw images and target respectively"\
-                                .format(x[:-1],expected_y_shape[:-1],x[:-1],y[:-1]), reason="error")
-                            return    
+                                expected_y_shape = x
+                                
+                            if y[:-1] != expected_y_shape[:-1]:
+                                main_window.dialog_exec("Raw images and their corresponding targets seem to not match in shape. "
+                                    "Expected {} and {}. Found {} and {} for raw images and target respectively"\
+                                    .format(x[:-1],expected_y_shape[:-1],x[:-1],y[:-1]), reason="error")
+                                return    
 
         # Set the rest of the variables found by checking the data 
         for key, value in biapy_cfg["data_constraints"].items():
