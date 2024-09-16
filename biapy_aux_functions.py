@@ -265,7 +265,7 @@ def check_model_restrictions(
                 
         if specific_workflow == "SEMANTIC_SEG" and classes == -1:
             raise ValueError("Classes not found for semantic segmentation dir. ")
-        opts["MODEL.N_CLASSES"] = classes
+        opts["MODEL.N_CLASSES"] = max(2,classes)
 
     if "preprocessing" not in model_rdf["inputs"][0]:
         return opts
