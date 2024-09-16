@@ -1028,6 +1028,11 @@ def export_wizard_summary(main_window):
                                     .format(x[:-1],expected_y_shape[:-1],x[:-1],y[:-1]), reason="error")
                                 return    
 
+                    if f"DATA.{phase}.PATH_path_shapes" in biapy_cfg["data_constraints"]:
+                        del biapy_cfg["data_constraints"][f"DATA.{phase}.PATH_path_shapes"]
+                    if f"DATA.{phase}.GT_PATH_path_shapes" in biapy_cfg["data_constraints"]:
+                        del biapy_cfg["data_constraints"][f"DATA.{phase}.GT_PATH_path_shapes"]
+
         # Set the rest of the variables found by checking the data 
         for key, value in biapy_cfg["data_constraints"].items():
             biapy_cfg[key] = value
@@ -1195,7 +1200,7 @@ def set_default_config(cfg):
         cfg['AUGMENTOR']['CONTRAST_FACTOR'] = str((-0.2, 0.2))
         cfg['AUGMENTOR']['ELASTIC'] = True
         cfg['AUGMENTOR']['ZOOM'] = True
-        cfg['AUGMENTOR']['ZOOM_RANGE'] = str((-0.2, 0.2))
+        cfg['AUGMENTOR']['ZOOM_RANGE'] = str((0.9, 1.1))
         cfg['AUGMENTOR']['RANDOM_ROT'] = True
 
         if cfg['PROBLEM']['TYPE'] == 'INSTANCE_SEG':
