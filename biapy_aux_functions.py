@@ -7,7 +7,7 @@ from skimage.io import imread
 from typing import Optional, Dict, Tuple, List
 from packaging.version import Version
 
-## Copied from BiaPy commit: d3e90f754cf6ec3894e8e6b22f9fb77eed9c9897 (3.5.1)
+## Copied from BiaPy commit: ff7d91757687636edb697eb63f45a7de9564419b (3.5.2)
 def check_bmz_model_compatibility(
     model_rdf: Dict,
     workflow_specs: Optional[Dict] = None,
@@ -41,7 +41,7 @@ def check_bmz_model_compatibility(
 
     error = False
     reason_message = ""
-    preproc_info = []
+    preproc_info = {}
 
     # Accepting models that are exported in pytorch_state_dict and with just one input
     if "pytorch_state_dict" in model_rdf["weights"] and len(model_rdf["inputs"]) == 1:
@@ -186,7 +186,7 @@ def check_bmz_model_compatibility(
 
     return preproc_info, error, reason_message
 
-# Adapted from BiaPy commit: d3e90f754cf6ec3894e8e6b22f9fb77eed9c9897 (3.5.1)
+# Adapted from BiaPy commit: ff7d91757687636edb697eb63f45a7de9564419b (3.5.2)
 def check_model_restrictions(
     model_rdf,
 ):
@@ -257,37 +257,38 @@ def check_model_restrictions(
     # 'zero_mean_unit_variance' and 'fixed_zero_mean_unit_variance' norms of BMZ can be translated to our 'custom' norm 
     # providing mean and std
     key_to_find = "id" if model_version > Version("0.5.0") else "name"
-    if preproc_info[key_to_find] in ["fixed_zero_mean_unit_variance", "zero_mean_unit_variance"]:
-        if (
-            "kwargs" in preproc_info
-            and "mean" in preproc_info["kwargs"]
-        ):
-            mean = preproc_info["kwargs"]["mean"]
-            std = preproc_info["kwargs"]["std"]
-        elif "mean" in preproc_info:
-            mean = preproc_info["mean"]
-            std = preproc_info["std"]
-        else:
-            mean, std = -1., -1.
+    if key_to_find in preproc_info:
+        if preproc_info[key_to_find] in ["fixed_zero_mean_unit_variance", "zero_mean_unit_variance"]:
+            if (
+                "kwargs" in preproc_info
+                and "mean" in preproc_info["kwargs"]
+            ):
+                mean = preproc_info["kwargs"]["mean"]
+                std = preproc_info["kwargs"]["std"]
+            elif "mean" in preproc_info:
+                mean = preproc_info["mean"]
+                std = preproc_info["std"]
+            else:
+                mean, std = -1., -1.
 
-        opts["DATA.NORMALIZATION.TYPE"] = "custom"
-        opts["DATA.NORMALIZATION.CUSTOM_MEAN"] = mean
-        opts["DATA.NORMALIZATION.CUSTOM_STD"] = std
+            opts["DATA.NORMALIZATION.TYPE"] = "custom"
+            opts["DATA.NORMALIZATION.CUSTOM_MEAN"] = mean
+            opts["DATA.NORMALIZATION.CUSTOM_STD"] = std
 
-    # 'scale_linear' norm of BMZ is close to our 'div' norm (TODO: we need to control the "gain" arg)
-    elif preproc_info[key_to_find] == "scale_linear":
-        opts["DATA.NORMALIZATION.TYPE"] = "div"
+        # 'scale_linear' norm of BMZ is close to our 'div' norm (TODO: we need to control the "gain" arg)
+        elif preproc_info[key_to_find] == "scale_linear":
+            opts["DATA.NORMALIZATION.TYPE"] = "div"
 
-    # 'scale_range' norm of BMZ is as our PERC_CLIP + 'scale_range' norm
-    elif preproc_info[key_to_find] == "scale_range":
-        opts["DATA.NORMALIZATION.TYPE"] = "scale_range"
-        if (
-            float(preproc_info["kwargs"]["min_percentile"]) != 0
-            or float(preproc_info["kwargs"]["max_percentile"]) != 100
-        ):
-            opts["DATA.NORMALIZATION.PERC_CLIP"] = True
-            opts["DATA.NORMALIZATION.PERC_LOWER"] = float(preproc_info["kwargs"]["min_percentile"])
-            opts["DATA.NORMALIZATION.PERC_UPPER"] = float(preproc_info["kwargs"]["max_percentile"])
+        # 'scale_range' norm of BMZ is as our PERC_CLIP + 'scale_range' norm
+        elif preproc_info[key_to_find] == "scale_range":
+            opts["DATA.NORMALIZATION.TYPE"] = "scale_range"
+            if (
+                float(preproc_info["kwargs"]["min_percentile"]) != 0
+                or float(preproc_info["kwargs"]["max_percentile"]) != 100
+            ):
+                opts["DATA.NORMALIZATION.PERC_CLIP"] = True
+                opts["DATA.NORMALIZATION.PERC_LOWER"] = float(preproc_info["kwargs"]["min_percentile"])
+                opts["DATA.NORMALIZATION.PERC_UPPER"] = float(preproc_info["kwargs"]["max_percentile"])
 
     return opts
 
