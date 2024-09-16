@@ -189,6 +189,7 @@ def check_bmz_model_compatibility(
 # Adapted from BiaPy commit: ff7d91757687636edb697eb63f45a7de9564419b (3.5.2)
 def check_model_restrictions(
     model_rdf,
+    workflow_specs,
 ):
     """
     Checks model restrictions to be applied into the current configuration.
@@ -197,6 +198,9 @@ def check_model_restrictions(
     ----------
     model_rdf : dict
         BMZ model RDF that contains all the information of the model.
+        
+    workflow_specs : dict
+        Specifications of the workflow. If not provided all possible models will be considered.
 
     Returns
     -------
@@ -204,6 +208,8 @@ def check_model_restrictions(
         Variables and values to change in current configuration. These changes
         are imposed by the selected model. 
     """
+    specific_workflow = workflow_specs["workflow_type"]
+
     # Version of the model
     model_version = Version(model_rdf["format_version"])
     opts = {}    
@@ -242,8 +248,24 @@ def check_model_restrictions(
                         input_image_shape += [axis['size']['min'],]
     if len(input_image_shape) == 0:
         raise ValueError("Couldn't load input info from BMZ model's RDF: {}".format(model_rdf["inputs"][0]))   
-
     opts["DATA.PATCH_SIZE"] = tuple(input_image_shape[2:]) + (input_image_shape[1],)
+
+    # 2) Classes in semantic segmentation
+    # if (specific_workflow in ["INSTANCE_SEG", "SEMANTIC_SEG", "DETECTION"]):
+    if specific_workflow in ["SEMANTIC_SEG"]:
+        # Check number of classes
+        classes = -1
+        if "kwargs" in model_rdf["weights"]["pytorch_state_dict"]:
+            if "n_classes" in model_rdf["weights"]["pytorch_state_dict"]["kwargs"]: # BiaPy
+                classes = model_rdf["weights"]["pytorch_state_dict"]["kwargs"]["n_classes"]
+            elif "out_channels" in model_rdf["weights"]["pytorch_state_dict"]["kwargs"]:
+                classes = model_rdf["weights"]["pytorch_state_dict"]["kwargs"]["out_channels"]
+            elif "classes" in model_rdf["weights"]["pytorch_state_dict"]["kwargs"]:
+                classes = model_rdf["weights"]["pytorch_state_dict"]["kwargs"]["classes"]
+                
+        if specific_workflow == "SEMANTIC_SEG" and classes == -1:
+            raise ValueError("Classes not found for semantic segmentation dir. ")
+        opts["MODEL.N_CLASSES"] = classes
 
     if "preprocessing" not in model_rdf["inputs"][0]:
         return opts
@@ -253,7 +275,7 @@ def check_model_restrictions(
         return opts
     preproc_info = preproc_info[0]
 
-    # 2) Change preprocessing to the one stablished by BMZ by translate BMZ keywords into BiaPy's
+    # 3) Change preprocessing to the one stablished by BMZ by translate BMZ keywords into BiaPy's
     # 'zero_mean_unit_variance' and 'fixed_zero_mean_unit_variance' norms of BMZ can be translated to our 'custom' norm 
     # providing mean and std
     key_to_find = "id" if model_version > Version("0.5.0") else "name"

@@ -828,7 +828,7 @@ class check_models_from_other_sources_engine(QObject):
                         # Creating BMZ model object
                         # model = load_description(model_rdfs[-1]['config']['bioimageio']['nickname'])
                         # abs url: model.covers[0].absolute() (covers[0] is RelativeFilePath)
-                        biapy_imposed_vars = check_model_restrictions(model_rdfs[-1])
+                        biapy_imposed_vars = check_model_restrictions(model_rdfs[-1], workflow_specs=workflow_specs)
                         doi = "/".join(model_rdfs[-1]['id'].split("/")[:2])
                         # Extract nickname and its icon
                         if 'nickname' in model_rdfs[-1]['config']['bioimageio']:
@@ -926,6 +926,17 @@ def export_wizard_summary(main_window):
         if "model_restrictions" in biapy_cfg:
             biapy_cfg["model_restrictions"] = main_window.cfg.settings["wizard_answers"]["model_restrictions"].copy()
 
+        # Check class compatibility between model and data 
+        data_imposed_classes = 2 if "MODEL.N_CLASSES" not in biapy_cfg["data_constraints"] else biapy_cfg["data_constraints"]["MODEL.N_CLASSES"]
+        if "model_restrictions" in biapy_cfg and "MODEL.N_CLASSES" in biapy_cfg["model_restrictions"]:
+            model_imposed_classes = max(2, biapy_cfg["model_restrictions"]["MODEL.N_CLASSES"])
+        else:
+            model_imposed_classes = 2
+        if data_imposed_classes != model_imposed_classes:
+            main_window.dialog_exec(f"Incompatibility found: data provided seems to have {data_imposed_classes} classes whereas "
+                f"the pretrained model is prepared to work with {model_imposed_classes} classes. Please select another pretrained model.", reason="error")
+            return
+            
         # Special variables that need to be processed
         # Constraints imposed by the model. Patch size will be determined by the model
         if "model_restrictions" in biapy_cfg:
