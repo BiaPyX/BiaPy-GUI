@@ -1306,12 +1306,15 @@ class UIFunction(MainWindow):
         local_images = main_window.docker_client.images.list()
         local_biapy_image_tag = ""
         old_biapy_images = []
+        local_biapy_container_found = False 
         if len(local_images) > 0:    
             # Capture local BiaPy image 
             for i in range(len(local_images)):
                 if len(local_images[i].attrs.get("RepoTags")) > 0:
                     if local_images[i].attrs.get("RepoTags")[0] == main_window.cfg.settings['biapy_container_name']:
-                        local_biapy_image_tag = local_images[i].attrs.get("RepoDigests")[0].replace("biapyx/biapy@","")  
+                        local_biapy_container_found = True
+                        if len(local_images[i].attrs.get("RepoDigests")) > 0:
+                            local_biapy_image_tag = local_images[i].attrs.get("RepoDigests")[0].replace("biapyx/biapy@","")  
                 else:
                     if len(local_images[i].attrs.get("RepoDigests"))>0:
                         if 'biapyx/biapy' in local_images[i].attrs.get("RepoDigests")[0]:
@@ -1335,7 +1338,8 @@ class UIFunction(MainWindow):
             # Replace BiaPy container 
             if dockerhub_image_tag != "" and local_biapy_image_tag != "":
                 if dockerhub_image_tag != local_biapy_image_tag:
-                    main_window.yes_no_exec("There is another BiaPy container. Do yo want to remove the current one to save disk space?")
+                    main_window.yes_no_exec("There is another BiaPy container ('{}'). Do yo want to remove the current one to "
+                        "save disk space?".format(main_window.cfg.settings['biapy_container_name']))
                     if main_window.yes_no.answer:
                         main_window.logger.info("Removing last valid container")
                         main_window.docker_client.images.remove(main_window.cfg.settings['biapy_container_name'], force=True)
@@ -1343,8 +1347,12 @@ class UIFunction(MainWindow):
         # Firs time 
         run_biapy_cond = True
         if local_biapy_image_tag == "":
-            main_window.yes_no_exec("The first time you run BiaPy you need to download its Docker container. "
-                f"This process will be done just once and needs {main_window.cfg.settings['biapy_container_size']} of disk space. Proceed?")
+            if not local_biapy_container_found:
+                main_window.yes_no_exec("The first time you run BiaPy you need to download its Docker container. "
+                    f"This process will be done just once and needs {main_window.cfg.settings['biapy_container_size']} of disk space. Proceed?")
+            else:
+                main_window.yes_no_exec("Seems that there is an existing BiaPy container locally built ({}). Do you want to continue?"\
+                    .format(main_window.cfg.settings['biapy_container_name']))
             run_biapy_cond = main_window.yes_no.answer
         
         if run_biapy_cond:
@@ -1358,7 +1366,7 @@ class UIFunction(MainWindow):
             main_window.cfg.settings['running_threads'].append(QThread())
             worker_id = len(main_window.cfg.settings['running_workers'])
             main_window.cfg.settings['running_workers'].append(run_worker(main_window, main_window.cfg.settings['biapy_cfg'], main_window.cfg.settings['biapy_container_name'], 
-                worker_id, main_window.cfg.settings['output_folder'], main_window.cfg.settings['user_host'], use_gpu))
+                worker_id, main_window.cfg.settings['output_folder'], main_window.cfg.settings['user_host'], use_gpu, use_local_biapy_image=local_biapy_container_found))
 
             # Set up signals so the mainn thread, in charge of updating the GUI, can do it
             main_window.cfg.settings['running_workers'][worker_id].moveToThread(main_window.cfg.settings['running_threads'][worker_id])

@@ -191,7 +191,7 @@ class run_worker(QObject):
     # Signal to indicate the main thread to update the GUI with the pulling progress
     update_pulling_progress_signal = QtCore.Signal(int)
 
-    def __init__(self, main_gui, config, container_name, worker_id, output_folder, user_host, use_gpu):
+    def __init__(self, main_gui, config, container_name, worker_id, output_folder, user_host, use_gpu, use_local_biapy_image):
         super(run_worker, self).__init__()
         self.main_gui = main_gui
         self.config = config
@@ -208,6 +208,7 @@ class run_worker(QObject):
         self.container_info = 'NONE'
         self.process_steps = "NONE"
         self.break_pulling = False
+        self.use_local_biapy_image = use_local_biapy_image
 
     def stop_worker(self):
         self.main_gui.logger.info("Stopping the container . . . ")
@@ -254,90 +255,94 @@ class run_worker(QObject):
             self.total_layers = {}
             problem_attempts = 0
             json_orig_data = None
-            while problem_attempts < 4:
-                try:
-                    self.main_gui.logger.info("Pulling container . . .")
-                    self.docker_client = docker.from_env() # Necessary 
-                    for item in self.docker_client.api.pull(self.main_gui.cfg.settings['biapy_container_name'], stream=True, decode=True):    
-                        self.main_gui.logger.info(item)
-                        if item["status"] == 'Pulling fs layer':
-                            self.total_layers[item["id"]+"_download"] = 0
-                            self.total_layers[item["id"]+"_extract"] = 0
-                        elif item["status"] == "Downloading":
-                            self.total_layers[item["id"]+"_download"] = item["progressDetail"]['current']/item["progressDetail"]['total']
-                        elif item["status"] == "Extracting": 
-                            self.total_layers[item["id"]+"_extract"] = item["progressDetail"]['current']/item["progressDetail"]['total'] 
-                        elif item["status"] == "Pull complete": 
-                            self.total_layers[item["id"]+"_download"] = 1
-                            self.total_layers[item["id"]+"_extract"] = 1
+            if self.use_local_biapy_image:
+                self.main_gui.logger.info("Using local BiaPy image")
+                self.docker_client = docker.from_env() # Necessary
+            else:
+                while problem_attempts < 4:
+                    try:
+                        self.main_gui.logger.info("Pulling container . . .")
+                        self.docker_client = docker.from_env() # Necessary 
+                        for item in self.docker_client.api.pull(self.main_gui.cfg.settings['biapy_container_name'], stream=True, decode=True):    
+                            self.main_gui.logger.info(item)
+                            if item["status"] == 'Pulling fs layer':
+                                self.total_layers[item["id"]+"_download"] = 0
+                                self.total_layers[item["id"]+"_extract"] = 0
+                            elif item["status"] == "Downloading":
+                                self.total_layers[item["id"]+"_download"] = item["progressDetail"]['current']/item["progressDetail"]['total']
+                            elif item["status"] == "Extracting": 
+                                self.total_layers[item["id"]+"_extract"] = item["progressDetail"]['current']/item["progressDetail"]['total'] 
+                            elif item["status"] == "Pull complete": 
+                                self.total_layers[item["id"]+"_download"] = 1
+                                self.total_layers[item["id"]+"_extract"] = 1
 
-                        if self.break_pulling:
-                            self.main_gui.logger.info("Stopping pulling process . . .")
-                            return 
-                        # Update GUI 
-                        steps = np.sum([int(float(x)*10) for x in self.total_layers.values()])
-                        self.update_pulling_progress_signal.emit(steps)
-                except Exception as e:
-                    problem_attempts += 1
-                    self.main_gui.logger.error(f"Error pulling the container: {e}")
-                    self.main_gui.logger.info(f"Trying to modify ~/.docker/config.json - (attempt {problem_attempts})")
+                            if self.break_pulling:
+                                self.main_gui.logger.info("Stopping pulling process . . .")
+                                return 
+                            # Update GUI 
+                            steps = np.sum([int(float(x)*10) for x in self.total_layers.values()])
+                            self.update_pulling_progress_signal.emit(steps)
+                    except Exception as e:
+                        problem_attempts += 1
+                        self.main_gui.logger.error(f"Error pulling the container: {e}")
+                        self.main_gui.logger.info(f"Trying to modify ~/.docker/config.json - (attempt {problem_attempts})")
 
-                    # Attempt 1: trying to change the values of "credsStore" and some possible typos as documented in 
-                    # the issue: https://github.com/docker/for-mac/issues/3785#issuecomment-518328553
-                    if problem_attempts == 1:
-                        try:
-                            with open(Path.home() / ".docker" / "config.json", "r") as jsonFile:
-                                data = json.load(jsonFile)
-                                json_orig_data = data.copy()
+                        # Attempt 1: trying to change the values of "credsStore" and some possible typos as documented in 
+                        # the issue: https://github.com/docker/for-mac/issues/3785#issuecomment-518328553
+                        if problem_attempts == 1:
+                            try:
+                                with open(Path.home() / ".docker" / "config.json", "r") as jsonFile:
+                                    data = json.load(jsonFile)
+                                    json_orig_data = data.copy()
 
-                            # Possible typo
-                            if "credSstore" in data:
-                                val = data["credSstore"] 
-                                del data["credSstore"] 
-                                data["credsStore"] = val
+                                # Possible typo
+                                if "credSstore" in data:
+                                    val = data["credSstore"] 
+                                    del data["credSstore"] 
+                                    data["credsStore"] = val
 
-                            # Change credsStore value
-                            if "credsStore" in data:
-                                val = data["credsStore"] 
-                                data["credsStore"] = "osxkeychain" if "desktop" in val else "desktop"
-                        
-                            with open(Path.home() / ".docker" / "config.json", "w") as jsonFile:
-                                json.dump(data, jsonFile, indent=4)
-                        except Exception as e:
-                            self.main_gui.logger.error(f"Error modifying ~/.docker/config.json file (attempt 1): {e}")
+                                # Change credsStore value
+                                if "credsStore" in data:
+                                    val = data["credsStore"] 
+                                    data["credsStore"] = "osxkeychain" if "desktop" in val else "desktop"
+                            
+                                with open(Path.home() / ".docker" / "config.json", "w") as jsonFile:
+                                    json.dump(data, jsonFile, indent=4)
+                            except Exception as e:
+                                self.main_gui.logger.error(f"Error modifying ~/.docker/config.json file (attempt 1): {e}")
 
-                    # Attempt 2: remove "credsStore" key
-                    elif problem_attempts == 2:
-                        try:
-                            with open(Path.home() / ".docker" / "config.json", "r") as jsonFile:
-                                data = json.load(jsonFile)
+                        # Attempt 2: remove "credsStore" key
+                        elif problem_attempts == 2:
+                            try:
+                                with open(Path.home() / ".docker" / "config.json", "r") as jsonFile:
+                                    data = json.load(jsonFile)
 
-                            # Delete credsStore directly
-                            if "credsStore" in data:
-                                del data["credsStore"] 
-                        
-                            with open(Path.home() / ".docker" / "config.json", "w") as jsonFile:
-                                json.dump(data, jsonFile, indent=4)
+                                # Delete credsStore directly
+                                if "credsStore" in data:
+                                    del data["credsStore"] 
+                            
+                                with open(Path.home() / ".docker" / "config.json", "w") as jsonFile:
+                                    json.dump(data, jsonFile, indent=4)
 
-                        except Exception as e:
-                            self.main_gui.logger.error(f"Error modifying ~/.docker/config.json file (attempt 2): {e}")
+                            except Exception as e:
+                                self.main_gui.logger.error(f"Error modifying ~/.docker/config.json file (attempt 2): {e}")
 
-                    # Attempt 3: rename the file
-                    else:
-                        try:
-                            os.rename(Path.home() / ".docker" / "config.json", Path.home() / ".docker" / "config.json.backup")
-                        except Exception as e:
-                            self.main_gui.logger.error(f"Error modifying ~/.docker/config.json file (attempt 3): {e}")
-                else: 
-                    self.main_gui.logger.info(f"No errors pulling, continuing . . .")
-                    problem_attempts = 10 # break the loop 
+                        # Attempt 3: rename the file
+                        else:
+                            try:
+                                os.rename(Path.home() / ".docker" / "config.json", Path.home() / ".docker" / "config.json.backup")
+                            except Exception as e:
+                                self.main_gui.logger.error(f"Error modifying ~/.docker/config.json file (attempt 3): {e}")
+                    else: 
+                        self.main_gui.logger.info(f"No errors pulling, continuing . . .")
+                        problem_attempts = 10 # break the loop 
 
-            # Revert configuration ~/.docker/config.json configuration
-            if json_orig_data is not None:
-                if os.path.exists(Path.home() / ".docker" / "config.json.backup"):
-                    os.rename(Path.home() / ".docker" / "config.json.backup", Path.home() / ".docker" / "config.json")
-                with open(Path.home() / ".docker" / "config.json", "w") as jsonFile:
-                    json.dump(json_orig_data, jsonFile, indent=4)
+                # Revert configuration ~/.docker/config.json configuration
+                if json_orig_data is not None:
+                    if os.path.exists(Path.home() / ".docker" / "config.json.backup"):
+                        os.rename(Path.home() / ".docker" / "config.json.backup", Path.home() / ".docker" / "config.json")
+                    with open(Path.home() / ".docker" / "config.json", "w") as jsonFile:
+                        json.dump(json_orig_data, jsonFile, indent=4)
 
             self.update_pulling_signal.emit(1)     
 
@@ -369,7 +374,7 @@ class run_worker(QObject):
 
             dist_backend = "gloo" if self.windows_os else "nccl"
             command = ["--config", "/BiaPy_files/input.yaml", "--result_dir", "{}".format(self.output_folder_in_container),
-                "--name", "{}".format(jobname), "--run_id", "1", "--dist_backend", f"{dist_backend}"]   
+                "--name", "{}".format(jobname), "--run_id", "1", "--dist_backend", f"{dist_backend}"]
             gpus = " "
             if self.use_gpu:
                 gpus = self.main_gui.ui.gpu_input.currentData()
@@ -398,6 +403,9 @@ class run_worker(QObject):
             # Docker mount points 
             volumes = {}
             volumes[real_cfg_input] = {"bind": "/BiaPy_files/input.yaml", "mode": "ro"}
+            # To debug with local BiaPy copy 
+            # volumes["/data/dfranco/BiaPy"] = {"bind": "/installations/BiaPy", "mode": "ro"}
+            volumes[str(Path.home())] = {"bind": "/home/user", "mode": "rw"} # Bind user's home into /home/user
             volumes[self.output_folder_in_host] = {"bind": self.output_folder_in_container, "mode": "rw"}
             paths = []
             paths.append(self.output_folder_in_container)
