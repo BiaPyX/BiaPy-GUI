@@ -3068,7 +3068,7 @@ class Ui_MainWindow(object):
         self.train_scrollArea.setFont(font)
         self.train_scrollArea.setStyleSheet(u"")
         self.train_scrollArea.setFrameShape(QFrame.NoFrame)
-        self.train_scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.train_scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
         self.train_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
@@ -8548,7 +8548,7 @@ class Ui_MainWindow(object):
 
         self.frame_3 = QFrame(self.scrollAreaWidgetContents_3)
         self.frame_3.setObjectName(u"frame_3")
-        self.frame_3.setMaximumSize(QSize(900, 16777215))
+        self.frame_3.setMaximumSize(QSize(16777215, 16777215))
         self.frame_3.setFont(font)
         self.frame_3.setStyleSheet(u"background: rgb(246,246,246);\n"
 "")
@@ -8985,7 +8985,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 895, 100))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 929, 326))
         self.gridLayout_17 = QGridLayout(self.scrollAreaWidgetContents_4)
         self.gridLayout_17.setObjectName(u"gridLayout_17")
         self.verticalSpacer_9 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -14058,7 +14058,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(2)
         self.wizard_main_frame.setCurrentIndex(0)
         self.stackedWidget_create_yaml_frame.setCurrentIndex(2)
         self.train_tab_widget.setCurrentIndex(0)

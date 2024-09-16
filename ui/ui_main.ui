@@ -1401,7 +1401,7 @@ QPushButton:pressed {
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>1</number>
+                <number>2</number>
                </property>
                <widget class="QWidget" name="page_home">
                 <property name="styleSheet">
@@ -7747,7 +7747,7 @@ QPushButton:pressed {
                                 <enum>QFrame::NoFrame</enum>
                                </property>
                                <property name="horizontalScrollBarPolicy">
-                                <enum>Qt::ScrollBarAlwaysOff</enum>
+                                <enum>Qt::ScrollBarAsNeeded</enum>
                                </property>
                                <property name="widgetResizable">
                                 <bool>true</bool>
@@ -23500,7 +23500,7 @@ p, li { white-space: pre-wrap; }
                                   <widget class="QFrame" name="frame_3">
                                    <property name="maximumSize">
                                     <size>
-                                     <width>900</width>
+                                     <width>16777215</width>
                                      <height>16777215</height>
                                     </size>
                                    </property>
@@ -24756,8 +24756,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>895</width>
-                                         <height>100</height>
+                                         <width>929</width>
+                                         <height>326</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_17">
