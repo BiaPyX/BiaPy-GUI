@@ -405,9 +405,9 @@ def eval_wizard_answer(main_window):
         
         # Remember current answer
         if main_window.ui.wizard_question_answer_frame.isVisible():
+            changed_answer = False
             if main_window.ui.wizard_question_answer.currentIndex() != -1:
-                mark_as_answered = True
-                changed_answer = False
+                mark_as_answered = True    
                 if main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] != main_window.ui.wizard_question_answer.currentIndex():
                     main_window.cfg.settings["wizard_question_answered_index"][main_window.cfg.settings['wizard_question_index']] = main_window.ui.wizard_question_answer.currentIndex()
                     changed_answer = True 

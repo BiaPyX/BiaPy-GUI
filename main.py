@@ -3,7 +3,7 @@ import sys
 import tempfile
 import logging
 import traceback
-
+from typing import Optional
 from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtWidgets import *
 from PySide2.QtCore import *
@@ -633,7 +633,26 @@ class MainWindow(QMainWindow):
             "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__LABEL", "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__INFO",
             "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__INPUT", "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__LABEL",
             "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INFO", "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INPUT"]))
-        
+                
+        # Info icons
+        info_icon = QIcon(self.cfg.settings['info_image'])
+        def inspect_all_widgets(main_widget):
+            for widget in main_widget.children():
+                if isinstance(widget, QPushButton):
+                    if "_info" in widget.objectName().lower():
+                        # Set info icon
+                        widget.setIcon(info_icon)
+                        widget.setIconSize(QSize(30,30))
+                        # Set instant tooltip
+                        widget.clicked[bool].connect(lambda checked, a=widget.objectName(): self.showInstantToolTip(a))
+
+                if isinstance(widget, QFrame) or isinstance(widget, QStackedWidget) or isinstance(widget, QWidget):
+                    inspect_all_widgets(widget)
+
+        inspect_all_widgets(self.ui.page_create_yaml)
+        inspect_all_widgets(self.ui.page_run_biapy)
+        inspect_all_widgets(self.ui.wizard_start_page_paths_frame)
+
         # Run page buttons 
         self.ui.select_yaml_name_label.textChanged.connect(lambda: mark_syntax_error(self, "select_yaml_name_label", ["empty"]))                        
         self.ui.examine_yaml_bn.clicked.connect(lambda: examine(self, "select_yaml_name_label"))
@@ -952,7 +971,16 @@ class MainWindow(QMainWindow):
         if sha is not None and vtag is not None and vtag != self.cfg.settings['biapy_gui_version']:
             self.dialog_exec("There is a new version of BiaPy's graphical user interface available. Please, "
                 "download it <a href='https://biapyx.github.io'>here</a>", reason="inform_user")
- 
+    
+    def showInstantToolTip(self, gui_widget_name):
+        """
+        Shows the tooTip of a widget.
+        """
+        QToolTip.showText(
+            QtGui.QCursor.pos(),
+            getattr(self.ui, gui_widget_name).toolTip(),
+            )
+        
 def center_window(widget, geometry):
     window = widget.window()
     window.setGeometry(
@@ -963,7 +991,7 @@ def center_window(widget, geometry):
             geometry,
         ),
     )
-        
+   
 if __name__ == "__main__":
     window = None
 

@@ -95,7 +95,12 @@ class Ui_model_card_carrousel_dialog(object):
 
         self.label = QLabel(self.centralwidget)
         self.label.setObjectName(u"label")
-        self.label.setFont(font)
+        font1 = QFont()
+        font1.setFamily(u"DejaVu Math TeX Gyre")
+        font1.setPointSize(12)
+        font1.setBold(True)
+        font1.setWeight(75)
+        self.label.setFont(font1)
 
         self.verticalLayout_2.addWidget(self.label, 0, Qt.AlignHCenter)
 
@@ -115,7 +120,7 @@ class Ui_model_card_carrousel_dialog(object):
         self.model_carrousel_scrollarea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 838, 361))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 838, 359))
         self.verticalLayout_6 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.model_carrousel_scrollarea.setWidget(self.scrollAreaWidgetContents)

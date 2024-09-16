@@ -91,10 +91,6 @@ class Ui_MainWindow(object):
         self.biapy_logo_label.setMinimumSize(QSize(0, 0))
         self.biapy_logo_label.setMaximumSize(QSize(180, 180))
         self.biapy_logo_label.setFont(font)
-        self.biapy_logo_label.setStyleSheet(u"QLabel {\n"
-"color: white;\n"
-"background-color:rgba(0, 0, 0, 0);\n"
-"}")
         self.biapy_logo_label.setLineWidth(0)
         self.biapy_logo_label.setPixmap(QPixmap(u"images/superminimal_ark_biapy2.png"))
         self.biapy_logo_label.setScaledContents(True)
@@ -1119,74 +1115,68 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_53.addWidget(self.frame_68)
 
-        self.frame_80 = QFrame(self.frame_67)
-        self.frame_80.setObjectName(u"frame_80")
-        self.frame_80.setMinimumSize(QSize(0, 0))
-        self.frame_80.setFrameShape(QFrame.NoFrame)
-        self.frame_80.setFrameShadow(QFrame.Raised)
-        self.gridLayout_80 = QGridLayout(self.frame_80)
+        self.wizard_start_page_paths_frame = QFrame(self.frame_67)
+        self.wizard_start_page_paths_frame.setObjectName(u"wizard_start_page_paths_frame")
+        self.wizard_start_page_paths_frame.setMinimumSize(QSize(0, 0))
+        self.wizard_start_page_paths_frame.setFrameShape(QFrame.NoFrame)
+        self.wizard_start_page_paths_frame.setFrameShadow(QFrame.Raised)
+        self.gridLayout_80 = QGridLayout(self.wizard_start_page_paths_frame)
         self.gridLayout_80.setObjectName(u"gridLayout_80")
-        self.goptions_browse_yaml_path_info_2 = QLabel(self.frame_80)
-        self.goptions_browse_yaml_path_info_2.setObjectName(u"goptions_browse_yaml_path_info_2")
-        self.goptions_browse_yaml_path_info_2.setMinimumSize(QSize(30, 30))
-        self.goptions_browse_yaml_path_info_2.setMaximumSize(QSize(30, 30))
-        self.goptions_browse_yaml_path_info_2.setStyleSheet(u"")
-        self.goptions_browse_yaml_path_info_2.setScaledContents(True)
+        self.wizard_browse_yaml_path_info = QPushButton(self.wizard_start_page_paths_frame)
+        self.wizard_browse_yaml_path_info.setObjectName(u"wizard_browse_yaml_path_info")
+        self.wizard_browse_yaml_path_info.setMinimumSize(QSize(30, 30))
+        self.wizard_browse_yaml_path_info.setMaximumSize(QSize(30, 30))
+        self.wizard_browse_yaml_path_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
-        self.gridLayout_80.addWidget(self.goptions_browse_yaml_path_info_2, 3, 3, 1, 1)
+        self.gridLayout_80.addWidget(self.wizard_browse_yaml_path_info, 3, 3, 1, 1)
 
-        self.PROBLEM__NDIM__INFO_2 = QLabel(self.frame_80)
-        self.PROBLEM__NDIM__INFO_2.setObjectName(u"PROBLEM__NDIM__INFO_2")
-        self.PROBLEM__NDIM__INFO_2.setMinimumSize(QSize(30, 30))
-        self.PROBLEM__NDIM__INFO_2.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__NDIM__INFO_2.setStyleSheet(u"")
-        self.PROBLEM__NDIM__INFO_2.setScaledContents(True)
+        self.WIZARD_PROBLEM__NDIM__INFO = QPushButton(self.wizard_start_page_paths_frame)
+        self.WIZARD_PROBLEM__NDIM__INFO.setObjectName(u"WIZARD_PROBLEM__NDIM__INFO")
+        self.WIZARD_PROBLEM__NDIM__INFO.setMinimumSize(QSize(30, 30))
+        self.WIZARD_PROBLEM__NDIM__INFO.setMaximumSize(QSize(30, 30))
+        self.WIZARD_PROBLEM__NDIM__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
-        self.gridLayout_80.addWidget(self.PROBLEM__NDIM__INFO_2, 0, 3, 1, 1)
+        self.gridLayout_80.addWidget(self.WIZARD_PROBLEM__NDIM__INFO, 0, 3, 1, 1)
 
-        self.wizard_browse_yaml_path_bn = QPushButton(self.frame_80)
+        self.wizard_browse_yaml_path_bn = QPushButton(self.wizard_start_page_paths_frame)
         self.wizard_browse_yaml_path_bn.setObjectName(u"wizard_browse_yaml_path_bn")
         self.wizard_browse_yaml_path_bn.setMaximumSize(QSize(130, 16777215))
         self.wizard_browse_yaml_path_bn.setFont(font)
 
         self.gridLayout_80.addWidget(self.wizard_browse_yaml_path_bn, 0, 6, 1, 1)
 
-        self.wizard_browse_yaml_path_input = QLineEdit(self.frame_80)
-        self.wizard_browse_yaml_path_input.setObjectName(u"wizard_browse_yaml_path_input")
-        self.wizard_browse_yaml_path_input.setMinimumSize(QSize(500, 30))
-        self.wizard_browse_yaml_path_input.setMaximumSize(QSize(500, 30))
-        self.wizard_browse_yaml_path_input.setFont(font)
-
-        self.gridLayout_80.addWidget(self.wizard_browse_yaml_path_input, 0, 5, 1, 1)
-
-        self.horizontalSpacer_87 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.gridLayout_80.addItem(self.horizontalSpacer_87, 0, 7, 1, 1)
-
-        self.goptions_yaml_name_info_2 = QLabel(self.frame_80)
-        self.goptions_yaml_name_info_2.setObjectName(u"goptions_yaml_name_info_2")
-        self.goptions_yaml_name_info_2.setMinimumSize(QSize(30, 30))
-        self.goptions_yaml_name_info_2.setMaximumSize(QSize(30, 30))
-        self.goptions_yaml_name_info_2.setStyleSheet(u"")
-        self.goptions_yaml_name_info_2.setScaledContents(True)
-
-        self.gridLayout_80.addWidget(self.goptions_yaml_name_info_2, 5, 3, 1, 1)
-
-        self.wizard_browse_yaml_path_label = QLabel(self.frame_80)
+        self.wizard_browse_yaml_path_label = QLabel(self.wizard_start_page_paths_frame)
         self.wizard_browse_yaml_path_label.setObjectName(u"wizard_browse_yaml_path_label")
         self.wizard_browse_yaml_path_label.setMaximumSize(QSize(250, 35))
         self.wizard_browse_yaml_path_label.setFont(font)
 
         self.gridLayout_80.addWidget(self.wizard_browse_yaml_path_label, 0, 1, 1, 1)
 
-        self.wizard_yaml_name_label = QLabel(self.frame_80)
+        self.horizontalSpacer_87 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_80.addItem(self.horizontalSpacer_87, 0, 7, 1, 1)
+
+        self.wizard_browse_yaml_path_input = QLineEdit(self.wizard_start_page_paths_frame)
+        self.wizard_browse_yaml_path_input.setObjectName(u"wizard_browse_yaml_path_input")
+        self.wizard_browse_yaml_path_input.setMinimumSize(QSize(500, 30))
+        self.wizard_browse_yaml_path_input.setMaximumSize(QSize(500, 30))
+        self.wizard_browse_yaml_path_input.setFont(font)
+        self.wizard_browse_yaml_path_input.setReadOnly(True)
+
+        self.gridLayout_80.addWidget(self.wizard_browse_yaml_path_input, 0, 5, 1, 1)
+
+        self.wizard_yaml_name_label = QLabel(self.wizard_start_page_paths_frame)
         self.wizard_yaml_name_label.setObjectName(u"wizard_yaml_name_label")
         self.wizard_yaml_name_label.setMaximumSize(QSize(250, 35))
         self.wizard_yaml_name_label.setFont(font)
 
         self.gridLayout_80.addWidget(self.wizard_yaml_name_label, 3, 1, 1, 1)
 
-        self.wizard_yaml_name_input = QLineEdit(self.frame_80)
+        self.wizard_yaml_name_input = QLineEdit(self.wizard_start_page_paths_frame)
         self.wizard_yaml_name_input.setObjectName(u"wizard_yaml_name_input")
         self.wizard_yaml_name_input.setMinimumSize(QSize(0, 30))
         self.wizard_yaml_name_input.setMaximumSize(QSize(500, 30))
@@ -1195,7 +1185,7 @@ class Ui_MainWindow(object):
         self.gridLayout_80.addWidget(self.wizard_yaml_name_input, 3, 5, 1, 1)
 
 
-        self.verticalLayout_53.addWidget(self.frame_80)
+        self.verticalLayout_53.addWidget(self.wizard_start_page_paths_frame)
 
         self.frame_69 = QFrame(self.frame_67)
         self.frame_69.setObjectName(u"frame_69")
@@ -2551,12 +2541,14 @@ class Ui_MainWindow(object):
         self.train_disable_checkpoint_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_26 = QGridLayout(self.train_disable_checkpoint_frame)
         self.gridLayout_26.setObjectName(u"gridLayout_26")
-        self.LOAD_PRETRAINED_MODEL__INFO = QLabel(self.train_disable_checkpoint_frame)
+        self.LOAD_PRETRAINED_MODEL__INFO = QPushButton(self.train_disable_checkpoint_frame)
         self.LOAD_PRETRAINED_MODEL__INFO.setObjectName(u"LOAD_PRETRAINED_MODEL__INFO")
         self.LOAD_PRETRAINED_MODEL__INFO.setMinimumSize(QSize(30, 30))
         self.LOAD_PRETRAINED_MODEL__INFO.setMaximumSize(QSize(30, 30))
         self.LOAD_PRETRAINED_MODEL__INFO.setFont(font)
-        self.LOAD_PRETRAINED_MODEL__INFO.setScaledContents(True)
+        self.LOAD_PRETRAINED_MODEL__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_26.addWidget(self.LOAD_PRETRAINED_MODEL__INFO, 1, 2, 1, 1)
 
@@ -2570,12 +2562,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_26.addWidget(self.LOAD_PRETRAINED_MODEL__INPUT, 1, 3, 1, 1)
 
-        self.MODEL__SOURCE__INFO = QLabel(self.train_disable_checkpoint_frame)
+        self.MODEL__SOURCE__INFO = QPushButton(self.train_disable_checkpoint_frame)
         self.MODEL__SOURCE__INFO.setObjectName(u"MODEL__SOURCE__INFO")
         self.MODEL__SOURCE__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__SOURCE__INFO.setMaximumSize(QSize(30, 30))
         self.MODEL__SOURCE__INFO.setFont(font)
-        self.MODEL__SOURCE__INFO.setScaledContents(True)
+        self.MODEL__SOURCE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_26.addWidget(self.MODEL__SOURCE__INFO, 2, 2, 1, 1)
 
@@ -2624,12 +2618,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_26.addWidget(self.checkpoint_file_path_browse_bn, 4, 4, 1, 1)
 
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO = QLabel(self.train_disable_checkpoint_frame)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO = QPushButton(self.train_disable_checkpoint_frame)
         self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__INFO")
         self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setMaximumSize(QSize(30, 30))
         self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setFont(font)
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setScaledContents(True)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__INFO, 5, 2, 1, 1)
 
@@ -2648,12 +2644,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_26.addWidget(self.checkpoint_file_path_browse_label, 4, 1, 1, 1)
 
-        self.PATHS__CHECKPOINT_FILE__INFO = QLabel(self.train_disable_checkpoint_frame)
+        self.PATHS__CHECKPOINT_FILE__INFO = QPushButton(self.train_disable_checkpoint_frame)
         self.PATHS__CHECKPOINT_FILE__INFO.setObjectName(u"PATHS__CHECKPOINT_FILE__INFO")
         self.PATHS__CHECKPOINT_FILE__INFO.setMinimumSize(QSize(30, 30))
         self.PATHS__CHECKPOINT_FILE__INFO.setMaximumSize(QSize(30, 30))
-        self.PATHS__CHECKPOINT_FILE__INFO.setStyleSheet(u"")
-        self.PATHS__CHECKPOINT_FILE__INFO.setScaledContents(True)
+        self.PATHS__CHECKPOINT_FILE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_26.addWidget(self.PATHS__CHECKPOINT_FILE__INFO, 4, 2, 1, 1)
 
@@ -2770,20 +2767,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_5.addItem(self.horizontalSpacer_2, 1, 3, 1, 1)
 
-        self.SYSTEM__NUM_WORKERS__INFO = QLabel(self.frame_2)
+        self.SYSTEM__NUM_WORKERS__INFO = QPushButton(self.frame_2)
         self.SYSTEM__NUM_WORKERS__INFO.setObjectName(u"SYSTEM__NUM_WORKERS__INFO")
         self.SYSTEM__NUM_WORKERS__INFO.setMinimumSize(QSize(30, 30))
         self.SYSTEM__NUM_WORKERS__INFO.setMaximumSize(QSize(30, 30))
-        self.SYSTEM__NUM_WORKERS__INFO.setStyleSheet(u"")
-        self.SYSTEM__NUM_WORKERS__INFO.setScaledContents(True)
+        self.SYSTEM__NUM_WORKERS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_5.addWidget(self.SYSTEM__NUM_WORKERS__INFO, 1, 1, 1, 1)
 
-        self.SYSTEM__SEED__INFO = QLabel(self.frame_2)
+        self.SYSTEM__SEED__INFO = QPushButton(self.frame_2)
         self.SYSTEM__SEED__INFO.setObjectName(u"SYSTEM__SEED__INFO")
         self.SYSTEM__SEED__INFO.setMinimumSize(QSize(30, 30))
         self.SYSTEM__SEED__INFO.setMaximumSize(QSize(30, 30))
-        self.SYSTEM__SEED__INFO.setScaledContents(True)
+        self.SYSTEM__SEED__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_5.addWidget(self.SYSTEM__SEED__INFO, 3, 1, 1, 1)
 
@@ -2793,12 +2793,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_5.addWidget(self.SYSTEM__NUM_CPUS__LABEL, 0, 0, 1, 1)
 
-        self.SYSTEM__NUM_CPUS__INFO = QLabel(self.frame_2)
+        self.SYSTEM__NUM_CPUS__INFO = QPushButton(self.frame_2)
         self.SYSTEM__NUM_CPUS__INFO.setObjectName(u"SYSTEM__NUM_CPUS__INFO")
         self.SYSTEM__NUM_CPUS__INFO.setMinimumSize(QSize(30, 30))
         self.SYSTEM__NUM_CPUS__INFO.setMaximumSize(QSize(30, 30))
         self.SYSTEM__NUM_CPUS__INFO.setFont(font)
-        self.SYSTEM__NUM_CPUS__INFO.setScaledContents(True)
+        self.SYSTEM__NUM_CPUS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_5.addWidget(self.SYSTEM__NUM_CPUS__INFO, 0, 1, 1, 1)
 
@@ -2857,19 +2859,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_24.addWidget(self.label_38, 3, 0, 1, 1)
 
-        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO = QLabel(self.checkpoint_loading_opt_frame)
+        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO = QPushButton(self.checkpoint_loading_opt_frame)
         self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO.setObjectName(u"MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO")
         self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO.setScaledContents(True)
+        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_24.addWidget(self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO, 0, 1, 1, 1)
 
-        self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO = QLabel(self.checkpoint_loading_opt_frame)
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO = QPushButton(self.checkpoint_loading_opt_frame)
         self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setObjectName(u"MODEL__LOAD_CHECKPOINT_EPOCH__INFO")
         self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setScaledContents(True)
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_24.addWidget(self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO, 3, 1, 1, 1)
 
@@ -2943,30 +2949,34 @@ class Ui_MainWindow(object):
 
         self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_label, 3, 1, 1, 2)
 
-        self.goptions_browse_yaml_path_info = QLabel(self.frame_21)
+        self.goptions_browse_yaml_path_info = QPushButton(self.frame_21)
         self.goptions_browse_yaml_path_info.setObjectName(u"goptions_browse_yaml_path_info")
         self.goptions_browse_yaml_path_info.setMinimumSize(QSize(30, 30))
         self.goptions_browse_yaml_path_info.setMaximumSize(QSize(30, 30))
-        self.goptions_browse_yaml_path_info.setStyleSheet(u"")
-        self.goptions_browse_yaml_path_info.setScaledContents(True)
+        self.goptions_browse_yaml_path_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+        self.goptions_browse_yaml_path_info.setProperty("scaledContents", True)
 
         self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_info, 3, 3, 1, 1)
 
-        self.PROBLEM__NDIM__INFO = QLabel(self.frame_21)
+        self.PROBLEM__NDIM__INFO = QPushButton(self.frame_21)
         self.PROBLEM__NDIM__INFO.setObjectName(u"PROBLEM__NDIM__INFO")
         self.PROBLEM__NDIM__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__NDIM__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__NDIM__INFO.setStyleSheet(u"")
-        self.PROBLEM__NDIM__INFO.setScaledContents(True)
+        self.PROBLEM__NDIM__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_27.addWidget(self.PROBLEM__NDIM__INFO, 0, 3, 1, 1)
 
-        self.goptions_yaml_name_info = QLabel(self.frame_21)
+        self.goptions_yaml_name_info = QPushButton(self.frame_21)
         self.goptions_yaml_name_info.setObjectName(u"goptions_yaml_name_info")
         self.goptions_yaml_name_info.setMinimumSize(QSize(30, 30))
         self.goptions_yaml_name_info.setMaximumSize(QSize(30, 30))
-        self.goptions_yaml_name_info.setStyleSheet(u"")
-        self.goptions_yaml_name_info.setScaledContents(True)
+        self.goptions_yaml_name_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_27.addWidget(self.goptions_yaml_name_info, 5, 3, 1, 1)
 
@@ -3096,15 +3106,19 @@ class Ui_MainWindow(object):
         self.convnext_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_82 = QGridLayout(self.convnext_frame)
         self.gridLayout_82.setObjectName(u"gridLayout_82")
-        self.MODEL__CONVNEXT_LAYERS__INFO = QLabel(self.convnext_frame)
+        self.MODEL__CONVNEXT_LAYERS__INFO = QPushButton(self.convnext_frame)
         self.MODEL__CONVNEXT_LAYERS__INFO.setObjectName(u"MODEL__CONVNEXT_LAYERS__INFO")
-        self.MODEL__CONVNEXT_LAYERS__INFO.setScaledContents(True)
+        self.MODEL__CONVNEXT_LAYERS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_LAYERS__INFO, 0, 1, 1, 1)
 
-        self.MODEL__CONVNEXT_LAYER_SCALE__INFO = QLabel(self.convnext_frame)
+        self.MODEL__CONVNEXT_LAYER_SCALE__INFO = QPushButton(self.convnext_frame)
         self.MODEL__CONVNEXT_LAYER_SCALE__INFO.setObjectName(u"MODEL__CONVNEXT_LAYER_SCALE__INFO")
-        self.MODEL__CONVNEXT_LAYER_SCALE__INFO.setScaledContents(True)
+        self.MODEL__CONVNEXT_LAYER_SCALE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_LAYER_SCALE__INFO, 2, 1, 1, 1)
 
@@ -3114,11 +3128,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_LAYER_SCALE__LABEL, 2, 0, 1, 1)
 
-        self.MODEL__CONVNEXT_STEM_K_SIZE__INFO = QLabel(self.convnext_frame)
+        self.MODEL__CONVNEXT_STEM_K_SIZE__INFO = QPushButton(self.convnext_frame)
         self.MODEL__CONVNEXT_STEM_K_SIZE__INFO.setObjectName(u"MODEL__CONVNEXT_STEM_K_SIZE__INFO")
         self.MODEL__CONVNEXT_STEM_K_SIZE__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__CONVNEXT_STEM_K_SIZE__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__CONVNEXT_STEM_K_SIZE__INFO.setScaledContents(True)
+        self.MODEL__CONVNEXT_STEM_K_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_STEM_K_SIZE__INFO, 3, 1, 1, 1)
 
@@ -3136,9 +3152,11 @@ class Ui_MainWindow(object):
 
         self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_SD_PROB__LABEL, 1, 0, 1, 1)
 
-        self.MODEL__CONVNEXT_SD_PROB__INFO = QLabel(self.convnext_frame)
+        self.MODEL__CONVNEXT_SD_PROB__INFO = QPushButton(self.convnext_frame)
         self.MODEL__CONVNEXT_SD_PROB__INFO.setObjectName(u"MODEL__CONVNEXT_SD_PROB__INFO")
-        self.MODEL__CONVNEXT_SD_PROB__INFO.setScaledContents(True)
+        self.MODEL__CONVNEXT_SD_PROB__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_SD_PROB__INFO, 1, 1, 1, 1)
 
@@ -3202,11 +3220,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_15.addWidget(self.custom_std_label, 16, 1, 1, 1)
 
-        self.DATA__FORCE_RGB__INFO = QLabel(self.frame_14)
+        self.DATA__FORCE_RGB__INFO = QPushButton(self.frame_14)
         self.DATA__FORCE_RGB__INFO.setObjectName(u"DATA__FORCE_RGB__INFO")
         self.DATA__FORCE_RGB__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__FORCE_RGB__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__FORCE_RGB__INFO.setScaledContents(True)
+        self.DATA__FORCE_RGB__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_15.addWidget(self.DATA__FORCE_RGB__INFO, 18, 3, 1, 1)
 
@@ -3224,12 +3244,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_15.addWidget(self.label_7, 3, 1, 1, 2)
 
-        self.DATA__NORMALIZATION__PERC_UPPER__INFO = QLabel(self.frame_14)
+        self.DATA__NORMALIZATION__PERC_UPPER__INFO = QPushButton(self.frame_14)
         self.DATA__NORMALIZATION__PERC_UPPER__INFO.setObjectName(u"DATA__NORMALIZATION__PERC_UPPER__INFO")
         self.DATA__NORMALIZATION__PERC_UPPER__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__NORMALIZATION__PERC_UPPER__INFO.setMaximumSize(QSize(30, 30))
         self.DATA__NORMALIZATION__PERC_UPPER__INFO.setFont(font8)
-        self.DATA__NORMALIZATION__PERC_UPPER__INFO.setScaledContents(True)
+        self.DATA__NORMALIZATION__PERC_UPPER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__PERC_UPPER__INFO, 11, 3, 1, 1)
 
@@ -3260,19 +3282,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_15.addWidget(self.DATA__CHECK_GENERATORS__INPUT, 17, 4, 1, 1)
 
-        self.DATA__NORMALIZATION__CUSTOM_STD__INFO = QLabel(self.frame_14)
+        self.DATA__NORMALIZATION__CUSTOM_STD__INFO = QPushButton(self.frame_14)
         self.DATA__NORMALIZATION__CUSTOM_STD__INFO.setObjectName(u"DATA__NORMALIZATION__CUSTOM_STD__INFO")
         self.DATA__NORMALIZATION__CUSTOM_STD__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__NORMALIZATION__CUSTOM_STD__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__NORMALIZATION__CUSTOM_STD__INFO.setScaledContents(True)
+        self.DATA__NORMALIZATION__CUSTOM_STD__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__CUSTOM_STD__INFO, 16, 3, 1, 1)
 
-        self.DATA__EXTRACT_RANDOM_PATCH__INFO = QLabel(self.frame_14)
+        self.DATA__EXTRACT_RANDOM_PATCH__INFO = QPushButton(self.frame_14)
         self.DATA__EXTRACT_RANDOM_PATCH__INFO.setObjectName(u"DATA__EXTRACT_RANDOM_PATCH__INFO")
         self.DATA__EXTRACT_RANDOM_PATCH__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__EXTRACT_RANDOM_PATCH__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__EXTRACT_RANDOM_PATCH__INFO.setScaledContents(True)
+        self.DATA__EXTRACT_RANDOM_PATCH__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_15.addWidget(self.DATA__EXTRACT_RANDOM_PATCH__INFO, 3, 3, 1, 1)
 
@@ -3292,12 +3318,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_15.addWidget(self.label_11, 4, 1, 1, 2)
 
-        self.DATA__NORMALIZATION__PERC_CLIP__INFO = QLabel(self.frame_14)
+        self.DATA__NORMALIZATION__PERC_CLIP__INFO = QPushButton(self.frame_14)
         self.DATA__NORMALIZATION__PERC_CLIP__INFO.setObjectName(u"DATA__NORMALIZATION__PERC_CLIP__INFO")
         self.DATA__NORMALIZATION__PERC_CLIP__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__NORMALIZATION__PERC_CLIP__INFO.setMaximumSize(QSize(30, 30))
         self.DATA__NORMALIZATION__PERC_CLIP__INFO.setFont(font8)
-        self.DATA__NORMALIZATION__PERC_CLIP__INFO.setScaledContents(True)
+        self.DATA__NORMALIZATION__PERC_CLIP__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__PERC_CLIP__INFO, 9, 3, 1, 1)
 
@@ -3315,19 +3343,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__PERC_CLIP__LABEL, 9, 1, 1, 1)
 
-        self.DATA__NORMALIZATION__CUSTOM_MEAN__INFO = QLabel(self.frame_14)
+        self.DATA__NORMALIZATION__CUSTOM_MEAN__INFO = QPushButton(self.frame_14)
         self.DATA__NORMALIZATION__CUSTOM_MEAN__INFO.setObjectName(u"DATA__NORMALIZATION__CUSTOM_MEAN__INFO")
         self.DATA__NORMALIZATION__CUSTOM_MEAN__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__NORMALIZATION__CUSTOM_MEAN__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__NORMALIZATION__CUSTOM_MEAN__INFO.setScaledContents(True)
+        self.DATA__NORMALIZATION__CUSTOM_MEAN__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__CUSTOM_MEAN__INFO, 15, 3, 1, 1)
 
-        self.DATA__NORMALIZATION__TYPE__INFO = QLabel(self.frame_14)
+        self.DATA__NORMALIZATION__TYPE__INFO = QPushButton(self.frame_14)
         self.DATA__NORMALIZATION__TYPE__INFO.setObjectName(u"DATA__NORMALIZATION__TYPE__INFO")
         self.DATA__NORMALIZATION__TYPE__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__NORMALIZATION__TYPE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__NORMALIZATION__TYPE__INFO.setScaledContents(True)
+        self.DATA__NORMALIZATION__TYPE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__TYPE__INFO, 12, 3, 1, 1)
 
@@ -3339,19 +3371,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__CUSTOM_MEAN__INPUT, 15, 4, 1, 1)
 
-        self.DATA__CHECK_GENERATORS__INFO = QLabel(self.frame_14)
+        self.DATA__CHECK_GENERATORS__INFO = QPushButton(self.frame_14)
         self.DATA__CHECK_GENERATORS__INFO.setObjectName(u"DATA__CHECK_GENERATORS__INFO")
         self.DATA__CHECK_GENERATORS__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__CHECK_GENERATORS__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__CHECK_GENERATORS__INFO.setScaledContents(True)
+        self.DATA__CHECK_GENERATORS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_15.addWidget(self.DATA__CHECK_GENERATORS__INFO, 17, 3, 1, 1)
 
-        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO = QLabel(self.frame_14)
+        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO = QPushButton(self.frame_14)
         self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO.setObjectName(u"DATA__REFLECT_TO_COMPLETE_SHAPE__INFO")
         self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO.setScaledContents(True)
+        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_15.addWidget(self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO, 4, 3, 1, 1)
 
@@ -3387,12 +3423,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__PERC_CLIP__INPUT, 9, 4, 1, 1)
 
-        self.DATA__NORMALIZATION__PERC_LOWER__INFO = QLabel(self.frame_14)
+        self.DATA__NORMALIZATION__PERC_LOWER__INFO = QPushButton(self.frame_14)
         self.DATA__NORMALIZATION__PERC_LOWER__INFO.setObjectName(u"DATA__NORMALIZATION__PERC_LOWER__INFO")
         self.DATA__NORMALIZATION__PERC_LOWER__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__NORMALIZATION__PERC_LOWER__INFO.setMaximumSize(QSize(30, 30))
         self.DATA__NORMALIZATION__PERC_LOWER__INFO.setFont(font8)
-        self.DATA__NORMALIZATION__PERC_LOWER__INFO.setScaledContents(True)
+        self.DATA__NORMALIZATION__PERC_LOWER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__PERC_LOWER__INFO, 10, 3, 1, 1)
 
@@ -3473,11 +3511,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_22.addWidget(self.MODEL__Z_DOWN__LABEL, 7, 0, 1, 1)
 
-        self.MODEL__ACTIVATION__INFO = QLabel(self.unet_model_like_frame)
+        self.MODEL__ACTIVATION__INFO = QPushButton(self.unet_model_like_frame)
         self.MODEL__ACTIVATION__INFO.setObjectName(u"MODEL__ACTIVATION__INFO")
         self.MODEL__ACTIVATION__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__ACTIVATION__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__ACTIVATION__INFO.setScaledContents(True)
+        self.MODEL__ACTIVATION__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_22.addWidget(self.MODEL__ACTIVATION__INFO, 5, 1, 1, 1)
 
@@ -3507,11 +3547,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_22.addWidget(self.label_39, 2, 0, 1, 1)
 
-        self.MODEL__FEATURE_MAPS__INFO = QLabel(self.unet_model_like_frame)
+        self.MODEL__FEATURE_MAPS__INFO = QPushButton(self.unet_model_like_frame)
         self.MODEL__FEATURE_MAPS__INFO.setObjectName(u"MODEL__FEATURE_MAPS__INFO")
         self.MODEL__FEATURE_MAPS__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__FEATURE_MAPS__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__FEATURE_MAPS__INFO.setScaledContents(True)
+        self.MODEL__FEATURE_MAPS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_22.addWidget(self.MODEL__FEATURE_MAPS__INFO, 0, 1, 1, 1)
 
@@ -3538,19 +3580,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_22.addWidget(self.MODEL__FEATURE_MAPS__INPUT, 0, 2, 1, 1)
 
-        self.MODEL__NORMALIZATION__INFO = QLabel(self.unet_model_like_frame)
+        self.MODEL__NORMALIZATION__INFO = QPushButton(self.unet_model_like_frame)
         self.MODEL__NORMALIZATION__INFO.setObjectName(u"MODEL__NORMALIZATION__INFO")
         self.MODEL__NORMALIZATION__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__NORMALIZATION__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__NORMALIZATION__INFO.setScaledContents(True)
+        self.MODEL__NORMALIZATION__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_22.addWidget(self.MODEL__NORMALIZATION__INFO, 2, 1, 1, 1)
 
-        self.MODEL__DROPOUT_VALUES__INFO = QLabel(self.unet_model_like_frame)
+        self.MODEL__DROPOUT_VALUES__INFO = QPushButton(self.unet_model_like_frame)
         self.MODEL__DROPOUT_VALUES__INFO.setObjectName(u"MODEL__DROPOUT_VALUES__INFO")
         self.MODEL__DROPOUT_VALUES__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__DROPOUT_VALUES__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__DROPOUT_VALUES__INFO.setScaledContents(True)
+        self.MODEL__DROPOUT_VALUES__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_22.addWidget(self.MODEL__DROPOUT_VALUES__INFO, 1, 1, 1, 1)
 
@@ -3561,19 +3607,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_22.addWidget(self.label_36, 0, 0, 1, 1)
 
-        self.MODEL__UPSAMPLE_LAYER__INFO = QLabel(self.unet_model_like_frame)
+        self.MODEL__UPSAMPLE_LAYER__INFO = QPushButton(self.unet_model_like_frame)
         self.MODEL__UPSAMPLE_LAYER__INFO.setObjectName(u"MODEL__UPSAMPLE_LAYER__INFO")
         self.MODEL__UPSAMPLE_LAYER__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__UPSAMPLE_LAYER__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__UPSAMPLE_LAYER__INFO.setScaledContents(True)
+        self.MODEL__UPSAMPLE_LAYER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_22.addWidget(self.MODEL__UPSAMPLE_LAYER__INFO, 4, 1, 1, 1)
 
-        self.MODEL__Z_DOWN__INFO = QLabel(self.unet_model_like_frame)
+        self.MODEL__Z_DOWN__INFO = QPushButton(self.unet_model_like_frame)
         self.MODEL__Z_DOWN__INFO.setObjectName(u"MODEL__Z_DOWN__INFO")
         self.MODEL__Z_DOWN__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__Z_DOWN__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__Z_DOWN__INFO.setScaledContents(True)
+        self.MODEL__Z_DOWN__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_22.addWidget(self.MODEL__Z_DOWN__INFO, 7, 1, 1, 1)
 
@@ -3609,11 +3659,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_22.addWidget(self.MODEL__DROPOUT_VALUES__INPUT, 1, 2, 1, 1)
 
-        self.MODEL__LAST_ACTIVATION__INFO = QLabel(self.unet_model_like_frame)
+        self.MODEL__LAST_ACTIVATION__INFO = QPushButton(self.unet_model_like_frame)
         self.MODEL__LAST_ACTIVATION__INFO.setObjectName(u"MODEL__LAST_ACTIVATION__INFO")
         self.MODEL__LAST_ACTIVATION__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__LAST_ACTIVATION__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__LAST_ACTIVATION__INFO.setScaledContents(True)
+        self.MODEL__LAST_ACTIVATION__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_22.addWidget(self.MODEL__LAST_ACTIVATION__INFO, 6, 1, 1, 1)
 
@@ -3655,11 +3707,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_22.addWidget(self.label_43, 4, 0, 1, 1)
 
-        self.MODEL__KERNEL_SIZE__INFO = QLabel(self.unet_model_like_frame)
+        self.MODEL__KERNEL_SIZE__INFO = QPushButton(self.unet_model_like_frame)
         self.MODEL__KERNEL_SIZE__INFO.setObjectName(u"MODEL__KERNEL_SIZE__INFO")
         self.MODEL__KERNEL_SIZE__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__KERNEL_SIZE__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__KERNEL_SIZE__INFO.setScaledContents(True)
+        self.MODEL__KERNEL_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_22.addWidget(self.MODEL__KERNEL_SIZE__INFO, 3, 1, 1, 1)
 
@@ -3669,21 +3723,25 @@ class Ui_MainWindow(object):
 
         self.gridLayout_22.addWidget(self.MODEL__LAGER_IO__LABEL, 9, 0, 1, 1)
 
-        self.MODEL__ISOTROPY__INFO = QLabel(self.unet_model_like_frame)
+        self.MODEL__ISOTROPY__INFO = QPushButton(self.unet_model_like_frame)
         self.MODEL__ISOTROPY__INFO.setObjectName(u"MODEL__ISOTROPY__INFO")
         self.MODEL__ISOTROPY__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__ISOTROPY__INFO.setMaximumSize(QSize(30, 30))
         self.MODEL__ISOTROPY__INFO.setFont(font)
-        self.MODEL__ISOTROPY__INFO.setScaledContents(True)
+        self.MODEL__ISOTROPY__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_22.addWidget(self.MODEL__ISOTROPY__INFO, 8, 1, 1, 1)
 
-        self.MODEL__LAGER_IO__INFO = QLabel(self.unet_model_like_frame)
+        self.MODEL__LAGER_IO__INFO = QPushButton(self.unet_model_like_frame)
         self.MODEL__LAGER_IO__INFO.setObjectName(u"MODEL__LAGER_IO__INFO")
         self.MODEL__LAGER_IO__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__LAGER_IO__INFO.setMaximumSize(QSize(30, 30))
         self.MODEL__LAGER_IO__INFO.setFont(font)
-        self.MODEL__LAGER_IO__INFO.setScaledContents(True)
+        self.MODEL__LAGER_IO__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_22.addWidget(self.MODEL__LAGER_IO__INFO, 9, 1, 1, 1)
 
@@ -3722,12 +3780,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addWidget(self.LOSS__CLASS_REBALANCE__LABEL, 3, 0, 1, 1)
 
-        self.LOSS__CLASS_REBALANCE__INFO = QLabel(self.frame_28)
+        self.LOSS__CLASS_REBALANCE__INFO = QPushButton(self.frame_28)
         self.LOSS__CLASS_REBALANCE__INFO.setObjectName(u"LOSS__CLASS_REBALANCE__INFO")
         self.LOSS__CLASS_REBALANCE__INFO.setMinimumSize(QSize(30, 30))
         self.LOSS__CLASS_REBALANCE__INFO.setMaximumSize(QSize(30, 30))
         self.LOSS__CLASS_REBALANCE__INFO.setFont(font)
-        self.LOSS__CLASS_REBALANCE__INFO.setScaledContents(True)
+        self.LOSS__CLASS_REBALANCE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_29.addWidget(self.LOSS__CLASS_REBALANCE__INFO, 3, 1, 1, 1)
 
@@ -3755,12 +3815,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addWidget(self.LOSS__WEIGHTS__LABEL, 2, 0, 1, 1)
 
-        self.LOSS__WEIGHTS__INFO = QLabel(self.frame_28)
+        self.LOSS__WEIGHTS__INFO = QPushButton(self.frame_28)
         self.LOSS__WEIGHTS__INFO.setObjectName(u"LOSS__WEIGHTS__INFO")
         self.LOSS__WEIGHTS__INFO.setMinimumSize(QSize(30, 30))
         self.LOSS__WEIGHTS__INFO.setMaximumSize(QSize(30, 30))
         self.LOSS__WEIGHTS__INFO.setFont(font)
-        self.LOSS__WEIGHTS__INFO.setScaledContents(True)
+        self.LOSS__WEIGHTS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_29.addWidget(self.LOSS__WEIGHTS__INFO, 2, 1, 1, 1)
 
@@ -3962,35 +4024,43 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addWidget(self.label_162, 13, 0, 1, 1)
 
-        self.TRAIN__LR__INFO = QLabel(self.frame_28)
+        self.TRAIN__LR__INFO = QPushButton(self.frame_28)
         self.TRAIN__LR__INFO.setObjectName(u"TRAIN__LR__INFO")
         self.TRAIN__LR__INFO.setMinimumSize(QSize(30, 30))
         self.TRAIN__LR__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__LR__INFO.setScaledContents(True)
+        self.TRAIN__LR__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_29.addWidget(self.TRAIN__LR__INFO, 6, 1, 1, 1)
 
-        self.TRAIN__OPTIMIZER__INFO = QLabel(self.frame_28)
+        self.TRAIN__OPTIMIZER__INFO = QPushButton(self.frame_28)
         self.TRAIN__OPTIMIZER__INFO.setObjectName(u"TRAIN__OPTIMIZER__INFO")
         self.TRAIN__OPTIMIZER__INFO.setMinimumSize(QSize(30, 30))
         self.TRAIN__OPTIMIZER__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__OPTIMIZER__INFO.setScaledContents(True)
+        self.TRAIN__OPTIMIZER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_29.addWidget(self.TRAIN__OPTIMIZER__INFO, 0, 1, 1, 1)
 
-        self.TRAIN__BATCH_SIZE__INFO = QLabel(self.frame_28)
+        self.TRAIN__BATCH_SIZE__INFO = QPushButton(self.frame_28)
         self.TRAIN__BATCH_SIZE__INFO.setObjectName(u"TRAIN__BATCH_SIZE__INFO")
         self.TRAIN__BATCH_SIZE__INFO.setMinimumSize(QSize(30, 30))
         self.TRAIN__BATCH_SIZE__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__BATCH_SIZE__INFO.setScaledContents(True)
+        self.TRAIN__BATCH_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__INFO, 9, 1, 1, 1)
 
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO = QLabel(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO = QPushButton(self.frame_28)
         self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__MIN_LR__INFO")
         self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setMinimumSize(QSize(30, 30))
         self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setScaledContents(True)
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__MIN_LR__INFO, 15, 1, 1, 1)
 
@@ -4001,59 +4071,73 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addWidget(self.lr_schel_reduce_on_plat_patience_label, 17, 0, 1, 1)
 
-        self.TRAIN__W_DECAY__INFO = QLabel(self.frame_28)
+        self.TRAIN__W_DECAY__INFO = QPushButton(self.frame_28)
         self.TRAIN__W_DECAY__INFO.setObjectName(u"TRAIN__W_DECAY__INFO")
         self.TRAIN__W_DECAY__INFO.setMinimumSize(QSize(30, 30))
         self.TRAIN__W_DECAY__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__W_DECAY__INFO.setScaledContents(True)
+        self.TRAIN__W_DECAY__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_29.addWidget(self.TRAIN__W_DECAY__INFO, 7, 1, 1, 1)
 
-        self.TRAIN__LR_SCHEDULER__NAME__INFO = QLabel(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__NAME__INFO = QPushButton(self.frame_28)
         self.TRAIN__LR_SCHEDULER__NAME__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__NAME__INFO")
         self.TRAIN__LR_SCHEDULER__NAME__INFO.setMinimumSize(QSize(30, 30))
         self.TRAIN__LR_SCHEDULER__NAME__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__NAME__INFO.setScaledContents(True)
+        self.TRAIN__LR_SCHEDULER__NAME__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__NAME__INFO, 13, 1, 1, 1)
 
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO = QLabel(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO = QPushButton(self.frame_28)
         self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO")
         self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setMinimumSize(QSize(30, 30))
         self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setScaledContents(True)
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO, 18, 1, 1, 1)
 
-        self.TRAIN__ACCUM_ITER__INFO = QLabel(self.frame_28)
+        self.TRAIN__ACCUM_ITER__INFO = QPushButton(self.frame_28)
         self.TRAIN__ACCUM_ITER__INFO.setObjectName(u"TRAIN__ACCUM_ITER__INFO")
         self.TRAIN__ACCUM_ITER__INFO.setMinimumSize(QSize(30, 30))
         self.TRAIN__ACCUM_ITER__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__ACCUM_ITER__INFO.setScaledContents(True)
+        self.TRAIN__ACCUM_ITER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_29.addWidget(self.TRAIN__ACCUM_ITER__INFO, 10, 1, 1, 1)
 
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO = QLabel(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO = QPushButton(self.frame_28)
         self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO")
         self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setMinimumSize(QSize(30, 30))
         self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setScaledContents(True)
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO, 17, 1, 1, 1)
 
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO = QLabel(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO = QPushButton(self.frame_28)
         self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO")
         self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setMinimumSize(QSize(30, 30))
         self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setScaledContents(True)
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO, 20, 1, 1, 1)
 
-        self.MODEL__SAVE_CKPT_FREQ__INFO = QLabel(self.frame_28)
+        self.MODEL__SAVE_CKPT_FREQ__INFO = QPushButton(self.frame_28)
         self.MODEL__SAVE_CKPT_FREQ__INFO.setObjectName(u"MODEL__SAVE_CKPT_FREQ__INFO")
         self.MODEL__SAVE_CKPT_FREQ__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__SAVE_CKPT_FREQ__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__SAVE_CKPT_FREQ__INFO.setScaledContents(True)
+        self.MODEL__SAVE_CKPT_FREQ__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_29.addWidget(self.MODEL__SAVE_CKPT_FREQ__INFO, 11, 1, 1, 1)
 
@@ -4063,19 +4147,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addWidget(self.TRAIN__VERBOSE__LABEL, 28, 0, 1, 1)
 
-        self.TRAIN__PROFILER__INFO = QLabel(self.frame_28)
+        self.TRAIN__PROFILER__INFO = QPushButton(self.frame_28)
         self.TRAIN__PROFILER__INFO.setObjectName(u"TRAIN__PROFILER__INFO")
         self.TRAIN__PROFILER__INFO.setMinimumSize(QSize(30, 30))
         self.TRAIN__PROFILER__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__PROFILER__INFO.setScaledContents(True)
+        self.TRAIN__PROFILER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_29.addWidget(self.TRAIN__PROFILER__INFO, 23, 1, 1, 1)
 
-        self.TRAIN__PROFILER_BATCH_RANGE__INFO = QLabel(self.frame_28)
+        self.TRAIN__PROFILER_BATCH_RANGE__INFO = QPushButton(self.frame_28)
         self.TRAIN__PROFILER_BATCH_RANGE__INFO.setObjectName(u"TRAIN__PROFILER_BATCH_RANGE__INFO")
         self.TRAIN__PROFILER_BATCH_RANGE__INFO.setMinimumSize(QSize(30, 30))
         self.TRAIN__PROFILER_BATCH_RANGE__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__PROFILER_BATCH_RANGE__INFO.setScaledContents(True)
+        self.TRAIN__PROFILER_BATCH_RANGE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_29.addWidget(self.TRAIN__PROFILER_BATCH_RANGE__INFO, 26, 1, 1, 1)
 
@@ -4089,12 +4177,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addWidget(self.TRAIN__VERBOSE__INPUT, 28, 2, 1, 1)
 
-        self.TRAIN__VERBOSE__INFO = QLabel(self.frame_28)
+        self.TRAIN__VERBOSE__INFO = QPushButton(self.frame_28)
         self.TRAIN__VERBOSE__INFO.setObjectName(u"TRAIN__VERBOSE__INFO")
         self.TRAIN__VERBOSE__INFO.setMinimumSize(QSize(30, 30))
         self.TRAIN__VERBOSE__INFO.setMaximumSize(QSize(30, 30))
         self.TRAIN__VERBOSE__INFO.setFont(font8)
-        self.TRAIN__VERBOSE__INFO.setScaledContents(True)
+        self.TRAIN__VERBOSE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_29.addWidget(self.TRAIN__VERBOSE__INFO, 28, 1, 1, 1)
 
@@ -4113,11 +4203,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addWidget(self.TRAIN__OPT_BETAS__LABEL, 8, 0, 1, 1)
 
-        self.TRAIN__OPT_BETAS__INFO = QLabel(self.frame_28)
+        self.TRAIN__OPT_BETAS__INFO = QPushButton(self.frame_28)
         self.TRAIN__OPT_BETAS__INFO.setObjectName(u"TRAIN__OPT_BETAS__INFO")
         self.TRAIN__OPT_BETAS__INFO.setMinimumSize(QSize(30, 30))
         self.TRAIN__OPT_BETAS__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__OPT_BETAS__INFO.setScaledContents(True)
+        self.TRAIN__OPT_BETAS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_29.addWidget(self.TRAIN__OPT_BETAS__INFO, 8, 1, 1, 1)
 
@@ -4127,21 +4219,25 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addWidget(self.TRAIN__METRICS__LABEL, 4, 0, 1, 1)
 
-        self.TRAIN__METRICS__INFO = QLabel(self.frame_28)
+        self.TRAIN__METRICS__INFO = QPushButton(self.frame_28)
         self.TRAIN__METRICS__INFO.setObjectName(u"TRAIN__METRICS__INFO")
         self.TRAIN__METRICS__INFO.setMinimumSize(QSize(30, 30))
         self.TRAIN__METRICS__INFO.setMaximumSize(QSize(30, 30))
         self.TRAIN__METRICS__INFO.setFont(font)
-        self.TRAIN__METRICS__INFO.setScaledContents(True)
+        self.TRAIN__METRICS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_29.addWidget(self.TRAIN__METRICS__INFO, 4, 1, 1, 1)
 
-        self.LOSS__TYPE__INFO = QLabel(self.frame_28)
+        self.LOSS__TYPE__INFO = QPushButton(self.frame_28)
         self.LOSS__TYPE__INFO.setObjectName(u"LOSS__TYPE__INFO")
         self.LOSS__TYPE__INFO.setMinimumSize(QSize(30, 30))
         self.LOSS__TYPE__INFO.setMaximumSize(QSize(30, 30))
         self.LOSS__TYPE__INFO.setFont(font)
-        self.LOSS__TYPE__INFO.setScaledContents(True)
+        self.LOSS__TYPE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_29.addWidget(self.LOSS__TYPE__INFO, 1, 1, 1, 1)
 
@@ -4191,19 +4287,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_74.addWidget(self.DATA__PREPROCESS__VAL__INPUT, 1, 2, 1, 1)
 
-        self.DATA__PREPROCESS__VAL__INFO = QLabel(self.frame_61)
+        self.DATA__PREPROCESS__VAL__INFO = QPushButton(self.frame_61)
         self.DATA__PREPROCESS__VAL__INFO.setObjectName(u"DATA__PREPROCESS__VAL__INFO")
         self.DATA__PREPROCESS__VAL__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__VAL__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__VAL__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__VAL__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_74.addWidget(self.DATA__PREPROCESS__VAL__INFO, 1, 1, 1, 1)
 
-        self.DATA__PREPROCESS__TRAIN__INFO = QLabel(self.frame_61)
+        self.DATA__PREPROCESS__TRAIN__INFO = QPushButton(self.frame_61)
         self.DATA__PREPROCESS__TRAIN__INFO.setObjectName(u"DATA__PREPROCESS__TRAIN__INFO")
         self.DATA__PREPROCESS__TRAIN__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__TRAIN__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__TRAIN__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__TRAIN__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_74.addWidget(self.DATA__PREPROCESS__TRAIN__INFO, 0, 1, 1, 1)
 
@@ -4240,11 +4340,13 @@ class Ui_MainWindow(object):
         self.preprocessing_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_71 = QGridLayout(self.preprocessing_frame)
         self.gridLayout_71.setObjectName(u"gridLayout_71")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__INFO = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__INFO = QPushButton(self.preprocessing_frame)
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__INFO.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__INFO")
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__INFO, 8, 1, 1, 1)
 
@@ -4258,19 +4360,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT, 14, 3, 1, 1)
 
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO = QPushButton(self.preprocessing_frame)
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO")
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO, 11, 1, 1, 1)
 
-        self.DATA__PREPROCESS__MEDIAN_BLUR__INFO = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__INFO = QPushButton(self.preprocessing_frame)
         self.DATA__PREPROCESS__MEDIAN_BLUR__INFO.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__INFO")
         self.DATA__PREPROCESS__MEDIAN_BLUR__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__MEDIAN_BLUR__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__MEDIAN_BLUR__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__INFO, 12, 1, 1, 1)
 
@@ -4310,11 +4416,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__CLIP__INPUT, 5, 3, 1, 1)
 
-        self.DATA__PREPROCESS__CLAHE__INFO = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__CLAHE__INFO = QPushButton(self.preprocessing_frame)
         self.DATA__PREPROCESS__CLAHE__INFO.setObjectName(u"DATA__PREPROCESS__CLAHE__INFO")
         self.DATA__PREPROCESS__CLAHE__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__CLAHE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__CLAHE__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__CLAHE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__INFO, 16, 1, 1, 1)
 
@@ -4325,19 +4433,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__LABEL, 1, 0, 1, 1)
 
-        self.DATA__PREPROCESS__RESIZE__CVAL__INFO = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__CVAL__INFO = QPushButton(self.preprocessing_frame)
         self.DATA__PREPROCESS__RESIZE__CVAL__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__CVAL__INFO")
         self.DATA__PREPROCESS__RESIZE__CVAL__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__RESIZE__CVAL__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__CVAL__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__RESIZE__CVAL__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__CVAL__INFO, 4, 1, 1, 1)
 
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__INFO = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__INFO = QPushButton(self.preprocessing_frame)
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__INFO.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__INFO")
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__INFO, 14, 1, 1, 1)
 
@@ -4377,11 +4489,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT, 8, 3, 1, 1)
 
-        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO = QPushButton(self.preprocessing_frame)
         self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO.setObjectName(u"DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO")
         self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO, 18, 1, 1, 1)
 
@@ -4407,19 +4521,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__LABEL, 10, 0, 1, 1)
 
-        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO = QPushButton(self.preprocessing_frame)
         self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO.setObjectName(u"DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO")
         self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO, 17, 1, 1, 1)
 
-        self.DATA__PREPROCESS__RESIZE__CLIP__INFO = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__CLIP__INFO = QPushButton(self.preprocessing_frame)
         self.DATA__PREPROCESS__RESIZE__CLIP__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__CLIP__INFO")
         self.DATA__PREPROCESS__RESIZE__CLIP__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__RESIZE__CLIP__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__CLIP__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__RESIZE__CLIP__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__CLIP__INFO, 5, 1, 1, 1)
 
@@ -4441,19 +4559,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT, 15, 3, 1, 1)
 
-        self.DATA__PREPROCESS__RESIZE__ORDER__INFO = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__ORDER__INFO = QPushButton(self.preprocessing_frame)
         self.DATA__PREPROCESS__RESIZE__ORDER__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__ORDER__INFO")
         self.DATA__PREPROCESS__RESIZE__ORDER__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__RESIZE__ORDER__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__ORDER__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__RESIZE__ORDER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__ORDER__INFO, 2, 1, 1, 1)
 
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO = QPushButton(self.preprocessing_frame)
         self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO")
         self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO, 6, 1, 1, 1)
 
@@ -4475,14 +4597,16 @@ class Ui_MainWindow(object):
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT, 18, 3, 1, 1)
 
-        self.DATA__PREPROCESS__RESIZE__INFO = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__INFO = QPushButton(self.preprocessing_frame)
         self.DATA__PREPROCESS__RESIZE__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__INFO")
         self.DATA__PREPROCESS__RESIZE__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__RESIZE__INFO.setMaximumSize(QSize(30, 30))
         font10 = QFont()
         font10.setFamily(u"URW Gothic [urw]")
         self.DATA__PREPROCESS__RESIZE__INFO.setFont(font10)
-        self.DATA__PREPROCESS__RESIZE__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__RESIZE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__INFO, 0, 1, 1, 1)
 
@@ -4533,19 +4657,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__LABEL, 12, 0, 1, 1)
 
-        self.DATA__PREPROCESS__RESIZE__MODE__INFO = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__MODE__INFO = QPushButton(self.preprocessing_frame)
         self.DATA__PREPROCESS__RESIZE__MODE__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__MODE__INFO")
         self.DATA__PREPROCESS__RESIZE__MODE__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__RESIZE__MODE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__MODE__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__RESIZE__MODE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__MODE__INFO, 3, 1, 1, 1)
 
-        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO = QPushButton(self.preprocessing_frame)
         self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO")
         self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO, 1, 1, 1, 1)
 
@@ -4569,11 +4697,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__LABEL, 19, 0, 1, 1)
 
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO = QPushButton(self.preprocessing_frame)
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO")
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO, 9, 1, 1, 1)
 
@@ -4608,11 +4738,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__CVAL__LABEL, 4, 0, 1, 1)
 
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO = QPushButton(self.preprocessing_frame)
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO")
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO, 15, 1, 1, 1)
 
@@ -4669,19 +4801,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT, 17, 3, 1, 1)
 
-        self.DATA__PREPROCESS__CANNY__INFO = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__CANNY__INFO = QPushButton(self.preprocessing_frame)
         self.DATA__PREPROCESS__CANNY__INFO.setObjectName(u"DATA__PREPROCESS__CANNY__INFO")
         self.DATA__PREPROCESS__CANNY__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__CANNY__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__CANNY__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__CANNY__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__INFO, 19, 1, 1, 1)
 
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO = QPushButton(self.preprocessing_frame)
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO")
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO, 10, 1, 1, 1)
 
@@ -4706,11 +4842,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__CLIP__LABEL, 5, 0, 1, 1)
 
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO = QPushButton(self.preprocessing_frame)
         self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO")
         self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO, 7, 1, 1, 1)
 
@@ -4749,19 +4887,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__MODE__LABEL, 3, 0, 1, 1)
 
-        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO = QPushButton(self.preprocessing_frame)
         self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO.setObjectName(u"DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO")
         self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO, 20, 1, 1, 1)
 
-        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO = QPushButton(self.preprocessing_frame)
         self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO.setObjectName(u"DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO")
         self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO, 21, 1, 1, 1)
 
@@ -4772,12 +4914,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL, 13, 0, 1, 1)
 
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO = QPushButton(self.preprocessing_frame)
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO")
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setMaximumSize(QSize(30, 30))
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setFont(font)
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO, 13, 1, 1, 1)
 
@@ -4815,19 +4959,23 @@ class Ui_MainWindow(object):
         self.da_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_25 = QGridLayout(self.da_frame)
         self.gridLayout_25.setObjectName(u"gridLayout_25")
-        self.AUGMENTOR__DROPOUT__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__DROPOUT__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__DROPOUT__INFO.setObjectName(u"AUGMENTOR__DROPOUT__INFO")
         self.AUGMENTOR__DROPOUT__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__DROPOUT__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__DROPOUT__INFO.setScaledContents(True)
+        self.AUGMENTOR__DROPOUT__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__DROPOUT__INFO, 39, 1, 1, 1)
 
-        self.AUGMENTOR__MS_ROTATE_RATIO__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__MS_ROTATE_RATIO__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__MS_ROTATE_RATIO__INFO.setObjectName(u"AUGMENTOR__MS_ROTATE_RATIO__INFO")
         self.AUGMENTOR__MS_ROTATE_RATIO__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__MS_ROTATE_RATIO__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__MS_ROTATE_RATIO__INFO.setScaledContents(True)
+        self.AUGMENTOR__MS_ROTATE_RATIO__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__MS_ROTATE_RATIO__INFO, 58, 1, 1, 1)
 
@@ -4839,19 +4987,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SHEAR_RANGE__INPUT, 11, 2, 1, 1)
 
-        self.AUGMENTOR__E_ALPHA__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__E_ALPHA__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__E_ALPHA__INFO.setObjectName(u"AUGMENTOR__E_ALPHA__INFO")
         self.AUGMENTOR__E_ALPHA__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__E_ALPHA__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__E_ALPHA__INFO.setScaledContents(True)
+        self.AUGMENTOR__E_ALPHA__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__E_ALPHA__INFO, 22, 1, 1, 1)
 
-        self.AUGMENTOR__MEDIAN_BLUR__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__MEDIAN_BLUR__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__MEDIAN_BLUR__INFO.setObjectName(u"AUGMENTOR__MEDIAN_BLUR__INFO")
         self.AUGMENTOR__MEDIAN_BLUR__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__MEDIAN_BLUR__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__MEDIAN_BLUR__INFO.setScaledContents(True)
+        self.AUGMENTOR__MEDIAN_BLUR__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__MEDIAN_BLUR__INFO, 27, 1, 1, 1)
 
@@ -4865,11 +5017,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__COUT_APPLY_TO_MASK__INPUT, 45, 2, 1, 1)
 
-        self.AUGMENTOR__SHUFFLE_TRAIN_DATA_EACH_EPOCH__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__SHUFFLE_TRAIN_DATA_EACH_EPOCH__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__SHUFFLE_TRAIN_DATA_EACH_EPOCH__INFO.setObjectName(u"AUGMENTOR__SHUFFLE_TRAIN_DATA_EACH_EPOCH__INFO")
         self.AUGMENTOR__SHUFFLE_TRAIN_DATA_EACH_EPOCH__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__SHUFFLE_TRAIN_DATA_EACH_EPOCH__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__SHUFFLE_TRAIN_DATA_EACH_EPOCH__INFO.setScaledContents(True)
+        self.AUGMENTOR__SHUFFLE_TRAIN_DATA_EACH_EPOCH__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SHUFFLE_TRAIN_DATA_EACH_EPOCH__INFO, 5, 1, 1, 1)
 
@@ -4883,11 +5037,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__VFLIP__INPUT, 18, 2, 1, 1)
 
-        self.AUGMENTOR__GRID_RATIO__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__GRID_RATIO__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__GRID_RATIO__INFO.setObjectName(u"AUGMENTOR__GRID_RATIO__INFO")
         self.AUGMENTOR__GRID_RATIO__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__GRID_RATIO__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__GRID_RATIO__INFO.setScaledContents(True)
+        self.AUGMENTOR__GRID_RATIO__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GRID_RATIO__INFO, 64, 1, 1, 1)
 
@@ -4901,19 +5057,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GRIDMASK__INPUT, 63, 2, 1, 1)
 
-        self.AUGMENTOR__GAUSSIAN_NOISE_VAR__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__GAUSSIAN_NOISE_VAR__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__GAUSSIAN_NOISE_VAR__INFO.setObjectName(u"AUGMENTOR__GAUSSIAN_NOISE_VAR__INFO")
         self.AUGMENTOR__GAUSSIAN_NOISE_VAR__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__GAUSSIAN_NOISE_VAR__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__GAUSSIAN_NOISE_VAR__INFO.setScaledContents(True)
+        self.AUGMENTOR__GAUSSIAN_NOISE_VAR__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GAUSSIAN_NOISE_VAR__INFO, 70, 1, 1, 1)
 
-        self.AUGMENTOR__GAMMA_CONTRAST__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__GAMMA_CONTRAST__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__GAMMA_CONTRAST__INFO.setObjectName(u"AUGMENTOR__GAMMA_CONTRAST__INFO")
         self.AUGMENTOR__GAMMA_CONTRAST__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__GAMMA_CONTRAST__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__GAMMA_CONTRAST__INFO.setScaledContents(True)
+        self.AUGMENTOR__GAMMA_CONTRAST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GAMMA_CONTRAST__INFO, 31, 1, 1, 1)
 
@@ -4997,11 +5157,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.label_73, 17, 0, 1, 1)
 
-        self.AUGMENTOR__DRAW_GRID__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__DRAW_GRID__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__DRAW_GRID__INFO.setObjectName(u"AUGMENTOR__DRAW_GRID__INFO")
         self.AUGMENTOR__DRAW_GRID__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__DRAW_GRID__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__DRAW_GRID__INFO.setScaledContents(True)
+        self.AUGMENTOR__DRAW_GRID__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__DRAW_GRID__INFO, 3, 1, 1, 1)
 
@@ -5074,11 +5236,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addItem(self.horizontalSpacer_16, 1, 3, 1, 1)
 
-        self.AUGMENTOR__PEPPER__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__PEPPER__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__PEPPER__INFO.setObjectName(u"AUGMENTOR__PEPPER__INFO")
         self.AUGMENTOR__PEPPER__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__PEPPER__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__PEPPER__INFO.setScaledContents(True)
+        self.AUGMENTOR__PEPPER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__PEPPER__INFO, 75, 1, 1, 1)
 
@@ -5089,11 +5253,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.da_missing_sections_iteration_range_label, 60, 0, 1, 1)
 
-        self.AUGMENTOR__MOTB_K_RANGE__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__MOTB_K_RANGE__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__MOTB_K_RANGE__INFO.setObjectName(u"AUGMENTOR__MOTB_K_RANGE__INFO")
         self.AUGMENTOR__MOTB_K_RANGE__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__MOTB_K_RANGE__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__MOTB_K_RANGE__INFO.setScaledContents(True)
+        self.AUGMENTOR__MOTB_K_RANGE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__MOTB_K_RANGE__INFO, 30, 1, 1, 1)
 
@@ -5123,11 +5289,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__DRAW_GRID__INPUT, 3, 2, 1, 1)
 
-        self.AUGMENTOR__RANDOM_ROT__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__RANDOM_ROT__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__RANDOM_ROT__INFO.setObjectName(u"AUGMENTOR__RANDOM_ROT__INFO")
         self.AUGMENTOR__RANDOM_ROT__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__RANDOM_ROT__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__RANDOM_ROT__INFO.setScaledContents(True)
+        self.AUGMENTOR__RANDOM_ROT__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__RANDOM_ROT__INFO, 8, 1, 1, 1)
 
@@ -5171,19 +5339,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.da_z_flip_label, 20, 0, 1, 1)
 
-        self.AUGMENTOR__RANDOM_ROT_RANGE__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__RANDOM_ROT_RANGE__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__RANDOM_ROT_RANGE__INFO.setObjectName(u"AUGMENTOR__RANDOM_ROT_RANGE__INFO")
         self.AUGMENTOR__RANDOM_ROT_RANGE__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__RANDOM_ROT_RANGE__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__RANDOM_ROT_RANGE__INFO.setScaledContents(True)
+        self.AUGMENTOR__RANDOM_ROT_RANGE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__RANDOM_ROT_RANGE__INFO, 9, 1, 1, 1)
 
-        self.AUGMENTOR__CONTRAST_FACTOR__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__CONTRAST_FACTOR__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__CONTRAST_FACTOR__INFO.setObjectName(u"AUGMENTOR__CONTRAST_FACTOR__INFO")
         self.AUGMENTOR__CONTRAST_FACTOR__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__CONTRAST_FACTOR__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__CONTRAST_FACTOR__INFO.setScaledContents(True)
+        self.AUGMENTOR__CONTRAST_FACTOR__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CONTRAST_FACTOR__INFO, 37, 1, 1, 1)
 
@@ -5201,27 +5373,33 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__PEPPER_AMOUNT__INPUT, 76, 2, 1, 1)
 
-        self.AUGMENTOR__CNOISE_NB_ITERATIONS__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__CNOISE_NB_ITERATIONS__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__CNOISE_NB_ITERATIONS__INFO.setObjectName(u"AUGMENTOR__CNOISE_NB_ITERATIONS__INFO")
         self.AUGMENTOR__CNOISE_NB_ITERATIONS__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__CNOISE_NB_ITERATIONS__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__CNOISE_NB_ITERATIONS__INFO.setScaledContents(True)
+        self.AUGMENTOR__CNOISE_NB_ITERATIONS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CNOISE_NB_ITERATIONS__INFO, 54, 1, 1, 1)
 
-        self.AUGMENTOR__CUTNOISE__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__CUTNOISE__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__CUTNOISE__INFO.setObjectName(u"AUGMENTOR__CUTNOISE__INFO")
         self.AUGMENTOR__CUTNOISE__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__CUTNOISE__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__CUTNOISE__INFO.setScaledContents(True)
+        self.AUGMENTOR__CUTNOISE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CUTNOISE__INFO, 52, 1, 1, 1)
 
-        self.AUGMENTOR__ZOOM_IN_Z__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__ZOOM_IN_Z__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__ZOOM_IN_Z__INFO.setObjectName(u"AUGMENTOR__ZOOM_IN_Z__INFO")
         self.AUGMENTOR__ZOOM_IN_Z__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__ZOOM_IN_Z__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__ZOOM_IN_Z__INFO.setScaledContents(True)
+        self.AUGMENTOR__ZOOM_IN_Z__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__ZOOM_IN_Z__INFO, 14, 1, 1, 1)
 
@@ -5254,19 +5432,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.da_brightness_mode_label, 35, 0, 1, 1)
 
-        self.AUGMENTOR__POISSON_NOISE__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__POISSON_NOISE__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__POISSON_NOISE__INFO.setObjectName(u"AUGMENTOR__POISSON_NOISE__INFO")
         self.AUGMENTOR__POISSON_NOISE__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__POISSON_NOISE__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__POISSON_NOISE__INFO.setScaledContents(True)
+        self.AUGMENTOR__POISSON_NOISE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__POISSON_NOISE__INFO, 72, 1, 1, 1)
 
-        self.AUGMENTOR__E_SIGMA__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__E_SIGMA__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__E_SIGMA__INFO.setObjectName(u"AUGMENTOR__E_SIGMA__INFO")
         self.AUGMENTOR__E_SIGMA__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__E_SIGMA__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__E_SIGMA__INFO.setScaledContents(True)
+        self.AUGMENTOR__E_SIGMA__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__E_SIGMA__INFO, 23, 1, 1, 1)
 
@@ -5284,19 +5466,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SHIFT_RANGE__INPUT, 16, 2, 1, 1)
 
-        self.AUGMENTOR__GRIDMASK__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__GRIDMASK__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__GRIDMASK__INFO.setObjectName(u"AUGMENTOR__GRIDMASK__INFO")
         self.AUGMENTOR__GRIDMASK__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__GRIDMASK__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__GRIDMASK__INFO.setScaledContents(True)
+        self.AUGMENTOR__GRIDMASK__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GRIDMASK__INFO, 63, 1, 1, 1)
 
-        self.AUGMENTOR__ZOOM__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__ZOOM__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__ZOOM__INFO.setObjectName(u"AUGMENTOR__ZOOM__INFO")
         self.AUGMENTOR__ZOOM__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__ZOOM__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__ZOOM__INFO.setScaledContents(True)
+        self.AUGMENTOR__ZOOM__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__ZOOM__INFO, 12, 1, 1, 1)
 
@@ -5313,11 +5499,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.da_misaligment_displacement_label, 57, 0, 1, 1)
 
-        self.AUGMENTOR__AFFINE_MODE__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__AFFINE_MODE__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__AFFINE_MODE__INFO.setObjectName(u"AUGMENTOR__AFFINE_MODE__INFO")
         self.AUGMENTOR__AFFINE_MODE__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__AFFINE_MODE__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__AFFINE_MODE__INFO.setScaledContents(True)
+        self.AUGMENTOR__AFFINE_MODE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__AFFINE_MODE__INFO, 17, 1, 1, 1)
 
@@ -5349,19 +5537,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__MS_ROTATE_RATIO__INPUT, 58, 2, 1, 1)
 
-        self.AUGMENTOR__SHEAR_RANGE__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__SHEAR_RANGE__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__SHEAR_RANGE__INFO.setObjectName(u"AUGMENTOR__SHEAR_RANGE__INFO")
         self.AUGMENTOR__SHEAR_RANGE__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__SHEAR_RANGE__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__SHEAR_RANGE__INFO.setScaledContents(True)
+        self.AUGMENTOR__SHEAR_RANGE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SHEAR_RANGE__INFO, 11, 1, 1, 1)
 
-        self.AUGMENTOR__CHANNEL_SHUFFLE__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__CHANNEL_SHUFFLE__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__CHANNEL_SHUFFLE__INFO.setObjectName(u"AUGMENTOR__CHANNEL_SHUFFLE__INFO")
         self.AUGMENTOR__CHANNEL_SHUFFLE__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__CHANNEL_SHUFFLE__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__CHANNEL_SHUFFLE__INFO.setScaledContents(True)
+        self.AUGMENTOR__CHANNEL_SHUFFLE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CHANNEL_SHUFFLE__INFO, 62, 1, 1, 1)
 
@@ -5381,19 +5573,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GRID_ROTATE__INPUT, 66, 2, 1, 1)
 
-        self.AUGMENTOR__GRID_D_RANGE__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__GRID_D_RANGE__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__GRID_D_RANGE__INFO.setObjectName(u"AUGMENTOR__GRID_D_RANGE__INFO")
         self.AUGMENTOR__GRID_D_RANGE__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__GRID_D_RANGE__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__GRID_D_RANGE__INFO.setScaledContents(True)
+        self.AUGMENTOR__GRID_D_RANGE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GRID_D_RANGE__INFO, 65, 1, 1, 1)
 
-        self.AUGMENTOR__HFLIP__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__HFLIP__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__HFLIP__INFO.setObjectName(u"AUGMENTOR__HFLIP__INFO")
         self.AUGMENTOR__HFLIP__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__HFLIP__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__HFLIP__INFO.setScaledContents(True)
+        self.AUGMENTOR__HFLIP__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__HFLIP__INFO, 19, 1, 1, 1)
 
@@ -5430,11 +5626,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.da_cutblur_inside_label, 49, 0, 1, 1)
 
-        self.AUGMENTOR__CUTMIX__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__CUTMIX__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__CUTMIX__INFO.setObjectName(u"AUGMENTOR__CUTMIX__INFO")
         self.AUGMENTOR__CUTMIX__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__CUTMIX__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__CUTMIX__INFO.setScaledContents(True)
+        self.AUGMENTOR__CUTMIX__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CUTMIX__INFO, 50, 1, 1, 1)
 
@@ -5444,19 +5642,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.label_109, 46, 0, 1, 1)
 
-        self.AUGMENTOR__CUTBLUR__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__CUTBLUR__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__CUTBLUR__INFO.setObjectName(u"AUGMENTOR__CUTBLUR__INFO")
         self.AUGMENTOR__CUTBLUR__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__CUTBLUR__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__CUTBLUR__INFO.setScaledContents(True)
+        self.AUGMENTOR__CUTBLUR__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CUTBLUR__INFO, 46, 1, 1, 1)
 
-        self.AUGMENTOR__BRIGHTNESS__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__BRIGHTNESS__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__BRIGHTNESS__INFO.setObjectName(u"AUGMENTOR__BRIGHTNESS__INFO")
         self.AUGMENTOR__BRIGHTNESS__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__BRIGHTNESS__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__BRIGHTNESS__INFO.setScaledContents(True)
+        self.AUGMENTOR__BRIGHTNESS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__BRIGHTNESS__INFO, 33, 1, 1, 1)
 
@@ -5487,11 +5689,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.da_salt_amount_label, 74, 0, 1, 1)
 
-        self.AUGMENTOR__MISSP_ITERATIONS__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__MISSP_ITERATIONS__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__MISSP_ITERATIONS__INFO.setObjectName(u"AUGMENTOR__MISSP_ITERATIONS__INFO")
         self.AUGMENTOR__MISSP_ITERATIONS__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__MISSP_ITERATIONS__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__MISSP_ITERATIONS__INFO.setScaledContents(True)
+        self.AUGMENTOR__MISSP_ITERATIONS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__MISSP_ITERATIONS__INFO, 60, 1, 1, 1)
 
@@ -5503,11 +5707,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__RANDOM_ROT_RANGE__INPUT, 9, 2, 1, 1)
 
-        self.AUGMENTOR__SALT_AND_PEPPER_PROP__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__SALT_AND_PEPPER_PROP__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__SALT_AND_PEPPER_PROP__INFO.setObjectName(u"AUGMENTOR__SALT_AND_PEPPER_PROP__INFO")
         self.AUGMENTOR__SALT_AND_PEPPER_PROP__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__SALT_AND_PEPPER_PROP__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__SALT_AND_PEPPER_PROP__INFO.setScaledContents(True)
+        self.AUGMENTOR__SALT_AND_PEPPER_PROP__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SALT_AND_PEPPER_PROP__INFO, 79, 1, 1, 1)
 
@@ -5518,11 +5724,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.da_motion_blur_k_size_label, 30, 0, 1, 1)
 
-        self.AUGMENTOR__AUG_NUM_SAMPLES__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__AUG_NUM_SAMPLES__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__AUG_NUM_SAMPLES__INFO.setObjectName(u"AUGMENTOR__AUG_NUM_SAMPLES__INFO")
         self.AUGMENTOR__AUG_NUM_SAMPLES__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__AUG_NUM_SAMPLES__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__AUG_NUM_SAMPLES__INFO.setScaledContents(True)
+        self.AUGMENTOR__AUG_NUM_SAMPLES__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__AUG_NUM_SAMPLES__INFO, 4, 1, 1, 1)
 
@@ -5546,11 +5754,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__DA_PROB__INPUT, 1, 2, 1, 1)
 
-        self.AUGMENTOR__SALT__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__SALT__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__SALT__INFO.setObjectName(u"AUGMENTOR__SALT__INFO")
         self.AUGMENTOR__SALT__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__SALT__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__SALT__INFO.setScaledContents(True)
+        self.AUGMENTOR__SALT__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SALT__INFO, 73, 1, 1, 1)
 
@@ -5576,11 +5786,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INPUT, 78, 2, 1, 1)
 
-        self.AUGMENTOR__ROT90__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__ROT90__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__ROT90__INFO.setObjectName(u"AUGMENTOR__ROT90__INFO")
         self.AUGMENTOR__ROT90__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__ROT90__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__ROT90__INFO.setScaledContents(True)
+        self.AUGMENTOR__ROT90__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__ROT90__INFO, 7, 1, 1, 1)
 
@@ -5590,19 +5802,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.label_84, 21, 0, 1, 1)
 
-        self.AUGMENTOR__CMIX_SIZE__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__CMIX_SIZE__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__CMIX_SIZE__INFO.setObjectName(u"AUGMENTOR__CMIX_SIZE__INFO")
         self.AUGMENTOR__CMIX_SIZE__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__CMIX_SIZE__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__CMIX_SIZE__INFO.setScaledContents(True)
+        self.AUGMENTOR__CMIX_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CMIX_SIZE__INFO, 51, 1, 1, 1)
 
-        self.AUGMENTOR__PEPPER_AMOUNT__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__PEPPER_AMOUNT__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__PEPPER_AMOUNT__INFO.setObjectName(u"AUGMENTOR__PEPPER_AMOUNT__INFO")
         self.AUGMENTOR__PEPPER_AMOUNT__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__PEPPER_AMOUNT__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__PEPPER_AMOUNT__INFO.setScaledContents(True)
+        self.AUGMENTOR__PEPPER_AMOUNT__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__PEPPER_AMOUNT__INFO, 76, 1, 1, 1)
 
@@ -5614,11 +5830,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__COUT_NB_ITERATIONS__INPUT, 42, 2, 1, 1)
 
-        self.AUGMENTOR__COUT_CVAL__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__COUT_CVAL__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__COUT_CVAL__INFO.setObjectName(u"AUGMENTOR__COUT_CVAL__INFO")
         self.AUGMENTOR__COUT_CVAL__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__COUT_CVAL__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__COUT_CVAL__INFO.setScaledContents(True)
+        self.AUGMENTOR__COUT_CVAL__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__COUT_CVAL__INFO, 44, 1, 1, 1)
 
@@ -5635,11 +5853,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.da_zoom_range_label, 13, 0, 1, 1)
 
-        self.AUGMENTOR__G_SIGMA__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__G_SIGMA__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__G_SIGMA__INFO.setObjectName(u"AUGMENTOR__G_SIGMA__INFO")
         self.AUGMENTOR__G_SIGMA__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__G_SIGMA__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__G_SIGMA__INFO.setScaledContents(True)
+        self.AUGMENTOR__G_SIGMA__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__G_SIGMA__INFO, 26, 1, 1, 1)
 
@@ -5657,11 +5877,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.da_cutmix_size_range_label, 51, 0, 1, 1)
 
-        self.AUGMENTOR__CBLUR_INSIDE__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__CBLUR_INSIDE__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__CBLUR_INSIDE__INFO.setObjectName(u"AUGMENTOR__CBLUR_INSIDE__INFO")
         self.AUGMENTOR__CBLUR_INSIDE__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__CBLUR_INSIDE__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__CBLUR_INSIDE__INFO.setScaledContents(True)
+        self.AUGMENTOR__CBLUR_INSIDE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CBLUR_INSIDE__INFO, 49, 1, 1, 1)
 
@@ -5673,19 +5895,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GAUSSIAN_NOISE_VAR__INPUT, 70, 2, 1, 1)
 
-        self.AUGMENTOR__SALT_AMOUNT__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__SALT_AMOUNT__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__SALT_AMOUNT__INFO.setObjectName(u"AUGMENTOR__SALT_AMOUNT__INFO")
         self.AUGMENTOR__SALT_AMOUNT__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__SALT_AMOUNT__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__SALT_AMOUNT__INFO.setScaledContents(True)
+        self.AUGMENTOR__SALT_AMOUNT__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SALT_AMOUNT__INFO, 74, 1, 1, 1)
 
-        self.AUGMENTOR__SALT_AND_PEPPER__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__SALT_AND_PEPPER__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__SALT_AND_PEPPER__INFO.setObjectName(u"AUGMENTOR__SALT_AND_PEPPER__INFO")
         self.AUGMENTOR__SALT_AND_PEPPER__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__SALT_AND_PEPPER__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__SALT_AND_PEPPER__INFO.setScaledContents(True)
+        self.AUGMENTOR__SALT_AND_PEPPER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SALT_AND_PEPPER__INFO, 77, 1, 1, 1)
 
@@ -5695,11 +5921,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.label_87, 25, 0, 1, 1)
 
-        self.AUGMENTOR__BRIGHTNESS_MODE__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__BRIGHTNESS_MODE__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__BRIGHTNESS_MODE__INFO.setObjectName(u"AUGMENTOR__BRIGHTNESS_MODE__INFO")
         self.AUGMENTOR__BRIGHTNESS_MODE__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__BRIGHTNESS_MODE__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__BRIGHTNESS_MODE__INFO.setScaledContents(True)
+        self.AUGMENTOR__BRIGHTNESS_MODE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__BRIGHTNESS_MODE__INFO, 35, 1, 1, 1)
 
@@ -5793,19 +6021,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.da_grid_rotate_label, 66, 0, 1, 1)
 
-        self.AUGMENTOR__BRIGHTNESS_FACTOR__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__BRIGHTNESS_FACTOR__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__BRIGHTNESS_FACTOR__INFO.setObjectName(u"AUGMENTOR__BRIGHTNESS_FACTOR__INFO")
         self.AUGMENTOR__BRIGHTNESS_FACTOR__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__BRIGHTNESS_FACTOR__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__BRIGHTNESS_FACTOR__INFO.setScaledContents(True)
+        self.AUGMENTOR__BRIGHTNESS_FACTOR__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__BRIGHTNESS_FACTOR__INFO, 34, 1, 1, 1)
 
-        self.AUGMENTOR__SHIFT__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__SHIFT__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__SHIFT__INFO.setObjectName(u"AUGMENTOR__SHIFT__INFO")
         self.AUGMENTOR__SHIFT__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__SHIFT__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__SHIFT__INFO.setScaledContents(True)
+        self.AUGMENTOR__SHIFT__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SHIFT__INFO, 15, 1, 1, 1)
 
@@ -5819,19 +6051,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__ELASTIC__INPUT, 21, 2, 1, 1)
 
-        self.AUGMENTOR__CONTRAST_MODE__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__CONTRAST_MODE__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__CONTRAST_MODE__INFO.setObjectName(u"AUGMENTOR__CONTRAST_MODE__INFO")
         self.AUGMENTOR__CONTRAST_MODE__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__CONTRAST_MODE__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__CONTRAST_MODE__INFO.setScaledContents(True)
+        self.AUGMENTOR__CONTRAST_MODE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CONTRAST_MODE__INFO, 38, 1, 1, 1)
 
-        self.AUGMENTOR__AUG_SAMPLES__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__AUG_SAMPLES__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__AUG_SAMPLES__INFO.setObjectName(u"AUGMENTOR__AUG_SAMPLES__INFO")
         self.AUGMENTOR__AUG_SAMPLES__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__AUG_SAMPLES__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__AUG_SAMPLES__INFO.setScaledContents(True)
+        self.AUGMENTOR__AUG_SAMPLES__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__AUG_SAMPLES__INFO, 2, 1, 1, 1)
 
@@ -5889,19 +6125,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SALT_AND_PEPPER_PROP__INPUT, 79, 2, 1, 1)
 
-        self.AUGMENTOR__CONTRAST__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__CONTRAST__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__CONTRAST__INFO.setObjectName(u"AUGMENTOR__CONTRAST__INFO")
         self.AUGMENTOR__CONTRAST__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__CONTRAST__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__CONTRAST__INFO.setScaledContents(True)
+        self.AUGMENTOR__CONTRAST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CONTRAST__INFO, 36, 1, 1, 1)
 
-        self.AUGMENTOR__VFLIP__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__VFLIP__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__VFLIP__INFO.setObjectName(u"AUGMENTOR__VFLIP__INFO")
         self.AUGMENTOR__VFLIP__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__VFLIP__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__VFLIP__INFO.setScaledContents(True)
+        self.AUGMENTOR__VFLIP__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__VFLIP__INFO, 18, 1, 1, 1)
 
@@ -5932,11 +6172,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.label_118, 63, 0, 1, 1)
 
-        self.AUGMENTOR__MB_KERNEL__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__MB_KERNEL__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__MB_KERNEL__INFO.setObjectName(u"AUGMENTOR__MB_KERNEL__INFO")
         self.AUGMENTOR__MB_KERNEL__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__MB_KERNEL__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__MB_KERNEL__INFO.setScaledContents(True)
+        self.AUGMENTOR__MB_KERNEL__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__MB_KERNEL__INFO, 28, 1, 1, 1)
 
@@ -5947,11 +6189,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.da_salt_pepper_amount_label, 78, 0, 1, 1)
 
-        self.AUGMENTOR__GAUSSIAN_NOISE_MEAN__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__GAUSSIAN_NOISE_MEAN__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__GAUSSIAN_NOISE_MEAN__INFO.setObjectName(u"AUGMENTOR__GAUSSIAN_NOISE_MEAN__INFO")
         self.AUGMENTOR__GAUSSIAN_NOISE_MEAN__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__GAUSSIAN_NOISE_MEAN__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__GAUSSIAN_NOISE_MEAN__INFO.setScaledContents(True)
+        self.AUGMENTOR__GAUSSIAN_NOISE_MEAN__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GAUSSIAN_NOISE_MEAN__INFO, 69, 1, 1, 1)
 
@@ -6029,11 +6273,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GAUSSIAN_NOISE_MEAN__INPUT, 69, 2, 1, 1)
 
-        self.AUGMENTOR__CNOISE_SIZE__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__CNOISE_SIZE__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__CNOISE_SIZE__INFO.setObjectName(u"AUGMENTOR__CNOISE_SIZE__INFO")
         self.AUGMENTOR__CNOISE_SIZE__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__CNOISE_SIZE__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__CNOISE_SIZE__INFO.setScaledContents(True)
+        self.AUGMENTOR__CNOISE_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CNOISE_SIZE__INFO, 55, 1, 1, 1)
 
@@ -6084,11 +6330,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CBLUR_INSIDE__INPUT, 49, 2, 1, 1)
 
-        self.AUGMENTOR__DA_PROB__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__DA_PROB__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__DA_PROB__INFO.setObjectName(u"AUGMENTOR__DA_PROB__INFO")
         self.AUGMENTOR__DA_PROB__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__DA_PROB__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__DA_PROB__INFO.setScaledContents(True)
+        self.AUGMENTOR__DA_PROB__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__DA_PROB__INFO, 1, 1, 1, 1)
 
@@ -6167,11 +6415,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.label_65, 8, 0, 1, 1)
 
-        self.AUGMENTOR__GAUSSIAN_NOISE_USE_INPUT_IMG_MEAN_AND_VAR__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__GAUSSIAN_NOISE_USE_INPUT_IMG_MEAN_AND_VAR__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__GAUSSIAN_NOISE_USE_INPUT_IMG_MEAN_AND_VAR__INFO.setObjectName(u"AUGMENTOR__GAUSSIAN_NOISE_USE_INPUT_IMG_MEAN_AND_VAR__INFO")
         self.AUGMENTOR__GAUSSIAN_NOISE_USE_INPUT_IMG_MEAN_AND_VAR__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__GAUSSIAN_NOISE_USE_INPUT_IMG_MEAN_AND_VAR__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__GAUSSIAN_NOISE_USE_INPUT_IMG_MEAN_AND_VAR__INFO.setScaledContents(True)
+        self.AUGMENTOR__GAUSSIAN_NOISE_USE_INPUT_IMG_MEAN_AND_VAR__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GAUSSIAN_NOISE_USE_INPUT_IMG_MEAN_AND_VAR__INFO, 71, 1, 1, 1)
 
@@ -6182,11 +6432,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.da_elastic_alpha_label, 22, 0, 1, 1)
 
-        self.AUGMENTOR__MISALIGNMENT__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__MISALIGNMENT__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__MISALIGNMENT__INFO.setObjectName(u"AUGMENTOR__MISALIGNMENT__INFO")
         self.AUGMENTOR__MISALIGNMENT__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__MISALIGNMENT__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__MISALIGNMENT__INFO.setScaledContents(True)
+        self.AUGMENTOR__MISALIGNMENT__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__MISALIGNMENT__INFO, 56, 1, 1, 1)
 
@@ -6196,11 +6448,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.label_135, 68, 0, 1, 1)
 
-        self.AUGMENTOR__SHUFFLE_VAL_DATA_EACH_EPOCH__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__SHUFFLE_VAL_DATA_EACH_EPOCH__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__SHUFFLE_VAL_DATA_EACH_EPOCH__INFO.setObjectName(u"AUGMENTOR__SHUFFLE_VAL_DATA_EACH_EPOCH__INFO")
         self.AUGMENTOR__SHUFFLE_VAL_DATA_EACH_EPOCH__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__SHUFFLE_VAL_DATA_EACH_EPOCH__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__SHUFFLE_VAL_DATA_EACH_EPOCH__INFO.setScaledContents(True)
+        self.AUGMENTOR__SHUFFLE_VAL_DATA_EACH_EPOCH__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SHUFFLE_VAL_DATA_EACH_EPOCH__INFO, 6, 1, 1, 1)
 
@@ -6211,11 +6465,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.da_gamma_contrast_range_label, 32, 0, 1, 1)
 
-        self.AUGMENTOR__ELASTIC__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__ELASTIC__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__ELASTIC__INFO.setObjectName(u"AUGMENTOR__ELASTIC__INFO")
         self.AUGMENTOR__ELASTIC__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__ELASTIC__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__ELASTIC__INFO.setScaledContents(True)
+        self.AUGMENTOR__ELASTIC__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__ELASTIC__INFO, 21, 1, 1, 1)
 
@@ -6231,11 +6487,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__AFFINE_MODE__INPUT, 17, 2, 1, 1)
 
-        self.AUGMENTOR__GRID_INVERT__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__GRID_INVERT__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__GRID_INVERT__INFO.setObjectName(u"AUGMENTOR__GRID_INVERT__INFO")
         self.AUGMENTOR__GRID_INVERT__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__GRID_INVERT__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__GRID_INVERT__INFO.setScaledContents(True)
+        self.AUGMENTOR__GRID_INVERT__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GRID_INVERT__INFO, 67, 1, 1, 1)
 
@@ -6249,11 +6507,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__MEDIAN_BLUR__INPUT, 27, 2, 1, 1)
 
-        self.AUGMENTOR__G_BLUR__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__G_BLUR__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__G_BLUR__INFO.setObjectName(u"AUGMENTOR__G_BLUR__INFO")
         self.AUGMENTOR__G_BLUR__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__G_BLUR__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__G_BLUR__INFO.setScaledContents(True)
+        self.AUGMENTOR__G_BLUR__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__G_BLUR__INFO, 25, 1, 1, 1)
 
@@ -6264,19 +6524,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.label_127, 59, 0, 1, 1)
 
-        self.AUGMENTOR__MS_DISPLACEMENT__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__MS_DISPLACEMENT__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__MS_DISPLACEMENT__INFO.setObjectName(u"AUGMENTOR__MS_DISPLACEMENT__INFO")
         self.AUGMENTOR__MS_DISPLACEMENT__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__MS_DISPLACEMENT__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__MS_DISPLACEMENT__INFO.setScaledContents(True)
+        self.AUGMENTOR__MS_DISPLACEMENT__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__MS_DISPLACEMENT__INFO, 57, 1, 1, 1)
 
-        self.AUGMENTOR__COUT_APPLY_TO_MASK__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__COUT_APPLY_TO_MASK__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__COUT_APPLY_TO_MASK__INFO.setObjectName(u"AUGMENTOR__COUT_APPLY_TO_MASK__INFO")
         self.AUGMENTOR__COUT_APPLY_TO_MASK__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__COUT_APPLY_TO_MASK__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__COUT_APPLY_TO_MASK__INFO.setScaledContents(True)
+        self.AUGMENTOR__COUT_APPLY_TO_MASK__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__COUT_APPLY_TO_MASK__INFO, 45, 1, 1, 1)
 
@@ -6300,11 +6564,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SHIFT__INPUT, 15, 2, 1, 1)
 
-        self.AUGMENTOR__ZFLIP__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__ZFLIP__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__ZFLIP__INFO.setObjectName(u"AUGMENTOR__ZFLIP__INFO")
         self.AUGMENTOR__ZFLIP__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__ZFLIP__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__ZFLIP__INFO.setScaledContents(True)
+        self.AUGMENTOR__ZFLIP__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__ZFLIP__INFO, 20, 1, 1, 1)
 
@@ -6318,11 +6584,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__MOTION_BLUR__INPUT, 29, 2, 1, 1)
 
-        self.AUGMENTOR__MOTION_BLUR__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__MOTION_BLUR__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__MOTION_BLUR__INFO.setObjectName(u"AUGMENTOR__MOTION_BLUR__INFO")
         self.AUGMENTOR__MOTION_BLUR__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__MOTION_BLUR__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__MOTION_BLUR__INFO.setScaledContents(True)
+        self.AUGMENTOR__MOTION_BLUR__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__MOTION_BLUR__INFO, 29, 1, 1, 1)
 
@@ -6336,11 +6604,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__HFLIP__INPUT, 19, 2, 1, 1)
 
-        self.AUGMENTOR__CNOISE_SCALE__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__CNOISE_SCALE__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__CNOISE_SCALE__INFO.setObjectName(u"AUGMENTOR__CNOISE_SCALE__INFO")
         self.AUGMENTOR__CNOISE_SCALE__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__CNOISE_SCALE__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__CNOISE_SCALE__INFO.setScaledContents(True)
+        self.AUGMENTOR__CNOISE_SCALE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CNOISE_SCALE__INFO, 53, 1, 1, 1)
 
@@ -6357,11 +6627,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.da_elastic_sigma_label, 23, 0, 1, 1)
 
-        self.AUGMENTOR__MISSING_SECTIONS__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__MISSING_SECTIONS__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__MISSING_SECTIONS__INFO.setObjectName(u"AUGMENTOR__MISSING_SECTIONS__INFO")
         self.AUGMENTOR__MISSING_SECTIONS__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__MISSING_SECTIONS__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__MISSING_SECTIONS__INFO.setScaledContents(True)
+        self.AUGMENTOR__MISSING_SECTIONS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__MISSING_SECTIONS__INFO, 59, 1, 1, 1)
 
@@ -6375,19 +6647,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__PEPPER__INPUT, 75, 2, 1, 1)
 
-        self.AUGMENTOR__SHIFT_RANGE__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__SHIFT_RANGE__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__SHIFT_RANGE__INFO.setObjectName(u"AUGMENTOR__SHIFT_RANGE__INFO")
         self.AUGMENTOR__SHIFT_RANGE__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__SHIFT_RANGE__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__SHIFT_RANGE__INFO.setScaledContents(True)
+        self.AUGMENTOR__SHIFT_RANGE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SHIFT_RANGE__INFO, 16, 1, 1, 1)
 
-        self.AUGMENTOR__GAUSSIAN_NOISE__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__GAUSSIAN_NOISE__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__GAUSSIAN_NOISE__INFO.setObjectName(u"AUGMENTOR__GAUSSIAN_NOISE__INFO")
         self.AUGMENTOR__GAUSSIAN_NOISE__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__GAUSSIAN_NOISE__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__GAUSSIAN_NOISE__INFO.setScaledContents(True)
+        self.AUGMENTOR__GAUSSIAN_NOISE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GAUSSIAN_NOISE__INFO, 68, 1, 1, 1)
 
@@ -6411,19 +6687,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.da_grid_ratio_label, 64, 0, 1, 1)
 
-        self.AUGMENTOR__GC_GAMMA__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__GC_GAMMA__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__GC_GAMMA__INFO.setObjectName(u"AUGMENTOR__GC_GAMMA__INFO")
         self.AUGMENTOR__GC_GAMMA__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__GC_GAMMA__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__GC_GAMMA__INFO.setScaledContents(True)
+        self.AUGMENTOR__GC_GAMMA__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GC_GAMMA__INFO, 32, 1, 1, 1)
 
-        self.AUGMENTOR__CUTOUT__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__CUTOUT__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__CUTOUT__INFO.setObjectName(u"AUGMENTOR__CUTOUT__INFO")
         self.AUGMENTOR__CUTOUT__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__CUTOUT__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__CUTOUT__INFO.setScaledContents(True)
+        self.AUGMENTOR__CUTOUT__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CUTOUT__INFO, 41, 1, 1, 1)
 
@@ -6443,11 +6723,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.label_61, 3, 0, 1, 1)
 
-        self.AUGMENTOR__E_MODE__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__E_MODE__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__E_MODE__INFO.setObjectName(u"AUGMENTOR__E_MODE__INFO")
         self.AUGMENTOR__E_MODE__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__E_MODE__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__E_MODE__INFO.setScaledContents(True)
+        self.AUGMENTOR__E_MODE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__E_MODE__INFO, 24, 1, 1, 1)
 
@@ -6464,11 +6746,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.da_random_rot_range_label, 9, 0, 1, 1)
 
-        self.AUGMENTOR__ZOOM_RANGE__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__ZOOM_RANGE__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__ZOOM_RANGE__INFO.setObjectName(u"AUGMENTOR__ZOOM_RANGE__INFO")
         self.AUGMENTOR__ZOOM_RANGE__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__ZOOM_RANGE__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__ZOOM_RANGE__INFO.setScaledContents(True)
+        self.AUGMENTOR__ZOOM_RANGE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__ZOOM_RANGE__INFO, 13, 1, 1, 1)
 
@@ -6498,11 +6782,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.da_cutblur_size_range_label, 47, 0, 1, 1)
 
-        self.AUGMENTOR__CBLUR_DOWN_RANGE__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__CBLUR_DOWN_RANGE__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__CBLUR_DOWN_RANGE__INFO.setObjectName(u"AUGMENTOR__CBLUR_DOWN_RANGE__INFO")
         self.AUGMENTOR__CBLUR_DOWN_RANGE__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__CBLUR_DOWN_RANGE__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__CBLUR_DOWN_RANGE__INFO.setScaledContents(True)
+        self.AUGMENTOR__CBLUR_DOWN_RANGE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CBLUR_DOWN_RANGE__INFO, 48, 1, 1, 1)
 
@@ -6514,11 +6800,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CNOISE_SCALE__INPUT, 53, 2, 1, 1)
 
-        self.AUGMENTOR__DROP_RANGE__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__DROP_RANGE__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__DROP_RANGE__INFO.setObjectName(u"AUGMENTOR__DROP_RANGE__INFO")
         self.AUGMENTOR__DROP_RANGE__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__DROP_RANGE__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__DROP_RANGE__INFO.setScaledContents(True)
+        self.AUGMENTOR__DROP_RANGE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__DROP_RANGE__INFO, 40, 1, 1, 1)
 
@@ -6530,11 +6818,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CONTRAST_FACTOR__INPUT, 37, 2, 1, 1)
 
-        self.AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INFO.setObjectName(u"AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INFO")
         self.AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INFO.setScaledContents(True)
+        self.AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INFO, 78, 1, 1, 1)
 
@@ -6546,11 +6836,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__MISSP_ITERATIONS__INPUT, 60, 2, 1, 1)
 
-        self.AUGMENTOR__SHEAR__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__SHEAR__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__SHEAR__INFO.setObjectName(u"AUGMENTOR__SHEAR__INFO")
         self.AUGMENTOR__SHEAR__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__SHEAR__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__SHEAR__INFO.setScaledContents(True)
+        self.AUGMENTOR__SHEAR__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SHEAR__INFO, 10, 1, 1, 1)
 
@@ -6568,11 +6860,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.label_68, 19, 0, 1, 1)
 
-        self.AUGMENTOR__GRID_ROTATE__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__GRID_ROTATE__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__GRID_ROTATE__INFO.setObjectName(u"AUGMENTOR__GRID_ROTATE__INFO")
         self.AUGMENTOR__GRID_ROTATE__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__GRID_ROTATE__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__GRID_ROTATE__INFO.setScaledContents(True)
+        self.AUGMENTOR__GRID_ROTATE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GRID_ROTATE__INFO, 66, 1, 1, 1)
 
@@ -6602,19 +6896,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.label_91, 33, 0, 1, 1)
 
-        self.AUGMENTOR__COUT_NB_ITERATIONS__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__COUT_NB_ITERATIONS__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__COUT_NB_ITERATIONS__INFO.setObjectName(u"AUGMENTOR__COUT_NB_ITERATIONS__INFO")
         self.AUGMENTOR__COUT_NB_ITERATIONS__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__COUT_NB_ITERATIONS__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__COUT_NB_ITERATIONS__INFO.setScaledContents(True)
+        self.AUGMENTOR__COUT_NB_ITERATIONS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__COUT_NB_ITERATIONS__INFO, 42, 1, 1, 1)
 
-        self.AUGMENTOR__COUT_SIZE__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__COUT_SIZE__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__COUT_SIZE__INFO.setObjectName(u"AUGMENTOR__COUT_SIZE__INFO")
         self.AUGMENTOR__COUT_SIZE__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__COUT_SIZE__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__COUT_SIZE__INFO.setScaledContents(True)
+        self.AUGMENTOR__COUT_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__COUT_SIZE__INFO, 43, 1, 1, 1)
 
@@ -6668,11 +6966,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__AUG_NUM_SAMPLES__INPUT, 4, 2, 1, 1)
 
-        self.AUGMENTOR__GRAYSCALE__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__GRAYSCALE__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__GRAYSCALE__INFO.setObjectName(u"AUGMENTOR__GRAYSCALE__INFO")
         self.AUGMENTOR__GRAYSCALE__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__GRAYSCALE__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__GRAYSCALE__INFO.setScaledContents(True)
+        self.AUGMENTOR__GRAYSCALE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GRAYSCALE__INFO, 61, 1, 1, 1)
 
@@ -6684,11 +6984,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.da_cutout_size_label, 43, 0, 1, 1)
 
-        self.AUGMENTOR__CBLUR_SIZE__INFO = QLabel(self.da_frame)
+        self.AUGMENTOR__CBLUR_SIZE__INFO = QPushButton(self.da_frame)
         self.AUGMENTOR__CBLUR_SIZE__INFO.setObjectName(u"AUGMENTOR__CBLUR_SIZE__INFO")
         self.AUGMENTOR__CBLUR_SIZE__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__CBLUR_SIZE__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__CBLUR_SIZE__INFO.setScaledContents(True)
+        self.AUGMENTOR__CBLUR_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CBLUR_SIZE__INFO, 47, 1, 1, 1)
 
@@ -6722,11 +7024,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_11.addWidget(self.DATA__VAL__IN_MEMORY__INPUT, 1, 3, 1, 1)
 
-        self.cross_validation_nfolds_info = QLabel(self.frame_11)
+        self.cross_validation_nfolds_info = QPushButton(self.frame_11)
         self.cross_validation_nfolds_info.setObjectName(u"cross_validation_nfolds_info")
         self.cross_validation_nfolds_info.setMinimumSize(QSize(30, 30))
         self.cross_validation_nfolds_info.setMaximumSize(QSize(30, 30))
-        self.cross_validation_nfolds_info.setScaledContents(True)
+        self.cross_validation_nfolds_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_11.addWidget(self.cross_validation_nfolds_info, 3, 1, 1, 1)
 
@@ -6738,11 +7042,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_11.addWidget(self.DATA__VAL__CROSS_VAL_FOLD__INPUT, 7, 3, 1, 1)
 
-        self.cross_validation_fold_info = QLabel(self.frame_11)
+        self.cross_validation_fold_info = QPushButton(self.frame_11)
         self.cross_validation_fold_info.setObjectName(u"cross_validation_fold_info")
         self.cross_validation_fold_info.setMinimumSize(QSize(30, 30))
         self.cross_validation_fold_info.setMaximumSize(QSize(30, 30))
-        self.cross_validation_fold_info.setScaledContents(True)
+        self.cross_validation_fold_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_11.addWidget(self.cross_validation_fold_info, 7, 1, 1, 1)
 
@@ -6776,12 +7082,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_11.addWidget(self.validation_data_gt_label, 9, 0, 1, 1)
 
-        self.percentage_validation_info = QLabel(self.frame_11)
+        self.percentage_validation_info = QPushButton(self.frame_11)
         self.percentage_validation_info.setObjectName(u"percentage_validation_info")
         self.percentage_validation_info.setMinimumSize(QSize(30, 30))
         self.percentage_validation_info.setMaximumSize(QSize(30, 30))
-        self.percentage_validation_info.setScaledContents(True)
-        self.percentage_validation_info.setIndent(15)
+        self.percentage_validation_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_11.addWidget(self.percentage_validation_info, 12, 1, 1, 1)
 
@@ -6815,11 +7122,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_11.addWidget(self.DATA__VAL__PATH__INPUT, 8, 3, 1, 1)
 
-        self.DATA__VAL__PATH__INFO = QLabel(self.frame_11)
+        self.DATA__VAL__PATH__INFO = QPushButton(self.frame_11)
         self.DATA__VAL__PATH__INFO.setObjectName(u"DATA__VAL__PATH__INFO")
         self.DATA__VAL__PATH__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__VAL__PATH__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__VAL__PATH__INFO.setScaledContents(True)
+        self.DATA__VAL__PATH__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_11.addWidget(self.DATA__VAL__PATH__INFO, 8, 1, 1, 1)
 
@@ -6830,11 +7139,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_11.addWidget(self.val_in_memory_label, 1, 0, 1, 1)
 
-        self.validation_type_info = QLabel(self.frame_11)
+        self.validation_type_info = QPushButton(self.frame_11)
         self.validation_type_info.setObjectName(u"validation_type_info")
         self.validation_type_info.setMinimumSize(QSize(30, 30))
         self.validation_type_info.setMaximumSize(QSize(30, 30))
-        self.validation_type_info.setScaledContents(True)
+        self.validation_type_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_11.addWidget(self.validation_type_info, 0, 1, 1, 1)
 
@@ -6842,19 +7153,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_11.addItem(self.horizontalSpacer_54, 0, 4, 1, 1)
 
-        self.validation_data_gt_info = QLabel(self.frame_11)
+        self.validation_data_gt_info = QPushButton(self.frame_11)
         self.validation_data_gt_info.setObjectName(u"validation_data_gt_info")
         self.validation_data_gt_info.setMinimumSize(QSize(30, 30))
         self.validation_data_gt_info.setMaximumSize(QSize(30, 30))
-        self.validation_data_gt_info.setScaledContents(True)
+        self.validation_data_gt_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_11.addWidget(self.validation_data_gt_info, 9, 1, 1, 1)
 
-        self.val_in_memory_info = QLabel(self.frame_11)
+        self.val_in_memory_info = QPushButton(self.frame_11)
         self.val_in_memory_info.setObjectName(u"val_in_memory_info")
         self.val_in_memory_info.setMinimumSize(QSize(30, 30))
         self.val_in_memory_info.setMaximumSize(QSize(30, 30))
-        self.val_in_memory_info.setScaledContents(True)
+        self.val_in_memory_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_11.addWidget(self.val_in_memory_info, 1, 1, 1, 1)
 
@@ -6976,12 +7291,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL, 5, 0, 1, 1)
 
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO = QLabel(self.frame_16)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO = QPushButton(self.frame_16)
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO")
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setMaximumSize(QSize(30, 30))
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setFont(font)
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setScaledContents(True)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO, 4, 2, 1, 1)
 
@@ -7000,11 +7317,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_20.addWidget(self.label_22, 2, 0, 1, 1)
 
-        self.DATA__TRAIN__RESOLUTION__INFO = QLabel(self.frame_16)
+        self.DATA__TRAIN__RESOLUTION__INFO = QPushButton(self.frame_16)
         self.DATA__TRAIN__RESOLUTION__INFO.setObjectName(u"DATA__TRAIN__RESOLUTION__INFO")
         self.DATA__TRAIN__RESOLUTION__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TRAIN__RESOLUTION__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__RESOLUTION__INFO.setScaledContents(True)
+        self.DATA__TRAIN__RESOLUTION__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__RESOLUTION__INFO, 1, 2, 1, 1)
 
@@ -7045,28 +7364,34 @@ class Ui_MainWindow(object):
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT, 6, 3, 1, 1)
 
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO = QLabel(self.frame_16)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO = QPushButton(self.frame_16)
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO")
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setMaximumSize(QSize(30, 30))
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setFont(font)
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setScaledContents(True)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO, 6, 2, 1, 1)
 
-        self.DATA__TRAIN__OVERLAP__INFO = QLabel(self.frame_16)
+        self.DATA__TRAIN__OVERLAP__INFO = QPushButton(self.frame_16)
         self.DATA__TRAIN__OVERLAP__INFO.setObjectName(u"DATA__TRAIN__OVERLAP__INFO")
         self.DATA__TRAIN__OVERLAP__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TRAIN__OVERLAP__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__OVERLAP__INFO.setScaledContents(True)
+        self.DATA__TRAIN__OVERLAP__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__OVERLAP__INFO, 2, 2, 1, 1)
 
-        self.DATA__TRAIN__PADDING__INFO = QLabel(self.frame_16)
+        self.DATA__TRAIN__PADDING__INFO = QPushButton(self.frame_16)
         self.DATA__TRAIN__PADDING__INFO.setObjectName(u"DATA__TRAIN__PADDING__INFO")
         self.DATA__TRAIN__PADDING__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TRAIN__PADDING__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__PADDING__INFO.setScaledContents(True)
+        self.DATA__TRAIN__PADDING__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__PADDING__INFO, 3, 2, 1, 1)
 
@@ -7090,11 +7415,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL, 4, 0, 1, 1)
 
-        self.DATA__TRAIN__REPLICATE__INFO = QLabel(self.frame_16)
+        self.DATA__TRAIN__REPLICATE__INFO = QPushButton(self.frame_16)
         self.DATA__TRAIN__REPLICATE__INFO.setObjectName(u"DATA__TRAIN__REPLICATE__INFO")
         self.DATA__TRAIN__REPLICATE__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TRAIN__REPLICATE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__REPLICATE__INFO.setScaledContents(True)
+        self.DATA__TRAIN__REPLICATE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__REPLICATE__INFO, 0, 2, 1, 1)
 
@@ -7102,12 +7429,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_20.addItem(self.horizontalSpacer_11, 0, 6, 1, 1)
 
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO = QLabel(self.frame_16)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO = QPushButton(self.frame_16)
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO")
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setMaximumSize(QSize(30, 30))
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setFont(font)
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setScaledContents(True)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO, 5, 2, 1, 1)
 
@@ -7141,11 +7470,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__LABEL, 8, 0, 1, 1)
 
-        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO = QLabel(self.frame_16)
+        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO = QPushButton(self.frame_16)
         self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO.setObjectName(u"DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO")
         self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO.setScaledContents(True)
+        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO, 8, 2, 1, 1)
 
@@ -7165,11 +7496,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT, 8, 3, 1, 1)
 
-        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO = QLabel(self.frame_16)
+        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO = QPushButton(self.frame_16)
         self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO.setObjectName(u"DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO")
         self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO.setScaledContents(True)
+        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO, 7, 2, 1, 1)
 
@@ -7203,12 +7536,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT, 9, 3, 1, 1)
 
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO = QLabel(self.frame_16)
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO = QPushButton(self.frame_16)
         self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO")
         self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setMaximumSize(QSize(30, 30))
         self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setFont(font)
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setScaledContents(True)
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO, 9, 2, 1, 1)
 
@@ -7219,30 +7554,36 @@ class Ui_MainWindow(object):
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL, 12, 0, 1, 1)
 
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO = QLabel(self.frame_16)
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO = QPushButton(self.frame_16)
         self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO")
         self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setMaximumSize(QSize(30, 30))
         self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setFont(font)
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setScaledContents(True)
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO, 10, 2, 1, 1)
 
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO = QLabel(self.frame_16)
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO = QPushButton(self.frame_16)
         self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO")
         self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setMaximumSize(QSize(30, 30))
         self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setFont(font)
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setScaledContents(True)
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO, 11, 2, 1, 1)
 
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO = QLabel(self.frame_16)
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO = QPushButton(self.frame_16)
         self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO")
         self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setMaximumSize(QSize(30, 30))
         self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setFont(font)
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setScaledContents(True)
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO, 12, 2, 1, 1)
 
@@ -7296,11 +7637,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_13.addWidget(self.TRAIN__PATIENCE__INPUT, 2, 2, 1, 1)
 
-        self.MODEL__ARCHITECTURE__INFO = QLabel(self.frame_12)
+        self.MODEL__ARCHITECTURE__INFO = QPushButton(self.frame_12)
         self.MODEL__ARCHITECTURE__INFO.setObjectName(u"MODEL__ARCHITECTURE__INFO")
         self.MODEL__ARCHITECTURE__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__ARCHITECTURE__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__ARCHITECTURE__INFO.setScaledContents(True)
+        self.MODEL__ARCHITECTURE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_13.addWidget(self.MODEL__ARCHITECTURE__INFO, 4, 1, 1, 1)
 
@@ -7325,19 +7668,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_13.addWidget(self.label_34, 4, 0, 1, 1)
 
-        self.patience_info = QLabel(self.frame_12)
+        self.patience_info = QPushButton(self.frame_12)
         self.patience_info.setObjectName(u"patience_info")
         self.patience_info.setMinimumSize(QSize(30, 30))
         self.patience_info.setMaximumSize(QSize(30, 30))
-        self.patience_info.setScaledContents(True)
+        self.patience_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_13.addWidget(self.patience_info, 2, 1, 1, 1)
 
-        self.number_of_epochs_info = QLabel(self.frame_12)
+        self.number_of_epochs_info = QPushButton(self.frame_12)
         self.number_of_epochs_info.setObjectName(u"number_of_epochs_info")
         self.number_of_epochs_info.setMinimumSize(QSize(30, 30))
         self.number_of_epochs_info.setMaximumSize(QSize(30, 30))
-        self.number_of_epochs_info.setScaledContents(True)
+        self.number_of_epochs_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_13.addWidget(self.number_of_epochs_info, 1, 1, 1, 1)
 
@@ -7347,11 +7694,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_13.addWidget(self.number_of_epochs_label, 1, 0, 1, 1)
 
-        self.MODEL__N_CLASSES__INFO = QLabel(self.frame_12)
+        self.MODEL__N_CLASSES__INFO = QPushButton(self.frame_12)
         self.MODEL__N_CLASSES__INFO.setObjectName(u"MODEL__N_CLASSES__INFO")
         self.MODEL__N_CLASSES__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__N_CLASSES__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__N_CLASSES__INFO.setScaledContents(True)
+        self.MODEL__N_CLASSES__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_13.addWidget(self.MODEL__N_CLASSES__INFO, 5, 1, 1, 1)
 
@@ -7428,11 +7777,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_23.addItem(self.horizontalSpacer_14, 5, 3, 1, 1)
 
-        self.MODEL__MAE_DEC_HIDDEN_SIZE__INFO = QLabel(self.transformers_frame)
+        self.MODEL__MAE_DEC_HIDDEN_SIZE__INFO = QPushButton(self.transformers_frame)
         self.MODEL__MAE_DEC_HIDDEN_SIZE__INFO.setObjectName(u"MODEL__MAE_DEC_HIDDEN_SIZE__INFO")
         self.MODEL__MAE_DEC_HIDDEN_SIZE__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__MAE_DEC_HIDDEN_SIZE__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__MAE_DEC_HIDDEN_SIZE__INFO.setScaledContents(True)
+        self.MODEL__MAE_DEC_HIDDEN_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_HIDDEN_SIZE__INFO, 13, 1, 1, 1)
 
@@ -7477,11 +7828,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_23.addWidget(self.MODEL__MAE_MASK_TYPE__INPUT, 11, 2, 1, 1)
 
-        self.MODEL__UNETR_VIT_HIDD_MULT__INFO = QLabel(self.transformers_frame)
+        self.MODEL__UNETR_VIT_HIDD_MULT__INFO = QPushButton(self.transformers_frame)
         self.MODEL__UNETR_VIT_HIDD_MULT__INFO.setObjectName(u"MODEL__UNETR_VIT_HIDD_MULT__INFO")
         self.MODEL__UNETR_VIT_HIDD_MULT__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__UNETR_VIT_HIDD_MULT__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__UNETR_VIT_HIDD_MULT__INFO.setScaledContents(True)
+        self.MODEL__UNETR_VIT_HIDD_MULT__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_23.addWidget(self.MODEL__UNETR_VIT_HIDD_MULT__INFO, 7, 1, 1, 1)
 
@@ -7492,12 +7845,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_23.addWidget(self.label_55, 5, 0, 1, 1)
 
-        self.MODEL__MAE_MASK_TYPE__INFO = QLabel(self.transformers_frame)
+        self.MODEL__MAE_MASK_TYPE__INFO = QPushButton(self.transformers_frame)
         self.MODEL__MAE_MASK_TYPE__INFO.setObjectName(u"MODEL__MAE_MASK_TYPE__INFO")
         self.MODEL__MAE_MASK_TYPE__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__MAE_MASK_TYPE__INFO.setMaximumSize(QSize(30, 30))
         self.MODEL__MAE_MASK_TYPE__INFO.setFont(font)
-        self.MODEL__MAE_MASK_TYPE__INFO.setScaledContents(True)
+        self.MODEL__MAE_MASK_TYPE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_23.addWidget(self.MODEL__MAE_MASK_TYPE__INFO, 11, 1, 1, 1)
 
@@ -7507,11 +7862,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_MLP_DIMS__LABEL, 16, 0, 1, 1)
 
-        self.MODEL__VIT_EMBED_DIM__INFO = QLabel(self.transformers_frame)
+        self.MODEL__VIT_EMBED_DIM__INFO = QPushButton(self.transformers_frame)
         self.MODEL__VIT_EMBED_DIM__INFO.setObjectName(u"MODEL__VIT_EMBED_DIM__INFO")
         self.MODEL__VIT_EMBED_DIM__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__VIT_EMBED_DIM__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__VIT_EMBED_DIM__INFO.setScaledContents(True)
+        self.MODEL__VIT_EMBED_DIM__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_23.addWidget(self.MODEL__VIT_EMBED_DIM__INFO, 1, 1, 1, 1)
 
@@ -7542,11 +7899,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_23.addWidget(self.unetr_dec_act_label, 9, 0, 1, 1)
 
-        self.MODEL__MAE_MASK_RATIO__INFO = QLabel(self.transformers_frame)
+        self.MODEL__MAE_MASK_RATIO__INFO = QPushButton(self.transformers_frame)
         self.MODEL__MAE_MASK_RATIO__INFO.setObjectName(u"MODEL__MAE_MASK_RATIO__INFO")
         self.MODEL__MAE_MASK_RATIO__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__MAE_MASK_RATIO__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__MAE_MASK_RATIO__INFO.setScaledContents(True)
+        self.MODEL__MAE_MASK_RATIO__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_23.addWidget(self.MODEL__MAE_MASK_RATIO__INFO, 12, 1, 1, 1)
 
@@ -7565,11 +7924,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_23.addWidget(self.MODEL__VIT_EMBED_DIM__INPUT, 1, 2, 1, 1)
 
-        self.MODEL__UNETR_DEC_ACTIVATION__INFO = QLabel(self.transformers_frame)
+        self.MODEL__UNETR_DEC_ACTIVATION__INFO = QPushButton(self.transformers_frame)
         self.MODEL__UNETR_DEC_ACTIVATION__INFO.setObjectName(u"MODEL__UNETR_DEC_ACTIVATION__INFO")
         self.MODEL__UNETR_DEC_ACTIVATION__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__UNETR_DEC_ACTIVATION__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__UNETR_DEC_ACTIVATION__INFO.setScaledContents(True)
+        self.MODEL__UNETR_DEC_ACTIVATION__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_23.addWidget(self.MODEL__UNETR_DEC_ACTIVATION__INFO, 9, 1, 1, 1)
 
@@ -7579,27 +7940,33 @@ class Ui_MainWindow(object):
 
         self.gridLayout_23.addWidget(self.MODEL__MAE_MASK_TYPE__LABEL, 11, 0, 1, 1)
 
-        self.MODEL__VIT_NUM_HEADS__INFO = QLabel(self.transformers_frame)
+        self.MODEL__VIT_NUM_HEADS__INFO = QPushButton(self.transformers_frame)
         self.MODEL__VIT_NUM_HEADS__INFO.setObjectName(u"MODEL__VIT_NUM_HEADS__INFO")
         self.MODEL__VIT_NUM_HEADS__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__VIT_NUM_HEADS__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__VIT_NUM_HEADS__INFO.setScaledContents(True)
+        self.MODEL__VIT_NUM_HEADS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_23.addWidget(self.MODEL__VIT_NUM_HEADS__INFO, 3, 1, 1, 1)
 
-        self.MODEL__VIT_TOKEN_SIZE__INFO = QLabel(self.transformers_frame)
+        self.MODEL__VIT_TOKEN_SIZE__INFO = QPushButton(self.transformers_frame)
         self.MODEL__VIT_TOKEN_SIZE__INFO.setObjectName(u"MODEL__VIT_TOKEN_SIZE__INFO")
         self.MODEL__VIT_TOKEN_SIZE__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__VIT_TOKEN_SIZE__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__VIT_TOKEN_SIZE__INFO.setScaledContents(True)
+        self.MODEL__VIT_TOKEN_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_23.addWidget(self.MODEL__VIT_TOKEN_SIZE__INFO, 0, 1, 1, 1)
 
-        self.MODEL__VIT_MLP_RATIO__INFO = QLabel(self.transformers_frame)
+        self.MODEL__VIT_MLP_RATIO__INFO = QPushButton(self.transformers_frame)
         self.MODEL__VIT_MLP_RATIO__INFO.setObjectName(u"MODEL__VIT_MLP_RATIO__INFO")
         self.MODEL__VIT_MLP_RATIO__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__VIT_MLP_RATIO__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__VIT_MLP_RATIO__INFO.setScaledContents(True)
+        self.MODEL__VIT_MLP_RATIO__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_23.addWidget(self.MODEL__VIT_MLP_RATIO__INFO, 5, 1, 1, 1)
 
@@ -7611,19 +7978,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_NUM_HEADS__INPUT, 15, 2, 1, 1)
 
-        self.MODEL__VIT_NUM_LAYERS__INFO = QLabel(self.transformers_frame)
+        self.MODEL__VIT_NUM_LAYERS__INFO = QPushButton(self.transformers_frame)
         self.MODEL__VIT_NUM_LAYERS__INFO.setObjectName(u"MODEL__VIT_NUM_LAYERS__INFO")
         self.MODEL__VIT_NUM_LAYERS__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__VIT_NUM_LAYERS__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__VIT_NUM_LAYERS__INFO.setScaledContents(True)
+        self.MODEL__VIT_NUM_LAYERS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_23.addWidget(self.MODEL__VIT_NUM_LAYERS__INFO, 2, 1, 1, 1)
 
-        self.MODEL__VIT_NORM_EPS__INFO = QLabel(self.transformers_frame)
+        self.MODEL__VIT_NORM_EPS__INFO = QPushButton(self.transformers_frame)
         self.MODEL__VIT_NORM_EPS__INFO.setObjectName(u"MODEL__VIT_NORM_EPS__INFO")
         self.MODEL__VIT_NORM_EPS__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__VIT_NORM_EPS__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__VIT_NORM_EPS__INFO.setScaledContents(True)
+        self.MODEL__VIT_NORM_EPS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_23.addWidget(self.MODEL__VIT_NORM_EPS__INFO, 6, 1, 1, 1)
 
@@ -7638,11 +8009,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_23.addWidget(self.MODEL__UNETR_DEC_ACTIVATION__INPUT, 9, 2, 1, 1)
 
-        self.MODEL__UNETR_VIT_NUM_FILTERS__INFO = QLabel(self.transformers_frame)
+        self.MODEL__UNETR_VIT_NUM_FILTERS__INFO = QPushButton(self.transformers_frame)
         self.MODEL__UNETR_VIT_NUM_FILTERS__INFO.setObjectName(u"MODEL__UNETR_VIT_NUM_FILTERS__INFO")
         self.MODEL__UNETR_VIT_NUM_FILTERS__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__UNETR_VIT_NUM_FILTERS__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__UNETR_VIT_NUM_FILTERS__INFO.setScaledContents(True)
+        self.MODEL__UNETR_VIT_NUM_FILTERS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_23.addWidget(self.MODEL__UNETR_VIT_NUM_FILTERS__INFO, 8, 1, 1, 1)
 
@@ -7654,11 +8027,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_23.addWidget(self.MODEL__VIT_NORM_EPS__INPUT, 6, 2, 1, 1)
 
-        self.MODEL__MAE_DEC_MLP_DIMS__INFO = QLabel(self.transformers_frame)
+        self.MODEL__MAE_DEC_MLP_DIMS__INFO = QPushButton(self.transformers_frame)
         self.MODEL__MAE_DEC_MLP_DIMS__INFO.setObjectName(u"MODEL__MAE_DEC_MLP_DIMS__INFO")
         self.MODEL__MAE_DEC_MLP_DIMS__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__MAE_DEC_MLP_DIMS__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__MAE_DEC_MLP_DIMS__INFO.setScaledContents(True)
+        self.MODEL__MAE_DEC_MLP_DIMS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_MLP_DIMS__INFO, 16, 1, 1, 1)
 
@@ -7670,19 +8045,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_MLP_DIMS__INPUT, 16, 2, 1, 1)
 
-        self.MODEL__MAE_DEC_NUM_LAYERS__INFO = QLabel(self.transformers_frame)
+        self.MODEL__MAE_DEC_NUM_LAYERS__INFO = QPushButton(self.transformers_frame)
         self.MODEL__MAE_DEC_NUM_LAYERS__INFO.setObjectName(u"MODEL__MAE_DEC_NUM_LAYERS__INFO")
         self.MODEL__MAE_DEC_NUM_LAYERS__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__MAE_DEC_NUM_LAYERS__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__MAE_DEC_NUM_LAYERS__INFO.setScaledContents(True)
+        self.MODEL__MAE_DEC_NUM_LAYERS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_NUM_LAYERS__INFO, 14, 1, 1, 1)
 
-        self.MODEL__MAE_DEC_NUM_HEADS__INFO = QLabel(self.transformers_frame)
+        self.MODEL__MAE_DEC_NUM_HEADS__INFO = QPushButton(self.transformers_frame)
         self.MODEL__MAE_DEC_NUM_HEADS__INFO.setObjectName(u"MODEL__MAE_DEC_NUM_HEADS__INFO")
         self.MODEL__MAE_DEC_NUM_HEADS__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__MAE_DEC_NUM_HEADS__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__MAE_DEC_NUM_HEADS__INFO.setScaledContents(True)
+        self.MODEL__MAE_DEC_NUM_HEADS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_NUM_HEADS__INFO, 15, 1, 1, 1)
 
@@ -7754,12 +8133,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_23.addWidget(self.MODEL__UNETR_DEC_KERNEL_SIZE__LABEL, 10, 0, 1, 1)
 
-        self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO = QLabel(self.transformers_frame)
+        self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO = QPushButton(self.transformers_frame)
         self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setObjectName(u"MODEL__UNETR_DEC_KERNEL_SIZE__INFO")
         self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setMaximumSize(QSize(30, 30))
         self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setFont(font)
-        self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setScaledContents(True)
+        self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_23.addWidget(self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO, 10, 1, 1, 1)
 
@@ -7784,11 +8165,13 @@ class Ui_MainWindow(object):
         self.frame_19.setFrameShadow(QFrame.Raised)
         self.gridLayout_21 = QGridLayout(self.frame_19)
         self.gridLayout_21.setObjectName(u"gridLayout_21")
-        self.DATA__VAL__RANDOM__INFO = QLabel(self.frame_19)
+        self.DATA__VAL__RANDOM__INFO = QPushButton(self.frame_19)
         self.DATA__VAL__RANDOM__INFO.setObjectName(u"DATA__VAL__RANDOM__INFO")
         self.DATA__VAL__RANDOM__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__VAL__RANDOM__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__VAL__RANDOM__INFO.setScaledContents(True)
+        self.DATA__VAL__RANDOM__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_21.addWidget(self.DATA__VAL__RANDOM__INFO, 0, 2, 1, 1)
 
@@ -7809,11 +8192,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_21.addWidget(self.DATA__VAL__RANDOM__INPUT, 0, 3, 1, 3)
 
-        self.DATA__VAL__OVERLAP__INFO = QLabel(self.frame_19)
+        self.DATA__VAL__OVERLAP__INFO = QPushButton(self.frame_19)
         self.DATA__VAL__OVERLAP__INFO.setObjectName(u"DATA__VAL__OVERLAP__INFO")
         self.DATA__VAL__OVERLAP__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__VAL__OVERLAP__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__VAL__OVERLAP__INFO.setScaledContents(True)
+        self.DATA__VAL__OVERLAP__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_21.addWidget(self.DATA__VAL__OVERLAP__INFO, 1, 2, 1, 1)
 
@@ -7847,11 +8232,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_21.addWidget(self.DATA__VAL__PADDING__INPUT, 2, 3, 1, 3)
 
-        self.DATA__VAL__PADDING__INFO = QLabel(self.frame_19)
+        self.DATA__VAL__PADDING__INFO = QPushButton(self.frame_19)
         self.DATA__VAL__PADDING__INFO.setObjectName(u"DATA__VAL__PADDING__INFO")
         self.DATA__VAL__PADDING__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__VAL__PADDING__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__VAL__PADDING__INFO.setScaledContents(True)
+        self.DATA__VAL__PADDING__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_21.addWidget(self.DATA__VAL__PADDING__INFO, 2, 2, 1, 1)
 
@@ -7861,11 +8248,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_21.addWidget(self.label_33, 3, 0, 1, 1)
 
-        self.DATA__VAL__RESOLUTION__INFO = QLabel(self.frame_19)
+        self.DATA__VAL__RESOLUTION__INFO = QPushButton(self.frame_19)
         self.DATA__VAL__RESOLUTION__INFO.setObjectName(u"DATA__VAL__RESOLUTION__INFO")
         self.DATA__VAL__RESOLUTION__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__VAL__RESOLUTION__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__VAL__RESOLUTION__INFO.setScaledContents(True)
+        self.DATA__VAL__RESOLUTION__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_21.addWidget(self.DATA__VAL__RESOLUTION__INFO, 3, 2, 1, 1)
 
@@ -7887,21 +8276,25 @@ class Ui_MainWindow(object):
 
         self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__LABEL, 4, 0, 1, 2)
 
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO = QLabel(self.frame_19)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO = QPushButton(self.frame_19)
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO")
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO.setMaximumSize(QSize(30, 30))
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO.setFont(font)
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO.setScaledContents(True)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO, 4, 2, 1, 1)
 
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO = QLabel(self.frame_19)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO = QPushButton(self.frame_19)
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO")
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setMaximumSize(QSize(30, 30))
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setFont(font)
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setScaledContents(True)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO, 5, 2, 1, 1)
 
@@ -7929,12 +8322,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL, 6, 0, 1, 2)
 
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO = QLabel(self.frame_19)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO = QPushButton(self.frame_19)
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO")
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setMaximumSize(QSize(30, 30))
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setFont(font)
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setScaledContents(True)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO, 6, 2, 1, 1)
 
@@ -7960,11 +8355,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT, 6, 3, 1, 3)
 
-        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INFO = QLabel(self.frame_19)
+        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INFO = QPushButton(self.frame_19)
         self.DATA__VAL__INPUT_IMG_AXES_ORDER__INFO.setObjectName(u"DATA__VAL__INPUT_IMG_AXES_ORDER__INFO")
         self.DATA__VAL__INPUT_IMG_AXES_ORDER__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__VAL__INPUT_IMG_AXES_ORDER__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INFO.setScaledContents(True)
+        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_IMG_AXES_ORDER__INFO, 7, 2, 1, 1)
 
@@ -7990,11 +8387,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT, 8, 3, 1, 1)
 
-        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INFO = QLabel(self.frame_19)
+        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INFO = QPushButton(self.frame_19)
         self.DATA__VAL__INPUT_MASK_AXES_ORDER__INFO.setObjectName(u"DATA__VAL__INPUT_MASK_AXES_ORDER__INFO")
         self.DATA__VAL__INPUT_MASK_AXES_ORDER__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__VAL__INPUT_MASK_AXES_ORDER__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INFO.setScaledContents(True)
+        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_MASK_AXES_ORDER__INFO, 8, 2, 1, 1)
 
@@ -8073,35 +8472,43 @@ class Ui_MainWindow(object):
 
         self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT, 12, 3, 1, 1)
 
-        self.DATA__VAL__FILTER_SAMPLES__SIGNS__INFO = QLabel(self.frame_19)
+        self.DATA__VAL__FILTER_SAMPLES__SIGNS__INFO = QPushButton(self.frame_19)
         self.DATA__VAL__FILTER_SAMPLES__SIGNS__INFO.setObjectName(u"DATA__VAL__FILTER_SAMPLES__SIGNS__INFO")
         self.DATA__VAL__FILTER_SAMPLES__SIGNS__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__VAL__FILTER_SAMPLES__SIGNS__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__VAL__FILTER_SAMPLES__SIGNS__INFO.setScaledContents(True)
+        self.DATA__VAL__FILTER_SAMPLES__SIGNS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__SIGNS__INFO, 12, 2, 1, 1)
 
-        self.DATA__VAL__FILTER_SAMPLES__VALUES__INFO = QLabel(self.frame_19)
+        self.DATA__VAL__FILTER_SAMPLES__VALUES__INFO = QPushButton(self.frame_19)
         self.DATA__VAL__FILTER_SAMPLES__VALUES__INFO.setObjectName(u"DATA__VAL__FILTER_SAMPLES__VALUES__INFO")
         self.DATA__VAL__FILTER_SAMPLES__VALUES__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__VAL__FILTER_SAMPLES__VALUES__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__VAL__FILTER_SAMPLES__VALUES__INFO.setScaledContents(True)
+        self.DATA__VAL__FILTER_SAMPLES__VALUES__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__VALUES__INFO, 11, 2, 1, 1)
 
-        self.DATA__VAL__FILTER_SAMPLES__PROPS__INFO = QLabel(self.frame_19)
+        self.DATA__VAL__FILTER_SAMPLES__PROPS__INFO = QPushButton(self.frame_19)
         self.DATA__VAL__FILTER_SAMPLES__PROPS__INFO.setObjectName(u"DATA__VAL__FILTER_SAMPLES__PROPS__INFO")
         self.DATA__VAL__FILTER_SAMPLES__PROPS__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__VAL__FILTER_SAMPLES__PROPS__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__VAL__FILTER_SAMPLES__PROPS__INFO.setScaledContents(True)
+        self.DATA__VAL__FILTER_SAMPLES__PROPS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__PROPS__INFO, 10, 2, 1, 1)
 
-        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INFO = QLabel(self.frame_19)
+        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INFO = QPushButton(self.frame_19)
         self.DATA__VAL__FILTER_SAMPLES__ENABLE__INFO.setObjectName(u"DATA__VAL__FILTER_SAMPLES__ENABLE__INFO")
         self.DATA__VAL__FILTER_SAMPLES__ENABLE__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__VAL__FILTER_SAMPLES__ENABLE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INFO.setScaledContents(True)
+        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__ENABLE__INFO, 9, 2, 1, 1)
 
@@ -8174,11 +8581,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_6.addWidget(self.train_data_input_browse_bn, 0, 4, 1, 1)
 
-        self.train_data_info = QLabel(self.frame_3)
+        self.train_data_info = QPushButton(self.frame_3)
         self.train_data_info.setObjectName(u"train_data_info")
         self.train_data_info.setMinimumSize(QSize(30, 30))
         self.train_data_info.setMaximumSize(QSize(30, 30))
-        self.train_data_info.setScaledContents(True)
+        self.train_data_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_6.addWidget(self.train_data_info, 0, 2, 1, 1)
 
@@ -8197,19 +8606,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_6.addWidget(self.DATA__TRAIN__PATH__INPUT, 0, 3, 1, 1)
 
-        self.train_data_in_info = QLabel(self.frame_3)
+        self.train_data_in_info = QPushButton(self.frame_3)
         self.train_data_in_info.setObjectName(u"train_data_in_info")
         self.train_data_in_info.setMinimumSize(QSize(30, 30))
         self.train_data_in_info.setMaximumSize(QSize(30, 30))
-        self.train_data_in_info.setScaledContents(True)
+        self.train_data_in_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_6.addWidget(self.train_data_in_info, 4, 2, 1, 1)
 
-        self.train_gt_info = QLabel(self.frame_3)
+        self.train_gt_info = QPushButton(self.frame_3)
         self.train_gt_info.setObjectName(u"train_gt_info")
         self.train_gt_info.setMinimumSize(QSize(30, 30))
         self.train_gt_info.setMaximumSize(QSize(30, 30))
-        self.train_gt_info.setScaledContents(True)
+        self.train_gt_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_6.addWidget(self.train_gt_info, 1, 2, 1, 1)
 
@@ -8245,11 +8658,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_6.addWidget(self.label_6, 5, 1, 1, 1)
 
-        self.DATA__PATCH_SIZE__INFO = QLabel(self.frame_3)
+        self.DATA__PATCH_SIZE__INFO = QPushButton(self.frame_3)
         self.DATA__PATCH_SIZE__INFO.setObjectName(u"DATA__PATCH_SIZE__INFO")
         self.DATA__PATCH_SIZE__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PATCH_SIZE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PATCH_SIZE__INFO.setScaledContents(True)
+        self.DATA__PATCH_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_6.addWidget(self.DATA__PATCH_SIZE__INFO, 5, 2, 1, 1)
 
@@ -8428,27 +8843,33 @@ class Ui_MainWindow(object):
 
         self.gridLayout_30.addWidget(self.DATA__W_BACKGROUND__INPUT, 4, 2, 1, 1)
 
-        self.DATA__PROBABILITY_MAP__INFO = QLabel(self.extract_random_patch_frame)
+        self.DATA__PROBABILITY_MAP__INFO = QPushButton(self.extract_random_patch_frame)
         self.DATA__PROBABILITY_MAP__INFO.setObjectName(u"DATA__PROBABILITY_MAP__INFO")
         self.DATA__PROBABILITY_MAP__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PROBABILITY_MAP__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PROBABILITY_MAP__INFO.setScaledContents(True)
+        self.DATA__PROBABILITY_MAP__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_30.addWidget(self.DATA__PROBABILITY_MAP__INFO, 0, 1, 1, 1)
 
-        self.DATA__W_FOREGROUND__INFO = QLabel(self.extract_random_patch_frame)
+        self.DATA__W_FOREGROUND__INFO = QPushButton(self.extract_random_patch_frame)
         self.DATA__W_FOREGROUND__INFO.setObjectName(u"DATA__W_FOREGROUND__INFO")
         self.DATA__W_FOREGROUND__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__W_FOREGROUND__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__W_FOREGROUND__INFO.setScaledContents(True)
+        self.DATA__W_FOREGROUND__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_30.addWidget(self.DATA__W_FOREGROUND__INFO, 1, 1, 1, 1)
 
-        self.DATA__W_BACKGROUND__INFO = QLabel(self.extract_random_patch_frame)
+        self.DATA__W_BACKGROUND__INFO = QPushButton(self.extract_random_patch_frame)
         self.DATA__W_BACKGROUND__INFO.setObjectName(u"DATA__W_BACKGROUND__INFO")
         self.DATA__W_BACKGROUND__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__W_BACKGROUND__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__W_BACKGROUND__INFO.setScaledContents(True)
+        self.DATA__W_BACKGROUND__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_30.addWidget(self.DATA__W_BACKGROUND__INFO, 4, 1, 1, 1)
 
@@ -8513,27 +8934,33 @@ class Ui_MainWindow(object):
 
         self.gridLayout_31.addWidget(self.DATA__TRAIN__CHECK_DATA__INPUT, 1, 2, 1, 1)
 
-        self.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INFO = QLabel(self.frame_30)
+        self.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INFO = QPushButton(self.frame_30)
         self.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INFO.setObjectName(u"PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INFO")
         self.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INFO.setScaledContents(True)
+        self.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_31.addWidget(self.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INFO, 0, 1, 1, 1)
 
-        self.DATA__TRAIN__CHECK_DATA__INFO = QLabel(self.frame_30)
+        self.DATA__TRAIN__CHECK_DATA__INFO = QPushButton(self.frame_30)
         self.DATA__TRAIN__CHECK_DATA__INFO.setObjectName(u"DATA__TRAIN__CHECK_DATA__INFO")
         self.DATA__TRAIN__CHECK_DATA__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TRAIN__CHECK_DATA__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__CHECK_DATA__INFO.setScaledContents(True)
+        self.DATA__TRAIN__CHECK_DATA__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_31.addWidget(self.DATA__TRAIN__CHECK_DATA__INFO, 1, 1, 1, 1)
 
-        self.DATA__TRAIN__MINIMUM_FOREGROUND_PER__SEM_SEG__INFO = QLabel(self.frame_30)
+        self.DATA__TRAIN__MINIMUM_FOREGROUND_PER__SEM_SEG__INFO = QPushButton(self.frame_30)
         self.DATA__TRAIN__MINIMUM_FOREGROUND_PER__SEM_SEG__INFO.setObjectName(u"DATA__TRAIN__MINIMUM_FOREGROUND_PER__SEM_SEG__INFO")
         self.DATA__TRAIN__MINIMUM_FOREGROUND_PER__SEM_SEG__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TRAIN__MINIMUM_FOREGROUND_PER__SEM_SEG__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__MINIMUM_FOREGROUND_PER__SEM_SEG__INFO.setScaledContents(True)
+        self.DATA__TRAIN__MINIMUM_FOREGROUND_PER__SEM_SEG__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_31.addWidget(self.DATA__TRAIN__MINIMUM_FOREGROUND_PER__SEM_SEG__INFO, 2, 1, 1, 1)
 
@@ -8579,19 +9006,23 @@ class Ui_MainWindow(object):
         self.frame_32.setFrameShadow(QFrame.Raised)
         self.gridLayout_32 = QGridLayout(self.frame_32)
         self.gridLayout_32.setObjectName(u"gridLayout_32")
-        self.PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INFO = QLabel(self.frame_32)
+        self.PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INFO = QPushButton(self.frame_32)
         self.PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INFO")
         self.PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INFO.setScaledContents(True)
+        self.PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_32.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INFO, 3, 1, 1, 1)
 
-        self.PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__INFO = QLabel(self.frame_32)
+        self.PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__INFO = QPushButton(self.frame_32)
         self.PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__INFO")
         self.PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__INFO.setScaledContents(True)
+        self.PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_32.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__INFO, 5, 1, 1, 1)
 
@@ -8629,11 +9060,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_32.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__LABEL, 5, 0, 1, 1)
 
-        self.PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__INFO = QLabel(self.frame_32)
+        self.PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__INFO = QPushButton(self.frame_32)
         self.PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__INFO")
         self.PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__INFO.setScaledContents(True)
+        self.PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_32.addWidget(self.PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__INFO, 6, 1, 1, 1)
 
@@ -8673,11 +9106,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_32.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT, 3, 2, 1, 1)
 
-        self.PROBLEM__INSTANCE_SEG__DATA_CHANNEL_WEIGHTS__INFO = QLabel(self.frame_32)
+        self.PROBLEM__INSTANCE_SEG__DATA_CHANNEL_WEIGHTS__INFO = QPushButton(self.frame_32)
         self.PROBLEM__INSTANCE_SEG__DATA_CHANNEL_WEIGHTS__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_CHANNEL_WEIGHTS__INFO")
         self.PROBLEM__INSTANCE_SEG__DATA_CHANNEL_WEIGHTS__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_CHANNEL_WEIGHTS__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__INSTANCE_SEG__DATA_CHANNEL_WEIGHTS__INFO.setScaledContents(True)
+        self.PROBLEM__INSTANCE_SEG__DATA_CHANNEL_WEIGHTS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_32.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_CHANNEL_WEIGHTS__INFO, 1, 1, 1, 1)
 
@@ -8769,19 +9204,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_35.addWidget(self.label_79, 1, 0, 1, 1)
 
-        self.PROBLEM__DETECTION__CENTRAL_POINT_DILATION__INFO = QLabel(self.frame_34)
+        self.PROBLEM__DETECTION__CENTRAL_POINT_DILATION__INFO = QPushButton(self.frame_34)
         self.PROBLEM__DETECTION__CENTRAL_POINT_DILATION__INFO.setObjectName(u"PROBLEM__DETECTION__CENTRAL_POINT_DILATION__INFO")
         self.PROBLEM__DETECTION__CENTRAL_POINT_DILATION__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__DETECTION__CENTRAL_POINT_DILATION__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__DETECTION__CENTRAL_POINT_DILATION__INFO.setScaledContents(True)
+        self.PROBLEM__DETECTION__CENTRAL_POINT_DILATION__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_35.addWidget(self.PROBLEM__DETECTION__CENTRAL_POINT_DILATION__INFO, 0, 1, 1, 1)
 
-        self.PROBLEM__DETECTION__CHECK_POINTS_CREATED__INFO = QLabel(self.frame_34)
+        self.PROBLEM__DETECTION__CHECK_POINTS_CREATED__INFO = QPushButton(self.frame_34)
         self.PROBLEM__DETECTION__CHECK_POINTS_CREATED__INFO.setObjectName(u"PROBLEM__DETECTION__CHECK_POINTS_CREATED__INFO")
         self.PROBLEM__DETECTION__CHECK_POINTS_CREATED__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__DETECTION__CHECK_POINTS_CREATED__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__DETECTION__CHECK_POINTS_CREATED__INFO.setScaledContents(True)
+        self.PROBLEM__DETECTION__CHECK_POINTS_CREATED__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_35.addWidget(self.PROBLEM__DETECTION__CHECK_POINTS_CREATED__INFO, 1, 1, 1, 1)
 
@@ -8893,35 +9332,43 @@ class Ui_MainWindow(object):
 
         self.gridLayout_48.addWidget(self.PROBLEM__DENOISING__N2V_NEIGHBORHOOD_RADIUS__INPUT, 2, 2, 1, 1)
 
-        self.PROBLEM__DENOISING__N2V_PERC_PIX__INFO = QLabel(self.frame_44)
+        self.PROBLEM__DENOISING__N2V_PERC_PIX__INFO = QPushButton(self.frame_44)
         self.PROBLEM__DENOISING__N2V_PERC_PIX__INFO.setObjectName(u"PROBLEM__DENOISING__N2V_PERC_PIX__INFO")
         self.PROBLEM__DENOISING__N2V_PERC_PIX__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__DENOISING__N2V_PERC_PIX__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__DENOISING__N2V_PERC_PIX__INFO.setScaledContents(True)
+        self.PROBLEM__DENOISING__N2V_PERC_PIX__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_48.addWidget(self.PROBLEM__DENOISING__N2V_PERC_PIX__INFO, 0, 1, 1, 1)
 
-        self.PROBLEM__DENOISING__N2V_MANIPULATOR__INFO = QLabel(self.frame_44)
+        self.PROBLEM__DENOISING__N2V_MANIPULATOR__INFO = QPushButton(self.frame_44)
         self.PROBLEM__DENOISING__N2V_MANIPULATOR__INFO.setObjectName(u"PROBLEM__DENOISING__N2V_MANIPULATOR__INFO")
         self.PROBLEM__DENOISING__N2V_MANIPULATOR__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__DENOISING__N2V_MANIPULATOR__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__DENOISING__N2V_MANIPULATOR__INFO.setScaledContents(True)
+        self.PROBLEM__DENOISING__N2V_MANIPULATOR__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_48.addWidget(self.PROBLEM__DENOISING__N2V_MANIPULATOR__INFO, 1, 1, 1, 1)
 
-        self.PROBLEM__DENOISING__N2V_NEIGHBORHOOD_RADIUS__INFO = QLabel(self.frame_44)
+        self.PROBLEM__DENOISING__N2V_NEIGHBORHOOD_RADIUS__INFO = QPushButton(self.frame_44)
         self.PROBLEM__DENOISING__N2V_NEIGHBORHOOD_RADIUS__INFO.setObjectName(u"PROBLEM__DENOISING__N2V_NEIGHBORHOOD_RADIUS__INFO")
         self.PROBLEM__DENOISING__N2V_NEIGHBORHOOD_RADIUS__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__DENOISING__N2V_NEIGHBORHOOD_RADIUS__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__DENOISING__N2V_NEIGHBORHOOD_RADIUS__INFO.setScaledContents(True)
+        self.PROBLEM__DENOISING__N2V_NEIGHBORHOOD_RADIUS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_48.addWidget(self.PROBLEM__DENOISING__N2V_NEIGHBORHOOD_RADIUS__INFO, 2, 1, 1, 1)
 
-        self.PROBLEM__DENOISING__N2V_STRUCTMASK__INFO = QLabel(self.frame_44)
+        self.PROBLEM__DENOISING__N2V_STRUCTMASK__INFO = QPushButton(self.frame_44)
         self.PROBLEM__DENOISING__N2V_STRUCTMASK__INFO.setObjectName(u"PROBLEM__DENOISING__N2V_STRUCTMASK__INFO")
         self.PROBLEM__DENOISING__N2V_STRUCTMASK__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__DENOISING__N2V_STRUCTMASK__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__DENOISING__N2V_STRUCTMASK__INFO.setScaledContents(True)
+        self.PROBLEM__DENOISING__N2V_STRUCTMASK__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_48.addWidget(self.PROBLEM__DENOISING__N2V_STRUCTMASK__INFO, 3, 1, 1, 1)
 
@@ -8986,11 +9433,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_56.addItem(self.horizontalSpacer_53, 0, 3, 1, 1)
 
-        self.PROBLEM__SUPER_RESOLUTION__UPSCALING__INFO = QLabel(self.frame_48)
+        self.PROBLEM__SUPER_RESOLUTION__UPSCALING__INFO = QPushButton(self.frame_48)
         self.PROBLEM__SUPER_RESOLUTION__UPSCALING__INFO.setObjectName(u"PROBLEM__SUPER_RESOLUTION__UPSCALING__INFO")
         self.PROBLEM__SUPER_RESOLUTION__UPSCALING__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__SUPER_RESOLUTION__UPSCALING__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__SUPER_RESOLUTION__UPSCALING__INFO.setScaledContents(True)
+        self.PROBLEM__SUPER_RESOLUTION__UPSCALING__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_56.addWidget(self.PROBLEM__SUPER_RESOLUTION__UPSCALING__INFO, 0, 1, 1, 1)
 
@@ -9041,11 +9490,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_10.addWidget(self.MODEL__UNET_SR_UPSAMPLE_POSITION__LABEL, 0, 0, 1, 1)
 
-        self.MODEL__UNET_SR_UPSAMPLE_POSITION__INFO = QLabel(self.sr_unet_like_frame)
+        self.MODEL__UNET_SR_UPSAMPLE_POSITION__INFO = QPushButton(self.sr_unet_like_frame)
         self.MODEL__UNET_SR_UPSAMPLE_POSITION__INFO.setObjectName(u"MODEL__UNET_SR_UPSAMPLE_POSITION__INFO")
         self.MODEL__UNET_SR_UPSAMPLE_POSITION__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__UNET_SR_UPSAMPLE_POSITION__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__UNET_SR_UPSAMPLE_POSITION__INFO.setScaledContents(True)
+        self.MODEL__UNET_SR_UPSAMPLE_POSITION__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_10.addWidget(self.MODEL__UNET_SR_UPSAMPLE_POSITION__INFO, 0, 1, 1, 1)
 
@@ -9140,27 +9591,33 @@ class Ui_MainWindow(object):
 
         self.gridLayout_57.addWidget(self.PROBLEM__SELF_SUPERVISED__NOISE__INPUT, 2, 2, 1, 1)
 
-        self.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INFO = QLabel(self.pretext_frame)
+        self.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INFO = QPushButton(self.pretext_frame)
         self.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INFO.setObjectName(u"PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INFO")
         self.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INFO.setScaledContents(True)
+        self.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_57.addWidget(self.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INFO, 0, 1, 1, 1)
 
-        self.PROBLEM__SELF_SUPERVISED__RESIZING_FACTOR__INFO = QLabel(self.pretext_frame)
+        self.PROBLEM__SELF_SUPERVISED__RESIZING_FACTOR__INFO = QPushButton(self.pretext_frame)
         self.PROBLEM__SELF_SUPERVISED__RESIZING_FACTOR__INFO.setObjectName(u"PROBLEM__SELF_SUPERVISED__RESIZING_FACTOR__INFO")
         self.PROBLEM__SELF_SUPERVISED__RESIZING_FACTOR__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__SELF_SUPERVISED__RESIZING_FACTOR__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__SELF_SUPERVISED__RESIZING_FACTOR__INFO.setScaledContents(True)
+        self.PROBLEM__SELF_SUPERVISED__RESIZING_FACTOR__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_57.addWidget(self.PROBLEM__SELF_SUPERVISED__RESIZING_FACTOR__INFO, 1, 1, 1, 1)
 
-        self.PROBLEM__SELF_SUPERVISED__NOISE__INFO = QLabel(self.pretext_frame)
+        self.PROBLEM__SELF_SUPERVISED__NOISE__INFO = QPushButton(self.pretext_frame)
         self.PROBLEM__SELF_SUPERVISED__NOISE__INFO.setObjectName(u"PROBLEM__SELF_SUPERVISED__NOISE__INFO")
         self.PROBLEM__SELF_SUPERVISED__NOISE__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__SELF_SUPERVISED__NOISE__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__SELF_SUPERVISED__NOISE__INFO.setScaledContents(True)
+        self.PROBLEM__SELF_SUPERVISED__NOISE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_57.addWidget(self.PROBLEM__SELF_SUPERVISED__NOISE__INFO, 2, 1, 1, 1)
 
@@ -9260,12 +9717,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_77.addWidget(self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__LABEL, 0, 0, 1, 1)
 
-        self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INFO = QLabel(self.frame_63)
+        self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INFO = QPushButton(self.frame_63)
         self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INFO.setObjectName(u"PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INFO")
         self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INFO.setMaximumSize(QSize(30, 30))
         self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INFO.setFont(font)
-        self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INFO.setScaledContents(True)
+        self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_77.addWidget(self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INFO, 0, 1, 1, 1)
 
@@ -9356,7 +9815,7 @@ class Ui_MainWindow(object):
         self.test_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 881, 2430))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 898, 2430))
         self.gridLayout_37 = QGridLayout(self.scrollAreaWidgetContents_5)
         self.gridLayout_37.setObjectName(u"gridLayout_37")
         self.test_advanced_options_frame = QFrame(self.scrollAreaWidgetContents_5)
@@ -9418,35 +9877,43 @@ class Ui_MainWindow(object):
 
         self.gridLayout_53.addItem(self.horizontalSpacer_44, 2, 3, 1, 1)
 
-        self.TEST__VERBOSE__INFO = QLabel(self.frame_45)
+        self.TEST__VERBOSE__INFO = QPushButton(self.frame_45)
         self.TEST__VERBOSE__INFO.setObjectName(u"TEST__VERBOSE__INFO")
         self.TEST__VERBOSE__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__VERBOSE__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__VERBOSE__INFO.setScaledContents(True)
+        self.TEST__VERBOSE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_53.addWidget(self.TEST__VERBOSE__INFO, 2, 1, 1, 1)
 
-        self.TEST__AUGMENTATION__INFO = QLabel(self.frame_45)
+        self.TEST__AUGMENTATION__INFO = QPushButton(self.frame_45)
         self.TEST__AUGMENTATION__INFO.setObjectName(u"TEST__AUGMENTATION__INFO")
         self.TEST__AUGMENTATION__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__AUGMENTATION__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__AUGMENTATION__INFO.setScaledContents(True)
+        self.TEST__AUGMENTATION__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_53.addWidget(self.TEST__AUGMENTATION__INFO, 4, 1, 1, 1)
 
-        self.TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INFO = QLabel(self.frame_45)
+        self.TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INFO = QPushButton(self.frame_45)
         self.TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INFO.setObjectName(u"TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INFO")
         self.TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INFO.setScaledContents(True)
+        self.TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_53.addWidget(self.TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INFO, 6, 1, 1, 1)
 
-        self.TEST__BY_CHUNKS__ENABLE__INFO = QLabel(self.frame_45)
+        self.TEST__BY_CHUNKS__ENABLE__INFO = QPushButton(self.frame_45)
         self.TEST__BY_CHUNKS__ENABLE__INFO.setObjectName(u"TEST__BY_CHUNKS__ENABLE__INFO")
         self.TEST__BY_CHUNKS__ENABLE__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__BY_CHUNKS__ENABLE__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__BY_CHUNKS__ENABLE__INFO.setScaledContents(True)
+        self.TEST__BY_CHUNKS__ENABLE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_53.addWidget(self.TEST__BY_CHUNKS__ENABLE__INFO, 1, 1, 1, 1)
 
@@ -9456,11 +9923,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_53.addWidget(self.test_2d_as_3d_stack_label, 6, 0, 1, 1)
 
-        self.TEST__REDUCE_MEMORY__INFO = QLabel(self.frame_45)
+        self.TEST__REDUCE_MEMORY__INFO = QPushButton(self.frame_45)
         self.TEST__REDUCE_MEMORY__INFO.setObjectName(u"TEST__REDUCE_MEMORY__INFO")
         self.TEST__REDUCE_MEMORY__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__REDUCE_MEMORY__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__REDUCE_MEMORY__INFO.setScaledContents(True)
+        self.TEST__REDUCE_MEMORY__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_53.addWidget(self.TEST__REDUCE_MEMORY__INFO, 0, 1, 1, 1)
 
@@ -9529,12 +9998,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_53.addWidget(self.TEST__AUGMENTATION_MODE__LABEL, 5, 0, 1, 1)
 
-        self.TEST__AUGMENTATION_MODE__INFO = QLabel(self.frame_45)
+        self.TEST__AUGMENTATION_MODE__INFO = QPushButton(self.frame_45)
         self.TEST__AUGMENTATION_MODE__INFO.setObjectName(u"TEST__AUGMENTATION_MODE__INFO")
         self.TEST__AUGMENTATION_MODE__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__AUGMENTATION_MODE__INFO.setMaximumSize(QSize(30, 30))
         self.TEST__AUGMENTATION_MODE__INFO.setFont(font)
-        self.TEST__AUGMENTATION_MODE__INFO.setScaledContents(True)
+        self.TEST__AUGMENTATION_MODE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_53.addWidget(self.TEST__AUGMENTATION_MODE__INFO, 5, 1, 1, 1)
 
@@ -9577,11 +10048,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_54.addWidget(self.TEST__FULL_IMG__INPUT, 0, 2, 1, 1)
 
-        self.TEST__FULL_IMG__INFO = QLabel(self.frame_46)
+        self.TEST__FULL_IMG__INFO = QPushButton(self.frame_46)
         self.TEST__FULL_IMG__INFO.setObjectName(u"TEST__FULL_IMG__INFO")
         self.TEST__FULL_IMG__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__FULL_IMG__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__FULL_IMG__INFO.setScaledContents(True)
+        self.TEST__FULL_IMG__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_54.addWidget(self.TEST__FULL_IMG__INFO, 0, 1, 1, 1)
 
@@ -9605,12 +10078,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_54.addWidget(self.TEST__REUSE_PREDICTIONS__INPUT, 1, 2, 1, 1)
 
-        self.TEST__REUSE_PREDICTIONS__INFO = QLabel(self.frame_46)
+        self.TEST__REUSE_PREDICTIONS__INFO = QPushButton(self.frame_46)
         self.TEST__REUSE_PREDICTIONS__INFO.setObjectName(u"TEST__REUSE_PREDICTIONS__INFO")
         self.TEST__REUSE_PREDICTIONS__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__REUSE_PREDICTIONS__INFO.setMaximumSize(QSize(30, 30))
         self.TEST__REUSE_PREDICTIONS__INFO.setFont(font)
-        self.TEST__REUSE_PREDICTIONS__INFO.setScaledContents(True)
+        self.TEST__REUSE_PREDICTIONS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_54.addWidget(self.TEST__REUSE_PREDICTIONS__INFO, 1, 1, 1, 1)
 
@@ -9635,11 +10110,13 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_34.addWidget(self.DATA__PREPROCESS__TEST__LABEL)
 
-        self.DATA__PREPROCESS__TEST__INFO = QLabel(self.DATA__PREPROCESS__TEST__FRAME)
+        self.DATA__PREPROCESS__TEST__INFO = QPushButton(self.DATA__PREPROCESS__TEST__FRAME)
         self.DATA__PREPROCESS__TEST__INFO.setObjectName(u"DATA__PREPROCESS__TEST__INFO")
         self.DATA__PREPROCESS__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__TEST__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__TEST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.horizontalLayout_34.addWidget(self.DATA__PREPROCESS__TEST__INFO)
 
@@ -9686,12 +10163,14 @@ class Ui_MainWindow(object):
         self.process_by_chunks_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_70 = QGridLayout(self.process_by_chunks_frame)
         self.gridLayout_70.setObjectName(u"gridLayout_70")
-        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO = QLabel(self.process_by_chunks_frame)
+        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO = QPushButton(self.process_by_chunks_frame)
         self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO.setObjectName(u"TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO")
         self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO.setMaximumSize(QSize(30, 30))
         self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO.setFont(font)
-        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO.setScaledContents(True)
+        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO, 5, 1, 1, 1)
 
@@ -9734,11 +10213,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__FORMAT__INPUT, 0, 2, 1, 1)
 
-        self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INFO = QLabel(self.process_by_chunks_frame)
+        self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INFO = QPushButton(self.process_by_chunks_frame)
         self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INFO.setObjectName(u"TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INFO")
         self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INFO.setScaledContents(True)
+        self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INFO, 3, 1, 1, 1)
 
@@ -9769,12 +10250,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__FLUSH_EACH__INPUT, 2, 2, 1, 1)
 
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO = QLabel(self.process_by_chunks_frame)
+        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO = QPushButton(self.process_by_chunks_frame)
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO.setObjectName(u"TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO")
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO.setMaximumSize(QSize(30, 30))
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO.setFont(font)
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO.setScaledContents(True)
+        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO, 6, 1, 1, 1)
 
@@ -9820,11 +10303,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INPUT, 9, 2, 1, 1)
 
-        self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INFO = QLabel(self.process_by_chunks_frame)
+        self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INFO = QPushButton(self.process_by_chunks_frame)
         self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INFO.setObjectName(u"TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INFO")
         self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INFO.setScaledContents(True)
+        self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INFO, 11, 1, 1, 1)
 
@@ -9834,28 +10319,34 @@ class Ui_MainWindow(object):
 
         self.gridLayout_70.addWidget(self.label_54, 2, 0, 1, 1)
 
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO = QLabel(self.process_by_chunks_frame)
+        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO = QPushButton(self.process_by_chunks_frame)
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setObjectName(u"TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO")
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setMaximumSize(QSize(30, 30))
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setFont(font)
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setScaledContents(True)
+        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO, 7, 1, 1, 1)
 
-        self.TEST__BY_CHUNKS__FLUSH_EACH__INFO = QLabel(self.process_by_chunks_frame)
+        self.TEST__BY_CHUNKS__FLUSH_EACH__INFO = QPushButton(self.process_by_chunks_frame)
         self.TEST__BY_CHUNKS__FLUSH_EACH__INFO.setObjectName(u"TEST__BY_CHUNKS__FLUSH_EACH__INFO")
         self.TEST__BY_CHUNKS__FLUSH_EACH__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__BY_CHUNKS__FLUSH_EACH__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__BY_CHUNKS__FLUSH_EACH__INFO.setScaledContents(True)
+        self.TEST__BY_CHUNKS__FLUSH_EACH__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__FLUSH_EACH__INFO, 2, 1, 1, 1)
 
-        self.TEST__BY_CHUNKS__SAVE_OUT_TIF__INFO = QLabel(self.process_by_chunks_frame)
+        self.TEST__BY_CHUNKS__SAVE_OUT_TIF__INFO = QPushButton(self.process_by_chunks_frame)
         self.TEST__BY_CHUNKS__SAVE_OUT_TIF__INFO.setObjectName(u"TEST__BY_CHUNKS__SAVE_OUT_TIF__INFO")
         self.TEST__BY_CHUNKS__SAVE_OUT_TIF__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__BY_CHUNKS__SAVE_OUT_TIF__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__BY_CHUNKS__SAVE_OUT_TIF__INFO.setScaledContents(True)
+        self.TEST__BY_CHUNKS__SAVE_OUT_TIF__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__SAVE_OUT_TIF__INFO, 1, 1, 1, 1)
 
@@ -9894,28 +10385,34 @@ class Ui_MainWindow(object):
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__LABEL, 3, 0, 1, 1)
 
-        self.TEST__BY_CHUNKS__FORMAT__INFO = QLabel(self.process_by_chunks_frame)
+        self.TEST__BY_CHUNKS__FORMAT__INFO = QPushButton(self.process_by_chunks_frame)
         self.TEST__BY_CHUNKS__FORMAT__INFO.setObjectName(u"TEST__BY_CHUNKS__FORMAT__INFO")
         self.TEST__BY_CHUNKS__FORMAT__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__BY_CHUNKS__FORMAT__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__BY_CHUNKS__FORMAT__INFO.setScaledContents(True)
+        self.TEST__BY_CHUNKS__FORMAT__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__FORMAT__INFO, 0, 1, 1, 1)
 
-        self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INFO = QLabel(self.process_by_chunks_frame)
+        self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INFO = QPushButton(self.process_by_chunks_frame)
         self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INFO.setObjectName(u"TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INFO")
         self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INFO.setScaledContents(True)
+        self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INFO, 9, 1, 1, 1)
 
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO = QLabel(self.process_by_chunks_frame)
+        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO = QPushButton(self.process_by_chunks_frame)
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setObjectName(u"TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO")
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setMaximumSize(QSize(30, 30))
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setFont(font)
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setScaledContents(True)
+        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO, 8, 1, 1, 1)
 
@@ -9985,11 +10482,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_43.addWidget(self.test_argmax_label, 5, 0, 1, 1)
 
-        self.DATA__TEST__MEDIAN_PADDING__INFO = QLabel(self.frame_41)
+        self.DATA__TEST__MEDIAN_PADDING__INFO = QPushButton(self.frame_41)
         self.DATA__TEST__MEDIAN_PADDING__INFO.setObjectName(u"DATA__TEST__MEDIAN_PADDING__INFO")
         self.DATA__TEST__MEDIAN_PADDING__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TEST__MEDIAN_PADDING__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__MEDIAN_PADDING__INFO.setScaledContents(True)
+        self.DATA__TEST__MEDIAN_PADDING__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_43.addWidget(self.DATA__TEST__MEDIAN_PADDING__INFO, 3, 1, 1, 1)
 
@@ -9999,19 +10498,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_43.addWidget(self.test_median_padding_label, 3, 0, 1, 1)
 
-        self.DATA__TEST__PADDING__INFO = QLabel(self.frame_41)
+        self.DATA__TEST__PADDING__INFO = QPushButton(self.frame_41)
         self.DATA__TEST__PADDING__INFO.setObjectName(u"DATA__TEST__PADDING__INFO")
         self.DATA__TEST__PADDING__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TEST__PADDING__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__PADDING__INFO.setScaledContents(True)
+        self.DATA__TEST__PADDING__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_43.addWidget(self.DATA__TEST__PADDING__INFO, 2, 1, 1, 1)
 
-        self.DATA__TEST__RESOLUTION__INFO = QLabel(self.frame_41)
+        self.DATA__TEST__RESOLUTION__INFO = QPushButton(self.frame_41)
         self.DATA__TEST__RESOLUTION__INFO.setObjectName(u"DATA__TEST__RESOLUTION__INFO")
         self.DATA__TEST__RESOLUTION__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TEST__RESOLUTION__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__RESOLUTION__INFO.setScaledContents(True)
+        self.DATA__TEST__RESOLUTION__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_43.addWidget(self.DATA__TEST__RESOLUTION__INFO, 4, 1, 1, 1)
 
@@ -10029,19 +10532,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_43.addWidget(self.test_overlap_label, 1, 0, 1, 1)
 
-        self.DATA__TEST__ARGMAX_TO_OUTPUT__INFO = QLabel(self.frame_41)
+        self.DATA__TEST__ARGMAX_TO_OUTPUT__INFO = QPushButton(self.frame_41)
         self.DATA__TEST__ARGMAX_TO_OUTPUT__INFO.setObjectName(u"DATA__TEST__ARGMAX_TO_OUTPUT__INFO")
         self.DATA__TEST__ARGMAX_TO_OUTPUT__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TEST__ARGMAX_TO_OUTPUT__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__ARGMAX_TO_OUTPUT__INFO.setScaledContents(True)
+        self.DATA__TEST__ARGMAX_TO_OUTPUT__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_43.addWidget(self.DATA__TEST__ARGMAX_TO_OUTPUT__INFO, 5, 1, 1, 1)
 
-        self.DATA__TEST__OVERLAP__INFO = QLabel(self.frame_41)
+        self.DATA__TEST__OVERLAP__INFO = QPushButton(self.frame_41)
         self.DATA__TEST__OVERLAP__INFO.setObjectName(u"DATA__TEST__OVERLAP__INFO")
         self.DATA__TEST__OVERLAP__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TEST__OVERLAP__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__OVERLAP__INFO.setScaledContents(True)
+        self.DATA__TEST__OVERLAP__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_43.addWidget(self.DATA__TEST__OVERLAP__INFO, 1, 1, 1, 1)
 
@@ -10057,11 +10564,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_43.addWidget(self.DATA__TEST__RESOLUTION__INPUT, 4, 2, 1, 1)
 
-        self.DATA__PATCH_SIZE__TEST__INFO = QLabel(self.frame_41)
+        self.DATA__PATCH_SIZE__TEST__INFO = QPushButton(self.frame_41)
         self.DATA__PATCH_SIZE__TEST__INFO.setObjectName(u"DATA__PATCH_SIZE__TEST__INFO")
         self.DATA__PATCH_SIZE__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PATCH_SIZE__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PATCH_SIZE__TEST__INFO.setScaledContents(True)
+        self.DATA__PATCH_SIZE__TEST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_43.addWidget(self.DATA__PATCH_SIZE__TEST__INFO, 0, 1, 1, 1)
 
@@ -10093,12 +10602,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__VALUES__LABEL, 8, 0, 1, 1)
 
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO = QLabel(self.frame_41)
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO = QPushButton(self.frame_41)
         self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setObjectName(u"DATA__TEST__FILTER_SAMPLES__ENABLE__INFO")
         self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setMaximumSize(QSize(30, 30))
         self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setFont(font)
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setScaledContents(True)
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO, 6, 1, 1, 1)
 
@@ -10115,30 +10626,36 @@ class Ui_MainWindow(object):
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL, 9, 0, 1, 1)
 
-        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO = QLabel(self.frame_41)
+        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO = QPushButton(self.frame_41)
         self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setObjectName(u"DATA__TEST__FILTER_SAMPLES__SIGNS__INFO")
         self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setMaximumSize(QSize(30, 30))
         self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setFont(font)
-        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setScaledContents(True)
+        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO, 9, 1, 1, 1)
 
-        self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO = QLabel(self.frame_41)
+        self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO = QPushButton(self.frame_41)
         self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO.setObjectName(u"DATA__TEST__FILTER_SAMPLES__VALUES__INFO")
         self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO.setMaximumSize(QSize(30, 30))
         self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO.setFont(font)
-        self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO.setScaledContents(True)
+        self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO, 8, 1, 1, 1)
 
-        self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO = QLabel(self.frame_41)
+        self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO = QPushButton(self.frame_41)
         self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO.setObjectName(u"DATA__TEST__FILTER_SAMPLES__PROPS__INFO")
         self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO.setMaximumSize(QSize(30, 30))
         self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO.setFont(font)
-        self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO.setScaledContents(True)
+        self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO, 7, 1, 1, 1)
 
@@ -10207,11 +10724,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_63.addWidget(self.TEST__POST_PROCESSING__APPLY_MASK__INPUT, 0, 2, 1, 1)
 
-        self.TEST__POST_PROCESSING__APPLY_MASK__INFO = QLabel(self.frame_55)
+        self.TEST__POST_PROCESSING__APPLY_MASK__INFO = QPushButton(self.frame_55)
         self.TEST__POST_PROCESSING__APPLY_MASK__INFO.setObjectName(u"TEST__POST_PROCESSING__APPLY_MASK__INFO")
         self.TEST__POST_PROCESSING__APPLY_MASK__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__APPLY_MASK__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__APPLY_MASK__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__APPLY_MASK__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_63.addWidget(self.TEST__POST_PROCESSING__APPLY_MASK__INFO, 0, 1, 1, 1)
 
@@ -10225,11 +10744,13 @@ class Ui_MainWindow(object):
         self.preprocessing_test_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_75 = QGridLayout(self.preprocessing_test_frame)
         self.gridLayout_75.setObjectName(u"gridLayout_75")
-        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INFO = QLabel(self.preprocessing_test_frame)
+        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INFO = QPushButton(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INFO")
         self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INFO, 1, 1, 1, 1)
 
@@ -10239,27 +10760,33 @@ class Ui_MainWindow(object):
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__TEST__LABEL, 12, 0, 1, 1)
 
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__INFO = QLabel(self.preprocessing_test_frame)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__INFO = QPushButton(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__INFO.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__INFO")
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__INFO, 10, 1, 1, 1)
 
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INFO = QLabel(self.preprocessing_test_frame)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INFO = QPushButton(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INFO.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INFO")
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INFO, 15, 1, 1, 1)
 
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__INFO = QLabel(self.preprocessing_test_frame)
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__INFO = QPushButton(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__INFO")
         self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__INFO, 6, 1, 1, 1)
 
@@ -10294,11 +10821,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__ORDER__TEST__LABEL, 2, 0, 1, 1)
 
-        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INFO = QLabel(self.preprocessing_test_frame)
+        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INFO = QPushButton(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INFO.setObjectName(u"DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INFO")
         self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INFO, 20, 1, 1, 1)
 
@@ -10337,11 +10866,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__CANNY__ENABLE__TEST__INPUT, 19, 3, 1, 1)
 
-        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INFO = QLabel(self.preprocessing_test_frame)
+        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INFO = QPushButton(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INFO.setObjectName(u"DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INFO")
         self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INFO, 21, 1, 1, 1)
 
@@ -10363,11 +10894,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__TEST__INPUT, 12, 3, 1, 1)
 
-        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__INFO = QLabel(self.preprocessing_test_frame)
+        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__INFO = QPushButton(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__INFO.setObjectName(u"DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__INFO")
         self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__INFO, 18, 1, 1, 1)
 
@@ -10392,11 +10925,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__LABEL, 20, 0, 1, 1)
 
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__INFO = QLabel(self.preprocessing_test_frame)
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__INFO = QPushButton(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__INFO")
         self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__INFO, 7, 1, 1, 1)
 
@@ -10506,19 +11041,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__LABEL, 1, 0, 1, 1)
 
-        self.DATA__PREPROCESS__CLAHE__TEST__INFO = QLabel(self.preprocessing_test_frame)
+        self.DATA__PREPROCESS__CLAHE__TEST__INFO = QPushButton(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__CLAHE__TEST__INFO.setObjectName(u"DATA__PREPROCESS__CLAHE__TEST__INFO")
         self.DATA__PREPROCESS__CLAHE__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__CLAHE__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__CLAHE__TEST__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__CLAHE__TEST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__CLAHE__TEST__INFO, 16, 1, 1, 1)
 
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__TEST__INFO = QLabel(self.preprocessing_test_frame)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__TEST__INFO = QPushButton(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__TEST__INFO.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__TEST__INFO")
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__TEST__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__TEST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__TEST__INFO, 14, 1, 1, 1)
 
@@ -10545,12 +11084,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__INPUT, 6, 3, 1, 1)
 
-        self.DATA__PREPROCESS__RESIZE__TEST__INFO = QLabel(self.preprocessing_test_frame)
+        self.DATA__PREPROCESS__RESIZE__TEST__INFO = QPushButton(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__RESIZE__TEST__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__TEST__INFO")
         self.DATA__PREPROCESS__RESIZE__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__RESIZE__TEST__INFO.setMaximumSize(QSize(30, 30))
         self.DATA__PREPROCESS__RESIZE__TEST__INFO.setFont(font10)
-        self.DATA__PREPROCESS__RESIZE__TEST__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__RESIZE__TEST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__TEST__INFO, 0, 1, 1, 1)
 
@@ -10586,11 +11127,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__LABEL, 21, 0, 1, 1)
 
-        self.DATA__PREPROCESS__CANNY__TEST__INFO = QLabel(self.preprocessing_test_frame)
+        self.DATA__PREPROCESS__CANNY__TEST__INFO = QPushButton(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__CANNY__TEST__INFO.setObjectName(u"DATA__PREPROCESS__CANNY__TEST__INFO")
         self.DATA__PREPROCESS__CANNY__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__CANNY__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__CANNY__TEST__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__CANNY__TEST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__CANNY__TEST__INFO, 19, 1, 1, 1)
 
@@ -10600,11 +11143,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__TEST__LABEL, 8, 0, 1, 1)
 
-        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__INFO = QLabel(self.preprocessing_test_frame)
+        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__INFO = QPushButton(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__INFO.setObjectName(u"DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__INFO")
         self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__INFO, 17, 1, 1, 1)
 
@@ -10616,11 +11161,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INPUT, 21, 3, 1, 1)
 
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__INFO = QLabel(self.preprocessing_test_frame)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__INFO = QPushButton(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__INFO.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__INFO")
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__INFO, 11, 1, 1, 1)
 
@@ -10639,11 +11186,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__LABEL, 17, 0, 1, 1)
 
-        self.DATA__PREPROCESS__RESIZE__CLIP__TEST__INFO = QLabel(self.preprocessing_test_frame)
+        self.DATA__PREPROCESS__RESIZE__CLIP__TEST__INFO = QPushButton(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__RESIZE__CLIP__TEST__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__CLIP__TEST__INFO")
         self.DATA__PREPROCESS__RESIZE__CLIP__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__RESIZE__CLIP__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__CLIP__TEST__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__RESIZE__CLIP__TEST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__CLIP__TEST__INFO, 5, 1, 1, 1)
 
@@ -10675,19 +11224,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__CVAL__TEST__LABEL, 4, 0, 1, 1)
 
-        self.DATA__PREPROCESS__MEDIAN_BLUR__TEST__INFO = QLabel(self.preprocessing_test_frame)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__TEST__INFO = QPushButton(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__MEDIAN_BLUR__TEST__INFO.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__TEST__INFO")
         self.DATA__PREPROCESS__MEDIAN_BLUR__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__MEDIAN_BLUR__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__MEDIAN_BLUR__TEST__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__TEST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__TEST__INFO, 12, 1, 1, 1)
 
-        self.DATA__PREPROCESS__RESIZE__ORDER__TEST__INFO = QLabel(self.preprocessing_test_frame)
+        self.DATA__PREPROCESS__RESIZE__ORDER__TEST__INFO = QPushButton(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__RESIZE__ORDER__TEST__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__ORDER__TEST__INFO")
         self.DATA__PREPROCESS__RESIZE__ORDER__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__RESIZE__ORDER__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__ORDER__TEST__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__RESIZE__ORDER__TEST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__ORDER__TEST__INFO, 2, 1, 1, 1)
 
@@ -10697,11 +11250,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__CLAHE__TEST__LABEL, 16, 0, 1, 1)
 
-        self.DATA__PREPROCESS__RESIZE__MODE__TEST__INFO = QLabel(self.preprocessing_test_frame)
+        self.DATA__PREPROCESS__RESIZE__MODE__TEST__INFO = QPushButton(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__RESIZE__MODE__TEST__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__MODE__TEST__INFO")
         self.DATA__PREPROCESS__RESIZE__MODE__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__RESIZE__MODE__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__MODE__TEST__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__RESIZE__MODE__TEST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__MODE__TEST__INFO, 3, 1, 1, 1)
 
@@ -10720,11 +11275,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__LABEL, 18, 0, 1, 1)
 
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__INFO = QLabel(self.preprocessing_test_frame)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__INFO = QPushButton(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__INFO.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__INFO")
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__INFO, 9, 1, 1, 1)
 
@@ -10732,19 +11289,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_75.addItem(self.horizontalSpacer_77, 0, 4, 1, 1)
 
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__TEST__INFO = QLabel(self.preprocessing_test_frame)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__TEST__INFO = QPushButton(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__TEST__INFO.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__TEST__INFO")
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__TEST__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__TEST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__TEST__INFO, 8, 1, 1, 1)
 
-        self.DATA__PREPROCESS__RESIZE__CVAL__TEST__INFO = QLabel(self.preprocessing_test_frame)
+        self.DATA__PREPROCESS__RESIZE__CVAL__TEST__INFO = QPushButton(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__RESIZE__CVAL__TEST__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__CVAL__TEST__INFO")
         self.DATA__PREPROCESS__RESIZE__CVAL__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__RESIZE__CVAL__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__CVAL__TEST__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__RESIZE__CVAL__TEST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__CVAL__TEST__INFO, 4, 1, 1, 1)
 
@@ -10756,10 +11317,12 @@ class Ui_MainWindow(object):
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INPUT, 13, 3, 1, 1)
 
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INFO = QLabel(self.preprocessing_test_frame)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INFO = QPushButton(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INFO.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INFO")
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INFO.setFont(font)
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INFO.setScaledContents(True)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INFO, 13, 1, 1, 1)
 
@@ -10923,11 +11486,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_38.addWidget(self.DATA__TEST__PATH__INPUT, 2, 3, 1, 1)
 
-        self.DATA__TEST__GT_PATH__INFO = QLabel(self.frame_36)
+        self.DATA__TEST__GT_PATH__INFO = QPushButton(self.frame_36)
         self.DATA__TEST__GT_PATH__INFO.setObjectName(u"DATA__TEST__GT_PATH__INFO")
         self.DATA__TEST__GT_PATH__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TEST__GT_PATH__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__GT_PATH__INFO.setScaledContents(True)
+        self.DATA__TEST__GT_PATH__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_38.addWidget(self.DATA__TEST__GT_PATH__INFO, 4, 2, 1, 1)
 
@@ -10941,35 +11506,43 @@ class Ui_MainWindow(object):
 
         self.gridLayout_38.addWidget(self.DATA__TEST__IN_MEMORY__INPUT, 5, 3, 1, 1)
 
-        self.DATA__TEST__LOAD_GT__INFO = QLabel(self.frame_36)
+        self.DATA__TEST__LOAD_GT__INFO = QPushButton(self.frame_36)
         self.DATA__TEST__LOAD_GT__INFO.setObjectName(u"DATA__TEST__LOAD_GT__INFO")
         self.DATA__TEST__LOAD_GT__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TEST__LOAD_GT__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__LOAD_GT__INFO.setScaledContents(True)
+        self.DATA__TEST__LOAD_GT__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_38.addWidget(self.DATA__TEST__LOAD_GT__INFO, 3, 2, 1, 1)
 
-        self.DATA__TEST__USE_VAL_AS_TEST__INFO = QLabel(self.frame_36)
+        self.DATA__TEST__USE_VAL_AS_TEST__INFO = QPushButton(self.frame_36)
         self.DATA__TEST__USE_VAL_AS_TEST__INFO.setObjectName(u"DATA__TEST__USE_VAL_AS_TEST__INFO")
         self.DATA__TEST__USE_VAL_AS_TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TEST__USE_VAL_AS_TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__USE_VAL_AS_TEST__INFO.setScaledContents(True)
+        self.DATA__TEST__USE_VAL_AS_TEST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_38.addWidget(self.DATA__TEST__USE_VAL_AS_TEST__INFO, 1, 2, 1, 1)
 
-        self.DATA__TEST__PATH__INFO = QLabel(self.frame_36)
+        self.DATA__TEST__PATH__INFO = QPushButton(self.frame_36)
         self.DATA__TEST__PATH__INFO.setObjectName(u"DATA__TEST__PATH__INFO")
         self.DATA__TEST__PATH__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TEST__PATH__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__PATH__INFO.setScaledContents(True)
+        self.DATA__TEST__PATH__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_38.addWidget(self.DATA__TEST__PATH__INFO, 2, 2, 1, 1)
 
-        self.DATA__TEST__IN_MEMORY__INFO = QLabel(self.frame_36)
+        self.DATA__TEST__IN_MEMORY__INFO = QPushButton(self.frame_36)
         self.DATA__TEST__IN_MEMORY__INFO.setObjectName(u"DATA__TEST__IN_MEMORY__INFO")
         self.DATA__TEST__IN_MEMORY__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TEST__IN_MEMORY__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__IN_MEMORY__INFO.setScaledContents(True)
+        self.DATA__TEST__IN_MEMORY__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_38.addWidget(self.DATA__TEST__IN_MEMORY__INFO, 5, 2, 1, 1)
 
@@ -11051,11 +11624,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_42.addWidget(self.DATA__TEST__CHECK_DATA__INPUT, 0, 2, 1, 1)
 
-        self.DATA__TEST__CHECK_DATA__INFO = QLabel(self.frame_40)
+        self.DATA__TEST__CHECK_DATA__INFO = QPushButton(self.frame_40)
         self.DATA__TEST__CHECK_DATA__INFO.setObjectName(u"DATA__TEST__CHECK_DATA__INFO")
         self.DATA__TEST__CHECK_DATA__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TEST__CHECK_DATA__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__CHECK_DATA__INFO.setScaledContents(True)
+        self.DATA__TEST__CHECK_DATA__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_42.addWidget(self.DATA__TEST__CHECK_DATA__INFO, 0, 1, 1, 1)
 
@@ -11102,11 +11677,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_60.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__INPUT, 2, 2, 1, 1)
 
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INFO = QLabel(self.sem_seg_post_proc_frame)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INFO = QPushButton(self.sem_seg_post_proc_frame)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INFO.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INFO")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_60.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INFO, 0, 1, 1, 1)
 
@@ -11117,19 +11694,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_60.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__LABEL, 2, 0, 1, 1)
 
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__INFO = QLabel(self.sem_seg_post_proc_frame)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__INFO = QPushButton(self.sem_seg_post_proc_frame)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__INFO.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__INFO")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_60.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__INFO, 1, 1, 1, 1)
 
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__INFO = QLabel(self.sem_seg_post_proc_frame)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__INFO = QPushButton(self.sem_seg_post_proc_frame)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__INFO.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__INFO")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_60.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__INFO, 2, 1, 1, 1)
 
@@ -11280,43 +11861,53 @@ class Ui_MainWindow(object):
 
         self.gridLayout_45.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INPUT, 6, 2, 1, 1)
 
-        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INFO = QLabel(self.inst_seg_ths_frame)
+        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INFO = QPushButton(self.inst_seg_ths_frame)
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INFO")
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INFO.setScaledContents(True)
+        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_45.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INFO, 0, 1, 1, 1)
 
-        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INFO = QLabel(self.inst_seg_ths_frame)
+        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INFO = QPushButton(self.inst_seg_ths_frame)
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INFO")
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INFO.setScaledContents(True)
+        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_45.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INFO, 1, 1, 1, 1)
 
-        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INFO = QLabel(self.inst_seg_ths_frame)
+        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INFO = QPushButton(self.inst_seg_ths_frame)
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INFO")
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INFO.setScaledContents(True)
+        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_45.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INFO, 2, 1, 1, 1)
 
-        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_POINTS__INFO = QLabel(self.inst_seg_ths_frame)
+        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_POINTS__INFO = QPushButton(self.inst_seg_ths_frame)
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_POINTS__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_MW_TH_POINTS__INFO")
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_POINTS__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_POINTS__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_POINTS__INFO.setScaledContents(True)
+        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_POINTS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_45.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_POINTS__INFO, 5, 1, 1, 1)
 
-        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INFO = QLabel(self.inst_seg_ths_frame)
+        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INFO = QPushButton(self.inst_seg_ths_frame)
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INFO")
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INFO.setScaledContents(True)
+        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_45.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INFO, 6, 1, 1, 1)
 
@@ -11370,11 +11961,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__CLEAR_BORDER__INPUT, 13, 2, 1, 1)
 
-        self.TEST__POST_PROCESSING__CLEAR_BORDER__INFO = QLabel(self.frame_50)
+        self.TEST__POST_PROCESSING__CLEAR_BORDER__INFO = QPushButton(self.frame_50)
         self.TEST__POST_PROCESSING__CLEAR_BORDER__INFO.setObjectName(u"TEST__POST_PROCESSING__CLEAR_BORDER__INFO")
         self.TEST__POST_PROCESSING__CLEAR_BORDER__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__CLEAR_BORDER__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__CLEAR_BORDER__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__CLEAR_BORDER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__CLEAR_BORDER__INFO, 13, 1, 1, 1)
 
@@ -11385,11 +11978,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__LABEL, 4, 0, 1, 1)
 
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INFO = QLabel(self.frame_50)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INFO = QPushButton(self.frame_50)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INFO.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INFO")
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INFO, 7, 1, 1, 1)
 
@@ -11399,19 +11994,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_58.addWidget(self.label_115, 13, 0, 1, 1)
 
-        self.TEST__POST_PROCESSING__VORONOI_ON_MASK__INFO = QLabel(self.frame_50)
+        self.TEST__POST_PROCESSING__VORONOI_ON_MASK__INFO = QPushButton(self.frame_50)
         self.TEST__POST_PROCESSING__VORONOI_ON_MASK__INFO.setObjectName(u"TEST__POST_PROCESSING__VORONOI_ON_MASK__INFO")
         self.TEST__POST_PROCESSING__VORONOI_ON_MASK__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__VORONOI_ON_MASK__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__VORONOI_ON_MASK__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__VORONOI_ON_MASK__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__VORONOI_ON_MASK__INFO, 8, 1, 1, 1)
 
-        self.TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INFO = QLabel(self.frame_50)
+        self.TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INFO = QPushButton(self.frame_50)
         self.TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INFO.setObjectName(u"TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INFO")
         self.TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INFO, 10, 1, 1, 1)
 
@@ -11439,11 +12038,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__VORONOI_ON_MASK__INPUT, 8, 2, 1, 1)
 
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__INFO = QLabel(self.frame_50)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__INFO = QPushButton(self.frame_50)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__INFO.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__INFO")
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__INFO, 4, 1, 1, 1)
 
@@ -11454,11 +12055,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INST_SEG__LABEL, 6, 0, 1, 1)
 
-        self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INFO = QLabel(self.frame_50)
+        self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INFO = QPushButton(self.frame_50)
         self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INFO.setObjectName(u"TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INFO")
         self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INFO, 12, 1, 1, 1)
 
@@ -11483,11 +12086,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_58.addWidget(self.inst_seg_voronoi_mask_th_label, 9, 0, 1, 1)
 
-        self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__INST_SEG__INFO = QLabel(self.frame_50)
+        self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__INST_SEG__INFO = QPushButton(self.frame_50)
         self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__INST_SEG__INFO.setObjectName(u"TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__INST_SEG__INFO")
         self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__INST_SEG__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__INST_SEG__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__INST_SEG__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__INST_SEG__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__INST_SEG__INFO, 11, 1, 1, 1)
 
@@ -11499,19 +12104,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INPUT, 12, 2, 1, 1)
 
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INST_SEG__INFO = QLabel(self.frame_50)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INST_SEG__INFO = QPushButton(self.frame_50)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INST_SEG__INFO.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INST_SEG__INFO")
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INST_SEG__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INST_SEG__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INST_SEG__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INST_SEG__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INST_SEG__INFO, 6, 1, 1, 1)
 
-        self.TEST__POST_PROCESSING__VORONOI_TH__INFO = QLabel(self.frame_50)
+        self.TEST__POST_PROCESSING__VORONOI_TH__INFO = QPushButton(self.frame_50)
         self.TEST__POST_PROCESSING__VORONOI_TH__INFO.setObjectName(u"TEST__POST_PROCESSING__VORONOI_TH__INFO")
         self.TEST__POST_PROCESSING__VORONOI_TH__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__VORONOI_TH__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__VORONOI_TH__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__VORONOI_TH__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__VORONOI_TH__INFO, 9, 1, 1, 1)
 
@@ -11552,11 +12161,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__LABEL, 7, 0, 1, 1)
 
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INFO = QLabel(self.frame_50)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INFO = QPushButton(self.frame_50)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INFO.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INFO")
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INFO, 3, 1, 1, 1)
 
@@ -11585,11 +12196,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INPUT, 3, 2, 1, 1)
 
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INST_SEG__INFO = QLabel(self.frame_50)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INST_SEG__INFO = QPushButton(self.frame_50)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INST_SEG__INFO.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INST_SEG__INFO")
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INST_SEG__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INST_SEG__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INST_SEG__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INST_SEG__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INST_SEG__INFO, 5, 1, 1, 1)
 
@@ -11614,30 +12227,36 @@ class Ui_MainWindow(object):
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__LABEL, 2, 0, 1, 1)
 
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO = QLabel(self.frame_50)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO = QPushButton(self.frame_50)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO.setMaximumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO.setFont(font)
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO, 2, 1, 1, 1)
 
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO = QLabel(self.frame_50)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO = QPushButton(self.frame_50)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO.setMaximumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO.setFont(font)
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO, 1, 1, 1, 1)
 
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INFO = QLabel(self.frame_50)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INFO = QPushButton(self.frame_50)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INFO.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INFO")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INFO.setMaximumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INFO.setFont(font)
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INFO, 0, 1, 1, 1)
 
@@ -11732,27 +12351,33 @@ class Ui_MainWindow(object):
 
         self.gridLayout_55.addItem(self.horizontalSpacer_49, 1, 3, 1, 1)
 
-        self.TEST__MATCHING_STATS__INFO = QLabel(self.inst_seg_metrics_frame)
+        self.TEST__MATCHING_STATS__INFO = QPushButton(self.inst_seg_metrics_frame)
         self.TEST__MATCHING_STATS__INFO.setObjectName(u"TEST__MATCHING_STATS__INFO")
         self.TEST__MATCHING_STATS__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__MATCHING_STATS__INFO.setMaximumSize(QSize(30, 16777215))
-        self.TEST__MATCHING_STATS__INFO.setScaledContents(True)
+        self.TEST__MATCHING_STATS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_55.addWidget(self.TEST__MATCHING_STATS__INFO, 0, 1, 1, 1)
 
-        self.TEST__MATCHING_STATS_THS__INFO = QLabel(self.inst_seg_metrics_frame)
+        self.TEST__MATCHING_STATS_THS__INFO = QPushButton(self.inst_seg_metrics_frame)
         self.TEST__MATCHING_STATS_THS__INFO.setObjectName(u"TEST__MATCHING_STATS_THS__INFO")
         self.TEST__MATCHING_STATS_THS__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__MATCHING_STATS_THS__INFO.setMaximumSize(QSize(30, 16777215))
-        self.TEST__MATCHING_STATS_THS__INFO.setScaledContents(True)
+        self.TEST__MATCHING_STATS_THS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_55.addWidget(self.TEST__MATCHING_STATS_THS__INFO, 1, 1, 1, 1)
 
-        self.TEST__MATCHING_STATS_THS_COLORED_IMG__INFO = QLabel(self.inst_seg_metrics_frame)
+        self.TEST__MATCHING_STATS_THS_COLORED_IMG__INFO = QPushButton(self.inst_seg_metrics_frame)
         self.TEST__MATCHING_STATS_THS_COLORED_IMG__INFO.setObjectName(u"TEST__MATCHING_STATS_THS_COLORED_IMG__INFO")
         self.TEST__MATCHING_STATS_THS_COLORED_IMG__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__MATCHING_STATS_THS_COLORED_IMG__INFO.setMaximumSize(QSize(30, 16777215))
-        self.TEST__MATCHING_STATS_THS_COLORED_IMG__INFO.setScaledContents(True)
+        self.TEST__MATCHING_STATS_THS_COLORED_IMG__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_55.addWidget(self.TEST__MATCHING_STATS_THS_COLORED_IMG__INFO, 2, 1, 1, 1)
 
@@ -11891,67 +12516,83 @@ class Ui_MainWindow(object):
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INPUT, 11, 3, 1, 1)
 
-        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INFO = QLabel(self.frame_43)
+        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INFO = QPushButton(self.frame_43)
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INFO")
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INFO.setScaledContents(True)
+        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INFO, 2, 2, 1, 1)
 
-        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO = QLabel(self.frame_43)
+        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO = QPushButton(self.frame_43)
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO")
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO.setScaledContents(True)
+        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INFO, 1, 2, 1, 1)
 
-        self.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INFO = QLabel(self.frame_43)
+        self.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INFO = QPushButton(self.frame_43)
         self.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INFO")
         self.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INFO.setScaledContents(True)
+        self.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INFO, 5, 2, 1, 1)
 
-        self.PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INFO = QLabel(self.frame_43)
+        self.PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INFO = QPushButton(self.frame_43)
         self.PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INFO")
         self.PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INFO.setScaledContents(True)
+        self.PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INFO, 6, 2, 1, 1)
 
-        self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO = QLabel(self.frame_43)
+        self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO = QPushButton(self.frame_43)
         self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO")
         self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO.setScaledContents(True)
+        self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INFO, 4, 2, 1, 1)
 
-        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INFO = QLabel(self.frame_43)
+        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INFO = QPushButton(self.frame_43)
         self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INFO")
         self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INFO.setScaledContents(True)
+        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INFO, 8, 2, 1, 1)
 
-        self.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INFO = QLabel(self.frame_43)
+        self.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INFO = QPushButton(self.frame_43)
         self.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INFO")
         self.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INFO.setScaledContents(True)
+        self.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INFO, 11, 2, 1, 1)
 
-        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO = QLabel(self.frame_43)
+        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO = QPushButton(self.frame_43)
         self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO")
         self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO.setScaledContents(True)
+        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INFO, 7, 2, 1, 1)
 
@@ -11971,11 +12612,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INPUT, 12, 3, 1, 1)
 
-        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INFO = QLabel(self.frame_43)
+        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INFO = QPushButton(self.frame_43)
         self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INFO.setObjectName(u"PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INFO")
         self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INFO.setScaledContents(True)
+        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INFO, 12, 2, 1, 1)
 
@@ -12070,11 +12713,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_41.addItem(self.horizontalSpacer_52, 0, 3, 1, 1)
 
-        self.TEST__DET_TOLERANCE__INFO = QLabel(self.det_metrics_frame)
+        self.TEST__DET_TOLERANCE__INFO = QPushButton(self.det_metrics_frame)
         self.TEST__DET_TOLERANCE__INFO.setObjectName(u"TEST__DET_TOLERANCE__INFO")
         self.TEST__DET_TOLERANCE__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__DET_TOLERANCE__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__DET_TOLERANCE__INFO.setScaledContents(True)
+        self.TEST__DET_TOLERANCE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_41.addWidget(self.TEST__DET_TOLERANCE__INFO, 0, 1, 1, 1)
 
@@ -12106,12 +12751,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_41.addWidget(self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INPUT, 1, 2, 1, 1)
 
-        self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INFO = QLabel(self.det_metrics_frame)
+        self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INFO = QPushButton(self.det_metrics_frame)
         self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INFO.setObjectName(u"TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INFO")
         self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INFO.setMaximumSize(QSize(30, 30))
         self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INFO.setFont(font)
-        self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INFO.setScaledContents(True)
+        self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_41.addWidget(self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INFO, 1, 1, 1, 1)
 
@@ -12139,11 +12786,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_62.addWidget(self.TEST__DET_EXCLUDE_BORDER__INPUT, 9, 2, 1, 1)
 
-        self.TEST__DET_MIN_TH_TO_BE_PEAK__INFO = QLabel(self.frame_54)
+        self.TEST__DET_MIN_TH_TO_BE_PEAK__INFO = QPushButton(self.frame_54)
         self.TEST__DET_MIN_TH_TO_BE_PEAK__INFO.setObjectName(u"TEST__DET_MIN_TH_TO_BE_PEAK__INFO")
         self.TEST__DET_MIN_TH_TO_BE_PEAK__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__DET_MIN_TH_TO_BE_PEAK__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__DET_MIN_TH_TO_BE_PEAK__INFO.setScaledContents(True)
+        self.TEST__DET_MIN_TH_TO_BE_PEAK__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_62.addWidget(self.TEST__DET_MIN_TH_TO_BE_PEAK__INFO, 7, 1, 1, 1)
 
@@ -12167,28 +12816,34 @@ class Ui_MainWindow(object):
 
         self.gridLayout_62.addWidget(self.TEST__DET_EXCLUDE_BORDER__LABEL, 9, 0, 1, 1)
 
-        self.TEST__DET_EXCLUDE_BORDER__INFO = QLabel(self.frame_54)
+        self.TEST__DET_EXCLUDE_BORDER__INFO = QPushButton(self.frame_54)
         self.TEST__DET_EXCLUDE_BORDER__INFO.setObjectName(u"TEST__DET_EXCLUDE_BORDER__INFO")
         self.TEST__DET_EXCLUDE_BORDER__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__DET_EXCLUDE_BORDER__INFO.setMaximumSize(QSize(30, 30))
         self.TEST__DET_EXCLUDE_BORDER__INFO.setFont(font)
-        self.TEST__DET_EXCLUDE_BORDER__INFO.setScaledContents(True)
+        self.TEST__DET_EXCLUDE_BORDER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_62.addWidget(self.TEST__DET_EXCLUDE_BORDER__INFO, 9, 1, 1, 1)
 
-        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INFO = QLabel(self.frame_54)
+        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INFO = QPushButton(self.frame_54)
         self.TEST__DET_BLOB_LOG_MAX_SIGMA__INFO.setObjectName(u"TEST__DET_BLOB_LOG_MAX_SIGMA__INFO")
         self.TEST__DET_BLOB_LOG_MAX_SIGMA__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__DET_BLOB_LOG_MAX_SIGMA__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INFO.setScaledContents(True)
+        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_62.addWidget(self.TEST__DET_BLOB_LOG_MAX_SIGMA__INFO, 4, 1, 1, 1)
 
-        self.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO = QLabel(self.frame_54)
+        self.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO = QPushButton(self.frame_54)
         self.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO.setObjectName(u"TEST__DET_BLOB_LOG_NUM_SIGMA__INFO")
         self.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO.setScaledContents(True)
+        self.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_62.addWidget(self.TEST__DET_BLOB_LOG_NUM_SIGMA__INFO, 5, 1, 1, 1)
 
@@ -12257,19 +12912,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_62.addWidget(self.TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL, 5, 0, 1, 1)
 
-        self.TEST__DET_POINT_CREATION_FUNCTION__INFO = QLabel(self.frame_54)
+        self.TEST__DET_POINT_CREATION_FUNCTION__INFO = QPushButton(self.frame_54)
         self.TEST__DET_POINT_CREATION_FUNCTION__INFO.setObjectName(u"TEST__DET_POINT_CREATION_FUNCTION__INFO")
         self.TEST__DET_POINT_CREATION_FUNCTION__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__DET_POINT_CREATION_FUNCTION__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__DET_POINT_CREATION_FUNCTION__INFO.setScaledContents(True)
+        self.TEST__DET_POINT_CREATION_FUNCTION__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_62.addWidget(self.TEST__DET_POINT_CREATION_FUNCTION__INFO, 0, 1, 1, 1)
 
-        self.TEST__DET_BLOB_LOG_MIN_SIGMA__INFO = QLabel(self.frame_54)
+        self.TEST__DET_BLOB_LOG_MIN_SIGMA__INFO = QPushButton(self.frame_54)
         self.TEST__DET_BLOB_LOG_MIN_SIGMA__INFO.setObjectName(u"TEST__DET_BLOB_LOG_MIN_SIGMA__INFO")
         self.TEST__DET_BLOB_LOG_MIN_SIGMA__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__DET_BLOB_LOG_MIN_SIGMA__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__DET_BLOB_LOG_MIN_SIGMA__INFO.setScaledContents(True)
+        self.TEST__DET_BLOB_LOG_MIN_SIGMA__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_62.addWidget(self.TEST__DET_BLOB_LOG_MIN_SIGMA__INFO, 3, 1, 1, 1)
 
@@ -12288,7 +12947,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_62.addWidget(self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INPUT, 6, 2, 1, 1)
 
-        self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INFO = QLabel(self.frame_54)
+        self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INFO = QPushButton(self.frame_54)
         self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INFO.setObjectName(u"TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INFO")
         self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INFO.setMaximumSize(QSize(30, 30))
@@ -12306,11 +12965,13 @@ class Ui_MainWindow(object):
         self.frame_51.setFrameShadow(QFrame.Raised)
         self.gridLayout_59 = QGridLayout(self.frame_51)
         self.gridLayout_59.setObjectName(u"gridLayout_59")
-        self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_CLASSES__INFO = QLabel(self.frame_51)
+        self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_CLASSES__INFO = QPushButton(self.frame_51)
         self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_CLASSES__INFO.setObjectName(u"TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_CLASSES__INFO")
         self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_CLASSES__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_CLASSES__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_CLASSES__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_CLASSES__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_CLASSES__INFO, 9, 1, 1, 1)
 
@@ -12328,11 +12989,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_CLASSES__INPUT, 9, 2, 1, 1)
 
-        self.TEST__POST_PROCESSING__DET_WATERSHED__INFO = QLabel(self.frame_51)
+        self.TEST__POST_PROCESSING__DET_WATERSHED__INFO = QPushButton(self.frame_51)
         self.TEST__POST_PROCESSING__DET_WATERSHED__INFO.setObjectName(u"TEST__POST_PROCESSING__DET_WATERSHED__INFO")
         self.TEST__POST_PROCESSING__DET_WATERSHED__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__DET_WATERSHED__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__DET_WATERSHED__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__DET_WATERSHED__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__DET_WATERSHED__INFO, 7, 1, 1, 1)
 
@@ -12353,19 +13016,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__INPUT, 15, 2, 1, 1)
 
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__INFO = QLabel(self.frame_51)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__INFO = QPushButton(self.frame_51)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__INFO.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__INFO")
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__INFO, 15, 1, 1, 1)
 
-        self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_PATCH__INFO = QLabel(self.frame_51)
+        self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_PATCH__INFO = QPushButton(self.frame_51)
         self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_PATCH__INFO.setObjectName(u"TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_PATCH__INFO")
         self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_PATCH__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_PATCH__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_PATCH__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_PATCH__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_PATCH__INFO, 10, 1, 1, 1)
 
@@ -12383,19 +13050,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_59.addWidget(self.det_watershed_donuts_classes_label, 9, 0, 1, 1)
 
-        self.TEST__POST_PROCESSING__DET_WATERSHED_FIRST_DILATION__INFO = QLabel(self.frame_51)
+        self.TEST__POST_PROCESSING__DET_WATERSHED_FIRST_DILATION__INFO = QPushButton(self.frame_51)
         self.TEST__POST_PROCESSING__DET_WATERSHED_FIRST_DILATION__INFO.setObjectName(u"TEST__POST_PROCESSING__DET_WATERSHED_FIRST_DILATION__INFO")
         self.TEST__POST_PROCESSING__DET_WATERSHED_FIRST_DILATION__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__DET_WATERSHED_FIRST_DILATION__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__DET_WATERSHED_FIRST_DILATION__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__DET_WATERSHED_FIRST_DILATION__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__DET_WATERSHED_FIRST_DILATION__INFO, 8, 1, 1, 1)
 
-        self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INFO = QLabel(self.frame_51)
+        self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INFO = QPushButton(self.frame_51)
         self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INFO.setObjectName(u"TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INFO")
         self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INFO, 5, 1, 1, 1)
 
@@ -12439,11 +13110,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_59.addWidget(self.det_data_watetshed_check_label, 12, 0, 1, 1)
 
-        self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__DET__INFO = QLabel(self.frame_51)
+        self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__DET__INFO = QPushButton(self.frame_51)
         self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__DET__INFO.setObjectName(u"TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__DET__INFO")
         self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__DET__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__DET__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__DET__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__DET__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__DET__INFO, 6, 1, 1, 1)
 
@@ -12525,19 +13198,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER__INPUT, 11, 2, 1, 1)
 
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__INFO = QLabel(self.frame_51)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__INFO = QPushButton(self.frame_51)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__INFO.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__INFO")
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__INFO, 16, 1, 1, 1)
 
-        self.PROBLEM__DETECTION__DATA_CHECK_MW__INFO = QLabel(self.frame_51)
+        self.PROBLEM__DETECTION__DATA_CHECK_MW__INFO = QPushButton(self.frame_51)
         self.PROBLEM__DETECTION__DATA_CHECK_MW__INFO.setObjectName(u"PROBLEM__DETECTION__DATA_CHECK_MW__INFO")
         self.PROBLEM__DETECTION__DATA_CHECK_MW__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__DETECTION__DATA_CHECK_MW__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__DETECTION__DATA_CHECK_MW__INFO.setScaledContents(True)
+        self.PROBLEM__DETECTION__DATA_CHECK_MW__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_59.addWidget(self.PROBLEM__DETECTION__DATA_CHECK_MW__INFO, 12, 1, 1, 1)
 
@@ -12549,11 +13226,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INPUT, 19, 2, 1, 1)
 
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INFO = QLabel(self.frame_51)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INFO = QPushButton(self.frame_51)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INFO.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INFO")
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INFO, 19, 1, 1, 1)
 
@@ -12565,27 +13244,33 @@ class Ui_MainWindow(object):
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__INPUT, 18, 2, 1, 1)
 
-        self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER__INFO = QLabel(self.frame_51)
+        self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER__INFO = QPushButton(self.frame_51)
         self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER__INFO.setObjectName(u"TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER__INFO")
         self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER__INFO, 11, 1, 1, 1)
 
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__INFO = QLabel(self.frame_51)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__INFO = QPushButton(self.frame_51)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__INFO.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__INFO")
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__INFO, 18, 1, 1, 1)
 
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__INFO = QLabel(self.frame_51)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__INFO = QPushButton(self.frame_51)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__INFO.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__INFO")
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__INFO, 13, 1, 1, 1)
 
@@ -12638,30 +13323,36 @@ class Ui_MainWindow(object):
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__LABEL, 2, 0, 1, 1)
 
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO = QLabel(self.frame_51)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO = QPushButton(self.frame_51)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO.setMaximumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO.setFont(font)
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO, 2, 1, 1, 1)
 
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO = QLabel(self.frame_51)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO = QPushButton(self.frame_51)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO.setMaximumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO.setFont(font)
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO, 1, 1, 1, 1)
 
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INFO = QLabel(self.frame_51)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INFO = QPushButton(self.frame_51)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INFO.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INFO")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INFO.setMaximumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INFO.setFont(font)
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INFO.setScaledContents(True)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INFO, 0, 1, 1, 1)
 
@@ -13214,7 +13905,7 @@ class Ui_MainWindow(object):
         self.check_yaml_file_errors_frame.setWidgetResizable(True)
         self.scrollAreaWidgetContents_19 = QWidget()
         self.scrollAreaWidgetContents_19.setObjectName(u"scrollAreaWidgetContents_19")
-        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 96, 26))
+        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 896, 101))
         self.verticalLayout_32 = QVBoxLayout(self.scrollAreaWidgetContents_19)
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
         self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)
@@ -13262,11 +13953,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_9.addWidget(self.output_folder_label, 3, 0, 1, 2)
 
-        self.output_folder_info = QLabel(self.frame_27)
+        self.output_folder_info = QPushButton(self.frame_27)
         self.output_folder_info.setObjectName(u"output_folder_info")
         self.output_folder_info.setMinimumSize(QSize(30, 30))
         self.output_folder_info.setMaximumSize(QSize(30, 30))
-        self.output_folder_info.setScaledContents(True)
+        self.output_folder_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_9.addWidget(self.output_folder_info, 3, 2, 1, 1)
 
@@ -13284,19 +13977,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_9.addWidget(self.select_yaml_name_label, 0, 3, 1, 1)
 
-        self.select_yaml_name_info = QLabel(self.frame_27)
+        self.select_yaml_name_info = QPushButton(self.frame_27)
         self.select_yaml_name_info.setObjectName(u"select_yaml_name_info")
         self.select_yaml_name_info.setMinimumSize(QSize(30, 30))
         self.select_yaml_name_info.setMaximumSize(QSize(30, 30))
-        self.select_yaml_name_info.setScaledContents(True)
+        self.select_yaml_name_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_9.addWidget(self.select_yaml_name_info, 0, 2, 1, 1)
 
-        self.job_name_info = QLabel(self.frame_27)
+        self.job_name_info = QPushButton(self.frame_27)
         self.job_name_info.setObjectName(u"job_name_info")
         self.job_name_info.setMinimumSize(QSize(30, 30))
         self.job_name_info.setMaximumSize(QSize(30, 30))
-        self.job_name_info.setScaledContents(True)
+        self.job_name_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_9.addWidget(self.job_name_info, 2, 2, 1, 1)
 
@@ -13431,28 +14128,24 @@ class Ui_MainWindow(object):
         self.wizard_start_message.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Hello, I'm the wizard of BiaPy, and I'll be guiding you through this process. During the questionnaire, you can click on me to get more information about each question.</span></p><p><span style=\" font-size:12pt;\">Click &quot;Start&quot; to begin the questionnaire that will help generate the required configuration file for running BiaPy.</span></p></body></html>", None))
         self.wizard_start_wizard_icon.setText("")
 #if QT_CONFIG(tooltip)
-        self.goptions_browse_yaml_path_info_2.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to store the YAML file</span></p></body></html>", None))
+        self.wizard_browse_yaml_path_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to store the YAML file</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.goptions_browse_yaml_path_info_2.setText("")
+        self.wizard_browse_yaml_path_info.setText("")
 #if QT_CONFIG(tooltip)
-        self.PROBLEM__NDIM__INFO_2.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of dimensions of the input images</span></p></body></html>", None))
+        self.WIZARD_PROBLEM__NDIM__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of dimensions of the input images</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
 #if QT_CONFIG(statustip)
-        self.PROBLEM__NDIM__INFO_2.setStatusTip("")
+        self.WIZARD_PROBLEM__NDIM__INFO.setStatusTip("")
 #endif // QT_CONFIG(statustip)
-        self.PROBLEM__NDIM__INFO_2.setText("")
+        self.WIZARD_PROBLEM__NDIM__INFO.setText("")
         self.wizard_browse_yaml_path_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
-#if QT_CONFIG(statustip)
-        self.wizard_browse_yaml_path_input.setStatusTip("")
-#endif // QT_CONFIG(statustip)
-#if QT_CONFIG(tooltip)
-        self.goptions_yaml_name_info_2.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">YAML file name</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.goptions_yaml_name_info_2.setText("")
 #if QT_CONFIG(tooltip)
         self.wizard_browse_yaml_path_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.wizard_browse_yaml_path_label.setText(QCoreApplication.translate("MainWindow", u"Configuration file directory", None))
+#if QT_CONFIG(statustip)
+        self.wizard_browse_yaml_path_input.setStatusTip("")
+#endif // QT_CONFIG(statustip)
 #if QT_CONFIG(tooltip)
         self.wizard_yaml_name_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
