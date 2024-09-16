@@ -12,6 +12,7 @@ import pooch
 import json 
 import http.client as httplib
 from pathlib import PurePath, Path, PureWindowsPath
+from packaging.version import Version
 
 from PySide2 import QtCore
 from PySide2.QtCore import QObject, QThread
@@ -2872,7 +2873,7 @@ def get_git_revision_short_hash(main_window) -> str:
         vtag = str(re.split(r'\t+', stdout.decode('ascii'))[-1]).replace("refs/tags/","").replace('^{}',"").replace('\n',"")   
     except Exception: 
         pass
-    return sha, vtag
+    return sha, Version(vtag)
         
 def path_in_list(list, path):
     """

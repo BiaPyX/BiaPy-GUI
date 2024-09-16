@@ -2,9 +2,8 @@ import os
 import platform
 import getpass
 from PySide2.QtGui import QPixmap, QMovie
-from PySide2.QtCore import QSize
 from ui_utils import resource_path
-
+from packaging.version import Version
 
 class Settings:
 
@@ -31,9 +30,9 @@ class Settings:
         self.settings["CUDA_version"] = [10.2, 11.8]
 
         # BiaPy
-        self.settings["biapy_code_version"] = "v3.5.2"
+        self.settings["biapy_code_version"] = Version("v3.5.2")
         self.settings["biapy_code_github"] = "https://github.com/BiaPyX/BiaPy"
-        self.settings["biapy_gui_version"] = "v1.1.0"
+        self.settings["biapy_gui_version"] = Version("v1.1.0")
         self.settings["biapy_gui_github"] = "https://github.com/BiaPyX/BiaPy-GUI"
         self.settings["biapy_container_basename"] = "biapyx/biapy"
         self.settings["biapy_container_name"] = (

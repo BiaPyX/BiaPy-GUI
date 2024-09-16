@@ -8,6 +8,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtWidgets import *
 from PySide2.QtCore import *
 from PySide2.QtGui import *
+from packaging.version import Version
 
 from ui_function import * 
 from ui_utils import (examine, mark_syntax_error, expand_hide_advanced_options, change_page, get_git_revision_short_hash,
@@ -968,7 +969,7 @@ class MainWindow(QMainWindow):
         self.logger.info(f"Local GUI version: {self.cfg.settings['biapy_gui_version']}")
         self.logger.info(f"Remote last version's hash: {sha}")
         self.logger.info(f"Remote last version: {vtag}")
-        if sha is not None and vtag is not None and vtag != self.cfg.settings['biapy_gui_version']:
+        if sha is not None and vtag is not None and vtag > self.cfg.settings['biapy_gui_version']:
             self.dialog_exec("There is a new version of BiaPy's graphical user interface available. Please, "
                 "download it <a href='https://biapyx.github.io'>here</a>", reason="inform_user")
     
