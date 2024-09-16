@@ -7,7 +7,7 @@ from skimage.io import imread
 from typing import Optional, Dict, Tuple, List
 from packaging.version import Version
 
-## Copied from BiaPy commit: ff7d91757687636edb697eb63f45a7de9564419b (3.5.2)
+## Copied from BiaPy commit: 608052bbbd97c0d7c520b99dc5e279c12fd3be3d (3.5.2)
 def check_bmz_model_compatibility(
     model_rdf: Dict,
     workflow_specs: Optional[Dict] = None,
@@ -186,7 +186,7 @@ def check_bmz_model_compatibility(
 
     return preproc_info, error, reason_message
 
-# Adapted from BiaPy commit: ff7d91757687636edb697eb63f45a7de9564419b (3.5.2)
+# Adapted from BiaPy commit: 608052bbbd97c0d7c520b99dc5e279c12fd3be3d (3.5.2)
 def check_model_restrictions(
     model_rdf,
     workflow_specs,
@@ -250,7 +250,7 @@ def check_model_restrictions(
         raise ValueError("Couldn't load input info from BMZ model's RDF: {}".format(model_rdf["inputs"][0]))   
     opts["DATA.PATCH_SIZE"] = tuple(input_image_shape[2:]) + (input_image_shape[1],)
 
-    # 2) Classes in semantic segmentation
+    # 2) Classes in semantic segmentation. This is slightly different from BiaPy because we are using RDF dict here.
     # if (specific_workflow in ["INSTANCE_SEG", "SEMANTIC_SEG", "DETECTION"]):
     if specific_workflow in ["SEMANTIC_SEG"]:
         # Check number of classes

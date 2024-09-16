@@ -377,9 +377,8 @@ class run_worker(QObject):
                 "--name", "{}".format(jobname), "--run_id", "1", "--dist_backend", f"{dist_backend}"]
             gpus = " "
             if self.use_gpu:
-                gpus = self.main_gui.ui.gpu_input.currentData()
-                gpus = [int(x[0]) for x in gpus]
-                gpus = ','.join(str(x) for x in gpus)
+                device = get_text(self.main_gui.ui.gpu_input)
+                gpus = device.split()[1] # As the format is "GPU 0 : NVIDIA RTX ..."
                 command += ["--gpu", gpus]
 
             # Limit a bit the proccesses used in Docker if it's using a GPU, as multiGPU is not supported yet through the GUI

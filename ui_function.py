@@ -1204,7 +1204,8 @@ class UIFunction(MainWindow):
         """
         if len(main_window.cfg.settings['GPUs']) > 0:
             # Create GPU input field
-            main_window.ui.gpu_input = CheckableComboBox(main_window.ui.gpu_list_frame)
+            # main_window.ui.gpu_input = CheckableComboBox(main_window.ui.gpu_list_frame)
+            main_window.ui.gpu_input = QComboBox(main_window.ui.gpu_list_frame)
             main_window.ui.gpu_input.setObjectName(u"gpu_input")
             main_window.ui.gpu_input.setMinimumSize(QSize(400, 30))
             main_window.ui.gpu_input.setMaximumSize(QSize(400, 30))
@@ -1213,8 +1214,11 @@ class UIFunction(MainWindow):
             font.setPointSize(12)
             main_window.ui.gpu_input.setFont(font)
             main_window.ui.verticalLayout_40.addWidget(main_window.ui.gpu_input, 0, Qt.AlignHCenter)
+            # for i, gpu in enumerate(main_window.cfg.settings['GPUs']):
+            #     main_window.ui.gpu_input.addItem("{} : {} ".format(i, gpu.name), check=True if i == 0 else False)
+            main_window.ui.gpu_input.addItem("CPU")
             for i, gpu in enumerate(main_window.cfg.settings['GPUs']):
-                main_window.ui.gpu_input.addItem("{} : {} ".format(i, gpu.name), check=True if i == 0 else False)
+                main_window.ui.gpu_input.addItem("GPU {} : {} ".format(i, gpu.name))
         else:
             main_window.ui.gpu_list_frame.setVisible(False)
             main_window.ui.run_workflow_frame.setFrameShape(QFrame.NoFrame)
@@ -1297,11 +1301,10 @@ class UIFunction(MainWindow):
                 "so you can do it.", "docker_installation")
             return
 
-        # Allow only one GPU through the GUI for the moment 
-        if len(main_window.cfg.settings['GPUs']) > 0 and len(main_window.ui.gpu_input.currentData()) > 1:
-            main_window.dialog_exec("Currently use a multi-GPU setting is not supported. Please, select just one GPU.", "error")
-            return 
-
+        # Device selection
+        device = get_text(main_window.ui.gpu_input)
+        use_gpu = True if "GPU" in device else False
+        
         # Check if a pull is necessary 
         local_images = main_window.docker_client.images.list()
         local_biapy_image_tag = ""
@@ -1355,13 +1358,7 @@ class UIFunction(MainWindow):
                     .format(main_window.cfg.settings['biapy_container_name']))
             run_biapy_cond = main_window.yes_no.answer
         
-        if run_biapy_cond:
-            # GPU check
-            use_gpu = True
-            if len(main_window.cfg.settings['GPUs']) == 0:
-                use_gpu = False 
-            elif len(main_window.cfg.settings['GPUs']) > 0 and len(main_window.ui.gpu_input.currentData()) == 0:
-                use_gpu = False 
+        if run_biapy_cond:            
             # Initialize thread/worker 
             main_window.cfg.settings['running_threads'].append(QThread())
             worker_id = len(main_window.cfg.settings['running_workers'])
