@@ -483,11 +483,15 @@ def eval_wizard_answer(main_window):
                 for key, val in main_window.cfg.settings["wizard_answers"].items():
                     if "CHECKED" in key: 
                         main_window.cfg.settings["wizard_answers"][key] = -1
-                        
+
                 for i in range(main_window.cfg.settings["wizard_number_of_questions"]):
                     if main_window.cfg.settings['wizard_possible_answers'][i][0] == "PATH":
                         index = main_window.cfg.settings['wizard_from_question_index_to_toc'][i]        
                         main_window.wizard_toc_model.item(index[0]).child(index[1]).setForeground(QColor(0,0,0))
+                    elif main_window.cfg.settings['wizard_possible_answers'][i][0] in ["MODEL_BIAPY", "MODEL_OTHERS"]:
+                        index = main_window.cfg.settings['wizard_from_question_index_to_toc'][i]        
+                        main_window.wizard_toc_model.item(index[0]).child(index[1]).setForeground(QColor(0,0,0))
+                        main_window.cfg.settings["wizard_question_answered_index"][i] = -1
 
 def change_wizard_page(main_window, val, based_on_toc=False, added_val=0):
     """
