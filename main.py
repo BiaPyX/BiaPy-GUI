@@ -677,6 +677,7 @@ class MainWindow(QMainWindow):
         self.worker_spin = None
         
         self.external_model_restrictions = None
+        self.pretrained_model_need_to_check = None
 
         # Options to allow user moving the GUI
         self.dragPos = self.pos()
@@ -920,6 +921,9 @@ class MainWindow(QMainWindow):
 
     def external_model_list_built(self, model_count):
         if model_count > 0:
+            if self.pretrained_model_need_to_check is not None:
+                self.model_carrousel_dialog.show_models(model_count)
+            self.pretrained_model_need_to_check = model_count
             self.model_carrousel_dialog_exec()
         else:
             self.dialog_exec("There are no models in the BioImage Model Zoo or Torchvision that are compatible with BiaPy "

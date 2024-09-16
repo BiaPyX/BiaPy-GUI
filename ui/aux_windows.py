@@ -385,6 +385,10 @@ class model_card_carrousel_Ui(QDialog):
         self.source_logo.append(QPixmap(resource_path(os.path.join("images","bmz_logo.png"))))
         self.source_logo.append(QPixmap(resource_path(os.path.join("images","torchvision_logo.png"))))
 
+    def show_models(self, number_of_models):
+        for i in range(number_of_models):
+            self.model_cards[i][f"model_card_frame_{i}"].setVisible(True)
+
     def create_model_card(self, model_number, model_info, from_wizard=True):
         print("Creating model card . . .")
         # Create model card the first time (future checks will reuse the widgets)

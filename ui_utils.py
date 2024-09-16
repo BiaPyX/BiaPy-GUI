@@ -479,6 +479,7 @@ def eval_wizard_answer(main_window):
 
         # Reset data checks if dimensionality or workflow changed, as the data check is different 
         if main_window.ui.wizard_question_answer_frame.isVisible() and changed_answer:
+            main_window.pretrained_model_need_to_check = None
             key = next(iter(main_window.cfg.settings["wizard_variable_to_map"]["Q"+str(main_window.cfg.settings['wizard_question_index']+1)]))
             if "PROBLEM.NDIM" == key or "PROBLEM.TYPE" == key:
                 for key, val in main_window.cfg.settings["wizard_answers"].items():
@@ -721,6 +722,10 @@ def check_models_from_other_sources(main_window, ask_user=False, from_wizard=Tru
     main_window : QMainWindow
         Main window of the application.
     """
+    if main_window.pretrained_model_need_to_check is not None:
+        main_window.external_model_list_built(main_window.pretrained_model_need_to_check)
+        return
+    
     if not from_wizard:
         main_window.yes_no_exec("This process needs internet connection and may take a while. Do you want to proceed?")
         if not main_window.yes_no.answer:
