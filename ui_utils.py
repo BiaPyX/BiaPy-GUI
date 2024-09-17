@@ -1067,7 +1067,6 @@ def export_wizard_summary(main_window):
                     create_dict_from_key(key, value, out_config)
                 else:
                     raise ValueError(f"Error found in config: {key}. Contact BiaPy team!")
-
         out_config = set_default_config(out_config.copy())
         
         yaml_file = os.path.join(get_text(main_window.ui.wizard_browse_yaml_path_input), get_text(main_window.ui.wizard_yaml_name_input))
@@ -1132,7 +1131,8 @@ def set_default_config(cfg):
     
     if cfg['TEST']['ENABLE']:
         # Test data
-        cfg['DATA']['TEST'] = {}
+        if "TEST" not in cfg['DATA']:
+            cfg['DATA']['TEST'] = {}
         cfg["DATA"]["TEST"]["IN_MEMORY"] = False
 
         # Adjust test padding accordingly
@@ -1266,7 +1266,8 @@ def set_default_config(cfg):
 
     elif cfg["PROBLEM"]["TYPE"] == "CLASSIFICATION":
         pass
-
+    
+    cfg['DATA']['PATCH_SIZE'] = str(cfg['DATA']['PATCH_SIZE'])
     return cfg 
 
 
@@ -2950,8 +2951,6 @@ def create_dict_from_key(cfg_key, value, out_cfg):
     if keys[0] not in out_cfg:
         out_cfg[keys[0]] = {}
     if len(keys) == 2:
-        if isinstance(value, tuple):
-            value = str(value)
         out_cfg[keys[0]][keys[1]] = value    
     else:
         create_dict_from_key(".".join(keys[1:]), value, out_cfg[keys[0]])  
