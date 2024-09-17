@@ -1205,10 +1205,14 @@ def set_default_config(cfg):
             "IMAGE_TO_IMAGE"
         ]:
             cfg["MODEL"]["ARCHITECTURE"] = "resunet"
+            if cfg['PROBLEM']['NDIM'] == "3D":
+                cfg["MODEL"]["Z_DOWN"] = [1, 1, 1, 1]
         elif cfg["PROBLEM"]["TYPE"] == "SUPER_RESOLUTION":
             cfg["MODEL"]["ARCHITECTURE"] = "rcan"
         elif cfg["PROBLEM"]["TYPE"] == "SELF_SUPERVISED":
             cfg["MODEL"]["ARCHITECTURE"] = "unet"
+            if cfg['PROBLEM']['NDIM'] == "3D":
+                cfg["MODEL"]["Z_DOWN"] = [1, 1, 1, 1]
         elif cfg["PROBLEM"]["TYPE"] == "CLASSIFICATION":
             cfg["MODEL"]["ARCHITECTURE"] = "vit"
 
@@ -1280,6 +1284,8 @@ def set_default_config(cfg):
         cfg['PROBLEM']['DENOISING']['N2V_STRUCTMASK'] = True
         cfg['MODEL']['ARCHITECTURE'] = 'unet'
         cfg['MODEL']['FEATURE_MAPS'] = [32, 64, 96]
+        if cfg['PROBLEM']['NDIM'] == "3D":
+            cfg["MODEL"]["Z_DOWN"] = [1, 1]
         cfg['MODEL']['KERNEL_SIZE'] = 3
         cfg['MODEL']['UPSAMPLE_LAYER'] = "upsampling"
         cfg['MODEL']['DROPOUT_VALUES'] = [0, 0, 0]
