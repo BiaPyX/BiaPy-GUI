@@ -376,8 +376,8 @@ class run_worker(QObject):
             command = ["--config", "/BiaPy_files/input.yaml", "--result_dir", "{}".format(self.output_folder_in_container),
                 "--name", "{}".format(jobname), "--run_id", "1", "--dist_backend", f"{dist_backend}"]
             gpus = " "
-            if self.use_gpu:
-                device = get_text(self.main_gui.ui.gpu_input)
+            device = get_text(self.main_gui.ui.gpu_input)
+            if self.use_gpu:    
                 gpus = device.split()[1] # As the format is "GPU 0 : NVIDIA RTX ..."
                 command += ["--gpu", gpus]
 
@@ -410,6 +410,7 @@ class run_worker(QObject):
             paths.append(self.output_folder_in_container)
 
             mode = "rw" if self.config['PROBLEM']['TYPE'] in ['INSTANCE_SEG', 'DETECTION', 'SELF_SUPERVISED'] else "ro"
+            paths_message = ""
             if self.config['TRAIN']['ENABLE']: # mirar los paths que se repiten y bindear solo uan vez, si no error
                 self.total_epochs = int(self.config['TRAIN']['EPOCHS'])
                 self.gui.run_window.train_progress_bar.setMaximum(self.total_epochs)
@@ -422,16 +423,23 @@ class run_worker(QObject):
                     volumes[p] = {"bind": p, "mode": mode}
                 p = path_to_linux(self.config['DATA']['TRAIN']['PATH'], self.main_gui.cfg.settings['os_host'])
                 temp_cfg['DATA']['TRAIN']['PATH'] = p
+                paths_message += "<tr><td>Train raw image path</td><td>{}</td></tr>".format(
+                    self.config['DATA']['TRAIN']['PATH']
+                )
 
                 # Train GT path
-                p = os.path.realpath(os.path.join(self.config['DATA']['TRAIN']['GT_PATH'], '..'))
-                p = path_to_linux(p, self.main_gui.cfg.settings['os_host'])
-                if not path_in_list(paths,p):
-                    paths.append(p)    
-                    volumes[p] = {"bind": p, "mode": mode}
-                p = path_to_linux(self.config['DATA']['TRAIN']['GT_PATH'], self.main_gui.cfg.settings['os_host'])
-                temp_cfg['DATA']['TRAIN']['GT_PATH'] = p
-
+                if self.config['PROBLEM']['TYPE'] not in ["DENOISING", "CLASSIFICATION", "SELF_SUPERVISED"]:
+                    p = os.path.realpath(os.path.join(self.config['DATA']['TRAIN']['GT_PATH'], '..'))
+                    p = path_to_linux(p, self.main_gui.cfg.settings['os_host'])
+                    if not path_in_list(paths,p):
+                        paths.append(p)    
+                        volumes[p] = {"bind": p, "mode": mode}
+                    p = path_to_linux(self.config['DATA']['TRAIN']['GT_PATH'], self.main_gui.cfg.settings['os_host'])
+                    temp_cfg['DATA']['TRAIN']['GT_PATH'] = p
+                    paths_message += "<tr><td>Train target path</td><td>{}</td></tr>".format(
+                        self.config['DATA']['TRAIN']['GT_PATH']
+                    )
+                        
                 if not self.config['DATA']['VAL']['FROM_TRAIN']:
                     # Val path
                     p = os.path.realpath(os.path.join(self.config['DATA']['VAL']['PATH'], '..'))
@@ -441,15 +449,22 @@ class run_worker(QObject):
                         volumes[p] = {"bind": p, "mode": mode}
                     p = path_to_linux(self.config['DATA']['VAL']['PATH'], self.main_gui.cfg.settings['os_host'])
                     temp_cfg['DATA']['VAL']['PATH'] = p
+                    paths_message += "<tr><td>Validation raw image path</td><td>{}</td></tr>".format(
+                        self.config['DATA']['VAL']['PATH']
+                    )
 
                     # Val GT path
-                    p = os.path.realpath(os.path.join(self.config['DATA']['VAL']['GT_PATH'], '..'))
-                    p = path_to_linux(p, self.main_gui.cfg.settings['os_host'])
-                    if not path_in_list(paths,p):
-                        paths.append(p)
-                        volumes[p] = {"bind": p, "mode": mode}
-                    p = path_to_linux(self.config['DATA']['VAL']['GT_PATH'], self.main_gui.cfg.settings['os_host'])
-                    temp_cfg['DATA']['VAL']['GT_PATH'] = p
+                    if self.config['PROBLEM']['TYPE'] not in ["DENOISING", "CLASSIFICATION", "SELF_SUPERVISED"]:
+                        p = os.path.realpath(os.path.join(self.config['DATA']['VAL']['GT_PATH'], '..'))
+                        p = path_to_linux(p, self.main_gui.cfg.settings['os_host'])
+                        if not path_in_list(paths,p):
+                            paths.append(p)
+                            volumes[p] = {"bind": p, "mode": mode}
+                        p = path_to_linux(self.config['DATA']['VAL']['GT_PATH'], self.main_gui.cfg.settings['os_host'])
+                        temp_cfg['DATA']['VAL']['GT_PATH'] = p
+                        paths_message += "<tr><td>Validation target path</td><td>{}</td></tr>".format(
+                            self.config['DATA']['VAL']['GT_PATH']
+                        )
             else:
                 self.gui.run_window.train_progress_label.setVisible(False)
                 self.gui.run_window.train_progress_bar.setVisible(False)
@@ -463,8 +478,11 @@ class run_worker(QObject):
                     volumes[p] = {"bind": p, "mode": mode}
                 p = path_to_linux(self.config['DATA']['TEST']['PATH'], self.main_gui.cfg.settings['os_host'])
                 temp_cfg['DATA']['TEST']['PATH'] = p
+                paths_message += "<tr><td>Test raw image path</td><td>{}</td></tr>".format(
+                    self.config['DATA']['TEST']['PATH']
+                )
 
-                if self.config['DATA']['TEST']['LOAD_GT']:
+                if self.config['DATA']['TEST']['LOAD_GT'] and self.config['PROBLEM']['TYPE'] not in ["DENOISING", "CLASSIFICATION", "SELF_SUPERVISED"]:
                     # Test GT path
                     p = os.path.realpath(os.path.join(self.config['DATA']['TEST']['GT_PATH'], '..'))   
                     p = path_to_linux(p, self.main_gui.cfg.settings['os_host'])
@@ -473,6 +491,9 @@ class run_worker(QObject):
                         volumes[p] = {"bind": p, "mode": mode} 
                     p = path_to_linux(self.config['DATA']['TEST']['GT_PATH'], self.main_gui.cfg.settings['os_host'])
                     temp_cfg['DATA']['TEST']['GT_PATH'] = p   
+                    paths_message += "<tr><td>Test target path</td><td>{}</td></tr>".format(
+                        self.config['DATA']['TEST']['GT_PATH']
+                    )
 
             if self.config['MODEL']['LOAD_CHECKPOINT']: 
                 p = os.path.realpath(os.path.join(self.config['PATHS']['CHECKPOINT_FILE'], '..'))
@@ -538,17 +559,23 @@ class run_worker(QObject):
                 <tr><td>Start date</td><td>{}</td></tr>\
                 <tr><td>Jobname</td><td>{}</td></tr>\
                 <tr><td>YAML</td><td><a href={}>{}</a></td></tr>\
+                <tr><td>Device</td><td>{}</td></tr>\
                 <tr><td>Output folder  </td><td><a href={}>{}</a></td></tr>\
                 <tr><td>Output log</td><td><a href={}>{}</a></td></tr>\
                 <tr><td>Error log</td><td><a href={}>{}</a></td></tr>\
+                {}\
             </table>"\
-            .format(str(self.biapy_container.image).replace('<','').replace('>',''), self.biapy_container.short_id,
-                now.strftime("%Y/%m/%d %H:%M:%S"), jobname,
+            .format(
+                str(self.biapy_container.image).replace('<','').replace('>',''), self.biapy_container.short_id,
+                now.strftime("%Y/%m/%d %H:%M:%S"), 
+                jobname,
                 bytearray(QUrl.fromLocalFile(get_text(self.main_gui.ui.select_yaml_name_label)).toEncoded()).decode(), get_text(self.main_gui.ui.select_yaml_name_label),
+                device,
                 bytearray(QUrl.fromLocalFile(container_out_dir_in_host).toEncoded()).decode(), container_out_dir_in_host,
                 bytearray(QUrl.fromLocalFile(self.container_stdout_file).toEncoded()).decode(), self.container_stdout_file,
-                bytearray(QUrl.fromLocalFile(self.container_stderr_file).toEncoded()).decode(), self.container_stderr_file)
-            
+                bytearray(QUrl.fromLocalFile(self.container_stderr_file).toEncoded()).decode(), self.container_stderr_file,
+                paths_message,
+            )
             self.update_log_signal.emit(0)
 
             # Log the output in a file     

@@ -190,16 +190,17 @@ class Ui_RunBiaPy(object):
         self.scrollArea = QScrollArea(self.frame_4)
         self.scrollArea.setObjectName(u"scrollArea")
         self.scrollArea.setFrameShape(QFrame.NoFrame)
-        self.scrollArea.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.scrollArea.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        self.scrollArea.setSizeAdjustPolicy(QAbstractScrollArea.AdjustIgnored)
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 939, 178))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, -6, 925, 184))
         self.verticalLayout_5 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.biapy_container_info_label = QLabel(self.scrollAreaWidgetContents)
         self.biapy_container_info_label.setObjectName(u"biapy_container_info_label")
-        self.biapy_container_info_label.setMinimumSize(QSize(0, 160))
+        self.biapy_container_info_label.setMinimumSize(QSize(0, 0))
         font2 = QFont()
         font2.setFamily(u"DejaVu Math TeX Gyre")
         font2.setPointSize(11)
@@ -208,6 +209,10 @@ class Ui_RunBiaPy(object):
         self.biapy_container_info_label.setTextInteractionFlags(Qt.LinksAccessibleByKeyboard|Qt.LinksAccessibleByMouse|Qt.TextBrowserInteraction|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
         self.verticalLayout_5.addWidget(self.biapy_container_info_label)
+
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_5.addItem(self.verticalSpacer)
 
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
