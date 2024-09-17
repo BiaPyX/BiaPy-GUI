@@ -1401,7 +1401,7 @@ QPushButton:pressed {
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>2</number>
+                <number>3</number>
                </property>
                <widget class="QWidget" name="page_home">
                 <property name="styleSheet">
@@ -4068,8 +4068,8 @@ font: italic;</string>
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>100</width>
-                               <height>30</height>
+                               <width>930</width>
+                               <height>172</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_62"/>
@@ -6117,7 +6117,7 @@ QPushButton:pressed {
                              <rect>
                               <x>0</x>
                               <y>0</y>
-                              <width>922</width>
+                              <width>934</width>
                               <height>565</height>
                              </rect>
                             </property>
@@ -6739,7 +6739,7 @@ QPushButton:pressed {
                                     <rect>
                                      <x>0</x>
                                      <y>0</y>
-                                     <width>495</width>
+                                     <width>860</width>
                                      <height>284</height>
                                     </rect>
                                    </property>
@@ -34857,7 +34857,7 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>597</width>
+                                       <width>914</width>
                                        <height>1056</height>
                                       </rect>
                                      </property>
@@ -37744,31 +37744,31 @@ QPushButton:pressed {
                      <number>9</number>
                     </property>
                     <property name="verticalSpacing">
-                     <number>40</number>
+                     <number>20</number>
                     </property>
-                    <item row="2" column="1">
+                    <item row="3" column="1">
                      <widget class="QFrame" name="run_workflow_frame">
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
-                        <height>150</height>
+                        <height>100</height>
                        </size>
                       </property>
                       <property name="maximumSize">
                        <size>
                         <width>16777215</width>
-                        <height>250</height>
+                        <height>200</height>
                        </size>
                       </property>
                       <property name="frameShape">
-                       <enum>QFrame::Box</enum>
+                       <enum>QFrame::NoFrame</enum>
                       </property>
                       <property name="frameShadow">
                        <enum>QFrame::Raised</enum>
                       </property>
                       <layout class="QHBoxLayout" name="horizontalLayout_35">
                        <property name="topMargin">
-                        <number>40</number>
+                        <number>20</number>
                        </property>
                        <item>
                         <widget class="QFrame" name="gpu_list_frame">
@@ -37891,12 +37891,287 @@ QPushButton:pressed {
                       </layout>
                      </widget>
                     </item>
-                    <item row="1" column="1">
-                     <widget class="QFrame" name="yaml_errors_frame">
+                    <item row="0" column="1">
+                     <widget class="QFrame" name="frame_27">
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
                         <height>0</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>16777215</width>
+                        <height>120</height>
+                       </size>
+                      </property>
+                      <property name="frameShape">
+                       <enum>QFrame::NoFrame</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
+                      </property>
+                      <layout class="QGridLayout" name="gridLayout_9">
+                       <property name="leftMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>9</number>
+                       </property>
+                       <property name="verticalSpacing">
+                        <number>6</number>
+                       </property>
+                       <item row="0" column="5">
+                        <widget class="QPushButton" name="examine_yaml_bn">
+                         <property name="font">
+                          <font>
+                           <family>DejaVu Math TeX Gyre</family>
+                           <pointsize>12</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>Browse</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="3" column="0" colspan="2">
+                        <widget class="QLabel" name="output_folder_label">
+                         <property name="maximumSize">
+                          <size>
+                           <width>16777215</width>
+                           <height>35</height>
+                          </size>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>DejaVu Math TeX Gyre</family>
+                           <pointsize>12</pointsize>
+                          </font>
+                         </property>
+                         <property name="toolTip">
+                          <string/>
+                         </property>
+                         <property name="text">
+                          <string>Output folder to save the results</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="2" column="0">
+                        <widget class="QLabel" name="label_138">
+                         <property name="font">
+                          <font>
+                           <family>DejaVu Math TeX Gyre</family>
+                           <pointsize>12</pointsize>
+                          </font>
+                         </property>
+                         <property name="toolTip">
+                          <string/>
+                         </property>
+                         <property name="text">
+                          <string>Job name</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="2" column="2">
+                        <widget class="QPushButton" name="job_name_info">
+                         <property name="minimumSize">
+                          <size>
+                           <width>30</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>30</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="toolTip">
+                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Name of the job. It will be used to create a folder in the output path you selected. For instance, if the job name was set to &amp;quot;my_semantic_segmentation&amp;quot;, and if the output folder to save the results is &amp;quot;/home/user/Downloads&amp;quot;, all results of the experiment will be placed at : /home/user/Downloads/my_semantic_segmentation &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">QPushButton {
+  border: none;
+}</string>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="3" column="2">
+                        <widget class="QPushButton" name="output_folder_info">
+                         <property name="minimumSize">
+                          <size>
+                           <width>30</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>30</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="toolTip">
+                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Path to store the results. If you complete the proccess of creating a new one automatically this will point to the folder where you select to save the YAML file. It will be used to create a folder in the output path you selected. For instance, if the job name was set to &amp;quot;my_semantic_segmentation&amp;quot;, and if the output folder to save the results is &amp;quot;/home/user/Downloads&amp;quot;, all results of the experiment will be placed at : /home/user/Downloads/my_semantic_segmentation &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">QPushButton {
+  border: none;
+}</string>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="2">
+                        <widget class="QPushButton" name="select_yaml_name_info">
+                         <property name="minimumSize">
+                          <size>
+                           <width>30</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>30</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="toolTip">
+                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;YAML configuration file to run BiaPy with. If you completed the proccess of creating a new YAML file this value will be set pointing to file. However, you can change it too.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">QPushButton {
+  border: none;
+}</string>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="3" column="5">
+                        <widget class="QPushButton" name="output_folder_bn">
+                         <property name="maximumSize">
+                          <size>
+                           <width>130</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>DejaVu Math TeX Gyre</family>
+                           <pointsize>12</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>Browse</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="3">
+                        <widget class="QLineEdit" name="select_yaml_name_label">
+                         <property name="minimumSize">
+                          <size>
+                           <width>500</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>500</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>DejaVu Math TeX Gyre</family>
+                           <pointsize>12</pointsize>
+                          </font>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="2" column="3">
+                        <widget class="QPlainTextEdit" name="job_name_input">
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>500</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>DejaVu Math TeX Gyre</family>
+                           <pointsize>12</pointsize>
+                          </font>
+                         </property>
+                         <property name="verticalScrollBarPolicy">
+                          <enum>Qt::ScrollBarAlwaysOff</enum>
+                         </property>
+                         <property name="horizontalScrollBarPolicy">
+                          <enum>Qt::ScrollBarAlwaysOff</enum>
+                         </property>
+                         <property name="lineWrapMode">
+                          <enum>QPlainTextEdit::NoWrap</enum>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="0" colspan="2">
+                        <widget class="QLabel" name="select_yaml_label">
+                         <property name="font">
+                          <font>
+                           <family>DejaVu Math TeX Gyre</family>
+                           <pointsize>12</pointsize>
+                          </font>
+                         </property>
+                         <property name="toolTip">
+                          <string/>
+                         </property>
+                         <property name="text">
+                          <string>Select configuration file</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="3" column="3">
+                        <widget class="QLineEdit" name="output_folder_input">
+                         <property name="minimumSize">
+                          <size>
+                           <width>500</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>500</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>DejaVu Math TeX Gyre</family>
+                           <pointsize>12</pointsize>
+                          </font>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item row="2" column="1">
+                     <widget class="QFrame" name="yaml_errors_frame">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>200</height>
                        </size>
                       </property>
                       <property name="maximumSize">
@@ -38020,7 +38295,7 @@ QPushButton:pressed {
                                <x>0</x>
                                <y>0</y>
                                <width>896</width>
-                               <height>101</height>
+                               <height>154</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_32">
@@ -38089,276 +38364,20 @@ QPushButton:pressed {
                       </layout>
                      </widget>
                     </item>
-                    <item row="0" column="1">
-                     <widget class="QFrame" name="frame_27">
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>0</height>
-                       </size>
+                    <item row="1" column="1">
+                     <widget class="QLabel" name="output_final_directory_label">
+                      <property name="font">
+                       <font>
+                        <family>DejaVu Math TeX Gyre</family>
+                        <pointsize>12</pointsize>
+                       </font>
                       </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>16777215</width>
-                        <height>120</height>
-                       </size>
+                      <property name="text">
+                       <string/>
                       </property>
-                      <property name="frameShape">
-                       <enum>QFrame::NoFrame</enum>
+                      <property name="wordWrap">
+                       <bool>true</bool>
                       </property>
-                      <property name="frameShadow">
-                       <enum>QFrame::Raised</enum>
-                      </property>
-                      <layout class="QGridLayout" name="gridLayout_9">
-                       <property name="leftMargin">
-                        <number>0</number>
-                       </property>
-                       <property name="rightMargin">
-                        <number>9</number>
-                       </property>
-                       <item row="3" column="0" colspan="2">
-                        <widget class="QLabel" name="output_folder_label">
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>35</height>
-                          </size>
-                         </property>
-                         <property name="font">
-                          <font>
-                           <family>DejaVu Math TeX Gyre</family>
-                           <pointsize>12</pointsize>
-                          </font>
-                         </property>
-                         <property name="toolTip">
-                          <string/>
-                         </property>
-                         <property name="text">
-                          <string>Output folder to save the results</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="3" column="2">
-                        <widget class="QPushButton" name="output_folder_info">
-                         <property name="minimumSize">
-                          <size>
-                           <width>30</width>
-                           <height>30</height>
-                          </size>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>30</width>
-                           <height>30</height>
-                          </size>
-                         </property>
-                         <property name="toolTip">
-                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Path to store the results. If you complete the proccess of creating a new one automatically this will point to the folder where you select to save the YAML file. It will be used to create a folder in the output path you selected. For instance, if the job name was set to &amp;quot;my_semantic_segmentation&amp;quot;, and if the output folder to save the results is &amp;quot;/home/user/Downloads&amp;quot;, all results of the experiment will be placed at : /home/user/Downloads/my_semantic_segmentation &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                         </property>
-                         <property name="styleSheet">
-                          <string notr="true">QPushButton {
-  border: none;
-}</string>
-                         </property>
-                         <property name="text">
-                          <string/>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="0" column="5">
-                        <widget class="QPushButton" name="examine_yaml_bn">
-                         <property name="font">
-                          <font>
-                           <family>DejaVu Math TeX Gyre</family>
-                           <pointsize>12</pointsize>
-                          </font>
-                         </property>
-                         <property name="text">
-                          <string>Browse</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="0" column="3">
-                        <widget class="QLineEdit" name="select_yaml_name_label">
-                         <property name="minimumSize">
-                          <size>
-                           <width>500</width>
-                           <height>30</height>
-                          </size>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>500</width>
-                           <height>30</height>
-                          </size>
-                         </property>
-                         <property name="font">
-                          <font>
-                           <family>DejaVu Math TeX Gyre</family>
-                           <pointsize>12</pointsize>
-                          </font>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="0" column="2">
-                        <widget class="QPushButton" name="select_yaml_name_info">
-                         <property name="minimumSize">
-                          <size>
-                           <width>30</width>
-                           <height>30</height>
-                          </size>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>30</width>
-                           <height>30</height>
-                          </size>
-                         </property>
-                         <property name="toolTip">
-                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;YAML configuration file to run BiaPy with. If you completed the proccess of creating a new YAML file this value will be set pointing to file. However, you can change it too.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                         </property>
-                         <property name="styleSheet">
-                          <string notr="true">QPushButton {
-  border: none;
-}</string>
-                         </property>
-                         <property name="text">
-                          <string/>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="2" column="2">
-                        <widget class="QPushButton" name="job_name_info">
-                         <property name="minimumSize">
-                          <size>
-                           <width>30</width>
-                           <height>30</height>
-                          </size>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>30</width>
-                           <height>30</height>
-                          </size>
-                         </property>
-                         <property name="toolTip">
-                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Name of the job. It will be used to create a folder in the output path you selected. For instance, if the job name was set to &amp;quot;my_semantic_segmentation&amp;quot;, and if the output folder to save the results is &amp;quot;/home/user/Downloads&amp;quot;, all results of the experiment will be placed at : /home/user/Downloads/my_semantic_segmentation &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                         </property>
-                         <property name="styleSheet">
-                          <string notr="true">QPushButton {
-  border: none;
-}</string>
-                         </property>
-                         <property name="text">
-                          <string/>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="3" column="5">
-                        <widget class="QPushButton" name="output_folder_bn">
-                         <property name="maximumSize">
-                          <size>
-                           <width>130</width>
-                           <height>16777215</height>
-                          </size>
-                         </property>
-                         <property name="font">
-                          <font>
-                           <family>DejaVu Math TeX Gyre</family>
-                           <pointsize>12</pointsize>
-                          </font>
-                         </property>
-                         <property name="text">
-                          <string>Browse</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="2" column="3">
-                        <widget class="QPlainTextEdit" name="job_name_input">
-                         <property name="minimumSize">
-                          <size>
-                           <width>0</width>
-                           <height>30</height>
-                          </size>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>500</width>
-                           <height>30</height>
-                          </size>
-                         </property>
-                         <property name="font">
-                          <font>
-                           <family>DejaVu Math TeX Gyre</family>
-                           <pointsize>12</pointsize>
-                          </font>
-                         </property>
-                         <property name="verticalScrollBarPolicy">
-                          <enum>Qt::ScrollBarAlwaysOff</enum>
-                         </property>
-                         <property name="horizontalScrollBarPolicy">
-                          <enum>Qt::ScrollBarAlwaysOff</enum>
-                         </property>
-                         <property name="lineWrapMode">
-                          <enum>QPlainTextEdit::NoWrap</enum>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="2" column="0">
-                        <widget class="QLabel" name="label_138">
-                         <property name="font">
-                          <font>
-                           <family>DejaVu Math TeX Gyre</family>
-                           <pointsize>12</pointsize>
-                          </font>
-                         </property>
-                         <property name="toolTip">
-                          <string/>
-                         </property>
-                         <property name="text">
-                          <string>Job name</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="3" column="3">
-                        <widget class="QLineEdit" name="output_folder_input">
-                         <property name="minimumSize">
-                          <size>
-                           <width>500</width>
-                           <height>30</height>
-                          </size>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>500</width>
-                           <height>30</height>
-                          </size>
-                         </property>
-                         <property name="font">
-                          <font>
-                           <family>DejaVu Math TeX Gyre</family>
-                           <pointsize>12</pointsize>
-                          </font>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="0" column="0" colspan="2">
-                        <widget class="QLabel" name="select_yaml_label">
-                         <property name="font">
-                          <font>
-                           <family>DejaVu Math TeX Gyre</family>
-                           <pointsize>12</pointsize>
-                          </font>
-                         </property>
-                         <property name="toolTip">
-                          <string/>
-                         </property>
-                         <property name="text">
-                          <string>Select configuration file</string>
-                         </property>
-                        </widget>
-                       </item>
-                      </layout>
                      </widget>
                     </item>
                    </layout>

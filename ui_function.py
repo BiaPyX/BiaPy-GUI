@@ -1,6 +1,6 @@
 import os
 import multiprocessing
-import datetime
+from datetime import datetime
 import ast 
 from collections import deque
 import requests
@@ -13,7 +13,7 @@ from PySide2.QtSvg import QSvgWidget
 from main import MainWindow
 from run_functions import run_worker
 from build_functions import build_worker
-from ui_utils import get_text, resource_path, oninit_checks, load_yaml_config, change_wizard_page, set_text
+from ui_utils import get_text, resource_path, oninit_checks, load_yaml_config, change_wizard_page, set_text, is_path_exists_or_creatable
 from aux_classes.checkableComboBox import CheckableComboBox
 
 class UIFunction(MainWindow):
@@ -452,7 +452,7 @@ class UIFunction(MainWindow):
         for i in range(min(multiprocessing.cpu_count(),10)):
             main_window.ui.SYSTEM__NUM_WORKERS__INPUT.addItem(str(i+1))
 
-        time = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+        time = datetime.now().strftime("%Y%m%d-%H%M%S")
         main_window.ui.goptions_yaml_name_input.setText("my_experiment_"+get_text(main_window.ui.PROBLEM__NDIM__INPUT)+"_"+time+".yaml")        
 
     def change_problem_dimensions(main_window, idx):
@@ -1289,6 +1289,15 @@ class UIFunction(MainWindow):
         if main_window.cfg.settings['output_folder'] == "":
             main_window.dialog_exec("Output folder must be defined", "output_folder")
             return 
+        if not is_path_exists_or_creatable(main_window.cfg.settings['job_real_output_path']):
+            main_window.dialog_exec("Job results folder is invalid. Please set a valid path within your system.", "output_folder")
+            return 
+        if os.path.exists(main_window.cfg.settings['job_real_output_path']):
+            new_jobname = jobname+"_"+datetime.now().strftime("%Y%m%d_%H_%M_%S")
+            main_window.yes_no_exec("Job results folder already exists. Do you want to change it to '{}' to avoid overwriting?"\
+                .format(new_jobname))
+            if main_window.yes_no.answer:
+                main_window.ui.job_name_input.setPlainText(new_jobname)
 
         # Docker installation check
         if not main_window.cfg.settings['docker_found']:

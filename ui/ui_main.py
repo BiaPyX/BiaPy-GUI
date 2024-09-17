@@ -1687,7 +1687,7 @@ class Ui_MainWindow(object):
         self.scrollArea_18.setWidgetResizable(True)
         self.scrollAreaWidgetContents_23 = QWidget()
         self.scrollAreaWidgetContents_23.setObjectName(u"scrollAreaWidgetContents_23")
-        self.scrollAreaWidgetContents_23.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_23.setGeometry(QRect(0, 0, 930, 172))
         self.verticalLayout_62 = QVBoxLayout(self.scrollAreaWidgetContents_23)
         self.verticalLayout_62.setObjectName(u"verticalLayout_62")
         self.scrollArea_18.setWidget(self.scrollAreaWidgetContents_23)
@@ -2485,7 +2485,7 @@ class Ui_MainWindow(object):
         self.goptions_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 922, 565))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 934, 565))
         self.scrollAreaWidgetContents.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout.setObjectName(u"gridLayout")
@@ -2707,7 +2707,7 @@ class Ui_MainWindow(object):
         self.goptions_advanced_options_scrollarea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 495, 284))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 860, 284))
         self.gridLayout_2 = QGridLayout(self.scrollAreaWidgetContents_2)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.label = QLabel(self.scrollAreaWidgetContents_2)
@@ -12677,7 +12677,7 @@ class Ui_MainWindow(object):
         self.scrollArea_10.setWidgetResizable(True)
         self.scrollAreaWidgetContents_14 = QWidget()
         self.scrollAreaWidgetContents_14.setObjectName(u"scrollAreaWidgetContents_14")
-        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 597, 1056))
+        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 914, 1056))
         self.gridLayout_47 = QGridLayout(self.scrollAreaWidgetContents_14)
         self.gridLayout_47.setObjectName(u"gridLayout_47")
         self.label_100 = QLabel(self.scrollAreaWidgetContents_14)
@@ -13787,17 +13787,17 @@ class Ui_MainWindow(object):
         self.frame_7.setFrameShadow(QFrame.Raised)
         self.gridLayout_72 = QGridLayout(self.frame_7)
         self.gridLayout_72.setObjectName(u"gridLayout_72")
-        self.gridLayout_72.setVerticalSpacing(40)
+        self.gridLayout_72.setVerticalSpacing(20)
         self.gridLayout_72.setContentsMargins(9, 9, 9, 9)
         self.run_workflow_frame = QFrame(self.frame_7)
         self.run_workflow_frame.setObjectName(u"run_workflow_frame")
-        self.run_workflow_frame.setMinimumSize(QSize(0, 150))
-        self.run_workflow_frame.setMaximumSize(QSize(16777215, 250))
-        self.run_workflow_frame.setFrameShape(QFrame.Box)
+        self.run_workflow_frame.setMinimumSize(QSize(0, 100))
+        self.run_workflow_frame.setMaximumSize(QSize(16777215, 200))
+        self.run_workflow_frame.setFrameShape(QFrame.NoFrame)
         self.run_workflow_frame.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_35 = QHBoxLayout(self.run_workflow_frame)
         self.horizontalLayout_35.setObjectName(u"horizontalLayout_35")
-        self.horizontalLayout_35.setContentsMargins(-1, 40, -1, -1)
+        self.horizontalLayout_35.setContentsMargins(-1, 20, -1, -1)
         self.gpu_list_frame = QFrame(self.run_workflow_frame)
         self.gpu_list_frame.setObjectName(u"gpu_list_frame")
         self.gpu_list_frame.setFrameShape(QFrame.NoFrame)
@@ -13849,11 +13849,113 @@ class Ui_MainWindow(object):
         self.horizontalLayout_35.addWidget(self.frame_64, 0, Qt.AlignHCenter)
 
 
-        self.gridLayout_72.addWidget(self.run_workflow_frame, 2, 1, 1, 1)
+        self.gridLayout_72.addWidget(self.run_workflow_frame, 3, 1, 1, 1)
+
+        self.frame_27 = QFrame(self.frame_7)
+        self.frame_27.setObjectName(u"frame_27")
+        self.frame_27.setMinimumSize(QSize(0, 0))
+        self.frame_27.setMaximumSize(QSize(16777215, 120))
+        self.frame_27.setFrameShape(QFrame.NoFrame)
+        self.frame_27.setFrameShadow(QFrame.Raised)
+        self.gridLayout_9 = QGridLayout(self.frame_27)
+        self.gridLayout_9.setObjectName(u"gridLayout_9")
+        self.gridLayout_9.setVerticalSpacing(6)
+        self.gridLayout_9.setContentsMargins(0, -1, 9, -1)
+        self.examine_yaml_bn = QPushButton(self.frame_27)
+        self.examine_yaml_bn.setObjectName(u"examine_yaml_bn")
+        self.examine_yaml_bn.setFont(font)
+
+        self.gridLayout_9.addWidget(self.examine_yaml_bn, 0, 5, 1, 1)
+
+        self.output_folder_label = QLabel(self.frame_27)
+        self.output_folder_label.setObjectName(u"output_folder_label")
+        self.output_folder_label.setMaximumSize(QSize(16777215, 35))
+        self.output_folder_label.setFont(font)
+
+        self.gridLayout_9.addWidget(self.output_folder_label, 3, 0, 1, 2)
+
+        self.label_138 = QLabel(self.frame_27)
+        self.label_138.setObjectName(u"label_138")
+        self.label_138.setFont(font)
+
+        self.gridLayout_9.addWidget(self.label_138, 2, 0, 1, 1)
+
+        self.job_name_info = QPushButton(self.frame_27)
+        self.job_name_info.setObjectName(u"job_name_info")
+        self.job_name_info.setMinimumSize(QSize(30, 30))
+        self.job_name_info.setMaximumSize(QSize(30, 30))
+        self.job_name_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_9.addWidget(self.job_name_info, 2, 2, 1, 1)
+
+        self.output_folder_info = QPushButton(self.frame_27)
+        self.output_folder_info.setObjectName(u"output_folder_info")
+        self.output_folder_info.setMinimumSize(QSize(30, 30))
+        self.output_folder_info.setMaximumSize(QSize(30, 30))
+        self.output_folder_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_9.addWidget(self.output_folder_info, 3, 2, 1, 1)
+
+        self.select_yaml_name_info = QPushButton(self.frame_27)
+        self.select_yaml_name_info.setObjectName(u"select_yaml_name_info")
+        self.select_yaml_name_info.setMinimumSize(QSize(30, 30))
+        self.select_yaml_name_info.setMaximumSize(QSize(30, 30))
+        self.select_yaml_name_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_9.addWidget(self.select_yaml_name_info, 0, 2, 1, 1)
+
+        self.output_folder_bn = QPushButton(self.frame_27)
+        self.output_folder_bn.setObjectName(u"output_folder_bn")
+        self.output_folder_bn.setMaximumSize(QSize(130, 16777215))
+        self.output_folder_bn.setFont(font)
+
+        self.gridLayout_9.addWidget(self.output_folder_bn, 3, 5, 1, 1)
+
+        self.select_yaml_name_label = QLineEdit(self.frame_27)
+        self.select_yaml_name_label.setObjectName(u"select_yaml_name_label")
+        self.select_yaml_name_label.setMinimumSize(QSize(500, 30))
+        self.select_yaml_name_label.setMaximumSize(QSize(500, 30))
+        self.select_yaml_name_label.setFont(font)
+
+        self.gridLayout_9.addWidget(self.select_yaml_name_label, 0, 3, 1, 1)
+
+        self.job_name_input = QPlainTextEdit(self.frame_27)
+        self.job_name_input.setObjectName(u"job_name_input")
+        self.job_name_input.setMinimumSize(QSize(0, 30))
+        self.job_name_input.setMaximumSize(QSize(500, 30))
+        self.job_name_input.setFont(font)
+        self.job_name_input.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.job_name_input.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.job_name_input.setLineWrapMode(QPlainTextEdit.NoWrap)
+
+        self.gridLayout_9.addWidget(self.job_name_input, 2, 3, 1, 1)
+
+        self.select_yaml_label = QLabel(self.frame_27)
+        self.select_yaml_label.setObjectName(u"select_yaml_label")
+        self.select_yaml_label.setFont(font)
+
+        self.gridLayout_9.addWidget(self.select_yaml_label, 0, 0, 1, 2)
+
+        self.output_folder_input = QLineEdit(self.frame_27)
+        self.output_folder_input.setObjectName(u"output_folder_input")
+        self.output_folder_input.setMinimumSize(QSize(500, 30))
+        self.output_folder_input.setMaximumSize(QSize(500, 30))
+        self.output_folder_input.setFont(font)
+
+        self.gridLayout_9.addWidget(self.output_folder_input, 3, 3, 1, 1)
+
+
+        self.gridLayout_72.addWidget(self.frame_27, 0, 1, 1, 1)
 
         self.yaml_errors_frame = QFrame(self.frame_7)
         self.yaml_errors_frame.setObjectName(u"yaml_errors_frame")
-        self.yaml_errors_frame.setMinimumSize(QSize(0, 0))
+        self.yaml_errors_frame.setMinimumSize(QSize(0, 200))
         self.yaml_errors_frame.setMaximumSize(QSize(16777215, 16777215))
         self.yaml_errors_frame.setFrameShape(QFrame.NoFrame)
         self.yaml_errors_frame.setFrameShadow(QFrame.Raised)
@@ -13905,7 +14007,7 @@ class Ui_MainWindow(object):
         self.check_yaml_file_errors_frame.setWidgetResizable(True)
         self.scrollAreaWidgetContents_19 = QWidget()
         self.scrollAreaWidgetContents_19.setObjectName(u"scrollAreaWidgetContents_19")
-        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 896, 101))
+        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 896, 154))
         self.verticalLayout_32 = QVBoxLayout(self.scrollAreaWidgetContents_19)
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
         self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)
@@ -13935,108 +14037,14 @@ class Ui_MainWindow(object):
         self.gridLayout_73.addWidget(self.check_yaml_file_errors_frame_main, 2, 2, 1, 2)
 
 
-        self.gridLayout_72.addWidget(self.yaml_errors_frame, 1, 1, 1, 1)
+        self.gridLayout_72.addWidget(self.yaml_errors_frame, 2, 1, 1, 1)
 
-        self.frame_27 = QFrame(self.frame_7)
-        self.frame_27.setObjectName(u"frame_27")
-        self.frame_27.setMinimumSize(QSize(0, 0))
-        self.frame_27.setMaximumSize(QSize(16777215, 120))
-        self.frame_27.setFrameShape(QFrame.NoFrame)
-        self.frame_27.setFrameShadow(QFrame.Raised)
-        self.gridLayout_9 = QGridLayout(self.frame_27)
-        self.gridLayout_9.setObjectName(u"gridLayout_9")
-        self.gridLayout_9.setContentsMargins(0, -1, 9, -1)
-        self.output_folder_label = QLabel(self.frame_27)
-        self.output_folder_label.setObjectName(u"output_folder_label")
-        self.output_folder_label.setMaximumSize(QSize(16777215, 35))
-        self.output_folder_label.setFont(font)
+        self.output_final_directory_label = QLabel(self.frame_7)
+        self.output_final_directory_label.setObjectName(u"output_final_directory_label")
+        self.output_final_directory_label.setFont(font)
+        self.output_final_directory_label.setWordWrap(True)
 
-        self.gridLayout_9.addWidget(self.output_folder_label, 3, 0, 1, 2)
-
-        self.output_folder_info = QPushButton(self.frame_27)
-        self.output_folder_info.setObjectName(u"output_folder_info")
-        self.output_folder_info.setMinimumSize(QSize(30, 30))
-        self.output_folder_info.setMaximumSize(QSize(30, 30))
-        self.output_folder_info.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_9.addWidget(self.output_folder_info, 3, 2, 1, 1)
-
-        self.examine_yaml_bn = QPushButton(self.frame_27)
-        self.examine_yaml_bn.setObjectName(u"examine_yaml_bn")
-        self.examine_yaml_bn.setFont(font)
-
-        self.gridLayout_9.addWidget(self.examine_yaml_bn, 0, 5, 1, 1)
-
-        self.select_yaml_name_label = QLineEdit(self.frame_27)
-        self.select_yaml_name_label.setObjectName(u"select_yaml_name_label")
-        self.select_yaml_name_label.setMinimumSize(QSize(500, 30))
-        self.select_yaml_name_label.setMaximumSize(QSize(500, 30))
-        self.select_yaml_name_label.setFont(font)
-
-        self.gridLayout_9.addWidget(self.select_yaml_name_label, 0, 3, 1, 1)
-
-        self.select_yaml_name_info = QPushButton(self.frame_27)
-        self.select_yaml_name_info.setObjectName(u"select_yaml_name_info")
-        self.select_yaml_name_info.setMinimumSize(QSize(30, 30))
-        self.select_yaml_name_info.setMaximumSize(QSize(30, 30))
-        self.select_yaml_name_info.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_9.addWidget(self.select_yaml_name_info, 0, 2, 1, 1)
-
-        self.job_name_info = QPushButton(self.frame_27)
-        self.job_name_info.setObjectName(u"job_name_info")
-        self.job_name_info.setMinimumSize(QSize(30, 30))
-        self.job_name_info.setMaximumSize(QSize(30, 30))
-        self.job_name_info.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_9.addWidget(self.job_name_info, 2, 2, 1, 1)
-
-        self.output_folder_bn = QPushButton(self.frame_27)
-        self.output_folder_bn.setObjectName(u"output_folder_bn")
-        self.output_folder_bn.setMaximumSize(QSize(130, 16777215))
-        self.output_folder_bn.setFont(font)
-
-        self.gridLayout_9.addWidget(self.output_folder_bn, 3, 5, 1, 1)
-
-        self.job_name_input = QPlainTextEdit(self.frame_27)
-        self.job_name_input.setObjectName(u"job_name_input")
-        self.job_name_input.setMinimumSize(QSize(0, 30))
-        self.job_name_input.setMaximumSize(QSize(500, 30))
-        self.job_name_input.setFont(font)
-        self.job_name_input.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.job_name_input.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.job_name_input.setLineWrapMode(QPlainTextEdit.NoWrap)
-
-        self.gridLayout_9.addWidget(self.job_name_input, 2, 3, 1, 1)
-
-        self.label_138 = QLabel(self.frame_27)
-        self.label_138.setObjectName(u"label_138")
-        self.label_138.setFont(font)
-
-        self.gridLayout_9.addWidget(self.label_138, 2, 0, 1, 1)
-
-        self.output_folder_input = QLineEdit(self.frame_27)
-        self.output_folder_input.setObjectName(u"output_folder_input")
-        self.output_folder_input.setMinimumSize(QSize(500, 30))
-        self.output_folder_input.setMaximumSize(QSize(500, 30))
-        self.output_folder_input.setFont(font)
-
-        self.gridLayout_9.addWidget(self.output_folder_input, 3, 3, 1, 1)
-
-        self.select_yaml_label = QLabel(self.frame_27)
-        self.select_yaml_label.setObjectName(u"select_yaml_label")
-        self.select_yaml_label.setFont(font)
-
-        self.gridLayout_9.addWidget(self.select_yaml_label, 0, 0, 1, 2)
-
-
-        self.gridLayout_72.addWidget(self.frame_27, 0, 1, 1, 1)
+        self.gridLayout_72.addWidget(self.output_final_directory_label, 1, 1, 1, 1)
 
 
         self.horizontalLayout_29.addWidget(self.frame_7)
@@ -14058,7 +14066,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(3)
         self.wizard_main_frame.setCurrentIndex(0)
         self.stackedWidget_create_yaml_frame.setCurrentIndex(2)
         self.train_tab_widget.setCurrentIndex(0)
@@ -17626,33 +17634,34 @@ class Ui_MainWindow(object):
         self.run_biapy_docker_bn.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.run_biapy_docker_bn.setText(QCoreApplication.translate("MainWindow", u"Run Workflow", None))
-        self.check_yaml_file_bn.setText(QCoreApplication.translate("MainWindow", u"Check file", None))
-        self.check_yaml_file_errors_label.setText("")
+        self.examine_yaml_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
 #if QT_CONFIG(tooltip)
         self.output_folder_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.output_folder_label.setText(QCoreApplication.translate("MainWindow", u"Output folder to save the results", None))
 #if QT_CONFIG(tooltip)
-        self.output_folder_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to store the results. If you complete the proccess of creating a new one automatically this will point to the folder where you select to save the YAML file. It will be used to create a folder in the output path you selected. For instance, if the job name was set to &quot;my_semantic_segmentation&quot;, and if the output folder to save the results is &quot;/home/user/Downloads&quot;, all results of the experiment will be placed at : /home/user/Downloads/my_semantic_segmentation </span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.output_folder_info.setText("")
-        self.examine_yaml_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
-#if QT_CONFIG(tooltip)
-        self.select_yaml_name_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">YAML configuration file to run BiaPy with. If you completed the proccess of creating a new YAML file this value will be set pointing to file. However, you can change it too.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.select_yaml_name_info.setText("")
-#if QT_CONFIG(tooltip)
-        self.job_name_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Name of the job. It will be used to create a folder in the output path you selected. For instance, if the job name was set to &quot;my_semantic_segmentation&quot;, and if the output folder to save the results is &quot;/home/user/Downloads&quot;, all results of the experiment will be placed at : /home/user/Downloads/my_semantic_segmentation </span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.job_name_info.setText("")
-        self.output_folder_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
-#if QT_CONFIG(tooltip)
         self.label_138.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.label_138.setText(QCoreApplication.translate("MainWindow", u"Job name", None))
 #if QT_CONFIG(tooltip)
+        self.job_name_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Name of the job. It will be used to create a folder in the output path you selected. For instance, if the job name was set to &quot;my_semantic_segmentation&quot;, and if the output folder to save the results is &quot;/home/user/Downloads&quot;, all results of the experiment will be placed at : /home/user/Downloads/my_semantic_segmentation </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.job_name_info.setText("")
+#if QT_CONFIG(tooltip)
+        self.output_folder_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to store the results. If you complete the proccess of creating a new one automatically this will point to the folder where you select to save the YAML file. It will be used to create a folder in the output path you selected. For instance, if the job name was set to &quot;my_semantic_segmentation&quot;, and if the output folder to save the results is &quot;/home/user/Downloads&quot;, all results of the experiment will be placed at : /home/user/Downloads/my_semantic_segmentation </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.output_folder_info.setText("")
+#if QT_CONFIG(tooltip)
+        self.select_yaml_name_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">YAML configuration file to run BiaPy with. If you completed the proccess of creating a new YAML file this value will be set pointing to file. However, you can change it too.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.select_yaml_name_info.setText("")
+        self.output_folder_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
+#if QT_CONFIG(tooltip)
         self.select_yaml_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.select_yaml_label.setText(QCoreApplication.translate("MainWindow", u"Select configuration file", None))
+        self.check_yaml_file_bn.setText(QCoreApplication.translate("MainWindow", u"Check file", None))
+        self.check_yaml_file_errors_label.setText("")
+        self.output_final_directory_label.setText("")
     # retranslateUi
 
