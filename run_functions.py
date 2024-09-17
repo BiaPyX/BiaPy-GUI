@@ -552,6 +552,8 @@ class run_worker(QObject):
             self.process_steps = "running"
             self.main_gui.logger.info("Container created!")
 
+            workflow_name = self.main_gui.cfg.settings["workflow_names"][self.main_gui.cfg.settings["workflow_key_names"].index(self.config['PROBLEM']['TYPE'])]
+            workflow_name = workflow_name.replace("\n"," ")
             # Set the window header 
             self.container_info = \
             "<b>BiaPy container ({} - ID: {})</b><br>\
@@ -568,7 +570,7 @@ class run_worker(QObject):
             .format(
                 str(self.biapy_container.image).replace('<','').replace('>',''), self.biapy_container.short_id,
                 now.strftime("%Y/%m/%d %H:%M:%S"), 
-                jobname,
+                jobname + " (" + self.config['PROBLEM']['NDIM'] + " " + workflow_name + ")",
                 bytearray(QUrl.fromLocalFile(get_text(self.main_gui.ui.select_yaml_name_label)).toEncoded()).decode(), get_text(self.main_gui.ui.select_yaml_name_label),
                 device,
                 bytearray(QUrl.fromLocalFile(container_out_dir_in_host).toEncoded()).decode(), container_out_dir_in_host,
