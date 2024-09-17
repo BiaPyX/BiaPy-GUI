@@ -669,8 +669,8 @@ class Settings:
         ]
         self.settings["wizard_variable_to_map"]["Q3"] = {}
         self.settings["wizard_variable_to_map"]["Q3"]["MODEL.SOURCE"] = ["biapy", "biapy", "bmz"]
-        self.settings["wizard_variable_to_map"]["Q3"]["MODEL.LOAD_CHECKPOINT"] = ["False", "True", "False"]
-        self.settings["wizard_variable_to_map"]["Q3"]["MODEL.LOAD_MODEL_FROM_CHECKPOINT"] = ["False", "True", "False"]
+        self.settings["wizard_variable_to_map"]["Q3"]["MODEL.LOAD_CHECKPOINT"] = [False, True, False]
+        self.settings["wizard_variable_to_map"]["Q3"]["MODEL.LOAD_MODEL_FROM_CHECKPOINT"] = [False, True, False]
         self.settings["wizard_answers"]["MODEL.SOURCE"] = -1 
         self.settings["wizard_answers"]["MODEL.LOAD_CHECKPOINT"] = -1 
         self.settings["wizard_answers"]["MODEL.LOAD_MODEL_FROM_CHECKPOINT"] = -1
@@ -716,7 +716,7 @@ class Settings:
             "or_cond": [ ],
             "and_cond": [
                 ["MODEL.SOURCE", "biapy"],
-                ["MODEL.LOAD_CHECKPOINT", "True"],
+                ["MODEL.LOAD_CHECKPOINT", True],
             ],
         }
         self.settings["wizard_questions"] += [

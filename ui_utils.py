@@ -912,7 +912,15 @@ def export_wizard_summary(main_window):
         if main_window.cfg.settings['wizard_possible_answers'][i][0] == "PATH":
             key = next(iter(main_window.cfg.settings["wizard_variable_to_map"][f"Q{(i+1)}"].keys()))
             phase = "TRAIN" if "TRAIN" in key else "TEST"
-            if main_window.cfg.settings["wizard_answers"][f"{phase}.ENABLE"] and f"CHECKED {key}" in main_window.cfg.settings["wizard_answers"] and main_window.cfg.settings["wizard_answers"][f"CHECKED {key}"] == -1:
+            if (
+                main_window.cfg.settings["wizard_answers"][f"{phase}.ENABLE"] 
+                and f"CHECKED {key}" in main_window.cfg.settings["wizard_answers"] 
+                and main_window.cfg.settings["wizard_answers"][f"CHECKED {key}"] == -1
+                and not (
+                    "GT_PATH" in key 
+                    and main_window.cfg.settings["wizard_answers"]["PROBLEM.TYPE"] in ["DENOISING", "CLASSIFICATION", "SELF_SUPERVISED"]
+                    )
+            ):
                 finished_data_checks = False
 
     # Check if the data folder was checked 
@@ -992,10 +1000,6 @@ def export_wizard_summary(main_window):
                                 )
                         main_window.dialog_exec(m, reason="error")
                         return
-                    del biapy_cfg["data_constraints"][f"DATA.{phase}.PATH"]
-                    del biapy_cfg["data_constraints"][f"DATA.{phase}.PATH_path"]
-                    del biapy_cfg["data_constraints"][f"DATA.{phase}.GT_PATH"]
-                    del biapy_cfg["data_constraints"][f"DATA.{phase}.GT_PATH_path"]
 
                     if (
                         f"DATA.{phase}.PATH_path_shapes" in biapy_cfg["data_constraints"] 
@@ -1044,10 +1048,18 @@ def export_wizard_summary(main_window):
                                     .format(x[:-1],expected_y_shape[:-1],x[:-1],y[:-1]), reason="error")
                                 return    
 
-                    if f"DATA.{phase}.PATH_path_shapes" in biapy_cfg["data_constraints"]:
-                        del biapy_cfg["data_constraints"][f"DATA.{phase}.PATH_path_shapes"]
-                    if f"DATA.{phase}.GT_PATH_path_shapes" in biapy_cfg["data_constraints"]:
-                        del biapy_cfg["data_constraints"][f"DATA.{phase}.GT_PATH_path_shapes"]
+                if f"DATA.{phase}.PATH_path_shapes" in biapy_cfg["data_constraints"]:
+                    del biapy_cfg["data_constraints"][f"DATA.{phase}.PATH_path_shapes"]
+                if f"DATA.{phase}.GT_PATH_path_shapes" in biapy_cfg["data_constraints"]:
+                    del biapy_cfg["data_constraints"][f"DATA.{phase}.GT_PATH_path_shapes"]
+                if f"DATA.{phase}.PATH" in biapy_cfg["data_constraints"]:    
+                    del biapy_cfg["data_constraints"][f"DATA.{phase}.PATH"]
+                if f"DATA.{phase}.PATH_path" in biapy_cfg["data_constraints"]:    
+                    del biapy_cfg["data_constraints"][f"DATA.{phase}.PATH_path"]
+                if f"DATA.{phase}.GT_PATH" in biapy_cfg["data_constraints"]:
+                    del biapy_cfg["data_constraints"][f"DATA.{phase}.GT_PATH"]
+                if f"DATA.{phase}.GT_PATH_path" in biapy_cfg["data_constraints"]:
+                    del biapy_cfg["data_constraints"][f"DATA.{phase}.GT_PATH_path"]
 
         # Set the rest of the variables found by checking the data 
         for key, value in biapy_cfg["data_constraints"].items():
@@ -1231,11 +1243,11 @@ def set_default_config(cfg):
                 cfg['TEST']['POST_PROCESSING']["REMOVE_CLOSE_POINTS"] = True
 
     elif cfg["PROBLEM"]["TYPE"] == "DENOISING":
-        if cfg['DATA']['PATCH_SIZE'][0] != -1:
+        if cfg['DATA']['PATCH_SIZE'][0] == -1:
             if cfg['PROBLEM']['NDIM'] == "2D":
-                cfg['DATA']['PATCH_SIZE'] = str((64,64)+(data_channels,))
+                cfg['DATA']['PATCH_SIZE'] = (64,64)+(data_channels,)
             else:
-                cfg['DATA']['PATCH_SIZE'] = str((12,64,64)+(data_channels,))
+                cfg['DATA']['PATCH_SIZE'] = (12,64,64)+(data_channels,)
             if cfg['TEST']['ENABLE']:
                 cfg['DATA']['TEST']['PADDING'] = str(tuple([x//6 for x in cfg['DATA']['PATCH_SIZE'][:-1]]))
 
@@ -1255,11 +1267,11 @@ def set_default_config(cfg):
             cfg['TRAIN']['BATCH_SIZE'] = 1 # TODO: Depending on the GPU/CPU. In denoising the value can be higher  
         
     elif cfg["PROBLEM"]["TYPE"] == "SUPER_RESOLUTION":
-        if cfg['DATA']['PATCH_SIZE'][0] != -1:
+        if cfg['DATA']['PATCH_SIZE'][0] == -1:
             if cfg['PROBLEM']['NDIM'] == "2D":
-                cfg['DATA']['PATCH_SIZE'] = str((48,48)+(data_channels,))
+                cfg['DATA']['PATCH_SIZE'] = (48,48)+(data_channels,)
             else:
-                cfg['DATA']['PATCH_SIZE'] = str((6,128,128)+(data_channels,))
+                cfg['DATA']['PATCH_SIZE'] = (6,128,128)+(data_channels,)
 
             if cfg['TEST']['ENABLE']:
                 cfg['DATA']['TEST']['PADDING'] = str(tuple([x//6 for x in cfg['DATA']['PATCH_SIZE'][:-1]]))
@@ -2029,7 +2041,7 @@ def create_yaml_file(main_window):
         biapy_config['AUGMENTOR']['ENABLE'] = True  
         biapy_config['AUGMENTOR']['DA_PROB'] = float(get_text(main_window.ui.AUGMENTOR__DA_PROB__INPUT))
         biapy_config['AUGMENTOR']['AUG_SAMPLES'] = True if get_text(main_window.ui.AUGMENTOR__AUG_SAMPLES__INPUT) == "Yes" else False
-        if get_text(main_window.ui.AUGMENTOR__DRAW_GRID__INPUT) == "False": 
+        if get_text(main_window.ui.AUGMENTOR__DRAW_GRID__INPUT) == "No": 
             biapy_config['AUGMENTOR']['DRAW_GRID'] = False
         if int(get_text(main_window.ui.AUGMENTOR__AUG_NUM_SAMPLES__INPUT)) != 10:
             biapy_config['AUGMENTOR']['AUG_NUM_SAMPLES'] = int(get_text(main_window.ui.AUGMENTOR__AUG_NUM_SAMPLES__INPUT))
