@@ -919,7 +919,12 @@ def export_wizard_summary(main_window):
                 and not (
                     "GT_PATH" in key 
                     and main_window.cfg.settings["wizard_answers"]["PROBLEM.TYPE"] in ["DENOISING", "CLASSIFICATION", "SELF_SUPERVISED"]
-                    )
+                )
+                and not (
+                    "GT_PATH" in key 
+                    and phase == "TEST"
+                    and not main_window.cfg.settings["wizard_answers"]["DATA.TEST.LOAD_GT"]
+                )
             ):
                 finished_data_checks = False
 
@@ -1024,6 +1029,7 @@ def export_wizard_summary(main_window):
                                     else:
                                         y_upscaling.append(int(div))
                                 y_upscaling = tuple(y_upscaling)
+                                biapy_cfg["PROBLEM.SUPER_RESOLUTION.UPSCALING"] = y_upscaling
 
                             if biapy_cfg["PROBLEM.TYPE"] == "SUPER_RESOLUTION":
                                 if biapy_cfg["PROBLEM.NDIM"] == "3D":
@@ -1136,7 +1142,8 @@ def set_default_config(cfg):
         # Train data 
         cfg["DATA"]["TRAIN"]["IN_MEMORY"] = False
         # Validation data
-        cfg['DATA']['VAL'] = {}
+        if "VAL" not in cfg['DATA']:
+            cfg['DATA']['VAL'] = {}
         cfg['DATA']['VAL']['IN_MEMORY'] = False
         cfg["DATA"]["VAL"]["FROM_TRAIN"] = True
         cfg["DATA"]["VAL"]["SPLIT_TRAIN"] = 0.1
@@ -1152,7 +1159,8 @@ def set_default_config(cfg):
             cfg['DATA']['TEST']['PADDING'] = str(tuple([x//6 for x in cfg['DATA']['PATCH_SIZE'][:-1]]))
 
     # Normalization
-    cfg['DATA']['NORMALIZATION'] = {}
+    if "NORMALIZATION" not in cfg['DATA']:
+        cfg['DATA']['NORMALIZATION'] = {}
     cfg['DATA']['NORMALIZATION']['TYPE'] = 'custom'
     cfg['DATA']['NORMALIZATION']['PERC_CLIP'] = True
     cfg['DATA']['NORMALIZATION']['PERC_LOWER'] = 0.1
@@ -1168,11 +1176,13 @@ def set_default_config(cfg):
         cfg['TRAIN']['OPTIMIZER'] = "ADAMW"
         cfg['TRAIN']['LR'] = 1.E-4
         # Learning rate scheduler
-        cfg['TRAIN']['LR_SCHEDULER'] = {}
+        if "LR_SCHEDULER" not in cfg['TRAIN']:
+            cfg['TRAIN']['LR_SCHEDULER'] = {}
         cfg['TRAIN']['LR_SCHEDULER']['NAME'] = 'warmupcosine'
         cfg['TRAIN']['LR_SCHEDULER']['MIN_LR'] = 5.E-6
         cfg['TRAIN']['LR_SCHEDULER']['WARMUP_COSINE_DECAY_EPOCHS'] = 5
-        cfg['LOSS'] = {}
+        if "LOSS" not in cfg:
+            cfg['LOSS'] = {}
         cfg['LOSS']['CLASS_REBALANCE'] = True 
 
     #########
@@ -1198,7 +1208,8 @@ def set_default_config(cfg):
     # DATA AUGMENTATION #
     #####################
     if cfg['TRAIN']['ENABLE']:
-        cfg['AUGMENTOR'] = {}
+        if "AUGMENTOR" not in cfg:
+            cfg['AUGMENTOR'] = {}
         cfg['AUGMENTOR']["ENABLE"] = True
         cfg['AUGMENTOR']["AFFINE_MODE"] = 'reflect'
         cfg['AUGMENTOR']["VFLIP"] = True
@@ -1222,17 +1233,21 @@ def set_default_config(cfg):
             "DETECTION",
             "IMAGE_TO_IMAGE"
         ]:
-        cfg['AUGMENTOR']['BRIGHTNESS'] = True
-        cfg['AUGMENTOR']['BRIGHTNESS_FACTOR'] = str((-0.2, 0.2))
-        cfg['AUGMENTOR']['CONTRAST'] = True
-        cfg['AUGMENTOR']['CONTRAST_FACTOR'] = str((-0.2, 0.2))
-        cfg['AUGMENTOR']['ELASTIC'] = True
-        cfg['AUGMENTOR']['ZOOM'] = True
-        cfg['AUGMENTOR']['ZOOM_RANGE'] = str((0.9, 1.1))
-        cfg['AUGMENTOR']['RANDOM_ROT'] = True
+        if cfg['TRAIN']['ENABLE']:
+            if 'AUGMENTOR' not in cfg:
+                cfg['AUGMENTOR'] = {}
+            cfg['AUGMENTOR']['BRIGHTNESS'] = True
+            cfg['AUGMENTOR']['BRIGHTNESS_FACTOR'] = str((-0.2, 0.2))
+            cfg['AUGMENTOR']['CONTRAST'] = True
+            cfg['AUGMENTOR']['CONTRAST_FACTOR'] = str((-0.2, 0.2))
+            cfg['AUGMENTOR']['ELASTIC'] = True
+            cfg['AUGMENTOR']['ZOOM'] = True
+            cfg['AUGMENTOR']['ZOOM_RANGE'] = str((0.9, 1.1))
+            cfg['AUGMENTOR']['RANDOM_ROT'] = True
 
         if cfg['PROBLEM']['TYPE'] == 'INSTANCE_SEG':
-            cfg['PROBLEM']['INSTANCE_SEG'] = {}
+            if "INSTANCE_SEG" not in cfg['PROBLEM']:
+                cfg['PROBLEM']['INSTANCE_SEG'] = {}
             cfg['PROBLEM']['INSTANCE_SEG']['DATA_CHANNELS'] = 'BC'
             cfg['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_TYPE'] = "auto"
 
@@ -1252,7 +1267,8 @@ def set_default_config(cfg):
                 cfg['DATA']['TEST']['PADDING'] = str(tuple([x//6 for x in cfg['DATA']['PATCH_SIZE'][:-1]]))
 
         # Config as Noise2Void default parameters
-        cfg['PROBLEM']['DENOISING'] = {}
+        if "DENOISING" not in cfg['PROBLEM']:
+            cfg['PROBLEM']['DENOISING'] = {}
         cfg['PROBLEM']['DENOISING']['N2V_STRUCTMASK'] = True
         cfg['MODEL']['ARCHITECTURE'] = 'unet'
         cfg['MODEL']['FEATURE_MAPS'] = [32, 64, 96]
