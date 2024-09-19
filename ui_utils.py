@@ -1216,8 +1216,8 @@ def set_default_config(cfg, gpu_info, sample_info):
     # TRAINING PARAMETERS #
     #######################
     if cfg['TRAIN']['ENABLE']:
-        cfg['TRAIN']['EPOCHS'] = 1000
-        cfg['TRAIN']['PATIENCE'] = 50
+        cfg['TRAIN']['EPOCHS'] = 300
+        cfg['TRAIN']['PATIENCE'] = 30
         cfg['TRAIN']['OPTIMIZER'] = "ADAMW"
         cfg['TRAIN']['LR'] = 1.E-4
         # Learning rate scheduler
@@ -1225,7 +1225,7 @@ def set_default_config(cfg, gpu_info, sample_info):
             cfg['TRAIN']['LR_SCHEDULER'] = {}
         cfg['TRAIN']['LR_SCHEDULER']['NAME'] = 'warmupcosine'
         cfg['TRAIN']['LR_SCHEDULER']['MIN_LR'] = 5.E-6
-        cfg['TRAIN']['LR_SCHEDULER']['WARMUP_COSINE_DECAY_EPOCHS'] = 5
+        cfg['TRAIN']['LR_SCHEDULER']['WARMUP_COSINE_DECAY_EPOCHS'] = 10
         if "LOSS" not in cfg:
             cfg['LOSS'] = {}
         cfg['LOSS']['CLASS_REBALANCE'] = True 
@@ -1235,7 +1235,7 @@ def set_default_config(cfg, gpu_info, sample_info):
     #########
     # TODO: calculate BMZ/torchvision model size. Now a high number to ensure batch_size is set to 1 so it 
     # works always
-    network_memory = 9999999  
+    network_base_memory = 9999999  
     if cfg['MODEL']['SOURCE'] == "biapy":
         if cfg["PROBLEM"]["TYPE"] in [
             "SEMANTIC_SEG",
@@ -1247,18 +1247,23 @@ def set_default_config(cfg, gpu_info, sample_info):
             cfg["MODEL"]["ARCHITECTURE"] = "resunet"
             if cfg['PROBLEM']['NDIM'] == "3D":
                 cfg["MODEL"]["Z_DOWN"] = [1, 1, 1, 1]
-            network_memory = 220 if cfg['PROBLEM']['NDIM'] == "2D" else 615
+            network_base_memory = 400
         elif cfg["PROBLEM"]["TYPE"] == "SUPER_RESOLUTION":
-            cfg["MODEL"]["ARCHITECTURE"] = "rcan" if cfg['PROBLEM']['NDIM'] == "2D" else "resunet"
-            network_memory = 876.92 if cfg['PROBLEM']['NDIM'] == "2D" else 615
+            if cfg['PROBLEM']['NDIM'] == "3D":
+                cfg["MODEL"]["ARCHITECTURE"] = "resunet"
+                cfg["MODEL"]["Z_DOWN"] = [1, 1, 1, 1]
+                network_base_memory = 400
+            else:
+                cfg["MODEL"]["ARCHITECTURE"] = "rcan"
+                network_base_memory = 3500 
         elif cfg["PROBLEM"]["TYPE"] == "SELF_SUPERVISED":
-            cfg["MODEL"]["ARCHITECTURE"] = "unet"
-            network_memory = 400
+            cfg["MODEL"]["ARCHITECTURE"] = "resunet"
+            network_base_memory = 400
             if cfg['PROBLEM']['NDIM'] == "3D":
                 cfg["MODEL"]["Z_DOWN"] = [1, 1, 1, 1]
         elif cfg["PROBLEM"]["TYPE"] == "CLASSIFICATION":
             cfg["MODEL"]["ARCHITECTURE"] = "vit" 
-            network_memory = 342.67 if cfg['PROBLEM']['NDIM'] == "2D" else 354.55
+            network_base_memory = 2200 
 
     #####################
     # DATA AUGMENTATION #
@@ -1353,6 +1358,12 @@ def set_default_config(cfg, gpu_info, sample_info):
     elif cfg["PROBLEM"]["TYPE"] == "CLASSIFICATION":
         pass
 
+    # Removing detection key added from the wizard it we're not in that workflow 
+    if not cfg['TEST']['ENABLE'] or cfg['PROBLEM']['TYPE'] != 'DETECTION':  
+        del cfg['TEST']['POST_PROCESSING']["REMOVE_CLOSE_POINTS_RADIUS"]
+        if len(cfg['TEST']['POST_PROCESSING']) == 0:
+            del cfg['TEST']['POST_PROCESSING']
+
     # Calculate data channels 
     # cfg.PROBLEM.TYPE == "CLASSIFICATION" or "SELF_SUPERVISED" and PRETEXT_TASK == "masking". But as in the wizard there is no SSL
     # we reduce the if fo samples_each_time to this
@@ -1386,7 +1397,7 @@ def set_default_config(cfg, gpu_info, sample_info):
         sample_info=sample_info, 
         patch_size=cfg['DATA']['PATCH_SIZE'],
         channels_per_sample=channels_per_sample,
-        network_memory=network_memory, 
+        network_base_memory=network_base_memory, 
         y_upsampling=y_upsampling,
         max_batch_size_allowed=max_batch_size_allowed,
         )
@@ -1404,18 +1415,18 @@ def batch_size_calculator(
         sample_info, 
         patch_size,
         channels_per_sample, 
-        network_memory=400, 
+        network_base_memory=400, 
         sample_size_reference=256, 
-        sample_memory_reference=45,
+        sample_memory_reference=100,
         max_batch_size_allowed=32,
         y_upsampling=(1,1),
     ):
     """
     Calculate a reasonable value for the batch size measuring how much memory can consume a item returned by BiaPy generator 
     (i.e. __getitem__ function). It takes into account the GPUs available (taking the minimum memory among them), number
-    of samples, memory of the network (``network_memory``) and a sample reference memory (``sample_size_reference`` and 
+    of samples, memory of the network (``network_base_memory``) and a sample reference memory (``sample_size_reference`` and 
     ``sample_memory_reference``). The default settings of this variables takes as reference samples of (256,256,1), where each 
-    sample is calculated to consume 45MB of memory (more or less).
+    sample is calculated to consume 100MB of memory (more or less).
     
     Parameters
     ----------
@@ -1438,7 +1449,7 @@ def batch_size_calculator(
             * 'x': int. Channels for X data.
             * 'y': int. Channels for Y data.
 
-    network_memory : int, optional
+    network_base_memory : int, optional
         Memory consumed by the deep learning model in MB. This needs to be previously measured. For instace, the default
         U-Net of BiaPy takes 400MB in the GPU.
 
@@ -1471,7 +1482,7 @@ def batch_size_calculator(
         # the data an calculating the total number of samples, with the sample reference (composed by sample_size_reference and 
         # sample_memory_reference). 
         x_analisis_ref_ratio = x_data_to_analize['crop_shape'][1] / sample_size_reference 
-        x_selected_patch_ref_ratio = patch_size[1] / sample_size_reference
+        x_selected_patch_ref_ratio = (patch_size[1] / sample_size_reference)**2
         x_sample_memory_ratio = x_analisis_ref_ratio * x_selected_patch_ref_ratio * sample_memory_reference
         
         y_data_to_analize = None
@@ -1484,7 +1495,7 @@ def batch_size_calculator(
             y_crop = y_data_to_analize['crop_shape'][1] * y_upsampling[1]
             # Patch size always square in wizard, that's why we use always y_data_to_analize['crop_shape'][1]
             y_analisis_ref_ratio = y_crop / sample_size_reference
-            y_selected_patch_ref_ratio = patch_size[1] / sample_size_reference 
+            y_selected_patch_ref_ratio = (patch_size[1] / sample_size_reference)**2
             y_sample_memory_ratio = y_analisis_ref_ratio * y_selected_patch_ref_ratio * sample_memory_reference
         else:
             y_sample_memory_ratio = 0
@@ -1500,8 +1511,12 @@ def batch_size_calculator(
         # This value will be close to the one being used during a __getitem__ of BiaPy generator
         item_memory_consumption = (x_sample_memory_ratio*x_data) + (y_sample_memory_ratio*y_data)
 
+        # The network will hold more memory depending on the input_size. It's calculated to be like 210MB per each (256,256,1) sample
+        # so we use here x_sample_memory_ratio as it was measure with sample_memory_reference=100MB by default
+        approx_network_memory = network_base_memory + (2*x_sample_memory_ratio*x_data)
+         
         if item_memory_consumption == 0: item_memory_consumption = 1
-        number_of_samples = (min_mem_gpu - network_memory)//item_memory_consumption if (min_mem_gpu - network_memory) > 0 else 1
+        number_of_samples = (min_mem_gpu - approx_network_memory)//item_memory_consumption if (min_mem_gpu - approx_network_memory) > 0 else 1
     else:
         number_of_samples = max_batch_size_allowed//2
 

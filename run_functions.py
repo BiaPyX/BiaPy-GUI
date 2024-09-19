@@ -423,7 +423,7 @@ class run_worker(QObject):
                     volumes[p] = {"bind": p, "mode": mode}
                 p = path_to_linux(self.config['DATA']['TRAIN']['PATH'], self.main_gui.cfg.settings['os_host'])
                 temp_cfg['DATA']['TRAIN']['PATH'] = p
-                paths_message += "<tr><td>Train raw image path</td><td>{}</td></tr>".format(
+                paths_message += "<tr><td>Train raw image path  </td><td>{}</td></tr>".format(
                     self.config['DATA']['TRAIN']['PATH']
                 )
 
@@ -436,7 +436,7 @@ class run_worker(QObject):
                         volumes[p] = {"bind": p, "mode": mode}
                     p = path_to_linux(self.config['DATA']['TRAIN']['GT_PATH'], self.main_gui.cfg.settings['os_host'])
                     temp_cfg['DATA']['TRAIN']['GT_PATH'] = p
-                    paths_message += "<tr><td>Train target path</td><td>{}</td></tr>".format(
+                    paths_message += "<tr><td>Train target path  </td><td>{}</td></tr>".format(
                         self.config['DATA']['TRAIN']['GT_PATH']
                     )
                         
@@ -449,7 +449,7 @@ class run_worker(QObject):
                         volumes[p] = {"bind": p, "mode": mode}
                     p = path_to_linux(self.config['DATA']['VAL']['PATH'], self.main_gui.cfg.settings['os_host'])
                     temp_cfg['DATA']['VAL']['PATH'] = p
-                    paths_message += "<tr><td>Validation raw image path</td><td>{}</td></tr>".format(
+                    paths_message += "<tr><td>Validation raw image path  </td><td>{}</td></tr>".format(
                         self.config['DATA']['VAL']['PATH']
                     )
 
@@ -462,7 +462,7 @@ class run_worker(QObject):
                             volumes[p] = {"bind": p, "mode": mode}
                         p = path_to_linux(self.config['DATA']['VAL']['GT_PATH'], self.main_gui.cfg.settings['os_host'])
                         temp_cfg['DATA']['VAL']['GT_PATH'] = p
-                        paths_message += "<tr><td>Validation target path</td><td>{}</td></tr>".format(
+                        paths_message += "<tr><td>Validation target path  </td><td>{}</td></tr>".format(
                             self.config['DATA']['VAL']['GT_PATH']
                         )
             else:
@@ -478,7 +478,7 @@ class run_worker(QObject):
                     volumes[p] = {"bind": p, "mode": mode}
                 p = path_to_linux(self.config['DATA']['TEST']['PATH'], self.main_gui.cfg.settings['os_host'])
                 temp_cfg['DATA']['TEST']['PATH'] = p
-                paths_message += "<tr><td>Test raw image path</td><td>{}</td></tr>".format(
+                paths_message += "<tr><td>Test raw image path  </td><td>{}</td></tr>".format(
                     self.config['DATA']['TEST']['PATH']
                 )
 
@@ -491,7 +491,7 @@ class run_worker(QObject):
                         volumes[p] = {"bind": p, "mode": mode} 
                     p = path_to_linux(self.config['DATA']['TEST']['GT_PATH'], self.main_gui.cfg.settings['os_host'])
                     temp_cfg['DATA']['TEST']['GT_PATH'] = p   
-                    paths_message += "<tr><td>Test target path</td><td>{}</td></tr>".format(
+                    paths_message += "<tr><td>Test target path  </td><td>{}</td></tr>".format(
                         self.config['DATA']['TEST']['GT_PATH']
                     )
 
@@ -562,7 +562,7 @@ class run_worker(QObject):
                 <tr><td>Jobname</td><td>{}</td></tr>\
                 <tr><td>YAML</td><td><a href={}>{}</a></td></tr>\
                 <tr><td>Device</td><td>{}</td></tr>\
-                <tr><td>Output folder  </td><td><a href={}>{}</a></td></tr>\
+                <tr><td>Output folder</td><td><a href={}>{}</a></td></tr>\
                 <tr><td>Output log</td><td><a href={}>{}</a></td></tr>\
                 <tr><td>Error log</td><td><a href={}>{}</a></td></tr>\
                 {}\
