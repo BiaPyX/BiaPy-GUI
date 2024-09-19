@@ -11,6 +11,7 @@ import subprocess
 import re
 import pooch
 import json 
+import numpy as np
 import http.client as httplib
 from pathlib import PurePath, Path, PureWindowsPath
 from packaging.version import Version
@@ -1425,7 +1426,8 @@ def batch_size_calculator(
         Information with training data. Expected keys are "DATA.TRAIN.PATH" and "DATA.TEST.PATH". For each item, another 
         dictionary is expected with the following keys:
             * 'total_samples': integer. Number of samples. 
-            * 'crop_shape': tuple of int. Shape of the crops used to calculate the number of samples. E.g. (256, 256, 1).
+            * 'crop_shape': tuple of int. Shape of the crops used to calculate the number of samples during data check. 
+              E.g. (256, 256, 1).
             * 'dir_name': string. Directory processed.
 
     patch_size : tuple of int
@@ -1460,6 +1462,7 @@ def batch_size_calculator(
         else:
             min_mem_gpu = min(min_mem_gpu, gpu.memoryTotal)
 
+    x_data_to_analize = sample_info["DATA.TRAIN.PATH"] if "DATA.TRAIN.PATH" in sample_info else sample_info["DATA.TEST.PATH"]        
     # Leave 20% of the memory to not overload it too much and ensure the batch size will always fit 
     if min_mem_gpu is not None:
         min_mem_gpu = min_mem_gpu*0.8
@@ -1467,7 +1470,6 @@ def batch_size_calculator(
         # Calculate how much memory takes each X data comparing both, 1) selected patch size and and 2) the crop shape used for cropping 
         # the data an calculating the total number of samples, with the sample reference (composed by sample_size_reference and 
         # sample_memory_reference). 
-        x_data_to_analize = sample_info["DATA.TRAIN.PATH"] if "DATA.TRAIN.PATH" in sample_info else sample_info["DATA.TEST.PATH"]
         x_analisis_ref_ratio = x_data_to_analize['crop_shape'][1] / sample_size_reference 
         x_selected_patch_ref_ratio = patch_size[1] / sample_size_reference
         x_sample_memory_ratio = x_analisis_ref_ratio * x_selected_patch_ref_ratio * sample_memory_reference
@@ -1503,7 +1505,11 @@ def batch_size_calculator(
     else:
         number_of_samples = max_batch_size_allowed//2
 
-    batch_size = int(min(min(x_data_to_analize['total_samples'], number_of_samples), max_batch_size_allowed))   
+    # Rough stimation on how many patches could be obtained using the actual patch size selected in the wizard 
+    sample_data_factor = np.prod([x/y for x,y in zip(x_data_to_analize['crop_shape'],patch_size)])
+    total_samples = x_data_to_analize['total_samples']*sample_data_factor
+    
+    batch_size = int(min(min(total_samples, number_of_samples), max_batch_size_allowed))   
 
     return batch_size
 
