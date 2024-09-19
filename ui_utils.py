@@ -2829,11 +2829,14 @@ class load_yaml_to_GUI_engine(QObject):
             "LOG__CHART_CREATION_FREQ__INPUT", "LOG__LOG_DIR__INPUT", "LOG__LOG_FILE_PREFIX__INPUT", 
             "LOG__TENSORBOARD_LOG_DIR__INPUT", "SYSTEM__NUM_GPUS__INPUT",
 
+            # Handled with different names
+            "MODEL__LOAD_CHECKPOINT__INPUT", "MODEL__SOURCE__INPUT", "MODEL__TORCHVISION_MODEL_NAME__INPUT",
+
             # Not used or decided to not insert in GUI
             "SYSTEM__PIN_MEM__INPUT", "TRAIN__CHECKPOINT_MONITOR__INPUT","DATA__VAL__DIST_EVAL__INPUT",
             "MODEL__VIT_MODEL__INPUT", "SYSTEM__DEVICE", "DATA__PREPROCESS__ZOOM", 
             "DATA__PREPROCESS__ZOOM__ENABLE", "DATA__PREPROCESS__ZOOM__ZOOM_FACTOR",
-            "DATA__TRAIN__FILTER_SAMPLES__SIGNS","DATA__FILTER_BY_IMAGE"
+            "DATA__TRAIN__FILTER_SAMPLES__SIGNS", "DATA__FILTER_BY_IMAGE", "MODEL__LOAD_MODEL_FROM_CHECKPOINT__INPUT",
         ]
         
     def run(self):
@@ -3095,6 +3098,9 @@ class load_yaml_to_GUI_engine(QObject):
                 elif widget_name == "MODEL__TORCHVISION_MODEL_NAME__INPUT":
                     if self.torchvision_pretrained:
                         v += " (Torchvision)"
+                    # Using same field as BMZ
+                    other_widgets_to_set.append("MODEL__BMZ__SOURCE_MODEL_ID__INPUT")
+                    other_widgets_values_to_set.append(v)                     
                    
                 if "DATA__PREPROCESS__" in widget_name and widget_name not in ["DATA__PREPROCESS__TRAIN__INPUT", \
                     "DATA__PREPROCESS__VAL__INPUT", "DATA__PREPROCESS__TEST__INPUT"]:
