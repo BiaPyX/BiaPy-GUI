@@ -7,7 +7,7 @@ from skimage.io import imread
 from typing import Optional, Dict, Tuple, List
 from packaging.version import Version
 
-## Copied from BiaPy commit: ff12c305c03c48bcc07510c29887a4281cc108b7 (3.5.2)
+## Copied from BiaPy commit: 9e85d64ac040449182794b6b9c2b3ae0c5b652e7 (3.5.2)
 def check_bmz_model_compatibility(
     model_rdf: Dict,
     workflow_specs: Optional[Dict] = None,
@@ -191,7 +191,7 @@ def check_bmz_model_compatibility(
 
     return preproc_info, error, reason_message
 
-# Adapted from BiaPy commit: ff12c305c03c48bcc07510c29887a4281cc108b7 (3.5.2)
+# Adapted from BiaPy commit: 9e85d64ac040449182794b6b9c2b3ae0c5b652e7 (3.5.2)
 def check_model_restrictions(
     model_rdf,
     workflow_specs,
@@ -255,12 +255,11 @@ def check_model_restrictions(
         raise ValueError("Couldn't load input info from BMZ model's RDF: {}".format(model_rdf["inputs"][0]))   
     opts["DATA.PATCH_SIZE"] = tuple(input_image_shape[2:]) + (input_image_shape[1],)
 
-    # 2) Classes in semantic segmentation. This is slightly different from BiaPy because we are using RDF dict here.
-    # if (specific_workflow in ["INSTANCE_SEG", "SEMANTIC_SEG", "DETECTION"]):
+   # 2) Workflow specific restrictions 
+    # Classes in semantic segmentation
     if specific_workflow in ["SEMANTIC_SEG"]:
         # Check number of classes
         classes = -1
-        print(model_rdf["weights"]["pytorch_state_dict"])
         if "kwargs" in model_rdf["weights"]["pytorch_state_dict"]:
             if "n_classes" in model_rdf["weights"]["pytorch_state_dict"]["kwargs"]: # BiaPy
                 classes = model_rdf["weights"]["pytorch_state_dict"]["kwargs"]["n_classes"]
@@ -276,8 +275,23 @@ def check_model_restrictions(
                 
         if specific_workflow == "SEMANTIC_SEG" and classes == -1:
             raise ValueError("Classes not found for semantic segmentation dir. ")
-        print(f"classes: {classes}")
         opts["MODEL.N_CLASSES"] = max(2,classes)
+    elif specific_workflow in ["INSTANCE_SEG"]:
+        # Assumed it's BC. This needs a more elaborated process. Still deciding this:
+        # https://github.com/bioimage-io/spec-bioimage-io/issues/621
+        channels = 2 
+        if "out_channels" in bmz_config["original_bmz_config"].weights.pytorch_state_dict.kwargs:
+            channels = bmz_config["original_bmz_config"].weights.pytorch_state_dict.kwargs["out_channels"]
+        if channels == 1:
+            channel_code = "C"
+        elif channels == 2:
+            channel_code = "BC"
+        elif channels == 3:
+            channel_code = "BCM"
+        if channels > 3:
+            raise ValueError(f"Not recognized number of channels for instance segmentation. Obtained {channels}")
+        
+        opts["PROBLEM.INSTANCE_SEG.DATA_CHANNELS"] = channel_code
 
     if "preprocessing" not in model_rdf["inputs"][0]:
         return opts
@@ -756,7 +770,7 @@ def check_value(value, value_range=(0, 1)):
         return False
     
 
-# Copied from BiaPy commit: ff12c305c03c48bcc07510c29887a4281cc108b7 (3.5.2)
+# Copied from BiaPy commit: 9e85d64ac040449182794b6b9c2b3ae0c5b652e7 (3.5.2)
 def crop_data_with_overlap(data, crop_shape, data_mask=None, overlap=(0, 0), padding=(0, 0), verbose=True,
                            load_data=True):
     """
@@ -876,7 +890,7 @@ def crop_data_with_overlap(data, crop_shape, data_mask=None, overlap=(0, 0), pad
         if p >= crop_shape[i] // 2:
             raise ValueError(
                 "'Padding' can not be greater than the half of 'crop_shape'. Max value for this {} input shape is {}".format(
-                    data.shape, [(crop_shape[0] // 2) - 1, (crop_shape[1] // 2) - 1]
+                    crop_shape, [(crop_shape[0] // 2) - 1, (crop_shape[1] // 2) - 1]
                 )
             )
     if len(crop_shape) != 3:
@@ -1006,7 +1020,7 @@ def crop_data_with_overlap(data, crop_shape, data_mask=None, overlap=(0, 0), pad
     else:
         return crop_coords
     
-# Copied from BiaPy commit: ff12c305c03c48bcc07510c29887a4281cc108b7 (3.5.2)  
+# Copied from BiaPy commit: 9e85d64ac040449182794b6b9c2b3ae0c5b652e7 (3.5.2)  
 def crop_3D_data_with_overlap(
     data,
     vol_shape,
@@ -1149,7 +1163,7 @@ def crop_3D_data_with_overlap(
         if p >= vol_shape[i] // 2:
             raise ValueError(
                 "'Padding' can not be greater than the half of 'vol_shape'. Max value for this {} input shape is {}".format(
-                    data.shape,
+                    vol_shape,
                     [
                         (vol_shape[0] // 2) - 1,
                         (vol_shape[1] // 2) - 1,
@@ -1290,7 +1304,7 @@ def crop_3D_data_with_overlap(
     else:
         return crop_coords
 
-# Copied from BiaPy commit: ff12c305c03c48bcc07510c29887a4281cc108b7 (3.5.2)  
+# Copied from BiaPy commit: 9e85d64ac040449182794b6b9c2b3ae0c5b652e7 (3.5.2)  
 def pad_and_reflect(img, crop_shape, verbose=False):
     """
     Load data from a directory.
