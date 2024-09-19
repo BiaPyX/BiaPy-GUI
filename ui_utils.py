@@ -3037,6 +3037,11 @@ class load_yaml_to_GUI_engine(QObject):
                 elif widget_name == "DATA__PATCH_SIZE__INPUT":
                     other_widgets_to_set.append("DATA__PATCH_SIZE__TEST__INPUT")
                     other_widgets_values_to_set.append(v)
+                    # Update test padding, as that is set to other value but (0,0) depending on the batch size through the GUI.
+                    patch_size = ast.literal_eval(v)
+                    padding = str(tuple([x//6 for x in patch_size[:-1]]))
+                    other_widgets_to_set.append("DATA__TEST__PADDING__INPUT")
+                    other_widgets_values_to_set.append(padding)
                 elif widget_name == "PROBLEM__TYPE__INPUT":
                     set_var = False
                 elif widget_name == "DATA__VAL__SPLIT_TRAIN__INPUT":
@@ -3090,7 +3095,7 @@ class load_yaml_to_GUI_engine(QObject):
                 elif widget_name == "MODEL__TORCHVISION_MODEL_NAME__INPUT":
                     if self.torchvision_pretrained:
                         v += " (Torchvision)"
-                
+                   
                 if "DATA__PREPROCESS__" in widget_name and widget_name not in ["DATA__PREPROCESS__TRAIN__INPUT", \
                     "DATA__PREPROCESS__VAL__INPUT", "DATA__PREPROCESS__TEST__INPUT"]:
                     if self.train_preprocessing or self.val_preprocessing:
