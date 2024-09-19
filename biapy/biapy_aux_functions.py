@@ -376,11 +376,11 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False, dir_name=No
         ids = sorted(next(os.walk(data_dir))[2])
     except Exception as exc:
         error_message = f"Something strange happens when listing files in {data_dir}. Error:\n{exc}"
-        return True, error_message, {}    
+        return True, error_message, {}, {}    
 
     if len(ids) == 0:
         error_message = f"No images found in folder:\n{data_dir}"
-        return True, error_message, {}    
+        return True, error_message, {}, {}    
 
     # To calculate the number os samples that can be extracted in the same way as BiaPy does. This is useful to 
     # calculate later the batch size.
@@ -398,7 +398,7 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False, dir_name=No
                 img = imread(img_path)
             except Exception:
                 error_message = f"Couldn't load image:\n{img_path}"
-                return True, error_message, {}    
+                return True, error_message, {}, {}    
 
         # Shape adjust
         if not is_3d:
@@ -414,7 +414,7 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False, dir_name=No
                 "ensure the deep learning model can be trained correctly. However, the current image (with "\
                 f"{channel_expected} channels) appears to have a different number of channels than the first image"\
                 f"(with {img.shape[-1]} channels) in the folder. Current image:\n{img_path}"
-            return True, error_message, {}    
+            return True, error_message, {}, {}    
         shapes.append(img.shape)
 
         # Data range check
@@ -426,12 +426,12 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False, dir_name=No
                 error_message = f"All images must be within the same data range. However, the current image (with a "\
                     f"range of {drange}) appears to be in a different data range than the first image (with a range "\
                     f"of {data_range_expected}) in the folder. Current image:\n{img_path}"
-                return True, error_message, {}    
+                return True, error_message, {}, {}    
 
         if mask_type == "semantic_mask":
             if channel_expected != 1:
                 error_message = f"Semantic masks are expected to have just one channel. Image analized:\n{img_path}"
-                return True, error_message, {}    
+                return True, error_message, {}, {}    
             else:
                 nclasses = max(nclasses, len(np.unique(img)))
         elif mask_type == "instance_mask":
@@ -442,7 +442,7 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False, dir_name=No
                     error_message = f"Instance masks are expected to have one or two channels. In case two channels are provided "\
                         "the first one must have the instance IDs and one their corresponding semantic (class) labels. "\
                         f"Image analized:\n{img_path}"
-                    return True, error_message, {}    
+                    return True, error_message, {}, {}    
 
         # Calculate number of samples that can be extracted here 
         img = pad_and_reflect(img, crop_shape, verbose=False)
@@ -656,7 +656,7 @@ def check_classification_images(data_dir, is_3d=False, dir_name=None):
     class_names = sorted(next(os.walk(data_dir))[1])
     if len(class_names) < 1:
         error_message = "There is no folder/class in folder:\n{}".format(data_dir)
-        return True, error_message, {}  
+        return True, error_message, {}, {}  
     
     tot_samples = 0
     # Loop over each class/folder
@@ -667,7 +667,7 @@ def check_classification_images(data_dir, is_3d=False, dir_name=None):
         ids = sorted(next(os.walk(class_folder))[2])
         if len(ids) == 0:
             error_message = "There are no images in class folder:\n{}".format(class_folder)
-            return True, error_message, {}  
+            return True, error_message, {}, {}  
         else:
             print("Found {} samples".format(len(ids)))
 
@@ -682,7 +682,7 @@ def check_classification_images(data_dir, is_3d=False, dir_name=None):
                     img = imread(img_path)
                 except Exception:
                     error_message = f"Couldn't load image:\n{img_path}"
-                    return True, error_message, {}  
+                    return True, error_message, {}, {}  
 
             img = np.squeeze(img)
             # Shape adjust
@@ -699,7 +699,7 @@ def check_classification_images(data_dir, is_3d=False, dir_name=None):
                     "ensure the deep learning model can be trained correctly. However, the following image (with "\
                     f"{channel_expected} channels) appears to have a different number of channels than the first image "\
                     f"(with {img.shape[-1]} channels) in the folder:\n{img_path}"
-                return True, error_message, {}  
+                return True, error_message, {}, {}  
             
             # Data range check
             if data_range_expected == -1:
@@ -709,7 +709,7 @@ def check_classification_images(data_dir, is_3d=False, dir_name=None):
                 error_message = "All images must be within the same data range. However, the following image (with a "\
                     f"range of {drange}) appears to be in a different data range than the first image (with a range "\
                     f"of {data_range_expected}) in the folder:\n{img_path}"
-                return True, error_message, {}  
+                return True, error_message, {}, {}  
     
     constraints = {
         "DATA.PATCH_SIZE_C": channel_expected,
