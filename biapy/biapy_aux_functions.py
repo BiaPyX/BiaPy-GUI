@@ -1,13 +1,13 @@
 import os
+import math
 import functools
 import numpy as np
 import pandas as pd
 from skimage.io import imread
-
 from typing import Optional, Dict, Tuple, List
 from packaging.version import Version
 
-## Copied from BiaPy commit: 608052bbbd97c0d7c520b99dc5e279c12fd3be3d (3.5.2)
+## Copied from BiaPy commit: ff12c305c03c48bcc07510c29887a4281cc108b7 (3.5.2)
 def check_bmz_model_compatibility(
     model_rdf: Dict,
     workflow_specs: Optional[Dict] = None,
@@ -62,7 +62,12 @@ def check_bmz_model_compatibility(
                     classes = model_rdf["weights"]["pytorch_state_dict"]["kwargs"]["out_channels"]
                 elif "classes" in model_rdf["weights"]["pytorch_state_dict"]["kwargs"]:
                     classes = model_rdf["weights"]["pytorch_state_dict"]["kwargs"]["classes"]
-                
+                if isinstance(classes, list): 
+                    classes = classes[0]   
+                if not isinstance(classes, int):
+                    reason_message += f"[{specific_workflow}] 'MODEL.N_CLASSES' not extracted. Obtained {classes}. Please check it!\n"
+                    error = True   
+
             if classes != -1:
                 if ref_classes != "all":
                     if classes > 2 and ref_classes != classes:
@@ -186,7 +191,7 @@ def check_bmz_model_compatibility(
 
     return preproc_info, error, reason_message
 
-# Adapted from BiaPy commit: 608052bbbd97c0d7c520b99dc5e279c12fd3be3d (3.5.2)
+# Adapted from BiaPy commit: ff12c305c03c48bcc07510c29887a4281cc108b7 (3.5.2)
 def check_model_restrictions(
     model_rdf,
     workflow_specs,
@@ -255,6 +260,7 @@ def check_model_restrictions(
     if specific_workflow in ["SEMANTIC_SEG"]:
         # Check number of classes
         classes = -1
+        print(model_rdf["weights"]["pytorch_state_dict"])
         if "kwargs" in model_rdf["weights"]["pytorch_state_dict"]:
             if "n_classes" in model_rdf["weights"]["pytorch_state_dict"]["kwargs"]: # BiaPy
                 classes = model_rdf["weights"]["pytorch_state_dict"]["kwargs"]["n_classes"]
@@ -262,9 +268,15 @@ def check_model_restrictions(
                 classes = model_rdf["weights"]["pytorch_state_dict"]["kwargs"]["out_channels"]
             elif "classes" in model_rdf["weights"]["pytorch_state_dict"]["kwargs"]:
                 classes = model_rdf["weights"]["pytorch_state_dict"]["kwargs"]["classes"]
+        
+        if isinstance(classes, list): 
+            classes = classes[0]    
+        if not isinstance(classes, int):
+            raise ValueError(f"Classes not extracted correctly. Obtained {classes}")
                 
         if specific_workflow == "SEMANTIC_SEG" and classes == -1:
             raise ValueError("Classes not found for semantic segmentation dir. ")
+        print(f"classes: {classes}")
         opts["MODEL.N_CLASSES"] = max(2,classes)
 
     if "preprocessing" not in model_rdf["inputs"][0]:
@@ -370,6 +382,12 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False, dir_name=No
         error_message = f"No images found in folder:\n{data_dir}"
         return True, error_message, {}    
 
+    # To calculate the number os samples that can be extracted in the same way as BiaPy does. This is useful to 
+    # calculate later the batch size.
+    total_samples = 0
+    crop_shape = (256,256,1) if not is_3d else (20,128,128,1)
+    crop_funct = crop_3D_data_with_overlap if is_3d else crop_data_with_overlap
+
     shapes = []
     for id_ in ids:
         img_path = os.path.join(data_dir, id_)
@@ -426,6 +444,19 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False, dir_name=No
                         f"Image analized:\n{img_path}"
                     return True, error_message, {}    
 
+        # Calculate number of samples that can be extracted here 
+        img = pad_and_reflect(img, crop_shape, verbose=False)
+        if img.shape != crop_shape[:-1] + (img.shape[-1],):
+            crop_coords = crop_funct(
+                np.expand_dims(img, axis=0) if not is_3d else img,
+                crop_shape[:-1] + (img.shape[-1],),
+                verbose=False,
+                load_data=False,
+            )
+            total_samples += len(crop_coords)
+        else:
+            total_samples += 1
+
     constraints = {"DATA.PATCH_SIZE_C": channel_expected, }
     if nclasses > 2:
         constraints["MODEL.N_CLASSES"] = nclasses
@@ -435,7 +466,7 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False, dir_name=No
         constraints[dir_name+"_path"] = data_dir
         constraints[dir_name+"_path_shapes"] = shapes
 
-    return False, "", constraints
+    return False, "", constraints, {'total_samples': total_samples, 'crop_shape': crop_shape, 'dir_name': dir_name}
 
 def ensure_2d_shape(img, path=None):
     """
@@ -679,7 +710,7 @@ def check_classification_images(data_dir, is_3d=False, dir_name=None):
                     f"range of {drange}) appears to be in a different data range than the first image (with a range "\
                     f"of {data_range_expected}) in the folder:\n{img_path}"
                 return True, error_message, {}  
-        
+    
     constraints = {
         "DATA.PATCH_SIZE_C": channel_expected,
         "MODEL.N_CLASSES": len(class_names),
@@ -688,7 +719,7 @@ def check_classification_images(data_dir, is_3d=False, dir_name=None):
         constraints[dir_name] = tot_samples
         constraints[dir_name+"_path"] = data_dir
 
-    return False, "", constraints
+    return False, "", constraints, {'total_samples': tot_samples, 'crop_shape': (256,256,1), 'dir_name': dir_name}
 
 def data_range(x):
     if not isinstance(x, np.ndarray):
@@ -723,3 +754,605 @@ def check_value(value, value_range=(0, 1)):
             if value_range[0] <= value <= value_range[1]:
                 return True
         return False
+    
+
+# Copied from BiaPy commit: ff12c305c03c48bcc07510c29887a4281cc108b7 (3.5.2)
+def crop_data_with_overlap(data, crop_shape, data_mask=None, overlap=(0, 0), padding=(0, 0), verbose=True,
+                           load_data=True):
+    """
+    Crop data into small square pieces with overlap. The difference with :func:`~crop_data` is that this function
+    allows you to create patches with overlap.
+
+    The opposite function is :func:`~merge_data_with_overlap`.
+
+    Parameters
+    ----------
+    data : 4D Numpy array
+        Data to crop. E.g. ``(num_of_images, y, x, channels)``.
+
+    crop_shape : 3 int tuple
+        Shape of the crops to create. E.g. ``(y, x, channels)``.
+
+    data_mask : 4D Numpy array, optional
+        Data mask to crop. E.g. ``(num_of_images, y, x, channels)``.
+
+    overlap : Tuple of 2 floats, optional
+        Amount of minimum overlap on x and y dimensions. The values must be on range ``[0, 1)``, that is, ``0%`` or
+        ``99%`` of overlap. E. g. ``(y, x)``.
+
+    padding : tuple of ints, optional
+        Size of padding to be added on each axis ``(y, x)``. E.g. ``(24, 24)``.
+
+    verbose : bool, optional
+         To print information about the crop to be made.
+
+    load_data : bool, optional
+        Whether to create the patches or not. It saves memory in case you only need the coordiantes of the cropped patches. 
+
+    Returns
+    -------
+    cropped_data : 4D Numpy array, optional
+        Cropped image data. E.g. ``(num_of_images, y, x, channels)``. Returned if ``load_data`` is ``True``.
+
+    cropped_data_mask : 4D Numpy array, optional
+        Cropped image data masks. E.g. ``(num_of_images, y, x, channels)``. Returned if ``load_data`` is ``True``
+        and ``data_mask`` is provided. 
+
+    crop_coords : list of dict
+        Coordinates of each crop where the following keys are available:
+            * ``"z"``: image used to extract the crop.
+            * ``"y_start"``: starting point of the patch in Y axis.
+            * ``"y_end"``: end point of the patch in Y axis.
+            * ``"x_start"``: starting point of the patch in X axis.
+            * ``"x_end"``: end point of the patch in X axis.
+
+    Examples
+    --------
+    ::
+
+        # EXAMPLE 1
+        # Divide in crops of (256, 256) a given data with the minimum overlap
+        X_train = np.ones((165, 768, 1024, 1))
+        Y_train = np.ones((165, 768, 1024, 1))
+
+        X_train, Y_train = crop_data_with_overlap(X_train, (256, 256, 1), Y_train, (0, 0))
+
+        # Notice that as the shape of the data has exact division with the wnanted crops shape so no overlap will be
+        # made. The function will print the following information:
+        #     Minimum overlap selected: (0, 0)
+        #     Real overlapping (%): (0.0, 0.0)
+        #     Real overlapping (pixels): (0.0, 0.0)
+        #     (3, 4) patches per (x,y) axis
+        #     **** New data shape is: (1980, 256, 256, 1)
+
+
+        # EXAMPLE 2
+        # Same as example 1 but with 25% of overlap between crops
+        X_train, Y_train = crop_data_with_overlap(X_train, (256, 256, 1), Y_train, (0.25, 0.25))
+
+        # The function will print the following information:
+        #     Minimum overlap selected: (0.25, 0.25)
+        #     Real overlapping (%): (0.33203125, 0.3984375)
+        #     Real overlapping (pixels): (85.0, 102.0)
+        #     (4, 6) patches per (x,y) axis
+        #     **** New data shape is: (3960, 256, 256, 1)
+
+
+        # EXAMPLE 3
+        # Same as example 1 but with 50% of overlap between crops
+        X_train, Y_train = crop_data_with_overlap(X_train, (256, 256, 1), Y_train, (0.5, 0.5))
+
+        # The function will print the shape of the created array. In this example:
+        #     Minimum overlap selected: (0.5, 0.5)
+        #     Real overlapping (%): (0.59765625, 0.5703125)
+        #     Real overlapping (pixels): (153.0, 146.0)
+        #     (6, 8) patches per (x,y) axis
+        #     **** New data shape is: (7920, 256, 256, 1)
+
+
+        # EXAMPLE 4
+        # Same as example 2 but with 50% of overlap only in x axis
+        X_train, Y_train = crop_data_with_overlap(X_train, (256, 256, 1), Y_train, (0.5, 0))
+
+        # The function will print the shape of the created array. In this example:
+        #     Minimum overlap selected: (0.5, 0)
+        #     Real overlapping (%): (0.59765625, 0.0)
+        #     Real overlapping (pixels): (153.0, 0.0)
+        #     (6, 4) patches per (x,y) axis
+        #     **** New data shape is: (3960, 256, 256, 1)
+    """
+
+    if data.ndim != 4:
+        raise ValueError("data expected to be 4 dimensional, given {}".format(data.shape))
+    if data_mask is not None:
+        if data.ndim != 4:
+            raise ValueError("data mask expected to be 4 dimensional, given {}".format(data_mask.shape))
+        if data.shape[:-1] != data_mask.shape[:-1]:
+            raise ValueError(
+                "data and data_mask shapes mismatch: {} vs {}".format(data.shape[:-1], data_mask.shape[:-1])
+            )
+
+    for i, p in enumerate(padding):
+        if p >= crop_shape[i] // 2:
+            raise ValueError(
+                "'Padding' can not be greater than the half of 'crop_shape'. Max value for this {} input shape is {}".format(
+                    data.shape, [(crop_shape[0] // 2) - 1, (crop_shape[1] // 2) - 1]
+                )
+            )
+    if len(crop_shape) != 3:
+        raise ValueError("crop_shape expected to be of length 3, given {}".format(crop_shape))
+    if crop_shape[0] > data.shape[1]:
+        raise ValueError(
+            "'crop_shape[0]' {} greater than {} (you can reduce 'DATA.PATCH_SIZE' or use 'DATA.REFLECT_TO_COMPLETE_SHAPE')".format(
+                crop_shape[0], data.shape[1]
+            )
+        )
+    if crop_shape[1] > data.shape[2]:
+        raise ValueError(
+            "'crop_shape[1]' {} greater than {} (you can reduce 'DATA.PATCH_SIZE' or use 'DATA.REFLECT_TO_COMPLETE_SHAPE')".format(
+                crop_shape[1], data.shape[2]
+            )
+        )
+    if (overlap[0] >= 1 or overlap[0] < 0) or (overlap[1] >= 1 or overlap[1] < 0):
+        raise ValueError("'overlap' values must be floats between range [0, 1)")
+
+    if verbose:
+        print("### OV-CROP ###")
+        print("Cropping {} images into {} with overlapping. . .".format(data.shape, crop_shape))
+        print("Minimum overlap selected: {}".format(overlap))
+        print("Padding: {}".format(padding))
+
+    if (overlap[0] >= 1 or overlap[0] < 0) and (overlap[1] >= 1 or overlap[1] < 0):
+        raise ValueError("'overlap' values must be floats between range [0, 1)")
+
+    padded_data = np.pad(
+        data,
+        ((0, 0), (padding[1], padding[1]), (padding[0], padding[0]), (0, 0)),
+        "reflect",
+    )
+    if data_mask is not None:
+        padded_data_mask = np.pad(
+            data_mask,
+            ((0, 0), (padding[1], padding[1]), (padding[0], padding[0]), (0, 0)),
+            "reflect",
+        )
+
+    # Calculate overlapping variables
+    overlap_x = 1 if overlap[0] == 0 else 1 - overlap[0]
+    overlap_y = 1 if overlap[1] == 0 else 1 - overlap[1]
+
+    # Y
+    step_y = int((crop_shape[0] - padding[0] * 2) * overlap_y)
+    crops_per_y = math.ceil(data.shape[1] / step_y)
+    last_y = 0 if crops_per_y == 1 else (((crops_per_y - 1) * step_y) + crop_shape[0]) - padded_data.shape[1]
+    ovy_per_block = last_y // (crops_per_y - 1) if crops_per_y > 1 else 0
+    step_y -= ovy_per_block
+    last_y -= ovy_per_block * (crops_per_y - 1)
+
+    # X
+    step_x = int((crop_shape[1] - padding[1] * 2) * overlap_x)
+    crops_per_x = math.ceil(data.shape[2] / step_x)
+    last_x = 0 if crops_per_x == 1 else (((crops_per_x - 1) * step_x) + crop_shape[1]) - padded_data.shape[2]
+    ovx_per_block = last_x // (crops_per_x - 1) if crops_per_x > 1 else 0
+    step_x -= ovx_per_block
+    last_x -= ovx_per_block * (crops_per_x - 1)
+
+    # Real overlap calculation for printing
+    real_ov_y = ovy_per_block / (crop_shape[0] - padding[0] * 2)
+    real_ov_x = ovx_per_block / (crop_shape[1] - padding[1] * 2)
+
+    if verbose:
+        print("Real overlapping (%): {}".format(real_ov_x, real_ov_y))
+        print(
+            "Real overlapping (pixels): {}".format(
+                (crop_shape[1] - padding[1] * 2) * real_ov_x,
+                (crop_shape[0] - padding[0] * 2) * real_ov_y,
+            )
+        )
+        print("{} patches per (x,y) axis".format(crops_per_x, crops_per_y))
+
+    total_vol = data.shape[0] * (crops_per_x) * (crops_per_y)
+    if load_data:
+        cropped_data = np.zeros((total_vol,) + crop_shape, dtype=data.dtype)
+        if data_mask is not None:
+            cropped_data_mask = np.zeros(
+                (total_vol,) + crop_shape[:2] + (data_mask.shape[-1],),
+                dtype=data_mask.dtype,
+            )
+
+    crop_coords = []
+    c = 0
+    for z in range(data.shape[0]):
+        for y in range(crops_per_y):
+            for x in range(crops_per_x):
+                d_y = 0 if (y * step_y + crop_shape[0]) < padded_data.shape[1] else last_y
+                d_x = 0 if (x * step_x + crop_shape[1]) < padded_data.shape[2] else last_x
+
+                if load_data:
+                    cropped_data[c] = padded_data[
+                        z,
+                        y * step_y - d_y : y * step_y + crop_shape[0] - d_y,
+                        x * step_x - d_x : x * step_x + crop_shape[1] - d_x,
+                    ]
+
+                if load_data and data_mask is not None:
+                    cropped_data_mask[c] = padded_data_mask[
+                        z,
+                        y * step_y - d_y : y * step_y + crop_shape[0] - d_y,
+                        x * step_x - d_x : x * step_x + crop_shape[1] - d_x,
+                    ]
+                
+                crop_coords.append(
+                    {
+                        "z": z,
+                        "y_start": y * step_y - d_y, 
+                        "y_end": y * step_y + crop_shape[0] - d_y,
+                        "x_start": x * step_x - d_x,
+                        "x_end": x * step_x + crop_shape[1] - d_x,
+                    }
+                )
+
+                c += 1
+
+    if verbose:
+        print("**** New data shape is: {}".format(cropped_data.shape))
+        print("### END OV-CROP ###")
+
+    if load_data:
+        if data_mask is not None:
+            return cropped_data, cropped_data_mask, crop_coords
+        else:
+            return cropped_data, crop_coords
+    else:
+        return crop_coords
+    
+# Copied from BiaPy commit: ff12c305c03c48bcc07510c29887a4281cc108b7 (3.5.2)  
+def crop_3D_data_with_overlap(
+    data,
+    vol_shape,
+    data_mask=None,
+    overlap=(0, 0, 0),
+    padding=(0, 0, 0),
+    verbose=True,
+    median_padding=False,
+    load_data=True,
+):
+    """
+    Crop 3D data into smaller volumes with a defined overlap. The opposite function is :func:`~merge_3D_data_with_overlap`.
+
+    Parameters
+    ----------
+    data : 4D Numpy array
+        Data to crop. E.g. ``(z, y, x, channels)``.
+
+    vol_shape : 4D int tuple
+        Shape of the volumes to create. E.g. ``(z, y, x, channels)``.
+
+    data_mask : 4D Numpy array, optional
+        Data mask to crop. E.g. ``(z, y, x, channels)``.
+
+    overlap : Tuple of 3 floats, optional
+        Amount of minimum overlap on x, y and z dimensions. The values must be on range ``[0, 1)``, that is, ``0%``
+        or ``99%`` of overlap. E.g. ``(z, y, x)``.
+
+    padding : tuple of ints, optional
+        Size of padding to be added on each axis ``(z, y, x)``. E.g. ``(24, 24, 24)``.
+
+    verbose : bool, optional
+        To print information about the crop to be made.
+
+    median_padding : bool, optional
+        If ``True`` the padding value is the median value. If ``False``, the added values are zeroes.
+
+    load_data : bool, optional
+        Whether to create the patches or not. It saves memory in case you only need the coordiantes of the cropped patches.
+
+    Returns
+    -------
+    cropped_data : 5D Numpy array, optional
+        Cropped image data. E.g. ``(vol_number, z, y, x, channels)``. Returned if ``load_data`` is ``True``.
+
+    cropped_data_mask : 5D Numpy array, optional
+        Cropped image data masks. E.g. ``(vol_number, z, y, x, channels)``. Returned if ``load_data`` is ``True``
+        and ``data_mask`` is provided.
+
+    crop_coords : list of dict
+        Coordinates of each crop where the following keys are available:
+            * ``"z_start"``: starting point of the patch in Z axis.
+            * ``"z_end"``: end point of the patch in Z axis.
+            * ``"y_start"``: starting point of the patch in Y axis.
+            * ``"y_end"``: end point of the patch in Y axis.
+            * ``"x_start"``: starting point of the patch in X axis.
+            * ``"x_end"``: end point of the patch in X axis.
+
+    Examples
+    --------
+    ::
+
+        # EXAMPLE 1
+        # Following the example introduced in load_and_prepare_3D_data function, the cropping of a volume with shape
+        # (165, 1024, 765) should be done by the following call:
+        X_train = np.ones((165, 768, 1024, 1))
+        Y_train = np.ones((165, 768, 1024, 1))
+        X_train, Y_train = crop_3D_data_with_overlap(X_train, (80, 80, 80, 1), data_mask=Y_train,
+                                                     overlap=(0.5,0.5,0.5))
+        # The function will print the shape of the generated arrays. In this example:
+        #     **** New data shape is: (2600, 80, 80, 80, 1)
+
+    A visual explanation of the process:
+
+    .. image:: ../../img/crop_3D_ov.png
+        :width: 80%
+        :align: center
+
+    Note: this image do not respect the proportions.
+    ::
+
+        # EXAMPLE 2
+        # Same data crop but without overlap
+
+        X_train, Y_train = crop_3D_data_with_overlap(X_train, (80, 80, 80, 1), data_mask=Y_train, overlap=(0,0,0))
+
+        # The function will print the shape of the generated arrays. In this example:
+        #     **** New data shape is: (390, 80, 80, 80, 1)
+        #
+        # Notice how differs the amount of subvolumes created compared to the first example
+
+        #EXAMPLE 2
+        #In the same way, if the addition of (64,64,64) padding is required, the call should be done as shown:
+        X_train, Y_train = crop_3D_data_with_overlap(
+             X_train, (80, 80, 80, 1), data_mask=Y_train, overlap=(0.5,0.5,0.5), padding=(64,64,64))
+    """
+
+    if verbose:
+        print("### 3D-OV-CROP ###")
+        print("Cropping {} images into {} with overlapping . . .".format(data.shape, vol_shape))
+        print("Minimum overlap selected: {}".format(overlap))
+        print("Padding: {}".format(padding))
+
+    if data.ndim != 4:
+        raise ValueError("data expected to be 4 dimensional, given {}".format(data.shape))
+    if data_mask is not None:
+        if data_mask.ndim != 4:
+            raise ValueError("data_mask expected to be 4 dimensional, given {}".format(data_mask.shape))
+        if data.shape[:-1] != data_mask.shape[:-1]:
+            raise ValueError(
+                "data and data_mask shapes mismatch: {} vs {}".format(data.shape[:-1], data_mask.shape[:-1])
+            )
+    if len(vol_shape) != 4:
+        raise ValueError("vol_shape expected to be of length 4, given {}".format(vol_shape))
+    if vol_shape[0] > data.shape[0]:
+        raise ValueError(
+            "'vol_shape[0]' {} greater than {} (you can reduce 'DATA.PATCH_SIZE' or use 'DATA.REFLECT_TO_COMPLETE_SHAPE')".format(
+                vol_shape[0], data.shape[0]
+            )
+        )
+    if vol_shape[1] > data.shape[1]:
+        raise ValueError(
+            "'vol_shape[1]' {} greater than {} (you can reduce 'DATA.PATCH_SIZE' or use 'DATA.REFLECT_TO_COMPLETE_SHAPE')".format(
+                vol_shape[1], data.shape[1]
+            )
+        )
+    if vol_shape[2] > data.shape[2]:
+        raise ValueError(
+            "'vol_shape[2]' {} greater than {} (you can reduce 'DATA.PATCH_SIZE' or use 'DATA.REFLECT_TO_COMPLETE_SHAPE')".format(
+                vol_shape[2], data.shape[2]
+            )
+        )
+    if (
+        (overlap[0] >= 1 or overlap[0] < 0)
+        or (overlap[1] >= 1 or overlap[1] < 0)
+        or (overlap[2] >= 1 or overlap[2] < 0)
+    ):
+        raise ValueError("'overlap' values must be floats between range [0, 1)")
+    for i, p in enumerate(padding):
+        if p >= vol_shape[i] // 2:
+            raise ValueError(
+                "'Padding' can not be greater than the half of 'vol_shape'. Max value for this {} input shape is {}".format(
+                    data.shape,
+                    [
+                        (vol_shape[0] // 2) - 1,
+                        (vol_shape[1] // 2) - 1,
+                        (vol_shape[2] // 2) - 1,
+                    ],
+                )
+            )
+
+    padded_data = np.pad(
+        data,
+        (
+            (padding[0], padding[0]),
+            (padding[1], padding[1]),
+            (padding[2], padding[2]),
+            (0, 0),
+        ),
+        "reflect",
+    )
+    if data_mask is not None:
+        padded_data_mask = np.pad(
+            data_mask,
+            (
+                (padding[0], padding[0]),
+                (padding[1], padding[1]),
+                (padding[2], padding[2]),
+                (0, 0),
+            ),
+            "reflect",
+        )
+    if median_padding:
+        padded_data[0 : padding[0], :, :, :] = np.median(data[0, :, :, :])
+        padded_data[padding[0] + data.shape[0] : 2 * padding[0] + data.shape[0], :, :, :] = np.median(data[-1, :, :, :])
+        padded_data[:, 0 : padding[1], :, :] = np.median(data[:, 0, :, :])
+        padded_data[:, padding[1] + data.shape[1] : 2 * padding[1] + data.shape[0], :, :] = np.median(data[:, -1, :, :])
+        padded_data[:, :, 0 : padding[2], :] = np.median(data[:, :, 0, :])
+        padded_data[:, :, padding[2] + data.shape[2] : 2 * padding[2] + data.shape[2], :] = np.median(data[:, :, -1, :])
+    padded_vol_shape = vol_shape
+
+    # Calculate overlapping variables
+    overlap_z = 1 if overlap[0] == 0 else 1 - overlap[0]
+    overlap_y = 1 if overlap[1] == 0 else 1 - overlap[1]
+    overlap_x = 1 if overlap[2] == 0 else 1 - overlap[2]
+
+    # Z
+    step_z = int((vol_shape[0] - padding[0] * 2) * overlap_z)
+    vols_per_z = math.ceil(data.shape[0] / step_z)
+    last_z = 0 if vols_per_z == 1 else (((vols_per_z - 1) * step_z) + vol_shape[0]) - padded_data.shape[0]
+    ovz_per_block = last_z // (vols_per_z - 1) if vols_per_z > 1 else 0
+    step_z -= ovz_per_block
+    last_z -= ovz_per_block * (vols_per_z - 1)
+
+    # Y
+    step_y = int((vol_shape[1] - padding[1] * 2) * overlap_y)
+    vols_per_y = math.ceil(data.shape[1] / step_y)
+    last_y = 0 if vols_per_y == 1 else (((vols_per_y - 1) * step_y) + vol_shape[1]) - padded_data.shape[1]
+    ovy_per_block = last_y // (vols_per_y - 1) if vols_per_y > 1 else 0
+    step_y -= ovy_per_block
+    last_y -= ovy_per_block * (vols_per_y - 1)
+
+    # X
+    step_x = int((vol_shape[2] - padding[2] * 2) * overlap_x)
+    vols_per_x = math.ceil(data.shape[2] / step_x)
+    last_x = 0 if vols_per_x == 1 else (((vols_per_x - 1) * step_x) + vol_shape[2]) - padded_data.shape[2]
+    ovx_per_block = last_x // (vols_per_x - 1) if vols_per_x > 1 else 0
+    step_x -= ovx_per_block
+    last_x -= ovx_per_block * (vols_per_x - 1)
+
+    # Real overlap calculation for printing
+    real_ov_z = ovz_per_block / (vol_shape[0] - padding[0] * 2)
+    real_ov_y = ovy_per_block / (vol_shape[1] - padding[1] * 2)
+    real_ov_x = ovx_per_block / (vol_shape[2] - padding[2] * 2)
+    if verbose:
+        print("Real overlapping (%): {}".format((real_ov_z, real_ov_y, real_ov_x)))
+        print(
+            "Real overlapping (pixels): {}".format(
+                (
+                    (vol_shape[0] - padding[0] * 2) * real_ov_z,
+                    (vol_shape[1] - padding[1] * 2) * real_ov_y,
+                    (vol_shape[2] - padding[2] * 2) * real_ov_x,
+                )
+            )
+        )
+        print("{} patches per (z,y,x) axis".format((vols_per_z, vols_per_x, vols_per_y)))
+
+    total_vol = vols_per_z * vols_per_y * vols_per_x
+    if load_data:
+        cropped_data = np.zeros((total_vol,) + padded_vol_shape, dtype=data.dtype)
+        if data_mask is not None:
+            cropped_data_mask = np.zeros(
+                (total_vol,) + padded_vol_shape[:3] + (data_mask.shape[-1],),
+                dtype=data_mask.dtype,
+            )
+
+    c = 0
+    crop_coords = []
+    for z in range(vols_per_z):
+        for y in range(vols_per_y):
+            for x in range(vols_per_x):
+                d_z = 0 if (z * step_z + vol_shape[0]) < padded_data.shape[0] else last_z
+                d_y = 0 if (y * step_y + vol_shape[1]) < padded_data.shape[1] else last_y
+                d_x = 0 if (x * step_x + vol_shape[2]) < padded_data.shape[2] else last_x
+
+                if load_data:
+                    cropped_data[c] = padded_data[
+                        z * step_z - d_z : z * step_z + vol_shape[0] - d_z,
+                        y * step_y - d_y : y * step_y + vol_shape[1] - d_y,
+                        x * step_x - d_x : x * step_x + vol_shape[2] - d_x,
+                    ]
+
+                crop_coords.append(
+                    {
+                        "z_start": z * step_z - d_z,
+                        "z_end": z * step_z + vol_shape[0] - d_z,
+                        "y_start": y * step_y - d_y,
+                        "y_end": y * step_y + vol_shape[1] - d_y,
+                        "x_start": x * step_x - d_x,
+                        "x_end": x * step_x + vol_shape[2] - d_x,
+                    }
+                )
+
+                if load_data and data_mask is not None:
+                    cropped_data_mask[c] = padded_data_mask[
+                        z * step_z - d_z : (z * step_z) + vol_shape[0] - d_z,
+                        y * step_y - d_y : y * step_y + vol_shape[1] - d_y,
+                        x * step_x - d_x : x * step_x + vol_shape[2] - d_x,
+                    ]
+                c += 1
+
+    if verbose:
+        print("**** New data shape is: {}".format(cropped_data.shape))
+        print("### END 3D-OV-CROP ###")
+
+    if load_data:
+        if data_mask is not None:
+            return cropped_data, cropped_data_mask, crop_coords
+        else:
+            return cropped_data, crop_coords
+    else:
+        return crop_coords
+
+# Copied from BiaPy commit: ff12c305c03c48bcc07510c29887a4281cc108b7 (3.5.2)  
+def pad_and_reflect(img, crop_shape, verbose=False):
+    """
+    Load data from a directory.
+
+    Parameters
+    ----------
+    img : 3D/4D Numpy array
+        Image to pad. E.g. ``(y, x, channels)`` or ``(z, y, x, channels)``.
+
+    crop_shape : Tuple of 3/4 int, optional
+        Shape of the subvolumes to create when cropping.  E.g. ``(y, x, channels)`` or ``(z, y, x, channels)``.
+
+    verbose : bool, optional
+        Whether to output information.
+
+    Returns
+    -------
+    img : 3D/4D Numpy array
+        Image padded. E.g. ``(y, x, channels)`` for 2D and ``(z, y, x, channels)`` for 3D.
+    """
+    if img.ndim == 4 and len(crop_shape) != 4:
+        raise ValueError(
+            f"'crop_shape' needs to have 4 values as the input array has 4 dims. Provided crop_shape: {crop_shape}"
+        )
+    if img.ndim == 3 and len(crop_shape) != 3:
+        raise ValueError(
+            f"'crop_shape' needs to have 3 values as the input array has 3 dims. Provided crop_shape: {crop_shape}"
+        )
+
+    if img.ndim == 4:
+        if img.shape[0] < crop_shape[0]:
+            diff = crop_shape[0] - img.shape[0]
+            o_shape = img.shape
+            img = np.pad(img, ((diff, 0), (0, 0), (0, 0), (0, 0)), "reflect")
+            if verbose:
+                print("Reflected from {} to {}".format(o_shape, img.shape))
+
+        if img.shape[1] < crop_shape[1]:
+            diff = crop_shape[1] - img.shape[1]
+            o_shape = img.shape
+            img = np.pad(img, ((0, 0), (diff, 0), (0, 0), (0, 0)), "reflect")
+            if verbose:
+                print("Reflected from {} to {}".format(o_shape, img.shape))
+
+        if img.shape[2] < crop_shape[2]:
+            diff = crop_shape[2] - img.shape[2]
+            o_shape = img.shape
+            img = np.pad(img, ((0, 0), (0, 0), (diff, 0), (0, 0)), "reflect")
+            if verbose:
+                print("Reflected from {} to {}".format(o_shape, img.shape))
+    else:
+        if img.shape[0] < crop_shape[0]:
+            diff = crop_shape[0] - img.shape[0]
+            o_shape = img.shape
+            img = np.pad(img, ((diff, 0), (0, 0), (0, 0)), "reflect")
+            if verbose:
+                print("Reflected from {} to {}".format(o_shape, img.shape))
+
+        if img.shape[1] < crop_shape[1]:
+            diff = crop_shape[1] - img.shape[1]
+            o_shape = img.shape
+            img = np.pad(img, ((0, 0), (diff, 0), (0, 0)), "reflect")
+            if verbose:
+                print("Reflected from {} to {}".format(o_shape, img.shape))
+    return img

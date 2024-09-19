@@ -20,9 +20,9 @@ from PySide2.QtCore import QObject, QThread
 from PySide2.QtWidgets import *
 from PySide2.QtGui import QBrush, QColor
 
-from biapy_config import Config
-from biapy_check_configuration import check_configuration, check_torchvision_available_models
-from biapy_aux_functions import check_bmz_model_compatibility, check_images, check_csv_files, check_classification_images, check_model_restrictions
+from biapy.biapy_config import Config
+from biapy.biapy_check_configuration import check_configuration, check_torchvision_available_models
+from biapy.biapy_aux_functions import check_bmz_model_compatibility, check_images, check_csv_files, check_classification_images, check_model_restrictions
 
 
 def examine(main_window, save_in_obj_tag=None, is_file=True):
@@ -91,15 +91,19 @@ def check_data_from_path(main_window):
         main_window.yes_no_exec("This process may take a while as all images will be checked one by one. Are you sure you want to proceed?")
         if main_window.yes_no.answer:
 
-            def set_folder_checked(constraints, key):
+            def set_folder_checked(data_constraints, key, sample_info):
                 main_window.logger.info(f"Data {key} checked!")
                 if "data_constraints" not in main_window.cfg.settings["wizard_answers"]:
-                    main_window.cfg.settings["wizard_answers"]["data_constraints"] = constraints
+                    main_window.cfg.settings["wizard_answers"]["data_constraints"] = data_constraints
                 else:
-                    main_window.cfg.settings["wizard_answers"]["data_constraints"].update(constraints)
+                    main_window.cfg.settings["wizard_answers"]["data_constraints"].update(data_constraints)
                 main_window.cfg.settings["wizard_answers"][f"CHECKED {key}"] = 1
                 set_text(main_window.ui.wizard_data_checked_label, "<span style='color:#04aa6d'>Data checked!</span>")
-            
+
+                if "sample_info" not in main_window.cfg.settings["wizard_answers"]:
+                    main_window.cfg.settings["wizard_answers"]["sample_info"] = {}
+                main_window.cfg.settings["wizard_answers"]["sample_info"][sample_info['dir_name']] = sample_info
+
             main_window.logger.info("Checking data from path")
             dir_name = next(iter(main_window.cfg.settings["wizard_variable_to_map"]["Q"+str(main_window.cfg.settings['wizard_question_index']+1)]))
             main_window.thread_spin = QThread()
@@ -134,7 +138,7 @@ class check_data_from_path_engine(QObject):
     add_model_card_signal = QtCore.Signal(int, dict)
 
     # Signal to send a message to the user about the result of model checking
-    report_path_check_result = QtCore.Signal(dict, str)
+    report_path_check_result = QtCore.Signal(dict, str, dict)
 
     # Signal to indicate the main thread that the worker has finished 
     finished_signal = QtCore.Signal()
@@ -179,30 +183,30 @@ class check_data_from_path_engine(QObject):
                 is_3d = (ndim=="3D")
                 if workflow == "SEMANTIC_SEG":
                     mask_type = "semantic_mask" if ("GT_PATH" in key) else ""
-                    error, error_message, constraints = check_images(
+                    error, error_message, data_constraints, sample_info = check_images(
                         folder, is_mask=("GT_PATH" in key), mask_type=mask_type, 
                         is_3d=is_3d, dir_name=self.dir_name)
                 elif workflow == "INSTANCE_SEG": 
                     mask_type = "instance_mask" if ("GT_PATH" in key) else ""
-                    error, error_message, constraints = check_images(folder, is_mask=("GT_PATH" in key), 
+                    error, error_message, data_constraints, sample_info = check_images(folder, is_mask=("GT_PATH" in key), 
                         mask_type=mask_type, is_3d=is_3d, dir_name=self.dir_name)
                 elif workflow == "DETECTION":
                     if "GT_PATH" not in key: 
-                        error, error_message, constraints = check_images(folder, is_3d=is_3d, dir_name=self.dir_name)
+                        error, error_message, data_constraints, sample_info = check_images(folder, is_3d=is_3d, dir_name=self.dir_name)
                     else:
-                        error, error_message, constraints = check_csv_files(folder, is_3d=is_3d, dir_name=self.dir_name) 
+                        error, error_message, data_constraints = check_csv_files(folder, is_3d=is_3d, dir_name=self.dir_name) 
                 elif workflow == "CLASSIFICATION": 
-                    error, error_message, constraints = check_classification_images(folder, is_3d=is_3d, dir_name=self.dir_name)
+                    error, error_message, data_constraints, sample_info = check_classification_images(folder, is_3d=is_3d, dir_name=self.dir_name)
                 elif workflow in ["DENOISING", "SUPER_RESOLUTION", "SELF_SUPERVISED", "IMAGE_TO_IMAGE"]:   
-                    error, error_message, constraints = check_images(folder, is_3d=is_3d, dir_name=self.dir_name)
+                    error, error_message, data_constraints, sample_info = check_images(folder, is_3d=is_3d, dir_name=self.dir_name)
                 
-                self.main_window.logger.info(f"Constraints: {constraints}")
+                self.main_window.logger.info(f"data_constraints: {data_constraints}")
                 if error:
                     self.main_window.logger.info(f"Error: {error}")
                     self.main_window.logger.info(f"Message: {error_message}")
                     self.error_signal.emit(f"Following error found when checking the folder: \n{error_message}", "error")
                 else:
-                    self.report_path_check_result.emit(constraints, key)
+                    self.report_path_check_result.emit(data_constraints, key, sample_info)
         except:
             exc = traceback.format_exc()
             self.main_window.logger.error(exc)
@@ -720,7 +724,7 @@ def have_internet():
     finally:
         conn.close()
     
-def check_models_from_other_sources(main_window, ask_user=False, from_wizard=True):
+def check_models_from_other_sources(main_window, from_wizard=True):
     """
     Check available model compatible with BiaPy from external sources such as BioImage Model Zoo (BMZ)
     and Torchvision.
@@ -729,6 +733,9 @@ def check_models_from_other_sources(main_window, ask_user=False, from_wizard=Tru
     ----------
     main_window : QMainWindow
         Main window of the application.
+
+    from_wizard : bool, optional  
+        Whether this function was called through the Wizard or not. 
     """
     if main_window.pretrained_model_need_to_check is not None:
         main_window.external_model_list_built(main_window.pretrained_model_need_to_check)
@@ -906,6 +913,14 @@ class check_models_from_other_sources_engine(QObject):
         self.finished_signal.emit()
 
 def export_wizard_summary(main_window):
+    """
+    Create a yaml configuration file for the questions of the wizard. 
+    
+    Parameters
+    ----------
+    main_window : QMainWindow
+        Main window of the application.
+    """
     main_window.logger.info("Preparing the function to export the wizard's summary")
 
     # Check if there are not answered questions
@@ -949,15 +964,18 @@ def export_wizard_summary(main_window):
         
         biapy_cfg = main_window.cfg.settings["wizard_answers"].copy()
         biapy_cfg["data_constraints"] = main_window.cfg.settings["wizard_answers"]["data_constraints"].copy()
+        biapy_cfg["sample_info"] = main_window.cfg.settings["wizard_answers"]["sample_info"].copy()
         if "model_restrictions" in biapy_cfg:
             biapy_cfg["model_restrictions"] = main_window.cfg.settings["wizard_answers"]["model_restrictions"].copy()
+        sample_info = biapy_cfg["sample_info"]
+        del biapy_cfg["sample_info"]
 
         # Check class compatibility between model and data 
         data_imposed_classes = 2 if "MODEL.N_CLASSES" not in biapy_cfg["data_constraints"] else biapy_cfg["data_constraints"]["MODEL.N_CLASSES"]
         if "model_restrictions" in biapy_cfg and "MODEL.N_CLASSES" in biapy_cfg["model_restrictions"]:
             model_imposed_classes = max(2, biapy_cfg["model_restrictions"]["MODEL.N_CLASSES"])
         else:
-            model_imposed_classes = 2
+            model_imposed_classes = data_imposed_classes
         if data_imposed_classes != model_imposed_classes:
             main_window.dialog_exec(f"Incompatibility found: data provided seems to have {data_imposed_classes} classes whereas "
                 f"the pretrained model is prepared to work with {model_imposed_classes} classes. Please select another pretrained model.", reason="error")
@@ -1093,8 +1111,12 @@ def export_wizard_summary(main_window):
                     create_dict_from_key(key, value, out_config)
                 else:
                     raise ValueError(f"Error found in config: {key}. Contact BiaPy team!")
-        out_config = set_default_config(out_config.copy())
-        
+        out_config = set_default_config(
+            out_config.copy(), 
+            main_window.cfg.settings['GPUs'], 
+            sample_info
+            )
+
         yaml_file = os.path.join(get_text(main_window.ui.wizard_browse_yaml_path_input), get_text(main_window.ui.wizard_yaml_name_input))
         if not yaml_file.endswith(".yaml") and not yaml_file.endswith(".yml"):
             yaml_file +=".yaml"
@@ -1130,9 +1152,24 @@ def export_wizard_summary(main_window):
         main_window.ui.wizard_main_frame.setCurrentWidget(main_window.ui.wizard_start_page)
         clear_answers(main_window, ask_user=False)
 
-def set_default_config(cfg):
+def set_default_config(cfg, gpu_info, sample_info):
     """
     Set default variables depending on the workflow.
+
+    Parameters
+    ----------
+    cfg : dict
+        Configuration.
+
+    gpu_info : list of GPUtil.GPUtil.GPU
+        Information of all GPUs found in the system.
+
+    sample_info : dict of dict
+        Information with training data. Expected keys are "DATA.TRAIN.PATH" and "DATA.TEST.PATH". For each item, another 
+        dictionary is expected with the following keys:
+            * 'total_samples': integer. Number of samples. 
+            * 'crop_shape': tuple of int. Shape of the crops used to calculate the number of samples. E.g. (256, 256, 1).
+            * 'dir_name': string. Directory processed.
     """
     ##################
     # GENERAL CONFIG #
@@ -1140,7 +1177,7 @@ def set_default_config(cfg):
     # System 
     cfg["SYSTEM"] = {}
     cfg["SYSTEM"]["NUM_CPUS"] = -1
-    cfg["SYSTEM"]["NUM_WORKERS"] = 5
+    cfg["SYSTEM"]["NUM_WORKERS"] = 3
 
     ########
     # DATA #
@@ -1180,7 +1217,6 @@ def set_default_config(cfg):
     if cfg['TRAIN']['ENABLE']:
         cfg['TRAIN']['EPOCHS'] = 1000
         cfg['TRAIN']['PATIENCE'] = 50
-        cfg['TRAIN']['BATCH_SIZE'] = 1 # TODO: Depending on the GPU/CPU
         cfg['TRAIN']['OPTIMIZER'] = "ADAMW"
         cfg['TRAIN']['LR'] = 1.E-4
         # Learning rate scheduler
@@ -1196,6 +1232,9 @@ def set_default_config(cfg):
     #########
     # MODEL #
     #########
+    # TODO: calculate BMZ/torchvision model size. Now a high number to ensure batch_size is set to 1 so it 
+    # works always
+    network_memory = 9999999  
     if cfg['MODEL']['SOURCE'] == "biapy":
         if cfg["PROBLEM"]["TYPE"] in [
             "SEMANTIC_SEG",
@@ -1207,14 +1246,18 @@ def set_default_config(cfg):
             cfg["MODEL"]["ARCHITECTURE"] = "resunet"
             if cfg['PROBLEM']['NDIM'] == "3D":
                 cfg["MODEL"]["Z_DOWN"] = [1, 1, 1, 1]
+            network_memory = 220 if cfg['PROBLEM']['NDIM'] == "2D" else 615
         elif cfg["PROBLEM"]["TYPE"] == "SUPER_RESOLUTION":
-            cfg["MODEL"]["ARCHITECTURE"] = "rcan"
+            cfg["MODEL"]["ARCHITECTURE"] = "rcan" if cfg['PROBLEM']['NDIM'] == "2D" else "resunet"
+            network_memory = 876.92 if cfg['PROBLEM']['NDIM'] == "2D" else 615
         elif cfg["PROBLEM"]["TYPE"] == "SELF_SUPERVISED":
             cfg["MODEL"]["ARCHITECTURE"] = "unet"
+            network_memory = 400
             if cfg['PROBLEM']['NDIM'] == "3D":
                 cfg["MODEL"]["Z_DOWN"] = [1, 1, 1, 1]
         elif cfg["PROBLEM"]["TYPE"] == "CLASSIFICATION":
-            cfg["MODEL"]["ARCHITECTURE"] = "vit"
+            cfg["MODEL"]["ARCHITECTURE"] = "vit" 
+            network_memory = 342.67 if cfg['PROBLEM']['NDIM'] == "2D" else 354.55
 
     #####################
     # DATA AUGMENTATION #
@@ -1238,6 +1281,7 @@ def set_default_config(cfg):
     ############################
     # WORKFLOW SPECIFIC CONFIG #
     ############################
+    max_batch_size_allowed = 32
     data_channels = cfg["DATA"]["PATCH_SIZE"][-1]
     if cfg["PROBLEM"]["TYPE"] in [
             "SEMANTIC_SEG",
@@ -1268,7 +1312,6 @@ def set_default_config(cfg):
                 cfg['TEST']['DET_TOLERANCE'] = [int(0.8*cfg['TEST']['POST_PROCESSING']["REMOVE_CLOSE_POINTS_RADIUS"])] 
                 cfg['TEST']['DET_MIN_TH_TO_BE_PEAK'] = [0.5] 
                 cfg['TEST']['POST_PROCESSING']["REMOVE_CLOSE_POINTS"] = True
-
     elif cfg["PROBLEM"]["TYPE"] == "DENOISING":
         if cfg['DATA']['PATCH_SIZE'][0] == -1:
             if cfg['PROBLEM']['NDIM'] == "2D":
@@ -1292,10 +1335,7 @@ def set_default_config(cfg):
         cfg['MODEL']['ACTIVATION'] = 'relu'
         cfg['MODEL']['LAST_ACTIVATION'] = 'linear'
         cfg['MODEL']['NORMALIZATION'] = 'bn'
-        
-        if cfg['TRAIN']['ENABLE']:
-            cfg['TRAIN']['BATCH_SIZE'] = 1 # TODO: Depending on the GPU/CPU. In denoising the value can be higher  
-        
+        max_batch_size_allowed = 64
     elif cfg["PROBLEM"]["TYPE"] == "SUPER_RESOLUTION":
         if cfg['DATA']['PATCH_SIZE'][0] == -1:
             if cfg['PROBLEM']['NDIM'] == "2D":
@@ -1306,12 +1346,166 @@ def set_default_config(cfg):
             if cfg['TEST']['ENABLE']:
                 cfg['DATA']['TEST']['PADDING'] = str(tuple([x//6 for x in cfg['DATA']['PATCH_SIZE'][:-1]]))
 
+        # Force div normalization
+        cfg['DATA']['NORMALIZATION']['TYPE'] = 'div'
+        max_batch_size_allowed = 64
     elif cfg["PROBLEM"]["TYPE"] == "CLASSIFICATION":
         pass
-    
+
+    # Calculate data channels 
+    # cfg.PROBLEM.TYPE == "CLASSIFICATION" or "SELF_SUPERVISED" and PRETEXT_TASK == "masking". But as in the wizard there is no SSL
+    # we reduce the if fo samples_each_time to this
+    if cfg["PROBLEM"]["TYPE"] == "CLASSIFICATION":
+        y_channels = 0
+    else:
+        if cfg["PROBLEM"]["TYPE"] in [
+            "DENOISING",
+            "SUPER_RESOLUTION",
+            "IMAGE_TO_IMAGE"
+        ]:
+            y_channels = cfg['DATA']['PATCH_SIZE'][-1]   
+        elif cfg["PROBLEM"]["TYPE"] == "INSTANCE_SEG":
+            y_channels = 2 # As we are using a BC approach in the Wizard 
+        else:
+            y_channels = 1
+
+    channels_per_sample = {
+        "x": cfg['DATA']['PATCH_SIZE'][-1], 
+        "y": y_channels, 
+        }
+
+    # Batch size calculation
+    if cfg["PROBLEM"]["TYPE"] == "SUPER_RESOLUTION":
+        y_upsampling = cfg["PROBLEM"]["SUPER_RESOLUTION"]["UPSCALING"]
+    else:
+        y_upsampling = (1,1) if cfg['PROBLEM']['NDIM'] == "2D" else (1,1,1)
+
+    batch_size = batch_size_calculator(
+        gpu_info=gpu_info, 
+        sample_info=sample_info, 
+        patch_size=cfg['DATA']['PATCH_SIZE'],
+        channels_per_sample=channels_per_sample,
+        network_memory=network_memory, 
+        y_upsampling=y_upsampling,
+        max_batch_size_allowed=max_batch_size_allowed,
+        )
+
+    if cfg['TRAIN']['ENABLE']:
+        cfg['TRAIN']['BATCH_SIZE'] = batch_size
+
     cfg['DATA']['PATCH_SIZE'] = str(cfg['DATA']['PATCH_SIZE'])
+    if cfg["PROBLEM"]["TYPE"] == "SUPER_RESOLUTION":
+        cfg["PROBLEM"]["SUPER_RESOLUTION"]["UPSCALING"] = str(cfg["PROBLEM"]["SUPER_RESOLUTION"]["UPSCALING"])
     return cfg 
 
+def batch_size_calculator(
+        gpu_info, 
+        sample_info, 
+        patch_size,
+        channels_per_sample, 
+        network_memory=400, 
+        sample_size_reference=256, 
+        sample_memory_reference=45,
+        max_batch_size_allowed=32,
+        y_upsampling=(1,1),
+    ):
+    """
+    Calculate a reasonable value for the batch size measuring how much memory can consume a item returned by BiaPy generator 
+    (i.e. __getitem__ function). It takes into account the GPUs available (taking the minimum memory among them), number
+    of samples, memory of the network (``network_memory``) and a sample reference memory (``sample_size_reference`` and 
+    ``sample_memory_reference``). The default settings of this variables takes as reference samples of (256,256,1), where each 
+    sample is calculated to consume 45MB of memory (more or less).
+    
+    Parameters
+    ----------
+    gpu_info : list of GPUtil.GPUtil.GPU
+        Information of all GPUs found in the system.
+
+    sample_info : dict of dict
+        Information with training data. Expected keys are "DATA.TRAIN.PATH" and "DATA.TEST.PATH". For each item, another 
+        dictionary is expected with the following keys:
+            * 'total_samples': integer. Number of samples. 
+            * 'crop_shape': tuple of int. Shape of the crops used to calculate the number of samples. E.g. (256, 256, 1).
+            * 'dir_name': string. Directory processed.
+
+    patch_size : tuple of int
+        Patch size selected in the wizard. 
+
+    channels_per_sample : dict of int
+        Information of the number of channels for X and Y data. The following keys are expected:
+            * 'x': int. Channels for X data.
+            * 'y': int. Channels for Y data.
+
+    network_memory : int, optional
+        Memory consumed by the deep learning model in MB. This needs to be previously measured. For instace, the default
+        U-Net of BiaPy takes 400MB in the GPU.
+
+    sample_size_reference : int, optional
+        Size reference used to measure ``sample_memory_reference``.
+    
+    sample_memory_reference : int, optional
+        Memory in MB that consume a sample of size ``sample_size_reference``. 
+
+    max_batch_size_allowed : int, optional
+        Maximum batch size to allow.
+
+    y_upsampling : tuple of int, optional
+        Upsampling to be done to the Y data. Should be always 1 but in super-resolution workflow. 
+    """    
+    # Calculate min memory between available GPUs
+    min_mem_gpu = None
+    for gpu in gpu_info:
+        if min_mem_gpu is None:
+            min_mem_gpu = gpu.memoryTotal
+        else:
+            min_mem_gpu = min(min_mem_gpu, gpu.memoryTotal)
+
+    # Leave 20% of the memory to not overload it too much and ensure the batch size will always fit 
+    if min_mem_gpu is not None:
+        min_mem_gpu = min_mem_gpu*0.8
+
+        # Calculate how much memory takes each X data comparing both, 1) selected patch size and and 2) the crop shape used for cropping 
+        # the data an calculating the total number of samples, with the sample reference (composed by sample_size_reference and 
+        # sample_memory_reference). 
+        x_data_to_analize = sample_info["DATA.TRAIN.PATH"] if "DATA.TRAIN.PATH" in sample_info else sample_info["DATA.TEST.PATH"]
+        x_analisis_ref_ratio = x_data_to_analize['crop_shape'][1] / sample_size_reference 
+        x_selected_patch_ref_ratio = patch_size[1] / sample_size_reference
+        x_sample_memory_ratio = x_analisis_ref_ratio * x_selected_patch_ref_ratio * sample_memory_reference
+        
+        y_data_to_analize = None
+        if "DATA.TRAIN.GT_PATH" in sample_info:
+            y_data_to_analize = sample_info["DATA.TRAIN.GT_PATH"]
+        elif "DATA.TEST.GT_PATH" in sample_info:
+            y_data_to_analize = sample_info["DATA.TEST.GT_PATH"]
+
+        if y_data_to_analize is not None:
+            y_crop = y_data_to_analize['crop_shape'][1] * y_upsampling[1]
+            # Patch size always square in wizard, that's why we use always y_data_to_analize['crop_shape'][1]
+            y_analisis_ref_ratio = y_crop / sample_size_reference
+            y_selected_patch_ref_ratio = patch_size[1] / sample_size_reference 
+            y_sample_memory_ratio = y_analisis_ref_ratio * y_selected_patch_ref_ratio * sample_memory_reference
+        else:
+            y_sample_memory_ratio = 0
+
+        # How many "slices", i.e. z dimension and channels, to take into account
+        x_data = channels_per_sample['x']
+        y_data = channels_per_sample['y']
+        if len(x_data_to_analize['crop_shape']) == 4: # Add Z dim if working in 3D
+            x_data *= x_data_to_analize['crop_shape'][0]
+            if y_data_to_analize is not None:
+                y_data *= y_data_to_analize['crop_shape'][0] * y_upsampling[0]
+
+        # This value will be close to the one being used during a __getitem__ of BiaPy generator
+        item_memory_consumption = (x_sample_memory_ratio*x_data) + (y_sample_memory_ratio*y_data)
+
+        if item_memory_consumption == 0: item_memory_consumption = 1
+        number_of_samples = (min_mem_gpu - network_memory)//item_memory_consumption if (min_mem_gpu - network_memory) > 0 else 1
+    else:
+        number_of_samples = max_batch_size_allowed//2
+
+    batch_size = int(min(min(x_data_to_analize['total_samples'], number_of_samples), max_batch_size_allowed))   
+
+    return batch_size
 
 def adjust_window_progress(main_window):
     """
@@ -1560,6 +1754,7 @@ def oninit_checks(main_window):
         main_window.ui.docker_frame.setStyleSheet("#docker_frame { border: 3px solid red; border-radius: 25px;}\n#docker_frame:disabled {border: 3px solid rgb(169,169,169);}")
 
     # GPU check
+    main_window.cfg.settings['GPUs'] = []
     try:
         main_window.cfg.settings['GPUs'] = GPUtil.getGPUs()
 

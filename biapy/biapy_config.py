@@ -1,5 +1,4 @@
-## Copied from BiaPy commit: 4d890b1850daab8a8e8b3391ad37231f5b4d8c2a (3.5.1)
-# Model definition variables (source BMZ/BiaPy/Torchvision) not updated yet
+## Copied from BiaPy commit: 608052bbbd97c0d7c520b99dc5e279c12fd3be3d (3.5.2)
 import os
 from yacs.config import CfgNode as CN
 
