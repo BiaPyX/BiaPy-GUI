@@ -7,7 +7,7 @@ from skimage.io import imread
 from typing import Optional, Dict, Tuple, List
 from packaging.version import Version
 
-## Copied from BiaPy commit: 9e85d64ac040449182794b6b9c2b3ae0c5b652e7 (3.5.2)
+## Copied from BiaPy commit: 284ec3838766392c9a333ac9d27b55816a267bb9 (3.5.2)
 def check_bmz_model_compatibility(
     model_rdf: Dict,
     workflow_specs: Optional[Dict] = None,
@@ -39,15 +39,25 @@ def check_bmz_model_compatibility(
     specific_dims = "all" if workflow_specs is None else workflow_specs["ndim"]
     ref_classes = "all" if workflow_specs is None else workflow_specs["nclasses"]
 
-    error = False
-    reason_message = ""
     preproc_info = {}
 
     # Accepting models that are exported in pytorch_state_dict and with just one input
     if "pytorch_state_dict" in model_rdf["weights"] and len(model_rdf["inputs"]) == 1:
         
         model_version = Version(model_rdf["format_version"])
-
+        
+        # Capture model kwargs
+        model_kwargs = None
+        if "kwargs" in model_rdf["weights"]["pytorch_state_dict"]:
+            model_kwargs = model_rdf["weights"]["pytorch_state_dict"]["kwargs"]
+        elif (
+            "architecture" in model_rdf["weights"]["pytorch_state_dict"]
+            and "kwargs" in model_rdf["weights"]["pytorch_state_dict"]["architecture"]
+            ):
+            model_kwargs = model_rdf["weights"]["pytorch_state_dict"]["architecture"]["kwargs"]
+        else: 
+            return preproc_info, True, f"[{specific_workflow}] Couldn't extract kwargs from model description.\n"
+        
         # Check problem type
         if (specific_workflow in ["all", "SEMANTIC_SEG"]) and (
             "semantic-segmentation" in model_rdf["tags"] or 
@@ -55,29 +65,27 @@ def check_bmz_model_compatibility(
         ):
             # Check number of classes
             classes = -1
-            if "kwargs" in model_rdf["weights"]["pytorch_state_dict"]:
-                if "n_classes" in model_rdf["weights"]["pytorch_state_dict"]["kwargs"]: # BiaPy
-                    classes = model_rdf["weights"]["pytorch_state_dict"]["kwargs"]["n_classes"]
-                elif "out_channels" in model_rdf["weights"]["pytorch_state_dict"]["kwargs"]:
-                    classes = model_rdf["weights"]["pytorch_state_dict"]["kwargs"]["out_channels"]
-                elif "classes" in model_rdf["weights"]["pytorch_state_dict"]["kwargs"]:
-                    classes = model_rdf["weights"]["pytorch_state_dict"]["kwargs"]["classes"]
-                if isinstance(classes, list): 
-                    classes = classes[0]   
-                if not isinstance(classes, int):
-                    reason_message += f"[{specific_workflow}] 'MODEL.N_CLASSES' not extracted. Obtained {classes}. Please check it!\n"
-                    error = True   
+            if "n_classes" in model_kwargs: # BiaPy
+                classes = model_kwargs["n_classes"]
+            elif "out_channels" in model_kwargs:
+                classes = model_kwargs["out_channels"]
+            elif "classes" in model_kwargs:
+                classes = model_kwargs["classes"]
+            if isinstance(classes, list): 
+                classes = classes[0]   
 
-            if classes != -1:
+            if not isinstance(classes, int):
+                reason_message = f"[{specific_workflow}] 'MODEL.N_CLASSES' not extracted. Obtained {classes}. Please check it!\n"
+                return preproc_info, True, reason_message
+
+            if isinstance(classes, int) and classes != -1:
                 if ref_classes != "all":
                     if classes > 2 and ref_classes != classes:
-                        reason_message += f"[{specific_workflow}] 'MODEL.N_CLASSES' does not match network's output classes. Please check it!\n"
-                        error = True
-                    else:
-                        reason_message += f"[{specific_workflow}] BiaPy works only with one channel for the binary case (classes <= 2) so will adapt the output to match the ground truth data\n"
+                        reason_message = f"[{specific_workflow}] 'MODEL.N_CLASSES' does not match network's output classes. Please check it!\n"
+                        return preproc_info, True, reason_message
             else:
-                reason_message += f"[{specific_workflow}] Couldn't find the classes this model is returning so please be aware to match it\n"
-                error = True
+                reason_message = f"[{specific_workflow}] Couldn't find the classes this model is returning so please be aware to match it\n"
+                return preproc_info, True, reason_message
 
         elif specific_workflow in ["all", "INSTANCE_SEG"] and "instance-segmentation" in model_rdf["tags"]:
             # TODO: add cellpose tag and create flow post-processing to create images 
@@ -100,8 +108,8 @@ def check_bmz_model_compatibility(
         ):
             pass
         else:
-            reason_message += "[{}] no workflow tag recognized in {}.\n".format(specific_workflow, model_rdf["tags"])
-            error = True
+            reason_message = "[{}] no workflow tag recognized in {}.\n".format(specific_workflow, model_rdf["tags"])
+            return preproc_info, True, reason_message
 
         # Check axes
         axes_order = model_rdf["inputs"][0]["axes"]
@@ -124,29 +132,29 @@ def check_bmz_model_compatibility(
 
         if specific_dims == "2D":
             if axes_order != "bcyx":
-                error = True
-                reason_message += f"[{specific_workflow}] In a 2D problem the axes need to be 'bcyx', found {axes_order}\n"
+                reason_message = f"[{specific_workflow}] In a 2D problem the axes need to be 'bcyx', found {axes_order}\n"
+                return preproc_info, True, reason_message
             elif "2d" not in model_rdf["tags"] and "3d" in model_rdf["tags"]:
-                error = True
-                reason_message += f"[{specific_workflow}] Selected model seems to not be 2D\n"
+                reason_message = f"[{specific_workflow}] Selected model seems to not be 2D\n"
+                return preproc_info, True, reason_message
         elif specific_dims == "3D":
             if axes_order != "bczyx":
-                error = True
-                reason_message += f"[{specific_workflow}] In a 3D problem the axes need to be 'bczyx', found {axes_order}\n"
+                reason_message = f"[{specific_workflow}] In a 3D problem the axes need to be 'bczyx', found {axes_order}\n"
+                return preproc_info, True, reason_message
             elif "3d" not in model_rdf["tags"] and "2d" in model_rdf["tags"]:
-                error = True
-                reason_message += f"[{specific_workflow}] Selected model seems to not be 3D\n"
+                reason_message = f"[{specific_workflow}] Selected model seems to not be 3D\n"
+                return preproc_info, True, reason_message
         else:  # All
             if axes_order not in ["bcyx", "bczyx"]:
-                error = True
-                reason_message += f"[{specific_workflow}] Accepting models only with ['bcyx', 'bczyx'] axis order, found {axes_order}\n"
+                reason_message = f"[{specific_workflow}] Accepting models only with ['bcyx', 'bczyx'] axis order, found {axes_order}\n"
+                return preproc_info, True, reason_message
 
         # Check preprocessing
         if "preprocessing" in model_rdf["inputs"][0]:
             preproc_info = model_rdf["inputs"][0]["preprocessing"]
             key_to_find = "id" if model_version > Version("0.5.0") else "name"
             if isinstance(preproc_info, list):
-                # Remove "ensure_dtype" preprocessing when casting to float, as BiaPy will alsways do it like that
+                # Remove "ensure_dtype" preprocessing when casting to float, as BiaPy will always do it like that
                 new_preproc_info = []
                 for preproc in preproc_info:
                     if key_to_find in preproc and not (preproc[key_to_find] == "ensure_dtype" and 'kwargs' in preproc and 'dtype' in preproc['kwargs'] and 'float' in preproc['kwargs']['dtype']):
@@ -155,8 +163,8 @@ def check_bmz_model_compatibility(
                 
                 # Then if there is still more than one preprocessing not continue as it is not implemented yet
                 if len(preproc_info) > 1:
-                    error = True
-                    reason_message += f"[{specific_workflow}] More than one preprocessing from BMZ not implemented yet {axes_order}\n"
+                    reason_message = f"[{specific_workflow}] More than one preprocessing from BMZ not implemented yet {axes_order}\n"
+                    return preproc_info, True, reason_message
                 elif len(preproc_info) == 1:
                     preproc_info = preproc_info[0]
                     if key_to_find in preproc_info:
@@ -166,32 +174,27 @@ def check_bmz_model_compatibility(
                             "scale_range",
                             "scale_linear",
                         ]:
-                            error = True
-                            reason_message += f"[{specific_workflow}] Not recognized preprocessing found: {preproc_info[key_to_find]}\n"
+                            reason_message = f"[{specific_workflow}] Not recognized preprocessing found: {preproc_info[key_to_find]}\n"
+                            return preproc_info, True, reason_message
                     else:
-                        error = True
-                        reason_message += f"[{specific_workflow}] Not recognized preprocessing structure found: {preproc_info}\n"
+                        reason_message = f"[{specific_workflow}] Not recognized preprocessing structure found: {preproc_info}\n"
+                        return preproc_info, True, reason_message
 
         # Check post-processing
-        model_kwargs = None
-        if "kwargs" in model_rdf["weights"]["pytorch_state_dict"]:
-            model_kwargs = model_rdf["weights"]["pytorch_state_dict"]["kwargs"]
-        elif "architecture" in model_rdf["weights"]["pytorch_state_dict"] and "kwargs" in model_rdf["weights"]["pytorch_state_dict"]["architecture"]:
-            model_kwargs = model_rdf["weights"]["pytorch_state_dict"]["architecture"]["kwargs"] 
         if (
             model_kwargs is not None  
             and "postprocessing" in model_kwargs
             and model_kwargs["postprocessing"] is not None
         ):
-            error = True
-            reason_message += f"[{specific_workflow}] Currently no postprocessing is supported. Found: {model_kwargs['postprocessing']}\n"
+            reason_message = f"[{specific_workflow}] Currently no postprocessing is supported. Found: {model_kwargs['postprocessing']}\n"
+            return preproc_info, True, reason_message
     else:
-        error = True
-        reason_message += f"[{specific_workflow}] pytorch_state_dict not found in model RDF\n"
+        reason_message = f"[{specific_workflow}] pytorch_state_dict not found in model RDF\n"
+        return preproc_info, True, reason_message
 
-    return preproc_info, error, reason_message
+    return preproc_info, False, ""
 
-# Adapted from BiaPy commit: 9e85d64ac040449182794b6b9c2b3ae0c5b652e7 (3.5.2)
+# Adapted from BiaPy commit: 284ec3838766392c9a333ac9d27b55816a267bb9 (3.5.2)
 def check_model_restrictions(
     model_rdf,
     workflow_specs,
@@ -255,19 +258,29 @@ def check_model_restrictions(
         raise ValueError("Couldn't load input info from BMZ model's RDF: {}".format(model_rdf["inputs"][0]))   
     opts["DATA.PATCH_SIZE"] = tuple(input_image_shape[2:]) + (input_image_shape[1],)
 
-   # 2) Workflow specific restrictions 
+    # Capture model kwargs
+    if "kwargs" in model_rdf["weights"]["pytorch_state_dict"]:
+        model_kwargs = model_rdf["weights"]["pytorch_state_dict"]["kwargs"]
+    elif (
+        "architecture" in model_rdf["weights"]["pytorch_state_dict"]
+        and "kwargs" in model_rdf["weights"]["pytorch_state_dict"]["architecture"]
+    ):
+        model_kwargs = model_rdf["weights"]["pytorch_state_dict"]["architecture"]["kwargs"]
+    else: 
+        raise ValueError(f"Couldn't extract kwargs from model description.")
+
+    # 2) Workflow specific restrictions 
     # Classes in semantic segmentation
     if specific_workflow in ["SEMANTIC_SEG"]:
         # Check number of classes
         classes = -1
-        if "kwargs" in model_rdf["weights"]["pytorch_state_dict"]:
-            if "n_classes" in model_rdf["weights"]["pytorch_state_dict"]["kwargs"]: # BiaPy
-                classes = model_rdf["weights"]["pytorch_state_dict"]["kwargs"]["n_classes"]
-            elif "out_channels" in model_rdf["weights"]["pytorch_state_dict"]["kwargs"]:
-                classes = model_rdf["weights"]["pytorch_state_dict"]["kwargs"]["out_channels"]
-            elif "classes" in model_rdf["weights"]["pytorch_state_dict"]["kwargs"]:
-                classes = model_rdf["weights"]["pytorch_state_dict"]["kwargs"]["classes"]
-        
+        if "n_classes" in model_kwargs: # BiaPy
+            classes = model_kwargs["n_classes"]
+        elif "out_channels" in model_kwargs:
+            classes = model_kwargs["out_channels"]
+        elif "classes" in model_kwargs:
+            classes = model_kwargs["classes"]
+    
         if isinstance(classes, list): 
             classes = classes[0]    
         if not isinstance(classes, int):
@@ -280,8 +293,8 @@ def check_model_restrictions(
         # Assumed it's BC. This needs a more elaborated process. Still deciding this:
         # https://github.com/bioimage-io/spec-bioimage-io/issues/621
         channels = 2 
-        if "out_channels" in bmz_config["original_bmz_config"].weights.pytorch_state_dict.kwargs:
-            channels = bmz_config["original_bmz_config"].weights.pytorch_state_dict.kwargs["out_channels"]
+        if "out_channels" in model_kwargs:
+            channels = model_kwargs["out_channels"]
         if channels == 1:
             channel_code = "C"
         elif channels == 2:
@@ -770,7 +783,7 @@ def check_value(value, value_range=(0, 1)):
         return False
     
 
-# Copied from BiaPy commit: 9e85d64ac040449182794b6b9c2b3ae0c5b652e7 (3.5.2)
+# Copied from BiaPy commit: 284ec3838766392c9a333ac9d27b55816a267bb9 (3.5.2)
 def crop_data_with_overlap(data, crop_shape, data_mask=None, overlap=(0, 0), padding=(0, 0), verbose=True,
                            load_data=True):
     """
@@ -1020,7 +1033,7 @@ def crop_data_with_overlap(data, crop_shape, data_mask=None, overlap=(0, 0), pad
     else:
         return crop_coords
     
-# Copied from BiaPy commit: 9e85d64ac040449182794b6b9c2b3ae0c5b652e7 (3.5.2)  
+# Copied from BiaPy commit: 284ec3838766392c9a333ac9d27b55816a267bb9 (3.5.2)  
 def crop_3D_data_with_overlap(
     data,
     vol_shape,
@@ -1304,7 +1317,7 @@ def crop_3D_data_with_overlap(
     else:
         return crop_coords
 
-# Copied from BiaPy commit: 9e85d64ac040449182794b6b9c2b3ae0c5b652e7 (3.5.2)  
+# Copied from BiaPy commit: 284ec3838766392c9a333ac9d27b55816a267bb9 (3.5.2)  
 def pad_and_reflect(img, crop_shape, verbose=False):
     """
     Load data from a directory.
