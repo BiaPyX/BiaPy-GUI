@@ -825,7 +825,7 @@ class check_models_from_other_sources_engine(QObject):
             model_rdfs = []
             model_count = 0
             for mu in model_urls:
-                with open(Path(pooch.retrieve(mu, known_hash=None))) as stream:
+                with open(Path(pooch.retrieve(mu, known_hash=None)), 'rt', encoding='utf8') as stream:
                     model_rdfs.append(yaml.safe_load(stream))
                     model_name = model_rdfs[-1]['name']
                     self.main_window.logger.info("Checking entry: {}".format(model_name))
@@ -1130,7 +1130,7 @@ def export_wizard_summary(main_window):
             replace = True if main_window.yes_no.answer else False
         if replace:
             main_window.logger.info("Creating YAML file") 
-            with open(yaml_file, 'w') as outfile:
+            with open(yaml_file, 'w', encoding='utf8') as outfile:
                 yaml.dump(out_config, outfile, default_flow_style=False)
 
         # Update GUI with the new YAML file path and resets the check 
@@ -2694,7 +2694,7 @@ def create_yaml_file(main_window):
         
     if replace:
         main_window.logger.info("Creating YAML file") 
-        with open(os.path.join(main_window.cfg.settings['yaml_config_file_path'], main_window.cfg.settings['yaml_config_filename']), 'w') as outfile:
+        with open(os.path.join(main_window.cfg.settings['yaml_config_file_path'], main_window.cfg.settings['yaml_config_filename']), 'w', encoding='utf8') as outfile:
             yaml.dump(biapy_config, outfile, default_flow_style=False)
 
     # Reset the check 
@@ -2860,7 +2860,7 @@ class load_yaml_to_GUI_engine(QObject):
         """
         self.state_signal.emit(0)
         try:
-            with open(self.yaml_file, "r") as stream:
+            with open(self.yaml_file, "r", encoding='utf8') as stream:
                 cfg_content = stream.read()
                 tab_detected_mss = ""
                 if '\t' in cfg_content:
@@ -2871,7 +2871,7 @@ class load_yaml_to_GUI_engine(QObject):
 
             if tab_detected_mss != "":
                 yaml_file_final = os.path.join(self.main_window.log_dir, "tmp_load_yaml.yaml")
-                f = open(self.yaml_file, "w")
+                f = open(self.yaml_file, "w", encoding='utf8')
                 f.write(cfg_content)
                 f.close()
             else:

@@ -99,7 +99,7 @@ class runBiaPy_Ui(QDialog):
             
     def update_log(self):
         finished_good = False
-        with open(self.parent_worker.container_stdout_file, 'r') as f:
+        with open(self.parent_worker.container_stdout_file, 'r', encoding='utf8') as f:
             last_lines = f.readlines()[-20:]
             last_lines = ''.join(last_lines).replace("\x08", "").replace("[A", "").replace("", "")           
             self.run_window.run_biapy_log.setText(str(last_lines))
@@ -291,7 +291,7 @@ class run_worker(QObject):
                         # the issue: https://github.com/docker/for-mac/issues/3785#issuecomment-518328553
                         if problem_attempts == 1:
                             try:
-                                with open(Path.home() / ".docker" / "config.json", "r") as jsonFile:
+                                with open(Path.home() / ".docker" / "config.json", "r", encoding='utf8') as jsonFile:
                                     data = json.load(jsonFile)
                                     json_orig_data = data.copy()
 
@@ -306,7 +306,7 @@ class run_worker(QObject):
                                     val = data["credsStore"] 
                                     data["credsStore"] = "osxkeychain" if "desktop" in val else "desktop"
                             
-                                with open(Path.home() / ".docker" / "config.json", "w") as jsonFile:
+                                with open(Path.home() / ".docker" / "config.json", "w", encoding='utf8') as jsonFile:
                                     json.dump(data, jsonFile, indent=4)
                             except Exception as e:
                                 self.main_gui.logger.error(f"Error modifying ~/.docker/config.json file (attempt 1): {e}")
@@ -314,14 +314,14 @@ class run_worker(QObject):
                         # Attempt 2: remove "credsStore" key
                         elif problem_attempts == 2:
                             try:
-                                with open(Path.home() / ".docker" / "config.json", "r") as jsonFile:
+                                with open(Path.home() / ".docker" / "config.json", "r", encoding='utf8') as jsonFile:
                                     data = json.load(jsonFile)
 
                                 # Delete credsStore directly
                                 if "credsStore" in data:
                                     del data["credsStore"] 
                             
-                                with open(Path.home() / ".docker" / "config.json", "w") as jsonFile:
+                                with open(Path.home() / ".docker" / "config.json", "w", encoding='utf8') as jsonFile:
                                     json.dump(data, jsonFile, indent=4)
 
                             except Exception as e:
@@ -341,7 +341,7 @@ class run_worker(QObject):
                 if json_orig_data is not None:
                     if os.path.exists(Path.home() / ".docker" / "config.json.backup"):
                         os.rename(Path.home() / ".docker" / "config.json.backup", Path.home() / ".docker" / "config.json")
-                    with open(Path.home() / ".docker" / "config.json", "w") as jsonFile:
+                    with open(Path.home() / ".docker" / "config.json", "w", encoding='utf8') as jsonFile:
                         json.dump(json_orig_data, jsonFile, indent=4)
 
             self.update_pulling_signal.emit(1)     
@@ -366,7 +366,7 @@ class run_worker(QObject):
             os.makedirs(cfg_input, exist_ok=True)
 
             # Read the configuration file
-            with open(cfg_file, "r") as stream:
+            with open(cfg_file, "r", encoding='utf8') as stream:
                 try:
                     temp_cfg = yaml.safe_load(stream)
                 except yaml.YAMLError as exc:
@@ -516,7 +516,7 @@ class run_worker(QObject):
                 self.gui.run_window.test_progress_bar.setMaximum(self.test_files)
             
             self.main_gui.logger.info("Creating temporal input YAML file") 
-            with open(real_cfg_input, 'w') as outfile:
+            with open(real_cfg_input, 'w', encoding='utf8') as outfile:
                 yaml.dump(temp_cfg, outfile, default_flow_style=False)
 
             if self.use_gpu:
@@ -581,9 +581,9 @@ class run_worker(QObject):
             self.update_log_signal.emit(0)
 
             # Log the output in a file     
-            f = open(self.container_stderr_file, "x")
+            f = open(self.container_stderr_file, "x", encoding='utf8')
             f.close()       
-            f = open(self.container_stdout_file, "w")
+            f = open(self.container_stdout_file, "w", encoding='utf8')
             f.write("#########################################################\n")
             f.write(self.container_info.replace("<tr><td>", "").replace("</td><td>", ": ").replace("</td></tr>", "")\
                 .replace("<table>", "\n").replace("</table>", "\n").replace('<b>','').replace('</b>','').replace('<br>','').strip())
@@ -655,7 +655,7 @@ class run_worker(QObject):
             self.main_gui.logger.error(traceback.format_exc())
 
             # Try to log the error in the error file
-            ferr = open(self.container_stderr_file, "w")
+            ferr = open(self.container_stderr_file, "w", encoding='utf8')
             ferr.write("#########################################################\n")
             ferr.write(self.container_info+"\n")
             ferr.write("#########################################################\n")
