@@ -1688,6 +1688,7 @@ def move_between_workflows(main_window, to_page, dims=None):
         ["test_exists_gt_label", "DATA__TEST__LOAD_GT__INPUT", "DATA__TEST__LOAD_GT__INFO", 
          "test_data_gt_label", "DATA__TEST__GT_PATH__INPUT", "DATA__TEST__GT_PATH__INFO", "test_data_gt_input_browse_bn",
          "train_gt_label", "train_gt_info", "DATA__TRAIN__GT_PATH__INPUT", "train_data_gt_input_browse_bn",
+         "validation_data_gt_label", "validation_data_gt_info", "DATA__VAL__GT_PATH__INPUT", "val_data_gt_input_browse_bn",
          "MODEL__N_CLASSES__LABEL", "MODEL__N_CLASSES__INFO", "MODEL__N_CLASSES__INPUT"])
 
     actual_name = get_text(main_window.ui.job_name_input)
