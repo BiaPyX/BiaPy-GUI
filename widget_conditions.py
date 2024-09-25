@@ -3013,7 +3013,7 @@ class Widget_conditions():
                         'Residual U-Net', 
                         'ResUNet++',
                         'ResUNet SE',
-                        'U-NeXT V1', 
+                        'U-NeXt V1', 
                         'Attention U-Net', 
                         'MultiResUnet', 
                         'SEUnet', 
@@ -3027,7 +3027,7 @@ class Widget_conditions():
                         'Residual U-Net', 
                         'ResUNet++',
                         'ResUNet SE',
-                        'U-NeXT V1', 
+                        'U-NeXt V1', 
                         'Attention U-Net', 
                         'MultiResUnet', 
                         'SEUnet', 
@@ -3041,7 +3041,7 @@ class Widget_conditions():
                         'Residual U-Net', 
                         'ResUNet++',
                         'ResUNet SE',
-                        'U-NeXT V1', 
+                        'U-NeXt V1', 
                         'Attention U-Net', 
                         'MultiResUnet', 
                         'SEUnet', 
@@ -3055,7 +3055,7 @@ class Widget_conditions():
                         'Residual U-Net', 
                         'ResUNet++',
                         'ResUNet SE',
-                        'U-NeXT V1', 
+                        'U-NeXt V1', 
                         'Attention U-Net', 
                         'MultiResUnet', 
                         'SEUnet', 
@@ -3083,14 +3083,14 @@ class Widget_conditions():
                 {
                     "MODEL__ARCHITECTURE__INPUT": 
                     [
-                        'U-NeXT V1', 
+                        'U-NeXt V1', 
                     ],
                 }, 
             "convnext_frame": 
                 {
                     "MODEL__ARCHITECTURE__INPUT": 
                     [
-                        'U-NeXT V1', 
+                        'U-NeXt V1', 
                     ],
                 }, 
             "unetr_vit_hidden_multiple_label": 
