@@ -1401,7 +1401,7 @@ QPushButton:pressed {
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>3</number>
+                <number>2</number>
                </property>
                <widget class="QWidget" name="page_home">
                 <property name="styleSheet">
@@ -4068,8 +4068,8 @@ font: italic;</string>
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>930</width>
-                               <height>172</height>
+                               <width>100</width>
+                               <height>30</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_62"/>
@@ -4280,7 +4280,7 @@ QPushButton:pressed {
                        </font>
                       </property>
                       <property name="currentIndex">
-                       <number>2</number>
+                       <number>1</number>
                       </property>
                       <widget class="QWidget" name="workflow_selection_page">
                        <property name="minimumSize">
@@ -6246,8 +6246,24 @@ QPushButton:pressed {
                                 <enum>QFrame::Raised</enum>
                                </property>
                                <layout class="QGridLayout" name="gridLayout_26">
-                                <item row="1" column="2">
-                                 <widget class="QPushButton" name="LOAD_PRETRAINED_MODEL__INFO">
+                                <item row="5" column="1">
+                                 <widget class="QLabel" name="MODEL__BMZ__SOURCE_MODEL_ID__LABEL">
+                                  <property name="font">
+                                   <font>
+                                    <family>DejaVu Math TeX Gyre</family>
+                                    <pointsize>12</pointsize>
+                                   </font>
+                                  </property>
+                                  <property name="text">
+                                   <string>Model ID</string>
+                                  </property>
+                                  <property name="indent">
+                                   <number>15</number>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="4" column="2">
+                                 <widget class="QPushButton" name="PATHS__CHECKPOINT_FILE__INFO">
                                   <property name="minimumSize">
                                    <size>
                                     <width>30</width>
@@ -6260,11 +6276,8 @@ QPushButton:pressed {
                                     <height>30</height>
                                    </size>
                                   </property>
-                                  <property name="font">
-                                   <font>
-                                    <family>DejaVu Math TeX Gyre</family>
-                                    <pointsize>12</pointsize>
-                                   </font>
+                                  <property name="toolTip">
+                                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Path to the model's checkpoint that will be loaded. Leave it blank to let BiaPy find it. If the output folder and the job name match, BiaPy will locate the model's weights within the 'checkpoints' directory&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                   </property>
                                   <property name="styleSheet">
                                    <string notr="true">QPushButton {
@@ -6274,6 +6287,38 @@ QPushButton:pressed {
                                   <property name="text">
                                    <string/>
                                   </property>
+                                 </widget>
+                                </item>
+                                <item row="2" column="3">
+                                 <widget class="QComboBox" name="MODEL__SOURCE__INPUT">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>300</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
+                                  <property name="maximumSize">
+                                   <size>
+                                    <width>300</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
+                                  <property name="font">
+                                   <font>
+                                    <family>DejaVu Math TeX Gyre</family>
+                                    <pointsize>12</pointsize>
+                                   </font>
+                                  </property>
+                                  <item>
+                                   <property name="text">
+                                    <string>I have a model trained with BiaPy</string>
+                                   </property>
+                                  </item>
+                                  <item>
+                                   <property name="text">
+                                    <string>I want to check other online sources</string>
+                                   </property>
+                                  </item>
                                  </widget>
                                 </item>
                                 <item row="1" column="3">
@@ -6341,83 +6386,6 @@ QPushButton:pressed {
                                   </property>
                                  </widget>
                                 </item>
-                                <item row="2" column="3">
-                                 <widget class="QComboBox" name="MODEL__SOURCE__INPUT">
-                                  <property name="minimumSize">
-                                   <size>
-                                    <width>300</width>
-                                    <height>30</height>
-                                   </size>
-                                  </property>
-                                  <property name="maximumSize">
-                                   <size>
-                                    <width>300</width>
-                                    <height>30</height>
-                                   </size>
-                                  </property>
-                                  <property name="font">
-                                   <font>
-                                    <family>DejaVu Math TeX Gyre</family>
-                                    <pointsize>12</pointsize>
-                                   </font>
-                                  </property>
-                                  <item>
-                                   <property name="text">
-                                    <string>I have a model trained with BiaPy</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>I want to check other online sources</string>
-                                   </property>
-                                  </item>
-                                 </widget>
-                                </item>
-                                <item row="5" column="1">
-                                 <widget class="QLabel" name="MODEL__BMZ__SOURCE_MODEL_ID__LABEL">
-                                  <property name="font">
-                                   <font>
-                                    <family>DejaVu Math TeX Gyre</family>
-                                    <pointsize>12</pointsize>
-                                   </font>
-                                  </property>
-                                  <property name="text">
-                                   <string>Model ID</string>
-                                  </property>
-                                  <property name="indent">
-                                   <number>15</number>
-                                  </property>
-                                 </widget>
-                                </item>
-                                <item row="1" column="1">
-                                 <widget class="QLabel" name="LOAD_PRETRAINED_MODEL__LABEL">
-                                  <property name="font">
-                                   <font>
-                                    <family>DejaVu Math TeX Gyre</family>
-                                    <pointsize>12</pointsize>
-                                   </font>
-                                  </property>
-                                  <property name="text">
-                                   <string>Load pretrained model</string>
-                                  </property>
-                                 </widget>
-                                </item>
-                                <item row="2" column="1">
-                                 <widget class="QLabel" name="MODEL__SOURCE__LABEL">
-                                  <property name="font">
-                                   <font>
-                                    <family>DejaVu Math TeX Gyre</family>
-                                    <pointsize>12</pointsize>
-                                   </font>
-                                  </property>
-                                  <property name="text">
-                                   <string>Source of the model</string>
-                                  </property>
-                                  <property name="indent">
-                                   <number>15</number>
-                                  </property>
-                                 </widget>
-                                </item>
                                 <item row="5" column="3">
                                  <widget class="QLineEdit" name="MODEL__BMZ__SOURCE_MODEL_ID__INPUT">
                                   <property name="minimumSize">
@@ -6443,8 +6411,33 @@ QPushButton:pressed {
                                   </property>
                                  </widget>
                                 </item>
-                                <item row="4" column="4">
-                                 <widget class="QPushButton" name="checkpoint_file_path_browse_bn">
+                                <item row="4" column="1">
+                                 <widget class="QLabel" name="checkpoint_file_path_browse_label">
+                                  <property name="font">
+                                   <font>
+                                    <family>DejaVu Math TeX Gyre</family>
+                                    <pointsize>12</pointsize>
+                                   </font>
+                                  </property>
+                                  <property name="toolTip">
+                                   <string/>
+                                  </property>
+                                  <property name="text">
+                                   <string>Model file</string>
+                                  </property>
+                                  <property name="indent">
+                                   <number>15</number>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="5" column="4">
+                                 <widget class="QPushButton" name="MODEL__BMZ__SOURCE_MODEL_ID__BN">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>130</width>
+                                    <height>0</height>
+                                   </size>
+                                  </property>
                                   <property name="font">
                                    <font>
                                     <family>DejaVu Math TeX Gyre</family>
@@ -6452,7 +6445,7 @@ QPushButton:pressed {
                                    </font>
                                   </property>
                                   <property name="text">
-                                   <string>Browse</string>
+                                   <string>Check models</string>
                                   </property>
                                  </widget>
                                 </item>
@@ -6489,6 +6482,48 @@ QPushButton:pressed {
                                   </property>
                                  </widget>
                                 </item>
+                                <item row="2" column="1">
+                                 <widget class="QLabel" name="MODEL__SOURCE__LABEL">
+                                  <property name="font">
+                                   <font>
+                                    <family>DejaVu Math TeX Gyre</family>
+                                    <pointsize>12</pointsize>
+                                   </font>
+                                  </property>
+                                  <property name="text">
+                                   <string>Source of the model</string>
+                                  </property>
+                                  <property name="indent">
+                                   <number>15</number>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="1" column="1">
+                                 <widget class="QLabel" name="LOAD_PRETRAINED_MODEL__LABEL">
+                                  <property name="font">
+                                   <font>
+                                    <family>DejaVu Math TeX Gyre</family>
+                                    <pointsize>12</pointsize>
+                                   </font>
+                                  </property>
+                                  <property name="text">
+                                   <string>Load pretrained model</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="4" column="4">
+                                 <widget class="QPushButton" name="checkpoint_file_path_browse_bn">
+                                  <property name="font">
+                                   <font>
+                                    <family>DejaVu Math TeX Gyre</family>
+                                    <pointsize>12</pointsize>
+                                   </font>
+                                  </property>
+                                  <property name="text">
+                                   <string>Browse</string>
+                                  </property>
+                                 </widget>
+                                </item>
                                 <item row="4" column="3">
                                  <widget class="QLineEdit" name="PATHS__CHECKPOINT_FILE__INPUT">
                                   <property name="minimumSize">
@@ -6514,27 +6549,8 @@ QPushButton:pressed {
                                   </property>
                                  </widget>
                                 </item>
-                                <item row="4" column="1">
-                                 <widget class="QLabel" name="checkpoint_file_path_browse_label">
-                                  <property name="font">
-                                   <font>
-                                    <family>DejaVu Math TeX Gyre</family>
-                                    <pointsize>12</pointsize>
-                                   </font>
-                                  </property>
-                                  <property name="toolTip">
-                                   <string/>
-                                  </property>
-                                  <property name="text">
-                                   <string>Model file</string>
-                                  </property>
-                                  <property name="indent">
-                                   <number>15</number>
-                                  </property>
-                                 </widget>
-                                </item>
-                                <item row="4" column="2">
-                                 <widget class="QPushButton" name="PATHS__CHECKPOINT_FILE__INFO">
+                                <item row="1" column="2">
+                                 <widget class="QPushButton" name="LOAD_PRETRAINED_MODEL__INFO">
                                   <property name="minimumSize">
                                    <size>
                                     <width>30</width>
@@ -6547,8 +6563,11 @@ QPushButton:pressed {
                                     <height>30</height>
                                    </size>
                                   </property>
-                                  <property name="toolTip">
-                                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Path to the model's checkpoint that will be loaded. Leave it blank to let BiaPy find it. If the output folder and the job name match, BiaPy will locate the model's weights within the 'checkpoints' directory&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                  <property name="font">
+                                   <font>
+                                    <family>DejaVu Math TeX Gyre</family>
+                                    <pointsize>12</pointsize>
+                                   </font>
                                   </property>
                                   <property name="styleSheet">
                                    <string notr="true">QPushButton {
@@ -6560,26 +6579,7 @@ QPushButton:pressed {
                                   </property>
                                  </widget>
                                 </item>
-                                <item row="5" column="4">
-                                 <widget class="QPushButton" name="MODEL__BMZ__SOURCE_MODEL_ID__BN">
-                                  <property name="minimumSize">
-                                   <size>
-                                    <width>130</width>
-                                    <height>0</height>
-                                   </size>
-                                  </property>
-                                  <property name="font">
-                                   <font>
-                                    <family>DejaVu Math TeX Gyre</family>
-                                    <pointsize>12</pointsize>
-                                   </font>
-                                  </property>
-                                  <property name="text">
-                                   <string>Check models</string>
-                                  </property>
-                                 </widget>
-                                </item>
-                                <item row="4" column="5">
+                                <item row="1" column="4">
                                  <spacer name="horizontalSpacer_10">
                                   <property name="orientation">
                                    <enum>Qt::Horizontal</enum>
@@ -6739,7 +6739,7 @@ QPushButton:pressed {
                                     <rect>
                                      <x>0</x>
                                      <y>0</y>
-                                     <width>860</width>
+                                     <width>842</width>
                                      <height>284</height>
                                     </rect>
                                    </property>
@@ -24756,8 +24756,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>929</width>
-                                         <height>326</height>
+                                         <width>895</width>
+                                         <height>100</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_17">
@@ -34857,7 +34857,7 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>914</width>
+                                       <width>597</width>
                                        <height>1056</height>
                                       </rect>
                                      </property>
@@ -38295,7 +38295,7 @@ QPushButton:pressed {
                                <x>0</x>
                                <y>0</y>
                                <width>896</width>
-                               <height>154</height>
+                               <height>152</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_32">
