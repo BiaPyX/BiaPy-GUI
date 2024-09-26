@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: 608052bbbd97c0d7c520b99dc5e279c12fd3be3d (3.5.2)
+## Copied from BiaPy commit: 280117ca2eef9abfa806040999b12e2548bdaa46 (3.5.3)
 import os
 from yacs.config import CfgNode as CN
 
@@ -727,6 +727,37 @@ class Config:
         # DOI or nickname of the model from BMZ to load. It can not be empty if MODEL.SOURCE = "bmz".
         _C.MODEL.BMZ.SOURCE_MODEL_ID = ""
         # BMZ model export options
+        _C.MODEL.BMZ.EXPORT = CN()
+        # Whether to activate or not the exporation of the used model to the BMZ format after train and/or test 
+        _C.MODEL.BMZ.EXPORT.ENABLE = False
+        # Name of the model to create. It should be something meaningful. Take other models in https://bioimage.io/#/ as reference.
+        _C.MODEL.BMZ.EXPORT.MODEL_NAME = ""
+        # Description of the model. It should be something meaningful. Take other models in https://bioimage.io/#/ as reference.
+        # E.g. "Mitochondria segmentation for electron microscopy"
+        _C.MODEL.BMZ.EXPORT.DESCRIPTION = ""
+        # List of authors of the model. Each item must be a dict containing "name" and "githubuser".
+        # E.g. [{"name": "Daniel", "github_user": "danifranco"}]
+        _C.MODEL.BMZ.EXPORT.AUTHORS = []
+        # License of the model.
+        _C.MODEL.BMZ.EXPORT.LICENSE = "CC-BY-4.0"
+        # Path to a .md extension file with the documentation of the model. If it is not set so the model documentation will point to 
+        # BiaPy doc: https://github.com/BiaPyX/BiaPy/blob/master/README.md". Take other models in https://bioimage.io/#/ as reference.
+        _C.MODEL.BMZ.EXPORT.DOCUMENTATION = ""
+        # List of tags. Here the type of dataset and the target object should be provided. BiaPy automatically sets the following tags: 
+        #   * "biapy": to represent that the model was created with BiaPy.
+        #   * "pytorch": to represent that you are using Pytorch
+        #   * "2d" or "3d": depending on the image dimensions one or the other is selected.
+        #   * workflow tag: depending on the workflow the tag is set. E.g. "semantic-segmentation"
+        #
+        # So, what you can set for instance is: ["electron-microscopy", "mitochondria"]
+        _C.MODEL.BMZ.EXPORT.TAGS = []
+        # Citations. It must be a list of dictionaries with keys "text" and "doi". E.g.:
+        # [{"text": "training library", "doi": "10.1101/2024.02.03.576026"}, {"text": "architecture", "doi": "10.1109/LGRS.2018.2802944"},
+        #  {"text": "data", "doi": "10.48550/arXiv.1812.06024"}]
+        _C.MODEL.BMZ.EXPORT.CITE = []
+        # If you are loading a BMZ model you can enable this option to avoid setting all above variables and instead reuse the same
+        # information that was present in that model. You need still to set 'MODEL.BMZ.EXPORT.ENABLE' to 'True' and nothing else.
+        _C.MODEL.BMZ.EXPORT.REUSE_BMZ_CONFIG = False
 
         #
         # TOCHIVISION BACKEND MODELS AND OPTIONS
@@ -784,11 +815,11 @@ class Config:
         #   * Semantic segmentation: 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', 'unetr', 'unext_v1'
         #   * Instance segmentation: 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', 'unetr', 'unext_v1'
         #   * Detection: 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', 'unetr', 'unext_v1'
-        #   * Denoising: 'unet', 'resunet', 'resunet++', 'attention_unet', 'seunet', 'resunet_se',, 'unext_v1'
+        #   * Denoising: 'unet', 'resunet', 'resunet++', 'attention_unet', 'seunet', 'resunet_se', 'unext_v1'
         #   * Super-resolution: 'edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'resunet++', 'seunet', 'resunet_se', 'attention_unet', 'multiresunet', 'unext_v1'
         #   * Self-supervision: 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', 'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'vit', 'mae', 'unext_v1'
         #   * Classification: 'simple_cnn', 'vit', 'efficientnet_b[0-7]' (only 2D)
-        #   * Image to image: 'edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'unetr', 'multiresunet', 'unext_v1'
+        #   * Image to image: 'edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'resunet++', 'seunet', 'resunet_se', 'attention_unet', 'unetr', 'multiresunet', 'unext_v1'
         _C.MODEL.ARCHITECTURE = "unet"
         # Number of feature maps on each level of the network.
         _C.MODEL.FEATURE_MAPS = [16, 32, 64, 128, 256]
@@ -822,7 +853,7 @@ class Config:
         # Options: 'best_on_val' or 'last_on_train'
         _C.MODEL.LOAD_CHECKPOINT_EPOCH = "best_on_val"
         # Whether to load the model from the checkpoint instead of builiding it following 'MODEL.ARCHITECTURE' when 'MODEL.SOURCE' is "biapy"
-        _C.MODEL.LOAD_MODEL_FROM_CHECKPOINT = False
+        _C.MODEL.LOAD_MODEL_FROM_CHECKPOINT = True
         # Epochs to save a checkpoint of the model apart from the ones saved with LOAD_CHECKPOINT_ONLY_WEIGHTS. Set it to -1 to
         # not do it.
         _C.MODEL.SAVE_CKPT_FREQ = -1
@@ -909,7 +940,7 @@ class Config:
         #       * "MAE" (default): mean absolute error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss
         #       * "MSE": mean square error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss
         _C.LOSS.TYPE = ""
-        # Weights to be apply in multiple loss combination cases. Currently only available when LOSS.TYPE == "W_CE_DICE" where
+        # Wights to be apply in multiple loss combination cases. Currently only available when LOSS.TYPE == "W_CE_DICE" where
         # it needs to be a list of two floats (one for CE loss and the other for DICE loss). They must sum 1. E.g. [0.3, 0.7].
         _C.LOSS.WEIGHTS = [0.66, 0.34]
         # To adjust the loss function based on the imbalance between classes. Used when LOSS.TYPE == "CE" in detection and
@@ -1263,6 +1294,8 @@ class Config:
         )
         _C.PATHS.RESULT_DIR.DET_ASSOC_POINTS = os.path.join(_C.PATHS.RESULT_DIR.PATH, "point_associations")
         _C.PATHS.RESULT_DIR.INST_ASSOC_POINTS = os.path.join(_C.PATHS.RESULT_DIR.PATH, "instance_associations")
+        # Path to store the BMZ model created 
+        _C.PATHS.BMZ_EXPORT_PATH = os.path.join(_C.PATHS.RESULT_DIR.PATH, "BMZ_files")
 
         # Path to store profiler files
         _C.PATHS.PROFILER = os.path.join(_C.PATHS.RESULT_DIR.PATH, "profiler")
@@ -1325,93 +1358,94 @@ class Config:
         # This is for the "local variable" use pattern
         return self._C.clone()
 
-    def update_dependencies(self) -> None:
-        """Update some variables that depend of changes made after merge the .cfg file provide by the user. That is,
-        this function should be called after YACS's merge_from_file().
-        """
-        # Remove possible / characters at the end of the paths
-        self._C.DATA.TRAIN.PATH = (
-            self._C.DATA.TRAIN.PATH if self._C.DATA.TRAIN.PATH[-1] != "/" else self._C.DATA.TRAIN.PATH[:-1]
-        )
-        self._C.DATA.TRAIN.GT_PATH = (
-            self._C.DATA.TRAIN.GT_PATH if self._C.DATA.TRAIN.GT_PATH[-1] != "/" else self._C.DATA.TRAIN.GT_PATH[:-1]
-        )
-        self._C.DATA.VAL.PATH = (
-            self._C.DATA.VAL.PATH if self._C.DATA.VAL.PATH[-1] != "/" else self._C.DATA.VAL.PATH[:-1]
-        )
-        self._C.DATA.VAL.GT_PATH = (
-            self._C.DATA.VAL.GT_PATH if self._C.DATA.VAL.GT_PATH[-1] != "/" else self._C.DATA.VAL.GT_PATH[:-1]
-        )
-        self._C.DATA.TEST.PATH = (
-            self._C.DATA.TEST.PATH if self._C.DATA.TEST.PATH[-1] != "/" else self._C.DATA.TEST.PATH[:-1]
-        )
-        self._C.DATA.TEST.GT_PATH = (
-            self._C.DATA.TEST.GT_PATH if self._C.DATA.TEST.GT_PATH[-1] != "/" else self._C.DATA.TEST.GT_PATH[:-1]
-        )
+def update_dependencies(cfg) -> None:
+    """Update some variables that depend of changes made after merge the .cfg file provide by the user. That is,
+    this function should be called after YACS's merge_from_file().
+    """
+    call = getattr(cfg, "_C") if bool(getattr(cfg, "_C", False)) else cfg
+    # Remove possible / characters at the end of the paths
+    call.DATA.TRAIN.PATH = (
+        call.DATA.TRAIN.PATH if call.DATA.TRAIN.PATH[-1] != "/" else call.DATA.TRAIN.PATH[:-1]
+    )
+    call.DATA.TRAIN.GT_PATH = (
+        call.DATA.TRAIN.GT_PATH if call.DATA.TRAIN.GT_PATH[-1] != "/" else call.DATA.TRAIN.GT_PATH[:-1]
+    )
+    call.DATA.VAL.PATH = (
+        call.DATA.VAL.PATH if call.DATA.VAL.PATH[-1] != "/" else call.DATA.VAL.PATH[:-1]
+    )
+    call.DATA.VAL.GT_PATH = (
+        call.DATA.VAL.GT_PATH if call.DATA.VAL.GT_PATH[-1] != "/" else call.DATA.VAL.GT_PATH[:-1]
+    )
+    call.DATA.TEST.PATH = (
+        call.DATA.TEST.PATH if call.DATA.TEST.PATH[-1] != "/" else call.DATA.TEST.PATH[:-1]
+    )
+    call.DATA.TEST.GT_PATH = (
+        call.DATA.TEST.GT_PATH if call.DATA.TEST.GT_PATH[-1] != "/" else call.DATA.TEST.GT_PATH[:-1]
+    )
 
-        self._C.DATA.TRAIN.INSTANCE_CHANNELS_DIR = (
-            self._C.DATA.TRAIN.PATH
-            + "_"
-            + self._C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
-            + "_"
-            + self._C.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
-        )
-        self._C.DATA.TRAIN.INSTANCE_CHANNELS_MASK_DIR = (
-            self._C.DATA.TRAIN.GT_PATH
-            + "_"
-            + self._C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
-            + "_"
-            + self._C.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
-        )
-        self._C.DATA.TRAIN.DETECTION_MASK_DIR = self._C.DATA.TRAIN.GT_PATH + "_detection_masks"
-        self._C.DATA.TRAIN.SSL_SOURCE_DIR = self._C.DATA.TRAIN.PATH + "_ssl_source"
-        self._C.DATA.VAL.INSTANCE_CHANNELS_DIR = (
-            self._C.DATA.VAL.PATH
-            + "_"
-            + self._C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
-            + "_"
-            + self._C.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
-        )
-        self._C.DATA.VAL.INSTANCE_CHANNELS_MASK_DIR = (
-            self._C.DATA.VAL.GT_PATH
-            + "_"
-            + self._C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
-            + "_"
-            + self._C.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
-        )
-        # If value is not the default
-        self._C.DATA.VAL.DETECTION_MASK_DIR = self._C.DATA.VAL.GT_PATH + "_detection_masks"
-        self._C.DATA.VAL.SSL_SOURCE_DIR = self._C.DATA.VAL.PATH + "_ssl_source"
-        self._C.DATA.TEST.INSTANCE_CHANNELS_DIR = (
-            self._C.DATA.TEST.PATH
-            + "_"
-            + self._C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
-            + "_"
-            + self._C.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
-        )
-        self._C.DATA.TEST.INSTANCE_CHANNELS_MASK_DIR = (
-            self._C.DATA.TEST.GT_PATH
-            + "_"
-            + self._C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
-            + "_"
-            + self._C.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
-        )
-        # If value is not the default
-        if self._C.DATA.TEST.BINARY_MASKS == os.path.join("user_data", "test", "bin_mask"):
-            self._C.DATA.TEST.BINARY_MASKS = os.path.join(self._C.DATA.TEST.PATH, "..", "bin_mask")
-        self._C.DATA.TEST.DETECTION_MASK_DIR = self._C.DATA.TEST.GT_PATH + "_detection_masks"
-        self._C.DATA.TEST.SSL_SOURCE_DIR = self._C.DATA.TEST.PATH + "_ssl_source"
-        self._C.PATHS.TEST_FULL_GT_H5 = os.path.join(self._C.DATA.TEST.GT_PATH, "h5")
+    call.DATA.TRAIN.INSTANCE_CHANNELS_DIR = (
+        call.DATA.TRAIN.PATH
+        + "_"
+        + call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
+        + "_"
+        + call.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
+    )
+    call.DATA.TRAIN.INSTANCE_CHANNELS_MASK_DIR = (
+        call.DATA.TRAIN.GT_PATH
+        + "_"
+        + call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
+        + "_"
+        + call.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
+    )
+    call.DATA.TRAIN.DETECTION_MASK_DIR = call.DATA.TRAIN.GT_PATH + "_detection_masks"
+    call.DATA.TRAIN.SSL_SOURCE_DIR = call.DATA.TRAIN.PATH + "_ssl_source"
+    call.DATA.VAL.INSTANCE_CHANNELS_DIR = (
+        call.DATA.VAL.PATH
+        + "_"
+        + call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
+        + "_"
+        + call.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
+    )
+    call.DATA.VAL.INSTANCE_CHANNELS_MASK_DIR = (
+        call.DATA.VAL.GT_PATH
+        + "_"
+        + call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
+        + "_"
+        + call.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
+    )
+    # If value is not the default
+    call.DATA.VAL.DETECTION_MASK_DIR = call.DATA.VAL.GT_PATH + "_detection_masks"
+    call.DATA.VAL.SSL_SOURCE_DIR = call.DATA.VAL.PATH + "_ssl_source"
+    call.DATA.TEST.INSTANCE_CHANNELS_DIR = (
+        call.DATA.TEST.PATH
+        + "_"
+        + call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
+        + "_"
+        + call.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
+    )
+    call.DATA.TEST.INSTANCE_CHANNELS_MASK_DIR = (
+        call.DATA.TEST.GT_PATH
+        + "_"
+        + call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
+        + "_"
+        + call.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
+    )
+    # If value is not the default
+    if call.DATA.TEST.BINARY_MASKS == os.path.join("user_data", "test", "bin_mask"):
+        call.DATA.TEST.BINARY_MASKS = os.path.join(call.DATA.TEST.PATH, "..", "bin_mask")
+    call.DATA.TEST.DETECTION_MASK_DIR = call.DATA.TEST.GT_PATH + "_detection_masks"
+    call.DATA.TEST.SSL_SOURCE_DIR = call.DATA.TEST.PATH + "_ssl_source"
+    call.PATHS.TEST_FULL_GT_H5 = os.path.join(call.DATA.TEST.GT_PATH, "h5")
 
-        self._C.PATHS.TRAIN_INSTANCE_CHANNELS_CHECK = os.path.join(
-            self._C.PATHS.RESULT_DIR.PATH,
-            "train_" + self._C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS + "_instance_channels",
-        )
-        self._C.PATHS.VAL_INSTANCE_CHANNELS_CHECK = os.path.join(
-            self._C.PATHS.RESULT_DIR.PATH,
-            "val_" + self._C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS + "_instance_channels",
-        )
-        self._C.PATHS.TEST_INSTANCE_CHANNELS_CHECK = os.path.join(
-            self._C.PATHS.RESULT_DIR.PATH,
-            "test_" + self._C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS + "_instance_channels",
-        )
+    call.PATHS.TRAIN_INSTANCE_CHANNELS_CHECK = os.path.join(
+        call.PATHS.RESULT_DIR.PATH,
+        "train_" + call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS + "_instance_channels",
+    )
+    call.PATHS.VAL_INSTANCE_CHANNELS_CHECK = os.path.join(
+        call.PATHS.RESULT_DIR.PATH,
+        "val_" + call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS + "_instance_channels",
+    )
+    call.PATHS.TEST_INSTANCE_CHANNELS_CHECK = os.path.join(
+        call.PATHS.RESULT_DIR.PATH,
+        "test_" + call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS + "_instance_channels",
+    )

@@ -157,6 +157,32 @@ class Widget_conditions():
                         "I have a model trained with BiaPy"
                     ],
                 },
+            "MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME": 
+                {
+                    "MODEL__BMZ__EXPORT__ENABLE__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                    "LOAD_PRETRAINED_MODEL__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                    "MODEL__SOURCE__INPUT": 
+                    [
+                        "I want to check other online sources"
+                    ],
+                },
+            "MODEL__BMZ__EXPORT__FRAME": 
+                {
+                    "MODEL__BMZ__EXPORT__ENABLE__INPUT": 
+                    [
+                        "Yes"
+                    ],
+                    "MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INPUT": 
+                    [
+                        "No"
+                    ],
+                },
             "train_tab_widget": 
                 {
                     "TRAIN__ENABLE__INPUT": 

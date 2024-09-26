@@ -167,6 +167,7 @@ class MainWindow(QMainWindow):
         self.ui.goptions_browse_yaml_path_bn.clicked.connect(lambda: examine(self, "goptions_browse_yaml_path_input", False))
         self.ui.checkpoint_file_path_browse_bn.clicked.connect(lambda: examine(self, "PATHS__CHECKPOINT_FILE__INPUT"))
         self.ui.MODEL__BMZ__SOURCE_MODEL_ID__BN.clicked.connect(lambda: check_models_from_other_sources(self, from_wizard=False))
+        self.ui.MODEL__BMZ__EXPORT__DOCUMENTATION__BN.clicked.connect(lambda: examine(self, "MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT"))
 
         # Train page buttons 
         self.ui.DATA__VAL__CROSS_VAL_NFOLD__INPUT.setValidator(self.int_validator)
@@ -293,13 +294,29 @@ class MainWindow(QMainWindow):
             ["MODEL__SOURCE__LABEL","MODEL__SOURCE__INFO","MODEL__SOURCE__INPUT",
              "checkpoint_file_path_browse_label", "PATHS__CHECKPOINT_FILE__INFO","PATHS__CHECKPOINT_FILE__INPUT","checkpoint_file_path_browse_bn", 
              "checkpoint_loading_opt_label", "checkpoint_loading_opt_frame", 
-             "MODEL__BMZ__SOURCE_MODEL_ID__LABEL","MODEL__BMZ__SOURCE_MODEL_ID__INFO","MODEL__BMZ__SOURCE_MODEL_ID__INPUT","MODEL__BMZ__SOURCE_MODEL_ID__BN"]))
+             "MODEL__BMZ__SOURCE_MODEL_ID__LABEL","MODEL__BMZ__SOURCE_MODEL_ID__INFO","MODEL__BMZ__SOURCE_MODEL_ID__INPUT","MODEL__BMZ__SOURCE_MODEL_ID__BN"]
+             , widgets_to_set_cond=
+            [
+                (["MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INPUT", "No"], ["No"])
+            ], updated_widget="LOAD_PRETRAINED_MODEL__INPUT"))
 
         self.ui.MODEL__SOURCE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
             ["checkpoint_file_path_browse_label", "PATHS__CHECKPOINT_FILE__INFO","PATHS__CHECKPOINT_FILE__INPUT","checkpoint_file_path_browse_bn", 
              "checkpoint_loading_opt_label", "checkpoint_loading_opt_frame", 
-             "MODEL__BMZ__SOURCE_MODEL_ID__LABEL","MODEL__BMZ__SOURCE_MODEL_ID__INFO","MODEL__BMZ__SOURCE_MODEL_ID__INPUT","MODEL__BMZ__SOURCE_MODEL_ID__BN",]))
+             "MODEL__BMZ__SOURCE_MODEL_ID__LABEL","MODEL__BMZ__SOURCE_MODEL_ID__INFO","MODEL__BMZ__SOURCE_MODEL_ID__INPUT","MODEL__BMZ__SOURCE_MODEL_ID__BN",
+             "MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME",
+             ], widgets_to_set_cond=
+            [
+                (["MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INPUT", "No"], ["I have a model trained with BiaPy"])
+            ], updated_widget="MODEL__SOURCE__INPUT"))
         
+        self.ui.MODEL__BMZ__EXPORT__ENABLE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
+            ["MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME", "MODEL__BMZ__EXPORT__FRAME"]))
+        self.ui.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
+            ["MODEL__BMZ__EXPORT__FRAME"]))
+
+
+
         self.ui.job_name_input.textChanged.connect(lambda: mark_syntax_error(self, "job_name_input", ["empty"]))   
         self.ui.goptions_yaml_name_input.textChanged.connect(lambda: mark_syntax_error(self, "goptions_yaml_name_input", ["empty"]))
         self.ui.goptions_browse_yaml_path_input.textChanged.connect(lambda: mark_syntax_error(self, "goptions_browse_yaml_path_input", ["empty"]))      

@@ -446,6 +446,9 @@ class UIFunction(MainWindow):
         main_window.ui.checkpoint_loading_opt_label.setVisible(False)
         main_window.ui.checkpoint_loading_opt_frame.setVisible(False)
 
+        main_window.ui.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME.setVisible(False)
+        main_window.ui.MODEL__BMZ__EXPORT__FRAME.setVisible(False)
+
         main_window.ui.SYSTEM__NUM_CPUS__INPUT.addItem("All")
         for i in range(multiprocessing.cpu_count()):
             main_window.ui.SYSTEM__NUM_CPUS__INPUT.addItem(str(i+1))
