@@ -819,7 +819,7 @@ class Settings:
             ],
         }
         self.settings["wizard_questions"] += [
-            "What is the median object width/height in pixels?",
+            "What is the average object width/height in pixels?",
         ]
         self.settings["wizard_possible_answers"] += [
             [

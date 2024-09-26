@@ -1688,8 +1688,7 @@ def move_between_workflows(main_window, to_page, dims=None):
         ["test_exists_gt_label", "DATA__TEST__LOAD_GT__INPUT", "DATA__TEST__LOAD_GT__INFO", 
          "test_data_gt_label", "DATA__TEST__GT_PATH__INPUT", "DATA__TEST__GT_PATH__INFO", "test_data_gt_input_browse_bn",
          "train_gt_label", "train_gt_info", "DATA__TRAIN__GT_PATH__INPUT", "train_data_gt_input_browse_bn",
-         "validation_data_gt_label", "validation_data_gt_info", "DATA__VAL__GT_PATH__INPUT", "val_data_gt_input_browse_bn",
-         "MODEL__N_CLASSES__LABEL", "MODEL__N_CLASSES__INFO", "MODEL__N_CLASSES__INPUT"])
+         "validation_data_gt_label", "validation_data_gt_info", "DATA__VAL__GT_PATH__INPUT", "val_data_gt_input_browse_bn"])
 
     actual_name = get_text(main_window.ui.job_name_input)
     if actual_name in ["", "my_semantic_segmentation", "my_instance_segmentation", "my_detection", "my_denoising", \
@@ -2461,8 +2460,17 @@ def create_yaml_file(main_window):
             biapy_config['MODEL']['CONVNEXT_LAYER_SCALE'] = float(get_text(main_window.ui.MODEL__CONVNEXT_LAYER_SCALE__INPUT))
             biapy_config['MODEL']['CONVNEXT_STEM_K_SIZE'] = int(get_text(main_window.ui.MODEL__CONVNEXT_STEM_K_SIZE__INPUT))
 
-    if workflow_key_name in ["SEMANTIC_SEG","INSTANCE_SEG","DETECTION","CLASSIFICATION"] and int(get_text(main_window.ui.MODEL__N_CLASSES__INPUT)) != 2:
-        classes = int(get_text(main_window.ui.MODEL__N_CLASSES__INPUT))
+    if workflow_key_name in ["SEMANTIC_SEG","INSTANCE_SEG","DETECTION","CLASSIFICATION"]:
+        classes = 2
+        if workflow_key_name == "SEMANTIC_SEG" and int(get_text(main_window.ui.MODEL__N_CLASSES__INPUT)) != 2:
+            classes = int(get_text(main_window.ui.MODEL__N_CLASSES__INPUT))
+        elif workflow_key_name == "INSTANCE_SEG" and int(get_text(main_window.ui.MODEL__N_CLASSES__INST_SEG__INPUT)) != 2:
+            classes = int(get_text(main_window.ui.MODEL__N_CLASSES__INST_SEG__INPUT))
+        elif workflow_key_name == "DETECTION" and int(get_text(main_window.ui.MODEL__N_CLASSES__DET__INPUT)) != 2:
+            classes = int(get_text(main_window.ui.MODEL__N_CLASSES__DET__INPUT))
+        else: # CLASSIFICATION
+            classes = int(get_text(main_window.ui.MODEL__N_CLASSES__CLS__INPUT))
+
         if classes == 1: 
             classes = 2
         biapy_config['MODEL']['N_CLASSES'] = classes
@@ -3117,7 +3125,14 @@ class load_yaml_to_GUI_engine(QObject):
                     # Using same field as BMZ
                     other_widgets_to_set.append("MODEL__BMZ__SOURCE_MODEL_ID__INPUT")
                     other_widgets_values_to_set.append(v)                     
-                   
+                elif widget_name == "MODEL__N_CLASSES__INPUT": 
+                    other_widgets_to_set.append("MODEL__N_CLASSES__INST_SEG__INPUT")
+                    other_widgets_values_to_set.append(v)    
+                    other_widgets_to_set.append("MODEL__N_CLASSES__DET__INPUT")
+                    other_widgets_values_to_set.append(v)    
+                    other_widgets_to_set.append("MODEL__N_CLASSES__CLS__INPUT")
+                    other_widgets_values_to_set.append(v)    
+
                 if "DATA__PREPROCESS__" in widget_name and widget_name not in ["DATA__PREPROCESS__TRAIN__INPUT", \
                     "DATA__PREPROCESS__VAL__INPUT", "DATA__PREPROCESS__TEST__INPUT"]:
                     if self.train_preprocessing or self.val_preprocessing:

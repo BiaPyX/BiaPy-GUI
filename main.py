@@ -108,7 +108,6 @@ class MainWindow(QMainWindow):
         self.ui.bn_run_biapy.clicked.connect(lambda: change_page(self,'bn_run_biapy',99))
 
         # Home page buttons 
-        self.ui.continue_yaml_bn.clicked.connect(lambda: change_page(self,'bn_run_biapy',99))
         self.ui.create_yaml_bn.clicked.connect(lambda: change_page(self, 'bn_workflow', 99))
         self.ui.load_yaml_bn.clicked.connect(lambda: load_yaml_to_GUI(self))
         self.ui.biapy_github_bn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://github.com/BiaPyX/BiaPy")))
@@ -176,6 +175,10 @@ class MainWindow(QMainWindow):
         self.ui.TRAIN__ACCUM_ITER__INPUT.setValidator(self.int_validator)
         # self.ui.TRAIN__PATIENCE__INPUT.setValidator(self.float_validator)
         self.ui.MODEL__N_CLASSES__INPUT.setValidator(self.int_validator)
+        self.ui.MODEL__N_CLASSES__INST_SEG__INPUT.setValidator(self.int_validator)
+        self.ui.MODEL__N_CLASSES__DET__INPUT.setValidator(self.int_validator)
+        self.ui.MODEL__N_CLASSES__CLS__INPUT.setValidator(self.int_validator)
+        
         # self.ui.DATA__NORMALIZATION__CUSTOM_MEAN__INPUT.setValidator(self.float_validator)
         # self.ui.DATA__NORMALIZATION__CUSTOM_STD__INPUT.setValidator(self.float_validator)
         self.ui.DATA__PREPROCESS__RESIZE__CVAL__INPUT.setValidator(self.float_validator)

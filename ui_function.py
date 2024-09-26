@@ -174,10 +174,12 @@ class UIFunction(MainWindow):
         
         def update_ani(self):
             main_window.ui.wizard_question_wizard_icon.setIcon(QIcon(main_window.cfg.settings["wizard_animation_img"].currentPixmap()))
+            main_window.ui.main_window_wizard_question_wizard_icon.setIcon(QIcon(main_window.cfg.settings["wizard_animation_img"].currentPixmap()))
             
         main_window.cfg.settings['wizard_animation_img'].start()
         main_window.cfg.settings["wizard_animation_img"].frameChanged.connect(update_ani)
         main_window.ui.wizard_question_wizard_icon.setIcon(main_window.cfg.settings["wizard_animation_img"].currentPixmap())
+        main_window.ui.main_window_wizard_question_wizard_icon.setIcon(main_window.cfg.settings["wizard_animation_img"].currentPixmap())
 
         main_window.wizard_toc_model = QStandardItemModel()
         UIFunction.configure_from_list(main_window.wizard_toc_model, main_window.cfg.settings["wizard_sections"])     
