@@ -116,7 +116,8 @@ class MainWindow(QMainWindow):
         self.ui.biapy_doc_bn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://biapy.readthedocs.io/en/latest/")))
         self.ui.biapy_notebooks_bn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://github.com/BiaPyX/BiaPy/tree/master/notebooks")))
         self.ui.biapy_citation_bn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://github.com/BiaPyX/BiaPy#citation")))
-
+        self.ui.main_window_wizard_question_wizard_icon.clicked.connect(lambda: change_page(self, 'bn_wizard', 99))
+        
         # Wizard page buttons
         self.ui.wizard_start_bn.clicked.connect(lambda: start_wizard_questionary(self))
         self.ui.wizard_back_bn.clicked.connect(lambda: change_wizard_page(self, self.cfg.settings['wizard_question_index'], False, added_val=-1))
