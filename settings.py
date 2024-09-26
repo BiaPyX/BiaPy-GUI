@@ -981,7 +981,7 @@ class Settings:
             "or_cond": [],
         }
         self.settings["wizard_questions"] += [
-            "Please insert training raw image folder",
+            "Could you please specify the location of the training raw image folder? After that, click on the 'Check data' button to analyze the data.",
         ]
         self.settings["wizard_possible_answers"] += [["PATH"]]
         self.settings["wizard_variable_to_map"]["Q9"] = {}
@@ -1040,7 +1040,7 @@ class Settings:
             ],
         }
         self.settings["wizard_questions"] += [
-            "Please insert training ground truth folder",
+            "Could you please specify the location of the training ground truth (target) folder? After that, click on the 'Check data' button to analyze the data.",
         ]
         self.settings["wizard_possible_answers"] += [["PATH"]]
         self.settings["wizard_variable_to_map"]["Q10"] = {}
@@ -1098,7 +1098,7 @@ class Settings:
             "or_cond": [],
         }
         self.settings["wizard_questions"] += [
-            "Please insert test raw image folder",
+            "Could you please specify the location of the test raw image folder? After that, click on the 'Check data' button to analyze the data.",
         ]
         self.settings["wizard_possible_answers"] += [["PATH"]]
         self.settings["wizard_variable_to_map"]["Q11"] = {}
@@ -1158,7 +1158,7 @@ class Settings:
             ],
         }
         self.settings["wizard_questions"] += [
-            "Do you have test target data?",
+            "Do you have test ground truth (target) data?",
         ]
         self.settings["wizard_possible_answers"] += [
             [
@@ -1220,7 +1220,7 @@ class Settings:
             ],
         }
         self.settings["wizard_questions"] += [
-            "Please insert test ground truth folder",
+            "Could you please specify the location of the test ground truth (target) folder? After that, click on the 'Check data' button to analyze the data.",
         ]
         self.settings["wizard_possible_answers"] += [["PATH"]]
         self.settings["wizard_variable_to_map"]["Q13"] = {}
