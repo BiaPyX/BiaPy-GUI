@@ -514,9 +514,9 @@ def ensure_2d_shape(img, path=None):
     """
     if img.ndim > 3:
         if path is not None:
-            m = "Read image seems to be 3D:\n{}.\nPath:\n{}".format(img.shape, path)
+            m = "Read image seems to be 3D. Image shape is: {}.\nImage path:\n{}".format(img.shape, path)
         else:
-            m = "Read image seems to be 3D:\n{}".format(img.shape)
+            m = "Read image seems to be 3D. Image shape is: {}".format(img.shape)
         raise ValueError(m)
 
     if img.ndim == 2:
@@ -545,9 +545,9 @@ def ensure_3d_shape(img, path=None):
     """
     if img.ndim < 3:
         if path is not None:
-            m = "Read image seems to be 2D:\n{}.\nPath:\n{}".format(img.shape, path)
+            m = "Read image seems to be 2D. Image shape is: {}.\nImage path:\n{}".format(img.shape, path)
         else:
-            m = "Read image seems to be 2D:\n{}".format(img.shape)
+            m = "Read image seems to be 2D. Image shape is: {}".format(img.shape)
         raise ValueError(m)
 
     if img.ndim == 3:
