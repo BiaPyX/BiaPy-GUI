@@ -1962,13 +1962,13 @@ def create_yaml_file(main_window):
                 biapy_config['PROBLEM']['INSTANCE_SEG']['SEED_MORPH_SEQUENCE'] = ast.literal_eval(get_text(main_window.ui.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT) )
             except: 
                 main_window.dialog_exec("There was an error with instance segmentation seed morph sequence field (PROBLEM.INSTANCE_SEG.SEED_MORPH_SEQUENCE). Please check its syntax!", reason="error")
-                return False, False
+                return True, False
         if get_text(main_window.ui.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INPUT) != "[]":
             try:
                 biapy_config['PROBLEM']['INSTANCE_SEG']['SEED_MORPH_RADIUS'] =  ast.literal_eval(get_text(main_window.ui.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INPUT))
             except:
                 main_window.dialog_exec("There was an error with instance segmentation seed morph radius field (PROBLEM.INSTANCE_SEG.SEED_MORPH_RADIUS). Please check its syntax!", reason="error")
-                return False, False
+                return True, False
         if get_text(main_window.ui.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INPUT) == "Yes":
             biapy_config['PROBLEM']['INSTANCE_SEG']['ERODE_AND_DILATE_FOREGROUND'] = True
             biapy_config['PROBLEM']['INSTANCE_SEG']['FORE_EROSION_RADIUS'] = int(get_text(main_window.ui.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INPUT))
@@ -1983,7 +1983,7 @@ def create_yaml_file(main_window):
             biapy_config['PROBLEM']['DETECTION']['CENTRAL_POINT_DILATION'] = ast.literal_eval(get_text(main_window.ui.PROBLEM__DETECTION__CENTRAL_POINT_DILATION__INPUT))
         except: 
             main_window.dialog_exec("There was an error with detection central point dilation field (PROBLEM.DETECTION.CENTRAL_POINT_DILATION). Please check its syntax!", reason="error")
-            return False, False
+            return True, False
         biapy_config['PROBLEM']['DETECTION']['CHECK_POINTS_CREATED'] = True if get_text(main_window.ui.PROBLEM__DETECTION__CHECK_POINTS_CREATED__INPUT) == "Yes" else False
         if get_text(main_window.ui.PROBLEM__DETECTION__DATA_CHECK_MW__INPUT) == "Yes" and get_text(main_window.ui.TEST__POST_PROCESSING__DET_WATERSHED__INPUT) == "Yes":
             biapy_config['PROBLEM']['DETECTION']['DATA_CHECK_MW'] = True
@@ -2071,7 +2071,7 @@ def create_yaml_file(main_window):
                 biapy_config['DATA']['PREPROCESS']['MEDIAN_BLUR']['KERNEL_SIZE'] = ast.literal_eval(get_text(main_window.ui.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT))
             except: 
                 main_window.dialog_exec("There was an error with preprocessing median blur kernel size field (DATA.PREPROCESS.MEDIAN_BLUR.KERNEL_SIZE). Please check its syntax!", reason="error")
-                return False, False
+                return True, False
 
         if get_text(main_window.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT) == "Yes":
             biapy_config['DATA']['PREPROCESS']['MATCH_HISTOGRAM'] = {}
@@ -2138,7 +2138,7 @@ def create_yaml_file(main_window):
                     biapy_config['DATA']['PREPROCESS']['MEDIAN_BLUR']['KERNEL_SIZE'] = ast.literal_eval(get_text(main_window.ui.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INPUT))
                 except: 
                     main_window.dialog_exec("There was an error with preprocessing median blur kernel size field (DATA.PREPROCESS.MEDIAN_BLUR.KERNEL_SIZE). Please check its syntax!", reason="error")
-                    return False, False
+                    return True, False
 
             if get_text(main_window.ui.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__TEST__INPUT) == "Yes":
                 biapy_config['DATA']['PREPROCESS']['MATCH_HISTOGRAM'] = {}
@@ -2226,17 +2226,17 @@ def create_yaml_file(main_window):
                 biapy_config['DATA']['TRAIN']['FILTER_SAMPLES']['PROPS'] = ast.literal_eval(get_text(main_window.ui.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT))
             except: 
                 main_window.dialog_exec("There was an error with train data filter samples property array field (DATA.TRAIN.FILTER_SAMPLES.PROPS). Please check its syntax!", reason="error")
-                return False, False
+                return True, False
             try:
                 biapy_config['DATA']['TRAIN']['FILTER_SAMPLES']['VALUES'] = ast.literal_eval(get_text(main_window.ui.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT))
             except: 
                 main_window.dialog_exec("There was an error with train data filter samples values array field (DATA.TRAIN.FILTER_SAMPLES.VALUES). Please check its syntax!", reason="error")
-                return False, False
+                return True, False
             try:
                 biapy_config['DATA']['TRAIN']['FILTER_SAMPLES']['SIGNS'] = ast.literal_eval(get_text(main_window.ui.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT))
             except: 
                 main_window.dialog_exec("There was an error with train data filter samples signs array field (DATA.TRAIN.FILTER_SAMPLES.SIGNS). Please check its syntax!", reason="error")
-                return False, False
+                return True, False
 
         # Validation
         biapy_config['DATA']['VAL'] = {}
@@ -2280,17 +2280,17 @@ def create_yaml_file(main_window):
                 biapy_config['DATA']['VAL']['FILTER_SAMPLES']['PROPS'] = ast.literal_eval(get_text(main_window.ui.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT))
             except: 
                 main_window.dialog_exec("There was an error with train data filter samples prperty array field (DATA.TRAIN.FILTER_SAMPLES.PROPS). Please check its syntax!", reason="error")
-                return False, False
+                return True, False
             try:
                 biapy_config['DATA']['VAL']['FILTER_SAMPLES']['VALUES'] = ast.literal_eval(get_text(main_window.ui.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT))
             except: 
                 main_window.dialog_exec("There was an error with train data filter samples values array field (DATA.TRAIN.FILTER_SAMPLES.VALUES). Please check its syntax!", reason="error")
-                return False, False
+                return True, False
             try:
                 biapy_config['DATA']['VAL']['FILTER_SAMPLES']['SIGNS'] = ast.literal_eval(get_text(main_window.ui.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT))
             except: 
                 main_window.dialog_exec("There was an error with train data filter samples signs array field (DATA.TRAIN.FILTER_SAMPLES.SIGNS). Please check its syntax!", reason="error")
-                return False, False
+                return True, False
     # Test
     if get_text(main_window.ui.TEST__ENABLE__INPUT) == "Yes":
         biapy_config['DATA']['TEST'] = {}
@@ -2324,17 +2324,17 @@ def create_yaml_file(main_window):
             biapy_config['DATA']['TEST']['FILTER_SAMPLES']['PROPS'] = ast.literal_eval(get_text(main_window.ui.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT))
         except: 
             main_window.dialog_exec("There was an error with train data filter samples properties array field (DATA.TRAIN.FILTER_SAMPLES.PROPS). Please check its syntax!", reason="error")
-            return False, False
+            return True, False
         try:
             biapy_config['DATA']['TEST']['FILTER_SAMPLES']['VALUES'] = ast.literal_eval(get_text(main_window.ui.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT))
         except: 
             main_window.dialog_exec("There was an error with train data filter samples values array field (DATA.TRAIN.FILTER_SAMPLES.VALUES). Please check its syntax!", reason="error")
-            return False, False
+            return True, False
         try:
             biapy_config['DATA']['TEST']['FILTER_SAMPLES']['SIGNS'] = ast.literal_eval(get_text(main_window.ui.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT))
         except: 
             main_window.dialog_exec("There was an error with train data filter samples signs array field (DATA.TRAIN.FILTER_SAMPLES.SIGNS). Please check its syntax!", reason="error")
-            return False, False
+            return True, False
 
     # Data augmentation (DA)
     biapy_config['AUGMENTOR'] = {}
@@ -2466,12 +2466,12 @@ def create_yaml_file(main_window):
             biapy_config['MODEL']['FEATURE_MAPS'] = ast.literal_eval(get_text(main_window.ui.MODEL__FEATURE_MAPS__INPUT))
         except: 
             main_window.dialog_exec("There was an error in model's feature maps field (MODEL.FEATURE_MAPS). Please check its syntax!", reason="error")
-            return False, False
+            return True, False
         try:
             biapy_config['MODEL']['DROPOUT_VALUES'] = ast.literal_eval(get_text(main_window.ui.MODEL__DROPOUT_VALUES__INPUT)) 
         except: 
             main_window.dialog_exec("There was an error in model's dropout values field (MODEL.DROPOUT_VALUES). Please check its syntax!", reason="error")
-            return False, False
+            return True, False
         if get_text(main_window.ui.MODEL__NORMALIZATION__INPUT) != "bn":
             biapy_config['MODEL']['NORMALIZATION'] = get_text(main_window.ui.MODEL__NORMALIZATION__INPUT) 
         if int(get_text(main_window.ui.MODEL__KERNEL_SIZE__INPUT)) != 3:
@@ -2487,13 +2487,13 @@ def create_yaml_file(main_window):
                 biapy_config['MODEL']['Z_DOWN'] = ast.literal_eval(get_text(main_window.ui.MODEL__Z_DOWN__INPUT)) 
             except: 
                 main_window.dialog_exec("There was an error in model's z axis downsampling  field (MODEL.Z_DOWN). Please check its syntax!", reason="error")
-                return False, False
+                return True, False
         if get_text(main_window.ui.MODEL__ISOTROPY__INPUT) != "[True, True, True, True, True]":
             try:
                 biapy_config['MODEL']['ISOTROPY'] = ast.literal_eval(get_text(main_window.ui.MODEL__ISOTROPY__INPUT)) 
             except: 
                 main_window.dialog_exec("There was an error in model's isotropy field (MODEL.ISOTROPY). Please check its syntax!", reason="error")
-                return False, False
+                return True, False
         if get_text(main_window.ui.MODEL__LAGER_IO__INPUT) == "Yes":
             biapy_config['MODEL']['LAGER_IO'] = True
         if workflow_key_name == "SUPER_RESOLUTION" and get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "3D": # SR
@@ -2530,7 +2530,7 @@ def create_yaml_file(main_window):
                 biapy_config['MODEL']['CONVNEXT_LAYERS'] = ast.literal_eval(get_text(main_window.ui.MODEL__CONVNEXT_LAYERS__INPUT))
             except: 
                 main_window.dialog_exec("There was an error in model's convnext layers field (MODEL.CONVNEXT_LAYERS). Please check its syntax!", reason="error")
-                return False, False
+                return True, False
             biapy_config['MODEL']['CONVNEXT_SD_PROB'] = float(get_text(main_window.ui.MODEL__CONVNEXT_SD_PROB__INPUT))
             biapy_config['MODEL']['CONVNEXT_LAYER_SCALE'] = float(get_text(main_window.ui.MODEL__CONVNEXT_LAYER_SCALE__INPUT))
             biapy_config['MODEL']['CONVNEXT_STEM_K_SIZE'] = int(get_text(main_window.ui.MODEL__CONVNEXT_STEM_K_SIZE__INPUT))
@@ -2575,39 +2575,41 @@ def create_yaml_file(main_window):
                     biapy_config['MODEL']["SOURCE"] = "torchvision"
                     biapy_config['MODEL']['TORCHVISION_MODEL_NAME'] = str(model)
 
-    if get_text(main_window.ui.MODEL__BMZ__EXPORT__ENABLE__INPUT) == "Yes":
-        if "BMZ" not in biapy_config['MODEL']:
-            biapy_config['MODEL']['BMZ'] = {} 
-        biapy_config['MODEL']['BMZ']["EXPORT"] = {}    
-        biapy_config['MODEL']['BMZ']["EXPORT"]["ENABLE"] = True
-        if get_text(main_window.ui.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INPUT) == "Yes": 
-            biapy_config['MODEL']['BMZ']["EXPORT"]["REUSE_BMZ_CONFIG"] = True 
-        else:
-            biapy_config['MODEL']['BMZ']["EXPORT"]["REUSE_BMZ_CONFIG"] = False
-            biapy_config['MODEL']['BMZ']["EXPORT"]["MODEL_NAME"] = get_text(main_window.ui.MODEL__BMZ__EXPORT__MODEL_NAME__INPUT)
-            biapy_config['MODEL']['BMZ']["EXPORT"]["DESCRIPTION"] = get_text(main_window.ui.MODEL__BMZ__EXPORT__DESCRIPTION__INPUT)
-            biapy_config['MODEL']['BMZ']["EXPORT"]["LICENSE"] = get_text(main_window.ui.MODEL__BMZ__EXPORT__LICENSE__INPUT)
-            if get_text(main_window.ui.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT) != "":
-                biapy_config['MODEL']['BMZ']["EXPORT"]["DOCUMENTATION"] = get_text(main_window.ui.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT)
-            if get_text(main_window.ui.MODEL__BMZ__EXPORT__AUTHORS__INPUT) != "":
-                try:
-                    biapy_config['MODEL']['BMZ']["EXPORT"]["AUTHORS"] = ast.literal_eval(get_text(main_window.ui.MODEL__BMZ__EXPORT__AUTHORS__INPUT))
-                except:
-                    main_window.dialog_exec("There was an error with BMZ authors field (MODEL.BMZ.EXPORT.AUTHORS). Please check its syntax!", reason="error")
-                    return False, False
-            if get_text(main_window.ui.MODEL__BMZ__EXPORT__TAGS__INPUT) != "":
-                try:
-                    biapy_config['MODEL']['BMZ']["EXPORT"]["TAGS"] = ast.literal_eval(get_text(main_window.ui.MODEL__BMZ__EXPORT__TAGS__INPUT))
-                except: 
-                    main_window.dialog_exec("There was an error with BMZ tags field (MODEL.BMZ.EXPORT.TAGS). Please check its syntax!", reason="error")
-                    return False, False
-            if get_text(main_window.ui.MODEL__BMZ__EXPORT__CITE__INPUT) != "":
-                try:
-                    biapy_config['MODEL']['BMZ']["EXPORT"]["CITE"] = ast.literal_eval(get_text(main_window.ui.MODEL__BMZ__EXPORT__CITE__INPUT))
-                except:
-                    main_window.dialog_exec("There was an error with BMZ citation field (MODEL.BMZ.EXPORT.CITE). Please check its syntax!", reason="error")
-                    return False, False
-    
+                # Set BMZ variables 
+                if biapy_config['MODEL']["SOURCE"] == "bmz" and get_text(main_window.ui.MODEL__BMZ__EXPORT__ENABLE__INPUT) == "Yes":
+                    biapy_config['MODEL']['BMZ']["EXPORT"] = {}    
+                    biapy_config['MODEL']['BMZ']["EXPORT"]["ENABLE"] = True
+                    if get_text(main_window.ui.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INPUT) == "Yes": 
+                        biapy_config['MODEL']['BMZ']["EXPORT"]["REUSE_BMZ_CONFIG"] = True 
+                    else:
+                        biapy_config['MODEL']['BMZ']["EXPORT"]["REUSE_BMZ_CONFIG"] = False
+                        biapy_config['MODEL']['BMZ']["EXPORT"]["MODEL_NAME"] = get_text(main_window.ui.MODEL__BMZ__EXPORT__MODEL_NAME__INPUT)
+                        biapy_config['MODEL']['BMZ']["EXPORT"]["DESCRIPTION"] = get_text(main_window.ui.MODEL__BMZ__EXPORT__DESCRIPTION__INPUT)
+                        biapy_config['MODEL']['BMZ']["EXPORT"]["LICENSE"] = get_text(main_window.ui.MODEL__BMZ__EXPORT__LICENSE__INPUT)
+                        if get_text(main_window.ui.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT) != "":
+                            biapy_config['MODEL']['BMZ']["EXPORT"]["DOCUMENTATION"] = get_text(main_window.ui.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT)
+                        if get_text(main_window.ui.MODEL__BMZ__EXPORT__AUTHORS__INPUT) != "":
+                            try:
+                                biapy_config['MODEL']['BMZ']["EXPORT"]["AUTHORS"] = ast.literal_eval(get_text(main_window.ui.MODEL__BMZ__EXPORT__AUTHORS__INPUT))
+                            except:
+                                main_window.dialog_exec("There was an error with BMZ authors field (MODEL.BMZ.EXPORT.AUTHORS). Please check its syntax!", reason="error")
+                                return True, False
+                        if get_text(main_window.ui.MODEL__BMZ__EXPORT__TAGS__INPUT) != "":
+                            try:
+                                biapy_config['MODEL']['BMZ']["EXPORT"]["TAGS"] = ast.literal_eval(get_text(main_window.ui.MODEL__BMZ__EXPORT__TAGS__INPUT))
+                            except: 
+                                main_window.dialog_exec("There was an error with BMZ tags field (MODEL.BMZ.EXPORT.TAGS). Please check its syntax!", reason="error")
+                                return True, False
+                        if get_text(main_window.ui.MODEL__BMZ__EXPORT__CITE__INPUT) != "":
+                            try:
+                                biapy_config['MODEL']['BMZ']["EXPORT"]["CITE"] = ast.literal_eval(get_text(main_window.ui.MODEL__BMZ__EXPORT__CITE__INPUT))
+                            except:
+                                main_window.dialog_exec("There was an error with BMZ citation field (MODEL.BMZ.EXPORT.CITE). Please check its syntax!", reason="error")
+                                return True, False
+            else:
+                main_window.dialog_exec("Please, select an external model by clicking on 'Check models' button in 'Generic options' window.", reason="error")
+                return True, False
+        
     # Loss
     loss_name = main_window.cfg.translate_names(get_text(main_window.ui.LOSS__TYPE__INPUT), key_str="losses")
     biapy_config['LOSS'] = {}
@@ -2616,7 +2618,7 @@ def create_yaml_file(main_window):
         biapy_config['LOSS']['WEIGHTS'] = ast.literal_eval(get_text(main_window.ui.LOSS__WEIGHTS__INPUT)) 
     except:
         main_window.dialog_exec("There was an error with loss weights field (LOSS.WEIGHTS). Please check its syntax!", reason="error")
-        return False, False
+        return True, False
     biapy_config['LOSS']['CLASS_REBALANCE'] = True if get_text(main_window.ui.LOSS__CLASS_REBALANCE__INPUT) == "Yes" else False
     
     # Metrics 
@@ -2625,7 +2627,7 @@ def create_yaml_file(main_window):
         biapy_config['TRAIN']['METRICS'] = ast.literal_eval(get_text(main_window.ui.TRAIN__METRICS__INPUT))
     except:
         main_window.dialog_exec("There was an error with train metrics field (TRAIN.METRICS). Please check its syntax!", reason="error")
-        return False, False
+        return True, False
 
     # Training phase
     biapy_config['TRAIN'] = {}
@@ -2707,13 +2709,13 @@ def create_yaml_file(main_window):
                 biapy_config['TEST']['MATCHING_STATS_THS'] = ast.literal_eval(get_text(main_window.ui.TEST__MATCHING_STATS_THS__INPUT)) 
             except:
                 main_window.dialog_exec("There was an error with test matching start thresholds field (TEST.MATCHING_STATS_THS). Please check its syntax!", reason="error")
-                return False, False
+                return True, False
             if get_text(main_window.ui.TEST__MATCHING_STATS_THS_COLORED_IMG__INPUT) != "[0.3]":
                 try:
                     biapy_config['TEST']['MATCHING_STATS_THS_COLORED_IMG'] = ast.literal_eval(get_text(main_window.ui.TEST__MATCHING_STATS_THS_COLORED_IMG__INPUT))
                 except:
                     main_window.dialog_exec("There was an error with test matching start thresholds colored image field (TEST.MATCHING_STATS_THS_COLORED_IMG). Please check its syntax!", reason="error")
-                    return False, False
+                    return True, False
 
         ### Detection
         elif workflow_key_name == "DETECTION":
@@ -2722,18 +2724,18 @@ def create_yaml_file(main_window):
                 biapy_config['TEST']['DET_MIN_TH_TO_BE_PEAK'] = ast.literal_eval(get_text(main_window.ui.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT))
             except:
                 main_window.dialog_exec("There was an error with test detection minimum threshold to be peak field (TEST.DET_MIN_TH_TO_BE_PEAK). Please check its syntax!", reason="error")
-                return False, False
+                return True, False
             biapy_config['TEST']['DET_EXCLUDE_BORDER'] = True if get_text(main_window.ui.TEST__DET_EXCLUDE_BORDER__INPUT) == "Yes" else False
             try:
                 biapy_config['TEST']['DET_TOLERANCE'] = ast.literal_eval(get_text(main_window.ui.TEST__DET_TOLERANCE__INPUT))
             except:
                 main_window.dialog_exec("There was an error with test detection tolerance field (TEST.DET_TOLERANCE). Please check its syntax!", reason="error")
-                return False, False
+                return True, False
             try:
                 biapy_config['TEST']['DET_IGNORE_POINTS_OUTSIDE_BOX'] = ast.literal_eval(get_text(main_window.ui.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INPUT))
             except:
                 main_window.dialog_exec("There was an error with test detection ignore points outside box field (TEST.DET_IGNORE_POINTS_OUTSIDE_BOX). Please check its syntax!", reason="error")
-                return False, False
+                return True, False
             if get_text(main_window.ui.TEST__DET_POINT_CREATION_FUNCTION__INPUT) == "blob_log":
                 biapy_config['TEST']['DET_BLOB_LOG_MIN_SIGMA'] = int(get_text(main_window.ui.TEST__DET_BLOB_LOG_MIN_SIGMA__INPUT))    
                 biapy_config['TEST']['DET_BLOB_LOG_MAX_SIGMA'] = int(get_text(main_window.ui.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT)) 
@@ -2749,12 +2751,12 @@ def create_yaml_file(main_window):
                     biapy_config['TEST']['POST_PROCESSING']['MEDIAN_FILTER_AXIS'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__INPUT))
                 except:
                     main_window.dialog_exec("There was an error with test post processing median filter axis field (TEST.POST_PROCESSING.MEDIAN_FILTER_AXIS). Please check its syntax!", reason="error")
-                    return False, False
+                    return True, False
                 try:
                     biapy_config['TEST']['POST_PROCESSING']['MEDIAN_FILTER_SIZE'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__INPUT))
                 except:
                     main_window.dialog_exec("There was an error with test post processing median filter size field (TEST.POST_PROCESSING.MEDIAN_FILTER_SIZE). Please check its syntax!", reason="error")
-                    return False, False
+                    return True, False
         ### Instance segmentation
         elif workflow_key_name == "INSTANCE_SEG":
             if get_text(main_window.ui.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT) == "Yes":
@@ -2763,12 +2765,12 @@ def create_yaml_file(main_window):
                     biapy_config['TEST']['POST_PROCESSING']['MEDIAN_FILTER_AXIS'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INPUT))
                 except:
                     main_window.dialog_exec("There was an error with test post processing median filter axis field (TEST.POST_PROCESSING.MEDIAN_FILTER_AXIS). Please check its syntax!", reason="error")
-                    return False, False
+                    return True, False
                 try:
                     biapy_config['TEST']['POST_PROCESSING']['MEDIAN_FILTER_SIZE'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INPUT))
                 except:
                     main_window.dialog_exec("There was an error with test post processing median filter size field (TEST.POST_PROCESSING.MEDIAN_FILTER_SIZE). Please check its syntax!", reason="error")
-                    return False, False
+                    return True, False
             if problem_channels in ["BC", "BCM"] and get_text(main_window.ui.TEST__POST_PROCESSING__VORONOI_ON_MASK__INPUT) == "Yes":
                 biapy_config['TEST']['POST_PROCESSING']['VORONOI_ON_MASK'] = True 
                 biapy_config['TEST']['POST_PROCESSING']['VORONOI_TH'] = float(get_text(main_window.ui.TEST__POST_PROCESSING__VORONOI_TH__INPUT))
@@ -2782,17 +2784,17 @@ def create_yaml_file(main_window):
                         biapy_config['TEST']['POST_PROCESSING']['MEASURE_PROPERTIES']['REMOVE_BY_PROPERTIES']['PROPS'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INST_SEG__INPUT) ) 
                     except:
                         main_window.dialog_exec("There was an error with test post processing measure properties, removing my properties, in properties array field (TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS). Please check its syntax!", reason="error")
-                        return False, False
+                        return True, False
                     try:
                         biapy_config['TEST']['POST_PROCESSING']['MEASURE_PROPERTIES']['REMOVE_BY_PROPERTIES']['VALUES'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INST_SEG__INPUT) ) 
                     except:
                         main_window.dialog_exec("There was an error with test post processing measure properties, removing my properties, in values array field (TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.VALUES). Please check its syntax!", reason="error")
-                        return False, False
+                        return True, False
                     try:
                         biapy_config['TEST']['POST_PROCESSING']['MEASURE_PROPERTIES']['REMOVE_BY_PROPERTIES']['SIGN'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INPUT) ) 
                     except:
                         main_window.dialog_exec("There was an error with test post processing measure properties, removing my properties, in signs array field (TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.SIGN). Please check its syntax!", reason="error")
-                        return False, False
+                        return True, False
             if problem_channels == "BP":
                 if int(get_text(main_window.ui.TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INPUT)) != -1:
                     biapy_config['TEST']['POST_PROCESSING']['REPARE_LARGE_BLOBS_SIZE'] = int(get_text(main_window.ui.TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INPUT))
@@ -2802,7 +2804,7 @@ def create_yaml_file(main_window):
                         biapy_config['TEST']['POST_PROCESSING']['REMOVE_CLOSE_POINTS_RADIUS'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INPUT))
                     except:
                         main_window.dialog_exec("There was an error with test post processing removing close point radius field (TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS_RADIUS). Please check its syntax!", reason="error")
-                        return False, False
+                        return True, False
         ### Detection
         elif workflow_key_name == "DETECTION":
             if get_text(main_window.ui.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT) == "Yes":
@@ -2811,12 +2813,12 @@ def create_yaml_file(main_window):
                     biapy_config['TEST']['POST_PROCESSING']['MEDIAN_FILTER_AXIS'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INPUT))
                 except:
                     main_window.dialog_exec("There was an error with test post processing median filter axis field (TEST.POST_PROCESSING.MEDIAN_FILTER_AXIS). Please check its syntax!", reason="error")
-                    return False, False
+                    return True, False
                 try:
                     biapy_config['TEST']['POST_PROCESSING']['MEDIAN_FILTER_SIZE'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INPUT))
                 except:
                     main_window.dialog_exec("There was an error with test post processing median filter size field (TEST.POST_PROCESSING.MEDIAN_FILTER_SIZE). Please check its syntax!", reason="error")
-                    return False, False
+                    return True, False
 
             if get_text(main_window.ui.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INPUT) == "Yes":
                 biapy_config['TEST']['POST_PROCESSING']['REMOVE_CLOSE_POINTS'] = True 
@@ -2827,17 +2829,17 @@ def create_yaml_file(main_window):
                     biapy_config['TEST']['POST_PROCESSING']['DET_WATERSHED_FIRST_DILATION'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__DET_WATERSHED_FIRST_DILATION__INPUT) )
                 except:
                     main_window.dialog_exec("There was an error with test post processing detection watershed first dilation field (TEST.POST_PROCESSING.DET_WATERSHED_FIRST_DILATION). Please check its syntax!", reason="error")
-                    return False, False
+                    return True, False
                 try:
                     biapy_config['TEST']['POST_PROCESSING']['DET_WATERSHED_DONUTS_CLASSES'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_CLASSES__INPUT) )
                 except:
                     main_window.dialog_exec("There was an error with test post processing detection watershed donuts classes field (TEST.POST_PROCESSING.DET_WATERSHED_DONUTS_CLASSES). Please check its syntax!", reason="error")
-                    return False, False
+                    return True, False
                 try:
                     biapy_config['TEST']['POST_PROCESSING']['DET_WATERSHED_DONUTS_PATCH'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_PATCH__INPUT) )
                 except:
                     main_window.dialog_exec("There was an error with test post processing detection watershed donuts patch field (TEST.POST_PROCESSING.DET_WATERSHED_DONUTS_PATCH). Please check its syntax!", reason="error")
-                    return False, False
+                    return True, False
                 biapy_config['TEST']['POST_PROCESSING']['DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER'] = int(get_text(main_window.ui.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER__INPUT)) 
                 if get_text(main_window.ui.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__INPUT) == "Yes":
                     biapy_config['TEST']['POST_PROCESSING']['MEASURE_PROPERTIES'] = {}
@@ -2849,17 +2851,17 @@ def create_yaml_file(main_window):
                             biapy_config['TEST']['POST_PROCESSING']['MEASURE_PROPERTIES']['REMOVE_BY_PROPERTIES']['PROPS'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__INPUT) ) 
                         except:
                             main_window.dialog_exec("There was an error with test post processing measure properties, removing my properties, in properties array field (TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS). Please check its syntax!", reason="error")
-                            return False, False
+                            return True, False
                         try:
                             biapy_config['TEST']['POST_PROCESSING']['MEASURE_PROPERTIES']['REMOVE_BY_PROPERTIES']['VALUES'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__INPUT) ) 
                         except:
                             main_window.dialog_exec("There was an error with test post processing measure properties, removing my properties, in values array field (TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.VALUES). Please check its syntax!", reason="error")
-                            return False, False
+                            return True, False
                         try:
                             biapy_config['TEST']['POST_PROCESSING']['MEASURE_PROPERTIES']['REMOVE_BY_PROPERTIES']['SIGN'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INPUT) ) 
                         except:
                             main_window.dialog_exec("There was an error with test post processing measure properties, removing my properties, in signs array field (TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.SIGN). Please check its syntax!", reason="error")
-                            return False, False
+                            return True, False
         if get_text(main_window.ui.TEST__POST_PROCESSING__APPLY_MASK__INPUT) == "Yes":
             biapy_config['TEST']['POST_PROCESSING']['APPLY_MASK'] = True
         if get_text(main_window.ui.TEST__POST_PROCESSING__CLEAR_BORDER__INPUT) == "Yes":
