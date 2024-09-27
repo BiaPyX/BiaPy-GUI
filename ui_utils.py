@@ -2893,6 +2893,8 @@ def create_yaml_file(main_window):
         for key, value in main_window.external_model_restrictions.items():
             if value != -1:
                 if isinstance(key, str):
+                    if isinstance(value, tuple):
+                        value = str(value)
                     create_dict_from_key(key, value, model_restrictions)
                 else:
                     raise ValueError(f"Error found in config: {key}. Contact BiaPy team!")
