@@ -311,7 +311,7 @@ class MainWindow(QMainWindow):
             ], updated_widget="MODEL__SOURCE__INPUT"))
         
         self.ui.MODEL__BMZ__EXPORT__ENABLE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
-            ["MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME", "MODEL__BMZ__EXPORT__FRAME"]))
+            ["MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME", "MODEL__BMZ__EXPORT__FRAME", "MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME"]))
         self.ui.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
             ["MODEL__BMZ__EXPORT__FRAME"]))
 

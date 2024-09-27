@@ -163,14 +163,6 @@ class Widget_conditions():
                     [
                         "Yes"
                     ],
-                    "LOAD_PRETRAINED_MODEL__INPUT": 
-                    [
-                        "Yes"
-                    ],
-                    "MODEL__SOURCE__INPUT": 
-                    [
-                        "I want to check other online sources"
-                    ],
                 },
             "MODEL__BMZ__EXPORT__FRAME": 
                 {
