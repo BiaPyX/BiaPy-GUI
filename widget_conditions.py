@@ -3031,6 +3031,27 @@ class Widget_conditions():
                 }, 
 
             # Model widgets
+            "MODEL__ARCHITECTURE__LABEL": 
+                {
+                    "LOAD_PRETRAINED_MODEL__INPUT": 
+                    [
+                        'No', 
+                    ],
+                },
+            "MODEL__ARCHITECTURE__INFO": 
+                {
+                    "LOAD_PRETRAINED_MODEL__INPUT": 
+                    [
+                        'No', 
+                    ],
+                },
+            "MODEL__ARCHITECTURE__INPUT": 
+                {
+                    "LOAD_PRETRAINED_MODEL__INPUT": 
+                    [
+                        'No', 
+                    ],
+                },
             "unet_model_like_frame": 
                 {
                     "MODEL__ARCHITECTURE__INPUT": 
@@ -3043,6 +3064,10 @@ class Widget_conditions():
                         'Attention U-Net', 
                         'MultiResUnet', 
                         'SEUnet', 
+                    ],
+                    "LOAD_PRETRAINED_MODEL__INPUT": 
+                    [
+                        'No', 
                     ],
                 }, 
             "unet_model_like_label": 
@@ -3057,6 +3082,10 @@ class Widget_conditions():
                         'Attention U-Net', 
                         'MultiResUnet', 
                         'SEUnet', 
+                    ],
+                    "LOAD_PRETRAINED_MODEL__INPUT": 
+                    [
+                        'No', 
                     ],
                 },
             "sr_unet_like_heading": 
@@ -3095,6 +3124,10 @@ class Widget_conditions():
                         'UNETR', 
                         'ViT', 
                     ],
+                    "LOAD_PRETRAINED_MODEL__INPUT": 
+                    [
+                        'No', 
+                    ],
                 }, 
             "transformers_label": 
                 {
@@ -3104,6 +3137,10 @@ class Widget_conditions():
                         'UNETR', 
                         'ViT', 
                     ],
+                    "LOAD_PRETRAINED_MODEL__INPUT": 
+                    [
+                        'No', 
+                    ],
                 }, 
             "convnext_label": 
                 {
@@ -3111,12 +3148,20 @@ class Widget_conditions():
                     [
                         'U-NeXt V1', 
                     ],
+                    "LOAD_PRETRAINED_MODEL__INPUT": 
+                    [
+                        'No', 
+                    ],
                 }, 
             "convnext_frame": 
                 {
                     "MODEL__ARCHITECTURE__INPUT": 
                     [
                         'U-NeXt V1', 
+                    ],
+                    "LOAD_PRETRAINED_MODEL__INPUT": 
+                    [
+                        'No', 
                     ],
                 }, 
             "unetr_vit_hidden_multiple_label": 

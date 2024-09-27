@@ -294,7 +294,10 @@ class MainWindow(QMainWindow):
             ["MODEL__SOURCE__LABEL","MODEL__SOURCE__INFO","MODEL__SOURCE__INPUT",
              "checkpoint_file_path_browse_label", "PATHS__CHECKPOINT_FILE__INFO","PATHS__CHECKPOINT_FILE__INPUT","checkpoint_file_path_browse_bn", 
              "checkpoint_loading_opt_label", "checkpoint_loading_opt_frame", 
-             "MODEL__BMZ__SOURCE_MODEL_ID__LABEL","MODEL__BMZ__SOURCE_MODEL_ID__INFO","MODEL__BMZ__SOURCE_MODEL_ID__INPUT","MODEL__BMZ__SOURCE_MODEL_ID__BN"]
+             "MODEL__BMZ__SOURCE_MODEL_ID__LABEL","MODEL__BMZ__SOURCE_MODEL_ID__INFO","MODEL__BMZ__SOURCE_MODEL_ID__INPUT","MODEL__BMZ__SOURCE_MODEL_ID__BN",
+             "MODEL__ARCHITECTURE__LABEL", "MODEL__ARCHITECTURE__INFO", "MODEL__ARCHITECTURE__INPUT",
+             "unet_model_like_frame", "unet_model_like_label","transformers_frame", "transformers_label",
+             "convnext_label", "convnext_frame"]
              , widgets_to_set_cond=
             [
                 (["MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INPUT", "No"], ["No"])
@@ -314,7 +317,6 @@ class MainWindow(QMainWindow):
             ["MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME", "MODEL__BMZ__EXPORT__FRAME", "MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME"]))
         self.ui.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
             ["MODEL__BMZ__EXPORT__FRAME"]))
-
 
 
         self.ui.job_name_input.textChanged.connect(lambda: mark_syntax_error(self, "job_name_input", ["empty"]))   
