@@ -360,6 +360,8 @@ class run_worker(QObject):
             container_out_dir_in_host = os.path.normpath(os.path.join(self.output_folder_in_host, jobname))
             self.container_stdout_file = os.path.normpath(os.path.join(container_out_dir_in_host, jobname+"_out_"+dt_string))
             self.container_stderr_file = os.path.normpath(os.path.join(container_out_dir_in_host, jobname+"_err_"+dt_string))
+            self.container_plots_folder = os.path.normpath(os.path.join(container_out_dir_in_host, "results", jobname+"_1", "charts"))
+            self.container_bmz_folder = os.path.normpath(os.path.join(container_out_dir_in_host, "results", jobname+"_1", "BMZ_files"))
             self.output_folder_in_container = path_to_linux(self.output_folder_in_host, self.main_gui.cfg.settings['os_host']) 
             cfg_input = os.path.join(container_out_dir_in_host, "input_config")
             real_cfg_input = os.path.join(cfg_input, "input"+dt_string+".yaml")
@@ -555,6 +557,17 @@ class run_worker(QObject):
             workflow_name = self.main_gui.cfg.settings["workflow_names"][self.main_gui.cfg.settings["workflow_key_names"].index(self.config['PROBLEM']['TYPE'])]
             workflow_name = workflow_name.replace("\n"," ")
             # Set the window header 
+            try:
+                bmz_export_enabled = self.config['MODEL']['BMZ']['EXPORT']['ENABLE']
+            except:
+                bmz_export_enabled = False 
+
+            if bmz_export_enabled:
+                bmz_message = "<tr><td>BioImage Model Zoo file folder</td><td><a href={}>{}</a></td></tr>".format(
+                    bytearray(QUrl.fromLocalFile(self.container_bmz_folder).toEncoded()).decode(), self.container_bmz_folder,
+                )
+            else:
+                bmz_message = ""
             self.container_info = \
             "<b>BiaPy container ({} - ID: {})</b><br>\
             <table>\
@@ -563,6 +576,8 @@ class run_worker(QObject):
                 <tr><td>YAML</td><td><a href={}>{}</a></td></tr>\
                 <tr><td>Device</td><td>{}</td></tr>\
                 <tr><td>Output folder</td><td><a href={}>{}</a></td></tr>\
+                <tr><td>Training plots folder</td><td><a href={}>{}</a></td></tr>\
+                {}\
                 <tr><td>Output log</td><td><a href={}>{}</a></td></tr>\
                 <tr><td>Error log</td><td><a href={}>{}</a></td></tr>\
                 {}\
@@ -574,6 +589,8 @@ class run_worker(QObject):
                 bytearray(QUrl.fromLocalFile(get_text(self.main_gui.ui.select_yaml_name_label)).toEncoded()).decode(), get_text(self.main_gui.ui.select_yaml_name_label),
                 device,
                 bytearray(QUrl.fromLocalFile(container_out_dir_in_host).toEncoded()).decode(), container_out_dir_in_host,
+                bytearray(QUrl.fromLocalFile(self.container_plots_folder).toEncoded()).decode(), self.container_plots_folder,
+                bmz_message,
                 bytearray(QUrl.fromLocalFile(self.container_stdout_file).toEncoded()).decode(), self.container_stdout_file,
                 bytearray(QUrl.fromLocalFile(self.container_stderr_file).toEncoded()).decode(), self.container_stderr_file,
                 paths_message,
