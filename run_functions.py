@@ -131,6 +131,7 @@ class runBiaPy_Ui(QDialog):
         # When the signal is 0 the container has finished good
         else:
             st = "finished"
+            self.run_window.stop_container_bn.setEnabled(False)
         self.run_window.container_state_label.setText("Container state [ {} ]".format(st))
 
     def update_train_progress(self, value):
@@ -667,6 +668,7 @@ class run_worker(QObject):
                 self.gui.run_window.test_files_label.setEnabled(False)
             self.process_steps = "finished"
             f.close()
+            self.finished_signal.emit()
         except:
             # Print first the traceback (only visible through terminal)
             self.main_gui.logger.error(traceback.format_exc())
