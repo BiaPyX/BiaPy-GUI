@@ -2243,7 +2243,7 @@ def create_yaml_file(main_window):
         biapy_config['DATA']['VAL']['IN_MEMORY'] = True if get_text(main_window.ui.DATA__VAL__IN_MEMORY__INPUT) == "Yes" else False
         if get_text(main_window.ui.DATA__VAL__TYPE__INPUT) == "Extract from train (split training)":
             biapy_config['DATA']['VAL']['FROM_TRAIN'] = True
-            biapy_config['DATA']['VAL']['SPLIT_TRAIN'] = float(int(get_text(main_window.ui.DATA__VAL__SPLIT_TRAIN__INPUT))/100)
+            biapy_config['DATA']['VAL']['SPLIT_TRAIN'] = float(get_text(main_window.ui.DATA__VAL__SPLIT_TRAIN__INPUT))
             biapy_config['DATA']['VAL']['RANDOM'] = True if get_text(main_window.ui.DATA__VAL__RANDOM__INPUT) == "Yes" else False 
         elif get_text(main_window.ui.DATA__VAL__TYPE__INPUT) == "Extract from train (cross validation)":
             biapy_config['DATA']['VAL']['FROM_TRAIN'] = True
@@ -3076,8 +3076,16 @@ class load_yaml_to_GUI_engine(QObject):
                     tab_detected_mss = "WARNING: Tabs have been identified and substituted with two spaces. This error may be "+\
                         "attributed to this, so please eliminate them.\n"
                     cfg_content = cfg_content.replace('\t', '  ')
-                loaded_cfg = yaml.safe_load(cfg_content)
-
+                try:
+                    loaded_cfg = yaml.safe_load(cfg_content)
+                except:
+                    exc = traceback.format_exc()
+                    self.main_window.logger.error(exc)
+                    self.error_signal.emit(f"Error found reading YAML {self.yaml_file}.\nPlease check the file!", "unexpected_error")
+                    self.state_signal.emit(1)
+                    self.finished_signal.emit()
+                    return 
+                
             if tab_detected_mss != "":
                 yaml_file_final = os.path.join(self.main_window.log_dir, "tmp_load_yaml.yaml")
                 f = open(self.yaml_file, "w", encoding='utf8')
@@ -3401,7 +3409,7 @@ def path_in_list(list, path):
     bool : bool
         ``True``if ``path`` is contained in ``list`` or is relative to any of the paths there.
     """
-    if path in list:
+    if path in list:    
         return True
     else:
         for i in list:

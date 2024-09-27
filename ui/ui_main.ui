@@ -1401,7 +1401,7 @@ QPushButton:pressed {
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>3</number>
+                <number>2</number>
                </property>
                <widget class="QWidget" name="page_home">
                 <property name="styleSheet">
@@ -4277,7 +4277,7 @@ QPushButton:pressed {
                        </font>
                       </property>
                       <property name="currentIndex">
-                       <number>1</number>
+                       <number>2</number>
                       </property>
                       <widget class="QWidget" name="workflow_selection_page">
                        <property name="minimumSize">
@@ -6113,7 +6113,7 @@ QPushButton:pressed {
                             <property name="geometry">
                              <rect>
                               <x>0</x>
-                              <y>-542</y>
+                              <y>0</y>
                               <width>928</width>
                               <height>983</height>
                              </rect>
@@ -8633,7 +8633,7 @@ QPushButton:pressed {
                                 <property name="geometry">
                                  <rect>
                                   <x>0</x>
-                                  <y>0</y>
+                                  <y>-266</y>
                                   <width>905</width>
                                   <height>7914</height>
                                  </rect>
@@ -20233,7 +20233,7 @@ p, li { white-space: pre-wrap; }
                                              </size>
                                             </property>
                                             <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Percentage of the training data used as validation during the model training. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive integer between 0 and 100&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Training data proportion used as validation during the model training. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive float between 0 and 1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                             </property>
                                             <property name="styleSheet">
                                              <string notr="true">QPushButton {
@@ -20282,7 +20282,7 @@ p, li { white-space: pre-wrap; }
                                              <string/>
                                             </property>
                                             <property name="text">
-                                             <string>Train percentage for validation</string>
+                                             <string>Train proportion for validation</string>
                                             </property>
                                             <property name="indent">
                                              <number>0</number>
@@ -20529,7 +20529,7 @@ p, li { white-space: pre-wrap; }
                                              </font>
                                             </property>
                                             <property name="text">
-                                             <string>10</string>
+                                             <string>0.1</string>
                                             </property>
                                            </widget>
                                           </item>
@@ -27676,8 +27676,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>415</width>
-                                         <height>99</height>
+                                         <width>920</width>
+                                         <height>326</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_52">
