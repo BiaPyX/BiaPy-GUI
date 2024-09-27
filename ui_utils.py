@@ -2574,41 +2574,47 @@ def create_yaml_file(main_window):
                 else:
                     biapy_config['MODEL']["SOURCE"] = "torchvision"
                     biapy_config['MODEL']['TORCHVISION_MODEL_NAME'] = str(model)
-
-                # Set BMZ variables 
-                if biapy_config['MODEL']["SOURCE"] == "bmz" and get_text(main_window.ui.MODEL__BMZ__EXPORT__ENABLE__INPUT) == "Yes":
-                    biapy_config['MODEL']['BMZ']["EXPORT"] = {}    
-                    biapy_config['MODEL']['BMZ']["EXPORT"]["ENABLE"] = True
-                    if get_text(main_window.ui.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INPUT) == "Yes": 
-                        biapy_config['MODEL']['BMZ']["EXPORT"]["REUSE_BMZ_CONFIG"] = True 
-                    else:
-                        biapy_config['MODEL']['BMZ']["EXPORT"]["REUSE_BMZ_CONFIG"] = False
-                        biapy_config['MODEL']['BMZ']["EXPORT"]["MODEL_NAME"] = get_text(main_window.ui.MODEL__BMZ__EXPORT__MODEL_NAME__INPUT)
-                        biapy_config['MODEL']['BMZ']["EXPORT"]["DESCRIPTION"] = get_text(main_window.ui.MODEL__BMZ__EXPORT__DESCRIPTION__INPUT)
-                        biapy_config['MODEL']['BMZ']["EXPORT"]["LICENSE"] = get_text(main_window.ui.MODEL__BMZ__EXPORT__LICENSE__INPUT)
-                        if get_text(main_window.ui.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT) != "":
-                            biapy_config['MODEL']['BMZ']["EXPORT"]["DOCUMENTATION"] = get_text(main_window.ui.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT)
-                        if get_text(main_window.ui.MODEL__BMZ__EXPORT__AUTHORS__INPUT) != "":
-                            try:
-                                biapy_config['MODEL']['BMZ']["EXPORT"]["AUTHORS"] = ast.literal_eval(get_text(main_window.ui.MODEL__BMZ__EXPORT__AUTHORS__INPUT))
-                            except:
-                                main_window.dialog_exec("There was an error with BMZ authors field (MODEL.BMZ.EXPORT.AUTHORS). Please check its syntax!", reason="error")
-                                return True, False
-                        if get_text(main_window.ui.MODEL__BMZ__EXPORT__TAGS__INPUT) != "":
-                            try:
-                                biapy_config['MODEL']['BMZ']["EXPORT"]["TAGS"] = ast.literal_eval(get_text(main_window.ui.MODEL__BMZ__EXPORT__TAGS__INPUT))
-                            except: 
-                                main_window.dialog_exec("There was an error with BMZ tags field (MODEL.BMZ.EXPORT.TAGS). Please check its syntax!", reason="error")
-                                return True, False
-                        if get_text(main_window.ui.MODEL__BMZ__EXPORT__CITE__INPUT) != "":
-                            try:
-                                biapy_config['MODEL']['BMZ']["EXPORT"]["CITE"] = ast.literal_eval(get_text(main_window.ui.MODEL__BMZ__EXPORT__CITE__INPUT))
-                            except:
-                                main_window.dialog_exec("There was an error with BMZ citation field (MODEL.BMZ.EXPORT.CITE). Please check its syntax!", reason="error")
-                                return True, False
             else:
                 main_window.dialog_exec("Please, select an external model by clicking on 'Check models' button in 'Generic options' window.", reason="error")
                 return True, False
+        
+    # Set BMZ variables 
+    if get_text(main_window.ui.MODEL__BMZ__EXPORT__ENABLE__INPUT) == "Yes":
+        if "BMZ" not in biapy_config['MODEL']:
+            biapy_config['MODEL']['BMZ'] = {}
+        biapy_config['MODEL']['BMZ']["EXPORT"] = {}    
+        biapy_config['MODEL']['BMZ']["EXPORT"]["ENABLE"] = True
+        try:
+            model_src = biapy_config['MODEL']['SOURCE']
+        except: 
+            model_src = "biapy"
+        if model_src == "bmz" and get_text(main_window.ui.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INPUT) == "Yes": 
+            biapy_config['MODEL']['BMZ']["EXPORT"]["REUSE_BMZ_CONFIG"] = True 
+        else:
+            biapy_config['MODEL']['BMZ']["EXPORT"]["REUSE_BMZ_CONFIG"] = False
+            biapy_config['MODEL']['BMZ']["EXPORT"]["MODEL_NAME"] = get_text(main_window.ui.MODEL__BMZ__EXPORT__MODEL_NAME__INPUT)
+            biapy_config['MODEL']['BMZ']["EXPORT"]["DESCRIPTION"] = get_text(main_window.ui.MODEL__BMZ__EXPORT__DESCRIPTION__INPUT)
+            biapy_config['MODEL']['BMZ']["EXPORT"]["LICENSE"] = get_text(main_window.ui.MODEL__BMZ__EXPORT__LICENSE__INPUT)
+            if get_text(main_window.ui.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT) != "":
+                biapy_config['MODEL']['BMZ']["EXPORT"]["DOCUMENTATION"] = get_text(main_window.ui.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT)
+            if get_text(main_window.ui.MODEL__BMZ__EXPORT__AUTHORS__INPUT) != "":
+                try:
+                    biapy_config['MODEL']['BMZ']["EXPORT"]["AUTHORS"] = ast.literal_eval(get_text(main_window.ui.MODEL__BMZ__EXPORT__AUTHORS__INPUT))
+                except:
+                    main_window.dialog_exec("There was an error with BMZ authors field (MODEL.BMZ.EXPORT.AUTHORS). Please check its syntax!", reason="error")
+                    return True, False
+            if get_text(main_window.ui.MODEL__BMZ__EXPORT__TAGS__INPUT) != "":
+                try:
+                    biapy_config['MODEL']['BMZ']["EXPORT"]["TAGS"] = ast.literal_eval(get_text(main_window.ui.MODEL__BMZ__EXPORT__TAGS__INPUT))
+                except: 
+                    main_window.dialog_exec("There was an error with BMZ tags field (MODEL.BMZ.EXPORT.TAGS). Please check its syntax!", reason="error")
+                    return True, False
+            if get_text(main_window.ui.MODEL__BMZ__EXPORT__CITE__INPUT) != "":
+                try:
+                    biapy_config['MODEL']['BMZ']["EXPORT"]["CITE"] = ast.literal_eval(get_text(main_window.ui.MODEL__BMZ__EXPORT__CITE__INPUT))
+                except:
+                    main_window.dialog_exec("There was an error with BMZ citation field (MODEL.BMZ.EXPORT.CITE). Please check its syntax!", reason="error")
+                    return True, False
         
     # Loss
     loss_name = main_window.cfg.translate_names(get_text(main_window.ui.LOSS__TYPE__INPUT), key_str="losses")
