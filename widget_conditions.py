@@ -491,7 +491,6 @@ class Widget_conditions():
                         "INSTANCE_SEG",
                         "DETECTION",
                         "SUPER_RESOLUTION",
-                        "CLASSIFICATION",
                         "IMAGE_TO_IMAGE",
                     ]
                 }, 
@@ -510,7 +509,6 @@ class Widget_conditions():
                         "INSTANCE_SEG",
                         "DETECTION",
                         "SUPER_RESOLUTION",
-                        "CLASSIFICATION",
                         "IMAGE_TO_IMAGE",
                     ]
                 },
@@ -529,7 +527,6 @@ class Widget_conditions():
                         "INSTANCE_SEG",
                         "DETECTION",
                         "SUPER_RESOLUTION",
-                        "CLASSIFICATION",
                         "IMAGE_TO_IMAGE",
                     ]
                 },
@@ -548,7 +545,6 @@ class Widget_conditions():
                         "INSTANCE_SEG",
                         "DETECTION",
                         "SUPER_RESOLUTION",
-                        "CLASSIFICATION",
                         "IMAGE_TO_IMAGE",
                     ]
                 },  

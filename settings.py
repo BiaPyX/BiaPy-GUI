@@ -70,7 +70,7 @@ class Settings:
 
         # Workflow page
         self.settings["workflow_names"] = [
-            "Semantic\nSegmentation",
+            "Semantic\nsegmentation",
             "Instance\nsegmentation",
             "Object\ndetection",
             "Image\ndenoising",
