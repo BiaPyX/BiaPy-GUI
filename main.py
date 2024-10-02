@@ -660,6 +660,7 @@ class MainWindow(QMainWindow):
                 
         # Info icons
         info_icon = QIcon(self.cfg.settings['info_image'])
+        info_icon_clicked = self.cfg.settings['info_image_clicked']
         def inspect_all_widgets(main_widget):
             for widget in main_widget.children():
                 if isinstance(widget, QPushButton):
@@ -669,6 +670,18 @@ class MainWindow(QMainWindow):
                         widget.setIconSize(QSize(30,30))
                         # Set instant tooltip
                         widget.clicked[bool].connect(lambda checked, a=widget.objectName(): self.showInstantToolTip(a))
+                        widget.setStyleSheet(
+                            u"QPushButton {\n"
+                            "  border-radius: 5px;\n"
+                            "  border: none;\n"
+                            "}\n"
+                            "QPushButton:hover {\n"
+                            "    border: 1px solid rgb(110, 110, 110);\n"
+                            "}"
+                            "QPushButton:pressed {\n"
+                            f"   icon: url({info_icon_clicked});\n"
+                            f"   icon-size: 30px;\n"
+                            "}")
 
                 if isinstance(widget, QFrame) or isinstance(widget, QStackedWidget) or isinstance(widget, QWidget):
                     inspect_all_widgets(widget)

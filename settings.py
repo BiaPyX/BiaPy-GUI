@@ -61,6 +61,7 @@ class Settings:
             QPixmap(resource_path(os.path.join("images", "bn_images", "down_arrow.svg"))),
         ]
         self.settings["info_image"] = QPixmap(resource_path(os.path.join("images", "bn_images", "info.png")))
+        self.settings["info_image_clicked"] = resource_path(os.path.join("images", "bn_images", "info_clicked.png"))
 
         # Wizard icons
         self.settings["wizard_img"] = QPixmap(resource_path(os.path.join("images", "wizard", "wizard.png")))
