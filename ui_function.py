@@ -415,6 +415,9 @@ class UIFunction(MainWindow):
         getattr(main_window.ui, f"workflow_view{main_window.workflow_view_queue[item]}_frame").setEnabled(False)
         getattr(main_window.ui, f"workflow_view{main_window.workflow_view_queue[item]}_frame").setStyleSheet("background:rgb(240,240,240);\nborder-radius: 25px;")
 
+        # To update mainly the patch size depending on the workflow
+        UIFunction.change_problem_dimensions(main_window, main_window.ui.PROBLEM__NDIM__INPUT.currentIndex())
+
     ######################
     # General options page 
     ######################
@@ -476,8 +479,15 @@ class UIFunction(MainWindow):
         if idx == 0:
             # Only change values the first time and if they were not modified 
             if get_text(main_window.ui.DATA__TEST__RESOLUTION__INPUT) == "":
-                main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(256,256,1)")
-                main_window.ui.DATA__PATCH_SIZE__TEST__INPUT.setText("(256,256,1)")
+                if main_window.cfg.settings['selected_workflow'] == 3: # Denoising
+                    main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(64,64,1)")
+                    main_window.ui.DATA__PATCH_SIZE__TEST__INPUT.setText("(64,64,1)")
+                elif main_window.cfg.settings['selected_workflow'] == 4: # SR
+                    main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(48,48,1)")
+                    main_window.ui.DATA__PATCH_SIZE__TEST__INPUT.setText("(48,48,1)")
+                else:
+                    main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(256,256,1)")
+                    main_window.ui.DATA__PATCH_SIZE__TEST__INPUT.setText("(256,256,1)")
                 main_window.ui.DATA__TRAIN__RESOLUTION__INPUT.setText("(1,1)")
                 main_window.ui.DATA__TRAIN__OVERLAP__INPUT.setText("(0,0)")
                 main_window.ui.DATA__TRAIN__PADDING__INPUT.setText("(0,0)")
@@ -496,9 +506,23 @@ class UIFunction(MainWindow):
                     aux = ast.literal_eval(get_text(main_window.ui.DATA__PATCH_SIZE__INPUT) )
                 else:
                     aux = ast.literal_eval(get_text(main_window.ui.DATA__PATCH_SIZE__TEST__INPUT) )
-                if isinstance(aux, tuple) and aux == (40,128,128,1):
-                    main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(256,256,1)")
-                    main_window.ui.DATA__PATCH_SIZE__TEST__INPUT.setText("(256,256,1)")
+                if isinstance(aux, tuple) and (
+                    aux == (40,128,128,1) 
+                    or aux == (6,128,128,1) 
+                    or aux == (12,64,64,1) 
+                    or aux == (256,256,1)
+                    or aux == (64,64,1)
+                    or aux == (48,48,1)
+                ):
+                    if main_window.cfg.settings['selected_workflow'] == 3: # Denoising
+                        main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(64,64,1)")
+                        main_window.ui.DATA__PATCH_SIZE__TEST__INPUT.setText("(64,64,1)")
+                    elif main_window.cfg.settings['selected_workflow'] == 4: # SR
+                        main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(48,48,1)")
+                        main_window.ui.DATA__PATCH_SIZE__TEST__INPUT.setText("(48,48,1)")
+                    else:
+                        main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(256,256,1)")
+                        main_window.ui.DATA__PATCH_SIZE__TEST__INPUT.setText("(256,256,1)")
                 aux = ast.literal_eval(get_text(main_window.ui.DATA__TRAIN__RESOLUTION__INPUT) )
                 if isinstance(aux, tuple) and aux == (1,1,1):
                     main_window.ui.DATA__TRAIN__RESOLUTION__INPUT.setText("(1,1)")
@@ -638,9 +662,23 @@ class UIFunction(MainWindow):
                 aux = ast.literal_eval(get_text(main_window.ui.DATA__PATCH_SIZE__INPUT) )
             else:
                 aux = ast.literal_eval(get_text(main_window.ui.DATA__PATCH_SIZE__TEST__INPUT) )
-            if isinstance(aux, tuple) and aux == (256,256,1):
-                main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(40,128,128,1)")
-                main_window.ui.DATA__PATCH_SIZE__TEST__INPUT.setText("(40,128,128,1)")
+            if isinstance(aux, tuple) and (
+                aux == (64,64,1) 
+                or aux == (48,48,1) 
+                or aux == (256,256,1) 
+                or aux == (40,128,128,1)
+                or aux == (6,128,128,1)
+                or aux == (12,64,64,1)
+            ):
+                if main_window.cfg.settings['selected_workflow'] == 3: # Denoising
+                    main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(12,64,64,1)")
+                    main_window.ui.DATA__PATCH_SIZE__TEST__INPUT.setText("(12,64,64,1)")
+                elif main_window.cfg.settings['selected_workflow'] == 4: # SR
+                    main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(6,128,128,1)")
+                    main_window.ui.DATA__PATCH_SIZE__TEST__INPUT.setText("(6,128,128,1)")
+                else:
+                    main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(40,128,128,1)")
+                    main_window.ui.DATA__PATCH_SIZE__TEST__INPUT.setText("(40,128,128,1)")
             aux = ast.literal_eval(get_text(main_window.ui.DATA__TRAIN__RESOLUTION__INPUT) )
             if isinstance(aux, tuple) and aux == (1,1):
                 main_window.ui.DATA__TRAIN__RESOLUTION__INPUT.setText("(1,1,1)")
