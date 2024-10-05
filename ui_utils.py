@@ -1216,8 +1216,8 @@ def set_default_config(cfg, gpu_info, sample_info):
     # TRAINING PARAMETERS #
     #######################
     if cfg['TRAIN']['ENABLE']:
-        cfg['TRAIN']['EPOCHS'] = 300
-        cfg['TRAIN']['PATIENCE'] = 30
+        cfg['TRAIN']['EPOCHS'] = 150
+        cfg['TRAIN']['PATIENCE'] = 20
         cfg['TRAIN']['OPTIMIZER'] = "ADAMW"
         cfg['TRAIN']['LR'] = 1.E-4
         # Learning rate scheduler
