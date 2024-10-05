@@ -1329,7 +1329,7 @@ class UIFunction(MainWindow):
             for i in range(len(local_images)):
                 if len(local_images[i].attrs.get("RepoTags")) > 0:
                     if local_images[i].attrs.get("RepoTags")[0] == main_window.cfg.settings['biapy_container_name']:
-                        local_biapy_container_found = True
+                        # local_biapy_container_found = True # Activate this when locally want to try new BiaPy code 
                         if len(local_images[i].attrs.get("RepoDigests")) > 0:
                             local_biapy_image_tag = local_images[i].attrs.get("RepoDigests")[0].replace("biapyx/biapy@","")  
                 else:
@@ -1361,7 +1361,7 @@ class UIFunction(MainWindow):
                         main_window.logger.info("Removing last valid container")
                         main_window.docker_client.images.remove(main_window.cfg.settings['biapy_container_name'], force=True)
 
-        # Firs time 
+        # First time 
         run_biapy_cond = True
         if local_biapy_image_tag == "":
             if not local_biapy_container_found:
