@@ -701,6 +701,27 @@ class Widget_conditions():
                         "ADAM"
                     ],
                 },
+            "TRAIN__BATCH_SIZE__LABEL": 
+                {
+                    "TRAIN__BATCH_SIZE__CALCULATION__INPUT": 
+                    [
+                        "No",
+                    ],
+                },
+            "TRAIN__BATCH_SIZE__INFO": 
+                {
+                    "TRAIN__BATCH_SIZE__CALCULATION__INPUT": 
+                    [
+                        "No",
+                    ],
+                },
+            "TRAIN__BATCH_SIZE__INPUT": 
+                {
+                    "TRAIN__BATCH_SIZE__CALCULATION__INPUT": 
+                    [
+                        "No",
+                    ],
+                },
             "profiler_batch_range_label": 
                 {
                     "TRAIN__PROFILER__INPUT": 

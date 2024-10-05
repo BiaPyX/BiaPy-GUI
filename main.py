@@ -358,6 +358,8 @@ class MainWindow(QMainWindow):
         self.ui.TRAIN__OPTIMIZER__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["TRAIN__W_DECAY__INPUT", "adamw_weight_decay_label", "TRAIN__W_DECAY__INFO",
             "TRAIN__OPT_BETAS__INPUT", "TRAIN__OPT_BETAS__LABEL", "TRAIN__OPT_BETAS__INFO"]))
+        self.ui.TRAIN__BATCH_SIZE__CALCULATION__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["TRAIN__BATCH_SIZE__LABEL", "TRAIN__BATCH_SIZE__INFO", "TRAIN__BATCH_SIZE__INPUT"]))
         self.ui.TRAIN__PROFILER__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
             ["profiler_batch_range_label", "TRAIN__PROFILER_BATCH_RANGE__INPUT", "TRAIN__PROFILER_BATCH_RANGE__INFO"]))
         self.ui.DATA__NORMALIZATION__PERC_CLIP__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 

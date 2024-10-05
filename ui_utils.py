@@ -1391,7 +1391,6 @@ def set_default_config(cfg, gpu_info, sample_info):
         y_upsampling = cfg["PROBLEM"]["SUPER_RESOLUTION"]["UPSCALING"]
     else:
         y_upsampling = (1,1) if cfg['PROBLEM']['NDIM'] == "2D" else (1,1,1)
-
     batch_size = batch_size_calculator(
         gpu_info=gpu_info, 
         sample_info=sample_info, 
@@ -2644,7 +2643,83 @@ def create_yaml_file(main_window):
         if biapy_config['TRAIN']['OPTIMIZER'] == "ADAMW":
             biapy_config['TRAIN']['W_DECAY'] = float(get_text(main_window.ui.TRAIN__W_DECAY__INPUT))
             biapy_config['TRAIN']['OPT_BETAS'] = get_text(main_window.ui.TRAIN__OPT_BETAS__INPUT)
-        biapy_config['TRAIN']['BATCH_SIZE'] = int(get_text(main_window.ui.TRAIN__BATCH_SIZE__INPUT))
+        if get_text(main_window.ui.TRAIN__BATCH_SIZE__CALCULATION__INPUT) == "Yes":
+            patch_size = ast.literal_eval(biapy_config['DATA']['PATCH_SIZE'])
+            network_base_memory = 4000 # High value here to prevent crash  
+                                        
+            if biapy_config["PROBLEM"]["TYPE"] == "CLASSIFICATION":
+                y_channels = 0
+            else:
+                if biapy_config["PROBLEM"]["TYPE"] in [
+                    "DENOISING",
+                    "SUPER_RESOLUTION",
+                    "IMAGE_TO_IMAGE"
+                ]:
+                    y_channels = patch_size[-1]   
+                elif biapy_config["PROBLEM"]["TYPE"] == "INSTANCE_SEG":
+                    y_channels = 2 # As we are using a BC approach in the Wizard 
+                else:
+                    y_channels = 1
+
+            channels_per_sample = {
+                "x": patch_size[-1], 
+                "y": y_channels, 
+                }
+            
+            if biapy_config["PROBLEM"]["TYPE"] == "SUPER_RESOLUTION":
+                y_upsampling = biapy_config["PROBLEM"]["SUPER_RESOLUTION"]["UPSCALING"]
+            else:
+                y_upsampling = (1,1) if biapy_config['PROBLEM']['NDIM'] == "2D" else (1,1,1)
+                
+            try:
+                total_samples = len(next(os.walk(biapy_config['DATA']['TRAIN']['PATH']))[2]) 
+            except:
+                total_samples = 1
+
+            max_batch_size_allowed = 32 if biapy_config["PROBLEM"]["TYPE"] not in ["SUPER_RESOLUTION", "DENOISING"] else 64
+
+            if total_samples == 1:
+                batch_size = 1
+            else:    
+                sample_info = {
+                    "DATA.TRAIN.PATH": {
+                        'total_samples': total_samples,
+                        'crop_shape': patch_size,
+                        'dir_name': biapy_config['DATA']['TRAIN']['PATH'],
+                    }
+                }
+                try:
+                    masking = (
+                        biapy_config["PROBLEM"]["TYPE"] == "SELF_SUPERVISED" 
+                        and biapy_config['PROBLEM']['SELF_SUPERVISED']['PRETEXT_TASK'] == "masking"
+                        )
+                except:
+                    masking = False
+                if (
+                    biapy_config["PROBLEM"]["TYPE"] != "DENOISING" 
+                    and not masking
+                ):
+                    try:
+                        total_samples = len(next(os.walk(biapy_config['DATA']['TRAIN']['GT_PATH']))[2]) 
+                    except:
+                        total_samples = 1
+                    sample_info["DATA.TRAIN.GT_PATH"] = {
+                        'total_samples': total_samples,
+                        'crop_shape': patch_size,
+                        'dir_name': biapy_config['DATA']['TRAIN']['GT_PATH'],
+                    }    
+                batch_size = batch_size_calculator(
+                    gpu_info=main_window.cfg.settings['GPUs'], 
+                    sample_info=sample_info, 
+                    patch_size=patch_size,
+                    channels_per_sample=channels_per_sample,
+                    network_base_memory=network_base_memory, 
+                    y_upsampling=y_upsampling,
+                    max_batch_size_allowed=max_batch_size_allowed,
+                    )
+            biapy_config['TRAIN']['BATCH_SIZE'] = batch_size
+        else:
+            biapy_config['TRAIN']['BATCH_SIZE'] = int(get_text(main_window.ui.TRAIN__BATCH_SIZE__INPUT))
         biapy_config['TRAIN']['EPOCHS'] = int(get_text(main_window.ui.TRAIN__EPOCHS__INPUT)) 
         if get_text(main_window.ui.TRAIN__ACCUM_ITER__INPUT) != 1:
             biapy_config['TRAIN']['ACCUM_ITER'] = int(get_text(main_window.ui.TRAIN__ACCUM_ITER__INPUT)) 
