@@ -6114,7 +6114,7 @@ QPushButton:pressed {
                              <rect>
                               <x>0</x>
                               <y>0</y>
-                              <width>928</width>
+                              <width>910</width>
                               <height>983</height>
                              </rect>
                             </property>
@@ -6463,7 +6463,7 @@ QPushButton:pressed {
                                     <rect>
                                      <x>0</x>
                                      <y>0</y>
-                                     <width>851</width>
+                                     <width>469</width>
                                      <height>288</height>
                                     </rect>
                                    </property>
@@ -8636,7 +8636,7 @@ QPushButton:pressed {
                                 <property name="geometry">
                                  <rect>
                                   <x>0</x>
-                                  <y>-4439</y>
+                                  <y>0</y>
                                   <width>905</width>
                                   <height>7950</height>
                                  </rect>
@@ -10760,12 +10760,12 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <item>
                                              <property name="text">
-                                              <string>No</string>
+                                              <string>Yes</string>
                                              </property>
                                             </item>
                                             <item>
                                              <property name="text">
-                                              <string>Yes</string>
+                                              <string>No</string>
                                              </property>
                                             </item>
                                            </widget>
@@ -27755,8 +27755,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>920</width>
-                                         <height>326</height>
+                                         <width>415</width>
+                                         <height>99</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_52">

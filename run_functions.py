@@ -652,7 +652,7 @@ class run_worker(QObject):
                     
                 # Update test progress bar
                 if self.config['TEST']['ENABLE'] and start_test and self.test_image_count < self.test_files and \
-                    "Processing image(s): ['{}']".format(self.test_filenames[self.test_image_count]) in l: 
+                    "Processing image: {}".format(self.test_filenames[self.test_image_count]) in l: 
                     self.test_image_count += 1
                     self.update_test_progress_signal.emit(self.test_image_count)
 
