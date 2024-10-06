@@ -459,6 +459,7 @@ class UIFunction(MainWindow):
         main_window.ui.SYSTEM__NUM_WORKERS__INPUT.addItem("0")
         for i in range(min(multiprocessing.cpu_count(),10)):
             main_window.ui.SYSTEM__NUM_WORKERS__INPUT.addItem(str(i+1))
+        main_window.ui.SYSTEM__NUM_WORKERS__INPUT.setCurrentText("2")
 
         time = datetime.now().strftime("%Y%m%d-%H%M%S")
         main_window.ui.goptions_yaml_name_input.setText("my_experiment_"+get_text(main_window.ui.PROBLEM__NDIM__INPUT)+"_"+time+".yaml")        
