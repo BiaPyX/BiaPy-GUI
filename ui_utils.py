@@ -1287,7 +1287,7 @@ def set_default_config(cfg, gpu_info, sample_info):
     ############################
     # WORKFLOW SPECIFIC CONFIG #
     ############################
-    max_batch_size_allowed = 32
+    max_batch_size_allowed = 16
     data_channels = cfg["DATA"]["PATCH_SIZE"][-1]
     if cfg["PROBLEM"]["TYPE"] in [
             "SEMANTIC_SEG",
@@ -2619,11 +2619,12 @@ def create_yaml_file(main_window):
     loss_name = main_window.cfg.translate_names(get_text(main_window.ui.LOSS__TYPE__INPUT), key_str="losses")
     biapy_config['LOSS'] = {}
     biapy_config['LOSS']['TYPE'] = loss_name
-    try:
-        biapy_config['LOSS']['WEIGHTS'] = ast.literal_eval(get_text(main_window.ui.LOSS__WEIGHTS__INPUT)) 
-    except:
-        main_window.dialog_exec("There was an error with loss weights field (LOSS.WEIGHTS). Please check its syntax!", reason="error")
-        return True, False
+    if biapy_config['LOSS']['TYPE'] == "W_CE_DICE":
+        try:
+            biapy_config['LOSS']['WEIGHTS'] = ast.literal_eval(get_text(main_window.ui.LOSS__WEIGHTS__INPUT)) 
+        except:
+            main_window.dialog_exec("There was an error with loss weights field (LOSS.WEIGHTS). Please check its syntax!", reason="error")
+            return True, False
     biapy_config['LOSS']['CLASS_REBALANCE'] = True if get_text(main_window.ui.LOSS__CLASS_REBALANCE__INPUT) == "Yes" else False
     
     # Metrics 
@@ -2676,7 +2677,7 @@ def create_yaml_file(main_window):
             except:
                 total_samples = 1
 
-            max_batch_size_allowed = 32 if biapy_config["PROBLEM"]["TYPE"] not in ["SUPER_RESOLUTION", "DENOISING"] else 64
+            max_batch_size_allowed = 16 if biapy_config["PROBLEM"]["TYPE"] not in ["SUPER_RESOLUTION", "DENOISING"] else 64
 
             if total_samples == 1:
                 batch_size = 1
