@@ -1942,17 +1942,18 @@ def create_yaml_file(main_window):
         if get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INPUT) == "Yes":
             biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_CHECK_MW'] = True 
         biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_TYPE'] = get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT)
-        if 'B' in problem_channels:
-            biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_BINARY_MASK'] = float(get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INPUT))
-            biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_FOREGROUND'] = float(get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INPUT))
-        if 'C' in problem_channels:
-            biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_CONTOUR'] = float(get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INPUT))
-        if 'D' in problem_channels:    
-            biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_DISTANCE'] = float(get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INPUT))
-            if get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__INPUT) == "Yes":
-                biapy_config['PROBLEM']['INSTANCE_SEG']['DISTANCE_CHANNEL_MASK'] = True
-        if 'P' in problem_channels: 
-            biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_POINTS'] = float(get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_POINTS__INPUT))
+        if biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_TYPE'] == "manual":
+            if 'B' in problem_channels:
+                biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_BINARY_MASK'] = float(get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INPUT))
+                biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_FOREGROUND'] = float(get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INPUT))
+            if 'C' in problem_channels:
+                biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_CONTOUR'] = float(get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INPUT))
+            if 'D' in problem_channels:    
+                biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_DISTANCE'] = float(get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INPUT))
+                if get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__INPUT) == "Yes":
+                    biapy_config['PROBLEM']['INSTANCE_SEG']['DISTANCE_CHANNEL_MASK'] = True
+            if 'P' in problem_channels: 
+                biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_POINTS'] = float(get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_MW_TH_POINTS__INPUT))
         if get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INPUT) == "Yes":
             biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_REMOVE_BEFORE_MW'] = True
             biapy_config['PROBLEM']['INSTANCE_SEG']['DATA_REMOVE_SMALL_OBJ_BEFORE'] = int(get_text(main_window.ui.PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INPUT))
@@ -2358,8 +2359,8 @@ def create_yaml_file(main_window):
         if get_text(main_window.ui.AUGMENTOR__ZOOM__INPUT) == "Yes":
             biapy_config['AUGMENTOR']['ZOOM'] = True  
             biapy_config['AUGMENTOR']['ZOOM_RANGE'] = get_text(main_window.ui.AUGMENTOR__ZOOM_RANGE__INPUT)
-            if get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "3D":
-                biapy_config['AUGMENTOR']['ZOOM_IN_Z'] = get_text(main_window.ui.AUGMENTOR__ZOOM_IN_Z__INPUT)
+            if get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "3D" and get_text(main_window.ui.AUGMENTOR__ZOOM_IN_Z__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['ZOOM_IN_Z'] = True
         if get_text(main_window.ui.AUGMENTOR__SHIFT__INPUT) == "Yes":
             biapy_config['AUGMENTOR']['SHIFT'] = True 
             biapy_config['AUGMENTOR']['SHIFT_RANGE'] = get_text(main_window.ui.AUGMENTOR__SHIFT_RANGE__INPUT)
