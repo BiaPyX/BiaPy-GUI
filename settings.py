@@ -99,8 +99,8 @@ class Settings:
 
         # Semantic segmentation
         self.settings["semantic_models"] = [
-            "unet",
             "resunet",
+            "unet",
             "resunet++",
             "resunet_se",
             "unext_v1",
@@ -110,8 +110,8 @@ class Settings:
             "unetr",
         ]
         self.settings["semantic_models_real_names"] = [
-            "U-Net",
             "Residual U-Net",
+            "U-Net",
             "ResUNet++",
             "ResUNet SE",
             "U-NeXt V1",
@@ -138,8 +138,8 @@ class Settings:
         ]
         # Instance segmentation
         self.settings["instance_models"] = [
-            "unet",
             "resunet",
+            "unet",
             "resunet++",
             "resunet_se",
             "unext_v1",
@@ -149,8 +149,8 @@ class Settings:
             "unetr",
         ]
         self.settings["instance_models_real_names"] = [
-            "U-Net",
             "Residual U-Net",
+            "U-Net",
             "ResUNet++",
             "ResUNet SE",
             "U-NeXt V1",
@@ -177,8 +177,8 @@ class Settings:
         ]
         # Detection
         self.settings["detection_models"] = [
-            "unet",
             "resunet",
+            "unet",
             "resunet++",
             "resunet_se",
             "unext_v1",
@@ -188,8 +188,8 @@ class Settings:
             "unetr",
         ]
         self.settings["detection_models_real_names"] = [
-            "U-Net",
             "Residual U-Net",
+            "U-Net",
             "ResUNet++",
             "ResUNet SE",
             "U-NeXt V1",
@@ -253,8 +253,8 @@ class Settings:
         ]
         # Super resolution
         self.settings["sr_2d_models"] = [
-            "edsr",
             "rcan",
+            "edsr",
             "dfcan",
             "wdsr",
             "unet",
@@ -267,8 +267,8 @@ class Settings:
             "multiresunet",
         ]
         self.settings["sr_2d_models_real_names"] = [
-            "EDSR",
             "RCAN",
+            "EDSR",
             "DFCAN",
             "WDSR",
             "U-Net",
@@ -280,10 +280,19 @@ class Settings:
             "Attention U-Net",
             "MultiResUnet",
         ]
-        self.settings["sr_3d_models"] = ["unet", "resunet", "resunet++", "resunet_se", "seunet", "attention_unet", "multiresunet"]
+        self.settings["sr_3d_models"] = [
+            "resunet", 
+            "unet", 
+            "resunet++", 
+            "resunet_se", 
+            "unext_v1",
+            "seunet", 
+            "attention_unet", 
+            "multiresunet"
+        ]
         self.settings["sr_3d_models_real_names"] = [
-            "U-Net",
             "Residual U-Net",
+            "U-Net",
             "ResUNet++",
             "ResUNet SE",
             "U-NeXt V1",
@@ -397,12 +406,12 @@ class Settings:
         ]
         # Image to image
         self.settings["i2i_models"] = [
+            "resunet",
             "edsr",
             "rcan",
             "dfcan",
             "wdsr",
             "unet",
-            "resunet",
             "resunet++",
             "resunet_se",
             "unext_v1",
@@ -412,12 +421,12 @@ class Settings:
             "multiresunet",
         ]
         self.settings["i2i_models_real_names"] = [
+            "Residual U-Net",
             "EDSR",
             "RCAN",
             "DFCAN",
             "WDSR",
             "U-Net",
-            "Residual U-Net",
             "ResUNet++",
             "ResUNet SE",
             "U-NeXt V1",

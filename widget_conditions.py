@@ -928,11 +928,36 @@ class Widget_conditions():
                         "reduceonplateau"
                     ],
                 }, 
+            "AUGMENTOR__ENABLE__LABEL": 
+                {
+                    "AUTOMATIC__AUG__INPUT": 
+                    [
+                        "Manually"
+                    ],
+                },
+            "AUGMENTOR__ENABLE__INFO": 
+                {
+                    "AUTOMATIC__AUG__INPUT": 
+                    [
+                        "Manually"
+                    ],
+                },
+            "AUGMENTOR__ENABLE__INPUT": 
+                {
+                    "AUTOMATIC__AUG__INPUT": 
+                    [
+                        "Manually"
+                    ],
+                },
             "da_frame": 
                 {
                     "AUGMENTOR__ENABLE__INPUT": 
                     [
                         "Yes"
+                    ],
+                    "AUTOMATIC__AUG__INPUT": 
+                    [
+                        "Manually"
                     ],
                 },
             "da_random_rot_range_label": 

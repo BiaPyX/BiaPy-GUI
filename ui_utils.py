@@ -1904,8 +1904,8 @@ def create_yaml_file(main_window):
     workflow_key_name = main_window.cfg.settings["workflow_key_names"][main_window.cfg.settings['selected_workflow']]
     ### SEMANTIC_SEG
     if workflow_key_name == "SEMANTIC_SEG":
-        biapy_config['PROBLEM']['SEMANTIC_SEG'] = {}
-        if get_text(main_window.ui.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INPUT) != 0:
+        if int(get_text(main_window.ui.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INPUT)) != 0:
+            biapy_config['PROBLEM']['SEMANTIC_SEG'] = {}
             biapy_config['PROBLEM']['SEMANTIC_SEG']['IGNORE_CLASS_ID'] = int(get_text(main_window.ui.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INPUT))
 
     ### INSTANCE_SEG
@@ -2291,6 +2291,160 @@ def create_yaml_file(main_window):
             except: 
                 main_window.dialog_exec("There was an error with train data filter samples signs array field (DATA.TRAIN.FILTER_SAMPLES.SIGNS). Please check its syntax!", reason="error")
                 return True, False
+            
+        # Data augmentation (DA)
+        biapy_config['AUGMENTOR'] = {}
+        if get_text(main_window.ui.AUGMENTOR__ENABLE__INPUT) == "Yes":
+            biapy_config['AUGMENTOR']['ENABLE'] = True  
+            if float(get_text(main_window.ui.AUGMENTOR__DA_PROB__INPUT)) != 0.5:
+                biapy_config['AUGMENTOR']['DA_PROB'] = float(get_text(main_window.ui.AUGMENTOR__DA_PROB__INPUT))
+            biapy_config['AUGMENTOR']['AUG_SAMPLES'] = True if get_text(main_window.ui.AUGMENTOR__AUG_SAMPLES__INPUT) == "Yes" else False
+            if get_text(main_window.ui.AUGMENTOR__DRAW_GRID__INPUT) == "No": 
+                biapy_config['AUGMENTOR']['DRAW_GRID'] = False
+            if int(get_text(main_window.ui.AUGMENTOR__AUG_NUM_SAMPLES__INPUT)) != 10:
+                biapy_config['AUGMENTOR']['AUG_NUM_SAMPLES'] = int(get_text(main_window.ui.AUGMENTOR__AUG_NUM_SAMPLES__INPUT))
+            if get_text(main_window.ui.AUGMENTOR__SHUFFLE_TRAIN_DATA_EACH_EPOCH__INPUT) == "No":                
+                biapy_config['AUGMENTOR']['SHUFFLE_TRAIN_DATA_EACH_EPOCH'] = False
+            if get_text(main_window.ui.AUGMENTOR__SHUFFLE_VAL_DATA_EACH_EPOCH__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['SHUFFLE_VAL_DATA_EACH_EPOCH'] = True
+            if get_text(main_window.ui.AUGMENTOR__ROT90__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['ROT90'] = True 
+            if get_text(main_window.ui.AUGMENTOR__RANDOM_ROT__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['RANDOM_ROT'] = True  
+                biapy_config['AUGMENTOR']['RANDOM_ROT_RANGE'] = get_text(main_window.ui.AUGMENTOR__RANDOM_ROT_RANGE__INPUT)
+            if get_text(main_window.ui.AUGMENTOR__SHEAR__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['SHEAR'] = True  
+                biapy_config['AUGMENTOR']['SHEAR_RANGE'] = get_text(main_window.ui.AUGMENTOR__SHEAR_RANGE__INPUT)
+            if get_text(main_window.ui.AUGMENTOR__ZOOM__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['ZOOM'] = True  
+                biapy_config['AUGMENTOR']['ZOOM_RANGE'] = get_text(main_window.ui.AUGMENTOR__ZOOM_RANGE__INPUT)
+                if get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "3D" and get_text(main_window.ui.AUGMENTOR__ZOOM_IN_Z__INPUT) == "Yes":
+                    biapy_config['AUGMENTOR']['ZOOM_IN_Z'] = True
+            if get_text(main_window.ui.AUGMENTOR__SHIFT__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['SHIFT'] = True 
+                biapy_config['AUGMENTOR']['SHIFT_RANGE'] = get_text(main_window.ui.AUGMENTOR__SHIFT_RANGE__INPUT)
+            if get_text(main_window.ui.AUGMENTOR__SHIFT__INPUT) == "Yes" or get_text(main_window.ui.AUGMENTOR__ZOOM__INPUT) == "Yes" or\
+                get_text(main_window.ui.AUGMENTOR__SHEAR__INPUT) == "Yes" or get_text(main_window.ui.AUGMENTOR__RANDOM_ROT__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['AFFINE_MODE'] = get_text(main_window.ui.AUGMENTOR__AFFINE_MODE__INPUT)
+            if get_text(main_window.ui.AUGMENTOR__VFLIP__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['VFLIP'] = True 
+            if get_text(main_window.ui.AUGMENTOR__HFLIP__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['HFLIP'] = True 
+            if get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "3D" and get_text(main_window.ui.AUGMENTOR__ZFLIP__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['ZFLIP'] = True 
+            if get_text(main_window.ui.AUGMENTOR__ELASTIC__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['ELASTIC'] = True 
+                biapy_config['AUGMENTOR']['E_ALPHA'] = get_text(main_window.ui.AUGMENTOR__E_ALPHA__INPUT)
+                biapy_config['AUGMENTOR']['E_SIGMA'] = int(get_text(main_window.ui.AUGMENTOR__E_SIGMA__INPUT))
+                biapy_config['AUGMENTOR']['E_MODE'] = get_text(main_window.ui.AUGMENTOR__E_MODE__INPUT)
+            if get_text(main_window.ui.AUGMENTOR__G_BLUR__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['G_BLUR'] = True 
+                biapy_config['AUGMENTOR']['G_SIGMA'] = get_text(main_window.ui.AUGMENTOR__G_SIGMA__INPUT)
+            if get_text(main_window.ui.AUGMENTOR__MEDIAN_BLUR__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['MEDIAN_BLUR'] = True 
+                biapy_config['AUGMENTOR']['MB_KERNEL'] = get_text(main_window.ui.AUGMENTOR__MB_KERNEL__INPUT)
+            if get_text(main_window.ui.AUGMENTOR__MOTION_BLUR__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['MOTION_BLUR'] = True 
+                biapy_config['AUGMENTOR']['MOTB_K_RANGE'] = get_text(main_window.ui.AUGMENTOR__MOTB_K_RANGE__INPUT)
+            if get_text(main_window.ui.AUGMENTOR__GAMMA_CONTRAST__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['GAMMA_CONTRAST'] = True
+                biapy_config['AUGMENTOR']['GC_GAMMA'] = get_text(main_window.ui.AUGMENTOR__GC_GAMMA__INPUT)
+            if get_text(main_window.ui.AUGMENTOR__BRIGHTNESS__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['BRIGHTNESS'] = True
+                biapy_config['AUGMENTOR']['BRIGHTNESS_FACTOR'] = get_text(main_window.ui.AUGMENTOR__BRIGHTNESS_FACTOR__INPUT)
+                if get_text(main_window.ui.AUGMENTOR__BRIGHTNESS_MODE__INPUT) != "3D":
+                    biapy_config['AUGMENTOR']['BRIGHTNESS_MODE'] = get_text(main_window.ui.AUGMENTOR__BRIGHTNESS_MODE__INPUT)
+            if get_text(main_window.ui.AUGMENTOR__CONTRAST__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['CONTRAST'] = True
+                biapy_config['AUGMENTOR']['CONTRAST_FACTOR'] = get_text(main_window.ui.AUGMENTOR__CONTRAST_FACTOR__INPUT)
+                if get_text(main_window.ui.AUGMENTOR__CONTRAST_MODE__INPUT) != "3D":
+                    biapy_config['AUGMENTOR']['CONTRAST_MODE'] = get_text(main_window.ui.AUGMENTOR__CONTRAST_MODE__INPUT)
+            if get_text(main_window.ui.AUGMENTOR__DROPOUT__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['DROPOUT'] = True
+                biapy_config['AUGMENTOR']['DROP_RANGE'] = get_text(main_window.ui.AUGMENTOR__DROP_RANGE__INPUT)
+            if get_text(main_window.ui.AUGMENTOR__CUTOUT__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['CUTOUT'] = True
+                biapy_config['AUGMENTOR']['COUT_NB_ITERATIONS'] = get_text(main_window.ui.AUGMENTOR__COUT_NB_ITERATIONS__INPUT)
+                biapy_config['AUGMENTOR']['COUT_SIZE'] = get_text(main_window.ui.AUGMENTOR__COUT_SIZE__INPUT)
+                biapy_config['AUGMENTOR']['COUT_CVAL'] = float(get_text(main_window.ui.AUGMENTOR__COUT_CVAL__INPUT))
+                biapy_config['AUGMENTOR']['COUT_APPLY_TO_MASK'] = True if get_text(main_window.ui.AUGMENTOR__COUT_APPLY_TO_MASK__INPUT) == "Yes" else False 
+            if get_text(main_window.ui.AUGMENTOR__CUTBLUR__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['CUTBLUR'] = True
+                biapy_config['AUGMENTOR']['CBLUR_SIZE'] = get_text(main_window.ui.AUGMENTOR__CBLUR_SIZE__INPUT)
+                biapy_config['AUGMENTOR']['CBLUR_DOWN_RANGE'] = get_text(main_window.ui.AUGMENTOR__CBLUR_DOWN_RANGE__INPUT)
+                biapy_config['AUGMENTOR']['CBLUR_INSIDE'] = True if get_text(main_window.ui.AUGMENTOR__CBLUR_INSIDE__INPUT) == "Yes" else False 
+            if get_text(main_window.ui.AUGMENTOR__CUTMIX__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['CUTMIX'] = True
+                biapy_config['AUGMENTOR']['CMIX_SIZE'] = get_text(main_window.ui.AUGMENTOR__CMIX_SIZE__INPUT)
+            if get_text(main_window.ui.AUGMENTOR__CUTNOISE__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['CUTNOISE'] = True
+                biapy_config['AUGMENTOR']['CNOISE_SCALE'] = get_text(main_window.ui.AUGMENTOR__CNOISE_SCALE__INPUT)
+                biapy_config['AUGMENTOR']['CNOISE_NB_ITERATIONS'] = get_text(main_window.ui.AUGMENTOR__CNOISE_NB_ITERATIONS__INPUT)
+                biapy_config['AUGMENTOR']['CNOISE_SIZE'] = get_text(main_window.ui.AUGMENTOR__CNOISE_SIZE__INPUT)
+            if get_text(main_window.ui.AUGMENTOR__MISALIGNMENT__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['MISALIGNMENT'] = True
+                biapy_config['AUGMENTOR']['MS_DISPLACEMENT'] = int(get_text(main_window.ui.AUGMENTOR__MS_DISPLACEMENT__INPUT))
+                biapy_config['AUGMENTOR']['MS_ROTATE_RATIO'] = float(get_text(main_window.ui.AUGMENTOR__MS_ROTATE_RATIO__INPUT))
+            if get_text(main_window.ui.AUGMENTOR__MISSING_SECTIONS__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['MISSING_SECTIONS'] = True
+                biapy_config['AUGMENTOR']['MISSP_ITERATIONS'] = get_text(main_window.ui.AUGMENTOR__MISSP_ITERATIONS__INPUT)
+            if get_text(main_window.ui.AUGMENTOR__GRAYSCALE__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['GRAYSCALE'] = True
+            if get_text(main_window.ui.AUGMENTOR__CHANNEL_SHUFFLE__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['CHANNEL_SHUFFLE'] = True
+            if get_text(main_window.ui.AUGMENTOR__GRIDMASK__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['GRIDMASK'] = True
+                biapy_config['AUGMENTOR']['GRID_RATIO'] = float(get_text(main_window.ui.AUGMENTOR__GRID_RATIO__INPUT))
+                biapy_config['AUGMENTOR']['GRID_D_RANGE'] = get_text(main_window.ui.AUGMENTOR__GRID_D_RANGE__INPUT)
+                biapy_config['AUGMENTOR']['GRID_ROTATE'] = float(get_text(main_window.ui.AUGMENTOR__GRID_ROTATE__INPUT))
+                biapy_config['AUGMENTOR']['GRID_INVERT'] = True if get_text(main_window.ui.AUGMENTOR__GRID_INVERT__INPUT) == "Yes" else False 
+            if get_text(main_window.ui.AUGMENTOR__GAUSSIAN_NOISE__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['GAUSSIAN_NOISE'] = True
+                biapy_config['AUGMENTOR']['GAUSSIAN_NOISE_MEAN'] = float(get_text(main_window.ui.AUGMENTOR__GAUSSIAN_NOISE_MEAN__INPUT))
+                biapy_config['AUGMENTOR']['GAUSSIAN_NOISE_VAR'] = float(get_text(main_window.ui.AUGMENTOR__GAUSSIAN_NOISE_VAR__INPUT))
+                biapy_config['AUGMENTOR']['GAUSSIAN_NOISE_USE_INPUT_IMG_MEAN_AND_VAR'] = True if get_text(main_window.ui.AUGMENTOR__GAUSSIAN_NOISE_USE_INPUT_IMG_MEAN_AND_VAR__INPUT) == "Yes" else False 
+            if get_text(main_window.ui.AUGMENTOR__POISSON_NOISE__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['POISSON_NOISE'] = True
+            if get_text(main_window.ui.AUGMENTOR__SALT__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['SALT'] = True
+                biapy_config['AUGMENTOR']['SALT_AMOUNT'] = float(get_text(main_window.ui.AUGMENTOR__SALT_AMOUNT__INPUT))
+            if get_text(main_window.ui.AUGMENTOR__PEPPER__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['PEPPER'] = True
+                biapy_config['AUGMENTOR']['PEPPER_AMOUNT'] = float(get_text(main_window.ui.AUGMENTOR__PEPPER_AMOUNT__INPUT))
+            if get_text(main_window.ui.AUGMENTOR__SALT_AND_PEPPER__INPUT) == "Yes":
+                biapy_config['AUGMENTOR']['SALT_AND_PEPPER'] = True
+                biapy_config['AUGMENTOR']['SALT_AND_PEPPER_AMOUNT'] = float(get_text(main_window.ui.AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INPUT))
+                biapy_config['AUGMENTOR']['SALT_AND_PEPPER_PROP'] = float(get_text(main_window.ui.AUGMENTOR__SALT_AND_PEPPER_PROP__INPUT))
+        else:
+            if get_text(main_window.ui.AUTOMATIC__AUG__INPUT) == "Manually":
+                biapy_config['AUGMENTOR']['ENABLE'] = False
+            else: # Automatically: configure default augmentations depending on the workflow 
+                biapy_config['AUGMENTOR']['ENABLE'] = True
+
+                # Basic DA
+                biapy_config['AUGMENTOR']["AFFINE_MODE"] = 'reflect'
+                biapy_config['AUGMENTOR']["VFLIP"] = True
+                biapy_config['AUGMENTOR']["HFLIP"] = True
+                if biapy_config['PROBLEM']['NDIM'] == "3D":
+                    biapy_config['AUGMENTOR']['ZFLIP'] = True
+
+                # Workflow specific DA
+                if workflow_key_name in [
+                    "SEMANTIC_SEG",
+                    "INSTANCE_SEG",
+                    "DETECTION",
+                    "IMAGE_TO_IMAGE"
+                ]:
+                    biapy_config['AUGMENTOR']['BRIGHTNESS'] = True
+                    biapy_config['AUGMENTOR']['BRIGHTNESS_FACTOR'] = str((-0.1, 0.1))
+                    biapy_config['AUGMENTOR']['CONTRAST'] = True
+                    biapy_config['AUGMENTOR']['CONTRAST_FACTOR'] = str((-0.1, 0.1))
+                    biapy_config['AUGMENTOR']['ELASTIC'] = True
+                    biapy_config['AUGMENTOR']['ZOOM'] = True
+                    biapy_config['AUGMENTOR']['ZOOM_RANGE'] = str((0.9, 1.1))
+                    biapy_config['AUGMENTOR']['RANDOM_ROT'] = True
+                    biapy_config['AUGMENTOR']['RANDOM_ROT_RANGE'] = str((-180, 180))
+            
     # Test
     if get_text(main_window.ui.TEST__ENABLE__INPUT) == "Yes":
         biapy_config['DATA']['TEST'] = {}
@@ -2335,127 +2489,6 @@ def create_yaml_file(main_window):
         except: 
             main_window.dialog_exec("There was an error with train data filter samples signs array field (DATA.TRAIN.FILTER_SAMPLES.SIGNS). Please check its syntax!", reason="error")
             return True, False
-
-    # Data augmentation (DA)
-    biapy_config['AUGMENTOR'] = {}
-    if get_text(main_window.ui.AUGMENTOR__ENABLE__INPUT) == "Yes":
-        biapy_config['AUGMENTOR']['ENABLE'] = True  
-        biapy_config['AUGMENTOR']['DA_PROB'] = float(get_text(main_window.ui.AUGMENTOR__DA_PROB__INPUT))
-        biapy_config['AUGMENTOR']['AUG_SAMPLES'] = True if get_text(main_window.ui.AUGMENTOR__AUG_SAMPLES__INPUT) == "Yes" else False
-        if get_text(main_window.ui.AUGMENTOR__DRAW_GRID__INPUT) == "No": 
-            biapy_config['AUGMENTOR']['DRAW_GRID'] = False
-        if int(get_text(main_window.ui.AUGMENTOR__AUG_NUM_SAMPLES__INPUT)) != 10:
-            biapy_config['AUGMENTOR']['AUG_NUM_SAMPLES'] = int(get_text(main_window.ui.AUGMENTOR__AUG_NUM_SAMPLES__INPUT))
-        biapy_config['AUGMENTOR']['SHUFFLE_TRAIN_DATA_EACH_EPOCH'] = True if get_text(main_window.ui.AUGMENTOR__SHUFFLE_TRAIN_DATA_EACH_EPOCH__INPUT) == "Yes" else False 
-        biapy_config['AUGMENTOR']['SHUFFLE_VAL_DATA_EACH_EPOCH'] = True if get_text(main_window.ui.AUGMENTOR__SHUFFLE_VAL_DATA_EACH_EPOCH__INPUT) == "Yes" else False 
-        if get_text(main_window.ui.AUGMENTOR__ROT90__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['ROT90'] = True 
-        if get_text(main_window.ui.AUGMENTOR__RANDOM_ROT__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['RANDOM_ROT'] = True  
-            biapy_config['AUGMENTOR']['RANDOM_ROT_RANGE'] = get_text(main_window.ui.AUGMENTOR__RANDOM_ROT_RANGE__INPUT)
-        if get_text(main_window.ui.AUGMENTOR__SHEAR__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['SHEAR'] = True  
-            biapy_config['AUGMENTOR']['SHEAR_RANGE'] = get_text(main_window.ui.AUGMENTOR__SHEAR_RANGE__INPUT)
-        if get_text(main_window.ui.AUGMENTOR__ZOOM__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['ZOOM'] = True  
-            biapy_config['AUGMENTOR']['ZOOM_RANGE'] = get_text(main_window.ui.AUGMENTOR__ZOOM_RANGE__INPUT)
-            if get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "3D" and get_text(main_window.ui.AUGMENTOR__ZOOM_IN_Z__INPUT) == "Yes":
-                biapy_config['AUGMENTOR']['ZOOM_IN_Z'] = True
-        if get_text(main_window.ui.AUGMENTOR__SHIFT__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['SHIFT'] = True 
-            biapy_config['AUGMENTOR']['SHIFT_RANGE'] = get_text(main_window.ui.AUGMENTOR__SHIFT_RANGE__INPUT)
-        if get_text(main_window.ui.AUGMENTOR__SHIFT__INPUT) == "Yes" or get_text(main_window.ui.AUGMENTOR__ZOOM__INPUT) == "Yes" or\
-            get_text(main_window.ui.AUGMENTOR__SHEAR__INPUT) == "Yes" or get_text(main_window.ui.AUGMENTOR__RANDOM_ROT__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['AFFINE_MODE'] = get_text(main_window.ui.AUGMENTOR__AFFINE_MODE__INPUT)
-        if get_text(main_window.ui.AUGMENTOR__VFLIP__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['VFLIP'] = True 
-        if get_text(main_window.ui.AUGMENTOR__HFLIP__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['HFLIP'] = True 
-        if get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "3D" and get_text(main_window.ui.AUGMENTOR__ZFLIP__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['ZFLIP'] = True 
-        if get_text(main_window.ui.AUGMENTOR__ELASTIC__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['ELASTIC'] = True 
-            biapy_config['AUGMENTOR']['E_ALPHA'] = get_text(main_window.ui.AUGMENTOR__E_ALPHA__INPUT)
-            biapy_config['AUGMENTOR']['E_SIGMA'] = int(get_text(main_window.ui.AUGMENTOR__E_SIGMA__INPUT))
-            biapy_config['AUGMENTOR']['E_MODE'] = get_text(main_window.ui.AUGMENTOR__E_MODE__INPUT)
-        if get_text(main_window.ui.AUGMENTOR__G_BLUR__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['G_BLUR'] = True 
-            biapy_config['AUGMENTOR']['G_SIGMA'] = get_text(main_window.ui.AUGMENTOR__G_SIGMA__INPUT)
-        if get_text(main_window.ui.AUGMENTOR__MEDIAN_BLUR__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['MEDIAN_BLUR'] = True 
-            biapy_config['AUGMENTOR']['MB_KERNEL'] = get_text(main_window.ui.AUGMENTOR__MB_KERNEL__INPUT)
-        if get_text(main_window.ui.AUGMENTOR__MOTION_BLUR__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['MOTION_BLUR'] = True 
-            biapy_config['AUGMENTOR']['MOTB_K_RANGE'] = get_text(main_window.ui.AUGMENTOR__MOTB_K_RANGE__INPUT)
-        if get_text(main_window.ui.AUGMENTOR__GAMMA_CONTRAST__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['GAMMA_CONTRAST'] = True
-            biapy_config['AUGMENTOR']['GC_GAMMA'] = get_text(main_window.ui.AUGMENTOR__GC_GAMMA__INPUT)
-        if get_text(main_window.ui.AUGMENTOR__BRIGHTNESS__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['BRIGHTNESS'] = True
-            biapy_config['AUGMENTOR']['BRIGHTNESS_FACTOR'] = get_text(main_window.ui.AUGMENTOR__BRIGHTNESS_FACTOR__INPUT)
-            biapy_config['AUGMENTOR']['BRIGHTNESS_MODE'] = get_text(main_window.ui.AUGMENTOR__BRIGHTNESS_MODE__INPUT)
-        if get_text(main_window.ui.AUGMENTOR__CONTRAST__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['CONTRAST'] = True
-            biapy_config['AUGMENTOR']['CONTRAST_FACTOR'] = get_text(main_window.ui.AUGMENTOR__CONTRAST_FACTOR__INPUT)
-            biapy_config['AUGMENTOR']['CONTRAST_MODE'] = get_text(main_window.ui.AUGMENTOR__CONTRAST_MODE__INPUT)
-        if get_text(main_window.ui.AUGMENTOR__DROPOUT__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['DROPOUT'] = True
-            biapy_config['AUGMENTOR']['DROP_RANGE'] = get_text(main_window.ui.AUGMENTOR__DROP_RANGE__INPUT)
-        if get_text(main_window.ui.AUGMENTOR__CUTOUT__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['CUTOUT'] = True
-            biapy_config['AUGMENTOR']['COUT_NB_ITERATIONS'] = get_text(main_window.ui.AUGMENTOR__COUT_NB_ITERATIONS__INPUT)
-            biapy_config['AUGMENTOR']['COUT_SIZE'] = get_text(main_window.ui.AUGMENTOR__COUT_SIZE__INPUT)
-            biapy_config['AUGMENTOR']['COUT_CVAL'] = float(get_text(main_window.ui.AUGMENTOR__COUT_CVAL__INPUT))
-            biapy_config['AUGMENTOR']['COUT_APPLY_TO_MASK'] = True if get_text(main_window.ui.AUGMENTOR__COUT_APPLY_TO_MASK__INPUT) == "Yes" else False 
-        if get_text(main_window.ui.AUGMENTOR__CUTBLUR__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['CUTBLUR'] = True
-            biapy_config['AUGMENTOR']['CBLUR_SIZE'] = get_text(main_window.ui.AUGMENTOR__CBLUR_SIZE__INPUT)
-            biapy_config['AUGMENTOR']['CBLUR_DOWN_RANGE'] = get_text(main_window.ui.AUGMENTOR__CBLUR_DOWN_RANGE__INPUT)
-            biapy_config['AUGMENTOR']['CBLUR_INSIDE'] = True if get_text(main_window.ui.AUGMENTOR__CBLUR_INSIDE__INPUT) == "Yes" else False 
-        if get_text(main_window.ui.AUGMENTOR__CUTMIX__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['CUTMIX'] = True
-            biapy_config['AUGMENTOR']['CMIX_SIZE'] = get_text(main_window.ui.AUGMENTOR__CMIX_SIZE__INPUT)
-        if get_text(main_window.ui.AUGMENTOR__CUTNOISE__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['CUTNOISE'] = True
-            biapy_config['AUGMENTOR']['CNOISE_SCALE'] = get_text(main_window.ui.AUGMENTOR__CNOISE_SCALE__INPUT)
-            biapy_config['AUGMENTOR']['CNOISE_NB_ITERATIONS'] = get_text(main_window.ui.AUGMENTOR__CNOISE_NB_ITERATIONS__INPUT)
-            biapy_config['AUGMENTOR']['CNOISE_SIZE'] = get_text(main_window.ui.AUGMENTOR__CNOISE_SIZE__INPUT)
-        if get_text(main_window.ui.AUGMENTOR__MISALIGNMENT__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['MISALIGNMENT'] = True
-            biapy_config['AUGMENTOR']['MS_DISPLACEMENT'] = int(get_text(main_window.ui.AUGMENTOR__MS_DISPLACEMENT__INPUT))
-            biapy_config['AUGMENTOR']['MS_ROTATE_RATIO'] = float(get_text(main_window.ui.AUGMENTOR__MS_ROTATE_RATIO__INPUT))
-        if get_text(main_window.ui.AUGMENTOR__MISSING_SECTIONS__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['MISSING_SECTIONS'] = True
-            biapy_config['AUGMENTOR']['MISSP_ITERATIONS'] = get_text(main_window.ui.AUGMENTOR__MISSP_ITERATIONS__INPUT)
-        if get_text(main_window.ui.AUGMENTOR__GRAYSCALE__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['GRAYSCALE'] = True
-        if get_text(main_window.ui.AUGMENTOR__CHANNEL_SHUFFLE__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['CHANNEL_SHUFFLE'] = True
-        if get_text(main_window.ui.AUGMENTOR__GRIDMASK__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['GRIDMASK'] = True
-            biapy_config['AUGMENTOR']['GRID_RATIO'] = float(get_text(main_window.ui.AUGMENTOR__GRID_RATIO__INPUT))
-            biapy_config['AUGMENTOR']['GRID_D_RANGE'] = get_text(main_window.ui.AUGMENTOR__GRID_D_RANGE__INPUT)
-            biapy_config['AUGMENTOR']['GRID_ROTATE'] = float(get_text(main_window.ui.AUGMENTOR__GRID_ROTATE__INPUT))
-            biapy_config['AUGMENTOR']['GRID_INVERT'] = True if get_text(main_window.ui.AUGMENTOR__GRID_INVERT__INPUT) == "Yes" else False 
-        if get_text(main_window.ui.AUGMENTOR__GAUSSIAN_NOISE__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['GAUSSIAN_NOISE'] = True
-            biapy_config['AUGMENTOR']['GAUSSIAN_NOISE_MEAN'] = float(get_text(main_window.ui.AUGMENTOR__GAUSSIAN_NOISE_MEAN__INPUT))
-            biapy_config['AUGMENTOR']['GAUSSIAN_NOISE_VAR'] = float(get_text(main_window.ui.AUGMENTOR__GAUSSIAN_NOISE_VAR__INPUT))
-            biapy_config['AUGMENTOR']['GAUSSIAN_NOISE_USE_INPUT_IMG_MEAN_AND_VAR'] = True if get_text(main_window.ui.AUGMENTOR__GAUSSIAN_NOISE_USE_INPUT_IMG_MEAN_AND_VAR__INPUT) == "Yes" else False 
-        if get_text(main_window.ui.AUGMENTOR__POISSON_NOISE__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['POISSON_NOISE'] = True
-        if get_text(main_window.ui.AUGMENTOR__SALT__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['SALT'] = True
-            biapy_config['AUGMENTOR']['SALT_AMOUNT'] = float(get_text(main_window.ui.AUGMENTOR__SALT_AMOUNT__INPUT))
-        if get_text(main_window.ui.AUGMENTOR__PEPPER__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['PEPPER'] = True
-            biapy_config['AUGMENTOR']['PEPPER_AMOUNT'] = float(get_text(main_window.ui.AUGMENTOR__PEPPER_AMOUNT__INPUT))
-        if get_text(main_window.ui.AUGMENTOR__SALT_AND_PEPPER__INPUT) == "Yes":
-            biapy_config['AUGMENTOR']['SALT_AND_PEPPER'] = True
-            biapy_config['AUGMENTOR']['SALT_AND_PEPPER_AMOUNT'] = float(get_text(main_window.ui.AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INPUT))
-            biapy_config['AUGMENTOR']['SALT_AND_PEPPER_PROP'] = float(get_text(main_window.ui.AUGMENTOR__SALT_AND_PEPPER_PROP__INPUT))
-    else:
-        biapy_config['AUGMENTOR']['ENABLE'] = False
 
     # Model definition
     biapy_config['MODEL'] = {}
@@ -2682,8 +2715,10 @@ def create_yaml_file(main_window):
                 total_samples = len(next(os.walk(biapy_config['DATA']['TRAIN']['PATH']))[2]) 
             except:
                 total_samples = 1
-
-            max_batch_size_allowed = 16 if biapy_config["PROBLEM"]["TYPE"] not in ["SUPER_RESOLUTION", "DENOISING"] else 64
+            if biapy_config["PROBLEM"]["TYPE"] not in ["SUPER_RESOLUTION", "DENOISING"]:
+                max_batch_size_allowed = 16 if biapy_config['PROBLEM']['NDIM'] == "2D" else 4   
+            else:
+                max_batch_size_allowed = 64
 
             if total_samples == 1:
                 batch_size = 1

@@ -457,6 +457,8 @@ class MainWindow(QMainWindow):
             "TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO",
             "lr_schel_reduce_on_plat_factor_label", "TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT",
             "TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO"]))
+        self.ui.AUTOMATIC__AUG__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
+            ["AUGMENTOR__ENABLE__INPUT", "AUGMENTOR__ENABLE__INFO", "AUGMENTOR__ENABLE__LABEL", "da_frame"]))
         self.ui.AUGMENTOR__ENABLE__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 
             ["da_frame"]))
         self.ui.AUGMENTOR__RANDOM_ROT__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self, 

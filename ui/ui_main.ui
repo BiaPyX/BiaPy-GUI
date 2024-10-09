@@ -8636,9 +8636,9 @@ QPushButton:pressed {
                                 <property name="geometry">
                                  <rect>
                                   <x>0</x>
-                                  <y>-382</y>
+                                  <y>-4823</y>
                                   <width>944</width>
-                                  <height>7930</height>
+                                  <height>7969</height>
                                  </rect>
                                 </property>
                                 <property name="layoutDirection">
@@ -14298,12 +14298,12 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <item>
                                              <property name="text">
-                                              <string>Yes</string>
+                                              <string>No</string>
                                              </property>
                                             </item>
                                             <item>
                                              <property name="text">
-                                              <string>No</string>
+                                              <string>Yes</string>
                                              </property>
                                             </item>
                                            </widget>
@@ -14605,12 +14605,12 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <item>
                                              <property name="text">
-                                              <string>Yes</string>
+                                              <string>No</string>
                                              </property>
                                             </item>
                                             <item>
                                              <property name="text">
-                                              <string>No</string>
+                                              <string>Yes</string>
                                              </property>
                                             </item>
                                            </widget>
@@ -15003,12 +15003,12 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <item>
                                              <property name="text">
-                                              <string>Yes</string>
+                                              <string>No</string>
                                              </property>
                                             </item>
                                             <item>
                                              <property name="text">
-                                              <string>No</string>
+                                              <string>Yes</string>
                                              </property>
                                             </item>
                                            </widget>
@@ -15185,12 +15185,12 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <item>
                                              <property name="text">
-                                              <string>Yes</string>
+                                              <string>No</string>
                                              </property>
                                             </item>
                                             <item>
                                              <property name="text">
-                                              <string>No</string>
+                                              <string>Yes</string>
                                              </property>
                                             </item>
                                            </widget>
@@ -17263,12 +17263,12 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <item>
                                              <property name="text">
-                                              <string>Yes</string>
+                                              <string>No</string>
                                              </property>
                                             </item>
                                             <item>
                                              <property name="text">
-                                              <string>No</string>
+                                              <string>Yes</string>
                                              </property>
                                             </item>
                                            </widget>
@@ -17408,12 +17408,12 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <item>
                                              <property name="text">
-                                              <string>Yes</string>
+                                              <string>No</string>
                                              </property>
                                             </item>
                                             <item>
                                              <property name="text">
-                                              <string>No</string>
+                                              <string>Yes</string>
                                              </property>
                                             </item>
                                            </widget>
@@ -18299,12 +18299,12 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <item>
                                              <property name="text">
-                                              <string>Yes</string>
+                                              <string>No</string>
                                              </property>
                                             </item>
                                             <item>
                                              <property name="text">
-                                              <string>No</string>
+                                              <string>Yes</string>
                                              </property>
                                             </item>
                                            </widget>
@@ -18904,12 +18904,12 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <item>
                                              <property name="text">
-                                              <string>Yes</string>
+                                              <string>No</string>
                                              </property>
                                             </item>
                                             <item>
                                              <property name="text">
-                                              <string>No</string>
+                                              <string>Yes</string>
                                              </property>
                                             </item>
                                            </widget>
@@ -19855,12 +19855,12 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <item>
                                              <property name="text">
-                                              <string>No</string>
+                                              <string>Yes</string>
                                              </property>
                                             </item>
                                             <item>
                                              <property name="text">
-                                              <string>Yes</string>
+                                              <string>No</string>
                                              </property>
                                             </item>
                                            </widget>
@@ -20712,7 +20712,7 @@ p, li { white-space: pre-wrap; }
                                          <property name="frameShadow">
                                           <enum>QFrame::Raised</enum>
                                          </property>
-                                         <layout class="QGridLayout" name="gridLayout_69" rowstretch="0">
+                                         <layout class="QGridLayout" name="gridLayout_69" rowstretch="0,0">
                                           <property name="leftMargin">
                                            <number>0</number>
                                           </property>
@@ -20725,14 +20725,11 @@ p, li { white-space: pre-wrap; }
                                           <property name="bottomMargin">
                                            <number>0</number>
                                           </property>
-                                          <property name="horizontalSpacing">
+                                          <property name="spacing">
                                            <number>9</number>
                                           </property>
-                                          <property name="verticalSpacing">
-                                           <number>0</number>
-                                          </property>
-                                          <item row="0" column="0">
-                                           <widget class="QLabel" name="label_57">
+                                          <item row="1" column="0">
+                                           <widget class="QLabel" name="AUGMENTOR__ENABLE__LABEL">
                                             <property name="font">
                                              <font>
                                               <family>DejaVu Math TeX Gyre</family>
@@ -20744,7 +20741,7 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                            </widget>
                                           </item>
-                                          <item row="0" column="1">
+                                          <item row="1" column="2">
                                            <widget class="QComboBox" name="AUGMENTOR__ENABLE__INPUT">
                                             <property name="minimumSize">
                                              <size>
@@ -20766,17 +20763,49 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <item>
                                              <property name="text">
-                                              <string>Yes</string>
+                                              <string>No</string>
                                              </property>
                                             </item>
                                             <item>
                                              <property name="text">
-                                              <string>No</string>
+                                              <string>Yes</string>
                                              </property>
                                             </item>
                                            </widget>
                                           </item>
                                           <item row="0" column="2">
+                                           <widget class="QComboBox" name="AUTOMATIC__AUG__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>0</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <item>
+                                             <property name="text">
+                                              <string>Automatically</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>Manually</string>
+                                             </property>
+                                            </item>
+                                           </widget>
+                                          </item>
+                                          <item row="0" column="3">
                                            <spacer name="horizontalSpacer_65">
                                             <property name="orientation">
                                              <enum>Qt::Horizontal</enum>
@@ -20788,6 +20817,81 @@ p, li { white-space: pre-wrap; }
                                              </size>
                                             </property>
                                            </spacer>
+                                          </item>
+                                          <item row="0" column="0">
+                                           <widget class="QLabel" name="AUTOMATIC__AUG__LABEL">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>How to configure the data augmentation?</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="1" column="1">
+                                           <widget class="QLabel" name="AUGMENTOR__ENABLE__INFO">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Whether to enable data augmentation or not&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string/>
+                                            </property>
+                                            <property name="scaledContents">
+                                             <bool>true</bool>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="0" column="1">
+                                           <widget class="QLabel" name="AUTOMATIC__AUG__INFO">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Whether to automatically configure the data augmentation based on the workflow specified or configure it manually&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="text">
+                                             <string/>
+                                            </property>
+                                            <property name="scaledContents">
+                                             <bool>true</bool>
+                                            </property>
+                                           </widget>
                                           </item>
                                          </layout>
                                         </widget>
