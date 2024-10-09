@@ -1687,7 +1687,7 @@ class Ui_MainWindow(object):
         self.scrollArea_18.setWidgetResizable(True)
         self.scrollAreaWidgetContents_23 = QWidget()
         self.scrollAreaWidgetContents_23.setObjectName(u"scrollAreaWidgetContents_23")
-        self.scrollAreaWidgetContents_23.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_23.setGeometry(QRect(0, 0, 930, 172))
         self.verticalLayout_62 = QVBoxLayout(self.scrollAreaWidgetContents_23)
         self.verticalLayout_62.setObjectName(u"verticalLayout_62")
         self.scrollArea_18.setWidget(self.scrollAreaWidgetContents_23)
@@ -3394,7 +3394,7 @@ class Ui_MainWindow(object):
         self.train_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, -6147, 944, 7930))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, -382, 944, 7930))
         self.scrollAreaWidgetContents_3.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout_3 = QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
@@ -4096,11 +4096,11 @@ class Ui_MainWindow(object):
         self.frame_28.setFrameShadow(QFrame.Raised)
         self.gridLayout_29 = QGridLayout(self.frame_28)
         self.gridLayout_29.setObjectName(u"gridLayout_29")
-        self.LOSS__CLASS_REBALANCE__LABEL = QLabel(self.frame_28)
-        self.LOSS__CLASS_REBALANCE__LABEL.setObjectName(u"LOSS__CLASS_REBALANCE__LABEL")
-        self.LOSS__CLASS_REBALANCE__LABEL.setFont(font)
+        self.label_162 = QLabel(self.frame_28)
+        self.label_162.setObjectName(u"label_162")
+        self.label_162.setFont(font)
 
-        self.gridLayout_29.addWidget(self.LOSS__CLASS_REBALANCE__LABEL, 3, 0, 1, 1)
+        self.gridLayout_29.addWidget(self.label_162, 14, 0, 1, 1)
 
         self.LOSS__CLASS_REBALANCE__INFO = QPushButton(self.frame_28)
         self.LOSS__CLASS_REBALANCE__INFO.setObjectName(u"LOSS__CLASS_REBALANCE__INFO")
@@ -4113,6 +4113,111 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addWidget(self.LOSS__CLASS_REBALANCE__INFO, 3, 1, 1, 1)
 
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO = QPushButton(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO")
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO, 19, 1, 1, 1)
+
+        self.label_114 = QLabel(self.frame_28)
+        self.label_114.setObjectName(u"label_114")
+        self.label_114.setFont(font)
+
+        self.gridLayout_29.addWidget(self.label_114, 11, 0, 1, 1)
+
+        self.TRAIN__BATCH_SIZE__INFO = QPushButton(self.frame_28)
+        self.TRAIN__BATCH_SIZE__INFO.setObjectName(u"TRAIN__BATCH_SIZE__INFO")
+        self.TRAIN__BATCH_SIZE__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__BATCH_SIZE__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__BATCH_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__INFO, 10, 1, 1, 1)
+
+        self.lr_schel_warmupcosine_epochs_label = QLabel(self.frame_28)
+        self.lr_schel_warmupcosine_epochs_label.setObjectName(u"lr_schel_warmupcosine_epochs_label")
+        self.lr_schel_warmupcosine_epochs_label.setFont(font)
+        self.lr_schel_warmupcosine_epochs_label.setIndent(15)
+
+        self.gridLayout_29.addWidget(self.lr_schel_warmupcosine_epochs_label, 21, 0, 1, 1)
+
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO = QPushButton(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO")
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO, 18, 1, 1, 1)
+
+        self.TRAIN__BATCH_SIZE__CALCULATION__LABEL = QLabel(self.frame_28)
+        self.TRAIN__BATCH_SIZE__CALCULATION__LABEL.setObjectName(u"TRAIN__BATCH_SIZE__CALCULATION__LABEL")
+        self.TRAIN__BATCH_SIZE__CALCULATION__LABEL.setFont(font)
+
+        self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__CALCULATION__LABEL, 9, 0, 1, 1)
+
+        self.verticalSpacer_14 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.gridLayout_29.addItem(self.verticalSpacer_14, 28, 0, 1, 1)
+
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO = QPushButton(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__MIN_LR__INFO")
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__MIN_LR__INFO, 16, 1, 1, 1)
+
+        self.TRAIN__METRICS__LABEL = QLabel(self.frame_28)
+        self.TRAIN__METRICS__LABEL.setObjectName(u"TRAIN__METRICS__LABEL")
+        self.TRAIN__METRICS__LABEL.setFont(font)
+
+        self.gridLayout_29.addWidget(self.TRAIN__METRICS__LABEL, 4, 0, 1, 1)
+
+        self.TRAIN__ACCUM_ITER__INFO = QPushButton(self.frame_28)
+        self.TRAIN__ACCUM_ITER__INFO.setObjectName(u"TRAIN__ACCUM_ITER__INFO")
+        self.TRAIN__ACCUM_ITER__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__ACCUM_ITER__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__ACCUM_ITER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__ACCUM_ITER__INFO, 11, 1, 1, 1)
+
+        self.lr_schel_reduce_on_plat_patience_label = QLabel(self.frame_28)
+        self.lr_schel_reduce_on_plat_patience_label.setObjectName(u"lr_schel_reduce_on_plat_patience_label")
+        self.lr_schel_reduce_on_plat_patience_label.setFont(font)
+        self.lr_schel_reduce_on_plat_patience_label.setIndent(15)
+
+        self.gridLayout_29.addWidget(self.lr_schel_reduce_on_plat_patience_label, 18, 0, 1, 1)
+
+        self.LOSS__TYPE__LABEL = QLabel(self.frame_28)
+        self.LOSS__TYPE__LABEL.setObjectName(u"LOSS__TYPE__LABEL")
+        self.LOSS__TYPE__LABEL.setFont(font)
+
+        self.gridLayout_29.addWidget(self.LOSS__TYPE__LABEL, 1, 0, 1, 1)
+
+        self.TRAIN__BATCH_SIZE__LABEL = QLabel(self.frame_28)
+        self.TRAIN__BATCH_SIZE__LABEL.setObjectName(u"TRAIN__BATCH_SIZE__LABEL")
+        self.TRAIN__BATCH_SIZE__LABEL.setFont(font)
+        self.TRAIN__BATCH_SIZE__LABEL.setIndent(15)
+
+        self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__LABEL, 10, 0, 1, 1)
+
+        self.LOSS__CLASS_REBALANCE__LABEL = QLabel(self.frame_28)
+        self.LOSS__CLASS_REBALANCE__LABEL.setObjectName(u"LOSS__CLASS_REBALANCE__LABEL")
+        self.LOSS__CLASS_REBALANCE__LABEL.setFont(font)
+
+        self.gridLayout_29.addWidget(self.LOSS__CLASS_REBALANCE__LABEL, 3, 0, 1, 1)
+
         self.LOSS__CLASS_REBALANCE__INPUT = QComboBox(self.frame_28)
         self.LOSS__CLASS_REBALANCE__INPUT.addItem("")
         self.LOSS__CLASS_REBALANCE__INPUT.addItem("")
@@ -4122,6 +4227,150 @@ class Ui_MainWindow(object):
         self.LOSS__CLASS_REBALANCE__INPUT.setFont(font)
 
         self.gridLayout_29.addWidget(self.LOSS__CLASS_REBALANCE__INPUT, 3, 2, 1, 1)
+
+        self.TRAIN__LR_SCHEDULER__NAME__INFO = QPushButton(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__NAME__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__NAME__INFO")
+        self.TRAIN__LR_SCHEDULER__NAME__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__LR_SCHEDULER__NAME__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__LR_SCHEDULER__NAME__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__NAME__INFO, 14, 1, 1, 1)
+
+        self.TRAIN__ACCUM_ITER__INPUT = QLineEdit(self.frame_28)
+        self.TRAIN__ACCUM_ITER__INPUT.setObjectName(u"TRAIN__ACCUM_ITER__INPUT")
+        self.TRAIN__ACCUM_ITER__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__ACCUM_ITER__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__ACCUM_ITER__INPUT.setFont(font)
+
+        self.gridLayout_29.addWidget(self.TRAIN__ACCUM_ITER__INPUT, 11, 2, 1, 1)
+
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT = QLineEdit(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT")
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setFont(font)
+
+        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT, 21, 2, 1, 1)
+
+        self.MODEL__SAVE_CKPT_FREQ__INPUT = QLineEdit(self.frame_28)
+        self.MODEL__SAVE_CKPT_FREQ__INPUT.setObjectName(u"MODEL__SAVE_CKPT_FREQ__INPUT")
+        self.MODEL__SAVE_CKPT_FREQ__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__SAVE_CKPT_FREQ__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__SAVE_CKPT_FREQ__INPUT.setFont(font)
+
+        self.gridLayout_29.addWidget(self.MODEL__SAVE_CKPT_FREQ__INPUT, 12, 2, 1, 1)
+
+        self.TRAIN__OPT_BETAS__LABEL = QLabel(self.frame_28)
+        self.TRAIN__OPT_BETAS__LABEL.setObjectName(u"TRAIN__OPT_BETAS__LABEL")
+        self.TRAIN__OPT_BETAS__LABEL.setFont(font)
+        self.TRAIN__OPT_BETAS__LABEL.setIndent(15)
+
+        self.gridLayout_29.addWidget(self.TRAIN__OPT_BETAS__LABEL, 8, 0, 1, 1)
+
+        self.TRAIN__OPTIMIZER__INPUT = QComboBox(self.frame_28)
+        self.TRAIN__OPTIMIZER__INPUT.addItem("")
+        self.TRAIN__OPTIMIZER__INPUT.addItem("")
+        self.TRAIN__OPTIMIZER__INPUT.addItem("")
+        self.TRAIN__OPTIMIZER__INPUT.setObjectName(u"TRAIN__OPTIMIZER__INPUT")
+        self.TRAIN__OPTIMIZER__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__OPTIMIZER__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__OPTIMIZER__INPUT.setFont(font)
+
+        self.gridLayout_29.addWidget(self.TRAIN__OPTIMIZER__INPUT, 0, 2, 1, 1)
+
+        self.TRAIN__W_DECAY__INFO = QPushButton(self.frame_28)
+        self.TRAIN__W_DECAY__INFO.setObjectName(u"TRAIN__W_DECAY__INFO")
+        self.TRAIN__W_DECAY__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__W_DECAY__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__W_DECAY__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__W_DECAY__INFO, 7, 1, 1, 1)
+
+        self.TRAIN__OPT_BETAS__INPUT = QLineEdit(self.frame_28)
+        self.TRAIN__OPT_BETAS__INPUT.setObjectName(u"TRAIN__OPT_BETAS__INPUT")
+        self.TRAIN__OPT_BETAS__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__OPT_BETAS__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__OPT_BETAS__INPUT.setFont(font)
+
+        self.gridLayout_29.addWidget(self.TRAIN__OPT_BETAS__INPUT, 8, 2, 1, 1)
+
+        self.TRAIN__PROFILER__INFO = QPushButton(self.frame_28)
+        self.TRAIN__PROFILER__INFO.setObjectName(u"TRAIN__PROFILER__INFO")
+        self.TRAIN__PROFILER__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__PROFILER__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__PROFILER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__PROFILER__INFO, 24, 1, 1, 1)
+
+        self.label_143 = QLabel(self.frame_28)
+        self.label_143.setObjectName(u"label_143")
+        self.label_143.setFont(font)
+
+        self.gridLayout_29.addWidget(self.label_143, 0, 0, 1, 1)
+
+        self.LOSS__TYPE__INFO = QPushButton(self.frame_28)
+        self.LOSS__TYPE__INFO.setObjectName(u"LOSS__TYPE__INFO")
+        self.LOSS__TYPE__INFO.setMinimumSize(QSize(30, 30))
+        self.LOSS__TYPE__INFO.setMaximumSize(QSize(30, 30))
+        self.LOSS__TYPE__INFO.setFont(font)
+        self.LOSS__TYPE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.LOSS__TYPE__INFO, 1, 1, 1, 1)
+
+        self.lr_schel_min_lr_label = QLabel(self.frame_28)
+        self.lr_schel_min_lr_label.setObjectName(u"lr_schel_min_lr_label")
+        self.lr_schel_min_lr_label.setFont(font)
+        self.lr_schel_min_lr_label.setIndent(15)
+
+        self.gridLayout_29.addWidget(self.lr_schel_min_lr_label, 16, 0, 1, 1)
+
+        self.MODEL__SAVE_CKPT_FREQ__INFO = QPushButton(self.frame_28)
+        self.MODEL__SAVE_CKPT_FREQ__INFO.setObjectName(u"MODEL__SAVE_CKPT_FREQ__INFO")
+        self.MODEL__SAVE_CKPT_FREQ__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__SAVE_CKPT_FREQ__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__SAVE_CKPT_FREQ__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.MODEL__SAVE_CKPT_FREQ__INFO, 12, 1, 1, 1)
+
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO = QPushButton(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO")
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO, 21, 1, 1, 1)
+
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT = QComboBox(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT.addItem("")
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT.addItem("")
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT.addItem("")
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT.addItem("")
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__NAME__INPUT")
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setFont(font)
+
+        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__NAME__INPUT, 14, 2, 1, 1)
+
+        self.LOSS__TYPE__INPUT = QComboBox(self.frame_28)
+        self.LOSS__TYPE__INPUT.setObjectName(u"LOSS__TYPE__INPUT")
+        self.LOSS__TYPE__INPUT.setMinimumSize(QSize(200, 30))
+        self.LOSS__TYPE__INPUT.setMaximumSize(QSize(200, 30))
+        self.LOSS__TYPE__INPUT.setFont(font)
+
+        self.gridLayout_29.addWidget(self.LOSS__TYPE__INPUT, 1, 2, 1, 1)
 
         self.LOSS__WEIGHTS__INPUT = QLineEdit(self.frame_28)
         self.LOSS__WEIGHTS__INPUT.setObjectName(u"LOSS__WEIGHTS__INPUT")
@@ -4137,56 +4386,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addWidget(self.LOSS__WEIGHTS__LABEL, 2, 0, 1, 1)
 
-        self.LOSS__WEIGHTS__INFO = QPushButton(self.frame_28)
-        self.LOSS__WEIGHTS__INFO.setObjectName(u"LOSS__WEIGHTS__INFO")
-        self.LOSS__WEIGHTS__INFO.setMinimumSize(QSize(30, 30))
-        self.LOSS__WEIGHTS__INFO.setMaximumSize(QSize(30, 30))
-        self.LOSS__WEIGHTS__INFO.setFont(font)
-        self.LOSS__WEIGHTS__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.LOSS__WEIGHTS__INFO, 2, 1, 1, 1)
-
-        self.profiler_batch_range_label = QLabel(self.frame_28)
-        self.profiler_batch_range_label.setObjectName(u"profiler_batch_range_label")
-        self.profiler_batch_range_label.setFont(font)
-        self.profiler_batch_range_label.setIndent(15)
-
-        self.gridLayout_29.addWidget(self.profiler_batch_range_label, 27, 0, 1, 1)
-
-        self.horizontalSpacer_21 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.gridLayout_29.addItem(self.horizontalSpacer_21, 10, 3, 1, 1)
-
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT = QComboBox(self.frame_28)
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT.addItem("")
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT.addItem("")
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT.addItem("")
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT.addItem("")
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__NAME__INPUT")
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setFont(font)
-
-        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__NAME__INPUT, 14, 2, 1, 1)
-
-        self.MODEL__SAVE_CKPT_FREQ__LABEL = QLabel(self.frame_28)
-        self.MODEL__SAVE_CKPT_FREQ__LABEL.setObjectName(u"MODEL__SAVE_CKPT_FREQ__LABEL")
-        self.MODEL__SAVE_CKPT_FREQ__LABEL.setFont(font)
-
-        self.gridLayout_29.addWidget(self.MODEL__SAVE_CKPT_FREQ__LABEL, 12, 0, 1, 1)
-
-        self.TRAIN__PROFILER__INPUT = QComboBox(self.frame_28)
-        self.TRAIN__PROFILER__INPUT.addItem("")
-        self.TRAIN__PROFILER__INPUT.addItem("")
-        self.TRAIN__PROFILER__INPUT.setObjectName(u"TRAIN__PROFILER__INPUT")
-        self.TRAIN__PROFILER__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__PROFILER__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__PROFILER__INPUT.setFont(font)
-
-        self.gridLayout_29.addWidget(self.TRAIN__PROFILER__INPUT, 24, 2, 1, 1)
-
         self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT = QLineEdit(self.frame_28)
         self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__MIN_LR__INPUT")
         self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT.setMinimumSize(QSize(200, 30))
@@ -4194,336 +4393,6 @@ class Ui_MainWindow(object):
         self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT.setFont(font)
 
         self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT, 16, 2, 1, 1)
-
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT = QLineEdit(self.frame_28)
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT")
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setFont(font)
-
-        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT, 18, 2, 1, 1)
-
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT = QLineEdit(self.frame_28)
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT")
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setFont(font)
-
-        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT, 19, 2, 1, 1)
-
-        self.label_114 = QLabel(self.frame_28)
-        self.label_114.setObjectName(u"label_114")
-        self.label_114.setFont(font)
-
-        self.gridLayout_29.addWidget(self.label_114, 11, 0, 1, 1)
-
-        self.label_151 = QLabel(self.frame_28)
-        self.label_151.setObjectName(u"label_151")
-        self.label_151.setFont(font)
-
-        self.gridLayout_29.addWidget(self.label_151, 6, 0, 1, 1)
-
-        self.TRAIN__LR__INPUT = QLineEdit(self.frame_28)
-        self.TRAIN__LR__INPUT.setObjectName(u"TRAIN__LR__INPUT")
-        self.TRAIN__LR__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__LR__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__LR__INPUT.setFont(font)
-
-        self.gridLayout_29.addWidget(self.TRAIN__LR__INPUT, 6, 2, 1, 1)
-
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT = QLineEdit(self.frame_28)
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT")
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setFont(font)
-
-        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT, 21, 2, 1, 1)
-
-        self.TRAIN__PROFILER_BATCH_RANGE__INPUT = QLineEdit(self.frame_28)
-        self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setObjectName(u"TRAIN__PROFILER_BATCH_RANGE__INPUT")
-        self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setFont(font)
-
-        self.gridLayout_29.addWidget(self.TRAIN__PROFILER_BATCH_RANGE__INPUT, 27, 2, 1, 1)
-
-        self.label_143 = QLabel(self.frame_28)
-        self.label_143.setObjectName(u"label_143")
-        self.label_143.setFont(font)
-
-        self.gridLayout_29.addWidget(self.label_143, 0, 0, 1, 1)
-
-        self.TRAIN__OPTIMIZER__INPUT = QComboBox(self.frame_28)
-        self.TRAIN__OPTIMIZER__INPUT.addItem("")
-        self.TRAIN__OPTIMIZER__INPUT.addItem("")
-        self.TRAIN__OPTIMIZER__INPUT.addItem("")
-        self.TRAIN__OPTIMIZER__INPUT.setObjectName(u"TRAIN__OPTIMIZER__INPUT")
-        self.TRAIN__OPTIMIZER__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__OPTIMIZER__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__OPTIMIZER__INPUT.setFont(font)
-
-        self.gridLayout_29.addWidget(self.TRAIN__OPTIMIZER__INPUT, 0, 2, 1, 1)
-
-        self.verticalSpacer_14 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
-
-        self.gridLayout_29.addItem(self.verticalSpacer_14, 28, 0, 1, 1)
-
-        self.MODEL__SAVE_CKPT_FREQ__INPUT = QLineEdit(self.frame_28)
-        self.MODEL__SAVE_CKPT_FREQ__INPUT.setObjectName(u"MODEL__SAVE_CKPT_FREQ__INPUT")
-        self.MODEL__SAVE_CKPT_FREQ__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__SAVE_CKPT_FREQ__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__SAVE_CKPT_FREQ__INPUT.setFont(font)
-
-        self.gridLayout_29.addWidget(self.MODEL__SAVE_CKPT_FREQ__INPUT, 12, 2, 1, 1)
-
-        self.TRAIN__BATCH_SIZE__INPUT = QLineEdit(self.frame_28)
-        self.TRAIN__BATCH_SIZE__INPUT.setObjectName(u"TRAIN__BATCH_SIZE__INPUT")
-        self.TRAIN__BATCH_SIZE__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__BATCH_SIZE__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__BATCH_SIZE__INPUT.setFont(font)
-
-        self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__INPUT, 10, 2, 1, 1)
-
-        self.TRAIN__ACCUM_ITER__INPUT = QLineEdit(self.frame_28)
-        self.TRAIN__ACCUM_ITER__INPUT.setObjectName(u"TRAIN__ACCUM_ITER__INPUT")
-        self.TRAIN__ACCUM_ITER__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__ACCUM_ITER__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__ACCUM_ITER__INPUT.setFont(font)
-
-        self.gridLayout_29.addWidget(self.TRAIN__ACCUM_ITER__INPUT, 11, 2, 1, 1)
-
-        self.lr_schel_min_lr_label = QLabel(self.frame_28)
-        self.lr_schel_min_lr_label.setObjectName(u"lr_schel_min_lr_label")
-        self.lr_schel_min_lr_label.setFont(font)
-        self.lr_schel_min_lr_label.setIndent(15)
-
-        self.gridLayout_29.addWidget(self.lr_schel_min_lr_label, 16, 0, 1, 1)
-
-        self.lr_schel_warmupcosine_epochs_label = QLabel(self.frame_28)
-        self.lr_schel_warmupcosine_epochs_label.setObjectName(u"lr_schel_warmupcosine_epochs_label")
-        self.lr_schel_warmupcosine_epochs_label.setFont(font)
-        self.lr_schel_warmupcosine_epochs_label.setIndent(15)
-
-        self.gridLayout_29.addWidget(self.lr_schel_warmupcosine_epochs_label, 21, 0, 1, 1)
-
-        self.TRAIN__BATCH_SIZE__LABEL = QLabel(self.frame_28)
-        self.TRAIN__BATCH_SIZE__LABEL.setObjectName(u"TRAIN__BATCH_SIZE__LABEL")
-        self.TRAIN__BATCH_SIZE__LABEL.setFont(font)
-
-        self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__LABEL, 10, 0, 1, 1)
-
-        self.label_160 = QLabel(self.frame_28)
-        self.label_160.setObjectName(u"label_160")
-        self.label_160.setFont(font)
-
-        self.gridLayout_29.addWidget(self.label_160, 24, 0, 1, 1)
-
-        self.adamw_weight_decay_label = QLabel(self.frame_28)
-        self.adamw_weight_decay_label.setObjectName(u"adamw_weight_decay_label")
-        self.adamw_weight_decay_label.setFont(font)
-        self.adamw_weight_decay_label.setIndent(15)
-
-        self.gridLayout_29.addWidget(self.adamw_weight_decay_label, 7, 0, 1, 1)
-
-        self.lr_schel_reduce_on_plat_factor_label = QLabel(self.frame_28)
-        self.lr_schel_reduce_on_plat_factor_label.setObjectName(u"lr_schel_reduce_on_plat_factor_label")
-        self.lr_schel_reduce_on_plat_factor_label.setFont(font)
-        self.lr_schel_reduce_on_plat_factor_label.setIndent(15)
-
-        self.gridLayout_29.addWidget(self.lr_schel_reduce_on_plat_factor_label, 19, 0, 1, 1)
-
-        self.TRAIN__W_DECAY__INPUT = QLineEdit(self.frame_28)
-        self.TRAIN__W_DECAY__INPUT.setObjectName(u"TRAIN__W_DECAY__INPUT")
-        self.TRAIN__W_DECAY__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__W_DECAY__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__W_DECAY__INPUT.setFont(font)
-
-        self.gridLayout_29.addWidget(self.TRAIN__W_DECAY__INPUT, 7, 2, 1, 1)
-
-        self.TRAIN__LR__INFO = QPushButton(self.frame_28)
-        self.TRAIN__LR__INFO.setObjectName(u"TRAIN__LR__INFO")
-        self.TRAIN__LR__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__LR__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__LR__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__LR__INFO, 6, 1, 1, 1)
-
-        self.label_162 = QLabel(self.frame_28)
-        self.label_162.setObjectName(u"label_162")
-        self.label_162.setFont(font)
-
-        self.gridLayout_29.addWidget(self.label_162, 14, 0, 1, 1)
-
-        self.TRAIN__OPTIMIZER__INFO = QPushButton(self.frame_28)
-        self.TRAIN__OPTIMIZER__INFO.setObjectName(u"TRAIN__OPTIMIZER__INFO")
-        self.TRAIN__OPTIMIZER__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__OPTIMIZER__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__OPTIMIZER__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__OPTIMIZER__INFO, 0, 1, 1, 1)
-
-        self.TRAIN__BATCH_SIZE__INFO = QPushButton(self.frame_28)
-        self.TRAIN__BATCH_SIZE__INFO.setObjectName(u"TRAIN__BATCH_SIZE__INFO")
-        self.TRAIN__BATCH_SIZE__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__BATCH_SIZE__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__BATCH_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__INFO, 10, 1, 1, 1)
-
-        self.lr_schel_reduce_on_plat_patience_label = QLabel(self.frame_28)
-        self.lr_schel_reduce_on_plat_patience_label.setObjectName(u"lr_schel_reduce_on_plat_patience_label")
-        self.lr_schel_reduce_on_plat_patience_label.setFont(font)
-        self.lr_schel_reduce_on_plat_patience_label.setIndent(15)
-
-        self.gridLayout_29.addWidget(self.lr_schel_reduce_on_plat_patience_label, 18, 0, 1, 1)
-
-        self.TRAIN__W_DECAY__INFO = QPushButton(self.frame_28)
-        self.TRAIN__W_DECAY__INFO.setObjectName(u"TRAIN__W_DECAY__INFO")
-        self.TRAIN__W_DECAY__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__W_DECAY__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__W_DECAY__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__W_DECAY__INFO, 7, 1, 1, 1)
-
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO = QPushButton(self.frame_28)
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__MIN_LR__INFO")
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__MIN_LR__INFO, 16, 1, 1, 1)
-
-        self.TRAIN__LR_SCHEDULER__NAME__INFO = QPushButton(self.frame_28)
-        self.TRAIN__LR_SCHEDULER__NAME__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__NAME__INFO")
-        self.TRAIN__LR_SCHEDULER__NAME__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__NAME__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__NAME__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__NAME__INFO, 14, 1, 1, 1)
-
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO = QPushButton(self.frame_28)
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO")
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO, 19, 1, 1, 1)
-
-        self.TRAIN__ACCUM_ITER__INFO = QPushButton(self.frame_28)
-        self.TRAIN__ACCUM_ITER__INFO.setObjectName(u"TRAIN__ACCUM_ITER__INFO")
-        self.TRAIN__ACCUM_ITER__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__ACCUM_ITER__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__ACCUM_ITER__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__ACCUM_ITER__INFO, 11, 1, 1, 1)
-
-        self.MODEL__SAVE_CKPT_FREQ__INFO = QPushButton(self.frame_28)
-        self.MODEL__SAVE_CKPT_FREQ__INFO.setObjectName(u"MODEL__SAVE_CKPT_FREQ__INFO")
-        self.MODEL__SAVE_CKPT_FREQ__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__SAVE_CKPT_FREQ__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__SAVE_CKPT_FREQ__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.MODEL__SAVE_CKPT_FREQ__INFO, 12, 1, 1, 1)
-
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO = QPushButton(self.frame_28)
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO")
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO, 18, 1, 1, 1)
-
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO = QPushButton(self.frame_28)
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO")
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO, 21, 1, 1, 1)
-
-        self.TRAIN__VERBOSE__LABEL = QLabel(self.frame_28)
-        self.TRAIN__VERBOSE__LABEL.setObjectName(u"TRAIN__VERBOSE__LABEL")
-        self.TRAIN__VERBOSE__LABEL.setFont(font)
-
-        self.gridLayout_29.addWidget(self.TRAIN__VERBOSE__LABEL, 29, 0, 1, 1)
-
-        self.TRAIN__PROFILER__INFO = QPushButton(self.frame_28)
-        self.TRAIN__PROFILER__INFO.setObjectName(u"TRAIN__PROFILER__INFO")
-        self.TRAIN__PROFILER__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__PROFILER__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__PROFILER__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__PROFILER__INFO, 24, 1, 1, 1)
-
-        self.TRAIN__PROFILER_BATCH_RANGE__INFO = QPushButton(self.frame_28)
-        self.TRAIN__PROFILER_BATCH_RANGE__INFO.setObjectName(u"TRAIN__PROFILER_BATCH_RANGE__INFO")
-        self.TRAIN__PROFILER_BATCH_RANGE__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__PROFILER_BATCH_RANGE__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__PROFILER_BATCH_RANGE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__PROFILER_BATCH_RANGE__INFO, 27, 1, 1, 1)
-
-        self.TRAIN__VERBOSE__INPUT = QComboBox(self.frame_28)
-        self.TRAIN__VERBOSE__INPUT.addItem("")
-        self.TRAIN__VERBOSE__INPUT.addItem("")
-        self.TRAIN__VERBOSE__INPUT.setObjectName(u"TRAIN__VERBOSE__INPUT")
-        self.TRAIN__VERBOSE__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__VERBOSE__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__VERBOSE__INPUT.setFont(font)
-
-        self.gridLayout_29.addWidget(self.TRAIN__VERBOSE__INPUT, 29, 2, 1, 1)
-
-        self.TRAIN__VERBOSE__INFO = QPushButton(self.frame_28)
-        self.TRAIN__VERBOSE__INFO.setObjectName(u"TRAIN__VERBOSE__INFO")
-        self.TRAIN__VERBOSE__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__VERBOSE__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__VERBOSE__INFO.setFont(font8)
-        self.TRAIN__VERBOSE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__VERBOSE__INFO, 29, 1, 1, 1)
-
-        self.TRAIN__OPT_BETAS__LABEL = QLabel(self.frame_28)
-        self.TRAIN__OPT_BETAS__LABEL.setObjectName(u"TRAIN__OPT_BETAS__LABEL")
-        self.TRAIN__OPT_BETAS__LABEL.setFont(font)
-        self.TRAIN__OPT_BETAS__LABEL.setIndent(15)
-
-        self.gridLayout_29.addWidget(self.TRAIN__OPT_BETAS__LABEL, 8, 0, 1, 1)
-
-        self.TRAIN__OPT_BETAS__INPUT = QLineEdit(self.frame_28)
-        self.TRAIN__OPT_BETAS__INPUT.setObjectName(u"TRAIN__OPT_BETAS__INPUT")
-        self.TRAIN__OPT_BETAS__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__OPT_BETAS__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__OPT_BETAS__INPUT.setFont(font)
-
-        self.gridLayout_29.addWidget(self.TRAIN__OPT_BETAS__INPUT, 8, 2, 1, 1)
 
         self.TRAIN__OPT_BETAS__INFO = QPushButton(self.frame_28)
         self.TRAIN__OPT_BETAS__INFO.setObjectName(u"TRAIN__OPT_BETAS__INFO")
@@ -4535,11 +4404,22 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addWidget(self.TRAIN__OPT_BETAS__INFO, 8, 1, 1, 1)
 
-        self.TRAIN__METRICS__LABEL = QLabel(self.frame_28)
-        self.TRAIN__METRICS__LABEL.setObjectName(u"TRAIN__METRICS__LABEL")
-        self.TRAIN__METRICS__LABEL.setFont(font)
+        self.TRAIN__BATCH_SIZE__CALCULATION__INFO = QLabel(self.frame_28)
+        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setObjectName(u"TRAIN__BATCH_SIZE__CALCULATION__INFO")
+        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setFont(font)
+        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setScaledContents(True)
 
-        self.gridLayout_29.addWidget(self.TRAIN__METRICS__LABEL, 4, 0, 1, 1)
+        self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__CALCULATION__INFO, 9, 1, 1, 1)
+
+        self.TRAIN__LR__INPUT = QLineEdit(self.frame_28)
+        self.TRAIN__LR__INPUT.setObjectName(u"TRAIN__LR__INPUT")
+        self.TRAIN__LR__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__LR__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__LR__INPUT.setFont(font)
+
+        self.gridLayout_29.addWidget(self.TRAIN__LR__INPUT, 6, 2, 1, 1)
 
         self.TRAIN__METRICS__INFO = QPushButton(self.frame_28)
         self.TRAIN__METRICS__INFO.setObjectName(u"TRAIN__METRICS__INFO")
@@ -4552,53 +4432,100 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addWidget(self.TRAIN__METRICS__INFO, 4, 1, 1, 1)
 
-        self.LOSS__TYPE__INFO = QPushButton(self.frame_28)
-        self.LOSS__TYPE__INFO.setObjectName(u"LOSS__TYPE__INFO")
-        self.LOSS__TYPE__INFO.setMinimumSize(QSize(30, 30))
-        self.LOSS__TYPE__INFO.setMaximumSize(QSize(30, 30))
-        self.LOSS__TYPE__INFO.setFont(font)
-        self.LOSS__TYPE__INFO.setStyleSheet(u"QPushButton {\n"
+        self.TRAIN__W_DECAY__INPUT = QLineEdit(self.frame_28)
+        self.TRAIN__W_DECAY__INPUT.setObjectName(u"TRAIN__W_DECAY__INPUT")
+        self.TRAIN__W_DECAY__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__W_DECAY__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__W_DECAY__INPUT.setFont(font)
+
+        self.gridLayout_29.addWidget(self.TRAIN__W_DECAY__INPUT, 7, 2, 1, 1)
+
+        self.TRAIN__PROFILER_BATCH_RANGE__INFO = QPushButton(self.frame_28)
+        self.TRAIN__PROFILER_BATCH_RANGE__INFO.setObjectName(u"TRAIN__PROFILER_BATCH_RANGE__INFO")
+        self.TRAIN__PROFILER_BATCH_RANGE__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__PROFILER_BATCH_RANGE__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__PROFILER_BATCH_RANGE__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
 
-        self.gridLayout_29.addWidget(self.LOSS__TYPE__INFO, 1, 1, 1, 1)
+        self.gridLayout_29.addWidget(self.TRAIN__PROFILER_BATCH_RANGE__INFO, 27, 1, 1, 1)
 
-        self.LOSS__TYPE__INPUT = QComboBox(self.frame_28)
-        self.LOSS__TYPE__INPUT.setObjectName(u"LOSS__TYPE__INPUT")
-        self.LOSS__TYPE__INPUT.setMinimumSize(QSize(200, 30))
-        self.LOSS__TYPE__INPUT.setMaximumSize(QSize(200, 30))
-        self.LOSS__TYPE__INPUT.setFont(font)
+        self.TRAIN__PROFILER__INPUT = QComboBox(self.frame_28)
+        self.TRAIN__PROFILER__INPUT.addItem("")
+        self.TRAIN__PROFILER__INPUT.addItem("")
+        self.TRAIN__PROFILER__INPUT.setObjectName(u"TRAIN__PROFILER__INPUT")
+        self.TRAIN__PROFILER__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__PROFILER__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__PROFILER__INPUT.setFont(font)
 
-        self.gridLayout_29.addWidget(self.LOSS__TYPE__INPUT, 1, 2, 1, 1)
+        self.gridLayout_29.addWidget(self.TRAIN__PROFILER__INPUT, 24, 2, 1, 1)
 
-        self.LOSS__TYPE__LABEL = QLabel(self.frame_28)
-        self.LOSS__TYPE__LABEL.setObjectName(u"LOSS__TYPE__LABEL")
-        self.LOSS__TYPE__LABEL.setFont(font)
+        self.TRAIN__VERBOSE__INFO = QPushButton(self.frame_28)
+        self.TRAIN__VERBOSE__INFO.setObjectName(u"TRAIN__VERBOSE__INFO")
+        self.TRAIN__VERBOSE__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__VERBOSE__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__VERBOSE__INFO.setFont(font8)
+        self.TRAIN__VERBOSE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
-        self.gridLayout_29.addWidget(self.LOSS__TYPE__LABEL, 1, 0, 1, 1)
+        self.gridLayout_29.addWidget(self.TRAIN__VERBOSE__INFO, 29, 1, 1, 1)
 
-        self.TRAIN__METRICS__INPUT = QLineEdit(self.frame_28)
-        self.TRAIN__METRICS__INPUT.setObjectName(u"TRAIN__METRICS__INPUT")
-        self.TRAIN__METRICS__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__METRICS__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__METRICS__INPUT.setFont(font)
+        self.LOSS__WEIGHTS__INFO = QPushButton(self.frame_28)
+        self.LOSS__WEIGHTS__INFO.setObjectName(u"LOSS__WEIGHTS__INFO")
+        self.LOSS__WEIGHTS__INFO.setMinimumSize(QSize(30, 30))
+        self.LOSS__WEIGHTS__INFO.setMaximumSize(QSize(30, 30))
+        self.LOSS__WEIGHTS__INFO.setFont(font)
+        self.LOSS__WEIGHTS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
-        self.gridLayout_29.addWidget(self.TRAIN__METRICS__INPUT, 4, 2, 1, 1)
+        self.gridLayout_29.addWidget(self.LOSS__WEIGHTS__INFO, 2, 1, 1, 1)
 
-        self.TRAIN__BATCH_SIZE__CALCULATION__LABEL = QLabel(self.frame_28)
-        self.TRAIN__BATCH_SIZE__CALCULATION__LABEL.setObjectName(u"TRAIN__BATCH_SIZE__CALCULATION__LABEL")
-        self.TRAIN__BATCH_SIZE__CALCULATION__LABEL.setFont(font)
+        self.label_151 = QLabel(self.frame_28)
+        self.label_151.setObjectName(u"label_151")
+        self.label_151.setFont(font)
 
-        self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__CALCULATION__LABEL, 9, 0, 1, 1)
+        self.gridLayout_29.addWidget(self.label_151, 6, 0, 1, 1)
 
-        self.TRAIN__BATCH_SIZE__CALCULATION__INFO = QLabel(self.frame_28)
-        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setObjectName(u"TRAIN__BATCH_SIZE__CALCULATION__INFO")
-        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setFont(font)
-        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setScaledContents(True)
+        self.adamw_weight_decay_label = QLabel(self.frame_28)
+        self.adamw_weight_decay_label.setObjectName(u"adamw_weight_decay_label")
+        self.adamw_weight_decay_label.setFont(font)
+        self.adamw_weight_decay_label.setIndent(15)
 
-        self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__CALCULATION__INFO, 9, 1, 1, 1)
+        self.gridLayout_29.addWidget(self.adamw_weight_decay_label, 7, 0, 1, 1)
+
+        self.TRAIN__VERBOSE__LABEL = QLabel(self.frame_28)
+        self.TRAIN__VERBOSE__LABEL.setObjectName(u"TRAIN__VERBOSE__LABEL")
+        self.TRAIN__VERBOSE__LABEL.setFont(font)
+
+        self.gridLayout_29.addWidget(self.TRAIN__VERBOSE__LABEL, 29, 0, 1, 1)
+
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT = QLineEdit(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT")
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setFont(font)
+
+        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT, 19, 2, 1, 1)
+
+        self.TRAIN__OPTIMIZER__INFO = QPushButton(self.frame_28)
+        self.TRAIN__OPTIMIZER__INFO.setObjectName(u"TRAIN__OPTIMIZER__INFO")
+        self.TRAIN__OPTIMIZER__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__OPTIMIZER__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__OPTIMIZER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__OPTIMIZER__INFO, 0, 1, 1, 1)
+
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT = QLineEdit(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT")
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setFont(font)
+
+        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT, 18, 2, 1, 1)
 
         self.TRAIN__BATCH_SIZE__CALCULATION__INPUT = QComboBox(self.frame_28)
         self.TRAIN__BATCH_SIZE__CALCULATION__INPUT.addItem("")
@@ -4609,6 +4536,80 @@ class Ui_MainWindow(object):
         self.TRAIN__BATCH_SIZE__CALCULATION__INPUT.setFont(font)
 
         self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__CALCULATION__INPUT, 9, 2, 1, 1)
+
+        self.TRAIN__METRICS__INPUT = QLineEdit(self.frame_28)
+        self.TRAIN__METRICS__INPUT.setObjectName(u"TRAIN__METRICS__INPUT")
+        self.TRAIN__METRICS__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__METRICS__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__METRICS__INPUT.setFont(font)
+
+        self.gridLayout_29.addWidget(self.TRAIN__METRICS__INPUT, 4, 2, 1, 1)
+
+        self.MODEL__SAVE_CKPT_FREQ__LABEL = QLabel(self.frame_28)
+        self.MODEL__SAVE_CKPT_FREQ__LABEL.setObjectName(u"MODEL__SAVE_CKPT_FREQ__LABEL")
+        self.MODEL__SAVE_CKPT_FREQ__LABEL.setFont(font)
+
+        self.gridLayout_29.addWidget(self.MODEL__SAVE_CKPT_FREQ__LABEL, 12, 0, 1, 1)
+
+        self.TRAIN__PROFILER_BATCH_RANGE__INPUT = QLineEdit(self.frame_28)
+        self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setObjectName(u"TRAIN__PROFILER_BATCH_RANGE__INPUT")
+        self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setFont(font)
+
+        self.gridLayout_29.addWidget(self.TRAIN__PROFILER_BATCH_RANGE__INPUT, 27, 2, 1, 1)
+
+        self.TRAIN__LR__INFO = QPushButton(self.frame_28)
+        self.TRAIN__LR__INFO.setObjectName(u"TRAIN__LR__INFO")
+        self.TRAIN__LR__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__LR__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__LR__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__LR__INFO, 6, 1, 1, 1)
+
+        self.TRAIN__VERBOSE__INPUT = QComboBox(self.frame_28)
+        self.TRAIN__VERBOSE__INPUT.addItem("")
+        self.TRAIN__VERBOSE__INPUT.addItem("")
+        self.TRAIN__VERBOSE__INPUT.setObjectName(u"TRAIN__VERBOSE__INPUT")
+        self.TRAIN__VERBOSE__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__VERBOSE__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__VERBOSE__INPUT.setFont(font)
+
+        self.gridLayout_29.addWidget(self.TRAIN__VERBOSE__INPUT, 29, 2, 1, 1)
+
+        self.profiler_batch_range_label = QLabel(self.frame_28)
+        self.profiler_batch_range_label.setObjectName(u"profiler_batch_range_label")
+        self.profiler_batch_range_label.setFont(font)
+        self.profiler_batch_range_label.setIndent(15)
+
+        self.gridLayout_29.addWidget(self.profiler_batch_range_label, 27, 0, 1, 1)
+
+        self.lr_schel_reduce_on_plat_factor_label = QLabel(self.frame_28)
+        self.lr_schel_reduce_on_plat_factor_label.setObjectName(u"lr_schel_reduce_on_plat_factor_label")
+        self.lr_schel_reduce_on_plat_factor_label.setFont(font)
+        self.lr_schel_reduce_on_plat_factor_label.setIndent(15)
+
+        self.gridLayout_29.addWidget(self.lr_schel_reduce_on_plat_factor_label, 19, 0, 1, 1)
+
+        self.TRAIN__BATCH_SIZE__INPUT = QLineEdit(self.frame_28)
+        self.TRAIN__BATCH_SIZE__INPUT.setObjectName(u"TRAIN__BATCH_SIZE__INPUT")
+        self.TRAIN__BATCH_SIZE__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__BATCH_SIZE__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__BATCH_SIZE__INPUT.setFont(font)
+
+        self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__INPUT, 10, 2, 1, 1)
+
+        self.label_160 = QLabel(self.frame_28)
+        self.label_160.setObjectName(u"label_160")
+        self.label_160.setFont(font)
+
+        self.gridLayout_29.addWidget(self.label_160, 24, 0, 1, 1)
+
+        self.horizontalSpacer_21 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_29.addItem(self.horizontalSpacer_21, 9, 3, 1, 1)
 
 
         self.gridLayout_4.addWidget(self.frame_28, 25, 0, 1, 1)
@@ -13145,7 +13146,7 @@ class Ui_MainWindow(object):
         self.scrollArea_10.setWidgetResizable(True)
         self.scrollAreaWidgetContents_14 = QWidget()
         self.scrollAreaWidgetContents_14.setObjectName(u"scrollAreaWidgetContents_14")
-        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 597, 1056))
+        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 914, 1056))
         self.gridLayout_47 = QGridLayout(self.scrollAreaWidgetContents_14)
         self.gridLayout_47.setObjectName(u"gridLayout_47")
         self.label_100 = QLabel(self.scrollAreaWidgetContents_14)
@@ -14473,7 +14474,7 @@ class Ui_MainWindow(object):
         self.check_yaml_file_errors_frame.setWidgetResizable(True)
         self.scrollAreaWidgetContents_19 = QWidget()
         self.scrollAreaWidgetContents_19.setObjectName(u"scrollAreaWidgetContents_19")
-        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 896, 152))
+        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 48, 114))
         self.verticalLayout_32 = QVBoxLayout(self.scrollAreaWidgetContents_19)
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
         self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)
@@ -15102,167 +15103,83 @@ class Ui_MainWindow(object):
         self.MODEL__LAGER_IO__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
         self.MODEL__LAGER_IO__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
 
-        self.LOSS__CLASS_REBALANCE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Class rebalance", None))
-#if QT_CONFIG(tooltip)
-        self.LOSS__CLASS_REBALANCE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">To adjust the loss function based on the imbalance between classes. Used when LOSS.TYPE == &quot;CE&quot; in detection and semantic segmentation and if using B,C,M,P or A channels in instance segmentation workflow.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.LOSS__CLASS_REBALANCE__INFO.setText("")
-        self.LOSS__CLASS_REBALANCE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
-        self.LOSS__CLASS_REBALANCE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
-
-        self.LOSS__WEIGHTS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[0.66, 0.34]", None))
-        self.LOSS__WEIGHTS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Loss weights", None))
-#if QT_CONFIG(tooltip)
-        self.LOSS__WEIGHTS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Weights to be apply in multiple loss combination cases. Currently only available when LOSS.TYPE == &quot;W_CE_DICE&quot; where it needs to be a list of two floats (one for CE loss and the other for DICE loss). They must sum 1. E.g. [0.3, 0.7]</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.LOSS__WEIGHTS__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.profiler_batch_range_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.profiler_batch_range_label.setText(QCoreApplication.translate("MainWindow", u"Profiler batch range", None))
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setItemText(0, "")
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"warmupcosine", None))
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"reduceonplateau", None))
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setItemText(3, QCoreApplication.translate("MainWindow", u"onecycle", None))
-
-#if QT_CONFIG(tooltip)
-        self.MODEL__SAVE_CKPT_FREQ__LABEL.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__SAVE_CKPT_FREQ__LABEL.setText(QCoreApplication.translate("MainWindow", u"Save checkpoint frequency", None))
-        self.TRAIN__PROFILER__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.TRAIN__PROFILER__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1", None))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1", None))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.5", None))
-#if QT_CONFIG(tooltip)
-        self.label_114.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_114.setText(QCoreApplication.translate("MainWindow", u"Accumulate iterations", None))
-#if QT_CONFIG(tooltip)
-        self.label_151.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_151.setText(QCoreApplication.translate("MainWindow", u"Learning rate", None))
-        self.TRAIN__LR__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.0001", None))
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1", None))
-        self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setText(QCoreApplication.translate("MainWindow", u"10, 100", None))
-#if QT_CONFIG(tooltip)
-        self.label_143.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_143.setText(QCoreApplication.translate("MainWindow", u"Optimizer", None))
-        self.TRAIN__OPTIMIZER__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"ADAMW", None))
-        self.TRAIN__OPTIMIZER__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"ADAM", None))
-        self.TRAIN__OPTIMIZER__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"SGD", None))
-
-        self.MODEL__SAVE_CKPT_FREQ__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1", None))
-        self.TRAIN__BATCH_SIZE__INPUT.setText(QCoreApplication.translate("MainWindow", u"1", None))
-        self.TRAIN__ACCUM_ITER__INPUT.setText(QCoreApplication.translate("MainWindow", u"1", None))
-#if QT_CONFIG(tooltip)
-        self.lr_schel_min_lr_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.lr_schel_min_lr_label.setText(QCoreApplication.translate("MainWindow", u"Minimum learning rate", None))
-#if QT_CONFIG(tooltip)
-        self.lr_schel_warmupcosine_epochs_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.lr_schel_warmupcosine_epochs_label.setText(QCoreApplication.translate("MainWindow", u"Warmup cosine decay epochs", None))
-#if QT_CONFIG(tooltip)
-        self.TRAIN__BATCH_SIZE__LABEL.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__BATCH_SIZE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Batch size", None))
-#if QT_CONFIG(tooltip)
-        self.label_160.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_160.setText(QCoreApplication.translate("MainWindow", u"Profiler", None))
-#if QT_CONFIG(tooltip)
-        self.adamw_weight_decay_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.adamw_weight_decay_label.setText(QCoreApplication.translate("MainWindow", u"Weight decay", None))
-#if QT_CONFIG(tooltip)
-        self.lr_schel_reduce_on_plat_factor_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.lr_schel_reduce_on_plat_factor_label.setText(QCoreApplication.translate("MainWindow", u"Reduce on plateau factor", None))
-        self.TRAIN__W_DECAY__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.02", None))
-#if QT_CONFIG(tooltip)
-        self.TRAIN__LR__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Learning rate during training phase. The learning rate is a hyperparameter that controls how much to change the model in response to the estimated error each time the model weights are updated. Choosing the learning rate is challenging as a value too small may result in a long training process that could get stuck, whereas a value too large may result in learning a sub-optimal set of weights too fast or an unstable training process</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__LR__INFO.setText("")
 #if QT_CONFIG(tooltip)
         self.label_162.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.label_162.setText(QCoreApplication.translate("MainWindow", u"Learning rate scheduler name", None))
 #if QT_CONFIG(tooltip)
-        self.TRAIN__OPTIMIZER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Optimizer to use during the model training.  Optimizers are algorithms or methods used to minimize an error function (the loss function) </span></p></body></html>", None))
+        self.LOSS__CLASS_REBALANCE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">To adjust the loss function based on the imbalance between classes. Used when LOSS.TYPE == &quot;CE&quot; in detection and semantic segmentation and if using B,C,M,P or A channels in instance segmentation workflow.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.TRAIN__OPTIMIZER__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.TRAIN__BATCH_SIZE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Batch size of the training process. It is a hyperparameter that defines the number of samples to work through before updating the internal model parameters. This determines how many images will be loaded into the GPU at once so a high value will lead to a GPU memory error. Set it according to your GPU memory. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__BATCH_SIZE__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.lr_schel_reduce_on_plat_patience_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.lr_schel_reduce_on_plat_patience_label.setText(QCoreApplication.translate("MainWindow", u"Reduce on plateau patience", None))
-#if QT_CONFIG(tooltip)
-        self.TRAIN__W_DECAY__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Weight decay for AdamW optimizer</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__W_DECAY__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Lower bound on the learning rate used in 'warmupcosine' and 'reduceonplateau'. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive float</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.TRAIN__LR_SCHEDULER__NAME__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Set up a learning rate scheduler. A Learning rate scheduler is a predefined framework that adjusts the learning rate between epochs or iterations as the training progresses. Leave it with the first option blank to avoid applying it. Three options available: 'warmupcosine', 'reduceonplateau', 'onecycle'. </span></p><p><span style=\" font-size:12pt;\">- 'warmupcosine' refers to a cosine decay with a warm up consist in 2 phases: 1) a warm up phase which consists of increasing the learning rate from 'warmup cosine decay' to 'training learning rate' value by a factor during a certain number of epochs defined by 'warmup cosine decay hold epochs'; 2) after this will began the decay of the learning rate value using the cosine function. Find a detailed explanation in </span><a href=\"https://scorrea92.medium.com/cosine-learning-rate-decay-e8b50aa455b \"><span style=\" font-size:12pt; text-decoration: underline; color:#0000ff;\">here</span></a></p><p><span style=\" "
-                        "font-size:12pt;\">- 'reduceonplateau' reduces the learning rate when a metric has stopped improving. Models often benefit from reducing the learning rate by a factor of 2-10 once learning stagnates. This callback monitors a quantity and if no improvement is seen for a 'patience' number of epochs, the learning rate is reduced.</span></p><p><span style=\" font-size:12pt;\">- 'onecycle', sets the learning rate of each parameter group according to the 1cycle learning rate policy. The 1cycle policy anneals the learning rate from an initial learning rate to some maximum learning rate and then from that maximum learning rate to some minimum learning rate much lower than the initial learning rate. This policy was initially described in the paper: </span><a href=\"https://arxiv.org/abs/1708.07120\"><span style=\" font-size:12pt; text-decoration: underline; color:#0000ff;\">&quot;Super-Convergence: Very Fast Training of Neural Networks Using Large Learning Rates&quot;</span></a></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__LR_SCHEDULER__NAME__INFO.setText("")
+        self.LOSS__CLASS_REBALANCE__INFO.setText("")
 #if QT_CONFIG(tooltip)
         self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Factor by which the learning rate will be reduced in 'reduceonplateau' scheduler. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a float between 0 and 1</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setText("")
 #if QT_CONFIG(tooltip)
-        self.TRAIN__ACCUM_ITER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">If memory or # gpus is limited, use this variable to maintain the effective batch size, which is batch_size (per gpu) * nodes * (gpus per node) * accum_iter. Must be a positive integer.</span></p></body></html>", None))
+        self.label_114.setToolTip("")
 #endif // QT_CONFIG(tooltip)
-        self.TRAIN__ACCUM_ITER__INFO.setText("")
+        self.label_114.setText(QCoreApplication.translate("MainWindow", u"Accumulate iterations", None))
 #if QT_CONFIG(tooltip)
-        self.MODEL__SAVE_CKPT_FREQ__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Epochs to save a checkpoint of the model apart from the ones saved with LOAD_CHECKPOINT_ONLY_WEIGHTS. Set it to -1 to not do it.</span></p></body></html>", None))
+        self.TRAIN__BATCH_SIZE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Batch size of the training process. It is a hyperparameter that defines the number of samples to work through before updating the internal model parameters. This determines how many images will be loaded into the GPU at once so a high value will lead to a GPU memory error. Set it according to your GPU memory. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.MODEL__SAVE_CKPT_FREQ__INFO.setText("")
+        self.TRAIN__BATCH_SIZE__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.lr_schel_warmupcosine_epochs_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.lr_schel_warmupcosine_epochs_label.setText(QCoreApplication.translate("MainWindow", u"Warmup cosine decay epochs", None))
 #if QT_CONFIG(tooltip)
         self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of epochs with no improvement after which learning rate will be reduced in 'reduceonplateau' scheduler. Need to be less than training patience otherwise it makes no sense. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setText("")
+        self.TRAIN__BATCH_SIZE__CALCULATION__LABEL.setText(QCoreApplication.translate("MainWindow", u"Automatically calculate batch size", None))
 #if QT_CONFIG(tooltip)
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Epochs to do the warming up in 'warmupcosine' scheduler. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Lower bound on the learning rate used in 'warmupcosine' and 'reduceonplateau'. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive float</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setText("")
-        self.TRAIN__VERBOSE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Verbose", None))
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setText("")
+        self.TRAIN__METRICS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Train metrics", None))
+#if QT_CONFIG(tooltip)
+        self.TRAIN__ACCUM_ITER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">If memory or # gpus is limited, use this variable to maintain the effective batch size, which is batch_size (per gpu) * nodes * (gpus per node) * accum_iter. Must be a positive integer.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__ACCUM_ITER__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.lr_schel_reduce_on_plat_patience_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.lr_schel_reduce_on_plat_patience_label.setText(QCoreApplication.translate("MainWindow", u"Reduce on plateau patience", None))
+        self.LOSS__TYPE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Loss type", None))
+#if QT_CONFIG(tooltip)
+        self.TRAIN__BATCH_SIZE__LABEL.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__BATCH_SIZE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Batch size", None))
+        self.LOSS__CLASS_REBALANCE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Class rebalance", None))
+        self.LOSS__CLASS_REBALANCE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
+        self.LOSS__CLASS_REBALANCE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
+
+#if QT_CONFIG(tooltip)
+        self.TRAIN__LR_SCHEDULER__NAME__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Set up a learning rate scheduler. A Learning rate scheduler is a predefined framework that adjusts the learning rate between epochs or iterations as the training progresses. Leave it with the first option blank to avoid applying it. Three options available: 'warmupcosine', 'reduceonplateau', 'onecycle'. </span></p><p><span style=\" font-size:12pt;\">- 'warmupcosine' refers to a cosine decay with a warm up consist in 2 phases: 1) a warm up phase which consists of increasing the learning rate from 'warmup cosine decay' to 'training learning rate' value by a factor during a certain number of epochs defined by 'warmup cosine decay hold epochs'; 2) after this will began the decay of the learning rate value using the cosine function. Find a detailed explanation in </span><a href=\"https://scorrea92.medium.com/cosine-learning-rate-decay-e8b50aa455b \"><span style=\" font-size:12pt; text-decoration: underline; color:#0000ff;\">here</span></a></p><p><span style=\" "
+                        "font-size:12pt;\">- 'reduceonplateau' reduces the learning rate when a metric has stopped improving. Models often benefit from reducing the learning rate by a factor of 2-10 once learning stagnates. This callback monitors a quantity and if no improvement is seen for a 'patience' number of epochs, the learning rate is reduced.</span></p><p><span style=\" font-size:12pt;\">- 'onecycle', sets the learning rate of each parameter group according to the 1cycle learning rate policy. The 1cycle policy anneals the learning rate from an initial learning rate to some maximum learning rate and then from that maximum learning rate to some minimum learning rate much lower than the initial learning rate. This policy was initially described in the paper: </span><a href=\"https://arxiv.org/abs/1708.07120\"><span style=\" font-size:12pt; text-decoration: underline; color:#0000ff;\">&quot;Super-Convergence: Very Fast Training of Neural Networks Using Large Learning Rates&quot;</span></a></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__LR_SCHEDULER__NAME__INFO.setText("")
+        self.TRAIN__ACCUM_ITER__INPUT.setText(QCoreApplication.translate("MainWindow", u"1", None))
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1", None))
+        self.MODEL__SAVE_CKPT_FREQ__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1", None))
+        self.TRAIN__OPT_BETAS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Betas", None))
+        self.TRAIN__OPTIMIZER__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"ADAMW", None))
+        self.TRAIN__OPTIMIZER__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"ADAM", None))
+        self.TRAIN__OPTIMIZER__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"SGD", None))
+
+#if QT_CONFIG(tooltip)
+        self.TRAIN__W_DECAY__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Weight decay for AdamW optimizer</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__W_DECAY__INFO.setText("")
+        self.TRAIN__OPT_BETAS__INPUT.setText(QCoreApplication.translate("MainWindow", u"(0.9, 0.999)", None))
 #if QT_CONFIG(tooltip)
         self.TRAIN__PROFILER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\"> Whether to add profiler callback to the training </span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.TRAIN__PROFILER__INFO.setText("")
 #if QT_CONFIG(tooltip)
-        self.TRAIN__PROFILER_BATCH_RANGE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Batch range to be analyzed in the profiler. Must two positive integers separated by a comma.</span><span style=\" font-size:12pt; font-weight:600;\"> E.g. (10, 100) means that the profiler will analise the batches from the 10th to the 100th </span></p></body></html>", None))
+        self.label_143.setToolTip("")
 #endif // QT_CONFIG(tooltip)
-        self.TRAIN__PROFILER_BATCH_RANGE__INFO.setText("")
-        self.TRAIN__VERBOSE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.TRAIN__VERBOSE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-#if QT_CONFIG(tooltip)
-        self.TRAIN__VERBOSE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Train verbosity to print more info on each batch process</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__VERBOSE__INFO.setText("")
-        self.TRAIN__OPT_BETAS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Betas", None))
-        self.TRAIN__OPT_BETAS__INPUT.setText(QCoreApplication.translate("MainWindow", u"(0.9, 0.999)", None))
-#if QT_CONFIG(tooltip)
-        self.TRAIN__OPT_BETAS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Coefficients used for computing running averages of gradient and its square. Used in ADAM and ADAMW optimizers</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__OPT_BETAS__INFO.setText("")
-        self.TRAIN__METRICS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Train metrics", None))
-#if QT_CONFIG(tooltip)
-        self.TRAIN__METRICS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Metrics to apply during training. Depending on the workflow different ones can be applied. If empty, some default metrics will be configured automatically:</span></p><p><span style=\" font-size:12pt;\">* Semantic segmentation: 'iou' (called also Jaccard index)</span></p><p><span style=\" font-size:12pt;\">* Instance segmentation: automatically set depending on the channels selected (PROBLEM.INSTANCE_SEG.DATA_CHANNELS).</span></p><p><span style=\" font-size:12pt;\">* Detection: 'iou' (called also Jaccard index)</span></p><p><span style=\" font-size:12pt;\">* Denoising: 'mae', 'mse'</span></p><p><span style=\" font-size:12pt;\">* Super-resolution: &quot;psnr&quot;, &quot;mae&quot;, &quot;mse&quot;, &quot;ssim&quot;</span></p><p><span style=\" font-size:12pt;\">* Self-supervision: &quot;psnr&quot;, &quot;mae&quot;, &quot;mse&quot;, &quot;ssim&quot;</span></p><p><span style=\" font-size:12pt;\">* Classification: 'accuracy', 'top-5-accuracy'</span></p><p><span "
-                        "style=\" font-size:12pt;\">* Image to image: &quot;psnr&quot;, &quot;mae&quot;, &quot;mse&quot;, &quot;ssim&quot;</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__METRICS__INFO.setText("")
+        self.label_143.setText(QCoreApplication.translate("MainWindow", u"Optimizer", None))
 #if QT_CONFIG(tooltip)
         self.LOSS__TYPE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Loss type, different options depending on the workflow. If empty the default loss on each case will be set:</span></p><p><span style=\" font-size:12pt;\">  * Semantic segmentation:</span></p><p><span style=\" font-size:12pt;\">      * &quot;CE&quot; (default): cross entropy. Ref: https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html</span></p><p><span style=\" font-size:12pt;\">      * &quot;DICE&quot;: Dice loss. Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch</span></p><p><span style=\" font-size:12pt;\">      * &quot;W_CE_DICE&quot;: CE and Dice (with a weight term on each one that must sum 1). Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch</span></p><p><span style=\" font-size:12pt;\">  * Instance segmentation: automatically set depending on the channels selected (PROBLEM.INSTANCE_SEG.DATA_CHANNELS). There is no need</span></p><p><span style=\" font-size:12pt;\"> "
                         "                          to set it.</span></p><p><span style=\" font-size:12pt;\">  * Detection:</span></p><p><span style=\" font-size:12pt;\">      * &quot;CE&quot; (default): cross entropy. Ref: https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html</span></p><p><span style=\" font-size:12pt;\">      * &quot;DICE&quot;: Dice loss. Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch</span></p><p><span style=\" font-size:12pt;\">      * &quot;W_CE_DICE&quot;: CE and Dice (with a weight term on each one that must sum 1). Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch</span></p><p><span style=\" font-size:12pt;\">  * Denoising:</span></p><p><span style=\" font-size:12pt;\">      * &quot;MSE&quot; (default): mean square error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss</span></p><p><span style=\" font-size:12pt;\">  * Super-resolution:</span></p><p><span style=\" font-size:12pt;\">     "
@@ -15270,16 +15187,100 @@ class Ui_MainWindow(object):
                         "oss.html#torch.nn.MSELoss</span></p><p><span style=\" font-size:12pt;\">  * Classification:</span></p><p><span style=\" font-size:12pt;\">      * &quot;CE&quot; (default): cross entropy. Ref: https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html</span></p><p><span style=\" font-size:12pt;\">  * Image to image:</span></p><p><span style=\" font-size:12pt;\">      * &quot;MAE&quot; (default): mean absolute error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss</span></p><p><span style=\" font-size:12pt;\">      * &quot;MSE&quot;: mean square error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.LOSS__TYPE__INFO.setText("")
-        self.LOSS__TYPE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Loss type", None))
-        self.TRAIN__METRICS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
-        self.TRAIN__BATCH_SIZE__CALCULATION__LABEL.setText(QCoreApplication.translate("MainWindow", u"Automatically calculate batch size", None))
+#if QT_CONFIG(tooltip)
+        self.lr_schel_min_lr_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.lr_schel_min_lr_label.setText(QCoreApplication.translate("MainWindow", u"Minimum learning rate", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__SAVE_CKPT_FREQ__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Epochs to save a checkpoint of the model apart from the ones saved with LOAD_CHECKPOINT_ONLY_WEIGHTS. Set it to -1 to not do it.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__SAVE_CKPT_FREQ__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Epochs to do the warming up in 'warmupcosine' scheduler. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setText("")
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setItemText(0, "")
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"warmupcosine", None))
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"reduceonplateau", None))
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setItemText(3, QCoreApplication.translate("MainWindow", u"onecycle", None))
+
+        self.LOSS__WEIGHTS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[0.66, 0.34]", None))
+        self.LOSS__WEIGHTS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Loss weights", None))
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1", None))
+#if QT_CONFIG(tooltip)
+        self.TRAIN__OPT_BETAS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Coefficients used for computing running averages of gradient and its square. Used in ADAM and ADAMW optimizers</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__OPT_BETAS__INFO.setText("")
 #if QT_CONFIG(tooltip)
         self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">To automatically calculate the batch size based on the GPU memory available. If you don't have a GPU a &quot;modest&quot; value of 12 will be set. </span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setText("")
+        self.TRAIN__LR__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.0001", None))
+#if QT_CONFIG(tooltip)
+        self.TRAIN__METRICS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Metrics to apply during training. Depending on the workflow different ones can be applied. If empty, some default metrics will be configured automatically:</span></p><p><span style=\" font-size:12pt;\">* Semantic segmentation: 'iou' (called also Jaccard index)</span></p><p><span style=\" font-size:12pt;\">* Instance segmentation: automatically set depending on the channels selected (PROBLEM.INSTANCE_SEG.DATA_CHANNELS).</span></p><p><span style=\" font-size:12pt;\">* Detection: 'iou' (called also Jaccard index)</span></p><p><span style=\" font-size:12pt;\">* Denoising: 'mae', 'mse'</span></p><p><span style=\" font-size:12pt;\">* Super-resolution: &quot;psnr&quot;, &quot;mae&quot;, &quot;mse&quot;, &quot;ssim&quot;</span></p><p><span style=\" font-size:12pt;\">* Self-supervision: &quot;psnr&quot;, &quot;mae&quot;, &quot;mse&quot;, &quot;ssim&quot;</span></p><p><span style=\" font-size:12pt;\">* Classification: 'accuracy', 'top-5-accuracy'</span></p><p><span "
+                        "style=\" font-size:12pt;\">* Image to image: &quot;psnr&quot;, &quot;mae&quot;, &quot;mse&quot;, &quot;ssim&quot;</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__METRICS__INFO.setText("")
+        self.TRAIN__W_DECAY__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.02", None))
+#if QT_CONFIG(tooltip)
+        self.TRAIN__PROFILER_BATCH_RANGE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Batch range to be analyzed in the profiler. Must two positive integers separated by a comma.</span><span style=\" font-size:12pt; font-weight:600;\"> E.g. (10, 100) means that the profiler will analise the batches from the 10th to the 100th </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__PROFILER_BATCH_RANGE__INFO.setText("")
+        self.TRAIN__PROFILER__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.TRAIN__PROFILER__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+#if QT_CONFIG(tooltip)
+        self.TRAIN__VERBOSE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Train verbosity to print more info on each batch process</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__VERBOSE__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.LOSS__WEIGHTS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Weights to be apply in multiple loss combination cases. Currently only available when LOSS.TYPE == &quot;W_CE_DICE&quot; where it needs to be a list of two floats (one for CE loss and the other for DICE loss). They must sum 1. E.g. [0.3, 0.7]</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.LOSS__WEIGHTS__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.label_151.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_151.setText(QCoreApplication.translate("MainWindow", u"Learning rate", None))
+#if QT_CONFIG(tooltip)
+        self.adamw_weight_decay_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.adamw_weight_decay_label.setText(QCoreApplication.translate("MainWindow", u"Weight decay", None))
+        self.TRAIN__VERBOSE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Verbose", None))
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.5", None))
+#if QT_CONFIG(tooltip)
+        self.TRAIN__OPTIMIZER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Optimizer to use during the model training.  Optimizers are algorithms or methods used to minimize an error function (the loss function) </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__OPTIMIZER__INFO.setText("")
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1", None))
         self.TRAIN__BATCH_SIZE__CALCULATION__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
         self.TRAIN__BATCH_SIZE__CALCULATION__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
 
+        self.TRAIN__METRICS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__SAVE_CKPT_FREQ__LABEL.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__SAVE_CKPT_FREQ__LABEL.setText(QCoreApplication.translate("MainWindow", u"Save checkpoint frequency", None))
+        self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setText(QCoreApplication.translate("MainWindow", u"10, 100", None))
+#if QT_CONFIG(tooltip)
+        self.TRAIN__LR__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Learning rate during training phase. The learning rate is a hyperparameter that controls how much to change the model in response to the estimated error each time the model weights are updated. Choosing the learning rate is challenging as a value too small may result in a long training process that could get stuck, whereas a value too large may result in learning a sub-optimal set of weights too fast or an unstable training process</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__LR__INFO.setText("")
+        self.TRAIN__VERBOSE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.TRAIN__VERBOSE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+#if QT_CONFIG(tooltip)
+        self.profiler_batch_range_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.profiler_batch_range_label.setText(QCoreApplication.translate("MainWindow", u"Profiler batch range", None))
+#if QT_CONFIG(tooltip)
+        self.lr_schel_reduce_on_plat_factor_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.lr_schel_reduce_on_plat_factor_label.setText(QCoreApplication.translate("MainWindow", u"Reduce on plateau factor", None))
+        self.TRAIN__BATCH_SIZE__INPUT.setText(QCoreApplication.translate("MainWindow", u"1", None))
+#if QT_CONFIG(tooltip)
+        self.label_160.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_160.setText(QCoreApplication.translate("MainWindow", u"Profiler", None))
         self.DATA__PREPROCESS__VAL__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
         self.DATA__PREPROCESS__VAL__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
 
@@ -15531,8 +15532,8 @@ class Ui_MainWindow(object):
         self.da_gaussian_noise_use_input_img_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.da_gaussian_noise_use_input_img_label.setText(QCoreApplication.translate("MainWindow", u"Gaussian noise use input img stats", None))
-        self.AUGMENTOR__CONTRAST__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.AUGMENTOR__CONTRAST__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+        self.AUGMENTOR__CONTRAST__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
+        self.AUGMENTOR__CONTRAST__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
 
         self.AUGMENTOR__MOTB_K_RANGE__INPUT.setText(QCoreApplication.translate("MainWindow", u"(8, 12)", None))
         self.AUGMENTOR__MOTB_K_RANGE__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"(8, 12)", None))
@@ -16016,7 +16017,7 @@ class Ui_MainWindow(object):
         self.da_cutnoise_scale_range_label.setText(QCoreApplication.translate("MainWindow", u"Cutnoise scale range", None))
         self.AUGMENTOR__CNOISE_SIZE__INPUT.setText(QCoreApplication.translate("MainWindow", u"(0.2, 0.4)", None))
         self.AUGMENTOR__CNOISE_SIZE__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"(0.2,0.4)", None))
-        self.AUGMENTOR__BRIGHTNESS_FACTOR__INPUT.setText(QCoreApplication.translate("MainWindow", u"(-0.2, 0.2)", None))
+        self.AUGMENTOR__BRIGHTNESS_FACTOR__INPUT.setText(QCoreApplication.translate("MainWindow", u"(-0.1, 0.1)", None))
         self.AUGMENTOR__BRIGHTNESS_FACTOR__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"(-0.1,0.1) ", None))
 #if QT_CONFIG(tooltip)
         self.label_128.setToolTip("")
@@ -16484,7 +16485,7 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
         self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
         self.label_42.setText(QCoreApplication.translate("MainWindow", u"Advanced training parameters", None))
-        self.TRAIN__PATIENCE__INPUT.setText(QCoreApplication.translate("MainWindow", u"20", None))
+        self.TRAIN__PATIENCE__INPUT.setText(QCoreApplication.translate("MainWindow", u"50", None))
         self.TRAIN__EPOCHS__INPUT.setText(QCoreApplication.translate("MainWindow", u"150", None))
 #if QT_CONFIG(tooltip)
         self.MODEL__ARCHITECTURE__LABEL.setToolTip("")

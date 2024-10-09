@@ -4065,8 +4065,8 @@ font: italic;</string>
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>100</width>
-                               <height>30</height>
+                               <width>930</width>
+                               <height>172</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_62"/>
@@ -8636,7 +8636,7 @@ QPushButton:pressed {
                                 <property name="geometry">
                                  <rect>
                                   <x>0</x>
-                                  <y>-6147</y>
+                                  <y>-382</y>
                                   <width>944</width>
                                   <height>7930</height>
                                  </rect>
@@ -10692,16 +10692,19 @@ p, li { white-space: pre-wrap; }
                                           <enum>QFrame::Raised</enum>
                                          </property>
                                          <layout class="QGridLayout" name="gridLayout_29">
-                                          <item row="3" column="0">
-                                           <widget class="QLabel" name="LOSS__CLASS_REBALANCE__LABEL">
+                                          <item row="14" column="0">
+                                           <widget class="QLabel" name="label_162">
                                             <property name="font">
                                              <font>
                                               <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
+                                            <property name="toolTip">
+                                             <string/>
+                                            </property>
                                             <property name="text">
-                                             <string>Class rebalance</string>
+                                             <string>Learning rate scheduler name</string>
                                             </property>
                                            </widget>
                                           </item>
@@ -10738,6 +10741,279 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                            </widget>
                                           </item>
+                                          <item row="19" column="1">
+                                           <widget class="QPushButton" name="TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Factor by which the learning rate will be reduced in 'reduceonplateau' scheduler. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a float between 0 and 1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="styleSheet">
+                                             <string notr="true">QPushButton {
+  border: none;
+}</string>
+                                            </property>
+                                            <property name="text">
+                                             <string/>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="11" column="0">
+                                           <widget class="QLabel" name="label_114">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string/>
+                                            </property>
+                                            <property name="text">
+                                             <string>Accumulate iterations</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="10" column="1">
+                                           <widget class="QPushButton" name="TRAIN__BATCH_SIZE__INFO">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Batch size of the training process. It is a hyperparameter that defines the number of samples to work through before updating the internal model parameters. This determines how many images will be loaded into the GPU at once so a high value will lead to a GPU memory error. Set it according to your GPU memory. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="styleSheet">
+                                             <string notr="true">QPushButton {
+  border: none;
+}</string>
+                                            </property>
+                                            <property name="text">
+                                             <string/>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="21" column="0">
+                                           <widget class="QLabel" name="lr_schel_warmupcosine_epochs_label">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string/>
+                                            </property>
+                                            <property name="text">
+                                             <string>Warmup cosine decay epochs</string>
+                                            </property>
+                                            <property name="indent">
+                                             <number>15</number>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="18" column="1">
+                                           <widget class="QPushButton" name="TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Number of epochs with no improvement after which learning rate will be reduced in 'reduceonplateau' scheduler. Need to be less than training patience otherwise it makes no sense. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="styleSheet">
+                                             <string notr="true">QPushButton {
+  border: none;
+}</string>
+                                            </property>
+                                            <property name="text">
+                                             <string/>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="9" column="0">
+                                           <widget class="QLabel" name="TRAIN__BATCH_SIZE__CALCULATION__LABEL">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>Automatically calculate batch size</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="28" column="0">
+                                           <spacer name="verticalSpacer_14">
+                                            <property name="orientation">
+                                             <enum>Qt::Vertical</enum>
+                                            </property>
+                                            <property name="sizeHint" stdset="0">
+                                             <size>
+                                              <width>20</width>
+                                              <height>40</height>
+                                             </size>
+                                            </property>
+                                           </spacer>
+                                          </item>
+                                          <item row="16" column="1">
+                                           <widget class="QPushButton" name="TRAIN__LR_SCHEDULER__MIN_LR__INFO">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Lower bound on the learning rate used in 'warmupcosine' and 'reduceonplateau'. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive float&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="styleSheet">
+                                             <string notr="true">QPushButton {
+  border: none;
+}</string>
+                                            </property>
+                                            <property name="text">
+                                             <string/>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="4" column="0">
+                                           <widget class="QLabel" name="TRAIN__METRICS__LABEL">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>Train metrics</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="11" column="1">
+                                           <widget class="QPushButton" name="TRAIN__ACCUM_ITER__INFO">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;If memory or # gpus is limited, use this variable to maintain the effective batch size, which is batch_size (per gpu) * nodes * (gpus per node) * accum_iter. Must be a positive integer.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="styleSheet">
+                                             <string notr="true">QPushButton {
+  border: none;
+}</string>
+                                            </property>
+                                            <property name="text">
+                                             <string/>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="18" column="0">
+                                           <widget class="QLabel" name="lr_schel_reduce_on_plat_patience_label">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string/>
+                                            </property>
+                                            <property name="text">
+                                             <string>Reduce on plateau patience</string>
+                                            </property>
+                                            <property name="indent">
+                                             <number>15</number>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="1" column="0">
+                                           <widget class="QLabel" name="LOSS__TYPE__LABEL">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>Loss type</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="10" column="0">
+                                           <widget class="QLabel" name="TRAIN__BATCH_SIZE__LABEL">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string/>
+                                            </property>
+                                            <property name="text">
+                                             <string>Batch size</string>
+                                            </property>
+                                            <property name="indent">
+                                             <number>15</number>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="3" column="0">
+                                           <widget class="QLabel" name="LOSS__CLASS_REBALANCE__LABEL">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>Class rebalance</string>
+                                            </property>
+                                           </widget>
+                                          </item>
                                           <item row="3" column="2">
                                            <widget class="QComboBox" name="LOSS__CLASS_REBALANCE__INPUT">
                                             <property name="minimumSize">
@@ -10770,46 +11046,8 @@ p, li { white-space: pre-wrap; }
                                             </item>
                                            </widget>
                                           </item>
-                                          <item row="2" column="2">
-                                           <widget class="QLineEdit" name="LOSS__WEIGHTS__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>[0.66, 0.34]</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="2" column="0">
-                                           <widget class="QLabel" name="LOSS__WEIGHTS__LABEL">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>Loss weights</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="2" column="1">
-                                           <widget class="QPushButton" name="LOSS__WEIGHTS__INFO">
+                                          <item row="14" column="1">
+                                           <widget class="QPushButton" name="TRAIN__LR_SCHEDULER__NAME__INFO">
                                             <property name="minimumSize">
                                              <size>
                                               <width>30</width>
@@ -10821,15 +11059,9 @@ p, li { white-space: pre-wrap; }
                                               <width>30</width>
                                               <height>30</height>
                                              </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
                                             </property>
                                             <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Weights to be apply in multiple loss combination cases. Currently only available when LOSS.TYPE == &amp;quot;W_CE_DICE&amp;quot; where it needs to be a list of two floats (one for CE loss and the other for DICE loss). They must sum 1. E.g. [0.3, 0.7]&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Set up a learning rate scheduler. A Learning rate scheduler is a predefined framework that adjusts the learning rate between epochs or iterations as the training progresses. Leave it with the first option blank to avoid applying it. Three options available: 'warmupcosine', 'reduceonplateau', 'onecycle'. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;- 'warmupcosine' refers to a cosine decay with a warm up consist in 2 phases: 1) a warm up phase which consists of increasing the learning rate from 'warmup cosine decay' to 'training learning rate' value by a factor during a certain number of epochs defined by 'warmup cosine decay hold epochs'; 2) after this will began the decay of the learning rate value using the cosine function. Find a detailed explanation in &lt;/span&gt;&lt;a href=&quot;https://scorrea92.medium.com/cosine-learning-rate-decay-e8b50aa455b &quot;&gt;&lt;span style=&quot; font-size:12pt; text-decoration: underline; color:#0000ff;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;- 'reduceonplateau' reduces the learning rate when a metric has stopped improving. Models often benefit from reducing the learning rate by a factor of 2-10 once learning stagnates. This callback monitors a quantity and if no improvement is seen for a 'patience' number of epochs, the learning rate is reduced.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;- 'onecycle', sets the learning rate of each parameter group according to the 1cycle learning rate policy. The 1cycle policy anneals the learning rate from an initial learning rate to some maximum learning rate and then from that maximum learning rate to some minimum learning rate much lower than the initial learning rate. This policy was initially described in the paper: &lt;/span&gt;&lt;a href=&quot;https://arxiv.org/abs/1708.07120&quot;&gt;&lt;span style=&quot; font-size:12pt; text-decoration: underline; color:#0000ff;&quot;&gt;&amp;quot;Super-Convergence: Very Fast Training of Neural Networks Using Large Learning Rates&amp;quot;&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                             </property>
                                             <property name="styleSheet">
                                              <string notr="true">QPushButton {
@@ -10841,8 +11073,215 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                            </widget>
                                           </item>
-                                          <item row="27" column="0">
-                                           <widget class="QLabel" name="profiler_batch_range_label">
+                                          <item row="11" column="2">
+                                           <widget class="QLineEdit" name="TRAIN__ACCUM_ITER__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>1</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="21" column="2">
+                                           <widget class="QLineEdit" name="TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>-1</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="12" column="2">
+                                           <widget class="QLineEdit" name="MODEL__SAVE_CKPT_FREQ__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>-1</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="8" column="0">
+                                           <widget class="QLabel" name="TRAIN__OPT_BETAS__LABEL">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>Betas</string>
+                                            </property>
+                                            <property name="indent">
+                                             <number>15</number>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="0" column="2">
+                                           <widget class="QComboBox" name="TRAIN__OPTIMIZER__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <item>
+                                             <property name="text">
+                                              <string>ADAMW</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>ADAM</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>SGD</string>
+                                             </property>
+                                            </item>
+                                           </widget>
+                                          </item>
+                                          <item row="7" column="1">
+                                           <widget class="QPushButton" name="TRAIN__W_DECAY__INFO">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Weight decay for AdamW optimizer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="styleSheet">
+                                             <string notr="true">QPushButton {
+  border: none;
+}</string>
+                                            </property>
+                                            <property name="text">
+                                             <string/>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="8" column="2">
+                                           <widget class="QLineEdit" name="TRAIN__OPT_BETAS__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>(0.9, 0.999)</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="24" column="1">
+                                           <widget class="QPushButton" name="TRAIN__PROFILER__INFO">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; Whether to add profiler callback to the training &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="styleSheet">
+                                             <string notr="true">QPushButton {
+  border: none;
+}</string>
+                                            </property>
+                                            <property name="text">
+                                             <string/>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="0" column="0">
+                                           <widget class="QLabel" name="label_143">
                                             <property name="font">
                                              <font>
                                               <family>DejaVu Math TeX Gyre</family>
@@ -10853,25 +11292,115 @@ p, li { white-space: pre-wrap; }
                                              <string/>
                                             </property>
                                             <property name="text">
-                                             <string>Profiler batch range</string>
+                                             <string>Optimizer</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="1" column="1">
+                                           <widget class="QPushButton" name="LOSS__TYPE__INFO">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Loss type, different options depending on the workflow. If empty the default loss on each case will be set:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;  * Semantic segmentation:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;CE&amp;quot; (default): cross entropy. Ref: https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;DICE&amp;quot;: Dice loss. Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;W_CE_DICE&amp;quot;: CE and Dice (with a weight term on each one that must sum 1). Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;  * Instance segmentation: automatically set depending on the channels selected (PROBLEM.INSTANCE_SEG.DATA_CHANNELS). There is no need&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;                           to set it.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;  * Detection:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;CE&amp;quot; (default): cross entropy. Ref: https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;DICE&amp;quot;: Dice loss. Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;W_CE_DICE&amp;quot;: CE and Dice (with a weight term on each one that must sum 1). Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;  * Denoising:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;MSE&amp;quot; (default): mean square error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;  * Super-resolution:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;MAE&amp;quot; (default): mean absolute error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;MSE&amp;quot;: mean square error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;  * Self-supervision:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      These losses can only be set when PROBLEM.SELF_SUPERVISED.PRETEXT_TASK = &amp;quot;crappify&amp;quot;. Otherwise it will be automatically set to MSE when&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      PROBLEM.SELF_SUPERVISED.PRETEXT_TASK = &amp;quot;masking&amp;quot;.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;MAE&amp;quot; (default): mean absolute error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;MSE&amp;quot;: mean square error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;  * Classification:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;CE&amp;quot; (default): cross entropy. Ref: https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;  * Image to image:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;MAE&amp;quot; (default): mean absolute error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;MSE&amp;quot;: mean square error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="styleSheet">
+                                             <string notr="true">QPushButton {
+  border: none;
+}</string>
+                                            </property>
+                                            <property name="text">
+                                             <string/>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="16" column="0">
+                                           <widget class="QLabel" name="lr_schel_min_lr_label">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string/>
+                                            </property>
+                                            <property name="text">
+                                             <string>Minimum learning rate</string>
                                             </property>
                                             <property name="indent">
                                              <number>15</number>
                                             </property>
                                            </widget>
                                           </item>
-                                          <item row="10" column="3">
-                                           <spacer name="horizontalSpacer_21">
-                                            <property name="orientation">
-                                             <enum>Qt::Horizontal</enum>
-                                            </property>
-                                            <property name="sizeHint" stdset="0">
+                                          <item row="12" column="1">
+                                           <widget class="QPushButton" name="MODEL__SAVE_CKPT_FREQ__INFO">
+                                            <property name="minimumSize">
                                              <size>
-                                              <width>40</width>
-                                              <height>20</height>
+                                              <width>30</width>
+                                              <height>30</height>
                                              </size>
                                             </property>
-                                           </spacer>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Epochs to save a checkpoint of the model apart from the ones saved with LOAD_CHECKPOINT_ONLY_WEIGHTS. Set it to -1 to not do it.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="styleSheet">
+                                             <string notr="true">QPushButton {
+  border: none;
+}</string>
+                                            </property>
+                                            <property name="text">
+                                             <string/>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="21" column="1">
+                                           <widget class="QPushButton" name="TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Epochs to do the warming up in 'warmupcosine' scheduler. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="styleSheet">
+                                             <string notr="true">QPushButton {
+  border: none;
+}</string>
+                                            </property>
+                                            <property name="text">
+                                             <string/>
+                                            </property>
+                                           </widget>
                                           </item>
                                           <item row="14" column="2">
                                            <widget class="QComboBox" name="TRAIN__LR_SCHEDULER__NAME__INPUT">
@@ -10915,24 +11444,8 @@ p, li { white-space: pre-wrap; }
                                             </item>
                                            </widget>
                                           </item>
-                                          <item row="12" column="0">
-                                           <widget class="QLabel" name="MODEL__SAVE_CKPT_FREQ__LABEL">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string/>
-                                            </property>
-                                            <property name="text">
-                                             <string>Save checkpoint frequency</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="24" column="2">
-                                           <widget class="QComboBox" name="TRAIN__PROFILER__INPUT">
+                                          <item row="1" column="2">
+                                           <widget class="QComboBox" name="LOSS__TYPE__INPUT">
                                             <property name="minimumSize">
                                              <size>
                                               <width>200</width>
@@ -10951,16 +11464,44 @@ p, li { white-space: pre-wrap; }
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
-                                            <item>
-                                             <property name="text">
-                                              <string>No</string>
-                                             </property>
-                                            </item>
-                                            <item>
-                                             <property name="text">
-                                              <string>Yes</string>
-                                             </property>
-                                            </item>
+                                           </widget>
+                                          </item>
+                                          <item row="2" column="2">
+                                           <widget class="QLineEdit" name="LOSS__WEIGHTS__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>[0.66, 0.34]</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="2" column="0">
+                                           <widget class="QLabel" name="LOSS__WEIGHTS__LABEL">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>Loss weights</string>
+                                            </property>
                                            </widget>
                                           </item>
                                           <item row="16" column="2">
@@ -10988,58 +11529,47 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                            </widget>
                                           </item>
-                                          <item row="18" column="2">
-                                           <widget class="QLineEdit" name="TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT">
+                                          <item row="8" column="1">
+                                           <widget class="QPushButton" name="TRAIN__OPT_BETAS__INFO">
                                             <property name="minimumSize">
                                              <size>
-                                              <width>200</width>
+                                              <width>30</width>
                                               <height>30</height>
                                              </size>
                                             </property>
                                             <property name="maximumSize">
                                              <size>
-                                              <width>200</width>
+                                              <width>30</width>
                                               <height>30</height>
                                              </size>
                                             </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Coefficients used for computing running averages of gradient and its square. Used in ADAM and ADAMW optimizers&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="styleSheet">
+                                             <string notr="true">QPushButton {
+  border: none;
+}</string>
                                             </property>
                                             <property name="text">
-                                             <string>-1</string>
+                                             <string/>
                                             </property>
                                            </widget>
                                           </item>
-                                          <item row="19" column="2">
-                                           <widget class="QLineEdit" name="TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT">
+                                          <item row="9" column="1">
+                                           <widget class="QLabel" name="TRAIN__BATCH_SIZE__CALCULATION__INFO">
                                             <property name="minimumSize">
                                              <size>
-                                              <width>200</width>
+                                              <width>30</width>
                                               <height>30</height>
                                              </size>
                                             </property>
                                             <property name="maximumSize">
                                              <size>
-                                              <width>200</width>
+                                              <width>30</width>
                                               <height>30</height>
                                              </size>
                                             </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>0.5</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="11" column="0">
-                                           <widget class="QLabel" name="label_114">
                                             <property name="font">
                                              <font>
                                               <family>DejaVu Math TeX Gyre</family>
@@ -11047,26 +11577,13 @@ p, li { white-space: pre-wrap; }
                                              </font>
                                             </property>
                                             <property name="toolTip">
-                                             <string/>
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;To automatically calculate the batch size based on the GPU memory available. If you don't have a GPU a &amp;quot;modest&amp;quot; value of 12 will be set. &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                             </property>
                                             <property name="text">
-                                             <string>Accumulate iterations</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="6" column="0">
-                                           <widget class="QLabel" name="label_151">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
                                              <string/>
                                             </property>
-                                            <property name="text">
-                                             <string>Learning rate</string>
+                                            <property name="scaledContents">
+                                             <bool>true</bool>
                                             </property>
                                            </widget>
                                           </item>
@@ -11095,58 +11612,20 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                            </widget>
                                           </item>
-                                          <item row="21" column="2">
-                                           <widget class="QLineEdit" name="TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT">
+                                          <item row="4" column="1">
+                                           <widget class="QPushButton" name="TRAIN__METRICS__INFO">
                                             <property name="minimumSize">
                                              <size>
-                                              <width>200</width>
+                                              <width>30</width>
                                               <height>30</height>
                                              </size>
                                             </property>
                                             <property name="maximumSize">
                                              <size>
-                                              <width>200</width>
+                                              <width>30</width>
                                               <height>30</height>
                                              </size>
                                             </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>-1</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="27" column="2">
-                                           <widget class="QLineEdit" name="TRAIN__PROFILER_BATCH_RANGE__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>10, 100</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="0" column="0">
-                                           <widget class="QLabel" name="label_143">
                                             <property name="font">
                                              <font>
                                               <family>DejaVu Math TeX Gyre</family>
@@ -11154,243 +11633,15 @@ p, li { white-space: pre-wrap; }
                                              </font>
                                             </property>
                                             <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Metrics to apply during training. Depending on the workflow different ones can be applied. If empty, some default metrics will be configured automatically:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;* Semantic segmentation: 'iou' (called also Jaccard index)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;* Instance segmentation: automatically set depending on the channels selected (PROBLEM.INSTANCE_SEG.DATA_CHANNELS).&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;* Detection: 'iou' (called also Jaccard index)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;* Denoising: 'mae', 'mse'&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;* Super-resolution: &amp;quot;psnr&amp;quot;, &amp;quot;mae&amp;quot;, &amp;quot;mse&amp;quot;, &amp;quot;ssim&amp;quot;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;* Self-supervision: &amp;quot;psnr&amp;quot;, &amp;quot;mae&amp;quot;, &amp;quot;mse&amp;quot;, &amp;quot;ssim&amp;quot;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;* Classification: 'accuracy', 'top-5-accuracy'&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;* Image to image: &amp;quot;psnr&amp;quot;, &amp;quot;mae&amp;quot;, &amp;quot;mse&amp;quot;, &amp;quot;ssim&amp;quot;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="styleSheet">
+                                             <string notr="true">QPushButton {
+  border: none;
+}</string>
+                                            </property>
+                                            <property name="text">
                                              <string/>
-                                            </property>
-                                            <property name="text">
-                                             <string>Optimizer</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="0" column="2">
-                                           <widget class="QComboBox" name="TRAIN__OPTIMIZER__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <item>
-                                             <property name="text">
-                                              <string>ADAMW</string>
-                                             </property>
-                                            </item>
-                                            <item>
-                                             <property name="text">
-                                              <string>ADAM</string>
-                                             </property>
-                                            </item>
-                                            <item>
-                                             <property name="text">
-                                              <string>SGD</string>
-                                             </property>
-                                            </item>
-                                           </widget>
-                                          </item>
-                                          <item row="28" column="0">
-                                           <spacer name="verticalSpacer_14">
-                                            <property name="orientation">
-                                             <enum>Qt::Vertical</enum>
-                                            </property>
-                                            <property name="sizeHint" stdset="0">
-                                             <size>
-                                              <width>20</width>
-                                              <height>40</height>
-                                             </size>
-                                            </property>
-                                           </spacer>
-                                          </item>
-                                          <item row="12" column="2">
-                                           <widget class="QLineEdit" name="MODEL__SAVE_CKPT_FREQ__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>-1</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="10" column="2">
-                                           <widget class="QLineEdit" name="TRAIN__BATCH_SIZE__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>1</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="11" column="2">
-                                           <widget class="QLineEdit" name="TRAIN__ACCUM_ITER__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>1</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="16" column="0">
-                                           <widget class="QLabel" name="lr_schel_min_lr_label">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string/>
-                                            </property>
-                                            <property name="text">
-                                             <string>Minimum learning rate</string>
-                                            </property>
-                                            <property name="indent">
-                                             <number>15</number>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="21" column="0">
-                                           <widget class="QLabel" name="lr_schel_warmupcosine_epochs_label">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string/>
-                                            </property>
-                                            <property name="text">
-                                             <string>Warmup cosine decay epochs</string>
-                                            </property>
-                                            <property name="indent">
-                                             <number>15</number>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="10" column="0">
-                                           <widget class="QLabel" name="TRAIN__BATCH_SIZE__LABEL">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string/>
-                                            </property>
-                                            <property name="text">
-                                             <string>Batch size</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="24" column="0">
-                                           <widget class="QLabel" name="label_160">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string/>
-                                            </property>
-                                            <property name="text">
-                                             <string>Profiler</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="7" column="0">
-                                           <widget class="QLabel" name="adamw_weight_decay_label">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string/>
-                                            </property>
-                                            <property name="text">
-                                             <string>Weight decay</string>
-                                            </property>
-                                            <property name="indent">
-                                             <number>15</number>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="19" column="0">
-                                           <widget class="QLabel" name="lr_schel_reduce_on_plat_factor_label">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string/>
-                                            </property>
-                                            <property name="text">
-                                             <string>Reduce on plateau factor</string>
-                                            </property>
-                                            <property name="indent">
-                                             <number>15</number>
                                             </property>
                                            </widget>
                                           </item>
@@ -11416,378 +11667,6 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="text">
                                              <string>0.02</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="6" column="1">
-                                           <widget class="QPushButton" name="TRAIN__LR__INFO">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Learning rate during training phase. The learning rate is a hyperparameter that controls how much to change the model in response to the estimated error each time the model weights are updated. Choosing the learning rate is challenging as a value too small may result in a long training process that could get stuck, whereas a value too large may result in learning a sub-optimal set of weights too fast or an unstable training process&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="styleSheet">
-                                             <string notr="true">QPushButton {
-  border: none;
-}</string>
-                                            </property>
-                                            <property name="text">
-                                             <string/>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="14" column="0">
-                                           <widget class="QLabel" name="label_162">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string/>
-                                            </property>
-                                            <property name="text">
-                                             <string>Learning rate scheduler name</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="0" column="1">
-                                           <widget class="QPushButton" name="TRAIN__OPTIMIZER__INFO">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Optimizer to use during the model training.  Optimizers are algorithms or methods used to minimize an error function (the loss function) &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="styleSheet">
-                                             <string notr="true">QPushButton {
-  border: none;
-}</string>
-                                            </property>
-                                            <property name="text">
-                                             <string/>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="10" column="1">
-                                           <widget class="QPushButton" name="TRAIN__BATCH_SIZE__INFO">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Batch size of the training process. It is a hyperparameter that defines the number of samples to work through before updating the internal model parameters. This determines how many images will be loaded into the GPU at once so a high value will lead to a GPU memory error. Set it according to your GPU memory. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="styleSheet">
-                                             <string notr="true">QPushButton {
-  border: none;
-}</string>
-                                            </property>
-                                            <property name="text">
-                                             <string/>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="18" column="0">
-                                           <widget class="QLabel" name="lr_schel_reduce_on_plat_patience_label">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string/>
-                                            </property>
-                                            <property name="text">
-                                             <string>Reduce on plateau patience</string>
-                                            </property>
-                                            <property name="indent">
-                                             <number>15</number>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="7" column="1">
-                                           <widget class="QPushButton" name="TRAIN__W_DECAY__INFO">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Weight decay for AdamW optimizer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="styleSheet">
-                                             <string notr="true">QPushButton {
-  border: none;
-}</string>
-                                            </property>
-                                            <property name="text">
-                                             <string/>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="16" column="1">
-                                           <widget class="QPushButton" name="TRAIN__LR_SCHEDULER__MIN_LR__INFO">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Lower bound on the learning rate used in 'warmupcosine' and 'reduceonplateau'. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive float&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="styleSheet">
-                                             <string notr="true">QPushButton {
-  border: none;
-}</string>
-                                            </property>
-                                            <property name="text">
-                                             <string/>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="14" column="1">
-                                           <widget class="QPushButton" name="TRAIN__LR_SCHEDULER__NAME__INFO">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Set up a learning rate scheduler. A Learning rate scheduler is a predefined framework that adjusts the learning rate between epochs or iterations as the training progresses. Leave it with the first option blank to avoid applying it. Three options available: 'warmupcosine', 'reduceonplateau', 'onecycle'. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;- 'warmupcosine' refers to a cosine decay with a warm up consist in 2 phases: 1) a warm up phase which consists of increasing the learning rate from 'warmup cosine decay' to 'training learning rate' value by a factor during a certain number of epochs defined by 'warmup cosine decay hold epochs'; 2) after this will began the decay of the learning rate value using the cosine function. Find a detailed explanation in &lt;/span&gt;&lt;a href=&quot;https://scorrea92.medium.com/cosine-learning-rate-decay-e8b50aa455b &quot;&gt;&lt;span style=&quot; font-size:12pt; text-decoration: underline; color:#0000ff;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;- 'reduceonplateau' reduces the learning rate when a metric has stopped improving. Models often benefit from reducing the learning rate by a factor of 2-10 once learning stagnates. This callback monitors a quantity and if no improvement is seen for a 'patience' number of epochs, the learning rate is reduced.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;- 'onecycle', sets the learning rate of each parameter group according to the 1cycle learning rate policy. The 1cycle policy anneals the learning rate from an initial learning rate to some maximum learning rate and then from that maximum learning rate to some minimum learning rate much lower than the initial learning rate. This policy was initially described in the paper: &lt;/span&gt;&lt;a href=&quot;https://arxiv.org/abs/1708.07120&quot;&gt;&lt;span style=&quot; font-size:12pt; text-decoration: underline; color:#0000ff;&quot;&gt;&amp;quot;Super-Convergence: Very Fast Training of Neural Networks Using Large Learning Rates&amp;quot;&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="styleSheet">
-                                             <string notr="true">QPushButton {
-  border: none;
-}</string>
-                                            </property>
-                                            <property name="text">
-                                             <string/>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="19" column="1">
-                                           <widget class="QPushButton" name="TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Factor by which the learning rate will be reduced in 'reduceonplateau' scheduler. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a float between 0 and 1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="styleSheet">
-                                             <string notr="true">QPushButton {
-  border: none;
-}</string>
-                                            </property>
-                                            <property name="text">
-                                             <string/>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="11" column="1">
-                                           <widget class="QPushButton" name="TRAIN__ACCUM_ITER__INFO">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;If memory or # gpus is limited, use this variable to maintain the effective batch size, which is batch_size (per gpu) * nodes * (gpus per node) * accum_iter. Must be a positive integer.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="styleSheet">
-                                             <string notr="true">QPushButton {
-  border: none;
-}</string>
-                                            </property>
-                                            <property name="text">
-                                             <string/>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="12" column="1">
-                                           <widget class="QPushButton" name="MODEL__SAVE_CKPT_FREQ__INFO">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Epochs to save a checkpoint of the model apart from the ones saved with LOAD_CHECKPOINT_ONLY_WEIGHTS. Set it to -1 to not do it.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="styleSheet">
-                                             <string notr="true">QPushButton {
-  border: none;
-}</string>
-                                            </property>
-                                            <property name="text">
-                                             <string/>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="18" column="1">
-                                           <widget class="QPushButton" name="TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Number of epochs with no improvement after which learning rate will be reduced in 'reduceonplateau' scheduler. Need to be less than training patience otherwise it makes no sense. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="styleSheet">
-                                             <string notr="true">QPushButton {
-  border: none;
-}</string>
-                                            </property>
-                                            <property name="text">
-                                             <string/>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="21" column="1">
-                                           <widget class="QPushButton" name="TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Epochs to do the warming up in 'warmupcosine' scheduler. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Must be a positive integer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="styleSheet">
-                                             <string notr="true">QPushButton {
-  border: none;
-}</string>
-                                            </property>
-                                            <property name="text">
-                                             <string/>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="29" column="0">
-                                           <widget class="QLabel" name="TRAIN__VERBOSE__LABEL">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>Verbose</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="24" column="1">
-                                           <widget class="QPushButton" name="TRAIN__PROFILER__INFO">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; Whether to add profiler callback to the training &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="styleSheet">
-                                             <string notr="true">QPushButton {
-  border: none;
-}</string>
-                                            </property>
-                                            <property name="text">
-                                             <string/>
                                             </property>
                                            </widget>
                                           </item>
@@ -11818,8 +11697,8 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                            </widget>
                                           </item>
-                                          <item row="29" column="2">
-                                           <widget class="QComboBox" name="TRAIN__VERBOSE__INPUT">
+                                          <item row="24" column="2">
+                                           <widget class="QComboBox" name="TRAIN__PROFILER__INPUT">
                                             <property name="minimumSize">
                                              <size>
                                               <width>200</width>
@@ -11882,24 +11761,89 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                            </widget>
                                           </item>
-                                          <item row="8" column="0">
-                                           <widget class="QLabel" name="TRAIN__OPT_BETAS__LABEL">
+                                          <item row="2" column="1">
+                                           <widget class="QPushButton" name="LOSS__WEIGHTS__INFO">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
                                             <property name="font">
                                              <font>
                                               <family>DejaVu Math TeX Gyre</family>
                                               <pointsize>12</pointsize>
                                              </font>
                                             </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Weights to be apply in multiple loss combination cases. Currently only available when LOSS.TYPE == &amp;quot;W_CE_DICE&amp;quot; where it needs to be a list of two floats (one for CE loss and the other for DICE loss). They must sum 1. E.g. [0.3, 0.7]&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="styleSheet">
+                                             <string notr="true">QPushButton {
+  border: none;
+}</string>
+                                            </property>
                                             <property name="text">
-                                             <string>Betas</string>
+                                             <string/>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="6" column="0">
+                                           <widget class="QLabel" name="label_151">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string/>
+                                            </property>
+                                            <property name="text">
+                                             <string>Learning rate</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="7" column="0">
+                                           <widget class="QLabel" name="adamw_weight_decay_label">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string/>
+                                            </property>
+                                            <property name="text">
+                                             <string>Weight decay</string>
                                             </property>
                                             <property name="indent">
                                              <number>15</number>
                                             </property>
                                            </widget>
                                           </item>
-                                          <item row="8" column="2">
-                                           <widget class="QLineEdit" name="TRAIN__OPT_BETAS__INPUT">
+                                          <item row="29" column="0">
+                                           <widget class="QLabel" name="TRAIN__VERBOSE__LABEL">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>Verbose</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="19" column="2">
+                                           <widget class="QLineEdit" name="TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT">
                                             <property name="minimumSize">
                                              <size>
                                               <width>200</width>
@@ -11919,12 +11863,12 @@ p, li { white-space: pre-wrap; }
                                              </font>
                                             </property>
                                             <property name="text">
-                                             <string>(0.9, 0.999)</string>
+                                             <string>0.5</string>
                                             </property>
                                            </widget>
                                           </item>
-                                          <item row="8" column="1">
-                                           <widget class="QPushButton" name="TRAIN__OPT_BETAS__INFO">
+                                          <item row="0" column="1">
+                                           <widget class="QPushButton" name="TRAIN__OPTIMIZER__INFO">
                                             <property name="minimumSize">
                                              <size>
                                               <width>30</width>
@@ -11938,7 +11882,7 @@ p, li { white-space: pre-wrap; }
                                              </size>
                                             </property>
                                             <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Coefficients used for computing running averages of gradient and its square. Used in ADAM and ADAMW optimizers&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Optimizer to use during the model training.  Optimizers are algorithms or methods used to minimize an error function (the loss function) &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                             </property>
                                             <property name="styleSheet">
                                              <string notr="true">QPushButton {
@@ -11950,122 +11894,8 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                            </widget>
                                           </item>
-                                          <item row="4" column="0">
-                                           <widget class="QLabel" name="TRAIN__METRICS__LABEL">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>Train metrics</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="4" column="1">
-                                           <widget class="QPushButton" name="TRAIN__METRICS__INFO">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Metrics to apply during training. Depending on the workflow different ones can be applied. If empty, some default metrics will be configured automatically:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;* Semantic segmentation: 'iou' (called also Jaccard index)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;* Instance segmentation: automatically set depending on the channels selected (PROBLEM.INSTANCE_SEG.DATA_CHANNELS).&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;* Detection: 'iou' (called also Jaccard index)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;* Denoising: 'mae', 'mse'&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;* Super-resolution: &amp;quot;psnr&amp;quot;, &amp;quot;mae&amp;quot;, &amp;quot;mse&amp;quot;, &amp;quot;ssim&amp;quot;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;* Self-supervision: &amp;quot;psnr&amp;quot;, &amp;quot;mae&amp;quot;, &amp;quot;mse&amp;quot;, &amp;quot;ssim&amp;quot;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;* Classification: 'accuracy', 'top-5-accuracy'&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;* Image to image: &amp;quot;psnr&amp;quot;, &amp;quot;mae&amp;quot;, &amp;quot;mse&amp;quot;, &amp;quot;ssim&amp;quot;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="styleSheet">
-                                             <string notr="true">QPushButton {
-  border: none;
-}</string>
-                                            </property>
-                                            <property name="text">
-                                             <string/>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="1" column="1">
-                                           <widget class="QPushButton" name="LOSS__TYPE__INFO">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Loss type, different options depending on the workflow. If empty the default loss on each case will be set:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;  * Semantic segmentation:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;CE&amp;quot; (default): cross entropy. Ref: https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;DICE&amp;quot;: Dice loss. Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;W_CE_DICE&amp;quot;: CE and Dice (with a weight term on each one that must sum 1). Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;  * Instance segmentation: automatically set depending on the channels selected (PROBLEM.INSTANCE_SEG.DATA_CHANNELS). There is no need&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;                           to set it.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;  * Detection:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;CE&amp;quot; (default): cross entropy. Ref: https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;DICE&amp;quot;: Dice loss. Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;W_CE_DICE&amp;quot;: CE and Dice (with a weight term on each one that must sum 1). Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;  * Denoising:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;MSE&amp;quot; (default): mean square error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;  * Super-resolution:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;MAE&amp;quot; (default): mean absolute error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;MSE&amp;quot;: mean square error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;  * Self-supervision:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      These losses can only be set when PROBLEM.SELF_SUPERVISED.PRETEXT_TASK = &amp;quot;crappify&amp;quot;. Otherwise it will be automatically set to MSE when&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      PROBLEM.SELF_SUPERVISED.PRETEXT_TASK = &amp;quot;masking&amp;quot;.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;MAE&amp;quot; (default): mean absolute error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;MSE&amp;quot;: mean square error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;  * Classification:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;CE&amp;quot; (default): cross entropy. Ref: https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;  * Image to image:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;MAE&amp;quot; (default): mean absolute error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;      * &amp;quot;MSE&amp;quot;: mean square error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="styleSheet">
-                                             <string notr="true">QPushButton {
-  border: none;
-}</string>
-                                            </property>
-                                            <property name="text">
-                                             <string/>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="1" column="2">
-                                           <widget class="QComboBox" name="LOSS__TYPE__INPUT">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>200</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="1" column="0">
-                                           <widget class="QLabel" name="LOSS__TYPE__LABEL">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>Loss type</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="4" column="2">
-                                           <widget class="QLineEdit" name="TRAIN__METRICS__INPUT">
+                                          <item row="18" column="2">
+                                           <widget class="QLineEdit" name="TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT">
                                             <property name="minimumSize">
                                              <size>
                                               <width>200</width>
@@ -12085,51 +11915,7 @@ p, li { white-space: pre-wrap; }
                                              </font>
                                             </property>
                                             <property name="text">
-                                             <string>[]</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="9" column="0">
-                                           <widget class="QLabel" name="TRAIN__BATCH_SIZE__CALCULATION__LABEL">
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="text">
-                                             <string>Automatically calculate batch size</string>
-                                            </property>
-                                           </widget>
-                                          </item>
-                                          <item row="9" column="1">
-                                           <widget class="QLabel" name="TRAIN__BATCH_SIZE__CALCULATION__INFO">
-                                            <property name="minimumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="maximumSize">
-                                             <size>
-                                              <width>30</width>
-                                              <height>30</height>
-                                             </size>
-                                            </property>
-                                            <property name="font">
-                                             <font>
-                                              <family>DejaVu Math TeX Gyre</family>
-                                              <pointsize>12</pointsize>
-                                             </font>
-                                            </property>
-                                            <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;To automatically calculate the batch size based on the GPU memory available. If you don't have a GPU a &amp;quot;modest&amp;quot; value of 12 will be set. &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                            </property>
-                                            <property name="text">
-                                             <string/>
-                                            </property>
-                                            <property name="scaledContents">
-                                             <bool>true</bool>
+                                             <string>-1</string>
                                             </property>
                                            </widget>
                                           </item>
@@ -12164,6 +11950,223 @@ p, li { white-space: pre-wrap; }
                                              </property>
                                             </item>
                                            </widget>
+                                          </item>
+                                          <item row="4" column="2">
+                                           <widget class="QLineEdit" name="TRAIN__METRICS__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>[]</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="12" column="0">
+                                           <widget class="QLabel" name="MODEL__SAVE_CKPT_FREQ__LABEL">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string/>
+                                            </property>
+                                            <property name="text">
+                                             <string>Save checkpoint frequency</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="27" column="2">
+                                           <widget class="QLineEdit" name="TRAIN__PROFILER_BATCH_RANGE__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>10, 100</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="6" column="1">
+                                           <widget class="QPushButton" name="TRAIN__LR__INFO">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>30</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Learning rate during training phase. The learning rate is a hyperparameter that controls how much to change the model in response to the estimated error each time the model weights are updated. Choosing the learning rate is challenging as a value too small may result in a long training process that could get stuck, whereas a value too large may result in learning a sub-optimal set of weights too fast or an unstable training process&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="styleSheet">
+                                             <string notr="true">QPushButton {
+  border: none;
+}</string>
+                                            </property>
+                                            <property name="text">
+                                             <string/>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="29" column="2">
+                                           <widget class="QComboBox" name="TRAIN__VERBOSE__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <item>
+                                             <property name="text">
+                                              <string>No</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>Yes</string>
+                                             </property>
+                                            </item>
+                                           </widget>
+                                          </item>
+                                          <item row="27" column="0">
+                                           <widget class="QLabel" name="profiler_batch_range_label">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string/>
+                                            </property>
+                                            <property name="text">
+                                             <string>Profiler batch range</string>
+                                            </property>
+                                            <property name="indent">
+                                             <number>15</number>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="19" column="0">
+                                           <widget class="QLabel" name="lr_schel_reduce_on_plat_factor_label">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string/>
+                                            </property>
+                                            <property name="text">
+                                             <string>Reduce on plateau factor</string>
+                                            </property>
+                                            <property name="indent">
+                                             <number>15</number>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="10" column="2">
+                                           <widget class="QLineEdit" name="TRAIN__BATCH_SIZE__INPUT">
+                                            <property name="minimumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>200</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>1</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="24" column="0">
+                                           <widget class="QLabel" name="label_160">
+                                            <property name="font">
+                                             <font>
+                                              <family>DejaVu Math TeX Gyre</family>
+                                              <pointsize>12</pointsize>
+                                             </font>
+                                            </property>
+                                            <property name="toolTip">
+                                             <string/>
+                                            </property>
+                                            <property name="text">
+                                             <string>Profiler</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item row="9" column="3">
+                                           <spacer name="horizontalSpacer_21">
+                                            <property name="orientation">
+                                             <enum>Qt::Horizontal</enum>
+                                            </property>
+                                            <property name="sizeHint" stdset="0">
+                                             <size>
+                                              <width>40</width>
+                                              <height>20</height>
+                                             </size>
+                                            </property>
+                                           </spacer>
                                           </item>
                                          </layout>
                                         </widget>
@@ -14602,12 +14605,12 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <item>
                                              <property name="text">
-                                              <string>No</string>
+                                              <string>Yes</string>
                                              </property>
                                             </item>
                                             <item>
                                              <property name="text">
-                                              <string>Yes</string>
+                                              <string>No</string>
                                              </property>
                                             </item>
                                            </widget>
@@ -18059,7 +18062,7 @@ p, li { white-space: pre-wrap; }
                                              </font>
                                             </property>
                                             <property name="text">
-                                             <string>(-0.2, 0.2)</string>
+                                             <string>(-0.1, 0.1)</string>
                                             </property>
                                             <property name="plainText" stdset="0">
                                              <string>(-0.1,0.1) </string>
@@ -21850,7 +21853,7 @@ p, li { white-space: pre-wrap; }
                                              </font>
                                             </property>
                                             <property name="text">
-                                             <string>20</string>
+                                             <string>50</string>
                                             </property>
                                            </widget>
                                           </item>
@@ -36119,7 +36122,7 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>597</width>
+                                       <width>914</width>
                                        <height>1056</height>
                                       </rect>
                                      </property>
@@ -39554,8 +39557,8 @@ QPushButton:pressed {
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>896</width>
-                               <height>152</height>
+                               <width>48</width>
+                               <height>114</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_32">

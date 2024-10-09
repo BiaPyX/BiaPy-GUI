@@ -1217,14 +1217,14 @@ def set_default_config(cfg, gpu_info, sample_info):
     #######################
     if cfg['TRAIN']['ENABLE']:
         cfg['TRAIN']['EPOCHS'] = 150
-        cfg['TRAIN']['PATIENCE'] = 20
+        cfg['TRAIN']['PATIENCE'] = 50
         cfg['TRAIN']['OPTIMIZER'] = "ADAMW"
         cfg['TRAIN']['LR'] = 1.E-4
         # Learning rate scheduler
         if "LR_SCHEDULER" not in cfg['TRAIN']:
             cfg['TRAIN']['LR_SCHEDULER'] = {}
         cfg['TRAIN']['LR_SCHEDULER']['NAME'] = 'warmupcosine'
-        cfg['TRAIN']['LR_SCHEDULER']['MIN_LR'] = 5.E-6
+        cfg['TRAIN']['LR_SCHEDULER']['MIN_LR'] = 1.E-5
         cfg['TRAIN']['LR_SCHEDULER']['WARMUP_COSINE_DECAY_EPOCHS'] = 10
         if "LOSS" not in cfg:
             cfg['LOSS'] = {}
@@ -1287,7 +1287,7 @@ def set_default_config(cfg, gpu_info, sample_info):
     ############################
     # WORKFLOW SPECIFIC CONFIG #
     ############################
-    max_batch_size_allowed = 16
+    max_batch_size_allowed = 16 if cfg['PROBLEM']['NDIM'] == "2D" else 4 
     data_channels = cfg["DATA"]["PATCH_SIZE"][-1]
     if cfg["PROBLEM"]["TYPE"] in [
             "SEMANTIC_SEG",
@@ -1299,9 +1299,9 @@ def set_default_config(cfg, gpu_info, sample_info):
             if 'AUGMENTOR' not in cfg:
                 cfg['AUGMENTOR'] = {}
             cfg['AUGMENTOR']['BRIGHTNESS'] = True
-            cfg['AUGMENTOR']['BRIGHTNESS_FACTOR'] = str((-0.2, 0.2))
+            cfg['AUGMENTOR']['BRIGHTNESS_FACTOR'] = str((-0.1, 0.1))
             cfg['AUGMENTOR']['CONTRAST'] = True
-            cfg['AUGMENTOR']['CONTRAST_FACTOR'] = str((-0.2, 0.2))
+            cfg['AUGMENTOR']['CONTRAST_FACTOR'] = str((-0.1, 0.1))
             cfg['AUGMENTOR']['ELASTIC'] = True
             cfg['AUGMENTOR']['ZOOM'] = True
             cfg['AUGMENTOR']['ZOOM_RANGE'] = str((0.9, 1.1))
@@ -1515,15 +1515,15 @@ def batch_size_calculator(
         approx_network_memory = network_base_memory + (2*x_sample_memory_ratio*x_data)
          
         if item_memory_consumption == 0: item_memory_consumption = 1
-        number_of_samples = (min_mem_gpu - approx_network_memory)//item_memory_consumption if (min_mem_gpu - approx_network_memory) > 0 else 1
+        approx_batch_size = (min_mem_gpu - approx_network_memory)//item_memory_consumption if item_memory_consumption > 0 else 1
     else:
-        number_of_samples = max_batch_size_allowed//2
+        approx_batch_size = max_batch_size_allowed//2
 
     # Rough stimation on how many patches could be obtained using the actual patch size selected in the wizard 
     sample_data_factor = np.prod([x/y for x,y in zip(x_data_to_analize['crop_shape'],patch_size)])
     total_samples = x_data_to_analize['total_samples']*sample_data_factor
     
-    batch_size = int(min(min(total_samples, number_of_samples), max_batch_size_allowed))   
+    batch_size = int(min(min(total_samples, approx_batch_size), max_batch_size_allowed))   
 
     return batch_size
 
@@ -2646,7 +2646,12 @@ def create_yaml_file(main_window):
             biapy_config['TRAIN']['W_DECAY'] = float(get_text(main_window.ui.TRAIN__W_DECAY__INPUT))
             biapy_config['TRAIN']['OPT_BETAS'] = get_text(main_window.ui.TRAIN__OPT_BETAS__INPUT)
         if get_text(main_window.ui.TRAIN__BATCH_SIZE__CALCULATION__INPUT) == "Yes":
-            patch_size = ast.literal_eval(biapy_config['DATA']['PATCH_SIZE'])
+            try:
+                patch_size = ast.literal_eval(biapy_config['DATA']['PATCH_SIZE'])
+            except:
+                main_window.dialog_exec("There was an error with the patch size formating (DATA.PATCH_SIZE). Please check its syntax!", reason="error")
+                return True, False
+            
             network_base_memory = 4000 # High value here to prevent crash  
                                         
             if biapy_config["PROBLEM"]["TYPE"] == "CLASSIFICATION":
@@ -2723,7 +2728,7 @@ def create_yaml_file(main_window):
         else:
             biapy_config['TRAIN']['BATCH_SIZE'] = int(get_text(main_window.ui.TRAIN__BATCH_SIZE__INPUT))
         biapy_config['TRAIN']['EPOCHS'] = int(get_text(main_window.ui.TRAIN__EPOCHS__INPUT)) 
-        if get_text(main_window.ui.TRAIN__ACCUM_ITER__INPUT) != 1:
+        if int(get_text(main_window.ui.TRAIN__ACCUM_ITER__INPUT)) != 1:
             biapy_config['TRAIN']['ACCUM_ITER'] = int(get_text(main_window.ui.TRAIN__ACCUM_ITER__INPUT)) 
         biapy_config['TRAIN']['PATIENCE'] = int(get_text(main_window.ui.TRAIN__PATIENCE__INPUT))
 
@@ -2739,6 +2744,14 @@ def create_yaml_file(main_window):
             if get_text(main_window.ui.TRAIN__LR_SCHEDULER__NAME__INPUT) == "warmupcosine":  
                 biapy_config['TRAIN']['LR_SCHEDULER']['WARMUP_COSINE_DECAY_EPOCHS'] = int(get_text(main_window.ui.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT))
 
+        # Set LR scheduler by default if default epochs and patience 
+        if biapy_config['TRAIN']['EPOCHS'] == 150 and biapy_config['TRAIN']['PATIENCE'] == 50 and get_text(main_window.ui.TRAIN__LR_SCHEDULER__NAME__INPUT) == "":
+            if "LR_SCHEDULER" not in biapy_config['TRAIN']:
+                biapy_config['TRAIN']['LR_SCHEDULER'] = {}
+            biapy_config['TRAIN']['LR_SCHEDULER']['NAME'] = 'warmupcosine'
+            biapy_config['TRAIN']['LR_SCHEDULER']['MIN_LR'] = 1.E-5
+            biapy_config['TRAIN']['LR_SCHEDULER']['WARMUP_COSINE_DECAY_EPOCHS'] = 10
+            
         # Callbacks
         # if get_text(main_window.ui.TRAIN__PROFILER__INPUT) == "Yes": 
         #     biapy_config['TRAIN']['PROFILER'] = True 
