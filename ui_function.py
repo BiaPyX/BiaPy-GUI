@@ -1252,26 +1252,24 @@ class UIFunction(MainWindow):
         main_window : QMainWindow
             Main window of the application.
         """
+        # Create GPU input field
+        # main_window.ui.device_input = CheckableComboBox(main_window.ui.gpu_list_frame)
+        main_window.ui.device_input = QComboBox(main_window.ui.gpu_list_frame)
+        main_window.ui.device_input.setObjectName(u"device_input")
+        main_window.ui.device_input.setMinimumSize(QSize(400, 30))
+        main_window.ui.device_input.setMaximumSize(QSize(400, 30))
+        font = QFont()
+        font.setFamily(u"DejaVu Math TeX Gyre")
+        font.setPointSize(12)
+        main_window.ui.device_input.setFont(font)
+        main_window.ui.verticalLayout_40.addWidget(main_window.ui.device_input, 0, Qt.AlignHCenter)
+        main_window.ui.device_input.addItem("CPU")
+
         if len(main_window.cfg.settings['GPUs']) > 0:
-            # Create GPU input field
-            # main_window.ui.gpu_input = CheckableComboBox(main_window.ui.gpu_list_frame)
-            main_window.ui.gpu_input = QComboBox(main_window.ui.gpu_list_frame)
-            main_window.ui.gpu_input.setObjectName(u"gpu_input")
-            main_window.ui.gpu_input.setMinimumSize(QSize(400, 30))
-            main_window.ui.gpu_input.setMaximumSize(QSize(400, 30))
-            font = QFont()
-            font.setFamily(u"DejaVu Math TeX Gyre")
-            font.setPointSize(12)
-            main_window.ui.gpu_input.setFont(font)
-            main_window.ui.verticalLayout_40.addWidget(main_window.ui.gpu_input, 0, Qt.AlignHCenter)
             # for i, gpu in enumerate(main_window.cfg.settings['GPUs']):
-            #     main_window.ui.gpu_input.addItem("{} : {} ".format(i, gpu.name), check=True if i == 0 else False)
-            main_window.ui.gpu_input.addItem("CPU")
+            #     main_window.ui.device_input.addItem("{} : {} ".format(i, gpu.name), check=True if i == 0 else False)
             for i, gpu in enumerate(main_window.cfg.settings['GPUs']):
-                main_window.ui.gpu_input.addItem("GPU {} : {} ".format(i, gpu.name))
-        else:
-            main_window.ui.gpu_list_frame.setVisible(False)
-            main_window.ui.run_workflow_frame.setFrameShape(QFrame.NoFrame)
+                main_window.ui.device_input.addItem("GPU {} : {} ".format(i, gpu.name))
 
     def build_container(main_window):
         """
@@ -1361,7 +1359,7 @@ class UIFunction(MainWindow):
             return
 
         # Device selection
-        device = get_text(main_window.ui.gpu_input)
+        device = get_text(main_window.ui.device_input)
         use_gpu = True if "GPU" in device else False
         
         # Check if a pull is necessary 
