@@ -30,9 +30,9 @@ class Settings:
         self.settings["CUDA_version"] = [10.2, 11.8]
 
         # BiaPy
-        self.settings["biapy_code_version"] = Version("v3.5.3")
+        self.settings["biapy_code_version"] = Version("v3.5.4")
         self.settings["biapy_code_github"] = "https://github.com/BiaPyX/BiaPy"
-        self.settings["biapy_gui_version"] = Version("v1.1.1")
+        self.settings["biapy_gui_version"] = Version("v1.1.2")
         self.settings["biapy_gui_github"] = "https://github.com/BiaPyX/BiaPy-GUI"
         self.settings["biapy_container_basename"] = "biapyx/biapy"
         self.settings["biapy_container_name"] = (
