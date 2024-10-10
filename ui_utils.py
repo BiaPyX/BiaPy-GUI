@@ -2588,7 +2588,7 @@ def create_yaml_file(main_window):
             biapy_config['MODEL']['LOAD_CHECKPOINT'] = True 
             biapy_config['MODEL']["SOURCE"] = "biapy"
             biapy_config['PATHS'] = {}
-            if get_text(main_window.ui.PATHS__CHECKPOINT_FILE__INPUT) != "":
+            if get_text(main_window.ui.PATHS__CHECKPOINT_FILE__INPUT) != "" and get_text(main_window.ui.PATHS__CHECKPOINT_FILE__INPUT) != "model_weights.pth":
                 biapy_config['PATHS']['CHECKPOINT_FILE'] = get_text(main_window.ui.PATHS__CHECKPOINT_FILE__INPUT, strip=False)
             if int(get_text(main_window.ui.MODEL__SAVE_CKPT_FREQ__INPUT)) != -1:
                 biapy_config['MODEL']['SAVE_CKPT_FREQ'] = int(get_text(main_window.ui.MODEL__SAVE_CKPT_FREQ__INPUT))
@@ -3457,6 +3457,10 @@ class load_yaml_to_GUI_engine(QObject):
                         other_widgets_values_to_set.append("Yes") 
                     elif self.torchvision_pretrained:
                         v = "I want to check other online sources"
+                        other_widgets_to_set.append("LOAD_PRETRAINED_MODEL__INPUT")
+                        other_widgets_values_to_set.append("Yes") 
+                elif widget_name == "MODEL__LOAD_CHECKPOINT__INPUT":
+                    if self.biapy_pretrained:
                         other_widgets_to_set.append("LOAD_PRETRAINED_MODEL__INPUT")
                         other_widgets_values_to_set.append("Yes") 
                 elif widget_name == "MODEL__BMZ__SOURCE_MODEL_ID__INPUT":
