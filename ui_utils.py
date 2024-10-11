@@ -715,12 +715,14 @@ def clear_answers(main_window, ask_user=True):
 
         main_window.cfg.settings['wizard_question_index'] = 0
 
-def have_internet():
+def have_internet(main_window):
     conn = httplib.HTTPSConnection("8.8.8.8", timeout=5)
     try:
         conn.request("HEAD", "/")
         return True
     except Exception:
+        exc = traceback.format_exc()
+        main_window.logger.error(exc)
         return False
     finally:
         conn.close()
@@ -747,7 +749,7 @@ def check_models_from_other_sources(main_window, from_wizard=True):
         if not main_window.yes_no.answer:
             return
 
-    if not have_internet():
+    if not have_internet(main_window):
         main_window.dialog_exec("There is no internet connection. Check aborted!", reason="error")
         return 
 
