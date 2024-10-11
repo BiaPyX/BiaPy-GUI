@@ -1401,7 +1401,7 @@ QPushButton:pressed {
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>2</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="page_home">
                 <property name="styleSheet">
@@ -1432,8 +1432,14 @@ background-color:#D3D3D3;
                   <widget class="QFrame" name="frame_4">
                    <property name="minimumSize">
                     <size>
-                     <width>775</width>
-                     <height>500</height>
+                     <width>948</width>
+                     <height>555</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>948</width>
+                     <height>555</height>
                     </size>
                    </property>
                    <property name="font">
@@ -1472,6 +1478,12 @@ background-color:#D3D3D3;
                         <height>30</height>
                        </size>
                       </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>16777215</width>
+                        <height>30</height>
+                       </size>
+                      </property>
                       <property name="font">
                        <font>
                         <family>DejaVu Math TeX Gyre</family>
@@ -1496,7 +1508,7 @@ background-color:#D3D3D3;
                       <property name="maximumSize">
                        <size>
                         <width>16777215</width>
-                        <height>140</height>
+                        <height>120</height>
                        </size>
                       </property>
                       <property name="styleSheet">
@@ -2135,7 +2147,7 @@ background-color:#A9A9A9;
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
-                        <height>240</height>
+                        <height>200</height>
                        </size>
                       </property>
                       <property name="maximumSize">
@@ -2208,7 +2220,13 @@ border-radius: 25px;
                          <property name="minimumSize">
                           <size>
                            <width>0</width>
-                           <height>20</height>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>16777215</width>
+                           <height>30</height>
                           </size>
                          </property>
                          <property name="font">
@@ -2265,13 +2283,13 @@ border-radius: 25px;
                          <property name="minimumSize">
                           <size>
                            <width>0</width>
-                           <height>20</height>
+                           <height>30</height>
                           </size>
                          </property>
                          <property name="maximumSize">
                           <size>
                            <width>16777215</width>
-                           <height>16777215</height>
+                           <height>30</height>
                           </size>
                          </property>
                          <property name="font">
@@ -2298,7 +2316,7 @@ border-radius: 25px;
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
-                        <height>150</height>
+                        <height>170</height>
                        </size>
                       </property>
                       <property name="maximumSize">
@@ -2322,6 +2340,12 @@ border-radius: 25px;
                       <layout class="QGridLayout" name="gridLayout_33">
                        <item row="1" column="0" alignment="Qt::AlignHCenter">
                         <widget class="QFrame" name="frame_31">
+                         <property name="maximumSize">
+                          <size>
+                           <width>16777215</width>
+                           <height>136</height>
+                          </size>
+                         </property>
                          <property name="frameShape">
                           <enum>QFrame::NoFrame</enum>
                          </property>
@@ -2377,6 +2401,12 @@ QPushButton:pressed {
                        </item>
                        <item row="1" column="1" alignment="Qt::AlignHCenter">
                         <widget class="QFrame" name="frame_5">
+                         <property name="maximumSize">
+                          <size>
+                           <width>16777215</width>
+                           <height>136</height>
+                          </size>
+                         </property>
                          <property name="frameShape">
                           <enum>QFrame::NoFrame</enum>
                          </property>
@@ -4065,8 +4095,8 @@ font: italic;</string>
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>930</width>
-                               <height>172</height>
+                               <width>100</width>
+                               <height>30</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_62"/>
@@ -6114,7 +6144,7 @@ QPushButton:pressed {
                              <rect>
                               <x>0</x>
                               <y>0</y>
-                              <width>931</width>
+                              <width>916</width>
                               <height>979</height>
                              </rect>
                             </property>
@@ -6463,7 +6493,7 @@ QPushButton:pressed {
                                     <rect>
                                      <x>0</x>
                                      <y>0</y>
-                                     <width>857</width>
+                                     <width>495</width>
                                      <height>284</height>
                                     </rect>
                                    </property>
@@ -8636,7 +8666,7 @@ QPushButton:pressed {
                                 <property name="geometry">
                                  <rect>
                                   <x>0</x>
-                                  <y>-4823</y>
+                                  <y>0</y>
                                   <width>944</width>
                                   <height>7969</height>
                                  </rect>
@@ -27862,8 +27892,8 @@ QPushButton:pressed {
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>922</width>
-                                         <height>327</height>
+                                         <width>437</width>
+                                         <height>97</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_52">
@@ -36226,7 +36256,7 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>914</width>
+                                       <width>597</width>
                                        <height>1056</height>
                                       </rect>
                                      </property>
@@ -39661,8 +39691,8 @@ QPushButton:pressed {
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>48</width>
-                               <height>114</height>
+                               <width>96</width>
+                               <height>26</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_32">
