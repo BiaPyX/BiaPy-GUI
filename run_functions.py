@@ -379,7 +379,7 @@ class run_worker(QObject):
             command = ["--config", "/BiaPy_files/input.yaml", "--result_dir", "{}".format(self.output_folder_in_container),
                 "--name", "{}".format(jobname), "--run_id", "1", "--dist_backend", f"{dist_backend}"]
             gpus = " "
-            device = get_text(self.main_gui.ui.gpu_input)
+            device = get_text(self.main_gui.ui.device_input)
             if self.use_gpu:    
                 gpus = device.split()[1] # As the format is "GPU 0 : NVIDIA RTX ..."
                 command += ["--gpu", gpus]
@@ -396,7 +396,7 @@ class run_worker(QObject):
             # command = ["-c", f"from biapy import BiaPy; BiaPy( '/BiaPy_files/input.yaml', result_dir='{self.output_folder_in_container}', name='{jobname}', run_id=1, dist_backend='{dist_backend}'"]
             # gpus = " "
             # if self.use_gpu:
-            #     gpus = self.main_gui.ui.gpu_input.currentData()
+            #     gpus = self.main_gui.ui.device_input.currentData()
             #     gpus = [int(x[0]) for x in gpus]
             #     gpus = ','.join(str(x) for x in gpus)
             #     command[-1] += f", gpu='{gpus}'"
