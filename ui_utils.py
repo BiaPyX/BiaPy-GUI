@@ -22,7 +22,7 @@ from PySide2.QtWidgets import *
 from PySide2.QtGui import QBrush, QColor
 
 from biapy.biapy_config import Config
-from biapy.biapy_check_configuration import check_configuration, check_torchvision_available_models
+from biapy.biapy_check_configuration import check_configuration, check_torchvision_available_models, convert_old_model_cfg_to_current_version
 from biapy.biapy_aux_functions import check_bmz_model_compatibility, check_images, check_csv_files, check_classification_images, check_model_restrictions
 
 
@@ -3088,11 +3088,25 @@ def load_yaml_config(main_window, advise_user=False):
     jobname = get_text(main_window.ui.job_name_input) if get_text(main_window.ui.job_name_input) != "" else "jobname"
     ofolder = os.path.join(ofolder, jobname)
     main_window.cfg.settings['biapy_cfg'] = Config(ofolder, jobname+"_1")
-    
+
+    # Create a temporal file with the configuration. In this process old key variables that the configuration file may have 
+    # are automatically translated into the BiaPy version the GUI is running.
+    with open(os.path.join(main_window.cfg.settings['yaml_config_file_path'], main_window.cfg.settings['yaml_config_filename']), "r", encoding='utf8') as stream:
+        try:
+            temp_cfg = yaml.safe_load(stream)
+        except yaml.YAMLError as exc:
+            main_window.logger.error(exc)
+            main_window.dialog_exec("There was a problem loading the .yaml config file", reason="error")
+    temp_cfg = convert_old_model_cfg_to_current_version(temp_cfg)
+    main_window.logger.info("Creating temporal input YAML file for converting possible old configuration") 
+    tmp_cfg_file = os.path.join(main_window.log_dir, "biapy_tmp.yaml")
+    with open(tmp_cfg_file, 'w', encoding='utf8') as outfile:
+        yaml.dump(temp_cfg, outfile, default_flow_style=False)
+
     # Merge loaded configuration with the YACS defaults to see if everything is correct or not 
     errors = ""
     try:
-        main_window.cfg.settings['biapy_cfg']._C.merge_from_file(os.path.join(main_window.cfg.settings['yaml_config_file_path'], main_window.cfg.settings['yaml_config_filename']))
+        main_window.cfg.settings['biapy_cfg']._C.merge_from_file(tmp_cfg_file)
         main_window.cfg.settings['biapy_cfg'] = main_window.cfg.settings['biapy_cfg'].get_cfg_defaults()
         check_configuration(main_window.cfg.settings['biapy_cfg'], jobname+"_1")
         
@@ -3222,26 +3236,27 @@ class load_yaml_to_GUI_engine(QObject):
                     self.state_signal.emit(1)
                     self.finished_signal.emit()
                     return 
-                
-            if tab_detected_mss != "":
-                yaml_file_final = os.path.join(self.main_window.log_dir, "tmp_load_yaml.yaml")
-                f = open(self.yaml_file, "w", encoding='utf8')
-                f.write(cfg_content)
-                f.close()
-            else:
-                yaml_file_final = self.yaml_file
 
             if loaded_cfg is None:
                 self.error_signal.emit(f"The input config file seems to be empty", "error")
                 self.state_signal.emit(1)
                 self.finished_signal.emit()
                 return  
+
+            # Create a temporal file with the configuration. In this process old key variables that the configuration file may have 
+            # are automatically translated into the BiaPy version the GUI is running.
+            loaded_cfg = convert_old_model_cfg_to_current_version(loaded_cfg)
+            self.main_window.logger.info("Creating temporal input YAML file for converting possible old configuration") 
+            tmp_cfg_file = os.path.join(self.main_window.log_dir, "biapy_tmp.yaml")
+            with open(tmp_cfg_file, 'w', encoding='utf8') as outfile:
+                yaml.dump(loaded_cfg, outfile, default_flow_style=False)
+
             self.main_window.logger.info(f"Loaded: {loaded_cfg}")
 
             # Load configuration file and check possible errors
             tmp_cfg = Config("/home/","jobname")
             errors = ""
-            tmp_cfg._C.merge_from_file(yaml_file_final)
+            tmp_cfg._C.merge_from_file(tmp_cfg_file)
             tmp_cfg = tmp_cfg.get_cfg_defaults()
             check_configuration(tmp_cfg, get_text(self.main_window.ui.job_name_input), check_data_paths=False)
         

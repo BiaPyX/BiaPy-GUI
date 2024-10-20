@@ -14,6 +14,7 @@ from PySide2.QtGui import QPixmap
 from PySide2.QtWidgets import *
 
 from ui_utils import get_text, resource_path, path_in_list, path_to_linux
+from biapy.biapy_check_configuration import convert_old_model_cfg_to_current_version
 from ui.ui_run import Ui_RunBiaPy 
 from ui.aux_windows import yes_no_Ui
 
@@ -519,6 +520,7 @@ class run_worker(QObject):
                 self.gui.run_window.test_progress_bar.setMaximum(self.test_files)
             
             self.main_gui.logger.info("Creating temporal input YAML file") 
+            temp_cfg = convert_old_model_cfg_to_current_version(temp_cfg)
             with open(real_cfg_input, 'w', encoding='utf8') as outfile:
                 yaml.dump(temp_cfg, outfile, default_flow_style=False)
 
