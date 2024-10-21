@@ -28,17 +28,18 @@ class Settings:
         # CUDA version match to decide the container to donwload
         self.settings["NVIDIA_driver_list"] = [440.33, 520.61]
         self.settings["CUDA_version"] = [10.2, 11.8]
+        self.settings["CUDA_selected"] = "" # to be filled by checking the GPU 
 
         # BiaPy
-        self.settings["biapy_code_version"] = Version("v3.5.4")
+        self.settings["biapy_code_version"] = Version("v3.5.5")
         self.settings["biapy_code_github"] = "https://github.com/BiaPyX/BiaPy"
-        self.settings["biapy_gui_version"] = Version("v1.1.2")
+        self.settings["biapy_gui_version"] = Version("v1.1.3")
         self.settings["biapy_gui_github"] = "https://github.com/BiaPyX/BiaPy-GUI"
         self.settings["biapy_container_basename"] = "biapyx/biapy"
         self.settings["biapy_container_name"] = (
-            self.settings["biapy_container_basename"] + ":latest-" + str(self.settings["CUDA_version"][-1])
+            self.settings["biapy_container_basename"] + ":" + str(self.settings["biapy_code_version"]) + "-" + str(self.settings["CUDA_version"][-1])
         )
-        self.settings["biapy_container_sizes"] = ["7.68GB", "11.6GB"]
+        self.settings["biapy_container_sizes"] = ["8GB", "12GB"]
         self.settings["biapy_container_size"] = self.settings["biapy_container_sizes"][-1]
         self.settings["biapy_container_dockerfile"] = (
             "https://raw.githubusercontent.com/BiaPyX/BiaPy/master/biapy/utils/env/Dockerfile"

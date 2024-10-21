@@ -15,6 +15,8 @@ import numpy as np
 import http.client as httplib
 from pathlib import PurePath, Path, PureWindowsPath
 from packaging.version import Version
+from bs4 import BeautifulSoup
+from urllib.request import urlopen
 
 from PySide2 import QtCore
 from PySide2.QtCore import QObject, QThread
@@ -1788,11 +1790,9 @@ def oninit_checks(main_window):
                 pos = i
                 if driver_version < main_window.cfg.settings['NVIDIA_driver_list'][i]:
                     break
-
-        main_window.cfg.settings['biapy_container_name'] = \
-            main_window.cfg.settings['biapy_container_basename'] + ":latest-"+str(main_window.cfg.settings['CUDA_version'][pos])
+        
+        main_window.cfg.settings["CUDA_selected"] = str(main_window.cfg.settings['CUDA_version'][pos])
         main_window.cfg.settings['biapy_container_size'] = main_window.cfg.settings['biapy_container_sizes'][pos]
-        main_window.logger.info(f"Using {main_window.cfg.settings['biapy_container_name']} container")
 
     except Exception as gpu_check_error:
         main_window.cfg.settings['GPUs'] = []
@@ -3715,3 +3715,36 @@ def is_pathname_valid(pathname: str) -> bool:
     # (e.g., a bug). Permit this exception to unwind the call stack.
     #
     # Did we mention this should be shipped with Python already?
+
+
+def check_supported_container_versions(gui_version, logger):
+    """
+    Reads BiaPy's landing page, in the GUI history, to find the containers supported for this version of the GUI. 
+    """
+    compatible_versions = []
+    try:
+        # Read the page 
+        response = urlopen('https://biapyx.github.io/GUI_versions/')
+
+        # Parse it 
+        soup = BeautifulSoup(response.read(), from_encoding=response.headers.get_content_charset(), features="html.parser")
+        find_version = soup.find_all(string="v"+str(gui_version))
+        if len(find_version) == 0:
+            print("Version not found in landing page...")
+        else:
+            version_row = find_version[0].parent.parent
+            container_table = version_row.find("table", attrs={"class": "styled-table_inside"})
+            compatible_versions_td = container_table.find_all("td")
+            for version in compatible_versions_td:
+                for child in version.children:
+                    if "v" in child.text:
+                        try:
+                            compatible_versions.append(Version(child.text))
+                        except: 
+                            pass    
+        return compatible_versions
+    except:
+        exc = traceback.format_exc()
+        logger.error(exc)
+        return compatible_versions
+    

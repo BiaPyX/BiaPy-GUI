@@ -14308,7 +14308,7 @@ class Ui_MainWindow(object):
         self.gpu_list_frame.setFrameShape(QFrame.NoFrame)
         self.gpu_list_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_40 = QVBoxLayout(self.gpu_list_frame)
-        self.verticalLayout_40.setSpacing(20)
+        self.verticalLayout_40.setSpacing(10)
         self.verticalLayout_40.setObjectName(u"verticalLayout_40")
         self.verticalLayout_40.setContentsMargins(0, 0, 0, 0)
         self.label_9 = QLabel(self.gpu_list_frame)
@@ -14317,8 +14317,41 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_40.addWidget(self.label_9, 0, Qt.AlignHCenter)
 
+        self.device_input = QComboBox(self.gpu_list_frame)
+        self.device_input.setObjectName(u"device_input")
+        self.device_input.setMinimumSize(QSize(300, 30))
+        self.device_input.setMaximumSize(QSize(300, 30))
+        self.device_input.setFont(font)
 
-        self.horizontalLayout_35.addWidget(self.gpu_list_frame)
+        self.verticalLayout_40.addWidget(self.device_input)
+
+
+        self.horizontalLayout_35.addWidget(self.gpu_list_frame, 0, Qt.AlignHCenter)
+
+        self.container_list_frame = QFrame(self.run_workflow_frame)
+        self.container_list_frame.setObjectName(u"container_list_frame")
+        self.container_list_frame.setFrameShape(QFrame.NoFrame)
+        self.container_list_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_58 = QVBoxLayout(self.container_list_frame)
+        self.verticalLayout_58.setSpacing(10)
+        self.verticalLayout_58.setObjectName(u"verticalLayout_58")
+        self.verticalLayout_58.setContentsMargins(0, 0, 0, 0)
+        self.container_version_label = QLabel(self.container_list_frame)
+        self.container_version_label.setObjectName(u"container_version_label")
+        self.container_version_label.setFont(font2)
+
+        self.verticalLayout_58.addWidget(self.container_version_label, 0, Qt.AlignHCenter)
+
+        self.container_input = QComboBox(self.container_list_frame)
+        self.container_input.setObjectName(u"container_input")
+        self.container_input.setMinimumSize(QSize(150, 30))
+        self.container_input.setMaximumSize(QSize(150, 30))
+        self.container_input.setFont(font)
+
+        self.verticalLayout_58.addWidget(self.container_input)
+
+
+        self.horizontalLayout_35.addWidget(self.container_list_frame, 0, Qt.AlignHCenter)
 
         self.frame_64 = QFrame(self.run_workflow_frame)
         self.frame_64.setObjectName(u"frame_64")
@@ -14512,7 +14545,7 @@ class Ui_MainWindow(object):
         self.check_yaml_file_errors_frame.setWidgetResizable(True)
         self.scrollAreaWidgetContents_19 = QWidget()
         self.scrollAreaWidgetContents_19.setObjectName(u"scrollAreaWidgetContents_19")
-        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 96, 26))
+        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 896, 152))
         self.verticalLayout_32 = QVBoxLayout(self.scrollAreaWidgetContents_19)
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
         self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)
@@ -14571,7 +14604,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(3)
         self.wizard_main_frame.setCurrentIndex(0)
         self.stackedWidget_create_yaml_frame.setCurrentIndex(2)
         self.train_tab_widget.setCurrentIndex(0)
@@ -18248,6 +18281,7 @@ class Ui_MainWindow(object):
         self.window4_bn.setText("")
         self.continue_bn.setText(QCoreApplication.translate("MainWindow", u"Continue", None))
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"Select device to run workflow", None))
+        self.container_version_label.setText(QCoreApplication.translate("MainWindow", u"Container to use", None))
 #if QT_CONFIG(tooltip)
         self.run_biapy_docker_bn.setToolTip("")
 #endif // QT_CONFIG(tooltip)

@@ -13,7 +13,16 @@ from PySide2.QtSvg import QSvgWidget
 from main import MainWindow
 from run_functions import run_worker
 from build_functions import build_worker
-from ui_utils import get_text, resource_path, oninit_checks, load_yaml_config, change_wizard_page, set_text, is_path_exists_or_creatable
+from ui_utils import (
+    get_text, 
+    resource_path, 
+    oninit_checks, 
+    load_yaml_config, 
+    change_wizard_page, 
+    set_text, 
+    is_path_exists_or_creatable,
+    check_supported_container_versions
+)
 from aux_classes.checkableComboBox import CheckableComboBox
 
 class UIFunction(MainWindow):
@@ -1252,24 +1261,25 @@ class UIFunction(MainWindow):
         main_window : QMainWindow
             Main window of the application.
         """
-        # Create GPU input field
-        # main_window.ui.device_input = CheckableComboBox(main_window.ui.gpu_list_frame)
-        main_window.ui.device_input = QComboBox(main_window.ui.gpu_list_frame)
-        main_window.ui.device_input.setObjectName(u"device_input")
-        main_window.ui.device_input.setMinimumSize(QSize(400, 30))
-        main_window.ui.device_input.setMaximumSize(QSize(400, 30))
-        font = QFont()
-        font.setFamily(u"DejaVu Math TeX Gyre")
-        font.setPointSize(12)
-        main_window.ui.device_input.setFont(font)
-        main_window.ui.verticalLayout_40.addWidget(main_window.ui.device_input, 0, Qt.AlignHCenter)
+        # Fill device input field
         main_window.ui.device_input.addItem("CPU")
-
         if len(main_window.cfg.settings['GPUs']) > 0:
-            # for i, gpu in enumerate(main_window.cfg.settings['GPUs']):
-            #     main_window.ui.device_input.addItem("{} : {} ".format(i, gpu.name), check=True if i == 0 else False)
             for i, gpu in enumerate(main_window.cfg.settings['GPUs']):
                 main_window.ui.device_input.addItem("GPU {} : {} ".format(i, gpu.name))
+
+        supported_versions = check_supported_container_versions(
+            main_window.cfg.settings["biapy_gui_version"], 
+            main_window.logger
+        )
+        
+        # Set at least the base version that this GUI supports
+        if len(supported_versions) == 0:
+            supported_versions = [main_window.cfg.settings["biapy_code_version"]]
+
+        main_window.ui.container_input.addItem(f"{supported_versions[0]}")
+        if len(supported_versions) > 1:
+            for cont_version in range(1,len(supported_versions)):
+                main_window.ui.container_input.addItem("{}".format(supported_versions[cont_version]))
 
     def build_container(main_window):
         """
@@ -1362,10 +1372,13 @@ class UIFunction(MainWindow):
         device = get_text(main_window.ui.device_input)
         use_gpu = True if "GPU" in device else False
         
+        # Set the container name 
+        container_version_selected = get_text(main_window.ui.container_input)
+        main_window.cfg.settings['biapy_container_name'] = main_window.cfg.settings["biapy_container_basename"] + ":" + container_version_selected + "-" + str(main_window.cfg.settings["CUDA_selected"])
+
         # Check if a pull is necessary 
         local_images = main_window.docker_client.images.list()
         local_biapy_image_tag = ""
-        old_biapy_images = []
         local_biapy_container_found = False 
         if len(local_images) > 0:    
             # Capture local BiaPy image 
@@ -1375,10 +1388,6 @@ class UIFunction(MainWindow):
                         # local_biapy_container_found = True # Activate this when locally want to try new BiaPy code 
                         if len(local_images[i].attrs.get("RepoDigests")) > 0:
                             local_biapy_image_tag = local_images[i].attrs.get("RepoDigests")[0].replace("biapyx/biapy@","")  
-                else:
-                    if len(local_images[i].attrs.get("RepoDigests"))>0:
-                        if 'biapyx/biapy' in local_images[i].attrs.get("RepoDigests")[0]:
-                            old_biapy_images.append(local_images[i].attrs['Id'])
 
             res = requests.get("https://registry.hub.docker.com/v2/repositories/biapyx/biapy/tags/")
             res = res.json()
@@ -1386,14 +1395,6 @@ class UIFunction(MainWindow):
             for i in range(len(res['results'])):
                 if res['results'][i]['name'] == main_window.cfg.settings['biapy_container_name'].split(':')[-1]:
                     dockerhub_image_tag = res['results'][i]['images'][0]['digest']    
-
-            # Remove possible untagged BiaPy containers
-            if len(old_biapy_images) > 0:
-                main_window.yes_no_exec("Seems that there is one or more old BiaPy containers. Do yo want to remove them to save disk space?")
-                if main_window.yes_no.answer:
-                    main_window.logger.info("Removing old containers")
-                    for i in range(len(old_biapy_images)):
-                        main_window.docker_client.images.remove(old_biapy_images[i], force=True)
 
             # Replace BiaPy container 
             if dockerhub_image_tag != "" and local_biapy_image_tag != "":
@@ -1408,8 +1409,9 @@ class UIFunction(MainWindow):
         run_biapy_cond = True
         if local_biapy_image_tag == "":
             if not local_biapy_container_found:
-                main_window.yes_no_exec("The first time you run BiaPy you need to download its Docker container. "
-                    f"This process will be done just once and needs {main_window.cfg.settings['biapy_container_size']} of disk space. Proceed?")
+                main_window.yes_no_exec(f"Container version '{container_version_selected}' not found. You will need to download" +\
+                    "it (in the future, if you reuse it, downloading won't be required). This will require approximately 10GB".format(main_window.cfg.settings['biapy_container_size']) +\
+                    "of disk space. Would you like to proceed?")
             else:
                 main_window.yes_no_exec("Seems that there is an existing BiaPy container locally built ({}). Do you want to continue?"\
                     .format(main_window.cfg.settings['biapy_container_name']))
