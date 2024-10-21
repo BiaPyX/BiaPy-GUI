@@ -1274,7 +1274,10 @@ class UIFunction(MainWindow):
         
         # Set at least the base version that this GUI supports
         if len(supported_versions) == 0:
+            main_window.logger.info("No BiaPy compatible containers found in the landing page. Setting the default one {}".format(main_window.cfg.settings["biapy_code_version"]))
             supported_versions = [main_window.cfg.settings["biapy_code_version"]]
+        else:
+            main_window.logger.info("Compatible containers found: {}".format(supported_versions))
 
         main_window.ui.container_input.addItem(f"{supported_versions[0]}")
         if len(supported_versions) > 1:

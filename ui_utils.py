@@ -3728,7 +3728,7 @@ def check_supported_container_versions(gui_version, logger):
 
         # Parse it 
         soup = BeautifulSoup(response.read(), from_encoding=response.headers.get_content_charset(), features="html.parser")
-        find_version = soup.find_all(string="v"+str(gui_version))
+        find_version = soup.find_all(string=re.compile(str(gui_version)))
         if len(find_version) == 0:
             print("Version not found in landing page...")
         else:
