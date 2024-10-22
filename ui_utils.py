@@ -2924,9 +2924,9 @@ def create_yaml_file(main_window):
                         main_window.dialog_exec("There was an error with test post processing measure properties, removing my properties, in values array field (TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.VALUES). Please check its syntax!", reason="error")
                         return True, False
                     try:
-                        biapy_config['TEST']['POST_PROCESSING']['MEASURE_PROPERTIES']['REMOVE_BY_PROPERTIES']['SIGN'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INPUT) ) 
+                        biapy_config['TEST']['POST_PROCESSING']['MEASURE_PROPERTIES']['REMOVE_BY_PROPERTIES']['SIGNS'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INPUT) ) 
                     except:
-                        main_window.dialog_exec("There was an error with test post processing measure properties, removing my properties, in signs array field (TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.SIGN). Please check its syntax!", reason="error")
+                        main_window.dialog_exec("There was an error with test post processing measure properties, removing my properties, in signs array field (TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.SIGNS). Please check its syntax!", reason="error")
                         return True, False
             if problem_channels == "BP":
                 if int(get_text(main_window.ui.TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INPUT)) != -1:
@@ -2991,9 +2991,9 @@ def create_yaml_file(main_window):
                             main_window.dialog_exec("There was an error with test post processing measure properties, removing my properties, in values array field (TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.VALUES). Please check its syntax!", reason="error")
                             return True, False
                         try:
-                            biapy_config['TEST']['POST_PROCESSING']['MEASURE_PROPERTIES']['REMOVE_BY_PROPERTIES']['SIGN'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INPUT) ) 
+                            biapy_config['TEST']['POST_PROCESSING']['MEASURE_PROPERTIES']['REMOVE_BY_PROPERTIES']['SIGNS'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INPUT) ) 
                         except:
-                            main_window.dialog_exec("There was an error with test post processing measure properties, removing my properties, in signs array field (TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.SIGN). Please check its syntax!", reason="error")
+                            main_window.dialog_exec("There was an error with test post processing measure properties, removing my properties, in signs array field (TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.SIGNS). Please check its syntax!", reason="error")
                             return True, False
         if get_text(main_window.ui.TEST__POST_PROCESSING__APPLY_MASK__INPUT) == "Yes":
             biapy_config['TEST']['POST_PROCESSING']['APPLY_MASK'] = True
@@ -3451,8 +3451,8 @@ class load_yaml_to_GUI_engine(QObject):
                     widget_name = "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__{}__INPUT".format(self.workflow_str)
                 elif widget_name == "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INPUT":
                     widget_name = "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__{}__INPUT".format(self.workflow_str)
-                elif widget_name == "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INPUT":
-                    widget_name = "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__{}__INPUT".format(self.workflow_str)
+                elif widget_name == "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INPUT":
+                    widget_name = "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__{}__INPUT".format(self.workflow_str)
                 elif widget_name == "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__INPUT":
                     widget_name = "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__{}__INPUT".format(self.workflow_str)
                 elif widget_name == "TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INPUT":

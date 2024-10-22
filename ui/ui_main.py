@@ -10322,7 +10322,7 @@ class Ui_MainWindow(object):
         self.test_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 898, 2430))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 915, 2430))
         self.gridLayout_37 = QGridLayout(self.scrollAreaWidgetContents_5)
         self.gridLayout_37.setObjectName(u"gridLayout_37")
         self.test_advanced_options_frame = QFrame(self.scrollAreaWidgetContents_5)
@@ -12094,7 +12094,7 @@ class Ui_MainWindow(object):
         self.scrollArea_8.setWidgetResizable(True)
         self.scrollAreaWidgetContents_12 = QWidget()
         self.scrollAreaWidgetContents_12.setObjectName(u"scrollAreaWidgetContents_12")
-        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 452, 255))
+        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 928, 301))
         self.gridLayout_61 = QGridLayout(self.scrollAreaWidgetContents_12)
         self.gridLayout_61.setObjectName(u"gridLayout_61")
         self.label_82 = QLabel(self.scrollAreaWidgetContents_12)
@@ -12266,7 +12266,7 @@ class Ui_MainWindow(object):
         self.scrollArea_9.setWidgetResizable(True)
         self.scrollAreaWidgetContents_13 = QWidget()
         self.scrollAreaWidgetContents_13.setObjectName(u"scrollAreaWidgetContents_13")
-        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 633, 1327))
+        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 914, 1327))
         self.gridLayout_44 = QGridLayout(self.scrollAreaWidgetContents_13)
         self.gridLayout_44.setObjectName(u"gridLayout_44")
         self.label_86 = QLabel(self.scrollAreaWidgetContents_13)
@@ -12485,15 +12485,15 @@ class Ui_MainWindow(object):
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__LABEL, 4, 0, 1, 1)
 
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INFO = QPushButton(self.frame_50)
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INFO.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INFO")
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INFO.setMinimumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INFO.setStyleSheet(u"QPushButton {\n"
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INFO = QPushButton(self.frame_50)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INFO.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INFO")
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INFO.setMinimumSize(QSize(30, 30))
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INFO.setMaximumSize(QSize(30, 30))
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
 
-        self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INFO, 7, 1, 1, 1)
+        self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INFO, 7, 1, 1, 1)
 
         self.label_115 = QLabel(self.frame_50)
         self.label_115.setObjectName(u"label_115")
@@ -12527,13 +12527,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__LABEL, 3, 0, 1, 1)
 
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INPUT = QLineEdit(self.frame_50)
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INPUT")
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INPUT.setMinimumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INPUT = QLineEdit(self.frame_50)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INPUT")
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INPUT.setMinimumSize(QSize(200, 30))
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INPUT.setMaximumSize(QSize(200, 30))
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INPUT.setFont(font)
 
-        self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INPUT, 7, 2, 1, 1)
+        self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INPUT, 7, 2, 1, 1)
 
         self.TEST__POST_PROCESSING__VORONOI_ON_MASK__INPUT = QComboBox(self.frame_50)
         self.TEST__POST_PROCESSING__VORONOI_ON_MASK__INPUT.addItem("")
@@ -12661,12 +12661,12 @@ class Ui_MainWindow(object):
 
         self.gridLayout_58.addWidget(self.inst_seg_remove_close_points_label, 11, 0, 1, 1)
 
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__LABEL = QLabel(self.frame_50)
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__LABEL")
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__LABEL.setFont(font)
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__LABEL.setIndent(30)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__LABEL = QLabel(self.frame_50)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__LABEL")
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__LABEL.setFont(font)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__LABEL.setIndent(30)
 
-        self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__LABEL, 7, 0, 1, 1)
+        self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__LABEL, 7, 0, 1, 1)
 
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INFO = QPushButton(self.frame_50)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INFO.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INFO")
@@ -13184,7 +13184,7 @@ class Ui_MainWindow(object):
         self.scrollArea_10.setWidgetResizable(True)
         self.scrollAreaWidgetContents_14 = QWidget()
         self.scrollAreaWidgetContents_14.setObjectName(u"scrollAreaWidgetContents_14")
-        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 597, 1056))
+        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, -636, 914, 1056))
         self.gridLayout_47 = QGridLayout(self.scrollAreaWidgetContents_14)
         self.gridLayout_47.setObjectName(u"gridLayout_47")
         self.label_100 = QLabel(self.scrollAreaWidgetContents_14)
@@ -13458,6 +13458,9 @@ class Ui_MainWindow(object):
         self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INFO.setObjectName(u"TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INFO")
         self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INFO.setMaximumSize(QSize(30, 30))
+        self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
         self.gridLayout_62.addWidget(self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INFO, 6, 1, 1, 1)
 
@@ -13683,12 +13686,15 @@ class Ui_MainWindow(object):
 
         self.gridLayout_59.addWidget(self.det_watershed_donuts_nucleus_diam_label, 11, 0, 1, 1)
 
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__LABEL = QLabel(self.frame_51)
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__LABEL")
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__LABEL.setFont(font)
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__LABEL.setIndent(45)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__LABEL = QLabel(self.frame_51)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__LABEL")
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__LABEL.setFont(font)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__LABEL.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__LABEL.setIndent(45)
 
-        self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__LABEL, 19, 0, 1, 1)
+        self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__LABEL, 19, 0, 1, 1)
 
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__LABEL = QLabel(self.frame_51)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__LABEL")
@@ -13725,23 +13731,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_59.addWidget(self.PROBLEM__DETECTION__DATA_CHECK_MW__INFO, 12, 1, 1, 1)
 
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INPUT = QLineEdit(self.frame_51)
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INPUT")
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INPUT.setMinimumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INPUT = QLineEdit(self.frame_51)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INPUT")
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INPUT.setMinimumSize(QSize(200, 30))
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INPUT.setMaximumSize(QSize(200, 30))
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INPUT.setFont(font)
 
-        self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INPUT, 19, 2, 1, 1)
+        self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INPUT, 19, 2, 1, 1)
 
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INFO = QPushButton(self.frame_51)
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INFO.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INFO")
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INFO.setMinimumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INFO.setStyleSheet(u"QPushButton {\n"
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INFO = QPushButton(self.frame_51)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INFO.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INFO")
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INFO.setMinimumSize(QSize(30, 30))
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INFO.setMaximumSize(QSize(30, 30))
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
 
-        self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INFO, 19, 1, 1, 1)
+        self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INFO, 19, 1, 1, 1)
 
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__INPUT = QLineEdit(self.frame_51)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__INPUT")
@@ -13909,7 +13915,7 @@ class Ui_MainWindow(object):
         self.scrollArea_11.setWidgetResizable(True)
         self.scrollAreaWidgetContents_15 = QWidget()
         self.scrollAreaWidgetContents_15.setObjectName(u"scrollAreaWidgetContents_15")
-        self.scrollAreaWidgetContents_15.setGeometry(QRect(0, 0, 372, 44))
+        self.scrollAreaWidgetContents_15.setGeometry(QRect(0, 0, 928, 301))
         self.gridLayout_64 = QGridLayout(self.scrollAreaWidgetContents_15)
         self.gridLayout_64.setObjectName(u"gridLayout_64")
         self.verticalSpacer_27 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -13943,7 +13949,7 @@ class Ui_MainWindow(object):
         self.scrollArea_12.setWidgetResizable(True)
         self.scrollAreaWidgetContents_16 = QWidget()
         self.scrollAreaWidgetContents_16.setObjectName(u"scrollAreaWidgetContents_16")
-        self.scrollAreaWidgetContents_16.setGeometry(QRect(0, 0, 426, 44))
+        self.scrollAreaWidgetContents_16.setGeometry(QRect(0, 0, 928, 301))
         self.gridLayout_65 = QGridLayout(self.scrollAreaWidgetContents_16)
         self.gridLayout_65.setObjectName(u"gridLayout_65")
         self.label_102 = QLabel(self.scrollAreaWidgetContents_16)
@@ -14604,13 +14610,13 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(3)
+        self.stackedWidget.setCurrentIndex(2)
         self.wizard_main_frame.setCurrentIndex(0)
-        self.stackedWidget_create_yaml_frame.setCurrentIndex(2)
+        self.stackedWidget_create_yaml_frame.setCurrentIndex(3)
         self.train_tab_widget.setCurrentIndex(0)
         self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(6)
         self.test_tab_widget.setCurrentIndex(0)
-        self.test_workflow_specific_tab_stackedWidget.setCurrentIndex(2)
+        self.test_workflow_specific_tab_stackedWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -17787,9 +17793,9 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__LABEL.setText(QCoreApplication.translate("MainWindow", u"Remove by properties", None))
 #if QT_CONFIG(tooltip)
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">List of list of signs to do the comparison. Options: ['gt', 'ge', 'lt', 'le'] that corresponds to &quot;greather than&quot;, e.g. &quot;&gt;&quot;,  &quot;greather equal&quot;, e.g. &quot;&gt;=&quot;, &quot;less than&quot;, e.g. &quot;&lt;&quot;, and &quot;less equal&quot; e.g. &quot;&lt;=&quot; comparisons. E.g. [['le'], ['lt', 'ge']]</span></p></body></html>", None))
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">List of list of signs to do the comparison. Options: ['gt', 'ge', 'lt', 'le'] that corresponds to &quot;greather than&quot;, e.g. &quot;&gt;&quot;,  &quot;greather equal&quot;, e.g. &quot;&gt;=&quot;, &quot;less than&quot;, e.g. &quot;&lt;&quot;, and &quot;less equal&quot; e.g. &quot;&lt;=&quot; comparisons. E.g. [['le'], ['lt', 'ge']]</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INFO.setText("")
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INFO.setText("")
 #if QT_CONFIG(tooltip)
         self.label_115.setToolTip("")
 #endif // QT_CONFIG(tooltip)
@@ -17803,7 +17809,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INFO.setText("")
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__LABEL.setText(QCoreApplication.translate("MainWindow", u"Measure properties", None))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
         self.TEST__POST_PROCESSING__VORONOI_ON_MASK__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
         self.TEST__POST_PROCESSING__VORONOI_ON_MASK__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
 
@@ -17885,9 +17891,9 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.inst_seg_remove_close_points_label.setText(QCoreApplication.translate("MainWindow", u"Remove close points", None))
 #if QT_CONFIG(tooltip)
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__LABEL.setToolTip("")
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__LABEL.setToolTip("")
 #endif // QT_CONFIG(tooltip)
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__LABEL.setText(QCoreApplication.translate("MainWindow", u"Signs", None))
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__LABEL.setText(QCoreApplication.translate("MainWindow", u"Signs", None))
 #if QT_CONFIG(tooltip)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to measure morphological features on each instances, i.e. 'circularity' (2D), 'elongation' (2D), 'npixels', 'area', 'diameter', 'perimeter', 'sphericity' (3D)</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -18206,9 +18212,9 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.det_watershed_donuts_nucleus_diam_label.setText(QCoreApplication.translate("MainWindow", u"Watershed donuts nucleus diameter", None))
 #if QT_CONFIG(tooltip)
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__LABEL.setToolTip("")
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__LABEL.setToolTip("")
 #endif // QT_CONFIG(tooltip)
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__LABEL.setText(QCoreApplication.translate("MainWindow", u"Signs", None))
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__LABEL.setText(QCoreApplication.translate("MainWindow", u"Signs", None))
 #if QT_CONFIG(tooltip)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__LABEL.setToolTip("")
 #endif // QT_CONFIG(tooltip)
@@ -18222,11 +18228,11 @@ class Ui_MainWindow(object):
         self.PROBLEM__DETECTION__DATA_CHECK_MW__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to save watershed check files</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.PROBLEM__DETECTION__DATA_CHECK_MW__INFO.setText("")
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
 #if QT_CONFIG(tooltip)
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">List of list of signs to do the comparison. Options: ['gt', 'ge', 'lt', 'le'] that corresponds to &quot;greather than&quot;, e.g. &quot;&gt;&quot;,  &quot;greather equal&quot;, e.g. &quot;&gt;=&quot;, &quot;less than&quot;, e.g. &quot;&lt;&quot;, and &quot;less equal&quot; e.g. &quot;&lt;=&quot; comparisons. E.g. [['le'], ['lt', 'ge']]</span></p></body></html>", None))
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">List of list of signs to do the comparison. Options: ['gt', 'ge', 'lt', 'le'] that corresponds to &quot;greather than&quot;, e.g. &quot;&gt;&quot;,  &quot;greather equal&quot;, e.g. &quot;&gt;=&quot;, &quot;less than&quot;, e.g. &quot;&lt;&quot;, and &quot;less equal&quot; e.g. &quot;&lt;=&quot; comparisons. E.g. [['le'], ['lt', 'ge']]</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INFO.setText("")
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INFO.setText("")
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
 #if QT_CONFIG(tooltip)
         self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Diameter (in pixels) that a cell need to have to be considered as donuts type</span></p></body></html>", None))

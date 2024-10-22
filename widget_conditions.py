@@ -2442,7 +2442,7 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
-            "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__LABEL": 
+            "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__LABEL": 
                 {
                     "TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INPUT": 
                     [
@@ -2453,7 +2453,7 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
-            "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INFO": 
+            "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INFO": 
                 {
                     "TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INPUT": 
                     [
@@ -2464,7 +2464,7 @@ class Widget_conditions():
                         "Yes"
                     ],
                 }, 
-            "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INPUT": 
+            "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INPUT": 
                 {
                     "TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INPUT": 
                     [
@@ -2900,7 +2900,7 @@ class Widget_conditions():
                         "Yes"
                     ],
                 },
-            "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__LABEL": 
+            "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__LABEL": 
                 {
                     "TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__INPUT": 
                     [
@@ -2915,7 +2915,7 @@ class Widget_conditions():
                         "Yes"
                     ],
                 },
-            "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INFO": 
+            "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INFO": 
                 {
                     "TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__INPUT": 
                     [
@@ -2930,7 +2930,7 @@ class Widget_conditions():
                         "Yes"
                     ],
                 },
-            "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INPUT": 
+            "TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INPUT": 
                 {
                     "TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__INPUT": 
                     [

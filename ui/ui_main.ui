@@ -1401,7 +1401,7 @@ QPushButton:pressed {
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>3</number>
+                <number>2</number>
                </property>
                <widget class="QWidget" name="page_home">
                 <property name="styleSheet">
@@ -4307,7 +4307,7 @@ QPushButton:pressed {
                        </font>
                       </property>
                       <property name="currentIndex">
-                       <number>2</number>
+                       <number>3</number>
                       </property>
                       <widget class="QWidget" name="workflow_selection_page">
                        <property name="minimumSize">
@@ -28395,7 +28395,7 @@ QPushButton:pressed {
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>898</width>
+                                  <width>915</width>
                                   <height>2430</height>
                                  </rect>
                                 </property>
@@ -33220,7 +33220,7 @@ QPushButton:pressed {
                               <item>
                                <widget class="QStackedWidget" name="test_workflow_specific_tab_stackedWidget">
                                 <property name="currentIndex">
-                                 <number>2</number>
+                                 <number>0</number>
                                 </property>
                                 <widget class="QWidget" name="test_workflow_specific_tab_semantic_seg_page">
                                  <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -33252,8 +33252,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>452</width>
-                                       <height>255</height>
+                                       <width>928</width>
+                                       <height>301</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_61">
@@ -33690,7 +33690,7 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>633</width>
+                                       <width>914</width>
                                        <height>1327</height>
                                       </rect>
                                      </property>
@@ -34278,7 +34278,7 @@ QPushButton:pressed {
                                           </widget>
                                          </item>
                                          <item row="7" column="1">
-                                          <widget class="QPushButton" name="TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INFO">
+                                          <widget class="QPushButton" name="TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INFO">
                                            <property name="minimumSize">
                                             <size>
                                              <width>30</width>
@@ -34388,7 +34388,7 @@ QPushButton:pressed {
                                           </widget>
                                          </item>
                                          <item row="7" column="2">
-                                          <widget class="QLineEdit" name="TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__INPUT">
+                                          <widget class="QLineEdit" name="TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INPUT">
                                            <property name="minimumSize">
                                             <size>
                                              <width>200</width>
@@ -34791,7 +34791,7 @@ p, li { white-space: pre-wrap; }
                                           </widget>
                                          </item>
                                          <item row="7" column="0">
-                                          <widget class="QLabel" name="TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__INST_SEG__LABEL">
+                                          <widget class="QLabel" name="TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__LABEL">
                                            <property name="font">
                                             <font>
                                              <family>DejaVu Math TeX Gyre</family>
@@ -36255,8 +36255,8 @@ p, li { white-space: pre-wrap; }
                                      <property name="geometry">
                                       <rect>
                                        <x>0</x>
-                                       <y>0</y>
-                                       <width>597</width>
+                                       <y>-636</y>
+                                       <width>914</width>
                                        <height>1056</height>
                                       </rect>
                                      </property>
@@ -37010,6 +37010,11 @@ p, li { white-space: pre-wrap; }
                                            <property name="toolTip">
                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;The minimal allowed distance separating peaks. To find the maximum number of peaks, use 1.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                            </property>
+                                           <property name="styleSheet">
+                                            <string notr="true">QPushButton {
+  border: none;
+}</string>
+                                           </property>
                                            <property name="text">
                                             <string/>
                                            </property>
@@ -37635,7 +37640,7 @@ p, li { white-space: pre-wrap; }
                                           </widget>
                                          </item>
                                          <item row="19" column="0">
-                                          <widget class="QLabel" name="TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__LABEL">
+                                          <widget class="QLabel" name="TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__LABEL">
                                            <property name="font">
                                             <font>
                                              <family>DejaVu Math TeX Gyre</family>
@@ -37644,6 +37649,11 @@ p, li { white-space: pre-wrap; }
                                            </property>
                                            <property name="toolTip">
                                             <string/>
+                                           </property>
+                                           <property name="styleSheet">
+                                            <string notr="true">QPushButton {
+  border: none;
+}</string>
                                            </property>
                                            <property name="text">
                                             <string>Signs</string>
@@ -37752,7 +37762,7 @@ p, li { white-space: pre-wrap; }
                                           </widget>
                                          </item>
                                          <item row="19" column="2">
-                                          <widget class="QLineEdit" name="TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INPUT">
+                                          <widget class="QLineEdit" name="TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INPUT">
                                            <property name="minimumSize">
                                             <size>
                                              <width>200</width>
@@ -37777,7 +37787,7 @@ p, li { white-space: pre-wrap; }
                                           </widget>
                                          </item>
                                          <item row="19" column="1">
-                                          <widget class="QPushButton" name="TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGN__DET__INFO">
+                                          <widget class="QPushButton" name="TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INFO">
                                            <property name="minimumSize">
                                             <size>
                                              <width>30</width>
@@ -38263,8 +38273,8 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>372</width>
-                                       <height>44</height>
+                                       <width>928</width>
+                                       <height>301</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_64">
@@ -38343,8 +38353,8 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>426</width>
-                                       <height>44</height>
+                                       <width>928</width>
+                                       <height>301</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_65">
