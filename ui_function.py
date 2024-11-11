@@ -1412,8 +1412,8 @@ class UIFunction(MainWindow):
         run_biapy_cond = True
         if local_biapy_image_tag == "":
             if not local_biapy_container_found:
-                main_window.yes_no_exec(f"Container version '{container_version_selected}' not found. You will need to download" +\
-                    "it (in the future, if you reuse it, downloading won't be required). This will require approximately 10GB".format(main_window.cfg.settings['biapy_container_size']) +\
+                main_window.yes_no_exec(f"Container version '{container_version_selected}' not found. You will need to download " +\
+                    "it (in the future, if you reuse it, downloading won't be required). This will require approximately 10GB ".format(main_window.cfg.settings['biapy_container_size']) +\
                     "of disk space. Would you like to proceed?")
             else:
                 main_window.yes_no_exec("Seems that there is an existing BiaPy container locally built ({}). Do you want to continue?"\
