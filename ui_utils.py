@@ -12,7 +12,6 @@ import re
 import pooch
 import json 
 import numpy as np
-import http.client as httplib
 from pathlib import PurePath, Path, PureWindowsPath
 from packaging.version import Version
 from bs4 import BeautifulSoup
@@ -717,17 +716,14 @@ def clear_answers(main_window, ask_user=True):
 
         main_window.cfg.settings['wizard_question_index'] = 0
 
-def have_internet(main_window):
-    conn = httplib.HTTPSConnection("8.8.8.8", timeout=5)
+def have_internet(main_window, timeout=3):
     try:
-        conn.request("HEAD", "/")
+        urlopen('https://biapyx.github.io', timeout=timeout)
         return True
     except Exception:
         exc = traceback.format_exc()
         main_window.logger.error(exc)
         return False
-    finally:
-        conn.close()
     
 def check_models_from_other_sources(main_window, from_wizard=True):
     """
