@@ -1,0 +1,34 @@
+# Checks BiaPy code consistency
+
+name: Create Linux binary
+
+# Once a week (on Sunday)
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+        cache: "pip" # caching pip dependencies
+        
+    - name: Installing BiaPy-GUI dependencies
+      run: pip install -r requirements.txt
+      
+    - name: Creating Linux binary
+      run: |
+        cp dist-linux/main.spec main.spec
+        pyinstaller main.spec
+        
+    - name: Upload public folder to Google Drive
+      uses: Jodebu/upload-to-drive@master
+      with:
+        credentials: ${{ secrets.DRIVE_CREDENTIALS }}
+        target: dist/BiaPy
+        folderId: ${{ secrets.linux_GUI_binary_folder }}
