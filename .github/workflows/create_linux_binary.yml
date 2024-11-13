@@ -1,6 +1,6 @@
 # Checks BiaPy code consistency
 
-name: Code consistency
+name: Create Linux binary
 
 # Once a week (on Sunday)
 on:
