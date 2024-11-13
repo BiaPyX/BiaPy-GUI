@@ -31,4 +31,4 @@ jobs:
       with:
         credentials: ${{ secrets.DRIVE_CREDENTIALS }}
         target: dist/BiaPy
-        folderId: ${{ secrets.linux_GUI_binary_folder }}
+        folder: ${{ secrets.linux_GUI_binary_folder }}
