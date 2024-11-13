@@ -12,6 +12,8 @@ import re
 import pooch
 import json 
 import numpy as np
+import certifi
+import ssl
 from pathlib import PurePath, Path, PureWindowsPath
 from packaging.version import Version
 from bs4 import BeautifulSoup
@@ -718,7 +720,7 @@ def clear_answers(main_window, ask_user=True):
 
 def have_internet(main_window, timeout=3):
     try:
-        urlopen('https://biapyx.github.io', timeout=timeout)
+        urlopen('https://biapyx.github.io', timeout=timeout, context=ssl.create_default_context(cafile=certifi.where()))
         return True
     except Exception:
         exc = traceback.format_exc()
@@ -3720,7 +3722,7 @@ def check_supported_container_versions(gui_version, logger):
     compatible_versions = []
     try:
         # Read the page 
-        response = urlopen('https://biapyx.github.io/GUI_versions/')
+        response = urlopen('https://biapyx.github.io/GUI_versions/', context=ssl.create_default_context(cafile=certifi.where()))
 
         # Parse it 
         soup = BeautifulSoup(response.read(), from_encoding=response.headers.get_content_charset(), features="html.parser")
