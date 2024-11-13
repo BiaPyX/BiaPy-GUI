@@ -7,7 +7,7 @@ from skimage.io import imread
 from typing import Optional, Dict, Tuple, List
 from packaging.version import Version
 
-## Copied from BiaPy commit: 284ec3838766392c9a333ac9d27b55816a267bb9 (3.5.2)
+## Copied from BiaPy commit: a1f30928ae20d1198fd145e069032bb3d38336ec (3.5.5)
 def check_bmz_model_compatibility(
     model_rdf: Dict,
     workflow_specs: Optional[Dict] = None,
@@ -42,10 +42,20 @@ def check_bmz_model_compatibility(
     preproc_info = {}
 
     # Accepting models that are exported in pytorch_state_dict and with just one input
-    if "pytorch_state_dict" in model_rdf["weights"] and len(model_rdf["inputs"]) == 1:
+    if (
+        "pytorch_state_dict" in model_rdf["weights"] 
+        and model_rdf["weights"]["pytorch_state_dict"] is not None
+        and len(model_rdf["inputs"]) == 1
+    ):
         
+        # TODO: control model.weights.pytorch_state_dict.dependencies conda env to check if all 
+        # dependencies are installed 
+        # https://github.com/bioimage-io/collection-bioimage-io/issues/609
+
         model_version = Version(model_rdf["format_version"])
-        
+        if "format_version" in model_rdf:
+            model_version = Version(model_rdf["format_version"])
+
         # Capture model kwargs
         model_kwargs = None
         if "kwargs" in model_rdf["weights"]["pytorch_state_dict"]:
