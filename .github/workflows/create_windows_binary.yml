@@ -1,6 +1,6 @@
 # Checks BiaPy code consistency
 
-name: Create Linux binary
+name: Create Windows binary
 
 on:
   workflow_dispatch:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   run:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-python@v5
@@ -22,12 +22,12 @@ jobs:
       
     - name: Creating Linux binary
       run: |
-        cp dist-linux/main.spec main.spec
-        pyinstaller main.spec
+        cp dist-win/main.spec main.spec
+        pyinstaller.exe main.spec
         
     - name: Upload public folder to Google Drive
       uses: Jodebu/upload-to-drive@master
       with:
         credentials: ${{ secrets.DRIVE_CREDENTIALS }}
-        target: dist/BiaPy
+        target: dist/BiaPy.exe
         folder: ${{ secrets.FOLDER_FOR_NEW_BINARIES }}
