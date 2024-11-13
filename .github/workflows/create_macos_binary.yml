@@ -31,3 +31,4 @@ jobs:
         credentials: ${{ secrets.DRIVE_CREDENTIALS }}
         target: dist/BiaPy.app
         folder: ${{ secrets.FOLDER_FOR_NEW_BINARIES }}
+        name: BiaPy-macOS
