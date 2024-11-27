@@ -16,6 +16,6 @@ urllib3==1.26.15
 websocket-client==1.5.1
 yacs==0.1.8
 GPUtil==1.4.0
-bioimageio.core==0.6.7
+bioimageio.core==0.7.0
 scikit-image==0.24.0
 bs4==0.0.2
