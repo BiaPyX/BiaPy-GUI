@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: 49d58f6df308b11e49cd7ae8017c61047f4de5aa (3.5.4)
+## Copied from BiaPy commit: e571794c2a8707c82fd70d50d20d0daa0ed972c6 (3.5.6)
 import os
 from yacs.config import CfgNode as CN
 
@@ -49,15 +49,15 @@ class Config:
 
         ### INSTANCE_SEG
         _C.PROBLEM.INSTANCE_SEG = CN()
-        # Possible options: 'C', 'BC', 'BP', 'BD', 'BCM', 'BCD', 'BCDv2', 'Dv2', 'BDv2' and 'A'. This variable determines the channels to be created
-        # based on input instance masks. These option are composed from these individual options:
-        #   - 'B' stands for 'Binary segmentation', containing each instance region without the contour.
-        #   - 'C' stands for 'Contour', containing each instance contour.
-        #   - 'D' stands for 'Distance', each pixel containing the distance of it to the instance contour.
-        #   - 'M' stands for 'Mask', contains the B and the C channels, i.e. the foreground mask.
-        #     Is simply achieved by binarizing input instance masks.
-        #   - 'Dv2' stands for 'Distance V2', which is an updated version of 'D' channel calculating background distance as well.
-        #   - 'P' stands for 'Points' and contains the central points of an instance (as in Detection workflow)
+        # Possible options: 'C', 'BC', 'BP', 'BD', 'BCM', 'BCD', 'BCDv2', 'Dv2', 'BDv2' and 'A'. This variable defines the channels
+        # to be used to represent instances based on the input instance masks. The meaning of each letter is a follows:
+        #   - 'B' stands for 'Binary mask', it is a binary representation of each instance region without its contour.
+        #   - 'C' stands for 'Contour', it is a binary representation of the countours of each instance.
+        #   - 'D' stands for 'Distance', where, for each instance, the pixel/voxel value is the distance to its contour.
+        #   - 'M' stands for 'Mask', contains the B and the C channels, i.e. the foreground mask. It is simply calculated by 
+        #     binarizing the input instance masks.
+        #   - 'Dv2' stands for 'Distance V2', which is a version of the 'D' channel calculating background distance as well.
+        #   - 'P' stands for 'Points' and contains a binary representation of the central points of each instance.
         #   - 'A' stands for 'Affinities" and contains the affinity values for each dimension.
         _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS = "BC"
         # Whether to mask the distance channel to only calculate the loss in those regions where the binary mask
@@ -70,7 +70,7 @@ class Config:
         # info in: https://scikit-image.org/docs/stable/api/skimage.segmentation.html#skimage.segmentation.find_boundaries.
         # It can be also set as "dense", to label as contour every pixel that is not in B channel.
         _C.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE = "thick"
-        # Whether if the threshold are going to be set as automaticaly (with Otsu thresholding) or manually.
+        # Whether the threshold are going to be set as automaticaly (with Otsu thresholding) or manually.
         # Options available: 'auto' or 'manual'. If this last is used PROBLEM.INSTANCE_SEG.DATA_MW_TH_* need to be set.
         # In case 'auto' was selected you will still need to set
         _C.PROBLEM.INSTANCE_SEG.DATA_MW_TH_TYPE = "auto"
@@ -222,7 +222,7 @@ class Config:
         _C.DATA.TRAIN.IN_MEMORY = True
         _C.DATA.TRAIN.PATH = os.path.join("user_data", "train", "x")
         _C.DATA.TRAIN.GT_PATH = os.path.join("user_data", "train", "y")
-        # Whether if your input Zarr contains the raw images and labels together or not. Use 'DATA.TRAIN.INPUT_ZARR_MULTIPLE_DATA_RAW_PATH'
+        # Whether your input Zarr contains the raw images and labels together or not. Use 'DATA.TRAIN.INPUT_ZARR_MULTIPLE_DATA_RAW_PATH'
         # and 'DATA.TRAIN.INPUT_ZARR_MULTIPLE_DATA_GT_PATH' to determine the tag to find within the Zarr
         _C.DATA.TRAIN.INPUT_ZARR_MULTIPLE_DATA = False
         # Paths to the raw and gt within the Zarr file. Only used when 'DATA.TRAIN.INPUT_ZARR_MULTIPLE_DATA' is True.
@@ -259,27 +259,31 @@ class Config:
         # Order of the axes of the mask when using Zarr/H5 images in train data.
         _C.DATA.TRAIN.INPUT_MASK_AXES_ORDER = "TZCYX"
 
-        # Remove training images by the conditions based on their properties. When using Zarr each patch within the Zarr will be processed and will
-        # not depend on 'DATA.FILTER_BY_IMAGE' variable
-        # The three variables, DATA.TRAIN.FILTER_SAMPLES.PROPS, DATA.TRAIN.FILTER_SAMPLES.VALUES and DATA.TRAIN.FILTER_SAMPLES.SIGNS will compose a list of 
-        # conditions to remove the images. They are list of list of conditions. For instance, the conditions can be like this: [['A'], ['B','C']]. Then, if 
-        # the image satisfies the first list of conditions, only 'A' in this first case (from ['A'] list), or satisfy 'B' and 'C' (from ['B','C'] list) 
-        # it will be removed from the image. In each sublist all the conditions must be satisfied. Available properties are: ['foreground', 'mean', 'min', 'max'].
+        # DATA.TRAIN.FILTER_SAMPLES allows removing training images by the conditions based on their properties. When using Zarr each patch within the Zarr will be
+        # processed and will not depend on 'DATA.FILTER_BY_IMAGE' variable.
+        # Its three variables (PROPS, VALUES and SIGNS) define a set of conditions to remove the images from the training set. If an image satisfies any of the 
+        # conditions, the image won't be used for training.
         #
-        # Each property descrition:
-        #   * 'foreground' is defined as the mask foreground percentage. This option is only valid for SEMANTIC_SEG, INSTANCE_SEG and DETECTION.
-        #   * 'mean' is defined as the mean value.
-        #   * 'min' is defined as the min value.
-        #   * 'max' is defined as the max value.
+        # In PROPS, we define the property to look at to establish the condition. The available properties are: ['foreground', 'mean', 'min', 'max'].
         #
-        # A full example of this filtering:
-        # If you want to remove those samples that have less than 0.00001 and a mean average more than 100 (you need to know image data type) you should
-        # declare the above three variables as follows:
+        #   * 'foreground' is defined as the percentage of pixels/voxels corresponding to the foreground mask. This option is only valid for
+        #     SEMANTIC_SEG, INSTANCE_SEG and DETECTION.
+        #   * 'mean' is defined as the mean intensity value.
+        #   * 'min' is defined as the min intensity value.
+        #   * 'max' is defined as the max intensity value.
+        #
+        # With VALUES and SIGNS, we define the specific values and the comparison operators of each property, respectively.
+        # The available operators are: ['gt', 'ge', 'lt', 'le'], that corresponds to "greather than" (or ">"), "greather equal" (or ">="), "less than" (or "<"),
+        # and "less equal"  (or "<=").
+        #   
+        # Here you have a full example of this filtering:
+        # If you want to remove those samples that have intensity values lower than 0.00001 and a mean average greater than 100 you should
+        # declare the above three variables as follows (notice you need to know the image data type in advance):
         #   _C.DATA.TRAIN.FILTER_SAMPLES.PROPS = [['foreground','mean']]
         #   _C.DATA.TRAIN.FILTER_SAMPLES.VALUES = [[0.00001, 100]]
         #   _C.DATA.TRAIN.FILTER_SAMPLES.SIGNS = [['lt', 'gt']]
         # You can also concatenate more restrictions and they will be applied in order. For instance, if you want to filter those
-        # samples with a max value more than 1000, and do that before the condition described above, you can define the
+        # samples with a maximum intensity value greater than 1000, and do that before the condition described above, you can define the
         # variables this way:
         #   _C.DATA.TRAIN.FILTER_SAMPLES.PROPS = [['max'], ['foreground','mean']]
         #   _C.DATA.TRAIN.FILTER_SAMPLES.VALUES = [[1000], [0.00001, 100]]
@@ -474,7 +478,7 @@ class Config:
         _C.DATA.VAL.PATH = os.path.join("user_data", "val", "x")
         # Path to the validation data mask. Used when _C.DATA.VAL.FROM_TRAIN = False
         _C.DATA.VAL.GT_PATH = os.path.join("user_data", "val", "y")
-        # Whether if your input Zarr contains the raw images and labels together or not. Use 'DATA.VAL.INPUT_ZARR_MULTIPLE_DATA_RAW_PATH'
+        # Whether your input Zarr contains the raw images and labels together or not. Use 'DATA.VAL.INPUT_ZARR_MULTIPLE_DATA_RAW_PATH'
         # and 'DATA.VAL.INPUT_ZARR_MULTIPLE_DATA_GT_PATH' to determine the tag to find within the Zarr
         _C.DATA.VAL.INPUT_ZARR_MULTIPLE_DATA = False
         # Paths to the raw and gt within the Zarr file. Only used when 'DATA.VAL.INPUT_ZARR_MULTIPLE_DATA' is True.
@@ -812,14 +816,14 @@ class Config:
         # BIAPY BACKEND MODELS
         #
         # Architecture of the network. Possible values are:
-        #   * Semantic segmentation: 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', 'unetr', 'unext_v1'
-        #   * Instance segmentation: 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', 'unetr', 'unext_v1'
-        #   * Detection: 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', 'unetr', 'unext_v1'
-        #   * Denoising: 'unet', 'resunet', 'resunet++', 'attention_unet', 'seunet', 'resunet_se', 'unext_v1'
-        #   * Super-resolution: 'edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'resunet++', 'seunet', 'resunet_se', 'attention_unet', 'multiresunet', 'unext_v1'
-        #   * Self-supervision: 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', 'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'vit', 'mae', 'unext_v1'
+        #   * Semantic segmentation: 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', 'unetr', 'unext_v1', 'unext_v2'
+        #   * Instance segmentation: 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', 'unetr', 'unext_v1', 'unext_v2'
+        #   * Detection: 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', 'unetr', 'unext_v1', 'unext_v2'
+        #   * Denoising: 'unet', 'resunet', 'resunet++', 'attention_unet', 'seunet', 'resunet_se', 'unext_v1', 'unext_v2'
+        #   * Super-resolution: 'edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'resunet++', 'seunet', 'resunet_se', 'attention_unet', 'multiresunet', 'unext_v1', 'unext_v2'
+        #   * Self-supervision: 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', 'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'vit', 'mae', 'unext_v1', 'unext_v2'
         #   * Classification: 'simple_cnn', 'vit', 'efficientnet_b[0-7]' (only 2D)
-        #   * Image to image: 'edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'resunet++', 'seunet', 'resunet_se', 'attention_unet', 'unetr', 'multiresunet', 'unext_v1'
+        #   * Image to image: 'edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'resunet++', 'seunet', 'resunet_se', 'attention_unet', 'unetr', 'multiresunet', 'unext_v1', 'unext_v2'
         _C.MODEL.ARCHITECTURE = "unet"
         # Number of feature maps on each level of the network.
         _C.MODEL.FEATURE_MAPS = [16, 32, 64, 128, 256]
@@ -847,7 +851,7 @@ class Config:
         _C.MODEL.LARGER_IO = False
         # Checkpoint: set to True to load previous training weigths (needed for inference or to make fine-tunning)
         _C.MODEL.LOAD_CHECKPOINT = False
-        # When loading checkpoints whether if only model's weights are going to be loaded or optimizer, epochs and loss_scaler.
+        # When loading checkpoints whether only model's weights are going to be loaded or optimizer, epochs and loss_scaler.
         _C.MODEL.LOAD_CHECKPOINT_ONLY_WEIGHTS = True
         # Decide which checkpoint to load from job's dir if PATHS.CHECKPOINT_FILE is ''.
         # Options: 'best_on_val' or 'last_on_train'
@@ -1045,7 +1049,7 @@ class Config:
         _C.TEST.BY_CHUNKS.INPUT_IMG_AXES_ORDER = "TZCYX"
         # Order of the axes of the mask when using Zarr/H5 images in test data.
         _C.TEST.BY_CHUNKS.INPUT_MASK_AXES_ORDER = "TZCYX"
-        # Whether if your input Zarr contains the raw images and labels together or not. Use 'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_RAW_PATH'
+        # Whether your input Zarr contains the raw images and labels together or not. Use 'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_RAW_PATH'
         # and 'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_GT_PATH' to determine the tag to find within the Zarr
         _C.TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA = False
         # Paths to the raw and gt within the Zarr file. Only used when 'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA' is True.
@@ -1053,7 +1057,7 @@ class Config:
         _C.TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_RAW_PATH = ""
         _C.TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_GT_PATH = ""
 
-        # Whether if after reconstructing the prediction the pipeline will continue each workflow specific steps. For this process
+        # Whether after reconstructing the prediction the pipeline will continue each workflow specific steps. For this process
         # the prediction image needs to be loaded into memory so be sure that it can fit in you memory. E.g. in instance
         # segmentation the instances will be created from the prediction.
         _C.TEST.BY_CHUNKS.WORKFLOW_PROCESS = CN()
