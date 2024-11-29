@@ -24,10 +24,12 @@ jobs:
       run: |
         cp dist-macOS/main.spec main.spec
         pyinstaller main.spec
-        
+
     - name: Upload public folder to Google Drive
-      uses: Jodebu/upload-to-drive@master
+      uses: adityak74/google-drive-upload-git-action@main
       with:
         credentials: ${{ secrets.DRIVE_CREDENTIALS }}
-        target: dist/BiaPy.app
-        folder: ${{ secrets.FOLDER_FOR_NEW_BINARIES }}
+        filename: dist/BiaPy.app
+        folderId: ${{ secrets.FOLDER_FOR_NEW_BINARIES }}
+        overwrite: "true"
+        mirrorDirectoryStructure: "false"
