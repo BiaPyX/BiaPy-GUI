@@ -3541,8 +3541,33 @@ def get_git_revision_short_hash(main_window) -> str:
         sha = re.split(r'\t+', stdout.decode('ascii'))[0]
         vtag = str(re.split(r'\t+', stdout.decode('ascii'))[-1]).replace("refs/tags/","").replace('^{}',"").replace('\n',"")   
     except Exception: 
-        pass
-    return sha, Version(vtag)
+        exc = traceback.format_exc()
+        main_window.logger.error("There was an error getting BiaPy-GUI latest version (attempt 1)")
+        main_window.logger.error(exc)
+
+    try: 
+        vtag = Version(vtag)
+    except Exception:
+        exc = traceback.format_exc()
+        main_window.logger.error(f"There was an error converting the vtag into Version object. vtag is {vtag}")
+        main_window.logger.error(exc) 
+
+    if vtag is None:
+        try:
+            import requests
+            response = requests.get("https://api.github.com/repos/BiaPyX/BiaPy-GUI/releases/latest")
+            vtag = Version(response.json()["name"].split(' ')[-1])
+        except Exception: 
+            exc = traceback.format_exc()
+            main_window.logger.error("There was an error getting BiaPy-GUI latest version (attempt 2)")
+            main_window.logger.error(exc)
+
+    if vtag is None:
+        main_window.logger.info("Setting finally the version of the current GUI because other attempts failed. "
+                                "Please, report this issue with BiaPy developers so they can fix it.")
+        vtag = self.settings["biapy_gui_version"]
+
+    return sha, vtag 
         
 def path_in_list(list, path):
     """
