@@ -2,6 +2,10 @@
 
 ![BiaPy GUI](https://raw.githubusercontent.com/BiaPyX/BiaPy/master/img/BiaPy_GUI_main_page.png)
 
+[![Create Linux binary](https://github.com/BiaPyX/BiaPy-GUI/actions/workflows/create_linux_binary.yml/badge.svg)](https://github.com/BiaPyX/BiaPy-GUI/actions/workflows/create_linux_binary.yml)
+[![Create macOS binary](https://github.com/BiaPyX/BiaPy-GUI/actions/workflows/create_macos_binary.yml/badge.svg)](https://github.com/BiaPyX/BiaPy-GUI/actions/workflows/create_macos_binary.yml)
+[![Create Windows binary](https://github.com/BiaPyX/BiaPy-GUI/actions/workflows/create_windows_binary.yml/badge.svg)](https://github.com/BiaPyX/BiaPy-GUI/actions/workflows/create_windows_binary.yml)
+
 ## Download BiaPy GUI for you OS
 
 - [Windows 64-bit](https://drive.google.com/uc?export=download&id=1iV0wzdFhpCpBCBgsameGyT3iFyQ6av5o) 
