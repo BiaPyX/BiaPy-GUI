@@ -5,10 +5,10 @@ import ast
 from collections import deque
 import requests
 
-from PySide2.QtCore import *
-from PySide2.QtGui import *
-from PySide2.QtWidgets import *
-from PySide2.QtSvg import QSvgWidget
+from PySide6.QtCore import *
+from PySide6.QtGui import *
+from PySide6.QtWidgets import *
+from PySide6.QtSvgWidgets import QSvgWidget
 
 from main import MainWindow
 from run_functions import run_worker
@@ -217,7 +217,6 @@ class UIFunction(MainWindow):
         font7.setFamily(u"DejaVu Math TeX Gyre")
         font7.setBold(False)
         font7.setItalic(True)
-        font7.setWeight(50)
         font8 = QFont()
         font8.setFamily(u"DejaVu Math TeX Gyre")
         font8.setPointSize(11)

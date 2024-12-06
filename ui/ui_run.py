@@ -3,15 +3,22 @@
 ################################################################################
 ## Form generated from reading UI file 'ui_run.ui'
 ##
-## Created by: Qt User Interface Compiler version 5.15.2
+## Created by: Qt User Interface Compiler version 6.8.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide2.QtCore import *
-from PySide2.QtGui import *
-from PySide2.QtWidgets import *
-
+from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QDialog, QFrame,
+    QGridLayout, QHBoxLayout, QLabel, QProgressBar,
+    QPushButton, QScrollArea, QSizePolicy, QSpacerItem,
+    QTextBrowser, QTextEdit, QVBoxLayout, QWidget)
 
 class Ui_RunBiaPy(object):
     def setupUi(self, RunBiaPy):
@@ -56,7 +63,7 @@ class Ui_RunBiaPy(object):
         self.window_des_label = QLabel(self.frame_top)
         self.window_des_label.setObjectName(u"window_des_label")
         font = QFont()
-        font.setFamily(u"DejaVu Math TeX Gyre")
+        font.setFamilies([u"DejaVu Math TeX Gyre"])
         font.setPointSize(12)
         self.window_des_label.setFont(font)
 
@@ -85,7 +92,7 @@ class Ui_RunBiaPy(object):
 "	background-color: rgba(0,0,0,0);\n"
 "}")
         icon = QIcon()
-        icon.addFile(u"images/bn_images/hide_icon.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u"images/bn_images/hide_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.bn_min.setIcon(icon)
         self.bn_min.setIconSize(QSize(22, 12))
         self.bn_min.setAutoDefault(False)
@@ -108,7 +115,7 @@ class Ui_RunBiaPy(object):
 "	background-color: rgba(0,0,0,0);\n"
 "}")
         icon1 = QIcon()
-        icon1.addFile(u"images/bn_images/close_icon.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon1.addFile(u"images/bn_images/close_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.bn_close.setIcon(icon1)
         self.bn_close.setIconSize(QSize(22, 22))
         self.bn_close.setAutoDefault(False)
@@ -132,10 +139,9 @@ class Ui_RunBiaPy(object):
         self.biapy_image_status = QLabel(self.frame_bottom)
         self.biapy_image_status.setObjectName(u"biapy_image_status")
         font1 = QFont()
-        font1.setFamily(u"DejaVu Math TeX Gyre")
+        font1.setFamilies([u"DejaVu Math TeX Gyre"])
         font1.setPointSize(12)
         font1.setBold(True)
-        font1.setWeight(75)
         self.biapy_image_status.setFont(font1)
 
         self.verticalLayout_3.addWidget(self.biapy_image_status)
@@ -202,7 +208,7 @@ class Ui_RunBiaPy(object):
         self.biapy_container_info_label.setObjectName(u"biapy_container_info_label")
         self.biapy_container_info_label.setMinimumSize(QSize(0, 0))
         font2 = QFont()
-        font2.setFamily(u"DejaVu Math TeX Gyre")
+        font2.setFamilies([u"DejaVu Math TeX Gyre"])
         font2.setPointSize(11)
         self.biapy_container_info_label.setFont(font2)
         self.biapy_container_info_label.setOpenExternalLinks(True)
@@ -210,7 +216,7 @@ class Ui_RunBiaPy(object):
 
         self.verticalLayout_5.addWidget(self.biapy_container_info_label)
 
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_5.addItem(self.verticalSpacer)
 
@@ -251,7 +257,7 @@ class Ui_RunBiaPy(object):
 
         self.gridLayout.addWidget(self.stop_container_bn, 0, 1, 1, 1)
 
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout.addItem(self.horizontalSpacer, 0, 2, 1, 1)
 
@@ -286,7 +292,7 @@ class Ui_RunBiaPy(object):
 
         self.gridLayout_2.addWidget(self.test_progress_bar, 1, 2, 1, 1)
 
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_2.addItem(self.horizontalSpacer_2, 1, 3, 1, 1)
 
@@ -297,7 +303,7 @@ class Ui_RunBiaPy(object):
 
         self.gridLayout_2.addWidget(self.train_progress_label, 0, 1, 1, 1)
 
-        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_2.addItem(self.horizontalSpacer_3, 1, 0, 1, 1)
 
@@ -345,7 +351,7 @@ class Ui_RunBiaPy(object):
         self.run_biapy_log.setMinimumSize(QSize(0, 0))
         self.run_biapy_log.setMaximumSize(QSize(16777215, 16777215))
         font3 = QFont()
-        font3.setFamily(u"Monospace")
+        font3.setFamilies([u"Monospace"])
         self.run_biapy_log.setFont(font3)
         self.run_biapy_log.setStyleSheet(u"background-color : black ; \n"
 "color : white; \n"

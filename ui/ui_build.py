@@ -3,15 +3,21 @@
 ################################################################################
 ## Form generated from reading UI file 'ui_build.ui'
 ##
-## Created by: Qt User Interface Compiler version 5.15.2
+## Created by: Qt User Interface Compiler version 6.8.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide2.QtCore import *
-from PySide2.QtGui import *
-from PySide2.QtWidgets import *
-
+from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtWidgets import (QApplication, QDialog, QFrame, QHBoxLayout,
+    QLabel, QProgressBar, QPushButton, QSizePolicy,
+    QTextBrowser, QTextEdit, QVBoxLayout, QWidget)
 
 class Ui_BuildBiaPy(object):
     def setupUi(self, BuildBiaPy):
@@ -56,7 +62,7 @@ class Ui_BuildBiaPy(object):
         self.lab_heading = QLabel(self.frame_top)
         self.lab_heading.setObjectName(u"lab_heading")
         font = QFont()
-        font.setFamily(u"DejaVu Math TeX Gyre")
+        font.setFamilies([u"DejaVu Math TeX Gyre"])
         font.setPointSize(12)
         self.lab_heading.setFont(font)
         self.lab_heading.setStyleSheet(u"")
@@ -79,7 +85,7 @@ class Ui_BuildBiaPy(object):
 "	background-color: rgba(0,0,0,0);\n"
 "}")
         icon = QIcon()
-        icon.addFile(u"images/bn_images/hide_icon.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u"images/bn_images/hide_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.bn_min.setIcon(icon)
         self.bn_min.setIconSize(QSize(22, 12))
         self.bn_min.setAutoDefault(False)
@@ -102,7 +108,7 @@ class Ui_BuildBiaPy(object):
 "	background-color: rgba(0,0,0,0);\n"
 "}")
         icon1 = QIcon()
-        icon1.addFile(u"images/bn_images/close_icon.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon1.addFile(u"images/bn_images/close_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.bn_close.setIcon(icon1)
         self.bn_close.setIconSize(QSize(22, 22))
         self.bn_close.setAutoDefault(False)
@@ -145,7 +151,7 @@ class Ui_BuildBiaPy(object):
         self.biapy_container_info_label.setMinimumSize(QSize(0, 100))
         self.biapy_container_info_label.setMaximumSize(QSize(16777215, 100))
         font1 = QFont()
-        font1.setFamily(u"DejaVu Math TeX Gyre")
+        font1.setFamilies([u"DejaVu Math TeX Gyre"])
         font1.setPointSize(11)
         self.biapy_container_info_label.setFont(font1)
         self.biapy_container_info_label.setOpenExternalLinks(True)
@@ -158,10 +164,9 @@ class Ui_BuildBiaPy(object):
         self.label.setMinimumSize(QSize(0, 0))
         self.label.setMaximumSize(QSize(16777215, 16777215))
         font2 = QFont()
-        font2.setFamily(u"DejaVu Math TeX Gyre")
+        font2.setFamilies([u"DejaVu Math TeX Gyre"])
         font2.setPointSize(11)
         font2.setBold(True)
-        font2.setWeight(75)
         self.label.setFont(font2)
 
         self.verticalLayout_4.addWidget(self.label)
@@ -192,7 +197,7 @@ class Ui_BuildBiaPy(object):
         self.build_biapy_log.setMinimumSize(QSize(0, 0))
         self.build_biapy_log.setMaximumSize(QSize(16777215, 16777215))
         font3 = QFont()
-        font3.setFamily(u"Monospace")
+        font3.setFamilies([u"Monospace"])
         font3.setPointSize(10)
         self.build_biapy_log.setFont(font3)
         self.build_biapy_log.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)

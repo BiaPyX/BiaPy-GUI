@@ -3,15 +3,21 @@
 ################################################################################
 ## Form generated from reading UI file 'ui_yes_no.ui'
 ##
-## Created by: Qt User Interface Compiler version 5.15.2
+## Created by: Qt User Interface Compiler version 6.8.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide2.QtCore import *
-from PySide2.QtGui import *
-from PySide2.QtWidgets import *
-
+from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtWidgets import (QApplication, QDialog, QFrame, QHBoxLayout,
+    QLabel, QPushButton, QSizePolicy, QVBoxLayout,
+    QWidget)
 
 class Ui_yes_no(object):
     def setupUi(self, yes_no):
@@ -58,7 +64,7 @@ class Ui_yes_no(object):
         self.frame_bottom = QFrame(self.centralwidget)
         self.frame_bottom.setObjectName(u"frame_bottom")
         font = QFont()
-        font.setFamily(u"DejaVu Math TeX Gyre")
+        font.setFamilies([u"DejaVu Math TeX Gyre"])
         font.setPointSize(12)
         self.frame_bottom.setFont(font)
         self.frame_bottom.setStyleSheet(u"")
@@ -71,7 +77,7 @@ class Ui_yes_no(object):
         self.question_label = QLabel(self.frame_bottom)
         self.question_label.setObjectName(u"question_label")
         font1 = QFont()
-        font1.setFamily(u"DejaVu Math TeX Gyre")
+        font1.setFamilies([u"DejaVu Math TeX Gyre"])
         font1.setPointSize(12)
         font1.setKerning(True)
         self.question_label.setFont(font1)
@@ -103,10 +109,6 @@ class Ui_yes_no(object):
 "QPushButton:hover {\n"
 "	background-color: rgb(255,255,255);\n"
 "	border: 2px solid rgb(0, 0, 0);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
 "}")
 
         self.horizontalLayout_2.addWidget(self.yes_bn)
@@ -114,19 +116,13 @@ class Ui_yes_no(object):
         self.no_bn = QPushButton(self.frame)
         self.no_bn.setObjectName(u"no_bn")
         self.no_bn.setMaximumSize(QSize(100, 30))
-        font2 = QFont()
-        font2.setPointSize(12)
-        self.no_bn.setFont(font2)
+        self.no_bn.setFont(font)
         self.no_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgb(64,144,253);\n"
 "	border-radius: 15px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}\n"
-"QPushButton:pressed {	\n"
 "	background-color: rgb(255,255,255);\n"
 "	border: 2px solid rgb(0, 0, 0);\n"
 "}")

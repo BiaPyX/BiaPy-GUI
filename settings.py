@@ -1,7 +1,7 @@
 import os
 import platform
 import getpass
-from PySide2.QtGui import QPixmap, QMovie
+from PySide6.QtGui import QPixmap, QMovie
 from ui_utils import resource_path
 from packaging.version import Version
 

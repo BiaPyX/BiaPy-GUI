@@ -5,10 +5,10 @@ import urllib.request
 from datetime import datetime, timedelta
 from pathlib import Path
 
-from PySide2 import QtCore, QtGui, QtWidgets
-from PySide2.QtCore import Qt, QObject, QUrl
-from PySide2.QtGui import QPixmap
-from PySide2.QtWidgets import *
+from PySide6 import QtCore, QtGui, QtWidgets
+from PySide6.QtCore import Qt, QObject, QUrl
+from PySide6.QtGui import QPixmap
+from PySide6.QtWidgets import *
 
 from ui_utils import resource_path, get_text
 from ui.ui_build import Ui_BuildBiaPy 

@@ -3,15 +3,24 @@
 ################################################################################
 ## Form generated from reading UI file 'ui_main.ui'
 ##
-## Created by: Qt User Interface Compiler version 5.15.2
+## Created by: Qt User Interface Compiler version 6.8.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide2.QtCore import *
-from PySide2.QtGui import *
-from PySide2.QtWidgets import *
-
+from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtWidgets import (QAbstractItemView, QApplication, QComboBox, QFormLayout,
+    QFrame, QGridLayout, QHBoxLayout, QHeaderView,
+    QLabel, QLineEdit, QMainWindow, QPlainTextEdit,
+    QPushButton, QScrollArea, QSizePolicy, QSpacerItem,
+    QStackedWidget, QTabWidget, QTextEdit, QTreeView,
+    QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -39,7 +48,7 @@ class Ui_MainWindow(object):
         self.frame_west = QFrame(self.centralwidget)
         self.frame_west.setObjectName(u"frame_west")
         font = QFont()
-        font.setFamily(u"DejaVu Math TeX Gyre")
+        font.setFamilies([u"DejaVu Math TeX Gyre"])
         font.setPointSize(12)
         self.frame_west.setFont(font)
         self.frame_west.setStyleSheet(u"background-color:rgba(0, 0, 0, 0);")
@@ -104,8 +113,8 @@ class Ui_MainWindow(object):
         self.line_2 = QFrame(self.biapy_logo_frame)
         self.line_2.setObjectName(u"line_2")
         self.line_2.setStyleSheet(u"background-color:rgba(0, 0, 0, 0);")
-        self.line_2.setFrameShape(QFrame.HLine)
-        self.line_2.setFrameShadow(QFrame.Sunken)
+        self.line_2.setFrameShape(QFrame.Shape.HLine)
+        self.line_2.setFrameShadow(QFrame.Shadow.Sunken)
 
         self.verticalLayout_3.addWidget(self.line_2)
 
@@ -114,7 +123,7 @@ class Ui_MainWindow(object):
         self.biapy_version.setMinimumSize(QSize(0, 0))
         self.biapy_version.setMaximumSize(QSize(16777215, 16777215))
         font1 = QFont()
-        font1.setFamily(u"DejaVu Math TeX Gyre")
+        font1.setFamilies([u"DejaVu Math TeX Gyre"])
         font1.setPointSize(7)
         self.biapy_version.setFont(font1)
         self.biapy_version.setStyleSheet(u"QLabel {\n"
@@ -132,8 +141,8 @@ class Ui_MainWindow(object):
         self.line = QFrame(self.frame_bottom_west)
         self.line.setObjectName(u"line")
         self.line.setFont(font)
-        self.line.setFrameShape(QFrame.HLine)
-        self.line.setFrameShadow(QFrame.Sunken)
+        self.line.setFrameShape(QFrame.Shape.HLine)
+        self.line.setFrameShadow(QFrame.Shadow.Sunken)
 
         self.verticalLayout_14.addWidget(self.line)
 
@@ -218,7 +227,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_16.setContentsMargins(0, 0, 0, 0)
         self.bn_workflow = QPushButton(self.frame_workflow)
         self.bn_workflow.setObjectName(u"bn_workflow")
-        sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.bn_workflow.sizePolicy().hasHeightForWidth())
@@ -280,7 +289,7 @@ class Ui_MainWindow(object):
 
         self.frame_train = QFrame(self.frame_bottom_west)
         self.frame_train.setObjectName(u"frame_train")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.frame_train.sizePolicy().hasHeightForWidth())
@@ -465,7 +474,7 @@ class Ui_MainWindow(object):
 "	background-color: rgba(0,0,0,0);\n"
 "}")
         icon = QIcon()
-        icon.addFile(u"images/bn_images/hide_icon.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u"images/bn_images/hide_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.bn_min.setIcon(icon)
         self.bn_min.setIconSize(QSize(22, 22))
         self.bn_min.setFlat(True)
@@ -501,7 +510,7 @@ class Ui_MainWindow(object):
 "	background-color: rgba(0,0,0,0);\n"
 "}")
         icon1 = QIcon()
-        icon1.addFile(u"images/bn_images/close_icon.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon1.addFile(u"images/bn_images/close_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.bn_close.setIcon(icon1)
         self.bn_close.setIconSize(QSize(22, 22))
         self.bn_close.setFlat(True)
@@ -566,10 +575,9 @@ class Ui_MainWindow(object):
         self.label_16.setMinimumSize(QSize(0, 30))
         self.label_16.setMaximumSize(QSize(16777215, 30))
         font2 = QFont()
-        font2.setFamily(u"DejaVu Math TeX Gyre")
+        font2.setFamilies([u"DejaVu Math TeX Gyre"])
         font2.setPointSize(12)
         font2.setBold(True)
-        font2.setWeight(75)
         self.label_16.setFont(font2)
 
         self.verticalLayout_5.addWidget(self.label_16)
@@ -624,10 +632,9 @@ class Ui_MainWindow(object):
         self.home_project_page_label.setMinimumSize(QSize(100, 0))
         self.home_project_page_label.setMaximumSize(QSize(16777215, 16777215))
         font3 = QFont()
-        font3.setFamily(u"DejaVu Math TeX Gyre")
+        font3.setFamilies([u"DejaVu Math TeX Gyre"])
         font3.setPointSize(10)
         font3.setBold(False)
-        font3.setWeight(50)
         self.home_project_page_label.setFont(font3)
 
         self.verticalLayout_34.addWidget(self.home_project_page_label, 0, Qt.AlignHCenter)
@@ -1090,7 +1097,7 @@ class Ui_MainWindow(object):
         self.frame_68.setObjectName(u"frame_68")
         self.frame_68.setMinimumSize(QSize(0, 300))
         font4 = QFont()
-        font4.setFamily(u"DejaVu Math TeX Gyre")
+        font4.setFamilies([u"DejaVu Math TeX Gyre"])
         self.frame_68.setFont(font4)
         self.frame_68.setFrameShape(QFrame.NoFrame)
         self.frame_68.setFrameShadow(QFrame.Raised)
@@ -1161,7 +1168,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_80.addWidget(self.wizard_browse_yaml_path_label, 0, 1, 1, 1)
 
-        self.horizontalSpacer_87 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_87 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_80.addItem(self.horizontalSpacer_87, 0, 7, 1, 1)
 
@@ -1313,7 +1320,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_38.addWidget(self.wizard_question_label, 0, Qt.AlignBottom)
 
-        self.horizontalSpacer_82 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_82 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_38.addItem(self.horizontalSpacer_82)
 
@@ -1403,7 +1410,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_81.addWidget(self.label_113, 0, 0, 1, 1)
 
-        self.verticalSpacer_57 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_57 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_81.addItem(self.verticalSpacer_57, 2, 0, 1, 1)
 
@@ -1446,7 +1453,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_41.addWidget(self.wizard_path_input_bn)
 
-        self.horizontalSpacer_86 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_86 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_41.addItem(self.horizontalSpacer_86)
 
@@ -1485,7 +1492,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_57.addWidget(self.frame_76, 0, Qt.AlignHCenter)
 
-        self.verticalSpacer_58 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_58 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_57.addItem(self.verticalSpacer_58)
 
@@ -1528,7 +1535,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_44.addWidget(self.wizard_model_browse_bn)
 
-        self.horizontalSpacer_85 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_85 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_44.addItem(self.horizontalSpacer_85)
 
@@ -1551,7 +1558,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_60.addWidget(self.wizard_model_check_bn, 0, Qt.AlignHCenter)
 
-        self.verticalSpacer_59 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_59 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_60.addItem(self.verticalSpacer_59)
 
@@ -1576,7 +1583,7 @@ class Ui_MainWindow(object):
         self.wizard_back_bn.setObjectName(u"wizard_back_bn")
         self.wizard_back_bn.setMinimumSize(QSize(100, 35))
         font5 = QFont()
-        font5.setFamily(u"DejaVu Math TeX Gyre")
+        font5.setFamilies([u"DejaVu Math TeX Gyre"])
         font5.setPointSize(20)
         self.wizard_back_bn.setFont(font5)
         self.wizard_back_bn.setStyleSheet(u"QPushButton {\n"
@@ -1591,7 +1598,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_37.addWidget(self.wizard_back_bn)
 
-        self.horizontalSpacer_81 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_81 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_37.addItem(self.horizontalSpacer_81)
 
@@ -1643,9 +1650,8 @@ class Ui_MainWindow(object):
         self.label_108.setObjectName(u"label_108")
         self.label_108.setMaximumSize(QSize(16777215, 30))
         font6 = QFont()
-        font6.setFamily(u"DejaVu Math TeX Gyre")
+        font6.setFamilies([u"DejaVu Math TeX Gyre"])
         font6.setBold(True)
-        font6.setWeight(75)
         self.label_108.setFont(font6)
         self.label_108.setStyleSheet(u"color: rgb(64,144,253);\n"
 "font-weight: bold;")
@@ -1670,11 +1676,10 @@ class Ui_MainWindow(object):
         self.wizard_config_file_label = QLabel(self.frame_78)
         self.wizard_config_file_label.setObjectName(u"wizard_config_file_label")
         font7 = QFont()
-        font7.setFamily(u"DejaVu Math TeX Gyre")
+        font7.setFamilies([u"DejaVu Math TeX Gyre"])
         font7.setPointSize(12)
         font7.setBold(False)
         font7.setItalic(True)
-        font7.setWeight(50)
         self.wizard_config_file_label.setFont(font7)
         self.wizard_config_file_label.setStyleSheet(u"color: rgb(120,120,120);\n"
 "font: italic;")
@@ -1699,7 +1704,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_61.addWidget(self.scrollArea_18)
 
-        self.verticalSpacer_31 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_31 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_61.addItem(self.verticalSpacer_31)
 
@@ -1732,7 +1737,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_42.addWidget(self.wizard_summary_back_bn)
 
-        self.horizontalSpacer_83 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_83 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_42.addItem(self.horizontalSpacer_83)
 
@@ -1756,7 +1761,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_42.addWidget(self.summary_end_bn)
 
-        self.horizontalSpacer_84 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_84 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_42.addItem(self.horizontalSpacer_84)
 
@@ -1817,7 +1822,7 @@ class Ui_MainWindow(object):
 "	border: 2px solid rgb(0, 0, 0);\n"
 "}")
         icon2 = QIcon()
-        icon2.addFile(u"images/bn_images/left_arrow.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon2.addFile(u"images/bn_images/left_arrow.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.left_arrow_bn.setIcon(icon2)
         self.left_arrow_bn.setIconSize(QSize(32, 32))
         self.workflow_view1_frame = QFrame(self.page_create_yaml_mid_frame)
@@ -1836,7 +1841,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_29.setSpacing(6)
         self.verticalLayout_29.setObjectName(u"verticalLayout_29")
         self.verticalLayout_29.setContentsMargins(-1, 17, -1, -1)
-        self.verticalSpacer_34 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_34 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_29.addItem(self.verticalSpacer_34)
 
@@ -1857,7 +1862,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.setSpacing(0)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.horizontalLayout_3.setContentsMargins(0, 4, 0, 0)
-        self.horizontalSpacer_68 = QSpacerItem(106, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_68 = QSpacerItem(106, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_3.addItem(self.horizontalSpacer_68)
 
@@ -1865,7 +1870,7 @@ class Ui_MainWindow(object):
         self.workflow_view1_seemore_bn.setObjectName(u"workflow_view1_seemore_bn")
         self.workflow_view1_seemore_bn.setMinimumSize(QSize(140, 30))
         font9 = QFont()
-        font9.setFamily(u"DejaVu Math TeX Gyre")
+        font9.setFamilies([u"DejaVu Math TeX Gyre"])
         font9.setPointSize(11)
         self.workflow_view1_seemore_bn.setFont(font9)
         self.workflow_view1_seemore_bn.setStyleSheet(u"QPushButton {\n"
@@ -1887,7 +1892,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_29.addWidget(self.frame_17)
 
-        self.verticalSpacer_33 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_33 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_29.addItem(self.verticalSpacer_33)
 
@@ -1899,7 +1904,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_29.addWidget(self.workflow_view1_name_label)
 
-        self.verticalSpacer_39 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_39 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_29.addItem(self.verticalSpacer_39)
 
@@ -1918,7 +1923,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_30 = QVBoxLayout(self.workflow_view2_frame)
         self.verticalLayout_30.setObjectName(u"verticalLayout_30")
         self.verticalLayout_30.setContentsMargins(-1, 17, -1, -1)
-        self.verticalSpacer_36 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_36 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_30.addItem(self.verticalSpacer_36)
 
@@ -1939,7 +1944,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_22.setSpacing(0)
         self.horizontalLayout_22.setObjectName(u"horizontalLayout_22")
         self.horizontalLayout_22.setContentsMargins(0, 4, 0, 0)
-        self.horizontalSpacer_62 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_62 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_22.addItem(self.horizontalSpacer_62)
 
@@ -1966,7 +1971,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_30.addWidget(self.frame_59)
 
-        self.verticalSpacer_35 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_35 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_30.addItem(self.verticalSpacer_35)
 
@@ -1978,7 +1983,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_30.addWidget(self.workflow_view2_name_label)
 
-        self.verticalSpacer_40 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_40 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_30.addItem(self.verticalSpacer_40)
 
@@ -1995,7 +2000,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_31.setSpacing(6)
         self.verticalLayout_31.setObjectName(u"verticalLayout_31")
         self.verticalLayout_31.setContentsMargins(-1, 17, -1, -1)
-        self.verticalSpacer_37 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_37 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_31.addItem(self.verticalSpacer_37)
 
@@ -2016,7 +2021,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_27.setSpacing(0)
         self.horizontalLayout_27.setObjectName(u"horizontalLayout_27")
         self.horizontalLayout_27.setContentsMargins(0, 4, 0, 0)
-        self.horizontalSpacer_69 = QSpacerItem(106, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_69 = QSpacerItem(106, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_27.addItem(self.horizontalSpacer_69)
 
@@ -2043,7 +2048,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_31.addWidget(self.frame_18)
 
-        self.verticalSpacer_38 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_38 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_31.addItem(self.verticalSpacer_38)
 
@@ -2055,7 +2060,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_31.addWidget(self.workflow_view3_name_label)
 
-        self.verticalSpacer_41 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_41 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_31.addItem(self.verticalSpacer_41)
 
@@ -2075,7 +2080,7 @@ class Ui_MainWindow(object):
 "	border: 2px solid rgb(0, 0, 0);\n"
 "}")
         icon3 = QIcon()
-        icon3.addFile(u"images/bn_images/right_arrow.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon3.addFile(u"images/bn_images/right_arrow.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.right_arrow_bn.setIcon(icon3)
         self.right_arrow_bn.setIconSize(QSize(32, 32))
         self.workflow_view4_frame = QFrame(self.page_create_yaml_mid_frame)
@@ -2091,7 +2096,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_43.setSpacing(6)
         self.verticalLayout_43.setObjectName(u"verticalLayout_43")
         self.verticalLayout_43.setContentsMargins(-1, 17, -1, -1)
-        self.verticalSpacer_42 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_42 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_43.addItem(self.verticalSpacer_42)
 
@@ -2112,7 +2117,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_30.setSpacing(0)
         self.horizontalLayout_30.setObjectName(u"horizontalLayout_30")
         self.horizontalLayout_30.setContentsMargins(0, 4, 0, 0)
-        self.horizontalSpacer_70 = QSpacerItem(106, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_70 = QSpacerItem(106, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_30.addItem(self.horizontalSpacer_70)
 
@@ -2139,7 +2144,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_43.addWidget(self.frame_42)
 
-        self.verticalSpacer_43 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_43 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_43.addItem(self.verticalSpacer_43)
 
@@ -2151,7 +2156,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_43.addWidget(self.workflow_view4_name_label)
 
-        self.verticalSpacer_44 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_44 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_43.addItem(self.verticalSpacer_44)
 
@@ -2168,7 +2173,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_44.setSpacing(6)
         self.verticalLayout_44.setObjectName(u"verticalLayout_44")
         self.verticalLayout_44.setContentsMargins(-1, 17, -1, -1)
-        self.verticalSpacer_45 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_45 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_44.addItem(self.verticalSpacer_45)
 
@@ -2189,7 +2194,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_31.setSpacing(0)
         self.horizontalLayout_31.setObjectName(u"horizontalLayout_31")
         self.horizontalLayout_31.setContentsMargins(0, 4, 0, 0)
-        self.horizontalSpacer_71 = QSpacerItem(106, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_71 = QSpacerItem(106, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_31.addItem(self.horizontalSpacer_71)
 
@@ -2216,7 +2221,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_44.addWidget(self.frame_53)
 
-        self.verticalSpacer_46 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_46 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_44.addItem(self.verticalSpacer_46)
 
@@ -2228,7 +2233,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_44.addWidget(self.workflow_view5_name_label)
 
-        self.verticalSpacer_47 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_47 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_44.addItem(self.verticalSpacer_47)
 
@@ -2245,7 +2250,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_45.setSpacing(6)
         self.verticalLayout_45.setObjectName(u"verticalLayout_45")
         self.verticalLayout_45.setContentsMargins(-1, 17, -1, -1)
-        self.verticalSpacer_48 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_48 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_45.addItem(self.verticalSpacer_48)
 
@@ -2266,7 +2271,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_32.setSpacing(0)
         self.horizontalLayout_32.setObjectName(u"horizontalLayout_32")
         self.horizontalLayout_32.setContentsMargins(0, 4, 0, 0)
-        self.horizontalSpacer_72 = QSpacerItem(106, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_72 = QSpacerItem(106, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_32.addItem(self.horizontalSpacer_72)
 
@@ -2293,7 +2298,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_45.addWidget(self.frame_56)
 
-        self.verticalSpacer_49 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_49 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_45.addItem(self.verticalSpacer_49)
 
@@ -2305,7 +2310,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_45.addWidget(self.workflow_view6_name_label)
 
-        self.verticalSpacer_50 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_50 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_45.addItem(self.verticalSpacer_50)
 
@@ -2322,7 +2327,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_46.setSpacing(6)
         self.verticalLayout_46.setObjectName(u"verticalLayout_46")
         self.verticalLayout_46.setContentsMargins(-1, 17, -1, -1)
-        self.verticalSpacer_51 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_51 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_46.addItem(self.verticalSpacer_51)
 
@@ -2343,7 +2348,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_33.setSpacing(0)
         self.horizontalLayout_33.setObjectName(u"horizontalLayout_33")
         self.horizontalLayout_33.setContentsMargins(0, 4, 0, 0)
-        self.horizontalSpacer_73 = QSpacerItem(106, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_73 = QSpacerItem(106, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_33.addItem(self.horizontalSpacer_73)
 
@@ -2370,7 +2375,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_46.addWidget(self.frame_60)
 
-        self.verticalSpacer_52 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_52 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_46.addItem(self.verticalSpacer_52)
 
@@ -2382,7 +2387,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_46.addWidget(self.workflow_view7_name_label)
 
-        self.verticalSpacer_53 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_53 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_46.addItem(self.verticalSpacer_53)
 
@@ -2403,7 +2408,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_47.setSpacing(6)
         self.verticalLayout_47.setObjectName(u"verticalLayout_47")
         self.verticalLayout_47.setContentsMargins(-1, 17, -1, -1)
-        self.verticalSpacer_54 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_54 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_47.addItem(self.verticalSpacer_54)
 
@@ -2424,7 +2429,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_36.setSpacing(0)
         self.horizontalLayout_36.setObjectName(u"horizontalLayout_36")
         self.horizontalLayout_36.setContentsMargins(0, 4, 0, 0)
-        self.horizontalSpacer_78 = QSpacerItem(106, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_78 = QSpacerItem(106, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_36.addItem(self.horizontalSpacer_78)
 
@@ -2451,7 +2456,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_47.addWidget(self.frame_62)
 
-        self.verticalSpacer_55 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_55 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_47.addItem(self.verticalSpacer_55)
 
@@ -2463,7 +2468,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_47.addWidget(self.workflow_view8_name_label)
 
-        self.verticalSpacer_56 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_56 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_47.addItem(self.verticalSpacer_56)
 
@@ -2522,7 +2527,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_86.addWidget(self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INPUT, 0, 2, 1, 1)
 
-        self.horizontalSpacer_64 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_64 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_86.addItem(self.horizontalSpacer_64, 0, 3, 1, 1)
 
@@ -2534,7 +2539,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
-        self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INFO.setProperty("scaledContents", True)
+        self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INFO.setProperty(u"scaledContents", True)
 
         self.gridLayout_86.addWidget(self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INFO, 0, 1, 1, 1)
 
@@ -2558,7 +2563,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_28.addWidget(self.goptions_advanced_label, 1, 0, 1, 1)
 
-        self.horizontalSpacer_19 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_19 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_28.addItem(self.horizontalSpacer_19, 1, 2, 1, 1)
 
@@ -2576,7 +2581,7 @@ class Ui_MainWindow(object):
 "	border: 2px solid rgb(0, 0, 0);\n"
 "}")
         icon4 = QIcon()
-        icon4.addFile(u"images/bn_images/down_arrow.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon4.addFile(u"images/bn_images/down_arrow.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.goptions_advanced_bn.setIcon(icon4)
 
         self.gridLayout_28.addWidget(self.goptions_advanced_bn, 1, 1, 1, 1)
@@ -2593,11 +2598,11 @@ class Ui_MainWindow(object):
         self.formLayout = QFormLayout(self.goptions_advanced_options_frame)
         self.formLayout.setObjectName(u"formLayout")
         self.formLayout.setContentsMargins(0, 0, 0, 0)
-        self.verticalSpacer_3 = QSpacerItem(15, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_3 = QSpacerItem(15, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.formLayout.setItem(0, QFormLayout.LabelRole, self.verticalSpacer_3)
 
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.formLayout.setItem(1, QFormLayout.LabelRole, self.verticalSpacer)
 
@@ -2621,11 +2626,11 @@ class Ui_MainWindow(object):
 
         self.gridLayout_2.addWidget(self.label, 0, 0, 1, 1)
 
-        self.horizontalSpacer_63 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_63 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_2.addItem(self.horizontalSpacer_63, 1, 1, 1, 1)
 
-        self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_2.addItem(self.verticalSpacer_4, 4, 0, 1, 1)
 
@@ -2668,7 +2673,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_5.addWidget(self.SYSTEM__SEED__INPUT, 3, 2, 1, 1)
 
-        self.horizontalSpacer_2 = QSpacerItem(568, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_2 = QSpacerItem(568, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_5.addItem(self.horizontalSpacer_2, 1, 3, 1, 1)
 
@@ -2738,7 +2743,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_24.addWidget(self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT, 0, 2, 1, 1)
 
-        self.horizontalSpacer_15 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_15 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_24.addItem(self.horizontalSpacer_15, 0, 3, 1, 1)
 
@@ -2807,7 +2812,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.train_disable_checkpoint_label, 4, 0, 1, 2)
 
-        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout.addItem(self.verticalSpacer_2, 3, 0, 1, 2)
 
@@ -2832,7 +2837,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__ENABLE__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
-        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setProperty("scaledContents", True)
+        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setProperty(u"scaledContents", True)
 
         self.horizontalLayout_26.addWidget(self.MODEL__BMZ__EXPORT__ENABLE__INFO)
 
@@ -2846,7 +2851,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_26.addWidget(self.MODEL__BMZ__EXPORT__ENABLE__INPUT)
 
-        self.horizontalSpacer_56 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_56 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_26.addItem(self.horizontalSpacer_56)
 
@@ -2982,7 +2987,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_26.addWidget(self.LOAD_PRETRAINED_MODEL__INFO, 1, 2, 1, 1)
 
-        self.horizontalSpacer_10 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_10 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_26.addItem(self.horizontalSpacer_10, 1, 4, 1, 1)
 
@@ -2996,7 +3001,7 @@ class Ui_MainWindow(object):
         self.frame_21.setFrameShadow(QFrame.Raised)
         self.gridLayout_27 = QGridLayout(self.frame_21)
         self.gridLayout_27.setObjectName(u"gridLayout_27")
-        self.horizontalSpacer_28 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_28 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_27.addItem(self.horizontalSpacer_28, 3, 7, 1, 1)
 
@@ -3040,7 +3045,7 @@ class Ui_MainWindow(object):
         self.goptions_browse_yaml_path_info.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
-        self.goptions_browse_yaml_path_info.setProperty("scaledContents", True)
+        self.goptions_browse_yaml_path_info.setProperty(u"scaledContents", True)
 
         self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_info, 3, 3, 1, 1)
 
@@ -3099,7 +3104,7 @@ class Ui_MainWindow(object):
         self.formLayout_4.setHorizontalSpacing(0)
         self.formLayout_4.setVerticalSpacing(9)
         self.formLayout_4.setContentsMargins(0, 9, 0, 9)
-        self.verticalSpacer_60 = QSpacerItem(15, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_60 = QSpacerItem(15, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.formLayout_4.setItem(1, QFormLayout.LabelRole, self.verticalSpacer_60)
 
@@ -3131,7 +3136,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__TAGS__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
-        self.MODEL__BMZ__EXPORT__TAGS__INFO.setProperty("scaledContents", True)
+        self.MODEL__BMZ__EXPORT__TAGS__INFO.setProperty(u"scaledContents", True)
 
         self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__TAGS__INFO, 6, 1, 1, 1)
 
@@ -3157,7 +3162,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__AUTHORS__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
-        self.MODEL__BMZ__EXPORT__AUTHORS__INFO.setProperty("scaledContents", True)
+        self.MODEL__BMZ__EXPORT__AUTHORS__INFO.setProperty(u"scaledContents", True)
 
         self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__AUTHORS__INFO, 4, 1, 1, 1)
 
@@ -3169,7 +3174,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__CITE__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
-        self.MODEL__BMZ__EXPORT__CITE__INFO.setProperty("scaledContents", True)
+        self.MODEL__BMZ__EXPORT__CITE__INFO.setProperty(u"scaledContents", True)
 
         self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__CITE__INFO, 7, 1, 1, 1)
 
@@ -3187,7 +3192,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
-        self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO.setProperty("scaledContents", True)
+        self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO.setProperty(u"scaledContents", True)
 
         self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO, 3, 1, 1, 1)
 
@@ -3221,7 +3226,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__LICENSE__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
-        self.MODEL__BMZ__EXPORT__LICENSE__INFO.setProperty("scaledContents", True)
+        self.MODEL__BMZ__EXPORT__LICENSE__INFO.setProperty(u"scaledContents", True)
 
         self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__LICENSE__INFO, 5, 1, 1, 1)
 
@@ -3233,7 +3238,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setProperty("scaledContents", True)
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setProperty(u"scaledContents", True)
 
         self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO, 8, 1, 1, 1)
 
@@ -3243,7 +3248,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DESCRIPTION__LABEL, 3, 0, 1, 1)
 
-        self.horizontalSpacer_42 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_42 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_85.addItem(self.horizontalSpacer_42, 8, 4, 1, 1)
 
@@ -3285,7 +3290,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
-        self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO.setProperty("scaledContents", True)
+        self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO.setProperty(u"scaledContents", True)
 
         self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO, 2, 1, 1, 1)
 
@@ -3306,7 +3311,7 @@ class Ui_MainWindow(object):
 
         self.formLayout_4.setWidget(1, QFormLayout.FieldRole, self.MODEL__BMZ__EXPORT__FRAME_inside)
 
-        self.verticalSpacer_61 = QSpacerItem(15, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_61 = QSpacerItem(15, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.formLayout_4.setItem(0, QFormLayout.LabelRole, self.verticalSpacer_61)
 
@@ -3339,11 +3344,11 @@ class Ui_MainWindow(object):
         self.gridLayout_14.setSpacing(9)
         self.gridLayout_14.setObjectName(u"gridLayout_14")
         self.gridLayout_14.setContentsMargins(9, -1, -1, -1)
-        self.verticalSpacer_11 = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_11 = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_14.addItem(self.verticalSpacer_11, 2, 0, 1, 1)
 
-        self.horizontalSpacer_18 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_18 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_14.addItem(self.horizontalSpacer_18, 0, 1, 1, 1)
 
@@ -3373,7 +3378,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_12.addWidget(self.TRAIN__ENABLE__INPUT)
 
-        self.horizontalSpacer_17 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_17 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_12.addItem(self.horizontalSpacer_17)
 
@@ -3403,7 +3408,7 @@ class Ui_MainWindow(object):
         self.scrollAreaWidgetContents_3.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout_3 = QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.verticalSpacer_7 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_7 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_3.addItem(self.verticalSpacer_7, 12, 9, 1, 1)
 
@@ -3523,7 +3528,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_LAYERS__LABEL, 0, 0, 1, 1)
 
-        self.horizontalSpacer_88 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_88 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_82.addItem(self.horizontalSpacer_88, 0, 3, 1, 1)
 
@@ -3804,7 +3809,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__CUSTOM_STD__INPUT, 16, 4, 1, 1)
 
-        self.horizontalSpacer_8 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_8 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_15.addItem(self.horizontalSpacer_8, 3, 5, 1, 1)
 
@@ -4003,7 +4008,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_22.addWidget(self.label_41, 3, 0, 1, 1)
 
-        self.horizontalSpacer_13 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_13 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_22.addItem(self.horizontalSpacer_13, 0, 3, 1, 1)
 
@@ -4167,7 +4172,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__CALCULATION__LABEL, 9, 0, 1, 1)
 
-        self.verticalSpacer_14 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_14 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_29.addItem(self.verticalSpacer_14, 28, 0, 1, 1)
 
@@ -4612,7 +4617,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addWidget(self.label_160, 24, 0, 1, 1)
 
-        self.horizontalSpacer_21 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_21 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_29.addItem(self.horizontalSpacer_21, 9, 3, 1, 1)
 
@@ -4626,7 +4631,7 @@ class Ui_MainWindow(object):
         self.gridLayout_74 = QGridLayout(self.frame_61)
         self.gridLayout_74.setObjectName(u"gridLayout_74")
         self.gridLayout_74.setContentsMargins(0, 0, 0, 0)
-        self.horizontalSpacer_74 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_74 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_74.addItem(self.horizontalSpacer_74, 0, 3, 1, 1)
 
@@ -4955,7 +4960,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__RESIZE__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__RESIZE__INFO.setMaximumSize(QSize(30, 30))
         font10 = QFont()
-        font10.setFamily(u"URW Gothic [urw]")
+        font10.setFamilies([u"URW Gothic [urw]"])
         self.DATA__PREPROCESS__RESIZE__INFO.setFont(font10)
         self.DATA__PREPROCESS__RESIZE__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
@@ -5229,7 +5234,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT, 6, 3, 1, 1)
 
-        self.horizontalSpacer_75 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_75 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_71.addItem(self.horizontalSpacer_75, 0, 4, 1, 1)
 
@@ -5585,7 +5590,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SHUFFLE_VAL_DATA_EACH_EPOCH__INPUT, 6, 2, 1, 1)
 
-        self.horizontalSpacer_16 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_16 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_25.addItem(self.horizontalSpacer_16, 1, 3, 1, 1)
 
@@ -7424,7 +7429,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_11.addWidget(self.DATA__VAL__CROSS_VAL_NFOLD__INPUT, 3, 3, 1, 1)
 
-        self.verticalSpacer_15 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_15 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_11.addItem(self.verticalSpacer_15, 15, 0, 1, 1)
 
@@ -7502,7 +7507,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_11.addWidget(self.validation_type_info, 0, 1, 1, 1)
 
-        self.horizontalSpacer_54 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_54 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_11.addItem(self.horizontalSpacer_54, 0, 4, 1, 1)
 
@@ -7571,7 +7576,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_4.addWidget(self.convnext_label, 22, 0, 1, 1)
 
-        self.verticalSpacer_6 = QSpacerItem(20, 165, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_6 = QSpacerItem(20, 165, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_4.addItem(self.verticalSpacer_6, 29, 0, 1, 1)
 
@@ -7615,7 +7620,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_69.addWidget(self.AUTOMATIC__AUG__INPUT, 0, 2, 1, 1)
 
-        self.horizontalSpacer_65 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_65 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_69.addItem(self.horizontalSpacer_65, 0, 3, 1, 1)
 
@@ -7811,7 +7816,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__REPLICATE__INFO, 0, 2, 1, 1)
 
-        self.horizontalSpacer_11 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_11 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_20.addItem(self.horizontalSpacer_11, 0, 6, 1, 1)
 
@@ -8088,7 +8093,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_13.addWidget(self.MODEL__ARCHITECTURE__INFO, 4, 1, 1, 1)
 
-        self.horizontalSpacer_6 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_6 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_13.addItem(self.horizontalSpacer_6, 2, 3, 1, 1)
 
@@ -8134,7 +8139,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_23.addWidget(self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT, 8, 2, 1, 1)
 
-        self.horizontalSpacer_14 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_14 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_23.addItem(self.horizontalSpacer_14, 5, 3, 1, 1)
 
@@ -8627,7 +8632,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_21.addWidget(self.DATA__VAL__RESOLUTION__INPUT, 3, 3, 1, 3)
 
-        self.horizontalSpacer_12 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_12 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_21.addItem(self.horizontalSpacer_12, 3, 6, 1, 1)
 
@@ -8789,7 +8794,7 @@ class Ui_MainWindow(object):
         self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.addItem("")
         self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.addItem("")
         self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.setObjectName(u"DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
         sizePolicy2.setHorizontalStretch(0)
         sizePolicy2.setVerticalStretch(0)
         sizePolicy2.setHeightForWidth(self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.sizePolicy().hasHeightForWidth())
@@ -8802,7 +8807,7 @@ class Ui_MainWindow(object):
 
         self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT = QLineEdit(self.frame_19)
         self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT.setObjectName(u"DATA__VAL__FILTER_SAMPLES__PROPS__INPUT")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         sizePolicy3.setHorizontalStretch(0)
         sizePolicy3.setVerticalStretch(0)
         sizePolicy3.setHeightForWidth(self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT.sizePolicy().hasHeightForWidth())
@@ -8893,7 +8898,7 @@ class Ui_MainWindow(object):
 
         self.formLayout_2.setWidget(0, QFormLayout.FieldRole, self.train_advanced_options_frame_2)
 
-        self.verticalSpacer_5 = QSpacerItem(10, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_5 = QSpacerItem(10, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.formLayout_2.setItem(0, QFormLayout.LabelRole, self.verticalSpacer_5)
 
@@ -8924,7 +8929,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_6.addWidget(self.train_data_gt_input_browse_bn, 1, 4, 1, 1)
 
-        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_6.addItem(self.horizontalSpacer_5, 0, 5, 1, 1)
 
@@ -9074,7 +9079,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_10.addWidget(self.train_advanced_bn)
 
-        self.horizontalSpacer_7 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_7 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_10.addItem(self.horizontalSpacer_7)
 
@@ -9121,7 +9126,7 @@ class Ui_MainWindow(object):
         self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 583, 373))
         self.gridLayout_18 = QGridLayout(self.scrollAreaWidgetContents_6)
         self.gridLayout_18.setObjectName(u"gridLayout_18")
-        self.verticalSpacer_8 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_8 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_18.addItem(self.verticalSpacer_8, 6, 0, 1, 1)
 
@@ -9139,7 +9144,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_18.addWidget(self.label_14, 3, 0, 1, 1)
 
-        self.horizontalSpacer_3 = QSpacerItem(619, 27, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_3 = QSpacerItem(619, 27, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_18.addItem(self.horizontalSpacer_3, 1, 1, 1, 1)
 
@@ -9174,7 +9179,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_30.addWidget(self.label_18, 1, 0, 1, 1)
 
-        self.horizontalSpacer_23 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_23 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_30.addItem(self.horizontalSpacer_23, 0, 3, 1, 1)
 
@@ -9286,7 +9291,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_31.addWidget(self.DATA__TRAIN__CHECK_DATA__INFO, 1, 2, 1, 2)
 
-        self.horizontalSpacer_25 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_25 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_31.addItem(self.horizontalSpacer_25, 1, 7, 1, 1)
 
@@ -9380,7 +9385,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_17.addWidget(self.label_59, 1, 0, 1, 1)
 
-        self.horizontalSpacer_9 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_9 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_17.addItem(self.horizontalSpacer_9, 1, 1, 1, 1)
 
@@ -9390,7 +9395,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_17.addWidget(self.label_29, 3, 0, 1, 1)
 
-        self.verticalSpacer_9 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_9 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_17.addItem(self.verticalSpacer_9, 5, 0, 1, 1)
 
@@ -9445,7 +9450,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_32.addWidget(self.PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__INPUT, 6, 2, 1, 1)
 
-        self.horizontalSpacer_22 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_22 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_32.addItem(self.horizontalSpacer_22, 3, 3, 1, 1)
 
@@ -9555,7 +9560,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_34.addWidget(self.MODEL__N_CLASSES__INST_SEG__LABEL, 0, 0, 1, 1)
 
-        self.horizontalSpacer_31 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_31 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_34.addItem(self.horizontalSpacer_31, 0, 3, 1, 1)
 
@@ -9583,7 +9588,7 @@ class Ui_MainWindow(object):
         self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 468, 217))
         self.gridLayout_19 = QGridLayout(self.scrollAreaWidgetContents_7)
         self.gridLayout_19.setObjectName(u"gridLayout_19")
-        self.horizontalSpacer_24 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_24 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_19.addItem(self.horizontalSpacer_24, 0, 1, 1, 1)
 
@@ -9595,7 +9600,7 @@ class Ui_MainWindow(object):
         self.frame_34.setFrameShadow(QFrame.Raised)
         self.gridLayout_35 = QGridLayout(self.frame_34)
         self.gridLayout_35.setObjectName(u"gridLayout_35")
-        self.horizontalSpacer_32 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_32 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_35.addItem(self.horizontalSpacer_32, 0, 3, 1, 1)
 
@@ -9654,7 +9659,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_19.addWidget(self.frame_34, 1, 0, 1, 1)
 
-        self.verticalSpacer_10 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_10 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_19.addItem(self.verticalSpacer_10, 4, 0, 1, 1)
 
@@ -9780,7 +9785,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_48.addWidget(self.PROBLEM__DENOISING__N2V_MANIPULATOR__INPUT, 1, 2, 1, 1)
 
-        self.horizontalSpacer_37 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_37 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_48.addItem(self.horizontalSpacer_37, 1, 3, 1, 1)
 
@@ -9847,7 +9852,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_49.addWidget(self.frame_44, 1, 0, 1, 1)
 
-        self.horizontalSpacer_38 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_38 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_49.addItem(self.horizontalSpacer_38, 0, 1, 1, 1)
 
@@ -9857,7 +9862,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_49.addWidget(self.label_15, 0, 0, 1, 1)
 
-        self.verticalSpacer_19 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_19 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_49.addItem(self.verticalSpacer_19, 2, 0, 1, 1)
 
@@ -9901,7 +9906,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_56.addWidget(self.sr_upscaling_label, 0, 0, 1, 1)
 
-        self.horizontalSpacer_53 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_53 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_56.addItem(self.horizontalSpacer_53, 0, 3, 1, 1)
 
@@ -9926,11 +9931,11 @@ class Ui_MainWindow(object):
 
         self.gridLayout_50.addWidget(self.frame_48, 1, 0, 1, 1)
 
-        self.verticalSpacer_21 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_21 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_50.addItem(self.verticalSpacer_21, 4, 0, 1, 1)
 
-        self.horizontalSpacer_40 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_40 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_50.addItem(self.horizontalSpacer_40, 1, 1, 1, 1)
 
@@ -10041,7 +10046,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_57.addWidget(self.pretext_task_label, 0, 0, 1, 1)
 
-        self.horizontalSpacer_46 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_46 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_57.addItem(self.horizontalSpacer_46, 1, 3, 1, 1)
 
@@ -10096,11 +10101,11 @@ class Ui_MainWindow(object):
 
         self.gridLayout_51.addWidget(self.pretext_frame, 3, 0, 1, 1)
 
-        self.horizontalSpacer_41 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_41 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_51.addItem(self.horizontalSpacer_41, 3, 1, 1, 1)
 
-        self.verticalSpacer_22 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_22 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_51.addItem(self.verticalSpacer_22, 4, 0, 1, 1)
 
@@ -10163,14 +10168,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_84.addWidget(self.MODEL__N_CLASSES__CLS__INFO, 0, 1, 1, 1)
 
-        self.horizontalSpacer_20 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_20 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_84.addItem(self.horizontalSpacer_20, 0, 3, 1, 1)
 
 
         self.gridLayout_52.addWidget(self.frame_79, 1, 0, 1, 3)
 
-        self.verticalSpacer_23 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_23 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_52.addItem(self.verticalSpacer_23, 2, 0, 1, 1)
 
@@ -10197,7 +10202,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_76.addWidget(self.label_46, 0, 0, 1, 1)
 
-        self.verticalSpacer_13 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_13 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_76.addItem(self.verticalSpacer_13, 2, 0, 1, 1)
 
@@ -10235,7 +10240,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_77.addWidget(self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INFO, 0, 1, 1, 1)
 
-        self.horizontalSpacer_79 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_79 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_77.addItem(self.horizontalSpacer_79, 0, 3, 1, 1)
 
@@ -10266,11 +10271,11 @@ class Ui_MainWindow(object):
         self.gridLayout_36 = QGridLayout(self.test_general_frame)
         self.gridLayout_36.setSpacing(9)
         self.gridLayout_36.setObjectName(u"gridLayout_36")
-        self.verticalSpacer_12 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_12 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_36.addItem(self.verticalSpacer_12, 1, 0, 1, 1)
 
-        self.horizontalSpacer_27 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_27 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_36.addItem(self.horizontalSpacer_27, 0, 1, 1, 1)
 
@@ -10300,7 +10305,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_13.addWidget(self.TEST__ENABLE__INPUT)
 
-        self.horizontalSpacer_26 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_26 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_13.addItem(self.horizontalSpacer_26)
 
@@ -10335,7 +10340,7 @@ class Ui_MainWindow(object):
         self.formLayout_3.setHorizontalSpacing(6)
         self.formLayout_3.setVerticalSpacing(6)
         self.formLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.verticalSpacer_32 = QSpacerItem(10, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_32 = QSpacerItem(10, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.formLayout_3.setItem(0, QFormLayout.LabelRole, self.verticalSpacer_32)
 
@@ -10380,7 +10385,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_53.addWidget(self.TEST__BY_CHUNKS__ENABLE__INPUT, 1, 2, 1, 1)
 
-        self.horizontalSpacer_44 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_44 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_53.addItem(self.horizontalSpacer_44, 2, 3, 1, 1)
 
@@ -10456,7 +10461,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_53.addWidget(self.TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INPUT, 6, 2, 1, 1)
 
-        self.verticalSpacer_25 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_25 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_53.addItem(self.verticalSpacer_25, 7, 2, 1, 1)
 
@@ -10565,7 +10570,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_54.addWidget(self.TEST__FULL_IMG__INFO, 0, 1, 1, 1)
 
-        self.verticalSpacer_24 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_24 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_54.addItem(self.verticalSpacer_24, 2, 0, 1, 1)
 
@@ -10596,7 +10601,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_54.addWidget(self.TEST__REUSE_PREDICTIONS__INFO, 1, 1, 1, 1)
 
-        self.horizontalSpacer_43 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_43 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_54.addItem(self.horizontalSpacer_43, 0, 3, 1, 1)
 
@@ -10637,7 +10642,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_34.addWidget(self.DATA__PREPROCESS__TEST__INPUT)
 
-        self.horizontalSpacer_76 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_76 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_34.addItem(self.horizontalSpacer_76)
 
@@ -10737,7 +10742,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL, 7, 0, 1, 1)
 
-        self.horizontalSpacer_55 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_55 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_70.addItem(self.horizontalSpacer_55, 0, 3, 1, 1)
 
@@ -11059,7 +11064,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_43.addWidget(self.DATA__TEST__OVERLAP__INFO, 1, 1, 1, 1)
 
-        self.horizontalSpacer_34 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_34 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_43.addItem(self.horizontalSpacer_34, 1, 4, 1, 1)
 
@@ -11211,7 +11216,7 @@ class Ui_MainWindow(object):
         self.frame_55.setFrameShadow(QFrame.Raised)
         self.gridLayout_63 = QGridLayout(self.frame_55)
         self.gridLayout_63.setObjectName(u"gridLayout_63")
-        self.horizontalSpacer_57 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_57 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_63.addItem(self.horizontalSpacer_57, 0, 3, 1, 1)
 
@@ -11792,7 +11797,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__INFO, 9, 1, 1, 1)
 
-        self.horizontalSpacer_77 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_77 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_75.addItem(self.horizontalSpacer_77, 0, 4, 1, 1)
 
@@ -11889,7 +11894,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_14.addWidget(self.test_advanced_bn)
 
-        self.horizontalSpacer_29 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_29 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_14.addItem(self.horizontalSpacer_29)
 
@@ -12053,14 +12058,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_38.addWidget(self.DATA__TEST__IN_MEMORY__INFO, 5, 2, 1, 1)
 
-        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_38.addItem(self.horizontalSpacer_4, 2, 5, 1, 1)
 
 
         self.gridLayout_37.addWidget(self.frame_36, 1, 0, 1, 2)
 
-        self.verticalSpacer_17 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_17 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_37.addItem(self.verticalSpacer_17, 4, 0, 1, 1)
 
@@ -12117,7 +12122,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_42.addWidget(self.sem_seg_check_data_label, 0, 0, 1, 1)
 
-        self.horizontalSpacer_33 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_33 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_42.addItem(self.horizontalSpacer_33, 0, 3, 1, 1)
 
@@ -12221,7 +12226,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_60.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__INFO, 2, 1, 1, 1)
 
-        self.horizontalSpacer_51 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_51 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_60.addItem(self.horizontalSpacer_51, 0, 3, 1, 1)
 
@@ -12241,11 +12246,11 @@ class Ui_MainWindow(object):
 
         self.gridLayout_61.addWidget(self.sem_seg_post_proc_frame, 4, 0, 1, 1)
 
-        self.horizontalSpacer_30 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_30 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_61.addItem(self.horizontalSpacer_30, 0, 1, 1, 1)
 
-        self.verticalSpacer_18 = QSpacerItem(20, 179, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_18 = QSpacerItem(20, 179, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_61.addItem(self.verticalSpacer_18, 5, 0, 1, 1)
 
@@ -12314,7 +12319,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_45.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INPUT, 2, 2, 1, 1)
 
-        self.horizontalSpacer_36 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_36 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_45.addItem(self.horizontalSpacer_36, 0, 3, 1, 1)
 
@@ -12723,7 +12728,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__INPUT, 4, 2, 1, 1)
 
-        self.horizontalSpacer_48 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_48 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_58.addItem(self.horizontalSpacer_48, 13, 3, 1, 1)
 
@@ -12850,11 +12855,11 @@ class Ui_MainWindow(object):
 
         self.gridLayout_55.addWidget(self.TEST__MATCHING_STATS_THS_COLORED_IMG__INPUT, 2, 2, 1, 1)
 
-        self.verticalSpacer_26 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_26 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_55.addItem(self.verticalSpacer_26, 3, 0, 1, 1)
 
-        self.horizontalSpacer_49 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_49 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_55.addItem(self.horizontalSpacer_49, 1, 3, 1, 1)
 
@@ -13001,7 +13006,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INPUT, 7, 3, 1, 1)
 
-        self.horizontalSpacer_47 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_47 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_46.addItem(self.horizontalSpacer_47, 1, 4, 1, 1)
 
@@ -13156,14 +13161,14 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_23.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT)
 
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_23.addItem(self.horizontalSpacer)
 
 
         self.gridLayout_44.addWidget(self.frame_49, 1, 0, 1, 1)
 
-        self.horizontalSpacer_35 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_35 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_44.addItem(self.horizontalSpacer_35, 1, 1, 1, 1)
 
@@ -13205,7 +13210,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_47.addWidget(self.det_metrics_label, 4, 0, 1, 1)
 
-        self.horizontalSpacer_39 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_39 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_47.addItem(self.horizontalSpacer_39, 0, 1, 1, 1)
 
@@ -13216,7 +13221,7 @@ class Ui_MainWindow(object):
         self.det_metrics_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_41 = QGridLayout(self.det_metrics_frame)
         self.gridLayout_41.setObjectName(u"gridLayout_41")
-        self.horizontalSpacer_52 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_52 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_41.addItem(self.horizontalSpacer_52, 0, 3, 1, 1)
 
@@ -13272,7 +13277,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_47.addWidget(self.det_metrics_frame, 5, 0, 1, 1)
 
-        self.verticalSpacer_20 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_20 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_47.addItem(self.verticalSpacer_20, 6, 0, 1, 1)
 
@@ -13377,7 +13382,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_62.addWidget(self.TEST__DET_BLOB_LOG_MIN_SIGMA__INPUT, 3, 2, 1, 1)
 
-        self.horizontalSpacer_61 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_61 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_62.addItem(self.horizontalSpacer_61, 0, 3, 1, 1)
 
@@ -13804,7 +13809,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__LABEL, 16, 0, 1, 1)
 
-        self.horizontalSpacer_50 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_50 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_59.addItem(self.horizontalSpacer_50, 5, 3, 1, 1)
 
@@ -13918,7 +13923,7 @@ class Ui_MainWindow(object):
         self.scrollAreaWidgetContents_15.setGeometry(QRect(0, 0, 928, 301))
         self.gridLayout_64 = QGridLayout(self.scrollAreaWidgetContents_15)
         self.gridLayout_64.setObjectName(u"gridLayout_64")
-        self.verticalSpacer_27 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_27 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_64.addItem(self.verticalSpacer_27, 1, 0, 1, 1)
 
@@ -13928,7 +13933,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_64.addWidget(self.label_93, 0, 0, 1, 1)
 
-        self.horizontalSpacer_45 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_45 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_64.addItem(self.horizontalSpacer_45, 0, 1, 1, 1)
 
@@ -13958,11 +13963,11 @@ class Ui_MainWindow(object):
 
         self.gridLayout_65.addWidget(self.label_102, 0, 0, 1, 1)
 
-        self.horizontalSpacer_58 = QSpacerItem(540, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_58 = QSpacerItem(540, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_65.addItem(self.horizontalSpacer_58, 0, 1, 1, 1)
 
-        self.verticalSpacer_28 = QSpacerItem(20, 263, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_28 = QSpacerItem(20, 263, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_65.addItem(self.verticalSpacer_28, 1, 0, 1, 1)
 
@@ -13992,11 +13997,11 @@ class Ui_MainWindow(object):
 
         self.gridLayout_66.addWidget(self.label_106, 0, 0, 1, 1)
 
-        self.horizontalSpacer_59 = QSpacerItem(487, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_59 = QSpacerItem(487, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_66.addItem(self.horizontalSpacer_59, 0, 1, 1, 1)
 
-        self.verticalSpacer_29 = QSpacerItem(20, 263, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_29 = QSpacerItem(20, 263, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_66.addItem(self.verticalSpacer_29, 1, 0, 1, 1)
 
@@ -14026,11 +14031,11 @@ class Ui_MainWindow(object):
 
         self.gridLayout_67.addWidget(self.label_111, 0, 0, 1, 1)
 
-        self.horizontalSpacer_60 = QSpacerItem(566, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_60 = QSpacerItem(566, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_67.addItem(self.horizontalSpacer_60, 0, 1, 1, 1)
 
-        self.verticalSpacer_30 = QSpacerItem(20, 263, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_30 = QSpacerItem(20, 263, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_67.addItem(self.verticalSpacer_30, 1, 0, 1, 1)
 
@@ -14050,7 +14055,7 @@ class Ui_MainWindow(object):
         self.scrollAreaWidgetContents_21.setGeometry(QRect(0, 0, 926, 329))
         self.gridLayout_78 = QGridLayout(self.scrollAreaWidgetContents_21)
         self.gridLayout_78.setObjectName(u"gridLayout_78")
-        self.verticalSpacer_16 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_16 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_78.addItem(self.verticalSpacer_16, 2, 0, 1, 1)
 
@@ -14060,7 +14065,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_78.addWidget(self.label_58, 0, 0, 1, 1)
 
-        self.horizontalSpacer_80 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_80 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_78.addItem(self.horizontalSpacer_80, 0, 1, 1, 1)
 
@@ -14082,10 +14087,9 @@ class Ui_MainWindow(object):
         self.page_create_yaml_bottom_frame.setMinimumSize(QSize(0, 103))
         self.page_create_yaml_bottom_frame.setMaximumSize(QSize(16777215, 16777215))
         font11 = QFont()
-        font11.setFamily(u"DejaVu Math TeX Gyre")
+        font11.setFamilies([u"DejaVu Math TeX Gyre"])
         font11.setPointSize(12)
         font11.setBold(False)
-        font11.setWeight(50)
         self.page_create_yaml_bottom_frame.setFont(font11)
         self.page_create_yaml_bottom_frame.setFrameShape(QFrame.NoFrame)
         self.page_create_yaml_bottom_frame.setFrameShadow(QFrame.Raised)
@@ -14113,7 +14117,7 @@ class Ui_MainWindow(object):
 "	border: 2px solid rgb(0, 0, 0);\n"
 "}")
         icon5 = QIcon()
-        icon5.addFile(u"images/bn_images/back.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon5.addFile(u"images/bn_images/back.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.back_bn.setIcon(icon5)
         self.back_bn.setIconSize(QSize(80, 12))
 
@@ -14160,7 +14164,7 @@ class Ui_MainWindow(object):
 "	background-color: rgb(255,255,255);\n"
 "}")
         icon6 = QIcon()
-        icon6.addFile(u"images/bn_images/dot_enable.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon6.addFile(u"images/bn_images/dot_enable.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.window1_bn.setIcon(icon6)
         self.window1_bn.setIconSize(QSize(12, 12))
 
@@ -14181,7 +14185,7 @@ class Ui_MainWindow(object):
 "	background-color: rgb(255,255,255);\n"
 "}")
         icon7 = QIcon()
-        icon7.addFile(u"images/bn_images/dot_disable.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon7.addFile(u"images/bn_images/dot_disable.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.window2_bn.setIcon(icon7)
         self.window2_bn.setIconSize(QSize(12, 12))
 
@@ -14244,10 +14248,9 @@ class Ui_MainWindow(object):
         self.continue_bn.setMinimumSize(QSize(0, 40))
         self.continue_bn.setMaximumSize(QSize(220, 77))
         font12 = QFont()
-        font12.setFamily(u"DejaVu Math TeX Gyre")
+        font12.setFamilies([u"DejaVu Math TeX Gyre"])
         font12.setPointSize(12)
         font12.setBold(False)
-        font12.setWeight(50)
         font12.setStrikeOut(False)
         self.continue_bn.setFont(font12)
         self.continue_bn.setStyleSheet(u"QPushButton {\n"
@@ -15018,7 +15021,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.DATA__NORMALIZATION__TYPE__INFO.setText("")
         self.DATA__NORMALIZATION__CUSTOM_MEAN__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1.0", None))
-        self.DATA__NORMALIZATION__CUSTOM_MEAN__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"-1.0", None))
+        self.DATA__NORMALIZATION__CUSTOM_MEAN__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"-1.0", None))
 #if QT_CONFIG(tooltip)
         self.DATA__CHECK_GENERATORS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Save all data of the training and validation generators in a folder named 'gen_check' in the results directory</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -15050,7 +15053,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.check_gen_label.setText(QCoreApplication.translate("MainWindow", u"Check generator", None))
         self.DATA__NORMALIZATION__CUSTOM_STD__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1.0", None))
-        self.DATA__NORMALIZATION__CUSTOM_STD__INPUT.setProperty("html", QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.DATA__NORMALIZATION__CUSTOM_STD__INPUT.setProperty(u"html", QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
@@ -15087,13 +15090,13 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.label_37.setText(QCoreApplication.translate("MainWindow", u"Dropout values", None))
         self.MODEL__KERNEL_SIZE__INPUT.setText(QCoreApplication.translate("MainWindow", u"3", None))
-        self.MODEL__KERNEL_SIZE__INPUT.setProperty("html", QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.MODEL__KERNEL_SIZE__INPUT.setProperty(u"html", QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Ubuntu';\">3</span></p></body></html>", None))
         self.MODEL__FEATURE_MAPS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[16, 32, 64, 128, 256]", None))
-        self.MODEL__FEATURE_MAPS__INPUT.setProperty("html", QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.MODEL__FEATURE_MAPS__INPUT.setProperty(u"html", QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
@@ -15132,7 +15135,7 @@ class Ui_MainWindow(object):
         self.MODEL__UPSAMPLE_LAYER__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"upsampling", None))
 
         self.MODEL__DROPOUT_VALUES__INPUT.setText(QCoreApplication.translate("MainWindow", u"[0., 0., 0., 0., 0.]", None))
-        self.MODEL__DROPOUT_VALUES__INPUT.setProperty("html", QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.MODEL__DROPOUT_VALUES__INPUT.setProperty(u"html", QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
@@ -15154,7 +15157,7 @@ class Ui_MainWindow(object):
         self.MODEL__Z_DOWN__INPUT.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.MODEL__Z_DOWN__INPUT.setText(QCoreApplication.translate("MainWindow", u"[0, 0, 0, 0]", None))
-        self.MODEL__Z_DOWN__INPUT.setProperty("html", QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.MODEL__Z_DOWN__INPUT.setProperty(u"html", QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
@@ -15549,7 +15552,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.AUGMENTOR__MS_ROTATE_RATIO__INFO.setText("")
         self.AUGMENTOR__SHEAR_RANGE__INPUT.setText(QCoreApplication.translate("MainWindow", u"(-20, 20)", None))
-        self.AUGMENTOR__SHEAR_RANGE__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"(-20,-20)", None))
+        self.AUGMENTOR__SHEAR_RANGE__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"(-20,-20)", None))
 #if QT_CONFIG(tooltip)
         self.AUGMENTOR__E_ALPHA__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Strength of the distortion field. Higher values mean that pixels are moved further with respect to the distortion field\u2019s direction. Set this to around 10 times the value of sigma for visible effects. Each time the augmentation is applied a random value in the specified range will be selected. E.g. </span><span style=\" font-size:12pt; font-weight:600;\">(12,16)</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -15613,7 +15616,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__CONTRAST__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
 
         self.AUGMENTOR__MOTB_K_RANGE__INPUT.setText(QCoreApplication.translate("MainWindow", u"(8, 12)", None))
-        self.AUGMENTOR__MOTB_K_RANGE__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"(8, 12)", None))
+        self.AUGMENTOR__MOTB_K_RANGE__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"(8, 12)", None))
 #if QT_CONFIG(tooltip)
         self.label_73.setToolTip("")
 #endif // QT_CONFIG(tooltip)
@@ -15629,13 +15632,13 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__GAUSSIAN_NOISE_USE_INPUT_IMG_MEAN_AND_VAR__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
 
         self.AUGMENTOR__CNOISE_NB_ITERATIONS__INPUT.setText(QCoreApplication.translate("MainWindow", u"(1, 3)", None))
-        self.AUGMENTOR__CNOISE_NB_ITERATIONS__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"(1,3)", None))
+        self.AUGMENTOR__CNOISE_NB_ITERATIONS__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"(1,3)", None))
 #if QT_CONFIG(tooltip)
         self.label_103.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.label_103.setText(QCoreApplication.translate("MainWindow", u"Cutout", None))
         self.AUGMENTOR__MB_KERNEL__INPUT.setText(QCoreApplication.translate("MainWindow", u"(3, 7)", None))
-        self.AUGMENTOR__MB_KERNEL__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"(3,7)", None))
+        self.AUGMENTOR__MB_KERNEL__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"(3,7)", None))
 #if QT_CONFIG(tooltip)
         self.da_cutnoise_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
@@ -15674,9 +15677,9 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.AUGMENTOR__RANDOM_ROT__INFO.setText("")
         self.AUGMENTOR__G_SIGMA__INPUT.setText(QCoreApplication.translate("MainWindow", u"(1.0, 2.0)", None))
-        self.AUGMENTOR__G_SIGMA__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"(1.0,2.0)", None))
+        self.AUGMENTOR__G_SIGMA__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"(1.0,2.0)", None))
         self.AUGMENTOR__GRID_RATIO__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.6", None))
-        self.AUGMENTOR__GRID_RATIO__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"0.6", None))
+        self.AUGMENTOR__GRID_RATIO__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"0.6", None))
 #if QT_CONFIG(tooltip)
         self.da_elastic_mode_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
@@ -15701,7 +15704,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.label_78.setText(QCoreApplication.translate("MainWindow", u"Motion blur ", None))
         self.AUGMENTOR__PEPPER_AMOUNT__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.05", None))
-        self.AUGMENTOR__PEPPER_AMOUNT__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"0.05", None))
+        self.AUGMENTOR__PEPPER_AMOUNT__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"0.05", None))
 #if QT_CONFIG(tooltip)
         self.AUGMENTOR__CNOISE_NB_ITERATIONS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of areas to fill with noise. Each time the augmentation is applied a random value in the specified range will be selected. Values need to be positive integers. E.g. </span><span style=\" font-size:12pt; font-weight:600;\">(1,3)</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -15719,7 +15722,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.da_cuout_cval_label.setText(QCoreApplication.translate("MainWindow", u"Cutout cval", None))
         self.AUGMENTOR__E_ALPHA__INPUT.setText(QCoreApplication.translate("MainWindow", u"(12, 16)", None))
-        self.AUGMENTOR__E_ALPHA__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"(12,16)", None))
+        self.AUGMENTOR__E_ALPHA__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"(12,16)", None))
 #if QT_CONFIG(tooltip)
         self.label_60.setToolTip("")
 #endif // QT_CONFIG(tooltip)
@@ -15741,7 +15744,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.label_107.setText(QCoreApplication.translate("MainWindow", u"Dropout", None))
         self.AUGMENTOR__SHIFT_RANGE__INPUT.setText(QCoreApplication.translate("MainWindow", u"(0.1, 0.2)", None))
-        self.AUGMENTOR__SHIFT_RANGE__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"(0.1, 0.2)", None))
+        self.AUGMENTOR__SHIFT_RANGE__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"(0.1, 0.2)", None))
 #if QT_CONFIG(tooltip)
         self.AUGMENTOR__GRIDMASK__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Apply gridmask to the image. It is based on the deletion of regions of the input image. Original paper: </span><a href=\"https://arxiv.org/pdf/2001.04086v1.pdf\"><span style=\" font-size:12pt; text-decoration: underline; color:#0000ff;\">https://arxiv.org/pdf/2001.04086v1.pdf</span></a><span style=\" font-size:12pt;\"/></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -15769,7 +15772,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__SHEAR__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
 
         self.AUGMENTOR__MS_ROTATE_RATIO__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.5", None))
-        self.AUGMENTOR__MS_ROTATE_RATIO__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"0.5", None))
+        self.AUGMENTOR__MS_ROTATE_RATIO__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"0.5", None))
 #if QT_CONFIG(tooltip)
         self.AUGMENTOR__SHEAR_RANGE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Shear range. Expected value range is around [-360, 360], with reasonable values being in the range of [-45, 45]. Each time the augmentation is applied a random value in the specified range will be selected. E.g.</span><span style=\" font-size:12pt; font-weight:600;\"> [-45, 45]</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -15779,9 +15782,9 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.AUGMENTOR__CHANNEL_SHUFFLE__INFO.setText("")
         self.AUGMENTOR__COUT_SIZE__INPUT.setText(QCoreApplication.translate("MainWindow", u"(0.05, 0.3)", None))
-        self.AUGMENTOR__COUT_SIZE__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"(0.05,0.3)", None))
+        self.AUGMENTOR__COUT_SIZE__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"(0.05,0.3)", None))
         self.AUGMENTOR__GRID_ROTATE__INPUT.setText(QCoreApplication.translate("MainWindow", u"1.0", None))
-        self.AUGMENTOR__GRID_ROTATE__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"1", None))
+        self.AUGMENTOR__GRID_ROTATE__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"1", None))
 #if QT_CONFIG(tooltip)
         self.AUGMENTOR__GRID_D_RANGE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Range to choose a 'd' value, which determines the length of each unit. Each time the augmentation is applied a random value in the specified range will be selected. Values need to be float. E.g. </span><span style=\" font-size:12pt; font-weight:600;\">(0.5 ,1)</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -15838,7 +15841,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.AUGMENTOR__MISSP_ITERATIONS__INFO.setText("")
         self.AUGMENTOR__RANDOM_ROT_RANGE__INPUT.setText(QCoreApplication.translate("MainWindow", u"(-180, 180)", None))
-        self.AUGMENTOR__RANDOM_ROT_RANGE__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"(-180, 180)", None))
+        self.AUGMENTOR__RANDOM_ROT_RANGE__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"(-180, 180)", None))
 #if QT_CONFIG(tooltip)
         self.AUGMENTOR__SALT_AND_PEPPER_PROP__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Proportion of salt vs. pepper noise. Higher values represent more salt. 0.5 represents equal ammounts. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a float between 0 and 1</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -15863,7 +15866,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__DA_PROB__INPUT.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.AUGMENTOR__DA_PROB__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.5", None))
-        self.AUGMENTOR__DA_PROB__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"0.5", None))
+        self.AUGMENTOR__DA_PROB__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"0.5", None))
 #if QT_CONFIG(tooltip)
         self.AUGMENTOR__SALT__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Augment the images by adding salt, which replaces random pixels with 1</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -15877,7 +15880,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.da_salt_pepper_prop_label.setText(QCoreApplication.translate("MainWindow", u"Salt and pepper proportion", None))
         self.AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.05", None))
-        self.AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"0.05", None))
+        self.AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"0.05", None))
 #if QT_CONFIG(tooltip)
         self.AUGMENTOR__ROT90__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Enable rotation of 90\u00ba, 180\u00ba or 270\u00ba to images as augmentation</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -15895,7 +15898,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.AUGMENTOR__PEPPER_AMOUNT__INFO.setText("")
         self.AUGMENTOR__COUT_NB_ITERATIONS__INPUT.setText(QCoreApplication.translate("MainWindow", u"(1, 3)", None))
-        self.AUGMENTOR__COUT_NB_ITERATIONS__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"(1,3)", None))
+        self.AUGMENTOR__COUT_NB_ITERATIONS__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"(1,3)", None))
 #if QT_CONFIG(tooltip)
         self.AUGMENTOR__COUT_CVAL__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Value to fill the area of cutout. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a float.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -15925,7 +15928,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.AUGMENTOR__CBLUR_INSIDE__INFO.setText("")
         self.AUGMENTOR__GAUSSIAN_NOISE_VAR__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.05", None))
-        self.AUGMENTOR__GAUSSIAN_NOISE_VAR__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"0.05", None))
+        self.AUGMENTOR__GAUSSIAN_NOISE_VAR__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"0.05", None))
 #if QT_CONFIG(tooltip)
         self.AUGMENTOR__SALT_AMOUNT__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Proportion of salt to add. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a float between 0 and 1</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -15946,7 +15949,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__COUT_CVAL__INPUT.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Normalization layer</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.AUGMENTOR__COUT_CVAL__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.0", None))
-        self.AUGMENTOR__COUT_CVAL__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"0.", None))
+        self.AUGMENTOR__COUT_CVAL__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"0.", None))
         self.AUGMENTOR__CUTBLUR__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
         self.AUGMENTOR__CUTBLUR__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
 
@@ -15961,7 +15964,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__ROT90__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
 
         self.AUGMENTOR__GRID_D_RANGE__INPUT.setText(QCoreApplication.translate("MainWindow", u"(0.4, 1)", None))
-        self.AUGMENTOR__GRID_D_RANGE__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"(0.4 ,1)", None))
+        self.AUGMENTOR__GRID_D_RANGE__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"(0.4 ,1)", None))
         self.AUGMENTOR__CUTMIX__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
         self.AUGMENTOR__CUTMIX__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
 
@@ -16004,9 +16007,9 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__CBLUR_SIZE__INPUT.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.AUGMENTOR__CBLUR_SIZE__INPUT.setText(QCoreApplication.translate("MainWindow", u"(0.2, 0.4)", None))
-        self.AUGMENTOR__CBLUR_SIZE__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"(0.2, 0.4)", None))
+        self.AUGMENTOR__CBLUR_SIZE__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"(0.2, 0.4)", None))
         self.AUGMENTOR__DROP_RANGE__INPUT.setText(QCoreApplication.translate("MainWindow", u"(0, 0.2)", None))
-        self.AUGMENTOR__DROP_RANGE__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"(0,0.2)", None))
+        self.AUGMENTOR__DROP_RANGE__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"(0,0.2)", None))
         self.AUGMENTOR__ZOOM__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
         self.AUGMENTOR__ZOOM__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
 
@@ -16023,7 +16026,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.da_pepper_amount_label.setText(QCoreApplication.translate("MainWindow", u"Pepper amount", None))
         self.AUGMENTOR__SALT_AND_PEPPER_PROP__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.5", None))
-        self.AUGMENTOR__SALT_AND_PEPPER_PROP__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"0.5", None))
+        self.AUGMENTOR__SALT_AND_PEPPER_PROP__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"0.5", None))
 #if QT_CONFIG(tooltip)
         self.AUGMENTOR__CONTRAST__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Enable contrast changes as data augmentation.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -16041,7 +16044,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.da_cutout_to_mask_label.setText(QCoreApplication.translate("MainWindow", u"Cutout applied to mask", None))
         self.AUGMENTOR__E_SIGMA__INPUT.setText(QCoreApplication.translate("MainWindow", u"4", None))
-        self.AUGMENTOR__E_SIGMA__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"4", None))
+        self.AUGMENTOR__E_SIGMA__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"4", None))
 #if QT_CONFIG(tooltip)
         self.label_118.setToolTip("")
 #endif // QT_CONFIG(tooltip)
@@ -16081,21 +16084,21 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__POISSON_NOISE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
 
         self.AUGMENTOR__GAUSSIAN_NOISE_MEAN__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.", None))
-        self.AUGMENTOR__GAUSSIAN_NOISE_MEAN__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"0", None))
+        self.AUGMENTOR__GAUSSIAN_NOISE_MEAN__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"0", None))
 #if QT_CONFIG(tooltip)
         self.AUGMENTOR__CNOISE_SIZE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Size of the regions. Each time the augmentation is applied a random value in the specified range will be selected. Values need to be between 0 and 1. E.g. </span><span style=\" font-size:12pt; font-weight:600;\">(0.1,0.2)</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.AUGMENTOR__CNOISE_SIZE__INFO.setText("")
         self.AUGMENTOR__CBLUR_DOWN_RANGE__INPUT.setText(QCoreApplication.translate("MainWindow", u"(2, 8)", None))
-        self.AUGMENTOR__CBLUR_DOWN_RANGE__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"(2, 8)", None))
+        self.AUGMENTOR__CBLUR_DOWN_RANGE__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"(2, 8)", None))
 #if QT_CONFIG(tooltip)
         self.da_cutnoise_scale_range_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.da_cutnoise_scale_range_label.setText(QCoreApplication.translate("MainWindow", u"Cutnoise scale range", None))
         self.AUGMENTOR__CNOISE_SIZE__INPUT.setText(QCoreApplication.translate("MainWindow", u"(0.2, 0.4)", None))
-        self.AUGMENTOR__CNOISE_SIZE__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"(0.2,0.4)", None))
+        self.AUGMENTOR__CNOISE_SIZE__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"(0.2,0.4)", None))
         self.AUGMENTOR__BRIGHTNESS_FACTOR__INPUT.setText(QCoreApplication.translate("MainWindow", u"(-0.1, 0.1)", None))
-        self.AUGMENTOR__BRIGHTNESS_FACTOR__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"(-0.1,0.1) ", None))
+        self.AUGMENTOR__BRIGHTNESS_FACTOR__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"(-0.1,0.1) ", None))
 #if QT_CONFIG(tooltip)
         self.label_128.setToolTip("")
 #endif // QT_CONFIG(tooltip)
@@ -16108,7 +16111,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.AUGMENTOR__DA_PROB__INFO.setText("")
         self.AUGMENTOR__MS_DISPLACEMENT__INPUT.setText(QCoreApplication.translate("MainWindow", u"16", None))
-        self.AUGMENTOR__MS_DISPLACEMENT__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"16", None))
+        self.AUGMENTOR__MS_DISPLACEMENT__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"16", None))
 #if QT_CONFIG(tooltip)
         self.da_gaussian_sigma_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
@@ -16132,7 +16135,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__RANDOM_ROT__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
 
         self.AUGMENTOR__SALT_AMOUNT__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.05", None))
-        self.AUGMENTOR__SALT_AMOUNT__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"0.05", None))
+        self.AUGMENTOR__SALT_AMOUNT__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"0.05", None))
 #if QT_CONFIG(tooltip)
         self.label_141.setToolTip("")
 #endif // QT_CONFIG(tooltip)
@@ -16301,13 +16304,13 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.AUGMENTOR__CBLUR_DOWN_RANGE__INFO.setText("")
         self.AUGMENTOR__CNOISE_SCALE__INPUT.setText(QCoreApplication.translate("MainWindow", u"(0.05, 0.1)", None))
-        self.AUGMENTOR__CNOISE_SCALE__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"(0.05, 0.1)", None))
+        self.AUGMENTOR__CNOISE_SCALE__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"(0.05, 0.1)", None))
 #if QT_CONFIG(tooltip)
         self.AUGMENTOR__DROP_RANGE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Range to take the probability to drop a pixel. Each time the augmentation is applied a random value in the specified range will be selected. Values need to be between 0 and 1. E.g. </span><span style=\" font-size:12pt; font-weight:600;\">(0,0.2)</span><span style=\" font-size:12pt;\"/></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.AUGMENTOR__DROP_RANGE__INFO.setText("")
         self.AUGMENTOR__CONTRAST_FACTOR__INPUT.setText(QCoreApplication.translate("MainWindow", u"(-0.1, 0.1)", None))
-        self.AUGMENTOR__CONTRAST_FACTOR__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"(-0.1,0.1) ", None))
+        self.AUGMENTOR__CONTRAST_FACTOR__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"(-0.1,0.1) ", None))
 #if QT_CONFIG(tooltip)
         self.AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Amount of salt and pepper to add. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a float between 0 and 1</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -16316,7 +16319,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__MISSP_ITERATIONS__INPUT.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.AUGMENTOR__MISSP_ITERATIONS__INPUT.setText(QCoreApplication.translate("MainWindow", u"(10, 30)", None))
-        self.AUGMENTOR__MISSP_ITERATIONS__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"(10,30)", None))
+        self.AUGMENTOR__MISSP_ITERATIONS__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"(10,30)", None))
 #if QT_CONFIG(tooltip)
         self.AUGMENTOR__SHEAR__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Enable shear as data augmentation</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -16325,7 +16328,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__GC_GAMMA__INPUT.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Exponent for the contrast adjustment. Higher values darken the image</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.AUGMENTOR__GC_GAMMA__INPUT.setText(QCoreApplication.translate("MainWindow", u"(1.25, 1.75)", None))
-        self.AUGMENTOR__GC_GAMMA__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"(1.25,1.75)", None))
+        self.AUGMENTOR__GC_GAMMA__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"(1.25,1.75)", None))
 #if QT_CONFIG(tooltip)
         self.label_68.setToolTip("")
 #endif // QT_CONFIG(tooltip)
@@ -16359,7 +16362,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.AUGMENTOR__COUT_SIZE__INFO.setText("")
         self.AUGMENTOR__CMIX_SIZE__INPUT.setText(QCoreApplication.translate("MainWindow", u"(0.2, 0.4)", None))
-        self.AUGMENTOR__CMIX_SIZE__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"(0.2,0.4)", None))
+        self.AUGMENTOR__CMIX_SIZE__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"(0.2,0.4)", None))
         self.AUGMENTOR__AUG_SAMPLES__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
         self.AUGMENTOR__AUG_SAMPLES__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
 
@@ -16371,9 +16374,9 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__MISALIGNMENT__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
 
         self.AUGMENTOR__ZOOM_RANGE__INPUT.setText(QCoreApplication.translate("MainWindow", u"(0.9, 1.1)", None))
-        self.AUGMENTOR__ZOOM_RANGE__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"(0.8, 1.2)", None))
+        self.AUGMENTOR__ZOOM_RANGE__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"(0.8, 1.2)", None))
         self.AUGMENTOR__AUG_NUM_SAMPLES__INPUT.setText(QCoreApplication.translate("MainWindow", u"10", None))
-        self.AUGMENTOR__AUG_NUM_SAMPLES__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"10", None))
+        self.AUGMENTOR__AUG_NUM_SAMPLES__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"10", None))
 #if QT_CONFIG(tooltip)
         self.AUGMENTOR__GRAYSCALE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Augment images by converting them into grayscale</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -16490,7 +16493,7 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__RESOLUTION__INFO.setText("")
         self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__LABEL.setText(QCoreApplication.translate("MainWindow", u"Zarr image axis order", None))
         self.DATA__TRAIN__REPLICATE__INPUT.setText(QCoreApplication.translate("MainWindow", u"0", None))
-        self.DATA__TRAIN__REPLICATE__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"0", None))
+        self.DATA__TRAIN__REPLICATE__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"0", None))
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setText("")
 #if QT_CONFIG(tooltip)
         self.train_resolution_label.setToolTip("")
@@ -16619,11 +16622,11 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.label_52.setText(QCoreApplication.translate("MainWindow", u"Numer of heads", None))
         self.MODEL__UNETR_VIT_HIDD_MULT__INPUT.setText(QCoreApplication.translate("MainWindow", u"3", None))
-        self.MODEL__UNETR_VIT_HIDD_MULT__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"3", None))
+        self.MODEL__UNETR_VIT_HIDD_MULT__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"3", None))
         self.MODEL__VIT_NUM_HEADS__INPUT.setText(QCoreApplication.translate("MainWindow", u"12", None))
-        self.MODEL__VIT_NUM_HEADS__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"4", None))
+        self.MODEL__VIT_NUM_HEADS__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"4", None))
         self.MODEL__VIT_NUM_LAYERS__INPUT.setText(QCoreApplication.translate("MainWindow", u"12", None))
-        self.MODEL__VIT_NUM_LAYERS__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"12", None))
+        self.MODEL__VIT_NUM_LAYERS__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"12", None))
         self.MODEL__MAE_MASK_TYPE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"grid", None))
         self.MODEL__MAE_MASK_TYPE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"random", None))
 
@@ -16669,7 +16672,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.unetr_vit_hidden_multiple_label.setText(QCoreApplication.translate("MainWindow", u"UNETR - ViT Hidden multiple", None))
         self.MODEL__VIT_EMBED_DIM__INPUT.setText(QCoreApplication.translate("MainWindow", u"768", None))
-        self.MODEL__VIT_EMBED_DIM__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"768", None))
+        self.MODEL__VIT_EMBED_DIM__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"768", None))
 #if QT_CONFIG(tooltip)
         self.MODEL__UNETR_DEC_ACTIVATION__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Activation of the decoder</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -16731,7 +16734,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.MODEL__MAE_DEC_NUM_HEADS__LABEL.setText(QCoreApplication.translate("MainWindow", u"MAE - Decoder number heads", None))
         self.MODEL__VIT_TOKEN_SIZE__INPUT.setText(QCoreApplication.translate("MainWindow", u"16", None))
-        self.MODEL__VIT_TOKEN_SIZE__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"16", None))
+        self.MODEL__VIT_TOKEN_SIZE__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"16", None))
 #if QT_CONFIG(tooltip)
         self.label_50.setToolTip("")
 #endif // QT_CONFIG(tooltip)
@@ -16740,7 +16743,7 @@ class Ui_MainWindow(object):
         self.MODEL__VIT_MLP_RATIO__INPUT.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.MODEL__VIT_MLP_RATIO__INPUT.setText(QCoreApplication.translate("MainWindow", u"4.", None))
-        self.MODEL__VIT_MLP_RATIO__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"[3072, 768]", None))
+        self.MODEL__VIT_MLP_RATIO__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"[3072, 768]", None))
 #if QT_CONFIG(tooltip)
         self.unetr_num_filters_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
@@ -16909,7 +16912,7 @@ class Ui_MainWindow(object):
         self.extract_random_patch_frame_label.setText(QCoreApplication.translate("MainWindow", u"Extract random patch options", None))
         self.label_14.setText(QCoreApplication.translate("MainWindow", u"Train data options", None))
         self.DATA__W_FOREGROUND__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.94", None))
-        self.DATA__W_FOREGROUND__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"0.06", None))
+        self.DATA__W_FOREGROUND__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"0.06", None))
 #if QT_CONFIG(tooltip)
         self.label_17.setToolTip("")
 #endif // QT_CONFIG(tooltip)
@@ -16926,7 +16929,7 @@ class Ui_MainWindow(object):
         self.DATA__PROBABILITY_MAP__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
 
         self.DATA__W_BACKGROUND__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.06", None))
-        self.DATA__W_BACKGROUND__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"0.94", None))
+        self.DATA__W_BACKGROUND__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"0.94", None))
 #if QT_CONFIG(tooltip)
         self.DATA__PROBABILITY_MAP__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Create a probability map so the patches extracted will have a high probability of having an object in the middle of it. Useful to avoid extracting patches which have no foreground class information. Used only with </span><span style=\" font-size:12pt; font-weight:600;\">extract random patch</span><span style=\" font-size:12pt;\"> option.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -16963,7 +16966,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INFO.setText("")
         self.DATA__TRAIN__MINIMUM_FOREGROUND_PER__SEM_SEG__INPUT.setText(QCoreApplication.translate("MainWindow", u"0", None))
-        self.DATA__TRAIN__MINIMUM_FOREGROUND_PER__SEM_SEG__INPUT.setProperty("plainText", QCoreApplication.translate("MainWindow", u"-1", None))
+        self.DATA__TRAIN__MINIMUM_FOREGROUND_PER__SEM_SEG__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"-1", None))
 #if QT_CONFIG(tooltip)
         self.label_20.setToolTip("")
 #endif // QT_CONFIG(tooltip)

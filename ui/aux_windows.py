@@ -2,10 +2,10 @@ import os
 import pooch
 from functools import partial
 
-from PySide2 import QtCore
-from PySide2.QtCore import ( QCoreApplication, QRect, QSize, Qt, QEvent)
-from PySide2.QtGui import (QDesktopServices, QColor, QFont, QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
-from PySide2.QtWidgets import *
+from PySide6 import QtCore
+from PySide6.QtCore import ( QCoreApplication, QRect, QSize, Qt, QEvent)
+from PySide6.QtGui import (QDesktopServices, QColor, QFont, QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
+from PySide6.QtWidgets import *
 
 from ui_utils import mark_syntax_error, resource_path, change_page
 from ui.ui_dialog import Ui_Dialog 

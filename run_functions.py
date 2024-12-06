@@ -8,10 +8,10 @@ import multiprocessing
 import json
 from pathlib import Path
 
-from PySide2 import QtCore, QtGui, QtWidgets
-from PySide2.QtCore import Qt, QObject, QUrl
-from PySide2.QtGui import QPixmap
-from PySide2.QtWidgets import *
+from PySide6 import QtCore, QtGui, QtWidgets
+from PySide6.QtCore import Qt, QObject, QUrl
+from PySide6.QtGui import QPixmap
+from PySide6.QtWidgets import *
 
 from ui_utils import get_text, resource_path, path_in_list, path_to_linux
 from biapy.biapy_check_configuration import convert_old_model_cfg_to_current_version

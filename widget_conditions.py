@@ -1,4 +1,4 @@
-from PySide2.QtWidgets import *
+from PySide6.QtWidgets import *
 from ui_utils import get_text
 
 class Widget_conditions():

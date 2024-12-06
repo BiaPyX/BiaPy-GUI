@@ -19,10 +19,10 @@ from packaging.version import Version
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 
-from PySide2 import QtCore
-from PySide2.QtCore import QObject, QThread
-from PySide2.QtWidgets import *
-from PySide2.QtGui import QBrush, QColor
+from PySide6 import QtCore
+from PySide6.QtCore import QObject, QThread
+from PySide6.QtWidgets import *
+from PySide6.QtGui import QBrush, QColor
 
 from biapy.biapy_config import Config
 from biapy.biapy_check_configuration import check_configuration, check_torchvision_available_models, convert_old_model_cfg_to_current_version

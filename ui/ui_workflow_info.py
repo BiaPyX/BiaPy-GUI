@@ -3,15 +3,21 @@
 ################################################################################
 ## Form generated from reading UI file 'ui_workflow_info.ui'
 ##
-## Created by: Qt User Interface Compiler version 5.15.2
+## Created by: Qt User Interface Compiler version 6.8.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide2.QtCore import *
-from PySide2.QtGui import *
-from PySide2.QtWidgets import *
-
+from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtWidgets import (QApplication, QDialog, QFrame, QGridLayout,
+    QHBoxLayout, QLabel, QPushButton, QScrollArea,
+    QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
 
 class Ui_Workflow_info(object):
     def setupUi(self, Workflow_info):
@@ -28,7 +34,7 @@ class Ui_Workflow_info(object):
         self.centralwidget = QFrame(Workflow_info)
         self.centralwidget.setObjectName(u"centralwidget")
         font = QFont()
-        font.setFamily(u"DejaVu Math TeX Gyre")
+        font.setFamilies([u"DejaVu Math TeX Gyre"])
         font.setPointSize(12)
         self.centralwidget.setFont(font)
         self.centralwidget.setStyleSheet(u"background:rgb(255,255,255);")
@@ -66,7 +72,7 @@ class Ui_Workflow_info(object):
         self.lab_heading = QLabel(self.frame_top)
         self.lab_heading.setObjectName(u"lab_heading")
         font1 = QFont()
-        font1.setFamily(u"DejaVu Math TeX Gyre")
+        font1.setFamilies([u"DejaVu Math TeX Gyre"])
         font1.setPointSize(13)
         self.lab_heading.setFont(font1)
         self.lab_heading.setStyleSheet(u"")
@@ -76,7 +82,7 @@ class Ui_Workflow_info(object):
 
         self.bn_close = QPushButton(self.frame_top)
         self.bn_close.setObjectName(u"bn_close")
-        sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.bn_close.sizePolicy().hasHeightForWidth())
@@ -94,7 +100,7 @@ class Ui_Workflow_info(object):
 "	background-color: rgba(0,0,0,0);\n"
 "}")
         icon = QIcon()
-        icon.addFile(u"images/bn_images/close_icon.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u"images/bn_images/close_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.bn_close.setIcon(icon)
         self.bn_close.setIconSize(QSize(22, 22))
         self.bn_close.setAutoDefault(False)
@@ -138,10 +144,9 @@ class Ui_Workflow_info(object):
         self.workflow_name_label.setObjectName(u"workflow_name_label")
         self.workflow_name_label.setEnabled(True)
         font2 = QFont()
-        font2.setFamily(u"DejaVu Math TeX Gyre")
+        font2.setFamilies([u"DejaVu Math TeX Gyre"])
         font2.setPointSize(14)
         font2.setBold(True)
-        font2.setWeight(75)
         self.workflow_name_label.setFont(font2)
         self.workflow_name_label.setAlignment(Qt.AlignCenter)
         self.workflow_name_label.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
@@ -280,10 +285,9 @@ class Ui_Workflow_info(object):
         self.label = QLabel(self.frame_2)
         self.label.setObjectName(u"label")
         font3 = QFont()
-        font3.setFamily(u"DejaVu Math TeX Gyre")
+        font3.setFamilies([u"DejaVu Math TeX Gyre"])
         font3.setPointSize(12)
         font3.setBold(True)
-        font3.setWeight(75)
         self.label.setFont(font3)
         self.label.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
@@ -293,13 +297,13 @@ class Ui_Workflow_info(object):
         self.ready_to_use_samples_frame.setObjectName(u"ready_to_use_samples_frame")
         self.ready_to_use_samples_frame.setMinimumSize(QSize(0, 0))
         font4 = QFont()
-        font4.setFamily(u"DejaVu Math TeX Gyre")
+        font4.setFamilies([u"DejaVu Math TeX Gyre"])
         self.ready_to_use_samples_frame.setFont(font4)
         self.ready_to_use_samples_frame.setFrameShape(QFrame.NoFrame)
         self.ready_to_use_samples_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_2 = QGridLayout(self.ready_to_use_samples_frame)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_2.addItem(self.horizontalSpacer, 1, 0, 1, 1)
 

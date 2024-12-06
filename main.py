@@ -3,12 +3,10 @@ import sys
 import tempfile
 import logging
 import traceback
-from typing import Optional
-from PySide2 import QtCore, QtGui, QtWidgets
-from PySide2.QtWidgets import *
-from PySide2.QtCore import *
-from PySide2.QtGui import *
-from packaging.version import Version
+from PySide6 import QtCore, QtGui, QtWidgets
+from PySide6.QtWidgets import *
+from PySide6.QtCore import *
+from PySide6.QtGui import *
 
 from ui_function import * 
 from ui_utils import (examine, mark_syntax_error, expand_hide_advanced_options, change_page, get_git_revision_short_hash,
@@ -63,36 +61,36 @@ class MainWindow(QMainWindow):
         self.ui.bn_min.clicked.connect(self.showMinimized)
         self.ui.bn_close.clicked.connect(self.close)
 
-        two_pos_number_regex = QtCore.QRegExp('^\s*[0-9][0-9]*\s*,\s*[0-9][0-9]*\s*$')
-        self.two_pos_number_validator = QtGui.QRegExpValidator(two_pos_number_regex)
+        two_pos_number_regex = QtCore.QRegularExpression('^\s*[0-9][0-9]*\s*,\s*[0-9][0-9]*\s*$')
+        self.two_pos_number_validator = QtGui.QRegularExpressionValidator(two_pos_number_regex)
 
-        two_pos_number_parenthesis_regex = QtCore.QRegExp('^\(\s*[0-9][0-9]*\s*,\s*[0-9][0-9]*\s*\)$')
-        self.two_pos_number_parenthesis_validator = QtGui.QRegExpValidator(two_pos_number_parenthesis_regex)
-        two_number_parenthesis_regex = QtCore.QRegExp('^\(\s*-?[0-9][0-9]*\s*,\s*-?[0-9][0-9]*\s*\)$')
-        self.two_number_parenthesis_validator = QtGui.QRegExpValidator(two_number_parenthesis_regex)
-        two_pos_0_1_float_number_parenthesis_regex = QtCore.QRegExp('^\(\s*0\.[0-9]*\s*,\s*0\.[0-9]*\s*\)$')
-        self.two_pos_0_1_float_number_parenthesis_validator = QtGui.QRegExpValidator(two_pos_0_1_float_number_parenthesis_regex)
-        two_0_1_float_number_parenthesis_regex = QtCore.QRegExp('^\(\s*-?0\.[0-9]*\s*,\s*-?0\.[0-9]*\s*\)$')
-        self.two_0_1_float_number_parenthesis_validator = QtGui.QRegExpValidator(two_0_1_float_number_parenthesis_regex)
-        two_0_2_float_number_parenthesis_regex = QtCore.QRegExp('^\(\s*[0-1]\.[0-9]*\s*,\s*[0-1]\.[0-9]*\s*\)$')
-        self.two_0_2_float_number_parenthesis_validator = QtGui.QRegExpValidator(two_0_2_float_number_parenthesis_regex)
-        two_pos_float_number_parenthesis_regex = QtCore.QRegExp('^\(\s*[0-9]\.[0-9]*\s*,\s*[0-9]\.[0-9]*\s*\)$')
-        self.two_pos_float_number_parenthesis_validator = QtGui.QRegExpValidator(two_pos_float_number_parenthesis_regex)
-        three_number_parenthesis_regex = QtCore.QRegExp('^\(\s*[0-9][0-9]*\s*,\s*[0-9][0-9]*\s*,\s*[0-9][0-9]*\s*\)$')
-        self.three_number_parenthesis_validator = QtGui.QRegExpValidator(three_number_parenthesis_regex)
-        four_number_parenthesis_regex = QtCore.QRegExp('^\(\s*[0-9][0-9]*\s*,\s*[0-9][0-9]*\s*,\s*[0-9][0-9]*\s*,\s*[0-9][0-9]*\s*\)$')
-        self.four_number_parenthesis_validator = QtGui.QRegExpValidator(four_number_parenthesis_regex)
+        two_pos_number_parenthesis_regex = QtCore.QRegularExpression('^\(\s*[0-9][0-9]*\s*,\s*[0-9][0-9]*\s*\)$')
+        self.two_pos_number_parenthesis_validator = QtGui.QRegularExpressionValidator(two_pos_number_parenthesis_regex)
+        two_number_parenthesis_regex = QtCore.QRegularExpression('^\(\s*-?[0-9][0-9]*\s*,\s*-?[0-9][0-9]*\s*\)$')
+        self.two_number_parenthesis_validator = QtGui.QRegularExpressionValidator(two_number_parenthesis_regex)
+        two_pos_0_1_float_number_parenthesis_regex = QtCore.QRegularExpression('^\(\s*0\.[0-9]*\s*,\s*0\.[0-9]*\s*\)$')
+        self.two_pos_0_1_float_number_parenthesis_validator = QtGui.QRegularExpressionValidator(two_pos_0_1_float_number_parenthesis_regex)
+        two_0_1_float_number_parenthesis_regex = QtCore.QRegularExpression('^\(\s*-?0\.[0-9]*\s*,\s*-?0\.[0-9]*\s*\)$')
+        self.two_0_1_float_number_parenthesis_validator = QtGui.QRegularExpressionValidator(two_0_1_float_number_parenthesis_regex)
+        two_0_2_float_number_parenthesis_regex = QtCore.QRegularExpression('^\(\s*[0-1]\.[0-9]*\s*,\s*[0-1]\.[0-9]*\s*\)$')
+        self.two_0_2_float_number_parenthesis_validator = QtGui.QRegularExpressionValidator(two_0_2_float_number_parenthesis_regex)
+        two_pos_float_number_parenthesis_regex = QtCore.QRegularExpression('^\(\s*[0-9]\.[0-9]*\s*,\s*[0-9]\.[0-9]*\s*\)$')
+        self.two_pos_float_number_parenthesis_validator = QtGui.QRegularExpressionValidator(two_pos_float_number_parenthesis_regex)
+        three_number_parenthesis_regex = QtCore.QRegularExpression('^\(\s*[0-9][0-9]*\s*,\s*[0-9][0-9]*\s*,\s*[0-9][0-9]*\s*\)$')
+        self.three_number_parenthesis_validator = QtGui.QRegularExpressionValidator(three_number_parenthesis_regex)
+        four_number_parenthesis_regex = QtCore.QRegularExpression('^\(\s*[0-9][0-9]*\s*,\s*[0-9][0-9]*\s*,\s*[0-9][0-9]*\s*,\s*[0-9][0-9]*\s*\)$')
+        self.four_number_parenthesis_validator = QtGui.QRegularExpressionValidator(four_number_parenthesis_regex)
 
-        two_pos_number_bracket_regex = QtCore.QRegExp('^\[\s*[0-9][0-9]*\s*,\s*[0-9][0-9]*\s*\]$')
-        self.two_pos_number_bracket_validator = QtGui.QRegExpValidator(two_pos_number_bracket_regex)
-        no_limit_number_min_one_number_bracket_regex = QtCore.QRegExp('^\[\s*[0-9][0-9]*\s*(,\s*[0-9][0-9]*\s*)*\]$')
-        self.no_limit_number_min_one_number_bracket_validator = QtGui.QRegExpValidator(no_limit_number_min_one_number_bracket_regex)
-        no_limit_number_bracket_regex = QtCore.QRegExp('^\[\s*[0-9]*\s*(,\s*[0-9]*\s*)*\]$')
-        self.no_limit_number_bracket_validator = QtGui.QRegExpValidator(no_limit_number_bracket_regex)
-        no_limit_0_1_float_number_bracket_regex = QtCore.QRegExp('^\[\s*0\.[0-9]*\s*(,\s*0\.[0-9]*\s*)*\]$')
-        self.no_limit_0_1_float_number_bracket_validator = QtGui.QRegExpValidator(no_limit_0_1_float_number_bracket_regex)
-        z_down_bracket_regex = QtCore.QRegExp('^\[\s*[0-2]\s*(,\s*[0-2]\s*)*\]$')
-        self.z_down_bracket_validator = QtGui.QRegExpValidator(z_down_bracket_regex)
+        two_pos_number_bracket_regex = QtCore.QRegularExpression('^\[\s*[0-9][0-9]*\s*,\s*[0-9][0-9]*\s*\]$')
+        self.two_pos_number_bracket_validator = QtGui.QRegularExpressionValidator(two_pos_number_bracket_regex)
+        no_limit_number_min_one_number_bracket_regex = QtCore.QRegularExpression('^\[\s*[0-9][0-9]*\s*(,\s*[0-9][0-9]*\s*)*\]$')
+        self.no_limit_number_min_one_number_bracket_validator = QtGui.QRegularExpressionValidator(no_limit_number_min_one_number_bracket_regex)
+        no_limit_number_bracket_regex = QtCore.QRegularExpression('^\[\s*[0-9]*\s*(,\s*[0-9]*\s*)*\]$')
+        self.no_limit_number_bracket_validator = QtGui.QRegularExpressionValidator(no_limit_number_bracket_regex)
+        no_limit_0_1_float_number_bracket_regex = QtCore.QRegularExpression('^\[\s*0\.[0-9]*\s*(,\s*0\.[0-9]*\s*)*\]$')
+        self.no_limit_0_1_float_number_bracket_validator = QtGui.QRegularExpressionValidator(no_limit_0_1_float_number_bracket_regex)
+        z_down_bracket_regex = QtCore.QRegularExpression('^\[\s*[0-2]\s*(,\s*[0-2]\s*)*\]$')
+        self.z_down_bracket_validator = QtGui.QRegularExpressionValidator(z_down_bracket_regex)
 
         self.float_validator = QtGui.QDoubleValidator(0.,1.,3)
         self.large_range_float_validator = QtGui.QDoubleValidator(0.,10.,3)
@@ -723,8 +721,8 @@ class MainWindow(QMainWindow):
         self.dragPos = self.pos()
         def moveWindow(event):
             if event.buttons() == Qt.LeftButton:
-                self.move(self.pos() + event.globalPos() - self.dragPos)
-                self.dragPos = event.globalPos()
+                self.move(self.pos() + event.globalPosition().toPoint() - self.dragPos)
+                self.dragPos = event.globalPosition().toPoint()
                 event.accept()
 
         self.ui.frame_empty.mouseMoveEvent = moveWindow
@@ -740,7 +738,7 @@ class MainWindow(QMainWindow):
         event : QT event
             Mouse drag event.
         """
-        self.dragPos = event.globalPos()
+        self.dragPos = event.globalPosition().toPoint()
     
     def dialog_exec(self, message, reason):
         """ 
@@ -759,7 +757,7 @@ class MainWindow(QMainWindow):
 
         self.diag.dialog_constrict(message, reason)
         center_window(self.diag, self.geometry())
-        self.diag.exec_()
+        self.diag.exec()
 
     def workflow_info_exec(self, workflow_name, workflow_images, workflow_description, 
         workflow_doc, workflow_ready_to_use_examples):
@@ -790,7 +788,7 @@ class MainWindow(QMainWindow):
             workflow_images[1], workflow_description, workflow_doc, 
             workflow_ready_to_use_examples)
         center_window(self.wokflow_info, self.geometry())
-        self.wokflow_info.exec_()
+        self.wokflow_info.exec()
 
     def yes_no_exec(self, question):
         """ 
@@ -806,7 +804,7 @@ class MainWindow(QMainWindow):
 
         self.yes_no.create_question(question)
         center_window(self.yes_no, self.geometry())
-        self.yes_no.exec_()
+        self.yes_no.exec()
 
     def basic_dialog_exec(self, text):
         """ 
@@ -822,7 +820,7 @@ class MainWindow(QMainWindow):
 
         self.basic_dialog.set_info(text)
         center_window(self.basic_dialog, self.geometry())
-        self.basic_dialog.exec_()
+        self.basic_dialog.exec()
 
 
     def add_model_card(self, model_count, model_info, from_wizard):
@@ -842,7 +840,7 @@ class MainWindow(QMainWindow):
             self.model_carrousel_dialog = model_card_carrousel_Ui(self)
 
         center_window(self.model_carrousel_dialog, self.geometry())
-        self.model_carrousel_dialog.exec_()
+        self.model_carrousel_dialog.exec()
 
     def select_external_model(self, model_selected, model_source, model_restrictions, from_wizard=True):
         self.yes_no_exec(f"Do you want to select '{model_selected}' model\nfrom {model_source}?")
@@ -901,7 +899,7 @@ class MainWindow(QMainWindow):
         center_window(self.spinner, self.geometry())
 
         self.spinner.start()
-        self.spinner.exec_()
+        self.spinner.exec()
 
     def loading_phase(self, signal):
         """
@@ -1103,5 +1101,5 @@ if __name__ == "__main__":
         QtWidgets.QApplication.quit()
     sys.excepthook = excepthook
 
-    app.exec_()
-
+    app.exec()
+    app.quit()
