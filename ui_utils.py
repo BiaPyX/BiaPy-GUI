@@ -3565,7 +3565,7 @@ def get_git_revision_short_hash(main_window) -> str:
     if vtag is None:
         main_window.logger.info("Setting finally the version of the current GUI because other attempts failed. "
                                 "Please, report this issue with BiaPy developers so they can fix it.")
-        vtag = self.settings["biapy_gui_version"]
+        vtag = main_window.cfg.settings["biapy_gui_version"]
 
     return sha, vtag 
         
