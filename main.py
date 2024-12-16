@@ -3,6 +3,7 @@ import sys
 import tempfile
 import logging
 import traceback
+import qdarktheme
 from PySide6 import QtCore, QtGui, QtWidgets
 from PySide6.QtWidgets import *
 from PySide6.QtCore import *
@@ -1070,11 +1071,13 @@ if __name__ == "__main__":
 
     splash = QSplashScreen(QPixmap(resource_path(os.path.join("images","splash_screen","biapy_splash_logo.png"))))
     splash.show()
-    # app.processEvents()  
+    app.processEvents()  
+    
+    qdarktheme.setup_theme("light")
 
     app.setWindowIcon(QIcon(resource_path(os.path.join("images","splash_screen","biapy_logo_icon.ico"))))
     app.setStyleSheet(StyleSheet)
-
+    app.setStyle("Fusion")
     # For disabling wheel in combo boxes
     class WheelEventFilter(QtCore.QObject):
         def eventFilter(self, obj, ev):
