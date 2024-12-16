@@ -1002,6 +1002,7 @@ class MainWindow(QMainWindow):
                     self.logger.error(f"Possible expected error during thread_spin deletion: {e}")
             # Finally close the main window    
             self.close()
+            QtWidgets.QApplication.quit()
         else:
             event.ignore()  
 
@@ -1066,9 +1067,14 @@ if __name__ == "__main__":
     # os.environ["QT_SCALE_FACTOR"] = "1"
     os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
     app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon(resource_path(os.path.join("images","biapy_logo_icon.ico"))))
+
+    splash = QSplashScreen(QPixmap(resource_path(os.path.join("images","splash_screen","biapy_splash_logo.png"))))
+    splash.show()
+    # app.processEvents()  
+
+    app.setWindowIcon(QIcon(resource_path(os.path.join("images","splash_screen","biapy_logo_icon.ico"))))
     app.setStyleSheet(StyleSheet)
-    
+
     # For disabling wheel in combo boxes
     class WheelEventFilter(QtCore.QObject):
         def eventFilter(self, obj, ev):
@@ -1080,6 +1086,7 @@ if __name__ == "__main__":
 
     window = MainWindow(logger, log_dir)
     window.show()
+    splash.finish(window)
 
     # Center the main GUI in the middle of the first screen
     all_screens = app.screens()
@@ -1101,5 +1108,4 @@ if __name__ == "__main__":
         QtWidgets.QApplication.quit()
     sys.excepthook = excepthook
 
-    app.exec()
-    app.quit()
+    sys.exit(app.exec())

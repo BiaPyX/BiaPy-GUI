@@ -8,7 +8,7 @@ import multiprocessing
 import json
 from pathlib import Path
 
-from PySide6 import QtCore, QtGui, QtWidgets
+from PySide6 import QtCore, QtWidgets
 from PySide6.QtCore import Qt, QObject, QUrl
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import *
