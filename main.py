@@ -58,7 +58,6 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("BiaPy") 
         UIFunction.initStackTab(self)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
-        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.ui.bn_min.clicked.connect(self.showMinimized)
         self.ui.bn_close.clicked.connect(self.close)
 
@@ -1069,8 +1068,11 @@ if __name__ == "__main__":
     os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
     app = QApplication(sys.argv)
 
-    splash = QSplashScreen(QPixmap(resource_path(os.path.join("images","splash_screen","biapy_splash_logo.png"))))
+    splash = QSplashScreen(
+        QPixmap(resource_path(os.path.join("images","splash_screen","biapy_splash_logo.png"))),
+        Qt.WindowStaysOnTopHint)
     splash.show()
+    
     app.processEvents()  
     
     qdarktheme.setup_theme("light")
