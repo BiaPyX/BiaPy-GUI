@@ -1,6 +1,7 @@
 import os
 import sys
-import tempfile
+import json
+from platformdirs import user_cache_dir
 import logging
 import traceback
 import qdarktheme
@@ -21,7 +22,7 @@ from ui.aux_windows import dialog_Ui, workflow_explanation_Ui, yes_no_Ui, spinne
 os.environ['QT_MAC_WANTS_LAYER'] = '1'
 
 class MainWindow(QMainWindow):
-    def __init__(self, logger, log_dir):
+    def __init__(self, logger, log_info):
         """ 
         Main window constructor. 
 
@@ -30,15 +31,15 @@ class MainWindow(QMainWindow):
         logger : str
             Logger to log the file to log all the information. 
 
-        log_dir : str
-            Logging directory for the current BiaPy GUI execution. 
+        log_info : dict
+            Logging information.
         """
         super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
         self.logger = logger
-        self.log_dir = log_dir
+        self.log_info = log_info
         self.cfg = Settings()
 
         self.workflow_view_queue = None
@@ -739,7 +740,7 @@ class MainWindow(QMainWindow):
             Mouse drag event.
         """
         self.dragPos = event.globalPosition().toPoint()
-    
+
     def dialog_exec(self, message, reason):
         """ 
         Starts a dialog to inform the user of something. 
@@ -1040,10 +1041,21 @@ if __name__ == "__main__":
     window = None
 
     # Log output to file
-    log_dir = os.path.join(tempfile._get_default_tempdir(), "BiaPy")
-    random_str = next(tempfile._get_candidate_names())
-    log_file = os.path.join(log_dir, f"BiaPy_{random_str}") 
+    biapy_dir = user_cache_dir("biapy")
+    log_dir = os.path.join(biapy_dir, "logs")
+    time_now = datetime.now().strftime("%Y%m%d-%H%M%S")
+    log_file = os.path.join(log_dir, f"biapy_{time_now}") 
+    config_file = os.path.join(biapy_dir, f"config.json") 
+    os.makedirs(biapy_dir, exist_ok=True)
     os.makedirs(log_dir, exist_ok=True)
+
+    log_info = {
+        "biapy_dir": biapy_dir,
+        "log_dir": log_dir,
+        "log_file": log_file,
+        "config_file": config_file,
+    }
+
     logging.basicConfig(filename=log_file, format='%(asctime)s %(message)s', filemode='w')
     logger = logging.getLogger()
     logger.setLevel(logging.DEBUG) 
@@ -1089,7 +1101,7 @@ if __name__ == "__main__":
     filter = WheelEventFilter()
     app.installEventFilter(filter)
 
-    window = MainWindow(logger, log_dir)
+    window = MainWindow(logger, log_info)
     window.show()
     splash.finish(window)
 
@@ -1099,7 +1111,7 @@ if __name__ == "__main__":
 
     # Check new versions of the GUI
     window.check_new_gui_version()
-
+        
     def excepthook(exc_type, exc_value, exc_tb):
         tb = "".join(traceback.format_exception(exc_type, exc_value, exc_tb))
         logger.info("error message:\n", tb)
