@@ -13,8 +13,8 @@ from ui.ui_yes_no import Ui_yes_no
 from ui.spinner import Ui_spinner
 from ui.ui_basic import Ui_basic 
 from ui.ui_model_carrousel import Ui_model_card_carrousel_dialog 
-
 from ui.ui_workflow_info import Ui_Workflow_info 
+from ui.ui_tour_window import Ui_tour_window
 from aux_classes.waitingspinnerwidget import QtWaitingSpinner
 
 class workflow_explanation_Ui(QDialog):
@@ -530,3 +530,75 @@ class model_card_carrousel_Ui(QDialog):
         for i, model in enumerate(self.model_cards):
             model[f"model_card_frame_{i}"].setVisible(False)
         super().close()
+
+class tour_window_Ui(QDialog):
+    def __init__(self, dot_images, parent=None):
+        super(tour_window_Ui, self).__init__(parent)
+        self.basic_window = Ui_tour_window()
+        self.basic_window.setupUi(self)
+        self.setWindowFlags(Qt.Window | Qt.FramelessWindowHint)
+        self.basic_window.bn_close.clicked.connect(self.close)
+        self.basic_window.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","close_icon.png"))))
+        self.basic_window.ok_bn.clicked.connect(self.close)
+        self.setStyleSheet("#centralwidget{ border: 1px solid black;} QWidget{ font-size:16px;}")
+        self.current_tour_window = 1 
+        self.dot_images = dot_images
+
+        self.basic_window.left_arrow_bn.clicked.connect(lambda: self.move_tour_view(self.current_tour_window-1))
+        self.basic_window.right_arrow_bn.clicked.connect(lambda: self.move_tour_view(self.current_tour_window+1))
+        self.basic_window.window1_bn.clicked.connect(lambda: self.move_tour_view(1))
+        self.basic_window.window2_bn.clicked.connect(lambda: self.move_tour_view(2))
+        self.basic_window.window3_bn.clicked.connect(lambda: self.move_tour_view(3))
+        self.basic_window.window4_bn.clicked.connect(lambda: self.move_tour_view(4))
+        self.basic_window.window5_bn.clicked.connect(lambda: self.move_tour_view(5))
+        self.basic_window.window6_bn.clicked.connect(lambda: self.move_tour_view(6))
+        self.max_windows = 6
+        
+        # Set all icons 
+        self.basic_window.window1_bn.setIcon(self.dot_images[0])
+        self.basic_window.d1_label.setPixmap(QPixmap(resource_path(os.path.join("images","tour","description_page1.svg"))))
+        for i in range(2,self.max_windows):
+            getattr(self.basic_window, f"window{i}_bn").setIcon(self.dot_images[1])
+            getattr(self.basic_window, f"d{i}_label").setPixmap(QPixmap(resource_path(os.path.join("images","tour",f"description_page{i}.svg"))))
+        getattr(self.basic_window, f"window{self.max_windows}_bn").setIcon(self.dot_images[1])
+        self.basic_window.left_arrow_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","left_arrow.svg"))))
+        self.basic_window.right_arrow_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","right_arrow.svg"))))
+        self.basic_window.left_arrow_bn.setVisible(False)
+        
+    def set_biapy_version(self, version):
+        self.basic_window.presentation_version_text.setText(f"Version {str(version)}")
+        self.basic_window.d5_release_notes_text.setText(f"<html><head/><body><p align=\"center\"><span style=\" font-family:'Arial','sans-serif'; font-size:12pt; color:#595959; background-color:transparent;\">Check out version {str(version)} </span><a href=\"https://github.com/BiaPyX/BiaPy-GUI/releases/tag/v{str(version)}\"><span style=\" font-family:'Arial','sans-serif'; font-size:12pt; text-decoration: underline; color:#0097a7; background-color:transparent;\">release notes</span></a><span style=\" font-family:'Arial','sans-serif'; font-size:12pt; color:#595959; background-color:transparent;\">.</span></p></body></html>")
+
+    def move_tour_view(self, bn_number): 
+        self.current_tour_window = max(1,min(self.max_windows, bn_number))
+
+        # Hide left/rigth arrows depending on the current window
+        if self.current_tour_window == 1:
+            self.basic_window.left_arrow_bn.setVisible(False)
+        elif self.current_tour_window > 1:
+            self.basic_window.left_arrow_bn.setVisible(True)
+        if self.current_tour_window == self.max_windows:
+            self.basic_window.right_arrow_bn.setVisible(False)
+        elif self.current_tour_window < self.max_windows:
+            self.basic_window.right_arrow_bn.setVisible(True)
+
+        # Change page view 
+        if self.current_tour_window == 1:
+            self.basic_window.stackedWidget.setCurrentWidget(self.basic_window.presentation_page)
+        elif self.current_tour_window == 2:
+            self.basic_window.stackedWidget.setCurrentWidget(self.basic_window.description_page1)
+        elif self.current_tour_window == 3:
+            self.basic_window.stackedWidget.setCurrentWidget(self.basic_window.description_page2)
+        elif self.current_tour_window == 4:
+            self.basic_window.stackedWidget.setCurrentWidget(self.basic_window.description_page3)
+        elif self.current_tour_window == 5:
+            self.basic_window.stackedWidget.setCurrentWidget(self.basic_window.description_page4)
+        elif self.current_tour_window == 6:
+            self.basic_window.stackedWidget.setCurrentWidget(self.basic_window.release_notes_page)
+
+        # Adjust the progress dot 
+        for i in range(1,self.current_tour_window+1):
+            getattr(self.basic_window, f"window{i}_bn").setIcon(self.dot_images[0])
+
+        for i in range(self.current_tour_window+1,self.max_windows+1):
+            getattr(self.basic_window, f"window{i}_bn").setIcon(self.dot_images[1])

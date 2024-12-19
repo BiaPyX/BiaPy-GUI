@@ -17,7 +17,7 @@ from ui_utils import (examine, mark_syntax_error, expand_hide_advanced_options, 
 from settings import Settings
 from widget_conditions import Widget_conditions
 from ui.ui_main import Ui_MainWindow 
-from ui.aux_windows import dialog_Ui, workflow_explanation_Ui, yes_no_Ui, spinner_Ui, basic_Ui, model_card_carrousel_Ui
+from ui.aux_windows import dialog_Ui, workflow_explanation_Ui, yes_no_Ui, spinner_Ui, basic_Ui, model_card_carrousel_Ui, tour_window_Ui
 
 os.environ['QT_MAC_WANTS_LAYER'] = '1'
 
@@ -707,6 +707,7 @@ class MainWindow(QMainWindow):
         self.spinner = None
         self.basic_dialog = None
         self.model_carrousel_dialog = None
+        self.tour = None
 
         # Variable to store model cards 
         self.model_cards = None
@@ -740,6 +741,28 @@ class MainWindow(QMainWindow):
             Mouse drag event.
         """
         self.dragPos = event.globalPosition().toPoint()
+
+    def tour_exec(self):
+        """ 
+        Starts the tour window. 
+        """
+        if self.tour is None: 
+            self.tour = tour_window_Ui(self.cfg.settings['dot_images'], self)
+
+        self.tour.set_biapy_version(self.cfg.settings["biapy_gui_version"])
+        center_window(self.tour, self.geometry())
+        self.tour.exec()
+
+        # Save users election
+        try:
+            with open(self.log_info["config_file"], 'r') as file:
+                data = json.load(file)
+        except:
+            data = {}
+        data["HIDE_TOUR_WINDOW"]= self.tour.basic_window.dont_show_message_checkbox.checkState() == Qt.Checked
+
+        with open(self.log_info["config_file"], "w") as outfile:
+            json.dump(data, outfile, indent=4)
 
     def dialog_exec(self, message, reason):
         """ 
@@ -1111,6 +1134,18 @@ if __name__ == "__main__":
 
     # Check new versions of the GUI
     window.check_new_gui_version()
+
+    # Start tour window
+    hide_tour = False
+    try:
+        with open(log_info["config_file"], 'r') as file:
+            data = json.load(file)
+            hide_tour = bool(data["HIDE_TOUR_WINDOW"])
+    except: 
+        pass
+
+    if not hide_tour:
+        window.tour_exec()
         
     def excepthook(exc_type, exc_value, exc_tb):
         tb = "".join(traceback.format_exception(exc_type, exc_value, exc_tb))
