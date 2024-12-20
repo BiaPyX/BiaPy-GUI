@@ -119,51 +119,8 @@ class UIFunction(MainWindow):
         main_window.ui.biapy_notebooks_bn.setIconSize(QSize(40, 40))
         main_window.ui.biapy_citation_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","citation_icon.svg"))))
         main_window.ui.biapy_citation_bn.setIconSize(QSize(31, 31))
-
-        # Create docker logo and text here. This last is necessary to do it here and not in ui_main.py
-        # because they are inserted in order 
-        dockerlogo = QFile(resource_path(os.path.join("images","docker_logo.svg")))
-        dockerlogo.open(QIODevice.ReadWrite)
-        main_window.docker_logo_bytearray_str = dockerlogo.readAll()
-        dockerlogo.close()
-        main_window.ui.docker_logo = QSvgWidget()
-        main_window.ui.docker_logo.setObjectName(u"docker_logo")
-        main_window.ui.docker_logo.setMinimumSize(QSize(220, 56))
-        main_window.ui.docker_logo.setMaximumSize(QSize(220, 56))
-        main_window.ui.docker_logo.load(main_window.docker_logo_bytearray_str)
-        main_window.ui.verticalLayout_28.addWidget(main_window.ui.docker_logo, alignment=Qt.AlignCenter)
-
-        main_window.ui.docker_status_label = QLabel(main_window.ui.docker_frame)
-        main_window.ui.docker_status_label.setObjectName(u"docker_status_label")
-        main_window.ui.docker_status_label.setMinimumSize(QSize(0, 0))
-        main_window.ui.docker_status_label.setMaximumSize(QSize(16777215, 16777215))
-        main_window.ui.docker_status_label.setFont(font)
-        main_window.ui.docker_status_label.setAlignment(Qt.AlignCenter)
-        main_window.ui.docker_status_label.setWordWrap(True)
-        main_window.ui.docker_status_label.setOpenExternalLinks(True)
-        main_window.ui.verticalLayout_28.addWidget(main_window.ui.docker_status_label)
-
-        # GPU logo and text
-        gpu_icon = QFile(resource_path(os.path.join("images","gpu_icon.svg")))
-        gpu_icon.open(QIODevice.ReadWrite)
-        main_window.gpu_icon_bytearray_str = gpu_icon.readAll()
-        gpu_icon.close()
-        main_window.ui.gpu_icon_label = QSvgWidget()
-        main_window.ui.gpu_icon_label.setObjectName(u"gpu_icon_label")
-        main_window.ui.gpu_icon_label.setMinimumSize(QSize(122, 80))
-        main_window.ui.gpu_icon_label.setMaximumSize(QSize(122, 80))
-        main_window.ui.gpu_icon_label.load(main_window.gpu_icon_bytearray_str)
-        main_window.ui.verticalLayout_33.addWidget(main_window.ui.gpu_icon_label, alignment=Qt.AlignCenter)
-
-        main_window.ui.gpu_status_label = QLabel(main_window.ui.gpu_frame)
-        main_window.ui.gpu_status_label.setObjectName(u"gpu_status_label")
-        main_window.ui.gpu_status_label.setMinimumSize(QSize(0, 0))
-        main_window.ui.gpu_status_label.setFont(font)
-        main_window.ui.gpu_status_label.setAlignment(Qt.AlignCenter)
-        main_window.ui.gpu_status_label.setWordWrap(True)
-        main_window.ui.gpu_status_label.setOpenExternalLinks(True)
-        main_window.ui.verticalLayout_33.addWidget(main_window.ui.gpu_status_label)
-        
+        main_window.ui.docker_logo.setPixmap(QPixmap(resource_path(os.path.join("images","docker_logo.svg"))))
+        main_window.ui.gpu_icon_label.setPixmap(QPixmap(resource_path(os.path.join("images","gpu_icon.svg"))))
         main_window.ui.biapy_version.setText(f"Version {main_window.cfg.settings['biapy_code_version']} - GUI: {main_window.cfg.settings['biapy_gui_version']}")
 
     ###############

@@ -1401,7 +1401,7 @@ QPushButton:pressed {
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>2</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="page_home">
                 <property name="styleSheet">
@@ -2212,6 +2212,50 @@ border-radius: 25px;
                           <property name="bottomMargin">
                            <number>9</number>
                           </property>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QLabel" name="docker_logo">
+                            <property name="minimumSize">
+                             <size>
+                              <width>220</width>
+                              <height>56</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>220</width>
+                              <height>56</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>DejaVu Math TeX Gyre</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="scaledContents">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QLabel" name="docker_status_label">
+                            <property name="font">
+                             <font>
+                              <family>DejaVu Math TeX Gyre</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                            <property name="wordWrap">
+                             <bool>true</bool>
+                            </property>
+                            <property name="openExternalLinks">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
                          </layout>
                         </widget>
                        </item>
@@ -2275,6 +2319,50 @@ border-radius: 25px;
                           <property name="bottomMargin">
                            <number>9</number>
                           </property>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QLabel" name="gpu_icon_label">
+                            <property name="minimumSize">
+                             <size>
+                              <width>122</width>
+                              <height>80</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>122</width>
+                              <height>80</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>DejaVu Math TeX Gyre</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="scaledContents">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QLabel" name="gpu_status_label">
+                            <property name="font">
+                             <font>
+                              <family>DejaVu Math TeX Gyre</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                            <property name="wordWrap">
+                             <bool>true</bool>
+                            </property>
+                            <property name="openExternalLinks">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
                          </layout>
                         </widget>
                        </item>
@@ -33252,8 +33340,8 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>928</width>
-                                       <height>301</height>
+                                       <width>452</width>
+                                       <height>255</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_61">
@@ -33690,7 +33778,7 @@ QPushButton:pressed {
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>914</width>
+                                       <width>633</width>
                                        <height>1327</height>
                                       </rect>
                                      </property>
@@ -36255,8 +36343,8 @@ p, li { white-space: pre-wrap; }
                                      <property name="geometry">
                                       <rect>
                                        <x>0</x>
-                                       <y>-636</y>
-                                       <width>914</width>
+                                       <y>0</y>
+                                       <width>597</width>
                                        <height>1056</height>
                                       </rect>
                                      </property>
@@ -38273,8 +38361,8 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>928</width>
-                                       <height>301</height>
+                                       <width>372</width>
+                                       <height>44</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_64">
@@ -38353,8 +38441,8 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>928</width>
-                                       <height>301</height>
+                                       <width>426</width>
+                                       <height>44</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_65">
@@ -39787,8 +39875,8 @@ QPushButton:pressed {
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>896</width>
-                               <height>152</height>
+                               <width>96</width>
+                               <height>26</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_32">

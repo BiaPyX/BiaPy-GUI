@@ -893,6 +893,24 @@ class Ui_MainWindow(object):
         self.verticalLayout_28.setSpacing(6)
         self.verticalLayout_28.setObjectName(u"verticalLayout_28")
         self.verticalLayout_28.setContentsMargins(9, 9, 9, 9)
+        self.docker_logo = QLabel(self.docker_frame)
+        self.docker_logo.setObjectName(u"docker_logo")
+        self.docker_logo.setMinimumSize(QSize(220, 56))
+        self.docker_logo.setMaximumSize(QSize(220, 56))
+        self.docker_logo.setFont(font)
+        self.docker_logo.setScaledContents(True)
+
+        self.verticalLayout_28.addWidget(self.docker_logo, 0, Qt.AlignHCenter)
+
+        self.docker_status_label = QLabel(self.docker_frame)
+        self.docker_status_label.setObjectName(u"docker_status_label")
+        self.docker_status_label.setFont(font)
+        self.docker_status_label.setAlignment(Qt.AlignCenter)
+        self.docker_status_label.setWordWrap(True)
+        self.docker_status_label.setOpenExternalLinks(True)
+
+        self.verticalLayout_28.addWidget(self.docker_status_label, 0, Qt.AlignHCenter)
+
 
         self.gridLayout_68.addWidget(self.docker_frame, 1, 0, 1, 1)
 
@@ -917,6 +935,24 @@ class Ui_MainWindow(object):
         self.verticalLayout_33.setSpacing(6)
         self.verticalLayout_33.setObjectName(u"verticalLayout_33")
         self.verticalLayout_33.setContentsMargins(9, 9, 9, 9)
+        self.gpu_icon_label = QLabel(self.gpu_frame)
+        self.gpu_icon_label.setObjectName(u"gpu_icon_label")
+        self.gpu_icon_label.setMinimumSize(QSize(122, 80))
+        self.gpu_icon_label.setMaximumSize(QSize(122, 80))
+        self.gpu_icon_label.setFont(font)
+        self.gpu_icon_label.setScaledContents(True)
+
+        self.verticalLayout_33.addWidget(self.gpu_icon_label, 0, Qt.AlignHCenter)
+
+        self.gpu_status_label = QLabel(self.gpu_frame)
+        self.gpu_status_label.setObjectName(u"gpu_status_label")
+        self.gpu_status_label.setFont(font)
+        self.gpu_status_label.setAlignment(Qt.AlignCenter)
+        self.gpu_status_label.setWordWrap(True)
+        self.gpu_status_label.setOpenExternalLinks(True)
+
+        self.verticalLayout_33.addWidget(self.gpu_status_label, 0, Qt.AlignHCenter)
+
 
         self.gridLayout_68.addWidget(self.gpu_frame, 1, 1, 1, 1)
 
@@ -12099,7 +12135,7 @@ class Ui_MainWindow(object):
         self.scrollArea_8.setWidgetResizable(True)
         self.scrollAreaWidgetContents_12 = QWidget()
         self.scrollAreaWidgetContents_12.setObjectName(u"scrollAreaWidgetContents_12")
-        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 928, 301))
+        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 452, 255))
         self.gridLayout_61 = QGridLayout(self.scrollAreaWidgetContents_12)
         self.gridLayout_61.setObjectName(u"gridLayout_61")
         self.label_82 = QLabel(self.scrollAreaWidgetContents_12)
@@ -12271,7 +12307,7 @@ class Ui_MainWindow(object):
         self.scrollArea_9.setWidgetResizable(True)
         self.scrollAreaWidgetContents_13 = QWidget()
         self.scrollAreaWidgetContents_13.setObjectName(u"scrollAreaWidgetContents_13")
-        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 914, 1327))
+        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 633, 1327))
         self.gridLayout_44 = QGridLayout(self.scrollAreaWidgetContents_13)
         self.gridLayout_44.setObjectName(u"gridLayout_44")
         self.label_86 = QLabel(self.scrollAreaWidgetContents_13)
@@ -13189,7 +13225,7 @@ class Ui_MainWindow(object):
         self.scrollArea_10.setWidgetResizable(True)
         self.scrollAreaWidgetContents_14 = QWidget()
         self.scrollAreaWidgetContents_14.setObjectName(u"scrollAreaWidgetContents_14")
-        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, -636, 914, 1056))
+        self.scrollAreaWidgetContents_14.setGeometry(QRect(0, 0, 597, 1056))
         self.gridLayout_47 = QGridLayout(self.scrollAreaWidgetContents_14)
         self.gridLayout_47.setObjectName(u"gridLayout_47")
         self.label_100 = QLabel(self.scrollAreaWidgetContents_14)
@@ -13920,7 +13956,7 @@ class Ui_MainWindow(object):
         self.scrollArea_11.setWidgetResizable(True)
         self.scrollAreaWidgetContents_15 = QWidget()
         self.scrollAreaWidgetContents_15.setObjectName(u"scrollAreaWidgetContents_15")
-        self.scrollAreaWidgetContents_15.setGeometry(QRect(0, 0, 928, 301))
+        self.scrollAreaWidgetContents_15.setGeometry(QRect(0, 0, 372, 44))
         self.gridLayout_64 = QGridLayout(self.scrollAreaWidgetContents_15)
         self.gridLayout_64.setObjectName(u"gridLayout_64")
         self.verticalSpacer_27 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
@@ -13954,7 +13990,7 @@ class Ui_MainWindow(object):
         self.scrollArea_12.setWidgetResizable(True)
         self.scrollAreaWidgetContents_16 = QWidget()
         self.scrollAreaWidgetContents_16.setObjectName(u"scrollAreaWidgetContents_16")
-        self.scrollAreaWidgetContents_16.setGeometry(QRect(0, 0, 928, 301))
+        self.scrollAreaWidgetContents_16.setGeometry(QRect(0, 0, 426, 44))
         self.gridLayout_65 = QGridLayout(self.scrollAreaWidgetContents_16)
         self.gridLayout_65.setObjectName(u"gridLayout_65")
         self.label_102 = QLabel(self.scrollAreaWidgetContents_16)
@@ -14554,7 +14590,7 @@ class Ui_MainWindow(object):
         self.check_yaml_file_errors_frame.setWidgetResizable(True)
         self.scrollAreaWidgetContents_19 = QWidget()
         self.scrollAreaWidgetContents_19.setObjectName(u"scrollAreaWidgetContents_19")
-        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 896, 152))
+        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 96, 26))
         self.verticalLayout_32 = QVBoxLayout(self.scrollAreaWidgetContents_19)
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
         self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)
@@ -14613,7 +14649,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(0)
         self.wizard_main_frame.setCurrentIndex(0)
         self.stackedWidget_create_yaml_frame.setCurrentIndex(3)
         self.train_tab_widget.setCurrentIndex(0)
