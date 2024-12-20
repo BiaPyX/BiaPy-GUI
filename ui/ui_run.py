@@ -92,7 +92,7 @@ class Ui_RunBiaPy(object):
 "	background-color: rgba(0,0,0,0);\n"
 "}")
         icon = QIcon()
-        icon.addFile(u"images/bn_images/hide_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon.addFile(u"../../../../.designer/backup/images/bn_images/hide_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.bn_min.setIcon(icon)
         self.bn_min.setIconSize(QSize(22, 12))
         self.bn_min.setAutoDefault(False)
@@ -115,7 +115,7 @@ class Ui_RunBiaPy(object):
 "	background-color: rgba(0,0,0,0);\n"
 "}")
         icon1 = QIcon()
-        icon1.addFile(u"images/bn_images/close_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon1.addFile(u"../../../../.designer/backup/images/bn_images/close_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.bn_close.setIcon(icon1)
         self.bn_close.setIconSize(QSize(22, 22))
         self.bn_close.setAutoDefault(False)
@@ -201,16 +201,18 @@ class Ui_RunBiaPy(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, -6, 925, 184))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 939, 158))
         self.verticalLayout_5 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.biapy_container_info_label = QLabel(self.scrollAreaWidgetContents)
         self.biapy_container_info_label.setObjectName(u"biapy_container_info_label")
         self.biapy_container_info_label.setMinimumSize(QSize(0, 0))
+        self.biapy_container_info_label.setMaximumSize(QSize(921, 16777215))
         font2 = QFont()
         font2.setFamilies([u"DejaVu Math TeX Gyre"])
         font2.setPointSize(11)
         self.biapy_container_info_label.setFont(font2)
+        self.biapy_container_info_label.setWordWrap(True)
         self.biapy_container_info_label.setOpenExternalLinks(True)
         self.biapy_container_info_label.setTextInteractionFlags(Qt.LinksAccessibleByKeyboard|Qt.LinksAccessibleByMouse|Qt.TextBrowserInteraction|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
@@ -342,6 +344,7 @@ class Ui_RunBiaPy(object):
 
         self.label = QLabel(self.frame_bottom)
         self.label.setObjectName(u"label")
+        self.label.setMinimumSize(QSize(0, 20))
         self.label.setFont(font)
 
         self.verticalLayout_3.addWidget(self.label)

@@ -3097,7 +3097,7 @@ def load_yaml_config(main_window, advise_user=False):
             main_window.dialog_exec("There was a problem loading the .yaml config file", reason="error")
     temp_cfg = convert_old_model_cfg_to_current_version(temp_cfg)
     main_window.logger.info("Creating temporal input YAML file for converting possible old configuration") 
-    tmp_cfg_file = os.path.join(main_window.log_dir, "biapy_tmp.yaml")
+    tmp_cfg_file = os.path.join(main_window.log_info["log_dir"], "biapy_tmp.yaml")
     with open(tmp_cfg_file, 'w', encoding='utf8') as outfile:
         yaml.dump(temp_cfg, outfile, default_flow_style=False)
 
@@ -3245,7 +3245,7 @@ class load_yaml_to_GUI_engine(QObject):
             # are automatically translated into the BiaPy version the GUI is running.
             loaded_cfg = convert_old_model_cfg_to_current_version(loaded_cfg)
             self.main_window.logger.info("Creating temporal input YAML file for converting possible old configuration") 
-            tmp_cfg_file = os.path.join(self.main_window.log_dir, "biapy_tmp.yaml")
+            tmp_cfg_file = os.path.join(self.main_window.log_info["log_dir"], "biapy_tmp.yaml")
             with open(tmp_cfg_file, 'w', encoding='utf8') as outfile:
                 yaml.dump(loaded_cfg, outfile, default_flow_style=False)
 

@@ -1253,7 +1253,7 @@ class UIFunction(MainWindow):
         main_window.cfg.settings['building_thread'] = None
         main_window.cfg.settings['building_worker'] = None
         main_window.cfg.settings['building_threads'] = QThread()
-        outf = main_window.log_dir if main_window.cfg.settings['output_folder'] == "" else main_window.cfg.settings['output_folder']
+        outf = main_window.log_info["log_dir"] if main_window.cfg.settings['output_folder'] == "" else main_window.cfg.settings['output_folder']
         main_window.cfg.settings['building_worker'] = build_worker(main_window, main_window.cfg.settings['biapy_container_dockerfile'], 
             main_window.cfg.settings['biapy_container_name'], outf)
         main_window.cfg.settings['building_worker'].moveToThread(main_window.cfg.settings['building_threads'])
@@ -1370,7 +1370,7 @@ class UIFunction(MainWindow):
         if local_biapy_image_tag == "":
             if not local_biapy_container_found:
                 main_window.yes_no_exec(f"Container version '{container_version_selected}' not found. You will need to download " +\
-                    "it (in the future, if you reuse it, downloading won't be required). This will require approximately 10GB ".format(main_window.cfg.settings['biapy_container_size']) +\
+                    "it (in the future, if you reuse it, downloading won't be required). This will require approximately 12GB ".format(main_window.cfg.settings['biapy_container_size']) +\
                     "of disk space. Would you like to proceed?")
             else:
                 main_window.yes_no_exec("Seems that there is an existing BiaPy container locally built ({}). Do you want to continue?"\

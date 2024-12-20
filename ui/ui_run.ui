@@ -195,7 +195,7 @@ QPushButton:pressed {
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>images/bn_images/hide_icon.png</normaloff>images/bn_images/hide_icon.png</iconset>
+             <normaloff>../../../../.designer/backup/images/bn_images/hide_icon.png</normaloff>../../../../.designer/backup/images/bn_images/hide_icon.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -242,7 +242,7 @@ QPushButton:pressed {
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>images/bn_images/close_icon.png</normaloff>images/bn_images/close_icon.png</iconset>
+             <normaloff>../../../../.designer/backup/images/bn_images/close_icon.png</normaloff>../../../../.designer/backup/images/bn_images/close_icon.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -435,9 +435,9 @@ QPushButton:pressed {
                   <property name="geometry">
                    <rect>
                     <x>0</x>
-                    <y>-6</y>
-                    <width>925</width>
-                    <height>184</height>
+                    <y>0</y>
+                    <width>939</width>
+                    <height>158</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -449,6 +449,12 @@ QPushButton:pressed {
                        <height>0</height>
                       </size>
                      </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>921</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
                      <property name="font">
                       <font>
                        <family>DejaVu Math TeX Gyre</family>
@@ -457,6 +463,9 @@ QPushButton:pressed {
                      </property>
                      <property name="text">
                       <string>INITIALIZING . . . (this may take a while)</string>
+                     </property>
+                     <property name="wordWrap">
+                      <bool>true</bool>
                      </property>
                      <property name="openExternalLinks">
                       <bool>true</bool>
@@ -767,6 +776,12 @@ QPushButton:hover {
          </item>
          <item>
           <widget class="QLabel" name="label">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <family>DejaVu Math TeX Gyre</family>
