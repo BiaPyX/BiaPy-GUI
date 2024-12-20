@@ -759,7 +759,8 @@ class MainWindow(QMainWindow):
                 data = json.load(file)
         except:
             data = {}
-        data["HIDE_TOUR_WINDOW"]= self.tour.basic_window.dont_show_message_checkbox.checkState() == Qt.Checked
+        data["HIDE_TOUR_WINDOW"] = self.tour.basic_window.dont_show_message_checkbox.checkState() == Qt.Checked
+        data["GUI_VERSION"] = str(self.cfg.settings["biapy_gui_version"])
 
         with open(self.log_info["config_file"], "w") as outfile:
             json.dump(data, outfile, indent=4)
@@ -1137,12 +1138,17 @@ if __name__ == "__main__":
 
     # Start tour window
     hide_tour = False
+    version = ""
     try:
         with open(log_info["config_file"], 'r') as file:
             data = json.load(file)
             hide_tour = bool(data["HIDE_TOUR_WINDOW"])
+            version = str(data["GUI_VERSION"])
     except: 
         pass
+
+    if hide_tour and version != str(window.cfg.settings["biapy_gui_version"]):
+        hide_tour = False
 
     if not hide_tour:
         window.tour_exec()
