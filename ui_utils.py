@@ -3771,3 +3771,30 @@ def check_supported_container_versions(gui_version, logger):
         logger.error(exc)
         return compatible_versions
     
+def save_biapy_config(main_window, data, biapy_version=""): 
+    """
+    Save BiaPy configuration.
+    
+    Parameters
+    ----------
+    main_window : QMainWindow
+        Main window of the application.
+    
+    data: dict
+        Data dict to save.
+
+    biapy_version : str, optional
+        Data version to save if there is no one in the config file. 
+    """    
+    try:
+        with open(main_window.log_info["config_file"], 'r') as file:
+            old_data = json.load(file)
+    except:
+        old_data = {}
+    old_data.update(data)
+
+    if biapy_version != "" and "GUI_VERSION" not in old_data:
+        old_data["GUI_VERSION"] = biapy_version
+
+    with open(main_window.log_info["config_file"], "w") as outfile:
+        json.dump(old_data, outfile, indent=4)

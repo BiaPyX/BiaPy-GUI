@@ -13,7 +13,8 @@ from PySide6.QtGui import *
 from ui_function import * 
 from ui_utils import (examine, mark_syntax_error, expand_hide_advanced_options, change_page, get_git_revision_short_hash,
     load_yaml_config, resource_path, load_yaml_to_GUI, set_text, start_wizard_questionary, change_wizard_page, eval_wizard_answer, 
-    clear_answers, check_models_from_other_sources, check_data_from_path, export_wizard_summary, wizard_path_changed)
+    clear_answers, check_models_from_other_sources, check_data_from_path, export_wizard_summary, wizard_path_changed,
+    save_biapy_config)
 from settings import Settings
 from widget_conditions import Widget_conditions
 from ui.ui_main import Ui_MainWindow 
@@ -754,16 +755,10 @@ class MainWindow(QMainWindow):
         self.tour.exec()
 
         # Save users election
-        try:
-            with open(self.log_info["config_file"], 'r') as file:
-                data = json.load(file)
-        except:
-            data = {}
-        data["HIDE_TOUR_WINDOW"] = self.tour.basic_window.dont_show_message_checkbox.checkState() == Qt.Checked
-        data["GUI_VERSION"] = str(self.cfg.settings["biapy_gui_version"])
-
-        with open(self.log_info["config_file"], "w") as outfile:
-            json.dump(data, outfile, indent=4)
+        data = {
+            "HIDE_TOUR_WINDOW": self.tour.basic_window.dont_show_message_checkbox.checkState() == Qt.Checked,
+        }
+        save_biapy_config(self, data, self.cfg.settings["biapy_gui_version"])
 
     def dialog_exec(self, message, reason):
         """ 
@@ -1137,6 +1132,7 @@ if __name__ == "__main__":
     window.check_new_gui_version()
 
     # Start tour window
+    save_biapy_config(window, {}, str(window.cfg.settings["biapy_gui_version"]))
     hide_tour = False
     version = ""
     try:
@@ -1147,7 +1143,7 @@ if __name__ == "__main__":
     except: 
         pass
 
-    if hide_tour and version != str(window.cfg.settings["biapy_gui_version"]):
+    if version != str(window.cfg.settings["biapy_gui_version"]):
         hide_tour = False
 
     if not hide_tour:
