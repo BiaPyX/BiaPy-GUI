@@ -487,7 +487,7 @@ class Ui_tour_window(object):
         self.window5_bn.setText("")
         self.window6_bn.setText("")
         self.right_arrow_bn.setText("")
-        self.dont_show_message_checkbox.setText(QCoreApplication.translate("tour_window", u"Do not show me this message again. ", None))
+        self.dont_show_message_checkbox.setText(QCoreApplication.translate("tour_window", u"Do not show this message again. ", None))
         self.ok_bn.setText(QCoreApplication.translate("tour_window", u"Got it!", None))
     # retranslateUi
 
