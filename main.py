@@ -1057,6 +1057,17 @@ def center_window(widget, geometry):
     )
    
 if __name__ == "__main__":
+    # os.environ["QT_SCALE_FACTOR"] = "1"
+    os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
+    app = QApplication(sys.argv)
+
+    splash = QSplashScreen(
+        QPixmap(resource_path(os.path.join("images","splash_screen","biapy_splash_logo.png"))),
+        Qt.WindowStaysOnTopHint)
+    splash.show()
+    
+    app.processEvents()  
+
     window = None
 
     # Log output to file
@@ -1094,17 +1105,6 @@ if __name__ == "__main__":
         background-color:#000000;
         }
         """
-
-    # os.environ["QT_SCALE_FACTOR"] = "1"
-    os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
-    app = QApplication(sys.argv)
-
-    splash = QSplashScreen(
-        QPixmap(resource_path(os.path.join("images","splash_screen","biapy_splash_logo.png"))),
-        Qt.WindowStaysOnTopHint)
-    splash.show()
-    
-    app.processEvents()  
     
     qdarktheme.setup_theme("light")
 
