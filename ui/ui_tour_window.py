@@ -123,9 +123,7 @@ class Ui_tour_window(object):
 
         self.presentation_version_text = QLabel(self.presentation_page)
         self.presentation_version_text.setObjectName(u"presentation_version_text")
-        font2 = QFont()
-        font2.setFamilies([u"DejaVu Math TeX Gyre"])
-        self.presentation_version_text.setFont(font2)
+        self.presentation_version_text.setFont(font)
         self.presentation_version_text.setStyleSheet(u"color: rgb(150, 150, 150)")
         self.presentation_version_text.setAlignment(Qt.AlignCenter)
 
@@ -470,7 +468,7 @@ class Ui_tour_window(object):
     def retranslateUi(self, tour_window):
         tour_window.setWindowTitle(QCoreApplication.translate("tour_window", u"Dialog", None))
         self.bn_close.setText("")
-        self.presentation_text.setText(QCoreApplication.translate("tour_window", u"<html><head/><body><p align=\"center\"><span style=\" font-size:20pt;\">Welcome to BiaPy's GUI</span></p><p align=\"center\"><span style=\" font-size:12pt;\">Take a tour</span></p></body></html>", None))
+        self.presentation_text.setText(QCoreApplication.translate("tour_window", u"<html><head/><body><p align=\"center\"><span style=\" font-size:28pt;\">Welcome to BiaPy's GUI</span></p><p align=\"center\"><span style=\" font-size:18pt;\">Take a tour</span></p></body></html>", None))
         self.presentation_version_text.setText(QCoreApplication.translate("tour_window", u"Version XXX", None))
         self.d1_label.setText("")
         self.d2_label.setText("")
