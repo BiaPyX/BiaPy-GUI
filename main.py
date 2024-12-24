@@ -934,23 +934,9 @@ class MainWindow(QMainWindow):
         """
         if signal == 0:
             self.ui.centralwidget.setEnabled(False)
-
-            # Update home page logos' color to be as blocked
-            self.docker_logo_bytearray_str = self.docker_logo_bytearray_str.replace(bytes("#2396ed", encoding='utf8'),bytes("#a9a9a9", encoding='utf8'))
-            self.ui.docker_logo.load(self.docker_logo_bytearray_str)
-            self.gpu_icon_bytearray_str = self.gpu_icon_bytearray_str.replace(bytes("#000000", encoding='utf8'),bytes("#a9a9a9", encoding='utf8'))
-            self.ui.gpu_icon_label.load(self.gpu_icon_bytearray_str)
-
             self.spinner_exec()
         else:
             self.spinner.close()
-
-            # Update home page logos' color to be as blocked
-            self.docker_logo_bytearray_str = self.docker_logo_bytearray_str.replace(bytes("#a9a9a9", encoding='utf8'),bytes("#2396ed", encoding='utf8'))
-            self.ui.docker_logo.load(self.docker_logo_bytearray_str)
-            self.gpu_icon_bytearray_str = self.gpu_icon_bytearray_str.replace(bytes("#a9a9a9", encoding='utf8'),bytes("#000000", encoding='utf8'))
-            self.ui.gpu_icon_label.load(self.gpu_icon_bytearray_str)
-
             self.ui.centralwidget.setEnabled(True)
 
     def report_yaml_load(self, errors, yaml_file):
