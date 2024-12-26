@@ -31,6 +31,7 @@ class runBiaPy_Ui(QDialog):
         self.run_window.bn_min.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","hide_icon.png"))))
         self.run_window.icon_label.setPixmap(QPixmap(resource_path(os.path.join("images","bn_images","info.png"))))
         self.run_window.return_icon_label.setPixmap(QPixmap(resource_path(os.path.join("images","bn_images","return_icon.png"))))
+        self.run_window.return_icon_label_2.setPixmap(QPixmap(resource_path(os.path.join("images","bn_images","return_icon.png"))))
         self.run_window.window_des_label.setText("  Running information")
         self.run_window.stop_container_bn.clicked.connect(lambda: self.parent_worker.stop_worker())
         self.run_window.container_state_label.setText("BiaPy state [ Initializing ]")
@@ -46,8 +47,9 @@ class runBiaPy_Ui(QDialog):
         self.run_window.frame_top.mouseMoveEvent = movedialogWindow  
         self.yes_no = yes_no_Ui()
         self.forcing_close = False
-        self.progress_pulling_time = True
         self.pulling_terminal_buffer = []
+        self.run_window.biapy_image_downloading_progress_bar.setMaximum(100)
+        self.run_window.biapy_image_extracting_progress_bar.setMaximum(100)
 
     def center_window(self, widget, geometry):
         window = widget.window()
@@ -150,27 +152,37 @@ class runBiaPy_Ui(QDialog):
             style=\"font-size:12pt;\">"+"{}/{}".format(self.parent_worker.test_image_count, \
             self.parent_worker.test_files)+"</span></p></body></html>") 
         
-    def update_pulling_progress(self, value, item):
-        if self.progress_pulling_time:
-            self.run_window.biapy_image_pulling_progress_bar.setMaximum(max(10,len(self.parent_worker.total_layers)*2*10))
-            self.pulling_terminal_buffer.append(item)
-            if len(self.pulling_terminal_buffer) > 23:
-               self.pulling_terminal_buffer.pop(0) 
-            self.run_window.run_biapy_log.setText("\n".join(self.pulling_terminal_buffer))
-        self.run_window.biapy_image_pulling_progress_bar.setValue(value)
+    def update_pulling_progress(self, d_value, e_value, item):
+        # Download process
+        self.run_window.biapy_image_downloading_progress_bar.setMaximum(max(10,len(self.parent_worker.download_total_layers)*10))
+        self.run_window.biapy_image_downloading_progress_bar.setValue(d_value)
+        # Extracting process
+        self.run_window.biapy_image_extracting_progress_bar.setMaximum(max(10,len(self.parent_worker.extract_total_layers)*10))
+        self.run_window.biapy_image_extracting_progress_bar.setValue(e_value)
+
+        # Update terminal-like label
+        self.pulling_terminal_buffer.append(item)
+        if len(self.pulling_terminal_buffer) > 23:
+            self.pulling_terminal_buffer.pop(0) 
+        self.run_window.run_biapy_log.setText("\n".join(self.pulling_terminal_buffer))
+
 
     def pulling_progress(self, value):
         if value == 0: # Start of the pulling process 
-            self.run_window.biapy_image_status.setText("BiaPy image [ <span style=\"color:orange;\"> Pulling </span> ]")
-            self.run_window.pulling_label.setText("Downloading BiaPy image (only done once) - Total size: {}"
+            self.run_window.image_prep_title_label.setVisible(True)
+            self.run_window.image_prep_title_label.setText("Preparing BiaPy image (only done once) - Total size: {}"
                 .format(self.parent_worker.main_gui.cfg.settings['biapy_container_size']))
+            self.run_window.biapy_image_status.setText("BiaPy image [ <span style=\"color:orange;\"> Pulling </span> ]")
             self.run_window.container_pulling_frame.setVisible(True)
             self.run_window.biapy_container_info_label.setText("Please wait for the image to download fully. Occasionally, parts of the container may be downloaded twice, causing the progress bar to move backward slightly.")
-        else:
+            self.run_window.terminal_upper_label.setText("Downloading and unpacking log")
+        else: # end
             self.run_window.container_pulling_frame.setVisible(False)
+            self.run_window.image_prep_title_label.setVisible(False)
             self.run_window.biapy_image_status.setText("BiaPy image [ <span style=\"color:green;\">Downloaded</span> ]")
             self.run_window.biapy_container_info_label.setText("INITIALIZING . . . (this may take a while)")
             self.run_window.run_biapy_log.setText("Please wait, the first screen update may take a while depending on your OS")
+            self.run_window.terminal_upper_label.setText("Last lines of the log (updating every 3 seconds):")
 
     def mousePressEvent(self, event):
         self.dragPos = event.globalPos()
@@ -197,7 +209,7 @@ class run_worker(QObject):
     update_pulling_signal = QtCore.Signal(int)
 
     # Signal to indicate the main thread to update the GUI with the pulling progress
-    update_pulling_progress_signal = QtCore.Signal(int, str)
+    update_pulling_progress_signal = QtCore.Signal(int, int, str)
 
     def __init__(self, main_gui, config, container_name, worker_id, output_folder, user_host, use_gpu, use_local_biapy_image):
         super(run_worker, self).__init__()
@@ -260,7 +272,8 @@ class run_worker(QObject):
             self.update_pulling_signal.emit(0)
             self.process_steps = "pulling"
             # Collect the output of the container and update the GUI
-            self.total_layers = {}
+            self.download_total_layers = {}
+            self.extract_total_layers = {}
             problem_attempts = 0
             json_orig_data = None
             if self.use_local_biapy_image:
@@ -274,23 +287,25 @@ class run_worker(QObject):
                         for item in self.docker_client.api.pull(self.main_gui.cfg.settings['biapy_container_name'], stream=True, decode=True):    
                             self.main_gui.logger.info(item)
                             if item["status"] == 'Pulling fs layer':
-                                self.total_layers[item["id"]+"_download"] = 0
-                                self.total_layers[item["id"]+"_extract"] = 0
+                                self.download_total_layers[item["id"]+"_download"] = 0
+                                self.extract_total_layers[item["id"]+"_extract"] = 0
                             elif item["status"] == "Downloading":
-                                self.total_layers[item["id"]+"_download"] = item["progressDetail"]['current']/item["progressDetail"]['total']
+                                self.download_total_layers[item["id"]+"_download"] = item["progressDetail"]['current']/item["progressDetail"]['total']
                             elif item["status"] == "Extracting": 
-                                self.total_layers[item["id"]+"_extract"] = item["progressDetail"]['current']/item["progressDetail"]['total']
-                            elif item["status"] in ["Pull complete", 'Download complete']: 
-                                self.total_layers[item["id"]+"_download"] = 1
-                                self.total_layers[item["id"]+"_extract"] = 1
+                                self.extract_total_layers[item["id"]+"_extract"] = item["progressDetail"]['current']/item["progressDetail"]['total']
+                            elif item["status"] == 'Download complete': 
+                                self.download_total_layers[item["id"]+"_download"] = 1
+                            elif item["status"] == "Pull complete": 
+                                self.extract_total_layers[item["id"]+"_extract"] = 1
 
                             if self.break_pulling:
                                 self.main_gui.logger.info("Stopping pulling process . . .")
                                 return 
                             
                             # Update GUI 
-                            steps = np.sum([int(float(x)*10) for x in self.total_layers.values()])
-                            self.update_pulling_progress_signal.emit(steps, str(item))
+                            d_steps = np.sum([int(float(x)*10) for x in self.download_total_layers.values()])
+                            e_steps = np.sum([int(float(x)*10) for x in self.extract_total_layers.values()])
+                            self.update_pulling_progress_signal.emit(d_steps, e_steps, str(item))
                     except Exception as e:
                         problem_attempts += 1
                         self.main_gui.logger.error(f"Error pulling the container: {e}")
