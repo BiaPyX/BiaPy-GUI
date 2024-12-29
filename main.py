@@ -115,7 +115,7 @@ class MainWindow(QMainWindow):
         self.ui.biapy_templates_bn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://github.com/BiaPyX/BiaPy/tree/master/templates")))
         self.ui.biapy_doc_bn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://biapy.readthedocs.io/en/latest/")))
         self.ui.biapy_notebooks_bn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://github.com/BiaPyX/BiaPy/tree/master/notebooks")))
-        self.ui.biapy_citation_bn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://github.com/BiaPyX/BiaPy#citation")))
+        self.ui.biapy_citation_bn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://www.biorxiv.org/content/10.1101/2024.02.03.576026v2")))
         self.ui.main_window_wizard_question_wizard_icon.clicked.connect(lambda: change_page(self, 'bn_wizard', 99))
         
         # Wizard page buttons
