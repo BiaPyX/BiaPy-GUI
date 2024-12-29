@@ -1317,6 +1317,8 @@ def set_default_config(cfg, gpu_info, sample_info):
 
         elif cfg['PROBLEM']['TYPE'] == 'DETECTION':  
             if cfg['TEST']['ENABLE']:
+                if "REMOVE_CLOSE_POINTS_RADIUS" not in cfg['TEST']['POST_PROCESSING']:
+                    cfg['TEST']['POST_PROCESSING']["REMOVE_CLOSE_POINTS_RADIUS"] = [10]
                 cfg['TEST']['DET_TOLERANCE'] = [int(0.8*cfg['TEST']['POST_PROCESSING']["REMOVE_CLOSE_POINTS_RADIUS"])] 
                 cfg['TEST']['DET_MIN_TH_TO_BE_PEAK'] = [0.5] 
                 cfg['TEST']['POST_PROCESSING']["REMOVE_CLOSE_POINTS"] = True
@@ -1360,11 +1362,12 @@ def set_default_config(cfg, gpu_info, sample_info):
     elif cfg["PROBLEM"]["TYPE"] == "CLASSIFICATION":
         pass
 
-    # Removing detection key added from the wizard it we're not in that workflow 
+    # Removing detection key added from the wizard if we are not in that workflow 
     if not cfg['TEST']['ENABLE'] or cfg['PROBLEM']['TYPE'] != 'DETECTION':  
-        del cfg['TEST']['POST_PROCESSING']["REMOVE_CLOSE_POINTS_RADIUS"]
-        if len(cfg['TEST']['POST_PROCESSING']) == 0:
-            del cfg['TEST']['POST_PROCESSING']
+        if 'POST_PROCESSING' in cfg['TEST'] and "REMOVE_CLOSE_POINTS_RADIUS" in cfg['TEST']['POST_PROCESSING']:
+            del cfg['TEST']['POST_PROCESSING']["REMOVE_CLOSE_POINTS_RADIUS"]
+            if len(cfg['TEST']['POST_PROCESSING']) == 0:
+                del cfg['TEST']['POST_PROCESSING']
 
     # Calculate data channels 
     # cfg.PROBLEM.TYPE == "CLASSIFICATION" or "SELF_SUPERVISED" and PRETEXT_TASK == "masking". But as in the wizard there is no SSL
