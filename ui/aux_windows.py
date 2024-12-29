@@ -567,7 +567,7 @@ class tour_window_Ui(QDialog):
         
     def set_biapy_version(self, version):
         self.basic_window.presentation_version_text.setText(f"Version {str(version)}")
-        self.basic_window.d5_release_notes_text.setText(f"<html><head/><body><p align=\"center\"><span style=\" font-family:'Arial','sans-serif'; font-size:12pt; color:#595959; background-color:transparent;\">Check out version {str(version)} </span><a href=\"https://github.com/BiaPyX/BiaPy-GUI/releases/tag/v{str(version)}\"><span style=\" font-family:'Arial','sans-serif'; font-size:12pt; text-decoration: underline; color:#0097a7; background-color:transparent;\">release notes</span></a><span style=\" font-family:'Arial','sans-serif'; font-size:12pt; color:#595959; background-color:transparent;\">.</span></p></body></html>")
+        self.basic_window.d5_release_notes_text.setText(f"<html><head/><body><p align=\"center\"><span style=\" font-family:'Arial','sans-serif'; font-size:13pt; color:#595959; background-color:transparent;\">Check out version {str(version)} </span><a href=\"https://github.com/BiaPyX/BiaPy-GUI/releases/tag/v{str(version)}\"><span style=\" font-family:'Arial','sans-serif'; font-size:13pt; text-decoration: underline; color:#0097a7; background-color:transparent;\">release notes</span></a><span style=\" font-family:'Arial','sans-serif'; font-size:13pt; color:#595959; background-color:transparent;\">.</span></p></body></html>")
 
     def move_tour_view(self, bn_number): 
         self.current_tour_window = max(1,min(self.max_windows, bn_number))
