@@ -525,7 +525,9 @@ class model_card_carrousel_Ui(QDialog):
             if model_info['restrictions'] != "":
                 self.model_cards[model_number][f"model_link_{model_number}"].setText("<span style=\"color:#4090FD\";>Restrictions: </span><span style=\"color:#FF0000\";><br>"+ model_info['restrictions'].replace("\n","<br>") + "</span>")
             self.model_cards[model_number][f"model_img_{model_number}"].setPixmap(QPixmap(local_path))
-            
+        
+        self.model_cards[model_number][f"model_card_frame_{model_number}"].mouseDoubleClickEvent = lambda event, a=model_info['nickname'],b=model_info['source'],c=model_info['imposed_vars'],d=from_wizard: self.parent.select_external_model(a,b,c,d)
+
     def close(self):
         for i, model in enumerate(self.model_cards):
             model[f"model_card_frame_{i}"].setVisible(False)
