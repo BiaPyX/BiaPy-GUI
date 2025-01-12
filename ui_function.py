@@ -1234,7 +1234,16 @@ class UIFunction(MainWindow):
             main_window.logger.info("No BiaPy compatible containers found in the landing page. Setting the default one {}".format(main_window.cfg.settings["biapy_code_version"]))
             supported_versions = [main_window.cfg.settings["biapy_code_version"]]
         else:
-            main_window.logger.info("Compatible containers found: {}".format(supported_versions))
+            found_ge_version = False
+            for ver in supported_versions:
+                if ver >= main_window.cfg.settings["biapy_code_version"]:
+                    found_ge_version = True
+            if found_ge_version:
+                main_window.logger.info("Compatible containers found: {}".format(supported_versions))
+            else:
+                supported_versions = [main_window.cfg.settings["biapy_code_version"]]
+                main_window.logger.info("Containers in the landing page seem to be older than the default (contact BiaPy team so the can fix that in the website). "
+                    "Using the default container version: {}".format(supported_versions))
 
         main_window.ui.container_input.addItem(f"{supported_versions[0]}")
         if len(supported_versions) > 1:
