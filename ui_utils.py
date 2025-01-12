@@ -3796,8 +3796,16 @@ def save_biapy_config(main_window, data, biapy_version=""):
         old_data = {}
     old_data.update(data)
 
-    if biapy_version != "" and "GUI_VERSION" not in old_data:
-        old_data["GUI_VERSION"] = biapy_version
+    if biapy_version != "":
+        if "GUI_VERSION" not in old_data:
+            old_data["GUI_VERSION"] = biapy_version
+        elif "GUI_VERSION" in old_data:
+            try:
+                file_version = Version(old_data["GUI_VERSION"])
+                if file_version < biapy_version:
+                    old_data["GUI_VERSION"] = biapy_version
+            except:
+                old_data["GUI_VERSION"] = biapy_version 
 
     with open(main_window.log_info["config_file"], "w") as outfile:
         json.dump(old_data, outfile, indent=4)
