@@ -1046,7 +1046,8 @@ if __name__ == "__main__":
     # os.environ["QT_SCALE_FACTOR"] = "1"
     os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
     app = QApplication(sys.argv)
-
+    qdarktheme.setup_theme("light")
+    
     splash = QSplashScreen(
         QPixmap(resource_path(os.path.join("images","splash_screen","biapy_splash_logo.png"))),
         Qt.WindowStaysOnTopHint)
@@ -1091,8 +1092,6 @@ if __name__ == "__main__":
         background-color:#000000;
         }
         """
-    
-    qdarktheme.setup_theme("light")
 
     app.setWindowIcon(QIcon(resource_path(os.path.join("images","splash_screen","biapy_logo_icon.ico"))))
     app.setStyleSheet(StyleSheet)
