@@ -4150,7 +4150,7 @@ QPushButton:pressed {
                        </font>
                       </property>
                       <property name="currentIndex">
-                       <number>3</number>
+                       <number>2</number>
                       </property>
                       <widget class="QWidget" name="workflow_selection_page">
                        <property name="minimumSize">
@@ -8346,7 +8346,7 @@ border-radius: 25px;		</string>
                                 <property name="geometry">
                                  <rect>
                                   <x>0</x>
-                                  <y>0</y>
+                                  <y>-4434</y>
                                   <width>944</width>
                                   <height>7969</height>
                                  </rect>
@@ -11254,7 +11254,7 @@ p, li { white-space: pre-wrap; }
                                            </widget>
                                           </item>
                                           <item row="9" column="1">
-                                           <widget class="QLabel" name="TRAIN__BATCH_SIZE__CALCULATION__INFO">
+                                           <widget class="QPushButton" name="TRAIN__BATCH_SIZE__CALCULATION__INFO">
                                             <property name="minimumSize">
                                              <size>
                                               <width>30</width>
@@ -11278,9 +11278,6 @@ p, li { white-space: pre-wrap; }
                                             </property>
                                             <property name="text">
                                              <string/>
-                                            </property>
-                                            <property name="scaledContents">
-                                             <bool>true</bool>
                                             </property>
                                            </widget>
                                           </item>
@@ -25467,8 +25464,8 @@ p, li { white-space: pre-wrap; }
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>895</width>
-                                         <height>179</height>
+                                         <width>922</width>
+                                         <height>327</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_17">
@@ -32801,8 +32798,8 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>452</width>
-                                       <height>255</height>
+                                       <width>928</width>
+                                       <height>301</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_61">

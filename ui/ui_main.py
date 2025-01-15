@@ -3102,7 +3102,7 @@ class Ui_MainWindow(object):
         self.train_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 944, 7969))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, -4434, 944, 7969))
         self.scrollAreaWidgetContents_3.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout_3 = QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
@@ -4107,12 +4107,11 @@ class Ui_MainWindow(object):
 
         self.gridLayout_29.addWidget(self.TRAIN__OPT_BETAS__INFO, 8, 1, 1, 1)
 
-        self.TRAIN__BATCH_SIZE__CALCULATION__INFO = QLabel(self.frame_28)
+        self.TRAIN__BATCH_SIZE__CALCULATION__INFO = QPushButton(self.frame_28)
         self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setObjectName(u"TRAIN__BATCH_SIZE__CALCULATION__INFO")
         self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setMinimumSize(QSize(30, 30))
         self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setMaximumSize(QSize(30, 30))
         self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setFont(font1)
-        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setScaledContents(True)
 
         self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__CALCULATION__INFO, 9, 1, 1, 1)
 
@@ -9045,7 +9044,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 895, 179))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 922, 327))
         self.gridLayout_17 = QGridLayout(self.scrollAreaWidgetContents_4)
         self.gridLayout_17.setObjectName(u"gridLayout_17")
         self.label_59 = QLabel(self.scrollAreaWidgetContents_4)
@@ -11736,7 +11735,7 @@ class Ui_MainWindow(object):
         self.scrollArea_8.setWidgetResizable(True)
         self.scrollAreaWidgetContents_12 = QWidget()
         self.scrollAreaWidgetContents_12.setObjectName(u"scrollAreaWidgetContents_12")
-        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 452, 255))
+        self.scrollAreaWidgetContents_12.setGeometry(QRect(0, 0, 928, 301))
         self.gridLayout_61 = QGridLayout(self.scrollAreaWidgetContents_12)
         self.gridLayout_61.setObjectName(u"gridLayout_61")
         self.label_82 = QLabel(self.scrollAreaWidgetContents_12)
@@ -14199,7 +14198,7 @@ class Ui_MainWindow(object):
 
         self.stackedWidget.setCurrentIndex(2)
         self.wizard_main_frame.setCurrentIndex(0)
-        self.stackedWidget_create_yaml_frame.setCurrentIndex(3)
+        self.stackedWidget_create_yaml_frame.setCurrentIndex(2)
         self.train_tab_widget.setCurrentIndex(0)
         self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(1)
         self.test_tab_widget.setCurrentIndex(0)
