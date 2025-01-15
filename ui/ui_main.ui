@@ -23,6 +23,11 @@
    <string notr="true"/>
   </property>
   <widget class="QFrame" name="centralwidget">
+   <property name="font">
+    <font>
+     <family>Ubuntu</family>
+    </font>
+   </property>
    <property name="styleSheet">
     <string notr="true">QWidget:disabled {
 background-color:#D3D3D3;
@@ -154,9 +159,6 @@ background:rgb(64,144,253);
               <pointsize>12</pointsize>
              </font>
             </property>
-            <property name="styleSheet">
-             <string notr="true">background-color:rgba(0, 0, 0, 0);</string>
-            </property>
             <property name="frameShape">
              <enum>QFrame::NoFrame</enum>
             </property>
@@ -239,7 +241,7 @@ background:rgb(64,144,253);
                    <string/>
                   </property>
                   <property name="pixmap">
-                   <pixmap>images/superminimal_ark_biapy2.png</pixmap>
+                   <pixmap>../../../../.designer/backup/images/superminimal_ark_biapy2.png</pixmap>
                   </property>
                   <property name="scaledContents">
                    <bool>true</bool>
@@ -335,11 +337,6 @@ background-color:rgba(0, 0, 0, 0);
               <pointsize>12</pointsize>
              </font>
             </property>
-            <property name="styleSheet">
-             <string notr="true">QFrame:disabled {
-background-color: rgb(169,169,169);
-}</string>
-            </property>
             <property name="frameShape">
              <enum>QFrame::NoFrame</enum>
             </property>
@@ -381,21 +378,6 @@ background-color: rgb(169,169,169);
                  <family>DejaVu Math TeX Gyre</family>
                  <pointsize>12</pointsize>
                 </font>
-               </property>
-               <property name="toolTip">
-                <string/>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QPushButton {
-	border: none;
-	background-color: rgba(0,0,0,0);
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-}
-QPushButton:pressed {	
-	background-color: rgb(255,255,255);
-}</string>
                </property>
                <property name="text">
                 <string/>
@@ -464,17 +446,11 @@ QPushButton:pressed {
                  <height>52</height>
                 </size>
                </property>
-               <property name="styleSheet">
-                <string notr="true">QPushButton {
-	border: none;
-	background-color: rgba(0,0,0,0);
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-}
-QPushButton:pressed {	
-	background-color: rgb(255,255,255);
-}</string>
+               <property name="font">
+                <font>
+                 <family>DejaVu Math TeX Gyre</family>
+                 <pointsize>12</pointsize>
+                </font>
                </property>
                <property name="text">
                 <string/>
@@ -484,6 +460,9 @@ QPushButton:pressed {
                  <width>257</width>
                  <height>48</height>
                 </size>
+               </property>
+               <property name="flat">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
@@ -557,21 +536,6 @@ QPushButton:pressed {
                  <family>DejaVu Math TeX Gyre</family>
                  <pointsize>12</pointsize>
                 </font>
-               </property>
-               <property name="toolTip">
-                <string/>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QPushButton {
-	border: none;
-	background-color: rgba(0,0,0,0);
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-}
-QPushButton:pressed {	
-	background-color: rgb(255,255,255);
-}</string>
                </property>
                <property name="text">
                 <string/>
@@ -652,21 +616,6 @@ QPushButton:pressed {
                  <pointsize>12</pointsize>
                 </font>
                </property>
-               <property name="toolTip">
-                <string/>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QPushButton {
-	border: none;
-	background-color: rgba(0,0,0,0);
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-}
-QPushButton:pressed {	
-	background-color: rgb(255,255,255);
-}</string>
-               </property>
                <property name="text">
                 <string/>
                </property>
@@ -716,9 +665,6 @@ QPushButton:pressed {
             <property name="frameShadow">
              <enum>QFrame::Plain</enum>
             </property>
-            <property name="lineWidth">
-             <number>1</number>
-            </property>
             <layout class="QHBoxLayout" name="horizontalLayout_18">
              <property name="spacing">
               <number>0</number>
@@ -754,21 +700,6 @@ QPushButton:pressed {
                  <family>DejaVu Math TeX Gyre</family>
                  <pointsize>12</pointsize>
                 </font>
-               </property>
-               <property name="toolTip">
-                <string/>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QPushButton {
-	border: none;
-	background-color: rgba(0,0,0,0);
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-}
-QPushButton:pressed {	
-	background-color: rgb(255,255,255);
-}</string>
                </property>
                <property name="text">
                 <string/>
@@ -855,21 +786,6 @@ QPushButton:pressed {
                  <pointsize>12</pointsize>
                 </font>
                </property>
-               <property name="toolTip">
-                <string/>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QPushButton {
-	border: none;
-	background-color: rgba(0,0,0,0);
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-}
-QPushButton:pressed {	
-	background-color: rgb(255,255,255);
-}</string>
-               </property>
                <property name="text">
                 <string/>
                </property>
@@ -954,21 +870,6 @@ QPushButton:pressed {
                  <family>DejaVu Math TeX Gyre</family>
                  <pointsize>12</pointsize>
                 </font>
-               </property>
-               <property name="toolTip">
-                <string/>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QPushButton {
-	border: none;
-	background-color: rgba(0,0,0,0);
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-}
-QPushButton:pressed {	
-	background-color: rgb(255,255,255);
-}</string>
                </property>
                <property name="text">
                 <string/>
@@ -1062,10 +963,7 @@ QPushButton:pressed {
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">QFrame{
-background:rgb(255,255,255);
-}
-QFrame:disabled {
+          <string notr="true">QFrame:disabled {
 background-color:#D3D3D3;
 }</string>
          </property>
@@ -1204,10 +1102,6 @@ QPushButton:pressed {
                <property name="text">
                 <string/>
                </property>
-               <property name="icon">
-                <iconset>
-                 <normaloff>images/bn_images/hide_icon.png</normaloff>images/bn_images/hide_icon.png</iconset>
-               </property>
                <property name="iconSize">
                 <size>
                  <width>22</width>
@@ -1295,10 +1189,6 @@ QPushButton:pressed {
                </property>
                <property name="text">
                 <string/>
-               </property>
-               <property name="icon">
-                <iconset>
-                 <normaloff>images/bn_images/close_icon.png</normaloff>images/bn_images/close_icon.png</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -1397,21 +1287,10 @@ QPushButton:pressed {
                  <pointsize>12</pointsize>
                 </font>
                </property>
-               <property name="styleSheet">
-                <string notr="true"/>
-               </property>
                <property name="currentIndex">
-                <number>0</number>
+                <number>2</number>
                </property>
                <widget class="QWidget" name="page_home">
-                <property name="styleSheet">
-                 <string notr="true">QFrame {
-background:rgb(255,255,255);
-}
-QFrame:disabled {
-background-color:#D3D3D3;
-}</string>
-                </property>
                 <layout class="QVBoxLayout" name="verticalLayout_13">
                  <property name="spacing">
                   <number>0</number>
@@ -2455,24 +2334,6 @@ border-radius: 25px;
                               <height>85</height>
                              </size>
                             </property>
-                            <property name="styleSheet">
-                             <string notr="true">QPushButton {
-	border: none;
-	background-color: rgb(255,255,255);
-	border-radius: 10px;
-}
-
-QPushButton:hover {
-	background-color: rgb(197,234,250);
-	border: 2px solid rgb(0, 0, 0);
-}
-
-QPushButton:pressed {	
-	background-color: rgb(197,234,250);
-	border: 2px solid rgb(0, 0, 0);
-}
-</string>
-                            </property>
                             <property name="text">
                              <string/>
                             </property>
@@ -2537,25 +2398,6 @@ QPushButton:pressed {
                               <pointsize>12</pointsize>
                              </font>
                             </property>
-                            <property name="styleSheet">
-                             <string notr="true">QPushButton {
-	border: none;
-	border-radius: 15px;
-	background-color: rgb(64,144,253);
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}
-QPushButton:pressed {	
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}
-
-QPushButton:disabled {
-background-color:#A9A9A9;
-}</string>
-                            </property>
                             <property name="text">
                              <string>Create new workflow</string>
                             </property>
@@ -2586,25 +2428,6 @@ background-color:#A9A9A9;
                               <family>DejaVu Math TeX Gyre</family>
                               <pointsize>12</pointsize>
                              </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">QPushButton {
-	border: none;
-	border-radius: 15px;
-	background-color: rgb(64,144,253);
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}
-QPushButton:pressed {	
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}
-
-QPushButton:disabled {
-background-color:#A9A9A9;
-}</string>
                             </property>
                             <property name="text">
                              <string>Load and modify workflow</string>
@@ -2684,10 +2507,7 @@ background-color:#A9A9A9;
                </widget>
                <widget class="QWidget" name="page_wizard">
                 <property name="styleSheet">
-                 <string notr="true">QFrame {
-background:rgb(255,255,255);
-}
-QFrame:disabled {
+                 <string notr="true">QFrame:disabled {
 background-color:#D3D3D3;
 }</string>
                 </property>
@@ -3070,14 +2890,14 @@ background-color:#D3D3D3;
                              <widget class="QPushButton" name="wizard_start_bn">
                               <property name="minimumSize">
                                <size>
-                                <width>200</width>
-                                <height>30</height>
+                                <width>220</width>
+                                <height>40</height>
                                </size>
                               </property>
                               <property name="maximumSize">
                                <size>
-                                <width>200</width>
-                                <height>30</height>
+                                <width>220</width>
+                                <height>77</height>
                                </size>
                               </property>
                               <property name="font">
@@ -3085,21 +2905,6 @@ background-color:#D3D3D3;
                                 <family>DejaVu Math TeX Gyre</family>
                                 <pointsize>12</pointsize>
                                </font>
-                              </property>
-                              <property name="styleSheet">
-                               <string notr="true">QPushButton {
-	border: none;
-	background-color: rgb(64,144,253);
-	border-radius: 15px;
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}
-QPushButton:pressed {	
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}</string>
                               </property>
                               <property name="text">
                                <string>Start</string>
@@ -3235,17 +3040,6 @@ QPushButton:pressed {
                                    <family>DejaVu Math TeX Gyre</family>
                                    <pointsize>12</pointsize>
                                   </font>
-                                 </property>
-                                 <property name="styleSheet">
-                                  <string notr="true">QPushButton {
-	border: none;
-	background-color: rgb(64,144,253);
-	border-radius: 15px;
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}</string>
                                  </property>
                                  <property name="text">
                                   <string>Clear all answers</string>
@@ -3650,6 +3444,9 @@ border-radius: 35px;
                                           <pointsize>12</pointsize>
                                          </font>
                                         </property>
+                                        <property name="focusPolicy">
+                                         <enum>Qt::NoFocus</enum>
+                                        </property>
                                         <property name="text">
                                          <string>Browse</string>
                                         </property>
@@ -3697,16 +3494,8 @@ border-radius: 35px;
                                           <pointsize>12</pointsize>
                                          </font>
                                         </property>
-                                        <property name="styleSheet">
-                                         <string notr="true">QPushButton {
-	border: none;
-	background-color: rgb(64,144,253);
-	border-radius: 15px;
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}</string>
+                                        <property name="focusPolicy">
+                                         <enum>Qt::NoFocus</enum>
                                         </property>
                                         <property name="text">
                                          <string>Check data</string>
@@ -3841,6 +3630,9 @@ QPushButton:hover {
                                           <pointsize>12</pointsize>
                                          </font>
                                         </property>
+                                        <property name="focusPolicy">
+                                         <enum>Qt::NoFocus</enum>
+                                        </property>
                                         <property name="text">
                                          <string>Browse</string>
                                         </property>
@@ -3876,16 +3668,8 @@ QPushButton:hover {
                                        <pointsize>12</pointsize>
                                       </font>
                                      </property>
-                                     <property name="styleSheet">
-                                      <string notr="true">QPushButton {
-	border: none;
-	background-color: rgb(64,144,253);
-	border-radius: 15px;
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}</string>
+                                     <property name="focusPolicy">
+                                      <enum>Qt::NoFocus</enum>
                                      </property>
                                      <property name="text">
                                       <string>Check models</string>
@@ -3962,16 +3746,8 @@ QPushButton:hover {
                                    <pointsize>20</pointsize>
                                   </font>
                                  </property>
-                                 <property name="styleSheet">
-                                  <string notr="true">QPushButton {
-	border: none;
-	background-color: rgb(64,144,253);
-	border-radius: 15px;
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}</string>
+                                 <property name="focusPolicy">
+                                  <enum>Qt::NoFocus</enum>
                                  </property>
                                  <property name="text">
                                   <string>&lt;</string>
@@ -4005,16 +3781,8 @@ QPushButton:hover {
                                    <pointsize>20</pointsize>
                                   </font>
                                  </property>
-                                 <property name="styleSheet">
-                                  <string notr="true">QPushButton {
-	border: none;
-	background-color: rgb(64,144,253);
-	border-radius: 15px;
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}</string>
+                                 <property name="focusPolicy">
+                                  <enum>Qt::NoFocus</enum>
                                  </property>
                                  <property name="text">
                                   <string>&gt;</string>
@@ -4279,20 +4047,8 @@ QPushButton:pressed {
                               <pointsize>12</pointsize>
                              </font>
                             </property>
-                            <property name="styleSheet">
-                             <string notr="true">QPushButton {
-	border: none;
-	background-color: rgb(64,144,253);
-	border-radius: 15px;
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}
-QPushButton:pressed {	
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}</string>
+                            <property name="focusPolicy">
+                             <enum>Qt::NoFocus</enum>
                             </property>
                             <property name="text">
                              <string>OK</string>
@@ -4318,7 +4074,6 @@ QPushButton:pressed {
                       </layout>
                      </widget>
                     </widget>
-                    <widget class="QWidget" name="end_page"/>
                    </widget>
                   </item>
                  </layout>
@@ -4326,7 +4081,7 @@ QPushButton:pressed {
                </widget>
                <widget class="QWidget" name="page_create_yaml">
                 <property name="styleSheet">
-                 <string notr="true">background:rgb(255,255,255);</string>
+                 <string notr="true"/>
                 </property>
                 <layout class="QHBoxLayout" name="horizontalLayout_19">
                  <property name="spacing">
@@ -4430,13 +4185,13 @@ QPushButton:pressed {
                           <rect>
                            <x>5</x>
                            <y>195</y>
-                           <width>30</width>
+                           <width>25</width>
                            <height>50</height>
                           </rect>
                          </property>
                          <property name="maximumSize">
                           <size>
-                           <width>30</width>
+                           <width>25</width>
                            <height>50</height>
                           </size>
                          </property>
@@ -4461,14 +4216,10 @@ QPushButton:pressed {
                          <property name="text">
                           <string/>
                          </property>
-                         <property name="icon">
-                          <iconset>
-                           <normaloff>images/bn_images/left_arrow.svg</normaloff>images/bn_images/left_arrow.svg</iconset>
-                         </property>
                          <property name="iconSize">
                           <size>
-                           <width>32</width>
-                           <height>32</height>
+                           <width>25</width>
+                           <height>25</height>
                           </size>
                          </property>
                         </widget>
@@ -4506,7 +4257,7 @@ QPushButton:pressed {
                           </font>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">background:rgb(240,240,240);
+                          <string notr="true">color: black;
 border-radius: 25px;		</string>
                          </property>
                          <property name="frameShape">
@@ -4610,21 +4361,6 @@ border-radius: 25px;		</string>
                                  <family>DejaVu Math TeX Gyre</family>
                                  <pointsize>11</pointsize>
                                 </font>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">QPushButton {
-	border: none;
-	background-color: rgb(64,144,253);
-	border-radius: 15px;
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}
-QPushButton:pressed {	
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}</string>
                                </property>
                                <property name="text">
                                 <string>Learn more . . .</string>
@@ -4816,21 +4552,6 @@ border-radius: 25px;
                                  <pointsize>11</pointsize>
                                 </font>
                                </property>
-                               <property name="styleSheet">
-                                <string notr="true">QPushButton {
-	border: none;
-	background-color: rgb(64,144,253);
-	border-radius: 15px;
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}
-QPushButton:pressed {	
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}</string>
-                               </property>
                                <property name="text">
                                 <string>Learn more . . .</string>
                                </property>
@@ -4911,7 +4632,7 @@ QPushButton:pressed {
                           </font>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">background:rgb(240,240,240);
+                          <string notr="true">color: black;
 border-radius: 25px;		</string>
                          </property>
                          <property name="frameShape">
@@ -5016,21 +4737,6 @@ border-radius: 25px;		</string>
                                  <pointsize>11</pointsize>
                                 </font>
                                </property>
-                               <property name="styleSheet">
-                                <string notr="true">QPushButton {
-	border: none;
-	background-color: rgb(64,144,253);
-	border-radius: 15px;
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}
-QPushButton:pressed {	
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}</string>
-                               </property>
                                <property name="text">
                                 <string>Learn more . . .</string>
                                </property>
@@ -5094,13 +4800,13 @@ QPushButton:pressed {
                           <rect>
                            <x>915</x>
                            <y>195</y>
-                           <width>30</width>
+                           <width>25</width>
                            <height>50</height>
                           </rect>
                          </property>
                          <property name="maximumSize">
                           <size>
-                           <width>30</width>
+                           <width>25</width>
                            <height>50</height>
                           </size>
                          </property>
@@ -5125,14 +4831,10 @@ QPushButton:pressed {
                          <property name="text">
                           <string/>
                          </property>
-                         <property name="icon">
-                          <iconset>
-                           <normaloff>images/bn_images/right_arrow.svg</normaloff>images/bn_images/right_arrow.svg</iconset>
-                         </property>
                          <property name="iconSize">
                           <size>
-                           <width>32</width>
-                           <height>32</height>
+                           <width>25</width>
+                           <height>30</height>
                           </size>
                          </property>
                         </widget>
@@ -5158,7 +4860,7 @@ QPushButton:pressed {
                           </font>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">background:rgb(240,240,240);
+                          <string notr="true">color: black;
 border-radius: 25px;		</string>
                          </property>
                          <property name="frameShape">
@@ -5263,21 +4965,6 @@ border-radius: 25px;		</string>
                                  <pointsize>11</pointsize>
                                 </font>
                                </property>
-                               <property name="styleSheet">
-                                <string notr="true">QPushButton {
-	border: none;
-	background-color: rgb(64,144,253);
-	border-radius: 15px;
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}
-QPushButton:pressed {	
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}</string>
-                               </property>
                                <property name="text">
                                 <string>Learn more . . .</string>
                                </property>
@@ -5358,7 +5045,7 @@ QPushButton:pressed {
                           </font>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">background:rgb(240,240,240);
+                          <string notr="true">color: black;
 border-radius: 25px;		</string>
                          </property>
                          <property name="frameShape">
@@ -5463,21 +5150,6 @@ border-radius: 25px;		</string>
                                  <pointsize>11</pointsize>
                                 </font>
                                </property>
-                               <property name="styleSheet">
-                                <string notr="true">QPushButton {
-	border: none;
-	background-color: rgb(64,144,253);
-	border-radius: 15px;
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}
-QPushButton:pressed {	
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}</string>
-                               </property>
                                <property name="text">
                                 <string>Learn more . . .</string>
                                </property>
@@ -5558,7 +5230,7 @@ QPushButton:pressed {
                           </font>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">background:rgb(240,240,240);
+                          <string notr="true">color: black;
 border-radius: 25px;		</string>
                          </property>
                          <property name="frameShape">
@@ -5663,21 +5335,6 @@ border-radius: 25px;		</string>
                                  <pointsize>11</pointsize>
                                 </font>
                                </property>
-                               <property name="styleSheet">
-                                <string notr="true">QPushButton {
-	border: none;
-	background-color: rgb(64,144,253);
-	border-radius: 15px;
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}
-QPushButton:pressed {	
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}</string>
-                               </property>
                                <property name="text">
                                 <string>Learn more . . .</string>
                                </property>
@@ -5758,7 +5415,7 @@ QPushButton:pressed {
                           </font>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">background:rgb(240,240,240);
+                          <string notr="true">color: black;
 border-radius: 25px;		</string>
                          </property>
                          <property name="frameShape">
@@ -5863,21 +5520,6 @@ border-radius: 25px;		</string>
                                  <pointsize>11</pointsize>
                                 </font>
                                </property>
-                               <property name="styleSheet">
-                                <string notr="true">QPushButton {
-	border: none;
-	background-color: rgb(64,144,253);
-	border-radius: 15px;
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}
-QPushButton:pressed {	
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}</string>
-                               </property>
                                <property name="text">
                                 <string>Learn more . . .</string>
                                </property>
@@ -5977,7 +5619,7 @@ QPushButton:pressed {
                           </font>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">background:rgb(240,240,240);
+                          <string notr="true">color: black;
 border-radius: 25px;		</string>
                          </property>
                          <property name="frameShape">
@@ -6081,21 +5723,6 @@ border-radius: 25px;		</string>
                                  <family>DejaVu Math TeX Gyre</family>
                                  <pointsize>11</pointsize>
                                 </font>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">QPushButton {
-	border: none;
-	background-color: rgb(64,144,253);
-	border-radius: 15px;
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}
-QPushButton:pressed {	
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}</string>
                                </property>
                                <property name="text">
                                 <string>Learn more . . .</string>
@@ -6231,9 +5858,9 @@ QPushButton:pressed {
                             <property name="geometry">
                              <rect>
                               <x>0</x>
-                              <y>0</y>
-                              <width>916</width>
-                              <height>979</height>
+                              <y>-538</y>
+                              <width>931</width>
+                              <height>984</height>
                              </rect>
                             </property>
                             <property name="layoutDirection">
@@ -6452,23 +6079,8 @@ QPushButton:pressed {
                                     <pointsize>12</pointsize>
                                    </font>
                                   </property>
-                                  <property name="styleSheet">
-                                   <string notr="true">QPushButton {
-	border: none;
-}
-QPushButton:hover {
-	border: 2px solid rgb(0, 0, 0);
-}
-QPushButton:pressed {	
-	border: 2px solid rgb(0, 0, 0);
-}</string>
-                                  </property>
                                   <property name="text">
                                    <string/>
-                                  </property>
-                                  <property name="icon">
-                                   <iconset>
-                                    <normaloff>images/bn_images/down_arrow.svg</normaloff>images/bn_images/down_arrow.svg</iconset>
                                   </property>
                                  </widget>
                                 </item>
@@ -6566,10 +6178,6 @@ QPushButton:pressed {
                                     <pointsize>12</pointsize>
                                    </font>
                                   </property>
-                                  <property name="styleSheet">
-                                   <string notr="true">.QFrame{border: 1px solid grey}
-</string>
-                                  </property>
                                   <property name="frameShape">
                                    <enum>QFrame::Box</enum>
                                   </property>
@@ -6581,8 +6189,8 @@ QPushButton:pressed {
                                     <rect>
                                      <x>0</x>
                                      <y>0</y>
-                                     <width>495</width>
-                                     <height>284</height>
+                                     <width>857</width>
+                                     <height>286</height>
                                     </rect>
                                    </property>
                                    <layout class="QGridLayout" name="gridLayout_2">
@@ -6644,10 +6252,6 @@ QPushButton:pressed {
                                         <family>DejaVu Math TeX Gyre</family>
                                         <pointsize>12</pointsize>
                                        </font>
-                                      </property>
-                                      <property name="styleSheet">
-                                       <string notr="true">background: rgb(246,246,246);
-</string>
                                       </property>
                                       <property name="frameShape">
                                        <enum>QFrame::Box</enum>
@@ -6887,10 +6491,6 @@ QPushButton:pressed {
                                     </item>
                                     <item row="3" column="0">
                                      <widget class="QFrame" name="checkpoint_loading_opt_frame">
-                                      <property name="styleSheet">
-                                       <string notr="true">background: rgb(246,246,246);
-</string>
-                                      </property>
                                       <property name="frameShape">
                                        <enum>QFrame::StyledPanel</enum>
                                       </property>
@@ -7247,10 +6847,6 @@ QPushButton:pressed {
                                  <width>0</width>
                                  <height>0</height>
                                 </size>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">background: rgb(246,246,246);
-</string>
                                </property>
                                <property name="frameShape">
                                 <enum>QFrame::Box</enum>
@@ -7901,10 +7497,6 @@ QPushButton:pressed {
                              </item>
                              <item row="11" column="0">
                               <widget class="QFrame" name="MODEL__BMZ__EXPORT__FRAME">
-                               <property name="styleSheet">
-                                <string notr="true">background: rgb(246,246,246);
-</string>
-                               </property>
                                <property name="frameShape">
                                 <enum>QFrame::Box</enum>
                                </property>
@@ -8852,9 +8444,6 @@ QPushButton:pressed {
                                            <pointsize>12</pointsize>
                                           </font>
                                          </property>
-                                         <property name="styleSheet">
-                                          <string notr="true">background: rgb(246,246,246);</string>
-                                         </property>
                                          <property name="frameShape">
                                           <enum>QFrame::Box</enum>
                                          </property>
@@ -9109,10 +8698,6 @@ QPushButton:pressed {
                                            <family>DejaVu Math TeX Gyre</family>
                                            <pointsize>12</pointsize>
                                           </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                          <string notr="true">background: rgb(246,246,246);
-</string>
                                          </property>
                                          <property name="frameShape">
                                           <enum>QFrame::Box</enum>
@@ -9929,9 +9514,6 @@ p, li { white-space: pre-wrap; }
                                            <family>DejaVu Math TeX Gyre</family>
                                            <pointsize>12</pointsize>
                                           </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                          <string notr="true">background: rgb(246,246,246);</string>
                                          </property>
                                          <property name="frameShape">
                                           <enum>QFrame::Box</enum>
@@ -10799,9 +10381,6 @@ p, li { white-space: pre-wrap; }
                                            <width>0</width>
                                            <height>0</height>
                                           </size>
-                                         </property>
-                                         <property name="styleSheet">
-                                          <string notr="true">background: rgb(246,246,246);</string>
                                          </property>
                                          <property name="frameShape">
                                           <enum>QFrame::Box</enum>
@@ -12478,9 +12057,6 @@ p, li { white-space: pre-wrap; }
                                        </item>
                                        <item row="13" column="0">
                                         <widget class="QFrame" name="preprocessing_frame">
-                                         <property name="styleSheet">
-                                          <string notr="true">background: rgb(246,246,246);</string>
-                                         </property>
                                          <property name="frameShape">
                                           <enum>QFrame::Box</enum>
                                          </property>
@@ -14188,9 +13764,6 @@ p, li { white-space: pre-wrap; }
                                            <family>DejaVu Math TeX Gyre</family>
                                            <pointsize>12</pointsize>
                                           </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                          <string notr="true">background: rgb(246,246,246);</string>
                                          </property>
                                          <property name="frameShape">
                                           <enum>QFrame::Box</enum>
@@ -20183,10 +19756,6 @@ p, li { white-space: pre-wrap; }
                                            <pointsize>12</pointsize>
                                           </font>
                                          </property>
-                                         <property name="styleSheet">
-                                          <string notr="true">background: rgb(246,246,246);
-</string>
-                                         </property>
                                          <property name="frameShape">
                                           <enum>QFrame::Box</enum>
                                          </property>
@@ -21046,9 +20615,6 @@ p, li { white-space: pre-wrap; }
                                            <family>DejaVu Math TeX Gyre</family>
                                            <pointsize>12</pointsize>
                                           </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                          <string notr="true">background: rgb(246,246,246);</string>
                                          </property>
                                          <property name="frameShape">
                                           <enum>QFrame::Box</enum>
@@ -22043,10 +21609,6 @@ p, li { white-space: pre-wrap; }
                                            <pointsize>12</pointsize>
                                           </font>
                                          </property>
-                                         <property name="styleSheet">
-                                          <string notr="true">background: rgb(246,246,246);
-</string>
-                                         </property>
                                          <property name="frameShape">
                                           <enum>QFrame::Box</enum>
                                          </property>
@@ -22318,9 +21880,6 @@ p, li { white-space: pre-wrap; }
                                            <family>DejaVu Math TeX Gyre</family>
                                            <pointsize>12</pointsize>
                                           </font>
-                                         </property>
-                                         <property name="styleSheet">
-                                          <string notr="true">background: rgb(246,246,246);</string>
                                          </property>
                                          <property name="frameShape">
                                           <enum>QFrame::Box</enum>
@@ -23538,10 +23097,6 @@ p, li { white-space: pre-wrap; }
                                            <pointsize>12</pointsize>
                                           </font>
                                          </property>
-                                         <property name="styleSheet">
-                                          <string notr="true">background: rgb(246,246,246);
-</string>
-                                         </property>
                                          <property name="frameShape">
                                           <enum>QFrame::Box</enum>
                                          </property>
@@ -24617,10 +24172,6 @@ p, li { white-space: pre-wrap; }
                                      <pointsize>12</pointsize>
                                     </font>
                                    </property>
-                                   <property name="styleSheet">
-                                    <string notr="true">background: rgb(246,246,246);
-</string>
-                                   </property>
                                    <property name="frameShape">
                                     <enum>QFrame::Box</enum>
                                    </property>
@@ -25054,23 +24605,8 @@ p, li { white-space: pre-wrap; }
                                         <pointsize>12</pointsize>
                                        </font>
                                       </property>
-                                      <property name="styleSheet">
-                                       <string notr="true">QPushButton {
-	border: none;
-}
-QPushButton:hover {
-	border: 2px solid rgb(0, 0, 0);
-}
-QPushButton:pressed {	
-	border: 2px solid rgb(0, 0, 0);
-}</string>
-                                      </property>
                                       <property name="text">
                                        <string/>
-                                      </property>
-                                      <property name="icon">
-                                       <iconset>
-                                        <normaloff>images/bn_images/down_arrow.svg</normaloff>images/bn_images/down_arrow.svg</iconset>
                                       </property>
                                      </widget>
                                     </item>
@@ -25167,7 +24703,7 @@ QPushButton:pressed {
                                    </font>
                                   </property>
                                   <property name="currentIndex">
-                                   <number>6</number>
+                                   <number>1</number>
                                   </property>
                                   <widget class="QWidget" name="train_workflow_specific_tab_semantic_seg_page">
                                    <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -25293,9 +24829,6 @@ QPushButton:pressed {
                                             <width>0</width>
                                             <height>0</height>
                                            </size>
-                                          </property>
-                                          <property name="styleSheet">
-                                           <string notr="true">background: rgb(246,246,246);</string>
                                           </property>
                                           <property name="frameShape">
                                            <enum>QFrame::Box</enum>
@@ -25568,9 +25101,6 @@ QPushButton:pressed {
                                             <width>0</width>
                                             <height>0</height>
                                            </size>
-                                          </property>
-                                          <property name="styleSheet">
-                                           <string notr="true">background: rgb(246,246,246);</string>
                                           </property>
                                           <property name="frameShape">
                                            <enum>QFrame::Box</enum>
@@ -26014,9 +25544,6 @@ QPushButton:pressed {
                                             <height>50</height>
                                            </size>
                                           </property>
-                                          <property name="styleSheet">
-                                           <string notr="true">background: rgb(246,246,246);</string>
-                                          </property>
                                           <property name="frameShape">
                                            <enum>QFrame::Box</enum>
                                           </property>
@@ -26391,9 +25918,6 @@ QPushButton:pressed {
                                         </item>
                                         <item row="4" column="0">
                                          <widget class="QFrame" name="frame_33">
-                                          <property name="styleSheet">
-                                           <string notr="true">background: rgb(246,246,246);</string>
-                                          </property>
                                           <property name="frameShape">
                                            <enum>QFrame::StyledPanel</enum>
                                           </property>
@@ -26558,9 +26082,6 @@ QPushButton:pressed {
                                             <width>0</width>
                                             <height>0</height>
                                            </size>
-                                          </property>
-                                          <property name="styleSheet">
-                                           <string notr="true">background: rgb(246,246,246);</string>
                                           </property>
                                           <property name="frameShape">
                                            <enum>QFrame::Box</enum>
@@ -26783,9 +26304,6 @@ QPushButton:pressed {
                                         </item>
                                         <item row="3" column="0">
                                          <widget class="QFrame" name="frame_38">
-                                          <property name="styleSheet">
-                                           <string notr="true">background: rgb(246,246,246);</string>
-                                          </property>
                                           <property name="frameShape">
                                            <enum>QFrame::StyledPanel</enum>
                                           </property>
@@ -26932,9 +26450,6 @@ QPushButton:pressed {
                                        <layout class="QGridLayout" name="gridLayout_49">
                                         <item row="1" column="0">
                                          <widget class="QFrame" name="frame_44">
-                                          <property name="styleSheet">
-                                           <string notr="true">background: rgb(246,246,246);</string>
-                                          </property>
                                           <property name="frameShape">
                                            <enum>QFrame::Box</enum>
                                           </property>
@@ -27375,9 +26890,6 @@ QPushButton:pressed {
                                         </item>
                                         <item row="1" column="0">
                                          <widget class="QFrame" name="frame_48">
-                                          <property name="styleSheet">
-                                           <string notr="true">background: rgb(246,246,246);</string>
-                                          </property>
                                           <property name="frameShape">
                                            <enum>QFrame::Box</enum>
                                           </property>
@@ -27510,9 +27022,6 @@ QPushButton:pressed {
                                         </item>
                                         <item row="3" column="0">
                                          <widget class="QFrame" name="sr_unet_like_frame">
-                                          <property name="styleSheet">
-                                           <string notr="true">background: rgb(246,246,246);</string>
-                                          </property>
                                           <property name="frameShape">
                                            <enum>QFrame::Box</enum>
                                           </property>
@@ -27656,9 +27165,6 @@ QPushButton:pressed {
                                             <width>0</width>
                                             <height>0</height>
                                            </size>
-                                          </property>
-                                          <property name="styleSheet">
-                                           <string notr="true">background: rgb(246,246,246);</string>
                                           </property>
                                           <property name="frameShape">
                                            <enum>QFrame::Box</enum>
@@ -28000,9 +27506,6 @@ QPushButton:pressed {
                                         </item>
                                         <item row="1" column="0" colspan="3">
                                          <widget class="QFrame" name="frame_79">
-                                          <property name="styleSheet">
-                                           <string notr="true">background: rgb(246,246,246);</string>
-                                          </property>
                                           <property name="frameShape">
                                            <enum>QFrame::StyledPanel</enum>
                                           </property>
@@ -28173,9 +27676,6 @@ QPushButton:pressed {
                                       </item>
                                       <item row="1" column="0">
                                        <widget class="QFrame" name="frame_63">
-                                        <property name="styleSheet">
-                                         <string notr="true">background: rgb(246,246,246);</string>
-                                        </property>
                                         <property name="frameShape">
                                          <enum>QFrame::StyledPanel</enum>
                                         </property>
@@ -28563,10 +28063,6 @@ QPushButton:pressed {
                                            <width>0</width>
                                            <height>0</height>
                                           </size>
-                                         </property>
-                                         <property name="styleSheet">
-                                          <string notr="true">background: rgb(246,246,246);
-</string>
                                          </property>
                                          <property name="frameShape">
                                           <enum>QFrame::Box</enum>
@@ -29073,10 +28569,6 @@ QPushButton:pressed {
                                            <height>0</height>
                                           </size>
                                          </property>
-                                         <property name="styleSheet">
-                                          <string notr="true">background: rgb(246,246,246);
-</string>
-                                         </property>
                                          <property name="frameShape">
                                           <enum>QFrame::Box</enum>
                                          </property>
@@ -29419,10 +28911,6 @@ QPushButton:pressed {
                                        </item>
                                        <item row="9" column="0">
                                         <widget class="QFrame" name="process_by_chunks_frame">
-                                         <property name="styleSheet">
-                                          <string notr="true">background: rgb(246,246,246);
-</string>
-                                         </property>
                                          <property name="frameShape">
                                           <enum>QFrame::Box</enum>
                                          </property>
@@ -30182,8 +29670,7 @@ QPushButton:pressed {
                                           </size>
                                          </property>
                                          <property name="styleSheet">
-                                          <string notr="true">background: rgb(246,246,246);
-</string>
+                                          <string notr="true"/>
                                          </property>
                                          <property name="frameShape">
                                           <enum>QFrame::Box</enum>
@@ -30917,10 +30404,6 @@ QPushButton:pressed {
                                        </item>
                                        <item row="15" column="0">
                                         <widget class="QFrame" name="frame_55">
-                                         <property name="styleSheet">
-                                          <string notr="true">background: rgb(246,246,246);
-</string>
-                                         </property>
                                          <property name="frameShape">
                                           <enum>QFrame::Box</enum>
                                          </property>
@@ -31021,9 +30504,6 @@ QPushButton:pressed {
                                        </item>
                                        <item row="3" column="0">
                                         <widget class="QFrame" name="preprocessing_test_frame">
-                                         <property name="styleSheet">
-                                          <string notr="true">background: rgb(246,246,246);</string>
-                                         </property>
                                          <property name="frameShape">
                                           <enum>QFrame::Box</enum>
                                          </property>
@@ -32753,23 +32233,8 @@ QPushButton:pressed {
                                         <pointsize>12</pointsize>
                                        </font>
                                       </property>
-                                      <property name="styleSheet">
-                                       <string notr="true">QPushButton {
-	border: none;
-}
-QPushButton:hover {
-	border: 2px solid rgb(0, 0, 0);
-}
-QPushButton:pressed {	
-	border: 2px solid rgb(0, 0, 0);
-}</string>
-                                      </property>
                                       <property name="text">
                                        <string/>
-                                      </property>
-                                      <property name="icon">
-                                       <iconset>
-                                        <normaloff>images/bn_images/down_arrow.svg</normaloff>images/bn_images/down_arrow.svg</iconset>
                                       </property>
                                      </widget>
                                     </item>
@@ -32821,10 +32286,6 @@ QPushButton:pressed {
                                      <family>DejaVu Math TeX Gyre</family>
                                      <pointsize>12</pointsize>
                                     </font>
-                                   </property>
-                                   <property name="styleSheet">
-                                    <string notr="true">background: rgb(246,246,246);
-</string>
                                    </property>
                                    <property name="frameShape">
                                     <enum>QFrame::Box</enum>
@@ -33366,9 +32827,6 @@ QPushButton:pressed {
                                       </item>
                                       <item row="2" column="0">
                                        <widget class="QFrame" name="frame_40">
-                                        <property name="styleSheet">
-                                         <string notr="true">background: rgb(246,246,246);</string>
-                                        </property>
                                         <property name="frameShape">
                                          <enum>QFrame::Box</enum>
                                         </property>
@@ -33481,9 +32939,6 @@ QPushButton:pressed {
                                           <width>0</width>
                                           <height>0</height>
                                          </size>
-                                        </property>
-                                        <property name="styleSheet">
-                                         <string notr="true">background: rgb(246,246,246);</string>
                                         </property>
                                         <property name="frameShape">
                                          <enum>QFrame::Box</enum>
@@ -33824,9 +33279,6 @@ QPushButton:pressed {
                                       </item>
                                       <item row="3" column="0">
                                        <widget class="QFrame" name="inst_seg_ths_frame">
-                                        <property name="styleSheet">
-                                         <string notr="true">background: rgb(246,246,246);</string>
-                                        </property>
                                         <property name="frameShape">
                                          <enum>QFrame::Box</enum>
                                         </property>
@@ -34197,9 +33649,6 @@ QPushButton:pressed {
                                           <width>0</width>
                                           <height>0</height>
                                          </size>
-                                        </property>
-                                        <property name="styleSheet">
-                                         <string notr="true">background: rgb(246,246,246);</string>
                                         </property>
                                         <property name="frameShape">
                                          <enum>QFrame::Box</enum>
@@ -35277,9 +34726,6 @@ p, li { white-space: pre-wrap; }
                                           <height>0</height>
                                          </size>
                                         </property>
-                                        <property name="styleSheet">
-                                         <string notr="true">background: rgb(246,246,246);</string>
-                                        </property>
                                         <property name="frameShape">
                                          <enum>QFrame::Box</enum>
                                         </property>
@@ -35535,9 +34981,6 @@ p, li { white-space: pre-wrap; }
                                       </item>
                                       <item row="5" column="0">
                                        <widget class="QFrame" name="frame_43">
-                                        <property name="styleSheet">
-                                         <string notr="true">background: rgb(246,246,246);</string>
-                                        </property>
                                         <property name="frameShape">
                                          <enum>QFrame::Box</enum>
                                         </property>
@@ -36403,9 +35846,6 @@ p, li { white-space: pre-wrap; }
                                       </item>
                                       <item row="5" column="0">
                                        <widget class="QFrame" name="det_metrics_frame">
-                                        <property name="styleSheet">
-                                         <string notr="true">background: rgb(246,246,246);</string>
-                                        </property>
                                         <property name="frameShape">
                                          <enum>QFrame::Box</enum>
                                         </property>
@@ -36583,9 +36023,6 @@ p, li { white-space: pre-wrap; }
                                       </item>
                                       <item row="1" column="0">
                                        <widget class="QFrame" name="frame_54">
-                                        <property name="styleSheet">
-                                         <string notr="true">background: rgb(246,246,246);</string>
-                                        </property>
                                         <property name="frameShape">
                                          <enum>QFrame::Box</enum>
                                         </property>
@@ -37118,9 +36555,6 @@ p, li { white-space: pre-wrap; }
                                           <width>0</width>
                                           <height>0</height>
                                          </size>
-                                        </property>
-                                        <property name="styleSheet">
-                                         <string notr="true">background: rgb(246,246,246);</string>
                                         </property>
                                         <property name="frameShape">
                                          <enum>QFrame::Box</enum>
@@ -38819,7 +38253,7 @@ QPushButton:pressed {
                           </property>
                           <property name="icon">
                            <iconset>
-                            <normaloff>images/bn_images/back.png</normaloff>images/bn_images/back.png</iconset>
+                            <normaloff>../../../../.designer/backup/images/bn_images/back.png</normaloff>../../../../.designer/backup/images/bn_images/back.png</iconset>
                           </property>
                           <property name="iconSize">
                            <size>
@@ -38938,10 +38372,6 @@ QPushButton:pressed {
                                <property name="text">
                                 <string/>
                                </property>
-                               <property name="icon">
-                                <iconset>
-                                 <normaloff>images/bn_images/dot_enable.svg</normaloff>images/bn_images/dot_enable.svg</iconset>
-                               </property>
                                <property name="iconSize">
                                 <size>
                                  <width>12</width>
@@ -38978,10 +38408,6 @@ QPushButton:pressed {
                                </property>
                                <property name="text">
                                 <string/>
-                               </property>
-                               <property name="icon">
-                                <iconset>
-                                 <normaloff>images/bn_images/dot_disable.svg</normaloff>images/bn_images/dot_disable.svg</iconset>
                                </property>
                                <property name="iconSize">
                                 <size>
@@ -39026,10 +38452,6 @@ QPushButton:pressed {
                                <property name="text">
                                 <string/>
                                </property>
-                               <property name="icon">
-                                <iconset>
-                                 <normaloff>images/bn_images/dot_disable.svg</normaloff>images/bn_images/dot_disable.svg</iconset>
-                               </property>
                                <property name="iconSize">
                                 <size>
                                  <width>12</width>
@@ -39069,10 +38491,6 @@ QPushButton:pressed {
                                </property>
                                <property name="text">
                                 <string/>
-                               </property>
-                               <property name="icon">
-                                <iconset>
-                                 <normaloff>images/bn_images/dot_disable.svg</normaloff>images/bn_images/dot_disable.svg</iconset>
                                </property>
                                <property name="iconSize">
                                 <size>
@@ -39130,17 +38548,6 @@ QPushButton:pressed {
                               <strikeout>false</strikeout>
                              </font>
                             </property>
-                            <property name="styleSheet">
-                             <string notr="true">QPushButton {
-	border: none;
-	background-color: rgb(64,144,253);
-	border-radius: 15px;
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}</string>
-                            </property>
                             <property name="text">
                              <string>Continue</string>
                             </property>
@@ -39192,9 +38599,6 @@ QPushButton:hover {
                 </layout>
                </widget>
                <widget class="QWidget" name="page_run_biapy">
-                <property name="styleSheet">
-                 <string notr="true">background:rgb(255,255,255);</string>
-                </property>
                 <layout class="QHBoxLayout" name="horizontalLayout_29">
                  <property name="spacing">
                   <number>0</number>
@@ -39434,26 +38838,11 @@ QPushButton:hover {
                             <property name="font">
                              <font>
                               <family>DejaVu Math TeX Gyre</family>
-                              <pointsize>20</pointsize>
+                              <pointsize>12</pointsize>
                              </font>
                             </property>
                             <property name="toolTip">
                              <string/>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">QPushButton {
-	border: none;
-	background-color: rgb(64,144,253);
-	border-radius: 15px;
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}
-QPushButton:pressed {	
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}</string>
                             </property>
                             <property name="text">
                              <string>Run Workflow</string>
@@ -39833,21 +39222,6 @@ QPushButton:pressed {
                                  <pointsize>12</pointsize>
                                 </font>
                                </property>
-                               <property name="styleSheet">
-                                <string notr="true">QPushButton {
-	border: none;
-	background-color: rgb(64,144,253);
-	border-radius: 15px;
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}
-QPushButton:pressed {	
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}</string>
-                               </property>
                                <property name="text">
                                 <string>Check file</string>
                                </property>
@@ -39875,8 +39249,8 @@ QPushButton:pressed {
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>96</width>
-                               <height>26</height>
+                               <width>896</width>
+                               <height>152</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_32">

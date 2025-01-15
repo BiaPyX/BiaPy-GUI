@@ -26,14 +26,12 @@ class Ui_yes_no(object):
         yes_no.resize(600, 235)
         yes_no.setMinimumSize(QSize(600, 235))
         yes_no.setMaximumSize(QSize(600, 235))
-        yes_no.setStyleSheet(u"background: rgb(255,255,255);")
         self.verticalLayout = QVBoxLayout(yes_no)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.centralwidget = QFrame(yes_no)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.centralwidget.setStyleSheet(u"background: rgb(255,255,255);")
         self.centralwidget.setFrameShape(QFrame.NoFrame)
         self.centralwidget.setFrameShadow(QFrame.Plain)
         self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
@@ -101,15 +99,8 @@ class Ui_yes_no(object):
         self.yes_bn.setMinimumSize(QSize(0, 0))
         self.yes_bn.setMaximumSize(QSize(100, 30))
         self.yes_bn.setFont(font)
-        self.yes_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgb(64,144,253);\n"
-"	border-radius: 15px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
+        self.yes_bn.setFocusPolicy(Qt.NoFocus)
+        self.yes_bn.setFlat(False)
 
         self.horizontalLayout_2.addWidget(self.yes_bn)
 
@@ -117,15 +108,8 @@ class Ui_yes_no(object):
         self.no_bn.setObjectName(u"no_bn")
         self.no_bn.setMaximumSize(QSize(100, 30))
         self.no_bn.setFont(font)
-        self.no_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgb(64,144,253);\n"
-"	border-radius: 15px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
+        self.no_bn.setFocusPolicy(Qt.NoFocus)
+        self.no_bn.setFlat(False)
 
         self.horizontalLayout_2.addWidget(self.no_bn)
 

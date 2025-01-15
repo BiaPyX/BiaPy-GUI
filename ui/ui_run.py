@@ -27,14 +27,12 @@ class Ui_RunBiaPy(object):
         RunBiaPy.resize(1181, 650)
         RunBiaPy.setMinimumSize(QSize(1181, 650))
         RunBiaPy.setMaximumSize(QSize(1181, 650))
-        RunBiaPy.setStyleSheet(u"background:rgb(255,255,255);")
         self.verticalLayout = QVBoxLayout(RunBiaPy)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 6)
         self.centralwidget = QFrame(RunBiaPy)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.centralwidget.setStyleSheet(u"background:rgb(255,255,255);")
         self.centralwidget.setFrameShape(QFrame.NoFrame)
         self.centralwidget.setFrameShadow(QFrame.Plain)
         self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
@@ -91,9 +89,6 @@ class Ui_RunBiaPy(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgba(0,0,0,0);\n"
 "}")
-        icon = QIcon()
-        icon.addFile(u"../../../../.designer/backup/images/bn_images/hide_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.bn_min.setIcon(icon)
         self.bn_min.setIconSize(QSize(22, 12))
         self.bn_min.setAutoDefault(False)
         self.bn_min.setFlat(True)
@@ -114,9 +109,6 @@ class Ui_RunBiaPy(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgba(0,0,0,0);\n"
 "}")
-        icon1 = QIcon()
-        icon1.addFile(u"../../../../.designer/backup/images/bn_images/close_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.bn_close.setIcon(icon1)
         self.bn_close.setIconSize(QSize(22, 22))
         self.bn_close.setAutoDefault(False)
         self.bn_close.setFlat(True)
@@ -184,9 +176,7 @@ class Ui_RunBiaPy(object):
         self.biapy_image_downloading_progress_bar = QProgressBar(self.container_pulling_frame)
         self.biapy_image_downloading_progress_bar.setObjectName(u"biapy_image_downloading_progress_bar")
         self.biapy_image_downloading_progress_bar.setMaximumSize(QSize(400, 16777215))
-        font2 = QFont()
-        font2.setFamilies([u"DejaVu Math TeX Gyre"])
-        self.biapy_image_downloading_progress_bar.setFont(font2)
+        self.biapy_image_downloading_progress_bar.setFont(font)
         self.biapy_image_downloading_progress_bar.setValue(24)
 
         self.gridLayout_3.addWidget(self.biapy_image_downloading_progress_bar, 1, 2, 1, 1)
@@ -194,10 +184,10 @@ class Ui_RunBiaPy(object):
         self.biapy_image_extracting_progress_bar = QProgressBar(self.container_pulling_frame)
         self.biapy_image_extracting_progress_bar.setObjectName(u"biapy_image_extracting_progress_bar")
         self.biapy_image_extracting_progress_bar.setMaximumSize(QSize(400, 16777215))
-        font3 = QFont()
-        font3.setFamilies([u"DejaVu Math TeX Gyre"])
-        font3.setPointSize(11)
-        self.biapy_image_extracting_progress_bar.setFont(font3)
+        font2 = QFont()
+        font2.setFamilies([u"DejaVu Math TeX Gyre"])
+        font2.setPointSize(11)
+        self.biapy_image_extracting_progress_bar.setFont(font2)
         self.biapy_image_extracting_progress_bar.setValue(24)
 
         self.gridLayout_3.addWidget(self.biapy_image_extracting_progress_bar, 2, 2, 1, 1)
@@ -239,7 +229,7 @@ class Ui_RunBiaPy(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 921, 118))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 921, 121))
         self.verticalLayout_5 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.biapy_container_info_label = QLabel(self.scrollAreaWidgetContents)
@@ -282,15 +272,7 @@ class Ui_RunBiaPy(object):
         self.stop_container_bn.setObjectName(u"stop_container_bn")
         self.stop_container_bn.setMinimumSize(QSize(100, 40))
         self.stop_container_bn.setFont(font)
-        self.stop_container_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgb(64,144,253);\n"
-"	border-radius: 15px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
+        self.stop_container_bn.setFocusPolicy(Qt.NoFocus)
 
         self.gridLayout.addWidget(self.stop_container_bn, 0, 1, 1, 1)
 
@@ -388,9 +370,9 @@ class Ui_RunBiaPy(object):
         self.run_biapy_log.setObjectName(u"run_biapy_log")
         self.run_biapy_log.setMinimumSize(QSize(0, 0))
         self.run_biapy_log.setMaximumSize(QSize(16777215, 16777215))
-        font4 = QFont()
-        font4.setFamilies([u"Monospace"])
-        self.run_biapy_log.setFont(font4)
+        font3 = QFont()
+        font3.setFamilies([u"Monospace"])
+        self.run_biapy_log.setFont(font3)
         self.run_biapy_log.setStyleSheet(u"background-color : black ; \n"
 "color : white; \n"
 "font-size: 9px;")
@@ -435,7 +417,7 @@ class Ui_RunBiaPy(object):
         self.run_biapy_log.setHtml(QCoreApplication.translate("RunBiaPy", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Monospace'; font-size:9px; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9px;\">Please wait, the first screen update may take a while depending on your OS</span></p></body></html>", None))
+"</style></head><body style=\" font-family:'Monospace','DejaVu Math TeX Gyre'; font-size:9px; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Monospace'; font-size:9px;\">Please wait, the first screen update may take a while depending on your OS</span></p></body></html>", None))
     # retranslateUi
 

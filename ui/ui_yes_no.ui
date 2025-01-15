@@ -25,9 +25,6 @@
   <property name="windowTitle">
    <string>yes_no</string>
   </property>
-  <property name="styleSheet">
-   <string notr="true">background: rgb(255,255,255);</string>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>0</number>
@@ -46,9 +43,6 @@
    </property>
    <item>
     <widget class="QFrame" name="centralwidget">
-     <property name="styleSheet">
-      <string notr="true">background: rgb(255,255,255);</string>
-     </property>
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
      </property>
@@ -232,19 +226,14 @@
                 <pointsize>12</pointsize>
                </font>
               </property>
-              <property name="styleSheet">
-               <string notr="true">QPushButton {
-	border: none;
-	background-color: rgb(64,144,253);
-	border-radius: 15px;
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}</string>
+              <property name="focusPolicy">
+               <enum>Qt::NoFocus</enum>
               </property>
               <property name="text">
                <string>Yes</string>
+              </property>
+              <property name="flat">
+               <bool>false</bool>
               </property>
              </widget>
             </item>
@@ -262,19 +251,14 @@ QPushButton:hover {
                 <pointsize>12</pointsize>
                </font>
               </property>
-              <property name="styleSheet">
-               <string notr="true">QPushButton {
-	border: none;
-	background-color: rgb(64,144,253);
-	border-radius: 15px;
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}</string>
+              <property name="focusPolicy">
+               <enum>Qt::NoFocus</enum>
               </property>
               <property name="text">
                <string>No</string>
+              </property>
+              <property name="flat">
+               <bool>false</bool>
               </property>
              </widget>
             </item>

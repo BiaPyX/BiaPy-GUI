@@ -41,16 +41,35 @@ class UIFunction(MainWindow):
             main_window.ui.frame_home.setStyleSheet("background:rgb(255,255,255)") 
             
             main_window.ui.biapy_logo_label.setPixmap(QPixmap(resource_path(os.path.join("images","biapy_logo.png"))))
-            main_window.ui.bn_close.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","close_icon.png"))))
-            main_window.ui.bn_min.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","hide_icon.png"))))
+            main_window.ui.bn_close.setIcon(main_window.style().standardIcon(QStyle.StandardPixmap.SP_TitleBarCloseButton))
+            main_window.ui.bn_min.setIcon(main_window.style().standardIcon(QStyle.StandardPixmap.SP_TitleBarMinButton))
 
+            style_bns = """
+            QPushButton {
+                border: none;
+                background-color: rgba(0,0,0,0);
+            }
+            QPushButton:hover {
+                background-color: rgb(255,255,255);
+            }
+            QPushButton:pressed {	
+                background-color: rgb(255,255,255);
+            }
+            """
             main_window.ui.bn_home.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","home.png"))))
+            main_window.ui.bn_home.setStyleSheet(style_bns)
             main_window.ui.bn_wizard.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","wizard.png"))))
+            main_window.ui.bn_home.setStyleSheet(style_bns)
             main_window.ui.bn_workflow.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","workflow.png"))))
+            main_window.ui.bn_home.setStyleSheet(style_bns)
             main_window.ui.bn_goptions.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","goptions.png"))))
+            main_window.ui.bn_home.setStyleSheet(style_bns)
             main_window.ui.bn_train.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","train.png"))))
+            main_window.ui.bn_home.setStyleSheet(style_bns)
             main_window.ui.bn_test.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","test.png"))))
+            main_window.ui.bn_home.setStyleSheet(style_bns)
             main_window.ui.bn_run_biapy.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","run.png"))))
+            main_window.ui.bn_home.setStyleSheet(style_bns)
 
             main_window.ui.left_arrow_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","left_arrow.svg"))))
             main_window.ui.right_arrow_bn.setIcon(QPixmap(resource_path(os.path.join("images","bn_images","right_arrow.svg"))))
@@ -379,7 +398,7 @@ class UIFunction(MainWindow):
         getattr(main_window.ui, f"workflow_view{main_window.workflow_view_queue[1]}_frame").setEnabled(True)
         getattr(main_window.ui, f"workflow_view{main_window.workflow_view_queue[1]}_frame").setStyleSheet(f"#workflow_view{main_window.workflow_view_queue[1]}_frame "+"{\nborder: 5px solid rgb(64,144,253);\nborder-radius: 25px;\n}")
         getattr(main_window.ui, f"workflow_view{main_window.workflow_view_queue[item]}_frame").setEnabled(False)
-        getattr(main_window.ui, f"workflow_view{main_window.workflow_view_queue[item]}_frame").setStyleSheet("background:rgb(240,240,240);\nborder-radius: 25px;")
+        getattr(main_window.ui, f"workflow_view{main_window.workflow_view_queue[item]}_frame").setStyleSheet("color: black;\nbackground:rgb(240,240,240);\nborder-radius: 25px;")
 
         # To update mainly the patch size depending on the workflow
         UIFunction.change_problem_dimensions(main_window, main_window.ui.PROBLEM__NDIM__INPUT.currentIndex())

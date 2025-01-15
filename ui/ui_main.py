@@ -31,6 +31,9 @@ class Ui_MainWindow(object):
         MainWindow.setStyleSheet(u"")
         self.centralwidget = QFrame(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
+        font = QFont()
+        font.setFamilies([u"Ubuntu"])
+        self.centralwidget.setFont(font)
         self.centralwidget.setStyleSheet(u"QWidget:disabled {\n"
 "background-color:#D3D3D3;\n"
 "}\n"
@@ -47,10 +50,10 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.frame_west = QFrame(self.centralwidget)
         self.frame_west.setObjectName(u"frame_west")
-        font = QFont()
-        font.setFamilies([u"DejaVu Math TeX Gyre"])
-        font.setPointSize(12)
-        self.frame_west.setFont(font)
+        font1 = QFont()
+        font1.setFamilies([u"DejaVu Math TeX Gyre"])
+        font1.setPointSize(12)
+        self.frame_west.setFont(font1)
         self.frame_west.setStyleSheet(u"background-color:rgba(0, 0, 0, 0);")
         self.frame_west.setFrameShape(QFrame.NoFrame)
         self.frame_west.setFrameShadow(QFrame.Plain)
@@ -62,7 +65,7 @@ class Ui_MainWindow(object):
         self.frame_bottom_west.setObjectName(u"frame_bottom_west")
         self.frame_bottom_west.setMinimumSize(QSize(260, 0))
         self.frame_bottom_west.setMaximumSize(QSize(80, 16777215))
-        self.frame_bottom_west.setFont(font)
+        self.frame_bottom_west.setFont(font1)
         self.frame_bottom_west.setStyleSheet(u"QFrame{\n"
 "background:rgb(64,144,253);\n"
 "}\n"
@@ -77,8 +80,7 @@ class Ui_MainWindow(object):
         self.biapy_logo_frame.setObjectName(u"biapy_logo_frame")
         self.biapy_logo_frame.setMinimumSize(QSize(0, 0))
         self.biapy_logo_frame.setMaximumSize(QSize(16777215, 16777215))
-        self.biapy_logo_frame.setFont(font)
-        self.biapy_logo_frame.setStyleSheet(u"background-color:rgba(0, 0, 0, 0);")
+        self.biapy_logo_frame.setFont(font1)
         self.biapy_logo_frame.setFrameShape(QFrame.NoFrame)
         self.biapy_logo_frame.setFrameShadow(QFrame.Plain)
         self.biapy_logo_frame.setLineWidth(0)
@@ -99,9 +101,9 @@ class Ui_MainWindow(object):
         self.biapy_logo_label.setObjectName(u"biapy_logo_label")
         self.biapy_logo_label.setMinimumSize(QSize(0, 0))
         self.biapy_logo_label.setMaximumSize(QSize(180, 180))
-        self.biapy_logo_label.setFont(font)
+        self.biapy_logo_label.setFont(font1)
         self.biapy_logo_label.setLineWidth(0)
-        self.biapy_logo_label.setPixmap(QPixmap(u"images/superminimal_ark_biapy2.png"))
+        self.biapy_logo_label.setPixmap(QPixmap(u"../../../../.designer/backup/images/superminimal_ark_biapy2.png"))
         self.biapy_logo_label.setScaledContents(True)
         self.biapy_logo_label.setAlignment(Qt.AlignCenter)
 
@@ -122,10 +124,10 @@ class Ui_MainWindow(object):
         self.biapy_version.setObjectName(u"biapy_version")
         self.biapy_version.setMinimumSize(QSize(0, 0))
         self.biapy_version.setMaximumSize(QSize(16777215, 16777215))
-        font1 = QFont()
-        font1.setFamilies([u"DejaVu Math TeX Gyre"])
-        font1.setPointSize(7)
-        self.biapy_version.setFont(font1)
+        font2 = QFont()
+        font2.setFamilies([u"DejaVu Math TeX Gyre"])
+        font2.setPointSize(7)
+        self.biapy_version.setFont(font2)
         self.biapy_version.setStyleSheet(u"QLabel {\n"
 "color: white;\n"
 "background-color:rgba(0, 0, 0, 0);\n"
@@ -140,7 +142,7 @@ class Ui_MainWindow(object):
 
         self.line = QFrame(self.frame_bottom_west)
         self.line.setObjectName(u"line")
-        self.line.setFont(font)
+        self.line.setFont(font1)
         self.line.setFrameShape(QFrame.Shape.HLine)
         self.line.setFrameShadow(QFrame.Shadow.Sunken)
 
@@ -150,10 +152,7 @@ class Ui_MainWindow(object):
         self.frame_home.setObjectName(u"frame_home")
         self.frame_home.setMinimumSize(QSize(0, 0))
         self.frame_home.setMaximumSize(QSize(260, 52))
-        self.frame_home.setFont(font)
-        self.frame_home.setStyleSheet(u"QFrame:disabled {\n"
-"background-color: rgb(169,169,169);\n"
-"}")
+        self.frame_home.setFont(font1)
         self.frame_home.setFrameShape(QFrame.NoFrame)
         self.frame_home.setFrameShadow(QFrame.Plain)
         self.horizontalLayout_15 = QHBoxLayout(self.frame_home)
@@ -164,17 +163,7 @@ class Ui_MainWindow(object):
         self.bn_home.setObjectName(u"bn_home")
         self.bn_home.setMinimumSize(QSize(52, 0))
         self.bn_home.setMaximumSize(QSize(260, 52))
-        self.bn_home.setFont(font)
-        self.bn_home.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgba(0,0,0,0);\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
-"}")
+        self.bn_home.setFont(font1)
         self.bn_home.setIconSize(QSize(257, 48))
         self.bn_home.setFlat(True)
 
@@ -186,7 +175,7 @@ class Ui_MainWindow(object):
         self.frame_wizard = QFrame(self.frame_bottom_west)
         self.frame_wizard.setObjectName(u"frame_wizard")
         self.frame_wizard.setMaximumSize(QSize(260, 52))
-        self.frame_wizard.setFont(font)
+        self.frame_wizard.setFont(font1)
         self.frame_wizard.setFrameShape(QFrame.NoFrame)
         self.frame_wizard.setFrameShadow(QFrame.Plain)
         self.verticalLayout_4 = QVBoxLayout(self.frame_wizard)
@@ -197,17 +186,9 @@ class Ui_MainWindow(object):
         self.bn_wizard.setObjectName(u"bn_wizard")
         self.bn_wizard.setMinimumSize(QSize(52, 0))
         self.bn_wizard.setMaximumSize(QSize(260, 52))
-        self.bn_wizard.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgba(0,0,0,0);\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
-"}")
+        self.bn_wizard.setFont(font1)
         self.bn_wizard.setIconSize(QSize(257, 48))
+        self.bn_wizard.setFlat(True)
 
         self.verticalLayout_4.addWidget(self.bn_wizard)
 
@@ -218,7 +199,7 @@ class Ui_MainWindow(object):
         self.frame_workflow.setObjectName(u"frame_workflow")
         self.frame_workflow.setMinimumSize(QSize(0, 0))
         self.frame_workflow.setMaximumSize(QSize(260, 52))
-        self.frame_workflow.setFont(font)
+        self.frame_workflow.setFont(font1)
         self.frame_workflow.setFrameShape(QFrame.NoFrame)
         self.frame_workflow.setFrameShadow(QFrame.Plain)
         self.horizontalLayout_16 = QHBoxLayout(self.frame_workflow)
@@ -234,17 +215,7 @@ class Ui_MainWindow(object):
         self.bn_workflow.setSizePolicy(sizePolicy)
         self.bn_workflow.setMinimumSize(QSize(52, 0))
         self.bn_workflow.setMaximumSize(QSize(260, 52))
-        self.bn_workflow.setFont(font)
-        self.bn_workflow.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgba(0,0,0,0);\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
-"}")
+        self.bn_workflow.setFont(font1)
         self.bn_workflow.setIconSize(QSize(257, 48))
         self.bn_workflow.setFlat(True)
 
@@ -257,7 +228,7 @@ class Ui_MainWindow(object):
         self.frame_goptions.setObjectName(u"frame_goptions")
         self.frame_goptions.setMinimumSize(QSize(0, 0))
         self.frame_goptions.setMaximumSize(QSize(260, 52))
-        self.frame_goptions.setFont(font)
+        self.frame_goptions.setFont(font1)
         self.frame_goptions.setFrameShape(QFrame.NoFrame)
         self.frame_goptions.setFrameShadow(QFrame.Plain)
         self.horizontalLayout_17 = QHBoxLayout(self.frame_goptions)
@@ -268,17 +239,7 @@ class Ui_MainWindow(object):
         self.bn_goptions.setObjectName(u"bn_goptions")
         self.bn_goptions.setMinimumSize(QSize(52, 0))
         self.bn_goptions.setMaximumSize(QSize(260, 52))
-        self.bn_goptions.setFont(font)
-        self.bn_goptions.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgba(0,0,0,0);\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
-"}")
+        self.bn_goptions.setFont(font1)
         self.bn_goptions.setIconSize(QSize(257, 48))
         self.bn_goptions.setFlat(True)
 
@@ -296,10 +257,9 @@ class Ui_MainWindow(object):
         self.frame_train.setSizePolicy(sizePolicy1)
         self.frame_train.setMinimumSize(QSize(0, 0))
         self.frame_train.setMaximumSize(QSize(260, 52))
-        self.frame_train.setFont(font)
+        self.frame_train.setFont(font1)
         self.frame_train.setFrameShape(QFrame.NoFrame)
         self.frame_train.setFrameShadow(QFrame.Plain)
-        self.frame_train.setLineWidth(1)
         self.horizontalLayout_18 = QHBoxLayout(self.frame_train)
         self.horizontalLayout_18.setSpacing(0)
         self.horizontalLayout_18.setObjectName(u"horizontalLayout_18")
@@ -308,17 +268,7 @@ class Ui_MainWindow(object):
         self.bn_train.setObjectName(u"bn_train")
         self.bn_train.setMinimumSize(QSize(52, 0))
         self.bn_train.setMaximumSize(QSize(260, 52))
-        self.bn_train.setFont(font)
-        self.bn_train.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgba(0,0,0,0);\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
-"}")
+        self.bn_train.setFont(font1)
         self.bn_train.setIconSize(QSize(257, 48))
         self.bn_train.setFlat(True)
 
@@ -333,7 +283,7 @@ class Ui_MainWindow(object):
         self.frame_test.setSizePolicy(sizePolicy1)
         self.frame_test.setMinimumSize(QSize(0, 0))
         self.frame_test.setMaximumSize(QSize(260, 52))
-        self.frame_test.setFont(font)
+        self.frame_test.setFont(font1)
         self.frame_test.setFrameShape(QFrame.NoFrame)
         self.frame_test.setFrameShadow(QFrame.Plain)
         self.horizontalLayout_24 = QHBoxLayout(self.frame_test)
@@ -344,17 +294,7 @@ class Ui_MainWindow(object):
         self.bn_test.setObjectName(u"bn_test")
         self.bn_test.setMinimumSize(QSize(52, 0))
         self.bn_test.setMaximumSize(QSize(260, 52))
-        self.bn_test.setFont(font)
-        self.bn_test.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgba(0,0,0,0);\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
-"}")
+        self.bn_test.setFont(font1)
         self.bn_test.setIconSize(QSize(257, 48))
         self.bn_test.setFlat(True)
 
@@ -369,7 +309,7 @@ class Ui_MainWindow(object):
         self.frame_run_biapy.setSizePolicy(sizePolicy1)
         self.frame_run_biapy.setMinimumSize(QSize(0, 0))
         self.frame_run_biapy.setMaximumSize(QSize(260, 52))
-        self.frame_run_biapy.setFont(font)
+        self.frame_run_biapy.setFont(font1)
         self.frame_run_biapy.setFrameShape(QFrame.NoFrame)
         self.frame_run_biapy.setFrameShadow(QFrame.Plain)
         self.horizontalLayout_28 = QHBoxLayout(self.frame_run_biapy)
@@ -380,17 +320,7 @@ class Ui_MainWindow(object):
         self.bn_run_biapy.setObjectName(u"bn_run_biapy")
         self.bn_run_biapy.setMinimumSize(QSize(52, 0))
         self.bn_run_biapy.setMaximumSize(QSize(260, 52))
-        self.bn_run_biapy.setFont(font)
-        self.bn_run_biapy.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgba(0,0,0,0);\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
-"}")
+        self.bn_run_biapy.setFont(font1)
         self.bn_run_biapy.setIconSize(QSize(257, 48))
         self.bn_run_biapy.setFlat(True)
 
@@ -410,7 +340,7 @@ class Ui_MainWindow(object):
         self.frame_east.setEnabled(True)
         self.frame_east.setMinimumSize(QSize(0, 0))
         self.frame_east.setMaximumSize(QSize(16777215, 16777215))
-        self.frame_east.setFont(font)
+        self.frame_east.setFont(font1)
         self.frame_east.setStyleSheet(u"")
         self.frame_east.setFrameShape(QFrame.NoFrame)
         self.frame_east.setFrameShadow(QFrame.Plain)
@@ -422,11 +352,8 @@ class Ui_MainWindow(object):
         self.frame_top_east.setObjectName(u"frame_top_east")
         self.frame_top_east.setMinimumSize(QSize(0, 0))
         self.frame_top_east.setMaximumSize(QSize(16777215, 35))
-        self.frame_top_east.setFont(font)
-        self.frame_top_east.setStyleSheet(u"QFrame{\n"
-"background:rgb(255,255,255);\n"
-"}\n"
-"QFrame:disabled {\n"
+        self.frame_top_east.setFont(font1)
+        self.frame_top_east.setStyleSheet(u"QFrame:disabled {\n"
 "background-color:#D3D3D3;\n"
 "}")
         self.frame_top_east.setFrameShape(QFrame.NoFrame)
@@ -438,7 +365,7 @@ class Ui_MainWindow(object):
         self.frame_empty = QFrame(self.frame_top_east)
         self.frame_empty.setObjectName(u"frame_empty")
         self.frame_empty.setMinimumSize(QSize(0, 0))
-        self.frame_empty.setFont(font)
+        self.frame_empty.setFont(font1)
         self.frame_empty.setFrameShape(QFrame.NoFrame)
         self.frame_empty.setFrameShadow(QFrame.Plain)
         self.horizontalLayout_9 = QHBoxLayout(self.frame_empty)
@@ -452,7 +379,7 @@ class Ui_MainWindow(object):
         self.frame_min.setObjectName(u"frame_min")
         self.frame_min.setMinimumSize(QSize(55, 35))
         self.frame_min.setMaximumSize(QSize(55, 35))
-        self.frame_min.setFont(font)
+        self.frame_min.setFont(font1)
         self.frame_min.setFrameShape(QFrame.NoFrame)
         self.frame_min.setFrameShadow(QFrame.Plain)
         self.horizontalLayout_7 = QHBoxLayout(self.frame_min)
@@ -462,7 +389,7 @@ class Ui_MainWindow(object):
         self.bn_min = QPushButton(self.frame_min)
         self.bn_min.setObjectName(u"bn_min")
         self.bn_min.setMaximumSize(QSize(55, 35))
-        self.bn_min.setFont(font)
+        self.bn_min.setFont(font1)
         self.bn_min.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgba(0,0,0,0);\n"
@@ -473,9 +400,6 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgba(0,0,0,0);\n"
 "}")
-        icon = QIcon()
-        icon.addFile(u"images/bn_images/hide_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.bn_min.setIcon(icon)
         self.bn_min.setIconSize(QSize(22, 22))
         self.bn_min.setFlat(True)
 
@@ -488,7 +412,7 @@ class Ui_MainWindow(object):
         self.frame_close.setObjectName(u"frame_close")
         self.frame_close.setMinimumSize(QSize(55, 35))
         self.frame_close.setMaximumSize(QSize(55, 35))
-        self.frame_close.setFont(font)
+        self.frame_close.setFont(font1)
         self.frame_close.setFrameShape(QFrame.NoFrame)
         self.frame_close.setFrameShadow(QFrame.Plain)
         self.horizontalLayout_5 = QHBoxLayout(self.frame_close)
@@ -498,7 +422,7 @@ class Ui_MainWindow(object):
         self.bn_close = QPushButton(self.frame_close)
         self.bn_close.setObjectName(u"bn_close")
         self.bn_close.setMaximumSize(QSize(55, 35))
-        self.bn_close.setFont(font)
+        self.bn_close.setFont(font1)
         self.bn_close.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgba(0,0,0,0);\n"
@@ -509,9 +433,6 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgba(0,0,0,0);\n"
 "}")
-        icon1 = QIcon()
-        icon1.addFile(u"images/bn_images/close_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.bn_close.setIcon(icon1)
         self.bn_close.setIconSize(QSize(22, 22))
         self.bn_close.setFlat(True)
 
@@ -526,7 +447,7 @@ class Ui_MainWindow(object):
         self.frame_bottom_east = QFrame(self.frame_east)
         self.frame_bottom_east.setObjectName(u"frame_bottom_east")
         self.frame_bottom_east.setMaximumSize(QSize(16777215, 16777215))
-        self.frame_bottom_east.setFont(font)
+        self.frame_bottom_east.setFont(font1)
         self.frame_bottom_east.setFrameShape(QFrame.NoFrame)
         self.frame_bottom_east.setFrameShadow(QFrame.Plain)
         self.verticalLayout_2 = QVBoxLayout(self.frame_bottom_east)
@@ -535,7 +456,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.frame = QFrame(self.frame_bottom_east)
         self.frame.setObjectName(u"frame")
-        self.frame.setFont(font)
+        self.frame.setFont(font1)
         self.frame.setFrameShape(QFrame.NoFrame)
         self.frame.setFrameShadow(QFrame.Plain)
         self.verticalLayout_6 = QVBoxLayout(self.frame)
@@ -545,16 +466,9 @@ class Ui_MainWindow(object):
         self.stackedWidget = QStackedWidget(self.frame)
         self.stackedWidget.setObjectName(u"stackedWidget")
         self.stackedWidget.setMinimumSize(QSize(0, 55))
-        self.stackedWidget.setFont(font)
-        self.stackedWidget.setStyleSheet(u"")
+        self.stackedWidget.setFont(font1)
         self.page_home = QWidget()
         self.page_home.setObjectName(u"page_home")
-        self.page_home.setStyleSheet(u"QFrame {\n"
-"background:rgb(255,255,255);\n"
-"}\n"
-"QFrame:disabled {\n"
-"background-color:#D3D3D3;\n"
-"}")
         self.verticalLayout_13 = QVBoxLayout(self.page_home)
         self.verticalLayout_13.setSpacing(0)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
@@ -563,7 +477,7 @@ class Ui_MainWindow(object):
         self.frame_4.setObjectName(u"frame_4")
         self.frame_4.setMinimumSize(QSize(948, 555))
         self.frame_4.setMaximumSize(QSize(948, 555))
-        self.frame_4.setFont(font)
+        self.frame_4.setFont(font1)
         self.frame_4.setFrameShape(QFrame.NoFrame)
         self.frame_4.setFrameShadow(QFrame.Raised)
         self.verticalLayout_5 = QVBoxLayout(self.frame_4)
@@ -574,11 +488,11 @@ class Ui_MainWindow(object):
         self.label_16.setObjectName(u"label_16")
         self.label_16.setMinimumSize(QSize(0, 30))
         self.label_16.setMaximumSize(QSize(16777215, 30))
-        font2 = QFont()
-        font2.setFamilies([u"DejaVu Math TeX Gyre"])
-        font2.setPointSize(12)
-        font2.setBold(True)
-        self.label_16.setFont(font2)
+        font3 = QFont()
+        font3.setFamilies([u"DejaVu Math TeX Gyre"])
+        font3.setPointSize(12)
+        font3.setBold(True)
+        self.label_16.setFont(font3)
 
         self.verticalLayout_5.addWidget(self.label_16)
 
@@ -631,11 +545,11 @@ class Ui_MainWindow(object):
         self.home_project_page_label.setObjectName(u"home_project_page_label")
         self.home_project_page_label.setMinimumSize(QSize(100, 0))
         self.home_project_page_label.setMaximumSize(QSize(16777215, 16777215))
-        font3 = QFont()
-        font3.setFamilies([u"DejaVu Math TeX Gyre"])
-        font3.setPointSize(10)
-        font3.setBold(False)
-        self.home_project_page_label.setFont(font3)
+        font4 = QFont()
+        font4.setFamilies([u"DejaVu Math TeX Gyre"])
+        font4.setPointSize(10)
+        font4.setBold(False)
+        self.home_project_page_label.setFont(font4)
 
         self.verticalLayout_34.addWidget(self.home_project_page_label, 0, Qt.AlignHCenter)
 
@@ -679,7 +593,7 @@ class Ui_MainWindow(object):
         self.forum_page_label.setObjectName(u"forum_page_label")
         self.forum_page_label.setMinimumSize(QSize(100, 0))
         self.forum_page_label.setMaximumSize(QSize(16777215, 16777215))
-        self.forum_page_label.setFont(font3)
+        self.forum_page_label.setFont(font4)
 
         self.verticalLayout_15.addWidget(self.forum_page_label)
 
@@ -725,7 +639,7 @@ class Ui_MainWindow(object):
         self.documentation_page_label.setObjectName(u"documentation_page_label")
         self.documentation_page_label.setMinimumSize(QSize(100, 0))
         self.documentation_page_label.setMaximumSize(QSize(16777215, 16777215))
-        self.documentation_page_label.setFont(font3)
+        self.documentation_page_label.setFont(font4)
 
         self.verticalLayout_35.addWidget(self.documentation_page_label)
 
@@ -769,7 +683,7 @@ class Ui_MainWindow(object):
         self.templates_page_label.setObjectName(u"templates_page_label")
         self.templates_page_label.setMinimumSize(QSize(100, 0))
         self.templates_page_label.setMaximumSize(QSize(16777215, 16777215))
-        self.templates_page_label.setFont(font3)
+        self.templates_page_label.setFont(font4)
 
         self.verticalLayout_36.addWidget(self.templates_page_label)
 
@@ -813,7 +727,7 @@ class Ui_MainWindow(object):
         self.notebooks_page_label.setObjectName(u"notebooks_page_label")
         self.notebooks_page_label.setMinimumSize(QSize(100, 0))
         self.notebooks_page_label.setMaximumSize(QSize(16777215, 16777215))
-        self.notebooks_page_label.setFont(font3)
+        self.notebooks_page_label.setFont(font4)
 
         self.verticalLayout_37.addWidget(self.notebooks_page_label)
 
@@ -857,7 +771,7 @@ class Ui_MainWindow(object):
         self.citation_page_label.setObjectName(u"citation_page_label")
         self.citation_page_label.setMinimumSize(QSize(100, 0))
         self.citation_page_label.setMaximumSize(QSize(16777215, 16777215))
-        self.citation_page_label.setFont(font3)
+        self.citation_page_label.setFont(font4)
 
         self.verticalLayout_38.addWidget(self.citation_page_label)
 
@@ -897,14 +811,14 @@ class Ui_MainWindow(object):
         self.docker_logo.setObjectName(u"docker_logo")
         self.docker_logo.setMinimumSize(QSize(220, 56))
         self.docker_logo.setMaximumSize(QSize(220, 56))
-        self.docker_logo.setFont(font)
+        self.docker_logo.setFont(font1)
         self.docker_logo.setScaledContents(True)
 
         self.verticalLayout_28.addWidget(self.docker_logo, 0, Qt.AlignHCenter)
 
         self.docker_status_label = QLabel(self.docker_frame)
         self.docker_status_label.setObjectName(u"docker_status_label")
-        self.docker_status_label.setFont(font)
+        self.docker_status_label.setFont(font1)
         self.docker_status_label.setAlignment(Qt.AlignCenter)
         self.docker_status_label.setWordWrap(True)
         self.docker_status_label.setOpenExternalLinks(True)
@@ -918,7 +832,7 @@ class Ui_MainWindow(object):
         self.gpu_head_label.setObjectName(u"gpu_head_label")
         self.gpu_head_label.setMinimumSize(QSize(0, 30))
         self.gpu_head_label.setMaximumSize(QSize(16777215, 30))
-        self.gpu_head_label.setFont(font2)
+        self.gpu_head_label.setFont(font3)
 
         self.gridLayout_68.addWidget(self.gpu_head_label, 0, 1, 1, 1)
 
@@ -939,14 +853,14 @@ class Ui_MainWindow(object):
         self.gpu_icon_label.setObjectName(u"gpu_icon_label")
         self.gpu_icon_label.setMinimumSize(QSize(122, 80))
         self.gpu_icon_label.setMaximumSize(QSize(122, 80))
-        self.gpu_icon_label.setFont(font)
+        self.gpu_icon_label.setFont(font1)
         self.gpu_icon_label.setScaledContents(True)
 
         self.verticalLayout_33.addWidget(self.gpu_icon_label, 0, Qt.AlignHCenter)
 
         self.gpu_status_label = QLabel(self.gpu_frame)
         self.gpu_status_label.setObjectName(u"gpu_status_label")
-        self.gpu_status_label.setFont(font)
+        self.gpu_status_label.setFont(font1)
         self.gpu_status_label.setAlignment(Qt.AlignCenter)
         self.gpu_status_label.setWordWrap(True)
         self.gpu_status_label.setOpenExternalLinks(True)
@@ -960,7 +874,7 @@ class Ui_MainWindow(object):
         self.docker_head_label.setObjectName(u"docker_head_label")
         self.docker_head_label.setMinimumSize(QSize(0, 30))
         self.docker_head_label.setMaximumSize(QSize(16777215, 30))
-        self.docker_head_label.setFont(font2)
+        self.docker_head_label.setFont(font3)
         self.docker_head_label.setOpenExternalLinks(True)
 
         self.gridLayout_68.addWidget(self.docker_head_label, 0, 0, 1, 1)
@@ -972,7 +886,7 @@ class Ui_MainWindow(object):
         self.frame_6.setObjectName(u"frame_6")
         self.frame_6.setMinimumSize(QSize(0, 170))
         self.frame_6.setMaximumSize(QSize(16777215, 16777215))
-        self.frame_6.setFont(font)
+        self.frame_6.setFont(font1)
         self.frame_6.setFrameShape(QFrame.NoFrame)
         self.frame_6.setFrameShadow(QFrame.Raised)
         self.gridLayout_33 = QGridLayout(self.frame_6)
@@ -988,22 +902,6 @@ class Ui_MainWindow(object):
         self.main_window_wizard_question_wizard_icon.setObjectName(u"main_window_wizard_question_wizard_icon")
         self.main_window_wizard_question_wizard_icon.setMinimumSize(QSize(194, 85))
         self.main_window_wizard_question_wizard_icon.setMaximumSize(QSize(194, 85))
-        self.main_window_wizard_question_wizard_icon.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgb(255,255,255);\n"
-"	border-radius: 10px;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(197,234,250);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}\n"
-"\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgb(197,234,250);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}\n"
-"")
         self.main_window_wizard_question_wizard_icon.setIconSize(QSize(184, 75))
 
         self.verticalLayout_41.addWidget(self.main_window_wizard_question_wizard_icon)
@@ -1024,24 +922,7 @@ class Ui_MainWindow(object):
         self.create_yaml_bn.setObjectName(u"create_yaml_bn")
         self.create_yaml_bn.setMinimumSize(QSize(300, 35))
         self.create_yaml_bn.setMaximumSize(QSize(300, 35))
-        self.create_yaml_bn.setFont(font)
-        self.create_yaml_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	border-radius: 15px;\n"
-"	background-color: rgb(64,144,253);\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}\n"
-"\n"
-"QPushButton:disabled {\n"
-"background-color:#A9A9A9;\n"
-"}")
+        self.create_yaml_bn.setFont(font1)
         self.create_yaml_bn.setIconSize(QSize(215, 33))
 
         self.verticalLayout_42.addWidget(self.create_yaml_bn)
@@ -1050,24 +931,7 @@ class Ui_MainWindow(object):
         self.load_yaml_bn.setObjectName(u"load_yaml_bn")
         self.load_yaml_bn.setMinimumSize(QSize(300, 35))
         self.load_yaml_bn.setMaximumSize(QSize(300, 35))
-        self.load_yaml_bn.setFont(font)
-        self.load_yaml_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	border-radius: 15px;\n"
-"	background-color: rgb(64,144,253);\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}\n"
-"\n"
-"QPushButton:disabled {\n"
-"background-color:#A9A9A9;\n"
-"}")
+        self.load_yaml_bn.setFont(font1)
         self.load_yaml_bn.setIconSize(QSize(215, 33))
 
         self.verticalLayout_42.addWidget(self.load_yaml_bn)
@@ -1079,7 +943,7 @@ class Ui_MainWindow(object):
         self.label_26.setObjectName(u"label_26")
         self.label_26.setMinimumSize(QSize(0, 30))
         self.label_26.setMaximumSize(QSize(16777215, 30))
-        self.label_26.setFont(font2)
+        self.label_26.setFont(font3)
 
         self.gridLayout_33.addWidget(self.label_26, 0, 0, 1, 1)
 
@@ -1087,7 +951,7 @@ class Ui_MainWindow(object):
         self.label_27.setObjectName(u"label_27")
         self.label_27.setMinimumSize(QSize(0, 30))
         self.label_27.setMaximumSize(QSize(16777215, 30))
-        self.label_27.setFont(font2)
+        self.label_27.setFont(font3)
 
         self.gridLayout_33.addWidget(self.label_27, 0, 1, 1, 1)
 
@@ -1100,10 +964,7 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.page_home)
         self.page_wizard = QWidget()
         self.page_wizard.setObjectName(u"page_wizard")
-        self.page_wizard.setStyleSheet(u"QFrame {\n"
-"background:rgb(255,255,255);\n"
-"}\n"
-"QFrame:disabled {\n"
+        self.page_wizard.setStyleSheet(u"QFrame:disabled {\n"
 "background-color:#D3D3D3;\n"
 "}")
         self.wizard_frame = QFrame(self.page_wizard)
@@ -1132,9 +993,9 @@ class Ui_MainWindow(object):
         self.frame_68 = QFrame(self.frame_67)
         self.frame_68.setObjectName(u"frame_68")
         self.frame_68.setMinimumSize(QSize(0, 300))
-        font4 = QFont()
-        font4.setFamilies([u"DejaVu Math TeX Gyre"])
-        self.frame_68.setFont(font4)
+        font5 = QFont()
+        font5.setFamilies([u"DejaVu Math TeX Gyre"])
+        self.frame_68.setFont(font5)
         self.frame_68.setFrameShape(QFrame.NoFrame)
         self.frame_68.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_39 = QHBoxLayout(self.frame_68)
@@ -1145,7 +1006,7 @@ class Ui_MainWindow(object):
         self.wizard_start_message.setObjectName(u"wizard_start_message")
         self.wizard_start_message.setMinimumSize(QSize(0, 0))
         self.wizard_start_message.setMaximumSize(QSize(16777215, 16777215))
-        self.wizard_start_message.setFont(font)
+        self.wizard_start_message.setFont(font1)
         self.wizard_start_message.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.wizard_start_message.setWordWrap(True)
 
@@ -1155,7 +1016,7 @@ class Ui_MainWindow(object):
         self.wizard_start_wizard_icon.setObjectName(u"wizard_start_wizard_icon")
         self.wizard_start_wizard_icon.setMinimumSize(QSize(130, 148))
         self.wizard_start_wizard_icon.setMaximumSize(QSize(130, 148))
-        self.wizard_start_wizard_icon.setFont(font)
+        self.wizard_start_wizard_icon.setFont(font1)
         self.wizard_start_wizard_icon.setScaledContents(True)
 
         self.horizontalLayout_39.addWidget(self.wizard_start_wizard_icon)
@@ -1193,14 +1054,14 @@ class Ui_MainWindow(object):
         self.wizard_browse_yaml_path_bn = QPushButton(self.wizard_start_page_paths_frame)
         self.wizard_browse_yaml_path_bn.setObjectName(u"wizard_browse_yaml_path_bn")
         self.wizard_browse_yaml_path_bn.setMaximumSize(QSize(130, 16777215))
-        self.wizard_browse_yaml_path_bn.setFont(font)
+        self.wizard_browse_yaml_path_bn.setFont(font1)
 
         self.gridLayout_80.addWidget(self.wizard_browse_yaml_path_bn, 0, 6, 1, 1)
 
         self.wizard_browse_yaml_path_label = QLabel(self.wizard_start_page_paths_frame)
         self.wizard_browse_yaml_path_label.setObjectName(u"wizard_browse_yaml_path_label")
         self.wizard_browse_yaml_path_label.setMaximumSize(QSize(250, 35))
-        self.wizard_browse_yaml_path_label.setFont(font)
+        self.wizard_browse_yaml_path_label.setFont(font1)
 
         self.gridLayout_80.addWidget(self.wizard_browse_yaml_path_label, 0, 1, 1, 1)
 
@@ -1212,7 +1073,7 @@ class Ui_MainWindow(object):
         self.wizard_browse_yaml_path_input.setObjectName(u"wizard_browse_yaml_path_input")
         self.wizard_browse_yaml_path_input.setMinimumSize(QSize(500, 30))
         self.wizard_browse_yaml_path_input.setMaximumSize(QSize(500, 30))
-        self.wizard_browse_yaml_path_input.setFont(font)
+        self.wizard_browse_yaml_path_input.setFont(font1)
         self.wizard_browse_yaml_path_input.setReadOnly(True)
 
         self.gridLayout_80.addWidget(self.wizard_browse_yaml_path_input, 0, 5, 1, 1)
@@ -1220,7 +1081,7 @@ class Ui_MainWindow(object):
         self.wizard_yaml_name_label = QLabel(self.wizard_start_page_paths_frame)
         self.wizard_yaml_name_label.setObjectName(u"wizard_yaml_name_label")
         self.wizard_yaml_name_label.setMaximumSize(QSize(250, 35))
-        self.wizard_yaml_name_label.setFont(font)
+        self.wizard_yaml_name_label.setFont(font1)
 
         self.gridLayout_80.addWidget(self.wizard_yaml_name_label, 3, 1, 1, 1)
 
@@ -1228,7 +1089,7 @@ class Ui_MainWindow(object):
         self.wizard_yaml_name_input.setObjectName(u"wizard_yaml_name_input")
         self.wizard_yaml_name_input.setMinimumSize(QSize(0, 30))
         self.wizard_yaml_name_input.setMaximumSize(QSize(500, 30))
-        self.wizard_yaml_name_input.setFont(font)
+        self.wizard_yaml_name_input.setFont(font1)
 
         self.gridLayout_80.addWidget(self.wizard_yaml_name_input, 3, 5, 1, 1)
 
@@ -1243,22 +1104,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_55.setObjectName(u"verticalLayout_55")
         self.wizard_start_bn = QPushButton(self.frame_69)
         self.wizard_start_bn.setObjectName(u"wizard_start_bn")
-        self.wizard_start_bn.setMinimumSize(QSize(200, 30))
-        self.wizard_start_bn.setMaximumSize(QSize(200, 30))
-        self.wizard_start_bn.setFont(font)
-        self.wizard_start_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgb(64,144,253);\n"
-"	border-radius: 15px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
+        self.wizard_start_bn.setMinimumSize(QSize(220, 40))
+        self.wizard_start_bn.setMaximumSize(QSize(220, 77))
+        self.wizard_start_bn.setFont(font1)
 
         self.verticalLayout_55.addWidget(self.wizard_start_bn)
 
@@ -1295,7 +1143,7 @@ class Ui_MainWindow(object):
         self.wizard_treeView.setObjectName(u"wizard_treeView")
         self.wizard_treeView.setMinimumSize(QSize(0, 0))
         self.wizard_treeView.setMaximumSize(QSize(16777215, 16777215))
-        self.wizard_treeView.setFont(font)
+        self.wizard_treeView.setFont(font1)
         self.wizard_treeView.setFrameShape(QFrame.NoFrame)
         self.wizard_treeView.setEditTriggers(QAbstractItemView.DoubleClicked)
         self.wizard_treeView.setAlternatingRowColors(False)
@@ -1313,16 +1161,7 @@ class Ui_MainWindow(object):
         self.wizard_clear_answers_bn = QPushButton(self.frame_74)
         self.wizard_clear_answers_bn.setObjectName(u"wizard_clear_answers_bn")
         self.wizard_clear_answers_bn.setMinimumSize(QSize(160, 30))
-        self.wizard_clear_answers_bn.setFont(font)
-        self.wizard_clear_answers_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgb(64,144,253);\n"
-"	border-radius: 15px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
+        self.wizard_clear_answers_bn.setFont(font1)
 
         self.horizontalLayout_43.addWidget(self.wizard_clear_answers_bn)
 
@@ -1352,7 +1191,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_38.setContentsMargins(0, 0, 0, 0)
         self.wizard_question_label = QLabel(self.frame_66)
         self.wizard_question_label.setObjectName(u"wizard_question_label")
-        self.wizard_question_label.setFont(font)
+        self.wizard_question_label.setFont(font1)
 
         self.horizontalLayout_38.addWidget(self.wizard_question_label, 0, Qt.AlignBottom)
 
@@ -1403,7 +1242,7 @@ class Ui_MainWindow(object):
         self.wizard_question = QLabel(self.wizard_quest_frame)
         self.wizard_question.setObjectName(u"wizard_question")
         self.wizard_question.setMinimumSize(QSize(0, 100))
-        self.wizard_question.setFont(font)
+        self.wizard_question.setFont(font1)
         self.wizard_question.setStyleSheet(u"")
         self.wizard_question.setFrameShape(QFrame.NoFrame)
         self.wizard_question.setFrameShadow(QFrame.Plain)
@@ -1436,13 +1275,13 @@ class Ui_MainWindow(object):
         self.wizard_question_answer = QComboBox(self.wizard_question_answer_frame)
         self.wizard_question_answer.setObjectName(u"wizard_question_answer")
         self.wizard_question_answer.setMinimumSize(QSize(0, 30))
-        self.wizard_question_answer.setFont(font)
+        self.wizard_question_answer.setFont(font1)
 
         self.gridLayout_81.addWidget(self.wizard_question_answer, 1, 0, 1, 1)
 
         self.label_113 = QLabel(self.wizard_question_answer_frame)
         self.label_113.setObjectName(u"label_113")
-        self.label_113.setFont(font)
+        self.label_113.setFont(font1)
 
         self.gridLayout_81.addWidget(self.label_113, 0, 0, 1, 1)
 
@@ -1462,7 +1301,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_57.setContentsMargins(0, 0, 0, 9)
         self.label_112 = QLabel(self.wizard_path_input_frame)
         self.label_112.setObjectName(u"label_112")
-        self.label_112.setFont(font)
+        self.label_112.setFont(font1)
 
         self.verticalLayout_57.addWidget(self.label_112)
 
@@ -1477,7 +1316,7 @@ class Ui_MainWindow(object):
         self.wizard_path_input.setObjectName(u"wizard_path_input")
         self.wizard_path_input.setMinimumSize(QSize(500, 30))
         self.wizard_path_input.setMaximumSize(QSize(500, 16777215))
-        self.wizard_path_input.setFont(font)
+        self.wizard_path_input.setFont(font1)
         self.wizard_path_input.setReadOnly(True)
 
         self.horizontalLayout_41.addWidget(self.wizard_path_input)
@@ -1485,7 +1324,8 @@ class Ui_MainWindow(object):
         self.wizard_path_input_bn = QPushButton(self.frame_75)
         self.wizard_path_input_bn.setObjectName(u"wizard_path_input_bn")
         self.wizard_path_input_bn.setMinimumSize(QSize(0, 30))
-        self.wizard_path_input_bn.setFont(font)
+        self.wizard_path_input_bn.setFont(font1)
+        self.wizard_path_input_bn.setFocusPolicy(Qt.NoFocus)
 
         self.horizontalLayout_41.addWidget(self.wizard_path_input_bn)
 
@@ -1506,22 +1346,14 @@ class Ui_MainWindow(object):
         self.wizard_path_check = QPushButton(self.frame_76)
         self.wizard_path_check.setObjectName(u"wizard_path_check")
         self.wizard_path_check.setMinimumSize(QSize(170, 35))
-        self.wizard_path_check.setFont(font)
-        self.wizard_path_check.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgb(64,144,253);\n"
-"	border-radius: 15px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
+        self.wizard_path_check.setFont(font1)
+        self.wizard_path_check.setFocusPolicy(Qt.NoFocus)
 
         self.horizontalLayout_45.addWidget(self.wizard_path_check, 0, Qt.AlignHCenter)
 
         self.wizard_data_checked_label = QLabel(self.frame_76)
         self.wizard_data_checked_label.setObjectName(u"wizard_data_checked_label")
-        self.wizard_data_checked_label.setFont(font2)
+        self.wizard_data_checked_label.setFont(font3)
 
         self.horizontalLayout_45.addWidget(self.wizard_data_checked_label, 0, Qt.AlignHCenter)
 
@@ -1545,7 +1377,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_60.setContentsMargins(0, 0, 0, 0)
         self.label_116 = QLabel(self.wizard_model_input_frame)
         self.label_116.setObjectName(u"label_116")
-        self.label_116.setFont(font)
+        self.label_116.setFont(font1)
 
         self.verticalLayout_60.addWidget(self.label_116)
 
@@ -1559,7 +1391,7 @@ class Ui_MainWindow(object):
         self.wizard_model_input = QLineEdit(self.frame_77)
         self.wizard_model_input.setObjectName(u"wizard_model_input")
         self.wizard_model_input.setMinimumSize(QSize(500, 30))
-        self.wizard_model_input.setFont(font)
+        self.wizard_model_input.setFont(font1)
         self.wizard_model_input.setReadOnly(True)
 
         self.horizontalLayout_44.addWidget(self.wizard_model_input)
@@ -1567,7 +1399,8 @@ class Ui_MainWindow(object):
         self.wizard_model_browse_bn = QPushButton(self.frame_77)
         self.wizard_model_browse_bn.setObjectName(u"wizard_model_browse_bn")
         self.wizard_model_browse_bn.setMinimumSize(QSize(0, 30))
-        self.wizard_model_browse_bn.setFont(font)
+        self.wizard_model_browse_bn.setFont(font1)
+        self.wizard_model_browse_bn.setFocusPolicy(Qt.NoFocus)
 
         self.horizontalLayout_44.addWidget(self.wizard_model_browse_bn)
 
@@ -1581,16 +1414,8 @@ class Ui_MainWindow(object):
         self.wizard_model_check_bn = QPushButton(self.wizard_model_input_frame)
         self.wizard_model_check_bn.setObjectName(u"wizard_model_check_bn")
         self.wizard_model_check_bn.setMinimumSize(QSize(170, 35))
-        self.wizard_model_check_bn.setFont(font)
-        self.wizard_model_check_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgb(64,144,253);\n"
-"	border-radius: 15px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
+        self.wizard_model_check_bn.setFont(font1)
+        self.wizard_model_check_bn.setFocusPolicy(Qt.NoFocus)
 
         self.verticalLayout_60.addWidget(self.wizard_model_check_bn, 0, Qt.AlignHCenter)
 
@@ -1618,19 +1443,11 @@ class Ui_MainWindow(object):
         self.wizard_back_bn = QPushButton(self.frame_52)
         self.wizard_back_bn.setObjectName(u"wizard_back_bn")
         self.wizard_back_bn.setMinimumSize(QSize(100, 35))
-        font5 = QFont()
-        font5.setFamilies([u"DejaVu Math TeX Gyre"])
-        font5.setPointSize(20)
-        self.wizard_back_bn.setFont(font5)
-        self.wizard_back_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgb(64,144,253);\n"
-"	border-radius: 15px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
+        font6 = QFont()
+        font6.setFamilies([u"DejaVu Math TeX Gyre"])
+        font6.setPointSize(20)
+        self.wizard_back_bn.setFont(font6)
+        self.wizard_back_bn.setFocusPolicy(Qt.NoFocus)
 
         self.horizontalLayout_37.addWidget(self.wizard_back_bn)
 
@@ -1641,16 +1458,8 @@ class Ui_MainWindow(object):
         self.wizard_cont_bn = QPushButton(self.frame_52)
         self.wizard_cont_bn.setObjectName(u"wizard_cont_bn")
         self.wizard_cont_bn.setMinimumSize(QSize(100, 35))
-        self.wizard_cont_bn.setFont(font5)
-        self.wizard_cont_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgb(64,144,253);\n"
-"	border-radius: 15px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
+        self.wizard_cont_bn.setFont(font6)
+        self.wizard_cont_bn.setFocusPolicy(Qt.NoFocus)
 
         self.horizontalLayout_37.addWidget(self.wizard_cont_bn)
 
@@ -1685,10 +1494,10 @@ class Ui_MainWindow(object):
         self.label_108 = QLabel(self.frame_72)
         self.label_108.setObjectName(u"label_108")
         self.label_108.setMaximumSize(QSize(16777215, 30))
-        font6 = QFont()
-        font6.setFamilies([u"DejaVu Math TeX Gyre"])
-        font6.setBold(True)
-        self.label_108.setFont(font6)
+        font7 = QFont()
+        font7.setFamilies([u"DejaVu Math TeX Gyre"])
+        font7.setBold(True)
+        self.label_108.setFont(font7)
         self.label_108.setStyleSheet(u"color: rgb(64,144,253);\n"
 "font-weight: bold;")
 
@@ -1705,18 +1514,18 @@ class Ui_MainWindow(object):
         self.gridLayout_79.setContentsMargins(0, 0, 0, 0)
         self.label_24 = QLabel(self.frame_78)
         self.label_24.setObjectName(u"label_24")
-        self.label_24.setFont(font)
+        self.label_24.setFont(font1)
 
         self.gridLayout_79.addWidget(self.label_24, 0, 0, 1, 1)
 
         self.wizard_config_file_label = QLabel(self.frame_78)
         self.wizard_config_file_label.setObjectName(u"wizard_config_file_label")
-        font7 = QFont()
-        font7.setFamilies([u"DejaVu Math TeX Gyre"])
-        font7.setPointSize(12)
-        font7.setBold(False)
-        font7.setItalic(True)
-        self.wizard_config_file_label.setFont(font7)
+        font8 = QFont()
+        font8.setFamilies([u"DejaVu Math TeX Gyre"])
+        font8.setPointSize(12)
+        font8.setBold(False)
+        font8.setItalic(True)
+        self.wizard_config_file_label.setFont(font8)
         self.wizard_config_file_label.setStyleSheet(u"color: rgb(120,120,120);\n"
 "font: italic;")
 
@@ -1756,9 +1565,9 @@ class Ui_MainWindow(object):
         self.wizard_summary_back_bn = QPushButton(self.frame_73)
         self.wizard_summary_back_bn.setObjectName(u"wizard_summary_back_bn")
         self.wizard_summary_back_bn.setMinimumSize(QSize(91, 24))
-        font8 = QFont()
-        font8.setPointSize(12)
-        self.wizard_summary_back_bn.setFont(font8)
+        font9 = QFont()
+        font9.setPointSize(12)
+        self.wizard_summary_back_bn.setFont(font9)
         self.wizard_summary_back_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgba(0,0,0,0);\n"
@@ -1780,20 +1589,8 @@ class Ui_MainWindow(object):
         self.summary_end_bn = QPushButton(self.frame_73)
         self.summary_end_bn.setObjectName(u"summary_end_bn")
         self.summary_end_bn.setMinimumSize(QSize(180, 35))
-        self.summary_end_bn.setFont(font)
-        self.summary_end_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgb(64,144,253);\n"
-"	border-radius: 15px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
+        self.summary_end_bn.setFont(font1)
+        self.summary_end_bn.setFocusPolicy(Qt.NoFocus)
 
         self.horizontalLayout_42.addWidget(self.summary_end_bn)
 
@@ -1805,16 +1602,13 @@ class Ui_MainWindow(object):
         self.verticalLayout_50.addWidget(self.frame_73, 0, Qt.AlignVCenter)
 
         self.wizard_main_frame.addWidget(self.summary_page)
-        self.end_page = QWidget()
-        self.end_page.setObjectName(u"end_page")
-        self.wizard_main_frame.addWidget(self.end_page)
 
         self.verticalLayout_48.addWidget(self.wizard_main_frame)
 
         self.stackedWidget.addWidget(self.page_wizard)
         self.page_create_yaml = QWidget()
         self.page_create_yaml.setObjectName(u"page_create_yaml")
-        self.page_create_yaml.setStyleSheet(u"background:rgb(255,255,255);")
+        self.page_create_yaml.setStyleSheet(u"")
         self.horizontalLayout_19 = QHBoxLayout(self.page_create_yaml)
         self.horizontalLayout_19.setSpacing(0)
         self.horizontalLayout_19.setObjectName(u"horizontalLayout_19")
@@ -1823,7 +1617,7 @@ class Ui_MainWindow(object):
         self.page_create_yaml_frame.setObjectName(u"page_create_yaml_frame")
         self.page_create_yaml_frame.setMinimumSize(QSize(0, 0))
         self.page_create_yaml_frame.setMaximumSize(QSize(16777215, 16777215))
-        self.page_create_yaml_frame.setFont(font)
+        self.page_create_yaml_frame.setFont(font1)
         self.page_create_yaml_frame.setFrameShape(QFrame.NoFrame)
         self.page_create_yaml_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_7 = QVBoxLayout(self.page_create_yaml_frame)
@@ -1832,21 +1626,21 @@ class Ui_MainWindow(object):
         self.verticalLayout_7.setContentsMargins(0, 0, 0, 0)
         self.stackedWidget_create_yaml_frame = QStackedWidget(self.page_create_yaml_frame)
         self.stackedWidget_create_yaml_frame.setObjectName(u"stackedWidget_create_yaml_frame")
-        self.stackedWidget_create_yaml_frame.setFont(font)
+        self.stackedWidget_create_yaml_frame.setFont(font1)
         self.workflow_selection_page = QWidget()
         self.workflow_selection_page.setObjectName(u"workflow_selection_page")
         self.workflow_selection_page.setMinimumSize(QSize(0, 0))
         self.page_create_yaml_mid_frame = QFrame(self.workflow_selection_page)
         self.page_create_yaml_mid_frame.setObjectName(u"page_create_yaml_mid_frame")
         self.page_create_yaml_mid_frame.setGeometry(QRect(0, 0, 947, 435))
-        self.page_create_yaml_mid_frame.setFont(font)
+        self.page_create_yaml_mid_frame.setFont(font1)
         self.page_create_yaml_mid_frame.setFrameShape(QFrame.NoFrame)
         self.page_create_yaml_mid_frame.setFrameShadow(QFrame.Raised)
         self.left_arrow_bn = QPushButton(self.page_create_yaml_mid_frame)
         self.left_arrow_bn.setObjectName(u"left_arrow_bn")
-        self.left_arrow_bn.setGeometry(QRect(5, 195, 30, 50))
-        self.left_arrow_bn.setMaximumSize(QSize(30, 50))
-        self.left_arrow_bn.setFont(font)
+        self.left_arrow_bn.setGeometry(QRect(5, 195, 25, 50))
+        self.left_arrow_bn.setMaximumSize(QSize(25, 50))
+        self.left_arrow_bn.setFont(font1)
         self.left_arrow_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgba(0,0,0,0);\n"
@@ -1857,10 +1651,7 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	border: 2px solid rgb(0, 0, 0);\n"
 "}")
-        icon2 = QIcon()
-        icon2.addFile(u"images/bn_images/left_arrow.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.left_arrow_bn.setIcon(icon2)
-        self.left_arrow_bn.setIconSize(QSize(32, 32))
+        self.left_arrow_bn.setIconSize(QSize(25, 25))
         self.workflow_view1_frame = QFrame(self.page_create_yaml_mid_frame)
         self.workflow_view1_frame.setObjectName(u"workflow_view1_frame")
         self.workflow_view1_frame.setGeometry(QRect(35, 0, 267, 435))
@@ -1868,8 +1659,8 @@ class Ui_MainWindow(object):
         self.workflow_view1_frame.setSizePolicy(sizePolicy1)
         self.workflow_view1_frame.setMinimumSize(QSize(0, 0))
         self.workflow_view1_frame.setMaximumSize(QSize(267, 16777215))
-        self.workflow_view1_frame.setFont(font)
-        self.workflow_view1_frame.setStyleSheet(u"background:rgb(240,240,240);\n"
+        self.workflow_view1_frame.setFont(font1)
+        self.workflow_view1_frame.setStyleSheet(u"color: black;\n"
 "border-radius: 25px;		")
         self.workflow_view1_frame.setFrameShape(QFrame.NoFrame)
         self.workflow_view1_frame.setFrameShadow(QFrame.Raised)
@@ -1884,7 +1675,7 @@ class Ui_MainWindow(object):
         self.workflow_view1_label = QLabel(self.workflow_view1_frame)
         self.workflow_view1_label.setObjectName(u"workflow_view1_label")
         self.workflow_view1_label.setMaximumSize(QSize(250, 250))
-        self.workflow_view1_label.setFont(font)
+        self.workflow_view1_label.setFont(font1)
         self.workflow_view1_label.setFrameShape(QFrame.NoFrame)
         self.workflow_view1_label.setAlignment(Qt.AlignCenter)
 
@@ -1905,23 +1696,10 @@ class Ui_MainWindow(object):
         self.workflow_view1_seemore_bn = QPushButton(self.frame_17)
         self.workflow_view1_seemore_bn.setObjectName(u"workflow_view1_seemore_bn")
         self.workflow_view1_seemore_bn.setMinimumSize(QSize(140, 30))
-        font9 = QFont()
-        font9.setFamilies([u"DejaVu Math TeX Gyre"])
-        font9.setPointSize(11)
-        self.workflow_view1_seemore_bn.setFont(font9)
-        self.workflow_view1_seemore_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgb(64,144,253);\n"
-"	border-radius: 15px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
+        font10 = QFont()
+        font10.setFamilies([u"DejaVu Math TeX Gyre"])
+        font10.setPointSize(11)
+        self.workflow_view1_seemore_bn.setFont(font10)
 
         self.horizontalLayout_3.addWidget(self.workflow_view1_seemore_bn)
 
@@ -1935,7 +1713,7 @@ class Ui_MainWindow(object):
         self.workflow_view1_name_label = QLabel(self.workflow_view1_frame)
         self.workflow_view1_name_label.setObjectName(u"workflow_view1_name_label")
         self.workflow_view1_name_label.setMaximumSize(QSize(16777215, 16777215))
-        self.workflow_view1_name_label.setFont(font)
+        self.workflow_view1_name_label.setFont(font1)
         self.workflow_view1_name_label.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_29.addWidget(self.workflow_view1_name_label)
@@ -1949,7 +1727,7 @@ class Ui_MainWindow(object):
         self.workflow_view2_frame.setGeometry(QRect(340, 0, 267, 435))
         self.workflow_view2_frame.setMinimumSize(QSize(0, 0))
         self.workflow_view2_frame.setMaximumSize(QSize(267, 16777215))
-        self.workflow_view2_frame.setFont(font)
+        self.workflow_view2_frame.setFont(font1)
         self.workflow_view2_frame.setStyleSheet(u"#workflow_view2_frame {\n"
 "border: 5px solid rgb(64,144,253);\n"
 "border-radius: 25px;\n"
@@ -1966,7 +1744,7 @@ class Ui_MainWindow(object):
         self.workflow_view2_label = QLabel(self.workflow_view2_frame)
         self.workflow_view2_label.setObjectName(u"workflow_view2_label")
         self.workflow_view2_label.setMaximumSize(QSize(250, 250))
-        self.workflow_view2_label.setFont(font)
+        self.workflow_view2_label.setFont(font1)
         self.workflow_view2_label.setFrameShape(QFrame.NoFrame)
         self.workflow_view2_label.setAlignment(Qt.AlignCenter)
 
@@ -1987,20 +1765,7 @@ class Ui_MainWindow(object):
         self.workflow_view2_seemore_bn = QPushButton(self.frame_59)
         self.workflow_view2_seemore_bn.setObjectName(u"workflow_view2_seemore_bn")
         self.workflow_view2_seemore_bn.setMinimumSize(QSize(140, 30))
-        self.workflow_view2_seemore_bn.setFont(font9)
-        self.workflow_view2_seemore_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgb(64,144,253);\n"
-"	border-radius: 15px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
+        self.workflow_view2_seemore_bn.setFont(font10)
 
         self.horizontalLayout_22.addWidget(self.workflow_view2_seemore_bn)
 
@@ -2014,7 +1779,7 @@ class Ui_MainWindow(object):
         self.workflow_view2_name_label = QLabel(self.workflow_view2_frame)
         self.workflow_view2_name_label.setObjectName(u"workflow_view2_name_label")
         self.workflow_view2_name_label.setMaximumSize(QSize(16777215, 16777215))
-        self.workflow_view2_name_label.setFont(font)
+        self.workflow_view2_name_label.setFont(font1)
         self.workflow_view2_name_label.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_30.addWidget(self.workflow_view2_name_label)
@@ -2027,8 +1792,8 @@ class Ui_MainWindow(object):
         self.workflow_view3_frame.setObjectName(u"workflow_view3_frame")
         self.workflow_view3_frame.setGeometry(QRect(645, 0, 267, 435))
         self.workflow_view3_frame.setMaximumSize(QSize(267, 16777215))
-        self.workflow_view3_frame.setFont(font)
-        self.workflow_view3_frame.setStyleSheet(u"background:rgb(240,240,240);\n"
+        self.workflow_view3_frame.setFont(font1)
+        self.workflow_view3_frame.setStyleSheet(u"color: black;\n"
 "border-radius: 25px;		")
         self.workflow_view3_frame.setFrameShape(QFrame.NoFrame)
         self.workflow_view3_frame.setFrameShadow(QFrame.Raised)
@@ -2043,7 +1808,7 @@ class Ui_MainWindow(object):
         self.workflow_view3_label = QLabel(self.workflow_view3_frame)
         self.workflow_view3_label.setObjectName(u"workflow_view3_label")
         self.workflow_view3_label.setMaximumSize(QSize(250, 250))
-        self.workflow_view3_label.setFont(font)
+        self.workflow_view3_label.setFont(font1)
         self.workflow_view3_label.setFrameShape(QFrame.NoFrame)
         self.workflow_view3_label.setAlignment(Qt.AlignCenter)
 
@@ -2064,20 +1829,7 @@ class Ui_MainWindow(object):
         self.workflow_view3_seemore_bn = QPushButton(self.frame_18)
         self.workflow_view3_seemore_bn.setObjectName(u"workflow_view3_seemore_bn")
         self.workflow_view3_seemore_bn.setMinimumSize(QSize(140, 30))
-        self.workflow_view3_seemore_bn.setFont(font9)
-        self.workflow_view3_seemore_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgb(64,144,253);\n"
-"	border-radius: 15px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
+        self.workflow_view3_seemore_bn.setFont(font10)
 
         self.horizontalLayout_27.addWidget(self.workflow_view3_seemore_bn)
 
@@ -2091,7 +1843,7 @@ class Ui_MainWindow(object):
         self.workflow_view3_name_label = QLabel(self.workflow_view3_frame)
         self.workflow_view3_name_label.setObjectName(u"workflow_view3_name_label")
         self.workflow_view3_name_label.setMaximumSize(QSize(16777215, 16777215))
-        self.workflow_view3_name_label.setFont(font)
+        self.workflow_view3_name_label.setFont(font1)
         self.workflow_view3_name_label.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_31.addWidget(self.workflow_view3_name_label)
@@ -2102,9 +1854,9 @@ class Ui_MainWindow(object):
 
         self.right_arrow_bn = QPushButton(self.page_create_yaml_mid_frame)
         self.right_arrow_bn.setObjectName(u"right_arrow_bn")
-        self.right_arrow_bn.setGeometry(QRect(915, 195, 30, 50))
-        self.right_arrow_bn.setMaximumSize(QSize(30, 50))
-        self.right_arrow_bn.setFont(font)
+        self.right_arrow_bn.setGeometry(QRect(915, 195, 25, 50))
+        self.right_arrow_bn.setMaximumSize(QSize(25, 50))
+        self.right_arrow_bn.setFont(font1)
         self.right_arrow_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgba(0,0,0,0);\n"
@@ -2115,16 +1867,13 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	border: 2px solid rgb(0, 0, 0);\n"
 "}")
-        icon3 = QIcon()
-        icon3.addFile(u"images/bn_images/right_arrow.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.right_arrow_bn.setIcon(icon3)
-        self.right_arrow_bn.setIconSize(QSize(32, 32))
+        self.right_arrow_bn.setIconSize(QSize(25, 30))
         self.workflow_view4_frame = QFrame(self.page_create_yaml_mid_frame)
         self.workflow_view4_frame.setObjectName(u"workflow_view4_frame")
         self.workflow_view4_frame.setGeometry(QRect(950, 0, 267, 435))
         self.workflow_view4_frame.setMaximumSize(QSize(267, 16777215))
-        self.workflow_view4_frame.setFont(font)
-        self.workflow_view4_frame.setStyleSheet(u"background:rgb(240,240,240);\n"
+        self.workflow_view4_frame.setFont(font1)
+        self.workflow_view4_frame.setStyleSheet(u"color: black;\n"
 "border-radius: 25px;		")
         self.workflow_view4_frame.setFrameShape(QFrame.NoFrame)
         self.workflow_view4_frame.setFrameShadow(QFrame.Raised)
@@ -2139,7 +1888,7 @@ class Ui_MainWindow(object):
         self.workflow_view4_label = QLabel(self.workflow_view4_frame)
         self.workflow_view4_label.setObjectName(u"workflow_view4_label")
         self.workflow_view4_label.setMaximumSize(QSize(250, 250))
-        self.workflow_view4_label.setFont(font)
+        self.workflow_view4_label.setFont(font1)
         self.workflow_view4_label.setFrameShape(QFrame.NoFrame)
         self.workflow_view4_label.setAlignment(Qt.AlignCenter)
 
@@ -2160,20 +1909,7 @@ class Ui_MainWindow(object):
         self.workflow_view4_seemore_bn = QPushButton(self.frame_42)
         self.workflow_view4_seemore_bn.setObjectName(u"workflow_view4_seemore_bn")
         self.workflow_view4_seemore_bn.setMinimumSize(QSize(140, 30))
-        self.workflow_view4_seemore_bn.setFont(font9)
-        self.workflow_view4_seemore_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgb(64,144,253);\n"
-"	border-radius: 15px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
+        self.workflow_view4_seemore_bn.setFont(font10)
 
         self.horizontalLayout_30.addWidget(self.workflow_view4_seemore_bn)
 
@@ -2187,7 +1923,7 @@ class Ui_MainWindow(object):
         self.workflow_view4_name_label = QLabel(self.workflow_view4_frame)
         self.workflow_view4_name_label.setObjectName(u"workflow_view4_name_label")
         self.workflow_view4_name_label.setMaximumSize(QSize(16777215, 16777215))
-        self.workflow_view4_name_label.setFont(font)
+        self.workflow_view4_name_label.setFont(font1)
         self.workflow_view4_name_label.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_43.addWidget(self.workflow_view4_name_label)
@@ -2200,8 +1936,8 @@ class Ui_MainWindow(object):
         self.workflow_view5_frame.setObjectName(u"workflow_view5_frame")
         self.workflow_view5_frame.setGeometry(QRect(1255, 0, 267, 435))
         self.workflow_view5_frame.setMaximumSize(QSize(267, 16777215))
-        self.workflow_view5_frame.setFont(font)
-        self.workflow_view5_frame.setStyleSheet(u"background:rgb(240,240,240);\n"
+        self.workflow_view5_frame.setFont(font1)
+        self.workflow_view5_frame.setStyleSheet(u"color: black;\n"
 "border-radius: 25px;		")
         self.workflow_view5_frame.setFrameShape(QFrame.NoFrame)
         self.workflow_view5_frame.setFrameShadow(QFrame.Raised)
@@ -2216,7 +1952,7 @@ class Ui_MainWindow(object):
         self.workflow_view5_label = QLabel(self.workflow_view5_frame)
         self.workflow_view5_label.setObjectName(u"workflow_view5_label")
         self.workflow_view5_label.setMaximumSize(QSize(250, 250))
-        self.workflow_view5_label.setFont(font)
+        self.workflow_view5_label.setFont(font1)
         self.workflow_view5_label.setFrameShape(QFrame.NoFrame)
         self.workflow_view5_label.setAlignment(Qt.AlignCenter)
 
@@ -2237,20 +1973,7 @@ class Ui_MainWindow(object):
         self.workflow_view5_seemore_bn = QPushButton(self.frame_53)
         self.workflow_view5_seemore_bn.setObjectName(u"workflow_view5_seemore_bn")
         self.workflow_view5_seemore_bn.setMinimumSize(QSize(140, 30))
-        self.workflow_view5_seemore_bn.setFont(font9)
-        self.workflow_view5_seemore_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgb(64,144,253);\n"
-"	border-radius: 15px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
+        self.workflow_view5_seemore_bn.setFont(font10)
 
         self.horizontalLayout_31.addWidget(self.workflow_view5_seemore_bn)
 
@@ -2264,7 +1987,7 @@ class Ui_MainWindow(object):
         self.workflow_view5_name_label = QLabel(self.workflow_view5_frame)
         self.workflow_view5_name_label.setObjectName(u"workflow_view5_name_label")
         self.workflow_view5_name_label.setMaximumSize(QSize(16777215, 16777215))
-        self.workflow_view5_name_label.setFont(font)
+        self.workflow_view5_name_label.setFont(font1)
         self.workflow_view5_name_label.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_44.addWidget(self.workflow_view5_name_label)
@@ -2277,8 +2000,8 @@ class Ui_MainWindow(object):
         self.workflow_view6_frame.setObjectName(u"workflow_view6_frame")
         self.workflow_view6_frame.setGeometry(QRect(1560, 0, 267, 435))
         self.workflow_view6_frame.setMaximumSize(QSize(267, 16777215))
-        self.workflow_view6_frame.setFont(font)
-        self.workflow_view6_frame.setStyleSheet(u"background:rgb(240,240,240);\n"
+        self.workflow_view6_frame.setFont(font1)
+        self.workflow_view6_frame.setStyleSheet(u"color: black;\n"
 "border-radius: 25px;		")
         self.workflow_view6_frame.setFrameShape(QFrame.NoFrame)
         self.workflow_view6_frame.setFrameShadow(QFrame.Raised)
@@ -2293,7 +2016,7 @@ class Ui_MainWindow(object):
         self.workflow_view6_label = QLabel(self.workflow_view6_frame)
         self.workflow_view6_label.setObjectName(u"workflow_view6_label")
         self.workflow_view6_label.setMaximumSize(QSize(250, 250))
-        self.workflow_view6_label.setFont(font)
+        self.workflow_view6_label.setFont(font1)
         self.workflow_view6_label.setFrameShape(QFrame.NoFrame)
         self.workflow_view6_label.setAlignment(Qt.AlignCenter)
 
@@ -2314,20 +2037,7 @@ class Ui_MainWindow(object):
         self.workflow_view6_seemore_bn = QPushButton(self.frame_56)
         self.workflow_view6_seemore_bn.setObjectName(u"workflow_view6_seemore_bn")
         self.workflow_view6_seemore_bn.setMinimumSize(QSize(140, 30))
-        self.workflow_view6_seemore_bn.setFont(font9)
-        self.workflow_view6_seemore_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgb(64,144,253);\n"
-"	border-radius: 15px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
+        self.workflow_view6_seemore_bn.setFont(font10)
 
         self.horizontalLayout_32.addWidget(self.workflow_view6_seemore_bn)
 
@@ -2341,7 +2051,7 @@ class Ui_MainWindow(object):
         self.workflow_view6_name_label = QLabel(self.workflow_view6_frame)
         self.workflow_view6_name_label.setObjectName(u"workflow_view6_name_label")
         self.workflow_view6_name_label.setMaximumSize(QSize(16777215, 16777215))
-        self.workflow_view6_name_label.setFont(font)
+        self.workflow_view6_name_label.setFont(font1)
         self.workflow_view6_name_label.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_45.addWidget(self.workflow_view6_name_label)
@@ -2354,8 +2064,8 @@ class Ui_MainWindow(object):
         self.workflow_view7_frame.setObjectName(u"workflow_view7_frame")
         self.workflow_view7_frame.setGeometry(QRect(1865, 0, 267, 435))
         self.workflow_view7_frame.setMaximumSize(QSize(267, 16777215))
-        self.workflow_view7_frame.setFont(font)
-        self.workflow_view7_frame.setStyleSheet(u"background:rgb(240,240,240);\n"
+        self.workflow_view7_frame.setFont(font1)
+        self.workflow_view7_frame.setStyleSheet(u"color: black;\n"
 "border-radius: 25px;		")
         self.workflow_view7_frame.setFrameShape(QFrame.NoFrame)
         self.workflow_view7_frame.setFrameShadow(QFrame.Raised)
@@ -2370,7 +2080,7 @@ class Ui_MainWindow(object):
         self.workflow_view7_label = QLabel(self.workflow_view7_frame)
         self.workflow_view7_label.setObjectName(u"workflow_view7_label")
         self.workflow_view7_label.setMaximumSize(QSize(250, 250))
-        self.workflow_view7_label.setFont(font)
+        self.workflow_view7_label.setFont(font1)
         self.workflow_view7_label.setFrameShape(QFrame.NoFrame)
         self.workflow_view7_label.setAlignment(Qt.AlignCenter)
 
@@ -2391,20 +2101,7 @@ class Ui_MainWindow(object):
         self.workflow_view7_seemore_bn = QPushButton(self.frame_60)
         self.workflow_view7_seemore_bn.setObjectName(u"workflow_view7_seemore_bn")
         self.workflow_view7_seemore_bn.setMinimumSize(QSize(140, 30))
-        self.workflow_view7_seemore_bn.setFont(font9)
-        self.workflow_view7_seemore_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgb(64,144,253);\n"
-"	border-radius: 15px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
+        self.workflow_view7_seemore_bn.setFont(font10)
 
         self.horizontalLayout_33.addWidget(self.workflow_view7_seemore_bn)
 
@@ -2418,7 +2115,7 @@ class Ui_MainWindow(object):
         self.workflow_view7_name_label = QLabel(self.workflow_view7_frame)
         self.workflow_view7_name_label.setObjectName(u"workflow_view7_name_label")
         self.workflow_view7_name_label.setMaximumSize(QSize(16777215, 16777215))
-        self.workflow_view7_name_label.setFont(font)
+        self.workflow_view7_name_label.setFont(font1)
         self.workflow_view7_name_label.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_46.addWidget(self.workflow_view7_name_label)
@@ -2430,13 +2127,13 @@ class Ui_MainWindow(object):
         self.WORKFLOW_SELECTED_LABEL = QLabel(self.page_create_yaml_mid_frame)
         self.WORKFLOW_SELECTED_LABEL.setObjectName(u"WORKFLOW_SELECTED_LABEL")
         self.WORKFLOW_SELECTED_LABEL.setGeometry(QRect(1000, 40, 67, 17))
-        self.WORKFLOW_SELECTED_LABEL.setFont(font)
+        self.WORKFLOW_SELECTED_LABEL.setFont(font1)
         self.workflow_view8_frame = QFrame(self.page_create_yaml_mid_frame)
         self.workflow_view8_frame.setObjectName(u"workflow_view8_frame")
         self.workflow_view8_frame.setGeometry(QRect(2170, 0, 267, 435))
         self.workflow_view8_frame.setMaximumSize(QSize(267, 16777215))
-        self.workflow_view8_frame.setFont(font)
-        self.workflow_view8_frame.setStyleSheet(u"background:rgb(240,240,240);\n"
+        self.workflow_view8_frame.setFont(font1)
+        self.workflow_view8_frame.setStyleSheet(u"color: black;\n"
 "border-radius: 25px;		")
         self.workflow_view8_frame.setFrameShape(QFrame.NoFrame)
         self.workflow_view8_frame.setFrameShadow(QFrame.Raised)
@@ -2451,7 +2148,7 @@ class Ui_MainWindow(object):
         self.workflow_view8_label = QLabel(self.workflow_view8_frame)
         self.workflow_view8_label.setObjectName(u"workflow_view8_label")
         self.workflow_view8_label.setMaximumSize(QSize(250, 250))
-        self.workflow_view8_label.setFont(font)
+        self.workflow_view8_label.setFont(font1)
         self.workflow_view8_label.setFrameShape(QFrame.NoFrame)
         self.workflow_view8_label.setAlignment(Qt.AlignCenter)
 
@@ -2472,20 +2169,7 @@ class Ui_MainWindow(object):
         self.workflow_view8_seemore_bn = QPushButton(self.frame_62)
         self.workflow_view8_seemore_bn.setObjectName(u"workflow_view8_seemore_bn")
         self.workflow_view8_seemore_bn.setMinimumSize(QSize(140, 30))
-        self.workflow_view8_seemore_bn.setFont(font9)
-        self.workflow_view8_seemore_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgb(64,144,253);\n"
-"	border-radius: 15px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
+        self.workflow_view8_seemore_bn.setFont(font10)
 
         self.horizontalLayout_36.addWidget(self.workflow_view8_seemore_bn)
 
@@ -2499,7 +2183,7 @@ class Ui_MainWindow(object):
         self.workflow_view8_name_label = QLabel(self.workflow_view8_frame)
         self.workflow_view8_name_label.setObjectName(u"workflow_view8_name_label")
         self.workflow_view8_name_label.setMaximumSize(QSize(16777215, 16777215))
-        self.workflow_view8_name_label.setFont(font)
+        self.workflow_view8_name_label.setFont(font1)
         self.workflow_view8_name_label.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_47.addWidget(self.workflow_view8_name_label)
@@ -2515,7 +2199,7 @@ class Ui_MainWindow(object):
         self.goptions_general_frame.setObjectName(u"goptions_general_frame")
         self.goptions_general_frame.setGeometry(QRect(0, 0, 945, 441))
         self.goptions_general_frame.setMinimumSize(QSize(940, 441))
-        self.goptions_general_frame.setFont(font)
+        self.goptions_general_frame.setFont(font1)
         self.goptions_general_frame.setFrameShape(QFrame.NoFrame)
         self.goptions_general_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_8 = QVBoxLayout(self.goptions_general_frame)
@@ -2525,13 +2209,13 @@ class Ui_MainWindow(object):
         self.goptions_scrollArea = QScrollArea(self.goptions_general_frame)
         self.goptions_scrollArea.setObjectName(u"goptions_scrollArea")
         self.goptions_scrollArea.setMinimumSize(QSize(0, 30))
-        self.goptions_scrollArea.setFont(font)
+        self.goptions_scrollArea.setFont(font1)
         self.goptions_scrollArea.setFrameShape(QFrame.NoFrame)
         self.goptions_scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
         self.goptions_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 916, 979))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, -538, 931, 984))
         self.scrollAreaWidgetContents.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout.setObjectName(u"gridLayout")
@@ -2548,7 +2232,7 @@ class Ui_MainWindow(object):
         self.gridLayout_86.setContentsMargins(0, 0, 0, 0)
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__LABEL = QLabel(self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME)
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__LABEL")
-        self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__LABEL.setFont(font)
+        self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__LABEL.setFont(font1)
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__LABEL.setIndent(15)
 
         self.gridLayout_86.addWidget(self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__LABEL, 0, 0, 1, 1)
@@ -2559,7 +2243,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INPUT")
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INPUT.setFont(font)
+        self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INPUT.setFont(font1)
 
         self.gridLayout_86.addWidget(self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INPUT, 0, 2, 1, 1)
 
@@ -2571,7 +2255,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INFO.setObjectName(u"MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INFO")
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INFO.setFont(font)
+        self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INFO.setFont(font1)
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -2595,7 +2279,7 @@ class Ui_MainWindow(object):
         self.goptions_advanced_label = QLabel(self.frame_26)
         self.goptions_advanced_label.setObjectName(u"goptions_advanced_label")
         self.goptions_advanced_label.setMaximumSize(QSize(16777215, 35))
-        self.goptions_advanced_label.setFont(font)
+        self.goptions_advanced_label.setFont(font1)
 
         self.gridLayout_28.addWidget(self.goptions_advanced_label, 1, 0, 1, 1)
 
@@ -2606,19 +2290,7 @@ class Ui_MainWindow(object):
         self.goptions_advanced_bn = QPushButton(self.frame_26)
         self.goptions_advanced_bn.setObjectName(u"goptions_advanced_bn")
         self.goptions_advanced_bn.setMaximumSize(QSize(35, 35))
-        self.goptions_advanced_bn.setFont(font)
-        self.goptions_advanced_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
-        icon4 = QIcon()
-        icon4.addFile(u"images/bn_images/down_arrow.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.goptions_advanced_bn.setIcon(icon4)
+        self.goptions_advanced_bn.setFont(font1)
 
         self.gridLayout_28.addWidget(self.goptions_advanced_bn, 1, 1, 1, 1)
 
@@ -2628,7 +2300,7 @@ class Ui_MainWindow(object):
         self.goptions_advanced_options_frame = QFrame(self.scrollAreaWidgetContents)
         self.goptions_advanced_options_frame.setObjectName(u"goptions_advanced_options_frame")
         self.goptions_advanced_options_frame.setMinimumSize(QSize(880, 200))
-        self.goptions_advanced_options_frame.setFont(font)
+        self.goptions_advanced_options_frame.setFont(font1)
         self.goptions_advanced_options_frame.setFrameShape(QFrame.NoFrame)
         self.goptions_advanced_options_frame.setFrameShadow(QFrame.Raised)
         self.formLayout = QFormLayout(self.goptions_advanced_options_frame)
@@ -2646,19 +2318,17 @@ class Ui_MainWindow(object):
         self.goptions_advanced_options_scrollarea.setObjectName(u"goptions_advanced_options_scrollarea")
         self.goptions_advanced_options_scrollarea.setMinimumSize(QSize(0, 0))
         self.goptions_advanced_options_scrollarea.setMaximumSize(QSize(16777215, 16777215))
-        self.goptions_advanced_options_scrollarea.setFont(font)
-        self.goptions_advanced_options_scrollarea.setStyleSheet(u".QFrame{border: 1px solid grey}\n"
-"")
+        self.goptions_advanced_options_scrollarea.setFont(font1)
         self.goptions_advanced_options_scrollarea.setFrameShape(QFrame.Box)
         self.goptions_advanced_options_scrollarea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 495, 284))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 857, 286))
         self.gridLayout_2 = QGridLayout(self.scrollAreaWidgetContents_2)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.label = QLabel(self.scrollAreaWidgetContents_2)
         self.label.setObjectName(u"label")
-        self.label.setFont(font)
+        self.label.setFont(font1)
 
         self.gridLayout_2.addWidget(self.label, 0, 0, 1, 1)
 
@@ -2673,9 +2343,7 @@ class Ui_MainWindow(object):
         self.frame_2 = QFrame(self.scrollAreaWidgetContents_2)
         self.frame_2.setObjectName(u"frame_2")
         self.frame_2.setMinimumSize(QSize(0, 0))
-        self.frame_2.setFont(font)
-        self.frame_2.setStyleSheet(u"background: rgb(246,246,246);\n"
-"")
+        self.frame_2.setFont(font1)
         self.frame_2.setFrameShape(QFrame.Box)
         self.frame_2.setFrameShadow(QFrame.Raised)
         self.gridLayout_5 = QGridLayout(self.frame_2)
@@ -2683,13 +2351,13 @@ class Ui_MainWindow(object):
         self.label_8 = QLabel(self.frame_2)
         self.label_8.setObjectName(u"label_8")
         self.label_8.setMaximumSize(QSize(200, 35))
-        self.label_8.setFont(font)
+        self.label_8.setFont(font1)
 
         self.gridLayout_5.addWidget(self.label_8, 1, 0, 1, 1)
 
         self.label_2 = QLabel(self.frame_2)
         self.label_2.setObjectName(u"label_2")
-        self.label_2.setFont(font)
+        self.label_2.setFont(font1)
 
         self.gridLayout_5.addWidget(self.label_2, 3, 0, 1, 1)
 
@@ -2697,7 +2365,7 @@ class Ui_MainWindow(object):
         self.SYSTEM__NUM_WORKERS__INPUT.setObjectName(u"SYSTEM__NUM_WORKERS__INPUT")
         self.SYSTEM__NUM_WORKERS__INPUT.setMinimumSize(QSize(200, 30))
         self.SYSTEM__NUM_WORKERS__INPUT.setMaximumSize(QSize(200, 30))
-        self.SYSTEM__NUM_WORKERS__INPUT.setFont(font)
+        self.SYSTEM__NUM_WORKERS__INPUT.setFont(font1)
 
         self.gridLayout_5.addWidget(self.SYSTEM__NUM_WORKERS__INPUT, 1, 2, 1, 1)
 
@@ -2705,7 +2373,7 @@ class Ui_MainWindow(object):
         self.SYSTEM__SEED__INPUT.setObjectName(u"SYSTEM__SEED__INPUT")
         self.SYSTEM__SEED__INPUT.setMinimumSize(QSize(200, 30))
         self.SYSTEM__SEED__INPUT.setMaximumSize(QSize(200, 30))
-        self.SYSTEM__SEED__INPUT.setFont(font)
+        self.SYSTEM__SEED__INPUT.setFont(font1)
 
         self.gridLayout_5.addWidget(self.SYSTEM__SEED__INPUT, 3, 2, 1, 1)
 
@@ -2735,7 +2403,7 @@ class Ui_MainWindow(object):
 
         self.SYSTEM__NUM_CPUS__LABEL = QLabel(self.frame_2)
         self.SYSTEM__NUM_CPUS__LABEL.setObjectName(u"SYSTEM__NUM_CPUS__LABEL")
-        self.SYSTEM__NUM_CPUS__LABEL.setFont(font)
+        self.SYSTEM__NUM_CPUS__LABEL.setFont(font1)
 
         self.gridLayout_5.addWidget(self.SYSTEM__NUM_CPUS__LABEL, 0, 0, 1, 1)
 
@@ -2743,7 +2411,7 @@ class Ui_MainWindow(object):
         self.SYSTEM__NUM_CPUS__INFO.setObjectName(u"SYSTEM__NUM_CPUS__INFO")
         self.SYSTEM__NUM_CPUS__INFO.setMinimumSize(QSize(30, 30))
         self.SYSTEM__NUM_CPUS__INFO.setMaximumSize(QSize(30, 30))
-        self.SYSTEM__NUM_CPUS__INFO.setFont(font)
+        self.SYSTEM__NUM_CPUS__INFO.setFont(font1)
         self.SYSTEM__NUM_CPUS__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -2754,7 +2422,7 @@ class Ui_MainWindow(object):
         self.SYSTEM__NUM_CPUS__INPUT.setObjectName(u"SYSTEM__NUM_CPUS__INPUT")
         self.SYSTEM__NUM_CPUS__INPUT.setMinimumSize(QSize(200, 30))
         self.SYSTEM__NUM_CPUS__INPUT.setMaximumSize(QSize(200, 30))
-        self.SYSTEM__NUM_CPUS__INPUT.setFont(font)
+        self.SYSTEM__NUM_CPUS__INPUT.setFont(font1)
 
         self.gridLayout_5.addWidget(self.SYSTEM__NUM_CPUS__INPUT, 0, 2, 1, 1)
 
@@ -2763,8 +2431,6 @@ class Ui_MainWindow(object):
 
         self.checkpoint_loading_opt_frame = QFrame(self.scrollAreaWidgetContents_2)
         self.checkpoint_loading_opt_frame.setObjectName(u"checkpoint_loading_opt_frame")
-        self.checkpoint_loading_opt_frame.setStyleSheet(u"background: rgb(246,246,246);\n"
-"")
         self.checkpoint_loading_opt_frame.setFrameShape(QFrame.StyledPanel)
         self.checkpoint_loading_opt_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_24 = QGridLayout(self.checkpoint_loading_opt_frame)
@@ -2775,7 +2441,7 @@ class Ui_MainWindow(object):
         self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.setObjectName(u"MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT")
         self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.setFont(font)
+        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.setFont(font1)
 
         self.gridLayout_24.addWidget(self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT, 0, 2, 1, 1)
 
@@ -2789,19 +2455,19 @@ class Ui_MainWindow(object):
         self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setObjectName(u"MODEL__LOAD_CHECKPOINT_EPOCH__INPUT")
         self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setFont(font)
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setFont(font1)
 
         self.gridLayout_24.addWidget(self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT, 3, 2, 1, 1)
 
         self.label_4 = QLabel(self.checkpoint_loading_opt_frame)
         self.label_4.setObjectName(u"label_4")
-        self.label_4.setFont(font)
+        self.label_4.setFont(font1)
 
         self.gridLayout_24.addWidget(self.label_4, 0, 0, 1, 1)
 
         self.label_38 = QLabel(self.checkpoint_loading_opt_frame)
         self.label_38.setObjectName(u"label_38")
-        self.label_38.setFont(font)
+        self.label_38.setFont(font1)
 
         self.gridLayout_24.addWidget(self.label_38, 3, 0, 1, 1)
 
@@ -2830,7 +2496,7 @@ class Ui_MainWindow(object):
 
         self.checkpoint_loading_opt_label = QLabel(self.scrollAreaWidgetContents_2)
         self.checkpoint_loading_opt_label.setObjectName(u"checkpoint_loading_opt_label")
-        self.checkpoint_loading_opt_label.setFont(font)
+        self.checkpoint_loading_opt_label.setFont(font1)
 
         self.gridLayout_2.addWidget(self.checkpoint_loading_opt_label, 2, 0, 1, 1)
 
@@ -2844,7 +2510,7 @@ class Ui_MainWindow(object):
         self.train_disable_checkpoint_label = QLabel(self.scrollAreaWidgetContents)
         self.train_disable_checkpoint_label.setObjectName(u"train_disable_checkpoint_label")
         self.train_disable_checkpoint_label.setMaximumSize(QSize(16777215, 16777215))
-        self.train_disable_checkpoint_label.setFont(font)
+        self.train_disable_checkpoint_label.setFont(font1)
 
         self.gridLayout.addWidget(self.train_disable_checkpoint_label, 4, 0, 1, 2)
 
@@ -2862,7 +2528,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_26.setContentsMargins(0, 0, 0, 0)
         self.MODEL__BMZ__EXPORT__ENABLE__LABEL = QLabel(self.MODEL__BMZ__EXPORT__ENABLE__FRAME)
         self.MODEL__BMZ__EXPORT__ENABLE__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__ENABLE__LABEL")
-        self.MODEL__BMZ__EXPORT__ENABLE__LABEL.setFont(font)
+        self.MODEL__BMZ__EXPORT__ENABLE__LABEL.setFont(font1)
 
         self.horizontalLayout_26.addWidget(self.MODEL__BMZ__EXPORT__ENABLE__LABEL)
 
@@ -2883,7 +2549,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__ENABLE__INPUT")
         self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setFont(font)
+        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setFont(font1)
 
         self.horizontalLayout_26.addWidget(self.MODEL__BMZ__EXPORT__ENABLE__INPUT)
 
@@ -2897,15 +2563,13 @@ class Ui_MainWindow(object):
         self.train_disable_checkpoint_frame = QFrame(self.scrollAreaWidgetContents)
         self.train_disable_checkpoint_frame.setObjectName(u"train_disable_checkpoint_frame")
         self.train_disable_checkpoint_frame.setMinimumSize(QSize(0, 0))
-        self.train_disable_checkpoint_frame.setStyleSheet(u"background: rgb(246,246,246);\n"
-"")
         self.train_disable_checkpoint_frame.setFrameShape(QFrame.Box)
         self.train_disable_checkpoint_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_26 = QGridLayout(self.train_disable_checkpoint_frame)
         self.gridLayout_26.setObjectName(u"gridLayout_26")
         self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL = QLabel(self.train_disable_checkpoint_frame)
         self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__LABEL")
-        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setFont(font)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setFont(font1)
         self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setIndent(15)
 
         self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL, 5, 1, 1, 1)
@@ -2926,7 +2590,7 @@ class Ui_MainWindow(object):
         self.MODEL__SOURCE__INPUT.setObjectName(u"MODEL__SOURCE__INPUT")
         self.MODEL__SOURCE__INPUT.setMinimumSize(QSize(300, 30))
         self.MODEL__SOURCE__INPUT.setMaximumSize(QSize(300, 30))
-        self.MODEL__SOURCE__INPUT.setFont(font)
+        self.MODEL__SOURCE__INPUT.setFont(font1)
 
         self.gridLayout_26.addWidget(self.MODEL__SOURCE__INPUT, 2, 3, 1, 1)
 
@@ -2936,7 +2600,7 @@ class Ui_MainWindow(object):
         self.LOAD_PRETRAINED_MODEL__INPUT.setObjectName(u"LOAD_PRETRAINED_MODEL__INPUT")
         self.LOAD_PRETRAINED_MODEL__INPUT.setMinimumSize(QSize(200, 30))
         self.LOAD_PRETRAINED_MODEL__INPUT.setMaximumSize(QSize(200, 30))
-        self.LOAD_PRETRAINED_MODEL__INPUT.setFont(font)
+        self.LOAD_PRETRAINED_MODEL__INPUT.setFont(font1)
 
         self.gridLayout_26.addWidget(self.LOAD_PRETRAINED_MODEL__INPUT, 1, 3, 1, 1)
 
@@ -2944,7 +2608,7 @@ class Ui_MainWindow(object):
         self.MODEL__SOURCE__INFO.setObjectName(u"MODEL__SOURCE__INFO")
         self.MODEL__SOURCE__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__SOURCE__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__SOURCE__INFO.setFont(font)
+        self.MODEL__SOURCE__INFO.setFont(font1)
         self.MODEL__SOURCE__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -2955,14 +2619,14 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__INPUT")
         self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setMinimumSize(QSize(500, 30))
         self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setMaximumSize(QSize(500, 30))
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setFont(font)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setFont(font1)
         self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setReadOnly(True)
 
         self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT, 5, 3, 1, 1)
 
         self.checkpoint_file_path_browse_label = QLabel(self.train_disable_checkpoint_frame)
         self.checkpoint_file_path_browse_label.setObjectName(u"checkpoint_file_path_browse_label")
-        self.checkpoint_file_path_browse_label.setFont(font)
+        self.checkpoint_file_path_browse_label.setFont(font1)
         self.checkpoint_file_path_browse_label.setIndent(15)
 
         self.gridLayout_26.addWidget(self.checkpoint_file_path_browse_label, 4, 1, 1, 1)
@@ -2970,7 +2634,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__SOURCE_MODEL_ID__BN = QPushButton(self.train_disable_checkpoint_frame)
         self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__BN")
         self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setMinimumSize(QSize(130, 0))
-        self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setFont(font)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setFont(font1)
 
         self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__BN, 5, 4, 1, 1)
 
@@ -2978,7 +2642,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__INFO")
         self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setFont(font)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setFont(font1)
         self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -2987,20 +2651,20 @@ class Ui_MainWindow(object):
 
         self.MODEL__SOURCE__LABEL = QLabel(self.train_disable_checkpoint_frame)
         self.MODEL__SOURCE__LABEL.setObjectName(u"MODEL__SOURCE__LABEL")
-        self.MODEL__SOURCE__LABEL.setFont(font)
+        self.MODEL__SOURCE__LABEL.setFont(font1)
         self.MODEL__SOURCE__LABEL.setIndent(15)
 
         self.gridLayout_26.addWidget(self.MODEL__SOURCE__LABEL, 2, 1, 1, 1)
 
         self.LOAD_PRETRAINED_MODEL__LABEL = QLabel(self.train_disable_checkpoint_frame)
         self.LOAD_PRETRAINED_MODEL__LABEL.setObjectName(u"LOAD_PRETRAINED_MODEL__LABEL")
-        self.LOAD_PRETRAINED_MODEL__LABEL.setFont(font)
+        self.LOAD_PRETRAINED_MODEL__LABEL.setFont(font1)
 
         self.gridLayout_26.addWidget(self.LOAD_PRETRAINED_MODEL__LABEL, 1, 1, 1, 1)
 
         self.checkpoint_file_path_browse_bn = QPushButton(self.train_disable_checkpoint_frame)
         self.checkpoint_file_path_browse_bn.setObjectName(u"checkpoint_file_path_browse_bn")
-        self.checkpoint_file_path_browse_bn.setFont(font)
+        self.checkpoint_file_path_browse_bn.setFont(font1)
 
         self.gridLayout_26.addWidget(self.checkpoint_file_path_browse_bn, 4, 4, 1, 1)
 
@@ -3008,7 +2672,7 @@ class Ui_MainWindow(object):
         self.PATHS__CHECKPOINT_FILE__INPUT.setObjectName(u"PATHS__CHECKPOINT_FILE__INPUT")
         self.PATHS__CHECKPOINT_FILE__INPUT.setMinimumSize(QSize(500, 30))
         self.PATHS__CHECKPOINT_FILE__INPUT.setMaximumSize(QSize(500, 30))
-        self.PATHS__CHECKPOINT_FILE__INPUT.setFont(font)
+        self.PATHS__CHECKPOINT_FILE__INPUT.setFont(font1)
 
         self.gridLayout_26.addWidget(self.PATHS__CHECKPOINT_FILE__INPUT, 4, 3, 1, 1)
 
@@ -3016,7 +2680,7 @@ class Ui_MainWindow(object):
         self.LOAD_PRETRAINED_MODEL__INFO.setObjectName(u"LOAD_PRETRAINED_MODEL__INFO")
         self.LOAD_PRETRAINED_MODEL__INFO.setMinimumSize(QSize(30, 30))
         self.LOAD_PRETRAINED_MODEL__INFO.setMaximumSize(QSize(30, 30))
-        self.LOAD_PRETRAINED_MODEL__INFO.setFont(font)
+        self.LOAD_PRETRAINED_MODEL__INFO.setFont(font1)
         self.LOAD_PRETRAINED_MODEL__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -3045,7 +2709,7 @@ class Ui_MainWindow(object):
         self.goptions_browse_yaml_path_input.setObjectName(u"goptions_browse_yaml_path_input")
         self.goptions_browse_yaml_path_input.setMinimumSize(QSize(500, 30))
         self.goptions_browse_yaml_path_input.setMaximumSize(QSize(500, 30))
-        self.goptions_browse_yaml_path_input.setFont(font)
+        self.goptions_browse_yaml_path_input.setFont(font1)
 
         self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_input, 3, 4, 1, 1)
 
@@ -3055,7 +2719,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__NDIM__INPUT.setObjectName(u"PROBLEM__NDIM__INPUT")
         self.PROBLEM__NDIM__INPUT.setMinimumSize(QSize(100, 30))
         self.PROBLEM__NDIM__INPUT.setMaximumSize(QSize(100, 30))
-        self.PROBLEM__NDIM__INPUT.setFont(font)
+        self.PROBLEM__NDIM__INPUT.setFont(font1)
 
         self.gridLayout_27.addWidget(self.PROBLEM__NDIM__INPUT, 0, 4, 1, 1)
 
@@ -3063,14 +2727,14 @@ class Ui_MainWindow(object):
         self.goptions_yaml_name_input.setObjectName(u"goptions_yaml_name_input")
         self.goptions_yaml_name_input.setMinimumSize(QSize(0, 30))
         self.goptions_yaml_name_input.setMaximumSize(QSize(500, 30))
-        self.goptions_yaml_name_input.setFont(font)
+        self.goptions_yaml_name_input.setFont(font1)
 
         self.gridLayout_27.addWidget(self.goptions_yaml_name_input, 5, 4, 1, 1)
 
         self.PROBLEM__NDIM__LABEL = QLabel(self.frame_21)
         self.PROBLEM__NDIM__LABEL.setObjectName(u"PROBLEM__NDIM__LABEL")
         self.PROBLEM__NDIM__LABEL.setMaximumSize(QSize(200, 35))
-        self.PROBLEM__NDIM__LABEL.setFont(font)
+        self.PROBLEM__NDIM__LABEL.setFont(font1)
 
         self.gridLayout_27.addWidget(self.PROBLEM__NDIM__LABEL, 0, 1, 1, 1)
 
@@ -3108,21 +2772,21 @@ class Ui_MainWindow(object):
         self.goptions_yaml_name_label = QLabel(self.frame_21)
         self.goptions_yaml_name_label.setObjectName(u"goptions_yaml_name_label")
         self.goptions_yaml_name_label.setMaximumSize(QSize(250, 35))
-        self.goptions_yaml_name_label.setFont(font)
+        self.goptions_yaml_name_label.setFont(font1)
 
         self.gridLayout_27.addWidget(self.goptions_yaml_name_label, 5, 1, 1, 1)
 
         self.goptions_browse_yaml_path_label = QLabel(self.frame_21)
         self.goptions_browse_yaml_path_label.setObjectName(u"goptions_browse_yaml_path_label")
         self.goptions_browse_yaml_path_label.setMaximumSize(QSize(250, 35))
-        self.goptions_browse_yaml_path_label.setFont(font)
+        self.goptions_browse_yaml_path_label.setFont(font1)
 
         self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_label, 3, 1, 1, 2)
 
         self.goptions_browse_yaml_path_bn = QPushButton(self.frame_21)
         self.goptions_browse_yaml_path_bn.setObjectName(u"goptions_browse_yaml_path_bn")
         self.goptions_browse_yaml_path_bn.setMaximumSize(QSize(130, 16777215))
-        self.goptions_browse_yaml_path_bn.setFont(font)
+        self.goptions_browse_yaml_path_bn.setFont(font1)
 
         self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_bn, 3, 6, 1, 1)
 
@@ -3131,8 +2795,6 @@ class Ui_MainWindow(object):
 
         self.MODEL__BMZ__EXPORT__FRAME = QFrame(self.scrollAreaWidgetContents)
         self.MODEL__BMZ__EXPORT__FRAME.setObjectName(u"MODEL__BMZ__EXPORT__FRAME")
-        self.MODEL__BMZ__EXPORT__FRAME.setStyleSheet(u"background: rgb(246,246,246);\n"
-"")
         self.MODEL__BMZ__EXPORT__FRAME.setFrameShape(QFrame.Box)
         self.MODEL__BMZ__EXPORT__FRAME.setFrameShadow(QFrame.Raised)
         self.formLayout_4 = QFormLayout(self.MODEL__BMZ__EXPORT__FRAME)
@@ -3154,13 +2816,13 @@ class Ui_MainWindow(object):
         self.gridLayout_85.setContentsMargins(-1, 9, -1, -1)
         self.MODEL__BMZ__EXPORT__CITE__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
         self.MODEL__BMZ__EXPORT__CITE__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__CITE__LABEL")
-        self.MODEL__BMZ__EXPORT__CITE__LABEL.setFont(font)
+        self.MODEL__BMZ__EXPORT__CITE__LABEL.setFont(font1)
 
         self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__CITE__LABEL, 7, 0, 1, 1)
 
         self.MODEL__BMZ__EXPORT__LICENSE__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
         self.MODEL__BMZ__EXPORT__LICENSE__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__LICENSE__LABEL")
-        self.MODEL__BMZ__EXPORT__LICENSE__LABEL.setFont(font)
+        self.MODEL__BMZ__EXPORT__LICENSE__LABEL.setFont(font1)
 
         self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__LICENSE__LABEL, 5, 0, 1, 1)
 
@@ -3168,7 +2830,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__TAGS__INFO.setObjectName(u"MODEL__BMZ__EXPORT__TAGS__INFO")
         self.MODEL__BMZ__EXPORT__TAGS__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__BMZ__EXPORT__TAGS__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__TAGS__INFO.setFont(font)
+        self.MODEL__BMZ__EXPORT__TAGS__INFO.setFont(font1)
         self.MODEL__BMZ__EXPORT__TAGS__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -3180,13 +2842,13 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__DESCRIPTION__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__DESCRIPTION__INPUT")
         self.MODEL__BMZ__EXPORT__DESCRIPTION__INPUT.setMinimumSize(QSize(500, 30))
         self.MODEL__BMZ__EXPORT__DESCRIPTION__INPUT.setMaximumSize(QSize(500, 30))
-        self.MODEL__BMZ__EXPORT__DESCRIPTION__INPUT.setFont(font)
+        self.MODEL__BMZ__EXPORT__DESCRIPTION__INPUT.setFont(font1)
 
         self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DESCRIPTION__INPUT, 3, 2, 1, 1)
 
         self.MODEL__BMZ__EXPORT__DOCUMENTATION__BN = QPushButton(self.MODEL__BMZ__EXPORT__FRAME_inside)
         self.MODEL__BMZ__EXPORT__DOCUMENTATION__BN.setObjectName(u"MODEL__BMZ__EXPORT__DOCUMENTATION__BN")
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__BN.setFont(font)
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__BN.setFont(font1)
 
         self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DOCUMENTATION__BN, 8, 3, 1, 1)
 
@@ -3194,7 +2856,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__AUTHORS__INFO.setObjectName(u"MODEL__BMZ__EXPORT__AUTHORS__INFO")
         self.MODEL__BMZ__EXPORT__AUTHORS__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__BMZ__EXPORT__AUTHORS__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__AUTHORS__INFO.setFont(font)
+        self.MODEL__BMZ__EXPORT__AUTHORS__INFO.setFont(font1)
         self.MODEL__BMZ__EXPORT__AUTHORS__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -3206,7 +2868,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__CITE__INFO.setObjectName(u"MODEL__BMZ__EXPORT__CITE__INFO")
         self.MODEL__BMZ__EXPORT__CITE__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__BMZ__EXPORT__CITE__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__CITE__INFO.setFont(font)
+        self.MODEL__BMZ__EXPORT__CITE__INFO.setFont(font1)
         self.MODEL__BMZ__EXPORT__CITE__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -3216,7 +2878,7 @@ class Ui_MainWindow(object):
 
         self.MODEL__BMZ__EXPORT__TAGS__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
         self.MODEL__BMZ__EXPORT__TAGS__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__TAGS__LABEL")
-        self.MODEL__BMZ__EXPORT__TAGS__LABEL.setFont(font)
+        self.MODEL__BMZ__EXPORT__TAGS__LABEL.setFont(font1)
 
         self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__TAGS__LABEL, 6, 0, 1, 1)
 
@@ -3224,7 +2886,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO.setObjectName(u"MODEL__BMZ__EXPORT__DESCRIPTION__INFO")
         self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO.setFont(font)
+        self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO.setFont(font1)
         self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -3236,13 +2898,13 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT")
         self.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT.setMinimumSize(QSize(500, 30))
         self.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT.setMaximumSize(QSize(500, 30))
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT.setFont(font)
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT.setFont(font1)
 
         self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT, 8, 2, 1, 1)
 
         self.MODEL__BMZ__EXPORT__MODEL_NAME__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
         self.MODEL__BMZ__EXPORT__MODEL_NAME__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__MODEL_NAME__LABEL")
-        self.MODEL__BMZ__EXPORT__MODEL_NAME__LABEL.setFont(font)
+        self.MODEL__BMZ__EXPORT__MODEL_NAME__LABEL.setFont(font1)
 
         self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__MODEL_NAME__LABEL, 2, 0, 1, 1)
 
@@ -3250,7 +2912,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__CITE__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__CITE__INPUT")
         self.MODEL__BMZ__EXPORT__CITE__INPUT.setMinimumSize(QSize(500, 30))
         self.MODEL__BMZ__EXPORT__CITE__INPUT.setMaximumSize(QSize(500, 30))
-        self.MODEL__BMZ__EXPORT__CITE__INPUT.setFont(font)
+        self.MODEL__BMZ__EXPORT__CITE__INPUT.setFont(font1)
 
         self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__CITE__INPUT, 7, 2, 1, 1)
 
@@ -3258,7 +2920,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__LICENSE__INFO.setObjectName(u"MODEL__BMZ__EXPORT__LICENSE__INFO")
         self.MODEL__BMZ__EXPORT__LICENSE__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__BMZ__EXPORT__LICENSE__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__LICENSE__INFO.setFont(font)
+        self.MODEL__BMZ__EXPORT__LICENSE__INFO.setFont(font1)
         self.MODEL__BMZ__EXPORT__LICENSE__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -3270,7 +2932,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setObjectName(u"MODEL__BMZ__EXPORT__DOCUMENTATION__INFO")
         self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setFont(font)
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setFont(font1)
         self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -3280,7 +2942,7 @@ class Ui_MainWindow(object):
 
         self.MODEL__BMZ__EXPORT__DESCRIPTION__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
         self.MODEL__BMZ__EXPORT__DESCRIPTION__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__DESCRIPTION__LABEL")
-        self.MODEL__BMZ__EXPORT__DESCRIPTION__LABEL.setFont(font)
+        self.MODEL__BMZ__EXPORT__DESCRIPTION__LABEL.setFont(font1)
 
         self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DESCRIPTION__LABEL, 3, 0, 1, 1)
 
@@ -3290,7 +2952,7 @@ class Ui_MainWindow(object):
 
         self.MODEL__BMZ__EXPORT__AUTHORS__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
         self.MODEL__BMZ__EXPORT__AUTHORS__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__AUTHORS__LABEL")
-        self.MODEL__BMZ__EXPORT__AUTHORS__LABEL.setFont(font)
+        self.MODEL__BMZ__EXPORT__AUTHORS__LABEL.setFont(font1)
 
         self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__AUTHORS__LABEL, 4, 0, 1, 1)
 
@@ -3298,7 +2960,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__AUTHORS__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__AUTHORS__INPUT")
         self.MODEL__BMZ__EXPORT__AUTHORS__INPUT.setMinimumSize(QSize(500, 30))
         self.MODEL__BMZ__EXPORT__AUTHORS__INPUT.setMaximumSize(QSize(500, 30))
-        self.MODEL__BMZ__EXPORT__AUTHORS__INPUT.setFont(font)
+        self.MODEL__BMZ__EXPORT__AUTHORS__INPUT.setFont(font1)
 
         self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__AUTHORS__INPUT, 4, 2, 1, 1)
 
@@ -3306,7 +2968,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__TAGS__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__TAGS__INPUT")
         self.MODEL__BMZ__EXPORT__TAGS__INPUT.setMinimumSize(QSize(500, 30))
         self.MODEL__BMZ__EXPORT__TAGS__INPUT.setMaximumSize(QSize(500, 30))
-        self.MODEL__BMZ__EXPORT__TAGS__INPUT.setFont(font)
+        self.MODEL__BMZ__EXPORT__TAGS__INPUT.setFont(font1)
 
         self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__TAGS__INPUT, 6, 2, 1, 1)
 
@@ -3314,7 +2976,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__LICENSE__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__LICENSE__INPUT")
         self.MODEL__BMZ__EXPORT__LICENSE__INPUT.setMinimumSize(QSize(500, 30))
         self.MODEL__BMZ__EXPORT__LICENSE__INPUT.setMaximumSize(QSize(500, 30))
-        self.MODEL__BMZ__EXPORT__LICENSE__INPUT.setFont(font)
+        self.MODEL__BMZ__EXPORT__LICENSE__INPUT.setFont(font1)
 
         self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__LICENSE__INPUT, 5, 2, 1, 1)
 
@@ -3322,7 +2984,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO.setObjectName(u"MODEL__BMZ__EXPORT__MODEL_NAME__INFO")
         self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO.setFont(font)
+        self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO.setFont(font1)
         self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -3332,7 +2994,7 @@ class Ui_MainWindow(object):
 
         self.MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
         self.MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL")
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL.setFont(font)
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL.setFont(font1)
 
         self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL, 8, 0, 1, 1)
 
@@ -3340,7 +3002,7 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__MODEL_NAME__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__MODEL_NAME__INPUT")
         self.MODEL__BMZ__EXPORT__MODEL_NAME__INPUT.setMinimumSize(QSize(500, 30))
         self.MODEL__BMZ__EXPORT__MODEL_NAME__INPUT.setMaximumSize(QSize(500, 30))
-        self.MODEL__BMZ__EXPORT__MODEL_NAME__INPUT.setFont(font)
+        self.MODEL__BMZ__EXPORT__MODEL_NAME__INPUT.setFont(font1)
 
         self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__MODEL_NAME__INPUT, 2, 2, 1, 1)
 
@@ -3353,7 +3015,7 @@ class Ui_MainWindow(object):
 
         self.MODEL__BMZ__EXPORT__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME)
         self.MODEL__BMZ__EXPORT__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__LABEL")
-        self.MODEL__BMZ__EXPORT__LABEL.setFont(font)
+        self.MODEL__BMZ__EXPORT__LABEL.setFont(font1)
         self.MODEL__BMZ__EXPORT__LABEL.setMargin(0)
         self.MODEL__BMZ__EXPORT__LABEL.setIndent(-1)
 
@@ -3373,7 +3035,7 @@ class Ui_MainWindow(object):
         self.train_general_frame.setObjectName(u"train_general_frame")
         self.train_general_frame.setGeometry(QRect(0, 0, 944, 444))
         self.train_general_frame.setMinimumSize(QSize(0, 0))
-        self.train_general_frame.setFont(font)
+        self.train_general_frame.setFont(font1)
         self.train_general_frame.setFrameShape(QFrame.NoFrame)
         self.train_general_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_14 = QGridLayout(self.train_general_frame)
@@ -3400,7 +3062,7 @@ class Ui_MainWindow(object):
         self.label_49 = QLabel(self.frame_25)
         self.label_49.setObjectName(u"label_49")
         self.label_49.setMaximumSize(QSize(16777215, 16777215))
-        self.label_49.setFont(font)
+        self.label_49.setFont(font1)
         self.label_49.setContextMenuPolicy(Qt.NoContextMenu)
 
         self.horizontalLayout_12.addWidget(self.label_49)
@@ -3410,7 +3072,7 @@ class Ui_MainWindow(object):
         self.TRAIN__ENABLE__INPUT.addItem("")
         self.TRAIN__ENABLE__INPUT.setObjectName(u"TRAIN__ENABLE__INPUT")
         self.TRAIN__ENABLE__INPUT.setMinimumSize(QSize(100, 0))
-        self.TRAIN__ENABLE__INPUT.setFont(font)
+        self.TRAIN__ENABLE__INPUT.setFont(font1)
 
         self.horizontalLayout_12.addWidget(self.TRAIN__ENABLE__INPUT)
 
@@ -3423,7 +3085,7 @@ class Ui_MainWindow(object):
 
         self.train_tab_widget = QTabWidget(self.train_general_frame)
         self.train_tab_widget.setObjectName(u"train_tab_widget")
-        self.train_tab_widget.setFont(font)
+        self.train_tab_widget.setFont(font1)
         self.train_general_options_tab = QWidget()
         self.train_general_options_tab.setObjectName(u"train_general_options_tab")
         self.train_general_options_tab.setMaximumSize(QSize(16777215, 356))
@@ -3433,7 +3095,7 @@ class Ui_MainWindow(object):
         self.gridLayout_12.setContentsMargins(0, 0, 0, 0)
         self.train_scrollArea = QScrollArea(self.train_general_options_tab)
         self.train_scrollArea.setObjectName(u"train_scrollArea")
-        self.train_scrollArea.setFont(font)
+        self.train_scrollArea.setFont(font1)
         self.train_scrollArea.setStyleSheet(u"")
         self.train_scrollArea.setFrameShape(QFrame.NoFrame)
         self.train_scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
@@ -3452,7 +3114,7 @@ class Ui_MainWindow(object):
         self.train_advanced_options_frame.setObjectName(u"train_advanced_options_frame")
         self.train_advanced_options_frame.setMinimumSize(QSize(0, 0))
         self.train_advanced_options_frame.setMaximumSize(QSize(900, 16777215))
-        self.train_advanced_options_frame.setFont(font)
+        self.train_advanced_options_frame.setFont(font1)
         self.train_advanced_options_frame.setFrameShape(QFrame.NoFrame)
         self.train_advanced_options_frame.setFrameShadow(QFrame.Raised)
         self.formLayout_2 = QFormLayout(self.train_advanced_options_frame)
@@ -3462,14 +3124,13 @@ class Ui_MainWindow(object):
         self.train_advanced_options_frame_2.setObjectName(u"train_advanced_options_frame_2")
         self.train_advanced_options_frame_2.setMinimumSize(QSize(0, 0))
         self.train_advanced_options_frame_2.setMaximumSize(QSize(16777215, 16777215))
-        self.train_advanced_options_frame_2.setFont(font)
+        self.train_advanced_options_frame_2.setFont(font1)
         self.train_advanced_options_frame_2.setFrameShape(QFrame.Box)
         self.gridLayout_4 = QGridLayout(self.train_advanced_options_frame_2)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
         self.convnext_frame = QFrame(self.train_advanced_options_frame_2)
         self.convnext_frame.setObjectName(u"convnext_frame")
-        self.convnext_frame.setFont(font8)
-        self.convnext_frame.setStyleSheet(u"background: rgb(246,246,246);")
+        self.convnext_frame.setFont(font9)
         self.convnext_frame.setFrameShape(QFrame.Box)
         self.convnext_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_82 = QGridLayout(self.convnext_frame)
@@ -3492,7 +3153,7 @@ class Ui_MainWindow(object):
 
         self.MODEL__CONVNEXT_LAYER_SCALE__LABEL = QLabel(self.convnext_frame)
         self.MODEL__CONVNEXT_LAYER_SCALE__LABEL.setObjectName(u"MODEL__CONVNEXT_LAYER_SCALE__LABEL")
-        self.MODEL__CONVNEXT_LAYER_SCALE__LABEL.setFont(font)
+        self.MODEL__CONVNEXT_LAYER_SCALE__LABEL.setFont(font1)
 
         self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_LAYER_SCALE__LABEL, 2, 0, 1, 1)
 
@@ -3510,13 +3171,13 @@ class Ui_MainWindow(object):
         self.MODEL__CONVNEXT_SD_PROB__INPUT.setObjectName(u"MODEL__CONVNEXT_SD_PROB__INPUT")
         self.MODEL__CONVNEXT_SD_PROB__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__CONVNEXT_SD_PROB__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__CONVNEXT_SD_PROB__INPUT.setFont(font)
+        self.MODEL__CONVNEXT_SD_PROB__INPUT.setFont(font1)
 
         self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_SD_PROB__INPUT, 1, 2, 1, 1)
 
         self.MODEL__CONVNEXT_SD_PROB__LABEL = QLabel(self.convnext_frame)
         self.MODEL__CONVNEXT_SD_PROB__LABEL.setObjectName(u"MODEL__CONVNEXT_SD_PROB__LABEL")
-        self.MODEL__CONVNEXT_SD_PROB__LABEL.setFont(font)
+        self.MODEL__CONVNEXT_SD_PROB__LABEL.setFont(font1)
 
         self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_SD_PROB__LABEL, 1, 0, 1, 1)
 
@@ -3532,13 +3193,13 @@ class Ui_MainWindow(object):
         self.MODEL__CONVNEXT_LAYER_SCALE__INPUT.setObjectName(u"MODEL__CONVNEXT_LAYER_SCALE__INPUT")
         self.MODEL__CONVNEXT_LAYER_SCALE__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__CONVNEXT_LAYER_SCALE__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__CONVNEXT_LAYER_SCALE__INPUT.setFont(font)
+        self.MODEL__CONVNEXT_LAYER_SCALE__INPUT.setFont(font1)
 
         self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_LAYER_SCALE__INPUT, 2, 2, 1, 1)
 
         self.MODEL__CONVNEXT_STEM_K_SIZE__LABEL = QLabel(self.convnext_frame)
         self.MODEL__CONVNEXT_STEM_K_SIZE__LABEL.setObjectName(u"MODEL__CONVNEXT_STEM_K_SIZE__LABEL")
-        self.MODEL__CONVNEXT_STEM_K_SIZE__LABEL.setFont(font)
+        self.MODEL__CONVNEXT_STEM_K_SIZE__LABEL.setFont(font1)
 
         self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_STEM_K_SIZE__LABEL, 3, 0, 1, 1)
 
@@ -3546,7 +3207,7 @@ class Ui_MainWindow(object):
         self.MODEL__CONVNEXT_STEM_K_SIZE__INPUT.setObjectName(u"MODEL__CONVNEXT_STEM_K_SIZE__INPUT")
         self.MODEL__CONVNEXT_STEM_K_SIZE__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__CONVNEXT_STEM_K_SIZE__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__CONVNEXT_STEM_K_SIZE__INPUT.setFont(font)
+        self.MODEL__CONVNEXT_STEM_K_SIZE__INPUT.setFont(font1)
 
         self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_STEM_K_SIZE__INPUT, 3, 2, 1, 1)
 
@@ -3554,13 +3215,13 @@ class Ui_MainWindow(object):
         self.MODEL__CONVNEXT_LAYERS__INPUT.setObjectName(u"MODEL__CONVNEXT_LAYERS__INPUT")
         self.MODEL__CONVNEXT_LAYERS__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__CONVNEXT_LAYERS__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__CONVNEXT_LAYERS__INPUT.setFont(font)
+        self.MODEL__CONVNEXT_LAYERS__INPUT.setFont(font1)
 
         self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_LAYERS__INPUT, 0, 2, 1, 1)
 
         self.MODEL__CONVNEXT_LAYERS__LABEL = QLabel(self.convnext_frame)
         self.MODEL__CONVNEXT_LAYERS__LABEL.setObjectName(u"MODEL__CONVNEXT_LAYERS__LABEL")
-        self.MODEL__CONVNEXT_LAYERS__LABEL.setFont(font)
+        self.MODEL__CONVNEXT_LAYERS__LABEL.setFont(font1)
 
         self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_LAYERS__LABEL, 0, 0, 1, 1)
 
@@ -3573,9 +3234,7 @@ class Ui_MainWindow(object):
 
         self.frame_14 = QFrame(self.train_advanced_options_frame_2)
         self.frame_14.setObjectName(u"frame_14")
-        self.frame_14.setFont(font)
-        self.frame_14.setStyleSheet(u"background: rgb(246,246,246);\n"
-"")
+        self.frame_14.setFont(font1)
         self.frame_14.setFrameShape(QFrame.Box)
         self.frame_14.setFrameShadow(QFrame.Raised)
         self.gridLayout_15 = QGridLayout(self.frame_14)
@@ -3583,7 +3242,7 @@ class Ui_MainWindow(object):
         self.custom_std_label = QLabel(self.frame_14)
         self.custom_std_label.setObjectName(u"custom_std_label")
         self.custom_std_label.setMaximumSize(QSize(16777215, 16777215))
-        self.custom_std_label.setFont(font)
+        self.custom_std_label.setFont(font1)
         self.custom_std_label.setIndent(15)
 
         self.gridLayout_15.addWidget(self.custom_std_label, 16, 1, 1, 1)
@@ -3600,7 +3259,7 @@ class Ui_MainWindow(object):
 
         self.DATA__NORMALIZATION__PERC_LOWER__LABEL = QLabel(self.frame_14)
         self.DATA__NORMALIZATION__PERC_LOWER__LABEL.setObjectName(u"DATA__NORMALIZATION__PERC_LOWER__LABEL")
-        self.DATA__NORMALIZATION__PERC_LOWER__LABEL.setFont(font)
+        self.DATA__NORMALIZATION__PERC_LOWER__LABEL.setFont(font1)
         self.DATA__NORMALIZATION__PERC_LOWER__LABEL.setIndent(15)
 
         self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__PERC_LOWER__LABEL, 10, 1, 1, 1)
@@ -3608,7 +3267,7 @@ class Ui_MainWindow(object):
         self.label_7 = QLabel(self.frame_14)
         self.label_7.setObjectName(u"label_7")
         self.label_7.setMaximumSize(QSize(16777215, 16777215))
-        self.label_7.setFont(font)
+        self.label_7.setFont(font1)
 
         self.gridLayout_15.addWidget(self.label_7, 3, 1, 1, 2)
 
@@ -3616,7 +3275,7 @@ class Ui_MainWindow(object):
         self.DATA__NORMALIZATION__PERC_UPPER__INFO.setObjectName(u"DATA__NORMALIZATION__PERC_UPPER__INFO")
         self.DATA__NORMALIZATION__PERC_UPPER__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__NORMALIZATION__PERC_UPPER__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__NORMALIZATION__PERC_UPPER__INFO.setFont(font8)
+        self.DATA__NORMALIZATION__PERC_UPPER__INFO.setFont(font9)
         self.DATA__NORMALIZATION__PERC_UPPER__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -3629,14 +3288,14 @@ class Ui_MainWindow(object):
         self.DATA__FORCE_RGB__INPUT.setObjectName(u"DATA__FORCE_RGB__INPUT")
         self.DATA__FORCE_RGB__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__FORCE_RGB__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__FORCE_RGB__INPUT.setFont(font)
+        self.DATA__FORCE_RGB__INPUT.setFont(font1)
 
         self.gridLayout_15.addWidget(self.DATA__FORCE_RGB__INPUT, 18, 4, 1, 1)
 
         self.label_12 = QLabel(self.frame_14)
         self.label_12.setObjectName(u"label_12")
         self.label_12.setMaximumSize(QSize(16777215, 16777215))
-        self.label_12.setFont(font)
+        self.label_12.setFont(font1)
 
         self.gridLayout_15.addWidget(self.label_12, 12, 1, 1, 1)
 
@@ -3646,7 +3305,7 @@ class Ui_MainWindow(object):
         self.DATA__CHECK_GENERATORS__INPUT.setObjectName(u"DATA__CHECK_GENERATORS__INPUT")
         self.DATA__CHECK_GENERATORS__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__CHECK_GENERATORS__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__CHECK_GENERATORS__INPUT.setFont(font)
+        self.DATA__CHECK_GENERATORS__INPUT.setFont(font1)
 
         self.gridLayout_15.addWidget(self.DATA__CHECK_GENERATORS__INPUT, 17, 4, 1, 1)
 
@@ -3676,13 +3335,13 @@ class Ui_MainWindow(object):
         self.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT.setObjectName(u"DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT")
         self.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT.setFont(font)
+        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT.setFont(font1)
 
         self.gridLayout_15.addWidget(self.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT, 4, 4, 1, 1)
 
         self.label_11 = QLabel(self.frame_14)
         self.label_11.setObjectName(u"label_11")
-        self.label_11.setFont(font)
+        self.label_11.setFont(font1)
 
         self.gridLayout_15.addWidget(self.label_11, 4, 1, 1, 2)
 
@@ -3690,7 +3349,7 @@ class Ui_MainWindow(object):
         self.DATA__NORMALIZATION__PERC_CLIP__INFO.setObjectName(u"DATA__NORMALIZATION__PERC_CLIP__INFO")
         self.DATA__NORMALIZATION__PERC_CLIP__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__NORMALIZATION__PERC_CLIP__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__NORMALIZATION__PERC_CLIP__INFO.setFont(font8)
+        self.DATA__NORMALIZATION__PERC_CLIP__INFO.setFont(font9)
         self.DATA__NORMALIZATION__PERC_CLIP__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -3701,13 +3360,13 @@ class Ui_MainWindow(object):
         self.DATA__NORMALIZATION__PERC_UPPER__INPUT.setObjectName(u"DATA__NORMALIZATION__PERC_UPPER__INPUT")
         self.DATA__NORMALIZATION__PERC_UPPER__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__NORMALIZATION__PERC_UPPER__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__NORMALIZATION__PERC_UPPER__INPUT.setFont(font)
+        self.DATA__NORMALIZATION__PERC_UPPER__INPUT.setFont(font1)
 
         self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__PERC_UPPER__INPUT, 11, 4, 1, 1)
 
         self.DATA__NORMALIZATION__PERC_CLIP__LABEL = QLabel(self.frame_14)
         self.DATA__NORMALIZATION__PERC_CLIP__LABEL.setObjectName(u"DATA__NORMALIZATION__PERC_CLIP__LABEL")
-        self.DATA__NORMALIZATION__PERC_CLIP__LABEL.setFont(font)
+        self.DATA__NORMALIZATION__PERC_CLIP__LABEL.setFont(font1)
 
         self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__PERC_CLIP__LABEL, 9, 1, 1, 1)
 
@@ -3735,7 +3394,7 @@ class Ui_MainWindow(object):
         self.DATA__NORMALIZATION__CUSTOM_MEAN__INPUT.setObjectName(u"DATA__NORMALIZATION__CUSTOM_MEAN__INPUT")
         self.DATA__NORMALIZATION__CUSTOM_MEAN__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__NORMALIZATION__CUSTOM_MEAN__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__NORMALIZATION__CUSTOM_MEAN__INPUT.setFont(font)
+        self.DATA__NORMALIZATION__CUSTOM_MEAN__INPUT.setFont(font1)
 
         self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__CUSTOM_MEAN__INPUT, 15, 4, 1, 1)
 
@@ -3763,21 +3422,21 @@ class Ui_MainWindow(object):
         self.DATA__NORMALIZATION__PERC_LOWER__INPUT.setObjectName(u"DATA__NORMALIZATION__PERC_LOWER__INPUT")
         self.DATA__NORMALIZATION__PERC_LOWER__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__NORMALIZATION__PERC_LOWER__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__NORMALIZATION__PERC_LOWER__INPUT.setFont(font)
+        self.DATA__NORMALIZATION__PERC_LOWER__INPUT.setFont(font1)
 
         self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__PERC_LOWER__INPUT, 10, 4, 1, 1)
 
         self.custom_mean_label = QLabel(self.frame_14)
         self.custom_mean_label.setObjectName(u"custom_mean_label")
         self.custom_mean_label.setMaximumSize(QSize(16777215, 16777215))
-        self.custom_mean_label.setFont(font)
+        self.custom_mean_label.setFont(font1)
         self.custom_mean_label.setIndent(15)
 
         self.gridLayout_15.addWidget(self.custom_mean_label, 15, 1, 1, 1)
 
         self.DATA__FORCE_RGB__LABEL = QLabel(self.frame_14)
         self.DATA__FORCE_RGB__LABEL.setObjectName(u"DATA__FORCE_RGB__LABEL")
-        self.DATA__FORCE_RGB__LABEL.setFont(font)
+        self.DATA__FORCE_RGB__LABEL.setFont(font1)
 
         self.gridLayout_15.addWidget(self.DATA__FORCE_RGB__LABEL, 18, 1, 1, 1)
 
@@ -3787,7 +3446,7 @@ class Ui_MainWindow(object):
         self.DATA__NORMALIZATION__PERC_CLIP__INPUT.setObjectName(u"DATA__NORMALIZATION__PERC_CLIP__INPUT")
         self.DATA__NORMALIZATION__PERC_CLIP__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__NORMALIZATION__PERC_CLIP__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__NORMALIZATION__PERC_CLIP__INPUT.setFont(font)
+        self.DATA__NORMALIZATION__PERC_CLIP__INPUT.setFont(font1)
 
         self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__PERC_CLIP__INPUT, 9, 4, 1, 1)
 
@@ -3795,7 +3454,7 @@ class Ui_MainWindow(object):
         self.DATA__NORMALIZATION__PERC_LOWER__INFO.setObjectName(u"DATA__NORMALIZATION__PERC_LOWER__INFO")
         self.DATA__NORMALIZATION__PERC_LOWER__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__NORMALIZATION__PERC_LOWER__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__NORMALIZATION__PERC_LOWER__INFO.setFont(font8)
+        self.DATA__NORMALIZATION__PERC_LOWER__INFO.setFont(font9)
         self.DATA__NORMALIZATION__PERC_LOWER__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -3808,13 +3467,13 @@ class Ui_MainWindow(object):
         self.DATA__EXTRACT_RANDOM_PATCH__INPUT.setObjectName(u"DATA__EXTRACT_RANDOM_PATCH__INPUT")
         self.DATA__EXTRACT_RANDOM_PATCH__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__EXTRACT_RANDOM_PATCH__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__EXTRACT_RANDOM_PATCH__INPUT.setFont(font)
+        self.DATA__EXTRACT_RANDOM_PATCH__INPUT.setFont(font1)
 
         self.gridLayout_15.addWidget(self.DATA__EXTRACT_RANDOM_PATCH__INPUT, 3, 4, 1, 1)
 
         self.DATA__NORMALIZATION__PERC_UPPER__LABEL = QLabel(self.frame_14)
         self.DATA__NORMALIZATION__PERC_UPPER__LABEL.setObjectName(u"DATA__NORMALIZATION__PERC_UPPER__LABEL")
-        self.DATA__NORMALIZATION__PERC_UPPER__LABEL.setFont(font)
+        self.DATA__NORMALIZATION__PERC_UPPER__LABEL.setFont(font1)
         self.DATA__NORMALIZATION__PERC_UPPER__LABEL.setIndent(15)
 
         self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__PERC_UPPER__LABEL, 11, 1, 1, 1)
@@ -3826,14 +3485,14 @@ class Ui_MainWindow(object):
         self.DATA__NORMALIZATION__TYPE__INPUT.setObjectName(u"DATA__NORMALIZATION__TYPE__INPUT")
         self.DATA__NORMALIZATION__TYPE__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__NORMALIZATION__TYPE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__NORMALIZATION__TYPE__INPUT.setFont(font)
+        self.DATA__NORMALIZATION__TYPE__INPUT.setFont(font1)
 
         self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__TYPE__INPUT, 12, 4, 1, 1)
 
         self.check_gen_label = QLabel(self.frame_14)
         self.check_gen_label.setObjectName(u"check_gen_label")
         self.check_gen_label.setMaximumSize(QSize(16777215, 16777215))
-        self.check_gen_label.setFont(font)
+        self.check_gen_label.setFont(font1)
 
         self.gridLayout_15.addWidget(self.check_gen_label, 17, 1, 1, 1)
 
@@ -3841,7 +3500,7 @@ class Ui_MainWindow(object):
         self.DATA__NORMALIZATION__CUSTOM_STD__INPUT.setObjectName(u"DATA__NORMALIZATION__CUSTOM_STD__INPUT")
         self.DATA__NORMALIZATION__CUSTOM_STD__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__NORMALIZATION__CUSTOM_STD__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__NORMALIZATION__CUSTOM_STD__INPUT.setFont(font)
+        self.DATA__NORMALIZATION__CUSTOM_STD__INPUT.setFont(font1)
 
         self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__CUSTOM_STD__INPUT, 16, 4, 1, 1)
 
@@ -3855,8 +3514,7 @@ class Ui_MainWindow(object):
         self.unet_model_like_frame = QFrame(self.train_advanced_options_frame_2)
         self.unet_model_like_frame.setObjectName(u"unet_model_like_frame")
         self.unet_model_like_frame.setMinimumSize(QSize(0, 0))
-        self.unet_model_like_frame.setFont(font)
-        self.unet_model_like_frame.setStyleSheet(u"background: rgb(246,246,246);")
+        self.unet_model_like_frame.setFont(font1)
         self.unet_model_like_frame.setFrameShape(QFrame.Box)
         self.unet_model_like_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_22 = QGridLayout(self.unet_model_like_frame)
@@ -3868,14 +3526,14 @@ class Ui_MainWindow(object):
         self.MODEL__ACTIVATION__INPUT.setObjectName(u"MODEL__ACTIVATION__INPUT")
         self.MODEL__ACTIVATION__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__ACTIVATION__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__ACTIVATION__INPUT.setFont(font)
+        self.MODEL__ACTIVATION__INPUT.setFont(font1)
 
         self.gridLayout_22.addWidget(self.MODEL__ACTIVATION__INPUT, 5, 2, 1, 1)
 
         self.MODEL__Z_DOWN__LABEL = QLabel(self.unet_model_like_frame)
         self.MODEL__Z_DOWN__LABEL.setObjectName(u"MODEL__Z_DOWN__LABEL")
         self.MODEL__Z_DOWN__LABEL.setMaximumSize(QSize(16777215, 16777215))
-        self.MODEL__Z_DOWN__LABEL.setFont(font)
+        self.MODEL__Z_DOWN__LABEL.setFont(font1)
 
         self.gridLayout_22.addWidget(self.MODEL__Z_DOWN__LABEL, 7, 0, 1, 1)
 
@@ -3891,7 +3549,7 @@ class Ui_MainWindow(object):
 
         self.MODEL__ISOTROPY__LABEL = QLabel(self.unet_model_like_frame)
         self.MODEL__ISOTROPY__LABEL.setObjectName(u"MODEL__ISOTROPY__LABEL")
-        self.MODEL__ISOTROPY__LABEL.setFont(font)
+        self.MODEL__ISOTROPY__LABEL.setFont(font1)
 
         self.gridLayout_22.addWidget(self.MODEL__ISOTROPY__LABEL, 8, 0, 1, 1)
 
@@ -3904,14 +3562,14 @@ class Ui_MainWindow(object):
         self.MODEL__NORMALIZATION__INPUT.setObjectName(u"MODEL__NORMALIZATION__INPUT")
         self.MODEL__NORMALIZATION__INPUT.setMinimumSize(QSize(100, 30))
         self.MODEL__NORMALIZATION__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__NORMALIZATION__INPUT.setFont(font)
+        self.MODEL__NORMALIZATION__INPUT.setFont(font1)
 
         self.gridLayout_22.addWidget(self.MODEL__NORMALIZATION__INPUT, 2, 2, 1, 1)
 
         self.label_39 = QLabel(self.unet_model_like_frame)
         self.label_39.setObjectName(u"label_39")
         self.label_39.setMaximumSize(QSize(16777215, 16777215))
-        self.label_39.setFont(font)
+        self.label_39.setFont(font1)
 
         self.gridLayout_22.addWidget(self.label_39, 2, 0, 1, 1)
 
@@ -3928,7 +3586,7 @@ class Ui_MainWindow(object):
         self.label_37 = QLabel(self.unet_model_like_frame)
         self.label_37.setObjectName(u"label_37")
         self.label_37.setMaximumSize(QSize(16777215, 16777215))
-        self.label_37.setFont(font)
+        self.label_37.setFont(font1)
 
         self.gridLayout_22.addWidget(self.label_37, 1, 0, 1, 1)
 
@@ -3936,7 +3594,7 @@ class Ui_MainWindow(object):
         self.MODEL__KERNEL_SIZE__INPUT.setObjectName(u"MODEL__KERNEL_SIZE__INPUT")
         self.MODEL__KERNEL_SIZE__INPUT.setMinimumSize(QSize(100, 30))
         self.MODEL__KERNEL_SIZE__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__KERNEL_SIZE__INPUT.setFont(font)
+        self.MODEL__KERNEL_SIZE__INPUT.setFont(font1)
 
         self.gridLayout_22.addWidget(self.MODEL__KERNEL_SIZE__INPUT, 3, 2, 1, 1)
 
@@ -3944,7 +3602,7 @@ class Ui_MainWindow(object):
         self.MODEL__FEATURE_MAPS__INPUT.setObjectName(u"MODEL__FEATURE_MAPS__INPUT")
         self.MODEL__FEATURE_MAPS__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__FEATURE_MAPS__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__FEATURE_MAPS__INPUT.setFont(font)
+        self.MODEL__FEATURE_MAPS__INPUT.setFont(font1)
 
         self.gridLayout_22.addWidget(self.MODEL__FEATURE_MAPS__INPUT, 0, 2, 1, 1)
 
@@ -3971,7 +3629,7 @@ class Ui_MainWindow(object):
         self.label_36 = QLabel(self.unet_model_like_frame)
         self.label_36.setObjectName(u"label_36")
         self.label_36.setMaximumSize(QSize(16777215, 16777215))
-        self.label_36.setFont(font)
+        self.label_36.setFont(font1)
 
         self.gridLayout_22.addWidget(self.label_36, 0, 0, 1, 1)
 
@@ -3998,14 +3656,14 @@ class Ui_MainWindow(object):
         self.label_47 = QLabel(self.unet_model_like_frame)
         self.label_47.setObjectName(u"label_47")
         self.label_47.setMaximumSize(QSize(16777215, 16777215))
-        self.label_47.setFont(font)
+        self.label_47.setFont(font1)
 
         self.gridLayout_22.addWidget(self.label_47, 5, 0, 1, 1)
 
         self.label_45 = QLabel(self.unet_model_like_frame)
         self.label_45.setObjectName(u"label_45")
         self.label_45.setMaximumSize(QSize(16777215, 16777215))
-        self.label_45.setFont(font)
+        self.label_45.setFont(font1)
 
         self.gridLayout_22.addWidget(self.label_45, 6, 0, 1, 1)
 
@@ -4015,7 +3673,7 @@ class Ui_MainWindow(object):
         self.MODEL__UPSAMPLE_LAYER__INPUT.setObjectName(u"MODEL__UPSAMPLE_LAYER__INPUT")
         self.MODEL__UPSAMPLE_LAYER__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__UPSAMPLE_LAYER__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__UPSAMPLE_LAYER__INPUT.setFont(font)
+        self.MODEL__UPSAMPLE_LAYER__INPUT.setFont(font1)
 
         self.gridLayout_22.addWidget(self.MODEL__UPSAMPLE_LAYER__INPUT, 4, 2, 1, 1)
 
@@ -4023,7 +3681,7 @@ class Ui_MainWindow(object):
         self.MODEL__DROPOUT_VALUES__INPUT.setObjectName(u"MODEL__DROPOUT_VALUES__INPUT")
         self.MODEL__DROPOUT_VALUES__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__DROPOUT_VALUES__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__DROPOUT_VALUES__INPUT.setFont(font)
+        self.MODEL__DROPOUT_VALUES__INPUT.setFont(font1)
 
         self.gridLayout_22.addWidget(self.MODEL__DROPOUT_VALUES__INPUT, 1, 2, 1, 1)
 
@@ -4040,7 +3698,7 @@ class Ui_MainWindow(object):
         self.label_41 = QLabel(self.unet_model_like_frame)
         self.label_41.setObjectName(u"label_41")
         self.label_41.setMaximumSize(QSize(16777215, 16777215))
-        self.label_41.setFont(font)
+        self.label_41.setFont(font1)
 
         self.gridLayout_22.addWidget(self.label_41, 3, 0, 1, 1)
 
@@ -4056,7 +3714,7 @@ class Ui_MainWindow(object):
         self.MODEL__LAST_ACTIVATION__INPUT.setObjectName(u"MODEL__LAST_ACTIVATION__INPUT")
         self.MODEL__LAST_ACTIVATION__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__LAST_ACTIVATION__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__LAST_ACTIVATION__INPUT.setFont(font)
+        self.MODEL__LAST_ACTIVATION__INPUT.setFont(font1)
 
         self.gridLayout_22.addWidget(self.MODEL__LAST_ACTIVATION__INPUT, 6, 2, 1, 1)
 
@@ -4064,14 +3722,14 @@ class Ui_MainWindow(object):
         self.MODEL__Z_DOWN__INPUT.setObjectName(u"MODEL__Z_DOWN__INPUT")
         self.MODEL__Z_DOWN__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__Z_DOWN__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__Z_DOWN__INPUT.setFont(font)
+        self.MODEL__Z_DOWN__INPUT.setFont(font1)
 
         self.gridLayout_22.addWidget(self.MODEL__Z_DOWN__INPUT, 7, 2, 1, 1)
 
         self.label_43 = QLabel(self.unet_model_like_frame)
         self.label_43.setObjectName(u"label_43")
         self.label_43.setMaximumSize(QSize(16777215, 16777215))
-        self.label_43.setFont(font)
+        self.label_43.setFont(font1)
 
         self.gridLayout_22.addWidget(self.label_43, 4, 0, 1, 1)
 
@@ -4087,7 +3745,7 @@ class Ui_MainWindow(object):
 
         self.MODEL__LAGER_IO__LABEL = QLabel(self.unet_model_like_frame)
         self.MODEL__LAGER_IO__LABEL.setObjectName(u"MODEL__LAGER_IO__LABEL")
-        self.MODEL__LAGER_IO__LABEL.setFont(font)
+        self.MODEL__LAGER_IO__LABEL.setFont(font1)
 
         self.gridLayout_22.addWidget(self.MODEL__LAGER_IO__LABEL, 9, 0, 1, 1)
 
@@ -4095,7 +3753,7 @@ class Ui_MainWindow(object):
         self.MODEL__ISOTROPY__INFO.setObjectName(u"MODEL__ISOTROPY__INFO")
         self.MODEL__ISOTROPY__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__ISOTROPY__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__ISOTROPY__INFO.setFont(font)
+        self.MODEL__ISOTROPY__INFO.setFont(font1)
         self.MODEL__ISOTROPY__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -4106,7 +3764,7 @@ class Ui_MainWindow(object):
         self.MODEL__LAGER_IO__INFO.setObjectName(u"MODEL__LAGER_IO__INFO")
         self.MODEL__LAGER_IO__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__LAGER_IO__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__LAGER_IO__INFO.setFont(font)
+        self.MODEL__LAGER_IO__INFO.setFont(font1)
         self.MODEL__LAGER_IO__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -4117,7 +3775,7 @@ class Ui_MainWindow(object):
         self.MODEL__ISOTROPY__INPUT.setObjectName(u"MODEL__ISOTROPY__INPUT")
         self.MODEL__ISOTROPY__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__ISOTROPY__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__ISOTROPY__INPUT.setFont(font)
+        self.MODEL__ISOTROPY__INPUT.setFont(font1)
 
         self.gridLayout_22.addWidget(self.MODEL__ISOTROPY__INPUT, 8, 2, 1, 1)
 
@@ -4127,7 +3785,7 @@ class Ui_MainWindow(object):
         self.MODEL__LAGER_IO__INPUT.setObjectName(u"MODEL__LAGER_IO__INPUT")
         self.MODEL__LAGER_IO__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__LAGER_IO__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__LAGER_IO__INPUT.setFont(font)
+        self.MODEL__LAGER_IO__INPUT.setFont(font1)
 
         self.gridLayout_22.addWidget(self.MODEL__LAGER_IO__INPUT, 9, 2, 1, 1)
 
@@ -4137,14 +3795,13 @@ class Ui_MainWindow(object):
         self.frame_28 = QFrame(self.train_advanced_options_frame_2)
         self.frame_28.setObjectName(u"frame_28")
         self.frame_28.setMinimumSize(QSize(0, 0))
-        self.frame_28.setStyleSheet(u"background: rgb(246,246,246);")
         self.frame_28.setFrameShape(QFrame.Box)
         self.frame_28.setFrameShadow(QFrame.Raised)
         self.gridLayout_29 = QGridLayout(self.frame_28)
         self.gridLayout_29.setObjectName(u"gridLayout_29")
         self.label_162 = QLabel(self.frame_28)
         self.label_162.setObjectName(u"label_162")
-        self.label_162.setFont(font)
+        self.label_162.setFont(font1)
 
         self.gridLayout_29.addWidget(self.label_162, 14, 0, 1, 1)
 
@@ -4152,7 +3809,7 @@ class Ui_MainWindow(object):
         self.LOSS__CLASS_REBALANCE__INFO.setObjectName(u"LOSS__CLASS_REBALANCE__INFO")
         self.LOSS__CLASS_REBALANCE__INFO.setMinimumSize(QSize(30, 30))
         self.LOSS__CLASS_REBALANCE__INFO.setMaximumSize(QSize(30, 30))
-        self.LOSS__CLASS_REBALANCE__INFO.setFont(font)
+        self.LOSS__CLASS_REBALANCE__INFO.setFont(font1)
         self.LOSS__CLASS_REBALANCE__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -4171,7 +3828,7 @@ class Ui_MainWindow(object):
 
         self.label_114 = QLabel(self.frame_28)
         self.label_114.setObjectName(u"label_114")
-        self.label_114.setFont(font)
+        self.label_114.setFont(font1)
 
         self.gridLayout_29.addWidget(self.label_114, 11, 0, 1, 1)
 
@@ -4187,7 +3844,7 @@ class Ui_MainWindow(object):
 
         self.lr_schel_warmupcosine_epochs_label = QLabel(self.frame_28)
         self.lr_schel_warmupcosine_epochs_label.setObjectName(u"lr_schel_warmupcosine_epochs_label")
-        self.lr_schel_warmupcosine_epochs_label.setFont(font)
+        self.lr_schel_warmupcosine_epochs_label.setFont(font1)
         self.lr_schel_warmupcosine_epochs_label.setIndent(15)
 
         self.gridLayout_29.addWidget(self.lr_schel_warmupcosine_epochs_label, 21, 0, 1, 1)
@@ -4204,7 +3861,7 @@ class Ui_MainWindow(object):
 
         self.TRAIN__BATCH_SIZE__CALCULATION__LABEL = QLabel(self.frame_28)
         self.TRAIN__BATCH_SIZE__CALCULATION__LABEL.setObjectName(u"TRAIN__BATCH_SIZE__CALCULATION__LABEL")
-        self.TRAIN__BATCH_SIZE__CALCULATION__LABEL.setFont(font)
+        self.TRAIN__BATCH_SIZE__CALCULATION__LABEL.setFont(font1)
 
         self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__CALCULATION__LABEL, 9, 0, 1, 1)
 
@@ -4224,7 +3881,7 @@ class Ui_MainWindow(object):
 
         self.TRAIN__METRICS__LABEL = QLabel(self.frame_28)
         self.TRAIN__METRICS__LABEL.setObjectName(u"TRAIN__METRICS__LABEL")
-        self.TRAIN__METRICS__LABEL.setFont(font)
+        self.TRAIN__METRICS__LABEL.setFont(font1)
 
         self.gridLayout_29.addWidget(self.TRAIN__METRICS__LABEL, 4, 0, 1, 1)
 
@@ -4240,27 +3897,27 @@ class Ui_MainWindow(object):
 
         self.lr_schel_reduce_on_plat_patience_label = QLabel(self.frame_28)
         self.lr_schel_reduce_on_plat_patience_label.setObjectName(u"lr_schel_reduce_on_plat_patience_label")
-        self.lr_schel_reduce_on_plat_patience_label.setFont(font)
+        self.lr_schel_reduce_on_plat_patience_label.setFont(font1)
         self.lr_schel_reduce_on_plat_patience_label.setIndent(15)
 
         self.gridLayout_29.addWidget(self.lr_schel_reduce_on_plat_patience_label, 18, 0, 1, 1)
 
         self.LOSS__TYPE__LABEL = QLabel(self.frame_28)
         self.LOSS__TYPE__LABEL.setObjectName(u"LOSS__TYPE__LABEL")
-        self.LOSS__TYPE__LABEL.setFont(font)
+        self.LOSS__TYPE__LABEL.setFont(font1)
 
         self.gridLayout_29.addWidget(self.LOSS__TYPE__LABEL, 1, 0, 1, 1)
 
         self.TRAIN__BATCH_SIZE__LABEL = QLabel(self.frame_28)
         self.TRAIN__BATCH_SIZE__LABEL.setObjectName(u"TRAIN__BATCH_SIZE__LABEL")
-        self.TRAIN__BATCH_SIZE__LABEL.setFont(font)
+        self.TRAIN__BATCH_SIZE__LABEL.setFont(font1)
         self.TRAIN__BATCH_SIZE__LABEL.setIndent(15)
 
         self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__LABEL, 10, 0, 1, 1)
 
         self.LOSS__CLASS_REBALANCE__LABEL = QLabel(self.frame_28)
         self.LOSS__CLASS_REBALANCE__LABEL.setObjectName(u"LOSS__CLASS_REBALANCE__LABEL")
-        self.LOSS__CLASS_REBALANCE__LABEL.setFont(font)
+        self.LOSS__CLASS_REBALANCE__LABEL.setFont(font1)
 
         self.gridLayout_29.addWidget(self.LOSS__CLASS_REBALANCE__LABEL, 3, 0, 1, 1)
 
@@ -4270,7 +3927,7 @@ class Ui_MainWindow(object):
         self.LOSS__CLASS_REBALANCE__INPUT.setObjectName(u"LOSS__CLASS_REBALANCE__INPUT")
         self.LOSS__CLASS_REBALANCE__INPUT.setMinimumSize(QSize(200, 30))
         self.LOSS__CLASS_REBALANCE__INPUT.setMaximumSize(QSize(200, 30))
-        self.LOSS__CLASS_REBALANCE__INPUT.setFont(font)
+        self.LOSS__CLASS_REBALANCE__INPUT.setFont(font1)
 
         self.gridLayout_29.addWidget(self.LOSS__CLASS_REBALANCE__INPUT, 3, 2, 1, 1)
 
@@ -4288,7 +3945,7 @@ class Ui_MainWindow(object):
         self.TRAIN__ACCUM_ITER__INPUT.setObjectName(u"TRAIN__ACCUM_ITER__INPUT")
         self.TRAIN__ACCUM_ITER__INPUT.setMinimumSize(QSize(200, 30))
         self.TRAIN__ACCUM_ITER__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__ACCUM_ITER__INPUT.setFont(font)
+        self.TRAIN__ACCUM_ITER__INPUT.setFont(font1)
 
         self.gridLayout_29.addWidget(self.TRAIN__ACCUM_ITER__INPUT, 11, 2, 1, 1)
 
@@ -4296,7 +3953,7 @@ class Ui_MainWindow(object):
         self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT")
         self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setMinimumSize(QSize(200, 30))
         self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setFont(font)
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setFont(font1)
 
         self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT, 21, 2, 1, 1)
 
@@ -4304,13 +3961,13 @@ class Ui_MainWindow(object):
         self.MODEL__SAVE_CKPT_FREQ__INPUT.setObjectName(u"MODEL__SAVE_CKPT_FREQ__INPUT")
         self.MODEL__SAVE_CKPT_FREQ__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__SAVE_CKPT_FREQ__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__SAVE_CKPT_FREQ__INPUT.setFont(font)
+        self.MODEL__SAVE_CKPT_FREQ__INPUT.setFont(font1)
 
         self.gridLayout_29.addWidget(self.MODEL__SAVE_CKPT_FREQ__INPUT, 12, 2, 1, 1)
 
         self.TRAIN__OPT_BETAS__LABEL = QLabel(self.frame_28)
         self.TRAIN__OPT_BETAS__LABEL.setObjectName(u"TRAIN__OPT_BETAS__LABEL")
-        self.TRAIN__OPT_BETAS__LABEL.setFont(font)
+        self.TRAIN__OPT_BETAS__LABEL.setFont(font1)
         self.TRAIN__OPT_BETAS__LABEL.setIndent(15)
 
         self.gridLayout_29.addWidget(self.TRAIN__OPT_BETAS__LABEL, 8, 0, 1, 1)
@@ -4322,7 +3979,7 @@ class Ui_MainWindow(object):
         self.TRAIN__OPTIMIZER__INPUT.setObjectName(u"TRAIN__OPTIMIZER__INPUT")
         self.TRAIN__OPTIMIZER__INPUT.setMinimumSize(QSize(200, 30))
         self.TRAIN__OPTIMIZER__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__OPTIMIZER__INPUT.setFont(font)
+        self.TRAIN__OPTIMIZER__INPUT.setFont(font1)
 
         self.gridLayout_29.addWidget(self.TRAIN__OPTIMIZER__INPUT, 0, 2, 1, 1)
 
@@ -4340,7 +3997,7 @@ class Ui_MainWindow(object):
         self.TRAIN__OPT_BETAS__INPUT.setObjectName(u"TRAIN__OPT_BETAS__INPUT")
         self.TRAIN__OPT_BETAS__INPUT.setMinimumSize(QSize(200, 30))
         self.TRAIN__OPT_BETAS__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__OPT_BETAS__INPUT.setFont(font)
+        self.TRAIN__OPT_BETAS__INPUT.setFont(font1)
 
         self.gridLayout_29.addWidget(self.TRAIN__OPT_BETAS__INPUT, 8, 2, 1, 1)
 
@@ -4356,7 +4013,7 @@ class Ui_MainWindow(object):
 
         self.label_143 = QLabel(self.frame_28)
         self.label_143.setObjectName(u"label_143")
-        self.label_143.setFont(font)
+        self.label_143.setFont(font1)
 
         self.gridLayout_29.addWidget(self.label_143, 0, 0, 1, 1)
 
@@ -4364,7 +4021,7 @@ class Ui_MainWindow(object):
         self.LOSS__TYPE__INFO.setObjectName(u"LOSS__TYPE__INFO")
         self.LOSS__TYPE__INFO.setMinimumSize(QSize(30, 30))
         self.LOSS__TYPE__INFO.setMaximumSize(QSize(30, 30))
-        self.LOSS__TYPE__INFO.setFont(font)
+        self.LOSS__TYPE__INFO.setFont(font1)
         self.LOSS__TYPE__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -4373,7 +4030,7 @@ class Ui_MainWindow(object):
 
         self.lr_schel_min_lr_label = QLabel(self.frame_28)
         self.lr_schel_min_lr_label.setObjectName(u"lr_schel_min_lr_label")
-        self.lr_schel_min_lr_label.setFont(font)
+        self.lr_schel_min_lr_label.setFont(font1)
         self.lr_schel_min_lr_label.setIndent(15)
 
         self.gridLayout_29.addWidget(self.lr_schel_min_lr_label, 16, 0, 1, 1)
@@ -4406,7 +4063,7 @@ class Ui_MainWindow(object):
         self.TRAIN__LR_SCHEDULER__NAME__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__NAME__INPUT")
         self.TRAIN__LR_SCHEDULER__NAME__INPUT.setMinimumSize(QSize(200, 30))
         self.TRAIN__LR_SCHEDULER__NAME__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setFont(font)
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setFont(font1)
 
         self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__NAME__INPUT, 14, 2, 1, 1)
 
@@ -4414,7 +4071,7 @@ class Ui_MainWindow(object):
         self.LOSS__TYPE__INPUT.setObjectName(u"LOSS__TYPE__INPUT")
         self.LOSS__TYPE__INPUT.setMinimumSize(QSize(200, 30))
         self.LOSS__TYPE__INPUT.setMaximumSize(QSize(200, 30))
-        self.LOSS__TYPE__INPUT.setFont(font)
+        self.LOSS__TYPE__INPUT.setFont(font1)
 
         self.gridLayout_29.addWidget(self.LOSS__TYPE__INPUT, 1, 2, 1, 1)
 
@@ -4422,13 +4079,13 @@ class Ui_MainWindow(object):
         self.LOSS__WEIGHTS__INPUT.setObjectName(u"LOSS__WEIGHTS__INPUT")
         self.LOSS__WEIGHTS__INPUT.setMinimumSize(QSize(200, 30))
         self.LOSS__WEIGHTS__INPUT.setMaximumSize(QSize(200, 30))
-        self.LOSS__WEIGHTS__INPUT.setFont(font)
+        self.LOSS__WEIGHTS__INPUT.setFont(font1)
 
         self.gridLayout_29.addWidget(self.LOSS__WEIGHTS__INPUT, 2, 2, 1, 1)
 
         self.LOSS__WEIGHTS__LABEL = QLabel(self.frame_28)
         self.LOSS__WEIGHTS__LABEL.setObjectName(u"LOSS__WEIGHTS__LABEL")
-        self.LOSS__WEIGHTS__LABEL.setFont(font)
+        self.LOSS__WEIGHTS__LABEL.setFont(font1)
 
         self.gridLayout_29.addWidget(self.LOSS__WEIGHTS__LABEL, 2, 0, 1, 1)
 
@@ -4436,7 +4093,7 @@ class Ui_MainWindow(object):
         self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__MIN_LR__INPUT")
         self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT.setMinimumSize(QSize(200, 30))
         self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT.setFont(font)
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT.setFont(font1)
 
         self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT, 16, 2, 1, 1)
 
@@ -4454,7 +4111,7 @@ class Ui_MainWindow(object):
         self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setObjectName(u"TRAIN__BATCH_SIZE__CALCULATION__INFO")
         self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setMinimumSize(QSize(30, 30))
         self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setFont(font)
+        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setFont(font1)
         self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setScaledContents(True)
 
         self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__CALCULATION__INFO, 9, 1, 1, 1)
@@ -4463,7 +4120,7 @@ class Ui_MainWindow(object):
         self.TRAIN__LR__INPUT.setObjectName(u"TRAIN__LR__INPUT")
         self.TRAIN__LR__INPUT.setMinimumSize(QSize(200, 30))
         self.TRAIN__LR__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__LR__INPUT.setFont(font)
+        self.TRAIN__LR__INPUT.setFont(font1)
 
         self.gridLayout_29.addWidget(self.TRAIN__LR__INPUT, 6, 2, 1, 1)
 
@@ -4471,7 +4128,7 @@ class Ui_MainWindow(object):
         self.TRAIN__METRICS__INFO.setObjectName(u"TRAIN__METRICS__INFO")
         self.TRAIN__METRICS__INFO.setMinimumSize(QSize(30, 30))
         self.TRAIN__METRICS__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__METRICS__INFO.setFont(font)
+        self.TRAIN__METRICS__INFO.setFont(font1)
         self.TRAIN__METRICS__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -4482,7 +4139,7 @@ class Ui_MainWindow(object):
         self.TRAIN__W_DECAY__INPUT.setObjectName(u"TRAIN__W_DECAY__INPUT")
         self.TRAIN__W_DECAY__INPUT.setMinimumSize(QSize(200, 30))
         self.TRAIN__W_DECAY__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__W_DECAY__INPUT.setFont(font)
+        self.TRAIN__W_DECAY__INPUT.setFont(font1)
 
         self.gridLayout_29.addWidget(self.TRAIN__W_DECAY__INPUT, 7, 2, 1, 1)
 
@@ -4502,7 +4159,7 @@ class Ui_MainWindow(object):
         self.TRAIN__PROFILER__INPUT.setObjectName(u"TRAIN__PROFILER__INPUT")
         self.TRAIN__PROFILER__INPUT.setMinimumSize(QSize(200, 30))
         self.TRAIN__PROFILER__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__PROFILER__INPUT.setFont(font)
+        self.TRAIN__PROFILER__INPUT.setFont(font1)
 
         self.gridLayout_29.addWidget(self.TRAIN__PROFILER__INPUT, 24, 2, 1, 1)
 
@@ -4510,7 +4167,7 @@ class Ui_MainWindow(object):
         self.TRAIN__VERBOSE__INFO.setObjectName(u"TRAIN__VERBOSE__INFO")
         self.TRAIN__VERBOSE__INFO.setMinimumSize(QSize(30, 30))
         self.TRAIN__VERBOSE__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__VERBOSE__INFO.setFont(font8)
+        self.TRAIN__VERBOSE__INFO.setFont(font9)
         self.TRAIN__VERBOSE__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -4521,7 +4178,7 @@ class Ui_MainWindow(object):
         self.LOSS__WEIGHTS__INFO.setObjectName(u"LOSS__WEIGHTS__INFO")
         self.LOSS__WEIGHTS__INFO.setMinimumSize(QSize(30, 30))
         self.LOSS__WEIGHTS__INFO.setMaximumSize(QSize(30, 30))
-        self.LOSS__WEIGHTS__INFO.setFont(font)
+        self.LOSS__WEIGHTS__INFO.setFont(font1)
         self.LOSS__WEIGHTS__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -4530,20 +4187,20 @@ class Ui_MainWindow(object):
 
         self.label_151 = QLabel(self.frame_28)
         self.label_151.setObjectName(u"label_151")
-        self.label_151.setFont(font)
+        self.label_151.setFont(font1)
 
         self.gridLayout_29.addWidget(self.label_151, 6, 0, 1, 1)
 
         self.adamw_weight_decay_label = QLabel(self.frame_28)
         self.adamw_weight_decay_label.setObjectName(u"adamw_weight_decay_label")
-        self.adamw_weight_decay_label.setFont(font)
+        self.adamw_weight_decay_label.setFont(font1)
         self.adamw_weight_decay_label.setIndent(15)
 
         self.gridLayout_29.addWidget(self.adamw_weight_decay_label, 7, 0, 1, 1)
 
         self.TRAIN__VERBOSE__LABEL = QLabel(self.frame_28)
         self.TRAIN__VERBOSE__LABEL.setObjectName(u"TRAIN__VERBOSE__LABEL")
-        self.TRAIN__VERBOSE__LABEL.setFont(font)
+        self.TRAIN__VERBOSE__LABEL.setFont(font1)
 
         self.gridLayout_29.addWidget(self.TRAIN__VERBOSE__LABEL, 29, 0, 1, 1)
 
@@ -4551,7 +4208,7 @@ class Ui_MainWindow(object):
         self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT")
         self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setMinimumSize(QSize(200, 30))
         self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setFont(font)
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setFont(font1)
 
         self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT, 19, 2, 1, 1)
 
@@ -4569,7 +4226,7 @@ class Ui_MainWindow(object):
         self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT")
         self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setMinimumSize(QSize(200, 30))
         self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setFont(font)
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setFont(font1)
 
         self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT, 18, 2, 1, 1)
 
@@ -4579,7 +4236,7 @@ class Ui_MainWindow(object):
         self.TRAIN__BATCH_SIZE__CALCULATION__INPUT.setObjectName(u"TRAIN__BATCH_SIZE__CALCULATION__INPUT")
         self.TRAIN__BATCH_SIZE__CALCULATION__INPUT.setMinimumSize(QSize(200, 30))
         self.TRAIN__BATCH_SIZE__CALCULATION__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__BATCH_SIZE__CALCULATION__INPUT.setFont(font)
+        self.TRAIN__BATCH_SIZE__CALCULATION__INPUT.setFont(font1)
 
         self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__CALCULATION__INPUT, 9, 2, 1, 1)
 
@@ -4587,13 +4244,13 @@ class Ui_MainWindow(object):
         self.TRAIN__METRICS__INPUT.setObjectName(u"TRAIN__METRICS__INPUT")
         self.TRAIN__METRICS__INPUT.setMinimumSize(QSize(200, 30))
         self.TRAIN__METRICS__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__METRICS__INPUT.setFont(font)
+        self.TRAIN__METRICS__INPUT.setFont(font1)
 
         self.gridLayout_29.addWidget(self.TRAIN__METRICS__INPUT, 4, 2, 1, 1)
 
         self.MODEL__SAVE_CKPT_FREQ__LABEL = QLabel(self.frame_28)
         self.MODEL__SAVE_CKPT_FREQ__LABEL.setObjectName(u"MODEL__SAVE_CKPT_FREQ__LABEL")
-        self.MODEL__SAVE_CKPT_FREQ__LABEL.setFont(font)
+        self.MODEL__SAVE_CKPT_FREQ__LABEL.setFont(font1)
 
         self.gridLayout_29.addWidget(self.MODEL__SAVE_CKPT_FREQ__LABEL, 12, 0, 1, 1)
 
@@ -4601,7 +4258,7 @@ class Ui_MainWindow(object):
         self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setObjectName(u"TRAIN__PROFILER_BATCH_RANGE__INPUT")
         self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setMinimumSize(QSize(200, 30))
         self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setFont(font)
+        self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setFont(font1)
 
         self.gridLayout_29.addWidget(self.TRAIN__PROFILER_BATCH_RANGE__INPUT, 27, 2, 1, 1)
 
@@ -4621,20 +4278,20 @@ class Ui_MainWindow(object):
         self.TRAIN__VERBOSE__INPUT.setObjectName(u"TRAIN__VERBOSE__INPUT")
         self.TRAIN__VERBOSE__INPUT.setMinimumSize(QSize(200, 30))
         self.TRAIN__VERBOSE__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__VERBOSE__INPUT.setFont(font)
+        self.TRAIN__VERBOSE__INPUT.setFont(font1)
 
         self.gridLayout_29.addWidget(self.TRAIN__VERBOSE__INPUT, 29, 2, 1, 1)
 
         self.profiler_batch_range_label = QLabel(self.frame_28)
         self.profiler_batch_range_label.setObjectName(u"profiler_batch_range_label")
-        self.profiler_batch_range_label.setFont(font)
+        self.profiler_batch_range_label.setFont(font1)
         self.profiler_batch_range_label.setIndent(15)
 
         self.gridLayout_29.addWidget(self.profiler_batch_range_label, 27, 0, 1, 1)
 
         self.lr_schel_reduce_on_plat_factor_label = QLabel(self.frame_28)
         self.lr_schel_reduce_on_plat_factor_label.setObjectName(u"lr_schel_reduce_on_plat_factor_label")
-        self.lr_schel_reduce_on_plat_factor_label.setFont(font)
+        self.lr_schel_reduce_on_plat_factor_label.setFont(font1)
         self.lr_schel_reduce_on_plat_factor_label.setIndent(15)
 
         self.gridLayout_29.addWidget(self.lr_schel_reduce_on_plat_factor_label, 19, 0, 1, 1)
@@ -4643,13 +4300,13 @@ class Ui_MainWindow(object):
         self.TRAIN__BATCH_SIZE__INPUT.setObjectName(u"TRAIN__BATCH_SIZE__INPUT")
         self.TRAIN__BATCH_SIZE__INPUT.setMinimumSize(QSize(200, 30))
         self.TRAIN__BATCH_SIZE__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__BATCH_SIZE__INPUT.setFont(font)
+        self.TRAIN__BATCH_SIZE__INPUT.setFont(font1)
 
         self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__INPUT, 10, 2, 1, 1)
 
         self.label_160 = QLabel(self.frame_28)
         self.label_160.setObjectName(u"label_160")
-        self.label_160.setFont(font)
+        self.label_160.setFont(font1)
 
         self.gridLayout_29.addWidget(self.label_160, 24, 0, 1, 1)
 
@@ -4677,7 +4334,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__VAL__INPUT.setObjectName(u"DATA__PREPROCESS__VAL__INPUT")
         self.DATA__PREPROCESS__VAL__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__VAL__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__VAL__INPUT.setFont(font)
+        self.DATA__PREPROCESS__VAL__INPUT.setFont(font1)
 
         self.gridLayout_74.addWidget(self.DATA__PREPROCESS__VAL__INPUT, 1, 2, 1, 1)
 
@@ -4703,7 +4360,7 @@ class Ui_MainWindow(object):
 
         self.DATA__PREPROCESS__VAL__LABEL = QLabel(self.frame_61)
         self.DATA__PREPROCESS__VAL__LABEL.setObjectName(u"DATA__PREPROCESS__VAL__LABEL")
-        self.DATA__PREPROCESS__VAL__LABEL.setFont(font)
+        self.DATA__PREPROCESS__VAL__LABEL.setFont(font1)
 
         self.gridLayout_74.addWidget(self.DATA__PREPROCESS__VAL__LABEL, 1, 0, 1, 1)
 
@@ -4713,14 +4370,14 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__TRAIN__INPUT.setObjectName(u"DATA__PREPROCESS__TRAIN__INPUT")
         self.DATA__PREPROCESS__TRAIN__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__TRAIN__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__TRAIN__INPUT.setFont(font)
+        self.DATA__PREPROCESS__TRAIN__INPUT.setFont(font1)
 
         self.gridLayout_74.addWidget(self.DATA__PREPROCESS__TRAIN__INPUT, 0, 2, 1, 1)
 
         self.DATA__PREPROCESS__TRAIN__LABEL = QLabel(self.frame_61)
         self.DATA__PREPROCESS__TRAIN__LABEL.setObjectName(u"DATA__PREPROCESS__TRAIN__LABEL")
         self.DATA__PREPROCESS__TRAIN__LABEL.setMaximumSize(QSize(16777215, 16777215))
-        self.DATA__PREPROCESS__TRAIN__LABEL.setFont(font)
+        self.DATA__PREPROCESS__TRAIN__LABEL.setFont(font1)
 
         self.gridLayout_74.addWidget(self.DATA__PREPROCESS__TRAIN__LABEL, 0, 0, 1, 1)
 
@@ -4729,7 +4386,6 @@ class Ui_MainWindow(object):
 
         self.preprocessing_frame = QFrame(self.train_advanced_options_frame_2)
         self.preprocessing_frame.setObjectName(u"preprocessing_frame")
-        self.preprocessing_frame.setStyleSheet(u"background: rgb(246,246,246);")
         self.preprocessing_frame.setFrameShape(QFrame.Box)
         self.preprocessing_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_71 = QGridLayout(self.preprocessing_frame)
@@ -4750,7 +4406,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT")
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT.setFont(font)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT, 14, 3, 1, 1)
 
@@ -4776,14 +4432,14 @@ class Ui_MainWindow(object):
 
         self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__LABEL = QLabel(self.preprocessing_frame)
         self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__LABEL.setObjectName(u"DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__LABEL")
-        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__LABEL.setFont(font)
+        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__LABEL.setFont(font1)
         self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__LABEL.setIndent(15)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__LABEL, 21, 0, 1, 1)
 
         self.DATA__PREPROCESS__RESIZE__LABEL = QLabel(self.preprocessing_frame)
         self.DATA__PREPROCESS__RESIZE__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__LABEL")
-        self.DATA__PREPROCESS__RESIZE__LABEL.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__LABEL.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__LABEL, 0, 0, 1, 1)
 
@@ -4796,7 +4452,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT")
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.setFont(font)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT, 10, 3, 1, 1)
 
@@ -4806,7 +4462,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__RESIZE__CLIP__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__CLIP__INPUT")
         self.DATA__PREPROCESS__RESIZE__CLIP__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__RESIZE__CLIP__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__CLIP__INPUT.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__CLIP__INPUT.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__CLIP__INPUT, 5, 3, 1, 1)
 
@@ -4822,7 +4478,7 @@ class Ui_MainWindow(object):
 
         self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__LABEL = QLabel(self.preprocessing_frame)
         self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__LABEL")
-        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__LABEL.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__LABEL.setFont(font1)
         self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__LABEL.setIndent(15)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__LABEL, 1, 0, 1, 1)
@@ -4849,13 +4505,13 @@ class Ui_MainWindow(object):
 
         self.DATA__PREPROCESS__CLAHE__LABEL = QLabel(self.preprocessing_frame)
         self.DATA__PREPROCESS__CLAHE__LABEL.setObjectName(u"DATA__PREPROCESS__CLAHE__LABEL")
-        self.DATA__PREPROCESS__CLAHE__LABEL.setFont(font)
+        self.DATA__PREPROCESS__CLAHE__LABEL.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__LABEL, 16, 0, 1, 1)
 
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__LABEL = QLabel(self.preprocessing_frame)
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__LABEL.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__LABEL")
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__LABEL.setFont(font)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__LABEL.setFont(font1)
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__LABEL.setIndent(15)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__LABEL, 15, 0, 1, 1)
@@ -4869,7 +4525,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__RESIZE__MODE__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__MODE__INPUT")
         self.DATA__PREPROCESS__RESIZE__MODE__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__RESIZE__MODE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__MODE__INPUT, 3, 3, 1, 1)
 
@@ -4879,7 +4535,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT")
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT.setFont(font)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT, 8, 3, 1, 1)
 
@@ -4895,7 +4551,7 @@ class Ui_MainWindow(object):
 
         self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__LABEL = QLabel(self.preprocessing_frame)
         self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__LABEL.setObjectName(u"DATA__PREPROCESS__CANNY__LOW_THRESHOLD__LABEL")
-        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__LABEL.setFont(font)
+        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__LABEL.setFont(font1)
         self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__LABEL.setIndent(15)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__LABEL, 20, 0, 1, 1)
@@ -4904,13 +4560,13 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT")
         self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT, 1, 3, 1, 1)
 
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__LABEL = QLabel(self.preprocessing_frame)
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__LABEL.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__LABEL")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__LABEL.setFont(font)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__LABEL.setFont(font1)
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__LABEL.setIndent(15)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__LABEL, 10, 0, 1, 1)
@@ -4941,7 +4597,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT")
         self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT.setFont(font)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT, 12, 3, 1, 1)
 
@@ -4949,7 +4605,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT")
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT.setMinimumSize(QSize(500, 30))
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT.setMaximumSize(QSize(500, 30))
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT.setFont(font)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT, 15, 3, 1, 1)
 
@@ -4979,7 +4635,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT")
         self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT, 7, 3, 1, 1)
 
@@ -4987,7 +4643,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT.setObjectName(u"DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT")
         self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT.setFont(font)
+        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT, 18, 3, 1, 1)
 
@@ -4995,9 +4651,9 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__RESIZE__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__INFO")
         self.DATA__PREPROCESS__RESIZE__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__RESIZE__INFO.setMaximumSize(QSize(30, 30))
-        font10 = QFont()
-        font10.setFamilies([u"URW Gothic [urw]"])
-        self.DATA__PREPROCESS__RESIZE__INFO.setFont(font10)
+        font11 = QFont()
+        font11.setFamilies([u"URW Gothic [urw]"])
+        self.DATA__PREPROCESS__RESIZE__INFO.setFont(font11)
         self.DATA__PREPROCESS__RESIZE__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -5008,7 +4664,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT")
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT.setFont(font)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT, 9, 3, 1, 1)
 
@@ -5016,7 +4672,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT")
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT.setFont(font)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT, 11, 3, 1, 1)
 
@@ -5026,13 +4682,13 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__CLAHE__ENABLE__INPUT.setObjectName(u"DATA__PREPROCESS__CLAHE__ENABLE__INPUT")
         self.DATA__PREPROCESS__CLAHE__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__CLAHE__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__CLAHE__ENABLE__INPUT.setFont(font)
+        self.DATA__PREPROCESS__CLAHE__ENABLE__INPUT.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__ENABLE__INPUT, 16, 3, 1, 1)
 
         self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__LABEL = QLabel(self.preprocessing_frame)
         self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__ANTI_ALIASING__LABEL")
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__LABEL.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__LABEL.setFont(font1)
         self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__LABEL.setIndent(15)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__LABEL, 7, 0, 1, 1)
@@ -5041,13 +4697,13 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT.setObjectName(u"DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT")
         self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT.setFont(font)
+        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT, 21, 3, 1, 1)
 
         self.DATA__PREPROCESS__MEDIAN_BLUR__LABEL = QLabel(self.preprocessing_frame)
         self.DATA__PREPROCESS__MEDIAN_BLUR__LABEL.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__LABEL")
-        self.DATA__PREPROCESS__MEDIAN_BLUR__LABEL.setFont(font)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__LABEL.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__LABEL, 12, 0, 1, 1)
 
@@ -5081,13 +4737,13 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__ORDER__INPUT")
         self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__ORDER__INPUT, 2, 3, 1, 1)
 
         self.DATA__PREPROCESS__CANNY__LABEL = QLabel(self.preprocessing_frame)
         self.DATA__PREPROCESS__CANNY__LABEL.setObjectName(u"DATA__PREPROCESS__CANNY__LABEL")
-        self.DATA__PREPROCESS__CANNY__LABEL.setFont(font)
+        self.DATA__PREPROCESS__CANNY__LABEL.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__LABEL, 19, 0, 1, 1)
 
@@ -5103,14 +4759,14 @@ class Ui_MainWindow(object):
 
         self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__LABEL = QLabel(self.preprocessing_frame)
         self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__LABEL")
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__LABEL.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__LABEL.setFont(font1)
         self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__LABEL.setIndent(15)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__LABEL, 6, 0, 1, 1)
 
         self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__LABEL = QLabel(self.preprocessing_frame)
         self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__LABEL.setObjectName(u"DATA__PREPROCESS__CLAHE__KERNEL_SIZE__LABEL")
-        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__LABEL.setFont(font)
+        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__LABEL.setFont(font1)
         self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__LABEL.setIndent(15)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__LABEL, 17, 0, 1, 1)
@@ -5121,13 +4777,13 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__RESIZE__ENABLE__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__ENABLE__INPUT")
         self.DATA__PREPROCESS__RESIZE__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__RESIZE__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__ENABLE__INPUT.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__ENABLE__INPUT.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__ENABLE__INPUT, 0, 3, 1, 1)
 
         self.DATA__PREPROCESS__RESIZE__CVAL__LABEL = QLabel(self.preprocessing_frame)
         self.DATA__PREPROCESS__RESIZE__CVAL__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__CVAL__LABEL")
-        self.DATA__PREPROCESS__RESIZE__CVAL__LABEL.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__CVAL__LABEL.setFont(font1)
         self.DATA__PREPROCESS__RESIZE__CVAL__LABEL.setIndent(15)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__CVAL__LABEL, 4, 0, 1, 1)
@@ -5146,7 +4802,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__RESIZE__CVAL__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__CVAL__INPUT")
         self.DATA__PREPROCESS__RESIZE__CVAL__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__RESIZE__CVAL__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__CVAL__INPUT.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__CVAL__INPUT.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__CVAL__INPUT, 4, 3, 1, 1)
 
@@ -5154,7 +4810,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT.setObjectName(u"DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT")
         self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT.setFont(font)
+        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT, 20, 3, 1, 1)
 
@@ -5164,25 +4820,25 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__CANNY__ENABLE__INPUT.setObjectName(u"DATA__PREPROCESS__CANNY__ENABLE__INPUT")
         self.DATA__PREPROCESS__CANNY__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__CANNY__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__CANNY__ENABLE__INPUT.setFont(font)
+        self.DATA__PREPROCESS__CANNY__ENABLE__INPUT.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__ENABLE__INPUT, 19, 3, 1, 1)
 
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__LABEL = QLabel(self.preprocessing_frame)
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__LABEL.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__LABEL")
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__LABEL.setFont(font)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__LABEL.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__LABEL, 14, 0, 1, 1)
 
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__LABEL = QLabel(self.preprocessing_frame)
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__LABEL.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__LABEL")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__LABEL.setFont(font)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__LABEL.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__LABEL, 8, 0, 1, 1)
 
         self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__LABEL = QLabel(self.preprocessing_frame)
         self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__LABEL.setObjectName(u"DATA__PREPROCESS__CLAHE__CLIP_LIMIT__LABEL")
-        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__LABEL.setFont(font)
+        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__LABEL.setFont(font1)
         self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__LABEL.setIndent(15)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__LABEL, 18, 0, 1, 1)
@@ -5191,7 +4847,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT.setObjectName(u"DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT")
         self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT.setFont(font)
+        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT, 17, 3, 1, 1)
 
@@ -5217,21 +4873,21 @@ class Ui_MainWindow(object):
 
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__LABEL = QLabel(self.preprocessing_frame)
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__LABEL.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__LABEL")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__LABEL.setFont(font)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__LABEL.setFont(font1)
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__LABEL.setIndent(15)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__LABEL, 11, 0, 1, 1)
 
         self.DATA__PREPROCESS__RESIZE__ORDER__LABEL = QLabel(self.preprocessing_frame)
         self.DATA__PREPROCESS__RESIZE__ORDER__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__ORDER__LABEL")
-        self.DATA__PREPROCESS__RESIZE__ORDER__LABEL.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__ORDER__LABEL.setFont(font1)
         self.DATA__PREPROCESS__RESIZE__ORDER__LABEL.setIndent(15)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__ORDER__LABEL, 2, 0, 1, 1)
 
         self.DATA__PREPROCESS__RESIZE__CLIP__LABEL = QLabel(self.preprocessing_frame)
         self.DATA__PREPROCESS__RESIZE__CLIP__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__CLIP__LABEL")
-        self.DATA__PREPROCESS__RESIZE__CLIP__LABEL.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__CLIP__LABEL.setFont(font1)
         self.DATA__PREPROCESS__RESIZE__CLIP__LABEL.setIndent(15)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__CLIP__LABEL, 5, 0, 1, 1)
@@ -5248,7 +4904,7 @@ class Ui_MainWindow(object):
 
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__LABEL = QLabel(self.preprocessing_frame)
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__LABEL.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__LABEL")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__LABEL.setFont(font)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__LABEL.setFont(font1)
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__LABEL.setIndent(15)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__LABEL, 9, 0, 1, 1)
@@ -5256,7 +4912,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN = QPushButton(self.preprocessing_frame)
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN")
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN.setMaximumSize(QSize(130, 30))
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN.setFont(font)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN, 15, 4, 1, 1)
 
@@ -5266,7 +4922,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT")
         self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT, 6, 3, 1, 1)
 
@@ -5276,7 +4932,7 @@ class Ui_MainWindow(object):
 
         self.DATA__PREPROCESS__RESIZE__MODE__LABEL = QLabel(self.preprocessing_frame)
         self.DATA__PREPROCESS__RESIZE__MODE__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__MODE__LABEL")
-        self.DATA__PREPROCESS__RESIZE__MODE__LABEL.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__MODE__LABEL.setFont(font1)
         self.DATA__PREPROCESS__RESIZE__MODE__LABEL.setIndent(15)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__MODE__LABEL, 3, 0, 1, 1)
@@ -5303,7 +4959,7 @@ class Ui_MainWindow(object):
 
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL = QLabel(self.preprocessing_frame)
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL")
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL.setFont(font)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL.setFont(font1)
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL.setIndent(15)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL, 13, 0, 1, 1)
@@ -5312,7 +4968,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO")
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setFont(font)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setFont(font1)
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -5323,7 +4979,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT")
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT.setFont(font)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT.setFont(font1)
 
         self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT, 13, 3, 1, 1)
 
@@ -5333,22 +4989,21 @@ class Ui_MainWindow(object):
         self.label_3 = QLabel(self.train_advanced_options_frame_2)
         self.label_3.setObjectName(u"label_3")
         self.label_3.setMaximumSize(QSize(150, 16777215))
-        self.label_3.setFont(font)
+        self.label_3.setFont(font1)
 
         self.gridLayout_4.addWidget(self.label_3, 1, 0, 1, 1)
 
         self.label_30 = QLabel(self.train_advanced_options_frame_2)
         self.label_30.setObjectName(u"label_30")
         self.label_30.setMaximumSize(QSize(100, 16777215))
-        self.label_30.setFont(font)
+        self.label_30.setFont(font1)
 
         self.gridLayout_4.addWidget(self.label_30, 14, 0, 1, 1)
 
         self.da_frame = QFrame(self.train_advanced_options_frame_2)
         self.da_frame.setObjectName(u"da_frame")
         self.da_frame.setMinimumSize(QSize(0, 0))
-        self.da_frame.setFont(font)
-        self.da_frame.setStyleSheet(u"background: rgb(246,246,246);")
+        self.da_frame.setFont(font1)
         self.da_frame.setFrameShape(QFrame.Box)
         self.da_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_25 = QGridLayout(self.da_frame)
@@ -5377,7 +5032,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__SHEAR_RANGE__INPUT.setObjectName(u"AUGMENTOR__SHEAR_RANGE__INPUT")
         self.AUGMENTOR__SHEAR_RANGE__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__SHEAR_RANGE__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__SHEAR_RANGE__INPUT.setFont(font)
+        self.AUGMENTOR__SHEAR_RANGE__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SHEAR_RANGE__INPUT, 11, 2, 1, 1)
 
@@ -5407,7 +5062,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__COUT_APPLY_TO_MASK__INPUT.setObjectName(u"AUGMENTOR__COUT_APPLY_TO_MASK__INPUT")
         self.AUGMENTOR__COUT_APPLY_TO_MASK__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__COUT_APPLY_TO_MASK__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__COUT_APPLY_TO_MASK__INPUT.setFont(font)
+        self.AUGMENTOR__COUT_APPLY_TO_MASK__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__COUT_APPLY_TO_MASK__INPUT, 45, 2, 1, 1)
 
@@ -5427,7 +5082,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__VFLIP__INPUT.setObjectName(u"AUGMENTOR__VFLIP__INPUT")
         self.AUGMENTOR__VFLIP__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__VFLIP__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__VFLIP__INPUT.setFont(font)
+        self.AUGMENTOR__VFLIP__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__VFLIP__INPUT, 18, 2, 1, 1)
 
@@ -5447,7 +5102,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__GRIDMASK__INPUT.setObjectName(u"AUGMENTOR__GRIDMASK__INPUT")
         self.AUGMENTOR__GRIDMASK__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__GRIDMASK__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__GRIDMASK__INPUT.setFont(font)
+        self.AUGMENTOR__GRIDMASK__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GRIDMASK__INPUT, 63, 2, 1, 1)
 
@@ -5473,7 +5128,7 @@ class Ui_MainWindow(object):
 
         self.da_shear_range_label = QLabel(self.da_frame)
         self.da_shear_range_label.setObjectName(u"da_shear_range_label")
-        self.da_shear_range_label.setFont(font)
+        self.da_shear_range_label.setFont(font1)
         self.da_shear_range_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_shear_range_label, 11, 0, 1, 1)
@@ -5484,20 +5139,20 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__SHUFFLE_TRAIN_DATA_EACH_EPOCH__INPUT.setObjectName(u"AUGMENTOR__SHUFFLE_TRAIN_DATA_EACH_EPOCH__INPUT")
         self.AUGMENTOR__SHUFFLE_TRAIN_DATA_EACH_EPOCH__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__SHUFFLE_TRAIN_DATA_EACH_EPOCH__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__SHUFFLE_TRAIN_DATA_EACH_EPOCH__INPUT.setFont(font)
+        self.AUGMENTOR__SHUFFLE_TRAIN_DATA_EACH_EPOCH__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SHUFFLE_TRAIN_DATA_EACH_EPOCH__INPUT, 5, 2, 1, 1)
 
         self.da_grid_d_range_label = QLabel(self.da_frame)
         self.da_grid_d_range_label.setObjectName(u"da_grid_d_range_label")
-        self.da_grid_d_range_label.setFont(font)
+        self.da_grid_d_range_label.setFont(font1)
         self.da_grid_d_range_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_grid_d_range_label, 65, 0, 1, 1)
 
         self.da_gaussian_noise_mean_label = QLabel(self.da_frame)
         self.da_gaussian_noise_mean_label.setObjectName(u"da_gaussian_noise_mean_label")
-        self.da_gaussian_noise_mean_label.setFont(font)
+        self.da_gaussian_noise_mean_label.setFont(font1)
         self.da_gaussian_noise_mean_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_gaussian_noise_mean_label, 69, 0, 1, 1)
@@ -5508,20 +5163,20 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__CUTOUT__INPUT.setObjectName(u"AUGMENTOR__CUTOUT__INPUT")
         self.AUGMENTOR__CUTOUT__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__CUTOUT__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__CUTOUT__INPUT.setFont(font)
+        self.AUGMENTOR__CUTOUT__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CUTOUT__INPUT, 41, 2, 1, 1)
 
         self.da_cutnoise_number_iter_label = QLabel(self.da_frame)
         self.da_cutnoise_number_iter_label.setObjectName(u"da_cutnoise_number_iter_label")
-        self.da_cutnoise_number_iter_label.setFont(font)
+        self.da_cutnoise_number_iter_label.setFont(font1)
         self.da_cutnoise_number_iter_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_cutnoise_number_iter_label, 54, 0, 1, 1)
 
         self.da_gaussian_noise_use_input_img_label = QLabel(self.da_frame)
         self.da_gaussian_noise_use_input_img_label.setObjectName(u"da_gaussian_noise_use_input_img_label")
-        self.da_gaussian_noise_use_input_img_label.setFont(font)
+        self.da_gaussian_noise_use_input_img_label.setFont(font1)
         self.da_gaussian_noise_use_input_img_label.setAcceptDrops(False)
         self.da_gaussian_noise_use_input_img_label.setIndent(15)
 
@@ -5533,7 +5188,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__CONTRAST__INPUT.setObjectName(u"AUGMENTOR__CONTRAST__INPUT")
         self.AUGMENTOR__CONTRAST__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__CONTRAST__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__CONTRAST__INPUT.setFont(font)
+        self.AUGMENTOR__CONTRAST__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CONTRAST__INPUT, 36, 2, 1, 1)
 
@@ -5541,13 +5196,13 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__MOTB_K_RANGE__INPUT.setObjectName(u"AUGMENTOR__MOTB_K_RANGE__INPUT")
         self.AUGMENTOR__MOTB_K_RANGE__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__MOTB_K_RANGE__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__MOTB_K_RANGE__INPUT.setFont(font)
+        self.AUGMENTOR__MOTB_K_RANGE__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__MOTB_K_RANGE__INPUT, 30, 2, 1, 1)
 
         self.label_73 = QLabel(self.da_frame)
         self.label_73.setObjectName(u"label_73")
-        self.label_73.setFont(font)
+        self.label_73.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_73, 17, 0, 1, 1)
 
@@ -5567,7 +5222,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__GAUSSIAN_NOISE__INPUT.setObjectName(u"AUGMENTOR__GAUSSIAN_NOISE__INPUT")
         self.AUGMENTOR__GAUSSIAN_NOISE__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__GAUSSIAN_NOISE__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__GAUSSIAN_NOISE__INPUT.setFont(font)
+        self.AUGMENTOR__GAUSSIAN_NOISE__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GAUSSIAN_NOISE__INPUT, 68, 2, 1, 1)
 
@@ -5577,7 +5232,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__GAUSSIAN_NOISE_USE_INPUT_IMG_MEAN_AND_VAR__INPUT.setObjectName(u"AUGMENTOR__GAUSSIAN_NOISE_USE_INPUT_IMG_MEAN_AND_VAR__INPUT")
         self.AUGMENTOR__GAUSSIAN_NOISE_USE_INPUT_IMG_MEAN_AND_VAR__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__GAUSSIAN_NOISE_USE_INPUT_IMG_MEAN_AND_VAR__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__GAUSSIAN_NOISE_USE_INPUT_IMG_MEAN_AND_VAR__INPUT.setFont(font)
+        self.AUGMENTOR__GAUSSIAN_NOISE_USE_INPUT_IMG_MEAN_AND_VAR__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GAUSSIAN_NOISE_USE_INPUT_IMG_MEAN_AND_VAR__INPUT, 71, 2, 1, 1)
 
@@ -5585,13 +5240,13 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__CNOISE_NB_ITERATIONS__INPUT.setObjectName(u"AUGMENTOR__CNOISE_NB_ITERATIONS__INPUT")
         self.AUGMENTOR__CNOISE_NB_ITERATIONS__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__CNOISE_NB_ITERATIONS__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__CNOISE_NB_ITERATIONS__INPUT.setFont(font)
+        self.AUGMENTOR__CNOISE_NB_ITERATIONS__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CNOISE_NB_ITERATIONS__INPUT, 54, 2, 1, 1)
 
         self.label_103 = QLabel(self.da_frame)
         self.label_103.setObjectName(u"label_103")
-        self.label_103.setFont(font)
+        self.label_103.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_103, 41, 0, 1, 1)
 
@@ -5599,19 +5254,19 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__MB_KERNEL__INPUT.setObjectName(u"AUGMENTOR__MB_KERNEL__INPUT")
         self.AUGMENTOR__MB_KERNEL__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__MB_KERNEL__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__MB_KERNEL__INPUT.setFont(font)
+        self.AUGMENTOR__MB_KERNEL__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__MB_KERNEL__INPUT, 28, 2, 1, 1)
 
         self.da_cutnoise_label = QLabel(self.da_frame)
         self.da_cutnoise_label.setObjectName(u"da_cutnoise_label")
-        self.da_cutnoise_label.setFont(font)
+        self.da_cutnoise_label.setFont(font1)
 
         self.gridLayout_25.addWidget(self.da_cutnoise_label, 52, 0, 1, 1)
 
         self.da_median_blur_k_size_label = QLabel(self.da_frame)
         self.da_median_blur_k_size_label.setObjectName(u"da_median_blur_k_size_label")
-        self.da_median_blur_k_size_label.setFont(font)
+        self.da_median_blur_k_size_label.setFont(font1)
         self.da_median_blur_k_size_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_median_blur_k_size_label, 28, 0, 1, 1)
@@ -5622,7 +5277,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__SHUFFLE_VAL_DATA_EACH_EPOCH__INPUT.setObjectName(u"AUGMENTOR__SHUFFLE_VAL_DATA_EACH_EPOCH__INPUT")
         self.AUGMENTOR__SHUFFLE_VAL_DATA_EACH_EPOCH__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__SHUFFLE_VAL_DATA_EACH_EPOCH__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__SHUFFLE_VAL_DATA_EACH_EPOCH__INPUT.setFont(font)
+        self.AUGMENTOR__SHUFFLE_VAL_DATA_EACH_EPOCH__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SHUFFLE_VAL_DATA_EACH_EPOCH__INPUT, 6, 2, 1, 1)
 
@@ -5642,7 +5297,7 @@ class Ui_MainWindow(object):
 
         self.da_missing_sections_iteration_range_label = QLabel(self.da_frame)
         self.da_missing_sections_iteration_range_label.setObjectName(u"da_missing_sections_iteration_range_label")
-        self.da_missing_sections_iteration_range_label.setFont(font)
+        self.da_missing_sections_iteration_range_label.setFont(font1)
         self.da_missing_sections_iteration_range_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_missing_sections_iteration_range_label, 60, 0, 1, 1)
@@ -5663,13 +5318,13 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__BRIGHTNESS__INPUT.setObjectName(u"AUGMENTOR__BRIGHTNESS__INPUT")
         self.AUGMENTOR__BRIGHTNESS__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__BRIGHTNESS__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__BRIGHTNESS__INPUT.setFont(font)
+        self.AUGMENTOR__BRIGHTNESS__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__BRIGHTNESS__INPUT, 33, 2, 1, 1)
 
         self.label_110 = QLabel(self.da_frame)
         self.label_110.setObjectName(u"label_110")
-        self.label_110.setFont(font)
+        self.label_110.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_110, 50, 0, 1, 1)
 
@@ -5679,7 +5334,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__DRAW_GRID__INPUT.setObjectName(u"AUGMENTOR__DRAW_GRID__INPUT")
         self.AUGMENTOR__DRAW_GRID__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__DRAW_GRID__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__DRAW_GRID__INPUT.setFont(font)
+        self.AUGMENTOR__DRAW_GRID__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__DRAW_GRID__INPUT, 3, 2, 1, 1)
 
@@ -5697,7 +5352,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__G_SIGMA__INPUT.setObjectName(u"AUGMENTOR__G_SIGMA__INPUT")
         self.AUGMENTOR__G_SIGMA__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__G_SIGMA__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__G_SIGMA__INPUT.setFont(font)
+        self.AUGMENTOR__G_SIGMA__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__G_SIGMA__INPUT, 26, 2, 1, 1)
 
@@ -5705,13 +5360,13 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__GRID_RATIO__INPUT.setObjectName(u"AUGMENTOR__GRID_RATIO__INPUT")
         self.AUGMENTOR__GRID_RATIO__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__GRID_RATIO__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__GRID_RATIO__INPUT.setFont(font)
+        self.AUGMENTOR__GRID_RATIO__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GRID_RATIO__INPUT, 64, 2, 1, 1)
 
         self.da_elastic_mode_label = QLabel(self.da_frame)
         self.da_elastic_mode_label.setObjectName(u"da_elastic_mode_label")
-        self.da_elastic_mode_label.setFont(font)
+        self.da_elastic_mode_label.setFont(font1)
         self.da_elastic_mode_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_elastic_mode_label, 24, 0, 1, 1)
@@ -5722,13 +5377,13 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__ZFLIP__INPUT.setObjectName(u"AUGMENTOR__ZFLIP__INPUT")
         self.AUGMENTOR__ZFLIP__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__ZFLIP__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__ZFLIP__INPUT.setFont(font)
+        self.AUGMENTOR__ZFLIP__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__ZFLIP__INPUT, 20, 2, 1, 1)
 
         self.da_z_flip_label = QLabel(self.da_frame)
         self.da_z_flip_label.setObjectName(u"da_z_flip_label")
-        self.da_z_flip_label.setFont(font)
+        self.da_z_flip_label.setFont(font1)
         self.da_z_flip_label.setIndent(-1)
 
         self.gridLayout_25.addWidget(self.da_z_flip_label, 20, 0, 1, 1)
@@ -5755,7 +5410,7 @@ class Ui_MainWindow(object):
 
         self.label_78 = QLabel(self.da_frame)
         self.label_78.setObjectName(u"label_78")
-        self.label_78.setFont(font)
+        self.label_78.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_78, 29, 0, 1, 1)
 
@@ -5763,7 +5418,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__PEPPER_AMOUNT__INPUT.setObjectName(u"AUGMENTOR__PEPPER_AMOUNT__INPUT")
         self.AUGMENTOR__PEPPER_AMOUNT__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__PEPPER_AMOUNT__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__PEPPER_AMOUNT__INPUT.setFont(font)
+        self.AUGMENTOR__PEPPER_AMOUNT__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__PEPPER_AMOUNT__INPUT, 76, 2, 1, 1)
 
@@ -5799,7 +5454,7 @@ class Ui_MainWindow(object):
 
         self.da_cuout_cval_label = QLabel(self.da_frame)
         self.da_cuout_cval_label.setObjectName(u"da_cuout_cval_label")
-        self.da_cuout_cval_label.setFont(font)
+        self.da_cuout_cval_label.setFont(font1)
         self.da_cuout_cval_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_cuout_cval_label, 44, 0, 1, 1)
@@ -5808,20 +5463,20 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__E_ALPHA__INPUT.setObjectName(u"AUGMENTOR__E_ALPHA__INPUT")
         self.AUGMENTOR__E_ALPHA__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__E_ALPHA__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__E_ALPHA__INPUT.setFont(font)
+        self.AUGMENTOR__E_ALPHA__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__E_ALPHA__INPUT, 22, 2, 1, 1)
 
         self.label_60 = QLabel(self.da_frame)
         self.label_60.setObjectName(u"label_60")
-        self.label_60.setFont(font)
+        self.label_60.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_60, 1, 0, 1, 1)
 
         self.da_brightness_mode_label = QLabel(self.da_frame)
         self.da_brightness_mode_label.setObjectName(u"da_brightness_mode_label")
         self.da_brightness_mode_label.setMaximumSize(QSize(16777215, 16777215))
-        self.da_brightness_mode_label.setFont(font)
+        self.da_brightness_mode_label.setFont(font1)
         self.da_brightness_mode_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_brightness_mode_label, 35, 0, 1, 1)
@@ -5848,7 +5503,7 @@ class Ui_MainWindow(object):
 
         self.label_107 = QLabel(self.da_frame)
         self.label_107.setObjectName(u"label_107")
-        self.label_107.setFont(font)
+        self.label_107.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_107, 39, 0, 1, 1)
 
@@ -5856,7 +5511,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__SHIFT_RANGE__INPUT.setObjectName(u"AUGMENTOR__SHIFT_RANGE__INPUT")
         self.AUGMENTOR__SHIFT_RANGE__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__SHIFT_RANGE__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__SHIFT_RANGE__INPUT.setFont(font)
+        self.AUGMENTOR__SHIFT_RANGE__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SHIFT_RANGE__INPUT, 16, 2, 1, 1)
 
@@ -5882,13 +5537,13 @@ class Ui_MainWindow(object):
 
         self.label_119 = QLabel(self.da_frame)
         self.label_119.setObjectName(u"label_119")
-        self.label_119.setFont(font)
+        self.label_119.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_119, 56, 0, 1, 1)
 
         self.da_misaligment_displacement_label = QLabel(self.da_frame)
         self.da_misaligment_displacement_label.setObjectName(u"da_misaligment_displacement_label")
-        self.da_misaligment_displacement_label.setFont(font)
+        self.da_misaligment_displacement_label.setFont(font1)
         self.da_misaligment_displacement_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_misaligment_displacement_label, 57, 0, 1, 1)
@@ -5909,7 +5564,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__CUTNOISE__INPUT.setObjectName(u"AUGMENTOR__CUTNOISE__INPUT")
         self.AUGMENTOR__CUTNOISE__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__CUTNOISE__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__CUTNOISE__INPUT.setFont(font)
+        self.AUGMENTOR__CUTNOISE__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CUTNOISE__INPUT, 52, 2, 1, 1)
 
@@ -5919,7 +5574,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__SHEAR__INPUT.setObjectName(u"AUGMENTOR__SHEAR__INPUT")
         self.AUGMENTOR__SHEAR__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__SHEAR__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__SHEAR__INPUT.setFont(font)
+        self.AUGMENTOR__SHEAR__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SHEAR__INPUT, 10, 2, 1, 1)
 
@@ -5927,7 +5582,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__MS_ROTATE_RATIO__INPUT.setObjectName(u"AUGMENTOR__MS_ROTATE_RATIO__INPUT")
         self.AUGMENTOR__MS_ROTATE_RATIO__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__MS_ROTATE_RATIO__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__MS_ROTATE_RATIO__INPUT.setFont(font)
+        self.AUGMENTOR__MS_ROTATE_RATIO__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__MS_ROTATE_RATIO__INPUT, 58, 2, 1, 1)
 
@@ -5955,7 +5610,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__COUT_SIZE__INPUT.setObjectName(u"AUGMENTOR__COUT_SIZE__INPUT")
         self.AUGMENTOR__COUT_SIZE__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__COUT_SIZE__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__COUT_SIZE__INPUT.setFont(font)
+        self.AUGMENTOR__COUT_SIZE__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__COUT_SIZE__INPUT, 43, 2, 1, 1)
 
@@ -5963,7 +5618,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__GRID_ROTATE__INPUT.setObjectName(u"AUGMENTOR__GRID_ROTATE__INPUT")
         self.AUGMENTOR__GRID_ROTATE__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__GRID_ROTATE__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__GRID_ROTATE__INPUT.setFont(font)
+        self.AUGMENTOR__GRID_ROTATE__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GRID_ROTATE__INPUT, 66, 2, 1, 1)
 
@@ -5993,13 +5648,13 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__GRAYSCALE__INPUT.setObjectName(u"AUGMENTOR__GRAYSCALE__INPUT")
         self.AUGMENTOR__GRAYSCALE__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__GRAYSCALE__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__GRAYSCALE__INPUT.setFont(font)
+        self.AUGMENTOR__GRAYSCALE__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GRAYSCALE__INPUT, 61, 2, 1, 1)
 
         self.label_72 = QLabel(self.da_frame)
         self.label_72.setObjectName(u"label_72")
-        self.label_72.setFont(font)
+        self.label_72.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_72, 18, 0, 1, 1)
 
@@ -6009,13 +5664,13 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__GRID_INVERT__INPUT.setObjectName(u"AUGMENTOR__GRID_INVERT__INPUT")
         self.AUGMENTOR__GRID_INVERT__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__GRID_INVERT__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__GRID_INVERT__INPUT.setFont(font)
+        self.AUGMENTOR__GRID_INVERT__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GRID_INVERT__INPUT, 67, 2, 1, 1)
 
         self.da_cutblur_inside_label = QLabel(self.da_frame)
         self.da_cutblur_inside_label.setObjectName(u"da_cutblur_inside_label")
-        self.da_cutblur_inside_label.setFont(font)
+        self.da_cutblur_inside_label.setFont(font1)
         self.da_cutblur_inside_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_cutblur_inside_label, 49, 0, 1, 1)
@@ -6032,7 +5687,7 @@ class Ui_MainWindow(object):
 
         self.label_109 = QLabel(self.da_frame)
         self.label_109.setObjectName(u"label_109")
-        self.label_109.setFont(font)
+        self.label_109.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_109, 46, 0, 1, 1)
 
@@ -6058,27 +5713,27 @@ class Ui_MainWindow(object):
 
         self.da_zoom_in_z_label = QLabel(self.da_frame)
         self.da_zoom_in_z_label.setObjectName(u"da_zoom_in_z_label")
-        self.da_zoom_in_z_label.setFont(font)
+        self.da_zoom_in_z_label.setFont(font1)
         self.da_zoom_in_z_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_zoom_in_z_label, 14, 0, 1, 1)
 
         self.label_123 = QLabel(self.da_frame)
         self.label_123.setObjectName(u"label_123")
-        self.label_123.setFont(font)
+        self.label_123.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_123, 61, 0, 1, 1)
 
         self.da_cutblut_down_range_label = QLabel(self.da_frame)
         self.da_cutblut_down_range_label.setObjectName(u"da_cutblut_down_range_label")
-        self.da_cutblut_down_range_label.setFont(font)
+        self.da_cutblut_down_range_label.setFont(font1)
         self.da_cutblut_down_range_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_cutblut_down_range_label, 48, 0, 1, 1)
 
         self.da_salt_amount_label = QLabel(self.da_frame)
         self.da_salt_amount_label.setObjectName(u"da_salt_amount_label")
-        self.da_salt_amount_label.setFont(font)
+        self.da_salt_amount_label.setFont(font1)
         self.da_salt_amount_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_salt_amount_label, 74, 0, 1, 1)
@@ -6097,7 +5752,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__RANDOM_ROT_RANGE__INPUT.setObjectName(u"AUGMENTOR__RANDOM_ROT_RANGE__INPUT")
         self.AUGMENTOR__RANDOM_ROT_RANGE__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__RANDOM_ROT_RANGE__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__RANDOM_ROT_RANGE__INPUT.setFont(font)
+        self.AUGMENTOR__RANDOM_ROT_RANGE__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__RANDOM_ROT_RANGE__INPUT, 9, 2, 1, 1)
 
@@ -6113,7 +5768,7 @@ class Ui_MainWindow(object):
 
         self.da_motion_blur_k_size_label = QLabel(self.da_frame)
         self.da_motion_blur_k_size_label.setObjectName(u"da_motion_blur_k_size_label")
-        self.da_motion_blur_k_size_label.setFont(font)
+        self.da_motion_blur_k_size_label.setFont(font1)
         self.da_motion_blur_k_size_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_motion_blur_k_size_label, 30, 0, 1, 1)
@@ -6130,13 +5785,13 @@ class Ui_MainWindow(object):
 
         self.label_74 = QLabel(self.da_frame)
         self.label_74.setObjectName(u"label_74")
-        self.label_74.setFont(font)
+        self.label_74.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_74, 10, 0, 1, 1)
 
         self.label_122 = QLabel(self.da_frame)
         self.label_122.setObjectName(u"label_122")
-        self.label_122.setFont(font)
+        self.label_122.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_122, 62, 0, 1, 1)
 
@@ -6144,7 +5799,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__DA_PROB__INPUT.setObjectName(u"AUGMENTOR__DA_PROB__INPUT")
         self.AUGMENTOR__DA_PROB__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__DA_PROB__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__DA_PROB__INPUT.setFont(font)
+        self.AUGMENTOR__DA_PROB__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__DA_PROB__INPUT, 1, 2, 1, 1)
 
@@ -6160,14 +5815,14 @@ class Ui_MainWindow(object):
 
         self.da_misaligment_rotate_ratio_label = QLabel(self.da_frame)
         self.da_misaligment_rotate_ratio_label.setObjectName(u"da_misaligment_rotate_ratio_label")
-        self.da_misaligment_rotate_ratio_label.setFont(font)
+        self.da_misaligment_rotate_ratio_label.setFont(font1)
         self.da_misaligment_rotate_ratio_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_misaligment_rotate_ratio_label, 58, 0, 1, 1)
 
         self.da_salt_pepper_prop_label = QLabel(self.da_frame)
         self.da_salt_pepper_prop_label.setObjectName(u"da_salt_pepper_prop_label")
-        self.da_salt_pepper_prop_label.setFont(font)
+        self.da_salt_pepper_prop_label.setFont(font1)
         self.da_salt_pepper_prop_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_salt_pepper_prop_label, 79, 0, 1, 1)
@@ -6176,7 +5831,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INPUT.setObjectName(u"AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INPUT")
         self.AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INPUT.setFont(font)
+        self.AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SALT_AND_PEPPER_AMOUNT__INPUT, 78, 2, 1, 1)
 
@@ -6192,7 +5847,7 @@ class Ui_MainWindow(object):
 
         self.label_84 = QLabel(self.da_frame)
         self.label_84.setObjectName(u"label_84")
-        self.label_84.setFont(font)
+        self.label_84.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_84, 21, 0, 1, 1)
 
@@ -6220,7 +5875,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__COUT_NB_ITERATIONS__INPUT.setObjectName(u"AUGMENTOR__COUT_NB_ITERATIONS__INPUT")
         self.AUGMENTOR__COUT_NB_ITERATIONS__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__COUT_NB_ITERATIONS__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__COUT_NB_ITERATIONS__INPUT.setFont(font)
+        self.AUGMENTOR__COUT_NB_ITERATIONS__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__COUT_NB_ITERATIONS__INPUT, 42, 2, 1, 1)
 
@@ -6236,13 +5891,13 @@ class Ui_MainWindow(object):
 
         self.label_67 = QLabel(self.da_frame)
         self.label_67.setObjectName(u"label_67")
-        self.label_67.setFont(font)
+        self.label_67.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_67, 7, 0, 1, 1)
 
         self.da_zoom_range_label = QLabel(self.da_frame)
         self.da_zoom_range_label.setObjectName(u"da_zoom_range_label")
-        self.da_zoom_range_label.setFont(font)
+        self.da_zoom_range_label.setFont(font1)
         self.da_zoom_range_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_zoom_range_label, 13, 0, 1, 1)
@@ -6259,14 +5914,14 @@ class Ui_MainWindow(object):
 
         self.da_grid_invert_label = QLabel(self.da_frame)
         self.da_grid_invert_label.setObjectName(u"da_grid_invert_label")
-        self.da_grid_invert_label.setFont(font)
+        self.da_grid_invert_label.setFont(font1)
         self.da_grid_invert_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_grid_invert_label, 67, 0, 1, 1)
 
         self.da_cutmix_size_range_label = QLabel(self.da_frame)
         self.da_cutmix_size_range_label.setObjectName(u"da_cutmix_size_range_label")
-        self.da_cutmix_size_range_label.setFont(font)
+        self.da_cutmix_size_range_label.setFont(font1)
         self.da_cutmix_size_range_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_cutmix_size_range_label, 51, 0, 1, 1)
@@ -6285,7 +5940,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__GAUSSIAN_NOISE_VAR__INPUT.setObjectName(u"AUGMENTOR__GAUSSIAN_NOISE_VAR__INPUT")
         self.AUGMENTOR__GAUSSIAN_NOISE_VAR__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__GAUSSIAN_NOISE_VAR__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__GAUSSIAN_NOISE_VAR__INPUT.setFont(font)
+        self.AUGMENTOR__GAUSSIAN_NOISE_VAR__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GAUSSIAN_NOISE_VAR__INPUT, 70, 2, 1, 1)
 
@@ -6311,7 +5966,7 @@ class Ui_MainWindow(object):
 
         self.label_87 = QLabel(self.da_frame)
         self.label_87.setObjectName(u"label_87")
-        self.label_87.setFont(font)
+        self.label_87.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_87, 25, 0, 1, 1)
 
@@ -6329,7 +5984,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__COUT_CVAL__INPUT.setObjectName(u"AUGMENTOR__COUT_CVAL__INPUT")
         self.AUGMENTOR__COUT_CVAL__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__COUT_CVAL__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__COUT_CVAL__INPUT.setFont(font)
+        self.AUGMENTOR__COUT_CVAL__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__COUT_CVAL__INPUT, 44, 2, 1, 1)
 
@@ -6339,7 +5994,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__CUTBLUR__INPUT.setObjectName(u"AUGMENTOR__CUTBLUR__INPUT")
         self.AUGMENTOR__CUTBLUR__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__CUTBLUR__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__CUTBLUR__INPUT.setFont(font)
+        self.AUGMENTOR__CUTBLUR__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CUTBLUR__INPUT, 46, 2, 1, 1)
 
@@ -6349,13 +6004,13 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__DROPOUT__INPUT.setObjectName(u"AUGMENTOR__DROPOUT__INPUT")
         self.AUGMENTOR__DROPOUT__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__DROPOUT__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__DROPOUT__INPUT.setFont(font)
+        self.AUGMENTOR__DROPOUT__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__DROPOUT__INPUT, 39, 2, 1, 1)
 
         self.label_90 = QLabel(self.da_frame)
         self.label_90.setObjectName(u"label_90")
-        self.label_90.setFont(font)
+        self.label_90.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_90, 36, 0, 1, 1)
 
@@ -6365,7 +6020,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__ROT90__INPUT.setObjectName(u"AUGMENTOR__ROT90__INPUT")
         self.AUGMENTOR__ROT90__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__ROT90__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__ROT90__INPUT.setFont(font)
+        self.AUGMENTOR__ROT90__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__ROT90__INPUT, 7, 2, 1, 1)
 
@@ -6373,7 +6028,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__GRID_D_RANGE__INPUT.setObjectName(u"AUGMENTOR__GRID_D_RANGE__INPUT")
         self.AUGMENTOR__GRID_D_RANGE__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__GRID_D_RANGE__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__GRID_D_RANGE__INPUT.setFont(font)
+        self.AUGMENTOR__GRID_D_RANGE__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GRID_D_RANGE__INPUT, 65, 2, 1, 1)
 
@@ -6383,19 +6038,19 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__CUTMIX__INPUT.setObjectName(u"AUGMENTOR__CUTMIX__INPUT")
         self.AUGMENTOR__CUTMIX__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__CUTMIX__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__CUTMIX__INPUT.setFont(font)
+        self.AUGMENTOR__CUTMIX__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CUTMIX__INPUT, 50, 2, 1, 1)
 
         self.label_132 = QLabel(self.da_frame)
         self.label_132.setObjectName(u"label_132")
-        self.label_132.setFont(font)
+        self.label_132.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_132, 72, 0, 1, 1)
 
         self.da_gaussian_noise_var_label = QLabel(self.da_frame)
         self.da_gaussian_noise_var_label.setObjectName(u"da_gaussian_noise_var_label")
-        self.da_gaussian_noise_var_label.setFont(font)
+        self.da_gaussian_noise_var_label.setFont(font1)
         self.da_gaussian_noise_var_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_gaussian_noise_var_label, 70, 0, 1, 1)
@@ -6403,14 +6058,14 @@ class Ui_MainWindow(object):
         self.da_brightness_factor_range_label = QLabel(self.da_frame)
         self.da_brightness_factor_range_label.setObjectName(u"da_brightness_factor_range_label")
         self.da_brightness_factor_range_label.setMaximumSize(QSize(16777215, 16777215))
-        self.da_brightness_factor_range_label.setFont(font)
+        self.da_brightness_factor_range_label.setFont(font1)
         self.da_brightness_factor_range_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_brightness_factor_range_label, 34, 0, 1, 1)
 
         self.da_grid_rotate_label = QLabel(self.da_frame)
         self.da_grid_rotate_label.setObjectName(u"da_grid_rotate_label")
-        self.da_grid_rotate_label.setFont(font)
+        self.da_grid_rotate_label.setFont(font1)
         self.da_grid_rotate_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_grid_rotate_label, 66, 0, 1, 1)
@@ -6441,7 +6096,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__ELASTIC__INPUT.setObjectName(u"AUGMENTOR__ELASTIC__INPUT")
         self.AUGMENTOR__ELASTIC__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__ELASTIC__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__ELASTIC__INPUT.setFont(font)
+        self.AUGMENTOR__ELASTIC__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__ELASTIC__INPUT, 21, 2, 1, 1)
 
@@ -6469,7 +6124,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__CBLUR_SIZE__INPUT.setObjectName(u"AUGMENTOR__CBLUR_SIZE__INPUT")
         self.AUGMENTOR__CBLUR_SIZE__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__CBLUR_SIZE__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__CBLUR_SIZE__INPUT.setFont(font)
+        self.AUGMENTOR__CBLUR_SIZE__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CBLUR_SIZE__INPUT, 47, 2, 1, 1)
 
@@ -6477,7 +6132,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__DROP_RANGE__INPUT.setObjectName(u"AUGMENTOR__DROP_RANGE__INPUT")
         self.AUGMENTOR__DROP_RANGE__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__DROP_RANGE__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__DROP_RANGE__INPUT.setFont(font)
+        self.AUGMENTOR__DROP_RANGE__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__DROP_RANGE__INPUT, 40, 2, 1, 1)
 
@@ -6487,26 +6142,26 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__ZOOM__INPUT.setObjectName(u"AUGMENTOR__ZOOM__INPUT")
         self.AUGMENTOR__ZOOM__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__ZOOM__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__ZOOM__INPUT.setFont(font)
+        self.AUGMENTOR__ZOOM__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__ZOOM__INPUT, 12, 2, 1, 1)
 
         self.label_77 = QLabel(self.da_frame)
         self.label_77.setObjectName(u"label_77")
-        self.label_77.setFont(font)
+        self.label_77.setFont(font1)
         self.label_77.setAcceptDrops(False)
 
         self.gridLayout_25.addWidget(self.label_77, 15, 0, 1, 1)
 
         self.label_66 = QLabel(self.da_frame)
         self.label_66.setObjectName(u"label_66")
-        self.label_66.setFont(font)
+        self.label_66.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_66, 5, 0, 1, 1)
 
         self.da_pepper_amount_label = QLabel(self.da_frame)
         self.da_pepper_amount_label.setObjectName(u"da_pepper_amount_label")
-        self.da_pepper_amount_label.setFont(font)
+        self.da_pepper_amount_label.setFont(font1)
         self.da_pepper_amount_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_pepper_amount_label, 76, 0, 1, 1)
@@ -6515,7 +6170,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__SALT_AND_PEPPER_PROP__INPUT.setObjectName(u"AUGMENTOR__SALT_AND_PEPPER_PROP__INPUT")
         self.AUGMENTOR__SALT_AND_PEPPER_PROP__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__SALT_AND_PEPPER_PROP__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__SALT_AND_PEPPER_PROP__INPUT.setFont(font)
+        self.AUGMENTOR__SALT_AND_PEPPER_PROP__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SALT_AND_PEPPER_PROP__INPUT, 79, 2, 1, 1)
 
@@ -6541,13 +6196,13 @@ class Ui_MainWindow(object):
 
         self.label_71 = QLabel(self.da_frame)
         self.label_71.setObjectName(u"label_71")
-        self.label_71.setFont(font)
+        self.label_71.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_71, 12, 0, 1, 1)
 
         self.da_cutout_to_mask_label = QLabel(self.da_frame)
         self.da_cutout_to_mask_label.setObjectName(u"da_cutout_to_mask_label")
-        self.da_cutout_to_mask_label.setFont(font)
+        self.da_cutout_to_mask_label.setFont(font1)
         self.da_cutout_to_mask_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_cutout_to_mask_label, 45, 0, 1, 1)
@@ -6556,13 +6211,13 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__E_SIGMA__INPUT.setObjectName(u"AUGMENTOR__E_SIGMA__INPUT")
         self.AUGMENTOR__E_SIGMA__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__E_SIGMA__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__E_SIGMA__INPUT.setFont(font)
+        self.AUGMENTOR__E_SIGMA__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__E_SIGMA__INPUT, 23, 2, 1, 1)
 
         self.label_118 = QLabel(self.da_frame)
         self.label_118.setObjectName(u"label_118")
-        self.label_118.setFont(font)
+        self.label_118.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_118, 63, 0, 1, 1)
 
@@ -6578,7 +6233,7 @@ class Ui_MainWindow(object):
 
         self.da_salt_pepper_amount_label = QLabel(self.da_frame)
         self.da_salt_pepper_amount_label.setObjectName(u"da_salt_pepper_amount_label")
-        self.da_salt_pepper_amount_label.setFont(font)
+        self.da_salt_pepper_amount_label.setFont(font1)
         self.da_salt_pepper_amount_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_salt_pepper_amount_label, 78, 0, 1, 1)
@@ -6599,7 +6254,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__CHANNEL_SHUFFLE__INPUT.setObjectName(u"AUGMENTOR__CHANNEL_SHUFFLE__INPUT")
         self.AUGMENTOR__CHANNEL_SHUFFLE__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__CHANNEL_SHUFFLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__CHANNEL_SHUFFLE__INPUT.setFont(font)
+        self.AUGMENTOR__CHANNEL_SHUFFLE__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CHANNEL_SHUFFLE__INPUT, 62, 2, 1, 1)
 
@@ -6608,7 +6263,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__ZOOM_IN_Z__INPUT.addItem("")
         self.AUGMENTOR__ZOOM_IN_Z__INPUT.setObjectName(u"AUGMENTOR__ZOOM_IN_Z__INPUT")
         self.AUGMENTOR__ZOOM_IN_Z__INPUT.setMinimumSize(QSize(200, 30))
-        self.AUGMENTOR__ZOOM_IN_Z__INPUT.setFont(font)
+        self.AUGMENTOR__ZOOM_IN_Z__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__ZOOM_IN_Z__INPUT, 14, 2, 1, 1)
 
@@ -6618,13 +6273,13 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__BRIGHTNESS_MODE__INPUT.setObjectName(u"AUGMENTOR__BRIGHTNESS_MODE__INPUT")
         self.AUGMENTOR__BRIGHTNESS_MODE__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__BRIGHTNESS_MODE__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__BRIGHTNESS_MODE__INPUT.setFont(font)
+        self.AUGMENTOR__BRIGHTNESS_MODE__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__BRIGHTNESS_MODE__INPUT, 35, 2, 1, 1)
 
         self.da_contrast_mode_label = QLabel(self.da_frame)
         self.da_contrast_mode_label.setObjectName(u"da_contrast_mode_label")
-        self.da_contrast_mode_label.setFont(font)
+        self.da_contrast_mode_label.setFont(font1)
         self.da_contrast_mode_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_contrast_mode_label, 38, 0, 1, 1)
@@ -6635,7 +6290,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__G_BLUR__INPUT.setObjectName(u"AUGMENTOR__G_BLUR__INPUT")
         self.AUGMENTOR__G_BLUR__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__G_BLUR__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__G_BLUR__INPUT.setFont(font)
+        self.AUGMENTOR__G_BLUR__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__G_BLUR__INPUT, 25, 2, 1, 1)
 
@@ -6645,7 +6300,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__GAMMA_CONTRAST__INPUT.setObjectName(u"AUGMENTOR__GAMMA_CONTRAST__INPUT")
         self.AUGMENTOR__GAMMA_CONTRAST__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__GAMMA_CONTRAST__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__GAMMA_CONTRAST__INPUT.setFont(font)
+        self.AUGMENTOR__GAMMA_CONTRAST__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GAMMA_CONTRAST__INPUT, 31, 2, 1, 1)
 
@@ -6655,7 +6310,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__POISSON_NOISE__INPUT.setObjectName(u"AUGMENTOR__POISSON_NOISE__INPUT")
         self.AUGMENTOR__POISSON_NOISE__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__POISSON_NOISE__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__POISSON_NOISE__INPUT.setFont(font)
+        self.AUGMENTOR__POISSON_NOISE__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__POISSON_NOISE__INPUT, 72, 2, 1, 1)
 
@@ -6663,7 +6318,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__GAUSSIAN_NOISE_MEAN__INPUT.setObjectName(u"AUGMENTOR__GAUSSIAN_NOISE_MEAN__INPUT")
         self.AUGMENTOR__GAUSSIAN_NOISE_MEAN__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__GAUSSIAN_NOISE_MEAN__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__GAUSSIAN_NOISE_MEAN__INPUT.setFont(font)
+        self.AUGMENTOR__GAUSSIAN_NOISE_MEAN__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GAUSSIAN_NOISE_MEAN__INPUT, 69, 2, 1, 1)
 
@@ -6681,13 +6336,13 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__CBLUR_DOWN_RANGE__INPUT.setObjectName(u"AUGMENTOR__CBLUR_DOWN_RANGE__INPUT")
         self.AUGMENTOR__CBLUR_DOWN_RANGE__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__CBLUR_DOWN_RANGE__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__CBLUR_DOWN_RANGE__INPUT.setFont(font)
+        self.AUGMENTOR__CBLUR_DOWN_RANGE__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CBLUR_DOWN_RANGE__INPUT, 48, 2, 1, 1)
 
         self.da_cutnoise_scale_range_label = QLabel(self.da_frame)
         self.da_cutnoise_scale_range_label.setObjectName(u"da_cutnoise_scale_range_label")
-        self.da_cutnoise_scale_range_label.setFont(font)
+        self.da_cutnoise_scale_range_label.setFont(font1)
         self.da_cutnoise_scale_range_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_cutnoise_scale_range_label, 53, 0, 1, 1)
@@ -6696,7 +6351,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__CNOISE_SIZE__INPUT.setObjectName(u"AUGMENTOR__CNOISE_SIZE__INPUT")
         self.AUGMENTOR__CNOISE_SIZE__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__CNOISE_SIZE__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__CNOISE_SIZE__INPUT.setFont(font)
+        self.AUGMENTOR__CNOISE_SIZE__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CNOISE_SIZE__INPUT, 55, 2, 1, 1)
 
@@ -6704,13 +6359,13 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__BRIGHTNESS_FACTOR__INPUT.setObjectName(u"AUGMENTOR__BRIGHTNESS_FACTOR__INPUT")
         self.AUGMENTOR__BRIGHTNESS_FACTOR__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__BRIGHTNESS_FACTOR__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__BRIGHTNESS_FACTOR__INPUT.setFont(font)
+        self.AUGMENTOR__BRIGHTNESS_FACTOR__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__BRIGHTNESS_FACTOR__INPUT, 34, 2, 1, 1)
 
         self.label_128 = QLabel(self.da_frame)
         self.label_128.setObjectName(u"label_128")
-        self.label_128.setFont(font)
+        self.label_128.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_128, 73, 0, 1, 1)
 
@@ -6720,7 +6375,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__CBLUR_INSIDE__INPUT.setObjectName(u"AUGMENTOR__CBLUR_INSIDE__INPUT")
         self.AUGMENTOR__CBLUR_INSIDE__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__CBLUR_INSIDE__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__CBLUR_INSIDE__INPUT.setFont(font)
+        self.AUGMENTOR__CBLUR_INSIDE__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CBLUR_INSIDE__INPUT, 49, 2, 1, 1)
 
@@ -6738,20 +6393,20 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__MS_DISPLACEMENT__INPUT.setObjectName(u"AUGMENTOR__MS_DISPLACEMENT__INPUT")
         self.AUGMENTOR__MS_DISPLACEMENT__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__MS_DISPLACEMENT__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__MS_DISPLACEMENT__INPUT.setFont(font)
+        self.AUGMENTOR__MS_DISPLACEMENT__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__MS_DISPLACEMENT__INPUT, 57, 2, 1, 1)
 
         self.da_gaussian_sigma_label = QLabel(self.da_frame)
         self.da_gaussian_sigma_label.setObjectName(u"da_gaussian_sigma_label")
-        self.da_gaussian_sigma_label.setFont(font)
+        self.da_gaussian_sigma_label.setFont(font1)
         self.da_gaussian_sigma_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_gaussian_sigma_label, 26, 0, 1, 1)
 
         self.label_63 = QLabel(self.da_frame)
         self.label_63.setObjectName(u"label_63")
-        self.label_63.setFont(font)
+        self.label_63.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_63, 6, 0, 1, 1)
 
@@ -6761,20 +6416,20 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__MISSING_SECTIONS__INPUT.setObjectName(u"AUGMENTOR__MISSING_SECTIONS__INPUT")
         self.AUGMENTOR__MISSING_SECTIONS__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__MISSING_SECTIONS__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__MISSING_SECTIONS__INPUT.setFont(font)
+        self.AUGMENTOR__MISSING_SECTIONS__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__MISSING_SECTIONS__INPUT, 59, 2, 1, 1)
 
         self.da_contrast_factor_range_label = QLabel(self.da_frame)
         self.da_contrast_factor_range_label.setObjectName(u"da_contrast_factor_range_label")
-        self.da_contrast_factor_range_label.setFont(font)
+        self.da_contrast_factor_range_label.setFont(font1)
         self.da_contrast_factor_range_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_contrast_factor_range_label, 37, 0, 1, 1)
 
         self.da_dropout_range_label = QLabel(self.da_frame)
         self.da_dropout_range_label.setObjectName(u"da_dropout_range_label")
-        self.da_dropout_range_label.setFont(font)
+        self.da_dropout_range_label.setFont(font1)
         self.da_dropout_range_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_dropout_range_label, 40, 0, 1, 1)
@@ -6785,7 +6440,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__RANDOM_ROT__INPUT.setObjectName(u"AUGMENTOR__RANDOM_ROT__INPUT")
         self.AUGMENTOR__RANDOM_ROT__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__RANDOM_ROT__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__RANDOM_ROT__INPUT.setFont(font)
+        self.AUGMENTOR__RANDOM_ROT__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__RANDOM_ROT__INPUT, 8, 2, 1, 1)
 
@@ -6793,19 +6448,19 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__SALT_AMOUNT__INPUT.setObjectName(u"AUGMENTOR__SALT_AMOUNT__INPUT")
         self.AUGMENTOR__SALT_AMOUNT__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__SALT_AMOUNT__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__SALT_AMOUNT__INPUT.setFont(font)
+        self.AUGMENTOR__SALT_AMOUNT__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SALT_AMOUNT__INPUT, 74, 2, 1, 1)
 
         self.label_141 = QLabel(self.da_frame)
         self.label_141.setObjectName(u"label_141")
-        self.label_141.setFont(font)
+        self.label_141.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_141, 77, 0, 1, 1)
 
         self.label_65 = QLabel(self.da_frame)
         self.label_65.setObjectName(u"label_65")
-        self.label_65.setFont(font)
+        self.label_65.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_65, 8, 0, 1, 1)
 
@@ -6821,7 +6476,7 @@ class Ui_MainWindow(object):
 
         self.da_elastic_alpha_label = QLabel(self.da_frame)
         self.da_elastic_alpha_label.setObjectName(u"da_elastic_alpha_label")
-        self.da_elastic_alpha_label.setFont(font)
+        self.da_elastic_alpha_label.setFont(font1)
         self.da_elastic_alpha_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_elastic_alpha_label, 22, 0, 1, 1)
@@ -6838,7 +6493,7 @@ class Ui_MainWindow(object):
 
         self.label_135 = QLabel(self.da_frame)
         self.label_135.setObjectName(u"label_135")
-        self.label_135.setFont(font)
+        self.label_135.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_135, 68, 0, 1, 1)
 
@@ -6854,7 +6509,7 @@ class Ui_MainWindow(object):
 
         self.da_gamma_contrast_range_label = QLabel(self.da_frame)
         self.da_gamma_contrast_range_label.setObjectName(u"da_gamma_contrast_range_label")
-        self.da_gamma_contrast_range_label.setFont(font)
+        self.da_gamma_contrast_range_label.setFont(font1)
         self.da_gamma_contrast_range_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_gamma_contrast_range_label, 32, 0, 1, 1)
@@ -6877,7 +6532,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__AFFINE_MODE__INPUT.setObjectName(u"AUGMENTOR__AFFINE_MODE__INPUT")
         self.AUGMENTOR__AFFINE_MODE__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__AFFINE_MODE__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__AFFINE_MODE__INPUT.setFont(font)
+        self.AUGMENTOR__AFFINE_MODE__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__AFFINE_MODE__INPUT, 17, 2, 1, 1)
 
@@ -6897,7 +6552,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__MEDIAN_BLUR__INPUT.setObjectName(u"AUGMENTOR__MEDIAN_BLUR__INPUT")
         self.AUGMENTOR__MEDIAN_BLUR__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__MEDIAN_BLUR__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__MEDIAN_BLUR__INPUT.setFont(font)
+        self.AUGMENTOR__MEDIAN_BLUR__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__MEDIAN_BLUR__INPUT, 27, 2, 1, 1)
 
@@ -6913,7 +6568,7 @@ class Ui_MainWindow(object):
 
         self.label_127 = QLabel(self.da_frame)
         self.label_127.setObjectName(u"label_127")
-        self.label_127.setFont(font)
+        self.label_127.setFont(font1)
         self.label_127.setIndent(-1)
 
         self.gridLayout_25.addWidget(self.label_127, 59, 0, 1, 1)
@@ -6944,7 +6599,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__CONTRAST_MODE__INPUT.setObjectName(u"AUGMENTOR__CONTRAST_MODE__INPUT")
         self.AUGMENTOR__CONTRAST_MODE__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__CONTRAST_MODE__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__CONTRAST_MODE__INPUT.setFont(font)
+        self.AUGMENTOR__CONTRAST_MODE__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CONTRAST_MODE__INPUT, 38, 2, 1, 1)
 
@@ -6954,7 +6609,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__SHIFT__INPUT.setObjectName(u"AUGMENTOR__SHIFT__INPUT")
         self.AUGMENTOR__SHIFT__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__SHIFT__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__SHIFT__INPUT.setFont(font)
+        self.AUGMENTOR__SHIFT__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SHIFT__INPUT, 15, 2, 1, 1)
 
@@ -6974,7 +6629,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__MOTION_BLUR__INPUT.setObjectName(u"AUGMENTOR__MOTION_BLUR__INPUT")
         self.AUGMENTOR__MOTION_BLUR__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__MOTION_BLUR__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__MOTION_BLUR__INPUT.setFont(font)
+        self.AUGMENTOR__MOTION_BLUR__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__MOTION_BLUR__INPUT, 29, 2, 1, 1)
 
@@ -6994,7 +6649,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__HFLIP__INPUT.setObjectName(u"AUGMENTOR__HFLIP__INPUT")
         self.AUGMENTOR__HFLIP__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__HFLIP__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__HFLIP__INPUT.setFont(font)
+        self.AUGMENTOR__HFLIP__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__HFLIP__INPUT, 19, 2, 1, 1)
 
@@ -7010,13 +6665,13 @@ class Ui_MainWindow(object):
 
         self.label_64 = QLabel(self.da_frame)
         self.label_64.setObjectName(u"label_64")
-        self.label_64.setFont(font)
+        self.label_64.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_64, 4, 0, 1, 1)
 
         self.da_elastic_sigma_label = QLabel(self.da_frame)
         self.da_elastic_sigma_label.setObjectName(u"da_elastic_sigma_label")
-        self.da_elastic_sigma_label.setFont(font)
+        self.da_elastic_sigma_label.setFont(font1)
         self.da_elastic_sigma_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_elastic_sigma_label, 23, 0, 1, 1)
@@ -7037,7 +6692,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__PEPPER__INPUT.setObjectName(u"AUGMENTOR__PEPPER__INPUT")
         self.AUGMENTOR__PEPPER__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__PEPPER__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__PEPPER__INPUT.setFont(font)
+        self.AUGMENTOR__PEPPER__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__PEPPER__INPUT, 75, 2, 1, 1)
 
@@ -7063,20 +6718,20 @@ class Ui_MainWindow(object):
 
         self.label_94 = QLabel(self.da_frame)
         self.label_94.setObjectName(u"label_94")
-        self.label_94.setFont(font)
+        self.label_94.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_94, 31, 0, 1, 1)
 
         self.da_shift_range_label = QLabel(self.da_frame)
         self.da_shift_range_label.setObjectName(u"da_shift_range_label")
-        self.da_shift_range_label.setFont(font)
+        self.da_shift_range_label.setFont(font1)
         self.da_shift_range_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_shift_range_label, 16, 0, 1, 1)
 
         self.da_grid_ratio_label = QLabel(self.da_frame)
         self.da_grid_ratio_label.setObjectName(u"da_grid_ratio_label")
-        self.da_grid_ratio_label.setFont(font)
+        self.da_grid_ratio_label.setFont(font1)
         self.da_grid_ratio_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_grid_ratio_label, 64, 0, 1, 1)
@@ -7107,13 +6762,13 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__SALT_AND_PEPPER__INPUT.setObjectName(u"AUGMENTOR__SALT_AND_PEPPER__INPUT")
         self.AUGMENTOR__SALT_AND_PEPPER__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__SALT_AND_PEPPER__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__SALT_AND_PEPPER__INPUT.setFont(font)
+        self.AUGMENTOR__SALT_AND_PEPPER__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SALT_AND_PEPPER__INPUT, 77, 2, 1, 1)
 
         self.label_61 = QLabel(self.da_frame)
         self.label_61.setObjectName(u"label_61")
-        self.label_61.setFont(font)
+        self.label_61.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_61, 3, 0, 1, 1)
 
@@ -7129,13 +6784,13 @@ class Ui_MainWindow(object):
 
         self.label_62 = QLabel(self.da_frame)
         self.label_62.setObjectName(u"label_62")
-        self.label_62.setFont(font)
+        self.label_62.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_62, 2, 0, 1, 1)
 
         self.da_random_rot_range_label = QLabel(self.da_frame)
         self.da_random_rot_range_label.setObjectName(u"da_random_rot_range_label")
-        self.da_random_rot_range_label.setFont(font)
+        self.da_random_rot_range_label.setFont(font1)
         self.da_random_rot_range_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_random_rot_range_label, 9, 0, 1, 1)
@@ -7156,7 +6811,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__SALT__INPUT.setObjectName(u"AUGMENTOR__SALT__INPUT")
         self.AUGMENTOR__SALT__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__SALT__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__SALT__INPUT.setFont(font)
+        self.AUGMENTOR__SALT__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__SALT__INPUT, 73, 2, 1, 1)
 
@@ -7165,13 +6820,13 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__E_MODE__INPUT.setObjectName(u"AUGMENTOR__E_MODE__INPUT")
         self.AUGMENTOR__E_MODE__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__E_MODE__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__E_MODE__INPUT.setFont(font)
+        self.AUGMENTOR__E_MODE__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__E_MODE__INPUT, 24, 2, 1, 1)
 
         self.da_cutblur_size_range_label = QLabel(self.da_frame)
         self.da_cutblur_size_range_label.setObjectName(u"da_cutblur_size_range_label")
-        self.da_cutblur_size_range_label.setFont(font)
+        self.da_cutblur_size_range_label.setFont(font1)
         self.da_cutblur_size_range_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_cutblur_size_range_label, 47, 0, 1, 1)
@@ -7190,7 +6845,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__CNOISE_SCALE__INPUT.setObjectName(u"AUGMENTOR__CNOISE_SCALE__INPUT")
         self.AUGMENTOR__CNOISE_SCALE__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__CNOISE_SCALE__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__CNOISE_SCALE__INPUT.setFont(font)
+        self.AUGMENTOR__CNOISE_SCALE__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CNOISE_SCALE__INPUT, 53, 2, 1, 1)
 
@@ -7208,7 +6863,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__CONTRAST_FACTOR__INPUT.setObjectName(u"AUGMENTOR__CONTRAST_FACTOR__INPUT")
         self.AUGMENTOR__CONTRAST_FACTOR__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__CONTRAST_FACTOR__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__CONTRAST_FACTOR__INPUT.setFont(font)
+        self.AUGMENTOR__CONTRAST_FACTOR__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CONTRAST_FACTOR__INPUT, 37, 2, 1, 1)
 
@@ -7226,7 +6881,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__MISSP_ITERATIONS__INPUT.setObjectName(u"AUGMENTOR__MISSP_ITERATIONS__INPUT")
         self.AUGMENTOR__MISSP_ITERATIONS__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__MISSP_ITERATIONS__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__MISSP_ITERATIONS__INPUT.setFont(font)
+        self.AUGMENTOR__MISSP_ITERATIONS__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__MISSP_ITERATIONS__INPUT, 60, 2, 1, 1)
 
@@ -7244,13 +6899,13 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__GC_GAMMA__INPUT.setObjectName(u"AUGMENTOR__GC_GAMMA__INPUT")
         self.AUGMENTOR__GC_GAMMA__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__GC_GAMMA__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__GC_GAMMA__INPUT.setFont(font)
+        self.AUGMENTOR__GC_GAMMA__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__GC_GAMMA__INPUT, 32, 2, 1, 1)
 
         self.label_68 = QLabel(self.da_frame)
         self.label_68.setObjectName(u"label_68")
-        self.label_68.setFont(font)
+        self.label_68.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_68, 19, 0, 1, 1)
 
@@ -7266,27 +6921,27 @@ class Ui_MainWindow(object):
 
         self.da_cutout_number_iterations_label = QLabel(self.da_frame)
         self.da_cutout_number_iterations_label.setObjectName(u"da_cutout_number_iterations_label")
-        self.da_cutout_number_iterations_label.setFont(font)
+        self.da_cutout_number_iterations_label.setFont(font1)
         self.da_cutout_number_iterations_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_cutout_number_iterations_label, 42, 0, 1, 1)
 
         self.label_83 = QLabel(self.da_frame)
         self.label_83.setObjectName(u"label_83")
-        self.label_83.setFont(font)
+        self.label_83.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_83, 27, 0, 1, 1)
 
         self.da_cutnoise_size_range_label = QLabel(self.da_frame)
         self.da_cutnoise_size_range_label.setObjectName(u"da_cutnoise_size_range_label")
-        self.da_cutnoise_size_range_label.setFont(font)
+        self.da_cutnoise_size_range_label.setFont(font1)
         self.da_cutnoise_size_range_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_cutnoise_size_range_label, 55, 0, 1, 1)
 
         self.label_91 = QLabel(self.da_frame)
         self.label_91.setObjectName(u"label_91")
-        self.label_91.setFont(font)
+        self.label_91.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_91, 33, 0, 1, 1)
 
@@ -7314,7 +6969,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__CMIX_SIZE__INPUT.setObjectName(u"AUGMENTOR__CMIX_SIZE__INPUT")
         self.AUGMENTOR__CMIX_SIZE__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__CMIX_SIZE__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__CMIX_SIZE__INPUT.setFont(font)
+        self.AUGMENTOR__CMIX_SIZE__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__CMIX_SIZE__INPUT, 51, 2, 1, 1)
 
@@ -7324,13 +6979,13 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__AUG_SAMPLES__INPUT.setObjectName(u"AUGMENTOR__AUG_SAMPLES__INPUT")
         self.AUGMENTOR__AUG_SAMPLES__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__AUG_SAMPLES__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__AUG_SAMPLES__INPUT.setFont(font)
+        self.AUGMENTOR__AUG_SAMPLES__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__AUG_SAMPLES__INPUT, 2, 2, 1, 1)
 
         self.label_144 = QLabel(self.da_frame)
         self.label_144.setObjectName(u"label_144")
-        self.label_144.setFont(font)
+        self.label_144.setFont(font1)
 
         self.gridLayout_25.addWidget(self.label_144, 75, 0, 1, 1)
 
@@ -7340,7 +6995,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__MISALIGNMENT__INPUT.setObjectName(u"AUGMENTOR__MISALIGNMENT__INPUT")
         self.AUGMENTOR__MISALIGNMENT__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__MISALIGNMENT__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__MISALIGNMENT__INPUT.setFont(font)
+        self.AUGMENTOR__MISALIGNMENT__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__MISALIGNMENT__INPUT, 56, 2, 1, 1)
 
@@ -7348,7 +7003,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__ZOOM_RANGE__INPUT.setObjectName(u"AUGMENTOR__ZOOM_RANGE__INPUT")
         self.AUGMENTOR__ZOOM_RANGE__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__ZOOM_RANGE__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__ZOOM_RANGE__INPUT.setFont(font)
+        self.AUGMENTOR__ZOOM_RANGE__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__ZOOM_RANGE__INPUT, 13, 2, 1, 1)
 
@@ -7356,7 +7011,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__AUG_NUM_SAMPLES__INPUT.setObjectName(u"AUGMENTOR__AUG_NUM_SAMPLES__INPUT")
         self.AUGMENTOR__AUG_NUM_SAMPLES__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__AUG_NUM_SAMPLES__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__AUG_NUM_SAMPLES__INPUT.setFont(font)
+        self.AUGMENTOR__AUG_NUM_SAMPLES__INPUT.setFont(font1)
 
         self.gridLayout_25.addWidget(self.AUGMENTOR__AUG_NUM_SAMPLES__INPUT, 4, 2, 1, 1)
 
@@ -7373,7 +7028,7 @@ class Ui_MainWindow(object):
         self.da_cutout_size_label = QLabel(self.da_frame)
         self.da_cutout_size_label.setObjectName(u"da_cutout_size_label")
         self.da_cutout_size_label.setMaximumSize(QSize(16777215, 16777215))
-        self.da_cutout_size_label.setFont(font)
+        self.da_cutout_size_label.setFont(font1)
         self.da_cutout_size_label.setIndent(15)
 
         self.gridLayout_25.addWidget(self.da_cutout_size_label, 43, 0, 1, 1)
@@ -7394,9 +7049,7 @@ class Ui_MainWindow(object):
         self.frame_11 = QFrame(self.train_advanced_options_frame_2)
         self.frame_11.setObjectName(u"frame_11")
         self.frame_11.setMaximumSize(QSize(900, 16777215))
-        self.frame_11.setFont(font)
-        self.frame_11.setStyleSheet(u"background: rgb(246,246,246);\n"
-"")
+        self.frame_11.setFont(font1)
         self.frame_11.setFrameShape(QFrame.Box)
         self.frame_11.setFrameShadow(QFrame.Raised)
         self.gridLayout_11 = QGridLayout(self.frame_11)
@@ -7404,7 +7057,7 @@ class Ui_MainWindow(object):
         self.val_data_gt_input_browse_bn = QPushButton(self.frame_11)
         self.val_data_gt_input_browse_bn.setObjectName(u"val_data_gt_input_browse_bn")
         self.val_data_gt_input_browse_bn.setMaximumSize(QSize(130, 30))
-        self.val_data_gt_input_browse_bn.setFont(font)
+        self.val_data_gt_input_browse_bn.setFont(font1)
 
         self.gridLayout_11.addWidget(self.val_data_gt_input_browse_bn, 9, 4, 1, 1)
 
@@ -7414,7 +7067,7 @@ class Ui_MainWindow(object):
         self.DATA__VAL__IN_MEMORY__INPUT.setObjectName(u"DATA__VAL__IN_MEMORY__INPUT")
         self.DATA__VAL__IN_MEMORY__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__VAL__IN_MEMORY__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__IN_MEMORY__INPUT.setFont(font)
+        self.DATA__VAL__IN_MEMORY__INPUT.setFont(font1)
 
         self.gridLayout_11.addWidget(self.DATA__VAL__IN_MEMORY__INPUT, 1, 3, 1, 1)
 
@@ -7432,7 +7085,7 @@ class Ui_MainWindow(object):
         self.DATA__VAL__CROSS_VAL_FOLD__INPUT.setObjectName(u"DATA__VAL__CROSS_VAL_FOLD__INPUT")
         self.DATA__VAL__CROSS_VAL_FOLD__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__VAL__CROSS_VAL_FOLD__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__CROSS_VAL_FOLD__INPUT.setFont(font)
+        self.DATA__VAL__CROSS_VAL_FOLD__INPUT.setFont(font1)
 
         self.gridLayout_11.addWidget(self.DATA__VAL__CROSS_VAL_FOLD__INPUT, 7, 3, 1, 1)
 
@@ -7453,7 +7106,7 @@ class Ui_MainWindow(object):
         self.DATA__VAL__TYPE__INPUT.setObjectName(u"DATA__VAL__TYPE__INPUT")
         self.DATA__VAL__TYPE__INPUT.setMinimumSize(QSize(300, 30))
         self.DATA__VAL__TYPE__INPUT.setMaximumSize(QSize(16777215, 30))
-        self.DATA__VAL__TYPE__INPUT.setFont(font)
+        self.DATA__VAL__TYPE__INPUT.setFont(font1)
 
         self.gridLayout_11.addWidget(self.DATA__VAL__TYPE__INPUT, 0, 3, 1, 1)
 
@@ -7461,7 +7114,7 @@ class Ui_MainWindow(object):
         self.DATA__VAL__CROSS_VAL_NFOLD__INPUT.setObjectName(u"DATA__VAL__CROSS_VAL_NFOLD__INPUT")
         self.DATA__VAL__CROSS_VAL_NFOLD__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__VAL__CROSS_VAL_NFOLD__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__CROSS_VAL_NFOLD__INPUT.setFont(font)
+        self.DATA__VAL__CROSS_VAL_NFOLD__INPUT.setFont(font1)
 
         self.gridLayout_11.addWidget(self.DATA__VAL__CROSS_VAL_NFOLD__INPUT, 3, 3, 1, 1)
 
@@ -7471,7 +7124,7 @@ class Ui_MainWindow(object):
 
         self.validation_data_gt_label = QLabel(self.frame_11)
         self.validation_data_gt_label.setObjectName(u"validation_data_gt_label")
-        self.validation_data_gt_label.setFont(font)
+        self.validation_data_gt_label.setFont(font1)
         self.validation_data_gt_label.setIndent(0)
 
         self.gridLayout_11.addWidget(self.validation_data_gt_label, 9, 0, 1, 1)
@@ -7490,13 +7143,13 @@ class Ui_MainWindow(object):
         self.DATA__VAL__GT_PATH__INPUT.setObjectName(u"DATA__VAL__GT_PATH__INPUT")
         self.DATA__VAL__GT_PATH__INPUT.setMinimumSize(QSize(450, 30))
         self.DATA__VAL__GT_PATH__INPUT.setMaximumSize(QSize(450, 30))
-        self.DATA__VAL__GT_PATH__INPUT.setFont(font)
+        self.DATA__VAL__GT_PATH__INPUT.setFont(font1)
 
         self.gridLayout_11.addWidget(self.DATA__VAL__GT_PATH__INPUT, 9, 3, 1, 1)
 
         self.percentage_validation_label = QLabel(self.frame_11)
         self.percentage_validation_label.setObjectName(u"percentage_validation_label")
-        self.percentage_validation_label.setFont(font)
+        self.percentage_validation_label.setFont(font1)
         self.percentage_validation_label.setIndent(0)
 
         self.gridLayout_11.addWidget(self.percentage_validation_label, 12, 0, 1, 1)
@@ -7504,7 +7157,7 @@ class Ui_MainWindow(object):
         self.val_data_input_browse_bn = QPushButton(self.frame_11)
         self.val_data_input_browse_bn.setObjectName(u"val_data_input_browse_bn")
         self.val_data_input_browse_bn.setMaximumSize(QSize(130, 30))
-        self.val_data_input_browse_bn.setFont(font)
+        self.val_data_input_browse_bn.setFont(font1)
 
         self.gridLayout_11.addWidget(self.val_data_input_browse_bn, 8, 4, 1, 1)
 
@@ -7512,7 +7165,7 @@ class Ui_MainWindow(object):
         self.DATA__VAL__PATH__INPUT.setObjectName(u"DATA__VAL__PATH__INPUT")
         self.DATA__VAL__PATH__INPUT.setMinimumSize(QSize(450, 30))
         self.DATA__VAL__PATH__INPUT.setMaximumSize(QSize(450, 30))
-        self.DATA__VAL__PATH__INPUT.setFont(font)
+        self.DATA__VAL__PATH__INPUT.setFont(font1)
 
         self.gridLayout_11.addWidget(self.DATA__VAL__PATH__INPUT, 8, 3, 1, 1)
 
@@ -7528,7 +7181,7 @@ class Ui_MainWindow(object):
 
         self.val_in_memory_label = QLabel(self.frame_11)
         self.val_in_memory_label.setObjectName(u"val_in_memory_label")
-        self.val_in_memory_label.setFont(font)
+        self.val_in_memory_label.setFont(font1)
         self.val_in_memory_label.setIndent(0)
 
         self.gridLayout_11.addWidget(self.val_in_memory_label, 1, 0, 1, 1)
@@ -7569,14 +7222,14 @@ class Ui_MainWindow(object):
 
         self.DATA__VAL__PATH__LABEL = QLabel(self.frame_11)
         self.DATA__VAL__PATH__LABEL.setObjectName(u"DATA__VAL__PATH__LABEL")
-        self.DATA__VAL__PATH__LABEL.setFont(font)
+        self.DATA__VAL__PATH__LABEL.setFont(font1)
         self.DATA__VAL__PATH__LABEL.setIndent(0)
 
         self.gridLayout_11.addWidget(self.DATA__VAL__PATH__LABEL, 8, 0, 1, 1)
 
         self.validation_type_label = QLabel(self.frame_11)
         self.validation_type_label.setObjectName(u"validation_type_label")
-        self.validation_type_label.setFont(font)
+        self.validation_type_label.setFont(font1)
 
         self.gridLayout_11.addWidget(self.validation_type_label, 0, 0, 1, 1)
 
@@ -7584,13 +7237,13 @@ class Ui_MainWindow(object):
         self.DATA__VAL__SPLIT_TRAIN__INPUT.setObjectName(u"DATA__VAL__SPLIT_TRAIN__INPUT")
         self.DATA__VAL__SPLIT_TRAIN__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__VAL__SPLIT_TRAIN__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__SPLIT_TRAIN__INPUT.setFont(font)
+        self.DATA__VAL__SPLIT_TRAIN__INPUT.setFont(font1)
 
         self.gridLayout_11.addWidget(self.DATA__VAL__SPLIT_TRAIN__INPUT, 12, 3, 1, 1)
 
         self.cross_validation_nfolds_label = QLabel(self.frame_11)
         self.cross_validation_nfolds_label.setObjectName(u"cross_validation_nfolds_label")
-        self.cross_validation_nfolds_label.setFont(font)
+        self.cross_validation_nfolds_label.setFont(font1)
         self.cross_validation_nfolds_label.setMargin(0)
         self.cross_validation_nfolds_label.setIndent(0)
 
@@ -7598,7 +7251,7 @@ class Ui_MainWindow(object):
 
         self.cross_validation_fold_label = QLabel(self.frame_11)
         self.cross_validation_fold_label.setObjectName(u"cross_validation_fold_label")
-        self.cross_validation_fold_label.setFont(font)
+        self.cross_validation_fold_label.setFont(font1)
         self.cross_validation_fold_label.setIndent(0)
 
         self.gridLayout_11.addWidget(self.cross_validation_fold_label, 7, 0, 1, 1)
@@ -7608,7 +7261,7 @@ class Ui_MainWindow(object):
 
         self.convnext_label = QLabel(self.train_advanced_options_frame_2)
         self.convnext_label.setObjectName(u"convnext_label")
-        self.convnext_label.setFont(font)
+        self.convnext_label.setFont(font1)
 
         self.gridLayout_4.addWidget(self.convnext_label, 22, 0, 1, 1)
 
@@ -7618,7 +7271,7 @@ class Ui_MainWindow(object):
 
         self.unet_model_like_label = QLabel(self.train_advanced_options_frame_2)
         self.unet_model_like_label.setObjectName(u"unet_model_like_label")
-        self.unet_model_like_label.setFont(font)
+        self.unet_model_like_label.setFont(font1)
 
         self.gridLayout_4.addWidget(self.unet_model_like_label, 18, 0, 1, 1)
 
@@ -7632,7 +7285,7 @@ class Ui_MainWindow(object):
         self.gridLayout_69.setContentsMargins(0, 0, 0, 0)
         self.AUGMENTOR__ENABLE__LABEL = QLabel(self.frame_29)
         self.AUGMENTOR__ENABLE__LABEL.setObjectName(u"AUGMENTOR__ENABLE__LABEL")
-        self.AUGMENTOR__ENABLE__LABEL.setFont(font)
+        self.AUGMENTOR__ENABLE__LABEL.setFont(font1)
 
         self.gridLayout_69.addWidget(self.AUGMENTOR__ENABLE__LABEL, 1, 0, 1, 1)
 
@@ -7642,7 +7295,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__ENABLE__INPUT.setObjectName(u"AUGMENTOR__ENABLE__INPUT")
         self.AUGMENTOR__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
         self.AUGMENTOR__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUGMENTOR__ENABLE__INPUT.setFont(font)
+        self.AUGMENTOR__ENABLE__INPUT.setFont(font1)
 
         self.gridLayout_69.addWidget(self.AUGMENTOR__ENABLE__INPUT, 1, 2, 1, 1)
 
@@ -7652,7 +7305,7 @@ class Ui_MainWindow(object):
         self.AUTOMATIC__AUG__INPUT.setObjectName(u"AUTOMATIC__AUG__INPUT")
         self.AUTOMATIC__AUG__INPUT.setMinimumSize(QSize(0, 30))
         self.AUTOMATIC__AUG__INPUT.setMaximumSize(QSize(200, 30))
-        self.AUTOMATIC__AUG__INPUT.setFont(font)
+        self.AUTOMATIC__AUG__INPUT.setFont(font1)
 
         self.gridLayout_69.addWidget(self.AUTOMATIC__AUG__INPUT, 0, 2, 1, 1)
 
@@ -7662,7 +7315,7 @@ class Ui_MainWindow(object):
 
         self.AUTOMATIC__AUG__LABEL = QLabel(self.frame_29)
         self.AUTOMATIC__AUG__LABEL.setObjectName(u"AUTOMATIC__AUG__LABEL")
-        self.AUTOMATIC__AUG__LABEL.setFont(font)
+        self.AUTOMATIC__AUG__LABEL.setFont(font1)
 
         self.gridLayout_69.addWidget(self.AUTOMATIC__AUG__LABEL, 0, 0, 1, 1)
 
@@ -7670,7 +7323,7 @@ class Ui_MainWindow(object):
         self.AUGMENTOR__ENABLE__INFO.setObjectName(u"AUGMENTOR__ENABLE__INFO")
         self.AUGMENTOR__ENABLE__INFO.setMinimumSize(QSize(30, 30))
         self.AUGMENTOR__ENABLE__INFO.setMaximumSize(QSize(30, 30))
-        self.AUGMENTOR__ENABLE__INFO.setFont(font)
+        self.AUGMENTOR__ENABLE__INFO.setFont(font1)
         self.AUGMENTOR__ENABLE__INFO.setScaledContents(True)
 
         self.gridLayout_69.addWidget(self.AUGMENTOR__ENABLE__INFO, 1, 1, 1, 1)
@@ -7679,7 +7332,7 @@ class Ui_MainWindow(object):
         self.AUTOMATIC__AUG__INFO.setObjectName(u"AUTOMATIC__AUG__INFO")
         self.AUTOMATIC__AUG__INFO.setMinimumSize(QSize(30, 30))
         self.AUTOMATIC__AUG__INFO.setMaximumSize(QSize(30, 30))
-        self.AUTOMATIC__AUG__INFO.setFont(font)
+        self.AUTOMATIC__AUG__INFO.setFont(font1)
         self.AUTOMATIC__AUG__INFO.setScaledContents(True)
 
         self.gridLayout_69.addWidget(self.AUTOMATIC__AUG__INFO, 0, 1, 1, 1)
@@ -7690,15 +7343,14 @@ class Ui_MainWindow(object):
         self.label_5 = QLabel(self.train_advanced_options_frame_2)
         self.label_5.setObjectName(u"label_5")
         self.label_5.setMaximumSize(QSize(16777215, 16777215))
-        self.label_5.setFont(font)
+        self.label_5.setFont(font1)
 
         self.gridLayout_4.addWidget(self.label_5, 6, 0, 1, 1)
 
         self.frame_16 = QFrame(self.train_advanced_options_frame_2)
         self.frame_16.setObjectName(u"frame_16")
         self.frame_16.setMinimumSize(QSize(0, 0))
-        self.frame_16.setFont(font)
-        self.frame_16.setStyleSheet(u"background: rgb(246,246,246);")
+        self.frame_16.setFont(font1)
         self.frame_16.setFrameShape(QFrame.Box)
         self.frame_16.setFrameShadow(QFrame.Raised)
         self.gridLayout_20 = QGridLayout(self.frame_16)
@@ -7707,13 +7359,13 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__OVERLAP__INPUT.setObjectName(u"DATA__TRAIN__OVERLAP__INPUT")
         self.DATA__TRAIN__OVERLAP__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TRAIN__OVERLAP__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__OVERLAP__INPUT.setFont(font)
+        self.DATA__TRAIN__OVERLAP__INPUT.setFont(font1)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__OVERLAP__INPUT, 2, 3, 1, 3)
 
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL = QLabel(self.frame_16)
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL")
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setFont(font)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setFont(font1)
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setIndent(15)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL, 5, 0, 1, 1)
@@ -7722,7 +7374,7 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO")
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setFont(font)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setFont(font1)
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -7733,14 +7385,14 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__PADDING__INPUT.setObjectName(u"DATA__TRAIN__PADDING__INPUT")
         self.DATA__TRAIN__PADDING__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TRAIN__PADDING__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__PADDING__INPUT.setFont(font)
+        self.DATA__TRAIN__PADDING__INPUT.setFont(font1)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__PADDING__INPUT, 3, 3, 1, 3)
 
         self.label_22 = QLabel(self.frame_16)
         self.label_22.setObjectName(u"label_22")
         self.label_22.setMaximumSize(QSize(16777215, 16777215))
-        self.label_22.setFont(font)
+        self.label_22.setFont(font1)
 
         self.gridLayout_20.addWidget(self.label_22, 2, 0, 1, 1)
 
@@ -7756,7 +7408,7 @@ class Ui_MainWindow(object):
 
         self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__LABEL = QLabel(self.frame_16)
         self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__LABEL.setObjectName(u"DATA__TRAIN__INPUT_IMG_AXES_ORDER__LABEL")
-        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__LABEL.setFont(font)
+        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__LABEL.setFont(font1)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__LABEL, 7, 0, 1, 1)
 
@@ -7764,7 +7416,7 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__REPLICATE__INPUT.setObjectName(u"DATA__TRAIN__REPLICATE__INPUT")
         self.DATA__TRAIN__REPLICATE__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TRAIN__REPLICATE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__REPLICATE__INPUT.setFont(font)
+        self.DATA__TRAIN__REPLICATE__INPUT.setFont(font1)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__REPLICATE__INPUT, 0, 3, 1, 3)
 
@@ -7772,14 +7424,14 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT")
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setFont(font)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setFont(font1)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT, 5, 3, 1, 1)
 
         self.train_resolution_label = QLabel(self.frame_16)
         self.train_resolution_label.setObjectName(u"train_resolution_label")
         self.train_resolution_label.setMaximumSize(QSize(16777215, 16777215))
-        self.train_resolution_label.setFont(font)
+        self.train_resolution_label.setFont(font1)
 
         self.gridLayout_20.addWidget(self.train_resolution_label, 1, 0, 1, 1)
 
@@ -7787,7 +7439,7 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT")
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setFont(font)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setFont(font1)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT, 6, 3, 1, 1)
 
@@ -7795,7 +7447,7 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO")
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setFont(font)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setFont(font1)
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -7824,7 +7476,7 @@ class Ui_MainWindow(object):
 
         self.label_21 = QLabel(self.frame_16)
         self.label_21.setObjectName(u"label_21")
-        self.label_21.setFont(font)
+        self.label_21.setFont(font1)
 
         self.gridLayout_20.addWidget(self.label_21, 0, 0, 1, 2)
 
@@ -7832,13 +7484,13 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__RESOLUTION__INPUT.setObjectName(u"DATA__TRAIN__RESOLUTION__INPUT")
         self.DATA__TRAIN__RESOLUTION__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TRAIN__RESOLUTION__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__RESOLUTION__INPUT.setFont(font)
+        self.DATA__TRAIN__RESOLUTION__INPUT.setFont(font1)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__RESOLUTION__INPUT, 1, 3, 1, 3)
 
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL = QLabel(self.frame_16)
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL")
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setFont(font)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setFont(font1)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL, 4, 0, 1, 1)
 
@@ -7860,7 +7512,7 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO")
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setFont(font)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setFont(font1)
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -7873,27 +7525,27 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT")
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT.setFont(font)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT.setFont(font1)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT, 4, 3, 1, 1)
 
         self.label_23 = QLabel(self.frame_16)
         self.label_23.setObjectName(u"label_23")
         self.label_23.setMaximumSize(QSize(16777215, 16777215))
-        self.label_23.setFont(font)
+        self.label_23.setFont(font1)
 
         self.gridLayout_20.addWidget(self.label_23, 3, 0, 1, 1)
 
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL = QLabel(self.frame_16)
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL")
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setFont(font)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setFont(font1)
         self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setIndent(15)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL, 6, 0, 1, 1)
 
         self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__LABEL = QLabel(self.frame_16)
         self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__LABEL.setObjectName(u"DATA__TRAIN__INPUT_MASK_AXES_ORDER__LABEL")
-        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__LABEL.setFont(font)
+        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__LABEL.setFont(font1)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__LABEL, 8, 0, 1, 1)
 
@@ -7911,7 +7563,7 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INPUT.setObjectName(u"DATA__TRAIN__INPUT_IMG_AXES_ORDER__INPUT")
         self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INPUT.setFont(font)
+        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INPUT.setFont(font1)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INPUT, 7, 3, 1, 1)
 
@@ -7919,7 +7571,7 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT.setObjectName(u"DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT")
         self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT.setFont(font)
+        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT.setFont(font1)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT, 8, 3, 1, 1)
 
@@ -7935,21 +7587,21 @@ class Ui_MainWindow(object):
 
         self.DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL = QLabel(self.frame_16)
         self.DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL")
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL.setFont(font)
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL.setFont(font1)
         self.DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL.setIndent(15)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL, 10, 0, 1, 1)
 
         self.DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL = QLabel(self.frame_16)
         self.DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL")
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL.setFont(font)
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL.setFont(font1)
         self.DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL.setIndent(15)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL, 11, 0, 1, 1)
 
         self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__LABEL = QLabel(self.frame_16)
         self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__LABEL.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__ENABLE__LABEL")
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__LABEL.setFont(font)
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__LABEL.setFont(font1)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__LABEL, 9, 0, 1, 1)
 
@@ -7959,7 +7611,7 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT")
         self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.setFont(font)
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.setFont(font1)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT, 9, 3, 1, 1)
 
@@ -7967,7 +7619,7 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO")
         self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setFont(font)
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setFont(font1)
         self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -7976,7 +7628,7 @@ class Ui_MainWindow(object):
 
         self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL = QLabel(self.frame_16)
         self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL")
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL.setFont(font)
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL.setFont(font1)
         self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL.setIndent(15)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL, 12, 0, 1, 1)
@@ -7985,7 +7637,7 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO")
         self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setFont(font)
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setFont(font1)
         self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -7996,7 +7648,7 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO")
         self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setFont(font)
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setFont(font1)
         self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -8007,7 +7659,7 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO")
         self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setFont(font)
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setFont(font1)
         self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -8018,7 +7670,7 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT")
         self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT.setFont(font)
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT.setFont(font1)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT, 10, 3, 1, 1)
 
@@ -8026,7 +7678,7 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT")
         self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT.setFont(font)
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT.setFont(font1)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT, 11, 3, 1, 1)
 
@@ -8034,7 +7686,7 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT")
         self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT.setFont(font)
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT.setFont(font1)
 
         self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT, 12, 3, 1, 1)
 
@@ -8043,15 +7695,13 @@ class Ui_MainWindow(object):
 
         self.label_42 = QLabel(self.train_advanced_options_frame_2)
         self.label_42.setObjectName(u"label_42")
-        self.label_42.setFont(font)
+        self.label_42.setFont(font1)
 
         self.gridLayout_4.addWidget(self.label_42, 24, 0, 1, 1)
 
         self.frame_12 = QFrame(self.train_advanced_options_frame_2)
         self.frame_12.setObjectName(u"frame_12")
-        self.frame_12.setFont(font)
-        self.frame_12.setStyleSheet(u"background: rgb(246,246,246);\n"
-"")
+        self.frame_12.setFont(font1)
         self.frame_12.setFrameShape(QFrame.Box)
         self.frame_12.setFrameShadow(QFrame.Raised)
         self.gridLayout_13 = QGridLayout(self.frame_12)
@@ -8060,7 +7710,7 @@ class Ui_MainWindow(object):
         self.TRAIN__PATIENCE__INPUT.setObjectName(u"TRAIN__PATIENCE__INPUT")
         self.TRAIN__PATIENCE__INPUT.setMinimumSize(QSize(200, 30))
         self.TRAIN__PATIENCE__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__PATIENCE__INPUT.setFont(font)
+        self.TRAIN__PATIENCE__INPUT.setFont(font1)
 
         self.gridLayout_13.addWidget(self.TRAIN__PATIENCE__INPUT, 2, 2, 1, 1)
 
@@ -8068,14 +7718,14 @@ class Ui_MainWindow(object):
         self.TRAIN__EPOCHS__INPUT.setObjectName(u"TRAIN__EPOCHS__INPUT")
         self.TRAIN__EPOCHS__INPUT.setMinimumSize(QSize(200, 30))
         self.TRAIN__EPOCHS__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__EPOCHS__INPUT.setFont(font)
+        self.TRAIN__EPOCHS__INPUT.setFont(font1)
 
         self.gridLayout_13.addWidget(self.TRAIN__EPOCHS__INPUT, 1, 2, 1, 1)
 
         self.MODEL__ARCHITECTURE__LABEL = QLabel(self.frame_12)
         self.MODEL__ARCHITECTURE__LABEL.setObjectName(u"MODEL__ARCHITECTURE__LABEL")
         self.MODEL__ARCHITECTURE__LABEL.setMaximumSize(QSize(16777215, 16777215))
-        self.MODEL__ARCHITECTURE__LABEL.setFont(font)
+        self.MODEL__ARCHITECTURE__LABEL.setFont(font1)
 
         self.gridLayout_13.addWidget(self.MODEL__ARCHITECTURE__LABEL, 4, 0, 1, 1)
 
@@ -8093,13 +7743,13 @@ class Ui_MainWindow(object):
         self.MODEL__ARCHITECTURE__INPUT.setObjectName(u"MODEL__ARCHITECTURE__INPUT")
         self.MODEL__ARCHITECTURE__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__ARCHITECTURE__INPUT.setMaximumSize(QSize(16777215, 30))
-        self.MODEL__ARCHITECTURE__INPUT.setFont(font)
+        self.MODEL__ARCHITECTURE__INPUT.setFont(font1)
 
         self.gridLayout_13.addWidget(self.MODEL__ARCHITECTURE__INPUT, 4, 2, 1, 1)
 
         self.patience_label = QLabel(self.frame_12)
         self.patience_label.setObjectName(u"patience_label")
-        self.patience_label.setFont(font)
+        self.patience_label.setFont(font1)
 
         self.gridLayout_13.addWidget(self.patience_label, 2, 0, 1, 1)
 
@@ -8115,7 +7765,7 @@ class Ui_MainWindow(object):
 
         self.number_of_epochs_label = QLabel(self.frame_12)
         self.number_of_epochs_label.setObjectName(u"number_of_epochs_label")
-        self.number_of_epochs_label.setFont(font)
+        self.number_of_epochs_label.setFont(font1)
 
         self.gridLayout_13.addWidget(self.number_of_epochs_label, 1, 0, 1, 1)
 
@@ -8139,22 +7789,21 @@ class Ui_MainWindow(object):
         self.label_10 = QLabel(self.train_advanced_options_frame_2)
         self.label_10.setObjectName(u"label_10")
         self.label_10.setMaximumSize(QSize(200, 35))
-        self.label_10.setFont(font)
+        self.label_10.setFont(font1)
 
         self.gridLayout_4.addWidget(self.label_10, 9, 0, 1, 1)
 
         self.transformers_frame = QFrame(self.train_advanced_options_frame_2)
         self.transformers_frame.setObjectName(u"transformers_frame")
         self.transformers_frame.setMinimumSize(QSize(0, 0))
-        self.transformers_frame.setFont(font)
-        self.transformers_frame.setStyleSheet(u"background: rgb(246,246,246);")
+        self.transformers_frame.setFont(font1)
         self.transformers_frame.setFrameShape(QFrame.Box)
         self.transformers_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_23 = QGridLayout(self.transformers_frame)
         self.gridLayout_23.setObjectName(u"gridLayout_23")
         self.MODEL__MAE_MASK_RATIO__LABEL = QLabel(self.transformers_frame)
         self.MODEL__MAE_MASK_RATIO__LABEL.setObjectName(u"MODEL__MAE_MASK_RATIO__LABEL")
-        self.MODEL__MAE_MASK_RATIO__LABEL.setFont(font)
+        self.MODEL__MAE_MASK_RATIO__LABEL.setFont(font1)
         self.MODEL__MAE_MASK_RATIO__LABEL.setIndent(15)
 
         self.gridLayout_23.addWidget(self.MODEL__MAE_MASK_RATIO__LABEL, 12, 0, 1, 1)
@@ -8163,7 +7812,7 @@ class Ui_MainWindow(object):
         self.MODEL__MAE_MASK_RATIO__INPUT.setObjectName(u"MODEL__MAE_MASK_RATIO__INPUT")
         self.MODEL__MAE_MASK_RATIO__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__MAE_MASK_RATIO__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__MAE_MASK_RATIO__INPUT.setFont(font)
+        self.MODEL__MAE_MASK_RATIO__INPUT.setFont(font1)
 
         self.gridLayout_23.addWidget(self.MODEL__MAE_MASK_RATIO__INPUT, 12, 2, 1, 1)
 
@@ -8171,7 +7820,7 @@ class Ui_MainWindow(object):
         self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT.setObjectName(u"MODEL__UNETR_VIT_NUM_FILTERS__INPUT")
         self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT.setFont(font)
+        self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT.setFont(font1)
 
         self.gridLayout_23.addWidget(self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT, 8, 2, 1, 1)
 
@@ -8192,7 +7841,7 @@ class Ui_MainWindow(object):
         self.label_52 = QLabel(self.transformers_frame)
         self.label_52.setObjectName(u"label_52")
         self.label_52.setMaximumSize(QSize(16777215, 16777215))
-        self.label_52.setFont(font)
+        self.label_52.setFont(font1)
 
         self.gridLayout_23.addWidget(self.label_52, 3, 0, 1, 1)
 
@@ -8200,7 +7849,7 @@ class Ui_MainWindow(object):
         self.MODEL__UNETR_VIT_HIDD_MULT__INPUT.setObjectName(u"MODEL__UNETR_VIT_HIDD_MULT__INPUT")
         self.MODEL__UNETR_VIT_HIDD_MULT__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__UNETR_VIT_HIDD_MULT__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__UNETR_VIT_HIDD_MULT__INPUT.setFont(font)
+        self.MODEL__UNETR_VIT_HIDD_MULT__INPUT.setFont(font1)
 
         self.gridLayout_23.addWidget(self.MODEL__UNETR_VIT_HIDD_MULT__INPUT, 7, 2, 1, 1)
 
@@ -8208,7 +7857,7 @@ class Ui_MainWindow(object):
         self.MODEL__VIT_NUM_HEADS__INPUT.setObjectName(u"MODEL__VIT_NUM_HEADS__INPUT")
         self.MODEL__VIT_NUM_HEADS__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__VIT_NUM_HEADS__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__VIT_NUM_HEADS__INPUT.setFont(font)
+        self.MODEL__VIT_NUM_HEADS__INPUT.setFont(font1)
 
         self.gridLayout_23.addWidget(self.MODEL__VIT_NUM_HEADS__INPUT, 3, 2, 1, 1)
 
@@ -8216,7 +7865,7 @@ class Ui_MainWindow(object):
         self.MODEL__VIT_NUM_LAYERS__INPUT.setObjectName(u"MODEL__VIT_NUM_LAYERS__INPUT")
         self.MODEL__VIT_NUM_LAYERS__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__VIT_NUM_LAYERS__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__VIT_NUM_LAYERS__INPUT.setFont(font)
+        self.MODEL__VIT_NUM_LAYERS__INPUT.setFont(font1)
 
         self.gridLayout_23.addWidget(self.MODEL__VIT_NUM_LAYERS__INPUT, 2, 2, 1, 1)
 
@@ -8226,7 +7875,7 @@ class Ui_MainWindow(object):
         self.MODEL__MAE_MASK_TYPE__INPUT.setObjectName(u"MODEL__MAE_MASK_TYPE__INPUT")
         self.MODEL__MAE_MASK_TYPE__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__MAE_MASK_TYPE__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__MAE_MASK_TYPE__INPUT.setFont(font)
+        self.MODEL__MAE_MASK_TYPE__INPUT.setFont(font1)
 
         self.gridLayout_23.addWidget(self.MODEL__MAE_MASK_TYPE__INPUT, 11, 2, 1, 1)
 
@@ -8243,7 +7892,7 @@ class Ui_MainWindow(object):
         self.label_55 = QLabel(self.transformers_frame)
         self.label_55.setObjectName(u"label_55")
         self.label_55.setMaximumSize(QSize(16777215, 16777215))
-        self.label_55.setFont(font)
+        self.label_55.setFont(font1)
 
         self.gridLayout_23.addWidget(self.label_55, 5, 0, 1, 1)
 
@@ -8251,7 +7900,7 @@ class Ui_MainWindow(object):
         self.MODEL__MAE_MASK_TYPE__INFO.setObjectName(u"MODEL__MAE_MASK_TYPE__INFO")
         self.MODEL__MAE_MASK_TYPE__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__MAE_MASK_TYPE__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__MAE_MASK_TYPE__INFO.setFont(font)
+        self.MODEL__MAE_MASK_TYPE__INFO.setFont(font1)
         self.MODEL__MAE_MASK_TYPE__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -8260,7 +7909,7 @@ class Ui_MainWindow(object):
 
         self.MODEL__MAE_DEC_MLP_DIMS__LABEL = QLabel(self.transformers_frame)
         self.MODEL__MAE_DEC_MLP_DIMS__LABEL.setObjectName(u"MODEL__MAE_DEC_MLP_DIMS__LABEL")
-        self.MODEL__MAE_DEC_MLP_DIMS__LABEL.setFont(font)
+        self.MODEL__MAE_DEC_MLP_DIMS__LABEL.setFont(font1)
 
         self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_MLP_DIMS__LABEL, 16, 0, 1, 1)
 
@@ -8276,7 +7925,7 @@ class Ui_MainWindow(object):
 
         self.MODEL__VIT_NORM_EPS__LABEL = QLabel(self.transformers_frame)
         self.MODEL__VIT_NORM_EPS__LABEL.setObjectName(u"MODEL__VIT_NORM_EPS__LABEL")
-        self.MODEL__VIT_NORM_EPS__LABEL.setFont(font)
+        self.MODEL__VIT_NORM_EPS__LABEL.setFont(font1)
 
         self.gridLayout_23.addWidget(self.MODEL__VIT_NORM_EPS__LABEL, 6, 0, 1, 1)
 
@@ -8284,20 +7933,20 @@ class Ui_MainWindow(object):
         self.MODEL__MAE_DEC_NUM_LAYERS__INPUT.setObjectName(u"MODEL__MAE_DEC_NUM_LAYERS__INPUT")
         self.MODEL__MAE_DEC_NUM_LAYERS__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__MAE_DEC_NUM_LAYERS__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__MAE_DEC_NUM_LAYERS__INPUT.setFont(font)
+        self.MODEL__MAE_DEC_NUM_LAYERS__INPUT.setFont(font1)
 
         self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_NUM_LAYERS__INPUT, 14, 2, 1, 1)
 
         self.label_53 = QLabel(self.transformers_frame)
         self.label_53.setObjectName(u"label_53")
         self.label_53.setMaximumSize(QSize(16777215, 16777215))
-        self.label_53.setFont(font)
+        self.label_53.setFont(font1)
 
         self.gridLayout_23.addWidget(self.label_53, 2, 0, 1, 1)
 
         self.unetr_dec_act_label = QLabel(self.transformers_frame)
         self.unetr_dec_act_label.setObjectName(u"unetr_dec_act_label")
-        self.unetr_dec_act_label.setFont(font)
+        self.unetr_dec_act_label.setFont(font1)
 
         self.gridLayout_23.addWidget(self.unetr_dec_act_label, 9, 0, 1, 1)
 
@@ -8314,7 +7963,7 @@ class Ui_MainWindow(object):
         self.unetr_vit_hidden_multiple_label = QLabel(self.transformers_frame)
         self.unetr_vit_hidden_multiple_label.setObjectName(u"unetr_vit_hidden_multiple_label")
         self.unetr_vit_hidden_multiple_label.setMaximumSize(QSize(16777215, 16777215))
-        self.unetr_vit_hidden_multiple_label.setFont(font)
+        self.unetr_vit_hidden_multiple_label.setFont(font1)
 
         self.gridLayout_23.addWidget(self.unetr_vit_hidden_multiple_label, 7, 0, 1, 1)
 
@@ -8322,7 +7971,7 @@ class Ui_MainWindow(object):
         self.MODEL__VIT_EMBED_DIM__INPUT.setObjectName(u"MODEL__VIT_EMBED_DIM__INPUT")
         self.MODEL__VIT_EMBED_DIM__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__VIT_EMBED_DIM__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__VIT_EMBED_DIM__INPUT.setFont(font)
+        self.MODEL__VIT_EMBED_DIM__INPUT.setFont(font1)
 
         self.gridLayout_23.addWidget(self.MODEL__VIT_EMBED_DIM__INPUT, 1, 2, 1, 1)
 
@@ -8338,7 +7987,7 @@ class Ui_MainWindow(object):
 
         self.MODEL__MAE_MASK_TYPE__LABEL = QLabel(self.transformers_frame)
         self.MODEL__MAE_MASK_TYPE__LABEL.setObjectName(u"MODEL__MAE_MASK_TYPE__LABEL")
-        self.MODEL__MAE_MASK_TYPE__LABEL.setFont(font)
+        self.MODEL__MAE_MASK_TYPE__LABEL.setFont(font1)
 
         self.gridLayout_23.addWidget(self.MODEL__MAE_MASK_TYPE__LABEL, 11, 0, 1, 1)
 
@@ -8376,7 +8025,7 @@ class Ui_MainWindow(object):
         self.MODEL__MAE_DEC_NUM_HEADS__INPUT.setObjectName(u"MODEL__MAE_DEC_NUM_HEADS__INPUT")
         self.MODEL__MAE_DEC_NUM_HEADS__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__MAE_DEC_NUM_HEADS__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__MAE_DEC_NUM_HEADS__INPUT.setFont(font)
+        self.MODEL__MAE_DEC_NUM_HEADS__INPUT.setFont(font1)
 
         self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_NUM_HEADS__INPUT, 15, 2, 1, 1)
 
@@ -8407,7 +8056,7 @@ class Ui_MainWindow(object):
         self.MODEL__UNETR_DEC_ACTIVATION__INPUT.setObjectName(u"MODEL__UNETR_DEC_ACTIVATION__INPUT")
         self.MODEL__UNETR_DEC_ACTIVATION__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__UNETR_DEC_ACTIVATION__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__UNETR_DEC_ACTIVATION__INPUT.setFont(font)
+        self.MODEL__UNETR_DEC_ACTIVATION__INPUT.setFont(font1)
 
         self.gridLayout_23.addWidget(self.MODEL__UNETR_DEC_ACTIVATION__INPUT, 9, 2, 1, 1)
 
@@ -8425,7 +8074,7 @@ class Ui_MainWindow(object):
         self.MODEL__VIT_NORM_EPS__INPUT.setObjectName(u"MODEL__VIT_NORM_EPS__INPUT")
         self.MODEL__VIT_NORM_EPS__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__VIT_NORM_EPS__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__VIT_NORM_EPS__INPUT.setFont(font)
+        self.MODEL__VIT_NORM_EPS__INPUT.setFont(font1)
 
         self.gridLayout_23.addWidget(self.MODEL__VIT_NORM_EPS__INPUT, 6, 2, 1, 1)
 
@@ -8443,7 +8092,7 @@ class Ui_MainWindow(object):
         self.MODEL__MAE_DEC_MLP_DIMS__INPUT.setObjectName(u"MODEL__MAE_DEC_MLP_DIMS__INPUT")
         self.MODEL__MAE_DEC_MLP_DIMS__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__MAE_DEC_MLP_DIMS__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__MAE_DEC_MLP_DIMS__INPUT.setFont(font)
+        self.MODEL__MAE_DEC_MLP_DIMS__INPUT.setFont(font1)
 
         self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_MLP_DIMS__INPUT, 16, 2, 1, 1)
 
@@ -8469,19 +8118,19 @@ class Ui_MainWindow(object):
 
         self.MODEL__MAE_DEC_NUM_LAYERS__LABEL = QLabel(self.transformers_frame)
         self.MODEL__MAE_DEC_NUM_LAYERS__LABEL.setObjectName(u"MODEL__MAE_DEC_NUM_LAYERS__LABEL")
-        self.MODEL__MAE_DEC_NUM_LAYERS__LABEL.setFont(font)
+        self.MODEL__MAE_DEC_NUM_LAYERS__LABEL.setFont(font1)
 
         self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_NUM_LAYERS__LABEL, 14, 0, 1, 1)
 
         self.MODEL__MAE_DEC_HIDDEN_SIZE__LABEL = QLabel(self.transformers_frame)
         self.MODEL__MAE_DEC_HIDDEN_SIZE__LABEL.setObjectName(u"MODEL__MAE_DEC_HIDDEN_SIZE__LABEL")
-        self.MODEL__MAE_DEC_HIDDEN_SIZE__LABEL.setFont(font)
+        self.MODEL__MAE_DEC_HIDDEN_SIZE__LABEL.setFont(font1)
 
         self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_HIDDEN_SIZE__LABEL, 13, 0, 1, 1)
 
         self.MODEL__MAE_DEC_NUM_HEADS__LABEL = QLabel(self.transformers_frame)
         self.MODEL__MAE_DEC_NUM_HEADS__LABEL.setObjectName(u"MODEL__MAE_DEC_NUM_HEADS__LABEL")
-        self.MODEL__MAE_DEC_NUM_HEADS__LABEL.setFont(font)
+        self.MODEL__MAE_DEC_NUM_HEADS__LABEL.setFont(font1)
 
         self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_NUM_HEADS__LABEL, 15, 0, 1, 1)
 
@@ -8489,14 +8138,14 @@ class Ui_MainWindow(object):
         self.MODEL__VIT_TOKEN_SIZE__INPUT.setObjectName(u"MODEL__VIT_TOKEN_SIZE__INPUT")
         self.MODEL__VIT_TOKEN_SIZE__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__VIT_TOKEN_SIZE__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__VIT_TOKEN_SIZE__INPUT.setFont(font)
+        self.MODEL__VIT_TOKEN_SIZE__INPUT.setFont(font1)
 
         self.gridLayout_23.addWidget(self.MODEL__VIT_TOKEN_SIZE__INPUT, 0, 2, 1, 1)
 
         self.label_50 = QLabel(self.transformers_frame)
         self.label_50.setObjectName(u"label_50")
         self.label_50.setMaximumSize(QSize(16777215, 16777215))
-        self.label_50.setFont(font)
+        self.label_50.setFont(font1)
 
         self.gridLayout_23.addWidget(self.label_50, 0, 0, 1, 1)
 
@@ -8504,20 +8153,20 @@ class Ui_MainWindow(object):
         self.MODEL__VIT_MLP_RATIO__INPUT.setObjectName(u"MODEL__VIT_MLP_RATIO__INPUT")
         self.MODEL__VIT_MLP_RATIO__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__VIT_MLP_RATIO__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__VIT_MLP_RATIO__INPUT.setFont(font)
+        self.MODEL__VIT_MLP_RATIO__INPUT.setFont(font1)
 
         self.gridLayout_23.addWidget(self.MODEL__VIT_MLP_RATIO__INPUT, 5, 2, 1, 1)
 
         self.unetr_num_filters_label = QLabel(self.transformers_frame)
         self.unetr_num_filters_label.setObjectName(u"unetr_num_filters_label")
-        self.unetr_num_filters_label.setFont(font)
+        self.unetr_num_filters_label.setFont(font1)
 
         self.gridLayout_23.addWidget(self.unetr_num_filters_label, 8, 0, 1, 1)
 
         self.label_51 = QLabel(self.transformers_frame)
         self.label_51.setObjectName(u"label_51")
         self.label_51.setMaximumSize(QSize(16777215, 16777215))
-        self.label_51.setFont(font)
+        self.label_51.setFont(font1)
 
         self.gridLayout_23.addWidget(self.label_51, 1, 0, 1, 1)
 
@@ -8525,13 +8174,13 @@ class Ui_MainWindow(object):
         self.MODEL__MAE_DEC_HIDDEN_SIZE__INPUT.setObjectName(u"MODEL__MAE_DEC_HIDDEN_SIZE__INPUT")
         self.MODEL__MAE_DEC_HIDDEN_SIZE__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__MAE_DEC_HIDDEN_SIZE__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__MAE_DEC_HIDDEN_SIZE__INPUT.setFont(font)
+        self.MODEL__MAE_DEC_HIDDEN_SIZE__INPUT.setFont(font1)
 
         self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_HIDDEN_SIZE__INPUT, 13, 2, 1, 1)
 
         self.MODEL__UNETR_DEC_KERNEL_SIZE__LABEL = QLabel(self.transformers_frame)
         self.MODEL__UNETR_DEC_KERNEL_SIZE__LABEL.setObjectName(u"MODEL__UNETR_DEC_KERNEL_SIZE__LABEL")
-        self.MODEL__UNETR_DEC_KERNEL_SIZE__LABEL.setFont(font)
+        self.MODEL__UNETR_DEC_KERNEL_SIZE__LABEL.setFont(font1)
 
         self.gridLayout_23.addWidget(self.MODEL__UNETR_DEC_KERNEL_SIZE__LABEL, 10, 0, 1, 1)
 
@@ -8539,7 +8188,7 @@ class Ui_MainWindow(object):
         self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setObjectName(u"MODEL__UNETR_DEC_KERNEL_SIZE__INFO")
         self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setMinimumSize(QSize(30, 30))
         self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setFont(font)
+        self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setFont(font1)
         self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -8550,7 +8199,7 @@ class Ui_MainWindow(object):
         self.MODEL__UNETR_DEC_KERNEL_SIZE__INPUT.setObjectName(u"MODEL__UNETR_DEC_KERNEL_SIZE__INPUT")
         self.MODEL__UNETR_DEC_KERNEL_SIZE__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__UNETR_DEC_KERNEL_SIZE__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__UNETR_DEC_KERNEL_SIZE__INPUT.setFont(font)
+        self.MODEL__UNETR_DEC_KERNEL_SIZE__INPUT.setFont(font1)
 
         self.gridLayout_23.addWidget(self.MODEL__UNETR_DEC_KERNEL_SIZE__INPUT, 10, 2, 1, 1)
 
@@ -8560,9 +8209,7 @@ class Ui_MainWindow(object):
         self.frame_19 = QFrame(self.train_advanced_options_frame_2)
         self.frame_19.setObjectName(u"frame_19")
         self.frame_19.setMinimumSize(QSize(0, 0))
-        self.frame_19.setFont(font)
-        self.frame_19.setStyleSheet(u"background: rgb(246,246,246);\n"
-"")
+        self.frame_19.setFont(font1)
         self.frame_19.setFrameShape(QFrame.Box)
         self.frame_19.setFrameShadow(QFrame.Raised)
         self.gridLayout_21 = QGridLayout(self.frame_19)
@@ -8580,7 +8227,7 @@ class Ui_MainWindow(object):
         self.random_val_label = QLabel(self.frame_19)
         self.random_val_label.setObjectName(u"random_val_label")
         self.random_val_label.setMaximumSize(QSize(16777215, 16777215))
-        self.random_val_label.setFont(font)
+        self.random_val_label.setFont(font1)
 
         self.gridLayout_21.addWidget(self.random_val_label, 0, 0, 1, 2)
 
@@ -8590,7 +8237,7 @@ class Ui_MainWindow(object):
         self.DATA__VAL__RANDOM__INPUT.setObjectName(u"DATA__VAL__RANDOM__INPUT")
         self.DATA__VAL__RANDOM__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__VAL__RANDOM__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__RANDOM__INPUT.setFont(font)
+        self.DATA__VAL__RANDOM__INPUT.setFont(font1)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__RANDOM__INPUT, 0, 3, 1, 3)
 
@@ -8608,21 +8255,21 @@ class Ui_MainWindow(object):
         self.DATA__VAL__OVERLAP__INPUT.setObjectName(u"DATA__VAL__OVERLAP__INPUT")
         self.DATA__VAL__OVERLAP__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__VAL__OVERLAP__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__OVERLAP__INPUT.setFont(font)
+        self.DATA__VAL__OVERLAP__INPUT.setFont(font1)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__OVERLAP__INPUT, 1, 3, 1, 3)
 
         self.validation_padding_label = QLabel(self.frame_19)
         self.validation_padding_label.setObjectName(u"validation_padding_label")
         self.validation_padding_label.setMaximumSize(QSize(16777215, 16777215))
-        self.validation_padding_label.setFont(font)
+        self.validation_padding_label.setFont(font1)
 
         self.gridLayout_21.addWidget(self.validation_padding_label, 2, 0, 1, 1)
 
         self.validation_overlap_label = QLabel(self.frame_19)
         self.validation_overlap_label.setObjectName(u"validation_overlap_label")
         self.validation_overlap_label.setMaximumSize(QSize(16777215, 16777215))
-        self.validation_overlap_label.setFont(font)
+        self.validation_overlap_label.setFont(font1)
 
         self.gridLayout_21.addWidget(self.validation_overlap_label, 1, 0, 1, 1)
 
@@ -8630,7 +8277,7 @@ class Ui_MainWindow(object):
         self.DATA__VAL__PADDING__INPUT.setObjectName(u"DATA__VAL__PADDING__INPUT")
         self.DATA__VAL__PADDING__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__VAL__PADDING__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__PADDING__INPUT.setFont(font)
+        self.DATA__VAL__PADDING__INPUT.setFont(font1)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__PADDING__INPUT, 2, 3, 1, 3)
 
@@ -8646,7 +8293,7 @@ class Ui_MainWindow(object):
 
         self.label_33 = QLabel(self.frame_19)
         self.label_33.setObjectName(u"label_33")
-        self.label_33.setFont(font)
+        self.label_33.setFont(font1)
 
         self.gridLayout_21.addWidget(self.label_33, 3, 0, 1, 1)
 
@@ -8664,7 +8311,7 @@ class Ui_MainWindow(object):
         self.DATA__VAL__RESOLUTION__INPUT.setObjectName(u"DATA__VAL__RESOLUTION__INPUT")
         self.DATA__VAL__RESOLUTION__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__VAL__RESOLUTION__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__RESOLUTION__INPUT.setFont(font)
+        self.DATA__VAL__RESOLUTION__INPUT.setFont(font1)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__RESOLUTION__INPUT, 3, 3, 1, 3)
 
@@ -8674,7 +8321,7 @@ class Ui_MainWindow(object):
 
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__LABEL = QLabel(self.frame_19)
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__LABEL.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__LABEL")
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__LABEL.setFont(font)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__LABEL.setFont(font1)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__LABEL, 4, 0, 1, 2)
 
@@ -8682,7 +8329,7 @@ class Ui_MainWindow(object):
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO")
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO.setFont(font)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO.setFont(font1)
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -8693,7 +8340,7 @@ class Ui_MainWindow(object):
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO")
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setFont(font)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setFont(font1)
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -8706,20 +8353,20 @@ class Ui_MainWindow(object):
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT")
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT.setFont(font)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT.setFont(font1)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT, 4, 3, 1, 3)
 
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL = QLabel(self.frame_19)
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL")
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setFont(font)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setFont(font1)
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setIndent(15)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL, 5, 0, 1, 2)
 
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL = QLabel(self.frame_19)
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL")
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setFont(font)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setFont(font1)
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setIndent(15)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL, 6, 0, 1, 2)
@@ -8728,7 +8375,7 @@ class Ui_MainWindow(object):
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO")
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setFont(font)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setFont(font1)
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -8739,13 +8386,13 @@ class Ui_MainWindow(object):
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT")
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setFont(font)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setFont(font1)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT, 5, 3, 1, 3)
 
         self.DATA__VAL__INPUT_MASK_AXES_ORDER__LABEL = QLabel(self.frame_19)
         self.DATA__VAL__INPUT_MASK_AXES_ORDER__LABEL.setObjectName(u"DATA__VAL__INPUT_MASK_AXES_ORDER__LABEL")
-        self.DATA__VAL__INPUT_MASK_AXES_ORDER__LABEL.setFont(font)
+        self.DATA__VAL__INPUT_MASK_AXES_ORDER__LABEL.setFont(font1)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_MASK_AXES_ORDER__LABEL, 8, 0, 1, 1)
 
@@ -8753,7 +8400,7 @@ class Ui_MainWindow(object):
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT")
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setFont(font)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setFont(font1)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT, 6, 3, 1, 3)
 
@@ -8769,7 +8416,7 @@ class Ui_MainWindow(object):
 
         self.DATA__VAL__INPUT_IMG_AXES_ORDER__LABEL = QLabel(self.frame_19)
         self.DATA__VAL__INPUT_IMG_AXES_ORDER__LABEL.setObjectName(u"DATA__VAL__INPUT_IMG_AXES_ORDER__LABEL")
-        self.DATA__VAL__INPUT_IMG_AXES_ORDER__LABEL.setFont(font)
+        self.DATA__VAL__INPUT_IMG_AXES_ORDER__LABEL.setFont(font1)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_IMG_AXES_ORDER__LABEL, 7, 0, 1, 1)
 
@@ -8777,7 +8424,7 @@ class Ui_MainWindow(object):
         self.DATA__VAL__INPUT_IMG_AXES_ORDER__INPUT.setObjectName(u"DATA__VAL__INPUT_IMG_AXES_ORDER__INPUT")
         self.DATA__VAL__INPUT_IMG_AXES_ORDER__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__VAL__INPUT_IMG_AXES_ORDER__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INPUT.setFont(font)
+        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INPUT.setFont(font1)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_IMG_AXES_ORDER__INPUT, 7, 3, 1, 1)
 
@@ -8785,7 +8432,7 @@ class Ui_MainWindow(object):
         self.DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT.setObjectName(u"DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT")
         self.DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT.setFont(font)
+        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT.setFont(font1)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT, 8, 3, 1, 1)
 
@@ -8801,27 +8448,27 @@ class Ui_MainWindow(object):
 
         self.DATA__VAL__FILTER_SAMPLES__ENABLE__LABEL = QLabel(self.frame_19)
         self.DATA__VAL__FILTER_SAMPLES__ENABLE__LABEL.setObjectName(u"DATA__VAL__FILTER_SAMPLES__ENABLE__LABEL")
-        self.DATA__VAL__FILTER_SAMPLES__ENABLE__LABEL.setFont(font)
+        self.DATA__VAL__FILTER_SAMPLES__ENABLE__LABEL.setFont(font1)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__ENABLE__LABEL, 9, 0, 1, 1)
 
         self.DATA__VAL__FILTER_SAMPLES__PROPS__LABEL = QLabel(self.frame_19)
         self.DATA__VAL__FILTER_SAMPLES__PROPS__LABEL.setObjectName(u"DATA__VAL__FILTER_SAMPLES__PROPS__LABEL")
-        self.DATA__VAL__FILTER_SAMPLES__PROPS__LABEL.setFont(font)
+        self.DATA__VAL__FILTER_SAMPLES__PROPS__LABEL.setFont(font1)
         self.DATA__VAL__FILTER_SAMPLES__PROPS__LABEL.setIndent(15)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__PROPS__LABEL, 10, 0, 1, 1)
 
         self.DATA__VAL__FILTER_SAMPLES__VALUES__LABEL = QLabel(self.frame_19)
         self.DATA__VAL__FILTER_SAMPLES__VALUES__LABEL.setObjectName(u"DATA__VAL__FILTER_SAMPLES__VALUES__LABEL")
-        self.DATA__VAL__FILTER_SAMPLES__VALUES__LABEL.setFont(font)
+        self.DATA__VAL__FILTER_SAMPLES__VALUES__LABEL.setFont(font1)
         self.DATA__VAL__FILTER_SAMPLES__VALUES__LABEL.setIndent(15)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__VALUES__LABEL, 11, 0, 1, 1)
 
         self.DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL = QLabel(self.frame_19)
         self.DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL.setObjectName(u"DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL")
-        self.DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL.setFont(font)
+        self.DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL.setFont(font1)
         self.DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL.setIndent(15)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL, 12, 0, 1, 1)
@@ -8837,7 +8484,7 @@ class Ui_MainWindow(object):
         self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.setSizePolicy(sizePolicy2)
         self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.setFont(font)
+        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.setFont(font1)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT, 9, 3, 1, 1)
 
@@ -8850,7 +8497,7 @@ class Ui_MainWindow(object):
         self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT.setSizePolicy(sizePolicy3)
         self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT.setFont(font)
+        self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT.setFont(font1)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT, 10, 3, 1, 1)
 
@@ -8860,7 +8507,7 @@ class Ui_MainWindow(object):
         self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT.setSizePolicy(sizePolicy3)
         self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT.setFont(font)
+        self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT.setFont(font1)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT, 11, 3, 1, 1)
 
@@ -8870,7 +8517,7 @@ class Ui_MainWindow(object):
         self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT.setSizePolicy(sizePolicy3)
         self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT.setFont(font)
+        self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT.setFont(font1)
 
         self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT, 12, 3, 1, 1)
 
@@ -8920,14 +8567,14 @@ class Ui_MainWindow(object):
         self.label_31 = QLabel(self.train_advanced_options_frame_2)
         self.label_31.setObjectName(u"label_31")
         self.label_31.setMaximumSize(QSize(150, 16777215))
-        self.label_31.setFont(font)
+        self.label_31.setFont(font1)
 
         self.gridLayout_4.addWidget(self.label_31, 16, 0, 1, 1)
 
         self.transformers_label = QLabel(self.train_advanced_options_frame_2)
         self.transformers_label.setObjectName(u"transformers_label")
         self.transformers_label.setMaximumSize(QSize(16777215, 16777215))
-        self.transformers_label.setFont(font)
+        self.transformers_label.setFont(font1)
 
         self.gridLayout_4.addWidget(self.transformers_label, 20, 0, 1, 1)
 
@@ -8944,16 +8591,14 @@ class Ui_MainWindow(object):
         self.train_label = QLabel(self.scrollAreaWidgetContents_3)
         self.train_label.setObjectName(u"train_label")
         self.train_label.setMaximumSize(QSize(150, 16777215))
-        self.train_label.setFont(font)
+        self.train_label.setFont(font1)
 
         self.gridLayout_3.addWidget(self.train_label, 0, 0, 1, 2)
 
         self.frame_3 = QFrame(self.scrollAreaWidgetContents_3)
         self.frame_3.setObjectName(u"frame_3")
         self.frame_3.setMaximumSize(QSize(16777215, 16777215))
-        self.frame_3.setFont(font)
-        self.frame_3.setStyleSheet(u"background: rgb(246,246,246);\n"
-"")
+        self.frame_3.setFont(font1)
         self.frame_3.setFrameShape(QFrame.Box)
         self.frame_3.setFrameShadow(QFrame.Raised)
         self.gridLayout_6 = QGridLayout(self.frame_3)
@@ -8961,7 +8606,7 @@ class Ui_MainWindow(object):
         self.train_data_gt_input_browse_bn = QPushButton(self.frame_3)
         self.train_data_gt_input_browse_bn.setObjectName(u"train_data_gt_input_browse_bn")
         self.train_data_gt_input_browse_bn.setMaximumSize(QSize(130, 30))
-        self.train_data_gt_input_browse_bn.setFont(font)
+        self.train_data_gt_input_browse_bn.setFont(font1)
 
         self.gridLayout_6.addWidget(self.train_data_gt_input_browse_bn, 1, 4, 1, 1)
 
@@ -8972,14 +8617,14 @@ class Ui_MainWindow(object):
         self.train_data_in_memory = QLabel(self.frame_3)
         self.train_data_in_memory.setObjectName(u"train_data_in_memory")
         self.train_data_in_memory.setMaximumSize(QSize(16777215, 16777215))
-        self.train_data_in_memory.setFont(font)
+        self.train_data_in_memory.setFont(font1)
 
         self.gridLayout_6.addWidget(self.train_data_in_memory, 4, 1, 1, 1)
 
         self.train_data_input_browse_bn = QPushButton(self.frame_3)
         self.train_data_input_browse_bn.setObjectName(u"train_data_input_browse_bn")
         self.train_data_input_browse_bn.setMaximumSize(QSize(16777215, 30))
-        self.train_data_input_browse_bn.setFont(font)
+        self.train_data_input_browse_bn.setFont(font1)
 
         self.gridLayout_6.addWidget(self.train_data_input_browse_bn, 0, 4, 1, 1)
 
@@ -8996,7 +8641,7 @@ class Ui_MainWindow(object):
         self.train_data_label = QLabel(self.frame_3)
         self.train_data_label.setObjectName(u"train_data_label")
         self.train_data_label.setMaximumSize(QSize(200, 35))
-        self.train_data_label.setFont(font)
+        self.train_data_label.setFont(font1)
 
         self.gridLayout_6.addWidget(self.train_data_label, 0, 1, 1, 1)
 
@@ -9004,7 +8649,7 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__PATH__INPUT.setObjectName(u"DATA__TRAIN__PATH__INPUT")
         self.DATA__TRAIN__PATH__INPUT.setMinimumSize(QSize(500, 30))
         self.DATA__TRAIN__PATH__INPUT.setMaximumSize(QSize(500, 30))
-        self.DATA__TRAIN__PATH__INPUT.setFont(font)
+        self.DATA__TRAIN__PATH__INPUT.setFont(font1)
 
         self.gridLayout_6.addWidget(self.DATA__TRAIN__PATH__INPUT, 0, 3, 1, 1)
 
@@ -9032,14 +8677,14 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__GT_PATH__INPUT.setObjectName(u"DATA__TRAIN__GT_PATH__INPUT")
         self.DATA__TRAIN__GT_PATH__INPUT.setMinimumSize(QSize(500, 30))
         self.DATA__TRAIN__GT_PATH__INPUT.setMaximumSize(QSize(500, 30))
-        self.DATA__TRAIN__GT_PATH__INPUT.setFont(font)
+        self.DATA__TRAIN__GT_PATH__INPUT.setFont(font1)
 
         self.gridLayout_6.addWidget(self.DATA__TRAIN__GT_PATH__INPUT, 1, 3, 1, 1)
 
         self.train_gt_label = QLabel(self.frame_3)
         self.train_gt_label.setObjectName(u"train_gt_label")
         self.train_gt_label.setMaximumSize(QSize(16777215, 35))
-        self.train_gt_label.setFont(font)
+        self.train_gt_label.setFont(font1)
 
         self.gridLayout_6.addWidget(self.train_gt_label, 1, 1, 1, 1)
 
@@ -9049,14 +8694,14 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__IN_MEMORY__INPUT.setObjectName(u"DATA__TRAIN__IN_MEMORY__INPUT")
         self.DATA__TRAIN__IN_MEMORY__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TRAIN__IN_MEMORY__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__IN_MEMORY__INPUT.setFont(font)
+        self.DATA__TRAIN__IN_MEMORY__INPUT.setFont(font1)
 
         self.gridLayout_6.addWidget(self.DATA__TRAIN__IN_MEMORY__INPUT, 4, 3, 1, 1)
 
         self.label_6 = QLabel(self.frame_3)
         self.label_6.setObjectName(u"label_6")
         self.label_6.setMinimumSize(QSize(0, 30))
-        self.label_6.setFont(font)
+        self.label_6.setFont(font1)
 
         self.gridLayout_6.addWidget(self.label_6, 5, 1, 1, 1)
 
@@ -9074,7 +8719,7 @@ class Ui_MainWindow(object):
         self.DATA__PATCH_SIZE__INPUT.setObjectName(u"DATA__PATCH_SIZE__INPUT")
         self.DATA__PATCH_SIZE__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PATCH_SIZE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PATCH_SIZE__INPUT.setFont(font)
+        self.DATA__PATCH_SIZE__INPUT.setFont(font1)
 
         self.gridLayout_6.addWidget(self.DATA__PATCH_SIZE__INPUT, 5, 3, 1, 1)
 
@@ -9084,7 +8729,7 @@ class Ui_MainWindow(object):
         self.frame_13 = QFrame(self.scrollAreaWidgetContents_3)
         self.frame_13.setObjectName(u"frame_13")
         self.frame_13.setMinimumSize(QSize(0, 30))
-        self.frame_13.setFont(font)
+        self.frame_13.setFont(font1)
         self.frame_13.setFrameShape(QFrame.NoFrame)
         self.frame_13.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_10 = QHBoxLayout(self.frame_13)
@@ -9094,24 +8739,14 @@ class Ui_MainWindow(object):
         self.train_advanced_label = QLabel(self.frame_13)
         self.train_advanced_label.setObjectName(u"train_advanced_label")
         self.train_advanced_label.setMaximumSize(QSize(150, 35))
-        self.train_advanced_label.setFont(font)
+        self.train_advanced_label.setFont(font1)
 
         self.horizontalLayout_10.addWidget(self.train_advanced_label)
 
         self.train_advanced_bn = QPushButton(self.frame_13)
         self.train_advanced_bn.setObjectName(u"train_advanced_bn")
         self.train_advanced_bn.setMaximumSize(QSize(35, 35))
-        self.train_advanced_bn.setFont(font)
-        self.train_advanced_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
-        self.train_advanced_bn.setIcon(icon4)
+        self.train_advanced_bn.setFont(font1)
 
         self.horizontalLayout_10.addWidget(self.train_advanced_bn)
 
@@ -9136,7 +8771,7 @@ class Ui_MainWindow(object):
         self.gridLayout_16.setContentsMargins(0, 0, 0, 0)
         self.frame_15 = QFrame(self.train_workflow_specific_tab)
         self.frame_15.setObjectName(u"frame_15")
-        self.frame_15.setFont(font)
+        self.frame_15.setFont(font1)
         self.frame_15.setFrameShape(QFrame.NoFrame)
         self.frame_15.setFrameShadow(QFrame.Raised)
         self.verticalLayout_9 = QVBoxLayout(self.frame_15)
@@ -9145,7 +8780,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_9.setContentsMargins(0, 0, 0, 0)
         self.train_workflow_specific_tab_stackedWidget = QStackedWidget(self.frame_15)
         self.train_workflow_specific_tab_stackedWidget.setObjectName(u"train_workflow_specific_tab_stackedWidget")
-        self.train_workflow_specific_tab_stackedWidget.setFont(font)
+        self.train_workflow_specific_tab_stackedWidget.setFont(font1)
         self.train_workflow_specific_tab_semantic_seg_page = QWidget()
         self.train_workflow_specific_tab_semantic_seg_page.setObjectName(u"train_workflow_specific_tab_semantic_seg_page")
         self.verticalLayout_10 = QVBoxLayout(self.train_workflow_specific_tab_semantic_seg_page)
@@ -9154,7 +8789,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_10.setContentsMargins(0, 0, 0, 0)
         self.scrollArea = QScrollArea(self.train_workflow_specific_tab_semantic_seg_page)
         self.scrollArea.setObjectName(u"scrollArea")
-        self.scrollArea.setFont(font)
+        self.scrollArea.setFont(font1)
         self.scrollArea.setFrameShape(QFrame.NoFrame)
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_6 = QWidget()
@@ -9170,13 +8805,13 @@ class Ui_MainWindow(object):
         self.extract_random_patch_frame_label.setObjectName(u"extract_random_patch_frame_label")
         self.extract_random_patch_frame_label.setMinimumSize(QSize(0, 30))
         self.extract_random_patch_frame_label.setMaximumSize(QSize(16777215, 30))
-        self.extract_random_patch_frame_label.setFont(font)
+        self.extract_random_patch_frame_label.setFont(font1)
 
         self.gridLayout_18.addWidget(self.extract_random_patch_frame_label, 1, 0, 1, 1)
 
         self.label_14 = QLabel(self.scrollAreaWidgetContents_6)
         self.label_14.setObjectName(u"label_14")
-        self.label_14.setFont(font)
+        self.label_14.setFont(font1)
 
         self.gridLayout_18.addWidget(self.label_14, 3, 0, 1, 1)
 
@@ -9187,7 +8822,6 @@ class Ui_MainWindow(object):
         self.extract_random_patch_frame = QFrame(self.scrollAreaWidgetContents_6)
         self.extract_random_patch_frame.setObjectName(u"extract_random_patch_frame")
         self.extract_random_patch_frame.setMinimumSize(QSize(0, 0))
-        self.extract_random_patch_frame.setStyleSheet(u"background: rgb(246,246,246);")
         self.extract_random_patch_frame.setFrameShape(QFrame.Box)
         self.extract_random_patch_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_30 = QGridLayout(self.extract_random_patch_frame)
@@ -9196,21 +8830,21 @@ class Ui_MainWindow(object):
         self.DATA__W_FOREGROUND__INPUT.setObjectName(u"DATA__W_FOREGROUND__INPUT")
         self.DATA__W_FOREGROUND__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__W_FOREGROUND__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__W_FOREGROUND__INPUT.setFont(font)
+        self.DATA__W_FOREGROUND__INPUT.setFont(font1)
 
         self.gridLayout_30.addWidget(self.DATA__W_FOREGROUND__INPUT, 1, 2, 1, 1)
 
         self.label_17 = QLabel(self.extract_random_patch_frame)
         self.label_17.setObjectName(u"label_17")
         self.label_17.setMaximumSize(QSize(200, 16777215))
-        self.label_17.setFont(font)
+        self.label_17.setFont(font1)
 
         self.gridLayout_30.addWidget(self.label_17, 0, 0, 1, 1)
 
         self.label_18 = QLabel(self.extract_random_patch_frame)
         self.label_18.setObjectName(u"label_18")
         self.label_18.setMaximumSize(QSize(16777215, 16777215))
-        self.label_18.setFont(font)
+        self.label_18.setFont(font1)
         self.label_18.setIndent(15)
 
         self.gridLayout_30.addWidget(self.label_18, 1, 0, 1, 1)
@@ -9222,7 +8856,7 @@ class Ui_MainWindow(object):
         self.label_19 = QLabel(self.extract_random_patch_frame)
         self.label_19.setObjectName(u"label_19")
         self.label_19.setMaximumSize(QSize(16777215, 16777215))
-        self.label_19.setFont(font)
+        self.label_19.setFont(font1)
         self.label_19.setIndent(15)
 
         self.gridLayout_30.addWidget(self.label_19, 4, 0, 1, 1)
@@ -9233,7 +8867,7 @@ class Ui_MainWindow(object):
         self.DATA__PROBABILITY_MAP__INPUT.setObjectName(u"DATA__PROBABILITY_MAP__INPUT")
         self.DATA__PROBABILITY_MAP__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PROBABILITY_MAP__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PROBABILITY_MAP__INPUT.setFont(font)
+        self.DATA__PROBABILITY_MAP__INPUT.setFont(font1)
 
         self.gridLayout_30.addWidget(self.DATA__PROBABILITY_MAP__INPUT, 0, 2, 1, 1)
 
@@ -9241,7 +8875,7 @@ class Ui_MainWindow(object):
         self.DATA__W_BACKGROUND__INPUT.setObjectName(u"DATA__W_BACKGROUND__INPUT")
         self.DATA__W_BACKGROUND__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__W_BACKGROUND__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__W_BACKGROUND__INPUT.setFont(font)
+        self.DATA__W_BACKGROUND__INPUT.setFont(font1)
 
         self.gridLayout_30.addWidget(self.DATA__W_BACKGROUND__INPUT, 4, 2, 1, 1)
 
@@ -9281,21 +8915,20 @@ class Ui_MainWindow(object):
         self.frame_30 = QFrame(self.scrollAreaWidgetContents_6)
         self.frame_30.setObjectName(u"frame_30")
         self.frame_30.setMinimumSize(QSize(0, 0))
-        self.frame_30.setStyleSheet(u"background: rgb(246,246,246);")
         self.frame_30.setFrameShape(QFrame.Box)
         self.frame_30.setFrameShadow(QFrame.Raised)
         self.gridLayout_31 = QGridLayout(self.frame_30)
         self.gridLayout_31.setObjectName(u"gridLayout_31")
         self.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__LABEL = QLabel(self.frame_30)
         self.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__LABEL.setObjectName(u"PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__LABEL")
-        self.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__LABEL.setFont(font)
+        self.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__LABEL.setFont(font1)
 
         self.gridLayout_31.addWidget(self.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__LABEL, 0, 0, 1, 2)
 
         self.label_28 = QLabel(self.frame_30)
         self.label_28.setObjectName(u"label_28")
         self.label_28.setMaximumSize(QSize(16777215, 16777215))
-        self.label_28.setFont(font)
+        self.label_28.setFont(font1)
 
         self.gridLayout_31.addWidget(self.label_28, 2, 0, 1, 2)
 
@@ -9303,7 +8936,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INPUT.setObjectName(u"PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INPUT")
         self.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INPUT.setFont(font)
+        self.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INPUT.setFont(font1)
 
         self.gridLayout_31.addWidget(self.PROBLEM__SEMANTIC_SEG__IGNORE_CLASS_ID__INPUT, 0, 4, 1, 3)
 
@@ -9313,7 +8946,7 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__CHECK_DATA__INPUT.setObjectName(u"DATA__TRAIN__CHECK_DATA__INPUT")
         self.DATA__TRAIN__CHECK_DATA__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TRAIN__CHECK_DATA__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__CHECK_DATA__INPUT.setFont(font)
+        self.DATA__TRAIN__CHECK_DATA__INPUT.setFont(font1)
 
         self.gridLayout_31.addWidget(self.DATA__TRAIN__CHECK_DATA__INPUT, 1, 4, 1, 3)
 
@@ -9345,21 +8978,21 @@ class Ui_MainWindow(object):
         self.DATA__TRAIN__MINIMUM_FOREGROUND_PER__SEM_SEG__INPUT.setObjectName(u"DATA__TRAIN__MINIMUM_FOREGROUND_PER__SEM_SEG__INPUT")
         self.DATA__TRAIN__MINIMUM_FOREGROUND_PER__SEM_SEG__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TRAIN__MINIMUM_FOREGROUND_PER__SEM_SEG__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__MINIMUM_FOREGROUND_PER__SEM_SEG__INPUT.setFont(font)
+        self.DATA__TRAIN__MINIMUM_FOREGROUND_PER__SEM_SEG__INPUT.setFont(font1)
 
         self.gridLayout_31.addWidget(self.DATA__TRAIN__MINIMUM_FOREGROUND_PER__SEM_SEG__INPUT, 2, 4, 1, 3)
 
         self.label_20 = QLabel(self.frame_30)
         self.label_20.setObjectName(u"label_20")
         self.label_20.setMaximumSize(QSize(16777215, 16777215))
-        self.label_20.setFont(font)
+        self.label_20.setFont(font1)
 
         self.gridLayout_31.addWidget(self.label_20, 1, 0, 1, 1)
 
         self.MODEL__N_CLASSES__LABEL = QLabel(self.frame_30)
         self.MODEL__N_CLASSES__LABEL.setObjectName(u"MODEL__N_CLASSES__LABEL")
         self.MODEL__N_CLASSES__LABEL.setMaximumSize(QSize(16777215, 16777215))
-        self.MODEL__N_CLASSES__LABEL.setFont(font)
+        self.MODEL__N_CLASSES__LABEL.setFont(font1)
 
         self.gridLayout_31.addWidget(self.MODEL__N_CLASSES__LABEL, 3, 0, 1, 1)
 
@@ -9387,7 +9020,7 @@ class Ui_MainWindow(object):
         self.MODEL__N_CLASSES__INPUT.setObjectName(u"MODEL__N_CLASSES__INPUT")
         self.MODEL__N_CLASSES__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__N_CLASSES__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__N_CLASSES__INPUT.setFont(font)
+        self.MODEL__N_CLASSES__INPUT.setFont(font1)
 
         self.gridLayout_31.addWidget(self.MODEL__N_CLASSES__INPUT, 3, 4, 1, 1)
 
@@ -9417,7 +9050,7 @@ class Ui_MainWindow(object):
         self.gridLayout_17.setObjectName(u"gridLayout_17")
         self.label_59 = QLabel(self.scrollAreaWidgetContents_4)
         self.label_59.setObjectName(u"label_59")
-        self.label_59.setFont(font)
+        self.label_59.setFont(font1)
 
         self.gridLayout_17.addWidget(self.label_59, 1, 0, 1, 1)
 
@@ -9427,7 +9060,7 @@ class Ui_MainWindow(object):
 
         self.label_29 = QLabel(self.scrollAreaWidgetContents_4)
         self.label_29.setObjectName(u"label_29")
-        self.label_29.setFont(font)
+        self.label_29.setFont(font1)
 
         self.gridLayout_17.addWidget(self.label_29, 3, 0, 1, 1)
 
@@ -9438,7 +9071,6 @@ class Ui_MainWindow(object):
         self.frame_32 = QFrame(self.scrollAreaWidgetContents_4)
         self.frame_32.setObjectName(u"frame_32")
         self.frame_32.setMinimumSize(QSize(0, 50))
-        self.frame_32.setStyleSheet(u"background: rgb(246,246,246);")
         self.frame_32.setFrameShape(QFrame.Box)
         self.frame_32.setFrameShadow(QFrame.Raised)
         self.gridLayout_32 = QGridLayout(self.frame_32)
@@ -9465,13 +9097,13 @@ class Ui_MainWindow(object):
 
         self.label_69 = QLabel(self.frame_32)
         self.label_69.setObjectName(u"label_69")
-        self.label_69.setFont(font)
+        self.label_69.setFont(font1)
 
         self.gridLayout_32.addWidget(self.label_69, 3, 0, 1, 1)
 
         self.PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__LABEL = QLabel(self.frame_32)
         self.PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__LABEL.setObjectName(u"PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__LABEL")
-        self.PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__LABEL.setFont(font)
+        self.PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__LABEL.setFont(font1)
         self.PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__LABEL.setIndent(15)
 
         self.gridLayout_32.addWidget(self.PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__LABEL, 6, 0, 1, 1)
@@ -9482,7 +9114,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__INPUT")
         self.PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__INPUT.setFont(font)
+        self.PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__INPUT.setFont(font1)
 
         self.gridLayout_32.addWidget(self.PROBLEM__INSTANCE_SEG__DISTANCE_CHANNEL_MASK__INPUT, 6, 2, 1, 1)
 
@@ -9492,7 +9124,7 @@ class Ui_MainWindow(object):
 
         self.PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__LABEL = QLabel(self.frame_32)
         self.PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__LABEL.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__LABEL")
-        self.PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__LABEL.setFont(font)
+        self.PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__LABEL.setFont(font1)
         self.PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__LABEL.setIndent(15)
 
         self.gridLayout_32.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__LABEL, 5, 0, 1, 1)
@@ -9515,13 +9147,13 @@ class Ui_MainWindow(object):
         self.PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__INPUT")
         self.PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__INPUT.setFont(font)
+        self.PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__INPUT.setFont(font1)
 
         self.gridLayout_32.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_CONTOUR_MODE__INPUT, 5, 2, 1, 1)
 
         self.label_70 = QLabel(self.frame_32)
         self.label_70.setObjectName(u"label_70")
-        self.label_70.setFont(font)
+        self.label_70.setFont(font1)
 
         self.gridLayout_32.addWidget(self.label_70, 1, 0, 1, 1)
 
@@ -9539,7 +9171,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT")
         self.PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT.setMinimumSize(QSize(600, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT.setFont(font)
+        self.PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT.setFont(font1)
 
         self.gridLayout_32.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_CHANNELS__INPUT, 3, 2, 1, 1)
 
@@ -9557,7 +9189,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__INSTANCE_SEG__DATA_CHANNEL_WEIGHTS__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_CHANNEL_WEIGHTS__INPUT")
         self.PROBLEM__INSTANCE_SEG__DATA_CHANNEL_WEIGHTS__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_CHANNEL_WEIGHTS__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__INSTANCE_SEG__DATA_CHANNEL_WEIGHTS__INPUT.setFont(font)
+        self.PROBLEM__INSTANCE_SEG__DATA_CHANNEL_WEIGHTS__INPUT.setFont(font1)
 
         self.gridLayout_32.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_CHANNEL_WEIGHTS__INPUT, 1, 2, 1, 1)
 
@@ -9566,7 +9198,6 @@ class Ui_MainWindow(object):
 
         self.frame_33 = QFrame(self.scrollAreaWidgetContents_4)
         self.frame_33.setObjectName(u"frame_33")
-        self.frame_33.setStyleSheet(u"background: rgb(246,246,246);")
         self.frame_33.setFrameShape(QFrame.StyledPanel)
         self.frame_33.setFrameShadow(QFrame.Raised)
         self.gridLayout_34 = QGridLayout(self.frame_33)
@@ -9575,7 +9206,7 @@ class Ui_MainWindow(object):
         self.MODEL__N_CLASSES__INST_SEG__INPUT.setObjectName(u"MODEL__N_CLASSES__INST_SEG__INPUT")
         self.MODEL__N_CLASSES__INST_SEG__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__N_CLASSES__INST_SEG__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__N_CLASSES__INST_SEG__INPUT.setFont(font)
+        self.MODEL__N_CLASSES__INST_SEG__INPUT.setFont(font1)
 
         self.gridLayout_34.addWidget(self.MODEL__N_CLASSES__INST_SEG__INPUT, 0, 2, 1, 1)
 
@@ -9592,7 +9223,7 @@ class Ui_MainWindow(object):
         self.MODEL__N_CLASSES__INST_SEG__LABEL = QLabel(self.frame_33)
         self.MODEL__N_CLASSES__INST_SEG__LABEL.setObjectName(u"MODEL__N_CLASSES__INST_SEG__LABEL")
         self.MODEL__N_CLASSES__INST_SEG__LABEL.setMaximumSize(QSize(16777215, 16777215))
-        self.MODEL__N_CLASSES__INST_SEG__LABEL.setFont(font)
+        self.MODEL__N_CLASSES__INST_SEG__LABEL.setFont(font1)
 
         self.gridLayout_34.addWidget(self.MODEL__N_CLASSES__INST_SEG__LABEL, 0, 0, 1, 1)
 
@@ -9616,7 +9247,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_23.setContentsMargins(0, 0, 0, 0)
         self.scrollArea_3 = QScrollArea(self.train_workflow_specific_tab_detection_page)
         self.scrollArea_3.setObjectName(u"scrollArea_3")
-        self.scrollArea_3.setFont(font)
+        self.scrollArea_3.setFont(font1)
         self.scrollArea_3.setFrameShape(QFrame.NoFrame)
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollAreaWidgetContents_7 = QWidget()
@@ -9631,7 +9262,6 @@ class Ui_MainWindow(object):
         self.frame_34 = QFrame(self.scrollAreaWidgetContents_7)
         self.frame_34.setObjectName(u"frame_34")
         self.frame_34.setMinimumSize(QSize(0, 0))
-        self.frame_34.setStyleSheet(u"background: rgb(246,246,246);")
         self.frame_34.setFrameShape(QFrame.Box)
         self.frame_34.setFrameShadow(QFrame.Raised)
         self.gridLayout_35 = QGridLayout(self.frame_34)
@@ -9646,7 +9276,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__DETECTION__CHECK_POINTS_CREATED__INPUT.setObjectName(u"PROBLEM__DETECTION__CHECK_POINTS_CREATED__INPUT")
         self.PROBLEM__DETECTION__CHECK_POINTS_CREATED__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__DETECTION__CHECK_POINTS_CREATED__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__DETECTION__CHECK_POINTS_CREATED__INPUT.setFont(font)
+        self.PROBLEM__DETECTION__CHECK_POINTS_CREATED__INPUT.setFont(font1)
 
         self.gridLayout_35.addWidget(self.PROBLEM__DETECTION__CHECK_POINTS_CREATED__INPUT, 1, 2, 1, 1)
 
@@ -9654,21 +9284,21 @@ class Ui_MainWindow(object):
         self.PROBLEM__DETECTION__CENTRAL_POINT_DILATION__INPUT.setObjectName(u"PROBLEM__DETECTION__CENTRAL_POINT_DILATION__INPUT")
         self.PROBLEM__DETECTION__CENTRAL_POINT_DILATION__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__DETECTION__CENTRAL_POINT_DILATION__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__DETECTION__CENTRAL_POINT_DILATION__INPUT.setFont(font)
+        self.PROBLEM__DETECTION__CENTRAL_POINT_DILATION__INPUT.setFont(font1)
 
         self.gridLayout_35.addWidget(self.PROBLEM__DETECTION__CENTRAL_POINT_DILATION__INPUT, 0, 2, 1, 1)
 
         self.label_76 = QLabel(self.frame_34)
         self.label_76.setObjectName(u"label_76")
         self.label_76.setMaximumSize(QSize(16777215, 16777215))
-        self.label_76.setFont(font)
+        self.label_76.setFont(font1)
 
         self.gridLayout_35.addWidget(self.label_76, 0, 0, 1, 1)
 
         self.label_79 = QLabel(self.frame_34)
         self.label_79.setObjectName(u"label_79")
         self.label_79.setMaximumSize(QSize(16777215, 16777215))
-        self.label_79.setFont(font)
+        self.label_79.setFont(font1)
 
         self.gridLayout_35.addWidget(self.label_79, 1, 0, 1, 1)
 
@@ -9702,13 +9332,12 @@ class Ui_MainWindow(object):
         self.label_80 = QLabel(self.scrollAreaWidgetContents_7)
         self.label_80.setObjectName(u"label_80")
         self.label_80.setMaximumSize(QSize(16777215, 16777215))
-        self.label_80.setFont(font)
+        self.label_80.setFont(font1)
 
         self.gridLayout_19.addWidget(self.label_80, 0, 0, 1, 1)
 
         self.frame_38 = QFrame(self.scrollAreaWidgetContents_7)
         self.frame_38.setObjectName(u"frame_38")
-        self.frame_38.setStyleSheet(u"background: rgb(246,246,246);")
         self.frame_38.setFrameShape(QFrame.StyledPanel)
         self.frame_38.setFrameShadow(QFrame.Raised)
         self.gridLayout_83 = QGridLayout(self.frame_38)
@@ -9716,7 +9345,7 @@ class Ui_MainWindow(object):
         self.MODEL__N_CLASSES__DET_LABEL = QLabel(self.frame_38)
         self.MODEL__N_CLASSES__DET_LABEL.setObjectName(u"MODEL__N_CLASSES__DET_LABEL")
         self.MODEL__N_CLASSES__DET_LABEL.setMaximumSize(QSize(16777215, 16777215))
-        self.MODEL__N_CLASSES__DET_LABEL.setFont(font)
+        self.MODEL__N_CLASSES__DET_LABEL.setFont(font1)
 
         self.gridLayout_83.addWidget(self.MODEL__N_CLASSES__DET_LABEL, 0, 0, 1, 1)
 
@@ -9734,7 +9363,7 @@ class Ui_MainWindow(object):
         self.MODEL__N_CLASSES__DET__INPUT.setObjectName(u"MODEL__N_CLASSES__DET__INPUT")
         self.MODEL__N_CLASSES__DET__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__N_CLASSES__DET__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__N_CLASSES__DET__INPUT.setFont(font)
+        self.MODEL__N_CLASSES__DET__INPUT.setFont(font1)
 
         self.gridLayout_83.addWidget(self.MODEL__N_CLASSES__DET__INPUT, 0, 2, 1, 1)
 
@@ -9743,7 +9372,7 @@ class Ui_MainWindow(object):
 
         self.label_35 = QLabel(self.scrollAreaWidgetContents_7)
         self.label_35.setObjectName(u"label_35")
-        self.label_35.setFont(font)
+        self.label_35.setFont(font1)
 
         self.gridLayout_19.addWidget(self.label_35, 2, 0, 1, 1)
 
@@ -9760,7 +9389,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_24.setContentsMargins(0, 0, 0, 0)
         self.scrollArea_4 = QScrollArea(self.train_workflow_specific_tab_denoising_page)
         self.scrollArea_4.setObjectName(u"scrollArea_4")
-        self.scrollArea_4.setFont(font)
+        self.scrollArea_4.setFont(font1)
         self.scrollArea_4.setFrameShape(QFrame.NoFrame)
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollAreaWidgetContents_8 = QWidget()
@@ -9770,7 +9399,6 @@ class Ui_MainWindow(object):
         self.gridLayout_49.setObjectName(u"gridLayout_49")
         self.frame_44 = QFrame(self.scrollAreaWidgetContents_8)
         self.frame_44.setObjectName(u"frame_44")
-        self.frame_44.setStyleSheet(u"background: rgb(246,246,246);")
         self.frame_44.setFrameShape(QFrame.Box)
         self.frame_44.setFrameShadow(QFrame.Raised)
         self.gridLayout_48 = QGridLayout(self.frame_44)
@@ -9781,19 +9409,19 @@ class Ui_MainWindow(object):
         self.PROBLEM__DENOISING__N2V_STRUCTMASK__INPUT.setObjectName(u"PROBLEM__DENOISING__N2V_STRUCTMASK__INPUT")
         self.PROBLEM__DENOISING__N2V_STRUCTMASK__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__DENOISING__N2V_STRUCTMASK__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__DENOISING__N2V_STRUCTMASK__INPUT.setFont(font)
+        self.PROBLEM__DENOISING__N2V_STRUCTMASK__INPUT.setFont(font1)
 
         self.gridLayout_48.addWidget(self.PROBLEM__DENOISING__N2V_STRUCTMASK__INPUT, 3, 2, 1, 1)
 
         self.deno_n2v_neighborhood_struct_label = QLabel(self.frame_44)
         self.deno_n2v_neighborhood_struct_label.setObjectName(u"deno_n2v_neighborhood_struct_label")
-        self.deno_n2v_neighborhood_struct_label.setFont(font)
+        self.deno_n2v_neighborhood_struct_label.setFont(font1)
 
         self.gridLayout_48.addWidget(self.deno_n2v_neighborhood_struct_label, 3, 0, 1, 1)
 
         self.deno_n2v_perc_pix_label = QLabel(self.frame_44)
         self.deno_n2v_perc_pix_label.setObjectName(u"deno_n2v_perc_pix_label")
-        self.deno_n2v_perc_pix_label.setFont(font)
+        self.deno_n2v_perc_pix_label.setFont(font1)
 
         self.gridLayout_48.addWidget(self.deno_n2v_perc_pix_label, 0, 0, 1, 1)
 
@@ -9801,7 +9429,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__DENOISING__N2V_PERC_PIX__INPUT.setObjectName(u"PROBLEM__DENOISING__N2V_PERC_PIX__INPUT")
         self.PROBLEM__DENOISING__N2V_PERC_PIX__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__DENOISING__N2V_PERC_PIX__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__DENOISING__N2V_PERC_PIX__INPUT.setFont(font)
+        self.PROBLEM__DENOISING__N2V_PERC_PIX__INPUT.setFont(font1)
 
         self.gridLayout_48.addWidget(self.PROBLEM__DENOISING__N2V_PERC_PIX__INPUT, 0, 2, 1, 1)
 
@@ -9817,7 +9445,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__DENOISING__N2V_MANIPULATOR__INPUT.setObjectName(u"PROBLEM__DENOISING__N2V_MANIPULATOR__INPUT")
         self.PROBLEM__DENOISING__N2V_MANIPULATOR__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__DENOISING__N2V_MANIPULATOR__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__DENOISING__N2V_MANIPULATOR__INPUT.setFont(font)
+        self.PROBLEM__DENOISING__N2V_MANIPULATOR__INPUT.setFont(font1)
 
         self.gridLayout_48.addWidget(self.PROBLEM__DENOISING__N2V_MANIPULATOR__INPUT, 1, 2, 1, 1)
 
@@ -9827,13 +9455,13 @@ class Ui_MainWindow(object):
 
         self.deno_n2v_neighborhood_radius_label = QLabel(self.frame_44)
         self.deno_n2v_neighborhood_radius_label.setObjectName(u"deno_n2v_neighborhood_radius_label")
-        self.deno_n2v_neighborhood_radius_label.setFont(font)
+        self.deno_n2v_neighborhood_radius_label.setFont(font1)
 
         self.gridLayout_48.addWidget(self.deno_n2v_neighborhood_radius_label, 2, 0, 1, 1)
 
         self.deno_n2v_manipulator_label = QLabel(self.frame_44)
         self.deno_n2v_manipulator_label.setObjectName(u"deno_n2v_manipulator_label")
-        self.deno_n2v_manipulator_label.setFont(font)
+        self.deno_n2v_manipulator_label.setFont(font1)
 
         self.gridLayout_48.addWidget(self.deno_n2v_manipulator_label, 1, 0, 1, 1)
 
@@ -9841,7 +9469,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__DENOISING__N2V_NEIGHBORHOOD_RADIUS__INPUT.setObjectName(u"PROBLEM__DENOISING__N2V_NEIGHBORHOOD_RADIUS__INPUT")
         self.PROBLEM__DENOISING__N2V_NEIGHBORHOOD_RADIUS__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__DENOISING__N2V_NEIGHBORHOOD_RADIUS__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__DENOISING__N2V_NEIGHBORHOOD_RADIUS__INPUT.setFont(font)
+        self.PROBLEM__DENOISING__N2V_NEIGHBORHOOD_RADIUS__INPUT.setFont(font1)
 
         self.gridLayout_48.addWidget(self.PROBLEM__DENOISING__N2V_NEIGHBORHOOD_RADIUS__INPUT, 2, 2, 1, 1)
 
@@ -9894,7 +9522,7 @@ class Ui_MainWindow(object):
 
         self.label_15 = QLabel(self.scrollAreaWidgetContents_8)
         self.label_15.setObjectName(u"label_15")
-        self.label_15.setFont(font)
+        self.label_15.setFont(font1)
 
         self.gridLayout_49.addWidget(self.label_15, 0, 0, 1, 1)
 
@@ -9915,7 +9543,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_25.setContentsMargins(0, 0, 0, 0)
         self.scrollArea_5 = QScrollArea(self.train_workflow_specific_tab_sr_page)
         self.scrollArea_5.setObjectName(u"scrollArea_5")
-        self.scrollArea_5.setFont(font)
+        self.scrollArea_5.setFont(font1)
         self.scrollArea_5.setFrameShape(QFrame.NoFrame)
         self.scrollArea_5.setWidgetResizable(True)
         self.scrollAreaWidgetContents_9 = QWidget()
@@ -9925,20 +9553,19 @@ class Ui_MainWindow(object):
         self.gridLayout_50.setObjectName(u"gridLayout_50")
         self.sr_unet_like_heading = QLabel(self.scrollAreaWidgetContents_9)
         self.sr_unet_like_heading.setObjectName(u"sr_unet_like_heading")
-        self.sr_unet_like_heading.setFont(font)
+        self.sr_unet_like_heading.setFont(font1)
 
         self.gridLayout_50.addWidget(self.sr_unet_like_heading, 2, 0, 1, 1)
 
         self.frame_48 = QFrame(self.scrollAreaWidgetContents_9)
         self.frame_48.setObjectName(u"frame_48")
-        self.frame_48.setStyleSheet(u"background: rgb(246,246,246);")
         self.frame_48.setFrameShape(QFrame.Box)
         self.frame_48.setFrameShadow(QFrame.Raised)
         self.gridLayout_56 = QGridLayout(self.frame_48)
         self.gridLayout_56.setObjectName(u"gridLayout_56")
         self.sr_upscaling_label = QLabel(self.frame_48)
         self.sr_upscaling_label.setObjectName(u"sr_upscaling_label")
-        self.sr_upscaling_label.setFont(font)
+        self.sr_upscaling_label.setFont(font1)
 
         self.gridLayout_56.addWidget(self.sr_upscaling_label, 0, 0, 1, 1)
 
@@ -9960,7 +9587,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__SUPER_RESOLUTION__UPSCALING__INPUT.setObjectName(u"PROBLEM__SUPER_RESOLUTION__UPSCALING__INPUT")
         self.PROBLEM__SUPER_RESOLUTION__UPSCALING__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__SUPER_RESOLUTION__UPSCALING__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__SUPER_RESOLUTION__UPSCALING__INPUT.setFont(font)
+        self.PROBLEM__SUPER_RESOLUTION__UPSCALING__INPUT.setFont(font1)
 
         self.gridLayout_56.addWidget(self.PROBLEM__SUPER_RESOLUTION__UPSCALING__INPUT, 0, 2, 1, 1)
 
@@ -9977,13 +9604,12 @@ class Ui_MainWindow(object):
 
         self.label_95 = QLabel(self.scrollAreaWidgetContents_9)
         self.label_95.setObjectName(u"label_95")
-        self.label_95.setFont(font)
+        self.label_95.setFont(font1)
 
         self.gridLayout_50.addWidget(self.label_95, 0, 0, 1, 1)
 
         self.sr_unet_like_frame = QFrame(self.scrollAreaWidgetContents_9)
         self.sr_unet_like_frame.setObjectName(u"sr_unet_like_frame")
-        self.sr_unet_like_frame.setStyleSheet(u"background: rgb(246,246,246);")
         self.sr_unet_like_frame.setFrameShape(QFrame.Box)
         self.sr_unet_like_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_10 = QGridLayout(self.sr_unet_like_frame)
@@ -9993,13 +9619,13 @@ class Ui_MainWindow(object):
         self.MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT.addItem("")
         self.MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT.setObjectName(u"MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT")
         self.MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT.setMinimumSize(QSize(0, 30))
-        self.MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT.setFont(font)
+        self.MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT.setFont(font1)
 
         self.gridLayout_10.addWidget(self.MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT, 0, 2, 1, 1)
 
         self.MODEL__UNET_SR_UPSAMPLE_POSITION__LABEL = QLabel(self.sr_unet_like_frame)
         self.MODEL__UNET_SR_UPSAMPLE_POSITION__LABEL.setObjectName(u"MODEL__UNET_SR_UPSAMPLE_POSITION__LABEL")
-        self.MODEL__UNET_SR_UPSAMPLE_POSITION__LABEL.setFont(font)
+        self.MODEL__UNET_SR_UPSAMPLE_POSITION__LABEL.setFont(font1)
 
         self.gridLayout_10.addWidget(self.MODEL__UNET_SR_UPSAMPLE_POSITION__LABEL, 0, 0, 1, 1)
 
@@ -10029,7 +9655,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_26.setContentsMargins(0, 0, 0, 0)
         self.scrollArea_6 = QScrollArea(self.train_workflow_specific_tab_ssl_page)
         self.scrollArea_6.setObjectName(u"scrollArea_6")
-        self.scrollArea_6.setFont(font)
+        self.scrollArea_6.setFont(font1)
         self.scrollArea_6.setFrameShape(QFrame.NoFrame)
         self.scrollArea_6.setWidgetResizable(True)
         self.scrollAreaWidgetContents_10 = QWidget()
@@ -10039,14 +9665,13 @@ class Ui_MainWindow(object):
         self.gridLayout_51.setObjectName(u"gridLayout_51")
         self.label_96 = QLabel(self.scrollAreaWidgetContents_10)
         self.label_96.setObjectName(u"label_96")
-        self.label_96.setFont(font)
+        self.label_96.setFont(font1)
 
         self.gridLayout_51.addWidget(self.label_96, 1, 0, 1, 1)
 
         self.pretext_frame = QFrame(self.scrollAreaWidgetContents_10)
         self.pretext_frame.setObjectName(u"pretext_frame")
         self.pretext_frame.setMinimumSize(QSize(0, 0))
-        self.pretext_frame.setStyleSheet(u"background: rgb(246,246,246);")
         self.pretext_frame.setFrameShape(QFrame.Box)
         self.pretext_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_57 = QGridLayout(self.pretext_frame)
@@ -10058,27 +9683,27 @@ class Ui_MainWindow(object):
         self.PROBLEM__SELF_SUPERVISED__RESIZING_FACTOR__INPUT.setObjectName(u"PROBLEM__SELF_SUPERVISED__RESIZING_FACTOR__INPUT")
         self.PROBLEM__SELF_SUPERVISED__RESIZING_FACTOR__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__SELF_SUPERVISED__RESIZING_FACTOR__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__SELF_SUPERVISED__RESIZING_FACTOR__INPUT.setFont(font)
+        self.PROBLEM__SELF_SUPERVISED__RESIZING_FACTOR__INPUT.setFont(font1)
 
         self.gridLayout_57.addWidget(self.PROBLEM__SELF_SUPERVISED__RESIZING_FACTOR__INPUT, 1, 2, 1, 1)
 
         self.ssl_noise_label = QLabel(self.pretext_frame)
         self.ssl_noise_label.setObjectName(u"ssl_noise_label")
-        self.ssl_noise_label.setFont(font)
+        self.ssl_noise_label.setFont(font1)
         self.ssl_noise_label.setIndent(15)
 
         self.gridLayout_57.addWidget(self.ssl_noise_label, 2, 0, 1, 1)
 
         self.ssl_resizing_factor_label = QLabel(self.pretext_frame)
         self.ssl_resizing_factor_label.setObjectName(u"ssl_resizing_factor_label")
-        self.ssl_resizing_factor_label.setFont(font)
+        self.ssl_resizing_factor_label.setFont(font1)
         self.ssl_resizing_factor_label.setIndent(15)
 
         self.gridLayout_57.addWidget(self.ssl_resizing_factor_label, 1, 0, 1, 1)
 
         self.pretext_task_label = QLabel(self.pretext_frame)
         self.pretext_task_label.setObjectName(u"pretext_task_label")
-        self.pretext_task_label.setFont(font)
+        self.pretext_task_label.setFont(font1)
 
         self.gridLayout_57.addWidget(self.pretext_task_label, 0, 0, 1, 1)
 
@@ -10092,7 +9717,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT.setObjectName(u"PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT")
         self.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT.setFont(font)
+        self.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT.setFont(font1)
 
         self.gridLayout_57.addWidget(self.PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT, 0, 2, 1, 1)
 
@@ -10100,7 +9725,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__SELF_SUPERVISED__NOISE__INPUT.setObjectName(u"PROBLEM__SELF_SUPERVISED__NOISE__INPUT")
         self.PROBLEM__SELF_SUPERVISED__NOISE__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__SELF_SUPERVISED__NOISE__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__SELF_SUPERVISED__NOISE__INPUT.setFont(font)
+        self.PROBLEM__SELF_SUPERVISED__NOISE__INPUT.setFont(font1)
 
         self.gridLayout_57.addWidget(self.PROBLEM__SELF_SUPERVISED__NOISE__INPUT, 2, 2, 1, 1)
 
@@ -10158,7 +9783,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_27.setContentsMargins(0, 0, 0, 0)
         self.scrollArea_7 = QScrollArea(self.train_workflow_specific_tab_classification_page)
         self.scrollArea_7.setObjectName(u"scrollArea_7")
-        self.scrollArea_7.setFont(font)
+        self.scrollArea_7.setFont(font1)
         self.scrollArea_7.setFrameShape(QFrame.NoFrame)
         self.scrollArea_7.setWidgetResizable(True)
         self.scrollAreaWidgetContents_11 = QWidget()
@@ -10168,13 +9793,12 @@ class Ui_MainWindow(object):
         self.gridLayout_52.setObjectName(u"gridLayout_52")
         self.label_44 = QLabel(self.scrollAreaWidgetContents_11)
         self.label_44.setObjectName(u"label_44")
-        self.label_44.setFont(font)
+        self.label_44.setFont(font1)
 
         self.gridLayout_52.addWidget(self.label_44, 0, 0, 1, 1)
 
         self.frame_79 = QFrame(self.scrollAreaWidgetContents_11)
         self.frame_79.setObjectName(u"frame_79")
-        self.frame_79.setStyleSheet(u"background: rgb(246,246,246);")
         self.frame_79.setFrameShape(QFrame.StyledPanel)
         self.frame_79.setFrameShadow(QFrame.Raised)
         self.gridLayout_84 = QGridLayout(self.frame_79)
@@ -10183,14 +9807,14 @@ class Ui_MainWindow(object):
         self.MODEL__N_CLASSES__CLS__INPUT.setObjectName(u"MODEL__N_CLASSES__CLS__INPUT")
         self.MODEL__N_CLASSES__CLS__INPUT.setMinimumSize(QSize(200, 30))
         self.MODEL__N_CLASSES__CLS__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__N_CLASSES__CLS__INPUT.setFont(font)
+        self.MODEL__N_CLASSES__CLS__INPUT.setFont(font1)
 
         self.gridLayout_84.addWidget(self.MODEL__N_CLASSES__CLS__INPUT, 0, 2, 1, 1)
 
         self.MODEL__N_CLASSES__CLS_LABEL = QLabel(self.frame_79)
         self.MODEL__N_CLASSES__CLS_LABEL.setObjectName(u"MODEL__N_CLASSES__CLS_LABEL")
         self.MODEL__N_CLASSES__CLS_LABEL.setMaximumSize(QSize(16777215, 16777215))
-        self.MODEL__N_CLASSES__CLS_LABEL.setFont(font)
+        self.MODEL__N_CLASSES__CLS_LABEL.setFont(font1)
 
         self.gridLayout_84.addWidget(self.MODEL__N_CLASSES__CLS_LABEL, 0, 0, 1, 1)
 
@@ -10234,7 +9858,7 @@ class Ui_MainWindow(object):
         self.gridLayout_76.setObjectName(u"gridLayout_76")
         self.label_46 = QLabel(self.scrollAreaWidgetContents_20)
         self.label_46.setObjectName(u"label_46")
-        self.label_46.setFont(font)
+        self.label_46.setFont(font1)
 
         self.gridLayout_76.addWidget(self.label_46, 0, 0, 1, 1)
 
@@ -10244,7 +9868,6 @@ class Ui_MainWindow(object):
 
         self.frame_63 = QFrame(self.scrollAreaWidgetContents_20)
         self.frame_63.setObjectName(u"frame_63")
-        self.frame_63.setStyleSheet(u"background: rgb(246,246,246);")
         self.frame_63.setFrameShape(QFrame.StyledPanel)
         self.frame_63.setFrameShadow(QFrame.Raised)
         self.gridLayout_77 = QGridLayout(self.frame_63)
@@ -10255,13 +9878,13 @@ class Ui_MainWindow(object):
         self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INPUT.setObjectName(u"PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INPUT")
         self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INPUT.setFont(font)
+        self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INPUT.setFont(font1)
 
         self.gridLayout_77.addWidget(self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INPUT, 0, 2, 1, 1)
 
         self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__LABEL = QLabel(self.frame_63)
         self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__LABEL.setObjectName(u"PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__LABEL")
-        self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__LABEL.setFont(font)
+        self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__LABEL.setFont(font1)
 
         self.gridLayout_77.addWidget(self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__LABEL, 0, 0, 1, 1)
 
@@ -10269,7 +9892,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INFO.setObjectName(u"PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INFO")
         self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INFO.setMinimumSize(QSize(30, 30))
         self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INFO.setFont(font)
+        self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INFO.setFont(font1)
         self.PROBLEM__IMAGE_TO_IMAGE__MULTIPLE_RAW_ONE_TARGET_LOADER__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -10327,7 +9950,7 @@ class Ui_MainWindow(object):
         self.label_81 = QLabel(self.frame_35)
         self.label_81.setObjectName(u"label_81")
         self.label_81.setMaximumSize(QSize(16777215, 16777215))
-        self.label_81.setFont(font)
+        self.label_81.setFont(font1)
         self.label_81.setContextMenuPolicy(Qt.NoContextMenu)
 
         self.horizontalLayout_13.addWidget(self.label_81)
@@ -10337,7 +9960,7 @@ class Ui_MainWindow(object):
         self.TEST__ENABLE__INPUT.addItem("")
         self.TEST__ENABLE__INPUT.setObjectName(u"TEST__ENABLE__INPUT")
         self.TEST__ENABLE__INPUT.setMinimumSize(QSize(100, 0))
-        self.TEST__ENABLE__INPUT.setFont(font)
+        self.TEST__ENABLE__INPUT.setFont(font1)
 
         self.horizontalLayout_13.addWidget(self.TEST__ENABLE__INPUT)
 
@@ -10350,7 +9973,7 @@ class Ui_MainWindow(object):
 
         self.test_tab_widget = QTabWidget(self.test_general_frame)
         self.test_tab_widget.setObjectName(u"test_tab_widget")
-        self.test_tab_widget.setFont(font)
+        self.test_tab_widget.setFont(font1)
         self.test_general_options_tab = QWidget()
         self.test_general_options_tab.setObjectName(u"test_general_options_tab")
         self.gridLayout_40 = QGridLayout(self.test_general_options_tab)
@@ -10388,15 +10011,13 @@ class Ui_MainWindow(object):
         self.gridLayout_8.setObjectName(u"gridLayout_8")
         self.process_by_chunks_label = QLabel(self.test_advanced_options_frame_2)
         self.process_by_chunks_label.setObjectName(u"process_by_chunks_label")
-        self.process_by_chunks_label.setFont(font)
+        self.process_by_chunks_label.setFont(font1)
 
         self.gridLayout_8.addWidget(self.process_by_chunks_label, 7, 0, 1, 1)
 
         self.frame_45 = QFrame(self.test_advanced_options_frame_2)
         self.frame_45.setObjectName(u"frame_45")
         self.frame_45.setMinimumSize(QSize(0, 0))
-        self.frame_45.setStyleSheet(u"background: rgb(246,246,246);\n"
-"")
         self.frame_45.setFrameShape(QFrame.Box)
         self.frame_45.setFrameShadow(QFrame.Raised)
         self.gridLayout_53 = QGridLayout(self.frame_45)
@@ -10407,7 +10028,7 @@ class Ui_MainWindow(object):
         self.TEST__REDUCE_MEMORY__INPUT.setObjectName(u"TEST__REDUCE_MEMORY__INPUT")
         self.TEST__REDUCE_MEMORY__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__REDUCE_MEMORY__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__REDUCE_MEMORY__INPUT.setFont(font)
+        self.TEST__REDUCE_MEMORY__INPUT.setFont(font1)
 
         self.gridLayout_53.addWidget(self.TEST__REDUCE_MEMORY__INPUT, 0, 2, 1, 1)
 
@@ -10417,7 +10038,7 @@ class Ui_MainWindow(object):
         self.TEST__BY_CHUNKS__ENABLE__INPUT.setObjectName(u"TEST__BY_CHUNKS__ENABLE__INPUT")
         self.TEST__BY_CHUNKS__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__BY_CHUNKS__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__BY_CHUNKS__ENABLE__INPUT.setFont(font)
+        self.TEST__BY_CHUNKS__ENABLE__INPUT.setFont(font1)
 
         self.gridLayout_53.addWidget(self.TEST__BY_CHUNKS__ENABLE__INPUT, 1, 2, 1, 1)
 
@@ -10467,7 +10088,7 @@ class Ui_MainWindow(object):
 
         self.test_2d_as_3d_stack_label = QLabel(self.frame_45)
         self.test_2d_as_3d_stack_label.setObjectName(u"test_2d_as_3d_stack_label")
-        self.test_2d_as_3d_stack_label.setFont(font)
+        self.test_2d_as_3d_stack_label.setFont(font1)
 
         self.gridLayout_53.addWidget(self.test_2d_as_3d_stack_label, 6, 0, 1, 1)
 
@@ -10483,7 +10104,7 @@ class Ui_MainWindow(object):
 
         self.test_verbose_label = QLabel(self.frame_45)
         self.test_verbose_label.setObjectName(u"test_verbose_label")
-        self.test_verbose_label.setFont(font)
+        self.test_verbose_label.setFont(font1)
 
         self.gridLayout_53.addWidget(self.test_verbose_label, 2, 0, 1, 1)
 
@@ -10493,7 +10114,7 @@ class Ui_MainWindow(object):
         self.TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INPUT.setObjectName(u"TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INPUT")
         self.TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INPUT.setFont(font)
+        self.TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INPUT.setFont(font1)
 
         self.gridLayout_53.addWidget(self.TEST__ANALIZE_2D_IMGS_AS_3D_STACK__INPUT, 6, 2, 1, 1)
 
@@ -10503,7 +10124,7 @@ class Ui_MainWindow(object):
 
         self.TEST__BY_CHUNKS__ENABLE__LABEL = QLabel(self.frame_45)
         self.TEST__BY_CHUNKS__ENABLE__LABEL.setObjectName(u"TEST__BY_CHUNKS__ENABLE__LABEL")
-        self.TEST__BY_CHUNKS__ENABLE__LABEL.setFont(font)
+        self.TEST__BY_CHUNKS__ENABLE__LABEL.setFont(font1)
 
         self.gridLayout_53.addWidget(self.TEST__BY_CHUNKS__ENABLE__LABEL, 1, 0, 1, 1)
 
@@ -10513,13 +10134,13 @@ class Ui_MainWindow(object):
         self.TEST__AUGMENTATION__INPUT.setObjectName(u"TEST__AUGMENTATION__INPUT")
         self.TEST__AUGMENTATION__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__AUGMENTATION__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__AUGMENTATION__INPUT.setFont(font)
+        self.TEST__AUGMENTATION__INPUT.setFont(font1)
 
         self.gridLayout_53.addWidget(self.TEST__AUGMENTATION__INPUT, 4, 2, 1, 1)
 
         self.test_tta_label = QLabel(self.frame_45)
         self.test_tta_label.setObjectName(u"test_tta_label")
-        self.test_tta_label.setFont(font)
+        self.test_tta_label.setFont(font1)
 
         self.gridLayout_53.addWidget(self.test_tta_label, 4, 0, 1, 1)
 
@@ -10529,19 +10150,19 @@ class Ui_MainWindow(object):
         self.TEST__VERBOSE__INPUT.setObjectName(u"TEST__VERBOSE__INPUT")
         self.TEST__VERBOSE__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__VERBOSE__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__VERBOSE__INPUT.setFont(font)
+        self.TEST__VERBOSE__INPUT.setFont(font1)
 
         self.gridLayout_53.addWidget(self.TEST__VERBOSE__INPUT, 2, 2, 1, 1)
 
         self.test_reduce_memory_label = QLabel(self.frame_45)
         self.test_reduce_memory_label.setObjectName(u"test_reduce_memory_label")
-        self.test_reduce_memory_label.setFont(font)
+        self.test_reduce_memory_label.setFont(font1)
 
         self.gridLayout_53.addWidget(self.test_reduce_memory_label, 0, 0, 1, 1)
 
         self.TEST__AUGMENTATION_MODE__LABEL = QLabel(self.frame_45)
         self.TEST__AUGMENTATION_MODE__LABEL.setObjectName(u"TEST__AUGMENTATION_MODE__LABEL")
-        self.TEST__AUGMENTATION_MODE__LABEL.setFont(font)
+        self.TEST__AUGMENTATION_MODE__LABEL.setFont(font1)
         self.TEST__AUGMENTATION_MODE__LABEL.setIndent(15)
 
         self.gridLayout_53.addWidget(self.TEST__AUGMENTATION_MODE__LABEL, 5, 0, 1, 1)
@@ -10550,7 +10171,7 @@ class Ui_MainWindow(object):
         self.TEST__AUGMENTATION_MODE__INFO.setObjectName(u"TEST__AUGMENTATION_MODE__INFO")
         self.TEST__AUGMENTATION_MODE__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__AUGMENTATION_MODE__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__AUGMENTATION_MODE__INFO.setFont(font)
+        self.TEST__AUGMENTATION_MODE__INFO.setFont(font1)
         self.TEST__AUGMENTATION_MODE__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -10564,7 +10185,7 @@ class Ui_MainWindow(object):
         self.TEST__AUGMENTATION_MODE__INPUT.setObjectName(u"TEST__AUGMENTATION_MODE__INPUT")
         self.TEST__AUGMENTATION_MODE__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__AUGMENTATION_MODE__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__AUGMENTATION_MODE__INPUT.setFont(font)
+        self.TEST__AUGMENTATION_MODE__INPUT.setFont(font1)
 
         self.gridLayout_53.addWidget(self.TEST__AUGMENTATION_MODE__INPUT, 5, 2, 1, 1)
 
@@ -10574,15 +10195,13 @@ class Ui_MainWindow(object):
         self.frame_46 = QFrame(self.test_advanced_options_frame_2)
         self.frame_46.setObjectName(u"frame_46")
         self.frame_46.setMinimumSize(QSize(0, 0))
-        self.frame_46.setStyleSheet(u"background: rgb(246,246,246);\n"
-"")
         self.frame_46.setFrameShape(QFrame.Box)
         self.frame_46.setFrameShadow(QFrame.Raised)
         self.gridLayout_54 = QGridLayout(self.frame_46)
         self.gridLayout_54.setObjectName(u"gridLayout_54")
         self.test_full_image_label = QLabel(self.frame_46)
         self.test_full_image_label.setObjectName(u"test_full_image_label")
-        self.test_full_image_label.setFont(font)
+        self.test_full_image_label.setFont(font1)
 
         self.gridLayout_54.addWidget(self.test_full_image_label, 0, 0, 1, 1)
 
@@ -10592,7 +10211,7 @@ class Ui_MainWindow(object):
         self.TEST__FULL_IMG__INPUT.setObjectName(u"TEST__FULL_IMG__INPUT")
         self.TEST__FULL_IMG__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__FULL_IMG__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__FULL_IMG__INPUT.setFont(font)
+        self.TEST__FULL_IMG__INPUT.setFont(font1)
 
         self.gridLayout_54.addWidget(self.TEST__FULL_IMG__INPUT, 0, 2, 1, 1)
 
@@ -10612,7 +10231,7 @@ class Ui_MainWindow(object):
 
         self.TEST__REUSE_PREDICTIONS__LABEL = QLabel(self.frame_46)
         self.TEST__REUSE_PREDICTIONS__LABEL.setObjectName(u"TEST__REUSE_PREDICTIONS__LABEL")
-        self.TEST__REUSE_PREDICTIONS__LABEL.setFont(font)
+        self.TEST__REUSE_PREDICTIONS__LABEL.setFont(font1)
 
         self.gridLayout_54.addWidget(self.TEST__REUSE_PREDICTIONS__LABEL, 1, 0, 1, 1)
 
@@ -10622,7 +10241,7 @@ class Ui_MainWindow(object):
         self.TEST__REUSE_PREDICTIONS__INPUT.setObjectName(u"TEST__REUSE_PREDICTIONS__INPUT")
         self.TEST__REUSE_PREDICTIONS__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__REUSE_PREDICTIONS__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__REUSE_PREDICTIONS__INPUT.setFont(font)
+        self.TEST__REUSE_PREDICTIONS__INPUT.setFont(font1)
 
         self.gridLayout_54.addWidget(self.TEST__REUSE_PREDICTIONS__INPUT, 1, 2, 1, 1)
 
@@ -10630,7 +10249,7 @@ class Ui_MainWindow(object):
         self.TEST__REUSE_PREDICTIONS__INFO.setObjectName(u"TEST__REUSE_PREDICTIONS__INFO")
         self.TEST__REUSE_PREDICTIONS__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__REUSE_PREDICTIONS__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__REUSE_PREDICTIONS__INFO.setFont(font)
+        self.TEST__REUSE_PREDICTIONS__INFO.setFont(font1)
         self.TEST__REUSE_PREDICTIONS__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -10654,7 +10273,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_34.setContentsMargins(0, 0, 0, 0)
         self.DATA__PREPROCESS__TEST__LABEL = QLabel(self.DATA__PREPROCESS__TEST__FRAME)
         self.DATA__PREPROCESS__TEST__LABEL.setObjectName(u"DATA__PREPROCESS__TEST__LABEL")
-        self.DATA__PREPROCESS__TEST__LABEL.setFont(font)
+        self.DATA__PREPROCESS__TEST__LABEL.setFont(font1)
 
         self.horizontalLayout_34.addWidget(self.DATA__PREPROCESS__TEST__LABEL)
 
@@ -10674,7 +10293,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__TEST__INPUT.setObjectName(u"DATA__PREPROCESS__TEST__INPUT")
         self.DATA__PREPROCESS__TEST__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__TEST__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__TEST__INPUT.setFont(font)
+        self.DATA__PREPROCESS__TEST__INPUT.setFont(font1)
 
         self.horizontalLayout_34.addWidget(self.DATA__PREPROCESS__TEST__INPUT)
 
@@ -10687,26 +10306,24 @@ class Ui_MainWindow(object):
 
         self.label_89 = QLabel(self.test_advanced_options_frame_2)
         self.label_89.setObjectName(u"label_89")
-        self.label_89.setFont(font)
+        self.label_89.setFont(font1)
 
         self.gridLayout_8.addWidget(self.label_89, 0, 0, 1, 1)
 
         self.label_105 = QLabel(self.test_advanced_options_frame_2)
         self.label_105.setObjectName(u"label_105")
-        self.label_105.setFont(font)
+        self.label_105.setFont(font1)
 
         self.gridLayout_8.addWidget(self.label_105, 14, 0, 1, 1)
 
         self.label_92 = QLabel(self.test_advanced_options_frame_2)
         self.label_92.setObjectName(u"label_92")
-        self.label_92.setFont(font)
+        self.label_92.setFont(font1)
 
         self.gridLayout_8.addWidget(self.label_92, 4, 0, 1, 1)
 
         self.process_by_chunks_frame = QFrame(self.test_advanced_options_frame_2)
         self.process_by_chunks_frame.setObjectName(u"process_by_chunks_frame")
-        self.process_by_chunks_frame.setStyleSheet(u"background: rgb(246,246,246);\n"
-"")
         self.process_by_chunks_frame.setFrameShape(QFrame.Box)
         self.process_by_chunks_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_70 = QGridLayout(self.process_by_chunks_frame)
@@ -10715,7 +10332,7 @@ class Ui_MainWindow(object):
         self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO.setObjectName(u"TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO")
         self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO.setFont(font)
+        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO.setFont(font1)
         self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -10724,7 +10341,7 @@ class Ui_MainWindow(object):
 
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__LABEL = QLabel(self.process_by_chunks_frame)
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__LABEL.setObjectName(u"TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__LABEL")
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__LABEL.setFont(font)
+        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__LABEL.setFont(font1)
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__LABEL, 6, 0, 1, 1)
 
@@ -10734,19 +10351,19 @@ class Ui_MainWindow(object):
         self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INPUT.setObjectName(u"TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INPUT")
         self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INPUT.setFont(font)
+        self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INPUT.setFont(font1)
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INPUT, 11, 2, 1, 1)
 
         self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__LABEL = QLabel(self.process_by_chunks_frame)
         self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__LABEL.setObjectName(u"TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__LABEL")
-        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__LABEL.setFont(font)
+        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__LABEL.setFont(font1)
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__LABEL, 5, 0, 1, 1)
 
         self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__LABEL = QLabel(self.process_by_chunks_frame)
         self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__LABEL.setObjectName(u"TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__LABEL")
-        self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__LABEL.setFont(font)
+        self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__LABEL.setFont(font1)
         self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__LABEL.setIndent(15)
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__LABEL, 11, 0, 1, 1)
@@ -10757,7 +10374,7 @@ class Ui_MainWindow(object):
         self.TEST__BY_CHUNKS__FORMAT__INPUT.setObjectName(u"TEST__BY_CHUNKS__FORMAT__INPUT")
         self.TEST__BY_CHUNKS__FORMAT__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__BY_CHUNKS__FORMAT__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__BY_CHUNKS__FORMAT__INPUT.setFont(font)
+        self.TEST__BY_CHUNKS__FORMAT__INPUT.setFont(font1)
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__FORMAT__INPUT, 0, 2, 1, 1)
 
@@ -10773,7 +10390,7 @@ class Ui_MainWindow(object):
 
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL = QLabel(self.process_by_chunks_frame)
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setObjectName(u"TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL")
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setFont(font)
+        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setFont(font1)
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setIndent(15)
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL, 7, 0, 1, 1)
@@ -10786,7 +10403,7 @@ class Ui_MainWindow(object):
         self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INPUT.setObjectName(u"TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INPUT")
         self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INPUT.setFont(font)
+        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INPUT.setFont(font1)
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INPUT, 5, 2, 1, 1)
 
@@ -10794,7 +10411,7 @@ class Ui_MainWindow(object):
         self.TEST__BY_CHUNKS__FLUSH_EACH__INPUT.setObjectName(u"TEST__BY_CHUNKS__FLUSH_EACH__INPUT")
         self.TEST__BY_CHUNKS__FLUSH_EACH__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__BY_CHUNKS__FLUSH_EACH__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__BY_CHUNKS__FLUSH_EACH__INPUT.setFont(font)
+        self.TEST__BY_CHUNKS__FLUSH_EACH__INPUT.setFont(font1)
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__FLUSH_EACH__INPUT, 2, 2, 1, 1)
 
@@ -10802,7 +10419,7 @@ class Ui_MainWindow(object):
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO.setObjectName(u"TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO")
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO.setFont(font)
+        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO.setFont(font1)
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -10815,7 +10432,7 @@ class Ui_MainWindow(object):
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT.setObjectName(u"TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT")
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT.setFont(font)
+        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT.setFont(font1)
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT, 6, 2, 1, 1)
 
@@ -10823,13 +10440,13 @@ class Ui_MainWindow(object):
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setObjectName(u"TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT")
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setFont(font)
+        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setFont(font1)
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT, 8, 2, 1, 1)
 
         self.label_56 = QLabel(self.process_by_chunks_frame)
         self.label_56.setObjectName(u"label_56")
-        self.label_56.setFont(font)
+        self.label_56.setFont(font1)
 
         self.gridLayout_70.addWidget(self.label_56, 9, 0, 1, 1)
 
@@ -10837,7 +10454,7 @@ class Ui_MainWindow(object):
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setObjectName(u"TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT")
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setFont(font)
+        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setFont(font1)
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT, 7, 2, 1, 1)
 
@@ -10847,7 +10464,7 @@ class Ui_MainWindow(object):
         self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INPUT.setObjectName(u"TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INPUT")
         self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INPUT.setFont(font)
+        self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INPUT.setFont(font1)
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INPUT, 9, 2, 1, 1)
 
@@ -10863,7 +10480,7 @@ class Ui_MainWindow(object):
 
         self.label_54 = QLabel(self.process_by_chunks_frame)
         self.label_54.setObjectName(u"label_54")
-        self.label_54.setFont(font)
+        self.label_54.setFont(font1)
 
         self.gridLayout_70.addWidget(self.label_54, 2, 0, 1, 1)
 
@@ -10871,7 +10488,7 @@ class Ui_MainWindow(object):
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setObjectName(u"TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO")
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setFont(font)
+        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setFont(font1)
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -10904,32 +10521,32 @@ class Ui_MainWindow(object):
         self.TEST__BY_CHUNKS__SAVE_OUT_TIF__INPUT.setObjectName(u"TEST__BY_CHUNKS__SAVE_OUT_TIF__INPUT")
         self.TEST__BY_CHUNKS__SAVE_OUT_TIF__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__BY_CHUNKS__SAVE_OUT_TIF__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__BY_CHUNKS__SAVE_OUT_TIF__INPUT.setFont(font)
+        self.TEST__BY_CHUNKS__SAVE_OUT_TIF__INPUT.setFont(font1)
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__SAVE_OUT_TIF__INPUT, 1, 2, 1, 1)
 
         self.label_40 = QLabel(self.process_by_chunks_frame)
         self.label_40.setObjectName(u"label_40")
-        self.label_40.setFont(font)
+        self.label_40.setFont(font1)
 
         self.gridLayout_70.addWidget(self.label_40, 1, 0, 1, 1)
 
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL = QLabel(self.process_by_chunks_frame)
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setObjectName(u"TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL")
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setFont(font)
+        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setFont(font1)
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setIndent(15)
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL, 8, 0, 1, 1)
 
         self.label_32 = QLabel(self.process_by_chunks_frame)
         self.label_32.setObjectName(u"label_32")
-        self.label_32.setFont(font)
+        self.label_32.setFont(font1)
 
         self.gridLayout_70.addWidget(self.label_32, 0, 0, 1, 1)
 
         self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__LABEL = QLabel(self.process_by_chunks_frame)
         self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__LABEL.setObjectName(u"TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__LABEL")
-        self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__LABEL.setFont(font)
+        self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__LABEL.setFont(font1)
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__LABEL, 3, 0, 1, 1)
 
@@ -10957,7 +10574,7 @@ class Ui_MainWindow(object):
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setObjectName(u"TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO")
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setFont(font)
+        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setFont(font1)
         self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -10968,7 +10585,7 @@ class Ui_MainWindow(object):
         self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INPUT.setObjectName(u"TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INPUT")
         self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INPUT.setFont(font)
+        self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INPUT.setFont(font1)
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INPUT, 3, 2, 1, 1)
 
@@ -10978,15 +10595,14 @@ class Ui_MainWindow(object):
         self.frame_41 = QFrame(self.test_advanced_options_frame_2)
         self.frame_41.setObjectName(u"frame_41")
         self.frame_41.setMinimumSize(QSize(0, 0))
-        self.frame_41.setStyleSheet(u"background: rgb(246,246,246);\n"
-"")
+        self.frame_41.setStyleSheet(u"")
         self.frame_41.setFrameShape(QFrame.Box)
         self.frame_41.setFrameShadow(QFrame.Raised)
         self.gridLayout_43 = QGridLayout(self.frame_41)
         self.gridLayout_43.setObjectName(u"gridLayout_43")
         self.test_resolution_label = QLabel(self.frame_41)
         self.test_resolution_label.setObjectName(u"test_resolution_label")
-        self.test_resolution_label.setFont(font)
+        self.test_resolution_label.setFont(font1)
 
         self.gridLayout_43.addWidget(self.test_resolution_label, 4, 0, 1, 1)
 
@@ -10994,7 +10610,7 @@ class Ui_MainWindow(object):
         self.DATA__TEST__OVERLAP__INPUT.setObjectName(u"DATA__TEST__OVERLAP__INPUT")
         self.DATA__TEST__OVERLAP__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TEST__OVERLAP__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TEST__OVERLAP__INPUT.setFont(font)
+        self.DATA__TEST__OVERLAP__INPUT.setFont(font1)
 
         self.gridLayout_43.addWidget(self.DATA__TEST__OVERLAP__INPUT, 1, 2, 1, 1)
 
@@ -11004,7 +10620,7 @@ class Ui_MainWindow(object):
         self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT.setObjectName(u"DATA__TEST__ARGMAX_TO_OUTPUT__INPUT")
         self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT.setFont(font)
+        self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT.setFont(font1)
 
         self.gridLayout_43.addWidget(self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT, 5, 2, 1, 1)
 
@@ -11014,19 +10630,19 @@ class Ui_MainWindow(object):
         self.DATA__TEST__MEDIAN_PADDING__INPUT.setObjectName(u"DATA__TEST__MEDIAN_PADDING__INPUT")
         self.DATA__TEST__MEDIAN_PADDING__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TEST__MEDIAN_PADDING__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TEST__MEDIAN_PADDING__INPUT.setFont(font)
+        self.DATA__TEST__MEDIAN_PADDING__INPUT.setFont(font1)
 
         self.gridLayout_43.addWidget(self.DATA__TEST__MEDIAN_PADDING__INPUT, 3, 2, 1, 1)
 
         self.test_padding_label = QLabel(self.frame_41)
         self.test_padding_label.setObjectName(u"test_padding_label")
-        self.test_padding_label.setFont(font)
+        self.test_padding_label.setFont(font1)
 
         self.gridLayout_43.addWidget(self.test_padding_label, 2, 0, 1, 1)
 
         self.test_argmax_label = QLabel(self.frame_41)
         self.test_argmax_label.setObjectName(u"test_argmax_label")
-        self.test_argmax_label.setFont(font)
+        self.test_argmax_label.setFont(font1)
 
         self.gridLayout_43.addWidget(self.test_argmax_label, 5, 0, 1, 1)
 
@@ -11042,7 +10658,7 @@ class Ui_MainWindow(object):
 
         self.test_median_padding_label = QLabel(self.frame_41)
         self.test_median_padding_label.setObjectName(u"test_median_padding_label")
-        self.test_median_padding_label.setFont(font)
+        self.test_median_padding_label.setFont(font1)
 
         self.gridLayout_43.addWidget(self.test_median_padding_label, 3, 0, 1, 1)
 
@@ -11070,13 +10686,13 @@ class Ui_MainWindow(object):
         self.DATA__TEST__PADDING__INPUT.setObjectName(u"DATA__TEST__PADDING__INPUT")
         self.DATA__TEST__PADDING__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TEST__PADDING__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TEST__PADDING__INPUT.setFont(font)
+        self.DATA__TEST__PADDING__INPUT.setFont(font1)
 
         self.gridLayout_43.addWidget(self.DATA__TEST__PADDING__INPUT, 2, 2, 1, 1)
 
         self.test_overlap_label = QLabel(self.frame_41)
         self.test_overlap_label.setObjectName(u"test_overlap_label")
-        self.test_overlap_label.setFont(font)
+        self.test_overlap_label.setFont(font1)
 
         self.gridLayout_43.addWidget(self.test_overlap_label, 1, 0, 1, 1)
 
@@ -11108,7 +10724,7 @@ class Ui_MainWindow(object):
         self.DATA__TEST__RESOLUTION__INPUT.setObjectName(u"DATA__TEST__RESOLUTION__INPUT")
         self.DATA__TEST__RESOLUTION__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TEST__RESOLUTION__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TEST__RESOLUTION__INPUT.setFont(font)
+        self.DATA__TEST__RESOLUTION__INPUT.setFont(font1)
 
         self.gridLayout_43.addWidget(self.DATA__TEST__RESOLUTION__INPUT, 4, 2, 1, 1)
 
@@ -11124,7 +10740,7 @@ class Ui_MainWindow(object):
 
         self.DATA__PATCH_SIZE__TEST__LABEL = QLabel(self.frame_41)
         self.DATA__PATCH_SIZE__TEST__LABEL.setObjectName(u"DATA__PATCH_SIZE__TEST__LABEL")
-        self.DATA__PATCH_SIZE__TEST__LABEL.setFont(font)
+        self.DATA__PATCH_SIZE__TEST__LABEL.setFont(font1)
 
         self.gridLayout_43.addWidget(self.DATA__PATCH_SIZE__TEST__LABEL, 0, 0, 1, 1)
 
@@ -11132,20 +10748,20 @@ class Ui_MainWindow(object):
         self.DATA__PATCH_SIZE__TEST__INPUT.setObjectName(u"DATA__PATCH_SIZE__TEST__INPUT")
         self.DATA__PATCH_SIZE__TEST__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PATCH_SIZE__TEST__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PATCH_SIZE__TEST__INPUT.setFont(font)
+        self.DATA__PATCH_SIZE__TEST__INPUT.setFont(font1)
 
         self.gridLayout_43.addWidget(self.DATA__PATCH_SIZE__TEST__INPUT, 0, 2, 1, 1)
 
         self.DATA__TEST__FILTER_SAMPLES__PROPS__LABEL = QLabel(self.frame_41)
         self.DATA__TEST__FILTER_SAMPLES__PROPS__LABEL.setObjectName(u"DATA__TEST__FILTER_SAMPLES__PROPS__LABEL")
-        self.DATA__TEST__FILTER_SAMPLES__PROPS__LABEL.setFont(font)
+        self.DATA__TEST__FILTER_SAMPLES__PROPS__LABEL.setFont(font1)
         self.DATA__TEST__FILTER_SAMPLES__PROPS__LABEL.setIndent(15)
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__PROPS__LABEL, 7, 0, 1, 1)
 
         self.DATA__TEST__FILTER_SAMPLES__VALUES__LABEL = QLabel(self.frame_41)
         self.DATA__TEST__FILTER_SAMPLES__VALUES__LABEL.setObjectName(u"DATA__TEST__FILTER_SAMPLES__VALUES__LABEL")
-        self.DATA__TEST__FILTER_SAMPLES__VALUES__LABEL.setFont(font)
+        self.DATA__TEST__FILTER_SAMPLES__VALUES__LABEL.setFont(font1)
         self.DATA__TEST__FILTER_SAMPLES__VALUES__LABEL.setIndent(15)
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__VALUES__LABEL, 8, 0, 1, 1)
@@ -11154,7 +10770,7 @@ class Ui_MainWindow(object):
         self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setObjectName(u"DATA__TEST__FILTER_SAMPLES__ENABLE__INFO")
         self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setFont(font)
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setFont(font1)
         self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -11163,13 +10779,13 @@ class Ui_MainWindow(object):
 
         self.DATA__TEST__FILTER_SAMPLES__ENABLE__LABEL = QLabel(self.frame_41)
         self.DATA__TEST__FILTER_SAMPLES__ENABLE__LABEL.setObjectName(u"DATA__TEST__FILTER_SAMPLES__ENABLE__LABEL")
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__LABEL.setFont(font)
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__LABEL.setFont(font1)
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__ENABLE__LABEL, 6, 0, 1, 1)
 
         self.DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL = QLabel(self.frame_41)
         self.DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL.setObjectName(u"DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL")
-        self.DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL.setFont(font)
+        self.DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL.setFont(font1)
         self.DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL.setIndent(15)
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL, 9, 0, 1, 1)
@@ -11178,7 +10794,7 @@ class Ui_MainWindow(object):
         self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setObjectName(u"DATA__TEST__FILTER_SAMPLES__SIGNS__INFO")
         self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setFont(font)
+        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setFont(font1)
         self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -11189,7 +10805,7 @@ class Ui_MainWindow(object):
         self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO.setObjectName(u"DATA__TEST__FILTER_SAMPLES__VALUES__INFO")
         self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO.setFont(font)
+        self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO.setFont(font1)
         self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -11200,7 +10816,7 @@ class Ui_MainWindow(object):
         self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO.setObjectName(u"DATA__TEST__FILTER_SAMPLES__PROPS__INFO")
         self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO.setFont(font)
+        self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO.setFont(font1)
         self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -11211,7 +10827,7 @@ class Ui_MainWindow(object):
         self.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT.setObjectName(u"DATA__TEST__FILTER_SAMPLES__PROPS__INPUT")
         self.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT.setFont(font)
+        self.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT.setFont(font1)
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT, 7, 2, 1, 1)
 
@@ -11219,7 +10835,7 @@ class Ui_MainWindow(object):
         self.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT.setObjectName(u"DATA__TEST__FILTER_SAMPLES__VALUES__INPUT")
         self.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT.setFont(font)
+        self.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT.setFont(font1)
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT, 8, 2, 1, 1)
 
@@ -11227,7 +10843,7 @@ class Ui_MainWindow(object):
         self.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT.setObjectName(u"DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT")
         self.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT.setFont(font)
+        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT.setFont(font1)
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT, 9, 2, 1, 1)
 
@@ -11237,7 +10853,7 @@ class Ui_MainWindow(object):
         self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.setObjectName(u"DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT")
         self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.setFont(font)
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.setFont(font1)
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT, 6, 2, 1, 1)
 
@@ -11246,8 +10862,6 @@ class Ui_MainWindow(object):
 
         self.frame_55 = QFrame(self.test_advanced_options_frame_2)
         self.frame_55.setObjectName(u"frame_55")
-        self.frame_55.setStyleSheet(u"background: rgb(246,246,246);\n"
-"")
         self.frame_55.setFrameShape(QFrame.Box)
         self.frame_55.setFrameShadow(QFrame.Raised)
         self.gridLayout_63 = QGridLayout(self.frame_55)
@@ -11258,7 +10872,7 @@ class Ui_MainWindow(object):
 
         self.test_apply_bin_mask_label = QLabel(self.frame_55)
         self.test_apply_bin_mask_label.setObjectName(u"test_apply_bin_mask_label")
-        self.test_apply_bin_mask_label.setFont(font)
+        self.test_apply_bin_mask_label.setFont(font1)
 
         self.gridLayout_63.addWidget(self.test_apply_bin_mask_label, 0, 0, 1, 1)
 
@@ -11268,7 +10882,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__APPLY_MASK__INPUT.setObjectName(u"TEST__POST_PROCESSING__APPLY_MASK__INPUT")
         self.TEST__POST_PROCESSING__APPLY_MASK__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__APPLY_MASK__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__APPLY_MASK__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__APPLY_MASK__INPUT.setFont(font1)
 
         self.gridLayout_63.addWidget(self.TEST__POST_PROCESSING__APPLY_MASK__INPUT, 0, 2, 1, 1)
 
@@ -11287,7 +10901,6 @@ class Ui_MainWindow(object):
 
         self.preprocessing_test_frame = QFrame(self.test_advanced_options_frame_2)
         self.preprocessing_test_frame.setObjectName(u"preprocessing_test_frame")
-        self.preprocessing_test_frame.setStyleSheet(u"background: rgb(246,246,246);")
         self.preprocessing_test_frame.setFrameShape(QFrame.Box)
         self.preprocessing_test_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_75 = QGridLayout(self.preprocessing_test_frame)
@@ -11304,7 +10917,7 @@ class Ui_MainWindow(object):
 
         self.DATA__PREPROCESS__MEDIAN_BLUR__TEST__LABEL = QLabel(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__MEDIAN_BLUR__TEST__LABEL.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__TEST__LABEL")
-        self.DATA__PREPROCESS__MEDIAN_BLUR__TEST__LABEL.setFont(font)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__TEST__LABEL.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__TEST__LABEL, 12, 0, 1, 1)
 
@@ -11340,14 +10953,14 @@ class Ui_MainWindow(object):
 
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__LABEL = QLabel(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__LABEL.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__LABEL")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__LABEL.setFont(font)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__LABEL.setFont(font1)
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__LABEL.setIndent(15)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__LABEL, 10, 0, 1, 1)
 
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__LABEL = QLabel(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__LABEL.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__LABEL")
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__LABEL.setFont(font)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__LABEL.setFont(font1)
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__LABEL.setIndent(15)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__LABEL, 15, 0, 1, 1)
@@ -11358,13 +10971,13 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__TEST__INPUT.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__TEST__INPUT")
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__TEST__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__TEST__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__TEST__INPUT.setFont(font)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__TEST__INPUT.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__TEST__INPUT, 14, 3, 1, 1)
 
         self.DATA__PREPROCESS__RESIZE__ORDER__TEST__LABEL = QLabel(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__RESIZE__ORDER__TEST__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__ORDER__TEST__LABEL")
-        self.DATA__PREPROCESS__RESIZE__ORDER__TEST__LABEL.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__ORDER__TEST__LABEL.setFont(font1)
         self.DATA__PREPROCESS__RESIZE__ORDER__TEST__LABEL.setIndent(15)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__ORDER__TEST__LABEL, 2, 0, 1, 1)
@@ -11383,7 +10996,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT")
         self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__INPUT, 1, 3, 1, 1)
 
@@ -11393,13 +11006,13 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__CLAHE__ENABLE__TEST__INPUT.setObjectName(u"DATA__PREPROCESS__CLAHE__ENABLE__TEST__INPUT")
         self.DATA__PREPROCESS__CLAHE__ENABLE__TEST__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__CLAHE__ENABLE__TEST__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__CLAHE__ENABLE__TEST__INPUT.setFont(font)
+        self.DATA__PREPROCESS__CLAHE__ENABLE__TEST__INPUT.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__CLAHE__ENABLE__TEST__INPUT, 16, 3, 1, 1)
 
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__LABEL = QLabel(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__LABEL.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__LABEL")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__LABEL.setFont(font)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__LABEL.setFont(font1)
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__LABEL.setIndent(15)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__LABEL, 11, 0, 1, 1)
@@ -11410,7 +11023,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__CANNY__ENABLE__TEST__INPUT.setObjectName(u"DATA__PREPROCESS__CANNY__ENABLE__TEST__INPUT")
         self.DATA__PREPROCESS__CANNY__ENABLE__TEST__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__CANNY__ENABLE__TEST__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__CANNY__ENABLE__TEST__INPUT.setFont(font)
+        self.DATA__PREPROCESS__CANNY__ENABLE__TEST__INPUT.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__CANNY__ENABLE__TEST__INPUT, 19, 3, 1, 1)
 
@@ -11428,7 +11041,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__INPUT.setObjectName(u"DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__INPUT")
         self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__INPUT.setFont(font)
+        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__INPUT.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__INPUT, 17, 3, 1, 1)
 
@@ -11438,7 +11051,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__TEST__INPUT.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__TEST__INPUT")
         self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__TEST__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__TEST__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__TEST__INPUT.setFont(font)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__TEST__INPUT.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__TEST__INPUT, 12, 3, 1, 1)
 
@@ -11456,19 +11069,19 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__RESIZE__CVAL__TEST__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__CVAL__TEST__INPUT")
         self.DATA__PREPROCESS__RESIZE__CVAL__TEST__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__RESIZE__CVAL__TEST__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__CVAL__TEST__INPUT.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__CVAL__TEST__INPUT.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__CVAL__TEST__INPUT, 4, 3, 1, 1)
 
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__TEST__LABEL = QLabel(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__TEST__LABEL.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__TEST__LABEL")
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__TEST__LABEL.setFont(font)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__TEST__LABEL.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__TEST__LABEL, 14, 0, 1, 1)
 
         self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__LABEL = QLabel(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__LABEL.setObjectName(u"DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__LABEL")
-        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__LABEL.setFont(font)
+        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__LABEL.setFont(font1)
         self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__LABEL.setIndent(15)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__LABEL, 20, 0, 1, 1)
@@ -11485,14 +11098,14 @@ class Ui_MainWindow(object):
 
         self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__LABEL = QLabel(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__LABEL")
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__LABEL.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__LABEL.setFont(font1)
         self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__LABEL.setIndent(15)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__LABEL, 6, 0, 1, 1)
 
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__LABEL = QLabel(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__LABEL.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__LABEL")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__LABEL.setFont(font)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__LABEL.setFont(font1)
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__LABEL.setIndent(15)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__LABEL, 9, 0, 1, 1)
@@ -11506,13 +11119,13 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__INPUT.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__INPUT")
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__INPUT.setFont(font)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__INPUT.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__TEST__INPUT, 10, 3, 1, 1)
 
         self.DATA__PREPROCESS__RESIZE__MODE__TEST__LABEL = QLabel(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__RESIZE__MODE__TEST__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__MODE__TEST__LABEL")
-        self.DATA__PREPROCESS__RESIZE__MODE__TEST__LABEL.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__MODE__TEST__LABEL.setFont(font1)
         self.DATA__PREPROCESS__RESIZE__MODE__TEST__LABEL.setIndent(15)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__MODE__TEST__LABEL, 3, 0, 1, 1)
@@ -11526,7 +11139,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__RESIZE__MODE__TEST__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__MODE__TEST__INPUT")
         self.DATA__PREPROCESS__RESIZE__MODE__TEST__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__RESIZE__MODE__TEST__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__MODE__TEST__INPUT.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__MODE__TEST__INPUT.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__MODE__TEST__INPUT, 3, 3, 1, 1)
 
@@ -11534,7 +11147,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INPUT.setObjectName(u"DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INPUT")
         self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INPUT.setFont(font)
+        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INPUT.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__TEST__INPUT, 20, 3, 1, 1)
 
@@ -11544,7 +11157,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__TEST__INPUT.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__TEST__INPUT")
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__TEST__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__TEST__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__TEST__INPUT.setFont(font)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__TEST__INPUT.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__TEST__INPUT, 8, 3, 1, 1)
 
@@ -11554,7 +11167,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__INPUT")
         self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__INPUT.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__INPUT.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__INPUT, 7, 3, 1, 1)
 
@@ -11562,13 +11175,13 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__INPUT.setObjectName(u"DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__INPUT")
         self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__INPUT.setFont(font)
+        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__INPUT.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__INPUT, 18, 3, 1, 1)
 
         self.DATA__PREPROCESS__CANNY__TEST__LABEL = QLabel(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__CANNY__TEST__LABEL.setObjectName(u"DATA__PREPROCESS__CANNY__TEST__LABEL")
-        self.DATA__PREPROCESS__CANNY__TEST__LABEL.setFont(font)
+        self.DATA__PREPROCESS__CANNY__TEST__LABEL.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__CANNY__TEST__LABEL, 19, 0, 1, 1)
 
@@ -11578,13 +11191,13 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__RESIZE__CLIP__TEST__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__CLIP__TEST__INPUT")
         self.DATA__PREPROCESS__RESIZE__CLIP__TEST__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__RESIZE__CLIP__TEST__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__CLIP__TEST__INPUT.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__CLIP__TEST__INPUT.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__CLIP__TEST__INPUT, 5, 3, 1, 1)
 
         self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__LABEL = QLabel(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__LABEL")
-        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__LABEL.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__LABEL.setFont(font1)
         self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__LABEL.setIndent(15)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__TEST__LABEL, 1, 0, 1, 1)
@@ -11611,13 +11224,13 @@ class Ui_MainWindow(object):
 
         self.DATA__PREPROCESS__RESIZE__TEST__LABEL = QLabel(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__RESIZE__TEST__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__TEST__LABEL")
-        self.DATA__PREPROCESS__RESIZE__TEST__LABEL.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__TEST__LABEL.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__TEST__LABEL, 0, 0, 1, 1)
 
         self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__LABEL = QLabel(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__LABEL")
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__LABEL.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__LABEL.setFont(font1)
         self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__LABEL.setIndent(15)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__TEST__LABEL, 7, 0, 1, 1)
@@ -11628,7 +11241,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__INPUT")
         self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__INPUT.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__INPUT.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__TEST__INPUT, 6, 3, 1, 1)
 
@@ -11636,7 +11249,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__RESIZE__TEST__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__TEST__INFO")
         self.DATA__PREPROCESS__RESIZE__TEST__INFO.setMinimumSize(QSize(30, 30))
         self.DATA__PREPROCESS__RESIZE__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__TEST__INFO.setFont(font10)
+        self.DATA__PREPROCESS__RESIZE__TEST__INFO.setFont(font11)
         self.DATA__PREPROCESS__RESIZE__TEST__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -11649,7 +11262,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT")
         self.DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__ENABLE__TEST__INPUT, 0, 3, 1, 1)
 
@@ -11657,20 +11270,20 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__INPUT.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__INPUT")
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__INPUT.setFont(font)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__INPUT.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__TEST__INPUT, 11, 3, 1, 1)
 
         self.DATA__PREPROCESS__RESIZE__CLIP__TEST__LABEL = QLabel(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__RESIZE__CLIP__TEST__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__CLIP__TEST__LABEL")
-        self.DATA__PREPROCESS__RESIZE__CLIP__TEST__LABEL.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__CLIP__TEST__LABEL.setFont(font1)
         self.DATA__PREPROCESS__RESIZE__CLIP__TEST__LABEL.setIndent(15)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__CLIP__TEST__LABEL, 5, 0, 1, 1)
 
         self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__LABEL = QLabel(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__LABEL.setObjectName(u"DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__LABEL")
-        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__LABEL.setFont(font)
+        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__LABEL.setFont(font1)
         self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__LABEL.setIndent(15)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__LABEL, 21, 0, 1, 1)
@@ -11687,7 +11300,7 @@ class Ui_MainWindow(object):
 
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__TEST__LABEL = QLabel(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__TEST__LABEL.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__TEST__LABEL")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__TEST__LABEL.setFont(font)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__TEST__LABEL.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__TEST__LABEL, 8, 0, 1, 1)
 
@@ -11705,7 +11318,7 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INPUT.setObjectName(u"DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INPUT")
         self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INPUT.setFont(font)
+        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INPUT.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INPUT, 21, 3, 1, 1)
 
@@ -11723,13 +11336,13 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INPUT.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INPUT")
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INPUT.setMinimumSize(QSize(500, 30))
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INPUT.setMaximumSize(QSize(500, 30))
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INPUT.setFont(font)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INPUT.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__INPUT, 15, 3, 1, 1)
 
         self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__LABEL = QLabel(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__LABEL.setObjectName(u"DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__LABEL")
-        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__LABEL.setFont(font)
+        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__LABEL.setFont(font1)
         self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__LABEL.setIndent(15)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__TEST__LABEL, 17, 0, 1, 1)
@@ -11754,20 +11367,20 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__RESIZE__ORDER__TEST__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__ORDER__TEST__INPUT")
         self.DATA__PREPROCESS__RESIZE__ORDER__TEST__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__RESIZE__ORDER__TEST__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__ORDER__TEST__INPUT.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__ORDER__TEST__INPUT.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__ORDER__TEST__INPUT, 2, 3, 1, 1)
 
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__BN = QPushButton(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__BN.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__BN")
         self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__BN.setMaximumSize(QSize(130, 30))
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__BN.setFont(font)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__BN.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__TEST__BN, 15, 4, 1, 1)
 
         self.DATA__PREPROCESS__RESIZE__CVAL__TEST__LABEL = QLabel(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__RESIZE__CVAL__TEST__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__CVAL__TEST__LABEL")
-        self.DATA__PREPROCESS__RESIZE__CVAL__TEST__LABEL.setFont(font)
+        self.DATA__PREPROCESS__RESIZE__CVAL__TEST__LABEL.setFont(font1)
         self.DATA__PREPROCESS__RESIZE__CVAL__TEST__LABEL.setIndent(15)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__RESIZE__CVAL__TEST__LABEL, 4, 0, 1, 1)
@@ -11794,7 +11407,7 @@ class Ui_MainWindow(object):
 
         self.DATA__PREPROCESS__CLAHE__TEST__LABEL = QLabel(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__CLAHE__TEST__LABEL.setObjectName(u"DATA__PREPROCESS__CLAHE__TEST__LABEL")
-        self.DATA__PREPROCESS__CLAHE__TEST__LABEL.setFont(font)
+        self.DATA__PREPROCESS__CLAHE__TEST__LABEL.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__CLAHE__TEST__LABEL, 16, 0, 1, 1)
 
@@ -11812,13 +11425,13 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__INPUT.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__INPUT")
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__INPUT.setFont(font)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__INPUT.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__TEST__INPUT, 9, 3, 1, 1)
 
         self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__LABEL = QLabel(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__LABEL.setObjectName(u"DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__LABEL")
-        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__LABEL.setFont(font)
+        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__LABEL.setFont(font1)
         self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__LABEL.setIndent(15)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__TEST__LABEL, 18, 0, 1, 1)
@@ -11861,13 +11474,13 @@ class Ui_MainWindow(object):
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INPUT.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INPUT")
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INPUT.setFont(font)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INPUT.setFont(font1)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INPUT, 13, 3, 1, 1)
 
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INFO = QPushButton(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INFO.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INFO")
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INFO.setFont(font)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INFO.setFont(font1)
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -11876,7 +11489,7 @@ class Ui_MainWindow(object):
 
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__LABEL = QLabel(self.preprocessing_test_frame)
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__LABEL.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__LABEL")
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__LABEL.setFont(font)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__LABEL.setFont(font1)
         self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__LABEL.setIndent(15)
 
         self.gridLayout_75.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__TEST__LABEL, 13, 0, 1, 1)
@@ -11886,7 +11499,7 @@ class Ui_MainWindow(object):
 
         self.label_98 = QLabel(self.test_advanced_options_frame_2)
         self.label_98.setObjectName(u"label_98")
-        self.label_98.setFont(font)
+        self.label_98.setFont(font1)
 
         self.gridLayout_8.addWidget(self.label_98, 16, 0, 1, 1)
 
@@ -11899,7 +11512,7 @@ class Ui_MainWindow(object):
         self.frame_37 = QFrame(self.scrollAreaWidgetContents_5)
         self.frame_37.setObjectName(u"frame_37")
         self.frame_37.setMinimumSize(QSize(0, 30))
-        self.frame_37.setFont(font)
+        self.frame_37.setFont(font1)
         self.frame_37.setFrameShape(QFrame.NoFrame)
         self.frame_37.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_14 = QHBoxLayout(self.frame_37)
@@ -11909,24 +11522,14 @@ class Ui_MainWindow(object):
         self.train_advanced_label_2 = QLabel(self.frame_37)
         self.train_advanced_label_2.setObjectName(u"train_advanced_label_2")
         self.train_advanced_label_2.setMaximumSize(QSize(150, 35))
-        self.train_advanced_label_2.setFont(font)
+        self.train_advanced_label_2.setFont(font1)
 
         self.horizontalLayout_14.addWidget(self.train_advanced_label_2)
 
         self.test_advanced_bn = QPushButton(self.frame_37)
         self.test_advanced_bn.setObjectName(u"test_advanced_bn")
         self.test_advanced_bn.setMaximumSize(QSize(35, 35))
-        self.test_advanced_bn.setFont(font)
-        self.test_advanced_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
-        self.test_advanced_bn.setIcon(icon4)
+        self.test_advanced_bn.setFont(font1)
 
         self.horizontalLayout_14.addWidget(self.test_advanced_bn)
 
@@ -11940,40 +11543,38 @@ class Ui_MainWindow(object):
         self.label_85 = QLabel(self.scrollAreaWidgetContents_5)
         self.label_85.setObjectName(u"label_85")
         self.label_85.setMaximumSize(QSize(150, 16777215))
-        self.label_85.setFont(font)
+        self.label_85.setFont(font1)
 
         self.gridLayout_37.addWidget(self.label_85, 0, 0, 1, 1)
 
         self.frame_36 = QFrame(self.scrollAreaWidgetContents_5)
         self.frame_36.setObjectName(u"frame_36")
-        self.frame_36.setFont(font)
-        self.frame_36.setStyleSheet(u"background: rgb(246,246,246);\n"
-"")
+        self.frame_36.setFont(font1)
         self.frame_36.setFrameShape(QFrame.Box)
         self.frame_36.setFrameShadow(QFrame.Raised)
         self.gridLayout_38 = QGridLayout(self.frame_36)
         self.gridLayout_38.setObjectName(u"gridLayout_38")
         self.test_data_input_browse_bn = QPushButton(self.frame_36)
         self.test_data_input_browse_bn.setObjectName(u"test_data_input_browse_bn")
-        self.test_data_input_browse_bn.setFont(font)
+        self.test_data_input_browse_bn.setFont(font1)
 
         self.gridLayout_38.addWidget(self.test_data_input_browse_bn, 2, 4, 1, 1)
 
         self.test_data_label = QLabel(self.frame_36)
         self.test_data_label.setObjectName(u"test_data_label")
-        self.test_data_label.setFont(font)
+        self.test_data_label.setFont(font1)
 
         self.gridLayout_38.addWidget(self.test_data_label, 2, 1, 1, 1)
 
         self.test_data_gt_input_browse_bn = QPushButton(self.frame_36)
         self.test_data_gt_input_browse_bn.setObjectName(u"test_data_gt_input_browse_bn")
-        self.test_data_gt_input_browse_bn.setFont(font)
+        self.test_data_gt_input_browse_bn.setFont(font1)
 
         self.gridLayout_38.addWidget(self.test_data_gt_input_browse_bn, 4, 4, 1, 1)
 
         self.test_exists_gt_label = QLabel(self.frame_36)
         self.test_exists_gt_label.setObjectName(u"test_exists_gt_label")
-        self.test_exists_gt_label.setFont(font)
+        self.test_exists_gt_label.setFont(font1)
 
         self.gridLayout_38.addWidget(self.test_exists_gt_label, 3, 1, 1, 1)
 
@@ -11981,13 +11582,13 @@ class Ui_MainWindow(object):
         self.use_val_as_test.setObjectName(u"use_val_as_test")
         self.use_val_as_test.setMinimumSize(QSize(0, 0))
         self.use_val_as_test.setMaximumSize(QSize(200, 16777215))
-        self.use_val_as_test.setFont(font)
+        self.use_val_as_test.setFont(font1)
 
         self.gridLayout_38.addWidget(self.use_val_as_test, 1, 1, 1, 1)
 
         self.test_data_in_memory_label = QLabel(self.frame_36)
         self.test_data_in_memory_label.setObjectName(u"test_data_in_memory_label")
-        self.test_data_in_memory_label.setFont(font)
+        self.test_data_in_memory_label.setFont(font1)
 
         self.gridLayout_38.addWidget(self.test_data_in_memory_label, 5, 1, 1, 1)
 
@@ -11997,7 +11598,7 @@ class Ui_MainWindow(object):
         self.DATA__TEST__USE_VAL_AS_TEST__INPUT.setObjectName(u"DATA__TEST__USE_VAL_AS_TEST__INPUT")
         self.DATA__TEST__USE_VAL_AS_TEST__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TEST__USE_VAL_AS_TEST__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TEST__USE_VAL_AS_TEST__INPUT.setFont(font)
+        self.DATA__TEST__USE_VAL_AS_TEST__INPUT.setFont(font1)
 
         self.gridLayout_38.addWidget(self.DATA__TEST__USE_VAL_AS_TEST__INPUT, 1, 3, 1, 1)
 
@@ -12007,13 +11608,13 @@ class Ui_MainWindow(object):
         self.DATA__TEST__LOAD_GT__INPUT.setObjectName(u"DATA__TEST__LOAD_GT__INPUT")
         self.DATA__TEST__LOAD_GT__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TEST__LOAD_GT__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TEST__LOAD_GT__INPUT.setFont(font)
+        self.DATA__TEST__LOAD_GT__INPUT.setFont(font1)
 
         self.gridLayout_38.addWidget(self.DATA__TEST__LOAD_GT__INPUT, 3, 3, 1, 1)
 
         self.test_data_gt_label = QLabel(self.frame_36)
         self.test_data_gt_label.setObjectName(u"test_data_gt_label")
-        self.test_data_gt_label.setFont(font)
+        self.test_data_gt_label.setFont(font1)
         self.test_data_gt_label.setIndent(15)
 
         self.gridLayout_38.addWidget(self.test_data_gt_label, 4, 1, 1, 1)
@@ -12022,7 +11623,7 @@ class Ui_MainWindow(object):
         self.DATA__TEST__GT_PATH__INPUT.setObjectName(u"DATA__TEST__GT_PATH__INPUT")
         self.DATA__TEST__GT_PATH__INPUT.setMinimumSize(QSize(500, 30))
         self.DATA__TEST__GT_PATH__INPUT.setMaximumSize(QSize(500, 30))
-        self.DATA__TEST__GT_PATH__INPUT.setFont(font)
+        self.DATA__TEST__GT_PATH__INPUT.setFont(font1)
 
         self.gridLayout_38.addWidget(self.DATA__TEST__GT_PATH__INPUT, 4, 3, 1, 1)
 
@@ -12030,7 +11631,7 @@ class Ui_MainWindow(object):
         self.DATA__TEST__PATH__INPUT.setObjectName(u"DATA__TEST__PATH__INPUT")
         self.DATA__TEST__PATH__INPUT.setMinimumSize(QSize(500, 30))
         self.DATA__TEST__PATH__INPUT.setMaximumSize(QSize(500, 30))
-        self.DATA__TEST__PATH__INPUT.setFont(font)
+        self.DATA__TEST__PATH__INPUT.setFont(font1)
 
         self.gridLayout_38.addWidget(self.DATA__TEST__PATH__INPUT, 2, 3, 1, 1)
 
@@ -12050,7 +11651,7 @@ class Ui_MainWindow(object):
         self.DATA__TEST__IN_MEMORY__INPUT.setObjectName(u"DATA__TEST__IN_MEMORY__INPUT")
         self.DATA__TEST__IN_MEMORY__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TEST__IN_MEMORY__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TEST__IN_MEMORY__INPUT.setFont(font)
+        self.DATA__TEST__IN_MEMORY__INPUT.setFont(font1)
 
         self.gridLayout_38.addWidget(self.DATA__TEST__IN_MEMORY__INPUT, 5, 3, 1, 1)
 
@@ -12141,20 +11742,19 @@ class Ui_MainWindow(object):
         self.label_82 = QLabel(self.scrollAreaWidgetContents_12)
         self.label_82.setObjectName(u"label_82")
         self.label_82.setMaximumSize(QSize(16777215, 16777215))
-        self.label_82.setFont(font)
+        self.label_82.setFont(font1)
 
         self.gridLayout_61.addWidget(self.label_82, 0, 0, 1, 1)
 
         self.frame_40 = QFrame(self.scrollAreaWidgetContents_12)
         self.frame_40.setObjectName(u"frame_40")
-        self.frame_40.setStyleSheet(u"background: rgb(246,246,246);")
         self.frame_40.setFrameShape(QFrame.Box)
         self.frame_40.setFrameShadow(QFrame.Raised)
         self.gridLayout_42 = QGridLayout(self.frame_40)
         self.gridLayout_42.setObjectName(u"gridLayout_42")
         self.sem_seg_check_data_label = QLabel(self.frame_40)
         self.sem_seg_check_data_label.setObjectName(u"sem_seg_check_data_label")
-        self.sem_seg_check_data_label.setFont(font)
+        self.sem_seg_check_data_label.setFont(font1)
 
         self.gridLayout_42.addWidget(self.sem_seg_check_data_label, 0, 0, 1, 1)
 
@@ -12168,7 +11768,7 @@ class Ui_MainWindow(object):
         self.DATA__TEST__CHECK_DATA__INPUT.setObjectName(u"DATA__TEST__CHECK_DATA__INPUT")
         self.DATA__TEST__CHECK_DATA__INPUT.setMinimumSize(QSize(200, 30))
         self.DATA__TEST__CHECK_DATA__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TEST__CHECK_DATA__INPUT.setFont(font)
+        self.DATA__TEST__CHECK_DATA__INPUT.setFont(font1)
 
         self.gridLayout_42.addWidget(self.DATA__TEST__CHECK_DATA__INPUT, 0, 2, 1, 1)
 
@@ -12187,14 +11787,13 @@ class Ui_MainWindow(object):
 
         self.sem_seg_post_proc_frame_label = QLabel(self.scrollAreaWidgetContents_12)
         self.sem_seg_post_proc_frame_label.setObjectName(u"sem_seg_post_proc_frame_label")
-        self.sem_seg_post_proc_frame_label.setFont(font)
+        self.sem_seg_post_proc_frame_label.setFont(font1)
 
         self.gridLayout_61.addWidget(self.sem_seg_post_proc_frame_label, 3, 0, 1, 1)
 
         self.sem_seg_post_proc_frame = QFrame(self.scrollAreaWidgetContents_12)
         self.sem_seg_post_proc_frame.setObjectName(u"sem_seg_post_proc_frame")
         self.sem_seg_post_proc_frame.setMinimumSize(QSize(0, 0))
-        self.sem_seg_post_proc_frame.setStyleSheet(u"background: rgb(246,246,246);")
         self.sem_seg_post_proc_frame.setFrameShape(QFrame.Box)
         self.sem_seg_post_proc_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_60 = QGridLayout(self.sem_seg_post_proc_frame)
@@ -12205,7 +11804,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INPUT")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INPUT.setFont(font1)
 
         self.gridLayout_60.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__INPUT, 0, 2, 1, 1)
 
@@ -12213,7 +11812,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__INPUT")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__INPUT.setFont(font1)
 
         self.gridLayout_60.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__INPUT, 1, 2, 1, 1)
 
@@ -12221,7 +11820,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__INPUT")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__INPUT.setFont(font1)
 
         self.gridLayout_60.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__INPUT, 2, 2, 1, 1)
 
@@ -12237,7 +11836,7 @@ class Ui_MainWindow(object):
 
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__LABEL = QLabel(self.sem_seg_post_proc_frame)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__LABEL")
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__LABEL.setFont(font)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__LABEL.setFont(font1)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__LABEL.setIndent(15)
 
         self.gridLayout_60.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__SEM_SEG__LABEL, 2, 0, 1, 1)
@@ -12268,13 +11867,13 @@ class Ui_MainWindow(object):
 
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__LABEL = QLabel(self.sem_seg_post_proc_frame)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__LABEL")
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__LABEL.setFont(font)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__LABEL.setFont(font1)
 
         self.gridLayout_60.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER__SEM_SEG__LABEL, 0, 0, 1, 1)
 
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__LABEL = QLabel(self.sem_seg_post_proc_frame)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__LABEL")
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__LABEL.setFont(font)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__LABEL.setFont(font1)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__LABEL.setIndent(15)
 
         self.gridLayout_60.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__SEM_SEG__LABEL, 1, 0, 1, 1)
@@ -12312,38 +11911,37 @@ class Ui_MainWindow(object):
         self.gridLayout_44.setObjectName(u"gridLayout_44")
         self.label_86 = QLabel(self.scrollAreaWidgetContents_13)
         self.label_86.setObjectName(u"label_86")
-        self.label_86.setFont(font)
+        self.label_86.setFont(font1)
 
         self.gridLayout_44.addWidget(self.label_86, 4, 0, 1, 1)
 
         self.label_97 = QLabel(self.scrollAreaWidgetContents_13)
         self.label_97.setObjectName(u"label_97")
-        self.label_97.setFont(font)
+        self.label_97.setFont(font1)
 
         self.gridLayout_44.addWidget(self.label_97, 6, 0, 1, 1)
 
         self.inst_seg_metrics_label = QLabel(self.scrollAreaWidgetContents_13)
         self.inst_seg_metrics_label.setObjectName(u"inst_seg_metrics_label")
-        self.inst_seg_metrics_label.setFont(font)
+        self.inst_seg_metrics_label.setFont(font1)
 
         self.gridLayout_44.addWidget(self.inst_seg_metrics_label, 8, 0, 1, 1)
 
         self.inst_seg_ths_frame = QFrame(self.scrollAreaWidgetContents_13)
         self.inst_seg_ths_frame.setObjectName(u"inst_seg_ths_frame")
-        self.inst_seg_ths_frame.setStyleSheet(u"background: rgb(246,246,246);")
         self.inst_seg_ths_frame.setFrameShape(QFrame.Box)
         self.inst_seg_ths_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_45 = QGridLayout(self.inst_seg_ths_frame)
         self.gridLayout_45.setObjectName(u"gridLayout_45")
         self.inst_seg_d_channel_th_label = QLabel(self.inst_seg_ths_frame)
         self.inst_seg_d_channel_th_label.setObjectName(u"inst_seg_d_channel_th_label")
-        self.inst_seg_d_channel_th_label.setFont(font)
+        self.inst_seg_d_channel_th_label.setFont(font1)
 
         self.gridLayout_45.addWidget(self.inst_seg_d_channel_th_label, 2, 0, 1, 1)
 
         self.inst_seg_fore_mask_th_label = QLabel(self.inst_seg_ths_frame)
         self.inst_seg_fore_mask_th_label.setObjectName(u"inst_seg_fore_mask_th_label")
-        self.inst_seg_fore_mask_th_label.setFont(font)
+        self.inst_seg_fore_mask_th_label.setFont(font1)
 
         self.gridLayout_45.addWidget(self.inst_seg_fore_mask_th_label, 6, 0, 1, 1)
 
@@ -12351,7 +11949,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INPUT")
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INPUT.setFont(font)
+        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INPUT.setFont(font1)
 
         self.gridLayout_45.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_DISTANCE__INPUT, 2, 2, 1, 1)
 
@@ -12361,7 +11959,7 @@ class Ui_MainWindow(object):
 
         self.inst_seg_b_channel_th_label = QLabel(self.inst_seg_ths_frame)
         self.inst_seg_b_channel_th_label.setObjectName(u"inst_seg_b_channel_th_label")
-        self.inst_seg_b_channel_th_label.setFont(font)
+        self.inst_seg_b_channel_th_label.setFont(font1)
 
         self.gridLayout_45.addWidget(self.inst_seg_b_channel_th_label, 0, 0, 1, 1)
 
@@ -12369,13 +11967,13 @@ class Ui_MainWindow(object):
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_POINTS__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_MW_TH_POINTS__INPUT")
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_POINTS__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_POINTS__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_POINTS__INPUT.setFont(font)
+        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_POINTS__INPUT.setFont(font1)
 
         self.gridLayout_45.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_POINTS__INPUT, 5, 2, 1, 1)
 
         self.inst_seg_c_channel_th_label = QLabel(self.inst_seg_ths_frame)
         self.inst_seg_c_channel_th_label.setObjectName(u"inst_seg_c_channel_th_label")
-        self.inst_seg_c_channel_th_label.setFont(font)
+        self.inst_seg_c_channel_th_label.setFont(font1)
 
         self.gridLayout_45.addWidget(self.inst_seg_c_channel_th_label, 1, 0, 1, 1)
 
@@ -12383,13 +11981,13 @@ class Ui_MainWindow(object):
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INPUT")
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INPUT.setFont(font)
+        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INPUT.setFont(font1)
 
         self.gridLayout_45.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_BINARY_MASK__INPUT, 0, 2, 1, 1)
 
         self.inst_seg_p_channel_th_label = QLabel(self.inst_seg_ths_frame)
         self.inst_seg_p_channel_th_label.setObjectName(u"inst_seg_p_channel_th_label")
-        self.inst_seg_p_channel_th_label.setFont(font)
+        self.inst_seg_p_channel_th_label.setFont(font1)
 
         self.gridLayout_45.addWidget(self.inst_seg_p_channel_th_label, 5, 0, 1, 1)
 
@@ -12397,7 +11995,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INPUT")
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INPUT.setFont(font)
+        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INPUT.setFont(font1)
 
         self.gridLayout_45.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_CONTOUR__INPUT, 1, 2, 1, 1)
 
@@ -12405,7 +12003,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INPUT")
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INPUT.setFont(font)
+        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INPUT.setFont(font1)
 
         self.gridLayout_45.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_FOREGROUND__INPUT, 6, 2, 1, 1)
 
@@ -12465,21 +12063,20 @@ class Ui_MainWindow(object):
         self.frame_50 = QFrame(self.scrollAreaWidgetContents_13)
         self.frame_50.setObjectName(u"frame_50")
         self.frame_50.setMinimumSize(QSize(0, 0))
-        self.frame_50.setStyleSheet(u"background: rgb(246,246,246);")
         self.frame_50.setFrameShape(QFrame.Box)
         self.frame_50.setFrameShadow(QFrame.Raised)
         self.gridLayout_58 = QGridLayout(self.frame_50)
         self.gridLayout_58.setObjectName(u"gridLayout_58")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__LABEL = QLabel(self.frame_50)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__LABEL")
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__LABEL.setFont(font)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__LABEL.setFont(font1)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__LABEL.setIndent(15)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__LABEL, 1, 0, 1, 1)
 
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__LABEL = QLabel(self.frame_50)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__LABEL")
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__LABEL.setFont(font)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__LABEL.setFont(font1)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__LABEL, 0, 0, 1, 1)
 
@@ -12487,7 +12084,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INST_SEG__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INST_SEG__INPUT")
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INST_SEG__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INST_SEG__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INST_SEG__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INST_SEG__INPUT.setFont(font1)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INST_SEG__INPUT, 6, 2, 1, 1)
 
@@ -12495,7 +12092,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INPUT.setObjectName(u"TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INPUT")
         self.TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INPUT.setFont(font1)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INPUT, 10, 2, 1, 1)
 
@@ -12505,7 +12102,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__CLEAR_BORDER__INPUT.setObjectName(u"TEST__POST_PROCESSING__CLEAR_BORDER__INPUT")
         self.TEST__POST_PROCESSING__CLEAR_BORDER__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__CLEAR_BORDER__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__CLEAR_BORDER__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__CLEAR_BORDER__INPUT.setFont(font1)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__CLEAR_BORDER__INPUT, 13, 2, 1, 1)
 
@@ -12521,7 +12118,7 @@ class Ui_MainWindow(object):
 
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__LABEL = QLabel(self.frame_50)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__LABEL")
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__LABEL.setFont(font)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__LABEL.setFont(font1)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__LABEL.setIndent(15)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__LABEL, 4, 0, 1, 1)
@@ -12538,7 +12135,7 @@ class Ui_MainWindow(object):
 
         self.label_115 = QLabel(self.frame_50)
         self.label_115.setObjectName(u"label_115")
-        self.label_115.setFont(font)
+        self.label_115.setFont(font1)
 
         self.gridLayout_58.addWidget(self.label_115, 13, 0, 1, 1)
 
@@ -12564,7 +12161,7 @@ class Ui_MainWindow(object):
 
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__LABEL = QLabel(self.frame_50)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__LABEL")
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__LABEL.setFont(font)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__LABEL.setFont(font1)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__LABEL, 3, 0, 1, 1)
 
@@ -12572,7 +12169,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INPUT")
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INPUT.setFont(font1)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__INPUT, 7, 2, 1, 1)
 
@@ -12582,7 +12179,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__VORONOI_ON_MASK__INPUT.setObjectName(u"TEST__POST_PROCESSING__VORONOI_ON_MASK__INPUT")
         self.TEST__POST_PROCESSING__VORONOI_ON_MASK__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__VORONOI_ON_MASK__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__VORONOI_ON_MASK__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__VORONOI_ON_MASK__INPUT.setFont(font1)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__VORONOI_ON_MASK__INPUT, 8, 2, 1, 1)
 
@@ -12598,7 +12195,7 @@ class Ui_MainWindow(object):
 
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INST_SEG__LABEL = QLabel(self.frame_50)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INST_SEG__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INST_SEG__LABEL")
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INST_SEG__LABEL.setFont(font)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INST_SEG__LABEL.setFont(font1)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INST_SEG__LABEL.setIndent(30)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__INST_SEG__LABEL, 6, 0, 1, 1)
@@ -12615,7 +12212,7 @@ class Ui_MainWindow(object):
 
         self.inst_seg_voronoi_label = QLabel(self.frame_50)
         self.inst_seg_voronoi_label.setObjectName(u"inst_seg_voronoi_label")
-        self.inst_seg_voronoi_label.setFont(font)
+        self.inst_seg_voronoi_label.setFont(font1)
 
         self.gridLayout_58.addWidget(self.inst_seg_voronoi_label, 8, 0, 1, 1)
 
@@ -12623,13 +12220,13 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__VORONOI_TH__INPUT.setObjectName(u"TEST__POST_PROCESSING__VORONOI_TH__INPUT")
         self.TEST__POST_PROCESSING__VORONOI_TH__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__VORONOI_TH__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__VORONOI_TH__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__VORONOI_TH__INPUT.setFont(font1)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__VORONOI_TH__INPUT, 9, 2, 1, 1)
 
         self.inst_seg_voronoi_mask_th_label = QLabel(self.frame_50)
         self.inst_seg_voronoi_mask_th_label.setObjectName(u"inst_seg_voronoi_mask_th_label")
-        self.inst_seg_voronoi_mask_th_label.setFont(font)
+        self.inst_seg_voronoi_mask_th_label.setFont(font1)
         self.inst_seg_voronoi_mask_th_label.setIndent(15)
 
         self.gridLayout_58.addWidget(self.inst_seg_voronoi_mask_th_label, 9, 0, 1, 1)
@@ -12648,7 +12245,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INPUT.setObjectName(u"TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INPUT")
         self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INPUT.setFont(font1)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INPUT, 12, 2, 1, 1)
 
@@ -12674,14 +12271,14 @@ class Ui_MainWindow(object):
 
         self.inst_seg_repare_large_blobs_label = QLabel(self.frame_50)
         self.inst_seg_repare_large_blobs_label.setObjectName(u"inst_seg_repare_large_blobs_label")
-        self.inst_seg_repare_large_blobs_label.setFont(font)
+        self.inst_seg_repare_large_blobs_label.setFont(font1)
         self.inst_seg_repare_large_blobs_label.setAcceptDrops(False)
 
         self.gridLayout_58.addWidget(self.inst_seg_repare_large_blobs_label, 10, 0, 1, 1)
 
         self.inst_seg_remove_close_points_radius_label = QLabel(self.frame_50)
         self.inst_seg_remove_close_points_radius_label.setObjectName(u"inst_seg_remove_close_points_radius_label")
-        self.inst_seg_remove_close_points_radius_label.setFont(font)
+        self.inst_seg_remove_close_points_radius_label.setFont(font1)
         self.inst_seg_remove_close_points_radius_label.setIndent(15)
 
         self.gridLayout_58.addWidget(self.inst_seg_remove_close_points_radius_label, 12, 0, 1, 1)
@@ -12692,19 +12289,19 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__INST_SEG__INPUT.setObjectName(u"TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__INST_SEG__INPUT")
         self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__INST_SEG__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__INST_SEG__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__INST_SEG__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__INST_SEG__INPUT.setFont(font1)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__INST_SEG__INPUT, 11, 2, 1, 1)
 
         self.inst_seg_remove_close_points_label = QLabel(self.frame_50)
         self.inst_seg_remove_close_points_label.setObjectName(u"inst_seg_remove_close_points_label")
-        self.inst_seg_remove_close_points_label.setFont(font)
+        self.inst_seg_remove_close_points_label.setFont(font1)
 
         self.gridLayout_58.addWidget(self.inst_seg_remove_close_points_label, 11, 0, 1, 1)
 
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__LABEL = QLabel(self.frame_50)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__LABEL")
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__LABEL.setFont(font)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__LABEL.setFont(font1)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__LABEL.setIndent(30)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__INST_SEG__LABEL, 7, 0, 1, 1)
@@ -12721,7 +12318,7 @@ class Ui_MainWindow(object):
 
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INST_SEG__LABEL = QLabel(self.frame_50)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INST_SEG__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INST_SEG__LABEL")
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INST_SEG__LABEL.setFont(font)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INST_SEG__LABEL.setFont(font1)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INST_SEG__LABEL.setIndent(30)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INST_SEG__LABEL, 5, 0, 1, 1)
@@ -12730,7 +12327,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INST_SEG__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INST_SEG__INPUT")
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INST_SEG__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INST_SEG__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INST_SEG__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INST_SEG__INPUT.setFont(font1)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__INST_SEG__INPUT, 5, 2, 1, 1)
 
@@ -12740,7 +12337,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INPUT")
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INPUT.setFont(font1)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__INST_SEG__INPUT, 3, 2, 1, 1)
 
@@ -12760,7 +12357,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__INPUT")
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__INPUT.setFont(font1)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__INST_SEG__INPUT, 4, 2, 1, 1)
 
@@ -12770,7 +12367,7 @@ class Ui_MainWindow(object):
 
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__LABEL = QLabel(self.frame_50)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__LABEL")
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__LABEL.setFont(font)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__LABEL.setFont(font1)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__LABEL.setIndent(15)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__LABEL, 2, 0, 1, 1)
@@ -12779,7 +12376,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO.setFont(font)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO.setFont(font1)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -12790,7 +12387,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO.setFont(font)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO.setFont(font1)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -12801,7 +12398,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INFO.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INFO")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INFO.setFont(font)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INFO.setFont(font1)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -12814,7 +12411,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT.setFont(font1)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER__INST_SEG__INPUT, 0, 2, 1, 1)
 
@@ -12822,7 +12419,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INPUT")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INPUT.setFont(font1)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__INST_SEG__INPUT, 1, 2, 1, 1)
 
@@ -12830,7 +12427,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INPUT")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INPUT.setFont(font1)
 
         self.gridLayout_58.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__INST_SEG__INPUT, 2, 2, 1, 1)
 
@@ -12840,7 +12437,6 @@ class Ui_MainWindow(object):
         self.inst_seg_metrics_frame = QFrame(self.scrollAreaWidgetContents_13)
         self.inst_seg_metrics_frame.setObjectName(u"inst_seg_metrics_frame")
         self.inst_seg_metrics_frame.setMinimumSize(QSize(0, 0))
-        self.inst_seg_metrics_frame.setStyleSheet(u"background: rgb(246,246,246);")
         self.inst_seg_metrics_frame.setFrameShape(QFrame.Box)
         self.inst_seg_metrics_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_55 = QGridLayout(self.inst_seg_metrics_frame)
@@ -12851,26 +12447,26 @@ class Ui_MainWindow(object):
         self.TEST__MATCHING_STATS__INPUT.setObjectName(u"TEST__MATCHING_STATS__INPUT")
         self.TEST__MATCHING_STATS__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__MATCHING_STATS__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__MATCHING_STATS__INPUT.setFont(font)
+        self.TEST__MATCHING_STATS__INPUT.setFont(font1)
 
         self.gridLayout_55.addWidget(self.TEST__MATCHING_STATS__INPUT, 0, 2, 1, 1)
 
         self.inst_seg_matching_stats_ths_label = QLabel(self.inst_seg_metrics_frame)
         self.inst_seg_matching_stats_ths_label.setObjectName(u"inst_seg_matching_stats_ths_label")
-        self.inst_seg_matching_stats_ths_label.setFont(font)
+        self.inst_seg_matching_stats_ths_label.setFont(font1)
         self.inst_seg_matching_stats_ths_label.setIndent(15)
 
         self.gridLayout_55.addWidget(self.inst_seg_matching_stats_ths_label, 1, 0, 1, 1)
 
         self.inst_seg_matching_stats_label = QLabel(self.inst_seg_metrics_frame)
         self.inst_seg_matching_stats_label.setObjectName(u"inst_seg_matching_stats_label")
-        self.inst_seg_matching_stats_label.setFont(font)
+        self.inst_seg_matching_stats_label.setFont(font1)
 
         self.gridLayout_55.addWidget(self.inst_seg_matching_stats_label, 0, 0, 1, 1)
 
         self.inst_seg_matching_stats_colores_img_ths_label = QLabel(self.inst_seg_metrics_frame)
         self.inst_seg_matching_stats_colores_img_ths_label.setObjectName(u"inst_seg_matching_stats_colores_img_ths_label")
-        self.inst_seg_matching_stats_colores_img_ths_label.setFont(font)
+        self.inst_seg_matching_stats_colores_img_ths_label.setFont(font1)
         self.inst_seg_matching_stats_colores_img_ths_label.setIndent(15)
 
         self.gridLayout_55.addWidget(self.inst_seg_matching_stats_colores_img_ths_label, 2, 0, 1, 1)
@@ -12879,7 +12475,7 @@ class Ui_MainWindow(object):
         self.TEST__MATCHING_STATS_THS__INPUT.setObjectName(u"TEST__MATCHING_STATS_THS__INPUT")
         self.TEST__MATCHING_STATS_THS__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__MATCHING_STATS_THS__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__MATCHING_STATS_THS__INPUT.setFont(font)
+        self.TEST__MATCHING_STATS_THS__INPUT.setFont(font1)
 
         self.gridLayout_55.addWidget(self.TEST__MATCHING_STATS_THS__INPUT, 1, 2, 1, 1)
 
@@ -12887,7 +12483,7 @@ class Ui_MainWindow(object):
         self.TEST__MATCHING_STATS_THS_COLORED_IMG__INPUT.setObjectName(u"TEST__MATCHING_STATS_THS_COLORED_IMG__INPUT")
         self.TEST__MATCHING_STATS_THS_COLORED_IMG__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__MATCHING_STATS_THS_COLORED_IMG__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__MATCHING_STATS_THS_COLORED_IMG__INPUT.setFont(font)
+        self.TEST__MATCHING_STATS_THS_COLORED_IMG__INPUT.setFont(font1)
 
         self.gridLayout_55.addWidget(self.TEST__MATCHING_STATS_THS_COLORED_IMG__INPUT, 2, 2, 1, 1)
 
@@ -12934,14 +12530,13 @@ class Ui_MainWindow(object):
 
         self.frame_43 = QFrame(self.scrollAreaWidgetContents_13)
         self.frame_43.setObjectName(u"frame_43")
-        self.frame_43.setStyleSheet(u"background: rgb(246,246,246);")
         self.frame_43.setFrameShape(QFrame.Box)
         self.frame_43.setFrameShadow(QFrame.Raised)
         self.gridLayout_46 = QGridLayout(self.frame_43)
         self.gridLayout_46.setObjectName(u"gridLayout_46")
         self.inst_seg_fore_ero_label = QLabel(self.frame_43)
         self.inst_seg_fore_ero_label.setObjectName(u"inst_seg_fore_ero_label")
-        self.inst_seg_fore_ero_label.setFont(font)
+        self.inst_seg_fore_ero_label.setFont(font1)
         self.inst_seg_fore_ero_label.setIndent(15)
 
         self.gridLayout_46.addWidget(self.inst_seg_fore_ero_label, 6, 1, 1, 1)
@@ -12950,20 +12545,20 @@ class Ui_MainWindow(object):
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INPUT")
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INPUT.setFont(font)
+        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INPUT.setFont(font1)
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__SEED_MORPH_RADIUS__INPUT, 2, 3, 1, 1)
 
         self.inst_seg_small_obj_fil_before_size_label = QLabel(self.frame_43)
         self.inst_seg_small_obj_fil_before_size_label.setObjectName(u"inst_seg_small_obj_fil_before_size_label")
-        self.inst_seg_small_obj_fil_before_size_label.setFont(font)
+        self.inst_seg_small_obj_fil_before_size_label.setFont(font1)
         self.inst_seg_small_obj_fil_before_size_label.setIndent(15)
 
         self.gridLayout_46.addWidget(self.inst_seg_small_obj_fil_before_size_label, 8, 1, 1, 1)
 
         self.inst_seg_moph_op_rad_label = QLabel(self.frame_43)
         self.inst_seg_moph_op_rad_label.setObjectName(u"inst_seg_moph_op_rad_label")
-        self.inst_seg_moph_op_rad_label.setFont(font)
+        self.inst_seg_moph_op_rad_label.setFont(font1)
 
         self.gridLayout_46.addWidget(self.inst_seg_moph_op_rad_label, 2, 1, 1, 1)
 
@@ -12971,7 +12566,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INPUT")
         self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INPUT.setFont(font)
+        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INPUT.setFont(font1)
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_SMALL_OBJ_BEFORE__INPUT, 8, 3, 1, 1)
 
@@ -12981,13 +12576,13 @@ class Ui_MainWindow(object):
         self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INPUT")
         self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INPUT.setFont(font)
+        self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INPUT.setFont(font1)
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__ERODE_AND_DILATE_FOREGROUND__INPUT, 4, 3, 1, 1)
 
         self.inst_seg_fore_dil_label = QLabel(self.frame_43)
         self.inst_seg_fore_dil_label.setObjectName(u"inst_seg_fore_dil_label")
-        self.inst_seg_fore_dil_label.setFont(font)
+        self.inst_seg_fore_dil_label.setFont(font1)
         self.inst_seg_fore_dil_label.setIndent(15)
 
         self.gridLayout_46.addWidget(self.inst_seg_fore_dil_label, 5, 1, 1, 1)
@@ -12996,31 +12591,31 @@ class Ui_MainWindow(object):
         self.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INPUT")
         self.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INPUT.setFont(font)
+        self.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INPUT.setFont(font1)
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__FORE_EROSION_RADIUS__INPUT, 5, 3, 1, 1)
 
         self.inst_seg_ero_dil_fore_label = QLabel(self.frame_43)
         self.inst_seg_ero_dil_fore_label.setObjectName(u"inst_seg_ero_dil_fore_label")
-        self.inst_seg_ero_dil_fore_label.setFont(font)
+        self.inst_seg_ero_dil_fore_label.setFont(font1)
 
         self.gridLayout_46.addWidget(self.inst_seg_ero_dil_fore_label, 4, 1, 1, 1)
 
         self.inst_seg_moph_op_label = QLabel(self.frame_43)
         self.inst_seg_moph_op_label.setObjectName(u"inst_seg_moph_op_label")
-        self.inst_seg_moph_op_label.setFont(font)
+        self.inst_seg_moph_op_label.setFont(font1)
 
         self.gridLayout_46.addWidget(self.inst_seg_moph_op_label, 1, 1, 1, 1)
 
         self.inst_seg_small_obj_fil_before_label = QLabel(self.frame_43)
         self.inst_seg_small_obj_fil_before_label.setObjectName(u"inst_seg_small_obj_fil_before_label")
-        self.inst_seg_small_obj_fil_before_label.setFont(font)
+        self.inst_seg_small_obj_fil_before_label.setFont(font1)
 
         self.gridLayout_46.addWidget(self.inst_seg_small_obj_fil_before_label, 7, 1, 1, 1)
 
         self.inst_seg_save_water_files_label = QLabel(self.frame_43)
         self.inst_seg_save_water_files_label.setObjectName(u"inst_seg_save_water_files_label")
-        self.inst_seg_save_water_files_label.setFont(font)
+        self.inst_seg_save_water_files_label.setFont(font1)
 
         self.gridLayout_46.addWidget(self.inst_seg_save_water_files_label, 11, 1, 1, 1)
 
@@ -13028,7 +12623,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT")
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT.setFont(font)
+        self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT.setFont(font1)
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__SEED_MORPH_SEQUENCE__INPUT, 1, 3, 1, 1)
 
@@ -13038,7 +12633,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INPUT")
         self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INPUT.setFont(font)
+        self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INPUT.setFont(font1)
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_REMOVE_BEFORE_MW__INPUT, 7, 3, 1, 1)
 
@@ -13050,7 +12645,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INPUT")
         self.PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INPUT.setFont(font)
+        self.PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INPUT.setFont(font1)
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__FORE_DILATION_RADIUS__INPUT, 6, 3, 1, 1)
 
@@ -13060,7 +12655,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INPUT")
         self.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INPUT.setFont(font)
+        self.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INPUT.setFont(font1)
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_CHECK_MW__INPUT, 11, 3, 1, 1)
 
@@ -13146,7 +12741,7 @@ class Ui_MainWindow(object):
 
         self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__LABEL = QLabel(self.frame_43)
         self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__LABEL.setObjectName(u"PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__LABEL")
-        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__LABEL.setFont(font)
+        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__LABEL.setFont(font1)
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__LABEL, 12, 1, 1, 1)
 
@@ -13156,7 +12751,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INPUT")
         self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INPUT.setFont(font)
+        self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INPUT.setFont(font1)
 
         self.gridLayout_46.addWidget(self.PROBLEM__INSTANCE_SEG__WATERSHED_BY_2D_SLICES__INPUT, 12, 3, 1, 1)
 
@@ -13183,7 +12778,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_23.setContentsMargins(0, 0, 0, 0)
         self.label_13 = QLabel(self.frame_49)
         self.label_13.setObjectName(u"label_13")
-        self.label_13.setFont(font)
+        self.label_13.setFont(font1)
 
         self.horizontalLayout_23.addWidget(self.label_13)
 
@@ -13193,7 +12788,7 @@ class Ui_MainWindow(object):
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT.setObjectName(u"PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT")
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT.setFont(font)
+        self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT.setFont(font1)
 
         self.horizontalLayout_23.addWidget(self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT)
 
@@ -13230,19 +12825,19 @@ class Ui_MainWindow(object):
         self.gridLayout_47.setObjectName(u"gridLayout_47")
         self.label_100 = QLabel(self.scrollAreaWidgetContents_14)
         self.label_100.setObjectName(u"label_100")
-        self.label_100.setFont(font)
+        self.label_100.setFont(font1)
 
         self.gridLayout_47.addWidget(self.label_100, 2, 0, 1, 1)
 
         self.label_104 = QLabel(self.scrollAreaWidgetContents_14)
         self.label_104.setObjectName(u"label_104")
-        self.label_104.setFont(font)
+        self.label_104.setFont(font1)
 
         self.gridLayout_47.addWidget(self.label_104, 0, 0, 1, 1)
 
         self.det_metrics_label = QLabel(self.scrollAreaWidgetContents_14)
         self.det_metrics_label.setObjectName(u"det_metrics_label")
-        self.det_metrics_label.setFont(font)
+        self.det_metrics_label.setFont(font1)
 
         self.gridLayout_47.addWidget(self.det_metrics_label, 4, 0, 1, 1)
 
@@ -13252,7 +12847,6 @@ class Ui_MainWindow(object):
 
         self.det_metrics_frame = QFrame(self.scrollAreaWidgetContents_14)
         self.det_metrics_frame.setObjectName(u"det_metrics_frame")
-        self.det_metrics_frame.setStyleSheet(u"background: rgb(246,246,246);")
         self.det_metrics_frame.setFrameShape(QFrame.Box)
         self.det_metrics_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_41 = QGridLayout(self.det_metrics_frame)
@@ -13275,19 +12869,19 @@ class Ui_MainWindow(object):
         self.TEST__DET_TOLERANCE__INPUT.setObjectName(u"TEST__DET_TOLERANCE__INPUT")
         self.TEST__DET_TOLERANCE__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__DET_TOLERANCE__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__DET_TOLERANCE__INPUT.setFont(font)
+        self.TEST__DET_TOLERANCE__INPUT.setFont(font1)
 
         self.gridLayout_41.addWidget(self.TEST__DET_TOLERANCE__INPUT, 0, 2, 1, 1)
 
         self.det_tolerance_label = QLabel(self.det_metrics_frame)
         self.det_tolerance_label.setObjectName(u"det_tolerance_label")
-        self.det_tolerance_label.setFont(font)
+        self.det_tolerance_label.setFont(font1)
 
         self.gridLayout_41.addWidget(self.det_tolerance_label, 0, 0, 1, 1)
 
         self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__LABEL = QLabel(self.det_metrics_frame)
         self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__LABEL.setObjectName(u"TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__LABEL")
-        self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__LABEL.setFont(font)
+        self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__LABEL.setFont(font1)
 
         self.gridLayout_41.addWidget(self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__LABEL, 1, 0, 1, 1)
 
@@ -13295,7 +12889,7 @@ class Ui_MainWindow(object):
         self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INPUT.setObjectName(u"TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INPUT")
         self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INPUT.setFont(font)
+        self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INPUT.setFont(font1)
 
         self.gridLayout_41.addWidget(self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INPUT, 1, 2, 1, 1)
 
@@ -13303,7 +12897,7 @@ class Ui_MainWindow(object):
         self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INFO.setObjectName(u"TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INFO")
         self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INFO.setFont(font)
+        self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INFO.setFont(font1)
         self.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -13319,7 +12913,6 @@ class Ui_MainWindow(object):
 
         self.frame_54 = QFrame(self.scrollAreaWidgetContents_14)
         self.frame_54.setObjectName(u"frame_54")
-        self.frame_54.setStyleSheet(u"background: rgb(246,246,246);")
         self.frame_54.setFrameShape(QFrame.Box)
         self.frame_54.setFrameShadow(QFrame.Raised)
         self.gridLayout_62 = QGridLayout(self.frame_54)
@@ -13330,7 +12923,7 @@ class Ui_MainWindow(object):
         self.TEST__DET_EXCLUDE_BORDER__INPUT.setObjectName(u"TEST__DET_EXCLUDE_BORDER__INPUT")
         self.TEST__DET_EXCLUDE_BORDER__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__DET_EXCLUDE_BORDER__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__DET_EXCLUDE_BORDER__INPUT.setFont(font)
+        self.TEST__DET_EXCLUDE_BORDER__INPUT.setFont(font1)
 
         self.gridLayout_62.addWidget(self.TEST__DET_EXCLUDE_BORDER__INPUT, 9, 2, 1, 1)
 
@@ -13346,7 +12939,7 @@ class Ui_MainWindow(object):
 
         self.det_min_th_to_be_peak_label = QLabel(self.frame_54)
         self.det_min_th_to_be_peak_label.setObjectName(u"det_min_th_to_be_peak_label")
-        self.det_min_th_to_be_peak_label.setFont(font)
+        self.det_min_th_to_be_peak_label.setFont(font1)
 
         self.gridLayout_62.addWidget(self.det_min_th_to_be_peak_label, 7, 0, 1, 1)
 
@@ -13354,13 +12947,13 @@ class Ui_MainWindow(object):
         self.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT.setObjectName(u"TEST__DET_MIN_TH_TO_BE_PEAK__INPUT")
         self.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT.setFont(font)
+        self.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT.setFont(font1)
 
         self.gridLayout_62.addWidget(self.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT, 7, 2, 1, 1)
 
         self.TEST__DET_EXCLUDE_BORDER__LABEL = QLabel(self.frame_54)
         self.TEST__DET_EXCLUDE_BORDER__LABEL.setObjectName(u"TEST__DET_EXCLUDE_BORDER__LABEL")
-        self.TEST__DET_EXCLUDE_BORDER__LABEL.setFont(font)
+        self.TEST__DET_EXCLUDE_BORDER__LABEL.setFont(font1)
 
         self.gridLayout_62.addWidget(self.TEST__DET_EXCLUDE_BORDER__LABEL, 9, 0, 1, 1)
 
@@ -13368,7 +12961,7 @@ class Ui_MainWindow(object):
         self.TEST__DET_EXCLUDE_BORDER__INFO.setObjectName(u"TEST__DET_EXCLUDE_BORDER__INFO")
         self.TEST__DET_EXCLUDE_BORDER__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__DET_EXCLUDE_BORDER__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__DET_EXCLUDE_BORDER__INFO.setFont(font)
+        self.TEST__DET_EXCLUDE_BORDER__INFO.setFont(font1)
         self.TEST__DET_EXCLUDE_BORDER__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -13399,13 +12992,13 @@ class Ui_MainWindow(object):
         self.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT.setObjectName(u"TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT")
         self.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT.setFont(font)
+        self.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT.setFont(font1)
 
         self.gridLayout_62.addWidget(self.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT, 4, 2, 1, 1)
 
         self.TEST__DET_BLOB_LOG_MAX_SIGMA__LABEL = QLabel(self.frame_54)
         self.TEST__DET_BLOB_LOG_MAX_SIGMA__LABEL.setObjectName(u"TEST__DET_BLOB_LOG_MAX_SIGMA__LABEL")
-        self.TEST__DET_BLOB_LOG_MAX_SIGMA__LABEL.setFont(font)
+        self.TEST__DET_BLOB_LOG_MAX_SIGMA__LABEL.setFont(font1)
         self.TEST__DET_BLOB_LOG_MAX_SIGMA__LABEL.setIndent(15)
 
         self.gridLayout_62.addWidget(self.TEST__DET_BLOB_LOG_MAX_SIGMA__LABEL, 4, 0, 1, 1)
@@ -13414,7 +13007,7 @@ class Ui_MainWindow(object):
         self.TEST__DET_BLOB_LOG_MIN_SIGMA__INPUT.setObjectName(u"TEST__DET_BLOB_LOG_MIN_SIGMA__INPUT")
         self.TEST__DET_BLOB_LOG_MIN_SIGMA__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__DET_BLOB_LOG_MIN_SIGMA__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__DET_BLOB_LOG_MIN_SIGMA__INPUT.setFont(font)
+        self.TEST__DET_BLOB_LOG_MIN_SIGMA__INPUT.setFont(font1)
 
         self.gridLayout_62.addWidget(self.TEST__DET_BLOB_LOG_MIN_SIGMA__INPUT, 3, 2, 1, 1)
 
@@ -13426,7 +13019,7 @@ class Ui_MainWindow(object):
         self.TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT.setObjectName(u"TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT")
         self.TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT.setFont(font)
+        self.TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT.setFont(font1)
 
         self.gridLayout_62.addWidget(self.TEST__DET_BLOB_LOG_NUM_SIGMA__INPUT, 5, 2, 1, 1)
 
@@ -13436,26 +13029,26 @@ class Ui_MainWindow(object):
         self.TEST__DET_POINT_CREATION_FUNCTION__INPUT.setObjectName(u"TEST__DET_POINT_CREATION_FUNCTION__INPUT")
         self.TEST__DET_POINT_CREATION_FUNCTION__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__DET_POINT_CREATION_FUNCTION__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__DET_POINT_CREATION_FUNCTION__INPUT.setFont(font)
+        self.TEST__DET_POINT_CREATION_FUNCTION__INPUT.setFont(font1)
 
         self.gridLayout_62.addWidget(self.TEST__DET_POINT_CREATION_FUNCTION__INPUT, 0, 2, 1, 1)
 
         self.TEST__DET_POINT_CREATION_FUNCTION__LABEL = QLabel(self.frame_54)
         self.TEST__DET_POINT_CREATION_FUNCTION__LABEL.setObjectName(u"TEST__DET_POINT_CREATION_FUNCTION__LABEL")
-        self.TEST__DET_POINT_CREATION_FUNCTION__LABEL.setFont(font)
+        self.TEST__DET_POINT_CREATION_FUNCTION__LABEL.setFont(font1)
 
         self.gridLayout_62.addWidget(self.TEST__DET_POINT_CREATION_FUNCTION__LABEL, 0, 0, 1, 1)
 
         self.TEST__DET_BLOB_LOG_MIN_SIGMA__LABEL = QLabel(self.frame_54)
         self.TEST__DET_BLOB_LOG_MIN_SIGMA__LABEL.setObjectName(u"TEST__DET_BLOB_LOG_MIN_SIGMA__LABEL")
-        self.TEST__DET_BLOB_LOG_MIN_SIGMA__LABEL.setFont(font)
+        self.TEST__DET_BLOB_LOG_MIN_SIGMA__LABEL.setFont(font1)
         self.TEST__DET_BLOB_LOG_MIN_SIGMA__LABEL.setIndent(15)
 
         self.gridLayout_62.addWidget(self.TEST__DET_BLOB_LOG_MIN_SIGMA__LABEL, 3, 0, 1, 1)
 
         self.TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL = QLabel(self.frame_54)
         self.TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL.setObjectName(u"TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL")
-        self.TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL.setFont(font)
+        self.TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL.setFont(font1)
         self.TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL.setIndent(15)
 
         self.gridLayout_62.addWidget(self.TEST__DET_BLOB_LOG_NUM_SIGMA__LABEL, 5, 0, 1, 1)
@@ -13482,7 +13075,7 @@ class Ui_MainWindow(object):
 
         self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__LABEL = QLabel(self.frame_54)
         self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__LABEL.setObjectName(u"TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__LABEL")
-        self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__LABEL.setFont(font)
+        self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__LABEL.setFont(font1)
         self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__LABEL.setIndent(15)
 
         self.gridLayout_62.addWidget(self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__LABEL, 6, 0, 1, 1)
@@ -13491,7 +13084,7 @@ class Ui_MainWindow(object):
         self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INPUT.setObjectName(u"TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INPUT")
         self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INPUT.setFont(font)
+        self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INPUT.setFont(font1)
 
         self.gridLayout_62.addWidget(self.TEST__DET_PEAK_LOCAL_MAX_MIN_DISTANCE__INPUT, 6, 2, 1, 1)
 
@@ -13511,7 +13104,6 @@ class Ui_MainWindow(object):
         self.frame_51 = QFrame(self.scrollAreaWidgetContents_14)
         self.frame_51.setObjectName(u"frame_51")
         self.frame_51.setMinimumSize(QSize(0, 0))
-        self.frame_51.setStyleSheet(u"background: rgb(246,246,246);")
         self.frame_51.setFrameShape(QFrame.Box)
         self.frame_51.setFrameShadow(QFrame.Raised)
         self.gridLayout_59 = QGridLayout(self.frame_51)
@@ -13528,7 +13120,7 @@ class Ui_MainWindow(object):
 
         self.det_remove_close_points_label = QLabel(self.frame_51)
         self.det_remove_close_points_label.setObjectName(u"det_remove_close_points_label")
-        self.det_remove_close_points_label.setFont(font)
+        self.det_remove_close_points_label.setFont(font1)
 
         self.gridLayout_59.addWidget(self.det_remove_close_points_label, 5, 0, 1, 1)
 
@@ -13536,7 +13128,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_CLASSES__INPUT.setObjectName(u"TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_CLASSES__INPUT")
         self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_CLASSES__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_CLASSES__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_CLASSES__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_CLASSES__INPUT.setFont(font1)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_CLASSES__INPUT, 9, 2, 1, 1)
 
@@ -13552,7 +13144,7 @@ class Ui_MainWindow(object):
 
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__LABEL = QLabel(self.frame_51)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__LABEL")
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__LABEL.setFont(font)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__LABEL.setFont(font1)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__LABEL.setIndent(30)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__LABEL, 15, 0, 1, 1)
@@ -13563,7 +13155,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__INPUT")
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__INPUT.setFont(font1)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__ENABLE__DET__INPUT, 15, 2, 1, 1)
 
@@ -13589,14 +13181,14 @@ class Ui_MainWindow(object):
 
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__LABEL = QLabel(self.frame_51)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__LABEL")
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__LABEL.setFont(font)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__LABEL.setFont(font1)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__LABEL.setIndent(15)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__LABEL, 13, 0, 1, 1)
 
         self.det_watershed_donuts_classes_label = QLabel(self.frame_51)
         self.det_watershed_donuts_classes_label.setObjectName(u"det_watershed_donuts_classes_label")
-        self.det_watershed_donuts_classes_label.setFont(font)
+        self.det_watershed_donuts_classes_label.setFont(font1)
         self.det_watershed_donuts_classes_label.setIndent(15)
 
         self.gridLayout_59.addWidget(self.det_watershed_donuts_classes_label, 9, 0, 1, 1)
@@ -13627,7 +13219,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INPUT.setObjectName(u"TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INPUT")
         self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INPUT.setFont(font1)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INPUT, 5, 2, 1, 1)
 
@@ -13637,26 +13229,26 @@ class Ui_MainWindow(object):
         self.PROBLEM__DETECTION__DATA_CHECK_MW__INPUT.setObjectName(u"PROBLEM__DETECTION__DATA_CHECK_MW__INPUT")
         self.PROBLEM__DETECTION__DATA_CHECK_MW__INPUT.setMinimumSize(QSize(200, 30))
         self.PROBLEM__DETECTION__DATA_CHECK_MW__INPUT.setMaximumSize(QSize(200, 30))
-        self.PROBLEM__DETECTION__DATA_CHECK_MW__INPUT.setFont(font)
+        self.PROBLEM__DETECTION__DATA_CHECK_MW__INPUT.setFont(font1)
 
         self.gridLayout_59.addWidget(self.PROBLEM__DETECTION__DATA_CHECK_MW__INPUT, 12, 2, 1, 1)
 
         self.det_watershed_label = QLabel(self.frame_51)
         self.det_watershed_label.setObjectName(u"det_watershed_label")
-        self.det_watershed_label.setFont(font)
+        self.det_watershed_label.setFont(font1)
 
         self.gridLayout_59.addWidget(self.det_watershed_label, 7, 0, 1, 1)
 
         self.det_remove_close_points_radius_label = QLabel(self.frame_51)
         self.det_remove_close_points_radius_label.setObjectName(u"det_remove_close_points_radius_label")
-        self.det_remove_close_points_radius_label.setFont(font)
+        self.det_remove_close_points_radius_label.setFont(font1)
         self.det_remove_close_points_radius_label.setIndent(15)
 
         self.gridLayout_59.addWidget(self.det_remove_close_points_radius_label, 6, 0, 1, 1)
 
         self.det_data_watetshed_check_label = QLabel(self.frame_51)
         self.det_data_watetshed_check_label.setObjectName(u"det_data_watetshed_check_label")
-        self.det_data_watetshed_check_label.setFont(font)
+        self.det_data_watetshed_check_label.setFont(font1)
         self.det_data_watetshed_check_label.setIndent(15)
 
         self.gridLayout_59.addWidget(self.det_data_watetshed_check_label, 12, 0, 1, 1)
@@ -13677,7 +13269,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__DET_WATERSHED__INPUT.setObjectName(u"TEST__POST_PROCESSING__DET_WATERSHED__INPUT")
         self.TEST__POST_PROCESSING__DET_WATERSHED__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__DET_WATERSHED__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__DET_WATERSHED__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__DET_WATERSHED__INPUT.setFont(font1)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__DET_WATERSHED__INPUT, 7, 2, 1, 1)
 
@@ -13685,13 +13277,13 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__DET__INPUT.setObjectName(u"TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__DET__INPUT")
         self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__DET__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__DET__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__DET__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__DET__INPUT.setFont(font1)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__DET__INPUT, 6, 2, 1, 1)
 
         self.det_watershed_first_dilation_label = QLabel(self.frame_51)
         self.det_watershed_first_dilation_label.setObjectName(u"det_watershed_first_dilation_label")
-        self.det_watershed_first_dilation_label.setFont(font)
+        self.det_watershed_first_dilation_label.setFont(font1)
         self.det_watershed_first_dilation_label.setAcceptDrops(False)
         self.det_watershed_first_dilation_label.setIndent(15)
 
@@ -13701,7 +13293,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_PATCH__INPUT.setObjectName(u"TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_PATCH__INPUT")
         self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_PATCH__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_PATCH__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_PATCH__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_PATCH__INPUT.setFont(font1)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_PATCH__INPUT, 10, 2, 1, 1)
 
@@ -13709,27 +13301,27 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__DET_WATERSHED_FIRST_DILATION__INPUT.setObjectName(u"TEST__POST_PROCESSING__DET_WATERSHED_FIRST_DILATION__INPUT")
         self.TEST__POST_PROCESSING__DET_WATERSHED_FIRST_DILATION__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__DET_WATERSHED_FIRST_DILATION__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__DET_WATERSHED_FIRST_DILATION__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__DET_WATERSHED_FIRST_DILATION__INPUT.setFont(font1)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__DET_WATERSHED_FIRST_DILATION__INPUT, 8, 2, 1, 1)
 
         self.det_watershed_donuts_patch_label = QLabel(self.frame_51)
         self.det_watershed_donuts_patch_label.setObjectName(u"det_watershed_donuts_patch_label")
-        self.det_watershed_donuts_patch_label.setFont(font)
+        self.det_watershed_donuts_patch_label.setFont(font1)
         self.det_watershed_donuts_patch_label.setIndent(15)
 
         self.gridLayout_59.addWidget(self.det_watershed_donuts_patch_label, 10, 0, 1, 1)
 
         self.det_watershed_donuts_nucleus_diam_label = QLabel(self.frame_51)
         self.det_watershed_donuts_nucleus_diam_label.setObjectName(u"det_watershed_donuts_nucleus_diam_label")
-        self.det_watershed_donuts_nucleus_diam_label.setFont(font)
+        self.det_watershed_donuts_nucleus_diam_label.setFont(font1)
         self.det_watershed_donuts_nucleus_diam_label.setIndent(15)
 
         self.gridLayout_59.addWidget(self.det_watershed_donuts_nucleus_diam_label, 11, 0, 1, 1)
 
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__LABEL = QLabel(self.frame_51)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__LABEL")
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__LABEL.setFont(font)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__LABEL.setFont(font1)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__LABEL.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -13739,7 +13331,7 @@ class Ui_MainWindow(object):
 
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__LABEL = QLabel(self.frame_51)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__LABEL")
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__LABEL.setFont(font)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__LABEL.setFont(font1)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__LABEL.setIndent(45)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__LABEL, 18, 0, 1, 1)
@@ -13748,7 +13340,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER__INPUT.setObjectName(u"TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER__INPUT")
         self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER__INPUT.setFont(font1)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER__INPUT, 11, 2, 1, 1)
 
@@ -13776,7 +13368,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INPUT")
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INPUT.setFont(font1)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__SIGNS__DET__INPUT, 19, 2, 1, 1)
 
@@ -13794,7 +13386,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__INPUT")
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__INPUT.setFont(font1)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__VALUES__DET__INPUT, 18, 2, 1, 1)
 
@@ -13834,13 +13426,13 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__INPUT")
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__INPUT.setFont(font1)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__ENABLE__DET__INPUT, 13, 2, 1, 1)
 
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__LABEL = QLabel(self.frame_51)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__LABEL")
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__LABEL.setFont(font)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__LABEL.setFont(font1)
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__LABEL.setIndent(45)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__LABEL, 16, 0, 1, 1)
@@ -13853,26 +13445,26 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__INPUT")
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__INPUT.setFont(font1)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEASURE_PROPERTIES__REMOVE_BY_PROPERTIES__PROPS__DET__INPUT, 16, 2, 1, 1)
 
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__LABEL = QLabel(self.frame_51)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER__DET__LABEL")
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__LABEL.setFont(font)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__LABEL.setFont(font1)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__LABEL, 0, 0, 1, 1)
 
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__LABEL = QLabel(self.frame_51)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__LABEL")
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__LABEL.setFont(font)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__LABEL.setFont(font1)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__LABEL.setIndent(15)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__LABEL, 1, 0, 1, 1)
 
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__LABEL = QLabel(self.frame_51)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__LABEL.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__LABEL")
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__LABEL.setFont(font)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__LABEL.setFont(font1)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__LABEL.setIndent(15)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__LABEL, 2, 0, 1, 1)
@@ -13881,7 +13473,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO.setFont(font)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO.setFont(font1)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -13892,7 +13484,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO.setFont(font)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO.setFont(font1)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -13903,7 +13495,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INFO.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INFO")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INFO.setMinimumSize(QSize(30, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INFO.setFont(font)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INFO.setFont(font1)
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
@@ -13916,7 +13508,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT.setFont(font1)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT, 0, 2, 1, 1)
 
@@ -13924,7 +13516,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INPUT")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INPUT.setFont(font1)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_AXIS__DET__INPUT, 1, 2, 1, 1)
 
@@ -13932,7 +13524,7 @@ class Ui_MainWindow(object):
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INPUT.setObjectName(u"TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INPUT")
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INPUT.setMinimumSize(QSize(200, 30))
         self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INPUT.setFont(font)
+        self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INPUT.setFont(font1)
 
         self.gridLayout_59.addWidget(self.TEST__POST_PROCESSING__MEDIAN_FILTER_SIZE__DET__INPUT, 2, 2, 1, 1)
 
@@ -13965,7 +13557,7 @@ class Ui_MainWindow(object):
 
         self.label_93 = QLabel(self.scrollAreaWidgetContents_15)
         self.label_93.setObjectName(u"label_93")
-        self.label_93.setFont(font)
+        self.label_93.setFont(font1)
 
         self.gridLayout_64.addWidget(self.label_93, 0, 0, 1, 1)
 
@@ -13995,7 +13587,7 @@ class Ui_MainWindow(object):
         self.gridLayout_65.setObjectName(u"gridLayout_65")
         self.label_102 = QLabel(self.scrollAreaWidgetContents_16)
         self.label_102.setObjectName(u"label_102")
-        self.label_102.setFont(font)
+        self.label_102.setFont(font1)
 
         self.gridLayout_65.addWidget(self.label_102, 0, 0, 1, 1)
 
@@ -14029,7 +13621,7 @@ class Ui_MainWindow(object):
         self.gridLayout_66.setObjectName(u"gridLayout_66")
         self.label_106 = QLabel(self.scrollAreaWidgetContents_17)
         self.label_106.setObjectName(u"label_106")
-        self.label_106.setFont(font)
+        self.label_106.setFont(font1)
 
         self.gridLayout_66.addWidget(self.label_106, 0, 0, 1, 1)
 
@@ -14063,7 +13655,7 @@ class Ui_MainWindow(object):
         self.gridLayout_67.setObjectName(u"gridLayout_67")
         self.label_111 = QLabel(self.scrollAreaWidgetContents_18)
         self.label_111.setObjectName(u"label_111")
-        self.label_111.setFont(font)
+        self.label_111.setFont(font1)
 
         self.gridLayout_67.addWidget(self.label_111, 0, 0, 1, 1)
 
@@ -14097,7 +13689,7 @@ class Ui_MainWindow(object):
 
         self.label_58 = QLabel(self.scrollAreaWidgetContents_21)
         self.label_58.setObjectName(u"label_58")
-        self.label_58.setFont(font)
+        self.label_58.setFont(font1)
 
         self.gridLayout_78.addWidget(self.label_58, 0, 0, 1, 1)
 
@@ -14122,11 +13714,11 @@ class Ui_MainWindow(object):
         self.page_create_yaml_bottom_frame.setObjectName(u"page_create_yaml_bottom_frame")
         self.page_create_yaml_bottom_frame.setMinimumSize(QSize(0, 103))
         self.page_create_yaml_bottom_frame.setMaximumSize(QSize(16777215, 16777215))
-        font11 = QFont()
-        font11.setFamilies([u"DejaVu Math TeX Gyre"])
-        font11.setPointSize(12)
-        font11.setBold(False)
-        self.page_create_yaml_bottom_frame.setFont(font11)
+        font12 = QFont()
+        font12.setFamilies([u"DejaVu Math TeX Gyre"])
+        font12.setPointSize(12)
+        font12.setBold(False)
+        self.page_create_yaml_bottom_frame.setFont(font12)
         self.page_create_yaml_bottom_frame.setFrameShape(QFrame.NoFrame)
         self.page_create_yaml_bottom_frame.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_8 = QHBoxLayout(self.page_create_yaml_bottom_frame)
@@ -14135,13 +13727,13 @@ class Ui_MainWindow(object):
         self.horizontalLayout_8.setContentsMargins(0, 35, 0, 0)
         self.frame_20 = QFrame(self.page_create_yaml_bottom_frame)
         self.frame_20.setObjectName(u"frame_20")
-        self.frame_20.setFont(font)
+        self.frame_20.setFont(font1)
         self.frame_20.setFrameShape(QFrame.NoFrame)
         self.frame_20.setFrameShadow(QFrame.Raised)
         self.back_bn = QPushButton(self.frame_20)
         self.back_bn.setObjectName(u"back_bn")
         self.back_bn.setGeometry(QRect(0, 0, 91, 24))
-        self.back_bn.setFont(font)
+        self.back_bn.setFont(font1)
         self.back_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgba(0,0,0,0);\n"
@@ -14152,16 +13744,16 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	border: 2px solid rgb(0, 0, 0);\n"
 "}")
-        icon5 = QIcon()
-        icon5.addFile(u"images/bn_images/back.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.back_bn.setIcon(icon5)
+        icon = QIcon()
+        icon.addFile(u"../../../../.designer/backup/images/bn_images/back.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.back_bn.setIcon(icon)
         self.back_bn.setIconSize(QSize(80, 12))
 
         self.horizontalLayout_8.addWidget(self.frame_20)
 
         self.frame_23 = QFrame(self.page_create_yaml_bottom_frame)
         self.frame_23.setObjectName(u"frame_23")
-        self.frame_23.setFont(font)
+        self.frame_23.setFont(font1)
         self.frame_23.setFrameShape(QFrame.NoFrame)
         self.frame_23.setFrameShadow(QFrame.Raised)
         self.gridLayout_7 = QGridLayout(self.frame_23)
@@ -14169,7 +13761,7 @@ class Ui_MainWindow(object):
         self.gridLayout_7.setContentsMargins(0, 0, 0, 0)
         self.frame_24 = QFrame(self.frame_23)
         self.frame_24.setObjectName(u"frame_24")
-        self.frame_24.setFont(font)
+        self.frame_24.setFont(font1)
         self.frame_24.setFrameShape(QFrame.NoFrame)
         self.frame_24.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_11 = QHBoxLayout(self.frame_24)
@@ -14179,7 +13771,7 @@ class Ui_MainWindow(object):
         self.frame_9 = QFrame(self.frame_24)
         self.frame_9.setObjectName(u"frame_9")
         self.frame_9.setMaximumSize(QSize(30, 16777215))
-        self.frame_9.setFont(font)
+        self.frame_9.setFont(font1)
         self.frame_9.setFrameShape(QFrame.NoFrame)
         self.frame_9.setFrameShadow(QFrame.Raised)
 
@@ -14188,7 +13780,7 @@ class Ui_MainWindow(object):
         self.window1_bn = QPushButton(self.frame_24)
         self.window1_bn.setObjectName(u"window1_bn")
         self.window1_bn.setMaximumSize(QSize(20, 16777215))
-        self.window1_bn.setFont(font)
+        self.window1_bn.setFont(font1)
         self.window1_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgba(0,0,0,0);\n"
@@ -14199,9 +13791,6 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(255,255,255);\n"
 "}")
-        icon6 = QIcon()
-        icon6.addFile(u"images/bn_images/dot_enable.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.window1_bn.setIcon(icon6)
         self.window1_bn.setIconSize(QSize(12, 12))
 
         self.horizontalLayout_11.addWidget(self.window1_bn)
@@ -14209,7 +13798,7 @@ class Ui_MainWindow(object):
         self.window2_bn = QPushButton(self.frame_24)
         self.window2_bn.setObjectName(u"window2_bn")
         self.window2_bn.setMaximumSize(QSize(20, 16777215))
-        self.window2_bn.setFont(font)
+        self.window2_bn.setFont(font1)
         self.window2_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgba(0,0,0,0);\n"
@@ -14220,9 +13809,6 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(255,255,255);\n"
 "}")
-        icon7 = QIcon()
-        icon7.addFile(u"images/bn_images/dot_disable.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.window2_bn.setIcon(icon7)
         self.window2_bn.setIconSize(QSize(12, 12))
 
         self.horizontalLayout_11.addWidget(self.window2_bn)
@@ -14231,7 +13817,7 @@ class Ui_MainWindow(object):
         self.window3_bn.setObjectName(u"window3_bn")
         self.window3_bn.setMinimumSize(QSize(0, 0))
         self.window3_bn.setMaximumSize(QSize(20, 16777215))
-        self.window3_bn.setFont(font)
+        self.window3_bn.setFont(font1)
         self.window3_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgba(0,0,0,0);\n"
@@ -14242,7 +13828,6 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(255,255,255);\n"
 "}")
-        self.window3_bn.setIcon(icon7)
         self.window3_bn.setIconSize(QSize(12, 12))
         self.window3_bn.setAutoRepeatInterval(100)
 
@@ -14251,7 +13836,7 @@ class Ui_MainWindow(object):
         self.window4_bn = QPushButton(self.frame_24)
         self.window4_bn.setObjectName(u"window4_bn")
         self.window4_bn.setMaximumSize(QSize(20, 16777215))
-        self.window4_bn.setFont(font)
+        self.window4_bn.setFont(font1)
         self.window4_bn.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgba(0,0,0,0);\n"
@@ -14262,7 +13847,6 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgb(255,255,255);\n"
 "}")
-        self.window4_bn.setIcon(icon7)
         self.window4_bn.setIconSize(QSize(12, 12))
 
         self.horizontalLayout_11.addWidget(self.window4_bn)
@@ -14270,7 +13854,7 @@ class Ui_MainWindow(object):
         self.frame_10 = QFrame(self.frame_24)
         self.frame_10.setObjectName(u"frame_10")
         self.frame_10.setMaximumSize(QSize(30, 16777215))
-        self.frame_10.setFont(font)
+        self.frame_10.setFont(font1)
         self.frame_10.setFrameShape(QFrame.NoFrame)
         self.frame_10.setFrameShadow(QFrame.Raised)
 
@@ -14283,21 +13867,12 @@ class Ui_MainWindow(object):
         self.continue_bn.setObjectName(u"continue_bn")
         self.continue_bn.setMinimumSize(QSize(0, 40))
         self.continue_bn.setMaximumSize(QSize(220, 77))
-        font12 = QFont()
-        font12.setFamilies([u"DejaVu Math TeX Gyre"])
-        font12.setPointSize(12)
-        font12.setBold(False)
-        font12.setStrikeOut(False)
-        self.continue_bn.setFont(font12)
-        self.continue_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgb(64,144,253);\n"
-"	border-radius: 15px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
+        font13 = QFont()
+        font13.setFamilies([u"DejaVu Math TeX Gyre"])
+        font13.setPointSize(12)
+        font13.setBold(False)
+        font13.setStrikeOut(False)
+        self.continue_bn.setFont(font13)
         self.continue_bn.setIconSize(QSize(160, 33))
         self.continue_bn.setAutoRepeat(False)
         self.continue_bn.setFlat(False)
@@ -14310,7 +13885,7 @@ class Ui_MainWindow(object):
         self.frame_22 = QFrame(self.page_create_yaml_bottom_frame)
         self.frame_22.setObjectName(u"frame_22")
         self.frame_22.setMaximumSize(QSize(16777215, 16777215))
-        self.frame_22.setFont(font)
+        self.frame_22.setFont(font1)
         self.frame_22.setFrameShape(QFrame.NoFrame)
         self.frame_22.setFrameShadow(QFrame.Raised)
 
@@ -14325,14 +13900,13 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.page_create_yaml)
         self.page_run_biapy = QWidget()
         self.page_run_biapy.setObjectName(u"page_run_biapy")
-        self.page_run_biapy.setStyleSheet(u"background:rgb(255,255,255);")
         self.horizontalLayout_29 = QHBoxLayout(self.page_run_biapy)
         self.horizontalLayout_29.setSpacing(0)
         self.horizontalLayout_29.setObjectName(u"horizontalLayout_29")
         self.horizontalLayout_29.setContentsMargins(0, 0, 0, 0)
         self.frame_7 = QFrame(self.page_run_biapy)
         self.frame_7.setObjectName(u"frame_7")
-        self.frame_7.setFont(font)
+        self.frame_7.setFont(font1)
         self.frame_7.setFrameShape(QFrame.NoFrame)
         self.frame_7.setFrameShadow(QFrame.Raised)
         self.gridLayout_72 = QGridLayout(self.frame_7)
@@ -14358,7 +13932,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_40.setContentsMargins(0, 0, 0, 0)
         self.label_9 = QLabel(self.gpu_list_frame)
         self.label_9.setObjectName(u"label_9")
-        self.label_9.setFont(font2)
+        self.label_9.setFont(font3)
 
         self.verticalLayout_40.addWidget(self.label_9, 0, Qt.AlignHCenter)
 
@@ -14366,7 +13940,7 @@ class Ui_MainWindow(object):
         self.device_input.setObjectName(u"device_input")
         self.device_input.setMinimumSize(QSize(300, 30))
         self.device_input.setMaximumSize(QSize(300, 30))
-        self.device_input.setFont(font)
+        self.device_input.setFont(font1)
 
         self.verticalLayout_40.addWidget(self.device_input)
 
@@ -14383,7 +13957,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_58.setContentsMargins(0, 0, 0, 0)
         self.container_version_label = QLabel(self.container_list_frame)
         self.container_version_label.setObjectName(u"container_version_label")
-        self.container_version_label.setFont(font2)
+        self.container_version_label.setFont(font3)
 
         self.verticalLayout_58.addWidget(self.container_version_label, 0, Qt.AlignHCenter)
 
@@ -14391,7 +13965,7 @@ class Ui_MainWindow(object):
         self.container_input.setObjectName(u"container_input")
         self.container_input.setMinimumSize(QSize(150, 30))
         self.container_input.setMaximumSize(QSize(150, 30))
-        self.container_input.setFont(font)
+        self.container_input.setFont(font1)
 
         self.verticalLayout_58.addWidget(self.container_input)
 
@@ -14410,20 +13984,7 @@ class Ui_MainWindow(object):
         self.run_biapy_docker_bn.setObjectName(u"run_biapy_docker_bn")
         self.run_biapy_docker_bn.setMinimumSize(QSize(300, 40))
         self.run_biapy_docker_bn.setMaximumSize(QSize(300, 16777215))
-        self.run_biapy_docker_bn.setFont(font5)
-        self.run_biapy_docker_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgb(64,144,253);\n"
-"	border-radius: 15px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
+        self.run_biapy_docker_bn.setFont(font1)
         self.run_biapy_docker_bn.setIconSize(QSize(250, 33))
 
         self.verticalLayout_39.addWidget(self.run_biapy_docker_bn)
@@ -14446,20 +14007,20 @@ class Ui_MainWindow(object):
         self.gridLayout_9.setContentsMargins(0, -1, 9, -1)
         self.examine_yaml_bn = QPushButton(self.frame_27)
         self.examine_yaml_bn.setObjectName(u"examine_yaml_bn")
-        self.examine_yaml_bn.setFont(font)
+        self.examine_yaml_bn.setFont(font1)
 
         self.gridLayout_9.addWidget(self.examine_yaml_bn, 0, 5, 1, 1)
 
         self.output_folder_label = QLabel(self.frame_27)
         self.output_folder_label.setObjectName(u"output_folder_label")
         self.output_folder_label.setMaximumSize(QSize(16777215, 35))
-        self.output_folder_label.setFont(font)
+        self.output_folder_label.setFont(font1)
 
         self.gridLayout_9.addWidget(self.output_folder_label, 3, 0, 1, 2)
 
         self.label_138 = QLabel(self.frame_27)
         self.label_138.setObjectName(u"label_138")
-        self.label_138.setFont(font)
+        self.label_138.setFont(font1)
 
         self.gridLayout_9.addWidget(self.label_138, 2, 0, 1, 1)
 
@@ -14496,7 +14057,7 @@ class Ui_MainWindow(object):
         self.output_folder_bn = QPushButton(self.frame_27)
         self.output_folder_bn.setObjectName(u"output_folder_bn")
         self.output_folder_bn.setMaximumSize(QSize(130, 16777215))
-        self.output_folder_bn.setFont(font)
+        self.output_folder_bn.setFont(font1)
 
         self.gridLayout_9.addWidget(self.output_folder_bn, 3, 5, 1, 1)
 
@@ -14504,7 +14065,7 @@ class Ui_MainWindow(object):
         self.select_yaml_name_label.setObjectName(u"select_yaml_name_label")
         self.select_yaml_name_label.setMinimumSize(QSize(500, 30))
         self.select_yaml_name_label.setMaximumSize(QSize(500, 30))
-        self.select_yaml_name_label.setFont(font)
+        self.select_yaml_name_label.setFont(font1)
 
         self.gridLayout_9.addWidget(self.select_yaml_name_label, 0, 3, 1, 1)
 
@@ -14512,7 +14073,7 @@ class Ui_MainWindow(object):
         self.job_name_input.setObjectName(u"job_name_input")
         self.job_name_input.setMinimumSize(QSize(0, 30))
         self.job_name_input.setMaximumSize(QSize(500, 30))
-        self.job_name_input.setFont(font)
+        self.job_name_input.setFont(font1)
         self.job_name_input.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.job_name_input.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.job_name_input.setLineWrapMode(QPlainTextEdit.NoWrap)
@@ -14521,7 +14082,7 @@ class Ui_MainWindow(object):
 
         self.select_yaml_label = QLabel(self.frame_27)
         self.select_yaml_label.setObjectName(u"select_yaml_label")
-        self.select_yaml_label.setFont(font)
+        self.select_yaml_label.setFont(font1)
 
         self.gridLayout_9.addWidget(self.select_yaml_label, 0, 0, 1, 2)
 
@@ -14529,7 +14090,7 @@ class Ui_MainWindow(object):
         self.output_folder_input.setObjectName(u"output_folder_input")
         self.output_folder_input.setMinimumSize(QSize(500, 30))
         self.output_folder_input.setMaximumSize(QSize(500, 30))
-        self.output_folder_input.setFont(font)
+        self.output_folder_input.setFont(font1)
 
         self.gridLayout_9.addWidget(self.output_folder_input, 3, 3, 1, 1)
 
@@ -14563,20 +14124,7 @@ class Ui_MainWindow(object):
         self.check_yaml_file_bn.setObjectName(u"check_yaml_file_bn")
         self.check_yaml_file_bn.setMinimumSize(QSize(200, 40))
         self.check_yaml_file_bn.setMaximumSize(QSize(100, 16777215))
-        self.check_yaml_file_bn.setFont(font)
-        self.check_yaml_file_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	background-color: rgb(64,144,253);\n"
-"	border-radius: 15px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
+        self.check_yaml_file_bn.setFont(font1)
 
         self.horizontalLayout_6.addWidget(self.check_yaml_file_bn)
 
@@ -14585,18 +14133,18 @@ class Ui_MainWindow(object):
 
         self.check_yaml_file_errors_frame = QScrollArea(self.frame_57)
         self.check_yaml_file_errors_frame.setObjectName(u"check_yaml_file_errors_frame")
-        self.check_yaml_file_errors_frame.setFont(font)
+        self.check_yaml_file_errors_frame.setFont(font1)
         self.check_yaml_file_errors_frame.setFrameShape(QFrame.Box)
         self.check_yaml_file_errors_frame.setWidgetResizable(True)
         self.scrollAreaWidgetContents_19 = QWidget()
         self.scrollAreaWidgetContents_19.setObjectName(u"scrollAreaWidgetContents_19")
-        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 96, 26))
+        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 896, 152))
         self.verticalLayout_32 = QVBoxLayout(self.scrollAreaWidgetContents_19)
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
         self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)
         self.check_yaml_file_errors_label = QLabel(self.scrollAreaWidgetContents_19)
         self.check_yaml_file_errors_label.setObjectName(u"check_yaml_file_errors_label")
-        self.check_yaml_file_errors_label.setFont(font)
+        self.check_yaml_file_errors_label.setFont(font1)
         self.check_yaml_file_errors_label.setWordWrap(True)
 
         self.verticalLayout_32.addWidget(self.check_yaml_file_errors_label)
@@ -14624,7 +14172,7 @@ class Ui_MainWindow(object):
 
         self.output_final_directory_label = QLabel(self.frame_7)
         self.output_final_directory_label.setObjectName(u"output_final_directory_label")
-        self.output_final_directory_label.setFont(font)
+        self.output_final_directory_label.setFont(font1)
         self.output_final_directory_label.setWordWrap(True)
 
         self.gridLayout_72.addWidget(self.output_final_directory_label, 1, 1, 1, 1)
@@ -14649,11 +14197,11 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(2)
         self.wizard_main_frame.setCurrentIndex(0)
         self.stackedWidget_create_yaml_frame.setCurrentIndex(3)
         self.train_tab_widget.setCurrentIndex(0)
-        self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(6)
+        self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(1)
         self.test_tab_widget.setCurrentIndex(0)
         self.test_workflow_specific_tab_stackedWidget.setCurrentIndex(0)
 
@@ -14665,30 +14213,12 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.biapy_logo_label.setText("")
         self.biapy_version.setText(QCoreApplication.translate("MainWindow", u"Version 3.3.8 - GUI: 1.0.0", None))
-#if QT_CONFIG(tooltip)
-        self.bn_home.setToolTip("")
-#endif // QT_CONFIG(tooltip)
         self.bn_home.setText("")
         self.bn_wizard.setText("")
-#if QT_CONFIG(tooltip)
-        self.bn_workflow.setToolTip("")
-#endif // QT_CONFIG(tooltip)
         self.bn_workflow.setText("")
-#if QT_CONFIG(tooltip)
-        self.bn_goptions.setToolTip("")
-#endif // QT_CONFIG(tooltip)
         self.bn_goptions.setText("")
-#if QT_CONFIG(tooltip)
-        self.bn_train.setToolTip("")
-#endif // QT_CONFIG(tooltip)
         self.bn_train.setText("")
-#if QT_CONFIG(tooltip)
-        self.bn_test.setToolTip("")
-#endif // QT_CONFIG(tooltip)
         self.bn_test.setText("")
-#if QT_CONFIG(tooltip)
-        self.bn_run_biapy.setToolTip("")
-#endif // QT_CONFIG(tooltip)
         self.bn_run_biapy.setText("")
 #if QT_CONFIG(tooltip)
         self.bn_min.setToolTip(QCoreApplication.translate("MainWindow", u"Minimize", None))

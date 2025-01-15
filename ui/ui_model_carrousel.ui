@@ -28,9 +28,6 @@
    </property>
    <item>
     <widget class="QFrame" name="centralwidget">
-     <property name="styleSheet">
-      <string notr="true">background:rgb(255,255,255);</string>
-     </property>
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
      </property>
@@ -66,9 +63,6 @@
           <width>16777215</width>
           <height>40</height>
          </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background:rgb(255,255,255);</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
@@ -175,10 +169,6 @@ QPushButton:pressed {
            <property name="text">
             <string/>
            </property>
-           <property name="icon">
-            <iconset>
-             <normaloff>images/bn_images/close_icon.png</normaloff>images/bn_images/close_icon.png</iconset>
-           </property>
            <property name="iconSize">
             <size>
              <width>22</width>
@@ -258,7 +248,7 @@ QPushButton:pressed {
               <x>0</x>
               <y>0</y>
               <width>838</width>
-              <height>359</height>
+              <height>361</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_6"/>

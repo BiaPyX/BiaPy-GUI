@@ -25,9 +25,6 @@
   <property name="windowTitle">
    <string>Run BiaPy</string>
   </property>
-  <property name="styleSheet">
-   <string notr="true">background:rgb(255,255,255);</string>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>0</number>
@@ -46,9 +43,6 @@
    </property>
    <item>
     <widget class="QFrame" name="centralwidget">
-     <property name="styleSheet">
-      <string notr="true">background:rgb(255,255,255);</string>
-     </property>
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
      </property>
@@ -193,10 +187,6 @@ QPushButton:pressed {
            <property name="text">
             <string/>
            </property>
-           <property name="icon">
-            <iconset>
-             <normaloff>../../../../.designer/backup/images/bn_images/hide_icon.png</normaloff>../../../../.designer/backup/images/bn_images/hide_icon.png</iconset>
-           </property>
            <property name="iconSize">
             <size>
              <width>22</width>
@@ -239,10 +229,6 @@ QPushButton:pressed {
            </property>
            <property name="text">
             <string/>
-           </property>
-           <property name="icon">
-            <iconset>
-             <normaloff>../../../../.designer/backup/images/bn_images/close_icon.png</normaloff>../../../../.designer/backup/images/bn_images/close_icon.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -403,6 +389,7 @@ QPushButton:pressed {
                     <property name="font">
                      <font>
                       <family>DejaVu Math TeX Gyre</family>
+                      <pointsize>12</pointsize>
                      </font>
                     </property>
                     <property name="value">
@@ -522,7 +509,7 @@ QPushButton:pressed {
                     <x>0</x>
                     <y>0</y>
                     <width>921</width>
-                    <height>118</height>
+                    <height>121</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -645,16 +632,8 @@ QPushButton:pressed {
                       <pointsize>12</pointsize>
                      </font>
                     </property>
-                    <property name="styleSheet">
-                     <string notr="true">QPushButton {
-	border: none;
-	background-color: rgb(64,144,253);
-	border-radius: 15px;
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}</string>
+                    <property name="focusPolicy">
+                     <enum>Qt::NoFocus</enum>
                     </property>
                     <property name="text">
                      <string>Stop</string>
@@ -913,8 +892,8 @@ font-size: 9px;</string>
             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Monospace'; font-size:9px; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9px;&quot;&gt;Please wait, the first screen update may take a while depending on your OS&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Monospace','DejaVu Math TeX Gyre'; font-size:9px; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Monospace'; font-size:9px;&quot;&gt;Please wait, the first screen update may take a while depending on your OS&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
          </item>

@@ -26,7 +26,6 @@ class Ui_Workflow_info(object):
         Workflow_info.resize(800, 700)
         Workflow_info.setMinimumSize(QSize(800, 700))
         Workflow_info.setMaximumSize(QSize(800, 700))
-        Workflow_info.setStyleSheet(u"background:rgb(255,255,255);")
         self.verticalLayout = QVBoxLayout(Workflow_info)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(u"verticalLayout")
@@ -37,7 +36,6 @@ class Ui_Workflow_info(object):
         font.setFamilies([u"DejaVu Math TeX Gyre"])
         font.setPointSize(12)
         self.centralwidget.setFont(font)
-        self.centralwidget.setStyleSheet(u"background:rgb(255,255,255);")
         self.centralwidget.setFrameShape(QFrame.NoFrame)
         self.centralwidget.setFrameShadow(QFrame.Plain)
         self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
@@ -99,9 +97,6 @@ class Ui_Workflow_info(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgba(0,0,0,0);\n"
 "}")
-        icon = QIcon()
-        icon.addFile(u"images/bn_images/close_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.bn_close.setIcon(icon)
         self.bn_close.setIconSize(QSize(22, 22))
         self.bn_close.setAutoDefault(False)
         self.bn_close.setFlat(True)
@@ -163,32 +158,59 @@ class Ui_Workflow_info(object):
         self.frame_3.setFrameShadow(QFrame.Raised)
         self.gridLayout = QGridLayout(self.frame_3)
         self.gridLayout.setObjectName(u"gridLayout")
-        self.frame_5 = QFrame(self.frame_3)
-        self.frame_5.setObjectName(u"frame_5")
-        self.frame_5.setFrameShape(QFrame.NoFrame)
-        self.frame_5.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_4 = QHBoxLayout(self.frame_5)
-        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.input_image_label = QLabel(self.frame_5)
-        self.input_image_label.setObjectName(u"input_image_label")
-        self.input_image_label.setMinimumSize(QSize(200, 200))
-        self.input_image_label.setMaximumSize(QSize(200, 200))
-        self.input_image_label.setFrameShape(QFrame.Box)
-        self.input_image_label.setLineWidth(1)
+        self.workflow_description_label = QLabel(self.frame_3)
+        self.workflow_description_label.setObjectName(u"workflow_description_label")
+        self.workflow_description_label.setFont(font)
+        self.workflow_description_label.setWordWrap(True)
+        self.workflow_description_label.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
-        self.horizontalLayout_4.addWidget(self.input_image_label)
+        self.gridLayout.addWidget(self.workflow_description_label, 3, 0, 1, 1)
 
-        self.gt_image_label = QLabel(self.frame_5)
-        self.gt_image_label.setObjectName(u"gt_image_label")
-        self.gt_image_label.setMinimumSize(QSize(200, 200))
-        self.gt_image_label.setMaximumSize(QSize(200, 200))
-        self.gt_image_label.setFrameShape(QFrame.Box)
-        self.gt_image_label.setLineWidth(1)
+        self.frame_2 = QFrame(self.frame_3)
+        self.frame_2.setObjectName(u"frame_2")
+        self.frame_2.setMinimumSize(QSize(0, 150))
+        self.frame_2.setFrameShape(QFrame.NoFrame)
+        self.frame_2.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_6 = QVBoxLayout(self.frame_2)
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
+        self.verticalLayout_6.setContentsMargins(0, 15, 0, 0)
+        self.documentation_bn = QPushButton(self.frame_2)
+        self.documentation_bn.setObjectName(u"documentation_bn")
+        self.documentation_bn.setMinimumSize(QSize(240, 30))
+        self.documentation_bn.setMaximumSize(QSize(16777215, 16777215))
+        self.documentation_bn.setFont(font)
+        self.documentation_bn.setFocusPolicy(Qt.NoFocus)
 
-        self.horizontalLayout_4.addWidget(self.gt_image_label)
+        self.verticalLayout_6.addWidget(self.documentation_bn, 0, Qt.AlignHCenter)
+
+        self.label = QLabel(self.frame_2)
+        self.label.setObjectName(u"label")
+        font3 = QFont()
+        font3.setFamilies([u"DejaVu Math TeX Gyre"])
+        font3.setPointSize(12)
+        font3.setBold(True)
+        self.label.setFont(font3)
+        self.label.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
+
+        self.verticalLayout_6.addWidget(self.label)
+
+        self.ready_to_use_samples_frame = QFrame(self.frame_2)
+        self.ready_to_use_samples_frame.setObjectName(u"ready_to_use_samples_frame")
+        self.ready_to_use_samples_frame.setMinimumSize(QSize(0, 0))
+        self.ready_to_use_samples_frame.setFont(font)
+        self.ready_to_use_samples_frame.setFrameShape(QFrame.NoFrame)
+        self.ready_to_use_samples_frame.setFrameShadow(QFrame.Raised)
+        self.gridLayout_2 = QGridLayout(self.ready_to_use_samples_frame)
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_2.addItem(self.horizontalSpacer, 1, 0, 1, 1)
 
 
-        self.gridLayout.addWidget(self.frame_5, 0, 0, 1, 1)
+        self.verticalLayout_6.addWidget(self.ready_to_use_samples_frame)
+
+
+        self.gridLayout.addWidget(self.frame_2, 4, 0, 1, 1)
 
         self.frame_4 = QFrame(self.frame_3)
         self.frame_4.setObjectName(u"frame_4")
@@ -221,6 +243,33 @@ class Ui_Workflow_info(object):
 
         self.gridLayout.addWidget(self.frame_4, 1, 0, 1, 1)
 
+        self.frame_5 = QFrame(self.frame_3)
+        self.frame_5.setObjectName(u"frame_5")
+        self.frame_5.setFrameShape(QFrame.NoFrame)
+        self.frame_5.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_4 = QHBoxLayout(self.frame_5)
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.input_image_label = QLabel(self.frame_5)
+        self.input_image_label.setObjectName(u"input_image_label")
+        self.input_image_label.setMinimumSize(QSize(200, 200))
+        self.input_image_label.setMaximumSize(QSize(200, 200))
+        self.input_image_label.setFrameShape(QFrame.Box)
+        self.input_image_label.setLineWidth(1)
+
+        self.horizontalLayout_4.addWidget(self.input_image_label)
+
+        self.gt_image_label = QLabel(self.frame_5)
+        self.gt_image_label.setObjectName(u"gt_image_label")
+        self.gt_image_label.setMinimumSize(QSize(200, 200))
+        self.gt_image_label.setMaximumSize(QSize(200, 200))
+        self.gt_image_label.setFrameShape(QFrame.Box)
+        self.gt_image_label.setLineWidth(1)
+
+        self.horizontalLayout_4.addWidget(self.gt_image_label)
+
+
+        self.gridLayout.addWidget(self.frame_5, 0, 0, 1, 1)
+
         self.frame = QFrame(self.frame_3)
         self.frame.setObjectName(u"frame")
         self.frame.setFrameShape(QFrame.NoFrame)
@@ -233,85 +282,12 @@ class Ui_Workflow_info(object):
         self.ok_bn.setObjectName(u"ok_bn")
         self.ok_bn.setMinimumSize(QSize(100, 30))
         self.ok_bn.setMaximumSize(QSize(100, 16777215))
-        self.ok_bn.setFont(font)
-        self.ok_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	border-radius: 15px;\n"
-"	background-color: rgb(64,144,253);\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
+        self.ok_bn.setFocusPolicy(Qt.NoFocus)
 
         self.horizontalLayout_2.addWidget(self.ok_bn)
 
 
         self.gridLayout.addWidget(self.frame, 5, 0, 1, 1)
-
-        self.workflow_description_label = QLabel(self.frame_3)
-        self.workflow_description_label.setObjectName(u"workflow_description_label")
-        self.workflow_description_label.setFont(font)
-        self.workflow_description_label.setWordWrap(True)
-        self.workflow_description_label.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
-
-        self.gridLayout.addWidget(self.workflow_description_label, 3, 0, 1, 1)
-
-        self.frame_2 = QFrame(self.frame_3)
-        self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setMinimumSize(QSize(0, 150))
-        self.frame_2.setFrameShape(QFrame.NoFrame)
-        self.frame_2.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_6 = QVBoxLayout(self.frame_2)
-        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
-        self.verticalLayout_6.setContentsMargins(0, 15, 0, 0)
-        self.documentation_bn = QPushButton(self.frame_2)
-        self.documentation_bn.setObjectName(u"documentation_bn")
-        self.documentation_bn.setMinimumSize(QSize(240, 30))
-        self.documentation_bn.setMaximumSize(QSize(16777215, 16777215))
-        self.documentation_bn.setFont(font)
-        self.documentation_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	border-radius: 15px;\n"
-"	background-color: rgb(64,144,253);\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
-
-        self.verticalLayout_6.addWidget(self.documentation_bn, 0, Qt.AlignHCenter)
-
-        self.label = QLabel(self.frame_2)
-        self.label.setObjectName(u"label")
-        font3 = QFont()
-        font3.setFamilies([u"DejaVu Math TeX Gyre"])
-        font3.setPointSize(12)
-        font3.setBold(True)
-        self.label.setFont(font3)
-        self.label.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
-
-        self.verticalLayout_6.addWidget(self.label)
-
-        self.ready_to_use_samples_frame = QFrame(self.frame_2)
-        self.ready_to_use_samples_frame.setObjectName(u"ready_to_use_samples_frame")
-        self.ready_to_use_samples_frame.setMinimumSize(QSize(0, 0))
-        font4 = QFont()
-        font4.setFamilies([u"DejaVu Math TeX Gyre"])
-        self.ready_to_use_samples_frame.setFont(font4)
-        self.ready_to_use_samples_frame.setFrameShape(QFrame.NoFrame)
-        self.ready_to_use_samples_frame.setFrameShadow(QFrame.Raised)
-        self.gridLayout_2 = QGridLayout(self.ready_to_use_samples_frame)
-        self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_2.addItem(self.horizontalSpacer, 1, 0, 1, 1)
-
-
-        self.verticalLayout_6.addWidget(self.ready_to_use_samples_frame)
-
-
-        self.gridLayout.addWidget(self.frame_2, 4, 0, 1, 1)
 
 
         self.verticalLayout_4.addWidget(self.frame_3)
@@ -339,16 +315,16 @@ class Ui_Workflow_info(object):
         self.lab_heading.setText("")
         self.bn_close.setText("")
         self.workflow_name_label.setText(QCoreApplication.translate("Workflow_info", u"<html><head/><body><p>TextLabel</p></body></html>", None))
-        self.input_image_label.setText("")
-        self.gt_image_label.setText("")
-        self.input_description_label.setText(QCoreApplication.translate("Workflow_info", u"<html><head/><body><p>Input image</p></body></html>", None))
-        self.gt_description_label.setText(QCoreApplication.translate("Workflow_info", u"GT", None))
-        self.ok_bn.setText(QCoreApplication.translate("Workflow_info", u"OK", None))
         self.workflow_description_label.setText(QCoreApplication.translate("Workflow_info", u"<html><head/><body><p>TextLabel</p></body></html>", None))
 #if QT_CONFIG(tooltip)
         self.documentation_bn.setToolTip(QCoreApplication.translate("Workflow_info", u"<html><head/><body><p><span style=\" font-size:12pt;\">Open</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.documentation_bn.setText(QCoreApplication.translate("Workflow_info", u"Workflow documentation", None))
         self.label.setText(QCoreApplication.translate("Workflow_info", u"Ready to use examples:", None))
+        self.input_description_label.setText(QCoreApplication.translate("Workflow_info", u"<html><head/><body><p>Input image</p></body></html>", None))
+        self.gt_description_label.setText(QCoreApplication.translate("Workflow_info", u"GT", None))
+        self.input_image_label.setText("")
+        self.gt_image_label.setText("")
+        self.ok_bn.setText(QCoreApplication.translate("Workflow_info", u"OK", None))
     # retranslateUi
 

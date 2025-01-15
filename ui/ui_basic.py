@@ -30,7 +30,6 @@ class Ui_basic(object):
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.centralwidget = QFrame(basic)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.centralwidget.setStyleSheet(u"background:rgb(255,255,255);")
         self.centralwidget.setFrameShape(QFrame.NoFrame)
         self.centralwidget.setFrameShadow(QFrame.Plain)
         self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
@@ -41,7 +40,6 @@ class Ui_basic(object):
         self.frame_top.setObjectName(u"frame_top")
         self.frame_top.setMinimumSize(QSize(0, 0))
         self.frame_top.setMaximumSize(QSize(16777215, 16777215))
-        self.frame_top.setStyleSheet(u"background:rgb(255,255,255);")
         self.frame_top.setFrameShape(QFrame.NoFrame)
         self.frame_top.setFrameShadow(QFrame.Plain)
         self.horizontalLayout = QHBoxLayout(self.frame_top)
@@ -90,9 +88,6 @@ class Ui_basic(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgba(0,0,0,0);\n"
 "}")
-        icon = QIcon()
-        icon.addFile(u"images/bn_images/close_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.bn_close.setIcon(icon)
         self.bn_close.setIconSize(QSize(22, 22))
         self.bn_close.setAutoDefault(False)
         self.bn_close.setFlat(True)
@@ -121,7 +116,7 @@ class Ui_basic(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 69, 353))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 68, 353))
         self.verticalLayout_4 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_4.setSpacing(0)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
@@ -131,7 +126,6 @@ class Ui_basic(object):
         self.message_label.setMinimumSize(QSize(0, 0))
         self.message_label.setMaximumSize(QSize(600, 16777215))
         self.message_label.setFont(font1)
-        self.message_label.setStyleSheet(u"background:rgb(255,255,255);")
         self.message_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.message_label.setWordWrap(True)
         self.message_label.setMargin(5)
@@ -158,15 +152,7 @@ class Ui_basic(object):
         self.ok_bn.setMinimumSize(QSize(150, 30))
         self.ok_bn.setMaximumSize(QSize(150, 16777215))
         self.ok_bn.setFont(font1)
-        self.ok_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	border-radius: 15px;\n"
-"	background-color: rgb(64,144,253);\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
+        self.ok_bn.setFocusPolicy(Qt.NoFocus)
 
         self.horizontalLayout_2.addWidget(self.ok_bn)
 

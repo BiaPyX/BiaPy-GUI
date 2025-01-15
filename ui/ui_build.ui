@@ -25,9 +25,6 @@
   <property name="windowTitle">
    <string>Run BiaPy</string>
   </property>
-  <property name="styleSheet">
-   <string notr="true">background:rgb(255,255,255);</string>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>0</number>
@@ -180,10 +177,6 @@ QPushButton:pressed {
            <property name="text">
             <string/>
            </property>
-           <property name="icon">
-            <iconset>
-             <normaloff>images/bn_images/hide_icon.png</normaloff>images/bn_images/hide_icon.png</iconset>
-           </property>
            <property name="iconSize">
             <size>
              <width>22</width>
@@ -226,10 +219,6 @@ QPushButton:pressed {
            </property>
            <property name="text">
             <string/>
-           </property>
-           <property name="icon">
-            <iconset>
-             <normaloff>images/bn_images/close_icon.png</normaloff>images/bn_images/close_icon.png</iconset>
            </property>
            <property name="iconSize">
             <size>

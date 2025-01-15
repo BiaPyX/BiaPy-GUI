@@ -31,9 +31,6 @@
    </property>
    <item>
     <widget class="QFrame" name="centralwidget">
-     <property name="styleSheet">
-      <string notr="true">background:rgb(255,255,255);</string>
-     </property>
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
      </property>
@@ -69,9 +66,6 @@
           <width>16777215</width>
           <height>16777215</height>
          </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background:rgb(255,255,255);</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
@@ -183,10 +177,6 @@ QPushButton:pressed {
            <property name="text">
             <string/>
            </property>
-           <property name="icon">
-            <iconset>
-             <normaloff>images/bn_images/close_icon.png</normaloff>images/bn_images/close_icon.png</iconset>
-           </property>
            <property name="iconSize">
             <size>
              <width>22</width>
@@ -250,7 +240,7 @@ QPushButton:pressed {
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>69</width>
+              <width>68</width>
               <height>353</height>
              </rect>
             </property>
@@ -289,9 +279,6 @@ QPushButton:pressed {
                  <family>DejaVu Math TeX Gyre</family>
                  <pointsize>12</pointsize>
                 </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background:rgb(255,255,255);</string>
                </property>
                <property name="text">
                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;TEXT&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -364,16 +351,8 @@ QPushButton:pressed {
                 <pointsize>12</pointsize>
                </font>
               </property>
-              <property name="styleSheet">
-               <string notr="true">QPushButton {
-	border: none;
-	border-radius: 15px;
-	background-color: rgb(64,144,253);
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}</string>
+              <property name="focusPolicy">
+               <enum>Qt::NoFocus</enum>
               </property>
               <property name="text">
                <string>Got it!</string>

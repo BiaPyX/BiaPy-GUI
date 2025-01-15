@@ -25,9 +25,6 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <property name="styleSheet">
-   <string notr="true">background:rgb(255,255,255);</string>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>0</number>
@@ -46,9 +43,6 @@
    </property>
    <item>
     <widget class="QFrame" name="centralwidget">
-     <property name="styleSheet">
-      <string notr="true">background:rgb(255,255,255);</string>
-     </property>
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
      </property>
@@ -84,9 +78,6 @@
           <width>16777215</width>
           <height>40</height>
          </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background:rgb(255,255,255);</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
@@ -202,9 +193,6 @@
              <pointsize>12</pointsize>
             </font>
            </property>
-           <property name="styleSheet">
-            <string notr="true">background:rgb(255,255,255);</string>
-           </property>
            <property name="text">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;TEXT&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
@@ -266,16 +254,8 @@
                 <pointsize>12</pointsize>
                </font>
               </property>
-              <property name="styleSheet">
-               <string notr="true">QPushButton {
-	border: none;
-	border-radius: 15px;
-	background-color: rgb(64,144,253);
-}
-QPushButton:hover {
-	background-color: rgb(255,255,255);
-	border: 2px solid rgb(0, 0, 0);
-}</string>
+              <property name="focusPolicy">
+               <enum>Qt::NoFocus</enum>
               </property>
               <property name="text">
                <string>Go to correct</string>

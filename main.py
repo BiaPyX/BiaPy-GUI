@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import darkdetect
 from platformdirs import user_cache_dir
 import logging
 import traceback
@@ -23,7 +24,7 @@ from ui.aux_windows import dialog_Ui, workflow_explanation_Ui, yes_no_Ui, spinne
 os.environ['QT_MAC_WANTS_LAYER'] = '1'
 
 class MainWindow(QMainWindow):
-    def __init__(self, logger, log_info):
+    def __init__(self, logger, log_info, theme):
         """ 
         Main window constructor. 
 
@@ -42,6 +43,7 @@ class MainWindow(QMainWindow):
         self.logger = logger
         self.log_info = log_info
         self.cfg = Settings()
+        self.theme = theme 
 
         self.workflow_view_queue = None
         self.observer1 = None
@@ -1041,13 +1043,18 @@ def center_window(widget, geometry):
             geometry,
         ),
     )
-   
+
 if __name__ == "__main__":
     # os.environ["QT_SCALE_FACTOR"] = "1"
     os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
     app = QApplication(sys.argv)
-    qdarktheme.setup_theme("light")
-    
+
+    # Setup theme
+    theme = "light" # force light theme
+    qdarktheme.setup_theme(theme)
+    system_theme = darkdetect.theme().lower()
+    print(f"System theme detected: {system_theme} ; Forced theme: {theme}")
+
     splash = QSplashScreen(
         QPixmap(resource_path(os.path.join("images","splash_screen","biapy_splash_logo.png"))),
         Qt.WindowStaysOnTopHint)
@@ -1084,18 +1091,8 @@ if __name__ == "__main__":
     console.setFormatter(formatter)
     logging.getLogger('').addHandler(console)
 
-    StyleSheet = """ 
-        QComboBox {
-            selection-background-color: rgb(64,144,253);
-        }
-        QFrame:disabled {
-        background-color:#000000;
-        }
-        """
-
     app.setWindowIcon(QIcon(resource_path(os.path.join("images","splash_screen","biapy_logo_icon.ico"))))
-    app.setStyleSheet(StyleSheet)
-    app.setStyle("Fusion")
+
     # For disabling wheel in combo boxes
     class WheelEventFilter(QtCore.QObject):
         def eventFilter(self, obj, ev):
@@ -1105,7 +1102,7 @@ if __name__ == "__main__":
     filter = WheelEventFilter()
     app.installEventFilter(filter)
 
-    window = MainWindow(logger, log_info)
+    window = MainWindow(logger, log_info, system_theme)
     window.show()
     splash.finish(window)
 

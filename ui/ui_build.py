@@ -26,7 +26,6 @@ class Ui_BuildBiaPy(object):
         BuildBiaPy.resize(550, 520)
         BuildBiaPy.setMinimumSize(QSize(550, 520))
         BuildBiaPy.setMaximumSize(QSize(550, 520))
-        BuildBiaPy.setStyleSheet(u"background:rgb(255,255,255);")
         self.verticalLayout = QVBoxLayout(BuildBiaPy)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(u"verticalLayout")
@@ -84,9 +83,6 @@ class Ui_BuildBiaPy(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgba(0,0,0,0);\n"
 "}")
-        icon = QIcon()
-        icon.addFile(u"images/bn_images/hide_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.bn_min.setIcon(icon)
         self.bn_min.setIconSize(QSize(22, 12))
         self.bn_min.setAutoDefault(False)
         self.bn_min.setFlat(True)
@@ -107,9 +103,6 @@ class Ui_BuildBiaPy(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgba(0,0,0,0);\n"
 "}")
-        icon1 = QIcon()
-        icon1.addFile(u"images/bn_images/close_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.bn_close.setIcon(icon1)
         self.bn_close.setIconSize(QSize(22, 22))
         self.bn_close.setAutoDefault(False)
         self.bn_close.setFlat(True)

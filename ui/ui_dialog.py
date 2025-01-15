@@ -26,14 +26,12 @@ class Ui_Dialog(object):
         Dialog.resize(507, 247)
         Dialog.setMinimumSize(QSize(0, 0))
         Dialog.setMaximumSize(QSize(16777215, 16777215))
-        Dialog.setStyleSheet(u"background:rgb(255,255,255);")
         self.verticalLayout = QVBoxLayout(Dialog)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.centralwidget = QFrame(Dialog)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.centralwidget.setStyleSheet(u"background:rgb(255,255,255);")
         self.centralwidget.setFrameShape(QFrame.NoFrame)
         self.centralwidget.setFrameShadow(QFrame.Plain)
         self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
@@ -44,7 +42,6 @@ class Ui_Dialog(object):
         self.frame_top.setObjectName(u"frame_top")
         self.frame_top.setMinimumSize(QSize(0, 40))
         self.frame_top.setMaximumSize(QSize(16777215, 40))
-        self.frame_top.setStyleSheet(u"background:rgb(255,255,255);")
         self.frame_top.setFrameShape(QFrame.NoFrame)
         self.frame_top.setFrameShadow(QFrame.Plain)
         self.horizontalLayout = QHBoxLayout(self.frame_top)
@@ -89,7 +86,6 @@ class Ui_Dialog(object):
         self.error_message_label = QLabel(self.frame_bottom)
         self.error_message_label.setObjectName(u"error_message_label")
         self.error_message_label.setFont(font)
-        self.error_message_label.setStyleSheet(u"background:rgb(255,255,255);")
         self.error_message_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.error_message_label.setWordWrap(False)
         self.error_message_label.setOpenExternalLinks(True)
@@ -110,15 +106,7 @@ class Ui_Dialog(object):
         self.go_to_correct_bn.setMinimumSize(QSize(150, 30))
         self.go_to_correct_bn.setMaximumSize(QSize(150, 16777215))
         self.go_to_correct_bn.setFont(font)
-        self.go_to_correct_bn.setStyleSheet(u"QPushButton {\n"
-"	border: none;\n"
-"	border-radius: 15px;\n"
-"	background-color: rgb(64,144,253);\n"
-"}\n"
-"QPushButton:hover {\n"
-"	background-color: rgb(255,255,255);\n"
-"	border: 2px solid rgb(0, 0, 0);\n"
-"}")
+        self.go_to_correct_bn.setFocusPolicy(Qt.NoFocus)
 
         self.horizontalLayout_2.addWidget(self.go_to_correct_bn)
 
