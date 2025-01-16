@@ -23,7 +23,7 @@ class workflow_explanation_Ui(QDialog):
         super(workflow_explanation_Ui, self).__init__(parent)
         self.workflow_info_window = Ui_Workflow_info()
         self.workflow_info_window.setupUi(self)
-        self.setWindowFlags(Qt.Window | Qt.FramelessWindowHint)
+        self.setWindowFlags(Qt.Window | Qt.FramelessWindowHint | Qt.WindowMinimizeButtonHint)
         self.workflow_info_window.bn_close.clicked.connect(self.close)
         self.workflow_info_window.bn_close.setIcon(self.style().standardIcon(QStyle.StandardPixmap.SP_TitleBarCloseButton))
         self.workflow_info_window.ok_bn.clicked.connect(self.close)
@@ -182,7 +182,7 @@ class dialog_Ui(QDialog):
         self.original_width = self.geometry().width()
         self.parent_ui = parent_ui
         self.dialog_window.setupUi(self)
-        self.setWindowFlags(QtCore.Qt.FramelessWindowHint) 
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint | Qt.WindowMinimizeButtonHint) 
         self.upbar_icon = [QPixmap(resource_path(os.path.join("images","bn_images","error.png"))),
                            QPixmap(resource_path(os.path.join("images","bn_images","info.png")))]
         self.dragPos = self.pos()  
@@ -290,7 +290,7 @@ class yes_no_Ui(QDialog):
         super(yes_no_Ui, self).__init__(parent)
         self.yes_no_window = Ui_yes_no()
         self.yes_no_window.setupUi(self)
-        self.setWindowFlags(QtCore.Qt.FramelessWindowHint) 
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint | Qt.WindowMinimizeButtonHint) 
         self.yes_no_window.yes_bn.clicked.connect(lambda: self.submitclose(True))
         self.yes_no_window.no_bn.clicked.connect(lambda: self.submitclose(False))
         self.yes_no_window.icon_label.setPixmap(QPixmap(resource_path(os.path.join("images","bn_images","question.png"))))
@@ -324,7 +324,7 @@ class spinner_Ui(QDialog):
         self.spinner.setColor(QColor(64,144,253))
         self.spinner_window.verticalLayout.addWidget(self.spinner)
         
-        self.setWindowFlags(QtCore.Qt.FramelessWindowHint) 
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint | Qt.WindowMinimizeButtonHint) 
         self.setAttribute(Qt.WA_TranslucentBackground)
 
     def stop(self):
@@ -347,7 +347,7 @@ class basic_Ui(QDialog):
         super(basic_Ui, self).__init__(parent)
         self.basic_window = Ui_basic()
         self.basic_window.setupUi(self)
-        self.setWindowFlags(QtCore.Qt.FramelessWindowHint) 
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint | Qt.WindowMinimizeButtonHint) 
         self.basic_window.bn_close.clicked.connect(self.close)
         self.basic_window.ok_bn.clicked.connect(self.close)
         self.basic_window.bn_close.setIcon(self.style().standardIcon(QStyle.StandardPixmap.SP_TitleBarCloseButton))
@@ -366,7 +366,7 @@ class model_card_carrousel_Ui(QDialog):
         super(model_card_carrousel_Ui, self).__init__()
         self.model_carrousel_window = Ui_model_card_carrousel_dialog()
         self.model_carrousel_window.setupUi(self)
-        self.setWindowFlags(QtCore.Qt.FramelessWindowHint) 
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint | Qt.WindowMinimizeButtonHint) 
         self.model_carrousel_window.bn_close.clicked.connect(self.close)
         self.model_carrousel_window.bn_close.setIcon(self.style().standardIcon(QStyle.StandardPixmap.SP_TitleBarCloseButton))
         self.model_carrousel_window.icon_label.setPixmap(QPixmap(resource_path(os.path.join("images","bn_images","info.png"))))
@@ -538,7 +538,7 @@ class tour_window_Ui(QDialog):
         super(tour_window_Ui, self).__init__(parent)
         self.basic_window = Ui_tour_window()
         self.basic_window.setupUi(self)
-        self.setWindowFlags(Qt.Window | Qt.FramelessWindowHint)
+        self.setWindowFlags(Qt.Window | Qt.FramelessWindowHint | Qt.WindowMinimizeButtonHint)
         self.basic_window.bn_close.clicked.connect(self.close)
         self.basic_window.bn_close.setIcon(self.style().standardIcon(QStyle.StandardPixmap.SP_TitleBarCloseButton))
         self.basic_window.ok_bn.clicked.connect(self.close)

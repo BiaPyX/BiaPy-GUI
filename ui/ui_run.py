@@ -77,8 +77,8 @@ class Ui_RunBiaPy(object):
 
         self.bn_min = QPushButton(self.frame_top)
         self.bn_min.setObjectName(u"bn_min")
-        self.bn_min.setMinimumSize(QSize(55, 40))
-        self.bn_min.setMaximumSize(QSize(55, 40))
+        self.bn_min.setMinimumSize(QSize(55, 35))
+        self.bn_min.setMaximumSize(QSize(55, 35))
         self.bn_min.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgba(0,0,0,0);\n"
@@ -97,8 +97,8 @@ class Ui_RunBiaPy(object):
 
         self.bn_close = QPushButton(self.frame_top)
         self.bn_close.setObjectName(u"bn_close")
-        self.bn_close.setMinimumSize(QSize(55, 40))
-        self.bn_close.setMaximumSize(QSize(55, 40))
+        self.bn_close.setMinimumSize(QSize(55, 35))
+        self.bn_close.setMaximumSize(QSize(55, 35))
         self.bn_close.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgba(0,0,0,0);\n"

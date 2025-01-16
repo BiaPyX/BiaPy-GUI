@@ -24,7 +24,7 @@ class runBiaPy_Ui(QDialog):
         self.run_window = Ui_RunBiaPy()
         self.parent_worker = parent_worker
         self.run_window.setupUi(self)
-        self.setWindowFlags(QtCore.Qt.FramelessWindowHint) 
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint | Qt.WindowMinimizeButtonHint) 
         self.run_window.bn_min.clicked.connect(self.showMinimized)
         self.run_window.bn_close.clicked.connect(self.close)
         self.run_window.bn_close.setIcon(self.style().standardIcon(QStyle.StandardPixmap.SP_TitleBarCloseButton))

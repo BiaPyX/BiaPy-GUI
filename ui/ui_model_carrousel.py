@@ -73,8 +73,8 @@ class Ui_model_card_carrousel_dialog(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.bn_close.sizePolicy().hasHeightForWidth())
         self.bn_close.setSizePolicy(sizePolicy)
-        self.bn_close.setMinimumSize(QSize(55, 40))
-        self.bn_close.setMaximumSize(QSize(55, 40))
+        self.bn_close.setMinimumSize(QSize(55, 35))
+        self.bn_close.setMaximumSize(QSize(55, 35))
         self.bn_close.setStyleSheet(u"QPushButton {\n"
 "	border: none;\n"
 "	background-color: rgba(0,0,0,0);\n"

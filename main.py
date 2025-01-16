@@ -61,7 +61,7 @@ class MainWindow(QMainWindow):
                 
         self.setWindowTitle("BiaPy") 
         UIFunction.initStackTab(self)
-        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint | Qt.WindowMinimizeButtonHint)
         self.ui.bn_min.clicked.connect(self.showMinimized)
         self.ui.bn_close.clicked.connect(self.close)
 
