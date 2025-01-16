@@ -164,16 +164,18 @@ class Ui_RunBiaPy(object):
         self.container_pulling_frame.setObjectName(u"container_pulling_frame")
         self.container_pulling_frame.setFrameShape(QFrame.NoFrame)
         self.container_pulling_frame.setFrameShadow(QFrame.Raised)
-        self.gridLayout_3 = QGridLayout(self.container_pulling_frame)
+        self.verticalLayout_6 = QVBoxLayout(self.container_pulling_frame)
+        self.verticalLayout_6.setSpacing(0)
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
+        self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.container_pulling_download_frame = QFrame(self.container_pulling_frame)
+        self.container_pulling_download_frame.setObjectName(u"container_pulling_download_frame")
+        self.container_pulling_download_frame.setFrameShape(QFrame.NoFrame)
+        self.container_pulling_download_frame.setFrameShadow(QFrame.Raised)
+        self.gridLayout_3 = QGridLayout(self.container_pulling_download_frame)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.gridLayout_3.setContentsMargins(30, 9, -1, -1)
-        self.downloading_label = QLabel(self.container_pulling_frame)
-        self.downloading_label.setObjectName(u"downloading_label")
-        self.downloading_label.setFont(font)
-
-        self.gridLayout_3.addWidget(self.downloading_label, 1, 1, 1, 1)
-
-        self.biapy_image_downloading_progress_bar = QProgressBar(self.container_pulling_frame)
+        self.biapy_image_downloading_progress_bar = QProgressBar(self.container_pulling_download_frame)
         self.biapy_image_downloading_progress_bar.setObjectName(u"biapy_image_downloading_progress_bar")
         self.biapy_image_downloading_progress_bar.setMaximumSize(QSize(400, 16777215))
         self.biapy_image_downloading_progress_bar.setFont(font)
@@ -181,7 +183,45 @@ class Ui_RunBiaPy(object):
 
         self.gridLayout_3.addWidget(self.biapy_image_downloading_progress_bar, 1, 2, 1, 1)
 
-        self.biapy_image_extracting_progress_bar = QProgressBar(self.container_pulling_frame)
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_3.addItem(self.horizontalSpacer_4, 1, 3, 1, 1)
+
+        self.return_icon_label = QLabel(self.container_pulling_download_frame)
+        self.return_icon_label.setObjectName(u"return_icon_label")
+        self.return_icon_label.setMinimumSize(QSize(30, 30))
+        self.return_icon_label.setMaximumSize(QSize(30, 30))
+        self.return_icon_label.setScaledContents(True)
+
+        self.gridLayout_3.addWidget(self.return_icon_label, 1, 0, 1, 1)
+
+        self.downloading_label = QLabel(self.container_pulling_download_frame)
+        self.downloading_label.setObjectName(u"downloading_label")
+        self.downloading_label.setMinimumSize(QSize(120, 0))
+        self.downloading_label.setMaximumSize(QSize(120, 16777215))
+        self.downloading_label.setFont(font)
+
+        self.gridLayout_3.addWidget(self.downloading_label, 1, 1, 1, 1)
+
+
+        self.verticalLayout_6.addWidget(self.container_pulling_download_frame)
+
+        self.container_pulling_extract_frame = QFrame(self.container_pulling_frame)
+        self.container_pulling_extract_frame.setObjectName(u"container_pulling_extract_frame")
+        self.container_pulling_extract_frame.setFrameShape(QFrame.NoFrame)
+        self.container_pulling_extract_frame.setFrameShadow(QFrame.Raised)
+        self.gridLayout_4 = QGridLayout(self.container_pulling_extract_frame)
+        self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.gridLayout_4.setContentsMargins(30, -1, -1, -1)
+        self.return_icon_label_2 = QLabel(self.container_pulling_extract_frame)
+        self.return_icon_label_2.setObjectName(u"return_icon_label_2")
+        self.return_icon_label_2.setMinimumSize(QSize(30, 30))
+        self.return_icon_label_2.setMaximumSize(QSize(30, 30))
+        self.return_icon_label_2.setScaledContents(True)
+
+        self.gridLayout_4.addWidget(self.return_icon_label_2, 0, 0, 1, 1)
+
+        self.biapy_image_extracting_progress_bar = QProgressBar(self.container_pulling_extract_frame)
         self.biapy_image_extracting_progress_bar.setObjectName(u"biapy_image_extracting_progress_bar")
         self.biapy_image_extracting_progress_bar.setMaximumSize(QSize(400, 16777215))
         font2 = QFont()
@@ -190,33 +230,22 @@ class Ui_RunBiaPy(object):
         self.biapy_image_extracting_progress_bar.setFont(font2)
         self.biapy_image_extracting_progress_bar.setValue(24)
 
-        self.gridLayout_3.addWidget(self.biapy_image_extracting_progress_bar, 2, 2, 1, 1)
+        self.gridLayout_4.addWidget(self.biapy_image_extracting_progress_bar, 0, 2, 1, 1)
 
-        self.return_icon_label_2 = QLabel(self.container_pulling_frame)
-        self.return_icon_label_2.setObjectName(u"return_icon_label_2")
-        self.return_icon_label_2.setMinimumSize(QSize(30, 30))
-        self.return_icon_label_2.setMaximumSize(QSize(30, 30))
-        self.return_icon_label_2.setScaledContents(True)
-
-        self.gridLayout_3.addWidget(self.return_icon_label_2, 2, 0, 1, 1)
-
-        self.return_icon_label = QLabel(self.container_pulling_frame)
-        self.return_icon_label.setObjectName(u"return_icon_label")
-        self.return_icon_label.setMinimumSize(QSize(30, 30))
-        self.return_icon_label.setMaximumSize(QSize(30, 30))
-        self.return_icon_label.setScaledContents(True)
-
-        self.gridLayout_3.addWidget(self.return_icon_label, 1, 0, 1, 1)
-
-        self.extracting_label = QLabel(self.container_pulling_frame)
+        self.extracting_label = QLabel(self.container_pulling_extract_frame)
         self.extracting_label.setObjectName(u"extracting_label")
+        self.extracting_label.setMinimumSize(QSize(120, 0))
+        self.extracting_label.setMaximumSize(QSize(120, 16777215))
         self.extracting_label.setFont(font)
 
-        self.gridLayout_3.addWidget(self.extracting_label, 2, 1, 1, 1)
+        self.gridLayout_4.addWidget(self.extracting_label, 0, 1, 1, 1)
 
-        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.gridLayout_3.addItem(self.horizontalSpacer_4, 1, 3, 1, 1)
+        self.gridLayout_4.addItem(self.horizontalSpacer_5, 0, 3, 1, 1)
+
+
+        self.verticalLayout_6.addWidget(self.container_pulling_extract_frame)
 
 
         self.verticalLayout_4.addWidget(self.container_pulling_frame)
@@ -229,7 +258,7 @@ class Ui_RunBiaPy(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 921, 121))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 907, 159))
         self.verticalLayout_5 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.biapy_container_info_label = QLabel(self.scrollAreaWidgetContents)
@@ -242,6 +271,14 @@ class Ui_RunBiaPy(object):
         self.biapy_container_info_label.setTextInteractionFlags(Qt.LinksAccessibleByKeyboard|Qt.LinksAccessibleByMouse|Qt.TextBrowserInteraction|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
         self.verticalLayout_5.addWidget(self.biapy_container_info_label)
+
+        self.spin_label = QLabel(self.scrollAreaWidgetContents)
+        self.spin_label.setObjectName(u"spin_label")
+        self.spin_label.setMinimumSize(QSize(70, 70))
+        self.spin_label.setMaximumSize(QSize(70, 70))
+        self.spin_label.setScaledContents(True)
+
+        self.verticalLayout_5.addWidget(self.spin_label, 0, Qt.AlignHCenter|Qt.AlignVCenter)
 
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
@@ -401,12 +438,13 @@ class Ui_RunBiaPy(object):
         self.bn_min.setText("")
         self.bn_close.setText("")
         self.biapy_image_status.setText(QCoreApplication.translate("RunBiaPy", u"BiaPy image [ ]", None))
-        self.image_prep_title_label.setText(QCoreApplication.translate("RunBiaPy", u"Preparing BiaPy image (only done once) - Total GB: ", None))
+        self.image_prep_title_label.setText(QCoreApplication.translate("RunBiaPy", u"Preparing BiaPy image (only done once) - Total approx. size GB: ", None))
+        self.return_icon_label.setText("")
         self.downloading_label.setText(QCoreApplication.translate("RunBiaPy", u"Downloading ", None))
         self.return_icon_label_2.setText("")
-        self.return_icon_label.setText("")
         self.extracting_label.setText(QCoreApplication.translate("RunBiaPy", u"Extracting ", None))
         self.biapy_container_info_label.setText(QCoreApplication.translate("RunBiaPy", u"INITIALIZING . . . (this may take a while)", None))
+        self.spin_label.setText("")
         self.container_state_label.setText(QCoreApplication.translate("RunBiaPy", u"BiaPy state [  ]", None))
         self.stop_container_bn.setText(QCoreApplication.translate("RunBiaPy", u"Stop", None))
         self.test_progress_label.setText(QCoreApplication.translate("RunBiaPy", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Test</span></p><p align=\"center\"><span style=\" font-size:12pt;\">phase</span></p></body></html>", None))

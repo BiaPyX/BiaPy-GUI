@@ -10,7 +10,7 @@ from pathlib import Path
 
 from PySide6 import QtCore, QtWidgets
 from PySide6.QtCore import Qt, QObject, QUrl
-from PySide6.QtGui import QPixmap
+from PySide6.QtGui import QPixmap, QMovie
 from PySide6.QtWidgets import *
 
 from ui_utils import get_text, resource_path, path_in_list, path_to_linux
@@ -50,6 +50,19 @@ class runBiaPy_Ui(QDialog):
         self.pulling_terminal_buffer = []
         self.run_window.biapy_image_downloading_progress_bar.setMaximum(100)
         self.run_window.biapy_image_extracting_progress_bar.setMaximum(100)
+        self.run_window.container_pulling_extract_frame.setVisible(False)
+        self.log_lines = 23
+
+        # Initializing spin
+        self.run_window.spin_label.setVisible(False)
+        self.loading_spin = QMovie(
+            resource_path(os.path.join("images", "circle_loader.gif"))
+        )
+        self.run_window.spin_label.setPixmap(self.loading_spin.currentPixmap())  
+        def update_spin(j):
+            self.run_window.spin_label.setPixmap(self.loading_spin.currentPixmap())   
+        self.loading_spin.start()
+        self.loading_spin.frameChanged.connect(update_spin)
 
     def center_window(self, widget, geometry):
         window = widget.window()
@@ -104,7 +117,7 @@ class runBiaPy_Ui(QDialog):
     def update_log(self):
         finished_good = False
         with open(self.parent_worker.container_stdout_file, 'r', encoding='utf8') as f:
-            last_lines = f.readlines()[-20:]
+            last_lines = f.readlines()[-self.log_lines:]
             last_lines = ''.join(last_lines).replace("\x08", "").replace("[A", "").replace("", "")           
             self.run_window.run_biapy_log.setText(str(last_lines))
             if "FINISHED JOB" in last_lines:
@@ -160,22 +173,27 @@ class runBiaPy_Ui(QDialog):
         self.run_window.biapy_image_extracting_progress_bar.setMaximum(max(10,len(self.parent_worker.extract_total_layers)*10))
         self.run_window.biapy_image_extracting_progress_bar.setValue(e_value)
 
+        if d_value > 99 and e_value > 99:
+            self.run_window.spin_label.setVisible(True)
+
         # Update terminal-like label
         self.pulling_terminal_buffer.append(item)
-        if len(self.pulling_terminal_buffer) > 23:
+        if len(self.pulling_terminal_buffer) > self.log_lines:
             self.pulling_terminal_buffer.pop(0) 
         self.run_window.run_biapy_log.setText("\n".join(self.pulling_terminal_buffer))
 
 
     def pulling_progress(self, value):
-        if value == 0: # Start of the pulling process 
+        if value == 0: # Start download process 
             self.run_window.image_prep_title_label.setVisible(True)
-            self.run_window.image_prep_title_label.setText("Preparing BiaPy image (only done once) - Total size: {}"
+            self.run_window.image_prep_title_label.setText("Preparing BiaPy image (only done once) - Total approx. size: {}"
                 .format(self.parent_worker.main_gui.cfg.settings['biapy_container_size']))
             self.run_window.biapy_image_status.setText("BiaPy image [ <span style=\"color:orange;\"> Pulling </span> ]")
             self.run_window.container_pulling_frame.setVisible(True)
             self.run_window.biapy_container_info_label.setText("Please wait for the image to download fully. Occasionally, parts of the container may be downloaded twice, causing the progress bar to move backward slightly.")
             self.run_window.terminal_upper_label.setText("Downloading and unpacking log")
+        elif value == 1: # Start extracting process 
+            self.run_window.container_pulling_extract_frame.setVisible(True)
         else: # end
             self.run_window.container_pulling_frame.setVisible(False)
             self.run_window.image_prep_title_label.setVisible(False)
@@ -183,6 +201,7 @@ class runBiaPy_Ui(QDialog):
             self.run_window.biapy_container_info_label.setText("INITIALIZING . . . (this may take a while)")
             self.run_window.run_biapy_log.setText("Please wait, the first screen update may take a while depending on your OS")
             self.run_window.terminal_upper_label.setText("Last lines of the log (updating every 3 seconds):")
+            self.run_window.spin_label.setVisible(True)
 
     def mousePressEvent(self, event):
         self.dragPos = event.globalPos()
@@ -252,6 +271,7 @@ class run_worker(QObject):
             
     def init_gui(self):
         self.gui.init_log(self.container_info)
+        self.gui.run_window.spin_label.setVisible(False)
         if self.config['TRAIN']['ENABLE']:
             self.gui.run_window.train_epochs_label.setText("<html><head/><body><p align=\"center\"><span \
                 style=\"font-size:12pt;\">Epochs</span></p><p align=\"center\"><span \
@@ -276,6 +296,7 @@ class run_worker(QObject):
             self.extract_total_layers = {}
             problem_attempts = 0
             json_orig_data = None
+            extracting_bar_activated = False
             if self.use_local_biapy_image:
                 self.main_gui.logger.info("Using local BiaPy image")
                 self.docker_client = docker.from_env() # Necessary
@@ -292,6 +313,9 @@ class run_worker(QObject):
                             elif item["status"] == "Downloading":
                                 self.download_total_layers[item["id"]+"_download"] = item["progressDetail"]['current']/item["progressDetail"]['total']
                             elif item["status"] == "Extracting": 
+                                if not extracting_bar_activated:
+                                    extracting_bar_activated = True
+                                    self.update_pulling_signal.emit(1)
                                 self.extract_total_layers[item["id"]+"_extract"] = item["progressDetail"]['current']/item["progressDetail"]['total']
                             elif item["status"] == 'Download complete': 
                                 self.download_total_layers[item["id"]+"_download"] = 1
@@ -304,7 +328,10 @@ class run_worker(QObject):
                             
                             # Update GUI 
                             d_steps = np.sum([int(float(x)*10) for x in self.download_total_layers.values()])
-                            e_steps = np.sum([int(float(x)*10) for x in self.extract_total_layers.values()])
+                            if extracting_bar_activated:
+                                e_steps = np.sum([int(float(x)*10) for x in self.extract_total_layers.values()])
+                            else:
+                                e_steps = 100
                             self.update_pulling_progress_signal.emit(d_steps, e_steps, str(item))
                     except Exception as e:
                         problem_attempts += 1
@@ -368,7 +395,7 @@ class run_worker(QObject):
                     with open(Path.home() / ".docker" / "config.json", "w", encoding='utf8') as jsonFile:
                         json.dump(json_orig_data, jsonFile, indent=4)
 
-            self.update_pulling_signal.emit(1)     
+            self.update_pulling_signal.emit(2)     
 
             #################
             # RUN CONTAINER #
