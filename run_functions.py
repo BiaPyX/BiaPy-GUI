@@ -95,6 +95,7 @@ class runBiaPy_Ui(QDialog):
 
     def kill_all_processes(self):
         self.parent_worker.stop_worker()
+        self.run_window.spin_label.setVisible(False)
         try:
             self.parent_worker.finished_signal.emit()
         except Exception as e:
@@ -166,14 +167,17 @@ class runBiaPy_Ui(QDialog):
             self.parent_worker.test_files)+"</span></p></body></html>") 
         
     def update_pulling_progress(self, d_value, e_value, item):
+        dmax = max(10,len(self.parent_worker.download_total_layers)*10)
+        emax = max(10,len(self.parent_worker.extract_total_layers)*10)
+        
         # Download process
-        self.run_window.biapy_image_downloading_progress_bar.setMaximum(max(10,len(self.parent_worker.download_total_layers)*10))
+        self.run_window.biapy_image_downloading_progress_bar.setMaximum(dmax)
         self.run_window.biapy_image_downloading_progress_bar.setValue(d_value)
         # Extracting process
-        self.run_window.biapy_image_extracting_progress_bar.setMaximum(max(10,len(self.parent_worker.extract_total_layers)*10))
+        self.run_window.biapy_image_extracting_progress_bar.setMaximum(emax)
         self.run_window.biapy_image_extracting_progress_bar.setValue(e_value)
 
-        if d_value > 99 and e_value > 99:
+        if d_value/dmax > 0.99 and e_value/emax > 0.99:
             self.run_window.spin_label.setVisible(True)
 
         # Update terminal-like label
