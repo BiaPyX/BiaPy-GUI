@@ -983,15 +983,12 @@ def export_wizard_summary(main_window):
             main_window.dialog_exec(f"Incompatibility found: data provided seems to have {data_imposed_classes} classes whereas "
                 f"the pretrained model is prepared to work with {model_imposed_classes} classes. Please select another pretrained model.", reason="error")
             return
-            
+
         # Special variables that need to be processed
         # Constraints imposed by the model. Patch size will be determined by the model
         if "model_restrictions" in biapy_cfg:
             for key, value in biapy_cfg["model_restrictions"].items():
-                if "PATCH_SIZE_C" in key:
-                    biapy_cfg["DATA.PATCH_SIZE"] = biapy_cfg["DATA.PATCH_SIZE"][:-1]+(value,)
-                else:
-                    biapy_cfg[key] = value
+                biapy_cfg[key] = value
             del biapy_cfg["DATA.PATCH_SIZE_Z"]
             del biapy_cfg["DATA.PATCH_SIZE_XY"]
             del biapy_cfg["model_restrictions"]
@@ -1284,7 +1281,8 @@ def set_default_config(cfg, gpu_info, sample_info):
     # TEST PARAMETERS #
     ###################
     if cfg['TEST']['ENABLE']:
-        cfg['TEST']['FULL_IMG'] = False
+        if 'FULL_IMG' not in cfg['TEST']:
+            cfg['TEST']['FULL_IMG'] = False
 
     ############################
     # WORKFLOW SPECIFIC CONFIG #

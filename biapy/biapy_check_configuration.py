@@ -1951,6 +1951,18 @@ def check_torchvision_available_models(workflow, ndim):
     for i in range(len(models)):
         if len(model_restrictions) == i:
             model_restrictions.append({})
+        if "DATA.PATCH_SIZE_XY" not in model_restrictions[i]:
+            model_restrictions[i]["DATA.PATCH_SIZE_XY"] = (256,256)
+        if "DATA.PATCH_SIZE_C" not in model_restrictions[i]:
+            model_restrictions[i]["DATA.PATCH_SIZE_C"] = 1
+
+        model_restrictions[i]["DATA.PATCH_SIZE"] = (
+            model_restrictions[i]["DATA.PATCH_SIZE_XY"] 
+            + (model_restrictions[i]["DATA.PATCH_SIZE_C"],)
+        )
+        del model_restrictions[i]["DATA.PATCH_SIZE_XY"]
+        del model_restrictions[i]["DATA.PATCH_SIZE_C"]
+
         model_restrictions[i]["PROBLEM.NDIM"] = "2D"
         model_restrictions[i]["TEST.ANALIZE_2D_IMGS_AS_3D_STACK"] = False
         model_restrictions[i]["TEST.AUGMENTATION"] = False
