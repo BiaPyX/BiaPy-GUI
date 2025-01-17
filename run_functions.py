@@ -335,7 +335,7 @@ class run_worker(QObject):
                             if extracting_bar_activated:
                                 e_steps = np.sum([int(float(x)*10) for x in self.extract_total_layers.values()])
                             else:
-                                e_steps = 100
+                                e_steps = max(10,len(self.extract_total_layers)*10)
                             self.update_pulling_progress_signal.emit(d_steps, e_steps, str(item))
                     except Exception as e:
                         problem_attempts += 1
