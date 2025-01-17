@@ -1795,29 +1795,15 @@ def check_torchvision_available_models(workflow, ndim):
             "fcn_resnet50",
             "lraspp_mobilenet_v3_large",
         ]
-        model_restrictions_description = [
-            "- Images must be RGB\n", 
-            "", 
-            "", 
-            "", 
-            "", 
-            ""
-        ]
-        model_restrictions = [
-            {"DATA.PATCH_SIZE_C": 3},
-            {}, 
-            {},
-            {},
-            {},
-            {},
-        ]
+        model_restrictions_description = ["- Images must be RGB\n"]*len(models) 
+        model_restrictions = [{"DATA.PATCH_SIZE_C": 3}]*len(models) 
     elif workflow == "INSTANCE_SEG":
         models = [
             "maskrcnn_resnet50_fpn",
             "maskrcnn_resnet50_fpn_v2",
         ]
-        model_restrictions_description = ["- Only available for testing\n"]*len(models) 
-        model_restrictions = [{"TRAIN.ENABLE": False}]*len(models)  
+        model_restrictions_description = ["- Only available for testing\n- Images must be RGB\n"]*len(models) 
+        model_restrictions = [{"TRAIN.ENABLE": False, "DATA.PATCH_SIZE_C": 3}]*len(models)  
     elif workflow == "DETECTION":
         models = [
             "fasterrcnn_mobilenet_v3_large_320_fpn",
@@ -1830,8 +1816,8 @@ def check_torchvision_available_models(workflow, ndim):
             "retinanet_resnet50_fpn",
             "retinanet_resnet50_fpn_v2",
         ]
-        model_restrictions_description = ["- Only available for testing\n"]*len(models) 
-        model_restrictions = [{"TRAIN.ENABLE": False}]*len(models) 
+        model_restrictions_description = ["- Only available for testing\n- Images must be RGB\n"]*len(models) 
+        model_restrictions = [{"TRAIN.ENABLE": False, "DATA.PATCH_SIZE_C": 3,}]*len(models) 
     elif workflow == "SUPER_RESOLUTION":
         models = []
         model_restrictions_description = []
@@ -1944,8 +1930,8 @@ def check_torchvision_available_models(workflow, ndim):
             "wide_resnet101_2",
             "wide_resnet50_2",
         ]
-        model_restrictions_description = []
-        model_restrictions = []
+        model_restrictions_description = ["- Images must be RGB\n"]*len(models)
+        model_restrictions = [{"DATA.PATCH_SIZE_C": 3,}]*len(models) 
 
     # Add common restrictions for all workflows
     for i in range(len(models)):
