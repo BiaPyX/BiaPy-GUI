@@ -568,7 +568,6 @@ class run_worker(QObject):
                 self.gui.run_window.test_progress_bar.setVisible(False)
                 self.gui.run_window.test_files_label.setVisible(False)
             else:
-                self.test_filenames = sorted(next(os.walk(self.config['DATA']['TEST']['PATH']))[2])
                 self.test_files = len(sorted(next(os.walk(self.config['DATA']['TEST']['PATH']))[2]))
                 self.gui.run_window.test_progress_bar.setMaximum(self.test_files)
             
@@ -707,7 +706,7 @@ class run_worker(QObject):
                     
                 # Update test progress bar
                 if self.config['TEST']['ENABLE'] and start_test and self.test_image_count < self.test_files and \
-                    "Processing image: {}".format(self.test_filenames[self.test_image_count]) in l: 
+                    "Processing image: " in l: 
                     self.test_image_count += 1
                     self.update_test_progress_signal.emit(self.test_image_count)
 
