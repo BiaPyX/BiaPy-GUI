@@ -18,6 +18,7 @@ from pathlib import PurePath, Path, PureWindowsPath
 from packaging.version import Version
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
+import collections.abc
 
 from PySide6 import QtCore
 from PySide6.QtCore import QObject, QThread
@@ -100,7 +101,10 @@ def check_data_from_path(main_window):
                 if "data_constraints" not in main_window.cfg.settings["wizard_answers"]:
                     main_window.cfg.settings["wizard_answers"]["data_constraints"] = data_constraints
                 else:
-                    main_window.cfg.settings["wizard_answers"]["data_constraints"].update(data_constraints)
+                    main_window.cfg.settings["wizard_answers"]["data_constraints"] = update_dict(
+                        main_window.cfg.settings["wizard_answers"]["data_constraints"],
+                        data_constraints
+                    )
                 main_window.cfg.settings["wizard_answers"][f"CHECKED {key}"] = 1
                 set_text(main_window.ui.wizard_data_checked_label, "<span style='color:#04aa6d'>Data checked!</span>")
 
@@ -2493,97 +2497,100 @@ def create_yaml_file(main_window):
 
     # Model definition
     biapy_config['MODEL'] = {}
-    model_name = main_window.cfg.translate_model_names(get_text(main_window.ui.MODEL__ARCHITECTURE__INPUT), get_text(main_window.ui.PROBLEM__NDIM__INPUT))
-    biapy_config['MODEL']['ARCHITECTURE'] = model_name
-    if model_name in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet']:
-        try:
-            biapy_config['MODEL']['FEATURE_MAPS'] = ast.literal_eval(get_text(main_window.ui.MODEL__FEATURE_MAPS__INPUT))
-        except: 
-            main_window.dialog_exec("There was an error in model's feature maps field (MODEL.FEATURE_MAPS). Please check its syntax!", reason="error")
-            return True, False
-        try:
-            biapy_config['MODEL']['DROPOUT_VALUES'] = ast.literal_eval(get_text(main_window.ui.MODEL__DROPOUT_VALUES__INPUT)) 
-        except: 
-            main_window.dialog_exec("There was an error in model's dropout values field (MODEL.DROPOUT_VALUES). Please check its syntax!", reason="error")
-            return True, False
-        if get_text(main_window.ui.MODEL__NORMALIZATION__INPUT) != "bn":
-            biapy_config['MODEL']['NORMALIZATION'] = get_text(main_window.ui.MODEL__NORMALIZATION__INPUT) 
-        if int(get_text(main_window.ui.MODEL__KERNEL_SIZE__INPUT)) != 3:
-            biapy_config['MODEL']['KERNEL_SIZE'] = int(get_text(main_window.ui.MODEL__KERNEL_SIZE__INPUT))
-        if get_text(main_window.ui.MODEL__UPSAMPLE_LAYER__INPUT) != "convtranspose":
-            biapy_config['MODEL']['UPSAMPLE_LAYER'] = get_text(main_window.ui.MODEL__UPSAMPLE_LAYER__INPUT) 
-        if get_text(main_window.ui.MODEL__ACTIVATION__INPUT) != 'elu':
-            biapy_config['MODEL']['ACTIVATION'] = get_text(main_window.ui.MODEL__ACTIVATION__INPUT)
-        if get_text(main_window.ui.MODEL__LAST_ACTIVATION__INPUT) != 'sigmoid':
-            biapy_config['MODEL']['LAST_ACTIVATION'] = get_text(main_window.ui.MODEL__LAST_ACTIVATION__INPUT)
-        if get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "3D":
+    if not (get_text(main_window.ui.LOAD_PRETRAINED_MODEL__INPUT) == "Yes" 
+        and get_text(main_window.ui.MODEL__SOURCE__INPUT) != "I have a model trained with BiaPy"
+    ):
+        model_name = main_window.cfg.translate_model_names(get_text(main_window.ui.MODEL__ARCHITECTURE__INPUT), get_text(main_window.ui.PROBLEM__NDIM__INPUT))
+        biapy_config['MODEL']['ARCHITECTURE'] = model_name
+        if model_name in ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet']:
             try:
-                biapy_config['MODEL']['Z_DOWN'] = ast.literal_eval(get_text(main_window.ui.MODEL__Z_DOWN__INPUT)) 
+                biapy_config['MODEL']['FEATURE_MAPS'] = ast.literal_eval(get_text(main_window.ui.MODEL__FEATURE_MAPS__INPUT))
             except: 
-                main_window.dialog_exec("There was an error in model's z axis downsampling  field (MODEL.Z_DOWN). Please check its syntax!", reason="error")
+                main_window.dialog_exec("There was an error in model's feature maps field (MODEL.FEATURE_MAPS). Please check its syntax!", reason="error")
                 return True, False
-        if get_text(main_window.ui.MODEL__ISOTROPY__INPUT) != "[True, True, True, True, True]":
             try:
-                biapy_config['MODEL']['ISOTROPY'] = ast.literal_eval(get_text(main_window.ui.MODEL__ISOTROPY__INPUT)) 
+                biapy_config['MODEL']['DROPOUT_VALUES'] = ast.literal_eval(get_text(main_window.ui.MODEL__DROPOUT_VALUES__INPUT)) 
             except: 
-                main_window.dialog_exec("There was an error in model's isotropy field (MODEL.ISOTROPY). Please check its syntax!", reason="error")
+                main_window.dialog_exec("There was an error in model's dropout values field (MODEL.DROPOUT_VALUES). Please check its syntax!", reason="error")
                 return True, False
-        if get_text(main_window.ui.MODEL__LAGER_IO__INPUT) == "Yes":
-            biapy_config['MODEL']['LAGER_IO'] = True
-        if workflow_key_name == "SUPER_RESOLUTION" and get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "3D": # SR
-            r = "pre" if get_text(main_window.ui.MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT) == "Before model" else "post"
-            biapy_config['MODEL']['UNET_SR_UPSAMPLE_POSITION'] = r
-    elif model_name in ["unetr", "mae", "ViT"]:
-        biapy_config['MODEL']['VIT_TOKEN_SIZE'] = int(get_text(main_window.ui.MODEL__VIT_TOKEN_SIZE__INPUT))
-        biapy_config['MODEL']['VIT_EMBED_DIM'] = int(get_text(main_window.ui.MODEL__VIT_EMBED_DIM__INPUT))
-        biapy_config['MODEL']['VIT_NUM_LAYERS'] = int(get_text(main_window.ui.MODEL__VIT_NUM_LAYERS__INPUT))
-        biapy_config['MODEL']['VIT_MLP_RATIO'] = get_text(main_window.ui.MODEL__VIT_MLP_RATIO__INPUT)
-        biapy_config['MODEL']['VIT_NUM_HEADS'] = int(get_text(main_window.ui.MODEL__VIT_NUM_HEADS__INPUT))
-        biapy_config['MODEL']['VIT_NORM_EPS'] = get_text(main_window.ui.MODEL__VIT_NORM_EPS__INPUT)
+            if get_text(main_window.ui.MODEL__NORMALIZATION__INPUT) != "bn":
+                biapy_config['MODEL']['NORMALIZATION'] = get_text(main_window.ui.MODEL__NORMALIZATION__INPUT) 
+            if int(get_text(main_window.ui.MODEL__KERNEL_SIZE__INPUT)) != 3:
+                biapy_config['MODEL']['KERNEL_SIZE'] = int(get_text(main_window.ui.MODEL__KERNEL_SIZE__INPUT))
+            if get_text(main_window.ui.MODEL__UPSAMPLE_LAYER__INPUT) != "convtranspose":
+                biapy_config['MODEL']['UPSAMPLE_LAYER'] = get_text(main_window.ui.MODEL__UPSAMPLE_LAYER__INPUT) 
+            if get_text(main_window.ui.MODEL__ACTIVATION__INPUT) != 'elu':
+                biapy_config['MODEL']['ACTIVATION'] = get_text(main_window.ui.MODEL__ACTIVATION__INPUT)
+            if get_text(main_window.ui.MODEL__LAST_ACTIVATION__INPUT) != 'sigmoid':
+                biapy_config['MODEL']['LAST_ACTIVATION'] = get_text(main_window.ui.MODEL__LAST_ACTIVATION__INPUT)
+            if get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "3D":
+                try:
+                    biapy_config['MODEL']['Z_DOWN'] = ast.literal_eval(get_text(main_window.ui.MODEL__Z_DOWN__INPUT)) 
+                except: 
+                    main_window.dialog_exec("There was an error in model's z axis downsampling  field (MODEL.Z_DOWN). Please check its syntax!", reason="error")
+                    return True, False
+            if get_text(main_window.ui.MODEL__ISOTROPY__INPUT) != "[True, True, True, True, True]":
+                try:
+                    biapy_config['MODEL']['ISOTROPY'] = ast.literal_eval(get_text(main_window.ui.MODEL__ISOTROPY__INPUT)) 
+                except: 
+                    main_window.dialog_exec("There was an error in model's isotropy field (MODEL.ISOTROPY). Please check its syntax!", reason="error")
+                    return True, False
+            if get_text(main_window.ui.MODEL__LAGER_IO__INPUT) == "Yes":
+                biapy_config['MODEL']['LAGER_IO'] = True
+            if workflow_key_name == "SUPER_RESOLUTION" and get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "3D": # SR
+                r = "pre" if get_text(main_window.ui.MODEL__UNET_SR_UPSAMPLE_POSITION__INPUT) == "Before model" else "post"
+                biapy_config['MODEL']['UNET_SR_UPSAMPLE_POSITION'] = r
+        elif model_name in ["unetr", "mae", "ViT"]:
+            biapy_config['MODEL']['VIT_TOKEN_SIZE'] = int(get_text(main_window.ui.MODEL__VIT_TOKEN_SIZE__INPUT))
+            biapy_config['MODEL']['VIT_EMBED_DIM'] = int(get_text(main_window.ui.MODEL__VIT_EMBED_DIM__INPUT))
+            biapy_config['MODEL']['VIT_NUM_LAYERS'] = int(get_text(main_window.ui.MODEL__VIT_NUM_LAYERS__INPUT))
+            biapy_config['MODEL']['VIT_MLP_RATIO'] = get_text(main_window.ui.MODEL__VIT_MLP_RATIO__INPUT)
+            biapy_config['MODEL']['VIT_NUM_HEADS'] = int(get_text(main_window.ui.MODEL__VIT_NUM_HEADS__INPUT))
+            biapy_config['MODEL']['VIT_NORM_EPS'] = get_text(main_window.ui.MODEL__VIT_NORM_EPS__INPUT)
 
-        # UNETR
-        if model_name in "unetr":
-            biapy_config['MODEL']['UNETR_VIT_HIDD_MULT'] = int(get_text(main_window.ui.MODEL__UNETR_VIT_HIDD_MULT__INPUT)) 
-            biapy_config['MODEL']['UNETR_VIT_NUM_FILTERS'] = int(get_text(main_window.ui.MODEL__UNETR_VIT_NUM_FILTERS__INPUT)) 
-            biapy_config['MODEL']['UNETR_DEC_ACTIVATION'] = get_text(main_window.ui.MODEL__UNETR_DEC_ACTIVATION__INPUT)
-            biapy_config['MODEL']['UNETR_DEC_KERNEL_SIZE'] = int(get_text(main_window.ui.MODEL__UNETR_DEC_KERNEL_SIZE__INPUT))
+            # UNETR
+            if model_name in "unetr":
+                biapy_config['MODEL']['UNETR_VIT_HIDD_MULT'] = int(get_text(main_window.ui.MODEL__UNETR_VIT_HIDD_MULT__INPUT)) 
+                biapy_config['MODEL']['UNETR_VIT_NUM_FILTERS'] = int(get_text(main_window.ui.MODEL__UNETR_VIT_NUM_FILTERS__INPUT)) 
+                biapy_config['MODEL']['UNETR_DEC_ACTIVATION'] = get_text(main_window.ui.MODEL__UNETR_DEC_ACTIVATION__INPUT)
+                biapy_config['MODEL']['UNETR_DEC_KERNEL_SIZE'] = int(get_text(main_window.ui.MODEL__UNETR_DEC_KERNEL_SIZE__INPUT))
 
-        # MAE
-        if model_name in "mae":
-            biapy_config['MODEL']['MAE_MASK_TYPE'] = get_text(main_window.ui.MODEL__MAE_MASK_TYPE__INPUT)
-            if get_text(main_window.ui.MODEL__MAE_MASK_TYPE__INPUT) == "random":
-                biapy_config['MODEL']['MAE_MASK_RATIO'] = float(get_text(main_window.ui.MODEL__MAE_MASK_RATIO__INPUT))
-            biapy_config['MODEL']['MAE_DEC_HIDDEN_SIZE'] = int(get_text(main_window.ui.MODEL__MAE_DEC_HIDDEN_SIZE__INPUT)) 
-            biapy_config['MODEL']['MAE_DEC_NUM_LAYERS'] = int(get_text(main_window.ui.MODEL__MAE_DEC_NUM_LAYERS__INPUT)) 
-            biapy_config['MODEL']['MAE_DEC_NUM_HEADS'] = get_text(main_window.ui.MODEL__MAE_DEC_NUM_HEADS__INPUT)
-            biapy_config['MODEL']['MAE_DEC_MLP_DIMS'] = get_text(main_window.ui.MODEL__MAE_DEC_MLP_DIMS__INPUT)
+            # MAE
+            if model_name in "mae":
+                biapy_config['MODEL']['MAE_MASK_TYPE'] = get_text(main_window.ui.MODEL__MAE_MASK_TYPE__INPUT)
+                if get_text(main_window.ui.MODEL__MAE_MASK_TYPE__INPUT) == "random":
+                    biapy_config['MODEL']['MAE_MASK_RATIO'] = float(get_text(main_window.ui.MODEL__MAE_MASK_RATIO__INPUT))
+                biapy_config['MODEL']['MAE_DEC_HIDDEN_SIZE'] = int(get_text(main_window.ui.MODEL__MAE_DEC_HIDDEN_SIZE__INPUT)) 
+                biapy_config['MODEL']['MAE_DEC_NUM_LAYERS'] = int(get_text(main_window.ui.MODEL__MAE_DEC_NUM_LAYERS__INPUT)) 
+                biapy_config['MODEL']['MAE_DEC_NUM_HEADS'] = get_text(main_window.ui.MODEL__MAE_DEC_NUM_HEADS__INPUT)
+                biapy_config['MODEL']['MAE_DEC_MLP_DIMS'] = get_text(main_window.ui.MODEL__MAE_DEC_MLP_DIMS__INPUT)
 
-        # ConvNeXT 
-        if model_name in "unext_v1":
-            try:
-                biapy_config['MODEL']['CONVNEXT_LAYERS'] = ast.literal_eval(get_text(main_window.ui.MODEL__CONVNEXT_LAYERS__INPUT))
-            except: 
-                main_window.dialog_exec("There was an error in model's convnext layers field (MODEL.CONVNEXT_LAYERS). Please check its syntax!", reason="error")
-                return True, False
-            biapy_config['MODEL']['CONVNEXT_SD_PROB'] = float(get_text(main_window.ui.MODEL__CONVNEXT_SD_PROB__INPUT))
-            biapy_config['MODEL']['CONVNEXT_LAYER_SCALE'] = float(get_text(main_window.ui.MODEL__CONVNEXT_LAYER_SCALE__INPUT))
-            biapy_config['MODEL']['CONVNEXT_STEM_K_SIZE'] = int(get_text(main_window.ui.MODEL__CONVNEXT_STEM_K_SIZE__INPUT))
+            # ConvNeXT 
+            if model_name in "unext_v1":
+                try:
+                    biapy_config['MODEL']['CONVNEXT_LAYERS'] = ast.literal_eval(get_text(main_window.ui.MODEL__CONVNEXT_LAYERS__INPUT))
+                except: 
+                    main_window.dialog_exec("There was an error in model's convnext layers field (MODEL.CONVNEXT_LAYERS). Please check its syntax!", reason="error")
+                    return True, False
+                biapy_config['MODEL']['CONVNEXT_SD_PROB'] = float(get_text(main_window.ui.MODEL__CONVNEXT_SD_PROB__INPUT))
+                biapy_config['MODEL']['CONVNEXT_LAYER_SCALE'] = float(get_text(main_window.ui.MODEL__CONVNEXT_LAYER_SCALE__INPUT))
+                biapy_config['MODEL']['CONVNEXT_STEM_K_SIZE'] = int(get_text(main_window.ui.MODEL__CONVNEXT_STEM_K_SIZE__INPUT))
 
-    if workflow_key_name in ["SEMANTIC_SEG","INSTANCE_SEG","DETECTION","CLASSIFICATION"]:
-        classes = 2
-        if workflow_key_name == "SEMANTIC_SEG" and int(get_text(main_window.ui.MODEL__N_CLASSES__INPUT)) != 2:
-            classes = int(get_text(main_window.ui.MODEL__N_CLASSES__INPUT))
-        elif workflow_key_name == "INSTANCE_SEG" and int(get_text(main_window.ui.MODEL__N_CLASSES__INST_SEG__INPUT)) != 2:
-            classes = int(get_text(main_window.ui.MODEL__N_CLASSES__INST_SEG__INPUT))
-        elif workflow_key_name == "DETECTION" and int(get_text(main_window.ui.MODEL__N_CLASSES__DET__INPUT)) != 2:
-            classes = int(get_text(main_window.ui.MODEL__N_CLASSES__DET__INPUT))
-        else: # CLASSIFICATION
-            classes = int(get_text(main_window.ui.MODEL__N_CLASSES__CLS__INPUT))
-
-        if classes == 1: 
+        if workflow_key_name in ["SEMANTIC_SEG","INSTANCE_SEG","DETECTION","CLASSIFICATION"]:
             classes = 2
-        biapy_config['MODEL']['N_CLASSES'] = classes
-    
+            if workflow_key_name == "SEMANTIC_SEG" and int(get_text(main_window.ui.MODEL__N_CLASSES__INPUT)) != 2:
+                classes = int(get_text(main_window.ui.MODEL__N_CLASSES__INPUT))
+            elif workflow_key_name == "INSTANCE_SEG" and int(get_text(main_window.ui.MODEL__N_CLASSES__INST_SEG__INPUT)) != 2:
+                classes = int(get_text(main_window.ui.MODEL__N_CLASSES__INST_SEG__INPUT))
+            elif workflow_key_name == "DETECTION" and int(get_text(main_window.ui.MODEL__N_CLASSES__DET__INPUT)) != 2:
+                classes = int(get_text(main_window.ui.MODEL__N_CLASSES__DET__INPUT))
+            else: # CLASSIFICATION
+                classes = int(get_text(main_window.ui.MODEL__N_CLASSES__CLS__INPUT))
+
+            if classes == 1: 
+                classes = 2
+            biapy_config['MODEL']['N_CLASSES'] = classes
+        
     if get_text(main_window.ui.LOAD_PRETRAINED_MODEL__INPUT) == "Yes":
         if get_text(main_window.ui.MODEL__SOURCE__INPUT) == "I have a model trained with BiaPy":
             biapy_config['MODEL']['LOAD_CHECKPOINT'] = True 
@@ -3024,8 +3031,7 @@ def create_yaml_file(main_window):
                     create_dict_from_key(key, value, model_restrictions)
                 else:
                     raise ValueError(f"Error found in config: {key}. Contact BiaPy team!")
-        
-        biapy_config.update(model_restrictions)         
+        biapy_config = update_dict(biapy_config, model_restrictions)
 
     if not main_window.cfg.settings['yaml_config_filename'].endswith(".yaml") and not main_window.cfg.settings['yaml_config_filename'].endswith(".yml"):
         main_window.cfg.settings['yaml_config_filename'] = main_window.cfg.settings['yaml_config_filename']+".yaml"
@@ -3366,7 +3372,7 @@ class load_yaml_to_GUI_engine(QObject):
                 err, _vars = self.analyze_dict(v,sep+k if sep == "" else sep+"__"+k)
                 if err is not None: 
                     errors +=err
-                    variables_set.update(_vars)
+                    variables_set = update_dict(variables_set,_vars)
             else:
                 widget_name = sep+"__"+k+"__INPUT"
                 other_widgets_to_set = []
@@ -3792,7 +3798,7 @@ def save_biapy_config(main_window, data, biapy_version=""):
             old_data = json.load(file)
     except:
         old_data = {}
-    old_data.update(data)
+    old_data = update_dict(old_data, data)
 
     if biapy_version != "":
         if "GUI_VERSION" not in old_data:
@@ -3807,3 +3813,11 @@ def save_biapy_config(main_window, data, biapy_version=""):
 
     with open(main_window.log_info["config_file"], "w") as outfile:
         json.dump(old_data, outfile, indent=4)
+
+def update_dict(d, u):
+    for k, v in u.items():
+        if isinstance(v, collections.abc.Mapping):
+            d[k] = update_dict(d.get(k, {}), v)
+        else:
+            d[k] = v
+    return d
