@@ -638,7 +638,8 @@ def check_csv_files(data_dir, is_3d=False, dir_name=None):
         # Discard first index column to not have error if it is not sorted
         p_number = df.iloc[:, 0].to_list()
         df = df.rename(columns=lambda x: x.strip())  # trim spaces in column names
-        cols_not_in_file = [x for x in req_columns if x not in df.columns]
+        columns_present = [x.lower() for x in df.columns]
+        cols_not_in_file = [x for x in req_columns if x not in columns_present]
         if len(cols_not_in_file) > 0:
             if len(cols_not_in_file) == 1:
                 error_message = f"'{cols_not_in_file[0]}' column is not present in CSV file:\n{csv_path}"
@@ -647,7 +648,7 @@ def check_csv_files(data_dir, is_3d=False, dir_name=None):
             return True, error_message, {}  
         
         # Check class in columns
-        if 'class' in df.columns:
+        if 'class' in columns_present:
             df["class"] = df["class"].astype("int")
             class_point = np.array(df["class"])
 
@@ -661,10 +662,9 @@ def check_csv_files(data_dir, is_3d=False, dir_name=None):
             
             nclasses = uniq.max()
 
-
     constraints = {}
-    if 'class' in df.columns:
-        constraints["MODEL.N_CLASSES"] = nclasses
+    if 'class' in columns_present:
+        constraints["MODEL.N_CLASSES"] = int(nclasses)
     if dir_name is not None:
         constraints[dir_name] = len(ids)
         constraints[dir_name+"_path"] = data_dir
