@@ -400,6 +400,12 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False, dir_name=No
     
     constraints: dict
         BiaPy variables to set. This info is extracted from the images read. E.g. ``{"DATA.PATCH_SIZE": 1}``
+
+    sample_info : dict
+        Information of the samples within the directory analized. Keys: 
+            * ``'total_samples'``: total number of samples in the directory.
+            * ``'crop_shape'``: shape of the crop used to analize the samples.
+            * ``'dir_name'``: name of the directory analized.  
     """
     assert mask_type in ["", "semantic_mask", "instance_mask"]
 
@@ -597,6 +603,12 @@ def check_csv_files(data_dir, is_3d=False, dir_name=None):
     
     constraints: dict
         BiaPy variables to set. This info is extracted from the images read. E.g. ``{"DATA.PATCH_SIZE": 1}``
+    
+    sample_info : dict
+        Information of the samples within the directory analized. Keys: 
+            * ``'total_samples'``: total number of samples in the directory.
+            * ``'crop_shape'``: shape of the crop used to analize the samples.
+            * ``'dir_name'``: name of the directory analized.  
     """
     print("Checking CSV files . . .")
     nclasses = 0
@@ -657,7 +669,8 @@ def check_csv_files(data_dir, is_3d=False, dir_name=None):
         constraints[dir_name] = len(ids)
         constraints[dir_name+"_path"] = data_dir
 
-    return False, "", constraints
+    crop_shape = (0,0,0) if not is_3d else (0,0,0,0)
+    return False, "", constraints, {'total_samples': len(ids), 'crop_shape': crop_shape, 'dir_name': dir_name}
 
 
 def check_classification_images(data_dir, is_3d=False, dir_name=None):

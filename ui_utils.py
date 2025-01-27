@@ -202,7 +202,7 @@ class check_data_from_path_engine(QObject):
                     if "GT_PATH" not in key: 
                         error, error_message, data_constraints, sample_info = check_images(folder, is_3d=is_3d, dir_name=self.dir_name)
                     else:
-                        error, error_message, data_constraints = check_csv_files(folder, is_3d=is_3d, dir_name=self.dir_name) 
+                        error, error_message, data_constraints, sample_info = check_csv_files(folder, is_3d=is_3d, dir_name=self.dir_name) 
                 elif workflow == "CLASSIFICATION": 
                     error, error_message, data_constraints, sample_info = check_classification_images(folder, is_3d=is_3d, dir_name=self.dir_name)
                 elif workflow in ["DENOISING", "SUPER_RESOLUTION", "SELF_SUPERVISED", "IMAGE_TO_IMAGE"]:   
