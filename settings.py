@@ -31,9 +31,9 @@ class Settings:
         self.settings["CUDA_selected"] = "" # to be filled by checking the GPU 
 
         # BiaPy
-        self.settings["biapy_code_version"] = Version("v3.5.8")
+        self.settings["biapy_code_version"] = Version("v3.5.9")
         self.settings["biapy_code_github"] = "https://github.com/BiaPyX/BiaPy"
-        self.settings["biapy_gui_version"] = Version("v1.1.5")
+        self.settings["biapy_gui_version"] = Version("v1.1.6")
         self.settings["biapy_gui_github"] = "https://github.com/BiaPyX/BiaPy-GUI"
         self.settings["biapy_container_basename"] = "biapyx/biapy"
         self.settings["biapy_container_name"] = (
@@ -105,6 +105,7 @@ class Settings:
             "resunet++",
             "resunet_se",
             "unext_v1",
+            "unext_v2",
             "attention_unet",
             "multiresunet",
             "seunet",
@@ -116,6 +117,7 @@ class Settings:
             "ResUNet++",
             "ResUNet SE",
             "U-NeXt V1",
+            "U-NeXt V2",
             "Attention U-Net",
             "MultiResUnet",
             "SEUnet",
@@ -144,6 +146,7 @@ class Settings:
             "resunet++",
             "resunet_se",
             "unext_v1",
+            "unext_v2",
             "seunet",
             "attention_unet",
             "multiresunet",
@@ -155,6 +158,7 @@ class Settings:
             "ResUNet++",
             "ResUNet SE",
             "U-NeXt V1",
+            "U-NeXt V2",
             "SEUnet",
             "Attention U-Net",
             "MultiResUnet",
@@ -183,6 +187,7 @@ class Settings:
             "resunet++",
             "resunet_se",
             "unext_v1",
+            "unext_v2",
             "seunet",
             "attention_unet",
             "multiresunet",
@@ -194,6 +199,7 @@ class Settings:
             "ResUNet++",
             "ResUNet SE",
             "U-NeXt V1",
+            "U-NeXt V2",
             "SEUnet",
             "Attention U-Net",
             "MultiResUnet",
@@ -222,6 +228,7 @@ class Settings:
             "resunet++",
             "resunet_se",
             "unext_v1",
+            "unext_v2",
             "seunet",
             "attention_unet",
             "multiresunet",
@@ -233,6 +240,7 @@ class Settings:
             "ResUNet++",
             "ResUNet SE",
             "U-NeXt V1",
+            "U-NeXt V2",
             "SEUnet",
             "Attention U-Net",
             "MultiResUnet",
@@ -263,6 +271,7 @@ class Settings:
             "resunet++",
             "resunet_se",
             "unext_v1",
+            "unext_v2",
             "seunet",
             "attention_unet",
             "multiresunet",
@@ -277,6 +286,7 @@ class Settings:
             "ResUNet++",
             "ResUNet SE",
             "U-NeXt V1",
+            "U-NeXt V2",
             "SEUnet",
             "Attention U-Net",
             "MultiResUnet",
@@ -287,6 +297,7 @@ class Settings:
             "resunet++", 
             "resunet_se", 
             "unext_v1",
+            "unext_v2",
             "seunet", 
             "attention_unet", 
             "multiresunet"
@@ -297,6 +308,7 @@ class Settings:
             "ResUNet++",
             "ResUNet SE",
             "U-NeXt V1",
+            "U-NeXt V2",
             "SEUnet",
             "Attention U-Net",
             "MultiResUnet",
@@ -329,6 +341,7 @@ class Settings:
             "resunet++",
             "resunet_se",
             "unext_v1",
+            "unext_v2",
             "seunet",
             "attention_unet",
             "multiresunet",
@@ -341,6 +354,7 @@ class Settings:
             "ResUNet++",
             "ResUNet SE",
             "U-NeXt V1",
+            "U-NeXt V2",
             "SEUnet",
             "Attention U-Net",
             "MultiResUnet",
@@ -416,6 +430,7 @@ class Settings:
             "resunet++",
             "resunet_se",
             "unext_v1",
+            "unext_v2",
             "seunet",
             "attention_unet",
             "unetr",
@@ -431,6 +446,7 @@ class Settings:
             "ResUNet++",
             "ResUNet SE",
             "U-NeXt V1",
+            "U-NeXt V2",
             "SEUnet",
             "Attention U-Net",
             "UNETR",

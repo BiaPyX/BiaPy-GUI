@@ -571,7 +571,7 @@ def ensure_3d_shape(img, path=None):
     else:
         min_val = min(img.shape)
         channel_pos = img.shape.index(min_val)
-        if channel_pos != 3 and img.shape[channel_pos] <= 4:
+        if channel_pos != 3:
             new_pos = [x for x in range(4) if x != channel_pos] + [
                 channel_pos,
             ]
@@ -624,6 +624,7 @@ def check_csv_files(data_dir, is_3d=False, dir_name=None):
     
     req_columns = ["axis-0", "axis-1"] if not is_3d else ["axis-0", "axis-1", "axis-2"] 
 
+    classes_found = []
     for id_ in ids:
         csv_path = os.path.join(data_dir, id_)
         try:
@@ -653,14 +654,11 @@ def check_csv_files(data_dir, is_3d=False, dir_name=None):
             class_point = np.array(df["class"])
 
             uniq = np.sort(np.unique(class_point))
-            if uniq[0] != 1:
-                error_message = f"Class number must start with 1 in CSV file:\n{csv_path}"
-                return True, error_message, {}  
-            if not all(uniq == np.array(range(1, uniq.max()+ 1))):
-                error_message = f"Classes must be consecutive, e.g [1,2,3,4,...]. Given {uniq} in CSV file:\n{csv_path}"
-                return True, error_message, {}  
+            for c in uniq:
+                if c not in classes_found:
+                    classes_found.append(c)
             
-            nclasses = uniq.max()
+    nclasses = len(classes_found)
 
     constraints = {}
     if 'class' in columns_present:

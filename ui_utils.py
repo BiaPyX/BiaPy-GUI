@@ -1318,11 +1318,14 @@ def set_default_config(cfg, gpu_info, sample_info):
             cfg['PROBLEM']['INSTANCE_SEG']['DATA_MW_TH_TYPE'] = "auto"
 
         elif cfg['PROBLEM']['TYPE'] == 'DETECTION':  
+            if "DETECTION" not in cfg['PROBLEM']:
+                cfg['PROBLEM']['DETECTION'] = {}
+            cfg['PROBLEM']['DETECTION']['CHECK_POINTS_CREATED'] = False    
             if cfg['TEST']['ENABLE']:
                 if "REMOVE_CLOSE_POINTS_RADIUS" not in cfg['TEST']['POST_PROCESSING']:
-                    cfg['TEST']['POST_PROCESSING']["REMOVE_CLOSE_POINTS_RADIUS"] = [10]
-                cfg['TEST']['DET_TOLERANCE'] = [int(0.8*cfg['TEST']['POST_PROCESSING']["REMOVE_CLOSE_POINTS_RADIUS"])] 
-                cfg['TEST']['DET_MIN_TH_TO_BE_PEAK'] = [0.5] 
+                    cfg['TEST']['POST_PROCESSING']["REMOVE_CLOSE_POINTS_RADIUS"] = 5
+                cfg['TEST']['DET_TOLERANCE'] = int(0.8*cfg['TEST']['POST_PROCESSING']["REMOVE_CLOSE_POINTS_RADIUS"])
+                cfg['TEST']['DET_MIN_TH_TO_BE_PEAK'] = 0.5 
                 cfg['TEST']['POST_PROCESSING']["REMOVE_CLOSE_POINTS"] = True
     elif cfg["PROBLEM"]["TYPE"] == "DENOISING":
         if cfg['DATA']['PATCH_SIZE'][0] == -1:
@@ -2859,17 +2862,9 @@ def create_yaml_file(main_window):
         ### Detection
         elif workflow_key_name == "DETECTION":
             biapy_config['TEST']['DET_POINT_CREATION_FUNCTION'] = get_text(main_window.ui.TEST__DET_POINT_CREATION_FUNCTION__INPUT)
-            try:
-                biapy_config['TEST']['DET_MIN_TH_TO_BE_PEAK'] = ast.literal_eval(get_text(main_window.ui.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT))
-            except:
-                main_window.dialog_exec("There was an error with test detection minimum threshold to be peak field (TEST.DET_MIN_TH_TO_BE_PEAK). Please check its syntax!", reason="error")
-                return True, False
+            biapy_config['TEST']['DET_MIN_TH_TO_BE_PEAK'] = float(get_text(main_window.ui.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT))
             biapy_config['TEST']['DET_EXCLUDE_BORDER'] = True if get_text(main_window.ui.TEST__DET_EXCLUDE_BORDER__INPUT) == "Yes" else False
-            try:
-                biapy_config['TEST']['DET_TOLERANCE'] = ast.literal_eval(get_text(main_window.ui.TEST__DET_TOLERANCE__INPUT))
-            except:
-                main_window.dialog_exec("There was an error with test detection tolerance field (TEST.DET_TOLERANCE). Please check its syntax!", reason="error")
-                return True, False
+            biapy_config['TEST']['DET_TOLERANCE'] = int(get_text(main_window.ui.TEST__DET_TOLERANCE__INPUT))
             try:
                 biapy_config['TEST']['DET_IGNORE_POINTS_OUTSIDE_BOX'] = ast.literal_eval(get_text(main_window.ui.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INPUT))
             except:
@@ -2939,11 +2934,7 @@ def create_yaml_file(main_window):
                     biapy_config['TEST']['POST_PROCESSING']['REPARE_LARGE_BLOBS_SIZE'] = int(get_text(main_window.ui.TEST__POST_PROCESSING__REPARE_LARGE_BLOBS_SIZE__INPUT))
                 if get_text(main_window.ui.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__INST_SEG__INPUT) == "Yes":
                     biapy_config['TEST']['POST_PROCESSING']['REMOVE_CLOSE_POINTS'] = True 
-                    try:
-                        biapy_config['TEST']['POST_PROCESSING']['REMOVE_CLOSE_POINTS_RADIUS'] = ast.literal_eval(get_text(main_window.ui.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INPUT))
-                    except:
-                        main_window.dialog_exec("There was an error with test post processing removing close point radius field (TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS_RADIUS). Please check its syntax!", reason="error")
-                        return True, False
+                    biapy_config['TEST']['POST_PROCESSING']['REMOVE_CLOSE_POINTS_RADIUS'] = int(get_text(main_window.ui.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__INST_SEG__INPUT))
         ### Detection
         elif workflow_key_name == "DETECTION":
             if get_text(main_window.ui.TEST__POST_PROCESSING__MEDIAN_FILTER__DET__INPUT) == "Yes":
@@ -2961,7 +2952,7 @@ def create_yaml_file(main_window):
 
             if get_text(main_window.ui.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS__DET__INPUT) == "Yes":
                 biapy_config['TEST']['POST_PROCESSING']['REMOVE_CLOSE_POINTS'] = True 
-                biapy_config['TEST']['POST_PROCESSING']['REMOVE_CLOSE_POINTS_RADIUS'] = float(get_text(main_window.ui.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__DET__INPUT))
+                biapy_config['TEST']['POST_PROCESSING']['REMOVE_CLOSE_POINTS_RADIUS'] = int(get_text(main_window.ui.TEST__POST_PROCESSING__REMOVE_CLOSE_POINTS_RADIUS__DET__INPUT))
             if get_text(main_window.ui.TEST__POST_PROCESSING__DET_WATERSHED__INPUT) == "Yes":
                 biapy_config['TEST']['POST_PROCESSING']['DET_WATERSHED'] = True
                 try:

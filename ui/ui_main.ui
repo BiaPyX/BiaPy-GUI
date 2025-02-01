@@ -1288,7 +1288,7 @@ QPushButton:pressed {
                 </font>
                </property>
                <property name="currentIndex">
-                <number>2</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="page_home">
                 <layout class="QVBoxLayout" name="verticalLayout_13">
@@ -4150,7 +4150,7 @@ QPushButton:pressed {
                        </font>
                       </property>
                       <property name="currentIndex">
-                       <number>2</number>
+                       <number>3</number>
                       </property>
                       <widget class="QWidget" name="workflow_selection_page">
                        <property name="minimumSize">
@@ -5858,7 +5858,7 @@ border-radius: 25px;		</string>
                             <property name="geometry">
                              <rect>
                               <x>0</x>
-                              <y>-538</y>
+                              <y>0</y>
                               <width>931</width>
                               <height>984</height>
                              </rect>
@@ -8346,7 +8346,7 @@ border-radius: 25px;		</string>
                                 <property name="geometry">
                                  <rect>
                                   <x>0</x>
-                                  <y>-4434</y>
+                                  <y>0</y>
                                   <width>944</width>
                                   <height>7969</height>
                                  </rect>
@@ -25464,8 +25464,8 @@ p, li { white-space: pre-wrap; }
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>922</width>
-                                         <height>327</height>
+                                         <width>895</width>
+                                         <height>179</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_17">
@@ -32766,7 +32766,7 @@ p, li { white-space: pre-wrap; }
                               <item>
                                <widget class="QStackedWidget" name="test_workflow_specific_tab_stackedWidget">
                                 <property name="currentIndex">
-                                 <number>0</number>
+                                 <number>1</number>
                                 </property>
                                 <widget class="QWidget" name="test_workflow_specific_tab_semantic_seg_page">
                                  <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -32798,8 +32798,8 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>928</width>
-                                       <height>301</height>
+                                       <width>452</width>
+                                       <height>255</height>
                                       </rect>
                                      </property>
                                      <layout class="QGridLayout" name="gridLayout_61">
@@ -33230,7 +33230,7 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>633</width>
+                                       <width>914</width>
                                        <height>1327</height>
                                       </rect>
                                      </property>
@@ -34180,7 +34180,7 @@ p, li { white-space: pre-wrap; }
                                             </font>
                                            </property>
                                            <property name="text">
-                                            <string>[-1.0]</string>
+                                            <string>0</string>
                                            </property>
                                           </widget>
                                          </item>
@@ -35784,7 +35784,7 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>597</width>
+                                       <width>914</width>
                                        <height>1056</height>
                                       </rect>
                                      </property>
@@ -35911,7 +35911,7 @@ p, li { white-space: pre-wrap; }
                                             </font>
                                            </property>
                                            <property name="text">
-                                            <string>[10]</string>
+                                            <string>10</string>
                                            </property>
                                           </widget>
                                          </item>
@@ -36123,7 +36123,7 @@ p, li { white-space: pre-wrap; }
                                             </font>
                                            </property>
                                            <property name="text">
-                                            <string>[0.2]</string>
+                                            <string>0.2</string>
                                            </property>
                                           </widget>
                                          </item>
@@ -37044,7 +37044,7 @@ p, li { white-space: pre-wrap; }
                                             </font>
                                            </property>
                                            <property name="text">
-                                            <string>-1</string>
+                                            <string>0</string>
                                            </property>
                                           </widget>
                                          </item>
@@ -37116,7 +37116,7 @@ p, li { white-space: pre-wrap; }
                                             </font>
                                            </property>
                                            <property name="text">
-                                            <string>[[-1,-1],]</string>
+                                            <string>[-1,-1]</string>
                                            </property>
                                           </widget>
                                          </item>
