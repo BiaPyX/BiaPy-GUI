@@ -866,11 +866,11 @@ class Settings:
             (1024, 1024),
         ]
         self.settings["wizard_variable_to_map"]["Q6"]["TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS_RADIUS"] = [
-            [10],
-            [20],
-            [30],
-            [30],
-            [30],
+            10,
+            20,
+            30,
+            30,
+            30,
         ]
         self.settings["wizard_answers"]["DATA.PATCH_SIZE_XY"] = -1
         self.settings["wizard_answers"]["TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS_RADIUS"] = -1
