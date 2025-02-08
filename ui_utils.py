@@ -2865,11 +2865,12 @@ def create_yaml_file(main_window):
             biapy_config['TEST']['DET_MIN_TH_TO_BE_PEAK'] = float(get_text(main_window.ui.TEST__DET_MIN_TH_TO_BE_PEAK__INPUT))
             biapy_config['TEST']['DET_EXCLUDE_BORDER'] = True if get_text(main_window.ui.TEST__DET_EXCLUDE_BORDER__INPUT) == "Yes" else False
             biapy_config['TEST']['DET_TOLERANCE'] = int(get_text(main_window.ui.TEST__DET_TOLERANCE__INPUT))
-            try:
-                biapy_config['TEST']['DET_IGNORE_POINTS_OUTSIDE_BOX'] = ast.literal_eval(get_text(main_window.ui.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INPUT))
-            except:
-                main_window.dialog_exec("There was an error with test detection ignore points outside box field (TEST.DET_IGNORE_POINTS_OUTSIDE_BOX). Please check its syntax!", reason="error")
-                return True, False
+            if get_text(main_window.ui.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INPUT) != "[]":
+                try:
+                    biapy_config['TEST']['DET_IGNORE_POINTS_OUTSIDE_BOX'] = ast.literal_eval(get_text(main_window.ui.TEST__DET_IGNORE_POINTS_OUTSIDE_BOX__INPUT))
+                except:
+                    main_window.dialog_exec("There was an error with test detection ignore points outside box field (TEST.DET_IGNORE_POINTS_OUTSIDE_BOX). Please check its syntax!", reason="error")
+                    return True, False
             if get_text(main_window.ui.TEST__DET_POINT_CREATION_FUNCTION__INPUT) == "blob_log":
                 biapy_config['TEST']['DET_BLOB_LOG_MIN_SIGMA'] = int(get_text(main_window.ui.TEST__DET_BLOB_LOG_MIN_SIGMA__INPUT))    
                 biapy_config['TEST']['DET_BLOB_LOG_MAX_SIGMA'] = int(get_text(main_window.ui.TEST__DET_BLOB_LOG_MAX_SIGMA__INPUT)) 
