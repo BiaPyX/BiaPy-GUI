@@ -1533,7 +1533,7 @@ def batch_size_calculator(
     sample_data_factor = np.prod([x/y for x,y in zip(x_data_to_analize['crop_shape'],patch_size)])
     total_samples = x_data_to_analize['total_samples']*sample_data_factor
     
-    batch_size = int(min(min(total_samples, approx_batch_size), max_batch_size_allowed))   
+    batch_size = int(max(1,min(min(total_samples, approx_batch_size), max_batch_size_allowed)))   
 
     return batch_size
 
