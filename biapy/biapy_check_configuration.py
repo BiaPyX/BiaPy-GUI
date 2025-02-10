@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: d77dba89299234a5b1a967f6b997cb62bf49d228 (3.5.9)
+## Copied from BiaPy commit: 881a8338a6e34b339bcb042865e4a7b0d66fdd48 (3.5.10)
 import os
 import glob
 import numpy as np
@@ -45,7 +45,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
         else:  # synapses
             if cfg.PROBLEM.NDIM != "3D":
                 raise ValueError("'PROBLEM.INSTANCE_SEG.TYPE' == 'synapse' can only be used for 3D data")
-            
+
             channels_provided = 1 + dim_count  # BF
 
         if len(cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS) != channels_provided:
@@ -582,14 +582,18 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                     "'MODEL.SOURCE' must be one between ['deeplabv3_mobilenet_v3_large', 'deeplabv3_resnet101', "
                     "'deeplabv3_resnet50', 'fcn_resnet101', 'fcn_resnet50', 'lraspp_mobilenet_v3_large' ]"
                 )
-            if cfg.MODEL.TORCHVISION_MODEL_NAME in [
-                "deeplabv3_mobilenet_v3_large", 
-                "deeplabv3_resnet101", 
-                "deeplabv3_resnet50",
-                "fcn_resnet101",
-                "fcn_resnet50",
-                "lraspp_mobilenet_v3_large",
-                ] and cfg.DATA.PATCH_SIZE[-1] != 3:
+            if (
+                cfg.MODEL.TORCHVISION_MODEL_NAME
+                in [
+                    "deeplabv3_mobilenet_v3_large",
+                    "deeplabv3_resnet101",
+                    "deeplabv3_resnet50",
+                    "fcn_resnet101",
+                    "fcn_resnet50",
+                    "lraspp_mobilenet_v3_large",
+                ]
+                and cfg.DATA.PATCH_SIZE[-1] != 3
+            ):
                 raise ValueError(
                     "'deeplabv3_mobilenet_v3_large' model expects 3 channel data (RGB). "
                     f"'DATA.PATCH_SIZE' set is {cfg.DATA.PATCH_SIZE}"
@@ -614,8 +618,10 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 "BF",
             ], "PROBLEM.INSTANCE_SEG.DATA_CHANNELS not in ['BF']"
             if not cfg.DATA.TRAIN.INPUT_ZARR_MULTIPLE_DATA or cfg.PROBLEM.NDIM != "3D":
-                raise ValueError("Synapse detection is only available for 3D Zarr/H5 data. Please set 'DATA.TRAIN.INPUT_ZARR_MULTIPLE_DATA' "
-                                 "and PROBLEM.NDIM == '3D'")
+                raise ValueError(
+                    "Synapse detection is only available for 3D Zarr/H5 data. Please set 'DATA.TRAIN.INPUT_ZARR_MULTIPLE_DATA' "
+                    "and PROBLEM.NDIM == '3D'"
+                )
         if len(cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS) != channels_provided:
             raise ValueError(
                 "'PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS' needs to be of the same length as the channels selected in 'PROBLEM.INSTANCE_SEG.DATA_CHANNELS'. "
@@ -1115,7 +1121,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                         "'DATA.VAL.INPUT_ZARR_MULTIPLE_DATA_RESOLUTION_PATH' needs to be set when 'DATA.VAL.INPUT_ZARR_MULTIPLE_DATA' is used "
                         "and PROBLEM.INSTANCE_SEG.TYPE == 'synapses'"
                     )
-                
+
     if cfg.TEST.ENABLE and not cfg.DATA.TEST.USE_VAL_AS_TEST and check_data_paths:
         if not os.path.exists(cfg.DATA.TEST.PATH):
             raise ValueError("Test data not found: {}".format(cfg.DATA.TEST.PATH))
@@ -1183,7 +1189,6 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                             "and PROBLEM.INSTANCE_SEG.TYPE == 'synapses'"
                         )
                     
-
     if cfg.TRAIN.ENABLE:
         if cfg.DATA.EXTRACT_RANDOM_PATCH and cfg.DATA.PROBABILITY_MAP:
             if not cfg.PROBLEM.TYPE == "SEMANTIC_SEG":
@@ -1776,7 +1781,22 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                                 raise ValueError(
                                     f"'MODEL.BMZ.EXPORT.CITE' malformed. Cite dictionary available keys are: ['text', 'doi', 'url']. Provided {k}. E.g. {'text': 'Gizmo et al.', 'doi': '10.1002/xyzacab123'}"
                                 )
-
+            if isinstance(cfg.MODEL.BMZ.EXPORT.DATASET_INFO, list):
+                raise ValueError(
+                    "'MODEL.BMZ.EXPORT.DATASET_INFO' must be a list with a single dictionary inside. Keys that must be set in that dict are: ['name', 'doi', 'image_modality'] and optionallly 'dataset_id'"
+                )
+            elif len(cfg.MODEL.BMZ.EXPORT.DATASET_INFO) != 1:
+                raise ValueError(
+                    "'MODEL.BMZ.EXPORT.DATASET_INFO' must be a list with a single dictionary inside. Keys that must be set in that dict are: ['name', 'doi', 'image_modality'] and optionallly 'dataset_id'. "
+                    "E.g. [{ 'name': 'CartoCell', 'doi': '10.1016/j.crmeth.2023.100597', 'image_modality': 'fluorescence microscopy',  'dataset_id': 'biapy/cartocell_cyst_segmentation' }]"                
+                    )
+            else:
+                for k in cfg.MODEL.BMZ.EXPORT.DATASET_INFO[0].keys():
+                    if k not in ["name", "doi", "image_modality", 'dataset_id']:
+                        raise ValueError(
+                            f"'MODEL.BMZ.EXPORT.DATASET_INFO' malformed. Cite dictionary available keys are: ['name', 'doi', 'image_modality', 'dataset_id']. Provided {k}. "
+                            "E.g. [{ 'name': 'CartoCell', 'doi': '10.1016/j.crmeth.2023.100597', 'image_modality': 'fluorescence microscopy',  'dataset_id': 'biapy/cartocell_cyst_segmentation' }]"
+                        )
             if cfg.MODEL.BMZ.EXPORT.DOCUMENTATION == "":
                 print(
                     "WARNING: 'MODEL.BMZ.EXPORT.DOCUMENTATION' not set so the model documentation will point to BiaPy doc: https://github.com/BiaPyX/BiaPy/blob/master/README.md"
@@ -1808,6 +1828,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             raise ValueError(
                 "'TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS' needs to be set when 'TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS' is True"
             )
+
 
 def compare_configurations_without_model(actual_cfg, old_cfg, header_message="", old_cfg_version=None):
     """
@@ -2093,24 +2114,24 @@ def convert_old_model_cfg_to_current_version(old_cfg):
             del old_cfg["TEST"]["EVALUATE"]
         if "POST_PROCESSING" in old_cfg["TEST"]:
             if "YZ_FILTERING" in old_cfg["TEST"]["POST_PROCESSING"]:
-                del old_cfg["TEST"]["POST_PROCESSING"]["YZ_FILTERING"] 
+                del old_cfg["TEST"]["POST_PROCESSING"]["YZ_FILTERING"]
                 try:
-                    fsize = old_cfg["TEST"]["POST_PROCESSING"]["YZ_FILTERING_SIZE"] 
-                except: 
+                    fsize = old_cfg["TEST"]["POST_PROCESSING"]["YZ_FILTERING_SIZE"]
+                except:
                     fsize = 5
                 del old_cfg["TEST"]["POST_PROCESSING"]["YZ_FILTERING_SIZE"]
-                
+
                 old_cfg["TEST"]["POST_PROCESSING"]["MEDIAN_FILTER"] = True
                 old_cfg["TEST"]["POST_PROCESSING"]["MEDIAN_FILTER_AXIS"] = ["yz"]
                 old_cfg["TEST"]["POST_PROCESSING"]["MEDIAN_FILTER_SIZE"] = [fsize]
             if "Z_FILTERING" in old_cfg["TEST"]["POST_PROCESSING"]:
-                del old_cfg["TEST"]["POST_PROCESSING"]["Z_FILTERING"] 
+                del old_cfg["TEST"]["POST_PROCESSING"]["Z_FILTERING"]
                 try:
-                    fsize = old_cfg["TEST"]["POST_PROCESSING"]["Z_FILTERING_SIZE"] 
-                except: 
+                    fsize = old_cfg["TEST"]["POST_PROCESSING"]["Z_FILTERING_SIZE"]
+                except:
                     fsize = 5
                 del old_cfg["TEST"]["POST_PROCESSING"]["Z_FILTERING_SIZE"]
-                
+
                 old_cfg["TEST"]["POST_PROCESSING"]["MEDIAN_FILTER"] = True
                 old_cfg["TEST"]["POST_PROCESSING"]["MEDIAN_FILTER_AXIS"] = ["z"]
                 old_cfg["TEST"]["POST_PROCESSING"]["MEDIAN_FILTER_SIZE"] = [fsize]
@@ -2118,7 +2139,9 @@ def convert_old_model_cfg_to_current_version(old_cfg):
             if "MEASURE_PROPERTIES" in old_cfg["TEST"]["POST_PROCESSING"]:
                 if "REMOVE_BY_PROPERTIES" in old_cfg["TEST"]["POST_PROCESSING"]["MEASURE_PROPERTIES"]:
                     if "SIGN" in old_cfg["TEST"]["POST_PROCESSING"]["MEASURE_PROPERTIES"]["REMOVE_BY_PROPERTIES"]:
-                        old_cfg["TEST"]["POST_PROCESSING"]["MEASURE_PROPERTIES"]["REMOVE_BY_PROPERTIES"]["SIGNS"] = old_cfg["TEST"]["POST_PROCESSING"]["MEASURE_PROPERTIES"]["REMOVE_BY_PROPERTIES"]["SIGN"]
+                        old_cfg["TEST"]["POST_PROCESSING"]["MEASURE_PROPERTIES"]["REMOVE_BY_PROPERTIES"]["SIGNS"] = (
+                            old_cfg["TEST"]["POST_PROCESSING"]["MEASURE_PROPERTIES"]["REMOVE_BY_PROPERTIES"]["SIGN"]
+                        )
                         del old_cfg["TEST"]["POST_PROCESSING"]["MEASURE_PROPERTIES"]["REMOVE_BY_PROPERTIES"]["SIGN"]
 
             if "REMOVE_BY_PROPERTIES" in old_cfg["TEST"]["POST_PROCESSING"]:
@@ -2126,21 +2149,27 @@ def convert_old_model_cfg_to_current_version(old_cfg):
                 old_cfg["TEST"]["POST_PROCESSING"]["MEASURE_PROPERTIES"]["REMOVE_BY_PROPERTIES"] = {}
                 old_cfg["TEST"]["POST_PROCESSING"]["MEASURE_PROPERTIES"]["ENABLE"] = True
                 old_cfg["TEST"]["POST_PROCESSING"]["MEASURE_PROPERTIES"]["REMOVE_BY_PROPERTIES"]["ENABLE"] = True
-                old_cfg["TEST"]["POST_PROCESSING"]["MEASURE_PROPERTIES"]["REMOVE_BY_PROPERTIES"]["PROPS"] = old_cfg["TEST"]["POST_PROCESSING"]["REMOVE_BY_PROPERTIES"]
+                old_cfg["TEST"]["POST_PROCESSING"]["MEASURE_PROPERTIES"]["REMOVE_BY_PROPERTIES"]["PROPS"] = old_cfg[
+                    "TEST"
+                ]["POST_PROCESSING"]["REMOVE_BY_PROPERTIES"]
                 del old_cfg["TEST"]["POST_PROCESSING"]["REMOVE_BY_PROPERTIES"]
                 if "REMOVE_BY_PROPERTIES_VALUES" in old_cfg["TEST"]["POST_PROCESSING"]:
-                    old_cfg["TEST"]["POST_PROCESSING"]["MEASURE_PROPERTIES"]["REMOVE_BY_PROPERTIES"]["VALUES"] = old_cfg["TEST"]["POST_PROCESSING"]["REMOVE_BY_PROPERTIES_VALUES"]
+                    old_cfg["TEST"]["POST_PROCESSING"]["MEASURE_PROPERTIES"]["REMOVE_BY_PROPERTIES"]["VALUES"] = (
+                        old_cfg["TEST"]["POST_PROCESSING"]["REMOVE_BY_PROPERTIES_VALUES"]
+                    )
                     del old_cfg["TEST"]["POST_PROCESSING"]["REMOVE_BY_PROPERTIES_VALUES"]
                 if "REMOVE_BY_PROPERTIES_SIGN" in old_cfg["TEST"]["POST_PROCESSING"]:
-                    old_cfg["TEST"]["POST_PROCESSING"]["MEASURE_PROPERTIES"]["REMOVE_BY_PROPERTIES"]["SIGNS"] = old_cfg["TEST"]["POST_PROCESSING"]["REMOVE_BY_PROPERTIES_SIGN"]
+                    old_cfg["TEST"]["POST_PROCESSING"]["MEASURE_PROPERTIES"]["REMOVE_BY_PROPERTIES"]["SIGNS"] = old_cfg[
+                        "TEST"
+                    ]["POST_PROCESSING"]["REMOVE_BY_PROPERTIES_SIGN"]
                     del old_cfg["TEST"]["POST_PROCESSING"]["REMOVE_BY_PROPERTIES_SIGN"]
 
             if "REMOVE_CLOSE_POINTS_RADIUS" in old_cfg["TEST"]["POST_PROCESSING"]:
                 if isinstance(old_cfg["TEST"]["POST_PROCESSING"]["REMOVE_CLOSE_POINTS_RADIUS"], list):
                     if len(old_cfg["TEST"]["POST_PROCESSING"]["REMOVE_CLOSE_POINTS_RADIUS"]) > 0:
-                        old_cfg["TEST"]["POST_PROCESSING"]["REMOVE_CLOSE_POINTS_RADIUS"] = (
-                            old_cfg["TEST"]["POST_PROCESSING"]["REMOVE_CLOSE_POINTS_RADIUS"][0]
-                        )
+                        old_cfg["TEST"]["POST_PROCESSING"]["REMOVE_CLOSE_POINTS_RADIUS"] = old_cfg["TEST"][
+                            "POST_PROCESSING"
+                        ]["REMOVE_CLOSE_POINTS_RADIUS"][0]
                     else:
                         del old_cfg["TEST"]["POST_PROCESSING"]["REMOVE_CLOSE_POINTS_RADIUS"]
                 else:
@@ -2149,9 +2178,9 @@ def convert_old_model_cfg_to_current_version(old_cfg):
             if "DET_WATERSHED_FIRST_DILATION" in old_cfg["TEST"]["POST_PROCESSING"]:
                 if isinstance(old_cfg["TEST"]["POST_PROCESSING"]["DET_WATERSHED_FIRST_DILATION"], list):
                     if len(old_cfg["TEST"]["POST_PROCESSING"]["DET_WATERSHED_FIRST_DILATION"]) > 0:
-                        old_cfg["TEST"]["POST_PROCESSING"]["DET_WATERSHED_FIRST_DILATION"] = (
-                            old_cfg["TEST"]["POST_PROCESSING"]["DET_WATERSHED_FIRST_DILATION"][0]
-                        )
+                        old_cfg["TEST"]["POST_PROCESSING"]["DET_WATERSHED_FIRST_DILATION"] = old_cfg["TEST"][
+                            "POST_PROCESSING"
+                        ]["DET_WATERSHED_FIRST_DILATION"][0]
                     else:
                         del old_cfg["TEST"]["POST_PROCESSING"]["DET_WATERSHED_FIRST_DILATION"]
                 else:
@@ -2165,7 +2194,7 @@ def convert_old_model_cfg_to_current_version(old_cfg):
                     del old_cfg["TEST"]["DET_MIN_TH_TO_BE_PEAK"]
             else:
                 del old_cfg["TEST"]["DET_MIN_TH_TO_BE_PEAK"]
-        
+
         if "DET_TOLERANCE" in old_cfg["TEST"]:
             if isinstance(old_cfg["TEST"]["DET_TOLERANCE"], list):
                 if len(old_cfg["TEST"]["DET_TOLERANCE"]) > 0:
@@ -2173,30 +2202,34 @@ def convert_old_model_cfg_to_current_version(old_cfg):
                 else:
                     del old_cfg["TEST"]["DET_TOLERANCE"]
             else:
-                del old_cfg["TEST"]["DET_TOLERANCE"]
+                del old_cfg["TEST"]["DET_MIN_TH_TO_BE_PEAK"]
 
     if "PROBLEM" in old_cfg:
         ndim = 3 if "NDIM" in old_cfg["PROBLEM"] and old_cfg["PROBLEM"]["NDIM"] == "3D" else 2
         if "DETECTION" in old_cfg["PROBLEM"]:
             if "CENTRAL_POINT_DILATION" in old_cfg["PROBLEM"]["DETECTION"]:
                 if isinstance(old_cfg["PROBLEM"]["DETECTION"]["CENTRAL_POINT_DILATION"], int):
-                    old_cfg["PROBLEM"]["DETECTION"]["CENTRAL_POINT_DILATION"] = [old_cfg["PROBLEM"]["DETECTION"]["CENTRAL_POINT_DILATION"]]
+                    old_cfg["PROBLEM"]["DETECTION"]["CENTRAL_POINT_DILATION"] = [
+                        old_cfg["PROBLEM"]["DETECTION"]["CENTRAL_POINT_DILATION"]
+                    ]
 
         if "SUPER_RESOLUTION" in old_cfg["PROBLEM"]:
             if "UPSCALING" in old_cfg["PROBLEM"]["SUPER_RESOLUTION"]:
                 if isinstance(old_cfg["PROBLEM"]["SUPER_RESOLUTION"]["UPSCALING"], int):
-                    old_cfg["PROBLEM"]["SUPER_RESOLUTION"]["UPSCALING"] = (old_cfg["PROBLEM"]["SUPER_RESOLUTION"]["UPSCALING"],)*ndim
+                    old_cfg["PROBLEM"]["SUPER_RESOLUTION"]["UPSCALING"] = (
+                        old_cfg["PROBLEM"]["SUPER_RESOLUTION"]["UPSCALING"],
+                    ) * ndim
 
     if "DATA" in old_cfg:
         if "TRAIN" in old_cfg["DATA"]:
             if "MINIMUM_FOREGROUND_PER" in old_cfg["DATA"]["TRAIN"]:
                 min_fore = old_cfg["DATA"]["TRAIN"]["MINIMUM_FOREGROUND_PER"]
                 del old_cfg["DATA"]["TRAIN"]["MINIMUM_FOREGROUND_PER"]
-                if min_fore != -1:  
-                    old_cfg["DATA"]["TRAIN"]["FILTER_SAMPLES"] = {} 
-                    old_cfg["DATA"]["TRAIN"]["FILTER_SAMPLES"]["PROPS"] = [['foreground']]
+                if min_fore != -1:
+                    old_cfg["DATA"]["TRAIN"]["FILTER_SAMPLES"] = {}
+                    old_cfg["DATA"]["TRAIN"]["FILTER_SAMPLES"]["PROPS"] = [["foreground"]]
                     old_cfg["DATA"]["TRAIN"]["FILTER_SAMPLES"]["VALUES"] = [[min_fore]]
-                    old_cfg["DATA"]["TRAIN"]["FILTER_SAMPLES"]["SIGNS"] = [['lt']]
+                    old_cfg["DATA"]["TRAIN"]["FILTER_SAMPLES"]["SIGNS"] = [["lt"]]
         if "VAL" in old_cfg["DATA"]:
             if "BINARY_MASKS" in old_cfg["DATA"]["VAL"]:
                 del old_cfg["DATA"]["VAL"]["BINARY_MASKS"]
@@ -2228,48 +2261,48 @@ def convert_old_model_cfg_to_current_version(old_cfg):
                 old_cfg["MODEL"]["BMZ"]["SOURCE_MODEL_ID"] = model
             if "EXPORT_MODEL" in old_cfg["MODEL"]["BMZ"]:
                 old_cfg["MODEL"]["BMZ"]["EXPORT"] = {}
-                try:                
+                try:
                     enabled = old_cfg["MODEL"]["BMZ"]["EXPORT_MODEL"]["ENABLE"]
                 except:
                     enabled = False
-                old_cfg["MODEL"]["BMZ"]["EXPORT"]["ENABLED"] = enabled 
-                try:                
+                old_cfg["MODEL"]["BMZ"]["EXPORT"]["ENABLED"] = enabled
+                try:
                     model_name = old_cfg["MODEL"]["BMZ"]["EXPORT_MODEL"]["NAME"]
                 except:
-                    model_name = ''
-                old_cfg["MODEL"]["BMZ"]["EXPORT"]["MODEL_NAME"] = model_name 
-                try:                
+                    model_name = ""
+                old_cfg["MODEL"]["BMZ"]["EXPORT"]["MODEL_NAME"] = model_name
+                try:
                     description = old_cfg["MODEL"]["BMZ"]["EXPORT_MODEL"]["DESCRIPTION"]
                 except:
                     description = ""
-                old_cfg["MODEL"]["BMZ"]["EXPORT"]["DESCRIPTION"] = description 
-                try:                
+                old_cfg["MODEL"]["BMZ"]["EXPORT"]["DESCRIPTION"] = description
+                try:
                     authors = old_cfg["MODEL"]["BMZ"]["EXPORT_MODEL"]["AUTHORS"]
                 except:
                     authors = []
-                old_cfg["MODEL"]["BMZ"]["EXPORT"]["AUTHORS"] = authors 
-                try:                
+                old_cfg["MODEL"]["BMZ"]["EXPORT"]["AUTHORS"] = authors
+                try:
                     license = old_cfg["MODEL"]["BMZ"]["EXPORT_MODEL"]["LICENSE"]
                 except:
                     license = "CC-BY-4.0"
-                old_cfg["MODEL"]["BMZ"]["EXPORT"]["LICENSE"] = license 
-                try:                
+                old_cfg["MODEL"]["BMZ"]["EXPORT"]["LICENSE"] = license
+                try:
                     doc = old_cfg["MODEL"]["BMZ"]["EXPORT_MODEL"]["DOCUMENTATION"]
                 except:
                     doc = ""
-                old_cfg["MODEL"]["BMZ"]["EXPORT"]["DOCUMENTATION"] = doc 
-                try:                
+                old_cfg["MODEL"]["BMZ"]["EXPORT"]["DOCUMENTATION"] = doc
+                try:
                     tags = old_cfg["MODEL"]["BMZ"]["EXPORT_MODEL"]["TAGS"]
                 except:
                     tags = []
-                old_cfg["MODEL"]["BMZ"]["EXPORT"]["TAGS"] = tags 
-                try:                
+                old_cfg["MODEL"]["BMZ"]["EXPORT"]["TAGS"] = tags
+                try:
                     cite = old_cfg["MODEL"]["BMZ"]["EXPORT_MODEL"]["CITE"]
                 except:
                     cite = []
-                old_cfg["MODEL"]["BMZ"]["EXPORT"]["CITE"] = cite 
+                old_cfg["MODEL"]["BMZ"]["EXPORT"]["CITE"] = cite
                 del old_cfg["MODEL"]["BMZ"]["EXPORT_MODEL"]
-    
+
     if "LOSS" in old_cfg:
         if "TYPE" in old_cfg["LOSS"]:
             del old_cfg["LOSS"]["TYPE"]

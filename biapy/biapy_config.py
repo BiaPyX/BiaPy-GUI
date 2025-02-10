@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: d77dba89299234a5b1a967f6b997cb62bf49d228 (3.5.9)
+## Copied from BiaPy commit: 881a8338a6e34b339bcb042865e4a7b0d66fdd48 (3.5.10)
 # Synapse seg not added
 import os
 from yacs.config import CfgNode as CN
@@ -803,6 +803,17 @@ class Config:
         # [{"text": "training library", "doi": "10.1101/2024.02.03.576026"}, {"text": "architecture", "doi": "10.1109/LGRS.2018.2802944"},
         #  {"text": "data", "doi": "10.48550/arXiv.1812.06024"}]
         _C.MODEL.BMZ.EXPORT.CITE = []
+        # Information of the dataset. It must be a list of just one dict item with keys "name", "doi" and "image_modality". It can have 
+        # also "dataset_id" key but it is optional (must match a dataset in the BioImage Model Zoo). E.g: 
+        #   [{
+        #       "name": "CartoCell", 
+        #       "doi": "10.1016/j.crmeth.2023.100597", 
+        #       "image_modality": "fluorescence microscopy", 
+        #       "dataset_id": "biapy/cartocell_cyst_segmentation",
+        #   }]
+        _C.MODEL.BMZ.EXPORT.DATASET_INFO = [{}]
+        # Version of the model
+        _C.MODEL.BMZ.EXPORT.MODEL_VERSION = "0.1.0"
         # If you are loading a BMZ model you can enable this option to avoid setting all above variables and instead reuse the same
         # information that was present in that model. You need still to set 'MODEL.BMZ.EXPORT.ENABLE' to 'True' and nothing else.
         _C.MODEL.BMZ.EXPORT.REUSE_BMZ_CONFIG = False
@@ -1446,16 +1457,15 @@ def update_dependencies(cfg) -> None:
             call.DATA.TRAIN.PATH
             + "_"
             + call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
-            + "_"
-            + call.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
         )
         call.DATA.TRAIN.INSTANCE_CHANNELS_MASK_DIR = (
             call.DATA.TRAIN.GT_PATH
             + "_"
             + call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
-            + "_"
-            + call.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
         )
+        if "C" in call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS:
+            call.DATA.TRAIN.INSTANCE_CHANNELS_DIR += "_" + call.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
+            call.DATA.TRAIN.INSTANCE_CHANNELS_MASK_DIR += "_" + call.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
     else: 
         call.DATA.TRAIN.INSTANCE_CHANNELS_DIR = (
             call.DATA.TRAIN.PATH
@@ -1483,16 +1493,15 @@ def update_dependencies(cfg) -> None:
             call.DATA.VAL.PATH
             + "_"
             + call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
-            + "_"
-            + call.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
         )
         call.DATA.VAL.INSTANCE_CHANNELS_MASK_DIR = (
             call.DATA.VAL.GT_PATH
             + "_"
             + call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
-            + "_"
-            + call.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
         )
+        if "C" in call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS:
+            call.DATA.VAL.INSTANCE_CHANNELS_DIR += "_" + call.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
+            call.DATA.VAL.INSTANCE_CHANNELS_MASK_DIR += "_" + call.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
     else: 
         call.DATA.VAL.INSTANCE_CHANNELS_DIR = (
             call.DATA.VAL.PATH
@@ -1521,16 +1530,15 @@ def update_dependencies(cfg) -> None:
             call.DATA.TEST.PATH
             + "_"
             + call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
-            + "_"
-            + call.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
         )
         call.DATA.TEST.INSTANCE_CHANNELS_MASK_DIR = (
             call.DATA.TEST.GT_PATH
             + "_"
             + call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
-            + "_"
-            + call.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
         )
+        if "C" in call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS:
+            call.DATA.TEST.INSTANCE_CHANNELS_DIR += "_" + call.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
+            call.DATA.TEST.INSTANCE_CHANNELS_MASK_DIR += "_" + call.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
     else: 
         call.DATA.TEST.INSTANCE_CHANNELS_DIR = (
             call.DATA.TEST.PATH
