@@ -319,7 +319,9 @@ class MainWindow(QMainWindow):
             ["MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME", "MODEL__BMZ__EXPORT__FRAME", "MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME"]))
         self.ui.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
             ["MODEL__BMZ__EXPORT__FRAME"]))
-
+        self.ui.MODEL_AUTOGENERATE_DOC_INPUT.currentIndexChanged.connect(lambda: self.condition_db.combobox_hide_visible_action(self,
+            ["MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL","MODEL__BMZ__EXPORT__DOCUMENTATION__INFO", "MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT",
+            "MODEL__BMZ__EXPORT__DOCUMENTATION__BN"]))
 
         self.ui.job_name_input.textChanged.connect(lambda: mark_syntax_error(self, "job_name_input", ["empty"]))   
         self.ui.goptions_yaml_name_input.textChanged.connect(lambda: mark_syntax_error(self, "goptions_yaml_name_input", ["empty"]))

@@ -2639,8 +2639,9 @@ def create_yaml_file(main_window):
             biapy_config['MODEL']['BMZ']["EXPORT"]["MODEL_NAME"] = get_text(main_window.ui.MODEL__BMZ__EXPORT__MODEL_NAME__INPUT)
             biapy_config['MODEL']['BMZ']["EXPORT"]["DESCRIPTION"] = get_text(main_window.ui.MODEL__BMZ__EXPORT__DESCRIPTION__INPUT)
             biapy_config['MODEL']['BMZ']["EXPORT"]["LICENSE"] = get_text(main_window.ui.MODEL__BMZ__EXPORT__LICENSE__INPUT)
-            if get_text(main_window.ui.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT) != "":
-                biapy_config['MODEL']['BMZ']["EXPORT"]["DOCUMENTATION"] = get_text(main_window.ui.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT)
+            biapy_config['MODEL']['BMZ']["EXPORT"]["MODEL_VERSION"] = get_text(main_window.ui.MODEL__BMZ__EXPORT__MODEL_VERSION__INPUT)
+            if get_text(main_window.ui.MODEL_AUTOGENERATE_DOC_INPUT) == "No" and get_text(main_window.ui.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT) != "":
+                biapy_config['MODEL']['BMZ']["EXPORT"]["DOCUMENTATION"] = get_text(main_window.ui.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT)                
             if get_text(main_window.ui.MODEL__BMZ__EXPORT__AUTHORS__INPUT) != "":
                 try:
                     biapy_config['MODEL']['BMZ']["EXPORT"]["AUTHORS"] = ast.literal_eval(get_text(main_window.ui.MODEL__BMZ__EXPORT__AUTHORS__INPUT))
@@ -2659,7 +2660,13 @@ def create_yaml_file(main_window):
                 except:
                     main_window.dialog_exec("There was an error with BMZ citation field (MODEL.BMZ.EXPORT.CITE). Please check its syntax!", reason="error")
                     return True, False
-        
+            if get_text(main_window.ui.MODEL__BMZ__EXPORT__DATASET_INFO__INPUT) != "":
+                try:
+                    biapy_config['MODEL']['BMZ']["EXPORT"]["DATASET_INFO"] = ast.literal_eval(get_text(main_window.ui.MODEL__BMZ__EXPORT__DATASET_INFO__INPUT))
+                except:
+                    main_window.dialog_exec("There was an error with BMZ citation field (MODEL.BMZ.EXPORT.DATASET_INFO). Please check its syntax!", reason="error")
+                    return True, False
+
     # Loss
     loss_name = main_window.cfg.translate_names(get_text(main_window.ui.LOSS__TYPE__INPUT), key_str="losses")
     biapy_config['LOSS'] = {}

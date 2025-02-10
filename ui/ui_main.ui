@@ -1288,7 +1288,7 @@ QPushButton:pressed {
                 </font>
                </property>
                <property name="currentIndex">
-                <number>0</number>
+                <number>2</number>
                </property>
                <widget class="QWidget" name="page_home">
                 <layout class="QVBoxLayout" name="verticalLayout_13">
@@ -3951,8 +3951,8 @@ font: italic;</string>
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>100</width>
-                               <height>30</height>
+                               <width>930</width>
+                               <height>172</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_62"/>
@@ -4150,7 +4150,7 @@ QPushButton:pressed {
                        </font>
                       </property>
                       <property name="currentIndex">
-                       <number>3</number>
+                       <number>1</number>
                       </property>
                       <widget class="QWidget" name="workflow_selection_page">
                        <property name="minimumSize">
@@ -5790,7 +5790,7 @@ border-radius: 25px;		</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>945</width>
+                          <width>940</width>
                           <height>441</height>
                          </rect>
                         </property>
@@ -5858,9 +5858,9 @@ border-radius: 25px;		</string>
                             <property name="geometry">
                              <rect>
                               <x>0</x>
-                              <y>0</y>
-                              <width>931</width>
-                              <height>984</height>
+                              <y>-435</y>
+                              <width>926</width>
+                              <height>1092</height>
                              </rect>
                             </property>
                             <property name="layoutDirection">
@@ -6189,7 +6189,7 @@ border-radius: 25px;		</string>
                                     <rect>
                                      <x>0</x>
                                      <y>0</y>
-                                     <width>857</width>
+                                     <width>852</width>
                                      <height>286</height>
                                     </rect>
                                    </property>
@@ -6260,6 +6260,123 @@ border-radius: 25px;		</string>
                                        <enum>QFrame::Raised</enum>
                                       </property>
                                       <layout class="QGridLayout" name="gridLayout_5">
+                                       <item row="0" column="2">
+                                        <widget class="QComboBox" name="SYSTEM__NUM_CPUS__INPUT">
+                                         <property name="minimumSize">
+                                          <size>
+                                           <width>200</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="maximumSize">
+                                          <size>
+                                           <width>200</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="font">
+                                          <font>
+                                           <family>DejaVu Math TeX Gyre</family>
+                                           <pointsize>12</pointsize>
+                                          </font>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item row="0" column="0">
+                                        <widget class="QLabel" name="SYSTEM__NUM_CPUS__LABEL">
+                                         <property name="font">
+                                          <font>
+                                           <family>DejaVu Math TeX Gyre</family>
+                                           <pointsize>12</pointsize>
+                                          </font>
+                                         </property>
+                                         <property name="text">
+                                          <string>Number of CPUs</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item row="1" column="1">
+                                        <widget class="QPushButton" name="SYSTEM__NUM_WORKERS__INFO">
+                                         <property name="minimumSize">
+                                          <size>
+                                           <width>30</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="maximumSize">
+                                          <size>
+                                           <width>30</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="toolTip">
+                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Maximum number of workers to use. You can disable this option by setting 0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                         </property>
+                                         <property name="styleSheet">
+                                          <string notr="true">QPushButton {
+  border: none;
+}</string>
+                                         </property>
+                                         <property name="text">
+                                          <string/>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item row="0" column="1">
+                                        <widget class="QPushButton" name="SYSTEM__NUM_CPUS__INFO">
+                                         <property name="minimumSize">
+                                          <size>
+                                           <width>30</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="maximumSize">
+                                          <size>
+                                           <width>30</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="font">
+                                          <font>
+                                           <family>DejaVu Math TeX Gyre</family>
+                                           <pointsize>12</pointsize>
+                                          </font>
+                                         </property>
+                                         <property name="toolTip">
+                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Maximum number of CPUs to use. Set it to &amp;quot;-1&amp;quot; to not set a limit.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                         </property>
+                                         <property name="styleSheet">
+                                          <string notr="true">QPushButton {
+  border: none;
+}</string>
+                                         </property>
+                                         <property name="text">
+                                          <string/>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item row="1" column="2">
+                                        <widget class="QComboBox" name="SYSTEM__NUM_WORKERS__INPUT">
+                                         <property name="minimumSize">
+                                          <size>
+                                           <width>200</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="maximumSize">
+                                          <size>
+                                           <width>200</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="font">
+                                          <font>
+                                           <family>DejaVu Math TeX Gyre</family>
+                                           <pointsize>12</pointsize>
+                                          </font>
+                                         </property>
+                                        </widget>
+                                       </item>
                                        <item row="1" column="0">
                                         <widget class="QLabel" name="label_8">
                                          <property name="maximumSize">
@@ -6298,28 +6415,6 @@ border-radius: 25px;		</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="1" column="2">
-                                        <widget class="QComboBox" name="SYSTEM__NUM_WORKERS__INPUT">
-                                         <property name="minimumSize">
-                                          <size>
-                                           <width>200</width>
-                                           <height>30</height>
-                                          </size>
-                                         </property>
-                                         <property name="maximumSize">
-                                          <size>
-                                           <width>200</width>
-                                           <height>30</height>
-                                          </size>
-                                         </property>
-                                         <property name="font">
-                                          <font>
-                                           <family>DejaVu Math TeX Gyre</family>
-                                           <pointsize>12</pointsize>
-                                          </font>
-                                         </property>
-                                        </widget>
-                                       </item>
                                        <item row="3" column="2">
                                         <widget class="QLineEdit" name="SYSTEM__SEED__INPUT">
                                          <property name="minimumSize">
@@ -6342,52 +6437,6 @@ border-radius: 25px;		</string>
                                          </property>
                                          <property name="text">
                                           <string>0</string>
-                                         </property>
-                                        </widget>
-                                       </item>
-                                       <item row="1" column="3">
-                                        <spacer name="horizontalSpacer_2">
-                                         <property name="font">
-                                          <font>
-                                           <family>DejaVu Math TeX Gyre</family>
-                                           <pointsize>12</pointsize>
-                                          </font>
-                                         </property>
-                                         <property name="orientation">
-                                          <enum>Qt::Horizontal</enum>
-                                         </property>
-                                         <property name="sizeHint" stdset="0">
-                                          <size>
-                                           <width>568</width>
-                                           <height>20</height>
-                                          </size>
-                                         </property>
-                                        </spacer>
-                                       </item>
-                                       <item row="1" column="1">
-                                        <widget class="QPushButton" name="SYSTEM__NUM_WORKERS__INFO">
-                                         <property name="minimumSize">
-                                          <size>
-                                           <width>30</width>
-                                           <height>30</height>
-                                          </size>
-                                         </property>
-                                         <property name="maximumSize">
-                                          <size>
-                                           <width>30</width>
-                                           <height>30</height>
-                                          </size>
-                                         </property>
-                                         <property name="toolTip">
-                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Maximum number of workers to use. You can disable this option by setting 0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                         </property>
-                                         <property name="styleSheet">
-                                          <string notr="true">QPushButton {
-  border: none;
-}</string>
-                                         </property>
-                                         <property name="text">
-                                          <string/>
                                          </property>
                                         </widget>
                                        </item>
@@ -6418,73 +6467,24 @@ border-radius: 25px;		</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="0" column="0">
-                                        <widget class="QLabel" name="SYSTEM__NUM_CPUS__LABEL">
+                                       <item row="1" column="3">
+                                        <spacer name="horizontalSpacer_2">
                                          <property name="font">
                                           <font>
                                            <family>DejaVu Math TeX Gyre</family>
                                            <pointsize>12</pointsize>
                                           </font>
                                          </property>
-                                         <property name="text">
-                                          <string>Number of CPUs</string>
+                                         <property name="orientation">
+                                          <enum>Qt::Horizontal</enum>
                                          </property>
-                                        </widget>
-                                       </item>
-                                       <item row="0" column="1">
-                                        <widget class="QPushButton" name="SYSTEM__NUM_CPUS__INFO">
-                                         <property name="minimumSize">
+                                         <property name="sizeHint" stdset="0">
                                           <size>
-                                           <width>30</width>
-                                           <height>30</height>
+                                           <width>568</width>
+                                           <height>20</height>
                                           </size>
                                          </property>
-                                         <property name="maximumSize">
-                                          <size>
-                                           <width>30</width>
-                                           <height>30</height>
-                                          </size>
-                                         </property>
-                                         <property name="font">
-                                          <font>
-                                           <family>DejaVu Math TeX Gyre</family>
-                                           <pointsize>12</pointsize>
-                                          </font>
-                                         </property>
-                                         <property name="toolTip">
-                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Maximum number of CPUs to use. Set it to &amp;quot;-1&amp;quot; to not set a limit.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                         </property>
-                                         <property name="styleSheet">
-                                          <string notr="true">QPushButton {
-  border: none;
-}</string>
-                                         </property>
-                                         <property name="text">
-                                          <string/>
-                                         </property>
-                                        </widget>
-                                       </item>
-                                       <item row="0" column="2">
-                                        <widget class="QComboBox" name="SYSTEM__NUM_CPUS__INPUT">
-                                         <property name="minimumSize">
-                                          <size>
-                                           <width>200</width>
-                                           <height>30</height>
-                                          </size>
-                                         </property>
-                                         <property name="maximumSize">
-                                          <size>
-                                           <width>200</width>
-                                           <height>30</height>
-                                          </size>
-                                         </property>
-                                         <property name="font">
-                                          <font>
-                                           <family>DejaVu Math TeX Gyre</family>
-                                           <pointsize>12</pointsize>
-                                          </font>
-                                         </property>
-                                        </widget>
+                                        </spacer>
                                        </item>
                                       </layout>
                                      </widget>
@@ -7522,6 +7522,38 @@ border-radius: 25px;		</string>
                                 <property name="bottomMargin">
                                  <number>9</number>
                                 </property>
+                                <item row="0" column="0">
+                                 <spacer name="verticalSpacer_61">
+                                  <property name="orientation">
+                                   <enum>Qt::Vertical</enum>
+                                  </property>
+                                  <property name="sizeHint" stdset="0">
+                                   <size>
+                                    <width>15</width>
+                                    <height>40</height>
+                                   </size>
+                                  </property>
+                                 </spacer>
+                                </item>
+                                <item row="0" column="1">
+                                 <widget class="QLabel" name="MODEL__BMZ__EXPORT__LABEL">
+                                  <property name="font">
+                                   <font>
+                                    <family>DejaVu Math TeX Gyre</family>
+                                    <pointsize>12</pointsize>
+                                   </font>
+                                  </property>
+                                  <property name="text">
+                                   <string>Additional fields required for the BioImage Model Zoo export process:</string>
+                                  </property>
+                                  <property name="margin">
+                                   <number>0</number>
+                                  </property>
+                                  <property name="indent">
+                                   <number>-1</number>
+                                  </property>
+                                 </widget>
+                                </item>
                                 <item row="1" column="0">
                                  <spacer name="verticalSpacer_60">
                                   <property name="orientation">
@@ -7550,34 +7582,8 @@ border-radius: 25px;		</string>
                                    <property name="topMargin">
                                     <number>9</number>
                                    </property>
-                                   <item row="7" column="0">
-                                    <widget class="QLabel" name="MODEL__BMZ__EXPORT__CITE__LABEL">
-                                     <property name="font">
-                                      <font>
-                                       <family>DejaVu Math TeX Gyre</family>
-                                       <pointsize>12</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>Citations</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="5" column="0">
-                                    <widget class="QLabel" name="MODEL__BMZ__EXPORT__LICENSE__LABEL">
-                                     <property name="font">
-                                      <font>
-                                       <family>DejaVu Math TeX Gyre</family>
-                                       <pointsize>12</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>License</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="6" column="1">
-                                    <widget class="QPushButton" name="MODEL__BMZ__EXPORT__TAGS__INFO">
+                                   <item row="5" column="1">
+                                    <widget class="QPushButton" name="MODEL__BMZ__EXPORT__LICENSE__INFO">
                                      <property name="minimumSize">
                                       <size>
                                        <width>30</width>
@@ -7597,7 +7603,7 @@ border-radius: 25px;		</string>
                                       </font>
                                      </property>
                                      <property name="toolTip">
-                                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;List of tags. Here the type of dataset and the target object should be provided. BiaPy automatically sets the following tags: &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;* &amp;quot;biapy&amp;quot;: to represent that the model was created with BiaPy.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;* &amp;quot;pytorch&amp;quot;: to represent that you are using Pytorch&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;* &amp;quot;2d&amp;quot; or &amp;quot;3d&amp;quot;: depending on the image dimensions one or the other is selected.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;* workflow tag: depending on the workflow the tag is set. E.g. &amp;quot;semantic-segmentation&amp;quot;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;The quotation marks are important see the following example:&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; [&amp;quot;electron-microscopy&amp;quot;, &amp;quot;mitochondria&amp;quot;]&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;License of the model.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                      </property>
                                      <property name="styleSheet">
                                       <string notr="true">QPushButton {
@@ -7609,41 +7615,6 @@ border-radius: 25px;		</string>
                                      </property>
                                      <property name="scaledContents" stdset="0">
                                       <bool>true</bool>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="3" column="2">
-                                    <widget class="QLineEdit" name="MODEL__BMZ__EXPORT__DESCRIPTION__INPUT">
-                                     <property name="minimumSize">
-                                      <size>
-                                       <width>500</width>
-                                       <height>30</height>
-                                      </size>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>500</width>
-                                       <height>30</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>DejaVu Math TeX Gyre</family>
-                                       <pointsize>12</pointsize>
-                                      </font>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="8" column="3">
-                                    <widget class="QPushButton" name="MODEL__BMZ__EXPORT__DOCUMENTATION__BN">
-                                     <property name="font">
-                                      <font>
-                                       <family>DejaVu Math TeX Gyre</family>
-                                       <pointsize>12</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>Browse</string>
                                      </property>
                                     </widget>
                                    </item>
@@ -7683,7 +7654,330 @@ border-radius: 25px;		</string>
                                      </property>
                                     </widget>
                                    </item>
+                                   <item row="9" column="2">
+                                    <widget class="QLineEdit" name="MODEL__BMZ__EXPORT__DATASET_INFO__INPUT">
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>500</width>
+                                       <height>30</height>
+                                      </size>
+                                     </property>
+                                     <property name="maximumSize">
+                                      <size>
+                                       <width>500</width>
+                                       <height>30</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>DejaVu Math TeX Gyre</family>
+                                       <pointsize>12</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>[{&quot;name&quot;: &quot;CartoCell&quot;, &quot;doi&quot;: &quot;10.1016/j.crmeth.2023.100597&quot;, &quot;image_modality&quot;: &quot;fluorescence microscopy&quot;, &quot;dataset_id&quot;: &quot;biapy/cartocell_cyst_segmentation&quot;}]</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="10" column="1">
+                                    <widget class="QPushButton" name="MODEL_AUTOGENERATE_DOC__INFO">
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>30</height>
+                                      </size>
+                                     </property>
+                                     <property name="maximumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>30</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>DejaVu Math TeX Gyre</family>
+                                       <pointsize>12</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="toolTip">
+                                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;To automatically generate the documentation file&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                     </property>
+                                     <property name="styleSheet">
+                                      <string notr="true">QPushButton {
+  border: none;
+}</string>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="3" column="2">
+                                    <widget class="QLineEdit" name="MODEL__BMZ__EXPORT__DESCRIPTION__INPUT">
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>500</width>
+                                       <height>30</height>
+                                      </size>
+                                     </property>
+                                     <property name="maximumSize">
+                                      <size>
+                                       <width>500</width>
+                                       <height>30</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>DejaVu Math TeX Gyre</family>
+                                       <pointsize>12</pointsize>
+                                      </font>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="8" column="0">
+                                    <widget class="QLabel" name="MODEL__BMZ__EXPORT__CITE__LABEL">
+                                     <property name="font">
+                                      <font>
+                                       <family>DejaVu Math TeX Gyre</family>
+                                       <pointsize>12</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>Citations</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="4" column="2">
+                                    <widget class="QLineEdit" name="MODEL__BMZ__EXPORT__AUTHORS__INPUT">
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>500</width>
+                                       <height>30</height>
+                                      </size>
+                                     </property>
+                                     <property name="maximumSize">
+                                      <size>
+                                       <width>500</width>
+                                       <height>30</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>DejaVu Math TeX Gyre</family>
+                                       <pointsize>12</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>[{&quot;name&quot;: &quot;Daniel&quot;, &quot;github_user&quot;: &quot;danifranco&quot;}]</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="11" column="1">
+                                    <widget class="QPushButton" name="MODEL__BMZ__EXPORT__DOCUMENTATION__INFO">
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>30</height>
+                                      </size>
+                                     </property>
+                                     <property name="maximumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>30</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>DejaVu Math TeX Gyre</family>
+                                       <pointsize>12</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="toolTip">
+                                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Path to a .md extension file with the documentation of the model. Take other models in https://bioimage.io/ as reference. If it is not set the model documentation will be autogenerated. &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                     </property>
+                                     <property name="styleSheet">
+                                      <string notr="true">QPushButton {
+  border: none;
+}</string>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                     <property name="scaledContents" stdset="0">
+                                      <bool>true</bool>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="3" column="0">
+                                    <widget class="QLabel" name="MODEL__BMZ__EXPORT__DESCRIPTION__LABEL">
+                                     <property name="font">
+                                      <font>
+                                       <family>DejaVu Math TeX Gyre</family>
+                                       <pointsize>12</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>Description</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="8" column="3">
+                                    <spacer name="horizontalSpacer_42">
+                                     <property name="orientation">
+                                      <enum>Qt::Horizontal</enum>
+                                     </property>
+                                     <property name="sizeHint" stdset="0">
+                                      <size>
+                                       <width>40</width>
+                                       <height>20</height>
+                                      </size>
+                                     </property>
+                                    </spacer>
+                                   </item>
+                                   <item row="10" column="2">
+                                    <widget class="QComboBox" name="MODEL_AUTOGENERATE_DOC_INPUT">
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>200</width>
+                                       <height>30</height>
+                                      </size>
+                                     </property>
+                                     <property name="maximumSize">
+                                      <size>
+                                       <width>200</width>
+                                       <height>30</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>DejaVu Math TeX Gyre</family>
+                                       <pointsize>12</pointsize>
+                                      </font>
+                                     </property>
+                                     <item>
+                                      <property name="text">
+                                       <string>Yes</string>
+                                      </property>
+                                     </item>
+                                     <item>
+                                      <property name="text">
+                                       <string>No</string>
+                                      </property>
+                                     </item>
+                                    </widget>
+                                   </item>
+                                   <item row="11" column="0">
+                                    <widget class="QLabel" name="MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL">
+                                     <property name="font">
+                                      <font>
+                                       <family>DejaVu Math TeX Gyre</family>
+                                       <pointsize>12</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>Documentation</string>
+                                     </property>
+                                     <property name="indent">
+                                      <number>15</number>
+                                     </property>
+                                    </widget>
+                                   </item>
                                    <item row="7" column="1">
+                                    <widget class="QPushButton" name="MODEL__BMZ__EXPORT__TAGS__INFO">
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>30</height>
+                                      </size>
+                                     </property>
+                                     <property name="maximumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>30</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>DejaVu Math TeX Gyre</family>
+                                       <pointsize>12</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="toolTip">
+                                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;List of tags. Here the type of dataset and the target object should be provided. BiaPy automatically sets the following tags: &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;* &amp;quot;biapy&amp;quot;: to represent that the model was created with BiaPy.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;* &amp;quot;pytorch&amp;quot;: to represent that you are using Pytorch&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;* &amp;quot;2d&amp;quot; or &amp;quot;3d&amp;quot;: depending on the image dimensions one or the other is selected.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;* workflow tag: depending on the workflow the tag is set. E.g. &amp;quot;semantic-segmentation&amp;quot;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;The quotation marks are important see the following example:&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; [&amp;quot;electron-microscopy&amp;quot;, &amp;quot;mitochondria&amp;quot;]&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                     </property>
+                                     <property name="styleSheet">
+                                      <string notr="true">QPushButton {
+  border: none;
+}</string>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                     <property name="scaledContents" stdset="0">
+                                      <bool>true</bool>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="11" column="3">
+                                    <widget class="QPushButton" name="MODEL__BMZ__EXPORT__DOCUMENTATION__BN">
+                                     <property name="font">
+                                      <font>
+                                       <family>DejaVu Math TeX Gyre</family>
+                                       <pointsize>12</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>Browse</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="9" column="1">
+                                    <widget class="QPushButton" name="MODEL__BMZ__EXPORT__DATASET_INFO__INFO">
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>30</height>
+                                      </size>
+                                     </property>
+                                     <property name="maximumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>30</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>DejaVu Math TeX Gyre</family>
+                                       <pointsize>12</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="toolTip">
+                                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Information of the dataset used to train the model. It must be a list of a single dictionary with keys &amp;quot;name&amp;quot;, &amp;quot;doi&amp;quot; and &amp;quot;image_modality&amp;quot;. It can have also &amp;quot;dataset_id&amp;quot; key but it is optional and, if provided, must match a dataset in the BioImage Model Zoo. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;The quotation marks are important see the following example&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;: [{&amp;quot;name&amp;quot;: &amp;quot;CartoCell&amp;quot;, &amp;quot;doi&amp;quot;: &amp;quot;10.1016/j.crmeth.2023.100597&amp;quot;, &amp;quot;image_modality&amp;quot;: &amp;quot;fluorescence microscopy&amp;quot;, &amp;quot;dataset_id&amp;quot;: &amp;quot;biapy/cartocell_cyst_segmentation&amp;quot;}]&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                     </property>
+                                     <property name="styleSheet">
+                                      <string notr="true">QPushButton {
+  border: none;
+}</string>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="7" column="0">
+                                    <widget class="QLabel" name="MODEL__BMZ__EXPORT__TAGS__LABEL">
+                                     <property name="font">
+                                      <font>
+                                       <family>DejaVu Math TeX Gyre</family>
+                                       <pointsize>12</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>Tags</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="8" column="1">
                                     <widget class="QPushButton" name="MODEL__BMZ__EXPORT__CITE__INFO">
                                      <property name="minimumSize">
                                       <size>
@@ -7719,16 +8013,25 @@ border-radius: 25px;		</string>
                                      </property>
                                     </widget>
                                    </item>
-                                   <item row="6" column="0">
-                                    <widget class="QLabel" name="MODEL__BMZ__EXPORT__TAGS__LABEL">
+                                   <item row="11" column="2">
+                                    <widget class="QLineEdit" name="MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT">
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>500</width>
+                                       <height>30</height>
+                                      </size>
+                                     </property>
+                                     <property name="maximumSize">
+                                      <size>
+                                       <width>500</width>
+                                       <height>30</height>
+                                      </size>
+                                     </property>
                                      <property name="font">
                                       <font>
                                        <family>DejaVu Math TeX Gyre</family>
                                        <pointsize>12</pointsize>
                                       </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>Tags</string>
                                      </property>
                                     </widget>
                                    </item>
@@ -7769,41 +8072,6 @@ border-radius: 25px;		</string>
                                     </widget>
                                    </item>
                                    <item row="8" column="2">
-                                    <widget class="QLineEdit" name="MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT">
-                                     <property name="minimumSize">
-                                      <size>
-                                       <width>500</width>
-                                       <height>30</height>
-                                      </size>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>500</width>
-                                       <height>30</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>DejaVu Math TeX Gyre</family>
-                                       <pointsize>12</pointsize>
-                                      </font>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="2" column="0">
-                                    <widget class="QLabel" name="MODEL__BMZ__EXPORT__MODEL_NAME__LABEL">
-                                     <property name="font">
-                                      <font>
-                                       <family>DejaVu Math TeX Gyre</family>
-                                       <pointsize>12</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>Model name</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="7" column="2">
                                     <widget class="QLineEdit" name="MODEL__BMZ__EXPORT__CITE__INPUT">
                                      <property name="minimumSize">
                                       <size>
@@ -7825,164 +8093,6 @@ border-radius: 25px;		</string>
                                      </property>
                                      <property name="text">
                                       <string>[{&quot;text&quot;: &quot;training library&quot;, &quot;doi&quot;: &quot;10.1101/2024.02.03.576026&quot;}]</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="5" column="1">
-                                    <widget class="QPushButton" name="MODEL__BMZ__EXPORT__LICENSE__INFO">
-                                     <property name="minimumSize">
-                                      <size>
-                                       <width>30</width>
-                                       <height>30</height>
-                                      </size>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>30</width>
-                                       <height>30</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>DejaVu Math TeX Gyre</family>
-                                       <pointsize>12</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="toolTip">
-                                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;License of the model.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                     </property>
-                                     <property name="styleSheet">
-                                      <string notr="true">QPushButton {
-  border: none;
-}</string>
-                                     </property>
-                                     <property name="text">
-                                      <string/>
-                                     </property>
-                                     <property name="scaledContents" stdset="0">
-                                      <bool>true</bool>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="8" column="1">
-                                    <widget class="QPushButton" name="MODEL__BMZ__EXPORT__DOCUMENTATION__INFO">
-                                     <property name="minimumSize">
-                                      <size>
-                                       <width>30</width>
-                                       <height>30</height>
-                                      </size>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>30</width>
-                                       <height>30</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>DejaVu Math TeX Gyre</family>
-                                       <pointsize>12</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="toolTip">
-                                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Path to a .md extension file with the documentation of the model. If it is not set so the model documentation will point to BiaPy's code README.md file. Take other models in https://bioimage.io/ as reference.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                     </property>
-                                     <property name="styleSheet">
-                                      <string notr="true">QPushButton {
-  border: none;
-}</string>
-                                     </property>
-                                     <property name="text">
-                                      <string/>
-                                     </property>
-                                     <property name="scaledContents" stdset="0">
-                                      <bool>true</bool>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="3" column="0">
-                                    <widget class="QLabel" name="MODEL__BMZ__EXPORT__DESCRIPTION__LABEL">
-                                     <property name="font">
-                                      <font>
-                                       <family>DejaVu Math TeX Gyre</family>
-                                       <pointsize>12</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>Description</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="8" column="4">
-                                    <spacer name="horizontalSpacer_42">
-                                     <property name="orientation">
-                                      <enum>Qt::Horizontal</enum>
-                                     </property>
-                                     <property name="sizeHint" stdset="0">
-                                      <size>
-                                       <width>40</width>
-                                       <height>20</height>
-                                      </size>
-                                     </property>
-                                    </spacer>
-                                   </item>
-                                   <item row="4" column="0">
-                                    <widget class="QLabel" name="MODEL__BMZ__EXPORT__AUTHORS__LABEL">
-                                     <property name="font">
-                                      <font>
-                                       <family>DejaVu Math TeX Gyre</family>
-                                       <pointsize>12</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>Authors</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="4" column="2">
-                                    <widget class="QLineEdit" name="MODEL__BMZ__EXPORT__AUTHORS__INPUT">
-                                     <property name="minimumSize">
-                                      <size>
-                                       <width>500</width>
-                                       <height>30</height>
-                                      </size>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>500</width>
-                                       <height>30</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>DejaVu Math TeX Gyre</family>
-                                       <pointsize>12</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>[{&quot;name&quot;: &quot;Daniel&quot;, &quot;github_user&quot;: &quot;danifranco&quot;}]</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="6" column="2">
-                                    <widget class="QLineEdit" name="MODEL__BMZ__EXPORT__TAGS__INPUT">
-                                     <property name="minimumSize">
-                                      <size>
-                                       <width>500</width>
-                                       <height>30</height>
-                                      </size>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>500</width>
-                                       <height>30</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>DejaVu Math TeX Gyre</family>
-                                       <pointsize>12</pointsize>
-                                      </font>
                                      </property>
                                     </widget>
                                    </item>
@@ -8008,6 +8118,118 @@ border-radius: 25px;		</string>
                                      </property>
                                      <property name="text">
                                       <string>CC-BY-4.0</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="5" column="0">
+                                    <widget class="QLabel" name="MODEL__BMZ__EXPORT__LICENSE__LABEL">
+                                     <property name="font">
+                                      <font>
+                                       <family>DejaVu Math TeX Gyre</family>
+                                       <pointsize>12</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>License</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="2" column="0">
+                                    <widget class="QLabel" name="MODEL__BMZ__EXPORT__MODEL_NAME__LABEL">
+                                     <property name="font">
+                                      <font>
+                                       <family>DejaVu Math TeX Gyre</family>
+                                       <pointsize>12</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>Model name</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="7" column="2">
+                                    <widget class="QLineEdit" name="MODEL__BMZ__EXPORT__TAGS__INPUT">
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>500</width>
+                                       <height>30</height>
+                                      </size>
+                                     </property>
+                                     <property name="maximumSize">
+                                      <size>
+                                       <width>500</width>
+                                       <height>30</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>DejaVu Math TeX Gyre</family>
+                                       <pointsize>12</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>[&quot;electron-microscopy&quot;, &quot;mitochondria&quot;]</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="10" column="0">
+                                    <widget class="QLabel" name="MODEL_AUTOGENERATE_DOC_LABEL">
+                                     <property name="font">
+                                      <font>
+                                       <family>DejaVu Math TeX Gyre</family>
+                                       <pointsize>12</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>Automatic doc generation</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="9" column="0">
+                                    <widget class="QLabel" name="MODEL__BMZ__EXPORT__DATASET_INFO__LABEL">
+                                     <property name="font">
+                                      <font>
+                                       <family>DejaVu Math TeX Gyre</family>
+                                       <pointsize>12</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>Dataset info</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="2" column="2">
+                                    <widget class="QLineEdit" name="MODEL__BMZ__EXPORT__MODEL_NAME__INPUT">
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>500</width>
+                                       <height>30</height>
+                                      </size>
+                                     </property>
+                                     <property name="maximumSize">
+                                      <size>
+                                       <width>500</width>
+                                       <height>30</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>DejaVu Math TeX Gyre</family>
+                                       <pointsize>12</pointsize>
+                                      </font>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="4" column="0">
+                                    <widget class="QLabel" name="MODEL__BMZ__EXPORT__AUTHORS__LABEL">
+                                     <property name="font">
+                                      <font>
+                                       <family>DejaVu Math TeX Gyre</family>
+                                       <pointsize>12</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>Authors</string>
                                      </property>
                                     </widget>
                                    </item>
@@ -8047,8 +8269,8 @@ border-radius: 25px;		</string>
                                      </property>
                                     </widget>
                                    </item>
-                                   <item row="8" column="0">
-                                    <widget class="QLabel" name="MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL">
+                                   <item row="6" column="0">
+                                    <widget class="QLabel" name="MODEL__BMZ__EXPORT__MODEL_VERSION__LABEL">
                                      <property name="font">
                                       <font>
                                        <family>DejaVu Math TeX Gyre</family>
@@ -8056,12 +8278,12 @@ border-radius: 25px;		</string>
                                       </font>
                                      </property>
                                      <property name="text">
-                                      <string>Documentation</string>
+                                      <string>Model version</string>
                                      </property>
                                     </widget>
                                    </item>
-                                   <item row="2" column="2">
-                                    <widget class="QLineEdit" name="MODEL__BMZ__EXPORT__MODEL_NAME__INPUT">
+                                   <item row="6" column="2">
+                                    <widget class="QLineEdit" name="MODEL__BMZ__EXPORT__MODEL_VERSION__INPUT">
                                      <property name="minimumSize">
                                       <size>
                                        <width>500</width>
@@ -8080,41 +8302,45 @@ border-radius: 25px;		</string>
                                        <pointsize>12</pointsize>
                                       </font>
                                      </property>
+                                     <property name="text">
+                                      <string>0.1.0</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="6" column="1">
+                                    <widget class="QPushButton" name="MODEL__BMZ__EXPORT__MODEL_VERSION__INFO">
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>30</height>
+                                      </size>
+                                     </property>
+                                     <property name="maximumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>30</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>DejaVu Math TeX Gyre</family>
+                                       <pointsize>12</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="toolTip">
+                                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Version of the model. E.g. &amp;quot;0.1.0&amp;quot;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                     </property>
+                                     <property name="styleSheet">
+                                      <string notr="true">QPushButton {
+  border: none;
+}</string>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
                                     </widget>
                                    </item>
                                   </layout>
-                                 </widget>
-                                </item>
-                                <item row="0" column="0">
-                                 <spacer name="verticalSpacer_61">
-                                  <property name="orientation">
-                                   <enum>Qt::Vertical</enum>
-                                  </property>
-                                  <property name="sizeHint" stdset="0">
-                                   <size>
-                                    <width>15</width>
-                                    <height>40</height>
-                                   </size>
-                                  </property>
-                                 </spacer>
-                                </item>
-                                <item row="0" column="1">
-                                 <widget class="QLabel" name="MODEL__BMZ__EXPORT__LABEL">
-                                  <property name="font">
-                                   <font>
-                                    <family>DejaVu Math TeX Gyre</family>
-                                    <pointsize>12</pointsize>
-                                   </font>
-                                  </property>
-                                  <property name="text">
-                                   <string>Additional fields required for the BioImage Model Zoo export process:</string>
-                                  </property>
-                                  <property name="margin">
-                                   <number>0</number>
-                                  </property>
-                                  <property name="indent">
-                                   <number>-1</number>
-                                  </property>
                                  </widget>
                                 </item>
                                </layout>
@@ -35784,7 +36010,7 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>914</width>
+                                       <width>597</width>
                                        <height>1056</height>
                                       </rect>
                                      </property>
@@ -39246,8 +39472,8 @@ QPushButton:pressed {
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>896</width>
-                               <height>152</height>
+                               <width>48</width>
+                               <height>114</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_32">

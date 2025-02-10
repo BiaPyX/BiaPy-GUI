@@ -436,6 +436,11 @@ class UIFunction(MainWindow):
 
         main_window.ui.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME.setVisible(False)
         main_window.ui.MODEL__BMZ__EXPORT__FRAME.setVisible(False)
+        
+        main_window.ui.MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL.setVisible(False)
+        main_window.ui.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setVisible(False)
+        main_window.ui.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT.setVisible(False)
+        main_window.ui.MODEL__BMZ__EXPORT__DOCUMENTATION__BN.setVisible(False)
 
         main_window.ui.SYSTEM__NUM_CPUS__INPUT.addItem("All")
         for i in range(multiprocessing.cpu_count()):

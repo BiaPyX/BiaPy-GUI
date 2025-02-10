@@ -183,6 +183,34 @@ class Widget_conditions():
                         "No"
                     ],
                 },
+            "MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL": 
+                {
+                    "MODEL_AUTOGENERATE_DOC_INPUT": 
+                    [
+                        "No"
+                    ],
+                },
+            "MODEL__BMZ__EXPORT__DOCUMENTATION__INFO": 
+                {
+                    "MODEL_AUTOGENERATE_DOC_INPUT": 
+                    [
+                        "No"
+                    ],
+                },
+            "MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT": 
+                {
+                    "MODEL_AUTOGENERATE_DOC_INPUT": 
+                    [
+                        "No"
+                    ],
+                },
+            "MODEL__BMZ__EXPORT__DOCUMENTATION__BN": 
+                {
+                    "MODEL_AUTOGENERATE_DOC_INPUT": 
+                    [
+                        "No"
+                    ],
+                },
             "train_tab_widget": 
                 {
                     "TRAIN__ENABLE__INPUT": 
