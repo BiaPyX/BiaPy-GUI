@@ -3951,8 +3951,8 @@ font: italic;</string>
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>930</width>
-                               <height>172</height>
+                               <width>100</width>
+                               <height>30</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_62"/>
@@ -4150,7 +4150,7 @@ QPushButton:pressed {
                        </font>
                       </property>
                       <property name="currentIndex">
-                       <number>1</number>
+                       <number>2</number>
                       </property>
                       <widget class="QWidget" name="workflow_selection_page">
                        <property name="minimumSize">
@@ -5858,7 +5858,7 @@ border-radius: 25px;		</string>
                             <property name="geometry">
                              <rect>
                               <x>0</x>
-                              <y>-435</y>
+                              <y>0</y>
                               <width>926</width>
                               <height>1092</height>
                              </rect>
@@ -8572,7 +8572,7 @@ border-radius: 25px;		</string>
                                 <property name="geometry">
                                  <rect>
                                   <x>0</x>
-                                  <y>0</y>
+                                  <y>-4434</y>
                                   <width>944</width>
                                   <height>7969</height>
                                  </rect>
@@ -11500,7 +11500,12 @@ p, li { white-space: pre-wrap; }
                                              </font>
                                             </property>
                                             <property name="toolTip">
-                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;To automatically calculate the batch size based on the GPU memory available. If you don't have a GPU a &amp;quot;modest&amp;quot; value of 12 will be set. &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Tries to automatically calculate the batch size based on the GPU memory available. The maximum value is difficult to calculate so you may need to decrease it to not have a out-of-memory error. If you don't have a GPU a &amp;quot;modest&amp;quot; value of 12 will be set. &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                            </property>
+                                            <property name="styleSheet">
+                                             <string notr="true">QPushButton {
+  border: none;
+}</string>
                                             </property>
                                             <property name="text">
                                              <string/>
@@ -25690,8 +25695,8 @@ p, li { white-space: pre-wrap; }
                                         <rect>
                                          <x>0</x>
                                          <y>0</y>
-                                         <width>895</width>
-                                         <height>179</height>
+                                         <width>922</width>
+                                         <height>327</height>
                                         </rect>
                                        </property>
                                        <layout class="QGridLayout" name="gridLayout_17">
@@ -33456,7 +33461,7 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>914</width>
+                                       <width>633</width>
                                        <height>1327</height>
                                       </rect>
                                      </property>
@@ -39472,8 +39477,8 @@ QPushButton:pressed {
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>48</width>
-                               <height>114</height>
+                               <width>96</width>
+                               <height>26</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_32">

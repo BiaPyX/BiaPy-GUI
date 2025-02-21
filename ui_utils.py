@@ -1401,16 +1401,17 @@ def set_default_config(cfg, gpu_info, sample_info):
         y_upsampling = cfg["PROBLEM"]["SUPER_RESOLUTION"]["UPSCALING"]
     else:
         y_upsampling = (1,1) if cfg['PROBLEM']['NDIM'] == "2D" else (1,1,1)
-    batch_size = batch_size_calculator(
-        gpu_info=gpu_info, 
-        sample_info=sample_info, 
-        patch_size=cfg['DATA']['PATCH_SIZE'],
-        channels_per_sample=channels_per_sample,
-        network_base_memory=network_base_memory, 
-        y_upsampling=y_upsampling,
-        max_batch_size_allowed=max_batch_size_allowed,
-        )
-
+    # batch_size = batch_size_calculator(
+    #     gpu_info=gpu_info, 
+    #     sample_info=sample_info, 
+    #     patch_size=cfg['DATA']['PATCH_SIZE'],
+    #     channels_per_sample=channels_per_sample,
+    #     network_base_memory=network_base_memory, 
+    #     y_upsampling=y_upsampling,
+    #     max_batch_size_allowed=max_batch_size_allowed,
+    #     )
+    batch_size = 1
+    
     if cfg['TRAIN']['ENABLE']:
         cfg['TRAIN']['BATCH_SIZE'] = batch_size
 
