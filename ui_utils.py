@@ -2232,17 +2232,17 @@ def create_yaml_file(main_window):
             biapy_config['DATA']['TRAIN']['FILTER_SAMPLES'] = {}
             biapy_config['DATA']['TRAIN']['FILTER_SAMPLES']['ENABLE'] = True
             try:
-                biapy_config['DATA']['TRAIN']['FILTER_SAMPLES']['PROPS'] = ast.literal_eval(get_text(main_window.ui.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT))
+                biapy_config['DATA']['TRAIN']['FILTER_SAMPLES']['PROPS'] = ast.literal_eval(get_text(main_window.ui.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT))
             except: 
                 main_window.dialog_exec("There was an error with train data filter samples property array field (DATA.TRAIN.FILTER_SAMPLES.PROPS). Please check its syntax!", reason="error")
                 return True, False
             try:
-                biapy_config['DATA']['TRAIN']['FILTER_SAMPLES']['VALUES'] = ast.literal_eval(get_text(main_window.ui.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT))
+                biapy_config['DATA']['TRAIN']['FILTER_SAMPLES']['VALUES'] = ast.literal_eval(get_text(main_window.ui.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT))
             except: 
                 main_window.dialog_exec("There was an error with train data filter samples values array field (DATA.TRAIN.FILTER_SAMPLES.VALUES). Please check its syntax!", reason="error")
                 return True, False
             try:
-                biapy_config['DATA']['TRAIN']['FILTER_SAMPLES']['SIGNS'] = ast.literal_eval(get_text(main_window.ui.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT))
+                biapy_config['DATA']['TRAIN']['FILTER_SAMPLES']['SIGNS'] = ast.literal_eval(get_text(main_window.ui.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT))
             except: 
                 main_window.dialog_exec("There was an error with train data filter samples signs array field (DATA.TRAIN.FILTER_SAMPLES.SIGNS). Please check its syntax!", reason="error")
                 return True, False
@@ -2286,19 +2286,19 @@ def create_yaml_file(main_window):
             biapy_config['DATA']['VAL']['FILTER_SAMPLES'] = {}
             biapy_config['DATA']['VAL']['FILTER_SAMPLES']['ENABLE'] = True
             try:
-                biapy_config['DATA']['VAL']['FILTER_SAMPLES']['PROPS'] = ast.literal_eval(get_text(main_window.ui.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT))
+                biapy_config['DATA']['VAL']['FILTER_SAMPLES']['PROPS'] = ast.literal_eval(get_text(main_window.ui.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT))
             except: 
-                main_window.dialog_exec("There was an error with train data filter samples prperty array field (DATA.TRAIN.FILTER_SAMPLES.PROPS). Please check its syntax!", reason="error")
+                main_window.dialog_exec("There was an error with val data filter samples property array field (DATA.VAL.FILTER_SAMPLES.PROPS). Please check its syntax!", reason="error")
                 return True, False
             try:
-                biapy_config['DATA']['VAL']['FILTER_SAMPLES']['VALUES'] = ast.literal_eval(get_text(main_window.ui.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT))
+                biapy_config['DATA']['VAL']['FILTER_SAMPLES']['VALUES'] = ast.literal_eval(get_text(main_window.ui.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT))
             except: 
-                main_window.dialog_exec("There was an error with train data filter samples values array field (DATA.TRAIN.FILTER_SAMPLES.VALUES). Please check its syntax!", reason="error")
+                main_window.dialog_exec("There was an error with val data filter samples values array field (DATA.VAL.FILTER_SAMPLES.VALUES). Please check its syntax!", reason="error")
                 return True, False
             try:
-                biapy_config['DATA']['VAL']['FILTER_SAMPLES']['SIGNS'] = ast.literal_eval(get_text(main_window.ui.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT))
+                biapy_config['DATA']['VAL']['FILTER_SAMPLES']['SIGNS'] = ast.literal_eval(get_text(main_window.ui.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT))
             except: 
-                main_window.dialog_exec("There was an error with train data filter samples signs array field (DATA.TRAIN.FILTER_SAMPLES.SIGNS). Please check its syntax!", reason="error")
+                main_window.dialog_exec("There was an error with val data filter samples signs array field (DATA.VAL.FILTER_SAMPLES.SIGNS). Please check its syntax!", reason="error")
                 return True, False
             
         # Data augmentation (DA)
@@ -2484,19 +2484,19 @@ def create_yaml_file(main_window):
         biapy_config['DATA']['TEST']['FILTER_SAMPLES'] = {}
         biapy_config['DATA']['TEST']['FILTER_SAMPLES']['ENABLE'] = True
         try:
-            biapy_config['DATA']['TEST']['FILTER_SAMPLES']['PROPS'] = ast.literal_eval(get_text(main_window.ui.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT))
+            biapy_config['DATA']['TEST']['FILTER_SAMPLES']['PROPS'] = ast.literal_eval(get_text(main_window.ui.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT))
         except: 
-            main_window.dialog_exec("There was an error with train data filter samples properties array field (DATA.TRAIN.FILTER_SAMPLES.PROPS). Please check its syntax!", reason="error")
+            main_window.dialog_exec("There was an error with test data filter samples properties array field (DATA.TEST.FILTER_SAMPLES.PROPS). Please check its syntax!", reason="error")
             return True, False
         try:
-            biapy_config['DATA']['TEST']['FILTER_SAMPLES']['VALUES'] = ast.literal_eval(get_text(main_window.ui.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT))
+            biapy_config['DATA']['TEST']['FILTER_SAMPLES']['VALUES'] = ast.literal_eval(get_text(main_window.ui.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT))
         except: 
-            main_window.dialog_exec("There was an error with train data filter samples values array field (DATA.TRAIN.FILTER_SAMPLES.VALUES). Please check its syntax!", reason="error")
+            main_window.dialog_exec("There was an error with test data filter samples values array field (DATA.TEST.FILTER_SAMPLES.VALUES). Please check its syntax!", reason="error")
             return True, False
         try:
-            biapy_config['DATA']['TEST']['FILTER_SAMPLES']['SIGNS'] = ast.literal_eval(get_text(main_window.ui.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT))
+            biapy_config['DATA']['TEST']['FILTER_SAMPLES']['SIGNS'] = ast.literal_eval(get_text(main_window.ui.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT))
         except: 
-            main_window.dialog_exec("There was an error with train data filter samples signs array field (DATA.TRAIN.FILTER_SAMPLES.SIGNS). Please check its syntax!", reason="error")
+            main_window.dialog_exec("There was an error with test data filter samples signs array field (DATA.TEST.FILTER_SAMPLES.SIGNS). Please check its syntax!", reason="error")
             return True, False
 
     # Model definition
