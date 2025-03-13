@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: 881a8338a6e34b339bcb042865e4a7b0d66fdd48 (3.5.10)
+## Copied from BiaPy commit: 783f1f5a9d6c4148b6eeadfec437585dab72279d (almost 3.5.11)
 import os
 import glob
 import numpy as np
@@ -36,7 +36,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
         assert cfg.PROBLEM.INSTANCE_SEG.TYPE in [
             "regular",
             "synapses",
-        ], "'PROBLEM.INSTANCE_SEG.TYPE' needs to be one between ['regular', 'synapses']"
+        ], "'PROBLEM.INSTANCE_SEG.TYPE' needs to be in ['regular', 'synapses']"
 
         if cfg.PROBLEM.INSTANCE_SEG.TYPE == "regular":
             channels_provided = len(cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS.replace("Dv2", "D"))
@@ -76,10 +76,34 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                     raise ValueError(
                         "'foreground' property can only be used in SEMANTIC_SEG, INSTANCE_SEG and DETECTION workflows"
                     )
-                if phase == "TEST" and not cfg.DATA.TEST.LOAD_GT and cfg.DATA.TEST.USE_VAL_AS_TEST:
-                    raise ValueError(
-                        "'foreground' condition can not be used for filtering when test ground truth is not provided"
+
+            target_required = any(
+                [
+                    True
+                    for cond in getattr(cfg.DATA, phase).FILTER_SAMPLES.PROPS
+                    if cond
+                    in [
+                        "foreground",
+                        "target_mean",
+                        "target_min",
+                        "target_max",
+                        "diff",
+                        "diff_by_min_max_ratio",
+                        "diff_by_target_min_max_ratio",
+                    ]
+                ]
+            )
+            if target_required and cfg.PROBLEM.TYPE not in ["DENOISING", "SELF_SUPERVISED"]:
+                raise ValueError(
+                    "Target data is required to apply some of the filters you selected, i.e. the property is one of ['foreground', 'target_mean', 'target_min', 'target_max', 'diff', 'diff_by_min_max_ratio', 'diff_by_target_min_max_ratio']. Provided is {} . This is not possible in 'DENOISING', 'SELF_SUPERVISED' workflows as no target data is required".format(
+                        getattr(cfg.DATA, phase).FILTER_SAMPLES.PROPS
                     )
+                )
+
+            if target_required and phase == "TEST" and not cfg.DATA.TEST.LOAD_GT and not cfg.DATA.TEST.USE_VAL_AS_TEST:
+                raise ValueError(
+                    "['foreground', 'target_mean', 'target_min', 'target_max', 'diff', 'diff_by_min_max_ratio', 'diff_by_target_min_max_ratio'] properties can not be used for filtering when test ground truth is not provided"
+                )
 
             if len(getattr(cfg.DATA, phase).FILTER_SAMPLES.PROPS) == 0:
                 raise ValueError(
@@ -135,10 +159,34 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 ):
                     raise ValueError("Non repeated values are allowed in 'DATA.TRAIN.FILTER_SAMPLES'")
                 for j in range(len(getattr(cfg.DATA, phase).FILTER_SAMPLES.PROPS[i])):
-                    if getattr(cfg.DATA, phase).FILTER_SAMPLES.PROPS[i][j] not in ["foreground", "mean", "min", "max"]:
+                    if getattr(cfg.DATA, phase).FILTER_SAMPLES.PROPS[i][j] not in [
+                        "foreground",
+                        "mean",
+                        "min",
+                        "max",
+                        "target_mean",
+                        "target_min",
+                        "target_max",
+                        "diff",
+                        "diff_by_min_max_ratio",
+                        "diff_by_target_min_max_ratio",
+                    ]:
                         raise ValueError(
-                            "'DATA.TRAIN.FILTER_SAMPLES.PROPS' can only be one among these: ['foreground', 'mean', 'min', 'max']"
+                            "'DATA.TRAIN.FILTER_SAMPLES.PROPS' can only be one among these: ['foreground', 'mean', 'min', 'max', 'target_mean', 'target_min', 'target_max', 'diff', 'diff_by_min_max_ratio', 'diff_by_target_min_max_ratio']"
                         )
+                    if getattr(cfg.DATA, phase).FILTER_SAMPLES.PROPS[i][j] in [
+                        "diff",
+                        "diff_by_min_max_ratio",
+                        "diff_by_target_min_max_ratio",
+                    ]:
+                        if cfg.PROBLEM.TYPE == "SUPER_RESOLUTION":
+                            raise ValueError(
+                                "'DATA.TRAIN.FILTER_SAMPLES.PROPS' can not have a condition between ['diff', 'diff_by_min_max_ratio', 'diff_by_target_min_max_ratio'] in super-resolution workflow"
+                            )
+                        if phase == "TEST" and not cfg.DATA.TEST.LOAD_GT:
+                            raise ValueError(
+                                "'DATA.TRAIN.FILTER_SAMPLES.PROPS' can not have a condition between ['diff', 'diff_by_min_max_ratio', 'diff_by_target_min_max_ratio'] for test data if 'DATA.TEST.LOAD_GT' is False"
+                            )
                     if getattr(cfg.DATA, phase).FILTER_SAMPLES.SIGNS[i][j] not in [
                         "gt",
                         "ge",
@@ -436,8 +484,6 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             opts.extend(["TRAIN.METRICS", ["psnr", "mae", "mse", "ssim"]])
         if set_test_metrics:
             metric_default_list = ["psnr", "mae", "mse", "ssim"]
-            if cfg.PROBLEM.NDIM == "2D":  # IS, FID and LPIPS implementations only works for 2D images
-                metric_default_list += ["is", "fid", "lpips"]
             opts.extend(["TEST.METRICS", metric_default_list])
 
         assert len(cfg.TRAIN.METRICS) == 0 or all(
@@ -450,9 +496,9 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             ]
         ), f"'TEST.METRICS' options are ['psnr', 'mae', 'mse', 'ssim', 'fid', 'is', 'lpips'] in {cfg.PROBLEM.TYPE} workflow"
 
-        if any([True for x in cfg.TEST.METRICS if x.lower() in ["is", "fid", "lpips"]]) and cfg.PROBLEM.NDIM == "3D":
-            raise ValueError("IS, FID and LPIPS metrics can only be measured when PROBLEM.NDIM == '3D'")
-
+        if any([True for x in cfg.TEST.METRICS if x.lower() in ["is", "fid", "lpips"]]):
+            if cfg.PROBLEM.NDIM == "3D":
+                raise ValueError("IS, FID and LPIPS metrics can only be measured when PROBLEM.NDIM == '2D'")
     elif cfg.PROBLEM.TYPE == "DENOISING":
         if set_train_metrics:
             opts.extend(["TRAIN.METRICS", ["mae", "mse"]])
@@ -500,7 +546,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             assert (
                 len(cfg.LOSS.WEIGHTS) == 2
             ), "'LOSS.WEIGHTS' needs to be a list of two floats when using LOSS.TYPE == 'W_CE_DICE'"
-            assert sum(cfg.LOSS.WEIGHTS) != 1, "'LOSS.WEIGHTS' values need to sum 1"
+            assert sum(cfg.LOSS.WEIGHTS) == 1, "'LOSS.WEIGHTS' values need to sum 1"
     elif cfg.PROBLEM.TYPE in [
         "SUPER_RESOLUTION",
         "SELF_SUPERVISED",
@@ -510,7 +556,15 @@ def check_configuration(cfg, jobname, check_data_paths=True):
         assert loss in [
             "MAE",
             "MSE",
-        ], "LOSS.TYPE not in ['MAE', 'MSE']"
+            "SSIM",
+            "W_MAE_SSIM",
+            "W_MSE_SSIM",
+        ], "LOSS.TYPE not in ['MAE', 'MSE', 'SSIM', 'W_MAE_SSIM', 'W_MSE_SSIM']"
+        if loss in ["W_MAE_SSIM", "W_MSE_SSIM"]:
+            assert (
+                len(cfg.LOSS.WEIGHTS) == 2
+            ), "'LOSS.WEIGHTS' needs to be a list of two floats when using LOSS.TYPE is in ['W_MAE_SSIM', 'W_MSE_SSIM']"
+            assert sum(cfg.LOSS.WEIGHTS) == 1, "'LOSS.WEIGHTS' values need to sum 1"
     elif cfg.PROBLEM.TYPE == "DENOISING":
         loss = "MSE" if cfg.LOSS.TYPE == "" else cfg.LOSS.TYPE
         assert loss == "MSE", "LOSS.TYPE must be 'MSE'"
@@ -523,7 +577,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
         raise ValueError("'TEST.ANALIZE_2D_IMGS_AS_3D_STACK' makes no sense when the problem is 3D. Disable it.")
 
     if cfg.MODEL.SOURCE not in ["biapy", "bmz", "torchvision"]:
-        raise ValueError("'MODEL.SOURCE' needs to be one between ['biapy', 'bmz', 'torchvision']")
+        raise ValueError("'MODEL.SOURCE' needs to be in ['biapy', 'bmz', 'torchvision']")
 
     if cfg.MODEL.SOURCE == "bmz":
         if cfg.MODEL.BMZ.SOURCE_MODEL_ID == "":
@@ -579,7 +633,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 "lraspp_mobilenet_v3_large",
             ]:
                 raise ValueError(
-                    "'MODEL.SOURCE' must be one between ['deeplabv3_mobilenet_v3_large', 'deeplabv3_resnet101', "
+                    "'MODEL.SOURCE' must be in ['deeplabv3_mobilenet_v3_large', 'deeplabv3_resnet101', "
                     "'deeplabv3_resnet50', 'fcn_resnet101', 'fcn_resnet50', 'lraspp_mobilenet_v3_large' ]"
                 )
             if (
@@ -638,7 +692,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 "BCDv2",
             ]:
                 raise ValueError(
-                    "'PROBLEM.INSTANCE_SEG.DATA_CHANNELS' needs to be one between ['C', 'BC', 'BCM', 'BCD', 'BCDv2'] "
+                    "'PROBLEM.INSTANCE_SEG.DATA_CHANNELS' needs to be in ['C', 'BC', 'BCM', 'BCD', 'BCDv2'] "
                     "when 'TEST.POST_PROCESSING.VORONOI_ON_MASK' is enabled"
                 )
             if not check_value(cfg.TEST.POST_PROCESSING.VORONOI_TH):
@@ -668,7 +722,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             "dense",
         ]:
             raise ValueError(
-                "'PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE' must be one between ['thick', 'inner', 'outer', 'subpixel', 'dense']"
+                "'PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE' must be in ['thick', 'inner', 'outer', 'subpixel', 'dense']"
             )
         if cfg.PROBLEM.INSTANCE_SEG.TYPE == "regular":
             if (
@@ -690,9 +744,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 "maskrcnn_resnet50_fpn",
                 "maskrcnn_resnet50_fpn_v2",
             ]:
-                raise ValueError(
-                    "'MODEL.SOURCE' must be one between ['maskrcnn_resnet50_fpn', 'maskrcnn_resnet50_fpn_v2']"
-                )
+                raise ValueError("'MODEL.SOURCE' must be in ['maskrcnn_resnet50_fpn', 'maskrcnn_resnet50_fpn_v2']")
             if cfg.PROBLEM.NDIM == "3D":
                 raise ValueError("TorchVision model's for instance segmentation are only available for 2D images")
             if cfg.TRAIN.ENABLE:
@@ -758,7 +810,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 "retinanet_resnet50_fpn_v2",
             ]:
                 raise ValueError(
-                    "'MODEL.SOURCE' must be one between ['fasterrcnn_mobilenet_v3_large_320_fpn', 'fasterrcnn_mobilenet_v3_large_fpn', "
+                    "'MODEL.SOURCE' must be in ['fasterrcnn_mobilenet_v3_large_320_fpn', 'fasterrcnn_mobilenet_v3_large_fpn', "
                     "'fasterrcnn_resnet50_fpn', 'fasterrcnn_resnet50_fpn_v2', 'fcos_resnet50_fpn', 'ssd300_vgg16', 'ssdlite320_mobilenet_v3_large', "
                     "'retinanet_resnet50_fpn', 'retinanet_resnet50_fpn_v2']"
                 )
@@ -787,7 +839,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
         if cfg.MODEL.SOURCE == "torchvision":
             raise ValueError("'MODEL.SOURCE' as 'torchvision' is not available in super-resolution workflow")
         if cfg.DATA.NORMALIZATION.TYPE not in ["div", "scale_range"]:
-            raise ValueError("'DATA.NORMALIZATION.TYPE' in SR workflow needs to be one between ['div','scale_range']")
+            raise ValueError("'DATA.NORMALIZATION.TYPE' in SR workflow needs to be in ['div','scale_range']")
 
     #### Self-supervision ####
     elif cfg.PROBLEM.TYPE == "SELF_SUPERVISED":
@@ -808,7 +860,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             assert cfg.MODEL.MAE_MASK_TYPE in [
                 "random",
                 "grid",
-            ], "'MODEL.MAE_MASK_TYPE' needs to be one between ['random', 'grid']"
+            ], "'MODEL.MAE_MASK_TYPE' needs to be in ['random', 'grid']"
             if cfg.MODEL.MAE_MASK_TYPE == "random" and not check_value(cfg.MODEL.MAE_MASK_RATIO):
                 raise ValueError("'MODEL.MAE_MASK_RATIO' not in [0, 1] range")
         else:
@@ -930,7 +982,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 "wide_resnet50_2",
             ]:
                 raise ValueError(
-                    "'MODEL.SOURCE' must be one between [ "
+                    "'MODEL.SOURCE' must be in [ "
                     "'alexnet', 'convnext_base', 'convnext_large', 'convnext_small', 'convnext_tiny', 'densenet121', 'densenet161', "
                     "'densenet169', 'densenet201', 'efficientnet_b0', 'efficientnet_b1', 'efficientnet_b2', 'efficientnet_b3', "
                     "'efficientnet_b4', 'efficientnet_b5', 'efficientnet_b6', 'efficientnet_b7', 'efficientnet_v2_l', 'efficientnet_v2_m', "
@@ -1018,10 +1070,10 @@ def check_configuration(cfg, jobname, check_data_paths=True):
         if cfg.DATA.PREPROCESS.ZOOM.ENABLE and not cfg.TEST.BY_CHUNKS.ENABLE:
             raise ValueError("'DATA.PREPROCESS.ZOOM.ENABLE' can only be activated when 'TEST.BY_CHUNKS.ENABLE' is True")
         if cfg.DATA.PREPROCESS.ZOOM.ENABLE and len(cfg.DATA.PREPROCESS.ZOOM.ZOOM_FACTOR) != len(
-            cfg.TEST.BY_CHUNKS.INPUT_IMG_AXES_ORDER
+            cfg.DATA.TEST.INPUT_IMG_AXES_ORDER
         ):
             raise ValueError(
-                "'DATA.PREPROCESS.ZOOM.ZOOM_FACTOR' needs to have the same length as 'TEST.BY_CHUNKS.INPUT_IMG_AXES_ORDER'"
+                "'DATA.PREPROCESS.ZOOM.ZOOM_FACTOR' needs to have the same length as 'DATA.TEST.INPUT_IMG_AXES_ORDER'"
             )
 
     #### Data ####
@@ -1129,7 +1181,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             cfg.DATA.TEST.LOAD_GT
             and not os.path.exists(cfg.DATA.TEST.GT_PATH)
             and cfg.PROBLEM.TYPE not in ["CLASSIFICATION", "SELF_SUPERVISED"]
-            and not cfg.TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA
+            and not cfg.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA
         ):
             raise ValueError("Test data mask not found: {}".format(cfg.DATA.TEST.GT_PATH))
     if cfg.TEST.ENABLE and cfg.TEST.BY_CHUNKS.ENABLE:
@@ -1138,57 +1190,57 @@ def check_configuration(cfg, jobname, check_data_paths=True):
         assert cfg.TEST.BY_CHUNKS.FORMAT.lower() in [
             "h5",
             "zarr",
-        ], "'TEST.BY_CHUNKS.FORMAT' needs to be one between ['H5', 'Zarr']"
+        ], "'TEST.BY_CHUNKS.FORMAT' needs to be in ['H5', 'Zarr']"
         opts.extend(["TEST.BY_CHUNKS.FORMAT", cfg.TEST.BY_CHUNKS.FORMAT.lower()])
         if cfg.TEST.BY_CHUNKS.WORKFLOW_PROCESS.ENABLE:
             assert cfg.TEST.BY_CHUNKS.WORKFLOW_PROCESS.TYPE in [
                 "chunk_by_chunk",
                 "entire_pred",
-            ], "'TEST.BY_CHUNKS.WORKFLOW_PROCESS.TYPE' needs to be one between ['chunk_by_chunk', 'entire_pred']"
-        if len(cfg.TEST.BY_CHUNKS.INPUT_IMG_AXES_ORDER) < 3:
-            raise ValueError("'TEST.BY_CHUNKS.INPUT_IMG_AXES_ORDER' needs to be at least of length 3, e.g., 'ZYX'")
+            ], "'TEST.BY_CHUNKS.WORKFLOW_PROCESS.TYPE' needs to be in ['chunk_by_chunk', 'entire_pred']"
+        if len(cfg.DATA.TEST.INPUT_IMG_AXES_ORDER) < 3:
+            raise ValueError("'DATA.TEST.INPUT_IMG_AXES_ORDER' needs to be at least of length 3, e.g., 'ZYX'")
         if cfg.MODEL.N_CLASSES > 2:
             raise ValueError("Not implemented pipeline option: 'MODEL.N_CLASSES' > 2 and 'TEST.BY_CHUNKS'")
-        if cfg.TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA:
-            if cfg.TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_RAW_PATH == "":
+        if cfg.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA:
+            if cfg.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_RAW_PATH == "":
                 raise ValueError(
-                    "'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_RAW_PATH' needs to be set when "
-                    "'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA' is used."
+                    "'DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_RAW_PATH' needs to be set when "
+                    "'DATA.TEST.INPUT_ZARR_MULTIPLE_DATA' is used."
                 )
             if cfg.DATA.TEST.LOAD_GT:
                 if cfg.PROBLEM.INSTANCE_SEG.TYPE == "regular":
-                    if cfg.TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_GT_PATH == "":
+                    if cfg.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_GT_PATH == "":
                         raise ValueError(
-                            "'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_GT_PATH' needs to be set when "
-                            "'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA' is used."
+                            "'DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_GT_PATH' needs to be set when "
+                            "'DATA.TEST.INPUT_ZARR_MULTIPLE_DATA' is used."
                         )
                 else:  # synapses
-                    if cfg.TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_ID_PATH == "":
+                    if cfg.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_ID_PATH == "":
                         raise ValueError(
-                            "'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_ID_PATH' needs to be set when 'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA' is used "
+                            "'DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_ID_PATH' needs to be set when 'DATA.TEST.INPUT_ZARR_MULTIPLE_DATA' is used "
                             "and PROBLEM.INSTANCE_SEG.TYPE == 'synapses'"
                         )
-                    # if cfg.TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_TYPES_PATH == "":
+                    # if cfg.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_TYPES_PATH == "":
                     #     raise ValueError(
-                    #         "'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_TYPES_PATH' needs to be set when 'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA' is used "
+                    #         "'DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_TYPES_PATH' needs to be set when 'DATA.TEST.INPUT_ZARR_MULTIPLE_DATA' is used "
                     #         "and PROBLEM.INSTANCE_SEG.TYPE == 'synapses'"
                     #     )
-                    if cfg.TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_PARTNERS_PATH == "":
+                    if cfg.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_PARTNERS_PATH == "":
                         raise ValueError(
-                            "'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_PARTNERS_PATH' needs to be set when 'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA' is used "
+                            "'DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_PARTNERS_PATH' needs to be set when 'DATA.TEST.INPUT_ZARR_MULTIPLE_DATA' is used "
                             "and PROBLEM.INSTANCE_SEG.TYPE == 'synapses'"
                         )
-                    if cfg.TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_LOCATIONS_PATH == "":
+                    if cfg.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_LOCATIONS_PATH == "":
                         raise ValueError(
-                            "'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_LOCATIONS_PATH' needs to be set when 'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA' is used "
+                            "'DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_LOCATIONS_PATH' needs to be set when 'DATA.TEST.INPUT_ZARR_MULTIPLE_DATA' is used "
                             "and PROBLEM.INSTANCE_SEG.TYPE == 'synapses'"
                         )
-                    if cfg.TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_RESOLUTION_PATH == "":
+                    if cfg.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_RESOLUTION_PATH == "":
                         raise ValueError(
-                            "'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_RESOLUTION_PATH' needs to be set when 'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA' is used "
+                            "'DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_RESOLUTION_PATH' needs to be set when 'DATA.TEST.INPUT_ZARR_MULTIPLE_DATA' is used "
                             "and PROBLEM.INSTANCE_SEG.TYPE == 'synapses'"
                         )
-                    
+
     if cfg.TRAIN.ENABLE:
         if cfg.DATA.EXTRACT_RANDOM_PATCH and cfg.DATA.PROBABILITY_MAP:
             if not cfg.PROBLEM.TYPE == "SEMANTIC_SEG":
@@ -1306,25 +1358,21 @@ def check_configuration(cfg, jobname, check_data_paths=True):
     assert cfg.DATA.NORMALIZATION.TYPE in [
         "div",
         "scale_range",
-        "custom",
-    ], "DATA.NORMALIZATION.TYPE not in ['div', 'scale_range', 'custom']"
-    if cfg.DATA.NORMALIZATION.CUSTOM_MEAN != -1 and cfg.DATA.NORMALIZATION.CUSTOM_STD == -1:
-        raise ValueError(
-            "'DATA.NORMALIZATION.CUSTOM_STD' needs to be provided when 'DATA.NORMALIZATION.CUSTOM_MEAN' is provided too"
-        )
-    if cfg.DATA.NORMALIZATION.PERC_CLIP:
-        if cfg.DATA.NORMALIZATION.PERC_LOWER == -1:
+        "zero_mean_unit_variance",
+    ], "DATA.NORMALIZATION.TYPE not in ['div', 'scale_range', 'zero_mean_unit_variance']"
+    if cfg.DATA.NORMALIZATION.PERC_CLIP.ENABLE:
+        if cfg.DATA.NORMALIZATION.PERC_CLIP.LOWER_PERC == -1 and cfg.DATA.NORMALIZATION.PERC_CLIP.LOWER_VALUE == -1:
             raise ValueError(
-                "'DATA.NORMALIZATION.PERC_LOWER' needs to be set when DATA.NORMALIZATION.PERC_CLIP == 'True'"
+                "'DATA.NORMALIZATION.PERC_CLIP.LOWER_PERC' or 'DATA.NORMALIZATION.PERC_CLIP.LOWER_VALUE' need to be set when DATA.NORMALIZATION.PERC_CLIP.ENABLE == 'True'"
             )
-        if cfg.DATA.NORMALIZATION.PERC_UPPER == -1:
+        if cfg.DATA.NORMALIZATION.PERC_CLIP.UPPER_PERC == -1 and cfg.DATA.NORMALIZATION.PERC_CLIP.UPPER_VALUE == -1:
             raise ValueError(
-                "'DATA.NORMALIZATION.PERC_UPPER' needs to be set when DATA.NORMALIZATION.PERC_CLIP == 'True'"
+                "'DATA.NORMALIZATION.PERC_CLIP.UPPER_PERC' or 'DATA.NORMALIZATION.PERC_CLIP.UPPER_VALUE' need to be set when DATA.NORMALIZATION.PERC_CLIP.ENABLE == 'True'"
             )
-        if not check_value(cfg.DATA.NORMALIZATION.PERC_LOWER, value_range=(0, 100)):
-            raise ValueError("'DATA.NORMALIZATION.PERC_LOWER' not in [0, 100] range")
-        if not check_value(cfg.DATA.NORMALIZATION.PERC_UPPER, value_range=(0, 100)):
-            raise ValueError("'DATA.NORMALIZATION.PERC_UPPER' not in [0, 100] range")
+        if not check_value(cfg.DATA.NORMALIZATION.PERC_CLIP.LOWER_PERC, value_range=(0, 100)):
+            raise ValueError("'DATA.NORMALIZATION.PERC_CLIP.LOWER_PERC' not in [0, 100] range")
+        if not check_value(cfg.DATA.NORMALIZATION.PERC_CLIP.UPPER_PERC, value_range=(0, 100)):
+            raise ValueError("'DATA.NORMALIZATION.PERC_CLIP.UPPER_PERC' not in [0, 100] range")
     if cfg.DATA.TRAIN.REPLICATE:
         if cfg.PROBLEM.TYPE == "CLASSIFICATION" or (
             cfg.PROBLEM.TYPE == "SELF_SUPERVISED" and cfg.PROBLEM.SELF_SUPERVISED.PRETEXT_TASK == "masking"
@@ -1375,6 +1423,8 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 "mae",
                 "unext_v1",
                 "unext_v2",
+                "dfcan",
+                "rcan",
             ]
             and cfg.PROBLEM.NDIM == "3D"
             and cfg.PROBLEM.TYPE != "CLASSIFICATION"
@@ -1394,6 +1444,8 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                         "mae",
                         "unext_v1",
                         "unext_v2",
+                        "dfcan",
+                        "rcan",
                     ]
                 )
             )
@@ -1477,7 +1529,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
 
         if cfg.MODEL.UPSAMPLE_LAYER.lower() not in ["upsampling", "convtranspose"]:
             raise ValueError(
-                "cfg.MODEL.UPSAMPLE_LAYER' needs to be one between ['upsampling', 'convtranspose']. Provided {}".format(
+                "cfg.MODEL.UPSAMPLE_LAYER' needs to be in ['upsampling', 'convtranspose']. Provided {}".format(
                     cfg.MODEL.UPSAMPLE_LAYER
                 )
             )
@@ -1648,9 +1700,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             "warmupcosine",
             "onecycle",
         ]:
-            raise ValueError(
-                "'TRAIN.LR_SCHEDULER.NAME' must be one between ['reduceonplateau', 'warmupcosine', 'onecycle']"
-            )
+            raise ValueError("'TRAIN.LR_SCHEDULER.NAME' must be in ['reduceonplateau', 'warmupcosine', 'onecycle']")
         if cfg.TRAIN.LR_SCHEDULER.MIN_LR == -1.0 and cfg.TRAIN.LR_SCHEDULER.NAME != "onecycle":
             raise ValueError(
                 "'TRAIN.LR_SCHEDULER.MIN_LR' needs to be set when 'TRAIN.LR_SCHEDULER.NAME' is between ['reduceonplateau', 'warmupcosine']"
@@ -1734,10 +1784,10 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             "reflect",
             "wrap",
             "symmetric",
-        ], "'AUGMENTOR.AFFINE_MODE' needs to be one between ['constant', 'reflect', 'wrap', 'symmetric']"
-        if cfg.AUGMENTOR.GAMMA_CONTRAST and cfg.DATA.NORMALIZATION.TYPE == "custom":
+        ], "'AUGMENTOR.AFFINE_MODE' needs to be in ['constant', 'reflect', 'wrap', 'symmetric']"
+        if cfg.AUGMENTOR.GAMMA_CONTRAST and cfg.DATA.NORMALIZATION.TYPE == "zero_mean_unit_variance":
             raise ValueError(
-                "'AUGMENTOR.GAMMA_CONTRAST' doesn't work correctly on images with negative values, which 'custom' "
+                "'AUGMENTOR.GAMMA_CONTRAST' doesn't work correctly on images with negative values, which 'zero_mean_unit_variance' "
                 "normalization will lead to"
             )
 
@@ -1781,18 +1831,18 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                                 raise ValueError(
                                     f"'MODEL.BMZ.EXPORT.CITE' malformed. Cite dictionary available keys are: ['text', 'doi', 'url']. Provided {k}. E.g. {'text': 'Gizmo et al.', 'doi': '10.1002/xyzacab123'}"
                                 )
-            if isinstance(cfg.MODEL.BMZ.EXPORT.DATASET_INFO, list):
+            if not isinstance(cfg.MODEL.BMZ.EXPORT.DATASET_INFO, list):
                 raise ValueError(
                     "'MODEL.BMZ.EXPORT.DATASET_INFO' must be a list with a single dictionary inside. Keys that must be set in that dict are: ['name', 'doi', 'image_modality'] and optionallly 'dataset_id'"
                 )
             elif len(cfg.MODEL.BMZ.EXPORT.DATASET_INFO) != 1:
                 raise ValueError(
                     "'MODEL.BMZ.EXPORT.DATASET_INFO' must be a list with a single dictionary inside. Keys that must be set in that dict are: ['name', 'doi', 'image_modality'] and optionallly 'dataset_id'. "
-                    "E.g. [{ 'name': 'CartoCell', 'doi': '10.1016/j.crmeth.2023.100597', 'image_modality': 'fluorescence microscopy',  'dataset_id': 'biapy/cartocell_cyst_segmentation' }]"                
-                    )
+                    "E.g. [{ 'name': 'CartoCell', 'doi': '10.1016/j.crmeth.2023.100597', 'image_modality': 'fluorescence microscopy',  'dataset_id': 'biapy/cartocell_cyst_segmentation' }]"
+                )
             else:
                 for k in cfg.MODEL.BMZ.EXPORT.DATASET_INFO[0].keys():
-                    if k not in ["name", "doi", "image_modality", 'dataset_id']:
+                    if k not in ["name", "doi", "image_modality", "dataset_id"]:
                         raise ValueError(
                             f"'MODEL.BMZ.EXPORT.DATASET_INFO' malformed. Cite dictionary available keys are: ['name', 'doi', 'image_modality', 'dataset_id']. Provided {k}. "
                             "E.g. [{ 'name': 'CartoCell', 'doi': '10.1016/j.crmeth.2023.100597', 'image_modality': 'fluorescence microscopy',  'dataset_id': 'biapy/cartocell_cyst_segmentation' }]"
@@ -1872,7 +1922,6 @@ def compare_configurations_without_model(actual_cfg, old_cfg, header_message="",
             )
 
     print("Configurations seem to be compatible. Continuing . . .")
-
 
 
 def get_checkpoint_path(cfg, jobname):
@@ -2100,6 +2149,7 @@ def check_torchvision_available_models(workflow, ndim):
         
     return models, model_restrictions_description, model_restrictions
 
+
 def convert_old_model_cfg_to_current_version(old_cfg):
     """
     Backward compatibility until commit 6aa291baa9bc5d7fb410454bfcea3a3da0c23604 (version 3.2.0)
@@ -2186,6 +2236,29 @@ def convert_old_model_cfg_to_current_version(old_cfg):
                 else:
                     del old_cfg["TEST"]["POST_PROCESSING"]["DET_WATERSHED_FIRST_DILATION"]
 
+        if "BY_CHUNKS" in old_cfg["TEST"]:
+            for i, x in enumerate(old_cfg["TEST"]["BY_CHUNKS"].copy()):
+                if x in [
+                    "INPUT_IMG_AXES_ORDER",
+                    "INPUT_MASK_AXES_ORDER",
+                    "INPUT_ZARR_MULTIPLE_DATA",
+                    "INPUT_ZARR_MULTIPLE_DATA_RAW_PATH",
+                    "INPUT_ZARR_MULTIPLE_DATA_GT_PATH",
+                    "INPUT_ZARR_MULTIPLE_DATA_ID_PATH",
+                    "INPUT_ZARR_MULTIPLE_DATA_PARTNERS_PATH",
+                    "INPUT_ZARR_MULTIPLE_DATA_LOCATIONS_PATH",
+                    "INPUT_ZARR_MULTIPLE_DATA_RESOLUTION_PATH",
+                ]:
+                    # Ensure ["DATA"]["TEST"] exists
+                    if i == 0:
+                        if "DATA" not in old_cfg:
+                            old_cfg["DATA"] = {}
+                        if "TEST" not in old_cfg["DATA"]:
+                            old_cfg["DATA"]["TEST"] = {}
+
+                    old_cfg["DATA"]["TEST"][x] = old_cfg["TEST"]["BY_CHUNKS"][x]
+                    del old_cfg["TEST"]["BY_CHUNKS"][x]
+
         if "DET_MIN_TH_TO_BE_PEAK" in old_cfg["TEST"]:
             if isinstance(old_cfg["TEST"]["DET_MIN_TH_TO_BE_PEAK"], list):
                 if len(old_cfg["TEST"]["DET_MIN_TH_TO_BE_PEAK"]) > 0:
@@ -2233,6 +2306,38 @@ def convert_old_model_cfg_to_current_version(old_cfg):
         if "VAL" in old_cfg["DATA"]:
             if "BINARY_MASKS" in old_cfg["DATA"]["VAL"]:
                 del old_cfg["DATA"]["VAL"]["BINARY_MASKS"]
+
+        if "NORMALIZATION" in old_cfg["DATA"]:
+            if "PERC_CLIP" in old_cfg["DATA"]["NORMALIZATION"]:
+                val = old_cfg["DATA"]["NORMALIZATION"]["PERC_CLIP"]
+                if isinstance(val, bool) and val:
+                    del old_cfg["DATA"]["NORMALIZATION"]["PERC_CLIP"]
+                    old_cfg["DATA"]["NORMALIZATION"]["PERC_CLIP"] = {}
+                    old_cfg["DATA"]["NORMALIZATION"]["PERC_CLIP"]["ENABLE"] = True
+                    if "PERC_LOWER" in old_cfg["DATA"]["NORMALIZATION"]:
+                        old_cfg["DATA"]["NORMALIZATION"]["PERC_CLIP"]["LOWER_PERC"] = old_cfg["DATA"]["NORMALIZATION"][
+                            "PERC_LOWER"
+                        ]
+                        del old_cfg["DATA"]["NORMALIZATION"]["PERC_LOWER"]
+                    if "PERC_UPPER" in old_cfg["DATA"]["NORMALIZATION"]:
+                        old_cfg["DATA"]["NORMALIZATION"]["PERC_CLIP"]["UPPER_PERC"] = old_cfg["DATA"]["NORMALIZATION"][
+                            "PERC_UPPER"
+                        ]
+                        del old_cfg["DATA"]["NORMALIZATION"]["PERC_UPPER"]
+
+            if old_cfg["DATA"]["NORMALIZATION"]["TYPE"] == "custom":
+                old_cfg["DATA"]["NORMALIZATION"]["TYPE"] = "zero_mean_unit_variance"
+                if "CUSTOM_MEAN" in old_cfg["DATA"]["NORMALIZATION"]:
+                    old_cfg["DATA"]["NORMALIZATION"]["ZERO_MEAN_UNIT_VAR"] = {}
+                    mean = old_cfg["DATA"]["NORMALIZATION"]["CUSTOM_MEAN"]
+                    old_cfg["DATA"]["NORMALIZATION"]["ZERO_MEAN_UNIT_VAR"]["MEAN_VAL"] = mean
+                    del old_cfg["DATA"]["NORMALIZATION"]["CUSTOM_MEAN"]
+                if "CUSTOM_STD" in old_cfg["DATA"]["NORMALIZATION"]:
+                    if "ZERO_MEAN_UNIT_VAR" not in old_cfg["DATA"]["NORMALIZATION"]:
+                        old_cfg["DATA"]["NORMALIZATION"]["ZERO_MEAN_UNIT_VAR"] = {}
+                    std = old_cfg["DATA"]["NORMALIZATION"]["CUSTOM_STD"]
+                    old_cfg["DATA"]["NORMALIZATION"]["ZERO_MEAN_UNIT_VAR"]["STD_VAL"] = std
+                    del old_cfg["DATA"]["NORMALIZATION"]["CUSTOM_STD"]
 
     if "AUGMENTOR" in old_cfg:
         if "BRIGHTNESS_EM" in old_cfg["AUGMENTOR"]:
@@ -2312,4 +2417,4 @@ def convert_old_model_cfg_to_current_version(old_cfg):
     except:
         pass
 
-    return old_cfg
+    return old_cfg 
