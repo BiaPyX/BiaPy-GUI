@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: 881a8338a6e34b339bcb042865e4a7b0d66fdd48 (3.5.10)
+## Copied from BiaPy commit: da129c759abfee420c8c9d636a4e8f771687dfc0 (almost 3.5.11)
 # Synapse seg not added
 import os
 from yacs.config import CfgNode as CN
@@ -161,6 +161,8 @@ class Config:
         # To apply a structured mask as is proposed in Noise2Void to alleviate the limitation of the method of not removing effectively
         # the structured noise (section 4.4 of their paper).
         _C.PROBLEM.DENOISING.N2V_STRUCTMASK = False
+        # Whether to load ground truth data in denoising
+        _C.PROBLEM.DENOISING.LOAD_GT_DATA = False
 
         ### SUPER_RESOLUTION
         _C.PROBLEM.SUPER_RESOLUTION = CN()
@@ -219,23 +221,39 @@ class Config:
         # If filtering is done, with any of DATA.*.FILTER_SAMPLES.* variables, this will decide how this filtering will be done:
         #   * True: apply filter image by image. 
         #   * False: apply filtering sample by sample. Each sample represents a patch within an image.
-        _C.DATA.FILTER_BY_IMAGE = True
+        _C.DATA.FILTER_BY_IMAGE = False
+        # Determines whether to save filtered images. If 'DATA.FILTER_BY_IMAGE' is enabled, two subfolders will be created: one for 
+        # filtered images and another for non-filtered images. Otherwise, no subfolders will be created, and the images will 
+        # display filtered patches as black (all zero values) while retaining original patch values in non-filtered areas. 
+        _C.DATA.SAVE_FILTERED_IMAGES = False
+        # Number of filtered images to save. Only work when 'DATA.SAVE_FILTERED_IMAGES' is True
+        _C.DATA.SAVE_FILTERED_IMAGES_NUM = 3 
 
         _C.DATA.NORMALIZATION = CN()
         # Whether to apply or not a percentile clipping before normalizing the data
-        _C.DATA.NORMALIZATION.PERC_CLIP = False
-        # Lower and upper bound for percentile clip. Must be set when DATA.NORMALIZATION.PERC_CLIP = 'True'
-        _C.DATA.NORMALIZATION.PERC_LOWER = -1.0
-        _C.DATA.NORMALIZATION.PERC_UPPER = -1.0
+        _C.DATA.NORMALIZATION.PERC_CLIP = CN()
+        _C.DATA.NORMALIZATION.PERC_CLIP.ENABLE = False
+        # Lower and upper bound for percentile clip. Must be set when DATA.NORMALIZATION.PERC_CLIP.ENABLE = 'True'
+        _C.DATA.NORMALIZATION.PERC_CLIP.LOWER_PERC = -1.0
+        _C.DATA.NORMALIZATION.PERC_CLIP.UPPER_PERC = -1.0
+        # Lower and upper values to clip. If these are provided the percentiles are not calculated with the variable above, e.g.
+        # 'DATA.NORMALIZATION.PERC_CLIP.LOWER_PERC' and 'DATA.NORMALIZATION.PERC_CLIP.UPPER_PERC' 
+        _C.DATA.NORMALIZATION.PERC_CLIP.LOWER_VALUE = -1.0
+        _C.DATA.NORMALIZATION.PERC_CLIP.UPPER_VALUE = -1.0
         # Normalization type to use. Possible options:
         #   'div' to divide values from 0/255 (or 0/65535 if uint16) in [0,1] range
         #   'scale_range' same as 'div' but scaling the range to [0-max] and then dividing by the maximum value of the data
         #    and not by 255 or 65535
-        #   'custom' to use DATA.NORMALIZATION.CUSTOM_MEAN and DATA.NORMALIZATION.CUSTOM_STD to normalize
+        #   'zero_mean_unit_variance' to substract the mean and divide by std. 
         _C.DATA.NORMALIZATION.TYPE = "div"
+        # Whether to based the normalization on values extracted from the complete image or from each patch. When working with 
+        # large images such as Zarr or H5 it is done by patch automatically. The values are also applied for the percentage
+        # clipping. Options: ['image', 'patch']
+        _C.DATA.NORMALIZATION.MEASURE_BY = "image"
         # Custom normalization variables: mean and std (they are calculated if not provided)
-        _C.DATA.NORMALIZATION.CUSTOM_MEAN = -1.0
-        _C.DATA.NORMALIZATION.CUSTOM_STD = -1.0
+        _C.DATA.NORMALIZATION.ZERO_MEAN_UNIT_VAR = CN()
+        _C.DATA.NORMALIZATION.ZERO_MEAN_UNIT_VAR.MEAN_VAL = -1.0
+        _C.DATA.NORMALIZATION.ZERO_MEAN_UNIT_VAR.STD_VAL = -1.0
 
         # Train
         _C.DATA.TRAIN = CN()
@@ -264,9 +282,6 @@ class Config:
         _C.DATA.TRAIN.INPUT_ZARR_MULTIPLE_DATA_RESOLUTION_PATH = 'volumes.raw'
         # File to load/save data prepared with the appropiate channels in a instance segmentation problem.
         # E.g. _C.PROBLEM.TYPE ='INSTANCE_SEG' and _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS != 'B'
-        _C.DATA.TRAIN.INSTANCE_CHANNELS_DIR = os.path.join(
-            "user_data", "train", "x_" + _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
-        )
         _C.DATA.TRAIN.INSTANCE_CHANNELS_MASK_DIR = os.path.join(
             "user_data", "train", "y_" + _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
         )
@@ -297,13 +312,20 @@ class Config:
         # Its three variables (PROPS, VALUES and SIGNS) define a set of conditions to remove the images from the training set. If an image satisfies any of the 
         # conditions, the image won't be used for training.
         #
-        # In PROPS, we define the property to look at to establish the condition. The available properties are: ['foreground', 'mean', 'min', 'max'].
+        # In PROPS, we define the property to look at to establish the condition. The available properties are: ['foreground', 'mean', 'min', 'max', 
+        # 'target_mean', 'target_min', 'target_max', 'diff'].
         #
         #   * 'foreground' is defined as the percentage of pixels/voxels corresponding to the foreground mask. This option is only valid for
         #     SEMANTIC_SEG, INSTANCE_SEG and DETECTION.
-        #   * 'mean' is defined as the mean intensity value.
-        #   * 'min' is defined as the min intensity value.
-        #   * 'max' is defined as the max intensity value.
+        #   * 'mean' is defined as the mean intensity value of the raw image inputs.
+        #   * 'min' is defined as the min intensity value of the raw image inputs.
+        #   * 'max' is defined as the max intensity value of the raw image inputs.
+        #   * 'diff' is defined as the difference between ground truth and raw images. Available for all workflows but SELF_SUPERVISED and DENOISING. 
+        #   * 'diff_by_min_max_ratio' is defined as the difference between ground truth and raw images multiplied by the ratio between raw image max and min. Available for all workflows but SELF_SUPERVISED and DENOISING. 
+        #   * 'target_mean is defined as the mean intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING.
+        #   * 'target_min' is defined as the min intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING. 
+        #   * 'target_max' is defined as the max intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING.  
+        #   * 'diff_by_target_min_max_ratio' is defined as the difference between ground truth and raw images multiplied by the ratio between ground truth image max and min. Available for all workflows but SELF_SUPERVISED and DENOISING. 
         #
         # With VALUES and SIGNS, we define the specific values and the comparison operators of each property, respectively.
         # The available operators are: ['gt', 'ge', 'lt', 'le'], that corresponds to "greather than" (or ">"), "greather equal" (or ">="), "less than" (or "<"),
@@ -325,7 +347,7 @@ class Config:
         _C.DATA.TRAIN.FILTER_SAMPLES = CN()
         # Whether to enable or not the filtering by properties
         _C.DATA.TRAIN.FILTER_SAMPLES.ENABLE = False
-        # List of lists of properties to apply a filter. Available properties are: ['foreground', 'mean', 'min', 'max']
+        # List of lists of properties to apply a filter. Available properties are: ['foreground', 'mean', 'min', 'max', 'target_mean', 'target_min', 'target_max', 'diff']
         _C.DATA.TRAIN.FILTER_SAMPLES.PROPS = []
         # List of ints/float that represent the values of the properties listed in 'DATA.TRAIN.FILTER_SAMPLES.PROPS'
         # that the images need to satisfy to not be dropped.
@@ -333,6 +355,8 @@ class Config:
         # List of list of signs to do the comparison. Options: ['gt', 'ge', 'lt', 'le'] that corresponds to "greather than", e.g. ">",
         # "greather equal", e.g. ">=", "less than", e.g. "<", and "less equal" e.g. "<=" comparisons.
         _C.DATA.TRAIN.FILTER_SAMPLES.SIGNS = []
+        # Whether to normalize the samples before comparison
+        _C.DATA.TRAIN.FILTER_SAMPLES.NORM_BEFORE = False
 
         # PREPROCESSING
         # Same preprocessing will be applied to all selected datasets
@@ -368,7 +392,7 @@ class Config:
         # WARNING: Only implemented for _C.TEST.BY_CHUNKS = True. It will change the zoom of each patch individually.
         # This is useful when the input image has a different resolution than the one used in the training. The value
         # is the zoom factor to be applied to each patch using scipy.ndimage.zoom.
-        # "E.g. [1,2,1,3,3] that needs to match _C.TEST.BY_CHUNKS.INPUT_IMG_AXES_ORDER axes"
+        # "E.g. [1,2,1,3,3] that needs to match _C.DATA.TEST.INPUT_IMG_AXES_ORDER axes"
         _C.DATA.PREPROCESS.ZOOM.ZOOM_FACTOR = [1, 1, 1, 1, 1]
 
         # Gaussian blur
@@ -427,9 +451,6 @@ class Config:
         _C.DATA.TEST.GT_PATH = os.path.join("user_data", "test", "y")
         # File to load/save data prepared with the appropiate channels in a instance segmentation problem.
         # E.g. _C.PROBLEM.TYPE ='INSTANCE_SEG' and _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS != 'B'
-        _C.DATA.TEST.INSTANCE_CHANNELS_DIR = os.path.join(
-            "user_data", "test", "x_" + _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
-        )
         _C.DATA.TEST.INSTANCE_CHANNELS_MASK_DIR = os.path.join(
             "user_data", "test", "y_" + _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
         )
@@ -451,18 +472,49 @@ class Config:
         _C.DATA.TEST.RESOLUTION = (-1,)
         # Whether to apply argmax to the predicted images
         _C.DATA.TEST.ARGMAX_TO_OUTPUT = True
+        # Order of the axes of the image when using Zarr/H5 images in test data.
+        _C.DATA.TEST.INPUT_IMG_AXES_ORDER = "TZCYX"
+        # Order of the axes of the mask when using Zarr/H5 images in test data.
+        _C.DATA.TEST.INPUT_MASK_AXES_ORDER = "TZCYX"
+        # Whether your input Zarr contains the raw images and labels together or not. Use 'DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_RAW_PATH'
+        # and 'DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_GT_PATH' to determine the tag to find within the Zarr
+        _C.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA = False
+        # Paths to the raw and gt within the Zarr file. Only used when 'DATA.TEST.INPUT_ZARR_MULTIPLE_DATA' is True.
+        # E.g. 'volumes.raw' for raw and 'volumes.labels.neuron_ids' for GT path.
+        _C.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_RAW_PATH = ""
+        _C.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_GT_PATH = ""
+        # For synapse detection. The information must be stored as CREMI dataset (https://cremi.org/data/)
+        # Path within the file where the ``ids`` are stored. Reference in CREMI: ``annotations/ids``
+        _C.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_ID_PATH = "annotations.ids"
+        # Path within the file where the ``types`` are stored (not used). Reference in CREMI: ``annotations/types``
+        # _C.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_TYPES_PATH = "annotations.types"
+        # Path within the file where the ``partners`` are stored. Reference in CREMI: ``annotations/partners``
+        _C.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_PARTNERS_PATH = "annotations.presynaptic_site.partners"
+        # Path within the file where the ``locations`` are stored. Reference in CREMI: ``annotations/locations``
+        _C.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_LOCATIONS_PATH = "annotations.locations"
+        # Path within the file where the ``resolution`` is stored. Reference in CREMI: ``["volumes/raw"].attrs["offset"]``
+        _C.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_RESOLUTION_PATH = 'volumes.raw'
         # Remove test images by the conditions based on their properties. When using Zarr each patch within the Zarr will be processed and will
         # not depend on 'DATA.FILTER_BY_IMAGE' variable
         # The three variables, DATA.TEST.FILTER_SAMPLES.PROPS, DATA.TEST.FILTER_SAMPLES.VALUES and DATA.TEST.FILTER_SAMPLES.SIGNS will compose a 
         # list of conditions to remove the images. They are list of list of conditions. For instance, the conditions can be like this: [['A'], ['B','C']]. 
         # Then, if the image satisfies the first list of conditions, only 'A' in this first case (from ['A'] list), or satisfy 'B' and 'C' (from ['B','C'] list) 
-        # it will be removed from the image. In each sublist all the conditions must be satisfied. Available properties are: ['foreground', 'mean', 'min', 'max'].
+        # it will be removed from the image. In each sublist all the conditions must be satisfied. Available properties are: ['foreground', 'mean', 'min', 'max', 
+        # 'target_mean', 'target_min', 'target_max', 'diff'].
         #
         # Each property descrition:
-        #   * 'foreground' is defined as the mask foreground percentage. This option is only valid for SEMANTIC_SEG, INSTANCE_SEG and DETECTION.
-        #   * 'mean' is defined as the mean value.
-        #   * 'min' is defined as the min value.
-        #   * 'max' is defined as the max value.
+        #   * 'foreground' is defined as the percentage of pixels/voxels corresponding to the foreground mask. This option is only valid for
+        #     SEMANTIC_SEG, INSTANCE_SEG and DETECTION.
+        #   * 'mean' is defined as the mean intensity value of the raw image inputs.
+        #   * 'min' is defined as the min intensity value of the raw image inputs.
+        #   * 'max' is defined as the max intensity value of the raw image inputs.
+        #   * 'diff' is defined as the difference between ground truth and raw images. Available for all workflows but SELF_SUPERVISED and DENOISING. 
+        #   * 'diff_by_min_max_ratio' is defined as the difference between ground truth and raw images multiplied by the ratio between raw image max and min. Available for all workflows but SELF_SUPERVISED and DENOISING. 
+        #   * 'target_mean is defined as the mean intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING.
+        #   * 'target_min' is defined as the min intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING. 
+        #   * 'target_max' is defined as the max intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING.  
+        #   * 'diff_by_target_min_max_ratio' is defined as the difference between ground truth and raw images multiplied by the ratio between ground truth image max and min. Available for all workflows but SELF_SUPERVISED and DENOISING. 
+        #
         #
         # A full example of this filtering:
         # If you want to remove those samples that have less than 0.00001 and a mean average more than 100 (you need to know image data type) you should
@@ -480,7 +532,7 @@ class Config:
         _C.DATA.TEST.FILTER_SAMPLES = CN()
         # Whether to enable or not the filtering by properties
         _C.DATA.TEST.FILTER_SAMPLES.ENABLE = False
-        # List of lists of properties to apply a filter. Available properties are: ['foreground', 'mean', 'min', 'max']
+        # List of lists of properties to apply a filter. Available properties are: ['foreground', 'mean', 'min', 'max', 'target_mean', 'target_min', 'target_max', 'diff']
         _C.DATA.TEST.FILTER_SAMPLES.PROPS = []
         # List of ints/float that represent the values of the properties listed in 'DATA.TEST.FILTER_SAMPLES.PROPS'
         # that the images need to satisfy to not be dropped.
@@ -488,6 +540,8 @@ class Config:
         # List of list of signs to do the comparison. Options: ['gt', 'ge', 'lt', 'le'] that corresponds to "greather than", e.g. ">",
         # "greather equal", e.g. ">=", "less than", e.g. "<", and "less equal" e.g. "<=" comparisons.
         _C.DATA.TEST.FILTER_SAMPLES.SIGNS = []
+        # Whether to normalize the samples before comparison
+        _C.DATA.TEST.FILTER_SAMPLES.NORM_BEFORE = False
 
         # Validation
         _C.DATA.VAL = CN()
@@ -531,9 +585,6 @@ class Config:
         _C.DATA.VAL.INPUT_ZARR_MULTIPLE_DATA_RESOLUTION_PATH = 'volumes.raw'
         # File to load/save data prepared with the appropiate channels in a instance segmentation problem.
         # E.g. _C.PROBLEM.TYPE ='INSTANCE_SEG' and _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS != 'B'
-        _C.DATA.VAL.INSTANCE_CHANNELS_DIR = os.path.join(
-            "user_data", "val", "x_" + _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
-        )
         _C.DATA.VAL.INSTANCE_CHANNELS_MASK_DIR = os.path.join(
             "user_data", "val", "y_" + _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
         )
@@ -560,13 +611,21 @@ class Config:
         # The three variables, DATA.VAL.FILTER_SAMPLES.PROPS, DATA.VAL.FILTER_SAMPLES.VALUES and DATA.VAL.FILTER_SAMPLES.SIGNS will compose a list of 
         # conditions to remove the images. They are list of list of conditions. For instance, the conditions can be like this: [['A'], ['B','C']]. Then, 
         # if the image satisfies the first list of conditions, only 'A' in this first case (from ['A'] list), or satisfy 'B' and 'C' (from ['B','C'] list) 
-        # it will be removed from the image. In each sublist all the conditions must be satisfied. Available properties are: ['foreground', 'mean', 'min', 'max'].
+        # it will be removed from the image. In each sublist all the conditions must be satisfied. Available properties are: ['foreground', 'mean', 'min', 'max', 
+        # 'target_mean', 'target_min', 'target_max', 'diff'].
         #
         # Each property descrition:
-        #   * 'foreground' is defined as the mask foreground percentage. This option is only valid for SEMANTIC_SEG, INSTANCE_SEG and DETECTION.
-        #   * 'mean' is defined as the mean value.
-        #   * 'min' is defined as the min value.
-        #   * 'max' is defined as the max value.
+        #   * 'foreground' is defined as the percentage of pixels/voxels corresponding to the foreground mask. This option is only valid for
+        #     SEMANTIC_SEG, INSTANCE_SEG and DETECTION.
+        #   * 'mean' is defined as the mean intensity value of the raw image inputs.
+        #   * 'min' is defined as the min intensity value of the raw image inputs.
+        #   * 'max' is defined as the max intensity value of the raw image inputs.
+        #   * 'diff' is defined as the difference between ground truth and raw images. Available for all workflows but SELF_SUPERVISED and DENOISING. 
+        #   * 'diff_by_min_max_ratio' is defined as the difference between ground truth and raw images multiplied by the ratio between raw image max and min. Available for all workflows but SELF_SUPERVISED and DENOISING. 
+        #   * 'target_mean is defined as the mean intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING.
+        #   * 'target_min' is defined as the min intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING. 
+        #   * 'target_max' is defined as the max intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING.  
+        #   * 'diff_by_target_min_max_ratio' is defined as the difference between ground truth and raw images multiplied by the ratio between ground truth image max and min. Available for all workflows but SELF_SUPERVISED and DENOISING. 
         #
         # A full example of this filtering:
         # If you want to remove those samples that have less than 0.00001 and a mean average more than 100 (you need to know image data type) you should
@@ -584,7 +643,7 @@ class Config:
         _C.DATA.VAL.FILTER_SAMPLES = CN()
         # Whether to enable or not the filtering by properties
         _C.DATA.VAL.FILTER_SAMPLES.ENABLE = False
-        # List of lists of properties to apply a filter. Available properties are: ['foreground', 'mean', 'min', 'max']
+        # List of lists of properties to apply a filter. Available properties are: ['foreground', 'mean', 'min', 'max', 'target_mean', 'target_min', 'target_max', 'diff']
         _C.DATA.VAL.FILTER_SAMPLES.PROPS = []
         # List of ints/float that represent the values of the properties listed in 'DATA.VAL.FILTER_SAMPLES.PROPS'
         # that the images need to satisfy to not be dropped.
@@ -592,6 +651,9 @@ class Config:
         # List of list of signs to do the comparison. Options: ['gt', 'ge', 'lt', 'le'] that corresponds to "greather than", e.g. ">",
         # "greather equal", e.g. ">=", "less than", e.g. "<", and "less equal" e.g. "<=" comparisons.
         _C.DATA.VAL.FILTER_SAMPLES.SIGNS = []
+        # Whether to normalize the samples before comparison
+        _C.DATA.VAL.FILTER_SAMPLES.NORM_BEFORE = False
+
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Data augmentation (DA)
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -968,6 +1030,18 @@ class Config:
         # Specific for SR models based on U-Net architectures. Options are ["pre", "post"]
         _C.MODEL.UNET_SR_UPSAMPLE_POSITION = "pre"
 
+        # RCAN
+        # Number of RG modules
+        _C.MODEL.RCAN_RG_BLOCK_NUM = 10
+        # Number of RCAB modules in each RG block
+        _C.MODEL.RCAN_RCAB_BLOCK_NUM = 20
+        # Filters in the convolutions
+        _C.MODEL.RCAN_CONV_FILTERS = 16
+        # Channel reduction ratio for channel attention
+        _C.MODEL.RCAN_REDUCTION_RATIO = 16
+        # Whether to maintain or not the upscaling layer. 
+        _C.MODEL.RCAN_UPSCALING_LAYER = True
+
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Loss
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -999,8 +1073,7 @@ class Config:
         #       * "MAE" (default): mean absolute error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss
         #       * "MSE": mean square error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss
         _C.LOSS.TYPE = ""
-        # Wights to be apply in multiple loss combination cases. Currently only available when LOSS.TYPE == "W_CE_DICE" where
-        # it needs to be a list of two floats (one for CE loss and the other for DICE loss). They must sum 1. E.g. [0.3, 0.7].
+        # Weights to be applied in multiple loss combination cases. They must sum 1. E.g. [0.3, 0.7].
         _C.LOSS.WEIGHTS = [0.66, 0.34]
         # To adjust the loss function based on the imbalance between classes. Used when LOSS.TYPE == "CE" in detection and
         # semantic segmentation and if using B,C,M,P or A channels in instance segmentation workflow.
@@ -1100,28 +1173,6 @@ class Config:
         _C.TEST.BY_CHUNKS.SAVE_OUT_TIF = False
         # In how many iterations the H5 writer needs to flush the data. No need to do so with Zarr files.
         _C.TEST.BY_CHUNKS.FLUSH_EACH = 100
-        # Order of the axes of the image when using Zarr/H5 images in test data.
-        _C.TEST.BY_CHUNKS.INPUT_IMG_AXES_ORDER = "TZCYX"
-        # Order of the axes of the mask when using Zarr/H5 images in test data.
-        _C.TEST.BY_CHUNKS.INPUT_MASK_AXES_ORDER = "TZCYX"
-        # Whether your input Zarr contains the raw images and labels together or not. Use 'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_RAW_PATH'
-        # and 'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_GT_PATH' to determine the tag to find within the Zarr
-        _C.TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA = False
-        # Paths to the raw and gt within the Zarr file. Only used when 'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA' is True.
-        # E.g. 'volumes.raw' for raw and 'volumes.labels.neuron_ids' for GT path.
-        _C.TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_RAW_PATH = ""
-        _C.TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_GT_PATH = ""
-        # For synapse detection. The information must be stored as CREMI dataset (https://cremi.org/data/)
-        # Path within the file where the ``ids`` are stored. Reference in CREMI: ``annotations/ids``
-        _C.TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_ID_PATH = "annotations.ids"
-        # Path within the file where the ``types`` are stored (not used). Reference in CREMI: ``annotations/types``
-        # _C.TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_TYPES_PATH = "annotations.types"
-        # Path within the file where the ``partners`` are stored. Reference in CREMI: ``annotations/partners``
-        _C.TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_PARTNERS_PATH = "annotations.presynaptic_site.partners"
-        # Path within the file where the ``locations`` are stored. Reference in CREMI: ``annotations/locations``
-        _C.TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_LOCATIONS_PATH = "annotations.locations"
-        # Path within the file where the ``resolution`` is stored. Reference in CREMI: ``["volumes/raw"].attrs["offset"]``
-        _C.TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_RESOLUTION_PATH = 'volumes.raw'
 
         # Whether after reconstructing the prediction the pipeline will continue each workflow specific steps. For this process
         # the prediction image needs to be loaded into memory so be sure that it can fit in you memory. E.g. in instance
@@ -1408,6 +1459,8 @@ class Config:
         _C.PATHS.UPR_Y_FILE = os.path.join(_C.PATHS.CHECKPOINT, "upper_bound_Y_perc.npy")
         # Path where the images used in MAE will be saved suring inference
         _C.PATHS.MAE_OUT_DIR = os.path.join(_C.PATHS.RESULT_DIR.PATH, "MAE_checks")
+        # Directory to save filtered images.
+        _C.PATHS.FIL_SAMPLES_DIR = os.path.join(_C.PATHS.RESULT_DIR.PATH, "filtering_information")
 
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Logging

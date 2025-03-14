@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: 783f1f5a9d6c4148b6eeadfec437585dab72279d (almost 3.5.11)
+## Copied from BiaPy commit: da129c759abfee420c8c9d636a4e8f771687dfc0 (almost 3.5.11)
 import os
 import glob
 import numpy as np
@@ -1876,7 +1876,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             )
         if cfg.TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS_RADIUS == 0:
             raise ValueError(
-                "'TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS' needs to be set when 'TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS' is True"
+                "'TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS_RADIUS' needs to be set when 'TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS' is True"
             )
 
 
@@ -1892,7 +1892,6 @@ def compare_configurations_without_model(actual_cfg, old_cfg, header_message="",
         "PROBLEM.NDIM",
         "DATA.PATCH_SIZE",
         "PROBLEM.INSTANCE_SEG.DATA_CHANNELS",
-        "PROBLEM.SELF_SUPERVISED.PRETEXT_TASK",
         "PROBLEM.SUPER_RESOLUTION.UPSCALING",
         "MODEL.N_CLASSES",
     ]
@@ -1914,12 +1913,16 @@ def compare_configurations_without_model(actual_cfg, old_cfg, header_message="",
             ) * dim_count
 
     for var_to_compare in vars_to_compare:
-        if get_attribute_recursive(actual_cfg, var_to_compare) != get_attribute_recursive(old_cfg, var_to_compare):
-            raise ValueError(
-                header_message
-                + f"The '{var_to_compare}' value of the compared configurations does not match: "
-                + f"{get_attribute_recursive(actual_cfg, var_to_compare)} (current configuration) vs {get_attribute_recursive(old_cfg, var_to_compare)} (from loaded configuration)"
-            )
+        current_value = get_attribute_recursive(actual_cfg, var_to_compare)
+        old_value = get_attribute_recursive(old_cfg, var_to_compare)
+        if current_value != old_value:
+            # Allow SSL pretrainings
+            if not (var_to_compare == "PROBLEM.TYPE" and old_value == "SELF_SUPERVISED"):
+                raise ValueError(
+                    header_message
+                    + f"The '{var_to_compare}' value of the compared configurations does not match: "
+                    + f"{current_value} (current configuration) vs {old_value} (from loaded configuration)"
+                )
 
     print("Configurations seem to be compatible. Continuing . . .")
 
@@ -2222,8 +2225,6 @@ def convert_old_model_cfg_to_current_version(old_cfg):
                         ]["REMOVE_CLOSE_POINTS_RADIUS"][0]
                     else:
                         del old_cfg["TEST"]["POST_PROCESSING"]["REMOVE_CLOSE_POINTS_RADIUS"]
-                else:
-                    del old_cfg["TEST"]["POST_PROCESSING"]["REMOVE_CLOSE_POINTS_RADIUS"]
 
             if "DET_WATERSHED_FIRST_DILATION" in old_cfg["TEST"]["POST_PROCESSING"]:
                 if isinstance(old_cfg["TEST"]["POST_PROCESSING"]["DET_WATERSHED_FIRST_DILATION"], list):
@@ -2233,8 +2234,6 @@ def convert_old_model_cfg_to_current_version(old_cfg):
                         ]["DET_WATERSHED_FIRST_DILATION"][0]
                     else:
                         del old_cfg["TEST"]["POST_PROCESSING"]["DET_WATERSHED_FIRST_DILATION"]
-                else:
-                    del old_cfg["TEST"]["POST_PROCESSING"]["DET_WATERSHED_FIRST_DILATION"]
 
         if "BY_CHUNKS" in old_cfg["TEST"]:
             for i, x in enumerate(old_cfg["TEST"]["BY_CHUNKS"].copy()):
@@ -2265,8 +2264,6 @@ def convert_old_model_cfg_to_current_version(old_cfg):
                     old_cfg["TEST"]["DET_MIN_TH_TO_BE_PEAK"] = old_cfg["TEST"]["DET_MIN_TH_TO_BE_PEAK"][0]
                 else:
                     del old_cfg["TEST"]["DET_MIN_TH_TO_BE_PEAK"]
-            else:
-                del old_cfg["TEST"]["DET_MIN_TH_TO_BE_PEAK"]
 
         if "DET_TOLERANCE" in old_cfg["TEST"]:
             if isinstance(old_cfg["TEST"]["DET_TOLERANCE"], list):
@@ -2274,8 +2271,6 @@ def convert_old_model_cfg_to_current_version(old_cfg):
                     old_cfg["TEST"]["DET_TOLERANCE"] = old_cfg["TEST"]["DET_TOLERANCE"][0]
                 else:
                     del old_cfg["TEST"]["DET_TOLERANCE"]
-            else:
-                del old_cfg["TEST"]["DET_TOLERANCE"]
 
     if "PROBLEM" in old_cfg:
         ndim = 3 if "NDIM" in old_cfg["PROBLEM"] and old_cfg["PROBLEM"]["NDIM"] == "3D" else 2
@@ -2325,7 +2320,7 @@ def convert_old_model_cfg_to_current_version(old_cfg):
                         ]
                         del old_cfg["DATA"]["NORMALIZATION"]["PERC_UPPER"]
 
-            if old_cfg["DATA"]["NORMALIZATION"]["TYPE"] == "custom":
+            if "TYPE" in old_cfg["DATA"]["NORMALIZATION"] and old_cfg["DATA"]["NORMALIZATION"]["TYPE"] == "custom":
                 old_cfg["DATA"]["NORMALIZATION"]["TYPE"] = "zero_mean_unit_variance"
                 if "CUSTOM_MEAN" in old_cfg["DATA"]["NORMALIZATION"]:
                     old_cfg["DATA"]["NORMALIZATION"]["ZERO_MEAN_UNIT_VAR"] = {}
@@ -2417,4 +2412,4 @@ def convert_old_model_cfg_to_current_version(old_cfg):
     except:
         pass
 
-    return old_cfg 
+    return old_cfg
