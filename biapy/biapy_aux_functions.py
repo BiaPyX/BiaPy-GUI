@@ -353,9 +353,9 @@ def check_model_restrictions(
             else:
                 mean, std = -1., -1.
 
-            opts["DATA.NORMALIZATION.TYPE"] = "custom"
-            opts["DATA.NORMALIZATION.CUSTOM_MEAN"] = mean
-            opts["DATA.NORMALIZATION.CUSTOM_STD"] = std
+            opts["DATA.NORMALIZATION.TYPE"] = "zero_mean_unit_variance"
+            opts["DATA.NORMALIZATION.ZERO_MEAN_UNIT_VAR.MEAN_VAL"] = mean
+            opts["DATA.NORMALIZATION.ZERO_MEAN_UNIT_VAR.STD_VAL"] = std
 
         # 'scale_linear' norm of BMZ is close to our 'div' norm (TODO: we need to control the "gain" arg)
         elif preproc_info[key_to_find] == "scale_linear":
