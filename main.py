@@ -420,6 +420,9 @@ class MainWindow(QMainWindow):
                     "transformers_label",
                     "convnext_label",
                     "convnext_frame",
+                    "rcan_label",
+                    "rcan_frame"
+
                 ],
                 widgets_to_set_cond=[(["MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INPUT", "No"], ["No"])],
                 updated_widget="LOAD_PRETRAINED_MODEL__INPUT",
@@ -574,6 +577,8 @@ class MainWindow(QMainWindow):
                     "MODEL__MAE_DEC_MLP_DIMS__LABEL",
                     "convnext_label",
                     "convnext_frame",
+                    "rcan_label",
+                    "rcan_frame"
                 ],
                 widgets_to_set_cond=[
                     (["PROBLEM__SELF_SUPERVISED__PRETEXT_TASK__INPUT", "masking"], ["MAE"]),

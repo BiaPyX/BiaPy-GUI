@@ -1542,7 +1542,7 @@ class Ui_MainWindow(object):
         self.scrollArea_18.setWidgetResizable(True)
         self.scrollAreaWidgetContents_23 = QWidget()
         self.scrollAreaWidgetContents_23.setObjectName(u"scrollAreaWidgetContents_23")
-        self.scrollAreaWidgetContents_23.setGeometry(QRect(0, 0, 930, 172))
+        self.scrollAreaWidgetContents_23.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_62 = QVBoxLayout(self.scrollAreaWidgetContents_23)
         self.verticalLayout_62.setObjectName(u"verticalLayout_62")
         self.scrollArea_18.setWidget(self.scrollAreaWidgetContents_23)
@@ -2365,7 +2365,7 @@ class Ui_MainWindow(object):
         self.goptions_advanced_options_scrollarea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, -1554, 852, 1993))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, -1512, 852, 2148))
         self.verticalLayout_63 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_63.setSpacing(9)
         self.verticalLayout_63.setObjectName(u"verticalLayout_63")
@@ -3458,25 +3458,146 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_63.addWidget(self.transformers_frame)
 
-        self.label_11 = QLabel(self.scrollAreaWidgetContents_2)
-        self.label_11.setObjectName(u"label_11")
-        self.label_11.setFont(font1)
+        self.rcan_label = QLabel(self.scrollAreaWidgetContents_2)
+        self.rcan_label.setObjectName(u"rcan_label")
+        self.rcan_label.setFont(font1)
 
-        self.verticalLayout_63.addWidget(self.label_11)
+        self.verticalLayout_63.addWidget(self.rcan_label)
 
-        self.frame_82 = QFrame(self.scrollAreaWidgetContents_2)
-        self.frame_82.setObjectName(u"frame_82")
-        self.frame_82.setFrameShape(QFrame.StyledPanel)
-        self.frame_82.setFrameShadow(QFrame.Raised)
-        self.gridLayout_87 = QGridLayout(self.frame_82)
+        self.rcan_frame = QFrame(self.scrollAreaWidgetContents_2)
+        self.rcan_frame.setObjectName(u"rcan_frame")
+        self.rcan_frame.setFrameShape(QFrame.StyledPanel)
+        self.rcan_frame.setFrameShadow(QFrame.Raised)
+        self.gridLayout_87 = QGridLayout(self.rcan_frame)
         self.gridLayout_87.setObjectName(u"gridLayout_87")
-        self.label_12 = QLabel(self.frame_82)
-        self.label_12.setObjectName(u"label_12")
+        self.MODEL__RCAN_CONV_FILTERS__INPUT = QLineEdit(self.rcan_frame)
+        self.MODEL__RCAN_CONV_FILTERS__INPUT.setObjectName(u"MODEL__RCAN_CONV_FILTERS__INPUT")
+        self.MODEL__RCAN_CONV_FILTERS__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__RCAN_CONV_FILTERS__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__RCAN_CONV_FILTERS__INPUT.setFont(font1)
 
-        self.gridLayout_87.addWidget(self.label_12, 0, 0, 1, 1)
+        self.gridLayout_87.addWidget(self.MODEL__RCAN_CONV_FILTERS__INPUT, 2, 2, 1, 1)
+
+        self.MODEL__RCAN_RG_BLOCK_NUM__LABEL = QLabel(self.rcan_frame)
+        self.MODEL__RCAN_RG_BLOCK_NUM__LABEL.setObjectName(u"MODEL__RCAN_RG_BLOCK_NUM__LABEL")
+        self.MODEL__RCAN_RG_BLOCK_NUM__LABEL.setFont(font1)
+
+        self.gridLayout_87.addWidget(self.MODEL__RCAN_RG_BLOCK_NUM__LABEL, 0, 0, 1, 1)
+
+        self.MODEL__RCAN_RG_BLOCK_NUM__INPUT = QLineEdit(self.rcan_frame)
+        self.MODEL__RCAN_RG_BLOCK_NUM__INPUT.setObjectName(u"MODEL__RCAN_RG_BLOCK_NUM__INPUT")
+        self.MODEL__RCAN_RG_BLOCK_NUM__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__RCAN_RG_BLOCK_NUM__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__RCAN_RG_BLOCK_NUM__INPUT.setFont(font1)
+
+        self.gridLayout_87.addWidget(self.MODEL__RCAN_RG_BLOCK_NUM__INPUT, 0, 2, 1, 1)
+
+        self.horizontalSpacer_66 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_87.addItem(self.horizontalSpacer_66, 0, 3, 1, 1)
+
+        self.MODEL__RCAN_RG_BLOCK_NUM__INFO = QPushButton(self.rcan_frame)
+        self.MODEL__RCAN_RG_BLOCK_NUM__INFO.setObjectName(u"MODEL__RCAN_RG_BLOCK_NUM__INFO")
+        self.MODEL__RCAN_RG_BLOCK_NUM__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__RCAN_RG_BLOCK_NUM__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__RCAN_RG_BLOCK_NUM__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_87.addWidget(self.MODEL__RCAN_RG_BLOCK_NUM__INFO, 0, 1, 1, 1)
+
+        self.MODEL__RCAN_REDUCTION_RATIO__INPUT = QLineEdit(self.rcan_frame)
+        self.MODEL__RCAN_REDUCTION_RATIO__INPUT.setObjectName(u"MODEL__RCAN_REDUCTION_RATIO__INPUT")
+        self.MODEL__RCAN_REDUCTION_RATIO__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__RCAN_REDUCTION_RATIO__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__RCAN_REDUCTION_RATIO__INPUT.setFont(font1)
+
+        self.gridLayout_87.addWidget(self.MODEL__RCAN_REDUCTION_RATIO__INPUT, 3, 2, 1, 1)
+
+        self.MODEL__RCAN_RCAB_BLOCK_NUM__INPUT = QLineEdit(self.rcan_frame)
+        self.MODEL__RCAN_RCAB_BLOCK_NUM__INPUT.setObjectName(u"MODEL__RCAN_RCAB_BLOCK_NUM__INPUT")
+        self.MODEL__RCAN_RCAB_BLOCK_NUM__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__RCAN_RCAB_BLOCK_NUM__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__RCAN_RCAB_BLOCK_NUM__INPUT.setFont(font1)
+
+        self.gridLayout_87.addWidget(self.MODEL__RCAN_RCAB_BLOCK_NUM__INPUT, 1, 2, 1, 1)
+
+        self.MODEL__RCAN_RCAB_BLOCK_NUM__INFO = QPushButton(self.rcan_frame)
+        self.MODEL__RCAN_RCAB_BLOCK_NUM__INFO.setObjectName(u"MODEL__RCAN_RCAB_BLOCK_NUM__INFO")
+        self.MODEL__RCAN_RCAB_BLOCK_NUM__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__RCAN_RCAB_BLOCK_NUM__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__RCAN_RCAB_BLOCK_NUM__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_87.addWidget(self.MODEL__RCAN_RCAB_BLOCK_NUM__INFO, 1, 1, 1, 1)
+
+        self.MODEL__RCAN_RCAB_BLOCK_NUM__LABEL = QLabel(self.rcan_frame)
+        self.MODEL__RCAN_RCAB_BLOCK_NUM__LABEL.setObjectName(u"MODEL__RCAN_RCAB_BLOCK_NUM__LABEL")
+        self.MODEL__RCAN_RCAB_BLOCK_NUM__LABEL.setFont(font1)
+
+        self.gridLayout_87.addWidget(self.MODEL__RCAN_RCAB_BLOCK_NUM__LABEL, 1, 0, 1, 1)
+
+        self.MODEL__RCAN_UPSCALING_LAYER__INPUT = QComboBox(self.rcan_frame)
+        self.MODEL__RCAN_UPSCALING_LAYER__INPUT.addItem("")
+        self.MODEL__RCAN_UPSCALING_LAYER__INPUT.addItem("")
+        self.MODEL__RCAN_UPSCALING_LAYER__INPUT.setObjectName(u"MODEL__RCAN_UPSCALING_LAYER__INPUT")
+        self.MODEL__RCAN_UPSCALING_LAYER__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__RCAN_UPSCALING_LAYER__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__RCAN_UPSCALING_LAYER__INPUT.setFont(font1)
+
+        self.gridLayout_87.addWidget(self.MODEL__RCAN_UPSCALING_LAYER__INPUT, 4, 2, 1, 1)
+
+        self.MODEL__RCAN_CONV_FILTERS__INFO = QPushButton(self.rcan_frame)
+        self.MODEL__RCAN_CONV_FILTERS__INFO.setObjectName(u"MODEL__RCAN_CONV_FILTERS__INFO")
+        self.MODEL__RCAN_CONV_FILTERS__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__RCAN_CONV_FILTERS__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__RCAN_CONV_FILTERS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_87.addWidget(self.MODEL__RCAN_CONV_FILTERS__INFO, 2, 1, 1, 1)
+
+        self.MODEL__RCAN_REDUCTION_RATIO__INFO = QPushButton(self.rcan_frame)
+        self.MODEL__RCAN_REDUCTION_RATIO__INFO.setObjectName(u"MODEL__RCAN_REDUCTION_RATIO__INFO")
+        self.MODEL__RCAN_REDUCTION_RATIO__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__RCAN_REDUCTION_RATIO__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__RCAN_REDUCTION_RATIO__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_87.addWidget(self.MODEL__RCAN_REDUCTION_RATIO__INFO, 3, 1, 1, 1)
+
+        self.MODEL__RCAN_UPSCALING_LAYER__INFO = QPushButton(self.rcan_frame)
+        self.MODEL__RCAN_UPSCALING_LAYER__INFO.setObjectName(u"MODEL__RCAN_UPSCALING_LAYER__INFO")
+        self.MODEL__RCAN_UPSCALING_LAYER__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__RCAN_UPSCALING_LAYER__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__RCAN_UPSCALING_LAYER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_87.addWidget(self.MODEL__RCAN_UPSCALING_LAYER__INFO, 4, 1, 1, 1)
+
+        self.MODEL__RCAN_CONV_FILTERS__LABEL = QLabel(self.rcan_frame)
+        self.MODEL__RCAN_CONV_FILTERS__LABEL.setObjectName(u"MODEL__RCAN_CONV_FILTERS__LABEL")
+        self.MODEL__RCAN_CONV_FILTERS__LABEL.setFont(font1)
+
+        self.gridLayout_87.addWidget(self.MODEL__RCAN_CONV_FILTERS__LABEL, 2, 0, 1, 1)
+
+        self.MODEL__RCAN_REDUCTION_RATIO__LABEL = QLabel(self.rcan_frame)
+        self.MODEL__RCAN_REDUCTION_RATIO__LABEL.setObjectName(u"MODEL__RCAN_REDUCTION_RATIO__LABEL")
+        self.MODEL__RCAN_REDUCTION_RATIO__LABEL.setFont(font1)
+
+        self.gridLayout_87.addWidget(self.MODEL__RCAN_REDUCTION_RATIO__LABEL, 3, 0, 1, 1)
+
+        self.MODEL__RCAN_UPSCALING_LAYER__LABEL = QLabel(self.rcan_frame)
+        self.MODEL__RCAN_UPSCALING_LAYER__LABEL.setObjectName(u"MODEL__RCAN_UPSCALING_LAYER__LABEL")
+        self.MODEL__RCAN_UPSCALING_LAYER__LABEL.setFont(font1)
+
+        self.gridLayout_87.addWidget(self.MODEL__RCAN_UPSCALING_LAYER__LABEL, 4, 0, 1, 1)
 
 
-        self.verticalLayout_63.addWidget(self.frame_82)
+        self.verticalLayout_63.addWidget(self.rcan_frame)
 
         self.checkpoint_loading_opt_label = QLabel(self.scrollAreaWidgetContents_2)
         self.checkpoint_loading_opt_label.setObjectName(u"checkpoint_loading_opt_label")
@@ -12122,7 +12243,7 @@ class Ui_MainWindow(object):
         self.scrollArea_9.setWidgetResizable(True)
         self.scrollAreaWidgetContents_13 = QWidget()
         self.scrollAreaWidgetContents_13.setObjectName(u"scrollAreaWidgetContents_13")
-        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 914, 1327))
+        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 633, 1327))
         self.gridLayout_44 = QGridLayout(self.scrollAreaWidgetContents_13)
         self.gridLayout_44.setObjectName(u"gridLayout_44")
         self.label_86 = QLabel(self.scrollAreaWidgetContents_13)
@@ -14354,7 +14475,7 @@ class Ui_MainWindow(object):
         self.check_yaml_file_errors_frame.setWidgetResizable(True)
         self.scrollAreaWidgetContents_19 = QWidget()
         self.scrollAreaWidgetContents_19.setObjectName(u"scrollAreaWidgetContents_19")
-        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 896, 152))
+        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 96, 26))
         self.verticalLayout_32 = QVBoxLayout(self.scrollAreaWidgetContents_19)
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
         self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)
@@ -14946,8 +15067,39 @@ class Ui_MainWindow(object):
         self.MODEL__MAE_MASK_TYPE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Type of the masking strategy. </span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.MODEL__MAE_MASK_TYPE__INFO.setText("")
-        self.label_11.setText(QCoreApplication.translate("MainWindow", u"RCAN options", None))
-        self.label_12.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.rcan_label.setText(QCoreApplication.translate("MainWindow", u"RCAN options", None))
+        self.MODEL__RCAN_CONV_FILTERS__INPUT.setText(QCoreApplication.translate("MainWindow", u"16", None))
+        self.MODEL__RCAN_RG_BLOCK_NUM__LABEL.setText(QCoreApplication.translate("MainWindow", u"Number of RG modules", None))
+        self.MODEL__RCAN_RG_BLOCK_NUM__INPUT.setText(QCoreApplication.translate("MainWindow", u"10", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__RCAN_RG_BLOCK_NUM__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of RG modules</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__RCAN_RG_BLOCK_NUM__INFO.setText("")
+        self.MODEL__RCAN_REDUCTION_RATIO__INPUT.setText(QCoreApplication.translate("MainWindow", u"16", None))
+        self.MODEL__RCAN_RCAB_BLOCK_NUM__INPUT.setText(QCoreApplication.translate("MainWindow", u"20", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__RCAN_RCAB_BLOCK_NUM__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of RCAB modules in each RG block</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__RCAN_RCAB_BLOCK_NUM__INFO.setText("")
+        self.MODEL__RCAN_RCAB_BLOCK_NUM__LABEL.setText(QCoreApplication.translate("MainWindow", u"Number of RCAB modules", None))
+        self.MODEL__RCAN_UPSCALING_LAYER__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
+        self.MODEL__RCAN_UPSCALING_LAYER__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
+
+#if QT_CONFIG(tooltip)
+        self.MODEL__RCAN_CONV_FILTERS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Filters in the convolutions</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__RCAN_CONV_FILTERS__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__RCAN_REDUCTION_RATIO__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Channel reduction ratio for channel attention</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__RCAN_REDUCTION_RATIO__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__RCAN_UPSCALING_LAYER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to maintain or not the upscaling layer. </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__RCAN_UPSCALING_LAYER__INFO.setText("")
+        self.MODEL__RCAN_CONV_FILTERS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filters in the convolutions", None))
+        self.MODEL__RCAN_REDUCTION_RATIO__LABEL.setText(QCoreApplication.translate("MainWindow", u"Channel reduction ratio", None))
+        self.MODEL__RCAN_UPSCALING_LAYER__LABEL.setText(QCoreApplication.translate("MainWindow", u"Upscaling layer", None))
         self.checkpoint_loading_opt_label.setText(QCoreApplication.translate("MainWindow", u"Checkpoint loading options", None))
         self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
         self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))

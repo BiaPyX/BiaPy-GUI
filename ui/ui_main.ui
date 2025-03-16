@@ -3951,8 +3951,8 @@ font: italic;</string>
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>930</width>
-                               <height>172</height>
+                               <width>100</width>
+                               <height>30</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_62"/>
@@ -6306,9 +6306,9 @@ border-radius: 25px;		</string>
                                    <property name="geometry">
                                     <rect>
                                      <x>0</x>
-                                     <y>-1554</y>
+                                     <y>-1512</y>
                                      <width>852</width>
-                                     <height>1993</height>
+                                     <height>2148</height>
                                     </rect>
                                    </property>
                                    <layout class="QVBoxLayout" name="verticalLayout_63">
@@ -9485,7 +9485,7 @@ p, li { white-space: pre-wrap; }
                                      </widget>
                                     </item>
                                     <item>
-                                     <widget class="QLabel" name="label_11">
+                                     <widget class="QLabel" name="rcan_label">
                                       <property name="font">
                                        <font>
                                         <family>DejaVu Math TeX Gyre</family>
@@ -9498,7 +9498,7 @@ p, li { white-space: pre-wrap; }
                                      </widget>
                                     </item>
                                     <item>
-                                     <widget class="QFrame" name="frame_82">
+                                     <widget class="QFrame" name="rcan_frame">
                                       <property name="frameShape">
                                        <enum>QFrame::StyledPanel</enum>
                                       </property>
@@ -9506,10 +9506,348 @@ p, li { white-space: pre-wrap; }
                                        <enum>QFrame::Raised</enum>
                                       </property>
                                       <layout class="QGridLayout" name="gridLayout_87">
-                                       <item row="0" column="0">
-                                        <widget class="QLabel" name="label_12">
+                                       <item row="2" column="2">
+                                        <widget class="QLineEdit" name="MODEL__RCAN_CONV_FILTERS__INPUT">
+                                         <property name="minimumSize">
+                                          <size>
+                                           <width>200</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="maximumSize">
+                                          <size>
+                                           <width>200</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="font">
+                                          <font>
+                                           <family>DejaVu Math TeX Gyre</family>
+                                           <pointsize>12</pointsize>
+                                          </font>
+                                         </property>
                                          <property name="text">
-                                          <string>TextLabel</string>
+                                          <string>16</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item row="0" column="0">
+                                        <widget class="QLabel" name="MODEL__RCAN_RG_BLOCK_NUM__LABEL">
+                                         <property name="font">
+                                          <font>
+                                           <family>DejaVu Math TeX Gyre</family>
+                                           <pointsize>12</pointsize>
+                                          </font>
+                                         </property>
+                                         <property name="text">
+                                          <string>Number of RG modules</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item row="0" column="2">
+                                        <widget class="QLineEdit" name="MODEL__RCAN_RG_BLOCK_NUM__INPUT">
+                                         <property name="minimumSize">
+                                          <size>
+                                           <width>200</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="maximumSize">
+                                          <size>
+                                           <width>200</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="font">
+                                          <font>
+                                           <family>DejaVu Math TeX Gyre</family>
+                                           <pointsize>12</pointsize>
+                                          </font>
+                                         </property>
+                                         <property name="text">
+                                          <string>10</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item row="0" column="3">
+                                        <spacer name="horizontalSpacer_66">
+                                         <property name="orientation">
+                                          <enum>Qt::Horizontal</enum>
+                                         </property>
+                                         <property name="sizeHint" stdset="0">
+                                          <size>
+                                           <width>40</width>
+                                           <height>20</height>
+                                          </size>
+                                         </property>
+                                        </spacer>
+                                       </item>
+                                       <item row="0" column="1">
+                                        <widget class="QPushButton" name="MODEL__RCAN_RG_BLOCK_NUM__INFO">
+                                         <property name="minimumSize">
+                                          <size>
+                                           <width>30</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="maximumSize">
+                                          <size>
+                                           <width>30</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="toolTip">
+                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Number of RG modules&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                         </property>
+                                         <property name="styleSheet">
+                                          <string notr="true">QPushButton {
+  border: none;
+}</string>
+                                         </property>
+                                         <property name="text">
+                                          <string/>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item row="3" column="2">
+                                        <widget class="QLineEdit" name="MODEL__RCAN_REDUCTION_RATIO__INPUT">
+                                         <property name="minimumSize">
+                                          <size>
+                                           <width>200</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="maximumSize">
+                                          <size>
+                                           <width>200</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="font">
+                                          <font>
+                                           <family>DejaVu Math TeX Gyre</family>
+                                           <pointsize>12</pointsize>
+                                          </font>
+                                         </property>
+                                         <property name="text">
+                                          <string>16</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item row="1" column="2">
+                                        <widget class="QLineEdit" name="MODEL__RCAN_RCAB_BLOCK_NUM__INPUT">
+                                         <property name="minimumSize">
+                                          <size>
+                                           <width>200</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="maximumSize">
+                                          <size>
+                                           <width>200</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="font">
+                                          <font>
+                                           <family>DejaVu Math TeX Gyre</family>
+                                           <pointsize>12</pointsize>
+                                          </font>
+                                         </property>
+                                         <property name="text">
+                                          <string>20</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item row="1" column="1">
+                                        <widget class="QPushButton" name="MODEL__RCAN_RCAB_BLOCK_NUM__INFO">
+                                         <property name="minimumSize">
+                                          <size>
+                                           <width>30</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="maximumSize">
+                                          <size>
+                                           <width>30</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="toolTip">
+                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Number of RCAB modules in each RG block&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                         </property>
+                                         <property name="styleSheet">
+                                          <string notr="true">QPushButton {
+  border: none;
+}</string>
+                                         </property>
+                                         <property name="text">
+                                          <string/>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item row="1" column="0">
+                                        <widget class="QLabel" name="MODEL__RCAN_RCAB_BLOCK_NUM__LABEL">
+                                         <property name="font">
+                                          <font>
+                                           <family>DejaVu Math TeX Gyre</family>
+                                           <pointsize>12</pointsize>
+                                          </font>
+                                         </property>
+                                         <property name="text">
+                                          <string>Number of RCAB modules</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item row="4" column="2">
+                                        <widget class="QComboBox" name="MODEL__RCAN_UPSCALING_LAYER__INPUT">
+                                         <property name="minimumSize">
+                                          <size>
+                                           <width>200</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="maximumSize">
+                                          <size>
+                                           <width>200</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="font">
+                                          <font>
+                                           <family>DejaVu Math TeX Gyre</family>
+                                           <pointsize>12</pointsize>
+                                          </font>
+                                         </property>
+                                         <item>
+                                          <property name="text">
+                                           <string>Yes</string>
+                                          </property>
+                                         </item>
+                                         <item>
+                                          <property name="text">
+                                           <string>No</string>
+                                          </property>
+                                         </item>
+                                        </widget>
+                                       </item>
+                                       <item row="2" column="1">
+                                        <widget class="QPushButton" name="MODEL__RCAN_CONV_FILTERS__INFO">
+                                         <property name="minimumSize">
+                                          <size>
+                                           <width>30</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="maximumSize">
+                                          <size>
+                                           <width>30</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="toolTip">
+                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Filters in the convolutions&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                         </property>
+                                         <property name="styleSheet">
+                                          <string notr="true">QPushButton {
+  border: none;
+}</string>
+                                         </property>
+                                         <property name="text">
+                                          <string/>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item row="3" column="1">
+                                        <widget class="QPushButton" name="MODEL__RCAN_REDUCTION_RATIO__INFO">
+                                         <property name="minimumSize">
+                                          <size>
+                                           <width>30</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="maximumSize">
+                                          <size>
+                                           <width>30</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="toolTip">
+                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Channel reduction ratio for channel attention&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                         </property>
+                                         <property name="styleSheet">
+                                          <string notr="true">QPushButton {
+  border: none;
+}</string>
+                                         </property>
+                                         <property name="text">
+                                          <string/>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item row="4" column="1">
+                                        <widget class="QPushButton" name="MODEL__RCAN_UPSCALING_LAYER__INFO">
+                                         <property name="minimumSize">
+                                          <size>
+                                           <width>30</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="maximumSize">
+                                          <size>
+                                           <width>30</width>
+                                           <height>30</height>
+                                          </size>
+                                         </property>
+                                         <property name="toolTip">
+                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Whether to maintain or not the upscaling layer. &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                         </property>
+                                         <property name="styleSheet">
+                                          <string notr="true">QPushButton {
+  border: none;
+}</string>
+                                         </property>
+                                         <property name="text">
+                                          <string/>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item row="2" column="0">
+                                        <widget class="QLabel" name="MODEL__RCAN_CONV_FILTERS__LABEL">
+                                         <property name="font">
+                                          <font>
+                                           <family>DejaVu Math TeX Gyre</family>
+                                           <pointsize>12</pointsize>
+                                          </font>
+                                         </property>
+                                         <property name="text">
+                                          <string>Filters in the convolutions</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item row="3" column="0">
+                                        <widget class="QLabel" name="MODEL__RCAN_REDUCTION_RATIO__LABEL">
+                                         <property name="font">
+                                          <font>
+                                           <family>DejaVu Math TeX Gyre</family>
+                                           <pointsize>12</pointsize>
+                                          </font>
+                                         </property>
+                                         <property name="text">
+                                          <string>Channel reduction ratio</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item row="4" column="0">
+                                        <widget class="QLabel" name="MODEL__RCAN_UPSCALING_LAYER__LABEL">
+                                         <property name="font">
+                                          <font>
+                                           <family>DejaVu Math TeX Gyre</family>
+                                           <pointsize>12</pointsize>
+                                          </font>
+                                         </property>
+                                         <property name="text">
+                                          <string>Upscaling layer</string>
                                          </property>
                                         </widget>
                                        </item>
@@ -33819,7 +34157,7 @@ p, li { white-space: pre-wrap; }
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>914</width>
+                                       <width>633</width>
                                        <height>1327</height>
                                       </rect>
                                      </property>
@@ -39835,8 +40173,8 @@ QPushButton:pressed {
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>896</width>
-                               <height>152</height>
+                               <width>96</width>
+                               <height>26</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_32">

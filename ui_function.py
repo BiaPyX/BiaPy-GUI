@@ -673,6 +673,11 @@ class UIFunction:
             self.main_window.ui.sem_seg_post_proc_frame_label.setVisible(True)
             if self.main_window.cfg.settings["selected_workflow"] == 4:
                 models = self.main_window.cfg.settings["sr_2d_models_real_names"]
+            elif self.main_window.cfg.settings["selected_workflow"] == 5:
+                models = self.main_window.cfg.settings["ssl_2d_models_real_names"]
+            elif self.main_window.cfg.settings["selected_workflow"] == 7:
+                models = self.main_window.cfg.settings["i2i_2d_models_real_names"]
+
 
             # Zarr related variables
             self.main_window.ui.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setVisible(False)
@@ -830,8 +835,12 @@ class UIFunction:
             self.main_window.ui.sem_seg_post_proc_frame_label.setVisible(False)
             if self.main_window.cfg.settings["selected_workflow"] == 4:
                 models = self.main_window.cfg.settings["sr_3d_models_real_names"]
+            elif self.main_window.cfg.settings["selected_workflow"] == 5:
+                models = self.main_window.cfg.settings["ssl_3d_models_real_names"]
+            elif self.main_window.cfg.settings["selected_workflow"] == 7:
+                models = self.main_window.cfg.settings["i2i_3d_models_real_names"]
 
-        if self.main_window.cfg.settings["selected_workflow"] == 4:
+        if self.main_window.cfg.settings["selected_workflow"] in [4,5,7]:
             self.main_window.ui.MODEL__ARCHITECTURE__INPUT.clear()
             self.main_window.ui.MODEL__ARCHITECTURE__INPUT.addItems(models)
 

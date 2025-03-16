@@ -3130,7 +3130,8 @@ class Widget_conditions():
                         'Residual U-Net', 
                         'ResUNet++',
                         'ResUNet SE',
-                        'U-NeXt V1', 
+                        'U-NeXt V1',
+                        'U-NeXt V2', 
                         'Attention U-Net', 
                         'MultiResUnet', 
                         'SEUnet', 
@@ -3148,7 +3149,8 @@ class Widget_conditions():
                         'Residual U-Net', 
                         'ResUNet++',
                         'ResUNet SE',
-                        'U-NeXt V1', 
+                        'U-NeXt V1',
+                        'U-NeXt V2', 
                         'Attention U-Net', 
                         'MultiResUnet', 
                         'SEUnet', 
@@ -3166,7 +3168,8 @@ class Widget_conditions():
                         'Residual U-Net', 
                         'ResUNet++',
                         'ResUNet SE',
-                        'U-NeXt V1', 
+                        'U-NeXt V1',
+                        'U-NeXt V2', 
                         'Attention U-Net', 
                         'MultiResUnet', 
                         'SEUnet', 
@@ -3181,11 +3184,34 @@ class Widget_conditions():
                         'ResUNet++',
                         'ResUNet SE',
                         'U-NeXt V1', 
+                        'U-NeXt V2',
                         'Attention U-Net', 
                         'MultiResUnet', 
                         'SEUnet', 
                     ],
                 }, 
+            "rcan_label": 
+                {
+                    "MODEL__ARCHITECTURE__INPUT": 
+                    [
+                        'RCAN', 
+                    ],
+                    "LOAD_PRETRAINED_MODEL__INPUT": 
+                    [
+                        'No', 
+                    ],
+                }, 
+            "rcan_frame": 
+                {
+                    "MODEL__ARCHITECTURE__INPUT": 
+                    [
+                        'RCAN', 
+                    ],
+                    "LOAD_PRETRAINED_MODEL__INPUT": 
+                    [
+                        'No', 
+                    ],
+                },         
             "transformers_frame": 
                 {
                     "MODEL__ARCHITECTURE__INPUT": 

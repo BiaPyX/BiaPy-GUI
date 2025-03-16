@@ -29,7 +29,7 @@ from typing import (
 )
 
 from PySide6.QtCore import QObject, QThread, Signal
-from PySide6.QtWidgets import QFileDialog, QComboBox, QLineEdit,  QLabel, QWidget, QFrame
+from PySide6.QtWidgets import QFileDialog, QComboBox, QLineEdit, QLabel, QWidget, QFrame
 from PySide6.QtGui import QColor
 
 import main
@@ -1956,7 +1956,16 @@ def move_between_workflows(main_window: main.MainWindow, to_page: int, dims: Opt
     # Self-supevised learning
     elif workflow_key_name == "SELF_SUPERVISED":
         jobname = "my_self_supervised_learning"
-        models = main_window.cfg.settings["ssl_models_real_names"]
+        if dims is None:
+            if get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "2D":
+                models = main_window.cfg.settings["ssl_2d_models_real_names"]
+            else:
+                models = main_window.cfg.settings["ssl_3d_models_real_names"]
+        else:
+            if dims == "2D":
+                models = main_window.cfg.settings["ssl_2d_models_real_names"]
+            else:
+                models = main_window.cfg.settings["ssl_3d_models_real_names"]
         losses = main_window.cfg.settings["ssl_losses_real_names"]
         main_window.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(
             main_window.ui.train_workflow_specific_tab_ssl_page
@@ -1985,7 +1994,17 @@ def move_between_workflows(main_window: main.MainWindow, to_page: int, dims: Opt
     # Image to image
     elif workflow_key_name == "IMAGE_TO_IMAGE":
         jobname = "my_image_to_image"
-        models = main_window.cfg.settings["i2i_models_real_names"]
+        if dims is None:
+            if get_text(main_window.ui.PROBLEM__NDIM__INPUT) == "2D":
+                models = main_window.cfg.settings["i2i_2d_models_real_names"]
+            else:
+                models = main_window.cfg.settings["i2i_3d_models_real_names"]
+        else:
+            if dims == "2D":
+                models = main_window.cfg.settings["i2i_2d_models_real_names"]
+            else:
+                models = main_window.cfg.settings["i2i_3d_models_real_names"]
+
         losses = main_window.cfg.settings["i2i_losses_real_names"]
         main_window.ui.train_workflow_specific_tab_stackedWidget.setCurrentWidget(
             main_window.ui.train_workflow_specific_tab_i2i_page
@@ -3241,7 +3260,8 @@ def create_yaml_file(main_window: main.MainWindow) -> Tuple[bool, bool]:
                     else "post"
                 )
                 biapy_config["MODEL"]["UNET_SR_UPSAMPLE_POSITION"] = r
-        elif model_name in ["unetr", "mae", "ViT"]:
+
+        elif model_name in ["unetr", "mae", "vit"]:
             biapy_config["MODEL"]["VIT_TOKEN_SIZE"] = int(get_text(main_window.ui.MODEL__VIT_TOKEN_SIZE__INPUT))
             biapy_config["MODEL"]["VIT_EMBED_DIM"] = int(get_text(main_window.ui.MODEL__VIT_EMBED_DIM__INPUT))
             biapy_config["MODEL"]["VIT_NUM_LAYERS"] = int(get_text(main_window.ui.MODEL__VIT_NUM_LAYERS__INPUT))
@@ -3265,7 +3285,7 @@ def create_yaml_file(main_window: main.MainWindow) -> Tuple[bool, bool]:
                 )
 
             # MAE
-            if model_name in "mae":
+            elif model_name in "mae":
                 biapy_config["MODEL"]["MAE_MASK_TYPE"] = get_text(main_window.ui.MODEL__MAE_MASK_TYPE__INPUT)
                 if get_text(main_window.ui.MODEL__MAE_MASK_TYPE__INPUT) == "random":
                     biapy_config["MODEL"]["MAE_MASK_RATIO"] = float(
@@ -3279,28 +3299,46 @@ def create_yaml_file(main_window: main.MainWindow) -> Tuple[bool, bool]:
                 )
                 biapy_config["MODEL"]["MAE_DEC_NUM_HEADS"] = get_text(main_window.ui.MODEL__MAE_DEC_NUM_HEADS__INPUT)
                 biapy_config["MODEL"]["MAE_DEC_MLP_DIMS"] = get_text(main_window.ui.MODEL__MAE_DEC_MLP_DIMS__INPUT)
-
-            # ConvNeXT
-            if model_name in "unext_v1":
-                try:
-                    biapy_config["MODEL"]["CONVNEXT_LAYERS"] = ast.literal_eval(
-                        get_text(main_window.ui.MODEL__CONVNEXT_LAYERS__INPUT)
-                    )
-                except:
-                    main_window.dialog_exec(
-                        "There was an error in model's convnext layers field (MODEL.CONVNEXT_LAYERS). Please check its syntax!",
-                        reason="error",
-                    )
-                    return True, False
-                biapy_config["MODEL"]["CONVNEXT_SD_PROB"] = float(
-                    get_text(main_window.ui.MODEL__CONVNEXT_SD_PROB__INPUT)
+        
+        # ConvNeXT
+        elif model_name in ["unext_v1", "unext_v2"]:    
+            try:
+                biapy_config["MODEL"]["CONVNEXT_LAYERS"] = ast.literal_eval(
+                    get_text(main_window.ui.MODEL__CONVNEXT_LAYERS__INPUT)
                 )
-                biapy_config["MODEL"]["CONVNEXT_LAYER_SCALE"] = float(
-                    get_text(main_window.ui.MODEL__CONVNEXT_LAYER_SCALE__INPUT)
+            except:
+                main_window.dialog_exec(
+                    "There was an error in model's convnext layers field (MODEL.CONVNEXT_LAYERS). Please check its syntax!",
+                    reason="error",
                 )
-                biapy_config["MODEL"]["CONVNEXT_STEM_K_SIZE"] = int(
-                    get_text(main_window.ui.MODEL__CONVNEXT_STEM_K_SIZE__INPUT)
-                )
+                return True, False
+            biapy_config["MODEL"]["CONVNEXT_SD_PROB"] = float(
+                get_text(main_window.ui.MODEL__CONVNEXT_SD_PROB__INPUT)
+            )
+            biapy_config["MODEL"]["CONVNEXT_LAYER_SCALE"] = float(
+                get_text(main_window.ui.MODEL__CONVNEXT_LAYER_SCALE__INPUT)
+            )
+            biapy_config["MODEL"]["CONVNEXT_STEM_K_SIZE"] = int(
+                get_text(main_window.ui.MODEL__CONVNEXT_STEM_K_SIZE__INPUT)
+            )
+        
+        # RCAN
+        elif model_name == "rcan":
+            biapy_config["MODEL"]["RCAN_RG_BLOCK_NUM"] = int(
+                get_text(main_window.ui.MODEL__RCAN_RG_BLOCK_NUM__INPUT)
+            )
+            biapy_config["MODEL"]["RCAN_RCAB_BLOCK_NUM"] = int(
+                get_text(main_window.ui.MODEL__RCAN_RCAB_BLOCK_NUM__INPUT)
+            )
+            biapy_config["MODEL"]["RCAN_CONV_FILTERS"] = int(
+                get_text(main_window.ui.MODEL__RCAN_CONV_FILTERS__INPUT)
+            )
+            biapy_config["MODEL"]["RCAN_REDUCTION_RATIO"] = int(
+                get_text(main_window.ui.MODEL__RCAN_REDUCTION_RATIO__INPUT)
+            )
+            biapy_config["MODEL"]["RCAN_UPSCALING_LAYER"] = (
+                True if get_text(main_window.ui.MODEL__RCAN_UPSCALING_LAYER__INPUT) == "Yes" else False
+            )
 
         if workflow_key_name in ["SEMANTIC_SEG", "INSTANCE_SEG", "DETECTION", "CLASSIFICATION"]:
             classes = 2

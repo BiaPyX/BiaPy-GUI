@@ -262,8 +262,8 @@ class Settings:
         ]
         # Super resolution
         self.settings["sr_2d_models"] = [
-            "rcan",
             "edsr",
+            "rcan",
             "dfcan",
             "wdsr",
             "unet",
@@ -277,8 +277,8 @@ class Settings:
             "multiresunet",
         ]
         self.settings["sr_2d_models_real_names"] = [
-            "RCAN",
             "EDSR",
+            "RCAN",
             "DFCAN",
             "WDSR",
             "U-Net",
@@ -292,6 +292,9 @@ class Settings:
             "MultiResUnet",
         ]
         self.settings["sr_3d_models"] = [
+            "edsr",
+            "rcan",
+            "dfcan",
             "resunet", 
             "unet", 
             "resunet++", 
@@ -303,6 +306,9 @@ class Settings:
             "multiresunet"
         ]
         self.settings["sr_3d_models_real_names"] = [
+            "EDSR",
+            "RCAN",
+            "DFCAN",
             "Residual U-Net",
             "U-Net",
             "ResUNet++",
@@ -334,31 +340,75 @@ class Settings:
             "Structural similarity index measure (SSIM)"
         ]
         # Self-supervised learning
-        self.settings["ssl_models"] = [
-            "mae",
+        self.settings["ssl_2d_models"] = [
             "unet",
             "resunet",
             "resunet++",
-            "resunet_se",
-            "unext_v1",
-            "unext_v2",
-            "seunet",
             "attention_unet",
             "multiresunet",
+            "seunet",
+            "resunet_se",
             "unetr",
+            "unext_v1",
+            "unext_v2",
+            "edsr",
+            "rcan",
+            "dfcan",
+            "wdsr",
+            "vit",
+            "mae",
         ]
-        self.settings["ssl_models_real_names"] = [
-            "MAE",
+        self.settings["ssl_2d_models_real_names"] = [
             "U-Net",
             "Residual U-Net",
             "ResUNet++",
-            "ResUNet SE",
-            "U-NeXt V1",
-            "U-NeXt V2",
-            "SEUnet",
             "Attention U-Net",
             "MultiResUnet",
+            "SEUnet",
+            "ResUNet SE",
             "UNETR",
+            "U-NeXt V1",
+            "U-NeXt V2",
+            "EDSR",
+            "RCAN",
+            "DFCAN",
+            "WDSR",
+            "ViT",
+            "MAE",
+        ]
+        self.settings["ssl_3d_models"] = [
+            "unet",
+            "resunet",
+            "resunet++",
+            "attention_unet",
+            "multiresunet",
+            "seunet",
+            "resunet_se",
+            "unetr",
+            "unext_v1",
+            "unext_v2",
+            "edsr",
+            "rcan",
+            "dfcan",
+            "vit",
+            "mae",
+        ]
+        self.settings["ssl_3d_models_real_names"] = [
+            "U-Net",
+            "Residual U-Net",
+            "ResUNet++",
+            "Attention U-Net",
+            "MultiResUnet",
+            "SEUnet",
+            "ResUNet SE",
+            "UNETR",
+            "U-NeXt V1",
+            "U-NeXt V2",
+            "EDSR",
+            "RCAN",
+            "DFCAN",
+            "ViT",
+            "MAE",
         ]
         self.settings["ssl_losses"] = [
             "MAE",
@@ -420,36 +470,66 @@ class Settings:
             "Top-5 Accuracy",
         ]
         # Image to image
-        self.settings["i2i_models"] = [
-            "resunet",
+        self.settings["i2i_2d_models"] = [
             "edsr",
             "rcan",
             "dfcan",
             "wdsr",
             "unet",
+            "resunet",
             "resunet++",
             "resunet_se",
             "unext_v1",
             "unext_v2",
+            "unetr",
             "seunet",
             "attention_unet",
-            "unetr",
             "multiresunet",
         ]
-        self.settings["i2i_models_real_names"] = [
-            "Residual U-Net",
+        self.settings["i2i_2d_models_real_names"] = [
             "EDSR",
             "RCAN",
             "DFCAN",
             "WDSR",
             "U-Net",
+            "Residual U-Net",
             "ResUNet++",
             "ResUNet SE",
             "U-NeXt V1",
             "U-NeXt V2",
+            "UNETR",
             "SEUnet",
             "Attention U-Net",
+            "MultiResUnet",
+        ]
+        self.settings["i2i_3d_models"] = [
+            "edsr",
+            "rcan",
+            "dfcan",
+            "resunet", 
+            "unet", 
+            "resunet++", 
+            "resunet_se", 
+            "unext_v1",
+            "unext_v2",
+            "unetr",
+            "seunet", 
+            "attention_unet", 
+            "multiresunet"
+        ]
+        self.settings["i2i_3d_models_real_names"] = [
+            "EDSR",
+            "RCAN",
+            "DFCAN",
+            "Residual U-Net",
+            "U-Net",
+            "ResUNet++",
+            "ResUNet SE",
+            "U-NeXt V1",
+            "U-NeXt V2",
             "UNETR",
+            "SEUnet",
+            "Attention U-Net",
             "MultiResUnet",
         ]
         self.settings["i2i_losses"] = [
@@ -1306,9 +1386,9 @@ class Settings:
         for x in ["semantic", "instance", "detection", "denoising", "sr", "ssl", "classification", "i2i"]:
             try:
                 d = ""
-                if x == "sr" and dim == "2D":
+                if x in ["sr", "ssl", "i2i"] and dim == "2D":
                     d = "_2d_"
-                elif x == "sr" and dim == "3D":
+                elif x in ["sr", "ssl", "i2i"] and dim == "3D":
                     d = "_3d_"
                 idx = list(self.settings[x + d + s]).index(model)
             except:
