@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import *
+from PySide6.QtWidgets import QLabel
 from ui_utils import get_text
 
 class Widget_conditions():
@@ -773,86 +773,86 @@ class Widget_conditions():
                 }, 
             "DATA__NORMALIZATION__PERC_LOWER__LABEL": 
                 {
-                    "DATA__NORMALIZATION__PERC_CLIP__INPUT": 
+                    "DATA__NORMALIZATION__PERC_CLIP__ENABLE__INPUT": 
                     [
                         "Yes"
                     ],
                 }, 
             "DATA__NORMALIZATION__PERC_LOWER__INFO": 
                 {
-                    "DATA__NORMALIZATION__PERC_CLIP__INPUT": 
+                    "DATA__NORMALIZATION__PERC_CLIP__ENABLE__INPUT": 
                     [
                         "Yes"
                     ],
                 }, 
-            "DATA__NORMALIZATION__PERC_LOWER__INPUT": 
+            "DATA__NORMALIZATION__PERC_CLIP__LOWER_PERC__INPUT": 
                 {
-                    "DATA__NORMALIZATION__PERC_CLIP__INPUT": 
+                    "DATA__NORMALIZATION__PERC_CLIP__ENABLE__INPUT": 
                     [
                         "Yes"
                     ],
                 }, 
             "DATA__NORMALIZATION__PERC_UPPER__LABEL": 
                 {
-                    "DATA__NORMALIZATION__PERC_CLIP__INPUT": 
+                    "DATA__NORMALIZATION__PERC_CLIP__ENABLE__INPUT": 
                     [
                         "Yes"
                     ],
                 }, 
             "DATA__NORMALIZATION__PERC_UPPER__INFO": 
                 {
-                    "DATA__NORMALIZATION__PERC_CLIP__INPUT": 
+                    "DATA__NORMALIZATION__PERC_CLIP__ENABLE__INPUT": 
                     [
                         "Yes"
                     ],
                 }, 
-            "DATA__NORMALIZATION__PERC_UPPER__INPUT": 
+            "DATA__NORMALIZATION__PERC_CLIP__UPPER_PERC__INPUT": 
                 {
-                    "DATA__NORMALIZATION__PERC_CLIP__INPUT": 
+                    "DATA__NORMALIZATION__PERC_CLIP__ENABLE__INPUT": 
                     [
                         "Yes"
                     ],
                 }, 
-            "custom_mean_label": 
+            "DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__LABEL": 
                 {
                     "DATA__NORMALIZATION__TYPE__INPUT": 
                     [
-                        "custom"
+                        "zero_mean_unit_variance"
                     ],
                 }, 
-            "DATA__NORMALIZATION__CUSTOM_MEAN__INPUT": 
+            "DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__INPUT": 
                 {
                     "DATA__NORMALIZATION__TYPE__INPUT": 
                     [
-                        "custom"
+                        "zero_mean_unit_variance"
                     ],
                 }, 
-            "DATA__NORMALIZATION__CUSTOM_MEAN__INFO": 
+            "DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__INFO": 
                 {
                     "DATA__NORMALIZATION__TYPE__INPUT": 
                     [
-                        "custom"
+                        "zero_mean_unit_variance"
                     ],
                 },
-            "custom_std_label": 
+            "DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__LABEL": 
                 {
                     "DATA__NORMALIZATION__TYPE__INPUT": 
                     [
-                        "custom"
+                        "zero_mean_unit_variance"
                     ],
                 }, 
-            "DATA__NORMALIZATION__CUSTOM_STD__INPUT": 
+            "DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__INPUT": 
                 {
                     "DATA__NORMALIZATION__TYPE__INPUT": 
                     [
-                        "custom"
+                        "zero_mean_unit_variance"
                     ],
                 }, 
-            "DATA__NORMALIZATION__CUSTOM_STD__INFO": 
+            "DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__INFO": 
                 {
                     "DATA__NORMALIZATION__TYPE__INPUT": 
                     [
-                        "custom"
+                        "zero_mean_unit_variance"
                     ],
                 }, 
             "extract_random_patch_frame_label": 
@@ -3217,6 +3217,7 @@ class Widget_conditions():
                     "MODEL__ARCHITECTURE__INPUT": 
                     [
                         'U-NeXt V1', 
+                        'U-NeXt V2', 
                     ],
                     "LOAD_PRETRAINED_MODEL__INPUT": 
                     [
@@ -3228,6 +3229,7 @@ class Widget_conditions():
                     "MODEL__ARCHITECTURE__INPUT": 
                     [
                         'U-NeXt V1', 
+                        'U-NeXt V2', 
                     ],
                     "LOAD_PRETRAINED_MODEL__INPUT": 
                     [
@@ -3477,44 +3479,44 @@ class Widget_conditions():
                         'Yes', 
                     ],
                 }, 
-            "TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL": 
+            "DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL": 
                 {
-                    "TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT": 
+                    "DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INPUT": 
                     [
                         'Yes', 
                     ],
                 }, 
-            "TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO": 
+            "DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO": 
                 {
-                    "TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT": 
+                    "DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INPUT": 
                     [
                         'Yes', 
                     ],
                 }, 
-            "TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT": 
+            "DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT": 
                 {
-                    "TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT": 
+                    "DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INPUT": 
                     [
                         'Yes', 
                     ],
                 }, 
-            "TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL": 
+            "DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL": 
                 {
-                    "TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT": 
+                    "DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INPUT": 
                     [
                         'Yes', 
                     ],
                 }, 
-            "TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO": 
+            "DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO": 
                 {
-                    "TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT": 
+                    "DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INPUT": 
                     [
                         'Yes', 
                     ],
                 }, 
-            "TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT": 
+            "DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT": 
                 {
-                    "TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT": 
+                    "DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INPUT": 
                     [
                         'Yes', 
                     ],
@@ -4380,7 +4382,24 @@ class Widget_conditions():
                         "Yes",
                     ]
                 },
-
+            "DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__LABEL": 
+                {
+                    "DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__INFO": 
+                {
+                    "DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__INPUT": 
+                {
+                    "DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
             "DATA__VAL__FILTER_SAMPLES__PROPS__LABEL": 
                 {
                     "DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT": [
@@ -4435,7 +4454,24 @@ class Widget_conditions():
                         "Yes",
                     ]
                 },
-
+            "DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__LABEL": 
+                {
+                    "DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__INFO": 
+                {
+                    "DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__INPUT": 
+                {
+                    "DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
 
             "DATA__TEST__FILTER_SAMPLES__PROPS__LABEL": 
                 {
@@ -4486,6 +4522,24 @@ class Widget_conditions():
                     ]
                 },
             "DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT": 
+                {
+                    "DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__LABEL": 
+                {
+                    "DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__INFO": 
+                {
+                    "DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT": [
+                        "Yes",
+                    ]
+                },
+            "DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__INPUT": 
                 {
                     "DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT": [
                         "Yes",

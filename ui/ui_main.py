@@ -1542,7 +1542,7 @@ class Ui_MainWindow(object):
         self.scrollArea_18.setWidgetResizable(True)
         self.scrollAreaWidgetContents_23 = QWidget()
         self.scrollAreaWidgetContents_23.setObjectName(u"scrollAreaWidgetContents_23")
-        self.scrollAreaWidgetContents_23.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_23.setGeometry(QRect(0, 0, 930, 172))
         self.verticalLayout_62 = QVBoxLayout(self.scrollAreaWidgetContents_23)
         self.verticalLayout_62.setObjectName(u"verticalLayout_62")
         self.scrollArea_18.setWidget(self.scrollAreaWidgetContents_23)
@@ -2215,7 +2215,7 @@ class Ui_MainWindow(object):
         self.goptions_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 926, 1092))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, -651, 926, 1092))
         self.scrollAreaWidgetContents.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout.setObjectName(u"gridLayout")
@@ -2297,6 +2297,48 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.frame_26, 12, 0, 1, 2)
 
+        self.MODEL__BMZ__EXPORT__ENABLE__FRAME = QFrame(self.scrollAreaWidgetContents)
+        self.MODEL__BMZ__EXPORT__ENABLE__FRAME.setObjectName(u"MODEL__BMZ__EXPORT__ENABLE__FRAME")
+        self.MODEL__BMZ__EXPORT__ENABLE__FRAME.setFrameShape(QFrame.NoFrame)
+        self.MODEL__BMZ__EXPORT__ENABLE__FRAME.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_26 = QHBoxLayout(self.MODEL__BMZ__EXPORT__ENABLE__FRAME)
+        self.horizontalLayout_26.setSpacing(15)
+        self.horizontalLayout_26.setObjectName(u"horizontalLayout_26")
+        self.horizontalLayout_26.setContentsMargins(0, 0, 0, 0)
+        self.MODEL__BMZ__EXPORT__ENABLE__LABEL = QLabel(self.MODEL__BMZ__EXPORT__ENABLE__FRAME)
+        self.MODEL__BMZ__EXPORT__ENABLE__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__ENABLE__LABEL")
+        self.MODEL__BMZ__EXPORT__ENABLE__LABEL.setFont(font1)
+
+        self.horizontalLayout_26.addWidget(self.MODEL__BMZ__EXPORT__ENABLE__LABEL)
+
+        self.MODEL__BMZ__EXPORT__ENABLE__INFO = QPushButton(self.MODEL__BMZ__EXPORT__ENABLE__FRAME)
+        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setObjectName(u"MODEL__BMZ__EXPORT__ENABLE__INFO")
+        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setProperty(u"scaledContents", True)
+
+        self.horizontalLayout_26.addWidget(self.MODEL__BMZ__EXPORT__ENABLE__INFO)
+
+        self.MODEL__BMZ__EXPORT__ENABLE__INPUT = QComboBox(self.MODEL__BMZ__EXPORT__ENABLE__FRAME)
+        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.addItem("")
+        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.addItem("")
+        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__ENABLE__INPUT")
+        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setFont(font1)
+
+        self.horizontalLayout_26.addWidget(self.MODEL__BMZ__EXPORT__ENABLE__INPUT)
+
+        self.horizontalSpacer_56 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_26.addItem(self.horizontalSpacer_56)
+
+
+        self.gridLayout.addWidget(self.MODEL__BMZ__EXPORT__ENABLE__FRAME, 7, 0, 1, 1)
+
         self.goptions_advanced_options_frame = QFrame(self.scrollAreaWidgetContents)
         self.goptions_advanced_options_frame.setObjectName(u"goptions_advanced_options_frame")
         self.goptions_advanced_options_frame.setMinimumSize(QSize(880, 200))
@@ -2323,22 +2365,1195 @@ class Ui_MainWindow(object):
         self.goptions_advanced_options_scrollarea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 852, 286))
-        self.gridLayout_2 = QGridLayout(self.scrollAreaWidgetContents_2)
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, -1554, 852, 1993))
+        self.verticalLayout_63 = QVBoxLayout(self.scrollAreaWidgetContents_2)
+        self.verticalLayout_63.setSpacing(9)
+        self.verticalLayout_63.setObjectName(u"verticalLayout_63")
+        self.label_25 = QLabel(self.scrollAreaWidgetContents_2)
+        self.label_25.setObjectName(u"label_25")
+        self.label_25.setMaximumSize(QSize(200, 35))
+        self.label_25.setFont(font1)
+
+        self.verticalLayout_63.addWidget(self.label_25)
+
+        self.frame_80 = QFrame(self.scrollAreaWidgetContents_2)
+        self.frame_80.setObjectName(u"frame_80")
+        self.frame_80.setFont(font1)
+        self.frame_80.setFrameShape(QFrame.Box)
+        self.frame_80.setFrameShadow(QFrame.Raised)
+        self.gridLayout_88 = QGridLayout(self.frame_80)
+        self.gridLayout_88.setObjectName(u"gridLayout_88")
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__LABEL = QLabel(self.frame_80)
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__LABEL.setObjectName(u"DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__LABEL")
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__LABEL.setMaximumSize(QSize(16777215, 16777215))
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__LABEL.setFont(font1)
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__LABEL.setIndent(15)
+
+        self.gridLayout_88.addWidget(self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__LABEL, 17, 1, 1, 1)
+
+        self.DATA__NORMALIZATION__PERC_CLIP__ENABLE__LABEL = QLabel(self.frame_80)
+        self.DATA__NORMALIZATION__PERC_CLIP__ENABLE__LABEL.setObjectName(u"DATA__NORMALIZATION__PERC_CLIP__ENABLE__LABEL")
+        self.DATA__NORMALIZATION__PERC_CLIP__ENABLE__LABEL.setFont(font1)
+
+        self.gridLayout_88.addWidget(self.DATA__NORMALIZATION__PERC_CLIP__ENABLE__LABEL, 9, 1, 1, 1)
+
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__LABEL = QLabel(self.frame_80)
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__LABEL.setObjectName(u"DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__LABEL")
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__LABEL.setMaximumSize(QSize(16777215, 16777215))
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__LABEL.setFont(font1)
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__LABEL.setIndent(15)
+
+        self.gridLayout_88.addWidget(self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__LABEL, 18, 1, 1, 1)
+
+        self.DATA__FORCE_RGB__INFO = QPushButton(self.frame_80)
+        self.DATA__FORCE_RGB__INFO.setObjectName(u"DATA__FORCE_RGB__INFO")
+        self.DATA__FORCE_RGB__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__FORCE_RGB__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__FORCE_RGB__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_88.addWidget(self.DATA__FORCE_RGB__INFO, 19, 3, 1, 1)
+
+        self.DATA__FORCE_RGB__LABEL = QLabel(self.frame_80)
+        self.DATA__FORCE_RGB__LABEL.setObjectName(u"DATA__FORCE_RGB__LABEL")
+        self.DATA__FORCE_RGB__LABEL.setFont(font1)
+
+        self.gridLayout_88.addWidget(self.DATA__FORCE_RGB__LABEL, 19, 1, 1, 1)
+
+        self.DATA__NORMALIZATION__PERC_CLIP__LOWER_PERC__INPUT = QLineEdit(self.frame_80)
+        self.DATA__NORMALIZATION__PERC_CLIP__LOWER_PERC__INPUT.setObjectName(u"DATA__NORMALIZATION__PERC_CLIP__LOWER_PERC__INPUT")
+        self.DATA__NORMALIZATION__PERC_CLIP__LOWER_PERC__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__NORMALIZATION__PERC_CLIP__LOWER_PERC__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__NORMALIZATION__PERC_CLIP__LOWER_PERC__INPUT.setFont(font1)
+
+        self.gridLayout_88.addWidget(self.DATA__NORMALIZATION__PERC_CLIP__LOWER_PERC__INPUT, 10, 4, 1, 1)
+
+        self.DATA__NORMALIZATION__TYPE__INPUT = QComboBox(self.frame_80)
+        self.DATA__NORMALIZATION__TYPE__INPUT.addItem("")
+        self.DATA__NORMALIZATION__TYPE__INPUT.addItem("")
+        self.DATA__NORMALIZATION__TYPE__INPUT.addItem("")
+        self.DATA__NORMALIZATION__TYPE__INPUT.setObjectName(u"DATA__NORMALIZATION__TYPE__INPUT")
+        self.DATA__NORMALIZATION__TYPE__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__NORMALIZATION__TYPE__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__NORMALIZATION__TYPE__INPUT.setFont(font1)
+
+        self.gridLayout_88.addWidget(self.DATA__NORMALIZATION__TYPE__INPUT, 14, 4, 1, 1)
+
+        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO = QPushButton(self.frame_80)
+        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO.setObjectName(u"DATA__REFLECT_TO_COMPLETE_SHAPE__INFO")
+        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_88.addWidget(self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO, 4, 3, 1, 1)
+
+        self.DATA__NORMALIZATION__PERC_CLIP__ENABLE__INPUT = QComboBox(self.frame_80)
+        self.DATA__NORMALIZATION__PERC_CLIP__ENABLE__INPUT.addItem("")
+        self.DATA__NORMALIZATION__PERC_CLIP__ENABLE__INPUT.addItem("")
+        self.DATA__NORMALIZATION__PERC_CLIP__ENABLE__INPUT.setObjectName(u"DATA__NORMALIZATION__PERC_CLIP__ENABLE__INPUT")
+        self.DATA__NORMALIZATION__PERC_CLIP__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__NORMALIZATION__PERC_CLIP__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__NORMALIZATION__PERC_CLIP__ENABLE__INPUT.setFont(font1)
+
+        self.gridLayout_88.addWidget(self.DATA__NORMALIZATION__PERC_CLIP__ENABLE__INPUT, 9, 4, 1, 1)
+
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__INFO = QPushButton(self.frame_80)
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__INFO.setObjectName(u"DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__INFO")
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_88.addWidget(self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__INFO, 17, 3, 1, 1)
+
+        self.DATA__NORMALIZATION__PERC_CLIP__ENABLE__INFO = QPushButton(self.frame_80)
+        self.DATA__NORMALIZATION__PERC_CLIP__ENABLE__INFO.setObjectName(u"DATA__NORMALIZATION__PERC_CLIP__ENABLE__INFO")
+        self.DATA__NORMALIZATION__PERC_CLIP__ENABLE__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__NORMALIZATION__PERC_CLIP__ENABLE__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__NORMALIZATION__PERC_CLIP__ENABLE__INFO.setFont(font9)
+        self.DATA__NORMALIZATION__PERC_CLIP__ENABLE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_88.addWidget(self.DATA__NORMALIZATION__PERC_CLIP__ENABLE__INFO, 9, 3, 1, 1)
+
+        self.DATA__NORMALIZATION__PERC_LOWER__INFO = QPushButton(self.frame_80)
+        self.DATA__NORMALIZATION__PERC_LOWER__INFO.setObjectName(u"DATA__NORMALIZATION__PERC_LOWER__INFO")
+        self.DATA__NORMALIZATION__PERC_LOWER__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__NORMALIZATION__PERC_LOWER__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__NORMALIZATION__PERC_LOWER__INFO.setFont(font9)
+        self.DATA__NORMALIZATION__PERC_LOWER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_88.addWidget(self.DATA__NORMALIZATION__PERC_LOWER__INFO, 10, 3, 1, 1)
+
+        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT = QComboBox(self.frame_80)
+        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT.addItem("")
+        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT.addItem("")
+        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT.setObjectName(u"DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT")
+        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT.setFont(font1)
+
+        self.gridLayout_88.addWidget(self.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT, 4, 4, 1, 1)
+
+        self.DATA__NORMALIZATION__PERC_LOWER__LABEL = QLabel(self.frame_80)
+        self.DATA__NORMALIZATION__PERC_LOWER__LABEL.setObjectName(u"DATA__NORMALIZATION__PERC_LOWER__LABEL")
+        self.DATA__NORMALIZATION__PERC_LOWER__LABEL.setFont(font1)
+        self.DATA__NORMALIZATION__PERC_LOWER__LABEL.setIndent(15)
+
+        self.gridLayout_88.addWidget(self.DATA__NORMALIZATION__PERC_LOWER__LABEL, 10, 1, 1, 1)
+
+        self.label_88 = QLabel(self.frame_80)
+        self.label_88.setObjectName(u"label_88")
+        self.label_88.setFont(font1)
+
+        self.gridLayout_88.addWidget(self.label_88, 4, 1, 1, 2)
+
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__INFO = QPushButton(self.frame_80)
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__INFO.setObjectName(u"DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__INFO")
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_88.addWidget(self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__INFO, 18, 3, 1, 1)
+
+        self.horizontalSpacer_67 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_88.addItem(self.horizontalSpacer_67, 4, 5, 1, 1)
+
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__INPUT = QLineEdit(self.frame_80)
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__INPUT.setObjectName(u"DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__INPUT")
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__INPUT.setFont(font1)
+
+        self.gridLayout_88.addWidget(self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__INPUT, 17, 4, 1, 1)
+
+        self.DATA__FORCE_RGB__INPUT = QComboBox(self.frame_80)
+        self.DATA__FORCE_RGB__INPUT.addItem("")
+        self.DATA__FORCE_RGB__INPUT.addItem("")
+        self.DATA__FORCE_RGB__INPUT.setObjectName(u"DATA__FORCE_RGB__INPUT")
+        self.DATA__FORCE_RGB__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__FORCE_RGB__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__FORCE_RGB__INPUT.setFont(font1)
+
+        self.gridLayout_88.addWidget(self.DATA__FORCE_RGB__INPUT, 19, 4, 1, 1)
+
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__INPUT = QLineEdit(self.frame_80)
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__INPUT.setObjectName(u"DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__INPUT")
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__INPUT.setFont(font1)
+
+        self.gridLayout_88.addWidget(self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__INPUT, 18, 4, 1, 1)
+
+        self.DATA__NORMALIZATION__PERC_CLIP__UPPER_PERC__INPUT = QLineEdit(self.frame_80)
+        self.DATA__NORMALIZATION__PERC_CLIP__UPPER_PERC__INPUT.setObjectName(u"DATA__NORMALIZATION__PERC_CLIP__UPPER_PERC__INPUT")
+        self.DATA__NORMALIZATION__PERC_CLIP__UPPER_PERC__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__NORMALIZATION__PERC_CLIP__UPPER_PERC__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__NORMALIZATION__PERC_CLIP__UPPER_PERC__INPUT.setFont(font1)
+
+        self.gridLayout_88.addWidget(self.DATA__NORMALIZATION__PERC_CLIP__UPPER_PERC__INPUT, 11, 4, 1, 1)
+
+        self.DATA__NORMALIZATION__PERC_UPPER__LABEL = QLabel(self.frame_80)
+        self.DATA__NORMALIZATION__PERC_UPPER__LABEL.setObjectName(u"DATA__NORMALIZATION__PERC_UPPER__LABEL")
+        self.DATA__NORMALIZATION__PERC_UPPER__LABEL.setFont(font1)
+        self.DATA__NORMALIZATION__PERC_UPPER__LABEL.setIndent(15)
+
+        self.gridLayout_88.addWidget(self.DATA__NORMALIZATION__PERC_UPPER__LABEL, 11, 1, 1, 1)
+
+        self.label_99 = QLabel(self.frame_80)
+        self.label_99.setObjectName(u"label_99")
+        self.label_99.setMaximumSize(QSize(16777215, 16777215))
+        self.label_99.setFont(font1)
+
+        self.gridLayout_88.addWidget(self.label_99, 14, 1, 1, 1)
+
+        self.DATA__NORMALIZATION__PERC_UPPER__INFO = QPushButton(self.frame_80)
+        self.DATA__NORMALIZATION__PERC_UPPER__INFO.setObjectName(u"DATA__NORMALIZATION__PERC_UPPER__INFO")
+        self.DATA__NORMALIZATION__PERC_UPPER__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__NORMALIZATION__PERC_UPPER__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__NORMALIZATION__PERC_UPPER__INFO.setFont(font9)
+        self.DATA__NORMALIZATION__PERC_UPPER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_88.addWidget(self.DATA__NORMALIZATION__PERC_UPPER__INFO, 11, 3, 1, 1)
+
+        self.DATA__NORMALIZATION__TYPE__INFO = QPushButton(self.frame_80)
+        self.DATA__NORMALIZATION__TYPE__INFO.setObjectName(u"DATA__NORMALIZATION__TYPE__INFO")
+        self.DATA__NORMALIZATION__TYPE__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__NORMALIZATION__TYPE__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__NORMALIZATION__TYPE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_88.addWidget(self.DATA__NORMALIZATION__TYPE__INFO, 14, 3, 1, 1)
+
+
+        self.verticalLayout_63.addWidget(self.frame_80)
+
+        self.frame_81 = QFrame(self.scrollAreaWidgetContents_2)
+        self.frame_81.setObjectName(u"frame_81")
+        self.frame_81.setFrameShape(QFrame.NoFrame)
+        self.frame_81.setFrameShadow(QFrame.Raised)
+        self.gridLayout_2 = QGridLayout(self.frame_81)
+        self.gridLayout_2.setSpacing(0)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.gridLayout_2.setContentsMargins(0, 5, 0, 5)
+        self.MODEL__ARCHITECTURE__INPUT = QComboBox(self.frame_81)
+        self.MODEL__ARCHITECTURE__INPUT.setObjectName(u"MODEL__ARCHITECTURE__INPUT")
+        self.MODEL__ARCHITECTURE__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__ARCHITECTURE__INPUT.setMaximumSize(QSize(16777215, 30))
+        self.MODEL__ARCHITECTURE__INPUT.setFont(font1)
+
+        self.gridLayout_2.addWidget(self.MODEL__ARCHITECTURE__INPUT, 0, 2, 1, 1)
+
+        self.MODEL__ARCHITECTURE__INFO = QPushButton(self.frame_81)
+        self.MODEL__ARCHITECTURE__INFO.setObjectName(u"MODEL__ARCHITECTURE__INFO")
+        self.MODEL__ARCHITECTURE__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__ARCHITECTURE__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__ARCHITECTURE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_2.addWidget(self.MODEL__ARCHITECTURE__INFO, 0, 1, 1, 1)
+
+        self.MODEL__ARCHITECTURE__LABEL = QLabel(self.frame_81)
+        self.MODEL__ARCHITECTURE__LABEL.setObjectName(u"MODEL__ARCHITECTURE__LABEL")
+        self.MODEL__ARCHITECTURE__LABEL.setMaximumSize(QSize(16777215, 16777215))
+        self.MODEL__ARCHITECTURE__LABEL.setFont(font1)
+
+        self.gridLayout_2.addWidget(self.MODEL__ARCHITECTURE__LABEL, 0, 0, 1, 1)
+
+        self.horizontalSpacer_63 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_2.addItem(self.horizontalSpacer_63, 0, 3, 1, 1)
+
+
+        self.verticalLayout_63.addWidget(self.frame_81)
+
+        self.unet_model_like_label = QLabel(self.scrollAreaWidgetContents_2)
+        self.unet_model_like_label.setObjectName(u"unet_model_like_label")
+        self.unet_model_like_label.setFont(font1)
+
+        self.verticalLayout_63.addWidget(self.unet_model_like_label)
+
+        self.unet_model_like_frame = QFrame(self.scrollAreaWidgetContents_2)
+        self.unet_model_like_frame.setObjectName(u"unet_model_like_frame")
+        self.unet_model_like_frame.setMinimumSize(QSize(0, 0))
+        self.unet_model_like_frame.setFont(font1)
+        self.unet_model_like_frame.setFrameShape(QFrame.Box)
+        self.unet_model_like_frame.setFrameShadow(QFrame.Raised)
+        self.gridLayout_22 = QGridLayout(self.unet_model_like_frame)
+        self.gridLayout_22.setObjectName(u"gridLayout_22")
+        self.MODEL__KERNEL_SIZE__INPUT = QLineEdit(self.unet_model_like_frame)
+        self.MODEL__KERNEL_SIZE__INPUT.setObjectName(u"MODEL__KERNEL_SIZE__INPUT")
+        self.MODEL__KERNEL_SIZE__INPUT.setMinimumSize(QSize(100, 30))
+        self.MODEL__KERNEL_SIZE__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__KERNEL_SIZE__INPUT.setFont(font1)
+
+        self.gridLayout_22.addWidget(self.MODEL__KERNEL_SIZE__INPUT, 5, 2, 1, 1)
+
+        self.MODEL__ISOTROPY__LABEL = QLabel(self.unet_model_like_frame)
+        self.MODEL__ISOTROPY__LABEL.setObjectName(u"MODEL__ISOTROPY__LABEL")
+        self.MODEL__ISOTROPY__LABEL.setFont(font1)
+
+        self.gridLayout_22.addWidget(self.MODEL__ISOTROPY__LABEL, 13, 0, 1, 1)
+
+        self.label_39 = QLabel(self.unet_model_like_frame)
+        self.label_39.setObjectName(u"label_39")
+        self.label_39.setMaximumSize(QSize(16777215, 16777215))
+        self.label_39.setFont(font1)
+
+        self.gridLayout_22.addWidget(self.label_39, 4, 0, 1, 1)
+
+        self.horizontalSpacer_13 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_22.addItem(self.horizontalSpacer_13, 1, 3, 1, 1)
+
+        self.MODEL__FEATURE_MAPS__INPUT = QLineEdit(self.unet_model_like_frame)
+        self.MODEL__FEATURE_MAPS__INPUT.setObjectName(u"MODEL__FEATURE_MAPS__INPUT")
+        self.MODEL__FEATURE_MAPS__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__FEATURE_MAPS__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__FEATURE_MAPS__INPUT.setFont(font1)
+
+        self.gridLayout_22.addWidget(self.MODEL__FEATURE_MAPS__INPUT, 1, 2, 1, 1)
+
+        self.label_45 = QLabel(self.unet_model_like_frame)
+        self.label_45.setObjectName(u"label_45")
+        self.label_45.setMaximumSize(QSize(16777215, 16777215))
+        self.label_45.setFont(font1)
+
+        self.gridLayout_22.addWidget(self.label_45, 11, 0, 1, 1)
+
+        self.label_36 = QLabel(self.unet_model_like_frame)
+        self.label_36.setObjectName(u"label_36")
+        self.label_36.setMaximumSize(QSize(16777215, 16777215))
+        self.label_36.setFont(font1)
+
+        self.gridLayout_22.addWidget(self.label_36, 1, 0, 1, 1)
+
+        self.MODEL__DROPOUT_VALUES__INPUT = QLineEdit(self.unet_model_like_frame)
+        self.MODEL__DROPOUT_VALUES__INPUT.setObjectName(u"MODEL__DROPOUT_VALUES__INPUT")
+        self.MODEL__DROPOUT_VALUES__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__DROPOUT_VALUES__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__DROPOUT_VALUES__INPUT.setFont(font1)
+
+        self.gridLayout_22.addWidget(self.MODEL__DROPOUT_VALUES__INPUT, 3, 2, 1, 1)
+
+        self.MODEL__ISOTROPY__INFO = QPushButton(self.unet_model_like_frame)
+        self.MODEL__ISOTROPY__INFO.setObjectName(u"MODEL__ISOTROPY__INFO")
+        self.MODEL__ISOTROPY__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__ISOTROPY__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__ISOTROPY__INFO.setFont(font1)
+        self.MODEL__ISOTROPY__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_22.addWidget(self.MODEL__ISOTROPY__INFO, 13, 1, 1, 1)
+
+        self.MODEL__LAGER_IO__INFO = QPushButton(self.unet_model_like_frame)
+        self.MODEL__LAGER_IO__INFO.setObjectName(u"MODEL__LAGER_IO__INFO")
+        self.MODEL__LAGER_IO__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__LAGER_IO__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__LAGER_IO__INFO.setFont(font1)
+        self.MODEL__LAGER_IO__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_22.addWidget(self.MODEL__LAGER_IO__INFO, 16, 1, 1, 1)
+
+        self.MODEL__Z_DOWN__LABEL = QLabel(self.unet_model_like_frame)
+        self.MODEL__Z_DOWN__LABEL.setObjectName(u"MODEL__Z_DOWN__LABEL")
+        self.MODEL__Z_DOWN__LABEL.setMaximumSize(QSize(16777215, 16777215))
+        self.MODEL__Z_DOWN__LABEL.setFont(font1)
+
+        self.gridLayout_22.addWidget(self.MODEL__Z_DOWN__LABEL, 12, 0, 1, 1)
+
+        self.MODEL__LAGER_IO__LABEL = QLabel(self.unet_model_like_frame)
+        self.MODEL__LAGER_IO__LABEL.setObjectName(u"MODEL__LAGER_IO__LABEL")
+        self.MODEL__LAGER_IO__LABEL.setFont(font1)
+
+        self.gridLayout_22.addWidget(self.MODEL__LAGER_IO__LABEL, 16, 0, 1, 1)
+
+        self.label_43 = QLabel(self.unet_model_like_frame)
+        self.label_43.setObjectName(u"label_43")
+        self.label_43.setMaximumSize(QSize(16777215, 16777215))
+        self.label_43.setFont(font1)
+
+        self.gridLayout_22.addWidget(self.label_43, 6, 0, 1, 1)
+
+        self.MODEL__NORMALIZATION__INFO = QPushButton(self.unet_model_like_frame)
+        self.MODEL__NORMALIZATION__INFO.setObjectName(u"MODEL__NORMALIZATION__INFO")
+        self.MODEL__NORMALIZATION__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__NORMALIZATION__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__NORMALIZATION__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_22.addWidget(self.MODEL__NORMALIZATION__INFO, 4, 1, 1, 1)
+
+        self.MODEL__ACTIVATION__INFO = QPushButton(self.unet_model_like_frame)
+        self.MODEL__ACTIVATION__INFO.setObjectName(u"MODEL__ACTIVATION__INFO")
+        self.MODEL__ACTIVATION__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__ACTIVATION__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__ACTIVATION__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_22.addWidget(self.MODEL__ACTIVATION__INFO, 9, 1, 1, 1)
+
+        self.MODEL__FEATURE_MAPS__INFO = QPushButton(self.unet_model_like_frame)
+        self.MODEL__FEATURE_MAPS__INFO.setObjectName(u"MODEL__FEATURE_MAPS__INFO")
+        self.MODEL__FEATURE_MAPS__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__FEATURE_MAPS__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__FEATURE_MAPS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_22.addWidget(self.MODEL__FEATURE_MAPS__INFO, 1, 1, 1, 1)
+
+        self.MODEL__LAST_ACTIVATION__INFO = QPushButton(self.unet_model_like_frame)
+        self.MODEL__LAST_ACTIVATION__INFO.setObjectName(u"MODEL__LAST_ACTIVATION__INFO")
+        self.MODEL__LAST_ACTIVATION__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__LAST_ACTIVATION__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__LAST_ACTIVATION__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_22.addWidget(self.MODEL__LAST_ACTIVATION__INFO, 11, 1, 1, 1)
+
+        self.MODEL__ACTIVATION__INPUT = QComboBox(self.unet_model_like_frame)
+        self.MODEL__ACTIVATION__INPUT.addItem("")
+        self.MODEL__ACTIVATION__INPUT.addItem("")
+        self.MODEL__ACTIVATION__INPUT.addItem("")
+        self.MODEL__ACTIVATION__INPUT.setObjectName(u"MODEL__ACTIVATION__INPUT")
+        self.MODEL__ACTIVATION__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__ACTIVATION__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__ACTIVATION__INPUT.setFont(font1)
+
+        self.gridLayout_22.addWidget(self.MODEL__ACTIVATION__INPUT, 9, 2, 1, 1)
+
+        self.MODEL__UPSAMPLE_LAYER__INFO = QPushButton(self.unet_model_like_frame)
+        self.MODEL__UPSAMPLE_LAYER__INFO.setObjectName(u"MODEL__UPSAMPLE_LAYER__INFO")
+        self.MODEL__UPSAMPLE_LAYER__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__UPSAMPLE_LAYER__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__UPSAMPLE_LAYER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_22.addWidget(self.MODEL__UPSAMPLE_LAYER__INFO, 6, 1, 1, 1)
+
+        self.MODEL__NORMALIZATION__INPUT = QComboBox(self.unet_model_like_frame)
+        self.MODEL__NORMALIZATION__INPUT.addItem("")
+        self.MODEL__NORMALIZATION__INPUT.addItem("")
+        self.MODEL__NORMALIZATION__INPUT.addItem("")
+        self.MODEL__NORMALIZATION__INPUT.addItem("")
+        self.MODEL__NORMALIZATION__INPUT.addItem("")
+        self.MODEL__NORMALIZATION__INPUT.setObjectName(u"MODEL__NORMALIZATION__INPUT")
+        self.MODEL__NORMALIZATION__INPUT.setMinimumSize(QSize(100, 30))
+        self.MODEL__NORMALIZATION__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__NORMALIZATION__INPUT.setFont(font1)
+
+        self.gridLayout_22.addWidget(self.MODEL__NORMALIZATION__INPUT, 4, 2, 1, 1)
+
+        self.label_37 = QLabel(self.unet_model_like_frame)
+        self.label_37.setObjectName(u"label_37")
+        self.label_37.setMaximumSize(QSize(16777215, 16777215))
+        self.label_37.setFont(font1)
+
+        self.gridLayout_22.addWidget(self.label_37, 3, 0, 1, 1)
+
+        self.MODEL__DROPOUT_VALUES__INFO = QPushButton(self.unet_model_like_frame)
+        self.MODEL__DROPOUT_VALUES__INFO.setObjectName(u"MODEL__DROPOUT_VALUES__INFO")
+        self.MODEL__DROPOUT_VALUES__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__DROPOUT_VALUES__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__DROPOUT_VALUES__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_22.addWidget(self.MODEL__DROPOUT_VALUES__INFO, 3, 1, 1, 1)
+
+        self.label_47 = QLabel(self.unet_model_like_frame)
+        self.label_47.setObjectName(u"label_47")
+        self.label_47.setMaximumSize(QSize(16777215, 16777215))
+        self.label_47.setFont(font1)
+
+        self.gridLayout_22.addWidget(self.label_47, 9, 0, 1, 1)
+
+        self.MODEL__Z_DOWN__INFO = QPushButton(self.unet_model_like_frame)
+        self.MODEL__Z_DOWN__INFO.setObjectName(u"MODEL__Z_DOWN__INFO")
+        self.MODEL__Z_DOWN__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__Z_DOWN__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__Z_DOWN__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_22.addWidget(self.MODEL__Z_DOWN__INFO, 12, 1, 1, 1)
+
+        self.MODEL__KERNEL_SIZE__INFO = QPushButton(self.unet_model_like_frame)
+        self.MODEL__KERNEL_SIZE__INFO.setObjectName(u"MODEL__KERNEL_SIZE__INFO")
+        self.MODEL__KERNEL_SIZE__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__KERNEL_SIZE__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__KERNEL_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_22.addWidget(self.MODEL__KERNEL_SIZE__INFO, 5, 1, 1, 1)
+
+        self.MODEL__Z_DOWN__INPUT = QLineEdit(self.unet_model_like_frame)
+        self.MODEL__Z_DOWN__INPUT.setObjectName(u"MODEL__Z_DOWN__INPUT")
+        self.MODEL__Z_DOWN__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__Z_DOWN__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__Z_DOWN__INPUT.setFont(font1)
+
+        self.gridLayout_22.addWidget(self.MODEL__Z_DOWN__INPUT, 12, 2, 1, 1)
+
+        self.MODEL__LAGER_IO__INPUT = QComboBox(self.unet_model_like_frame)
+        self.MODEL__LAGER_IO__INPUT.addItem("")
+        self.MODEL__LAGER_IO__INPUT.addItem("")
+        self.MODEL__LAGER_IO__INPUT.setObjectName(u"MODEL__LAGER_IO__INPUT")
+        self.MODEL__LAGER_IO__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__LAGER_IO__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__LAGER_IO__INPUT.setFont(font1)
+
+        self.gridLayout_22.addWidget(self.MODEL__LAGER_IO__INPUT, 16, 2, 1, 1)
+
+        self.label_41 = QLabel(self.unet_model_like_frame)
+        self.label_41.setObjectName(u"label_41")
+        self.label_41.setMaximumSize(QSize(16777215, 16777215))
+        self.label_41.setFont(font1)
+
+        self.gridLayout_22.addWidget(self.label_41, 5, 0, 1, 1)
+
+        self.MODEL__UPSAMPLE_LAYER__INPUT = QComboBox(self.unet_model_like_frame)
+        self.MODEL__UPSAMPLE_LAYER__INPUT.addItem("")
+        self.MODEL__UPSAMPLE_LAYER__INPUT.addItem("")
+        self.MODEL__UPSAMPLE_LAYER__INPUT.setObjectName(u"MODEL__UPSAMPLE_LAYER__INPUT")
+        self.MODEL__UPSAMPLE_LAYER__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__UPSAMPLE_LAYER__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__UPSAMPLE_LAYER__INPUT.setFont(font1)
+
+        self.gridLayout_22.addWidget(self.MODEL__UPSAMPLE_LAYER__INPUT, 6, 2, 1, 1)
+
+        self.MODEL__LAST_ACTIVATION__INPUT = QComboBox(self.unet_model_like_frame)
+        self.MODEL__LAST_ACTIVATION__INPUT.addItem("")
+        self.MODEL__LAST_ACTIVATION__INPUT.addItem("")
+        self.MODEL__LAST_ACTIVATION__INPUT.addItem("")
+        self.MODEL__LAST_ACTIVATION__INPUT.addItem("")
+        self.MODEL__LAST_ACTIVATION__INPUT.setObjectName(u"MODEL__LAST_ACTIVATION__INPUT")
+        self.MODEL__LAST_ACTIVATION__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__LAST_ACTIVATION__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__LAST_ACTIVATION__INPUT.setFont(font1)
+
+        self.gridLayout_22.addWidget(self.MODEL__LAST_ACTIVATION__INPUT, 11, 2, 1, 1)
+
+        self.MODEL__ISOTROPY__INPUT = QLineEdit(self.unet_model_like_frame)
+        self.MODEL__ISOTROPY__INPUT.setObjectName(u"MODEL__ISOTROPY__INPUT")
+        self.MODEL__ISOTROPY__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__ISOTROPY__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__ISOTROPY__INPUT.setFont(font1)
+
+        self.gridLayout_22.addWidget(self.MODEL__ISOTROPY__INPUT, 13, 2, 1, 1)
+
+
+        self.verticalLayout_63.addWidget(self.unet_model_like_frame)
+
+        self.convnext_label = QLabel(self.scrollAreaWidgetContents_2)
+        self.convnext_label.setObjectName(u"convnext_label")
+        self.convnext_label.setFont(font1)
+
+        self.verticalLayout_63.addWidget(self.convnext_label)
+
+        self.convnext_frame = QFrame(self.scrollAreaWidgetContents_2)
+        self.convnext_frame.setObjectName(u"convnext_frame")
+        self.convnext_frame.setFont(font9)
+        self.convnext_frame.setFrameShape(QFrame.Box)
+        self.convnext_frame.setFrameShadow(QFrame.Raised)
+        self.gridLayout_82 = QGridLayout(self.convnext_frame)
+        self.gridLayout_82.setObjectName(u"gridLayout_82")
+        self.MODEL__CONVNEXT_LAYERS__INFO = QPushButton(self.convnext_frame)
+        self.MODEL__CONVNEXT_LAYERS__INFO.setObjectName(u"MODEL__CONVNEXT_LAYERS__INFO")
+        self.MODEL__CONVNEXT_LAYERS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_LAYERS__INFO, 0, 1, 1, 1)
+
+        self.MODEL__CONVNEXT_LAYER_SCALE__INFO = QPushButton(self.convnext_frame)
+        self.MODEL__CONVNEXT_LAYER_SCALE__INFO.setObjectName(u"MODEL__CONVNEXT_LAYER_SCALE__INFO")
+        self.MODEL__CONVNEXT_LAYER_SCALE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_LAYER_SCALE__INFO, 2, 1, 1, 1)
+
+        self.MODEL__CONVNEXT_LAYER_SCALE__LABEL = QLabel(self.convnext_frame)
+        self.MODEL__CONVNEXT_LAYER_SCALE__LABEL.setObjectName(u"MODEL__CONVNEXT_LAYER_SCALE__LABEL")
+        self.MODEL__CONVNEXT_LAYER_SCALE__LABEL.setFont(font1)
+
+        self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_LAYER_SCALE__LABEL, 2, 0, 1, 1)
+
+        self.MODEL__CONVNEXT_STEM_K_SIZE__INFO = QPushButton(self.convnext_frame)
+        self.MODEL__CONVNEXT_STEM_K_SIZE__INFO.setObjectName(u"MODEL__CONVNEXT_STEM_K_SIZE__INFO")
+        self.MODEL__CONVNEXT_STEM_K_SIZE__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__CONVNEXT_STEM_K_SIZE__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__CONVNEXT_STEM_K_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_STEM_K_SIZE__INFO, 3, 1, 1, 1)
+
+        self.MODEL__CONVNEXT_SD_PROB__INPUT = QLineEdit(self.convnext_frame)
+        self.MODEL__CONVNEXT_SD_PROB__INPUT.setObjectName(u"MODEL__CONVNEXT_SD_PROB__INPUT")
+        self.MODEL__CONVNEXT_SD_PROB__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__CONVNEXT_SD_PROB__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__CONVNEXT_SD_PROB__INPUT.setFont(font1)
+
+        self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_SD_PROB__INPUT, 1, 2, 1, 1)
+
+        self.MODEL__CONVNEXT_SD_PROB__LABEL = QLabel(self.convnext_frame)
+        self.MODEL__CONVNEXT_SD_PROB__LABEL.setObjectName(u"MODEL__CONVNEXT_SD_PROB__LABEL")
+        self.MODEL__CONVNEXT_SD_PROB__LABEL.setFont(font1)
+
+        self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_SD_PROB__LABEL, 1, 0, 1, 1)
+
+        self.MODEL__CONVNEXT_SD_PROB__INFO = QPushButton(self.convnext_frame)
+        self.MODEL__CONVNEXT_SD_PROB__INFO.setObjectName(u"MODEL__CONVNEXT_SD_PROB__INFO")
+        self.MODEL__CONVNEXT_SD_PROB__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_SD_PROB__INFO, 1, 1, 1, 1)
+
+        self.MODEL__CONVNEXT_LAYER_SCALE__INPUT = QLineEdit(self.convnext_frame)
+        self.MODEL__CONVNEXT_LAYER_SCALE__INPUT.setObjectName(u"MODEL__CONVNEXT_LAYER_SCALE__INPUT")
+        self.MODEL__CONVNEXT_LAYER_SCALE__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__CONVNEXT_LAYER_SCALE__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__CONVNEXT_LAYER_SCALE__INPUT.setFont(font1)
+
+        self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_LAYER_SCALE__INPUT, 2, 2, 1, 1)
+
+        self.MODEL__CONVNEXT_STEM_K_SIZE__LABEL = QLabel(self.convnext_frame)
+        self.MODEL__CONVNEXT_STEM_K_SIZE__LABEL.setObjectName(u"MODEL__CONVNEXT_STEM_K_SIZE__LABEL")
+        self.MODEL__CONVNEXT_STEM_K_SIZE__LABEL.setFont(font1)
+
+        self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_STEM_K_SIZE__LABEL, 3, 0, 1, 1)
+
+        self.MODEL__CONVNEXT_STEM_K_SIZE__INPUT = QLineEdit(self.convnext_frame)
+        self.MODEL__CONVNEXT_STEM_K_SIZE__INPUT.setObjectName(u"MODEL__CONVNEXT_STEM_K_SIZE__INPUT")
+        self.MODEL__CONVNEXT_STEM_K_SIZE__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__CONVNEXT_STEM_K_SIZE__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__CONVNEXT_STEM_K_SIZE__INPUT.setFont(font1)
+
+        self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_STEM_K_SIZE__INPUT, 3, 2, 1, 1)
+
+        self.MODEL__CONVNEXT_LAYERS__INPUT = QLineEdit(self.convnext_frame)
+        self.MODEL__CONVNEXT_LAYERS__INPUT.setObjectName(u"MODEL__CONVNEXT_LAYERS__INPUT")
+        self.MODEL__CONVNEXT_LAYERS__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__CONVNEXT_LAYERS__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__CONVNEXT_LAYERS__INPUT.setFont(font1)
+
+        self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_LAYERS__INPUT, 0, 2, 1, 1)
+
+        self.MODEL__CONVNEXT_LAYERS__LABEL = QLabel(self.convnext_frame)
+        self.MODEL__CONVNEXT_LAYERS__LABEL.setObjectName(u"MODEL__CONVNEXT_LAYERS__LABEL")
+        self.MODEL__CONVNEXT_LAYERS__LABEL.setFont(font1)
+
+        self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_LAYERS__LABEL, 0, 0, 1, 1)
+
+        self.horizontalSpacer_88 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_82.addItem(self.horizontalSpacer_88, 0, 3, 1, 1)
+
+
+        self.verticalLayout_63.addWidget(self.convnext_frame)
+
+        self.transformers_label = QLabel(self.scrollAreaWidgetContents_2)
+        self.transformers_label.setObjectName(u"transformers_label")
+        self.transformers_label.setMaximumSize(QSize(16777215, 16777215))
+        self.transformers_label.setFont(font1)
+
+        self.verticalLayout_63.addWidget(self.transformers_label)
+
+        self.transformers_frame = QFrame(self.scrollAreaWidgetContents_2)
+        self.transformers_frame.setObjectName(u"transformers_frame")
+        self.transformers_frame.setMinimumSize(QSize(0, 0))
+        self.transformers_frame.setFont(font1)
+        self.transformers_frame.setFrameShape(QFrame.Box)
+        self.transformers_frame.setFrameShadow(QFrame.Raised)
+        self.gridLayout_23 = QGridLayout(self.transformers_frame)
+        self.gridLayout_23.setObjectName(u"gridLayout_23")
+        self.unetr_num_filters_label = QLabel(self.transformers_frame)
+        self.unetr_num_filters_label.setObjectName(u"unetr_num_filters_label")
+        self.unetr_num_filters_label.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.unetr_num_filters_label, 13, 0, 1, 1)
+
+        self.MODEL__VIT_NORM_EPS__INPUT = QLineEdit(self.transformers_frame)
+        self.MODEL__VIT_NORM_EPS__INPUT.setObjectName(u"MODEL__VIT_NORM_EPS__INPUT")
+        self.MODEL__VIT_NORM_EPS__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__VIT_NORM_EPS__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__VIT_NORM_EPS__INPUT.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.MODEL__VIT_NORM_EPS__INPUT, 10, 2, 1, 1)
+
+        self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO = QPushButton(self.transformers_frame)
+        self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setObjectName(u"MODEL__UNETR_DEC_KERNEL_SIZE__INFO")
+        self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setFont(font1)
+        self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_23.addWidget(self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO, 16, 1, 1, 1)
+
+        self.horizontalSpacer_14 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_23.addItem(self.horizontalSpacer_14, 8, 3, 1, 1)
+
+        self.unetr_vit_hidden_multiple_label = QLabel(self.transformers_frame)
+        self.unetr_vit_hidden_multiple_label.setObjectName(u"unetr_vit_hidden_multiple_label")
+        self.unetr_vit_hidden_multiple_label.setMaximumSize(QSize(16777215, 16777215))
+        self.unetr_vit_hidden_multiple_label.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.unetr_vit_hidden_multiple_label, 11, 0, 1, 1)
+
+        self.MODEL__VIT_EMBED_DIM__INFO = QPushButton(self.transformers_frame)
+        self.MODEL__VIT_EMBED_DIM__INFO.setObjectName(u"MODEL__VIT_EMBED_DIM__INFO")
+        self.MODEL__VIT_EMBED_DIM__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__VIT_EMBED_DIM__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__VIT_EMBED_DIM__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_23.addWidget(self.MODEL__VIT_EMBED_DIM__INFO, 2, 1, 1, 1)
+
+        self.unetr_dec_act_label = QLabel(self.transformers_frame)
+        self.unetr_dec_act_label.setObjectName(u"unetr_dec_act_label")
+        self.unetr_dec_act_label.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.unetr_dec_act_label, 14, 0, 1, 1)
+
+        self.MODEL__MAE_MASK_TYPE__LABEL = QLabel(self.transformers_frame)
+        self.MODEL__MAE_MASK_TYPE__LABEL.setObjectName(u"MODEL__MAE_MASK_TYPE__LABEL")
+        self.MODEL__MAE_MASK_TYPE__LABEL.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.MODEL__MAE_MASK_TYPE__LABEL, 17, 0, 1, 1)
+
+        self.MODEL__MAE_DEC_HIDDEN_SIZE__LABEL = QLabel(self.transformers_frame)
+        self.MODEL__MAE_DEC_HIDDEN_SIZE__LABEL.setObjectName(u"MODEL__MAE_DEC_HIDDEN_SIZE__LABEL")
+        self.MODEL__MAE_DEC_HIDDEN_SIZE__LABEL.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_HIDDEN_SIZE__LABEL, 20, 0, 1, 1)
+
+        self.MODEL__VIT_TOKEN_SIZE__INPUT = QLineEdit(self.transformers_frame)
+        self.MODEL__VIT_TOKEN_SIZE__INPUT.setObjectName(u"MODEL__VIT_TOKEN_SIZE__INPUT")
+        self.MODEL__VIT_TOKEN_SIZE__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__VIT_TOKEN_SIZE__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__VIT_TOKEN_SIZE__INPUT.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.MODEL__VIT_TOKEN_SIZE__INPUT, 0, 2, 1, 1)
+
+        self.MODEL__UNETR_VIT_HIDD_MULT__INFO = QPushButton(self.transformers_frame)
+        self.MODEL__UNETR_VIT_HIDD_MULT__INFO.setObjectName(u"MODEL__UNETR_VIT_HIDD_MULT__INFO")
+        self.MODEL__UNETR_VIT_HIDD_MULT__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__UNETR_VIT_HIDD_MULT__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__UNETR_VIT_HIDD_MULT__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_23.addWidget(self.MODEL__UNETR_VIT_HIDD_MULT__INFO, 11, 1, 1, 1)
+
+        self.MODEL__VIT_NUM_HEADS__INPUT = QLineEdit(self.transformers_frame)
+        self.MODEL__VIT_NUM_HEADS__INPUT.setObjectName(u"MODEL__VIT_NUM_HEADS__INPUT")
+        self.MODEL__VIT_NUM_HEADS__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__VIT_NUM_HEADS__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__VIT_NUM_HEADS__INPUT.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.MODEL__VIT_NUM_HEADS__INPUT, 5, 2, 1, 1)
+
+        self.label_51 = QLabel(self.transformers_frame)
+        self.label_51.setObjectName(u"label_51")
+        self.label_51.setMaximumSize(QSize(16777215, 16777215))
+        self.label_51.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.label_51, 2, 0, 1, 1)
+
+        self.MODEL__MAE_MASK_RATIO__INPUT = QLineEdit(self.transformers_frame)
+        self.MODEL__MAE_MASK_RATIO__INPUT.setObjectName(u"MODEL__MAE_MASK_RATIO__INPUT")
+        self.MODEL__MAE_MASK_RATIO__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__MAE_MASK_RATIO__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__MAE_MASK_RATIO__INPUT.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.MODEL__MAE_MASK_RATIO__INPUT, 19, 2, 1, 1)
+
+        self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT = QLineEdit(self.transformers_frame)
+        self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT.setObjectName(u"MODEL__UNETR_VIT_NUM_FILTERS__INPUT")
+        self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT, 13, 2, 1, 1)
+
+        self.label_52 = QLabel(self.transformers_frame)
+        self.label_52.setObjectName(u"label_52")
+        self.label_52.setMaximumSize(QSize(16777215, 16777215))
+        self.label_52.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.label_52, 5, 0, 1, 1)
+
+        self.label_55 = QLabel(self.transformers_frame)
+        self.label_55.setObjectName(u"label_55")
+        self.label_55.setMaximumSize(QSize(16777215, 16777215))
+        self.label_55.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.label_55, 8, 0, 1, 1)
+
+        self.MODEL__VIT_NORM_EPS__INFO = QPushButton(self.transformers_frame)
+        self.MODEL__VIT_NORM_EPS__INFO.setObjectName(u"MODEL__VIT_NORM_EPS__INFO")
+        self.MODEL__VIT_NORM_EPS__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__VIT_NORM_EPS__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__VIT_NORM_EPS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_23.addWidget(self.MODEL__VIT_NORM_EPS__INFO, 10, 1, 1, 1)
+
+        self.MODEL__MAE_MASK_RATIO__LABEL = QLabel(self.transformers_frame)
+        self.MODEL__MAE_MASK_RATIO__LABEL.setObjectName(u"MODEL__MAE_MASK_RATIO__LABEL")
+        self.MODEL__MAE_MASK_RATIO__LABEL.setFont(font1)
+        self.MODEL__MAE_MASK_RATIO__LABEL.setIndent(15)
+
+        self.gridLayout_23.addWidget(self.MODEL__MAE_MASK_RATIO__LABEL, 19, 0, 1, 1)
+
+        self.MODEL__MAE_MASK_TYPE__INPUT = QComboBox(self.transformers_frame)
+        self.MODEL__MAE_MASK_TYPE__INPUT.addItem("")
+        self.MODEL__MAE_MASK_TYPE__INPUT.addItem("")
+        self.MODEL__MAE_MASK_TYPE__INPUT.setObjectName(u"MODEL__MAE_MASK_TYPE__INPUT")
+        self.MODEL__MAE_MASK_TYPE__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__MAE_MASK_TYPE__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__MAE_MASK_TYPE__INPUT.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.MODEL__MAE_MASK_TYPE__INPUT, 17, 2, 1, 1)
+
+        self.MODEL__VIT_MLP_RATIO__INFO = QPushButton(self.transformers_frame)
+        self.MODEL__VIT_MLP_RATIO__INFO.setObjectName(u"MODEL__VIT_MLP_RATIO__INFO")
+        self.MODEL__VIT_MLP_RATIO__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__VIT_MLP_RATIO__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__VIT_MLP_RATIO__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_23.addWidget(self.MODEL__VIT_MLP_RATIO__INFO, 8, 1, 1, 1)
+
+        self.MODEL__MAE_DEC_MLP_DIMS__LABEL = QLabel(self.transformers_frame)
+        self.MODEL__MAE_DEC_MLP_DIMS__LABEL.setObjectName(u"MODEL__MAE_DEC_MLP_DIMS__LABEL")
+        self.MODEL__MAE_DEC_MLP_DIMS__LABEL.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_MLP_DIMS__LABEL, 25, 0, 1, 1)
+
+        self.MODEL__VIT_MLP_RATIO__INPUT = QLineEdit(self.transformers_frame)
+        self.MODEL__VIT_MLP_RATIO__INPUT.setObjectName(u"MODEL__VIT_MLP_RATIO__INPUT")
+        self.MODEL__VIT_MLP_RATIO__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__VIT_MLP_RATIO__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__VIT_MLP_RATIO__INPUT.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.MODEL__VIT_MLP_RATIO__INPUT, 8, 2, 1, 1)
+
+        self.MODEL__VIT_NUM_LAYERS__INPUT = QLineEdit(self.transformers_frame)
+        self.MODEL__VIT_NUM_LAYERS__INPUT.setObjectName(u"MODEL__VIT_NUM_LAYERS__INPUT")
+        self.MODEL__VIT_NUM_LAYERS__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__VIT_NUM_LAYERS__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__VIT_NUM_LAYERS__INPUT.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.MODEL__VIT_NUM_LAYERS__INPUT, 3, 2, 1, 1)
+
+        self.MODEL__UNETR_DEC_KERNEL_SIZE__LABEL = QLabel(self.transformers_frame)
+        self.MODEL__UNETR_DEC_KERNEL_SIZE__LABEL.setObjectName(u"MODEL__UNETR_DEC_KERNEL_SIZE__LABEL")
+        self.MODEL__UNETR_DEC_KERNEL_SIZE__LABEL.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.MODEL__UNETR_DEC_KERNEL_SIZE__LABEL, 16, 0, 1, 1)
+
+        self.label_53 = QLabel(self.transformers_frame)
+        self.label_53.setObjectName(u"label_53")
+        self.label_53.setMaximumSize(QSize(16777215, 16777215))
+        self.label_53.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.label_53, 3, 0, 1, 1)
+
+        self.MODEL__UNETR_VIT_HIDD_MULT__INPUT = QLineEdit(self.transformers_frame)
+        self.MODEL__UNETR_VIT_HIDD_MULT__INPUT.setObjectName(u"MODEL__UNETR_VIT_HIDD_MULT__INPUT")
+        self.MODEL__UNETR_VIT_HIDD_MULT__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__UNETR_VIT_HIDD_MULT__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__UNETR_VIT_HIDD_MULT__INPUT.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.MODEL__UNETR_VIT_HIDD_MULT__INPUT, 11, 2, 1, 1)
+
+        self.MODEL__UNETR_DEC_ACTIVATION__INFO = QPushButton(self.transformers_frame)
+        self.MODEL__UNETR_DEC_ACTIVATION__INFO.setObjectName(u"MODEL__UNETR_DEC_ACTIVATION__INFO")
+        self.MODEL__UNETR_DEC_ACTIVATION__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__UNETR_DEC_ACTIVATION__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__UNETR_DEC_ACTIVATION__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_23.addWidget(self.MODEL__UNETR_DEC_ACTIVATION__INFO, 14, 1, 1, 1)
+
+        self.MODEL__MAE_DEC_MLP_DIMS__INFO = QPushButton(self.transformers_frame)
+        self.MODEL__MAE_DEC_MLP_DIMS__INFO.setObjectName(u"MODEL__MAE_DEC_MLP_DIMS__INFO")
+        self.MODEL__MAE_DEC_MLP_DIMS__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__MAE_DEC_MLP_DIMS__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__MAE_DEC_MLP_DIMS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_MLP_DIMS__INFO, 25, 1, 1, 1)
+
+        self.MODEL__MAE_DEC_NUM_HEADS__LABEL = QLabel(self.transformers_frame)
+        self.MODEL__MAE_DEC_NUM_HEADS__LABEL.setObjectName(u"MODEL__MAE_DEC_NUM_HEADS__LABEL")
+        self.MODEL__MAE_DEC_NUM_HEADS__LABEL.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_NUM_HEADS__LABEL, 24, 0, 1, 1)
+
+        self.MODEL__MAE_DEC_HIDDEN_SIZE__INPUT = QLineEdit(self.transformers_frame)
+        self.MODEL__MAE_DEC_HIDDEN_SIZE__INPUT.setObjectName(u"MODEL__MAE_DEC_HIDDEN_SIZE__INPUT")
+        self.MODEL__MAE_DEC_HIDDEN_SIZE__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__MAE_DEC_HIDDEN_SIZE__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__MAE_DEC_HIDDEN_SIZE__INPUT.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_HIDDEN_SIZE__INPUT, 20, 2, 1, 1)
+
+        self.MODEL__MAE_DEC_NUM_HEADS__INFO = QPushButton(self.transformers_frame)
+        self.MODEL__MAE_DEC_NUM_HEADS__INFO.setObjectName(u"MODEL__MAE_DEC_NUM_HEADS__INFO")
+        self.MODEL__MAE_DEC_NUM_HEADS__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__MAE_DEC_NUM_HEADS__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__MAE_DEC_NUM_HEADS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_NUM_HEADS__INFO, 24, 1, 1, 1)
+
+        self.MODEL__MAE_MASK_RATIO__INFO = QPushButton(self.transformers_frame)
+        self.MODEL__MAE_MASK_RATIO__INFO.setObjectName(u"MODEL__MAE_MASK_RATIO__INFO")
+        self.MODEL__MAE_MASK_RATIO__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__MAE_MASK_RATIO__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__MAE_MASK_RATIO__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_23.addWidget(self.MODEL__MAE_MASK_RATIO__INFO, 19, 1, 1, 1)
+
+        self.MODEL__MAE_DEC_NUM_LAYERS__INFO = QPushButton(self.transformers_frame)
+        self.MODEL__MAE_DEC_NUM_LAYERS__INFO.setObjectName(u"MODEL__MAE_DEC_NUM_LAYERS__INFO")
+        self.MODEL__MAE_DEC_NUM_LAYERS__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__MAE_DEC_NUM_LAYERS__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__MAE_DEC_NUM_LAYERS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_NUM_LAYERS__INFO, 22, 1, 1, 1)
+
+        self.MODEL__UNETR_DEC_KERNEL_SIZE__INPUT = QLineEdit(self.transformers_frame)
+        self.MODEL__UNETR_DEC_KERNEL_SIZE__INPUT.setObjectName(u"MODEL__UNETR_DEC_KERNEL_SIZE__INPUT")
+        self.MODEL__UNETR_DEC_KERNEL_SIZE__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__UNETR_DEC_KERNEL_SIZE__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__UNETR_DEC_KERNEL_SIZE__INPUT.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.MODEL__UNETR_DEC_KERNEL_SIZE__INPUT, 16, 2, 1, 1)
+
+        self.MODEL__VIT_EMBED_DIM__INPUT = QLineEdit(self.transformers_frame)
+        self.MODEL__VIT_EMBED_DIM__INPUT.setObjectName(u"MODEL__VIT_EMBED_DIM__INPUT")
+        self.MODEL__VIT_EMBED_DIM__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__VIT_EMBED_DIM__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__VIT_EMBED_DIM__INPUT.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.MODEL__VIT_EMBED_DIM__INPUT, 2, 2, 1, 1)
+
+        self.MODEL__VIT_NUM_HEADS__INFO = QPushButton(self.transformers_frame)
+        self.MODEL__VIT_NUM_HEADS__INFO.setObjectName(u"MODEL__VIT_NUM_HEADS__INFO")
+        self.MODEL__VIT_NUM_HEADS__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__VIT_NUM_HEADS__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__VIT_NUM_HEADS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_23.addWidget(self.MODEL__VIT_NUM_HEADS__INFO, 5, 1, 1, 1)
+
+        self.MODEL__VIT_NORM_EPS__LABEL = QLabel(self.transformers_frame)
+        self.MODEL__VIT_NORM_EPS__LABEL.setObjectName(u"MODEL__VIT_NORM_EPS__LABEL")
+        self.MODEL__VIT_NORM_EPS__LABEL.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.MODEL__VIT_NORM_EPS__LABEL, 10, 0, 1, 1)
+
+        self.MODEL__MAE_DEC_NUM_LAYERS__INPUT = QLineEdit(self.transformers_frame)
+        self.MODEL__MAE_DEC_NUM_LAYERS__INPUT.setObjectName(u"MODEL__MAE_DEC_NUM_LAYERS__INPUT")
+        self.MODEL__MAE_DEC_NUM_LAYERS__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__MAE_DEC_NUM_LAYERS__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__MAE_DEC_NUM_LAYERS__INPUT.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_NUM_LAYERS__INPUT, 22, 2, 1, 1)
+
+        self.MODEL__VIT_NUM_LAYERS__INFO = QPushButton(self.transformers_frame)
+        self.MODEL__VIT_NUM_LAYERS__INFO.setObjectName(u"MODEL__VIT_NUM_LAYERS__INFO")
+        self.MODEL__VIT_NUM_LAYERS__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__VIT_NUM_LAYERS__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__VIT_NUM_LAYERS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_23.addWidget(self.MODEL__VIT_NUM_LAYERS__INFO, 3, 1, 1, 1)
+
+        self.MODEL__MAE_DEC_MLP_DIMS__INPUT = QLineEdit(self.transformers_frame)
+        self.MODEL__MAE_DEC_MLP_DIMS__INPUT.setObjectName(u"MODEL__MAE_DEC_MLP_DIMS__INPUT")
+        self.MODEL__MAE_DEC_MLP_DIMS__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__MAE_DEC_MLP_DIMS__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__MAE_DEC_MLP_DIMS__INPUT.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_MLP_DIMS__INPUT, 25, 2, 1, 1)
+
+        self.MODEL__MAE_DEC_HIDDEN_SIZE__INFO = QPushButton(self.transformers_frame)
+        self.MODEL__MAE_DEC_HIDDEN_SIZE__INFO.setObjectName(u"MODEL__MAE_DEC_HIDDEN_SIZE__INFO")
+        self.MODEL__MAE_DEC_HIDDEN_SIZE__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__MAE_DEC_HIDDEN_SIZE__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__MAE_DEC_HIDDEN_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_HIDDEN_SIZE__INFO, 20, 1, 1, 1)
+
+        self.MODEL__VIT_TOKEN_SIZE__INFO = QPushButton(self.transformers_frame)
+        self.MODEL__VIT_TOKEN_SIZE__INFO.setObjectName(u"MODEL__VIT_TOKEN_SIZE__INFO")
+        self.MODEL__VIT_TOKEN_SIZE__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__VIT_TOKEN_SIZE__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__VIT_TOKEN_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_23.addWidget(self.MODEL__VIT_TOKEN_SIZE__INFO, 0, 1, 1, 1)
+
+        self.MODEL__UNETR_DEC_ACTIVATION__INPUT = QComboBox(self.transformers_frame)
+        self.MODEL__UNETR_DEC_ACTIVATION__INPUT.addItem("")
+        self.MODEL__UNETR_DEC_ACTIVATION__INPUT.addItem("")
+        self.MODEL__UNETR_DEC_ACTIVATION__INPUT.addItem("")
+        self.MODEL__UNETR_DEC_ACTIVATION__INPUT.setObjectName(u"MODEL__UNETR_DEC_ACTIVATION__INPUT")
+        self.MODEL__UNETR_DEC_ACTIVATION__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__UNETR_DEC_ACTIVATION__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__UNETR_DEC_ACTIVATION__INPUT.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.MODEL__UNETR_DEC_ACTIVATION__INPUT, 14, 2, 1, 1)
+
+        self.MODEL__MAE_DEC_NUM_LAYERS__LABEL = QLabel(self.transformers_frame)
+        self.MODEL__MAE_DEC_NUM_LAYERS__LABEL.setObjectName(u"MODEL__MAE_DEC_NUM_LAYERS__LABEL")
+        self.MODEL__MAE_DEC_NUM_LAYERS__LABEL.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_NUM_LAYERS__LABEL, 22, 0, 1, 1)
+
+        self.label_50 = QLabel(self.transformers_frame)
+        self.label_50.setObjectName(u"label_50")
+        self.label_50.setMaximumSize(QSize(16777215, 16777215))
+        self.label_50.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.label_50, 0, 0, 1, 1)
+
+        self.MODEL__UNETR_VIT_NUM_FILTERS__INFO = QPushButton(self.transformers_frame)
+        self.MODEL__UNETR_VIT_NUM_FILTERS__INFO.setObjectName(u"MODEL__UNETR_VIT_NUM_FILTERS__INFO")
+        self.MODEL__UNETR_VIT_NUM_FILTERS__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__UNETR_VIT_NUM_FILTERS__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__UNETR_VIT_NUM_FILTERS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_23.addWidget(self.MODEL__UNETR_VIT_NUM_FILTERS__INFO, 13, 1, 1, 1)
+
+        self.MODEL__MAE_DEC_NUM_HEADS__INPUT = QLineEdit(self.transformers_frame)
+        self.MODEL__MAE_DEC_NUM_HEADS__INPUT.setObjectName(u"MODEL__MAE_DEC_NUM_HEADS__INPUT")
+        self.MODEL__MAE_DEC_NUM_HEADS__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__MAE_DEC_NUM_HEADS__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__MAE_DEC_NUM_HEADS__INPUT.setFont(font1)
+
+        self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_NUM_HEADS__INPUT, 24, 2, 1, 1)
+
+        self.MODEL__MAE_MASK_TYPE__INFO = QPushButton(self.transformers_frame)
+        self.MODEL__MAE_MASK_TYPE__INFO.setObjectName(u"MODEL__MAE_MASK_TYPE__INFO")
+        self.MODEL__MAE_MASK_TYPE__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__MAE_MASK_TYPE__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__MAE_MASK_TYPE__INFO.setFont(font1)
+        self.MODEL__MAE_MASK_TYPE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_23.addWidget(self.MODEL__MAE_MASK_TYPE__INFO, 17, 1, 1, 1)
+
+
+        self.verticalLayout_63.addWidget(self.transformers_frame)
+
+        self.label_11 = QLabel(self.scrollAreaWidgetContents_2)
+        self.label_11.setObjectName(u"label_11")
+        self.label_11.setFont(font1)
+
+        self.verticalLayout_63.addWidget(self.label_11)
+
+        self.frame_82 = QFrame(self.scrollAreaWidgetContents_2)
+        self.frame_82.setObjectName(u"frame_82")
+        self.frame_82.setFrameShape(QFrame.StyledPanel)
+        self.frame_82.setFrameShadow(QFrame.Raised)
+        self.gridLayout_87 = QGridLayout(self.frame_82)
+        self.gridLayout_87.setObjectName(u"gridLayout_87")
+        self.label_12 = QLabel(self.frame_82)
+        self.label_12.setObjectName(u"label_12")
+
+        self.gridLayout_87.addWidget(self.label_12, 0, 0, 1, 1)
+
+
+        self.verticalLayout_63.addWidget(self.frame_82)
+
+        self.checkpoint_loading_opt_label = QLabel(self.scrollAreaWidgetContents_2)
+        self.checkpoint_loading_opt_label.setObjectName(u"checkpoint_loading_opt_label")
+        self.checkpoint_loading_opt_label.setFont(font1)
+
+        self.verticalLayout_63.addWidget(self.checkpoint_loading_opt_label)
+
+        self.checkpoint_loading_opt_frame = QFrame(self.scrollAreaWidgetContents_2)
+        self.checkpoint_loading_opt_frame.setObjectName(u"checkpoint_loading_opt_frame")
+        self.checkpoint_loading_opt_frame.setFrameShape(QFrame.StyledPanel)
+        self.checkpoint_loading_opt_frame.setFrameShadow(QFrame.Raised)
+        self.gridLayout_24 = QGridLayout(self.checkpoint_loading_opt_frame)
+        self.gridLayout_24.setObjectName(u"gridLayout_24")
+        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT = QComboBox(self.checkpoint_loading_opt_frame)
+        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.addItem("")
+        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.addItem("")
+        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.setObjectName(u"MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT")
+        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.setFont(font1)
+
+        self.gridLayout_24.addWidget(self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT, 0, 2, 1, 1)
+
+        self.horizontalSpacer_15 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_24.addItem(self.horizontalSpacer_15, 0, 3, 1, 1)
+
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT = QComboBox(self.checkpoint_loading_opt_frame)
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.addItem("")
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.addItem("")
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setObjectName(u"MODEL__LOAD_CHECKPOINT_EPOCH__INPUT")
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setFont(font1)
+
+        self.gridLayout_24.addWidget(self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT, 3, 2, 1, 1)
+
+        self.label_4 = QLabel(self.checkpoint_loading_opt_frame)
+        self.label_4.setObjectName(u"label_4")
+        self.label_4.setFont(font1)
+
+        self.gridLayout_24.addWidget(self.label_4, 0, 0, 1, 1)
+
+        self.label_38 = QLabel(self.checkpoint_loading_opt_frame)
+        self.label_38.setObjectName(u"label_38")
+        self.label_38.setFont(font1)
+
+        self.gridLayout_24.addWidget(self.label_38, 3, 0, 1, 1)
+
+        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO = QPushButton(self.checkpoint_loading_opt_frame)
+        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO.setObjectName(u"MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO")
+        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_24.addWidget(self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO, 0, 1, 1, 1)
+
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO = QPushButton(self.checkpoint_loading_opt_frame)
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setObjectName(u"MODEL__LOAD_CHECKPOINT_EPOCH__INFO")
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_24.addWidget(self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO, 3, 1, 1, 1)
+
+
+        self.verticalLayout_63.addWidget(self.checkpoint_loading_opt_frame)
+
         self.label = QLabel(self.scrollAreaWidgetContents_2)
         self.label.setObjectName(u"label")
         self.label.setFont(font1)
 
-        self.gridLayout_2.addWidget(self.label, 0, 0, 1, 1)
-
-        self.horizontalSpacer_63 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_2.addItem(self.horizontalSpacer_63, 1, 1, 1, 1)
-
-        self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.gridLayout_2.addItem(self.verticalSpacer_4, 4, 0, 1, 1)
+        self.verticalLayout_63.addWidget(self.label)
 
         self.frame_2 = QFrame(self.scrollAreaWidgetContents_2)
         self.frame_2.setObjectName(u"frame_2")
@@ -2427,78 +3642,11 @@ class Ui_MainWindow(object):
         self.gridLayout_5.addItem(self.horizontalSpacer_2, 1, 3, 1, 1)
 
 
-        self.gridLayout_2.addWidget(self.frame_2, 1, 0, 1, 1)
+        self.verticalLayout_63.addWidget(self.frame_2)
 
-        self.checkpoint_loading_opt_frame = QFrame(self.scrollAreaWidgetContents_2)
-        self.checkpoint_loading_opt_frame.setObjectName(u"checkpoint_loading_opt_frame")
-        self.checkpoint_loading_opt_frame.setFrameShape(QFrame.StyledPanel)
-        self.checkpoint_loading_opt_frame.setFrameShadow(QFrame.Raised)
-        self.gridLayout_24 = QGridLayout(self.checkpoint_loading_opt_frame)
-        self.gridLayout_24.setObjectName(u"gridLayout_24")
-        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT = QComboBox(self.checkpoint_loading_opt_frame)
-        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.addItem("")
-        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.addItem("")
-        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.setObjectName(u"MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT")
-        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.setFont(font1)
+        self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.gridLayout_24.addWidget(self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT, 0, 2, 1, 1)
-
-        self.horizontalSpacer_15 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_24.addItem(self.horizontalSpacer_15, 0, 3, 1, 1)
-
-        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT = QComboBox(self.checkpoint_loading_opt_frame)
-        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.addItem("")
-        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.addItem("")
-        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setObjectName(u"MODEL__LOAD_CHECKPOINT_EPOCH__INPUT")
-        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setFont(font1)
-
-        self.gridLayout_24.addWidget(self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT, 3, 2, 1, 1)
-
-        self.label_4 = QLabel(self.checkpoint_loading_opt_frame)
-        self.label_4.setObjectName(u"label_4")
-        self.label_4.setFont(font1)
-
-        self.gridLayout_24.addWidget(self.label_4, 0, 0, 1, 1)
-
-        self.label_38 = QLabel(self.checkpoint_loading_opt_frame)
-        self.label_38.setObjectName(u"label_38")
-        self.label_38.setFont(font1)
-
-        self.gridLayout_24.addWidget(self.label_38, 3, 0, 1, 1)
-
-        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO = QPushButton(self.checkpoint_loading_opt_frame)
-        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO.setObjectName(u"MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO")
-        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_24.addWidget(self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO, 0, 1, 1, 1)
-
-        self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO = QPushButton(self.checkpoint_loading_opt_frame)
-        self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setObjectName(u"MODEL__LOAD_CHECKPOINT_EPOCH__INFO")
-        self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_24.addWidget(self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO, 3, 1, 1, 1)
-
-
-        self.gridLayout_2.addWidget(self.checkpoint_loading_opt_frame, 3, 0, 1, 1)
-
-        self.checkpoint_loading_opt_label = QLabel(self.scrollAreaWidgetContents_2)
-        self.checkpoint_loading_opt_label.setObjectName(u"checkpoint_loading_opt_label")
-        self.checkpoint_loading_opt_label.setFont(font1)
-
-        self.gridLayout_2.addWidget(self.checkpoint_loading_opt_label, 2, 0, 1, 1)
+        self.verticalLayout_63.addItem(self.verticalSpacer_4)
 
         self.goptions_advanced_options_scrollarea.setWidget(self.scrollAreaWidgetContents_2)
 
@@ -2517,281 +3665,6 @@ class Ui_MainWindow(object):
         self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout.addItem(self.verticalSpacer_2, 3, 0, 1, 2)
-
-        self.MODEL__BMZ__EXPORT__ENABLE__FRAME = QFrame(self.scrollAreaWidgetContents)
-        self.MODEL__BMZ__EXPORT__ENABLE__FRAME.setObjectName(u"MODEL__BMZ__EXPORT__ENABLE__FRAME")
-        self.MODEL__BMZ__EXPORT__ENABLE__FRAME.setFrameShape(QFrame.NoFrame)
-        self.MODEL__BMZ__EXPORT__ENABLE__FRAME.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_26 = QHBoxLayout(self.MODEL__BMZ__EXPORT__ENABLE__FRAME)
-        self.horizontalLayout_26.setSpacing(15)
-        self.horizontalLayout_26.setObjectName(u"horizontalLayout_26")
-        self.horizontalLayout_26.setContentsMargins(0, 0, 0, 0)
-        self.MODEL__BMZ__EXPORT__ENABLE__LABEL = QLabel(self.MODEL__BMZ__EXPORT__ENABLE__FRAME)
-        self.MODEL__BMZ__EXPORT__ENABLE__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__ENABLE__LABEL")
-        self.MODEL__BMZ__EXPORT__ENABLE__LABEL.setFont(font1)
-
-        self.horizontalLayout_26.addWidget(self.MODEL__BMZ__EXPORT__ENABLE__LABEL)
-
-        self.MODEL__BMZ__EXPORT__ENABLE__INFO = QPushButton(self.MODEL__BMZ__EXPORT__ENABLE__FRAME)
-        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setObjectName(u"MODEL__BMZ__EXPORT__ENABLE__INFO")
-        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setProperty(u"scaledContents", True)
-
-        self.horizontalLayout_26.addWidget(self.MODEL__BMZ__EXPORT__ENABLE__INFO)
-
-        self.MODEL__BMZ__EXPORT__ENABLE__INPUT = QComboBox(self.MODEL__BMZ__EXPORT__ENABLE__FRAME)
-        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.addItem("")
-        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.addItem("")
-        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__ENABLE__INPUT")
-        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setFont(font1)
-
-        self.horizontalLayout_26.addWidget(self.MODEL__BMZ__EXPORT__ENABLE__INPUT)
-
-        self.horizontalSpacer_56 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_26.addItem(self.horizontalSpacer_56)
-
-
-        self.gridLayout.addWidget(self.MODEL__BMZ__EXPORT__ENABLE__FRAME, 7, 0, 1, 1)
-
-        self.train_disable_checkpoint_frame = QFrame(self.scrollAreaWidgetContents)
-        self.train_disable_checkpoint_frame.setObjectName(u"train_disable_checkpoint_frame")
-        self.train_disable_checkpoint_frame.setMinimumSize(QSize(0, 0))
-        self.train_disable_checkpoint_frame.setFrameShape(QFrame.Box)
-        self.train_disable_checkpoint_frame.setFrameShadow(QFrame.Raised)
-        self.gridLayout_26 = QGridLayout(self.train_disable_checkpoint_frame)
-        self.gridLayout_26.setObjectName(u"gridLayout_26")
-        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL = QLabel(self.train_disable_checkpoint_frame)
-        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__LABEL")
-        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setFont(font1)
-        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setIndent(15)
-
-        self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL, 5, 1, 1, 1)
-
-        self.PATHS__CHECKPOINT_FILE__INFO = QPushButton(self.train_disable_checkpoint_frame)
-        self.PATHS__CHECKPOINT_FILE__INFO.setObjectName(u"PATHS__CHECKPOINT_FILE__INFO")
-        self.PATHS__CHECKPOINT_FILE__INFO.setMinimumSize(QSize(30, 30))
-        self.PATHS__CHECKPOINT_FILE__INFO.setMaximumSize(QSize(30, 30))
-        self.PATHS__CHECKPOINT_FILE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_26.addWidget(self.PATHS__CHECKPOINT_FILE__INFO, 4, 2, 1, 1)
-
-        self.MODEL__SOURCE__INPUT = QComboBox(self.train_disable_checkpoint_frame)
-        self.MODEL__SOURCE__INPUT.addItem("")
-        self.MODEL__SOURCE__INPUT.addItem("")
-        self.MODEL__SOURCE__INPUT.setObjectName(u"MODEL__SOURCE__INPUT")
-        self.MODEL__SOURCE__INPUT.setMinimumSize(QSize(300, 30))
-        self.MODEL__SOURCE__INPUT.setMaximumSize(QSize(300, 30))
-        self.MODEL__SOURCE__INPUT.setFont(font1)
-
-        self.gridLayout_26.addWidget(self.MODEL__SOURCE__INPUT, 2, 3, 1, 1)
-
-        self.LOAD_PRETRAINED_MODEL__INPUT = QComboBox(self.train_disable_checkpoint_frame)
-        self.LOAD_PRETRAINED_MODEL__INPUT.addItem("")
-        self.LOAD_PRETRAINED_MODEL__INPUT.addItem("")
-        self.LOAD_PRETRAINED_MODEL__INPUT.setObjectName(u"LOAD_PRETRAINED_MODEL__INPUT")
-        self.LOAD_PRETRAINED_MODEL__INPUT.setMinimumSize(QSize(200, 30))
-        self.LOAD_PRETRAINED_MODEL__INPUT.setMaximumSize(QSize(200, 30))
-        self.LOAD_PRETRAINED_MODEL__INPUT.setFont(font1)
-
-        self.gridLayout_26.addWidget(self.LOAD_PRETRAINED_MODEL__INPUT, 1, 3, 1, 1)
-
-        self.MODEL__SOURCE__INFO = QPushButton(self.train_disable_checkpoint_frame)
-        self.MODEL__SOURCE__INFO.setObjectName(u"MODEL__SOURCE__INFO")
-        self.MODEL__SOURCE__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__SOURCE__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__SOURCE__INFO.setFont(font1)
-        self.MODEL__SOURCE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_26.addWidget(self.MODEL__SOURCE__INFO, 2, 2, 1, 1)
-
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT = QLineEdit(self.train_disable_checkpoint_frame)
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__INPUT")
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setMinimumSize(QSize(500, 30))
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setMaximumSize(QSize(500, 30))
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setFont(font1)
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setReadOnly(True)
-
-        self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT, 5, 3, 1, 1)
-
-        self.checkpoint_file_path_browse_label = QLabel(self.train_disable_checkpoint_frame)
-        self.checkpoint_file_path_browse_label.setObjectName(u"checkpoint_file_path_browse_label")
-        self.checkpoint_file_path_browse_label.setFont(font1)
-        self.checkpoint_file_path_browse_label.setIndent(15)
-
-        self.gridLayout_26.addWidget(self.checkpoint_file_path_browse_label, 4, 1, 1, 1)
-
-        self.MODEL__BMZ__SOURCE_MODEL_ID__BN = QPushButton(self.train_disable_checkpoint_frame)
-        self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__BN")
-        self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setMinimumSize(QSize(130, 0))
-        self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setFont(font1)
-
-        self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__BN, 5, 4, 1, 1)
-
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO = QPushButton(self.train_disable_checkpoint_frame)
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__INFO")
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setFont(font1)
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__INFO, 5, 2, 1, 1)
-
-        self.MODEL__SOURCE__LABEL = QLabel(self.train_disable_checkpoint_frame)
-        self.MODEL__SOURCE__LABEL.setObjectName(u"MODEL__SOURCE__LABEL")
-        self.MODEL__SOURCE__LABEL.setFont(font1)
-        self.MODEL__SOURCE__LABEL.setIndent(15)
-
-        self.gridLayout_26.addWidget(self.MODEL__SOURCE__LABEL, 2, 1, 1, 1)
-
-        self.LOAD_PRETRAINED_MODEL__LABEL = QLabel(self.train_disable_checkpoint_frame)
-        self.LOAD_PRETRAINED_MODEL__LABEL.setObjectName(u"LOAD_PRETRAINED_MODEL__LABEL")
-        self.LOAD_PRETRAINED_MODEL__LABEL.setFont(font1)
-
-        self.gridLayout_26.addWidget(self.LOAD_PRETRAINED_MODEL__LABEL, 1, 1, 1, 1)
-
-        self.checkpoint_file_path_browse_bn = QPushButton(self.train_disable_checkpoint_frame)
-        self.checkpoint_file_path_browse_bn.setObjectName(u"checkpoint_file_path_browse_bn")
-        self.checkpoint_file_path_browse_bn.setFont(font1)
-
-        self.gridLayout_26.addWidget(self.checkpoint_file_path_browse_bn, 4, 4, 1, 1)
-
-        self.PATHS__CHECKPOINT_FILE__INPUT = QLineEdit(self.train_disable_checkpoint_frame)
-        self.PATHS__CHECKPOINT_FILE__INPUT.setObjectName(u"PATHS__CHECKPOINT_FILE__INPUT")
-        self.PATHS__CHECKPOINT_FILE__INPUT.setMinimumSize(QSize(500, 30))
-        self.PATHS__CHECKPOINT_FILE__INPUT.setMaximumSize(QSize(500, 30))
-        self.PATHS__CHECKPOINT_FILE__INPUT.setFont(font1)
-
-        self.gridLayout_26.addWidget(self.PATHS__CHECKPOINT_FILE__INPUT, 4, 3, 1, 1)
-
-        self.LOAD_PRETRAINED_MODEL__INFO = QPushButton(self.train_disable_checkpoint_frame)
-        self.LOAD_PRETRAINED_MODEL__INFO.setObjectName(u"LOAD_PRETRAINED_MODEL__INFO")
-        self.LOAD_PRETRAINED_MODEL__INFO.setMinimumSize(QSize(30, 30))
-        self.LOAD_PRETRAINED_MODEL__INFO.setMaximumSize(QSize(30, 30))
-        self.LOAD_PRETRAINED_MODEL__INFO.setFont(font1)
-        self.LOAD_PRETRAINED_MODEL__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_26.addWidget(self.LOAD_PRETRAINED_MODEL__INFO, 1, 2, 1, 1)
-
-        self.horizontalSpacer_10 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_26.addItem(self.horizontalSpacer_10, 1, 4, 1, 1)
-
-
-        self.gridLayout.addWidget(self.train_disable_checkpoint_frame, 6, 0, 1, 3)
-
-        self.frame_21 = QFrame(self.scrollAreaWidgetContents)
-        self.frame_21.setObjectName(u"frame_21")
-        self.frame_21.setMinimumSize(QSize(0, 0))
-        self.frame_21.setFrameShape(QFrame.NoFrame)
-        self.frame_21.setFrameShadow(QFrame.Raised)
-        self.gridLayout_27 = QGridLayout(self.frame_21)
-        self.gridLayout_27.setObjectName(u"gridLayout_27")
-        self.horizontalSpacer_28 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_27.addItem(self.horizontalSpacer_28, 3, 7, 1, 1)
-
-        self.goptions_browse_yaml_path_input = QLineEdit(self.frame_21)
-        self.goptions_browse_yaml_path_input.setObjectName(u"goptions_browse_yaml_path_input")
-        self.goptions_browse_yaml_path_input.setMinimumSize(QSize(500, 30))
-        self.goptions_browse_yaml_path_input.setMaximumSize(QSize(500, 30))
-        self.goptions_browse_yaml_path_input.setFont(font1)
-
-        self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_input, 3, 4, 1, 1)
-
-        self.PROBLEM__NDIM__INPUT = QComboBox(self.frame_21)
-        self.PROBLEM__NDIM__INPUT.addItem("")
-        self.PROBLEM__NDIM__INPUT.addItem("")
-        self.PROBLEM__NDIM__INPUT.setObjectName(u"PROBLEM__NDIM__INPUT")
-        self.PROBLEM__NDIM__INPUT.setMinimumSize(QSize(100, 30))
-        self.PROBLEM__NDIM__INPUT.setMaximumSize(QSize(100, 30))
-        self.PROBLEM__NDIM__INPUT.setFont(font1)
-
-        self.gridLayout_27.addWidget(self.PROBLEM__NDIM__INPUT, 0, 4, 1, 1)
-
-        self.goptions_yaml_name_input = QLineEdit(self.frame_21)
-        self.goptions_yaml_name_input.setObjectName(u"goptions_yaml_name_input")
-        self.goptions_yaml_name_input.setMinimumSize(QSize(0, 30))
-        self.goptions_yaml_name_input.setMaximumSize(QSize(500, 30))
-        self.goptions_yaml_name_input.setFont(font1)
-
-        self.gridLayout_27.addWidget(self.goptions_yaml_name_input, 5, 4, 1, 1)
-
-        self.PROBLEM__NDIM__LABEL = QLabel(self.frame_21)
-        self.PROBLEM__NDIM__LABEL.setObjectName(u"PROBLEM__NDIM__LABEL")
-        self.PROBLEM__NDIM__LABEL.setMaximumSize(QSize(200, 35))
-        self.PROBLEM__NDIM__LABEL.setFont(font1)
-
-        self.gridLayout_27.addWidget(self.PROBLEM__NDIM__LABEL, 0, 1, 1, 1)
-
-        self.goptions_browse_yaml_path_info = QPushButton(self.frame_21)
-        self.goptions_browse_yaml_path_info.setObjectName(u"goptions_browse_yaml_path_info")
-        self.goptions_browse_yaml_path_info.setMinimumSize(QSize(30, 30))
-        self.goptions_browse_yaml_path_info.setMaximumSize(QSize(30, 30))
-        self.goptions_browse_yaml_path_info.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-        self.goptions_browse_yaml_path_info.setProperty(u"scaledContents", True)
-
-        self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_info, 3, 3, 1, 1)
-
-        self.PROBLEM__NDIM__INFO = QPushButton(self.frame_21)
-        self.PROBLEM__NDIM__INFO.setObjectName(u"PROBLEM__NDIM__INFO")
-        self.PROBLEM__NDIM__INFO.setMinimumSize(QSize(30, 30))
-        self.PROBLEM__NDIM__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__NDIM__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_27.addWidget(self.PROBLEM__NDIM__INFO, 0, 3, 1, 1)
-
-        self.goptions_yaml_name_info = QPushButton(self.frame_21)
-        self.goptions_yaml_name_info.setObjectName(u"goptions_yaml_name_info")
-        self.goptions_yaml_name_info.setMinimumSize(QSize(30, 30))
-        self.goptions_yaml_name_info.setMaximumSize(QSize(30, 30))
-        self.goptions_yaml_name_info.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_27.addWidget(self.goptions_yaml_name_info, 5, 3, 1, 1)
-
-        self.goptions_yaml_name_label = QLabel(self.frame_21)
-        self.goptions_yaml_name_label.setObjectName(u"goptions_yaml_name_label")
-        self.goptions_yaml_name_label.setMaximumSize(QSize(250, 35))
-        self.goptions_yaml_name_label.setFont(font1)
-
-        self.gridLayout_27.addWidget(self.goptions_yaml_name_label, 5, 1, 1, 1)
-
-        self.goptions_browse_yaml_path_label = QLabel(self.frame_21)
-        self.goptions_browse_yaml_path_label.setObjectName(u"goptions_browse_yaml_path_label")
-        self.goptions_browse_yaml_path_label.setMaximumSize(QSize(250, 35))
-        self.goptions_browse_yaml_path_label.setFont(font1)
-
-        self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_label, 3, 1, 1, 2)
-
-        self.goptions_browse_yaml_path_bn = QPushButton(self.frame_21)
-        self.goptions_browse_yaml_path_bn.setObjectName(u"goptions_browse_yaml_path_bn")
-        self.goptions_browse_yaml_path_bn.setMaximumSize(QSize(130, 16777215))
-        self.goptions_browse_yaml_path_bn.setFont(font1)
-
-        self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_bn, 3, 6, 1, 1)
-
-
-        self.gridLayout.addWidget(self.frame_21, 0, 0, 2, 5)
 
         self.MODEL__BMZ__EXPORT__FRAME = QFrame(self.scrollAreaWidgetContents)
         self.MODEL__BMZ__EXPORT__FRAME.setObjectName(u"MODEL__BMZ__EXPORT__FRAME")
@@ -3102,6 +3975,239 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.MODEL__BMZ__EXPORT__FRAME, 11, 0, 1, 1)
 
+        self.frame_21 = QFrame(self.scrollAreaWidgetContents)
+        self.frame_21.setObjectName(u"frame_21")
+        self.frame_21.setMinimumSize(QSize(0, 0))
+        self.frame_21.setFrameShape(QFrame.NoFrame)
+        self.frame_21.setFrameShadow(QFrame.Raised)
+        self.gridLayout_27 = QGridLayout(self.frame_21)
+        self.gridLayout_27.setObjectName(u"gridLayout_27")
+        self.horizontalSpacer_28 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_27.addItem(self.horizontalSpacer_28, 3, 7, 1, 1)
+
+        self.goptions_browse_yaml_path_input = QLineEdit(self.frame_21)
+        self.goptions_browse_yaml_path_input.setObjectName(u"goptions_browse_yaml_path_input")
+        self.goptions_browse_yaml_path_input.setMinimumSize(QSize(500, 30))
+        self.goptions_browse_yaml_path_input.setMaximumSize(QSize(500, 30))
+        self.goptions_browse_yaml_path_input.setFont(font1)
+
+        self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_input, 3, 4, 1, 1)
+
+        self.PROBLEM__NDIM__INPUT = QComboBox(self.frame_21)
+        self.PROBLEM__NDIM__INPUT.addItem("")
+        self.PROBLEM__NDIM__INPUT.addItem("")
+        self.PROBLEM__NDIM__INPUT.setObjectName(u"PROBLEM__NDIM__INPUT")
+        self.PROBLEM__NDIM__INPUT.setMinimumSize(QSize(100, 30))
+        self.PROBLEM__NDIM__INPUT.setMaximumSize(QSize(100, 30))
+        self.PROBLEM__NDIM__INPUT.setFont(font1)
+
+        self.gridLayout_27.addWidget(self.PROBLEM__NDIM__INPUT, 0, 4, 1, 1)
+
+        self.goptions_yaml_name_input = QLineEdit(self.frame_21)
+        self.goptions_yaml_name_input.setObjectName(u"goptions_yaml_name_input")
+        self.goptions_yaml_name_input.setMinimumSize(QSize(0, 30))
+        self.goptions_yaml_name_input.setMaximumSize(QSize(500, 30))
+        self.goptions_yaml_name_input.setFont(font1)
+
+        self.gridLayout_27.addWidget(self.goptions_yaml_name_input, 5, 4, 1, 1)
+
+        self.PROBLEM__NDIM__LABEL = QLabel(self.frame_21)
+        self.PROBLEM__NDIM__LABEL.setObjectName(u"PROBLEM__NDIM__LABEL")
+        self.PROBLEM__NDIM__LABEL.setMaximumSize(QSize(200, 35))
+        self.PROBLEM__NDIM__LABEL.setFont(font1)
+
+        self.gridLayout_27.addWidget(self.PROBLEM__NDIM__LABEL, 0, 1, 1, 1)
+
+        self.goptions_browse_yaml_path_info = QPushButton(self.frame_21)
+        self.goptions_browse_yaml_path_info.setObjectName(u"goptions_browse_yaml_path_info")
+        self.goptions_browse_yaml_path_info.setMinimumSize(QSize(30, 30))
+        self.goptions_browse_yaml_path_info.setMaximumSize(QSize(30, 30))
+        self.goptions_browse_yaml_path_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+        self.goptions_browse_yaml_path_info.setProperty(u"scaledContents", True)
+
+        self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_info, 3, 3, 1, 1)
+
+        self.PROBLEM__NDIM__INFO = QPushButton(self.frame_21)
+        self.PROBLEM__NDIM__INFO.setObjectName(u"PROBLEM__NDIM__INFO")
+        self.PROBLEM__NDIM__INFO.setMinimumSize(QSize(30, 30))
+        self.PROBLEM__NDIM__INFO.setMaximumSize(QSize(30, 30))
+        self.PROBLEM__NDIM__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_27.addWidget(self.PROBLEM__NDIM__INFO, 0, 3, 1, 1)
+
+        self.goptions_yaml_name_info = QPushButton(self.frame_21)
+        self.goptions_yaml_name_info.setObjectName(u"goptions_yaml_name_info")
+        self.goptions_yaml_name_info.setMinimumSize(QSize(30, 30))
+        self.goptions_yaml_name_info.setMaximumSize(QSize(30, 30))
+        self.goptions_yaml_name_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_27.addWidget(self.goptions_yaml_name_info, 5, 3, 1, 1)
+
+        self.goptions_yaml_name_label = QLabel(self.frame_21)
+        self.goptions_yaml_name_label.setObjectName(u"goptions_yaml_name_label")
+        self.goptions_yaml_name_label.setMaximumSize(QSize(250, 35))
+        self.goptions_yaml_name_label.setFont(font1)
+
+        self.gridLayout_27.addWidget(self.goptions_yaml_name_label, 5, 1, 1, 1)
+
+        self.goptions_browse_yaml_path_label = QLabel(self.frame_21)
+        self.goptions_browse_yaml_path_label.setObjectName(u"goptions_browse_yaml_path_label")
+        self.goptions_browse_yaml_path_label.setMaximumSize(QSize(250, 35))
+        self.goptions_browse_yaml_path_label.setFont(font1)
+
+        self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_label, 3, 1, 1, 2)
+
+        self.goptions_browse_yaml_path_bn = QPushButton(self.frame_21)
+        self.goptions_browse_yaml_path_bn.setObjectName(u"goptions_browse_yaml_path_bn")
+        self.goptions_browse_yaml_path_bn.setMaximumSize(QSize(130, 16777215))
+        self.goptions_browse_yaml_path_bn.setFont(font1)
+
+        self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_bn, 3, 6, 1, 1)
+
+
+        self.gridLayout.addWidget(self.frame_21, 0, 0, 2, 5)
+
+        self.train_disable_checkpoint_frame = QFrame(self.scrollAreaWidgetContents)
+        self.train_disable_checkpoint_frame.setObjectName(u"train_disable_checkpoint_frame")
+        self.train_disable_checkpoint_frame.setMinimumSize(QSize(0, 0))
+        self.train_disable_checkpoint_frame.setFrameShape(QFrame.Box)
+        self.train_disable_checkpoint_frame.setFrameShadow(QFrame.Raised)
+        self.gridLayout_26 = QGridLayout(self.train_disable_checkpoint_frame)
+        self.gridLayout_26.setObjectName(u"gridLayout_26")
+        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL = QLabel(self.train_disable_checkpoint_frame)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__LABEL")
+        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setFont(font1)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setIndent(15)
+
+        self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL, 5, 1, 1, 1)
+
+        self.PATHS__CHECKPOINT_FILE__INFO = QPushButton(self.train_disable_checkpoint_frame)
+        self.PATHS__CHECKPOINT_FILE__INFO.setObjectName(u"PATHS__CHECKPOINT_FILE__INFO")
+        self.PATHS__CHECKPOINT_FILE__INFO.setMinimumSize(QSize(30, 30))
+        self.PATHS__CHECKPOINT_FILE__INFO.setMaximumSize(QSize(30, 30))
+        self.PATHS__CHECKPOINT_FILE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_26.addWidget(self.PATHS__CHECKPOINT_FILE__INFO, 4, 2, 1, 1)
+
+        self.MODEL__SOURCE__INPUT = QComboBox(self.train_disable_checkpoint_frame)
+        self.MODEL__SOURCE__INPUT.addItem("")
+        self.MODEL__SOURCE__INPUT.addItem("")
+        self.MODEL__SOURCE__INPUT.setObjectName(u"MODEL__SOURCE__INPUT")
+        self.MODEL__SOURCE__INPUT.setMinimumSize(QSize(300, 30))
+        self.MODEL__SOURCE__INPUT.setMaximumSize(QSize(300, 30))
+        self.MODEL__SOURCE__INPUT.setFont(font1)
+
+        self.gridLayout_26.addWidget(self.MODEL__SOURCE__INPUT, 2, 3, 1, 1)
+
+        self.LOAD_PRETRAINED_MODEL__INPUT = QComboBox(self.train_disable_checkpoint_frame)
+        self.LOAD_PRETRAINED_MODEL__INPUT.addItem("")
+        self.LOAD_PRETRAINED_MODEL__INPUT.addItem("")
+        self.LOAD_PRETRAINED_MODEL__INPUT.setObjectName(u"LOAD_PRETRAINED_MODEL__INPUT")
+        self.LOAD_PRETRAINED_MODEL__INPUT.setMinimumSize(QSize(200, 30))
+        self.LOAD_PRETRAINED_MODEL__INPUT.setMaximumSize(QSize(200, 30))
+        self.LOAD_PRETRAINED_MODEL__INPUT.setFont(font1)
+
+        self.gridLayout_26.addWidget(self.LOAD_PRETRAINED_MODEL__INPUT, 1, 3, 1, 1)
+
+        self.MODEL__SOURCE__INFO = QPushButton(self.train_disable_checkpoint_frame)
+        self.MODEL__SOURCE__INFO.setObjectName(u"MODEL__SOURCE__INFO")
+        self.MODEL__SOURCE__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__SOURCE__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__SOURCE__INFO.setFont(font1)
+        self.MODEL__SOURCE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_26.addWidget(self.MODEL__SOURCE__INFO, 2, 2, 1, 1)
+
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT = QLineEdit(self.train_disable_checkpoint_frame)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__INPUT")
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setMinimumSize(QSize(500, 30))
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setMaximumSize(QSize(500, 30))
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setFont(font1)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setReadOnly(True)
+
+        self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT, 5, 3, 1, 1)
+
+        self.checkpoint_file_path_browse_label = QLabel(self.train_disable_checkpoint_frame)
+        self.checkpoint_file_path_browse_label.setObjectName(u"checkpoint_file_path_browse_label")
+        self.checkpoint_file_path_browse_label.setFont(font1)
+        self.checkpoint_file_path_browse_label.setIndent(15)
+
+        self.gridLayout_26.addWidget(self.checkpoint_file_path_browse_label, 4, 1, 1, 1)
+
+        self.MODEL__BMZ__SOURCE_MODEL_ID__BN = QPushButton(self.train_disable_checkpoint_frame)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__BN")
+        self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setMinimumSize(QSize(130, 0))
+        self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setFont(font1)
+
+        self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__BN, 5, 4, 1, 1)
+
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO = QPushButton(self.train_disable_checkpoint_frame)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__INFO")
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setFont(font1)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__INFO, 5, 2, 1, 1)
+
+        self.MODEL__SOURCE__LABEL = QLabel(self.train_disable_checkpoint_frame)
+        self.MODEL__SOURCE__LABEL.setObjectName(u"MODEL__SOURCE__LABEL")
+        self.MODEL__SOURCE__LABEL.setFont(font1)
+        self.MODEL__SOURCE__LABEL.setIndent(15)
+
+        self.gridLayout_26.addWidget(self.MODEL__SOURCE__LABEL, 2, 1, 1, 1)
+
+        self.LOAD_PRETRAINED_MODEL__LABEL = QLabel(self.train_disable_checkpoint_frame)
+        self.LOAD_PRETRAINED_MODEL__LABEL.setObjectName(u"LOAD_PRETRAINED_MODEL__LABEL")
+        self.LOAD_PRETRAINED_MODEL__LABEL.setFont(font1)
+
+        self.gridLayout_26.addWidget(self.LOAD_PRETRAINED_MODEL__LABEL, 1, 1, 1, 1)
+
+        self.checkpoint_file_path_browse_bn = QPushButton(self.train_disable_checkpoint_frame)
+        self.checkpoint_file_path_browse_bn.setObjectName(u"checkpoint_file_path_browse_bn")
+        self.checkpoint_file_path_browse_bn.setFont(font1)
+
+        self.gridLayout_26.addWidget(self.checkpoint_file_path_browse_bn, 4, 4, 1, 1)
+
+        self.PATHS__CHECKPOINT_FILE__INPUT = QLineEdit(self.train_disable_checkpoint_frame)
+        self.PATHS__CHECKPOINT_FILE__INPUT.setObjectName(u"PATHS__CHECKPOINT_FILE__INPUT")
+        self.PATHS__CHECKPOINT_FILE__INPUT.setMinimumSize(QSize(500, 30))
+        self.PATHS__CHECKPOINT_FILE__INPUT.setMaximumSize(QSize(500, 30))
+        self.PATHS__CHECKPOINT_FILE__INPUT.setFont(font1)
+
+        self.gridLayout_26.addWidget(self.PATHS__CHECKPOINT_FILE__INPUT, 4, 3, 1, 1)
+
+        self.LOAD_PRETRAINED_MODEL__INFO = QPushButton(self.train_disable_checkpoint_frame)
+        self.LOAD_PRETRAINED_MODEL__INFO.setObjectName(u"LOAD_PRETRAINED_MODEL__INFO")
+        self.LOAD_PRETRAINED_MODEL__INFO.setMinimumSize(QSize(30, 30))
+        self.LOAD_PRETRAINED_MODEL__INFO.setMaximumSize(QSize(30, 30))
+        self.LOAD_PRETRAINED_MODEL__INFO.setFont(font1)
+        self.LOAD_PRETRAINED_MODEL__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_26.addWidget(self.LOAD_PRETRAINED_MODEL__INFO, 1, 2, 1, 1)
+
+        self.horizontalSpacer_10 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_26.addItem(self.horizontalSpacer_10, 1, 4, 1, 1)
+
+
+        self.gridLayout.addWidget(self.train_disable_checkpoint_frame, 6, 0, 1, 3)
+
         self.goptions_scrollArea.setWidget(self.scrollAreaWidgetContents)
 
         self.verticalLayout_8.addWidget(self.goptions_scrollArea)
@@ -3180,7 +4286,7 @@ class Ui_MainWindow(object):
         self.train_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, -4434, 944, 7969))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 944, 6502))
         self.scrollAreaWidgetContents_3.setLayoutDirection(Qt.LeftToRight)
         self.gridLayout_3 = QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
@@ -3206,1880 +4312,6 @@ class Ui_MainWindow(object):
         self.train_advanced_options_frame_2.setFrameShape(QFrame.Box)
         self.gridLayout_4 = QGridLayout(self.train_advanced_options_frame_2)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
-        self.convnext_frame = QFrame(self.train_advanced_options_frame_2)
-        self.convnext_frame.setObjectName(u"convnext_frame")
-        self.convnext_frame.setFont(font9)
-        self.convnext_frame.setFrameShape(QFrame.Box)
-        self.convnext_frame.setFrameShadow(QFrame.Raised)
-        self.gridLayout_82 = QGridLayout(self.convnext_frame)
-        self.gridLayout_82.setObjectName(u"gridLayout_82")
-        self.MODEL__CONVNEXT_LAYERS__INFO = QPushButton(self.convnext_frame)
-        self.MODEL__CONVNEXT_LAYERS__INFO.setObjectName(u"MODEL__CONVNEXT_LAYERS__INFO")
-        self.MODEL__CONVNEXT_LAYERS__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_LAYERS__INFO, 0, 1, 1, 1)
-
-        self.MODEL__CONVNEXT_LAYER_SCALE__INFO = QPushButton(self.convnext_frame)
-        self.MODEL__CONVNEXT_LAYER_SCALE__INFO.setObjectName(u"MODEL__CONVNEXT_LAYER_SCALE__INFO")
-        self.MODEL__CONVNEXT_LAYER_SCALE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_LAYER_SCALE__INFO, 2, 1, 1, 1)
-
-        self.MODEL__CONVNEXT_LAYER_SCALE__LABEL = QLabel(self.convnext_frame)
-        self.MODEL__CONVNEXT_LAYER_SCALE__LABEL.setObjectName(u"MODEL__CONVNEXT_LAYER_SCALE__LABEL")
-        self.MODEL__CONVNEXT_LAYER_SCALE__LABEL.setFont(font1)
-
-        self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_LAYER_SCALE__LABEL, 2, 0, 1, 1)
-
-        self.MODEL__CONVNEXT_STEM_K_SIZE__INFO = QPushButton(self.convnext_frame)
-        self.MODEL__CONVNEXT_STEM_K_SIZE__INFO.setObjectName(u"MODEL__CONVNEXT_STEM_K_SIZE__INFO")
-        self.MODEL__CONVNEXT_STEM_K_SIZE__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__CONVNEXT_STEM_K_SIZE__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__CONVNEXT_STEM_K_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_STEM_K_SIZE__INFO, 3, 1, 1, 1)
-
-        self.MODEL__CONVNEXT_SD_PROB__INPUT = QLineEdit(self.convnext_frame)
-        self.MODEL__CONVNEXT_SD_PROB__INPUT.setObjectName(u"MODEL__CONVNEXT_SD_PROB__INPUT")
-        self.MODEL__CONVNEXT_SD_PROB__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__CONVNEXT_SD_PROB__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__CONVNEXT_SD_PROB__INPUT.setFont(font1)
-
-        self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_SD_PROB__INPUT, 1, 2, 1, 1)
-
-        self.MODEL__CONVNEXT_SD_PROB__LABEL = QLabel(self.convnext_frame)
-        self.MODEL__CONVNEXT_SD_PROB__LABEL.setObjectName(u"MODEL__CONVNEXT_SD_PROB__LABEL")
-        self.MODEL__CONVNEXT_SD_PROB__LABEL.setFont(font1)
-
-        self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_SD_PROB__LABEL, 1, 0, 1, 1)
-
-        self.MODEL__CONVNEXT_SD_PROB__INFO = QPushButton(self.convnext_frame)
-        self.MODEL__CONVNEXT_SD_PROB__INFO.setObjectName(u"MODEL__CONVNEXT_SD_PROB__INFO")
-        self.MODEL__CONVNEXT_SD_PROB__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_SD_PROB__INFO, 1, 1, 1, 1)
-
-        self.MODEL__CONVNEXT_LAYER_SCALE__INPUT = QLineEdit(self.convnext_frame)
-        self.MODEL__CONVNEXT_LAYER_SCALE__INPUT.setObjectName(u"MODEL__CONVNEXT_LAYER_SCALE__INPUT")
-        self.MODEL__CONVNEXT_LAYER_SCALE__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__CONVNEXT_LAYER_SCALE__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__CONVNEXT_LAYER_SCALE__INPUT.setFont(font1)
-
-        self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_LAYER_SCALE__INPUT, 2, 2, 1, 1)
-
-        self.MODEL__CONVNEXT_STEM_K_SIZE__LABEL = QLabel(self.convnext_frame)
-        self.MODEL__CONVNEXT_STEM_K_SIZE__LABEL.setObjectName(u"MODEL__CONVNEXT_STEM_K_SIZE__LABEL")
-        self.MODEL__CONVNEXT_STEM_K_SIZE__LABEL.setFont(font1)
-
-        self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_STEM_K_SIZE__LABEL, 3, 0, 1, 1)
-
-        self.MODEL__CONVNEXT_STEM_K_SIZE__INPUT = QLineEdit(self.convnext_frame)
-        self.MODEL__CONVNEXT_STEM_K_SIZE__INPUT.setObjectName(u"MODEL__CONVNEXT_STEM_K_SIZE__INPUT")
-        self.MODEL__CONVNEXT_STEM_K_SIZE__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__CONVNEXT_STEM_K_SIZE__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__CONVNEXT_STEM_K_SIZE__INPUT.setFont(font1)
-
-        self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_STEM_K_SIZE__INPUT, 3, 2, 1, 1)
-
-        self.MODEL__CONVNEXT_LAYERS__INPUT = QLineEdit(self.convnext_frame)
-        self.MODEL__CONVNEXT_LAYERS__INPUT.setObjectName(u"MODEL__CONVNEXT_LAYERS__INPUT")
-        self.MODEL__CONVNEXT_LAYERS__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__CONVNEXT_LAYERS__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__CONVNEXT_LAYERS__INPUT.setFont(font1)
-
-        self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_LAYERS__INPUT, 0, 2, 1, 1)
-
-        self.MODEL__CONVNEXT_LAYERS__LABEL = QLabel(self.convnext_frame)
-        self.MODEL__CONVNEXT_LAYERS__LABEL.setObjectName(u"MODEL__CONVNEXT_LAYERS__LABEL")
-        self.MODEL__CONVNEXT_LAYERS__LABEL.setFont(font1)
-
-        self.gridLayout_82.addWidget(self.MODEL__CONVNEXT_LAYERS__LABEL, 0, 0, 1, 1)
-
-        self.horizontalSpacer_88 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_82.addItem(self.horizontalSpacer_88, 0, 3, 1, 1)
-
-
-        self.gridLayout_4.addWidget(self.convnext_frame, 23, 0, 1, 1)
-
-        self.frame_14 = QFrame(self.train_advanced_options_frame_2)
-        self.frame_14.setObjectName(u"frame_14")
-        self.frame_14.setFont(font1)
-        self.frame_14.setFrameShape(QFrame.Box)
-        self.frame_14.setFrameShadow(QFrame.Raised)
-        self.gridLayout_15 = QGridLayout(self.frame_14)
-        self.gridLayout_15.setObjectName(u"gridLayout_15")
-        self.custom_std_label = QLabel(self.frame_14)
-        self.custom_std_label.setObjectName(u"custom_std_label")
-        self.custom_std_label.setMaximumSize(QSize(16777215, 16777215))
-        self.custom_std_label.setFont(font1)
-        self.custom_std_label.setIndent(15)
-
-        self.gridLayout_15.addWidget(self.custom_std_label, 16, 1, 1, 1)
-
-        self.DATA__FORCE_RGB__INFO = QPushButton(self.frame_14)
-        self.DATA__FORCE_RGB__INFO.setObjectName(u"DATA__FORCE_RGB__INFO")
-        self.DATA__FORCE_RGB__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__FORCE_RGB__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__FORCE_RGB__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_15.addWidget(self.DATA__FORCE_RGB__INFO, 18, 3, 1, 1)
-
-        self.DATA__NORMALIZATION__PERC_LOWER__LABEL = QLabel(self.frame_14)
-        self.DATA__NORMALIZATION__PERC_LOWER__LABEL.setObjectName(u"DATA__NORMALIZATION__PERC_LOWER__LABEL")
-        self.DATA__NORMALIZATION__PERC_LOWER__LABEL.setFont(font1)
-        self.DATA__NORMALIZATION__PERC_LOWER__LABEL.setIndent(15)
-
-        self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__PERC_LOWER__LABEL, 10, 1, 1, 1)
-
-        self.label_7 = QLabel(self.frame_14)
-        self.label_7.setObjectName(u"label_7")
-        self.label_7.setMaximumSize(QSize(16777215, 16777215))
-        self.label_7.setFont(font1)
-
-        self.gridLayout_15.addWidget(self.label_7, 3, 1, 1, 2)
-
-        self.DATA__NORMALIZATION__PERC_UPPER__INFO = QPushButton(self.frame_14)
-        self.DATA__NORMALIZATION__PERC_UPPER__INFO.setObjectName(u"DATA__NORMALIZATION__PERC_UPPER__INFO")
-        self.DATA__NORMALIZATION__PERC_UPPER__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__NORMALIZATION__PERC_UPPER__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__NORMALIZATION__PERC_UPPER__INFO.setFont(font9)
-        self.DATA__NORMALIZATION__PERC_UPPER__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__PERC_UPPER__INFO, 11, 3, 1, 1)
-
-        self.DATA__FORCE_RGB__INPUT = QComboBox(self.frame_14)
-        self.DATA__FORCE_RGB__INPUT.addItem("")
-        self.DATA__FORCE_RGB__INPUT.addItem("")
-        self.DATA__FORCE_RGB__INPUT.setObjectName(u"DATA__FORCE_RGB__INPUT")
-        self.DATA__FORCE_RGB__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__FORCE_RGB__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__FORCE_RGB__INPUT.setFont(font1)
-
-        self.gridLayout_15.addWidget(self.DATA__FORCE_RGB__INPUT, 18, 4, 1, 1)
-
-        self.label_12 = QLabel(self.frame_14)
-        self.label_12.setObjectName(u"label_12")
-        self.label_12.setMaximumSize(QSize(16777215, 16777215))
-        self.label_12.setFont(font1)
-
-        self.gridLayout_15.addWidget(self.label_12, 12, 1, 1, 1)
-
-        self.DATA__CHECK_GENERATORS__INPUT = QComboBox(self.frame_14)
-        self.DATA__CHECK_GENERATORS__INPUT.addItem("")
-        self.DATA__CHECK_GENERATORS__INPUT.addItem("")
-        self.DATA__CHECK_GENERATORS__INPUT.setObjectName(u"DATA__CHECK_GENERATORS__INPUT")
-        self.DATA__CHECK_GENERATORS__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__CHECK_GENERATORS__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__CHECK_GENERATORS__INPUT.setFont(font1)
-
-        self.gridLayout_15.addWidget(self.DATA__CHECK_GENERATORS__INPUT, 17, 4, 1, 1)
-
-        self.DATA__NORMALIZATION__CUSTOM_STD__INFO = QPushButton(self.frame_14)
-        self.DATA__NORMALIZATION__CUSTOM_STD__INFO.setObjectName(u"DATA__NORMALIZATION__CUSTOM_STD__INFO")
-        self.DATA__NORMALIZATION__CUSTOM_STD__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__NORMALIZATION__CUSTOM_STD__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__NORMALIZATION__CUSTOM_STD__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__CUSTOM_STD__INFO, 16, 3, 1, 1)
-
-        self.DATA__EXTRACT_RANDOM_PATCH__INFO = QPushButton(self.frame_14)
-        self.DATA__EXTRACT_RANDOM_PATCH__INFO.setObjectName(u"DATA__EXTRACT_RANDOM_PATCH__INFO")
-        self.DATA__EXTRACT_RANDOM_PATCH__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__EXTRACT_RANDOM_PATCH__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__EXTRACT_RANDOM_PATCH__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_15.addWidget(self.DATA__EXTRACT_RANDOM_PATCH__INFO, 3, 3, 1, 1)
-
-        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT = QComboBox(self.frame_14)
-        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT.addItem("")
-        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT.addItem("")
-        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT.setObjectName(u"DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT")
-        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT.setFont(font1)
-
-        self.gridLayout_15.addWidget(self.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT, 4, 4, 1, 1)
-
-        self.label_11 = QLabel(self.frame_14)
-        self.label_11.setObjectName(u"label_11")
-        self.label_11.setFont(font1)
-
-        self.gridLayout_15.addWidget(self.label_11, 4, 1, 1, 2)
-
-        self.DATA__NORMALIZATION__PERC_CLIP__INFO = QPushButton(self.frame_14)
-        self.DATA__NORMALIZATION__PERC_CLIP__INFO.setObjectName(u"DATA__NORMALIZATION__PERC_CLIP__INFO")
-        self.DATA__NORMALIZATION__PERC_CLIP__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__NORMALIZATION__PERC_CLIP__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__NORMALIZATION__PERC_CLIP__INFO.setFont(font9)
-        self.DATA__NORMALIZATION__PERC_CLIP__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__PERC_CLIP__INFO, 9, 3, 1, 1)
-
-        self.DATA__NORMALIZATION__PERC_UPPER__INPUT = QLineEdit(self.frame_14)
-        self.DATA__NORMALIZATION__PERC_UPPER__INPUT.setObjectName(u"DATA__NORMALIZATION__PERC_UPPER__INPUT")
-        self.DATA__NORMALIZATION__PERC_UPPER__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__NORMALIZATION__PERC_UPPER__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__NORMALIZATION__PERC_UPPER__INPUT.setFont(font1)
-
-        self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__PERC_UPPER__INPUT, 11, 4, 1, 1)
-
-        self.DATA__NORMALIZATION__PERC_CLIP__LABEL = QLabel(self.frame_14)
-        self.DATA__NORMALIZATION__PERC_CLIP__LABEL.setObjectName(u"DATA__NORMALIZATION__PERC_CLIP__LABEL")
-        self.DATA__NORMALIZATION__PERC_CLIP__LABEL.setFont(font1)
-
-        self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__PERC_CLIP__LABEL, 9, 1, 1, 1)
-
-        self.DATA__NORMALIZATION__CUSTOM_MEAN__INFO = QPushButton(self.frame_14)
-        self.DATA__NORMALIZATION__CUSTOM_MEAN__INFO.setObjectName(u"DATA__NORMALIZATION__CUSTOM_MEAN__INFO")
-        self.DATA__NORMALIZATION__CUSTOM_MEAN__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__NORMALIZATION__CUSTOM_MEAN__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__NORMALIZATION__CUSTOM_MEAN__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__CUSTOM_MEAN__INFO, 15, 3, 1, 1)
-
-        self.DATA__NORMALIZATION__TYPE__INFO = QPushButton(self.frame_14)
-        self.DATA__NORMALIZATION__TYPE__INFO.setObjectName(u"DATA__NORMALIZATION__TYPE__INFO")
-        self.DATA__NORMALIZATION__TYPE__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__NORMALIZATION__TYPE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__NORMALIZATION__TYPE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__TYPE__INFO, 12, 3, 1, 1)
-
-        self.DATA__NORMALIZATION__CUSTOM_MEAN__INPUT = QLineEdit(self.frame_14)
-        self.DATA__NORMALIZATION__CUSTOM_MEAN__INPUT.setObjectName(u"DATA__NORMALIZATION__CUSTOM_MEAN__INPUT")
-        self.DATA__NORMALIZATION__CUSTOM_MEAN__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__NORMALIZATION__CUSTOM_MEAN__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__NORMALIZATION__CUSTOM_MEAN__INPUT.setFont(font1)
-
-        self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__CUSTOM_MEAN__INPUT, 15, 4, 1, 1)
-
-        self.DATA__CHECK_GENERATORS__INFO = QPushButton(self.frame_14)
-        self.DATA__CHECK_GENERATORS__INFO.setObjectName(u"DATA__CHECK_GENERATORS__INFO")
-        self.DATA__CHECK_GENERATORS__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__CHECK_GENERATORS__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__CHECK_GENERATORS__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_15.addWidget(self.DATA__CHECK_GENERATORS__INFO, 17, 3, 1, 1)
-
-        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO = QPushButton(self.frame_14)
-        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO.setObjectName(u"DATA__REFLECT_TO_COMPLETE_SHAPE__INFO")
-        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_15.addWidget(self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO, 4, 3, 1, 1)
-
-        self.DATA__NORMALIZATION__PERC_LOWER__INPUT = QLineEdit(self.frame_14)
-        self.DATA__NORMALIZATION__PERC_LOWER__INPUT.setObjectName(u"DATA__NORMALIZATION__PERC_LOWER__INPUT")
-        self.DATA__NORMALIZATION__PERC_LOWER__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__NORMALIZATION__PERC_LOWER__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__NORMALIZATION__PERC_LOWER__INPUT.setFont(font1)
-
-        self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__PERC_LOWER__INPUT, 10, 4, 1, 1)
-
-        self.custom_mean_label = QLabel(self.frame_14)
-        self.custom_mean_label.setObjectName(u"custom_mean_label")
-        self.custom_mean_label.setMaximumSize(QSize(16777215, 16777215))
-        self.custom_mean_label.setFont(font1)
-        self.custom_mean_label.setIndent(15)
-
-        self.gridLayout_15.addWidget(self.custom_mean_label, 15, 1, 1, 1)
-
-        self.DATA__FORCE_RGB__LABEL = QLabel(self.frame_14)
-        self.DATA__FORCE_RGB__LABEL.setObjectName(u"DATA__FORCE_RGB__LABEL")
-        self.DATA__FORCE_RGB__LABEL.setFont(font1)
-
-        self.gridLayout_15.addWidget(self.DATA__FORCE_RGB__LABEL, 18, 1, 1, 1)
-
-        self.DATA__NORMALIZATION__PERC_CLIP__INPUT = QComboBox(self.frame_14)
-        self.DATA__NORMALIZATION__PERC_CLIP__INPUT.addItem("")
-        self.DATA__NORMALIZATION__PERC_CLIP__INPUT.addItem("")
-        self.DATA__NORMALIZATION__PERC_CLIP__INPUT.setObjectName(u"DATA__NORMALIZATION__PERC_CLIP__INPUT")
-        self.DATA__NORMALIZATION__PERC_CLIP__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__NORMALIZATION__PERC_CLIP__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__NORMALIZATION__PERC_CLIP__INPUT.setFont(font1)
-
-        self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__PERC_CLIP__INPUT, 9, 4, 1, 1)
-
-        self.DATA__NORMALIZATION__PERC_LOWER__INFO = QPushButton(self.frame_14)
-        self.DATA__NORMALIZATION__PERC_LOWER__INFO.setObjectName(u"DATA__NORMALIZATION__PERC_LOWER__INFO")
-        self.DATA__NORMALIZATION__PERC_LOWER__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__NORMALIZATION__PERC_LOWER__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__NORMALIZATION__PERC_LOWER__INFO.setFont(font9)
-        self.DATA__NORMALIZATION__PERC_LOWER__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__PERC_LOWER__INFO, 10, 3, 1, 1)
-
-        self.DATA__EXTRACT_RANDOM_PATCH__INPUT = QComboBox(self.frame_14)
-        self.DATA__EXTRACT_RANDOM_PATCH__INPUT.addItem("")
-        self.DATA__EXTRACT_RANDOM_PATCH__INPUT.addItem("")
-        self.DATA__EXTRACT_RANDOM_PATCH__INPUT.setObjectName(u"DATA__EXTRACT_RANDOM_PATCH__INPUT")
-        self.DATA__EXTRACT_RANDOM_PATCH__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__EXTRACT_RANDOM_PATCH__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__EXTRACT_RANDOM_PATCH__INPUT.setFont(font1)
-
-        self.gridLayout_15.addWidget(self.DATA__EXTRACT_RANDOM_PATCH__INPUT, 3, 4, 1, 1)
-
-        self.DATA__NORMALIZATION__PERC_UPPER__LABEL = QLabel(self.frame_14)
-        self.DATA__NORMALIZATION__PERC_UPPER__LABEL.setObjectName(u"DATA__NORMALIZATION__PERC_UPPER__LABEL")
-        self.DATA__NORMALIZATION__PERC_UPPER__LABEL.setFont(font1)
-        self.DATA__NORMALIZATION__PERC_UPPER__LABEL.setIndent(15)
-
-        self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__PERC_UPPER__LABEL, 11, 1, 1, 1)
-
-        self.DATA__NORMALIZATION__TYPE__INPUT = QComboBox(self.frame_14)
-        self.DATA__NORMALIZATION__TYPE__INPUT.addItem("")
-        self.DATA__NORMALIZATION__TYPE__INPUT.addItem("")
-        self.DATA__NORMALIZATION__TYPE__INPUT.addItem("")
-        self.DATA__NORMALIZATION__TYPE__INPUT.setObjectName(u"DATA__NORMALIZATION__TYPE__INPUT")
-        self.DATA__NORMALIZATION__TYPE__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__NORMALIZATION__TYPE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__NORMALIZATION__TYPE__INPUT.setFont(font1)
-
-        self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__TYPE__INPUT, 12, 4, 1, 1)
-
-        self.check_gen_label = QLabel(self.frame_14)
-        self.check_gen_label.setObjectName(u"check_gen_label")
-        self.check_gen_label.setMaximumSize(QSize(16777215, 16777215))
-        self.check_gen_label.setFont(font1)
-
-        self.gridLayout_15.addWidget(self.check_gen_label, 17, 1, 1, 1)
-
-        self.DATA__NORMALIZATION__CUSTOM_STD__INPUT = QLineEdit(self.frame_14)
-        self.DATA__NORMALIZATION__CUSTOM_STD__INPUT.setObjectName(u"DATA__NORMALIZATION__CUSTOM_STD__INPUT")
-        self.DATA__NORMALIZATION__CUSTOM_STD__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__NORMALIZATION__CUSTOM_STD__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__NORMALIZATION__CUSTOM_STD__INPUT.setFont(font1)
-
-        self.gridLayout_15.addWidget(self.DATA__NORMALIZATION__CUSTOM_STD__INPUT, 16, 4, 1, 1)
-
-        self.horizontalSpacer_8 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_15.addItem(self.horizontalSpacer_8, 3, 5, 1, 1)
-
-
-        self.gridLayout_4.addWidget(self.frame_14, 10, 0, 1, 1)
-
-        self.unet_model_like_frame = QFrame(self.train_advanced_options_frame_2)
-        self.unet_model_like_frame.setObjectName(u"unet_model_like_frame")
-        self.unet_model_like_frame.setMinimumSize(QSize(0, 0))
-        self.unet_model_like_frame.setFont(font1)
-        self.unet_model_like_frame.setFrameShape(QFrame.Box)
-        self.unet_model_like_frame.setFrameShadow(QFrame.Raised)
-        self.gridLayout_22 = QGridLayout(self.unet_model_like_frame)
-        self.gridLayout_22.setObjectName(u"gridLayout_22")
-        self.MODEL__ACTIVATION__INPUT = QComboBox(self.unet_model_like_frame)
-        self.MODEL__ACTIVATION__INPUT.addItem("")
-        self.MODEL__ACTIVATION__INPUT.addItem("")
-        self.MODEL__ACTIVATION__INPUT.addItem("")
-        self.MODEL__ACTIVATION__INPUT.setObjectName(u"MODEL__ACTIVATION__INPUT")
-        self.MODEL__ACTIVATION__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__ACTIVATION__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__ACTIVATION__INPUT.setFont(font1)
-
-        self.gridLayout_22.addWidget(self.MODEL__ACTIVATION__INPUT, 5, 2, 1, 1)
-
-        self.MODEL__Z_DOWN__LABEL = QLabel(self.unet_model_like_frame)
-        self.MODEL__Z_DOWN__LABEL.setObjectName(u"MODEL__Z_DOWN__LABEL")
-        self.MODEL__Z_DOWN__LABEL.setMaximumSize(QSize(16777215, 16777215))
-        self.MODEL__Z_DOWN__LABEL.setFont(font1)
-
-        self.gridLayout_22.addWidget(self.MODEL__Z_DOWN__LABEL, 7, 0, 1, 1)
-
-        self.MODEL__ACTIVATION__INFO = QPushButton(self.unet_model_like_frame)
-        self.MODEL__ACTIVATION__INFO.setObjectName(u"MODEL__ACTIVATION__INFO")
-        self.MODEL__ACTIVATION__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__ACTIVATION__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__ACTIVATION__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_22.addWidget(self.MODEL__ACTIVATION__INFO, 5, 1, 1, 1)
-
-        self.MODEL__ISOTROPY__LABEL = QLabel(self.unet_model_like_frame)
-        self.MODEL__ISOTROPY__LABEL.setObjectName(u"MODEL__ISOTROPY__LABEL")
-        self.MODEL__ISOTROPY__LABEL.setFont(font1)
-
-        self.gridLayout_22.addWidget(self.MODEL__ISOTROPY__LABEL, 8, 0, 1, 1)
-
-        self.MODEL__NORMALIZATION__INPUT = QComboBox(self.unet_model_like_frame)
-        self.MODEL__NORMALIZATION__INPUT.addItem("")
-        self.MODEL__NORMALIZATION__INPUT.addItem("")
-        self.MODEL__NORMALIZATION__INPUT.addItem("")
-        self.MODEL__NORMALIZATION__INPUT.addItem("")
-        self.MODEL__NORMALIZATION__INPUT.addItem("")
-        self.MODEL__NORMALIZATION__INPUT.setObjectName(u"MODEL__NORMALIZATION__INPUT")
-        self.MODEL__NORMALIZATION__INPUT.setMinimumSize(QSize(100, 30))
-        self.MODEL__NORMALIZATION__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__NORMALIZATION__INPUT.setFont(font1)
-
-        self.gridLayout_22.addWidget(self.MODEL__NORMALIZATION__INPUT, 2, 2, 1, 1)
-
-        self.label_39 = QLabel(self.unet_model_like_frame)
-        self.label_39.setObjectName(u"label_39")
-        self.label_39.setMaximumSize(QSize(16777215, 16777215))
-        self.label_39.setFont(font1)
-
-        self.gridLayout_22.addWidget(self.label_39, 2, 0, 1, 1)
-
-        self.MODEL__FEATURE_MAPS__INFO = QPushButton(self.unet_model_like_frame)
-        self.MODEL__FEATURE_MAPS__INFO.setObjectName(u"MODEL__FEATURE_MAPS__INFO")
-        self.MODEL__FEATURE_MAPS__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__FEATURE_MAPS__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__FEATURE_MAPS__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_22.addWidget(self.MODEL__FEATURE_MAPS__INFO, 0, 1, 1, 1)
-
-        self.label_37 = QLabel(self.unet_model_like_frame)
-        self.label_37.setObjectName(u"label_37")
-        self.label_37.setMaximumSize(QSize(16777215, 16777215))
-        self.label_37.setFont(font1)
-
-        self.gridLayout_22.addWidget(self.label_37, 1, 0, 1, 1)
-
-        self.MODEL__KERNEL_SIZE__INPUT = QLineEdit(self.unet_model_like_frame)
-        self.MODEL__KERNEL_SIZE__INPUT.setObjectName(u"MODEL__KERNEL_SIZE__INPUT")
-        self.MODEL__KERNEL_SIZE__INPUT.setMinimumSize(QSize(100, 30))
-        self.MODEL__KERNEL_SIZE__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__KERNEL_SIZE__INPUT.setFont(font1)
-
-        self.gridLayout_22.addWidget(self.MODEL__KERNEL_SIZE__INPUT, 3, 2, 1, 1)
-
-        self.MODEL__FEATURE_MAPS__INPUT = QLineEdit(self.unet_model_like_frame)
-        self.MODEL__FEATURE_MAPS__INPUT.setObjectName(u"MODEL__FEATURE_MAPS__INPUT")
-        self.MODEL__FEATURE_MAPS__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__FEATURE_MAPS__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__FEATURE_MAPS__INPUT.setFont(font1)
-
-        self.gridLayout_22.addWidget(self.MODEL__FEATURE_MAPS__INPUT, 0, 2, 1, 1)
-
-        self.MODEL__NORMALIZATION__INFO = QPushButton(self.unet_model_like_frame)
-        self.MODEL__NORMALIZATION__INFO.setObjectName(u"MODEL__NORMALIZATION__INFO")
-        self.MODEL__NORMALIZATION__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__NORMALIZATION__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__NORMALIZATION__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_22.addWidget(self.MODEL__NORMALIZATION__INFO, 2, 1, 1, 1)
-
-        self.MODEL__DROPOUT_VALUES__INFO = QPushButton(self.unet_model_like_frame)
-        self.MODEL__DROPOUT_VALUES__INFO.setObjectName(u"MODEL__DROPOUT_VALUES__INFO")
-        self.MODEL__DROPOUT_VALUES__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__DROPOUT_VALUES__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__DROPOUT_VALUES__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_22.addWidget(self.MODEL__DROPOUT_VALUES__INFO, 1, 1, 1, 1)
-
-        self.label_36 = QLabel(self.unet_model_like_frame)
-        self.label_36.setObjectName(u"label_36")
-        self.label_36.setMaximumSize(QSize(16777215, 16777215))
-        self.label_36.setFont(font1)
-
-        self.gridLayout_22.addWidget(self.label_36, 0, 0, 1, 1)
-
-        self.MODEL__UPSAMPLE_LAYER__INFO = QPushButton(self.unet_model_like_frame)
-        self.MODEL__UPSAMPLE_LAYER__INFO.setObjectName(u"MODEL__UPSAMPLE_LAYER__INFO")
-        self.MODEL__UPSAMPLE_LAYER__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__UPSAMPLE_LAYER__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__UPSAMPLE_LAYER__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_22.addWidget(self.MODEL__UPSAMPLE_LAYER__INFO, 4, 1, 1, 1)
-
-        self.MODEL__Z_DOWN__INFO = QPushButton(self.unet_model_like_frame)
-        self.MODEL__Z_DOWN__INFO.setObjectName(u"MODEL__Z_DOWN__INFO")
-        self.MODEL__Z_DOWN__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__Z_DOWN__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__Z_DOWN__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_22.addWidget(self.MODEL__Z_DOWN__INFO, 7, 1, 1, 1)
-
-        self.label_47 = QLabel(self.unet_model_like_frame)
-        self.label_47.setObjectName(u"label_47")
-        self.label_47.setMaximumSize(QSize(16777215, 16777215))
-        self.label_47.setFont(font1)
-
-        self.gridLayout_22.addWidget(self.label_47, 5, 0, 1, 1)
-
-        self.label_45 = QLabel(self.unet_model_like_frame)
-        self.label_45.setObjectName(u"label_45")
-        self.label_45.setMaximumSize(QSize(16777215, 16777215))
-        self.label_45.setFont(font1)
-
-        self.gridLayout_22.addWidget(self.label_45, 6, 0, 1, 1)
-
-        self.MODEL__UPSAMPLE_LAYER__INPUT = QComboBox(self.unet_model_like_frame)
-        self.MODEL__UPSAMPLE_LAYER__INPUT.addItem("")
-        self.MODEL__UPSAMPLE_LAYER__INPUT.addItem("")
-        self.MODEL__UPSAMPLE_LAYER__INPUT.setObjectName(u"MODEL__UPSAMPLE_LAYER__INPUT")
-        self.MODEL__UPSAMPLE_LAYER__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__UPSAMPLE_LAYER__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__UPSAMPLE_LAYER__INPUT.setFont(font1)
-
-        self.gridLayout_22.addWidget(self.MODEL__UPSAMPLE_LAYER__INPUT, 4, 2, 1, 1)
-
-        self.MODEL__DROPOUT_VALUES__INPUT = QLineEdit(self.unet_model_like_frame)
-        self.MODEL__DROPOUT_VALUES__INPUT.setObjectName(u"MODEL__DROPOUT_VALUES__INPUT")
-        self.MODEL__DROPOUT_VALUES__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__DROPOUT_VALUES__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__DROPOUT_VALUES__INPUT.setFont(font1)
-
-        self.gridLayout_22.addWidget(self.MODEL__DROPOUT_VALUES__INPUT, 1, 2, 1, 1)
-
-        self.MODEL__LAST_ACTIVATION__INFO = QPushButton(self.unet_model_like_frame)
-        self.MODEL__LAST_ACTIVATION__INFO.setObjectName(u"MODEL__LAST_ACTIVATION__INFO")
-        self.MODEL__LAST_ACTIVATION__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__LAST_ACTIVATION__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__LAST_ACTIVATION__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_22.addWidget(self.MODEL__LAST_ACTIVATION__INFO, 6, 1, 1, 1)
-
-        self.label_41 = QLabel(self.unet_model_like_frame)
-        self.label_41.setObjectName(u"label_41")
-        self.label_41.setMaximumSize(QSize(16777215, 16777215))
-        self.label_41.setFont(font1)
-
-        self.gridLayout_22.addWidget(self.label_41, 3, 0, 1, 1)
-
-        self.horizontalSpacer_13 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_22.addItem(self.horizontalSpacer_13, 0, 3, 1, 1)
-
-        self.MODEL__LAST_ACTIVATION__INPUT = QComboBox(self.unet_model_like_frame)
-        self.MODEL__LAST_ACTIVATION__INPUT.addItem("")
-        self.MODEL__LAST_ACTIVATION__INPUT.addItem("")
-        self.MODEL__LAST_ACTIVATION__INPUT.addItem("")
-        self.MODEL__LAST_ACTIVATION__INPUT.addItem("")
-        self.MODEL__LAST_ACTIVATION__INPUT.setObjectName(u"MODEL__LAST_ACTIVATION__INPUT")
-        self.MODEL__LAST_ACTIVATION__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__LAST_ACTIVATION__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__LAST_ACTIVATION__INPUT.setFont(font1)
-
-        self.gridLayout_22.addWidget(self.MODEL__LAST_ACTIVATION__INPUT, 6, 2, 1, 1)
-
-        self.MODEL__Z_DOWN__INPUT = QLineEdit(self.unet_model_like_frame)
-        self.MODEL__Z_DOWN__INPUT.setObjectName(u"MODEL__Z_DOWN__INPUT")
-        self.MODEL__Z_DOWN__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__Z_DOWN__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__Z_DOWN__INPUT.setFont(font1)
-
-        self.gridLayout_22.addWidget(self.MODEL__Z_DOWN__INPUT, 7, 2, 1, 1)
-
-        self.label_43 = QLabel(self.unet_model_like_frame)
-        self.label_43.setObjectName(u"label_43")
-        self.label_43.setMaximumSize(QSize(16777215, 16777215))
-        self.label_43.setFont(font1)
-
-        self.gridLayout_22.addWidget(self.label_43, 4, 0, 1, 1)
-
-        self.MODEL__KERNEL_SIZE__INFO = QPushButton(self.unet_model_like_frame)
-        self.MODEL__KERNEL_SIZE__INFO.setObjectName(u"MODEL__KERNEL_SIZE__INFO")
-        self.MODEL__KERNEL_SIZE__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__KERNEL_SIZE__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__KERNEL_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_22.addWidget(self.MODEL__KERNEL_SIZE__INFO, 3, 1, 1, 1)
-
-        self.MODEL__LAGER_IO__LABEL = QLabel(self.unet_model_like_frame)
-        self.MODEL__LAGER_IO__LABEL.setObjectName(u"MODEL__LAGER_IO__LABEL")
-        self.MODEL__LAGER_IO__LABEL.setFont(font1)
-
-        self.gridLayout_22.addWidget(self.MODEL__LAGER_IO__LABEL, 9, 0, 1, 1)
-
-        self.MODEL__ISOTROPY__INFO = QPushButton(self.unet_model_like_frame)
-        self.MODEL__ISOTROPY__INFO.setObjectName(u"MODEL__ISOTROPY__INFO")
-        self.MODEL__ISOTROPY__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__ISOTROPY__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__ISOTROPY__INFO.setFont(font1)
-        self.MODEL__ISOTROPY__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_22.addWidget(self.MODEL__ISOTROPY__INFO, 8, 1, 1, 1)
-
-        self.MODEL__LAGER_IO__INFO = QPushButton(self.unet_model_like_frame)
-        self.MODEL__LAGER_IO__INFO.setObjectName(u"MODEL__LAGER_IO__INFO")
-        self.MODEL__LAGER_IO__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__LAGER_IO__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__LAGER_IO__INFO.setFont(font1)
-        self.MODEL__LAGER_IO__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_22.addWidget(self.MODEL__LAGER_IO__INFO, 9, 1, 1, 1)
-
-        self.MODEL__ISOTROPY__INPUT = QLineEdit(self.unet_model_like_frame)
-        self.MODEL__ISOTROPY__INPUT.setObjectName(u"MODEL__ISOTROPY__INPUT")
-        self.MODEL__ISOTROPY__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__ISOTROPY__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__ISOTROPY__INPUT.setFont(font1)
-
-        self.gridLayout_22.addWidget(self.MODEL__ISOTROPY__INPUT, 8, 2, 1, 1)
-
-        self.MODEL__LAGER_IO__INPUT = QComboBox(self.unet_model_like_frame)
-        self.MODEL__LAGER_IO__INPUT.addItem("")
-        self.MODEL__LAGER_IO__INPUT.addItem("")
-        self.MODEL__LAGER_IO__INPUT.setObjectName(u"MODEL__LAGER_IO__INPUT")
-        self.MODEL__LAGER_IO__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__LAGER_IO__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__LAGER_IO__INPUT.setFont(font1)
-
-        self.gridLayout_22.addWidget(self.MODEL__LAGER_IO__INPUT, 9, 2, 1, 1)
-
-
-        self.gridLayout_4.addWidget(self.unet_model_like_frame, 19, 0, 1, 1)
-
-        self.frame_28 = QFrame(self.train_advanced_options_frame_2)
-        self.frame_28.setObjectName(u"frame_28")
-        self.frame_28.setMinimumSize(QSize(0, 0))
-        self.frame_28.setFrameShape(QFrame.Box)
-        self.frame_28.setFrameShadow(QFrame.Raised)
-        self.gridLayout_29 = QGridLayout(self.frame_28)
-        self.gridLayout_29.setObjectName(u"gridLayout_29")
-        self.label_162 = QLabel(self.frame_28)
-        self.label_162.setObjectName(u"label_162")
-        self.label_162.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.label_162, 14, 0, 1, 1)
-
-        self.LOSS__CLASS_REBALANCE__INFO = QPushButton(self.frame_28)
-        self.LOSS__CLASS_REBALANCE__INFO.setObjectName(u"LOSS__CLASS_REBALANCE__INFO")
-        self.LOSS__CLASS_REBALANCE__INFO.setMinimumSize(QSize(30, 30))
-        self.LOSS__CLASS_REBALANCE__INFO.setMaximumSize(QSize(30, 30))
-        self.LOSS__CLASS_REBALANCE__INFO.setFont(font1)
-        self.LOSS__CLASS_REBALANCE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.LOSS__CLASS_REBALANCE__INFO, 3, 1, 1, 1)
-
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO = QPushButton(self.frame_28)
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO")
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO, 19, 1, 1, 1)
-
-        self.label_114 = QLabel(self.frame_28)
-        self.label_114.setObjectName(u"label_114")
-        self.label_114.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.label_114, 11, 0, 1, 1)
-
-        self.TRAIN__BATCH_SIZE__INFO = QPushButton(self.frame_28)
-        self.TRAIN__BATCH_SIZE__INFO.setObjectName(u"TRAIN__BATCH_SIZE__INFO")
-        self.TRAIN__BATCH_SIZE__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__BATCH_SIZE__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__BATCH_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__INFO, 10, 1, 1, 1)
-
-        self.lr_schel_warmupcosine_epochs_label = QLabel(self.frame_28)
-        self.lr_schel_warmupcosine_epochs_label.setObjectName(u"lr_schel_warmupcosine_epochs_label")
-        self.lr_schel_warmupcosine_epochs_label.setFont(font1)
-        self.lr_schel_warmupcosine_epochs_label.setIndent(15)
-
-        self.gridLayout_29.addWidget(self.lr_schel_warmupcosine_epochs_label, 21, 0, 1, 1)
-
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO = QPushButton(self.frame_28)
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO")
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO, 18, 1, 1, 1)
-
-        self.TRAIN__BATCH_SIZE__CALCULATION__LABEL = QLabel(self.frame_28)
-        self.TRAIN__BATCH_SIZE__CALCULATION__LABEL.setObjectName(u"TRAIN__BATCH_SIZE__CALCULATION__LABEL")
-        self.TRAIN__BATCH_SIZE__CALCULATION__LABEL.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__CALCULATION__LABEL, 9, 0, 1, 1)
-
-        self.verticalSpacer_14 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.gridLayout_29.addItem(self.verticalSpacer_14, 28, 0, 1, 1)
-
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO = QPushButton(self.frame_28)
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__MIN_LR__INFO")
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__MIN_LR__INFO, 16, 1, 1, 1)
-
-        self.TRAIN__METRICS__LABEL = QLabel(self.frame_28)
-        self.TRAIN__METRICS__LABEL.setObjectName(u"TRAIN__METRICS__LABEL")
-        self.TRAIN__METRICS__LABEL.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.TRAIN__METRICS__LABEL, 4, 0, 1, 1)
-
-        self.TRAIN__ACCUM_ITER__INFO = QPushButton(self.frame_28)
-        self.TRAIN__ACCUM_ITER__INFO.setObjectName(u"TRAIN__ACCUM_ITER__INFO")
-        self.TRAIN__ACCUM_ITER__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__ACCUM_ITER__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__ACCUM_ITER__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__ACCUM_ITER__INFO, 11, 1, 1, 1)
-
-        self.lr_schel_reduce_on_plat_patience_label = QLabel(self.frame_28)
-        self.lr_schel_reduce_on_plat_patience_label.setObjectName(u"lr_schel_reduce_on_plat_patience_label")
-        self.lr_schel_reduce_on_plat_patience_label.setFont(font1)
-        self.lr_schel_reduce_on_plat_patience_label.setIndent(15)
-
-        self.gridLayout_29.addWidget(self.lr_schel_reduce_on_plat_patience_label, 18, 0, 1, 1)
-
-        self.LOSS__TYPE__LABEL = QLabel(self.frame_28)
-        self.LOSS__TYPE__LABEL.setObjectName(u"LOSS__TYPE__LABEL")
-        self.LOSS__TYPE__LABEL.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.LOSS__TYPE__LABEL, 1, 0, 1, 1)
-
-        self.TRAIN__BATCH_SIZE__LABEL = QLabel(self.frame_28)
-        self.TRAIN__BATCH_SIZE__LABEL.setObjectName(u"TRAIN__BATCH_SIZE__LABEL")
-        self.TRAIN__BATCH_SIZE__LABEL.setFont(font1)
-        self.TRAIN__BATCH_SIZE__LABEL.setIndent(15)
-
-        self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__LABEL, 10, 0, 1, 1)
-
-        self.LOSS__CLASS_REBALANCE__LABEL = QLabel(self.frame_28)
-        self.LOSS__CLASS_REBALANCE__LABEL.setObjectName(u"LOSS__CLASS_REBALANCE__LABEL")
-        self.LOSS__CLASS_REBALANCE__LABEL.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.LOSS__CLASS_REBALANCE__LABEL, 3, 0, 1, 1)
-
-        self.LOSS__CLASS_REBALANCE__INPUT = QComboBox(self.frame_28)
-        self.LOSS__CLASS_REBALANCE__INPUT.addItem("")
-        self.LOSS__CLASS_REBALANCE__INPUT.addItem("")
-        self.LOSS__CLASS_REBALANCE__INPUT.setObjectName(u"LOSS__CLASS_REBALANCE__INPUT")
-        self.LOSS__CLASS_REBALANCE__INPUT.setMinimumSize(QSize(200, 30))
-        self.LOSS__CLASS_REBALANCE__INPUT.setMaximumSize(QSize(200, 30))
-        self.LOSS__CLASS_REBALANCE__INPUT.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.LOSS__CLASS_REBALANCE__INPUT, 3, 2, 1, 1)
-
-        self.TRAIN__LR_SCHEDULER__NAME__INFO = QPushButton(self.frame_28)
-        self.TRAIN__LR_SCHEDULER__NAME__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__NAME__INFO")
-        self.TRAIN__LR_SCHEDULER__NAME__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__NAME__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__NAME__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__NAME__INFO, 14, 1, 1, 1)
-
-        self.TRAIN__ACCUM_ITER__INPUT = QLineEdit(self.frame_28)
-        self.TRAIN__ACCUM_ITER__INPUT.setObjectName(u"TRAIN__ACCUM_ITER__INPUT")
-        self.TRAIN__ACCUM_ITER__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__ACCUM_ITER__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__ACCUM_ITER__INPUT.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.TRAIN__ACCUM_ITER__INPUT, 11, 2, 1, 1)
-
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT = QLineEdit(self.frame_28)
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT")
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT, 21, 2, 1, 1)
-
-        self.MODEL__SAVE_CKPT_FREQ__INPUT = QLineEdit(self.frame_28)
-        self.MODEL__SAVE_CKPT_FREQ__INPUT.setObjectName(u"MODEL__SAVE_CKPT_FREQ__INPUT")
-        self.MODEL__SAVE_CKPT_FREQ__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__SAVE_CKPT_FREQ__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__SAVE_CKPT_FREQ__INPUT.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.MODEL__SAVE_CKPT_FREQ__INPUT, 12, 2, 1, 1)
-
-        self.TRAIN__OPT_BETAS__LABEL = QLabel(self.frame_28)
-        self.TRAIN__OPT_BETAS__LABEL.setObjectName(u"TRAIN__OPT_BETAS__LABEL")
-        self.TRAIN__OPT_BETAS__LABEL.setFont(font1)
-        self.TRAIN__OPT_BETAS__LABEL.setIndent(15)
-
-        self.gridLayout_29.addWidget(self.TRAIN__OPT_BETAS__LABEL, 8, 0, 1, 1)
-
-        self.TRAIN__OPTIMIZER__INPUT = QComboBox(self.frame_28)
-        self.TRAIN__OPTIMIZER__INPUT.addItem("")
-        self.TRAIN__OPTIMIZER__INPUT.addItem("")
-        self.TRAIN__OPTIMIZER__INPUT.addItem("")
-        self.TRAIN__OPTIMIZER__INPUT.setObjectName(u"TRAIN__OPTIMIZER__INPUT")
-        self.TRAIN__OPTIMIZER__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__OPTIMIZER__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__OPTIMIZER__INPUT.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.TRAIN__OPTIMIZER__INPUT, 0, 2, 1, 1)
-
-        self.TRAIN__W_DECAY__INFO = QPushButton(self.frame_28)
-        self.TRAIN__W_DECAY__INFO.setObjectName(u"TRAIN__W_DECAY__INFO")
-        self.TRAIN__W_DECAY__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__W_DECAY__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__W_DECAY__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__W_DECAY__INFO, 7, 1, 1, 1)
-
-        self.TRAIN__OPT_BETAS__INPUT = QLineEdit(self.frame_28)
-        self.TRAIN__OPT_BETAS__INPUT.setObjectName(u"TRAIN__OPT_BETAS__INPUT")
-        self.TRAIN__OPT_BETAS__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__OPT_BETAS__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__OPT_BETAS__INPUT.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.TRAIN__OPT_BETAS__INPUT, 8, 2, 1, 1)
-
-        self.TRAIN__PROFILER__INFO = QPushButton(self.frame_28)
-        self.TRAIN__PROFILER__INFO.setObjectName(u"TRAIN__PROFILER__INFO")
-        self.TRAIN__PROFILER__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__PROFILER__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__PROFILER__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__PROFILER__INFO, 24, 1, 1, 1)
-
-        self.label_143 = QLabel(self.frame_28)
-        self.label_143.setObjectName(u"label_143")
-        self.label_143.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.label_143, 0, 0, 1, 1)
-
-        self.LOSS__TYPE__INFO = QPushButton(self.frame_28)
-        self.LOSS__TYPE__INFO.setObjectName(u"LOSS__TYPE__INFO")
-        self.LOSS__TYPE__INFO.setMinimumSize(QSize(30, 30))
-        self.LOSS__TYPE__INFO.setMaximumSize(QSize(30, 30))
-        self.LOSS__TYPE__INFO.setFont(font1)
-        self.LOSS__TYPE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.LOSS__TYPE__INFO, 1, 1, 1, 1)
-
-        self.lr_schel_min_lr_label = QLabel(self.frame_28)
-        self.lr_schel_min_lr_label.setObjectName(u"lr_schel_min_lr_label")
-        self.lr_schel_min_lr_label.setFont(font1)
-        self.lr_schel_min_lr_label.setIndent(15)
-
-        self.gridLayout_29.addWidget(self.lr_schel_min_lr_label, 16, 0, 1, 1)
-
-        self.MODEL__SAVE_CKPT_FREQ__INFO = QPushButton(self.frame_28)
-        self.MODEL__SAVE_CKPT_FREQ__INFO.setObjectName(u"MODEL__SAVE_CKPT_FREQ__INFO")
-        self.MODEL__SAVE_CKPT_FREQ__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__SAVE_CKPT_FREQ__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__SAVE_CKPT_FREQ__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.MODEL__SAVE_CKPT_FREQ__INFO, 12, 1, 1, 1)
-
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO = QPushButton(self.frame_28)
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO")
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO, 21, 1, 1, 1)
-
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT = QComboBox(self.frame_28)
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT.addItem("")
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT.addItem("")
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT.addItem("")
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT.addItem("")
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__NAME__INPUT")
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__NAME__INPUT, 14, 2, 1, 1)
-
-        self.LOSS__TYPE__INPUT = QComboBox(self.frame_28)
-        self.LOSS__TYPE__INPUT.setObjectName(u"LOSS__TYPE__INPUT")
-        self.LOSS__TYPE__INPUT.setMinimumSize(QSize(200, 30))
-        self.LOSS__TYPE__INPUT.setMaximumSize(QSize(200, 30))
-        self.LOSS__TYPE__INPUT.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.LOSS__TYPE__INPUT, 1, 2, 1, 1)
-
-        self.LOSS__WEIGHTS__INPUT = QLineEdit(self.frame_28)
-        self.LOSS__WEIGHTS__INPUT.setObjectName(u"LOSS__WEIGHTS__INPUT")
-        self.LOSS__WEIGHTS__INPUT.setMinimumSize(QSize(200, 30))
-        self.LOSS__WEIGHTS__INPUT.setMaximumSize(QSize(200, 30))
-        self.LOSS__WEIGHTS__INPUT.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.LOSS__WEIGHTS__INPUT, 2, 2, 1, 1)
-
-        self.LOSS__WEIGHTS__LABEL = QLabel(self.frame_28)
-        self.LOSS__WEIGHTS__LABEL.setObjectName(u"LOSS__WEIGHTS__LABEL")
-        self.LOSS__WEIGHTS__LABEL.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.LOSS__WEIGHTS__LABEL, 2, 0, 1, 1)
-
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT = QLineEdit(self.frame_28)
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__MIN_LR__INPUT")
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT, 16, 2, 1, 1)
-
-        self.TRAIN__OPT_BETAS__INFO = QPushButton(self.frame_28)
-        self.TRAIN__OPT_BETAS__INFO.setObjectName(u"TRAIN__OPT_BETAS__INFO")
-        self.TRAIN__OPT_BETAS__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__OPT_BETAS__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__OPT_BETAS__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__OPT_BETAS__INFO, 8, 1, 1, 1)
-
-        self.TRAIN__BATCH_SIZE__CALCULATION__INFO = QPushButton(self.frame_28)
-        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setObjectName(u"TRAIN__BATCH_SIZE__CALCULATION__INFO")
-        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setFont(font1)
-        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__CALCULATION__INFO, 9, 1, 1, 1)
-
-        self.TRAIN__LR__INPUT = QLineEdit(self.frame_28)
-        self.TRAIN__LR__INPUT.setObjectName(u"TRAIN__LR__INPUT")
-        self.TRAIN__LR__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__LR__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__LR__INPUT.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.TRAIN__LR__INPUT, 6, 2, 1, 1)
-
-        self.TRAIN__METRICS__INFO = QPushButton(self.frame_28)
-        self.TRAIN__METRICS__INFO.setObjectName(u"TRAIN__METRICS__INFO")
-        self.TRAIN__METRICS__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__METRICS__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__METRICS__INFO.setFont(font1)
-        self.TRAIN__METRICS__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__METRICS__INFO, 4, 1, 1, 1)
-
-        self.TRAIN__W_DECAY__INPUT = QLineEdit(self.frame_28)
-        self.TRAIN__W_DECAY__INPUT.setObjectName(u"TRAIN__W_DECAY__INPUT")
-        self.TRAIN__W_DECAY__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__W_DECAY__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__W_DECAY__INPUT.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.TRAIN__W_DECAY__INPUT, 7, 2, 1, 1)
-
-        self.TRAIN__PROFILER_BATCH_RANGE__INFO = QPushButton(self.frame_28)
-        self.TRAIN__PROFILER_BATCH_RANGE__INFO.setObjectName(u"TRAIN__PROFILER_BATCH_RANGE__INFO")
-        self.TRAIN__PROFILER_BATCH_RANGE__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__PROFILER_BATCH_RANGE__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__PROFILER_BATCH_RANGE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__PROFILER_BATCH_RANGE__INFO, 27, 1, 1, 1)
-
-        self.TRAIN__PROFILER__INPUT = QComboBox(self.frame_28)
-        self.TRAIN__PROFILER__INPUT.addItem("")
-        self.TRAIN__PROFILER__INPUT.addItem("")
-        self.TRAIN__PROFILER__INPUT.setObjectName(u"TRAIN__PROFILER__INPUT")
-        self.TRAIN__PROFILER__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__PROFILER__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__PROFILER__INPUT.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.TRAIN__PROFILER__INPUT, 24, 2, 1, 1)
-
-        self.TRAIN__VERBOSE__INFO = QPushButton(self.frame_28)
-        self.TRAIN__VERBOSE__INFO.setObjectName(u"TRAIN__VERBOSE__INFO")
-        self.TRAIN__VERBOSE__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__VERBOSE__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__VERBOSE__INFO.setFont(font9)
-        self.TRAIN__VERBOSE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__VERBOSE__INFO, 29, 1, 1, 1)
-
-        self.LOSS__WEIGHTS__INFO = QPushButton(self.frame_28)
-        self.LOSS__WEIGHTS__INFO.setObjectName(u"LOSS__WEIGHTS__INFO")
-        self.LOSS__WEIGHTS__INFO.setMinimumSize(QSize(30, 30))
-        self.LOSS__WEIGHTS__INFO.setMaximumSize(QSize(30, 30))
-        self.LOSS__WEIGHTS__INFO.setFont(font1)
-        self.LOSS__WEIGHTS__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.LOSS__WEIGHTS__INFO, 2, 1, 1, 1)
-
-        self.label_151 = QLabel(self.frame_28)
-        self.label_151.setObjectName(u"label_151")
-        self.label_151.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.label_151, 6, 0, 1, 1)
-
-        self.adamw_weight_decay_label = QLabel(self.frame_28)
-        self.adamw_weight_decay_label.setObjectName(u"adamw_weight_decay_label")
-        self.adamw_weight_decay_label.setFont(font1)
-        self.adamw_weight_decay_label.setIndent(15)
-
-        self.gridLayout_29.addWidget(self.adamw_weight_decay_label, 7, 0, 1, 1)
-
-        self.TRAIN__VERBOSE__LABEL = QLabel(self.frame_28)
-        self.TRAIN__VERBOSE__LABEL.setObjectName(u"TRAIN__VERBOSE__LABEL")
-        self.TRAIN__VERBOSE__LABEL.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.TRAIN__VERBOSE__LABEL, 29, 0, 1, 1)
-
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT = QLineEdit(self.frame_28)
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT")
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT, 19, 2, 1, 1)
-
-        self.TRAIN__OPTIMIZER__INFO = QPushButton(self.frame_28)
-        self.TRAIN__OPTIMIZER__INFO.setObjectName(u"TRAIN__OPTIMIZER__INFO")
-        self.TRAIN__OPTIMIZER__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__OPTIMIZER__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__OPTIMIZER__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__OPTIMIZER__INFO, 0, 1, 1, 1)
-
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT = QLineEdit(self.frame_28)
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT")
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT, 18, 2, 1, 1)
-
-        self.TRAIN__BATCH_SIZE__CALCULATION__INPUT = QComboBox(self.frame_28)
-        self.TRAIN__BATCH_SIZE__CALCULATION__INPUT.addItem("")
-        self.TRAIN__BATCH_SIZE__CALCULATION__INPUT.addItem("")
-        self.TRAIN__BATCH_SIZE__CALCULATION__INPUT.setObjectName(u"TRAIN__BATCH_SIZE__CALCULATION__INPUT")
-        self.TRAIN__BATCH_SIZE__CALCULATION__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__BATCH_SIZE__CALCULATION__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__BATCH_SIZE__CALCULATION__INPUT.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__CALCULATION__INPUT, 9, 2, 1, 1)
-
-        self.TRAIN__METRICS__INPUT = QLineEdit(self.frame_28)
-        self.TRAIN__METRICS__INPUT.setObjectName(u"TRAIN__METRICS__INPUT")
-        self.TRAIN__METRICS__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__METRICS__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__METRICS__INPUT.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.TRAIN__METRICS__INPUT, 4, 2, 1, 1)
-
-        self.MODEL__SAVE_CKPT_FREQ__LABEL = QLabel(self.frame_28)
-        self.MODEL__SAVE_CKPT_FREQ__LABEL.setObjectName(u"MODEL__SAVE_CKPT_FREQ__LABEL")
-        self.MODEL__SAVE_CKPT_FREQ__LABEL.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.MODEL__SAVE_CKPT_FREQ__LABEL, 12, 0, 1, 1)
-
-        self.TRAIN__PROFILER_BATCH_RANGE__INPUT = QLineEdit(self.frame_28)
-        self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setObjectName(u"TRAIN__PROFILER_BATCH_RANGE__INPUT")
-        self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.TRAIN__PROFILER_BATCH_RANGE__INPUT, 27, 2, 1, 1)
-
-        self.TRAIN__LR__INFO = QPushButton(self.frame_28)
-        self.TRAIN__LR__INFO.setObjectName(u"TRAIN__LR__INFO")
-        self.TRAIN__LR__INFO.setMinimumSize(QSize(30, 30))
-        self.TRAIN__LR__INFO.setMaximumSize(QSize(30, 30))
-        self.TRAIN__LR__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_29.addWidget(self.TRAIN__LR__INFO, 6, 1, 1, 1)
-
-        self.TRAIN__VERBOSE__INPUT = QComboBox(self.frame_28)
-        self.TRAIN__VERBOSE__INPUT.addItem("")
-        self.TRAIN__VERBOSE__INPUT.addItem("")
-        self.TRAIN__VERBOSE__INPUT.setObjectName(u"TRAIN__VERBOSE__INPUT")
-        self.TRAIN__VERBOSE__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__VERBOSE__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__VERBOSE__INPUT.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.TRAIN__VERBOSE__INPUT, 29, 2, 1, 1)
-
-        self.profiler_batch_range_label = QLabel(self.frame_28)
-        self.profiler_batch_range_label.setObjectName(u"profiler_batch_range_label")
-        self.profiler_batch_range_label.setFont(font1)
-        self.profiler_batch_range_label.setIndent(15)
-
-        self.gridLayout_29.addWidget(self.profiler_batch_range_label, 27, 0, 1, 1)
-
-        self.lr_schel_reduce_on_plat_factor_label = QLabel(self.frame_28)
-        self.lr_schel_reduce_on_plat_factor_label.setObjectName(u"lr_schel_reduce_on_plat_factor_label")
-        self.lr_schel_reduce_on_plat_factor_label.setFont(font1)
-        self.lr_schel_reduce_on_plat_factor_label.setIndent(15)
-
-        self.gridLayout_29.addWidget(self.lr_schel_reduce_on_plat_factor_label, 19, 0, 1, 1)
-
-        self.TRAIN__BATCH_SIZE__INPUT = QLineEdit(self.frame_28)
-        self.TRAIN__BATCH_SIZE__INPUT.setObjectName(u"TRAIN__BATCH_SIZE__INPUT")
-        self.TRAIN__BATCH_SIZE__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__BATCH_SIZE__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__BATCH_SIZE__INPUT.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__INPUT, 10, 2, 1, 1)
-
-        self.label_160 = QLabel(self.frame_28)
-        self.label_160.setObjectName(u"label_160")
-        self.label_160.setFont(font1)
-
-        self.gridLayout_29.addWidget(self.label_160, 24, 0, 1, 1)
-
-        self.horizontalSpacer_21 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_29.addItem(self.horizontalSpacer_21, 9, 3, 1, 1)
-
-
-        self.gridLayout_4.addWidget(self.frame_28, 25, 0, 1, 1)
-
-        self.frame_61 = QFrame(self.train_advanced_options_frame_2)
-        self.frame_61.setObjectName(u"frame_61")
-        self.frame_61.setFrameShape(QFrame.NoFrame)
-        self.frame_61.setFrameShadow(QFrame.Raised)
-        self.gridLayout_74 = QGridLayout(self.frame_61)
-        self.gridLayout_74.setObjectName(u"gridLayout_74")
-        self.gridLayout_74.setContentsMargins(0, 0, 0, 0)
-        self.horizontalSpacer_74 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_74.addItem(self.horizontalSpacer_74, 0, 3, 1, 1)
-
-        self.DATA__PREPROCESS__VAL__INPUT = QComboBox(self.frame_61)
-        self.DATA__PREPROCESS__VAL__INPUT.addItem("")
-        self.DATA__PREPROCESS__VAL__INPUT.addItem("")
-        self.DATA__PREPROCESS__VAL__INPUT.setObjectName(u"DATA__PREPROCESS__VAL__INPUT")
-        self.DATA__PREPROCESS__VAL__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__VAL__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__VAL__INPUT.setFont(font1)
-
-        self.gridLayout_74.addWidget(self.DATA__PREPROCESS__VAL__INPUT, 1, 2, 1, 1)
-
-        self.DATA__PREPROCESS__VAL__INFO = QPushButton(self.frame_61)
-        self.DATA__PREPROCESS__VAL__INFO.setObjectName(u"DATA__PREPROCESS__VAL__INFO")
-        self.DATA__PREPROCESS__VAL__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__VAL__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__VAL__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_74.addWidget(self.DATA__PREPROCESS__VAL__INFO, 1, 1, 1, 1)
-
-        self.DATA__PREPROCESS__TRAIN__INFO = QPushButton(self.frame_61)
-        self.DATA__PREPROCESS__TRAIN__INFO.setObjectName(u"DATA__PREPROCESS__TRAIN__INFO")
-        self.DATA__PREPROCESS__TRAIN__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__TRAIN__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__TRAIN__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_74.addWidget(self.DATA__PREPROCESS__TRAIN__INFO, 0, 1, 1, 1)
-
-        self.DATA__PREPROCESS__VAL__LABEL = QLabel(self.frame_61)
-        self.DATA__PREPROCESS__VAL__LABEL.setObjectName(u"DATA__PREPROCESS__VAL__LABEL")
-        self.DATA__PREPROCESS__VAL__LABEL.setFont(font1)
-
-        self.gridLayout_74.addWidget(self.DATA__PREPROCESS__VAL__LABEL, 1, 0, 1, 1)
-
-        self.DATA__PREPROCESS__TRAIN__INPUT = QComboBox(self.frame_61)
-        self.DATA__PREPROCESS__TRAIN__INPUT.addItem("")
-        self.DATA__PREPROCESS__TRAIN__INPUT.addItem("")
-        self.DATA__PREPROCESS__TRAIN__INPUT.setObjectName(u"DATA__PREPROCESS__TRAIN__INPUT")
-        self.DATA__PREPROCESS__TRAIN__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__TRAIN__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__TRAIN__INPUT.setFont(font1)
-
-        self.gridLayout_74.addWidget(self.DATA__PREPROCESS__TRAIN__INPUT, 0, 2, 1, 1)
-
-        self.DATA__PREPROCESS__TRAIN__LABEL = QLabel(self.frame_61)
-        self.DATA__PREPROCESS__TRAIN__LABEL.setObjectName(u"DATA__PREPROCESS__TRAIN__LABEL")
-        self.DATA__PREPROCESS__TRAIN__LABEL.setMaximumSize(QSize(16777215, 16777215))
-        self.DATA__PREPROCESS__TRAIN__LABEL.setFont(font1)
-
-        self.gridLayout_74.addWidget(self.DATA__PREPROCESS__TRAIN__LABEL, 0, 0, 1, 1)
-
-
-        self.gridLayout_4.addWidget(self.frame_61, 11, 0, 1, 1)
-
-        self.preprocessing_frame = QFrame(self.train_advanced_options_frame_2)
-        self.preprocessing_frame.setObjectName(u"preprocessing_frame")
-        self.preprocessing_frame.setFrameShape(QFrame.Box)
-        self.preprocessing_frame.setFrameShadow(QFrame.Raised)
-        self.gridLayout_71 = QGridLayout(self.preprocessing_frame)
-        self.gridLayout_71.setObjectName(u"gridLayout_71")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__INFO = QPushButton(self.preprocessing_frame)
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__INFO.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__INFO")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__INFO, 8, 1, 1, 1)
-
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT = QComboBox(self.preprocessing_frame)
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT.addItem("")
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT.addItem("")
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT")
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT, 14, 3, 1, 1)
-
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO = QPushButton(self.preprocessing_frame)
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO, 11, 1, 1, 1)
-
-        self.DATA__PREPROCESS__MEDIAN_BLUR__INFO = QPushButton(self.preprocessing_frame)
-        self.DATA__PREPROCESS__MEDIAN_BLUR__INFO.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__INFO")
-        self.DATA__PREPROCESS__MEDIAN_BLUR__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__MEDIAN_BLUR__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__MEDIAN_BLUR__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__INFO, 12, 1, 1, 1)
-
-        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__LABEL = QLabel(self.preprocessing_frame)
-        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__LABEL.setObjectName(u"DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__LABEL")
-        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__LABEL.setFont(font1)
-        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__LABEL.setIndent(15)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__LABEL, 21, 0, 1, 1)
-
-        self.DATA__PREPROCESS__RESIZE__LABEL = QLabel(self.preprocessing_frame)
-        self.DATA__PREPROCESS__RESIZE__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__LABEL")
-        self.DATA__PREPROCESS__RESIZE__LABEL.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__LABEL, 0, 0, 1, 1)
-
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT = QComboBox(self.preprocessing_frame)
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.addItem("")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.addItem("")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.addItem("")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.addItem("")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.addItem("")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT, 10, 3, 1, 1)
-
-        self.DATA__PREPROCESS__RESIZE__CLIP__INPUT = QComboBox(self.preprocessing_frame)
-        self.DATA__PREPROCESS__RESIZE__CLIP__INPUT.addItem("")
-        self.DATA__PREPROCESS__RESIZE__CLIP__INPUT.addItem("")
-        self.DATA__PREPROCESS__RESIZE__CLIP__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__CLIP__INPUT")
-        self.DATA__PREPROCESS__RESIZE__CLIP__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__CLIP__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__CLIP__INPUT.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__CLIP__INPUT, 5, 3, 1, 1)
-
-        self.DATA__PREPROCESS__CLAHE__INFO = QPushButton(self.preprocessing_frame)
-        self.DATA__PREPROCESS__CLAHE__INFO.setObjectName(u"DATA__PREPROCESS__CLAHE__INFO")
-        self.DATA__PREPROCESS__CLAHE__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__CLAHE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__CLAHE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__INFO, 16, 1, 1, 1)
-
-        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__LABEL = QLabel(self.preprocessing_frame)
-        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__LABEL")
-        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__LABEL.setFont(font1)
-        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__LABEL.setIndent(15)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__LABEL, 1, 0, 1, 1)
-
-        self.DATA__PREPROCESS__RESIZE__CVAL__INFO = QPushButton(self.preprocessing_frame)
-        self.DATA__PREPROCESS__RESIZE__CVAL__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__CVAL__INFO")
-        self.DATA__PREPROCESS__RESIZE__CVAL__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__CVAL__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__CVAL__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__CVAL__INFO, 4, 1, 1, 1)
-
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__INFO = QPushButton(self.preprocessing_frame)
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__INFO.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__INFO")
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__INFO, 14, 1, 1, 1)
-
-        self.DATA__PREPROCESS__CLAHE__LABEL = QLabel(self.preprocessing_frame)
-        self.DATA__PREPROCESS__CLAHE__LABEL.setObjectName(u"DATA__PREPROCESS__CLAHE__LABEL")
-        self.DATA__PREPROCESS__CLAHE__LABEL.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__LABEL, 16, 0, 1, 1)
-
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__LABEL = QLabel(self.preprocessing_frame)
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__LABEL.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__LABEL")
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__LABEL.setFont(font1)
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__LABEL.setIndent(15)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__LABEL, 15, 0, 1, 1)
-
-        self.DATA__PREPROCESS__RESIZE__MODE__INPUT = QComboBox(self.preprocessing_frame)
-        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.addItem("")
-        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.addItem("")
-        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.addItem("")
-        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.addItem("")
-        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.addItem("")
-        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__MODE__INPUT")
-        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__MODE__INPUT, 3, 3, 1, 1)
-
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT = QComboBox(self.preprocessing_frame)
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT.addItem("")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT.addItem("")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT, 8, 3, 1, 1)
-
-        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO = QPushButton(self.preprocessing_frame)
-        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO.setObjectName(u"DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO")
-        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO, 18, 1, 1, 1)
-
-        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__LABEL = QLabel(self.preprocessing_frame)
-        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__LABEL.setObjectName(u"DATA__PREPROCESS__CANNY__LOW_THRESHOLD__LABEL")
-        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__LABEL.setFont(font1)
-        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__LABEL.setIndent(15)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__LABEL, 20, 0, 1, 1)
-
-        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT = QLineEdit(self.preprocessing_frame)
-        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT")
-        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT, 1, 3, 1, 1)
-
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__LABEL = QLabel(self.preprocessing_frame)
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__LABEL.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__LABEL")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__LABEL.setFont(font1)
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__LABEL.setIndent(15)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__LABEL, 10, 0, 1, 1)
-
-        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO = QPushButton(self.preprocessing_frame)
-        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO.setObjectName(u"DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO")
-        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO, 17, 1, 1, 1)
-
-        self.DATA__PREPROCESS__RESIZE__CLIP__INFO = QPushButton(self.preprocessing_frame)
-        self.DATA__PREPROCESS__RESIZE__CLIP__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__CLIP__INFO")
-        self.DATA__PREPROCESS__RESIZE__CLIP__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__CLIP__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__CLIP__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__CLIP__INFO, 5, 1, 1, 1)
-
-        self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT = QComboBox(self.preprocessing_frame)
-        self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT.addItem("")
-        self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT.addItem("")
-        self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT")
-        self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT, 12, 3, 1, 1)
-
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT = QLineEdit(self.preprocessing_frame)
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT")
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT.setMinimumSize(QSize(500, 30))
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT.setMaximumSize(QSize(500, 30))
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT, 15, 3, 1, 1)
-
-        self.DATA__PREPROCESS__RESIZE__ORDER__INFO = QPushButton(self.preprocessing_frame)
-        self.DATA__PREPROCESS__RESIZE__ORDER__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__ORDER__INFO")
-        self.DATA__PREPROCESS__RESIZE__ORDER__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__ORDER__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__ORDER__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__ORDER__INFO, 2, 1, 1, 1)
-
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO = QPushButton(self.preprocessing_frame)
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO")
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO, 6, 1, 1, 1)
-
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT = QComboBox(self.preprocessing_frame)
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT.addItem("")
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT.addItem("")
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT")
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT, 7, 3, 1, 1)
-
-        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT = QLineEdit(self.preprocessing_frame)
-        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT.setObjectName(u"DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT")
-        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT, 18, 3, 1, 1)
-
-        self.DATA__PREPROCESS__RESIZE__INFO = QPushButton(self.preprocessing_frame)
-        self.DATA__PREPROCESS__RESIZE__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__INFO")
-        self.DATA__PREPROCESS__RESIZE__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__INFO.setMaximumSize(QSize(30, 30))
-        font11 = QFont()
-        font11.setFamilies([u"URW Gothic [urw]"])
-        self.DATA__PREPROCESS__RESIZE__INFO.setFont(font11)
-        self.DATA__PREPROCESS__RESIZE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__INFO, 0, 1, 1, 1)
-
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT = QLineEdit(self.preprocessing_frame)
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT, 9, 3, 1, 1)
-
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT = QLineEdit(self.preprocessing_frame)
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT, 11, 3, 1, 1)
-
-        self.DATA__PREPROCESS__CLAHE__ENABLE__INPUT = QComboBox(self.preprocessing_frame)
-        self.DATA__PREPROCESS__CLAHE__ENABLE__INPUT.addItem("")
-        self.DATA__PREPROCESS__CLAHE__ENABLE__INPUT.addItem("")
-        self.DATA__PREPROCESS__CLAHE__ENABLE__INPUT.setObjectName(u"DATA__PREPROCESS__CLAHE__ENABLE__INPUT")
-        self.DATA__PREPROCESS__CLAHE__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__CLAHE__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__CLAHE__ENABLE__INPUT.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__ENABLE__INPUT, 16, 3, 1, 1)
-
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__LABEL = QLabel(self.preprocessing_frame)
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__ANTI_ALIASING__LABEL")
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__LABEL.setFont(font1)
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__LABEL.setIndent(15)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__LABEL, 7, 0, 1, 1)
-
-        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT = QLineEdit(self.preprocessing_frame)
-        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT.setObjectName(u"DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT")
-        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT, 21, 3, 1, 1)
-
-        self.DATA__PREPROCESS__MEDIAN_BLUR__LABEL = QLabel(self.preprocessing_frame)
-        self.DATA__PREPROCESS__MEDIAN_BLUR__LABEL.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__LABEL")
-        self.DATA__PREPROCESS__MEDIAN_BLUR__LABEL.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__LABEL, 12, 0, 1, 1)
-
-        self.DATA__PREPROCESS__RESIZE__MODE__INFO = QPushButton(self.preprocessing_frame)
-        self.DATA__PREPROCESS__RESIZE__MODE__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__MODE__INFO")
-        self.DATA__PREPROCESS__RESIZE__MODE__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__MODE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__MODE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__MODE__INFO, 3, 1, 1, 1)
-
-        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO = QPushButton(self.preprocessing_frame)
-        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO")
-        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO, 1, 1, 1, 1)
-
-        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT = QComboBox(self.preprocessing_frame)
-        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.addItem("")
-        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.addItem("")
-        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.addItem("")
-        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.addItem("")
-        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.addItem("")
-        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.addItem("")
-        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__ORDER__INPUT")
-        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__ORDER__INPUT, 2, 3, 1, 1)
-
-        self.DATA__PREPROCESS__CANNY__LABEL = QLabel(self.preprocessing_frame)
-        self.DATA__PREPROCESS__CANNY__LABEL.setObjectName(u"DATA__PREPROCESS__CANNY__LABEL")
-        self.DATA__PREPROCESS__CANNY__LABEL.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__LABEL, 19, 0, 1, 1)
-
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO = QPushButton(self.preprocessing_frame)
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO, 9, 1, 1, 1)
-
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__LABEL = QLabel(self.preprocessing_frame)
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__LABEL")
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__LABEL.setFont(font1)
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__LABEL.setIndent(15)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__LABEL, 6, 0, 1, 1)
-
-        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__LABEL = QLabel(self.preprocessing_frame)
-        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__LABEL.setObjectName(u"DATA__PREPROCESS__CLAHE__KERNEL_SIZE__LABEL")
-        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__LABEL.setFont(font1)
-        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__LABEL.setIndent(15)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__LABEL, 17, 0, 1, 1)
-
-        self.DATA__PREPROCESS__RESIZE__ENABLE__INPUT = QComboBox(self.preprocessing_frame)
-        self.DATA__PREPROCESS__RESIZE__ENABLE__INPUT.addItem("")
-        self.DATA__PREPROCESS__RESIZE__ENABLE__INPUT.addItem("")
-        self.DATA__PREPROCESS__RESIZE__ENABLE__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__ENABLE__INPUT")
-        self.DATA__PREPROCESS__RESIZE__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__ENABLE__INPUT.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__ENABLE__INPUT, 0, 3, 1, 1)
-
-        self.DATA__PREPROCESS__RESIZE__CVAL__LABEL = QLabel(self.preprocessing_frame)
-        self.DATA__PREPROCESS__RESIZE__CVAL__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__CVAL__LABEL")
-        self.DATA__PREPROCESS__RESIZE__CVAL__LABEL.setFont(font1)
-        self.DATA__PREPROCESS__RESIZE__CVAL__LABEL.setIndent(15)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__CVAL__LABEL, 4, 0, 1, 1)
-
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO = QPushButton(self.preprocessing_frame)
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO")
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO, 15, 1, 1, 1)
-
-        self.DATA__PREPROCESS__RESIZE__CVAL__INPUT = QLineEdit(self.preprocessing_frame)
-        self.DATA__PREPROCESS__RESIZE__CVAL__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__CVAL__INPUT")
-        self.DATA__PREPROCESS__RESIZE__CVAL__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__CVAL__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__CVAL__INPUT.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__CVAL__INPUT, 4, 3, 1, 1)
-
-        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT = QLineEdit(self.preprocessing_frame)
-        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT.setObjectName(u"DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT")
-        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT, 20, 3, 1, 1)
-
-        self.DATA__PREPROCESS__CANNY__ENABLE__INPUT = QComboBox(self.preprocessing_frame)
-        self.DATA__PREPROCESS__CANNY__ENABLE__INPUT.addItem("")
-        self.DATA__PREPROCESS__CANNY__ENABLE__INPUT.addItem("")
-        self.DATA__PREPROCESS__CANNY__ENABLE__INPUT.setObjectName(u"DATA__PREPROCESS__CANNY__ENABLE__INPUT")
-        self.DATA__PREPROCESS__CANNY__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__CANNY__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__CANNY__ENABLE__INPUT.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__ENABLE__INPUT, 19, 3, 1, 1)
-
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__LABEL = QLabel(self.preprocessing_frame)
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__LABEL.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__LABEL")
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__LABEL.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__LABEL, 14, 0, 1, 1)
-
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__LABEL = QLabel(self.preprocessing_frame)
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__LABEL.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__LABEL")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__LABEL.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__LABEL, 8, 0, 1, 1)
-
-        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__LABEL = QLabel(self.preprocessing_frame)
-        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__LABEL.setObjectName(u"DATA__PREPROCESS__CLAHE__CLIP_LIMIT__LABEL")
-        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__LABEL.setFont(font1)
-        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__LABEL.setIndent(15)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__LABEL, 18, 0, 1, 1)
-
-        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT = QLineEdit(self.preprocessing_frame)
-        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT.setObjectName(u"DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT")
-        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT, 17, 3, 1, 1)
-
-        self.DATA__PREPROCESS__CANNY__INFO = QPushButton(self.preprocessing_frame)
-        self.DATA__PREPROCESS__CANNY__INFO.setObjectName(u"DATA__PREPROCESS__CANNY__INFO")
-        self.DATA__PREPROCESS__CANNY__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__CANNY__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__CANNY__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__INFO, 19, 1, 1, 1)
-
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO = QPushButton(self.preprocessing_frame)
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO, 10, 1, 1, 1)
-
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__LABEL = QLabel(self.preprocessing_frame)
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__LABEL.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__LABEL")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__LABEL.setFont(font1)
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__LABEL.setIndent(15)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__LABEL, 11, 0, 1, 1)
-
-        self.DATA__PREPROCESS__RESIZE__ORDER__LABEL = QLabel(self.preprocessing_frame)
-        self.DATA__PREPROCESS__RESIZE__ORDER__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__ORDER__LABEL")
-        self.DATA__PREPROCESS__RESIZE__ORDER__LABEL.setFont(font1)
-        self.DATA__PREPROCESS__RESIZE__ORDER__LABEL.setIndent(15)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__ORDER__LABEL, 2, 0, 1, 1)
-
-        self.DATA__PREPROCESS__RESIZE__CLIP__LABEL = QLabel(self.preprocessing_frame)
-        self.DATA__PREPROCESS__RESIZE__CLIP__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__CLIP__LABEL")
-        self.DATA__PREPROCESS__RESIZE__CLIP__LABEL.setFont(font1)
-        self.DATA__PREPROCESS__RESIZE__CLIP__LABEL.setIndent(15)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__CLIP__LABEL, 5, 0, 1, 1)
-
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO = QPushButton(self.preprocessing_frame)
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO")
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO, 7, 1, 1, 1)
-
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__LABEL = QLabel(self.preprocessing_frame)
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__LABEL.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__LABEL")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__LABEL.setFont(font1)
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__LABEL.setIndent(15)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__LABEL, 9, 0, 1, 1)
-
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN = QPushButton(self.preprocessing_frame)
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN")
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN.setMaximumSize(QSize(130, 30))
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN, 15, 4, 1, 1)
-
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT = QComboBox(self.preprocessing_frame)
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT.addItem("")
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT.addItem("")
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT")
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT, 6, 3, 1, 1)
-
-        self.horizontalSpacer_75 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_71.addItem(self.horizontalSpacer_75, 0, 4, 1, 1)
-
-        self.DATA__PREPROCESS__RESIZE__MODE__LABEL = QLabel(self.preprocessing_frame)
-        self.DATA__PREPROCESS__RESIZE__MODE__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__MODE__LABEL")
-        self.DATA__PREPROCESS__RESIZE__MODE__LABEL.setFont(font1)
-        self.DATA__PREPROCESS__RESIZE__MODE__LABEL.setIndent(15)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__MODE__LABEL, 3, 0, 1, 1)
-
-        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO = QPushButton(self.preprocessing_frame)
-        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO.setObjectName(u"DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO")
-        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO, 20, 1, 1, 1)
-
-        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO = QPushButton(self.preprocessing_frame)
-        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO.setObjectName(u"DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO")
-        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO, 21, 1, 1, 1)
-
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL = QLabel(self.preprocessing_frame)
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL")
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL.setFont(font1)
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL.setIndent(15)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL, 13, 0, 1, 1)
-
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO = QPushButton(self.preprocessing_frame)
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO")
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setFont(font1)
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO, 13, 1, 1, 1)
-
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT = QLineEdit(self.preprocessing_frame)
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT")
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT.setFont(font1)
-
-        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT, 13, 3, 1, 1)
-
-
-        self.gridLayout_4.addWidget(self.preprocessing_frame, 13, 0, 1, 1)
-
-        self.label_3 = QLabel(self.train_advanced_options_frame_2)
-        self.label_3.setObjectName(u"label_3")
-        self.label_3.setMaximumSize(QSize(150, 16777215))
-        self.label_3.setFont(font1)
-
-        self.gridLayout_4.addWidget(self.label_3, 1, 0, 1, 1)
-
-        self.label_30 = QLabel(self.train_advanced_options_frame_2)
-        self.label_30.setObjectName(u"label_30")
-        self.label_30.setMaximumSize(QSize(100, 16777215))
-        self.label_30.setFont(font1)
-
-        self.gridLayout_4.addWidget(self.label_30, 14, 0, 1, 1)
-
         self.da_frame = QFrame(self.train_advanced_options_frame_2)
         self.da_frame.setObjectName(u"da_frame")
         self.da_frame.setMinimumSize(QSize(0, 0))
@@ -7124,7 +6356,11 @@ class Ui_MainWindow(object):
         self.gridLayout_25.addWidget(self.AUGMENTOR__CBLUR_SIZE__INFO, 47, 1, 1, 1)
 
 
-        self.gridLayout_4.addWidget(self.da_frame, 27, 0, 1, 1)
+        self.gridLayout_4.addWidget(self.da_frame, 21, 0, 1, 1)
+
+        self.verticalSpacer_6 = QSpacerItem(20, 165, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.gridLayout_4.addItem(self.verticalSpacer_6, 23, 0, 1, 1)
 
         self.frame_11 = QFrame(self.train_advanced_options_frame_2)
         self.frame_11.setObjectName(u"frame_11")
@@ -7339,21 +6575,1298 @@ class Ui_MainWindow(object):
 
         self.gridLayout_4.addWidget(self.frame_11, 2, 0, 1, 1)
 
-        self.convnext_label = QLabel(self.train_advanced_options_frame_2)
-        self.convnext_label.setObjectName(u"convnext_label")
-        self.convnext_label.setFont(font1)
+        self.label_3 = QLabel(self.train_advanced_options_frame_2)
+        self.label_3.setObjectName(u"label_3")
+        self.label_3.setMaximumSize(QSize(150, 16777215))
+        self.label_3.setFont(font1)
 
-        self.gridLayout_4.addWidget(self.convnext_label, 22, 0, 1, 1)
+        self.gridLayout_4.addWidget(self.label_3, 1, 0, 1, 1)
 
-        self.verticalSpacer_6 = QSpacerItem(20, 165, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.label_31 = QLabel(self.train_advanced_options_frame_2)
+        self.label_31.setObjectName(u"label_31")
+        self.label_31.setMaximumSize(QSize(150, 16777215))
+        self.label_31.setFont(font1)
 
-        self.gridLayout_4.addItem(self.verticalSpacer_6, 29, 0, 1, 1)
+        self.gridLayout_4.addWidget(self.label_31, 16, 0, 1, 1)
 
-        self.unet_model_like_label = QLabel(self.train_advanced_options_frame_2)
-        self.unet_model_like_label.setObjectName(u"unet_model_like_label")
-        self.unet_model_like_label.setFont(font1)
+        self.frame_14 = QFrame(self.train_advanced_options_frame_2)
+        self.frame_14.setObjectName(u"frame_14")
+        self.frame_14.setFont(font1)
+        self.frame_14.setFrameShape(QFrame.Box)
+        self.frame_14.setFrameShadow(QFrame.Raised)
+        self.gridLayout_15 = QGridLayout(self.frame_14)
+        self.gridLayout_15.setObjectName(u"gridLayout_15")
+        self.DATA__CHECK_GENERATORS__INPUT = QComboBox(self.frame_14)
+        self.DATA__CHECK_GENERATORS__INPUT.addItem("")
+        self.DATA__CHECK_GENERATORS__INPUT.addItem("")
+        self.DATA__CHECK_GENERATORS__INPUT.setObjectName(u"DATA__CHECK_GENERATORS__INPUT")
+        self.DATA__CHECK_GENERATORS__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__CHECK_GENERATORS__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__CHECK_GENERATORS__INPUT.setFont(font1)
 
-        self.gridLayout_4.addWidget(self.unet_model_like_label, 18, 0, 1, 1)
+        self.gridLayout_15.addWidget(self.DATA__CHECK_GENERATORS__INPUT, 10, 4, 1, 1)
+
+        self.check_gen_label = QLabel(self.frame_14)
+        self.check_gen_label.setObjectName(u"check_gen_label")
+        self.check_gen_label.setMaximumSize(QSize(16777215, 16777215))
+        self.check_gen_label.setFont(font1)
+
+        self.gridLayout_15.addWidget(self.check_gen_label, 10, 1, 1, 1)
+
+        self.horizontalSpacer_8 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_15.addItem(self.horizontalSpacer_8, 3, 5, 1, 1)
+
+        self.label_7 = QLabel(self.frame_14)
+        self.label_7.setObjectName(u"label_7")
+        self.label_7.setMaximumSize(QSize(16777215, 16777215))
+        self.label_7.setFont(font1)
+
+        self.gridLayout_15.addWidget(self.label_7, 3, 1, 1, 2)
+
+        self.DATA__EXTRACT_RANDOM_PATCH__INFO = QPushButton(self.frame_14)
+        self.DATA__EXTRACT_RANDOM_PATCH__INFO.setObjectName(u"DATA__EXTRACT_RANDOM_PATCH__INFO")
+        self.DATA__EXTRACT_RANDOM_PATCH__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__EXTRACT_RANDOM_PATCH__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__EXTRACT_RANDOM_PATCH__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_15.addWidget(self.DATA__EXTRACT_RANDOM_PATCH__INFO, 3, 3, 1, 1)
+
+        self.DATA__EXTRACT_RANDOM_PATCH__INPUT = QComboBox(self.frame_14)
+        self.DATA__EXTRACT_RANDOM_PATCH__INPUT.addItem("")
+        self.DATA__EXTRACT_RANDOM_PATCH__INPUT.addItem("")
+        self.DATA__EXTRACT_RANDOM_PATCH__INPUT.setObjectName(u"DATA__EXTRACT_RANDOM_PATCH__INPUT")
+        self.DATA__EXTRACT_RANDOM_PATCH__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__EXTRACT_RANDOM_PATCH__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__EXTRACT_RANDOM_PATCH__INPUT.setFont(font1)
+
+        self.gridLayout_15.addWidget(self.DATA__EXTRACT_RANDOM_PATCH__INPUT, 3, 4, 1, 1)
+
+        self.DATA__CHECK_GENERATORS__INFO = QPushButton(self.frame_14)
+        self.DATA__CHECK_GENERATORS__INFO.setObjectName(u"DATA__CHECK_GENERATORS__INFO")
+        self.DATA__CHECK_GENERATORS__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__CHECK_GENERATORS__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__CHECK_GENERATORS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_15.addWidget(self.DATA__CHECK_GENERATORS__INFO, 10, 3, 1, 1)
+
+
+        self.gridLayout_4.addWidget(self.frame_14, 10, 0, 1, 1)
+
+        self.label_42 = QLabel(self.train_advanced_options_frame_2)
+        self.label_42.setObjectName(u"label_42")
+        self.label_42.setFont(font1)
+
+        self.gridLayout_4.addWidget(self.label_42, 18, 0, 1, 1)
+
+        self.frame_12 = QFrame(self.train_advanced_options_frame_2)
+        self.frame_12.setObjectName(u"frame_12")
+        self.frame_12.setFont(font1)
+        self.frame_12.setFrameShape(QFrame.Box)
+        self.frame_12.setFrameShadow(QFrame.Raised)
+        self.gridLayout_13 = QGridLayout(self.frame_12)
+        self.gridLayout_13.setObjectName(u"gridLayout_13")
+        self.number_of_epochs_label = QLabel(self.frame_12)
+        self.number_of_epochs_label.setObjectName(u"number_of_epochs_label")
+        self.number_of_epochs_label.setFont(font1)
+
+        self.gridLayout_13.addWidget(self.number_of_epochs_label, 1, 0, 1, 1)
+
+        self.number_of_epochs_info = QPushButton(self.frame_12)
+        self.number_of_epochs_info.setObjectName(u"number_of_epochs_info")
+        self.number_of_epochs_info.setMinimumSize(QSize(30, 30))
+        self.number_of_epochs_info.setMaximumSize(QSize(30, 30))
+        self.number_of_epochs_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_13.addWidget(self.number_of_epochs_info, 1, 1, 1, 1)
+
+        self.horizontalSpacer_6 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_13.addItem(self.horizontalSpacer_6, 2, 3, 1, 1)
+
+        self.TRAIN__PATIENCE__INPUT = QLineEdit(self.frame_12)
+        self.TRAIN__PATIENCE__INPUT.setObjectName(u"TRAIN__PATIENCE__INPUT")
+        self.TRAIN__PATIENCE__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__PATIENCE__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__PATIENCE__INPUT.setFont(font1)
+
+        self.gridLayout_13.addWidget(self.TRAIN__PATIENCE__INPUT, 2, 2, 1, 1)
+
+        self.patience_info = QPushButton(self.frame_12)
+        self.patience_info.setObjectName(u"patience_info")
+        self.patience_info.setMinimumSize(QSize(30, 30))
+        self.patience_info.setMaximumSize(QSize(30, 30))
+        self.patience_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_13.addWidget(self.patience_info, 2, 1, 1, 1)
+
+        self.patience_label = QLabel(self.frame_12)
+        self.patience_label.setObjectName(u"patience_label")
+        self.patience_label.setFont(font1)
+
+        self.gridLayout_13.addWidget(self.patience_label, 2, 0, 1, 1)
+
+        self.TRAIN__EPOCHS__INPUT = QLineEdit(self.frame_12)
+        self.TRAIN__EPOCHS__INPUT.setObjectName(u"TRAIN__EPOCHS__INPUT")
+        self.TRAIN__EPOCHS__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__EPOCHS__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__EPOCHS__INPUT.setFont(font1)
+
+        self.gridLayout_13.addWidget(self.TRAIN__EPOCHS__INPUT, 1, 2, 1, 1)
+
+
+        self.gridLayout_4.addWidget(self.frame_12, 7, 0, 1, 1)
+
+        self.preprocessing_frame = QFrame(self.train_advanced_options_frame_2)
+        self.preprocessing_frame.setObjectName(u"preprocessing_frame")
+        self.preprocessing_frame.setFrameShape(QFrame.Box)
+        self.preprocessing_frame.setFrameShadow(QFrame.Raised)
+        self.gridLayout_71 = QGridLayout(self.preprocessing_frame)
+        self.gridLayout_71.setObjectName(u"gridLayout_71")
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__INFO = QPushButton(self.preprocessing_frame)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__INFO.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__INFO")
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__INFO, 8, 1, 1, 1)
+
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT = QComboBox(self.preprocessing_frame)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT.addItem("")
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT.addItem("")
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT")
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT, 14, 3, 1, 1)
+
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO = QPushButton(self.preprocessing_frame)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO")
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO, 11, 1, 1, 1)
+
+        self.DATA__PREPROCESS__MEDIAN_BLUR__INFO = QPushButton(self.preprocessing_frame)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__INFO.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__INFO")
+        self.DATA__PREPROCESS__MEDIAN_BLUR__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__MEDIAN_BLUR__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__MEDIAN_BLUR__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__INFO, 12, 1, 1, 1)
+
+        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__LABEL = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__LABEL.setObjectName(u"DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__LABEL")
+        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__LABEL.setFont(font1)
+        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__LABEL.setIndent(15)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__LABEL, 21, 0, 1, 1)
+
+        self.DATA__PREPROCESS__RESIZE__LABEL = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__LABEL")
+        self.DATA__PREPROCESS__RESIZE__LABEL.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__LABEL, 0, 0, 1, 1)
+
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT = QComboBox(self.preprocessing_frame)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.addItem("")
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.addItem("")
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.addItem("")
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.addItem("")
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.addItem("")
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT")
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT, 10, 3, 1, 1)
+
+        self.DATA__PREPROCESS__RESIZE__CLIP__INPUT = QComboBox(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__CLIP__INPUT.addItem("")
+        self.DATA__PREPROCESS__RESIZE__CLIP__INPUT.addItem("")
+        self.DATA__PREPROCESS__RESIZE__CLIP__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__CLIP__INPUT")
+        self.DATA__PREPROCESS__RESIZE__CLIP__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__RESIZE__CLIP__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__RESIZE__CLIP__INPUT.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__CLIP__INPUT, 5, 3, 1, 1)
+
+        self.DATA__PREPROCESS__CLAHE__INFO = QPushButton(self.preprocessing_frame)
+        self.DATA__PREPROCESS__CLAHE__INFO.setObjectName(u"DATA__PREPROCESS__CLAHE__INFO")
+        self.DATA__PREPROCESS__CLAHE__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__CLAHE__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__CLAHE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__INFO, 16, 1, 1, 1)
+
+        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__LABEL = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__LABEL")
+        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__LABEL.setFont(font1)
+        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__LABEL.setIndent(15)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__LABEL, 1, 0, 1, 1)
+
+        self.DATA__PREPROCESS__RESIZE__CVAL__INFO = QPushButton(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__CVAL__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__CVAL__INFO")
+        self.DATA__PREPROCESS__RESIZE__CVAL__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__RESIZE__CVAL__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__RESIZE__CVAL__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__CVAL__INFO, 4, 1, 1, 1)
+
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__INFO = QPushButton(self.preprocessing_frame)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__INFO.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__INFO")
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__INFO, 14, 1, 1, 1)
+
+        self.DATA__PREPROCESS__CLAHE__LABEL = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__CLAHE__LABEL.setObjectName(u"DATA__PREPROCESS__CLAHE__LABEL")
+        self.DATA__PREPROCESS__CLAHE__LABEL.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__LABEL, 16, 0, 1, 1)
+
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__LABEL = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__LABEL.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__LABEL")
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__LABEL.setFont(font1)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__LABEL.setIndent(15)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__LABEL, 15, 0, 1, 1)
+
+        self.DATA__PREPROCESS__RESIZE__MODE__INPUT = QComboBox(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.addItem("")
+        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.addItem("")
+        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.addItem("")
+        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.addItem("")
+        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.addItem("")
+        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__MODE__INPUT")
+        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__MODE__INPUT, 3, 3, 1, 1)
+
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT = QComboBox(self.preprocessing_frame)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT.addItem("")
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT.addItem("")
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT")
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT, 8, 3, 1, 1)
+
+        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO = QPushButton(self.preprocessing_frame)
+        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO.setObjectName(u"DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO")
+        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO, 18, 1, 1, 1)
+
+        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__LABEL = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__LABEL.setObjectName(u"DATA__PREPROCESS__CANNY__LOW_THRESHOLD__LABEL")
+        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__LABEL.setFont(font1)
+        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__LABEL.setIndent(15)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__LABEL, 20, 0, 1, 1)
+
+        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT = QLineEdit(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT")
+        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT, 1, 3, 1, 1)
+
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__LABEL = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__LABEL.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__LABEL")
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__LABEL.setFont(font1)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__LABEL.setIndent(15)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__LABEL, 10, 0, 1, 1)
+
+        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO = QPushButton(self.preprocessing_frame)
+        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO.setObjectName(u"DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO")
+        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO, 17, 1, 1, 1)
+
+        self.DATA__PREPROCESS__RESIZE__CLIP__INFO = QPushButton(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__CLIP__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__CLIP__INFO")
+        self.DATA__PREPROCESS__RESIZE__CLIP__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__RESIZE__CLIP__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__RESIZE__CLIP__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__CLIP__INFO, 5, 1, 1, 1)
+
+        self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT = QComboBox(self.preprocessing_frame)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT.addItem("")
+        self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT.addItem("")
+        self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT")
+        self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT, 12, 3, 1, 1)
+
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT = QLineEdit(self.preprocessing_frame)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT")
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT.setMinimumSize(QSize(500, 30))
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT.setMaximumSize(QSize(500, 30))
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INPUT, 15, 3, 1, 1)
+
+        self.DATA__PREPROCESS__RESIZE__ORDER__INFO = QPushButton(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__ORDER__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__ORDER__INFO")
+        self.DATA__PREPROCESS__RESIZE__ORDER__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__RESIZE__ORDER__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__RESIZE__ORDER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__ORDER__INFO, 2, 1, 1, 1)
+
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO = QPushButton(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO")
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO, 6, 1, 1, 1)
+
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT = QComboBox(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT.addItem("")
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT.addItem("")
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT")
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT, 7, 3, 1, 1)
+
+        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT = QLineEdit(self.preprocessing_frame)
+        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT.setObjectName(u"DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT")
+        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT, 18, 3, 1, 1)
+
+        self.DATA__PREPROCESS__RESIZE__INFO = QPushButton(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__INFO")
+        self.DATA__PREPROCESS__RESIZE__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__RESIZE__INFO.setMaximumSize(QSize(30, 30))
+        font11 = QFont()
+        font11.setFamilies([u"URW Gothic [urw]"])
+        self.DATA__PREPROCESS__RESIZE__INFO.setFont(font11)
+        self.DATA__PREPROCESS__RESIZE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__INFO, 0, 1, 1, 1)
+
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT = QLineEdit(self.preprocessing_frame)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT")
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT, 9, 3, 1, 1)
+
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT = QLineEdit(self.preprocessing_frame)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT")
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INPUT, 11, 3, 1, 1)
+
+        self.DATA__PREPROCESS__CLAHE__ENABLE__INPUT = QComboBox(self.preprocessing_frame)
+        self.DATA__PREPROCESS__CLAHE__ENABLE__INPUT.addItem("")
+        self.DATA__PREPROCESS__CLAHE__ENABLE__INPUT.addItem("")
+        self.DATA__PREPROCESS__CLAHE__ENABLE__INPUT.setObjectName(u"DATA__PREPROCESS__CLAHE__ENABLE__INPUT")
+        self.DATA__PREPROCESS__CLAHE__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__CLAHE__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__CLAHE__ENABLE__INPUT.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__ENABLE__INPUT, 16, 3, 1, 1)
+
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__LABEL = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__ANTI_ALIASING__LABEL")
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__LABEL.setFont(font1)
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__LABEL.setIndent(15)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__LABEL, 7, 0, 1, 1)
+
+        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT = QLineEdit(self.preprocessing_frame)
+        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT.setObjectName(u"DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT")
+        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT, 21, 3, 1, 1)
+
+        self.DATA__PREPROCESS__MEDIAN_BLUR__LABEL = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__LABEL.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__LABEL")
+        self.DATA__PREPROCESS__MEDIAN_BLUR__LABEL.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__LABEL, 12, 0, 1, 1)
+
+        self.DATA__PREPROCESS__RESIZE__MODE__INFO = QPushButton(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__MODE__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__MODE__INFO")
+        self.DATA__PREPROCESS__RESIZE__MODE__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__RESIZE__MODE__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__RESIZE__MODE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__MODE__INFO, 3, 1, 1, 1)
+
+        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO = QPushButton(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO")
+        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO, 1, 1, 1, 1)
+
+        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT = QComboBox(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.addItem("")
+        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.addItem("")
+        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.addItem("")
+        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.addItem("")
+        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.addItem("")
+        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.addItem("")
+        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__ORDER__INPUT")
+        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__ORDER__INPUT, 2, 3, 1, 1)
+
+        self.DATA__PREPROCESS__CANNY__LABEL = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__CANNY__LABEL.setObjectName(u"DATA__PREPROCESS__CANNY__LABEL")
+        self.DATA__PREPROCESS__CANNY__LABEL.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__LABEL, 19, 0, 1, 1)
+
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO = QPushButton(self.preprocessing_frame)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO")
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO, 9, 1, 1, 1)
+
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__LABEL = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__LABEL")
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__LABEL.setFont(font1)
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__LABEL.setIndent(15)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__LABEL, 6, 0, 1, 1)
+
+        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__LABEL = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__LABEL.setObjectName(u"DATA__PREPROCESS__CLAHE__KERNEL_SIZE__LABEL")
+        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__LABEL.setFont(font1)
+        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__LABEL.setIndent(15)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__LABEL, 17, 0, 1, 1)
+
+        self.DATA__PREPROCESS__RESIZE__ENABLE__INPUT = QComboBox(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__ENABLE__INPUT.addItem("")
+        self.DATA__PREPROCESS__RESIZE__ENABLE__INPUT.addItem("")
+        self.DATA__PREPROCESS__RESIZE__ENABLE__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__ENABLE__INPUT")
+        self.DATA__PREPROCESS__RESIZE__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__RESIZE__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__RESIZE__ENABLE__INPUT.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__ENABLE__INPUT, 0, 3, 1, 1)
+
+        self.DATA__PREPROCESS__RESIZE__CVAL__LABEL = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__CVAL__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__CVAL__LABEL")
+        self.DATA__PREPROCESS__RESIZE__CVAL__LABEL.setFont(font1)
+        self.DATA__PREPROCESS__RESIZE__CVAL__LABEL.setIndent(15)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__CVAL__LABEL, 4, 0, 1, 1)
+
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO = QPushButton(self.preprocessing_frame)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO")
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO, 15, 1, 1, 1)
+
+        self.DATA__PREPROCESS__RESIZE__CVAL__INPUT = QLineEdit(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__CVAL__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__CVAL__INPUT")
+        self.DATA__PREPROCESS__RESIZE__CVAL__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__RESIZE__CVAL__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__RESIZE__CVAL__INPUT.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__CVAL__INPUT, 4, 3, 1, 1)
+
+        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT = QLineEdit(self.preprocessing_frame)
+        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT.setObjectName(u"DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT")
+        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT, 20, 3, 1, 1)
+
+        self.DATA__PREPROCESS__CANNY__ENABLE__INPUT = QComboBox(self.preprocessing_frame)
+        self.DATA__PREPROCESS__CANNY__ENABLE__INPUT.addItem("")
+        self.DATA__PREPROCESS__CANNY__ENABLE__INPUT.addItem("")
+        self.DATA__PREPROCESS__CANNY__ENABLE__INPUT.setObjectName(u"DATA__PREPROCESS__CANNY__ENABLE__INPUT")
+        self.DATA__PREPROCESS__CANNY__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__CANNY__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__CANNY__ENABLE__INPUT.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__ENABLE__INPUT, 19, 3, 1, 1)
+
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__LABEL = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__LABEL.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__LABEL")
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__LABEL.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__LABEL, 14, 0, 1, 1)
+
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__LABEL = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__LABEL.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__LABEL")
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__LABEL.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__LABEL, 8, 0, 1, 1)
+
+        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__LABEL = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__LABEL.setObjectName(u"DATA__PREPROCESS__CLAHE__CLIP_LIMIT__LABEL")
+        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__LABEL.setFont(font1)
+        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__LABEL.setIndent(15)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__LABEL, 18, 0, 1, 1)
+
+        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT = QLineEdit(self.preprocessing_frame)
+        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT.setObjectName(u"DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT")
+        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INPUT, 17, 3, 1, 1)
+
+        self.DATA__PREPROCESS__CANNY__INFO = QPushButton(self.preprocessing_frame)
+        self.DATA__PREPROCESS__CANNY__INFO.setObjectName(u"DATA__PREPROCESS__CANNY__INFO")
+        self.DATA__PREPROCESS__CANNY__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__CANNY__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__CANNY__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__INFO, 19, 1, 1, 1)
+
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO = QPushButton(self.preprocessing_frame)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO")
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO, 10, 1, 1, 1)
+
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__LABEL = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__LABEL.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__LABEL")
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__LABEL.setFont(font1)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__LABEL.setIndent(15)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__LABEL, 11, 0, 1, 1)
+
+        self.DATA__PREPROCESS__RESIZE__ORDER__LABEL = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__ORDER__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__ORDER__LABEL")
+        self.DATA__PREPROCESS__RESIZE__ORDER__LABEL.setFont(font1)
+        self.DATA__PREPROCESS__RESIZE__ORDER__LABEL.setIndent(15)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__ORDER__LABEL, 2, 0, 1, 1)
+
+        self.DATA__PREPROCESS__RESIZE__CLIP__LABEL = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__CLIP__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__CLIP__LABEL")
+        self.DATA__PREPROCESS__RESIZE__CLIP__LABEL.setFont(font1)
+        self.DATA__PREPROCESS__RESIZE__CLIP__LABEL.setIndent(15)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__CLIP__LABEL, 5, 0, 1, 1)
+
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO = QPushButton(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO.setObjectName(u"DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO")
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO, 7, 1, 1, 1)
+
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__LABEL = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__LABEL.setObjectName(u"DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__LABEL")
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__LABEL.setFont(font1)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__LABEL.setIndent(15)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__LABEL, 9, 0, 1, 1)
+
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN = QPushButton(self.preprocessing_frame)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN.setObjectName(u"DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN")
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN.setMaximumSize(QSize(130, 30))
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN, 15, 4, 1, 1)
+
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT = QComboBox(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT.addItem("")
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT.addItem("")
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT.setObjectName(u"DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT")
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT, 6, 3, 1, 1)
+
+        self.horizontalSpacer_75 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_71.addItem(self.horizontalSpacer_75, 0, 4, 1, 1)
+
+        self.DATA__PREPROCESS__RESIZE__MODE__LABEL = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__RESIZE__MODE__LABEL.setObjectName(u"DATA__PREPROCESS__RESIZE__MODE__LABEL")
+        self.DATA__PREPROCESS__RESIZE__MODE__LABEL.setFont(font1)
+        self.DATA__PREPROCESS__RESIZE__MODE__LABEL.setIndent(15)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__RESIZE__MODE__LABEL, 3, 0, 1, 1)
+
+        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO = QPushButton(self.preprocessing_frame)
+        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO.setObjectName(u"DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO")
+        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO, 20, 1, 1, 1)
+
+        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO = QPushButton(self.preprocessing_frame)
+        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO.setObjectName(u"DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO")
+        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO, 21, 1, 1, 1)
+
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL = QLabel(self.preprocessing_frame)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL")
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL.setFont(font1)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL.setIndent(15)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL, 13, 0, 1, 1)
+
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO = QPushButton(self.preprocessing_frame)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO")
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setFont(font1)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO, 13, 1, 1, 1)
+
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT = QLineEdit(self.preprocessing_frame)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT.setObjectName(u"DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT")
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT.setFont(font1)
+
+        self.gridLayout_71.addWidget(self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT, 13, 3, 1, 1)
+
+
+        self.gridLayout_4.addWidget(self.preprocessing_frame, 13, 0, 1, 1)
+
+        self.frame_28 = QFrame(self.train_advanced_options_frame_2)
+        self.frame_28.setObjectName(u"frame_28")
+        self.frame_28.setMinimumSize(QSize(0, 0))
+        self.frame_28.setFrameShape(QFrame.Box)
+        self.frame_28.setFrameShadow(QFrame.Raised)
+        self.gridLayout_29 = QGridLayout(self.frame_28)
+        self.gridLayout_29.setObjectName(u"gridLayout_29")
+        self.label_162 = QLabel(self.frame_28)
+        self.label_162.setObjectName(u"label_162")
+        self.label_162.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.label_162, 14, 0, 1, 1)
+
+        self.LOSS__CLASS_REBALANCE__INFO = QPushButton(self.frame_28)
+        self.LOSS__CLASS_REBALANCE__INFO.setObjectName(u"LOSS__CLASS_REBALANCE__INFO")
+        self.LOSS__CLASS_REBALANCE__INFO.setMinimumSize(QSize(30, 30))
+        self.LOSS__CLASS_REBALANCE__INFO.setMaximumSize(QSize(30, 30))
+        self.LOSS__CLASS_REBALANCE__INFO.setFont(font1)
+        self.LOSS__CLASS_REBALANCE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.LOSS__CLASS_REBALANCE__INFO, 3, 1, 1, 1)
+
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO = QPushButton(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO")
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO, 19, 1, 1, 1)
+
+        self.label_114 = QLabel(self.frame_28)
+        self.label_114.setObjectName(u"label_114")
+        self.label_114.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.label_114, 11, 0, 1, 1)
+
+        self.TRAIN__BATCH_SIZE__INFO = QPushButton(self.frame_28)
+        self.TRAIN__BATCH_SIZE__INFO.setObjectName(u"TRAIN__BATCH_SIZE__INFO")
+        self.TRAIN__BATCH_SIZE__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__BATCH_SIZE__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__BATCH_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__INFO, 10, 1, 1, 1)
+
+        self.lr_schel_warmupcosine_epochs_label = QLabel(self.frame_28)
+        self.lr_schel_warmupcosine_epochs_label.setObjectName(u"lr_schel_warmupcosine_epochs_label")
+        self.lr_schel_warmupcosine_epochs_label.setFont(font1)
+        self.lr_schel_warmupcosine_epochs_label.setIndent(15)
+
+        self.gridLayout_29.addWidget(self.lr_schel_warmupcosine_epochs_label, 21, 0, 1, 1)
+
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO = QPushButton(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO")
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO, 18, 1, 1, 1)
+
+        self.TRAIN__BATCH_SIZE__CALCULATION__LABEL = QLabel(self.frame_28)
+        self.TRAIN__BATCH_SIZE__CALCULATION__LABEL.setObjectName(u"TRAIN__BATCH_SIZE__CALCULATION__LABEL")
+        self.TRAIN__BATCH_SIZE__CALCULATION__LABEL.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__CALCULATION__LABEL, 9, 0, 1, 1)
+
+        self.verticalSpacer_14 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.gridLayout_29.addItem(self.verticalSpacer_14, 28, 0, 1, 1)
+
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO = QPushButton(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__MIN_LR__INFO")
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__MIN_LR__INFO, 16, 1, 1, 1)
+
+        self.TRAIN__METRICS__LABEL = QLabel(self.frame_28)
+        self.TRAIN__METRICS__LABEL.setObjectName(u"TRAIN__METRICS__LABEL")
+        self.TRAIN__METRICS__LABEL.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.TRAIN__METRICS__LABEL, 4, 0, 1, 1)
+
+        self.TRAIN__ACCUM_ITER__INFO = QPushButton(self.frame_28)
+        self.TRAIN__ACCUM_ITER__INFO.setObjectName(u"TRAIN__ACCUM_ITER__INFO")
+        self.TRAIN__ACCUM_ITER__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__ACCUM_ITER__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__ACCUM_ITER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__ACCUM_ITER__INFO, 11, 1, 1, 1)
+
+        self.lr_schel_reduce_on_plat_patience_label = QLabel(self.frame_28)
+        self.lr_schel_reduce_on_plat_patience_label.setObjectName(u"lr_schel_reduce_on_plat_patience_label")
+        self.lr_schel_reduce_on_plat_patience_label.setFont(font1)
+        self.lr_schel_reduce_on_plat_patience_label.setIndent(15)
+
+        self.gridLayout_29.addWidget(self.lr_schel_reduce_on_plat_patience_label, 18, 0, 1, 1)
+
+        self.LOSS__TYPE__LABEL = QLabel(self.frame_28)
+        self.LOSS__TYPE__LABEL.setObjectName(u"LOSS__TYPE__LABEL")
+        self.LOSS__TYPE__LABEL.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.LOSS__TYPE__LABEL, 1, 0, 1, 1)
+
+        self.TRAIN__BATCH_SIZE__LABEL = QLabel(self.frame_28)
+        self.TRAIN__BATCH_SIZE__LABEL.setObjectName(u"TRAIN__BATCH_SIZE__LABEL")
+        self.TRAIN__BATCH_SIZE__LABEL.setFont(font1)
+        self.TRAIN__BATCH_SIZE__LABEL.setIndent(15)
+
+        self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__LABEL, 10, 0, 1, 1)
+
+        self.LOSS__CLASS_REBALANCE__LABEL = QLabel(self.frame_28)
+        self.LOSS__CLASS_REBALANCE__LABEL.setObjectName(u"LOSS__CLASS_REBALANCE__LABEL")
+        self.LOSS__CLASS_REBALANCE__LABEL.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.LOSS__CLASS_REBALANCE__LABEL, 3, 0, 1, 1)
+
+        self.LOSS__CLASS_REBALANCE__INPUT = QComboBox(self.frame_28)
+        self.LOSS__CLASS_REBALANCE__INPUT.addItem("")
+        self.LOSS__CLASS_REBALANCE__INPUT.addItem("")
+        self.LOSS__CLASS_REBALANCE__INPUT.setObjectName(u"LOSS__CLASS_REBALANCE__INPUT")
+        self.LOSS__CLASS_REBALANCE__INPUT.setMinimumSize(QSize(200, 30))
+        self.LOSS__CLASS_REBALANCE__INPUT.setMaximumSize(QSize(200, 30))
+        self.LOSS__CLASS_REBALANCE__INPUT.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.LOSS__CLASS_REBALANCE__INPUT, 3, 2, 1, 1)
+
+        self.TRAIN__LR_SCHEDULER__NAME__INFO = QPushButton(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__NAME__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__NAME__INFO")
+        self.TRAIN__LR_SCHEDULER__NAME__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__LR_SCHEDULER__NAME__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__LR_SCHEDULER__NAME__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__NAME__INFO, 14, 1, 1, 1)
+
+        self.TRAIN__ACCUM_ITER__INPUT = QLineEdit(self.frame_28)
+        self.TRAIN__ACCUM_ITER__INPUT.setObjectName(u"TRAIN__ACCUM_ITER__INPUT")
+        self.TRAIN__ACCUM_ITER__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__ACCUM_ITER__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__ACCUM_ITER__INPUT.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.TRAIN__ACCUM_ITER__INPUT, 11, 2, 1, 1)
+
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT = QLineEdit(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT")
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT, 21, 2, 1, 1)
+
+        self.MODEL__SAVE_CKPT_FREQ__INPUT = QLineEdit(self.frame_28)
+        self.MODEL__SAVE_CKPT_FREQ__INPUT.setObjectName(u"MODEL__SAVE_CKPT_FREQ__INPUT")
+        self.MODEL__SAVE_CKPT_FREQ__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__SAVE_CKPT_FREQ__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__SAVE_CKPT_FREQ__INPUT.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.MODEL__SAVE_CKPT_FREQ__INPUT, 12, 2, 1, 1)
+
+        self.TRAIN__OPT_BETAS__LABEL = QLabel(self.frame_28)
+        self.TRAIN__OPT_BETAS__LABEL.setObjectName(u"TRAIN__OPT_BETAS__LABEL")
+        self.TRAIN__OPT_BETAS__LABEL.setFont(font1)
+        self.TRAIN__OPT_BETAS__LABEL.setIndent(15)
+
+        self.gridLayout_29.addWidget(self.TRAIN__OPT_BETAS__LABEL, 8, 0, 1, 1)
+
+        self.TRAIN__OPTIMIZER__INPUT = QComboBox(self.frame_28)
+        self.TRAIN__OPTIMIZER__INPUT.addItem("")
+        self.TRAIN__OPTIMIZER__INPUT.addItem("")
+        self.TRAIN__OPTIMIZER__INPUT.addItem("")
+        self.TRAIN__OPTIMIZER__INPUT.setObjectName(u"TRAIN__OPTIMIZER__INPUT")
+        self.TRAIN__OPTIMIZER__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__OPTIMIZER__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__OPTIMIZER__INPUT.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.TRAIN__OPTIMIZER__INPUT, 0, 2, 1, 1)
+
+        self.TRAIN__W_DECAY__INFO = QPushButton(self.frame_28)
+        self.TRAIN__W_DECAY__INFO.setObjectName(u"TRAIN__W_DECAY__INFO")
+        self.TRAIN__W_DECAY__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__W_DECAY__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__W_DECAY__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__W_DECAY__INFO, 7, 1, 1, 1)
+
+        self.TRAIN__OPT_BETAS__INPUT = QLineEdit(self.frame_28)
+        self.TRAIN__OPT_BETAS__INPUT.setObjectName(u"TRAIN__OPT_BETAS__INPUT")
+        self.TRAIN__OPT_BETAS__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__OPT_BETAS__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__OPT_BETAS__INPUT.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.TRAIN__OPT_BETAS__INPUT, 8, 2, 1, 1)
+
+        self.TRAIN__PROFILER__INFO = QPushButton(self.frame_28)
+        self.TRAIN__PROFILER__INFO.setObjectName(u"TRAIN__PROFILER__INFO")
+        self.TRAIN__PROFILER__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__PROFILER__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__PROFILER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__PROFILER__INFO, 24, 1, 1, 1)
+
+        self.label_143 = QLabel(self.frame_28)
+        self.label_143.setObjectName(u"label_143")
+        self.label_143.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.label_143, 0, 0, 1, 1)
+
+        self.LOSS__TYPE__INFO = QPushButton(self.frame_28)
+        self.LOSS__TYPE__INFO.setObjectName(u"LOSS__TYPE__INFO")
+        self.LOSS__TYPE__INFO.setMinimumSize(QSize(30, 30))
+        self.LOSS__TYPE__INFO.setMaximumSize(QSize(30, 30))
+        self.LOSS__TYPE__INFO.setFont(font1)
+        self.LOSS__TYPE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.LOSS__TYPE__INFO, 1, 1, 1, 1)
+
+        self.lr_schel_min_lr_label = QLabel(self.frame_28)
+        self.lr_schel_min_lr_label.setObjectName(u"lr_schel_min_lr_label")
+        self.lr_schel_min_lr_label.setFont(font1)
+        self.lr_schel_min_lr_label.setIndent(15)
+
+        self.gridLayout_29.addWidget(self.lr_schel_min_lr_label, 16, 0, 1, 1)
+
+        self.MODEL__SAVE_CKPT_FREQ__INFO = QPushButton(self.frame_28)
+        self.MODEL__SAVE_CKPT_FREQ__INFO.setObjectName(u"MODEL__SAVE_CKPT_FREQ__INFO")
+        self.MODEL__SAVE_CKPT_FREQ__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__SAVE_CKPT_FREQ__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__SAVE_CKPT_FREQ__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.MODEL__SAVE_CKPT_FREQ__INFO, 12, 1, 1, 1)
+
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO = QPushButton(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setObjectName(u"TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO")
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO, 21, 1, 1, 1)
+
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT = QComboBox(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT.addItem("")
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT.addItem("")
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT.addItem("")
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT.addItem("")
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__NAME__INPUT")
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__NAME__INPUT, 14, 2, 1, 1)
+
+        self.LOSS__TYPE__INPUT = QComboBox(self.frame_28)
+        self.LOSS__TYPE__INPUT.setObjectName(u"LOSS__TYPE__INPUT")
+        self.LOSS__TYPE__INPUT.setMinimumSize(QSize(200, 30))
+        self.LOSS__TYPE__INPUT.setMaximumSize(QSize(200, 30))
+        self.LOSS__TYPE__INPUT.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.LOSS__TYPE__INPUT, 1, 2, 1, 1)
+
+        self.LOSS__WEIGHTS__INPUT = QLineEdit(self.frame_28)
+        self.LOSS__WEIGHTS__INPUT.setObjectName(u"LOSS__WEIGHTS__INPUT")
+        self.LOSS__WEIGHTS__INPUT.setMinimumSize(QSize(200, 30))
+        self.LOSS__WEIGHTS__INPUT.setMaximumSize(QSize(200, 30))
+        self.LOSS__WEIGHTS__INPUT.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.LOSS__WEIGHTS__INPUT, 2, 2, 1, 1)
+
+        self.LOSS__WEIGHTS__LABEL = QLabel(self.frame_28)
+        self.LOSS__WEIGHTS__LABEL.setObjectName(u"LOSS__WEIGHTS__LABEL")
+        self.LOSS__WEIGHTS__LABEL.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.LOSS__WEIGHTS__LABEL, 2, 0, 1, 1)
+
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT = QLineEdit(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__MIN_LR__INPUT")
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT, 16, 2, 1, 1)
+
+        self.TRAIN__OPT_BETAS__INFO = QPushButton(self.frame_28)
+        self.TRAIN__OPT_BETAS__INFO.setObjectName(u"TRAIN__OPT_BETAS__INFO")
+        self.TRAIN__OPT_BETAS__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__OPT_BETAS__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__OPT_BETAS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__OPT_BETAS__INFO, 8, 1, 1, 1)
+
+        self.TRAIN__BATCH_SIZE__CALCULATION__INFO = QPushButton(self.frame_28)
+        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setObjectName(u"TRAIN__BATCH_SIZE__CALCULATION__INFO")
+        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setFont(font1)
+        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__CALCULATION__INFO, 9, 1, 1, 1)
+
+        self.TRAIN__LR__INPUT = QLineEdit(self.frame_28)
+        self.TRAIN__LR__INPUT.setObjectName(u"TRAIN__LR__INPUT")
+        self.TRAIN__LR__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__LR__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__LR__INPUT.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.TRAIN__LR__INPUT, 6, 2, 1, 1)
+
+        self.TRAIN__METRICS__INFO = QPushButton(self.frame_28)
+        self.TRAIN__METRICS__INFO.setObjectName(u"TRAIN__METRICS__INFO")
+        self.TRAIN__METRICS__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__METRICS__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__METRICS__INFO.setFont(font1)
+        self.TRAIN__METRICS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__METRICS__INFO, 4, 1, 1, 1)
+
+        self.TRAIN__W_DECAY__INPUT = QLineEdit(self.frame_28)
+        self.TRAIN__W_DECAY__INPUT.setObjectName(u"TRAIN__W_DECAY__INPUT")
+        self.TRAIN__W_DECAY__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__W_DECAY__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__W_DECAY__INPUT.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.TRAIN__W_DECAY__INPUT, 7, 2, 1, 1)
+
+        self.TRAIN__PROFILER_BATCH_RANGE__INFO = QPushButton(self.frame_28)
+        self.TRAIN__PROFILER_BATCH_RANGE__INFO.setObjectName(u"TRAIN__PROFILER_BATCH_RANGE__INFO")
+        self.TRAIN__PROFILER_BATCH_RANGE__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__PROFILER_BATCH_RANGE__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__PROFILER_BATCH_RANGE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__PROFILER_BATCH_RANGE__INFO, 27, 1, 1, 1)
+
+        self.TRAIN__PROFILER__INPUT = QComboBox(self.frame_28)
+        self.TRAIN__PROFILER__INPUT.addItem("")
+        self.TRAIN__PROFILER__INPUT.addItem("")
+        self.TRAIN__PROFILER__INPUT.setObjectName(u"TRAIN__PROFILER__INPUT")
+        self.TRAIN__PROFILER__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__PROFILER__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__PROFILER__INPUT.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.TRAIN__PROFILER__INPUT, 24, 2, 1, 1)
+
+        self.TRAIN__VERBOSE__INFO = QPushButton(self.frame_28)
+        self.TRAIN__VERBOSE__INFO.setObjectName(u"TRAIN__VERBOSE__INFO")
+        self.TRAIN__VERBOSE__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__VERBOSE__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__VERBOSE__INFO.setFont(font9)
+        self.TRAIN__VERBOSE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__VERBOSE__INFO, 29, 1, 1, 1)
+
+        self.LOSS__WEIGHTS__INFO = QPushButton(self.frame_28)
+        self.LOSS__WEIGHTS__INFO.setObjectName(u"LOSS__WEIGHTS__INFO")
+        self.LOSS__WEIGHTS__INFO.setMinimumSize(QSize(30, 30))
+        self.LOSS__WEIGHTS__INFO.setMaximumSize(QSize(30, 30))
+        self.LOSS__WEIGHTS__INFO.setFont(font1)
+        self.LOSS__WEIGHTS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.LOSS__WEIGHTS__INFO, 2, 1, 1, 1)
+
+        self.label_151 = QLabel(self.frame_28)
+        self.label_151.setObjectName(u"label_151")
+        self.label_151.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.label_151, 6, 0, 1, 1)
+
+        self.adamw_weight_decay_label = QLabel(self.frame_28)
+        self.adamw_weight_decay_label.setObjectName(u"adamw_weight_decay_label")
+        self.adamw_weight_decay_label.setFont(font1)
+        self.adamw_weight_decay_label.setIndent(15)
+
+        self.gridLayout_29.addWidget(self.adamw_weight_decay_label, 7, 0, 1, 1)
+
+        self.TRAIN__VERBOSE__LABEL = QLabel(self.frame_28)
+        self.TRAIN__VERBOSE__LABEL.setObjectName(u"TRAIN__VERBOSE__LABEL")
+        self.TRAIN__VERBOSE__LABEL.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.TRAIN__VERBOSE__LABEL, 29, 0, 1, 1)
+
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT = QLineEdit(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT")
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT, 19, 2, 1, 1)
+
+        self.TRAIN__OPTIMIZER__INFO = QPushButton(self.frame_28)
+        self.TRAIN__OPTIMIZER__INFO.setObjectName(u"TRAIN__OPTIMIZER__INFO")
+        self.TRAIN__OPTIMIZER__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__OPTIMIZER__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__OPTIMIZER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__OPTIMIZER__INFO, 0, 1, 1, 1)
+
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT = QLineEdit(self.frame_28)
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setObjectName(u"TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT")
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT, 18, 2, 1, 1)
+
+        self.TRAIN__BATCH_SIZE__CALCULATION__INPUT = QComboBox(self.frame_28)
+        self.TRAIN__BATCH_SIZE__CALCULATION__INPUT.addItem("")
+        self.TRAIN__BATCH_SIZE__CALCULATION__INPUT.addItem("")
+        self.TRAIN__BATCH_SIZE__CALCULATION__INPUT.setObjectName(u"TRAIN__BATCH_SIZE__CALCULATION__INPUT")
+        self.TRAIN__BATCH_SIZE__CALCULATION__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__BATCH_SIZE__CALCULATION__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__BATCH_SIZE__CALCULATION__INPUT.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__CALCULATION__INPUT, 9, 2, 1, 1)
+
+        self.TRAIN__METRICS__INPUT = QLineEdit(self.frame_28)
+        self.TRAIN__METRICS__INPUT.setObjectName(u"TRAIN__METRICS__INPUT")
+        self.TRAIN__METRICS__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__METRICS__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__METRICS__INPUT.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.TRAIN__METRICS__INPUT, 4, 2, 1, 1)
+
+        self.MODEL__SAVE_CKPT_FREQ__LABEL = QLabel(self.frame_28)
+        self.MODEL__SAVE_CKPT_FREQ__LABEL.setObjectName(u"MODEL__SAVE_CKPT_FREQ__LABEL")
+        self.MODEL__SAVE_CKPT_FREQ__LABEL.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.MODEL__SAVE_CKPT_FREQ__LABEL, 12, 0, 1, 1)
+
+        self.TRAIN__PROFILER_BATCH_RANGE__INPUT = QLineEdit(self.frame_28)
+        self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setObjectName(u"TRAIN__PROFILER_BATCH_RANGE__INPUT")
+        self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.TRAIN__PROFILER_BATCH_RANGE__INPUT, 27, 2, 1, 1)
+
+        self.TRAIN__LR__INFO = QPushButton(self.frame_28)
+        self.TRAIN__LR__INFO.setObjectName(u"TRAIN__LR__INFO")
+        self.TRAIN__LR__INFO.setMinimumSize(QSize(30, 30))
+        self.TRAIN__LR__INFO.setMaximumSize(QSize(30, 30))
+        self.TRAIN__LR__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_29.addWidget(self.TRAIN__LR__INFO, 6, 1, 1, 1)
+
+        self.TRAIN__VERBOSE__INPUT = QComboBox(self.frame_28)
+        self.TRAIN__VERBOSE__INPUT.addItem("")
+        self.TRAIN__VERBOSE__INPUT.addItem("")
+        self.TRAIN__VERBOSE__INPUT.setObjectName(u"TRAIN__VERBOSE__INPUT")
+        self.TRAIN__VERBOSE__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__VERBOSE__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__VERBOSE__INPUT.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.TRAIN__VERBOSE__INPUT, 29, 2, 1, 1)
+
+        self.profiler_batch_range_label = QLabel(self.frame_28)
+        self.profiler_batch_range_label.setObjectName(u"profiler_batch_range_label")
+        self.profiler_batch_range_label.setFont(font1)
+        self.profiler_batch_range_label.setIndent(15)
+
+        self.gridLayout_29.addWidget(self.profiler_batch_range_label, 27, 0, 1, 1)
+
+        self.lr_schel_reduce_on_plat_factor_label = QLabel(self.frame_28)
+        self.lr_schel_reduce_on_plat_factor_label.setObjectName(u"lr_schel_reduce_on_plat_factor_label")
+        self.lr_schel_reduce_on_plat_factor_label.setFont(font1)
+        self.lr_schel_reduce_on_plat_factor_label.setIndent(15)
+
+        self.gridLayout_29.addWidget(self.lr_schel_reduce_on_plat_factor_label, 19, 0, 1, 1)
+
+        self.TRAIN__BATCH_SIZE__INPUT = QLineEdit(self.frame_28)
+        self.TRAIN__BATCH_SIZE__INPUT.setObjectName(u"TRAIN__BATCH_SIZE__INPUT")
+        self.TRAIN__BATCH_SIZE__INPUT.setMinimumSize(QSize(200, 30))
+        self.TRAIN__BATCH_SIZE__INPUT.setMaximumSize(QSize(200, 30))
+        self.TRAIN__BATCH_SIZE__INPUT.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.TRAIN__BATCH_SIZE__INPUT, 10, 2, 1, 1)
+
+        self.label_160 = QLabel(self.frame_28)
+        self.label_160.setObjectName(u"label_160")
+        self.label_160.setFont(font1)
+
+        self.gridLayout_29.addWidget(self.label_160, 24, 0, 1, 1)
+
+        self.horizontalSpacer_21 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_29.addItem(self.horizontalSpacer_21, 9, 3, 1, 1)
+
+
+        self.gridLayout_4.addWidget(self.frame_28, 19, 0, 1, 1)
+
+        self.label_10 = QLabel(self.train_advanced_options_frame_2)
+        self.label_10.setObjectName(u"label_10")
+        self.label_10.setMaximumSize(QSize(200, 35))
+        self.label_10.setFont(font1)
+
+        self.gridLayout_4.addWidget(self.label_10, 9, 0, 1, 1)
+
+        self.label_5 = QLabel(self.train_advanced_options_frame_2)
+        self.label_5.setObjectName(u"label_5")
+        self.label_5.setMaximumSize(QSize(16777215, 16777215))
+        self.label_5.setFont(font1)
+
+        self.gridLayout_4.addWidget(self.label_5, 6, 0, 1, 1)
 
         self.frame_29 = QFrame(self.train_advanced_options_frame_2)
         self.frame_29.setObjectName(u"frame_29")
@@ -7418,873 +7931,14 @@ class Ui_MainWindow(object):
         self.gridLayout_69.addWidget(self.AUTOMATIC__AUG__INFO, 0, 1, 1, 1)
 
 
-        self.gridLayout_4.addWidget(self.frame_29, 26, 0, 1, 1)
+        self.gridLayout_4.addWidget(self.frame_29, 20, 0, 1, 1)
 
-        self.label_5 = QLabel(self.train_advanced_options_frame_2)
-        self.label_5.setObjectName(u"label_5")
-        self.label_5.setMaximumSize(QSize(16777215, 16777215))
-        self.label_5.setFont(font1)
+        self.label_30 = QLabel(self.train_advanced_options_frame_2)
+        self.label_30.setObjectName(u"label_30")
+        self.label_30.setMaximumSize(QSize(100, 16777215))
+        self.label_30.setFont(font1)
 
-        self.gridLayout_4.addWidget(self.label_5, 6, 0, 1, 1)
-
-        self.frame_16 = QFrame(self.train_advanced_options_frame_2)
-        self.frame_16.setObjectName(u"frame_16")
-        self.frame_16.setMinimumSize(QSize(0, 0))
-        self.frame_16.setFont(font1)
-        self.frame_16.setFrameShape(QFrame.Box)
-        self.frame_16.setFrameShadow(QFrame.Raised)
-        self.gridLayout_20 = QGridLayout(self.frame_16)
-        self.gridLayout_20.setObjectName(u"gridLayout_20")
-        self.DATA__TRAIN__OVERLAP__INPUT = QLineEdit(self.frame_16)
-        self.DATA__TRAIN__OVERLAP__INPUT.setObjectName(u"DATA__TRAIN__OVERLAP__INPUT")
-        self.DATA__TRAIN__OVERLAP__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__TRAIN__OVERLAP__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__OVERLAP__INPUT.setFont(font1)
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__OVERLAP__INPUT, 2, 3, 1, 3)
-
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL = QLabel(self.frame_16)
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL")
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setFont(font1)
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setIndent(15)
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL, 5, 0, 1, 1)
-
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO = QPushButton(self.frame_16)
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO")
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setFont(font1)
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO, 4, 2, 1, 1)
-
-        self.DATA__TRAIN__PADDING__INPUT = QLineEdit(self.frame_16)
-        self.DATA__TRAIN__PADDING__INPUT.setObjectName(u"DATA__TRAIN__PADDING__INPUT")
-        self.DATA__TRAIN__PADDING__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__TRAIN__PADDING__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__PADDING__INPUT.setFont(font1)
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__PADDING__INPUT, 3, 3, 1, 3)
-
-        self.label_22 = QLabel(self.frame_16)
-        self.label_22.setObjectName(u"label_22")
-        self.label_22.setMaximumSize(QSize(16777215, 16777215))
-        self.label_22.setFont(font1)
-
-        self.gridLayout_20.addWidget(self.label_22, 2, 0, 1, 1)
-
-        self.DATA__TRAIN__RESOLUTION__INFO = QPushButton(self.frame_16)
-        self.DATA__TRAIN__RESOLUTION__INFO.setObjectName(u"DATA__TRAIN__RESOLUTION__INFO")
-        self.DATA__TRAIN__RESOLUTION__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__TRAIN__RESOLUTION__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__RESOLUTION__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__RESOLUTION__INFO, 1, 2, 1, 1)
-
-        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__LABEL = QLabel(self.frame_16)
-        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__LABEL.setObjectName(u"DATA__TRAIN__INPUT_IMG_AXES_ORDER__LABEL")
-        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__LABEL.setFont(font1)
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__LABEL, 7, 0, 1, 1)
-
-        self.DATA__TRAIN__REPLICATE__INPUT = QLineEdit(self.frame_16)
-        self.DATA__TRAIN__REPLICATE__INPUT.setObjectName(u"DATA__TRAIN__REPLICATE__INPUT")
-        self.DATA__TRAIN__REPLICATE__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__TRAIN__REPLICATE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__REPLICATE__INPUT.setFont(font1)
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__REPLICATE__INPUT, 0, 3, 1, 3)
-
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT = QLineEdit(self.frame_16)
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT")
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setFont(font1)
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT, 5, 3, 1, 1)
-
-        self.train_resolution_label = QLabel(self.frame_16)
-        self.train_resolution_label.setObjectName(u"train_resolution_label")
-        self.train_resolution_label.setMaximumSize(QSize(16777215, 16777215))
-        self.train_resolution_label.setFont(font1)
-
-        self.gridLayout_20.addWidget(self.train_resolution_label, 1, 0, 1, 1)
-
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT = QLineEdit(self.frame_16)
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT")
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setFont(font1)
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT, 6, 3, 1, 1)
-
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO = QPushButton(self.frame_16)
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO")
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setFont(font1)
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO, 6, 2, 1, 1)
-
-        self.DATA__TRAIN__OVERLAP__INFO = QPushButton(self.frame_16)
-        self.DATA__TRAIN__OVERLAP__INFO.setObjectName(u"DATA__TRAIN__OVERLAP__INFO")
-        self.DATA__TRAIN__OVERLAP__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__TRAIN__OVERLAP__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__OVERLAP__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__OVERLAP__INFO, 2, 2, 1, 1)
-
-        self.DATA__TRAIN__PADDING__INFO = QPushButton(self.frame_16)
-        self.DATA__TRAIN__PADDING__INFO.setObjectName(u"DATA__TRAIN__PADDING__INFO")
-        self.DATA__TRAIN__PADDING__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__TRAIN__PADDING__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__PADDING__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__PADDING__INFO, 3, 2, 1, 1)
-
-        self.label_21 = QLabel(self.frame_16)
-        self.label_21.setObjectName(u"label_21")
-        self.label_21.setFont(font1)
-
-        self.gridLayout_20.addWidget(self.label_21, 0, 0, 1, 2)
-
-        self.DATA__TRAIN__RESOLUTION__INPUT = QLineEdit(self.frame_16)
-        self.DATA__TRAIN__RESOLUTION__INPUT.setObjectName(u"DATA__TRAIN__RESOLUTION__INPUT")
-        self.DATA__TRAIN__RESOLUTION__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__TRAIN__RESOLUTION__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__RESOLUTION__INPUT.setFont(font1)
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__RESOLUTION__INPUT, 1, 3, 1, 3)
-
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL = QLabel(self.frame_16)
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL")
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setFont(font1)
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL, 4, 0, 1, 1)
-
-        self.DATA__TRAIN__REPLICATE__INFO = QPushButton(self.frame_16)
-        self.DATA__TRAIN__REPLICATE__INFO.setObjectName(u"DATA__TRAIN__REPLICATE__INFO")
-        self.DATA__TRAIN__REPLICATE__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__TRAIN__REPLICATE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__REPLICATE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__REPLICATE__INFO, 0, 2, 1, 1)
-
-        self.horizontalSpacer_11 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_20.addItem(self.horizontalSpacer_11, 0, 6, 1, 1)
-
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO = QPushButton(self.frame_16)
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO")
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setFont(font1)
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO, 5, 2, 1, 1)
-
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT = QComboBox(self.frame_16)
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT.addItem("")
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT.addItem("")
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT")
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT.setFont(font1)
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT, 4, 3, 1, 1)
-
-        self.label_23 = QLabel(self.frame_16)
-        self.label_23.setObjectName(u"label_23")
-        self.label_23.setMaximumSize(QSize(16777215, 16777215))
-        self.label_23.setFont(font1)
-
-        self.gridLayout_20.addWidget(self.label_23, 3, 0, 1, 1)
-
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL = QLabel(self.frame_16)
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL")
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setFont(font1)
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setIndent(15)
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL, 6, 0, 1, 1)
-
-        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__LABEL = QLabel(self.frame_16)
-        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__LABEL.setObjectName(u"DATA__TRAIN__INPUT_MASK_AXES_ORDER__LABEL")
-        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__LABEL.setFont(font1)
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__LABEL, 8, 0, 1, 1)
-
-        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO = QPushButton(self.frame_16)
-        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO.setObjectName(u"DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO")
-        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO, 8, 2, 1, 1)
-
-        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INPUT = QLineEdit(self.frame_16)
-        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INPUT.setObjectName(u"DATA__TRAIN__INPUT_IMG_AXES_ORDER__INPUT")
-        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INPUT.setFont(font1)
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INPUT, 7, 3, 1, 1)
-
-        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT = QLineEdit(self.frame_16)
-        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT.setObjectName(u"DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT")
-        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT.setFont(font1)
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT, 8, 3, 1, 1)
-
-        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO = QPushButton(self.frame_16)
-        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO.setObjectName(u"DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO")
-        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO, 7, 2, 1, 1)
-
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL = QLabel(self.frame_16)
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL")
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL.setFont(font1)
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL.setIndent(15)
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL, 10, 0, 1, 1)
-
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL = QLabel(self.frame_16)
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL")
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL.setFont(font1)
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL.setIndent(15)
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL, 11, 0, 1, 1)
-
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__LABEL = QLabel(self.frame_16)
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__LABEL.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__ENABLE__LABEL")
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__LABEL.setFont(font1)
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__LABEL, 9, 0, 1, 1)
-
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT = QComboBox(self.frame_16)
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.addItem("")
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.addItem("")
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT")
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.setFont(font1)
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT, 9, 3, 1, 1)
-
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO = QPushButton(self.frame_16)
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO")
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setFont(font1)
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO, 9, 2, 1, 1)
-
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL = QLabel(self.frame_16)
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL")
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL.setFont(font1)
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL.setIndent(15)
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL, 12, 0, 1, 1)
-
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO = QPushButton(self.frame_16)
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO")
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setFont(font1)
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO, 10, 2, 1, 1)
-
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO = QPushButton(self.frame_16)
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO")
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setFont(font1)
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO, 11, 2, 1, 1)
-
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO = QPushButton(self.frame_16)
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO")
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setFont(font1)
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO, 12, 2, 1, 1)
-
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT = QLineEdit(self.frame_16)
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT")
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT.setFont(font1)
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT, 10, 3, 1, 1)
-
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT = QLineEdit(self.frame_16)
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT")
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT.setFont(font1)
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT, 11, 3, 1, 1)
-
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT = QLineEdit(self.frame_16)
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT")
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT.setFont(font1)
-
-        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT, 12, 3, 1, 1)
-
-
-        self.gridLayout_4.addWidget(self.frame_16, 15, 0, 1, 1)
-
-        self.label_42 = QLabel(self.train_advanced_options_frame_2)
-        self.label_42.setObjectName(u"label_42")
-        self.label_42.setFont(font1)
-
-        self.gridLayout_4.addWidget(self.label_42, 24, 0, 1, 1)
-
-        self.frame_12 = QFrame(self.train_advanced_options_frame_2)
-        self.frame_12.setObjectName(u"frame_12")
-        self.frame_12.setFont(font1)
-        self.frame_12.setFrameShape(QFrame.Box)
-        self.frame_12.setFrameShadow(QFrame.Raised)
-        self.gridLayout_13 = QGridLayout(self.frame_12)
-        self.gridLayout_13.setObjectName(u"gridLayout_13")
-        self.TRAIN__PATIENCE__INPUT = QLineEdit(self.frame_12)
-        self.TRAIN__PATIENCE__INPUT.setObjectName(u"TRAIN__PATIENCE__INPUT")
-        self.TRAIN__PATIENCE__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__PATIENCE__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__PATIENCE__INPUT.setFont(font1)
-
-        self.gridLayout_13.addWidget(self.TRAIN__PATIENCE__INPUT, 2, 2, 1, 1)
-
-        self.TRAIN__EPOCHS__INPUT = QLineEdit(self.frame_12)
-        self.TRAIN__EPOCHS__INPUT.setObjectName(u"TRAIN__EPOCHS__INPUT")
-        self.TRAIN__EPOCHS__INPUT.setMinimumSize(QSize(200, 30))
-        self.TRAIN__EPOCHS__INPUT.setMaximumSize(QSize(200, 30))
-        self.TRAIN__EPOCHS__INPUT.setFont(font1)
-
-        self.gridLayout_13.addWidget(self.TRAIN__EPOCHS__INPUT, 1, 2, 1, 1)
-
-        self.MODEL__ARCHITECTURE__LABEL = QLabel(self.frame_12)
-        self.MODEL__ARCHITECTURE__LABEL.setObjectName(u"MODEL__ARCHITECTURE__LABEL")
-        self.MODEL__ARCHITECTURE__LABEL.setMaximumSize(QSize(16777215, 16777215))
-        self.MODEL__ARCHITECTURE__LABEL.setFont(font1)
-
-        self.gridLayout_13.addWidget(self.MODEL__ARCHITECTURE__LABEL, 4, 0, 1, 1)
-
-        self.patience_info = QPushButton(self.frame_12)
-        self.patience_info.setObjectName(u"patience_info")
-        self.patience_info.setMinimumSize(QSize(30, 30))
-        self.patience_info.setMaximumSize(QSize(30, 30))
-        self.patience_info.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_13.addWidget(self.patience_info, 2, 1, 1, 1)
-
-        self.MODEL__ARCHITECTURE__INPUT = QComboBox(self.frame_12)
-        self.MODEL__ARCHITECTURE__INPUT.setObjectName(u"MODEL__ARCHITECTURE__INPUT")
-        self.MODEL__ARCHITECTURE__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__ARCHITECTURE__INPUT.setMaximumSize(QSize(16777215, 30))
-        self.MODEL__ARCHITECTURE__INPUT.setFont(font1)
-
-        self.gridLayout_13.addWidget(self.MODEL__ARCHITECTURE__INPUT, 4, 2, 1, 1)
-
-        self.patience_label = QLabel(self.frame_12)
-        self.patience_label.setObjectName(u"patience_label")
-        self.patience_label.setFont(font1)
-
-        self.gridLayout_13.addWidget(self.patience_label, 2, 0, 1, 1)
-
-        self.number_of_epochs_info = QPushButton(self.frame_12)
-        self.number_of_epochs_info.setObjectName(u"number_of_epochs_info")
-        self.number_of_epochs_info.setMinimumSize(QSize(30, 30))
-        self.number_of_epochs_info.setMaximumSize(QSize(30, 30))
-        self.number_of_epochs_info.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_13.addWidget(self.number_of_epochs_info, 1, 1, 1, 1)
-
-        self.number_of_epochs_label = QLabel(self.frame_12)
-        self.number_of_epochs_label.setObjectName(u"number_of_epochs_label")
-        self.number_of_epochs_label.setFont(font1)
-
-        self.gridLayout_13.addWidget(self.number_of_epochs_label, 1, 0, 1, 1)
-
-        self.MODEL__ARCHITECTURE__INFO = QPushButton(self.frame_12)
-        self.MODEL__ARCHITECTURE__INFO.setObjectName(u"MODEL__ARCHITECTURE__INFO")
-        self.MODEL__ARCHITECTURE__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__ARCHITECTURE__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__ARCHITECTURE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_13.addWidget(self.MODEL__ARCHITECTURE__INFO, 4, 1, 1, 1)
-
-        self.horizontalSpacer_6 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_13.addItem(self.horizontalSpacer_6, 2, 3, 1, 1)
-
-
-        self.gridLayout_4.addWidget(self.frame_12, 7, 0, 1, 1)
-
-        self.label_10 = QLabel(self.train_advanced_options_frame_2)
-        self.label_10.setObjectName(u"label_10")
-        self.label_10.setMaximumSize(QSize(200, 35))
-        self.label_10.setFont(font1)
-
-        self.gridLayout_4.addWidget(self.label_10, 9, 0, 1, 1)
-
-        self.transformers_frame = QFrame(self.train_advanced_options_frame_2)
-        self.transformers_frame.setObjectName(u"transformers_frame")
-        self.transformers_frame.setMinimumSize(QSize(0, 0))
-        self.transformers_frame.setFont(font1)
-        self.transformers_frame.setFrameShape(QFrame.Box)
-        self.transformers_frame.setFrameShadow(QFrame.Raised)
-        self.gridLayout_23 = QGridLayout(self.transformers_frame)
-        self.gridLayout_23.setObjectName(u"gridLayout_23")
-        self.MODEL__MAE_MASK_RATIO__LABEL = QLabel(self.transformers_frame)
-        self.MODEL__MAE_MASK_RATIO__LABEL.setObjectName(u"MODEL__MAE_MASK_RATIO__LABEL")
-        self.MODEL__MAE_MASK_RATIO__LABEL.setFont(font1)
-        self.MODEL__MAE_MASK_RATIO__LABEL.setIndent(15)
-
-        self.gridLayout_23.addWidget(self.MODEL__MAE_MASK_RATIO__LABEL, 12, 0, 1, 1)
-
-        self.MODEL__MAE_MASK_RATIO__INPUT = QLineEdit(self.transformers_frame)
-        self.MODEL__MAE_MASK_RATIO__INPUT.setObjectName(u"MODEL__MAE_MASK_RATIO__INPUT")
-        self.MODEL__MAE_MASK_RATIO__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__MAE_MASK_RATIO__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__MAE_MASK_RATIO__INPUT.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.MODEL__MAE_MASK_RATIO__INPUT, 12, 2, 1, 1)
-
-        self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT = QLineEdit(self.transformers_frame)
-        self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT.setObjectName(u"MODEL__UNETR_VIT_NUM_FILTERS__INPUT")
-        self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT, 8, 2, 1, 1)
-
-        self.horizontalSpacer_14 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_23.addItem(self.horizontalSpacer_14, 5, 3, 1, 1)
-
-        self.MODEL__MAE_DEC_HIDDEN_SIZE__INFO = QPushButton(self.transformers_frame)
-        self.MODEL__MAE_DEC_HIDDEN_SIZE__INFO.setObjectName(u"MODEL__MAE_DEC_HIDDEN_SIZE__INFO")
-        self.MODEL__MAE_DEC_HIDDEN_SIZE__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__MAE_DEC_HIDDEN_SIZE__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__MAE_DEC_HIDDEN_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_HIDDEN_SIZE__INFO, 13, 1, 1, 1)
-
-        self.label_52 = QLabel(self.transformers_frame)
-        self.label_52.setObjectName(u"label_52")
-        self.label_52.setMaximumSize(QSize(16777215, 16777215))
-        self.label_52.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.label_52, 3, 0, 1, 1)
-
-        self.MODEL__UNETR_VIT_HIDD_MULT__INPUT = QLineEdit(self.transformers_frame)
-        self.MODEL__UNETR_VIT_HIDD_MULT__INPUT.setObjectName(u"MODEL__UNETR_VIT_HIDD_MULT__INPUT")
-        self.MODEL__UNETR_VIT_HIDD_MULT__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__UNETR_VIT_HIDD_MULT__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__UNETR_VIT_HIDD_MULT__INPUT.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.MODEL__UNETR_VIT_HIDD_MULT__INPUT, 7, 2, 1, 1)
-
-        self.MODEL__VIT_NUM_HEADS__INPUT = QLineEdit(self.transformers_frame)
-        self.MODEL__VIT_NUM_HEADS__INPUT.setObjectName(u"MODEL__VIT_NUM_HEADS__INPUT")
-        self.MODEL__VIT_NUM_HEADS__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__VIT_NUM_HEADS__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__VIT_NUM_HEADS__INPUT.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.MODEL__VIT_NUM_HEADS__INPUT, 3, 2, 1, 1)
-
-        self.MODEL__VIT_NUM_LAYERS__INPUT = QLineEdit(self.transformers_frame)
-        self.MODEL__VIT_NUM_LAYERS__INPUT.setObjectName(u"MODEL__VIT_NUM_LAYERS__INPUT")
-        self.MODEL__VIT_NUM_LAYERS__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__VIT_NUM_LAYERS__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__VIT_NUM_LAYERS__INPUT.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.MODEL__VIT_NUM_LAYERS__INPUT, 2, 2, 1, 1)
-
-        self.MODEL__MAE_MASK_TYPE__INPUT = QComboBox(self.transformers_frame)
-        self.MODEL__MAE_MASK_TYPE__INPUT.addItem("")
-        self.MODEL__MAE_MASK_TYPE__INPUT.addItem("")
-        self.MODEL__MAE_MASK_TYPE__INPUT.setObjectName(u"MODEL__MAE_MASK_TYPE__INPUT")
-        self.MODEL__MAE_MASK_TYPE__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__MAE_MASK_TYPE__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__MAE_MASK_TYPE__INPUT.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.MODEL__MAE_MASK_TYPE__INPUT, 11, 2, 1, 1)
-
-        self.MODEL__UNETR_VIT_HIDD_MULT__INFO = QPushButton(self.transformers_frame)
-        self.MODEL__UNETR_VIT_HIDD_MULT__INFO.setObjectName(u"MODEL__UNETR_VIT_HIDD_MULT__INFO")
-        self.MODEL__UNETR_VIT_HIDD_MULT__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__UNETR_VIT_HIDD_MULT__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__UNETR_VIT_HIDD_MULT__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_23.addWidget(self.MODEL__UNETR_VIT_HIDD_MULT__INFO, 7, 1, 1, 1)
-
-        self.label_55 = QLabel(self.transformers_frame)
-        self.label_55.setObjectName(u"label_55")
-        self.label_55.setMaximumSize(QSize(16777215, 16777215))
-        self.label_55.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.label_55, 5, 0, 1, 1)
-
-        self.MODEL__MAE_MASK_TYPE__INFO = QPushButton(self.transformers_frame)
-        self.MODEL__MAE_MASK_TYPE__INFO.setObjectName(u"MODEL__MAE_MASK_TYPE__INFO")
-        self.MODEL__MAE_MASK_TYPE__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__MAE_MASK_TYPE__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__MAE_MASK_TYPE__INFO.setFont(font1)
-        self.MODEL__MAE_MASK_TYPE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_23.addWidget(self.MODEL__MAE_MASK_TYPE__INFO, 11, 1, 1, 1)
-
-        self.MODEL__MAE_DEC_MLP_DIMS__LABEL = QLabel(self.transformers_frame)
-        self.MODEL__MAE_DEC_MLP_DIMS__LABEL.setObjectName(u"MODEL__MAE_DEC_MLP_DIMS__LABEL")
-        self.MODEL__MAE_DEC_MLP_DIMS__LABEL.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_MLP_DIMS__LABEL, 16, 0, 1, 1)
-
-        self.MODEL__VIT_EMBED_DIM__INFO = QPushButton(self.transformers_frame)
-        self.MODEL__VIT_EMBED_DIM__INFO.setObjectName(u"MODEL__VIT_EMBED_DIM__INFO")
-        self.MODEL__VIT_EMBED_DIM__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__VIT_EMBED_DIM__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__VIT_EMBED_DIM__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_23.addWidget(self.MODEL__VIT_EMBED_DIM__INFO, 1, 1, 1, 1)
-
-        self.MODEL__VIT_NORM_EPS__LABEL = QLabel(self.transformers_frame)
-        self.MODEL__VIT_NORM_EPS__LABEL.setObjectName(u"MODEL__VIT_NORM_EPS__LABEL")
-        self.MODEL__VIT_NORM_EPS__LABEL.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.MODEL__VIT_NORM_EPS__LABEL, 6, 0, 1, 1)
-
-        self.MODEL__MAE_DEC_NUM_LAYERS__INPUT = QLineEdit(self.transformers_frame)
-        self.MODEL__MAE_DEC_NUM_LAYERS__INPUT.setObjectName(u"MODEL__MAE_DEC_NUM_LAYERS__INPUT")
-        self.MODEL__MAE_DEC_NUM_LAYERS__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__MAE_DEC_NUM_LAYERS__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__MAE_DEC_NUM_LAYERS__INPUT.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_NUM_LAYERS__INPUT, 14, 2, 1, 1)
-
-        self.label_53 = QLabel(self.transformers_frame)
-        self.label_53.setObjectName(u"label_53")
-        self.label_53.setMaximumSize(QSize(16777215, 16777215))
-        self.label_53.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.label_53, 2, 0, 1, 1)
-
-        self.unetr_dec_act_label = QLabel(self.transformers_frame)
-        self.unetr_dec_act_label.setObjectName(u"unetr_dec_act_label")
-        self.unetr_dec_act_label.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.unetr_dec_act_label, 9, 0, 1, 1)
-
-        self.MODEL__MAE_MASK_RATIO__INFO = QPushButton(self.transformers_frame)
-        self.MODEL__MAE_MASK_RATIO__INFO.setObjectName(u"MODEL__MAE_MASK_RATIO__INFO")
-        self.MODEL__MAE_MASK_RATIO__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__MAE_MASK_RATIO__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__MAE_MASK_RATIO__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_23.addWidget(self.MODEL__MAE_MASK_RATIO__INFO, 12, 1, 1, 1)
-
-        self.unetr_vit_hidden_multiple_label = QLabel(self.transformers_frame)
-        self.unetr_vit_hidden_multiple_label.setObjectName(u"unetr_vit_hidden_multiple_label")
-        self.unetr_vit_hidden_multiple_label.setMaximumSize(QSize(16777215, 16777215))
-        self.unetr_vit_hidden_multiple_label.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.unetr_vit_hidden_multiple_label, 7, 0, 1, 1)
-
-        self.MODEL__VIT_EMBED_DIM__INPUT = QLineEdit(self.transformers_frame)
-        self.MODEL__VIT_EMBED_DIM__INPUT.setObjectName(u"MODEL__VIT_EMBED_DIM__INPUT")
-        self.MODEL__VIT_EMBED_DIM__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__VIT_EMBED_DIM__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__VIT_EMBED_DIM__INPUT.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.MODEL__VIT_EMBED_DIM__INPUT, 1, 2, 1, 1)
-
-        self.MODEL__UNETR_DEC_ACTIVATION__INFO = QPushButton(self.transformers_frame)
-        self.MODEL__UNETR_DEC_ACTIVATION__INFO.setObjectName(u"MODEL__UNETR_DEC_ACTIVATION__INFO")
-        self.MODEL__UNETR_DEC_ACTIVATION__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__UNETR_DEC_ACTIVATION__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__UNETR_DEC_ACTIVATION__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_23.addWidget(self.MODEL__UNETR_DEC_ACTIVATION__INFO, 9, 1, 1, 1)
-
-        self.MODEL__MAE_MASK_TYPE__LABEL = QLabel(self.transformers_frame)
-        self.MODEL__MAE_MASK_TYPE__LABEL.setObjectName(u"MODEL__MAE_MASK_TYPE__LABEL")
-        self.MODEL__MAE_MASK_TYPE__LABEL.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.MODEL__MAE_MASK_TYPE__LABEL, 11, 0, 1, 1)
-
-        self.MODEL__VIT_NUM_HEADS__INFO = QPushButton(self.transformers_frame)
-        self.MODEL__VIT_NUM_HEADS__INFO.setObjectName(u"MODEL__VIT_NUM_HEADS__INFO")
-        self.MODEL__VIT_NUM_HEADS__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__VIT_NUM_HEADS__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__VIT_NUM_HEADS__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_23.addWidget(self.MODEL__VIT_NUM_HEADS__INFO, 3, 1, 1, 1)
-
-        self.MODEL__VIT_TOKEN_SIZE__INFO = QPushButton(self.transformers_frame)
-        self.MODEL__VIT_TOKEN_SIZE__INFO.setObjectName(u"MODEL__VIT_TOKEN_SIZE__INFO")
-        self.MODEL__VIT_TOKEN_SIZE__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__VIT_TOKEN_SIZE__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__VIT_TOKEN_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_23.addWidget(self.MODEL__VIT_TOKEN_SIZE__INFO, 0, 1, 1, 1)
-
-        self.MODEL__VIT_MLP_RATIO__INFO = QPushButton(self.transformers_frame)
-        self.MODEL__VIT_MLP_RATIO__INFO.setObjectName(u"MODEL__VIT_MLP_RATIO__INFO")
-        self.MODEL__VIT_MLP_RATIO__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__VIT_MLP_RATIO__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__VIT_MLP_RATIO__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_23.addWidget(self.MODEL__VIT_MLP_RATIO__INFO, 5, 1, 1, 1)
-
-        self.MODEL__MAE_DEC_NUM_HEADS__INPUT = QLineEdit(self.transformers_frame)
-        self.MODEL__MAE_DEC_NUM_HEADS__INPUT.setObjectName(u"MODEL__MAE_DEC_NUM_HEADS__INPUT")
-        self.MODEL__MAE_DEC_NUM_HEADS__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__MAE_DEC_NUM_HEADS__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__MAE_DEC_NUM_HEADS__INPUT.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_NUM_HEADS__INPUT, 15, 2, 1, 1)
-
-        self.MODEL__VIT_NUM_LAYERS__INFO = QPushButton(self.transformers_frame)
-        self.MODEL__VIT_NUM_LAYERS__INFO.setObjectName(u"MODEL__VIT_NUM_LAYERS__INFO")
-        self.MODEL__VIT_NUM_LAYERS__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__VIT_NUM_LAYERS__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__VIT_NUM_LAYERS__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_23.addWidget(self.MODEL__VIT_NUM_LAYERS__INFO, 2, 1, 1, 1)
-
-        self.MODEL__VIT_NORM_EPS__INFO = QPushButton(self.transformers_frame)
-        self.MODEL__VIT_NORM_EPS__INFO.setObjectName(u"MODEL__VIT_NORM_EPS__INFO")
-        self.MODEL__VIT_NORM_EPS__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__VIT_NORM_EPS__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__VIT_NORM_EPS__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_23.addWidget(self.MODEL__VIT_NORM_EPS__INFO, 6, 1, 1, 1)
-
-        self.MODEL__UNETR_DEC_ACTIVATION__INPUT = QComboBox(self.transformers_frame)
-        self.MODEL__UNETR_DEC_ACTIVATION__INPUT.addItem("")
-        self.MODEL__UNETR_DEC_ACTIVATION__INPUT.addItem("")
-        self.MODEL__UNETR_DEC_ACTIVATION__INPUT.addItem("")
-        self.MODEL__UNETR_DEC_ACTIVATION__INPUT.setObjectName(u"MODEL__UNETR_DEC_ACTIVATION__INPUT")
-        self.MODEL__UNETR_DEC_ACTIVATION__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__UNETR_DEC_ACTIVATION__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__UNETR_DEC_ACTIVATION__INPUT.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.MODEL__UNETR_DEC_ACTIVATION__INPUT, 9, 2, 1, 1)
-
-        self.MODEL__UNETR_VIT_NUM_FILTERS__INFO = QPushButton(self.transformers_frame)
-        self.MODEL__UNETR_VIT_NUM_FILTERS__INFO.setObjectName(u"MODEL__UNETR_VIT_NUM_FILTERS__INFO")
-        self.MODEL__UNETR_VIT_NUM_FILTERS__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__UNETR_VIT_NUM_FILTERS__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__UNETR_VIT_NUM_FILTERS__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_23.addWidget(self.MODEL__UNETR_VIT_NUM_FILTERS__INFO, 8, 1, 1, 1)
-
-        self.MODEL__VIT_NORM_EPS__INPUT = QLineEdit(self.transformers_frame)
-        self.MODEL__VIT_NORM_EPS__INPUT.setObjectName(u"MODEL__VIT_NORM_EPS__INPUT")
-        self.MODEL__VIT_NORM_EPS__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__VIT_NORM_EPS__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__VIT_NORM_EPS__INPUT.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.MODEL__VIT_NORM_EPS__INPUT, 6, 2, 1, 1)
-
-        self.MODEL__MAE_DEC_MLP_DIMS__INFO = QPushButton(self.transformers_frame)
-        self.MODEL__MAE_DEC_MLP_DIMS__INFO.setObjectName(u"MODEL__MAE_DEC_MLP_DIMS__INFO")
-        self.MODEL__MAE_DEC_MLP_DIMS__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__MAE_DEC_MLP_DIMS__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__MAE_DEC_MLP_DIMS__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_MLP_DIMS__INFO, 16, 1, 1, 1)
-
-        self.MODEL__MAE_DEC_MLP_DIMS__INPUT = QLineEdit(self.transformers_frame)
-        self.MODEL__MAE_DEC_MLP_DIMS__INPUT.setObjectName(u"MODEL__MAE_DEC_MLP_DIMS__INPUT")
-        self.MODEL__MAE_DEC_MLP_DIMS__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__MAE_DEC_MLP_DIMS__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__MAE_DEC_MLP_DIMS__INPUT.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_MLP_DIMS__INPUT, 16, 2, 1, 1)
-
-        self.MODEL__MAE_DEC_NUM_LAYERS__INFO = QPushButton(self.transformers_frame)
-        self.MODEL__MAE_DEC_NUM_LAYERS__INFO.setObjectName(u"MODEL__MAE_DEC_NUM_LAYERS__INFO")
-        self.MODEL__MAE_DEC_NUM_LAYERS__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__MAE_DEC_NUM_LAYERS__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__MAE_DEC_NUM_LAYERS__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_NUM_LAYERS__INFO, 14, 1, 1, 1)
-
-        self.MODEL__MAE_DEC_NUM_HEADS__INFO = QPushButton(self.transformers_frame)
-        self.MODEL__MAE_DEC_NUM_HEADS__INFO.setObjectName(u"MODEL__MAE_DEC_NUM_HEADS__INFO")
-        self.MODEL__MAE_DEC_NUM_HEADS__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__MAE_DEC_NUM_HEADS__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__MAE_DEC_NUM_HEADS__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_NUM_HEADS__INFO, 15, 1, 1, 1)
-
-        self.MODEL__MAE_DEC_NUM_LAYERS__LABEL = QLabel(self.transformers_frame)
-        self.MODEL__MAE_DEC_NUM_LAYERS__LABEL.setObjectName(u"MODEL__MAE_DEC_NUM_LAYERS__LABEL")
-        self.MODEL__MAE_DEC_NUM_LAYERS__LABEL.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_NUM_LAYERS__LABEL, 14, 0, 1, 1)
-
-        self.MODEL__MAE_DEC_HIDDEN_SIZE__LABEL = QLabel(self.transformers_frame)
-        self.MODEL__MAE_DEC_HIDDEN_SIZE__LABEL.setObjectName(u"MODEL__MAE_DEC_HIDDEN_SIZE__LABEL")
-        self.MODEL__MAE_DEC_HIDDEN_SIZE__LABEL.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_HIDDEN_SIZE__LABEL, 13, 0, 1, 1)
-
-        self.MODEL__MAE_DEC_NUM_HEADS__LABEL = QLabel(self.transformers_frame)
-        self.MODEL__MAE_DEC_NUM_HEADS__LABEL.setObjectName(u"MODEL__MAE_DEC_NUM_HEADS__LABEL")
-        self.MODEL__MAE_DEC_NUM_HEADS__LABEL.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_NUM_HEADS__LABEL, 15, 0, 1, 1)
-
-        self.MODEL__VIT_TOKEN_SIZE__INPUT = QLineEdit(self.transformers_frame)
-        self.MODEL__VIT_TOKEN_SIZE__INPUT.setObjectName(u"MODEL__VIT_TOKEN_SIZE__INPUT")
-        self.MODEL__VIT_TOKEN_SIZE__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__VIT_TOKEN_SIZE__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__VIT_TOKEN_SIZE__INPUT.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.MODEL__VIT_TOKEN_SIZE__INPUT, 0, 2, 1, 1)
-
-        self.label_50 = QLabel(self.transformers_frame)
-        self.label_50.setObjectName(u"label_50")
-        self.label_50.setMaximumSize(QSize(16777215, 16777215))
-        self.label_50.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.label_50, 0, 0, 1, 1)
-
-        self.MODEL__VIT_MLP_RATIO__INPUT = QLineEdit(self.transformers_frame)
-        self.MODEL__VIT_MLP_RATIO__INPUT.setObjectName(u"MODEL__VIT_MLP_RATIO__INPUT")
-        self.MODEL__VIT_MLP_RATIO__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__VIT_MLP_RATIO__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__VIT_MLP_RATIO__INPUT.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.MODEL__VIT_MLP_RATIO__INPUT, 5, 2, 1, 1)
-
-        self.unetr_num_filters_label = QLabel(self.transformers_frame)
-        self.unetr_num_filters_label.setObjectName(u"unetr_num_filters_label")
-        self.unetr_num_filters_label.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.unetr_num_filters_label, 8, 0, 1, 1)
-
-        self.label_51 = QLabel(self.transformers_frame)
-        self.label_51.setObjectName(u"label_51")
-        self.label_51.setMaximumSize(QSize(16777215, 16777215))
-        self.label_51.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.label_51, 1, 0, 1, 1)
-
-        self.MODEL__MAE_DEC_HIDDEN_SIZE__INPUT = QLineEdit(self.transformers_frame)
-        self.MODEL__MAE_DEC_HIDDEN_SIZE__INPUT.setObjectName(u"MODEL__MAE_DEC_HIDDEN_SIZE__INPUT")
-        self.MODEL__MAE_DEC_HIDDEN_SIZE__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__MAE_DEC_HIDDEN_SIZE__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__MAE_DEC_HIDDEN_SIZE__INPUT.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.MODEL__MAE_DEC_HIDDEN_SIZE__INPUT, 13, 2, 1, 1)
-
-        self.MODEL__UNETR_DEC_KERNEL_SIZE__LABEL = QLabel(self.transformers_frame)
-        self.MODEL__UNETR_DEC_KERNEL_SIZE__LABEL.setObjectName(u"MODEL__UNETR_DEC_KERNEL_SIZE__LABEL")
-        self.MODEL__UNETR_DEC_KERNEL_SIZE__LABEL.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.MODEL__UNETR_DEC_KERNEL_SIZE__LABEL, 10, 0, 1, 1)
-
-        self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO = QPushButton(self.transformers_frame)
-        self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setObjectName(u"MODEL__UNETR_DEC_KERNEL_SIZE__INFO")
-        self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setFont(font1)
-        self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_23.addWidget(self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO, 10, 1, 1, 1)
-
-        self.MODEL__UNETR_DEC_KERNEL_SIZE__INPUT = QLineEdit(self.transformers_frame)
-        self.MODEL__UNETR_DEC_KERNEL_SIZE__INPUT.setObjectName(u"MODEL__UNETR_DEC_KERNEL_SIZE__INPUT")
-        self.MODEL__UNETR_DEC_KERNEL_SIZE__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__UNETR_DEC_KERNEL_SIZE__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__UNETR_DEC_KERNEL_SIZE__INPUT.setFont(font1)
-
-        self.gridLayout_23.addWidget(self.MODEL__UNETR_DEC_KERNEL_SIZE__INPUT, 10, 2, 1, 1)
-
-
-        self.gridLayout_4.addWidget(self.transformers_frame, 21, 0, 1, 1)
+        self.gridLayout_4.addWidget(self.label_30, 14, 0, 1, 1)
 
         self.frame_19 = QFrame(self.train_advanced_options_frame_2)
         self.frame_19.setObjectName(u"frame_19")
@@ -8294,32 +7948,31 @@ class Ui_MainWindow(object):
         self.frame_19.setFrameShadow(QFrame.Raised)
         self.gridLayout_21 = QGridLayout(self.frame_19)
         self.gridLayout_21.setObjectName(u"gridLayout_21")
-        self.DATA__VAL__RANDOM__INFO = QPushButton(self.frame_19)
-        self.DATA__VAL__RANDOM__INFO.setObjectName(u"DATA__VAL__RANDOM__INFO")
-        self.DATA__VAL__RANDOM__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__VAL__RANDOM__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__VAL__RANDOM__INFO.setStyleSheet(u"QPushButton {\n"
+        self.DATA__VAL__RESOLUTION__INFO = QPushButton(self.frame_19)
+        self.DATA__VAL__RESOLUTION__INFO.setObjectName(u"DATA__VAL__RESOLUTION__INFO")
+        self.DATA__VAL__RESOLUTION__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__VAL__RESOLUTION__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__VAL__RESOLUTION__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
 
-        self.gridLayout_21.addWidget(self.DATA__VAL__RANDOM__INFO, 0, 2, 1, 1)
+        self.gridLayout_21.addWidget(self.DATA__VAL__RESOLUTION__INFO, 3, 2, 1, 1)
 
-        self.random_val_label = QLabel(self.frame_19)
-        self.random_val_label.setObjectName(u"random_val_label")
-        self.random_val_label.setMaximumSize(QSize(16777215, 16777215))
-        self.random_val_label.setFont(font1)
+        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INFO = QPushButton(self.frame_19)
+        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INFO.setObjectName(u"DATA__VAL__INPUT_IMG_AXES_ORDER__INFO")
+        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
-        self.gridLayout_21.addWidget(self.random_val_label, 0, 0, 1, 2)
+        self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_IMG_AXES_ORDER__INFO, 7, 2, 1, 1)
 
-        self.DATA__VAL__RANDOM__INPUT = QComboBox(self.frame_19)
-        self.DATA__VAL__RANDOM__INPUT.addItem("")
-        self.DATA__VAL__RANDOM__INPUT.addItem("")
-        self.DATA__VAL__RANDOM__INPUT.setObjectName(u"DATA__VAL__RANDOM__INPUT")
-        self.DATA__VAL__RANDOM__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__VAL__RANDOM__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__RANDOM__INPUT.setFont(font1)
+        self.DATA__VAL__INPUT_MASK_AXES_ORDER__LABEL = QLabel(self.frame_19)
+        self.DATA__VAL__INPUT_MASK_AXES_ORDER__LABEL.setObjectName(u"DATA__VAL__INPUT_MASK_AXES_ORDER__LABEL")
+        self.DATA__VAL__INPUT_MASK_AXES_ORDER__LABEL.setFont(font1)
 
-        self.gridLayout_21.addWidget(self.DATA__VAL__RANDOM__INPUT, 0, 3, 1, 3)
+        self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_MASK_AXES_ORDER__LABEL, 8, 0, 1, 1)
 
         self.DATA__VAL__OVERLAP__INFO = QPushButton(self.frame_19)
         self.DATA__VAL__OVERLAP__INFO.setObjectName(u"DATA__VAL__OVERLAP__INFO")
@@ -8331,6 +7984,55 @@ class Ui_MainWindow(object):
 
         self.gridLayout_21.addWidget(self.DATA__VAL__OVERLAP__INFO, 1, 2, 1, 1)
 
+        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INFO = QPushButton(self.frame_19)
+        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INFO.setObjectName(u"DATA__VAL__INPUT_MASK_AXES_ORDER__INFO")
+        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_MASK_AXES_ORDER__INFO, 8, 2, 1, 1)
+
+        self.DATA__VAL__FILTER_SAMPLES__VALUES__INFO = QPushButton(self.frame_19)
+        self.DATA__VAL__FILTER_SAMPLES__VALUES__INFO.setObjectName(u"DATA__VAL__FILTER_SAMPLES__VALUES__INFO")
+        self.DATA__VAL__FILTER_SAMPLES__VALUES__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__VAL__FILTER_SAMPLES__VALUES__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__VAL__FILTER_SAMPLES__VALUES__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__VALUES__INFO, 11, 2, 1, 1)
+
+        self.DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL = QLabel(self.frame_19)
+        self.DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL.setObjectName(u"DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL")
+        self.DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL.setFont(font1)
+        self.DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL.setIndent(15)
+
+        self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL, 12, 0, 1, 1)
+
+        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INPUT = QLineEdit(self.frame_19)
+        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INPUT.setObjectName(u"DATA__VAL__INPUT_IMG_AXES_ORDER__INPUT")
+        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INPUT.setFont(font1)
+
+        self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_IMG_AXES_ORDER__INPUT, 7, 3, 1, 1)
+
+        self.DATA__VAL__FILTER_SAMPLES__PROPS__LABEL = QLabel(self.frame_19)
+        self.DATA__VAL__FILTER_SAMPLES__PROPS__LABEL.setObjectName(u"DATA__VAL__FILTER_SAMPLES__PROPS__LABEL")
+        self.DATA__VAL__FILTER_SAMPLES__PROPS__LABEL.setFont(font1)
+        self.DATA__VAL__FILTER_SAMPLES__PROPS__LABEL.setIndent(15)
+
+        self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__PROPS__LABEL, 10, 0, 1, 1)
+
+        self.random_val_label = QLabel(self.frame_19)
+        self.random_val_label.setObjectName(u"random_val_label")
+        self.random_val_label.setMaximumSize(QSize(16777215, 16777215))
+        self.random_val_label.setFont(font1)
+
+        self.gridLayout_21.addWidget(self.random_val_label, 0, 0, 1, 2)
+
         self.DATA__VAL__OVERLAP__INPUT = QLineEdit(self.frame_19)
         self.DATA__VAL__OVERLAP__INPUT.setObjectName(u"DATA__VAL__OVERLAP__INPUT")
         self.DATA__VAL__OVERLAP__INPUT.setMinimumSize(QSize(200, 30))
@@ -8339,6 +8041,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_21.addWidget(self.DATA__VAL__OVERLAP__INPUT, 1, 3, 1, 3)
 
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT = QLineEdit(self.frame_19)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT")
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setFont(font1)
+
+        self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT, 5, 3, 1, 3)
+
         self.validation_padding_label = QLabel(self.frame_19)
         self.validation_padding_label.setObjectName(u"validation_padding_label")
         self.validation_padding_label.setMaximumSize(QSize(16777215, 16777215))
@@ -8346,64 +8056,51 @@ class Ui_MainWindow(object):
 
         self.gridLayout_21.addWidget(self.validation_padding_label, 2, 0, 1, 1)
 
-        self.validation_overlap_label = QLabel(self.frame_19)
-        self.validation_overlap_label.setObjectName(u"validation_overlap_label")
-        self.validation_overlap_label.setMaximumSize(QSize(16777215, 16777215))
-        self.validation_overlap_label.setFont(font1)
+        self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT = QLineEdit(self.frame_19)
+        self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT.setObjectName(u"DATA__VAL__FILTER_SAMPLES__PROPS__INPUT")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT.sizePolicy().hasHeightForWidth())
+        self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT.setSizePolicy(sizePolicy2)
+        self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT.setFont(font1)
 
-        self.gridLayout_21.addWidget(self.validation_overlap_label, 1, 0, 1, 1)
+        self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT, 10, 3, 1, 1)
 
-        self.DATA__VAL__PADDING__INPUT = QLineEdit(self.frame_19)
-        self.DATA__VAL__PADDING__INPUT.setObjectName(u"DATA__VAL__PADDING__INPUT")
-        self.DATA__VAL__PADDING__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__VAL__PADDING__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__PADDING__INPUT.setFont(font1)
+        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT = QLineEdit(self.frame_19)
+        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT.setObjectName(u"DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT")
+        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT.setFont(font1)
 
-        self.gridLayout_21.addWidget(self.DATA__VAL__PADDING__INPUT, 2, 3, 1, 3)
+        self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT, 8, 3, 1, 1)
 
-        self.DATA__VAL__PADDING__INFO = QPushButton(self.frame_19)
-        self.DATA__VAL__PADDING__INFO.setObjectName(u"DATA__VAL__PADDING__INFO")
-        self.DATA__VAL__PADDING__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__VAL__PADDING__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__VAL__PADDING__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
+        self.DATA__VAL__FILTER_SAMPLES__VALUES__LABEL = QLabel(self.frame_19)
+        self.DATA__VAL__FILTER_SAMPLES__VALUES__LABEL.setObjectName(u"DATA__VAL__FILTER_SAMPLES__VALUES__LABEL")
+        self.DATA__VAL__FILTER_SAMPLES__VALUES__LABEL.setFont(font1)
+        self.DATA__VAL__FILTER_SAMPLES__VALUES__LABEL.setIndent(15)
 
-        self.gridLayout_21.addWidget(self.DATA__VAL__PADDING__INFO, 2, 2, 1, 1)
+        self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__VALUES__LABEL, 11, 0, 1, 1)
 
-        self.label_33 = QLabel(self.frame_19)
-        self.label_33.setObjectName(u"label_33")
-        self.label_33.setFont(font1)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT = QLineEdit(self.frame_19)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT")
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setFont(font1)
 
-        self.gridLayout_21.addWidget(self.label_33, 3, 0, 1, 1)
+        self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT, 6, 3, 1, 3)
 
-        self.DATA__VAL__RESOLUTION__INFO = QPushButton(self.frame_19)
-        self.DATA__VAL__RESOLUTION__INFO.setObjectName(u"DATA__VAL__RESOLUTION__INFO")
-        self.DATA__VAL__RESOLUTION__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__VAL__RESOLUTION__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__VAL__RESOLUTION__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
+        self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT = QLineEdit(self.frame_19)
+        self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT.setObjectName(u"DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT")
+        sizePolicy2.setHeightForWidth(self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT.sizePolicy().hasHeightForWidth())
+        self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT.setSizePolicy(sizePolicy2)
+        self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT.setFont(font1)
 
-        self.gridLayout_21.addWidget(self.DATA__VAL__RESOLUTION__INFO, 3, 2, 1, 1)
-
-        self.DATA__VAL__RESOLUTION__INPUT = QLineEdit(self.frame_19)
-        self.DATA__VAL__RESOLUTION__INPUT.setObjectName(u"DATA__VAL__RESOLUTION__INPUT")
-        self.DATA__VAL__RESOLUTION__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__VAL__RESOLUTION__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__RESOLUTION__INPUT.setFont(font1)
-
-        self.gridLayout_21.addWidget(self.DATA__VAL__RESOLUTION__INPUT, 3, 3, 1, 3)
-
-        self.horizontalSpacer_12 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_21.addItem(self.horizontalSpacer_12, 3, 6, 1, 1)
-
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__LABEL = QLabel(self.frame_19)
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__LABEL.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__LABEL")
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__LABEL.setFont(font1)
-
-        self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__LABEL, 4, 0, 1, 2)
+        self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT, 12, 3, 1, 1)
 
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO = QPushButton(self.frame_19)
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO")
@@ -8416,40 +8113,34 @@ class Ui_MainWindow(object):
 
         self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO, 4, 2, 1, 1)
 
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO = QPushButton(self.frame_19)
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO")
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setFont(font1)
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
+        self.validation_overlap_label = QLabel(self.frame_19)
+        self.validation_overlap_label.setObjectName(u"validation_overlap_label")
+        self.validation_overlap_label.setMaximumSize(QSize(16777215, 16777215))
+        self.validation_overlap_label.setFont(font1)
 
-        self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO, 5, 2, 1, 1)
+        self.gridLayout_21.addWidget(self.validation_overlap_label, 1, 0, 1, 1)
 
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT = QComboBox(self.frame_19)
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT.addItem("")
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT.addItem("")
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT")
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT.setFont(font1)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__LABEL = QLabel(self.frame_19)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__LABEL.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__LABEL")
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__LABEL.setFont(font1)
 
-        self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT, 4, 3, 1, 3)
+        self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__LABEL, 4, 0, 1, 2)
 
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL = QLabel(self.frame_19)
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL")
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setFont(font1)
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setIndent(15)
+        self.DATA__VAL__RANDOM__INPUT = QComboBox(self.frame_19)
+        self.DATA__VAL__RANDOM__INPUT.addItem("")
+        self.DATA__VAL__RANDOM__INPUT.addItem("")
+        self.DATA__VAL__RANDOM__INPUT.setObjectName(u"DATA__VAL__RANDOM__INPUT")
+        self.DATA__VAL__RANDOM__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__VAL__RANDOM__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__VAL__RANDOM__INPUT.setFont(font1)
 
-        self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL, 5, 0, 1, 2)
+        self.gridLayout_21.addWidget(self.DATA__VAL__RANDOM__INPUT, 0, 3, 1, 3)
 
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL = QLabel(self.frame_19)
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL")
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setFont(font1)
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setIndent(15)
+        self.DATA__VAL__INPUT_IMG_AXES_ORDER__LABEL = QLabel(self.frame_19)
+        self.DATA__VAL__INPUT_IMG_AXES_ORDER__LABEL.setObjectName(u"DATA__VAL__INPUT_IMG_AXES_ORDER__LABEL")
+        self.DATA__VAL__INPUT_IMG_AXES_ORDER__LABEL.setFont(font1)
 
-        self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL, 6, 0, 1, 2)
+        self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_IMG_AXES_ORDER__LABEL, 7, 0, 1, 1)
 
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO = QPushButton(self.frame_19)
         self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO")
@@ -8462,144 +8153,37 @@ class Ui_MainWindow(object):
 
         self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO, 6, 2, 1, 1)
 
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT = QLineEdit(self.frame_19)
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT")
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setFont(font1)
+        self.label_33 = QLabel(self.frame_19)
+        self.label_33.setObjectName(u"label_33")
+        self.label_33.setFont(font1)
 
-        self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT, 5, 3, 1, 3)
+        self.gridLayout_21.addWidget(self.label_33, 3, 0, 1, 1)
 
-        self.DATA__VAL__INPUT_MASK_AXES_ORDER__LABEL = QLabel(self.frame_19)
-        self.DATA__VAL__INPUT_MASK_AXES_ORDER__LABEL.setObjectName(u"DATA__VAL__INPUT_MASK_AXES_ORDER__LABEL")
-        self.DATA__VAL__INPUT_MASK_AXES_ORDER__LABEL.setFont(font1)
-
-        self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_MASK_AXES_ORDER__LABEL, 8, 0, 1, 1)
-
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT = QLineEdit(self.frame_19)
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT")
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setFont(font1)
-
-        self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT, 6, 3, 1, 3)
-
-        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INFO = QPushButton(self.frame_19)
-        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INFO.setObjectName(u"DATA__VAL__INPUT_IMG_AXES_ORDER__INFO")
-        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INFO.setStyleSheet(u"QPushButton {\n"
+        self.DATA__VAL__PADDING__INFO = QPushButton(self.frame_19)
+        self.DATA__VAL__PADDING__INFO.setObjectName(u"DATA__VAL__PADDING__INFO")
+        self.DATA__VAL__PADDING__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__VAL__PADDING__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__VAL__PADDING__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
 
-        self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_IMG_AXES_ORDER__INFO, 7, 2, 1, 1)
+        self.gridLayout_21.addWidget(self.DATA__VAL__PADDING__INFO, 2, 2, 1, 1)
 
-        self.DATA__VAL__INPUT_IMG_AXES_ORDER__LABEL = QLabel(self.frame_19)
-        self.DATA__VAL__INPUT_IMG_AXES_ORDER__LABEL.setObjectName(u"DATA__VAL__INPUT_IMG_AXES_ORDER__LABEL")
-        self.DATA__VAL__INPUT_IMG_AXES_ORDER__LABEL.setFont(font1)
+        self.DATA__VAL__RESOLUTION__INPUT = QLineEdit(self.frame_19)
+        self.DATA__VAL__RESOLUTION__INPUT.setObjectName(u"DATA__VAL__RESOLUTION__INPUT")
+        self.DATA__VAL__RESOLUTION__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__VAL__RESOLUTION__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__VAL__RESOLUTION__INPUT.setFont(font1)
 
-        self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_IMG_AXES_ORDER__LABEL, 7, 0, 1, 1)
+        self.gridLayout_21.addWidget(self.DATA__VAL__RESOLUTION__INPUT, 3, 3, 1, 3)
 
-        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INPUT = QLineEdit(self.frame_19)
-        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INPUT.setObjectName(u"DATA__VAL__INPUT_IMG_AXES_ORDER__INPUT")
-        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INPUT.setFont(font1)
+        self.DATA__VAL__PADDING__INPUT = QLineEdit(self.frame_19)
+        self.DATA__VAL__PADDING__INPUT.setObjectName(u"DATA__VAL__PADDING__INPUT")
+        self.DATA__VAL__PADDING__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__VAL__PADDING__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__VAL__PADDING__INPUT.setFont(font1)
 
-        self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_IMG_AXES_ORDER__INPUT, 7, 3, 1, 1)
-
-        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT = QLineEdit(self.frame_19)
-        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT.setObjectName(u"DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT")
-        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT.setFont(font1)
-
-        self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT, 8, 3, 1, 1)
-
-        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INFO = QPushButton(self.frame_19)
-        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INFO.setObjectName(u"DATA__VAL__INPUT_MASK_AXES_ORDER__INFO")
-        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_MASK_AXES_ORDER__INFO, 8, 2, 1, 1)
-
-        self.DATA__VAL__FILTER_SAMPLES__ENABLE__LABEL = QLabel(self.frame_19)
-        self.DATA__VAL__FILTER_SAMPLES__ENABLE__LABEL.setObjectName(u"DATA__VAL__FILTER_SAMPLES__ENABLE__LABEL")
-        self.DATA__VAL__FILTER_SAMPLES__ENABLE__LABEL.setFont(font1)
-
-        self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__ENABLE__LABEL, 9, 0, 1, 1)
-
-        self.DATA__VAL__FILTER_SAMPLES__PROPS__LABEL = QLabel(self.frame_19)
-        self.DATA__VAL__FILTER_SAMPLES__PROPS__LABEL.setObjectName(u"DATA__VAL__FILTER_SAMPLES__PROPS__LABEL")
-        self.DATA__VAL__FILTER_SAMPLES__PROPS__LABEL.setFont(font1)
-        self.DATA__VAL__FILTER_SAMPLES__PROPS__LABEL.setIndent(15)
-
-        self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__PROPS__LABEL, 10, 0, 1, 1)
-
-        self.DATA__VAL__FILTER_SAMPLES__VALUES__LABEL = QLabel(self.frame_19)
-        self.DATA__VAL__FILTER_SAMPLES__VALUES__LABEL.setObjectName(u"DATA__VAL__FILTER_SAMPLES__VALUES__LABEL")
-        self.DATA__VAL__FILTER_SAMPLES__VALUES__LABEL.setFont(font1)
-        self.DATA__VAL__FILTER_SAMPLES__VALUES__LABEL.setIndent(15)
-
-        self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__VALUES__LABEL, 11, 0, 1, 1)
-
-        self.DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL = QLabel(self.frame_19)
-        self.DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL.setObjectName(u"DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL")
-        self.DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL.setFont(font1)
-        self.DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL.setIndent(15)
-
-        self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL, 12, 0, 1, 1)
-
-        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT = QComboBox(self.frame_19)
-        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.addItem("")
-        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.addItem("")
-        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.setObjectName(u"DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.sizePolicy().hasHeightForWidth())
-        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.setSizePolicy(sizePolicy2)
-        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.setFont(font1)
-
-        self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT, 9, 3, 1, 1)
-
-        self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT = QLineEdit(self.frame_19)
-        self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT.setObjectName(u"DATA__VAL__FILTER_SAMPLES__PROPS__INPUT")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
-        sizePolicy3.setHorizontalStretch(0)
-        sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT.sizePolicy().hasHeightForWidth())
-        self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT.setSizePolicy(sizePolicy3)
-        self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT.setFont(font1)
-
-        self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT, 10, 3, 1, 1)
-
-        self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT = QLineEdit(self.frame_19)
-        self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT.setObjectName(u"DATA__VAL__FILTER_SAMPLES__VALUES__INPUT")
-        sizePolicy3.setHeightForWidth(self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT.sizePolicy().hasHeightForWidth())
-        self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT.setSizePolicy(sizePolicy3)
-        self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT.setFont(font1)
-
-        self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT, 11, 3, 1, 1)
-
-        self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT = QLineEdit(self.frame_19)
-        self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT.setObjectName(u"DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT")
-        sizePolicy3.setHeightForWidth(self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT.sizePolicy().hasHeightForWidth())
-        self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT.setSizePolicy(sizePolicy3)
-        self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT.setFont(font1)
-
-        self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT, 12, 3, 1, 1)
+        self.gridLayout_21.addWidget(self.DATA__VAL__PADDING__INPUT, 2, 3, 1, 3)
 
         self.DATA__VAL__FILTER_SAMPLES__SIGNS__INFO = QPushButton(self.frame_19)
         self.DATA__VAL__FILTER_SAMPLES__SIGNS__INFO.setObjectName(u"DATA__VAL__FILTER_SAMPLES__SIGNS__INFO")
@@ -8611,25 +8195,45 @@ class Ui_MainWindow(object):
 
         self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__SIGNS__INFO, 12, 2, 1, 1)
 
-        self.DATA__VAL__FILTER_SAMPLES__VALUES__INFO = QPushButton(self.frame_19)
-        self.DATA__VAL__FILTER_SAMPLES__VALUES__INFO.setObjectName(u"DATA__VAL__FILTER_SAMPLES__VALUES__INFO")
-        self.DATA__VAL__FILTER_SAMPLES__VALUES__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__VAL__FILTER_SAMPLES__VALUES__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__VAL__FILTER_SAMPLES__VALUES__INFO.setStyleSheet(u"QPushButton {\n"
+        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT = QComboBox(self.frame_19)
+        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.addItem("")
+        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.addItem("")
+        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.setObjectName(u"DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT")
+        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.sizePolicy().hasHeightForWidth())
+        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.setSizePolicy(sizePolicy3)
+        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.setFont(font1)
+
+        self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT, 9, 3, 1, 1)
+
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL = QLabel(self.frame_19)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL")
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setFont(font1)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setIndent(15)
+
+        self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL, 6, 0, 1, 2)
+
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL = QLabel(self.frame_19)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL")
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setFont(font1)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setIndent(15)
+
+        self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL, 5, 0, 1, 2)
+
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO = QPushButton(self.frame_19)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO")
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setFont(font1)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
 
-        self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__VALUES__INFO, 11, 2, 1, 1)
-
-        self.DATA__VAL__FILTER_SAMPLES__PROPS__INFO = QPushButton(self.frame_19)
-        self.DATA__VAL__FILTER_SAMPLES__PROPS__INFO.setObjectName(u"DATA__VAL__FILTER_SAMPLES__PROPS__INFO")
-        self.DATA__VAL__FILTER_SAMPLES__PROPS__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__VAL__FILTER_SAMPLES__PROPS__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__VAL__FILTER_SAMPLES__PROPS__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__PROPS__INFO, 10, 2, 1, 1)
+        self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO, 5, 2, 1, 1)
 
         self.DATA__VAL__FILTER_SAMPLES__ENABLE__INFO = QPushButton(self.frame_19)
         self.DATA__VAL__FILTER_SAMPLES__ENABLE__INFO.setObjectName(u"DATA__VAL__FILTER_SAMPLES__ENABLE__INFO")
@@ -8641,22 +8245,527 @@ class Ui_MainWindow(object):
 
         self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__ENABLE__INFO, 9, 2, 1, 1)
 
+        self.DATA__VAL__FILTER_SAMPLES__PROPS__INFO = QPushButton(self.frame_19)
+        self.DATA__VAL__FILTER_SAMPLES__PROPS__INFO.setObjectName(u"DATA__VAL__FILTER_SAMPLES__PROPS__INFO")
+        self.DATA__VAL__FILTER_SAMPLES__PROPS__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__VAL__FILTER_SAMPLES__PROPS__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__VAL__FILTER_SAMPLES__PROPS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__PROPS__INFO, 10, 2, 1, 1)
+
+        self.DATA__VAL__FILTER_SAMPLES__ENABLE__LABEL = QLabel(self.frame_19)
+        self.DATA__VAL__FILTER_SAMPLES__ENABLE__LABEL.setObjectName(u"DATA__VAL__FILTER_SAMPLES__ENABLE__LABEL")
+        self.DATA__VAL__FILTER_SAMPLES__ENABLE__LABEL.setFont(font1)
+
+        self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__ENABLE__LABEL, 9, 0, 1, 1)
+
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT = QComboBox(self.frame_19)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT.addItem("")
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT.addItem("")
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT.setObjectName(u"DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT")
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT.setFont(font1)
+
+        self.gridLayout_21.addWidget(self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT, 4, 3, 1, 3)
+
+        self.DATA__VAL__RANDOM__INFO = QPushButton(self.frame_19)
+        self.DATA__VAL__RANDOM__INFO.setObjectName(u"DATA__VAL__RANDOM__INFO")
+        self.DATA__VAL__RANDOM__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__VAL__RANDOM__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__VAL__RANDOM__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_21.addWidget(self.DATA__VAL__RANDOM__INFO, 0, 2, 1, 1)
+
+        self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT = QLineEdit(self.frame_19)
+        self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT.setObjectName(u"DATA__VAL__FILTER_SAMPLES__VALUES__INPUT")
+        sizePolicy2.setHeightForWidth(self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT.sizePolicy().hasHeightForWidth())
+        self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT.setSizePolicy(sizePolicy2)
+        self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT.setFont(font1)
+
+        self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT, 11, 3, 1, 1)
+
+        self.horizontalSpacer_12 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_21.addItem(self.horizontalSpacer_12, 3, 6, 1, 1)
+
+        self.DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__INPUT = QComboBox(self.frame_19)
+        self.DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__INPUT.addItem("")
+        self.DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__INPUT.addItem("")
+        self.DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__INPUT.setObjectName(u"DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__INPUT")
+        self.DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__INPUT.setFont(font1)
+
+        self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__INPUT, 13, 3, 1, 1)
+
+        self.DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__INFO = QPushButton(self.frame_19)
+        self.DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__INFO.setObjectName(u"DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__INFO")
+        self.DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__INFO.setFont(font1)
+        self.DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__INFO, 13, 2, 1, 1)
+
+        self.DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__LABEL = QLabel(self.frame_19)
+        self.DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__LABEL.setObjectName(u"DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__LABEL")
+        self.DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__LABEL.setFont(font1)
+        self.DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__LABEL.setIndent(15)
+
+        self.gridLayout_21.addWidget(self.DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__LABEL, 13, 0, 1, 1)
+
 
         self.gridLayout_4.addWidget(self.frame_19, 17, 0, 1, 1)
 
-        self.label_31 = QLabel(self.train_advanced_options_frame_2)
-        self.label_31.setObjectName(u"label_31")
-        self.label_31.setMaximumSize(QSize(150, 16777215))
-        self.label_31.setFont(font1)
+        self.frame_16 = QFrame(self.train_advanced_options_frame_2)
+        self.frame_16.setObjectName(u"frame_16")
+        self.frame_16.setMinimumSize(QSize(0, 0))
+        self.frame_16.setFont(font1)
+        self.frame_16.setFrameShape(QFrame.Box)
+        self.frame_16.setFrameShadow(QFrame.Raised)
+        self.gridLayout_20 = QGridLayout(self.frame_16)
+        self.gridLayout_20.setObjectName(u"gridLayout_20")
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT = QLineEdit(self.frame_16)
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT")
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT.setFont(font1)
 
-        self.gridLayout_4.addWidget(self.label_31, 16, 0, 1, 1)
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT, 11, 3, 1, 1)
 
-        self.transformers_label = QLabel(self.train_advanced_options_frame_2)
-        self.transformers_label.setObjectName(u"transformers_label")
-        self.transformers_label.setMaximumSize(QSize(16777215, 16777215))
-        self.transformers_label.setFont(font1)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO = QPushButton(self.frame_16)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO")
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setFont(font1)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
-        self.gridLayout_4.addWidget(self.transformers_label, 20, 0, 1, 1)
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO, 6, 2, 1, 1)
+
+        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO = QPushButton(self.frame_16)
+        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO.setObjectName(u"DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO")
+        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO, 7, 2, 1, 1)
+
+        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__LABEL = QLabel(self.frame_16)
+        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__LABEL.setObjectName(u"DATA__TRAIN__INPUT_MASK_AXES_ORDER__LABEL")
+        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__LABEL.setFont(font1)
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__LABEL, 8, 0, 1, 1)
+
+        self.horizontalSpacer_11 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_20.addItem(self.horizontalSpacer_11, 0, 6, 1, 1)
+
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__LABEL = QLabel(self.frame_16)
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__LABEL.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__ENABLE__LABEL")
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__LABEL.setFont(font1)
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__LABEL, 9, 0, 1, 1)
+
+        self.DATA__TRAIN__PADDING__INPUT = QLineEdit(self.frame_16)
+        self.DATA__TRAIN__PADDING__INPUT.setObjectName(u"DATA__TRAIN__PADDING__INPUT")
+        self.DATA__TRAIN__PADDING__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TRAIN__PADDING__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TRAIN__PADDING__INPUT.setFont(font1)
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__PADDING__INPUT, 3, 3, 1, 3)
+
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO = QPushButton(self.frame_16)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO")
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setFont(font1)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO, 4, 2, 1, 1)
+
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL = QLabel(self.frame_16)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL")
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setFont(font1)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setIndent(15)
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL, 5, 0, 1, 1)
+
+        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INPUT = QLineEdit(self.frame_16)
+        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INPUT.setObjectName(u"DATA__TRAIN__INPUT_IMG_AXES_ORDER__INPUT")
+        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INPUT.setFont(font1)
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INPUT, 7, 3, 1, 1)
+
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT = QLineEdit(self.frame_16)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT")
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setFont(font1)
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT, 6, 3, 1, 1)
+
+        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__LABEL = QLabel(self.frame_16)
+        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__LABEL.setObjectName(u"DATA__TRAIN__INPUT_IMG_AXES_ORDER__LABEL")
+        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__LABEL.setFont(font1)
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__LABEL, 7, 0, 1, 1)
+
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO = QPushButton(self.frame_16)
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO")
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setFont(font1)
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO, 12, 2, 1, 1)
+
+        self.DATA__TRAIN__OVERLAP__INFO = QPushButton(self.frame_16)
+        self.DATA__TRAIN__OVERLAP__INFO.setObjectName(u"DATA__TRAIN__OVERLAP__INFO")
+        self.DATA__TRAIN__OVERLAP__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TRAIN__OVERLAP__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TRAIN__OVERLAP__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__OVERLAP__INFO, 2, 2, 1, 1)
+
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO = QPushButton(self.frame_16)
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO")
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setFont(font1)
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO, 10, 2, 1, 1)
+
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO = QPushButton(self.frame_16)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO")
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setFont(font1)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO, 5, 2, 1, 1)
+
+        self.label_22 = QLabel(self.frame_16)
+        self.label_22.setObjectName(u"label_22")
+        self.label_22.setMaximumSize(QSize(16777215, 16777215))
+        self.label_22.setFont(font1)
+
+        self.gridLayout_20.addWidget(self.label_22, 2, 0, 1, 1)
+
+        self.DATA__TRAIN__OVERLAP__INPUT = QLineEdit(self.frame_16)
+        self.DATA__TRAIN__OVERLAP__INPUT.setObjectName(u"DATA__TRAIN__OVERLAP__INPUT")
+        self.DATA__TRAIN__OVERLAP__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TRAIN__OVERLAP__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TRAIN__OVERLAP__INPUT.setFont(font1)
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__OVERLAP__INPUT, 2, 3, 1, 3)
+
+        self.DATA__TRAIN__REPLICATE__INFO = QPushButton(self.frame_16)
+        self.DATA__TRAIN__REPLICATE__INFO.setObjectName(u"DATA__TRAIN__REPLICATE__INFO")
+        self.DATA__TRAIN__REPLICATE__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TRAIN__REPLICATE__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TRAIN__REPLICATE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__REPLICATE__INFO, 0, 2, 1, 1)
+
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO = QPushButton(self.frame_16)
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO")
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setFont(font1)
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO, 9, 2, 1, 1)
+
+        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT = QLineEdit(self.frame_16)
+        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT.setObjectName(u"DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT")
+        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT.setFont(font1)
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT, 8, 3, 1, 1)
+
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL = QLabel(self.frame_16)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL")
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setFont(font1)
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL, 4, 0, 1, 1)
+
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT = QLineEdit(self.frame_16)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT")
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setFont(font1)
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT, 5, 3, 1, 1)
+
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL = QLabel(self.frame_16)
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL")
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL.setFont(font1)
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL.setIndent(15)
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL, 12, 0, 1, 1)
+
+        self.DATA__TRAIN__PADDING__INFO = QPushButton(self.frame_16)
+        self.DATA__TRAIN__PADDING__INFO.setObjectName(u"DATA__TRAIN__PADDING__INFO")
+        self.DATA__TRAIN__PADDING__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TRAIN__PADDING__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TRAIN__PADDING__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__PADDING__INFO, 3, 2, 1, 1)
+
+        self.train_resolution_label = QLabel(self.frame_16)
+        self.train_resolution_label.setObjectName(u"train_resolution_label")
+        self.train_resolution_label.setMaximumSize(QSize(16777215, 16777215))
+        self.train_resolution_label.setFont(font1)
+
+        self.gridLayout_20.addWidget(self.train_resolution_label, 1, 0, 1, 1)
+
+        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO = QPushButton(self.frame_16)
+        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO.setObjectName(u"DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO")
+        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO, 8, 2, 1, 1)
+
+        self.DATA__TRAIN__REPLICATE__INPUT = QLineEdit(self.frame_16)
+        self.DATA__TRAIN__REPLICATE__INPUT.setObjectName(u"DATA__TRAIN__REPLICATE__INPUT")
+        self.DATA__TRAIN__REPLICATE__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TRAIN__REPLICATE__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TRAIN__REPLICATE__INPUT.setFont(font1)
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__REPLICATE__INPUT, 0, 3, 1, 3)
+
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL = QLabel(self.frame_16)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL")
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setFont(font1)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setIndent(15)
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL, 6, 0, 1, 1)
+
+        self.DATA__TRAIN__RESOLUTION__INPUT = QLineEdit(self.frame_16)
+        self.DATA__TRAIN__RESOLUTION__INPUT.setObjectName(u"DATA__TRAIN__RESOLUTION__INPUT")
+        self.DATA__TRAIN__RESOLUTION__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TRAIN__RESOLUTION__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TRAIN__RESOLUTION__INPUT.setFont(font1)
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__RESOLUTION__INPUT, 1, 3, 1, 3)
+
+        self.label_23 = QLabel(self.frame_16)
+        self.label_23.setObjectName(u"label_23")
+        self.label_23.setMaximumSize(QSize(16777215, 16777215))
+        self.label_23.setFont(font1)
+
+        self.gridLayout_20.addWidget(self.label_23, 3, 0, 1, 1)
+
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT = QComboBox(self.frame_16)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT.addItem("")
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT.addItem("")
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT.setObjectName(u"DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT")
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT.setFont(font1)
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT, 4, 3, 1, 1)
+
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT = QLineEdit(self.frame_16)
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT")
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT.setFont(font1)
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT, 10, 3, 1, 1)
+
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT = QLineEdit(self.frame_16)
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT")
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT.setFont(font1)
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT, 12, 3, 1, 1)
+
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL = QLabel(self.frame_16)
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL")
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL.setFont(font1)
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL.setIndent(15)
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL, 10, 0, 1, 1)
+
+        self.label_21 = QLabel(self.frame_16)
+        self.label_21.setObjectName(u"label_21")
+        self.label_21.setFont(font1)
+
+        self.gridLayout_20.addWidget(self.label_21, 0, 0, 1, 2)
+
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT = QComboBox(self.frame_16)
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.addItem("")
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.addItem("")
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT")
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.setFont(font1)
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT, 9, 3, 1, 1)
+
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL = QLabel(self.frame_16)
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL")
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL.setFont(font1)
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL.setIndent(15)
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL, 11, 0, 1, 1)
+
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO = QPushButton(self.frame_16)
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO")
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setFont(font1)
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO, 11, 2, 1, 1)
+
+        self.DATA__TRAIN__RESOLUTION__INFO = QPushButton(self.frame_16)
+        self.DATA__TRAIN__RESOLUTION__INFO.setObjectName(u"DATA__TRAIN__RESOLUTION__INFO")
+        self.DATA__TRAIN__RESOLUTION__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TRAIN__RESOLUTION__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TRAIN__RESOLUTION__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__RESOLUTION__INFO, 1, 2, 1, 1)
+
+        self.DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__LABEL = QLabel(self.frame_16)
+        self.DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__LABEL.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__LABEL")
+        self.DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__LABEL.setFont(font1)
+        self.DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__LABEL.setIndent(15)
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__LABEL, 13, 0, 1, 1)
+
+        self.DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__INPUT = QComboBox(self.frame_16)
+        self.DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__INPUT.addItem("")
+        self.DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__INPUT.addItem("")
+        self.DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__INPUT.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__INPUT")
+        self.DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__INPUT.setFont(font1)
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__INPUT, 13, 3, 1, 1)
+
+        self.DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__INFO = QPushButton(self.frame_16)
+        self.DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__INFO.setObjectName(u"DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__INFO")
+        self.DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__INFO.setFont(font1)
+        self.DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_20.addWidget(self.DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__INFO, 13, 2, 1, 1)
+
+
+        self.gridLayout_4.addWidget(self.frame_16, 15, 0, 1, 1)
+
+        self.frame_61 = QFrame(self.train_advanced_options_frame_2)
+        self.frame_61.setObjectName(u"frame_61")
+        self.frame_61.setFrameShape(QFrame.NoFrame)
+        self.frame_61.setFrameShadow(QFrame.Raised)
+        self.gridLayout_74 = QGridLayout(self.frame_61)
+        self.gridLayout_74.setObjectName(u"gridLayout_74")
+        self.gridLayout_74.setContentsMargins(0, 0, 0, 0)
+        self.horizontalSpacer_74 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_74.addItem(self.horizontalSpacer_74, 0, 3, 1, 1)
+
+        self.DATA__PREPROCESS__VAL__INPUT = QComboBox(self.frame_61)
+        self.DATA__PREPROCESS__VAL__INPUT.addItem("")
+        self.DATA__PREPROCESS__VAL__INPUT.addItem("")
+        self.DATA__PREPROCESS__VAL__INPUT.setObjectName(u"DATA__PREPROCESS__VAL__INPUT")
+        self.DATA__PREPROCESS__VAL__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__VAL__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__VAL__INPUT.setFont(font1)
+
+        self.gridLayout_74.addWidget(self.DATA__PREPROCESS__VAL__INPUT, 1, 2, 1, 1)
+
+        self.DATA__PREPROCESS__VAL__INFO = QPushButton(self.frame_61)
+        self.DATA__PREPROCESS__VAL__INFO.setObjectName(u"DATA__PREPROCESS__VAL__INFO")
+        self.DATA__PREPROCESS__VAL__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__VAL__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__VAL__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_74.addWidget(self.DATA__PREPROCESS__VAL__INFO, 1, 1, 1, 1)
+
+        self.DATA__PREPROCESS__TRAIN__INFO = QPushButton(self.frame_61)
+        self.DATA__PREPROCESS__TRAIN__INFO.setObjectName(u"DATA__PREPROCESS__TRAIN__INFO")
+        self.DATA__PREPROCESS__TRAIN__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__TRAIN__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__PREPROCESS__TRAIN__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_74.addWidget(self.DATA__PREPROCESS__TRAIN__INFO, 0, 1, 1, 1)
+
+        self.DATA__PREPROCESS__VAL__LABEL = QLabel(self.frame_61)
+        self.DATA__PREPROCESS__VAL__LABEL.setObjectName(u"DATA__PREPROCESS__VAL__LABEL")
+        self.DATA__PREPROCESS__VAL__LABEL.setFont(font1)
+
+        self.gridLayout_74.addWidget(self.DATA__PREPROCESS__VAL__LABEL, 1, 0, 1, 1)
+
+        self.DATA__PREPROCESS__TRAIN__INPUT = QComboBox(self.frame_61)
+        self.DATA__PREPROCESS__TRAIN__INPUT.addItem("")
+        self.DATA__PREPROCESS__TRAIN__INPUT.addItem("")
+        self.DATA__PREPROCESS__TRAIN__INPUT.setObjectName(u"DATA__PREPROCESS__TRAIN__INPUT")
+        self.DATA__PREPROCESS__TRAIN__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__TRAIN__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__PREPROCESS__TRAIN__INPUT.setFont(font1)
+
+        self.gridLayout_74.addWidget(self.DATA__PREPROCESS__TRAIN__INPUT, 0, 2, 1, 1)
+
+        self.DATA__PREPROCESS__TRAIN__LABEL = QLabel(self.frame_61)
+        self.DATA__PREPROCESS__TRAIN__LABEL.setObjectName(u"DATA__PREPROCESS__TRAIN__LABEL")
+        self.DATA__PREPROCESS__TRAIN__LABEL.setMaximumSize(QSize(16777215, 16777215))
+        self.DATA__PREPROCESS__TRAIN__LABEL.setFont(font1)
+
+        self.gridLayout_74.addWidget(self.DATA__PREPROCESS__TRAIN__LABEL, 0, 0, 1, 1)
+
+
+        self.gridLayout_4.addWidget(self.frame_61, 11, 0, 1, 1)
 
 
         self.formLayout_2.setWidget(0, QFormLayout.FieldRole, self.train_advanced_options_frame_2)
@@ -9125,7 +9234,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 922, 327))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 895, 179))
         self.gridLayout_17 = QGridLayout(self.scrollAreaWidgetContents_4)
         self.gridLayout_17.setObjectName(u"gridLayout_17")
         self.label_59 = QLabel(self.scrollAreaWidgetContents_4)
@@ -10066,7 +10175,7 @@ class Ui_MainWindow(object):
         self.test_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 915, 2430))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 898, 2466))
         self.gridLayout_37 = QGridLayout(self.scrollAreaWidgetContents_5)
         self.gridLayout_37.setObjectName(u"gridLayout_37")
         self.test_advanced_options_frame = QFrame(self.scrollAreaWidgetContents_5)
@@ -10408,22 +10517,22 @@ class Ui_MainWindow(object):
         self.process_by_chunks_frame.setFrameShadow(QFrame.Raised)
         self.gridLayout_70 = QGridLayout(self.process_by_chunks_frame)
         self.gridLayout_70.setObjectName(u"gridLayout_70")
-        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO = QPushButton(self.process_by_chunks_frame)
-        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO.setObjectName(u"TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO")
-        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO.setMinimumSize(QSize(30, 30))
-        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO.setFont(font1)
-        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO.setStyleSheet(u"QPushButton {\n"
+        self.DATA__TEST__INPUT_MASK_AXES_ORDER__INFO = QPushButton(self.process_by_chunks_frame)
+        self.DATA__TEST__INPUT_MASK_AXES_ORDER__INFO.setObjectName(u"DATA__TEST__INPUT_MASK_AXES_ORDER__INFO")
+        self.DATA__TEST__INPUT_MASK_AXES_ORDER__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TEST__INPUT_MASK_AXES_ORDER__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TEST__INPUT_MASK_AXES_ORDER__INFO.setFont(font1)
+        self.DATA__TEST__INPUT_MASK_AXES_ORDER__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
 
-        self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO, 5, 1, 1, 1)
+        self.gridLayout_70.addWidget(self.DATA__TEST__INPUT_MASK_AXES_ORDER__INFO, 5, 1, 1, 1)
 
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__LABEL = QLabel(self.process_by_chunks_frame)
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__LABEL.setObjectName(u"TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__LABEL")
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__LABEL.setFont(font1)
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__LABEL = QLabel(self.process_by_chunks_frame)
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__LABEL.setObjectName(u"DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__LABEL")
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__LABEL.setFont(font1)
 
-        self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__LABEL, 6, 0, 1, 1)
+        self.gridLayout_70.addWidget(self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__LABEL, 6, 0, 1, 1)
 
         self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INPUT = QComboBox(self.process_by_chunks_frame)
         self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INPUT.addItem("")
@@ -10435,11 +10544,11 @@ class Ui_MainWindow(object):
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INPUT, 11, 2, 1, 1)
 
-        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__LABEL = QLabel(self.process_by_chunks_frame)
-        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__LABEL.setObjectName(u"TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__LABEL")
-        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__LABEL.setFont(font1)
+        self.DATA__TEST__INPUT_MASK_AXES_ORDER__LABEL = QLabel(self.process_by_chunks_frame)
+        self.DATA__TEST__INPUT_MASK_AXES_ORDER__LABEL.setObjectName(u"DATA__TEST__INPUT_MASK_AXES_ORDER__LABEL")
+        self.DATA__TEST__INPUT_MASK_AXES_ORDER__LABEL.setFont(font1)
 
-        self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__LABEL, 5, 0, 1, 1)
+        self.gridLayout_70.addWidget(self.DATA__TEST__INPUT_MASK_AXES_ORDER__LABEL, 5, 0, 1, 1)
 
         self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__LABEL = QLabel(self.process_by_chunks_frame)
         self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__LABEL.setObjectName(u"TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__LABEL")
@@ -10458,34 +10567,34 @@ class Ui_MainWindow(object):
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__FORMAT__INPUT, 0, 2, 1, 1)
 
-        self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INFO = QPushButton(self.process_by_chunks_frame)
-        self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INFO.setObjectName(u"TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INFO")
-        self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INFO.setMinimumSize(QSize(30, 30))
-        self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INFO.setStyleSheet(u"QPushButton {\n"
+        self.DATA__TEST__INPUT_IMG_AXES_ORDER__INFO = QPushButton(self.process_by_chunks_frame)
+        self.DATA__TEST__INPUT_IMG_AXES_ORDER__INFO.setObjectName(u"DATA__TEST__INPUT_IMG_AXES_ORDER__INFO")
+        self.DATA__TEST__INPUT_IMG_AXES_ORDER__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TEST__INPUT_IMG_AXES_ORDER__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TEST__INPUT_IMG_AXES_ORDER__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
 
-        self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INFO, 3, 1, 1, 1)
+        self.gridLayout_70.addWidget(self.DATA__TEST__INPUT_IMG_AXES_ORDER__INFO, 3, 1, 1, 1)
 
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL = QLabel(self.process_by_chunks_frame)
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setObjectName(u"TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL")
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setFont(font1)
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setIndent(15)
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL = QLabel(self.process_by_chunks_frame)
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setObjectName(u"DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL")
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setFont(font1)
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setIndent(15)
 
-        self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL, 7, 0, 1, 1)
+        self.gridLayout_70.addWidget(self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL, 7, 0, 1, 1)
 
         self.horizontalSpacer_55 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_70.addItem(self.horizontalSpacer_55, 0, 3, 1, 1)
 
-        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INPUT = QLineEdit(self.process_by_chunks_frame)
-        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INPUT.setObjectName(u"TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INPUT")
-        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INPUT.setMinimumSize(QSize(200, 30))
-        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INPUT.setFont(font1)
+        self.DATA__TEST__INPUT_MASK_AXES_ORDER__INPUT = QLineEdit(self.process_by_chunks_frame)
+        self.DATA__TEST__INPUT_MASK_AXES_ORDER__INPUT.setObjectName(u"DATA__TEST__INPUT_MASK_AXES_ORDER__INPUT")
+        self.DATA__TEST__INPUT_MASK_AXES_ORDER__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TEST__INPUT_MASK_AXES_ORDER__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TEST__INPUT_MASK_AXES_ORDER__INPUT.setFont(font1)
 
-        self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INPUT, 5, 2, 1, 1)
+        self.gridLayout_70.addWidget(self.DATA__TEST__INPUT_MASK_AXES_ORDER__INPUT, 5, 2, 1, 1)
 
         self.TEST__BY_CHUNKS__FLUSH_EACH__INPUT = QLineEdit(self.process_by_chunks_frame)
         self.TEST__BY_CHUNKS__FLUSH_EACH__INPUT.setObjectName(u"TEST__BY_CHUNKS__FLUSH_EACH__INPUT")
@@ -10495,34 +10604,34 @@ class Ui_MainWindow(object):
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__FLUSH_EACH__INPUT, 2, 2, 1, 1)
 
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO = QPushButton(self.process_by_chunks_frame)
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO.setObjectName(u"TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO")
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO.setMinimumSize(QSize(30, 30))
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO.setFont(font1)
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO.setStyleSheet(u"QPushButton {\n"
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INFO = QPushButton(self.process_by_chunks_frame)
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INFO.setObjectName(u"DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INFO")
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INFO.setFont(font1)
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
 
-        self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO, 6, 1, 1, 1)
+        self.gridLayout_70.addWidget(self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INFO, 6, 1, 1, 1)
 
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT = QComboBox(self.process_by_chunks_frame)
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT.addItem("")
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT.addItem("")
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT.setObjectName(u"TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT")
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT.setMinimumSize(QSize(200, 30))
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT.setFont(font1)
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INPUT = QComboBox(self.process_by_chunks_frame)
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INPUT.addItem("")
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INPUT.addItem("")
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INPUT.setObjectName(u"DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INPUT")
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INPUT.setFont(font1)
 
-        self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT, 6, 2, 1, 1)
+        self.gridLayout_70.addWidget(self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INPUT, 6, 2, 1, 1)
 
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT = QLineEdit(self.process_by_chunks_frame)
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setObjectName(u"TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT")
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setMinimumSize(QSize(200, 30))
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setFont(font1)
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT = QLineEdit(self.process_by_chunks_frame)
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setObjectName(u"DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT")
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setFont(font1)
 
-        self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT, 8, 2, 1, 1)
+        self.gridLayout_70.addWidget(self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT, 8, 2, 1, 1)
 
         self.label_56 = QLabel(self.process_by_chunks_frame)
         self.label_56.setObjectName(u"label_56")
@@ -10530,13 +10639,13 @@ class Ui_MainWindow(object):
 
         self.gridLayout_70.addWidget(self.label_56, 9, 0, 1, 1)
 
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT = QLineEdit(self.process_by_chunks_frame)
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setObjectName(u"TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT")
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setMinimumSize(QSize(200, 30))
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setFont(font1)
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT = QLineEdit(self.process_by_chunks_frame)
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setObjectName(u"DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT")
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setFont(font1)
 
-        self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT, 7, 2, 1, 1)
+        self.gridLayout_70.addWidget(self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT, 7, 2, 1, 1)
 
         self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INPUT = QComboBox(self.process_by_chunks_frame)
         self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INPUT.addItem("")
@@ -10564,16 +10673,16 @@ class Ui_MainWindow(object):
 
         self.gridLayout_70.addWidget(self.label_54, 2, 0, 1, 1)
 
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO = QPushButton(self.process_by_chunks_frame)
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setObjectName(u"TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO")
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setMinimumSize(QSize(30, 30))
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setFont(font1)
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setStyleSheet(u"QPushButton {\n"
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO = QPushButton(self.process_by_chunks_frame)
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setObjectName(u"DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO")
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setFont(font1)
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
 
-        self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO, 7, 1, 1, 1)
+        self.gridLayout_70.addWidget(self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO, 7, 1, 1, 1)
 
         self.TEST__BY_CHUNKS__FLUSH_EACH__INFO = QPushButton(self.process_by_chunks_frame)
         self.TEST__BY_CHUNKS__FLUSH_EACH__INFO.setObjectName(u"TEST__BY_CHUNKS__FLUSH_EACH__INFO")
@@ -10611,12 +10720,12 @@ class Ui_MainWindow(object):
 
         self.gridLayout_70.addWidget(self.label_40, 1, 0, 1, 1)
 
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL = QLabel(self.process_by_chunks_frame)
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setObjectName(u"TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL")
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setFont(font1)
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setIndent(15)
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL = QLabel(self.process_by_chunks_frame)
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setObjectName(u"DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL")
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setFont(font1)
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setIndent(15)
 
-        self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL, 8, 0, 1, 1)
+        self.gridLayout_70.addWidget(self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL, 8, 0, 1, 1)
 
         self.label_32 = QLabel(self.process_by_chunks_frame)
         self.label_32.setObjectName(u"label_32")
@@ -10624,11 +10733,11 @@ class Ui_MainWindow(object):
 
         self.gridLayout_70.addWidget(self.label_32, 0, 0, 1, 1)
 
-        self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__LABEL = QLabel(self.process_by_chunks_frame)
-        self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__LABEL.setObjectName(u"TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__LABEL")
-        self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__LABEL.setFont(font1)
+        self.DATA__TEST__INPUT_IMG_AXES_ORDER__LABEL = QLabel(self.process_by_chunks_frame)
+        self.DATA__TEST__INPUT_IMG_AXES_ORDER__LABEL.setObjectName(u"DATA__TEST__INPUT_IMG_AXES_ORDER__LABEL")
+        self.DATA__TEST__INPUT_IMG_AXES_ORDER__LABEL.setFont(font1)
 
-        self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__LABEL, 3, 0, 1, 1)
+        self.gridLayout_70.addWidget(self.DATA__TEST__INPUT_IMG_AXES_ORDER__LABEL, 3, 0, 1, 1)
 
         self.TEST__BY_CHUNKS__FORMAT__INFO = QPushButton(self.process_by_chunks_frame)
         self.TEST__BY_CHUNKS__FORMAT__INFO.setObjectName(u"TEST__BY_CHUNKS__FORMAT__INFO")
@@ -10650,24 +10759,24 @@ class Ui_MainWindow(object):
 
         self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INFO, 9, 1, 1, 1)
 
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO = QPushButton(self.process_by_chunks_frame)
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setObjectName(u"TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO")
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setMinimumSize(QSize(30, 30))
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setMaximumSize(QSize(30, 30))
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setFont(font1)
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setStyleSheet(u"QPushButton {\n"
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO = QPushButton(self.process_by_chunks_frame)
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setObjectName(u"DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO")
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setFont(font1)
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setStyleSheet(u"QPushButton {\n"
 "  border: none;\n"
 "}")
 
-        self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO, 8, 1, 1, 1)
+        self.gridLayout_70.addWidget(self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO, 8, 1, 1, 1)
 
-        self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INPUT = QLineEdit(self.process_by_chunks_frame)
-        self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INPUT.setObjectName(u"TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INPUT")
-        self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INPUT.setMinimumSize(QSize(200, 30))
-        self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INPUT.setMaximumSize(QSize(200, 30))
-        self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INPUT.setFont(font1)
+        self.DATA__TEST__INPUT_IMG_AXES_ORDER__INPUT = QLineEdit(self.process_by_chunks_frame)
+        self.DATA__TEST__INPUT_IMG_AXES_ORDER__INPUT.setObjectName(u"DATA__TEST__INPUT_IMG_AXES_ORDER__INPUT")
+        self.DATA__TEST__INPUT_IMG_AXES_ORDER__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TEST__INPUT_IMG_AXES_ORDER__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TEST__INPUT_IMG_AXES_ORDER__INPUT.setFont(font1)
 
-        self.gridLayout_70.addWidget(self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INPUT, 3, 2, 1, 1)
+        self.gridLayout_70.addWidget(self.DATA__TEST__INPUT_IMG_AXES_ORDER__INPUT, 3, 2, 1, 1)
 
 
         self.gridLayout_8.addWidget(self.process_by_chunks_frame, 9, 0, 1, 1)
@@ -10686,200 +10795,11 @@ class Ui_MainWindow(object):
 
         self.gridLayout_43.addWidget(self.test_resolution_label, 4, 0, 1, 1)
 
-        self.DATA__TEST__OVERLAP__INPUT = QLineEdit(self.frame_41)
-        self.DATA__TEST__OVERLAP__INPUT.setObjectName(u"DATA__TEST__OVERLAP__INPUT")
-        self.DATA__TEST__OVERLAP__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__TEST__OVERLAP__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TEST__OVERLAP__INPUT.setFont(font1)
-
-        self.gridLayout_43.addWidget(self.DATA__TEST__OVERLAP__INPUT, 1, 2, 1, 1)
-
-        self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT = QComboBox(self.frame_41)
-        self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT.addItem("")
-        self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT.addItem("")
-        self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT.setObjectName(u"DATA__TEST__ARGMAX_TO_OUTPUT__INPUT")
-        self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT.setFont(font1)
-
-        self.gridLayout_43.addWidget(self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT, 5, 2, 1, 1)
-
-        self.DATA__TEST__MEDIAN_PADDING__INPUT = QComboBox(self.frame_41)
-        self.DATA__TEST__MEDIAN_PADDING__INPUT.addItem("")
-        self.DATA__TEST__MEDIAN_PADDING__INPUT.addItem("")
-        self.DATA__TEST__MEDIAN_PADDING__INPUT.setObjectName(u"DATA__TEST__MEDIAN_PADDING__INPUT")
-        self.DATA__TEST__MEDIAN_PADDING__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__TEST__MEDIAN_PADDING__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TEST__MEDIAN_PADDING__INPUT.setFont(font1)
-
-        self.gridLayout_43.addWidget(self.DATA__TEST__MEDIAN_PADDING__INPUT, 3, 2, 1, 1)
-
-        self.test_padding_label = QLabel(self.frame_41)
-        self.test_padding_label.setObjectName(u"test_padding_label")
-        self.test_padding_label.setFont(font1)
-
-        self.gridLayout_43.addWidget(self.test_padding_label, 2, 0, 1, 1)
-
-        self.test_argmax_label = QLabel(self.frame_41)
-        self.test_argmax_label.setObjectName(u"test_argmax_label")
-        self.test_argmax_label.setFont(font1)
-
-        self.gridLayout_43.addWidget(self.test_argmax_label, 5, 0, 1, 1)
-
-        self.DATA__TEST__MEDIAN_PADDING__INFO = QPushButton(self.frame_41)
-        self.DATA__TEST__MEDIAN_PADDING__INFO.setObjectName(u"DATA__TEST__MEDIAN_PADDING__INFO")
-        self.DATA__TEST__MEDIAN_PADDING__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__TEST__MEDIAN_PADDING__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__MEDIAN_PADDING__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_43.addWidget(self.DATA__TEST__MEDIAN_PADDING__INFO, 3, 1, 1, 1)
-
-        self.test_median_padding_label = QLabel(self.frame_41)
-        self.test_median_padding_label.setObjectName(u"test_median_padding_label")
-        self.test_median_padding_label.setFont(font1)
-
-        self.gridLayout_43.addWidget(self.test_median_padding_label, 3, 0, 1, 1)
-
-        self.DATA__TEST__PADDING__INFO = QPushButton(self.frame_41)
-        self.DATA__TEST__PADDING__INFO.setObjectName(u"DATA__TEST__PADDING__INFO")
-        self.DATA__TEST__PADDING__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__TEST__PADDING__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__PADDING__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_43.addWidget(self.DATA__TEST__PADDING__INFO, 2, 1, 1, 1)
-
-        self.DATA__TEST__RESOLUTION__INFO = QPushButton(self.frame_41)
-        self.DATA__TEST__RESOLUTION__INFO.setObjectName(u"DATA__TEST__RESOLUTION__INFO")
-        self.DATA__TEST__RESOLUTION__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__TEST__RESOLUTION__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__RESOLUTION__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_43.addWidget(self.DATA__TEST__RESOLUTION__INFO, 4, 1, 1, 1)
-
-        self.DATA__TEST__PADDING__INPUT = QLineEdit(self.frame_41)
-        self.DATA__TEST__PADDING__INPUT.setObjectName(u"DATA__TEST__PADDING__INPUT")
-        self.DATA__TEST__PADDING__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__TEST__PADDING__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TEST__PADDING__INPUT.setFont(font1)
-
-        self.gridLayout_43.addWidget(self.DATA__TEST__PADDING__INPUT, 2, 2, 1, 1)
-
-        self.test_overlap_label = QLabel(self.frame_41)
-        self.test_overlap_label.setObjectName(u"test_overlap_label")
-        self.test_overlap_label.setFont(font1)
-
-        self.gridLayout_43.addWidget(self.test_overlap_label, 1, 0, 1, 1)
-
-        self.DATA__TEST__ARGMAX_TO_OUTPUT__INFO = QPushButton(self.frame_41)
-        self.DATA__TEST__ARGMAX_TO_OUTPUT__INFO.setObjectName(u"DATA__TEST__ARGMAX_TO_OUTPUT__INFO")
-        self.DATA__TEST__ARGMAX_TO_OUTPUT__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__TEST__ARGMAX_TO_OUTPUT__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__ARGMAX_TO_OUTPUT__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_43.addWidget(self.DATA__TEST__ARGMAX_TO_OUTPUT__INFO, 5, 1, 1, 1)
-
-        self.DATA__TEST__OVERLAP__INFO = QPushButton(self.frame_41)
-        self.DATA__TEST__OVERLAP__INFO.setObjectName(u"DATA__TEST__OVERLAP__INFO")
-        self.DATA__TEST__OVERLAP__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__TEST__OVERLAP__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__OVERLAP__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_43.addWidget(self.DATA__TEST__OVERLAP__INFO, 1, 1, 1, 1)
-
-        self.horizontalSpacer_34 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_43.addItem(self.horizontalSpacer_34, 1, 4, 1, 1)
-
-        self.DATA__TEST__RESOLUTION__INPUT = QLineEdit(self.frame_41)
-        self.DATA__TEST__RESOLUTION__INPUT.setObjectName(u"DATA__TEST__RESOLUTION__INPUT")
-        self.DATA__TEST__RESOLUTION__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__TEST__RESOLUTION__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TEST__RESOLUTION__INPUT.setFont(font1)
-
-        self.gridLayout_43.addWidget(self.DATA__TEST__RESOLUTION__INPUT, 4, 2, 1, 1)
-
-        self.DATA__PATCH_SIZE__TEST__INFO = QPushButton(self.frame_41)
-        self.DATA__PATCH_SIZE__TEST__INFO.setObjectName(u"DATA__PATCH_SIZE__TEST__INFO")
-        self.DATA__PATCH_SIZE__TEST__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__PATCH_SIZE__TEST__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PATCH_SIZE__TEST__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_43.addWidget(self.DATA__PATCH_SIZE__TEST__INFO, 0, 1, 1, 1)
-
         self.DATA__PATCH_SIZE__TEST__LABEL = QLabel(self.frame_41)
         self.DATA__PATCH_SIZE__TEST__LABEL.setObjectName(u"DATA__PATCH_SIZE__TEST__LABEL")
         self.DATA__PATCH_SIZE__TEST__LABEL.setFont(font1)
 
         self.gridLayout_43.addWidget(self.DATA__PATCH_SIZE__TEST__LABEL, 0, 0, 1, 1)
-
-        self.DATA__PATCH_SIZE__TEST__INPUT = QTextEdit(self.frame_41)
-        self.DATA__PATCH_SIZE__TEST__INPUT.setObjectName(u"DATA__PATCH_SIZE__TEST__INPUT")
-        self.DATA__PATCH_SIZE__TEST__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__PATCH_SIZE__TEST__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PATCH_SIZE__TEST__INPUT.setFont(font1)
-
-        self.gridLayout_43.addWidget(self.DATA__PATCH_SIZE__TEST__INPUT, 0, 2, 1, 1)
-
-        self.DATA__TEST__FILTER_SAMPLES__PROPS__LABEL = QLabel(self.frame_41)
-        self.DATA__TEST__FILTER_SAMPLES__PROPS__LABEL.setObjectName(u"DATA__TEST__FILTER_SAMPLES__PROPS__LABEL")
-        self.DATA__TEST__FILTER_SAMPLES__PROPS__LABEL.setFont(font1)
-        self.DATA__TEST__FILTER_SAMPLES__PROPS__LABEL.setIndent(15)
-
-        self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__PROPS__LABEL, 7, 0, 1, 1)
-
-        self.DATA__TEST__FILTER_SAMPLES__VALUES__LABEL = QLabel(self.frame_41)
-        self.DATA__TEST__FILTER_SAMPLES__VALUES__LABEL.setObjectName(u"DATA__TEST__FILTER_SAMPLES__VALUES__LABEL")
-        self.DATA__TEST__FILTER_SAMPLES__VALUES__LABEL.setFont(font1)
-        self.DATA__TEST__FILTER_SAMPLES__VALUES__LABEL.setIndent(15)
-
-        self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__VALUES__LABEL, 8, 0, 1, 1)
-
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO = QPushButton(self.frame_41)
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setObjectName(u"DATA__TEST__FILTER_SAMPLES__ENABLE__INFO")
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setFont(font1)
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO, 6, 1, 1, 1)
-
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__LABEL = QLabel(self.frame_41)
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__LABEL.setObjectName(u"DATA__TEST__FILTER_SAMPLES__ENABLE__LABEL")
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__LABEL.setFont(font1)
-
-        self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__ENABLE__LABEL, 6, 0, 1, 1)
-
-        self.DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL = QLabel(self.frame_41)
-        self.DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL.setObjectName(u"DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL")
-        self.DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL.setFont(font1)
-        self.DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL.setIndent(15)
-
-        self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL, 9, 0, 1, 1)
-
-        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO = QPushButton(self.frame_41)
-        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setObjectName(u"DATA__TEST__FILTER_SAMPLES__SIGNS__INFO")
-        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setFont(font1)
-        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO, 9, 1, 1, 1)
 
         self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO = QPushButton(self.frame_41)
         self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO.setObjectName(u"DATA__TEST__FILTER_SAMPLES__VALUES__INFO")
@@ -10892,6 +10812,219 @@ class Ui_MainWindow(object):
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO, 8, 1, 1, 1)
 
+        self.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT = QLineEdit(self.frame_41)
+        self.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT.setObjectName(u"DATA__TEST__FILTER_SAMPLES__PROPS__INPUT")
+        self.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT.setFont(font1)
+
+        self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT, 7, 2, 1, 1)
+
+        self.DATA__TEST__RESOLUTION__INPUT = QLineEdit(self.frame_41)
+        self.DATA__TEST__RESOLUTION__INPUT.setObjectName(u"DATA__TEST__RESOLUTION__INPUT")
+        self.DATA__TEST__RESOLUTION__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TEST__RESOLUTION__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TEST__RESOLUTION__INPUT.setFont(font1)
+
+        self.gridLayout_43.addWidget(self.DATA__TEST__RESOLUTION__INPUT, 4, 2, 1, 1)
+
+        self.DATA__TEST__FILTER_SAMPLES__VALUES__LABEL = QLabel(self.frame_41)
+        self.DATA__TEST__FILTER_SAMPLES__VALUES__LABEL.setObjectName(u"DATA__TEST__FILTER_SAMPLES__VALUES__LABEL")
+        self.DATA__TEST__FILTER_SAMPLES__VALUES__LABEL.setFont(font1)
+        self.DATA__TEST__FILTER_SAMPLES__VALUES__LABEL.setIndent(15)
+
+        self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__VALUES__LABEL, 8, 0, 1, 1)
+
+        self.test_padding_label = QLabel(self.frame_41)
+        self.test_padding_label.setObjectName(u"test_padding_label")
+        self.test_padding_label.setFont(font1)
+
+        self.gridLayout_43.addWidget(self.test_padding_label, 2, 0, 1, 1)
+
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__LABEL = QLabel(self.frame_41)
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__LABEL.setObjectName(u"DATA__TEST__FILTER_SAMPLES__ENABLE__LABEL")
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__LABEL.setFont(font1)
+
+        self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__ENABLE__LABEL, 6, 0, 1, 1)
+
+        self.DATA__TEST__PADDING__INFO = QPushButton(self.frame_41)
+        self.DATA__TEST__PADDING__INFO.setObjectName(u"DATA__TEST__PADDING__INFO")
+        self.DATA__TEST__PADDING__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TEST__PADDING__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TEST__PADDING__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_43.addWidget(self.DATA__TEST__PADDING__INFO, 2, 1, 1, 1)
+
+        self.test_median_padding_label = QLabel(self.frame_41)
+        self.test_median_padding_label.setObjectName(u"test_median_padding_label")
+        self.test_median_padding_label.setFont(font1)
+
+        self.gridLayout_43.addWidget(self.test_median_padding_label, 3, 0, 1, 1)
+
+        self.horizontalSpacer_34 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_43.addItem(self.horizontalSpacer_34, 1, 4, 1, 1)
+
+        self.DATA__TEST__MEDIAN_PADDING__INFO = QPushButton(self.frame_41)
+        self.DATA__TEST__MEDIAN_PADDING__INFO.setObjectName(u"DATA__TEST__MEDIAN_PADDING__INFO")
+        self.DATA__TEST__MEDIAN_PADDING__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TEST__MEDIAN_PADDING__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TEST__MEDIAN_PADDING__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_43.addWidget(self.DATA__TEST__MEDIAN_PADDING__INFO, 3, 1, 1, 1)
+
+        self.test_argmax_label = QLabel(self.frame_41)
+        self.test_argmax_label.setObjectName(u"test_argmax_label")
+        self.test_argmax_label.setFont(font1)
+
+        self.gridLayout_43.addWidget(self.test_argmax_label, 5, 0, 1, 1)
+
+        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT = QLineEdit(self.frame_41)
+        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT.setObjectName(u"DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT")
+        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT.setFont(font1)
+
+        self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT, 9, 2, 1, 1)
+
+        self.DATA__PATCH_SIZE__TEST__INPUT = QTextEdit(self.frame_41)
+        self.DATA__PATCH_SIZE__TEST__INPUT.setObjectName(u"DATA__PATCH_SIZE__TEST__INPUT")
+        self.DATA__PATCH_SIZE__TEST__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__PATCH_SIZE__TEST__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__PATCH_SIZE__TEST__INPUT.setFont(font1)
+
+        self.gridLayout_43.addWidget(self.DATA__PATCH_SIZE__TEST__INPUT, 0, 2, 1, 1)
+
+        self.DATA__TEST__RESOLUTION__INFO = QPushButton(self.frame_41)
+        self.DATA__TEST__RESOLUTION__INFO.setObjectName(u"DATA__TEST__RESOLUTION__INFO")
+        self.DATA__TEST__RESOLUTION__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TEST__RESOLUTION__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TEST__RESOLUTION__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_43.addWidget(self.DATA__TEST__RESOLUTION__INFO, 4, 1, 1, 1)
+
+        self.DATA__TEST__OVERLAP__INPUT = QLineEdit(self.frame_41)
+        self.DATA__TEST__OVERLAP__INPUT.setObjectName(u"DATA__TEST__OVERLAP__INPUT")
+        self.DATA__TEST__OVERLAP__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TEST__OVERLAP__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TEST__OVERLAP__INPUT.setFont(font1)
+
+        self.gridLayout_43.addWidget(self.DATA__TEST__OVERLAP__INPUT, 1, 2, 1, 1)
+
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT = QComboBox(self.frame_41)
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.addItem("")
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.addItem("")
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.setObjectName(u"DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT")
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.setFont(font1)
+
+        self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT, 6, 2, 1, 1)
+
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO = QPushButton(self.frame_41)
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setObjectName(u"DATA__TEST__FILTER_SAMPLES__ENABLE__INFO")
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setFont(font1)
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO, 6, 1, 1, 1)
+
+        self.DATA__TEST__OVERLAP__INFO = QPushButton(self.frame_41)
+        self.DATA__TEST__OVERLAP__INFO.setObjectName(u"DATA__TEST__OVERLAP__INFO")
+        self.DATA__TEST__OVERLAP__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TEST__OVERLAP__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TEST__OVERLAP__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_43.addWidget(self.DATA__TEST__OVERLAP__INFO, 1, 1, 1, 1)
+
+        self.DATA__TEST__PADDING__INPUT = QLineEdit(self.frame_41)
+        self.DATA__TEST__PADDING__INPUT.setObjectName(u"DATA__TEST__PADDING__INPUT")
+        self.DATA__TEST__PADDING__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TEST__PADDING__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TEST__PADDING__INPUT.setFont(font1)
+
+        self.gridLayout_43.addWidget(self.DATA__TEST__PADDING__INPUT, 2, 2, 1, 1)
+
+        self.DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL = QLabel(self.frame_41)
+        self.DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL.setObjectName(u"DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL")
+        self.DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL.setFont(font1)
+        self.DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL.setIndent(15)
+
+        self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL, 9, 0, 1, 1)
+
+        self.DATA__TEST__ARGMAX_TO_OUTPUT__INFO = QPushButton(self.frame_41)
+        self.DATA__TEST__ARGMAX_TO_OUTPUT__INFO.setObjectName(u"DATA__TEST__ARGMAX_TO_OUTPUT__INFO")
+        self.DATA__TEST__ARGMAX_TO_OUTPUT__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TEST__ARGMAX_TO_OUTPUT__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TEST__ARGMAX_TO_OUTPUT__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_43.addWidget(self.DATA__TEST__ARGMAX_TO_OUTPUT__INFO, 5, 1, 1, 1)
+
+        self.DATA__TEST__FILTER_SAMPLES__PROPS__LABEL = QLabel(self.frame_41)
+        self.DATA__TEST__FILTER_SAMPLES__PROPS__LABEL.setObjectName(u"DATA__TEST__FILTER_SAMPLES__PROPS__LABEL")
+        self.DATA__TEST__FILTER_SAMPLES__PROPS__LABEL.setFont(font1)
+        self.DATA__TEST__FILTER_SAMPLES__PROPS__LABEL.setIndent(15)
+
+        self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__PROPS__LABEL, 7, 0, 1, 1)
+
+        self.test_overlap_label = QLabel(self.frame_41)
+        self.test_overlap_label.setObjectName(u"test_overlap_label")
+        self.test_overlap_label.setFont(font1)
+
+        self.gridLayout_43.addWidget(self.test_overlap_label, 1, 0, 1, 1)
+
+        self.DATA__TEST__MEDIAN_PADDING__INPUT = QComboBox(self.frame_41)
+        self.DATA__TEST__MEDIAN_PADDING__INPUT.addItem("")
+        self.DATA__TEST__MEDIAN_PADDING__INPUT.addItem("")
+        self.DATA__TEST__MEDIAN_PADDING__INPUT.setObjectName(u"DATA__TEST__MEDIAN_PADDING__INPUT")
+        self.DATA__TEST__MEDIAN_PADDING__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TEST__MEDIAN_PADDING__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TEST__MEDIAN_PADDING__INPUT.setFont(font1)
+
+        self.gridLayout_43.addWidget(self.DATA__TEST__MEDIAN_PADDING__INPUT, 3, 2, 1, 1)
+
+        self.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT = QLineEdit(self.frame_41)
+        self.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT.setObjectName(u"DATA__TEST__FILTER_SAMPLES__VALUES__INPUT")
+        self.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT.setFont(font1)
+
+        self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT, 8, 2, 1, 1)
+
+        self.DATA__PATCH_SIZE__TEST__INFO = QPushButton(self.frame_41)
+        self.DATA__PATCH_SIZE__TEST__INFO.setObjectName(u"DATA__PATCH_SIZE__TEST__INFO")
+        self.DATA__PATCH_SIZE__TEST__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__PATCH_SIZE__TEST__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__PATCH_SIZE__TEST__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_43.addWidget(self.DATA__PATCH_SIZE__TEST__INFO, 0, 1, 1, 1)
+
+        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO = QPushButton(self.frame_41)
+        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setObjectName(u"DATA__TEST__FILTER_SAMPLES__SIGNS__INFO")
+        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setFont(font1)
+        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO, 9, 1, 1, 1)
+
         self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO = QPushButton(self.frame_41)
         self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO.setObjectName(u"DATA__TEST__FILTER_SAMPLES__PROPS__INFO")
         self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO.setMinimumSize(QSize(30, 30))
@@ -10903,39 +11036,42 @@ class Ui_MainWindow(object):
 
         self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO, 7, 1, 1, 1)
 
-        self.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT = QLineEdit(self.frame_41)
-        self.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT.setObjectName(u"DATA__TEST__FILTER_SAMPLES__PROPS__INPUT")
-        self.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT.setFont(font1)
+        self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT = QComboBox(self.frame_41)
+        self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT.addItem("")
+        self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT.addItem("")
+        self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT.setObjectName(u"DATA__TEST__ARGMAX_TO_OUTPUT__INPUT")
+        self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT.setFont(font1)
 
-        self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT, 7, 2, 1, 1)
+        self.gridLayout_43.addWidget(self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT, 5, 2, 1, 1)
 
-        self.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT = QLineEdit(self.frame_41)
-        self.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT.setObjectName(u"DATA__TEST__FILTER_SAMPLES__VALUES__INPUT")
-        self.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT.setFont(font1)
+        self.DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__LABEL = QLabel(self.frame_41)
+        self.DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__LABEL.setObjectName(u"DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__LABEL")
+        self.DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__LABEL.setFont(font1)
+        self.DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__LABEL.setIndent(15)
 
-        self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT, 8, 2, 1, 1)
+        self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__LABEL, 10, 0, 1, 1)
 
-        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT = QLineEdit(self.frame_41)
-        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT.setObjectName(u"DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT")
-        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT.setFont(font1)
+        self.DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__INPUT = QComboBox(self.frame_41)
+        self.DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__INPUT.addItem("")
+        self.DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__INPUT.addItem("")
+        self.DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__INPUT.setObjectName(u"DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__INPUT")
+        self.DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__INPUT.setFont(font1)
 
-        self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT, 9, 2, 1, 1)
+        self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__INPUT, 10, 2, 1, 1)
 
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT = QComboBox(self.frame_41)
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.addItem("")
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.addItem("")
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.setObjectName(u"DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT")
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.setFont(font1)
+        self.DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__INFO = QPushButton(self.frame_41)
+        self.DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__INFO.setObjectName(u"DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__INFO")
+        self.DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
-        self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT, 6, 2, 1, 1)
+        self.gridLayout_43.addWidget(self.DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__INFO, 10, 1, 1, 1)
 
 
         self.gridLayout_8.addWidget(self.frame_41, 1, 0, 1, 1)
@@ -11986,7 +12122,7 @@ class Ui_MainWindow(object):
         self.scrollArea_9.setWidgetResizable(True)
         self.scrollAreaWidgetContents_13 = QWidget()
         self.scrollAreaWidgetContents_13.setObjectName(u"scrollAreaWidgetContents_13")
-        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 633, 1327))
+        self.scrollAreaWidgetContents_13.setGeometry(QRect(0, 0, 914, 1327))
         self.gridLayout_44 = QGridLayout(self.scrollAreaWidgetContents_13)
         self.gridLayout_44.setObjectName(u"gridLayout_44")
         self.label_86 = QLabel(self.scrollAreaWidgetContents_13)
@@ -14218,7 +14354,7 @@ class Ui_MainWindow(object):
         self.check_yaml_file_errors_frame.setWidgetResizable(True)
         self.scrollAreaWidgetContents_19 = QWidget()
         self.scrollAreaWidgetContents_19.setObjectName(u"scrollAreaWidgetContents_19")
-        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 96, 26))
+        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 896, 152))
         self.verticalLayout_32 = QVBoxLayout(self.scrollAreaWidgetContents_19)
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
         self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)
@@ -14279,7 +14415,7 @@ class Ui_MainWindow(object):
 
         self.stackedWidget.setCurrentIndex(2)
         self.wizard_main_frame.setCurrentIndex(0)
-        self.stackedWidget_create_yaml_frame.setCurrentIndex(2)
+        self.stackedWidget_create_yaml_frame.setCurrentIndex(1)
         self.train_tab_widget.setCurrentIndex(0)
         self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(1)
         self.test_tab_widget.setCurrentIndex(0)
@@ -14417,6 +14553,424 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INFO.setText("")
         self.goptions_advanced_label.setText(QCoreApplication.translate("MainWindow", u"Advanced options", None))
         self.goptions_advanced_bn.setText("")
+        self.MODEL__BMZ__EXPORT__ENABLE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Export model to BioImage Model Zoo (BMZ) format?", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to activate or not the exportation of the used model to the BMZ format after train and/or test</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(statustip)
+        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setStatusTip("")
+#endif // QT_CONFIG(statustip)
+        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setText("")
+        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+#if QT_CONFIG(tooltip)
+        self.label_25.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">IDs of the GPU to run the job in. If you want to use more than one GPU add them sepated by commas. E.g. &quot;0,1,2,3&quot; </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.label_25.setText(QCoreApplication.translate("MainWindow", u"Data options", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__LABEL.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__LABEL.setText(QCoreApplication.translate("MainWindow", u"Mean", None))
+        self.DATA__NORMALIZATION__PERC_CLIP__ENABLE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Percentile clipping", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__LABEL.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__LABEL.setText(QCoreApplication.translate("MainWindow", u"Std", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__FORCE_RGB__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">If 'DATA.PATCH_SIZE' selected has 3 channels, e.g. RGB images are expected, so will force grayscale images to be converted into RGB (e.g. in ImageNet some of the images are grayscale)</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__FORCE_RGB__INFO.setText("")
+        self.DATA__FORCE_RGB__LABEL.setText(QCoreApplication.translate("MainWindow", u"Force image to be RGB", None))
+        self.DATA__NORMALIZATION__PERC_CLIP__LOWER_PERC__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1.0", None))
+        self.DATA__NORMALIZATION__TYPE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"div", None))
+        self.DATA__NORMALIZATION__TYPE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"scale_range", None))
+        self.DATA__NORMALIZATION__TYPE__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"zero_mean_unit_variance", None))
+
+#if QT_CONFIG(tooltip)
+        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to reshape the dimensions that does not satisfy the patch shape selected by padding it with reflect. It's not implemented in super-resolution inference phase workflow (as usually the patch size is small).</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO.setText("")
+        self.DATA__NORMALIZATION__PERC_CLIP__ENABLE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.DATA__NORMALIZATION__PERC_CLIP__ENABLE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+#if QT_CONFIG(tooltip)
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Custon mean to be applied if 'zero_mean_unit_variance' was selected in normalization type. If not provided, e.g. -1, it will be calculated on the fly.</span><span style=\" font-size:12pt; font-weight:600;\"> Must be a float.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__INFO.setText("")
+        self.DATA__NORMALIZATION__PERC_CLIP__ENABLE__INFO.setText("")
+        self.DATA__NORMALIZATION__PERC_LOWER__INFO.setText("")
+        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
+        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
+
+        self.DATA__NORMALIZATION__PERC_LOWER__LABEL.setText(QCoreApplication.translate("MainWindow", u"Lower bound", None))
+#if QT_CONFIG(tooltip)
+        self.label_88.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_88.setText(QCoreApplication.translate("MainWindow", u"Reflect to complete shape", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Custon std to be applied if 'zero_mean_unit_variance' was selected in normalization type. If not provided, e.g. -1, it will be calculated on the fly.</span><span style=\" font-size:12pt; font-weight:600;\"> Must be a float.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__INFO.setText("")
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1.0", None))
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__MEAN_VAL__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"-1.0", None))
+        self.DATA__FORCE_RGB__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.DATA__FORCE_RGB__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1.0", None))
+        self.DATA__NORMALIZATION__ZERO_MEAN_UNIT_VAR__STD_VAL__INPUT.setProperty(u"html", QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Ubuntu';\">-1.0</span></p></body></html>", None))
+        self.DATA__NORMALIZATION__PERC_CLIP__UPPER_PERC__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1.0", None))
+        self.DATA__NORMALIZATION__PERC_UPPER__LABEL.setText(QCoreApplication.translate("MainWindow", u"Upper bound", None))
+#if QT_CONFIG(tooltip)
+        self.label_99.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_99.setText(QCoreApplication.translate("MainWindow", u"Normalization type", None))
+        self.DATA__NORMALIZATION__PERC_UPPER__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.DATA__NORMALIZATION__TYPE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Normalization type to use. Possible options: </span></p><p><span style=\" font-size:12pt;\">- 'div' to divide values from 0/255 (or 0/65535 if uint16) in [0,1] range</span></p><p><span style=\" font-size:12pt;\">- 'scale_range' same as 'div' but scaling the range to [0-max] and then dividing by the maximum value of the data and not by 255 or 65535 </span></p><p><span style=\" font-size:12pt;\">- 'zero_mean_unit_variance' to substract the mean and divide by std</span><br/></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__NORMALIZATION__TYPE__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__ARCHITECTURE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Architecture of the network</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__ARCHITECTURE__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__ARCHITECTURE__LABEL.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__ARCHITECTURE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Model", None))
+        self.unet_model_like_label.setText(QCoreApplication.translate("MainWindow", u"U-Net model-like configuration", None))
+        self.MODEL__KERNEL_SIZE__INPUT.setText(QCoreApplication.translate("MainWindow", u"3", None))
+        self.MODEL__KERNEL_SIZE__INPUT.setProperty(u"html", QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Ubuntu';\">3</span></p></body></html>", None))
+        self.MODEL__ISOTROPY__LABEL.setText(QCoreApplication.translate("MainWindow", u"Isotropy ", None))
+#if QT_CONFIG(tooltip)
+        self.label_39.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_39.setText(QCoreApplication.translate("MainWindow", u"Normalization type", None))
+        self.MODEL__FEATURE_MAPS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[16, 32, 64, 128, 256]", None))
+        self.MODEL__FEATURE_MAPS__INPUT.setProperty(u"html", QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Ubuntu';\">[16, 32, 64, 128, 256]</span></p></body></html>", None))
+#if QT_CONFIG(tooltip)
+        self.label_45.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_45.setText(QCoreApplication.translate("MainWindow", u"Last activation", None))
+#if QT_CONFIG(tooltip)
+        self.label_36.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_36.setText(QCoreApplication.translate("MainWindow", u"Feature maps", None))
+        self.MODEL__DROPOUT_VALUES__INPUT.setText(QCoreApplication.translate("MainWindow", u"[0., 0., 0., 0., 0.]", None))
+        self.MODEL__DROPOUT_VALUES__INPUT.setProperty(u"html", QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Ubuntu';\">[0., 0., 0., 0., 0.]</span></p></body></html>", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__ISOTROPY__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">For each level of the model (U-Net levels), set to true or false if the dimensions of the feature maps are isotropic.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__ISOTROPY__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__LAGER_IO__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Include extra convolutional layers with larger kernel at the beginning and end of the U-Net-like model.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__LAGER_IO__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__Z_DOWN__LABEL.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__Z_DOWN__LABEL.setText(QCoreApplication.translate("MainWindow", u"Downsampling on each level", None))
+        self.MODEL__LAGER_IO__LABEL.setText(QCoreApplication.translate("MainWindow", u"Larger IO", None))
+#if QT_CONFIG(tooltip)
+        self.label_43.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_43.setText(QCoreApplication.translate("MainWindow", u"Upsample layer", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__NORMALIZATION__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Normalization layer</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__NORMALIZATION__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__ACTIVATION__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Activation function to use along the model. Please visit </span><a href=\"https://keras.io/api/layers/activations/\"><span style=\" font-size:12pt; text-decoration: underline; color:#0000ff;\">https://keras.io/api/layers/activations/</span></a><span style=\" font-size:12pt;\"> for more info</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__ACTIVATION__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__FEATURE_MAPS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of feature maps on each level of the network. Brackets are needed. </span><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; color:#000000; background-color:transparent;\">E.g.</span><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:600; color:#000000; background-color:transparent;\"> [16, 32, 64, 128, 256]</span><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; color:#000000; background-color:transparent;\"> on a 5 level U-Net </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__FEATURE_MAPS__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__LAST_ACTIVATION__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Last activation function to use along the model. Please visit </span><a href=\"https://keras.io/api/layers/activations/\"><span style=\" font-size:12pt; text-decoration: underline; color:#0000ff;\">https://keras.io/api/layers/activations/</span></a><span style=\" font-size:12pt;\"> for more info</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__LAST_ACTIVATION__INFO.setText("")
+        self.MODEL__ACTIVATION__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"elu", None))
+        self.MODEL__ACTIVATION__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"relu", None))
+        self.MODEL__ACTIVATION__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"selu", None))
+
+#if QT_CONFIG(tooltip)
+        self.MODEL__UPSAMPLE_LAYER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Upsampling layer to use in the model</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__UPSAMPLE_LAYER__INFO.setText("")
+        self.MODEL__NORMALIZATION__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"bn", None))
+        self.MODEL__NORMALIZATION__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"sync_bn", None))
+        self.MODEL__NORMALIZATION__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"in", None))
+        self.MODEL__NORMALIZATION__INPUT.setItemText(3, QCoreApplication.translate("MainWindow", u"gn", None))
+        self.MODEL__NORMALIZATION__INPUT.setItemText(4, QCoreApplication.translate("MainWindow", u"none", None))
+
+#if QT_CONFIG(tooltip)
+        self.label_37.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_37.setText(QCoreApplication.translate("MainWindow", u"Dropout values", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__DROPOUT_VALUES__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><a name=\"docs-internal-guid-7aa00324-7fff-fb61-fe4f-e2f1b72eacd0\"/><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; color:#000000; background-color:transparent;\"> V</span><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; color:#000000; background-color:transparent;\">alues to make the dropout on each model level. </span><span style=\" font-size:12pt;\">Brackets are needed and each number must be a float between 0 and 1. </span><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; color:#000000; background-color:transparent;\">Set to 0 to prevent dropout. </span><a name=\"docs-internal-guid-7aa00324-7fff-fb61-fe4f-e2f1b72eacd0\"/><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; color:#000000; background-color:transparent;\">W</span><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; color:#000000; background-color:transparent;\">hen using it with 'ViT' or 'unetr' a list with just one number must be provided"
+                        ". E. .g. </span><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:600; color:#000000; background-color:transparent;\">[0, 0.1, 0.2, 0.3]</span><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; color:#000000; background-color:transparent;\"> on a 4 level U-Net </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__DROPOUT_VALUES__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.label_47.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_47.setText(QCoreApplication.translate("MainWindow", u"Activation", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__Z_DOWN__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Downsampling to be made in Z for each level of the model. This step is only relevant for 3D problems and U-Net models, and the resulting value will be utilized in the MaxPooling function. The input for this function should be enclosed in brackets and consist only of the numbers 0, 1 or 2. Set it to 0 to avoid this option. A value of 1 indicates that no maxpooling will occur along the Z-axis at that level of the network, while a value of 2 signifies that pooling will be performed in all three dimensions. This approach is particularly useful when dealing with anisotropic datasets since better performance is typically achieved without a pooling in Z-axis. It needs to be of the same length than feature maps of the network minus one. E.g. the input </span><span style=\" font-size:12pt; font-weight:600;\">[2,1]</span><span style=\" font-size:12pt;\"> applies pooling in all dimensions for the downsampling between first and second levels of the network but only in"
+                        " the X and Y dimensions for the downsampling done between the second and third level, excluding the Z dimension.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__Z_DOWN__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__KERNEL_SIZE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Kernel size</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__KERNEL_SIZE__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__Z_DOWN__INPUT.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__Z_DOWN__INPUT.setText(QCoreApplication.translate("MainWindow", u"[0, 0, 0, 0]", None))
+        self.MODEL__Z_DOWN__INPUT.setProperty(u"html", QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Ubuntu';\">[0, 0, 0, 0]</span></p></body></html>", None))
+        self.MODEL__LAGER_IO__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.MODEL__LAGER_IO__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+#if QT_CONFIG(tooltip)
+        self.label_41.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_41.setText(QCoreApplication.translate("MainWindow", u"Kernel size", None))
+        self.MODEL__UPSAMPLE_LAYER__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"convtranspose", None))
+        self.MODEL__UPSAMPLE_LAYER__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"upsampling", None))
+
+        self.MODEL__LAST_ACTIVATION__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"sigmoid", None))
+        self.MODEL__LAST_ACTIVATION__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"softmax", None))
+        self.MODEL__LAST_ACTIVATION__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"linear", None))
+        self.MODEL__LAST_ACTIVATION__INPUT.setItemText(3, QCoreApplication.translate("MainWindow", u"tanh", None))
+
+        self.MODEL__ISOTROPY__INPUT.setText(QCoreApplication.translate("MainWindow", u"[True, True, True, True, True]", None))
+        self.convnext_label.setText(QCoreApplication.translate("MainWindow", u"ConvNeXT options", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__CONVNEXT_LAYERS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of ConvNeXtBlocks in each level.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__CONVNEXT_LAYERS__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__CONVNEXT_LAYER_SCALE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Layer Scale parameter for the U-NeXt model.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__CONVNEXT_LAYER_SCALE__INFO.setText("")
+        self.MODEL__CONVNEXT_LAYER_SCALE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Layer scale", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__CONVNEXT_STEM_K_SIZE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Size of the stem kernel in the U-NeXt model.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__CONVNEXT_STEM_K_SIZE__INFO.setText("")
+        self.MODEL__CONVNEXT_SD_PROB__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.1", None))
+        self.MODEL__CONVNEXT_SD_PROB__LABEL.setText(QCoreApplication.translate("MainWindow", u"Stochastic depth probability", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__CONVNEXT_SD_PROB__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Maximum Stochastic Depth probability for the U-NeXt model.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__CONVNEXT_SD_PROB__INFO.setText("")
+        self.MODEL__CONVNEXT_LAYER_SCALE__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.000001", None))
+        self.MODEL__CONVNEXT_STEM_K_SIZE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Stem kernel size", None))
+        self.MODEL__CONVNEXT_STEM_K_SIZE__INPUT.setText(QCoreApplication.translate("MainWindow", u"2", None))
+        self.MODEL__CONVNEXT_LAYERS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[2, 2, 2, 2, 2]", None))
+        self.MODEL__CONVNEXT_LAYERS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Layers", None))
+        self.transformers_label.setText(QCoreApplication.translate("MainWindow", u"UNETR options", None))
+#if QT_CONFIG(tooltip)
+        self.unetr_num_filters_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.unetr_num_filters_label.setText(QCoreApplication.translate("MainWindow", u"UNETR - Decoder numer of filters", None))
+        self.MODEL__VIT_NORM_EPS__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.000001", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Decoder convolutions' kernel size. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive int</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.unetr_vit_hidden_multiple_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.unetr_vit_hidden_multiple_label.setText(QCoreApplication.translate("MainWindow", u"UNETR - ViT Hidden multiple", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__VIT_EMBED_DIM__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Dimension of the embedding space. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__VIT_EMBED_DIM__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.unetr_dec_act_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.unetr_dec_act_label.setText(QCoreApplication.translate("MainWindow", u"UNETR - Decoder activation", None))
+        self.MODEL__MAE_MASK_TYPE__LABEL.setText(QCoreApplication.translate("MainWindow", u"MAE - Mask type", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__MAE_DEC_HIDDEN_SIZE__LABEL.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__MAE_DEC_HIDDEN_SIZE__LABEL.setText(QCoreApplication.translate("MainWindow", u"MAE - Decoder embedding dimension", None))
+        self.MODEL__VIT_TOKEN_SIZE__INPUT.setText(QCoreApplication.translate("MainWindow", u"16", None))
+        self.MODEL__VIT_TOKEN_SIZE__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"16", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__UNETR_VIT_HIDD_MULT__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Multiple of the transformer encoder layers from of which the skip connection signal is going to be extracted. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__UNETR_VIT_HIDD_MULT__INFO.setText("")
+        self.MODEL__VIT_NUM_HEADS__INPUT.setText(QCoreApplication.translate("MainWindow", u"12", None))
+        self.MODEL__VIT_NUM_HEADS__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"4", None))
+#if QT_CONFIG(tooltip)
+        self.label_51.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_51.setText(QCoreApplication.translate("MainWindow", u"Embedding dimension", None))
+        self.MODEL__MAE_MASK_RATIO__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.5", None))
+        self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT.setText(QCoreApplication.translate("MainWindow", u"16", None))
+#if QT_CONFIG(tooltip)
+        self.label_52.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_52.setText(QCoreApplication.translate("MainWindow", u"Numer of heads", None))
+#if QT_CONFIG(tooltip)
+        self.label_55.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_55.setText(QCoreApplication.translate("MainWindow", u"MLP ratio", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__VIT_NORM_EPS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Normalization layer epsion</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__VIT_NORM_EPS__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__MAE_MASK_RATIO__LABEL.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__MAE_MASK_RATIO__LABEL.setText(QCoreApplication.translate("MainWindow", u"MAE - Mask ratio", None))
+        self.MODEL__MAE_MASK_TYPE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"grid", None))
+        self.MODEL__MAE_MASK_TYPE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"random", None))
+
+#if QT_CONFIG(tooltip)
+        self.MODEL__VIT_MLP_RATIO__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Size of the dense layers of the final classifier. This value will mutiply 'VIT_EMBED_DIM'</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__VIT_MLP_RATIO__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__MAE_DEC_MLP_DIMS__LABEL.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__MAE_DEC_MLP_DIMS__LABEL.setText(QCoreApplication.translate("MainWindow", u"MAE - Decoder MLP dimension", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__VIT_MLP_RATIO__INPUT.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__VIT_MLP_RATIO__INPUT.setText(QCoreApplication.translate("MainWindow", u"4.", None))
+        self.MODEL__VIT_MLP_RATIO__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"[3072, 768]", None))
+        self.MODEL__VIT_NUM_LAYERS__INPUT.setText(QCoreApplication.translate("MainWindow", u"12", None))
+        self.MODEL__VIT_NUM_LAYERS__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"12", None))
+        self.MODEL__UNETR_DEC_KERNEL_SIZE__LABEL.setText(QCoreApplication.translate("MainWindow", u"UNETR - Decoder conv. kernel size", None))
+#if QT_CONFIG(tooltip)
+        self.label_53.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_53.setText(QCoreApplication.translate("MainWindow", u"Number of layers", None))
+        self.MODEL__UNETR_VIT_HIDD_MULT__INPUT.setText(QCoreApplication.translate("MainWindow", u"3", None))
+        self.MODEL__UNETR_VIT_HIDD_MULT__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"3", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__UNETR_DEC_ACTIVATION__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Activation of the decoder</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__UNETR_DEC_ACTIVATION__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__MAE_DEC_MLP_DIMS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Size of the dense layers of the final classifier</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__MAE_DEC_MLP_DIMS__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__MAE_DEC_NUM_HEADS__LABEL.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__MAE_DEC_NUM_HEADS__LABEL.setText(QCoreApplication.translate("MainWindow", u"MAE - Decoder number heads", None))
+        self.MODEL__MAE_DEC_HIDDEN_SIZE__INPUT.setText(QCoreApplication.translate("MainWindow", u"512", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__MAE_DEC_NUM_HEADS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of heads in the multi-head attention layer. Must be a positive integer.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__MAE_DEC_NUM_HEADS__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__MAE_MASK_RATIO__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Percentage of the input image to mask. Must be a float between 0 and 1. </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__MAE_MASK_RATIO__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__MAE_DEC_NUM_LAYERS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of transformer decoder layers. Must be a positive integer. </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__MAE_DEC_NUM_LAYERS__INFO.setText("")
+        self.MODEL__UNETR_DEC_KERNEL_SIZE__INPUT.setText(QCoreApplication.translate("MainWindow", u"3", None))
+        self.MODEL__VIT_EMBED_DIM__INPUT.setText(QCoreApplication.translate("MainWindow", u"768", None))
+        self.MODEL__VIT_EMBED_DIM__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"768", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__VIT_NUM_HEADS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of heads in the multi-head attention layer. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__VIT_NUM_HEADS__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__VIT_NORM_EPS__LABEL.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__VIT_NORM_EPS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Normalization epsilon", None))
+        self.MODEL__MAE_DEC_NUM_LAYERS__INPUT.setText(QCoreApplication.translate("MainWindow", u"8", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__VIT_NUM_LAYERS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of transformer encoder layers. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__VIT_NUM_LAYERS__INFO.setText("")
+        self.MODEL__MAE_DEC_MLP_DIMS__INPUT.setText(QCoreApplication.translate("MainWindow", u"2048", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__MAE_DEC_HIDDEN_SIZE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Dimension of the embedding space for the MAE decoder. Must be a positive integer. </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__MAE_DEC_HIDDEN_SIZE__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__VIT_TOKEN_SIZE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Size of the patches that are extracted from the input image. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__VIT_TOKEN_SIZE__INFO.setText("")
+        self.MODEL__UNETR_DEC_ACTIVATION__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"relu", None))
+        self.MODEL__UNETR_DEC_ACTIVATION__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"elu", None))
+        self.MODEL__UNETR_DEC_ACTIVATION__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"selu", None))
+
+#if QT_CONFIG(tooltip)
+        self.MODEL__MAE_DEC_NUM_LAYERS__LABEL.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__MAE_DEC_NUM_LAYERS__LABEL.setText(QCoreApplication.translate("MainWindow", u"MAE - Decoder number of  layers", None))
+#if QT_CONFIG(tooltip)
+        self.label_50.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_50.setText(QCoreApplication.translate("MainWindow", u"Token size", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__UNETR_VIT_NUM_FILTERS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of filters in the first UNETR's layer of the decoder. In each layer the previous number of filters is doubled. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive int</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__UNETR_VIT_NUM_FILTERS__INFO.setText("")
+        self.MODEL__MAE_DEC_NUM_HEADS__INPUT.setText(QCoreApplication.translate("MainWindow", u"16", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__MAE_MASK_TYPE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Type of the masking strategy. </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__MAE_MASK_TYPE__INFO.setText("")
+        self.label_11.setText(QCoreApplication.translate("MainWindow", u"RCAN options", None))
+        self.label_12.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.checkpoint_loading_opt_label.setText(QCoreApplication.translate("MainWindow", u"Checkpoint loading options", None))
+        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
+        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
+
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"best_on_val", None))
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"last_on_train", None))
+
+#if QT_CONFIG(tooltip)
+        self.label_4.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_4.setText(QCoreApplication.translate("MainWindow", u"Load only model weigths", None))
+#if QT_CONFIG(tooltip)
+        self.label_38.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_38.setText(QCoreApplication.translate("MainWindow", u"Epoch of the checkpoint", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">When loading checkpoints whether if only model's weights are going to be loaded or optimizer, epochs and loss_scaler.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Decide which checkpoint to load from job's dir if PATHS.CHECKPOINT_FILE is empty. Options: 'best_on_val' or 'last_on_train'</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setText("")
         self.label.setText(QCoreApplication.translate("MainWindow", u"Hardware", None))
         self.SYSTEM__NUM_CPUS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Number of CPUs", None))
 #if QT_CONFIG(tooltip)
@@ -14440,111 +14994,7 @@ class Ui_MainWindow(object):
         self.SYSTEM__SEED__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Math seed to generate random numbers. Used to ensure reproducibility in the results. </span><span style=\" font-size:12pt; font-weight:600;\">Must be an integer</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.SYSTEM__SEED__INFO.setText("")
-        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
-        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
-
-        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"best_on_val", None))
-        self.MODEL__LOAD_CHECKPOINT_EPOCH__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"last_on_train", None))
-
-#if QT_CONFIG(tooltip)
-        self.label_4.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_4.setText(QCoreApplication.translate("MainWindow", u"Load only model weigths", None))
-#if QT_CONFIG(tooltip)
-        self.label_38.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_38.setText(QCoreApplication.translate("MainWindow", u"Epoch of the checkpoint", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">When loading checkpoints whether if only model's weights are going to be loaded or optimizer, epochs and loss_scaler.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__LOAD_CHECKPOINT_ONLY_WEIGHTS__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Decide which checkpoint to load from job's dir if PATHS.CHECKPOINT_FILE is empty. Options: 'best_on_val' or 'last_on_train'</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setText("")
-        self.checkpoint_loading_opt_label.setText(QCoreApplication.translate("MainWindow", u"Checkpoint loading options", None))
         self.train_disable_checkpoint_label.setText(QCoreApplication.translate("MainWindow", u"Checkpoint configuration", None))
-        self.MODEL__BMZ__EXPORT__ENABLE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Export model to BioImage Model Zoo (BMZ) format?", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to activate or not the exportation of the used model to the BMZ format after train and/or test</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-#if QT_CONFIG(statustip)
-        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setStatusTip("")
-#endif // QT_CONFIG(statustip)
-        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setText("")
-        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setText(QCoreApplication.translate("MainWindow", u"Model ID", None))
-#if QT_CONFIG(tooltip)
-        self.PATHS__CHECKPOINT_FILE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the model's checkpoint that will be loaded. Leave it blank to let BiaPy find it. If the output folder and the job name match, BiaPy will locate the model's weights within the 'checkpoints' directory</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.PATHS__CHECKPOINT_FILE__INFO.setText("")
-        self.MODEL__SOURCE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"I have a model trained with BiaPy", None))
-        self.MODEL__SOURCE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"I want to check other online sources", None))
-
-        self.LOAD_PRETRAINED_MODEL__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.LOAD_PRETRAINED_MODEL__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-#if QT_CONFIG(tooltip)
-        self.MODEL__SOURCE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Source of the pretrained model</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__SOURCE__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.checkpoint_file_path_browse_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.checkpoint_file_path_browse_label.setText(QCoreApplication.translate("MainWindow", u"Model file", None))
-        self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setText(QCoreApplication.translate("MainWindow", u"Check models", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Model identifier</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setText("")
-        self.MODEL__SOURCE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Source of the model", None))
-        self.LOAD_PRETRAINED_MODEL__LABEL.setText(QCoreApplication.translate("MainWindow", u"Load pretrained model", None))
-        self.checkpoint_file_path_browse_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
-        self.PATHS__CHECKPOINT_FILE__INPUT.setText(QCoreApplication.translate("MainWindow", u"model_weights.pth", None))
-#if QT_CONFIG(tooltip)
-        self.LOAD_PRETRAINED_MODEL__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">This option determines whether to use a pretrained model instead of building one from scratch. If you select &quot;Yes,&quot; additional configuration options will appear, and options related to model selection will be disabled, as a pretrained model will be used.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.LOAD_PRETRAINED_MODEL__INFO.setText("")
-#if QT_CONFIG(statustip)
-        self.goptions_browse_yaml_path_input.setStatusTip("")
-#endif // QT_CONFIG(statustip)
-        self.PROBLEM__NDIM__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"2D", None))
-        self.PROBLEM__NDIM__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"3D", None))
-
-#if QT_CONFIG(tooltip)
-        self.goptions_yaml_name_input.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.goptions_yaml_name_input.setText("")
-#if QT_CONFIG(tooltip)
-        self.PROBLEM__NDIM__LABEL.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.PROBLEM__NDIM__LABEL.setText(QCoreApplication.translate("MainWindow", u"Image dimensions", None))
-#if QT_CONFIG(tooltip)
-        self.goptions_browse_yaml_path_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to store the YAML file</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.goptions_browse_yaml_path_info.setText("")
-#if QT_CONFIG(tooltip)
-        self.PROBLEM__NDIM__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of dimensions of the input images</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-#if QT_CONFIG(statustip)
-        self.PROBLEM__NDIM__INFO.setStatusTip("")
-#endif // QT_CONFIG(statustip)
-        self.PROBLEM__NDIM__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.goptions_yaml_name_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">YAML file name</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.goptions_yaml_name_info.setText("")
-#if QT_CONFIG(tooltip)
-        self.goptions_yaml_name_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.goptions_yaml_name_label.setText(QCoreApplication.translate("MainWindow", u"Configuration file name", None))
-#if QT_CONFIG(tooltip)
-        self.goptions_browse_yaml_path_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.goptions_browse_yaml_path_label.setText(QCoreApplication.translate("MainWindow", u"Configuration file directory", None))
-        self.goptions_browse_yaml_path_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
         self.MODEL__BMZ__EXPORT__LABEL.setText(QCoreApplication.translate("MainWindow", u"Additional fields required for the BioImage Model Zoo export process:", None))
 #if QT_CONFIG(tooltip)
         self.MODEL__BMZ__EXPORT__LICENSE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">License of the model.</span></p></body></html>", None))
@@ -14606,6 +15056,76 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__MODEL_VERSION__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Version of the model. E.g. &quot;0.1.0&quot;</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.MODEL__BMZ__EXPORT__MODEL_VERSION__INFO.setText("")
+#if QT_CONFIG(statustip)
+        self.goptions_browse_yaml_path_input.setStatusTip("")
+#endif // QT_CONFIG(statustip)
+        self.PROBLEM__NDIM__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"2D", None))
+        self.PROBLEM__NDIM__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"3D", None))
+
+#if QT_CONFIG(tooltip)
+        self.goptions_yaml_name_input.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.goptions_yaml_name_input.setText("")
+#if QT_CONFIG(tooltip)
+        self.PROBLEM__NDIM__LABEL.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.PROBLEM__NDIM__LABEL.setText(QCoreApplication.translate("MainWindow", u"Image dimensions", None))
+#if QT_CONFIG(tooltip)
+        self.goptions_browse_yaml_path_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to store the YAML file</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.goptions_browse_yaml_path_info.setText("")
+#if QT_CONFIG(tooltip)
+        self.PROBLEM__NDIM__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of dimensions of the input images</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(statustip)
+        self.PROBLEM__NDIM__INFO.setStatusTip("")
+#endif // QT_CONFIG(statustip)
+        self.PROBLEM__NDIM__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.goptions_yaml_name_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">YAML file name</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.goptions_yaml_name_info.setText("")
+#if QT_CONFIG(tooltip)
+        self.goptions_yaml_name_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.goptions_yaml_name_label.setText(QCoreApplication.translate("MainWindow", u"Configuration file name", None))
+#if QT_CONFIG(tooltip)
+        self.goptions_browse_yaml_path_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.goptions_browse_yaml_path_label.setText(QCoreApplication.translate("MainWindow", u"Configuration file directory", None))
+        self.goptions_browse_yaml_path_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
+        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setText(QCoreApplication.translate("MainWindow", u"Model ID", None))
+#if QT_CONFIG(tooltip)
+        self.PATHS__CHECKPOINT_FILE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the model's checkpoint that will be loaded. Leave it blank to let BiaPy find it. If the output folder and the job name match, BiaPy will locate the model's weights within the 'checkpoints' directory</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.PATHS__CHECKPOINT_FILE__INFO.setText("")
+        self.MODEL__SOURCE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"I have a model trained with BiaPy", None))
+        self.MODEL__SOURCE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"I want to check other online sources", None))
+
+        self.LOAD_PRETRAINED_MODEL__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.LOAD_PRETRAINED_MODEL__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+#if QT_CONFIG(tooltip)
+        self.MODEL__SOURCE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Source of the pretrained model</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__SOURCE__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.checkpoint_file_path_browse_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.checkpoint_file_path_browse_label.setText(QCoreApplication.translate("MainWindow", u"Model file", None))
+        self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setText(QCoreApplication.translate("MainWindow", u"Check models", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Model identifier</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setText("")
+        self.MODEL__SOURCE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Source of the model", None))
+        self.LOAD_PRETRAINED_MODEL__LABEL.setText(QCoreApplication.translate("MainWindow", u"Load pretrained model", None))
+        self.checkpoint_file_path_browse_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
+        self.PATHS__CHECKPOINT_FILE__INPUT.setText(QCoreApplication.translate("MainWindow", u"model_weights.pth", None))
+#if QT_CONFIG(tooltip)
+        self.LOAD_PRETRAINED_MODEL__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">This option determines whether to use a pretrained model instead of building one from scratch. If you select &quot;Yes,&quot; additional configuration options will appear, and options related to model selection will be disabled, as a pretrained model will be used.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.LOAD_PRETRAINED_MODEL__INFO.setText("")
 #if QT_CONFIG(tooltip)
         self.label_49.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to enable the training phase or not</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -14613,603 +15133,6 @@ class Ui_MainWindow(object):
         self.TRAIN__ENABLE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
         self.TRAIN__ENABLE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
 
-#if QT_CONFIG(tooltip)
-        self.MODEL__CONVNEXT_LAYERS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of ConvNeXtBlocks in each level.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__CONVNEXT_LAYERS__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.MODEL__CONVNEXT_LAYER_SCALE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Layer Scale parameter for the U-NeXt model.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__CONVNEXT_LAYER_SCALE__INFO.setText("")
-        self.MODEL__CONVNEXT_LAYER_SCALE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Layer scale", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__CONVNEXT_STEM_K_SIZE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Size of the stem kernel in the U-NeXt model.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__CONVNEXT_STEM_K_SIZE__INFO.setText("")
-        self.MODEL__CONVNEXT_SD_PROB__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.1", None))
-        self.MODEL__CONVNEXT_SD_PROB__LABEL.setText(QCoreApplication.translate("MainWindow", u"Stochastic depth probability", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__CONVNEXT_SD_PROB__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Maximum Stochastic Depth probability for the U-NeXt model.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__CONVNEXT_SD_PROB__INFO.setText("")
-        self.MODEL__CONVNEXT_LAYER_SCALE__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.000001", None))
-        self.MODEL__CONVNEXT_STEM_K_SIZE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Stem kernel size", None))
-        self.MODEL__CONVNEXT_STEM_K_SIZE__INPUT.setText(QCoreApplication.translate("MainWindow", u"2", None))
-        self.MODEL__CONVNEXT_LAYERS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[2, 2, 2, 2, 2]", None))
-        self.MODEL__CONVNEXT_LAYERS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Layers", None))
-#if QT_CONFIG(tooltip)
-        self.custom_std_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.custom_std_label.setText(QCoreApplication.translate("MainWindow", u"Custom std", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__FORCE_RGB__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">If 'DATA.PATCH_SIZE' selected has 3 channels, e.g. RGB images are expected, so will force grayscale images to be converted into RGB (e.g. in ImageNet some of the images are grayscale)</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__FORCE_RGB__INFO.setText("")
-        self.DATA__NORMALIZATION__PERC_LOWER__LABEL.setText(QCoreApplication.translate("MainWindow", u"Lower bound", None))
-#if QT_CONFIG(tooltip)
-        self.label_7.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_7.setText(QCoreApplication.translate("MainWindow", u"Extract random patch", None))
-        self.DATA__NORMALIZATION__PERC_UPPER__INFO.setText("")
-        self.DATA__FORCE_RGB__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.DATA__FORCE_RGB__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-#if QT_CONFIG(tooltip)
-        self.label_12.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_12.setText(QCoreApplication.translate("MainWindow", u"Normalization type", None))
-        self.DATA__CHECK_GENERATORS__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.DATA__CHECK_GENERATORS__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-#if QT_CONFIG(tooltip)
-        self.DATA__NORMALIZATION__CUSTOM_STD__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Custon std to be applied if 'custom' was selected in normalization type.</span><span style=\" font-size:12pt; font-weight:600;\"> Must be a float.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__NORMALIZATION__CUSTOM_STD__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.DATA__EXTRACT_RANDOM_PATCH__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Extract random patches during data augmentation (DA). This option will prevent input images to be cropped in the patch size specified and will extract a random patch of that shape every training sample. This option will slow down each training epoch. </span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__EXTRACT_RANDOM_PATCH__INFO.setText("")
-        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
-        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
-
-#if QT_CONFIG(tooltip)
-        self.label_11.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_11.setText(QCoreApplication.translate("MainWindow", u"Reflect to complete shape", None))
-        self.DATA__NORMALIZATION__PERC_CLIP__INFO.setText("")
-        self.DATA__NORMALIZATION__PERC_UPPER__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1.0", None))
-        self.DATA__NORMALIZATION__PERC_CLIP__LABEL.setText(QCoreApplication.translate("MainWindow", u"Percentile clipping", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__NORMALIZATION__CUSTOM_MEAN__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Custon mean to be applied if 'custom' was selected in normalization type.</span><span style=\" font-size:12pt; font-weight:600;\"> Must be a float.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__NORMALIZATION__CUSTOM_MEAN__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.DATA__NORMALIZATION__TYPE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Normalization type to use. Possible options: </span></p><p><span style=\" font-size:12pt;\">    - 'div' to divide values from 0/255 (or 0/65535 if uint16) in [0,1] range</span></p><p><span style=\" font-size:12pt;\">    - 'scale_range' same as 'div' but scaling the range to [0-max] and then dividing by the maximum value of the data and not by 255 or 65535 </span></p><p><span style=\" font-size:12pt;\">    - 'custom' to use a custom mean and std to normalize the data</span><br/></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__NORMALIZATION__TYPE__INFO.setText("")
-        self.DATA__NORMALIZATION__CUSTOM_MEAN__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1.0", None))
-        self.DATA__NORMALIZATION__CUSTOM_MEAN__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"-1.0", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__CHECK_GENERATORS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Save all data of the training and validation generators in a folder named 'gen_check' in the results directory</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__CHECK_GENERATORS__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to reshape the dimensions that does not satisfy the patch shape selected by padding it with reflect. It's not implemented in super-resolution inference phase workflow (as usually the patch size is small).</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__REFLECT_TO_COMPLETE_SHAPE__INFO.setText("")
-        self.DATA__NORMALIZATION__PERC_LOWER__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1.0", None))
-#if QT_CONFIG(tooltip)
-        self.custom_mean_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.custom_mean_label.setText(QCoreApplication.translate("MainWindow", u"Custom mean", None))
-        self.DATA__FORCE_RGB__LABEL.setText(QCoreApplication.translate("MainWindow", u"Force image to be RGB", None))
-        self.DATA__NORMALIZATION__PERC_CLIP__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.DATA__NORMALIZATION__PERC_CLIP__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-        self.DATA__NORMALIZATION__PERC_LOWER__INFO.setText("")
-        self.DATA__EXTRACT_RANDOM_PATCH__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.DATA__EXTRACT_RANDOM_PATCH__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-        self.DATA__NORMALIZATION__PERC_UPPER__LABEL.setText(QCoreApplication.translate("MainWindow", u"Upper bound", None))
-        self.DATA__NORMALIZATION__TYPE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"div", None))
-        self.DATA__NORMALIZATION__TYPE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"scale_range", None))
-        self.DATA__NORMALIZATION__TYPE__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"custom", None))
-
-#if QT_CONFIG(tooltip)
-        self.check_gen_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.check_gen_label.setText(QCoreApplication.translate("MainWindow", u"Check generator", None))
-        self.DATA__NORMALIZATION__CUSTOM_STD__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1.0", None))
-        self.DATA__NORMALIZATION__CUSTOM_STD__INPUT.setProperty(u"html", QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Ubuntu';\">-1.0</span></p></body></html>", None))
-        self.MODEL__ACTIVATION__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"elu", None))
-        self.MODEL__ACTIVATION__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"relu", None))
-        self.MODEL__ACTIVATION__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"selu", None))
-
-#if QT_CONFIG(tooltip)
-        self.MODEL__Z_DOWN__LABEL.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__Z_DOWN__LABEL.setText(QCoreApplication.translate("MainWindow", u"Downsampling on each level", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__ACTIVATION__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Activation function to use along the model. Please visit </span><a href=\"https://keras.io/api/layers/activations/\"><span style=\" font-size:12pt; text-decoration: underline; color:#0000ff;\">https://keras.io/api/layers/activations/</span></a><span style=\" font-size:12pt;\"> for more info</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__ACTIVATION__INFO.setText("")
-        self.MODEL__ISOTROPY__LABEL.setText(QCoreApplication.translate("MainWindow", u"Isotropy ", None))
-        self.MODEL__NORMALIZATION__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"bn", None))
-        self.MODEL__NORMALIZATION__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"sync_bn", None))
-        self.MODEL__NORMALIZATION__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"in", None))
-        self.MODEL__NORMALIZATION__INPUT.setItemText(3, QCoreApplication.translate("MainWindow", u"gn", None))
-        self.MODEL__NORMALIZATION__INPUT.setItemText(4, QCoreApplication.translate("MainWindow", u"none", None))
-
-#if QT_CONFIG(tooltip)
-        self.label_39.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_39.setText(QCoreApplication.translate("MainWindow", u"Normalization type", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__FEATURE_MAPS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of feature maps on each level of the network. Brackets are needed. </span><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; color:#000000; background-color:transparent;\">E.g.</span><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:600; color:#000000; background-color:transparent;\"> [16, 32, 64, 128, 256]</span><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; color:#000000; background-color:transparent;\"> on a 5 level U-Net </span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__FEATURE_MAPS__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.label_37.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_37.setText(QCoreApplication.translate("MainWindow", u"Dropout values", None))
-        self.MODEL__KERNEL_SIZE__INPUT.setText(QCoreApplication.translate("MainWindow", u"3", None))
-        self.MODEL__KERNEL_SIZE__INPUT.setProperty(u"html", QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Ubuntu';\">3</span></p></body></html>", None))
-        self.MODEL__FEATURE_MAPS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[16, 32, 64, 128, 256]", None))
-        self.MODEL__FEATURE_MAPS__INPUT.setProperty(u"html", QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Ubuntu';\">[16, 32, 64, 128, 256]</span></p></body></html>", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__NORMALIZATION__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Normalization layer</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__NORMALIZATION__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.MODEL__DROPOUT_VALUES__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><a name=\"docs-internal-guid-7aa00324-7fff-fb61-fe4f-e2f1b72eacd0\"/><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; color:#000000; background-color:transparent;\"> V</span><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; color:#000000; background-color:transparent;\">alues to make the dropout on each model level. </span><span style=\" font-size:12pt;\">Brackets are needed and each number must be a float between 0 and 1. </span><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; color:#000000; background-color:transparent;\">Set to 0 to prevent dropout. </span><a name=\"docs-internal-guid-7aa00324-7fff-fb61-fe4f-e2f1b72eacd0\"/><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; color:#000000; background-color:transparent;\">W</span><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; color:#000000; background-color:transparent;\">hen using it with 'ViT' or 'unetr' a list with just one number must be provided"
-                        ". E. .g. </span><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:600; color:#000000; background-color:transparent;\">[0, 0.1, 0.2, 0.3]</span><span style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; color:#000000; background-color:transparent;\"> on a 4 level U-Net </span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__DROPOUT_VALUES__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.label_36.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_36.setText(QCoreApplication.translate("MainWindow", u"Feature maps", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__UPSAMPLE_LAYER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Upsampling layer to use in the model</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__UPSAMPLE_LAYER__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.MODEL__Z_DOWN__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Downsampling to be made in Z for each level of the model. This step is only relevant for 3D problems and U-Net models, and the resulting value will be utilized in the MaxPooling function. The input for this function should be enclosed in brackets and consist only of the numbers 0, 1 or 2. Set it to 0 to avoid this option. A value of 1 indicates that no maxpooling will occur along the Z-axis at that level of the network, while a value of 2 signifies that pooling will be performed in all three dimensions. This approach is particularly useful when dealing with anisotropic datasets since better performance is typically achieved without a pooling in Z-axis. It needs to be of the same length than feature maps of the network minus one. E.g. the input </span><span style=\" font-size:12pt; font-weight:600;\">[2,1]</span><span style=\" font-size:12pt;\"> applies pooling in all dimensions for the downsampling between first and second levels of the network but only in"
-                        " the X and Y dimensions for the downsampling done between the second and third level, excluding the Z dimension.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__Z_DOWN__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.label_47.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_47.setText(QCoreApplication.translate("MainWindow", u"Activation", None))
-#if QT_CONFIG(tooltip)
-        self.label_45.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_45.setText(QCoreApplication.translate("MainWindow", u"Last activation", None))
-        self.MODEL__UPSAMPLE_LAYER__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"convtranspose", None))
-        self.MODEL__UPSAMPLE_LAYER__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"upsampling", None))
-
-        self.MODEL__DROPOUT_VALUES__INPUT.setText(QCoreApplication.translate("MainWindow", u"[0., 0., 0., 0., 0.]", None))
-        self.MODEL__DROPOUT_VALUES__INPUT.setProperty(u"html", QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Ubuntu';\">[0., 0., 0., 0., 0.]</span></p></body></html>", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__LAST_ACTIVATION__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Last activation function to use along the model. Please visit </span><a href=\"https://keras.io/api/layers/activations/\"><span style=\" font-size:12pt; text-decoration: underline; color:#0000ff;\">https://keras.io/api/layers/activations/</span></a><span style=\" font-size:12pt;\"> for more info</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__LAST_ACTIVATION__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.label_41.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_41.setText(QCoreApplication.translate("MainWindow", u"Kernel size", None))
-        self.MODEL__LAST_ACTIVATION__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"sigmoid", None))
-        self.MODEL__LAST_ACTIVATION__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"softmax", None))
-        self.MODEL__LAST_ACTIVATION__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"linear", None))
-        self.MODEL__LAST_ACTIVATION__INPUT.setItemText(3, QCoreApplication.translate("MainWindow", u"tanh", None))
-
-#if QT_CONFIG(tooltip)
-        self.MODEL__Z_DOWN__INPUT.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__Z_DOWN__INPUT.setText(QCoreApplication.translate("MainWindow", u"[0, 0, 0, 0]", None))
-        self.MODEL__Z_DOWN__INPUT.setProperty(u"html", QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Ubuntu';\">[0, 0, 0, 0]</span></p></body></html>", None))
-#if QT_CONFIG(tooltip)
-        self.label_43.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_43.setText(QCoreApplication.translate("MainWindow", u"Upsample layer", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__KERNEL_SIZE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Kernel size</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__KERNEL_SIZE__INFO.setText("")
-        self.MODEL__LAGER_IO__LABEL.setText(QCoreApplication.translate("MainWindow", u"Larger IO", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__ISOTROPY__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">For each level of the model (U-Net levels), set to true or false if the dimensions of the feature maps are isotropic.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__ISOTROPY__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.MODEL__LAGER_IO__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Include extra convolutional layers with larger kernel at the beginning and end of the U-Net-like model.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__LAGER_IO__INFO.setText("")
-        self.MODEL__ISOTROPY__INPUT.setText(QCoreApplication.translate("MainWindow", u"[True, True, True, True, True]", None))
-        self.MODEL__LAGER_IO__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.MODEL__LAGER_IO__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-#if QT_CONFIG(tooltip)
-        self.label_162.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_162.setText(QCoreApplication.translate("MainWindow", u"Learning rate scheduler name", None))
-#if QT_CONFIG(tooltip)
-        self.LOSS__CLASS_REBALANCE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">To adjust the loss function based on the imbalance between classes. Used when LOSS.TYPE == &quot;CE&quot; in detection and semantic segmentation and if using B,C,M,P or A channels in instance segmentation workflow.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.LOSS__CLASS_REBALANCE__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Factor by which the learning rate will be reduced in 'reduceonplateau' scheduler. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a float between 0 and 1</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.label_114.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_114.setText(QCoreApplication.translate("MainWindow", u"Accumulate iterations", None))
-#if QT_CONFIG(tooltip)
-        self.TRAIN__BATCH_SIZE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Batch size of the training process. It is a hyperparameter that defines the number of samples to work through before updating the internal model parameters. This determines how many images will be loaded into the GPU at once so a high value will lead to a GPU memory error. Set it according to your GPU memory. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__BATCH_SIZE__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.lr_schel_warmupcosine_epochs_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.lr_schel_warmupcosine_epochs_label.setText(QCoreApplication.translate("MainWindow", u"Warmup cosine decay epochs", None))
-#if QT_CONFIG(tooltip)
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of epochs with no improvement after which learning rate will be reduced in 'reduceonplateau' scheduler. Need to be less than training patience otherwise it makes no sense. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setText("")
-        self.TRAIN__BATCH_SIZE__CALCULATION__LABEL.setText(QCoreApplication.translate("MainWindow", u"Automatically calculate batch size", None))
-#if QT_CONFIG(tooltip)
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Lower bound on the learning rate used in 'warmupcosine' and 'reduceonplateau'. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive float</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setText("")
-        self.TRAIN__METRICS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Train metrics", None))
-#if QT_CONFIG(tooltip)
-        self.TRAIN__ACCUM_ITER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">If memory or # gpus is limited, use this variable to maintain the effective batch size, which is batch_size (per gpu) * nodes * (gpus per node) * accum_iter. Must be a positive integer.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__ACCUM_ITER__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.lr_schel_reduce_on_plat_patience_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.lr_schel_reduce_on_plat_patience_label.setText(QCoreApplication.translate("MainWindow", u"Reduce on plateau patience", None))
-        self.LOSS__TYPE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Loss type", None))
-#if QT_CONFIG(tooltip)
-        self.TRAIN__BATCH_SIZE__LABEL.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__BATCH_SIZE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Batch size", None))
-        self.LOSS__CLASS_REBALANCE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Class rebalance", None))
-        self.LOSS__CLASS_REBALANCE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
-        self.LOSS__CLASS_REBALANCE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
-
-#if QT_CONFIG(tooltip)
-        self.TRAIN__LR_SCHEDULER__NAME__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Set up a learning rate scheduler. A Learning rate scheduler is a predefined framework that adjusts the learning rate between epochs or iterations as the training progresses. Leave it with the first option blank to avoid applying it. Three options available: 'warmupcosine', 'reduceonplateau', 'onecycle'. </span></p><p><span style=\" font-size:12pt;\">- 'warmupcosine' refers to a cosine decay with a warm up consist in 2 phases: 1) a warm up phase which consists of increasing the learning rate from 'warmup cosine decay' to 'training learning rate' value by a factor during a certain number of epochs defined by 'warmup cosine decay hold epochs'; 2) after this will began the decay of the learning rate value using the cosine function. Find a detailed explanation in </span><a href=\"https://scorrea92.medium.com/cosine-learning-rate-decay-e8b50aa455b \"><span style=\" font-size:12pt; text-decoration: underline; color:#0000ff;\">here</span></a></p><p><span style=\" "
-                        "font-size:12pt;\">- 'reduceonplateau' reduces the learning rate when a metric has stopped improving. Models often benefit from reducing the learning rate by a factor of 2-10 once learning stagnates. This callback monitors a quantity and if no improvement is seen for a 'patience' number of epochs, the learning rate is reduced.</span></p><p><span style=\" font-size:12pt;\">- 'onecycle', sets the learning rate of each parameter group according to the 1cycle learning rate policy. The 1cycle policy anneals the learning rate from an initial learning rate to some maximum learning rate and then from that maximum learning rate to some minimum learning rate much lower than the initial learning rate. This policy was initially described in the paper: </span><a href=\"https://arxiv.org/abs/1708.07120\"><span style=\" font-size:12pt; text-decoration: underline; color:#0000ff;\">&quot;Super-Convergence: Very Fast Training of Neural Networks Using Large Learning Rates&quot;</span></a></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__LR_SCHEDULER__NAME__INFO.setText("")
-        self.TRAIN__ACCUM_ITER__INPUT.setText(QCoreApplication.translate("MainWindow", u"1", None))
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1", None))
-        self.MODEL__SAVE_CKPT_FREQ__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1", None))
-        self.TRAIN__OPT_BETAS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Betas", None))
-        self.TRAIN__OPTIMIZER__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"ADAMW", None))
-        self.TRAIN__OPTIMIZER__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"ADAM", None))
-        self.TRAIN__OPTIMIZER__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"SGD", None))
-
-#if QT_CONFIG(tooltip)
-        self.TRAIN__W_DECAY__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Weight decay for AdamW optimizer</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__W_DECAY__INFO.setText("")
-        self.TRAIN__OPT_BETAS__INPUT.setText(QCoreApplication.translate("MainWindow", u"(0.9, 0.999)", None))
-#if QT_CONFIG(tooltip)
-        self.TRAIN__PROFILER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\"> Whether to add profiler callback to the training </span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__PROFILER__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.label_143.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_143.setText(QCoreApplication.translate("MainWindow", u"Optimizer", None))
-#if QT_CONFIG(tooltip)
-        self.LOSS__TYPE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Loss type, different options depending on the workflow. If empty the default loss on each case will be set:</span></p><p><span style=\" font-size:12pt;\">  * Semantic segmentation:</span></p><p><span style=\" font-size:12pt;\">      * &quot;CE&quot; (default): cross entropy. Ref: https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html</span></p><p><span style=\" font-size:12pt;\">      * &quot;DICE&quot;: Dice loss. Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch</span></p><p><span style=\" font-size:12pt;\">      * &quot;W_CE_DICE&quot;: CE and Dice (with a weight term on each one that must sum 1). Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch</span></p><p><span style=\" font-size:12pt;\">  * Instance segmentation: automatically set depending on the channels selected (PROBLEM.INSTANCE_SEG.DATA_CHANNELS). There is no need</span></p><p><span style=\" font-size:12pt;\"> "
-                        "                          to set it.</span></p><p><span style=\" font-size:12pt;\">  * Detection:</span></p><p><span style=\" font-size:12pt;\">      * &quot;CE&quot; (default): cross entropy. Ref: https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html</span></p><p><span style=\" font-size:12pt;\">      * &quot;DICE&quot;: Dice loss. Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch</span></p><p><span style=\" font-size:12pt;\">      * &quot;W_CE_DICE&quot;: CE and Dice (with a weight term on each one that must sum 1). Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch</span></p><p><span style=\" font-size:12pt;\">  * Denoising:</span></p><p><span style=\" font-size:12pt;\">      * &quot;MSE&quot; (default): mean square error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss</span></p><p><span style=\" font-size:12pt;\">  * Super-resolution:</span></p><p><span style=\" font-size:12pt;\">     "
-                        " * &quot;MAE&quot; (default): mean absolute error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss</span></p><p><span style=\" font-size:12pt;\">      * &quot;MSE&quot;: mean square error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss</span></p><p><span style=\" font-size:12pt;\">  * Self-supervision:</span></p><p><span style=\" font-size:12pt;\">      These losses can only be set when PROBLEM.SELF_SUPERVISED.PRETEXT_TASK = &quot;crappify&quot;. Otherwise it will be automatically set to MSE when</span></p><p><span style=\" font-size:12pt;\">      PROBLEM.SELF_SUPERVISED.PRETEXT_TASK = &quot;masking&quot;.</span></p><p><span style=\" font-size:12pt;\">      * &quot;MAE&quot; (default): mean absolute error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss</span></p><p><span style=\" font-size:12pt;\">      * &quot;MSE&quot;: mean square error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSEL"
-                        "oss.html#torch.nn.MSELoss</span></p><p><span style=\" font-size:12pt;\">  * Classification:</span></p><p><span style=\" font-size:12pt;\">      * &quot;CE&quot; (default): cross entropy. Ref: https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html</span></p><p><span style=\" font-size:12pt;\">  * Image to image:</span></p><p><span style=\" font-size:12pt;\">      * &quot;MAE&quot; (default): mean absolute error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss</span></p><p><span style=\" font-size:12pt;\">      * &quot;MSE&quot;: mean square error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.LOSS__TYPE__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.lr_schel_min_lr_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.lr_schel_min_lr_label.setText(QCoreApplication.translate("MainWindow", u"Minimum learning rate", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__SAVE_CKPT_FREQ__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Epochs to save a checkpoint of the model apart from the ones saved with LOAD_CHECKPOINT_ONLY_WEIGHTS. Set it to -1 to not do it.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__SAVE_CKPT_FREQ__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Epochs to do the warming up in 'warmupcosine' scheduler. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setText("")
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setItemText(0, "")
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"warmupcosine", None))
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"reduceonplateau", None))
-        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setItemText(3, QCoreApplication.translate("MainWindow", u"onecycle", None))
-
-        self.LOSS__WEIGHTS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[0.66, 0.34]", None))
-        self.LOSS__WEIGHTS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Loss weights", None))
-        self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1", None))
-#if QT_CONFIG(tooltip)
-        self.TRAIN__OPT_BETAS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Coefficients used for computing running averages of gradient and its square. Used in ADAM and ADAMW optimizers</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__OPT_BETAS__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Tries to automatically calculate the batch size based on the GPU memory available. The maximum value is difficult to calculate so you may need to decrease it to not have a out-of-memory error. If you don't have a GPU a &quot;modest&quot; value of 12 will be set. </span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setText("")
-        self.TRAIN__LR__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.0001", None))
-#if QT_CONFIG(tooltip)
-        self.TRAIN__METRICS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Metrics to apply during training. Depending on the workflow different ones can be applied. If empty, some default metrics will be configured automatically:</span></p><p><span style=\" font-size:12pt;\">* Semantic segmentation: 'iou' (called also Jaccard index)</span></p><p><span style=\" font-size:12pt;\">* Instance segmentation: automatically set depending on the channels selected (PROBLEM.INSTANCE_SEG.DATA_CHANNELS).</span></p><p><span style=\" font-size:12pt;\">* Detection: 'iou' (called also Jaccard index)</span></p><p><span style=\" font-size:12pt;\">* Denoising: 'mae', 'mse'</span></p><p><span style=\" font-size:12pt;\">* Super-resolution: &quot;psnr&quot;, &quot;mae&quot;, &quot;mse&quot;, &quot;ssim&quot;</span></p><p><span style=\" font-size:12pt;\">* Self-supervision: &quot;psnr&quot;, &quot;mae&quot;, &quot;mse&quot;, &quot;ssim&quot;</span></p><p><span style=\" font-size:12pt;\">* Classification: 'accuracy', 'top-5-accuracy'</span></p><p><span "
-                        "style=\" font-size:12pt;\">* Image to image: &quot;psnr&quot;, &quot;mae&quot;, &quot;mse&quot;, &quot;ssim&quot;</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__METRICS__INFO.setText("")
-        self.TRAIN__W_DECAY__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.02", None))
-#if QT_CONFIG(tooltip)
-        self.TRAIN__PROFILER_BATCH_RANGE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Batch range to be analyzed in the profiler. Must two positive integers separated by a comma.</span><span style=\" font-size:12pt; font-weight:600;\"> E.g. (10, 100) means that the profiler will analise the batches from the 10th to the 100th </span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__PROFILER_BATCH_RANGE__INFO.setText("")
-        self.TRAIN__PROFILER__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.TRAIN__PROFILER__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-#if QT_CONFIG(tooltip)
-        self.TRAIN__VERBOSE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Train verbosity to print more info on each batch process</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__VERBOSE__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.LOSS__WEIGHTS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Weights to be apply in multiple loss combination cases. Currently only available when LOSS.TYPE == &quot;W_CE_DICE&quot; where it needs to be a list of two floats (one for CE loss and the other for DICE loss). They must sum 1. E.g. [0.3, 0.7]</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.LOSS__WEIGHTS__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.label_151.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_151.setText(QCoreApplication.translate("MainWindow", u"Learning rate", None))
-#if QT_CONFIG(tooltip)
-        self.adamw_weight_decay_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.adamw_weight_decay_label.setText(QCoreApplication.translate("MainWindow", u"Weight decay", None))
-        self.TRAIN__VERBOSE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Verbose", None))
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.5", None))
-#if QT_CONFIG(tooltip)
-        self.TRAIN__OPTIMIZER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Optimizer to use during the model training.  Optimizers are algorithms or methods used to minimize an error function (the loss function) </span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__OPTIMIZER__INFO.setText("")
-        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1", None))
-        self.TRAIN__BATCH_SIZE__CALCULATION__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
-        self.TRAIN__BATCH_SIZE__CALCULATION__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
-
-        self.TRAIN__METRICS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__SAVE_CKPT_FREQ__LABEL.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__SAVE_CKPT_FREQ__LABEL.setText(QCoreApplication.translate("MainWindow", u"Save checkpoint frequency", None))
-        self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setText(QCoreApplication.translate("MainWindow", u"10, 100", None))
-#if QT_CONFIG(tooltip)
-        self.TRAIN__LR__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Learning rate during training phase. The learning rate is a hyperparameter that controls how much to change the model in response to the estimated error each time the model weights are updated. Choosing the learning rate is challenging as a value too small may result in a long training process that could get stuck, whereas a value too large may result in learning a sub-optimal set of weights too fast or an unstable training process</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.TRAIN__LR__INFO.setText("")
-        self.TRAIN__VERBOSE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.TRAIN__VERBOSE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-#if QT_CONFIG(tooltip)
-        self.profiler_batch_range_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.profiler_batch_range_label.setText(QCoreApplication.translate("MainWindow", u"Profiler batch range", None))
-#if QT_CONFIG(tooltip)
-        self.lr_schel_reduce_on_plat_factor_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.lr_schel_reduce_on_plat_factor_label.setText(QCoreApplication.translate("MainWindow", u"Reduce on plateau factor", None))
-        self.TRAIN__BATCH_SIZE__INPUT.setText(QCoreApplication.translate("MainWindow", u"1", None))
-#if QT_CONFIG(tooltip)
-        self.label_160.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_160.setText(QCoreApplication.translate("MainWindow", u"Profiler", None))
-        self.DATA__PREPROCESS__VAL__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.DATA__PREPROCESS__VAL__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-#if QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__VAL__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Apply preprocessing to validation dataset</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__VAL__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__TRAIN__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Apply preprocessing to training dataset</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__TRAIN__INFO.setText("")
-        self.DATA__PREPROCESS__VAL__LABEL.setText(QCoreApplication.translate("MainWindow", u"Validation preprocessing", None))
-        self.DATA__PREPROCESS__TRAIN__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.DATA__PREPROCESS__TRAIN__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-        self.DATA__PREPROCESS__TRAIN__LABEL.setText(QCoreApplication.translate("MainWindow", u"Train preprocessing", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Apply gaussian blur</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__INFO.setText("")
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-#if QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">If None, the image is assumed to be a grayscale (single channel) image. Otherwise, this parameter indicates which axis of the array corresponds to channels.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__MEDIAN_BLUR__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Apply median blur</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__MEDIAN_BLUR__INFO.setText("")
-        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__LABEL.setText(QCoreApplication.translate("MainWindow", u"High threshold", None))
-        self.DATA__PREPROCESS__RESIZE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Resize", None))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"nearest", None))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"reflect", None))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"constant", None))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.setItemText(3, QCoreApplication.translate("MainWindow", u"mirror", None))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.setItemText(4, QCoreApplication.translate("MainWindow", u"wrap", None))
-
-        self.DATA__PREPROCESS__RESIZE__CLIP__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
-        self.DATA__PREPROCESS__RESIZE__CLIP__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
-
-#if QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__CLAHE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Contrast Limited Adaptive Histogram Equalization. More info at: <a href=\"https://en.wikipedia.org/wiki/Adaptive_histogram_equalization#Contrast_Limited_AHE\"><span style=\" text-decoration: underline; color:#0000ff;\">https://en.wikipedia.org/wiki/Adaptive_histogram_equalization#Contrast_Limited_AHE</span></a></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__CLAHE__INFO.setText("")
-        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Output shape", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__RESIZE__CVAL__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Used in conjunction with mode \u2018constant\u2019, the value outside the image boundaries.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__RESIZE__CVAL__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">In image processing, histogram matching or histogram specification is the transformation of an image so that its histogram matches a specified histogram. The well-known histogram equalization method is a special case in which the specified histogram is uniformly distributed.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__INFO.setText("")
-        self.DATA__PREPROCESS__CLAHE__LABEL.setText(QCoreApplication.translate("MainWindow", u"CLAHE", None))
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__LABEL.setText(QCoreApplication.translate("MainWindow", u"Reference path", None))
-        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"constant", None))
-        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"edge", None))
-        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"symmetric", None))
-        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.setItemText(3, QCoreApplication.translate("MainWindow", u"reflect", None))
-        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.setItemText(4, QCoreApplication.translate("MainWindow", u"wrap", None))
-
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-#if QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Clipping limit, normalized between 0 and 1 (higher values give more contrast).</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO.setText("")
-        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__LABEL.setText(QCoreApplication.translate("MainWindow", u"Low threshold", None))
-        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT.setText(QCoreApplication.translate("MainWindow", u"(512,512)", None))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Border mode", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Defines the shape of contextual regions used in the algorithm. By default, kernel_size is 1/8 of image height by 1/8 of its width.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__RESIZE__CLIP__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to clip the output to the range of values of the input image.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__RESIZE__CLIP__INFO.setText("")
-        self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-#if QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__RESIZE__ORDER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Interpolation order: {0: Nearest-neighbor, 1: Bi-linear (default), 2: Bi-quadratic, 3: Bi-cubic, 4: Bi-quartic, 5: Bi-quintic}</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__RESIZE__ORDER__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to keep the original range of values.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO.setText("")
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.01", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__RESIZE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Resize datasets</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__RESIZE__INFO.setText("")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT.setText(QCoreApplication.translate("MainWindow", u"1", None))
-        self.DATA__PREPROCESS__CLAHE__ENABLE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.DATA__PREPROCESS__CLAHE__ENABLE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__LABEL.setText(QCoreApplication.translate("MainWindow", u"Anti aliasing", None))
-        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT.setText(QCoreApplication.translate("MainWindow", u"2", None))
-        self.DATA__PREPROCESS__MEDIAN_BLUR__LABEL.setText(QCoreApplication.translate("MainWindow", u"Median blur", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__RESIZE__MODE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Points outside the boundaries of the input are filled according to the given mode: {\u2018constant\u2019, \u2018edge\u2019, \u2018symmetric\u2019, \u2018reflect\u2019, \u2018wrap\u2019}</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__RESIZE__MODE__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Desired resize size. when using 3D data, size must be also in 3D (ex. (512,512,512))</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO.setText("")
-        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Bi-linear", None))
-        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Bi-quadratic", None))
-        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"Bi-cubic", None))
-        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.setItemText(3, QCoreApplication.translate("MainWindow", u"Bi-quartic", None))
-        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.setItemText(4, QCoreApplication.translate("MainWindow", u"Bi-quintic", None))
-        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.setItemText(5, QCoreApplication.translate("MainWindow", u"Nearest-neighbor", None))
-
-        self.DATA__PREPROCESS__CANNY__LABEL.setText(QCoreApplication.translate("MainWindow", u"Canny", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Standard deviation for Gaussian kernel.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO.setText("")
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Preserve range", None))
-        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Kernel size", None))
-        self.DATA__PREPROCESS__RESIZE__ENABLE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.DATA__PREPROCESS__RESIZE__ENABLE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-        self.DATA__PREPROCESS__RESIZE__CVAL__LABEL.setText(QCoreApplication.translate("MainWindow", u"Cval", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path of the reference images, from which the reference histogram will be extracted </span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO.setText("")
-        self.DATA__PREPROCESS__RESIZE__CVAL__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.0", None))
-        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT.setText(QCoreApplication.translate("MainWindow", u"1", None))
-        self.DATA__PREPROCESS__CANNY__ENABLE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.DATA__PREPROCESS__CANNY__ENABLE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__LABEL.setText(QCoreApplication.translate("MainWindow", u"Match histogram", None))
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__LABEL.setText(QCoreApplication.translate("MainWindow", u"Gaussian blur ", None))
-        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__LABEL.setText(QCoreApplication.translate("MainWindow", u"Clip limit", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__CANNY__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Canny or edge detection (only 2D - grayscale or RGB)</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__CANNY__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">The mode parameter determines how the array borders are handled: {\u2018reflect\u2019, \u2018constant\u2019, \u2018nearest\u2019, \u2018mirror\u2019, \u2018wrap\u2019} \u2018constant\u2019 value = 0</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO.setText("")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Channel axis", None))
-        self.DATA__PREPROCESS__RESIZE__ORDER__LABEL.setText(QCoreApplication.translate("MainWindow", u"Interpolation order", None))
-        self.DATA__PREPROCESS__RESIZE__CLIP__LABEL.setText(QCoreApplication.translate("MainWindow", u"Clip values", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to apply a Gaussian filter to smooth the image prior to downsampling.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO.setText("")
-        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__LABEL.setText(QCoreApplication.translate("MainWindow", u"Sigma", None))
-        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
-        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
-
-        self.DATA__PREPROCESS__RESIZE__MODE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filling mode", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Lower bound for hysteresis thresholding (linking edges). If None, low_threshold is set to 10% of dtype\u2019s max.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Upper bound for hysteresis thresholding (linking edges). If None, high_threshold is set to 20% of dtype\u2019s max.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO.setText("")
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Kernel size", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Desired kernel size (including channels). When using 3D data, size must be also in 3D (ex. (3,7,7,1) for (z,y,x,c))</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setText("")
-        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT.setText(QCoreApplication.translate("MainWindow", u"(3,3,1)", None))
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"Validation data", None))
-        self.label_30.setText(QCoreApplication.translate("MainWindow", u"Train data", None))
 #if QT_CONFIG(tooltip)
         self.AUGMENTOR__DROPOUT__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Set a certain fraction of pixels in images to zero (not get confused with the dropout concept of neural networks)</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -16126,8 +16049,396 @@ class Ui_MainWindow(object):
         self.cross_validation_fold_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.cross_validation_fold_label.setText(QCoreApplication.translate("MainWindow", u"Cross validation fold number", None))
-        self.convnext_label.setText(QCoreApplication.translate("MainWindow", u"ConvNeXT blocks", None))
-        self.unet_model_like_label.setText(QCoreApplication.translate("MainWindow", u"U-Net model-like configuration", None))
+        self.label_3.setText(QCoreApplication.translate("MainWindow", u"Validation data", None))
+        self.label_31.setText(QCoreApplication.translate("MainWindow", u"Validation data", None))
+        self.DATA__CHECK_GENERATORS__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.DATA__CHECK_GENERATORS__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+#if QT_CONFIG(tooltip)
+        self.check_gen_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.check_gen_label.setText(QCoreApplication.translate("MainWindow", u"Check generator", None))
+#if QT_CONFIG(tooltip)
+        self.label_7.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_7.setText(QCoreApplication.translate("MainWindow", u"Extract random patch", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__EXTRACT_RANDOM_PATCH__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Extract random patches during data augmentation (DA). This option will prevent input images to be cropped in the patch size specified and will extract a random patch of that shape every training sample. This option will slow down each training epoch. </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__EXTRACT_RANDOM_PATCH__INFO.setText("")
+        self.DATA__EXTRACT_RANDOM_PATCH__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.DATA__EXTRACT_RANDOM_PATCH__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+#if QT_CONFIG(tooltip)
+        self.DATA__CHECK_GENERATORS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Save all data of the training and validation generators in a folder named 'gen_check' in the results directory</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__CHECK_GENERATORS__INFO.setText("")
+        self.label_42.setText(QCoreApplication.translate("MainWindow", u"Advanced training parameters", None))
+#if QT_CONFIG(tooltip)
+        self.number_of_epochs_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.number_of_epochs_label.setText(QCoreApplication.translate("MainWindow", u"Number of epochs", None))
+#if QT_CONFIG(tooltip)
+        self.number_of_epochs_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">How many epochs (rounds) the model will be trained. </span><span style=\" font-size:12pt; font-weight:600;\">Must be an integer</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.number_of_epochs_info.setText("")
+        self.TRAIN__PATIENCE__INPUT.setText(QCoreApplication.translate("MainWindow", u"50", None))
+#if QT_CONFIG(tooltip)
+        self.patience_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">How many epochs you want to wait without the model improving its results in the validation set to stop training. </span><span style=\" font-size:12pt; font-weight:600;\">Must be an integer lower than number of epochs</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.patience_info.setText("")
+#if QT_CONFIG(tooltip)
+        self.patience_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.patience_label.setText(QCoreApplication.translate("MainWindow", u"Patience ", None))
+        self.TRAIN__EPOCHS__INPUT.setText(QCoreApplication.translate("MainWindow", u"150", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Apply gaussian blur</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__INFO.setText("")
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__ENABLE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+#if QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">If None, the image is assumed to be a grayscale (single channel) image. Otherwise, this parameter indicates which axis of the array corresponds to channels.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Apply median blur</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__INFO.setText("")
+        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__LABEL.setText(QCoreApplication.translate("MainWindow", u"High threshold", None))
+        self.DATA__PREPROCESS__RESIZE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Resize", None))
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"nearest", None))
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"reflect", None))
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"constant", None))
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.setItemText(3, QCoreApplication.translate("MainWindow", u"mirror", None))
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INPUT.setItemText(4, QCoreApplication.translate("MainWindow", u"wrap", None))
+
+        self.DATA__PREPROCESS__RESIZE__CLIP__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
+        self.DATA__PREPROCESS__RESIZE__CLIP__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
+
+#if QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__CLAHE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Contrast Limited Adaptive Histogram Equalization. More info at: <a href=\"https://en.wikipedia.org/wiki/Adaptive_histogram_equalization#Contrast_Limited_AHE\"><span style=\" text-decoration: underline; color:#0000ff;\">https://en.wikipedia.org/wiki/Adaptive_histogram_equalization#Contrast_Limited_AHE</span></a></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__CLAHE__INFO.setText("")
+        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Output shape", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__RESIZE__CVAL__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Used in conjunction with mode \u2018constant\u2019, the value outside the image boundaries.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__RESIZE__CVAL__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">In image processing, histogram matching or histogram specification is the transformation of an image so that its histogram matches a specified histogram. The well-known histogram equalization method is a special case in which the specified histogram is uniformly distributed.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__INFO.setText("")
+        self.DATA__PREPROCESS__CLAHE__LABEL.setText(QCoreApplication.translate("MainWindow", u"CLAHE", None))
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__LABEL.setText(QCoreApplication.translate("MainWindow", u"Reference path", None))
+        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"constant", None))
+        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"edge", None))
+        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"symmetric", None))
+        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.setItemText(3, QCoreApplication.translate("MainWindow", u"reflect", None))
+        self.DATA__PREPROCESS__RESIZE__MODE__INPUT.setItemText(4, QCoreApplication.translate("MainWindow", u"wrap", None))
+
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__ENABLE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+#if QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Clipping limit, normalized between 0 and 1 (higher values give more contrast).</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INFO.setText("")
+        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__LABEL.setText(QCoreApplication.translate("MainWindow", u"Low threshold", None))
+        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INPUT.setText(QCoreApplication.translate("MainWindow", u"(512,512)", None))
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Border mode", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Defines the shape of contextual regions used in the algorithm. By default, kernel_size is 1/8 of image height by 1/8 of its width.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__RESIZE__CLIP__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to clip the output to the range of values of the input image.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__RESIZE__CLIP__INFO.setText("")
+        self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.DATA__PREPROCESS__MEDIAN_BLUR__ENABLE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+#if QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__RESIZE__ORDER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Interpolation order: {0: Nearest-neighbor, 1: Bi-linear (default), 2: Bi-quadratic, 3: Bi-cubic, 4: Bi-quartic, 5: Bi-quintic}</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__RESIZE__ORDER__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to keep the original range of values.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INFO.setText("")
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.01", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__RESIZE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Resize datasets</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__RESIZE__INFO.setText("")
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INPUT.setText(QCoreApplication.translate("MainWindow", u"1", None))
+        self.DATA__PREPROCESS__CLAHE__ENABLE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.DATA__PREPROCESS__CLAHE__ENABLE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__LABEL.setText(QCoreApplication.translate("MainWindow", u"Anti aliasing", None))
+        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INPUT.setText(QCoreApplication.translate("MainWindow", u"2", None))
+        self.DATA__PREPROCESS__MEDIAN_BLUR__LABEL.setText(QCoreApplication.translate("MainWindow", u"Median blur", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__RESIZE__MODE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Points outside the boundaries of the input are filled according to the given mode: {\u2018constant\u2019, \u2018edge\u2019, \u2018symmetric\u2019, \u2018reflect\u2019, \u2018wrap\u2019}</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__RESIZE__MODE__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Desired resize size. when using 3D data, size must be also in 3D (ex. (512,512,512))</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__RESIZE__OUTPUT_SHAPE__INFO.setText("")
+        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Bi-linear", None))
+        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Bi-quadratic", None))
+        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"Bi-cubic", None))
+        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.setItemText(3, QCoreApplication.translate("MainWindow", u"Bi-quartic", None))
+        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.setItemText(4, QCoreApplication.translate("MainWindow", u"Bi-quintic", None))
+        self.DATA__PREPROCESS__RESIZE__ORDER__INPUT.setItemText(5, QCoreApplication.translate("MainWindow", u"Nearest-neighbor", None))
+
+        self.DATA__PREPROCESS__CANNY__LABEL.setText(QCoreApplication.translate("MainWindow", u"Canny", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Standard deviation for Gaussian kernel.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__INFO.setText("")
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Preserve range", None))
+        self.DATA__PREPROCESS__CLAHE__KERNEL_SIZE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Kernel size", None))
+        self.DATA__PREPROCESS__RESIZE__ENABLE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.DATA__PREPROCESS__RESIZE__ENABLE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+        self.DATA__PREPROCESS__RESIZE__CVAL__LABEL.setText(QCoreApplication.translate("MainWindow", u"Cval", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path of the reference images, from which the reference histogram will be extracted </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__INFO.setText("")
+        self.DATA__PREPROCESS__RESIZE__CVAL__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.0", None))
+        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INPUT.setText(QCoreApplication.translate("MainWindow", u"1", None))
+        self.DATA__PREPROCESS__CANNY__ENABLE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.DATA__PREPROCESS__CANNY__ENABLE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__LABEL.setText(QCoreApplication.translate("MainWindow", u"Match histogram", None))
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__LABEL.setText(QCoreApplication.translate("MainWindow", u"Gaussian blur ", None))
+        self.DATA__PREPROCESS__CLAHE__CLIP_LIMIT__LABEL.setText(QCoreApplication.translate("MainWindow", u"Clip limit", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__CANNY__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Canny or edge detection (only 2D - grayscale or RGB)</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__CANNY__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">The mode parameter determines how the array borders are handled: {\u2018reflect\u2019, \u2018constant\u2019, \u2018nearest\u2019, \u2018mirror\u2019, \u2018wrap\u2019} \u2018constant\u2019 value = 0</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__MODE__INFO.setText("")
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__CHANNEL_AXIS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Channel axis", None))
+        self.DATA__PREPROCESS__RESIZE__ORDER__LABEL.setText(QCoreApplication.translate("MainWindow", u"Interpolation order", None))
+        self.DATA__PREPROCESS__RESIZE__CLIP__LABEL.setText(QCoreApplication.translate("MainWindow", u"Clip values", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to apply a Gaussian filter to smooth the image prior to downsampling.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__RESIZE__ANTI_ALIASING__INFO.setText("")
+        self.DATA__PREPROCESS__GAUSSIAN_BLUR__SIGMA__LABEL.setText(QCoreApplication.translate("MainWindow", u"Sigma", None))
+        self.DATA__PREPROCESS__MATCH_HISTOGRAM__REFERENCE_PATH__BN.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
+        self.DATA__PREPROCESS__RESIZE__PRESERVE_RANGE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
+
+        self.DATA__PREPROCESS__RESIZE__MODE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filling mode", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Lower bound for hysteresis thresholding (linking edges). If None, low_threshold is set to 10% of dtype\u2019s max.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__CANNY__LOW_THRESHOLD__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Upper bound for hysteresis thresholding (linking edges). If None, high_threshold is set to 20% of dtype\u2019s max.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__INFO.setText("")
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Kernel size", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Desired kernel size (including channels). When using 3D data, size must be also in 3D (ex. (3,7,7,1) for (z,y,x,c))</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INFO.setText("")
+        self.DATA__PREPROCESS__MEDIAN_BLUR__KERNEL_SIZE__INPUT.setText(QCoreApplication.translate("MainWindow", u"(3,3,1)", None))
+#if QT_CONFIG(tooltip)
+        self.label_162.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_162.setText(QCoreApplication.translate("MainWindow", u"Learning rate scheduler name", None))
+#if QT_CONFIG(tooltip)
+        self.LOSS__CLASS_REBALANCE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">To adjust the loss function based on the imbalance between classes. Used when LOSS.TYPE == &quot;CE&quot; in detection and semantic segmentation and if using B,C,M,P or A channels in instance segmentation workflow.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.LOSS__CLASS_REBALANCE__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Factor by which the learning rate will be reduced in 'reduceonplateau' scheduler. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a float between 0 and 1</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.label_114.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_114.setText(QCoreApplication.translate("MainWindow", u"Accumulate iterations", None))
+#if QT_CONFIG(tooltip)
+        self.TRAIN__BATCH_SIZE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Batch size of the training process. It is a hyperparameter that defines the number of samples to work through before updating the internal model parameters. This determines how many images will be loaded into the GPU at once so a high value will lead to a GPU memory error. Set it according to your GPU memory. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__BATCH_SIZE__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.lr_schel_warmupcosine_epochs_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.lr_schel_warmupcosine_epochs_label.setText(QCoreApplication.translate("MainWindow", u"Warmup cosine decay epochs", None))
+#if QT_CONFIG(tooltip)
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of epochs with no improvement after which learning rate will be reduced in 'reduceonplateau' scheduler. Need to be less than training patience otherwise it makes no sense. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INFO.setText("")
+        self.TRAIN__BATCH_SIZE__CALCULATION__LABEL.setText(QCoreApplication.translate("MainWindow", u"Automatically calculate batch size", None))
+#if QT_CONFIG(tooltip)
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Lower bound on the learning rate used in 'warmupcosine' and 'reduceonplateau'. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive float</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INFO.setText("")
+        self.TRAIN__METRICS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Train metrics", None))
+#if QT_CONFIG(tooltip)
+        self.TRAIN__ACCUM_ITER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">If memory or # gpus is limited, use this variable to maintain the effective batch size, which is batch_size (per gpu) * nodes * (gpus per node) * accum_iter. Must be a positive integer.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__ACCUM_ITER__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.lr_schel_reduce_on_plat_patience_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.lr_schel_reduce_on_plat_patience_label.setText(QCoreApplication.translate("MainWindow", u"Reduce on plateau patience", None))
+        self.LOSS__TYPE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Loss type", None))
+#if QT_CONFIG(tooltip)
+        self.TRAIN__BATCH_SIZE__LABEL.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__BATCH_SIZE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Batch size", None))
+        self.LOSS__CLASS_REBALANCE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Class rebalance", None))
+        self.LOSS__CLASS_REBALANCE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
+        self.LOSS__CLASS_REBALANCE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
+
+#if QT_CONFIG(tooltip)
+        self.TRAIN__LR_SCHEDULER__NAME__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Set up a learning rate scheduler. A Learning rate scheduler is a predefined framework that adjusts the learning rate between epochs or iterations as the training progresses. Leave it with the first option blank to avoid applying it. Three options available: 'warmupcosine', 'reduceonplateau', 'onecycle'. </span></p><p><span style=\" font-size:12pt;\">- 'warmupcosine' refers to a cosine decay with a warm up consist in 2 phases: 1) a warm up phase which consists of increasing the learning rate from 'warmup cosine decay' to 'training learning rate' value by a factor during a certain number of epochs defined by 'warmup cosine decay hold epochs'; 2) after this will began the decay of the learning rate value using the cosine function. Find a detailed explanation in </span><a href=\"https://scorrea92.medium.com/cosine-learning-rate-decay-e8b50aa455b \"><span style=\" font-size:12pt; text-decoration: underline; color:#0000ff;\">here</span></a></p><p><span style=\" "
+                        "font-size:12pt;\">- 'reduceonplateau' reduces the learning rate when a metric has stopped improving. Models often benefit from reducing the learning rate by a factor of 2-10 once learning stagnates. This callback monitors a quantity and if no improvement is seen for a 'patience' number of epochs, the learning rate is reduced.</span></p><p><span style=\" font-size:12pt;\">- 'onecycle', sets the learning rate of each parameter group according to the 1cycle learning rate policy. The 1cycle policy anneals the learning rate from an initial learning rate to some maximum learning rate and then from that maximum learning rate to some minimum learning rate much lower than the initial learning rate. This policy was initially described in the paper: </span><a href=\"https://arxiv.org/abs/1708.07120\"><span style=\" font-size:12pt; text-decoration: underline; color:#0000ff;\">&quot;Super-Convergence: Very Fast Training of Neural Networks Using Large Learning Rates&quot;</span></a></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__LR_SCHEDULER__NAME__INFO.setText("")
+        self.TRAIN__ACCUM_ITER__INPUT.setText(QCoreApplication.translate("MainWindow", u"1", None))
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1", None))
+        self.MODEL__SAVE_CKPT_FREQ__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1", None))
+        self.TRAIN__OPT_BETAS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Betas", None))
+        self.TRAIN__OPTIMIZER__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"ADAMW", None))
+        self.TRAIN__OPTIMIZER__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"ADAM", None))
+        self.TRAIN__OPTIMIZER__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"SGD", None))
+
+#if QT_CONFIG(tooltip)
+        self.TRAIN__W_DECAY__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Weight decay for AdamW optimizer</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__W_DECAY__INFO.setText("")
+        self.TRAIN__OPT_BETAS__INPUT.setText(QCoreApplication.translate("MainWindow", u"(0.9, 0.999)", None))
+#if QT_CONFIG(tooltip)
+        self.TRAIN__PROFILER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\"> Whether to add profiler callback to the training </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__PROFILER__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.label_143.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_143.setText(QCoreApplication.translate("MainWindow", u"Optimizer", None))
+#if QT_CONFIG(tooltip)
+        self.LOSS__TYPE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Loss type, different options depending on the workflow. If empty the default loss on each case will be set:</span></p><p><span style=\" font-size:12pt;\">  * Semantic segmentation:</span></p><p><span style=\" font-size:12pt;\">      * &quot;CE&quot; (default): cross entropy. Ref: https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html</span></p><p><span style=\" font-size:12pt;\">      * &quot;DICE&quot;: Dice loss. Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch</span></p><p><span style=\" font-size:12pt;\">      * &quot;W_CE_DICE&quot;: CE and Dice (with a weight term on each one that must sum 1). Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch</span></p><p><span style=\" font-size:12pt;\">  * Instance segmentation: automatically set depending on the channels selected (PROBLEM.INSTANCE_SEG.DATA_CHANNELS). There is no need</span></p><p><span style=\" font-size:12pt;\"> "
+                        "                          to set it.</span></p><p><span style=\" font-size:12pt;\">  * Detection:</span></p><p><span style=\" font-size:12pt;\">      * &quot;CE&quot; (default): cross entropy. Ref: https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html</span></p><p><span style=\" font-size:12pt;\">      * &quot;DICE&quot;: Dice loss. Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch</span></p><p><span style=\" font-size:12pt;\">      * &quot;W_CE_DICE&quot;: CE and Dice (with a weight term on each one that must sum 1). Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch</span></p><p><span style=\" font-size:12pt;\">  * Denoising:</span></p><p><span style=\" font-size:12pt;\">      * &quot;MSE&quot; (default): mean square error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss</span></p><p><span style=\" font-size:12pt;\">  * Super-resolution:</span></p><p><span style=\" font-size:12pt;\">     "
+                        " * &quot;MAE&quot; (default): mean absolute error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss</span></p><p><span style=\" font-size:12pt;\">      * &quot;MSE&quot;: mean square error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss</span></p><p><span style=\" font-size:12pt;\">  * Self-supervision:</span></p><p><span style=\" font-size:12pt;\">      These losses can only be set when PROBLEM.SELF_SUPERVISED.PRETEXT_TASK = &quot;crappify&quot;. Otherwise it will be automatically set to MSE when</span></p><p><span style=\" font-size:12pt;\">      PROBLEM.SELF_SUPERVISED.PRETEXT_TASK = &quot;masking&quot;.</span></p><p><span style=\" font-size:12pt;\">      * &quot;MAE&quot; (default): mean absolute error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss</span></p><p><span style=\" font-size:12pt;\">      * &quot;MSE&quot;: mean square error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSEL"
+                        "oss.html#torch.nn.MSELoss</span></p><p><span style=\" font-size:12pt;\">  * Classification:</span></p><p><span style=\" font-size:12pt;\">      * &quot;CE&quot; (default): cross entropy. Ref: https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html</span></p><p><span style=\" font-size:12pt;\">  * Image to image:</span></p><p><span style=\" font-size:12pt;\">      * &quot;MAE&quot; (default): mean absolute error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss</span></p><p><span style=\" font-size:12pt;\">      * &quot;MSE&quot;: mean square error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.LOSS__TYPE__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.lr_schel_min_lr_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.lr_schel_min_lr_label.setText(QCoreApplication.translate("MainWindow", u"Minimum learning rate", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__SAVE_CKPT_FREQ__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Epochs to save a checkpoint of the model apart from the ones saved with LOAD_CHECKPOINT_ONLY_WEIGHTS. Set it to -1 to not do it.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__SAVE_CKPT_FREQ__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Epochs to do the warming up in 'warmupcosine' scheduler. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__LR_SCHEDULER__WARMUP_COSINE_DECAY_EPOCHS__INFO.setText("")
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setItemText(0, "")
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"warmupcosine", None))
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"reduceonplateau", None))
+        self.TRAIN__LR_SCHEDULER__NAME__INPUT.setItemText(3, QCoreApplication.translate("MainWindow", u"onecycle", None))
+
+        self.LOSS__WEIGHTS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[0.66, 0.34]", None))
+        self.LOSS__WEIGHTS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Loss weights", None))
+        self.TRAIN__LR_SCHEDULER__MIN_LR__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1", None))
+#if QT_CONFIG(tooltip)
+        self.TRAIN__OPT_BETAS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Coefficients used for computing running averages of gradient and its square. Used in ADAM and ADAMW optimizers</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__OPT_BETAS__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Tries to automatically calculate the batch size based on the GPU memory available. The maximum value is difficult to calculate so you may need to decrease it to not have a out-of-memory error. If you don't have a GPU a &quot;modest&quot; value of 12 will be set. </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__BATCH_SIZE__CALCULATION__INFO.setText("")
+        self.TRAIN__LR__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.0001", None))
+#if QT_CONFIG(tooltip)
+        self.TRAIN__METRICS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Metrics to apply during training. Depending on the workflow different ones can be applied. If empty, some default metrics will be configured automatically:</span></p><p><span style=\" font-size:12pt;\">* Semantic segmentation: 'iou' (called also Jaccard index)</span></p><p><span style=\" font-size:12pt;\">* Instance segmentation: automatically set depending on the channels selected (PROBLEM.INSTANCE_SEG.DATA_CHANNELS).</span></p><p><span style=\" font-size:12pt;\">* Detection: 'iou' (called also Jaccard index)</span></p><p><span style=\" font-size:12pt;\">* Denoising: 'mae', 'mse'</span></p><p><span style=\" font-size:12pt;\">* Super-resolution: &quot;psnr&quot;, &quot;mae&quot;, &quot;mse&quot;, &quot;ssim&quot;</span></p><p><span style=\" font-size:12pt;\">* Self-supervision: &quot;psnr&quot;, &quot;mae&quot;, &quot;mse&quot;, &quot;ssim&quot;</span></p><p><span style=\" font-size:12pt;\">* Classification: 'accuracy', 'top-5-accuracy'</span></p><p><span "
+                        "style=\" font-size:12pt;\">* Image to image: &quot;psnr&quot;, &quot;mae&quot;, &quot;mse&quot;, &quot;ssim&quot;</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__METRICS__INFO.setText("")
+        self.TRAIN__W_DECAY__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.02", None))
+#if QT_CONFIG(tooltip)
+        self.TRAIN__PROFILER_BATCH_RANGE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Batch range to be analyzed in the profiler. Must two positive integers separated by a comma.</span><span style=\" font-size:12pt; font-weight:600;\"> E.g. (10, 100) means that the profiler will analise the batches from the 10th to the 100th </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__PROFILER_BATCH_RANGE__INFO.setText("")
+        self.TRAIN__PROFILER__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.TRAIN__PROFILER__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+#if QT_CONFIG(tooltip)
+        self.TRAIN__VERBOSE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Train verbosity to print more info on each batch process</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__VERBOSE__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.LOSS__WEIGHTS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Weights to be apply in multiple loss combination cases. Currently only available when LOSS.TYPE == &quot;W_CE_DICE&quot; where it needs to be a list of two floats (one for CE loss and the other for DICE loss). They must sum 1. E.g. [0.3, 0.7]</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.LOSS__WEIGHTS__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.label_151.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_151.setText(QCoreApplication.translate("MainWindow", u"Learning rate", None))
+#if QT_CONFIG(tooltip)
+        self.adamw_weight_decay_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.adamw_weight_decay_label.setText(QCoreApplication.translate("MainWindow", u"Weight decay", None))
+        self.TRAIN__VERBOSE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Verbose", None))
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_FACTOR__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.5", None))
+#if QT_CONFIG(tooltip)
+        self.TRAIN__OPTIMIZER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Optimizer to use during the model training.  Optimizers are algorithms or methods used to minimize an error function (the loss function) </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__OPTIMIZER__INFO.setText("")
+        self.TRAIN__LR_SCHEDULER__REDUCEONPLATEAU_PATIENCE__INPUT.setText(QCoreApplication.translate("MainWindow", u"-1", None))
+        self.TRAIN__BATCH_SIZE__CALCULATION__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
+        self.TRAIN__BATCH_SIZE__CALCULATION__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
+
+        self.TRAIN__METRICS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__SAVE_CKPT_FREQ__LABEL.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__SAVE_CKPT_FREQ__LABEL.setText(QCoreApplication.translate("MainWindow", u"Save checkpoint frequency", None))
+        self.TRAIN__PROFILER_BATCH_RANGE__INPUT.setText(QCoreApplication.translate("MainWindow", u"10, 100", None))
+#if QT_CONFIG(tooltip)
+        self.TRAIN__LR__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Learning rate during training phase. The learning rate is a hyperparameter that controls how much to change the model in response to the estimated error each time the model weights are updated. Choosing the learning rate is challenging as a value too small may result in a long training process that could get stuck, whereas a value too large may result in learning a sub-optimal set of weights too fast or an unstable training process</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.TRAIN__LR__INFO.setText("")
+        self.TRAIN__VERBOSE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.TRAIN__VERBOSE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+#if QT_CONFIG(tooltip)
+        self.profiler_batch_range_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.profiler_batch_range_label.setText(QCoreApplication.translate("MainWindow", u"Profiler batch range", None))
+#if QT_CONFIG(tooltip)
+        self.lr_schel_reduce_on_plat_factor_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.lr_schel_reduce_on_plat_factor_label.setText(QCoreApplication.translate("MainWindow", u"Reduce on plateau factor", None))
+        self.TRAIN__BATCH_SIZE__INPUT.setText(QCoreApplication.translate("MainWindow", u"1", None))
+#if QT_CONFIG(tooltip)
+        self.label_160.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_160.setText(QCoreApplication.translate("MainWindow", u"Profiler", None))
+#if QT_CONFIG(tooltip)
+        self.label_10.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">IDs of the GPU to run the job in. If you want to use more than one GPU add them sepated by commas. E.g. &quot;0,1,2,3&quot; </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.label_10.setText(QCoreApplication.translate("MainWindow", u"Data options", None))
+        self.label_5.setText(QCoreApplication.translate("MainWindow", u"General training parameters", None))
         self.AUGMENTOR__ENABLE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Data augmentation", None))
         self.AUGMENTOR__ENABLE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
         self.AUGMENTOR__ENABLE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
@@ -16144,347 +16455,11 @@ class Ui_MainWindow(object):
         self.AUTOMATIC__AUG__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to automatically configure the data augmentation based on the workflow specified or configure it manually</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.AUTOMATIC__AUG__INFO.setText("")
-        self.label_5.setText(QCoreApplication.translate("MainWindow", u"General training parameters", None))
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setText(QCoreApplication.translate("MainWindow", u"Zarr raw images path", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether if your input Zarr contains the raw images and labels together or not. Use 'DATA.TRAIN.INPUT_ZARR_MULTIPLE_DATA_RAW_PATH' and 'DATA.TRAIN.INPUT_ZARR_MULTIPLE_DATA_GT_PATH' to determine the tag to find within the Zarr</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.label_22.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_22.setText(QCoreApplication.translate("MainWindow", u"Overlap", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__TRAIN__RESOLUTION__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Train data resolution. It is not completely necessary but when configured it is taken into account when performing some augmentations, e.g. cutout. If defined it need to be (y,x)/(z,y,x) and needs to be to be a 2D tuple when in 2D problems and 3D tuple when in 3D problems. Parentheses are needed. E.g. </span><span style=\" font-size:12pt; font-weight:600;\">(5,0.852,0.852)</span><span style=\" font-size:12pt;\"> represent an anisotropic data with less resolution in Z axis.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__TRAIN__RESOLUTION__INFO.setText("")
-        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__LABEL.setText(QCoreApplication.translate("MainWindow", u"Zarr image axis order", None))
-        self.DATA__TRAIN__REPLICATE__INPUT.setText(QCoreApplication.translate("MainWindow", u"0", None))
-        self.DATA__TRAIN__REPLICATE__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"0", None))
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setText("")
-#if QT_CONFIG(tooltip)
-        self.train_resolution_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.train_resolution_label.setText(QCoreApplication.translate("MainWindow", u"Resolution", None))
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setText("")
-#if QT_CONFIG(tooltip)
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the gt within the Zarr file. Only used when 'DATA.TRAIN.INPUT_ZARR_MULTIPLE_DATA' is True. E.g.  'volumes.labels.neuron_ids' for GT path.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.DATA__TRAIN__OVERLAP__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Percentage of overlap in (y,x)/(z,y,x) when cropping training data. Set to 0 to calculate the minimum overlap. Parentheses are needed. The values must be floats between range [0, 1). It needs to be a 2D tuple in 2D problems and 3D tuple in 3D problems. E.g. </span><span style=\" font-size:12pt; font-weight:600;\">(0,0)</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__TRAIN__OVERLAP__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.DATA__TRAIN__PADDING__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Training padding to be done in (y,x) for 2D problems and (z,y,x) for 3D ones when reconstructing train data. Useful to avoid patch border effect. Parentheses are needed. A good value should be the patch size divided by 8. For instance, if the path size is (256,256,1) a good value can be </span><span style=\" font-size:12pt; font-weight:600;\">(32,32)</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__TRAIN__PADDING__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.label_21.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_21.setText(QCoreApplication.translate("MainWindow", u"Replicate train data", None))
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setText(QCoreApplication.translate("MainWindow", u"Input Zarr multiple data", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__TRAIN__REPLICATE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Factor to multiply the training data. With this option, each training sample will be seen more than once across multiple epochs. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__TRAIN__REPLICATE__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the raw images within the Zarr file. Only used when 'DATA.TRAIN.INPUT_ZARR_MULTIPLE_DATA' is True. E.g. 'volumes.raw' for raw images.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setText("")
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-#if QT_CONFIG(tooltip)
-        self.label_23.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_23.setText(QCoreApplication.translate("MainWindow", u"Padding", None))
-        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setText(QCoreApplication.translate("MainWindow", u"Zarr GT path", None))
-        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__LABEL.setText(QCoreApplication.translate("MainWindow", u"Zarr mask axis order", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Order of the axes of the mask when using Zarr/H5 images in train data.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO.setText("")
-        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INPUT.setText(QCoreApplication.translate("MainWindow", u"TZCYX", None))
-        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT.setText(QCoreApplication.translate("MainWindow", u"TZCYX", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Order of the axes of the image when using Zarr/H5 images in train data.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-#if QT_CONFIG(statustip)
-        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO.setStatusTip("")
-#endif // QT_CONFIG(statustip)
-        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO.setText("")
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filter properties", None))
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filter values", None))
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filter samples", None))
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-#if QT_CONFIG(tooltip)
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to enable or not the filtering by properties. Description:</span></p><p><span style=\" font-size:12pt;\">Remove training images by the conditions based on their properties. When using Zarr each patch within the Zarr will be processed and not</span></p><p><span style=\" font-size:12pt;\">the entire image.</span></p><p><span style=\" font-size:12pt;\">The three variables, DATA.TRAIN.FILTER_SAMPLES.PROPS, DATA.TRAIN.FILTER_SAMPLES.VALUES and DATA.TRAIN.FILTER_SAMPLES.SIGN will compose a list of </span></p><p><span style=\" font-size:12pt;\">conditions to remove the images. They are list of list of conditions. For instance, the conditions can be like this: [['A'], ['B','C']]. Then, if </span></p><p><span style=\" font-size:12pt;\">the image satisfies the first list of conditions, only 'A' in this first case (from ['A'] list), or satisfy 'B' and 'C' (from ['B','C'] list) </span></p><p><span style=\" font-size:12pt;\">it will be removed from the image. I"
-                        "n each sublist all the conditions must be satisfied. Available properties are: ['foreground', 'mean', 'min', 'max'].</span></p><p><br/></p><p><span style=\" font-size:12pt;\">Each property descrition:</span></p><p><span style=\" font-size:12pt;\">* 'foreground' is defined as the mask foreground percentage. This option is only valid for SEMANTIC_SEG, INSTANCE_SEG and DETECTION.</span></p><p><span style=\" font-size:12pt;\">* 'mean' is defined as the mean value.</span></p><p><span style=\" font-size:12pt;\">* 'min' is defined as the min value.</span></p><p><span style=\" font-size:12pt;\">* 'max' is defined as the max value.</span></p><p><br/></p><p><span style=\" font-size:12pt;\">A full example of this filtering:</span></p><p><span style=\" font-size:12pt;\">If you want to remove those samples that have less than 0.00001 and a mean average more than 100 (you need to know image data type) you should</span></p><p><span style=\" font-size:12pt;\">declare the above three variables as follows:</span></p><p><span st"
-                        "yle=\" font-size:12pt;\">* DATA.TRAIN.FILTER_SAMPLES.PROPS = [['foreground','mean']]</span></p><p><span style=\" font-size:12pt;\">* DATA.TRAIN.FILTER_SAMPLES.VALUES = [[0.00001, 100]]</span></p><p><span style=\" font-size:12pt;\">* DATA.TRAIN.FILTER_SAMPLES.SIGN = [['lt', 'gt']]</span></p><p><span style=\" font-size:12pt;\">You can also concatenate more restrictions and they will be applied in order. For instance, if you want to filter those</span></p><p><span style=\" font-size:12pt;\">samples with a max value more than 1000, and do that before the condition described above, you can define the</span></p><p><span style=\" font-size:12pt;\">variables this way:</span></p><p><span style=\" font-size:12pt;\">* DATA.TRAIN.FILTER_SAMPLES.PROPS = [['max'], ['foreground','mean']]</span></p><p><span style=\" font-size:12pt;\">* DATA.TRAIN.FILTER_SAMPLES.VALUES = [[1000], [0.00001, 100]]</span></p><p><span style=\" font-size:12pt;\">* DATA.TRAIN.FILTER_SAMPLES.SIGN = [['gt'], ['lt', 'gt']]</span></p><p><span style=\" f"
-                        "ont-size:12pt;\">This way, the images will be removed by 'max' and then by 'foreground' and 'mean'</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setText("")
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filter signs ", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">List of lists of properties to apply a filter. Available properties are: ['foreground', 'mean', 'min', 'max']</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">List of ints/float that represent the values of the properties listed in 'DATA.TRAIN.FILTER_SAMPLES.PROPS' that the images need to satisfy to not be dropped.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">List of list of signs to do the comparison. Options: ['gt', 'ge', 'lt', 'le'] that corresponds to &quot;greather than&quot;, e.g. &quot;&gt;&quot;, &quot;greather equal&quot;, e.g. &quot;&gt;=&quot;, &quot;less than&quot;, e.g. &quot;&lt;&quot;, and &quot;less equal&quot; e.g. &quot;&lt;=&quot; comparisons.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setText("")
-        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
-        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
-        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
-        self.label_42.setText(QCoreApplication.translate("MainWindow", u"Advanced training parameters", None))
-        self.TRAIN__PATIENCE__INPUT.setText(QCoreApplication.translate("MainWindow", u"50", None))
-        self.TRAIN__EPOCHS__INPUT.setText(QCoreApplication.translate("MainWindow", u"150", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__ARCHITECTURE__LABEL.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__ARCHITECTURE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Model", None))
-#if QT_CONFIG(tooltip)
-        self.patience_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">How many epochs you want to wait without the model improving its results in the validation set to stop training. </span><span style=\" font-size:12pt; font-weight:600;\">Must be an integer lower than number of epochs</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.patience_info.setText("")
-#if QT_CONFIG(tooltip)
-        self.patience_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.patience_label.setText(QCoreApplication.translate("MainWindow", u"Patience ", None))
-#if QT_CONFIG(tooltip)
-        self.number_of_epochs_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">How many epochs (rounds) the model will be trained. </span><span style=\" font-size:12pt; font-weight:600;\">Must be an integer</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.number_of_epochs_info.setText("")
-#if QT_CONFIG(tooltip)
-        self.number_of_epochs_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.number_of_epochs_label.setText(QCoreApplication.translate("MainWindow", u"Number of epochs", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__ARCHITECTURE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Architecture of the network</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__ARCHITECTURE__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.label_10.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">IDs of the GPU to run the job in. If you want to use more than one GPU add them sepated by commas. E.g. &quot;0,1,2,3&quot; </span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.label_10.setText(QCoreApplication.translate("MainWindow", u"Data options", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__MAE_MASK_RATIO__LABEL.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__MAE_MASK_RATIO__LABEL.setText(QCoreApplication.translate("MainWindow", u"MAE - Mask ratio", None))
-        self.MODEL__MAE_MASK_RATIO__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.5", None))
-        self.MODEL__UNETR_VIT_NUM_FILTERS__INPUT.setText(QCoreApplication.translate("MainWindow", u"16", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__MAE_DEC_HIDDEN_SIZE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Dimension of the embedding space for the MAE decoder. Must be a positive integer. </span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__MAE_DEC_HIDDEN_SIZE__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.label_52.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_52.setText(QCoreApplication.translate("MainWindow", u"Numer of heads", None))
-        self.MODEL__UNETR_VIT_HIDD_MULT__INPUT.setText(QCoreApplication.translate("MainWindow", u"3", None))
-        self.MODEL__UNETR_VIT_HIDD_MULT__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"3", None))
-        self.MODEL__VIT_NUM_HEADS__INPUT.setText(QCoreApplication.translate("MainWindow", u"12", None))
-        self.MODEL__VIT_NUM_HEADS__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"4", None))
-        self.MODEL__VIT_NUM_LAYERS__INPUT.setText(QCoreApplication.translate("MainWindow", u"12", None))
-        self.MODEL__VIT_NUM_LAYERS__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"12", None))
-        self.MODEL__MAE_MASK_TYPE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"grid", None))
-        self.MODEL__MAE_MASK_TYPE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"random", None))
-
-#if QT_CONFIG(tooltip)
-        self.MODEL__UNETR_VIT_HIDD_MULT__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Multiple of the transformer encoder layers from of which the skip connection signal is going to be extracted. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__UNETR_VIT_HIDD_MULT__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.label_55.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_55.setText(QCoreApplication.translate("MainWindow", u"MLP ratio", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__MAE_MASK_TYPE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Type of the masking strategy. </span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__MAE_MASK_TYPE__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.MODEL__MAE_DEC_MLP_DIMS__LABEL.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__MAE_DEC_MLP_DIMS__LABEL.setText(QCoreApplication.translate("MainWindow", u"MAE - Decoder MLP dimension", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__VIT_EMBED_DIM__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Dimension of the embedding space. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__VIT_EMBED_DIM__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.MODEL__VIT_NORM_EPS__LABEL.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__VIT_NORM_EPS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Normalization epsilon", None))
-        self.MODEL__MAE_DEC_NUM_LAYERS__INPUT.setText(QCoreApplication.translate("MainWindow", u"8", None))
-#if QT_CONFIG(tooltip)
-        self.label_53.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_53.setText(QCoreApplication.translate("MainWindow", u"Number of layers", None))
-#if QT_CONFIG(tooltip)
-        self.unetr_dec_act_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.unetr_dec_act_label.setText(QCoreApplication.translate("MainWindow", u"UNETR - Decoder activation", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__MAE_MASK_RATIO__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Percentage of the input image to mask. Must be a float between 0 and 1. </span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__MAE_MASK_RATIO__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.unetr_vit_hidden_multiple_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.unetr_vit_hidden_multiple_label.setText(QCoreApplication.translate("MainWindow", u"UNETR - ViT Hidden multiple", None))
-        self.MODEL__VIT_EMBED_DIM__INPUT.setText(QCoreApplication.translate("MainWindow", u"768", None))
-        self.MODEL__VIT_EMBED_DIM__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"768", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__UNETR_DEC_ACTIVATION__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Activation of the decoder</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__UNETR_DEC_ACTIVATION__INFO.setText("")
-        self.MODEL__MAE_MASK_TYPE__LABEL.setText(QCoreApplication.translate("MainWindow", u"MAE - Mask type", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__VIT_NUM_HEADS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of heads in the multi-head attention layer. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__VIT_NUM_HEADS__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.MODEL__VIT_TOKEN_SIZE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Size of the patches that are extracted from the input image. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__VIT_TOKEN_SIZE__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.MODEL__VIT_MLP_RATIO__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Size of the dense layers of the final classifier. This value will mutiply 'VIT_EMBED_DIM'</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__VIT_MLP_RATIO__INFO.setText("")
-        self.MODEL__MAE_DEC_NUM_HEADS__INPUT.setText(QCoreApplication.translate("MainWindow", u"16", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__VIT_NUM_LAYERS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of transformer encoder layers. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__VIT_NUM_LAYERS__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.MODEL__VIT_NORM_EPS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Normalization layer epsion</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__VIT_NORM_EPS__INFO.setText("")
-        self.MODEL__UNETR_DEC_ACTIVATION__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"relu", None))
-        self.MODEL__UNETR_DEC_ACTIVATION__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"elu", None))
-        self.MODEL__UNETR_DEC_ACTIVATION__INPUT.setItemText(2, QCoreApplication.translate("MainWindow", u"selu", None))
-
-#if QT_CONFIG(tooltip)
-        self.MODEL__UNETR_VIT_NUM_FILTERS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of filters in the first UNETR's layer of the decoder. In each layer the previous number of filters is doubled. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive int</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__UNETR_VIT_NUM_FILTERS__INFO.setText("")
-        self.MODEL__VIT_NORM_EPS__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.000001", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__MAE_DEC_MLP_DIMS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Size of the dense layers of the final classifier</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__MAE_DEC_MLP_DIMS__INFO.setText("")
-        self.MODEL__MAE_DEC_MLP_DIMS__INPUT.setText(QCoreApplication.translate("MainWindow", u"2048", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__MAE_DEC_NUM_LAYERS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of transformer decoder layers. Must be a positive integer. </span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__MAE_DEC_NUM_LAYERS__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.MODEL__MAE_DEC_NUM_HEADS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of heads in the multi-head attention layer. Must be a positive integer.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__MAE_DEC_NUM_HEADS__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.MODEL__MAE_DEC_NUM_LAYERS__LABEL.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__MAE_DEC_NUM_LAYERS__LABEL.setText(QCoreApplication.translate("MainWindow", u"MAE - Decoder number of  layers", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__MAE_DEC_HIDDEN_SIZE__LABEL.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__MAE_DEC_HIDDEN_SIZE__LABEL.setText(QCoreApplication.translate("MainWindow", u"MAE - Decoder embedding dimension", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__MAE_DEC_NUM_HEADS__LABEL.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__MAE_DEC_NUM_HEADS__LABEL.setText(QCoreApplication.translate("MainWindow", u"MAE - Decoder number heads", None))
-        self.MODEL__VIT_TOKEN_SIZE__INPUT.setText(QCoreApplication.translate("MainWindow", u"16", None))
-        self.MODEL__VIT_TOKEN_SIZE__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"16", None))
-#if QT_CONFIG(tooltip)
-        self.label_50.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_50.setText(QCoreApplication.translate("MainWindow", u"Token size", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__VIT_MLP_RATIO__INPUT.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__VIT_MLP_RATIO__INPUT.setText(QCoreApplication.translate("MainWindow", u"4.", None))
-        self.MODEL__VIT_MLP_RATIO__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"[3072, 768]", None))
-#if QT_CONFIG(tooltip)
-        self.unetr_num_filters_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.unetr_num_filters_label.setText(QCoreApplication.translate("MainWindow", u"UNETR - Decoder numer of filters", None))
-#if QT_CONFIG(tooltip)
-        self.label_51.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_51.setText(QCoreApplication.translate("MainWindow", u"Embedding dimension", None))
-        self.MODEL__MAE_DEC_HIDDEN_SIZE__INPUT.setText(QCoreApplication.translate("MainWindow", u"512", None))
-        self.MODEL__UNETR_DEC_KERNEL_SIZE__LABEL.setText(QCoreApplication.translate("MainWindow", u"UNETR - Decoder conv. kernel size", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Decoder convolutions' kernel size. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive int</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__UNETR_DEC_KERNEL_SIZE__INFO.setText("")
-        self.MODEL__UNETR_DEC_KERNEL_SIZE__INPUT.setText(QCoreApplication.translate("MainWindow", u"3", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__VAL__RANDOM__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Create the validation data with random images of the training data. Used when the validation data is extracted from the training data</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__VAL__RANDOM__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.random_val_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.random_val_label.setText(QCoreApplication.translate("MainWindow", u"Random validation", None))
-        self.DATA__VAL__RANDOM__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
-        self.DATA__VAL__RANDOM__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
-
-#if QT_CONFIG(tooltip)
-        self.DATA__VAL__OVERLAP__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Overlap to be done in (y,x) for 2D problems and (z,y,x) for 3D ones when loading the validation data. Set to 0 to calculate the minimum overlap. The values must be floats between range [0, 1). It needs to be a 2D tuple in 2D problems and 3D tuple in 3D problems. This is only used when the validation is loaded from disk, and thus, not extracted from training. </span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__VAL__OVERLAP__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.validation_padding_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.validation_padding_label.setText(QCoreApplication.translate("MainWindow", u"Padding", None))
-#if QT_CONFIG(tooltip)
-        self.validation_overlap_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.validation_overlap_label.setText(QCoreApplication.translate("MainWindow", u"Overlap", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__VAL__PADDING__INPUT.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Padding to be done in (y,x) for 2D problems and (z,y,x)for 3D ones when reconstructing train data. Useful to avoid patch border effect</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-#if QT_CONFIG(tooltip)
-        self.DATA__VAL__PADDING__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Padding to be done in (y,x) for 2D problems and (z,y,x) for 3D ones when loading the validation data. Useful to avoid patch border effect. Parentheses are needed. A good value should be the patch size divided by 8. For instance, if the path size is (256,256,1) a good value can be </span><span style=\" font-size:12pt; font-weight:600;\">(32,32). </span><span style=\" font-size:12pt;\">This is only used when the validation is loaded from disk, and thus, not extracted from training. </span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__VAL__PADDING__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.label_33.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_33.setText(QCoreApplication.translate("MainWindow", u"Resolution", None))
+        self.label_30.setText(QCoreApplication.translate("MainWindow", u"Train data", None))
 #if QT_CONFIG(tooltip)
         self.DATA__VAL__RESOLUTION__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Validation data resolution. </span><span style=\" font-size:12pt; font-weight:600;\">Currently not used in the code, but added just in case it is needed in a future</span><span style=\" font-size:12pt;\">. If defined it need to be (y,x)/(z,y,x) and needs to be to be a 2D tuple when in 2D problems and 3D tuple when in 3D problems</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.DATA__VAL__RESOLUTION__INFO.setText("")
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__LABEL.setText(QCoreApplication.translate("MainWindow", u"Input Zarr multiple data", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether if your input Zarr contains the raw images and labels together or not. Use 'DATA.VAL.INPUT_ZARR_MULTIPLE_DATA_RAW_PATH' and 'DATA.VAL.INPUT_ZARR_MULTIPLE_DATA_GT_PATH' to determine the tag to find within the Zarr</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the raw images within the Zarr file. Only used when 'DATA.VAL.INPUT_ZARR_MULTIPLE_DATA' is True. E.g. 'volumes.raw' for raw images.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setText("")
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setText(QCoreApplication.translate("MainWindow", u"Zarr raw images path", None))
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setText(QCoreApplication.translate("MainWindow", u"Zarr GT path", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the gt within the Zarr file. Only used when 'DATA.VAL.INPUT_ZARR_MULTIPLE_DATA' is True. E.g. 'volumes.labels.neuron_ids' for GT path.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setText("")
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setText("")
-        self.DATA__VAL__INPUT_MASK_AXES_ORDER__LABEL.setText(QCoreApplication.translate("MainWindow", u"Zarr mask axis order", None))
-        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setText("")
 #if QT_CONFIG(tooltip)
         self.DATA__VAL__INPUT_IMG_AXES_ORDER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Order of the axes of the image when using Zarr/H5 images in validation data.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -16492,44 +16467,229 @@ class Ui_MainWindow(object):
         self.DATA__VAL__INPUT_IMG_AXES_ORDER__INFO.setStatusTip("")
 #endif // QT_CONFIG(statustip)
         self.DATA__VAL__INPUT_IMG_AXES_ORDER__INFO.setText("")
-        self.DATA__VAL__INPUT_IMG_AXES_ORDER__LABEL.setText(QCoreApplication.translate("MainWindow", u"Zarr image axis order", None))
-        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INPUT.setText(QCoreApplication.translate("MainWindow", u"TZCYX", None))
-        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT.setText(QCoreApplication.translate("MainWindow", u"TZCYX", None))
+        self.DATA__VAL__INPUT_MASK_AXES_ORDER__LABEL.setText(QCoreApplication.translate("MainWindow", u"Zarr mask axis order", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__VAL__OVERLAP__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Overlap to be done in (y,x) for 2D problems and (z,y,x) for 3D ones when loading the validation data. Set to 0 to calculate the minimum overlap. The values must be floats between range [0, 1). It needs to be a 2D tuple in 2D problems and 3D tuple in 3D problems. This is only used when the validation is loaded from disk, and thus, not extracted from training. </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__VAL__OVERLAP__INFO.setText("")
 #if QT_CONFIG(tooltip)
         self.DATA__VAL__INPUT_MASK_AXES_ORDER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Order of the axes of the mask when using Zarr/H5 images in validation data.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.DATA__VAL__INPUT_MASK_AXES_ORDER__INFO.setText("")
-        self.DATA__VAL__FILTER_SAMPLES__ENABLE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filter samples", None))
-        self.DATA__VAL__FILTER_SAMPLES__PROPS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filter properties", None))
-        self.DATA__VAL__FILTER_SAMPLES__VALUES__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filter values", None))
-        self.DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filter sings", None))
-        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-        self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
-        self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
-        self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__VAL__FILTER_SAMPLES__SIGNS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">List of list of signs to do the comparison. Options: ['gt', 'ge', 'lt', 'le'] that corresponds to &quot;greather than&quot;, e.g. &quot;&gt;&quot;,  &quot;greather equal&quot;, e.g. &quot;&gt;=&quot;, &quot;less than&quot;, e.g. &quot;&lt;&quot;, and &quot;less equal&quot; e.g. &quot;&lt;=&quot; comparisons.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__VAL__FILTER_SAMPLES__SIGNS__INFO.setText("")
 #if QT_CONFIG(tooltip)
         self.DATA__VAL__FILTER_SAMPLES__VALUES__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">List of ints/float that represent the values of the properties listed in 'DATA.VAL.FILTER_SAMPLES.PROPS' that the images need to satisfy to not be dropped.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.DATA__VAL__FILTER_SAMPLES__VALUES__INFO.setText("")
+        self.DATA__VAL__FILTER_SAMPLES__SIGNS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filter sings", None))
+        self.DATA__VAL__INPUT_IMG_AXES_ORDER__INPUT.setText(QCoreApplication.translate("MainWindow", u"TZCYX", None))
+        self.DATA__VAL__FILTER_SAMPLES__PROPS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filter properties", None))
+#if QT_CONFIG(tooltip)
+        self.random_val_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.random_val_label.setText(QCoreApplication.translate("MainWindow", u"Random validation", None))
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setText("")
+#if QT_CONFIG(tooltip)
+        self.validation_padding_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.validation_padding_label.setText(QCoreApplication.translate("MainWindow", u"Padding", None))
+        self.DATA__VAL__FILTER_SAMPLES__PROPS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
+        self.DATA__VAL__INPUT_MASK_AXES_ORDER__INPUT.setText(QCoreApplication.translate("MainWindow", u"TZCYX", None))
+        self.DATA__VAL__FILTER_SAMPLES__VALUES__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filter values", None))
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setText("")
+        self.DATA__VAL__FILTER_SAMPLES__SIGNS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether if your input Zarr contains the raw images and labels together or not. Use 'DATA.VAL.INPUT_ZARR_MULTIPLE_DATA_RAW_PATH' and 'DATA.VAL.INPUT_ZARR_MULTIPLE_DATA_GT_PATH' to determine the tag to find within the Zarr</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.validation_overlap_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.validation_overlap_label.setText(QCoreApplication.translate("MainWindow", u"Overlap", None))
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__LABEL.setText(QCoreApplication.translate("MainWindow", u"Input Zarr multiple data", None))
+        self.DATA__VAL__RANDOM__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
+        self.DATA__VAL__RANDOM__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
+
+        self.DATA__VAL__INPUT_IMG_AXES_ORDER__LABEL.setText(QCoreApplication.translate("MainWindow", u"Zarr image axis order", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the gt within the Zarr file. Only used when 'DATA.VAL.INPUT_ZARR_MULTIPLE_DATA' is True. E.g. 'volumes.labels.neuron_ids' for GT path.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.label_33.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_33.setText(QCoreApplication.translate("MainWindow", u"Resolution", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__VAL__PADDING__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Padding to be done in (y,x) for 2D problems and (z,y,x) for 3D ones when loading the validation data. Useful to avoid patch border effect. Parentheses are needed. A good value should be the patch size divided by 8. For instance, if the path size is (256,256,1) a good value can be </span><span style=\" font-size:12pt; font-weight:600;\">(32,32). </span><span style=\" font-size:12pt;\">This is only used when the validation is loaded from disk, and thus, not extracted from training. </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__VAL__PADDING__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.DATA__VAL__PADDING__INPUT.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Padding to be done in (y,x) for 2D problems and (z,y,x)for 3D ones when reconstructing train data. Useful to avoid patch border effect</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        self.DATA__VAL__FILTER_SAMPLES__SIGNS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">List of list of signs to do the comparison. Options: ['gt', 'ge', 'lt', 'le'] that corresponds to &quot;greather than&quot;, e.g. &quot;&gt;&quot;,  &quot;greather equal&quot;, e.g. &quot;&gt;=&quot;, &quot;less than&quot;, e.g. &quot;&lt;&quot;, and &quot;less equal&quot; e.g. &quot;&lt;=&quot; comparisons.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__VAL__FILTER_SAMPLES__SIGNS__INFO.setText("")
+        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setText(QCoreApplication.translate("MainWindow", u"Zarr GT path", None))
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setText(QCoreApplication.translate("MainWindow", u"Zarr raw images path", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the raw images within the Zarr file. Only used when 'DATA.VAL.INPUT_ZARR_MULTIPLE_DATA' is True. E.g. 'volumes.raw' for raw images.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Remove validation images by the conditions based on their properties. When using Zarr each patch within the Zarr will be processed and not</span></p><p><span style=\" font-size:12pt;\">the entire image. </span></p><p><span style=\" font-size:12pt;\">The three variables, DATA.VAL.FILTER_SAMPLES.PROPS, DATA.VAL.FILTER_SAMPLES.VALUES and DATA.VAL.FILTER_SAMPLES.SIGN will compose a list of </span></p><p><span style=\" font-size:12pt;\">conditions to remove the images. They are list of list of conditions. For instance, the conditions can be like this: [['A'], ['B','C']]. Then, </span></p><p><span style=\" font-size:12pt;\">if the image satisfies the first list of conditions, only 'A' in this first case (from ['A'] list), or satisfy 'B' and 'C' (from ['B','C'] list) </span></p><p><span style=\" font-size:12pt;\">it will be removed from the image. In each sublist all the conditions must be satisfied. Available properties are: ['foreground', 'mean', 'min', 'max', "
+                        "'target_mean', 'target_min', 'target_max', 'diff', 'diff_by_min_max_ratio', 'diff_by_target_min_max_ratio'].</span><br/></p><p><span style=\" font-size:12pt;\">Each property descrition:</span></p><p><span style=\" font-size:12pt;\">* 'foreground' is defined as the mask foreground percentage. This option is only valid for SEMANTIC_SEG, INSTANCE_SEG and DETECTION.</span></p><p><span style=\" font-size:12pt;\">* 'mean' is defined as the mean intensity value of the raw image inputs.</span></p><p><span style=\" font-size:12pt;\">* 'min' is defined as the min intensity value of the raw image inputs.</span></p><p><span style=\" font-size:12pt;\">* 'max' is defined as the max intensity value of the raw image inputs.</span></p><p><span style=\" font-size:12pt;\">* 'diff' is defined as the difference between ground truth and raw images. Available for all workflows but SELF_SUPERVISED and DENOISING. </span></p><p><span style=\" font-size:12pt;\">* 'diff_by_min_max_ratio' is defined as the difference between ground truth "
+                        "and raw images multiplied by the ratio between raw image max and min. Available for all workflows but SELF_SUPERVISED and DENOISING. </span></p><p><span style=\" font-size:12pt;\">* 'target_mean is defined as the mean intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING.</span></p><p><span style=\" font-size:12pt;\">* 'target_min' is defined as the min intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING. </span></p><p><span style=\" font-size:12pt;\">* 'target_max' is defined as the max intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING. </span></p><p><span style=\" font-size:12pt;\">* 'diff_by_target_min_max_ratio' is defined as the difference between ground truth and raw images multiplied by the ratio between ground truth image max and min. Available for all workflows but SELF_SUPERVISED and DENOISING. </span></p><p><br/></p><p><span style=\" font-size:12"
+                        "pt;\">A full example of this filtering:</span></p><p><span style=\" font-size:12pt;\">If you want to remove those samples that have less than 0.00001 and a mean average more than 100 (you need to know image data type) you should</span></p><p><span style=\" font-size:12pt;\">declare the above three variables as follows:</span></p><p><span style=\" font-size:12pt;\">_C.DATA.VAL.FILTER_SAMPLES.PROPS = [['foreground','mean']]</span></p><p><span style=\" font-size:12pt;\">_C.DATA.VAL.FILTER_SAMPLES.VALUES = [[0.00001, 100]]</span></p><p><span style=\" font-size:12pt;\">_C.DATA.VAL.FILTER_SAMPLES.SIGN = [['lt', 'gt']]</span></p><p><span style=\" font-size:12pt;\">You can also concatenate more restrictions and they will be applied in order. For instance, if you want to filter those</span></p><p><span style=\" font-size:12pt;\">samples with a max value more than 1000, and do that before the condition described above, you can define the</span></p><p><span style=\" font-size:12pt;\">variables this way:</span></p><p><spa"
+                        "n style=\" font-size:12pt;\">_C.DATA.VAL.FILTER_SAMPLES.PROPS = [['max'], ['foreground','mean']]</span></p><p><span style=\" font-size:12pt;\">_C.DATA.VAL.FILTER_SAMPLES.VALUES = [[1000], [0.00001, 100]]</span></p><p><span style=\" font-size:12pt;\">_C.DATA.VAL.FILTER_SAMPLES.SIGN = [['gt'], ['lt', 'gt']]</span></p><p><span style=\" font-size:12pt;\">This way, the images will be removed by 'max' and then by 'foreground' and 'mean'</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INFO.setText("")
 #if QT_CONFIG(tooltip)
         self.DATA__VAL__FILTER_SAMPLES__PROPS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">List of lists of properties to apply a filter. Available properties are: ['foreground', 'mean', 'min', 'max']</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.DATA__VAL__FILTER_SAMPLES__PROPS__INFO.setText("")
+        self.DATA__VAL__FILTER_SAMPLES__ENABLE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filter samples", None))
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.DATA__VAL__INPUT_ZARR_MULTIPLE_DATA__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
 #if QT_CONFIG(tooltip)
-        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Remove validation images by the conditions based on their properties. When using Zarr each patch within the Zarr will be processed and not</span></p><p><span style=\" font-size:12pt;\">the entire image. </span></p><p><span style=\" font-size:12pt;\">The three variables, DATA.VAL.FILTER_SAMPLES.PROPS, DATA.VAL.FILTER_SAMPLES.VALUES and DATA.VAL.FILTER_SAMPLES.SIGN will compose a list of </span></p><p><span style=\" font-size:12pt;\">conditions to remove the images. They are list of list of conditions. For instance, the conditions can be like this: [['A'], ['B','C']]. Then, </span></p><p><span style=\" font-size:12pt;\">if the image satisfies the first list of conditions, only 'A' in this first case (from ['A'] list), or satisfy 'B' and 'C' (from ['B','C'] list) </span></p><p><span style=\" font-size:12pt;\">it will be removed from the image. In each sublist all the conditions must be satisfied. Available properties are: ['foreground', 'mean', 'min', 'max']."
-                        "</span></p><p><br/></p><p><span style=\" font-size:12pt;\">Each property descrition:</span></p><p><span style=\" font-size:12pt;\">    * 'foreground' is defined as the mask foreground percentage. This option is only valid for SEMANTIC_SEG, INSTANCE_SEG and DETECTION.</span></p><p><span style=\" font-size:12pt;\">    * 'mean' is defined as the mean value.</span></p><p><span style=\" font-size:12pt;\">    * 'min' is defined as the min value.</span></p><p><span style=\" font-size:12pt;\">    * 'max' is defined as the max value.</span></p><p><br/></p><p><span style=\" font-size:12pt;\">A full example of this filtering:</span></p><p><span style=\" font-size:12pt;\">If you want to remove those samples that have less than 0.00001 and a mean average more than 100 (you need to know image data type) you should</span></p><p><span style=\" font-size:12pt;\">declare the above three variables as follows:</span></p><p><span style=\" font-size:12pt;\">    _C.DATA.VAL.FILTER_SAMPLES.PROPS = [['foreground','mean']]</span></p><p"
-                        "><span style=\" font-size:12pt;\">    _C.DATA.VAL.FILTER_SAMPLES.VALUES = [[0.00001, 100]]</span></p><p><span style=\" font-size:12pt;\">    _C.DATA.VAL.FILTER_SAMPLES.SIGN = [['lt', 'gt']]</span></p><p><span style=\" font-size:12pt;\">You can also concatenate more restrictions and they will be applied in order. For instance, if you want to filter those</span></p><p><span style=\" font-size:12pt;\">samples with a max value more than 1000, and do that before the condition described above, you can define the</span></p><p><span style=\" font-size:12pt;\">variables this way:</span></p><p><span style=\" font-size:12pt;\">    _C.DATA.VAL.FILTER_SAMPLES.PROPS = [['max'], ['foreground','mean']]</span></p><p><span style=\" font-size:12pt;\">    _C.DATA.VAL.FILTER_SAMPLES.VALUES = [[1000], [0.00001, 100]]</span></p><p><span style=\" font-size:12pt;\">    _C.DATA.VAL.FILTER_SAMPLES.SIGN = [['gt'], ['lt', 'gt']]</span></p><p><span style=\" font-size:12pt;\">This way, the images will be removed by 'max' and then by 'foregr"
-                        "ound' and 'mean'</span></p></body></html>", None))
+        self.DATA__VAL__RANDOM__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Create the validation data with random images of the training data. Used when the validation data is extracted from the training data</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.DATA__VAL__FILTER_SAMPLES__ENABLE__INFO.setText("")
-        self.label_31.setText(QCoreApplication.translate("MainWindow", u"Validation data", None))
-        self.transformers_label.setText(QCoreApplication.translate("MainWindow", u"UNETR", None))
+        self.DATA__VAL__RANDOM__INFO.setText("")
+        self.DATA__VAL__FILTER_SAMPLES__VALUES__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
+        self.DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+#if QT_CONFIG(tooltip)
+        self.DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to normalize the samples before comparison</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__INFO.setText("")
+        self.DATA__VAL__FILTER_SAMPLES__NORM_BEFORE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Norm before", None))
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the gt within the Zarr file. Only used when 'DATA.TRAIN.INPUT_ZARR_MULTIPLE_DATA' is True. E.g.  'volumes.labels.neuron_ids' for GT path.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Order of the axes of the image when using Zarr/H5 images in train data.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(statustip)
+        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO.setStatusTip("")
+#endif // QT_CONFIG(statustip)
+        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INFO.setText("")
+        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__LABEL.setText(QCoreApplication.translate("MainWindow", u"Zarr mask axis order", None))
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filter samples", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether if your input Zarr contains the raw images and labels together or not. Use 'DATA.TRAIN.INPUT_ZARR_MULTIPLE_DATA_RAW_PATH' and 'DATA.TRAIN.INPUT_ZARR_MULTIPLE_DATA_GT_PATH' to determine the tag to find within the Zarr</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INFO.setText("")
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setText(QCoreApplication.translate("MainWindow", u"Zarr raw images path", None))
+        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__INPUT.setText(QCoreApplication.translate("MainWindow", u"TZCYX", None))
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT.setText("")
+        self.DATA__TRAIN__INPUT_IMG_AXES_ORDER__LABEL.setText(QCoreApplication.translate("MainWindow", u"Zarr image axis order", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">List of list of signs to do the comparison. Options: ['gt', 'ge', 'lt', 'le'] that corresponds to &quot;greather than&quot;, e.g. &quot;&gt;&quot;, &quot;greather equal&quot;, e.g. &quot;&gt;=&quot;, &quot;less than&quot;, e.g. &quot;&lt;&quot;, and &quot;less equal&quot; e.g. &quot;&lt;=&quot; comparisons.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.DATA__TRAIN__OVERLAP__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Percentage of overlap in (y,x)/(z,y,x) when cropping training data. Set to 0 to calculate the minimum overlap. Parentheses are needed. The values must be floats between range [0, 1). It needs to be a 2D tuple in 2D problems and 3D tuple in 3D problems. E.g. </span><span style=\" font-size:12pt; font-weight:600;\">(0,0)</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__TRAIN__OVERLAP__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">List of lists of properties to apply a filter. Available properties are: ['foreground', 'mean', 'min', 'max']</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the raw images within the Zarr file. Only used when 'DATA.TRAIN.INPUT_ZARR_MULTIPLE_DATA' is True. E.g. 'volumes.raw' for raw images.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.label_22.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_22.setText(QCoreApplication.translate("MainWindow", u"Overlap", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__TRAIN__REPLICATE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Factor to multiply the training data. With this option, each training sample will be seen more than once across multiple epochs. </span><span style=\" font-size:12pt; font-weight:600;\">Must be a positive integer</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__TRAIN__REPLICATE__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to enable or not the filtering by properties. Description:</span></p><p><span style=\" font-size:12pt;\">Remove training images by the conditions based on their properties. When using Zarr each patch within the Zarr will be processed and not</span></p><p><span style=\" font-size:12pt;\">the entire image.</span></p><p><span style=\" font-size:12pt;\">The three variables, DATA.TRAIN.FILTER_SAMPLES.PROPS, DATA.TRAIN.FILTER_SAMPLES.VALUES and DATA.TRAIN.FILTER_SAMPLES.SIGN will compose a list of </span></p><p><span style=\" font-size:12pt;\">conditions to remove the images. They are list of list of conditions. For instance, the conditions can be like this: [['A'], ['B','C']]. Then, if </span></p><p><span style=\" font-size:12pt;\">the image satisfies the first list of conditions, only 'A' in this first case (from ['A'] list), or satisfy 'B' and 'C' (from ['B','C'] list) </span></p><p><span style=\" font-size:12pt;\">it will be removed from the image. I"
+                        "n each sublist all the conditions must be satisfied. Available properties are: ['foreground', 'mean', 'min', 'max', 'target_mean', 'target_min', 'target_max', 'diff', 'diff_by_min_max_ratio', 'diff_by_target_min_max_ratio'].</span><br/></p><p><span style=\" font-size:12pt;\">Each property descrition:</span></p><p><span style=\" font-size:12pt;\">* 'foreground' is defined as the mask foreground percentage. This option is only valid for SEMANTIC_SEG, INSTANCE_SEG and DETECTION.</span></p><p><span style=\" font-size:12pt;\">* 'mean' is defined as the mean intensity value of the raw image inputs.</span></p><p><span style=\" font-size:12pt;\">* 'min' is defined as the min intensity value of the raw image inputs.</span></p><p><span style=\" font-size:12pt;\">* 'max' is defined as the max intensity value of the raw image inputs.</span></p><p><span style=\" font-size:12pt;\">* 'diff' is defined as the difference between ground truth and raw images. Available for all workflows but SELF_SUPERVISED and DENOISING. </span>"
+                        "</p><p><span style=\" font-size:12pt;\">* 'diff_by_min_max_ratio' is defined as the difference between ground truth and raw images multiplied by the ratio between raw image max and min. Available for all workflows but SELF_SUPERVISED and DENOISING. </span></p><p><span style=\" font-size:12pt;\">* 'target_mean is defined as the mean intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING.</span></p><p><span style=\" font-size:12pt;\">* 'target_min' is defined as the min intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING. </span></p><p><span style=\" font-size:12pt;\">* 'target_max' is defined as the max intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING.  </span></p><p><span style=\" font-size:12pt;\">* 'diff_by_target_min_max_ratio' is defined as the difference between ground truth and raw images multiplied by the ratio between ground truth image max and min."
+                        " Available for all workflows but SELF_SUPERVISED and DENOISING. </span></p><p><br/></p><p><span style=\" font-size:12pt;\">A full example of this filtering:</span></p><p><span style=\" font-size:12pt;\">If you want to remove those samples that have less than 0.00001 and a mean average more than 100 (you need to know image data type) you should</span></p><p><span style=\" font-size:12pt;\">declare the above three variables as follows:</span></p><p><span style=\" font-size:12pt;\">* DATA.TRAIN.FILTER_SAMPLES.PROPS = [['foreground','mean']]</span></p><p><span style=\" font-size:12pt;\">* DATA.TRAIN.FILTER_SAMPLES.VALUES = [[0.00001, 100]]</span></p><p><span style=\" font-size:12pt;\">* DATA.TRAIN.FILTER_SAMPLES.SIGN = [['lt', 'gt']]</span></p><p><span style=\" font-size:12pt;\">You can also concatenate more restrictions and they will be applied in order. For instance, if you want to filter those</span></p><p><span style=\" font-size:12pt;\">samples with a max value more than 1000, and do that before the condition"
+                        " described above, you can define the</span></p><p><span style=\" font-size:12pt;\">variables this way:</span></p><p><span style=\" font-size:12pt;\">* DATA.TRAIN.FILTER_SAMPLES.PROPS = [['max'], ['foreground','mean']]</span></p><p><span style=\" font-size:12pt;\">* DATA.TRAIN.FILTER_SAMPLES.VALUES = [[1000], [0.00001, 100]]</span></p><p><span style=\" font-size:12pt;\">* DATA.TRAIN.FILTER_SAMPLES.SIGN = [['gt'], ['lt', 'gt']]</span></p><p><span style=\" font-size:12pt;\">This way, the images will be removed by 'max' and then by 'foreground' and 'mean'</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INFO.setText("")
+        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INPUT.setText(QCoreApplication.translate("MainWindow", u"TZCYX", None))
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__LABEL.setText(QCoreApplication.translate("MainWindow", u"Input Zarr multiple data", None))
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT.setText("")
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filter signs ", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__TRAIN__PADDING__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Training padding to be done in (y,x) for 2D problems and (z,y,x) for 3D ones when reconstructing train data. Useful to avoid patch border effect. Parentheses are needed. A good value should be the patch size divided by 8. For instance, if the path size is (256,256,1) a good value can be </span><span style=\" font-size:12pt; font-weight:600;\">(32,32)</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__TRAIN__PADDING__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.train_resolution_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.train_resolution_label.setText(QCoreApplication.translate("MainWindow", u"Resolution", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Order of the axes of the mask when using Zarr/H5 images in train data.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__TRAIN__INPUT_MASK_AXES_ORDER__INFO.setText("")
+        self.DATA__TRAIN__REPLICATE__INPUT.setText(QCoreApplication.translate("MainWindow", u"0", None))
+        self.DATA__TRAIN__REPLICATE__INPUT.setProperty(u"plainText", QCoreApplication.translate("MainWindow", u"0", None))
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setText(QCoreApplication.translate("MainWindow", u"Zarr GT path", None))
+#if QT_CONFIG(tooltip)
+        self.label_23.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_23.setText(QCoreApplication.translate("MainWindow", u"Padding", None))
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.DATA__TRAIN__INPUT_ZARR_MULTIPLE_DATA__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
+        self.DATA__TRAIN__FILTER_SAMPLES__SIGNS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
+        self.DATA__TRAIN__FILTER_SAMPLES__PROPS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filter properties", None))
+#if QT_CONFIG(tooltip)
+        self.label_21.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_21.setText(QCoreApplication.translate("MainWindow", u"Replicate train data", None))
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.DATA__TRAIN__FILTER_SAMPLES__ENABLE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filter values", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">List of ints/float that represent the values of the properties listed in 'DATA.TRAIN.FILTER_SAMPLES.PROPS' that the images need to satisfy to not be dropped.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__TRAIN__FILTER_SAMPLES__VALUES__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.DATA__TRAIN__RESOLUTION__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Train data resolution. It is not completely necessary but when configured it is taken into account when performing some augmentations, e.g. cutout. If defined it need to be (y,x)/(z,y,x) and needs to be to be a 2D tuple when in 2D problems and 3D tuple when in 3D problems. Parentheses are needed. E.g. </span><span style=\" font-size:12pt; font-weight:600;\">(5,0.852,0.852)</span><span style=\" font-size:12pt;\"> represent an anisotropic data with less resolution in Z axis.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__TRAIN__RESOLUTION__INFO.setText("")
+        self.DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Norm before", None))
+        self.DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+#if QT_CONFIG(tooltip)
+        self.DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to normalize the samples before comparison</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__TRAIN__FILTER_SAMPLES__NORM_BEFORE__INFO.setText("")
+        self.DATA__PREPROCESS__VAL__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.DATA__PREPROCESS__VAL__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+#if QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__VAL__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Apply preprocessing to validation dataset</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__VAL__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__TRAIN__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Apply preprocessing to training dataset</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__PREPROCESS__TRAIN__INFO.setText("")
+        self.DATA__PREPROCESS__VAL__LABEL.setText(QCoreApplication.translate("MainWindow", u"Validation preprocessing", None))
+        self.DATA__PREPROCESS__TRAIN__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.DATA__PREPROCESS__TRAIN__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+        self.DATA__PREPROCESS__TRAIN__LABEL.setText(QCoreApplication.translate("MainWindow", u"Train preprocessing", None))
         self.train_label.setText(QCoreApplication.translate("MainWindow", u"Train data", None))
         self.train_data_gt_input_browse_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
 #if QT_CONFIG(tooltip)
@@ -16972,14 +17132,14 @@ class Ui_MainWindow(object):
         self.label_105.setText(QCoreApplication.translate("MainWindow", u"Post-processing options", None))
         self.label_92.setText(QCoreApplication.translate("MainWindow", u"Test phase", None))
 #if QT_CONFIG(tooltip)
-        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Order of the axes of the mask when using Zarr/H5 images in test data.</span></p></body></html>", None))
+        self.DATA__TEST__INPUT_MASK_AXES_ORDER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Order of the axes of the mask when using Zarr/H5 images in test data.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INFO.setText("")
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__LABEL.setText(QCoreApplication.translate("MainWindow", u"Input Zarr multiple data", None))
+        self.DATA__TEST__INPUT_MASK_AXES_ORDER__INFO.setText("")
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__LABEL.setText(QCoreApplication.translate("MainWindow", u"Input Zarr multiple data", None))
         self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"chunk_by_chunk", None))
         self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"entire_pred", None))
 
-        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__LABEL.setText(QCoreApplication.translate("MainWindow", u"Zarr mask axis order", None))
+        self.DATA__TEST__INPUT_MASK_AXES_ORDER__LABEL.setText(QCoreApplication.translate("MainWindow", u"Zarr mask axis order", None))
 #if QT_CONFIG(tooltip)
         self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__LABEL.setToolTip("")
 #endif // QT_CONFIG(tooltip)
@@ -16988,18 +17148,18 @@ class Ui_MainWindow(object):
         self.TEST__BY_CHUNKS__FORMAT__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"h5", None))
 
 #if QT_CONFIG(tooltip)
-        self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Order of the axes of the image when using Zarr/H5 images in test data.</span></p></body></html>", None))
+        self.DATA__TEST__INPUT_IMG_AXES_ORDER__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Order of the axes of the image when using Zarr/H5 images in test data.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INFO.setText("")
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setText(QCoreApplication.translate("MainWindow", u"Zarr raw images path", None))
-        self.TEST__BY_CHUNKS__INPUT_MASK_AXES_ORDER__INPUT.setText(QCoreApplication.translate("MainWindow", u"TZCYX", None))
+        self.DATA__TEST__INPUT_IMG_AXES_ORDER__INFO.setText("")
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setText(QCoreApplication.translate("MainWindow", u"Zarr raw images path", None))
+        self.DATA__TEST__INPUT_MASK_AXES_ORDER__INPUT.setText(QCoreApplication.translate("MainWindow", u"TZCYX", None))
         self.TEST__BY_CHUNKS__FLUSH_EACH__INPUT.setText(QCoreApplication.translate("MainWindow", u"100", None))
 #if QT_CONFIG(tooltip)
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether if your input Zarr contains the raw images and labels together or not. Use 'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_RAW_PATH' and 'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_GT_PATH' to determine the tag to find within the Zarr</span></p></body></html>", None))
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether if your input Zarr contains the raw images and labels together or not. Use 'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_RAW_PATH' and 'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA_GT_PATH' to determine the tag to find within the Zarr</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INFO.setText("")
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INFO.setText("")
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
 
 #if QT_CONFIG(tooltip)
         self.label_56.setToolTip("")
@@ -17017,9 +17177,9 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.label_54.setText(QCoreApplication.translate("MainWindow", u"Flush data iterations", None))
 #if QT_CONFIG(tooltip)
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the raw within the Zarr file. Only used when 'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA' is True. E.g. 'volumes.raw'</span></p></body></html>", None))
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the raw within the Zarr file. Only used when 'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA' is True. E.g. 'volumes.raw'</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setText("")
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INFO.setText("")
 #if QT_CONFIG(tooltip)
         self.TEST__BY_CHUNKS__FLUSH_EACH__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">In how many iterations the H5 writer needs to flush the data. No need to do so with Zarr files.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -17035,12 +17195,12 @@ class Ui_MainWindow(object):
         self.label_40.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.label_40.setText(QCoreApplication.translate("MainWindow", u"Save output tif", None))
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setText(QCoreApplication.translate("MainWindow", u"Zarr GT images path", None))
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__LABEL.setText(QCoreApplication.translate("MainWindow", u"Zarr GT images path", None))
 #if QT_CONFIG(tooltip)
         self.label_32.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.label_32.setText(QCoreApplication.translate("MainWindow", u"Output format", None))
-        self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__LABEL.setText(QCoreApplication.translate("MainWindow", u"Zarr image axis order", None))
+        self.DATA__TEST__INPUT_IMG_AXES_ORDER__LABEL.setText(QCoreApplication.translate("MainWindow", u"Zarr image axis order", None))
 #if QT_CONFIG(tooltip)
         self.TEST__BY_CHUNKS__FORMAT__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Type of format used to write data. Options available: [&quot;H5&quot;, &quot;Zarr&quot;]</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -17050,90 +17210,99 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INFO.setText("")
 #if QT_CONFIG(tooltip)
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the gt within the Zarr file. Only used when 'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA' is True. E.g. 'volumes.labels.neuron_ids' for GT path. </span></p></body></html>", None))
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the gt within the Zarr file. Only used when 'TEST.BY_CHUNKS.INPUT_ZARR_MULTIPLE_DATA' is True. E.g. 'volumes.labels.neuron_ids' for GT path. </span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.TEST__BY_CHUNKS__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setText("")
-        self.TEST__BY_CHUNKS__INPUT_IMG_AXES_ORDER__INPUT.setText(QCoreApplication.translate("MainWindow", u"TZCYX", None))
+        self.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INFO.setText("")
+        self.DATA__TEST__INPUT_IMG_AXES_ORDER__INPUT.setText(QCoreApplication.translate("MainWindow", u"TZCYX", None))
 #if QT_CONFIG(tooltip)
         self.test_resolution_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.test_resolution_label.setText(QCoreApplication.translate("MainWindow", u"Resolution", None))
-        self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
-        self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
-
-        self.DATA__TEST__MEDIAN_PADDING__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.DATA__TEST__MEDIAN_PADDING__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
+        self.DATA__PATCH_SIZE__TEST__LABEL.setText(QCoreApplication.translate("MainWindow", u"Patch size", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">List of ints/float that represent the values of the properties listed in 'DATA.TEST.FILTER_SAMPLES.PROPS' that the images need to satisfy to not be dropped.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO.setText("")
+        self.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
+        self.DATA__TEST__FILTER_SAMPLES__VALUES__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filter values", None))
 #if QT_CONFIG(tooltip)
         self.test_padding_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.test_padding_label.setText(QCoreApplication.translate("MainWindow", u"Padding", None))
-#if QT_CONFIG(tooltip)
-        self.test_argmax_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.test_argmax_label.setText(QCoreApplication.translate("MainWindow", u"Argmax to output", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__TEST__MEDIAN_PADDING__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to use median values to fill padded pixels or reflect it</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__TEST__MEDIAN_PADDING__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.test_median_padding_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.test_median_padding_label.setText(QCoreApplication.translate("MainWindow", u"Median padding", None))
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filter samples", None))
 #if QT_CONFIG(tooltip)
         self.DATA__TEST__PADDING__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Test padding to be done in (y,x) for 2D problems and (z,y,x) for 3D ones when reconstructing train data. Useful to avoid patch border effect. Parentheses are needed. A good value should be the patch size divided by 8. For instance, if the path size is (256,256,1) a good value can be (32,32)</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.DATA__TEST__PADDING__INFO.setText("")
 #if QT_CONFIG(tooltip)
+        self.test_median_padding_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.test_median_padding_label.setText(QCoreApplication.translate("MainWindow", u"Median padding", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__TEST__MEDIAN_PADDING__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to use median values to fill padded pixels or reflect it</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__TEST__MEDIAN_PADDING__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.test_argmax_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.test_argmax_label.setText(QCoreApplication.translate("MainWindow", u"Argmax to output", None))
+        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
+#if QT_CONFIG(tooltip)
         self.DATA__TEST__RESOLUTION__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Test data resolution. Currently not used in the code, but added just in case it is needed in a future. If defined it need to be (y,x)/(z,y,x) and needs to be to be a 2D tuple when in 2D problems and 3D tuple when in 3D problems</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.DATA__TEST__RESOLUTION__INFO.setText("")
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
 #if QT_CONFIG(tooltip)
-        self.test_overlap_label.setToolTip("")
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Remove test images by the conditions based on their properties. When using Zarr each patch within the Zarr will be processed and not</span></p><p><span style=\" font-size:12pt;\">the entire image.</span></p><p><span style=\" font-size:12pt;\">The three variables, DATA.TEST.FILTER_SAMPLES.PROPS, DATA.TEST.FILTER_SAMPLES.VALUES and DATA.TEST.FILTER_SAMPLES.SIGN will compose a </span></p><p><span style=\" font-size:12pt;\">list of conditions to remove the images. They are list of list of conditions. For instance, the conditions can be like this: [['A'], ['B','C']]. </span></p><p><span style=\" font-size:12pt;\">Then, if the image satisfies the first list of conditions, only 'A' in this first case (from ['A'] list), or satisfy 'B' and 'C' (from ['B','C'] list) </span></p><p><span style=\" font-size:12pt;\">it will be removed from the image. In each sublist all the conditions must be satisfied. Available properties are: ['foreground', 'mean', 'min', 'max', 'tar"
+                        "get_mean', 'target_min', 'target_max', 'diff', 'diff_by_min_max_ratio', 'diff_by_target_min_max_ratio'].</span><br/></p><p><span style=\" font-size:12pt;\">Each property descrition:</span></p><p><span style=\" font-size:12pt;\">* 'foreground' is defined as the mask foreground percentage. This option is only valid for SEMANTIC_SEG, INSTANCE_SEG and DETECTION.</span></p><p><span style=\" font-size:12pt;\">* 'mean' is defined as the mean intensity value of the raw image inputs.</span></p><p><span style=\" font-size:12pt;\">* 'min' is defined as the min intensity value of the raw image inputs.</span></p><p><span style=\" font-size:12pt;\">* 'max' is defined as the max intensity value of the raw image inputs.</span></p><p><span style=\" font-size:12pt;\">* 'diff' is defined as the difference between ground truth and raw images. Available for all workflows but SELF_SUPERVISED and DENOISING. </span></p><p><span style=\" font-size:12pt;\">* 'diff_by_min_max_ratio' is defined as the difference between ground truth and "
+                        "raw images multiplied by the ratio between raw image max and min. Available for all workflows but SELF_SUPERVISED and DENOISING. </span></p><p><span style=\" font-size:12pt;\">* 'target_mean is defined as the mean intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING.</span></p><p><span style=\" font-size:12pt;\">* 'target_min' is defined as the min intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING. </span></p><p><span style=\" font-size:12pt;\">* 'target_max' is defined as the max intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING. </span></p><p><span style=\" font-size:12pt;\">* 'diff_by_target_min_max_ratio' is defined as the difference between ground truth and raw images multiplied by the ratio between ground truth image max and min. Available for all workflows but SELF_SUPERVISED and DENOISING. </span></p><p><br/></p><p><span style=\" font-size:12pt;\""
+                        ">A full example of this filtering:</span></p><p><span style=\" font-size:12pt;\">If you want to remove those samples that have less than 0.00001 and a mean average more than 100 (you need to know image data type) you should</span></p><p><span style=\" font-size:12pt;\">declare the above three variables as follows:</span></p><p><span style=\" font-size:12pt;\">_C.DATA.TEST.FILTER_SAMPLES.PROPS = [['foreground','mean']]</span></p><p><span style=\" font-size:12pt;\">_C.DATA.TEST.FILTER_SAMPLES.VALUES = [[0.00001, 100]]</span></p><p><span style=\" font-size:12pt;\">_C.DATA.TEST.FILTER_SAMPLES.SIGN = [['lt', 'gt']]</span></p><p><span style=\" font-size:12pt;\">You can also concatenate more restrictions and they will be applied in order. For instance, if you want to filter those</span></p><p><span style=\" font-size:12pt;\">samples with a max value more than 1000, and do that before the condition described above, you can define the</span></p><p><span style=\" font-size:12pt;\">variables this way:</span></p><p><span "
+                        "style=\" font-size:12pt;\">_C.DATA.TEST.FILTER_SAMPLES.PROPS = [['max'], ['foreground','mean']]</span></p><p><span style=\" font-size:12pt;\">_C.DATA.TEST.FILTER_SAMPLES.VALUES = [[1000], [0.00001, 100]]</span></p><p><span style=\" font-size:12pt;\">_C.DATA.TEST.FILTER_SAMPLES.SIGN = [['gt'], ['lt', 'gt']]</span></p><p><span style=\" font-size:12pt;\">This way, the images will be removed by 'max' and then by 'foreground' and 'mean'</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.test_overlap_label.setText(QCoreApplication.translate("MainWindow", u"Overlap", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__TEST__ARGMAX_TO_OUTPUT__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to apply argmax to the predicted images </span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__TEST__ARGMAX_TO_OUTPUT__INFO.setText("")
+        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setText("")
 #if QT_CONFIG(tooltip)
         self.DATA__TEST__OVERLAP__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Test data resolution. Currently not used in the code, but added just in case it is needed in a future. If defined it need to be (y,x)/(z,y,x) and needs to be to be a 2D tuple when in 2D problems and 3D tuple when in 3D problems</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.DATA__TEST__OVERLAP__INFO.setText("")
+        self.DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filter signs", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__TEST__ARGMAX_TO_OUTPUT__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to apply argmax to the predicted images </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__TEST__ARGMAX_TO_OUTPUT__INFO.setText("")
+        self.DATA__TEST__FILTER_SAMPLES__PROPS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filter properties", None))
+#if QT_CONFIG(tooltip)
+        self.test_overlap_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.test_overlap_label.setText(QCoreApplication.translate("MainWindow", u"Overlap", None))
+        self.DATA__TEST__MEDIAN_PADDING__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.DATA__TEST__MEDIAN_PADDING__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+        self.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
 #if QT_CONFIG(tooltip)
         self.DATA__PATCH_SIZE__TEST__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Input the size of the patches use to train your model (y,x,channels) order for 2D and (z,y,x,channels) for 3D. Parentheses are need. The value should be smaller or equal to the shape of the image. E. g. </span><span style=\" font-size:12pt; font-weight:600;\">(40,128,128,1)</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.DATA__PATCH_SIZE__TEST__INFO.setText("")
-        self.DATA__PATCH_SIZE__TEST__LABEL.setText(QCoreApplication.translate("MainWindow", u"Patch size", None))
-        self.DATA__TEST__FILTER_SAMPLES__PROPS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filter properties", None))
-        self.DATA__TEST__FILTER_SAMPLES__VALUES__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filter values", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Remove test images by the conditions based on their properties. When using Zarr each patch within the Zarr will be processed and not</span></p><p><span style=\" font-size:12pt;\">the entire image.</span></p><p><span style=\" font-size:12pt;\">The three variables, DATA.TEST.FILTER_SAMPLES.PROPS, DATA.TEST.FILTER_SAMPLES.VALUES and DATA.TEST.FILTER_SAMPLES.SIGN will compose a </span></p><p><span style=\" font-size:12pt;\">list of conditions to remove the images. They are list of list of conditions. For instance, the conditions can be like this: [['A'], ['B','C']]. </span></p><p><span style=\" font-size:12pt;\">Then, if the image satisfies the first list of conditions, only 'A' in this first case (from ['A'] list), or satisfy 'B' and 'C' (from ['B','C'] list) </span></p><p><span style=\" font-size:12pt;\">it will be removed from the image. In each sublist all the conditions must be satisfied. Available properties are: ['foreground', 'mean', 'min', 'max'].</sp"
-                        "an></p><p><br/></p><p><span style=\" font-size:12pt;\">Each property descrition:</span></p><p><span style=\" font-size:12pt;\">  * 'foreground' is defined as the mask foreground percentage. This option is only valid for SEMANTIC_SEG, INSTANCE_SEG and DETECTION.</span></p><p><span style=\" font-size:12pt;\">  * 'mean' is defined as the mean value.</span></p><p><span style=\" font-size:12pt;\">  * 'min' is defined as the min value.</span></p><p><span style=\" font-size:12pt;\">  * 'max' is defined as the max value.</span></p><p><br/></p><p><span style=\" font-size:12pt;\">A full example of this filtering:</span></p><p><span style=\" font-size:12pt;\">If you want to remove those samples that have less than 0.00001 and a mean average more than 100 (you need to know image data type) you should</span></p><p><span style=\" font-size:12pt;\">declare the above three variables as follows:</span></p><p><span style=\" font-size:12pt;\">  _C.DATA.TEST.FILTER_SAMPLES.PROPS = [['foreground','mean']]</span></p><p><span style="
-                        "\" font-size:12pt;\">  _C.DATA.TEST.FILTER_SAMPLES.VALUES = [[0.00001, 100]]</span></p><p><span style=\" font-size:12pt;\">  _C.DATA.TEST.FILTER_SAMPLES.SIGN = [['lt', 'gt']]</span></p><p><span style=\" font-size:12pt;\">You can also concatenate more restrictions and they will be applied in order. For instance, if you want to filter those</span></p><p><span style=\" font-size:12pt;\">samples with a max value more than 1000, and do that before the condition described above, you can define the</span></p><p><span style=\" font-size:12pt;\">variables this way:</span></p><p><span style=\" font-size:12pt;\">  _C.DATA.TEST.FILTER_SAMPLES.PROPS = [['max'], ['foreground','mean']]</span></p><p><span style=\" font-size:12pt;\">  _C.DATA.TEST.FILTER_SAMPLES.VALUES = [[1000], [0.00001, 100]]</span></p><p><span style=\" font-size:12pt;\">  _C.DATA.TEST.FILTER_SAMPLES.SIGN = [['gt'], ['lt', 'gt']]</span></p><p><span style=\" font-size:12pt;\">This way, the images will be removed by 'max' and then by 'foreground' and 'mean'</"
-                        "span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INFO.setText("")
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filter samples", None))
-        self.DATA__TEST__FILTER_SAMPLES__SIGNS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Filter signs", None))
 #if QT_CONFIG(tooltip)
         self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">List of list of signs to do the comparison. Options: ['gt', 'ge', 'lt', 'le'] that corresponds to &quot;greather than&quot;, e.g. &quot;&gt;&quot;, &quot;greather equal&quot;, e.g. &quot;&gt;=&quot;, &quot;less than&quot;, e.g. &quot;&lt;&quot;, and &quot;less equal&quot; e.g. &quot;&lt;=&quot; comparisons</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.DATA__TEST__FILTER_SAMPLES__SIGNS__INFO.setText("")
 #if QT_CONFIG(tooltip)
-        self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">List of ints/float that represent the values of the properties listed in 'DATA.TEST.FILTER_SAMPLES.PROPS' that the images need to satisfy to not be dropped.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__TEST__FILTER_SAMPLES__VALUES__INFO.setText("")
-#if QT_CONFIG(tooltip)
         self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">List of lists of properties to apply a filter. Available properties are: ['foreground', 'mean', 'min', 'max']</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.DATA__TEST__FILTER_SAMPLES__PROPS__INFO.setText("")
-        self.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
-        self.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
-        self.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[]", None))
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+        self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
+        self.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
 
+        self.DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Norm before", None))
+        self.DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+#if QT_CONFIG(tooltip)
+        self.DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to normalize the samples before comparison</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__INFO.setText("")
 #if QT_CONFIG(tooltip)
         self.test_apply_bin_mask_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)

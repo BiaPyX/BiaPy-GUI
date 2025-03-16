@@ -4,6 +4,8 @@ import glob
 import numpy as np
 import collections
 from pathlib import Path
+from typing import Tuple, List, Dict, Any
+from biapy.biapy_config import Config
 
 def check_configuration(cfg, jobname, check_data_paths=True):
     """
@@ -1927,56 +1929,92 @@ def compare_configurations_without_model(actual_cfg, old_cfg, header_message="",
     print("Configurations seem to be compatible. Continuing . . .")
 
 
-def get_checkpoint_path(cfg, jobname):
-    """Get the checkpoint file path"""
+def get_checkpoint_path(
+    cfg: Config, 
+    jobname: str
+):
+    """
+    Gets the checkpoint file path.
+
+    Parameters
+    ----------
+    cfg : Config
+        Configuration to extract the checkpoint information from.
+
+    jobname : str
+        Name of the job.
+    """
     checkpoint_dir = Path(cfg.PATHS.CHECKPOINT)
 
     # Select the checkpoint source file
-    if cfg.PATHS.CHECKPOINT_FILE != '':
+    if cfg.PATHS.CHECKPOINT_FILE != "":
         resume = cfg.PATHS.CHECKPOINT_FILE
     else:
-        if cfg.MODEL.LOAD_CHECKPOINT_EPOCH == 'last_on_train':
+        if cfg.MODEL.LOAD_CHECKPOINT_EPOCH == "last_on_train":
             all_checkpoints = glob.glob(os.path.join(checkpoint_dir, "{}-checkpoint-*.pth".format(jobname)))
             latest_ckpt = -1
             for ckpt in all_checkpoints:
-                t = ckpt.split('-')[-1].split('.')[0]
+                t = ckpt.split("-")[-1].split(".")[0]
                 if t.isdigit():
                     latest_ckpt = max(int(t), latest_ckpt)
             if latest_ckpt >= 0:
                 resume = os.path.join(checkpoint_dir, "{}-checkpoint-{}.pth".format(jobname, latest_ckpt))
-        elif cfg.MODEL.LOAD_CHECKPOINT_EPOCH == 'best_on_val':
-            resume = os.path.join(checkpoint_dir, '{}-checkpoint-best.pth'.format(jobname))
+        elif cfg.MODEL.LOAD_CHECKPOINT_EPOCH == "best_on_val":
+            resume = os.path.join(checkpoint_dir, "{}-checkpoint-best.pth".format(jobname))
         else:
-            NotImplementedError
+            raise NotImplementedError
 
     return resume
 
-def check_value(value, value_range=(0,1)):
-    """Checks if a value is within a range """
+
+def check_value(value, value_range=(0, 1)):
+    """Checks if a value is within a range"""
     if isinstance(value, list) or isinstance(value, tuple):
         for i in range(len(value)):
             if isinstance(value[i], np.ndarray):
                 if value_range[0] <= np.min(value[i]) or np.max(value[i]) <= value_range[1]:
                     return False
             else:
-                if not (value_range[0] <= value[i] <= value_range[1]):    
+                if not (value_range[0] <= value[i] <= value_range[1]):
                     return False
-        return True 
+        return True
     else:
         if isinstance(value, np.ndarray):
             if value_range[0] <= np.min(value) and np.max(value) <= value_range[1]:
                 return True
-        else:  
+        else:
             if value_range[0] <= value <= value_range[1]:
                 return True
         return False
-    
 
-# Function extracted from check_configuration checks 
-def check_torchvision_available_models(workflow, ndim):
-    if ndim == "3D": # quick return as there are no 3D models
+
+# Function extracted from check_configuration checks
+def check_torchvision_available_models(workflow: str, ndim: str) -> Tuple[List[str], List[str], List[Dict[str, Any]]]:
+    """
+    Checks TorchVision available models.
+
+    Parameters
+    ----------
+    workflow : str
+        Workflow to use.
+
+    ndim : str
+        Dimensions to work with. Options: ["2D", "3D"]
+
+    Returns
+    -------
+    models : List of str
+        Available models for the selected configuration.
+
+    models : List of str
+        Restriction description of each model available.
+
+    models : List of dict
+        Restrictions of each model available.
+    """
+    if ndim == "3D":  # quick return as there are no 3D models
         return [], [], []
-    
+
     models, model_restrictions_description, model_restrictions = [], [], []
     if workflow == "SEMANTIC_SEG":
         models = [
@@ -1987,15 +2025,15 @@ def check_torchvision_available_models(workflow, ndim):
             "fcn_resnet50",
             "lraspp_mobilenet_v3_large",
         ]
-        model_restrictions_description = ["- Images must be RGB\n"]*len(models) 
-        model_restrictions = [{"DATA.PATCH_SIZE_C": 3}]*len(models) 
+        model_restrictions_description = ["- Images must be RGB\n"] * len(models)
+        model_restrictions = [{"DATA.PATCH_SIZE_C": 3}] * len(models)
     elif workflow == "INSTANCE_SEG":
         models = [
             "maskrcnn_resnet50_fpn",
             "maskrcnn_resnet50_fpn_v2",
         ]
-        model_restrictions_description = ["- Only available for testing\n- Images must be RGB\n"]*len(models) 
-        model_restrictions = [{"TRAIN.ENABLE": False, "DATA.PATCH_SIZE_C": 3}]*len(models)  
+        model_restrictions_description = ["- Only available for testing\n- Images must be RGB\n"] * len(models)
+        model_restrictions = [{"TRAIN.ENABLE": False, "DATA.PATCH_SIZE_C": 3}] * len(models)
     elif workflow == "DETECTION":
         models = [
             "fasterrcnn_mobilenet_v3_large_320_fpn",
@@ -2008,8 +2046,13 @@ def check_torchvision_available_models(workflow, ndim):
             "retinanet_resnet50_fpn",
             "retinanet_resnet50_fpn_v2",
         ]
-        model_restrictions_description = ["- Only available for testing\n- Images must be RGB\n"]*len(models) 
-        model_restrictions = [{"TRAIN.ENABLE": False, "DATA.PATCH_SIZE_C": 3,}]*len(models) 
+        model_restrictions_description = ["- Only available for testing\n- Images must be RGB\n"] * len(models)
+        model_restrictions = [
+            {
+                "TRAIN.ENABLE": False,
+                "DATA.PATCH_SIZE_C": 3,
+            }
+        ] * len(models)
     elif workflow == "SUPER_RESOLUTION":
         models = []
         model_restrictions_description = []
@@ -2122,26 +2165,29 @@ def check_torchvision_available_models(workflow, ndim):
             "wide_resnet101_2",
             "wide_resnet50_2",
         ]
-        model_restrictions_description = ["- Images must be RGB\n"]*len(models)
-        model_restrictions = [{"DATA.PATCH_SIZE_C": 3,}]*len(models) 
+        model_restrictions_description = ["- Images must be RGB\n"] * len(models)
+        model_restrictions = [
+            {
+                "DATA.PATCH_SIZE_C": 3,
+            }
+        ] * len(models)
 
     # Add common restrictions for all workflows
     for i in range(len(models)):
         if len(model_restrictions) == i:
             model_restrictions.append({})
         if "DATA.PATCH_SIZE_XY" not in model_restrictions[i]:
-            model_restrictions[i]["DATA.PATCH_SIZE_XY"] = (256,256)
+            model_restrictions[i]["DATA.PATCH_SIZE_XY"] = (256, 256)  # type: ignore
         if "DATA.PATCH_SIZE_C" not in model_restrictions[i]:
             model_restrictions[i]["DATA.PATCH_SIZE_C"] = 1
 
-        model_restrictions[i]["DATA.PATCH_SIZE"] = (
-            model_restrictions[i]["DATA.PATCH_SIZE_XY"] 
-            + (model_restrictions[i]["DATA.PATCH_SIZE_C"],)
-        )
+        model_restrictions[i]["DATA.PATCH_SIZE"] = model_restrictions[i]["DATA.PATCH_SIZE_XY"] + (
+            model_restrictions[i]["DATA.PATCH_SIZE_C"],
+        )  # type: ignore
         del model_restrictions[i]["DATA.PATCH_SIZE_XY"]
         del model_restrictions[i]["DATA.PATCH_SIZE_C"]
 
-        model_restrictions[i]["PROBLEM.NDIM"] = "2D"
+        model_restrictions[i]["PROBLEM.NDIM"] = "2D"  # type: ignore
         model_restrictions[i]["TEST.ANALIZE_2D_IMGS_AS_3D_STACK"] = False
         model_restrictions[i]["TEST.AUGMENTATION"] = False
         if workflow != "CLASSIFICATION":
@@ -2149,7 +2195,7 @@ def check_torchvision_available_models(workflow, ndim):
 
         if len(model_restrictions_description) == i:
             model_restrictions_description.append("")
-        
+
     return models, model_restrictions_description, model_restrictions
 
 

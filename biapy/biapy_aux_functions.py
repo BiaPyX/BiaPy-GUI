@@ -7,6 +7,7 @@ from skimage.io import imread
 from typing import Optional, Dict, Tuple, List
 from packaging.version import Version
 
+
 ## Copied from BiaPy commit: 783f1f5a9d6c4148b6eeadfec437585dab72279d (almost 3.5.11)
 def check_bmz_model_compatibility(
     model_rdf: Dict,
@@ -215,11 +216,12 @@ def check_bmz_model_compatibility(
 
     return preproc_info, False, ""
 
+
 # Adapted from BiaPy commit: 284ec3838766392c9a333ac9d27b55816a267bb9 (3.5.2)
 def check_model_restrictions(
-    model_rdf,
-    workflow_specs,
-):
+    model_rdf: Dict,
+    workflow_specs: Dict,
+) -> Dict:
     """
     Checks model restrictions to be applied into the current configuration.
 
@@ -227,7 +229,7 @@ def check_model_restrictions(
     ----------
     model_rdf : dict
         BMZ model RDF that contains all the information of the model.
-        
+
     workflow_specs : dict
         Specifications of the workflow. If not provided all possible models will be considered.
 
@@ -235,16 +237,16 @@ def check_model_restrictions(
     -------
     option_list: dict
         Variables and values to change in current configuration. These changes
-        are imposed by the selected model. 
+        are imposed by the selected model.
     """
     specific_workflow = workflow_specs["workflow_type"]
 
     # Version of the model
     model_version = Version(model_rdf["format_version"])
-    opts = {}    
+    opts = {}
 
     # 1) Change PATCH_SIZE with the one stored in the model description. This differs from the code of BiaPy where
-    # get_test_inputs() is simply used as there a ModelDescr is build out of the RDF. Here we try to do it manually 
+    # get_test_inputs() is simply used as there a ModelDescr is build out of the RDF. Here we try to do it manually
     # to avoid fetching files using the network as it may be slow.
     input_image_shape = []
     if "shape" in model_rdf["inputs"][0]:
@@ -257,26 +259,40 @@ def check_model_restrictions(
         # Check axes and dimension
         input_image_shape = []
         for axis in model_rdf["inputs"][0]["axes"]:
-            if 'type' in axis:
-                if axis['type'] == "batch":
-                    input_image_shape += [1,]
-                elif axis['type'] == "channel":
-                    input_image_shape += [1,]
-                elif 'id' in axis and 'size' in axis:
-                    if isinstance(axis['size'], int):
-                        input_image_shape += [axis['size'],]
-                    elif 'min' in axis['size']:
-                        input_image_shape += [axis['size']['min'],]
-            elif 'id' in axis:
-                if axis['id'] == "channel":
-                    input_image_shape += [1,]
+            if "type" in axis:
+                if axis["type"] == "batch":
+                    input_image_shape += [
+                        1,
+                    ]
+                elif axis["type"] == "channel":
+                    input_image_shape += [
+                        1,
+                    ]
+                elif "id" in axis and "size" in axis:
+                    if isinstance(axis["size"], int):
+                        input_image_shape += [
+                            axis["size"],
+                        ]
+                    elif "min" in axis["size"]:
+                        input_image_shape += [
+                            axis["size"]["min"],
+                        ]
+            elif "id" in axis:
+                if axis["id"] == "channel":
+                    input_image_shape += [
+                        1,
+                    ]
                 else:
-                    if isinstance(axis['size'], int):
-                        input_image_shape += [axis['size'],]
-                    elif 'min' in axis['size']:
-                        input_image_shape += [axis['size']['min'],]
+                    if isinstance(axis["size"], int):
+                        input_image_shape += [
+                            axis["size"],
+                        ]
+                    elif "min" in axis["size"]:
+                        input_image_shape += [
+                            axis["size"]["min"],
+                        ]
     if len(input_image_shape) == 0:
-        raise ValueError("Couldn't load input info from BMZ model's RDF: {}".format(model_rdf["inputs"][0]))   
+        raise ValueError("Couldn't load input info from BMZ model's RDF: {}".format(model_rdf["inputs"][0]))
     opts["DATA.PATCH_SIZE"] = tuple(input_image_shape[2:]) + (input_image_shape[1],)
 
     # Capture model kwargs
@@ -287,33 +303,33 @@ def check_model_restrictions(
         and "kwargs" in model_rdf["weights"]["pytorch_state_dict"]["architecture"]
     ):
         model_kwargs = model_rdf["weights"]["pytorch_state_dict"]["architecture"]["kwargs"]
-    else: 
+    else:
         raise ValueError(f"Couldn't extract kwargs from model description.")
 
-    # 2) Workflow specific restrictions 
+    # 2) Workflow specific restrictions
     # Classes in semantic segmentation
     if specific_workflow in ["SEMANTIC_SEG"]:
         # Check number of classes
         classes = -1
-        if "n_classes" in model_kwargs: # BiaPy
+        if "n_classes" in model_kwargs:  # BiaPy
             classes = model_kwargs["n_classes"]
         elif "out_channels" in model_kwargs:
             classes = model_kwargs["out_channels"]
         elif "classes" in model_kwargs:
             classes = model_kwargs["classes"]
-    
-        if isinstance(classes, list): 
-            classes = classes[0]    
+
+        if isinstance(classes, list):
+            classes = classes[0]
         if not isinstance(classes, int):
             raise ValueError(f"Classes not extracted correctly. Obtained {classes}")
-                
+
         if specific_workflow == "SEMANTIC_SEG" and classes == -1:
             raise ValueError("Classes not found for semantic segmentation dir. ")
-        opts["MODEL.N_CLASSES"] = max(2,classes)
+        opts["MODEL.N_CLASSES"] = max(2, classes)
     elif specific_workflow in ["INSTANCE_SEG"]:
         # Assumed it's BC. This needs a more elaborated process. Still deciding this:
         # https://github.com/bioimage-io/spec-bioimage-io/issues/621
-        channels = 2 
+        channels = 2
         if "out_channels" in model_kwargs:
             channels = model_kwargs["out_channels"]
         if channels == 1:
@@ -324,34 +340,31 @@ def check_model_restrictions(
             channel_code = "BCM"
         if channels > 3:
             raise ValueError(f"Not recognized number of channels for instance segmentation. Obtained {channels}")
-        
+
         opts["PROBLEM.INSTANCE_SEG.DATA_CHANNELS"] = channel_code
 
     if "preprocessing" not in model_rdf["inputs"][0]:
         return opts
-    
+
     preproc_info = model_rdf["inputs"][0]["preprocessing"]
     if len(preproc_info) == 0:
         return opts
     preproc_info = preproc_info[0]
 
     # 3) Change preprocessing to the one stablished by BMZ by translate BMZ keywords into BiaPy's
-    # 'zero_mean_unit_variance' and 'fixed_zero_mean_unit_variance' norms of BMZ can be translated to our 'custom' norm 
+    # 'zero_mean_unit_variance' and 'fixed_zero_mean_unit_variance' norms of BMZ can be translated to our 'custom' norm
     # providing mean and std
     key_to_find = "id" if model_version > Version("0.5.0") else "name"
     if key_to_find in preproc_info:
         if preproc_info[key_to_find] in ["fixed_zero_mean_unit_variance", "zero_mean_unit_variance"]:
-            if (
-                "kwargs" in preproc_info
-                and "mean" in preproc_info["kwargs"]
-            ):
+            if "kwargs" in preproc_info and "mean" in preproc_info["kwargs"]:
                 mean = preproc_info["kwargs"]["mean"]
                 std = preproc_info["kwargs"]["std"]
             elif "mean" in preproc_info:
                 mean = preproc_info["mean"]
                 std = preproc_info["std"]
             else:
-                mean, std = -1., -1.
+                mean, std = -1.0, -1.0
 
             opts["DATA.NORMALIZATION.TYPE"] = "zero_mean_unit_variance"
             opts["DATA.NORMALIZATION.ZERO_MEAN_UNIT_VAR.MEAN_VAL"] = mean
@@ -374,10 +387,13 @@ def check_model_restrictions(
 
     return opts
 
+
 def get_cfg_key_value(obj, attr, *args):
     def _getattr(obj, attr):
         return getattr(obj, attr, *args)
-    return functools.reduce(_getattr, [obj] + attr.split('.'))
+
+    return functools.reduce(_getattr, [obj] + attr.split("."))
+
 
 def check_images(data_dir, is_mask=False, mask_type="", is_3d=False, dir_name=None):
     """
@@ -386,17 +402,17 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False, dir_name=No
     Parameters
     ----------
     data_dir : str
-        Directory to check images from. 
-    
+        Directory to check images from.
+
     is_mask : bool, optional
-        Whether the images to check are masks and not raw images. It disables data range checking. 
+        Whether the images to check are masks and not raw images. It disables data range checking.
 
     mask_type : bool, optional
         Whether the images to check are semantic masks (``semantic_mask``) or instace masks (``instance_mask``).
-        It checks the number of classes within masks. 
+        It checks the number of classes within masks.
 
     is_3d: bool, optional
-        Whether to expect to read 3D images or 2D. 
+        Whether to expect to read 3D images or 2D.
 
     dir_name : str, optional
         Name of the directory processed.
@@ -404,24 +420,24 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False, dir_name=No
     Returns
     -------
     error : bool
-        ``True`` if something went wrong during folder check. 
+        ``True`` if something went wrong during folder check.
 
     error_message: str
-        Reason of the error (if any). 
-    
+        Reason of the error (if any).
+
     constraints: dict
         BiaPy variables to set. This info is extracted from the images read. E.g. ``{"DATA.PATCH_SIZE": 1}``
 
     sample_info : dict
-        Information of the samples within the directory analized. Keys: 
+        Information of the samples within the directory analized. Keys:
             * ``'total_samples'``: total number of samples in the directory.
             * ``'crop_shape'``: shape of the crop used to analize the samples.
-            * ``'dir_name'``: name of the directory analized.  
+            * ``'dir_name'``: name of the directory analized.
     """
     assert mask_type in ["", "semantic_mask", "instance_mask"]
 
     print(f"Checking images from {data_dir}")
-    
+
     nclasses = 2
     channel_expected = -1
     data_range_expected = -1
@@ -430,16 +446,16 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False, dir_name=No
         ids = sorted(next(os.walk(data_dir))[2])
     except Exception as exc:
         error_message = f"Something strange happens when listing files in {data_dir}. Error:\n{exc}"
-        return True, error_message, {}, {}    
+        return True, error_message, {}, {}
 
     if len(ids) == 0:
         error_message = f"No images found in folder:\n{data_dir}"
-        return True, error_message, {}, {}    
+        return True, error_message, {}, {}
 
-    # To calculate the number os samples that can be extracted in the same way as BiaPy does. This is useful to 
+    # To calculate the number os samples that can be extracted in the same way as BiaPy does. This is useful to
     # calculate later the batch size.
     total_samples = 0
-    crop_shape = (256,256,1) if not is_3d else (20,128,128,1)
+    crop_shape = (256, 256, 1) if not is_3d else (20, 128, 128, 1)
     crop_funct = crop_3D_data_with_overlap if is_3d else crop_data_with_overlap
 
     shapes = []
@@ -452,7 +468,7 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False, dir_name=No
                 img = imread(img_path)
             except Exception:
                 error_message = f"Couldn't load image:\n{img_path}"
-                return True, error_message, {}, {}    
+                return True, error_message, {}, {}
 
         # Shape adjust
         if not is_3d:
@@ -464,11 +480,13 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False, dir_name=No
         if channel_expected == -1:
             channel_expected = img.shape[-1]
         if img.shape[-1] != channel_expected:
-            error_message = f"All images need to have the same number of channels and represent same information to "\
-                "ensure the deep learning model can be trained correctly. However, the current image (with "\
-                f"{channel_expected} channels) appears to have a different number of channels than the first image"\
+            error_message = (
+                f"All images need to have the same number of channels and represent same information to "
+                "ensure the deep learning model can be trained correctly. However, the current image (with "
+                f"{channel_expected} channels) appears to have a different number of channels than the first image"
                 f"(with {img.shape[-1]} channels) in the folder. Current image:\n{img_path}"
-            return True, error_message, {}, {}    
+            )
+            return True, error_message, {}, {}
         shapes.append(img.shape)
 
         # Data range check
@@ -477,28 +495,32 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False, dir_name=No
                 data_range_expected = data_range(img)
             drange = data_range(img)
             if data_range_expected != drange:
-                error_message = f"All images must be within the same data range. However, the current image (with a "\
-                    f"range of {drange}) appears to be in a different data range than the first image (with a range "\
+                error_message = (
+                    f"All images must be within the same data range. However, the current image (with a "
+                    f"range of {drange}) appears to be in a different data range than the first image (with a range "
                     f"of {data_range_expected}) in the folder. Current image:\n{img_path}"
-                return True, error_message, {}, {}    
+                )
+                return True, error_message, {}, {}
 
         if mask_type == "semantic_mask":
             if channel_expected != 1:
                 error_message = f"Semantic masks are expected to have just one channel. Image analized:\n{img_path}"
-                return True, error_message, {}, {}    
+                return True, error_message, {}, {}
             else:
                 nclasses = max(nclasses, len(np.unique(img)))
         elif mask_type == "instance_mask":
             if channel_expected == 2:
-                nclasses = max(nclasses, len(np.unique(img[...,1])))
+                nclasses = max(nclasses, len(np.unique(img[..., 1])))
             else:
                 if channel_expected != 1:
-                    error_message = f"Instance masks are expected to have one or two channels. In case two channels are provided "\
-                        "the first one must have the instance IDs and one their corresponding semantic (class) labels. "\
+                    error_message = (
+                        f"Instance masks are expected to have one or two channels. In case two channels are provided "
+                        "the first one must have the instance IDs and one their corresponding semantic (class) labels. "
                         f"Image analized:\n{img_path}"
-                    return True, error_message, {}, {}    
+                    )
+                    return True, error_message, {}, {}
 
-        # Calculate number of samples that can be extracted here 
+        # Calculate number of samples that can be extracted here
         img = pad_and_reflect(img, crop_shape, verbose=False)
         if img.shape != crop_shape[:-1] + (img.shape[-1],):
             crop_coords = crop_funct(
@@ -511,16 +533,19 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False, dir_name=No
         else:
             total_samples += 1
 
-    constraints = {"DATA.PATCH_SIZE_C": channel_expected, }
+    constraints = {
+        "DATA.PATCH_SIZE_C": channel_expected,
+    }
     if nclasses > 2:
         constraints["MODEL.N_CLASSES"] = nclasses
 
     if dir_name is not None:
         constraints[dir_name] = len(ids)
-        constraints[dir_name+"_path"] = data_dir
-        constraints[dir_name+"_path_shapes"] = shapes
+        constraints[dir_name + "_path"] = data_dir
+        constraints[dir_name + "_path_shapes"] = shapes
 
-    return False, "", constraints, {'total_samples': total_samples, 'crop_shape': crop_shape, 'dir_name': dir_name}
+    return False, "", constraints, {"total_samples": total_samples, "crop_shape": crop_shape, "dir_name": dir_name}
+
 
 def ensure_2d_shape(img, path=None):
     """
@@ -558,6 +583,7 @@ def ensure_2d_shape(img, path=None):
             ]
             img = img.transpose(new_pos)
     return img
+
 
 def ensure_3d_shape(img, path=None):
     """
@@ -605,17 +631,18 @@ def ensure_3d_shape(img, path=None):
             img = img.transpose(new_pos)
     return img
 
-def check_csv_files(data_dir, is_3d=False, dir_name=None):
+
+def check_csv_files(data_dir: str, is_3d: bool = False, dir_name: Optional[str] = None) -> Tuple[bool, str, Dict, Dict]:
     """
     Check CSV files in folder.
 
     Parameters
     ----------
     data_dir : str
-        Directory to check images from. 
-    
+        Directory to check images from.
+
     is_3d: bool, optional
-        Whether to expect to read 3D images or 2D. 
+        Whether to expect to read 3D images or 2D.
 
     dir_name : str, optional
         Name of the directory processed.
@@ -623,19 +650,19 @@ def check_csv_files(data_dir, is_3d=False, dir_name=None):
     Returns
     -------
     error : bool
-        ``True`` if something went wrong during folder check. 
+        ``True`` if something went wrong during folder check.
 
     error_message: str
-        Reason of the error (if any). 
-    
+        Reason of the error (if any).
+
     constraints: dict
         BiaPy variables to set. This info is extracted from the images read. E.g. ``{"DATA.PATCH_SIZE": 1}``
-    
+
     sample_info : dict
-        Information of the samples within the directory analized. Keys: 
+        Information of the samples within the directory analized. Keys:
             * ``'total_samples'``: total number of samples in the directory.
             * ``'crop_shape'``: shape of the crop used to analize the samples.
-            * ``'dir_name'``: name of the directory analized.  
+            * ``'dir_name'``: name of the directory analized.
     """
     print("Checking CSV files . . .")
     nclasses = 0
@@ -643,13 +670,13 @@ def check_csv_files(data_dir, is_3d=False, dir_name=None):
         ids = sorted(next(os.walk(data_dir))[2])
     except Exception as exc:
         error_message = f"Something strange happens when listing files in folder:\n{data_dir}.\nError:\n{exc}"
-        return True, error_message, {}  
-    
+        return True, error_message, {}, {}
+
     if len(ids) == 0:
         error_message = f"No images found in folder:\n{data_dir}"
-        return True, error_message, {}  
-    
-    req_columns = ["axis-0", "axis-1"] if not is_3d else ["axis-0", "axis-1", "axis-2"] 
+        return True, error_message, {}, {}
+
+    req_columns = ["axis-0", "axis-1"] if not is_3d else ["axis-0", "axis-1", "axis-2"]
 
     classes_found = []
     for id_ in ids:
@@ -658,10 +685,10 @@ def check_csv_files(data_dir, is_3d=False, dir_name=None):
             df = pd.read_csv(csv_path)
         except Exception:
             error_message = f"Couldn't load CSV file:\n{csv_path}"
-            return True, error_message, {}  
-         
+            return True, error_message, {}, {}
+
         df = df.dropna()
-      
+
         # Check columns in csv
         # Discard first index column to not have error if it is not sorted
         p_number = df.iloc[:, 0].to_list()
@@ -673,10 +700,10 @@ def check_csv_files(data_dir, is_3d=False, dir_name=None):
                 error_message = f"'{cols_not_in_file[0]}' column is not present in CSV file:\n{csv_path}"
             else:
                 error_message = f"{cols_not_in_file} columns are not present in CSV file:\n{csv_path}"
-            return True, error_message, {}  
-        
+            return True, error_message, {}, {}
+
         # Check class in columns
-        if 'class' in columns_present:
+        if "class" in columns_present:
             df["class"] = df["class"].astype("int")
             class_point = np.array(df["class"])
 
@@ -684,18 +711,18 @@ def check_csv_files(data_dir, is_3d=False, dir_name=None):
             for c in uniq:
                 if c not in classes_found:
                     classes_found.append(c)
-            
+
     nclasses = len(classes_found)
 
     constraints = {}
-    if 'class' in columns_present:
+    if "class" in columns_present:
         constraints["MODEL.N_CLASSES"] = int(nclasses)
     if dir_name is not None:
         constraints[dir_name] = len(ids)
-        constraints[dir_name+"_path"] = data_dir
+        constraints[dir_name + "_path"] = data_dir
 
-    crop_shape = (0,0,0) if not is_3d else (0,0,0,0)
-    return False, "", constraints, {'total_samples': len(ids), 'crop_shape': crop_shape, 'dir_name': dir_name}
+    crop_shape = (0, 0, 0) if not is_3d else (0, 0, 0, 0)
+    return False, "", constraints, {"total_samples": len(ids), "crop_shape": crop_shape, "dir_name": dir_name}
 
 
 def check_classification_images(data_dir, is_3d=False, dir_name=None):
@@ -705,10 +732,10 @@ def check_classification_images(data_dir, is_3d=False, dir_name=None):
     Parameters
     ----------
     data_dir : str
-        Directory to check images from. 
-    
+        Directory to check images from.
+
     is_3d: bool, optional
-        Whether to expect to read 3D images or 2D. 
+        Whether to expect to read 3D images or 2D.
 
     dir_name : str, optional
         Name of the directory processed.
@@ -716,33 +743,33 @@ def check_classification_images(data_dir, is_3d=False, dir_name=None):
     Returns
     -------
     error : bool
-        ``True`` if something went wrong during folder check. 
+        ``True`` if something went wrong during folder check.
 
     error_message: str
-        Reason of the error (if any). 
-    
+        Reason of the error (if any).
+
     constraints: dict
         BiaPy variables to set. This info is extracted from the images read. E.g. ``{"DATA.PATCH_SIZE": 1}``
     """
     print("Checking classification images . . .")
 
-    channel_expected = -1 
+    channel_expected = -1
     data_range_expected = -1
     class_names = sorted(next(os.walk(data_dir))[1])
     if len(class_names) < 1:
         error_message = "There is no folder/class in folder:\n{}".format(data_dir)
-        return True, error_message, {}, {}  
-    
+        return True, error_message, {}, {}
+
     tot_samples = 0
     # Loop over each class/folder
     for folder in class_names:
         class_folder = os.path.join(data_dir, folder)
         print(f"Analizing folder {class_folder}")
-        
+
         ids = sorted(next(os.walk(class_folder))[2])
         if len(ids) == 0:
             error_message = "There are no images in class folder:\n{}".format(class_folder)
-            return True, error_message, {}, {}  
+            return True, error_message, {}, {}
         else:
             print("Found {} samples".format(len(ids)))
 
@@ -757,7 +784,7 @@ def check_classification_images(data_dir, is_3d=False, dir_name=None):
                     img = imread(img_path)
                 except Exception:
                     error_message = f"Couldn't load image:\n{img_path}"
-                    return True, error_message, {}, {}  
+                    return True, error_message, {}, {}
 
             img = np.squeeze(img)
             # Shape adjust
@@ -765,36 +792,41 @@ def check_classification_images(data_dir, is_3d=False, dir_name=None):
                 img = ensure_2d_shape(img.squeeze(), path=img_path)
             else:
                 img = ensure_3d_shape(img.squeeze(), path=img_path)
-                
+
             # Channel check
             if channel_expected == -1:
                 channel_expected = img.shape[-1]
             if img.shape[-1] != channel_expected:
-                error_message = "All images need to have the same number of channels and represent same information to "\
-                    "ensure the deep learning model can be trained correctly. However, the following image (with "\
-                    f"{channel_expected} channels) appears to have a different number of channels than the first image "\
+                error_message = (
+                    "All images need to have the same number of channels and represent same information to "
+                    "ensure the deep learning model can be trained correctly. However, the following image (with "
+                    f"{channel_expected} channels) appears to have a different number of channels than the first image "
                     f"(with {img.shape[-1]} channels) in the folder:\n{img_path}"
-                return True, error_message, {}, {}  
-            
+                )
+                return True, error_message, {}, {}
+
             # Data range check
             if data_range_expected == -1:
                 data_range_expected = data_range(img)
             drange = data_range(img)
             if data_range_expected != drange:
-                error_message = "All images must be within the same data range. However, the following image (with a "\
-                    f"range of {drange}) appears to be in a different data range than the first image (with a range "\
+                error_message = (
+                    "All images must be within the same data range. However, the following image (with a "
+                    f"range of {drange}) appears to be in a different data range than the first image (with a range "
                     f"of {data_range_expected}) in the folder:\n{img_path}"
-                return True, error_message, {}, {}  
-    
+                )
+                return True, error_message, {}, {}
+
     constraints = {
         "DATA.PATCH_SIZE_C": channel_expected,
         "MODEL.N_CLASSES": len(class_names),
     }
     if dir_name is not None:
         constraints[dir_name] = tot_samples
-        constraints[dir_name+"_path"] = data_dir
+        constraints[dir_name + "_path"] = data_dir
 
-    return False, "", constraints, {'total_samples': tot_samples, 'crop_shape': (256,256,1), 'dir_name': dir_name}
+    return False, "", constraints, {"total_samples": tot_samples, "crop_shape": (256, 256, 1), "dir_name": dir_name}
+
 
 def data_range(x):
     if not isinstance(x, np.ndarray):
@@ -807,7 +839,8 @@ def data_range(x):
         return "uint16 range"
     else:
         return "none_range"
-    
+
+
 def check_value(value, value_range=(0, 1)):
     """
     Checks if a value is within a range
@@ -829,11 +862,12 @@ def check_value(value, value_range=(0, 1)):
             if value_range[0] <= value <= value_range[1]:
                 return True
         return False
-    
+
 
 # Copied from BiaPy commit: 284ec3838766392c9a333ac9d27b55816a267bb9 (3.5.2)
-def crop_data_with_overlap(data, crop_shape, data_mask=None, overlap=(0, 0), padding=(0, 0), verbose=True,
-                           load_data=True):
+def crop_data_with_overlap(
+    data, crop_shape, data_mask=None, overlap=(0, 0), padding=(0, 0), verbose=True, load_data=True
+):
     """
     Crop data into small square pieces with overlap. The difference with :func:`~crop_data` is that this function
     allows you to create patches with overlap.
@@ -862,7 +896,7 @@ def crop_data_with_overlap(data, crop_shape, data_mask=None, overlap=(0, 0), pad
          To print information about the crop to be made.
 
     load_data : bool, optional
-        Whether to create the patches or not. It saves memory in case you only need the coordiantes of the cropped patches. 
+        Whether to create the patches or not. It saves memory in case you only need the coordiantes of the cropped patches.
 
     Returns
     -------
@@ -871,7 +905,7 @@ def crop_data_with_overlap(data, crop_shape, data_mask=None, overlap=(0, 0), pad
 
     cropped_data_mask : 4D Numpy array, optional
         Cropped image data masks. E.g. ``(num_of_images, y, x, channels)``. Returned if ``load_data`` is ``True``
-        and ``data_mask`` is provided. 
+        and ``data_mask`` is provided.
 
     crop_coords : list of dict
         Coordinates of each crop where the following keys are available:
@@ -1056,11 +1090,11 @@ def crop_data_with_overlap(data, crop_shape, data_mask=None, overlap=(0, 0), pad
                         y * step_y - d_y : y * step_y + crop_shape[0] - d_y,
                         x * step_x - d_x : x * step_x + crop_shape[1] - d_x,
                     ]
-                
+
                 crop_coords.append(
                     {
                         "z": z,
-                        "y_start": y * step_y - d_y, 
+                        "y_start": y * step_y - d_y,
                         "y_end": y * step_y + crop_shape[0] - d_y,
                         "x_start": x * step_x - d_x,
                         "x_end": x * step_x + crop_shape[1] - d_x,
@@ -1080,8 +1114,9 @@ def crop_data_with_overlap(data, crop_shape, data_mask=None, overlap=(0, 0), pad
             return cropped_data, crop_coords
     else:
         return crop_coords
-    
-# Copied from BiaPy commit: 284ec3838766392c9a333ac9d27b55816a267bb9 (3.5.2)  
+
+
+# Copied from BiaPy commit: 284ec3838766392c9a333ac9d27b55816a267bb9 (3.5.2)
 def crop_3D_data_with_overlap(
     data,
     vol_shape,
@@ -1365,7 +1400,8 @@ def crop_3D_data_with_overlap(
     else:
         return crop_coords
 
-# Copied from BiaPy commit: 284ec3838766392c9a333ac9d27b55816a267bb9 (3.5.2)  
+
+# Copied from BiaPy commit: 284ec3838766392c9a333ac9d27b55816a267bb9 (3.5.2)
 def pad_and_reflect(img, crop_shape, verbose=False):
     """
     Load data from a directory.
