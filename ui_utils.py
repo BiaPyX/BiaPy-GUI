@@ -3153,42 +3153,59 @@ def create_yaml_file(main_window: main.MainWindow) -> Tuple[bool, bool]:
         if get_text(main_window.ui.DATA__TEST__ARGMAX_TO_OUTPUT__INPUT) == "Yes":
             biapy_config["DATA"]["TEST"]["ARGMAX_TO_OUTPUT"] = True
 
-    if get_text(main_window.ui.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT) == "Yes":
-        biapy_config["DATA"]["TEST"]["FILTER_SAMPLES"] = {}
-        biapy_config["DATA"]["TEST"]["FILTER_SAMPLES"]["ENABLE"] = True
-        try:
-            biapy_config["DATA"]["TEST"]["FILTER_SAMPLES"]["PROPS"] = ast.literal_eval(
-                get_text(main_window.ui.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT)
+        if get_text(main_window.ui.DATA__TEST__INPUT_IMG_AXES_ORDER__INPUT) != "TZCYX":
+            biapy_config["DATA"]["TEST"]["INPUT_IMG_AXES_ORDER"] = get_text(
+                main_window.ui.DATA__TEST__INPUT_IMG_AXES_ORDER__INPUT
             )
-        except:
-            main_window.dialog_exec(
-                "There was an error with test data filter samples properties array field (DATA.TEST.FILTER_SAMPLES.PROPS). Please check its syntax!",
-                reason="error",
+        if get_text(main_window.ui.DATA__TEST__INPUT_MASK_AXES_ORDER__INPUT) != "TZCYX":
+            biapy_config["DATA"]["TEST"]["INPUT_MASK_AXES_ORDER"] = get_text(
+                main_window.ui.DATA__TEST__INPUT_MASK_AXES_ORDER__INPUT
             )
-            return True, False
-        try:
-            biapy_config["DATA"]["TEST"]["FILTER_SAMPLES"]["VALUES"] = ast.literal_eval(
-                get_text(main_window.ui.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT)
+        if get_text(main_window.ui.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INPUT) == "Yes":
+            biapy_config["DATA"]["TEST"]["INPUT_ZARR_MULTIPLE_DATA"] = True
+            biapy_config["DATA"]["TEST"]["INPUT_ZARR_MULTIPLE_DATA_RAW_PATH"] = get_text(
+                main_window.ui.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT
             )
-        except:
-            main_window.dialog_exec(
-                "There was an error with test data filter samples values array field (DATA.TEST.FILTER_SAMPLES.VALUES). Please check its syntax!",
-                reason="error",
+            biapy_config["DATA"]["TEST"]["INPUT_ZARR_MULTIPLE_DATA_GT_PATH"] = get_text(
+                main_window.ui.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT
             )
-            return True, False
-        try:
-            biapy_config["DATA"]["TEST"]["FILTER_SAMPLES"]["SIGNS"] = ast.literal_eval(
-                get_text(main_window.ui.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT)
+
+        if get_text(main_window.ui.DATA__TEST__FILTER_SAMPLES__ENABLE__INPUT) == "Yes":
+            biapy_config["DATA"]["TEST"]["FILTER_SAMPLES"] = {}
+            biapy_config["DATA"]["TEST"]["FILTER_SAMPLES"]["ENABLE"] = True
+            try:
+                biapy_config["DATA"]["TEST"]["FILTER_SAMPLES"]["PROPS"] = ast.literal_eval(
+                    get_text(main_window.ui.DATA__TEST__FILTER_SAMPLES__PROPS__INPUT)
+                )
+            except:
+                main_window.dialog_exec(
+                    "There was an error with test data filter samples properties array field (DATA.TEST.FILTER_SAMPLES.PROPS). Please check its syntax!",
+                    reason="error",
+                )
+                return True, False
+            try:
+                biapy_config["DATA"]["TEST"]["FILTER_SAMPLES"]["VALUES"] = ast.literal_eval(
+                    get_text(main_window.ui.DATA__TEST__FILTER_SAMPLES__VALUES__INPUT)
+                )
+            except:
+                main_window.dialog_exec(
+                    "There was an error with test data filter samples values array field (DATA.TEST.FILTER_SAMPLES.VALUES). Please check its syntax!",
+                    reason="error",
+                )
+                return True, False
+            try:
+                biapy_config["DATA"]["TEST"]["FILTER_SAMPLES"]["SIGNS"] = ast.literal_eval(
+                    get_text(main_window.ui.DATA__TEST__FILTER_SAMPLES__SIGNS__INPUT)
+                )
+            except:
+                main_window.dialog_exec(
+                    "There was an error with test data filter samples signs array field (DATA.TEST.FILTER_SAMPLES.SIGNS). Please check its syntax!",
+                    reason="error",
+                )
+                return True, False
+            biapy_config["DATA"]["TEST"]["FILTER_SAMPLES"]["NORM_BEFORE"] = (
+                True if get_text(main_window.ui.DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__INPUT) == "Yes" else False
             )
-        except:
-            main_window.dialog_exec(
-                "There was an error with test data filter samples signs array field (DATA.TEST.FILTER_SAMPLES.SIGNS). Please check its syntax!",
-                reason="error",
-            )
-            return True, False
-        biapy_config["DATA"]["TEST"]["FILTER_SAMPLES"]["NORM_BEFORE"] = (
-            True if get_text(main_window.ui.DATA__TEST__FILTER_SAMPLES__NORM_BEFORE__INPUT) == "Yes" else False
-        )
 
     # Model definition
     biapy_config["MODEL"] = {}
@@ -3299,9 +3316,9 @@ def create_yaml_file(main_window: main.MainWindow) -> Tuple[bool, bool]:
                 )
                 biapy_config["MODEL"]["MAE_DEC_NUM_HEADS"] = get_text(main_window.ui.MODEL__MAE_DEC_NUM_HEADS__INPUT)
                 biapy_config["MODEL"]["MAE_DEC_MLP_DIMS"] = get_text(main_window.ui.MODEL__MAE_DEC_MLP_DIMS__INPUT)
-        
+
         # ConvNeXT
-        elif model_name in ["unext_v1", "unext_v2"]:    
+        elif model_name in ["unext_v1", "unext_v2"]:
             try:
                 biapy_config["MODEL"]["CONVNEXT_LAYERS"] = ast.literal_eval(
                     get_text(main_window.ui.MODEL__CONVNEXT_LAYERS__INPUT)
@@ -3312,27 +3329,21 @@ def create_yaml_file(main_window: main.MainWindow) -> Tuple[bool, bool]:
                     reason="error",
                 )
                 return True, False
-            biapy_config["MODEL"]["CONVNEXT_SD_PROB"] = float(
-                get_text(main_window.ui.MODEL__CONVNEXT_SD_PROB__INPUT)
-            )
+            biapy_config["MODEL"]["CONVNEXT_SD_PROB"] = float(get_text(main_window.ui.MODEL__CONVNEXT_SD_PROB__INPUT))
             biapy_config["MODEL"]["CONVNEXT_LAYER_SCALE"] = float(
                 get_text(main_window.ui.MODEL__CONVNEXT_LAYER_SCALE__INPUT)
             )
             biapy_config["MODEL"]["CONVNEXT_STEM_K_SIZE"] = int(
                 get_text(main_window.ui.MODEL__CONVNEXT_STEM_K_SIZE__INPUT)
             )
-        
+
         # RCAN
         elif model_name == "rcan":
-            biapy_config["MODEL"]["RCAN_RG_BLOCK_NUM"] = int(
-                get_text(main_window.ui.MODEL__RCAN_RG_BLOCK_NUM__INPUT)
-            )
+            biapy_config["MODEL"]["RCAN_RG_BLOCK_NUM"] = int(get_text(main_window.ui.MODEL__RCAN_RG_BLOCK_NUM__INPUT))
             biapy_config["MODEL"]["RCAN_RCAB_BLOCK_NUM"] = int(
                 get_text(main_window.ui.MODEL__RCAN_RCAB_BLOCK_NUM__INPUT)
             )
-            biapy_config["MODEL"]["RCAN_CONV_FILTERS"] = int(
-                get_text(main_window.ui.MODEL__RCAN_CONV_FILTERS__INPUT)
-            )
+            biapy_config["MODEL"]["RCAN_CONV_FILTERS"] = int(get_text(main_window.ui.MODEL__RCAN_CONV_FILTERS__INPUT))
             biapy_config["MODEL"]["RCAN_REDUCTION_RATIO"] = int(
                 get_text(main_window.ui.MODEL__RCAN_REDUCTION_RATIO__INPUT)
             )
@@ -3671,20 +3682,6 @@ def create_yaml_file(main_window: main.MainWindow) -> Tuple[bool, bool]:
             biapy_config["TEST"]["BY_CHUNKS"]["FLUSH_EACH"] = int(
                 get_text(main_window.ui.TEST__BY_CHUNKS__FLUSH_EACH__INPUT)
             )
-            biapy_config["TEST"]["BY_CHUNKS"]["INPUT_IMG_AXES_ORDER"] = get_text(
-                main_window.ui.DATA__TEST__INPUT_IMG_AXES_ORDER__INPUT
-            )
-            biapy_config["TEST"]["BY_CHUNKS"]["INPUT_MASK_AXES_ORDER"] = get_text(
-                main_window.ui.DATA__TEST__INPUT_MASK_AXES_ORDER__INPUT
-            )
-            if get_text(main_window.ui.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA__INPUT) == "Yes":
-                biapy_config["TEST"]["BY_CHUNKS"]["INPUT_ZARR_MULTIPLE_DATA"] = True
-                biapy_config["TEST"]["BY_CHUNKS"]["INPUT_ZARR_MULTIPLE_DATA_RAW_PATH"] = get_text(
-                    main_window.ui.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__INPUT
-                )
-                biapy_config["TEST"]["BY_CHUNKS"]["INPUT_ZARR_MULTIPLE_DATA_GT_PATH"] = get_text(
-                    main_window.ui.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_GT_PATH__INPUT
-                )
             if get_text(main_window.ui.TEST__BY_CHUNKS__WORKFLOW_PROCESS__ENABLE__INPUT) == "Yes":
                 biapy_config["TEST"]["BY_CHUNKS"]["WORKFLOW_PROCESS"] = {}
                 biapy_config["TEST"]["BY_CHUNKS"]["WORKFLOW_PROCESS"]["ENABLE"] = True
