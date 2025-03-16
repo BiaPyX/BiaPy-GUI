@@ -406,9 +406,9 @@ class UIFunction:
             def eventFilter(self, obj, event):
                 if obj is self.widget and event.type() == QEvent.MouseButtonPress:
                     post = int(obj.objectName().split("_")[1][-1])
-                    if self.main_window.workflow_view_queue[1] != post:
-                        left = False if self.main_window.workflow_view_queue[0] == post else True
-                        self.move_workflow_view(left)
+                    if self.parent.workflow_view_queue[1] != post:
+                        left = False if self.parent.workflow_view_queue[0] == post else True
+                        self.parent.UIFunction.move_workflow_view(left)
                 return super().eventFilter(obj, event)
 
         self.main_window.observer1 = MouseObserver(self.main_window.ui.workflow_view1_frame, self.main_window)
