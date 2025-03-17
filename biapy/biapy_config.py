@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: da129c759abfee420c8c9d636a4e8f771687dfc0 (almost 3.5.11)
+## Copied from BiaPy commit: f2360c1d3796df13614dc8c005299a8989cf27fd (3.5.11)
 # Synapse seg not added
 import os
 from yacs.config import CfgNode as CN
@@ -533,8 +533,8 @@ class Config:
         _C.DATA.TEST.FILTER_SAMPLES = CN()
         # Whether to enable or not the filtering by properties
         _C.DATA.TEST.FILTER_SAMPLES.ENABLE = False
-        # List of lists of properties to apply a filter. Available properties are: ['foreground', 'mean', 'min', 'max', 'target_mean', 
-        # 'target_min', 'target_max', 'diff', 'diff_by_min_max_ratio', 'diff_by_target_min_max_ratio']
+        # List of lists of properties to apply a filter. Available properties are: ['foreground', 'mean', 'min', 'max', 
+        # 'target_mean', 'target_min', 'target_max', 'diff', 'diff_by_min_max_ratio', 'diff_by_target_min_max_ratio']
         _C.DATA.TEST.FILTER_SAMPLES.PROPS = []
         # List of ints/float that represent the values of the properties listed in 'DATA.TEST.FILTER_SAMPLES.PROPS'
         # that the images need to satisfy to not be dropped.

@@ -844,6 +844,9 @@ class UIFunction:
             self.main_window.ui.MODEL__ARCHITECTURE__INPUT.clear()
             self.main_window.ui.MODEL__ARCHITECTURE__INPUT.addItems(models)
 
+        # Resets the pretrained model check
+        self.main_window.pretrained_model_need_to_check = None
+
     ############
     # Train page
     ############
