@@ -488,16 +488,13 @@ class spinner_Ui(QDialog):
         parent_ui : MainWindow
             Main window.
         """
-        super(spinner_Ui, self).__init__(parent_ui)
+        super(spinner_Ui, self).__init__()
         self.spinner_window = Ui_spinner()
         self.spinner_window.setupUi(self)
         self.parent_ui = parent_ui
-
-        from main import center_window
-        center_window(self, self.parent_ui.geometry())
-
+   
         # Create spinner
-        self.spinner = QtWaitingSpinner(parent_ui, True, True)
+        self.spinner = QtWaitingSpinner(self.parent_ui, True, True)
         self.spinner.setRoundness(150.0)
         self.spinner.setMinimumTrailOpacity(15.0)
         self.spinner.setTrailFadePercentage(70.0)

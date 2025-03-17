@@ -17,7 +17,7 @@ class Ui_spinner(object):
     def setupUi(self, spinner):
         if not spinner.objectName():
             spinner.setObjectName(u"spinner")
-        spinner.resize(111, 93)
+        spinner.resize(150, 150)
         self.verticalLayout = QVBoxLayout(spinner)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(u"verticalLayout")
