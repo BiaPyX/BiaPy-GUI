@@ -8,7 +8,7 @@ import logging
 import traceback
 import qdarktheme
 from datetime import datetime
-from PySide6.QtCore import Qt, QSize, QRect, QRegularExpression, QObject, QEvent, QUrl
+from PySide6.QtCore import Qt, QSize, QRegularExpression, QObject, QEvent, QUrl
 from PySide6.QtGui import (
     QDesktopServices,
     QColor,
@@ -29,7 +29,6 @@ from PySide6.QtWidgets import (
     QPushButton,
     QMainWindow,
     QToolTip,
-    QStyle,
     QApplication,
 )
 from logging import Logger
@@ -58,6 +57,7 @@ from ui_utils import (
     export_wizard_summary,
     wizard_path_changed,
     save_biapy_config,
+    center_window,
 )
 from settings import Settings
 from widget_conditions import Widget_conditions
@@ -2069,30 +2069,6 @@ class MainWindow(QMainWindow):
             QCursor.pos(),
             getattr(self.ui, gui_widget_name).toolTip(),
         )
-
-
-def center_window(widget: QWidget, geometry: QRect):
-    """
-    Centers the given window.
-
-    Parameters
-    ----------
-    widget : QWidget
-        Widget to center.
-
-    geometry : QRect
-        Screen geometry.
-    """
-    window = widget.window()
-    assert window
-    window.setGeometry(
-        QStyle.alignedRect(
-            Qt.LeftToRight,
-            Qt.AlignCenter,
-            window.size(),
-            geometry,
-        ),
-    )
 
 
 if __name__ == "__main__":

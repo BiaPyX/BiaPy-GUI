@@ -28,8 +28,8 @@ from typing import (
     List,
 )
 
-from PySide6.QtCore import QObject, QThread, Signal
-from PySide6.QtWidgets import QFileDialog, QComboBox, QLineEdit, QLabel, QWidget, QFrame
+from PySide6.QtCore import QObject, QThread, Signal, QRect, Qt
+from PySide6.QtWidgets import QFileDialog, QComboBox, QLineEdit, QLabel, QWidget, QFrame, QStyle
 from PySide6.QtGui import QColor
 
 import main
@@ -5021,3 +5021,26 @@ def update_dict(old_dict: Dict, new_dict: Dict):
         else:
             old_dict[k] = v
     return old_dict
+
+def center_window(widget: QWidget, geometry: QRect):
+    """
+    Centers the given window.
+
+    Parameters
+    ----------
+    widget : QWidget
+        Widget to center.
+
+    geometry : QRect
+        Screen geometry.
+    """
+    window = widget.window()
+    assert window
+    window.setGeometry(
+        QStyle.alignedRect(
+            Qt.LeftToRight,
+            Qt.AlignCenter,
+            window.size(),
+            geometry,
+        ),
+    )
