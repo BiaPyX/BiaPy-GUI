@@ -2093,6 +2093,9 @@ def move_between_workflows(main_window: main.MainWindow, to_page: int, dims: Opt
         main_window.ui.MODEL__ARCHITECTURE__INPUT.addItems(models)
         main_window.ui.LOSS__TYPE__INPUT.clear()
         main_window.ui.LOSS__TYPE__INPUT.addItems(losses)
+        # Resets the pretrained model checks
+        main_window.pretrained_model_need_to_check = None
+        main_window.ui.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setText("")
 
 
 def start_wizard_questionary(main_window: main.MainWindow):
