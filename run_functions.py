@@ -23,7 +23,7 @@ import main
 
 
 class runBiaPy_Ui(QDialog):
-    def __init__(self, parent_worker: main.MainWindow):
+    def __init__(self, parent_worker: run_worker):
         """
         Creates the UI in charge of running BiaPy.
 
@@ -101,7 +101,7 @@ class runBiaPy_Ui(QDialog):
             else:
                 m = "Are you sure that you want to exit?"
             self.yes_no.create_question(m)
-            self.center_window(self.yes_no, self.geometry())
+            center_window(self.yes_no, self.geometry())
             self.yes_no.exec_()
             if self.yes_no.answer:
                 self.kill_all_processes()
@@ -401,7 +401,7 @@ class run_worker(QObject):
         self.windows_os = True if "win" in self.main_gui.cfg.settings["os_host"].lower() else False
         self.user_host = user_host
         self.use_gpu = use_gpu
-        self.gui = runBiaPy_Ui(self.main_gui)
+        self.gui = runBiaPy_Ui(self)
         self.gui.open()
         self.docker_client = docker.from_env()
         self.biapy_container = None
@@ -963,7 +963,6 @@ class run_worker(QObject):
         except:
             # Print first the traceback (only visible through terminal)
             self.main_gui.logger.error(traceback.format_exc())
-
             # Try to log the error in the error file
             ferr = open(self.container_stderr_file, "w", encoding="utf8")
             ferr.write("#########################################################\n")
