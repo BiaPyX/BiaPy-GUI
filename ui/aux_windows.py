@@ -869,7 +869,7 @@ class model_card_carrousel_Ui(QDialog):
                 "<span style='color:#4090FD';>Name: </span>"
                 + model_info["nickname"]
                 + " ("
-                + model_info["nickname_icon"]
+                + "<span style='font-family: \"Noto Color Emoji\";'>{}</span>".format(model_info["nickname_icon"])
                 + ")"
             )
             self.model_cards[model_number][f"model_id_{model_number}"].setText(
