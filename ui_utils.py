@@ -4993,6 +4993,10 @@ def save_biapy_config(main_window: main.MainWindow, data: Dict, biapy_version: s
             except:
                 old_data["GUI_VERSION"] = biapy_version
 
+    # Ensure always an str is saved
+    if "GUI_VERSION" in old_data:
+        old_data["GUI_VERSION"] = str(biapy_version)
+
     with open(main_window.log_info["config_file"], "w") as outfile:
         json.dump(old_data, outfile, indent=4)
 
