@@ -2047,7 +2047,8 @@ class MainWindow(QMainWindow):
         # Changed version
         sha, vtag = get_git_revision_short_hash(self)
         self.logger.info(f"Local GUI version: {self.cfg.settings['biapy_gui_version']}")
-        self.logger.info(f"Remote last version's hash: {sha}")
+        if sha is not None:
+            self.logger.info(f"Remote last version's hash: {sha}")
         self.logger.info(f"Remote last version: {vtag}")
         if sha is not None and vtag is not None and vtag > self.cfg.settings["biapy_gui_version"]:
             self.dialog_exec(

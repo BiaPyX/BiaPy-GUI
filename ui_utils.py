@@ -4689,7 +4689,7 @@ class load_yaml_to_GUI_engine(QObject):
         return errors, variables_set
 
 
-def get_git_revision_short_hash(main_window: main.MainWindow) -> Tuple[str, Version]:
+def get_git_revision_short_hash(main_window: main.MainWindow) -> Tuple[Optional[str], Optional[Version]]:
     sha = None
     vtag = None
     try:
@@ -4698,7 +4698,7 @@ def get_git_revision_short_hash(main_window: main.MainWindow) -> Tuple[str, Vers
         )
         stdout, stderr = process.communicate()
         sha = re.split(r"\t+", stdout.decode("ascii"))[0]
-        vtag = (
+        vtag = Version(
             str(re.split(r"\t+", stdout.decode("ascii"))[-1])
             .replace("refs/tags/", "")
             .replace("^{}", "")
@@ -4734,7 +4734,6 @@ def get_git_revision_short_hash(main_window: main.MainWindow) -> Tuple[str, Vers
         )
         vtag = main_window.cfg.settings["biapy_gui_version"]
 
-    assert sha is not None and isinstance(vtag, Version)
     return sha, vtag
 
 
