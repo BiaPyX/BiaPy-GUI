@@ -4779,13 +4779,13 @@ def path_to_linux(p: str, orig_os: str = "win") -> str:
 
     Returns
     -------
-    p : str
+    win_path : str
         Converted path to Linux.
     """
     if "win" in orig_os.lower():
-        p = str(PureWindowsPath(p))
-        p = os.path.join("/" + p.parts[0][0], *p.parts[1:]).replace("\\", "/")
-    return p
+        win_path = PureWindowsPath(p)
+        win_path = os.path.join("/" + win_path.parts[0][0], *win_path.parts[1:]).replace("\\", "/")
+    return win_path
 
 
 def create_dict_from_key(cfg_key, value, out_cfg):
