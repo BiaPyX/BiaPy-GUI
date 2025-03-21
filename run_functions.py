@@ -604,6 +604,9 @@ class run_worker(QObject):
             # Need to create a new copy of the input config file to adapt Windows paths to linux (container's OS)
             cfg_file = get_text(self.main_gui.ui.select_yaml_name_label).replace("\\", "/")
             container_out_dir_in_host = os.path.normpath(os.path.join(self.output_folder_in_host, jobname))
+            cfg_input = os.path.join(container_out_dir_in_host, "input_config")
+            real_cfg_input = os.path.join(cfg_input, "input" + dt_string + ".yaml")
+            os.makedirs(cfg_input, exist_ok=True)
             self.container_stdout_file = os.path.normpath(
                 os.path.join(container_out_dir_in_host, jobname + "_out_" + dt_string)
             )
@@ -619,9 +622,6 @@ class run_worker(QObject):
             self.output_folder_in_container = path_to_linux(
                 self.output_folder_in_host, self.main_gui.cfg.settings["os_host"]
             )
-            cfg_input = os.path.join(container_out_dir_in_host, "input_config")
-            real_cfg_input = os.path.join(cfg_input, "input" + dt_string + ".yaml")
-            os.makedirs(cfg_input, exist_ok=True)
 
             # Read the configuration file
             with open(cfg_file, "r", encoding="utf8") as stream:
