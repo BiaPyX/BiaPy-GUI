@@ -97,9 +97,6 @@ class UIFunction:
             self.main_window.ui.right_arrow_bn.setIcon(
                 QPixmap(resource_path(os.path.join("images", "bn_images", "right_arrow.svg")))
             )
-            self.main_window.ui.goptions_advanced_bn.setIcon(
-                QPixmap(resource_path(os.path.join("images", "bn_images", "down_arrow.svg")))
-            )
             self.main_window.ui.train_advanced_bn.setIcon(
                 QPixmap(resource_path(os.path.join("images", "bn_images", "down_arrow.svg")))
             )
@@ -511,8 +508,6 @@ class UIFunction:
         """
         Initialize general options page.
         """
-        self.main_window.ui.goptions_advanced_options_scrollarea.setVisible(False)
-
         self.main_window.ui.MODEL__SOURCE__LABEL.setVisible(False)
         self.main_window.ui.MODEL__SOURCE__INFO.setVisible(False)
         self.main_window.ui.MODEL__SOURCE__INPUT.setVisible(False)

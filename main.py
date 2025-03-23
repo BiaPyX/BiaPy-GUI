@@ -255,9 +255,6 @@ class MainWindow(QMainWindow):
             lambda: self.UIFunction.change_problem_dimensions(self.ui.PROBLEM__NDIM__INPUT.currentIndex())
         )
         self.UIFunction.change_problem_dimensions(0)
-        self.ui.goptions_advanced_bn.clicked.connect(
-            lambda: expand_hide_advanced_options(self, "goptions_advanced_bn", "goptions_advanced_options_scrollarea")
-        )
         self.ui.goptions_browse_yaml_path_bn.clicked.connect(
             lambda: examine(self, "goptions_browse_yaml_path_input", False)
         )

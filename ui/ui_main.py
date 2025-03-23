@@ -19,8 +19,8 @@ from PySide6.QtWidgets import (QAbstractItemView, QApplication, QComboBox, QForm
     QFrame, QGridLayout, QHBoxLayout, QHeaderView,
     QLabel, QLineEdit, QMainWindow, QPlainTextEdit,
     QPushButton, QScrollArea, QSizePolicy, QSpacerItem,
-    QStackedWidget, QTabWidget, QTreeView, QVBoxLayout,
-    QWidget)
+    QStackedWidget, QTabWidget, QTextEdit, QTreeView,
+    QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -2195,35 +2195,184 @@ class Ui_MainWindow(object):
         self.stackedWidget_create_yaml_frame.addWidget(self.workflow_selection_page)
         self.goptions_page = QWidget()
         self.goptions_page.setObjectName(u"goptions_page")
-        self.goptions_general_frame = QFrame(self.goptions_page)
-        self.goptions_general_frame.setObjectName(u"goptions_general_frame")
-        self.goptions_general_frame.setGeometry(QRect(0, 0, 948, 469))
-        self.goptions_general_frame.setMinimumSize(QSize(940, 441))
-        self.goptions_general_frame.setFont(font1)
-        self.goptions_general_frame.setFrameShape(QFrame.Shape.NoFrame)
-        self.goptions_general_frame.setFrameShadow(QFrame.Shadow.Raised)
-        self.verticalLayout_8 = QVBoxLayout(self.goptions_general_frame)
-        self.verticalLayout_8.setSpacing(6)
+        self.verticalLayout_8 = QVBoxLayout(self.goptions_page)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
-        self.verticalLayout_8.setContentsMargins(0, 0, 0, 0)
-        self.goptions_scrollArea = QScrollArea(self.goptions_general_frame)
+        self.tabWidget_2 = QTabWidget(self.goptions_page)
+        self.tabWidget_2.setObjectName(u"tabWidget_2")
+        self.tabWidget_2.setFont(font1)
+        self.tab_3 = QWidget()
+        self.tab_3.setObjectName(u"tab_3")
+        self.verticalLayout_12 = QVBoxLayout(self.tab_3)
+        self.verticalLayout_12.setSpacing(0)
+        self.verticalLayout_12.setObjectName(u"verticalLayout_12")
+        self.verticalLayout_12.setContentsMargins(0, 0, 0, 0)
+        self.goptions_scrollArea = QScrollArea(self.tab_3)
         self.goptions_scrollArea.setObjectName(u"goptions_scrollArea")
         self.goptions_scrollArea.setMinimumSize(QSize(0, 30))
         self.goptions_scrollArea.setFont(font1)
         self.goptions_scrollArea.setFrameShape(QFrame.Shape.NoFrame)
-        self.goptions_scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.goptions_scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.goptions_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 950, 1349))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 923, 1260))
         self.scrollAreaWidgetContents.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
         self.gridLayout = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayout.setVerticalSpacing(6)
+        self.gridLayout.setContentsMargins(11, 11, -1, -1)
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.gridLayout.addItem(self.verticalSpacer_2, 3, 0, 1, 2)
+
+        self.train_disable_checkpoint_frame = QFrame(self.scrollAreaWidgetContents)
+        self.train_disable_checkpoint_frame.setObjectName(u"train_disable_checkpoint_frame")
+        self.train_disable_checkpoint_frame.setMinimumSize(QSize(0, 0))
+        self.train_disable_checkpoint_frame.setMaximumSize(QSize(880, 16777215))
+        self.train_disable_checkpoint_frame.setFrameShape(QFrame.Shape.Box)
+        self.train_disable_checkpoint_frame.setFrameShadow(QFrame.Shadow.Raised)
+        self.gridLayout_26 = QGridLayout(self.train_disable_checkpoint_frame)
+        self.gridLayout_26.setObjectName(u"gridLayout_26")
+        self.gridLayout_26.setVerticalSpacing(6)
+        self.gridLayout_26.setContentsMargins(-1, 9, 0, 9)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT = QLineEdit(self.train_disable_checkpoint_frame)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__INPUT")
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setMinimumSize(QSize(400, 30))
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setMaximumSize(QSize(400, 30))
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setFont(font1)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setReadOnly(True)
+
+        self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT, 5, 3, 1, 1)
+
+        self.LOAD_PRETRAINED_MODEL__INPUT = QComboBox(self.train_disable_checkpoint_frame)
+        self.LOAD_PRETRAINED_MODEL__INPUT.addItem("")
+        self.LOAD_PRETRAINED_MODEL__INPUT.addItem("")
+        self.LOAD_PRETRAINED_MODEL__INPUT.setObjectName(u"LOAD_PRETRAINED_MODEL__INPUT")
+        self.LOAD_PRETRAINED_MODEL__INPUT.setMinimumSize(QSize(200, 30))
+        self.LOAD_PRETRAINED_MODEL__INPUT.setMaximumSize(QSize(200, 30))
+        self.LOAD_PRETRAINED_MODEL__INPUT.setFont(font1)
+
+        self.gridLayout_26.addWidget(self.LOAD_PRETRAINED_MODEL__INPUT, 1, 3, 1, 1)
+
+        self.PATHS__CHECKPOINT_FILE__INFO = QPushButton(self.train_disable_checkpoint_frame)
+        self.PATHS__CHECKPOINT_FILE__INFO.setObjectName(u"PATHS__CHECKPOINT_FILE__INFO")
+        self.PATHS__CHECKPOINT_FILE__INFO.setMinimumSize(QSize(30, 30))
+        self.PATHS__CHECKPOINT_FILE__INFO.setMaximumSize(QSize(30, 30))
+        self.PATHS__CHECKPOINT_FILE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_26.addWidget(self.PATHS__CHECKPOINT_FILE__INFO, 4, 2, 1, 1)
+
+        self.MODEL__BMZ__SOURCE_MODEL_ID__BN = QPushButton(self.train_disable_checkpoint_frame)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__BN")
+        self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setMinimumSize(QSize(0, 0))
+        self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setMaximumSize(QSize(16777215, 16777215))
+        self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setFont(font1)
+
+        self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__BN, 5, 4, 1, 1)
+
+        self.checkpoint_file_path_browse_label = QLabel(self.train_disable_checkpoint_frame)
+        self.checkpoint_file_path_browse_label.setObjectName(u"checkpoint_file_path_browse_label")
+        self.checkpoint_file_path_browse_label.setFont(font1)
+        self.checkpoint_file_path_browse_label.setIndent(15)
+
+        self.gridLayout_26.addWidget(self.checkpoint_file_path_browse_label, 4, 1, 1, 1)
+
+        self.MODEL__SOURCE__INPUT = QComboBox(self.train_disable_checkpoint_frame)
+        self.MODEL__SOURCE__INPUT.addItem("")
+        self.MODEL__SOURCE__INPUT.addItem("")
+        self.MODEL__SOURCE__INPUT.setObjectName(u"MODEL__SOURCE__INPUT")
+        self.MODEL__SOURCE__INPUT.setMinimumSize(QSize(400, 30))
+        self.MODEL__SOURCE__INPUT.setMaximumSize(QSize(400, 30))
+        self.MODEL__SOURCE__INPUT.setFont(font1)
+
+        self.gridLayout_26.addWidget(self.MODEL__SOURCE__INPUT, 2, 3, 1, 1)
+
+        self.MODEL__SOURCE__LABEL = QLabel(self.train_disable_checkpoint_frame)
+        self.MODEL__SOURCE__LABEL.setObjectName(u"MODEL__SOURCE__LABEL")
+        self.MODEL__SOURCE__LABEL.setFont(font1)
+        self.MODEL__SOURCE__LABEL.setIndent(15)
+
+        self.gridLayout_26.addWidget(self.MODEL__SOURCE__LABEL, 2, 1, 1, 1)
+
+        self.LOAD_PRETRAINED_MODEL__INFO = QPushButton(self.train_disable_checkpoint_frame)
+        self.LOAD_PRETRAINED_MODEL__INFO.setObjectName(u"LOAD_PRETRAINED_MODEL__INFO")
+        self.LOAD_PRETRAINED_MODEL__INFO.setMinimumSize(QSize(30, 30))
+        self.LOAD_PRETRAINED_MODEL__INFO.setMaximumSize(QSize(30, 30))
+        self.LOAD_PRETRAINED_MODEL__INFO.setFont(font1)
+        self.LOAD_PRETRAINED_MODEL__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_26.addWidget(self.LOAD_PRETRAINED_MODEL__INFO, 1, 2, 1, 1)
+
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO = QPushButton(self.train_disable_checkpoint_frame)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__INFO")
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setFont(font1)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__INFO, 5, 2, 1, 1)
+
+        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL = QLabel(self.train_disable_checkpoint_frame)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__LABEL")
+        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setFont(font1)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setIndent(15)
+
+        self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL, 5, 1, 1, 1)
+
+        self.checkpoint_file_path_browse_bn = QPushButton(self.train_disable_checkpoint_frame)
+        self.checkpoint_file_path_browse_bn.setObjectName(u"checkpoint_file_path_browse_bn")
+        self.checkpoint_file_path_browse_bn.setMinimumSize(QSize(0, 0))
+        self.checkpoint_file_path_browse_bn.setMaximumSize(QSize(16777215, 16777215))
+        self.checkpoint_file_path_browse_bn.setFont(font1)
+
+        self.gridLayout_26.addWidget(self.checkpoint_file_path_browse_bn, 4, 4, 1, 1)
+
+        self.MODEL__SOURCE__INFO = QPushButton(self.train_disable_checkpoint_frame)
+        self.MODEL__SOURCE__INFO.setObjectName(u"MODEL__SOURCE__INFO")
+        self.MODEL__SOURCE__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__SOURCE__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__SOURCE__INFO.setFont(font1)
+        self.MODEL__SOURCE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_26.addWidget(self.MODEL__SOURCE__INFO, 2, 2, 1, 1)
+
+        self.LOAD_PRETRAINED_MODEL__LABEL = QLabel(self.train_disable_checkpoint_frame)
+        self.LOAD_PRETRAINED_MODEL__LABEL.setObjectName(u"LOAD_PRETRAINED_MODEL__LABEL")
+        self.LOAD_PRETRAINED_MODEL__LABEL.setFont(font1)
+
+        self.gridLayout_26.addWidget(self.LOAD_PRETRAINED_MODEL__LABEL, 1, 1, 1, 1)
+
+        self.horizontalSpacer_10 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_26.addItem(self.horizontalSpacer_10, 1, 4, 1, 1)
+
+        self.PATHS__CHECKPOINT_FILE__INPUT = QLineEdit(self.train_disable_checkpoint_frame)
+        self.PATHS__CHECKPOINT_FILE__INPUT.setObjectName(u"PATHS__CHECKPOINT_FILE__INPUT")
+        self.PATHS__CHECKPOINT_FILE__INPUT.setMinimumSize(QSize(400, 30))
+        self.PATHS__CHECKPOINT_FILE__INPUT.setMaximumSize(QSize(400, 30))
+        self.PATHS__CHECKPOINT_FILE__INPUT.setFont(font1)
+
+        self.gridLayout_26.addWidget(self.PATHS__CHECKPOINT_FILE__INPUT, 4, 3, 1, 1)
+
+        self.checkpoint_file_path_browse_spacer = QSpacerItem(40, 0, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_26.addItem(self.checkpoint_file_path_browse_spacer, 4, 5, 1, 1)
+
+
+        self.gridLayout.addWidget(self.train_disable_checkpoint_frame, 6, 0, 1, 3)
+
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME = QFrame(self.scrollAreaWidgetContents)
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME.setObjectName(u"MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME")
-        self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME.setMinimumSize(QSize(900, 0))
-        self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME.setMaximumSize(QSize(900, 16777215))
+        self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME.setMinimumSize(QSize(880, 0))
+        self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME.setMaximumSize(QSize(880, 16777215))
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME.setStyleSheet(u"")
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME.setFrameShape(QFrame.Shape.NoFrame)
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME.setFrameShadow(QFrame.Shadow.Raised)
@@ -2234,7 +2383,8 @@ class Ui_MainWindow(object):
         self.gridLayout_86.setContentsMargins(0, 2, 0, 2)
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__LABEL = QLabel(self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME)
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__LABEL")
-        self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__LABEL.setMinimumSize(QSize(430, 0))
+        self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__LABEL.setMinimumSize(QSize(500, 0))
+        self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__LABEL.setMaximumSize(QSize(500, 16777215))
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__LABEL.setFont(font1)
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__LABEL.setIndent(15)
 
@@ -2269,38 +2419,525 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME, 8, 0, 1, 1)
 
-        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.frame_21 = QFrame(self.scrollAreaWidgetContents)
+        self.frame_21.setObjectName(u"frame_21")
+        self.frame_21.setMinimumSize(QSize(0, 0))
+        self.frame_21.setMaximumSize(QSize(880, 16777215))
+        self.frame_21.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_21.setFrameShadow(QFrame.Shadow.Raised)
+        self.gridLayout_27 = QGridLayout(self.frame_21)
+        self.gridLayout_27.setObjectName(u"gridLayout_27")
+        self.gridLayout_27.setVerticalSpacing(6)
+        self.gridLayout_27.setContentsMargins(0, 0, 0, 0)
+        self.goptions_yaml_name_info = QPushButton(self.frame_21)
+        self.goptions_yaml_name_info.setObjectName(u"goptions_yaml_name_info")
+        self.goptions_yaml_name_info.setMinimumSize(QSize(30, 30))
+        self.goptions_yaml_name_info.setMaximumSize(QSize(30, 30))
+        self.goptions_yaml_name_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
-        self.gridLayout.addItem(self.verticalSpacer_2, 3, 0, 1, 2)
+        self.gridLayout_27.addWidget(self.goptions_yaml_name_info, 9, 3, 1, 1)
 
-        self.goptions_advanced_options_frame = QFrame(self.scrollAreaWidgetContents)
-        self.goptions_advanced_options_frame.setObjectName(u"goptions_advanced_options_frame")
-        self.goptions_advanced_options_frame.setMinimumSize(QSize(900, 400))
-        self.goptions_advanced_options_frame.setMaximumSize(QSize(900, 16777215))
-        self.goptions_advanced_options_frame.setFont(font1)
-        self.goptions_advanced_options_frame.setFrameShape(QFrame.Shape.NoFrame)
-        self.goptions_advanced_options_frame.setFrameShadow(QFrame.Shadow.Raised)
-        self.formLayout = QFormLayout(self.goptions_advanced_options_frame)
-        self.formLayout.setObjectName(u"formLayout")
-        self.formLayout.setContentsMargins(0, 0, 0, 0)
-        self.verticalSpacer_3 = QSpacerItem(15, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.horizontalSpacer_28 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.formLayout.setItem(0, QFormLayout.LabelRole, self.verticalSpacer_3)
+        self.gridLayout_27.addItem(self.horizontalSpacer_28, 7, 7, 1, 1)
 
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.PROBLEM__NDIM__LABEL = QLabel(self.frame_21)
+        self.PROBLEM__NDIM__LABEL.setObjectName(u"PROBLEM__NDIM__LABEL")
+        self.PROBLEM__NDIM__LABEL.setMaximumSize(QSize(200, 35))
+        self.PROBLEM__NDIM__LABEL.setFont(font1)
 
-        self.formLayout.setItem(1, QFormLayout.LabelRole, self.verticalSpacer)
+        self.gridLayout_27.addWidget(self.PROBLEM__NDIM__LABEL, 0, 1, 1, 1)
 
-        self.goptions_advanced_options_scrollarea = QScrollArea(self.goptions_advanced_options_frame)
+        self.goptions_browse_yaml_path_info = QPushButton(self.frame_21)
+        self.goptions_browse_yaml_path_info.setObjectName(u"goptions_browse_yaml_path_info")
+        self.goptions_browse_yaml_path_info.setMinimumSize(QSize(30, 30))
+        self.goptions_browse_yaml_path_info.setMaximumSize(QSize(30, 30))
+        self.goptions_browse_yaml_path_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+        self.goptions_browse_yaml_path_info.setProperty(u"scaledContents", True)
+
+        self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_info, 7, 3, 1, 1)
+
+        self.PROBLEM__NDIM__INPUT = QComboBox(self.frame_21)
+        self.PROBLEM__NDIM__INPUT.addItem("")
+        self.PROBLEM__NDIM__INPUT.addItem("")
+        self.PROBLEM__NDIM__INPUT.setObjectName(u"PROBLEM__NDIM__INPUT")
+        self.PROBLEM__NDIM__INPUT.setMinimumSize(QSize(100, 30))
+        self.PROBLEM__NDIM__INPUT.setMaximumSize(QSize(100, 30))
+        self.PROBLEM__NDIM__INPUT.setFont(font1)
+
+        self.gridLayout_27.addWidget(self.PROBLEM__NDIM__INPUT, 0, 4, 1, 1)
+
+        self.goptions_browse_yaml_path_label = QLabel(self.frame_21)
+        self.goptions_browse_yaml_path_label.setObjectName(u"goptions_browse_yaml_path_label")
+        self.goptions_browse_yaml_path_label.setMaximumSize(QSize(250, 35))
+        self.goptions_browse_yaml_path_label.setFont(font1)
+
+        self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_label, 7, 1, 1, 2)
+
+        self.goptions_yaml_name_label = QLabel(self.frame_21)
+        self.goptions_yaml_name_label.setObjectName(u"goptions_yaml_name_label")
+        self.goptions_yaml_name_label.setMaximumSize(QSize(250, 35))
+        self.goptions_yaml_name_label.setFont(font1)
+
+        self.gridLayout_27.addWidget(self.goptions_yaml_name_label, 9, 1, 1, 1)
+
+        self.goptions_browse_yaml_path_input = QLineEdit(self.frame_21)
+        self.goptions_browse_yaml_path_input.setObjectName(u"goptions_browse_yaml_path_input")
+        self.goptions_browse_yaml_path_input.setMinimumSize(QSize(500, 30))
+        self.goptions_browse_yaml_path_input.setMaximumSize(QSize(500, 30))
+        self.goptions_browse_yaml_path_input.setFont(font1)
+
+        self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_input, 7, 4, 1, 1)
+
+        self.PROBLEM__NDIM__INFO = QPushButton(self.frame_21)
+        self.PROBLEM__NDIM__INFO.setObjectName(u"PROBLEM__NDIM__INFO")
+        self.PROBLEM__NDIM__INFO.setMinimumSize(QSize(30, 30))
+        self.PROBLEM__NDIM__INFO.setMaximumSize(QSize(30, 30))
+        self.PROBLEM__NDIM__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_27.addWidget(self.PROBLEM__NDIM__INFO, 0, 3, 1, 1)
+
+        self.goptions_yaml_name_input = QLineEdit(self.frame_21)
+        self.goptions_yaml_name_input.setObjectName(u"goptions_yaml_name_input")
+        self.goptions_yaml_name_input.setMinimumSize(QSize(0, 30))
+        self.goptions_yaml_name_input.setMaximumSize(QSize(500, 30))
+        self.goptions_yaml_name_input.setFont(font1)
+
+        self.gridLayout_27.addWidget(self.goptions_yaml_name_input, 9, 4, 1, 1)
+
+        self.goptions_browse_yaml_path_bn = QPushButton(self.frame_21)
+        self.goptions_browse_yaml_path_bn.setObjectName(u"goptions_browse_yaml_path_bn")
+        self.goptions_browse_yaml_path_bn.setMinimumSize(QSize(80, 0))
+        self.goptions_browse_yaml_path_bn.setMaximumSize(QSize(80, 16777215))
+        self.goptions_browse_yaml_path_bn.setFont(font1)
+
+        self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_bn, 7, 6, 1, 1)
+
+        self.DATA__PATCH_SIZE__INPUT = QLineEdit(self.frame_21)
+        self.DATA__PATCH_SIZE__INPUT.setObjectName(u"DATA__PATCH_SIZE__INPUT")
+        self.DATA__PATCH_SIZE__INPUT.setMinimumSize(QSize(200, 30))
+        self.DATA__PATCH_SIZE__INPUT.setMaximumSize(QSize(200, 30))
+        self.DATA__PATCH_SIZE__INPUT.setFont(font1)
+
+        self.gridLayout_27.addWidget(self.DATA__PATCH_SIZE__INPUT, 1, 4, 1, 1)
+
+        self.label_11 = QLabel(self.frame_21)
+        self.label_11.setObjectName(u"label_11")
+        self.label_11.setMinimumSize(QSize(0, 30))
+        self.label_11.setFont(font1)
+
+        self.gridLayout_27.addWidget(self.label_11, 1, 1, 1, 1)
+
+        self.DATA__PATCH_SIZE__INFO = QPushButton(self.frame_21)
+        self.DATA__PATCH_SIZE__INFO.setObjectName(u"DATA__PATCH_SIZE__INFO")
+        self.DATA__PATCH_SIZE__INFO.setMinimumSize(QSize(30, 30))
+        self.DATA__PATCH_SIZE__INFO.setMaximumSize(QSize(30, 30))
+        self.DATA__PATCH_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_27.addWidget(self.DATA__PATCH_SIZE__INFO, 1, 3, 1, 1)
+
+
+        self.gridLayout.addWidget(self.frame_21, 0, 0, 2, 4)
+
+        self.MODEL__BMZ__EXPORT__FRAME = QFrame(self.scrollAreaWidgetContents)
+        self.MODEL__BMZ__EXPORT__FRAME.setObjectName(u"MODEL__BMZ__EXPORT__FRAME")
+        self.MODEL__BMZ__EXPORT__FRAME.setMaximumSize(QSize(880, 16777215))
+        self.MODEL__BMZ__EXPORT__FRAME.setFrameShape(QFrame.Shape.Box)
+        self.MODEL__BMZ__EXPORT__FRAME.setFrameShadow(QFrame.Shadow.Raised)
+        self.formLayout_4 = QFormLayout(self.MODEL__BMZ__EXPORT__FRAME)
+        self.formLayout_4.setObjectName(u"formLayout_4")
+        self.formLayout_4.setHorizontalSpacing(0)
+        self.formLayout_4.setVerticalSpacing(9)
+        self.formLayout_4.setContentsMargins(11, 9, 0, 9)
+        self.MODEL__BMZ__EXPORT__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME)
+        self.MODEL__BMZ__EXPORT__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__LABEL")
+        self.MODEL__BMZ__EXPORT__LABEL.setFont(font1)
+        self.MODEL__BMZ__EXPORT__LABEL.setMargin(0)
+        self.MODEL__BMZ__EXPORT__LABEL.setIndent(-1)
+
+        self.formLayout_4.setWidget(0, QFormLayout.FieldRole, self.MODEL__BMZ__EXPORT__LABEL)
+
+        self.MODEL__BMZ__EXPORT__FRAME_inside = QFrame(self.MODEL__BMZ__EXPORT__FRAME)
+        self.MODEL__BMZ__EXPORT__FRAME_inside.setObjectName(u"MODEL__BMZ__EXPORT__FRAME_inside")
+        self.MODEL__BMZ__EXPORT__FRAME_inside.setStyleSheet(u"")
+        self.MODEL__BMZ__EXPORT__FRAME_inside.setFrameShape(QFrame.Shape.NoFrame)
+        self.MODEL__BMZ__EXPORT__FRAME_inside.setFrameShadow(QFrame.Shadow.Raised)
+        self.gridLayout_85 = QGridLayout(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.gridLayout_85.setObjectName(u"gridLayout_85")
+        self.gridLayout_85.setContentsMargins(-1, 9, -1, -1)
+        self.MODEL__BMZ__EXPORT__LICENSE__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__LICENSE__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__LICENSE__LABEL")
+        self.MODEL__BMZ__EXPORT__LICENSE__LABEL.setFont(font1)
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__LICENSE__LABEL, 5, 0, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__MODEL_NAME__INPUT = QTextEdit(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__MODEL_NAME__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__MODEL_NAME__INPUT")
+        self.MODEL__BMZ__EXPORT__MODEL_NAME__INPUT.setMinimumSize(QSize(500, 30))
+        self.MODEL__BMZ__EXPORT__MODEL_NAME__INPUT.setMaximumSize(QSize(500, 30))
+        self.MODEL__BMZ__EXPORT__MODEL_NAME__INPUT.setFont(font1)
+        self.MODEL__BMZ__EXPORT__MODEL_NAME__INPUT.setLineWrapMode(QTextEdit.LineWrapMode.NoWrap)
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__MODEL_NAME__INPUT, 2, 2, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__AUTHORS__INPUT = QTextEdit(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__AUTHORS__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__AUTHORS__INPUT")
+        self.MODEL__BMZ__EXPORT__AUTHORS__INPUT.setMinimumSize(QSize(500, 100))
+        self.MODEL__BMZ__EXPORT__AUTHORS__INPUT.setMaximumSize(QSize(500, 100))
+        self.MODEL__BMZ__EXPORT__AUTHORS__INPUT.setFont(font1)
+        self.MODEL__BMZ__EXPORT__AUTHORS__INPUT.setLineWrapMode(QTextEdit.LineWrapMode.NoWrap)
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__AUTHORS__INPUT, 4, 2, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__CITE__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__CITE__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__CITE__LABEL")
+        self.MODEL__BMZ__EXPORT__CITE__LABEL.setFont(font1)
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__CITE__LABEL, 8, 0, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__DATASET_INFO__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__DATASET_INFO__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__DATASET_INFO__LABEL")
+        self.MODEL__BMZ__EXPORT__DATASET_INFO__LABEL.setFont(font1)
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DATASET_INFO__LABEL, 9, 0, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__BN = QPushButton(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__BN.setObjectName(u"MODEL__BMZ__EXPORT__DOCUMENTATION__BN")
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__BN.setFont(font1)
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DOCUMENTATION__BN, 11, 3, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__DATASET_INFO__INFO = QPushButton(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__DATASET_INFO__INFO.setObjectName(u"MODEL__BMZ__EXPORT__DATASET_INFO__INFO")
+        self.MODEL__BMZ__EXPORT__DATASET_INFO__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__BMZ__EXPORT__DATASET_INFO__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__BMZ__EXPORT__DATASET_INFO__INFO.setFont(font1)
+        self.MODEL__BMZ__EXPORT__DATASET_INFO__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DATASET_INFO__INFO, 9, 1, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO = QPushButton(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setObjectName(u"MODEL__BMZ__EXPORT__DOCUMENTATION__INFO")
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setFont(font1)
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setProperty(u"scaledContents", True)
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO, 11, 1, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__LICENSE__INFO = QPushButton(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__LICENSE__INFO.setObjectName(u"MODEL__BMZ__EXPORT__LICENSE__INFO")
+        self.MODEL__BMZ__EXPORT__LICENSE__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__BMZ__EXPORT__LICENSE__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__BMZ__EXPORT__LICENSE__INFO.setFont(font1)
+        self.MODEL__BMZ__EXPORT__LICENSE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+        self.MODEL__BMZ__EXPORT__LICENSE__INFO.setProperty(u"scaledContents", True)
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__LICENSE__INFO, 5, 1, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__DESCRIPTION__INPUT = QTextEdit(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__DESCRIPTION__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__DESCRIPTION__INPUT")
+        self.MODEL__BMZ__EXPORT__DESCRIPTION__INPUT.setMinimumSize(QSize(500, 100))
+        self.MODEL__BMZ__EXPORT__DESCRIPTION__INPUT.setMaximumSize(QSize(500, 100))
+        self.MODEL__BMZ__EXPORT__DESCRIPTION__INPUT.setFont(font1)
+        self.MODEL__BMZ__EXPORT__DESCRIPTION__INPUT.setLineWrapMode(QTextEdit.LineWrapMode.NoWrap)
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DESCRIPTION__INPUT, 3, 2, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO = QPushButton(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO.setObjectName(u"MODEL__BMZ__EXPORT__MODEL_NAME__INFO")
+        self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO.setFont(font1)
+        self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+        self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO.setProperty(u"scaledContents", True)
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO, 2, 1, 1, 1)
+
+        self.MODEL_AUTOGENERATE_DOC_LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL_AUTOGENERATE_DOC_LABEL.setObjectName(u"MODEL_AUTOGENERATE_DOC_LABEL")
+        self.MODEL_AUTOGENERATE_DOC_LABEL.setFont(font1)
+
+        self.gridLayout_85.addWidget(self.MODEL_AUTOGENERATE_DOC_LABEL, 10, 0, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__MODEL_VERSION__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__MODEL_VERSION__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__MODEL_VERSION__LABEL")
+        self.MODEL__BMZ__EXPORT__MODEL_VERSION__LABEL.setFont(font1)
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__MODEL_VERSION__LABEL, 6, 0, 1, 1)
+
+        self.MODEL_AUTOGENERATE_DOC__INFO = QPushButton(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL_AUTOGENERATE_DOC__INFO.setObjectName(u"MODEL_AUTOGENERATE_DOC__INFO")
+        self.MODEL_AUTOGENERATE_DOC__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL_AUTOGENERATE_DOC__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL_AUTOGENERATE_DOC__INFO.setFont(font1)
+        self.MODEL_AUTOGENERATE_DOC__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_85.addWidget(self.MODEL_AUTOGENERATE_DOC__INFO, 10, 1, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INPUT = QLineEdit(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__MODEL_VERSION__INPUT")
+        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INPUT.setMinimumSize(QSize(500, 30))
+        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INPUT.setMaximumSize(QSize(500, 30))
+        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INPUT.setFont(font1)
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__MODEL_VERSION__INPUT, 6, 2, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__CITE__INPUT = QTextEdit(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__CITE__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__CITE__INPUT")
+        self.MODEL__BMZ__EXPORT__CITE__INPUT.setMinimumSize(QSize(500, 100))
+        self.MODEL__BMZ__EXPORT__CITE__INPUT.setMaximumSize(QSize(500, 100))
+        font11 = QFont()
+        font11.setFamilies([u"DejaVu Math TeX Gyre"])
+        font11.setPointSize(12)
+        font11.setStrikeOut(False)
+        self.MODEL__BMZ__EXPORT__CITE__INPUT.setFont(font11)
+        self.MODEL__BMZ__EXPORT__CITE__INPUT.setLineWrapMode(QTextEdit.LineWrapMode.NoWrap)
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__CITE__INPUT, 8, 2, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__TAGS__INPUT = QTextEdit(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__TAGS__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__TAGS__INPUT")
+        self.MODEL__BMZ__EXPORT__TAGS__INPUT.setMinimumSize(QSize(500, 100))
+        self.MODEL__BMZ__EXPORT__TAGS__INPUT.setMaximumSize(QSize(500, 100))
+        self.MODEL__BMZ__EXPORT__TAGS__INPUT.setFont(font1)
+        self.MODEL__BMZ__EXPORT__TAGS__INPUT.setLineWrapMode(QTextEdit.LineWrapMode.NoWrap)
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__TAGS__INPUT, 7, 2, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__AUTHORS__INFO = QPushButton(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__AUTHORS__INFO.setObjectName(u"MODEL__BMZ__EXPORT__AUTHORS__INFO")
+        self.MODEL__BMZ__EXPORT__AUTHORS__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__BMZ__EXPORT__AUTHORS__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__BMZ__EXPORT__AUTHORS__INFO.setFont(font1)
+        self.MODEL__BMZ__EXPORT__AUTHORS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+        self.MODEL__BMZ__EXPORT__AUTHORS__INFO.setProperty(u"scaledContents", True)
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__AUTHORS__INFO, 4, 1, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__CITE__INFO = QPushButton(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__CITE__INFO.setObjectName(u"MODEL__BMZ__EXPORT__CITE__INFO")
+        self.MODEL__BMZ__EXPORT__CITE__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__BMZ__EXPORT__CITE__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__BMZ__EXPORT__CITE__INFO.setFont(font1)
+        self.MODEL__BMZ__EXPORT__CITE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+        self.MODEL__BMZ__EXPORT__CITE__INFO.setProperty(u"scaledContents", True)
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__CITE__INFO, 8, 1, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__MODEL_NAME__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__MODEL_NAME__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__MODEL_NAME__LABEL")
+        self.MODEL__BMZ__EXPORT__MODEL_NAME__LABEL.setFont(font1)
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__MODEL_NAME__LABEL, 2, 0, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__DESCRIPTION__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__DESCRIPTION__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__DESCRIPTION__LABEL")
+        self.MODEL__BMZ__EXPORT__DESCRIPTION__LABEL.setFont(font1)
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DESCRIPTION__LABEL, 3, 0, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT = QLineEdit(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT")
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT.setMinimumSize(QSize(500, 30))
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT.setMaximumSize(QSize(500, 30))
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT.setFont(font1)
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT, 11, 2, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__DATASET_INFO__INPUT = QTextEdit(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__DATASET_INFO__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__DATASET_INFO__INPUT")
+        self.MODEL__BMZ__EXPORT__DATASET_INFO__INPUT.setMinimumSize(QSize(500, 100))
+        self.MODEL__BMZ__EXPORT__DATASET_INFO__INPUT.setMaximumSize(QSize(500, 100))
+        self.MODEL__BMZ__EXPORT__DATASET_INFO__INPUT.setFont(font1)
+        self.MODEL__BMZ__EXPORT__DATASET_INFO__INPUT.setLineWrapMode(QTextEdit.LineWrapMode.NoWrap)
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DATASET_INFO__INPUT, 9, 2, 1, 1)
+
+        self.MODEL_AUTOGENERATE_DOC_INPUT = QComboBox(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL_AUTOGENERATE_DOC_INPUT.addItem("")
+        self.MODEL_AUTOGENERATE_DOC_INPUT.addItem("")
+        self.MODEL_AUTOGENERATE_DOC_INPUT.setObjectName(u"MODEL_AUTOGENERATE_DOC_INPUT")
+        self.MODEL_AUTOGENERATE_DOC_INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL_AUTOGENERATE_DOC_INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL_AUTOGENERATE_DOC_INPUT.setFont(font1)
+
+        self.gridLayout_85.addWidget(self.MODEL_AUTOGENERATE_DOC_INPUT, 10, 2, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO = QPushButton(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO.setObjectName(u"MODEL__BMZ__EXPORT__DESCRIPTION__INFO")
+        self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO.setFont(font1)
+        self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+        self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO.setProperty(u"scaledContents", True)
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO, 3, 1, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INFO = QPushButton(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INFO.setObjectName(u"MODEL__BMZ__EXPORT__MODEL_VERSION__INFO")
+        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INFO.setFont(font1)
+        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__MODEL_VERSION__INFO, 6, 1, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__TAGS__INFO = QPushButton(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__TAGS__INFO.setObjectName(u"MODEL__BMZ__EXPORT__TAGS__INFO")
+        self.MODEL__BMZ__EXPORT__TAGS__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__BMZ__EXPORT__TAGS__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__BMZ__EXPORT__TAGS__INFO.setFont(font1)
+        self.MODEL__BMZ__EXPORT__TAGS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+        self.MODEL__BMZ__EXPORT__TAGS__INFO.setProperty(u"scaledContents", True)
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__TAGS__INFO, 7, 1, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL")
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL.setFont(font1)
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL.setIndent(15)
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL, 11, 0, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__LICENSE__INPUT = QLineEdit(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__LICENSE__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__LICENSE__INPUT")
+        self.MODEL__BMZ__EXPORT__LICENSE__INPUT.setMinimumSize(QSize(500, 30))
+        self.MODEL__BMZ__EXPORT__LICENSE__INPUT.setMaximumSize(QSize(500, 30))
+        self.MODEL__BMZ__EXPORT__LICENSE__INPUT.setFont(font1)
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__LICENSE__INPUT, 5, 2, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__TAGS__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__TAGS__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__TAGS__LABEL")
+        self.MODEL__BMZ__EXPORT__TAGS__LABEL.setFont(font1)
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__TAGS__LABEL, 7, 0, 1, 1)
+
+        self.MODEL__BMZ__EXPORT__AUTHORS__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
+        self.MODEL__BMZ__EXPORT__AUTHORS__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__AUTHORS__LABEL")
+        self.MODEL__BMZ__EXPORT__AUTHORS__LABEL.setFont(font1)
+
+        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__AUTHORS__LABEL, 4, 0, 1, 1)
+
+        self.horizontalSpacer_42 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_85.addItem(self.horizontalSpacer_42, 8, 3, 1, 1)
+
+
+        self.formLayout_4.setWidget(1, QFormLayout.FieldRole, self.MODEL__BMZ__EXPORT__FRAME_inside)
+
+
+        self.gridLayout.addWidget(self.MODEL__BMZ__EXPORT__FRAME, 11, 0, 1, 3)
+
+        self.MODEL__BMZ__EXPORT__ENABLE__FRAME = QFrame(self.scrollAreaWidgetContents)
+        self.MODEL__BMZ__EXPORT__ENABLE__FRAME.setObjectName(u"MODEL__BMZ__EXPORT__ENABLE__FRAME")
+        self.MODEL__BMZ__EXPORT__ENABLE__FRAME.setMinimumSize(QSize(880, 0))
+        self.MODEL__BMZ__EXPORT__ENABLE__FRAME.setMaximumSize(QSize(880, 16777215))
+        self.MODEL__BMZ__EXPORT__ENABLE__FRAME.setFrameShape(QFrame.Shape.NoFrame)
+        self.MODEL__BMZ__EXPORT__ENABLE__FRAME.setFrameShadow(QFrame.Shadow.Raised)
+        self.horizontalLayout_26 = QHBoxLayout(self.MODEL__BMZ__EXPORT__ENABLE__FRAME)
+        self.horizontalLayout_26.setSpacing(15)
+        self.horizontalLayout_26.setObjectName(u"horizontalLayout_26")
+        self.horizontalLayout_26.setContentsMargins(0, 2, 0, 2)
+        self.MODEL__BMZ__EXPORT__ENABLE__LABEL = QLabel(self.MODEL__BMZ__EXPORT__ENABLE__FRAME)
+        self.MODEL__BMZ__EXPORT__ENABLE__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__ENABLE__LABEL")
+        self.MODEL__BMZ__EXPORT__ENABLE__LABEL.setMinimumSize(QSize(500, 0))
+        self.MODEL__BMZ__EXPORT__ENABLE__LABEL.setMaximumSize(QSize(500, 16777215))
+        self.MODEL__BMZ__EXPORT__ENABLE__LABEL.setFont(font1)
+
+        self.horizontalLayout_26.addWidget(self.MODEL__BMZ__EXPORT__ENABLE__LABEL)
+
+        self.MODEL__BMZ__EXPORT__ENABLE__INFO = QPushButton(self.MODEL__BMZ__EXPORT__ENABLE__FRAME)
+        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setObjectName(u"MODEL__BMZ__EXPORT__ENABLE__INFO")
+        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setMinimumSize(QSize(30, 30))
+        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setMaximumSize(QSize(30, 30))
+        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setProperty(u"scaledContents", True)
+
+        self.horizontalLayout_26.addWidget(self.MODEL__BMZ__EXPORT__ENABLE__INFO)
+
+        self.MODEL__BMZ__EXPORT__ENABLE__INPUT = QComboBox(self.MODEL__BMZ__EXPORT__ENABLE__FRAME)
+        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.addItem("")
+        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.addItem("")
+        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__ENABLE__INPUT")
+        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
+        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
+        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setFont(font1)
+
+        self.horizontalLayout_26.addWidget(self.MODEL__BMZ__EXPORT__ENABLE__INPUT)
+
+        self.horizontalSpacer_56 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_26.addItem(self.horizontalSpacer_56)
+
+
+        self.gridLayout.addWidget(self.MODEL__BMZ__EXPORT__ENABLE__FRAME, 7, 0, 1, 2)
+
+        self.train_disable_checkpoint_label = QLabel(self.scrollAreaWidgetContents)
+        self.train_disable_checkpoint_label.setObjectName(u"train_disable_checkpoint_label")
+        self.train_disable_checkpoint_label.setMinimumSize(QSize(0, 30))
+        self.train_disable_checkpoint_label.setMaximumSize(QSize(16777215, 30))
+        self.train_disable_checkpoint_label.setFont(font1)
+
+        self.gridLayout.addWidget(self.train_disable_checkpoint_label, 4, 0, 1, 2)
+
+        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.gridLayout.addItem(self.verticalSpacer_3, 12, 0, 1, 1)
+
+        self.goptions_scrollArea.setWidget(self.scrollAreaWidgetContents)
+
+        self.verticalLayout_12.addWidget(self.goptions_scrollArea)
+
+        self.tabWidget_2.addTab(self.tab_3, "")
+        self.tab_4 = QWidget()
+        self.tab_4.setObjectName(u"tab_4")
+        self.verticalLayout_16 = QVBoxLayout(self.tab_4)
+        self.verticalLayout_16.setSpacing(0)
+        self.verticalLayout_16.setObjectName(u"verticalLayout_16")
+        self.verticalLayout_16.setContentsMargins(0, 0, 0, 0)
+        self.goptions_advanced_options_scrollarea = QScrollArea(self.tab_4)
         self.goptions_advanced_options_scrollarea.setObjectName(u"goptions_advanced_options_scrollarea")
         self.goptions_advanced_options_scrollarea.setMinimumSize(QSize(0, 0))
         self.goptions_advanced_options_scrollarea.setMaximumSize(QSize(900, 16777215))
         self.goptions_advanced_options_scrollarea.setFont(font1)
-        self.goptions_advanced_options_scrollarea.setFrameShape(QFrame.Shape.Box)
+        self.goptions_advanced_options_scrollarea.setFrameShape(QFrame.Shape.NoFrame)
         self.goptions_advanced_options_scrollarea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 852, 2172))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 883, 2176))
         self.verticalLayout_63 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_63.setSpacing(9)
         self.verticalLayout_63.setObjectName(u"verticalLayout_63")
@@ -3454,7 +4091,7 @@ class Ui_MainWindow(object):
 
         self.rcan_frame = QFrame(self.scrollAreaWidgetContents_2)
         self.rcan_frame.setObjectName(u"rcan_frame")
-        self.rcan_frame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.rcan_frame.setFrameShape(QFrame.Shape.Box)
         self.rcan_frame.setFrameShadow(QFrame.Shadow.Raised)
         self.gridLayout_87 = QGridLayout(self.rcan_frame)
         self.gridLayout_87.setObjectName(u"gridLayout_87")
@@ -3595,7 +4232,7 @@ class Ui_MainWindow(object):
 
         self.checkpoint_loading_opt_frame = QFrame(self.scrollAreaWidgetContents_2)
         self.checkpoint_loading_opt_frame.setObjectName(u"checkpoint_loading_opt_frame")
-        self.checkpoint_loading_opt_frame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.checkpoint_loading_opt_frame.setFrameShape(QFrame.Shape.Box)
         self.checkpoint_loading_opt_frame.setFrameShadow(QFrame.Shadow.Raised)
         self.gridLayout_24 = QGridLayout(self.checkpoint_loading_opt_frame)
         self.gridLayout_24.setObjectName(u"gridLayout_24")
@@ -3664,684 +4301,15 @@ class Ui_MainWindow(object):
 
         self.goptions_advanced_options_scrollarea.setWidget(self.scrollAreaWidgetContents_2)
 
-        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.goptions_advanced_options_scrollarea)
+        self.verticalLayout_16.addWidget(self.goptions_advanced_options_scrollarea)
 
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.gridLayout.addWidget(self.goptions_advanced_options_frame, 13, 0, 1, 4)
+        self.verticalLayout_16.addItem(self.verticalSpacer)
 
-        self.MODEL__BMZ__EXPORT__ENABLE__FRAME = QFrame(self.scrollAreaWidgetContents)
-        self.MODEL__BMZ__EXPORT__ENABLE__FRAME.setObjectName(u"MODEL__BMZ__EXPORT__ENABLE__FRAME")
-        self.MODEL__BMZ__EXPORT__ENABLE__FRAME.setMinimumSize(QSize(900, 0))
-        self.MODEL__BMZ__EXPORT__ENABLE__FRAME.setMaximumSize(QSize(900, 16777215))
-        self.MODEL__BMZ__EXPORT__ENABLE__FRAME.setFrameShape(QFrame.Shape.NoFrame)
-        self.MODEL__BMZ__EXPORT__ENABLE__FRAME.setFrameShadow(QFrame.Shadow.Raised)
-        self.horizontalLayout_26 = QHBoxLayout(self.MODEL__BMZ__EXPORT__ENABLE__FRAME)
-        self.horizontalLayout_26.setSpacing(15)
-        self.horizontalLayout_26.setObjectName(u"horizontalLayout_26")
-        self.horizontalLayout_26.setContentsMargins(0, 2, 0, 2)
-        self.MODEL__BMZ__EXPORT__ENABLE__LABEL = QLabel(self.MODEL__BMZ__EXPORT__ENABLE__FRAME)
-        self.MODEL__BMZ__EXPORT__ENABLE__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__ENABLE__LABEL")
-        self.MODEL__BMZ__EXPORT__ENABLE__LABEL.setFont(font1)
+        self.tabWidget_2.addTab(self.tab_4, "")
 
-        self.horizontalLayout_26.addWidget(self.MODEL__BMZ__EXPORT__ENABLE__LABEL)
-
-        self.MODEL__BMZ__EXPORT__ENABLE__INFO = QPushButton(self.MODEL__BMZ__EXPORT__ENABLE__FRAME)
-        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setObjectName(u"MODEL__BMZ__EXPORT__ENABLE__INFO")
-        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setProperty(u"scaledContents", True)
-
-        self.horizontalLayout_26.addWidget(self.MODEL__BMZ__EXPORT__ENABLE__INFO)
-
-        self.MODEL__BMZ__EXPORT__ENABLE__INPUT = QComboBox(self.MODEL__BMZ__EXPORT__ENABLE__FRAME)
-        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.addItem("")
-        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.addItem("")
-        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__ENABLE__INPUT")
-        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setFont(font1)
-
-        self.horizontalLayout_26.addWidget(self.MODEL__BMZ__EXPORT__ENABLE__INPUT)
-
-        self.horizontalSpacer_56 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_26.addItem(self.horizontalSpacer_56)
-
-
-        self.gridLayout.addWidget(self.MODEL__BMZ__EXPORT__ENABLE__FRAME, 7, 0, 1, 2)
-
-        self.train_disable_checkpoint_label = QLabel(self.scrollAreaWidgetContents)
-        self.train_disable_checkpoint_label.setObjectName(u"train_disable_checkpoint_label")
-        self.train_disable_checkpoint_label.setMinimumSize(QSize(0, 30))
-        self.train_disable_checkpoint_label.setMaximumSize(QSize(16777215, 30))
-        self.train_disable_checkpoint_label.setFont(font1)
-
-        self.gridLayout.addWidget(self.train_disable_checkpoint_label, 4, 0, 1, 2)
-
-        self.train_disable_checkpoint_frame = QFrame(self.scrollAreaWidgetContents)
-        self.train_disable_checkpoint_frame.setObjectName(u"train_disable_checkpoint_frame")
-        self.train_disable_checkpoint_frame.setMinimumSize(QSize(900, 0))
-        self.train_disable_checkpoint_frame.setMaximumSize(QSize(900, 16777215))
-        self.train_disable_checkpoint_frame.setFrameShape(QFrame.Shape.Box)
-        self.train_disable_checkpoint_frame.setFrameShadow(QFrame.Shadow.Raised)
-        self.gridLayout_26 = QGridLayout(self.train_disable_checkpoint_frame)
-        self.gridLayout_26.setObjectName(u"gridLayout_26")
-        self.gridLayout_26.setVerticalSpacing(6)
-        self.gridLayout_26.setContentsMargins(-1, 9, 0, 9)
-        self.MODEL__SOURCE__INFO = QPushButton(self.train_disable_checkpoint_frame)
-        self.MODEL__SOURCE__INFO.setObjectName(u"MODEL__SOURCE__INFO")
-        self.MODEL__SOURCE__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__SOURCE__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__SOURCE__INFO.setFont(font1)
-        self.MODEL__SOURCE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_26.addWidget(self.MODEL__SOURCE__INFO, 2, 2, 1, 1)
-
-        self.PATHS__CHECKPOINT_FILE__INFO = QPushButton(self.train_disable_checkpoint_frame)
-        self.PATHS__CHECKPOINT_FILE__INFO.setObjectName(u"PATHS__CHECKPOINT_FILE__INFO")
-        self.PATHS__CHECKPOINT_FILE__INFO.setMinimumSize(QSize(30, 30))
-        self.PATHS__CHECKPOINT_FILE__INFO.setMaximumSize(QSize(30, 30))
-        self.PATHS__CHECKPOINT_FILE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_26.addWidget(self.PATHS__CHECKPOINT_FILE__INFO, 4, 2, 1, 1)
-
-        self.MODEL__BMZ__SOURCE_MODEL_ID__BN = QPushButton(self.train_disable_checkpoint_frame)
-        self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__BN")
-        self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setMinimumSize(QSize(0, 0))
-        self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setMaximumSize(QSize(16777215, 16777215))
-        self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setFont(font1)
-
-        self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__BN, 5, 4, 1, 1)
-
-        self.checkpoint_file_path_browse_bn = QPushButton(self.train_disable_checkpoint_frame)
-        self.checkpoint_file_path_browse_bn.setObjectName(u"checkpoint_file_path_browse_bn")
-        self.checkpoint_file_path_browse_bn.setMinimumSize(QSize(0, 0))
-        self.checkpoint_file_path_browse_bn.setMaximumSize(QSize(16777215, 16777215))
-        self.checkpoint_file_path_browse_bn.setFont(font1)
-
-        self.gridLayout_26.addWidget(self.checkpoint_file_path_browse_bn, 4, 4, 1, 1)
-
-        self.MODEL__SOURCE__INPUT = QComboBox(self.train_disable_checkpoint_frame)
-        self.MODEL__SOURCE__INPUT.addItem("")
-        self.MODEL__SOURCE__INPUT.addItem("")
-        self.MODEL__SOURCE__INPUT.setObjectName(u"MODEL__SOURCE__INPUT")
-        self.MODEL__SOURCE__INPUT.setMinimumSize(QSize(500, 30))
-        self.MODEL__SOURCE__INPUT.setMaximumSize(QSize(500, 30))
-        self.MODEL__SOURCE__INPUT.setFont(font1)
-
-        self.gridLayout_26.addWidget(self.MODEL__SOURCE__INPUT, 2, 3, 1, 1)
-
-        self.LOAD_PRETRAINED_MODEL__INPUT = QComboBox(self.train_disable_checkpoint_frame)
-        self.LOAD_PRETRAINED_MODEL__INPUT.addItem("")
-        self.LOAD_PRETRAINED_MODEL__INPUT.addItem("")
-        self.LOAD_PRETRAINED_MODEL__INPUT.setObjectName(u"LOAD_PRETRAINED_MODEL__INPUT")
-        self.LOAD_PRETRAINED_MODEL__INPUT.setMinimumSize(QSize(200, 30))
-        self.LOAD_PRETRAINED_MODEL__INPUT.setMaximumSize(QSize(200, 30))
-        self.LOAD_PRETRAINED_MODEL__INPUT.setFont(font1)
-
-        self.gridLayout_26.addWidget(self.LOAD_PRETRAINED_MODEL__INPUT, 1, 3, 1, 1)
-
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO = QPushButton(self.train_disable_checkpoint_frame)
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__INFO")
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setFont(font1)
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__INFO, 5, 2, 1, 1)
-
-        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL = QLabel(self.train_disable_checkpoint_frame)
-        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__LABEL")
-        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setFont(font1)
-        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setIndent(15)
-
-        self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL, 5, 1, 1, 1)
-
-        self.LOAD_PRETRAINED_MODEL__INFO = QPushButton(self.train_disable_checkpoint_frame)
-        self.LOAD_PRETRAINED_MODEL__INFO.setObjectName(u"LOAD_PRETRAINED_MODEL__INFO")
-        self.LOAD_PRETRAINED_MODEL__INFO.setMinimumSize(QSize(30, 30))
-        self.LOAD_PRETRAINED_MODEL__INFO.setMaximumSize(QSize(30, 30))
-        self.LOAD_PRETRAINED_MODEL__INFO.setFont(font1)
-        self.LOAD_PRETRAINED_MODEL__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_26.addWidget(self.LOAD_PRETRAINED_MODEL__INFO, 1, 2, 1, 1)
-
-        self.horizontalSpacer_10 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_26.addItem(self.horizontalSpacer_10, 1, 4, 1, 1)
-
-        self.LOAD_PRETRAINED_MODEL__LABEL = QLabel(self.train_disable_checkpoint_frame)
-        self.LOAD_PRETRAINED_MODEL__LABEL.setObjectName(u"LOAD_PRETRAINED_MODEL__LABEL")
-        self.LOAD_PRETRAINED_MODEL__LABEL.setFont(font1)
-
-        self.gridLayout_26.addWidget(self.LOAD_PRETRAINED_MODEL__LABEL, 1, 1, 1, 1)
-
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT = QLineEdit(self.train_disable_checkpoint_frame)
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setObjectName(u"MODEL__BMZ__SOURCE_MODEL_ID__INPUT")
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setMinimumSize(QSize(500, 30))
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setMaximumSize(QSize(500, 30))
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setFont(font1)
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT.setReadOnly(True)
-
-        self.gridLayout_26.addWidget(self.MODEL__BMZ__SOURCE_MODEL_ID__INPUT, 5, 3, 1, 1)
-
-        self.checkpoint_file_path_browse_label = QLabel(self.train_disable_checkpoint_frame)
-        self.checkpoint_file_path_browse_label.setObjectName(u"checkpoint_file_path_browse_label")
-        self.checkpoint_file_path_browse_label.setFont(font1)
-        self.checkpoint_file_path_browse_label.setIndent(15)
-
-        self.gridLayout_26.addWidget(self.checkpoint_file_path_browse_label, 4, 1, 1, 1)
-
-        self.PATHS__CHECKPOINT_FILE__INPUT = QLineEdit(self.train_disable_checkpoint_frame)
-        self.PATHS__CHECKPOINT_FILE__INPUT.setObjectName(u"PATHS__CHECKPOINT_FILE__INPUT")
-        self.PATHS__CHECKPOINT_FILE__INPUT.setMinimumSize(QSize(500, 30))
-        self.PATHS__CHECKPOINT_FILE__INPUT.setMaximumSize(QSize(500, 30))
-        self.PATHS__CHECKPOINT_FILE__INPUT.setFont(font1)
-
-        self.gridLayout_26.addWidget(self.PATHS__CHECKPOINT_FILE__INPUT, 4, 3, 1, 1)
-
-        self.MODEL__SOURCE__LABEL = QLabel(self.train_disable_checkpoint_frame)
-        self.MODEL__SOURCE__LABEL.setObjectName(u"MODEL__SOURCE__LABEL")
-        self.MODEL__SOURCE__LABEL.setFont(font1)
-        self.MODEL__SOURCE__LABEL.setIndent(15)
-
-        self.gridLayout_26.addWidget(self.MODEL__SOURCE__LABEL, 2, 1, 1, 1)
-
-
-        self.gridLayout.addWidget(self.train_disable_checkpoint_frame, 6, 0, 1, 3)
-
-        self.MODEL__BMZ__EXPORT__FRAME = QFrame(self.scrollAreaWidgetContents)
-        self.MODEL__BMZ__EXPORT__FRAME.setObjectName(u"MODEL__BMZ__EXPORT__FRAME")
-        self.MODEL__BMZ__EXPORT__FRAME.setMaximumSize(QSize(900, 16777215))
-        self.MODEL__BMZ__EXPORT__FRAME.setFrameShape(QFrame.Shape.Box)
-        self.MODEL__BMZ__EXPORT__FRAME.setFrameShadow(QFrame.Shadow.Raised)
-        self.formLayout_4 = QFormLayout(self.MODEL__BMZ__EXPORT__FRAME)
-        self.formLayout_4.setObjectName(u"formLayout_4")
-        self.formLayout_4.setHorizontalSpacing(0)
-        self.formLayout_4.setVerticalSpacing(9)
-        self.formLayout_4.setContentsMargins(0, 9, 0, 9)
-        self.verticalSpacer_61 = QSpacerItem(15, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.formLayout_4.setItem(0, QFormLayout.LabelRole, self.verticalSpacer_61)
-
-        self.MODEL__BMZ__EXPORT__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME)
-        self.MODEL__BMZ__EXPORT__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__LABEL")
-        self.MODEL__BMZ__EXPORT__LABEL.setFont(font1)
-        self.MODEL__BMZ__EXPORT__LABEL.setMargin(0)
-        self.MODEL__BMZ__EXPORT__LABEL.setIndent(-1)
-
-        self.formLayout_4.setWidget(0, QFormLayout.FieldRole, self.MODEL__BMZ__EXPORT__LABEL)
-
-        self.verticalSpacer_60 = QSpacerItem(15, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.formLayout_4.setItem(1, QFormLayout.LabelRole, self.verticalSpacer_60)
-
-        self.MODEL__BMZ__EXPORT__FRAME_inside = QFrame(self.MODEL__BMZ__EXPORT__FRAME)
-        self.MODEL__BMZ__EXPORT__FRAME_inside.setObjectName(u"MODEL__BMZ__EXPORT__FRAME_inside")
-        self.MODEL__BMZ__EXPORT__FRAME_inside.setStyleSheet(u"")
-        self.MODEL__BMZ__EXPORT__FRAME_inside.setFrameShape(QFrame.Shape.NoFrame)
-        self.MODEL__BMZ__EXPORT__FRAME_inside.setFrameShadow(QFrame.Shadow.Raised)
-        self.gridLayout_85 = QGridLayout(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.gridLayout_85.setObjectName(u"gridLayout_85")
-        self.gridLayout_85.setContentsMargins(-1, 9, -1, -1)
-        self.MODEL__BMZ__EXPORT__LICENSE__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__LICENSE__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__LICENSE__LABEL")
-        self.MODEL__BMZ__EXPORT__LICENSE__LABEL.setFont(font1)
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__LICENSE__LABEL, 5, 0, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__MODEL_NAME__INPUT = QLineEdit(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__MODEL_NAME__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__MODEL_NAME__INPUT")
-        self.MODEL__BMZ__EXPORT__MODEL_NAME__INPUT.setMinimumSize(QSize(500, 30))
-        self.MODEL__BMZ__EXPORT__MODEL_NAME__INPUT.setMaximumSize(QSize(500, 30))
-        self.MODEL__BMZ__EXPORT__MODEL_NAME__INPUT.setFont(font1)
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__MODEL_NAME__INPUT, 2, 2, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__AUTHORS__INPUT = QLineEdit(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__AUTHORS__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__AUTHORS__INPUT")
-        self.MODEL__BMZ__EXPORT__AUTHORS__INPUT.setMinimumSize(QSize(500, 30))
-        self.MODEL__BMZ__EXPORT__AUTHORS__INPUT.setMaximumSize(QSize(500, 30))
-        self.MODEL__BMZ__EXPORT__AUTHORS__INPUT.setFont(font1)
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__AUTHORS__INPUT, 4, 2, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__CITE__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__CITE__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__CITE__LABEL")
-        self.MODEL__BMZ__EXPORT__CITE__LABEL.setFont(font1)
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__CITE__LABEL, 8, 0, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__DATASET_INFO__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__DATASET_INFO__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__DATASET_INFO__LABEL")
-        self.MODEL__BMZ__EXPORT__DATASET_INFO__LABEL.setFont(font1)
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DATASET_INFO__LABEL, 9, 0, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__BN = QPushButton(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__BN.setObjectName(u"MODEL__BMZ__EXPORT__DOCUMENTATION__BN")
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__BN.setFont(font1)
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DOCUMENTATION__BN, 11, 3, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__DATASET_INFO__INFO = QPushButton(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__DATASET_INFO__INFO.setObjectName(u"MODEL__BMZ__EXPORT__DATASET_INFO__INFO")
-        self.MODEL__BMZ__EXPORT__DATASET_INFO__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__DATASET_INFO__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__DATASET_INFO__INFO.setFont(font1)
-        self.MODEL__BMZ__EXPORT__DATASET_INFO__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DATASET_INFO__INFO, 9, 1, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO = QPushButton(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setObjectName(u"MODEL__BMZ__EXPORT__DOCUMENTATION__INFO")
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setFont(font1)
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setProperty(u"scaledContents", True)
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO, 11, 1, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__LICENSE__INFO = QPushButton(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__LICENSE__INFO.setObjectName(u"MODEL__BMZ__EXPORT__LICENSE__INFO")
-        self.MODEL__BMZ__EXPORT__LICENSE__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__LICENSE__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__LICENSE__INFO.setFont(font1)
-        self.MODEL__BMZ__EXPORT__LICENSE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-        self.MODEL__BMZ__EXPORT__LICENSE__INFO.setProperty(u"scaledContents", True)
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__LICENSE__INFO, 5, 1, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__DESCRIPTION__INPUT = QLineEdit(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__DESCRIPTION__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__DESCRIPTION__INPUT")
-        self.MODEL__BMZ__EXPORT__DESCRIPTION__INPUT.setMinimumSize(QSize(500, 30))
-        self.MODEL__BMZ__EXPORT__DESCRIPTION__INPUT.setMaximumSize(QSize(500, 30))
-        self.MODEL__BMZ__EXPORT__DESCRIPTION__INPUT.setFont(font1)
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DESCRIPTION__INPUT, 3, 2, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO = QPushButton(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO.setObjectName(u"MODEL__BMZ__EXPORT__MODEL_NAME__INFO")
-        self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO.setFont(font1)
-        self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-        self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO.setProperty(u"scaledContents", True)
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO, 2, 1, 1, 1)
-
-        self.MODEL_AUTOGENERATE_DOC_LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL_AUTOGENERATE_DOC_LABEL.setObjectName(u"MODEL_AUTOGENERATE_DOC_LABEL")
-        self.MODEL_AUTOGENERATE_DOC_LABEL.setFont(font1)
-
-        self.gridLayout_85.addWidget(self.MODEL_AUTOGENERATE_DOC_LABEL, 10, 0, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__MODEL_VERSION__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__MODEL_VERSION__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__MODEL_VERSION__LABEL")
-        self.MODEL__BMZ__EXPORT__MODEL_VERSION__LABEL.setFont(font1)
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__MODEL_VERSION__LABEL, 6, 0, 1, 1)
-
-        self.MODEL_AUTOGENERATE_DOC__INFO = QPushButton(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL_AUTOGENERATE_DOC__INFO.setObjectName(u"MODEL_AUTOGENERATE_DOC__INFO")
-        self.MODEL_AUTOGENERATE_DOC__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL_AUTOGENERATE_DOC__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL_AUTOGENERATE_DOC__INFO.setFont(font1)
-        self.MODEL_AUTOGENERATE_DOC__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_85.addWidget(self.MODEL_AUTOGENERATE_DOC__INFO, 10, 1, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INPUT = QLineEdit(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__MODEL_VERSION__INPUT")
-        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INPUT.setMinimumSize(QSize(500, 30))
-        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INPUT.setMaximumSize(QSize(500, 30))
-        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INPUT.setFont(font1)
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__MODEL_VERSION__INPUT, 6, 2, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__CITE__INPUT = QLineEdit(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__CITE__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__CITE__INPUT")
-        self.MODEL__BMZ__EXPORT__CITE__INPUT.setMinimumSize(QSize(500, 30))
-        self.MODEL__BMZ__EXPORT__CITE__INPUT.setMaximumSize(QSize(500, 30))
-        font11 = QFont()
-        font11.setFamilies([u"DejaVu Math TeX Gyre"])
-        font11.setPointSize(12)
-        font11.setStrikeOut(False)
-        self.MODEL__BMZ__EXPORT__CITE__INPUT.setFont(font11)
-        self.MODEL__BMZ__EXPORT__CITE__INPUT.setCursorPosition(0)
-        self.MODEL__BMZ__EXPORT__CITE__INPUT.setClearButtonEnabled(False)
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__CITE__INPUT, 8, 2, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__TAGS__INPUT = QLineEdit(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__TAGS__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__TAGS__INPUT")
-        self.MODEL__BMZ__EXPORT__TAGS__INPUT.setMinimumSize(QSize(500, 30))
-        self.MODEL__BMZ__EXPORT__TAGS__INPUT.setMaximumSize(QSize(500, 30))
-        self.MODEL__BMZ__EXPORT__TAGS__INPUT.setFont(font1)
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__TAGS__INPUT, 7, 2, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__AUTHORS__INFO = QPushButton(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__AUTHORS__INFO.setObjectName(u"MODEL__BMZ__EXPORT__AUTHORS__INFO")
-        self.MODEL__BMZ__EXPORT__AUTHORS__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__AUTHORS__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__AUTHORS__INFO.setFont(font1)
-        self.MODEL__BMZ__EXPORT__AUTHORS__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-        self.MODEL__BMZ__EXPORT__AUTHORS__INFO.setProperty(u"scaledContents", True)
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__AUTHORS__INFO, 4, 1, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__CITE__INFO = QPushButton(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__CITE__INFO.setObjectName(u"MODEL__BMZ__EXPORT__CITE__INFO")
-        self.MODEL__BMZ__EXPORT__CITE__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__CITE__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__CITE__INFO.setFont(font1)
-        self.MODEL__BMZ__EXPORT__CITE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-        self.MODEL__BMZ__EXPORT__CITE__INFO.setProperty(u"scaledContents", True)
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__CITE__INFO, 8, 1, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__MODEL_NAME__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__MODEL_NAME__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__MODEL_NAME__LABEL")
-        self.MODEL__BMZ__EXPORT__MODEL_NAME__LABEL.setFont(font1)
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__MODEL_NAME__LABEL, 2, 0, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__DESCRIPTION__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__DESCRIPTION__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__DESCRIPTION__LABEL")
-        self.MODEL__BMZ__EXPORT__DESCRIPTION__LABEL.setFont(font1)
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DESCRIPTION__LABEL, 3, 0, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT = QLineEdit(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT")
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT.setMinimumSize(QSize(500, 30))
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT.setMaximumSize(QSize(500, 30))
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT.setFont(font1)
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT, 11, 2, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__DATASET_INFO__INPUT = QLineEdit(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__DATASET_INFO__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__DATASET_INFO__INPUT")
-        self.MODEL__BMZ__EXPORT__DATASET_INFO__INPUT.setMinimumSize(QSize(500, 30))
-        self.MODEL__BMZ__EXPORT__DATASET_INFO__INPUT.setMaximumSize(QSize(500, 30))
-        self.MODEL__BMZ__EXPORT__DATASET_INFO__INPUT.setFont(font1)
-        self.MODEL__BMZ__EXPORT__DATASET_INFO__INPUT.setCursorPosition(0)
-        self.MODEL__BMZ__EXPORT__DATASET_INFO__INPUT.setClearButtonEnabled(False)
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DATASET_INFO__INPUT, 9, 2, 1, 1)
-
-        self.MODEL_AUTOGENERATE_DOC_INPUT = QComboBox(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL_AUTOGENERATE_DOC_INPUT.addItem("")
-        self.MODEL_AUTOGENERATE_DOC_INPUT.addItem("")
-        self.MODEL_AUTOGENERATE_DOC_INPUT.setObjectName(u"MODEL_AUTOGENERATE_DOC_INPUT")
-        self.MODEL_AUTOGENERATE_DOC_INPUT.setMinimumSize(QSize(200, 30))
-        self.MODEL_AUTOGENERATE_DOC_INPUT.setMaximumSize(QSize(200, 30))
-        self.MODEL_AUTOGENERATE_DOC_INPUT.setFont(font1)
-
-        self.gridLayout_85.addWidget(self.MODEL_AUTOGENERATE_DOC_INPUT, 10, 2, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO = QPushButton(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO.setObjectName(u"MODEL__BMZ__EXPORT__DESCRIPTION__INFO")
-        self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO.setFont(font1)
-        self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-        self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO.setProperty(u"scaledContents", True)
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO, 3, 1, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INFO = QPushButton(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INFO.setObjectName(u"MODEL__BMZ__EXPORT__MODEL_VERSION__INFO")
-        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INFO.setFont(font1)
-        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__MODEL_VERSION__INFO, 6, 1, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__TAGS__INFO = QPushButton(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__TAGS__INFO.setObjectName(u"MODEL__BMZ__EXPORT__TAGS__INFO")
-        self.MODEL__BMZ__EXPORT__TAGS__INFO.setMinimumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__TAGS__INFO.setMaximumSize(QSize(30, 30))
-        self.MODEL__BMZ__EXPORT__TAGS__INFO.setFont(font1)
-        self.MODEL__BMZ__EXPORT__TAGS__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-        self.MODEL__BMZ__EXPORT__TAGS__INFO.setProperty(u"scaledContents", True)
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__TAGS__INFO, 7, 1, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL")
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL.setFont(font1)
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL.setIndent(15)
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL, 11, 0, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__LICENSE__INPUT = QLineEdit(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__LICENSE__INPUT.setObjectName(u"MODEL__BMZ__EXPORT__LICENSE__INPUT")
-        self.MODEL__BMZ__EXPORT__LICENSE__INPUT.setMinimumSize(QSize(500, 30))
-        self.MODEL__BMZ__EXPORT__LICENSE__INPUT.setMaximumSize(QSize(500, 30))
-        self.MODEL__BMZ__EXPORT__LICENSE__INPUT.setFont(font1)
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__LICENSE__INPUT, 5, 2, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__TAGS__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__TAGS__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__TAGS__LABEL")
-        self.MODEL__BMZ__EXPORT__TAGS__LABEL.setFont(font1)
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__TAGS__LABEL, 7, 0, 1, 1)
-
-        self.MODEL__BMZ__EXPORT__AUTHORS__LABEL = QLabel(self.MODEL__BMZ__EXPORT__FRAME_inside)
-        self.MODEL__BMZ__EXPORT__AUTHORS__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__AUTHORS__LABEL")
-        self.MODEL__BMZ__EXPORT__AUTHORS__LABEL.setFont(font1)
-
-        self.gridLayout_85.addWidget(self.MODEL__BMZ__EXPORT__AUTHORS__LABEL, 4, 0, 1, 1)
-
-        self.horizontalSpacer_42 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_85.addItem(self.horizontalSpacer_42, 8, 3, 1, 1)
-
-
-        self.formLayout_4.setWidget(1, QFormLayout.FieldRole, self.MODEL__BMZ__EXPORT__FRAME_inside)
-
-
-        self.gridLayout.addWidget(self.MODEL__BMZ__EXPORT__FRAME, 11, 0, 1, 3)
-
-        self.frame_26 = QFrame(self.scrollAreaWidgetContents)
-        self.frame_26.setObjectName(u"frame_26")
-        self.frame_26.setMinimumSize(QSize(900, 0))
-        self.frame_26.setMaximumSize(QSize(900, 16777215))
-        self.frame_26.setFrameShape(QFrame.Shape.NoFrame)
-        self.frame_26.setFrameShadow(QFrame.Shadow.Raised)
-        self.gridLayout_28 = QGridLayout(self.frame_26)
-        self.gridLayout_28.setObjectName(u"gridLayout_28")
-        self.gridLayout_28.setHorizontalSpacing(10)
-        self.gridLayout_28.setVerticalSpacing(0)
-        self.gridLayout_28.setContentsMargins(0, 0, 0, 0)
-        self.goptions_advanced_label = QLabel(self.frame_26)
-        self.goptions_advanced_label.setObjectName(u"goptions_advanced_label")
-        self.goptions_advanced_label.setMaximumSize(QSize(16777215, 35))
-        self.goptions_advanced_label.setFont(font1)
-
-        self.gridLayout_28.addWidget(self.goptions_advanced_label, 1, 0, 1, 1)
-
-        self.horizontalSpacer_19 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_28.addItem(self.horizontalSpacer_19, 1, 2, 1, 1)
-
-        self.goptions_advanced_bn = QPushButton(self.frame_26)
-        self.goptions_advanced_bn.setObjectName(u"goptions_advanced_bn")
-        self.goptions_advanced_bn.setMaximumSize(QSize(35, 35))
-        self.goptions_advanced_bn.setFont(font1)
-
-        self.gridLayout_28.addWidget(self.goptions_advanced_bn, 1, 1, 1, 1)
-
-
-        self.gridLayout.addWidget(self.frame_26, 12, 0, 1, 2)
-
-        self.frame_21 = QFrame(self.scrollAreaWidgetContents)
-        self.frame_21.setObjectName(u"frame_21")
-        self.frame_21.setMinimumSize(QSize(900, 0))
-        self.frame_21.setMaximumSize(QSize(900, 16777215))
-        self.frame_21.setFrameShape(QFrame.Shape.NoFrame)
-        self.frame_21.setFrameShadow(QFrame.Shadow.Raised)
-        self.gridLayout_27 = QGridLayout(self.frame_21)
-        self.gridLayout_27.setObjectName(u"gridLayout_27")
-        self.gridLayout_27.setVerticalSpacing(6)
-        self.gridLayout_27.setContentsMargins(0, 0, 0, 0)
-        self.goptions_yaml_name_info = QPushButton(self.frame_21)
-        self.goptions_yaml_name_info.setObjectName(u"goptions_yaml_name_info")
-        self.goptions_yaml_name_info.setMinimumSize(QSize(30, 30))
-        self.goptions_yaml_name_info.setMaximumSize(QSize(30, 30))
-        self.goptions_yaml_name_info.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_27.addWidget(self.goptions_yaml_name_info, 9, 3, 1, 1)
-
-        self.horizontalSpacer_28 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_27.addItem(self.horizontalSpacer_28, 7, 7, 1, 1)
-
-        self.PROBLEM__NDIM__LABEL = QLabel(self.frame_21)
-        self.PROBLEM__NDIM__LABEL.setObjectName(u"PROBLEM__NDIM__LABEL")
-        self.PROBLEM__NDIM__LABEL.setMaximumSize(QSize(200, 35))
-        self.PROBLEM__NDIM__LABEL.setFont(font1)
-
-        self.gridLayout_27.addWidget(self.PROBLEM__NDIM__LABEL, 0, 1, 1, 1)
-
-        self.goptions_browse_yaml_path_info = QPushButton(self.frame_21)
-        self.goptions_browse_yaml_path_info.setObjectName(u"goptions_browse_yaml_path_info")
-        self.goptions_browse_yaml_path_info.setMinimumSize(QSize(30, 30))
-        self.goptions_browse_yaml_path_info.setMaximumSize(QSize(30, 30))
-        self.goptions_browse_yaml_path_info.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-        self.goptions_browse_yaml_path_info.setProperty(u"scaledContents", True)
-
-        self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_info, 7, 3, 1, 1)
-
-        self.PROBLEM__NDIM__INPUT = QComboBox(self.frame_21)
-        self.PROBLEM__NDIM__INPUT.addItem("")
-        self.PROBLEM__NDIM__INPUT.addItem("")
-        self.PROBLEM__NDIM__INPUT.setObjectName(u"PROBLEM__NDIM__INPUT")
-        self.PROBLEM__NDIM__INPUT.setMinimumSize(QSize(100, 30))
-        self.PROBLEM__NDIM__INPUT.setMaximumSize(QSize(100, 30))
-        self.PROBLEM__NDIM__INPUT.setFont(font1)
-
-        self.gridLayout_27.addWidget(self.PROBLEM__NDIM__INPUT, 0, 4, 1, 1)
-
-        self.goptions_browse_yaml_path_label = QLabel(self.frame_21)
-        self.goptions_browse_yaml_path_label.setObjectName(u"goptions_browse_yaml_path_label")
-        self.goptions_browse_yaml_path_label.setMaximumSize(QSize(250, 35))
-        self.goptions_browse_yaml_path_label.setFont(font1)
-
-        self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_label, 7, 1, 1, 2)
-
-        self.goptions_yaml_name_label = QLabel(self.frame_21)
-        self.goptions_yaml_name_label.setObjectName(u"goptions_yaml_name_label")
-        self.goptions_yaml_name_label.setMaximumSize(QSize(250, 35))
-        self.goptions_yaml_name_label.setFont(font1)
-
-        self.gridLayout_27.addWidget(self.goptions_yaml_name_label, 9, 1, 1, 1)
-
-        self.goptions_browse_yaml_path_input = QLineEdit(self.frame_21)
-        self.goptions_browse_yaml_path_input.setObjectName(u"goptions_browse_yaml_path_input")
-        self.goptions_browse_yaml_path_input.setMinimumSize(QSize(500, 30))
-        self.goptions_browse_yaml_path_input.setMaximumSize(QSize(500, 30))
-        self.goptions_browse_yaml_path_input.setFont(font1)
-
-        self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_input, 7, 4, 1, 1)
-
-        self.PROBLEM__NDIM__INFO = QPushButton(self.frame_21)
-        self.PROBLEM__NDIM__INFO.setObjectName(u"PROBLEM__NDIM__INFO")
-        self.PROBLEM__NDIM__INFO.setMinimumSize(QSize(30, 30))
-        self.PROBLEM__NDIM__INFO.setMaximumSize(QSize(30, 30))
-        self.PROBLEM__NDIM__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_27.addWidget(self.PROBLEM__NDIM__INFO, 0, 3, 1, 1)
-
-        self.goptions_yaml_name_input = QLineEdit(self.frame_21)
-        self.goptions_yaml_name_input.setObjectName(u"goptions_yaml_name_input")
-        self.goptions_yaml_name_input.setMinimumSize(QSize(0, 30))
-        self.goptions_yaml_name_input.setMaximumSize(QSize(500, 30))
-        self.goptions_yaml_name_input.setFont(font1)
-
-        self.gridLayout_27.addWidget(self.goptions_yaml_name_input, 9, 4, 1, 1)
-
-        self.goptions_browse_yaml_path_bn = QPushButton(self.frame_21)
-        self.goptions_browse_yaml_path_bn.setObjectName(u"goptions_browse_yaml_path_bn")
-        self.goptions_browse_yaml_path_bn.setMinimumSize(QSize(80, 0))
-        self.goptions_browse_yaml_path_bn.setMaximumSize(QSize(80, 16777215))
-        self.goptions_browse_yaml_path_bn.setFont(font1)
-
-        self.gridLayout_27.addWidget(self.goptions_browse_yaml_path_bn, 7, 6, 1, 1)
-
-        self.DATA__PATCH_SIZE__INPUT = QLineEdit(self.frame_21)
-        self.DATA__PATCH_SIZE__INPUT.setObjectName(u"DATA__PATCH_SIZE__INPUT")
-        self.DATA__PATCH_SIZE__INPUT.setMinimumSize(QSize(200, 30))
-        self.DATA__PATCH_SIZE__INPUT.setMaximumSize(QSize(200, 30))
-        self.DATA__PATCH_SIZE__INPUT.setFont(font1)
-
-        self.gridLayout_27.addWidget(self.DATA__PATCH_SIZE__INPUT, 1, 4, 1, 1)
-
-        self.label_11 = QLabel(self.frame_21)
-        self.label_11.setObjectName(u"label_11")
-        self.label_11.setMinimumSize(QSize(0, 30))
-        self.label_11.setFont(font1)
-
-        self.gridLayout_27.addWidget(self.label_11, 1, 1, 1, 1)
-
-        self.DATA__PATCH_SIZE__INFO = QPushButton(self.frame_21)
-        self.DATA__PATCH_SIZE__INFO.setObjectName(u"DATA__PATCH_SIZE__INFO")
-        self.DATA__PATCH_SIZE__INFO.setMinimumSize(QSize(30, 30))
-        self.DATA__PATCH_SIZE__INFO.setMaximumSize(QSize(30, 30))
-        self.DATA__PATCH_SIZE__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_27.addWidget(self.DATA__PATCH_SIZE__INFO, 1, 3, 1, 1)
-
-
-        self.gridLayout.addWidget(self.frame_21, 0, 0, 2, 5)
-
-        self.goptions_scrollArea.setWidget(self.scrollAreaWidgetContents)
-
-        self.verticalLayout_8.addWidget(self.goptions_scrollArea)
+        self.verticalLayout_8.addWidget(self.tabWidget_2)
 
         self.stackedWidget_create_yaml_frame.addWidget(self.goptions_page)
         self.train_page = QWidget()
@@ -10224,7 +10192,7 @@ class Ui_MainWindow(object):
         self.test_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 913, 344))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 903, 270))
         self.gridLayout_37 = QGridLayout(self.scrollAreaWidgetContents_5)
         self.gridLayout_37.setObjectName(u"gridLayout_37")
         self.label_85 = QLabel(self.scrollAreaWidgetContents_5)
@@ -10410,7 +10378,7 @@ class Ui_MainWindow(object):
         self.scrollArea_19.setWidgetResizable(True)
         self.scrollAreaWidgetContents_19 = QWidget()
         self.scrollAreaWidgetContents_19.setObjectName(u"scrollAreaWidgetContents_19")
-        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 896, 2268))
+        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 893, 2268))
         self.verticalLayout_40 = QVBoxLayout(self.scrollAreaWidgetContents_19)
         self.verticalLayout_40.setObjectName(u"verticalLayout_40")
         self.label_89 = QLabel(self.scrollAreaWidgetContents_19)
@@ -11926,7 +11894,7 @@ class Ui_MainWindow(object):
         self.scrollArea_20.setWidgetResizable(True)
         self.scrollAreaWidgetContents_24 = QWidget()
         self.scrollAreaWidgetContents_24.setObjectName(u"scrollAreaWidgetContents_24")
-        self.scrollAreaWidgetContents_24.setGeometry(QRect(0, 0, 896, 1407))
+        self.scrollAreaWidgetContents_24.setGeometry(QRect(0, 0, 664, 1407))
         self.verticalLayout_58 = QVBoxLayout(self.scrollAreaWidgetContents_24)
         self.verticalLayout_58.setSpacing(0)
         self.verticalLayout_58.setObjectName(u"verticalLayout_58")
@@ -14328,10 +14296,11 @@ class Ui_MainWindow(object):
 
         self.stackedWidget.setCurrentIndex(2)
         self.wizard_main_frame.setCurrentIndex(1)
-        self.stackedWidget_create_yaml_frame.setCurrentIndex(3)
+        self.stackedWidget_create_yaml_frame.setCurrentIndex(1)
+        self.tabWidget_2.setCurrentIndex(0)
         self.train_tab_widget.setCurrentIndex(0)
         self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(1)
-        self.test_tab_widget.setCurrentIndex(0)
+        self.test_tab_widget.setCurrentIndex(1)
         self.test_workflow_specific_tab_stackedWidget.setCurrentIndex(5)
         self.tabWidget.setCurrentIndex(0)
 
@@ -14457,6 +14426,38 @@ class Ui_MainWindow(object):
 #if QT_CONFIG(tooltip)
         self.goptions_scrollArea.setToolTip("")
 #endif // QT_CONFIG(tooltip)
+        self.LOAD_PRETRAINED_MODEL__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.LOAD_PRETRAINED_MODEL__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+#if QT_CONFIG(tooltip)
+        self.PATHS__CHECKPOINT_FILE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the model's checkpoint that will be loaded. Leave it blank to let BiaPy find it. If the output folder and the job name match, BiaPy will locate the model's weights within the 'checkpoints' directory</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.PATHS__CHECKPOINT_FILE__INFO.setText("")
+        self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setText(QCoreApplication.translate("MainWindow", u"Check models", None))
+#if QT_CONFIG(tooltip)
+        self.checkpoint_file_path_browse_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.checkpoint_file_path_browse_label.setText(QCoreApplication.translate("MainWindow", u"Model file", None))
+        self.MODEL__SOURCE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"I have a model trained with BiaPy", None))
+        self.MODEL__SOURCE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"I want to check other online sources", None))
+
+        self.MODEL__SOURCE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Source of the model", None))
+#if QT_CONFIG(tooltip)
+        self.LOAD_PRETRAINED_MODEL__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">This option determines whether to use a pretrained model instead of building one from scratch. If you select &quot;Yes,&quot; additional configuration options will appear, and options related to model selection will be disabled, as a pretrained model will be used.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.LOAD_PRETRAINED_MODEL__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Model identifier</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setText("")
+        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setText(QCoreApplication.translate("MainWindow", u"Model ID", None))
+        self.checkpoint_file_path_browse_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__SOURCE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Source of the pretrained model</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__SOURCE__INFO.setText("")
+        self.LOAD_PRETRAINED_MODEL__LABEL.setText(QCoreApplication.translate("MainWindow", u"Load pretrained model", None))
+        self.PATHS__CHECKPOINT_FILE__INPUT.setText(QCoreApplication.translate("MainWindow", u"model_weights.pth", None))
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__LABEL.setText(QCoreApplication.translate("MainWindow", u"Reuse BMZ model configuration                           ", None))
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
@@ -14465,6 +14466,179 @@ class Ui_MainWindow(object):
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">If you are loading a BMZ model, you can enable this option to automatically populate all the required fields for creating a new BioImage Model Zoo (BMZ) package, using the information from the loaded model, instead of setting them manually.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.goptions_yaml_name_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">YAML file name</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.goptions_yaml_name_info.setText("")
+#if QT_CONFIG(tooltip)
+        self.PROBLEM__NDIM__LABEL.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.PROBLEM__NDIM__LABEL.setText(QCoreApplication.translate("MainWindow", u"Image dimensions", None))
+#if QT_CONFIG(tooltip)
+        self.goptions_browse_yaml_path_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to store the YAML file</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.goptions_browse_yaml_path_info.setText("")
+        self.PROBLEM__NDIM__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"2D", None))
+        self.PROBLEM__NDIM__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"3D", None))
+
+#if QT_CONFIG(tooltip)
+        self.goptions_browse_yaml_path_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.goptions_browse_yaml_path_label.setText(QCoreApplication.translate("MainWindow", u"Configuration file directory", None))
+#if QT_CONFIG(tooltip)
+        self.goptions_yaml_name_label.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.goptions_yaml_name_label.setText(QCoreApplication.translate("MainWindow", u"Configuration file name", None))
+#if QT_CONFIG(statustip)
+        self.goptions_browse_yaml_path_input.setStatusTip("")
+#endif // QT_CONFIG(statustip)
+#if QT_CONFIG(tooltip)
+        self.PROBLEM__NDIM__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of dimensions of the input images</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(statustip)
+        self.PROBLEM__NDIM__INFO.setStatusTip("")
+#endif // QT_CONFIG(statustip)
+        self.PROBLEM__NDIM__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.goptions_yaml_name_input.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.goptions_yaml_name_input.setText("")
+        self.goptions_browse_yaml_path_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__PATCH_SIZE__INPUT.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        self.label_11.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_11.setText(QCoreApplication.translate("MainWindow", u"Patch size", None))
+#if QT_CONFIG(tooltip)
+        self.DATA__PATCH_SIZE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Input the size of the patches use to train your model (y,x,channels) order for 2D and (z,y,x,channels) for 3D. Parentheses are need. The value should be smaller or equal to the shape of the image. E. g. </span><span style=\" font-size:12pt; font-weight:600;\">(40,128,128,1)</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.DATA__PATCH_SIZE__INFO.setText("")
+        self.MODEL__BMZ__EXPORT__LABEL.setText(QCoreApplication.translate("MainWindow", u"Additional fields required for the BioImage Model Zoo export process:", None))
+        self.MODEL__BMZ__EXPORT__LICENSE__LABEL.setText(QCoreApplication.translate("MainWindow", u"License", None))
+        self.MODEL__BMZ__EXPORT__AUTHORS__INPUT.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"hr { height: 1px; border-width: 0; }\n"
+"li.unchecked::marker { content: \"\\2610\"; }\n"
+"li.checked::marker { content: \"\\2612\"; }\n"
+"</style></head><body style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">[{</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  &quot;name&quot;: &quot;Daniel&quot;, </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  &quot;github_user&quot;: &quot;danifranco&quot;,</p>\n"
+"<p style=\" margin-top:0px; ma"
+                        "rgin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">}]</p></body></html>", None))
+        self.MODEL__BMZ__EXPORT__AUTHORS__INPUT.setProperty(u"text", QCoreApplication.translate("MainWindow", u"[{\"name\": \"Daniel\", \"github_user\": \"danifranco\"}]", None))
+        self.MODEL__BMZ__EXPORT__CITE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Citations", None))
+        self.MODEL__BMZ__EXPORT__DATASET_INFO__LABEL.setText(QCoreApplication.translate("MainWindow", u"Dataset info", None))
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__BN.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__BMZ__EXPORT__DATASET_INFO__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Information of the dataset used to train the model. It must be a list of a single dictionary with keys &quot;name&quot;, &quot;doi&quot; and &quot;image_modality&quot;. It can have also &quot;dataset_id&quot; key but it is optional and, if provided, must match a dataset in the BioImage Model Zoo. </span><span style=\" font-size:12pt; font-weight:600;\">The quotation marks are important see the following example</span><span style=\" font-size:12pt;\">: [{&quot;name&quot;: &quot;CartoCell&quot;, &quot;doi&quot;: &quot;10.1016/j.crmeth.2023.100597&quot;, &quot;image_modality&quot;: &quot;fluorescence microscopy&quot;, &quot;dataset_id&quot;: &quot;biapy/cartocell_cyst_segmentation&quot;}]</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__BMZ__EXPORT__DATASET_INFO__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to a .md extension file with the documentation of the model. Take other models in https://bioimage.io/ as reference. If it is not set the model documentation will be autogenerated. </span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__BMZ__EXPORT__LICENSE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">License of the model.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__BMZ__EXPORT__LICENSE__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Name of the model to create. It should be something meaningful. Take other models in https://bioimage.io as reference.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO.setText("")
+        self.MODEL_AUTOGENERATE_DOC_LABEL.setText(QCoreApplication.translate("MainWindow", u"Automatic doc", None))
+        self.MODEL__BMZ__EXPORT__MODEL_VERSION__LABEL.setText(QCoreApplication.translate("MainWindow", u"Model version", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL_AUTOGENERATE_DOC__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">To automatically generate the documentation file</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL_AUTOGENERATE_DOC__INFO.setText("")
+        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.1.0", None))
+        self.MODEL__BMZ__EXPORT__CITE__INPUT.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"hr { height: 1px; border-width: 0; }\n"
+"li.unchecked::marker { content: \"\\2610\"; }\n"
+"li.checked::marker { content: \"\\2612\"; }\n"
+"</style></head><body style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">[{</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">   &quot;text&quot;: &quot;training library&quot;, </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">   &quot;doi&quot;: &quot;10.1101/2024.02.03.576026&quot;,</p>\n"
+"<p style=\""
+                        " margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">}]</p></body></html>", None))
+        self.MODEL__BMZ__EXPORT__CITE__INPUT.setProperty(u"text", QCoreApplication.translate("MainWindow", u"[{\"text\": \"training library\", \"doi\": \"10.1101/2024.02.03.576026\"}]", None))
+        self.MODEL__BMZ__EXPORT__TAGS__INPUT.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"hr { height: 1px; border-width: 0; }\n"
+"li.unchecked::marker { content: \"\\2610\"; }\n"
+"li.checked::marker { content: \"\\2612\"; }\n"
+"</style></head><body style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">[</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  &quot;electron-microscopy&quot;, </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  &quot;mitochondria&quot;,</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:"
+                        "0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">]</p></body></html>", None))
+        self.MODEL__BMZ__EXPORT__TAGS__INPUT.setProperty(u"text", QCoreApplication.translate("MainWindow", u"[\"electron-microscopy\", \"mitochondria\"]", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__BMZ__EXPORT__AUTHORS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">List of authors of the model. Each item must be a dict containing &quot;name&quot; and &quot;githubuser&quot;. </span><span style=\" font-size:12pt; font-weight:600;\">The quotation marks are important see the following example: </span><span style=\" font-size:12pt;\">[{&quot;name&quot;: &quot;Daniel&quot;, &quot;github_user&quot;: &quot;danifranco&quot;}, {&quot;name&quot;: &quot;David&quot;, &quot;github_user&quot;: &quot;daviduser&quot;},]</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__BMZ__EXPORT__AUTHORS__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__BMZ__EXPORT__CITE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Citations to be included in the BMZ model. It must be a list of dictionaries with keys &quot;text&quot; and &quot;doi&quot;. </span><span style=\" font-size:12pt; font-weight:600;\">The quotation marks are important see the following example:</span><span style=\" font-size:12pt;\"> [{&quot;text&quot;: &quot;training library&quot;, &quot;doi&quot;: &quot;10.1101/2024.02.03.576026&quot;}, {&quot;text&quot;: &quot;architecture&quot;, &quot;doi&quot;: &quot;10.1109/LGRS.2018.2802944&quot;}, {&quot;text&quot;: &quot;data&quot;, &quot;doi&quot;: &quot;10.48550/arXiv.1812.06024&quot;}]</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__BMZ__EXPORT__CITE__INFO.setText("")
+        self.MODEL__BMZ__EXPORT__MODEL_NAME__LABEL.setText(QCoreApplication.translate("MainWindow", u"Model name", None))
+        self.MODEL__BMZ__EXPORT__DESCRIPTION__LABEL.setText(QCoreApplication.translate("MainWindow", u"Description", None))
+        self.MODEL__BMZ__EXPORT__DATASET_INFO__INPUT.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"hr { height: 1px; border-width: 0; }\n"
+"li.unchecked::marker { content: \"\\2610\"; }\n"
+"li.checked::marker { content: \"\\2612\"; }\n"
+"</style></head><body style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">[{</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  &quot;name&quot;: &quot;CartoCell&quot;, </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  &quot;doi&quot;: &quot;10.1016/j.crmeth.2023.100597&quot;, </p>\n"
+"<p style=\" marg"
+                        "in-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  &quot;image_modality&quot;: &quot;fluorescence microscopy&quot;, </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  &quot;dataset_id&quot;: &quot;biapy/cartocell_cyst_segmentation&quot;,</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">}]</p></body></html>", None))
+        self.MODEL__BMZ__EXPORT__DATASET_INFO__INPUT.setProperty(u"text", QCoreApplication.translate("MainWindow", u"[{\"name\": \"CartoCell\", \"doi\": \"10.1016/j.crmeth.2023.100597\", \"image_modality\": \"fluorescence microscopy\", \"dataset_id\": \"biapy/cartocell_cyst_segmentation\"}]", None))
+        self.MODEL_AUTOGENERATE_DOC_INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
+        self.MODEL_AUTOGENERATE_DOC_INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
+
+#if QT_CONFIG(tooltip)
+        self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Description of the model. It should be something meaningful. Take other models in https://bioimage.io/# as reference. E.g. &quot;Mitochondria segmentation for electron microscopy&quot;</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Version of the model. E.g. &quot;0.1.0&quot;</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.MODEL__BMZ__EXPORT__TAGS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">List of tags. Here the type of dataset and the target object should be provided. BiaPy automatically sets the following tags: </span></p><p><span style=\" font-size:12pt;\">* &quot;biapy&quot;: to represent that the model was created with BiaPy.</span></p><p><span style=\" font-size:12pt;\">* &quot;pytorch&quot;: to represent that you are using Pytorch</span></p><p><span style=\" font-size:12pt;\">* &quot;2d&quot; or &quot;3d&quot;: depending on the image dimensions one or the other is selected.</span></p><p><span style=\" font-size:12pt;\">* workflow tag: depending on the workflow the tag is set. E.g. &quot;semantic-segmentation&quot;</span></p><p><br/></p><p><span style=\" font-size:12pt; font-weight:600;\">The quotation marks are important see the following example:</span><span style=\" font-size:12pt;\"> [&quot;electron-microscopy&quot;, &quot;mitochondria&quot;]</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.MODEL__BMZ__EXPORT__TAGS__INFO.setText("")
+        self.MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL.setText(QCoreApplication.translate("MainWindow", u"Documentation", None))
+        self.MODEL__BMZ__EXPORT__LICENSE__INPUT.setText(QCoreApplication.translate("MainWindow", u"CC-BY-4.0", None))
+        self.MODEL__BMZ__EXPORT__TAGS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Tags", None))
+        self.MODEL__BMZ__EXPORT__AUTHORS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Authors", None))
+        self.MODEL__BMZ__EXPORT__ENABLE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Export model to BioImage Model Zoo (BMZ) format?", None))
+#if QT_CONFIG(tooltip)
+        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to activate or not the exportation of the used model to the BMZ format after train and/or test</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(statustip)
+        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setStatusTip("")
+#endif // QT_CONFIG(statustip)
+        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setText("")
+        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
+        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
+
+        self.train_disable_checkpoint_label.setText(QCoreApplication.translate("MainWindow", u"Checkpoint configuration", None))
+        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_3), QCoreApplication.translate("MainWindow", u"General options", None))
 #if QT_CONFIG(tooltip)
         self.label_25.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">IDs of the GPU to run the job in. If you want to use more than one GPU add them sepated by commas. E.g. &quot;0,1,2,3&quot; </span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -14920,162 +15094,7 @@ class Ui_MainWindow(object):
         self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Decide which checkpoint to load from job's dir if PATHS.CHECKPOINT_FILE is empty. Options: 'best_on_val' or 'last_on_train'</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setText("")
-        self.MODEL__BMZ__EXPORT__ENABLE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Export model to BioImage Model Zoo (BMZ) format?", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to activate or not the exportation of the used model to the BMZ format after train and/or test</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-#if QT_CONFIG(statustip)
-        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setStatusTip("")
-#endif // QT_CONFIG(statustip)
-        self.MODEL__BMZ__EXPORT__ENABLE__INFO.setText("")
-        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.MODEL__BMZ__EXPORT__ENABLE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-        self.train_disable_checkpoint_label.setText(QCoreApplication.translate("MainWindow", u"Checkpoint configuration", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__SOURCE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Source of the pretrained model</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__SOURCE__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.PATHS__CHECKPOINT_FILE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to the model's checkpoint that will be loaded. Leave it blank to let BiaPy find it. If the output folder and the job name match, BiaPy will locate the model's weights within the 'checkpoints' directory</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.PATHS__CHECKPOINT_FILE__INFO.setText("")
-        self.MODEL__BMZ__SOURCE_MODEL_ID__BN.setText(QCoreApplication.translate("MainWindow", u"Check models", None))
-        self.checkpoint_file_path_browse_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
-        self.MODEL__SOURCE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"I have a model trained with BiaPy", None))
-        self.MODEL__SOURCE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"I want to check other online sources", None))
-
-        self.LOAD_PRETRAINED_MODEL__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"No", None))
-        self.LOAD_PRETRAINED_MODEL__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"Yes", None))
-
-#if QT_CONFIG(tooltip)
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Model identifier</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__BMZ__SOURCE_MODEL_ID__INFO.setText("")
-        self.MODEL__BMZ__SOURCE_MODEL_ID__LABEL.setText(QCoreApplication.translate("MainWindow", u"Model ID", None))
-#if QT_CONFIG(tooltip)
-        self.LOAD_PRETRAINED_MODEL__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">This option determines whether to use a pretrained model instead of building one from scratch. If you select &quot;Yes,&quot; additional configuration options will appear, and options related to model selection will be disabled, as a pretrained model will be used.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.LOAD_PRETRAINED_MODEL__INFO.setText("")
-        self.LOAD_PRETRAINED_MODEL__LABEL.setText(QCoreApplication.translate("MainWindow", u"Load pretrained model", None))
-#if QT_CONFIG(tooltip)
-        self.checkpoint_file_path_browse_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.checkpoint_file_path_browse_label.setText(QCoreApplication.translate("MainWindow", u"Model file", None))
-        self.PATHS__CHECKPOINT_FILE__INPUT.setText(QCoreApplication.translate("MainWindow", u"model_weights.pth", None))
-        self.MODEL__SOURCE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Source of the model", None))
-        self.MODEL__BMZ__EXPORT__LABEL.setText(QCoreApplication.translate("MainWindow", u"Additional fields required for the BioImage Model Zoo export process:", None))
-        self.MODEL__BMZ__EXPORT__LICENSE__LABEL.setText(QCoreApplication.translate("MainWindow", u"License", None))
-        self.MODEL__BMZ__EXPORT__AUTHORS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[{\"name\": \"Daniel\", \"github_user\": \"danifranco\"}]", None))
-        self.MODEL__BMZ__EXPORT__CITE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Citations", None))
-        self.MODEL__BMZ__EXPORT__DATASET_INFO__LABEL.setText(QCoreApplication.translate("MainWindow", u"Dataset info", None))
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__BN.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__BMZ__EXPORT__DATASET_INFO__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Information of the dataset used to train the model. It must be a list of a single dictionary with keys &quot;name&quot;, &quot;doi&quot; and &quot;image_modality&quot;. It can have also &quot;dataset_id&quot; key but it is optional and, if provided, must match a dataset in the BioImage Model Zoo. </span><span style=\" font-size:12pt; font-weight:600;\">The quotation marks are important see the following example</span><span style=\" font-size:12pt;\">: [{&quot;name&quot;: &quot;CartoCell&quot;, &quot;doi&quot;: &quot;10.1016/j.crmeth.2023.100597&quot;, &quot;image_modality&quot;: &quot;fluorescence microscopy&quot;, &quot;dataset_id&quot;: &quot;biapy/cartocell_cyst_segmentation&quot;}]</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__BMZ__EXPORT__DATASET_INFO__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to a .md extension file with the documentation of the model. Take other models in https://bioimage.io/ as reference. If it is not set the model documentation will be autogenerated. </span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.MODEL__BMZ__EXPORT__LICENSE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">License of the model.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__BMZ__EXPORT__LICENSE__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Name of the model to create. It should be something meaningful. Take other models in https://bioimage.io as reference.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__BMZ__EXPORT__MODEL_NAME__INFO.setText("")
-        self.MODEL_AUTOGENERATE_DOC_LABEL.setText(QCoreApplication.translate("MainWindow", u"Automatic doc generation", None))
-        self.MODEL__BMZ__EXPORT__MODEL_VERSION__LABEL.setText(QCoreApplication.translate("MainWindow", u"Model version", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL_AUTOGENERATE_DOC__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">To automatically generate the documentation file</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL_AUTOGENERATE_DOC__INFO.setText("")
-        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INPUT.setText(QCoreApplication.translate("MainWindow", u"0.1.0", None))
-        self.MODEL__BMZ__EXPORT__CITE__INPUT.setText(QCoreApplication.translate("MainWindow", u"[{\"text\": \"training library\", \"doi\": \"10.1101/2024.02.03.576026\"}]", None))
-        self.MODEL__BMZ__EXPORT__TAGS__INPUT.setText(QCoreApplication.translate("MainWindow", u"[\"electron-microscopy\", \"mitochondria\"]", None))
-#if QT_CONFIG(tooltip)
-        self.MODEL__BMZ__EXPORT__AUTHORS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">List of authors of the model. Each item must be a dict containing &quot;name&quot; and &quot;githubuser&quot;. </span><span style=\" font-size:12pt; font-weight:600;\">The quotation marks are important see the following example: </span><span style=\" font-size:12pt;\">[{&quot;name&quot;: &quot;Daniel&quot;, &quot;github_user&quot;: &quot;danifranco&quot;}, {&quot;name&quot;: &quot;David&quot;, &quot;github_user&quot;: &quot;daviduser&quot;},]</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__BMZ__EXPORT__AUTHORS__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.MODEL__BMZ__EXPORT__CITE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Citations to be included in the BMZ model. It must be a list of dictionaries with keys &quot;text&quot; and &quot;doi&quot;. </span><span style=\" font-size:12pt; font-weight:600;\">The quotation marks are important see the following example:</span><span style=\" font-size:12pt;\"> [{&quot;text&quot;: &quot;training library&quot;, &quot;doi&quot;: &quot;10.1101/2024.02.03.576026&quot;}, {&quot;text&quot;: &quot;architecture&quot;, &quot;doi&quot;: &quot;10.1109/LGRS.2018.2802944&quot;}, {&quot;text&quot;: &quot;data&quot;, &quot;doi&quot;: &quot;10.48550/arXiv.1812.06024&quot;}]</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__BMZ__EXPORT__CITE__INFO.setText("")
-        self.MODEL__BMZ__EXPORT__MODEL_NAME__LABEL.setText(QCoreApplication.translate("MainWindow", u"Model name", None))
-        self.MODEL__BMZ__EXPORT__DESCRIPTION__LABEL.setText(QCoreApplication.translate("MainWindow", u"Description", None))
-        self.MODEL__BMZ__EXPORT__DATASET_INFO__INPUT.setText(QCoreApplication.translate("MainWindow", u"[{\"name\": \"CartoCell\", \"doi\": \"10.1016/j.crmeth.2023.100597\", \"image_modality\": \"fluorescence microscopy\", \"dataset_id\": \"biapy/cartocell_cyst_segmentation\"}]", None))
-        self.MODEL_AUTOGENERATE_DOC_INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
-        self.MODEL_AUTOGENERATE_DOC_INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
-
-#if QT_CONFIG(tooltip)
-        self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Description of the model. It should be something meaningful. Take other models in https://bioimage.io/# as reference. E.g. &quot;Mitochondria segmentation for electron microscopy&quot;</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Version of the model. E.g. &quot;0.1.0&quot;</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__BMZ__EXPORT__MODEL_VERSION__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.MODEL__BMZ__EXPORT__TAGS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">List of tags. Here the type of dataset and the target object should be provided. BiaPy automatically sets the following tags: </span></p><p><span style=\" font-size:12pt;\">* &quot;biapy&quot;: to represent that the model was created with BiaPy.</span></p><p><span style=\" font-size:12pt;\">* &quot;pytorch&quot;: to represent that you are using Pytorch</span></p><p><span style=\" font-size:12pt;\">* &quot;2d&quot; or &quot;3d&quot;: depending on the image dimensions one or the other is selected.</span></p><p><span style=\" font-size:12pt;\">* workflow tag: depending on the workflow the tag is set. E.g. &quot;semantic-segmentation&quot;</span></p><p><br/></p><p><span style=\" font-size:12pt; font-weight:600;\">The quotation marks are important see the following example:</span><span style=\" font-size:12pt;\"> [&quot;electron-microscopy&quot;, &quot;mitochondria&quot;]</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.MODEL__BMZ__EXPORT__TAGS__INFO.setText("")
-        self.MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL.setText(QCoreApplication.translate("MainWindow", u"Documentation", None))
-        self.MODEL__BMZ__EXPORT__LICENSE__INPUT.setText(QCoreApplication.translate("MainWindow", u"CC-BY-4.0", None))
-        self.MODEL__BMZ__EXPORT__TAGS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Tags", None))
-        self.MODEL__BMZ__EXPORT__AUTHORS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Authors", None))
-        self.goptions_advanced_label.setText(QCoreApplication.translate("MainWindow", u"Advanced options", None))
-        self.goptions_advanced_bn.setText("")
-#if QT_CONFIG(tooltip)
-        self.goptions_yaml_name_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">YAML file name</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.goptions_yaml_name_info.setText("")
-#if QT_CONFIG(tooltip)
-        self.PROBLEM__NDIM__LABEL.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.PROBLEM__NDIM__LABEL.setText(QCoreApplication.translate("MainWindow", u"Image dimensions", None))
-#if QT_CONFIG(tooltip)
-        self.goptions_browse_yaml_path_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Path to store the YAML file</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.goptions_browse_yaml_path_info.setText("")
-        self.PROBLEM__NDIM__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"2D", None))
-        self.PROBLEM__NDIM__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"3D", None))
-
-#if QT_CONFIG(tooltip)
-        self.goptions_browse_yaml_path_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.goptions_browse_yaml_path_label.setText(QCoreApplication.translate("MainWindow", u"Configuration file directory", None))
-#if QT_CONFIG(tooltip)
-        self.goptions_yaml_name_label.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.goptions_yaml_name_label.setText(QCoreApplication.translate("MainWindow", u"Configuration file name", None))
-#if QT_CONFIG(statustip)
-        self.goptions_browse_yaml_path_input.setStatusTip("")
-#endif // QT_CONFIG(statustip)
-#if QT_CONFIG(tooltip)
-        self.PROBLEM__NDIM__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Number of dimensions of the input images</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-#if QT_CONFIG(statustip)
-        self.PROBLEM__NDIM__INFO.setStatusTip("")
-#endif // QT_CONFIG(statustip)
-        self.PROBLEM__NDIM__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.goptions_yaml_name_input.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.goptions_yaml_name_input.setText("")
-        self.goptions_browse_yaml_path_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__PATCH_SIZE__INPUT.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-#if QT_CONFIG(tooltip)
-        self.label_11.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_11.setText(QCoreApplication.translate("MainWindow", u"Patch size", None))
-#if QT_CONFIG(tooltip)
-        self.DATA__PATCH_SIZE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Input the size of the patches use to train your model (y,x,channels) order for 2D and (z,y,x,channels) for 3D. Parentheses are need. The value should be smaller or equal to the shape of the image. E. g. </span><span style=\" font-size:12pt; font-weight:600;\">(40,128,128,1)</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.DATA__PATCH_SIZE__INFO.setText("")
+        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_4), QCoreApplication.translate("MainWindow", u"Advanced options", None))
 #if QT_CONFIG(tooltip)
         self.label_49.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to enable the training phase or not</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
