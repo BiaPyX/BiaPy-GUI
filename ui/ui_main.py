@@ -17211,7 +17211,7 @@ class Ui_MainWindow(object):
 #if QT_CONFIG(tooltip)
         self.label_81.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to enable the training phase or not</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.label_81.setText(QCoreApplication.translate("MainWindow", u"Enable test phase", None))
+        self.label_81.setText(QCoreApplication.translate("MainWindow", u"Enable test/inference phase", None))
         self.TEST__ENABLE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"Yes", None))
         self.TEST__ENABLE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"No", None))
 
