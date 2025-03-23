@@ -1288,7 +1288,7 @@ QPushButton:pressed {
                 </font>
                </property>
                <property name="currentIndex">
-                <number>2</number>
+                <number>3</number>
                </property>
                <widget class="QWidget" name="page_home">
                 <layout class="QVBoxLayout" name="verticalLayout_13">
@@ -39687,7 +39687,7 @@ QPushButton:pressed {
                      <number>9</number>
                     </property>
                     <property name="verticalSpacing">
-                     <number>20</number>
+                     <number>15</number>
                     </property>
                     <item row="3" column="1">
                      <widget class="QFrame" name="run_workflow_frame">
@@ -39735,7 +39735,7 @@ QPushButton:pressed {
                            <number>0</number>
                           </property>
                           <property name="bottomMargin">
-                           <number>0</number>
+                           <number>5</number>
                           </property>
                           <item alignment="Qt::AlignmentFlag::AlignHCenter">
                            <widget class="QLabel" name="label_9">
@@ -39798,7 +39798,7 @@ QPushButton:pressed {
                            <number>0</number>
                           </property>
                           <property name="bottomMargin">
-                           <number>0</number>
+                           <number>5</number>
                           </property>
                           <item alignment="Qt::AlignmentFlag::AlignHCenter">
                            <widget class="QLabel" name="container_version_label">
@@ -40291,8 +40291,8 @@ QPushButton:pressed {
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>46</width>
-                               <height>109</height>
+                               <width>894</width>
+                               <height>157</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_32">
