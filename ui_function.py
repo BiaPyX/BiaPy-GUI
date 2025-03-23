@@ -1216,6 +1216,9 @@ class UIFunction:
         """
         Initialize test page.
         """
+        self.main_window.ui.use_val_as_test.setVisible(False)
+        self.main_window.ui.DATA__TEST__USE_VAL_AS_TEST__INFO.setVisible(False)
+        self.main_window.ui.DATA__TEST__USE_VAL_AS_TEST__INPUT.setVisible(False)
         self.main_window.ui.test_data_gt_label.setVisible(False)
         self.main_window.ui.DATA__TEST__GT_PATH__INPUT.setVisible(False)
         self.main_window.ui.DATA__TEST__GT_PATH__INFO.setVisible(False)

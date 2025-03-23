@@ -529,7 +529,14 @@ class MainWindow(QMainWindow):
                     "validation_padding_label",
                     "DATA__VAL__PADDING__INFO",
                     "DATA__VAL__PADDING__INPUT",
+                    "use_val_as_test",
+                    "DATA__TEST__USE_VAL_AS_TEST__INFO",
+                    "DATA__TEST__USE_VAL_AS_TEST__INPUT",
                 ],
+                widgets_to_set_cond=[
+                    (["DATA__TEST__USE_VAL_AS_TEST__INPUT", "No"], ["Extract from train (split training)","Not extracted from train (path needed)"])
+                ],
+                updated_widget="DATA__VAL__TYPE__INPUT",
             )
         )
         self.ui.train_advanced_bn.clicked.connect(
