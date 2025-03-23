@@ -1269,9 +1269,6 @@ class MainWindow(QMainWindow):
                 ],
             )
         )
-        self.ui.test_advanced_bn.clicked.connect(
-            lambda: expand_hide_advanced_options(self, "test_advanced_bn", "test_advanced_options_frame")
-        )
         self.ui.TEST__BY_CHUNKS__ENABLE__INPUT.currentIndexChanged.connect(
             lambda: self.condition_db.combobox_hide_visible_action(
                 self, ["process_by_chunks_label", "process_by_chunks_frame"]
@@ -1298,11 +1295,6 @@ class MainWindow(QMainWindow):
                     "TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INPUT",
                     "TEST__BY_CHUNKS__WORKFLOW_PROCESS__TYPE__INFO",
                 ],
-            )
-        )
-        self.ui.TRAIN__ENABLE__INPUT.currentIndexChanged.connect(
-            lambda: self.condition_db.combobox_hide_visible_action(
-                self, ["DATA__PATCH_SIZE__TEST__LABEL", "DATA__PATCH_SIZE__TEST__INFO", "DATA__PATCH_SIZE__TEST__INPUT"]
             )
         )
 

@@ -103,9 +103,6 @@ class UIFunction:
             self.main_window.ui.train_advanced_bn.setIcon(
                 QPixmap(resource_path(os.path.join("images", "bn_images", "down_arrow.svg")))
             )
-            self.main_window.ui.test_advanced_bn.setIcon(
-                QPixmap(resource_path(os.path.join("images", "bn_images", "down_arrow.svg")))
-            )
 
             self.init_main_page()
             oninit_checks(self.main_window)
@@ -570,13 +567,10 @@ class UIFunction:
             if get_text(self.main_window.ui.DATA__TEST__RESOLUTION__INPUT) == "":
                 if self.main_window.cfg.settings["selected_workflow"] == 3:  # Denoising
                     self.main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(64,64,1)")
-                    self.main_window.ui.DATA__PATCH_SIZE__TEST__INPUT.setText("(64,64,1)")
                 elif self.main_window.cfg.settings["selected_workflow"] == 4:  # SR
                     self.main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(48,48,1)")
-                    self.main_window.ui.DATA__PATCH_SIZE__TEST__INPUT.setText("(48,48,1)")
                 else:
                     self.main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(256,256,1)")
-                    self.main_window.ui.DATA__PATCH_SIZE__TEST__INPUT.setText("(256,256,1)")
                 self.main_window.ui.DATA__TRAIN__RESOLUTION__INPUT.setText("(1,1)")
                 self.main_window.ui.DATA__TRAIN__OVERLAP__INPUT.setText("(0,0)")
                 self.main_window.ui.DATA__TRAIN__PADDING__INPUT.setText("(0,0)")
@@ -591,10 +585,7 @@ class UIFunction:
                 self.main_window.ui.MODEL__FEATURE_MAPS__INPUT.setText("[16, 32, 64, 128, 256]")
                 self.main_window.ui.MODEL__DROPOUT_VALUES__INPUT.setText("[0., 0., 0., 0., 0.]")
             else:
-                if get_text(self.main_window.ui.TRAIN__ENABLE__INPUT) == "Yes":
-                    aux = ast.literal_eval(get_text(self.main_window.ui.DATA__PATCH_SIZE__INPUT))
-                else:
-                    aux = ast.literal_eval(get_text(self.main_window.ui.DATA__PATCH_SIZE__TEST__INPUT))
+                aux = ast.literal_eval(get_text(self.main_window.ui.DATA__PATCH_SIZE__INPUT))
                 if isinstance(aux, tuple) and (
                     aux == (40, 128, 128, 1)
                     or aux == (6, 128, 128, 1)
@@ -605,13 +596,10 @@ class UIFunction:
                 ):
                     if self.main_window.cfg.settings["selected_workflow"] == 3:  # Denoising
                         self.main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(64,64,1)")
-                        self.main_window.ui.DATA__PATCH_SIZE__TEST__INPUT.setText("(64,64,1)")
                     elif self.main_window.cfg.settings["selected_workflow"] == 4:  # SR
                         self.main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(48,48,1)")
-                        self.main_window.ui.DATA__PATCH_SIZE__TEST__INPUT.setText("(48,48,1)")
                     else:
                         self.main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(256,256,1)")
-                        self.main_window.ui.DATA__PATCH_SIZE__TEST__INPUT.setText("(256,256,1)")
                 aux = ast.literal_eval(get_text(self.main_window.ui.DATA__TRAIN__RESOLUTION__INPUT))
                 if isinstance(aux, tuple) and aux == (1, 1, 1):
                     self.main_window.ui.DATA__TRAIN__RESOLUTION__INPUT.setText("(1,1)")
@@ -754,10 +742,7 @@ class UIFunction:
         # 3D
         else:
             # Only change values the first time and if they were not modified
-            if get_text(self.main_window.ui.TRAIN__ENABLE__INPUT) == "Yes":
-                aux = ast.literal_eval(get_text(self.main_window.ui.DATA__PATCH_SIZE__INPUT))
-            else:
-                aux = ast.literal_eval(get_text(self.main_window.ui.DATA__PATCH_SIZE__TEST__INPUT))
+            aux = ast.literal_eval(get_text(self.main_window.ui.DATA__PATCH_SIZE__INPUT))
             if isinstance(aux, tuple) and (
                 aux == (64, 64, 1)
                 or aux == (48, 48, 1)
@@ -768,13 +753,10 @@ class UIFunction:
             ):
                 if self.main_window.cfg.settings["selected_workflow"] == 3:  # Denoising
                     self.main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(12,64,64,1)")
-                    self.main_window.ui.DATA__PATCH_SIZE__TEST__INPUT.setText("(12,64,64,1)")
                 elif self.main_window.cfg.settings["selected_workflow"] == 4:  # SR
                     self.main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(6,128,128,1)")
-                    self.main_window.ui.DATA__PATCH_SIZE__TEST__INPUT.setText("(6,128,128,1)")
                 else:
                     self.main_window.ui.DATA__PATCH_SIZE__INPUT.setText("(40,128,128,1)")
-                    self.main_window.ui.DATA__PATCH_SIZE__TEST__INPUT.setText("(40,128,128,1)")
             aux = ast.literal_eval(get_text(self.main_window.ui.DATA__TRAIN__RESOLUTION__INPUT))
             if isinstance(aux, tuple) and aux == (1, 1):
                 self.main_window.ui.DATA__TRAIN__RESOLUTION__INPUT.setText("(1,1,1)")
@@ -1371,7 +1353,6 @@ class UIFunction:
         self.main_window.ui.det_data_watetshed_check_label.setVisible(False)
         self.main_window.ui.PROBLEM__DETECTION__DATA_CHECK_MW__INPUT.setVisible(False)
         self.main_window.ui.PROBLEM__DETECTION__DATA_CHECK_MW__INFO.setVisible(False)
-        self.main_window.ui.test_advanced_options_frame.setVisible(False)
         self.main_window.ui.process_by_chunks_label.setVisible(False)
         self.main_window.ui.process_by_chunks_frame.setVisible(False)
         self.main_window.ui.DATA__TEST__INPUT_ZARR_MULTIPLE_DATA_RAW_PATH__LABEL.setVisible(False)
