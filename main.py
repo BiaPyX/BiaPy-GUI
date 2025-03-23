@@ -1647,7 +1647,7 @@ class MainWindow(QMainWindow):
         self.ui.output_folder_input.textChanged.connect(
             lambda: mark_syntax_error(self, "output_folder_input", ["empty"])
         )
-        self.ui.check_yaml_file_bn.clicked.connect(lambda: load_yaml_config(self, advise_user=True))
+        self.ui.check_yaml_file_bn.clicked.connect(lambda: load_yaml_config(self))
         self.ui.run_biapy_docker_bn.clicked.connect(lambda: self.UIFunction.run_biapy())
 
         self.yes_no = None

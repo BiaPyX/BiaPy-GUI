@@ -2215,7 +2215,7 @@ class Ui_MainWindow(object):
         self.goptions_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 950, 1341))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 950, 1349))
         self.scrollAreaWidgetContents.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
         self.gridLayout = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout.setObjectName(u"gridLayout")
@@ -2231,7 +2231,7 @@ class Ui_MainWindow(object):
         self.gridLayout_86.setObjectName(u"gridLayout_86")
         self.gridLayout_86.setHorizontalSpacing(15)
         self.gridLayout_86.setVerticalSpacing(0)
-        self.gridLayout_86.setContentsMargins(0, 0, 0, 0)
+        self.gridLayout_86.setContentsMargins(0, 2, 0, 2)
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__LABEL = QLabel(self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME)
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__LABEL")
         self.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__LABEL.setMinimumSize(QSize(430, 0))
@@ -2300,7 +2300,7 @@ class Ui_MainWindow(object):
         self.goptions_advanced_options_scrollarea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 852, 2344))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, -18, 852, 2172))
         self.verticalLayout_63 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_63.setSpacing(9)
         self.verticalLayout_63.setObjectName(u"verticalLayout_63")
@@ -3658,101 +3658,6 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_63.addWidget(self.checkpoint_loading_opt_frame)
 
-        self.label = QLabel(self.scrollAreaWidgetContents_2)
-        self.label.setObjectName(u"label")
-        self.label.setFont(font1)
-
-        self.verticalLayout_63.addWidget(self.label)
-
-        self.frame_2 = QFrame(self.scrollAreaWidgetContents_2)
-        self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setMinimumSize(QSize(0, 0))
-        self.frame_2.setFont(font1)
-        self.frame_2.setFrameShape(QFrame.Shape.Box)
-        self.frame_2.setFrameShadow(QFrame.Shadow.Raised)
-        self.gridLayout_5 = QGridLayout(self.frame_2)
-        self.gridLayout_5.setObjectName(u"gridLayout_5")
-        self.SYSTEM__NUM_CPUS__INPUT = QComboBox(self.frame_2)
-        self.SYSTEM__NUM_CPUS__INPUT.setObjectName(u"SYSTEM__NUM_CPUS__INPUT")
-        self.SYSTEM__NUM_CPUS__INPUT.setMinimumSize(QSize(200, 30))
-        self.SYSTEM__NUM_CPUS__INPUT.setMaximumSize(QSize(200, 30))
-        self.SYSTEM__NUM_CPUS__INPUT.setFont(font1)
-
-        self.gridLayout_5.addWidget(self.SYSTEM__NUM_CPUS__INPUT, 0, 2, 1, 1)
-
-        self.SYSTEM__NUM_CPUS__LABEL = QLabel(self.frame_2)
-        self.SYSTEM__NUM_CPUS__LABEL.setObjectName(u"SYSTEM__NUM_CPUS__LABEL")
-        self.SYSTEM__NUM_CPUS__LABEL.setFont(font1)
-
-        self.gridLayout_5.addWidget(self.SYSTEM__NUM_CPUS__LABEL, 0, 0, 1, 1)
-
-        self.SYSTEM__NUM_WORKERS__INFO = QPushButton(self.frame_2)
-        self.SYSTEM__NUM_WORKERS__INFO.setObjectName(u"SYSTEM__NUM_WORKERS__INFO")
-        self.SYSTEM__NUM_WORKERS__INFO.setMinimumSize(QSize(30, 30))
-        self.SYSTEM__NUM_WORKERS__INFO.setMaximumSize(QSize(30, 30))
-        self.SYSTEM__NUM_WORKERS__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_5.addWidget(self.SYSTEM__NUM_WORKERS__INFO, 1, 1, 1, 1)
-
-        self.SYSTEM__NUM_CPUS__INFO = QPushButton(self.frame_2)
-        self.SYSTEM__NUM_CPUS__INFO.setObjectName(u"SYSTEM__NUM_CPUS__INFO")
-        self.SYSTEM__NUM_CPUS__INFO.setMinimumSize(QSize(30, 30))
-        self.SYSTEM__NUM_CPUS__INFO.setMaximumSize(QSize(30, 30))
-        self.SYSTEM__NUM_CPUS__INFO.setFont(font1)
-        self.SYSTEM__NUM_CPUS__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_5.addWidget(self.SYSTEM__NUM_CPUS__INFO, 0, 1, 1, 1)
-
-        self.SYSTEM__NUM_WORKERS__INPUT = QComboBox(self.frame_2)
-        self.SYSTEM__NUM_WORKERS__INPUT.setObjectName(u"SYSTEM__NUM_WORKERS__INPUT")
-        self.SYSTEM__NUM_WORKERS__INPUT.setMinimumSize(QSize(200, 30))
-        self.SYSTEM__NUM_WORKERS__INPUT.setMaximumSize(QSize(200, 30))
-        self.SYSTEM__NUM_WORKERS__INPUT.setFont(font1)
-
-        self.gridLayout_5.addWidget(self.SYSTEM__NUM_WORKERS__INPUT, 1, 2, 1, 1)
-
-        self.label_8 = QLabel(self.frame_2)
-        self.label_8.setObjectName(u"label_8")
-        self.label_8.setMaximumSize(QSize(200, 35))
-        self.label_8.setFont(font1)
-
-        self.gridLayout_5.addWidget(self.label_8, 1, 0, 1, 1)
-
-        self.label_2 = QLabel(self.frame_2)
-        self.label_2.setObjectName(u"label_2")
-        self.label_2.setFont(font1)
-
-        self.gridLayout_5.addWidget(self.label_2, 3, 0, 1, 1)
-
-        self.SYSTEM__SEED__INPUT = QLineEdit(self.frame_2)
-        self.SYSTEM__SEED__INPUT.setObjectName(u"SYSTEM__SEED__INPUT")
-        self.SYSTEM__SEED__INPUT.setMinimumSize(QSize(200, 30))
-        self.SYSTEM__SEED__INPUT.setMaximumSize(QSize(200, 30))
-        self.SYSTEM__SEED__INPUT.setFont(font1)
-
-        self.gridLayout_5.addWidget(self.SYSTEM__SEED__INPUT, 3, 2, 1, 1)
-
-        self.SYSTEM__SEED__INFO = QPushButton(self.frame_2)
-        self.SYSTEM__SEED__INFO.setObjectName(u"SYSTEM__SEED__INFO")
-        self.SYSTEM__SEED__INFO.setMinimumSize(QSize(30, 30))
-        self.SYSTEM__SEED__INFO.setMaximumSize(QSize(30, 30))
-        self.SYSTEM__SEED__INFO.setStyleSheet(u"QPushButton {\n"
-"  border: none;\n"
-"}")
-
-        self.gridLayout_5.addWidget(self.SYSTEM__SEED__INFO, 3, 1, 1, 1)
-
-        self.horizontalSpacer_2 = QSpacerItem(568, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_5.addItem(self.horizontalSpacer_2, 1, 3, 1, 1)
-
-
-        self.verticalLayout_63.addWidget(self.frame_2)
-
         self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_63.addItem(self.verticalSpacer_4)
@@ -3773,7 +3678,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_26 = QHBoxLayout(self.MODEL__BMZ__EXPORT__ENABLE__FRAME)
         self.horizontalLayout_26.setSpacing(15)
         self.horizontalLayout_26.setObjectName(u"horizontalLayout_26")
-        self.horizontalLayout_26.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_26.setContentsMargins(0, 2, 0, 2)
         self.MODEL__BMZ__EXPORT__ENABLE__LABEL = QLabel(self.MODEL__BMZ__EXPORT__ENABLE__FRAME)
         self.MODEL__BMZ__EXPORT__ENABLE__LABEL.setObjectName(u"MODEL__BMZ__EXPORT__ENABLE__LABEL")
         self.MODEL__BMZ__EXPORT__ENABLE__LABEL.setFont(font1)
@@ -4512,7 +4417,7 @@ class Ui_MainWindow(object):
         self.train_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 949, 6662))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 949, 6670))
         self.scrollAreaWidgetContents_3.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
         self.gridLayout_3 = QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
@@ -8049,7 +7954,7 @@ class Ui_MainWindow(object):
         self.gridLayout_69 = QGridLayout(self.frame_29)
         self.gridLayout_69.setSpacing(9)
         self.gridLayout_69.setObjectName(u"gridLayout_69")
-        self.gridLayout_69.setContentsMargins(0, 0, 0, 0)
+        self.gridLayout_69.setContentsMargins(0, 2, 0, 2)
         self.AUGMENTOR__ENABLE__LABEL = QLabel(self.frame_29)
         self.AUGMENTOR__ENABLE__LABEL.setObjectName(u"AUGMENTOR__ENABLE__LABEL")
         self.AUGMENTOR__ENABLE__LABEL.setFont(font1)
@@ -8880,7 +8785,7 @@ class Ui_MainWindow(object):
         self.frame_61.setFrameShadow(QFrame.Shadow.Raised)
         self.gridLayout_74 = QGridLayout(self.frame_61)
         self.gridLayout_74.setObjectName(u"gridLayout_74")
-        self.gridLayout_74.setContentsMargins(0, 0, 0, 0)
+        self.gridLayout_74.setContentsMargins(0, 2, 0, 2)
         self.horizontalSpacer_74 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout_74.addItem(self.horizontalSpacer_74, 0, 3, 1, 1)
@@ -8970,7 +8875,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_10.setContentsMargins(0, 0, 0, 0)
         self.train_advanced_label = QLabel(self.frame_13)
         self.train_advanced_label.setObjectName(u"train_advanced_label")
-        self.train_advanced_label.setMaximumSize(QSize(150, 35))
+        self.train_advanced_label.setMaximumSize(QSize(16777215, 35))
         self.train_advanced_label.setFont(font1)
 
         self.horizontalLayout_10.addWidget(self.train_advanced_label)
@@ -9007,7 +8912,7 @@ class Ui_MainWindow(object):
 
         self.train_gt_label = QLabel(self.frame_3)
         self.train_gt_label.setObjectName(u"train_gt_label")
-        self.train_gt_label.setMaximumSize(QSize(16777215, 35))
+        self.train_gt_label.setMaximumSize(QSize(16777215, 16777215))
         self.train_gt_label.setFont(font1)
 
         self.gridLayout_6.addWidget(self.train_gt_label, 1, 1, 1, 1)
@@ -9040,7 +8945,7 @@ class Ui_MainWindow(object):
 
         self.train_data_label = QLabel(self.frame_3)
         self.train_data_label.setObjectName(u"train_data_label")
-        self.train_data_label.setMaximumSize(QSize(200, 35))
+        self.train_data_label.setMaximumSize(QSize(16777215, 16777215))
         self.train_data_label.setFont(font1)
 
         self.gridLayout_6.addWidget(self.train_data_label, 0, 1, 1, 1)
@@ -9383,7 +9288,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 921, 202))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 922, 342))
         self.gridLayout_17 = QGridLayout(self.scrollAreaWidgetContents_4)
         self.gridLayout_17.setObjectName(u"gridLayout_17")
         self.label_59 = QLabel(self.scrollAreaWidgetContents_4)
@@ -10324,7 +10229,7 @@ class Ui_MainWindow(object):
         self.test_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 940, 2617))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 940, 2621))
         self.gridLayout_37 = QGridLayout(self.scrollAreaWidgetContents_5)
         self.gridLayout_37.setObjectName(u"gridLayout_37")
         self.test_advanced_options_frame = QFrame(self.scrollAreaWidgetContents_5)
@@ -10437,7 +10342,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_34 = QHBoxLayout(self.DATA__PREPROCESS__TEST__FRAME)
         self.horizontalLayout_34.setSpacing(9)
         self.horizontalLayout_34.setObjectName(u"horizontalLayout_34")
-        self.horizontalLayout_34.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_34.setContentsMargins(0, 2, 0, 2)
         self.DATA__PREPROCESS__TEST__LABEL = QLabel(self.DATA__PREPROCESS__TEST__FRAME)
         self.DATA__PREPROCESS__TEST__LABEL.setObjectName(u"DATA__PREPROCESS__TEST__LABEL")
         self.DATA__PREPROCESS__TEST__LABEL.setFont(font1)
@@ -11886,7 +11791,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_14.setContentsMargins(0, 0, 0, 0)
         self.train_advanced_label_2 = QLabel(self.frame_37)
         self.train_advanced_label_2.setObjectName(u"train_advanced_label_2")
-        self.train_advanced_label_2.setMaximumSize(QSize(150, 35))
+        self.train_advanced_label_2.setMaximumSize(QSize(16777215, 35))
         self.train_advanced_label_2.setFont(font1)
 
         self.horizontalLayout_14.addWidget(self.train_advanced_label_2)
@@ -14278,87 +14183,183 @@ class Ui_MainWindow(object):
         self.gridLayout_72.setObjectName(u"gridLayout_72")
         self.gridLayout_72.setVerticalSpacing(15)
         self.gridLayout_72.setContentsMargins(9, 9, 9, 9)
-        self.run_workflow_frame = QFrame(self.frame_7)
-        self.run_workflow_frame.setObjectName(u"run_workflow_frame")
-        self.run_workflow_frame.setMinimumSize(QSize(0, 100))
-        self.run_workflow_frame.setMaximumSize(QSize(16777215, 200))
-        self.run_workflow_frame.setFrameShape(QFrame.Shape.NoFrame)
-        self.run_workflow_frame.setFrameShadow(QFrame.Shadow.Raised)
-        self.horizontalLayout_35 = QHBoxLayout(self.run_workflow_frame)
-        self.horizontalLayout_35.setObjectName(u"horizontalLayout_35")
-        self.horizontalLayout_35.setContentsMargins(-1, 20, -1, -1)
-        self.gpu_list_frame = QFrame(self.run_workflow_frame)
-        self.gpu_list_frame.setObjectName(u"gpu_list_frame")
-        self.gpu_list_frame.setFrameShape(QFrame.Shape.NoFrame)
-        self.gpu_list_frame.setFrameShadow(QFrame.Shadow.Raised)
-        self.verticalLayout_40 = QVBoxLayout(self.gpu_list_frame)
-        self.verticalLayout_40.setSpacing(10)
-        self.verticalLayout_40.setObjectName(u"verticalLayout_40")
-        self.verticalLayout_40.setContentsMargins(0, 0, 0, 5)
-        self.label_9 = QLabel(self.gpu_list_frame)
+        self.frame_47 = QFrame(self.frame_7)
+        self.frame_47.setObjectName(u"frame_47")
+        self.frame_47.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_47.setFrameShadow(QFrame.Shadow.Raised)
+        self.horizontalLayout_6 = QHBoxLayout(self.frame_47)
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.check_yaml_file_bn = QPushButton(self.frame_47)
+        self.check_yaml_file_bn.setObjectName(u"check_yaml_file_bn")
+        self.check_yaml_file_bn.setMinimumSize(QSize(200, 40))
+        self.check_yaml_file_bn.setMaximumSize(QSize(100, 16777215))
+        self.check_yaml_file_bn.setFont(font1)
+
+        self.horizontalLayout_6.addWidget(self.check_yaml_file_bn)
+
+
+        self.gridLayout_72.addWidget(self.frame_47, 2, 1, 1, 1)
+
+        self.tabWidget = QTabWidget(self.frame_7)
+        self.tabWidget.setObjectName(u"tabWidget")
+        self.tabWidget.setFont(font1)
+        self.tab = QWidget()
+        self.tab.setObjectName(u"tab")
+        self.gridLayout_39 = QGridLayout(self.tab)
+        self.gridLayout_39.setObjectName(u"gridLayout_39")
+        self.label_9 = QLabel(self.tab)
         self.label_9.setObjectName(u"label_9")
-        self.label_9.setFont(font3)
+        self.label_9.setFont(font13)
 
-        self.verticalLayout_40.addWidget(self.label_9, 0, Qt.AlignmentFlag.AlignHCenter)
+        self.gridLayout_39.addWidget(self.label_9, 0, 0, 1, 1)
 
-        self.device_input = QComboBox(self.gpu_list_frame)
+        self.horizontalSpacer_89 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_39.addItem(self.horizontalSpacer_89, 0, 3, 1, 1)
+
+        self.container_info = QPushButton(self.tab)
+        self.container_info.setObjectName(u"container_info")
+        self.container_info.setMinimumSize(QSize(30, 30))
+        self.container_info.setMaximumSize(QSize(30, 30))
+        self.container_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_39.addWidget(self.container_info, 1, 1, 1, 1)
+
+        self.container_version_label = QLabel(self.tab)
+        self.container_version_label.setObjectName(u"container_version_label")
+        self.container_version_label.setFont(font13)
+
+        self.gridLayout_39.addWidget(self.container_version_label, 1, 0, 1, 1)
+
+        self.device_input = QComboBox(self.tab)
         self.device_input.setObjectName(u"device_input")
         self.device_input.setMinimumSize(QSize(300, 30))
-        self.device_input.setMaximumSize(QSize(300, 30))
+        self.device_input.setMaximumSize(QSize(16777215, 30))
         self.device_input.setFont(font1)
 
-        self.verticalLayout_40.addWidget(self.device_input)
+        self.gridLayout_39.addWidget(self.device_input, 0, 2, 1, 1)
 
-
-        self.horizontalLayout_35.addWidget(self.gpu_list_frame, 0, Qt.AlignmentFlag.AlignHCenter)
-
-        self.container_list_frame = QFrame(self.run_workflow_frame)
-        self.container_list_frame.setObjectName(u"container_list_frame")
-        self.container_list_frame.setFrameShape(QFrame.Shape.NoFrame)
-        self.container_list_frame.setFrameShadow(QFrame.Shadow.Raised)
-        self.verticalLayout_58 = QVBoxLayout(self.container_list_frame)
-        self.verticalLayout_58.setSpacing(10)
-        self.verticalLayout_58.setObjectName(u"verticalLayout_58")
-        self.verticalLayout_58.setContentsMargins(0, 0, 0, 5)
-        self.container_version_label = QLabel(self.container_list_frame)
-        self.container_version_label.setObjectName(u"container_version_label")
-        self.container_version_label.setFont(font3)
-
-        self.verticalLayout_58.addWidget(self.container_version_label, 0, Qt.AlignmentFlag.AlignHCenter)
-
-        self.container_input = QComboBox(self.container_list_frame)
+        self.container_input = QComboBox(self.tab)
         self.container_input.setObjectName(u"container_input")
-        self.container_input.setMinimumSize(QSize(150, 30))
-        self.container_input.setMaximumSize(QSize(150, 30))
+        self.container_input.setMinimumSize(QSize(0, 30))
+        self.container_input.setMaximumSize(QSize(16777215, 30))
         self.container_input.setFont(font1)
 
-        self.verticalLayout_58.addWidget(self.container_input)
+        self.gridLayout_39.addWidget(self.container_input, 1, 2, 1, 1)
 
+        self.device_info = QPushButton(self.tab)
+        self.device_info.setObjectName(u"device_info")
+        self.device_info.setMinimumSize(QSize(30, 30))
+        self.device_info.setMaximumSize(QSize(30, 30))
+        self.device_info.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
-        self.horizontalLayout_35.addWidget(self.container_list_frame, 0, Qt.AlignmentFlag.AlignHCenter)
+        self.gridLayout_39.addWidget(self.device_info, 0, 1, 1, 1)
 
-        self.frame_64 = QFrame(self.run_workflow_frame)
-        self.frame_64.setObjectName(u"frame_64")
-        self.frame_64.setFrameShape(QFrame.Shape.NoFrame)
-        self.frame_64.setFrameShadow(QFrame.Shadow.Raised)
-        self.verticalLayout_39 = QVBoxLayout(self.frame_64)
-        self.verticalLayout_39.setSpacing(0)
-        self.verticalLayout_39.setObjectName(u"verticalLayout_39")
-        self.verticalLayout_39.setContentsMargins(0, 0, 0, 0)
-        self.run_biapy_docker_bn = QPushButton(self.frame_64)
-        self.run_biapy_docker_bn.setObjectName(u"run_biapy_docker_bn")
-        self.run_biapy_docker_bn.setMinimumSize(QSize(300, 40))
-        self.run_biapy_docker_bn.setMaximumSize(QSize(300, 16777215))
-        self.run_biapy_docker_bn.setFont(font1)
-        self.run_biapy_docker_bn.setIconSize(QSize(250, 33))
+        self.verticalSpacer_62 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.verticalLayout_39.addWidget(self.run_biapy_docker_bn)
+        self.gridLayout_39.addItem(self.verticalSpacer_62, 2, 0, 1, 1)
 
+        self.tabWidget.addTab(self.tab, "")
+        self.tab_2 = QWidget()
+        self.tab_2.setObjectName(u"tab_2")
+        self.gridLayout_5 = QGridLayout(self.tab_2)
+        self.gridLayout_5.setObjectName(u"gridLayout_5")
+        self.label_2 = QLabel(self.tab_2)
+        self.label_2.setObjectName(u"label_2")
+        self.label_2.setFont(font1)
 
-        self.horizontalLayout_35.addWidget(self.frame_64, 0, Qt.AlignmentFlag.AlignHCenter)
+        self.gridLayout_5.addWidget(self.label_2, 2, 0, 1, 1)
 
+        self.SYSTEM__NUM_CPUS__INFO = QPushButton(self.tab_2)
+        self.SYSTEM__NUM_CPUS__INFO.setObjectName(u"SYSTEM__NUM_CPUS__INFO")
+        self.SYSTEM__NUM_CPUS__INFO.setMinimumSize(QSize(30, 30))
+        self.SYSTEM__NUM_CPUS__INFO.setMaximumSize(QSize(30, 30))
+        self.SYSTEM__NUM_CPUS__INFO.setFont(font1)
+        self.SYSTEM__NUM_CPUS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
 
-        self.gridLayout_72.addWidget(self.run_workflow_frame, 3, 1, 1, 1)
+        self.gridLayout_5.addWidget(self.SYSTEM__NUM_CPUS__INFO, 0, 1, 1, 1)
+
+        self.SYSTEM__SEED__INFO = QPushButton(self.tab_2)
+        self.SYSTEM__SEED__INFO.setObjectName(u"SYSTEM__SEED__INFO")
+        self.SYSTEM__SEED__INFO.setMinimumSize(QSize(30, 30))
+        self.SYSTEM__SEED__INFO.setMaximumSize(QSize(30, 30))
+        self.SYSTEM__SEED__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_5.addWidget(self.SYSTEM__SEED__INFO, 2, 1, 1, 1)
+
+        self.SYSTEM__SEED__INPUT = QLineEdit(self.tab_2)
+        self.SYSTEM__SEED__INPUT.setObjectName(u"SYSTEM__SEED__INPUT")
+        self.SYSTEM__SEED__INPUT.setMinimumSize(QSize(200, 30))
+        self.SYSTEM__SEED__INPUT.setMaximumSize(QSize(200, 30))
+        self.SYSTEM__SEED__INPUT.setFont(font1)
+
+        self.gridLayout_5.addWidget(self.SYSTEM__SEED__INPUT, 2, 2, 1, 1)
+
+        self.horizontalSpacer_2 = QSpacerItem(479, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_5.addItem(self.horizontalSpacer_2, 1, 3, 1, 1)
+
+        self.SYSTEM__NUM_CPUS__INPUT = QComboBox(self.tab_2)
+        self.SYSTEM__NUM_CPUS__INPUT.setObjectName(u"SYSTEM__NUM_CPUS__INPUT")
+        self.SYSTEM__NUM_CPUS__INPUT.setMinimumSize(QSize(200, 30))
+        self.SYSTEM__NUM_CPUS__INPUT.setMaximumSize(QSize(200, 30))
+        self.SYSTEM__NUM_CPUS__INPUT.setFont(font1)
+
+        self.gridLayout_5.addWidget(self.SYSTEM__NUM_CPUS__INPUT, 0, 2, 1, 1)
+
+        self.SYSTEM__NUM_CPUS__LABEL = QLabel(self.tab_2)
+        self.SYSTEM__NUM_CPUS__LABEL.setObjectName(u"SYSTEM__NUM_CPUS__LABEL")
+        self.SYSTEM__NUM_CPUS__LABEL.setFont(font1)
+
+        self.gridLayout_5.addWidget(self.SYSTEM__NUM_CPUS__LABEL, 0, 0, 1, 1)
+
+        self.SYSTEM__NUM_WORKERS__INPUT = QComboBox(self.tab_2)
+        self.SYSTEM__NUM_WORKERS__INPUT.setObjectName(u"SYSTEM__NUM_WORKERS__INPUT")
+        self.SYSTEM__NUM_WORKERS__INPUT.setMinimumSize(QSize(200, 30))
+        self.SYSTEM__NUM_WORKERS__INPUT.setMaximumSize(QSize(200, 30))
+        self.SYSTEM__NUM_WORKERS__INPUT.setFont(font1)
+
+        self.gridLayout_5.addWidget(self.SYSTEM__NUM_WORKERS__INPUT, 1, 2, 1, 1)
+
+        self.SYSTEM__NUM_WORKERS__INFO = QPushButton(self.tab_2)
+        self.SYSTEM__NUM_WORKERS__INFO.setObjectName(u"SYSTEM__NUM_WORKERS__INFO")
+        self.SYSTEM__NUM_WORKERS__INFO.setMinimumSize(QSize(30, 30))
+        self.SYSTEM__NUM_WORKERS__INFO.setMaximumSize(QSize(30, 30))
+        self.SYSTEM__NUM_WORKERS__INFO.setStyleSheet(u"QPushButton {\n"
+"  border: none;\n"
+"}")
+
+        self.gridLayout_5.addWidget(self.SYSTEM__NUM_WORKERS__INFO, 1, 1, 1, 1)
+
+        self.label_8 = QLabel(self.tab_2)
+        self.label_8.setObjectName(u"label_8")
+        self.label_8.setMaximumSize(QSize(200, 35))
+        self.label_8.setFont(font1)
+
+        self.gridLayout_5.addWidget(self.label_8, 1, 0, 1, 1)
+
+        self.verticalSpacer_63 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.gridLayout_5.addItem(self.verticalSpacer_63, 3, 0, 1, 1)
+
+        self.tabWidget.addTab(self.tab_2, "")
+
+        self.gridLayout_72.addWidget(self.tabWidget, 3, 1, 1, 1)
+
+        self.output_final_directory_label = QLabel(self.frame_7)
+        self.output_final_directory_label.setObjectName(u"output_final_directory_label")
+        self.output_final_directory_label.setFont(font1)
+        self.output_final_directory_label.setWordWrap(True)
+
+        self.gridLayout_72.addWidget(self.output_final_directory_label, 1, 1, 1, 1)
 
         self.frame_27 = QFrame(self.frame_7)
         self.frame_27.setObjectName(u"frame_27")
@@ -14462,85 +14463,25 @@ class Ui_MainWindow(object):
 
         self.gridLayout_72.addWidget(self.frame_27, 0, 1, 1, 1)
 
-        self.yaml_errors_frame = QFrame(self.frame_7)
-        self.yaml_errors_frame.setObjectName(u"yaml_errors_frame")
-        self.yaml_errors_frame.setMinimumSize(QSize(0, 200))
-        self.yaml_errors_frame.setMaximumSize(QSize(16777215, 16777215))
-        self.yaml_errors_frame.setFrameShape(QFrame.Shape.NoFrame)
-        self.yaml_errors_frame.setFrameShadow(QFrame.Shadow.Raised)
-        self.gridLayout_73 = QGridLayout(self.yaml_errors_frame)
-        self.gridLayout_73.setObjectName(u"gridLayout_73")
-        self.gridLayout_73.setVerticalSpacing(9)
-        self.gridLayout_73.setContentsMargins(9, 9, 9, 0)
-        self.frame_57 = QFrame(self.yaml_errors_frame)
-        self.frame_57.setObjectName(u"frame_57")
-        self.frame_57.setFrameShape(QFrame.Shape.NoFrame)
-        self.frame_57.setFrameShadow(QFrame.Shadow.Raised)
-        self.gridLayout_39 = QGridLayout(self.frame_57)
-        self.gridLayout_39.setObjectName(u"gridLayout_39")
-        self.gridLayout_39.setContentsMargins(0, 0, 0, 0)
-        self.frame_47 = QFrame(self.frame_57)
-        self.frame_47.setObjectName(u"frame_47")
-        self.frame_47.setFrameShape(QFrame.Shape.NoFrame)
-        self.frame_47.setFrameShadow(QFrame.Shadow.Raised)
-        self.horizontalLayout_6 = QHBoxLayout(self.frame_47)
-        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.check_yaml_file_bn = QPushButton(self.frame_47)
-        self.check_yaml_file_bn.setObjectName(u"check_yaml_file_bn")
-        self.check_yaml_file_bn.setMinimumSize(QSize(200, 40))
-        self.check_yaml_file_bn.setMaximumSize(QSize(100, 16777215))
-        self.check_yaml_file_bn.setFont(font1)
+        self.frame_64 = QFrame(self.frame_7)
+        self.frame_64.setObjectName(u"frame_64")
+        self.frame_64.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_64.setFrameShadow(QFrame.Shadow.Raised)
+        self.verticalLayout_39 = QVBoxLayout(self.frame_64)
+        self.verticalLayout_39.setSpacing(11)
+        self.verticalLayout_39.setObjectName(u"verticalLayout_39")
+        self.verticalLayout_39.setContentsMargins(11, 11, 11, 11)
+        self.run_biapy_docker_bn = QPushButton(self.frame_64)
+        self.run_biapy_docker_bn.setObjectName(u"run_biapy_docker_bn")
+        self.run_biapy_docker_bn.setMinimumSize(QSize(300, 40))
+        self.run_biapy_docker_bn.setMaximumSize(QSize(300, 16777215))
+        self.run_biapy_docker_bn.setFont(font1)
+        self.run_biapy_docker_bn.setIconSize(QSize(250, 33))
 
-        self.horizontalLayout_6.addWidget(self.check_yaml_file_bn)
+        self.verticalLayout_39.addWidget(self.run_biapy_docker_bn)
 
 
-        self.gridLayout_39.addWidget(self.frame_47, 0, 0, 1, 1)
-
-        self.check_yaml_file_errors_frame = QScrollArea(self.frame_57)
-        self.check_yaml_file_errors_frame.setObjectName(u"check_yaml_file_errors_frame")
-        self.check_yaml_file_errors_frame.setFont(font1)
-        self.check_yaml_file_errors_frame.setFrameShape(QFrame.Shape.Box)
-        self.check_yaml_file_errors_frame.setWidgetResizable(True)
-        self.scrollAreaWidgetContents_19 = QWidget()
-        self.scrollAreaWidgetContents_19.setObjectName(u"scrollAreaWidgetContents_19")
-        self.scrollAreaWidgetContents_19.setGeometry(QRect(0, 0, 894, 157))
-        self.verticalLayout_32 = QVBoxLayout(self.scrollAreaWidgetContents_19)
-        self.verticalLayout_32.setObjectName(u"verticalLayout_32")
-        self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)
-        self.check_yaml_file_errors_label = QLabel(self.scrollAreaWidgetContents_19)
-        self.check_yaml_file_errors_label.setObjectName(u"check_yaml_file_errors_label")
-        self.check_yaml_file_errors_label.setFont(font1)
-        self.check_yaml_file_errors_label.setWordWrap(True)
-
-        self.verticalLayout_32.addWidget(self.check_yaml_file_errors_label)
-
-        self.check_yaml_file_errors_frame.setWidget(self.scrollAreaWidgetContents_19)
-
-        self.gridLayout_39.addWidget(self.check_yaml_file_errors_frame, 2, 0, 1, 1)
-
-
-        self.gridLayout_73.addWidget(self.frame_57, 1, 1, 1, 1)
-
-        self.check_yaml_file_errors_frame_main = QFrame(self.yaml_errors_frame)
-        self.check_yaml_file_errors_frame_main.setObjectName(u"check_yaml_file_errors_frame_main")
-        self.check_yaml_file_errors_frame_main.setFrameShape(QFrame.Shape.NoFrame)
-        self.check_yaml_file_errors_frame_main.setFrameShadow(QFrame.Shadow.Raised)
-        self.horizontalLayout_25 = QHBoxLayout(self.check_yaml_file_errors_frame_main)
-        self.horizontalLayout_25.setSpacing(0)
-        self.horizontalLayout_25.setObjectName(u"horizontalLayout_25")
-        self.horizontalLayout_25.setContentsMargins(0, 0, 0, 0)
-
-        self.gridLayout_73.addWidget(self.check_yaml_file_errors_frame_main, 2, 2, 1, 2)
-
-
-        self.gridLayout_72.addWidget(self.yaml_errors_frame, 2, 1, 1, 1)
-
-        self.output_final_directory_label = QLabel(self.frame_7)
-        self.output_final_directory_label.setObjectName(u"output_final_directory_label")
-        self.output_final_directory_label.setFont(font1)
-        self.output_final_directory_label.setWordWrap(True)
-
-        self.gridLayout_72.addWidget(self.output_final_directory_label, 1, 1, 1, 1)
+        self.gridLayout_72.addWidget(self.frame_64, 4, 1, 1, 1, Qt.AlignmentFlag.AlignHCenter)
 
 
         self.horizontalLayout_29.addWidget(self.frame_7)
@@ -14562,13 +14503,14 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(3)
+        self.stackedWidget.setCurrentIndex(2)
         self.wizard_main_frame.setCurrentIndex(1)
         self.stackedWidget_create_yaml_frame.setCurrentIndex(3)
         self.train_tab_widget.setCurrentIndex(0)
-        self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(0)
+        self.train_workflow_specific_tab_stackedWidget.setCurrentIndex(1)
         self.test_tab_widget.setCurrentIndex(0)
         self.test_workflow_specific_tab_stackedWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -15155,29 +15097,6 @@ class Ui_MainWindow(object):
         self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Decide which checkpoint to load from job's dir if PATHS.CHECKPOINT_FILE is empty. Options: 'best_on_val' or 'last_on_train'</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.MODEL__LOAD_CHECKPOINT_EPOCH__INFO.setText("")
-        self.label.setText(QCoreApplication.translate("MainWindow", u"Hardware", None))
-        self.SYSTEM__NUM_CPUS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Number of CPUs", None))
-#if QT_CONFIG(tooltip)
-        self.SYSTEM__NUM_WORKERS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Maximum number of workers to use. You can disable this option by setting 0</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.SYSTEM__NUM_WORKERS__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.SYSTEM__NUM_CPUS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Maximum number of CPUs to use. Set it to &quot;-1&quot; to not set a limit.</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.SYSTEM__NUM_CPUS__INFO.setText("")
-#if QT_CONFIG(tooltip)
-        self.label_8.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_8.setText(QCoreApplication.translate("MainWindow", u"Number of workers", None))
-#if QT_CONFIG(tooltip)
-        self.label_2.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.label_2.setText(QCoreApplication.translate("MainWindow", u"Math seed", None))
-        self.SYSTEM__SEED__INPUT.setText(QCoreApplication.translate("MainWindow", u"0", None))
-#if QT_CONFIG(tooltip)
-        self.SYSTEM__SEED__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Math seed to generate random numbers. Used to ensure reproducibility in the results. </span><span style=\" font-size:12pt; font-weight:600;\">Must be an integer</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.SYSTEM__SEED__INFO.setText("")
         self.MODEL__BMZ__EXPORT__ENABLE__LABEL.setText(QCoreApplication.translate("MainWindow", u"Export model to BioImage Model Zoo (BMZ) format?", None))
 #if QT_CONFIG(tooltip)
         self.MODEL__BMZ__EXPORT__ENABLE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether to activate or not the exportation of the used model to the BMZ format after train and/or test</span></p></body></html>", None))
@@ -18065,7 +17984,7 @@ class Ui_MainWindow(object):
 #if QT_CONFIG(tooltip)
         self.label_13.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Whether if the threshold are going to be set as automaticaly (with Otsu thresholding) or manually. If &quot;manual&quot; is used PROBLEM.INSTANCE_SEG.DATA_MW_TH_* need to be set . In case 'auto' was selected you will still need to set distance threshold.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.label_13.setText(QCoreApplication.translate("MainWindow", u"Threshold setting", None))
+        self.label_13.setText(QCoreApplication.translate("MainWindow", u"Threshold mode", None))
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT.setItemText(0, QCoreApplication.translate("MainWindow", u"auto", None))
         self.PROBLEM__INSTANCE_SEG__DATA_MW_TH_TYPE__INPUT.setItemText(1, QCoreApplication.translate("MainWindow", u"manual", None))
 
@@ -18305,12 +18224,42 @@ class Ui_MainWindow(object):
         self.window3_bn.setText("")
         self.window4_bn.setText("")
         self.continue_bn.setText(QCoreApplication.translate("MainWindow", u"Continue", None))
+        self.check_yaml_file_bn.setText(QCoreApplication.translate("MainWindow", u"Check file", None))
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"Select device to run workflow", None))
+#if QT_CONFIG(tooltip)
+        self.container_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt;\">Which container of BiaPy to use. The GUI has always a default container version linked but if there are new available they will be listed too.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.container_info.setText("")
         self.container_version_label.setText(QCoreApplication.translate("MainWindow", u"Container to use", None))
 #if QT_CONFIG(tooltip)
-        self.run_biapy_docker_bn.setToolTip("")
+        self.device_info.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt;\">Select the device in which you want to run BiaPy. If a GPU is used the process will be much faster (specially the training).</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.run_biapy_docker_bn.setText(QCoreApplication.translate("MainWindow", u"Run Workflow", None))
+        self.device_info.setText("")
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("MainWindow", u"Basic settings", None))
+#if QT_CONFIG(tooltip)
+        self.label_2.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"Math seed", None))
+#if QT_CONFIG(tooltip)
+        self.SYSTEM__NUM_CPUS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Maximum number of CPUs to use. Set it to &quot;-1&quot; to not set a limit.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.SYSTEM__NUM_CPUS__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.SYSTEM__SEED__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Math seed to generate random numbers. Used to ensure reproducibility in the results. </span><span style=\" font-size:12pt; font-weight:600;\">Must be an integer</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.SYSTEM__SEED__INFO.setText("")
+        self.SYSTEM__SEED__INPUT.setText(QCoreApplication.translate("MainWindow", u"0", None))
+        self.SYSTEM__NUM_CPUS__LABEL.setText(QCoreApplication.translate("MainWindow", u"Number of CPUs", None))
+#if QT_CONFIG(tooltip)
+        self.SYSTEM__NUM_WORKERS__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Maximum number of workers to use. You can disable this option by setting 0</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.SYSTEM__NUM_WORKERS__INFO.setText("")
+#if QT_CONFIG(tooltip)
+        self.label_8.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.label_8.setText(QCoreApplication.translate("MainWindow", u"Number of workers", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Advanced options", None))
+        self.output_final_directory_label.setText("")
         self.examine_yaml_bn.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
 #if QT_CONFIG(tooltip)
         self.output_folder_label.setToolTip("")
@@ -18337,8 +18286,9 @@ class Ui_MainWindow(object):
         self.select_yaml_label.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.select_yaml_label.setText(QCoreApplication.translate("MainWindow", u"Select configuration file", None))
-        self.check_yaml_file_bn.setText(QCoreApplication.translate("MainWindow", u"Check file", None))
-        self.check_yaml_file_errors_label.setText("")
-        self.output_final_directory_label.setText("")
+#if QT_CONFIG(tooltip)
+        self.run_biapy_docker_bn.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.run_biapy_docker_bn.setText(QCoreApplication.translate("MainWindow", u"Run Workflow", None))
     # retranslateUi
 

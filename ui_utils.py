@@ -350,10 +350,6 @@ def mark_syntax_error(main_window: main.MainWindow, gui_widget_name: str, valida
 
             if get_text(main_window.ui.job_name_input) == "":
                 main_window.ui.job_name_input.setPlainText(os.path.splitext(out_write)[0])
-
-            # Reset the check
-            main_window.ui.check_yaml_file_errors_label.setText("")
-            main_window.ui.check_yaml_file_errors_frame.setStyleSheet("")
         elif gui_widget_name == "output_folder_input":
             main_window.cfg.settings["output_folder"] = out
 
@@ -1433,8 +1429,6 @@ def export_wizard_summary(main_window: main.MainWindow):
             "my_image_to_image",
         ]:
             main_window.ui.job_name_input.setPlainText("my_" + out_config["PROBLEM"]["TYPE"].lower())
-        main_window.ui.check_yaml_file_errors_label.setText("")
-        main_window.ui.check_yaml_file_errors_frame.setStyleSheet("")
 
         if replace:
             # Advise user where the YAML file has been saved
@@ -4088,10 +4082,6 @@ def create_yaml_file(main_window: main.MainWindow) -> Tuple[bool, bool]:
         ) as outfile:
             yaml.dump(biapy_config, outfile, default_flow_style=False)
 
-    # Reset the check
-    main_window.ui.check_yaml_file_errors_label.setText("")
-    main_window.ui.check_yaml_file_errors_frame.setStyleSheet("")
-
     # Update GUI with the new YAML file path
     main_window.ui.select_yaml_name_label.setText(
         os.path.normpath(
@@ -4115,7 +4105,7 @@ def create_yaml_file(main_window: main.MainWindow) -> Tuple[bool, bool]:
     return False, replace
 
 
-def load_yaml_config(main_window: main.MainWindow, advise_user: bool = False) -> Optional[bool]:
+def load_yaml_config(main_window: main.MainWindow) -> Optional[bool]:
     """
     Load YAML configuration file and check its consistency. This function should be called before running BiaPy's
     container or while checking YAMl file consistency button.
@@ -4124,9 +4114,6 @@ def load_yaml_config(main_window: main.MainWindow, advise_user: bool = False) ->
     ----------
     main_window : MainWindow
         Main window of the application.
-
-    advise_user : bool, optional
-        Whether to advice the user with a dialog window with the errors.
 
     Returns
     -------
@@ -4189,19 +4176,12 @@ def load_yaml_config(main_window: main.MainWindow, advise_user: bool = False) ->
 
     except Exception as errors:
         errors = str(errors)
-        main_window.ui.check_yaml_file_errors_label.setText(errors)
-        main_window.ui.check_yaml_file_errors_frame.setStyleSheet("border: 2px solid red;")
-        if advise_user:
-            main_window.dialog_exec(
-                "Configuration file checked and some errors were found. " "Please correct them before proceeding.",
-                reason="error",
-            )
+        main_window.dialog_exec(
+            f"Configuration file checked and some errors were found:\n{errors}\nPlease correct them before proceeding.",
+            reason="error",
+        )
     else:
-        main_window.ui.check_yaml_file_errors_label.setText("No errors found in the configuration file")
-        main_window.ui.check_yaml_file_errors_frame.setStyleSheet("border: 2px solid green;")
-        if advise_user:
-            main_window.dialog_exec("Configuration file checked and no errors found.", reason="inform_user")
-
+        main_window.dialog_exec("Configuration file checked and no errors found.", reason="inform_user")
         return True
 
 
