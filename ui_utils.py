@@ -362,33 +362,6 @@ def mark_syntax_error(main_window: main.MainWindow, gui_widget_name: str, valida
                 m = "Job results folder: <strong>{}</strong>".format(main_window.cfg.settings["job_real_output_path"])
                 main_window.ui.output_final_directory_label.setText(m)
 
-
-def expand_hide_advanced_options(
-    main_window: main.MainWindow, advanced_options_bn_tag: str, advanced_options_frame_tag: str
-):
-    """
-    Functionality for the advanced option button (Down/UP arrows in GUI).
-
-    Parameters
-    ----------
-    main_window : MainWindow
-        Main window of the application.
-
-    advanced_options_bn_tag : str
-        Name of the button that triggers the function.
-
-    advanced_options_frame_tag : str
-        Name of the frame to show/hide.
-    """
-    expand = not getattr(main_window.ui, advanced_options_frame_tag).isVisible()
-    getattr(main_window.ui, advanced_options_bn_tag).setIcon(
-        main_window.cfg.settings["advanced_frame_images"][0]
-        if expand
-        else main_window.cfg.settings["advanced_frame_images"][1]
-    )
-    getattr(main_window.ui, advanced_options_frame_tag).setVisible(expand)
-
-
 def resource_path(relative_path: str) -> str:
     """
     Gets absolute path to resource. Needed for Pyinstaller so the resources are found in every OS.

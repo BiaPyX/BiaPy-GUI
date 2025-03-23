@@ -183,28 +183,7 @@ class Widget_conditions():
                         "No"
                     ],
                 },
-            "MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL": 
-                {
-                    "MODEL_AUTOGENERATE_DOC_INPUT": 
-                    [
-                        "No"
-                    ],
-                },
-            "MODEL__BMZ__EXPORT__DOCUMENTATION__INFO": 
-                {
-                    "MODEL_AUTOGENERATE_DOC_INPUT": 
-                    [
-                        "No"
-                    ],
-                },
-            "MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT": 
-                {
-                    "MODEL_AUTOGENERATE_DOC_INPUT": 
-                    [
-                        "No"
-                    ],
-                },
-            "MODEL__BMZ__EXPORT__DOCUMENTATION__BN": 
+            "MODEL__BMZ__EXPORT__DOCUMENTATION__FRAME": 
                 {
                     "MODEL_AUTOGENERATE_DOC_INPUT": 
                     [

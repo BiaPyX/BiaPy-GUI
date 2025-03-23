@@ -41,7 +41,6 @@ import ui_function
 from ui_utils import (
     examine,
     mark_syntax_error,
-    expand_hide_advanced_options,
     change_page,
     get_git_revision_short_hash,
     load_yaml_config,
@@ -466,10 +465,7 @@ class MainWindow(QMainWindow):
             lambda: self.condition_db.combobox_hide_visible_action(
                 self,
                 [
-                    "MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL",
-                    "MODEL__BMZ__EXPORT__DOCUMENTATION__INFO",
-                    "MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT",
-                    "MODEL__BMZ__EXPORT__DOCUMENTATION__BN",
+                    "MODEL__BMZ__EXPORT__DOCUMENTATION__FRAME",
                 ],
             )
         )
@@ -535,9 +531,6 @@ class MainWindow(QMainWindow):
                 ],
                 updated_widget="DATA__VAL__TYPE__INPUT",
             )
-        )
-        self.ui.train_advanced_bn.clicked.connect(
-            lambda: expand_hide_advanced_options(self, "train_advanced_bn", "train_advanced_options_frame")
         )
         self.ui.MODEL__ARCHITECTURE__INPUT.currentIndexChanged.connect(
             lambda: self.condition_db.combobox_hide_visible_action(

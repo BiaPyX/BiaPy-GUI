@@ -97,9 +97,6 @@ class UIFunction:
             self.main_window.ui.right_arrow_bn.setIcon(
                 QPixmap(resource_path(os.path.join("images", "bn_images", "right_arrow.svg")))
             )
-            self.main_window.ui.train_advanced_bn.setIcon(
-                QPixmap(resource_path(os.path.join("images", "bn_images", "down_arrow.svg")))
-            )
 
             self.init_main_page()
             oninit_checks(self.main_window)
@@ -528,10 +525,7 @@ class UIFunction:
         self.main_window.ui.MODEL__BMZ__EXPORT__REUSE_BMZ_CONFIG__FRAME.setVisible(False)
         self.main_window.ui.MODEL__BMZ__EXPORT__FRAME.setVisible(False)
 
-        self.main_window.ui.MODEL__BMZ__EXPORT__DOCUMENTATION__LABEL.setVisible(False)
-        self.main_window.ui.MODEL__BMZ__EXPORT__DOCUMENTATION__INFO.setVisible(False)
-        self.main_window.ui.MODEL__BMZ__EXPORT__DOCUMENTATION__INPUT.setVisible(False)
-        self.main_window.ui.MODEL__BMZ__EXPORT__DOCUMENTATION__BN.setVisible(False)
+        self.main_window.ui.MODEL__BMZ__EXPORT__DOCUMENTATION__FRAME.setVisible(False)
 
         self.main_window.ui.SYSTEM__NUM_CPUS__INPUT.addItem("All")
         for i in range(multiprocessing.cpu_count()):
@@ -850,7 +844,6 @@ class UIFunction:
         self.main_window.ui.cross_validation_fold_label.setVisible(False)
         self.main_window.ui.cross_validation_fold_info.setVisible(False)
         self.main_window.ui.DATA__VAL__CROSS_VAL_FOLD__INPUT.setVisible(False)
-        self.main_window.ui.train_advanced_options_frame.setVisible(False)
         self.main_window.ui.DATA__PREPROCESS__VAL__LABEL.setVisible(False)
         self.main_window.ui.DATA__PREPROCESS__VAL__INFO.setVisible(False)
         self.main_window.ui.DATA__PREPROCESS__VAL__INPUT.setVisible(False)
