@@ -33,8 +33,8 @@ class Ui_RunBiaPy(object):
         self.verticalLayout.setContentsMargins(0, 0, 0, 6)
         self.centralwidget = QFrame(RunBiaPy)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.centralwidget.setFrameShape(QFrame.NoFrame)
-        self.centralwidget.setFrameShadow(QFrame.Plain)
+        self.centralwidget.setFrameShape(QFrame.Shape.NoFrame)
+        self.centralwidget.setFrameShadow(QFrame.Shadow.Plain)
         self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
         self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
@@ -44,8 +44,8 @@ class Ui_RunBiaPy(object):
         self.frame_top.setMinimumSize(QSize(0, 40))
         self.frame_top.setMaximumSize(QSize(16777215, 40))
         self.frame_top.setStyleSheet(u"")
-        self.frame_top.setFrameShape(QFrame.NoFrame)
-        self.frame_top.setFrameShadow(QFrame.Plain)
+        self.frame_top.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_top.setFrameShadow(QFrame.Shadow.Plain)
         self.horizontalLayout = QHBoxLayout(self.frame_top)
         self.horizontalLayout.setSpacing(0)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
@@ -71,7 +71,7 @@ class Ui_RunBiaPy(object):
         self.lab_heading.setObjectName(u"lab_heading")
         self.lab_heading.setFont(font)
         self.lab_heading.setStyleSheet(u"")
-        self.lab_heading.setAlignment(Qt.AlignCenter)
+        self.lab_heading.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout.addWidget(self.lab_heading)
 
@@ -122,8 +122,8 @@ class Ui_RunBiaPy(object):
         self.frame_bottom.setObjectName(u"frame_bottom")
         self.frame_bottom.setFont(font)
         self.frame_bottom.setStyleSheet(u"")
-        self.frame_bottom.setFrameShape(QFrame.NoFrame)
-        self.frame_bottom.setFrameShadow(QFrame.Raised)
+        self.frame_bottom.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_bottom.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_3 = QVBoxLayout(self.frame_bottom)
         self.verticalLayout_3.setSpacing(12)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
@@ -140,8 +140,8 @@ class Ui_RunBiaPy(object):
 
         self.frame_3 = QFrame(self.frame_bottom)
         self.frame_3.setObjectName(u"frame_3")
-        self.frame_3.setFrameShape(QFrame.NoFrame)
-        self.frame_3.setFrameShadow(QFrame.Raised)
+        self.frame_3.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_3.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_2 = QHBoxLayout(self.frame_3)
         self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
@@ -149,8 +149,8 @@ class Ui_RunBiaPy(object):
         self.frame_4 = QFrame(self.frame_3)
         self.frame_4.setObjectName(u"frame_4")
         self.frame_4.setMinimumSize(QSize(100, 150))
-        self.frame_4.setFrameShape(QFrame.NoFrame)
-        self.frame_4.setFrameShadow(QFrame.Raised)
+        self.frame_4.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_4.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_4 = QVBoxLayout(self.frame_4)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.image_prep_title_label = QLabel(self.frame_4)
@@ -162,16 +162,16 @@ class Ui_RunBiaPy(object):
 
         self.container_pulling_frame = QFrame(self.frame_4)
         self.container_pulling_frame.setObjectName(u"container_pulling_frame")
-        self.container_pulling_frame.setFrameShape(QFrame.NoFrame)
-        self.container_pulling_frame.setFrameShadow(QFrame.Raised)
+        self.container_pulling_frame.setFrameShape(QFrame.Shape.NoFrame)
+        self.container_pulling_frame.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_6 = QVBoxLayout(self.container_pulling_frame)
         self.verticalLayout_6.setSpacing(0)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
         self.container_pulling_download_frame = QFrame(self.container_pulling_frame)
         self.container_pulling_download_frame.setObjectName(u"container_pulling_download_frame")
-        self.container_pulling_download_frame.setFrameShape(QFrame.NoFrame)
-        self.container_pulling_download_frame.setFrameShadow(QFrame.Raised)
+        self.container_pulling_download_frame.setFrameShape(QFrame.Shape.NoFrame)
+        self.container_pulling_download_frame.setFrameShadow(QFrame.Shadow.Raised)
         self.gridLayout_3 = QGridLayout(self.container_pulling_download_frame)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.gridLayout_3.setContentsMargins(30, 9, -1, -1)
@@ -208,8 +208,8 @@ class Ui_RunBiaPy(object):
 
         self.container_pulling_extract_frame = QFrame(self.container_pulling_frame)
         self.container_pulling_extract_frame.setObjectName(u"container_pulling_extract_frame")
-        self.container_pulling_extract_frame.setFrameShape(QFrame.NoFrame)
-        self.container_pulling_extract_frame.setFrameShadow(QFrame.Raised)
+        self.container_pulling_extract_frame.setFrameShape(QFrame.Shape.NoFrame)
+        self.container_pulling_extract_frame.setFrameShadow(QFrame.Shadow.Raised)
         self.gridLayout_4 = QGridLayout(self.container_pulling_extract_frame)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
         self.gridLayout_4.setContentsMargins(30, -1, -1, -1)
@@ -252,13 +252,13 @@ class Ui_RunBiaPy(object):
 
         self.scrollArea = QScrollArea(self.frame_4)
         self.scrollArea.setObjectName(u"scrollArea")
-        self.scrollArea.setFrameShape(QFrame.NoFrame)
-        self.scrollArea.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-        self.scrollArea.setSizeAdjustPolicy(QAbstractScrollArea.AdjustIgnored)
+        self.scrollArea.setFrameShape(QFrame.Shape.NoFrame)
+        self.scrollArea.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        self.scrollArea.setSizeAdjustPolicy(QAbstractScrollArea.SizeAdjustPolicy.AdjustIgnored)
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 907, 159))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 917, 161))
         self.verticalLayout_5 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.biapy_container_info_label = QLabel(self.scrollAreaWidgetContents)
@@ -266,9 +266,9 @@ class Ui_RunBiaPy(object):
         self.biapy_container_info_label.setMinimumSize(QSize(0, 0))
         self.biapy_container_info_label.setMaximumSize(QSize(921, 16777215))
         self.biapy_container_info_label.setFont(font)
-        self.biapy_container_info_label.setWordWrap(True)
+        self.biapy_container_info_label.setWordWrap(False)
         self.biapy_container_info_label.setOpenExternalLinks(True)
-        self.biapy_container_info_label.setTextInteractionFlags(Qt.LinksAccessibleByKeyboard|Qt.LinksAccessibleByMouse|Qt.TextBrowserInteraction|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
+        self.biapy_container_info_label.setTextInteractionFlags(Qt.TextInteractionFlag.LinksAccessibleByKeyboard|Qt.TextInteractionFlag.LinksAccessibleByMouse|Qt.TextInteractionFlag.TextBrowserInteraction|Qt.TextInteractionFlag.TextSelectableByKeyboard|Qt.TextInteractionFlag.TextSelectableByMouse)
 
         self.verticalLayout_5.addWidget(self.biapy_container_info_label)
 
@@ -278,7 +278,7 @@ class Ui_RunBiaPy(object):
         self.spin_label.setMaximumSize(QSize(70, 70))
         self.spin_label.setScaledContents(True)
 
-        self.verticalLayout_5.addWidget(self.spin_label, 0, Qt.AlignHCenter|Qt.AlignVCenter)
+        self.verticalLayout_5.addWidget(self.spin_label, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignVCenter)
 
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
@@ -292,8 +292,8 @@ class Ui_RunBiaPy(object):
         self.frame.setObjectName(u"frame")
         self.frame.setMinimumSize(QSize(0, 50))
         self.frame.setFont(font)
-        self.frame.setFrameShape(QFrame.NoFrame)
-        self.frame.setFrameShadow(QFrame.Raised)
+        self.frame.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame.setFrameShadow(QFrame.Shadow.Raised)
         self.frame.setLineWidth(0)
         self.gridLayout = QGridLayout(self.frame)
         self.gridLayout.setObjectName(u"gridLayout")
@@ -309,7 +309,7 @@ class Ui_RunBiaPy(object):
         self.stop_container_bn.setObjectName(u"stop_container_bn")
         self.stop_container_bn.setMinimumSize(QSize(100, 40))
         self.stop_container_bn.setFont(font)
-        self.stop_container_bn.setFocusPolicy(Qt.NoFocus)
+        self.stop_container_bn.setFocusPolicy(Qt.FocusPolicy.NoFocus)
 
         self.gridLayout.addWidget(self.stop_container_bn, 0, 1, 1, 1)
 
@@ -327,8 +327,8 @@ class Ui_RunBiaPy(object):
         self.frame_5.setObjectName(u"frame_5")
         self.frame_5.setMinimumSize(QSize(200, 0))
         self.frame_5.setMaximumSize(QSize(220, 16777215))
-        self.frame_5.setFrameShape(QFrame.NoFrame)
-        self.frame_5.setFrameShadow(QFrame.Raised)
+        self.frame_5.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_5.setFrameShadow(QFrame.Shadow.Raised)
         self.gridLayout_2 = QGridLayout(self.frame_5)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.test_progress_label = QLabel(self.frame_5)
@@ -342,9 +342,9 @@ class Ui_RunBiaPy(object):
         self.test_progress_bar.setMinimumSize(QSize(70, 0))
         self.test_progress_bar.setFont(font)
         self.test_progress_bar.setValue(24)
-        self.test_progress_bar.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.test_progress_bar.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
         self.test_progress_bar.setTextVisible(False)
-        self.test_progress_bar.setOrientation(Qt.Vertical)
+        self.test_progress_bar.setOrientation(Qt.Orientation.Vertical)
 
         self.gridLayout_2.addWidget(self.test_progress_bar, 1, 2, 1, 1)
 
@@ -355,7 +355,7 @@ class Ui_RunBiaPy(object):
         self.train_progress_label = QLabel(self.frame_5)
         self.train_progress_label.setObjectName(u"train_progress_label")
         self.train_progress_label.setFont(font)
-        self.train_progress_label.setAlignment(Qt.AlignCenter)
+        self.train_progress_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.gridLayout_2.addWidget(self.train_progress_label, 0, 1, 1, 1)
 
@@ -370,11 +370,11 @@ class Ui_RunBiaPy(object):
         self.train_progress_bar.setFont(font)
         self.train_progress_bar.setMaximum(100)
         self.train_progress_bar.setValue(24)
-        self.train_progress_bar.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.train_progress_bar.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
         self.train_progress_bar.setTextVisible(False)
-        self.train_progress_bar.setOrientation(Qt.Vertical)
+        self.train_progress_bar.setOrientation(Qt.Orientation.Vertical)
         self.train_progress_bar.setInvertedAppearance(False)
-        self.train_progress_bar.setTextDirection(QProgressBar.TopToBottom)
+        self.train_progress_bar.setTextDirection(QProgressBar.Direction.TopToBottom)
 
         self.gridLayout_2.addWidget(self.train_progress_bar, 1, 1, 1, 1)
 
@@ -413,8 +413,8 @@ class Ui_RunBiaPy(object):
         self.run_biapy_log.setStyleSheet(u"background-color : black ; \n"
 "color : white; \n"
 "font-size: 9px;")
-        self.run_biapy_log.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.run_biapy_log.setLineWrapMode(QTextEdit.WidgetWidth)
+        self.run_biapy_log.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.run_biapy_log.setLineWrapMode(QTextEdit.LineWrapMode.WidgetWidth)
 
         self.verticalLayout_3.addWidget(self.run_biapy_log)
 
@@ -453,9 +453,12 @@ class Ui_RunBiaPy(object):
         self.test_files_label.setText(QCoreApplication.translate("RunBiaPy", u"<html><head/><body><p align=\"center\">Files</p><p align=\"center\">-/-</p></body></html>", None))
         self.terminal_upper_label.setText(QCoreApplication.translate("RunBiaPy", u"Last lines of the log (updating every 3 seconds):", None))
         self.run_biapy_log.setHtml(QCoreApplication.translate("RunBiaPy", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Monospace','DejaVu Math TeX Gyre'; font-size:9px; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Monospace'; font-size:9px;\">Please wait, the first screen update may take a while depending on your OS</span></p></body></html>", None))
+"hr { height: 1px; border-width: 0; }\n"
+"li.unchecked::marker { content: \"\\2610\"; }\n"
+"li.checked::marker { content: \"\\2612\"; }\n"
+"</style></head><body style=\" font-family:'Monospace'; font-size:9px; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Please wait, the first screen update may take a while depending on your OS</p></body></html>", None))
     # retranslateUi
 

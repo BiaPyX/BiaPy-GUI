@@ -300,7 +300,7 @@ class runBiaPy_Ui(QDialog):
             self.run_window.biapy_image_status.setText('BiaPy image [ <span style="color:orange;"> Pulling </span> ]')
             self.run_window.container_pulling_frame.setVisible(True)
             self.run_window.biapy_container_info_label.setText(
-                "Please wait for the image to download fully. Occasionally, parts of the container may be downloaded twice, causing the progress bar to move backward slightly."
+                "Please wait for the image to download fully. Occasionally, parts of the container may be downloaded twice,\ncausing the progress bar to move backward slightly."
             )
             self.run_window.terminal_upper_label.setText("Downloading and unpacking log")
         elif value == 1:  # Start extracting process
@@ -489,15 +489,17 @@ class run_worker(QObject):
                                 self.download_total_layers[item["id"] + "_download"] = 0
                                 self.extract_total_layers[item["id"] + "_extract"] = 0
                             elif item["status"] == "Downloading":
+                                total = item["progressDetail"]["total"] if "total" in item["progressDetail"] else 1
                                 self.download_total_layers[item["id"] + "_download"] = (
-                                    item["progressDetail"]["current"] / item["progressDetail"]["total"]
+                                    item["progressDetail"]["current"] / total
                                 )
                             elif item["status"] == "Extracting":
                                 if not extracting_bar_activated:
                                     extracting_bar_activated = True
                                     self.update_pulling_signal.emit(1)
+                                total = item["progressDetail"]["total"] if "total" in item["progressDetail"] else 1
                                 self.extract_total_layers[item["id"] + "_extract"] = (
-                                    item["progressDetail"]["current"] / item["progressDetail"]["total"]
+                                    item["progressDetail"]["current"] / total
                                 )
                             elif item["status"] == "Download complete":
                                 self.download_total_layers[item["id"] + "_download"] = 1
