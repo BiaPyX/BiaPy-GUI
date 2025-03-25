@@ -4720,7 +4720,7 @@ def path_in_list(list: List[str], path: str) -> bool:
 
 def path_to_linux(p: str, orig_os: str = "win") -> str:
     """
-    Converts given path to Linux.
+    Converts given path to Linux if it is Windows.
 
     Parameters
     ----------
@@ -4738,6 +4738,8 @@ def path_to_linux(p: str, orig_os: str = "win") -> str:
     if "win" in orig_os.lower():
         win_path = PureWindowsPath(p)
         win_path = os.path.join("/" + win_path.parts[0][0], *win_path.parts[1:]).replace("\\", "/")
+    else:
+        win_path = p
     return win_path
 
 
