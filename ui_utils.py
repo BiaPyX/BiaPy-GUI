@@ -2144,15 +2144,17 @@ def oninit_checks(main_window: main.MainWindow):
     try:
         main_window.cfg.settings["GPUs"] = GPUtil.getGPUs()
 
-        # Find the container that
+        # Always select the last docker container for now
         pos = -1
         if len(main_window.cfg.settings["GPUs"]) > 0:
             driver_version = float(".".join(main_window.cfg.settings["GPUs"][0].driver.split(".")[:2]))
-            for i in range(len(main_window.cfg.settings["NVIDIA_driver_list"])):
-                pos = i
-                if driver_version < main_window.cfg.settings["NVIDIA_driver_list"][i]:
-                    break
+            print(f"Driver_version found: {driver_version}")
+            # for i in range(len(main_window.cfg.settings["NVIDIA_driver_list"])):
+            #     pos = i
+            #     if driver_version < main_window.cfg.settings["NVIDIA_driver_list"][i]:
+            #         break
 
+        pos = -1
         main_window.cfg.settings["CUDA_selected"] = str(main_window.cfg.settings["CUDA_version"][pos])
         main_window.cfg.settings["biapy_container_size"] = main_window.cfg.settings["biapy_container_sizes"][pos]
 
