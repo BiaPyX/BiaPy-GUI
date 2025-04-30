@@ -14529,7 +14529,7 @@ class Ui_MainWindow(object):
         self.MODEL_AUTOGENERATE_DOC_LABEL.setText(QCoreApplication.translate("MainWindow", u"Automatic doc", None))
         self.MODEL__BMZ__EXPORT__MODEL_VERSION__LABEL.setText(QCoreApplication.translate("MainWindow", u"Model version", None))
 #if QT_CONFIG(tooltip)
-        self.MODEL__BMZ__EXPORT__CITE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Citations to be included in the BMZ model. It must be a list of dictionaries with keys &quot;text&quot; and &quot;doi&quot;. </span><span style=\" font-size:12pt; font-weight:600;\">The quotation marks are important see the following example:</span><span style=\" font-size:12pt;\"> [{&quot;text&quot;: &quot;training library&quot;, &quot;doi&quot;: &quot;10.1101/2024.02.03.576026&quot;}, {&quot;text&quot;: &quot;architecture&quot;, &quot;doi&quot;: &quot;10.1109/LGRS.2018.2802944&quot;}, {&quot;text&quot;: &quot;data&quot;, &quot;doi&quot;: &quot;10.48550/arXiv.1812.06024&quot;}]</span></p></body></html>", None))
+        self.MODEL__BMZ__EXPORT__CITE__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Citations to be included in the BMZ model. It must be a list of dictionaries with keys &quot;text&quot; and &quot;doi&quot;. </span><span style=\" font-size:12pt; font-weight:600;\">The quotation marks are important see the following example:</span><span style=\" font-size:12pt;\"> [{&quot;text&quot;: &quot;training library&quot;, &quot;doi&quot;: &quot;10.1038/s41592-025-02699-y&quot;}, {&quot;text&quot;: &quot;architecture&quot;, &quot;doi&quot;: &quot;10.1109/LGRS.2018.2802944&quot;}, {&quot;text&quot;: &quot;data&quot;, &quot;doi&quot;: &quot;10.48550/arXiv.1812.06024&quot;}]</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.MODEL__BMZ__EXPORT__CITE__INFO.setText("")
 #if QT_CONFIG(tooltip)
@@ -14591,10 +14591,10 @@ class Ui_MainWindow(object):
 "</style></head><body style=\" font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">[{</p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">   &quot;text&quot;: &quot;training library&quot;, </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">   &quot;doi&quot;: &quot;10.1101/2024.02.03.576026&quot;,</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">   &quot;doi&quot;: &quot;10.1038/s41592-025-02699-y&quot;,</p>\n"
 "<p style=\""
                         " margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">}]</p></body></html>", None))
-        self.MODEL__BMZ__EXPORT__CITE__INPUT.setProperty(u"text", QCoreApplication.translate("MainWindow", u"[{\"text\": \"training library\", \"doi\": \"10.1101/2024.02.03.576026\"}]", None))
+        self.MODEL__BMZ__EXPORT__CITE__INPUT.setProperty(u"text", QCoreApplication.translate("MainWindow", u"[{\"text\": \"training library\", \"doi\": \"10.1038/s41592-025-02699-y\"}]", None))
 #if QT_CONFIG(tooltip)
         self.MODEL__BMZ__EXPORT__DESCRIPTION__INFO.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Description of the model. It should be something meaningful. Take other models in https://bioimage.io/# as reference. E.g. &quot;Mitochondria segmentation for electron microscopy&quot;</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)

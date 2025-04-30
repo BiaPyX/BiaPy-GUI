@@ -7227,7 +7227,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                                          </font>
                                         </property>
                                         <property name="toolTip">
-                                         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Citations to be included in the BMZ model. It must be a list of dictionaries with keys &amp;quot;text&amp;quot; and &amp;quot;doi&amp;quot;. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;The quotation marks are important see the following example:&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; [{&amp;quot;text&amp;quot;: &amp;quot;training library&amp;quot;, &amp;quot;doi&amp;quot;: &amp;quot;10.1101/2024.02.03.576026&amp;quot;}, {&amp;quot;text&amp;quot;: &amp;quot;architecture&amp;quot;, &amp;quot;doi&amp;quot;: &amp;quot;10.1109/LGRS.2018.2802944&amp;quot;}, {&amp;quot;text&amp;quot;: &amp;quot;data&amp;quot;, &amp;quot;doi&amp;quot;: &amp;quot;10.48550/arXiv.1812.06024&amp;quot;}]&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Citations to be included in the BMZ model. It must be a list of dictionaries with keys &amp;quot;text&amp;quot; and &amp;quot;doi&amp;quot;. &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;The quotation marks are important see the following example:&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; [{&amp;quot;text&amp;quot;: &amp;quot;training library&amp;quot;, &amp;quot;doi&amp;quot;: &amp;quot;10.1038/s41592-025-02699-y&amp;quot;}, {&amp;quot;text&amp;quot;: &amp;quot;architecture&amp;quot;, &amp;quot;doi&amp;quot;: &amp;quot;10.1109/LGRS.2018.2802944&amp;quot;}, {&amp;quot;text&amp;quot;: &amp;quot;data&amp;quot;, &amp;quot;doi&amp;quot;: &amp;quot;10.48550/arXiv.1812.06024&amp;quot;}]&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                         </property>
                                         <property name="styleSheet">
                                          <string notr="true">QPushButton {
@@ -7585,11 +7585,11 @@ li.checked::marker { content: &quot;\2612&quot;; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'DejaVu Math TeX Gyre'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;[{&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;   &amp;quot;text&amp;quot;: &amp;quot;training library&amp;quot;, &lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;   &amp;quot;doi&amp;quot;: &amp;quot;10.1101/2024.02.03.576026&amp;quot;,&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;   &amp;quot;doi&amp;quot;: &amp;quot;10.1038/s41592-025-02699-y&amp;quot;,&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;}]&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                         </property>
                                         <property name="text" stdset="0">
-                                         <string>[{&quot;text&quot;: &quot;training library&quot;, &quot;doi&quot;: &quot;10.1101/2024.02.03.576026&quot;}]</string>
+                                         <string>[{&quot;text&quot;: &quot;training library&quot;, &quot;doi&quot;: &quot;10.1038/s41592-025-02699-y&quot;}]</string>
                                         </property>
                                        </widget>
                                       </item>

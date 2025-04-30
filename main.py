@@ -195,7 +195,7 @@ class MainWindow(QMainWindow):
             lambda: QDesktopServices.openUrl(QUrl("https://github.com/BiaPyX/BiaPy/tree/master/notebooks"))
         )
         self.ui.biapy_citation_bn.clicked.connect(
-            lambda: QDesktopServices.openUrl(QUrl("https://www.biorxiv.org/content/10.1101/2024.02.03.576026v2"))
+            lambda: QDesktopServices.openUrl(QUrl("https://www.nature.com/articles/s41592-025-02699-y"))
         )
         self.ui.main_window_wizard_question_wizard_icon.clicked.connect(lambda: change_page(self, "bn_wizard", 99))
 
