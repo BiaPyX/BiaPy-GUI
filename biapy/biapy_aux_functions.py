@@ -53,7 +53,7 @@ def check_bmz_model_compatibility_in_GUI(
     model_rdf : dict
         BMZ model RDF that contains all the information of the model.
     """
-    consumable = False
+    compatible, consumable = False, False
 
     biapy_model_compatibility_file = f"https://uk1s3.embassy.ebi.ac.uk/public-datasets/bioimage.io/{model_name}/{model_version}/compatibility/biapy_{biapy_version}.json"
     logger.info(f"Checking BiaPy compatibility file: {biapy_model_compatibility_file}")
