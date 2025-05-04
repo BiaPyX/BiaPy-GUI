@@ -2707,10 +2707,7 @@ def create_yaml_file(main_window: main.MainWindow) -> Tuple[bool, bool]:
                         get_text(main_window.ui.DATA__PREPROCESS__CANNY__HIGH_THRESHOLD__TEST__INPUT)
                     )
 
-    if get_text(main_window.ui.TRAIN__ENABLE__INPUT) == "Yes":
-        biapy_config["DATA"]["PATCH_SIZE"] = get_text(main_window.ui.DATA__PATCH_SIZE__INPUT)
-    else:
-        biapy_config["DATA"]["PATCH_SIZE"] = get_text(main_window.ui.DATA__PATCH_SIZE__TEST__INPUT)
+    biapy_config["DATA"]["PATCH_SIZE"] = get_text(main_window.ui.DATA__PATCH_SIZE__INPUT)
     if get_text(main_window.ui.DATA__EXTRACT_RANDOM_PATCH__INPUT) == "Yes":
         biapy_config["DATA"]["EXTRACT_RANDOM_PATCH"] = True
         if get_text(main_window.ui.DATA__PROBABILITY_MAP__INPUT) == "Yes":
@@ -4504,8 +4501,6 @@ class load_yaml_to_GUI_engine(QObject):
                     else:
                         v = "Bi-linear"
                 elif widget_name == "DATA__PATCH_SIZE__INPUT":
-                    other_widgets_to_set.append("DATA__PATCH_SIZE__TEST__INPUT")
-                    other_widgets_values_to_set.append(v)
                     # Update test padding, as that is set to other value but (0,0) depending on the batch size through the GUI.
                     patch_size = ast.literal_eval(str(v))
                     padding = str(tuple([x // 6 for x in patch_size[:-1]]))

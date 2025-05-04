@@ -3554,13 +3554,6 @@ class Widget_conditions():
                         'No', 
                     ],
                 },
-            "DATA__PATCH_SIZE__TEST__INPUT": 
-                {
-                    "TRAIN__ENABLE__INPUT": 
-                    [
-                        'No', 
-                    ],
-                },
             "TEST__DET_BLOB_LOG_MIN_SIGMA__LABEL": 
                 {
                     "TEST__DET_POINT_CREATION_FUNCTION__INPUT": 
