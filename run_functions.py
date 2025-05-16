@@ -652,11 +652,8 @@ class run_worker(QObject):
                 command += ["--gpu", gpus]
 
             # Limit a bit the proccesses used in Docker if it's using a GPU, as multiGPU is not supported yet through the GUI
-            if self.use_gpu:
-                cpu_count = min(multiprocessing.cpu_count(), 5)
-            else:
-                cpu_count = get_text(self.main_gui.ui.SYSTEM__NUM_CPUS__INPUT)
-                cpu_count = multiprocessing.cpu_count() if cpu_count == "All" else int(cpu_count)
+            cpu_count = get_text(self.main_gui.ui.SYSTEM__NUM_CPUS__INPUT)
+            cpu_count = multiprocessing.cpu_count() if cpu_count == "All" else int(cpu_count)
             shm_size = f"{128*cpu_count}m"
 
             # dist_backend = "gloo" if self.windows_os else "nccl"
