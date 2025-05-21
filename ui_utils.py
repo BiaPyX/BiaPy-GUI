@@ -15,6 +15,7 @@ import json
 import numpy as np
 import certifi
 import ssl
+import tempfile
 from pathlib import PurePath, Path, PureWindowsPath
 from packaging.version import Version
 from bs4 import BeautifulSoup
@@ -4811,11 +4812,9 @@ def is_pathname_valid(pathname: str) -> bool:
         # erroneously invalidate all valid absolute Windows pathnames.
         _, pathname = os.path.splitdrive(pathname)
 
-        # Directory guaranteed to exist. If the current OS is Windows, this is
-        # the drive to which Windows was installed (e.g., the "%HOMEDRIVE%"
-        # environment variable); else, the typical root directory.
-        root_dirname = os.environ.get("HOMEDRIVE", "C:") if sys.platform == "win32" else os.path.sep
-        assert os.path.isdir(root_dirname)  # ...Murphy and her ironclad Law
+        # Use a guaranteed-to-exist base directory
+        root_dirname = tempfile.gettempdir()
+        assert os.path.isdir(root_dirname)
 
         # Append a path separator to this directory if needed.
         root_dirname = root_dirname.rstrip(os.path.sep) + os.path.sep
