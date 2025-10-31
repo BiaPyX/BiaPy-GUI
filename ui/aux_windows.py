@@ -1051,6 +1051,31 @@ class modify_yaml_Ui(QDialog):
             Dictionary of paths to change and their status.
         """
         self.clear_display()
+
+        # Try to catch other paths that are required depending on the workflow type because the user may not have specified them
+        workflow_type = "SEMANTIC_SEG"
+        if "PROBLEM" in loaded_cfg and "TYPE" in loaded_cfg["PROBLEM"]:
+            workflow_type = loaded_cfg["PROBLEM"]["TYPE"]
+
+        if "TRAIN" in loaded_cfg and "ENABLE" in loaded_cfg["TRAIN"] and loaded_cfg["TRAIN"]["ENABLE"]:
+            if "DATA__TRAIN__PATH" not in paths_to_change:
+                paths_to_change["DATA__TRAIN__PATH"] = ""
+            if workflow_type not in ["DENOISING", "CLASSIFICATION", "SELF_SUPERVISED"]:
+                paths_to_change["DATA__TRAIN__GT_PATH"] = ""
+            if "DATA" in loaded_cfg and "VAL" in loaded_cfg["DATA"] and not loaded_cfg["DATA"]["VAL"]["FROM_TRAIN"]:
+                if "DATA__VAL__PATH" not in paths_to_change:
+                    paths_to_change["DATA__VAL__PATH"] = ""
+                if workflow_type not in ["DENOISING", "CLASSIFICATION", "SELF_SUPERVISED"]:
+                    paths_to_change["DATA__VAL__GT_PATH"] = ""
+        if "TEST" in loaded_cfg and "ENABLE" in loaded_cfg["TEST"] and loaded_cfg["TEST"]["ENABLE"]:
+            if "DATA__TEST__PATH" not in paths_to_change:
+                paths_to_change["DATA__TEST__PATH"] = ""
+            if (
+                workflow_type not in ["DENOISING", "CLASSIFICATION", "SELF_SUPERVISED"] and "DATA" in loaded_cfg 
+                and "TEST" in loaded_cfg["DATA"] and loaded_cfg["DATA"]["TEST"]["LOAD_GT"]
+            ):
+                paths_to_change["DATA__TEST__GT_PATH"] = ""
+
         for key, path in paths_to_change.items():
             if "TRAIN" in key:
                 self.yaml_mod_window.train_frame.setVisible(True)
