@@ -21,7 +21,6 @@ from PySide6.QtGui import (
 
 from main import MainWindow
 from run_functions import run_worker
-from build_functions import build_worker
 from ui_utils import (
     get_text,
     resource_path,
@@ -434,50 +433,6 @@ class UIFunction:
         for i in range(min(cpu_count, 10)):
             self.main_window.ui.SYSTEM__NUM_WORKERS__INPUT.addItem(str(i + 1))
         self.main_window.ui.SYSTEM__NUM_WORKERS__INPUT.setCurrentText("2")
-
-    def build_container(self):
-        """
-        Start container bulding process.
-        """
-        self.main_window.cfg.settings["building_thread"] = None
-        self.main_window.cfg.settings["building_worker"] = None
-        self.main_window.cfg.settings["building_threads"] = QThread()
-        outf = (
-            self.main_window.log_info["log_dir"]
-            if self.main_window.cfg.settings["output_folder"] == ""
-            else self.main_window.cfg.settings["output_folder"]
-        )
-        self.main_window.cfg.settings["building_worker"] = build_worker(
-            self.main_window,
-            self.main_window.cfg.settings["biapy_container_dockerfile"],
-            self.main_window.cfg.settings["biapy_container_name"],
-            outf,
-        )
-        self.main_window.cfg.settings["building_worker"].moveToThread(self.main_window.cfg.settings["building_threads"])
-        self.main_window.cfg.settings["building_threads"].started.connect(
-            self.main_window.cfg.settings["building_worker"].run
-        )
-        self.main_window.cfg.settings["building_worker"].finished_signal.connect(
-            self.main_window.cfg.settings["building_threads"].quit
-        )
-        self.main_window.cfg.settings["building_worker"].finished_signal.connect(
-            lambda: self.update_container_status_in_build(
-                self.main_window.cfg.settings["building_worker"].finished_good
-            )
-        )
-        self.main_window.cfg.settings["building_worker"].close_signal.connect(
-            self.main_window.cfg.settings["building_worker"].deleteLater
-        )
-        self.main_window.cfg.settings["building_threads"].finished.connect(
-            self.main_window.cfg.settings["building_threads"].deleteLater
-        )
-        self.main_window.cfg.settings["building_worker"].update_log_signal.connect(
-            self.main_window.cfg.settings["building_worker"].gui.update_gui
-        )
-        self.main_window.cfg.settings["building_worker"].update_build_progress_signal.connect(
-            self.main_window.cfg.settings["building_worker"].gui.update_building_progress
-        )
-        self.main_window.cfg.settings["building_threads"].start()
 
     def update_container_status_in_build(self, signal: int):
         """
