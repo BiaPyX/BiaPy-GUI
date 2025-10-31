@@ -8,7 +8,7 @@ import logging
 import traceback
 import qdarktheme
 from datetime import datetime
-from PySide6.QtCore import Qt, QSize, QObject, QEvent, QUrl
+from PySide6.QtCore import Qt, QSize, QObject, QEvent, QUrl, QPoint
 from PySide6.QtGui import (
     QDesktopServices,
     QColor,
@@ -26,6 +26,7 @@ from PySide6.QtWidgets import (
     QMainWindow,
     QToolTip,
     QApplication,
+    QPushButton,
 )
 from logging import Logger
 from typing import (
@@ -68,6 +69,16 @@ from ui.aux_windows import (
 
 os.environ["QT_MAC_WANTS_LAYER"] = "1"
 
+
+import PySide6.QtWidgets as QtWidgets
+
+INTERACTIVE = (
+    QtWidgets.QAbstractButton,
+    QtWidgets.QLineEdit, QtWidgets.QAbstractSpinBox,
+    QtWidgets.QComboBox, QtWidgets.QTextEdit, QtWidgets.QPlainTextEdit,
+    QtWidgets.QAbstractSlider, QtWidgets.QTabBar,
+    QtWidgets.QTreeView, QtWidgets.QListView, QtWidgets.QTableView,
+)
 
 class MainWindow(QMainWindow):
     def __init__(self, logger: Logger, log_info: Dict, theme: str):
@@ -167,7 +178,7 @@ class MainWindow(QMainWindow):
         info_icon = QIcon(self.cfg.settings["info_image"])
         info_icon_clicked = self.cfg.settings["info_image_clicked"]
 
-        def inspect_all_widgets(main_widget):
+        def inspect_all_widgets(main_widget, widget_names: List[str] = ["ui"]):
             for widget in main_widget.children():
                 if isinstance(widget, QPushButton):
                     if "_info" in widget.objectName().lower():
@@ -175,7 +186,7 @@ class MainWindow(QMainWindow):
                         widget.setIcon(info_icon)
                         widget.setIconSize(QSize(30, 30))
                         # Set instant tooltip
-                        widget.clicked.connect(lambda checked, a=widget.objectName(): self.showInstantToolTip(a))
+                        widget.clicked.connect(lambda checked, a=widget.objectName(): self.showInstantToolTip(a, widget_names))
                         widget.setStyleSheet(
                             "QPushButton {\n"
                             "  border-radius: 5px;\n"
@@ -191,7 +202,7 @@ class MainWindow(QMainWindow):
                         )
 
                 if isinstance(widget, QFrame) or isinstance(widget, QStackedWidget) or isinstance(widget, QWidget):
-                    inspect_all_widgets(widget)
+                    inspect_all_widgets(widget, widget_names)
 
         inspect_all_widgets(self.ui.page_run_biapy)
         inspect_all_widgets(self.ui.wizard_start_page_paths_frame)
@@ -216,6 +227,7 @@ class MainWindow(QMainWindow):
         self.model_carrousel_dialog = None
         self.tour = None        
         self.modify_yaml = modify_yaml_Ui(self)
+        inspect_all_widgets(self.modify_yaml.yaml_mod_window.centralwidget, widget_names=["modify_yaml", "yaml_mod_window"])
 
         # Variable to store model cards
         self.model_cards = None
@@ -226,39 +238,6 @@ class MainWindow(QMainWindow):
 
         self.external_model_restrictions = None
         self.pretrained_model_need_to_check = None
-
-        # Options to allow user moving the GUI
-        self.dragPos = self.pos()
-
-        def moveWindow(event):
-            """
-            Moves the window.
-
-            Parameters
-            ----------
-            event: QEvent
-                Event that called this function.
-            """
-            if event.buttons() == Qt.LeftButton:
-                self.move(self.pos() + event.globalPosition().toPoint() - self.dragPos)
-                self.dragPos = event.globalPosition().toPoint()
-                event.accept()
-
-        self.ui.frame_empty.mouseMoveEvent = moveWindow
-        self.ui.frame_8.mouseMoveEvent = moveWindow
-        self.ui.biapy_logo_frame.mouseMoveEvent = moveWindow
-        self.ui.frame_2.mouseMoveEvent = moveWindow
-
-    def mousePressEvent(self, event: QEvent):
-        """
-        Mouse press event handler to grad the GUI.
-
-        Parameters
-        ----------
-        event: QEvent
-            Mouse drag event.
-        """
-        self.dragPos = event.globalPosition().toPoint()
 
     def tour_exec(self):
         """
@@ -588,7 +567,7 @@ class MainWindow(QMainWindow):
                 reason="inform_user",
             )
 
-    def showInstantToolTip(self, gui_widget_name: str):
+    def showInstantToolTip(self, gui_widget_name: str, widget_names: List[str] = ["ui"]):
         """
         Shows the tooTip of a widget.
 
@@ -597,10 +576,49 @@ class MainWindow(QMainWindow):
         gui_widget_name : str
             Name of the QWidget selected to show the tooltip.
         """
+        widget = self
+        for widget_name in widget_names:
+            widget = getattr(widget, widget_name)
+
         QToolTip.showText(
             QCursor.pos(),
-            getattr(self.ui, gui_widget_name).toolTip(),
+            getattr(widget, gui_widget_name).toolTip(),
         )
+        self._dragging = False
+        self._dragPos = QPoint()
+
+    def _is_interactive_child(self, pos):
+        w = self.childAt(pos)
+        while w and w is not self:
+            if isinstance(w, INTERACTIVE):
+                return True
+            w = w.parentWidget()
+        return False
+
+    def mousePressEvent(self, e):
+        if e.button() == Qt.LeftButton and not self._is_interactive_child(e.position().toPoint()):
+            self._dragging = True
+            self._dragPos = e.globalPosition().toPoint()
+            e.accept()
+        else:
+            super().mousePressEvent(e)
+
+    def mouseMoveEvent(self, e):
+        if self._dragging and (e.buttons() & Qt.LeftButton):
+            delta = e.globalPosition().toPoint() - self._dragPos
+            self.move(self.pos() + delta)
+            self._dragPos = e.globalPosition().toPoint()
+            e.accept()
+        else:
+            super().mouseMoveEvent(e)
+
+    def mouseReleaseEvent(self, e):
+        if self._dragging and e.button() == Qt.LeftButton:
+            self._dragging = False
+            e.accept()
+        else:
+            super().mouseReleaseEvent(e)
+    
 
 
 if __name__ == "__main__":

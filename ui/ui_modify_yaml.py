@@ -154,7 +154,7 @@ class Ui_Modify_YAML(object):
         self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
         self.train_data_label = QLabel(self.train_path_frame)
         self.train_data_label.setObjectName(u"train_data_label")
-        self.train_data_label.setMinimumSize(QSize(190, 0))
+        self.train_data_label.setMinimumSize(QSize(205, 0))
         self.train_data_label.setMaximumSize(QSize(16777215, 16777215))
         self.train_data_label.setFont(font1)
 
@@ -202,7 +202,7 @@ class Ui_Modify_YAML(object):
         self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.train_gt_label = QLabel(self.train_gt_path_frame)
         self.train_gt_label.setObjectName(u"train_gt_label")
-        self.train_gt_label.setMinimumSize(QSize(190, 0))
+        self.train_gt_label.setMinimumSize(QSize(205, 0))
         self.train_gt_label.setMaximumSize(QSize(16777215, 16777215))
         self.train_gt_label.setFont(font1)
 
@@ -275,7 +275,7 @@ class Ui_Modify_YAML(object):
         self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
         self.DATA__VAL__PATH__LABEL = QLabel(self.val_path_frame)
         self.DATA__VAL__PATH__LABEL.setObjectName(u"DATA__VAL__PATH__LABEL")
-        self.DATA__VAL__PATH__LABEL.setMinimumSize(QSize(190, 0))
+        self.DATA__VAL__PATH__LABEL.setMinimumSize(QSize(205, 0))
         self.DATA__VAL__PATH__LABEL.setFont(font1)
         self.DATA__VAL__PATH__LABEL.setIndent(0)
 
@@ -322,7 +322,7 @@ class Ui_Modify_YAML(object):
         self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.validation_data_gt_label = QLabel(self.val_gt_path_frame)
         self.validation_data_gt_label.setObjectName(u"validation_data_gt_label")
-        self.validation_data_gt_label.setMinimumSize(QSize(190, 0))
+        self.validation_data_gt_label.setMinimumSize(QSize(205, 0))
         self.validation_data_gt_label.setFont(font1)
         self.validation_data_gt_label.setIndent(0)
 
@@ -391,7 +391,7 @@ class Ui_Modify_YAML(object):
         self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
         self.test_data_label = QLabel(self.test_path_frame)
         self.test_data_label.setObjectName(u"test_data_label")
-        self.test_data_label.setMinimumSize(QSize(190, 0))
+        self.test_data_label.setMinimumSize(QSize(205, 0))
         self.test_data_label.setFont(font1)
 
         self.horizontalLayout_8.addWidget(self.test_data_label)
@@ -438,7 +438,7 @@ class Ui_Modify_YAML(object):
         self.horizontalLayout_7.setContentsMargins(0, 0, 0, 0)
         self.test_data_gt_label = QLabel(self.test_gt_path_frame)
         self.test_data_gt_label.setObjectName(u"test_data_gt_label")
-        self.test_data_gt_label.setMinimumSize(QSize(190, 0))
+        self.test_data_gt_label.setMinimumSize(QSize(205, 0))
         self.test_data_gt_label.setFont(font1)
         self.test_data_gt_label.setIndent(0)
 
@@ -498,7 +498,7 @@ class Ui_Modify_YAML(object):
         self.horizontalLayout_9.setContentsMargins(9, -1, 9, -1)
         self.checkpoint_file_path_browse_label = QLabel(self.checkpoint_frame)
         self.checkpoint_file_path_browse_label.setObjectName(u"checkpoint_file_path_browse_label")
-        self.checkpoint_file_path_browse_label.setMinimumSize(QSize(190, 0))
+        self.checkpoint_file_path_browse_label.setMinimumSize(QSize(205, 0))
         self.checkpoint_file_path_browse_label.setFont(font1)
 
         self.horizontalLayout_9.addWidget(self.checkpoint_file_path_browse_label)

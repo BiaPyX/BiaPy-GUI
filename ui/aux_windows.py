@@ -4,7 +4,7 @@ import yaml
 import pooch
 from typing import Dict, List, Optional
 from packaging.version import Version
-from PySide6.QtCore import QCoreApplication, QSize, Qt, QEvent
+from PySide6.QtCore import QCoreApplication, QSize, Qt, QEvent, QPoint
 from PySide6.QtGui import (
     QColor,
     QFont,
@@ -12,7 +12,8 @@ from PySide6.QtGui import (
     QPixmap,
     QCloseEvent,
 )
-from PySide6.QtWidgets import QDialog, QFrame, QHBoxLayout, QLabel, QVBoxLayout, QStyle, QGridLayout, QFileDialog
+import PySide6.QtWidgets as QtWidgets
+from PySide6.QtWidgets import QDialog, QFrame, QHBoxLayout, QLabel, QVBoxLayout, QStyle, QGridLayout, QFileDialog, QPushButton
 
 from ui_utils import mark_syntax_error, resource_path, change_page
 from ui.ui_dialog import Ui_Dialog
@@ -26,6 +27,14 @@ from aux_classes.waitingspinnerwidget import QtWaitingSpinner
 import main
 
 from ui_utils import is_pathname_valid
+
+INTERACTIVE = (
+    QtWidgets.QAbstractButton,
+    QtWidgets.QLineEdit, QtWidgets.QAbstractSpinBox,
+    QtWidgets.QComboBox, QtWidgets.QTextEdit, QtWidgets.QPlainTextEdit,
+    QtWidgets.QAbstractSlider, QtWidgets.QTabBar,
+    QtWidgets.QTreeView, QtWidgets.QListView, QtWidgets.QTableView,
+)
 
 class dialog_Ui(QDialog):
     def __init__(
@@ -841,6 +850,41 @@ class modify_yaml_Ui(QDialog):
         self.yaml_mod_window.DATA__TEST__GT_PATH__INPUT.textChanged.connect(lambda: self.mark_syntax_error("DATA__TEST__GT_PATH__INPUT"))
         self.yaml_mod_window.PATHS__CHECKPOINT_FILE__INPUT.textChanged.connect(lambda: self.mark_syntax_error("PATHS__CHECKPOINT_FILE__INPUT"))
 
+        self._dragging = False
+        self._dragPos = QPoint()
+
+    def _is_interactive_child(self, pos):
+        w = self.childAt(pos)
+        while w and w is not self:
+            if isinstance(w, INTERACTIVE):
+                return True
+            w = w.parentWidget()
+        return False
+
+    def mousePressEvent(self, e):
+        if e.button() == Qt.LeftButton and not self._is_interactive_child(e.pos()):
+            self._dragging = True
+            self._dragPos = e.globalPos()
+            e.accept()
+        else:
+            super().mousePressEvent(e)
+
+    def mouseMoveEvent(self, e):
+        if self._dragging and (e.buttons() & Qt.LeftButton):
+            delta = e.globalPos() - self._dragPos
+            self.move(self.pos() + delta)
+            self._dragPos = e.globalPos()
+            e.accept()
+        else:
+            super().mouseMoveEvent(e)
+
+    def mouseReleaseEvent(self, e):
+        if self._dragging and e.button() == Qt.LeftButton:
+            self._dragging = False
+            e.accept()
+        else:
+            super().mouseReleaseEvent(e)
+    
     def examine(self, save_in_obj_tag: str, is_file: bool = True) -> str:
         """
         Find an item in disk. Can be a file or a directory.
@@ -1015,16 +1059,7 @@ class modify_yaml_Ui(QDialog):
         if self.closeEvent(event):
             super().reject()  # only close if accepted
 
-    def mousePressEvent(self, event: QEvent):
-        """
-        Mouse press event handler.
-
-        Parameters
-        ----------
-        event: QEvent
-            Event that called this function.
-        """
-        self.dragPos = event.globalPos()
+ 
 
     def clear_display(self):
         self.allow_instant_exit = False

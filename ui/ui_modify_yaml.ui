@@ -346,7 +346,7 @@ QPushButton:pressed {
                        <widget class="QLabel" name="train_data_label">
                         <property name="minimumSize">
                          <size>
-                          <width>190</width>
+                          <width>205</width>
                           <height>0</height>
                          </size>
                         </property>
@@ -488,7 +488,7 @@ QPushButton:pressed {
                        <widget class="QLabel" name="train_gt_label">
                         <property name="minimumSize">
                          <size>
-                          <width>190</width>
+                          <width>205</width>
                           <height>0</height>
                          </size>
                         </property>
@@ -704,7 +704,7 @@ QPushButton:pressed {
                        <widget class="QLabel" name="DATA__VAL__PATH__LABEL">
                         <property name="minimumSize">
                          <size>
-                          <width>190</width>
+                          <width>205</width>
                           <height>0</height>
                          </size>
                         </property>
@@ -837,7 +837,7 @@ QPushButton:pressed {
                        <widget class="QLabel" name="validation_data_gt_label">
                         <property name="minimumSize">
                          <size>
-                          <width>190</width>
+                          <width>205</width>
                           <height>0</height>
                          </size>
                         </property>
@@ -1029,7 +1029,7 @@ QPushButton:pressed {
                        <widget class="QLabel" name="test_data_label">
                         <property name="minimumSize">
                          <size>
-                          <width>190</width>
+                          <width>205</width>
                           <height>0</height>
                          </size>
                         </property>
@@ -1165,7 +1165,7 @@ QPushButton:pressed {
                        <widget class="QLabel" name="test_data_gt_label">
                         <property name="minimumSize">
                          <size>
-                          <width>190</width>
+                          <width>205</width>
                           <height>0</height>
                          </size>
                         </property>
@@ -1324,7 +1324,7 @@ QPushButton:pressed {
                     <widget class="QLabel" name="checkpoint_file_path_browse_label">
                      <property name="minimumSize">
                       <size>
-                       <width>190</width>
+                       <width>205</width>
                        <height>0</height>
                       </size>
                      </property>
