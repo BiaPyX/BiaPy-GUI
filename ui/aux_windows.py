@@ -709,7 +709,8 @@ class tour_window_Ui(QDialog):
         self.basic_window.window4_bn.clicked.connect(lambda: self.move_tour_view(4))
         self.basic_window.window5_bn.clicked.connect(lambda: self.move_tour_view(5))
         self.basic_window.window6_bn.clicked.connect(lambda: self.move_tour_view(6))
-        self.max_windows = 6
+        self.basic_window.window7_bn.clicked.connect(lambda: self.move_tour_view(7))
+        self.max_windows = 7
 
         # Set all icons
         self.basic_window.window1_bn.setIcon(self.dot_images[0])
@@ -743,7 +744,7 @@ class tour_window_Ui(QDialog):
             BiaPy version to display.
         """
         self.basic_window.presentation_version_text.setText(f"Version {str(version)}")
-        self.basic_window.d5_release_notes_text.setText(
+        self.basic_window.d6_release_notes_text.setText(
             f"<html><head/><body><p align=\"center\"><span style=\" font-family:'Arial','sans-serif'; font-size:13pt; color:#595959; background-color:transparent;\">Check out version {str(version)} </span><a href=\"https://github.com/BiaPyX/BiaPy-GUI/releases/tag/v{str(version)}\"><span style=\" font-family:'Arial','sans-serif'; font-size:13pt; text-decoration: underline; color:#0097a7; background-color:transparent;\">release notes</span></a><span style=\" font-family:'Arial','sans-serif'; font-size:13pt; color:#595959; background-color:transparent;\">.</span></p></body></html>"
         )
 
@@ -783,6 +784,8 @@ class tour_window_Ui(QDialog):
         elif self.current_tour_window == 5:
             self.basic_window.stackedWidget.setCurrentWidget(self.basic_window.description_page4)
         elif self.current_tour_window == 6:
+            self.basic_window.stackedWidget.setCurrentWidget(self.basic_window.description_page5)
+        elif self.current_tour_window == 7:
             self.basic_window.stackedWidget.setCurrentWidget(self.basic_window.release_notes_page)
 
         # Adjust the progress dot

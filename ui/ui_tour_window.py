@@ -30,8 +30,8 @@ class Ui_tour_window(object):
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.centralwidget = QFrame(tour_window)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.centralwidget.setFrameShape(QFrame.NoFrame)
-        self.centralwidget.setFrameShadow(QFrame.Plain)
+        self.centralwidget.setFrameShape(QFrame.Shape.NoFrame)
+        self.centralwidget.setFrameShadow(QFrame.Shadow.Plain)
         self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
         self.verticalLayout_2.setSpacing(9)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
@@ -40,8 +40,8 @@ class Ui_tour_window(object):
         self.frame_top.setObjectName(u"frame_top")
         self.frame_top.setMinimumSize(QSize(0, 0))
         self.frame_top.setMaximumSize(QSize(16777215, 16777215))
-        self.frame_top.setFrameShape(QFrame.NoFrame)
-        self.frame_top.setFrameShadow(QFrame.Plain)
+        self.frame_top.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_top.setFrameShadow(QFrame.Shadow.Plain)
         self.horizontalLayout = QHBoxLayout(self.frame_top)
         self.horizontalLayout.setSpacing(0)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
@@ -87,8 +87,8 @@ class Ui_tour_window(object):
         font.setPointSize(12)
         self.frame_middle.setFont(font)
         self.frame_middle.setStyleSheet(u"")
-        self.frame_middle.setFrameShape(QFrame.NoFrame)
-        self.frame_middle.setFrameShadow(QFrame.Raised)
+        self.frame_middle.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_middle.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_3 = QVBoxLayout(self.frame_middle)
         self.verticalLayout_3.setSpacing(0)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
@@ -113,7 +113,7 @@ class Ui_tour_window(object):
         font1.setPointSize(12)
         font1.setBold(True)
         self.presentation_text.setFont(font1)
-        self.presentation_text.setAlignment(Qt.AlignCenter)
+        self.presentation_text.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.verticalLayout_4.addWidget(self.presentation_text)
 
@@ -121,7 +121,7 @@ class Ui_tour_window(object):
         self.presentation_version_text.setObjectName(u"presentation_version_text")
         self.presentation_version_text.setFont(font)
         self.presentation_version_text.setStyleSheet(u"color: rgb(150, 150, 150)")
-        self.presentation_version_text.setAlignment(Qt.AlignCenter)
+        self.presentation_version_text.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.verticalLayout_4.addWidget(self.presentation_version_text)
 
@@ -181,6 +181,18 @@ class Ui_tour_window(object):
         self.horizontalLayout_7.addWidget(self.d4_label)
 
         self.stackedWidget.addWidget(self.description_page4)
+        self.description_page5 = QWidget()
+        self.description_page5.setObjectName(u"description_page5")
+        self.horizontalLayout_11 = QHBoxLayout(self.description_page5)
+        self.horizontalLayout_11.setSpacing(0)
+        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
+        self.horizontalLayout_11.setContentsMargins(0, 0, 0, 0)
+        self.d5_label = QLabel(self.description_page5)
+        self.d5_label.setObjectName(u"d5_label")
+
+        self.horizontalLayout_11.addWidget(self.d5_label)
+
+        self.stackedWidget.addWidget(self.description_page5)
         self.release_notes_page = QWidget()
         self.release_notes_page.setObjectName(u"release_notes_page")
         self.horizontalLayout_8 = QHBoxLayout(self.release_notes_page)
@@ -189,41 +201,41 @@ class Ui_tour_window(object):
         self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
         self.frame_3 = QFrame(self.release_notes_page)
         self.frame_3.setObjectName(u"frame_3")
-        self.frame_3.setFrameShape(QFrame.NoFrame)
-        self.frame_3.setFrameShadow(QFrame.Raised)
+        self.frame_3.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_3.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_5 = QVBoxLayout(self.frame_3)
         self.verticalLayout_5.setSpacing(0)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.d5_label = QLabel(self.frame_3)
-        self.d5_label.setObjectName(u"d5_label")
-        self.d5_label.setMinimumSize(QSize(600, 0))
-        self.d5_label.setMaximumSize(QSize(600, 16777215))
-        self.d5_label.setFont(font)
+        self.d6_label = QLabel(self.frame_3)
+        self.d6_label.setObjectName(u"d6_label")
+        self.d6_label.setMinimumSize(QSize(600, 0))
+        self.d6_label.setMaximumSize(QSize(600, 16777215))
+        self.d6_label.setFont(font)
 
-        self.verticalLayout_5.addWidget(self.d5_label)
+        self.verticalLayout_5.addWidget(self.d6_label)
 
         self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_5.addItem(self.verticalSpacer_3)
 
-        self.d5_release_notes_text = QLabel(self.frame_3)
-        self.d5_release_notes_text.setObjectName(u"d5_release_notes_text")
-        self.d5_release_notes_text.setFont(font)
-        self.d5_release_notes_text.setOpenExternalLinks(True)
+        self.d6_release_notes_text = QLabel(self.frame_3)
+        self.d6_release_notes_text.setObjectName(u"d6_release_notes_text")
+        self.d6_release_notes_text.setFont(font)
+        self.d6_release_notes_text.setOpenExternalLinks(True)
 
-        self.verticalLayout_5.addWidget(self.d5_release_notes_text)
+        self.verticalLayout_5.addWidget(self.d6_release_notes_text)
 
 
         self.horizontalLayout_8.addWidget(self.frame_3)
 
-        self.d5_right_text = QLabel(self.release_notes_page)
-        self.d5_right_text.setObjectName(u"d5_right_text")
-        self.d5_right_text.setFont(font)
-        self.d5_right_text.setWordWrap(True)
-        self.d5_right_text.setOpenExternalLinks(True)
+        self.d6_right_text = QLabel(self.release_notes_page)
+        self.d6_right_text.setObjectName(u"d6_right_text")
+        self.d6_right_text.setFont(font)
+        self.d6_right_text.setWordWrap(True)
+        self.d6_right_text.setOpenExternalLinks(True)
 
-        self.horizontalLayout_8.addWidget(self.d5_right_text)
+        self.horizontalLayout_8.addWidget(self.d6_right_text)
 
         self.stackedWidget.addWidget(self.release_notes_page)
 
@@ -234,16 +246,16 @@ class Ui_tour_window(object):
 
         self.frame_bottom = QFrame(self.centralwidget)
         self.frame_bottom.setObjectName(u"frame_bottom")
-        self.frame_bottom.setFrameShape(QFrame.NoFrame)
-        self.frame_bottom.setFrameShadow(QFrame.Raised)
+        self.frame_bottom.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_bottom.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_8 = QVBoxLayout(self.frame_bottom)
         self.verticalLayout_8.setSpacing(0)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
         self.verticalLayout_8.setContentsMargins(0, 0, 0, 0)
         self.frame_2 = QFrame(self.frame_bottom)
         self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setFrameShape(QFrame.NoFrame)
-        self.frame_2.setFrameShadow(QFrame.Raised)
+        self.frame_2.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_2.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_4 = QHBoxLayout(self.frame_2)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.horizontalLayout_4.setContentsMargins(9, 0, 9, 0)
@@ -251,8 +263,8 @@ class Ui_tour_window(object):
         self.frame_4.setObjectName(u"frame_4")
         self.frame_4.setMinimumSize(QSize(30, 50))
         self.frame_4.setMaximumSize(QSize(30, 50))
-        self.frame_4.setFrameShape(QFrame.NoFrame)
-        self.frame_4.setFrameShadow(QFrame.Raised)
+        self.frame_4.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_4.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_10 = QHBoxLayout(self.frame_4)
         self.horizontalLayout_10.setSpacing(0)
         self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
@@ -377,6 +389,22 @@ class Ui_tour_window(object):
 
         self.horizontalLayout_4.addWidget(self.window6_bn)
 
+        self.window7_bn = QPushButton(self.frame_2)
+        self.window7_bn.setObjectName(u"window7_bn")
+        self.window7_bn.setMaximumSize(QSize(20, 16777215))
+        self.window7_bn.setStyleSheet(u"QPushButton {\n"
+"	border: none;\n"
+"	background-color: rgba(0,0,0,0);\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(255,255,255);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(255,255,255);\n"
+"}")
+
+        self.horizontalLayout_4.addWidget(self.window7_bn)
+
         self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_4.addItem(self.horizontalSpacer_2)
@@ -385,8 +413,8 @@ class Ui_tour_window(object):
         self.frame_5.setObjectName(u"frame_5")
         self.frame_5.setMinimumSize(QSize(30, 50))
         self.frame_5.setMaximumSize(QSize(30, 50))
-        self.frame_5.setFrameShape(QFrame.NoFrame)
-        self.frame_5.setFrameShadow(QFrame.Raised)
+        self.frame_5.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_5.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_9 = QHBoxLayout(self.frame_5)
         self.horizontalLayout_9.setSpacing(0)
         self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
@@ -412,12 +440,12 @@ class Ui_tour_window(object):
         self.horizontalLayout_4.addWidget(self.frame_5)
 
 
-        self.verticalLayout_8.addWidget(self.frame_2, 0, Qt.AlignVCenter)
+        self.verticalLayout_8.addWidget(self.frame_2, 0, Qt.AlignmentFlag.AlignVCenter)
 
         self.frame = QFrame(self.frame_bottom)
         self.frame.setObjectName(u"frame")
-        self.frame.setFrameShape(QFrame.NoFrame)
-        self.frame.setFrameShadow(QFrame.Raised)
+        self.frame.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_2 = QHBoxLayout(self.frame)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.dont_show_message_checkbox = QCheckBox(self.frame)
@@ -431,7 +459,7 @@ class Ui_tour_window(object):
         self.ok_bn.setMinimumSize(QSize(150, 30))
         self.ok_bn.setMaximumSize(QSize(150, 16777215))
         self.ok_bn.setFont(font)
-        self.ok_bn.setFocusPolicy(Qt.NoFocus)
+        self.ok_bn.setFocusPolicy(Qt.FocusPolicy.NoFocus)
 
         self.horizontalLayout_2.addWidget(self.ok_bn)
 
@@ -462,7 +490,8 @@ class Ui_tour_window(object):
         self.d2_label.setText("")
         self.d3_label.setText("")
         self.d4_label.setText("")
-        self.d5_right_text.setText(QCoreApplication.translate("tour_window", u"<html><head/><body><p><a name=\"docs-internal-guid-b8b2138f-7fff-57ba-34f3-3dafb7ee5dac\"/><span style=\" font-family:'Arial','sans-serif'; font-size:24pt; color:#000000; background-color:transparent;\">F</span><span style=\" font-family:'Arial','sans-serif'; font-size:24pt; color:#000000; background-color:transparent;\">urther help</span></p><p><a name=\"docs-internal-guid-c384090c-7fff-0c38-410d-e6caed5cd4d6\"/><span style=\" font-family:'Arial','sans-serif'; font-size:13pt; color:#595959; background-color:transparent;\">F</span><span style=\" font-family:'Arial','sans-serif'; font-size:13pt; color:#595959; background-color:transparent;\">or more information, in the \u201cHome\u201d options, click on \u201cDocumentation\u201d to get redirected to </span><a href=\"https://biapy.readthedocs.io/en/latest/index.html\"><span style=\" font-family:'Arial','sans-serif'; font-size:13pt; text-decoration: underline; color:#0097a7; background-color:transparent;\">BiaPy\u2019s documentation site</span></a><span style=\" "
+        self.d5_label.setText("")
+        self.d6_right_text.setText(QCoreApplication.translate("tour_window", u"<html><head/><body><p><a name=\"docs-internal-guid-b8b2138f-7fff-57ba-34f3-3dafb7ee5dac\"/><span style=\" font-family:'Arial','sans-serif'; font-size:24pt; color:#000000; background-color:transparent;\">F</span><span style=\" font-family:'Arial','sans-serif'; font-size:24pt; color:#000000; background-color:transparent;\">urther help</span></p><p><a name=\"docs-internal-guid-c384090c-7fff-0c38-410d-e6caed5cd4d6\"/><span style=\" font-family:'Arial','sans-serif'; font-size:13pt; color:#595959; background-color:transparent;\">F</span><span style=\" font-family:'Arial','sans-serif'; font-size:13pt; color:#595959; background-color:transparent;\">or more information, in the \u201cHome\u201d options, click on \u201cDocumentation\u201d to get redirected to </span><a href=\"https://biapy.readthedocs.io/en/latest/index.html\"><span style=\" font-family:'Arial','sans-serif'; font-size:13pt; text-decoration: underline; color:#0097a7; background-color:transparent;\">BiaPy\u2019s documentation site</span></a><span style=\" "
                         "font-family:'Arial','sans-serif'; font-size:13pt; color:#595959; background-color:transparent;\">.</span></p><p><span style=\" font-family:'Arial','sans-serif'; font-size:13pt; color:#595959; background-color:transparent;\">If you run into trouble, check our </span><a href=\"https://biapy.readthedocs.io/en/latest/get_started/faq.html\"><span style=\" font-family:'Arial','sans-serif'; font-size:13pt; text-decoration: underline; color:#0097a7; background-color:transparent;\">FAQ &amp; Troubleshooting</span></a><span style=\" font-family:'Arial','sans-serif'; font-size:13pt; color:#595959; background-color:transparent;\"> page or leave us a comment in the </span><a href=\"https://forum.image.sc/tag/biapy\"><span style=\" font-family:'Arial','sans-serif'; font-size:13pt; text-decoration: underline; color:#0097a7; background-color:transparent;\">image.sc forum</span></a><span style=\" font-family:'Arial','sans-serif'; font-size:13pt; color:#595959; background-color:transparent;\">.</span></p><p><span style=\" font-"
                         "family:'Arial','sans-serif'; font-size:13pt; color:#595959; background-color:transparent;\">All feedback is welcome!</span></p></body></html>", None))
         self.left_arrow_bn.setText("")
@@ -472,6 +501,7 @@ class Ui_tour_window(object):
         self.window4_bn.setText("")
         self.window5_bn.setText("")
         self.window6_bn.setText("")
+        self.window7_bn.setText("")
         self.right_arrow_bn.setText("")
         self.dont_show_message_checkbox.setText(QCoreApplication.translate("tour_window", u"Do not show this message again. ", None))
         self.ok_bn.setText(QCoreApplication.translate("tour_window", u"Got it!", None))
