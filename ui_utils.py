@@ -46,14 +46,14 @@ from biapy.biapy_aux_functions import (
 )
 
 
-def examine(main_window: main.MainWindow, save_in_obj_tag: Optional[str] = None, is_file: bool = True) -> str:
+def examine(_window: QWidget, save_in_obj_tag: Optional[str] = None, is_file: bool = True) -> str:
     """
     Find an item in disk. Can be a file or a directory.
 
     Parameters
     ----------
-    main_window : MainWindow
-        Main window of the application.
+    _window : MainWindow
+        Window of the application.
 
     save_in_obj_tag : str
         Name of the widget to set the item's name into.
@@ -62,7 +62,7 @@ def examine(main_window: main.MainWindow, save_in_obj_tag: Optional[str] = None,
         Whether the item to find is a file or a directory.
     """
     if not is_file:
-        out = QFileDialog.getExistingDirectory(main_window, "Select a directory")
+        out = QFileDialog.getExistingDirectory(_window, "Select a directory")
     else:
         out = QFileDialog.getOpenFileName()[0]
 
@@ -70,19 +70,7 @@ def examine(main_window: main.MainWindow, save_in_obj_tag: Optional[str] = None,
         return out  # If no file was selected
 
     if save_in_obj_tag is not None:
-        getattr(main_window.ui, save_in_obj_tag).setText(os.path.normpath(out))
-        if save_in_obj_tag == "DATA__TRAIN__PATH__INPUT":
-            main_window.cfg.settings["train_data_input_path"] = out
-        elif save_in_obj_tag == "DATA__TRAIN__GT_PATH__INPUT":
-            main_window.cfg.settings["train_data_gt_input_path"] = out
-        elif save_in_obj_tag == "DATA__VAL__PATH__INPUT":
-            main_window.cfg.settings["validation_data_input_path"] = out
-        elif save_in_obj_tag == "DATA__VAL__GT_PATH__INPUT":
-            main_window.cfg.settings["validation_data_gt_input_path"] = out
-        elif save_in_obj_tag == "DATA__TEST__PATH__INPUT":
-            main_window.cfg.settings["test_data_input_path"] = out
-        elif save_in_obj_tag == "DATA__TEST__GT_PATH__INPUT":
-            main_window.cfg.settings["test_data_gt_input_path"] = out
+        getattr(_window.ui, save_in_obj_tag).setText(os.path.normpath(out))
 
     return out
 
@@ -2009,13 +1997,13 @@ class load_yaml_to_GUI_engine(QObject):
     state_signal = Signal(int)
 
     # Signal to update variables in GUI
-    update_var_signal = Signal(str, str)
+    update_var_signal = Signal(str, str, list)
 
     # Signal to indicate the main thread that there was an error
     error_signal = Signal(str, str)
 
     # Signal to send a message to the user about the result of loading the YAML file
-    report_yaml_load_result = Signal(str, str)
+    report_yaml_load_result = Signal(str, str, dict, bool, dict)
 
     # Signal to indicate the main thread that the worker has finished
     finished_signal = Signal()
@@ -2040,6 +2028,7 @@ class load_yaml_to_GUI_engine(QObject):
         self.main_window = main_window
         self.yaml_file = yaml_file
         self.thread_queue = thread_queue
+        self.paths_vars_to_set = {}
 
     def run(self):
         """
@@ -2096,6 +2085,14 @@ class load_yaml_to_GUI_engine(QObject):
                 "DATA__TEST__GT_PATH__INPUT",
             ]
 
+            # BiaPy pretrained model
+            self.checkpoint_needed = False
+            if tmp_cfg["MODEL"]["SOURCE"] == "biapy":
+                if tmp_cfg["MODEL"]["LOAD_CHECKPOINT"]:
+                    self.checkpoint_needed = True
+                elif not tmp_cfg["TRAIN"]["ENABLE"] and tmp_cfg["TEST"]["ENABLE"]:
+                    self.checkpoint_needed = True
+
             # Go over configuration file
             errors, variables_set = self.analyze_dict(conf=loaded_cfg, sep="")
 
@@ -2108,7 +2105,7 @@ class load_yaml_to_GUI_engine(QObject):
                     self.main_window.logger.info("{}. : {}".format(i + 1, errors[i]))
 
             # Message for the user
-            self.report_yaml_load_result.emit(errors, self.yaml_file)
+            self.report_yaml_load_result.emit(errors, self.yaml_file, self.paths_vars_to_set, self.checkpoint_needed, loaded_cfg)
         except:
             exc = traceback.format_exc()
             self.main_window.logger.error(exc)
@@ -2163,12 +2160,15 @@ class load_yaml_to_GUI_engine(QObject):
                 # Set variable values
                 if set_var:
                     err = None
-                    if hasattr(self.main_window.ui, widget_name):
-                        self.update_var_signal.emit(widget_name, str(v))
+                    if hasattr(self.main_window.modify_yaml.yaml_mod_window, widget_name):
+                        self.update_var_signal.emit(widget_name, str(v), ["modify_yaml","yaml_mod_window"])
                         err = self.thread_queue.get()
                     else:
                         if not widget_name.startswith("PATHS__"):
                             err = "{} widget does not exist".format(widget_name)
+
+                    if "PATH__INPUT" in widget_name:
+                        self.paths_vars_to_set[widget_name.replace("__INPUT", "")] = v
 
                     if err is not None:
                         errors.append(err)

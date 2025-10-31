@@ -14,7 +14,6 @@ from PySide6.QtGui import (
     QColor,
     QIcon,
     QPixmap,
-    QCloseEvent,
     QCursor,
 )
 from PySide6.QtWidgets import (
@@ -59,6 +58,7 @@ from settings import Settings
 from ui.ui_main import Ui_MainWindow
 from ui.aux_windows import (
     dialog_Ui,
+    modify_yaml_Ui,
     yes_no_Ui,
     spinner_Ui,
     basic_Ui,
@@ -214,7 +214,8 @@ class MainWindow(QMainWindow):
         self.spinner = None
         self.basic_dialog = None
         self.model_carrousel_dialog = None
-        self.tour = None
+        self.tour = None        
+        self.modify_yaml = modify_yaml_Ui(self)
 
         # Variable to store model cards
         self.model_cards = None
@@ -235,7 +236,7 @@ class MainWindow(QMainWindow):
 
             Parameters
             ----------
-            event: QCloseEvent
+            event: QEvent
                 Event that called this function.
             """
             if event.buttons() == Qt.LeftButton:
@@ -248,13 +249,13 @@ class MainWindow(QMainWindow):
         self.ui.biapy_logo_frame.mouseMoveEvent = moveWindow
         self.ui.frame_2.mouseMoveEvent = moveWindow
 
-    def mousePressEvent(self, event: QCloseEvent):
+    def mousePressEvent(self, event: QEvent):
         """
         Mouse press event handler to grad the GUI.
 
         Parameters
         ----------
-        event: QCloseEvent
+        event: QEvent
             Mouse drag event.
         """
         self.dragPos = event.globalPosition().toPoint()
@@ -425,7 +426,7 @@ class MainWindow(QMainWindow):
             assert self.model_carrousel_dialog
             self.model_carrousel_dialog.close()
 
-    def update_variable_in_GUI(self, variable_name: str, variable_value: str):
+    def update_variable_in_GUI(self, variable_name: str, variable_value: str, widget_names=["ui"]):
         """
         Update a GUI's variable called ``variable_name`` with ``variable_value``.
 
@@ -442,7 +443,12 @@ class MainWindow(QMainWindow):
         err : str
             Error given in the process. It is ``None`` if not error was thrown.
         """
-        err = set_text(getattr(self.ui, variable_name), str(variable_value))
+        widget = self
+        for widget_name in widget_names:
+            widget = getattr(widget, widget_name)
+
+        err = set_text(getattr(widget, variable_name), str(variable_value))
+        
         self.thread_queue.put(err)
         return err
 
@@ -477,7 +483,7 @@ class MainWindow(QMainWindow):
             self.spinner.close()
             self.ui.centralwidget.setEnabled(True)
 
-    def report_yaml_load(self, errors: str, yaml_file: str):
+    def report_yaml_load(self, errors: str, yaml_file: str, paths_to_change: Dict[str, str], checkpoint_needed: bool, loaded_cfg: Dict):
         """
         Report to the user the result of loading the YAML file. If an error was found a dialog
         will be launched.
@@ -493,11 +499,14 @@ class MainWindow(QMainWindow):
         if len(errors) == 0:
             self.yaml_file = yaml_file
             self.dialog_exec(
-                "Configuration file succesfully loaded! You will "
-                "be redirected to the workflow page so you can modify the configuration.",
+                "Configuration file succesfully loaded! You will be prompted to modify any discrepant paths.",
                 "inform_user_and_go",
             )
             self.cfg.settings["yaml_config_file_path"] = os.path.dirname(self.yaml_file)
+
+            center_window(self.modify_yaml, self.geometry())
+            self.modify_yaml.display_discrepancies(paths_to_change, checkpoint_needed=checkpoint_needed, yaml_file=yaml_file, loaded_cfg=loaded_cfg)
+            self.modify_yaml.exec()                    
         else:
             self.dialog_exec(errors, "load_yaml_ok_but_errors")
 
@@ -523,13 +532,13 @@ class MainWindow(QMainWindow):
                 "inform_user",
             )
 
-    def closeEvent(self, event: QCloseEvent):
+    def closeEvent(self, event: QEvent):
         """
         Manages closing event to ensure all threads are killed.
 
         Parameters
         ----------
-        event: QCloseEvent
+        event: QEvent
             Main window of the application.
         """
         # Find if some window is still running

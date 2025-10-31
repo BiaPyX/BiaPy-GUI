@@ -1,9 +1,10 @@
 from __future__ import annotations
 import os
+import yaml
 import pooch
 from typing import Dict, List, Optional
 from packaging.version import Version
-from PySide6.QtCore import QCoreApplication, QSize, Qt
+from PySide6.QtCore import QCoreApplication, QSize, Qt, QEvent
 from PySide6.QtGui import (
     QColor,
     QFont,
@@ -11,17 +12,20 @@ from PySide6.QtGui import (
     QPixmap,
     QCloseEvent,
 )
-from PySide6.QtWidgets import QDialog, QFrame, QHBoxLayout, QLabel, QVBoxLayout, QStyle, QGridLayout
+from PySide6.QtWidgets import QDialog, QFrame, QHBoxLayout, QLabel, QVBoxLayout, QStyle, QGridLayout, QFileDialog
 
 from ui_utils import mark_syntax_error, resource_path, change_page
 from ui.ui_dialog import Ui_Dialog
 from ui.ui_yes_no import Ui_yes_no
 from ui.spinner import Ui_spinner
 from ui.ui_basic import Ui_basic
+from ui.ui_modify_yaml import Ui_Modify_YAML
 from ui.ui_model_carrousel import Ui_model_card_carrousel_dialog
 from ui.ui_tour_window import Ui_tour_window
 from aux_classes.waitingspinnerwidget import QtWaitingSpinner
 import main
+
+from ui_utils import is_pathname_valid
 
 class dialog_Ui(QDialog):
     def __init__(
@@ -66,13 +70,13 @@ class dialog_Ui(QDialog):
         self.signals_created = False
         self.dialog_window.frame_top.mouseMoveEvent = moveErrorWindow
 
-    def mousePressEvent(self, event: QCloseEvent):
+    def mousePressEvent(self, event: QEvent):
         """
         Mouse press event handler.
 
         Parameters
         ----------
-        event: QCloseEvent
+        event: QEvent
             Event that called this function.
         """
         self.dragPos = event.globalPos()
@@ -284,7 +288,6 @@ class basic_Ui(QDialog):
         self.basic_window.setupUi(self)
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowMinimizeButtonHint)
         self.basic_window.bn_close.clicked.connect(self.close)
-        self.basic_window.ok_bn.clicked.connect(self.close)
         self.basic_window.bn_close.setIcon(self.style().standardIcon(QStyle.StandardPixmap.SP_TitleBarCloseButton))
         self.basic_window.icon_label.setPixmap(QPixmap(resource_path(os.path.join("images", "wizard", "wizard.png"))))
         self.setStyleSheet("#centralwidget{ border: 1px solid black;} QWidget{ font-size:16px;}")
@@ -779,3 +782,313 @@ class tour_window_Ui(QDialog):
 
         for i in range(self.current_tour_window + 1, self.max_windows + 1):
             getattr(self.basic_window, f"window{i}_bn").setIcon(self.dot_images[1])
+
+
+class modify_yaml_Ui(QDialog):
+    def __init__(
+        self,
+        parent_ui: main.MainWindow,
+    ):
+        """
+        Creates a window to inform the user about YAML discrepancies and allow them to go to the correct section.
+        """
+        super(modify_yaml_Ui, self).__init__()
+        self.yaml_mod_window = Ui_Modify_YAML()
+        self.yaml_mod_window.setupUi(self)
+        self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowMinimizeButtonHint)
+        self.yaml_mod_window.icon_label.setPixmap(QPixmap(resource_path(os.path.join("images", "bn_images", "info.png"))))
+        self.setStyleSheet("#centralwidget{ border: 1px solid black;} QWidget{ font-size:16px;}")
+        self.parent_ui = parent_ui
+
+        self.yaml_mod_window.train_data_input_browse_bn.clicked.connect(lambda: self.examine("DATA__TRAIN__PATH__INPUT", False))
+        self.yaml_mod_window.train_data_gt_input_browse_bn.clicked.connect(lambda: self.examine("DATA__TRAIN__GT_PATH__INPUT", False))
+        self.yaml_mod_window.val_data_input_browse_bn.clicked.connect(lambda: self.examine("DATA__VAL__PATH__INPUT", False))
+        self.yaml_mod_window.val_data_gt_input_browse_bn.clicked.connect(lambda: self.examine("DATA__VAL__GT_PATH__INPUT", False))
+        self.yaml_mod_window.test_data_input_browse_bn.clicked.connect(lambda: self.examine("DATA__TEST__PATH__INPUT", False))
+        self.yaml_mod_window.test_data_gt_input_browse_bn.clicked.connect(lambda: self.examine("DATA__TEST__GT_PATH__INPUT", False))
+        self.yaml_mod_window.checkpoint_file_path_browse_bn.clicked.connect(lambda: self.examine("PATHS__CHECKPOINT_FILE__INPUT", True))
+        self.yaml_mod_window.create_config_bn.clicked.connect(self.save_new_yaml)
+        self.loaded_cfg = None
+
+        def moveErrorWindow(event: QEvent):
+            """
+            Move the error window.
+
+            Parameters
+            ----------
+            event: QEvent
+                Event that called this function.
+            """
+            if event.buttons() == Qt.LeftButton:
+                self.move(self.pos() + event.globalPos() - self.dragPos)
+                self.dragPos = event.globalPos()
+                event.accept()
+
+        self.allow_instant_exit = False
+        self.yaml_mod_window.frame_top.mouseMoveEvent = moveErrorWindow
+        self.yaml_file = ""
+
+        self.yaml_mod_window.DATA__TRAIN__PATH__INPUT.textChanged.connect(lambda: self.mark_syntax_error("DATA__TRAIN__PATH__INPUT"))
+        self.yaml_mod_window.DATA__TRAIN__GT_PATH__INPUT.textChanged.connect(lambda: self.mark_syntax_error("DATA__TRAIN__GT_PATH__INPUT"))
+        self.yaml_mod_window.DATA__VAL__PATH__INPUT.textChanged.connect(lambda: self.mark_syntax_error("DATA__VAL__PATH__INPUT"))
+        self.yaml_mod_window.DATA__VAL__GT_PATH__INPUT.textChanged.connect(lambda: self.mark_syntax_error("DATA__VAL__GT_PATH__INPUT"))
+        self.yaml_mod_window.DATA__TEST__PATH__INPUT.textChanged.connect(lambda: self.mark_syntax_error("DATA__TEST__PATH__INPUT"))
+        self.yaml_mod_window.DATA__TEST__GT_PATH__INPUT.textChanged.connect(lambda: self.mark_syntax_error("DATA__TEST__GT_PATH__INPUT"))
+        self.yaml_mod_window.PATHS__CHECKPOINT_FILE__INPUT.textChanged.connect(lambda: self.mark_syntax_error("PATHS__CHECKPOINT_FILE__INPUT"))
+
+    def examine(self, save_in_obj_tag: str, is_file: bool = True) -> str:
+        """
+        Find an item in disk. Can be a file or a directory.
+
+        Parameters
+        ----------
+        save_in_obj_tag : str
+            Name of the widget to set the item's name into.
+
+        is_file : bool, optional
+            Whether the item to find is a file or a directory.
+        """
+        if not is_file:
+            out = QFileDialog.getExistingDirectory(self, "Select a directory")
+        else:
+            out = QFileDialog.getOpenFileName()[0]
+
+        if out == "":
+            return out  # If no file was selected
+
+        if save_in_obj_tag is not None:
+            getattr(self.yaml_mod_window, save_in_obj_tag).setText(os.path.normpath(out))
+
+        return out
+
+    def mark_syntax_error(self, widget_name: str):
+        """
+        Marks syntax errors in the given widget.
+
+        Parameters
+        ----------
+        widget_name : str
+            Name of the widget to mark.
+        """
+        widget = getattr(self.yaml_mod_window, widget_name)
+        file = widget.text()
+        if not (is_pathname_valid(file) and os.path.exists(file)):
+            widget.setStyleSheet("border: 2px solid red;")
+        else:
+            widget.setStyleSheet("border: 2px solid green;")
+
+    def save_new_yaml(self):
+        # Writing YAML file
+        replace = True
+        yaml_file = self.yaml_mod_window.cfg_file_path.text()
+        if not is_pathname_valid(yaml_file):
+            self.parent_ui.dialog_exec(
+                "The YAML file path provided is not valid. Please check it and try again.",
+                reason="error",
+            )
+            return
+        basedir = os.path.dirname(yaml_file)
+        
+        if os.path.exists(yaml_file):
+            self.parent_ui.yes_no_exec("The file '{}' already exists. Do you want to overwrite it?".format(yaml_file))
+            assert self.parent_ui.yes_no
+            replace = True if self.parent_ui.yes_no.answer else False
+        if replace:
+            self.parent_ui.logger.info("Creating YAML file")
+
+            assert self.loaded_cfg is not None, "No configuration loaded to modify. BiaPy GUI internal error."
+            train_path = self.yaml_mod_window.DATA__TRAIN__PATH__INPUT.text()
+            val_path = self.yaml_mod_window.DATA__VAL__PATH__INPUT.text()
+            test_path = self.yaml_mod_window.DATA__TEST__PATH__INPUT.text()
+            train_gt_path = self.yaml_mod_window.DATA__TRAIN__GT_PATH__INPUT.text()
+            val_gt_path = self.yaml_mod_window.DATA__VAL__GT_PATH__INPUT.text()
+            test_gt_path = self.yaml_mod_window.DATA__TEST__GT_PATH__INPUT.text()
+            chk_pt_path = self.yaml_mod_window.PATHS__CHECKPOINT_FILE__INPUT.text()
+            
+            if train_path != "" and "DATA" in self.loaded_cfg and "TRAIN" in self.loaded_cfg["DATA"]:
+                if not (is_pathname_valid(train_path) and os.path.exists(train_path)):
+                    self.parent_ui.dialog_exec(
+                        "The training data path provided does not exist. Please check it and try again.",
+                        reason="error",
+                    )
+                    return
+                self.loaded_cfg["DATA"]["TRAIN"]["PATH"] = train_path
+
+            if train_gt_path != "" and "DATA" in self.loaded_cfg and "TRAIN" in self.loaded_cfg["DATA"]:
+                if not (is_pathname_valid(train_gt_path) and os.path.exists(train_gt_path)):
+                    self.parent_ui.dialog_exec(
+                        "The training ground truth path provided does not exist. Please check it and try again.",
+                        reason="error",
+                    )
+                    return
+                self.loaded_cfg["DATA"]["TRAIN"]["GT_PATH"] = train_gt_path
+            if val_path != "" and "DATA" in self.loaded_cfg and "VAL" in self.loaded_cfg["DATA"]:
+                if not (is_pathname_valid(val_path) and os.path.exists(val_path)):
+                    self.parent_ui.dialog_exec(
+                        "The validation data path provided does not exist. Please check it and try again.",
+                        reason="error",
+                    )
+                    return
+                self.loaded_cfg["DATA"]["VAL"]["PATH"] = val_path
+            if val_gt_path != "" and "DATA" in self.loaded_cfg and "VAL" in self.loaded_cfg["DATA"]:
+                if not (is_pathname_valid(val_gt_path) and os.path.exists(val_gt_path)):
+                    self.parent_ui.dialog_exec(
+                        "The validation ground truth path provided does not exist. Please check it and try again.",
+                        reason="error",
+                    )
+                    return
+                self.loaded_cfg["DATA"]["VAL"]["GT_PATH"] = val_gt_path
+            if test_path != "" and "DATA" in self.loaded_cfg and "TEST" in self.loaded_cfg["DATA"]:
+                if not (is_pathname_valid(test_path) and os.path.exists(test_path)):
+                    self.parent_ui.dialog_exec(
+                        "The test data path provided does not exist. Please check it and try again.",
+                        reason="error",
+                    )
+                    return
+                self.loaded_cfg["DATA"]["TEST"]["PATH"] = test_path
+            if test_gt_path != "" and "DATA" in self.loaded_cfg and "TEST" in self.loaded_cfg["DATA"]:
+                if not (is_pathname_valid(test_gt_path) and os.path.exists(test_gt_path)):
+                    self.parent_ui.dialog_exec(
+                        "The test ground truth path provided does not exist. Please check it and try again.",
+                        reason="error",
+                    )
+                    return
+                self.loaded_cfg["DATA"]["TEST"]["GT_PATH"] = test_gt_path
+            if chk_pt_path != "" and "PATHS" in self.loaded_cfg:
+                if not (is_pathname_valid(chk_pt_path) and os.path.exists(chk_pt_path)):
+                    self.parent_ui.dialog_exec(
+                        "The checkpoint file path provided does not exist. Please check it and try again.",
+                        reason="error",
+                    )
+                    return
+                self.loaded_cfg["PATHS"]["CHECKPOINT_FILE"] = chk_pt_path
+
+            os.makedirs(basedir, exist_ok=True)
+            with open(yaml_file, "w", encoding="utf8") as outfile:
+                yaml.dump(self.loaded_cfg, outfile, default_flow_style=False)
+
+            self.parent_ui.dialog_exec(
+                "Configuration file saved successfully at '{}'.".format(yaml_file),
+                "inform_user",
+            )
+            
+            # Set Run window parameters accordingly
+            out_write = os.path.basename(os.path.normpath(yaml_file))
+            self.parent_ui.cfg.settings["yaml_config_filename"] = out_write
+            self.parent_ui.cfg.settings["yaml_config_file_path"] = os.path.dirname(basedir)
+            self.parent_ui.ui.job_name_input.setPlainText(os.path.splitext(out_write)[0])
+            self.parent_ui.ui.select_yaml_name_label.setText(os.path.normpath(yaml_file))
+            change_page(self.parent_ui, "bn_run_biapy", 99)
+
+            self.allow_instant_exit = True
+            self.close()
+
+    def closeEvent(self, event: QCloseEvent):
+        """
+        Close event handler.
+
+        Parameters
+        ----------
+        event: QCloseEvent
+            Event that called this function.
+        """
+        if self.allow_instant_exit:
+            event.accept()
+            return True
+        
+        self.parent_ui.yes_no_exec("Are you sure you want to exit editing the configuration file? It may not work properly if you do so.")
+        assert self.parent_ui.yes_no
+        if self.parent_ui.yes_no.answer:
+            event.accept()
+            return True
+        else:
+            event.ignore()
+            return False
+
+    def reject(self):
+        event = QCloseEvent()
+        if self.closeEvent(event):
+            super().reject()  # only close if accepted
+
+    def mousePressEvent(self, event: QEvent):
+        """
+        Mouse press event handler.
+
+        Parameters
+        ----------
+        event: QEvent
+            Event that called this function.
+        """
+        self.dragPos = event.globalPos()
+
+    def clear_display(self):
+        self.allow_instant_exit = False
+        self.yaml_mod_window.train_label.setVisible(False)
+        self.yaml_mod_window.train_frame.setVisible(False)
+        self.yaml_mod_window.DATA__TRAIN__PATH__INPUT.setText("")
+        self.yaml_mod_window.train_gt_path_frame.setVisible(False)
+        self.yaml_mod_window.DATA__TRAIN__GT_PATH__INPUT.setText("")
+
+        self.yaml_mod_window.val_label.setVisible(False)
+        self.yaml_mod_window.val_frame.setVisible(False)
+        self.yaml_mod_window.DATA__VAL__PATH__INPUT.setText("")
+        self.yaml_mod_window.val_gt_path_frame.setVisible(False)
+        self.yaml_mod_window.DATA__VAL__GT_PATH__INPUT.setText("")
+
+        self.yaml_mod_window.test_label.setVisible(False)
+        self.yaml_mod_window.test_frame.setVisible(False)
+        self.yaml_mod_window.DATA__TEST__PATH__INPUT.setText("")
+        self.yaml_mod_window.test_gt_path_frame.setVisible(False)
+        self.yaml_mod_window.DATA__TEST__GT_PATH__INPUT.setText("")
+    
+    def display_discrepancies(self, paths_to_change: Dict[str, str], checkpoint_needed: bool = False, yaml_file: str = "", loaded_cfg: Dict = {}):
+        """
+        Sets the message of the window.
+
+        Parameters
+        ----------
+        paths_to_change : dict[str, bool]
+            Dictionary of paths to change and their status.
+        """
+        self.clear_display()
+        for key, path in paths_to_change.items():
+            if "TRAIN" in key:
+                self.yaml_mod_window.train_frame.setVisible(True)
+                self.yaml_mod_window.train_label.setVisible(True)
+                if "GT" in key:
+                    self.yaml_mod_window.train_gt_path_frame.setVisible(True)
+                    self.yaml_mod_window.DATA__TRAIN__GT_PATH__INPUT.setText(path)
+                else:
+                    self.yaml_mod_window.train_frame.setVisible(True)
+                    self.yaml_mod_window.DATA__TRAIN__PATH__INPUT.setText(path)
+            elif "VAL" in key:
+                self.yaml_mod_window.val_frame.setVisible(True)
+                self.yaml_mod_window.val_label.setVisible(True)
+                if "GT" in key:
+                    self.yaml_mod_window.val_gt_path_frame.setVisible(True)
+                    self.yaml_mod_window.DATA__VAL__GT_PATH__INPUT.setText(path)
+                else:
+                    self.yaml_mod_window.val_frame.setVisible(True)
+                    self.yaml_mod_window.DATA__VAL__PATH__INPUT.setText(path)
+            elif "TEST" in key:
+                self.yaml_mod_window.test_frame.setVisible(True)
+                self.yaml_mod_window.test_label.setVisible(True)
+                if "GT" in key:
+                    self.yaml_mod_window.test_gt_path_frame.setVisible(True)
+                    self.yaml_mod_window.DATA__TEST__GT_PATH__INPUT.setText(path)
+                else:
+                    self.yaml_mod_window.test_frame.setVisible(True)
+                    self.yaml_mod_window.DATA__TEST__PATH__INPUT.setText(path)
+
+        # Ask for checkpoint file if needed
+        if checkpoint_needed:
+            self.yaml_mod_window.checkpoint_label.setVisible(True)
+            self.yaml_mod_window.checkpoint_frame.setVisible(True)
+            path = "" if "PATHS" not in loaded_cfg or "CHECKPOINT_FILE" not in loaded_cfg["PATHS"] else loaded_cfg["PATHS"]["CHECKPOINT_FILE"]
+            self.yaml_mod_window.PATHS__CHECKPOINT_FILE__INPUT.setText(path)
+        else:
+            self.yaml_mod_window.checkpoint_label.setVisible(False)
+            self.yaml_mod_window.checkpoint_frame.setVisible(False)
+
+        self.yaml_mod_window.cfg_file_path.setText(yaml_file.replace(".yml", "_modified.yml").replace(".yaml", "_modified.yaml"))
+        self.loaded_cfg = loaded_cfg

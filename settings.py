@@ -93,14 +93,6 @@ class Settings:
             QPixmap(resource_path(os.path.join("images", "bn_images", "dot_disable.svg"))),
         ]
 
-        # Paths
-        self.settings["train_data_input_path"] = None
-        self.settings["train_data_gt_input_path"] = None
-        self.settings["validation_data_input_path"] = None
-        self.settings["validation_data_gt_input_path"] = None
-        self.settings["test_data_input_path"] = None
-        self.settings["test_data_gt_input_path"] = None
-
         #################################
         # Questions to identify workflow
         #################################

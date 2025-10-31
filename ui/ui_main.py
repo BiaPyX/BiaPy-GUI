@@ -1846,7 +1846,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(0)
         self.wizard_main_frame.setCurrentIndex(0)
         self.tabWidget.setCurrentIndex(0)
 
