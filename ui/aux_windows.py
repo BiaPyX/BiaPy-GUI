@@ -810,6 +810,11 @@ class modify_yaml_Ui(QDialog):
         self.yaml_mod_window.create_config_bn.clicked.connect(self.save_new_yaml)
         self.loaded_cfg = None
 
+        self.yaml_mod_window.bn_close.clicked.connect(self.close)
+        self.yaml_mod_window.bn_close.setIcon(
+            self.style().standardIcon(QStyle.StandardPixmap.SP_TitleBarCloseButton)
+        )
+
         def moveErrorWindow(event: QEvent):
             """
             Move the error window.

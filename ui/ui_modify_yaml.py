@@ -69,6 +69,24 @@ class Ui_Modify_YAML(object):
 
         self.horizontalLayout.addItem(self.horizontalSpacer)
 
+        self.bn_close = QPushButton(self.frame_top)
+        self.bn_close.setObjectName(u"bn_close")
+        self.bn_close.setMinimumSize(QSize(55, 35))
+        self.bn_close.setMaximumSize(QSize(55, 35))
+        self.bn_close.setStyleSheet(u"QPushButton {\n"
+"	border: none;\n"
+"	background-color: rgba(0,0,0,0);\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(64,144,253);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgba(0,0,0,0);\n"
+"}")
+        self.bn_close.setFlat(True)
+
+        self.horizontalLayout.addWidget(self.bn_close)
+
 
         self.verticalLayout_2.addWidget(self.frame_top)
 
@@ -580,6 +598,7 @@ class Ui_Modify_YAML(object):
         Modify_YAML.setWindowTitle(QCoreApplication.translate("Modify_YAML", u"Dialog", None))
         self.icon_label.setText("")
         self.window_des_label.setText(QCoreApplication.translate("Modify_YAML", u"Modify configuration file", None))
+        self.bn_close.setText("")
         self.label.setText(QCoreApplication.translate("Modify_YAML", u"Your configuration file may need some adjustments, for example, updating certain paths to match those on your system. The entries highlighted in red are invalid, so please update them accordingly.", None))
         self.train_label.setText(QCoreApplication.translate("Modify_YAML", u"Train data", None))
 #if QT_CONFIG(tooltip)
