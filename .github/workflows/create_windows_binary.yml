@@ -24,9 +24,12 @@ jobs:
       run: |
         cp dist-win/main.spec main.spec
         pyinstaller.exe main.spec
-        
+
+    - name: Enable debug logging
+      run: echo "ACTIONS_STEP_DEBUG=true" >> $GITHUB_ENV
+
     - name: Upload public folder to Google Drive
-      uses: Jodebu/upload-to-drive@master
+      uses: codetheweb/upload-to-google-drive-forked@v1.3.0
       with:
         credentials: ${{ secrets.DRIVE_CREDENTIALS }}
         target: dist/BiaPy.exe
