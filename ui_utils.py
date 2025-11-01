@@ -2424,28 +2424,37 @@ def save_biapy_config(main_window: main.MainWindow, data: Dict, biapy_version: s
     """
     try:
         with open(main_window.log_info["config_file"], "r") as file:
-            old_data = json.load(file)
+            current_data = json.load(file)
     except:
-        old_data = {}
-    old_data = update_dict(old_data, data)
+        current_data = {}
+
+    needs_save = False
+    if "HIDE_TOUR_WINDOW" not in current_data:
+        current_data["HIDE_TOUR_WINDOW"] = False
+        needs_save = True
+    else:
+        if "HIDE_TOUR_WINDOW" in data and current_data["HIDE_TOUR_WINDOW"] != data["HIDE_TOUR_WINDOW"]:
+            current_data["HIDE_TOUR_WINDOW"] = data["HIDE_TOUR_WINDOW"]
+            needs_save = True
 
     if biapy_version != "":
-        if "GUI_VERSION" not in old_data:
-            old_data["GUI_VERSION"] = biapy_version
-        elif "GUI_VERSION" in old_data:
+        if "GUI_VERSION" not in current_data:
+            current_data["GUI_VERSION"] = str(biapy_version)
+            needs_save = True
+        else:
             try:
-                file_version = Version(old_data["GUI_VERSION"])
-                if file_version < Version(biapy_version):
-                    old_data["GUI_VERSION"] = biapy_version
-            except:
-                old_data["GUI_VERSION"] = biapy_version
+                file_version = Version(current_data["GUI_VERSION"])
+                if file_version < Version(str(biapy_version)):
+                    current_data["GUI_VERSION"] = str(biapy_version)
+                    needs_save = True
+            except Exception as e:
+                current_data["GUI_VERSION"] = str(biapy_version)
+                needs_save = True
 
-    # Ensure always an str is saved
-    if "GUI_VERSION" in old_data:
-        old_data["GUI_VERSION"] = str(biapy_version)
-
-    with open(main_window.log_info["config_file"], "w") as outfile:
-        json.dump(old_data, outfile, indent=4)
+    if needs_save:
+        print(f"Saving BiaPy configuration file version: {current_data['GUI_VERSION']}")
+        with open(main_window.log_info["config_file"], "w") as outfile:
+            json.dump(current_data, outfile, indent=4)
 
 
 def update_dict(old_dict: Dict, new_dict: Dict):

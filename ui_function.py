@@ -76,6 +76,10 @@ class UIFunction:
                 QPixmap(resource_path(os.path.join("images", "bn_images", "run.png")))
             )
             self.main_window.ui.bn_run_biapy.setStyleSheet(style_bns)
+            self.main_window.ui.bn_home.setIcon(QPixmap(resource_path(os.path.join("images", "bn_images", "home.png"))))
+            self.main_window.ui.bn_home.setStyleSheet(style_bns)
+            self.main_window.ui.bn_tour.setIcon(QPixmap(resource_path(os.path.join("images", "bn_images", "tour.png"))))
+            self.main_window.ui.bn_tour.setStyleSheet(style_bns)
 
             self.init_main_page()
             self.oninit_checks()

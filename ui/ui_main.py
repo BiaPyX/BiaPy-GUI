@@ -223,12 +223,33 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_14.addWidget(self.frame_run_biapy)
 
-        self.frame_2 = QFrame(self.frame_bottom_west)
-        self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setFrameShape(QFrame.Shape.NoFrame)
-        self.frame_2.setFrameShadow(QFrame.Shadow.Raised)
+        self.frame_tour = QFrame(self.frame_bottom_west)
+        self.frame_tour.setObjectName(u"frame_tour")
+        self.frame_tour.setMaximumSize(QSize(260, 52))
+        self.frame_tour.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_tour.setFrameShadow(QFrame.Shadow.Plain)
+        self.horizontalLayout_3 = QHBoxLayout(self.frame_tour)
+        self.horizontalLayout_3.setSpacing(0)
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.bn_tour = QPushButton(self.frame_tour)
+        self.bn_tour.setObjectName(u"bn_tour")
+        self.bn_tour.setMinimumSize(QSize(52, 0))
+        self.bn_tour.setMaximumSize(QSize(260, 52))
+        self.bn_tour.setIconSize(QSize(257, 48))
+        self.bn_tour.setFlat(True)
 
-        self.verticalLayout_14.addWidget(self.frame_2)
+        self.horizontalLayout_3.addWidget(self.bn_tour)
+
+
+        self.verticalLayout_14.addWidget(self.frame_tour)
+
+        self.frame_3 = QFrame(self.frame_bottom_west)
+        self.frame_3.setObjectName(u"frame_3")
+        self.frame_3.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_3.setFrameShadow(QFrame.Shadow.Raised)
+
+        self.verticalLayout_14.addWidget(self.frame_3)
 
 
         self.horizontalLayout_2.addWidget(self.frame_bottom_west)
@@ -1861,6 +1882,7 @@ class Ui_MainWindow(object):
         self.bn_home.setText("")
         self.bn_wizard.setText("")
         self.bn_run_biapy.setText("")
+        self.bn_tour.setText("")
 #if QT_CONFIG(tooltip)
         self.bn_min.setToolTip(QCoreApplication.translate("MainWindow", u"Minimize", None))
 #endif // QT_CONFIG(tooltip)

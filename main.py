@@ -124,6 +124,7 @@ class MainWindow(QMainWindow):
         self.ui.bn_home.clicked.connect(lambda: change_page(self, "bn_home", 99))
         self.ui.bn_wizard.clicked.connect(lambda: change_page(self, "bn_wizard", 99))
         self.ui.bn_run_biapy.clicked.connect(lambda: change_page(self, "bn_run_biapy", 99))
+        self.ui.bn_tour.clicked.connect(lambda: self.tour_exec(force=True))
 
         # Home page buttons
         self.ui.load_yaml_bn.clicked.connect(lambda: load_yaml_to_GUI(self))
@@ -239,22 +240,44 @@ class MainWindow(QMainWindow):
         self.external_model_restrictions = None
         self.pretrained_model_need_to_check = None
 
-    def tour_exec(self):
+    def tour_exec(self, force=False):
         """
         Starts the tour window.
         """
         if self.tour is None:
             self.tour = tour_window_Ui(self.cfg.settings["dot_images"], self)
 
-        self.tour.set_biapy_version(self.cfg.settings["biapy_gui_version"])
-        center_window(self.tour, self.geometry())
-        self.tour.exec()
+        hide_tour, checked = False, False
+        version = ""
+        data = {}
+        try:
+            with open(self.log_info["config_file"], "r") as file:
+                data = json.load(file)
+                checked = bool(data["HIDE_TOUR_WINDOW"])
+                version = str(data["GUI_VERSION"])
+        except:
+            pass
+        
+        if checked:
+            hide_tour = True
+        if version != str(self.cfg.settings["biapy_gui_version"]):
+            hide_tour = False
 
-        # Save users election
-        data = {
-            "HIDE_TOUR_WINDOW": self.tour.basic_window.dont_show_message_checkbox.checkState() == Qt.Checked,
-        }
-        save_biapy_config(self, data, self.cfg.settings["biapy_gui_version"])
+        if not hide_tour or force:
+            self.tour.set_biapy_version(self.cfg.settings["biapy_gui_version"])
+            if checked:
+                self.tour.basic_window.dont_show_message_checkbox.setCheckState(Qt.Checked)
+            else:
+                self.tour.basic_window.dont_show_message_checkbox.setCheckState(Qt.Unchecked)
+            center_window(self.tour, self.geometry())
+            self.tour.exec()
+
+            # Save users election
+            hide_tour = self.tour.basic_window.dont_show_message_checkbox.checkState() == Qt.Checked
+            data.update({
+                "HIDE_TOUR_WINDOW": hide_tour,
+            })
+            save_biapy_config(self, data, self.cfg.settings["biapy_gui_version"])
 
     def dialog_exec(self, message: str, reason: str):
         """
@@ -693,22 +716,7 @@ if __name__ == "__main__":
     window.check_new_gui_version()
 
     # Start tour window
-    save_biapy_config(window, {}, str(window.cfg.settings["biapy_gui_version"]))
-    hide_tour = False
-    version = ""
-    try:
-        with open(log_info["config_file"], "r") as file:
-            data = json.load(file)
-            hide_tour = bool(data["HIDE_TOUR_WINDOW"])
-            version = str(data["GUI_VERSION"])
-    except:
-        pass
-
-    if version != str(window.cfg.settings["biapy_gui_version"]):
-        hide_tour = False
-
-    if not hide_tour:
-        window.tour_exec()
+    window.tour_exec()
 
     def excepthook(exc_type, exc_value, exc_tb):
         tb = "".join(traceback.format_exception(exc_type, exc_value, exc_tb))
