@@ -86,6 +86,7 @@ class Ui_Dialog(object):
         self.scrollArea = QScrollArea(self.frame_bottom)
         self.scrollArea.setObjectName(u"scrollArea")
         self.scrollArea.setFrameShape(QFrame.Shape.NoFrame)
+        self.scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
@@ -96,7 +97,7 @@ class Ui_Dialog(object):
         self.error_message_label.setObjectName(u"error_message_label")
         self.error_message_label.setFont(font)
         self.error_message_label.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
-        self.error_message_label.setWordWrap(False)
+        self.error_message_label.setWordWrap(True)
         self.error_message_label.setOpenExternalLinks(True)
         self.error_message_label.setTextInteractionFlags(Qt.TextInteractionFlag.LinksAccessibleByKeyboard|Qt.TextInteractionFlag.LinksAccessibleByMouse|Qt.TextInteractionFlag.TextBrowserInteraction|Qt.TextInteractionFlag.TextSelectableByKeyboard|Qt.TextInteractionFlag.TextSelectableByMouse)
 

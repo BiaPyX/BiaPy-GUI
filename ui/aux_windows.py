@@ -168,7 +168,6 @@ class dialog_Ui(QDialog):
         event: QCloseEvent
             Event that called this function.
         """
-        self.dialog_window.error_message_label.setWordWrap(False)
         self.dialog_window.go_to_correct_bn.click()
 
     def close_all(self):
