@@ -950,71 +950,15 @@ class modify_yaml_Ui(QDialog):
             self.parent_ui.logger.info("Creating YAML file")
 
             assert self.loaded_cfg is not None, "No configuration loaded to modify. BiaPy GUI internal error."
-            train_path = self.yaml_mod_window.DATA__TRAIN__PATH__INPUT.text()
-            val_path = self.yaml_mod_window.DATA__VAL__PATH__INPUT.text()
-            test_path = self.yaml_mod_window.DATA__TEST__PATH__INPUT.text()
-            train_gt_path = self.yaml_mod_window.DATA__TRAIN__GT_PATH__INPUT.text()
-            val_gt_path = self.yaml_mod_window.DATA__VAL__GT_PATH__INPUT.text()
-            test_gt_path = self.yaml_mod_window.DATA__TEST__GT_PATH__INPUT.text()
-            chk_pt_path = self.yaml_mod_window.PATHS__CHECKPOINT_FILE__INPUT.text()
-            
-            if train_path != "" and "DATA" in self.loaded_cfg and "TRAIN" in self.loaded_cfg["DATA"]:
-                if not (is_pathname_valid(train_path) and os.path.exists(train_path)):
+            for widget_name in self.paths_to_change.keys():
+                val = getattr(self.yaml_mod_window, widget_name+"__INPUT").text()
+                if not (is_pathname_valid(val) and os.path.exists(val)):
                     self.parent_ui.dialog_exec(
-                        "The training data path provided does not exist. Please check it and try again.",
+                        f"The path '{val}' is not valid or does not exist. Please check it and try again.",
                         reason="error",
                     )
                     return
-                self.loaded_cfg["DATA"]["TRAIN"]["PATH"] = train_path
-
-            if train_gt_path != "" and "DATA" in self.loaded_cfg and "TRAIN" in self.loaded_cfg["DATA"]:
-                if not (is_pathname_valid(train_gt_path) and os.path.exists(train_gt_path)):
-                    self.parent_ui.dialog_exec(
-                        "The training ground truth path provided does not exist. Please check it and try again.",
-                        reason="error",
-                    )
-                    return
-                self.loaded_cfg["DATA"]["TRAIN"]["GT_PATH"] = train_gt_path
-            if val_path != "" and "DATA" in self.loaded_cfg and "VAL" in self.loaded_cfg["DATA"]:
-                if not (is_pathname_valid(val_path) and os.path.exists(val_path)):
-                    self.parent_ui.dialog_exec(
-                        "The validation data path provided does not exist. Please check it and try again.",
-                        reason="error",
-                    )
-                    return
-                self.loaded_cfg["DATA"]["VAL"]["PATH"] = val_path
-            if val_gt_path != "" and "DATA" in self.loaded_cfg and "VAL" in self.loaded_cfg["DATA"]:
-                if not (is_pathname_valid(val_gt_path) and os.path.exists(val_gt_path)):
-                    self.parent_ui.dialog_exec(
-                        "The validation ground truth path provided does not exist. Please check it and try again.",
-                        reason="error",
-                    )
-                    return
-                self.loaded_cfg["DATA"]["VAL"]["GT_PATH"] = val_gt_path
-            if test_path != "" and "DATA" in self.loaded_cfg and "TEST" in self.loaded_cfg["DATA"]:
-                if not (is_pathname_valid(test_path) and os.path.exists(test_path)):
-                    self.parent_ui.dialog_exec(
-                        "The test data path provided does not exist. Please check it and try again.",
-                        reason="error",
-                    )
-                    return
-                self.loaded_cfg["DATA"]["TEST"]["PATH"] = test_path
-            if test_gt_path != "" and "DATA" in self.loaded_cfg and "TEST" in self.loaded_cfg["DATA"]:
-                if not (is_pathname_valid(test_gt_path) and os.path.exists(test_gt_path)):
-                    self.parent_ui.dialog_exec(
-                        "The test ground truth path provided does not exist. Please check it and try again.",
-                        reason="error",
-                    )
-                    return
-                self.loaded_cfg["DATA"]["TEST"]["GT_PATH"] = test_gt_path
-            if chk_pt_path != "" and "PATHS" in self.loaded_cfg:
-                if not (is_pathname_valid(chk_pt_path) and os.path.exists(chk_pt_path)):
-                    self.parent_ui.dialog_exec(
-                        "The checkpoint file path provided does not exist. Please check it and try again.",
-                        reason="error",
-                    )
-                    return
-                self.loaded_cfg["PATHS"]["CHECKPOINT_FILE"] = chk_pt_path
+                self.ensure_key_in_dict(self.loaded_cfg, widget_name, val)
 
             os.makedirs(basedir, exist_ok=True)
             with open(yaml_file, "w", encoding="utf8") as outfile:
@@ -1035,6 +979,28 @@ class modify_yaml_Ui(QDialog):
 
             self.allow_instant_exit = True
             self.close()
+
+    def ensure_key_in_dict(self, d: Dict, key: str, value: str = ""):
+        """
+        Ensures that a key exists in a nested dictionary, creating any necessary 
+        intermediate dictionaries and setting the final key to the specified value.
+
+        Parameters
+        ----------
+        d : dict
+            The dictionary to check.
+        key : str
+            The key to ensure, in the format "KEY1__KEY2__KEY3".
+        value : str, optional
+            The value to set for the final key. Default is an empty string.
+        """
+        keys = key.split("__")
+        current_dict = d
+        for k in keys[:-1]:
+            if k not in current_dict or not isinstance(current_dict[k], dict):
+                current_dict[k] = {}
+            current_dict = current_dict[k]
+        current_dict[keys[-1]] = value
 
     def closeEvent(self, event: QCloseEvent):
         """
@@ -1119,7 +1085,8 @@ class modify_yaml_Ui(QDialog):
                 and "TEST" in loaded_cfg["DATA"] and loaded_cfg["DATA"]["TEST"]["LOAD_GT"]
             ):
                 paths_to_change["DATA__TEST__GT_PATH"] = ""
-
+        
+        self.paths_to_change = paths_to_change
         for key, path in paths_to_change.items():
             if "TRAIN" in key:
                 self.yaml_mod_window.train_frame.setVisible(True)
