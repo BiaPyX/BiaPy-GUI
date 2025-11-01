@@ -1888,10 +1888,18 @@ def load_yaml_config(main_window: main.MainWindow) -> Optional[bool]:
         encoding="utf8",
     ) as stream:
         try:
-            temp_cfg = yaml.safe_load(stream)
+            cfg_content = stream.read()
+            if "\t" in cfg_content:
+                cfg_content = cfg_content.replace("\t", "  ")
+            temp_cfg = yaml.safe_load(cfg_content)
         except yaml.YAMLError as exc:
             main_window.logger.error(exc)
-            main_window.dialog_exec("There was a problem loading the .yaml config file", reason="error")
+            main_window.dialog_exec(
+                "There was a problem loading the .yaml config file. Please check the file syntax. The error was:\n{}".format(exc),
+                reason="error"
+            )
+            return False
+
     temp_cfg = convert_old_model_cfg_to_current_version(temp_cfg)
     main_window.logger.info("Creating temporal input YAML file for converting possible old configuration")
     tmp_cfg_file = os.path.join(main_window.log_info["log_dir"], "biapy_tmp.yaml")
@@ -1908,7 +1916,7 @@ def load_yaml_config(main_window: main.MainWindow) -> Optional[bool]:
     except Exception as errors:
         errors = str(errors)
         main_window.dialog_exec(
-            f"Configuration file checked and some errors were found:\n{errors}\n\nPlease correct the errors above before proceeding.",
+            f"Configuration file checked and some errors were found:\n\n{errors}\n\nPlease correct the errors above before proceeding.",
             reason="error",
         )
     else:
