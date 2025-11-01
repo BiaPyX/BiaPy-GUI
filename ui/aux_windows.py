@@ -960,6 +960,10 @@ class modify_yaml_Ui(QDialog):
                     return
                 self.ensure_key_in_dict(self.loaded_cfg, widget_name, val)
 
+            # If a checkpoint file is provided, ensure that the LOAD_CHECKPOINT flag is set to True
+            if "PATHS__CHECKPOINT_FILE" in self.paths_to_change:
+                self.loaded_cfg["MODEL"]["LOAD_CHECKPOINT"] = True
+
             os.makedirs(basedir, exist_ok=True)
             with open(yaml_file, "w", encoding="utf8") as outfile:
                 yaml.dump(self.loaded_cfg, outfile, default_flow_style=False)
@@ -1086,7 +1090,6 @@ class modify_yaml_Ui(QDialog):
             ):
                 paths_to_change["DATA__TEST__GT_PATH"] = ""
         
-        self.paths_to_change = paths_to_change
         for key, path in paths_to_change.items():
             if "TRAIN" in key:
                 self.yaml_mod_window.train_frame.setVisible(True)
@@ -1122,9 +1125,11 @@ class modify_yaml_Ui(QDialog):
             self.yaml_mod_window.checkpoint_frame.setVisible(True)
             path = "" if "PATHS" not in loaded_cfg or "CHECKPOINT_FILE" not in loaded_cfg["PATHS"] else loaded_cfg["PATHS"]["CHECKPOINT_FILE"]
             self.yaml_mod_window.PATHS__CHECKPOINT_FILE__INPUT.setText(path)
+            paths_to_change["PATHS__CHECKPOINT_FILE"] = path
         else:
             self.yaml_mod_window.checkpoint_label.setVisible(False)
             self.yaml_mod_window.checkpoint_frame.setVisible(False)
 
         self.yaml_mod_window.cfg_file_path.setText(yaml_file.replace(".yml", "_modified.yml").replace(".yaml", "_modified.yaml"))
         self.loaded_cfg = loaded_cfg
+        self.paths_to_change = paths_to_change
