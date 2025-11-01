@@ -12,7 +12,7 @@ from packaging.version import Version
 import requests
 from numpy.typing import NDArray
 
-# Copied from BiaPy commit: 1221ca518a78d633f88baf9e361305fabe81228c (3.6.6)
+# Copied from BiaPy commit: f9a9e707ed6d2437dbb1dce6a0b2c05027464442 (3.6.6)
 def check_bmz_model_compatibility(
     model_rdf: Dict,
     workflow_specs: Optional[Dict] = None,

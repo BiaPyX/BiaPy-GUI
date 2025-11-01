@@ -51,7 +51,6 @@ class dialog_Ui(QDialog):
         """
         super(dialog_Ui, self).__init__()
         self.dialog_window = Ui_Dialog()
-        self.original_width = self.geometry().width()
         self.parent_ui = parent_ui
         self.dialog_window.setupUi(self)
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowMinimizeButtonHint)
@@ -61,6 +60,7 @@ class dialog_Ui(QDialog):
         ]
         self.dragPos = self.pos()
         self.setStyleSheet("#centralwidget{ border: 1px solid black;} QWidget{ font-size:16px;}")
+        self.dialog_window.error_message_label.setWordWrap(True)
 
         def moveErrorWindow(event: QCloseEvent):
             """
@@ -103,7 +103,6 @@ class dialog_Ui(QDialog):
             Reason of the given message.
         """
 
-        self.resize(self.original_width, self.geometry().height())
         self.dialog_window.window_des_label.setText("Error")
         self.dialog_window.icon_label.setPixmap(self.upbar_icon[0])
         if self.signals_created:
@@ -129,8 +128,6 @@ class dialog_Ui(QDialog):
                 self.dialog_window.error_message_label.setText(m)
                 self.dialog_window.go_to_correct_bn.clicked.connect(self.close)
             elif reason in ["inform_user", "inform_user_and_go"]:
-                self.resize(int(0.9 * self.parent_ui.width()), self.geometry().height())
-                self.dialog_window.error_message_label.setWordWrap(True)
                 self.dialog_window.icon_label.setPixmap(self.upbar_icon[1])
                 self.dialog_window.window_des_label.setText("Information")
                 self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("OK", "OK", None))
@@ -142,13 +139,11 @@ class dialog_Ui(QDialog):
                 self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", "OK", None))
                 self.dialog_window.go_to_correct_bn.clicked.connect(self.close)
             elif reason == "error":
-                self.dialog_window.error_message_label.setWordWrap(True)
                 self.dialog_window.window_des_label.setText("Error")
                 self.dialog_window.error_message_label.setText("{}".format(message))
                 self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", "OK", None))
                 self.dialog_window.go_to_correct_bn.clicked.connect(self.close)
             else:
-                self.dialog_window.error_message_label.setWordWrap(True)
                 if reason == "docker_installation":
                     self.dialog_window.go_to_correct_bn.setText(QCoreApplication.translate("Error", "OK", None))
                 else:

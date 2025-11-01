@@ -1908,7 +1908,7 @@ def load_yaml_config(main_window: main.MainWindow) -> Optional[bool]:
     except Exception as errors:
         errors = str(errors)
         main_window.dialog_exec(
-            f"Configuration file checked and some errors were found:\n{errors}\nPlease correct them before proceeding.",
+            f"Configuration file checked and some errors were found:\n{errors}\n\nPlease correct the errors above before proceeding.",
             reason="error",
         )
     else:
@@ -2031,7 +2031,6 @@ class load_yaml_to_GUI_engine(QObject):
             errors = ""
             tmp_cfg._C.merge_from_file(tmp_cfg_file)
             tmp_cfg = tmp_cfg.get_cfg_defaults()
-            check_configuration(tmp_cfg, get_text(self.main_window.ui.job_name_input), check_data_paths=False)
 
             self.vars_to_set = [
                 "SYSTEM__NUM_CPUS__INPUT",

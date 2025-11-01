@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: b1c40e7bf89cb12a6413ef8dc55f49f1d1a45c34 (3.6.6)
+## Copied from BiaPy commit: 7f5e7ed09d9659226cdbd1cda12708cc9aec9d8f (3.6.6)
 import os
 import re
 from typing import List, Tuple, Any, Dict
@@ -36,6 +36,9 @@ def check_configuration(cfg, jobname, check_data_paths=True):
     assert cfg.PROBLEM.NDIM in ["2D", "3D"], "'PROBLEM.NDIM' must be either '2D' or '3D'"
     dim_count = 2 if cfg.PROBLEM.NDIM == "2D" else 3
 
+    if not cfg.TRAIN.ENABLE and not cfg.TEST.ENABLE:
+        raise ValueError("At least one of 'TRAIN.ENABLE' or 'TEST.ENABLE' must be set to True")
+    
     # Adjust overlap and padding in the default setting if it was not set
     opts = []
     if cfg.PROBLEM.NDIM == "3D":
@@ -2480,14 +2483,27 @@ def check_configuration(cfg, jobname, check_data_paths=True):
     if cfg.MODEL.LOAD_CHECKPOINT and check_data_paths:
         file = get_checkpoint_path(cfg, jobname)
         if not any([file + ext for ext in ['.pth', '.safetensors'] if os.path.exists(file + ext)]):
-            raise FileNotFoundError(f"Model checkpoint not found at {get_checkpoint_path(cfg, jobname)}")
+            if cfg.PATHS.CHECKPOINT_FILE == "":
+                raise FileNotFoundError(
+                    f"'MODEL.LOAD_CHECKPOINT' is enabled, but no explicit checkpoint file was provided "
+                    f"('PATHS.CHECKPOINT_FILE': '{cfg.PATHS.CHECKPOINT_FILE}'). "
+                    f"Given the specified job name ('{jobname}'), a checkpoint is expected to exist at:\n"
+                    f"  → {get_checkpoint_path(cfg, jobname)} \n"
+                    f"However, no file was found at that location. Please ensure the checkpoint exists, "
+                    f"or disable 'MODEL.LOAD_CHECKPOINT' if you do not intend to resume training."
+                )
+            else:
+                raise FileNotFoundError(f"Model checkpoint not valid: {get_checkpoint_path(cfg, jobname)}")
 
         if os.path.exists(file + ".safetensors"):
             try:
                 from safetensors.torch import load_file
             except ImportError:
                 raise ImportError("Please install safetensors package to be able to load .safetensors checkpoints")
-    
+
+    if not cfg.MODEL.LOAD_CHECKPOINT and not cfg.TRAIN.ENABLE and cfg.TEST.ENABLE:
+        raise ValueError("Seems that you want to test a model without training first. In this case, 'MODEL.LOAD_CHECKPOINT' needs to be set to True to load a pre-trained model.")
+
     assert cfg.MODEL.OUT_CHECKPOINT_FORMAT in ["pth", "safetensors"], "MODEL.OUT_CHECKPOINT_FORMAT not in ['pth', 'safetensors']"
 
     ### Train ###
