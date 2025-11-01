@@ -1,16 +1,43 @@
-## Copied from BiaPy commit: 79ad31925c20f67d1c30ac0b52acbbb0dffdf676 (3.5.12)
-# Synapse seg not added
+## Copied from BiaPy commit: b1c40e7bf89cb12a6413ef8dc55f49f1d1a45c34 (3.6.6)
+"""
+Configuration management for BiaPy.
 
+This module defines the Config class, which encapsulates all configuration options
+for BiaPy workflows using a YACS CfgNode. It provides default values and hierarchical
+organization for system, data, augmentation, model, loss, training, inference,
+post-processing, and logging parameters. Utility functions are included for updating
+dependent configuration variables after merging user-provided configs.
+"""
 import os
 from yacs.config import CfgNode as CN
 import copy
-from typing import (
-    Dict,
-)
 
 class Config:
-    def __init__(self, job_dir: str, job_identifier: str):
+    """
+    BiaPy configuration handler.
 
+    This class manages the hierarchical configuration for BiaPy experiments,
+    including system resources, problem specification, data loading, augmentation,
+    model architecture, loss functions, training, inference, post-processing, and
+    logging. It uses YACS CfgNode for flexible and robust configuration management.
+
+    Attributes
+    ----------
+    _C : CN
+        The root YACS configuration node containing all experiment parameters.
+    """
+
+    def __init__(self, job_dir: str, job_identifier: str):
+        """
+        Initialize the Config object with default values.
+
+        Parameters
+        ----------
+        job_dir : str
+            Directory where job outputs (results, checkpoints, logs) will be stored.
+        job_identifier : str
+            Unique identifier for the job (used in output paths).
+        """
         if "/" in job_identifier:
             raise ValueError("Job name can not contain / character. Provided: {}".format(job_identifier))
 
@@ -25,8 +52,8 @@ class Config:
         _C.SYSTEM = CN()
         # Maximum number of CPUs to use. Set it to "-1" to not set a limit.
         _C.SYSTEM.NUM_CPUS = -1
-        # Maximum number of workers to use. You can disable this option by setting 0.
-        _C.SYSTEM.NUM_WORKERS = 5
+        # Maximum number of workers to use. You can disable this option by setting 0. With a -1 the workers are calculated automatically.
+        _C.SYSTEM.NUM_WORKERS = -1
         # Do not set it as its value will be calculated based in --gpu input arg
         _C.SYSTEM.NUM_GPUS = 0
         # Device to be used when GPU is NOT selected. Most commonly "cpu", but also potentially "mps",
@@ -53,7 +80,7 @@ class Config:
 
         ### SEMANTIC_SEG
         _C.PROBLEM.SEMANTIC_SEG = CN()
-        # Class id to ignore when MODEL.N_CLASSES > 2
+        # Class id to ignore when DATA.N_CLASSES > 2
         _C.PROBLEM.SEMANTIC_SEG.IGNORE_CLASS_ID = 0
 
         ### INSTANCE_SEG
@@ -62,87 +89,238 @@ class Config:
         _C.PROBLEM.INSTANCE_SEG.TYPE = "regular" 
 
         #### For "regular" type of instances ####
-        
-        # Possible options: 'C', 'BC', 'BP', 'BD', 'BCM', 'BCD', 'BCDv2', 'Dv2', 'BDv2' and 'A'. This variable defines the channels
-        # to be used to represent instances based on the input instance masks. The meaning of each letter is a follows:
-        #   - 'B' stands for 'Binary mask', it is a binary representation of each instance region without its contour.
+        # This variable defines the channels to be used to represent the instances. The approach follows a bottom-up setting,
+        # where the intermediate representations of the instances are learned by the model and then fused to create the final
+        # instances. The variable needs to be a list with the representations to be extracted from the instances. 
+        # These are the options available:
+        #   - 'F' stands for 'Foreground', it is a binary representation of each instance
+        #   - 'B' stands for 'Background', it is a binary representation of the background, i.e. everything that is not an instance.
+        #   - 'P' stands for 'Central part', the extreme case of the F channel, where only the center of mass, or the skeleton is 
+        #     represented. It may also be expressed as a heatmap.
         #   - 'C' stands for 'Contour', it is a binary representation of the countours of each instance.
-        #   - 'D' stands for 'Distance', where, for each instance, the pixel/voxel value is the distance to its contour.
-        #   - 'M' stands for 'Mask', contains the B and the C channels, i.e. the foreground mask. It is simply calculated by 
-        #     binarizing the input instance masks.
-        #   - 'Dv2' stands for 'Distance V2', which is a version of the 'D' channel calculating background distance as well.
-        #   - 'P' stands for 'Points' and contains a binary representation of the central points of each instance.
-        #   - 'A' stands for 'Affinities" and contains the affinity values for each dimension.
-        #   - 'F' stands for 'Flow' where, for each instance, contains the distance values to its center of mass for each dimension.
-        _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS = "BC"
-        # Whether to mask the distance channel to only calculate the loss in those regions where the binary mask
-        # defined by B channel is present
-        _C.PROBLEM.INSTANCE_SEG.DISTANCE_CHANNEL_MASK = True
+        #   - 'H' stands for 'Horizontal distance', where, for each instance, the pixel/voxel value is the distance to its contour/skeleton 
+        #     in the horizontal axis.
+        #   - 'V' stands for 'Vertical distance', where, for each instance, the pixel/voxel value is the distance to its contour/skeleton 
+        #     in the vertical axis.
+        #   - 'Z' stands for 'Depth distance', where, for each instance, the pixel/voxel value is the distance to its contour/skeleton 
+        #     in the depth axis.
+        #   - 'Db' stands for 'Distance to the boundary', where, for each instance, the pixel/voxel value is the distance to its contour.
+        #   - 'Dc' stands for 'Distance to the center', where, for each instance, the pixel/voxel value is the distance to its 
+        #     center/skeleton.
+        #   - 'Dn' stands for 'Distance to the closest neighbor', where, for each instance, the pixel/voxel value is the distance to its 
+        #     closest neighbor instance.
+        #   - 'D' stands for 'Db for F and B channels' distance map'. In some cases, background pixel distances are negated and combined 
+        #     with a Tanh activation, 
+        #     while in others they are not
+        #   - 'R' stands for 'Radial distance', distances to boundaries measure how far each pixel is from its object’s edge along fixed 
+        #     radial directions, with StarDist being the most prominent approach.
+        #   - 'T' stands for 'Touching area', where touching regions between instances are highlighted.
+        #   - 'A' stands for 'Affinities' and contains the affinity values for each dimension. Affinities represent images as graphs for 
+        #     segmentation, where each voxel is a node connected to neighbors by edges indicating shared object membership. In 3D, nodes 
+        #     link along x-, y-, and z-axes, yielding multiple affinity channels, commonly used in connectomics.
+        #   - 'E' stands for 'Embeddings' and contains the embedding vectors for each pixel/voxel. Embedding-based approaches map each 
+        #     pixel in an input image to a point in an n-dimensional feature space (typically n=24), referred to as the pixel embedding. 
+        #     The goal is to ensure that embeddings from the same instance are close together, while embeddings from different instances
+        #     are well separated. We grouped here all the channels involved in this process
+        #
+        #### For "synapse" type of instances ####
+        # Possible options: 'B' and 'BF' (still experimental). This variable defines the channels to be used to represent synapse instances based on the input 
+        # synapse sites. The meaning of each letter is a follows:
+        #   * In 'B', the first and second channels represent the pre and post points as 3D points, respectively.
+        #
+        #   * In 'BF':
+        #       - 'B' stands for 'Binary mask', it is a binary representation of each postsynaptic site
+        #       - 'F' stands for 'Flow' and contains the distance values to the corresponding presynaptic site (of each postsynaptic 
+        #         site) for each dimension.
+        _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS = ["B", "C"]
+        # Details for each channel. It must be a list with a unique element: a dict of dicts. The details can be only set for the following channels:
+        #   - 'F' channel. Possible options:
+        #       - 'erosion': int or list of ints, the erosion size to be applied to the channel. Default: 0
+        #       - 'dilation': int or list of ints, the dilation size to be applied to the channel. Default: 0
+        #   - 'B' channel. Possible options:
+        #       - 'erosion': int or list of ints, the erosion size to be applied to the channel. Default: 0
+        #       - 'dilation': int or list of ints, the dilation size to be applied to the channel. Default: 0
+        #   - 'P' channel. Possible options:
+        #       - 'type': str, the type of the channel. Options are: 'centroid', 'skeleton'. Default: 'centroid'
+        #       - 'dilation': int or list of ints, the dilation size to be applied to the channel. Default: 1
+        #       - 'erosion': int or list of ints, the erosion size to be applied to the channel. Useful when you want thinner skeletons
+        #          as they are 2-pixel thick. Default: 0
+        #   - 'C' channel. Possible options:
+        #       - 'mode': str, how to create the contours. Corresponds to 'mode' arg of find_boundaries function from scikit-image. 
+        #          More info in: https://scikit-image.org/docs/stable/api/skimage.segmentation.html#skimage.segmentation.find_boundaries.
+        #          Options are: 'thick', 'inner', 'outer', 'subpixel' and 'dense'. The last one is used to label as contour every pixel
+        #          that is not in the foreground. Default: 'thick'.
+        #   - 'H', 'V', 'Z' and 'Db' channels. Possible options:
+        #       - 'norm': bool, whether to normalize the distances between 0 and 1. Default: False
+        #       - 'mask_values': bool, whether to mask the distance channel to only calculate the loss in non-zero values. Default: True
+        #   - 'Dc' channel. Possible options:
+        #       - 'type': str, the type of the channel. Options are: 'center', 'skeleton'. Default: 'center'
+        #       - 'norm': bool, whether to normalize the distances between 0 and 1. Default: False
+        #       - 'mask_values': bool, whether to mask the distance channel to only calculate the loss in non-zero values. Default: True
+        #   - 'Dn' channel. Possible options:
+        #       - 'closing_size': int, the size of the closing to be applied to the combined distance map. Default: 0
+        #       - 'norm': bool, whether to normalize the distances between 0 and 1. Default: False
+        #       - 'mask_values': bool, whether to mask the distance channel to only calculate the loss in non-zero values. Default: True
+        #       - 'decline_power': int, the power to which the distances are raised to control the decline rate. Default: 3
+        #   - 'D' channel. Possible options:
+        #       - 'act': str, activation function to be used in the last layer of the model when this channel is selected. Options are: 
+        #         'tanh' and 'linear'. Default: 'tanh'
+        #       - 'alpha': int, value to scale the distances of the background when 'act' is 'tanh'. Default: 1
+        #       - 'beta': int, value to scale the distances of the foreground when 'act' is 'tanh'. Default: 1
+        #       - 'norm': bool, whether to normalize the distances between -1 and 1. Default: False
+        #   - 'R' channel. Possible options:
+        #       - 'nrays': int, the number of rays to be used to represent the radial distances. Default: 32 (in 2D) and 96 (in 3D)
+        #       - 'norm': bool, whether to normalize the distances between 0 and 1. Default: False
+        #       - 'mask_values': bool, whether to mask the distance channel to only calculate the loss in non-zero values. Default: True
+        #   - 'T' channel. Possible options:
+        #       - 'thickness': int, the thickness in pixels of the touching area. Default: 2
+        #   - 'A' channel. Possible options:
+        #       - 'z_affinities': list of int, the offsets in x axis to be calculated. Default: [1]
+        #       - 'y_affinities': list of int, the offsets in y axis to be calculated. Default: [1]
+        #       - 'x_affinities': list of int, the offsets in z axis to be calculated. Default: [1]
+        #       - 'widen_borders': int, the size in pixels to widen the borders of the affinities. Default: 1
+        #       Notice that 'z_affinities', 'y_affinities' and 'x_affinities'  need to be lists of the same length. To reproduce the paper
+        #       "Superhuman Accuracy on the SNEMI3D Connectomics Challenge" the values are: 
+        #       'z_affinities': [1,2,3,4], 'y_affinities': [1,3,9,27] and 'x_affinities': [1,3,9,27]
+        #   - 'E' channel. Possible options:
+        #       - 'center_mode': str, the center mode to use for the gaussian seeds. Default: "centroid". Options: "centroid" and "medoid"
+        #       - 'medoid_max_points': int, the maximum number of points to use when calculating the medoid. Default: 10000
+        _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS = [{}]
+        # Losses to be applied to each channel. If not provided, the losses will be set automatically depending on the channel.
+        # The options are:
+        #  - "bce"/"ce": binary cross entropy. Ref: https://pytorch.org/docs/stable/generated/torch.nn.BCEWithLogitsLoss.html
+        #  - "l1"/"mae": mean absolute error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html
+        #  - "mse": mean squared error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html
+        #  - "triplet": triplet loss. Ref: https://pytorch.org/docs/stable/generated/torch.nn.TripletMarginLoss.html
+        _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS_LOSSES = []
 
         # Weights to be applied to the channels.
         _C.PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS = (1, 1)
-        # Contour creation mode. Corresponds to 'mode' arg of find_boundaries function from scikit-image. More
-        # info in: https://scikit-image.org/docs/stable/api/skimage.segmentation.html#skimage.segmentation.find_boundaries.
-        # It can be also set as "dense", to label as contour every pixel that is not in B channel.
-        _C.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE = "thick"
-        # Whether the threshold are going to be set as automaticaly (with Otsu thresholding) or manually.
-        # Options available: 'auto' or 'manual'. If this last is used PROBLEM.INSTANCE_SEG.DATA_MW_TH_* need to be set.
-        # In case 'auto' was selected you will still need to set
-        _C.PROBLEM.INSTANCE_SEG.DATA_MW_TH_TYPE = "auto"
+        # Whether to add an extra weight map to the loss calculation to focus on the borders between instances. Different weighting maps 
+        # can be defined. Options: ["unet-like", ""]
+        _C.PROBLEM.INSTANCE_SEG.BORDER_EXTRA_WEIGHTS = ""
+        # Defines how the instances are created. Options:
+        #   - "watershed" to use watershed algorithm
+        #   - "agglomeration" to use agglomeration algorithm
+        #   - "stardist" to use agglomeration algorithm
+        #   - "embeddings" to use embedding-based clustering algorithms
+        _C.PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS = ""
 
-        # To convert the model predictions, which are between 0 and 1 range, into instances with marked controlled
-        # watershed (MW) a few thresholds need to be set. There can be up to three channels, as explained above and
-        # based on 'PROBLEM.INSTANCE_SEG.DATA_CHANNELS' value. Each threshold is related to one of these channels. See the details in
-        # https://biapy.readthedocs.io/en/latest/workflows/instance_segmentation.html#problem-resolution
-        #
-        # This variables are only used when _C.PROBLEM.TYPE = 'INSTANCE_SEG
-        # TH_BINARY_MASK controls channel 'B' in the creation of the MW seeds
-        _C.PROBLEM.INSTANCE_SEG.DATA_MW_TH_BINARY_MASK = 0.5
-        # TH_CONTOUR controls channel 'C' in the creation of the MW seeds
-        _C.PROBLEM.INSTANCE_SEG.DATA_MW_TH_CONTOUR = 0.1
-        # TH_FOREGROUND acts over the channel 'B' and is used to limit how much the seeds can be grow
-        _C.PROBLEM.INSTANCE_SEG.DATA_MW_TH_FOREGROUND = 0.3
-        # TH_DISTANCE controls channel 'D' in the creation of the MW seeds
-        _C.PROBLEM.INSTANCE_SEG.DATA_MW_TH_DISTANCE = 1.0
-        # TH_POINTS controls channel 'P' in the creation of the MW seeds
-        _C.PROBLEM.INSTANCE_SEG.DATA_MW_TH_POINTS = 0.5
-        # Size of small objects to be removed after doing watershed
-        _C.PROBLEM.INSTANCE_SEG.DATA_REMOVE_SMALL_OBJ_BEFORE = 10
-        # Whether to remove objects before watershed
-        _C.PROBLEM.INSTANCE_SEG.DATA_REMOVE_BEFORE_MW = False
+        # Options for marker-controlled watershed
+        _C.PROBLEM.INSTANCE_SEG.WATERSHED = CN()
+        # List of the channels to be used for seed creation. If not provided will be automatically set based on
+        # 'PROBLEM.INSTANCE_SEG.DATA_CHANNELS'.
+        _C.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS = []
+        # Thresholds for the seed channels. If not provided will be automatically set with "auto" for each channel.
+        # If set it must have same length than 'PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS'. Options:
+        #   - A float between 0 and 1 to threshold each channel
+        #   - "auto" to automatically define a value by applying an Otsu thresholding
+        _C.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS_THRESH = []
+        # Defines the topographic surface to grow the seeds. If not provided will be automatically set based on
+        # 'PROBLEM.INSTANCE_SEG.DATA_CHANNELS'. If defined it must be a channel name, e.g. "B" or "C". 
+        _C.PROBLEM.INSTANCE_SEG.WATERSHED.TOPOGRAPHIC_SURFACE_CHANNEL = ""
+        # Channel to be used for growth mask creation. If not provided will be automatically set based on
+        # 'PROBLEM.INSTANCE_SEG.DATA_CHANNELS'. Options:
+        #   - A list of channel names, e.g. ["B"], ["C"] or ["B", "C"]. The channels must be in 'PROBLEM.INSTANCE_SEG.DATA_CHANNELS'
+        #   - "auto" to automatically create it based on the selected channels ('PROBLEM.INSTANCE_SEG.DATA_CHANNELS') 
+        _C.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS = []
+        # Thresholds for the growth mask channels. If not provided will be automatically set with "auto" for each channel.
+        # If set it must have same length than 'PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS'. Options:
+        #   - A float between 0 and 1 to threshold each channel
+        #   - "auto" to automatically define a value depending on the channels provided
+        _C.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS_THRESH  = []
         # Sequence of string to determine the morphological filters to apply to instance seeds. They will be done in that order.
         # Possible options 'dilate' and 'erode'. E.g. ['erode','dilate'] to erode first and dilate later.
-        _C.PROBLEM.INSTANCE_SEG.SEED_MORPH_SEQUENCE = []
+        _C.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_MORPH_SEQUENCE = []
         # Sequence of ints to determine the radius of the erosion or dilation for instance seeds
-        _C.PROBLEM.INSTANCE_SEG.SEED_MORPH_RADIUS = []
+        _C.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_MORPH_RADIUS = []
         # To erode and dilate the foreground mask before using marker controlled watershed. The idea is to remove the small holes
         # that may be produced so the instances grow without them
-        _C.PROBLEM.INSTANCE_SEG.ERODE_AND_DILATE_FOREGROUND = False
+        _C.PROBLEM.INSTANCE_SEG.WATERSHED.ERODE_AND_DILATE_GROWTH_MASK = False
         # Radius to erode the foreground mask
-        _C.PROBLEM.INSTANCE_SEG.FORE_EROSION_RADIUS = 5
+        _C.PROBLEM.INSTANCE_SEG.WATERSHED.FORE_EROSION_RADIUS = 5
         # Radius to dilate the foreground mask
-        _C.PROBLEM.INSTANCE_SEG.FORE_DILATION_RADIUS = 5
+        _C.PROBLEM.INSTANCE_SEG.WATERSHED.FORE_DILATION_RADIUS = 5
         # Whether to save watershed check files
-        _C.PROBLEM.INSTANCE_SEG.DATA_CHECK_MW = False
+        _C.PROBLEM.INSTANCE_SEG.WATERSHED.DATA_CHECK_MW = False
+        # Size of small objects to be removed before doing watershed
+        _C.PROBLEM.INSTANCE_SEG.WATERSHED.DATA_REMOVE_SMALL_OBJ_BEFORE = 10
+        # Whether to remove objects before watershed
+        _C.PROBLEM.INSTANCE_SEG.WATERSHED.DATA_REMOVE_BEFORE_MW = False
         # Whether to apply or not the watershed to create instances slice by slice in a 3D problem. This can solve instances invading
         # others if the objects in Z axis overlap too much.
-        _C.PROBLEM.INSTANCE_SEG.WATERSHED_BY_2D_SLICES = False
+        _C.PROBLEM.INSTANCE_SEG.WATERSHED.BY_2D_SLICES = False
+
+        # Options for stardist-kind instance creation
+        _C.PROBLEM.INSTANCE_SEG.STARDIST = CN()
+        # Probability threshold to consider a pixel/voxel as a potential instance center
+        _C.PROBLEM.INSTANCE_SEG.STARDIST.PROB_THRESH = 0.4
+        # Non-maximum suppression IoU threshold to filter overlapping instance candidates
+        _C.PROBLEM.INSTANCE_SEG.STARDIST.NMS_IOU_THRESH = 0.3
+
+        # Options for embedding-based clustering instance creation. They are inspired by the work:
+        # Reference: 
+        #   "EmbedSeg: Embedding-based Instance Segmentation for Biomedical Microscopy Data"
+        #    [link]: https://www.sciencedirect.com/science/article/pii/S1361841522001700
+        # Code adapted from: 
+        #    Embedseg: https://github.com/juglab/EmbedSeg
+        _C.PROBLEM.INSTANCE_SEG.EMBEDSEG = CN()
+        # Foreground threshold for seediness map to consider pixels for clustering.
+        _C.PROBLEM.INSTANCE_SEG.EMBEDSEG.SEED_THRESH = 0.5
+        # Minimum number of foreground pixels required to perform clustering.
+        _C.PROBLEM.INSTANCE_SEG.EMBEDSEG.MIN_MASK_SUM = 0
+        # Minimum number of unclustered foreground pixels to continue clustering.
+        _C.PROBLEM.INSTANCE_SEG.EMBEDSEG.MIN_UNCLUSTERED_SUM = 0
+        # Minimum size of objects to be considered valid. Objects smaller than this will be ignored.
+        _C.PROBLEM.INSTANCE_SEG.EMBEDSEG.MIN_OBJECT_SIZE = 100
 
         #### For "synapses" type of instances (only available for 3D H5/Zarr data) ####
         _C.PROBLEM.INSTANCE_SEG.SYNAPSES = CN()
-        # Possible options: 'BF'. This variable defines the channels to be used to represent synapse instances based on the input 
-        # synapse sites. The meaning of each letter is a follows:
-        #   - 'B' stands for 'Binary mask', it is a binary representation of each postsynaptic site
-        #   - 'F' stands for 'Flow' and contains the distance values to the corresponding presynaptic site (of each postsynaptic 
-        #     site) for each dimension.
-        _C.PROBLEM.INSTANCE_SEG.SYNAPSES.DATA_CHANNELS = "BF"
         # Dilation in (z,y,x) to be made for the 'B' channel
         _C.PROBLEM.INSTANCE_SEG.SYNAPSES.POSTSITE_DILATION = [2,4,4]
         # Dilation in (z,y,x) to be made to construct the 'F' channel
         _C.PROBLEM.INSTANCE_SEG.SYNAPSES.POSTSITE_DILATION_DISTANCE_CHANNELS = [3,10,10] 
-        # Whether to normalize or not the distances of channel 'F'
-        _C.PROBLEM.INSTANCE_SEG.SYNAPSES.NORMALIZE_DISTANCES = False
-        
+        _C.PROBLEM.INSTANCE_SEG.SYNAPSES.POINT_CREATION_FUNCTION = "peak_local_max"
+        # The minimal allowed distance separating peaks. To find the maximum number of peaks, use min_distance=1.
+        _C.PROBLEM.INSTANCE_SEG.SYNAPSES.PEAK_LOCAL_MAX_MIN_DISTANCE = 1
+        # Whether the threshold are going to be set as automaticaly (with Otsu thresholding) or manually.
+        # Options available: 
+        #   * 'auto' to decide the threshold to be applied by measuring it with Otsu
+        #   * 'manual' to set a fixed threshold defined by 'PROBLEM.INSTANCE_SEG.SYNAPSES.MIN_TH_TO_BE_PEAK'
+        #   * 'relative_by_patch' to use 'PROBLEM.INSTANCE_SEG.SYNAPSES.MIN_TH_TO_BE_PEAK' but relative to the maximum value in the predicted patch 
+        #     data. More info in https://scikit-image.org/docs/0.25.x/api/skimage.feature.html#skimage.feature.peak_local_max and 
+        #     https://scikit-image.org/docs/0.23.x/api/skimage.feature.html#skimage.feature.blob_log (see 'threshold_rel' argument description)
+        #   * 'relative' to use 'PROBLEM.INSTANCE_SEG.SYNAPSES.MIN_TH_TO_BE_PEAK' but relative to the maximum value in the whole predicted data. 
+        #     More info in https://scikit-image.org/docs/0.25.x/api/skimage.feature.html#skimage.feature.peak_local_max and 
+        #     https://scikit-image.org/docs/0.23.x/api/skimage.feature.html#skimage.feature.blob_log (see 'threshold_rel' argument description)
+        _C.PROBLEM.INSTANCE_SEG.SYNAPSES.TH_TYPE = "auto"
+        # Minimun value to consider a point as a peak. Corresponds to 'threshold_abs' argument of the function
+        # 'peak_local_max' of skimage.feature
+        _C.PROBLEM.INSTANCE_SEG.SYNAPSES.MIN_TH_TO_BE_PEAK = 0.2
+        # Corresponds to 'exclude_border' argument of 'peak_local_max' or 'blob_log' function of skimage. If True it will exclude
+        # peaks from the border of the image to avoid partial detection.
+        _C.PROBLEM.INSTANCE_SEG.SYNAPSES.EXCLUDE_BORDER = False
+        # Corresponds to 'min_sigma' argument of 'blob_log' function. It is the minimum standard deviation for Gaussian kernel.
+        # Keep this low to detect smaller blobs. The standard deviations of the Gaussian filter are given for each axis as a
+        # sequence, or as a single number, in which case it is equal for all axes.
+        _C.PROBLEM.INSTANCE_SEG.SYNAPSES.BLOB_LOG_MIN_SIGMA = 5
+        # Corresponds to 'max_sigma' argument of 'blob_log' function. It is the maximum standard deviation for Gaussian kernel.
+        # Keep this high to detect larger blobs. The standard deviations of the Gaussian filter are given for each axis as a
+        # sequence, or as a single number, in which case it is equal for all axes.
+        _C.PROBLEM.INSTANCE_SEG.SYNAPSES.BLOB_LOG_MAX_SIGMA = 10
+        # Corresponds to 'num_sigma' argument of 'blob_log' function. The number of intermediate values of standard deviations
+        # to consider between min_sigma and max_sigma.
+        _C.PROBLEM.INSTANCE_SEG.SYNAPSES.BLOB_LOG_NUM_SIGMA = 2
+        # For removing close points detected during synapse prediction
+        _C.PROBLEM.INSTANCE_SEG.SYNAPSES.REMOVE_CLOSE_PRE_POINTS_RADIUS = 0
+        _C.PROBLEM.INSTANCE_SEG.SYNAPSES.REMOVE_CLOSE_POST_POINTS_RADIUS = 0
+        # If this is activated the post points will be remove not only looking the distance between them but the must lay in the same mask.
+        # For creating this mask there can be a few options:
+        #   * Implemented: By creating instances binarizing the predictions (using PROBLEM.INSTANCE_SEG.SYNAPSES.MIN_TH_TO_BE_PEAK) and applying 
+        #     a connected-components
+        #   * TODO: by looking at external neuron segmentation
+        _C.PROBLEM.INSTANCE_SEG.SYNAPSES.REMOVE_CLOSE_POINTS_RADIUS_BY_MASK = False
+
         ### DETECTION
         _C.PROBLEM.DETECTION = CN()
         # Shape of the ellipse that will be used to dilate the central point created from the CSV file. 0 to not dilate and only create a 3x3 square.
@@ -244,7 +422,7 @@ class Config:
         # Lower and upper bound for percentile clip. Must be set when DATA.NORMALIZATION.PERC_CLIP.ENABLE = 'True'
         _C.DATA.NORMALIZATION.PERC_CLIP.LOWER_PERC = -1.0
         _C.DATA.NORMALIZATION.PERC_CLIP.UPPER_PERC = -1.0
-        # Lower and upper values to clip. If these are provided the percentiles are not calculated with the variable above, e.g.
+        # Lower and upper values to clip. If these are provided the percentiles are not calculated based on 
         # 'DATA.NORMALIZATION.PERC_CLIP.LOWER_PERC' and 'DATA.NORMALIZATION.PERC_CLIP.UPPER_PERC' 
         _C.DATA.NORMALIZATION.PERC_CLIP.LOWER_VALUE = -1.0
         _C.DATA.NORMALIZATION.PERC_CLIP.UPPER_VALUE = -1.0
@@ -253,7 +431,7 @@ class Config:
         #   'scale_range' same as 'div' but scaling the range to [0-max] and then dividing by the maximum value of the data
         #    and not by 255 or 65535
         #   'zero_mean_unit_variance' to substract the mean and divide by std. 
-        _C.DATA.NORMALIZATION.TYPE = "div"
+        _C.DATA.NORMALIZATION.TYPE = "zero_mean_unit_variance"
         # Whether to based the normalization on values extracted from the complete image or from each patch. When working with 
         # large images such as Zarr or H5 it is done by patch automatically. The values are also applied for the percentage
         # clipping. Options: ['image', 'patch']
@@ -291,15 +469,12 @@ class Config:
         # File to load/save data prepared with the appropiate channels in a instance segmentation problem.
         # E.g. _C.PROBLEM.TYPE ='INSTANCE_SEG' and _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS != 'B'
         _C.DATA.TRAIN.INSTANCE_CHANNELS_MASK_DIR = os.path.join(
-            "user_data", "train", "y_" + _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
+            "user_data", "train", "y_" + "".join(_C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS)
         )
         # Path to load/save detection masks prepared.
         _C.DATA.TRAIN.DETECTION_MASK_DIR = os.path.join("user_data", "train", "y_detection_masks")
         # Path to load/save SSL target prepared.
         _C.DATA.TRAIN.SSL_SOURCE_DIR = os.path.join("user_data", "train", "x_ssl_source")
-        # Extra train data generation: number of times to duplicate the train data. Useful when
-        # _C.DATA.EXTRACT_RANDOM_PATCH=True is made, as more original train data can be cover on each epoch
-        _C.DATA.TRAIN.REPLICATE = 0
         # Percentage of overlap in (y,x)/(z,y,x) when cropping validation. Set to 0 to calculate  the minimun overlap.
         # The values must be floats between range [0, 1). It needs to be a 2D tuple when using _C.PROBLEM.NDIM='2D' and
         # 3D tuple when using _C.PROBLEM.NDIM='3D'
@@ -330,7 +505,7 @@ class Config:
         #   * 'max' is defined as the max intensity value of the raw image inputs.
         #   * 'diff' is defined as the difference between ground truth and raw images. Available for all workflows but SELF_SUPERVISED and DENOISING. 
         #   * 'diff_by_min_max_ratio' is defined as the difference between ground truth and raw images multiplied by the ratio between raw image max and min. Available for all workflows but SELF_SUPERVISED and DENOISING. 
-        #   * 'target_mean is defined as the mean intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING.
+        #   * 'target_mean' is defined as the mean intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING.
         #   * 'target_min' is defined as the min intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING. 
         #   * 'target_max' is defined as the max intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING.  
         #   * 'diff_by_target_min_max_ratio' is defined as the difference between ground truth and raw images multiplied by the ratio between ground truth image max and min. Available for all workflows but SELF_SUPERVISED and DENOISING. 
@@ -461,7 +636,7 @@ class Config:
         # File to load/save data prepared with the appropiate channels in a instance segmentation problem.
         # E.g. _C.PROBLEM.TYPE ='INSTANCE_SEG' and _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS != 'B'
         _C.DATA.TEST.INSTANCE_CHANNELS_MASK_DIR = os.path.join(
-            "user_data", "test", "y_" + _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
+            "user_data", "test", "y_" + "".join(_C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS)
         )
         # Path to load/save detection masks prepared.
         _C.DATA.TEST.DETECTION_MASK_DIR = os.path.join("user_data", "test", "y_detection_masks")
@@ -519,7 +694,7 @@ class Config:
         #   * 'max' is defined as the max intensity value of the raw image inputs.
         #   * 'diff' is defined as the difference between ground truth and raw images. Available for all workflows but SELF_SUPERVISED and DENOISING. 
         #   * 'diff_by_min_max_ratio' is defined as the difference between ground truth and raw images multiplied by the ratio between raw image max and min. Available for all workflows but SELF_SUPERVISED and DENOISING. 
-        #   * 'target_mean is defined as the mean intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING.
+        #   * 'target_mean' is defined as the mean intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING.
         #   * 'target_min' is defined as the min intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING. 
         #   * 'target_max' is defined as the max intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING.  
         #   * 'diff_by_target_min_max_ratio' is defined as the difference between ground truth and raw images multiplied by the ratio between ground truth image max and min. Available for all workflows but SELF_SUPERVISED and DENOISING. 
@@ -596,7 +771,7 @@ class Config:
         # File to load/save data prepared with the appropiate channels in a instance segmentation problem.
         # E.g. _C.PROBLEM.TYPE ='INSTANCE_SEG' and _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS != 'B'
         _C.DATA.VAL.INSTANCE_CHANNELS_MASK_DIR = os.path.join(
-            "user_data", "val", "y_" + _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
+            "user_data", "val", "y_" + "".join(_C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS)
         )
         # Path to load/save detection masks prepared.
         _C.DATA.VAL.DETECTION_MASK_DIR = os.path.join("user_data", "val", "y_detection_masks")
@@ -632,7 +807,7 @@ class Config:
         #   * 'max' is defined as the max intensity value of the raw image inputs.
         #   * 'diff' is defined as the difference between ground truth and raw images. Available for all workflows but SELF_SUPERVISED and DENOISING. 
         #   * 'diff_by_min_max_ratio' is defined as the difference between ground truth and raw images multiplied by the ratio between raw image max and min. Available for all workflows but SELF_SUPERVISED and DENOISING. 
-        #   * 'target_mean is defined as the mean intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING.
+        #   * 'target_mean' is defined as the mean intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING.
         #   * 'target_min' is defined as the min intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING. 
         #   * 'target_max' is defined as the max intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING.  
         #   * 'diff_by_target_min_max_ratio' is defined as the difference between ground truth and raw images multiplied by the ratio between ground truth image max and min. Available for all workflows but SELF_SUPERVISED and DENOISING. 
@@ -705,7 +880,8 @@ class Config:
         # “no change” and 0.5 denotes “half of the axis size”.
         _C.AUGMENTOR.SHIFT_RANGE = (0.1, 0.2)
         # How to fill up the new values created with affine transformations (rotations, shear, shift and zoom).
-        # Same meaning as in numpy.pad() : 'constant', 'reflect', 'wrap', 'symmetric'
+        # Only keep modes common to skimage & scipy: 'constant', 'reflect', 'wrap' and 'symmetric
+        # Dropped 'edge'/'nearest' for simplicity
         _C.AUGMENTOR.AFFINE_MODE = "reflect"
         # Make vertical flips
         _C.AUGMENTOR.VFLIP = False
@@ -744,16 +920,10 @@ class Config:
         _C.AUGMENTOR.BRIGHTNESS = False
         # Strength of the brightness range.
         _C.AUGMENTOR.BRIGHTNESS_FACTOR = (-0.1, 0.1)
-        # If apply same contrast to the entire image or select one for each slice. For 2D does not matter but yes for
-        # 3D images. Possible values: '2D' or '3D'. Used when '_C.PROBLEM.NDIM' = '3D'.
-        _C.AUGMENTOR.BRIGHTNESS_MODE = "3D"
         # To apply contrast changes to images
         _C.AUGMENTOR.CONTRAST = False
         # Strength of the contrast change range.
         _C.AUGMENTOR.CONTRAST_FACTOR = (-0.1, 0.1)
-        # If apply same contrast to the entire image or select one for each slice. For 2D does not matter but yes for
-        # 3D images. Possible values: '2D' or '3D'. Used when '_C.PROBLEM.NDIM' = '3D'.
-        _C.AUGMENTOR.CONTRAST_MODE = "3D"
         # Set a certain fraction of pixels in images to zero (not get confused with the dropout concept of neural networks)
         _C.AUGMENTOR.DROPOUT = False
         # Range to take the probability to drop a pixel
@@ -798,6 +968,8 @@ class Config:
         _C.AUGMENTOR.MS_ROTATE_RATIO = 0.5
         # Augment the image by creating a black line in a random position
         _C.AUGMENTOR.MISSING_SECTIONS = False
+        # Probability of adding a missing section in each channel
+        _C.AUGMENTOR.MISSP_CHANNEL_PB = 0.5
         # Iterations to dilate the missing line with
         _C.AUGMENTOR.MISSP_ITERATIONS = (10, 30)
         # Convert images in grasycale gradually based on '_C.AUGMENTOR.GRAY_RANGE'
@@ -861,8 +1033,9 @@ class Config:
         _C.MODEL.BMZ.EXPORT.AUTHORS = []
         # License of the model.
         _C.MODEL.BMZ.EXPORT.LICENSE = "CC-BY-4.0"
-        # Path to a .md extension file with the documentation of the model. If it is not set so the model documentation will point to 
-        # BiaPy doc: https://github.com/BiaPyX/BiaPy/blob/master/README.md". Take other models in https://bioimage.io/#/ as reference.
+        # Path to a .md extension file with the documentation of the model. If it is not set so the model documentation will be 
+        # automatically generated with the information provided. If you want to add more information you can use this option.
+        # E.g. to provide more details of the training procedure, data, etc.
         _C.MODEL.BMZ.EXPORT.DOCUMENTATION = ""
         # List of tags. Here the type of dataset and the target object should be provided. BiaPy automatically sets the following tags: 
         #   * "biapy": to represent that the model was created with BiaPy.
@@ -873,7 +1046,7 @@ class Config:
         # So, what you can set for instance is: ["electron-microscopy", "mitochondria"]
         _C.MODEL.BMZ.EXPORT.TAGS = []
         # Citations. It must be a list of dictionaries with keys "text" and "doi". E.g.:
-        # [{"text": "training library", "doi": "10.1101/2024.02.03.576026"}, {"text": "architecture", "doi": "10.1109/LGRS.2018.2802944"},
+        # [{"text": "training library", "doi": "10.1038/s41592-025-02699-y"}, {"text": "architecture", "doi": "10.1109/LGRS.2018.2802944"},
         #  {"text": "data", "doi": "10.48550/arXiv.1812.06024"}]
         _C.MODEL.BMZ.EXPORT.CITE = []
         # Information of the dataset. It must be a list of just one dict item with keys "name", "doi" and "image_modality". It can have 
@@ -966,10 +1139,8 @@ class Config:
         _C.MODEL.UPSAMPLE_LAYER = "convtranspose"
         # Activation function to use along the model
         _C.MODEL.ACTIVATION = "ELU"
-        # Las activation to use. Options 'sigmoid', 'softmax' or 'linear'
-        _C.MODEL.LAST_ACTIVATION = "sigmoid"
         # Number of classes including the background class (that should be using 0 label)
-        _C.MODEL.N_CLASSES = 2
+        _C.DATA.N_CLASSES = 2
         # Downsampling to be made in Z. This value will be the third integer of the MaxPooling operation. When facing
         # anysotropic datasets set it to get better performance
         _C.MODEL.Z_DOWN = [0, 0, 0, 0]
@@ -986,6 +1157,11 @@ class Config:
         _C.MODEL.LOAD_CHECKPOINT_EPOCH = "best_on_val"
         # Whether to load the model from the checkpoint instead of builiding it following 'MODEL.ARCHITECTURE' when 'MODEL.SOURCE' is "biapy"
         _C.MODEL.LOAD_MODEL_FROM_CHECKPOINT = True
+        # Format of the output checkpoint. Options are 'pth' (native PyTorch format) or 'safetensors' (https://github.com/huggingface/safetensors)
+        _C.MODEL.OUT_CHECKPOINT_FORMAT = "pth"
+        # To skip loading those layers that do not match in shape with the given checkpoint. If this is set to False a regular load function will be 
+        # done, which will fail if a layer mismatch is found. Only workes when 'MODEL.LOAD_MODEL_FROM_CHECKPOINT' is True
+        _C.MODEL.SKIP_UNMATCHED_LAYERS = False
         # Epochs to save a checkpoint of the model apart from the ones saved with LOAD_CHECKPOINT_ONLY_WEIGHTS. Set it to -1 to
         # not do it.
         _C.MODEL.SAVE_CKPT_FREQ = -1
@@ -1053,6 +1229,135 @@ class Config:
         # Whether to maintain or not the upscaling layer. 
         _C.MODEL.RCAN_UPSCALING_LAYER = True
 
+        _C.MODEL.HRNET_64 = CN()
+        _C.MODEL.HRNET_64.Z_DOWN = True
+        _C.MODEL.HRNET_64.STAGE2 = CN()
+        _C.MODEL.HRNET_64.STAGE2.NUM_MODULES = 1
+        _C.MODEL.HRNET_64.STAGE2.NUM_BRANCHES = 2
+        _C.MODEL.HRNET_64.STAGE2.NUM_BLOCKS = [4, 4]
+        _C.MODEL.HRNET_64.STAGE2.NUM_CHANNELS = [64, 128]
+        _C.MODEL.HRNET_64.STAGE2.BLOCK = 'BASIC'
+
+        _C.MODEL.HRNET_64.STAGE3 = CN()
+        _C.MODEL.HRNET_64.STAGE3.NUM_MODULES = 4
+        _C.MODEL.HRNET_64.STAGE3.NUM_BRANCHES = 3
+        _C.MODEL.HRNET_64.STAGE3.NUM_BLOCKS = [4, 4, 4]
+        _C.MODEL.HRNET_64.STAGE3.NUM_CHANNELS = [64, 128, 256]
+        _C.MODEL.HRNET_64.STAGE3.BLOCK = 'BASIC'
+
+        _C.MODEL.HRNET_64.STAGE4 = CN()
+        _C.MODEL.HRNET_64.STAGE4.NUM_MODULES = 3
+        _C.MODEL.HRNET_64.STAGE4.NUM_BRANCHES = 4
+        _C.MODEL.HRNET_64.STAGE4.NUM_BLOCKS = [4, 4, 4, 4]
+        _C.MODEL.HRNET_64.STAGE4.NUM_CHANNELS = [64, 128, 256, 512]
+        _C.MODEL.HRNET_64.STAGE4.BLOCK = 'BASIC'
+
+
+        # configs for HRNet48
+        _C.MODEL.HRNET_48 = CN()
+        _C.MODEL.HRNET_48.Z_DOWN = True
+        _C.MODEL.HRNET_48.STAGE2 = CN()
+        _C.MODEL.HRNET_48.STAGE2.NUM_MODULES = 1
+        _C.MODEL.HRNET_48.STAGE2.NUM_BRANCHES = 2
+        _C.MODEL.HRNET_48.STAGE2.NUM_BLOCKS = [4, 4]
+        _C.MODEL.HRNET_48.STAGE2.NUM_CHANNELS = [48, 96]
+        _C.MODEL.HRNET_48.STAGE2.BLOCK = 'BASIC'
+
+        _C.MODEL.HRNET_48.STAGE3 = CN()
+        _C.MODEL.HRNET_48.STAGE3.NUM_MODULES = 4
+        _C.MODEL.HRNET_48.STAGE3.NUM_BRANCHES = 3
+        _C.MODEL.HRNET_48.STAGE3.NUM_BLOCKS = [4, 4, 4]
+        _C.MODEL.HRNET_48.STAGE3.NUM_CHANNELS = [48, 96, 192]
+        _C.MODEL.HRNET_48.STAGE3.BLOCK = 'BASIC'
+
+        _C.MODEL.HRNET_48.STAGE4 = CN()
+        _C.MODEL.HRNET_48.STAGE4.NUM_MODULES = 3
+        _C.MODEL.HRNET_48.STAGE4.NUM_BRANCHES = 4
+        _C.MODEL.HRNET_48.STAGE4.NUM_BLOCKS = [4, 4, 4, 4]
+        _C.MODEL.HRNET_48.STAGE4.NUM_CHANNELS = [48, 96, 192, 384]
+        _C.MODEL.HRNET_48.STAGE4.BLOCK = 'BASIC'
+
+
+        # configs for HRNet32
+        _C.MODEL.HRNET_32 = CN()
+        _C.MODEL.HRNET_32.Z_DOWN = True
+        _C.MODEL.HRNET_32.STAGE2 = CN()
+        _C.MODEL.HRNET_32.STAGE2.NUM_MODULES = 1
+        _C.MODEL.HRNET_32.STAGE2.NUM_BRANCHES = 2
+        _C.MODEL.HRNET_32.STAGE2.NUM_BLOCKS = [4, 4]
+        _C.MODEL.HRNET_32.STAGE2.NUM_CHANNELS = [32, 64]
+        _C.MODEL.HRNET_32.STAGE2.BLOCK = 'BASIC'
+
+        _C.MODEL.HRNET_32.STAGE3 = CN()
+        _C.MODEL.HRNET_32.STAGE3.NUM_MODULES = 4
+        _C.MODEL.HRNET_32.STAGE3.NUM_BRANCHES = 3
+        _C.MODEL.HRNET_32.STAGE3.NUM_BLOCKS = [4, 4, 4]
+        _C.MODEL.HRNET_32.STAGE3.NUM_CHANNELS = [32, 64, 128]
+        _C.MODEL.HRNET_32.STAGE3.BLOCK = 'BASIC'
+
+        _C.MODEL.HRNET_32.STAGE4 = CN()
+        _C.MODEL.HRNET_32.STAGE4.NUM_MODULES = 3
+        _C.MODEL.HRNET_32.STAGE4.NUM_BRANCHES = 4
+        _C.MODEL.HRNET_32.STAGE4.NUM_BLOCKS = [4, 4, 4, 4]
+        _C.MODEL.HRNET_32.STAGE4.NUM_CHANNELS = [32, 64, 128, 256]
+        _C.MODEL.HRNET_32.STAGE4.BLOCK = 'BASIC'
+
+
+        # configs for HRNet18
+        _C.MODEL.HRNET_18 = CN()
+        _C.MODEL.HRNET_18.Z_DOWN = True
+        _C.MODEL.HRNET_18.STAGE2 = CN()
+        _C.MODEL.HRNET_18.STAGE2.NUM_MODULES = 1
+        _C.MODEL.HRNET_18.STAGE2.NUM_BRANCHES = 2
+        _C.MODEL.HRNET_18.STAGE2.NUM_BLOCKS = [4, 4]
+        _C.MODEL.HRNET_18.STAGE2.NUM_CHANNELS = [18, 36]
+        _C.MODEL.HRNET_18.STAGE2.BLOCK = 'BASIC'
+
+        _C.MODEL.HRNET_18.STAGE3 = CN()
+        _C.MODEL.HRNET_18.STAGE3.NUM_MODULES = 4
+        _C.MODEL.HRNET_18.STAGE3.NUM_BRANCHES = 3
+        _C.MODEL.HRNET_18.STAGE3.NUM_BLOCKS = [4, 4, 4]
+        _C.MODEL.HRNET_18.STAGE3.NUM_CHANNELS = [18, 36, 72]
+        _C.MODEL.HRNET_18.STAGE3.BLOCK = 'BASIC'
+
+        _C.MODEL.HRNET_18.STAGE4 = CN()
+        _C.MODEL.HRNET_18.STAGE4.NUM_MODULES = 3
+        _C.MODEL.HRNET_18.STAGE4.NUM_BRANCHES = 4
+        _C.MODEL.HRNET_18.STAGE4.NUM_BLOCKS = [4, 4, 4, 4]
+        _C.MODEL.HRNET_18.STAGE4.NUM_CHANNELS = [18, 36, 72, 144]
+        _C.MODEL.HRNET_18.STAGE4.BLOCK = 'BASIC'
+
+        # configs for HRNet2x20
+        _C.MODEL.HRNET2X_20 = CN()
+        _C.MODEL.HRNET2X_20.Z_DOWN = True
+        _C.MODEL.HRNET2X_20.STAGE1 = CN()
+        _C.MODEL.HRNET2X_20.STAGE1.NUM_MODULES = 1
+        _C.MODEL.HRNET2X_20.STAGE1.NUM_BRANCHES = 2
+        _C.MODEL.HRNET2X_20.STAGE1.NUM_BLOCKS = [4, 4]
+        _C.MODEL.HRNET2X_20.STAGE1.NUM_CHANNELS = [32, 64]
+        _C.MODEL.HRNET2X_20.STAGE1.BLOCK = 'BOTTLENECK'
+
+        _C.MODEL.HRNET2X_20.STAGE2 = CN()
+        _C.MODEL.HRNET2X_20.STAGE2.NUM_MODULES = 1
+        _C.MODEL.HRNET2X_20.STAGE2.NUM_BRANCHES = 3
+        _C.MODEL.HRNET2X_20.STAGE2.NUM_BLOCKS = [4, 4, 4]
+        _C.MODEL.HRNET2X_20.STAGE2.NUM_CHANNELS = [20, 40, 80]
+        _C.MODEL.HRNET2X_20.STAGE2.BLOCK = 'BASIC'
+
+        _C.MODEL.HRNET2X_20.STAGE3 = CN()
+        _C.MODEL.HRNET2X_20.STAGE3.NUM_MODULES = 4
+        _C.MODEL.HRNET2X_20.STAGE3.NUM_BRANCHES = 4
+        _C.MODEL.HRNET2X_20.STAGE3.NUM_BLOCKS = [4, 4, 4, 4]
+        _C.MODEL.HRNET2X_20.STAGE3.NUM_CHANNELS = [20, 40, 80, 160]
+        _C.MODEL.HRNET2X_20.STAGE3.BLOCK = 'BASIC'
+
+        _C.MODEL.HRNET2X_20.STAGE4 = CN()
+        _C.MODEL.HRNET2X_20.STAGE4.NUM_MODULES = 3
+        _C.MODEL.HRNET2X_20.STAGE4.NUM_BRANCHES = 5
+        _C.MODEL.HRNET2X_20.STAGE4.NUM_BLOCKS = [4, 4, 4, 4, 4]
+        _C.MODEL.HRNET2X_20.STAGE4.NUM_CHANNELS = [20, 40, 80, 160, 320]
+        _C.MODEL.HRNET2X_20.STAGE4.BLOCK = 'BASIC'
+
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Loss
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1062,34 +1367,60 @@ class Config:
         #       * "CE" (default): cross entropy. Ref: https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html
         #       * "DICE": Dice loss. Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch
         #       * "W_CE_DICE": CE and Dice (with a weight term on each one that must sum 1). Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch
-        #   * Instance segmentation: automatically set depending on the channels selected (PROBLEM.INSTANCE_SEG.DATA_CHANNELS). There is no need
-        #                            to set it.
+        #   * Instance segmentation: automatically set depending on the channels selected (PROBLEM.INSTANCE_SEG.DATA_CHANNELS). 
+        #     It can be also set manually with PROBLEM.INSTANCE_SEG.DATA_CHANNELS_LOSSES. 
         #   * Detection:
         #       * "CE" (default): cross entropy. Ref: https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html
         #       * "DICE": Dice loss. Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch
         #       * "W_CE_DICE": CE and Dice (with a weight term on each one that must sum 1). Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch
         #   * Denoising:
-        #       * "MSE" (default): mean square error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss
+        #       * "MAE": mean absolute error (MAE or L1 loss). Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss
+        #       * "MSE" (default): mean square error (MSE). Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss
         #   * Super-resolution:
-        #       * "MAE" (default): mean absolute error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss
-        #       * "MSE": mean square error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss
+        #       * "MAE" (default): mean absolute error (MAE or L1 loss). Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss
+        #       * "MSE": mean square error (MSE). Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss
+        #       * "SSIM": structural similarity index measure (SSIM). Ref: https://lightning.ai/docs/torchmetrics/stable/image/structural_similarity.html#torchmetrics.image.StructuralSimilarityIndexMeasure
+        #       * "W_MAE_SSIM": MAE and SSIM (with a weight term on each one that must sum 1).
+        #       * "W_MSE_SSIM": MSE and SSIM (with a weight term on each one that must sum 1).
         #   * Self-supervision:
         #       These losses can only be set when PROBLEM.SELF_SUPERVISED.PRETEXT_TASK = "crappify". Otherwise it will be automatically set to MSE when
         #       PROBLEM.SELF_SUPERVISED.PRETEXT_TASK = "masking".
-        #       * "MAE" (default): mean absolute error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss
-        #       * "MSE": mean square error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss
+        #       * "MAE" (default): mean absolute error (MAE or L1 loss). Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss
+        #       * "MSE": mean square error (MSE). Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss
+        #       * "SSIM": structural similarity index measure (SSIM). Ref: https://lightning.ai/docs/torchmetrics/stable/image/structural_similarity.html#torchmetrics.image.StructuralSimilarityIndexMeasure
+        #       * "W_MAE_SSIM": MAE and SSIM (with a weight term on each one that must sum 1).
+        #       * "W_MSE_SSIM": MSE and SSIM (with a weight term on each one that must sum 1).
         #   * Classification:
         #       * "CE" (default): cross entropy. Ref: https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html
         #   * Image to image:
-        #       * "MAE" (default): mean absolute error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss
-        #       * "MSE": mean square error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss
+        #       * "MAE" (default): mean absolute error (MAE or L1 loss). Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss
+        #       * "MSE": mean square error (MSE). Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss
+        #       * "SSIM": structural similarity index measure (SSIM). Ref: https://lightning.ai/docs/torchmetrics/stable/image/structural_similarity.html#torchmetrics.image.StructuralSimilarityIndexMeasure
+        #       * "W_MAE_SSIM": MAE and SSIM (with a weight term on each one that must sum 1).
+        #       * "W_MSE_SSIM": MSE and SSIM (with a weight term on each one that must sum 1).
         _C.LOSS.TYPE = ""
-        # Weights to be applied in multiple loss combination cases. They must sum 1. E.g. [0.3, 0.7].
+        # Weights to be applied in multiple loss combination cases, by multiplying the corresponding weight to each loss.
+        # It works for all the workflows but the instance segmentation one, as in that case the weights must be set
+        # in PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS. The weights must sum 1. E.g. [0.3, 0.7].
         _C.LOSS.WEIGHTS = [0.66, 0.34]
-        # To adjust the loss function based on the imbalance between classes. Used when LOSS.TYPE == "CE" in detection and
-        # semantic segmentation and if using B,C,M,P or A channels in instance segmentation workflow.
-        _C.LOSS.CLASS_REBALANCE = False
-
+        # To weight classes in an imbalanced dataset. It can be 'none', 'manual' or 'auto'.
+        # Options:
+        #   * 'none': no class rebalancing is applied
+        #   * 'manual': the weights provided in LOSS.CLASS_WEIGHTS are used to weight each class
+        #   * 'auto': the weights are calculated automatically based on the number of pixels of each class per batch and directly in the loss computation.
+        _C.LOSS.CLASS_REBALANCE = "none"  # Options are 'none', 'manual' or 'auto'
+        # If LOSS.CLASS_REBALANCE is set to 'manual', this list of weights will be used to weight each class in the loss calculation.
+        # The length of the list must be equal to the number of classes.
+        _C.LOSS.CLASS_WEIGHTS = []
+        # Whether to ignore a value in the loss and metric calculation. This is only available when LOSS.TYPE == "CE". This value will not only
+        # be ignored in the loss computation but in the metrics, e.g. IoU.
+        _C.LOSS.IGNORE_INDEX = -1
+        _C.LOSS.CONTRAST = CN()
+        _C.LOSS.CONTRAST.ENABLE = False
+        _C.LOSS.CONTRAST.MEMORY_SIZE = 5000
+        _C.LOSS.CONTRAST.PROJ_DIM = 256
+        _C.LOSS.CONTRAST.PIXEL_UPD_FREQ = 10
+        
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Training phase
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1177,8 +1508,6 @@ class Config:
         # optimizing memory usage.
         _C.TEST.BY_CHUNKS = CN()
         _C.TEST.BY_CHUNKS.ENABLE = False
-        # Type of format used to write data. Options available: ["H5", "Zarr"]
-        _C.TEST.BY_CHUNKS.FORMAT = "H5"
         # In the process of 'TEST.BY_CHUNKS' you can enable this variable to save the reconstructed prediction as a TIF too.
         # Be aware of this option and be sure that the prediction can fit in you memory entirely, as it is needed for saving as TIF.
         _C.TEST.BY_CHUNKS.SAVE_OUT_TIF = False
@@ -1233,7 +1562,7 @@ class Config:
         # the process is repeated with each of the threshold values
         _C.TEST.MATCHING_STATS_THS = [0.3, 0.5, 0.75]
         # Decide in which thresholds to create a colored image of the TPs, FNs and FPs
-        _C.TEST.MATCHING_STATS_THS_COLORED_IMG = [0.3]
+        _C.TEST.MATCHING_STATS_THS_COLORED_IMG = []
 
         ### Detection
         # To decide which function is going to be used to create point from probabilities. Options: ['peak_local_max', 'blob_log']
@@ -1242,6 +1571,9 @@ class Config:
         _C.TEST.DET_POINT_CREATION_FUNCTION = "peak_local_max"
         # The minimal allowed distance separating peaks. To find the maximum number of peaks, use min_distance=1.
         _C.TEST.DET_PEAK_LOCAL_MAX_MIN_DISTANCE = 1
+        # Whether the threshold are going to be set as automaticaly (with Otsu thresholding) or manually.
+        # Options available: 'auto' or 'manual'. If this last is used TEST.DET_MIN_TH_TO_BE_PEAK needs to be set.
+        _C.TEST.DET_TH_TYPE = "manual"
         # Minimun value to consider a point as a peak. Corresponds to 'threshold_abs' argument of the function
         # 'peak_local_max' of skimage.feature
         _C.TEST.DET_MIN_TH_TO_BE_PEAK = 0.2
@@ -1291,6 +1623,32 @@ class Config:
         _C.TEST.POST_PROCESSING.APPLY_MASK = False
 
         ### Instance segmentation
+        #
+        #
+        # Instance refinement:
+        # Whether to refine the instances with morphological and filtering operations after being created and before any other post-processing
+        # such as Voronoi. This instance refinement is applied on each instance individually and sequentially. The two variables,
+        # TEST.POST_PROCESSING.INSTANCE_REFINEMENT.PROPS and TEST.POST_PROCESSING.INSTANCE_REFINEMENT.VALUES of refinements to be applied.
+        # For instance, the conditions can be like this: ['A', 'B', 'C'] and they will be applied sequentially.
+        # A full example of this refinement:
+        #   _C.DATA.VAL.FILTER_SAMPLES.PROPS = ['fill_holes', 'remove_small_objects', 'remove_large_objects', 'clear_border']
+        #   _C.DATA.VAL.FILTER_SAMPLES.VALUES = ['none', 10, 2000, 'none']
+        _C.TEST.POST_PROCESSING.INSTANCE_REFINEMENT = CN()
+        # Enable/disable instance refinement
+        _C.TEST.POST_PROCESSING.INSTANCE_REFINEMENT.ENABLE = False
+        # List of morphological operations to apply. They are going to be applied in the list order. Available operations are:
+        #   * 'dilation': to dilate instances
+        #   * 'erosion': to erode instances
+        #   * 'fill_holes': to fill holes inside instances
+        #   * 'clear_border': to remove instances touching the image border
+        #   * 'remove_small_objects': to remove small objects
+        #   * 'remove_large_objects': to remove large objects
+        _C.TEST.POST_PROCESSING.INSTANCE_REFINEMENT.OPERATIONS = []
+        # Values associated to each operation. For 'dilation' and 'erosion' it corresponds to the size of the structuring element (it can also be a list).
+        # For 'remove_small_objects' and 'remove_large_objects' it corresponds to the size threshold in pixels.
+        # For 'fill_holes' and 'clear_border' no value is needed so put None in those cases.
+        _C.TEST.POST_PROCESSING.INSTANCE_REFINEMENT.VALUES = []
+
         # Whether to measure morphological features on each instances, i.e. 'circularity' (2D), 'elongation' (2D), 'npixels', 'area', 'diameter',
         # 'perimeter', 'sphericity' (3D)
         _C.TEST.POST_PROCESSING.MEASURE_PROPERTIES = CN()
@@ -1315,10 +1673,7 @@ class Config:
         #     (Lehmann et al., 201211 ; https://doi.org/10.1093/bioinformatics/btw413).
         #
         #   * 'elongation' is the inverse of the circularity. The values of elongation range from 1 for round particles and increase for
-        #     elongated particles. Calculated as: 
-        #       - In 2D: (perimeter^2)/(4 * PI * area) 
-        #       - In 3D: (sqrt(surface area^3))/ (6 * volume * sqrt(PI)) where 'sqrt' is the square root. For the 3D diplib library is used
-        #         where it corresponds to 'P2A' metric (more info here: https://diplib.org/diplib-docs/features.html#shape_features_P2A)
+        #     elongated particles. Calculated as: (perimeter^2)/(4 * PI * area) . It is only measurable for 2D images.
         #
         #   * 'npixels' corresponds to the sum of pixels that compose an instance.
         #
@@ -1370,10 +1725,8 @@ class Config:
         # Set it to try to repare large instances by merging their neighbors with them and removing possible central holes.
         # Its value determines which instances are going to be repared by size (number of pixels that compose the instance)
         # This option is useful when PROBLEM.INSTANCE_SEG.DATA_CHANNELS is 'BP', as multiple central seeds may appear in big
-        # instances.
+        # instances. Only works in Instance segmentation workflow.
         _C.TEST.POST_PROCESSING.REPARE_LARGE_BLOBS_SIZE = -1
-        # Clear objects connected to the label image border
-        _C.TEST.POST_PROCESSING.CLEAR_BORDER = False
 
         ### Detection
         # To remove close points to each other. This can also be set when using 'BP' channels for instance segmentation.
@@ -1422,6 +1775,9 @@ class Config:
         _C.PATHS.RESULT_DIR.DET_LOCAL_MAX_COORDS_CHECK = os.path.join(
             _C.PATHS.RESULT_DIR.PATH, "per_image_local_max_check"
         )
+        _C.PATHS.RESULT_DIR.DET_LOCAL_MAX_COORDS_CHECK_POST_PROCESSING = os.path.join(
+            _C.PATHS.RESULT_DIR.PATH, "per_image_local_max_check_post_processing"
+        )
         _C.PATHS.RESULT_DIR.DET_ASSOC_POINTS = os.path.join(_C.PATHS.RESULT_DIR.PATH, "point_associations")
         _C.PATHS.RESULT_DIR.INST_ASSOC_POINTS = os.path.join(_C.PATHS.RESULT_DIR.PATH, "instance_associations")
         # Path to store the BMZ model created 
@@ -1441,15 +1797,15 @@ class Config:
         # Paths where a few samples of instance channels created will be stored just to check id there is any problem
         _C.PATHS.TRAIN_INSTANCE_CHANNELS_CHECK = os.path.join(
             _C.PATHS.RESULT_DIR.PATH,
-            "train_" + _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS + "_instance_channels",
+            "train_" + "".join(_C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS) + "_instance_channels",
         )
         _C.PATHS.VAL_INSTANCE_CHANNELS_CHECK = os.path.join(
             _C.PATHS.RESULT_DIR.PATH,
-            "val_" + _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS + "_instance_channels",
+            "val_" + "".join(_C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS) + "_instance_channels",
         )
         _C.PATHS.TEST_INSTANCE_CHANNELS_CHECK = os.path.join(
             _C.PATHS.RESULT_DIR.PATH,
-            "test_" + _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS + "_instance_channels",
+            "test_" + "".join(_C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS) + "_instance_channels",
         )
         # Name of the folder where weights files will be stored/loaded from.
         _C.PATHS.CHECKPOINT = os.path.join(job_dir, "checkpoints")
@@ -1460,14 +1816,6 @@ class Config:
         _C.PATHS.PROB_MAP_FILENAME = "prob_map.npy"
         # Watershed debugging folder
         _C.PATHS.WATERSHED_DIR = os.path.join(_C.PATHS.RESULT_DIR.PATH, "watershed")
-        # Custom mean normalization paths
-        _C.PATHS.MEAN_INFO_FILE = os.path.join(_C.PATHS.CHECKPOINT, "normalization_mean_value.npy")
-        _C.PATHS.STD_INFO_FILE = os.path.join(_C.PATHS.CHECKPOINT, "normalization_std_value.npy")
-        # Percentile normalization paths
-        _C.PATHS.LWR_X_FILE = os.path.join(_C.PATHS.CHECKPOINT, "lower_bound_X_perc.npy")
-        _C.PATHS.UPR_X_FILE = os.path.join(_C.PATHS.CHECKPOINT, "upper_bound_X_perc.npy")
-        _C.PATHS.LWR_Y_FILE = os.path.join(_C.PATHS.CHECKPOINT, "lower_bound_Y_perc.npy")
-        _C.PATHS.UPR_Y_FILE = os.path.join(_C.PATHS.CHECKPOINT, "upper_bound_Y_perc.npy")
         # Path where the images used in MAE will be saved suring inference
         _C.PATHS.MAE_OUT_DIR = os.path.join(_C.PATHS.RESULT_DIR.PATH, "MAE_checks")
         # Directory to save filtered images.
@@ -1485,27 +1833,74 @@ class Config:
         self._C = _C
 
     def get_cfg_defaults(self) -> CN:
-        """Get a yacs CfgNode object with default values for my_project."""
+        """
+        Get a clone of the default configuration.
+
+        Returns
+        -------
+        CN
+            A cloned YACS CfgNode object with default values.
+        """
         # Return a clone so that the defaults will not be altered
         # This is for the "local variable" use pattern
         return self._C.clone()
 
     def to_dict(self):
+        """
+        Convert the configuration to a Python dictionary.
+
+        Returns
+        -------
+        dict
+            Dictionary representation of the configuration.
+        """
         return dict(self._C)
 
     def copy(self):
+        """
+        Create a deep copy of the Config object.
+
+        Returns
+        -------
+        Config
+            A deep copy of the current Config instance.
+        """
         return copy.deepcopy(self)
 
     def __str__(self):
+        """
+        Return a string representation of the Config object.
+
+        Returns
+        -------
+        str
+            String representation of the configuration.
+        """
         return str(self.__dict__)
 
     def __repr__(self):
+        """
+        Return a string representation of the Config object.
+
+        Returns
+        -------
+        str
+            String representation of the configuration.
+        """
         return str(self.__dict__)
 
-
 def update_dependencies(cfg) -> None:
-    """Update some variables that depend of changes made after merge the .cfg file provide by the user. That is,
-    this function should be called after YACS's merge_from_file().
+    """
+    Update dependent configuration variables after merging user config.
+
+    This function should be called after merging a user-provided .cfg file
+    to ensure that all dependent paths and variables are updated accordingly.
+    That is, this function should be called after YACS's merge_from_file().
+
+    Parameters
+    ----------
+    cfg : Config or CN
+        The configuration object to update.
     """
     call = getattr(cfg, "_C") if bool(getattr(cfg, "_C", False)) else cfg
     # Remove possible / characters at the end of the paths
@@ -1527,73 +1922,19 @@ def update_dependencies(cfg) -> None:
     call.DATA.TEST.GT_PATH = (
         call.DATA.TEST.GT_PATH if call.DATA.TEST.GT_PATH[-1] != "/" else call.DATA.TEST.GT_PATH[:-1]
     )
-    post_dil = "".join(str(call.PROBLEM.INSTANCE_SEG.SYNAPSES.POSTSITE_DILATION)[1:-1].replace(",","")).replace(" ","_")
-    post_d_dil = "".join(str(call.PROBLEM.INSTANCE_SEG.SYNAPSES.POSTSITE_DILATION_DISTANCE_CHANNELS)[1:-1].replace(",","")).replace(" ","_")
     tdata = call.DATA.TRAIN.GT_PATH if not call.DATA.TRAIN.INPUT_ZARR_MULTIPLE_DATA else call.DATA.TRAIN.PATH
-    if call.PROBLEM.INSTANCE_SEG.TYPE == "regular":
-        call.DATA.TRAIN.INSTANCE_CHANNELS_MASK_DIR = (
-            tdata
-            + "_"
-            + call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
-        )
-        if "C" in call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS:
-            call.DATA.TRAIN.INSTANCE_CHANNELS_MASK_DIR += "_" + call.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
-    else: 
-        call.DATA.TRAIN.INSTANCE_CHANNELS_MASK_DIR = (
-            tdata
-            + "_"
-            + call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
-            + "_"
-            + post_dil
-            + "_" 
-            + post_d_dil
-        )
+    call.DATA.TRAIN.INSTANCE_CHANNELS_MASK_DIR = tdata
     cpd = '_'.join([str(x) for x in call.PROBLEM.DETECTION.CENTRAL_POINT_DILATION])
     call.DATA.TRAIN.DETECTION_MASK_DIR = call.DATA.TRAIN.GT_PATH + "_detection_masks_" + str(cpd)
     call.DATA.TRAIN.SSL_SOURCE_DIR = call.DATA.TRAIN.PATH + "_ssl_source"
     vdata = call.DATA.VAL.GT_PATH if not call.DATA.VAL.INPUT_ZARR_MULTIPLE_DATA else call.DATA.VAL.PATH
-    if call.PROBLEM.INSTANCE_SEG.TYPE == "regular":
-        call.DATA.VAL.INSTANCE_CHANNELS_MASK_DIR = (
-            vdata
-            + "_"
-            + call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
-        )
-        if "C" in call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS:
-            call.DATA.VAL.INSTANCE_CHANNELS_MASK_DIR += "_" + call.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
-    else: 
-        call.DATA.VAL.INSTANCE_CHANNELS_MASK_DIR = (
-            vdata
-            + "_"
-            + call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
-            + "_"
-            + post_dil 
-            + "_" 
-            + post_d_dil
-        )
-    
+    call.DATA.VAL.INSTANCE_CHANNELS_MASK_DIR = vdata
     # If value is not the default
     call.DATA.VAL.DETECTION_MASK_DIR = call.DATA.VAL.GT_PATH + "_detection_masks_" + str(cpd)
     call.DATA.VAL.SSL_SOURCE_DIR = call.DATA.VAL.PATH + "_ssl_source"
     tdata = call.DATA.TEST.GT_PATH if not call.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA else call.DATA.TEST.PATH
-    if call.PROBLEM.INSTANCE_SEG.TYPE == "regular":
-        call.DATA.TEST.INSTANCE_CHANNELS_MASK_DIR = (
-            tdata
-            + "_"
-            + call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
-        )
-        if "C" in call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS:
-            call.DATA.TEST.INSTANCE_CHANNELS_MASK_DIR += "_" + call.PROBLEM.INSTANCE_SEG.DATA_CONTOUR_MODE
-    else: 
-        call.DATA.TEST.INSTANCE_CHANNELS_MASK_DIR = (
-            tdata
-            + "_"
-            + call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
-            + "_"
-            + post_dil
-            + "_" 
-            + post_d_dil
-        )
-    
+    call.DATA.TEST.INSTANCE_CHANNELS_MASK_DIR = tdata
+
     # If value is not the default
     if call.DATA.TEST.BINARY_MASKS == os.path.join("user_data", "test", "bin_mask"):
         call.DATA.TEST.BINARY_MASKS = os.path.join(call.DATA.TEST.PATH, "..", "bin_mask")
@@ -1603,13 +1944,13 @@ def update_dependencies(cfg) -> None:
 
     call.PATHS.TRAIN_INSTANCE_CHANNELS_CHECK = os.path.join(
         call.PATHS.RESULT_DIR.PATH,
-        "train_" + call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS + "_instance_channels",
+        "train_" + "".join(call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS) + "_instance_channels",
     )
     call.PATHS.VAL_INSTANCE_CHANNELS_CHECK = os.path.join(
         call.PATHS.RESULT_DIR.PATH,
-        "val_" + call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS + "_instance_channels",
+        "val_" + "".join(call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS) + "_instance_channels",
     )
     call.PATHS.TEST_INSTANCE_CHANNELS_CHECK = os.path.join(
         call.PATHS.RESULT_DIR.PATH,
-        "test_" + call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS + "_instance_channels",
+        "test_" + "".join(call.PROBLEM.INSTANCE_SEG.DATA_CHANNELS) + "_instance_channels",
     )

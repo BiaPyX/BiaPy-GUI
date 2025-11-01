@@ -19,3 +19,4 @@ bioimageio.core==0.7.0
 scikit-image==0.24.0
 bs4==0.0.2
 pyqtdarktheme==2.1.0
+safetensors==0.6.2

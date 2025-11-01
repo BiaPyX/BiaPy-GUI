@@ -1,12 +1,16 @@
 import os
+import re
+import glob
 import math
 import functools
 import numpy as np
 import pandas as pd
+from pathlib import Path
 from skimage.io import imread
-from typing import Optional, Dict, Tuple, List
+from typing import Optional, Dict, Tuple, List, Iterator
 from packaging.version import Version
 import requests
+from numpy.typing import NDArray
 
 # Copied from BiaPy commit: 1221ca518a78d633f88baf9e361305fabe81228c (3.6.6)
 def check_bmz_model_compatibility(
@@ -803,30 +807,6 @@ def data_range(x):
     else:
         return "none_range"
 
-
-def check_value(value, value_range=(0, 1)):
-    """
-    Checks if a value is within a range
-    """
-    if isinstance(value, list) or isinstance(value, tuple):
-        for i in range(len(value)):
-            if isinstance(value[i], np.ndarray):
-                if value_range[0] <= np.min(value[i]) or np.max(value[i]) <= value_range[1]:
-                    return False
-            else:
-                if not (value_range[0] <= value[i] <= value_range[1]):
-                    return False
-        return True
-    else:
-        if isinstance(value, np.ndarray):
-            if value_range[0] <= np.min(value) and np.max(value) <= value_range[1]:
-                return True
-        else:
-            if value_range[0] <= value <= value_range[1]:
-                return True
-        return False
-
-
 # Copied from BiaPy commit: 284ec3838766392c9a333ac9d27b55816a267bb9 (3.5.2)
 def crop_data_with_overlap(
     data, crop_shape, data_mask=None, overlap=(0, 0), padding=(0, 0), verbose=True, load_data=True
@@ -1514,3 +1494,142 @@ def find_bmz_models(
 
     return out
 
+
+def os_walk_clean(
+    path: str,
+    exclude_files: Tuple = ("Thumbs.db", "desktop.ini", ".DS_Store"),
+    exclude_dirs: Tuple = (".git", "__pycache__")
+) -> Iterator[Tuple[str, List[str], List[str]]]:
+    """
+    Clean os.walk + robust natural sorting (numeric-aware).
+    
+    Parameters
+    ----------
+    path : str
+        The root directory to walk.
+    exclude_files : tuple, optional
+        Filenames to exclude from the results. Defaults to common system files.
+    exclude_dirs : tuple, optional
+        Directory names to exclude from the results. Defaults to common system directories.
+    Yields
+    ------
+    Iterator[Tuple[str, List[str], List[str]]]
+        Yields tuples of (root, dirs, files) with excluded items removed and
+        directories/files sorted in natural order.
+    """
+
+    def natural_key(s):
+        # Split filename into chunks of digits and non-digits,
+        # keeping all chunks as strings but zero-pad digits for proper order.
+        parts = re.findall(r'\d+|\D+', s)
+        # Pad numeric chunks so '2' < '10' < '100'
+        return [p.zfill(10) if p.isdigit() else p.lower() for p in parts]
+
+    for root, dirs, files in os.walk(path):
+        dirs[:]  = [d for d in dirs  if d not in exclude_dirs and not d.startswith('.')]
+        files    = [f for f in files if f not in exclude_files and not f.startswith('.')]
+
+        # Safe natural sort
+        dirs.sort(key=natural_key)
+        files.sort(key=natural_key)
+        yield root, dirs, files
+
+
+def get_checkpoint_path(cfg, jobname):
+    """
+    Determine the path to the checkpoint file to load.
+
+    It selects the checkpoint based on `cfg.PATHS.CHECKPOINT_FILE`,
+    `cfg.MODEL.LOAD_CHECKPOINT_EPOCH` ("last_on_train" or "best_on_val"),
+    and the `jobname`.
+
+    Parameters
+    ----------
+    cfg : YACS CN object
+        The configuration object. Key parameters:
+
+        - `cfg.PATHS.CHECKPOINT`: Base directory for checkpoints.
+        - `cfg.PATHS.CHECKPOINT_FILE`: Explicit path to a checkpoint file (if set).
+        - `cfg.MODEL.LOAD_CHECKPOINT_EPOCH`: Strategy for selecting checkpoint
+          ("last_on_train" or "best_on_val").
+          
+    jobname : str
+        The name of the current job/experiment.
+
+    Returns
+    -------
+    str
+        The absolute path to the checkpoint file without the extension (without the .pth or .safetensors).
+
+    Raises
+    ------
+    NotImplementedError
+        If `cfg.MODEL.LOAD_CHECKPOINT_EPOCH` is an unrecognized value.
+    """
+    checkpoint_dir = Path(cfg.PATHS.CHECKPOINT)
+
+    # Select the checkpoint source file
+    if cfg.PATHS.CHECKPOINT_FILE != "":
+        resume = cfg.PATHS.CHECKPOINT_FILE
+    else:
+        if cfg.MODEL.LOAD_CHECKPOINT_EPOCH == "last_on_train":
+            all_checkpoints = glob.glob(os.path.join(checkpoint_dir, "{}-checkpoint-*".format(jobname)))
+            latest_ckpt = -1
+            for ckpt in all_checkpoints:
+                t = ckpt.split("-")[-1].split(".")[0]
+                if t.isdigit():
+                    latest_ckpt = max(int(t), latest_ckpt)
+            if latest_ckpt >= 0:
+                resume = os.path.join(checkpoint_dir, "{}-checkpoint-{}".format(jobname, latest_ckpt))
+        elif cfg.MODEL.LOAD_CHECKPOINT_EPOCH == "best_on_val":
+            resume = os.path.join(checkpoint_dir, "{}-checkpoint-best".format(jobname))
+        else:
+            raise NotImplementedError
+
+    return resume
+
+
+
+def check_value(
+    value: int | float | Tuple[int | float] | List[int | float] | NDArray,
+    value_range: Tuple[int | float, int | float] = (0, 1),
+) -> bool:
+    """
+    Check whether a value or a collection of values falls within a specified range.
+
+    This function supports individual values (int, float), lists or tuples of values,
+    and NumPy arrays. If `value` is a list or tuple, all elements must fall within
+    the specified `value_range`. For NumPy arrays, both the minimum and maximum
+    values of the array must be within the range.
+
+    Parameters
+    ----------
+    value : int, float, list, tuple or np.ndarray
+        The value or collection of values to check.
+    value_range : tuple of (int or float), optional
+        A (min, max) tuple specifying the inclusive range of valid values.
+        Default is (0, 1).
+
+    Returns
+    -------
+    bool
+        True if all values are within the specified range; False otherwise.
+    """
+    if isinstance(value, list) or isinstance(value, tuple):
+        for i in range(len(value)):
+            if isinstance(value[i], np.ndarray):
+                if value_range[0] <= np.min(value[i]) or np.max(value[i]) <= value_range[1]:
+                    return False
+            else:
+                if not (value_range[0] <= value[i] <= value_range[1]):
+                    return False
+        return True
+    else:
+        if isinstance(value, np.ndarray):
+            if value_range[0] <= np.min(value) and np.max(value) <= value_range[1]:
+                return True
+        else:
+            if value_range[0] <= value <= value_range[1]:
+                return True
+        return False
+    
