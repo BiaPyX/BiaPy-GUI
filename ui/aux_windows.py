@@ -13,7 +13,7 @@ from PySide6.QtGui import (
     QCloseEvent,
 )
 import PySide6.QtWidgets as QtWidgets
-from PySide6.QtWidgets import QDialog, QFrame, QHBoxLayout, QLabel, QVBoxLayout, QStyle, QGridLayout, QFileDialog, QPushButton
+from PySide6.QtWidgets import QDialog, QFrame, QHBoxLayout, QLabel, QVBoxLayout, QStyle, QGridLayout, QFileDialog
 
 from ui_utils import mark_syntax_error, resource_path, change_page
 from ui.ui_dialog import Ui_Dialog
@@ -551,15 +551,16 @@ class model_card_carrousel_Ui(QDialog):
                 self.model_cards[model_number][f"model_nickname_{model_number}"]
             )
             self.model_cards[model_number][f"model_id_{model_number}"] = QLabel(
-                self.model_cards[model_number][f"model_nick_id_frame_{model_number}"]
+                self.model_cards[model_number][f"model_info_frame_{model_number}"]
             )
+            self.model_cards[model_number][f"model_id_{model_number}"].setWordWrap(True)
             self.model_cards[model_number][f"model_id_{model_number}"].setObjectName(f"model_id_{model_number}")
             self.model_cards[model_number][f"model_id_{model_number}"].setFont(self.font)
-            self.model_cards[model_number][f"horizontalLayout_3{model_number}"].addWidget(
-                self.model_cards[model_number][f"model_id_{model_number}"]
+            self.model_cards[model_number][f"gridLayout{model_number}"].addWidget(
+                self.model_cards[model_number][f"model_id_{model_number}"], 0, 0, 1, 1
             )
             self.model_cards[model_number][f"gridLayout{model_number}"].addWidget(
-                self.model_cards[model_number][f"model_nick_id_frame_{model_number}"], 0, 0, 1, 1
+                self.model_cards[model_number][f"model_nick_id_frame_{model_number}"], 1, 0, 1, 1
             )
             self.model_cards[model_number][f"model_description_{model_number}"] = QLabel(
                 self.model_cards[model_number][f"model_info_frame_{model_number}"]
@@ -570,7 +571,7 @@ class model_card_carrousel_Ui(QDialog):
             self.model_cards[model_number][f"model_description_{model_number}"].setFont(self.font)
             self.model_cards[model_number][f"model_description_{model_number}"].setWordWrap(True)
             self.model_cards[model_number][f"gridLayout{model_number}"].addWidget(
-                self.model_cards[model_number][f"model_description_{model_number}"], 1, 0, 1, 1
+                self.model_cards[model_number][f"model_description_{model_number}"], 2, 0, 1, 1
             )
             self.model_cards[model_number][f"model_link_{model_number}"] = QLabel(
                 self.model_cards[model_number][f"model_info_frame_{model_number}"]
@@ -580,7 +581,7 @@ class model_card_carrousel_Ui(QDialog):
             self.model_cards[model_number][f"model_link_{model_number}"].setWordWrap(True)
             self.model_cards[model_number][f"model_link_{model_number}"].setOpenExternalLinks(True)
             self.model_cards[model_number][f"gridLayout{model_number}"].addWidget(
-                self.model_cards[model_number][f"model_link_{model_number}"], 2, 0, 1, 1
+                self.model_cards[model_number][f"model_link_{model_number}"], 3, 0, 1, 1
             )
             self.model_cards[model_number][f"horizontalLayout_2{model_number}"].addWidget(
                 self.model_cards[model_number][f"model_info_frame_{model_number}"]

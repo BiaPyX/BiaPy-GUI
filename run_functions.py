@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 import multiprocessing
 import json
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict
 
 from PySide6 import QtCore
 from PySide6.QtCore import Qt, QObject, QUrl

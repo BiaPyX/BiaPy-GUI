@@ -4,261 +4,153 @@ import functools
 import numpy as np
 import pandas as pd
 from skimage.io import imread
-from typing import Optional, Dict, Tuple
+from typing import Optional, Dict, Tuple, List
 from packaging.version import Version
-from pathlib import Path
-import pooch
-import yaml
-from logging import Logger
+import requests
 
-## Copied from BiaPy commit: f2360c1d3796df13614dc8c005299a8989cf27fd (3.5.11)
-def check_bmz_model_compatibility_in_GUI(
-    model_rdf_file: Dict,
-    model_name: str,
-    model_version: str,
-    biapy_version: str,
-    workflow_specs: Dict,
-    logger: Logger,
-) -> Tuple[bool, Optional[Dict]]:
+# Copied from BiaPy commit: 1221ca518a78d633f88baf9e361305fabe81228c (3.6.6)
+def check_bmz_model_compatibility(
+    model_rdf: Dict,
+    workflow_specs: Optional[Dict] = None,
+) -> Tuple[List, bool, str, Dict]:
     """
-    Checks one model compatibility with BiaPy by looking at the compatibility file created from the CI. 
-    Here just the minimum information is checked, i.e. workflow and dimensions, as more detailed checks 
-    are done in the CI.
+    Check one model compatibility with BiaPy by looking at its RDF file provided by BMZ. This function is the one used in BMZ's continuous integration with BiaPy.
 
     Parameters
     ----------
-    model_rdf_file : str
-        RDF file of the model. 
-
-    model_name : str
-        Name of the model.
-
-    model_version : str
-        Version of the model.  
-
-    biapy_version : str
-        Version of BiaPy to check the compatibility with. 
-
-    logger : Logger
-        Logger to log messages.
+    model_rdf : dict
+        BMZ model RDF that contains all the information of the model.
 
     workflow_specs : dict
         Specifications of the workflow. If not provided all possible models will be considered.
 
     Returns
     -------
-    consumable : bool
-        Whether if the model can be consumed by BiaPy or not with the selected configuration.
+    preproc_info: dict
+        Preprocessing names that the model is using.
 
-    model_rdf : dict
-        BMZ model RDF that contains all the information of the model.
+    error : bool
+        Whether it there is a problem to consume the model in BiaPy or not.
+
+    reason_message: str
+        Reason why the model can not be consumed if there is any.
     """
-    compatible, consumable = False, False
 
-    biapy_model_compatibility_file = f"https://uk1s3.embassy.ebi.ac.uk/public-datasets/bioimage.io/{model_name}/{model_version}/compatibility/biapy_{biapy_version}.json"
-    logger.info(f"Checking BiaPy compatibility file: {biapy_model_compatibility_file}")
-    try:
-        with open(Path(pooch.retrieve(biapy_model_compatibility_file, known_hash=None)), "rt", encoding="utf8") as stream:
-            model_comp_file = yaml.safe_load(stream)
-            compatible = True if model_comp_file["status"] == "passed" else False
-    except:
-        logger.info("There was a problem reading the compatibility file so the model will not be listed as consumible just in case.")  
-    
-    if not compatible:
-        return False, None
+    # --------- helpers ---------
+    def g(d, *ks, default=None):
+        cur = d
+        for k in ks:
+            if isinstance(cur, dict) and k in cur:
+                cur = cur[k]
+            else:
+                return default
+        return cur
+
+    m = g(model_rdf, "raw", "manifest", default=model_rdf) or model_rdf
 
     specific_workflow = "all" if workflow_specs is None else workflow_specs["workflow_type"]
     specific_dims = "all" if workflow_specs is None else workflow_specs["ndim"]
+    ref_classes = "all" if workflow_specs is None else workflow_specs["nclasses"]
 
-    try:
-        with open(Path(pooch.retrieve(model_rdf_file, known_hash=None)), "rt", encoding="utf8") as stream:
-            model_rdf = yaml.safe_load(stream)
-    except:
-        logger.info("There was a problem reading the RDF file of the model")  
-        return False, None
-
-    # Check problem type
-    if (specific_workflow in ["all", "SEMANTIC_SEG"]) and (
-        "semantic-segmentation" in model_rdf["tags"]
-        or ("segmentation" in model_rdf["tags"] and "instance-segmentation" not in model_rdf["tags"])
-    ):
-        consumable = True
-    elif specific_workflow in ["all", "INSTANCE_SEG"] and "instance-segmentation" in model_rdf["tags"]:
-        consumable = True
-    elif specific_workflow in ["all", "DETECTION"] and "detection" in model_rdf["tags"]:
-        consumable = True
-    elif specific_workflow in ["all", "DENOISING"] and "denoising" in model_rdf["tags"]:
-        consumable = True
-    elif specific_workflow in ["all", "SUPER_RESOLUTION"] and "super-resolution" in model_rdf["tags"]:
-        consumable = True
-    elif specific_workflow in ["all", "SELF_SUPERVISED"] and "self-supervision" in model_rdf["tags"]:
-        consumable = True
-    elif specific_workflow in ["all", "CLASSIFICATION"] and "classification" in model_rdf["tags"]:
-        consumable = True
-    elif specific_workflow in ["all", "IMAGE_TO_IMAGE"] and (
-        "pix2pix" in model_rdf["tags"]
-        or "image-reconstruction" in model_rdf["tags"]
-        or "image-to-image" in model_rdf["tags"]
-        or "image-restoration" in model_rdf["tags"]
-    ):
-        consumable = True
-
-    if not consumable:
-        return False, None 
-
-    # Check axes
-    axes_order = model_rdf["inputs"][0]["axes"]
-    if isinstance(axes_order, list):
-        _axes_order = ""
-        for axis in axes_order:
-            if "type" in axis:
-                if axis["type"] == "batch":
-                    _axes_order += "b"
-                elif axis["type"] == "channel":
-                    _axes_order += "c"
-                elif "id" in axis:
-                    _axes_order += axis["id"]
-            elif "id" in axis:
-                if axis["id"] == "channel":
-                    _axes_order += "c"
-                else:
-                    _axes_order += axis["id"]
-        axes_order = _axes_order
-
-    if specific_dims == "2D":
-        if axes_order != "bcyx":
-            return False, None
-        elif "2d" not in model_rdf["tags"] and "3d" in model_rdf["tags"]:
-            return False, None
-    elif specific_dims == "3D":
-        if axes_order != "bczyx":
-            return False, None
-        elif "3d" not in model_rdf["tags"] and "2d" in model_rdf["tags"]:
-            return False, None
-    else:  # All
-        if axes_order not in ["bcyx", "bczyx"]:
-            return False, None
-
-    return consumable, model_rdf
-
-
-# Adapted from BiaPy commit: f2360c1d3796df13614dc8c005299a8989cf27fd (3.5.11)
-def check_model_restrictions(
-    model_rdf: Dict,
-    workflow_specs: Dict,
-) -> Dict:
-    """
-    Checks model restrictions to be applied into the current configuration.
-
-    Parameters
-    ----------
-    model_rdf : dict
-        BMZ model RDF that contains all the information of the model.
-
-    workflow_specs : dict
-        Specifications of the workflow. If not provided all possible models will be considered.
-
-    Returns
-    -------
-    option_list: dict
-        Variables and values to change in current configuration. These changes
-        are imposed by the selected model.
-    """
-    specific_workflow = workflow_specs["workflow_type"]
-
-    # Version of the model
-    model_version = Version(model_rdf["format_version"])
+    preproc_info: List = []
     opts = {}
 
-    # 1) Change PATCH_SIZE with the one stored in the model description. This differs from the code of BiaPy where
-    # get_test_inputs() is simply used as there a ModelDescr is build out of the RDF. Here we try to do it manually
-    # to avoid fetching files using the network as it may be slow.
-    input_image_shape = []
-    if "shape" in model_rdf["inputs"][0]:
-        input_image_shape = model_rdf["inputs"][0]["shape"]
-        # "CebraNET Cellular Membranes in Volume SEM" ('format_version': '0.4.10')
-        #   have: {'min': [1, 1, 64, 64, 64], 'step': [0, 0, 16, 16, 16]}
-        if isinstance(input_image_shape, dict) and "min" in input_image_shape:
-            input_image_shape = input_image_shape["min"]
-    else:
-        # Check axes and dimension
-        input_image_shape = []
-        for axis in model_rdf["inputs"][0]["axes"]:
-            if "type" in axis:
-                if axis["type"] == "batch":
-                    input_image_shape += [
-                        1,
-                    ]
-                elif axis["type"] == "channel":
-                    input_image_shape += [
-                        1,
-                    ]
-                elif "id" in axis and "size" in axis:
-                    if isinstance(axis["size"], int):
-                        input_image_shape += [
-                            axis["size"],
-                        ]
-                    elif "min" in axis["size"]:
-                        input_image_shape += [
-                            axis["size"]["min"],
-                        ]
-            elif "id" in axis:
-                if axis["id"] == "channel":
-                    input_image_shape += [
-                        1,
-                    ]
-                else:
-                    if isinstance(axis["size"], int):
-                        input_image_shape += [
-                            axis["size"],
-                        ]
-                    elif "min" in axis["size"]:
-                        input_image_shape += [
-                            axis["size"]["min"],
-                        ]
-    if len(input_image_shape) == 0:
-        raise ValueError("Couldn't load input info from BMZ model's RDF: {}".format(model_rdf["inputs"][0]))
-    opts["DATA.PATCH_SIZE"] = tuple(input_image_shape[2:]) + (input_image_shape[1],)
+    # --------- Accept only PyTorch state dict models with a single input ---------
+    weights = g(m, "weights", "pytorch_state_dict")
+    inputs = g(m, "inputs") or []
 
-    # Capture model kwargs
-    if "kwargs" in model_rdf["weights"]["pytorch_state_dict"]:
-        model_kwargs = model_rdf["weights"]["pytorch_state_dict"]["kwargs"]
-    elif (
-        "architecture" in model_rdf["weights"]["pytorch_state_dict"]
-        and "kwargs" in model_rdf["weights"]["pytorch_state_dict"]["architecture"]
+    if not (isinstance(weights, dict) and weights):
+        reason_message = f"[{specific_workflow}] pytorch_state_dict not found in model RDF\n"
+        return preproc_info, True, reason_message, opts
+    if not (isinstance(inputs, list) and len(inputs) == 1):
+        reason_message = f"[{specific_workflow}] Model needs to have a single input.\n"
+        return preproc_info, True, reason_message, opts
+
+    # Model format version (defaults to 0.5 for your legacy logic)
+    model_version = Version("0.5")
+    fmt = g(m, "format_version")
+    if isinstance(fmt, str):
+        try:
+            model_version = Version(fmt)
+        except Exception:
+            pass
+
+    # --------- Extract model kwargs ---------
+    model_kwargs = None
+    if "kwargs" in weights:
+        model_kwargs = weights["kwargs"]
+    elif "architecture" in weights and isinstance(weights["architecture"], dict):
+        model_kwargs = weights["architecture"].get("kwargs", None)
+    if model_kwargs is None:
+        return preproc_info, True, f"[{specific_workflow}] Couldn't extract kwargs from model description.\n", opts
+
+    # --------- Problem type via tags ---------
+    tags = g(m, "tags", default=[]) or []
+    
+    if (specific_workflow in ["all", "SEMANTIC_SEG"]) and (
+        "semantic-segmentation" in tags or ("segmentation" in tags and "instance-segmentation" not in tags)
     ):
-        model_kwargs = model_rdf["weights"]["pytorch_state_dict"]["architecture"]["kwargs"]
-    else:
-        raise ValueError(f"Couldn't extract kwargs from model description.")
-
-    # 2) Workflow specific restrictions
-    # Classes in semantic segmentation
-    if specific_workflow in ["SEMANTIC_SEG"]:
-        # Check number of classes
+        # classes
         classes = -1
-        if "n_classes" in model_kwargs:  # BiaPy
-            classes = model_kwargs["n_classes"]
-        elif "out_channels" in model_kwargs:
-            classes = model_kwargs["out_channels"]
-        elif "classes" in model_kwargs:
-            classes = model_kwargs["classes"]
+        for k in ("n_classes", "out_channels", "output_channels", "classes"):
+            if k in model_kwargs:
+                classes = model_kwargs[k]
+                break
         if isinstance(classes, list):
-            classes = classes[0]
+            classes = classes[-1]
 
         if not isinstance(classes, int):
-            raise ValueError(f"Classes not extracted correctly. Obtained {classes}")
-        if specific_workflow == "SEMANTIC_SEG" and classes == -1:
-            raise ValueError("Classes not found for semantic segmentation dir. ")
+            reason_message = (
+                f"[{specific_workflow}] 'DATA.N_CLASSES' not extracted. Obtained {classes}. Please check it!\n"
+            )
+            return preproc_info, True, reason_message, opts
+        
+        if (
+            classes == -1
+            and "architecture" in weights
+            and isinstance(weights["architecture"], dict)
+            and ("callable" in weights["architecture"] or "source" in weights["architecture"])
+        ):
+            # Check if the model is one of the known architectures and assume it returns 1 class (as is the default in BiaPy)
+            for arch in [weights["architecture"].get("callable", None), weights["architecture"].get("source", None)]:
+                if arch is not None:
+                    arch = str(arch).lower().replace(".py", "")
+                    if arch in [
+                        "unet",
+                        "resunet",
+                        "resunet++",
+                        "seunet",
+                        "attention_unet",
+                        "resunet_se",
+                        "unetr",
+                        "multiresunet",
+                        "unext_v1",
+                        "unext_v2",
+                        "hrnet",
+                    ]:
+                        classes = 1
+                if classes != -1:
+                    print(f"[BMZ] Detected BiaPy model ({arch}) so assuming 1 as the class output, which is the default in BiaPy")
+                    break 
 
-        opts["MODEL.N_CLASSES"] = max(2, classes)
+        if isinstance(classes, int) and classes != -1:
+            if ref_classes != "all":
+                if classes > 2 and ref_classes != classes:
+                    reason_message = f"[{specific_workflow}] 'DATA.N_CLASSES' does not match network's output classes. Please check it!\n"
+                    return preproc_info, True, reason_message, opts
+        else:
+            reason_message = f"[{specific_workflow}] Couldn't find the classes this model is returning so please be aware to match it\n"
+            return preproc_info, True, reason_message, opts
 
-    elif specific_workflow in ["INSTANCE_SEG"]:
-        # Assumed it's BC. This needs a more elaborated process. Still deciding this:
+        opts["DATA.N_CLASSES"] = max(2, classes)
+
+    elif specific_workflow in ["all", "INSTANCE_SEG"] and "instance-segmentation" in tags:
+        # Assumed it's F + C. This needs a more elaborated process. Still deciding this:
         # https://github.com/bioimage-io/spec-bioimage-io/issues/621
 
         # Defaults
         channels = 2
-        channel_code = "BC" 
+        channel_code = ["F", "C"]
         classes = 2
 
         if "out_channels" in model_kwargs:
@@ -266,14 +158,14 @@ def check_model_restrictions(
         elif "output_channels" in model_kwargs:
             channels = model_kwargs["output_channels"]
 
-        if "biapy" in model_rdf["tags"]:
+        if "biapy" in tags:
             # CartoCell models
             if (
-                "cyst" in model_rdf["tags"]
-                and "3d" in model_rdf["tags"]
-                and "fluorescence" in model_rdf["tags"]
+                "cyst" in tags
+                and "3d" in tags
+                and "fluorescence" in tags
             ):
-                channel_code = "BCM"
+                channel_code = ["F", "C", "M"]
 
             # Handle multihead
             assert isinstance(channels, list)
@@ -281,66 +173,182 @@ def check_model_restrictions(
                 classes = channels[-1]
             channels = channels[0]
 
-        else: # for other models set some defaults
+        else:  # for other models set some defaults
             if isinstance(channels, list):
                 channels = channels[-1]
             if channels == 1:
-                channel_code = "C"
+                channel_code = ["C"]
             elif channels == 2:
-                channel_code = "BC"
+                channel_code = ["F", "C"]
             elif channels == 8:
-                channel_code = "A"
+                channel_code = ["A"] # wild-whale
 
         opts["PROBLEM.INSTANCE_SEG.DATA_CHANNELS"] = channel_code
-        opts["PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS"] = [1,]*channels
+        opts["PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS"] = [
+            1,
+        ] * channels
         if classes != 2:
-            opts["MODEL.N_CLASSES"] = max(2, classes)
+            opts["DATA.N_CLASSES"] = max(2, classes)
         if channel_code == "A":
-            opts["LOSS.CLASS_REBALANCE"] = True
+            opts["LOSS.CLASS_REBALANCE"] = "auto"
 
-    if "preprocessing" not in model_rdf["inputs"][0]:
-        return opts
+    elif specific_workflow in ["all", "DETECTION"] and "detection" in tags:
+        pass
+    elif specific_workflow in ["all", "DENOISING"] and "denoising" in tags:
+        pass
+    elif specific_workflow in ["all", "SUPER_RESOLUTION"] and ("super-resolution" in tags or "superresolution" in tags):
+        pass
+    elif specific_workflow in ["all", "SELF_SUPERVISED"] and "self-supervision" in tags:
+        pass
+    elif specific_workflow in ["all", "CLASSIFICATION"] and "classification" in tags:
+        pass
+    elif specific_workflow in ["all", "IMAGE_TO_IMAGE"] and any(
+        t in tags for t in ("pix2pix", "image-reconstruction", "image-to-image", "image-restoration")
+    ):
+        pass
+    else:
+        reason_message = f"[{specific_workflow}] no workflow tag recognized in {tags}.\n"
+        return preproc_info, True, reason_message, opts
 
-    preproc_info = model_rdf["inputs"][0]["preprocessing"]
-    if len(preproc_info) == 0:
-        return opts
-    preproc_info = preproc_info[0]
+    # --------- Axes checks ---------
+    axes_order = g(inputs[0], "axes")
+    input_image_shape = []
+    
+    if isinstance(axes_order, list):
+        _axes_order = ""
+        for axis in axes_order:
+            if "type" in axis:
+                if axis["type"] == "batch":
+                    _axes_order += "b"
+                    input_image_shape += [1]
+                elif axis["type"] == "channel":
+                    _axes_order += "c"
+                    input_image_shape += [1]
+                elif "id" in axis:
+                    _axes_order += axis["id"]
+                    input_image_shape += [axis["size"]]
+            elif "id" in axis:
+                if axis["id"] == "channel":
+                    _axes_order += "c" 
+                    input_image_shape += [1]
+                else:
+                    if isinstance(axis.get("size"), int):
+                        input_image_shape += [axis["size"]]
+                    elif isinstance(axis.get("size"), dict) and "min" in axis["size"]:
+                        input_image_shape += [axis["size"]["min"]]
+                    _axes_order += axis["id"]
+        axes_order = _axes_order
+    
+    opts["DATA.PATCH_SIZE"] = tuple(input_image_shape[2:] + [input_image_shape[1]]) # (z) y x c
 
-    # 3) Change preprocessing to the one stablished by BMZ by translate BMZ keywords into BiaPy's
-    # 'zero_mean_unit_variance' and 'fixed_zero_mean_unit_variance' norms of BMZ can be translated to our 'custom' norm
-    # providing mean and std
-    key_to_find = "id" if model_version > Version("0.5.0") else "name"
-    if key_to_find in preproc_info:
-        if preproc_info[key_to_find] in ["fixed_zero_mean_unit_variance", "zero_mean_unit_variance"]:
-            if "kwargs" in preproc_info and "mean" in preproc_info["kwargs"]:
-                mean = preproc_info["kwargs"]["mean"]
-                std = preproc_info["kwargs"]["std"]
-            elif "mean" in preproc_info:
-                mean = preproc_info["mean"]
-                std = preproc_info["std"]
-            else:
-                mean, std = -1.0, -1.0
+    if specific_dims == "2D":
+        if axes_order != "bcyx":
+            reason_message = f"[{specific_workflow}] In a 2D problem the axes need to be 'bcyx', found {axes_order}\n"
+            return preproc_info, True, reason_message, opts
+        elif "2d" not in tags and "3d" in tags:
+            reason_message = f"[{specific_workflow}] Selected model seems to not be 2D\n"
+            return preproc_info, True, reason_message, opts
+    elif specific_dims == "3D":
+        if axes_order != "bczyx":
+            reason_message = f"[{specific_workflow}] In a 3D problem the axes need to be 'bczyx', found {axes_order}\n"
+            return preproc_info, True, reason_message, opts
+        elif "3d" not in tags and "2d" in tags:
+            reason_message = f"[{specific_workflow}] Selected model seems to not be 3D\n"
+            return preproc_info, True, reason_message, opts
+    else:  # "all"
+        if axes_order not in ["bcyx", "bczyx"]:
+            reason_message = (
+                f"[{specific_workflow}] Accepting models only with ['bcyx', 'bczyx'] axis order, found {axes_order}\n"
+            )
+            return preproc_info, True, reason_message, opts
 
-            opts["DATA.NORMALIZATION.TYPE"] = "zero_mean_unit_variance"
-            opts["DATA.NORMALIZATION.ZERO_MEAN_UNIT_VAR.MEAN_VAL"] = mean
-            opts["DATA.NORMALIZATION.ZERO_MEAN_UNIT_VAR.STD_VAL"] = std
+    # --------- Preprocessing ---------
+    if "preprocessing" in (inputs[0] or {}):
+        preproc_info = inputs[0]["preprocessing"]
+        key_to_find = "id" if model_version > Version("0.5.0") else "name"
+        if isinstance(preproc_info, list):
+            # remove ensure_dtype->float casts (BiaPy does it anyway)
+            new_preproc_info = []
+            for preproc in preproc_info:
+                if key_to_find in preproc and not (
+                    preproc[key_to_find] == "ensure_dtype"
+                    and "kwargs" in preproc
+                    and "dtype" in preproc["kwargs"]
+                    and "float" in str(preproc["kwargs"]["dtype"])
+                ):
+                    new_preproc_info.append(preproc)
+            preproc_info = new_preproc_info.copy()
 
-        # 'scale_linear' norm of BMZ is close to our 'div' norm (TODO: we need to control the "gain" arg)
-        elif preproc_info[key_to_find] == "scale_linear":
-            opts["DATA.NORMALIZATION.TYPE"] = "div"
+            if len(preproc_info) > 1:
+                reason_message = (
+                    f"[{specific_workflow}] More than one preprocessing from BMZ not implemented yet {axes_order}\n"
+                )
+                return preproc_info, True, reason_message, opts
+            elif len(preproc_info) == 1:
+                preproc_info = preproc_info[0]
+                if key_to_find in preproc_info:
+                    proc_id = preproc_info[key_to_find]
+                    if proc_id not in [
+                        "zero_mean_unit_variance",
+                        "fixed_zero_mean_unit_variance",
+                        "scale_range",
+                        "scale_linear",
+                    ]:
+                        reason_message = (
+                            f"[{specific_workflow}] Not recognized preprocessing found: {proc_id}\n"
+                        )
+                        return preproc_info, True, reason_message, opts
+                    else:
+                        # zero_mean_unit_variance / fixed_zero_mean_unit_variance -> zero_mean_unit_variance(mean,std)
+                        if proc_id in ["fixed_zero_mean_unit_variance", "zero_mean_unit_variance"]:
+                            if "kwargs" in preproc_info and "mean" in preproc_info["kwargs"]:
+                                mean = preproc_info["kwargs"]["mean"]
+                                std = preproc_info["kwargs"]["std"]
+                            elif "mean" in preproc_info:
+                                mean = preproc_info["mean"]
+                                std = preproc_info["std"]
+                            else:
+                                mean, std = -1.0, -1.0
 
-        # 'scale_range' norm of BMZ is as our PERC_CLIP + 'scale_range' norm
-        elif preproc_info[key_to_find] == "scale_range":
-            opts["DATA.NORMALIZATION.TYPE"] = "scale_range"
-            if (
-                float(preproc_info["kwargs"]["min_percentile"]) != 0
-                or float(preproc_info["kwargs"]["max_percentile"]) != 100
-            ):
-                opts["DATA.NORMALIZATION.PERC_CLIP"] = True
-                opts["DATA.NORMALIZATION.PERC_LOWER"] = float(preproc_info["kwargs"]["min_percentile"])
-                opts["DATA.NORMALIZATION.PERC_UPPER"] = float(preproc_info["kwargs"]["max_percentile"])
+                            opts["DATA.NORMALIZATION.TYPE"] = "zero_mean_unit_variance"
+                            opts["DATA.NORMALIZATION.ZERO_MEAN_UNIT_VAR.MEAN_VAL"] = mean
+                            opts["DATA.NORMALIZATION.ZERO_MEAN_UNIT_VAR.STD_VAL"] = std
 
-    return opts
+                        # scale_linear ~ div (gain not handled, same as original)
+                        elif proc_id == "scale_linear":
+                            opts["DATA.NORMALIZATION.TYPE"] = "div"
+
+                        # scale_range -> scale_range (+ optional PERC_CLIP)
+                        elif proc_id == "scale_range":
+                            opts["DATA.NORMALIZATION.TYPE"] = "scale_range"
+
+                            # Check if there is percentile clippign
+                            if (
+                                float(preproc_info["kwargs"]["min_percentile"]) != 0
+                                or float(preproc_info["kwargs"]["max_percentile"]) != 100
+                            ):
+                                opts["DATA.NORMALIZATION.PERC_CLIP.ENABLE"] = True
+                                opts["DATA.NORMALIZATION.PERC_CLIP.LOWER_PERC"] = float(
+                                    preproc_info["kwargs"]["min_percentile"]
+                                )
+                                opts["DATA.NORMALIZATION.PERC_CLIP.UPPER_PERC"] = float(
+                                    preproc_info["kwargs"]["max_percentile"]
+                                )
+                else:
+                    reason_message = (
+                        f"[{specific_workflow}] Not recognized preprocessing structure found: {preproc_info}\n"
+                    )
+                    return preproc_info, True, reason_message, opts
+
+    # --------- Post-processing in kwargs (unsupported) ---------
+    if "postprocessing" in model_kwargs and model_kwargs["postprocessing"] is not None:
+        reason_message = (
+            f"[{specific_workflow}] Currently no postprocessing is supported. Found: {model_kwargs['postprocessing']}\n"
+        )
+        return preproc_info, True, reason_message, opts
+
+    # All checks passed
+    return preproc_info, False, "", opts
 
 
 def get_cfg_key_value(obj, attr, *args):
@@ -1422,3 +1430,87 @@ def pad_and_reflect(img, crop_shape, verbose=False):
             if verbose:
                 print("Reflected from {} to {}".format(o_shape, img.shape))
     return img
+
+# Copied from BiaPy commit: d7cca5c7ccbf3cf0eae42ce5c11720117bc45343 (3.6.6)
+def find_bmz_models(
+    model_ID: Optional[str] = None,
+    url: str = "https://hypha.aicell.io/bioimage-io/artifacts/bioimage.io/children?limit=1000000",
+    timeout: int = 30,
+):
+    """
+    Query the BioImage.IO Hypha API for *models* and return those whose
+    nickname/id/rdf_source contains `model_ID` (case-insensitive).
+
+    Returns list of dicts with: id, alias, nickname, rdf_source, version,
+    format_version, artifact_path (id used as path), and a few handy urls.
+
+    Parameters
+    ----------
+    model_ID : str
+        Model identifier. It can be either its ``DOI`` or ``nickname``. Leave it as None
+        to get all available models.
+
+    url : str
+        URL to the BioImage.IO Hypha API endpoint to query for models.
+
+    timeout : int
+        Timeout for the HTTP request in seconds.
+
+    Returns
+    -------
+    out : list of dict
+        List of dictionaries containing model information. Each dictionary has the following
+        keys: `id`, `alias`, `nickname`, `rdf_source`, `version`, `format_version`,
+        `artifact_path`, `urls` (which contains `covers` and `documentation` URLs), and `raw`
+        (the original item from the API response).
+    """
+    q = str(model_ID).lower() if model_ID else None
+
+    r = requests.get(url, timeout=timeout)
+    r.raise_for_status()
+    items = r.json()
+
+    if isinstance(items, dict) and "children" in items:
+        items = items["children"]
+
+    out = []
+    for it in items or []:
+        if (it or {}).get("type") != "model":
+            continue
+
+        # Pull common fields defensively from the manifest config
+        cfg = ((it.get("manifest") or {}).get("config")) or {}
+        b = cfg.get("bioimageio") or {}
+        nickname = b.get("nickname") or it.get("alias")
+        rdf_source = b.get("rdf_source") or b.get("source")  # some deployments use 'source'
+        version = b.get("version") or cfg.get("version") or it.get("version")
+        format_version = b.get("format_version") or cfg.get("format_version")
+
+        # Build haystack for matching (old behavior)
+        hay = [
+            nickname or "",
+            it.get("id") or "",
+            rdf_source or "",
+        ]
+        if q and not any(q in h.lower() for h in hay):
+            continue
+
+        out.append(
+            {
+                "artifact_path": it.get("id"),  # usable as path for other calls
+                "id": it.get("id"),
+                "alias": it.get("alias"),
+                "nickname": nickname,
+                "rdf_source": rdf_source,
+                "version": version,
+                "format_version": format_version,
+                "urls": {
+                    "covers": (b.get("thumbnails") or {}),
+                    "documentation": b.get("documentation"),
+                },
+                "raw": it,  # keep the original item in case you need more fields
+            }
+        )
+
+    return out
+

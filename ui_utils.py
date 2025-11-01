@@ -7,7 +7,6 @@ import yaml
 import queue
 import subprocess
 import re
-import pooch
 import json
 import numpy as np
 import certifi
@@ -38,11 +37,11 @@ from biapy.biapy_check_configuration import (
     convert_old_model_cfg_to_current_version,
 )
 from biapy.biapy_aux_functions import (
-    check_bmz_model_compatibility_in_GUI,
+    check_bmz_model_compatibility,
     check_images,
     check_csv_files,
     check_classification_images,
-    check_model_restrictions,
+    find_bmz_models,
 )
 
 
@@ -960,94 +959,53 @@ class check_models_from_other_sources_engine(QObject):
         workflow_specs["workflow_type"] = problem_type
         workflow_specs["ndim"] = problem_ndim
         workflow_specs["nclasses"] = "all"
-        biapy_version_to_compare = self.main_window.cfg.settings["biapy_code_version"]
         try:
-            # Checking BMZ model compatibility using the available model list provided by BMZ
-            collection_path = Path(pooch.retrieve(self.COLLECTION_URL, known_hash=None))
-            with collection_path.open() as f:
-                collection = json.load(f)
-
-            # Collect all the models in BMZs
-            model_urls = [entry["rdf_source"] for entry in collection["collection"] if entry["type"] == "model"]
+            # Check the models that BiaPy can consume
+            models = find_bmz_models()
 
             # Check each model compatibility
             model_count = 0
-            for mu in model_urls:
-                splited_url = mu.split("/")
-                model_name = splited_url[-4]
-                model_version = splited_url[-3]
-                self.main_window.logger.info("Checking entry: {}".format(model_name))
-                
-                # Try to decice a better value for the version to compare, as maybe the CI has not run yet 
-                if model_name == "affable-shark":
-                    previous_biapy_version_to_compare = ""
-                    try:
-                        affable_shark_file = f"https://uk1s3.embassy.ebi.ac.uk/public-datasets/bioimage.io/affable-shark/{model_version}/compatibility/biapy_{str(biapy_version_to_compare)}.json"
-                        _ = Path(pooch.retrieve(affable_shark_file, known_hash=None))
-                    except: 
-                        # Seems that the CI was not passed yet so we try to check the compatibility with the last BiaPy release                        
-                        if biapy_version_to_compare.micro-1 >= 0:
-                            previous_release = int(biapy_version_to_compare.micro-1)
-                            previous_biapy_version_to_compare = ".".join(str(biapy_version_to_compare).split(".")[:-1]+[str(previous_release),])
-                        try:
-                            affable_shark_file = f"https://uk1s3.embassy.ebi.ac.uk/public-datasets/bioimage.io/affable-shark/{model_version}/compatibility/biapy_{str(previous_biapy_version_to_compare)}.json"
-                            _ = Path(pooch.retrieve(affable_shark_file, known_hash=None))
-                        except: 
-                            pass
-                    if previous_biapy_version_to_compare != "":
-                        biapy_version_to_compare = previous_biapy_version_to_compare
+            for model in models:
+                nickname = "Nick not found"
+                if 'nickname' in model:
+                    nickname = model['nickname']
+                elif 'alias' in model:
+                    nickname = model['alias']
                     
-                compatible, model_rdf = check_bmz_model_compatibility_in_GUI(
-                    model_rdf_file=mu,
-                    model_name=model_name, 
-                    model_version=model_version,
-                    biapy_version=str(biapy_version_to_compare),
-                    workflow_specs=workflow_specs, 
-                    logger=self.main_window.logger
-                )
-
-                if compatible:
-                    assert model_rdf
+                self.main_window.logger.info("Checking entry: {}".format(nickname))
+                try:
+                    (
+                        _,
+                        error,
+                        error_message,
+                        biapy_imposed_vars
+                    ) = check_bmz_model_compatibility(model, workflow_specs=workflow_specs)
+                except:
+                    error = True
+                
+                if not error:
                     self.main_window.logger.info("Compatible model")
-                    # Creating BMZ model object
-                    # model = load_description(model_rdf['config']['bioimageio']['nickname'])
-                    # abs url: model.covers[0].absolute() (covers[0] is RelativeFilePath)
-                    biapy_imposed_vars = check_model_restrictions(model_rdf, workflow_specs=workflow_specs)
-                    doi = "/".join(model_rdf["id"].split("/")[:2])
-                    # Extract nickname and its icon
-                    if "nickname" in model_rdf["config"]["bioimageio"]:
-                        nickname = model_rdf["config"]["bioimageio"]["nickname"]
-                        nickname_icon = model_rdf["config"]["bioimageio"]["nickname_icon"]
-                    elif "id" in model_rdf["config"]["bioimageio"]:
-                        nickname = model_rdf["config"]["bioimageio"]["id"]
-                        nickname_icon = model_rdf["config"]["bioimageio"]["id_emoji"]
-                    else:
-                        nickname = doi
-                        nickname_icon = doi
-                    cover_url = (
-                        "https://uk1s3.embassy.ebi.ac.uk/public-datasets/bioimage.io/"
-                        + nickname
-                        + "/"
-                        + str(model_rdf["version"])
-                        + "/files/"
-                        + model_rdf["covers"][0]
-                    )
+                    nickname_icon = "Emoji not found"
+                    if 'id_emoji' in model["raw"]["manifest"]:
+                        nickname_icon = model["raw"]["manifest"]['id_emoji']
+
+                    cover_url = "https://hypha.aicell.io/bioimage-io/artifacts/{}/files/{}".format(nickname, model["raw"]["manifest"]['covers'][0])
                     model_info = {
                         "name": model_name,
                         "source": "BioImage Model Zoo",
-                        "description": model_rdf["description"],
+                        "description": model["raw"]["manifest"]['description'],
                         "nickname": nickname,
                         "nickname_icon": nickname_icon,
-                        "id": doi,
+                        "id": model["raw"]["manifest"]['name'],
                         "covers": cover_url,
-                        "url": f"https://bioimage.io/#/?id={doi}",
+                        "url": f"https://bioimage.io/#/artifacts/{nickname}",
                         "imposed_vars": biapy_imposed_vars,
                     }
                     self.add_model_card_signal.emit(model_count, model_info, self.from_wizard)
 
                     model_count += 1
                 else:
-                    self.main_window.logger.info("Not compatible model")
+                    self.main_window.logger.info("Not compatible model. Reason: {}".format(error_message))
 
             self.main_window.logger.info("Finish checking BMZ model . . .")
 
