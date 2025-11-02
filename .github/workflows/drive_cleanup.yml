@@ -1,0 +1,30 @@
+name: Google Drive Cleanup (monthly)
+
+on:
+schedule:
+- cron: "0 0 1 * *" # Run at 00:00 UTC on the 1st of each month
+workflow_dispatch: # Allow manual trigger
+
+jobs:
+cleanup:
+runs-on: ubuntu-latest
+steps:
+  - name: Check out repository
+    uses: actions/checkout@v4
+
+  - name: Set up Python
+    uses: actions/setup-python@v5
+    with:
+      python-version: "3.11"
+
+  - name: Install Google API dependencies
+    run: |
+      python -m pip install --upgrade pip
+      pip install google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib
+
+  - name: Decode Drive credentials
+    run: |
+      echo "${{ secrets.DRIVE_CREDENTIALS }}" | base64 -d > sa.json
+
+  - name: Run Google Drive cleanup script
+    run: python scripts/gdrive_old_files_cleanup.py
