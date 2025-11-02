@@ -36,10 +36,30 @@ jobs:
       run: |
         echo "== dist tree =="
         ls -R dist || true
-        
-    - name: Upload public folder to Google Drive
-      uses: Jodebu/upload-to-drive@master
-      with:
-        credentials: ${{ secrets.DRIVE_CREDENTIALS }}
-        target: dist/BiaPy
-        folder: ${{ secrets.FOLDER_FOR_NEW_BINARIES }}
+
+    - name: Decode creds and show service account email (for debugging only)
+      run: |
+        echo "$DRIVE_CREDENTIALS" | base64 -d > sa.json
+        jq -r '.client_email,.project_id' sa.json
+        rm -f sa.json
+
+    - name: Upload dist/BiaPy to Drive
+      env:
+        FOLDER_ID: 1vMFX1llrQ7FDiMriMCFgqObfCHlOCcWM
+      run: |
+        echo "$DRIVE_CREDENTIALS" | base64 -d > sa.json
+        python - <<'PY'
+        import os, sys, mimetypes
+        from google.oauth2.service_account import Credentials
+        from googleapiclient.discovery import build
+        from googleapiclient.http import MediaFileUpload
+        creds = Credentials.from_service_account_file('sa.json', scopes=['https://www.googleapis.com/auth/drive'])
+        drive = build('drive','v3',credentials=creds,cache_discovery=False)
+
+        path = 'dist/BiaPy'
+        name = os.path.basename(path.rstrip('/'))
+        media = MediaFileUpload(path, mimetype=mimetypes.guess_type(path)[0] or 'application/octet-stream', resumable=True)
+        file_metadata = {'name': name, 'parents': [os.environ['FOLDER_ID']]}
+        file = drive.files().create(body=file_metadata, media_body=media, fields='id,name').execute()
+        print("Uploaded:", file['name'], file['id'])
+        PY
