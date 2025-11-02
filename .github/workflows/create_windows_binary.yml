@@ -48,7 +48,7 @@ jobs:
         from googleapiclient.http import MediaFileUpload
 
         FOLDER_ID = os.environ["FOLDER_ID"]
-        PATH = "dist/BiaPy"
+        PATH = "dist/BiaPy.exe"
 
         # Authorize with service account
         creds = Credentials.from_service_account_file(
