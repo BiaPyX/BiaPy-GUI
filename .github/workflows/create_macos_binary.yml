@@ -31,41 +31,47 @@ jobs:
         echo "== dist tree =="
         ls -R dist || true
 
-    - name: Upload dist/BiaPy to Google Drive (Python method)
+    # Zip the .app bundle
+    - name: Create macOS zip (preserve bundle attrs)
+      run: |
+        test -d "dist/BiaPy.app" || { echo "dist/BiaPy.app not found"; exit 1; }
+        # eg: BiaPy-GUI-<tag>-macOS.zip
+        NAME="BiaPy-GUI-${{ github.ref_name }}-macOS.zip"
+        ditto -c -k --sequesterRsrc --keepParent "dist/BiaPy.app" "dist/${NAME}"
+        ls -lh "dist/${NAME}"
+
+    # Install Google client libs, decode creds, and upload the ZIP
+    - name: Upload ZIP to Google Drive
       env:
         FOLDER_ID: ${{ secrets.FOLDER_FOR_NEW_BINARIES }}
       run: |
-        # Install Google API client
         python -m pip install --quiet google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib
-
-        # Decode your base64 credentials into a JSON file
         echo "${{ secrets.DRIVE_CREDENTIALS }}" | base64 -d > sa.json
 
-        # Run the upload script
         python - <<'PY'
-        import os, mimetypes
+        import os
         from google.oauth2.service_account import Credentials
         from googleapiclient.discovery import build
         from googleapiclient.http import MediaFileUpload
 
         FOLDER_ID = os.environ["FOLDER_ID"]
-        PATH = "dist/BiaPy.app"
+        # Match the NAME used above
+        ZIP_PATH = os.path.join("dist", f"BiaPy-GUI-{os.environ.get('GITHUB_REF_NAME','local')}-macOS.zip")
+        if not os.path.exists(ZIP_PATH):
+            # fallback: find the first .zip in dist
+            zips = [p for p in os.listdir("dist") if p.endswith(".zip")]
+            if not zips:
+                raise SystemExit("No ZIP found to upload")
+            ZIP_PATH = os.path.join("dist", zips[0])
 
-        # Authorize with service account
-        creds = Credentials.from_service_account_file(
-            "sa.json",
-            scopes=["https://www.googleapis.com/auth/drive"]
-        )
+        creds = Credentials.from_service_account_file("sa.json", scopes=["https://www.googleapis.com/auth/drive"])
+        drive = build("drive","v3",credentials=creds, cache_discovery=False)
 
-        service = build("drive", "v3", credentials=creds, cache_discovery=False)
+        media = MediaFileUpload(ZIP_PATH, mimetype="application/zip", resumable=True)
+        body = {"name": os.path.basename(ZIP_PATH), "parents": [FOLDER_ID]}
 
-        # Upload file (or folder as zip)
-        name = os.path.basename(PATH.rstrip("/"))
-        mime_type = mimetypes.guess_type(PATH)[0] or "application/octet-stream"
-        media = MediaFileUpload(PATH, mimetype=mime_type, resumable=True)
-        file_metadata = {"name": name, "parents": [FOLDER_ID]}
-
-        print(f"Uploading {PATH} to folder {FOLDER_ID} ...")
-        file = service.files().create(body=file_metadata, media_body=media, fields="id,name").execute()
-        print(f"✅ Uploaded {file['name']} with id {file['id']}")
+        print(f"Uploading {ZIP_PATH} to folder {FOLDER_ID} ...")
+        req = drive.files().create(body=body, media_body=media, fields="id,name")
+        result = req.execute()
+        print(f"✅ Uploaded {result['name']} (id: {result['id']})")
         PY
