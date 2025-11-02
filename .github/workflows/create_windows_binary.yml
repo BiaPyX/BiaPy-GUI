@@ -34,6 +34,7 @@ jobs:
       shell: bash
       env:
         FOLDER_ID: ${{ secrets.FOLDER_FOR_NEW_BINARIES }}
+        PYTHONUTF8: "1"           # or PYTHONIOENCODING: "utf-8"
       run: |
         # Install Google API client
         python -m pip install --quiet google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib
