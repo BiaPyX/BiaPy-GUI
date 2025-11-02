@@ -5,6 +5,7 @@
 [![Create Linux binary](https://github.com/BiaPyX/BiaPy-GUI/actions/workflows/create_linux_binary.yml/badge.svg)](https://github.com/BiaPyX/BiaPy-GUI/actions/workflows/create_linux_binary.yml)
 [![Create macOS binary](https://github.com/BiaPyX/BiaPy-GUI/actions/workflows/create_macos_binary.yml/badge.svg)](https://github.com/BiaPyX/BiaPy-GUI/actions/workflows/create_macos_binary.yml)
 [![Create Windows binary](https://github.com/BiaPyX/BiaPy-GUI/actions/workflows/create_windows_binary.yml/badge.svg)](https://github.com/BiaPyX/BiaPy-GUI/actions/workflows/create_windows_binary.yml)
+[![Google Drive Cleanup (monthly)](https://github.com/BiaPyX/BiaPy-GUI/actions/workflows/google_drive_cleanup.yml/badge.svg)](https://github.com/BiaPyX/BiaPy-GUI/actions/workflows/google_drive_cleanup.yml)
 
 ## Download BiaPy GUI for you OS
 
