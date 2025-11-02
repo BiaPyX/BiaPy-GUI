@@ -43,23 +43,41 @@ jobs:
         jq -r '.client_email,.project_id' sa.json
         rm -f sa.json
 
-    - name: Upload dist/BiaPy to Drive
+    - name: Upload dist/BiaPy to Google Drive (Python method)
       env:
-        FOLDER_ID: 1vMFX1llrQ7FDiMriMCFgqObfCHlOCcWM
+        FOLDER_ID: ${{ secrets.FOLDER_FOR_NEW_BINARIES }}
       run: |
-        echo "$DRIVE_CREDENTIALS" | base64 -d > sa.json
+        # Install Google API client
+        python -m pip install --quiet google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib
+
+        # Decode your base64 credentials into a JSON file
+        echo "${{ secrets.DRIVE_CREDENTIALS }}" | base64 -d > sa.json
+
+        # Run the upload script
         python - <<'PY'
-        import os, sys, mimetypes
+        import os, mimetypes
         from google.oauth2.service_account import Credentials
         from googleapiclient.discovery import build
         from googleapiclient.http import MediaFileUpload
-        creds = Credentials.from_service_account_file('sa.json', scopes=['https://www.googleapis.com/auth/drive'])
-        drive = build('drive','v3',credentials=creds,cache_discovery=False)
 
-        path = 'dist/BiaPy'
-        name = os.path.basename(path.rstrip('/'))
-        media = MediaFileUpload(path, mimetype=mimetypes.guess_type(path)[0] or 'application/octet-stream', resumable=True)
-        file_metadata = {'name': name, 'parents': [os.environ['FOLDER_ID']]}
-        file = drive.files().create(body=file_metadata, media_body=media, fields='id,name').execute()
-        print("Uploaded:", file['name'], file['id'])
+        FOLDER_ID = os.environ["FOLDER_ID"]
+        PATH = "dist/BiaPy"
+
+        # Authorize with service account
+        creds = Credentials.from_service_account_file(
+            "sa.json",
+            scopes=["https://www.googleapis.com/auth/drive"]
+        )
+
+        service = build("drive", "v3", credentials=creds, cache_discovery=False)
+
+        # Upload file (or folder as zip)
+        name = os.path.basename(PATH.rstrip("/"))
+        mime_type = mimetypes.guess_type(PATH)[0] or "application/octet-stream"
+        media = MediaFileUpload(PATH, mimetype=mime_type, resumable=True)
+        file_metadata = {"name": name, "parents": [FOLDER_ID]}
+
+        print(f"Uploading {PATH} to folder {FOLDER_ID} ...")
+        file = service.files().create(body=file_metadata, media_body=media, fields="id,name").execute()
+        print(f"✅ Uploaded {file['name']} with id {file['id']}")
         PY
