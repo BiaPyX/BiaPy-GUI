@@ -25,9 +25,11 @@ jobs:
         cp dist-win/main.spec main.spec
         pyinstaller.exe main.spec
 
-    - name: Enable debug logging
-      run: echo "ACTIONS_STEP_DEBUG=true" >> $GITHUB_ENV
-
+    - name: Check dist folder contents
+      run: |
+        echo "== dist tree =="
+        ls -R dist || true
+        
     - name: Upload public folder to Google Drive
       uses: codetheweb/upload-to-drive@v1.3.0
       with:

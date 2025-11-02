@@ -16,7 +16,14 @@ jobs:
       with:
         python-version: "3.10"
         cache: "pip" # caching pip dependencies
-        
+
+    - name: Install Qt/X11 runtime deps
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libxcb-shape0 libxcb-keysyms1 libxcb-render-util0 \
+                              libxcb-icccm4 libxkbcommon-x11-0 libxcb-image0 \
+                              libxcb-xkb1 libxcb-cursor0
+
     - name: Installing BiaPy-GUI dependencies
       run: pip install -r requirements.txt
       
@@ -25,11 +32,13 @@ jobs:
         cp dist-linux/main.spec main.spec
         pyinstaller main.spec
 
-    - name: Enable debug logging
-      run: echo "ACTIONS_STEP_DEBUG=true" >> $GITHUB_ENV
-
+    - name: Check dist folder contents
+      run: |
+        echo "== dist tree =="
+        ls -R dist || true
+        
     - name: Upload public folder to Google Drive
-      uses: codetheweb/upload-to-drive@v1.3.0
+      uses: Jodebu/upload-to-drive@master
       with:
         credentials: ${{ secrets.DRIVE_CREDENTIALS }}
         target: dist/BiaPy
