@@ -29,11 +29,6 @@ jobs:
       run: |
         echo "== dist tree =="
         ls -R dist || true
-        
-    - name: Decode creds and show service account email (for debugging only)
-      run: |
-        echo "$DRIVE_CREDENTIALS" | base64 -d > sa.json
-        jq -r '.client_email,.project_id' sa.json
 
     - name: Upload dist/BiaPy to Google Drive (Python method)
       env:
