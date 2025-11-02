@@ -20,7 +20,7 @@ jobs:
     - name: Installing BiaPy-GUI dependencies
       run: pip install -r requirements.txt
       
-    - name: Creating Linux binary
+    - name: Creating Windows binary
       run: |
         cp dist-win/main.spec main.spec
         pyinstaller.exe main.spec
@@ -29,7 +29,7 @@ jobs:
       run: echo "ACTIONS_STEP_DEBUG=true" >> $GITHUB_ENV
 
     - name: Upload public folder to Google Drive
-      uses: Jodebu/upload-to-drive@master
+      uses: codetheweb/upload-to-drive@v1.3.0
       with:
         credentials: ${{ secrets.DRIVE_CREDENTIALS }}
         target: dist/BiaPy.exe
