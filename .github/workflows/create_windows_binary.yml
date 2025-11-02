@@ -34,7 +34,6 @@ jobs:
       run: |
         echo "$DRIVE_CREDENTIALS" | base64 -d > sa.json
         jq -r '.client_email,.project_id' sa.json
-        rm -f sa.json
 
     - name: Upload dist/BiaPy to Google Drive (Python method)
       env:
