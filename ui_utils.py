@@ -136,12 +136,7 @@ def check_data_from_path(main_window: main.MainWindow):
 
             def set_folder_checked(data_constraints, key, sample_info):
                 main_window.logger.info(f"Data {key} checked!")
-                if "data_constraints" not in main_window.cfg.settings["wizard_answers"]:
-                    main_window.cfg.settings["wizard_answers"]["data_constraints"] = data_constraints
-                else:
-                    main_window.cfg.settings["wizard_answers"]["data_constraints"] = update_dict(
-                        main_window.cfg.settings["wizard_answers"]["data_constraints"], data_constraints
-                    )
+                main_window.cfg.settings["wizard_answers"]["data_constraints"] = data_constraints
                 main_window.cfg.settings["wizard_answers"][f"CHECKED {key}"] = 1
                 set_text(main_window.ui.wizard_data_checked_label, "<span style='color:#04aa6d'>Data checked!</span>")
 
