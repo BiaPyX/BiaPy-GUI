@@ -159,8 +159,7 @@ class Settings:
             [
                 "Generate masks of different (or just one) objects/regions within the image",
                 "Generate masks for each object in the image",
-                "Identify and count roughly circular objects in the images, without needing an exact outline around each one",
-                "Clean noisy images",
+                "Identify circular objects (e.g. nuclei) in the image using point markers",
                 "Upsample images into higher resolution",
                 "Assign a label to each image",
                 "Restore a degraded image",
