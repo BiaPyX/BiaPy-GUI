@@ -4,7 +4,7 @@ import yaml
 import pooch
 from typing import Dict, List, Optional
 from packaging.version import Version
-from PySide6.QtCore import QCoreApplication, QSize, Qt, QEvent, QPoint
+from PySide6.QtCore import QCoreApplication, QSize, Qt, QPoint
 from PySide6.QtGui import (
     QColor,
     QFont,
@@ -36,7 +36,45 @@ INTERACTIVE = (
     QtWidgets.QTreeView, QtWidgets.QListView, QtWidgets.QTableView,
 )
 
-class dialog_Ui(QDialog):
+class dragable_dialog_Ui(QDialog):
+    def __init__(self, parent=None):
+        super(dragable_dialog_Ui, self).__init__(parent)
+        self._dragging = False
+        self._dragPos = QPoint()
+
+    def _is_interactive_child(self, pos):
+        w = self.childAt(pos)
+        while w and w is not self:
+            if isinstance(w, INTERACTIVE):
+                return True
+            w = w.parentWidget()
+        return False
+
+    def mousePressEvent(self, e):
+        if e.button() == Qt.LeftButton and not self._is_interactive_child(e.pos()):
+            self._dragging = True
+            self._dragPos = e.globalPos()
+            e.accept()
+        else:
+            super().mousePressEvent(e)
+
+    def mouseMoveEvent(self, e):
+        if self._dragging and (e.buttons() & Qt.LeftButton):
+            delta = e.globalPos() - self._dragPos
+            self.move(self.pos() + delta)
+            self._dragPos = e.globalPos()
+            e.accept()
+        else:
+            super().mouseMoveEvent(e)
+
+    def mouseReleaseEvent(self, e):
+        if self._dragging and e.button() == Qt.LeftButton:
+            self._dragging = False
+            e.accept()
+        else:
+            super().mouseReleaseEvent(e)
+
+class dialog_Ui(dragable_dialog_Ui):
     def __init__(
         self,
         parent_ui: main.MainWindow,
@@ -58,37 +96,9 @@ class dialog_Ui(QDialog):
             QPixmap(resource_path(os.path.join("images", "bn_images", "error.png"))),
             QPixmap(resource_path(os.path.join("images", "bn_images", "info.png"))),
         ]
-        self.dragPos = self.pos()
         self.setStyleSheet("#centralwidget{ border: 1px solid black;} QWidget{ font-size:16px;}")
         self.dialog_window.error_message_label.setWordWrap(True)
-
-        def moveErrorWindow(event: QCloseEvent):
-            """
-            Move the error window.
-
-            Parameters
-            ----------
-            event: QCloseEvent
-                Event that called this function.
-            """
-            if event.buttons() == Qt.LeftButton:
-                self.move(self.pos() + event.globalPos() - self.dragPos)
-                self.dragPos = event.globalPos()
-                event.accept()
-
         self.signals_created = False
-        self.dialog_window.frame_top.mouseMoveEvent = moveErrorWindow
-
-    def mousePressEvent(self, event: QEvent):
-        """
-        Mouse press event handler.
-
-        Parameters
-        ----------
-        event: QEvent
-            Event that called this function.
-        """
-        self.dragPos = event.globalPos()
 
     def dialog_constrict(self, message: str, reason: Optional[str]):
         """
@@ -196,7 +206,7 @@ class dialog_Ui(QDialog):
         self.close()
 
 
-class yes_no_Ui(QDialog):
+class yes_no_Ui(dragable_dialog_Ui):
     def __init__(self):
         """
         Creates a yes/no question window for user interaction.
@@ -212,7 +222,7 @@ class yes_no_Ui(QDialog):
         )
         self.setStyleSheet("#centralwidget{ border: 1px solid black;} QWidget{ font-size:16px;}")
         self.answer = False
-
+    
     def create_question(self, question):
         self.yes_no_window.question_label.setText(question)
 
@@ -279,7 +289,7 @@ class spinner_Ui(QDialog):
         super().close()
 
 
-class basic_Ui(QDialog):
+class basic_Ui(dragable_dialog_Ui):
     def __init__(
         self,
     ):
@@ -310,7 +320,7 @@ class basic_Ui(QDialog):
         self.basic_window.message_label.setText(text)
 
 
-class model_card_carrousel_Ui(QDialog):
+class model_card_carrousel_Ui(dragable_dialog_Ui):
     def __init__(
         self,
         parent_ui: main.MainWindow,
@@ -668,7 +678,7 @@ class model_card_carrousel_Ui(QDialog):
         super().close()
 
 
-class tour_window_Ui(QDialog):
+class tour_window_Ui(dragable_dialog_Ui):
     def __init__(
         self,
         dot_images: List[QIcon],
@@ -791,7 +801,7 @@ class tour_window_Ui(QDialog):
             getattr(self.basic_window, f"window{i}_bn").setIcon(self.dot_images[1])
 
 
-class modify_yaml_Ui(QDialog):
+class modify_yaml_Ui(dragable_dialog_Ui):
     def __init__(
         self,
         parent_ui: main.MainWindow,
@@ -822,22 +832,7 @@ class modify_yaml_Ui(QDialog):
             self.style().standardIcon(QStyle.StandardPixmap.SP_TitleBarCloseButton)
         )
 
-        def moveErrorWindow(event: QEvent):
-            """
-            Move the error window.
-
-            Parameters
-            ----------
-            event: QEvent
-                Event that called this function.
-            """
-            if event.buttons() == Qt.LeftButton:
-                self.move(self.pos() + event.globalPos() - self.dragPos)
-                self.dragPos = event.globalPos()
-                event.accept()
-
         self.allow_instant_exit = False
-        self.yaml_mod_window.frame_top.mouseMoveEvent = moveErrorWindow
         self.yaml_file = ""
 
         self.yaml_mod_window.DATA__TRAIN__PATH__INPUT.textChanged.connect(lambda: self.mark_syntax_error("DATA__TRAIN__PATH__INPUT"))
@@ -848,41 +843,6 @@ class modify_yaml_Ui(QDialog):
         self.yaml_mod_window.DATA__TEST__GT_PATH__INPUT.textChanged.connect(lambda: self.mark_syntax_error("DATA__TEST__GT_PATH__INPUT"))
         self.yaml_mod_window.PATHS__CHECKPOINT_FILE__INPUT.textChanged.connect(lambda: self.mark_syntax_error("PATHS__CHECKPOINT_FILE__INPUT"))
 
-        self._dragging = False
-        self._dragPos = QPoint()
-
-    def _is_interactive_child(self, pos):
-        w = self.childAt(pos)
-        while w and w is not self:
-            if isinstance(w, INTERACTIVE):
-                return True
-            w = w.parentWidget()
-        return False
-
-    def mousePressEvent(self, e):
-        if e.button() == Qt.LeftButton and not self._is_interactive_child(e.pos()):
-            self._dragging = True
-            self._dragPos = e.globalPos()
-            e.accept()
-        else:
-            super().mousePressEvent(e)
-
-    def mouseMoveEvent(self, e):
-        if self._dragging and (e.buttons() & Qt.LeftButton):
-            delta = e.globalPos() - self._dragPos
-            self.move(self.pos() + delta)
-            self._dragPos = e.globalPos()
-            e.accept()
-        else:
-            super().mouseMoveEvent(e)
-
-    def mouseReleaseEvent(self, e):
-        if self._dragging and e.button() == Qt.LeftButton:
-            self._dragging = False
-            e.accept()
-        else:
-            super().mouseReleaseEvent(e)
-    
     def examine(self, save_in_obj_tag: str, is_file: bool = True) -> str:
         """
         Find an item in disk. Can be a file or a directory.
