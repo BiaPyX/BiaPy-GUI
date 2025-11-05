@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: 7f5e7ed09d9659226cdbd1cda12708cc9aec9d8f (3.6.6)
+## Copied from BiaPy commit: 3db4edcf634b3726484d650bc03058c5f36d3a7c (3.6.6)
 import os
 import re
 from typing import List, Tuple, Any, Dict
@@ -2501,7 +2501,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             except ImportError:
                 raise ImportError("Please install safetensors package to be able to load .safetensors checkpoints")
 
-    if not cfg.MODEL.LOAD_CHECKPOINT and not cfg.TRAIN.ENABLE and cfg.TEST.ENABLE:
+    if cfg.MODEL.SOURCE == "biapy" and not cfg.MODEL.LOAD_CHECKPOINT and not cfg.TRAIN.ENABLE and cfg.TEST.ENABLE:
         raise ValueError("Seems that you want to test a model without training first. In this case, 'MODEL.LOAD_CHECKPOINT' needs to be set to True to load a pre-trained model.")
 
     assert cfg.MODEL.OUT_CHECKPOINT_FORMAT in ["pth", "safetensors"], "MODEL.OUT_CHECKPOINT_FORMAT not in ['pth', 'safetensors']"
