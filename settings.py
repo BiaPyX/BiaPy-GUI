@@ -153,13 +153,13 @@ class Settings:
         # Q2 #
         ######
         self.settings["wizard_questions"] += [
-            "Do you want to:",
+            "What would you like to do? Check the Wizard Help for details about each workflow.",
         ]
         self.settings["wizard_possible_answers"] += [
             [
-                "Generate masks of different (or just one) objects/regions within the image",
+                "Generate masks of different objects/regions within the image",
                 "Generate masks for each object in the image",
-                "Identify circular objects (e.g. nuclei) in the image using point markers",
+                "Identify circular objects (e.g. nuclei) in the image using points",
                 "Upsample images into higher resolution",
                 "Assign a label to each image",
                 "Restore a degraded image",
@@ -193,7 +193,7 @@ class Settings:
                 The options are:\
             </p>\
             <p>\
-                <strong>&#8226;&quot;Generate masks of different (or just one) objects/regions within the image&quot;</strong>&nbsp; refers to the workflow called &quot;Semantic segmentation&quot;. The goal of this workflow is to assign a class to each pixel (or voxel) of the input image, thus producing a label image with semantic masks. The simplest case would be binary classification, as in the figure depicted below. There, only two labels are present in the label image: black pixels (usually with value 0) represent the background, and white pixels represent the foreground (the wound in this case, usually labeled with 1 or 255 value).\
+                <strong>&#8226;&quot;Generate masks of different objects/regions within the image&quot;</strong>&nbsp; refers to the workflow called &quot;Semantic segmentation&quot;. The goal of this workflow is to assign a class to each pixel (or voxel) of the input image, thus producing a label image with semantic masks. The simplest case would be binary classification, as in the figure depicted below. There, only two labels are present in the label image: black pixels (usually with value 0) represent the background, and white pixels represent the foreground (the wound in this case, usually labeled with 1 or 255 value).\
             </p>\
             <div style='float:center;'>\
             <img style='float:center;' src='{}' width='200px'/> \
@@ -213,7 +213,7 @@ class Settings:
             <p>Find more information about instance segmenation workflow in <a href='https://biapy.readthedocs.io/en/latest/workflows/instance_segmentation.html'>its documentation</a>.</p>\
             \
             <p>\
-            <strong>&#8226;&quot;Identify and count roughly circular objects in the images, without needing an exact outline around each one&quot;</strong>&nbsp;refers to the workflow called &quot;Detection&quot;. The goal of this workflow is to localize objects in the input image, not requiring a pixel-level class. Common strategies produce either bounding boxes containing the objects or individual points at their center of mass, which is the one adopted by BiaPy.\
+            <strong>&#8226;&quot;Identify circular objects (e.g. nuclei) in the image using points&quot;</strong>&nbsp;refers to the workflow called &quot;Detection&quot;. The goal of this workflow is to localize objects in the input image, not requiring a pixel-level class. Common strategies produce either bounding boxes containing the objects or individual points at their center of mass, which is the one adopted by BiaPy.\
             </p>\
             <p>\
             An example of this task is displayed in the figure below (credits to <a href='https://zenodo.org/records/3715492#.Y4m7FjPMJH6'>Jukkala & Jacquemet</a>), with a fluorescence microscopy image used as input (left) and its corresponding nuclei detection results (rigth). Each red dot in the right image corresponds to a unique predicted object.\
