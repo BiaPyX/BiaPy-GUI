@@ -13,16 +13,15 @@ from typing import Dict
 from PySide6 import QtCore
 from PySide6.QtCore import Qt, QObject, QUrl
 from PySide6.QtGui import QPixmap, QMovie, QCloseEvent
-from PySide6.QtWidgets import QDialog, QStyle
+from PySide6.QtWidgets import QStyle
 
 from ui_utils import get_text, resource_path, path_in_list, path_to_linux, center_window
 from biapy.biapy_check_configuration import convert_old_model_cfg_to_current_version
 from ui.ui_run import Ui_RunBiaPy
-from ui.aux_windows import yes_no_Ui
+from ui.aux_windows import yes_no_Ui, dragable_dialog_Ui
 import main
 
-
-class runBiaPy_Ui(QDialog):
+class runBiaPy_Ui(dragable_dialog_Ui):
     def __init__(self, parent_worker: run_worker):
         """
         Creates the UI in charge of running BiaPy.
@@ -54,15 +53,7 @@ class runBiaPy_Ui(QDialog):
         self.run_window.train_progress_bar.setValue(0)
         self.run_window.test_progress_bar.setValue(0)
         self.setStyleSheet("#centralwidget{ border: 1px solid black;} QWidget{ font-size:16px;}")
-        self.dragPos = self.pos()
 
-        def movedialogWindow(event):
-            if event.buttons() == Qt.LeftButton:
-                self.move(self.pos() + event.globalPos() - self.dragPos)
-                self.dragPos = event.globalPos()
-                event.accept()
-
-        self.run_window.frame_top.mouseMoveEvent = movedialogWindow
         self.yes_no = yes_no_Ui()
         self.forcing_close = False
         self.pulling_terminal_buffer = []
@@ -315,17 +306,6 @@ class runBiaPy_Ui(QDialog):
             )
             self.run_window.terminal_upper_label.setText("Last lines of the log (updating every 3 seconds):")
             self.run_window.spin_label.setVisible(True)
-
-    def mousePressEvent(self, event: QCloseEvent):
-        """
-        Mouse press event handler.
-
-        Parameters
-        ----------
-        event: QCloseEvent
-            Event that called this function.
-        """
-        self.dragPos = event.globalPos()
 
 
 class run_worker(QObject):
