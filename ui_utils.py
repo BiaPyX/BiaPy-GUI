@@ -136,7 +136,12 @@ def check_data_from_path(main_window: main.MainWindow):
 
             def set_folder_checked(data_constraints, key, sample_info):
                 main_window.logger.info(f"Data {key} checked!")
-                main_window.cfg.settings["wizard_answers"]["data_constraints"] = data_constraints
+                if "data_constraints" not in main_window.cfg.settings["wizard_answers"]:
+                    main_window.cfg.settings["wizard_answers"]["data_constraints"] = data_constraints
+                else:
+                    main_window.cfg.settings["wizard_answers"]["data_constraints"] = update_dict(
+                        main_window.cfg.settings["wizard_answers"]["data_constraints"], data_constraints
+                    )
                 main_window.cfg.settings["wizard_answers"][f"CHECKED {key}"] = 1
                 set_text(main_window.ui.wizard_data_checked_label, "<span style='color:#04aa6d'>Data checked!</span>")
 
@@ -853,7 +858,7 @@ def have_internet(main_window: main.MainWindow, timeout: int = 3) -> bool:
         return False
 
 
-def check_models_from_other_sources(main_window: main.MainWindow, from_wizard: bool = True):
+def check_models_from_other_sources(main_window: main.MainWindow):
     """
     Check available model compatible with BiaPy from external sources such as BioImage Model Zoo (BMZ)
     and Torchvision.
@@ -862,26 +867,17 @@ def check_models_from_other_sources(main_window: main.MainWindow, from_wizard: b
     ----------
     main_window : MainWindow
         Main window of the application.
-
-    from_wizard : bool, optional
-        Whether this function was called through the Wizard or not.
     """
     if main_window.pretrained_model_need_to_check is not None:
         main_window.external_model_list_built(main_window.pretrained_model_need_to_check)
         return
-
-    if not from_wizard:
-        main_window.yes_no_exec("This process needs internet connection and may take a while. Do you want to proceed?")
-        assert main_window.yes_no
-        if not main_window.yes_no.answer:
-            return
 
     if not have_internet(main_window):
         main_window.dialog_exec("There is no internet connection. Check aborted!", reason="error")
         return
 
     main_window.thread_spin = QThread()
-    main_window.worker_spin = check_models_from_other_sources_engine(main_window, from_wizard)
+    main_window.worker_spin = check_models_from_other_sources_engine(main_window)
     main_window.worker_spin.moveToThread(main_window.thread_spin)
     main_window.thread_spin.started.connect(main_window.worker_spin.run)
 
@@ -910,7 +906,7 @@ class check_models_from_other_sources_engine(QObject):
     error_signal = Signal(str, str)
 
     # Signal to send a message to the user about the result of model checking
-    add_model_card_signal = Signal(int, dict, bool)
+    add_model_card_signal = Signal(int, dict)
 
     # Signal to send a message to the user about the result of model checking
     report_yaml_model_check_result = Signal(int)
@@ -918,7 +914,7 @@ class check_models_from_other_sources_engine(QObject):
     # Signal to indicate the main thread that the worker has finished
     finished_signal = Signal()
 
-    def __init__(self, main_window, from_wizard):
+    def __init__(self, main_window):
         """
         Class to check available model compatible with BiaPy from external sources such as BioImage Model Zoo (BMZ)
         and Torchvision.
@@ -932,7 +928,6 @@ class check_models_from_other_sources_engine(QObject):
         self.main_window = main_window
         # self.COLLECTION_URL = "https://raw.githubusercontent.com/bioimage-io/collection-bioimage-io/gh-pages/collection.json"
         self.COLLECTION_URL = "https://uk1s3.embassy.ebi.ac.uk/public-datasets/bioimage.io/collection.json"
-        self.from_wizard = from_wizard
 
     def run(self):
         """
@@ -941,15 +936,8 @@ class check_models_from_other_sources_engine(QObject):
         ## Functionality copied from BiaPy commit: 0ed2222869300316839af7202ce1d55761c6eb88 (3.5.1) - (check_bmz_args function)
         self.state_signal.emit(0)
         model_name = ""
-
-        if self.from_wizard:
-            problem_type = self.main_window.cfg.settings["wizard_answers"]["PROBLEM.TYPE"]
-            problem_ndim = self.main_window.cfg.settings["wizard_answers"]["PROBLEM.NDIM"]
-        else:
-            problem_type = self.main_window.cfg.settings["workflow_key_names"][
-                self.main_window.cfg.settings["selected_workflow"]
-            ]
-            problem_ndim = get_text(self.main_window.ui.PROBLEM__NDIM__INPUT)
+        problem_type = self.main_window.cfg.settings["wizard_answers"]["PROBLEM.TYPE"]
+        problem_ndim = self.main_window.cfg.settings["wizard_answers"]["PROBLEM.NDIM"]
         workflow_specs = {}
         workflow_specs["workflow_type"] = problem_type
         workflow_specs["ndim"] = problem_ndim
@@ -996,7 +984,7 @@ class check_models_from_other_sources_engine(QObject):
                         "url": f"https://bioimage.io/#/artifacts/{nickname}",
                         "imposed_vars": biapy_imposed_vars,
                     }
-                    self.add_model_card_signal.emit(model_count, model_info, self.from_wizard)
+                    self.add_model_card_signal.emit(model_count, model_info)
 
                     model_count += 1
                 else:
@@ -1019,7 +1007,7 @@ class check_models_from_other_sources_engine(QObject):
                     "restrictions": res,
                     "imposed_vars": res_cmd,
                 }
-                self.add_model_card_signal.emit(model_count, model_info, self.from_wizard)
+                self.add_model_card_signal.emit(model_count, model_info)
                 model_count += 1
 
         except:
@@ -1120,12 +1108,28 @@ def export_wizard_summary(main_window: main.MainWindow):
 
         # Special variables that need to be processed
         # Constraints imposed by the model. Patch size will be determined by the model
+        pretrained_model_id = ''
         if "model_restrictions" in biapy_cfg:
             for key, value in biapy_cfg["model_restrictions"].items():
-                biapy_cfg[key] = value
+                # Some models are valid only for testing so if the user have selected to train and the model imposes
+                # to not train we throw an error
+                if key == 'TRAIN.ENABLE' and not value and "TRAIN.ENABLE" in biapy_cfg and biapy_cfg["TRAIN.ENABLE"]:
+                    main_window.dialog_exec(
+                        f"The selected pretrained model is not prepared to be trained. Please select another pretrained model.",
+                        reason="error",
+                    )
+                    return
+                else:
+                    biapy_cfg[key] = value
             del biapy_cfg["DATA.PATCH_SIZE_Z"]
             del biapy_cfg["DATA.PATCH_SIZE_XY"]
             del biapy_cfg["model_restrictions"]
+            if "MODEL.BMZ.SOURCE_MODEL_ID" in biapy_cfg and biapy_cfg["MODEL.BMZ.SOURCE_MODEL_ID"] != -1:
+                pretrained_model_id = biapy_cfg["MODEL.BMZ.SOURCE_MODEL_ID"]
+            elif "MODEL.TORCHVISION_MODEL_NAME" in biapy_cfg:
+                pretrained_model_id = biapy_cfg["MODEL.TORCHVISION_MODEL_NAME"]
+            else: 
+                pretrained_model_id = 'unknown_model'
         else:
             patch_size = ()
             if biapy_cfg["DATA.PATCH_SIZE_Z"] != -1:
@@ -1232,18 +1236,19 @@ def export_wizard_summary(main_window: main.MainWindow):
                                 )
                                 return
 
-                if f"DATA.{phase}.PATH_path_shapes" in biapy_cfg["data_constraints"]:
-                    del biapy_cfg["data_constraints"][f"DATA.{phase}.PATH_path_shapes"]
-                if f"DATA.{phase}.GT_PATH_path_shapes" in biapy_cfg["data_constraints"]:
-                    del biapy_cfg["data_constraints"][f"DATA.{phase}.GT_PATH_path_shapes"]
-                if f"DATA.{phase}.PATH" in biapy_cfg["data_constraints"]:
-                    del biapy_cfg["data_constraints"][f"DATA.{phase}.PATH"]
-                if f"DATA.{phase}.PATH_path" in biapy_cfg["data_constraints"]:
-                    del biapy_cfg["data_constraints"][f"DATA.{phase}.PATH_path"]
-                if f"DATA.{phase}.GT_PATH" in biapy_cfg["data_constraints"]:
-                    del biapy_cfg["data_constraints"][f"DATA.{phase}.GT_PATH"]
-                if f"DATA.{phase}.GT_PATH_path" in biapy_cfg["data_constraints"]:
-                    del biapy_cfg["data_constraints"][f"DATA.{phase}.GT_PATH_path"]
+            # Always remove path shapes and paths from data_constraints
+            if f"DATA.{phase}.PATH_path_shapes" in biapy_cfg["data_constraints"]:
+                del biapy_cfg["data_constraints"][f"DATA.{phase}.PATH_path_shapes"]
+            if f"DATA.{phase}.GT_PATH_path_shapes" in biapy_cfg["data_constraints"]:
+                del biapy_cfg["data_constraints"][f"DATA.{phase}.GT_PATH_path_shapes"]
+            if f"DATA.{phase}.PATH" in biapy_cfg["data_constraints"]:
+                del biapy_cfg["data_constraints"][f"DATA.{phase}.PATH"]
+            if f"DATA.{phase}.PATH_path" in biapy_cfg["data_constraints"]:
+                del biapy_cfg["data_constraints"][f"DATA.{phase}.PATH_path"]
+            if f"DATA.{phase}.GT_PATH" in biapy_cfg["data_constraints"]:
+                del biapy_cfg["data_constraints"][f"DATA.{phase}.GT_PATH"]
+            if f"DATA.{phase}.GT_PATH_path" in biapy_cfg["data_constraints"]:
+                del biapy_cfg["data_constraints"][f"DATA.{phase}.GT_PATH_path"]
 
         # Set the rest of the variables found by checking the data
         for key, value in biapy_cfg["data_constraints"].items():
@@ -1263,7 +1268,25 @@ def export_wizard_summary(main_window: main.MainWindow):
                     create_dict_from_key(key, value, out_config)
                 else:
                     raise ValueError(f"Error found in config: {key}. Contact BiaPy team!")
-        out_config = set_default_config(out_config.copy(), main_window.cfg.settings["GPUs"], sample_info)
+        try:
+            out_config = set_default_config(out_config.copy(), main_window.cfg.settings["GPUs"], sample_info)
+        except Exception as e:
+            if pretrained_model_id != "":
+                if pretrained_model_id == "unknown_model":
+                    main_window.dialog_exec(
+                        "Error found when setting default configuration values based on the pretrained model selected.",
+                        reason="error",
+                    )
+                else:
+                    main_window.dialog_exec(
+                        "Error found when setting default configuration values based on the pretrained model selected: {}".format(pretrained_model_id),
+                        reason="error",
+                    )
+            else:
+                main_window.dialog_exec(
+                    "Error found when setting default configuration values:\n{}".format(str(e)), reason="error"
+                )
+            return
 
         yaml_file = os.path.join(
             get_text(main_window.ui.wizard_browse_yaml_path_input), get_text(main_window.ui.wizard_yaml_name_input)

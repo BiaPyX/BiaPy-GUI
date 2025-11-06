@@ -371,7 +371,7 @@ class model_card_carrousel_Ui(dragable_dialog_Ui):
         for i in range(number_of_models):
             self.model_cards[i][f"model_card_frame_{i}"].setVisible(True)
 
-    def create_model_card(self, model_number: int, model_info: Dict, from_wizard: bool = True):
+    def create_model_card(self, model_number: int, model_info: Dict):
         """
         Create a model card. If there are no more model cards to display it this function internally creates a new model card.
 
@@ -600,7 +600,7 @@ class model_card_carrousel_Ui(dragable_dialog_Ui):
             self.model_cards[model_number][f"model_card_frame_{model_number}"].mouseDoubleClickEvent = (
                 lambda event, a=model_info["nickname"], b=model_info["source"], c=model_info[
                     "imposed_vars"
-                ], d=from_wizard: self.parent_ui.select_external_model(a, b, c, d)
+                ]: self.parent_ui.select_external_model(a, b, c)
             )
 
             self.total_model_cards_created += 1
@@ -669,7 +669,7 @@ class model_card_carrousel_Ui(dragable_dialog_Ui):
         self.model_cards[model_number][f"model_card_frame_{model_number}"].mouseDoubleClickEvent = (
             lambda event, a=model_info["nickname"], b=model_info["source"], c=model_info[
                 "imposed_vars"
-            ], d=from_wizard: self.parent_ui.select_external_model(a, b, c, d)
+            ]: self.parent_ui.select_external_model(a, b, c)
         )
 
     def close(self):

@@ -502,9 +502,8 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False, dir_name=No
 
     constraints = {
         "DATA.PATCH_SIZE_C": channel_expected,
+        "MODEL.N_CLASSES": nclasses,
     }
-    if nclasses > 2:
-        constraints["MODEL.N_CLASSES"] = nclasses
 
     if dir_name is not None:
         constraints[dir_name] = len(ids)
