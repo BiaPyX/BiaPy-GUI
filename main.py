@@ -239,6 +239,8 @@ class MainWindow(QMainWindow):
 
         self.external_model_restrictions = None
         self.pretrained_model_need_to_check = None
+        self._dragging = False
+        self._dragPos = QPoint()
 
     def tour_exec(self, force=False):
         """
@@ -334,7 +336,6 @@ class MainWindow(QMainWindow):
         self,
         model_count: int,
         model_info: Dict,
-        from_wizard: bool,
     ):
         """
         Add model card to model carrousel window. This function is called by model chgecking thread.
@@ -357,14 +358,11 @@ class MainWindow(QMainWindow):
             * ``'id'``: str (optional), DOI of the model. Only available in 'BioImage Model Zoo' models.
             * ``'imposed_vars'``: dict (optional), imposed variables by the model. E.g. patch size, normalization etc.
             * ``'restrictions'``: list of dicts (optional), restrictions imposed by the model. Only available in 'TorchVision' models.
-
-        from_wizard : bool
-            Whether if this function was called from the wizard or not.
         """
         if self.model_carrousel_dialog is None:
             self.model_carrousel_dialog = model_card_carrousel_Ui(self)
 
-        self.model_carrousel_dialog.create_model_card(model_count, model_info, from_wizard=from_wizard)
+        self.model_carrousel_dialog.create_model_card(model_count, model_info)
 
     def model_carrousel_dialog_exec(self):
         """
@@ -377,7 +375,7 @@ class MainWindow(QMainWindow):
         self.model_carrousel_dialog.exec()
 
     def select_external_model(
-        self, model_selected: str, model_source: str, model_restrictions: List[Dict], from_wizard: bool = True
+        self, model_selected: str, model_source: str, model_restrictions: List[Dict]
     ):
         """
         Add model card to model carrousel window. This function is called by model chgecking thread.
@@ -392,37 +390,30 @@ class MainWindow(QMainWindow):
 
         model_restrictions : list of dicts
             Restrictions imposed by the model.
-
-        from_wizard : bool
-            Whether if this function was called from the wizard or not.
         """
 
         self.yes_no_exec(f"Do you want to select '{model_selected}' model\nfrom {model_source}?")
         assert self.yes_no
         if self.yes_no.answer:
-            if from_wizard:
-                set_text(self.ui.wizard_model_input, model_selected + " ({})".format(model_source))
-                if "BioImage Model Zoo" == model_source:
-                    self.cfg.settings["wizard_answers"]["MODEL.SOURCE"] = "bmz"
-                    self.cfg.settings["wizard_answers"]["MODEL.BMZ.SOURCE_MODEL_ID"] = model_selected
-                else:
-                    self.cfg.settings["wizard_answers"]["MODEL.SOURCE"] = "torchvision"
-                    self.cfg.settings["wizard_answers"]["MODEL.TORCHVISION_MODEL_NAME"] = model_selected
-
-                self.cfg.settings["wizard_answers"]["model_restrictions"] = model_restrictions
-                self.cfg.settings["wizard_answers"]["MODEL.LOAD_CHECKPOINT"] = False
-
-                # Mark section as answered in TOC and remember answer
-                index = self.cfg.settings["wizard_from_question_index_to_toc"][
-                    self.cfg.settings["wizard_question_index"]
-                ]
-                self.wizard_toc_model.item(index[0]).child(index[1]).setForeground(QColor(64, 144, 253))
-                self.cfg.settings["wizard_question_answered_index"][
-                    self.cfg.settings["wizard_question_index"]
-                ] = model_selected
+            set_text(self.ui.wizard_model_input, model_selected + " ({})".format(model_source))
+            if "BioImage Model Zoo" == model_source:
+                self.cfg.settings["wizard_answers"]["MODEL.SOURCE"] = "bmz"
+                self.cfg.settings["wizard_answers"]["MODEL.BMZ.SOURCE_MODEL_ID"] = model_selected
             else:
-                set_text(self.ui.MODEL__BMZ__SOURCE_MODEL_ID__INPUT, model_selected + " ({})".format(model_source))
-                self.external_model_restrictions = model_restrictions
+                self.cfg.settings["wizard_answers"]["MODEL.SOURCE"] = "torchvision"
+                self.cfg.settings["wizard_answers"]["MODEL.TORCHVISION_MODEL_NAME"] = model_selected
+
+            self.cfg.settings["wizard_answers"]["model_restrictions"] = model_restrictions
+            self.cfg.settings["wizard_answers"]["MODEL.LOAD_CHECKPOINT"] = False
+
+            # Mark section as answered in TOC and remember answer
+            index = self.cfg.settings["wizard_from_question_index_to_toc"][
+                self.cfg.settings["wizard_question_index"]
+            ]
+            self.wizard_toc_model.item(index[0]).child(index[1]).setForeground(QColor(64, 144, 253))
+            self.cfg.settings["wizard_question_answered_index"][
+                self.cfg.settings["wizard_question_index"]
+            ] = model_selected
 
             # Close window
             assert self.model_carrousel_dialog
