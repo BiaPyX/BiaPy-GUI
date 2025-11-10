@@ -31,9 +31,9 @@ class Settings:
         self.settings["CUDA_selected"] = "" # to be filled by checking the GPU 
 
         # BiaPy
-        self.settings["biapy_code_version"] = Version("v3.6.6")
+        self.settings["biapy_code_version"] = Version("v3.6.7")
         self.settings["biapy_code_github"] = "https://github.com/BiaPyX/BiaPy"
-        self.settings["biapy_gui_version"] = Version("v1.2.0")
+        self.settings["biapy_gui_version"] = Version("v1.2.1")
         self.settings["biapy_gui_github"] = "https://github.com/BiaPyX/BiaPy-GUI"
         self.settings["biapy_container_basename"] = "biapyx/biapy"
         self.settings["biapy_container_name"] = (
