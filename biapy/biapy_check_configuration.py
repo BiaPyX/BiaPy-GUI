@@ -1,4 +1,12 @@
-## Copied from BiaPy commit: 3db4edcf634b3726484d650bc03058c5f36d3a7c (3.6.6)
+## Copied from BiaPy commit: b321fbf3700bec39480dde84fc2d37e4081c9581 (3.6.7)
+"""
+Configuration checking utilities for BiaPy.
+
+This module provides functions to validate, compare, and update BiaPy configuration
+objects, ensuring that all required settings are present and consistent for a given
+workflow. It includes compatibility checks for data, model, augmentation, and
+post-processing options.
+"""
 import os
 import re
 from typing import List, Tuple, Any, Dict
@@ -150,6 +158,24 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             elif set(sorted_original_instance_channels) == {"F", "D"}:
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
                     seed_channels = ["F", "D"]
+                    seed_channels_thresh = ["auto", "auto"]
+                if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.TOPOGRAPHIC_SURFACE_CHANNEL == "":
+                    topo_surface_ch = "F"
+                if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS == []:
+                    growth_mask_channels = ["F"]
+                    growth_mask_channel_ths = ["auto"]
+            elif set(sorted_original_instance_channels) == {"F", "Dc"}:
+                if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
+                    seed_channels = ["F", "Dc"]
+                    seed_channels_thresh = ["auto", "auto"]
+                if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.TOPOGRAPHIC_SURFACE_CHANNEL == "":
+                    topo_surface_ch = "F"
+                if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS == []:
+                    growth_mask_channels = ["F"]
+                    growth_mask_channel_ths = ["auto"]
+            elif set(sorted_original_instance_channels) == {"F", "Dn"}:
+                if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
+                    seed_channels = ["F", "Dn"]
                     seed_channels_thresh = ["auto", "auto"]
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.TOPOGRAPHIC_SURFACE_CHANNEL == "":
                     topo_surface_ch = "F"
@@ -386,7 +412,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             # Dc — center/skeleton distance-to-center
             if "Dc" in chs:
                 dst["Dc"] = {
-                    "type": dst.get("Dc", {}).get("mode", "thick"),
+                    "type": dst.get("Dc", {}).get("mode", "centroid"),
                     "norm": dst.get("Dc", {}).get("norm", True),
                     "mask_values": dst.get("Dc", {}).get("mask_values", True),
                 }
@@ -1031,8 +1057,14 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             "W_CE_DICE",
         ], "LOSS.TYPE not in ['CE', 'DICE', 'W_CE_DICE']"
 
-        if cfg.DATA.N_CLASSES > 2 and loss != "CE":
-            raise ValueError("'DATA.N_CLASSES' can only be done with 'CE' loss")
+        if cfg.DATA.N_CLASSES > 2:
+            if loss != "CE":
+                raise ValueError("'DATA.N_CLASSES' are only used with 'CE' loss and not with {}".format(loss))
+            if cfg.LOSS.CLASS_REBALANCE == "auto":
+                raise ValueError(
+                    "'LOSS.CLASS_REBALANCE' can not be set to 'auto' when 'DATA.N_CLASSES' > 2 as it is only valid for binary problems. " \
+                    "Use 'manual' and 'LOSS.CLASS_WEIGHTS' if you really want to rebalance classes. If not, set 'LOSS.CLASS_REBALANCE' to 'none'."
+                )
         if loss == "W_CE_DICE":
             assert (
                 len(cfg.LOSS.WEIGHTS) == 2
@@ -1314,8 +1346,8 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                         assert isinstance(val["norm"], bool)
                     _assert_bool(val, "mask_values", ctx)
 
-                elif key == "Dc":  # distance-to-center
-                    _assert_str_in(val, "type", {"center", "skeleton"}, ctx)
+                elif key == "Dc":  # distance-to-centroid
+                    _assert_str_in(val, "type", {"centroid", "skeleton"}, ctx)
                     _assert_optional_bool(val, "norm", ctx)
                     _assert_bool(val, "mask_values", ctx)
 
@@ -2259,14 +2291,27 @@ def check_configuration(cfg, jobname, check_data_paths=True):
 
     # Adjust Z_DOWN values to feature maps
     if all(x == 0 for x in cfg.MODEL.Z_DOWN):
-        opts.extend(["MODEL.Z_DOWN", (2,) * (len(cfg.MODEL.FEATURE_MAPS) - 1)])
+        if model_arch == "multiresunet":
+            opts.extend(["MODEL.Z_DOWN", (2, 2, 2, 2)])
+        else:
+            opts.extend(["MODEL.Z_DOWN", (2,) * (len(cfg.MODEL.FEATURE_MAPS) - 1)])
     elif any([False for x in cfg.MODEL.Z_DOWN if x != 1 and x != 2]):
         raise ValueError("'MODEL.Z_DOWN' needs to be 1 or 2")
     else:
         if model_arch == "multiresunet" and len(cfg.MODEL.Z_DOWN) != 4:
             raise ValueError("'MODEL.Z_DOWN' length must be 4 when using 'multiresunet'")
-        elif len(cfg.MODEL.FEATURE_MAPS) - 1 != len(cfg.MODEL.Z_DOWN):
-            raise ValueError("'MODEL.FEATURE_MAPS' length minus one and 'MODEL.Z_DOWN' length must be equal")
+        elif model_arch in [
+            "unet",
+            "resunet",
+            "resunet++",
+            "seunet",
+            "resunet_se",
+            "attention_unet",
+            "unext_v1",
+            "unext_v2",
+        ]:
+            if len(cfg.MODEL.FEATURE_MAPS) - 1 != len(cfg.MODEL.Z_DOWN):
+                raise ValueError("'MODEL.FEATURE_MAPS' length minus one and 'MODEL.Z_DOWN' length must be equal")
 
     # Adjust ISOTROPY values to feature maps
     if all(x == True for x in cfg.MODEL.ISOTROPY):
@@ -3274,7 +3319,6 @@ def convert_old_model_cfg_to_current_version(old_cfg: dict):
             del old_cfg["PATHS"]["UPR_Y_FILE"]  
         
     return old_cfg
-
 
 # Function extracted from check_configuration checks
 def check_torchvision_available_models(workflow: str, ndim: str) -> Tuple[List[str], List[str], List[Dict[str, Any]]]:

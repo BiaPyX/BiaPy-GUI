@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: b1c40e7bf89cb12a6413ef8dc55f49f1d1a45c34 (3.6.6)
+## Copied from BiaPy commit: b321fbf3700bec39480dde84fc2d37e4081c9581 (3.6.7)
 """
 Configuration management for BiaPy.
 
@@ -154,7 +154,7 @@ class Config:
         #       - 'norm': bool, whether to normalize the distances between 0 and 1. Default: False
         #       - 'mask_values': bool, whether to mask the distance channel to only calculate the loss in non-zero values. Default: True
         #   - 'Dc' channel. Possible options:
-        #       - 'type': str, the type of the channel. Options are: 'center', 'skeleton'. Default: 'center'
+        #       - 'type': str, the type of the channel. Options are: 'centroid', 'skeleton'. Default: 'centroid'
         #       - 'norm': bool, whether to normalize the distances between 0 and 1. Default: False
         #       - 'mask_values': bool, whether to mask the distance channel to only calculate the loss in non-zero values. Default: True
         #   - 'Dn' channel. Possible options:
@@ -1403,11 +1403,14 @@ class Config:
         # It works for all the workflows but the instance segmentation one, as in that case the weights must be set
         # in PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS. The weights must sum 1. E.g. [0.3, 0.7].
         _C.LOSS.WEIGHTS = [0.66, 0.34]
-        # To weight classes in an imbalanced dataset. It can be 'none', 'manual' or 'auto'.
-        # Options:
+        # To weight classes in an imbalanced dataset. Options available are:
         #   * 'none': no class rebalancing is applied
         #   * 'manual': the weights provided in LOSS.CLASS_WEIGHTS are used to weight each class
-        #   * 'auto': the weights are calculated automatically based on the number of pixels of each class per batch and directly in the loss computation.
+        #   * 'auto': the weights are calculated automatically based on the number of pixels of each class per batch and directly in the loss computation. 
+        #     This option is only applied for binary clases. That is to say:
+        #       * When LOSS.TYPE == "CE" in semantic segmentation and detection workflows and MODEL.N_CLASSES == 2.
+        #       * In instance segmentation when PROBLEM.INSTANCE_SEG.DATA_CHANNELS_LOSSES contains "CE". This is automatically set
+        #         when using binary channels, such as "B","F","P","C","T","A","M","F_pre","F_post".  
         _C.LOSS.CLASS_REBALANCE = "none"  # Options are 'none', 'manual' or 'auto'
         # If LOSS.CLASS_REBALANCE is set to 'manual', this list of weights will be used to weight each class in the loss calculation.
         # The length of the list must be equal to the number of classes.
