@@ -220,9 +220,6 @@ class check_data_from_path_engine(QObject):
         """
         try:
             self.state_signal.emit(0)
-
-            self.main_window.cfg.settings["wizard_question_answered_index"]
-            self.main_window.cfg.settings["wizard_question_index"]
             folder = self.main_window.cfg.settings["wizard_question_answered_index"][
                 self.main_window.cfg.settings["wizard_question_index"]
             ]
@@ -427,110 +424,35 @@ def eval_wizard_answer(main_window: main.MainWindow):
     main_window : MainWindow
         Main window of the application.
     """
-    if main_window.allow_change_wizard_question_answer:
-        mark_as_answered = False
-
-        # Remember current answer
-        if main_window.ui.wizard_question_answer_frame.isVisible():
-            changed_answer = False
-            if main_window.ui.wizard_question_answer.currentIndex() != -1:
-                mark_as_answered = True
-                if (
-                    main_window.cfg.settings["wizard_question_answered_index"][
-                        main_window.cfg.settings["wizard_question_index"]
-                    ]
-                    != main_window.ui.wizard_question_answer.currentIndex()
-                ):
-                    main_window.cfg.settings["wizard_question_answered_index"][
-                        main_window.cfg.settings["wizard_question_index"]
-                    ] = main_window.ui.wizard_question_answer.currentIndex()
-                    changed_answer = True
-
-                for key, values in main_window.cfg.settings["wizard_variable_to_map"][
-                    "Q" + str(main_window.cfg.settings["wizard_question_index"] + 1)
-                ].items():
-                    main_window.cfg.settings["wizard_answers"][key] = values[
-                        main_window.ui.wizard_question_answer.currentIndex()
-                    ]
-        elif main_window.ui.wizard_path_input_frame.isVisible():
-            te = get_text(main_window.ui.wizard_path_input)
-            if te != "":
-                key = next(
-                    iter(
-                        main_window.cfg.settings["wizard_variable_to_map"][
-                            "Q" + str(main_window.cfg.settings["wizard_question_index"] + 1)
-                        ]
-                    )
-                )
-                main_window.cfg.settings["wizard_answers"][key] = te
+    if not main_window.allow_change_wizard_question_answer:
+        return
+    mark_as_answered = False
+    
+    # Remember current answer
+    if main_window.ui.wizard_question_answer_frame.isVisible():
+        changed_answer = False
+        if main_window.ui.wizard_question_answer.currentIndex() != -1:
+            mark_as_answered = True
+            if (
                 main_window.cfg.settings["wizard_question_answered_index"][
                     main_window.cfg.settings["wizard_question_index"]
-                ] = te
-                set_text(main_window.ui.wizard_path_input, te)
+                ]
+                != main_window.ui.wizard_question_answer.currentIndex()
+            ):
+                main_window.cfg.settings["wizard_question_answered_index"][
+                    main_window.cfg.settings["wizard_question_index"]
+                ] = main_window.ui.wizard_question_answer.currentIndex()
+                changed_answer = True
 
-                # Check if the data was checked
-                if main_window.cfg.settings["wizard_answers"][f"CHECKED {key}"] == -1:
-                    mark_as_answered = False
-                else:
-                    mark_as_answered = True
-
-        if mark_as_answered:
-            # Mark section as answered in TOC
-            index = main_window.cfg.settings["wizard_from_question_index_to_toc"][
-                main_window.cfg.settings["wizard_question_index"]
-            ]
-            main_window.wizard_toc_model.item(index[0]).child(index[1]).setForeground(QColor(64, 144, 253))
-
-        # Check the questions that need to hide/appear
-        for question in main_window.cfg.settings["wizard_question_condition"]:
-            make_visible = True
-            set_default_value = True
-
-            # AND conditions
-            if len(main_window.cfg.settings["wizard_question_condition"][question]["and_cond"]) > 0:
-                for cond in main_window.cfg.settings["wizard_question_condition"][question]["and_cond"]:
-                    if main_window.cfg.settings["wizard_answers"][cond[0]] != -1:
-                        set_default_value = False
-                        if main_window.cfg.settings["wizard_answers"][cond[0]] != cond[1]:
-                            make_visible = False
-                            break
-                    else:
-                        make_visible = False
-                        break
-
-            if make_visible:
-                # OR conditions
-                if len(main_window.cfg.settings["wizard_question_condition"][question]["or_cond"]) > 0:
-                    for cond in main_window.cfg.settings["wizard_question_condition"][question]["or_cond"]:
-                        if main_window.cfg.settings["wizard_answers"][cond[0]] != -1:
-                            set_default_value = False
-                            if main_window.cfg.settings["wizard_answers"][cond[0]] not in cond[1]:
-                                make_visible = False
-                                break
-                        else:
-                            make_visible = False
-                            break
-
-            if not set_default_value:
-                question_number = int(question.replace("Q", "")) - 1
-                if make_visible:
-                    if not main_window.cfg.settings["wizard_question_visible"][question_number]:
-                        main_window.cfg.settings["wizard_question_visible"][question_number] = True
-                        index_in_toc = main_window.cfg.settings["wizard_from_question_index_to_toc"][question_number]
-                        main_window.ui.wizard_treeView.setRowHidden(
-                            index_in_toc[1], main_window.wizard_toc_model.index(index_in_toc[0], 0), False
-                        )
-                else:
-                    if main_window.cfg.settings["wizard_question_visible"][question_number]:
-                        main_window.cfg.settings["wizard_question_visible"][question_number] = False
-                        index_in_toc = main_window.cfg.settings["wizard_from_question_index_to_toc"][question_number]
-                        main_window.ui.wizard_treeView.setRowHidden(
-                            index_in_toc[1], main_window.wizard_toc_model.index(index_in_toc[0], 0), True
-                        )
-
-        # Reset data checks if dimensionality or workflow changed, as the data check is different
-        if main_window.ui.wizard_question_answer_frame.isVisible() and changed_answer:
-            main_window.pretrained_model_need_to_check = None
+            for key, values in main_window.cfg.settings["wizard_variable_to_map"][
+                "Q" + str(main_window.cfg.settings["wizard_question_index"] + 1)
+            ].items():
+                main_window.cfg.settings["wizard_answers"][key] = values[
+                    main_window.ui.wizard_question_answer.currentIndex()
+                ]
+    elif main_window.ui.wizard_path_input_frame.isVisible():
+        te = get_text(main_window.ui.wizard_path_input)
+        if te != "":
             key = next(
                 iter(
                     main_window.cfg.settings["wizard_variable_to_map"][
@@ -538,19 +460,112 @@ def eval_wizard_answer(main_window: main.MainWindow):
                     ]
                 )
             )
-            if "PROBLEM.NDIM" == key or "PROBLEM.TYPE" == key:
-                for key, val in main_window.cfg.settings["wizard_answers"].items():
-                    if "CHECKED" in key:
-                        main_window.cfg.settings["wizard_answers"][key] = -1
+            main_window.cfg.settings["wizard_answers"][key] = te
+            main_window.cfg.settings["wizard_question_answered_index"][
+                main_window.cfg.settings["wizard_question_index"]
+            ] = te
+            set_text(main_window.ui.wizard_path_input, te)
 
-                for i in range(main_window.cfg.settings["wizard_number_of_questions"]):
-                    if main_window.cfg.settings["wizard_possible_answers"][i][0] == "PATH":
-                        index = main_window.cfg.settings["wizard_from_question_index_to_toc"][i]
-                        main_window.wizard_toc_model.item(index[0]).child(index[1]).setForeground(QColor(0, 0, 0))
-                    elif main_window.cfg.settings["wizard_possible_answers"][i][0] in ["MODEL_BIAPY", "MODEL_OTHERS"]:
-                        index = main_window.cfg.settings["wizard_from_question_index_to_toc"][i]
-                        main_window.wizard_toc_model.item(index[0]).child(index[1]).setForeground(QColor(0, 0, 0))
-                        main_window.cfg.settings["wizard_question_answered_index"][i] = -1
+            # Check if the data was checked
+            if main_window.cfg.settings["wizard_answers"][f"CHECKED {key}"] == -1:
+                mark_as_answered = False
+            else:
+                mark_as_answered = True
+
+    elif main_window.ui.wizard_model_input_frame.isVisible():
+        te = get_text(main_window.ui.wizard_model_input)
+        if te != "":
+            key = next(
+                iter(
+                    main_window.cfg.settings["wizard_variable_to_map"][
+                        "Q" + str(main_window.cfg.settings["wizard_question_index"] + 1)
+                    ]
+                )
+            )
+            main_window.cfg.settings["wizard_answers"][key] = te
+            main_window.cfg.settings["wizard_question_answered_index"][
+                main_window.cfg.settings["wizard_question_index"]
+            ] = te
+            set_text(main_window.ui.wizard_model_input, te)
+            mark_as_answered = True
+
+    if mark_as_answered:
+        # Mark section as answered in TOC
+        index = main_window.cfg.settings["wizard_from_question_index_to_toc"][
+            main_window.cfg.settings["wizard_question_index"]
+        ]
+        main_window.wizard_toc_model.item(index[0]).child(index[1]).setForeground(QColor(64, 144, 253))
+
+    # Check the questions that need to hide/appear
+    for question in main_window.cfg.settings["wizard_question_condition"]:
+        make_visible = True
+        set_default_value = True
+
+        # AND conditions
+        if len(main_window.cfg.settings["wizard_question_condition"][question]["and_cond"]) > 0:
+            for cond in main_window.cfg.settings["wizard_question_condition"][question]["and_cond"]:
+                if main_window.cfg.settings["wizard_answers"][cond[0]] != -1:
+                    set_default_value = False
+                    if main_window.cfg.settings["wizard_answers"][cond[0]] != cond[1]:
+                        make_visible = False
+                        break
+                else:
+                    make_visible = False
+                    break
+
+        if make_visible:
+            # OR conditions
+            if len(main_window.cfg.settings["wizard_question_condition"][question]["or_cond"]) > 0:
+                for cond in main_window.cfg.settings["wizard_question_condition"][question]["or_cond"]:
+                    if main_window.cfg.settings["wizard_answers"][cond[0]] != -1:
+                        set_default_value = False
+                        if main_window.cfg.settings["wizard_answers"][cond[0]] not in cond[1]:
+                            make_visible = False
+                            break
+                    else:
+                        make_visible = False
+                        break
+
+        if not set_default_value:
+            question_number = int(question.replace("Q", "")) - 1
+            if make_visible:
+                if not main_window.cfg.settings["wizard_question_visible"][question_number]:
+                    main_window.cfg.settings["wizard_question_visible"][question_number] = True
+                    index_in_toc = main_window.cfg.settings["wizard_from_question_index_to_toc"][question_number]
+                    main_window.ui.wizard_treeView.setRowHidden(
+                        index_in_toc[1], main_window.wizard_toc_model.index(index_in_toc[0], 0), False
+                    )
+            else:
+                if main_window.cfg.settings["wizard_question_visible"][question_number]:
+                    main_window.cfg.settings["wizard_question_visible"][question_number] = False
+                    index_in_toc = main_window.cfg.settings["wizard_from_question_index_to_toc"][question_number]
+                    main_window.ui.wizard_treeView.setRowHidden(
+                        index_in_toc[1], main_window.wizard_toc_model.index(index_in_toc[0], 0), True
+                    )
+
+    # Reset data checks if dimensionality or workflow changed, as the data check is different
+    if main_window.ui.wizard_question_answer_frame.isVisible() and changed_answer:
+        main_window.pretrained_model_need_to_check = None
+        key = next(
+            iter(
+                main_window.cfg.settings["wizard_variable_to_map"][
+                    "Q" + str(main_window.cfg.settings["wizard_question_index"] + 1)
+                ]
+            )
+        )
+        if "PROBLEM.NDIM" == key or "PROBLEM.TYPE" == key:
+            for key, val in main_window.cfg.settings["wizard_answers"].items():
+                if "CHECKED" in key:
+                    main_window.cfg.settings["wizard_answers"][key] = -1
+
+            for i in range(main_window.cfg.settings["wizard_number_of_questions"]):
+                if main_window.cfg.settings["wizard_possible_answers"][i][0] == "PATH":
+                    index = main_window.cfg.settings["wizard_from_question_index_to_toc"][i]
+                    main_window.wizard_toc_model.item(index[0]).child(index[1]).setForeground(QColor(0, 0, 0))
+                elif main_window.cfg.settings["wizard_possible_answers"][i][0] in ["MODEL_BIAPY", "MODEL_OTHERS"]:
+                    index = main_window.cfg.settings["wizard_from_question_index_to_toc"][i]
+                    main_window.wizard_toc_model.item(index[0]).child(index[1]).setForeground(QColor(0, 0, 0))
+                    main_window.cfg.settings["wizard_question_answered_index"][i] = -1
 
 
 def change_wizard_page(main_window: main.MainWindow, val: int, based_on_toc: bool = False, added_val=0):
@@ -833,8 +848,10 @@ def clear_answers(main_window: main.MainWindow, ask_user: bool = True):
 
         # Rewrite all keys
         main_window.cfg.settings["wizard_answers"] = main_window.cfg.settings["original_wizard_answers"].copy()
-
-        main_window.cfg.settings["wizard_question_index"] = 0
+        if main_window.ui.wizard_path_input_frame.isVisible():
+            set_text(main_window.ui.wizard_path_input, "")
+        elif main_window.ui.wizard_model_input_frame.isVisible():
+            set_text(main_window.ui.wizard_model_input, "")
 
 
 def have_internet(main_window: main.MainWindow, timeout: int = 3) -> bool:
