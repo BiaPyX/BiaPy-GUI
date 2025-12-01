@@ -1035,6 +1035,16 @@ class modify_yaml_Ui(dragable_dialog_Ui):
                     paths_to_change["DATA__VAL__PATH"] = ""
                 if workflow_type not in ["DENOISING", "CLASSIFICATION", "SELF_SUPERVISED"]:
                     paths_to_change["DATA__VAL__GT_PATH"] = ""
+        else:
+            if "DATA__TRAIN__PATH" in paths_to_change:
+                del paths_to_change["DATA__TRAIN__PATH"]
+            if "DATA__TRAIN__GT_PATH" in paths_to_change:
+                del paths_to_change["DATA__TRAIN__GT_PATH"]
+            if "DATA__VAL__PATH" in paths_to_change:
+                del paths_to_change["DATA__VAL__PATH"]
+            if "DATA__VAL__GT_PATH" in paths_to_change:
+                del paths_to_change["DATA__VAL__GT_PATH"]
+
         if "TEST" in loaded_cfg and "ENABLE" in loaded_cfg["TEST"] and loaded_cfg["TEST"]["ENABLE"]:
             if "DATA__TEST__PATH" not in paths_to_change:
                 paths_to_change["DATA__TEST__PATH"] = ""
@@ -1043,6 +1053,14 @@ class modify_yaml_Ui(dragable_dialog_Ui):
                 and "TEST" in loaded_cfg["DATA"] and loaded_cfg["DATA"]["TEST"]["LOAD_GT"]
             ):
                 paths_to_change["DATA__TEST__GT_PATH"] = ""
+            else:
+                if "DATA__TEST__GT_PATH" in paths_to_change:
+                    del paths_to_change["DATA__TEST__GT_PATH"]
+        else:
+            if "DATA__TEST__PATH" in paths_to_change:
+                del paths_to_change["DATA__TEST__PATH"]
+            if "DATA__TEST__GT_PATH" in paths_to_change:
+                del paths_to_change["DATA__TEST__GT_PATH"]
         
         for key, path in paths_to_change.items():
             if "TRAIN" in key:
