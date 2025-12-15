@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: b321fbf3700bec39480dde84fc2d37e4081c9581 (3.6.7)
+## Copied from BiaPy commit: 647b8d33618c82329fe96eb9b4935c04b68d1d62 (3.6.8)
 """
 Configuration management for BiaPy.
 
@@ -11,6 +11,9 @@ dependent configuration variables after merging user-provided configs.
 import os
 from yacs.config import CfgNode as CN
 import copy
+from typing import (
+    Dict,
+)
 
 class Config:
     """
@@ -151,15 +154,15 @@ class Config:
         #          Options are: 'thick', 'inner', 'outer', 'subpixel' and 'dense'. The last one is used to label as contour every pixel
         #          that is not in the foreground. Default: 'thick'.
         #   - 'H', 'V', 'Z' and 'Db' channels. Possible options:
-        #       - 'norm': bool, whether to normalize the distances between 0 and 1. Default: False
+        #       - 'norm': bool, whether to normalize the distances between 0 and 1. Default: True
         #       - 'mask_values': bool, whether to mask the distance channel to only calculate the loss in non-zero values. Default: True
         #   - 'Dc' channel. Possible options:
         #       - 'type': str, the type of the channel. Options are: 'centroid', 'skeleton'. Default: 'centroid'
-        #       - 'norm': bool, whether to normalize the distances between 0 and 1. Default: False
+        #       - 'norm': bool, whether to normalize the distances between 0 and 1. Default: True
         #       - 'mask_values': bool, whether to mask the distance channel to only calculate the loss in non-zero values. Default: True
         #   - 'Dn' channel. Possible options:
         #       - 'closing_size': int, the size of the closing to be applied to the combined distance map. Default: 0
-        #       - 'norm': bool, whether to normalize the distances between 0 and 1. Default: False
+        #       - 'norm': bool, whether to normalize the distances between 0 and 1. Default: True
         #       - 'mask_values': bool, whether to mask the distance channel to only calculate the loss in non-zero values. Default: True
         #       - 'decline_power': int, the power to which the distances are raised to control the decline rate. Default: 3
         #   - 'D' channel. Possible options:
@@ -167,10 +170,10 @@ class Config:
         #         'tanh' and 'linear'. Default: 'tanh'
         #       - 'alpha': int, value to scale the distances of the background when 'act' is 'tanh'. Default: 1
         #       - 'beta': int, value to scale the distances of the foreground when 'act' is 'tanh'. Default: 1
-        #       - 'norm': bool, whether to normalize the distances between -1 and 1. Default: False
+        #       - 'norm': bool, whether to normalize the distances between -1 and 1. Default: True
         #   - 'R' channel. Possible options:
         #       - 'nrays': int, the number of rays to be used to represent the radial distances. Default: 32 (in 2D) and 96 (in 3D)
-        #       - 'norm': bool, whether to normalize the distances between 0 and 1. Default: False
+        #       - 'norm': bool, whether to normalize the distances between 0 and 1. Default: True
         #       - 'mask_values': bool, whether to mask the distance channel to only calculate the loss in non-zero values. Default: True
         #   - 'T' channel. Possible options:
         #       - 'thickness': int, the thickness in pixels of the touching area. Default: 2
@@ -389,15 +392,6 @@ class Config:
 
         # _C.PROBLEM.NDIM='2D' -> _C.DATA.PATCH_SIZE=(y,x,c) ; _C.PROBLEM.NDIM='3D' -> _C.DATA.PATCH_SIZE=(z,y,x,c)
         _C.DATA.PATCH_SIZE = (256, 256, 1)
-
-        # Extract random patches during data augmentation (DA)
-        _C.DATA.EXTRACT_RANDOM_PATCH = False
-        # Create a probability map so the patches extracted will have a high probability of having an object in the middle
-        # of it. Useful to avoid extracting patches which no foreground class information. Use it only when
-        # 'PROBLEM.TYPE' is 'SEMANTIC_SEG'
-        _C.DATA.PROBABILITY_MAP = False  # Used when _C.DATA.EXTRACT_RANDOM_PATCH=True
-        _C.DATA.W_FOREGROUND = 0.94  # Used when _C.DATA.PROBABILITY_MAP=True
-        _C.DATA.W_BACKGROUND = 0.06  # Used when _C.DATA.PROBABILITY_MAP=True
 
         # Whether to reshape the dimensions that does not satisfy the patch shape selected by padding it with reflect.
         _C.DATA.REFLECT_TO_COMPLETE_SHAPE = False
@@ -1160,7 +1154,7 @@ class Config:
         # Format of the output checkpoint. Options are 'pth' (native PyTorch format) or 'safetensors' (https://github.com/huggingface/safetensors)
         _C.MODEL.OUT_CHECKPOINT_FORMAT = "pth"
         # To skip loading those layers that do not match in shape with the given checkpoint. If this is set to False a regular load function will be 
-        # done, which will fail if a layer mismatch is found. Only workes when 'MODEL.LOAD_MODEL_FROM_CHECKPOINT' is True
+        # done, which will fail if a layer mismatch is found. Only works when 'MODEL.LOAD_MODEL_FROM_CHECKPOINT' is True
         _C.MODEL.SKIP_UNMATCHED_LAYERS = False
         # Epochs to save a checkpoint of the model apart from the ones saved with LOAD_CHECKPOINT_ONLY_WEIGHTS. Set it to -1 to
         # not do it.
@@ -1229,134 +1223,34 @@ class Config:
         # Whether to maintain or not the upscaling layer. 
         _C.MODEL.RCAN_UPSCALING_LAYER = True
 
-        _C.MODEL.HRNET_64 = CN()
-        _C.MODEL.HRNET_64.Z_DOWN = True
-        _C.MODEL.HRNET_64.STAGE2 = CN()
-        _C.MODEL.HRNET_64.STAGE2.NUM_MODULES = 1
-        _C.MODEL.HRNET_64.STAGE2.NUM_BRANCHES = 2
-        _C.MODEL.HRNET_64.STAGE2.NUM_BLOCKS = [4, 4]
-        _C.MODEL.HRNET_64.STAGE2.NUM_CHANNELS = [64, 128]
-        _C.MODEL.HRNET_64.STAGE2.BLOCK = 'BASIC'
+        # These parameters can be used as a template for building custom HRNet versions
+        _C.MODEL.HRNET = CN()
+        # Whether to downsample the input in Z or not
+        _C.MODEL.HRNET.Z_DOWN = True
+        # Type of block to use in HRNet. Options: 'BASIC', 'BOTTLENECK', 'CONVNEXT_V1' and 'CONVNEXT_V2'
+        _C.MODEL.HRNET.BLOCK_TYPE = 'BASIC'
+        # Indicate whether to use a custom configuration for HRNet or use a predefined one. If set to True 
+        # MODEL.HRNET.STAGE2, MODEL.HRNET.STAGE3 and MODEL.HRNET.STAGE4 will be used. If False, the configuration
+        # will be set depending on the selected architecture (see PROBLEM.MODEL_ARCHITECTURE)
+        _C.MODEL.HRNET.HEAD_TYPE = "FCN" # Options: "OCR", "ASPP", "PSP", "FCN"
+        _C.MODEL.HRNET.CUSTOM = False
 
-        _C.MODEL.HRNET_64.STAGE3 = CN()
-        _C.MODEL.HRNET_64.STAGE3.NUM_MODULES = 4
-        _C.MODEL.HRNET_64.STAGE3.NUM_BRANCHES = 3
-        _C.MODEL.HRNET_64.STAGE3.NUM_BLOCKS = [4, 4, 4]
-        _C.MODEL.HRNET_64.STAGE3.NUM_CHANNELS = [64, 128, 256]
-        _C.MODEL.HRNET_64.STAGE3.BLOCK = 'BASIC'
-
-        _C.MODEL.HRNET_64.STAGE4 = CN()
-        _C.MODEL.HRNET_64.STAGE4.NUM_MODULES = 3
-        _C.MODEL.HRNET_64.STAGE4.NUM_BRANCHES = 4
-        _C.MODEL.HRNET_64.STAGE4.NUM_BLOCKS = [4, 4, 4, 4]
-        _C.MODEL.HRNET_64.STAGE4.NUM_CHANNELS = [64, 128, 256, 512]
-        _C.MODEL.HRNET_64.STAGE4.BLOCK = 'BASIC'
-
-
-        # configs for HRNet48
-        _C.MODEL.HRNET_48 = CN()
-        _C.MODEL.HRNET_48.Z_DOWN = True
-        _C.MODEL.HRNET_48.STAGE2 = CN()
-        _C.MODEL.HRNET_48.STAGE2.NUM_MODULES = 1
-        _C.MODEL.HRNET_48.STAGE2.NUM_BRANCHES = 2
-        _C.MODEL.HRNET_48.STAGE2.NUM_BLOCKS = [4, 4]
-        _C.MODEL.HRNET_48.STAGE2.NUM_CHANNELS = [48, 96]
-        _C.MODEL.HRNET_48.STAGE2.BLOCK = 'BASIC'
-
-        _C.MODEL.HRNET_48.STAGE3 = CN()
-        _C.MODEL.HRNET_48.STAGE3.NUM_MODULES = 4
-        _C.MODEL.HRNET_48.STAGE3.NUM_BRANCHES = 3
-        _C.MODEL.HRNET_48.STAGE3.NUM_BLOCKS = [4, 4, 4]
-        _C.MODEL.HRNET_48.STAGE3.NUM_CHANNELS = [48, 96, 192]
-        _C.MODEL.HRNET_48.STAGE3.BLOCK = 'BASIC'
-
-        _C.MODEL.HRNET_48.STAGE4 = CN()
-        _C.MODEL.HRNET_48.STAGE4.NUM_MODULES = 3
-        _C.MODEL.HRNET_48.STAGE4.NUM_BRANCHES = 4
-        _C.MODEL.HRNET_48.STAGE4.NUM_BLOCKS = [4, 4, 4, 4]
-        _C.MODEL.HRNET_48.STAGE4.NUM_CHANNELS = [48, 96, 192, 384]
-        _C.MODEL.HRNET_48.STAGE4.BLOCK = 'BASIC'
-
-
-        # configs for HRNet32
-        _C.MODEL.HRNET_32 = CN()
-        _C.MODEL.HRNET_32.Z_DOWN = True
-        _C.MODEL.HRNET_32.STAGE2 = CN()
-        _C.MODEL.HRNET_32.STAGE2.NUM_MODULES = 1
-        _C.MODEL.HRNET_32.STAGE2.NUM_BRANCHES = 2
-        _C.MODEL.HRNET_32.STAGE2.NUM_BLOCKS = [4, 4]
-        _C.MODEL.HRNET_32.STAGE2.NUM_CHANNELS = [32, 64]
-        _C.MODEL.HRNET_32.STAGE2.BLOCK = 'BASIC'
-
-        _C.MODEL.HRNET_32.STAGE3 = CN()
-        _C.MODEL.HRNET_32.STAGE3.NUM_MODULES = 4
-        _C.MODEL.HRNET_32.STAGE3.NUM_BRANCHES = 3
-        _C.MODEL.HRNET_32.STAGE3.NUM_BLOCKS = [4, 4, 4]
-        _C.MODEL.HRNET_32.STAGE3.NUM_CHANNELS = [32, 64, 128]
-        _C.MODEL.HRNET_32.STAGE3.BLOCK = 'BASIC'
-
-        _C.MODEL.HRNET_32.STAGE4 = CN()
-        _C.MODEL.HRNET_32.STAGE4.NUM_MODULES = 3
-        _C.MODEL.HRNET_32.STAGE4.NUM_BRANCHES = 4
-        _C.MODEL.HRNET_32.STAGE4.NUM_BLOCKS = [4, 4, 4, 4]
-        _C.MODEL.HRNET_32.STAGE4.NUM_CHANNELS = [32, 64, 128, 256]
-        _C.MODEL.HRNET_32.STAGE4.BLOCK = 'BASIC'
-
-
-        # configs for HRNet18
-        _C.MODEL.HRNET_18 = CN()
-        _C.MODEL.HRNET_18.Z_DOWN = True
-        _C.MODEL.HRNET_18.STAGE2 = CN()
-        _C.MODEL.HRNET_18.STAGE2.NUM_MODULES = 1
-        _C.MODEL.HRNET_18.STAGE2.NUM_BRANCHES = 2
-        _C.MODEL.HRNET_18.STAGE2.NUM_BLOCKS = [4, 4]
-        _C.MODEL.HRNET_18.STAGE2.NUM_CHANNELS = [18, 36]
-        _C.MODEL.HRNET_18.STAGE2.BLOCK = 'BASIC'
-
-        _C.MODEL.HRNET_18.STAGE3 = CN()
-        _C.MODEL.HRNET_18.STAGE3.NUM_MODULES = 4
-        _C.MODEL.HRNET_18.STAGE3.NUM_BRANCHES = 3
-        _C.MODEL.HRNET_18.STAGE3.NUM_BLOCKS = [4, 4, 4]
-        _C.MODEL.HRNET_18.STAGE3.NUM_CHANNELS = [18, 36, 72]
-        _C.MODEL.HRNET_18.STAGE3.BLOCK = 'BASIC'
-
-        _C.MODEL.HRNET_18.STAGE4 = CN()
-        _C.MODEL.HRNET_18.STAGE4.NUM_MODULES = 3
-        _C.MODEL.HRNET_18.STAGE4.NUM_BRANCHES = 4
-        _C.MODEL.HRNET_18.STAGE4.NUM_BLOCKS = [4, 4, 4, 4]
-        _C.MODEL.HRNET_18.STAGE4.NUM_CHANNELS = [18, 36, 72, 144]
-        _C.MODEL.HRNET_18.STAGE4.BLOCK = 'BASIC'
-
-        # configs for HRNet2x20
-        _C.MODEL.HRNET2X_20 = CN()
-        _C.MODEL.HRNET2X_20.Z_DOWN = True
-        _C.MODEL.HRNET2X_20.STAGE1 = CN()
-        _C.MODEL.HRNET2X_20.STAGE1.NUM_MODULES = 1
-        _C.MODEL.HRNET2X_20.STAGE1.NUM_BRANCHES = 2
-        _C.MODEL.HRNET2X_20.STAGE1.NUM_BLOCKS = [4, 4]
-        _C.MODEL.HRNET2X_20.STAGE1.NUM_CHANNELS = [32, 64]
-        _C.MODEL.HRNET2X_20.STAGE1.BLOCK = 'BOTTLENECK'
-
-        _C.MODEL.HRNET2X_20.STAGE2 = CN()
-        _C.MODEL.HRNET2X_20.STAGE2.NUM_MODULES = 1
-        _C.MODEL.HRNET2X_20.STAGE2.NUM_BRANCHES = 3
-        _C.MODEL.HRNET2X_20.STAGE2.NUM_BLOCKS = [4, 4, 4]
-        _C.MODEL.HRNET2X_20.STAGE2.NUM_CHANNELS = [20, 40, 80]
-        _C.MODEL.HRNET2X_20.STAGE2.BLOCK = 'BASIC'
-
-        _C.MODEL.HRNET2X_20.STAGE3 = CN()
-        _C.MODEL.HRNET2X_20.STAGE3.NUM_MODULES = 4
-        _C.MODEL.HRNET2X_20.STAGE3.NUM_BRANCHES = 4
-        _C.MODEL.HRNET2X_20.STAGE3.NUM_BLOCKS = [4, 4, 4, 4]
-        _C.MODEL.HRNET2X_20.STAGE3.NUM_CHANNELS = [20, 40, 80, 160]
-        _C.MODEL.HRNET2X_20.STAGE3.BLOCK = 'BASIC'
-
-        _C.MODEL.HRNET2X_20.STAGE4 = CN()
-        _C.MODEL.HRNET2X_20.STAGE4.NUM_MODULES = 3
-        _C.MODEL.HRNET2X_20.STAGE4.NUM_BRANCHES = 5
-        _C.MODEL.HRNET2X_20.STAGE4.NUM_BLOCKS = [4, 4, 4, 4, 4]
-        _C.MODEL.HRNET2X_20.STAGE4.NUM_CHANNELS = [20, 40, 80, 160, 320]
-        _C.MODEL.HRNET2X_20.STAGE4.BLOCK = 'BASIC'
+        # These stages are used for HRNet18, HRNet32, HRNet48 and HRNet64
+        _C.MODEL.HRNET.STAGE2 = CN()
+        _C.MODEL.HRNET.STAGE2.NUM_MODULES = 1
+        _C.MODEL.HRNET.STAGE2.NUM_BRANCHES = 2
+        _C.MODEL.HRNET.STAGE2.NUM_BLOCKS = [4, 4]
+        _C.MODEL.HRNET.STAGE2.NUM_CHANNELS = [18, 36]
+        _C.MODEL.HRNET.STAGE3 = CN()
+        _C.MODEL.HRNET.STAGE3.NUM_MODULES = 4
+        _C.MODEL.HRNET.STAGE3.NUM_BRANCHES = 3
+        _C.MODEL.HRNET.STAGE3.NUM_BLOCKS = [4, 4, 4]
+        _C.MODEL.HRNET.STAGE3.NUM_CHANNELS = [18, 36, 72]
+        _C.MODEL.HRNET.STAGE4 = CN()
+        _C.MODEL.HRNET.STAGE4.NUM_MODULES = 3
+        _C.MODEL.HRNET.STAGE4.NUM_BRANCHES = 4
+        _C.MODEL.HRNET.STAGE4.NUM_BLOCKS = [4, 4, 4, 4]
+        _C.MODEL.HRNET.STAGE4.NUM_CHANNELS = [18, 36, 72, 144]
 
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Loss
@@ -1498,6 +1392,11 @@ class Config:
         # It is slower and not as precise as the "normal" inference process but saves memory. In 'TEST.BY_CHUNKS' it will
         # only save memory with the datatype change.
         _C.TEST.REDUCE_MEMORY = False
+        # Whether to compute the metrics in CPU instead of GPU to reduce GPU memory consumption.
+        _C.TEST.METRICS_IN_CPU = True
+        # Whether to save the raw output of the model (before any post-processing) alongside the final prediction. It is placed normally
+        # in a folder called 'per_image'
+        _C.TEST.SAVE_MODEL_RAW_OUTPUT = True
         # In the processing of 3D images, the primary image is segmented into smaller patches. These patches are subsequently
         # passed through a computational network. The outcome is a new image, typically saved as a TIF file, that retains the
         # dimensions of the original input. Notably, if the input image is sizable, this process can be memory-intensive. This
@@ -1656,20 +1555,11 @@ class Config:
         # 'perimeter', 'sphericity' (3D)
         _C.TEST.POST_PROCESSING.MEASURE_PROPERTIES = CN()
         _C.TEST.POST_PROCESSING.MEASURE_PROPERTIES.ENABLE = False
-        # Remove instances by the conditions based in each instance properties. The three variables, TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS,
-        # TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.VALUES and TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.SIGNS will compose a list
-        # of conditions to remove the instances. They are list of list of conditions. For instance, the conditions can be like this: [['A'], ['B','C']]. Then, if the instance satisfies
-        # the first list of conditions, only 'A' in this first case (from ['A'] list), or satisfy 'B' and 'C' (from ['B','C'] list) it will be
-        # removed from the image. In each sublist all the conditions must be satisfied. Available properties are: ['circularity', 'elongation',
-        # 'npixels', 'area', 'diameter', 'perimeter', 'sphericity']. When this post-processing step is selected two .csv files
-        # will be created, one with the properties of each instance from the original image (will be placed in PATHS.RESULT_DIR.PER_IMAGE_INSTANCES
-        # path), and another with only instances that remain once this post-processing has been applied (will be placed in
-        # PATHS.RESULT_DIR.PER_IMAGE_POST_PROCESSING path). In those csv files two more information columns will appear: a list of conditions
-        # that each instance has satisfy or not ('Satisfied', 'No satisfied' respectively), and a comment with two possible values, 'Removed'
-        # and 'Correct', telling you if the instance has been removed or not, respectively. Some of the properties follow the formulas used in
-        # MorphoLibJ library for Fiji https://doi.org/10.1093/bioinformatics/btw413
-        #
-        # Each property descrition:
+        # List of properties to measure on each instance. The following properties will be always calculated: label, npixels, areas, centers, elongation (2D), 
+        # sphericities (2D)/circularities (3D), diameters, perimeter (2D)/surface_area (3D). Apart from them, you can select more properties to be calculated
+        # based on scikit-image regionprops function. Check the following link for a detailed list of the extra available properties you can request:
+        # https://scikit-image.org/docs/stable/api/skimage.measure.html#skimage.measure.regionprops
+        # Default property description is as follows:
         #   * 'circularity' is defined as the ratio of area over the square of the perimeter, normalized such that the value for a disk equals
         #     one: (4 * PI * area) / (perimeter^2). Only measurable for 2D images (use sphericity for 3D images). While values of circularity
         #     range theoretically within the interval [0;1], the measurements errors of the perimeter may produce circularity values above 1
@@ -1688,11 +1578,24 @@ class Config:
         #     is also taken into account. Does not take into account the image resolution.
         #
         #   * 'perimeter', in 2D, approximates the contour as a line through the centers of border pixels using a 4-connectivity. In 3D,
-        #     it corresponds to the surface area calculated with diplib library 
-        #     (more info here https://diplib.org/diplib-docs/features.html#shape_features_P2A).
+        #     it corresponds to the surface area.
         #
         #   * 'sphericity', in 3D, it is the ratio of the squared volume over the cube of the surface area, normalized such that the value
         #     for a ball equals one: (36 * PI)*((volume^2)/(perimeter^3)). Only measurable for 3D images (use circularity for 2D images).
+        #
+        _C.TEST.POST_PROCESSING.MEASURE_PROPERTIES.EXTRA_PROPS = []
+        # Remove instances by the conditions based in each instance properties. The three variables, TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS,
+        # TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.VALUES and TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.SIGNS will compose a list
+        # of conditions to remove the instances. They are list of list of conditions. For instance, the conditions can be like this: [['A'], ['B','C']]. Then, if the instance satisfies
+        # the first list of conditions, only 'A' in this first case (from ['A'] list), or satisfy 'B' and 'C' (from ['B','C'] list) it will be
+        # removed from the image. In each sublist all the conditions must be satisfied. Available properties are: ['circularity', 'elongation',
+        # 'npixels', 'area', 'diameter', 'perimeter', 'sphericity']. When this post-processing step is selected two .csv files
+        # will be created, one with the properties of each instance from the original image (will be placed in PATHS.RESULT_DIR.PER_IMAGE_INSTANCES
+        # path), and another with only instances that remain once this post-processing has been applied (will be placed in
+        # PATHS.RESULT_DIR.PER_IMAGE_POST_PROCESSING path). In those csv files two more information columns will appear: a list of conditions
+        # that each instance has satisfy or not ('Satisfied', 'No satisfied' respectively), and a comment with two possible values, 'Removed'
+        # and 'Correct', telling you if the instance has been removed or not, respectively. Some of the properties follow the formulas used in
+        # MorphoLibJ library for Fiji https://doi.org/10.1093/bioinformatics/btw413
         #
         # A full example of this post-processing:
         # If you want to remove those instances that have less than 100 pixels and circularity less equal to 0.7 you should

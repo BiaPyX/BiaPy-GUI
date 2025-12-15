@@ -7,12 +7,12 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 from skimage.io import imread
-from typing import Optional, Dict, Tuple, List, Iterator
+from typing import Optional, Dict, Tuple, List, Iterator, Sequence
 from packaging.version import Version
 import requests
 from numpy.typing import NDArray
 
-# Copied from BiaPy commit: f9a9e707ed6d2437dbb1dce6a0b2c05027464442 (3.6.6)
+# Copied from BiaPy commit: 647b8d33618c82329fe96eb9b4935c04b68d1d62 (3.6.8)
 def check_bmz_model_compatibility(
     model_rdf: Dict,
     workflow_specs: Optional[Dict] = None,
@@ -163,6 +163,12 @@ def check_bmz_model_compatibility(
             channels = model_kwargs["output_channels"]
 
         if "biapy" in tags:
+            if "description" in m and "representation:" in m["description"]:
+                try:
+                    representation = m["description"].split("representation:")[1].split("\n")[0].strip().split("+")
+                    channel_code = [x.strip() for x in representation]
+                except Exception:
+                    print(f"[{specific_workflow}] couldn't extract channel representation from model RDF description: {m['description']}. Setting the default F+C\n")
             # CartoCell models
             if (
                 "cyst" in tags
@@ -217,8 +223,11 @@ def check_bmz_model_compatibility(
     # --------- Axes checks ---------
     axes_order = g(inputs[0], "axes")
     input_image_shape = []
-    
-    if isinstance(axes_order, list):
+
+    # Model version > 5   
+    if isinstance(axes_order, str):
+        input_image_shape = inputs[0].get("shape", {}).get("min", [])
+    elif isinstance(axes_order, list):
         _axes_order = ""
         for axis in axes_order:
             if "type" in axis:
@@ -243,7 +252,11 @@ def check_bmz_model_compatibility(
                     _axes_order += axis["id"]
         axes_order = _axes_order
     
-    opts["DATA.PATCH_SIZE"] = tuple(input_image_shape[2:] + [input_image_shape[1]]) # (z) y x c
+    try:
+        opts["DATA.PATCH_SIZE"] = tuple(input_image_shape[2:] + [input_image_shape[1]]) # (z) y x c
+    except Exception:
+        reason_message = f"[{specific_workflow}] couldn't extract input image shape from model RDF: {input_image_shape}\n"
+        return preproc_info, True, reason_message, opts
 
     if specific_dims == "2D":
         if axes_order != "bcyx":
@@ -550,23 +563,71 @@ def ensure_2d_shape(img, path=None):
             img = img.transpose(new_pos)
     return img
 
+# Copied from BiaPy commit: 647b8d33618c82329fe96eb9b4935c04b68d1d62 (3.6.8)
+def order_dimensions(
+    data: Sequence[slice] | List[str | int] | Tuple[int, ...] | NDArray,
+    input_order: str,
+    output_order: str = "TZCYX",
+    default_value: int | float = 1,
+) -> Sequence[slice] | List[str | int] | Tuple[int, ...] | NDArray:
+    """
+    Reorder data from any input order to output order.
 
-def ensure_3d_shape(img, path=None):
+    Parameters
+    ----------
+    data : Numpy array like
+        data to reorder. E.g. ``(z, y, x, channels)``.
+
+    input_order : str
+        Order of the input data. E.g. ``ZYXC``.
+
+    output_order : str, optional
+        Order of the output data. E.g. ``TZCYX``.
+
+    default_value : int or float, optional
+        Default value to use when a dimension is not present in the input order.
+
+    Returns
+    -------
+    shape : Tuple
+        Reordered data. E.g. ``(t, z, channel, y, x)``.
+    """
+    if input_order == output_order:
+        return data
+
+    output_data = []
+
+    for i in range(len(output_order)):
+        if output_order[i] in input_order:
+            output_data.append(data[input_order.index(output_order[i])])
+        else:
+            output_data.append(default_value)
+    return tuple(output_data)
+
+# Copied from BiaPy commit: 647b8d33618c82329fe96eb9b4935c04b68d1d62 (3.6.8)
+def ensure_3d_shape(
+    img: NDArray,
+    path: Optional[str] = None,
+    data_axes_order: Optional[str] = None,
+):
     """
     Read an image from a given path.
 
     Parameters
     ----------
-    img : ndarray
+    img : NDArray
         Image read.
 
-    path : str
+    path : str, optional
         Path of the image (just use to print possible errors).
+
+    data_axes_order : str, optional
+        Order of axes of ``data``. E.g. 'TZCYX', 'TZYXC', 'ZCYX', 'ZYXC'.
 
     Returns
     -------
     img : Numpy 4D array
-        Image read. E.g. ``(z, y, x, num_classes)``.
+        Image read. E.g. ``(z, y, x, channels)``.
     """
     if img.ndim < 3:
         if path:
@@ -574,27 +635,67 @@ def ensure_3d_shape(img, path=None):
         else:
             m = "Read image seems to be 2D: {}".format(img.shape)
         raise ValueError(m)
+    elif img.ndim == 5:
+        if img.shape[0] != 1:
+            # It is assumed that the image is already prepared
+            return img
+        else:
+            img = img[0]
 
+    # pop T in data_axes_order
+    if data_axes_order is not None:
+        data_axes_order = data_axes_order.replace("T", "")
+        if "Z" not in data_axes_order:
+            if "C" in data_axes_order:
+                data_axes_order = data_axes_order.replace("C", "Z")
+            elif "I" in data_axes_order:
+                data_axes_order = data_axes_order.replace("I", "Z")
+            elif "Q" in data_axes_order:
+                data_axes_order = data_axes_order.replace("Q", "Z")
+        if any([x for x in data_axes_order if x not in "ZYXC"]):
+            data_axes_order = None
+
+    new_pos = list(range(img.ndim))
     if img.ndim == 3:
-        # Ensure Z axis is always in the first position
-        min_val = min(img.shape)
-        z_pos = img.shape.index(min_val)
-        if z_pos != 0:
-            new_pos = [
-                z_pos,
-            ] + [x for x in range(3) if x != z_pos]
-            img = img.transpose(new_pos)
-
+        if data_axes_order is None:
+            # Ensure Z axis is always in the first position
+            min_val = min(img.shape)
+            z_pos = img.shape.index(min_val)
+            if z_pos != 0:
+                new_pos = [
+                    z_pos,
+                ] + [x for x in range(3) if x != z_pos]
+        else:
+            # Follows the axes order provided in data_axes_order
+            new_pos = order_dimensions(
+                np.array(range(len(data_axes_order))),
+                input_order=data_axes_order,
+                output_order="ZYX",
+                default_value=np.nan,
+            )
+            new_pos = [x for x in new_pos if not np.isnan(x)]  # type: ignore
+        img = img.transpose(new_pos)  # type: ignore
         img = np.expand_dims(img, -1)
     else:
-        # Ensure channel axis is always in the first position (assuming Z is already set)
-        min_val = min(img.shape)
-        channel_pos = img.shape.index(min_val)
-        if channel_pos != 3:
-            new_pos = [x for x in range(4) if x != channel_pos] + [
-                channel_pos,
-            ]
-            img = img.transpose(new_pos)
+        if data_axes_order is None:
+            # Ensure channel axis is always in the last position (assuming Z is already set)
+            min_val = min(img.shape)
+            z_pos = img.shape.index(min_val)
+            if z_pos != 3:
+                new_pos = [x for x in range(4) if x != z_pos] + [
+                    z_pos,
+                ]
+        else:
+            # Follows the axes order provided in data_axes_order
+            new_pos = order_dimensions(
+                np.array(range(len(data_axes_order))),
+                input_order=data_axes_order,
+                output_order="ZYXC",
+                default_value=np.nan,
+            )
+            new_pos = [x for x in new_pos if not np.isnan(x)]  # type: ignore
+        img = img.transpose(new_pos)  # type: ignore
+
     return img
 
 

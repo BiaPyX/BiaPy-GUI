@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: b321fbf3700bec39480dde84fc2d37e4081c9581 (3.6.7)
+## Copied from BiaPy commit: 647b8d33618c82329fe96eb9b4935c04b68d1d62 (3.6.8)
 """
 Configuration checking utilities for BiaPy.
 
@@ -792,117 +792,135 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             "'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.SIGNS' need to have same length"
         )
 
-    if (
-        cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.ENABLE
-        and cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.ENABLE
-    ):
-        if cfg.PROBLEM.TYPE not in ["INSTANCE_SEG", "DETECTION"]:
-            raise ValueError(
-                "'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS' can only be used in INSTANCE_SEG and DETECTION workflows"
-            )
+    if cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.ENABLE:
+        properties = cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.EXTRA_PROPS
+        if properties != []:
+            # Allowed regionprops attributes (from skimage.measure.regionprops)
+            VALID_REGIONPROPS = {
+                "area", "area_bbox", "area_convex", "area_filled",
+                "axis_major_length", "axis_minor_length", "bbox", "centroid",
+                "centroid_local", "centroid_weighted", "centroid_weighted_local",
+                "coords_scaled", "coords", "eccentricity", "equivalent_diameter_area",
+                "euler_number", "extent", "feret_diameter_max", "image",
+                "image_convex", "image_filled", "image_intensity", "inertia_tensor",
+                "inertia_tensor_eigvals", "intensity_max", "intensity_mean",
+                "intensity_min", "intensity_std", "label", "moments",
+                "moments_central", "moments_hu", "moments_normalized",
+                "moments_weighted", "moments_weighted_central", "moments_weighted_hu",
+                "moments_weighted_normalized", "num_pixels", "orientation",
+                "perimeter", "perimeter_crofton", "slice", "solidity",
+            }
+            assert set(properties).issubset(VALID_REGIONPROPS), f"Invalid properties found: {set(properties) - VALID_REGIONPROPS}"
+            opts.extend(["TEST.POST_PROCESSING.MEASURE_PROPERTIES.EXTRA_PROPS", list(set(cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.EXTRA_PROPS))])
 
-        if len(cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS) == 0:
-            raise ValueError(
-                "'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS' can not be an empty list when "
-                "'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.ENABLE' is enabled"
-            )
-
-        for i in range(len(cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS)):
-            if not isinstance(
-                cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS[i],
-                list,
-            ):
+        if cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.ENABLE:
+            if cfg.PROBLEM.TYPE not in ["INSTANCE_SEG", "DETECTION"]:
                 raise ValueError(
-                    "'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS' need to be a list of list. E.g. [ ['circularity'], ['area', 'diameter'] ]"
-                )
-            if not isinstance(
-                cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.VALUES[i],
-                list,
-            ):
-                raise ValueError(
-                    "'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.VALUES' need to be a list of list. E.g. [ [10], [15, 3] ]"
-                )
-            if not isinstance(
-                cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.SIGNS[i],
-                list,
-            ):
-                raise ValueError(
-                    "'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.SIGNS' need to be a list of list. E.g. [ ['gt'], ['le', 'gt'] ]"
+                    "'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS' can only be used in INSTANCE_SEG and DETECTION workflows"
                 )
 
-            if not (
-                len(cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS[i])
-                == len(cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.VALUES[i])
-                == len(cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.SIGNS[i])
-            ):
+            if len(cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS) == 0:
                 raise ValueError(
-                    "'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS', 'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.VALUES' and "
-                    "'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.SIGNS' need to have same length"
+                    "'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS' can not be an empty list when "
+                    "'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.ENABLE' is enabled"
                 )
 
-            # Check for unique values
-            if (
-                len(
-                    [
-                        item
-                        for item, count in collections.Counter(
-                            cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS[i]
-                        ).items()
-                        if count > 1
-                    ]
-                )
-                > 0
-            ):
-                raise ValueError(
-                    "Non repeated values are allowed in 'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES'"
-                )
-            for j in range(len(cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS[i])):
-                if cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS[i][j] not in [
-                    "circularity",
-                    "npixels",
-                    "area",
-                    "diameter",
-                    "elongation",
-                    "sphericity",
-                    "perimeter",
-                ]:
+            for i in range(len(cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS)):
+                if not isinstance(
+                    cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS[i],
+                    list,
+                ):
                     raise ValueError(
-                        "'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS' can only be one among these: ['circularity', 'npixels', 'area', 'diameter', 'elongation', 'sphericity', 'perimeter']"
+                        "'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS' need to be a list of list. E.g. [ ['circularity'], ['area', 'diameter'] ]"
                     )
+                if not isinstance(
+                    cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.VALUES[i],
+                    list,
+                ):
+                    raise ValueError(
+                        "'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.VALUES' need to be a list of list. E.g. [ [10], [15, 3] ]"
+                    )
+                if not isinstance(
+                    cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.SIGNS[i],
+                    list,
+                ):
+                    raise ValueError(
+                        "'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.SIGNS' need to be a list of list. E.g. [ ['gt'], ['le', 'gt'] ]"
+                    )
+
+                if not (
+                    len(cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS[i])
+                    == len(cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.VALUES[i])
+                    == len(cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.SIGNS[i])
+                ):
+                    raise ValueError(
+                        "'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS', 'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.VALUES' and "
+                        "'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.SIGNS' need to have same length"
+                    )
+
+                # Check for unique values
                 if (
-                    cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS[i][j]
-                    in ["circularity", "elongation"]
-                    and cfg.PROBLEM.NDIM != "2D"
+                    len(
+                        [
+                            item
+                            for item, count in collections.Counter(
+                                cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS[i]
+                            ).items()
+                            if count > 1
+                        ]
+                    )
+                    > 0
                 ):
                     raise ValueError(
-                        "'circularity' or 'elongation' properties can only be measured in 2D images. Delete them from 'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS'. "
-                        "'circularity'-kind property in 3D is 'sphericity'"
+                        "Non repeated values are allowed in 'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES'"
                     )
-                if (
-                    cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS[i][j] == "sphericity"
-                    and cfg.PROBLEM.NDIM != "3D"
-                ):
-                    raise ValueError(
-                        "'sphericity' property can only be measured in 3D images. Delete it from 'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS'. "
-                        "'sphericity'-kind property in 2D is 'circularity'"
-                    )
-                if cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.SIGNS[i][j] not in [
-                    "gt",
-                    "ge",
-                    "lt",
-                    "le",
-                ]:
-                    raise ValueError(
-                        "'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.SIGNS' can only be one among these: ['gt', 'ge', 'lt', 'le']"
-                    )
-                if cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS[i][
-                    j
-                ] == "circularity" and not check_value(
-                    cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.VALUES[i][j]
-                ):
-                    raise ValueError(
-                        "Circularity can only have values in [0, 1] range (check  'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.VALUES' values)"
-                    )
+                for j in range(len(cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS[i])):
+                    if cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS[i][j] not in [
+                        "circularity",
+                        "npixels",
+                        "area",
+                        "diameter",
+                        "elongation",
+                        "sphericity",
+                        "perimeter",
+                    ]:
+                        raise ValueError(
+                            "'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS' can only be one among these: ['circularity', 'npixels', 'area', 'diameter', 'elongation', 'sphericity', 'perimeter']"
+                        )
+                    if (
+                        cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS[i][j]
+                        in ["circularity", "elongation"]
+                        and cfg.PROBLEM.NDIM != "2D"
+                    ):
+                        raise ValueError(
+                            "'circularity' or 'elongation' properties can only be measured in 2D images. Delete them from 'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS'. "
+                            "'circularity'-kind property in 3D is 'sphericity'"
+                        )
+                    if (
+                        cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS[i][j] == "sphericity"
+                        and cfg.PROBLEM.NDIM != "3D"
+                    ):
+                        raise ValueError(
+                            "'sphericity' property can only be measured in 3D images. Delete it from 'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS'. "
+                            "'sphericity'-kind property in 2D is 'circularity'"
+                        )
+                    if cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.SIGNS[i][j] not in [
+                        "gt",
+                        "ge",
+                        "lt",
+                        "le",
+                    ]:
+                        raise ValueError(
+                            "'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.SIGNS' can only be one among these: ['gt', 'ge', 'lt', 'le']"
+                        )
+                    if cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.PROPS[i][
+                        j
+                    ] == "circularity" and not check_value(
+                        cfg.TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.VALUES[i][j]
+                    ):
+                        raise ValueError(
+                            "Circularity can only have values in [0, 1] range (check  'TEST.POST_PROCESSING.MEASURE_PROPERTIES.REMOVE_BY_PROPERTIES.VALUES' values)"
+                        )
 
     if cfg.PROBLEM.TYPE != "INSTANCE_SEG":
         if cfg.TEST.POST_PROCESSING.VORONOI_ON_MASK:
@@ -1779,11 +1797,6 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                     "'DATA.VAL.FILTER_SAMPLES.ENABLE' can not be enabled when 'PROBLEM.IMAGE_TO_IMAGE.MULTIPLE_RAW_ONE_TARGET_LOADER' is enabled too"
                 )
 
-    if cfg.DATA.EXTRACT_RANDOM_PATCH and cfg.DATA.PROBABILITY_MAP:
-        if cfg.DATA.W_FOREGROUND + cfg.DATA.W_BACKGROUND != 1:
-            raise ValueError(
-                "cfg.DATA.W_FOREGROUND+cfg.DATA.W_BACKGROUND need to sum 1. E.g. 0.94 and 0.06 respectively."
-            )
     if cfg.DATA.VAL.FROM_TRAIN and cfg.DATA.PREPROCESS.VAL:
         print(
             "WARNING: validation preprocessing will be done based on 'DATA.PREPROCESS.TRAIN', as 'DATA.VAL.FROM_TRAIN' is selected"
@@ -2025,10 +2038,6 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                             )
 
     if cfg.TRAIN.ENABLE:
-        if cfg.DATA.EXTRACT_RANDOM_PATCH and cfg.DATA.PROBABILITY_MAP:
-            if not cfg.PROBLEM.TYPE == "SEMANTIC_SEG":
-                raise ValueError("'DATA.PROBABILITY_MAP' can only be selected when 'PROBLEM.TYPE' is 'SEMANTIC_SEG'")
-
         if cfg.DATA.VAL.FROM_TRAIN and not cfg.DATA.VAL.CROSS_VAL and cfg.DATA.VAL.SPLIT_TRAIN <= 0:
             raise ValueError("'DATA.VAL.SPLIT_TRAIN' needs to be > 0 when 'DATA.VAL.FROM_TRAIN' == True")
 
@@ -2189,8 +2198,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             "hrnet32",
             "hrnet48",
             "hrnet64",
-            "hrnet2x20",
-        ], "MODEL.ARCHITECTURE not in ['unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'simple_cnn', 'efficientnet_b[0-7]', 'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'vit', 'mae', 'unext_v1', 'unext_v2', 'hrnet18', 'hrnet32', 'hrnet48', 'hrnet64', 'hrnet2x20']"
+        ], "MODEL.ARCHITECTURE not in ['unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'simple_cnn', 'efficientnet_b[0-7]', 'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'vit', 'mae', 'unext_v1', 'unext_v2', 'hrnet18', 'hrnet32', 'hrnet48', 'hrnet64']"
         if (
             model_arch
             not in [
@@ -2212,7 +2220,6 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 "hrnet32",
                 "hrnet48",
                 "hrnet64",
-                "hrnet2x20",
             ]
             and cfg.PROBLEM.NDIM == "3D"
             and cfg.PROBLEM.TYPE != "CLASSIFICATION"
@@ -2238,7 +2245,6 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                         "hrnet32",
                         "hrnet48",
                         "hrnet64",
-                        "hrnet2x20",
                     ]
                 )
             )
@@ -2261,11 +2267,10 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 "hrnet32",
                 "hrnet48",
                 "hrnet64",
-                "hrnet2x20",
             ]
         ):
             raise ValueError(
-                "'DATA.N_CLASSES' > 2 can only be used with 'MODEL.ARCHITECTURE' in ['unet', 'resunet', 'resunet++', 'seunet', 'resunet_se', 'attention_unet', 'multiresunet', 'unetr', 'unext_v1', 'unext_v2', 'hrnet18', 'hrnet32', 'hrnet48', 'hrnet64', 'hrnet2x20']"
+                "'DATA.N_CLASSES' > 2 can only be used with 'MODEL.ARCHITECTURE' in ['unet', 'resunet', 'resunet++', 'seunet', 'resunet_se', 'attention_unet', 'multiresunet', 'unetr', 'unext_v1', 'unext_v2', 'hrnet18', 'hrnet32', 'hrnet48', 'hrnet64']"
             )
 
         assert len(cfg.MODEL.FEATURE_MAPS) > 2, "'MODEL.FEATURE_MAPS' needs to have at least 3 values"
@@ -2353,10 +2358,9 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 "hrnet32",
                 "hrnet48",
                 "hrnet64",
-                "hrnet2x20",
             ]:
                 raise ValueError(
-                    "Architectures available for {} are: ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'resunet_se', 'unetr', 'multiresunet', 'unext_v1', 'unext_v2', 'hrnet18', 'hrnet32', 'hrnet48', 'hrnet64', 'hrnet2x20']".format(
+                    "Architectures available for {} are: ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'resunet_se', 'unetr', 'multiresunet', 'unext_v1', 'unext_v2', 'hrnet18', 'hrnet32', 'hrnet48', 'hrnet64']".format(
                         cfg.PROBLEM.TYPE
                     )
                 )
@@ -2407,10 +2411,9 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 "hrnet32",
                 "hrnet48",
                 "hrnet64",
-                "hrnet2x20",
             ]:
                 raise ValueError(
-                    "Architectures available for 'IMAGE_TO_IMAGE' are: ['edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'resunet++', 'resunet_se', 'seunet', 'attention_unet', 'unetr', 'multiresunet', 'unext_v1', 'unext_v2', 'hrnet18', 'hrnet32', 'hrnet48', 'hrnet64', 'hrnet2x20']"
+                    "Architectures available for 'IMAGE_TO_IMAGE' are: ['edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'resunet++', 'resunet_se', 'seunet', 'attention_unet', 'unetr', 'multiresunet', 'unext_v1', 'unext_v2', 'hrnet18', 'hrnet32', 'hrnet48', 'hrnet64']"
                 )
             # Not allowed archs
             if cfg.PROBLEM.NDIM == "3D" and model_arch == "wdsr":
@@ -2437,11 +2440,10 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 "hrnet32",
                 "hrnet48",
                 "hrnet64",
-                "hrnet2x20",
             ]:
                 raise ValueError(
                     "'SELF_SUPERVISED' models available are these: ['unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', "
-                    "'unetr', 'unext_v1', 'unext_v2', 'edsr', 'rcan', 'dfcan', 'wdsr', 'vit', 'mae', 'hrnet18', 'hrnet32', 'hrnet48', 'hrnet64', 'hrnet2x20']"
+                    "'unetr', 'unext_v1', 'unext_v2', 'edsr', 'rcan', 'dfcan', 'wdsr', 'vit', 'mae', 'hrnet18', 'hrnet32', 'hrnet48', 'hrnet64']"
                 )
 
             # Not allowed archs
@@ -2479,7 +2481,6 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             "hrnet32",
             "hrnet48",
             "hrnet64",
-            "hrnet2x20",
         ]:
             z_size = cfg.DATA.PATCH_SIZE[0]
             sizes = cfg.DATA.PATCH_SIZE[1:-1]
@@ -2502,28 +2503,30 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                     z_size = z_size // cfg.MODEL.Z_DOWN[i]
             else:
                 
-                # Check that the input patch size is divisible in every level of the HRNet's like architectures
-                _mod = model_arch.upper()
-                _mod = re.sub(r'HRNET(\d+)', r'HRNET_\1', _mod)
-                _mod = _mod.replace("X", "_X")
-                hrnet_zdown = getattr(cfg.MODEL, _mod).Z_DOWN
-                hrnet_zdown_div = 2 if hrnet_zdown else 1
+                # Check that the input patch size is divisible in every level of the HRNet selected
+                hrnet_zdown_div = 2 if cfg.MODEL.HRNET.Z_DOWN else 1
 
                 for i in range(4):
                     if not all(
                         [False for x in sizes if x % (np.power(2, (i + 1))) != 0 or z_size % hrnet_zdown_div != 0]
                     ):
                         m = (
-                            f"The 'DATA.PATCH_SIZE' provided is not divisible by 2 in each of the {_mod}'s levels. You can:\n 1) Reduce the number "
+                            f"The 'DATA.PATCH_SIZE' provided is not divisible by 2 in each of the HRNET's levels. You can:\n 1) Reduce the number "
                             + "of levels (by reducing 'cfg.MODEL.FEATURE_MAPS' array's length)\n 2) Increase 'DATA.PATCH_SIZE'"
                         )
                         if cfg.PROBLEM.NDIM == "3D":
                             m += (
                                 "\n 3) If the Z axis is the problem, as the patch size is normally less than in other axis due to resolution, you "
-                                + f"can tune 'MODEL.{_mod}.Z_DOWN' variable to not downsample the image in all U-Net levels"
+                                + f"can tune 'MODEL.HRNET.Z_DOWN' variable to not downsample the image in all U-Net levels"
                             )
                         raise ValueError(m)
-                    z_size = z_size // 2 if hrnet_zdown else z_size
+                    z_size = z_size // 2 if cfg.MODEL.HRNET.Z_DOWN else z_size
+
+        if "hrnet" in model_arch:
+            assert cfg.MODEL.HRNET.BLOCK_TYPE in ['BASIC', 'BOTTLENECK', 'CONVNEXT_V1', 'CONVNEXT_V2'], "'MODEL.HRNET.BLOCK_TYPE' not in ['BASIC', 'BOTTLENECK', 'CONVNEXT_V1', 'CONVNEXT_V2']"
+            assert cfg.MODEL.HRNET.HEAD_TYPE in ["OCR", "ASPP", "PSP", "FCN"], "'MODEL.HRNET.HEAD_TYPE' not in ['OCR', 'ASPP', 'PSP', 'FCN']"
+            if cfg.PROBLEM.NDIM == "3D" and cfg.MODEL.HRNET.HEAD_TYPE == "OCR":
+                raise ValueError("'OCR' head is not available for 3D 'HRNET' models. Please choose another head type: 'ASPP', 'PSP' or 'FCN'")
 
     if cfg.MODEL.LOAD_CHECKPOINT and check_data_paths:
         file = get_checkpoint_path(cfg, jobname)
@@ -3142,6 +3145,14 @@ def convert_old_model_cfg_to_current_version(old_cfg: dict):
                     del old_cfg["PROBLEM"]["INSTANCE_SEG"]["SYNAPSES"]["NORMALIZE_DISTANCES"]
 
     if "DATA" in old_cfg:
+        if "EXTRACT_RANDOM_PATCH" in old_cfg["DATA"]:   
+            del old_cfg["DATA"]["EXTRACT_RANDOM_PATCH"]
+        if "PROBABILITY_MAP" in old_cfg["DATA"]:
+            del old_cfg["DATA"]["PROBABILITY_MAP"]
+        if "W_FOREGROUND" in old_cfg["DATA"]:
+            del old_cfg["DATA"]["W_FOREGROUND"]
+        if "W_BACKGROUND" in old_cfg["DATA"]:
+            del old_cfg["DATA"]["W_BACKGROUND"]
         if "TRAIN" in old_cfg["DATA"]:
             if "MINIMUM_FOREGROUND_PER" in old_cfg["DATA"]["TRAIN"]:
                 min_fore = old_cfg["DATA"]["TRAIN"]["MINIMUM_FOREGROUND_PER"]
@@ -3299,6 +3310,17 @@ def convert_old_model_cfg_to_current_version(old_cfg: dict):
         if "LAST_ACTIVATION" in old_cfg["MODEL"]:
             del old_cfg["MODEL"]["LAST_ACTIVATION"]
 
+        if "HRNET_64" in old_cfg["MODEL"]:
+            old_cfg["MODEL"]["HRNET"] = old_cfg["MODEL"].pop("HRNET_64")
+        elif "HRNET_48" in old_cfg["MODEL"]:
+            old_cfg["MODEL"]["HRNET"] = old_cfg["MODEL"].pop("HRNET_48")
+        elif "HRNET_32" in old_cfg["MODEL"]:
+            old_cfg["MODEL"]["HRNET"] = old_cfg["MODEL"].pop("HRNET_32")
+        elif "HRNET_18" in old_cfg["MODEL"]:
+            old_cfg["MODEL"]["HRNET"] = old_cfg["MODEL"].pop("HRNET_18")
+        if "HRNET" in old_cfg["MODEL"]:
+            if "STAGE1" in old_cfg["MODEL"]["HRNET"]:
+                del old_cfg["MODEL"]["HRNET"]["STAGE1"]
     try:
         del old_cfg["PATHS"]["RESULT_DIR"]["BMZ_BUILD"]
     except:
