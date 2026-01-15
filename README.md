@@ -43,7 +43,7 @@ cd BiaPy-GUI
 This will create a folder called ``BiaPy-GUI`` that contains all the files of the repository. Then you need to create a conda environment and install the dependencies:
 
 ```shell
-conda create -n biapy-gui python=3.10.10
+conda create -n biapy-gui python=3.11
 conda activate biapy-gui
 pip install -r requirements.txt
 ```
