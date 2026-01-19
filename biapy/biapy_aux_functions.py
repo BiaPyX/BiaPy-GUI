@@ -12,7 +12,7 @@ from packaging.version import Version
 import requests
 from numpy.typing import NDArray
 
-# Copied from BiaPy commit: 647b8d33618c82329fe96eb9b4935c04b68d1d62 (3.6.8)
+# Copied from BiaPy commit: 0f0a5bc5eea1844ba2bd62c2fccb72783857b125 (3.6.8)
 def check_bmz_model_compatibility(
     model_rdf: Dict,
     workflow_specs: Optional[Dict] = None,
@@ -327,6 +327,11 @@ def check_bmz_model_compatibility(
                             else:
                                 mean, std = -1.0, -1.0
 
+                            if isinstance(mean, list):
+                                mean = float(mean[-1])
+                            if isinstance(std, list):
+                                std = float(std[-1])
+                                
                             opts["DATA.NORMALIZATION.TYPE"] = "zero_mean_unit_variance"
                             opts["DATA.NORMALIZATION.ZERO_MEAN_UNIT_VAR.MEAN_VAL"] = mean
                             opts["DATA.NORMALIZATION.ZERO_MEAN_UNIT_VAR.STD_VAL"] = std
@@ -339,7 +344,7 @@ def check_bmz_model_compatibility(
                         elif proc_id == "scale_range":
                             opts["DATA.NORMALIZATION.TYPE"] = "scale_range"
 
-                            # Check if there is percentile clippign
+                            # Check if there is percentile clipping
                             if (
                                 float(preproc_info["kwargs"]["min_percentile"]) != 0
                                 or float(preproc_info["kwargs"]["max_percentile"]) != 100
@@ -526,7 +531,7 @@ def check_images(data_dir, is_mask=False, mask_type="", is_3d=False, dir_name=No
     return False, "", constraints, {"total_samples": total_samples, "crop_shape": crop_shape, "dir_name": dir_name}
 
 
-def ensure_2d_shape(img, path=None):
+def ensure_2d_shape(img: NDArray, path: Optional[str] = None) -> NDArray:
     """
     Read an image from a given path.
 
@@ -541,13 +546,13 @@ def ensure_2d_shape(img, path=None):
     Returns
     -------
     img : Numpy 3D array
-        Image read. E.g. ``(y, x, num_classes)``.
+        Image read. E.g. ``(y, x, channels)``.
     """
     if img.ndim > 3:
-        if path is not None:
-            m = "Read image seems to be 3D. Image shape is: {}.\nImage path:\n{}".format(img.shape, path)
+        if path:
+            m = "Read image seems to be 3D: {}. Path: {}".format(img.shape, path)
         else:
-            m = "Read image seems to be 3D. Image shape is: {}".format(img.shape)
+            m = "Read image seems to be 3D: {}".format(img.shape)
         raise ValueError(m)
 
     if img.ndim == 2:
@@ -563,7 +568,6 @@ def ensure_2d_shape(img, path=None):
             img = img.transpose(new_pos)
     return img
 
-# Copied from BiaPy commit: 647b8d33618c82329fe96eb9b4935c04b68d1d62 (3.6.8)
 def order_dimensions(
     data: Sequence[slice] | List[str | int] | Tuple[int, ...] | NDArray,
     input_order: str,
@@ -604,7 +608,6 @@ def order_dimensions(
             output_data.append(default_value)
     return tuple(output_data)
 
-# Copied from BiaPy commit: 647b8d33618c82329fe96eb9b4935c04b68d1d62 (3.6.8)
 def ensure_3d_shape(
     img: NDArray,
     path: Optional[str] = None,
@@ -907,7 +910,6 @@ def data_range(x):
     else:
         return "none_range"
 
-# Copied from BiaPy commit: 284ec3838766392c9a333ac9d27b55816a267bb9 (3.5.2)
 def crop_data_with_overlap(
     data, crop_shape, data_mask=None, overlap=(0, 0), padding=(0, 0), verbose=True, load_data=True
 ):
@@ -1159,7 +1161,6 @@ def crop_data_with_overlap(
         return crop_coords
 
 
-# Copied from BiaPy commit: 284ec3838766392c9a333ac9d27b55816a267bb9 (3.5.2)
 def crop_3D_data_with_overlap(
     data,
     vol_shape,
@@ -1444,7 +1445,6 @@ def crop_3D_data_with_overlap(
         return crop_coords
 
 
-# Copied from BiaPy commit: 284ec3838766392c9a333ac9d27b55816a267bb9 (3.5.2)
 def pad_and_reflect(img, crop_shape, verbose=False):
     """
     Load data from a directory.
@@ -1511,7 +1511,6 @@ def pad_and_reflect(img, crop_shape, verbose=False):
                 print("Reflected from {} to {}".format(o_shape, img.shape))
     return img
 
-# Copied from BiaPy commit: d7cca5c7ccbf3cf0eae42ce5c11720117bc45343 (3.6.6)
 def find_bmz_models(
     model_ID: Optional[str] = None,
     url: str = "https://hypha.aicell.io/bioimage-io/artifacts/bioimage.io/children?limit=1000000",
@@ -1671,6 +1670,7 @@ def get_checkpoint_path(cfg, jobname):
     # Select the checkpoint source file
     if cfg.PATHS.CHECKPOINT_FILE != "":
         resume = cfg.PATHS.CHECKPOINT_FILE
+        resume, _ = os.path.splitext(resume)
     else:
         if cfg.MODEL.LOAD_CHECKPOINT_EPOCH == "last_on_train":
             all_checkpoints = glob.glob(os.path.join(checkpoint_dir, "{}-checkpoint-*".format(jobname)))
@@ -1685,9 +1685,7 @@ def get_checkpoint_path(cfg, jobname):
             resume = os.path.join(checkpoint_dir, "{}-checkpoint-best".format(jobname))
         else:
             raise NotImplementedError
-
     return resume
-
 
 
 def check_value(
