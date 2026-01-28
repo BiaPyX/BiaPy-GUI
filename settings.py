@@ -171,10 +171,9 @@ class Settings:
             "SEMANTIC_SEG",
             "INSTANCE_SEG",
             "DETECTION",
-            "DENOISING",
             "SUPER_RESOLUTION",
             "CLASSIFICATION",
-            "IMAGE_TO_IMAGE",
+            "DENOISING",
             "IMAGE_TO_IMAGE",
         ]
         self.settings["wizard_answers"]["PROBLEM.TYPE"] = -1
