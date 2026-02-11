@@ -614,6 +614,7 @@ class run_worker(QObject):
 
             dist_backend = "gloo" if self.windows_os else "nccl"
             command = [
+                "biapy",
                 "--config",
                 "/BiaPy_files/input.yaml",
                 "--result_dir",
