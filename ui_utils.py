@@ -482,6 +482,10 @@ def eval_wizard_answer(main_window: main.MainWindow):
                     ]
                 )
             )
+            if key == "MODEL.BMZ.SOURCE_MODEL_ID":
+                te = te.replace(" (BioImage Model Zoo)", "")
+            elif key == "MODEL.TORCHVISION.SOURCE_MODEL_ID":
+                te = te.replace(" (Torchvision)", "")
             main_window.cfg.settings["wizard_answers"][key] = te
             main_window.cfg.settings["wizard_question_answered_index"][
                 main_window.cfg.settings["wizard_question_index"]
