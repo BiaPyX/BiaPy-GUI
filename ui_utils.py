@@ -978,12 +978,10 @@ class check_models_from_other_sources_engine(QObject):
                     
                 self.main_window.logger.info("Checking entry: {}".format(nickname))
                 try:
-                    (
-                        _,
-                        error,
-                        error_message,
-                        biapy_imposed_vars
-                    ) = check_bmz_model_compatibility(model, workflow_specs=workflow_specs)
+                    compat = check_bmz_model_compatibility(model, workflow_specs=workflow_specs)
+                    error = compat["error"]
+                    error_message = compat["reason_message"]
+                    biapy_imposed_vars = compat["opts"]
                 except:
                     error = True
                 

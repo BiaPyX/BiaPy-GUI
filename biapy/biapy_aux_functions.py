@@ -1,22 +1,27 @@
 import os
 import re
+import sys
 import glob
 import math
 import functools
+import importlib
 import numpy as np
 import pandas as pd
+import yaml
 from pathlib import Path
 from skimage.io import imread
-from typing import Optional, Dict, Tuple, List, Iterator, Sequence
+from typing import Optional, Dict, Tuple, List, Iterator, Sequence, Iterable
 from packaging.version import Version
 import requests
 from numpy.typing import NDArray
+from bioimageio.spec import load_description
+from bioimageio.spec.utils import download
 
-# Copied from BiaPy commit: 0f0a5bc5eea1844ba2bd62c2fccb72783857b125 (3.6.8)
+# Copied from BiaPy commit: aa7c08e32364eb0186c9006109c47b4b8570172d (3.7.1)
 def check_bmz_model_compatibility(
     model_rdf: Dict,
     workflow_specs: Optional[Dict] = None,
-) -> Tuple[List, bool, str, Dict]:
+) -> Dict:
     """
     Check one model compatibility with BiaPy by looking at its RDF file provided by BMZ. This function is the one used in BMZ's continuous integration with BiaPy.
 
@@ -30,14 +35,20 @@ def check_bmz_model_compatibility(
 
     Returns
     -------
-    preproc_info: dict
-        Preprocessing names that the model is using.
+    result : dict
+        Compatibility report with the following keys:
 
-    error : bool
-        Whether it there is a problem to consume the model in BiaPy or not.
+        - ``preproc_info`` (list): preprocessing names that the model is using.
 
-    reason_message: str
-        Reason why the model can not be consumed if there is any.
+        - ``error`` (bool): whether it there is a problem to consume the model in BiaPy or not.
+
+        - ``reason_message`` (str): reason why the model can not be consumed if there is any.
+
+        - ``opts`` (dict): configuration overrides extracted from the model RDF.
+
+        - ``workflow_info`` (dict): inferred workflow information: ``workflow_type``
+          (PROBLEM.TYPE), ``ndim`` (PROBLEM.NDIM) and ``nclasses`` (DATA.N_CLASSES)
+          when available.
     """
 
     # --------- helpers ---------
@@ -50,6 +61,16 @@ def check_bmz_model_compatibility(
                 return default
         return cur
 
+    def _result(error: bool, reason_message: str = "") -> Dict:
+        """Build the compatibility report returned by this function."""
+        return {
+            "preproc_info": preproc_info,
+            "error": error,
+            "reason_message": reason_message,
+            "opts": opts,
+            "workflow_info": workflow_info,
+        }
+
     m = g(model_rdf, "raw", "manifest", default=model_rdf) or model_rdf
 
     specific_workflow = "all" if workflow_specs is None else workflow_specs["workflow_type"]
@@ -58,6 +79,7 @@ def check_bmz_model_compatibility(
 
     preproc_info: List = []
     opts = {}
+    workflow_info: Dict = {}
 
     # --------- Accept only PyTorch state dict models with a single input ---------
     weights = g(m, "weights", "pytorch_state_dict")
@@ -65,10 +87,10 @@ def check_bmz_model_compatibility(
 
     if not (isinstance(weights, dict) and weights):
         reason_message = f"[{specific_workflow}] pytorch_state_dict not found in model RDF\n"
-        return preproc_info, True, reason_message, opts
+        return _result(True, reason_message)
     if not (isinstance(inputs, list) and len(inputs) == 1):
         reason_message = f"[{specific_workflow}] Model needs to have a single input.\n"
-        return preproc_info, True, reason_message, opts
+        return _result(True, reason_message)
 
     # Model format version (defaults to 0.5 for your legacy logic)
     model_version = Version("0.5")
@@ -86,7 +108,7 @@ def check_bmz_model_compatibility(
     elif "architecture" in weights and isinstance(weights["architecture"], dict):
         model_kwargs = weights["architecture"].get("kwargs", None)
     if model_kwargs is None:
-        return preproc_info, True, f"[{specific_workflow}] Couldn't extract kwargs from model description.\n", opts
+        return _result(True, f"[{specific_workflow}] Couldn't extract kwargs from model description.\n")
 
     # --------- Problem type via tags ---------
     tags = g(m, "tags", default=[]) or []
@@ -94,6 +116,7 @@ def check_bmz_model_compatibility(
     if (specific_workflow in ["all", "SEMANTIC_SEG"]) and (
         "semantic-segmentation" in tags or ("segmentation" in tags and "instance-segmentation" not in tags)
     ):
+        workflow_info["workflow_type"] = "SEMANTIC_SEG"
         # classes
         classes = -1
         for k in ("n_classes", "out_channels", "output_channels", "classes"):
@@ -107,7 +130,7 @@ def check_bmz_model_compatibility(
             reason_message = (
                 f"[{specific_workflow}] 'DATA.N_CLASSES' not extracted. Obtained {classes}. Please check it!\n"
             )
-            return preproc_info, True, reason_message, opts
+            return _result(True, reason_message)
         
         if (
             classes == -1
@@ -141,14 +164,15 @@ def check_bmz_model_compatibility(
             if ref_classes != "all":
                 if classes > 2 and ref_classes != classes:
                     reason_message = f"[{specific_workflow}] 'DATA.N_CLASSES' does not match network's output classes. Please check it!\n"
-                    return preproc_info, True, reason_message, opts
+                    return _result(True, reason_message)
         else:
             reason_message = f"[{specific_workflow}] Couldn't find the classes this model is returning so please be aware to match it\n"
-            return preproc_info, True, reason_message, opts
+            return _result(True, reason_message)
 
         opts["DATA.N_CLASSES"] = max(2, classes)
 
     elif specific_workflow in ["all", "INSTANCE_SEG"] and "instance-segmentation" in tags:
+        workflow_info["workflow_type"] = "INSTANCE_SEG"
         # Assumed it's F + C. This needs a more elaborated process. Still deciding this:
         # https://github.com/bioimage-io/spec-bioimage-io/issues/621
 
@@ -177,7 +201,7 @@ def check_bmz_model_compatibility(
             ):
                 channel_code = ["F", "C", "M"]
 
-            # Handle multihead
+            # Handle separated_class_channel
             assert isinstance(channels, list)
             if len(channels) == 2:
                 classes = channels[-1]
@@ -194,31 +218,38 @@ def check_bmz_model_compatibility(
                 channel_code = ["A"] # wild-whale
 
         opts["PROBLEM.INSTANCE_SEG.DATA_CHANNELS"] = channel_code
-        opts["PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS"] = [
-            1,
-        ] * channels
+        opts["PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS"] = (1, 1)
+        opts["PROBLEM.INSTANCE_SEG.DATA_CHANNELS_LOSSES"] = []
+        if any([x for x in ["F_pre", "F_post", "F_cleft"] if x in channel_code]):
+            opts["PROBLEM.INSTANCE_SEG.TYPE"] = "synapses"
+        else:
+            opts["PROBLEM.INSTANCE_SEG.TYPE"] = "regular"
+        opts["PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS"] = []
+        opts["PROBLEM.INSTANCE_SEG.WATERSHED.TOPOGRAPHIC_SURFACE_CHANNEL"] = ""
+        opts["PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS"] = []
+        opts["PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS"] = ""
+        opts["PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS"] = [{}]
+
         if classes != 2:
             opts["DATA.N_CLASSES"] = max(2, classes)
-        if channel_code == "A":
-            opts["LOSS.CLASS_REBALANCE"] = "auto"
 
     elif specific_workflow in ["all", "DETECTION"] and "detection" in tags:
-        pass
+        workflow_info["workflow_type"] = "DETECTION"
     elif specific_workflow in ["all", "DENOISING"] and "denoising" in tags:
-        pass
+        workflow_info["workflow_type"] = "DENOISING"
     elif specific_workflow in ["all", "SUPER_RESOLUTION"] and ("super-resolution" in tags or "superresolution" in tags):
-        pass
+        workflow_info["workflow_type"] = "SUPER_RESOLUTION"
     elif specific_workflow in ["all", "SELF_SUPERVISED"] and "self-supervision" in tags:
-        pass
+        workflow_info["workflow_type"] = "SELF_SUPERVISED"
     elif specific_workflow in ["all", "CLASSIFICATION"] and "classification" in tags:
-        pass
+        workflow_info["workflow_type"] = "CLASSIFICATION"
     elif specific_workflow in ["all", "IMAGE_TO_IMAGE"] and any(
         t in tags for t in ("pix2pix", "image-reconstruction", "image-to-image", "image-restoration")
     ):
-        pass
+        workflow_info["workflow_type"] = "IMAGE_TO_IMAGE"
     else:
         reason_message = f"[{specific_workflow}] no workflow tag recognized in {tags}.\n"
-        return preproc_info, True, reason_message, opts
+        return _result(True, reason_message)
 
     # --------- Axes checks ---------
     axes_order = g(inputs[0], "axes")
@@ -238,8 +269,11 @@ def check_bmz_model_compatibility(
                     _axes_order += "c"
                     input_image_shape += [1]
                 elif "id" in axis:
+                    if isinstance(axis.get("size"), int):
+                        input_image_shape += [axis["size"]]
+                    elif isinstance(axis.get("size"), dict) and "min" in axis["size"]:
+                        input_image_shape += [axis["size"]["min"]]
                     _axes_order += axis["id"]
-                    input_image_shape += [axis["size"]]
             elif "id" in axis:
                 if axis["id"] == "channel":
                     _axes_order += "c" 
@@ -252,40 +286,53 @@ def check_bmz_model_compatibility(
                     _axes_order += axis["id"]
         axes_order = _axes_order
     
+    for x in input_image_shape:
+        if not isinstance(x, int):
+            reason_message = f"[{specific_workflow}] couldn't extract input image shape from model RDF: {input_image_shape}\n"
+            return _result(True, reason_message)
+
     try:
         opts["DATA.PATCH_SIZE"] = tuple(input_image_shape[2:] + [input_image_shape[1]]) # (z) y x c
     except Exception:
         reason_message = f"[{specific_workflow}] couldn't extract input image shape from model RDF: {input_image_shape}\n"
-        return preproc_info, True, reason_message, opts
+        return _result(True, reason_message)
+
+    if axes_order == "bcyx":
+        workflow_info["ndim"] = "2D"
+    elif axes_order == "bczyx":
+        workflow_info["ndim"] = "3D"
+    if "DATA.N_CLASSES" in opts:
+        workflow_info["nclasses"] = opts["DATA.N_CLASSES"]
 
     if specific_dims == "2D":
         if axes_order != "bcyx":
             reason_message = f"[{specific_workflow}] In a 2D problem the axes need to be 'bcyx', found {axes_order}\n"
-            return preproc_info, True, reason_message, opts
+            return _result(True, reason_message)
         elif "2d" not in tags and "3d" in tags:
             reason_message = f"[{specific_workflow}] Selected model seems to not be 2D\n"
-            return preproc_info, True, reason_message, opts
+            return _result(True, reason_message)
     elif specific_dims == "3D":
         if axes_order != "bczyx":
             reason_message = f"[{specific_workflow}] In a 3D problem the axes need to be 'bczyx', found {axes_order}\n"
-            return preproc_info, True, reason_message, opts
+            return _result(True, reason_message)
         elif "3d" not in tags and "2d" in tags:
             reason_message = f"[{specific_workflow}] Selected model seems to not be 3D\n"
-            return preproc_info, True, reason_message, opts
+            return _result(True, reason_message)
     else:  # "all"
         if axes_order not in ["bcyx", "bczyx"]:
             reason_message = (
                 f"[{specific_workflow}] Accepting models only with ['bcyx', 'bczyx'] axis order, found {axes_order}\n"
             )
-            return preproc_info, True, reason_message, opts
+            return _result(True, reason_message)
 
     # --------- Preprocessing ---------
     if "preprocessing" in (inputs[0] or {}):
         preproc_info = inputs[0]["preprocessing"]
         key_to_find = "id" if model_version > Version("0.5.0") else "name"
+
         if isinstance(preproc_info, list):
             # remove ensure_dtype->float casts (BiaPy does it anyway)
-            new_preproc_info = []
+            filtered_preproc_info = []
             for preproc in preproc_info:
                 if key_to_find in preproc and not (
                     preproc[key_to_find] == "ensure_dtype"
@@ -293,84 +340,216 @@ def check_bmz_model_compatibility(
                     and "dtype" in preproc["kwargs"]
                     and "float" in str(preproc["kwargs"]["dtype"])
                 ):
-                    new_preproc_info.append(preproc)
-            preproc_info = new_preproc_info.copy()
+                    filtered_preproc_info.append(preproc)
 
-            if len(preproc_info) > 1:
-                reason_message = (
-                    f"[{specific_workflow}] More than one preprocessing from BMZ not implemented yet {axes_order}\n"
-                )
-                return preproc_info, True, reason_message, opts
-            elif len(preproc_info) == 1:
-                preproc_info = preproc_info[0]
-                if key_to_find in preproc_info:
-                    proc_id = preproc_info[key_to_find]
-                    if proc_id not in [
-                        "zero_mean_unit_variance",
-                        "fixed_zero_mean_unit_variance",
-                        "scale_range",
-                        "scale_linear",
-                    ]:
-                        reason_message = (
-                            f"[{specific_workflow}] Not recognized preprocessing found: {proc_id}\n"
-                        )
-                        return preproc_info, True, reason_message, opts
-                    else:
-                        # zero_mean_unit_variance / fixed_zero_mean_unit_variance -> zero_mean_unit_variance(mean,std)
-                        if proc_id in ["fixed_zero_mean_unit_variance", "zero_mean_unit_variance"]:
-                            if "kwargs" in preproc_info and "mean" in preproc_info["kwargs"]:
-                                mean = preproc_info["kwargs"]["mean"]
-                                std = preproc_info["kwargs"]["std"]
-                            elif "mean" in preproc_info:
-                                mean = preproc_info["mean"]
-                                std = preproc_info["std"]
-                            else:
-                                mean, std = -1.0, -1.0
-
-                            if isinstance(mean, list):
-                                mean = float(mean[-1])
-                            if isinstance(std, list):
-                                std = float(std[-1])
-                                
-                            opts["DATA.NORMALIZATION.TYPE"] = "zero_mean_unit_variance"
-                            opts["DATA.NORMALIZATION.ZERO_MEAN_UNIT_VAR.MEAN_VAL"] = mean
-                            opts["DATA.NORMALIZATION.ZERO_MEAN_UNIT_VAR.STD_VAL"] = std
-
-                        # scale_linear ~ div (gain not handled, same as original)
-                        elif proc_id == "scale_linear":
-                            opts["DATA.NORMALIZATION.TYPE"] = "div"
-
-                        # scale_range -> scale_range (+ optional PERC_CLIP)
-                        elif proc_id == "scale_range":
-                            opts["DATA.NORMALIZATION.TYPE"] = "scale_range"
-
-                            # Check if there is percentile clipping
-                            if (
-                                float(preproc_info["kwargs"]["min_percentile"]) != 0
-                                or float(preproc_info["kwargs"]["max_percentile"]) != 100
-                            ):
-                                opts["DATA.NORMALIZATION.PERC_CLIP.ENABLE"] = True
-                                opts["DATA.NORMALIZATION.PERC_CLIP.LOWER_PERC"] = float(
-                                    preproc_info["kwargs"]["min_percentile"]
-                                )
-                                opts["DATA.NORMALIZATION.PERC_CLIP.UPPER_PERC"] = float(
-                                    preproc_info["kwargs"]["max_percentile"]
-                                )
-                else:
+            for preproc_info in filtered_preproc_info:
+                if key_to_find not in preproc_info:
                     reason_message = (
                         f"[{specific_workflow}] Not recognized preprocessing structure found: {preproc_info}\n"
                     )
-                    return preproc_info, True, reason_message, opts
+                    return _result(True, reason_message)
+                
+                proc_id = preproc_info[key_to_find]
+                if proc_id not in [
+                    "zero_mean_unit_variance",
+                    "fixed_zero_mean_unit_variance",
+                    "scale_range",
+                    "scale_linear",
+                    "clip"
+                ]:
+                    reason_message = (
+                        f"[{specific_workflow}] Not recognized preprocessing found: {proc_id}\n"
+                    )
+                    return _result(True, reason_message)
+
+                # zero_mean_unit_variance / fixed_zero_mean_unit_variance -> zero_mean_unit_variance(mean,std)
+                if proc_id in ["fixed_zero_mean_unit_variance", "zero_mean_unit_variance"]:
+                    if "kwargs" in preproc_info and "mean" in preproc_info["kwargs"]:
+                        mean = preproc_info["kwargs"]["mean"]
+                        std = preproc_info["kwargs"]["std"]
+                    elif "mean" in preproc_info:
+                        mean = preproc_info["mean"]
+                        std = preproc_info["std"]
+                    else:
+                        mean, std = -1.0, -1.0
+
+                    if not isinstance(mean, list):
+                        mean = [float(mean)]
+                    if not isinstance(std, list):
+                        std = [float(std)]
+
+                    opts["DATA.NORMALIZATION.TYPE"] = "zero_mean_unit_variance"
+                    opts["DATA.NORMALIZATION.ZERO_MEAN_UNIT_VAR.MEAN_VAL"] = mean
+                    opts["DATA.NORMALIZATION.ZERO_MEAN_UNIT_VAR.STD_VAL"] = std
+
+                # scale_linear ~ div (gain not handled, same as original)
+                elif proc_id == "scale_linear":
+                    opts["DATA.NORMALIZATION.TYPE"] = "div"
+
+                # scale_range -> scale_range (+ optional PERC_CLIP)
+                elif proc_id == "scale_range":
+                    opts["DATA.NORMALIZATION.TYPE"] = "scale_range"
+                    min_percentile = float(preproc_info["kwargs"].get("min_percentile", 0))
+                    max_percentile = float(preproc_info["kwargs"].get("max_percentile", 100))
+                    # Check if there is percentile clipping
+                    if min_percentile != 0 or max_percentile != 100:
+                        opts["DATA.NORMALIZATION.PERC_CLIP.ENABLE"] = True
+                        opts["DATA.NORMALIZATION.PERC_CLIP.LOWER_PERC"] = min_percentile
+                        opts["DATA.NORMALIZATION.PERC_CLIP.UPPER_PERC"] = max_percentile
+                elif proc_id == "clip":
+                    opts["DATA.NORMALIZATION.PERC_CLIP.ENABLE"] = True
+                    min_percentile = float(preproc_info["kwargs"].get("min_percentile", 0))
+                    max_percentile = float(preproc_info["kwargs"].get("max_percentile", 100))
+                    max_value = float(preproc_info["kwargs"].get("max_value", -1))
+                    min_value = float(preproc_info["kwargs"].get("min_value", -1))
+                    if min_percentile != 0 or max_percentile != 100:
+                        opts["DATA.NORMALIZATION.PERC_CLIP.LOWER_PERC"] = min_percentile
+                        opts["DATA.NORMALIZATION.PERC_CLIP.UPPER_PERC"] = max_percentile
+                    elif min_value != -1 or max_value != -1:
+                        opts["DATA.NORMALIZATION.PERC_CLIP.LOWER_VALUE"] = min_value
+                        opts["DATA.NORMALIZATION.PERC_CLIP.UPPER_VALUE"] = max_value
 
     # --------- Post-processing in kwargs (unsupported) ---------
     if "postprocessing" in model_kwargs and model_kwargs["postprocessing"] is not None:
         reason_message = (
             f"[{specific_workflow}] Currently no postprocessing is supported. Found: {model_kwargs['postprocessing']}\n"
         )
-        return preproc_info, True, reason_message, opts
+        return _result(True, reason_message)
+
+    # --------- Dependency checks ---------
+    if "dependencies" in weights and weights["dependencies"] is not None:
+        try:
+            nickname = model_rdf.get("nickname") or model_rdf.get("alias")
+        except Exception:
+            return _result(True, f"[{specific_workflow}] Couldn't extract model nickname from model description for dependency check.\n")
+        try:
+            # perform_io_checks=False: we only need the parsed RDF metadata to inspect the
+            # dependencies field, not to download/hash weights, sample and test files, which
+            # are otherwise fetched eagerly and can be hundreds of MBs per model.
+            current_model = load_description(nickname, perform_io_checks=False)
+        except Exception:
+            return _result(True, f"[{specific_workflow}] Couldn't load model for dependency check.\n")
+        
+        ok, msg = True, ""
+        try:
+            deps = current_model.weights.pytorch_state_dict.dependencies
+            if deps is None:
+                # nothing to check
+                ok, msg = True, ""
+            elif hasattr(deps, "get_reader"):
+                # newer spec: dependencies is (or behaves like) a FileDescr
+                yaml_reader = deps.get_reader()
+                ok, msg = can_import_env_deps(yaml_reader)
+            else:
+                # v0.4 spec: deps is a Dependencies object with a .file FileSource_
+                # (see DependenciesNode.file in v0_4.py)
+                yaml_reader = download(deps.file)  # returns a file-like BytesReader
+                ok, msg = can_import_env_deps(yaml_reader) 
+        except Exception:            
+            return _result(True, f"[{specific_workflow}] Couldn't read dependencies file for dependency check.\n")
+        if not ok:
+            return _result(True, f"[{specific_workflow}] Model has incompatible dependencies: {msg}\n")
 
     # All checks passed
-    return preproc_info, False, "", opts
+    return _result(False)
+
+
+
+
+def can_import_env_deps(
+    yaml_reader,
+    import_overrides={'pyyaml': 'yaml', 'scikit-learn': 'sklearn'},
+    allowlist: Optional[Iterable[str]] = {"pytorch", "torch", "pytorch-cuda", "pytorch-mutex", "torchvision"},
+) -> Tuple[bool, str]:
+    """
+    Check if all dependencies listed in a conda-style environment yaml file can be imported.
+    Dependencies whose *distribution name* is in `allowlist` are ignored.
+
+    Parameters
+    ----------
+    yaml_reader : file-like object
+      Provides the content of a conda-style environment yaml file.
+
+    import_overrides : dict, optional
+      Map dist name -> import name (e.g. {'pyyaml': 'yaml'}).
+
+    allowlist : Iterable[str], optional
+      Dist names to ignore if they fail import/version checks (case-insensitive).
+      Example: {"pytorch", "torch", "pytorch-cuda"}
+
+    Returns
+    -------
+    ok : bool
+    msg : str
+    """
+    import_overrides = {k.lower(): v for k, v in (import_overrides or {}).items()}
+    allow = {a.lower() for a in (allowlist or [])}
+
+    raw = yaml_reader.read()
+    if isinstance(raw, bytes):
+        text = raw.decode("utf-8", errors="replace")
+    else:
+        text = str(raw)
+
+    doc = yaml.safe_load(text) or {}
+    deps = doc.get("dependencies", []) if isinstance(doc, dict) else []
+
+    failures = []
+
+    def normalize_dist(dist: str) -> str:
+        # normalize to compare in allowlist
+        return dist.strip().lower()
+
+    def is_allowed(dist: str) -> bool:
+        d = normalize_dist(dist)
+        return d in allow
+
+    def dist_to_import_name(dist: str) -> str:
+        # Most common mapping: "foo-bar" -> "foo_bar"
+        d = dist.lower()
+        return import_overrides.get(d, dist.replace("-", "_"))
+
+    def try_import(dist: str):
+        if is_allowed(dist):
+            return
+        mod = dist_to_import_name(dist)
+        try:
+            importlib.import_module(mod)
+        except Exception:
+            failures.append(dist)
+
+    # Check conda-style deps and pip deps
+    for item in deps:
+        if isinstance(item, str):
+            s = item.strip()
+            low = s.lower()
+
+            if low.startswith("python="):
+                m = re.match(r"python\s*=\s*(\d+)\.(\d+)", low)
+                if m:
+                    req_major, req_minor = int(m.group(1)), int(m.group(2))
+                    if (sys.version_info.major, sys.version_info.minor) != (req_major, req_minor):
+                        failures.append(f"python={req_major}.{req_minor}")
+
+            elif low == "pip":
+                continue
+
+            else:
+                # take dist name before any version/marker extras
+                dist = re.split(r"[<>=!~\[]", s, maxsplit=1)[0].strip()
+                if dist:
+                    try_import(dist)
+
+        elif isinstance(item, dict) and "pip" in item and isinstance(item["pip"], list):
+            for req in item["pip"]:
+                req = str(req).strip()
+                dist = re.split(r"[<>=!~\[]", req, maxsplit=1)[0].strip()
+                if dist:
+                    try_import(dist)
+
+    ok = len(failures) == 0
+    return ok, ("" if ok else ", ".join(failures))
+
 
 
 def get_cfg_key_value(obj, attr, *args):

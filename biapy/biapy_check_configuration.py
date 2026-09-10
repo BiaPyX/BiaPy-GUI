@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: 647b8d33618c82329fe96eb9b4935c04b68d1d62 (3.6.8)
+## Copied from BiaPy commit: aa7c08e32364eb0186c9006109c47b4b8570172d (3.7.1)
 """
 Configuration checking utilities for BiaPy.
 
@@ -9,10 +9,41 @@ post-processing options.
 """
 import os
 import re
-from typing import List, Tuple, Any, Dict
+import warnings
 import numpy as np
 import collections
-from biapy.biapy_aux_functions import os_walk_clean, get_checkpoint_path, check_value
+from typing import Dict, List, Tuple, Any
+from yacs.config import CfgNode as CN
+
+from biapy.biapy_aux_functions import get_checkpoint_path, os_walk_clean, check_value
+from biapy.biapy_config import Config
+
+#: Instance-seg channels whose GT is directional (flows, HoVer displacements, StarDist rays,
+#: affinities): warping moves them without re-orienting, so they must be regenerated after any
+#: geometry-resampling augmentation.
+_DIRECTIONAL_CHANNELS = frozenset({"Gv", "Gh", "Gz", "H", "V", "Z", "R", "A"})
+
+
+def instance_channel_needs_regen(ch: str, channel_extra_opts: Dict = {}) -> bool:
+    """Whether a channel's GT must be recomputed from the augmented labels (vs. warped).
+
+    Directional channels are always corrupted by warping; distance channels only when they keep
+    absolute (unnormalized) values, since per-cell normalization makes them scale-invariant.
+    Everything else (binary masks, per-instance-normalized ``D``, embedding labels) warps safely.
+    """
+    opts = (channel_extra_opts or {}).get(ch, {})
+    if ch in _DIRECTIONAL_CHANNELS:
+        return True
+    if ch == "Db":
+        return opts.get("val_type", "norm") in ("raw", "omnipose")
+    if ch in ("Dc", "Dn"):
+        return not opts.get("norm", True)
+    return False
+
+
+#: Allowed values for TEST.AUGMENTATION_GROUP.
+TTA_GROUPS = ("auto", "full", "flips", "none")
+
 
 def check_configuration(cfg, jobname, check_data_paths=True):
     """
@@ -46,7 +77,26 @@ def check_configuration(cfg, jobname, check_data_paths=True):
 
     if not cfg.TRAIN.ENABLE and not cfg.TEST.ENABLE:
         raise ValueError("At least one of 'TRAIN.ENABLE' or 'TEST.ENABLE' must be set to True")
-    
+
+    if cfg.TEST.ENABLE and len(cfg.TEST.EVAL_BORDER_CROP) > 0:
+        assert cfg.PROBLEM.TYPE != "CLASSIFICATION", (
+            "'TEST.EVAL_BORDER_CROP' is not applicable to 'CLASSIFICATION' (no spatial dimension "
+            "to crop); leave it empty"
+        )
+        assert all(isinstance(x, int) and x >= 0 for x in cfg.TEST.EVAL_BORDER_CROP), (
+            "'TEST.EVAL_BORDER_CROP' needs to be a list of non-negative integers"
+        )
+        assert len(cfg.TEST.EVAL_BORDER_CROP) == dim_count, (
+            "'TEST.EVAL_BORDER_CROP' needs to be of " f"{dim_count} dimension"
+        )
+
+    if cfg.DATA.RESOLUTION_NORM.ENABLE:
+        yx_target = cfg.DATA.RESOLUTION_NORM.TARGET_RESOLUTION[-2:]
+        assert len(cfg.DATA.RESOLUTION_NORM.TARGET_RESOLUTION) == 3 and all(v > 0 for v in yx_target), (
+            "'DATA.RESOLUTION_NORM.TARGET_RESOLUTION' must be a (z,y,x) tuple with positive y,x values "
+            "when 'DATA.RESOLUTION_NORM.ENABLE' is True"
+        )
+
     # Adjust overlap and padding in the default setting if it was not set
     opts = []
     if cfg.PROBLEM.NDIM == "3D":
@@ -73,53 +123,57 @@ def check_configuration(cfg, jobname, check_data_paths=True):
         assert len(cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS) > 0, "'PROBLEM.INSTANCE_SEG.DATA_CHANNELS' must be defined"
 
         channel_loss_set = False
-        # Define the custom order once
-        CUSTOM_ORDER = {
-            "F": 0, # Foreground
-            "B": 1, # Background
-            "C": 3, # contours
-            "H": 4, # Horizontal distance
-            "V": 5, # Vertical distance
-            "Z": 6, # Z distance
-            "Db": 7, # Distance (boundary)
-            "Dc": 8, # Distance (center/skeleton)
-            "Dn": 9, # Distance (neighbor)
-            "D": 10, # Distance (signed)
-            "T": 11, # Touching area
-            "A": 12,  # Affinities
-            "E": 13,  # Embeddings
-            "E_offset": 14,  # Embeddings (offsets)
-            "E_sigma": 15,  # Embeddings (sigma)
-            "E_seediness": 16,  # Embeddings (seediness)
-            "R": 17,  # Radial distances
-            "M": 18,  # Legacy mask (B + C)
-        }
-
-        def get_sort_key(weights):
-            """Return a sort function based on given weights dict"""
-            def sort_key(item):
-                return (weights.get(item, 99), item)  # alphabetically for "rest"
-            return sort_key
-        custom_sort_key = get_sort_key(CUSTOM_ORDER)
 
         original_instance_channels = cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS.copy()
-        sorted_original_instance_channels = sorted(cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS, key=custom_sort_key)
+        instance_channels = cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS.copy()
 
-        channels_provided = len(cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS)
+        # Drop any pre-existing 'I' channel: it is re-derived and re-appended last below. This function is
+        # idempotent (it may re-run on a cfg that already contains 'I', e.g. after loading a checkpoint),
+        # and 'I' must stay the last channel so the generator can drop it without shifting another index.
+        instance_channels = [x for x in instance_channels if x != "I"]
+
+        # 'I' never becomes an output channel, so it must not count towards the per-channel weights/losses.
+        channels_provided = len([x for x in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS if x != "I"])
         if cfg.PROBLEM.INSTANCE_SEG.TYPE == "regular" and cfg.DATA.N_CLASSES > 2:
             channels_provided += 1
         
+        # 'I' (raw labels) and 'We' (weight map) are auxiliary channels appended by this function, so they
+        # must not count as "another representation" when it re-runs on an already-checked cfg (e.g. after
+        # loading a checkpoint).
+        _user_instance_channels = set(cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS) - {"I", "We"}
         if "E" in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS:
-            assert set(cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS) == {"E"}, "'E' representation can only be used alone"
+            assert _user_instance_channels == {"E"}, "'E' representation can only be used alone"
         if "A" in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS:
-            assert set(cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS) == {"A"}, "'A' representation can only be used alone"
+            assert _user_instance_channels == {"A"}, "'A' representation can only be used alone"
 
         if cfg.PROBLEM.INSTANCE_SEG.TYPE == "regular":
+            # Pre-fill per-channel extra options only if the first details dict is empty
+            chs = cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
+            dst = cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS[0]
+
+            inst_creation_process = cfg.PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS
+            if cfg.PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS == "":
+                if "R" in instance_channels:
+                    opts.extend(["PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS", "stardist"])
+                    inst_creation_process = "stardist"
+                if "Gv" in instance_channels:
+                    opts.extend(["PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS", "gradient-flow"])
+                    inst_creation_process = "gradient-flow"
+                elif "E_offset" in instance_channels:
+                    opts.extend(["PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS", "embeddings"])
+                    inst_creation_process = "embeddings"
+                elif "A" in instance_channels:
+                    opts.extend(["PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS", "agglomeration"])
+                    inst_creation_process = "agglomeration"
+                else:
+                    opts.extend(["PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS", "watershed"])
+                    inst_creation_process = "watershed"
+
             # Set default values for some configurations that are more common, such as 'C', 'BC', 'BP', 'BD', 
             # 'BCM', 'BCD' and 'A'.
             seed_channels, seed_channels_thresh, growth_mask_channels, growth_mask_channel_ths = [], [], [], []
             topo_surface_ch = ""
-            if set(sorted_original_instance_channels) == {"C"}:
+            if set(instance_channels) == {"C"}:
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
                     seed_channels = ["C"]
                     seed_channels_thresh = ["auto"]
@@ -128,7 +182,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS == []:
                     growth_mask_channels = ["C"]
                     growth_mask_channel_ths = ["auto"]
-            elif set(sorted_original_instance_channels) == {"F"}:
+            elif set(instance_channels) == {"F"}:
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
                     seed_channels = ["F"]
                     seed_channels_thresh = ["auto"]
@@ -137,7 +191,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS == []:
                     growth_mask_channels = ["F"]
                     growth_mask_channel_ths = ["auto"]
-            elif set(sorted_original_instance_channels) == {"F", "C"}:
+            elif set(instance_channels) == {"F", "C"}:
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
                     seed_channels = ["F", "C"]
                     seed_channels_thresh = ["auto", "auto"]
@@ -146,7 +200,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS == []:
                     growth_mask_channels = ["F"]
                     growth_mask_channel_ths = ["auto"]
-            elif set(sorted_original_instance_channels) == {"F", "P"}:
+            elif set(instance_channels) == {"F", "P"}:
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
                     seed_channels = ["P"]
                     seed_channels_thresh = ["auto"]
@@ -155,7 +209,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS == []:
                     growth_mask_channels = ["F"]
                     growth_mask_channel_ths = ["auto"]
-            elif set(sorted_original_instance_channels) == {"F", "D"}:
+            elif set(instance_channels) == {"F", "D"}:
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
                     seed_channels = ["F", "D"]
                     seed_channels_thresh = ["auto", "auto"]
@@ -164,7 +218,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS == []:
                     growth_mask_channels = ["F"]
                     growth_mask_channel_ths = ["auto"]
-            elif set(sorted_original_instance_channels) == {"F", "Dc"}:
+            elif set(instance_channels) == {"F", "Dc"}:
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
                     seed_channels = ["F", "Dc"]
                     seed_channels_thresh = ["auto", "auto"]
@@ -173,7 +227,16 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS == []:
                     growth_mask_channels = ["F"]
                     growth_mask_channel_ths = ["auto"]
-            elif set(sorted_original_instance_channels) == {"F", "Dn"}:
+            elif set(instance_channels) == {"F", "Db"}:
+                if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
+                    seed_channels = ["F", "Db"]
+                    seed_channels_thresh = ["auto", "auto"]
+                if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.TOPOGRAPHIC_SURFACE_CHANNEL == "":
+                    topo_surface_ch = "F"
+                if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS == []:
+                    growth_mask_channels = ["F"]
+                    growth_mask_channel_ths = ["auto"]
+            elif set(instance_channels) == {"F", "Dn"}:
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
                     seed_channels = ["F", "Dn"]
                     seed_channels_thresh = ["auto", "auto"]
@@ -182,7 +245,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS == []:
                     growth_mask_channels = ["F"]
                     growth_mask_channel_ths = ["auto"]
-            elif set(sorted_original_instance_channels) == {"F", "P"}:
+            elif set(instance_channels) == {"F", "P"}:
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
                     seed_channels = ["F", "P"]
                     seed_channels_thresh = ["auto", "auto"]
@@ -191,43 +254,43 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS == []:
                     growth_mask_channels = ["F"]
                     growth_mask_channel_ths = ["auto"]
-            elif set(sorted_original_instance_channels) == {"F", "H", "V"}:
+            elif set(instance_channels) == {"F", "V", "H"}:
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
-                    seed_channels = ["F", "H", "V"]
+                    seed_channels = ["F", "V", "H"]
                     seed_channels_thresh = ["auto", "auto", "auto"]
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.TOPOGRAPHIC_SURFACE_CHANNEL == "":
                     topo_surface_ch = "F"
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS == []:
                     growth_mask_channels = ["F"]
                     growth_mask_channel_ths = ["auto"]
-            elif set(sorted_original_instance_channels) == {"Db", "H", "V"}:
+            elif set(instance_channels) == {"Db", "V", "H"}:
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
-                    seed_channels = ["Db", "H", "V"]
+                    seed_channels = ["Db", "V", "H"]
                     seed_channels_thresh = ["auto", "auto", "auto"]
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.TOPOGRAPHIC_SURFACE_CHANNEL == "":
                     topo_surface_ch = "Db"
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS == []:
                     growth_mask_channels = ["Db"]
                     growth_mask_channel_ths = ["auto"]
-            elif set(sorted_original_instance_channels) == {"Dc", "H", "V"}:
+            elif set(instance_channels) == {"Dc", "V", "H"}:
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
-                    seed_channels = ["Dc", "H", "V"]
+                    seed_channels = ["Dc", "V", "H"]
                     seed_channels_thresh = ["auto", "auto", "auto"]
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.TOPOGRAPHIC_SURFACE_CHANNEL == "":
                     topo_surface_ch = "Dc"
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS == []:
                     growth_mask_channels = ["Dc"]
                     growth_mask_channel_ths = ["auto"]
-            elif set(sorted_original_instance_channels) == {"D", "H", "V"}:
+            elif set(instance_channels) == {"D", "V", "H"}:
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
-                    seed_channels = ["D", "H", "V"]
+                    seed_channels = ["D", "V", "H"]
                     seed_channels_thresh = ["auto", "auto", "auto"]
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.TOPOGRAPHIC_SURFACE_CHANNEL == "":
                     topo_surface_ch = "D"
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS == []:
                     growth_mask_channels = ["D"]
                     growth_mask_channel_ths = ["auto"]
-            elif set(sorted_original_instance_channels) == {"F", "C", "M"}:
+            elif set(instance_channels) == {"F", "C", "M"}:
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
                     seed_channels = ["F", "C"]
                     seed_channels_thresh = ["auto", "auto"]
@@ -236,43 +299,43 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS == []:
                     growth_mask_channels = ["F"]
                     growth_mask_channel_ths = ["auto"]    
-            elif set(sorted_original_instance_channels) == {"F", "H", "V", "Z"}:
+            elif set(instance_channels) == {"F", "Z", "V", "H"}:
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
-                    seed_channels = ["F", "H", "V", "Z"]
+                    seed_channels = ["F", "Z", "V", "H"]
                     seed_channels_thresh = ["auto", "auto", "auto", "auto"]
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.TOPOGRAPHIC_SURFACE_CHANNEL == "":
                     topo_surface_ch = "F"
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS == []:
                     growth_mask_channels = ["F"]
                     growth_mask_channel_ths = ["auto"]
-            elif set(sorted_original_instance_channels) == {"Db", "H", "V", "Z"}:
+            elif set(instance_channels) == {"Db", "Z", "V", "H"}:
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
-                    seed_channels = ["Db", "H", "V", "Z"]
+                    seed_channels = ["Db", "Z", "V", "H"]
                     seed_channels_thresh = ["auto", "auto", "auto", "auto"]
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.TOPOGRAPHIC_SURFACE_CHANNEL == "":
                     topo_surface_ch = "Db"
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS == []:
                     growth_mask_channels = ["Db"]
                     growth_mask_channel_ths = ["auto"]
-            elif set(sorted_original_instance_channels) == {"Dc", "H", "V", "Z"}:
+            elif set(instance_channels) == {"Dc", "Z", "V", "H"}:
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
-                    seed_channels = ["Dc", "H", "V", "Z"]
+                    seed_channels = ["Dc", "Z", "V", "H"]
                     seed_channels_thresh = ["auto", "auto", "auto", "auto"]
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.TOPOGRAPHIC_SURFACE_CHANNEL == "":
                     topo_surface_ch = "Dc"
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS == []:
                     growth_mask_channels = ["Dc"]
                     growth_mask_channel_ths = ["auto"]
-            elif set(sorted_original_instance_channels) == {"D", "H", "V", "Z"}:
+            elif set(instance_channels) == {"D", "Z", "V", "H"}:
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
-                    seed_channels = ["D", "H", "V", "Z"]
+                    seed_channels = ["D", "Z", "V", "H"]
                     seed_channels_thresh = ["auto", "auto", "auto", "auto"]
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.TOPOGRAPHIC_SURFACE_CHANNEL == "":
                     topo_surface_ch = "D"
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS == []:
                     growth_mask_channels = ["D"]
                     growth_mask_channel_ths = ["auto"]
-            elif set(sorted_original_instance_channels) == {"F", "C", "Dc"}:
+            elif set(instance_channels) == {"F", "C", "Dc"}:
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
                     seed_channels = ["F", "C", "Dc"]
                     seed_channels_thresh = ["auto", "auto", "auto"]
@@ -281,7 +344,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS == []:
                     growth_mask_channels = ["F"]
                     growth_mask_channel_ths = ["auto"]
-            elif set(sorted_original_instance_channels) == {"F", "C", "Db"}:
+            elif set(instance_channels) == {"F", "C", "Db"}:
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
                     seed_channels = ["F", "C", "Db"]
                     seed_channels_thresh = ["auto", "auto", "auto"]
@@ -290,7 +353,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS == []:
                     growth_mask_channels = ["F"]
                     growth_mask_channel_ths = ["auto"]
-            elif set(sorted_original_instance_channels) == {"F", "C", "D"}:
+            elif set(instance_channels) == {"F", "C", "D"}:
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
                     seed_channels = ["F", "C", "D"]
                     seed_channels_thresh = ["auto", "auto", "auto"]
@@ -299,7 +362,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS == []:
                     growth_mask_channels = ["F"]
                     growth_mask_channel_ths = ["auto"]
-            elif set(sorted_original_instance_channels) == {"A"}:
+            elif set(instance_channels) == {"A"}:
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
                     seed_channels = ["A"]
                     seed_channels_thresh = ["auto"]
@@ -308,7 +371,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS == []:
                     growth_mask_channels = ["A"]
                     growth_mask_channel_ths = ["auto"]
-            elif set(sorted_original_instance_channels) == {"Dc"}:
+            elif set(instance_channels) == {"Dc"}:
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
                     seed_channels = ["Dc"]
                     seed_channels_thresh = ["auto"]
@@ -317,7 +380,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS == []:
                     growth_mask_channels = ["Dc"]
                     growth_mask_channel_ths = ["auto"]
-            elif set(sorted_original_instance_channels) == {"Db", "R"}:
+            elif set(instance_channels) == {"Db", "R"}:
                 if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
                     seed_channels = ["A"]
                     seed_channels_thresh = ["auto"]
@@ -329,15 +392,35 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 if cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS_LOSSES == []:
                     opts.extend(["PROBLEM.INSTANCE_SEG.DATA_CHANNELS_LOSSES", ['bce', 'l1']])
                     channel_loss_set = True
+                # StarDist's 'Db' is the object-probability head (BCE); its background (target 0) must be
+                # supervised, so it is not foreground-masked (unless the user sets mask_values explicitly).
+                if "mask_values" not in dst.get("Db", {}):
+                    dst.setdefault("Db", {})["mask_values"] = False
+            elif set(instance_channels) == {"Db"}:
+                if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS == []:
+                    seed_channels = ["Db"]
+                    seed_channels_thresh = ["auto"]
+                if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.TOPOGRAPHIC_SURFACE_CHANNEL == "":
+                    topo_surface_ch = "Db"
+                if cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS == []:
+                    growth_mask_channels = ["Db"]
+                    growth_mask_channel_ths = ["auto"]
+                if (
+                    cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS_LOSSES == [] 
+                    and "Db" in dst and dst["Db"].get("val_type", "norm") == "discretize"
+                ):
+                    opts.extend(["PROBLEM.INSTANCE_SEG.DATA_CHANNELS_LOSSES", ['ce']])
+                    channel_loss_set = True
 
-            if seed_channels == [] or seed_channels_thresh == [] or topo_surface_ch == "" or growth_mask_channels == [] or growth_mask_channel_ths == []:
-                print("WARNING: seems that the channels requested are custom so BiaPy did not fill some varibles by default.\n"
-                    "You will need to fill the following variables:\n"
-                    "    - PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS\n"
-                    "    - PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS_THRESH\n"
-                    "    - PROBLEM.INSTANCE_SEG.WATERSHED.TOPOGRAPHIC_SURFACE_CHANNEL\n"
-                    "    - PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS\n"
-                    "    - PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS_THRESH\n"
+            if inst_creation_process == "watershed" and (seed_channels == [] or seed_channels_thresh == [] or topo_surface_ch == "" or growth_mask_channels == [] or growth_mask_channel_ths == []):
+                warnings.warn(
+                    "Seems that the channels requested are custom so BiaPy did not fill some variables by default. "
+                    "You will need to fill the following variables: "
+                    "PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS, "
+                    "PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS_THRESH, "
+                    "PROBLEM.INSTANCE_SEG.WATERSHED.TOPOGRAPHIC_SURFACE_CHANNEL, "
+                    "PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS, "
+                    "PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS_THRESH."
                 )
             if seed_channels != []:
                 opts.extend(
@@ -346,7 +429,13 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                         seed_channels
                     ]
                 )
-            if seed_channels_thresh != []:
+            # The threshold defaults are derived inside the '*_CHANNELS == []' branches above, so they must
+            # not be pushed when the user set the thresholds explicitly (and left the channels to default),
+            # or their values would be silently replaced by "auto". Only the lengths are compared, and not
+            # whether the thresholds are set at all, because this function may run more than once over the
+            # same config (e.g. after merging a BMZ/checkpoint config, which can change the channels): the
+            # thresholds left by the previous run are stale and must be re-derived.
+            if seed_channels_thresh != [] and len(cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS_THRESH) != len(seed_channels):
                 opts.extend(
                     [
                         "PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS_THRESH",
@@ -367,7 +456,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                         growth_mask_channels
                     ]
                 )
-            if growth_mask_channel_ths != []:
+            if growth_mask_channel_ths != [] and len(cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS_THRESH) != len(growth_mask_channels):
                 opts.extend(
                     [
                         "PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS_THRESH",
@@ -375,13 +464,13 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                     ]
                 )
 
-            # Pre-fill per-channel extra options only if the first details dict is empty
-            chs = cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
-            dst = cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS[0]
-
             # F and B — foreground and background
             for ch in ("F", "B"):
                 if ch in chs:
+                    if ch in dst:
+                        assert [x for x in dst[ch].keys() if x not in ["erosion", "dilation"]] == [], (
+                            f"PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS for channel '{ch}' can only have 'erosion' and 'dilation' keys"
+                        )
                     dst[ch] = {
                         "erosion": dst.get(ch, {}).get("erosion", 0),
                         "dilation": dst.get(ch, {}).get("dilation", 0),
@@ -389,36 +478,126 @@ def check_configuration(cfg, jobname, check_data_paths=True):
 
             # P — point-like channel
             if "P" in chs:
+                if "P" in dst:
+                    assert [x for x in dst["P"].keys() if x not in ["type", "skeleton_mode", "dilation", "erosion"]] == [], (
+                        "PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS for channel 'P' can only have 'type', 'skeleton_mode', "
+                        "'dilation' and 'erosion' keys"
+                    )
+                    assert dst["P"].get("skeleton_mode", "full") in ["full", "main"], (
+                        "PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS for channel 'P': 'skeleton_mode' must be one of "
+                        "['full', 'main']"
+                    )
                 dst["P"] = {
                     "type": dst.get("P", {}).get("type", "centroid"),
+                    "skeleton_mode": dst.get("P", {}).get("skeleton_mode", "full"),
                     "dilation": dst.get("P", {}).get("dilation", 1),
                     "erosion": dst.get("P", {}).get("erosion", 0),
                 }
 
             # C — contours
             if "C" in chs:
+                if "C" in dst:
+                    assert [x for x in dst["C"].keys() if x not in ["mode"]] == [], (
+                        "PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS for channel 'C' can only have 'mode' key"
+                    )
                 dst["C"] = {
                     "mode": dst.get("C", {}).get("mode", "thick"),
                 }
 
-            # H / V / Z / Db — distance channels group
-            for ch in ("H", "V", "Z", "Db"):
-                if ch in chs:
-                    dst[ch] = {
-                        "norm": dst.get(ch, {}).get("norm", True),
-                        "mask_values": dst.get(ch, {}).get("mask_values", True),
-                    }
+            # H / V / Z — distance channels group (grouped: configure only one, settings propagate to all)
+            hvz_chs_present = [ch for ch in ("Z", "V", "H") if ch in chs]
+            if hvz_chs_present:
+                hvz_with_opts = [ch for ch in hvz_chs_present if ch in dst]
+                if len(hvz_with_opts) > 1:
+                    # Allow identical entries written by a previous check_configuration call (idempotency)
+                    _vals = [dst[ch] for ch in hvz_with_opts]
+                    if not all(v == _vals[0] for v in _vals[1:]):
+                        raise ValueError(
+                            f"'PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS' contains options for multiple channels of the "
+                            f"'H'/'V'/'Z' group {hvz_with_opts}. These channels always share the same settings — "
+                            f"configure only one of them and the values will be propagated to the rest."
+                        )
+                if hvz_with_opts:
+                    source_ch = hvz_with_opts[0]
+                    assert [k for k in dst[source_ch] if k not in ["norm", "act"]] == [], (
+                        f"PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS for channel '{source_ch}' can only have 'norm' and 'act' keys"
+                        " ('mask_values' is no longer accepted: foreground masking is derived automatically)"
+                    )
+                    norm = dst[source_ch].get("norm", True)
+                    act = dst[source_ch].get("act", "")
+                else:
+                    norm = True
+                    act = ""
+                # H/V/Z hold signed displacements (centroid = 0), so the activation must keep negative
+                # values: 'linear' by default, 'tanh' when the [-1, 1] range should be enforced.
+                if act == "":
+                    act = "linear"
+                resolved_hvz = {"norm": norm, "act": act}
+                for ch in hvz_chs_present:
+                    dst[ch] = resolved_hvz.copy()
 
+            # Gh / Gv / Gz — Gradient channels group (grouped: configure only one, settings propagate to all)
+            gflow_chs_present = [ch for ch in ("Gz", "Gv", "Gh") if ch in chs]
+            if gflow_chs_present:
+                gflow_with_opts = [ch for ch in gflow_chs_present if ch in dst]
+                if len(gflow_with_opts) > 1:
+                    # Allow identical entries written by a previous check_configuration call (idempotency)
+                    _vals = [dst[ch] for ch in gflow_with_opts]
+                    if not all(v == _vals[0] for v in _vals[1:]):
+                        raise ValueError(
+                            f"'PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS' contains options for multiple channels of the "
+                            f"'Gv'/'Gh'/'Gz' group {gflow_with_opts}. These channels always share the same settings — "
+                            f"configure only one of them and the values will be propagated to the rest."
+                        )
+                if gflow_with_opts:
+                    source_ch = gflow_with_opts[0]
+                    assert [k for k in dst[source_ch] if k not in ["gradient_type"]] == [], (
+                        f"PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS for channel '{source_ch}' can only have the 'gradient_type' key"
+                        " ('niter' is not configurable -- the heat-diffusion iteration count is always derived from each cell's"
+                        " size, as in Cellpose; 'mask_values' is not accepted -- foreground masking is derived from the flow magnitude)"
+                    )
+                    gradient_type = dst[source_ch].get("gradient_type", "cellpose")
+                else:
+                    gradient_type = "cellpose"
+                resolved_gflow = {"gradient_type": gradient_type}
+                for ch in gflow_chs_present:
+                    dst[ch] = resolved_gflow.copy()
+
+            # Db — boundary distance-to-boundary
+            if "Db" in chs:
+                if "Db" in dst:
+                    assert [x for x in dst["Db"].keys() if x not in ["val_type", "act", "mask_values"]] == [], (
+                        "PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS for channel 'Db' can only have 'val_type', 'act' and 'mask_values' keys"
+                    )
+                val_type = dst.get("Db", {}).get("val_type", 'norm')
+                act = dst.get("Db", {}).get("act", "")
+                if act == "" and val_type == "norm":
+                    act = "sigmoid"
+                # Omnipose trains the distance field over the whole image (background = -dist_bg), so the
+                # loss must not be masked to foreground; other Db modes keep the foreground-only default.
+                dst["Db"] = {
+                    "val_type": val_type,
+                    "act": act,
+                    "mask_values": dst.get("Db", {}).get("mask_values", val_type != "omnipose"),
+                }
             # Dc — center/skeleton distance-to-center
             if "Dc" in chs:
+                if "Dc" in dst:
+                    assert [x for x in dst["Dc"].keys() if x not in ["type", "norm", "mask_values"]] == [], (
+                        "PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS for channel 'Dc' can only have 'type', 'norm' and 'mask_values' keys"
+                    )
                 dst["Dc"] = {
-                    "type": dst.get("Dc", {}).get("mode", "centroid"),
+                    "type": dst.get("Dc", {}).get("type", "centroid"),
                     "norm": dst.get("Dc", {}).get("norm", True),
                     "mask_values": dst.get("Dc", {}).get("mask_values", True),
                 }
 
             # Dn — normal / inverted distances
             if "Dn" in chs:
+                if "Dn" in dst:
+                    assert [x for x in dst["Dn"].keys() if x not in ["closing_size", "norm", "mask_values", "decline_power"]] == [], (
+                        "PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS for channel 'Dn' can only have 'closing_size', 'norm', 'mask_values' and 'decline_power' keys"
+                    )
                 dst["Dn"] = {
                     "closing_size": dst.get("Dn", {}).get("closing_size", 3),
                     "norm": dst.get("Dn", {}).get("norm", True),
@@ -428,32 +607,44 @@ def check_configuration(cfg, jobname, check_data_paths=True):
 
             # D — signed distance (global)
             if "D" in chs:
+                if "D" in dst:
+                    assert [x for x in dst["D"].keys() if x not in ["act"]] == [], (
+                        "PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS for channel 'D' can only have 'act' key"
+                    )
                 dst["D"] = {
-                    "alpha": dst.get("D", {}).get("alpha", 8),
-                    "beta": dst.get("D", {}).get("beta", 50),
                     "act": dst.get("D", {}).get("act", "tanh"),
-                    "norm": dst.get("D", {}).get("norm", True),
                 }
 
             # R — star-convex/radial distances
             if "R" in chs:
+                if "R" in dst:
+                    assert [x for x in dst["R"].keys() if x not in ["nrays", "mask_values"]] == [], (
+                        "PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS for channel 'R' can only have 'nrays' and 'mask_values' keys"
+                    )
                 nrays = dst.get("R", {}).get("nrays", "")
                 if nrays == "":
                     nrays = 32 if cfg.PROBLEM.NDIM == "2D" else 96
                 dst["R"] = {
                     "nrays": nrays,
-                    "norm": dst.get("R", {}).get("norm", True),
                     "mask_values": dst.get("R", {}).get("mask_values", True),
                 }
 
             # T — touching thickness
             if "T" in chs:
+                if "T" in dst:
+                    assert [x for x in dst["T"].keys() if x not in ["thickness"]] == [], (
+                        "PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS for channel 'T' can only have 'thickness' key"
+                    )
                 dst["T"] = {
                     "thickness": dst.get("T", {}).get("thickness", 2),
                 }
 
             # A — pixel/voxel affinities (fixed: removed invalid 'mode')
             if "A" in chs:
+                if "A" in dst:
+                    assert [x for x in dst["A"].keys() if x not in ["z_affinities", "y_affinities", "x_affinities", "widen_borders"]] == [], (
+                        "PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS for channel 'A' can only have 'z_affinities', 'y_affinities', 'x_affinities' and 'widen_borders' keys"
+                    )
                 dst["A"] = {
                     "z_affinities": dst.get("A", {}).get("z_affinities", [1]),
                     "y_affinities": dst.get("A", {}).get("y_affinities", [1]),
@@ -469,10 +660,14 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 # }
 
             # E — learned per-pixel features
-            if "E" in chs:
+            if "E_offset" in chs:
+                if "E_offset" in dst:
+                    assert [x for x in dst["E_offset"].keys() if x not in ["center_mode", "medoid_max_points"]] == [], (
+                        "PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS for channel 'E_offset' can only have 'center_mode' and 'medoid_max_points' keys"
+                    )
                 dst["E_offset"] = {
-                    "center_mode": dst.get("E", {}).get("center_mode", "medoid"),
-                    "medoid_max_points": dst.get("E", {}).get("medoid_max_points", 10000),
+                    "center_mode": dst.get("E_offset", {}).get("center_mode", "medoid"),
+                    "medoid_max_points": dst.get("E_offset", {}).get("medoid_max_points", 10000),
                 }
                 dst["E_sigma"] = {}
                 dst["E_seediness"] = {}
@@ -485,82 +680,165 @@ def check_configuration(cfg, jobname, check_data_paths=True):
 
             # Add extra weight map channel if requested
             assert cfg.PROBLEM.INSTANCE_SEG.BORDER_EXTRA_WEIGHTS in ["unet-like", ""], "'PROBLEM.INSTANCE_SEG.BORDER_EXTRA_WEIGHTS' not in ['unet-like', '']"
-            if cfg.PROBLEM.INSTANCE_SEG.BORDER_EXTRA_WEIGHTS == "unet-like" and "We" not in sorted_original_instance_channels:
-                sorted_original_instance_channels.append("We")
+            if cfg.PROBLEM.INSTANCE_SEG.BORDER_EXTRA_WEIGHTS == "unet-like" and "We" not in instance_channels:
+                instance_channels.append("We")
+
+            # Carry the raw instance labels as an 'I' channel whenever a geometry-derived target must be
+            # recomputed from the augmented labels (see instance_channel_needs_regen): directional
+            # (flows Gv/Gh/Gz, HoVer H/V/Z, rays R, affinities A) or absolute-scale (raw/omnipose Db,
+            # unnormalized Dc/Dn) channels are corrupted by warping. 'I' is appended last (dropped before
+            # the model, carries no loss) so removing it shifts no other index.
+            _extra_opts = cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS[0]
+            if any(instance_channel_needs_regen(ch, _extra_opts) for ch in instance_channels) \
+                    and "I" not in instance_channels:
+                instance_channels.append("I")
 
             # Create unique folder names for instance segmentation channel masks
             # depending on the channels and their options
             suffix = ""
             dst = cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS[0]
-            for ch in sorted_original_instance_channels:
+            for ch in instance_channels:
                 suffix += f"_{ch}"
                 for entry in dst.get(ch, {}):
                     eval = str(dst[ch][entry]).replace(" ", "").replace("[", "").replace("]", "").replace("(", "").replace(")", "").replace(",", "-")
                     suffix += f".{entry}-{eval}"
-            train_channel_mask_dir = cfg.DATA.TRAIN.INSTANCE_CHANNELS_MASK_DIR + suffix
+            # Derive the base directory from GT_PATH/PATH (the same source update_dependencies uses)
+            # instead of INSTANCE_CHANNELS_MASK_DIR, which may already carry the suffix from a previous
+            # check_configuration call. This keeps the appending idempotent when check_configuration
+            # runs more than once on the same cfg (e.g. after loading a checkpoint or a BMZ model).
+            train_base = cfg.DATA.TRAIN.PATH if cfg.DATA.TRAIN.INPUT_ZARR_MULTIPLE_DATA else cfg.DATA.TRAIN.GT_PATH
+            val_base = cfg.DATA.VAL.PATH if cfg.DATA.VAL.INPUT_ZARR_MULTIPLE_DATA else cfg.DATA.VAL.GT_PATH
+            test_base = cfg.DATA.TEST.PATH if cfg.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA else cfg.DATA.TEST.GT_PATH
+            train_channel_mask_dir = train_base + suffix
             opts.extend(["DATA.TRAIN.INSTANCE_CHANNELS_MASK_DIR", train_channel_mask_dir])
-            val_channel_mask_dir = cfg.DATA.VAL.INSTANCE_CHANNELS_MASK_DIR + suffix
+            val_channel_mask_dir = val_base + suffix
             opts.extend(["DATA.VAL.INSTANCE_CHANNELS_MASK_DIR", val_channel_mask_dir])
-            test_channel_mask_dir = cfg.DATA.TEST.INSTANCE_CHANNELS_MASK_DIR + suffix
+            test_channel_mask_dir = test_base + suffix
             opts.extend(["DATA.TEST.INSTANCE_CHANNELS_MASK_DIR", test_channel_mask_dir])
 
             replace_channels = False
-            if sorted_original_instance_channels != original_instance_channels:
+            if instance_channels != original_instance_channels:
                 replace_channels = True
-                print("Reordered instance segmentation data channels. Before: ", original_instance_channels, " . After: ", sorted_original_instance_channels)
+                print("Updated instance segmentation data channels (added 'We'/'I'). Before: ", original_instance_channels, " . After: ", instance_channels)
             
-            if "E" in sorted_original_instance_channels and cfg.PROBLEM.INSTANCE_SEG.TYPE == "regular":
+            if "E" in instance_channels and cfg.PROBLEM.INSTANCE_SEG.TYPE == "regular":
                 replace_channels = True
-                idx = sorted_original_instance_channels.index("E")
-                sorted_original_instance_channels[idx+1:idx+1] = ["E_offset", "E_sigma", "E_seediness"] 
-                sorted_original_instance_channels.remove("E")
+                idx = instance_channels.index("E")
+                instance_channels[idx+1:idx+1] = ["E_offset", "E_sigma", "E_seediness"] 
+                instance_channels.remove("E")
                 print("Expanded 'E' channel into 'E_offset', 'E_sigma' and 'E_seediness' channels.")
 
             if replace_channels:
-                opts.extend([ "PROBLEM.INSTANCE_SEG.DATA_CHANNELS", sorted_original_instance_channels])
+                opts.extend([ "PROBLEM.INSTANCE_SEG.DATA_CHANNELS", instance_channels])
             
-            if cfg.PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS == "":
-                if "R" in sorted_original_instance_channels:
-                    opts.extend(["PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS", "stardist"])
-                elif "E_offset" in sorted_original_instance_channels:
-                    opts.extend(["PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS", "embeddings"])
-                else:
-                    opts.extend(["PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS", "watershed"])
+            if "Gv" in instance_channels:
+                gradient_type = dst.get("Gv", {}).get("gradient_type", "cellpose")
+                # The flow gradient strategy selects both the GT generation and the post-processing
+                # (Cellpose vs Omnipose). Omnipose reconstruction needs the predicted distance field, so a
+                # 'Db' channel built with val_type 'omnipose' must accompany omnipose flows.
+                if gradient_type == "omnipose":
+                    if "Db" not in instance_channels or dst.get("Db", {}).get("val_type") != "omnipose":
+                        raise ValueError(
+                            "Omnipose flows (DATA_CHANNELS_EXTRA_OPTS[0]['Gv']['gradient_type'] == 'omnipose') require a "
+                            "'Db' distance channel with DATA_CHANNELS_EXTRA_OPTS[0]['Db']['val_type'] == 'omnipose'."
+                        )
 
         else: # synapses
+            chs = cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS
+            dst = cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS[0]
+
+            # F and B — foreground and background
+            for ch in ("F_pre", "F_post", "F_cleft"):
+                if ch in chs:
+                    if ch in dst:
+                        assert [x for x in dst[ch].keys() if x not in ["dilation"]] == [], (
+                            "PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS for channel '{}' can only have 'dilation' key not {}".format(ch, [x for x in dst[ch].keys() if x not in ["dilation"]])
+                        )
+                    dst[ch] = {
+                        "dilation": dst.get(ch, {}).get("dilation", [1, 3, 3]),
+                    }
+
+            # H / V / Z — distance channels group
+            # Their values need to be consistent to be able to create unique folder names for the channel masks and to know whether to apply normalization by default or not, so we check them all together here.
+            found_keys = {"norm": None, "act": None, "dilation": None}
+            default_keys = {"norm": False, "act": "", "dilation": [3, 25, 25]}
+            for ch in ("Z", "V", "H"):
+                for key in found_keys.keys():
+                    if ch in chs and ch in dst and key in dst[ch]:
+                        if found_keys[key] is not None and dst[ch][key] != found_keys[key]:
+                            raise ValueError(f"If channel '{ch}' has '{key}' set to {dst[ch][key]}, all other distance channels need to have the same value for '{key}' (currently {found_keys[key]})")
+                        else:
+                            found_keys[key] = dst[ch][key]
+
+            # Set all the values to the same for all distance channels
+            for ch in ("Z", "V", "H"):
+                dst[ch] = {
+                    "norm": found_keys["norm"] if found_keys["norm"] is not None else default_keys["norm"],
+                    "act": found_keys["act"] if found_keys["act"] is not None else default_keys["act"],
+                    "dilation": found_keys["dilation"] if found_keys["dilation"] is not None else default_keys["dilation"],
+                }
+
             # Create unique folder names for instance segmentation channel masks
             # depending on the channels and their options
-            suffix = "_postDilation-"
-            suffix += "".join(str(cfg.PROBLEM.INSTANCE_SEG.SYNAPSES.POSTSITE_DILATION)[1:-1].replace(",","")).replace(" ","_")
-            suffix += "_postDilationDistance-"
-            suffix += "".join(str(cfg.PROBLEM.INSTANCE_SEG.SYNAPSES.POSTSITE_DILATION_DISTANCE_CHANNELS)[1:-1].replace(",","")).replace(" ","_")
+            suffix = ""
+            dst = cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS[0]
+            for ch in [x for x in instance_channels if x in ["F_pre", "F_post", "F_cleft", "Z"]]:
+                suffix += f"_{ch}" if ch != "Z" else "_ZVH"
+                for entry in dst.get(ch, {}):
+                    # These do not affect the values in the channel masks so we ignore them for the unique folder name creation
+                    if entry not in ["act", "mask_values"]: 
+                        eval = str(dst[ch][entry]).replace(" ", "").replace("[", "").replace("]", "").replace("(", "").replace(")", "").replace(",", "-")
+                        suffix += f".{entry}-{eval}"
 
-            train_channel_mask_dir = cfg.DATA.TRAIN.INSTANCE_CHANNELS_MASK_DIR + suffix
+            # Derive the base directory from GT_PATH/PATH (the same source update_dependencies uses)
+            # instead of INSTANCE_CHANNELS_MASK_DIR, which may already carry the suffix from a previous
+            # check_configuration call. This keeps the appending idempotent when check_configuration
+            # runs more than once on the same cfg (e.g. after loading a checkpoint or a BMZ model).
+            train_base = cfg.DATA.TRAIN.PATH if cfg.DATA.TRAIN.INPUT_ZARR_MULTIPLE_DATA else cfg.DATA.TRAIN.GT_PATH
+            val_base = cfg.DATA.VAL.PATH if cfg.DATA.VAL.INPUT_ZARR_MULTIPLE_DATA else cfg.DATA.VAL.GT_PATH
+            test_base = cfg.DATA.TEST.PATH if cfg.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA else cfg.DATA.TEST.GT_PATH
+            train_channel_mask_dir = train_base + suffix
             opts.extend(["DATA.TRAIN.INSTANCE_CHANNELS_MASK_DIR", train_channel_mask_dir])
-            val_channel_mask_dir = cfg.DATA.VAL.INSTANCE_CHANNELS_MASK_DIR + suffix
+            val_channel_mask_dir = val_base + suffix
             opts.extend(["DATA.VAL.INSTANCE_CHANNELS_MASK_DIR", val_channel_mask_dir])
-            test_channel_mask_dir = cfg.DATA.TEST.INSTANCE_CHANNELS_MASK_DIR + suffix
+            test_channel_mask_dir = test_base + suffix
             opts.extend(["DATA.TEST.INSTANCE_CHANNELS_MASK_DIR", test_channel_mask_dir])
+
+        effective_channels_per_head = list(cfg.PROBLEM.INSTANCE_SEG.CHANNELS_PER_HEAD_INFO)
+
+        if cfg.PROBLEM.INSTANCE_SEG.SEPARATED_DECODERS_PER_HEAD and len(effective_channels_per_head) < 2 and len(instance_channels) > 1:
+            raise ValueError(
+                f"'PROBLEM.INSTANCE_SEG.SEPARATED_DECODERS_PER_HEAD' is True but "
+                f"'PROBLEM.INSTANCE_SEG.CHANNELS_PER_HEAD_INFO' has only {len(effective_channels_per_head)} "
+                f"entr{'y' if len(effective_channels_per_head) == 1 else 'ies'}, so no decoder separation can occur. "
+                f"Set 'PROBLEM.INSTANCE_SEG.CHANNELS_PER_HEAD_INFO' to a list with at least 2 entries whose values "
+                f"sum to the number of output channels ({len(instance_channels)} or more if any "
+                f"channel expands, e.g. 'R' into rays or 'E_*' into per-axis offsets/sigmas)."
+            )
 
         if cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS_LOSSES == []:
             if not channel_loss_set:
                 losses = []
-                for ch in sorted_original_instance_channels:
-                    if ch in ["F", "B", "C", "P", "T", "A", "M", "F_pre", "F_post"]:
+                for ch in instance_channels:
+                    if ch in ["F", "B", "C", "P", "T", "A", "M", "F_pre", "F_post", "F_cleft"]:
                         losses.append("bce")
-                    elif ch in ["H", "V", "Z", "Db", "Dc", "Dn", "D", "R"]:
+                    elif ch in ["Gv", "Gh", "Gz", "D"]:
+                        losses.append("mse")
+                    elif ch in ["Z", "V", "H", "Db", "Dc", "Dn", "R"]:
                         losses.append("l1")
                     elif ch in ["E_offset", "E_sigma", "E_seediness"]:
                         losses.append("embedseg")
                     elif ch in ["We"]:
                         continue  # no loss for extra weight map
+                    elif ch in ["I"]:
+                        continue  # no loss: dropped by the generator before the model
                     else:
                         raise ValueError(f"Unknown instance segmentation data channel '{ch}'")
 
                 if len(losses) > 0:
                     opts.extend(["PROBLEM.INSTANCE_SEG.DATA_CHANNELS_LOSSES", losses])
         else:
-            assert len(cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS_LOSSES) == len([x for x in sorted_original_instance_channels if x != "We"]), "'PROBLEM.INSTANCE_SEG.DATA_CHANNELS_LOSSES' must have the same length as 'PROBLEM.INSTANCE_SEG.DATA_CHANNELS'"
+            assert len(cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS_LOSSES) == len([x for x in instance_channels if x not in ("We", "I")]), "'PROBLEM.INSTANCE_SEG.DATA_CHANNELS_LOSSES' must have the same length as 'PROBLEM.INSTANCE_SEG.DATA_CHANNELS'"
             for loss in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS_LOSSES:
                 assert loss in ["bce", "ce", "mse", "l1", "mae", "embedseg"], "'PROBLEM.INSTANCE_SEG.DATA_CHANNELS_LOSSES' can only have values in ['bce', 'mse', 'l1', 'ce', 'embedseg']"
 
@@ -1022,14 +1300,14 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             opts.extend(["TEST.METRICS", metric_default_list])
 
         assert len(cfg.TRAIN.METRICS) == 0 or all(
-            [True if x.lower() in ["psnr", "mae", "mse", "ssim"] else False for x in cfg.TRAIN.METRICS]
-        ), f"'TRAIN.METRICS' options are ['psnr', 'mae', 'mse', 'ssim'] in {cfg.PROBLEM.TYPE} workflow"
+            [True if x.lower() in ["psnr", "mae", "mse", "ssim", "pcc"] else False for x in cfg.TRAIN.METRICS]
+        ), f"'TRAIN.METRICS' options are ['psnr', 'mae', 'mse', 'ssim', 'pcc'] in {cfg.PROBLEM.TYPE} workflow"
         assert len(cfg.TEST.METRICS) == 0 or all(
             [
-                True if x.lower() in ["psnr", "mae", "mse", "ssim", "fid", "is", "lpips"] else False
+                True if x.lower() in ["psnr", "mae", "mse", "ssim", "fid", "is", "lpips", "pcc"] else False
                 for x in cfg.TEST.METRICS
             ]
-        ), f"'TEST.METRICS' options are ['psnr', 'mae', 'mse', 'ssim', 'fid', 'is', 'lpips'] in {cfg.PROBLEM.TYPE} workflow"
+        ), f"'TEST.METRICS' options are ['psnr', 'mae', 'mse', 'ssim', 'fid', 'is', 'lpips', 'pcc'] in {cfg.PROBLEM.TYPE} workflow"
 
         if any([True for x in cfg.TEST.METRICS if x.lower() in ["is", "fid", "lpips"]]):
             if cfg.PROBLEM.NDIM == "3D":
@@ -1063,77 +1341,119 @@ def check_configuration(cfg, jobname, check_data_paths=True):
         if "top-5-accuracy" in [x.lower() for x in cfg.TRAIN.METRICS] and cfg.DATA.N_CLASSES < 5:
             raise ValueError("'top-5-accuracy' can only be used when DATA.N_CLASSES >= 5")
 
-    loss = ""
-    if cfg.PROBLEM.TYPE in [
-        "SEMANTIC_SEG",
-        "DETECTION",
-    ]:
-        loss = "CE" if cfg.LOSS.TYPE == "" else cfg.LOSS.TYPE
-        assert loss in [
-            "CE",
-            "DICE",
-            "W_CE_DICE",
-        ], "LOSS.TYPE not in ['CE', 'DICE', 'W_CE_DICE']"
+    # 'loss'/'weights' below are LOSS.TYPE/LOSS.WEIGHTS resolved to per-workflow defaults,
+    # uppercased. Old-style combo strings are upgraded to list form earlier, in
+    # '_convert_old_loss_type_to_list'.
+    _continuous_image_names = {
+        "MAE", "MSE", "PCC", "SSIM", "CHARBONNIER", "VGG", "LPIPS", "LAPLACIAN", "FFT", "RFFT",
+    }
+    loss: List[str] = []
+    weights: List[float] = []
+    if cfg.PROBLEM.TYPE == "SEMANTIC_SEG":
+        loss = [str(n).upper() for n in cfg.LOSS.TYPE] or ["CE"]
+        weights = list(cfg.LOSS.WEIGHTS) or [1.0] * len(loss)
+        assert len(loss) == len(weights), (
+            f"'LOSS.TYPE' and 'LOSS.WEIGHTS' must have the same length, got {len(loss)} vs {len(weights)}"
+        )
+        assert (set(loss) in ({"CE"}, {"DICE"}, {"CE", "DICE"})), (
+            f"LOSS.TYPE for SEMANTIC_SEG must be ['CE'], ['DICE'], or ['DICE', 'CE'] together, got {loss}"
+        )
 
         if cfg.DATA.N_CLASSES > 2:
-            if loss != "CE":
-                raise ValueError("'DATA.N_CLASSES' are only used with 'CE' loss and not with {}".format(loss))
-            if cfg.LOSS.CLASS_REBALANCE == "auto":
+            if "CE" not in loss:
                 raise ValueError(
-                    "'LOSS.CLASS_REBALANCE' can not be set to 'auto' when 'DATA.N_CLASSES' > 2 as it is only valid for binary problems. " \
-                    "Use 'manual' and 'LOSS.CLASS_WEIGHTS' if you really want to rebalance classes. If not, set 'LOSS.CLASS_REBALANCE' to 'none'."
+                    "'DATA.N_CLASSES' > 2 requires 'CE' to be one of LOSS.TYPE's entries, not {}".format(loss)
                 )
-        if loss == "W_CE_DICE":
-            assert (
-                len(cfg.LOSS.WEIGHTS) == 2
-            ), "'LOSS.WEIGHTS' needs to be a list of two floats when using LOSS.TYPE == 'W_CE_DICE'"
-            assert sum(cfg.LOSS.WEIGHTS) == 1, "'LOSS.WEIGHTS' values need to sum 1"
+
+            if cfg.LOSS.CLASS_WEIGHTS != [] and len(cfg.LOSS.CLASS_WEIGHTS) != cfg.DATA.N_CLASSES:
+                raise ValueError("'LOSS.CLASS_WEIGHTS' must be a list of length equal to the number of classes")
+    elif cfg.PROBLEM.TYPE == "DETECTION":
+        loss, weights = ["CE"], [1.0]
+        if cfg.DATA.N_CLASSES > 2:
+            if cfg.LOSS.CLASS_WEIGHTS != [] and len(cfg.LOSS.CLASS_WEIGHTS) != cfg.DATA.N_CLASSES:
+                raise ValueError("'LOSS.CLASS_WEIGHTS' must be a list of length equal to the number of classes")
+
+    elif cfg.PROBLEM.TYPE == "IMAGE_TO_IMAGE" and cfg.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.ENABLE:
+        loss = [str(n).upper() for n in cfg.LOSS.TYPE]
+        weights = list(cfg.LOSS.WEIGHTS)
+        assert len(loss) == len(weights), (
+            f"'LOSS.TYPE' and 'LOSS.WEIGHTS' must have the same length, got {len(loss)} vs {len(weights)}"
+        )
+        assert loss and set(loss) <= {"BCE", "MALIS", "CLDICE", "SVOX"}, (
+            "LOSS.TYPE must only contain 'BCE'/'MALIS'/'CLDICE'/'SVOX' when "
+            f"PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.ENABLE is True, got {loss}"
+        )
+        assert any(w > 0 for w in weights), (
+            "'LOSS.WEIGHTS' must have at least one positive entry when "
+            "PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.ENABLE is True"
+        )
+        assert cfg.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.POSTPROCESS.METHOD in ["watershed", "agglomeration"], (
+            "PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.POSTPROCESS.METHOD must be 'watershed' or "
+            "'agglomeration'"
+        )
+
+        # Carry the raw instance labels as an 'I' channel whenever a geometry-derived target (e.g. 'A',
+        # the affinities) must be recomputed from the augmented labels instead of warped -- same mechanism
+        # and same reasoning as INSTANCE_SEG's own 'I' auto-add above.
+        mr_channels = list(cfg.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.DATA_CHANNELS)
+        _mr_extra_opts = cfg.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.DATA_CHANNELS_EXTRA_OPTS[0]
+        if any(instance_channel_needs_regen(ch, _mr_extra_opts) for ch in mr_channels) and "I" not in mr_channels:
+            mr_channels.append("I")
+            opts.extend(["PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.DATA_CHANNELS", mr_channels])
     elif cfg.PROBLEM.TYPE in [
         "SUPER_RESOLUTION",
         "SELF_SUPERVISED",
-        "IMAGE_TO_IMAGE",
     ]:
-        loss = "MAE" if cfg.LOSS.TYPE == "" else cfg.LOSS.TYPE
-        assert loss in [
-            "MAE",
-            "MSE",
-            "SSIM",
-            "W_MAE_SSIM",
-            "W_MSE_SSIM",
-        ], "LOSS.TYPE not in ['MAE', 'MSE', 'SSIM', 'W_MAE_SSIM', 'W_MSE_SSIM']"
-        if loss in ["W_MAE_SSIM", "W_MSE_SSIM"]:
-            assert (
-                len(cfg.LOSS.WEIGHTS) == 2
-            ), "'LOSS.WEIGHTS' needs to be a list of two floats when using LOSS.TYPE is in ['W_MAE_SSIM', 'W_MSE_SSIM']"
-            assert sum(cfg.LOSS.WEIGHTS) == 1, "'LOSS.WEIGHTS' values need to sum 1"
-    elif cfg.PROBLEM.TYPE == "INSTANCE_SEG":
-        assert cfg.LOSS.CLASS_REBALANCE in [
-        "none",
-        "auto",
-    ], "LOSS.CLASS_REBALANCE not in ['none', 'auto'] for INSTANCE_SEG workflow"
+        loss = [str(n).upper() for n in cfg.LOSS.TYPE] or ["MAE"]
+        weights = list(cfg.LOSS.WEIGHTS) or [1.0] * len(loss)
+        assert len(loss) == len(weights), (
+            f"'LOSS.TYPE' and 'LOSS.WEIGHTS' must have the same length, got {len(loss)} vs {len(weights)}"
+        )
+        assert set(loss) <= _continuous_image_names, (
+            f"LOSS.TYPE for {cfg.PROBLEM.TYPE} must only contain {sorted(_continuous_image_names)}, got {loss}"
+        )
+    elif cfg.PROBLEM.TYPE == "IMAGE_TO_IMAGE":
+        loss = [str(n).upper() for n in cfg.LOSS.TYPE] or ["MAE"]
+        weights = list(cfg.LOSS.WEIGHTS) or [1.0] * len(loss)
+        assert len(loss) == len(weights), (
+            f"'LOSS.TYPE' and 'LOSS.WEIGHTS' must have the same length, got {len(loss)} vs {len(weights)}"
+        )
+        assert set(loss) <= (_continuous_image_names | {"BCE", "HINGE"}), (
+            f"LOSS.TYPE for IMAGE_TO_IMAGE must only contain {sorted(_continuous_image_names | {'BCE', 'HINGE'})}, "
+            f"got {loss}"
+        )
     elif cfg.PROBLEM.TYPE == "DENOISING":
-        loss = "MSE" if cfg.LOSS.TYPE == "" else cfg.LOSS.TYPE
-        assert loss == "MSE", "LOSS.TYPE must be 'MSE'"
+        loss = [str(n).upper() for n in cfg.LOSS.TYPE] or ["MSE"]
+        weights = list(cfg.LOSS.WEIGHTS) or [1.0] * len(loss)
+        assert len(loss) == len(weights), (
+            f"'LOSS.TYPE' and 'LOSS.WEIGHTS' must have the same length, got {len(loss)} vs {len(weights)}"
+        )
+        assert loss == ["MSE"] or "BCE" in loss or "HINGE" in loss, (
+            f"LOSS.TYPE for DENOISING must be ['MSE'] or include 'BCE'/'HINGE', got {loss}"
+        )
     elif cfg.PROBLEM.TYPE == "CLASSIFICATION":
-        loss = "CE" if cfg.LOSS.TYPE == "" else cfg.LOSS.TYPE
-        assert loss == "CE", "LOSS.TYPE must be 'CE'"
+        loss = [str(n).upper() for n in cfg.LOSS.TYPE] or ["CE"]
+        weights = list(cfg.LOSS.WEIGHTS) or [1.0] * len(loss)
+        assert loss == ["CE"], "LOSS.TYPE must be ['CE'] for CLASSIFICATION"
     opts.extend(["LOSS.TYPE", loss])
+    opts.extend(["LOSS.WEIGHTS", weights])
 
     if cfg.LOSS.IGNORE_INDEX != -1 and not check_value(cfg.LOSS.IGNORE_INDEX, (0, 255)):
         raise ValueError("If 'LOSS.IGNORE_INDEX' is set it needs to be a value in [0,255] range")
     assert cfg.LOSS.CLASS_REBALANCE in [
         "none",
         "manual",
-        "auto",
-    ], "LOSS.CLASS_REBALANCE not in ['none', 'manual', 'auto']"
+    ], "LOSS.CLASS_REBALANCE not in ['none', 'manual']"
     if cfg.LOSS.CLASS_REBALANCE == "manual":
         if cfg.LOSS.CLASS_WEIGHTS == []:
             raise ValueError("'LOSS.CLASS_WEIGHTS' needs to be configured when 'LOSS.CLASS_REBALANCE' is 'manual'")
         if len(cfg.LOSS.CLASS_WEIGHTS) != cfg.DATA.N_CLASSES:
             raise ValueError("'LOSS.CLASS_WEIGHTS' must be a list of length equal to the number of classes")
-    if cfg.LOSS.TYPE != "CE" and cfg.PROBLEM.TYPE != "INSTANCE_SEG":
-        print("WARNING: 'LOSS.IGNORE_INDEX' will not have effect, as it is only working when LOSS.TYPE is 'CE'")
+    if cfg.LOSS.IGNORE_INDEX != -1 and loss != ["CE"] and cfg.PROBLEM.TYPE != "INSTANCE_SEG":
+        warnings.warn("'LOSS.IGNORE_INDEX' will not have effect, as it is only working when LOSS.TYPE is ['CE']")
 
+    model_arch = cfg.MODEL.ARCHITECTURE.lower()
+    
     if cfg.LOSS.CONTRAST.ENABLE:
         if cfg.LOSS.CONTRAST.MEMORY_SIZE <= 0:
             raise ValueError("'LOSS.CONTRAST.MEMORY_SIZE' needs to be greater than 0")
@@ -1148,6 +1468,9 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 "'LOSS.CONTRAST.ENABLE' can only be set when 'PROBLEM.TYPE' is in ['SEMANTIC_SEG', 'INSTANCE_SEG', 'DETECTION']"
             )
         
+        if model_arch == "stunet":
+            raise ValueError("'LOSS.CONTRAST.ENABLE' can not be used with 'MODEL.ARCHITECTURE' set to 'stunet'")
+
     if cfg.TEST.ENABLE and cfg.TEST.ANALIZE_2D_IMGS_AS_3D_STACK and cfg.PROBLEM.NDIM == "3D":
         raise ValueError("'TEST.ANALIZE_2D_IMGS_AS_3D_STACK' makes no sense when the problem is 3D. Disable it.")
 
@@ -1164,7 +1487,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 "'MODEL.TORCHVISION_MODEL_NAME' needs to be configured when 'MODEL.SOURCE' is 'torchvision'"
             )
         if cfg.TEST.AUGMENTATION:
-            print("WARNING: 'TEST.AUGMENTATION' is not available using TorchVision models")
+            warnings.warn("'TEST.AUGMENTATION' is not available using TorchVision models")
         if cfg.TEST.ANALIZE_2D_IMGS_AS_3D_STACK:
             raise ValueError("'TEST.ANALIZE_2D_IMGS_AS_3D_STACK' can not be activated with TorchVision models")
         if cfg.PROBLEM.NDIM == "3D":
@@ -1173,11 +1496,11 @@ def check_configuration(cfg, jobname, check_data_paths=True):
         if not cfg.TEST.FULL_IMG and cfg.PROBLEM.TYPE != "CLASSIFICATION":
             raise ValueError("With TorchVision models only 'TEST.FULL_IMG' setting is available, so please set it")
 
-    if cfg.TEST.AUGMENTATION and cfg.TEST.REDUCE_MEMORY:
-        raise ValueError(
-            "'TEST.AUGMENTATION' and 'TEST.REDUCE_MEMORY' are incompatible as the function used to make the rotation "
-            "does not support float16 data type."
-        )
+    if cfg.TEST.AUGMENTATION_MODE not in ["mean", "min", "max"]:
+        raise ValueError("'TEST.AUGMENTATION_MODE' needs to be one of ['mean', 'min', 'max']")
+
+    if cfg.TEST.AUGMENTATION_GROUP not in TTA_GROUPS:
+        raise ValueError("'TEST.AUGMENTATION_GROUP' needs to be one of {}".format(list(TTA_GROUPS)))
 
     if cfg.DATA.N_CLASSES > 2 and cfg.PROBLEM.TYPE not in [
         "SEMANTIC_SEG",
@@ -1191,8 +1514,23 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             "'INSTANCE_SEG', 'DETECTION', 'CLASSIFICATION' and 'IMAGE_TO_IMAGE'"
         )
 
-    model_arch = cfg.MODEL.ARCHITECTURE.lower()
-    model_will_be_read = cfg.MODEL.LOAD_CHECKPOINT and cfg.MODEL.LOAD_MODEL_FROM_CHECKPOINT
+    if cfg.DATA.TRAIN.EXTRACT_RANDOM_PATCH and cfg.DATA.TRAIN.PROBABILITY_MAP and cfg.PROBLEM.TYPE not in ["SEMANTIC_SEG", "INSTANCE_SEG", "DETECTION"]:
+        raise ValueError(
+            "'DATA.TRAIN.PROBABILITY_MAP' can only be set when 'PROBLEM.TYPE' is in ['SEMANTIC_SEG', 'INSTANCE_SEG', 'DETECTION']"
+        )
+
+    for item in cfg.MODEL.ITEMS_TO_LOAD_FROM_CHECKPOINT:
+        if item not in ["weights", "norm", "model_arch", "optimizer", "epoch"]:
+            raise ValueError("'MODEL.ITEMS_TO_LOAD_FROM_CHECKPOINT' can only have items in ['weights', 'norm', 'model_arch', 'optimizer', 'epoch']")
+    model_will_be_read = cfg.MODEL.LOAD_CHECKPOINT and "model_arch" in cfg.MODEL.ITEMS_TO_LOAD_FROM_CHECKPOINT
+
+    for i, pattern in enumerate(cfg.MODEL.FREEZE_LAYERS_MATCHING):
+        try:
+            re.compile(pattern)
+        except re.error as e:
+            raise ValueError(
+                f"'MODEL.FREEZE_LAYERS_MATCHING[{i}]' is not a valid regex pattern ('{pattern}'): {e}"
+            )
     #### Semantic segmentation ####
     if cfg.PROBLEM.TYPE == "SEMANTIC_SEG":
         if not model_will_be_read and cfg.MODEL.SOURCE == "biapy":
@@ -1227,10 +1565,45 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                     "'deeplabv3_mobilenet_v3_large' model expects 3 channel data (RGB). "
                     f"'DATA.PATCH_SIZE' set is {cfg.DATA.PATCH_SIZE}"
                 )
+    #### Instance refinement (used by INSTANCE_SEG and IMAGE_TO_IMAGE.MEMBRANE_REPAIR) ####
+    if cfg.TEST.POST_PROCESSING.INSTANCE_REFINEMENT.ENABLE:
+        if len(cfg.TEST.POST_PROCESSING.INSTANCE_REFINEMENT.OPERATIONS) != len(
+            cfg.TEST.POST_PROCESSING.INSTANCE_REFINEMENT.VALUES
+        ):
+            raise ValueError(
+                "'TEST.POST_PROCESSING.INSTANCE_REFINEMENT.OPERATIONS' and 'TEST.POST_PROCESSING.INSTANCE_REFINEMENT.VALUES' need to be of the same length. "
+                "For those operations that do not require a value, please set 'none' for them (e.g. 'remove_small_objects')."
+            )
+        for opt, value in zip(cfg.TEST.POST_PROCESSING.INSTANCE_REFINEMENT.OPERATIONS, cfg.TEST.POST_PROCESSING.INSTANCE_REFINEMENT.VALUES):
+            if opt not in ["dilation", "erosion", "fill_holes", "clear_border", "remove_small_objects", "remove_big_objects"]:
+                raise ValueError(
+                    "'TEST.POST_PROCESSING.INSTANCE_REFINEMENT.OPERATIONS' can only contain the following operations: 'dilation', "
+                    "'erosion', 'fill_holes', 'clear_border', 'remove_small_objects', 'remove_big_objects'"
+                )
+            if (
+                opt in ["dilation", "erosion"]
+                and (
+                    (not isinstance(value, int) and not isinstance(value, list))
+                    or (isinstance(value, int) and value < 1)
+                    or (isinstance(value, list) and len(value) != dim_count)
+                    )
+            ):
+                raise ValueError(
+                    "'TEST.POST_PROCESSING.INSTANCE_REFINEMENT.VALUES' for 'dilation' and 'erosion' operations need to be an integer greater than 0 or a list of {} integers greater than 0".format(dim_count)
+                )
+            if opt in ["remove_small_objects", "remove_big_objects"] and (not isinstance(value, int) or value < 1):
+                raise ValueError(
+                    "'TEST.POST_PROCESSING.INSTANCE_REFINEMENT.VALUES' for 'remove_small_objects' and 'remove_big_objects' operations need to be an integer greater than 0"
+                )
+            if opt in ["fill_holes", "clear_border"] and value != "none":
+                raise ValueError(
+                    "'TEST.POST_PROCESSING.INSTANCE_REFINEMENT.VALUES' for 'fill_holes' and 'clear_border' operations need to be set to 'none'"
+                )
+
     #### Instance segmentation ####
     if cfg.PROBLEM.TYPE == "INSTANCE_SEG":
         if cfg.PROBLEM.INSTANCE_SEG.TYPE == "regular":
-            assert cfg.PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS in ["watershed", "agglomeration", "stardist", "embeddings"], "'PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS' not in ['watershed', 'agglomeration', 'stardist', 'embeddings']"
+            assert cfg.PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS in ["watershed", "agglomeration", "stardist", "embeddings", "gradient-flow"], "'PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS' not in ['watershed', 'agglomeration', 'stardist', 'embeddings', 'gradient-flow']"
             for x in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS:
                 assert x in [
                     "F",
@@ -1251,12 +1624,16 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                     "E_sigma",
                     "E_seediness",
                     "We",
-                    "M"
-                ], "'PROBLEM.INSTANCE_SEG.DATA_CHANNELS' not in ['F', 'B', 'P', 'C', 'H', 'V', 'Z', 'Db', 'Dc', 'Dn', 'D', 'R', 'T', 'A', 'M', 'E_offset', 'E_sigma', 'E_seediness', 'We']"
+                    "M",
+                    "Gv",
+                    "Gh",
+                    "Gz",
+                    "I",
+                ], "'PROBLEM.INSTANCE_SEG.DATA_CHANNELS' not in ['F', 'B', 'P', 'C', 'H', 'V', 'Z', 'Db', 'Dc', 'Dn', 'D', 'R', 'T', 'A', 'M', 'E_offset', 'E_sigma', 'E_seediness', 'We', 'Gv', 'Gh', 'Gz', 'I']"
             
             # Legacy mask used in CartoCell
             if "M" in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS:
-                print("WARNING: 'M' channel is a legacy mask channel used in CartoCell so the name is kept but the functionality is limited")
+                warnings.warn("'M' channel is a legacy mask channel used in CartoCell so the name is kept but the functionality is limited")
                 if cfg.PROBLEM.NDIM != "3D":
                     raise ValueError("'M' channel can only be used in 3D segmentation (CartoCell legacy approach)")
                 elif set(cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS) != {"F", "C", "M"}:
@@ -1264,21 +1641,30 @@ def check_configuration(cfg, jobname, check_data_paths=True):
 
             if cfg.PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS == "stardist":
                 assert "R" in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS, "'R' channel must be used when 'PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS' is 'stardist'"
-                # For now onlyb allow Db and R channels
-                assert set(sorted_original_instance_channels) == {"Db", "R"}, "'Db' and 'R' channels must be used when 'PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS' is 'stardist'"
+                # For now only allow Db and R channels ('I' is auto-added and dropped before the model).
+                _sd_chs = set(instance_channels) - {"I"}
+                assert _sd_chs == {"Db", "R"}, "'Db' and 'R' channels must be used when 'PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS' is 'stardist'"
             elif cfg.PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS == "embeddings":
                 assert "E_offset" in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS and "E_sigma" in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS and "E_seediness" in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS, "'E_offset', 'E_sigma' and 'E_seediness' channels must be used when 'PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS' is 'embeddings'"
                 assert len(cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS) == 3, "'E_offset', 'E_sigma' and 'E_seediness' channels must be the only ones used when 'PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS' is 'embeddings'"
+            elif cfg.PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS == "gradient-flow":
+                assert "Gv" in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS and "Gh" in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS, "'Gv', 'Gh' channels must be used when 'PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS' is 'gradient-flow'"
+                # 'I' is auto-added and dropped before the model, so exclude it from this check.
+                _gflow_chs = set(cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS) - {"I"}
+                if cfg.PROBLEM.NDIM == "2D":
+                    assert _gflow_chs in [{"Db", "Gv", "Gh"}, {"F", "Gv", "Gh"}], "'Gv' and 'Gh' channels must be used when 'PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS' is 'gradient-flow' and 'PROBLEM.NDIM' is '2D'"
+                else:
+                    assert _gflow_chs in [{"Db", "Gv", "Gh", "Gz"}, {"F", "Gv", "Gh", "Gz"}], "'Gv', 'Gh' and 'Gz' channels must be used when 'PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS' is 'gradient-flow' and 'PROBLEM.NDIM' is '3D'"
             elif cfg.PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS == "watershed":  
+                for ch in ["R", "Gv", "Gh", "E_offset", "E_sigma", "E_seediness"]:
+                    if ch in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS:
+                        raise ValueError("'{}' channel can not be used when 'PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS' is 'watershed'".format(ch))
                 if "A" in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS:
                     if cfg.PROBLEM.NDIM != "3D":
                         raise ValueError("'A' channel can only be used in 3D segmentation")
                 if "Z" in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS and cfg.PROBLEM.NDIM == "2D":
                     raise ValueError("'Z' channel can only be used in 3D segmentation")
-                if "R" in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS:
-                    assert set(cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS) == {"Db", "R"}, "'R' channel can only be used together with 'Db' channel"
-
-                if any([x for x in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS if x in ["H", "V", "Z"]]):
+                if any([x for x in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS if x in ["Z", "V", "H"]]):
                     if "H" in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS and "V" not in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS:
                         raise ValueError("'H' channel can only be used together with 'V' channel")
                     if "V" in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS and "H" not in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS:
@@ -1286,7 +1672,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                     if cfg.PROBLEM.NDIM == "3D":
                         if "Z" in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS and ("H" not in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS or "V" not in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS):
                             raise ValueError("'Z' channel can only be used together with 'H' and 'V' channels")
-                    other_chs = [x for x in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS if x not in ["H", "V", "Z"]]
+                    other_chs = [x for x in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS if x not in ["Z", "V", "H"]]
                     if not any([x for x in other_chs if x in ["F", "B", "C", "Db", "Dc", "Dn", "D"]]):
                         raise ValueError("'H', 'V' and 'Z' channels can not be the only channels used. Please add at least one of the following channels: ['F', 'B', 'C', 'Db', 'Dc', 'Dn', 'D'] so the foreground can be properly defined")
                 
@@ -1298,7 +1684,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
 
                 assert len(cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS) == len(cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS_THRESH), "'PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS' must have the same length as 'PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS_THRESH'"
                 assert len(cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS) == len(cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS_THRESH), "'PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS' must have the same length as 'PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS_THRESH'"
-                assert not any([x for x in cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS if x not in ["F", "B", "C", "Db", "Dc", "Dn", "D"]]), "'PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS' can only contain the following channels: ['F', 'B', 'C', 'Db', 'Dc', 'Dn', 'D']"
+                assert not any([x for x in cfg.PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS if x not in ["F", "B", "C", "Db", "Dc", "Dn", "D", "A"]]), "'PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS' can only contain the following channels: ['F', 'B', 'C', 'Db', 'Dc', 'Dn', 'D', 'A']"
 
                 for i, x in enumerate(cfg.PROBLEM.INSTANCE_SEG.WATERSHED.SEED_CHANNELS_THRESH):
                     if x != "auto":
@@ -1314,9 +1700,16 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                         except:
                             raise ValueError("'PROBLEM.INSTANCE_SEG.WATERSHED.GROWTH_MASK_CHANNELS_THRESH' values can only be 'auto' or a float")
             else: # agglomeration
-                raise NotImplementedError("'PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS' == 'agglomeration' is not implemented yet")
+                _agg_chs = set(instance_channels) - {"I"}
+                assert _agg_chs == {"A"}, (
+                    "'A' channel must be the only one used when 'PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS' "
+                    "is 'agglomeration'"
+                )
+                if cfg.PROBLEM.NDIM != "3D":
+                    raise ValueError("'A' channel can only be used in 3D segmentation")
               
-            chs = [x for x in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS if x != "We"]
+            # 'We' and 'I' are added automatically, so the user provides no extra options for them.
+            chs = [x for x in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS if x not in ("We", "I")]
             extra_opts_list = cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS
 
             assert len(extra_opts_list) == 1, (
@@ -1357,33 +1750,37 @@ def check_configuration(cfg, jobname, check_data_paths=True):
 
                 elif key == "C":  # contours
                     _assert_str_in(val, "mode", {"thick", "inner", "outer", "subpixel", "dense"}, ctx)
-
-                elif key in ("H", "V", "Z", "Db"):  # distance channels group
-                    _assert_optional_bool(val, "norm", ctx)
-                    if "norm" in val:
-                        assert isinstance(val["norm"], bool)
+                elif key in ("Z", "V", "H"):  # distance channels group
+                    _assert_bool(val, "norm", ctx)
+                    assert isinstance(val["norm"], bool)
+                    # 'sigmoid' is not allowed: these channels are signed and it would clip everything to [0, 1]
+                    _assert_str_in(val, "act", {"", "linear", "tanh"}, ctx)
+                elif key in ("Gv", "Gh", "Gz"):  # gradient flow channels
+                   # The diffusion iteration count is not user-configurable (always Cellpose's per-cell
+                   # 2*(ly+lx) / 6*(...) formula); only the gradient strategy is exposed.
+                   _assert_str_in(val, "gradient_type", {"omnipose", "cellpose"}, ctx)
+                elif key  == "Db":  # distance channels group
+                    _assert_optional_str_in(val, "val_type", {"raw", "norm", "discretize", "omnipose"}, ctx)
+                    if val["val_type"] == "discretize":
+                        assert set(cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS) == {"Db"}, "'Db' channel must be the only one used when 'val_type' is 'discretize'"
+                    _assert_str_in(val, "act", {"", "linear", "sigmoid"}, ctx)
                     _assert_bool(val, "mask_values", ctx)
-
                 elif key == "Dc":  # distance-to-centroid
                     _assert_str_in(val, "type", {"centroid", "skeleton"}, ctx)
-                    _assert_optional_bool(val, "norm", ctx)
+                    _assert_bool(val, "norm", ctx)
                     _assert_bool(val, "mask_values", ctx)
 
                 elif key == "Dn":  # distances to closest neighbor
                     _assert_int(val, "closing_size", ctx, min_val=0)
-                    _assert_optional_bool(val, "norm", ctx)
+                    _assert_bool(val, "norm", ctx)
                     _assert_bool(val, "mask_values", ctx)
                     _assert_int(val, "decline_power", ctx, min_val=0)
 
-                elif key == "D":  # signed distance (global)
+                elif key == "D":  # per-instance distance
                     _assert_str_in(val, "act", {"tanh", "linear"}, ctx)
-                    _assert_int(val, "alpha", ctx, min_val=0)
-                    _assert_int(val, "beta", ctx, min_val=0)
-                    _assert_optional_bool(val, "norm", ctx)
 
                 elif key == "R":  # star-convex/radial
                     _assert_int(val, "nrays", ctx, min_val=1)
-                    _assert_optional_bool(val, "norm", ctx)
                     _assert_bool(val, "mask_values", ctx)
 
                 elif key == "T":  # touching thickness
@@ -1417,7 +1814,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
 
             # Optionally: enforce that every channel that typically needs opts has an entry.
             # (This is optional because you pre-fill when empty; still helpful when users pass their own.)
-            must_have_if_present = {"F", "B", "P", "C", "H", "V", "Z", "Db", "Dc", "Dn", "D", "R", "T", "A", "E"}
+            must_have_if_present = {"F", "B", "P", "C", "Z", "V", "H", "Db", "Dc", "Dn", "D", "R", "T", "A", "E"}
             missing = sorted(k for k in chs if k in must_have_if_present and k not in extra_opts)
             assert not missing, (
                 "Missing extra options for channels: {}. "
@@ -1426,13 +1823,19 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             )
 
         else:  # synapses
-            assert cfg.PROBLEM.INSTANCE_SEG.SYNAPSES.TH_TYPE in ["manual", "auto", "relative_by_patch", "relative"], "'PROBLEM.INSTANCE_SEG.SYNAPSES.TH_TYPE' must be one of ['manual', 'auto']"
             for x in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS:
-                assert x in ["F_pre", "F_post", "H", "V", "Z"], "PROBLEM.INSTANCE_SEG.DATA_CHANNELS not in ['F_pre', 'F_post', 'H', 'V', 'Z']"
-
-            if set(cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS) not in [{"F_pre", "F_post"}, {"F_pre", "H", "V", "Z"}]:
-                raise ValueError("PROBLEM.INSTANCE_SEG.DATA_CHANNELS not 'F_pre' + 'F_post' or 'F_pre' + 'H' + 'V' + 'Z', which are the unique configurations supported for synapse detection")
-
+                assert x in ["F_pre", "F_post", "F_cleft", "Z", "V", "H"], "PROBLEM.INSTANCE_SEG.DATA_CHANNELS not in ['F_pre', 'F_post', 'F_cleft', 'H', 'V', 'Z']"
+            if set(instance_channels) == {"F_pre", "F_post"}:
+                assert cfg.PROBLEM.INSTANCE_SEG.SYNAPSES.TH_TYPE in ["manual", "auto", "relative_by_patch", "relative"], "'PROBLEM.INSTANCE_SEG.SYNAPSES.TH_TYPE' must be one of ['manual', 'auto']"
+            elif set(instance_channels) == {"F_post", "Z", "V", "H"}:
+                pass
+            elif set(instance_channels) == {"F_cleft"}:
+                pass
+            elif set(instance_channels) == {"F_post"}:
+                pass
+            else: 
+                raise ValueError("Synapse representation {} not supported".format(cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS))
+            
             if not cfg.DATA.TRAIN.INPUT_ZARR_MULTIPLE_DATA or cfg.PROBLEM.NDIM != "3D":
                 raise ValueError(
                     "Synapse detection is only available for 3D Zarr/H5 data. Please set 'DATA.TRAIN.INPUT_ZARR_MULTIPLE_DATA' "
@@ -1449,44 +1852,9 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 )
         else:
             # Set loss weights for the embedding representation
-            if (cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS == (1, 1) or cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS == (1,)):
+            if all([x for x in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS if x == 1]):
                 # Corresponds to foreground weight, instance center offset, variance and seediness
                 opts.extend(["PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS", [10,1,10,1]]) # Embedseg default weights
-
-        if cfg.TEST.POST_PROCESSING.INSTANCE_REFINEMENT.ENABLE:
-            if len(cfg.TEST.POST_PROCESSING.INSTANCE_REFINEMENT.OPERATIONS) != len(
-                cfg.TEST.POST_PROCESSING.INSTANCE_REFINEMENT.VALUES
-            ):
-                raise ValueError(
-                    "'TEST.POST_PROCESSING.INSTANCE_REFINEMENT.OPERATIONS' and 'TEST.POST_PROCESSING.INSTANCE_REFINEMENT.VALUES' need to be of the same length. "
-                    "For those operations that do not require a value, please set 'none' for them (e.g. 'remove_small_objects')."
-                )
-            for opt, value in zip(cfg.TEST.POST_PROCESSING.INSTANCE_REFINEMENT.OPERATIONS, cfg.TEST.POST_PROCESSING.INSTANCE_REFINEMENT.VALUES):
-                if opt not in ["dilation", "erosion", "fill_holes", "clear_border", "remove_small_objects", "remove_big_objects"]:
-                    raise ValueError(
-                        "'TEST.POST_PROCESSING.INSTANCE_REFINEMENT.OPERATIONS' can only contain the following operations: 'dilation', "
-                        "'erosion', 'fill_holes', 'clear_border', 'remove_small_objects', 'remove_big_objects'"
-                    )
-                if (
-                    opt in ["dilation", "erosion"] 
-                    and (
-                        (not isinstance(value, int) and not isinstance(value, list)) 
-                        or (isinstance(value, int) and value < 1)
-                        or (isinstance(value, list) and len(value) != dim_count)
-                        )
-                ):
-                    raise ValueError(
-                        "'TEST.POST_PROCESSING.INSTANCE_REFINEMENT.VALUES' for 'dilation' and 'erosion' operations need to be an integer greater than 0 or a list of {} integers greater than 0".format(dim_count)
-                    )
-                if opt in ["remove_small_objects", "remove_big_objects"] and (not isinstance(value, int) or value < 1):
-                    raise ValueError(
-                        "'TEST.POST_PROCESSING.INSTANCE_REFINEMENT.VALUES' for 'remove_small_objects' and 'remove_big_objects' operations need to be an integer greater than 0"
-                    )
-                if opt in ["fill_holes", "clear_border"] and value != "none":
-                    raise ValueError(
-                        "'TEST.POST_PROCESSING.INSTANCE_REFINEMENT.VALUES' for 'fill_holes' and 'clear_border' operations need to be set to 'none'"
-                    )
-
 
         if cfg.TEST.POST_PROCESSING.VORONOI_ON_MASK:
             if not any([x for x in cfg.PROBLEM.INSTANCE_SEG.DATA_CHANNELS if x in ["F", "B", "C", "M"]]):
@@ -1600,14 +1968,10 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             if cfg.TRAIN.ENABLE:
                 raise NotImplementedError  # require bbox generator etc.
 
-        if cfg.TEST.ENABLE and len(cfg.TEST.DET_IGNORE_POINTS_OUTSIDE_BOX) > 0:
-            assert [x > 0 for x in cfg.TEST.DET_IGNORE_POINTS_OUTSIDE_BOX], (
-                "'TEST.DET_IGNORE_POINTS_OUTSIDE_BOX' needs to be a list " "of positive integers"
-            )
-            assert len(cfg.TEST.DET_IGNORE_POINTS_OUTSIDE_BOX) == dim_count, (
-                "'TEST.DET_IGNORE_POINTS_OUTSIDE_BOX' needs to be of " f"{dim_count} dimension"
-            )
-
+        if cfg.DATA.N_CLASSES > 2 and len(cfg.PROBLEM.DETECTION.DATA_CHANNEL_WEIGHTS) != 2:
+            raise ValueError("When 'DATA.N_CLASSES' > 2, 'PROBLEM.DETECTION.DATA_CHANNEL_WEIGHTS' needs to have two weights: one for the background "
+            "and one for the foreground")
+            
     #### Super-resolution ####
     elif cfg.PROBLEM.TYPE == "SUPER_RESOLUTION":
         if not (cfg.PROBLEM.SUPER_RESOLUTION.UPSCALING):
@@ -1653,19 +2017,25 @@ def check_configuration(cfg, jobname, check_data_paths=True):
 
     #### Denoising ####
     elif cfg.PROBLEM.TYPE == "DENOISING":
-        if cfg.DATA.TEST.LOAD_GT:
-            raise ValueError(
-                "Denoising is made in an unsupervised way so there is no ground truth required. Disable 'DATA.TEST.LOAD_GT'"
-            )
-        if not check_value(cfg.PROBLEM.DENOISING.N2V_PERC_PIX):
-            raise ValueError("PROBLEM.DENOISING.N2V_PERC_PIX not in [0, 1] range")
+        loss_type_upper = [str(n).upper() for n in cfg.LOSS.TYPE]
+        if cfg.PROBLEM.DENOISING.LOAD_GT_DATA or "BCE" in loss_type_upper or "HINGE" in loss_type_upper:
+            if not cfg.DATA.TRAIN.GT_PATH and not cfg.DATA.TRAIN.INPUT_ZARR_MULTIPLE_DATA:
+                raise ValueError(
+                    "Supervised denoising (e.g., with CYCLEGAN or LOAD_GT_DATA=True) "
+                    "requires ground truth. 'DATA.TRAIN.GT_PATH' must be provided."
+                )
+        else:
+            if cfg.DATA.TEST.LOAD_GT:
+                raise ValueError(
+                    "Denoising is made in an unsupervised way so there is no ground truth required. Disable 'DATA.TEST.LOAD_GT'"
+                )
+            if not check_value(cfg.PROBLEM.DENOISING.N2V_PERC_PIX):
+                raise ValueError("PROBLEM.DENOISING.N2V_PERC_PIX not in [0, 1] range")
         if cfg.MODEL.SOURCE == "torchvision":
             raise ValueError("'MODEL.SOURCE' as 'torchvision' is not available in denoising workflow")
 
     #### Classification ####
     elif cfg.PROBLEM.TYPE == "CLASSIFICATION":
-        if cfg.TEST.BY_CHUNKS.ENABLE:
-            raise ValueError("'TEST.BY_CHUNKS.ENABLE' can not be activated for CLASSIFICATION workflow")
         if cfg.MODEL.SOURCE == "torchvision":
             if cfg.MODEL.TORCHVISION_MODEL_NAME not in [
                 "alexnet",
@@ -1797,6 +2167,12 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                     "'DATA.VAL.FILTER_SAMPLES.ENABLE' can not be enabled when 'PROBLEM.IMAGE_TO_IMAGE.MULTIPLE_RAW_ONE_TARGET_LOADER' is enabled too"
                 )
 
+        if cfg.PROBLEM.IMAGE_TO_IMAGE.CHANNELS_PER_HEAD_INFO != []:
+            assert sum(cfg.PROBLEM.IMAGE_TO_IMAGE.CHANNELS_PER_HEAD_INFO) == cfg.PROBLEM.IMAGE_TO_IMAGE.OUTPUT_CHANNELS, (
+                "The sum of the channels per head info needs to be equal to the total number of output channels defined in 'PROBLEM.IMAGE_TO_IMAGE.OUTPUT_CHANNELS'. "
+                f"Currently, the sum of 'PROBLEM.IMAGE_TO_IMAGE.CHANNELS_PER_HEAD_INFO' is {sum(cfg.PROBLEM.IMAGE_TO_IMAGE.CHANNELS_PER_HEAD_INFO)} while 'PROBLEM.IMAGE_TO_IMAGE.OUTPUT_CHANNELS' is {cfg.PROBLEM.IMAGE_TO_IMAGE.OUTPUT_CHANNELS}."
+            )
+        
     if cfg.DATA.VAL.FROM_TRAIN and cfg.DATA.PREPROCESS.VAL:
         print(
             "WARNING: validation preprocessing will be done based on 'DATA.PREPROCESS.TRAIN', as 'DATA.VAL.FROM_TRAIN' is selected"
@@ -1952,8 +2328,9 @@ def check_configuration(cfg, jobname, check_data_paths=True):
 
     if cfg.TEST.ENABLE:
         if cfg.DATA.TEST.USE_VAL_AS_TEST and check_data_paths:
-            if not os.path.exists(cfg.DATA.TEST.PATH):
-                raise ValueError("Test data not found: {}".format(cfg.DATA.TEST.PATH))
+            path_to_check = cfg.DATA.VAL.PATH if not cfg.DATA.VAL.FROM_TRAIN else cfg.DATA.TRAIN.PATH
+            if not os.path.exists(path_to_check):
+                raise ValueError("Test data not found: {}".format(path_to_check))
             if (
                 cfg.DATA.TEST.LOAD_GT
                 and not os.path.exists(cfg.DATA.TEST.GT_PATH)
@@ -1985,18 +2362,68 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 else:
                     print("Found {} test classes".format(len(list_of_classes)))
             
+        if cfg.DATA.TEST.ROI_MASK.ENABLE:
+            if cfg.DATA.TEST.ROI_MASK.PATH == "":
+                raise ValueError("'DATA.TEST.ROI_MASK.PATH' needs to be set when 'DATA.TEST.ROI_MASK.ENABLE' is True")
+            if check_data_paths and not os.path.exists(cfg.DATA.TEST.ROI_MASK.PATH):
+                raise ValueError(f"'DATA.TEST.ROI_MASK.PATH' not found: {cfg.DATA.TEST.ROI_MASK.PATH}")
+
         if cfg.TEST.BY_CHUNKS.ENABLE:
+            if cfg.PROBLEM.TYPE not in ["SEMANTIC_SEG", "INSTANCE_SEG", "DETECTION"]:
+                raise ValueError("'TEST.BY_CHUNKS' can only be activated in 'SEMANTIC_SEG', 'INSTANCE_SEG' and 'DETECTION' workflows")
             if cfg.PROBLEM.NDIM == "2D":
                 raise ValueError("'TEST.BY_CHUNKS' can not be activated when 'PROBLEM.NDIM' is 2D")
+            _valid_phases = {"prediction", "instance_creation", "instance_merging"}
+            if not isinstance(cfg.TEST.BY_CHUNKS.PHASES, (list, tuple)) or len(cfg.TEST.BY_CHUNKS.PHASES) == 0:
+                raise ValueError("'TEST.BY_CHUNKS.PHASES' must be a non-empty list")
+            assert set(cfg.TEST.BY_CHUNKS.PHASES).issubset(_valid_phases), f"'TEST.BY_CHUNKS.PHASES' can only contain these values: {_valid_phases}"
             if cfg.TEST.BY_CHUNKS.WORKFLOW_PROCESS.ENABLE:
                 assert cfg.TEST.BY_CHUNKS.WORKFLOW_PROCESS.TYPE in [
                     "chunk_by_chunk",
                     "entire_pred",
                 ], "'TEST.BY_CHUNKS.WORKFLOW_PROCESS.TYPE' needs to be in ['chunk_by_chunk', 'entire_pred']"
+                patches_per_tile = cfg.TEST.BY_CHUNKS.WORKFLOW_PROCESS.PATCHES_PER_TILE
+                if len(patches_per_tile) != 3 or any(x < 1 for x in patches_per_tile):
+                    raise ValueError(
+                        "'TEST.BY_CHUNKS.WORKFLOW_PROCESS.PATCHES_PER_TILE' must be a (z,y,x) tuple of positive integers"
+                    )
+                if not (0 < cfg.TEST.BY_CHUNKS.WORKFLOW_PROCESS.INSTANCE_SEG_MERGE_IOU_TH <= 1):
+                    raise ValueError("'TEST.BY_CHUNKS.WORKFLOW_PROCESS.INSTANCE_SEG_MERGE_IOU_TH' must be in (0, 1]")
+                # Tiles are groups of 'PATCHES_PER_TILE' consecutive patches, numbered on a grid anchored at
+                # Z=0 that is shared by every job (so that jobs splitting the same volume by 'Z_START'/'Z_END'
+                # agree on where each tile is). If a split point falls in the middle of a tile instead of on a
+                # tile boundary, that tile is a different, partial one in each of the two jobs: each considers
+                # its partial patch count "complete", post-processes it and writes it with the rest of the
+                # tile left as background, and the later job's write silently overwrites the earlier job's
+                # (Zarr writes replace the region, they do not merge). Requiring the split points to land on
+                # tile boundaries keeps every tile fully owned by exactly one job.
+                if cfg.TEST.BY_CHUNKS.WORKFLOW_PROCESS.TYPE == "chunk_by_chunk" and (
+                    cfg.TEST.BY_CHUNKS.Z_START != -1 or cfg.TEST.BY_CHUNKS.Z_END != -1
+                ):
+                    tile_step_z = (cfg.DATA.PATCH_SIZE[0] - 2 * cfg.DATA.TEST.PADDING[0]) * patches_per_tile[0]
+                    if cfg.TEST.BY_CHUNKS.Z_START != -1 and cfg.TEST.BY_CHUNKS.Z_START % tile_step_z != 0:
+                        raise ValueError(
+                            f"'TEST.BY_CHUNKS.Z_START' ({cfg.TEST.BY_CHUNKS.Z_START}) must be a multiple of the "
+                            f"tile size along Z ({tile_step_z} = (DATA.PATCH_SIZE[0] - 2*DATA.TEST.PADDING[0]) * "
+                            "PATCHES_PER_TILE[0]) or -1. Otherwise the tile straddling the split is written "
+                            "partially and independently by two jobs, and one write silently overwrites the other."
+                        )
+                    if cfg.TEST.BY_CHUNKS.Z_END != -1 and cfg.TEST.BY_CHUNKS.Z_END % tile_step_z != 0:
+                        raise ValueError(
+                            f"'TEST.BY_CHUNKS.Z_END' ({cfg.TEST.BY_CHUNKS.Z_END}) must be a multiple of the tile "
+                            f"size along Z ({tile_step_z} = (DATA.PATCH_SIZE[0] - 2*DATA.TEST.PADDING[0]) * "
+                            "PATCHES_PER_TILE[0]) or -1. Otherwise the tile straddling the split is written "
+                            "partially and independently by two jobs, and one write silently overwrites the other."
+                        )
+            if cfg.TEST.BY_CHUNKS.Z_START != -1 and cfg.TEST.BY_CHUNKS.Z_START < 0:
+                raise ValueError("'TEST.BY_CHUNKS.Z_START' must be -1 (disabled) or a non-negative integer")
+            if cfg.TEST.BY_CHUNKS.Z_END != -1 and cfg.TEST.BY_CHUNKS.Z_END <= 0:
+                raise ValueError("'TEST.BY_CHUNKS.Z_END' must be -1 (disabled) or a positive integer")
+            if cfg.TEST.BY_CHUNKS.Z_START != -1 and cfg.TEST.BY_CHUNKS.Z_END != -1:
+                if cfg.TEST.BY_CHUNKS.Z_START >= cfg.TEST.BY_CHUNKS.Z_END:
+                    raise ValueError("'TEST.BY_CHUNKS.Z_START' must be less than 'TEST.BY_CHUNKS.Z_END'")
             if len(cfg.DATA.TEST.INPUT_IMG_AXES_ORDER) < 3:
                 raise ValueError("'DATA.TEST.INPUT_IMG_AXES_ORDER' needs to be at least of length 3, e.g., 'ZYX'")
-            if cfg.DATA.N_CLASSES > 2:
-                raise ValueError("Not implemented pipeline option: 'DATA.N_CLASSES' > 2 and 'TEST.BY_CHUNKS'")
             if cfg.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA:
                 if cfg.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_RAW_PATH == "":
                     raise ValueError(
@@ -2166,6 +2593,43 @@ def check_configuration(cfg, jobname, check_data_paths=True):
         if not check_value(cfg.DATA.NORMALIZATION.PERC_CLIP.UPPER_PERC, value_range=(0, 100)):
             raise ValueError("'DATA.NORMALIZATION.PERC_CLIP.UPPER_PERC' not in [0, 100] range")
 
+    if cfg.DATA.NORMALIZATION.TARGET.ENABLE:
+        target_type = (
+            cfg.DATA.NORMALIZATION.TARGET.TYPE if cfg.DATA.NORMALIZATION.TARGET.TYPE != "" else cfg.DATA.NORMALIZATION.TYPE
+        )
+        assert target_type in ("zero_mean_unit_variance", "scale_range", "div"), (
+            "'DATA.NORMALIZATION.TARGET' only supports 'zero_mean_unit_variance', 'scale_range' or 'div' "
+            "(via 'DATA.NORMALIZATION.TARGET.TYPE' or the inherited 'DATA.NORMALIZATION.TYPE'), got "
+            f"'{target_type}'"
+        )
+        if target_type == "zero_mean_unit_variance":
+            if cfg.DATA.NORMALIZATION.TARGET.ZERO_MEAN_UNIT_VAR.MEAN_VAL[0] == -1 or cfg.DATA.NORMALIZATION.TARGET.ZERO_MEAN_UNIT_VAR.STD_VAL[0] == -1:
+                raise ValueError(
+                    "'DATA.NORMALIZATION.TARGET.ZERO_MEAN_UNIT_VAR.MEAN_VAL'/'STD_VAL' must be set to fixed "
+                    "values when 'DATA.NORMALIZATION.TARGET.ENABLE' is True. A per-image adaptive mean/std "
+                    "computed from the ground truth cannot be recovered at test time without the ground truth "
+                    "itself, which defeats the purpose of this section - compute fixed values once from the "
+                    "training set's target images and set them here."
+                )
+        else:  # 'scale_range' / 'div': no mean/std concept, fixed clip bounds double as the fixed
+            # min/max used to undo the 0-1 scaling (see 'resolve_fixed_norm_info'), so they are required.
+            if not cfg.DATA.NORMALIZATION.TARGET.PERC_CLIP.ENABLE:
+                raise ValueError(
+                    "'DATA.NORMALIZATION.TARGET.PERC_CLIP.ENABLE' must be True, with fixed "
+                    "'LOWER_VALUE'/'UPPER_VALUE', when 'DATA.NORMALIZATION.TARGET.TYPE' is "
+                    "'scale_range'/'div': those fixed bounds double as the fixed min/max used to undo the "
+                    "0-1 scaling at test time, since an adaptive per-image min/max cannot be recovered from "
+                    "the ground truth at test time."
+                )
+        if cfg.DATA.NORMALIZATION.TARGET.PERC_CLIP.ENABLE:
+            if cfg.DATA.NORMALIZATION.TARGET.PERC_CLIP.LOWER_VALUE[0] == -1 or cfg.DATA.NORMALIZATION.TARGET.PERC_CLIP.UPPER_VALUE[0] == -1:
+                raise ValueError(
+                    "'DATA.NORMALIZATION.TARGET.PERC_CLIP.LOWER_VALUE'/'UPPER_VALUE' must be set to fixed "
+                    "values when 'DATA.NORMALIZATION.TARGET.PERC_CLIP.ENABLE' is True - only fixed clip "
+                    "values are supported here, as percentiles would need to be computed from the ground "
+                    "truth, which is not available at test time."
+                )
+
     ### Model ###
     if not model_will_be_read and cfg.MODEL.SOURCE == "biapy":
         assert model_arch in [
@@ -2194,11 +2658,10 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             "mae",
             "unext_v1",
             "unext_v2",
-            "hrnet18",
-            "hrnet32",
-            "hrnet48",
-            "hrnet64",
-        ], "MODEL.ARCHITECTURE not in ['unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'simple_cnn', 'efficientnet_b[0-7]', 'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'vit', 'mae', 'unext_v1', 'unext_v2', 'hrnet18', 'hrnet32', 'hrnet48', 'hrnet64']"
+            "hrnet",
+            "stunet",
+            "nafnet",
+        ], "MODEL.ARCHITECTURE not in ['unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'simple_cnn', 'efficientnet_b[0-7]', 'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'vit', 'mae', 'unext_v1', 'unext_v2', 'hrnet', 'stunet']"
         if (
             model_arch
             not in [
@@ -2216,10 +2679,9 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 "unext_v2",
                 "dfcan",
                 "rcan",
-                "hrnet18",
-                "hrnet32",
-                "hrnet48",
-                "hrnet64",
+                "hrnet",
+                "stunet",
+                "nafnet",
             ]
             and cfg.PROBLEM.NDIM == "3D"
             and cfg.PROBLEM.TYPE != "CLASSIFICATION"
@@ -2241,10 +2703,9 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                         "unext_v2",
                         "dfcan",
                         "rcan",
-                        "hrnet18",
-                        "hrnet32",
-                        "hrnet48",
-                        "hrnet64",
+                        "hrnet",
+                        "stunet",
+                        "nafnet",
                     ]
                 )
             )
@@ -2263,14 +2724,29 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 "unetr",
                 "unext_v1",
                 "unext_v2",
-                "hrnet18",
-                "hrnet32",
-                "hrnet48",
-                "hrnet64",
+                "hrnet",
+                "stunet",
             ]
         ):
             raise ValueError(
-                "'DATA.N_CLASSES' > 2 can only be used with 'MODEL.ARCHITECTURE' in ['unet', 'resunet', 'resunet++', 'seunet', 'resunet_se', 'attention_unet', 'multiresunet', 'unetr', 'unext_v1', 'unext_v2', 'hrnet18', 'hrnet32', 'hrnet48', 'hrnet64']"
+                "'DATA.N_CLASSES' > 2 can only be used with 'MODEL.ARCHITECTURE' in ['unet', 'resunet', 'resunet++', 'seunet', 'resunet_se', 'attention_unet', 'multiresunet', 'unetr', 'unext_v1', 'unext_v2', 'hrnet', 'stunet']"
+            )
+
+        # Conv block ordering (post- vs pre-activation)
+        if cfg.MODEL.CONV_BLOCK_ORDER not in ["conv_norm_act", "norm_act_conv"]:
+            raise ValueError("'MODEL.CONV_BLOCK_ORDER' not in ['conv_norm_act', 'norm_act_conv']")
+        if cfg.MODEL.CONV_BLOCK_ORDER == "norm_act_conv" and model_arch not in [
+            "unet",
+            "resunet",
+            "resunet++",
+            "seunet",
+            "resunet_se",
+            "attention_unet",
+        ]:
+            raise ValueError(
+                "'MODEL.CONV_BLOCK_ORDER' set to 'norm_act_conv' (pre-activation) is only supported by "
+                "['unet', 'resunet', 'resunet++', 'seunet', 'resunet_se', 'attention_unet']. "
+                "'{}' only supports the default 'conv_norm_act'.".format(model_arch)
             )
 
         assert len(cfg.MODEL.FEATURE_MAPS) > 2, "'MODEL.FEATURE_MAPS' needs to have at least 3 values"
@@ -2294,6 +2770,59 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             else:
                 raise ValueError("'MODEL.FEATURE_MAPS' and 'MODEL.DROPOUT_VALUES' lengths must be equal")
 
+    # Adjust YX_DOWN 
+    if all(x == 0 for x in cfg.MODEL.YX_DOWN):
+        if model_arch == "multiresunet":
+            opts.extend(["MODEL.YX_DOWN", (2, 2, 2, 2)])
+        else:
+            opts.extend(["MODEL.YX_DOWN", (2,) * (len(cfg.MODEL.FEATURE_MAPS) - 1)])
+    elif any([False for x in cfg.MODEL.YX_DOWN if x != 1 and x != 2]):
+        raise ValueError("'MODEL.YX_DOWN' needs to be 1 or 2")
+    else:
+        if model_arch == "multiresunet" and len(cfg.MODEL.YX_DOWN) != 4:
+            raise ValueError("'MODEL.YX_DOWN' length must be 4 when using 'multiresunet'")
+        elif model_arch in [
+            "unet",
+            "resunet",
+            "resunet++",
+            "seunet",
+            "resunet_se",
+            "attention_unet",
+            "unext_v1",
+            "unext_v2",
+            "nafnet",
+        ]:
+            if len(cfg.MODEL.FEATURE_MAPS) - 1 != len(cfg.MODEL.YX_DOWN):
+                raise ValueError("'MODEL.FEATURE_MAPS' length minus one and 'MODEL.YX_DOWN' length must be equal")
+    if "hrnet" in model_arch:
+        assert cfg.MODEL.HRNET.VARIANT in ["W18", "W32", "W48", "W64", "custom"], "'MODEL.HRNET.VARIANT' needs to be in ['W18', 'W32', 'W48', 'W64', 'custom']"
+        if cfg.MODEL.HRNET.VARIANT != "custom":
+            # Extract base channels directly from the variant string
+            base_channels = int(cfg.MODEL.HRNET.VARIANT.lower().replace("w", ""))  # Remove 'w' prefix if present and convert to int
+            num_stages = 3
+            num_modules = [1, 4, 3]
+            num_branches = [2, 3, 4]
+
+            # Procedurally generate blocks and channels based on the number of branches
+            num_blocks = [[4] * b for b in num_branches]
+            num_channels = [[base_channels * (2**i) for i in range(b)] for b in num_branches]
+
+            opts.extend(["MODEL.HRNET.Z_DOWN", (1,) * (len(cfg.MODEL.HRNET.NUM_BLOCKS))])
+            opts.extend(["MODEL.HRNET.YX_DOWN", (2,) * (len(cfg.MODEL.HRNET.NUM_BLOCKS))])
+            opts.extend(["MODEL.HRNET.BLOCK_TYPE", 'BASIC'])
+            opts.extend(["MODEL.HRNET.NUM_STAGES", num_stages])
+            opts.extend(["MODEL.HRNET.NUM_MODULES", num_modules])
+            opts.extend(["MODEL.HRNET.NUM_BRANCHES", num_branches])
+            opts.extend(["MODEL.HRNET.NUM_BLOCKS", num_blocks])
+            opts.extend(["MODEL.HRNET.NUM_CHANNELS", num_channels])
+        else:
+            if len(cfg.MODEL.HRNET.NUM_BLOCKS) != len(cfg.MODEL.HRNET.YX_DOWN):
+                raise ValueError("'MODEL.HRNET.NUM_BLOCKS' length and 'MODEL.HRNET.YX_DOWN' length must be equal")
+            if any([False for x in cfg.MODEL.HRNET.YX_DOWN if x != 1 and x != 2]):
+                raise ValueError("'MODEL.HRNET.YX_DOWN' needs to be 1 or 2")
+            if any([False for x in cfg.MODEL.HRNET.Z_DOWN if x != 1 and x != 2]):
+                raise ValueError("'MODEL.HRNET.Z_DOWN' needs to be 1 or 2")
+
     # Adjust Z_DOWN values to feature maps
     if all(x == 0 for x in cfg.MODEL.Z_DOWN):
         if model_arch == "multiresunet":
@@ -2314,6 +2843,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             "attention_unet",
             "unext_v1",
             "unext_v2",
+            "nafnet",
         ]:
             if len(cfg.MODEL.FEATURE_MAPS) - 1 != len(cfg.MODEL.Z_DOWN):
                 raise ValueError("'MODEL.FEATURE_MAPS' length minus one and 'MODEL.Z_DOWN' length must be equal")
@@ -2322,9 +2852,130 @@ def check_configuration(cfg, jobname, check_data_paths=True):
     if all(x == True for x in cfg.MODEL.ISOTROPY):
         opts.extend(["MODEL.ISOTROPY", (True,) * (len(cfg.MODEL.FEATURE_MAPS))])
 
+    # Adjust CONV_LAYERS to feature maps (one value per level, i.e. per feature map)
+    if model_arch in [
+        "unet",
+        "resunet",
+        "resunet++",
+        "seunet",
+        "resunet_se",
+        "attention_unet",
+        "unext_v1",
+        "unext_v2",
+    ]:
+        conv_layers = cfg.MODEL.CONV_LAYERS
+        n_levels = len(cfg.MODEL.FEATURE_MAPS)
+        if len(conv_layers) == 0:
+            # Not set: use two convolutions per level (classic double-convolution behaviour)
+            opts.extend(["MODEL.CONV_LAYERS", (2,) * n_levels])
+        elif len(conv_layers) == 1:
+            # A single value is broadcast to all levels
+            opts.extend(["MODEL.CONV_LAYERS", (conv_layers[0],) * n_levels])
+        elif len(conv_layers) != n_levels:
+            if len(set(conv_layers)) == 1:
+                # Uniform value but wrong length: broadcast to match the number of levels
+                opts.extend(["MODEL.CONV_LAYERS", (conv_layers[0],) * n_levels])
+            else:
+                raise ValueError("'MODEL.FEATURE_MAPS' and 'MODEL.CONV_LAYERS' lengths must be equal")
+        if any(x < 1 for x in conv_layers):
+            raise ValueError("'MODEL.CONV_LAYERS' values must be greater than or equal to 1")
+
     # Correct UPSCALING for other workflows than SR
     if len(cfg.PROBLEM.SUPER_RESOLUTION.UPSCALING) == 0:
         opts.extend(["PROBLEM.SUPER_RESOLUTION.UPSCALING", (1,) * dim_count])
+
+    larger_io_supported_with_separated_decoders = {
+        "unet",
+        "resunet",
+        "resunet++",
+        "attention_unet",
+        "seunet",
+        "resunet_se",
+    }
+
+    if cfg.PROBLEM.INSTANCE_SEG.SEPARATED_DECODERS_PER_HEAD:
+        if cfg.PROBLEM.TYPE != "INSTANCE_SEG":
+            opts.extend([
+                "PROBLEM.INSTANCE_SEG.SEPARATED_DECODERS_PER_HEAD", False,
+                "PROBLEM.INSTANCE_SEG.SEPARATED_DECODERS_DIVIDE_FEATURE_MAPS", False,
+            ])
+        else:
+            if cfg.MODEL.LARGER_IO and model_arch not in larger_io_supported_with_separated_decoders:
+                raise ValueError(
+                    "'MODEL.LARGER_IO' with 'PROBLEM.INSTANCE_SEG.SEPARATED_DECODERS_PER_HEAD' is only supported for "
+                    "U-Net-like models: ['unet', 'resunet', 'resunet++', 'attention_unet', 'seunet', 'resunet_se']. "
+                    f"Provided architecture: '{cfg.MODEL.ARCHITECTURE}'"
+                )
+            if cfg.LOSS.CONTRAST.ENABLE:
+                raise ValueError("'LOSS.CONTRAST.ENABLE' can not be True when 'PROBLEM.INSTANCE_SEG.SEPARATED_DECODERS_PER_HEAD' is True")
+            _inst_supported = ["unet", "resunet", "resunet++", "seunet", "resunet_se", "attention_unet", "unext_v1", "unext_v2"]
+            if model_arch not in _inst_supported:
+                raise ValueError(
+                    f"'PROBLEM.INSTANCE_SEG.SEPARATED_DECODERS_PER_HEAD' is only supported by {_inst_supported}. "
+                    f"Selected architecture '{model_arch}' does not support it."
+                )
+    elif cfg.PROBLEM.INSTANCE_SEG.SEPARATED_DECODERS_DIVIDE_FEATURE_MAPS:
+        # Feature maps can only be divided between decoders if more than one decoder is created
+        opts.extend(["PROBLEM.INSTANCE_SEG.SEPARATED_DECODERS_DIVIDE_FEATURE_MAPS", False])
+
+    if cfg.PROBLEM.DETECTION.SEPARATED_DECODERS_PER_HEAD:
+        if cfg.PROBLEM.TYPE != "DETECTION":
+            opts.extend([
+                "PROBLEM.DETECTION.SEPARATED_DECODERS_PER_HEAD", False,
+                "PROBLEM.DETECTION.SEPARATED_DECODERS_DIVIDE_FEATURE_MAPS", False,
+            ])
+        else:
+            if cfg.DATA.N_CLASSES <= 2:
+                raise ValueError(
+                    "'PROBLEM.DETECTION.SEPARATED_DECODERS_PER_HEAD' can only be True when 'DATA.N_CLASSES' is greater than 2"
+                )
+            if cfg.MODEL.LARGER_IO and model_arch not in larger_io_supported_with_separated_decoders:
+                raise ValueError(
+                    "'MODEL.LARGER_IO' with 'PROBLEM.DETECTION.SEPARATED_DECODERS_PER_HEAD' is only supported for "
+                    "U-Net-like models: ['unet', 'resunet', 'resunet++', 'attention_unet', 'seunet', 'resunet_se']. "
+                    f"Provided architecture: '{cfg.MODEL.ARCHITECTURE}'"
+                )
+            if cfg.LOSS.CONTRAST.ENABLE:
+                raise ValueError("'LOSS.CONTRAST.ENABLE' can not be True when 'PROBLEM.DETECTION.SEPARATED_DECODERS_PER_HEAD' is True")
+            _det_supported = ["unet", "resunet", "resunet++", "seunet", "resunet_se", "attention_unet", "unext_v1", "unext_v2"]
+            if model_arch not in _det_supported:
+                raise ValueError(
+                    f"'PROBLEM.DETECTION.SEPARATED_DECODERS_PER_HEAD' is only supported by {_det_supported}. "
+                    f"Selected architecture '{model_arch}' does not support it."
+                )
+    elif cfg.PROBLEM.DETECTION.SEPARATED_DECODERS_DIVIDE_FEATURE_MAPS:
+        # Feature maps can only be divided between decoders if more than one decoder is created
+        opts.extend(["PROBLEM.DETECTION.SEPARATED_DECODERS_DIVIDE_FEATURE_MAPS", False])
+
+    if cfg.PROBLEM.IMAGE_TO_IMAGE.SEPARATED_DECODERS_PER_HEAD:
+        if cfg.PROBLEM.TYPE != "IMAGE_TO_IMAGE":
+            opts.extend([
+                "PROBLEM.IMAGE_TO_IMAGE.SEPARATED_DECODERS_PER_HEAD", False,
+                "PROBLEM.IMAGE_TO_IMAGE.SEPARATED_DECODERS_DIVIDE_FEATURE_MAPS", False,
+            ])
+        else:
+            if cfg.MODEL.LARGER_IO and model_arch not in larger_io_supported_with_separated_decoders:
+                raise ValueError(
+                    "'MODEL.LARGER_IO' with 'PROBLEM.IMAGE_TO_IMAGE.SEPARATED_DECODERS_PER_HEAD' is only supported for "
+                    "U-Net-like models: ['unet', 'resunet', 'resunet++', 'attention_unet', 'seunet', 'resunet_se']. "
+                    f"Provided architecture: '{cfg.MODEL.ARCHITECTURE}'"
+                )
+            if cfg.LOSS.CONTRAST.ENABLE:
+                raise ValueError("'LOSS.CONTRAST.ENABLE' can not be True when 'PROBLEM.IMAGE_TO_IMAGE.SEPARATED_DECODERS_PER_HEAD' is True")
+            _i2i_supported = ["unet", "resunet", "resunet++", "seunet", "resunet_se", "attention_unet", "unext_v1", "unext_v2"]
+            if model_arch not in _i2i_supported:
+                raise ValueError(
+                    f"'PROBLEM.IMAGE_TO_IMAGE.SEPARATED_DECODERS_PER_HEAD' is only supported by {_i2i_supported}. "
+                    f"Selected architecture '{model_arch}' does not support it."
+                )
+    elif cfg.PROBLEM.IMAGE_TO_IMAGE.SEPARATED_DECODERS_DIVIDE_FEATURE_MAPS:
+        # Feature maps can only be divided between decoders if more than one decoder is created
+        opts.extend(["PROBLEM.IMAGE_TO_IMAGE.SEPARATED_DECODERS_DIVIDE_FEATURE_MAPS", False])
+
+    if cfg.MODEL.NORMALIZATION == "":
+        opts.extend(["MODEL.NORMALIZATION", "in"])
+    else:
+        assert cfg.MODEL.NORMALIZATION in ["in", "bn", "sync_bn", "gn", "ln"], "'MODEL.NORMALIZATION' needs to be in ['in', 'bn', 'sync_bn', 'gn', 'ln']"
 
     if len(opts) > 0:
         cfg.merge_from_list(opts)
@@ -2338,10 +2989,8 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 )
             )
         if cfg.PROBLEM.TYPE in [
-            "SEMANTIC_SEG",
             "INSTANCE_SEG",
             "DETECTION",
-            "DENOISING",
         ]:
             if model_arch not in [
                 "unet",
@@ -2354,13 +3003,56 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 "multiresunet",
                 "unext_v1",
                 "unext_v2",
-                "hrnet18",
-                "hrnet32",
-                "hrnet48",
-                "hrnet64",
+                "hrnet",
+                "stunet",
             ]:
                 raise ValueError(
-                    "Architectures available for {} are: ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'resunet_se', 'unetr', 'multiresunet', 'unext_v1', 'unext_v2', 'hrnet18', 'hrnet32', 'hrnet48', 'hrnet64']".format(
+                    "Architectures available for {} are: ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'resunet_se', 'unetr', 'multiresunet', 'unext_v1', 'unext_v2', 'hrnet', 'stunet']".format(
+                        cfg.PROBLEM.TYPE
+                    )
+                )
+        elif cfg.PROBLEM.TYPE == "SEMANTIC_SEG":
+            if model_arch not in [
+                "edsr",
+                "rcan",
+                "dfcan",
+                "wdsr",
+                "unet",
+                "resunet",
+                "resunet++",
+                "seunet",
+                "attention_unet",
+                "resunet_se",
+                "unetr",
+                "multiresunet",
+                "unext_v1",
+                "unext_v2",
+                "hrnet",
+                "stunet",
+            ]:
+                raise ValueError(
+                    "Architectures available for {} are: ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'resunet_se', 'unetr', 'multiresunet', 'unext_v1', 'unext_v2', 'hrnet', 'stunet']".format(
+                        cfg.PROBLEM.TYPE
+                    )
+                )
+        elif cfg.PROBLEM.TYPE == "DENOISING":
+            if model_arch not in [
+                "unet",
+                "resunet",
+                "resunet++",
+                "seunet",
+                "attention_unet",
+                "resunet_se",
+                "unetr",
+                "multiresunet",
+                "unext_v1",
+                "unext_v2",
+                "hrnet",
+                "stunet",
+                "nafnet",
+            ]:
+                raise ValueError(
+                    "Architectures available for {} are: ['unet', 'resunet', 'resunet++', 'seunet', 'attention_unet', 'resunet_se', 'unetr', 'multiresunet', 'unext_v1', 'unext_v2', 'hrnet', 'stunet']".format(
                         cfg.PROBLEM.TYPE
                     )
                 )
@@ -2407,17 +3099,21 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 "multiresunet",
                 "unext_v1",
                 "unext_v2",
-                "hrnet18",
-                "hrnet32",
-                "hrnet48",
-                "hrnet64",
+                "hrnet",
+                "stunet",
+                "nafnet",
             ]:
                 raise ValueError(
-                    "Architectures available for 'IMAGE_TO_IMAGE' are: ['edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'resunet++', 'resunet_se', 'seunet', 'attention_unet', 'unetr', 'multiresunet', 'unext_v1', 'unext_v2', 'hrnet18', 'hrnet32', 'hrnet48', 'hrnet64']"
+                    "Architectures available for 'IMAGE_TO_IMAGE' are: ['edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'resunet++', 'resunet_se', 'seunet', 'attention_unet', 'unetr', 'multiresunet', 'unext_v1', 'unext_v2', 'hrnet', 'stunet', 'nafnet']"
                 )
             # Not allowed archs
             if cfg.PROBLEM.NDIM == "3D" and model_arch == "wdsr":
                 raise ValueError("'wdsr' architecture is not available for 3D 'IMAGE_TO_IMAGE'")
+            if model_arch == "nafnet":
+                assert cfg.MODEL.NAFNET.GENERATOR_BACKBONE in [
+                    "nafnet",
+                    "stunet",
+                ], "MODEL.NAFNET.GENERATOR_BACKBONE not in ['nafnet', 'stunet']"
         elif cfg.PROBLEM.TYPE == "SELF_SUPERVISED":
             if model_arch not in [
                 "unet",
@@ -2436,14 +3132,12 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 "wdsr",
                 "vit",
                 "mae",
-                "hrnet18",
-                "hrnet32",
-                "hrnet48",
-                "hrnet64",
+                "hrnet",
+                "stunet",
             ]:
                 raise ValueError(
                     "'SELF_SUPERVISED' models available are these: ['unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', "
-                    "'unetr', 'unext_v1', 'unext_v2', 'edsr', 'rcan', 'dfcan', 'wdsr', 'vit', 'mae', 'hrnet18', 'hrnet32', 'hrnet48', 'hrnet64']"
+                    "'unetr', 'unext_v1', 'unext_v2', 'edsr', 'rcan', 'dfcan', 'wdsr', 'vit', 'mae', 'hrnet', 'stunet']"
                 )
 
             # Not allowed archs
@@ -2459,8 +3153,82 @@ def check_configuration(cfg, jobname, check_data_paths=True):
         if model_arch in ["unetr", "vit", "mae"]:
             if model_arch == "mae" and cfg.PROBLEM.TYPE != "SELF_SUPERVISED":
                 raise ValueError("'mae' model can only be used in 'SELF_SUPERVISED' workflow")
-            if cfg.MODEL.VIT_EMBED_DIM % cfg.MODEL.VIT_NUM_HEADS != 0:
+
+            _vit_models = ["custom", "vit_base_patch16", "vit_large_patch16", "vit_huge_patch14", "sam3_vit"]
+            if model_arch == "unetr":
+                vit_backbone, vit_backbone_var = cfg.MODEL.UNETR_VIT_MODEL, "MODEL.UNETR_VIT_MODEL"
+            elif model_arch == "vit":
+                vit_backbone, vit_backbone_var = cfg.MODEL.VIT_MODEL, "MODEL.VIT_MODEL"
+            else:  # 'mae' is always built with the 'MODEL.VIT_*' variables
+                vit_backbone, vit_backbone_var = "custom", "MODEL.VIT_MODEL"
+            if vit_backbone not in _vit_models:
+                raise ValueError(f"'{vit_backbone_var}' needs to be in {_vit_models}. Provided: '{vit_backbone}'")
+
+            # Only "custom" builds the ViT out of the 'MODEL.VIT_*' variables. The rest of the models are
+            # built with the values they were designed with, 'MODEL.VIT_TOKEN_SIZE' included.
+            custom_vit = vit_backbone == "custom"
+            if custom_vit:
+                token_size = cfg.MODEL.VIT_TOKEN_SIZE
+            elif vit_backbone == "sam3_vit":
+                # SAM 3 uses 14x14 tokens, but UNETR's decoder needs a power of two, so the closest one is
+                # used there and its patch embedding is resized to it when loading the pretrained weights
+                token_size = 16 if model_arch == "unetr" else 14
+            else:
+                token_size = 14 if vit_backbone == "vit_huge_patch14" else 16
+
+            if model_arch == "unetr":
+                # UNETR's decoder upsamples the ViT features by a factor of two on each of its levels
+                if token_size < 2 or 2 ** int(np.log2(token_size)) != token_size:
+                    raise ValueError(
+                        "UNETR's token size needs to be a power of two greater than one, as its decoder upsamples "
+                        "the ViT features by a factor of two on each level. Resulting token size: {}{}".format(
+                            token_size,
+                            f" (set by 'MODEL.UNETR_VIT_MODEL' as '{vit_backbone}', so "
+                            "'MODEL.UNETR_VIT_MODEL' must be set to 'custom' to be able to select the token "
+                            "size with 'MODEL.VIT_TOKEN_SIZE')" if not custom_vit else "",
+                        )
+                    )
+            if custom_vit and cfg.MODEL.VIT_EMBED_DIM % cfg.MODEL.VIT_NUM_HEADS != 0:
                 raise ValueError("'MODEL.VIT_EMBED_DIM' should be divisible by 'MODEL.VIT_NUM_HEADS'")
+
+            if vit_backbone == "sam3_vit":
+                if cfg.DATA.PATCH_SIZE[0] % token_size != 0:
+                    valid = [token_size * i for i in range(4, 10)]
+                    why = (
+                        "under UNETR, whose decoder needs a power of two (SAM 3 itself uses 14x14 tokens)"
+                        if model_arch == "unetr"
+                        else "in SAM 3"
+                    )
+                    raise ValueError(
+                        f"'DATA.PATCH_SIZE' needs to be a multiple of {token_size} when the ViT backbone is "
+                        f"'sam3_vit', as that is the token size it is built with {why}. Provided: "
+                        f"{cfg.DATA.PATCH_SIZE[0]}. Valid sizes are, for example: {valid}"
+                    )
+                if cfg.PROBLEM.NDIM == "3D":
+                    raise ValueError(
+                        f"'{vit_backbone_var}' can not be set to 'sam3_vit' with 3D data, as SAM 3's pretrained "
+                        "weights are 2D (its patch embedding projects 3-channel 2D images)"
+                    )
+                if cfg.MODEL.VIT_PRETRAINED_WEIGHTS != "" and cfg.DATA.PATCH_SIZE[-1] not in [1, 3]:
+                    raise ValueError(
+                        "SAM 3's pretrained weights can only be loaded with 1 or 3 input channels, but "
+                        f"'DATA.PATCH_SIZE' has {cfg.DATA.PATCH_SIZE[-1]}. SAM 3 was trained on RGB images, and BiaPy "
+                        "can only adapt its patch embedding automatically when the input is grayscale (1 channel), by "
+                        f"adding up its three kernels. With {cfg.DATA.PATCH_SIZE[-1]} channels there is no meaningful "
+                        "way of doing it, so the data needs to be converted beforehand: keep the channel of interest "
+                        "(1 channel), combine them into an RGB image (3 channels), or set 'MODEL.VIT_PRETRAINED_WEIGHTS' "
+                        f"to '' to train from scratch with the {cfg.DATA.PATCH_SIZE[-1]} channels."
+                    )
+            elif cfg.MODEL.VIT_PRETRAINED_WEIGHTS != "":
+                raise ValueError(
+                    "'MODEL.VIT_PRETRAINED_WEIGHTS' can only be used when the ViT backbone is 'sam3_vit', as it is "
+                    f"the only one with pretrained weights available. '{vit_backbone_var}' is set to '{vit_backbone}'."
+                )
+        elif cfg.MODEL.VIT_PRETRAINED_WEIGHTS != "":
+            raise ValueError(
+                "'MODEL.VIT_PRETRAINED_WEIGHTS' can only be used with the 'vit' and 'unetr' architectures, but "
+                f"'MODEL.ARCHITECTURE' is '{cfg.MODEL.ARCHITECTURE}'"
+            )
             if not all([i == cfg.DATA.PATCH_SIZE[0] for i in cfg.DATA.PATCH_SIZE[:-1]]):
                 raise ValueError(
                     "'unetr', 'vit' 'mae' models need to have same shape in all dimensions (e.g. DATA.PATCH_SIZE = (80,80,80,1) )"
@@ -2477,56 +3245,90 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             "multiresunet",
             "unext_v1",
             "unext_v2",
-            "hrnet18",
-            "hrnet32",
-            "hrnet48",
-            "hrnet64",
+            "hrnet",
+            "stunet",
         ]:
             z_size = cfg.DATA.PATCH_SIZE[0]
             sizes = cfg.DATA.PATCH_SIZE[1:-1]
 
-            if "hrnet" not in model_arch:
-                for i in range(len(cfg.MODEL.FEATURE_MAPS) - 1):
-                    if not all(
-                        [False for x in sizes if x % (np.power(2, (i + 1))) != 0 or z_size % cfg.MODEL.Z_DOWN[i] != 0]
-                    ):
-                        m = (
-                            "The 'DATA.PATCH_SIZE' provided is not divisible by 2 in each of the U-Net's levels. You can:\n 1) Reduce the number "
-                            + "of levels (by reducing 'cfg.MODEL.FEATURE_MAPS' array's length)\n 2) Increase 'DATA.PATCH_SIZE'"
-                        )
-                        if cfg.PROBLEM.NDIM == "3D":
-                            m += (
-                                "\n 3) If the Z axis is the problem, as the patch size is normally less than in other axis due to resolution, you "
-                                + "can tune 'MODEL.Z_DOWN' variable to not downsample the image in all U-Net levels"
-                            )
-                        raise ValueError(m)
-                    z_size = z_size // cfg.MODEL.Z_DOWN[i]
-            else:
-                
-                # Check that the input patch size is divisible in every level of the HRNet selected
-                hrnet_zdown_div = 2 if cfg.MODEL.HRNET.Z_DOWN else 1
+            is_hrnet = "hrnet" in model_arch
+            is_3d = cfg.PROBLEM.NDIM == "3D"
 
-                for i in range(4):
-                    if not all(
-                        [False for x in sizes if x % (np.power(2, (i + 1))) != 0 or z_size % hrnet_zdown_div != 0]
-                    ):
-                        m = (
-                            f"The 'DATA.PATCH_SIZE' provided is not divisible by 2 in each of the HRNET's levels. You can:\n 1) Reduce the number "
-                            + "of levels (by reducing 'cfg.MODEL.FEATURE_MAPS' array's length)\n 2) Increase 'DATA.PATCH_SIZE'"
+            # 1. Setup the downsampling schedules based on the architecture
+            if is_hrnet:
+                num_downsamplings = len(cfg.MODEL.HRNET.NUM_BLOCKS)
+                yx_down_schedule = cfg.MODEL.HRNET.YX_DOWN
+                z_down_schedule = cfg.MODEL.HRNET.Z_DOWN
+                z_param_name = "MODEL.HRNET.Z_DOWN"
+            else:
+                if model_arch == "multiresunet":
+                    num_downsamplings = 4
+                else:
+                    num_downsamplings = len(cfg.MODEL.FEATURE_MAPS) - 1
+                yx_down_schedule = cfg.MODEL.YX_DOWN
+                z_down_schedule = cfg.MODEL.Z_DOWN
+                z_param_name = "MODEL.Z_DOWN"
+
+            # Isolate the current sizes to simulate downsampling iteratively
+            current_z = cfg.DATA.PATCH_SIZE[0] if is_3d else 1
+            current_yx = list(cfg.DATA.PATCH_SIZE[1:-1]) if is_3d else list(cfg.DATA.PATCH_SIZE[:-1])
+
+            # 2. Single loop to validate divisibility and simulate downsampling
+            for i in range(num_downsamplings):
+                yx_factor = yx_down_schedule[i]
+                z_factor = z_down_schedule[i] if is_3d else 1
+
+                # Check divisibility using clean generator expressions
+                yx_invalid = any(dim % yx_factor != 0 or dim <= 2 for dim in current_yx)
+                z_invalid = is_3d and (current_z % z_factor != 0 or current_z <= 2)
+
+                if yx_invalid or z_invalid:
+                    m = (
+                        f"The 'DATA.PATCH_SIZE' provided is not divisible by the downsampling factor at level {i} of the {model_arch}. "
+                        "You can:\n"
+                        " 1) Reduce the number of levels (by reducing 'cfg.MODEL.FEATURE_MAPS' array length)\n"
+                        " 2) Increase 'DATA.PATCH_SIZE'"
+                    )
+                    if is_3d:
+                        m += (
+                            f"\n 3) If the Z axis is the problem (often smaller due to resolution), you "
+                            f"can tune '{z_param_name}' to not downsample the Z axis in all levels."
                         )
-                        if cfg.PROBLEM.NDIM == "3D":
-                            m += (
-                                "\n 3) If the Z axis is the problem, as the patch size is normally less than in other axis due to resolution, you "
-                                + f"can tune 'MODEL.HRNET.Z_DOWN' variable to not downsample the image in all U-Net levels"
-                            )
-                        raise ValueError(m)
-                    z_size = z_size // 2 if cfg.MODEL.HRNET.Z_DOWN else z_size
+                    raise ValueError(m)
+
+                # Apply downsampling to prepare for the next level's check
+                current_yx = [dim // yx_factor for dim in current_yx]
+                current_z = current_z // z_factor
 
         if "hrnet" in model_arch:
             assert cfg.MODEL.HRNET.BLOCK_TYPE in ['BASIC', 'BOTTLENECK', 'CONVNEXT_V1', 'CONVNEXT_V2'], "'MODEL.HRNET.BLOCK_TYPE' not in ['BASIC', 'BOTTLENECK', 'CONVNEXT_V1', 'CONVNEXT_V2']"
             assert cfg.MODEL.HRNET.HEAD_TYPE in ["OCR", "ASPP", "PSP", "FCN"], "'MODEL.HRNET.HEAD_TYPE' not in ['OCR', 'ASPP', 'PSP', 'FCN']"
             if cfg.PROBLEM.NDIM == "3D" and cfg.MODEL.HRNET.HEAD_TYPE == "OCR":
                 raise ValueError("'OCR' head is not available for 3D 'HRNET' models. Please choose another head type: 'ASPP', 'PSP' or 'FCN'")
+        elif model_arch == "stunet":
+            assert cfg.MODEL.STUNET.VARIANT in ['small', 'base', 'large', 'custom'], "'MODEL.STUNET.VARIANT' not in ['small', 'base', 'large', 'custom']"
+            if cfg.MODEL.STUNET.VARIANT == "custom":
+                n_stages = len(cfg.MODEL.STUNET.DIMS)
+                assert len(cfg.MODEL.STUNET.DEPTH) == n_stages, (
+                    f"'MODEL.STUNET.DEPTH' (length {len(cfg.MODEL.STUNET.DEPTH)}) must have the same length as "
+                    f"'MODEL.STUNET.DIMS' (length {n_stages})"
+                )
+                assert len(cfg.MODEL.STUNET.CONV_KERNEL_SIZES) == n_stages, (
+                    f"'MODEL.STUNET.CONV_KERNEL_SIZES' (length {len(cfg.MODEL.STUNET.CONV_KERNEL_SIZES)}) must have the "
+                    f"same length as 'MODEL.STUNET.DIMS' (length {n_stages})"
+                )
+                assert len(cfg.MODEL.STUNET.POOL_OP_KERNEL_SIZES) == n_stages - 1, (
+                    f"'MODEL.STUNET.POOL_OP_KERNEL_SIZES' (length {len(cfg.MODEL.STUNET.POOL_OP_KERNEL_SIZES)}) must be "
+                    f"one shorter than 'MODEL.STUNET.DIMS' (length {n_stages}), i.e. {n_stages - 1}"
+                )
+                assert all(len(k) == dim_count for k in cfg.MODEL.STUNET.CONV_KERNEL_SIZES), (
+                    f"Each entry in 'MODEL.STUNET.CONV_KERNEL_SIZES' must have {dim_count} values "
+                    f"(one per spatial dimension) when PROBLEM.NDIM == '{cfg.PROBLEM.NDIM}'"
+                )
+                assert all(len(k) == dim_count for k in cfg.MODEL.STUNET.POOL_OP_KERNEL_SIZES), (
+                    f"Each entry in 'MODEL.STUNET.POOL_OP_KERNEL_SIZES' must have {dim_count} values "
+                    f"(one per spatial dimension) when PROBLEM.NDIM == '{cfg.PROBLEM.NDIM}'"
+                )
 
     if cfg.MODEL.LOAD_CHECKPOINT and check_data_paths:
         file = get_checkpoint_path(cfg, jobname)
@@ -2554,21 +3356,90 @@ def check_configuration(cfg, jobname, check_data_paths=True):
 
     assert cfg.MODEL.OUT_CHECKPOINT_FORMAT in ["pth", "safetensors"], "MODEL.OUT_CHECKPOINT_FORMAT not in ['pth', 'safetensors']"
 
+    ## NAFNet is always GAN-based ##
+    if cfg.MODEL.ARCHITECTURE == "nafnet":
+        if cfg.MODEL.NAFNET.ARCHITECTURE_D == "":
+            raise ValueError("'MODEL.ARCHITECTURE' is 'nafnet', which always requires a discriminator: set 'MODEL.NAFNET.ARCHITECTURE_D'.")
+        loss_names_upper = [str(n).upper() for n in cfg.LOSS.TYPE]
+        if "BCE" not in loss_names_upper and "HINGE" not in loss_names_upper:
+            raise ValueError("'MODEL.ARCHITECTURE' is 'nafnet', which always requires an adversarial term: include 'BCE' or 'HINGE' in 'LOSS.TYPE'.")
+
     ### Train ###
-    assert cfg.TRAIN.OPTIMIZER in [
-        "SGD",
-        "ADAM",
-        "ADAMW",
-    ], "TRAIN.OPTIMIZER not in ['SGD', 'ADAM', 'ADAMW']"
+    ## Optimizers ##
+    if not isinstance(cfg.TRAIN.OPTIMIZER, list):
+        raise ValueError("'TRAIN.OPTIMIZER' must be a list")
+    if cfg.MODEL.ARCHITECTURE in ['nafnet'] and cfg.MODEL.NAFNET.ARCHITECTURE_D != "":
+        if len(cfg.TRAIN.OPTIMIZER) != 2:
+            raise ValueError(
+                f"Configuration mismatch: You requested {len(cfg.TRAIN.OPTIMIZER)} optimizers, "
+                f"but the model has 2 parameter group(s). "
+                f"Check your TRAIN.OPTIMIZER list in the config."
+            )
+    elif len(cfg.TRAIN.OPTIMIZER) > 1:
+        raise ValueError(
+            "Multiple optimizers were provided but no discriminator architecture is configured. "
+            "Either set a discriminator (e.g. 'MODEL.NAFNET.ARCHITECTURE_D') or reduce 'TRAIN.OPTIMIZER' to a single entry."
+        )
+    for opt in cfg.TRAIN.OPTIMIZER:
+        if opt not in ["SGD", "ADAM", "ADAMW"]:
+            raise ValueError("'TRAIN.OPTIMIZER' values must be in ['SGD', 'ADAM', 'ADAMW']")
+
+    ## LR ##
+    if not isinstance(cfg.TRAIN.LR, list):
+        raise ValueError("'TRAIN.LR' must be a list")
+    if len(cfg.TRAIN.OPTIMIZER) != len(cfg.TRAIN.LR):
+        raise ValueError("'TRAIN.OPTIMIZER' and 'TRAIN.LR' must have the same length")
+
+    ## Betas ##
+    if not isinstance(cfg.TRAIN.OPT_BETAS, list):
+        raise ValueError("'TRAIN.OPT_BETAS' must be a list")
+    for idx, beta_pair in enumerate(cfg.TRAIN.OPT_BETAS):
+        if isinstance(beta_pair, str):
+            raise ValueError(
+                f"Config Error in 'TRAIN.OPT_BETAS': Found a string '{beta_pair}'. "
+                f"You must use nested square brackets `[]`. "
+                f"Change it to: [[0.9, 0.999]]"
+            )
+        if not isinstance(beta_pair, list):
+            raise ValueError(
+                f"Config Error: Each item in 'TRAIN.OPT_BETAS' must be a list. "
+                f"Got {type(beta_pair).__name__} at index {idx}."
+            )
+    if len(cfg.TRAIN.OPT_BETAS) not in [1, len(cfg.TRAIN.OPTIMIZER)]:
+        raise ValueError("'TRAIN.OPT_BETAS' must have length 1 or match 'TRAIN.OPTIMIZER' length")
+    if len(cfg.TRAIN.OPT_BETAS) == 1 and len(cfg.TRAIN.OPTIMIZER) > 1:
+        cfg.TRAIN.OPT_BETAS = cfg.TRAIN.OPT_BETAS * len(cfg.TRAIN.OPTIMIZER)
+    for beta_pair in cfg.TRAIN.OPT_BETAS:
+        if len(beta_pair) != 2:
+            raise ValueError("Each entry in 'TRAIN.OPT_BETAS' must be a tuple/list of length 2")
 
     if cfg.TRAIN.ENABLE and cfg.TRAIN.LR_SCHEDULER.NAME != "":
         if cfg.TRAIN.LR_SCHEDULER.NAME not in [
             "reduceonplateau",
             "warmupcosine",
             "onecycle",
+            "warmupreduceonplateau",
         ]:
-            raise ValueError("'TRAIN.LR_SCHEDULER.NAME' must be in ['reduceonplateau', 'warmupcosine', 'onecycle']")
-        if cfg.TRAIN.LR_SCHEDULER.MIN_LR == -1.0 and cfg.TRAIN.LR_SCHEDULER.NAME != "onecycle":
+            raise ValueError(
+                "'TRAIN.LR_SCHEDULER.NAME' must be in ['reduceonplateau', 'warmupcosine', 'onecycle', 'warmupreduceonplateau']"
+            )
+        if cfg.TRAIN.LR_SCHEDULER.NAME not in ["onecycle", "warmupreduceonplateau"]:
+            if not isinstance(cfg.TRAIN.LR_SCHEDULER.MIN_LR, list):
+                raise ValueError("'TRAIN.LR_SCHEDULER.MIN_LR' must be a list")
+            if len(cfg.TRAIN.LR_SCHEDULER.MIN_LR) not in [1, len(cfg.TRAIN.OPTIMIZER)]:
+                raise ValueError("'TRAIN.LR_SCHEDULER.MIN_LR' must have length 1 or match 'TRAIN.OPTIMIZER' length")
+            if len(cfg.TRAIN.LR_SCHEDULER.MIN_LR) == 1 and len(cfg.TRAIN.OPTIMIZER) > 1:
+                opts.extend(["TRAIN.LR_SCHEDULER.MIN_LR", cfg.TRAIN.LR_SCHEDULER.MIN_LR * len(cfg.TRAIN.OPTIMIZER)])
+            if all(x == -1.0 for x in cfg.TRAIN.LR_SCHEDULER.MIN_LR):
+                raise ValueError(
+                    "'TRAIN.LR_SCHEDULER.MIN_LR' needs to be set when 'TRAIN.LR_SCHEDULER.NAME' is between ['reduceonplateau', 'warmupcosine']"
+                )
+        elif len(cfg.TRAIN.LR_SCHEDULER.MIN_LR) > 1 and len(cfg.TRAIN.LR_SCHEDULER.MIN_LR) != len(cfg.TRAIN.OPTIMIZER):
+            raise ValueError("'TRAIN.LR_SCHEDULER.MIN_LR' must have length 1 or match 'TRAIN.OPTIMIZER' length")
+
+        if cfg.TRAIN.LR_SCHEDULER.NAME not in ["onecycle", "warmupreduceonplateau"] and all(
+            x == -1.0 for x in cfg.TRAIN.LR_SCHEDULER.MIN_LR
+        ):
             raise ValueError(
                 "'TRAIN.LR_SCHEDULER.MIN_LR' needs to be set when 'TRAIN.LR_SCHEDULER.NAME' is between ['reduceonplateau', 'warmupcosine']"
             )
@@ -2584,17 +3455,35 @@ def check_configuration(cfg, jobname, check_data_paths=True):
                 )
 
         if cfg.TRAIN.LR_SCHEDULER.NAME == "warmupcosine":
-            if cfg.TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_EPOCHS == -1:
+            if cfg.TRAIN.LR_SCHEDULER.COSINE_DECAY_FRACTION > 0:
+                if cfg.TRAIN.LR_SCHEDULER.COSINE_DECAY_FRACTION > 1.0:
+                    raise ValueError("'TRAIN.LR_SCHEDULER.COSINE_DECAY_FRACTION' must be in (0, 1]")
+                decay_start_epoch = round(cfg.TRAIN.EPOCHS * (1.0 - cfg.TRAIN.LR_SCHEDULER.COSINE_DECAY_FRACTION))
+                if cfg.TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_EPOCHS > decay_start_epoch:
+                    raise ValueError(
+                        "'TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_EPOCHS' must end before decay starts "
+                        "('TRAIN.EPOCHS' * (1 - 'TRAIN.LR_SCHEDULER.COSINE_DECAY_FRACTION'))"
+                    )
+            elif cfg.TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_EPOCHS == -1:
                 raise ValueError(
-                    "'TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_EPOCHS' needs to be set when 'TRAIN.LR_SCHEDULER.NAME' is 'warmupcosine'"
+                    "'TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_EPOCHS' needs to be set when 'TRAIN.LR_SCHEDULER.NAME' is "
+                    "'warmupcosine' (or set 'TRAIN.LR_SCHEDULER.COSINE_DECAY_FRACTION' instead)"
                 )
             if cfg.TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_EPOCHS > cfg.TRAIN.EPOCHS:
                 raise ValueError("'TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_EPOCHS' needs to be less than 'TRAIN.EPOCHS'")
 
+    # Gradient clipping validation
+    if not isinstance(cfg.TRAIN.GRADIENT_CLIP_NORM, (int, float)):
+        raise ValueError("'TRAIN.GRADIENT_CLIP_NORM' must be a number")
+    if cfg.TRAIN.GRADIENT_CLIP_NORM < 0:
+        raise ValueError("'TRAIN.GRADIENT_CLIP_NORM' must be non-negative (0 to disable)")
+
     #### Augmentation ####
     if cfg.AUGMENTOR.ENABLE:
-        if not check_value(cfg.AUGMENTOR.DA_PROB):
-            raise ValueError("AUGMENTOR.DA_PROB not in [0, 1] range")
+        for prob_key in [k for k in cfg.AUGMENTOR.keys() if k.endswith("_PROB")]:
+            if not check_value(cfg.AUGMENTOR[prob_key]):
+                raise ValueError(f"AUGMENTOR.{prob_key} not in [0, 1] range")
+
         if cfg.AUGMENTOR.RANDOM_ROT:
             if not check_value(cfg.AUGMENTOR.RANDOM_ROT_RANGE, (-360, 360)):
                 raise ValueError("AUGMENTOR.RANDOM_ROT_RANGE values needs to be between [-360,360]")
@@ -2639,7 +3528,7 @@ def check_configuration(cfg, jobname, check_data_paths=True):
             if not check_value(cfg.AUGMENTOR.ZOOM_RANGE, (0.1, 10)):
                 raise ValueError("AUGMENTOR.ZOOM_RANGE values needs to be between [0.1,10]")
             if cfg.AUGMENTOR.ZOOM_IN_Z and dim_count == 2:
-                print("WARNING: Ignoring AUGMENTOR.ZOOM_IN_Z in 2D problem")
+                warnings.warn("Ignoring AUGMENTOR.ZOOM_IN_Z in 2D problem")
         assert cfg.AUGMENTOR.AFFINE_MODE in [
             "constant",
             "reflect",
@@ -2755,6 +3644,14 @@ def _assert_int(d, k, ctx, *, min_val=None):
     assert isinstance(d[k], int), f"'{ctx}' '{k}' must be an integer"
     if min_val is not None:
         assert d[k] >= min_val, f"'{ctx}' '{k}' must be >= {min_val}"
+    
+def _assert_float(d, k, ctx, *, min_val=None, max_val=None):
+    assert k in d, f"'{ctx}' must have '{k}' key"
+    assert isinstance(d[k], float), f"'{ctx}' '{k}' must be a float"
+    if min_val is not None:
+        assert d[k] >= min_val, f"'{ctx}' '{k}' must be >= {min_val}"
+    if max_val is not None:
+        assert d[k] <= max_val, f"'{ctx}' '{k}' must be <= {max_val}"
 
 def _assert_list(d, k, ctx, length=2):
     assert k in d, f"'{ctx}' must have '{k}' key"
@@ -2771,15 +3668,10 @@ def _assert_optional_str_in(d, k, allowed, ctx):
         assert isinstance(d[k], str), f"'{ctx}' '{k}' must be a string"
         assert d[k] in allowed, f"'{ctx}' '{k}' must be one of {sorted(allowed)}"
 
-def _assert_optional_bool(d, k, ctx):
-    if k in d:
-        assert isinstance(d[k], bool), f"'{ctx}' '{k}' must be a boolean"
-
 def _assert_list_of_pos_ints(x, ctx):
     assert isinstance(x, list) and len(x) > 0, f"'{ctx}' must be a non-empty list"
     for i, v in enumerate(x):
         assert isinstance(v, int) and v > 0, f"'{ctx}[{i}]' must be a positive integer"
-
 
 def compare_configurations_without_model(actual_cfg, old_cfg, header_message="", old_cfg_version=None):
     """
@@ -2814,6 +3706,7 @@ def compare_configurations_without_model(actual_cfg, old_cfg, header_message="",
         "PROBLEM.INSTANCE_SEG.DATA_CHANNELS",
         "PROBLEM.SUPER_RESOLUTION.UPSCALING",
         "DATA.N_CLASSES",
+        "TRAIN.OPTIMIZER", # yeah not so sure how many
     ]
 
     def get_attribute_recursive(var, attr):
@@ -2862,8 +3755,7 @@ def compare_configurations_without_model(actual_cfg, old_cfg, header_message="",
             
     print("Configurations seem to be compatible. Continuing . . .")
 
-
-def convert_old_model_cfg_to_current_version(old_cfg: dict):
+def convert_old_model_cfg_to_current_version(old_cfg: dict) -> dict:
     """
     Convert old configuration to the current BiaPy version.
     
@@ -2880,6 +3772,21 @@ def convert_old_model_cfg_to_current_version(old_cfg: dict):
     new_cfg : dict
         Updated configuration to the current BiaPy version.
     """
+    if "TRAIN" in old_cfg:
+        if "OPTIMIZER" in old_cfg["TRAIN"] and isinstance(old_cfg["TRAIN"]["OPTIMIZER"], str):
+            old_cfg["TRAIN"]["OPTIMIZER"] = [old_cfg["TRAIN"]["OPTIMIZER"]]
+        if "LR" in old_cfg["TRAIN"] and isinstance(old_cfg["TRAIN"]["LR"], float):
+            old_cfg["TRAIN"]["LR"] = [old_cfg["TRAIN"]["LR"]]
+        if "OPT_BETAS" in old_cfg["TRAIN"] and isinstance(old_cfg["TRAIN"]["OPT_BETAS"], str):
+                clean_str = old_cfg["TRAIN"]["OPT_BETAS"].strip().strip("()")
+                number_list = [float(x.strip()) for x in clean_str.split(",")]
+                old_cfg["TRAIN"]["OPT_BETAS"] = [number_list]
+        if "ACCUM_ITER" in old_cfg["TRAIN"]:
+            del old_cfg["TRAIN"]["ACCUM_ITER"]
+        if "LR_SCHEDULER" in old_cfg["TRAIN"]:
+            if "MIN_LR" in old_cfg["TRAIN"]["LR_SCHEDULER"] and isinstance(old_cfg["TRAIN"]["LR_SCHEDULER"]["MIN_LR"], float):
+                old_cfg["TRAIN"]["LR_SCHEDULER"]["MIN_LR"] = [old_cfg["TRAIN"]["LR_SCHEDULER"]["MIN_LR"]] * len(old_cfg["TRAIN"]["OPTIMIZER"])
+    workflow = old_cfg.get("PROBLEM", {}).get("TYPE", "SEMANTIC_SEG")
     if "TEST" in old_cfg:
         if "STATS" in old_cfg["TEST"]:
             full_image = old_cfg["TEST"]["STATS"]["FULL_IMG"]
@@ -2887,6 +3794,9 @@ def convert_old_model_cfg_to_current_version(old_cfg: dict):
             old_cfg["TEST"]["FULL_IMG"] = full_image
         if "EVALUATE" in old_cfg["TEST"]:
             del old_cfg["TEST"]["EVALUATE"]
+        if "DET_IGNORE_POINTS_OUTSIDE_BOX" in old_cfg["TEST"]:
+            old_cfg["TEST"]["EVAL_BORDER_CROP"] = old_cfg["TEST"]["DET_IGNORE_POINTS_OUTSIDE_BOX"]
+            del old_cfg["TEST"]["DET_IGNORE_POINTS_OUTSIDE_BOX"]
         if "POST_PROCESSING" in old_cfg["TEST"]:
             if "YZ_FILTERING" in old_cfg["TEST"]["POST_PROCESSING"]:
                 del old_cfg["TEST"]["POST_PROCESSING"]["YZ_FILTERING"]
@@ -3044,9 +3954,9 @@ def convert_old_model_cfg_to_current_version(old_cfg: dict):
                 if "HVZ" in old_cfg["PROBLEM"]["INSTANCE_SEG"]["DATA_CHANNELS"]:
                     old_cfg["PROBLEM"]["INSTANCE_SEG"]["DATA_CHANNELS"].remove("HVZ")
                     if ndim == 2:
-                        old_cfg["PROBLEM"]["INSTANCE_SEG"]["DATA_CHANNELS"].extend(["H", "V"])
+                        old_cfg["PROBLEM"]["INSTANCE_SEG"]["DATA_CHANNELS"].extend(["V", "H"])
                     else:
-                        old_cfg["PROBLEM"]["INSTANCE_SEG"]["DATA_CHANNELS"].extend(["H", "V", "Z"])
+                        old_cfg["PROBLEM"]["INSTANCE_SEG"]["DATA_CHANNELS"].extend(["Z", "V", "H"])
 
             if "DISTANCE_CHANNEL_MASK" in old_cfg["PROBLEM"]["INSTANCE_SEG"]:
                 if not old_cfg["PROBLEM"]["INSTANCE_SEG"]["DISTANCE_CHANNEL_MASK"]:
@@ -3143,15 +4053,23 @@ def convert_old_model_cfg_to_current_version(old_cfg: dict):
             if "SYNAPSES" in old_cfg["PROBLEM"]["INSTANCE_SEG"]:
                 if "NORMALIZE_DISTANCES" in old_cfg["PROBLEM"]["INSTANCE_SEG"]["SYNAPSES"]:
                     del old_cfg["PROBLEM"]["INSTANCE_SEG"]["SYNAPSES"]["NORMALIZE_DISTANCES"]
+                if "POSTSITE_DILATION_DISTANCE_CHANNELS" in old_cfg["PROBLEM"]["INSTANCE_SEG"]["SYNAPSES"]:
+                    del old_cfg["PROBLEM"]["INSTANCE_SEG"]["SYNAPSES"]["POSTSITE_DILATION_DISTANCE_CHANNELS"]
+                if "POSTSITE_DILATION" in old_cfg["PROBLEM"]["INSTANCE_SEG"]["SYNAPSES"]:
+                    del old_cfg["PROBLEM"]["INSTANCE_SEG"]["SYNAPSES"]["POSTSITE_DILATION"]
 
     if "DATA" in old_cfg:
-        if "EXTRACT_RANDOM_PATCH" in old_cfg["DATA"]:   
+        if "EXTRACT_RANDOM_PATCH" in old_cfg["DATA"]:
+            old_cfg["DATA"]["TRAIN"]["EXTRACT_RANDOM_PATCH"] = old_cfg["DATA"]["EXTRACT_RANDOM_PATCH"]
             del old_cfg["DATA"]["EXTRACT_RANDOM_PATCH"]
         if "PROBABILITY_MAP" in old_cfg["DATA"]:
+            old_cfg["DATA"]["TRAIN"]["PROBABILITY_MAP"] = old_cfg["DATA"]["PROBABILITY_MAP"]
             del old_cfg["DATA"]["PROBABILITY_MAP"]
         if "W_FOREGROUND" in old_cfg["DATA"]:
+            old_cfg["DATA"]["TRAIN"]["W_FOREGROUND"] = old_cfg["DATA"]["W_FOREGROUND"]
             del old_cfg["DATA"]["W_FOREGROUND"]
         if "W_BACKGROUND" in old_cfg["DATA"]:
+            old_cfg["DATA"]["TRAIN"]["W_BACKGROUND"] = old_cfg["DATA"]["W_BACKGROUND"]
             del old_cfg["DATA"]["W_BACKGROUND"]
         if "TRAIN" in old_cfg["DATA"]:
             if "MINIMUM_FOREGROUND_PER" in old_cfg["DATA"]["TRAIN"]:
@@ -3162,19 +4080,26 @@ def convert_old_model_cfg_to_current_version(old_cfg: dict):
                     old_cfg["DATA"]["TRAIN"]["FILTER_SAMPLES"]["PROPS"] = [["foreground"]]
                     old_cfg["DATA"]["TRAIN"]["FILTER_SAMPLES"]["VALUES"] = [[min_fore]]
                     old_cfg["DATA"]["TRAIN"]["FILTER_SAMPLES"]["SIGNS"] = [["lt"]]
-            if "REPLICATE" in old_cfg["DATA"]["TRAIN"]:
-                del old_cfg["DATA"]["TRAIN"]["REPLICATE"]
         if "VAL" in old_cfg["DATA"]:
             if "BINARY_MASKS" in old_cfg["DATA"]["VAL"]:
                 del old_cfg["DATA"]["VAL"]["BINARY_MASKS"]
-
+        if "TEST" in old_cfg["DATA"]:
+            if "ARGMAX_TO_OUTPUT" in old_cfg["DATA"]["TEST"]:
+                del old_cfg["DATA"]["TEST"]["ARGMAX_TO_OUTPUT"]
+            if "BINARY_MASKS" in old_cfg["DATA"]["TEST"]:
+                bin_masks = old_cfg["DATA"]["TEST"]["BINARY_MASKS"]
+                del old_cfg["DATA"]["TEST"]["BINARY_MASKS"]
+                apply_mask = old_cfg.get("TEST", {}).get("POST_PROCESSING", {}).get("APPLY_MASK", False)
+                if apply_mask:
+                    old_cfg["DATA"]["TEST"].setdefault("ROI_MASK", {})
+                    old_cfg["DATA"]["TEST"]["ROI_MASK"]["PATH"] = bin_masks
         if "NORMALIZATION" in old_cfg["DATA"]:
             if "PERC_CLIP" in old_cfg["DATA"]["NORMALIZATION"]:
                 val = old_cfg["DATA"]["NORMALIZATION"]["PERC_CLIP"]
-                if isinstance(val, bool) and val:
+                if isinstance(val, bool):
                     del old_cfg["DATA"]["NORMALIZATION"]["PERC_CLIP"]
                     old_cfg["DATA"]["NORMALIZATION"]["PERC_CLIP"] = {}
-                    old_cfg["DATA"]["NORMALIZATION"]["PERC_CLIP"]["ENABLE"] = True
+                    old_cfg["DATA"]["NORMALIZATION"]["PERC_CLIP"]["ENABLE"] = val
                     if "PERC_LOWER" in old_cfg["DATA"]["NORMALIZATION"]:
                         old_cfg["DATA"]["NORMALIZATION"]["PERC_CLIP"]["LOWER_PERC"] = old_cfg["DATA"]["NORMALIZATION"][
                             "PERC_LOWER"
@@ -3186,18 +4111,43 @@ def convert_old_model_cfg_to_current_version(old_cfg: dict):
                         ]
                         del old_cfg["DATA"]["NORMALIZATION"]["PERC_UPPER"]
 
+                if (
+                    "LOWER_VALUE" in old_cfg["DATA"]["NORMALIZATION"]["PERC_CLIP"] 
+                    and not isinstance(old_cfg["DATA"]["NORMALIZATION"]["PERC_CLIP"]["LOWER_VALUE"], list)
+                ):
+                    old_cfg["DATA"]["NORMALIZATION"]["PERC_CLIP"]["LOWER_VALUE"] = [old_cfg["DATA"]["NORMALIZATION"]["PERC_CLIP"]["LOWER_VALUE"]]
+
+                if (
+                    "UPPER_VALUE" in old_cfg["DATA"]["NORMALIZATION"]["PERC_CLIP"] 
+                    and not isinstance(old_cfg["DATA"]["NORMALIZATION"]["PERC_CLIP"]["UPPER_VALUE"], list)
+                ):
+                    old_cfg["DATA"]["NORMALIZATION"]["PERC_CLIP"]["UPPER_VALUE"] = [old_cfg["DATA"]["NORMALIZATION"]["PERC_CLIP"]["UPPER_VALUE"]]
+            if "ZERO_MEAN_UNIT_VAR" in old_cfg["DATA"]["NORMALIZATION"]:
+                if (
+                    "MEAN_VAL" in old_cfg["DATA"]["NORMALIZATION"]["ZERO_MEAN_UNIT_VAR"]
+                    and not isinstance(old_cfg["DATA"]["NORMALIZATION"]["ZERO_MEAN_UNIT_VAR"]["MEAN_VAL"], list)
+                ):
+                    old_cfg["DATA"]["NORMALIZATION"]["ZERO_MEAN_UNIT_VAR"]["MEAN_VAL"] = [old_cfg["DATA"]["NORMALIZATION"]["ZERO_MEAN_UNIT_VAR"]["MEAN_VAL"]]
+                if (
+                    "STD_VAL" in old_cfg["DATA"]["NORMALIZATION"]["ZERO_MEAN_UNIT_VAR"]
+                    and not isinstance(old_cfg["DATA"]["NORMALIZATION"]["ZERO_MEAN_UNIT_VAR"]["STD_VAL"], list)
+                ):
+                    old_cfg["DATA"]["NORMALIZATION"]["ZERO_MEAN_UNIT_VAR"]["STD_VAL"] = [old_cfg["DATA"]["NORMALIZATION"]["ZERO_MEAN_UNIT_VAR"]["STD_VAL"]]   
+            if "MEASURE_BY" in old_cfg["DATA"]["NORMALIZATION"]:
+                del old_cfg["DATA"]["NORMALIZATION"]["MEASURE_BY"]
+
             if "TYPE" in old_cfg["DATA"]["NORMALIZATION"] and old_cfg["DATA"]["NORMALIZATION"]["TYPE"] == "custom":
                 old_cfg["DATA"]["NORMALIZATION"]["TYPE"] = "zero_mean_unit_variance"
                 if "CUSTOM_MEAN" in old_cfg["DATA"]["NORMALIZATION"]:
                     old_cfg["DATA"]["NORMALIZATION"]["ZERO_MEAN_UNIT_VAR"] = {}
                     mean = old_cfg["DATA"]["NORMALIZATION"]["CUSTOM_MEAN"]
-                    old_cfg["DATA"]["NORMALIZATION"]["ZERO_MEAN_UNIT_VAR"]["MEAN_VAL"] = mean
+                    old_cfg["DATA"]["NORMALIZATION"]["ZERO_MEAN_UNIT_VAR"]["MEAN_VAL"] = [mean]
                     del old_cfg["DATA"]["NORMALIZATION"]["CUSTOM_MEAN"]
                 if "CUSTOM_STD" in old_cfg["DATA"]["NORMALIZATION"]:
                     if "ZERO_MEAN_UNIT_VAR" not in old_cfg["DATA"]["NORMALIZATION"]:
                         old_cfg["DATA"]["NORMALIZATION"]["ZERO_MEAN_UNIT_VAR"] = {}
                     std = old_cfg["DATA"]["NORMALIZATION"]["CUSTOM_STD"]
-                    old_cfg["DATA"]["NORMALIZATION"]["ZERO_MEAN_UNIT_VAR"]["STD_VAL"] = std
+                    old_cfg["DATA"]["NORMALIZATION"]["ZERO_MEAN_UNIT_VAR"]["STD_VAL"] = [std]
                     del old_cfg["DATA"]["NORMALIZATION"]["CUSTOM_STD"]
                 if "CUSTOM_MODE" in old_cfg["DATA"]["NORMALIZATION"]:
                     del old_cfg["DATA"]["NORMALIZATION"]["CUSTOM_MODE"]
@@ -3205,6 +4155,22 @@ def convert_old_model_cfg_to_current_version(old_cfg: dict):
                     del old_cfg["DATA"]["NORMALIZATION"]["APPLICATION_MODE"]
 
     if "AUGMENTOR" in old_cfg:
+        if "DA_PROB" in old_cfg["AUGMENTOR"]:
+            # The single global AUGMENTOR.DA_PROB was replaced by a per-augmentation probability.
+            # Carry its value over to every individual *_PROB not already set so the augmentation
+            # behaviour of old configs is preserved, then drop the now-removed DA_PROB key.
+            da_prob = old_cfg["AUGMENTOR"]["DA_PROB"]
+            for prob_key in [
+                "ZOOM_PROB", "RANDOM_ROT_PROB", "ROT90_PROB", "SHEAR_PROB", "SHIFT_PROB", "VFLIP_PROB",
+                "HFLIP_PROB", "ZFLIP_PROB", "ELASTIC_PROB", "G_BLUR_PROB", "MEDIAN_BLUR_PROB",
+                "MOTION_BLUR_PROB", "GAMMA_CONTRAST_PROB", "BRIGHTNESS_PROB", "CONTRAST_PROB",
+                "DROPOUT_PROB", "CUTOUT_PROB", "CUTBLUR_PROB", "CUTMIX_PROB", "CUTNOISE_PROB",
+                "MISALIGNMENT_PROB", "MISSING_SECTIONS_PROB", "GRAYSCALE_PROB", "CHANNEL_SHUFFLE_PROB",
+                "GRIDMASK_PROB", "GAUSSIAN_NOISE_PROB", "POISSON_NOISE_PROB", "SALT_PROB", "PEPPER_PROB",
+                "SALT_AND_PEPPER_PROB",
+            ]:
+                old_cfg["AUGMENTOR"].setdefault(prob_key, da_prob)
+            del old_cfg["AUGMENTOR"]["DA_PROB"]
         if "BRIGHTNESS_EM" in old_cfg["AUGMENTOR"]:
             del old_cfg["AUGMENTOR"]["BRIGHTNESS_EM"]
         if "BRIGHTNESS_EM_FACTOR" in old_cfg["AUGMENTOR"]:
@@ -3226,17 +4192,53 @@ def convert_old_model_cfg_to_current_version(old_cfg: dict):
 
     if "LOSS" in old_cfg and "CLASS_REBALANCE" in old_cfg["LOSS"]:
         if isinstance(old_cfg["LOSS"]["CLASS_REBALANCE"], bool):
-            old_cfg["LOSS"]["CLASS_REBALANCE"] = "auto" if old_cfg["LOSS"]["CLASS_REBALANCE"] else "none"
+            val = bool(old_cfg["LOSS"]["CLASS_REBALANCE"])
+            old_cfg["LOSS"]["CLASS_REBALANCE"] = "none"
+            if workflow == "INSTANCE_SEG":
+                old_cfg["PROBLEM"]["INSTANCE_SEG"]["CLASS_REBALANCE_WITHIN_CHANNELS"] = val
+            elif workflow == "DETECTION":
+                old_cfg["PROBLEM"]["DETECTION"]["CLASS_REBALANCE_WITHIN_CHANNELS"] = val
+            elif workflow == "SEMANTIC_SEG":
+                cls_weights = old_cfg.get("LOSS", {}).get("CLASS_WEIGHTS", [])
+                if cls_weights != []:
+                    old_cfg["LOSS"]["CLASS_REBALANCE"] = "manual"
 
-    if "TEST" in old_cfg and "BY_CHUNKS" in old_cfg["TEST"] and "FORMAT" in old_cfg["TEST"]["BY_CHUNKS"]:
-        del old_cfg["TEST"]["BY_CHUNKS"]["FORMAT"]
+    if "TEST" in old_cfg and "BY_CHUNKS" in old_cfg["TEST"]:
+        if "FORMAT" in old_cfg["TEST"]["BY_CHUNKS"]:
+            del old_cfg["TEST"]["BY_CHUNKS"]["FORMAT"]
+        if "WORKFLOW_PROCESS" in old_cfg["TEST"]["BY_CHUNKS"]:
+            if "INSTANCE_SEG_HALO" in old_cfg["TEST"]["BY_CHUNKS"]["WORKFLOW_PROCESS"]:
+                del old_cfg["TEST"]["BY_CHUNKS"]["WORKFLOW_PROCESS"]["INSTANCE_SEG_HALO"]
+
+    if "TEST" in old_cfg and "POST_PROCESSING" in old_cfg["TEST"] and "APPLY_MASK" in old_cfg["TEST"]["POST_PROCESSING"]:
+        apply_mask = old_cfg["TEST"]["POST_PROCESSING"]["APPLY_MASK"]
+        del old_cfg["TEST"]["POST_PROCESSING"]["APPLY_MASK"]
+        if apply_mask:
+            old_cfg.setdefault("DATA", {}).setdefault("TEST", {}).setdefault("ROI_MASK", {})["ENABLE"] = True
 
     if "MODEL" in old_cfg:
+        load_checkpoint = True if "LOAD_CHECKPOINT" in old_cfg["MODEL"] and old_cfg["MODEL"]["LOAD_CHECKPOINT"] else False
+        if "LOAD_MODEL_FROM_CHECKPOINT" in old_cfg["MODEL"]:
+            if old_cfg["MODEL"]["LOAD_MODEL_FROM_CHECKPOINT"] and load_checkpoint:
+                old_cfg["MODEL"]["ITEMS_TO_LOAD_FROM_CHECKPOINT"] = ["weights", "norm", "model_arch"]
+            del old_cfg["MODEL"]["LOAD_MODEL_FROM_CHECKPOINT"]
+        if "LOAD_CHECKPOINT_ONLY_WEIGHTS" in old_cfg["MODEL"]:
+            if old_cfg["MODEL"]["LOAD_CHECKPOINT_ONLY_WEIGHTS"]:
+                old_cfg["MODEL"]["ITEMS_TO_LOAD_FROM_CHECKPOINT"] = ["weights"]
+            del old_cfg["MODEL"]["LOAD_CHECKPOINT_ONLY_WEIGHTS"]
         if "BATCH_NORMALIZATION" in old_cfg["MODEL"]:
             if old_cfg["MODEL"]["BATCH_NORMALIZATION"]:
                 old_cfg["MODEL"]["NORMALIZATION"] = "bn"
             del old_cfg["MODEL"]["BATCH_NORMALIZATION"]
-
+        if "CONVNEXT_LAYERS" in old_cfg["MODEL"]:
+            old_cfg["MODEL"]["CONV_LAYERS"] = old_cfg["MODEL"]["CONVNEXT_LAYERS"]
+            del old_cfg["MODEL"]["CONVNEXT_LAYERS"]
+        if "UNETR_DEC_ACTIVATION" in old_cfg["MODEL"]:
+            old_cfg["MODEL"]["ACTIVATION"] = old_cfg["MODEL"]["UNETR_DEC_ACTIVATION"]
+            del old_cfg["MODEL"]["UNETR_DEC_ACTIVATION"]
+        if "UNETR_DEC_KERNEL_SIZE" in old_cfg["MODEL"]:
+            old_cfg["MODEL"]["KERNEL_SIZE"] = old_cfg["MODEL"]["UNETR_DEC_KERNEL_SIZE"]
+            del old_cfg["MODEL"]["UNETR_DEC_KERNEL_SIZE"]
         if "N_CLASSES" in old_cfg["MODEL"]:
             if "DATA" not in old_cfg:
                 old_cfg["DATA"] = {}
@@ -3318,9 +4320,69 @@ def convert_old_model_cfg_to_current_version(old_cfg: dict):
             old_cfg["MODEL"]["HRNET"] = old_cfg["MODEL"].pop("HRNET_32")
         elif "HRNET_18" in old_cfg["MODEL"]:
             old_cfg["MODEL"]["HRNET"] = old_cfg["MODEL"].pop("HRNET_18")
-        if "HRNET" in old_cfg["MODEL"]:
-            if "STAGE1" in old_cfg["MODEL"]["HRNET"]:
-                del old_cfg["MODEL"]["HRNET"]["STAGE1"]
+
+        # 'ARCHITECTURE' may not be present in the old configuration, as it is not a mandatory field
+        architecture = old_cfg["MODEL"].get("ARCHITECTURE", "")
+        if not isinstance(architecture, str):
+            architecture = ""
+        if 'hrnet' in architecture.lower() or "HRNET" in old_cfg["MODEL"]:
+            if "HRNET" not in old_cfg["MODEL"]:
+                old_cfg["MODEL"]["HRNET"] = {}
+            hrnet_block = old_cfg["MODEL"]["HRNET"]
+            if "STAGE1" in hrnet_block:
+                del hrnet_block["STAGE1"]
+
+            variant_str = None
+            # 1. Migrate CUSTOM boolean to VARIANT string
+            if "CUSTOM" in hrnet_block:
+                is_custom = hrnet_block.pop("CUSTOM")
+                if is_custom:
+                    variant_str = "custom"
+            if 'hrnet' in architecture.lower():
+                # Extract base channels dynamically (e.g., 'hrnet32' -> 32)
+                match = re.search(r'\d+', architecture)
+                if match and variant_str != "custom":
+                    variant_str = "W" + str(int(match.group()))
+                old_cfg["MODEL"]["ARCHITECTURE"] = "hrnet"
+                
+            # Fallback if variant wasn't explicitly captured from old keys
+            if variant_str is None:
+                variant_str = hrnet_block.get("VARIANT", "W18")
+            
+            hrnet_block["VARIANT"] = str(variant_str)
+            # 2. Extract nested stages into the new dynamic flat lists
+            if "STAGE2" in hrnet_block:
+                num_stages = 0
+                num_modules = []
+                num_branches = []
+                num_blocks = []
+                num_channels = []
+                
+                for stage_idx in [2, 3, 4, 5]: # Checking up to STAGE5 just in case
+                    stage_key = f"STAGE{stage_idx}"
+                    if stage_key in hrnet_block:
+                        num_stages += 1
+                        stage_cfg = hrnet_block.pop(stage_key)
+                        num_modules.append(stage_cfg.get("NUM_MODULES", 1))
+                        num_branches.append(stage_cfg.get("NUM_BRANCHES", stage_idx))
+                        num_blocks.append(stage_cfg.get("NUM_BLOCKS", [4] * stage_idx))
+                        num_channels.append(stage_cfg.get("NUM_CHANNELS", [18 * (2**i) for i in range(stage_idx)]))
+                
+                if num_stages > 0:
+                    hrnet_block["NUM_STAGES"] = num_stages
+                    hrnet_block["NUM_MODULES"] = num_modules
+                    hrnet_block["NUM_BRANCHES"] = num_branches
+                    hrnet_block["NUM_BLOCKS"] = num_blocks
+                    hrnet_block["NUM_CHANNELS"] = num_channels
+            
+            # 3. Migrate Z_DOWN from bool to list and initialize YX_DOWN
+            n_stages = hrnet_block.get("NUM_STAGES", 3)
+            
+            if "Z_DOWN" in hrnet_block:
+                z_down_val = hrnet_block["Z_DOWN"]
+                if isinstance(z_down_val, bool):
+                    hrnet_block["Z_DOWN"] = [2 if z_down_val else 1] * n_stages
+
     try:
         del old_cfg["PATHS"]["RESULT_DIR"]["BMZ_BUILD"]
     except:
@@ -3338,11 +4400,134 @@ def convert_old_model_cfg_to_current_version(old_cfg: dict):
         if "LWR_Y_FILE" in old_cfg["PATHS"]:
             del old_cfg["PATHS"]["LWR_Y_FILE"]
         if "UPR_Y_FILE" in old_cfg["PATHS"]:
-            del old_cfg["PATHS"]["UPR_Y_FILE"]  
-        
+            del old_cfg["PATHS"]["UPR_Y_FILE"]
+
+    _convert_old_loss_type_to_list(old_cfg, workflow)
+
     return old_cfg
 
-# Function extracted from check_configuration checks
+
+def _convert_old_loss_type_to_list(old_cfg: dict, workflow: str) -> None:
+    """
+    Convert a pre-list-format ``LOSS.TYPE`` (a single combo string, e.g. ``"W_MAE_SSIM"`` or
+    ``"CYCLEGAN"``) into the current list format (``LOSS.TYPE`` a list of individually-weighted
+    loss names, ``LOSS.WEIGHTS`` the matching list of weights). No-op if ``LOSS.TYPE`` is absent,
+    empty, or already a list. Mutates ``old_cfg`` in place.
+
+    Parameters
+    ----------
+    old_cfg : dict
+        Raw (pre-merge) configuration dict.
+    workflow : str
+        ``PROBLEM.TYPE``, already resolved by the caller.
+    """
+    loss_cfg = old_cfg.get("LOSS")
+    if not isinstance(loss_cfg, dict):
+        return
+    old_type = loss_cfg.get("TYPE")
+    if not isinstance(old_type, str) or old_type == "":
+        return
+
+    old_weights = list(loss_cfg.get("WEIGHTS", []))
+    cyclegan_cfg = loss_cfg.get("CYCLEGAN", {})
+    membrane_repair_enabled = bool(
+        old_cfg.get("PROBLEM", {}).get("IMAGE_TO_IMAGE", {}).get("MEMBRANE_REPAIR", {}).get("ENABLE", False)
+    )
+
+    def cyclegan_to_list():
+        # Converts old LOSS.CYCLEGAN.LAMBDA_*/DELTA_MSE/ALPHA_PERCEPTUAL/GAMMA_SSIM/GAN_TYPE into
+        # LOSS.TYPE/LOSS.WEIGHTS. LOSS.CYCLEGAN -> LOSS.GAN, keeping only R1_GAMMA/ADAPTIVE_GAN_WEIGHT.
+        defaults = {
+            "LAMBDA_GAN": 1.0, "LAMBDA_RECON": 10.0, "LAMBDA_CHARB": 0.0, "DELTA_MSE": 0.0,
+            "ALPHA_PERCEPTUAL": 0.0, "LAMBDA_LPIPS": 0.0, "GAMMA_SSIM": 1.0, "LAMBDA_LAP": 0.0,
+            "LAMBDA_EDGE": 0.0, "LAMBDA_FFT": 0.0, "LAMBDA_RFFT": 0.0,
+        }
+        vals = {k: cyclegan_cfg.get(k, v) for k, v in defaults.items()}
+        vals["LAMBDA_LAP"] += vals.pop("LAMBDA_EDGE")  # same computation, single "LAPLACIAN" name
+        gan_name = str(cyclegan_cfg.get("GAN_TYPE", "bce")).upper()
+        name_by_key = {
+            "LAMBDA_RECON": "MAE", "LAMBDA_CHARB": "CHARBONNIER", "DELTA_MSE": "MSE",
+            "ALPHA_PERCEPTUAL": "VGG", "LAMBDA_LPIPS": "LPIPS", "GAMMA_SSIM": "SSIM",
+            "LAMBDA_LAP": "LAPLACIAN", "LAMBDA_FFT": "FFT",
+            "LAMBDA_RFFT": "RFFT", "LAMBDA_GAN": gan_name,
+        }
+        names, weights = [], []
+        for key, name in name_by_key.items():
+            if vals[key] != 0:
+                names.append(name)
+                weights.append(vals[key])
+        for key in list(defaults) + ["GAN_TYPE"]:
+            cyclegan_cfg.pop(key, None)
+        loss_cfg.pop("CYCLEGAN", None)
+        loss_cfg["GAN"] = cyclegan_cfg
+        return names, weights
+
+    new_names, new_weights = None, None
+    if old_type == "CYCLEGAN":
+        new_names, new_weights = cyclegan_to_list()
+    elif old_type == "MEMBRANE_REPAIR_AFFINITY" or (workflow == "IMAGE_TO_IMAGE" and membrane_repair_enabled):
+        w = (old_weights + [0.0, 0.0, 0.0, 0.0])[:4]
+        new_names, new_weights = ["BCE", "MALIS", "CLDICE", "SVOX"], w
+    elif old_type == "W_CE_DICE":
+        w = (old_weights + [1.0, 1.0])[:2]
+        new_names, new_weights = ["DICE", "CE"], w
+    elif old_type == "W_MAE_SSIM":
+        w = (old_weights + [1.0, 1.0])[:2]
+        new_names, new_weights = ["MAE", "SSIM"], w
+    elif old_type == "W_MSE_SSIM":
+        w = (old_weights + [1.0, 1.0])[:2]
+        new_names, new_weights = ["MSE", "SSIM"], w
+    else:
+        # A single bare name ("CE", "DICE", "MAE", "MSE", "SSIM") -- unambiguous either way.
+        new_names, new_weights = [old_type], [1.0]
+
+    loss_cfg["TYPE"] = new_names
+    loss_cfg["WEIGHTS"] = new_weights
+
+def diff_between_configs(old_dict: Dict | Config, new_dict: Dict | Config, path: str=""):
+    """
+    Print differences between two given configurations.
+
+    Parameters
+    ----------
+    old_dict : Config or Dict
+        First dictionary to compare against ``new_dict``.
+
+    new_dict : Config or Dict
+        Second dictionary to compare against ``old_dict``.
+
+    path : str
+        Path to record the variables. As this function is recursive this will be used 
+        automatically to complete the path of the variables.
+    """
+    if isinstance(old_dict, Config):
+        old_dict = old_dict.to_dict()
+    if isinstance(new_dict, Config):
+        new_dict = new_dict.to_dict()
+
+    for k in old_dict:
+        if k not in new_dict:
+            print("'" + path + "." + str(k) + "' removed")
+    for k in new_dict:
+        if k not in old_dict:
+            print("'" + path + "." + str(k) + "' added")
+        if k in new_dict and k in old_dict and new_dict[k] != old_dict[k]:
+            if type(new_dict[k]) not in (dict, list, CN):
+                print("'" + path + "." + str(k) + "' changed from '" + str(old_dict[k]) + "' to '" + str(new_dict[k]) + "'")
+            else:
+                if type(old_dict[k]) != type(new_dict[k]):
+                    print("'" + path + "." + str(k) + "' changed to '" + str(new_dict[k]) + "'")
+                else:
+                    if type(new_dict[k]) in [dict, CN]:
+                        path = path + str(k) if path == "" else path + "." + str(k) 
+                        diff_between_configs(old_dict[k], new_dict[k], path)
+                    elif isinstance(new_dict[k], list):
+                        print("'" + path + "." + str(k) + "' changed from '" + str(old_dict[k]) + "' to '" + str(new_dict[k]) + "'")
+
+########################################################################################
+# GUI-only: no direct BiaPy source counterpart (kept from the previous vendored copy). #
+########################################################################################
+
 def check_torchvision_available_models(workflow: str, ndim: str) -> Tuple[List[str], List[str], List[Dict[str, Any]]]:
     """
     Checks TorchVision available models.

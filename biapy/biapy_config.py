@@ -1,4 +1,4 @@
-## Copied from BiaPy commit: 647b8d33618c82329fe96eb9b4935c04b68d1d62 (3.6.8)
+## Copied from BiaPy commit: aa7c08e32364eb0186c9006109c47b4b8570172d (3.7.1)
 """
 Configuration management for BiaPy.
 
@@ -50,12 +50,16 @@ class Config:
         _C = CN()
 
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # System
+        # 1. System
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         _C.SYSTEM = CN()
         # Maximum number of CPUs to use. Set it to "-1" to not set a limit.
         _C.SYSTEM.NUM_CPUS = -1
         # Maximum number of workers to use. You can disable this option by setting 0. With a -1 the workers are calculated automatically.
+        # They are the processes that prepare the data (reading, cropping and normalizing it) in parallel with the GPU work, one
+        # set of them per process, i.e. per GPU. In the "by chunks" inference each of them fills one tile of the workflow process
+        # at a time, so they multiply the RAM the tiles take (see 'TEST.BY_CHUNKS.WORKFLOW_PROCESS.PATCHES_PER_TILE'): lower this
+        # value, or raise it, to trade reading speed for the memory that bigger tiles need.
         _C.SYSTEM.NUM_WORKERS = -1
         # Do not set it as its value will be calculated based in --gpu input arg
         _C.SYSTEM.NUM_GPUS = 0
@@ -69,7 +73,7 @@ class Config:
         _C.SYSTEM.PIN_MEM = True
 
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # Problem specification
+        # 2. Problem specification
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         _C.PROBLEM = CN()
         # Whether to check what changed to adapt the given input configuration to the newest. Basically to now what 
@@ -81,12 +85,16 @@ class Config:
         # Possible options: '2D' and '3D'
         _C.PROBLEM.NDIM = "2D"
 
-        ### SEMANTIC_SEG
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 2.1 Semantic segmentation problem specification
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         _C.PROBLEM.SEMANTIC_SEG = CN()
         # Class id to ignore when DATA.N_CLASSES > 2
         _C.PROBLEM.SEMANTIC_SEG.IGNORE_CLASS_ID = 0
 
-        ### INSTANCE_SEG
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 2.2 Instance segmentation problem specification
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         _C.PROBLEM.INSTANCE_SEG = CN()
         # Type of instances expected. Options are: ["regular", "synapses"]
         _C.PROBLEM.INSTANCE_SEG.TYPE = "regular" 
@@ -101,21 +109,30 @@ class Config:
         #   - 'P' stands for 'Central part', the extreme case of the F channel, where only the center of mass, or the skeleton is 
         #     represented. It may also be expressed as a heatmap.
         #   - 'C' stands for 'Contour', it is a binary representation of the countours of each instance.
-        #   - 'H' stands for 'Horizontal distance', where, for each instance, the pixel/voxel value is the distance to its contour/skeleton 
-        #     in the horizontal axis.
-        #   - 'V' stands for 'Vertical distance', where, for each instance, the pixel/voxel value is the distance to its contour/skeleton 
-        #     in the vertical axis.
-        #   - 'Z' stands for 'Depth distance', where, for each instance, the pixel/voxel value is the distance to its contour/skeleton 
-        #     in the depth axis.
-        #   - 'Db' stands for 'Distance to the boundary', where, for each instance, the pixel/voxel value is the distance to its contour.
-        #   - 'Dc' stands for 'Distance to the center', where, for each instance, the pixel/voxel value is the distance to its 
-        #     center/skeleton.
-        #   - 'Dn' stands for 'Distance to the closest neighbor', where, for each instance, the pixel/voxel value is the distance to its 
-        #     closest neighbor instance.
-        #   - 'D' stands for 'Db for F and B channels' distance map'. In some cases, background pixel distances are negated and combined 
-        #     with a Tanh activation, 
-        #     while in others they are not
-        #   - 'R' stands for 'Radial distance', distances to boundaries measure how far each pixel is from its object’s edge along fixed 
+        #   - 'H' stands for 'Horizontal distance' (HoVer-Net style). For each instance, the pixel/voxel value is the signed
+        #     horizontal displacement to the centroid. When 'norm' is True (default) values are rescaled to [-1, 1]: leftmost
+        #     pixel of the cell = -1, rightmost = +1, centroid column = 0. Background pixels are always 0.
+        #   - 'V' stands for 'Vertical distance' (HoVer-Net style), same as 'H' along the vertical axis:
+        #     top pixel = -1, bottom pixel = +1, centroid row = 0. Background = 0.
+        #   - 'Z' stands for 'Depth distance' (HoVer-Net style), same as 'H' along the depth (z) axis. Only relevant for 3D data.
+        #   - 'Gh', 'Gv', and 'Gz' stand for the x/y/z components of a flow field derived from a heat-diffusion potential
+        #     (Cellpose strategy) or the per-cell EDT gradient (Omnipose strategy). Each component is a unit vector in [-1, 1];
+        #     background is (0, 0[, 0]). Inspired by "Cellpose: a generalist algorithm for cellular segmentation"
+        #     (https://www.nature.com/articles/s41592-020-01018-x) and "Omnipose" (https://www.nature.com/articles/s41467-022-32267-2).
+        #   - 'Db' stands for 'Distance to the boundary'. For each foreground pixel the value is its Euclidean distance to
+        #     the nearest background pixel (i.e. intra-cell distance from the cell boundary inward). After per-cell normalization
+        #     ('norm'=True), boundary pixels map to 0 and the innermost pixel maps to 1. Background is always 0.
+        #   - 'Dc' stands for 'Distance to the center'. For each foreground pixel the value is its Euclidean distance to
+        #     the centroid (or skeleton) of its cell. The centroid pixel therefore has Dc = 0 (the minimum, most important value).
+        #     Background is also 0. When 'norm' is True, values are rescaled per-cell to [0, 1].
+        #   - 'Dn' stands for 'Distance to the closest neighbor'. For each foreground pixel the value reflects the proximity to
+        #     the nearest other instance; isolated cells (no neighbor) are assigned 0. Background is 0.
+        #   - 'D' stands for 'signed Distance field'. Foreground pixels hold the positive Euclidean distance to the nearest
+        #     background pixel; background pixels hold the negative distance to the nearest foreground pixel. The field spans
+        #     from negative (deep background) through 0 (boundary) to positive (deep interior). When 'norm' is True (default)
+        #     the field is passed through tanh, mapping all values to (-1, 1). Because both foreground (+) and background (-)
+        #     carry meaningful signal, the loss is computed on all pixels without masking.
+        #   - 'R' stands for 'Radial distance', distances to boundaries measure how far each pixel is from its object's edge along fixed 
         #     radial directions, with StarDist being the most prominent approach.
         #   - 'T' stands for 'Touching area', where touching regions between instances are highlighted.
         #   - 'A' stands for 'Affinities' and contains the affinity values for each dimension. Affinities represent images as graphs for 
@@ -127,67 +144,122 @@ class Config:
         #     are well separated. We grouped here all the channels involved in this process
         #
         #### For "synapse" type of instances ####
-        # Possible options: 'B' and 'BF' (still experimental). This variable defines the channels to be used to represent synapse instances based on the input 
-        # synapse sites. The meaning of each letter is a follows:
-        #   * In 'B', the first and second channels represent the pre and post points as 3D points, respectively.
+        # Possible options: 
+        #   * 'F_pre' and 'F_post': each one is a binary representation of the presynaptic and postsynaptic sites, respectively. 
+        #   * 'F_pre', 'H', 'V', 'Z': 'F_pre' is a binary representation of the presynaptic sites, while 'H', 'V' and 'Z' are the horizontal, 
+        #      vertical and depth distances to the closest postsynaptic site, respectively. This setting is inspired by the paper 
+        #      "Automatic detection of synaptic partners in a whole-brain Drosophila electron microscopy data set" 
+        #      (https://www.nature.com/articles/s41592-021-01183-7).
         #
-        #   * In 'BF':
-        #       - 'B' stands for 'Binary mask', it is a binary representation of each postsynaptic site
-        #       - 'F' stands for 'Flow' and contains the distance values to the corresponding presynaptic site (of each postsynaptic 
-        #         site) for each dimension.
         _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS = ["B", "C"]
         # Details for each channel. It must be a list with a unique element: a dict of dicts. The details can be only set for the following channels:
         #   - 'F' channel. Possible options:
-        #       - 'erosion': int or list of ints, the erosion size to be applied to the channel. Default: 0
-        #       - 'dilation': int or list of ints, the dilation size to be applied to the channel. Default: 0
+        #       - 'erosion': int or list of ints, specifies the erosion size applied to the channel. Default: 0
+        #       - 'dilation': int or list of ints, specifies the dilation size applied to the channel. Default: 0
         #   - 'B' channel. Possible options:
-        #       - 'erosion': int or list of ints, the erosion size to be applied to the channel. Default: 0
-        #       - 'dilation': int or list of ints, the dilation size to be applied to the channel. Default: 0
+        #       - 'erosion': int or list of ints, specifies the erosion size applied to the channel. Default: 0
+        #       - 'dilation': int or list of ints, specifies the dilation size applied to the channel. Default: 0
         #   - 'P' channel. Possible options:
-        #       - 'type': str, the type of the channel. Options are: 'centroid', 'skeleton'. Default: 'centroid'
-        #       - 'dilation': int or list of ints, the dilation size to be applied to the channel. Default: 1
-        #       - 'erosion': int or list of ints, the erosion size to be applied to the channel. Useful when you want thinner skeletons
-        #          as they are 2-pixel thick. Default: 0
+        #       - 'type': str, specifies the reference used to define the channel. Options are 'centroid' or 'skeleton'. Default: 'centroid'
+        #       - 'skeleton_mode': str, only used when 'type' is 'skeleton'. Controls how much of the skeleton is kept:
+        #           - 'full': keep the whole skeleton, branching into every protrusion of the instance (default).
+        #           - 'main': prune it down to the main body only, i.e. the longest path through the skeleton (its
+        #             two farthest-apart points and the branch connecting them). Side branches coming from small
+        #             protrusions (e.g. dendritic spines) are discarded, so the channel marks just the main shaft.
+        #         Default: 'full'
+        #       - 'dilation': int or list of ints, specifies the dilation size applied to the channel. Default: 1
+        #       - 'erosion': int or list of ints, specifies the erosion size applied to the channel. Useful for thinning skeletons,
+        #          which are typically 2 pixels thick. Default: 0
         #   - 'C' channel. Possible options:
-        #       - 'mode': str, how to create the contours. Corresponds to 'mode' arg of find_boundaries function from scikit-image. 
-        #          More info in: https://scikit-image.org/docs/stable/api/skimage.segmentation.html#skimage.segmentation.find_boundaries.
-        #          Options are: 'thick', 'inner', 'outer', 'subpixel' and 'dense'. The last one is used to label as contour every pixel
-        #          that is not in the foreground. Default: 'thick'.
-        #   - 'H', 'V', 'Z' and 'Db' channels. Possible options:
-        #       - 'norm': bool, whether to normalize the distances between 0 and 1. Default: True
-        #       - 'mask_values': bool, whether to mask the distance channel to only calculate the loss in non-zero values. Default: True
+        #       - 'mode': str, specifies how contours are generated. Corresponds to the 'mode' argument of the
+        #          find_boundaries function from scikit-image.
+        #          More information at: https://scikit-image.org/docs/stable/api/skimage.segmentation.html#skimage.segmentation.find_boundaries.
+        #          Options are 'thick', 'inner', 'outer', 'subpixel', and 'dense'. The 'dense' option labels as contour
+        #          every pixel that is not part of the foreground. Default: 'thick'
+        #   - 'H', 'V' and 'Z' channels. Possible options:
+        #       - 'norm': bool, specifies whether signed displacements are normalized to [-1, 1] (centroid = 0). Default: True
+        #       - 'act': str, specifies the activation function used in the model's final layer when this channel is selected.
+        #          These channels are signed, so the activation must allow negative values: 'linear' (unbounded) or 'tanh'
+        #          (bounded to [-1, 1], only meaningful with 'norm'=True). Options are 'linear' and 'tanh'. Default: 'linear'
+        #       Note: the loss for H/V/Z is computed over all pixels, not masked to the foreground, so the background
+        #       target (0) also trains the model. That keeps the predictions bounded outside the instances, which the
+        #       instance creation relies on (it min-max normalizes these channels over the whole image).
+        #   - 'Gh', 'Gv' and 'Gz' channels. Possible options:
+        #       - 'gradient_type': str, method to compute the gradients. Options are "cellpose" and "omnipose". Default: "cellpose"
+        #   - 'Db' channel. Possible options:
+        #       - 'val_type': str, to determine how to modify the distance values. Default: 'norm'. Options are:
+        #           - 'raw': to leave the distances as they are calculated.
+        #           - 'norm': to normalize the distances per cell to [0, 1] (boundary → 0, innermost pixel → 1).
+        #           - 'discretize': to discretize the distances into bins.
+        #       - 'act': str, activation function to be used in the last layer of the model when this channel is selected.
+        #          Options are: '', 'linear' and 'sigmoid'. Default: ''.
+        #       - 'mask_values': bool, kept for compatibility but superseded: the loss mask prefers a binary foreground channel
+        #         (F/M/B) to avoid excluding boundary pixels (Db=0). Falls back to (Db > 0) if no binary channel is present. Default: True
         #   - 'Dc' channel. Possible options:
-        #       - 'type': str, the type of the channel. Options are: 'centroid', 'skeleton'. Default: 'centroid'
-        #       - 'norm': bool, whether to normalize the distances between 0 and 1. Default: True
-        #       - 'mask_values': bool, whether to mask the distance channel to only calculate the loss in non-zero values. Default: True
+        #       - 'type': str, specifies the reference used to calculate the distance. Options are 'centroid' or 'skeleton'.
+        #         Default: 'centroid'
+        #       - 'norm': bool, specifies whether distances are normalized per cell to [0, 1]. Default: True
+        #       - 'mask_values': bool, kept for compatibility but superseded: the loss mask prefers a binary foreground channel
+        #         (F/M/B) to correctly include the centroid pixel (Dc=0). Falls back to (Dc > 0) if no binary channel is present,
+        #         which still misses the centroid — prefer pairing Dc with F, M, or B. Default: True
         #   - 'Dn' channel. Possible options:
-        #       - 'closing_size': int, the size of the closing to be applied to the combined distance map. Default: 0
-        #       - 'norm': bool, whether to normalize the distances between 0 and 1. Default: True
-        #       - 'mask_values': bool, whether to mask the distance channel to only calculate the loss in non-zero values. Default: True
-        #       - 'decline_power': int, the power to which the distances are raised to control the decline rate. Default: 3
-        #   - 'D' channel. Possible options:
-        #       - 'act': str, activation function to be used in the last layer of the model when this channel is selected. Options are: 
-        #         'tanh' and 'linear'. Default: 'tanh'
-        #       - 'alpha': int, value to scale the distances of the background when 'act' is 'tanh'. Default: 1
-        #       - 'beta': int, value to scale the distances of the foreground when 'act' is 'tanh'. Default: 1
-        #       - 'norm': bool, whether to normalize the distances between -1 and 1. Default: True
+        #       - 'closing_size': int, specifies the size of the closing operation applied to the combined distance map.
+        #         Default: 0
+        #       - 'norm': bool, specifies whether distances are normalized between 0 and 1. Default: True
+        #       - 'mask_values': bool, kept for compatibility but superseded: the loss mask prefers a binary foreground channel
+        #         (F/M/B) to include isolated cells (Dn=0). Falls back to (Dn > 0) if no binary channel is present. Default: True
+        #       - 'decline_power': int, specifies the power applied to distances to control the rate of decline. Default: 3
+        #   - 'D' channel. Per-instance distance in [-1, 1]: each instance's distance to its own boundary,
+        #     normalized per instance (boundary -> 0, innermost voxel -> 1), with the background set to -1.
+        #     Measuring the distance per instance, instead of on the binary foreground, is what keeps
+        #     touching instances apart, so each one keeps its own peak and they can be used as seeds.
+        #     Possible options:
+        #       - 'act': str, specifies the activation function used in the model's final layer when this channel is selected.
+        #         Options are 'tanh' and 'linear'. Default: 'tanh'
         #   - 'R' channel. Possible options:
-        #       - 'nrays': int, the number of rays to be used to represent the radial distances. Default: 32 (in 2D) and 96 (in 3D)
-        #       - 'norm': bool, whether to normalize the distances between 0 and 1. Default: True
-        #       - 'mask_values': bool, whether to mask the distance channel to only calculate the loss in non-zero values. Default: True
+        #       - 'nrays': int, specifies the number of rays used to represent radial distances.
+        #         Default: 32 for 2D data and 96 for 3D data
+        #       - 'norm': bool, specifies whether distances are normalized between 0 and 1. Default: True
+        #       - 'mask_values': bool, kept for compatibility but superseded: the loss mask prefers a binary foreground channel
+        #         (F/M/B) to avoid excluding near-boundary ray pixels (R≈0). Falls back to (R > 0) if no binary channel is present. Default: True
         #   - 'T' channel. Possible options:
-        #       - 'thickness': int, the thickness in pixels of the touching area. Default: 2
+        #       - 'thickness': int, specifies the thickness (in pixels) of the touching area. Default: 2
         #   - 'A' channel. Possible options:
-        #       - 'z_affinities': list of int, the offsets in x axis to be calculated. Default: [1]
-        #       - 'y_affinities': list of int, the offsets in y axis to be calculated. Default: [1]
-        #       - 'x_affinities': list of int, the offsets in z axis to be calculated. Default: [1]
-        #       - 'widen_borders': int, the size in pixels to widen the borders of the affinities. Default: 1
-        #       Notice that 'z_affinities', 'y_affinities' and 'x_affinities'  need to be lists of the same length. To reproduce the paper
-        #       "Superhuman Accuracy on the SNEMI3D Connectomics Challenge" the values are: 
-        #       'z_affinities': [1,2,3,4], 'y_affinities': [1,3,9,27] and 'x_affinities': [1,3,9,27]
+        #       - 'z_affinities': list of int, specifies offsets along the z axis. Default: [1]
+        #       - 'y_affinities': list of int, specifies offsets along the y axis. Default: [1]
+        #       - 'x_affinities': list of int, specifies offsets along the x axis. Default: [1]
+        #       - 'widen_borders': int, specifies the number of pixels used to widen affinity borders. Default: 1
+        #       Note that 'z_affinities', 'y_affinities', and 'x_affinities' must be lists of equal length: they are
+        #       paired by index, so entry k of each describes one set of neighbour offsets. The resulting channels are
+        #       stored as one (z, y, x) triple per offset index, i.e. interleaved (Az_1, Ay_1, Ax_1, Az_2, Ay_2, Ax_2,
+        #       ...) rather than grouped by axis.
+        #       To reproduce the paper "Superhuman Accuracy on the SNEMI3D Connectomics Challenge", use:
+        #       'z_affinities': [1, 2, 3, 4], 'y_affinities': [1, 3, 9, 27], and 'x_affinities': [1, 3, 9, 27]
         #   - 'E' channel. Possible options:
-        #       - 'center_mode': str, the center mode to use for the gaussian seeds. Default: "centroid". Options: "centroid" and "medoid"
-        #       - 'medoid_max_points': int, the maximum number of points to use when calculating the medoid. Default: 10000
+        #       - 'center_mode': str, specifies the center definition used for Gaussian seeds.
+        #         Options are 'centroid' and 'medoid'. Default: 'centroid'
+        #       - 'medoid_max_points': int, specifies the maximum number of points used when computing the medoid.
+        #         Default: 10000
+        # For synapse type of instances, the options are:
+        #   - 'F_pre' channel. Possible options: 
+        #       - 'dilation': int or list of ints, specifies the dilation size applied to the channel. Default: [1,3,3]
+        #   - 'F_post' channel. Possible options: 
+        #       - 'dilation': int or list of ints, specifies the dilation size applied to the channel. Default: [1,3,3]
+        #   - 'F_cleft' channel. Possible options:
+        #       - 'dilation': int or list of ints, specifies the dilation size applied to the channel. Default: [1,3,3]
+        #   - 'H', 'V' and 'Z' channels (synapse mode). Possible options:
+        #       - 'norm': bool, if True signed displacements are normalized to [-1, 1]; if False raw physical distances are kept.
+        #         Default: False (raw distances in physical units for synapse partner offsets)
+        #       - 'act': str, specifies the activation function used in the model's final layer when this channel is selected.
+        #         Options are '', 'linear', and 'sigmoid'. Default: ''
+        #       - 'dilation': int or list of ints, specifies the dilation size applied to the channel. In the case of the synapses this
+        #         will represent the area that will define the distance channels. Default: [3,25,25]
+        #       Note: the loss mask for H/V/Z is derived automatically from a binary foreground channel (F_pre/F_post/F_cleft)
+        #       when one is present; otherwise all pixels are included.
+        #
+        # For example:
+        #  DATA_CHANNELS = ['F', 'C']
+        #  DATA_CHANNELS_EXTRA_OPTS = [{'F': {'erosion': 2, 'dilation': 0}, 'C': {'mode': 'inner'}}]
         _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS = [{}]
         # Losses to be applied to each channel. If not provided, the losses will be set automatically depending on the channel.
         # The options are:
@@ -196,19 +268,48 @@ class Config:
         #  - "mse": mean squared error. Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html
         #  - "triplet": triplet loss. Ref: https://pytorch.org/docs/stable/generated/torch.nn.TripletMarginLoss.html
         _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS_LOSSES = []
-
-        # Weights to be applied to the channels.
+        # Whether to apply a rebalancing strategy to the loss function to give more importance to underrepresented pixels within the channels. 
+        # The weights are calculated automatically based on the number of pixels of each class per batch and directly in the loss computation.
+        # For example, in the case of the "C" channel, which represents the contours of the instances, there are usually much less pixels representing
+        # contours than pixels representing the background. With this option activated, the loss will give more importance to contour pixels to help
+        # the model learn better to predict them.
+        _C.PROBLEM.INSTANCE_SEG.CLASS_REBALANCE_WITHIN_CHANNELS = True
+        # Information on how the channels are distributed in the model's output heads. It must be a list of list of ints, where each 
+        # inner list contains the number of channels that are going to be predicted in the same head. If not provided, it will be set automatically
+        # with all the channels in one head, i.e. [DATA_CHANNELS]. For example, if "V", "H" and "Z" channels are in the same head, it is likely 
+        # that they are representing distance maps and therefore the model will be able to learn them together. On the other hand, if "C" channel 
+        # is in a different head than "H", "V" and "Z", it is likely that the model will be able to learn better the contours of the instances 
+        # separately from the distance maps.
+        _C.PROBLEM.INSTANCE_SEG.CHANNELS_PER_HEAD_INFO = []
+        # Whether to use a different decoder for each head in the model. The heads are defined by 'CHANNELS_PER_HEAD_INFO',
+        # so at least two entries are required there. Only supported by: ['unet', 'resunet', 'resunet++', 'seunet',
+        # 'resunet_se', 'attention_unet', 'unext_v1', 'unext_v2'].
+        _C.PROBLEM.INSTANCE_SEG.SEPARATED_DECODERS_PER_HEAD = False
+        # Whether to divide 'MODEL.FEATURE_MAPS' by the number of decoders created when 'SEPARATED_DECODERS_PER_HEAD'
+        # is enabled. This way the model keeps a number of parameters closer to the one built with just one decoder.
+        # If False each decoder is built with 'MODEL.FEATURE_MAPS' as they are, so the model will be as many times
+        # bigger (in its decoder part) as decoders are created. Only used when 'SEPARATED_DECODERS_PER_HEAD' is True.
+        _C.PROBLEM.INSTANCE_SEG.SEPARATED_DECODERS_DIVIDE_FEATURE_MAPS = False
+        # Weights to be applied to the channels. Notice that these weights are not applied directly to the loss, but to the predicted channels before
+        # calculating the loss. The length of the list must be equal to the number of channels. 
+        # Notice that this is different from LOSS.WEIGHTS, which are used to apply weights to different losses.
         _C.PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS = (1, 1)
         # Whether to add an extra weight map to the loss calculation to focus on the borders between instances. Different weighting maps 
         # can be defined. Options: ["unet-like", ""]
         _C.PROBLEM.INSTANCE_SEG.BORDER_EXTRA_WEIGHTS = ""
         # Defines how the instances are created. Options:
         #   - "watershed" to use watershed algorithm
-        #   - "agglomeration" to use agglomeration algorithm
-        #   - "stardist" to use agglomeration algorithm
+        #   - "gradient-flow" to use gradient flow algorithm (Cellpose/Omnipose)
+        #   - "stardist" to use stardist algorithm
         #   - "embeddings" to use embedding-based clustering algorithms
+        #   - "agglomeration" to oversegment predicted affinities and greedily merge fragments by
+        #     affinity (requires 'PROBLEM.INSTANCE_SEG.DATA_CHANNELS' == ['A']). See
+        #     'PROBLEM.INSTANCE_SEG.AGGLOMERATION' for its options.
         _C.PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS = ""
 
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 2.2.1 Watershed options for instance segmentation
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Options for marker-controlled watershed
         _C.PROBLEM.INSTANCE_SEG.WATERSHED = CN()
         # List of the channels to be used for seed creation. If not provided will be automatically set based on
@@ -254,35 +355,156 @@ class Config:
         # others if the objects in Z axis overlap too much.
         _C.PROBLEM.INSTANCE_SEG.WATERSHED.BY_2D_SLICES = False
 
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 2.2.1.1 Affinity agglomeration options for instance segmentation
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # Used when 'PROBLEM.INSTANCE_SEG.INSTANCE_CREATION_PROCESS' is 'agglomeration' (requires
+        # 'PROBLEM.INSTANCE_SEG.DATA_CHANNELS' == ['A']): oversegment the predicted affinities into
+        # small fragments via watershed, then greedily merge fragment pairs by a quantile of their
+        # affinity histogram until the merge threshold is reached. Matches waterz's
+        # (https://github.com/funkey/waterz) canonical behaviour: only the first short-range
+        # (z, y, x)/(y, x) affinity triple is used, by both the fragment watershed and the merge
+        # scoring; any further, longer-range offsets are ignored. See
+        # biapy/data/post_processing/affinity_agglomeration.py.
+        _C.PROBLEM.INSTANCE_SEG.AGGLOMERATION = CN()
+        # Seed threshold for the initial oversegmented fragments (high, so fragments never straddle a
+        # real instance boundary).
+        _C.PROBLEM.INSTANCE_SEG.AGGLOMERATION.FRAGMENT_SEED_TH = 0.9
+        # Growth-mask threshold for those fragments (low, so they cover all foreground with no gaps).
+        _C.PROBLEM.INSTANCE_SEG.AGGLOMERATION.FRAGMENT_GROWTH_TH = 0.1
+        # Two fragments merge while their MERGE_QUANTILE-th percentile affinity (short-range triple
+        # only, see above) is >= this value.
+        _C.PROBLEM.INSTANCE_SEG.AGGLOMERATION.MERGE_TH = 0.5
+        # Percentile (0-100) of each fragment pair's affinity histogram used as its merge score.
+        # 50 = median.
+        _C.PROBLEM.INSTANCE_SEG.AGGLOMERATION.MERGE_QUANTILE = 50.0
+        # Minimum supporting voxel-pairs an edge needs before it can trigger a merge. 1 effectively
+        # disables this.
+        _C.PROBLEM.INSTANCE_SEG.AGGLOMERATION.MIN_EDGE_VOXELS = 5
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 2.2.2 Stardist-like post-processing options for instance segmentation
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Options for stardist-kind instance creation
         _C.PROBLEM.INSTANCE_SEG.STARDIST = CN()
         # Probability threshold to consider a pixel/voxel as a potential instance center
         _C.PROBLEM.INSTANCE_SEG.STARDIST.PROB_THRESH = 0.4
         # Non-maximum suppression IoU threshold to filter overlapping instance candidates
         _C.PROBLEM.INSTANCE_SEG.STARDIST.NMS_IOU_THRESH = 0.3
+        # Output stride of the StarDist head per axis (StarDist's 'grid'); post-processing scales candidate
+        # coordinates by it. BiaPy's U-Net predicts at full resolution, so keep it all-ones; only set >1 if
+        # the model is changed to emit the maps on a coarser lattice. Empty -> all ones for the given ndim.
+        _C.PROBLEM.INSTANCE_SEG.STARDIST.GRID = []
 
+        
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 2.2.3 Cellpose/Omnipose-like post-processing options for instance segmentation
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # Options for flow-field-based instance creation from Gv/Gh/[Gz] channels.
+        # Inspired by the work:
+        # References:
+        #   "Cellpose: a generalist algorithm for cellular segmentation"
+        #    [link]: https://www.nature.com/articles/s41592-020-01018-x
+        #   "Omnipose: a high-precision morphology-independent solution for bacterial cell segmentation"
+        #    [link]: https://www.nature.com/articles/s41592-022-01639-4
+        # Cellpose vs Omnipose post-processing is selected by the flow channels' gradient strategy
+        # (DATA_CHANNELS_EXTRA_OPTS[0]['Gv']['gradient_type'], 'cellpose' or 'omnipose'); parameters for
+        # each live in the CELLPOSE and OMNIPOSE nodes below.
+        #
+        # Cellpose post-processing: Euler integration followed by histogram peak detection and 3x3
+        # expansion, with an optional flow-error check that removes instances whose flow (regenerated
+        # from the mask) disagrees with the network. Suited for Cellpose-style flows.
+        _C.PROBLEM.INSTANCE_SEG.CELLPOSE = CN()
+        # Foreground probability threshold. Pixels/voxels with a predicted foreground probability
+        # above this value are considered foreground and will be traced through the flow field.
+        # Applies when a dedicated binary channel ('F', 'M', or 'B') is present in DATA_CHANNELS.
+        # Matches Cellpose default (cellprob_threshold=0.0 in logit space = sigmoid 0.5).
+        _C.PROBLEM.INSTANCE_SEG.CELLPOSE.FG_THRESH = 0.5
+        # Flow-error threshold to discard spurious instances: each mask's flow is regenerated by
+        # diffusion and compared (mean squared error) against the network flow, removing the fragments
+        # left by over-segmentation. 0 disables the check. Default 0.4.
+        _C.PROBLEM.INSTANCE_SEG.CELLPOSE.FLOW_THRESHOLD = 0.4
+        # Number of Euler integration steps (overridden internally by niter = (DIAMETER / DIAM_MEAN) * 200).
+        _C.PROBLEM.INSTANCE_SEG.CELLPOSE.N_STEPS = 200
+        # Expected cell diameter (px) in the TEST data (test time only; training always rescales per
+        # image). The input is rescaled by DIAM_MEAN / DIAMETER, predicted, and resized back, with
+        # niter = (DIAMETER / DIAM_MEAN) * 200. DIAMETER == 0 estimates it per image
+        # (TEST_DOUBLE_INFERENCE), else uses the training-set median. Default: 0.0.
+        _C.PROBLEM.INSTANCE_SEG.CELLPOSE.DIAMETER = 0.0
+        # Reference cell diameter (px) the flow model is trained at (30 'cyto', 17 'nuclei'). Both
+        # training and test rescale cells to this size. Default: 30.0.
+        _C.PROBLEM.INSTANCE_SEG.CELLPOSE.DIAM_MEAN = 30.0
+        # Amount of random scale jitter applied on top of the per-image diameter rescale during training
+        # (data augmentation), mirroring Cellpose's 'scale_range'. Each training patch is scaled by a
+        # factor drawn as (1 - SCALE_RANGE/2) + SCALE_RANGE * U[0, 1), i.e. uniformly in
+        # [1 - SCALE_RANGE/2, 1 + SCALE_RANGE/2], and this factor multiplies the DIAM_MEAN / diameter
+        # normalization. Only applied when training with flow channels; validation/test use the plain
+        # diameter rescale with no jitter. 0.0 disables the jitter. Matches Cellpose's default for the
+        # rescale training path (cellpose/train.py: scale_range0 = 0.5 when rescale=True), giving the
+        # range [0.75, 1.25]. Default: 0.5.
+        _C.PROBLEM.INSTANCE_SEG.CELLPOSE.SCALE_RANGE = 0.5
+        # When DIAMETER == 0, estimate each test image's diameter with a cheap first inference pass (on
+        # one central patch) instead of the training-set median, then rescale the input for the real
+        # pass. Ignored when DIAMETER > 0, for the by-chunks/Zarr path, and for 'torchvision' models.
+        # Default: True.
+        _C.PROBLEM.INSTANCE_SEG.CELLPOSE.TEST_DOUBLE_INFERENCE = True
+
+        # Omnipose post-processing: divergence-rescaled, suppressed (step-damped) Euler flow-following
+        # with the step count derived from the predicted distance field, then DBSCAN clustering of the
+        # convergence points (a faithful port of Omnipose's compute_masks). Requires a predicted distance
+        # channel ('Db' with val_type 'omnipose'). Omnipose is diameter-agnostic, so the Cellpose
+        # DIAMETER/DIAM_MEAN/SCALE_RANGE rescaling does not apply.
+        _C.PROBLEM.INSTANCE_SEG.OMNIPOSE = CN()
+        # Foreground threshold on the predicted distance field ('Db'): pixels with distance above this
+        # are traced (Omnipose's mask_threshold, applied via hysteresis at [MASK_THRESHOLD-1,
+        # MASK_THRESHOLD]). Default: 0.0.
+        _C.PROBLEM.INSTANCE_SEG.OMNIPOSE.MASK_THRESHOLD = 0.0
+        # Flow-error threshold to discard masks whose flow (regenerated from the mask) disagrees with the
+        # network. 0 disables the check. Matches Omnipose default 0.4.
+        _C.PROBLEM.INSTANCE_SEG.OMNIPOSE.FLOW_THRESHOLD = 0.4
+        # Number of Euler integration steps. 0 = automatic (Omnipose derives it from the predicted
+        # distance field: niter = 2*(ndim+1)*mean(distance)). A positive value overrides it, mirroring
+        # Omnipose's --niter. Default: 0.
+        _C.PROBLEM.INSTANCE_SEG.OMNIPOSE.NITER = 0
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 2.2.4 EmbedSeg-like post-processing options for instance segmentation
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Options for embedding-based clustering instance creation. They are inspired by the work:
-        # Reference: 
+        # Reference:
         #   "EmbedSeg: Embedding-based Instance Segmentation for Biomedical Microscopy Data"
         #    [link]: https://www.sciencedirect.com/science/article/pii/S1361841522001700
         # Code adapted from: 
         #    Embedseg: https://github.com/juglab/EmbedSeg
         _C.PROBLEM.INSTANCE_SEG.EMBEDSEG = CN()
-        # Foreground threshold for seediness map to consider pixels for clustering.
-        _C.PROBLEM.INSTANCE_SEG.EMBEDSEG.SEED_THRESH = 0.5
+        # Seediness threshold defining the foreground pixels that get clustered into objects.
+        _C.PROBLEM.INSTANCE_SEG.EMBEDSEG.FG_THRESH = 0.5
+        # Seediness threshold a pixel must reach to seed a new object; clustering stops once no
+        # remaining foreground pixel exceeds it.
+        _C.PROBLEM.INSTANCE_SEG.EMBEDSEG.SEED_THRESH = 0.9
         # Minimum number of foreground pixels required to perform clustering.
         _C.PROBLEM.INSTANCE_SEG.EMBEDSEG.MIN_MASK_SUM = 0
         # Minimum number of unclustered foreground pixels to continue clustering.
         _C.PROBLEM.INSTANCE_SEG.EMBEDSEG.MIN_UNCLUSTERED_SUM = 0
-        # Minimum size of objects to be considered valid. Objects smaller than this will be ignored.
-        _C.PROBLEM.INSTANCE_SEG.EMBEDSEG.MIN_OBJECT_SIZE = 100
+        # Size (in pixels) of the canonical coordinate grid used to build the spatial-embedding
+        # coordinate map, i.e. the per-pixel coordinate step is ``1 / (GRID_SIZE - 1)``. This mirrors
+        # EmbedSeg's ``n_x = n_y`` (the dataset's max image size) and is decoupled from
+        # ``DATA.PATCH_SIZE`` on purpose: training patches are treated as slices of this grid so the
+        # coordinate scale (and hence the sigma initialisation ``s = exp(10)``) matches the original
+        # regardless of the patch size. The SAME value is used by the loss (training) and the clustering
+        # (inference). Leave it at -1 to compute it automatically from the dataset's max image size
+        # (cached to a JSON next to the instance-channel folder, like the Cellpose diameter); set a
+        # positive value to force it.
+        _C.PROBLEM.INSTANCE_SEG.EMBEDSEG.GRID_SIZE = -1
 
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 2.2.5 Synapse-specific options for instance segmentation
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
         #### For "synapses" type of instances (only available for 3D H5/Zarr data) ####
         _C.PROBLEM.INSTANCE_SEG.SYNAPSES = CN()
-        # Dilation in (z,y,x) to be made for the 'B' channel
-        _C.PROBLEM.INSTANCE_SEG.SYNAPSES.POSTSITE_DILATION = [2,4,4]
-        # Dilation in (z,y,x) to be made to construct the 'F' channel
-        _C.PROBLEM.INSTANCE_SEG.SYNAPSES.POSTSITE_DILATION_DISTANCE_CHANNELS = [3,10,10] 
+        # Method to create the points from the synapse prediction (in "F_pre" + "F_post" setting). Options are:
+        #   - 'peak_local_max' to use the skimage.feature.peak_local_max function to create the points 
+        #   - 'blob_log' to use the skimage.feature.blob_log function to create the points
         _C.PROBLEM.INSTANCE_SEG.SYNAPSES.POINT_CREATION_FUNCTION = "peak_local_max"
         # The minimal allowed distance separating peaks. To find the maximum number of peaks, use min_distance=1.
         _C.PROBLEM.INSTANCE_SEG.SYNAPSES.PEAK_LOCAL_MAX_MIN_DISTANCE = 1
@@ -324,7 +546,9 @@ class Config:
         #   * TODO: by looking at external neuron segmentation
         _C.PROBLEM.INSTANCE_SEG.SYNAPSES.REMOVE_CLOSE_POINTS_RADIUS_BY_MASK = False
 
-        ### DETECTION
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 2.3 Detection problem specification
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
         _C.PROBLEM.DETECTION = CN()
         # Shape of the ellipse that will be used to dilate the central point created from the CSV file. 0 to not dilate and only create a 3x3 square.
         # The value is the radius of the ellipse in pixels. If an integer is given, the shape will be a ball with the given side length.
@@ -334,8 +558,30 @@ class Config:
         _C.PROBLEM.DETECTION.CHECK_POINTS_CREATED = True
         # Whether to save watershed check files
         _C.PROBLEM.DETECTION.DATA_CHECK_MW = False
+        # Whether to use a different decoder for each head in the model. Only applicable when 'DATA.N_CLASSES' > 2
+        # (multi-class detection), where the model has two heads: one for the detection points and one for the class
+        # predictions. Only supported by: ['unet', 'resunet', 'resunet++', 'seunet', 'resunet_se', 'attention_unet',
+        # 'unext_v1', 'unext_v2'].
+        _C.PROBLEM.DETECTION.SEPARATED_DECODERS_PER_HEAD = False
+        # Whether to divide 'MODEL.FEATURE_MAPS' by the number of decoders created when 'SEPARATED_DECODERS_PER_HEAD'
+        # is enabled. This way the model keeps a number of parameters closer to the one built with just one decoder.
+        # If False each decoder is built with 'MODEL.FEATURE_MAPS' as they are, so the model will be as many times
+        # bigger (in its decoder part) as decoders are created. Only used when 'SEPARATED_DECODERS_PER_HEAD' is True.
+        _C.PROBLEM.DETECTION.SEPARATED_DECODERS_DIVIDE_FEATURE_MAPS = False
+        # Whether to apply a rebalancing strategy to the loss function to give more importance to underrepresented pixels within the channels. 
+        # The weights are calculated automatically based on the number of pixels of each class per batch and directly in the loss computation.
+        # In the specific case of detection, where there are usually much less pixels representing the center of the objects to detect than
+        # background pixels, with this option activated, the loss will give more importance to the pixels representing the center of the objects
+        # to help the model learn better to predict them.
+        _C.PROBLEM.DETECTION.CLASS_REBALANCE_WITHIN_CHANNELS = True
+        # Weights to be applied to the channels when doing detection with classes. Notice that these weights are not applied directly to the loss,
+        # but to the predicted channels before calculating the loss. The length of the list must be equal to the number of channels. 
+        # Notice that this is different from LOSS.WEIGHTS, which are used to apply weights to different losses.
+        _C.PROBLEM.DETECTION.DATA_CHANNEL_WEIGHTS = (1, 1)
 
-        ### DENOISING
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 2.4 Denoising problem specification
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
         # Based Noise2Void paper: https://arxiv.org/abs/1811.10980
         _C.PROBLEM.DENOISING = CN()
         # This variable corresponds to n2v_perc_pix from Noise2Void. It explanation is as follows: for faster training multiple
@@ -353,12 +599,16 @@ class Config:
         # Whether to load ground truth data in denoising
         _C.PROBLEM.DENOISING.LOAD_GT_DATA = False
 
-        ### SUPER_RESOLUTION
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 2.4 Super-resolution problem specification
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
         _C.PROBLEM.SUPER_RESOLUTION = CN()
         # Upscaling to be done to the input images on every dimension. Examples: (2,2) in 2D or (2,2,2) in 3D.
         _C.PROBLEM.SUPER_RESOLUTION.UPSCALING = ()
 
-        ### SELF_SUPERVISED
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 2.5 Self-supervised problem specification
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
         _C.PROBLEM.SELF_SUPERVISED = CN()
         # Pretext task to do. Options are as follows:
         #   - 'crappify': crappifies input image by adding Gaussian noise and downsampling and upsampling it so the resolution
@@ -373,28 +623,184 @@ class Config:
         # Number between [0, 1] indicating the std of the Gaussian noise N(0,std).
         _C.PROBLEM.SELF_SUPERVISED.NOISE = 0.2
 
-        ### IMAGE_TO_IMAGE
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 2.6 Image-to-image problem specification
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
         _C.PROBLEM.IMAGE_TO_IMAGE = CN()
+        # Information on how the channels are distributed in the model's output heads. It must be a list of list of ints, where each 
+        # inner list contains the number of channels that are going to be predicted in the same head. 
+        _C.PROBLEM.IMAGE_TO_IMAGE.CHANNELS_PER_HEAD_INFO = []
+        # Whether to use a different decoder for each head in the model. The heads are defined by 'CHANNELS_PER_HEAD_INFO',
+        # so at least two entries are required there. Only supported by: ['unet', 'resunet', 'resunet++', 'seunet',
+        # 'resunet_se', 'attention_unet', 'unext_v1', 'unext_v2'].
+        _C.PROBLEM.IMAGE_TO_IMAGE.SEPARATED_DECODERS_PER_HEAD = False
+        # Whether to divide 'MODEL.FEATURE_MAPS' by the number of decoders created when 'SEPARATED_DECODERS_PER_HEAD'
+        # is enabled. This way the model keeps a number of parameters closer to the one built with just one decoder.
+        # If False each decoder is built with 'MODEL.FEATURE_MAPS' as they are, so the model will be as many times
+        # bigger (in its decoder part) as decoders are created. Only used when 'SEPARATED_DECODERS_PER_HEAD' is True.
+        _C.PROBLEM.IMAGE_TO_IMAGE.SEPARATED_DECODERS_DIVIDE_FEATURE_MAPS = False
+        # Expected output channels to be predicted by the model.
+        _C.PROBLEM.IMAGE_TO_IMAGE.OUTPUT_CHANNELS = 1
         # To use a custom data loader to load a random image from each image sample folder. The data needs to be structured
         # in an special way, that is, instead of having images in the training/val folder a folder for each sample is expected,
         # where in each of those different versions of the same data sample will be placed. Visit the following tutorial
         # for a real use case and a more detailed description:
         #   - https://biapy.readthedocs.io/en/latest/tutorials/image-to-image/lightmycells.html
         _C.PROBLEM.IMAGE_TO_IMAGE.MULTIPLE_RAW_ONE_TARGET_LOADER = False
+        # Activation function to be applied to the output channels of the model. It can be a string or a list of strings if
+        # different activation functions are desired for different channels. Leave empty to use linear activation.
+        _C.PROBLEM.IMAGE_TO_IMAGE.OUTPUT_CHANNEL_ACT = []
 
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # Dataset
+        # 2.6.1 Membrane repair sub-problem (IMAGE_TO_IMAGE)
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # Trains a dataset-agnostic network that repairs membrane-segmentation errors (gaps and
+        # spurious fragments) coming out of an upstream foundation-model + GMM pipeline. Model input
+        # is EXCLUSIVELY DERIVED_CHANNELS, computed from SOURCE_CHANNELS (never fed to the model
+        # directly). Output is affinities learned from GT instance labels. Uses a dedicated data
+        # generator (Membrane2DRepairDataGenerator/Membrane3DRepairDataGenerator) instead of the
+        # shared instance-seg/Cellpose/N2V generator.
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR = CN()
+        # Master switch. When True, PROBLEM.TYPE == "IMAGE_TO_IMAGE" is routed through the dedicated
+        # membrane-repair data generator and Membrane_Repair_Workflow instead of the regular
+        # IMAGE_TO_IMAGE_Workflow path.
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.ENABLE = False
+        # Ordered list of the raw, on-disk input channels. Never fed to the model directly -- only
+        # used to compute DERIVED_CHANNELS (see below). Channels are resolved by name, not
+        # position, so any order/subset works, e.g. ["membrane"], ["raw"], ["membrane", "raw"] or
+        # ["raw", "membrane"] ("raw" required whenever 'meijering' is in DERIVED_CHANNELS;
+        # "membrane" required whenever 'skeleton_dt'/'hessian_blob' are).
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.SOURCE_CHANNELS = ["membrane", "raw"]
+        # Ordered list of channels derived on the fly from SOURCE_CHANNELS -- the model's actual
+        # input; must be non-empty. Options:
+        #   - 'skeleton_dt': clamped Euclidean distance transform of the per-slice membrane skeleton.
+        #     Derived from 'membrane' (required in SOURCE_CHANNELS).
+        #   - 'hessian_blob': Hessian-eigenvalue-based "dense blob" response (mito/synapse/vesicle cue).
+        #     Derived from 'membrane' (required in SOURCE_CHANNELS).
+        #   - 'meijering': standardised multi-scale Meijering ridge filter. Derived from 'raw'
+        #     (required in SOURCE_CHANNELS).
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.DERIVED_CHANNELS = ["skeleton_dt", "hessian_blob", "meijering"]
+        # Per-channel options for DERIVED_CHANNELS. Must be a list with a unique element: a dict of
+        # dicts, keyed by channel name. Possible options:
+        #   - 'skeleton_dt' channel. Possible options:
+        #       - 'clamp_px': int, clamp distance (in canonical pixels) applied to the DT. Default: 10
+        #       - 'per_slice': bool, whether to skeletonize/derive the DT per z-slice (2D skeleton in a
+        #         3D stack) rather than on the full 3D volume. Default: True
+        #   - 'hessian_blob' channel. Possible options:
+        #       - 'sigma_range': list of 2 floats, [min, max] Gaussian scales probed for the Hessian.
+        #         Default: [1.0, 3.0]
+        #   - 'meijering' channel. Possible options:
+        #       - 'sigma_range': list of 2 floats, [min, max] Gaussian scales probed for the ridge
+        #         filter. Default: [1.0, 4.0]
+        #       - 'standardize': bool, whether to z-score/percentile-normalize the response for
+        #         cross-dataset comparability. Default: True
+        # For example:
+        #  DERIVED_CHANNELS = ['skeleton_dt', 'hessian_blob']
+        #  DERIVED_CHANNELS_EXTRA_OPTS = [{'skeleton_dt': {'clamp_px': 8}, 'hessian_blob': {'sigma_range': [1.0, 2.5]}}]
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.DERIVED_CHANNELS_EXTRA_OPTS = [{}]
+
+        # Y-side: GT target channels, generated offline from the raw GT instance-label folder via the
+        # same 'labels_into_channels' machinery INSTANCE_SEG uses (see PROBLEM.INSTANCE_SEG.DATA_CHANNELS
+        # for the full list of channel letters), then regenerated online after each augmentation warp so
+        # directional channels never get corrupted by interpolation. Must include 'I' (the virtual raw
+        # instance-label channel), the regeneration source that is dropped before the batch reaches the
+        # model -- exactly as INSTANCE_SEG does for its own directional channels. 'A' (affinities) is the
+        # actual training target.
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.DATA_CHANNELS = ["A", "I"]
+        # Same shape/semantics as PROBLEM.INSTANCE_SEG.DATA_CHANNELS_EXTRA_OPTS's 'A' entry:
+        # 'z_affinities'/'y_affinities'/'x_affinities' (paired-by-index neighbour offset lists) and
+        # 'widen_borders'. E.g. [{'A': {'z_affinities': [1], 'y_affinities': [1], 'x_affinities': [1]}}]
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.DATA_CHANNELS_EXTRA_OPTS = [{}]
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 2.6.2 Membrane repair test-time post-processing (affinities -> instances)
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.POSTPROCESS = CN()
+        # How to turn predicted affinities into instance labels at test time. Options:
+        #   - 'watershed': single marker-controlled watershed over the min of the first (z,y,x)
+        #     affinity triple (see watershed_by_channels's 'A'-only branch), Otsu-thresholded.
+        #   - 'agglomeration': oversegment into small fragments, then merge fragment pairs by a
+        #     quantile (MERGE_QUANTILE) of their affinity histogram until MERGE_TH is reached, using
+        #     only the first (z,y,x) short-range affinity triple (matches waterz -- see
+        #     biapy/data/post_processing/affinity_agglomeration.py).
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.POSTPROCESS.METHOD = "agglomeration"
+        # 'agglomeration' only: seed threshold for the initial oversegmented fragments (high, so
+        # fragments never straddle a real instance boundary).
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.POSTPROCESS.FRAGMENT_SEED_TH = 0.9
+        # 'agglomeration' only: growth-mask threshold for those fragments (low, so they cover all
+        # foreground with no gaps).
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.POSTPROCESS.FRAGMENT_GROWTH_TH = 0.1
+        # 'agglomeration' only: two fragments merge while their MERGE_QUANTILE-th percentile
+        # affinity (short-range triple only, see METHOD above) is >= this value.
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.POSTPROCESS.MERGE_TH = 0.5
+        # 'agglomeration' only: percentile (0-100) of each fragment pair's affinity histogram used
+        # as its merge score. 50 = median.
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.POSTPROCESS.MERGE_QUANTILE = 50.0
+        # 'agglomeration' only: minimum supporting voxel-pairs an edge needs before it can trigger a
+        # merge. 1 effectively disables this.
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.POSTPROCESS.MIN_EDGE_VOXELS = 5
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 2.6.3 Membrane repair corruption augmentors
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # These synthesize the upstream pipeline's failure modes directly on the membrane source
+        # channel, so the network learns the repair operation from corrupted -> clean pairs.
+        # Applied after the geometric warps, before the derived channels are computed.
+        # PROB is a per-z-slice probability, independently rolled for every slice (2D: probability of
+        # augmenting the whole image), not a single roll for the whole sample.
+        #
+        # Blacks out random bands across the membrane channel (merge error). LENGTH_RANGE: fraction
+        # (0-1) of border-to-border extent (1.0 = full). THICKNESS_RANGE: pixels. N_LINES: bands
+        # per slice.
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.GAP_AUG = CN()
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.GAP_AUG.ENABLE = False
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.GAP_AUG.PROB = 0.5
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.GAP_AUG.LENGTH_RANGE = (0.3, 1.0)
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.GAP_AUG.THICKNESS_RANGE = (4, 9)
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.GAP_AUG.N_LINES = (1, 3)
+        # Inverse of GAP_AUG: paints bands instead of erasing (split error). Same options.
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.BRIDGE_AUG = CN()
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.BRIDGE_AUG.ENABLE = False
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.BRIDGE_AUG.PROB = 0.3
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.BRIDGE_AUG.LENGTH_RANGE = (0.3, 1.0)
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.BRIDGE_AUG.THICKNESS_RANGE = (4, 9)
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.BRIDGE_AUG.N_LINES = (1, 3)
+        # Heavy acquisition artifact. With probability BAND_PROB: a border-to-border band
+        # (BAND_THICKNESS_RANGE px) -- membrane channel set to 1 inside it, every other channel
+        # blacked out; rest of the image untouched. Otherwise: BLOB_N_RANGE ink-blot blobs
+        # (BLOB_SIZE_RANGE radius, fraction of min(h, w)) blacked out in every channel.
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.ARTIFACT_AUG = CN()
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.ARTIFACT_AUG.ENABLE = False
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.ARTIFACT_AUG.PROB = 0.1
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.ARTIFACT_AUG.BAND_PROB = 0.5
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.ARTIFACT_AUG.BAND_THICKNESS_RANGE = (50, 70)
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.ARTIFACT_AUG.BLOB_SIZE_RANGE = (0.1, 0.3)
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.ARTIFACT_AUG.BLOB_N_RANGE = (1, 3)
+        # Applies a small random dilation/erosion/spur injection to the membrane channel before the
+        # derived channels are computed, so the model doesn't over-trust exact skeleton geometry.
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.SKELETON_PERTURB_AUG = CN()
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.SKELETON_PERTURB_AUG.ENABLE = False
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.SKELETON_PERTURB_AUG.PROB = 0.3
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.SKELETON_PERTURB_AUG.RADIUS_RANGE = (1, 2)
+        # Zeroes z-slices of each raw source channel (SOURCE_CHANNELS, e.g. membrane or raw)
+        # independently with probability PROB (see 'slice_dropout' in
+        # biapy/data/generators/membrane_augmentors.py).
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.SLICE_DROPOUT_AUG = CN()
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.SLICE_DROPOUT_AUG.ENABLE = False
+        _C.PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.SLICE_DROPOUT_AUG.PROB = 0.3
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 3. Dataset
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         _C.DATA = CN()
-
         # Save all data of a generator in the given path.
         _C.DATA.CHECK_GENERATORS = False
-
         # _C.PROBLEM.NDIM='2D' -> _C.DATA.PATCH_SIZE=(y,x,c) ; _C.PROBLEM.NDIM='3D' -> _C.DATA.PATCH_SIZE=(z,y,x,c)
         _C.DATA.PATCH_SIZE = (256, 256, 1)
-
+        # Number of classes including the background class (that should be using 0 label)
+        _C.DATA.N_CLASSES = 2
         # Whether to reshape the dimensions that does not satisfy the patch shape selected by padding it with reflect.
-        _C.DATA.REFLECT_TO_COMPLETE_SHAPE = False
+        _C.DATA.REFLECT_TO_COMPLETE_SHAPE = True
         # If 'DATA.PATCH_SIZE' selected has 3 channels, e.g. RGB images are expected, so will force grayscale images to be
         # converted into RGB (e.g. in ImageNet some of the images are grayscale)
         _C.DATA.FORCE_RGB = False
@@ -407,8 +813,21 @@ class Config:
         # display filtered patches as black (all zero values) while retaining original patch values in non-filtered areas. 
         _C.DATA.SAVE_FILTERED_IMAGES = False
         # Number of filtered images to save. Only work when 'DATA.SAVE_FILTERED_IMAGES' is True
-        _C.DATA.SAVE_FILTERED_IMAGES_NUM = 3 
+        _C.DATA.SAVE_FILTERED_IMAGES_NUM = 3
 
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 3.0.1 Per-file resolution normalization (mixing datasets of different physical resolution)
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        _C.DATA.RESOLUTION_NORM = CN()
+        # Rescales each patch in-plane (Y,X) to TARGET_RESOLUTION, using a per-file resolution read
+        # from "resolution.json" in the parent of DATA.TRAIN.PATH/DATA.VAL.PATH.
+        _C.DATA.RESOLUTION_NORM.ENABLE = False
+        # Target (z,y,x) resolution; only y,x are used. Must be positive when ENABLE is True.
+        _C.DATA.RESOLUTION_NORM.TARGET_RESOLUTION = (-1.0, -1.0, -1.0)
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 3.1 Normalization options for the data
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         _C.DATA.NORMALIZATION = CN()
         # Whether to apply or not a percentile clipping before normalizing the data
         _C.DATA.NORMALIZATION.PERC_CLIP = CN()
@@ -418,24 +837,41 @@ class Config:
         _C.DATA.NORMALIZATION.PERC_CLIP.UPPER_PERC = -1.0
         # Lower and upper values to clip. If these are provided the percentiles are not calculated based on 
         # 'DATA.NORMALIZATION.PERC_CLIP.LOWER_PERC' and 'DATA.NORMALIZATION.PERC_CLIP.UPPER_PERC' 
-        _C.DATA.NORMALIZATION.PERC_CLIP.LOWER_VALUE = -1.0
-        _C.DATA.NORMALIZATION.PERC_CLIP.UPPER_VALUE = -1.0
+        _C.DATA.NORMALIZATION.PERC_CLIP.LOWER_VALUE = [-1.0]
+        _C.DATA.NORMALIZATION.PERC_CLIP.UPPER_VALUE = [-1.0]
         # Normalization type to use. Possible options:
         #   'div' to divide values from 0/255 (or 0/65535 if uint16) in [0,1] range
         #   'scale_range' same as 'div' but scaling the range to [0-max] and then dividing by the maximum value of the data
         #    and not by 255 or 65535
         #   'zero_mean_unit_variance' to substract the mean and divide by std. 
         _C.DATA.NORMALIZATION.TYPE = "zero_mean_unit_variance"
-        # Whether to based the normalization on values extracted from the complete image or from each patch. When working with 
-        # large images such as Zarr or H5 it is done by patch automatically. The values are also applied for the percentage
-        # clipping. Options: ['image', 'patch']
-        _C.DATA.NORMALIZATION.MEASURE_BY = "image"
         # Custom normalization variables: mean and std (they are calculated if not provided)
         _C.DATA.NORMALIZATION.ZERO_MEAN_UNIT_VAR = CN()
-        _C.DATA.NORMALIZATION.ZERO_MEAN_UNIT_VAR.MEAN_VAL = -1.0
-        _C.DATA.NORMALIZATION.ZERO_MEAN_UNIT_VAR.STD_VAL = -1.0
+        _C.DATA.NORMALIZATION.ZERO_MEAN_UNIT_VAR.MEAN_VAL = [-1.0]
+        _C.DATA.NORMALIZATION.ZERO_MEAN_UNIT_VAR.STD_VAL = [-1.0]
 
-        # Train
+        # Target/GT-specific normalization (image-to-image style targets only). Off by default = fully
+        # retrocompatible (target normalized like the input, as before). When enabled, the target is
+        # normalized with its own FIXED type/mean/std/clip below, and predictions are un-normalized with
+        # those same fixed values at test time instead of the input's - needed because the input's stats
+        # are computable at test time (the input always exists) but the target's are not.
+        _C.DATA.NORMALIZATION.TARGET = CN()
+        _C.DATA.NORMALIZATION.TARGET.ENABLE = False
+        # '' reuses 'DATA.NORMALIZATION.TYPE'. Only 'zero_mean_unit_variance' is supported here.
+        _C.DATA.NORMALIZATION.TARGET.TYPE = ""
+        _C.DATA.NORMALIZATION.TARGET.PERC_CLIP = CN()
+        _C.DATA.NORMALIZATION.TARGET.PERC_CLIP.ENABLE = False
+        # Fixed clip values only (no percentiles - those would need the target image at test time).
+        _C.DATA.NORMALIZATION.TARGET.PERC_CLIP.LOWER_VALUE = [-1.0]
+        _C.DATA.NORMALIZATION.TARGET.PERC_CLIP.UPPER_VALUE = [-1.0]
+        _C.DATA.NORMALIZATION.TARGET.ZERO_MEAN_UNIT_VAR = CN()
+        # Required (not -1) when 'DATA.NORMALIZATION.TARGET.ENABLE' is True.
+        _C.DATA.NORMALIZATION.TARGET.ZERO_MEAN_UNIT_VAR.MEAN_VAL = [-1.0]
+        _C.DATA.NORMALIZATION.TARGET.ZERO_MEAN_UNIT_VAR.STD_VAL = [-1.0]
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 3.2 Training data options
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         _C.DATA.TRAIN = CN()
         # Whether to check if the data mask contains correct values, e.g. same classes as defined
         _C.DATA.TRAIN.CHECK_DATA = True
@@ -469,6 +905,17 @@ class Config:
         _C.DATA.TRAIN.DETECTION_MASK_DIR = os.path.join("user_data", "train", "y_detection_masks")
         # Path to load/save SSL target prepared.
         _C.DATA.TRAIN.SSL_SOURCE_DIR = os.path.join("user_data", "train", "x_ssl_source")
+        # Extract random patches during data augmentation (DA)
+        _C.DATA.TRAIN.EXTRACT_RANDOM_PATCH = False
+        # Create a probability map so the patches extracted will have a high probability of having an object in the middle
+        # of it. Useful to avoid extracting patches which no foreground class information. Use it only when
+        # 'PROBLEM.TYPE' is 'SEMANTIC_SEG', 'INSTANCE_SEG' or 'DETECTION'
+        _C.DATA.TRAIN.PROBABILITY_MAP = False  # Used when _C.DATA.TRAIN.EXTRACT_RANDOM_PATCH=True
+        _C.DATA.TRAIN.W_FOREGROUND = 0.94  # Used when _C.DATA.TRAIN.PROBABILITY_MAP=True
+        _C.DATA.TRAIN.W_BACKGROUND = 0.06  # Used when _C.DATA.TRAIN.PROBABILITY_MAP=True
+        # Extra train data generation: number of times to duplicate the train data. Useful when
+        # _C.DATA.TRAIN.EXTRACT_RANDOM_PATCH=True is made, as more original train data can be cover on each epoch
+        _C.DATA.TRAIN.REPLICATE = 0
         # Percentage of overlap in (y,x)/(z,y,x) when cropping validation. Set to 0 to calculate  the minimun overlap.
         # The values must be floats between range [0, 1). It needs to be a 2D tuple when using _C.PROBLEM.NDIM='2D' and
         # 3D tuple when using _C.PROBLEM.NDIM='3D'
@@ -484,6 +931,9 @@ class Config:
         # Order of the axes of the mask when using Zarr/H5 images in train data.
         _C.DATA.TRAIN.INPUT_MASK_AXES_ORDER = "TZCYX"
 
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 3.2.1 Training data filtering options
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # DATA.TRAIN.FILTER_SAMPLES allows removing training images by the conditions based on their properties. When using Zarr each patch within the Zarr will be
         # processed and will not depend on 'DATA.FILTER_BY_IMAGE' variable.
         # Its three variables (PROPS, VALUES and SIGNS) define a set of conditions to remove the images from the training set. If an image satisfies any of the 
@@ -536,193 +986,10 @@ class Config:
         # Whether to normalize the samples before comparison
         _C.DATA.TRAIN.FILTER_SAMPLES.NORM_BEFORE = False
 
-        # PREPROCESSING
-        # Same preprocessing will be applied to all selected datasets
-        _C.DATA.PREPROCESS = CN()
-        # Apply preprocessing to training dataset
-        _C.DATA.PREPROCESS.TRAIN = False
-        # Apply preprocessing to validation dataset
-        _C.DATA.PREPROCESS.VAL = False
-        # Apply preprocessing to testing dataset
-        _C.DATA.PREPROCESS.TEST = False
 
-        # Resize datasets
-        _C.DATA.PREPROCESS.RESIZE = CN()
-        _C.DATA.PREPROCESS.RESIZE.ENABLE = False
-        # Desired resize size. when using 3D data, size must be also in 3D (ex. (512,512,512))
-        _C.DATA.PREPROCESS.RESIZE.OUTPUT_SHAPE = (512, 512)
-        # interpolation order: {0: Nearest-neighbor, 1: Bi-linear (default), 2: Bi-quadratic, 3: Bi-cubic, 4: Bi-quartic, 5: Bi-quintic}
-        _C.DATA.PREPROCESS.RESIZE.ORDER = 1
-        # Points outside the boundaries of the input are filled according to the given mode: {'constant', 'edge', 'symmetric', 'reflect', 'wrap'}
-        _C.DATA.PREPROCESS.RESIZE.MODE = "reflect"
-        # Used in conjunction with mode ‘constant’, the value outside the image boundaries.
-        _C.DATA.PREPROCESS.RESIZE.CVAL = 0.0
-        # Whether to clip the output to the range of values of the input image.
-        _C.DATA.PREPROCESS.RESIZE.CLIP = True
-        # Whether to keep the original range of values.
-        _C.DATA.PREPROCESS.RESIZE.PRESERVE_RANGE = True
-        # Whether to apply a Gaussian filter to smooth the image prior to downsampling.
-        _C.DATA.PREPROCESS.RESIZE.ANTI_ALIASING = False
-
-        # Zoom datasets.
-        _C.DATA.PREPROCESS.ZOOM = CN()
-        _C.DATA.PREPROCESS.ZOOM.ENABLE = False
-        # WARNING: Only implemented for _C.TEST.BY_CHUNKS = True. It will change the zoom of each patch individually.
-        # This is useful when the input image has a different resolution than the one used in the training. The value
-        # is the zoom factor to be applied to each patch using scipy.ndimage.zoom.
-        # "E.g. [1,2,1,3,3] that needs to match _C.DATA.TEST.INPUT_IMG_AXES_ORDER axes"
-        _C.DATA.PREPROCESS.ZOOM.ZOOM_FACTOR = [1, 1, 1, 1, 1]
-
-        # Gaussian blur
-        _C.DATA.PREPROCESS.GAUSSIAN_BLUR = CN()
-        _C.DATA.PREPROCESS.GAUSSIAN_BLUR.ENABLE = False
-        # Standard deviation for Gaussian kernel.
-        _C.DATA.PREPROCESS.GAUSSIAN_BLUR.SIGMA = 1
-        # The mode parameter determines how the array borders are handled: {‘reflect’, ‘constant’, ‘nearest’, ‘mirror’, ‘wrap’} ‘constant’ value = 0
-        _C.DATA.PREPROCESS.GAUSSIAN_BLUR.MODE = "nearest"
-        # If None, the image is assumed to be a grayscale (single channel) image.
-        # Otherwise, this parameter indicates which axis of the array corresponds to channels.
-        _C.DATA.PREPROCESS.GAUSSIAN_BLUR.CHANNEL_AXIS = None
-
-        # Median blur
-        _C.DATA.PREPROCESS.MEDIAN_BLUR = CN()
-        _C.DATA.PREPROCESS.MEDIAN_BLUR.ENABLE = False
-        # Desired kernel size (including channels). When using 3D data, size must be also in 3D (ex. (3,7,7,1) for (z,y,x,c))
-        _C.DATA.PREPROCESS.MEDIAN_BLUR.KERNEL_SIZE = (3,3,1)
-
-        # Histogram matching. More info at: https://en.wikipedia.org/wiki/Histogram_matching
-        _C.DATA.PREPROCESS.MATCH_HISTOGRAM = CN()
-        _C.DATA.PREPROCESS.MATCH_HISTOGRAM.ENABLE = False
-        # the path of the reference images, from which the reference histogram will be extracted
-        _C.DATA.PREPROCESS.MATCH_HISTOGRAM.REFERENCE_PATH = os.path.join("user_data", "test", "x")
-
-        # Contrast Limited Adaptive Histogram Equalization. More info at: https://en.wikipedia.org/wiki/Adaptive_histogram_equalization#Contrast_Limited_AHE
-        _C.DATA.PREPROCESS.CLAHE = CN()
-        _C.DATA.PREPROCESS.CLAHE.ENABLE = False
-        # Defines the shape of contextual regions used in the algorithm.
-        # By default, kernel_size is 1/8 of image height by 1/8 of its width.
-        _C.DATA.PREPROCESS.CLAHE.KERNEL_SIZE = None
-        # Clipping limit, normalized between 0 and 1 (higher values give more contrast).
-        _C.DATA.PREPROCESS.CLAHE.CLIP_LIMIT = 0.01
-
-        # Canny or edge detection (only 2D - grayscale or RGB)
-        _C.DATA.PREPROCESS.CANNY = CN()
-        _C.DATA.PREPROCESS.CANNY.ENABLE = False
-        # Lower bound for hysteresis thresholding (linking edges). If None, low_threshold is set to 10% of dtype’s max.
-        _C.DATA.PREPROCESS.CANNY.LOW_THRESHOLD = None
-        # Upper bound for hysteresis thresholding (linking edges). If None, high_threshold is set to 20% of dtype’s max.
-        _C.DATA.PREPROCESS.CANNY.HIGH_THRESHOLD = None
-
-        # Test
-        _C.DATA.TEST = CN()
-        # Whether to check if the data mask contains correct values, e.g. same classes as defined
-        _C.DATA.TEST.CHECK_DATA = True
-        _C.DATA.TEST.IN_MEMORY = False
-        # Whether to load ground truth (GT)
-        _C.DATA.TEST.LOAD_GT = False
-        # Whether to use validation data as test instead of trying to load test from _C.DATA.TEST.PATH and
-        # _C.DATA.TEST.GT_PATH. _C.DATA.VAL.CROSS_VAL needs to be True.
-        _C.DATA.TEST.USE_VAL_AS_TEST = False
-        # Path to load the test data from. Not used when _C.DATA.TEST.USE_VAL_AS_TEST == True
-        _C.DATA.TEST.PATH = os.path.join("user_data", "test", "x")
-        # Path to load the test data masks from. Not used when _C.DATA.TEST.USE_VAL_AS_TEST == True
-        _C.DATA.TEST.GT_PATH = os.path.join("user_data", "test", "y")
-        # File to load/save data prepared with the appropiate channels in a instance segmentation problem.
-        # E.g. _C.PROBLEM.TYPE ='INSTANCE_SEG' and _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS != 'B'
-        _C.DATA.TEST.INSTANCE_CHANNELS_MASK_DIR = os.path.join(
-            "user_data", "test", "y_" + "".join(_C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS)
-        )
-        # Path to load/save detection masks prepared.
-        _C.DATA.TEST.DETECTION_MASK_DIR = os.path.join("user_data", "test", "y_detection_masks")
-        # Path to load/save SSL target prepared.
-        _C.DATA.TEST.SSL_SOURCE_DIR = os.path.join("user_data", "test", "x_ssl_source")
-        # Percentage of overlap in (y,x)/(z,y,x) when cropping validation. Set to 0 to calculate  the minimun overlap.
-        # The values must be floats between range [0, 1). It needs to be a 2D tuple when using _C.PROBLEM.NDIM='2D' and
-        # 3D tuple when using _C.PROBLEM.NDIM='3D'
-        _C.DATA.TEST.OVERLAP = (0, 0)
-        # Padding to be done in (y,x)/(z,y,xz) when reconstructing test data. Useful to avoid patch 'border effect'
-        _C.DATA.TEST.PADDING = (0, 0)
-        # Whether to use median values to fill padded pixels or zeros
-        _C.DATA.TEST.MEDIAN_PADDING = False
-        # Directory where binary masks to apply to resulting images should be. Used when _C.TEST.POST_PROCESSING.APPLY_MASK  == True
-        _C.DATA.TEST.BINARY_MASKS = os.path.join("user_data", "test", "bin_mask")
-        # Test data resolution. Need to be provided in (z,y,x) order. Only applies when _C.PROBLEM.TYPE = 'DETECTION' now.
-        _C.DATA.TEST.RESOLUTION = (-1,)
-        # Whether to apply argmax to the predicted images
-        _C.DATA.TEST.ARGMAX_TO_OUTPUT = True
-        # Order of the axes of the image when using Zarr/H5 images in test data.
-        _C.DATA.TEST.INPUT_IMG_AXES_ORDER = "TZCYX"
-        # Order of the axes of the mask when using Zarr/H5 images in test data.
-        _C.DATA.TEST.INPUT_MASK_AXES_ORDER = "TZCYX"
-        # Whether your input Zarr contains the raw images and labels together or not. Use 'DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_RAW_PATH'
-        # and 'DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_GT_PATH' to determine the tag to find within the Zarr
-        _C.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA = False
-        # Paths to the raw and gt within the Zarr file. Only used when 'DATA.TEST.INPUT_ZARR_MULTIPLE_DATA' is True.
-        # E.g. 'volumes.raw' for raw and 'volumes.labels.neuron_ids' for GT path.
-        _C.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_RAW_PATH = ""
-        _C.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_GT_PATH = ""
-        # For synapse detection. The information must be stored as CREMI dataset (https://cremi.org/data/)
-        # Path within the file where the ``ids`` are stored. Reference in CREMI: ``annotations/ids``
-        _C.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_ID_PATH = "annotations.ids"
-        # Path within the file where the ``types`` are stored (not used). Reference in CREMI: ``annotations/types``
-        # _C.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_TYPES_PATH = "annotations.types"
-        # Path within the file where the ``partners`` are stored. Reference in CREMI: ``annotations/partners``
-        _C.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_PARTNERS_PATH = "annotations.presynaptic_site.partners"
-        # Path within the file where the ``locations`` are stored. Reference in CREMI: ``annotations/locations``
-        _C.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_LOCATIONS_PATH = "annotations.locations"
-        # Path within the file where the ``resolution`` is stored. Reference in CREMI: ``["volumes/raw"].attrs["offset"]``
-        _C.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_RESOLUTION_PATH = 'volumes.raw'
-        # Remove test images by the conditions based on their properties. When using Zarr each patch within the Zarr will be processed and will
-        # not depend on 'DATA.FILTER_BY_IMAGE' variable
-        # The three variables, DATA.TEST.FILTER_SAMPLES.PROPS, DATA.TEST.FILTER_SAMPLES.VALUES and DATA.TEST.FILTER_SAMPLES.SIGNS will compose a 
-        # list of conditions to remove the images. They are list of list of conditions. For instance, the conditions can be like this: [['A'], ['B','C']]. 
-        # Then, if the image satisfies the first list of conditions, only 'A' in this first case (from ['A'] list), or satisfy 'B' and 'C' (from ['B','C'] list) 
-        # it will be removed from the image. In each sublist all the conditions must be satisfied. Available properties are: ['foreground', 'mean', 'min', 'max', 
-        # 'target_mean', 'target_min', 'target_max', 'diff', 'diff_by_min_max_ratio', 'diff_by_target_min_max_ratio'].
-        #
-        # Each property descrition:
-        #   * 'foreground' is defined as the percentage of pixels/voxels corresponding to the foreground mask. This option is only valid for
-        #     SEMANTIC_SEG, INSTANCE_SEG and DETECTION.
-        #   * 'mean' is defined as the mean intensity value of the raw image inputs.
-        #   * 'min' is defined as the min intensity value of the raw image inputs.
-        #   * 'max' is defined as the max intensity value of the raw image inputs.
-        #   * 'diff' is defined as the difference between ground truth and raw images. Available for all workflows but SELF_SUPERVISED and DENOISING. 
-        #   * 'diff_by_min_max_ratio' is defined as the difference between ground truth and raw images multiplied by the ratio between raw image max and min. Available for all workflows but SELF_SUPERVISED and DENOISING. 
-        #   * 'target_mean' is defined as the mean intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING.
-        #   * 'target_min' is defined as the min intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING. 
-        #   * 'target_max' is defined as the max intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING.  
-        #   * 'diff_by_target_min_max_ratio' is defined as the difference between ground truth and raw images multiplied by the ratio between ground truth image max and min. Available for all workflows but SELF_SUPERVISED and DENOISING. 
-        #
-        #
-        # A full example of this filtering:
-        # If you want to remove those samples that have less than 0.00001 and a mean average more than 100 (you need to know image data type) you should
-        # declare the above three variables as follows:
-        #   _C.DATA.TEST.FILTER_SAMPLES.PROPS = [['foreground','mean']]
-        #   _C.DATA.TEST.FILTER_SAMPLES.VALUES = [[0.00001, 100]]
-        #   _C.DATA.TEST.FILTER_SAMPLES.SIGNS = [['lt', 'gt']]
-        # You can also concatenate more restrictions and they will be applied in order. For instance, if you want to filter those
-        # samples with a max value more than 1000, and do that before the condition described above, you can define the
-        # variables this way:
-        #   _C.DATA.TEST.FILTER_SAMPLES.PROPS = [['max'], ['foreground','mean']]
-        #   _C.DATA.TEST.FILTER_SAMPLES.VALUES = [[1000], [0.00001, 100]]
-        #   _C.DATA.TEST.FILTER_SAMPLES.SIGNS = [['gt'], ['lt', 'gt']]
-        # This way, the images will be removed by 'max' and then by 'foreground' and 'mean'
-        _C.DATA.TEST.FILTER_SAMPLES = CN()
-        # Whether to enable or not the filtering by properties
-        _C.DATA.TEST.FILTER_SAMPLES.ENABLE = False
-        # List of lists of properties to apply a filter. Available properties are: ['foreground', 'mean', 'min', 'max', 
-        # 'target_mean', 'target_min', 'target_max', 'diff', 'diff_by_min_max_ratio', 'diff_by_target_min_max_ratio']
-        _C.DATA.TEST.FILTER_SAMPLES.PROPS = []
-        # List of ints/float that represent the values of the properties listed in 'DATA.TEST.FILTER_SAMPLES.PROPS'
-        # that the images need to satisfy to not be dropped.
-        _C.DATA.TEST.FILTER_SAMPLES.VALUES = []
-        # List of list of signs to do the comparison. Options: ['gt', 'ge', 'lt', 'le'] that corresponds to "greather than", e.g. ">",
-        # "greather equal", e.g. ">=", "less than", e.g. "<", and "less equal" e.g. "<=" comparisons.
-        _C.DATA.TEST.FILTER_SAMPLES.SIGNS = []
-        # Whether to normalize the samples before comparison
-        _C.DATA.TEST.FILTER_SAMPLES.NORM_BEFORE = False
-
-        # Validation
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 3.3 Validation data options
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         _C.DATA.VAL = CN()
         # Enabling distributed evaluation (recommended during training)
         _C.DATA.VAL.DIST_EVAL = True
@@ -835,13 +1102,246 @@ class Config:
         _C.DATA.VAL.FILTER_SAMPLES.NORM_BEFORE = False
 
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # Data augmentation (DA)
+        # 3.4 Test data options
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        _C.DATA.TEST = CN()
+        # Whether to check if the data mask contains correct values, e.g. same classes as defined
+        _C.DATA.TEST.CHECK_DATA = True
+        _C.DATA.TEST.IN_MEMORY = False
+        # Whether to load ground truth (GT)
+        _C.DATA.TEST.LOAD_GT = False
+        # Whether to use validation data as test instead of trying to load test from _C.DATA.TEST.PATH and
+        # _C.DATA.TEST.GT_PATH. _C.DATA.VAL.CROSS_VAL needs to be True.
+        _C.DATA.TEST.USE_VAL_AS_TEST = False
+        # Path to load the test data from. Not used when _C.DATA.TEST.USE_VAL_AS_TEST == True
+        _C.DATA.TEST.PATH = os.path.join("user_data", "test", "x")
+        # Path to load the test data masks from. Not used when _C.DATA.TEST.USE_VAL_AS_TEST == True
+        _C.DATA.TEST.GT_PATH = os.path.join("user_data", "test", "y")
+        # File to load/save data prepared with the appropiate channels in a instance segmentation problem.
+        # E.g. _C.PROBLEM.TYPE ='INSTANCE_SEG' and _C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS != 'B'
+        _C.DATA.TEST.INSTANCE_CHANNELS_MASK_DIR = os.path.join(
+            "user_data", "test", "y_" + "".join(_C.PROBLEM.INSTANCE_SEG.DATA_CHANNELS)
+        )
+        # Path to load/save detection masks prepared.
+        _C.DATA.TEST.DETECTION_MASK_DIR = os.path.join("user_data", "test", "y_detection_masks")
+        # Path to load/save SSL target prepared.
+        _C.DATA.TEST.SSL_SOURCE_DIR = os.path.join("user_data", "test", "x_ssl_source")
+        # Percentage of overlap in (y,x)/(z,y,x) when cropping validation. Set to 0 to calculate  the minimun overlap.
+        # The values must be floats between range [0, 1). It needs to be a 2D tuple when using _C.PROBLEM.NDIM='2D' and
+        # 3D tuple when using _C.PROBLEM.NDIM='3D'
+        _C.DATA.TEST.OVERLAP = (0, 0)
+        # Padding to be done in (y,x)/(z,y,xz) when reconstructing test data. Useful to avoid patch 'border effect'
+        _C.DATA.TEST.PADDING = (0, 0)
+        # Whether to use median values to fill padded pixels or zeros
+        _C.DATA.TEST.MEDIAN_PADDING = False
+        # Region of interest (ROI) mask restricting where the inference is done. Anything greater than 0 in the mask is
+        # ROI. With 'TEST.BY_CHUNKS.ENABLE' the patches not overlapping the ROI are not predicted, and are left as
+        # background in the output Zarr; otherwise the prediction is zeroed outside the ROI. The mask does not need to
+        # have the same shape as the test image: it is mapped to it by scaling each axis, so a coarse mask (e.g. one
+        # voxel per 64x64x64 block) is enough.
+        _C.DATA.TEST.ROI_MASK = CN()
+        # Whether to restrict the inference to the ROI mask
+        _C.DATA.TEST.ROI_MASK.ENABLE = False
+        # Path to the ROI mask. It can be a file (used for all the test samples) or a directory. In a directory, if only one
+        # mask is found it is used for all the test samples, otherwise the mask named as the test sample is used for it.
+        _C.DATA.TEST.ROI_MASK.PATH = ""
+        # Order of the axes of the ROI mask. Leave it empty to use the axes order of the test image:
+        # 'DATA.TEST.INPUT_IMG_AXES_ORDER' when reading Zarr/H5 by chunks and 'ZYX'/'YX' otherwise.
+        _C.DATA.TEST.ROI_MASK.AXES_ORDER = ""
+
+        # Test data resolution. Need to be provided in (z,y,x) order. Only applies when _C.PROBLEM.TYPE = 'DETECTION' now.
+        _C.DATA.TEST.RESOLUTION = (-1,)
+        # Order of the axes of the image when using Zarr/H5 images in test data.
+        _C.DATA.TEST.INPUT_IMG_AXES_ORDER = "TZCYX"
+        # Order of the axes of the mask when using Zarr/H5 images in test data.
+        _C.DATA.TEST.INPUT_MASK_AXES_ORDER = "TZCYX"
+        # Whether your input Zarr contains the raw images and labels together or not. Use 'DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_RAW_PATH'
+        # and 'DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_GT_PATH' to determine the tag to find within the Zarr
+        _C.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA = False
+        # Paths to the raw and gt within the Zarr file. Only used when 'DATA.TEST.INPUT_ZARR_MULTIPLE_DATA' is True.
+        # E.g. 'volumes.raw' for raw and 'volumes.labels.neuron_ids' for GT path.
+        _C.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_RAW_PATH = ""
+        _C.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_GT_PATH = ""
+        # For synapse detection. The information must be stored as CREMI dataset (https://cremi.org/data/)
+        # Path within the file where the ``ids`` are stored. Reference in CREMI: ``annotations/ids``
+        _C.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_ID_PATH = "annotations.ids"
+        # Path within the file where the ``types`` are stored (not used). Reference in CREMI: ``annotations/types``
+        # _C.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_TYPES_PATH = "annotations.types"
+        # Path within the file where the ``partners`` are stored. Reference in CREMI: ``annotations/partners``
+        _C.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_PARTNERS_PATH = "annotations.presynaptic_site.partners"
+        # Path within the file where the ``locations`` are stored. Reference in CREMI: ``annotations/locations``
+        _C.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_LOCATIONS_PATH = "annotations.locations"
+        # Path within the file where the ``resolution`` is stored. Reference in CREMI: ``["volumes/raw"].attrs["offset"]``
+        _C.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA_RESOLUTION_PATH = 'volumes.raw'
+        # Remove test images by the conditions based on their properties. When using Zarr each patch within the Zarr will be processed and will
+        # not depend on 'DATA.FILTER_BY_IMAGE' variable
+        # The three variables, DATA.TEST.FILTER_SAMPLES.PROPS, DATA.TEST.FILTER_SAMPLES.VALUES and DATA.TEST.FILTER_SAMPLES.SIGNS will compose a 
+        # list of conditions to remove the images. They are list of list of conditions. For instance, the conditions can be like this: [['A'], ['B','C']]. 
+        # Then, if the image satisfies the first list of conditions, only 'A' in this first case (from ['A'] list), or satisfy 'B' and 'C' (from ['B','C'] list) 
+        # it will be removed from the image. In each sublist all the conditions must be satisfied. Available properties are: ['foreground', 'mean', 'min', 'max', 
+        # 'target_mean', 'target_min', 'target_max', 'diff', 'diff_by_min_max_ratio', 'diff_by_target_min_max_ratio'].
+        #
+        # Each property descrition:
+        #   * 'foreground' is defined as the percentage of pixels/voxels corresponding to the foreground mask. This option is only valid for
+        #     SEMANTIC_SEG, INSTANCE_SEG and DETECTION.
+        #   * 'mean' is defined as the mean intensity value of the raw image inputs.
+        #   * 'min' is defined as the min intensity value of the raw image inputs.
+        #   * 'max' is defined as the max intensity value of the raw image inputs.
+        #   * 'diff' is defined as the difference between ground truth and raw images. Available for all workflows but SELF_SUPERVISED and DENOISING. 
+        #   * 'diff_by_min_max_ratio' is defined as the difference between ground truth and raw images multiplied by the ratio between raw image max and min. Available for all workflows but SELF_SUPERVISED and DENOISING. 
+        #   * 'target_mean' is defined as the mean intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING.
+        #   * 'target_min' is defined as the min intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING. 
+        #   * 'target_max' is defined as the max intensity value of the raw image targets. Available for all workflows but SELF_SUPERVISED and DENOISING.  
+        #   * 'diff_by_target_min_max_ratio' is defined as the difference between ground truth and raw images multiplied by the ratio between ground truth image max and min. Available for all workflows but SELF_SUPERVISED and DENOISING. 
+        #
+        #
+        # A full example of this filtering:
+        # If you want to remove those samples that have less than 0.00001 and a mean average more than 100 (you need to know image data type) you should
+        # declare the above three variables as follows:
+        #   _C.DATA.TEST.FILTER_SAMPLES.PROPS = [['foreground','mean']]
+        #   _C.DATA.TEST.FILTER_SAMPLES.VALUES = [[0.00001, 100]]
+        #   _C.DATA.TEST.FILTER_SAMPLES.SIGNS = [['lt', 'gt']]
+        # You can also concatenate more restrictions and they will be applied in order. For instance, if you want to filter those
+        # samples with a max value more than 1000, and do that before the condition described above, you can define the
+        # variables this way:
+        #   _C.DATA.TEST.FILTER_SAMPLES.PROPS = [['max'], ['foreground','mean']]
+        #   _C.DATA.TEST.FILTER_SAMPLES.VALUES = [[1000], [0.00001, 100]]
+        #   _C.DATA.TEST.FILTER_SAMPLES.SIGNS = [['gt'], ['lt', 'gt']]
+        # This way, the images will be removed by 'max' and then by 'foreground' and 'mean'
+        _C.DATA.TEST.FILTER_SAMPLES = CN()
+        # Whether to enable or not the filtering by properties
+        _C.DATA.TEST.FILTER_SAMPLES.ENABLE = False
+        # List of lists of properties to apply a filter. Available properties are: ['foreground', 'mean', 'min', 'max', 
+        # 'target_mean', 'target_min', 'target_max', 'diff', 'diff_by_min_max_ratio', 'diff_by_target_min_max_ratio']
+        _C.DATA.TEST.FILTER_SAMPLES.PROPS = []
+        # List of ints/float that represent the values of the properties listed in 'DATA.TEST.FILTER_SAMPLES.PROPS'
+        # that the images need to satisfy to not be dropped.
+        _C.DATA.TEST.FILTER_SAMPLES.VALUES = []
+        # List of list of signs to do the comparison. Options: ['gt', 'ge', 'lt', 'le'] that corresponds to "greather than", e.g. ">",
+        # "greather equal", e.g. ">=", "less than", e.g. "<", and "less equal" e.g. "<=" comparisons.
+        _C.DATA.TEST.FILTER_SAMPLES.SIGNS = []
+        # Whether to normalize the samples before comparison
+        _C.DATA.TEST.FILTER_SAMPLES.NORM_BEFORE = False
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 3.5 Pre-processing data options
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # Same preprocessing will be applied to all selected datasets
+        _C.DATA.PREPROCESS = CN()
+        # Apply preprocessing to training dataset
+        _C.DATA.PREPROCESS.TRAIN = False
+        # Apply preprocessing to validation dataset
+        _C.DATA.PREPROCESS.VAL = False
+        # Apply preprocessing to testing dataset
+        _C.DATA.PREPROCESS.TEST = False
+
+        # Resize datasets
+        _C.DATA.PREPROCESS.RESIZE = CN()
+        _C.DATA.PREPROCESS.RESIZE.ENABLE = False
+        # Desired resize size. when using 3D data, size must be also in 3D (ex. (512,512,512))
+        _C.DATA.PREPROCESS.RESIZE.OUTPUT_SHAPE = (512, 512)
+        # interpolation order: {0: Nearest-neighbor, 1: Bi-linear (default), 2: Bi-quadratic, 3: Bi-cubic, 4: Bi-quartic, 5: Bi-quintic}
+        _C.DATA.PREPROCESS.RESIZE.ORDER = 1
+        # Points outside the boundaries of the input are filled according to the given mode: {'constant', 'edge', 'symmetric', 'reflect', 'wrap'}
+        _C.DATA.PREPROCESS.RESIZE.MODE = "reflect"
+        # Used in conjunction with mode 'constant', the value outside the image boundaries.
+        _C.DATA.PREPROCESS.RESIZE.CVAL = 0.0
+        # Whether to clip the output to the range of values of the input image.
+        _C.DATA.PREPROCESS.RESIZE.CLIP = True
+        # Whether to keep the original range of values.
+        _C.DATA.PREPROCESS.RESIZE.PRESERVE_RANGE = True
+        # Whether to apply a Gaussian filter to smooth the image prior to downsampling.
+        _C.DATA.PREPROCESS.RESIZE.ANTI_ALIASING = False
+
+        # Zoom datasets.
+        _C.DATA.PREPROCESS.ZOOM = CN()
+        _C.DATA.PREPROCESS.ZOOM.ENABLE = False
+        # WARNING: Only implemented for _C.TEST.BY_CHUNKS = True. It will change the zoom of each patch individually.
+        # This is useful when the input image has a different resolution than the one used in the training. The value
+        # is the zoom factor to be applied to each patch using scipy.ndimage.zoom.
+        # "E.g. [1,2,1,3,3] that needs to match _C.DATA.TEST.INPUT_IMG_AXES_ORDER axes"
+        _C.DATA.PREPROCESS.ZOOM.ZOOM_FACTOR = [1, 1, 1, 1, 1]
+
+        # Gaussian blur
+        _C.DATA.PREPROCESS.GAUSSIAN_BLUR = CN()
+        _C.DATA.PREPROCESS.GAUSSIAN_BLUR.ENABLE = False
+        # Standard deviation for Gaussian kernel.
+        _C.DATA.PREPROCESS.GAUSSIAN_BLUR.SIGMA = 1
+        # The mode parameter determines how the array borders are handled: {'reflect', 'constant', 'nearest', 'mirror', 'wrap'} 'constant' value = 0
+        _C.DATA.PREPROCESS.GAUSSIAN_BLUR.MODE = "nearest"
+        # If None, the image is assumed to be a grayscale (single channel) image.
+        # Otherwise, this parameter indicates which axis of the array corresponds to channels.
+        _C.DATA.PREPROCESS.GAUSSIAN_BLUR.CHANNEL_AXIS = None
+
+        # Median blur
+        _C.DATA.PREPROCESS.MEDIAN_BLUR = CN()
+        _C.DATA.PREPROCESS.MEDIAN_BLUR.ENABLE = False
+        # Desired kernel size (including channels). When using 3D data, size must be also in 3D (ex. (3,7,7,1) for (z,y,x,c))
+        _C.DATA.PREPROCESS.MEDIAN_BLUR.KERNEL_SIZE = (3,3,1)
+
+        # Histogram matching. More info at: https://en.wikipedia.org/wiki/Histogram_matching
+        _C.DATA.PREPROCESS.MATCH_HISTOGRAM = CN()
+        _C.DATA.PREPROCESS.MATCH_HISTOGRAM.ENABLE = False
+        # the path of the reference images, from which the reference histogram will be extracted
+        _C.DATA.PREPROCESS.MATCH_HISTOGRAM.REFERENCE_PATH = os.path.join("user_data", "test", "x")
+
+        # Contrast Limited Adaptive Histogram Equalization. More info at: https://en.wikipedia.org/wiki/Adaptive_histogram_equalization#Contrast_Limited_AHE
+        _C.DATA.PREPROCESS.CLAHE = CN()
+        _C.DATA.PREPROCESS.CLAHE.ENABLE = False
+        # Defines the shape of contextual regions used in the algorithm.
+        # By default, kernel_size is 1/8 of image height by 1/8 of its width.
+        _C.DATA.PREPROCESS.CLAHE.KERNEL_SIZE = None
+        # Clipping limit, normalized between 0 and 1 (higher values give more contrast).
+        _C.DATA.PREPROCESS.CLAHE.CLIP_LIMIT = 0.01
+
+        # Canny or edge detection (only 2D - grayscale or RGB)
+        _C.DATA.PREPROCESS.CANNY = CN()
+        _C.DATA.PREPROCESS.CANNY.ENABLE = False
+        # Lower bound for hysteresis thresholding (linking edges). If None, low_threshold is set to 10% of dtype's max.
+        _C.DATA.PREPROCESS.CANNY.LOW_THRESHOLD = None
+        # Upper bound for hysteresis thresholding (linking edges). If None, high_threshold is set to 20% of dtype's max.
+        _C.DATA.PREPROCESS.CANNY.HIGH_THRESHOLD = None
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 4. Data augmentation (DA)
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         _C.AUGMENTOR = CN()
         # Flag to activate DA
         _C.AUGMENTOR.ENABLE = False
-        # Probability of each transformation
-        _C.AUGMENTOR.DA_PROB = 0.5
+        # Per-augmentation probability of being applied (each in [0, 1]). Every enabled augmentation
+        # is rolled independently against its own probability; there is no longer a single global
+        # DA_PROB. The geometric augmentations (ZOOM, RANDOM_ROT, ROT90) are each rolled with their
+        # own probability and then composed into a single resampling pass (see affine_transform).
+        _C.AUGMENTOR.ZOOM_PROB = 0.5
+        _C.AUGMENTOR.RANDOM_ROT_PROB = 0.5
+        _C.AUGMENTOR.ROT90_PROB = 0.5
+        _C.AUGMENTOR.SHEAR_PROB = 0.5
+        _C.AUGMENTOR.SHIFT_PROB = 0.5
+        _C.AUGMENTOR.VFLIP_PROB = 0.5
+        _C.AUGMENTOR.HFLIP_PROB = 0.5
+        _C.AUGMENTOR.ZFLIP_PROB = 0.5
+        _C.AUGMENTOR.ELASTIC_PROB = 0.5
+        _C.AUGMENTOR.G_BLUR_PROB = 0.5
+        _C.AUGMENTOR.MEDIAN_BLUR_PROB = 0.5
+        _C.AUGMENTOR.MOTION_BLUR_PROB = 0.5
+        _C.AUGMENTOR.GAMMA_CONTRAST_PROB = 0.5
+        _C.AUGMENTOR.BRIGHTNESS_PROB = 0.5
+        _C.AUGMENTOR.CONTRAST_PROB = 0.5
+        _C.AUGMENTOR.DROPOUT_PROB = 0.5
+        _C.AUGMENTOR.CUTOUT_PROB = 0.5
+        _C.AUGMENTOR.CUTBLUR_PROB = 0.5
+        _C.AUGMENTOR.CUTMIX_PROB = 0.5
+        _C.AUGMENTOR.CUTNOISE_PROB = 0.5
+        _C.AUGMENTOR.MISALIGNMENT_PROB = 0.5
+        _C.AUGMENTOR.MISSING_SECTIONS_PROB = 0.5
+        _C.AUGMENTOR.GRAYSCALE_PROB = 0.5
+        _C.AUGMENTOR.CHANNEL_SHUFFLE_PROB = 0.5
+        _C.AUGMENTOR.GRIDMASK_PROB = 0.5
+        _C.AUGMENTOR.GAUSSIAN_NOISE_PROB = 0.5
+        _C.AUGMENTOR.POISSON_NOISE_PROB = 0.5
+        _C.AUGMENTOR.SALT_PROB = 0.5
+        _C.AUGMENTOR.PEPPER_PROB = 0.5
+        _C.AUGMENTOR.SALT_AND_PEPPER_PROB = 0.5
         # Create samples of the DA made. Useful to check the output images made.
         _C.AUGMENTOR.AUG_SAMPLES = True
         # Draw a grid in the augenation samples generated. Used when _C.AUGMENTOR.AUG_SAMPLES=True
@@ -865,7 +1365,7 @@ class Config:
         # Apply zoom to images
         _C.AUGMENTOR.ZOOM = False
         # Zoom range. Scaling factor to use, where 1.0 denotes “no change” and 0.5 is zoomed out to 50 percent of the original size.
-        _C.AUGMENTOR.ZOOM_RANGE = (0.8, 1.2)
+        _C.AUGMENTOR.ZOOM_RANGE = (0.5, 1.5)
         # Whether to apply or not zoom in Z axis (for 3D volumes).
         _C.AUGMENTOR.ZOOM_IN_Z = False
         # Apply shift
@@ -886,7 +1386,7 @@ class Config:
         # Elastic transformations
         _C.AUGMENTOR.ELASTIC = False
         # Strength of the distortion field. Higher values mean that pixels are moved further with respect to the distortion
-        # field’s direction. Set this to around 10 times the value of sigma for visible effects.
+        # field's direction. Set this to around 10 times the value of sigma for visible effects.
         _C.AUGMENTOR.E_ALPHA = (12, 16)
         # Standard deviation of the gaussian kernel used to smooth the distortion fields.  Higher values (for 128x128 images
         # around 5.0) lead to more water-like effects, while lower values (for 128x128 images around 1.0 and lower) lead to
@@ -999,7 +1499,7 @@ class Config:
         _C.AUGMENTOR.SALT_AND_PEPPER_PROP = 0.5
 
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # Model definition
+        # 5. Model definition
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         _C.MODEL = CN()
         # Whether to define manually the model ('biapy'), load a pretrained one from BioImage Model Zoo ('bmz') or use one
@@ -1007,13 +1507,290 @@ class Config:
         # Options: ["biapy", "bmz", "torchvision"]
         _C.MODEL.SOURCE = "biapy"
 
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 5.1 BiaPy backend models options
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # Architecture of the network. Possible values are:
+        #   * Semantic segmentation: 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', 'unetr', 'unext_v1', 'unext_v2',
+        #                            'hrnet' and 'stunet'
+        #   * Instance segmentation: 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', 'unetr', 'unext_v1', 'unext_v2',
+        #                            'hrnet' and 'stunet'
+        #   * Detection: 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', 'unetr', 'unext_v1', 'unext_v2', 'hrnet' and 
+        #                'stunet'
+        #   * Denoising: 'unet', 'resunet', 'resunet++', 'attention_unet', 'seunet', 'resunet_se', 'unext_v1', 'unext_v2', 'hrnet' and 'stunet'
+        #   * Super-resolution: 'edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'resunet++', 'seunet', 'resunet_se', 'attention_unet', 'multiresunet', 'unext_v1' 
+        #                       and 'unext_v2'
+        #   * Self-supervision: 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', 'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'vit',
+        #                       'mae', 'unext_v1', 'unext_v2', 'hrnet' and 'stunet'
+        #   * Classification: 'simple_cnn', 'vit' and 'efficientnet_b[0-7]' (only 2D)
+        #   * Image to image: 'edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'resunet++', 'seunet', 'resunet_se', 'attention_unet', 'unetr', 'multiresunet', 'unext_v1',
+        #                     'unext_v2', 'hrnet' and 'stunet'
+        _C.MODEL.ARCHITECTURE = "unet"
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 5.1.1 U-Net-like architectures options
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # Number of feature maps on each level of the network. Works with 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', 
+        # 'unext_v1', 'unext_v2' architectures. 
+        _C.MODEL.FEATURE_MAPS = [16, 32, 64, 128, 256]
+        # Values to make the dropout with. Set to 0 to prevent dropout. When using it with 'ViT' or 'unetr' a list with just one number must be provided. Works with 
+        # 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se' and 'unetr' architectures. 
+        _C.MODEL.DROPOUT_VALUES = [0.0, 0.0, 0.0, 0.0, 0.0]
+        # Normalization layer (one of 'bn', 'sync_bn' 'in', 'ln', 'gn' or 'none'). Works with 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 
+        # 'resunet_se', 'unetr', 'hrnet' architectures. 
+        _C.MODEL.NORMALIZATION = "in"
+        # to set the kernel size for the convolutional layers. Works with 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se' 
+        # and 'unetr' architectures. 
+        _C.MODEL.KERNEL_SIZE = 3
+        # Upsampling layer to use in the model. Options: ["upsampling", "convtranspose"]. Works with 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 
+        # 'seunet' and 'resunet_se' architectures.
+        _C.MODEL.UPSAMPLE_LAYER = "convtranspose"
+        # Activation function to use along the model (not in the final layer). Options: 'relu', 'tanh', 'leaky_relu', 'elu', 'gelu', 'silu', 'sigmoid',  'softmax', 'linear',
+        # 'softplus' and 'none'. Works with 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', 'unetr' and 'hrnet' architectures.
+        _C.MODEL.ACTIVATION = "elu"
+        # Downsampling to be made in Z. This value will be the third integer of the MaxPooling operation. When facing anysotropic datasets set it to get better performance.
+        # Works with 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', 'unext_v1' and 'unext_v2' architectures.
+        _C.MODEL.Z_DOWN = [0, 0, 0, 0]
+        # Downsampling to be made in XY. This value will be the first and second integer of the MaxPooling operation. When facing anysotropic datasets set it to get better 
+        # performance. Works with 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', 'unext_v1' and 'unext_v2' architectures.
+        _C.MODEL.YX_DOWN = [0, 0, 0, 0]
+        # For each level of the model (U-Net levels), set to true or false if the dimensions of the feature maps are isotropic. Works with 'unet', 'resunet', 'resunet++',
+        # 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', 'unext_v1' and 'unext_v2' architectures.
+        _C.MODEL.ISOTROPY = [True, True, True, True, True]
+        # Include extra convolutional layers with larger kernel at the beginning and end of the U-Net-like model. Works with 'unet', 'resunet', 'resunet++', 'attention_unet',
+        # 'multiresunet', 'seunet' and 'resunet_se' architectures.
+        _C.MODEL.LARGER_IO = False
+        # Number of convolutional layers to stack at each level of the U-Net-like model, given as one value per level (i.e. per feature map). For 'unet', 'resunet', 'resunet++',
+        # 'attention_unet', 'seunet' and 'resunet_se' architectures these are plain/residual convolutions ([2, 2, ...] reproduces the classic double-convolution U-Net); for
+        # 'unext_v1' and 'unext_v2' these are the number of ConvNeXtBlocks in each level. If a single value is provided it is broadcast to all levels.
+        _C.MODEL.CONV_LAYERS = [2, 2, 2, 2, 2]  # CONV_LAYERS
+        # Ordering of the convolution, normalization and activation layers inside each conv block.
+        # Options: "conv_norm_act" (default, post-activation: Conv -> Norm -> Act, the historical
+        # BiaPy block, keeps existing checkpoints loadable) and "norm_act_conv" (pre-activation:
+        # Norm -> Act -> Conv, normalizes every convolution's input including the first; 
+        # more stable when training from scratch at large learning rates).
+        # Works with 'unet', 'resunet', 'resunet++', 'attention_unet', 'seunet' and 'resunet_se'
+        # architectures ('multiresunet' only supports "conv_norm_act").
+        _C.MODEL.CONV_BLOCK_ORDER = "conv_norm_act"
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 5.1.1.1 U-NeXT (v1 and v2) architectures options
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # "unext_v1" and "unext_v2" architectures variables. These architectures are based on the ConvNeXt architecture (https://arxiv.org/abs/2201.03545) and they
+        # are adapted to the U-Net structure.
+        # Maximum Stochastic Depth probability for the U-NeXt model.
+        _C.MODEL.CONVNEXT_SD_PROB = 0.1
+        # Layer Scale parameter for the U-NeXt model. Only valid for the "unext_v1" architecture.
+        _C.MODEL.CONVNEXT_LAYER_SCALE = 1e-6
+        # Size of the stem kernel in the U-NeXt model.
+        _C.MODEL.CONVNEXT_STEM_K_SIZE = 2
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 5.1.1.2 UNETR architecture options
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # Type of ViT model to use as UNETR's backbone. Options are "custom", "vit_base_patch16", "vit_large_patch16",
+        # "vit_huge_patch14" and "sam3_vit". On "custom" setting the backbone is built with the 'MODEL.VIT_*' variables,
+        # whereas with the rest of the options all of them ('MODEL.VIT_TOKEN_SIZE' included) are set automatically.
+        # Notice that UNETR's decoder upsamples the ViT features by a factor of two on each of its levels, so the
+        # resulting token size must be a power of two: "vit_huge_patch14" can not be used and "custom" must be selected
+        # instead. "sam3_vit" builds the image encoder of SAM 3, which can be initialized with its pretrained weights
+        # through 'MODEL.VIT_PRETRAINED_WEIGHTS'. As SAM 3's 14x14 tokens are not a power of two, 16x16 ones are used
+        # here and its patch embedding is resized to them. It is 2D only, as SAM 3's pretrained weights are 2D.
+        _C.MODEL.UNETR_VIT_MODEL = "custom"
+        # Multiple of the transformer encoder layers from of which the skip connection signal is going to be extracted.
+        # Leave it as -1 to decide it automatically based on the encoder selected, which spaces the skip connections
+        # evenly along it taking one every 'MODEL.VIT_NUM_LAYERS // log2(token size)' blocks. That gives the 3 that
+        # used to be the default with the classic 12-layer ViT and 16x16 tokens, and adapts it to deeper encoders,
+        # e.g. it gives 8 with the 32 blocks of "sam3_vit" (so blocks 8, 16 and 24 feed the decoder).
+        _C.MODEL.UNETR_VIT_HIDD_MULT = -1
+        # Number of filters in the first UNETR's layer of the decoder. In each layer the previous number of filters is doubled.
+        _C.MODEL.UNETR_VIT_NUM_FILTERS = 16
+
+        # Specific for SR models based on U-Net architectures. Options are ["pre", "post"]
+        _C.MODEL.UNET_SR_UPSAMPLE_POSITION = "pre"
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 5.1.2 Transformer-based architectures options
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # Type of ViT model. Options are "custom", "vit_base_patch16", "vit_large_patch16", "vit_huge_patch14" and
+        # "sam3_vit". On "custom" setting the rest of the ViT parameters can be modified as other options will set
+        # them automatically. "sam3_vit" builds the image encoder of SAM 3 (Segment Anything Model 3), which can be
+        # initialized with its pretrained weights through 'MODEL.VIT_PRETRAINED_WEIGHTS'. It uses SAM 3's 14x14
+        # tokens, so 'DATA.PATCH_SIZE' must be a multiple of 14, and it is 2D only.
+        _C.MODEL.VIT_MODEL = "custom"
+        # Pretrained weights to initialize the ViT backbone with. Leave it empty to train from scratch. It can be a
+        # Hugging Face repository, i.e. "facebook/sam3" or "facebook/sam3.1" (both share the same image encoder, so
+        # "sam3_vit" builds the backbone for either of them), or the path to a local file with the weights. Only used when
+        # the selected ViT is "sam3_vit" ('MODEL.VIT_MODEL' or 'MODEL.UNETR_VIT_MODEL'). Notice that SAM 3 is a gated
+        # model, so its license needs to be accepted in https://huggingface.co/facebook/sam3 and this machine needs
+        # to be authenticated (running "hf auth login" or exporting the HF_TOKEN environment variable) to download it.
+        # The weights are not downloaded when 'MODEL.LOAD_CHECKPOINT' is enabled, as the checkpoint replaces them.
+        _C.MODEL.VIT_PRETRAINED_WEIGHTS = ""
+        # Size of the patches (tokens) that are extracted from the input image. Only used when the ViT model selected
+        # is "custom", as the rest of them are built with the token size they were designed with (e.g. "sam3_vit"
+        # uses SAM 3's 14x14 tokens, or the closest power of two under UNETR, as its decoder needs it).
+        _C.MODEL.VIT_TOKEN_SIZE = 16
+        # Dimension of the embedding space
+        _C.MODEL.VIT_EMBED_DIM = 768
+        # Number of transformer encoder layers
+        _C.MODEL.VIT_NUM_LAYERS = 12
+        # Number of heads in the multi-head attention layer.
+        _C.MODEL.VIT_NUM_HEADS = 12
+        # Size of the dense layers of the final classifier. This value will mutiply 'VIT_EMBED_DIM'
+        _C.MODEL.VIT_MLP_RATIO = 4.0
+        # Normalization layer epsion
+        _C.MODEL.VIT_NORM_EPS = 1e-6
+
+        # ViT architecture adapted for self-supervised learning with masked autoencoders (MAE). Original paper: https://arxiv.org/abs/2111.06377
+        # Dimension of the embedding space for the MAE decoder
+        _C.MODEL.MAE_DEC_HIDDEN_SIZE = 512
+        # Number of transformer decoder layers
+        _C.MODEL.MAE_DEC_NUM_LAYERS = 8
+        # Number of heads in the multi-head attention layer.
+        _C.MODEL.MAE_DEC_NUM_HEADS = 16
+        # Size of the dense layers of the final classifier
+        _C.MODEL.MAE_DEC_MLP_DIMS = 2048
+        # Type of the masking strategy. Options: ["grid", "random"]
+        _C.MODEL.MAE_MASK_TYPE = "grid"
+        # Percentage of the input image to mask (applied only when MODEL.MAE_MASK_TYPE == "random"). Value between 0 and 1.
+        _C.MODEL.MAE_MASK_RATIO = 0.5
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 5.1.3 RCAN architecture options
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # Number of RG modules
+        _C.MODEL.RCAN_RG_BLOCK_NUM = 10
+        # Number of RCAB modules in each RG block
+        _C.MODEL.RCAN_RCAB_BLOCK_NUM = 20
+        # Filters in the convolutions
+        _C.MODEL.RCAN_CONV_FILTERS = 16
+        # Channel reduction ratio for channel attention
+        _C.MODEL.RCAN_REDUCTION_RATIO = 16
+        # Whether to maintain or not the upscaling layer. 
+        _C.MODEL.RCAN_UPSCALING_LAYER = True
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 5.1.4 HRNet architecture options
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # These parameters can be used as a template for building custom HRNet versions
+        _C.MODEL.HRNET = CN()
+        # Whether to use a custom configuration for HRNet or use a predefined one. Options: "W18" (hrnet18), "W32" (hrnet32), 
+        # "W48" (hrnet48), "W64" (hrnet64) or "custom"
+        _C.MODEL.HRNET.VARIANT = "W48"
+        # Whether to downsample the input in Z or not
+        _C.MODEL.HRNET.Z_DOWN = [0, 0, 0]
+        # Downsampling to be made in XY. This value will be the first and second integer of the MaxPooling operation. 
+        # When facing anysotropic datasets set it to get better performance
+        _C.MODEL.HRNET.YX_DOWN = [0, 0, 0]
+        # Type of block to use in HRNet. Options: 'BASIC', 'BOTTLENECK', 'CONVNEXT_V1' and 'CONVNEXT_V2'
+        _C.MODEL.HRNET.BLOCK_TYPE = 'BASIC'
+        # Indicate whether to use a custom configuration for HRNet or use a predefined one. Options: "OCR", "ASPP", "PSP", "FCN"
+        _C.MODEL.HRNET.HEAD_TYPE = "FCN"
+        # Number of stages in the HRNet. This value will determine the length of the rest of the lists. Only used if MODEL.HRNET.VARIANT = "custom"
+        _C.MODEL.HRNET.NUM_STAGES = 3
+        # Number of modules in each stage. Only used if MODEL.HRNET.VARIANT = "custom". A module is a sequence of blocks (see MODEL.HRNET.BLOCK_TYPE) 
+        # that are not connected with the rest of branches. In each stage, after the modules, a fusion is made between all the branches. So, the 
+        # number of modules will determine how many times the fusion is made in each stage.
+        _C.MODEL.HRNET.NUM_MODULES = [1, 4, 3]
+        # Number of branches in each stage. Only used if MODEL.HRNET.VARIANT = "custom". The number of branches will determine how many parallel convolutions 
+        # are made in each stage and how many feature maps with different resolutions are generated.
+        _C.MODEL.HRNET.NUM_BRANCHES = [2, 3, 4]
+        # Number of blocks in each branch of each stage. Only used if MODEL.HRNET.VARIANT = "custom". A block is a convolutional operation 
+        # (see MODEL.HRNET.BLOCK_TYPE) that is repeated a certain number of times in each branch. The number of blocks will determine the 
+        # depth of the model.
+        _C.MODEL.HRNET.NUM_BLOCKS = [[4, 4], [4, 4, 4], [4, 4, 4, 4]]
+        # Number of channels in each block of each branch of each stage. Only used if MODEL.HRNET.VARIANT = "custom". The number of channels 
+        # will determine the width of the model.
+        _C.MODEL.HRNET.NUM_CHANNELS = [[18, 36], [18, 36, 72], [18, 36, 72, 144]]
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 5.1.5 STUNet architecture options
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        _C.MODEL.STUNET = CN()
+        # Variant of the STUNet model. Options are: 'small', 'base', 'large', 'custom'
+        _C.MODEL.STUNET.VARIANT = 'base'
+        # Whether to use a pretrained version of STUNet on ImageNet
+        _C.MODEL.STUNET.PRETRAINED = False
+        # Residual blocks per stage. Only used when VARIANT = "custom"; length must equal len(DIMS).
+        _C.MODEL.STUNET.DEPTH = [1, 1, 1, 1, 1, 1]
+        # Channels per stage. Only used when VARIANT = "custom".
+        _C.MODEL.STUNET.DIMS = [32, 64, 128, 256, 512, 512]
+        # Per-stage pooling/stride, (Z,Y,X), one entry per downsampling step (len(DIMS)-1). Only used
+        # when VARIANT = "custom"; set anisotropic values (e.g. [1,2,2]) to avoid downsampling Z.
+        _C.MODEL.STUNET.POOL_OP_KERNEL_SIZES = [[2, 2, 2], [2, 2, 2], [2, 2, 2], [2, 2, 2], [1, 1, 1]]
+        # Per-stage conv kernel size, (Z,Y,X), one entry per stage (len(DIMS)). Only used when VARIANT
+        # = "custom"; set anisotropic values (e.g. [1,3,3]) to avoid mixing information across Z.
+        _C.MODEL.STUNET.CONV_KERNEL_SIZES = [[3, 3, 3], [3, 3, 3], [3, 3, 3], [3, 3, 3], [3, 3, 3], [3, 3, 3]]
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 5.1.6 NafNet architecture options
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        _C.MODEL.NAFNET = CN()
+        # Number of NAFBlocks stacked at the bottleneck (deepest level).
+        _C.MODEL.NAFNET.MIDDLE_BLK_NUM = 12
+        # Number of NAFBlocks assigned to each downsampling level of the encoder.
+        _C.MODEL.NAFNET.ENC_BLK_NUMS = [2, 2, 4, 8]
+        # Number of NAFBlocks assigned to each upsampling level of the decoder.
+        _C.MODEL.NAFNET.DEC_BLK_NUMS = [2, 2, 2, 2]
+        # Channel expansion factor for the depthwise convolution within the gating unit.
+        _C.MODEL.NAFNET.DW_EXPAND = 2
+        # Expansion factor for the hidden layer within the feed-forward network.
+        _C.MODEL.NAFNET.FFN_EXPAND = 2
+        # Discriminator architecture
+        _C.MODEL.NAFNET.ARCHITECTURE_D = "patchgan"
+        # Discriminator PATCHGAN
+        _C.MODEL.NAFNET.PATCHGAN = CN()
+        # Number of initial convolutional filters in the first layer of the discriminator.
+        _C.MODEL.NAFNET.PATCHGAN.BASE_FILTERS = 64
+        # Generator backbone used inside the NAFNet GAN pipeline. 'nafnet' (default) uses NAFNet's own
+        # NAFBlock encoder/decoder as the generator. 'stunet' swaps in STUNet (configured via
+        # MODEL.STUNET) as the generator instead.
+        _C.MODEL.NAFNET.GENERATOR_BACKBONE = "nafnet"
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 5.1.7 Checkpoint options
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+        # To load a model (and more items if available) from a given checkpoint. Items that can be loaded are defined in 'MODEL.ITEMS_TO_LOAD_FROM_CHECKPOINT'.
+        _C.MODEL.LOAD_CHECKPOINT = False
+        # List of items to load from the checkpoint (if available). Options are:
+        #   * "weights": to load the model weights
+        #   * "norm": to load the normalization used. Unless you know that the checkpoint was trained with the same normalization as the one defined in the config, 
+        #   it is recommended to load it from the checkpoint if "weights" is also specified, as the model will expect the input data to be normalized accordingly.
+        #   * "model_arch": to load the model architecture
+        #   * "optimizer": to load the optimizer state dict
+        #   * "epoch": to load the epoch number from which the training will be resumed
         #
-        # BMZ BACKEND MODELS AND OPTIONS
-        #
+        # Defining it with "weights" and "model_arch" will allow to load the model weights and architecture, but not the
+        # optimizer state, which is useful when doing inference or fine-tunning. Defining it with all options
+        # will allow to resume training from a checkpoint.
+        _C.MODEL.ITEMS_TO_LOAD_FROM_CHECKPOINT = ["weights", "norm", "model_arch"]
+        # Decide which checkpoint to load from job's dir if PATHS.CHECKPOINT_FILE is ''.
+        # Options: 'best_on_val' or 'last_on_train'
+        _C.MODEL.LOAD_CHECKPOINT_EPOCH = "best_on_val"
+        # Format of the output checkpoint. Options are 'pth' (native PyTorch format) or 'safetensors' (https://github.com/huggingface/safetensors)
+        _C.MODEL.OUT_CHECKPOINT_FORMAT = "pth"
+        # To skip loading those layers that do not match in shape with the given checkpoint. If this is set to False a regular load function will be
+        # done, which will fail if a layer mismatch is found. Only applicable if "weights" is in 'MODEL.ITEMS_TO_LOAD_FROM_CHECKPOINT'. It is useful
+        # to set it to True when fine-tunning a model with a different head.
+        _C.MODEL.SKIP_UNMATCHED_LAYERS = False
+        # Epochs to save a checkpoint of the model apart from the best of the validation. Set it to -1 to not do it.
+        _C.MODEL.SAVE_CKPT_FREQ = -1
+        # List of regex patterns to match parameter names that should be frozen (i.e. excluded from gradient updates) during
+        # training. Each entry is a Python 're' pattern tested against the full parameter name (e.g. "encoder\.layer1\..*").
+        # Freezing is applied after loading the checkpoint so that the loaded weights are preserved. Parameters matched by
+        # any pattern will have 'requires_grad' set to False and will be excluded from the optimizer. An empty list (default)
+        # means no layers are frozen.
+        # Examples: ["backbone\.layer1\..*", "backbone\.layer2\.conv.*"]
+        _C.MODEL.FREEZE_LAYERS_MATCHING = []
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 5.2 BioImage Model Zoo (BMZ) options
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # BMZ model export options
         _C.MODEL.BMZ = CN()
         # DOI or nickname of the model from BMZ to load. It can not be empty if MODEL.SOURCE = "bmz".
         _C.MODEL.BMZ.SOURCE_MODEL_ID = ""
-        # BMZ model export options
+        # Module to export the model to BMZ format. It will be activated when 'MODEL.BMZ.EXPORT.ENABLE' is set to True.
         _C.MODEL.BMZ.EXPORT = CN()
         # Whether to activate or not the exporation of the used model to the BMZ format after train and/or test 
         _C.MODEL.BMZ.EXPORT.ENABLE = False
@@ -1058,10 +1835,12 @@ class Config:
         # information that was present in that model. You need still to set 'MODEL.BMZ.EXPORT.ENABLE' to 'True' and nothing else.
         _C.MODEL.BMZ.EXPORT.REUSE_BMZ_CONFIG = False
 
-        #
-        # TOCHIVISION BACKEND MODELS AND OPTIONS
-        #
-        # BiaPy support using models of Torchvision . It can not be empty if MODEL.SOURCE = "torchvision".
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 5.2 TorchVision options (limited support)
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # BiaPy support using models of Torchvision. However, most of the models were trained in natural images (not biomedical) and most of them
+        # are for classification. On top of that, some use bounding-box-annotations, which are not supported in BiaPy so only inference/prediction/test
+        # can only be done. 'MODEL.TORCHVISION_MODEL_NAME' variable can not be empty if MODEL.SOURCE = "torchvision".
         # Models available here: https://pytorch.org/vision/stable/models.html
         # They can be listed with: "from torchvision.models import list_models; list_models()"
         #
@@ -1107,237 +1886,77 @@ class Config:
         #
         _C.MODEL.TORCHVISION_MODEL_NAME = ""
 
-        #
-        # BIAPY BACKEND MODELS
-        #
-        # Architecture of the network. Possible values are:
-        #   * Semantic segmentation: 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', 'unetr', 'unext_v1', 'unext_v2'
-        #   * Instance segmentation: 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', 'unetr', 'unext_v1', 'unext_v2'
-        #   * Detection: 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', 'unetr', 'unext_v1', 'unext_v2'
-        #   * Denoising: 'unet', 'resunet', 'resunet++', 'attention_unet', 'seunet', 'resunet_se', 'unext_v1', 'unext_v2'
-        #   * Super-resolution: 'edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'resunet++', 'seunet', 'resunet_se', 'attention_unet', 'multiresunet', 'unext_v1', 'unext_v2'
-        #   * Self-supervision: 'unet', 'resunet', 'resunet++', 'attention_unet', 'multiresunet', 'seunet', 'resunet_se', 'unetr', 'edsr', 'rcan', 'dfcan', 'wdsr', 'vit', 'mae', 'unext_v1', 'unext_v2'
-        #   * Classification: 'simple_cnn', 'vit', 'efficientnet_b[0-7]' (only 2D)
-        #   * Image to image: 'edsr', 'rcan', 'dfcan', 'wdsr', 'unet', 'resunet', 'resunet++', 'seunet', 'resunet_se', 'attention_unet', 'unetr', 'multiresunet', 'unext_v1', 'unext_v2'
-        _C.MODEL.ARCHITECTURE = "unet"
-        # Number of feature maps on each level of the network.
-        _C.MODEL.FEATURE_MAPS = [16, 32, 64, 128, 256]
-        # Values to make the dropout with. Set to 0 to prevent dropout. When using it with 'ViT' or 'unetr'
-        # a list with just one number must be provided
-        _C.MODEL.DROPOUT_VALUES = [0.0, 0.0, 0.0, 0.0, 0.0]
-        # Normalization layer (one of 'bn', 'sync_bn' 'in', 'gn' or 'none').
-        _C.MODEL.NORMALIZATION = "bn"
-        # Kernel size
-        _C.MODEL.KERNEL_SIZE = 3
-        # Upsampling layer to use in the model. Options: ["upsampling", "convtranspose"]
-        _C.MODEL.UPSAMPLE_LAYER = "convtranspose"
-        # Activation function to use along the model
-        _C.MODEL.ACTIVATION = "ELU"
-        # Number of classes including the background class (that should be using 0 label)
-        _C.DATA.N_CLASSES = 2
-        # Downsampling to be made in Z. This value will be the third integer of the MaxPooling operation. When facing
-        # anysotropic datasets set it to get better performance
-        _C.MODEL.Z_DOWN = [0, 0, 0, 0]
-        # For each level of the model (U-Net levels), set to true or false if the dimensions of the feature maps are isotropic.
-        _C.MODEL.ISOTROPY = [True, True, True, True, True]
-        # Include extra convolutional layers with larger kernel at the beginning and end of the U-Net-like model.
-        _C.MODEL.LARGER_IO = False
-        # Checkpoint: set to True to load previous training weigths (needed for inference or to make fine-tunning)
-        _C.MODEL.LOAD_CHECKPOINT = False
-        # When loading checkpoints whether only model's weights are going to be loaded or optimizer, epochs and loss_scaler.
-        _C.MODEL.LOAD_CHECKPOINT_ONLY_WEIGHTS = True
-        # Decide which checkpoint to load from job's dir if PATHS.CHECKPOINT_FILE is ''.
-        # Options: 'best_on_val' or 'last_on_train'
-        _C.MODEL.LOAD_CHECKPOINT_EPOCH = "best_on_val"
-        # Whether to load the model from the checkpoint instead of builiding it following 'MODEL.ARCHITECTURE' when 'MODEL.SOURCE' is "biapy"
-        _C.MODEL.LOAD_MODEL_FROM_CHECKPOINT = True
-        # Format of the output checkpoint. Options are 'pth' (native PyTorch format) or 'safetensors' (https://github.com/huggingface/safetensors)
-        _C.MODEL.OUT_CHECKPOINT_FORMAT = "pth"
-        # To skip loading those layers that do not match in shape with the given checkpoint. If this is set to False a regular load function will be 
-        # done, which will fail if a layer mismatch is found. Only works when 'MODEL.LOAD_MODEL_FROM_CHECKPOINT' is True
-        _C.MODEL.SKIP_UNMATCHED_LAYERS = False
-        # Epochs to save a checkpoint of the model apart from the ones saved with LOAD_CHECKPOINT_ONLY_WEIGHTS. Set it to -1 to
-        # not do it.
-        _C.MODEL.SAVE_CKPT_FREQ = -1
-        # Number of ConvNeXtBlocks in each level.
-        _C.MODEL.CONVNEXT_LAYERS = [2, 2, 2, 2, 2]  # CONVNEXT_LAYERS
-        # Maximum Stochastic Depth probability for the U-NeXt model.
-        _C.MODEL.CONVNEXT_SD_PROB = 0.1
-        # Layer Scale parameter for the U-NeXt model.
-        _C.MODEL.CONVNEXT_LAYER_SCALE = 1e-6
-        # Size of the stem kernel in the U-NeXt model.
-        _C.MODEL.CONVNEXT_STEM_K_SIZE = 2
-
-        # TRANSFORMERS MODELS
-        # Type of model. Options are "custom", "vit_base_patch16", "vit_large_patch16" and "vit_huge_patch16". On custom setting
-        # the rest of the ViT parameters can be modified as other options will set them automatically.
-        _C.MODEL.VIT_MODEL = "custom"
-        # Size of the patches that are extracted from the input image.
-        _C.MODEL.VIT_TOKEN_SIZE = 16
-        # Dimension of the embedding space
-        _C.MODEL.VIT_EMBED_DIM = 768
-        # Number of transformer encoder layers
-        _C.MODEL.VIT_NUM_LAYERS = 12
-        # Number of heads in the multi-head attention layer.
-        _C.MODEL.VIT_NUM_HEADS = 12
-        # Size of the dense layers of the final classifier. This value will mutiply 'VIT_EMBED_DIM'
-        _C.MODEL.VIT_MLP_RATIO = 4.0
-        # Normalization layer epsion
-        _C.MODEL.VIT_NORM_EPS = 1e-6
-
-        # Dimension of the embedding space for the MAE decoder
-        _C.MODEL.MAE_DEC_HIDDEN_SIZE = 512
-        # Number of transformer decoder layers
-        _C.MODEL.MAE_DEC_NUM_LAYERS = 8
-        # Number of heads in the multi-head attention layer.
-        _C.MODEL.MAE_DEC_NUM_HEADS = 16
-        # Size of the dense layers of the final classifier
-        _C.MODEL.MAE_DEC_MLP_DIMS = 2048
-        # Type of the masking strategy. Options: ["grid", "random"]
-        _C.MODEL.MAE_MASK_TYPE = "grid"
-        # Percentage of the input image to mask (applied only when MODEL.MAE_MASK_TYPE == "random"). Value between 0 and 1.
-        _C.MODEL.MAE_MASK_RATIO = 0.5
-
-        # UNETR
-        # Multiple of the transformer encoder layers from of which the skip connection signal is going to be extracted
-        _C.MODEL.UNETR_VIT_HIDD_MULT = 3
-        # Number of filters in the first UNETR's layer of the decoder. In each layer the previous number of filters is doubled.
-        _C.MODEL.UNETR_VIT_NUM_FILTERS = 16
-        # Decoder activation
-        _C.MODEL.UNETR_DEC_ACTIVATION = "relu"
-        # Decoder convolutions' kernel size
-        _C.MODEL.UNETR_DEC_KERNEL_SIZE = 3
-
-        # Specific for SR models based on U-Net architectures. Options are ["pre", "post"]
-        _C.MODEL.UNET_SR_UPSAMPLE_POSITION = "pre"
-
-        # RCAN
-        # Number of RG modules
-        _C.MODEL.RCAN_RG_BLOCK_NUM = 10
-        # Number of RCAB modules in each RG block
-        _C.MODEL.RCAN_RCAB_BLOCK_NUM = 20
-        # Filters in the convolutions
-        _C.MODEL.RCAN_CONV_FILTERS = 16
-        # Channel reduction ratio for channel attention
-        _C.MODEL.RCAN_REDUCTION_RATIO = 16
-        # Whether to maintain or not the upscaling layer. 
-        _C.MODEL.RCAN_UPSCALING_LAYER = True
-
-        # These parameters can be used as a template for building custom HRNet versions
-        _C.MODEL.HRNET = CN()
-        # Whether to downsample the input in Z or not
-        _C.MODEL.HRNET.Z_DOWN = True
-        # Type of block to use in HRNet. Options: 'BASIC', 'BOTTLENECK', 'CONVNEXT_V1' and 'CONVNEXT_V2'
-        _C.MODEL.HRNET.BLOCK_TYPE = 'BASIC'
-        # Indicate whether to use a custom configuration for HRNet or use a predefined one. If set to True 
-        # MODEL.HRNET.STAGE2, MODEL.HRNET.STAGE3 and MODEL.HRNET.STAGE4 will be used. If False, the configuration
-        # will be set depending on the selected architecture (see PROBLEM.MODEL_ARCHITECTURE)
-        _C.MODEL.HRNET.HEAD_TYPE = "FCN" # Options: "OCR", "ASPP", "PSP", "FCN"
-        _C.MODEL.HRNET.CUSTOM = False
-
-        # These stages are used for HRNet18, HRNet32, HRNet48 and HRNet64
-        _C.MODEL.HRNET.STAGE2 = CN()
-        _C.MODEL.HRNET.STAGE2.NUM_MODULES = 1
-        _C.MODEL.HRNET.STAGE2.NUM_BRANCHES = 2
-        _C.MODEL.HRNET.STAGE2.NUM_BLOCKS = [4, 4]
-        _C.MODEL.HRNET.STAGE2.NUM_CHANNELS = [18, 36]
-        _C.MODEL.HRNET.STAGE3 = CN()
-        _C.MODEL.HRNET.STAGE3.NUM_MODULES = 4
-        _C.MODEL.HRNET.STAGE3.NUM_BRANCHES = 3
-        _C.MODEL.HRNET.STAGE3.NUM_BLOCKS = [4, 4, 4]
-        _C.MODEL.HRNET.STAGE3.NUM_CHANNELS = [18, 36, 72]
-        _C.MODEL.HRNET.STAGE4 = CN()
-        _C.MODEL.HRNET.STAGE4.NUM_MODULES = 3
-        _C.MODEL.HRNET.STAGE4.NUM_BRANCHES = 4
-        _C.MODEL.HRNET.STAGE4.NUM_BLOCKS = [4, 4, 4, 4]
-        _C.MODEL.HRNET.STAGE4.NUM_CHANNELS = [18, 36, 72, 144]
-
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # Loss
+        # 6. Loss definition options
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         _C.LOSS = CN()
-        # Loss type, different options depending on the workflow. If empty the default loss on each case will be set:
-        #   * Semantic segmentation:
-        #       * "CE" (default): cross entropy. Ref: https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html
-        #       * "DICE": Dice loss. Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch
-        #       * "W_CE_DICE": CE and Dice (with a weight term on each one that must sum 1). Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch
-        #   * Instance segmentation: automatically set depending on the channels selected (PROBLEM.INSTANCE_SEG.DATA_CHANNELS). 
-        #     It can be also set manually with PROBLEM.INSTANCE_SEG.DATA_CHANNELS_LOSSES. 
-        #   * Detection:
-        #       * "CE" (default): cross entropy. Ref: https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html
-        #       * "DICE": Dice loss. Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch
-        #       * "W_CE_DICE": CE and Dice (with a weight term on each one that must sum 1). Ref: https://www.kaggle.com/code/bigironsphere/loss-function-library-keras-pytorch
-        #   * Denoising:
-        #       * "MAE": mean absolute error (MAE or L1 loss). Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss
-        #       * "MSE" (default): mean square error (MSE). Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss
-        #   * Super-resolution:
-        #       * "MAE" (default): mean absolute error (MAE or L1 loss). Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss
-        #       * "MSE": mean square error (MSE). Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss
-        #       * "SSIM": structural similarity index measure (SSIM). Ref: https://lightning.ai/docs/torchmetrics/stable/image/structural_similarity.html#torchmetrics.image.StructuralSimilarityIndexMeasure
-        #       * "W_MAE_SSIM": MAE and SSIM (with a weight term on each one that must sum 1).
-        #       * "W_MSE_SSIM": MSE and SSIM (with a weight term on each one that must sum 1).
-        #   * Self-supervision:
-        #       These losses can only be set when PROBLEM.SELF_SUPERVISED.PRETEXT_TASK = "crappify". Otherwise it will be automatically set to MSE when
-        #       PROBLEM.SELF_SUPERVISED.PRETEXT_TASK = "masking".
-        #       * "MAE" (default): mean absolute error (MAE or L1 loss). Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss
-        #       * "MSE": mean square error (MSE). Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss
-        #       * "SSIM": structural similarity index measure (SSIM). Ref: https://lightning.ai/docs/torchmetrics/stable/image/structural_similarity.html#torchmetrics.image.StructuralSimilarityIndexMeasure
-        #       * "W_MAE_SSIM": MAE and SSIM (with a weight term on each one that must sum 1).
-        #       * "W_MSE_SSIM": MSE and SSIM (with a weight term on each one that must sum 1).
-        #   * Classification:
-        #       * "CE" (default): cross entropy. Ref: https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html
-        #   * Image to image:
-        #       * "MAE" (default): mean absolute error (MAE or L1 loss). Ref: https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html#torch.nn.L1Loss
-        #       * "MSE": mean square error (MSE). Ref: https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html#torch.nn.MSELoss
-        #       * "SSIM": structural similarity index measure (SSIM). Ref: https://lightning.ai/docs/torchmetrics/stable/image/structural_similarity.html#torchmetrics.image.StructuralSimilarityIndexMeasure
-        #       * "W_MAE_SSIM": MAE and SSIM (with a weight term on each one that must sum 1).
-        #       * "W_MSE_SSIM": MSE and SSIM (with a weight term on each one that must sum 1).
-        _C.LOSS.TYPE = ""
-        # Weights to be applied in multiple loss combination cases, by multiplying the corresponding weight to each loss.
-        # It works for all the workflows but the instance segmentation one, as in that case the weights must be set
-        # in PROBLEM.INSTANCE_SEG.DATA_CHANNEL_WEIGHTS. The weights must sum 1. E.g. [0.3, 0.7].
-        _C.LOSS.WEIGHTS = [0.66, 0.34]
+        # List of individually-weighted loss names to sum:
+        #   sum(LOSS.WEIGHTS[i] * loss_i(pred, target) for i, loss_i in enumerate(LOSS.TYPE))
+        # 'LOSS.WEIGHTS' must be the same length. Empty -> per-workflow default (see each
+        # workflow's 'define_metrics'). Old single-string combos (e.g. "W_MAE_SSIM") still work,
+        # auto-converted in check_configuration.py. Valid names per workflow:
+        #   * Semantic segmentation: "CE" (default), "DICE", or ["DICE", "CE"] together (fused
+        #     CE+Dice, not decomposed).
+        #   * Instance segmentation: set via PROBLEM.INSTANCE_SEG.DATA_CHANNELS(_LOSSES).
+        #   * Detection: always CE. Classification: always "CE".
+        #   * Continuous-image (DENOISING, SUPER_RESOLUTION, SELF_SUPERVISED, IMAGE_TO_IMAGE):
+        #     "MAE" (default), "MSE", "PCC", "CHARBONNIER", "VGG", "LPIPS", "SSIM", "LAPLACIAN",
+        #     "FFT", "RFFT" -- see 'continuous_image_loss_registry' in metrics.py. DENOISING only
+        #     supports a single ["MSE"] or ["BCE"]/["HINGE"], never a multi-term mix.
+        #   * IMAGE_TO_IMAGE/DENOISING also accept "BCE" or "HINGE" (adversarial term, mutually
+        #     exclusive, needs a discriminator; knobs under LOSS.GAN below).
+        #   * IMAGE_TO_IMAGE with PROBLEM.IMAGE_TO_IMAGE.MEMBRANE_REPAIR.ENABLE: "BCE", "MALIS",
+        #     "CLDICE", "SVOX" (at least one positive weight).
+        _C.LOSS.TYPE = []
+        # Same length as LOSS.TYPE. Unlike the old "W_*" strings, weights don't need to sum to 1.
+        _C.LOSS.WEIGHTS = []
         # To weight classes in an imbalanced dataset. Options available are:
         #   * 'none': no class rebalancing is applied
-        #   * 'manual': the weights provided in LOSS.CLASS_WEIGHTS are used to weight each class
-        #   * 'auto': the weights are calculated automatically based on the number of pixels of each class per batch and directly in the loss computation. 
-        #     This option is only applied for binary clases. That is to say:
-        #       * When LOSS.TYPE == "CE" in semantic segmentation and detection workflows and MODEL.N_CLASSES == 2.
-        #       * In instance segmentation when PROBLEM.INSTANCE_SEG.DATA_CHANNELS_LOSSES contains "CE". This is automatically set
-        #         when using binary channels, such as "B","F","P","C","T","A","M","F_pre","F_post".  
-        _C.LOSS.CLASS_REBALANCE = "none"  # Options are 'none', 'manual' or 'auto'
+        #   * 'manual': the weights provided in LOSS.CLASS_WEIGHTS are used to weight each class. This is valid for semantic segmentation, instance segmentation (when instance+classes are predicted) 
+        #               and detection workflows (when centroids + classes are predicted). 
+        _C.LOSS.CLASS_REBALANCE = "none"
         # If LOSS.CLASS_REBALANCE is set to 'manual', this list of weights will be used to weight each class in the loss calculation.
         # The length of the list must be equal to the number of classes.
         _C.LOSS.CLASS_WEIGHTS = []
         # Whether to ignore a value in the loss and metric calculation. This is only available when LOSS.TYPE == "CE". This value will not only
         # be ignored in the loss computation but in the metrics, e.g. IoU.
         _C.LOSS.IGNORE_INDEX = -1
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 6.1 Contrastive learning definitions
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         _C.LOSS.CONTRAST = CN()
         _C.LOSS.CONTRAST.ENABLE = False
         _C.LOSS.CONTRAST.MEMORY_SIZE = 5000
         _C.LOSS.CONTRAST.PROJ_DIM = 256
         _C.LOSS.CONTRAST.PIXEL_UPD_FREQ = 10
-        
+
+        # Adversarial-term knobs beyond its weight/formula (those live in LOSS.TYPE/LOSS.WEIGHTS,
+        # picking "BCE" or "HINGE"). Used only when one of those is present.
+        _C.LOSS.GAN = CN()
+        # R1 gradient penalty coefficient (0.0 to disable).
+        _C.LOSS.GAN.R1_GAMMA = 0.0
+        # If True, scale the adversarial weight by the VQGAN adaptive weight (recon/adv
+        # gradient-norm ratio) instead of using it as a fixed scalar.
+        _C.LOSS.GAN.ADAPTIVE_GAN_WEIGHT = False
+
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # Training phase
+        # 7. Training phase options
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         _C.TRAIN = CN()
         _C.TRAIN.ENABLE = False
         # Enable verbosity
         _C.TRAIN.VERBOSE = False
-        # Optimizer to use. Possible values: "SGD", "ADAM" or "ADAMW"
-        _C.TRAIN.OPTIMIZER = "SGD"
-        # Learning rate
-        _C.TRAIN.LR = 1.0e-4
+        # Optimizer(s) to use. Possible values: "SGD", "ADAM" or "ADAMW".
+        _C.TRAIN.OPTIMIZER = ["SGD"]
+        # Learning rate(s). 
+        _C.TRAIN.LR = [1.0e-4]
         # Weight decay
         _C.TRAIN.W_DECAY = 0.02
         # Coefficients used for computing running averages of gradient and its square. Used in ADAM and ADAMW optmizers
-        _C.TRAIN.OPT_BETAS = (0.9, 0.999)
+        _C.TRAIN.OPT_BETAS = [[0.9, 0.999]]
         # Batch size
         _C.TRAIN.BATCH_SIZE = 2
-        # If memory or # gpus is limited, use this variable to maintain the effective batch size, which is
-        # batch_size (per gpu) * nodes * (gpus per node) * accum_iter.
-        _C.TRAIN.ACCUM_ITER = 1
         # Number of epochs to train the model
         _C.TRAIN.EPOCHS = 360
         # Epochs to wait with no validation data improvement until the training is stopped
@@ -1348,114 +1967,142 @@ class Config:
         #   * Instance segmentation: automatically set depending on the channels selected (PROBLEM.INSTANCE_SEG.DATA_CHANNELS).
         #   * Detection: 'iou' (called also Jaccard index)
         #   * Denoising: 'mae', 'mse'
-        #   * Super-resolution: "psnr", "mae", "mse", "ssim"
-        #   * Self-supervision: "psnr", "mae", "mse", "ssim"
+        #   * Super-resolution: "psnr", "mae", "mse", "ssim", "pcc"
+        #   * Self-supervision: "psnr", "mae", "mse", "ssim", "pcc"
         #   * Classification: 'accuracy', 'top-5-accuracy'
-        #   * Image to image: "psnr", "mae", "mse", "ssim"
+        #   * Image to image: "psnr", "mae", "mse", "ssim", "pcc"
         _C.TRAIN.METRICS = []
+        
+        # Gradient clipping max norm applied per optimizer. 0 = disabled.
+        _C.TRAIN.GRADIENT_CLIP_NORM = 0.0
 
+        # Callbacks
+        # To determine which value monitor to consider which epoch consider the best to save. Currently not used.
+        _C.TRAIN.CHECKPOINT_MONITOR = "val_loss"
+
+        # Epochs to save a preview of the model's predictions on a fixed set of samples to PATHS.TRAIN_PRED_SAMPLES. Set it to -1 to not do it.
+        _C.TRAIN.SAVE_TRAIN_PREDS_FREQ = -1
+        # Number of fixed samples to track when 'TRAIN.SAVE_TRAIN_PREDS_FREQ' != -1.
+        _C.TRAIN.SAVE_TRAIN_PREDS_NUM_SAMPLES = 1
+        # Whether to also render the tracked samples inline (Jupyter/Colab only; ignored elsewhere).
+        _C.TRAIN.SAVE_TRAIN_PREDS_SHOW = False
+        # Add profiler callback to the training
+        # _C.TRAIN.PROFILER = False
+        # # Batch range to be analyzed
+        # _C.TRAIN.PROFILER_BATCH_RANGE='10, 100'
+        # _C.TRAIN.MAE_CALLBACK_EPOCHS = 5
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 7.1 Learning rate (LE) scheduler options
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # LR Scheduler
         _C.TRAIN.LR_SCHEDULER = CN()
-        _C.TRAIN.LR_SCHEDULER.NAME = ""  # Possible options: 'warmupcosine', 'reduceonplateau', 'onecycle'
+        _C.TRAIN.LR_SCHEDULER.NAME = ""  # Possible options: 'warmupcosine', 'reduceonplateau', 'onecycle', 'warmupreduceonplateau'
         # Lower bound on the learning rate used in 'warmupcosine' and 'reduceonplateau'
-        _C.TRAIN.LR_SCHEDULER.MIN_LR = -1.0
+        _C.TRAIN.LR_SCHEDULER.MIN_LR = [-1.0]
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 7.1.1 Reduce on plateau options
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # The reduce on plateau scheduler reduces the learning rate when a metric has stopped improving. 
+        #
         # Factor by which the learning rate will be reduced
         _C.TRAIN.LR_SCHEDULER.REDUCEONPLATEAU_FACTOR = 0.5
         # Number of epochs with no improvement after which learning rate will be reduced. Need to be less than 'TRAIN.PATIENCE'
         # otherwise it makes no sense
         _C.TRAIN.LR_SCHEDULER.REDUCEONPLATEAU_PATIENCE = -1
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 7.1.2 Cosine decay with warm up options
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Cosine decay with a warm up consist in 2 phases: 1) a warm up phase which consists of increasing
         # the learning rate from TRAIN.LR_SCHEDULER.MIN_LR to TRAIN.LR value by a factor
         # during a certain number of epochs defined by 'TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_EPOCHS'
         # 2) after this will began the decay of the learning rate value using the cosine function.
         # Find a detailed explanation in: https://scorrea92.medium.com/cosine-learning-rate-decay-e8b50aa455b
         #
-        # Epochs to do the warming up.
+        # Epochs to do the warming up. -1/0 disables the ramp.
         _C.TRAIN.LR_SCHEDULER.WARMUP_COSINE_DECAY_EPOCHS = -1
-
-        # Callbacks
-        # To determine which value monitor to consider which epoch consider the best to save. Currently not used.
-        _C.TRAIN.CHECKPOINT_MONITOR = "val_loss"
-        # Add profiler callback to the training
-        # _C.TRAIN.PROFILER = False
-        # # Batch range to be analyzed
-        # _C.TRAIN.PROFILER_BATCH_RANGE='10, 100'
-
-        # _C.TRAIN.MAE_CALLBACK_EPOCHS = 5
+        # Delays when decay starts: after warm up (if any), TRAIN.LR is held constant until
+        # (1 - COSINE_DECAY_FRACTION) fraction of TRAIN.EPOCHS have passed, then cosine-decayed
+        # over the final fraction ("delayed cosine decay"). Combinable with the warm up above
+        # (ramp, then hold, then decay). Set to a value in (0, 1] to enable; -1 (default) disables
+        # it, so decay starts right after warm up as usual.
+        _C.TRAIN.LR_SCHEDULER.COSINE_DECAY_FRACTION = -1.0
 
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # Inference phase
+        # 8. Test/inference phase options
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         _C.TEST = CN()
         _C.TEST.ENABLE = False
         # Tries to reduce the memory footprint by separating crop/merge operations and by changing dtype of the predictions.
-        # It is slower and not as precise as the "normal" inference process but saves memory. In 'TEST.BY_CHUNKS' it will
-        # only save memory with the datatype change.
+        # It is slower and not as precise as the "normal" inference process but saves memory
         _C.TEST.REDUCE_MEMORY = False
         # Whether to compute the metrics in CPU instead of GPU to reduce GPU memory consumption.
-        _C.TEST.METRICS_IN_CPU = True
+        _C.TEST.METRICS_IN_CPU = False
         # Whether to save the raw output of the model (before any post-processing) alongside the final prediction. It is placed normally
         # in a folder called 'per_image'
         _C.TEST.SAVE_MODEL_RAW_OUTPUT = True
-        # In the processing of 3D images, the primary image is segmented into smaller patches. These patches are subsequently
-        # passed through a computational network. The outcome is a new image, typically saved as a TIF file, that retains the
-        # dimensions of the original input. Notably, if the input image is sizable, this process can be memory-intensive. This
-        # is because the quantity of patches is contingent on both the dimensions of the input and the selected padding/overlap
-        # parameters (defined as 'DATA.TEST.PADDING' and 'DATA.TEST.OVERLAP').
-        # To alleviate potential memory constraints, we offer an alternative: producing an H5/Zarr file with the predicted patches.
-        # This method ensures efficient memory usage, as patches are individually incorporated into the H5/Zarr file in their respective
-        # positions. This negates the need to store all patches simultaneously for image reconstruction. Importantly, in this
-        # approach, only the 'DATA.TEST.PADDING' parameter is considered, excluding 'DATA.TEST.OVERLAP', which sufficiently
-        # addresses border effect issues. If the source image is also an H5/Zarr file, it will be processed incrementally, further
-        # optimizing memory usage.
-        _C.TEST.BY_CHUNKS = CN()
-        _C.TEST.BY_CHUNKS.ENABLE = False
-        # In the process of 'TEST.BY_CHUNKS' you can enable this variable to save the reconstructed prediction as a TIF too.
-        # Be aware of this option and be sure that the prediction can fit in you memory entirely, as it is needed for saving as TIF.
-        _C.TEST.BY_CHUNKS.SAVE_OUT_TIF = False
-        # In how many iterations the H5 writer needs to flush the data. No need to do so with Zarr files.
-        _C.TEST.BY_CHUNKS.FLUSH_EACH = 100
-
-        # Whether after reconstructing the prediction the pipeline will continue each workflow specific steps. For this process
-        # the prediction image needs to be loaded into memory so be sure that it can fit in you memory. E.g. in instance
-        # segmentation the instances will be created from the prediction.
-        _C.TEST.BY_CHUNKS.WORKFLOW_PROCESS = CN()
-        _C.TEST.BY_CHUNKS.WORKFLOW_PROCESS.ENABLE = True
-        # How the workflow process is going to be done. There are two options:
-        #    * 'chunk_by_chunk' : each chunk will be considered as an individual file. Select this operation if you have not enough
-        #      memory to process the entire prediction image with 'entire_pred'.
-        #    * 'entire_pred': the predicted image will be loaded in memory and processed entirely (be aware of your  memory budget)
-        _C.TEST.BY_CHUNKS.WORKFLOW_PROCESS.TYPE = "chunk_by_chunk"
         # Enable verbosity
         _C.TEST.VERBOSE = True
         # Make test-time augmentation. Infer over 8 possible rotations for 2D img and 16 when 3D
         _C.TEST.AUGMENTATION = False
         # Select test-time augmentation mode. Options: "mean" (default), "min", "max".
+        # "min"/"max" are only applied to the channels they are meaningful for: a component-wise
+        # minimum over several predicted flow/offset fields is not a flow field, so signed vector
+        # channels (Cellpose/Omnipose 'Gv'/'Gh'/'Gz', HoVerNet 'V'/'H'/'Z', EmbedSeg 'E_offset')
+        # are always averaged no matter what is set here.
         _C.TEST.AUGMENTATION_MODE = "mean"
+        # Largest set of test-time augmentation orientations to use. Options:
+        #   - "auto" (default)/"full": 90 degree rotations + flips (8 in 2D, 16 in 3D).
+        #   - "flips": axis flips only (4 in 2D, 8 in 3D). What Cellpose does upstream, and the safe
+        #     choice for representations whose rotations cannot be undone exactly.
+        #   - "none": no augmentation (identity only).
+        # Instance-segmentation representations that cannot represent an orientation exactly shrink
+        # this set automatically (e.g. 3D StarDist rays, or EmbedSeg on anisotropic data); the
+        # orientations actually used are printed once at the start of inference.
+        _C.TEST.AUGMENTATION_GROUP = "auto"
         # Stack 2D images into a 3D image and then process it entirely instead of going image per image
         _C.TEST.ANALIZE_2D_IMGS_AS_3D_STACK = False
         # Whether to reuse the existing ones (from file) or calculate predictions using the model
         _C.TEST.REUSE_PREDICTIONS = False
-
         # If PROBLEM.NDIM = '2D' this can be activated to process each image entirely instead of patch by patch. Only can be done
         # if the neural network is fully convolutional. Implemented in semantic-segmentation, instance-segmentation and detection workflows.
         _C.TEST.FULL_IMG = False
-
-        # Metrics to apply during training. Depending on the workflow different ones can be applied. If empty, some
+        # Metrics to apply during test/inference. Depending on the workflow different ones can be applied. If empty, some
         # default metrics will be configured automatically:
         #   * Semantic segmentation: 'iou' (called also Jaccard index)
         #   * Instance segmentation: automatically set depending on the channels selected (PROBLEM.INSTANCE_SEG.DATA_CHANNELS).
         #                            Instance metrics will be always calculated.
         #   * Detection: 'iou' (called also Jaccard index)
         #   * Denoising: 'mae', 'mse'
-        #   * Super-resolution: "psnr", "mae", "mse", "ssim". Additionally, if only if PROBLEM.NDIM == '2D', these
+        #   * Super-resolution: "psnr", "mae", "mse", "ssim", "pcc". Additionally, if only if PROBLEM.NDIM == '2D', these
         #                       can also be selected:  "fid", "is", "lpips"
-        #   * Self-supervision: "psnr", "mae", "mse", "ssim". Additionally, if only if PROBLEM.NDIM == '2D', these
+        #   * Self-supervision: "psnr", "mae", "mse", "ssim", "pcc". Additionally, if only if PROBLEM.NDIM == '2D', these
         #                       can also be selected:  "fid", "is", "lpips"
         #   * Classification: 'accuracy'. Always calculated: Confusion matrix
-        #   * Image to image: "psnr", "mae", "mse", "ssim". Additionally, if only if PROBLEM.NDIM == '2D', these
+        #   * Image to image: "psnr", "mae", "mse", "ssim", "pcc". Additionally, if only if PROBLEM.NDIM == '2D', these
         #                     can also be selected:  "fid", "is", "lpips"
         _C.TEST.METRICS = []
+
+        # Number of pixels/voxels to exclude from each border when computing test/inference metrics,
+        # regardless of workflow. Order is: [z, y, x] (3D) and [y, x] (2D). For example, with an image
+        # of 10x100x200 to ignore the first/last Z slices and a 15-pixel border on Y/X, use [1, 15, 15].
+        # Predictions near the border are usually less reliable (the model has no context beyond the
+        # edge, and patch-merging seams concentrate there too), which can inflate errors that don't
+        # reflect the model's real performance. This never changes the predictions themselves (nor
+        # anything saved to disk) -- only the region considered when scoring each metric, so only the
+        # center of the image is evaluated:
+        #   * Semantic segmentation / voxel-level instance segmentation & membrane-repair metrics /
+        #     denoising / super-resolution / image-to-image / self-supervised: the border region of the
+        #     prediction and GT is excluded before computing pixel-wise metrics (IoU, MAE, MSE, SSIM,
+        #     PSNR, etc).
+        #   * Object-level instance segmentation & membrane-repair matching: the predicted/GT instance
+        #     label images are cropped by this amount before matching.
+        #   * Detection: points (predicted or GT) whose coordinates fall in the border region are
+        #     excluded from the precision/recall/F1 computation.
+        #   * Classification: not applicable (no spatial dimension to crop); must be left empty.
+        _C.TEST.EVAL_BORDER_CROP = []
 
         ### Instance segmentation
         # Whether to calculate matching statistics (average overlap, accuracy, recall, precision, etc.)
@@ -1465,8 +2112,118 @@ class Config:
         _C.TEST.MATCHING_STATS_THS = [0.3, 0.5, 0.75]
         # Decide in which thresholds to create a colored image of the TPs, FNs and FPs
         _C.TEST.MATCHING_STATS_THS_COLORED_IMG = []
+        # How to aggregate the matching statistics across the dataset. If ``True`` the metrics (accuracy/AP_dsb,
+        # precision, recall, etc.) are computed per image and then averaged over images (macro-average), which matches
+        # the "AP_dsb" definition reported by EmbedSeg/StarDist. If ``False`` the TP/FP/FN counts are pooled across all
+        # images and the metrics are computed once from those totals (micro-average).
+        _C.TEST.MATCHING_STATS_BY_IMAGE = True
 
-        ### Detection
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 8.1 Test/inference by chunks options
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # In the processing of 3D images, the primary image is segmented into smaller patches. These patches are subsequently
+        # passed through a computational network. The outcome is a new image, typically saved as a TIF file, that retains the
+        # dimensions of the original input. Notably, if the input image is sizable, this process can be memory-intensive. This
+        # is because the quantity of patches is contingent on both the dimensions of the input and the selected padding/overlap
+        # parameters (defined as 'DATA.TEST.PADDING' and 'DATA.TEST.OVERLAP').
+        # To alleviate potential memory constraints, we offer an alternative: producing an H5/Zarr file with the predicted patches.
+        # This method ensures efficient memory usage, as patches are individually incorporated into the H5/Zarr file in their respective
+        # positions. This negates the need to store all patches simultaneously for image reconstruction. Importantly, in this
+        # approach, only the 'DATA.TEST.PADDING' parameter is considered, excluding 'DATA.TEST.OVERLAP', which sufficiently
+        # addresses border effect issues. If the source image is also an H5/Zarr file, it will be processed by chunks, further
+        # optimizing memory usage. This process can only be applied in semantic segmentation, instance segmentation and detection
+        # workflows.
+        #
+        _C.TEST.BY_CHUNKS = CN()
+        _C.TEST.BY_CHUNKS.ENABLE = False
+        # In the process of 'TEST.BY_CHUNKS' you can enable this variable to save the reconstructed prediction as a TIF too.
+        # Be aware of this option and be sure that the prediction can fit in you memory entirely, as it is needed for saving as TIF.
+        _C.TEST.BY_CHUNKS.SAVE_OUT_TIF = False
+        # In how many iterations the H5 writer needs to flush the data. No need to do so with Zarr files.
+        _C.TEST.BY_CHUNKS.FLUSH_EACH = 100
+        # Z slice index (inclusive) at which chunk processing starts. Use -1 (default) to start from the beginning.
+        # Useful for distributing large-volume prediction across multiple cluster jobs, each handling a Z sub-range.
+        _C.TEST.BY_CHUNKS.Z_START = -1
+        # Z slice index (exclusive) at which chunk processing ends. Use -1 (default) to process until the end.
+        # The output Zarr is always the full data shape so multiple jobs can write concurrently.
+        _C.TEST.BY_CHUNKS.Z_END = -1
+        # Whether to write the raw model predictions into a Zarr file. They are not needed to create the final output, as
+        # each tile is post-processed as soon as it is predicted, and they are heavy to store (e.g. 12 float32 channels
+        # per voxel for affinities), so they are only written on demand. Forced when the workflow process is disabled or
+        # set to 'entire_pred', when 'TEST.REUSE_PREDICTIONS' is enabled or when the raw prediction is the final output
+        # of the workflow (e.g. denoising).
+        _C.TEST.BY_CHUNKS.WRITE_RAW_PREDICTIONS = False
+        # Phases to execute in this job. Allows splitting the full pipeline across multiple cluster jobs.
+        # Available phases:
+        #   * 'prediction'         : run the model on each patch. Post-processing runs on the fly unless this is the only
+        #     phase of the job, in which case the raw predictions are written to a Zarr file.
+        #   * 'instance_creation'  : run per-chunk watershed (instance segmentation, 'chunk_by_chunk' only). Runs within
+        #     'prediction' when both phases are selected, otherwise it reads the raw predictions Zarr.
+        #   * 'instance_merging'   : resolve cross-chunk instance IDs (Passes B–E, instance segmentation only).
+        # Example multi-job setup for a large volume:
+        #   Job 1 — Z_START=0,   Z_END=500,  PHASES=["prediction", "instance_creation"]
+        #   Job 2 — Z_START=500, Z_END=1000, PHASES=["prediction", "instance_creation"]
+        #   Job 3 — (no Z range) PHASES=["instance_merging"]
+        _C.TEST.BY_CHUNKS.PHASES = ["prediction", "instance_creation", "instance_merging"]
+
+        # After passing all the patches through the model we obtain the model's raw predictions, which may be subsequently processed
+        # to generate the final prediction. Each workflow has its own steps for this process:
+        # 
+        #  * Semantic segmentation: all raw predictions, which are probabilities of each class, are merged together to create the final
+        #       predicted image by argmax operation. This process is not memory intensive as the raw predictions are merged patch by
+        #       patch and not all at once.
+        #  * Instance segmentation: the raw predictions are merged together to create the final predicted image by a watershed process.
+        #       This process is memory intensive as the entire predicted image needs to be loaded in memory to do it.
+        #  * Detection: All the points of interest are detected from the raw predictions. This process is not memory intensive as the
+        #       points are detected patch by patch and not all at once.
+        _C.TEST.BY_CHUNKS.WORKFLOW_PROCESS = CN()
+        _C.TEST.BY_CHUNKS.WORKFLOW_PROCESS.ENABLE = True
+        # How the workflow process is going to be done. There are two options:
+        #    * 'chunk_by_chunk' : each chunk will be considered as an individual file. Select this operation if you have not enough
+        #      memory to process the entire prediction image with 'entire_pred'.
+        #    * 'entire_pred': the predicted image will be loaded in memory and processed entirely (be aware of your  memory budget)
+        _C.TEST.BY_CHUNKS.WORKFLOW_PROCESS.TYPE = "chunk_by_chunk"
+        # Patches, in (z,y,x) order, grouped into each tile of the workflow process ('chunk_by_chunk' mode only). A tile
+        # is post-processed at once, using the 'DATA.TEST.PADDING' of its border patches as context, so it covers
+        # PATCHES_PER_TILE * ('DATA.PATCH_SIZE' - 2 * 'DATA.TEST.PADDING') voxels per axis. Tiles divide the patches
+        # among them, so this does not change the number of patches passed through the model nor their overlap: larger
+        # tiles only mean fewer seams between them, and therefore fewer instances split across tiles that instance
+        # segmentation has to merge back. Raising it improves the result, and the limit is the RAM available.
+        #
+        # Each tile being filled holds the prediction of its region plus the padding around it, i.e.
+        #   (tile + 2 * padding voxels per axis) * model output channels * 4 bytes
+        # and post-processing one takes about two more tiles of working memory. Every one of the 'SYSTEM.NUM_GPUS'
+        # processes fills as many tiles at the same time as workers it has ('SYSTEM.NUM_WORKERS'), so a job needs about
+        #   NUM_GPUS * ((NUM_WORKERS + 2) * tile size + 3 GiB)
+        # where those 3 GiB are what BiaPy itself takes per GPU (model, CUDA context and the patches in flight).
+        #
+        # Measured on a (1024,1024,128) volume with 4 GPUs and 5 workers each, a patch of (128,128,128), a padding of
+        # (10,10,10) and 12 output channels (peak RAM of the whole job, and the instances split across tiles that the
+        # merging has to join back):
+        #   PATCHES_PER_TILE   tile           tile size   RAM        instances found
+        #   (1,1,1)            (108,108,108)     96 MiB   13.7 GiB   953
+        #   (2,2,2)            (216,216,216)    327 MiB   19.7 GiB   836
+        #   (3,3,3)            (324,324,324)    693 MiB   22.9 GiB   828
+        #
+        # Values to ask for in the same setup, but on a volume large enough for the tiles not to be cut by its borders:
+        #   RAM of the job   PATCHES_PER_TILE   tile           needs
+        #   100 GiB          (3,3,3)            (324,324,324)   63 GiB
+        #   300 GiB          (5,5,5)            (540,540,540)  232 GiB
+        #   500 GiB          (6,6,6)            (648,648,648)  385 GiB
+        #   700 GiB          (7,7,7)            (756,756,756)  597 GiB
+        #   1000 GiB         (8,8,8)            (864,864,864)  877 GiB
+        # Halve the values above if the model outputs twice the channels, and note that the tile size grows with the
+        # cube of this value when the three axes are raised together: raise only the axes that need it if the memory
+        # gets tight (e.g. (1,2,2) on anisotropic data, or when an axis is already covered by a single tile).
+        _C.TEST.BY_CHUNKS.WORKFLOW_PROCESS.PATCHES_PER_TILE = (1, 1, 1)
+        # Minimum normalised IoU required to merge two instances across a chunk boundary
+        # (instance segmentation, 'chunk_by_chunk' mode only). Must be in (0, 1].
+        _C.TEST.BY_CHUNKS.WORKFLOW_PROCESS.INSTANCE_SEG_MERGE_IOU_TH = 0.3
+
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 8.2 Detection test/inference options
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # To decide which function is going to be used to create point from probabilities. Options: ['peak_local_max', 'blob_log']
         # 'peak_local_max': https://scikit-image.org/docs/stable/api/skimage.feature.html#skimage.feature.peak_local_max
         # 'blob_log': https://scikit-image.org/docs/stable/api/skimage.feature.html#skimage.feature.blob_log
@@ -1495,18 +2252,11 @@ class Config:
         _C.TEST.DET_BLOB_LOG_NUM_SIGMA = 2
         # Maximum distance far away from a GT point to consider a point as a true positive
         _C.TEST.DET_TOLERANCE = 10
-        # To not take into account during detection metrics calculation to those points outside the bounding box defined with
-        # this variable. Order is: [z, y, x] (3D) and [y, x] (2D). For example, using an image of 10x100x200 to not take into
-        # account points on the first/last slices and with a border of 15 pixel for x and y axes, this variable could be defined
-        # as [1, 15, 15].
-        _C.TEST.DET_IGNORE_POINTS_OUTSIDE_BOX = []
 
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # Post-processing
+        # 8.3 Post-processing options
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
         _C.TEST.POST_PROCESSING = CN()
-
         # To apply median filtering to the data
         _C.TEST.POST_PROCESSING.MEDIAN_FILTER = False
         # List of median filters to apply. They are going to be applied in the list order. This can only be used in
@@ -1519,14 +2269,9 @@ class Config:
         _C.TEST.POST_PROCESSING.MEDIAN_FILTER_AXIS = []
         _C.TEST.POST_PROCESSING.MEDIAN_FILTER_SIZE = []
 
-        # Apply a binary mask to remove possible segmentation outside it (you need to provide the mask and it must
-        # contain two values: '1' -> preserve the pixel ; '0' discard pixel ). A mask for each test sample must be
-        # provided and it will be loaded using 'DATA.TEST.BINARY_MASKS' variable.
-        _C.TEST.POST_PROCESSING.APPLY_MASK = False
-
-        ### Instance segmentation
-        #
-        #
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 8.3.1 Instance segmentation post-processing options
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Instance refinement:
         # Whether to refine the instances with morphological and filtering operations after being created and before any other post-processing
         # such as Voronoi. This instance refinement is applied on each instance individually and sequentially. The two variables,
@@ -1551,6 +2296,9 @@ class Config:
         # For 'fill_holes' and 'clear_border' no value is needed so put None in those cases.
         _C.TEST.POST_PROCESSING.INSTANCE_REFINEMENT.VALUES = []
 
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 8.3.1.1 Instance property measurement and filtering options
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Whether to measure morphological features on each instances, i.e. 'circularity' (2D), 'elongation' (2D), 'npixels', 'area', 'diameter',
         # 'perimeter', 'sphericity' (3D)
         _C.TEST.POST_PROCESSING.MEASURE_PROPERTIES = CN()
@@ -1634,7 +2382,9 @@ class Config:
         # instances. Only works in Instance segmentation workflow.
         _C.TEST.POST_PROCESSING.REPARE_LARGE_BLOBS_SIZE = -1
 
-        ### Detection
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # 8.3.2 Detection post-processing options
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # To remove close points to each other. This can also be set when using 'BP' channels for instance segmentation.
         _C.TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS = False
         # Distance between points to be considered the same. Only applies when TEST.POST_PROCESSING.REMOVE_CLOSE_POINTS = True
@@ -1654,7 +2404,7 @@ class Config:
         _C.TEST.POST_PROCESSING.DET_WATERSHED_DONUTS_NUCLEUS_DIAMETER = 30
 
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # Auxiliary paths
+        # 9. Auxiliary paths
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         _C.PATHS = CN()
 
@@ -1694,6 +2444,8 @@ class Config:
 
         # Name of the folder where the charts of the loss and metrics values while training the network are stored.
         _C.PATHS.CHARTS = os.path.join(_C.PATHS.RESULT_DIR.PATH, "charts")
+        # Folder where TRAIN.SAVE_TRAIN_PREDS_FREQ previews are stored.
+        _C.PATHS.TRAIN_PRED_SAMPLES = os.path.join(_C.PATHS.RESULT_DIR.PATH, "train_pred_samples")
         # Folder where samples of DA will be stored
         _C.PATHS.DA_SAMPLES = os.path.join(_C.PATHS.RESULT_DIR.PATH, "aug")
         # Folder where generator samples (X) will be stored
@@ -1717,7 +2469,9 @@ class Config:
         _C.PATHS.CHECKPOINT = os.path.join(job_dir, "checkpoints")
         # Checkpoint file to load/store the model weights
         _C.PATHS.CHECKPOINT_FILE = ""
-        # Name of the folder to store the probability map to avoid recalculating it on every run
+        # Name of the folder to store the probability map to avoid recalculating it on every run.
+        # Overridden at runtime to "<DATA.TRAIN.GT_PATH>_prob_maps" (see create_train_val_augmentors),
+        # mirroring the DATA.TRAIN.INSTANCE_CHANNELS_MASK_DIR/DETECTION_MASK_DIR naming convention.
         _C.PATHS.PROB_MAP_DIR = os.path.join(job_dir, "prob_map")
         _C.PATHS.PROB_MAP_FILENAME = "prob_map.npy"
         # Watershed debugging folder
@@ -1728,10 +2482,10 @@ class Config:
         _C.PATHS.FIL_SAMPLES_DIR = os.path.join(_C.PATHS.RESULT_DIR.PATH, "filtering_information")
 
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # Logging
+        # 10. Logging
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         _C.LOG = CN()
-        _C.LOG.LOG_DIR = os.path.join(job_dir, "train_logs")
+        _C.LOG.LOG_DIR = os.path.join(job_dir, "logs")
         _C.LOG.TENSORBOARD_LOG_DIR = os.path.join(_C.PATHS.RESULT_DIR.PATH, "tensorboard")
         _C.LOG.LOG_FILE_PREFIX = job_identifier
         _C.LOG.CHART_CREATION_FREQ = 5
@@ -1841,9 +2595,6 @@ def update_dependencies(cfg) -> None:
     tdata = call.DATA.TEST.GT_PATH if not call.DATA.TEST.INPUT_ZARR_MULTIPLE_DATA else call.DATA.TEST.PATH
     call.DATA.TEST.INSTANCE_CHANNELS_MASK_DIR = tdata
 
-    # If value is not the default
-    if call.DATA.TEST.BINARY_MASKS == os.path.join("user_data", "test", "bin_mask"):
-        call.DATA.TEST.BINARY_MASKS = os.path.join(call.DATA.TEST.PATH, "..", "bin_mask")
     call.DATA.TEST.DETECTION_MASK_DIR = call.DATA.TEST.GT_PATH + "_detection_masks_" + str(cpd)
     call.DATA.TEST.SSL_SOURCE_DIR = call.DATA.TEST.PATH + "_ssl_source"
     call.PATHS.TEST_FULL_GT_H5 = os.path.join(call.DATA.TEST.GT_PATH, "h5")
