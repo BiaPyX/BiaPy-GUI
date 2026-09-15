@@ -30,9 +30,20 @@ jobs:
         echo "== dist tree =="
         ls -R dist || true
 
+    - name: Exclude dist/temp from Windows Defender scanning
+      shell: pwsh
+      run: |
+        # Onefile PyInstaller builds self-extract their whole dependency tree
+        # (torch, numpy, PySide6, ...) into %TEMP% on first run; with Defender's
+        # real-time scan active this can take minutes and looks like a hang.
+        Add-MpPreference -ExclusionPath "$env:TEMP"
+        Add-MpPreference -ExclusionPath "${{ github.workspace }}\dist"
+
     - name: Smoke test Windows binary
       shell: bash
-      run: python scripts/smoke_test_binary.py "dist/BiaPy.exe"
+      env:
+        PYTHONUNBUFFERED: "1"
+      run: python -u scripts/smoke_test_binary.py "dist/BiaPy.exe" --timeout 300
 
     - name: Upload dist/BiaPy to Google Drive (Python method)
       shell: bash

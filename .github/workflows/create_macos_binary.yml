@@ -32,9 +32,11 @@ jobs:
         ls -R dist || true
 
     - name: Smoke test macOS binary
+      env:
+        PYTHONUNBUFFERED: "1"
       run: |
         chmod +x "dist/BiaPy.app/Contents/MacOS/BiaPy_bin"
-        python scripts/smoke_test_binary.py "dist/BiaPy.app/Contents/MacOS/BiaPy_bin"
+        python -u scripts/smoke_test_binary.py "dist/BiaPy.app/Contents/MacOS/BiaPy_bin"
 
     # Zip the .app bundle
     - name: Create macOS zip (preserve bundle attrs)

@@ -10,17 +10,31 @@ platform plugin) and then exit, instead of entering the event loop.
 """
 
 import argparse
+import functools
 import os
 import subprocess
 import sys
 
 SENTINEL = "BIAPY_GUI_SELFTEST_OK"
 
+# Stdout is a pipe when running under CI (not a TTY), so Python switches from
+# line-buffered to block-buffered output -- our own progress prints (and the
+# subprocess's, if it shared our stream) would sit invisible in the buffer
+# until it fills or the script exits, making a fast run look hung. Force a
+# flush after every print instead of relying on -u/PYTHONUNBUFFERED alone.
+print = functools.partial(print, flush=True)
+
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("binary", help="Path to the built BiaPy binary/executable")
-    parser.add_argument("--timeout", type=int, default=120, help="Seconds to wait before treating the binary as hung")
+    parser.add_argument(
+        "--timeout",
+        type=int,
+        default=300,
+        help="Seconds to wait before treating the binary as hung "
+        "(onefile builds self-extract a large dependency tree on first run, which can be slow)",
+    )
     args = parser.parse_args()
 
     if not os.path.exists(args.binary):

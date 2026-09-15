@@ -38,9 +38,11 @@ jobs:
         ls -R dist || true
 
     - name: Smoke test Linux binary
+      env:
+        PYTHONUNBUFFERED: "1"
       run: |
         chmod +x dist/BiaPy
-        python scripts/smoke_test_binary.py "dist/BiaPy"
+        python -u scripts/smoke_test_binary.py "dist/BiaPy"
 
     - name: Upload dist/BiaPy to Google Drive (Python method)
       env:
