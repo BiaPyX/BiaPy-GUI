@@ -1,8 +1,34 @@
 # -*- mode: python ; coding: utf-8 -*-
 
-from PyInstaller.utils.hooks import collect_data_files
+import importlib.metadata as importlib_metadata
+
+from PyInstaller.utils.hooks import collect_data_files, copy_metadata
 
 block_cipher = None
+
+
+def _collect_all_dist_metadata():
+    # Several packages in the dependency tree (imageio, bioimageio.*, ...) read
+    # their own installed-package metadata (dist-info/METADATA) at import time
+    # via importlib.metadata, e.g. to resolve __version__. PyInstaller's import
+    # analysis only follows Python imports, so it never bundles that metadata
+    # unless told to explicitly -- causing importlib.metadata.PackageNotFoundError
+    # at runtime for whichever package happens to do this. Rather than chasing
+    # these one at a time across build/run cycles, bundle the metadata for every
+    # distribution installed in the build environment; it's a few KB each.
+    collected = []
+    seen = set()
+    for dist in importlib_metadata.distributions():
+        name = dist.metadata.get("Name")
+        if not name or name in seen:
+            continue
+        seen.add(name)
+        try:
+            collected += copy_metadata(name)
+        except Exception:
+            pass
+    return collected
+
 
 datas = [('images', 'images')]
 # bioimageio.spec / bioimageio.core read non-.py data files (VERSION, static/*.json)
@@ -10,6 +36,7 @@ datas = [('images', 'images')]
 # pick these up automatically, so they must be collected explicitly.
 datas += collect_data_files('bioimageio.spec')
 datas += collect_data_files('bioimageio.core')
+datas += _collect_all_dist_metadata()
 
 a = Analysis(
     ['main.py'],
