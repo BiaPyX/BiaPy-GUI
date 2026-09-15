@@ -37,6 +37,11 @@ jobs:
         echo "== dist tree =="
         ls -R dist || true
 
+    - name: Smoke test Linux binary
+      run: |
+        chmod +x dist/BiaPy
+        python scripts/smoke_test_binary.py "dist/BiaPy"
+
     - name: Upload dist/BiaPy to Google Drive (Python method)
       env:
         FOLDER_ID: ${{ secrets.FOLDER_FOR_NEW_BINARIES }}

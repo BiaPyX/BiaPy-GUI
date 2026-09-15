@@ -1,14 +1,21 @@
 # -*- mode: python ; coding: utf-8 -*-
 
+from PyInstaller.utils.hooks import collect_data_files
 
 block_cipher = None
 
+datas = [('images', 'images')]
+# bioimageio.spec / bioimageio.core read non-.py data files (VERSION, static/*.json)
+# at import time via importlib.resources; PyInstaller's import analysis does not
+# pick these up automatically, so they must be collected explicitly.
+datas += collect_data_files('bioimageio.spec')
+datas += collect_data_files('bioimageio.core')
 
 a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[('images', 'images')],
+    datas=datas,
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

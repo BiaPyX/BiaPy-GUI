@@ -638,6 +638,16 @@ class MainWindow(QMainWindow):
 if __name__ == "__main__":
     # os.environ["QT_SCALE_FACTOR"] = "1"
     os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
+
+    # CI smoke test mode: exercise the full import chain and main window
+    # construction (the same code path that failed at import time in a
+    # frozen Windows binary due to a missing bundled data file), then exit
+    # cleanly instead of entering the event loop. Runs headless via Qt's
+    # offscreen platform plugin, so no display is required.
+    SELFTEST = os.environ.get("BIAPY_GUI_SELFTEST") == "1"
+    if SELFTEST:
+        os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
+
     app = QApplication(sys.argv)
 
     # Setup theme
@@ -702,6 +712,14 @@ if __name__ == "__main__":
     # Center the main GUI in the middle of the first screen
     all_screens = app.screens()
     center_window(window, all_screens[0].availableGeometry())
+
+    if SELFTEST:
+        # Skip the network version check and tour dialog (both can block or
+        # require network access) and report success without starting the
+        # event loop.
+        print("BIAPY_GUI_SELFTEST_OK")
+        logging.shutdown()
+        sys.exit(0)
 
     # Check new versions of the GUI
     window.check_new_gui_version()

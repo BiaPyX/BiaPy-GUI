@@ -30,6 +30,10 @@ jobs:
         echo "== dist tree =="
         ls -R dist || true
 
+    - name: Smoke test Windows binary
+      shell: bash
+      run: python scripts/smoke_test_binary.py "dist/BiaPy.exe"
+
     - name: Upload dist/BiaPy to Google Drive (Python method)
       shell: bash
       env:
